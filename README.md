@@ -1,0 +1,39 @@
+# BSIS Frontend
+
+This application provides the new client-side code and frontend to the [Blood Safety Information System (BSIS)](http://www.github.com/jembi/bsis).
+
+It is being developed with the following technology stack:
+* Single page web application
+* Responsive web design
+* [AngularJS](www.angularjs.org)
+* [Twitter Bootstrap](http://getbootstrap.com/)
+* The [Yeoman](http://yeoman.io/) development workflow:
+** [Bower](http://bower.io/) for simple installation of JS libraries
+** [Grunt](http://gruntjs.com/) for build, optimization and live reload
+** [PhantomJS](http://phantomjs.org/) and [Karma](http://karma-runner.github.io/) for front-end testing
+
+## Dependencies
+
+The application makes use of node.js tools - [node.js](http://nodejs.org/) and it's package manager [(npm)](https://www.npmjs.org/) should be installed.
+
+## Developer Guide
+
+Clone the repository and run `npm install`
+To start up a development instance of the webapp, run `grunt serve` (or `npm start`).
+
+The code was scaffolded using [angular-seed](https://github.com/angular/angular-seed), as well as [generator angular](https://github.com/yeoman/generator-angular) to add grunt support.
+
+### Directory Layout
+
+    app/                --> all of the files to be used in production
+      css/              --> css files
+      images/           --> image files
+      index.html        --> app layout file (the main html template file of the app)
+      scripts/          --> javascript files
+        app.js          --> application
+        controllers/    --> application controllers
+        services/       --> custom angular services 
+        util/           --> custom angular util
+      views/            --> angular views (partial html templates)
+    test/               --> test config and source files
+

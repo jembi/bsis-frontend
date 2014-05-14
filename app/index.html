@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+
+  <html ng-app="bsis">
+  <head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Blood Safety Information System">
+    <meta name="author" content="Jembi Health Systems">
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <title>BSIS</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Istok+Web" rel="stylesheet" type="text/css">
+
+
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bsis.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+    <!-- endbuild -->
+
+  </head>
+
+<body ng-app="bsis" style="padding-bottom: 0px;">
+
+  <div ng-include="'views/header.html'"></div>
+
+  <div id="wrap">
+  
+    <!-- angular templating -->
+    <!-- this is where content will be injected -->
+    <div ng-view></div>
+
+ 
+    
+
+  </div>
+  
+  <div id="footer">
+    <div class="container">
+      <hr>
+      <p>© 2014 <a href="www.jembi.org">Jembi Health Systems</a></p>
+    </div>
+  </div>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="../bsis/bower_components/angular/angular.js"></script>
+    <script src="../bsis/bower_components/angular-route/angular-route.js"></script>
+    <script src="../bsis/bower_components/angular-loader/angular-loader.js"></script>
+    <script src="../bsis/bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="../bsis/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/home.js"></script>
+    <script src="scripts/controllers/donors.js"></script>
+    <script src="scripts/controllers/header.js"></script>
+    <!-- endbuild -->
+
+</body>
+</html>

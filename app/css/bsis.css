@@ -1,0 +1,247 @@
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+
+html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height:60px;
+      }
+      #footer {
+        background-color: #f5f5f5;
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+
+
+
+
+
+
+  body {
+    padding-top: 40px;
+    padding-bottom: 20px;
+  background-color: #eee;
+
+  }
+
+
+@media (min-width: 1200px) {
+     .home-page{
+        max-width: 900px;
+        margin:0 auto;
+    }
+}
+
+
+
+  .dropdown-ext {
+  width: 100%; 
+}
+
+ .navbar-sub {
+  text-align: center;
+ }
+
+ .hr-top {
+    margin: 8px 0;
+ }
+
+ .hr-info {
+   margin: 10px auto;
+   width: 50%;
+ }
+
+  .hr-navside {
+   margin: 2px auto;
+   width: 80%;
+ }
+
+
+  .navbar {
+      background-color: #242424;
+      font-size: 1.7rem;
+      font-style: normal;
+  }
+
+  .navbar-inverse .navbar-nav li a{
+    padding:10px;
+  }
+
+.placeholders a  {
+  #color: #333;
+  color: #f5f5f5;
+text-align: center;
+text-decoration: none;
+position: relative;
+padding: 0 auto;
+}
+
+.home-page a {
+  margin: 1em;
+}
+
+.main-page a {
+  margin: 0em;
+}
+
+.placeholders a:hover { 
+  #color:#640009; 
+color:#b7b7b7;
+
+}
+
+
+
+.placeholder div {
+  text-align: center;
+#display: inline-block;
+border-radius: 50%;
+height: 11rem;
+width: 11rem;
+margin: 0 auto;
+font-size: 6rem;
+
+#background-color: #fff;
+#background-color: #640009;
+background-color: #242424;
+#box-shadow: 0px 0px -2px rgba(0,0,0,.25);
+#border: 1px solid #C0C0C0;
+
+#border: 1px solid #ccc;
+#border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.placeholder i {
+  vertical-align: middle; 
+  color: #f5f5f5;
+}
+
+
+.placeholder a div:hover { 
+background-color: rgba(36,36,36,0.85) !important;
+#outline: 5px solid #fff;
+#box-shadow: 0px 0px 0pt 4px #242424;
+
+}
+
+.placeholder .glyphicon {
+   top: 6px;
+}
+
+body {
+  font-family: 'Istok Web', Helvetica, Arial, sans-serif;
+}
+
+h1 h2 h3 h4 {
+  font-family: 'Volkorn', Helvetica, Arial, sans-serif;
+}
+
+.placeholder h3 {
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 2px;
+  font-size: 2rem;
+}
+
+.placeholder p {
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.1rem;
+}
+
+.p-info {
+  #display: none;
+}
+
+  #footer {
+color: #aaa;
+#margin: 1rem 0 1rem 0;
+text-align: center;
+background-color: #eee;
+
+}
+
+hr { display: block; height: 1px;
+    border: 0; border-top: 1px solid #ccc;
+    margin: 1em 0; padding: 0; }
+
+
+.disabled a {
+  font-size: 1.23rem;
+  color: #242424 !important;
+  text-decoration: none;
+  font-weight: bold;
+ # font-style: oblique;
+#border-style:solid;
+#border-bottom:thick dotted #ff0000;
+}
+
+.control-label {
+  font-weight: bold;
+}
+
+.navbar-nav .dropdown-toggle{
+  color: #e7e7e7 !important
+}
+
+.navbar-nav .dropdown-toggle a:hover, a:visited, a:link, a:active{
+  text-decoration: none; !important
+  
+}
+
+.nav-sidebar a{
+  font-size: 1.3rem;
+}
+
+.nav-sidebar .active a{
+  background-color: #eee !important;
+  color: #242424 !important;
+  font-weight: normal !important;
+}
+
+.nav-sidebar li{
+  #border-bottom: 1px solid #ccc;
+  border-bottom: 2px solid #eee;
+
+}
+
+.nav-sidebar span{
+  position: relative;
+  display: block;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding: 10px 15px;
+  text-align: -webkit-match-parent;
+  font-size: 1.23rem;
+  color: #242424 !important;
+  font-weight: bold;
+  cursor: default;
+}
+
