@@ -220,7 +220,7 @@ hr { display: block; height: 1px;
   font-size: 1.3rem;
 }
 
-.nav-sidebar .active a{
+.nav-sidebar .current a{
   background-color: #eee !important;
   color: #242424 !important;
   font-weight: normal !important;
