@@ -23,38 +23,42 @@ To start up a development instance of the webapp, run `grunt serve` (or `npm sta
 
 The code was scaffolded using [angular-seed](https://github.com/angular/angular-seed), as well as [generator angular](https://github.com/yeoman/generator-angular) to add grunt support.
 
-### Known Issues
+## Production Guide
 
-On initial clone of the repo, when running `npm install` and using OXS, the following error may appear:
+To make use of the application in production, run `grunt build`, which compiles the code into the `dist` folder. The contents of this folder can be copied to the default root folder (e.g. `/var/www/html`) of a web server, such as Apache, and run in production. 
+
+## Known Issues
+
+On initial clone of the repo, when running `npm install` and using OS X, the following error may appear:
 ```
 ...
 NodeJS error “EMFILE, too many open files”
 ...
 ```
 This is caused by the code opening too many files at once. By default, OS X has a limit of 256 simultaneously opened files.
-To resolve this, run the following command in a terminal:
+To resolve this, run the following command in a terminal to increase the file limit:
 ```
 $ ulimit -n 1024
 ```
 
-### Directory Layout
+## Directory Layout
 
-    app/                --> all of the files to be used in production
+    app/                --> main application files
       css/              --> css files
       fonts/            --> fonts and glyphs
       images/           --> image files
       index.html        --> app layout file (the main html template file of the app)
       scripts/          --> javascript files
-        app.js          --> application
+        app.js          --> application config and routing
         controllers/    --> application controllers
         services/       --> custom angular services 
         util/           --> custom angular util
       views/            --> angular views (partial html templates)
-    infrastructure/     --> Puppet development and delpoyment scripts
+    infrastructure/     --> Puppet development and deployment scripts
     test/               --> test config and source files
-    bower.json          --> bower metadata and dependencies
+    bower.json          --> Bower metadata and dependencies file
     Gruntfile.js        --> Grunt file used to configure tasks and build info
-    package.json        --> npm metatada and dependencies
+    package.json        --> npm metatada and dependencies file
     README.md           --> github repository readme file
 
 
