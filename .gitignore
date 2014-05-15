@@ -4,6 +4,7 @@ node_modules
 app/bower_components
 dist
 tmp
+npm-debug.log
 .tmp
 .DS_Store
 .idea
