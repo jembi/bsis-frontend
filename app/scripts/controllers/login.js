@@ -15,9 +15,12 @@ angular.module('bsis')
 	       	console.log("user.userId: ", $rootScope.user.userId);
 	       	console.log("user.Role: ", $rootScope.user.role);
 	       	$location.path( "/home" );
+	       	$scope.loginInvalid = false;
       	}, function () {
-        $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-        console.log("NOPPPPE");
+        	$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+        	$scope.loginInvalid = true;
+        	$scope.credentials.username = null;
+        	$scope.credentials.password = null;
       });
     };
   });
