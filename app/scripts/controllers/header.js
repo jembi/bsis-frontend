@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('HeaderCtrl', function ($scope, $location) {
+  .controller('HeaderCtrl', function ($scope, $location, AuthService) {
 
 
   	// set menu on initial load
@@ -16,7 +16,7 @@ angular.module('bsis')
 			$scope.currentSection = 'DONORS';
 			$scope.sectionList = [
 			    {'title': 'HOME',
-			     'href': '#',
+			     'href': '#home',
 			 	 'glyph': 'glyphicon-home'},
 			    {'title': 'COMPONENTS',
 			     'href': '#components',
@@ -80,7 +80,7 @@ angular.module('bsis')
 			$scope.currentSection = 'DONORS';
 			$scope.sectionList = [
 			    {'title': 'HOME',
-			     'href': '#',
+			     'href': '#home',
 			 	 'glyph': 'glyphicon-home'},
 			    {'title': 'COMPONENTS',
 			     'href': '#components',
@@ -145,6 +145,12 @@ angular.module('bsis')
 		$event.stopPropagation();
 		$scope.status.isopen = !$scope.status.isopen;
 	};
+
+	$scope.logout = function () {
+    	console.log("HEADERJS LOGOOOOOOOOUUUUTTTT");
+    	AuthService.logout();
+    	$location.path( "/" );
+    };
 
 	
 

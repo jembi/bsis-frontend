@@ -10,7 +10,7 @@
 
       <ul class="nav navbar-nav navbar-left">
           <li>
-            <a href="#" style="padding:0 0;"><img class="navbar-brand" src="images/bsis_logo_min_white.png" style="height:50px; padding: 5px;"/></a>
+            <a href="#home" style="padding:0 0;"><img class="navbar-brand" src="images/bsis_logo_min_white.png" style="height:50px; padding: 5px;"/></a>
           </li>
             <li class="dropdown" on-toggle="toggled(open)">
               <a href class="dropdown-toggle" style=" padding: 17px 5px 0 5px; font-size: 1.7rem;">
@@ -32,8 +32,8 @@
         <li>
             <a href="#settings"> Account Settings <i class="glyphicon glyphicon-cog" style="float: right; padding: 0px 0px;"></i></a>
         </li>
-        <li>
-            <a href="#login"> Log out <i class="glyphicon glyphicon-log-out" style="float: right; padding: 0px 0px;"></i></a>
+        <li ng-controller="LoginCtrl">
+            <a ng-click="logout()"> Log out <i class="glyphicon glyphicon-log-out" style="float: right; padding: 0px 0px;"></i></a>
         </li>
       </ul>
     </div>
