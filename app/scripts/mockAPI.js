@@ -6,7 +6,7 @@ var mockAPI = angular.module('mockAPI', [ 'ngMockE2E']);
     $httpBackend.whenPOST('/login', {username: 'admin', password: '123'}).respond(
       { user:{
           id: "100",
-          userId: "Super User",
+          userId: "Admin User",
           role: "admin"
         }
       })
