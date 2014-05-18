@@ -8,9 +8,9 @@ It is being developed with the following technology stack:
 * [AngularJS](www.angularjs.org)
 * [Twitter Bootstrap](http://getbootstrap.com/)
 * The [Yeoman](http://yeoman.io/) development workflow:
-** [Bower](http://bower.io/) for simple installation of JS libraries
-** [Grunt](http://gruntjs.com/) for build, optimization and live reload
-** [PhantomJS](http://phantomjs.org/) and [Karma](http://karma-runner.github.io/) for front-end testing
+  * [Bower](http://bower.io/) for simple installation of JS libraries
+  * [Grunt](http://gruntjs.com/) for build, optimization and live reload
+  * [PhantomJS](http://phantomjs.org/) and [Karma](http://karma-runner.github.io/) for front-end testing
 
 ## Dependencies
 
