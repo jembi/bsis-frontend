@@ -1,6 +1,7 @@
 var mockAPI = angular.module('mockAPI', [ 'ngMockE2E']);
   mockAPI.run(function($httpBackend) {
     
+    console.log("IN MOCKAPI");
 
     // login mock
     $httpBackend.whenPOST('/login', {username: 'admin', password: '123'}).respond(
@@ -8,6 +9,16 @@ var mockAPI = angular.module('mockAPI', [ 'ngMockE2E']);
           id: "100",
           userId: "Admin User",
           role: "admin"
+        }
+      });
+
+    $httpBackend.whenGET('/findDonor?firstName=sample&lastName=donor').respond(
+      { donor:{
+          firstName: "Sample",
+          lastName: "Donor",
+          donorNum: "000001",
+          gender: "Male",
+          birthDate: "10/01/1980"
         }
       })
 
