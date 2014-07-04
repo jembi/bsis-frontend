@@ -65,6 +65,29 @@ angular.module('bsis', [
 			}
 		})
 
+		// COMPONENTS URLs
+		.when('/components', {
+			templateUrl : 'views/components.html',
+			controller  : 'ComponentsCtrl',
+			data: {
+				permission: PERMISSIONS.VIEW_COMPONENTS
+			}
+		})
+		.when('/recordComponents', {
+			templateUrl : 'views/components.html',
+			controller  : 'ComponentsCtrl',
+			data: {
+				permission: PERMISSIONS.VIEW_COMPONENTS
+			}
+		})
+		.when('/findComponents', {
+			templateUrl : 'views/components.html',
+			controller  : 'ComponentsCtrl',
+			data: {
+				permission: PERMISSIONS.VIEW_COMPONENTS
+			}
+		})
+
 		.otherwise({
 			redirectTo: '/home'
 		});
