@@ -39,7 +39,7 @@ angular.module('bsis')
     }
 
   // else if on components page, set menu to COMPONENTS
-  if(~$location.path().indexOf('components')        ||
+  else if(~$location.path().indexOf('components')        ||
       ~$location.path().indexOf('findComponents')   ||
       ~$location.path().indexOf('recordComponents')
     ){
@@ -68,6 +68,41 @@ angular.module('bsis')
          'glyph': 'glyphicon-cog'}
       ];
     }
+
+  // else if on testing page, set menu to TESTING
+  else if(~$location.path().indexOf('testing')           ||
+      ~$location.path().indexOf('viewTestResults')  ||
+      ~$location.path().indexOf('manageTestBatch')  ||
+      ~$location.path().indexOf('serologyTesting')  ||
+      ~$location.path().indexOf('ttiTesting')       ||
+      ~$location.path().indexOf('uploadTestResults')
+    ){
+      $scope.currentSection = 'TESTING';
+      $scope.sectionList = [
+        {'title': 'HOME',
+         'href': '#home',
+         'glyph': 'glyphicon-home'},
+        {'title': 'DONORS',
+         'href': '#donors',
+         'glyph': 'glyphicon-tint'},
+        {'title': 'COMPONENTS',
+         'href': '#components',
+         'glyph': 'glyphicon-tasks'},
+        {'title': 'INVENTORY',
+         'href': '#inventory',
+         'glyph': 'glyphicon-tag'},
+        {'title': 'REPORTS',
+         'href': '#reports',
+         'glyph': 'glyphicon-stats'},
+        {'title': 'MOBILE CLINIC',
+         'href': '#mobile',
+         'glyph': 'glyphicon-road'},
+        {'title': 'SETTINGS',
+         'href': '#settings',
+         'glyph': 'glyphicon-cog'}
+      ];
+    }
+
   // else set menu to HOME
   else{
       $scope.currentSection = 'HOME';
@@ -134,7 +169,7 @@ angular.module('bsis')
     }
     
     // else if on components page, set menu to COMPONENTS
-    if(~$location.path().indexOf('components')        ||
+    else if(~$location.path().indexOf('components')        ||
         ~$location.path().indexOf('findComponents')   ||
         ~$location.path().indexOf('recordComponents')
     ){
@@ -162,6 +197,40 @@ angular.module('bsis')
              'href': '#settings',
              'glyph': 'glyphicon-cog'}
           ];
+    }
+
+    // else if on testing page, set menu to TESTING
+    else if(~$location.path().indexOf('testing')           ||
+      ~$location.path().indexOf('viewTestResults')  ||
+      ~$location.path().indexOf('manageTestBatch')  ||
+      ~$location.path().indexOf('serologyTesting')  ||
+      ~$location.path().indexOf('ttiTesting')       ||
+      ~$location.path().indexOf('uploadTestResults')
+    ){
+      $scope.currentSection = 'TESTING';
+      $scope.sectionList = [
+        {'title': 'HOME',
+         'href': '#home',
+         'glyph': 'glyphicon-home'},
+        {'title': 'DONORS',
+         'href': '#donors',
+         'glyph': 'glyphicon-tint'},
+        {'title': 'COMPONENTS',
+         'href': '#components',
+         'glyph': 'glyphicon-tasks'},
+        {'title': 'INVENTORY',
+         'href': '#inventory',
+         'glyph': 'glyphicon-tag'},
+        {'title': 'REPORTS',
+         'href': '#reports',
+         'glyph': 'glyphicon-stats'},
+        {'title': 'MOBILE CLINIC',
+         'href': '#mobile',
+         'glyph': 'glyphicon-road'},
+        {'title': 'SETTINGS',
+         'href': '#settings',
+         'glyph': 'glyphicon-cog'}
+      ];
     }
 
     // else set menu to HOME

@@ -88,6 +88,50 @@ angular.module('bsis', [
 			}
 		})
 
+		// TESTING URLs
+		.when('/testing', {
+			templateUrl : 'views/testing.html',
+			controller  : 'TestingCtrl',
+			data: {
+				permission: PERMISSIONS.VIEW_TESTING
+			}
+		})
+		.when('/viewTestResults', {
+			templateUrl : 'views/testing.html',
+			controller  : 'TestingCtrl',
+			data: {
+				permission: PERMISSIONS.VIEW_TESTING
+			}
+		})
+		.when('/manageTestBatch', {
+			templateUrl : 'views/testing.html',
+			controller  : 'TestingCtrl',
+			data: {
+				permission: PERMISSIONS.VIEW_TESTING
+			}
+		})
+		.when('/serologyTesting', {
+			templateUrl : 'views/testing.html',
+			controller  : 'TestingCtrl',
+			data: {
+				permission: PERMISSIONS.VIEW_TESTING
+			}
+		})
+		.when('/ttiTesting', {
+			templateUrl : 'views/testing.html',
+			controller  : 'TestingCtrl',
+			data: {
+				permission: PERMISSIONS.VIEW_TESTING
+			}
+		})
+		.when('/uploadTestResults', {
+			templateUrl : 'views/testing.html',
+			controller  : 'TestingCtrl',
+			data: {
+				permission: PERMISSIONS.VIEW_TESTING
+			}
+		})
+
 		.otherwise({
 			redirectTo: '/home'
 		});

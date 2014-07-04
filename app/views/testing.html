@@ -1,0 +1,36 @@
+
+      <div class="container-fluid">
+      <div class="row  main-page" ng-controller="TestingCtrl">
+
+  <div ng-include="'views/testing/sidebar.html'"></div>
+          
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      
+       <div class="row  main-page">
+
+       <div class="col-lg-9 " >
+       
+       <div ng-switch on="selection">
+          <div ng-switch-when="/viewTestResults"><div ng-include="'views/testing/viewTestResults.html'"></div></div>
+          <div ng-switch-when="/serologyTesting"><div ng-include="'views/testing/serologyTesting.html'"></div></div>
+          <div ng-switch-when="/ttiTesting"><div ng-include="'views/testing/ttiTesting.html'"></div></div>
+          <div ng-switch-when="/uploadTestResults"><div ng-include="'views/testing/uploadTestResults.html'"></div></div>
+          <div ng-switch-when="/manageTestBatch"><div ng-include="'views/testing/manageTestBatch.html'"></div></div>
+          <div ng-switch-default><div ng-include="'views/testing/viewTestResults.html'"></div></div>
+        </div>
+
+       </div>
+
+       </div>
+        
+      </div>
+
+    </div>
+
+      <div id="push"></div>
+      <div id="push"></div>
+      <div id="push"></div>
+      <div id="push"></div>
+
+      </div>

@@ -1,0 +1,19 @@
+<div class="col-sm-3 col-md-2 sidebar" style="padding-top:5px;">
+  <ul class="nav nav-sidebar">
+    <li class=" placeholders placeholder" style="margin-bottom:5px;">
+      <span>
+      <div >
+        <i class="glyphicon glyphicon-tasks"></i>
+      </div>
+      </span>
+    </li>
+    <li class="disabled"><span>MANAGE TESTS</span></li>
+    <li ng-class="{current: isCurrent('/viewTestResults')}"><a href="#/viewTestResults">View Test Results</a></li>
+    <li ng-class="{current: isCurrent('/manageTestBatch')}"><a href="#/manageTestBatch">Manage Test Batch</a></li>
+    <li class="disabled"><span>SEROLOGY TESTING</span></li>
+    <li ng-class="{current: isCurrent('/serologyTesting')}"><a href="#/serologyTesting">Record Serology Outcomes</a></li>
+    <li class="disabled"><span>TTI TESTING</span></li>
+    <li ng-class="{current: isCurrent('/ttiTesting')}"><a href="#/ttiTesting">Record TTI Outcomes</a></li>
+    <li ng-class="{current: isCurrent('/uploadTestResults')}"><a href="#/uploadTestResults">Upload Test Outcomes</a></li>
+  </ul>
+</div>
