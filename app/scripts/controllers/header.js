@@ -103,6 +103,39 @@ angular.module('bsis')
       ];
     }
 
+  // else if on inventory page, set menu to INVENTORY
+  else if(~$location.path().indexOf('inventory')           ||
+      ~$location.path().indexOf('manageInventory')  ||
+      ~$location.path().indexOf('transferComponents')  ||
+      ~$location.path().indexOf('issueComponents')  ||
+      ~$location.path().indexOf('componentUsage')
+    ){
+      $scope.currentSection = 'INVENTORY';
+      $scope.sectionList = [
+        {'title': 'HOME',
+         'href': '#home',
+         'glyph': 'glyphicon-home'},
+        {'title': 'DONORS',
+         'href': '#donors',
+         'glyph': 'glyphicon-tint'},
+        {'title': 'COMPONENTS',
+         'href': '#components',
+         'glyph': 'glyphicon-tasks'},
+        {'title': 'TESTING',
+         'href': '#testing',
+         'glyph': 'glyphicon-inbox'},
+        {'title': 'REPORTS',
+         'href': '#reports',
+         'glyph': 'glyphicon-stats'},
+        {'title': 'MOBILE CLINIC',
+         'href': '#mobile',
+         'glyph': 'glyphicon-road'},
+        {'title': 'SETTINGS',
+         'href': '#settings',
+         'glyph': 'glyphicon-cog'}
+      ];
+    }
+
   // else set menu to HOME
   else{
       $scope.currentSection = 'HOME';
@@ -221,6 +254,39 @@ angular.module('bsis')
         {'title': 'INVENTORY',
          'href': '#inventory',
          'glyph': 'glyphicon-tag'},
+        {'title': 'REPORTS',
+         'href': '#reports',
+         'glyph': 'glyphicon-stats'},
+        {'title': 'MOBILE CLINIC',
+         'href': '#mobile',
+         'glyph': 'glyphicon-road'},
+        {'title': 'SETTINGS',
+         'href': '#settings',
+         'glyph': 'glyphicon-cog'}
+      ];
+    }
+
+    // else if on inventory page, set menu to INVENTORY
+  else if(~$location.path().indexOf('inventory')           ||
+      ~$location.path().indexOf('manageInventory')  ||
+      ~$location.path().indexOf('transferComponents')  ||
+      ~$location.path().indexOf('issueComponents')  ||
+      ~$location.path().indexOf('componentUsage')
+    ){
+      $scope.currentSection = 'INVENTORY';
+      $scope.sectionList = [
+        {'title': 'HOME',
+         'href': '#home',
+         'glyph': 'glyphicon-home'},
+        {'title': 'DONORS',
+         'href': '#donors',
+         'glyph': 'glyphicon-tint'},
+        {'title': 'COMPONENTS',
+         'href': '#components',
+         'glyph': 'glyphicon-tasks'},
+        {'title': 'TESTING',
+         'href': '#testing',
+         'glyph': 'glyphicon-inbox'},
         {'title': 'REPORTS',
          'href': '#reports',
          'glyph': 'glyphicon-stats'},

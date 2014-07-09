@@ -132,6 +132,43 @@ angular.module('bsis', [
       }
     })
 
+    // INVENTORY URLs
+    .when('/inventory', {
+      templateUrl : 'views/inventory.html',
+      controller  : 'InventoryCtrl',
+      data: {
+        permission: PERMISSIONS.VIEW_INVENTORY
+      }
+    })
+    .when('/manageInventory', {
+      templateUrl : 'views/inventory.html',
+      controller  : 'InventoryCtrl',
+      data: {
+        permission: PERMISSIONS.VIEW_INVENTORY
+      }
+    })
+    .when('/transferComponents', {
+      templateUrl : 'views/inventory.html',
+      controller  : 'InventoryCtrl',
+      data: {
+        permission: PERMISSIONS.VIEW_INVENTORY
+      }
+    })
+    .when('/issueComponents', {
+      templateUrl : 'views/inventory.html',
+      controller  : 'InventoryCtrl',
+      data: {
+        permission: PERMISSIONS.VIEW_INVENTORY
+      }
+    })
+    .when('/componentUsage', {
+      templateUrl : 'views/inventory.html',
+      controller  : 'InventoryCtrl',
+      data: {
+        permission: PERMISSIONS.VIEW_INVENTORY
+      }
+    })
+
     .otherwise({
       redirectTo: '/home'
     });
