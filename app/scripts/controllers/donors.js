@@ -16,7 +16,7 @@ angular.module('bsis')
     $scope.findDonor = function () {      
       DonorService.findDonor($scope.donorSearch).then(function (response) {
           $scope.donor = response.data.donor;
-          console.log("ReturnedDonor: ",$scope.donor);
+          //console.log("ReturnedDonor: ",$scope.donor);
           $scope.searchResults = true;
         }, function () {
           $scope.searchResults = false;
@@ -26,7 +26,7 @@ angular.module('bsis')
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
-        $location.path(path)
+        $location.path(path);
         $scope.selection = path;
         return true;
       } else if ($location.path() === path) {

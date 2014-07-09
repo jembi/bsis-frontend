@@ -1,7 +1,9 @@
+'use strict';
+
 var mockAPI = angular.module('mockAPI', [ 'ngMockE2E']);
   mockAPI.run(function($httpBackend) {
     
-    console.log("IN MOCKAPI");
+    //console.log("IN MOCKAPI");
 
     // login mock
     $httpBackend.whenPOST('/login', {username: 'admin', password: '123'}).respond(
@@ -20,7 +22,7 @@ var mockAPI = angular.module('mockAPI', [ 'ngMockE2E']);
           gender: "Male",
           birthDate: "10/01/1980"
         }
-      })
+      });
 
     // Don't mock html views
     $httpBackend.whenGET(/views\/\w+.*/).passThrough();

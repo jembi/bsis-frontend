@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('bsis')
-	.controller('TestingCtrl', function ($scope, $location, TestingService) {
+  .controller('TestingCtrl', function ($scope, $location, TestingService) {
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
-        $location.path(path)
+        $location.path(path);
         $scope.selection = path;
         return true;
       } else if ($location.path() === path) {

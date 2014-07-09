@@ -7,20 +7,20 @@ angular.module('bsis')
       password: ''
     };
     $scope.login = function (credentials) {
-    	console.log(credentials.username);
-    	console.log(credentials.password);
+      console.log(credentials.username);
+      console.log(credentials.password);
           AuthService.login(credentials).then(function () {
-	        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-	       	console.log("user.id: ", $rootScope.user.id);
-	       	console.log("user.userId: ", $rootScope.user.userId);
-	       	console.log("user.Role: ", $rootScope.user.role);
-	       	$location.path( "/home" );
-	       	$scope.loginInvalid = false;
-      	}, function () {
-        	$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-        	$scope.loginInvalid = true;
-        	$scope.credentials.username = null;
-        	$scope.credentials.password = null;
+          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+          console.log("user.id: ", $rootScope.user.id);
+          console.log("user.userId: ", $rootScope.user.userId);
+          console.log("user.Role: ", $rootScope.user.role);
+          $location.path( "/home" );
+          $scope.loginInvalid = false;
+        }, function () {
+          $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+          $scope.loginInvalid = true;
+          $scope.credentials.username = null;
+          $scope.credentials.password = null;
       });
     };
   });
