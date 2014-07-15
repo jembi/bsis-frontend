@@ -2,5 +2,6 @@
   "globalstrict": true,
   "globals": {
     "angular": false
-  }
+  },
+  "-W117" : true /* hide "... is not defined" warnings */
 }
