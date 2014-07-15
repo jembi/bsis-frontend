@@ -169,6 +169,42 @@ angular.module('bsis', [
       }
     })
 
+    // LABELLING URLs
+    .when('/labelling', {
+      templateUrl : 'views/labelling.html',
+      controller  : 'LabellingCtrl',
+      data: {
+        permission: PERMISSIONS.VIEW_LABELLING
+      }
+    })
+
+    // REPORTS URLs
+    .when('/reports', {
+      templateUrl : 'views/reports.html',
+      controller  : 'ReportsCtrl',
+      data: {
+        permission: PERMISSIONS.VIEW_REPORTS
+      }
+    })
+
+    // MOBILE URLs
+    .when('/mobile', {
+      templateUrl : 'views/mobile.html',
+      controller  : 'MobileCtrl',
+      data: {
+        permission: PERMISSIONS.VIEW_MOBILE
+      }
+    })
+
+    // SETTINGS URLs
+    .when('/settings', {
+      templateUrl : 'views/settings.html',
+      controller  : 'SettingsCtrl',
+      data: {
+        permission: PERMISSIONS.VIEW_LABELLING
+      }
+    })
+
     .otherwise({
       redirectTo: '/home'
     });
