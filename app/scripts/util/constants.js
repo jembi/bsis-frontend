@@ -35,4 +35,18 @@ angular.module('bsis')
     // INVENTORY PERMISSIONS
     VIEW_INVENTORY: 'VIEW_INVENTORY'
 
+  })
+  .constant('ICONS', {
+    HOME: 'fa-home',
+    DONORS: 'fa-clipboard',
+    COMPONENTS: 'fa-filter',
+    TESTING: 'fa-flask',
+    INVENTORY:  'fa-tint', //'fa-archive',
+    LABELLING: 'fa-barcode',
+    REPORTS: 'fa-bar-chart-o',
+    MOBILE: 'fa-truck',
+    SETTINGS: 'fa-cogs',
+    USER: 'fa-user',
+    ACCOUNT: 'fa-cog',
+    LOGOUT: 'fa-sign-out'
   });

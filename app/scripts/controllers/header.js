@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-.controller('HeaderCtrl', function ($scope, $location, AuthService) {
+.controller('HeaderCtrl', function ($scope, $location, AuthService, ICONS) {
+
+  $scope.icons = ICONS;
 
   // set menu on initial load
   // if on donors page, set menu to DONORS
@@ -16,25 +18,25 @@ angular.module('bsis')
       $scope.sectionList = [
         {'title': 'HOME',
          'href': '#home',
-         'glyph': 'glyphicon-home'},
+         'icon': ICONS.HOME},
         {'title': 'COMPONENTS',
          'href': '#components',
-         'glyph': 'glyphicon-tasks'},
+         'icon': ICONS.COMPONENTS},
         {'title': 'TESTING',
          'href': '#testing',
-         'glyph': 'glyphicon-inbox'},
+         'icon': ICONS.TESTING},
         {'title': 'INVENTORY',
          'href': '#inventory',
-         'glyph': 'glyphicon-tag'},
+         'icon': ICONS.INVENTORY},
         {'title': 'REPORTS',
          'href': '#reports',
-         'glyph': 'glyphicon-stats'},
+         'icon': ICONS.REPORTS},
         {'title': 'MOBILE CLINIC',
          'href': '#mobile',
-         'glyph': 'glyphicon-road'},
+         'icon': ICONS.MOBILE},
         {'title': 'SETTINGS',
          'href': '#settings',
-         'glyph': 'glyphicon-cog'}
+         'icon': ICONS.SETTINGS}
       ];
     }
 
@@ -47,25 +49,25 @@ angular.module('bsis')
       $scope.sectionList = [
         {'title': 'HOME',
          'href': '#home',
-         'glyph': 'glyphicon-home'},
+         'icon': ICONS.HOME},
         {'title': 'DONORS',
          'href': '#donors',
-         'glyph': 'glyphicon-tint'},
+         'icon': ICONS.DONORS},
         {'title': 'TESTING',
          'href': '#testing',
-         'glyph': 'glyphicon-inbox'},
+         'icon': ICONS.TESTING},
         {'title': 'INVENTORY',
          'href': '#inventory',
-         'glyph': 'glyphicon-tag'},
+         'icon': ICONS.INVENTORY},
         {'title': 'REPORTS',
          'href': '#reports',
-         'glyph': 'glyphicon-stats'},
+         'icon': ICONS.REPORTS},
         {'title': 'MOBILE CLINIC',
          'href': '#mobile',
-         'glyph': 'glyphicon-road'},
+         'icon': ICONS.MOBILE},
         {'title': 'SETTINGS',
          'href': '#settings',
-         'glyph': 'glyphicon-cog'}
+         'icon': ICONS.SETTINGS}
       ];
     }
 
@@ -81,25 +83,25 @@ angular.module('bsis')
       $scope.sectionList = [
         {'title': 'HOME',
          'href': '#home',
-         'glyph': 'glyphicon-home'},
+         'icon': ICONS.HOME},
         {'title': 'DONORS',
          'href': '#donors',
-         'glyph': 'glyphicon-tint'},
+         'icon': ICONS.DONORS},
         {'title': 'COMPONENTS',
          'href': '#components',
-         'glyph': 'glyphicon-tasks'},
+         'icon': ICONS.COMPONENTS},
         {'title': 'INVENTORY',
          'href': '#inventory',
-         'glyph': 'glyphicon-tag'},
+         'icon': ICONS.INVENTORY},
         {'title': 'REPORTS',
          'href': '#reports',
-         'glyph': 'glyphicon-stats'},
+         'icon': ICONS.REPORTS},
         {'title': 'MOBILE CLINIC',
          'href': '#mobile',
-         'glyph': 'glyphicon-road'},
+         'icon': ICONS.MOBILE},
         {'title': 'SETTINGS',
          'href': '#settings',
-         'glyph': 'glyphicon-cog'}
+         'icon': ICONS.SETTINGS}
       ];
     }
 
@@ -114,25 +116,25 @@ angular.module('bsis')
       $scope.sectionList = [
         {'title': 'HOME',
          'href': '#home',
-         'glyph': 'glyphicon-home'},
+         'icon': ICONS.HOME},
         {'title': 'DONORS',
          'href': '#donors',
-         'glyph': 'glyphicon-tint'},
+         'icon': ICONS.DONORS},
         {'title': 'COMPONENTS',
          'href': '#components',
-         'glyph': 'glyphicon-tasks'},
+         'icon': ICONS.COMPONENTS},
         {'title': 'TESTING',
          'href': '#testing',
-         'glyph': 'glyphicon-inbox'},
+         'icon': ICONS.TESTING},
         {'title': 'REPORTS',
          'href': '#reports',
-         'glyph': 'glyphicon-stats'},
+         'icon': ICONS.REPORTS},
         {'title': 'MOBILE CLINIC',
          'href': '#mobile',
-         'glyph': 'glyphicon-road'},
+         'icon': ICONS.MOBILE},
         {'title': 'SETTINGS',
          'href': '#settings',
-         'glyph': 'glyphicon-cog'}
+         'icon': ICONS.SETTINGS}
       ];
     }
 
@@ -142,25 +144,25 @@ angular.module('bsis')
       $scope.sectionList = [
         {'title': 'DONORS',
          'href': '#donors',
-         'glyph': 'glyphicon-tint'},
+         'icon': ICONS.DONORS},
         {'title': 'COMPONENTS',
          'href': '#components',
-         'glyph': 'glyphicon-tasks'},
+         'icon': ICONS.COMPONENTS},
         {'title': 'TESTING',
          'href': '#testing',
-         'glyph': 'glyphicon-inbox'},
+         'icon': ICONS.TESTING},
         {'title': 'INVENTORY',
          'href': '#inventory',
-         'glyph': 'glyphicon-tag'},
+         'icon': ICONS.INVENTORY},
         {'title': 'REPORTS',
          'href': '#reports',
-         'glyph': 'glyphicon-stats'},
+         'icon': ICONS.REPORTS},
         {'title': 'MOBILE CLINIC',
          'href': '#mobile',
-         'glyph': 'glyphicon-road'},
+         'icon': ICONS.MOBILE},
         {'title': 'SETTINGS',
          'href': '#settings',
-         'glyph': 'glyphicon-cog'}
+         'icon': ICONS.SETTINGS}
       ];
     }
 
@@ -179,25 +181,25 @@ angular.module('bsis')
       $scope.sectionList = [
         {'title': 'HOME',
          'href': '#home',
-         'glyph': 'glyphicon-home'},
+         'icon': ICONS.HOME},
         {'title': 'COMPONENTS',
          'href': '#components',
-         'glyph': 'glyphicon-tasks'},
+         'icon': ICONS.COMPONENTS},
         {'title': 'TESTING',
          'href': '#testing',
-         'glyph': 'glyphicon-inbox'},
+         'icon': ICONS.TESTING},
         {'title': 'INVENTORY',
          'href': '#inventory',
-         'glyph': 'glyphicon-tag'},
+         'icon': ICONS.INVENTORY},
         {'title': 'REPORTS',
          'href': '#reports',
-         'glyph': 'glyphicon-stats'},
+         'icon': ICONS.REPORTS},
         {'title': 'MOBILE CLINIC',
          'href': '#mobile',
-         'glyph': 'glyphicon-road'},
+         'icon': ICONS.MOBILE},
         {'title': 'SETTINGS',
          'href': '#settings',
-         'glyph': 'glyphicon-cog'}
+         'icon': ICONS.SETTINGS}
       ];
     }
     
@@ -210,25 +212,25 @@ angular.module('bsis')
         $scope.sectionList = [
             {'title': 'HOME',
              'href': '#home',
-             'glyph': 'glyphicon-home'},
+             'icon': ICONS.HOME},
             {'title': 'DONORS',
              'href': '#donors',
-             'glyph': 'glyphicon-tint'},
+             'icon': ICONS.DONORS},
             {'title': 'TESTING',
              'href': '#testing',
-             'glyph': 'glyphicon-inbox'},
+             'icon': ICONS.TESTING},
             {'title': 'INVENTORY',
              'href': '#inventory',
-             'glyph': 'glyphicon-tag'},
+             'icon': ICONS.INVENTORY},
             {'title': 'REPORTS',
              'href': '#reports',
-             'glyph': 'glyphicon-stats'},
+             'icon': ICONS.REPORTS},
             {'title': 'MOBILE CLINIC',
              'href': '#mobile',
-             'glyph': 'glyphicon-road'},
+             'icon': ICONS.MOBILE},
             {'title': 'SETTINGS',
              'href': '#settings',
-             'glyph': 'glyphicon-cog'}
+             'icon': ICONS.SETTINGS}
           ];
     }
 
@@ -244,25 +246,25 @@ angular.module('bsis')
       $scope.sectionList = [
         {'title': 'HOME',
          'href': '#home',
-         'glyph': 'glyphicon-home'},
+         'icon': ICONS.HOME},
         {'title': 'DONORS',
          'href': '#donors',
-         'glyph': 'glyphicon-tint'},
+         'icon': ICONS.DONORS},
         {'title': 'COMPONENTS',
          'href': '#components',
-         'glyph': 'glyphicon-tasks'},
+         'icon': ICONS.COMPONENTS},
         {'title': 'INVENTORY',
          'href': '#inventory',
-         'glyph': 'glyphicon-tag'},
+         'icon': ICONS.INVENTORY},
         {'title': 'REPORTS',
          'href': '#reports',
-         'glyph': 'glyphicon-stats'},
+         'icon': ICONS.REPORTS},
         {'title': 'MOBILE CLINIC',
          'href': '#mobile',
-         'glyph': 'glyphicon-road'},
+         'icon': ICONS.MOBILE},
         {'title': 'SETTINGS',
          'href': '#settings',
-         'glyph': 'glyphicon-cog'}
+         'icon': ICONS.SETTINGS}
       ];
     }
 
@@ -277,25 +279,25 @@ angular.module('bsis')
       $scope.sectionList = [
         {'title': 'HOME',
          'href': '#home',
-         'glyph': 'glyphicon-home'},
+         'icon': ICONS.HOME},
         {'title': 'DONORS',
          'href': '#donors',
-         'glyph': 'glyphicon-tint'},
+         'icon': ICONS.DONORS},
         {'title': 'COMPONENTS',
          'href': '#components',
-         'glyph': 'glyphicon-tasks'},
+         'icon': ICONS.COMPONENTS},
         {'title': 'TESTING',
          'href': '#testing',
-         'glyph': 'glyphicon-inbox'},
+         'icon': ICONS.TESTING},
         {'title': 'REPORTS',
          'href': '#reports',
-         'glyph': 'glyphicon-stats'},
+         'icon': ICONS.REPORTS},
         {'title': 'MOBILE CLINIC',
          'href': '#mobile',
-         'glyph': 'glyphicon-road'},
+         'icon': ICONS.MOBILE},
         {'title': 'SETTINGS',
          'href': '#settings',
-         'glyph': 'glyphicon-cog'}
+         'icon': ICONS.SETTINGS}
       ];
     }
 
@@ -305,25 +307,25 @@ angular.module('bsis')
       $scope.sectionList = [
         {'title': 'DONORS',
          'href': '#donors',
-         'glyph': 'glyphicon-tint'},
+         'icon': ICONS.DONORS},
         {'title': 'COMPONENTS',
          'href': '#components',
-         'glyph': 'glyphicon-tasks'},
+         'icon': ICONS.COMPONENTS},
         {'title': 'TESTING',
          'href': '#testing',
-         'glyph': 'glyphicon-inbox'},
+         'icon': ICONS.TESTING},
         {'title': 'INVENTORY',
          'href': '#inventory',
-         'glyph': 'glyphicon-tag'},
+         'icon': ICONS.INVENTORY},
         {'title': 'REPORTS',
          'href': '#reports',
-         'glyph': 'glyphicon-stats'},
+         'icon': ICONS.REPORTS},
         {'title': 'MOBILE CLINIC',
          'href': '#mobile',
-         'glyph': 'glyphicon-road'},
+         'icon': ICONS.MOBILE},
         {'title': 'SETTINGS',
          'href': '#settings',
-         'glyph': 'glyphicon-cog'}
+         'icon': ICONS.SETTINGS}
       ];
     }
 

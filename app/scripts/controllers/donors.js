@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('bsis')
-	.controller('DonorsCtrl', function ($scope, $location, DonorService) {
+  .controller('DonorsCtrl', function ($scope, $location, DonorService, ICONS) {
 
+    $scope.icons = ICONS;
+    
     /*$scope.donor = {
       firstName: '',
       lastName: '',

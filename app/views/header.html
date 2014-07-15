@@ -17,7 +17,7 @@
                {{currentSection}} <b class="caret"></b></a>
               <ul class="dropdown-menu dropdown-ext">
               <li ng-repeat="section in sectionList">
-                <a href="{{section.href}}">{{section.title}}<i class="glyphicon {{section.glyph}}" style="float: right; padding: 0px 5px;"></i></a>
+                <a href="{{section.href}}">{{section.title}}<i class="fa {{section.icon}}" style="float: right; padding: 0px 5px;"></i></a>
               </li>
               </ul>
             </li>
@@ -26,14 +26,14 @@
 
     <div class="dropdown nav navbar-nav navbar-right" on-toggle="toggled(open)">
       <a href class="dropdown-toggle nav navbar-nav navbar-right" style="padding: 13px 5px 0 8px;">
-        <i class="glyphicon glyphicon-user"></i> {{user.userId}} <b class="caret"></b>
+        <i class="fa {{icons.USER}}"></i> {{user.userId}} <b class="caret"></b>
       </a>
       <ul class="dropdown-menu">
         <li>
-            <a href="#settings"> Account Settings <i class="glyphicon glyphicon-cog" style="float: right; padding: 0px 0px;"></i></a>
+            <a href="#settings"> Account Settings <i class="fa {{icons.ACCOUNT}}" style="float: right; padding: 0px 0px;"></i></a>
         </li>
         <li ng-controller="LoginCtrl">
-            <a ng-click="logout()"> Log out <i class="glyphicon glyphicon-log-out" style="float: right; padding: 0px 0px;"></i></a>
+            <a ng-click="logout()"> Log out <i class="fa {{icons.LOGOUT}}" style="float: right; padding: 0px 0px;"></i></a>
         </li>
       </ul>
     </div>

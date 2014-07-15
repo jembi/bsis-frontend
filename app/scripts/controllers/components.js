@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ComponentsCtrl', function ($scope, $location, ComponentsService) {
+  .controller('ComponentsCtrl', function ($scope, $location, ComponentsService, ICONS) {
+
+    $scope.icons = ICONS;
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
