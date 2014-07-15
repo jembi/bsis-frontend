@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 .factory('ComponentsService', function ($http) {
-	return {
+  return {
 
-	};
+  };
 });
