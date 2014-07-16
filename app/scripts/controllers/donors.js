@@ -39,4 +39,11 @@ angular.module('bsis')
         return false;
       }
     };
+
+    $scope.clear = function () {
+      $scope.donorSearch = {};
+      $scope.searchResults = '';
+    };
   });
+
+

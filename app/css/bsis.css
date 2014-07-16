@@ -2,101 +2,92 @@
 
 
 html,
-      body {
-        height: 100%;
-        /* The html and body elements cannot have any padding or margin. */
-      }
-
-      /* Wrapper for page content to push down footer */
-      #wrap {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-        /* Negative indent footer by it's height */
-        margin: 0 auto -60px;
-      }
-
-      /* Set the fixed height of the footer here */
-      #push,
-      #footer {
-        height:60px;
-      }
-      #footer {
-        background-color: #f5f5f5;
-      }
-
-      /* Lastly, apply responsive CSS fixes as necessary */
-      @media (max-width: 767px) {
-        #footer {
-          margin-left: -20px;
-          margin-right: -20px;
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-      }
-
-
-
-
-
-
-  body {
-    padding-top: 40px;
-    padding-bottom: 20px;
-  background-color: #eee;
-
-  }
-
-
-@media (min-width: 1200px) {
-     .home-page{
-        max-width: 900px;
-        margin:0 auto;
-    }
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
 }
 
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
 
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+  height:60px;
+}
+#footer {
+  background-color: #f5f5f5;
+}
 
-  .dropdown-ext {
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+body {
+  padding-top: 40px;
+  padding-bottom: 20px;
+  background-color: #eee;
+}
+
+@media (min-width: 1200px) {
+  .home-page{
+    max-width: 900px;
+    margin:0 auto;
+  }
+}
+
+.dropdown-ext {
   width: 100%; 
 }
 
- .navbar-sub {
+.navbar-sub {
   text-align: center;
- }
+}
 
- .hr-top {
-    margin: 8px 0;
- }
+.hr-top {
+  margin: 8px 0;
+}
 
- .hr-info {
-   margin: 10px auto;
-   width: 50%;
- }
+.hr-info {
+  margin: 10px auto;
+  width: 50%;
+}
 
-  .hr-navside {
-   margin: 2px auto;
-   width: 80%;
- }
+.hr-navside {
+  margin: 2px auto;
+  width: 80%;
+}
 
 
-  .navbar {
-      background-color: #242424;
-      font-size: 1.7rem;
-      font-style: normal;
-  }
+.navbar {
+  background-color: #242424;
+  font-size: 1.7rem;
+  font-style: normal;
+}
 
-  .navbar-inverse .navbar-nav li a{
-    padding:10px;
-  }
+.navbar-inverse .navbar-nav li a{
+  padding:10px;
+}
 
 .placeholders a  {
   #color: #333;
   color: #f5f5f5;
-text-align: center;
-text-decoration: none;
-position: relative;
-padding: 0 auto;
+  text-align: center;
+  text-decoration: none;
+  position: relative;
+  padding: 0 auto;
 }
 
 .home-page a {
@@ -109,33 +100,30 @@ padding: 0 auto;
 
 .placeholders a:hover { 
   #color:#640009; 
-color:#b7b7b7;
-
+  color:#b7b7b7;
 }
-
-
 
 .placeholder div {
   text-align: center;
-#display: inline-block;
-border-radius: 50%;
-height: 11rem;
-width: 11rem;
-margin: 0 auto;
-font-size: 6rem;
+  #display: inline-block;
+  border-radius: 50%;
+  height: 11rem;
+  width: 11rem;
+  margin: 0 auto;
+  font-size: 6rem;
 
-#background-color: #fff;
-#background-color: #640009;
-background-color: #242424;
-#box-shadow: 0px 0px -2px rgba(0,0,0,.25);
-#border: 1px solid #C0C0C0;
+  #background-color: #fff;
+  #background-color: #640009;
+  background-color: #242424;
+  #box-shadow: 0px 0px -2px rgba(0,0,0,.25);
+  #border: 1px solid #C0C0C0;
 
-#border: 1px solid #ccc;
-#border-radius: 4px;
--webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
--webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  #border: 1px solid #ccc;
+  #border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
 .placeholder i {
@@ -143,12 +131,10 @@ transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   color: #f5f5f5;
 }
 
-
 .placeholder a div:hover { 
 background-color: rgba(36,36,36,0.85) !important;
 #outline: 5px solid #fff;
 #box-shadow: 0px 0px 0pt 4px #242424;
-
 }
 
 .placeholder .glyphicon {
@@ -184,17 +170,17 @@ h1 h2 h3 h4 {
   #display: none;
 }
 
-  #footer {
-color: #aaa;
-#margin: 1rem 0 1rem 0;
-text-align: center;
-background-color: #eee;
-
+#footer {
+  color: #aaa;
+  #margin: 1rem 0 1rem 0;
+  text-align: center;
+  background-color: #eee;
 }
 
 hr { display: block; height: 1px;
-    border: 0; border-top: 1px solid #ccc;
-    margin: 1em 0; padding: 0; }
+  border: 0; border-top: 1px solid #ccc;
+  margin: 1em 0; padding: 0; 
+}
 
 
 .disabled a {
@@ -202,9 +188,9 @@ hr { display: block; height: 1px;
   color: #242424 !important;
   text-decoration: none;
   font-weight: bold;
- # font-style: oblique;
-#border-style:solid;
-#border-bottom:thick dotted #ff0000;
+  #font-style: oblique;
+  #border-style:solid;
+  #border-bottom:thick dotted #ff0000;
 }
 
 .control-label {
@@ -249,7 +235,6 @@ hr { display: block; height: 1px;
   cursor: default;
 }
 
-
 /* <-- login form css */
 
 .form-signin {
@@ -257,13 +242,16 @@ hr { display: block; height: 1px;
   padding: 15px;
   margin: 0 auto;
 }
+
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
 }
+
 .form-signin .checkbox {
   font-weight: normal;
 }
+
 .form-signin .form-control {
   position: relative;
   height: auto;
@@ -273,24 +261,55 @@ hr { display: block; height: 1px;
   padding: 10px;
   font-size: 16px;
 }
+
 .form-signin .form-control:focus {
   z-index: 2;
 }
+
 .form-signin input[type="username"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-  img.main {
-    width:100%;
-    padding:0px;
-  }
+img.main {
+  width:100%;
+  padding:0px;
+}
 
 /* --> login form css */
+
+/* general css */
+
+.main .page-header {
+  margin-bottom: 5px;
+}
+
+dob { 
+  display: inline; 
+}
+
+.dob * { 
+  display: inline-block;
+}
+
+.dob input { 
+  width: 2em;
+  border: none; 
+  font-size: 100%; 
+  background: none;
+  color: #000;
+}
+
+.dob input#day { margin: 0 0 0 0.5em; }
+.dob input#year { width:3em; }
+.dob input:focus { outline:none; }
+
+/* --> general css */
 
