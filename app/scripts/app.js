@@ -64,6 +64,13 @@ angular.module('bsis', [
           permission: PERMISSIONS.EXPORT_DONOR_LIST
         }
       })
+      .when('/viewDonor', {
+        templateUrl : 'views/donors.html',
+        controller  : 'ViewDonorCtrl',
+        data: {
+          permission: PERMISSIONS.VIEW_DONORS
+        }
+      })
 
       // COMPONENTS URLs
       .when('/components', {
