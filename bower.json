@@ -6,10 +6,11 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "1.2.x",
+    "angular": "1.2.3",
     "angular-route": "1.2.x",
     "angular-loader": "1.2.x",
     "angular-mocks": "~1.2.x",
-    "angular-bootstrap": "0.11.0"
+    "angular-bootstrap": "0.11.0",
+    "ng-table": "0.3.2"
   }
 }

@@ -3,7 +3,8 @@
 angular.module('bsis', [
   'ngRoute',
   'ui.bootstrap',
-  'mockAPI'
+  'mockAPI',
+  'ngTable'
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
