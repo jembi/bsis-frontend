@@ -311,5 +311,10 @@ dob {
 .dob input#year { width:3em; }
 .dob input:focus { outline:none; }
 
+
+table.ng-table tr td{
+  padding: 5px; !important
+}
+
 /* --> general css */
 
