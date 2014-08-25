@@ -2,22 +2,29 @@
 <form class="form-horizontal col-sm-12"  role="form" ng-submit="findDonor()">
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-3">
-      <input type="firstName" id="firstName" class="form-control input-md" placeholder="First"  autofocus="true" ng-model="donorSearch.firstName">
-      <input type="lastName " id="lastName" class="form-control input-md" placeholder="Last" ng-model="donorSearch.lastName">
+    <div class="row col-sm-10">
+      <div class="col-sm-3" style="padding-right:0;">
+        <input style="border-top-right-radius: 0; border-bottom-right-radius: 0;" type="firstName" id="firstName" class="form-control input-sm" placeholder="First"  autofocus="true" ng-model="donorSearch.firstName">
+      </div>
+      <div class="col-sm-3" style="padding-left:0;">
+        <input style="border-top-left-radius: 0; border-bottom-left-radius: 0;" type="lastName " id="lastName" class="form-control input-sm" placeholder="Last" ng-model="donorSearch.lastName">
+      </div>
+      <div class="col-sm-6 control-label" style="text-align: left;">
+        <input  type="checkbox" > Include Similar Results
+      </div>
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" style="display:none;">
     <label for="name" class="col-sm-2 control-label">Date of Birth</label>
     <div class="col-sm-3">
-      <div id="dob" class="form-control input-md dob">
+      <div id="dob" class="form-control input-sm dob">
         <input id="day" type="tel" ng-model="donorSearch.dob.day" maxlength="2" bsis-tab-to="month" placeholder="DD"/>/
         <input id="month" type="tel" ng-model="donorSearch.dob.month" maxlength="2" bsis-tab-to="year" placeholder="MM"/>/
         <input id="year" type="tel" ng-model="donorSearch.dob.year" maxlength="4" placeholder="YYYY"/>
       </div>
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" style="display:none;">
       <label for="name" class="col-sm-2 control-label">Gender</label>
     <div class="col-sm-3" style="padding-top:5px;">
       <input type="radio"  ng-model="donorSearch.gender" value="male" /> Male 
@@ -27,13 +34,13 @@
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label" >Donor #</label>
     <div class="col-sm-3">
-      <input type="donorNum" id="donorNum" class="form-control input-md" placeholder="" ng-model="donorSearch.donorNum">
+      <input type="donorNum" id="donorNum" class="form-control input-sm" placeholder="" ng-model="donorSearch.donorNum">
     </div>
   </div>
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label" >DIN</label>
     <div class="col-sm-3">
-      <input type="din" id="din" class="form-control input-md" placeholder="" ng-model="donorSearch.din">
+      <input type="din" id="din" class="form-control input-sm" placeholder="" ng-model="donorSearch.din">
     </div>
   </div>
   <div class="form-group">
@@ -49,7 +56,7 @@
   </div>
 </form>
 
-<div ng-switch="searchResults" class=" col-sm-5">
+<div ng-switch="searchResults" class=" col-sm-12">
   <style type="text/css">
     .displayTable {
       width: 480px;
@@ -74,25 +81,39 @@
       font-size: 1.1em;
     }
   </style>
-  <table ng-switch-when="true" class="displayTable">
-    <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Donor #</th>
-      <th>Gender</th>
-      <th>Birthdate</th>
+  
+
+<div ng-switch-when="true"  >
+
+<table ng-table="tableParams" show-filter="false" class="table">
+    <tr ng-repeat="donor in $data"
+        ng-click="viewDonor(donor); changeSelection(donor);"
+        ng-mouseenter="donor.$selected = true"
+        ng-mouseleave="donor.$selected = false"
+        ng-class="{'active': donor.$selected}">
+        <td data-title="'Donor Number'" header-class="text-left" sortable="'donorNum'">
+            {{donor.donorNum}}
+        </td>
+        <td data-title="'First Name'" header-class="text-left" sortable="'firstName'">
+            {{donor.firstName}}
+        </td>
+        <td data-title="'Last Name'" header-class="text-left" sortable="'lastName'">
+            {{donor.lastName}}
+        </td>
+        <td data-title="'Gender'" header-class="text-left" sortable="'gender'">
+            {{donor.gender}}
+        </td>
+        <td data-title="'Date of Birth'" header-class="text-left" sortable="'dob'">
+            {{donor.dob}}
+        </td>
     </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td><a href="#viewDonor">{{donor.firstName}}</td>
-      <td>{{donor.lastName}}</td>
-      <td>{{donor.donorNum}}</td>
-      <td>{{donor.gender}}</td>
-      <td>{{donor.birthDate}}</a></td>
-    </tr>
-    </tbody>
-  </table>
+</table>
+
+</div>
+
+
+
+
+
   <h4 ng-switch-when="false"><em>No Donors Found</em></h4>
 </div>

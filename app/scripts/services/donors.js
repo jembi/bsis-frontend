@@ -3,11 +3,7 @@
 angular.module('bsis')
 .factory('DonorService', function ($http) {
 
-  var donorrr = {
-    firstName: 'Yes',
-    lastName: 'You',
-    donorNum: ''
-  };
+  var donorrr = {};
 
   return {
     findDonor: function (donor) {
@@ -26,6 +22,9 @@ angular.module('bsis')
     },
     getDonor: function(){
       return donorrr;
+    },
+    setDonor: function(donor) {
+      donorrr = donor;
     }
   };
 });

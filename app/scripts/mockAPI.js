@@ -15,7 +15,7 @@ var mockAPI = angular.module('mockAPI', [ 'ngMockE2E']);
       });
 
     $httpBackend.whenGET('/findDonor?firstName=sample&lastName=donor').respond(
-      { donor:{
+      { donors:{
           firstName: "Sample",
           lastName: "Donor",
           donorNum: "000001",
