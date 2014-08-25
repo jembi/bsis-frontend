@@ -30,6 +30,8 @@ To make use of the application in production, run `grunt build`, which compiles 
 
 ## Known Issues
 
+#### EMFILE issue
+
 On initial clone of the repo, when running `npm install` and using OS X, the following error may appear:
 ```
 ...
@@ -41,6 +43,18 @@ To resolve this, run the following command in a terminal to increase the file li
 ```
 $ ulimit -n 1024
 ```
+
+#### Issue running grunt serve
+
+Running `grunt serve` displays error message 
+```
+-bash: grunt: command not found`.
+```
+Grunt should be installed globally using the following command:
+```
+$ sudo npm install -g grunt-cli
+```
+
 
 ## Directory Layout
 
