@@ -18,7 +18,8 @@ The application makes use of node.js tools - [node.js](http://nodejs.org/) and i
 
 ## Developer Guide
 
-Clone the repository and run `npm install`
+Clone the repository and run `npm install`. <br/>
+It is then recommended to run `npm update`, especially if there are `npm WARN unmet dependency` warnings when running `npm install`. <br/>
 To start up a development instance of the webapp, run `grunt serve` (or `npm start`).
 
 The code was scaffolded using [angular-seed](https://github.com/angular/angular-seed), as well as [generator angular](https://github.com/yeoman/generator-angular) to add grunt support.
