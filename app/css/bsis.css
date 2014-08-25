@@ -315,10 +315,15 @@ img.main {
   padding: 4px 5px;
 }
 
-.row {
+.row .main-page{
   margin-left: 0px;
   margin-right: 0px;
   padding: 0px;
+}
+
+.row .home-page {
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
 dob { 
