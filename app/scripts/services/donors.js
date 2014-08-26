@@ -19,6 +19,15 @@ angular.module('bsis')
         console.log("Find Donor Unsuccessful");
       });
     },
+    addDonor: function (){
+      return $http.get('/addDonor')
+        .success(function(data, status, headers, config){
+          return data;
+      })
+      .error(function(data){
+        console.log("Add Donor Form Unsuccessful");
+      });
+    },
     getDonor: function(){
       return donorObj;
     },

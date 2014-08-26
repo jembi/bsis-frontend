@@ -1,4 +1,17 @@
 <h3 class="page-header">Add Donor</h3>
 
 <form class="form-horizontal" role="form" method="get" action="">
+
+<select ng-model="preferredAddressType" ng-options="item.id as item.preferredAddressType for item in addressTypes">
+    <option value=""></option>
+</select>
+
+<select ng-model="preferredLanguage" ng-options="item.id as item.preferredLanguage for item in languages">
+    <option value=""></option>
+</select>
+
+<select ng-model="donorPanel" ng-options="item.id as item.name for item in donorPanels">
+    <option value=""></option>
+</select>
+
 </form>

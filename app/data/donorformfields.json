@@ -604,7 +604,6 @@
       "isDeleted": false
     }
   ],
-  "refreshUrl": "http://bsis.staging.jembi.org:8080/bsis/donor",
   "donorPanels": [
     {
       "id": 3,
@@ -700,6 +699,5 @@
     "contactId": "",
     "addressId": ""
   },
-  "requestUrl": "http://bsis.staging.jembi.org:8080/bsis/donor",
   "firstTimeRender": true
 }

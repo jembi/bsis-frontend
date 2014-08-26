@@ -39,7 +39,7 @@ angular.module('bsis', [
       })
       .when('/addDonor', {
         templateUrl : 'views/donors.html',
-        controller  : 'DonorsCtrl',
+        controller  : 'AddDonorCtrl',
         data: {
           permission: PERMISSIONS.ADD_DONOR
         }

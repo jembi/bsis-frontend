@@ -19,7 +19,6 @@ angular.module('bsis')
         }, function () {
           $scope.searchResults = false;
       });
-
     };
 
     $scope.isCurrent = function(path) {
@@ -77,22 +76,23 @@ angular.module('bsis')
             params.total(orderedData.length); // set total for pagination
             $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
-    });
-    
+    }); 
   })
   
   .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS) {
-      /*DonorService.getDonor().then(function (response) {
-          $scope.donor = response.data.donor;
-          console.log('ViewDonorCtrl - $scope.donor',$scope.donor);
-          //console.log("ReturnedDonor: ",$scope.donor);
-          //$scope.searchResults = true;
-        }, function () {
-          //$scope.searchResults = false;
-      });
-      */
-
      $scope.donor = DonorService.getDonor();
+  })
+
+  .controller('AddDonorCtrl', function ($scope, $location, DonorService, ICONS) {
+      DonorService.addDonor().then(function (response) {
+          var data = response.data;
+          $scope.addressTypes = data.addressTypes;
+          $scope.languages = data.languages;
+          $scope.donorPanels = data.donorPanels;
+          $scope.donor = data.addDonorForm;
+
+        }, function () {
+      });
   })
 
 ;
