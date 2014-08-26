@@ -313,6 +313,7 @@ img.main {
 
 .btn-primary {
   padding: 4px 5px;
+  margin-top: 10px;
 }
 
 .row .main-page{
@@ -349,6 +350,10 @@ dob {
 
 table.ng-table tr td{
   padding: 5px; !important
+}
+
+label {
+  margin-top: 8px;
 }
 
 /* --> general css */
