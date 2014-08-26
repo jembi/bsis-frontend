@@ -51,6 +51,12 @@ angular.module('bsis')
       $location.path("/viewDonor");
     };
 
+    $scope.addDonor = function (newDonor){
+      console.log("Add Donor - firstName:", newDonor.firstName);
+      console.log("Add Donor - lastName:", newDonor.lastName);
+      console.log("Add Donor - preferredLanguage:", newDonor.preferredLanguage);
+    };
+
     $scope.edit = function () {
     };
 
@@ -79,17 +85,23 @@ angular.module('bsis')
     }); 
   })
   
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS) {
+  // Controller for Viewing Donors
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService) {
      $scope.donor = DonorService.getDonor();
   })
 
-  .controller('AddDonorCtrl', function ($scope, $location, DonorService, ICONS) {
+  // Controller for Adding Donors
+  .controller('AddDonorCtrl', function ($scope, $location, DonorService, MONTH, TITLE, GENDER) {
       DonorService.addDonor().then(function (response) {
           var data = response.data;
           $scope.addressTypes = data.addressTypes;
           $scope.languages = data.languages;
           $scope.donorPanels = data.donorPanels;
           $scope.donor = data.addDonorForm;
+
+          $scope.title = TITLE.options;
+          $scope.month = MONTH.options;
+          $scope.gender = GENDER.options;
 
         }, function () {
       });

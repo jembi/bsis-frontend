@@ -1,17 +1,58 @@
 <h3 class="page-header">Add Donor</h3>
 
-<form class="form-horizontal" role="form" method="get" action="">
+<form class="col-sm-12" role="form" ng-submit="addDonor(donor)">
 
-<select ng-model="preferredAddressType" ng-options="item.id as item.preferredAddressType for item in addressTypes">
-    <option value=""></option>
-</select>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <div class="form-inline">
+      <select class="form-control input-sm" ng-model="donor.title" ng-options="item as item for item in title">
+          <option value="" ng-disabled="true">Title</option>
+      </select>
+      <input size="15" type="firstName" id="firstName" class="form-control input-sm" placeholder="First" ng-model="donor.firstName">
+      <input size="15" type="lastName" id="lastName" class="form-control input-sm" placeholder="Last" ng-model="donor.lastName">
+    </div>
+  </div>
 
-<select ng-model="preferredLanguage" ng-options="item.id as item.preferredLanguage for item in languages">
-    <option value=""></option>
-</select>
+  <div class="form-group">
+    <label for="name">Date of Birth</label>
+    <div class="form-inline">
+      <input size="2"  type="day" id="day" class="form-control input-sm" placeholder="Day" ng-model="donor.day">
+      <select class="form-control input-sm" ng-model="donor.month" ng-options="item as item for item in month">
+          <option value="" ng-disabled="true">Month</option>
+      </select>
+      <input size="4" type="year" id="year" class="form-control input-sm" placeholder="Year" ng-model="donor.year">
+    </div>
+  </div>
 
-<select ng-model="donorPanel" ng-options="item.id as item.name for item in donorPanels">
-    <option value=""></option>
-</select>
+  <div class="form-group">
+    <label for="name">Gender</label>
+    <div class="form-inline">
+      <select class="form-control input-sm" ng-model="donor.gender" ng-options="item as item for item in gender">
+          <option value="" ng-disabled="true"></option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Donor Panel</label>
+    <div class="form-inline">
+      <select class="form-control input-sm" ng-model="donor.donorPanel" ng-options="item.id as item.name for item in donorPanels">
+          <option value="" ng-disabled="true"></option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Preferred Language</label>
+    <div class="form-inline">
+      <select class="form-control input-sm" ng-model="donor.preferredLanguage" ng-options="item.id as item.preferredLanguage for item in languages">
+          <option value=""></option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group"> 
+      <button class="btn btn-primary" type="submit">Add Donor</button>
+  </div>
 
 </form>
