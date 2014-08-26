@@ -13,6 +13,8 @@ var mockAPI = angular.module('mockAPI', ['ngMockE2E', 'ngResource']);
           role: "admin"
         }
       });
+    // pass through all other /login attempts (will respond with a 404 (Not Found))
+    $httpBackend.whenPOST('/login').passThrough();
 
     // findDonor mock (firstName=sample, lastName=donor)
     $httpBackend.whenGET('/findDonor?firstName=sample&lastName=donor').respond($resource('data/donors.json').get());
