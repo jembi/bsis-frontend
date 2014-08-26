@@ -61,4 +61,13 @@ angular.module('bsis')
     USER: 'fa-user',
     ACCOUNT: 'fa-cog',
     LOGOUT: 'fa-sign-out'
+  })
+
+  .constant('MONTHS', {
+    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  })
+  .constant('TITLES', {
+    titles: ["Mr","Mrs","Ms","Dr","Prof"]
   });
+
+  
