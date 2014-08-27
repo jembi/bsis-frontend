@@ -5,6 +5,7 @@
       "firstName": "Sample",
       "lastName": "Donor",
       "donorNum": "189311",
+      "donorPanel": "Luanshya",
       "gender": "Male",
       "dob": "10/01/1965",
       "age": "39"
@@ -14,6 +15,7 @@
       "firstName": "Sample",
       "lastName": "Donor",
       "donorNum": "473128",
+      "donorPanel": "Luanshya",
       "gender": "Female",
       "dob": "12/10/1980",
       "age": "34"
@@ -23,6 +25,7 @@
       "firstName": "Sample",
       "lastName": "Donor",
       "donorNum": "412343",
+      "donorPanel": "Luanshya",
       "gender": "Female",
       "dob": "20/01/1975",
       "age": "29"
@@ -32,6 +35,7 @@
       "firstName": "Sample",
       "lastName": "Donorific",
       "donorNum": "235213",
+      "donorPanel": "Luanshya",
       "gender": "Male",
       "dob": "10/01/1975",
       "age": "29"
@@ -41,6 +45,7 @@
       "firstName": "Samplee",
       "lastName": "Donor",
       "donorNum": "654654",
+      "donorPanel": "Luanshya",
       "gender": "Female",
       "dob": "10/05/1975",
       "age": "29"
@@ -50,6 +55,7 @@
       "firstName": "Sample",
       "lastName": "Donor",
       "donorNum": "323232",
+      "donorPanel": "Luanshya",
       "gender": "Female",
       "dob": "10/05/1975",
       "age": "29"
@@ -59,6 +65,7 @@
       "firstName": "Sample",
       "lastName": "Donor",
       "donorNum": "234565",
+      "donorPanel": "Luanshya",
       "gender": "Female",
       "dob": "10/05/1980",
       "age": "34"
@@ -68,6 +75,7 @@
       "firstName": "Sample",
       "lastName": "Donor",
       "donorNum": "112237",
+      "donorPanel": "Luanshya",
       "gender": "Female",
       "dob": "10/05/1985",
       "age": "29"
@@ -77,6 +85,7 @@
       "firstName": "Sample",
       "lastName": "Donor",
       "donorNum": "218928",
+      "donorPanel": "Luanshya",
       "gender": "Male",
       "dob": "10/05/1995",
       "age": "19"
@@ -86,6 +95,7 @@
       "firstName": "Samplee",
       "lastName": "Donor",
       "donorNum": "190101",
+      "donorPanel": "Luanshya",
       "gender": "Male",
       "dob": "10/05/1994",
       "age": "20"
@@ -95,6 +105,7 @@
       "firstName": "Sample",
       "lastName": "Donor",
       "donorNum": "214282",
+      "donorPanel": "Luanshya",
       "gender": "Male",
       "dob": "10/05/1990",
       "age": "24"
@@ -104,6 +115,7 @@
       "firstName": "Sample",
       "lastName": "Donor",
       "donorNum": "114292",
+      "donorPanel": "Luanshya",
       "gender": "Female",
       "dob": "10/05/1980",
       "age": "34"
@@ -113,6 +125,7 @@
       "firstName": "Sample",
       "lastName": "Donor",
       "donorNum": "424211",
+      "donorPanel": "Luanshya",
       "gender": "Male",
       "dob": "10/06/1980",
       "age": "34"

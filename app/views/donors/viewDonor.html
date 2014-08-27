@@ -2,41 +2,115 @@
   {{donor.firstName}} {{donor.lastName}}<small><em> ({{donor.title}})</em></small>
 </span>
 
-<span ng-switch="donor.gender"class="h3" style="vertical-align: top;"> 
-  <span ng-switch-when="Male" class="fa-stack fa-1x">
-    <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-    <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
+  <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
+    <span ng-switch-when="Male" class="fa-stack fa-1x">
+      <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+      <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
+    </span>
+    <span ng-switch-when="Female" class="fa-stack fa-1x">
+      <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+      <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
+    </span>
   </span>
-  <span ng-switch-when="Female" class="fa-stack fa-1x">
-    <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-    <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
+  <span class="h3" style="vertical-align: 0.3em; padding-left:5px;">
+    <span class="fa-stack fa-1x">
+      <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+      <i class="fa fa-stack-1x fa-inverse">O+</i>
+    </span>
   </span>
-  <span class="fa-stack fa-1x">
-    <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-    <i class="fa fa-stack-1x fa-inverse">O+</i>
-  </span>
-</span>
 
-<span class = "h4"> 
+  <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
+    <small><em><a href="">Edit</a></em> | <em><a href="">Remove</a></em></small>
+  </span>
+
+<hr/>
+
+<div class = "h4"> 
   <small><em>Age: </em></small>
   {{donor.age}} <small>({{donor.dob}})</small> 
   | 
   <small><em>Donor Number: </em></small> {{donor.donorNum}}
-</span>
+  | 
+  <small><em>Donor Panel: </em></small> {{donor.donorPanel}}
+</div>
+
+<hr/>
 
 <div style="padding-bottom: 20px"></div>
 
 <div class="col-sm-12">
-  <div class="panel panel-info col-sm-5">
+  <div class="panel panel-info col-sm-6">
     <div class="panel-heading"><i class="fa {{icons.CALENDAR}}"></i> Donations</div>
     <div class="panel-body">
       Number of Donations: <strong>5</strong> <br/>
       Date of First Donation: <strong>12/10/2008</strong> <br/>
       Date of Last Donation: <strong>27/04/2014 <em>(100 days ago)</em></strong> <br/>
     </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Location</th>
+          <th>Pulse</th>
+          <th>Hb</th>
+          <th>BP</th>
+          <th>Wt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>27/04/2014</td>
+          <td>Luanshya</td>
+          <td>90</td>
+          <td>13.5</td>
+          <td>110/80</td>
+          <td>80.7</td>
+        </tr>
+        <tr>
+          <td>27/04/2014</td>
+          <td>Luanshya</td>
+          <td>90</td>
+          <td>13.5</td>
+          <td>110/80</td>
+          <td>80.7</td>
+        </tr>
+        <tr>
+          <td>27/04/2014</td>
+          <td>Luanshya</td>
+          <td>90</td>
+          <td>13.5</td>
+          <td>110/80</td>
+          <td>80.7</td>
+        </tr>
+        <tr>
+          <td>27/04/2014</td>
+          <td>Luanshya</td>
+          <td>90</td>
+          <td>13.5</td>
+          <td>110/80</td>
+          <td>80.7</td>
+        </tr>
+        <tr>
+          <td>27/04/2014</td>
+          <td>Luanshya</td>
+          <td>90</td>
+          <td>13.5</td>
+          <td>110/80</td>
+          <td>80.7</td>
+        </tr>
+        <tr>
+          <td>27/04/2014</td>
+          <td>Luanshya</td>
+          <td>90</td>
+          <td>13.5</td>
+          <td>110/80</td>
+          <td>80.7</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="panel panel-danger col-sm-5">
+  <div class="panel panel-danger col-sm-6">
     <div class="panel-heading"><i class="fa {{icons.WARNING}}"></i> Deferrals</div>
     <div class="panel-body">
       Current Deferrals: <strong>NONE</strong> <br/>
