@@ -60,7 +60,11 @@ angular.module('bsis')
     SETTINGS: 'fa-cogs',
     USER: 'fa-user',
     ACCOUNT: 'fa-cog',
-    LOGOUT: 'fa-sign-out'
+    LOGOUT: 'fa-sign-out',
+    MALE: 'fa-male',
+    FEMALE: 'fa-female',
+    CALENDAR: 'fa-calendar',
+    WARNING: 'fa-warning'
   })
 
   .constant('MONTH', {
