@@ -1,29 +1,45 @@
-<h3 class="page-header">View Donor</h3>
+<span class="h2"> 
+  {{donor.firstName}} {{donor.lastName}}<small><em> ({{donor.title}})</em></small>
+</span>
 
-<table class="displayTable">
-    <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Donor #</th>
-      <th>Gender</th>
-      <th>Birthdate</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td><a href="#viewDonor">{{donor.firstName}}</a></td>
-      <td><a href="#viewDonor">{{donor.lastName}}</a></td>
-      <td><a href="#viewDonor">{{donor.donorNum}}</a></td>
-      <td><a href="#viewDonor">{{donor.gender}}</a></td>
-      <td><a href="#viewDonor">{{donor.birthDate}}</a></td>
-      
-    </tr>
-    </tbody>
-  </table>
+<span ng-switch="donor.gender"class="h3" style="vertical-align: top;"> 
+  <span ng-switch-when="Male" class="fa-stack fa-1x">
+    <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+    <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
+  </span>
+  <span ng-switch-when="Female" class="fa-stack fa-1x">
+    <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+    <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
+  </span>
+  <span class="fa-stack fa-1x">
+    <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+    <i class="fa fa-stack-1x fa-inverse">O+</i>
+  </span>
+</span>
 
-  <button class="btn btn-primary" type="button" ng-click="edit()">Edit</button>
-  <button class="btn btn-primary" type="button" ng-click="done()">Done</button>
+<span class = "h4"> 
+  <small><em>Age: </em></small>
+  {{donor.age}} <small>({{donor.dob}})</small> 
+  | 
+  <small><em>Donor Number: </em></small> {{donor.donorNum}}
+</span>
 
-<form class="form-horizontal" role="form" method="get" action="">
-</form>
+<div style="padding-bottom: 20px"></div>
+
+<div class="col-sm-12">
+  <div class="panel panel-info col-sm-5">
+    <div class="panel-heading"><i class="fa {{icons.CALENDAR}}"></i> Donations</div>
+    <div class="panel-body">
+      Number of Donations: <strong>5</strong> <br/>
+      Date of First Donation: <strong>12/10/2008</strong> <br/>
+      Date of Last Donation: <strong>27/04/2014 <em>(100 days ago)</em></strong> <br/>
+    </div>
+  </div>
+
+  <div class="panel panel-danger col-sm-5">
+    <div class="panel-heading"><i class="fa {{icons.WARNING}}"></i> Deferrals</div>
+    <div class="panel-body">
+      Current Deferrals: <strong>NONE</strong> <br/>
+    </div>
+  </div>
+</div>

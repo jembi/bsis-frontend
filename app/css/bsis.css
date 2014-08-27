@@ -1,6 +1,5 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-
 html,
 body {
   height: 100%;
@@ -356,5 +355,9 @@ label {
   margin-top: 8px;
 }
 
+.panel {
+  padding: 0;
+  margin-right: 20px;
+}
 /* --> general css */
 

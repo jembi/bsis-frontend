@@ -86,7 +86,7 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService) {
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS) {
      $scope.donor = DonorService.getDonor();
   })
 
