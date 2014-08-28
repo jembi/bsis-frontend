@@ -9,7 +9,7 @@
       <div class="col-sm-3" style="padding-left:0;">
         <input style="border-top-left-radius: 0; border-bottom-left-radius: 0;" type="lastName " id="lastName" class="form-control input-sm" placeholder="Last" ng-model="donorSearch.lastName">
       </div>
-      <div class="col-sm-6 control-label" style="text-align: left;">
+      <div class="col-sm-4 control-label" style="text-align: left;">
         <input  type="checkbox" > Include Similar Results
       </div>
     </div>
@@ -56,13 +56,15 @@
   </div>
 </form>
 
-<div ng-switch="searchResults" class=" col-sm-10">
+<div ng-switch="searchResults" class="col-sm-offset-1 col-sm-10">
   <style type="text/css">
     .displayTable {
       width: 480px;
       border-collapse: collapse;
       text-align: left;
       margin: 30px;
+      border-radius: 0;
+      border: solid 1px black !important;
     }
 
     .displayTable thead {
@@ -75,6 +77,7 @@
 
     .displayTable tbody tr:hover {
       background-color: #f5f5f5;
+      cursor: pointer !important;
     }
 
     .displayTable tbody tr {
