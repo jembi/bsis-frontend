@@ -1,5 +1,5 @@
 <span class="h2"> 
-  {{donor.firstName}} {{donor.lastName}}<small><em> ({{donor.title}})</em></small>
+  {{donor.firstName}} {{donor.lastName}}<small><em> ({{donor.title}}. Sam)</em></small>
 </span>
 
   <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
@@ -45,17 +45,56 @@
 
       <div class="panel panel-default">
         <div class="panel-body">
-          <div class = "h4"> 
-            <small><em><i class="fa {{icons.CALENDAR}}"></i> Due To Donate: </em></small>
-            12 September 2014  
-            <br/> 
-            <small><em><i class="fa {{icons.PLUS}}"></i> Number of Donations: </em></small> 5
-            <br/> 
-            <small><em><i class="fa {{icons.ANGLEDBLRIGHT}}"></i> Date of First Donation: </em></small> 12/10/2008
-            <br/>
-            <small><em><i class="fa {{icons.ANGLERIGHT}}"></i> Date of Last Donation: </em></small> 27/04/2014 <em>(100 days ago)</em>
 
-          </div>
+          <table class="dash-table">
+            <tbody>
+              <tr>
+                <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
+                <td class="field">Due To Donate: </td>
+                <td class="value green">12 August 2014</td>
+              </tr>
+              <tr>
+                <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
+                <td class="field">Current Deferrals: </td>
+                <td class="value red"> On Medication <em>(ends 21 September 2014)</em></td>
+              </tr>
+              <tr>
+                <td class="icon"></td>
+                <td class="field"></td>
+                <td class="value red"> Illness or Operation <em>(ends 12 December 2014)</em></td>
+              </tr>
+              <tr><td></td></tr>
+              <tr>
+                <td class="icon"><i class="fa {{icons.PLUS}}"></i></td>
+                <td class="field">Number of Donations: </td>
+                <td class="value">8</td>
+              </tr>
+              <tr>
+                <td class="icon"><i class="fa {{icons.ANGLERIGHT}}"></i></td>
+                <td class="field">Date of First Donation: </td>
+                <td class="value">12 February 2010</td>
+              </tr>
+              <tr>
+                <td class="icon"><i class="fa {{icons.ANGLEDBLRIGHT}}"></i></td>
+                <td class="field">Date of Last Donation: </td>
+                <td class="value">21 May 2014 <em>(71 days ago)</em></td>
+              </tr>
+              <tr>
+                <td class="icon"><i class="fa {{icons.INFOCIRCLE}}"></i></td>
+                <td class="field">Previous Donation: </td>
+                <td class="value"><em>Venue</em>: Luanshya | <em>Wt</em>: 81kg | <em>BP</em>: 110/70 |
+                    <em>Hb</em>: 13.7 | <em>P</em>: 61 </td>
+              </tr>
+              <tr><td></td></tr>
+              <tr>
+                <td class="icon"><i class="fa {{icons.COMMENT}}"></i></td>
+                <td class="field">Comments: </td>
+                <td class="value">12/09/10 - Sample comment about donor<br/>
+                                  21/06/13 - Another sample comment about donor</em></td>
+              </tr>
+            </tbody>
+          </table>
+
         </div>
       </div>
 

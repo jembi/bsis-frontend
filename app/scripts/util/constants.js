@@ -67,7 +67,9 @@ angular.module('bsis')
     WARNING: 'fa-warning',
     PLUS: 'fa-plus-square',
     ANGLEDBLRIGHT: 'fa-angle-double-right',
-    ANGLERIGHT: 'fa-angle-right'
+    ANGLERIGHT: 'fa-angle-right',
+    INFOCIRCLE: 'fa-info-circle',
+    COMMENT: 'fa-comment'
   })
 
   .constant('MONTH', {
