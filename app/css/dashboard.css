@@ -63,7 +63,7 @@ body {
  */
 
 .main {
-  padding: 20px 10px;
+  padding: 20px 0px 0px 0px;
 }
 @media (min-width: 768px) {
   .main {
@@ -81,14 +81,15 @@ body {
  */
 
 .placeholders {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   text-align: center;
 }
 .placeholders h4 {
   margin-bottom: 0;
 }
 .placeholder {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .placeholder img {
   display: inline-block;
