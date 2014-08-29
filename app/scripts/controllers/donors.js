@@ -66,7 +66,7 @@ angular.module('bsis')
 
     $scope.tableParams = new ngTableParams({
         page: 1,            // show first page
-        count: 10,          // count per page
+        count: 8,          // count per page
         sorting: {
         //donorNum: 'asc'     // initial sorting
         }        

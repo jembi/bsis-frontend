@@ -350,7 +350,8 @@ img.main {
 .ng-table {
   border-radius: 0;
   #border: solid 1px #fff !important;
-  margin-top: 15px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .ng-table thead tr {
@@ -428,7 +429,6 @@ dob {
 .dob input#day { margin: 0 0 0 0.5em; }
 .dob input#year { width:3em; }
 .dob input:focus { outline:none; }
-
 
 table.ng-table tr td{
   padding: 5px; !important
