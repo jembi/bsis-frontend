@@ -64,7 +64,10 @@ angular.module('bsis')
     MALE: 'fa-male',
     FEMALE: 'fa-female',
     CALENDAR: 'fa-calendar',
-    WARNING: 'fa-warning'
+    WARNING: 'fa-warning',
+    PLUS: 'fa-plus-square',
+    ANGLEDBLRIGHT: 'fa-angle-double-right',
+    ANGLERIGHT: 'fa-angle-right'
   })
 
   .constant('MONTH', {
