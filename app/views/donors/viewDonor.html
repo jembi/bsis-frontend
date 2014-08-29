@@ -36,7 +36,7 @@
 
 <hr/>
 
-<div style="padding-bottom: 20px"></div>
+<div style="padding-bottom: 5px"></div>
 
 <div class="col-sm-12">
 
@@ -56,12 +56,20 @@
               <tr>
                 <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
                 <td class="field">Current Deferrals: </td>
-                <td class="value red"> On Medication <em>(ends 21 September 2014)</em></td>
+                <td class="value red"> On Medication <em>(ends 21 September 2014)</em>
+                  <span style="font-size: 0.8em;">
+                    <em><a href=""> Edit</a></em>
+                  </span>
+                </td>
               </tr>
               <tr>
                 <td class="icon"></td>
                 <td class="field"></td>
-                <td class="value red"> Illness or Operation <em>(ends 12 December 2014)</em></td>
+                <td class="value red"> Illness or Operation <em>(ends 12 December 2014)</em>
+                  <span style="font-size: 0.8em;">
+                    <em><a href=""> Edit</a></em>
+                  </span>
+                </td>
               </tr>
               <tr><td></td></tr>
               <tr>
@@ -102,84 +110,114 @@
     <tab heading="Demographics"></tab>
     <tab heading="Donations">
       
-      <div class="panel panel-info col-sm-6">
-        <div class="panel-heading"><i class="fa {{icons.CALENDAR}}"></i> Donations</div>
+      <div class="panel panel-default">
         <div class="panel-body">
-          Number of Donations: <strong>5</strong> <br/>
-          Date of First Donation: <strong>12/10/2008</strong> <br/>
-          Date of Last Donation: <strong>27/04/2014 <em>(100 days ago)</em></strong> <br/>
+
+          <table class="dash-table">
+            <tbody>
+              <tr>
+                <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
+                <td class="field">Due To Donate: </td>
+                <td class="value green">12 August 2014</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Pulse</th>
+                <th>Hb</th>
+                <th>BP</th>
+                <th>Wt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>27/04/2014</td>
+                <td>Luanshya</td>
+                <td>90</td>
+                <td>13.5</td>
+                <td>110/80</td>
+                <td>80.7</td>
+              </tr>
+              <tr>
+                <td>27/04/2014</td>
+                <td>Luanshya</td>
+                <td>90</td>
+                <td>13.5</td>
+                <td>110/80</td>
+                <td>80.7</td>
+              </tr>
+              <tr>
+                <td>27/04/2014</td>
+                <td>Luanshya</td>
+                <td>90</td>
+                <td>13.5</td>
+                <td>110/80</td>
+                <td>80.7</td>
+              </tr>
+              <tr>
+                <td>27/04/2014</td>
+                <td>Luanshya</td>
+                <td>90</td>
+                <td>13.5</td>
+                <td>110/80</td>
+                <td>80.7</td>
+              </tr>
+              <tr>
+                <td>27/04/2014</td>
+                <td>Luanshya</td>
+                <td>90</td>
+                <td>13.5</td>
+                <td>110/80</td>
+                <td>80.7</td>
+              </tr>
+              <tr>
+                <td>27/04/2014</td>
+                <td>Luanshya</td>
+                <td>90</td>
+                <td>13.5</td>
+                <td>110/80</td>
+                <td>80.7</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Location</th>
-              <th>Pulse</th>
-              <th>Hb</th>
-              <th>BP</th>
-              <th>Wt</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>27/04/2014</td>
-              <td>Luanshya</td>
-              <td>90</td>
-              <td>13.5</td>
-              <td>110/80</td>
-              <td>80.7</td>
-            </tr>
-            <tr>
-              <td>27/04/2014</td>
-              <td>Luanshya</td>
-              <td>90</td>
-              <td>13.5</td>
-              <td>110/80</td>
-              <td>80.7</td>
-            </tr>
-            <tr>
-              <td>27/04/2014</td>
-              <td>Luanshya</td>
-              <td>90</td>
-              <td>13.5</td>
-              <td>110/80</td>
-              <td>80.7</td>
-            </tr>
-            <tr>
-              <td>27/04/2014</td>
-              <td>Luanshya</td>
-              <td>90</td>
-              <td>13.5</td>
-              <td>110/80</td>
-              <td>80.7</td>
-            </tr>
-            <tr>
-              <td>27/04/2014</td>
-              <td>Luanshya</td>
-              <td>90</td>
-              <td>13.5</td>
-              <td>110/80</td>
-              <td>80.7</td>
-            </tr>
-            <tr>
-              <td>27/04/2014</td>
-              <td>Luanshya</td>
-              <td>90</td>
-              <td>13.5</td>
-              <td>110/80</td>
-              <td>80.7</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
 
     </tab>
     <tab heading="Deferrals">
       
-      <div class="panel panel-danger col-sm-6">
-        <div class="panel-heading"><i class="fa {{icons.WARNING}}"></i> Deferrals</div>
+      <div class="panel panel-default">
         <div class="panel-body">
-          Current Deferrals: <strong>NONE</strong> <br/>
+          <span style="float: right; padding-right: 15px; font-size: 0.9em">
+            <em><a href="">Add Deferral</a></em>
+          </span>
+          <table class="dash-table">
+              <tr>
+                <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
+                <td class="field">Current Deferrals: </td>
+                <td class="value red"> On Medication <em>(ends 21 September 2014)</em> 
+                  <span style="font-size: 0.8em;">
+                    <em><a href=""> Edit</a></em>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="icon"></td>
+                <td class="field"></td>
+                <td class="value red"> Illness or Operation <em>(ends 12 December 2014)</em>
+                  <span style="font-size: 0.8em;">
+                    <em><a href=""> Edit</a></em>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
