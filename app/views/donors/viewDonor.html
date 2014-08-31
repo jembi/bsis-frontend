@@ -20,7 +20,7 @@
   </span>
 
   <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
-    <small><em><a href="">Edit</a></em> | <em><a href="">Remove</a></em></small>
+    <small><em><a href="">Edit</a></em>  | <em><a href="">Remove</a></em></small>
   </span>
 
 <hr/>
@@ -41,7 +41,10 @@
 <div class="col-sm-12">
 
   <tabset justified="true" >
-    <tab heading="Overview">
+    <tab>
+      <tab-heading>
+        <i class="fa {{icons.INFOCIRCLE}}"></i> Overview
+      </tab-heading>
 
       <div class="panel panel-default">
         <div class="panel-body">
@@ -74,16 +77,16 @@
               <tr><td></td></tr>
               <tr>
                 <td class="icon"><i class="fa {{icons.PLUS}}"></i></td>
-                <td class="field">Number of Donations: </td>
+                <td class="field">Total Donations: </td>
                 <td class="value">8</td>
               </tr>
               <tr>
-                <td class="icon"><i class="fa {{icons.ANGLERIGHT}}"></i></td>
+                <td class="icon"><i class="fa {{icons.CIRCLEO}}"></i></td>
                 <td class="field">Date of First Donation: </td>
                 <td class="value">12 February 2010</td>
               </tr>
               <tr>
-                <td class="icon"><i class="fa {{icons.INFOCIRCLE}}"></i></td>
+                <td class="icon"><i class="fa {{icons.CIRCLE}}"></i></td>
                 <td class="field">Previous Donation: </td>
                 <td class="value">21 May 2014 <em>(71 days ago)</em><br/>
                     <em>Venue</em>: Luanshya | <em>Pack Type</em>: Single<br/>
@@ -104,8 +107,17 @@
       </div>
 
     </tab>
-    <tab heading="Demographics"></tab>
-    <tab heading="Donations">
+    <tab>
+      <tab-heading>
+        <i class="fa {{icons.BARS}}"></i> Demographics
+      </tab-heading>
+
+    </tab>
+
+    <tab>
+      <tab-heading>
+        <i class="fa {{icons.ARCHIVE}}"></i> Donations
+      </tab-heading>
       
       <div class="panel panel-default">
         <div class="panel-body">
@@ -187,7 +199,10 @@
       </div>
 
     </tab>
-    <tab heading="Deferrals">
+    <tab>
+      <tab-heading>
+        <i class="fa {{icons.WARNING}}"></i> Deferrals
+      </tab-heading>
       
       <div class="panel panel-default">
         <div class="panel-body">
