@@ -32,6 +32,8 @@
   <small><em>Donor Number: </em></small> {{donor.donorNumber}}
   | 
   <small><em>Donor Panel: </em></small> {{donor.donorPanel}}
+  | 
+  <small><em>Preferred Language: </em></small> English
 </div>
 
 <hr/>
@@ -217,7 +219,7 @@
 
     </tab>
 
-    <tab>
+    <tab select="getDonations()">
       <tab-heading>
         <i class="fa {{icons.ARCHIVE}}"></i> Donations
       </tab-heading>
@@ -232,72 +234,57 @@
                 <td class="field">Due To Donate: </td>
                 <td class="value green">12 August 2014</td>
               </tr>
+
+              <tr><td></td></tr>
             </tbody>
           </table>
 
+          <div ng-switch="donationResults">
+          <div ng-switch-when="true">
 
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Location</th>
-                <th>Pulse</th>
-                <th>Hb</th>
-                <th>BP</th>
-                <th>Wt</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>27/04/2014</td>
-                <td>Luanshya</td>
-                <td>90</td>
-                <td>13.5</td>
-                <td>110/80</td>
-                <td>80.7</td>
-              </tr>
-              <tr>
-                <td>27/04/2014</td>
-                <td>Luanshya</td>
-                <td>90</td>
-                <td>13.5</td>
-                <td>110/80</td>
-                <td>80.7</td>
-              </tr>
-              <tr>
-                <td>27/04/2014</td>
-                <td>Luanshya</td>
-                <td>90</td>
-                <td>13.5</td>
-                <td>110/80</td>
-                <td>80.7</td>
-              </tr>
-              <tr>
-                <td>27/04/2014</td>
-                <td>Luanshya</td>
-                <td>90</td>
-                <td>13.5</td>
-                <td>110/80</td>
-                <td>80.7</td>
-              </tr>
-              <tr>
-                <td>27/04/2014</td>
-                <td>Luanshya</td>
-                <td>90</td>
-                <td>13.5</td>
-                <td>110/80</td>
-                <td>80.7</td>
-              </tr>
-              <tr>
-                <td>27/04/2014</td>
-                <td>Luanshya</td>
-                <td>90</td>
-                <td>13.5</td>
-                <td>110/80</td>
-                <td>80.7</td>
-              </tr>
-            </tbody>
-          </table>
+            <table ng-table="donationTableParams" show-filter="true" class="table">
+                <tr ng-repeat="donation in $data"
+                    ng-click="changeSelection(donation);"
+                    ng-mouseenter="donation.$selected = true"
+                    ng-mouseleave="donation.$selected = false"
+                    ng-class="{'active': donation.$selected}">
+                    <td data-title="'Date'" style="width:18%;" header-class="text-left" class="text-center" sortable="'collectedOn'"  filter="{ 'collectedOn': 'text' }">
+                        {{donation.collectedOn}}
+                    </td>
+                    <td data-title="'Venue'" style="width:17%;" header-class="text-left" sortable="'collectionSite'" filter="{ 'collectionSite': 'text' }">
+                        {{donation.collectionSite}}
+                    </td>
+                    <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'bloodBagType'" filter="{ 'bloodBagType': 'select' }"
+                        filter-data="packTypeFilter($column)">
+                        {{donation.bloodBagType}}
+                    </td>
+                    <td data-title="'Wt'" style="width:10%;" header-class="text-left" class="text-center" sortable="'donorWeight'">
+                        {{donation.donorWeight}}
+                    </td>
+                    <td data-title="'BP'" style="width:10%;" header-class="text-left" class="text-center" sortable="'bloodPressureSystolic'">
+                        {{donation.bloodPressureSystolic}}/{{donation.bloodPressureDiastolic}}
+                    </td>
+                    <td data-title="'Hb'" style="width:10%;" header-class="text-left" class="text-center" sortable="'haemoglobinCount'">
+                        {{donation.haemoglobinCount}}
+                    </td>
+                    <td data-title="'Pulse'" style="width:10%;" header-class="text-left" class="text-center" sortable="'donorPulse'">
+                        {{donation.donorPulse}}
+                    </td>
+                    <td data-title="''" style="width:10%;" class="text-center">
+                      <span style="font-size: 0.9em;">
+                        <em><a href=""> View</a></em>
+                      </span>
+                    </td>
+                    </td>
+
+                </tr>
+            </table>
+          </div>
+          <div ng-switch-when="false">
+                <h4 ><em>No Previous Donations</em></h4>
+          </div>
+          </div>
+
         </div>
       </div>
     </tab>
@@ -336,46 +323,44 @@
             </tbody>
           </table>
 
-        <div ng-switch="deferralResults">
-        <div ng-switch-when="true">
+          <div ng-switch="deferralResults">
+          <div ng-switch-when="true">
 
-          <table ng-table="deferralTableParams" show-filter="true" class="table">
-              <tr ng-repeat="deferral in $data"
-                  ng-click="changeSelection(deferral);"
-                  ng-mouseenter="deferral.$selected = true"
-                  ng-mouseleave="deferral.$selected = false"
-                  ng-class="{'active': deferral.$selected}">
-                  <td data-title="'Deferred On'" style="width:15%;" header-class="text-left" class="text-center" sortable="'deferredOn'"  filter="{ 'deferredOn': 'text' }">
-                      {{deferral.deferredOn}}
-                  </td>
-                  <td data-title="'Deferred Until'" style="width:15%;" header-class="text-left" class="text-center" sortable="'deferredUntil'" filter="{ 'deferredUntil': 'text' }">
-                      {{deferral.deferredUntil}}
-                  </td>
-                  <td data-title="'Reason'" style="width:22%;" header-class="text-left" sortable="'deferralReason.reason'" filter="{ 'deferralReason.reason': 'select' }" 
-                      filter-data="deferralReasonsFilter($column)">
-                      {{deferral.deferralReason.reason}}
-                  </td>
-                  <td data-title="'Comment'" header-class="text-left" sortable="'deferralReasonText'">
-                      {{deferral.deferralReasonText}}
-                  </td>
-                  <td data-title="'Deferred By'" style="width:15%;" header-class="text-left" sortable="'deferredBy'" filter="{ 'deferredBy': 'text' }">
-                      {{deferral.deferredBy}}
-                  </td>
-                  <td data-title="''" style="width:8%;" class="text-center">
-                    <span style="font-size: 0.9em;">
-                      <em><a href=""> Edit</a></em>
-                    </span>
-                  </td>
+            <table ng-table="deferralTableParams" show-filter="true" class="table">
+                <tr ng-repeat="deferral in $data"
+                    ng-click="changeSelection(deferral);"
+                    ng-mouseenter="deferral.$selected = true"
+                    ng-mouseleave="deferral.$selected = false"
+                    ng-class="{'active': deferral.$selected}">
+                    <td data-title="'Deferred On'" style="width:15%;" header-class="text-left" class="text-center" sortable="'deferredOn'"  filter="{ 'deferredOn': 'text' }">
+                        {{deferral.deferredOn}}
+                    </td>
+                    <td data-title="'Deferred Until'" style="width:15%;" header-class="text-left" class="text-center" sortable="'deferredUntil'" filter="{ 'deferredUntil': 'text' }">
+                        {{deferral.deferredUntil}}
+                    </td>
+                    <td data-title="'Reason'" style="width:22%;" header-class="text-left" sortable="'deferralReason.reason'" filter="{ 'deferralReason.reason': 'select' }" 
+                        filter-data="deferralReasonsFilter($column)">
+                        {{deferral.deferralReason.reason}}
+                    </td>
+                    <td data-title="'Comment'" header-class="text-left" sortable="'deferralReasonText'">
+                        {{deferral.deferralReasonText}}
+                    </td>
+                    <td data-title="'Deferred By'" style="width:15%;" header-class="text-left" sortable="'deferredBy'" filter="{ 'deferredBy': 'text' }">
+                        {{deferral.deferredBy}}
+                    </td>
+                    <td data-title="''" style="width:8%;" class="text-center">
+                      <span style="font-size: 0.9em;">
+                        <em><a href=""> Edit</a></em>
+                      </span>
+                    </td>
 
-              </tr>
-          </table>
-        </div>
-        <div ng-switch-when="false">
-              <h4 ><em>No Deferrals Found</em></h4>
-        </div>
-        </div>
-
-
+                </tr>
+            </table>
+          </div>
+          <div ng-switch-when="false">
+                <h4 ><em>No Deferrals Found</em></h4>
+          </div>
+          </div>
 
         </div>
       </div>

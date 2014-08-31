@@ -78,7 +78,7 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, $filter, $q, ngTableParams) {
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $filter, $q, ngTableParams) {
 
     var data = {};
     $scope.data  = data;
@@ -89,69 +89,110 @@ angular.module('bsis')
     $scope.getDeferrals = function () {
 
       DonorService.getDeferrals().then(function (response) {
-          data = response.data.allDonorDeferrals;
-          $scope.data = data;
-          deferralReasons = response.data.deferralReasons;
-          $scope.deferralResults = true;
-        }, function () {
-          $scope.deferralResults = false;
+        data = response.data.allDonorDeferrals;
+        $scope.data = data;
+        deferralReasons = response.data.deferralReasons;
+        $scope.deferralResults = true;
+      }, function () {
+        $scope.deferralResults = false;
       });
 
       $scope.deferralTableParams = new ngTableParams({
-            page: 1,            // show first page
-            count: 6,          // count per page
-            filter: {},
-            sorting: {}
-        }, {
-            defaultSort: 'asc',
-            counts: [], // hide page counts control
-            total: data.length, // length of data
-            getData: function ($defer, params) {
-                var filteredData = params.filter() ?
-                  $filter('filter')(data, params.filter()) : data;
-                var orderedData = params.sorting() ?
-                  $filter('orderBy')(filteredData, params.orderBy()) : data;
-                params.total(orderedData.length); // set total for pagination
-                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-            }
-        });
+        page: 1,            // show first page
+        count: 6,          // count per page
+        filter: {},
+        sorting: {}
+      }, 
+      {
+        defaultSort: 'asc',
+        counts: [], // hide page counts control
+        total: data.length, // length of data
+        getData: function ($defer, params) {
+          var filteredData = params.filter() ?
+            $filter('filter')(data, params.filter()) : data;
+          var orderedData = params.sorting() ?
+            $filter('orderBy')(filteredData, params.orderBy()) : data;
+          params.total(orderedData.length); // set total for pagination
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
 
       $scope.deferralReasonsFilter = function(column) {
-        var def = $q.defer()
+        var def = $q.defer();
         var arr = [];
         angular.forEach(deferralReasons, function(item){
-                arr.push({
-                    'id': item.reason,
-                    'title': item.reason
-                });
-                console.log("arr.push: ", item.reason);
+          arr.push({
+            'id': item.reason,
+            'title': item.reason
+          });
         });
-        console.log("arr: ", arr);
         def.resolve(arr);
-        console.log("def: ",def);
         return def;
       };
 
     };
 
-    
+    $scope.getDonations = function () {
+
+      DonorService.getDonations().then(function (response) {
+        data = response.data.donations;
+        $scope.data = data;
+        $scope.donationResults = true;
+      }, function () {
+        $scope.donationResults = false;
+      });
+
+      $scope.donationTableParams = new ngTableParams({
+        page: 1,            // show first page
+        count: 6,          // count per page
+        filter: {},
+        sorting: {}
+      }, 
+      {
+        defaultSort: 'asc',
+        counts: [], // hide page counts control
+        total: data.length, // length of data
+        getData: function ($defer, params) {
+          var filteredData = params.filter() ?
+            $filter('filter')(data, params.filter()) : data;
+          var orderedData = params.sorting() ?
+            $filter('orderBy')(filteredData, params.orderBy()) : data;
+          params.total(orderedData.length); // set total for pagination
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
+
+      $scope.packTypeFilter = function(column) {
+        var def = $q.defer();
+        var arr = [];
+        angular.forEach(PACKTYPE.packtypes, function(item){
+          arr.push({
+              'id': item.name,
+              'title': item.name
+          });
+        });
+        def.resolve(arr);
+        return def;
+      };
+
+    };
 
   })
 
   // Controller for Adding Donors
   .controller('AddDonorCtrl', function ($scope, $location, DonorService, MONTH, TITLE, GENDER) {
       DonorService.addDonor().then(function (response) {
-          var data = response.data;
-          $scope.addressTypes = data.addressTypes;
-          $scope.languages = data.languages;
-          $scope.donorPanels = data.donorPanels;
-          $scope.donor = data.addDonorForm;
+        var data = response.data;
+        $scope.addressTypes = data.addressTypes;
+        $scope.languages = data.languages;
+        $scope.donorPanels = data.donorPanels;
+        $scope.donor = data.addDonorForm;
 
-          $scope.title = TITLE.options;
-          $scope.month = MONTH.options;
-          $scope.gender = GENDER.options;
+        $scope.title = TITLE.options;
+        $scope.month = MONTH.options;
+        $scope.gender = GENDER.options;
 
-        }, function () {
+      }, function () {
       });
   })
 

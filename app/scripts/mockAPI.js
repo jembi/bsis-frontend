@@ -33,8 +33,11 @@ var mockAPI = angular.module('mockAPI', ['ngMockE2E', 'ngResource']);
     // addDonor mock
     $httpBackend.whenGET('/addDonor').respond($resource('data/donorformfields.json').get());
 
-    // addDonor mock
+    // getDeferrals mock
     $httpBackend.whenGET('/getDeferrals').respond($resource('data/donordeferrals.json').get());
+
+    // getDonations mock
+    $httpBackend.whenGET('/getDonations').respond($resource('data/donordonations.json').get());
 
     // Don't mock html views
     $httpBackend.whenGET(/views\/\w+.*/).passThrough();
