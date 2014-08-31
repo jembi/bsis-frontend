@@ -346,18 +346,13 @@ img.main {
   line-height: 1.5;
   border-radius: 3px;
 }
-
 .ng-table {
   border-radius: 0;
-  #border: solid 1px #fff !important;
   margin-top: 0px;
   margin-bottom: 0px;
 }
-
 .ng-table thead tr {
-  border-top: 1px solid #ccc;
   border-bottom: 2px solid #ccc;
-  background-color: #f5f5f5;
 }
 .ng-table tbody tr {
   background-color: #fff;
@@ -367,18 +362,21 @@ img.main {
 }
 .ng-table tbody tr:hover {
   background-color: #f5f5f5;
-  #cursor: pointer !important;
+}
+table.ng-table tr td{
+  padding: 5px; !important;
 }
 
 .dash-table td {
   padding: 4px;
 }
 .dash-table td.icon {
-  vertical-align: middle;
+  vertical-align: top;
   color: #999;
 }
 .dash-table td.field {
   font-style: italic;
+  vertical-align: top;
 }
 .dash-table td.value {
   font-size: 1.15em;
@@ -429,10 +427,6 @@ dob {
 .dob input#day { margin: 0 0 0 0.5em; }
 .dob input#year { width:3em; }
 .dob input:focus { outline:none; }
-
-table.ng-table tr td{
-  padding: 5px; !important
-}
 
 label {
   margin-top: 8px;
