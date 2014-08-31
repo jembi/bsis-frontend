@@ -33,6 +33,15 @@ angular.module('bsis')
     },
     setDonor: function(donor) {
       donorObj = donor;
+    },
+    getDeferrals: function (donor) {
+       return $http.get('/getDeferrals')
+        .success(function(data, status, headers, config){
+          return data;
+      })
+      .error(function(data){
+        console.log("Get Donor Deferrals Unsuccessful");
+      });
     }
   };
 });

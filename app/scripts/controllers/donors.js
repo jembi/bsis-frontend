@@ -60,23 +60,17 @@ angular.module('bsis')
     $scope.edit = function () {
     };
 
-    $scope.done = function () {
-      $location.path("/findDonor");
-    };
-
     $scope.tableParams = new ngTableParams({
         page: 1,            // show first page
         count: 8,          // count per page
-        sorting: {
-        //donorNumber: 'asc'     // initial sorting
-        }        
+        sorting: {}
     }, {
         defaultSort: 'asc',
         counts: [], // hide page counts control
         total: data.length, // length of data
         getData: function ($defer, params) {
             var orderedData = params.sorting() ?
-                    $filter('orderBy')(data, params.orderBy()) : data;
+              $filter('orderBy')(data, params.orderBy()) : data;
             params.total(orderedData.length); // set total for pagination
             $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
@@ -84,8 +78,64 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS) {
-     $scope.donor = DonorService.getDonor();
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, $filter, $q, ngTableParams) {
+
+    var data = {};
+    $scope.data  = data;
+    var deferralReasons = [];
+
+    $scope.donor = DonorService.getDonor();
+
+    $scope.getDeferrals = function () {
+
+      DonorService.getDeferrals().then(function (response) {
+          data = response.data.allDonorDeferrals;
+          $scope.data = data;
+          deferralReasons = response.data.deferralReasons;
+          $scope.deferralResults = true;
+        }, function () {
+          $scope.deferralResults = false;
+      });
+
+      $scope.deferralTableParams = new ngTableParams({
+            page: 1,            // show first page
+            count: 6,          // count per page
+            filter: {},
+            sorting: {}
+        }, {
+            defaultSort: 'asc',
+            counts: [], // hide page counts control
+            total: data.length, // length of data
+            getData: function ($defer, params) {
+                var filteredData = params.filter() ?
+                  $filter('filter')(data, params.filter()) : data;
+                var orderedData = params.sorting() ?
+                  $filter('orderBy')(filteredData, params.orderBy()) : data;
+                params.total(orderedData.length); // set total for pagination
+                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            }
+        });
+
+      $scope.deferralReasonsFilter = function(column) {
+        var def = $q.defer()
+        var arr = [];
+        angular.forEach(deferralReasons, function(item){
+                arr.push({
+                    'id': item.reason,
+                    'title': item.reason
+                });
+                console.log("arr.push: ", item.reason);
+        });
+        console.log("arr: ", arr);
+        def.resolve(arr);
+        console.log("def: ",def);
+        return def;
+      };
+
+    };
+
+    
+
   })
 
   // Controller for Adding Donors
