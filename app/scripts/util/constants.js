@@ -66,13 +66,16 @@ angular.module('bsis')
     CALENDAR: 'fa-calendar',
     WARNING: 'fa-warning',
     PLUS: 'fa-plus-square',
+    INFO: 'fa-info',
     INFOCIRCLE: 'fa-info-circle',
     COMMENT: 'fa-comment',
     CIRCLE: 'fa-circle',
     CIRCLEO: 'fa-circle-o',
     TINT: 'fa-tint',
     BARS: 'fa-bars',
-    ARCHIVE: 'fa-archive'
+    ARCHIVE: 'fa-archive',
+    PHONE: 'fa-phone',
+    GLOBE: 'fa-globe'
   })
 
   .constant('MONTH', {

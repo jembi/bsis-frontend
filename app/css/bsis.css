@@ -377,6 +377,7 @@ table.ng-table tr td{
 .dash-table td.field {
   font-style: italic;
   vertical-align: top;
+  color: #555;
 }
 .dash-table td.value {
   font-size: 1.15em;

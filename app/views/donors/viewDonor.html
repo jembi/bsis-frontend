@@ -1,13 +1,13 @@
 <span class="h2"> 
-  {{donor.firstName}} {{donor.lastName}}<small><em> ({{donor.title}}. Sam)</em></small>
+  {{donor.firstName}} {{donor.lastName}}<small><em> ({{donor.title}}. {{donor.callingName}})</em></small>
 </span>
 
   <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
-    <span ng-switch-when="Male" class="fa-stack fa-1x">
+    <span ng-switch-when="male" class="fa-stack fa-1x">
       <i class="fa fa-circle fa-stack-2x fa-fw"></i>
       <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
     </span>
-    <span ng-switch-when="Female" class="fa-stack fa-1x">
+    <span ng-switch-when="female" class="fa-stack fa-1x">
       <i class="fa fa-circle fa-stack-2x fa-fw"></i>
       <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
     </span>
@@ -15,7 +15,7 @@
   <span class="h3" style="vertical-align: 0.3em; padding-left:5px;">
     <span class="fa-stack fa-1x">
       <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-      <i class="fa fa-stack-1x fa-inverse">O+</i>
+      <i class="fa fa-stack-1x fa-inverse">{{donor.bloodGroup}}</i>
     </span>
   </span>
 
@@ -27,9 +27,9 @@
 
 <div class = "h4"> 
   <small><em>Age: </em></small>
-  {{donor.age}} <small>({{donor.dob}})</small> 
+  {{donor.age}} <small>({{donor.birthDate}})</small> 
   | 
-  <small><em>Donor Number: </em></small> {{donor.donorNum}}
+  <small><em>Donor Number: </em></small> {{donor.donorNumber}}
   | 
   <small><em>Donor Panel: </em></small> {{donor.donorPanel}}
 </div>
@@ -54,7 +54,7 @@
               <tr>
                 <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
                 <td class="field">Due To Donate: </td>
-                <td class="value green">12 August 2014</td>
+                <td class="value green">August 12, 2014</td>
               </tr>
               <tr>
                 <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
@@ -78,18 +78,18 @@
               <tr>
                 <td class="icon"><i class="fa {{icons.PLUS}}"></i></td>
                 <td class="field">Total Donations: </td>
-                <td class="value">8</td>
+                <td class="value">{{donor.totalDonations}}</td>
               </tr>
               <tr>
                 <td class="icon"><i class="fa {{icons.CIRCLEO}}"></i></td>
                 <td class="field">Date of First Donation: </td>
-                <td class="value">12 February 2010</td>
+                <td class="value">{{donor.dateOfFirstDonation | date:'longDate'}}</td>
               </tr>
               <tr>
                 <td class="icon"><i class="fa {{icons.CIRCLE}}"></i></td>
                 <td class="field">Previous Donation: </td>
-                <td class="value">21 May 2014 <em>(71 days ago)</em><br/>
-                    <em>Venue</em>: Luanshya | <em>Pack Type</em>: Single<br/>
+                <td class="value">{{donor.dateOfLastDonation | date:'longDate'}} <em>(71 days ago)</em><br/>
+                    <em>Venue</em>: Maseru | <em>Pack Type</em>: Single<br/>
                     <em>Wt</em>: 81kg | <em>BP</em>: 110/70 |
                     <em>Hb</em>: 13.7 | <em>P</em>: 61 </td>
               </tr>
@@ -97,8 +97,8 @@
               <tr>
                 <td class="icon"><i class="fa {{icons.COMMENT}}"></i></td>
                 <td class="field">Comments: </td>
-                <td class="value">12/09/10 - Sample comment about donor<br/>
-                                  21/06/13 - Another sample comment about donor</em></td>
+                <td class="value">12/09/10 - Sample comment about donor  
+                    <br/>21/06/13 - Another sample comment about donor</td>
               </tr>
             </tbody>
           </table>
@@ -111,6 +111,109 @@
       <tab-heading>
         <i class="fa {{icons.BARS}}"></i> Demographics
       </tab-heading>
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <span style="float: right; padding-right: 15px; font-size: 0.9em">
+            <em><a href="">Edit</a></em>
+          </span>
+
+          <table class="dash-table">
+            <tbody>
+              <tr>
+                <td class="icon"><i class="fa {{icons.INFO}}"></i></td>
+                <td class="field">Identifier: </td>
+                <td class="value">{{donor.idNumber}} <em>({{donor.idType}})</em></td>
+              </tr>
+
+              <tr><td></td></tr>
+
+              <tr>
+                <td class="icon"><i class="fa {{icons.PHONE}}"></i></td>
+                <td class="field">Preferred Contact Type: </td>
+                <td class="value">{{donor.contactMethodType}}</td>
+              </tr>
+              <tr>
+                <td class="icon"></td>
+                <td class="field">Mobile: </td>
+                <td class="value">{{donor.contact.mobileNumber}}</td>
+              </tr>
+              <tr>
+                <td class="icon"></td>
+                <td class="field">Home: </td>
+                <td class="value">{{donor.contact.homeNumber}}</td>
+              </tr>
+              <tr>
+                <td class="icon"></td>
+                <td class="field">Work: </td>
+                <td class="value">{{donor.contact.workNumber}}</td>
+              </tr>
+
+              <tr><td></td></tr>
+
+            </tbody>
+          </table>
+
+          <table class="dash-table">
+            <tbody>
+
+              <tr>
+                <td class="icon"><i class="fa {{icons.GLOBE}}"></i></td>
+                <td class="field">Address Type: </td>
+                <td class="value" style="width:29%;"><em>Home</em></td>
+                <td class="value" style="width:29%;"><em>Postal (Preferred)</em></td>
+                <td class="value" style="width:29%;"><em>Work</em></td>
+              </tr>
+              <tr>
+                <td class="icon"></td>
+                <td class="field">Address: </td>
+                <td class="value">{{donor.address.homeAddressLine1}}</td>
+                <td class="value">{{donor.address.postalAddressLine1}}</td>
+                <td class="value">{{donor.address.workAddressLine1}}</td>
+              </tr>
+              <tr>
+                <td class="icon"></td>
+                <td class="field"></td>
+                <td class="value">{{donor.address.homeAddressLine2}}</td>
+                <td class="value">{{donor.address.postalAddressLine2}}</td>
+                <td class="value">{{donor.address.workAddressLine2}}</td>
+              </tr>
+              <tr>
+                <td class="icon"></td>
+                <td class="field">City: </td>
+                <td class="value">{{donor.address.homeAddressCity}}</td>
+                <td class="value">{{donor.address.postalAddressCity}}</td>
+                <td class="value">{{donor.address.workAddressCity}}</td>
+              </tr>
+              <tr>
+                <td class="icon"></td>
+                <td class="field">Province: </td>
+                <td class="value">{{donor.address.homeAddressProvince}}</td>
+                <td class="value">{{donor.address.postalAddressProvince}}</td>
+                <td class="value">{{donor.address.workAddressProvince}}</td>
+              </tr>
+              <tr>
+                <td class="icon"></td>
+                <td class="field">Country: </td>
+                <td class="value">{{donor.address.homeAddressCountry}}</td>
+                <td class="value">{{donor.address.postalAddressCountry}}</td>
+                <td class="value">{{donor.address.workAddressCountry}}</td>
+              </tr>
+              <tr>
+                <td class="icon"></td>
+                <td class="field">Code: </td>
+                <td class="value">{{donor.address.homeAddressZipcode}}</td>
+                <td class="value">{{donor.address.postalAddressZipcode}}</td>
+                <td class="value">{{donor.address.workAddressZipcode}}</td>
+              </tr>
+
+
+            </tbody>
+          </table>
+
+
+        </div>
+      </div>
 
     </tab>
 

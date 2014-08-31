@@ -68,7 +68,7 @@ angular.module('bsis')
         page: 1,            // show first page
         count: 8,          // count per page
         sorting: {
-        //donorNum: 'asc'     // initial sorting
+        //donorNumber: 'asc'     // initial sorting
         }        
     }, {
         defaultSort: 'asc',
@@ -76,9 +76,7 @@ angular.module('bsis')
         total: data.length, // length of data
         getData: function ($defer, params) {
             var orderedData = params.sorting() ?
-                    $filter('orderBy')(data, params.orderBy()) :
-                    data;
-
+                    $filter('orderBy')(data, params.orderBy()) : data;
             params.total(orderedData.length); // set total for pagination
             $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }

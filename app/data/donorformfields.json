@@ -607,7 +607,7 @@
   "donorPanels": [
     {
       "id": 3,
-      "name": "Livingstone",
+      "name": "Maseru",
       "isCollectionCenter": true,
       "isCollectionSite": true,
       "isUsageSite": true,
@@ -618,7 +618,7 @@
     },
     {
       "id": 4,
-      "name": "Luanshya",
+      "name": "Mohale's Hoek",
       "isCollectionCenter": true,
       "isCollectionSite": false,
       "isUsageSite": false,
@@ -629,7 +629,7 @@
     },
     {
       "id": 7,
-      "name": "Chingola",
+      "name": "Leribe",
       "isCollectionCenter": true,
       "isCollectionSite": true,
       "isUsageSite": true,
