@@ -4,6 +4,7 @@
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
 
+
         <div class="input-group col-sm-2">
           <input size="20" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="deferral.deferredOn" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
           <span class="input-group-btn">
@@ -11,9 +12,13 @@
           </span>
         </div>
 
-        <div>
+
+
+        <span>
         <em> To: </em>
-        </div>
+        </span>
+
+
 
         <div class="input-group col-sm-2">
           <input size="20" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="deferral.deferredUntil" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
@@ -21,6 +26,7 @@
             <button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa {{icons.CALENDAR}}"></i></button>
           </span>
         </div>
+
 
 
 

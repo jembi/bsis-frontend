@@ -401,6 +401,18 @@ table.ng-table tr td{
   margin-top: 10px;
 }
 
+/* css hack to get input-groups to display inline */
+.input-group {
+    display: inline-table !important;
+    vertical-align: middle;
+
+    .input-group-addon,
+    .input-group-btn,
+    .form-control {
+        width: auto !important;
+    }
+}
+
 .form-group .row{
   margin-left: 0px;
   margin-right: 0px;
