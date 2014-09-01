@@ -88,6 +88,8 @@ angular.module('bsis')
 
     $scope.getDeferrals = function () {
 
+      $scope.deferralView = 'viewDeferrals';
+
       DonorService.getDeferrals().then(function (response) {
         data = response.data.allDonorDeferrals;
         $scope.data = data;
@@ -175,6 +177,47 @@ angular.module('bsis')
         return def;
       };
 
+    };
+
+    $scope.manageDeferral = function () {
+
+      $scope.today = function() {
+        $scope.dt = new Date();
+      };
+      $scope.today();
+
+      $scope.clear = function () {
+        $scope.dt = null;
+      };
+
+      $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+      };
+      $scope.toggleMin();
+
+      $scope.open = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+      };
+
+      $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+      };
+
+      $scope.initDate = new Date('2016-15-20');
+      $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+      $scope.format = $scope.formats[0];
+
+      $scope.deferralView = 'manageDeferral';
+      $scope.deferralReasons = deferralReasons;
+
+      $scope.deferral.deferredUntil = $scope.dt;
+
+      console.log("deferralReasons: ", deferralReasons);
+      console.log("$scope.deferralReasons: ", $scope.deferralReasons);
     };
 
   })

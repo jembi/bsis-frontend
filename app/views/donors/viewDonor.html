@@ -293,74 +293,14 @@
       <tab-heading>
         <i class="fa {{icons.WARNING}}"></i> Deferrals
       </tab-heading>
-      
       <div class="panel panel-default">
         <div class="panel-body">
-          <span style="float: right; padding-right: 15px; font-size: 0.9em">
-            <em><a href="">Add Deferral</a></em>
-          </span>
-          <table class="dash-table">
-              <tr>
-                <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
-                <td class="field">Current Deferrals: </td>
-                <td class="value red"> On Medication <em>(ends 21 September 2014)</em> 
-                  <span style="font-size: 0.8em;">
-                    <em><a href=""> Edit</a></em>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="icon"></td>
-                <td class="field"></td>
-                <td class="value red"> Illness or Operation <em>(ends 12 December 2014)</em>
-                  <span style="font-size: 0.8em;">
-                    <em><a href=""> Edit</a></em>
-                  </span>
-                </td>
-              </tr>
 
-              <tr><td></td></tr>
-            </tbody>
-          </table>
-
-          <div ng-switch="deferralResults">
-          <div ng-switch-when="true">
-
-            <table ng-table="deferralTableParams" show-filter="true" class="table">
-                <tr ng-repeat="deferral in $data"
-                    ng-click="changeSelection(deferral);"
-                    ng-mouseenter="deferral.$selected = true"
-                    ng-mouseleave="deferral.$selected = false"
-                    ng-class="{'active': deferral.$selected}">
-                    <td data-title="'Deferred On'" style="width:15%;" header-class="text-left" class="text-center" sortable="'deferredOn'"  filter="{ 'deferredOn': 'text' }">
-                        {{deferral.deferredOn}}
-                    </td>
-                    <td data-title="'Deferred Until'" style="width:15%;" header-class="text-left" class="text-center" sortable="'deferredUntil'" filter="{ 'deferredUntil': 'text' }">
-                        {{deferral.deferredUntil}}
-                    </td>
-                    <td data-title="'Reason'" style="width:22%;" header-class="text-left" sortable="'deferralReason.reason'" filter="{ 'deferralReason.reason': 'select' }" 
-                        filter-data="deferralReasonsFilter($column)">
-                        {{deferral.deferralReason.reason}}
-                    </td>
-                    <td data-title="'Comment'" header-class="text-left" sortable="'deferralReasonText'">
-                        {{deferral.deferralReasonText}}
-                    </td>
-                    <td data-title="'Deferred By'" style="width:15%;" header-class="text-left" sortable="'deferredBy'" filter="{ 'deferredBy': 'text' }">
-                        {{deferral.deferredBy}}
-                    </td>
-                    <td data-title="''" style="width:8%;" class="text-center">
-                      <span style="font-size: 0.9em;">
-                        <em><a href=""> Edit</a></em>
-                      </span>
-                    </td>
-
-                </tr>
-            </table>
-          </div>
-          <div ng-switch-when="false">
-                <h4 ><em>No Deferrals Found</em></h4>
-          </div>
-          </div>
+        <div ng-switch on="deferralView">
+          <div ng-switch-when="viewDeferrals"><div ng-include="'views/donors/viewDeferrals.html'"></div></div>
+          <div ng-switch-when="manageDeferral"><div ng-include="'views/donors/manageDeferral.html'"></div></div>
+          <div ng-switch-default><div ng-include="'views/donors/viewDeferrals.html'"></div></div>
+        </div>
 
         </div>
       </div>
