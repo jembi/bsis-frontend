@@ -1,5 +1,10 @@
+<form editable-form name="editableForm" onaftersave="saveDonor()">
+
 <span class="h2"> 
-  {{donor.firstName}} {{donor.lastName}}<small><em> ({{donor.title}}. {{donor.callingName}})</em></small>
+  <span size="10" editable-text="donor.firstName" e-name="firstName"  e-required>{{donor.firstName}}</span> 
+  <span editable-text="donor.lastName" e-name="lastName"  e-required>{{donor.lastName}}</span><small><em>
+  (<span editable-text="donor.title" e-name="title"  e-required>{{donor.title}}</span>. 
+  <span editable-text="donor.callingName" e-name="callingName"  e-required>{{donor.callingName}}</span>)</em></small>
 </span>
 
   <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
@@ -20,7 +25,7 @@
   </span>
 
   <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
-    <small><em><a href="">Edit</a></em>  | <em><a href="">Remove</a></em></small>
+    <small><em><a ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  | <em><a href="">Remove</a></em></small>
   </span>
 
 <hr/>
@@ -35,6 +40,8 @@
   | 
   <small><em>Preferred Language: </em></small> English
 </div>
+
+</form>
 
 <hr/>
 

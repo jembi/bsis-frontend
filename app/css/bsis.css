@@ -491,6 +491,17 @@ padding-left: 5px;
 padding-right: 5px;
 }
 
+.editable-text{
+  width: 150px;
+}
+.editable-input{
+  height: 30px;
+  padding: 0px 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
 /* --> general css */
 
 small {
