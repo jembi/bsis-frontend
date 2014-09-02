@@ -181,13 +181,19 @@ angular.module('bsis')
 
     $scope.manageDeferral = function () {
 
+      $scope.dateFromOpen = false;
+      $scope.dateToOpen = false;
+
       $scope.today = function() {
-        $scope.dt = new Date();
+        $scope.dateFrom = new Date();
+        $scope.dateTo = new Date();
       };
+
       $scope.today();
 
       $scope.clear = function () {
-        $scope.dt = null;
+        $scope.dateFrom = null;
+        $scope.dateTo = null;
       };
 
       $scope.toggleMin = function() {
@@ -195,11 +201,25 @@ angular.module('bsis')
       };
       $scope.toggleMin();
 
-      $scope.open = function($event) {
+      $scope.open = function($event, datePicker) {
+
+        console.log("datePicker: ", datePicker);
         $event.preventDefault();
         $event.stopPropagation();
 
-        $scope.opened = true;
+        $scope.closeAll();
+
+        if (datePicker === 'dateFromOpen'){
+          $scope.dateFromOpen = true;
+        }
+        else if (datePicker === 'dateToOpen'){
+          $scope.dateToOpen = true;
+        }
+      };
+
+      $scope.closeAll = function() {
+          $scope.dateFromOpen = false;
+          $scope.dateToOpen = false;
       };
 
       $scope.dateOptions = {
@@ -207,14 +227,16 @@ angular.module('bsis')
         startingDay: 1
       };
 
-      $scope.initDate = new Date('2016-15-20');
-      $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-      $scope.format = $scope.formats[0];
+      $scope.initDate = new Date();
+      //$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+      //$scope.format = $scope.formats[0];
+      $scope.format = 'dd/MM/yyyy';
+
 
       $scope.deferralView = 'manageDeferral';
       $scope.deferralReasons = deferralReasons;
 
-      $scope.deferral.deferredUntil = $scope.dt;
+      //$scope.deferral.deferredOn = new Date();
 
       console.log("deferralReasons: ", deferralReasons);
       console.log("$scope.deferralReasons: ", $scope.deferralReasons);
