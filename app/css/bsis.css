@@ -370,6 +370,12 @@ table.ng-table tr td{
   margin: 10px 0;
 }
 
+.dash-table th.center {
+  text-align:center;
+}
+.dash-table th {
+  padding: 4px;
+}
 .dash-table td {
   padding: 4px;
 }
@@ -382,8 +388,14 @@ table.ng-table tr td{
   vertical-align: top;
   color: #555;
 }
+.dash-table td.center {
+  text-align:center;
+}
 .dash-table td.value {
-  font-size: 1.15em;
+  font-size: 1.05em;
+}
+.dash-table td.valuesml {
+  font-size:0.9em;
 }
 .dash-table td.green{
   color: #3c763d;
@@ -472,3 +484,6 @@ padding-right: 5px;
 
 /* --> general css */
 
+small {
+  color: #888 !important
+}

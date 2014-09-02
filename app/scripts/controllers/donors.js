@@ -249,7 +249,7 @@ angular.module('bsis')
 
     $scope.viewDonationDetails = function (din) {
       console.log("din: ", din);
-      $scope.donation = $filter('filter')($scope.data, {donationIdentificatioNumber : din})[0];
+      $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
       console.log("$scope.donation: ", $scope.donation);
 
       $scope.donationsView = 'viewDonationDetails';
