@@ -380,19 +380,19 @@ table.ng-table tr td{
   padding: 4px;
 }
 .dash-table td.icon {
-  vertical-align: top;
+  vertical-align: center;
   color: #999;
 }
 .dash-table td.field {
   font-style: italic;
-  vertical-align: top;
+  vertical-align: center;
   color: #555;
 }
 .dash-table td.center {
   text-align:center;
 }
 .dash-table td.value {
-  font-size: 1.05em;
+  font-size: 1.1em;
 }
 .dash-table td.valuesml {
   font-size:0.9em;
@@ -423,6 +423,15 @@ table.ng-table tr td{
     .form-control {
         width: auto !important;
     }
+}
+
+/* css hack to get cols with equal heights */
+.row.equal [class*="col-"]{
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+}
+.row.equal{
+  overflow: hidden; 
 }
 
 .form-group .row{
