@@ -1,0 +1,57 @@
+<table class="dash-table">
+  <tbody>
+    <tr>
+      <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
+      <td class="field">Due To Donate: </td>
+      <td class="value green">12 August 2014</td>
+    </tr>
+
+    <tr><td></td></tr>
+  </tbody>
+</table>
+
+<div ng-switch="donationResults">
+<div ng-switch-when="true">
+
+  <table ng-table="donationTableParams" show-filter="true" class="table">
+      <tr ng-repeat="donation in $data"
+          ng-click="changeSelection(donation);"
+          ng-mouseenter="donation.$selected = true"
+          ng-mouseleave="donation.$selected = false"
+          ng-class="{'active': donation.$selected}">
+          <td data-title="'Date'" style="width:18%;" header-class="text-left" class="text-center" sortable="'collectedOn'"  filter="{ 'collectedOn': 'text' }">
+              {{donation.collectedOn}}
+          </td>
+          <td data-title="'Venue'" style="width:17%;" header-class="text-left" sortable="'collectionSite'" filter="{ 'collectionSite': 'text' }">
+              {{donation.collectionSite}}
+          </td>
+          <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'bloodBagType'" filter="{ 'bloodBagType': 'select' }"
+              filter-data="packTypeFilter($column)">
+              {{donation.bloodBagType}}
+          </td>
+          <td data-title="'Wt'" style="width:10%;" header-class="text-left" class="text-center" sortable="'donorWeight'">
+              {{donation.donorWeight}}
+          </td>
+          <td data-title="'BP'" style="width:10%;" header-class="text-left" class="text-center" sortable="'bloodPressureSystolic'">
+              {{donation.bloodPressureSystolic}}/{{donation.bloodPressureDiastolic}}
+          </td>
+          <td data-title="'Hb'" style="width:10%;" header-class="text-left" class="text-center" sortable="'haemoglobinCount'">
+              {{donation.haemoglobinCount}}
+          </td>
+          <td data-title="'Pulse'" style="width:10%;" header-class="text-left" class="text-center" sortable="'donorPulse'">
+              {{donation.donorPulse}}
+          </td>
+          <td data-title="''" style="width:10%;" class="text-center">
+            <span style="font-size: 0.9em;">
+              <em><a ng-click="viewDonationDetails(donation.donationIdentificatioNumber)"> View</a></em>
+            </span>
+          </td>
+          </td>
+
+      </tr>
+  </table>
+</div>
+<div ng-switch-when="false">
+      <h4 ><em>No Previous Donations</em></h4>
+</div>
+</div>

@@ -136,6 +136,8 @@ angular.module('bsis')
 
     $scope.getDonations = function () {
 
+      $scope.donationsView = 'viewDonations';
+
       DonorService.getDonations().then(function (response) {
         data = response.data.donations;
         $scope.data = data;
@@ -215,6 +217,9 @@ angular.module('bsis')
         else if (datePicker === 'dateToOpen'){
           $scope.dateToOpen = true;
         }
+
+        console.log("$scope.dateFromOpen: ", $scope.dateFromOpen);
+        console.log("$scope.dateToOpen: ", $scope.dateToOpen);
       };
 
       $scope.closeAll = function() {
@@ -240,6 +245,15 @@ angular.module('bsis')
 
       console.log("deferralReasons: ", deferralReasons);
       console.log("$scope.deferralReasons: ", $scope.deferralReasons);
+    };
+
+    $scope.viewDonationDetails = function (din) {
+      console.log("din: ", din);
+      $scope.donation = $filter('filter')($scope.data, {donationIdentificatioNumber : din})[0];
+      console.log("$scope.donation: ", $scope.donation);
+
+      $scope.donationsView = 'viewDonationDetails';
+
     };
 
   })
