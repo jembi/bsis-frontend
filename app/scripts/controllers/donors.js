@@ -304,6 +304,13 @@ angular.module('bsis')
       });
   })
 
+  // Controller for Adding Donations
+  .controller('AddDonationCtrl', function ($scope, $location, DonorService, PACKTYPE) {
+
+    $scope.packTypes = PACKTYPE.packtypes;
+
+  })
+
 ;
 
 
