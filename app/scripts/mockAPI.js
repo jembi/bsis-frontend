@@ -33,6 +33,9 @@ var mockAPI = angular.module('mockAPI', ['ngMockE2E', 'ngResource']);
     // addDonor mock
     $httpBackend.whenGET('/addDonor').respond($resource('data/donorformfields.json').get());
 
+    // getDonorFormFields mock
+    $httpBackend.whenGET('/getDonorFormFields').respond($resource('data/donorformfields.json').get());
+
     // getDeferrals mock
     $httpBackend.whenGET('/getDeferrals').respond($resource('data/donordeferrals.json').get());
 

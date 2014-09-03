@@ -31,6 +31,15 @@ angular.module('bsis')
     getDonor: function(){
       return donorObj;
     },
+    getDonorFormFields: function(){
+      return $http.get('/getDonorFormFields')
+        .success(function(data, status, headers, config){
+          return data;
+      })
+      .error(function(data){
+        console.log("Get Donor Form Unsuccessful");
+      });
+    },
     setDonor: function(donor) {
       donorObj = donor;
     },
