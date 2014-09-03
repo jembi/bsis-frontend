@@ -25,20 +25,34 @@
   </span>
 
   <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
-    <small><em><a ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  | <em><a href="">Remove</a></em></small>
+    <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  
+    <span ng-show="!editableForm.$visible"> | 
+    </span>
+
+
+  <span ng-show="editableForm.$visible">
+          <em><a href="" ng-click="saveDonor()" ng-disabled="editableForm.$waiting">Save</a></em> | 
+          <em><a href="" ng-click="editableForm.$cancel()" ng-disabled="editableForm.$waiting">Cancel</a></em>
+  </span>
+
+    <em><a ng-show="!editableForm.$visible" href="">Remove</a></em></small>
   </span>
 
 <hr/>
 
 <div class = "h4"> 
   <small><em>Age: </em></small>
-  {{donor.age}} <small>({{donor.birthDate}})</small> 
+  {{donor.age}} <small>
+  <span editable-text="donor.birthDate" e-name="birthDate"  e-required>({{donor.birthDate}})</span>
+  </small> 
   | 
   <small><em>Donor Number: </em></small> {{donor.donorNumber}}
   | 
-  <small><em>Donor Panel: </em></small> {{donor.donorPanel}}
+  <small><em>Donor Panel: </em></small> 
+  <span editable-text="donor.donorPanel" e-name="donorPanel"  e-required>{{donor.donorPanel}}</span>
   | 
-  <small><em>Preferred Language: </em></small> English
+  <small><em>Preferred Language: </em></small> 
+  <span editable-text="donor.preferredLanguage" e-name="preferredLanguage"  e-required>{{donor.preferredLanguage}}</span>
 </div>
 
 </form>
