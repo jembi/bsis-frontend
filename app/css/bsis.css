@@ -497,6 +497,9 @@ padding-right: 5px;
   font-size: 0.9em;
   width: 110px;
 }
+.editable-select{
+  padding: 4px 4px;
+}
 
 /* --> general css */
 

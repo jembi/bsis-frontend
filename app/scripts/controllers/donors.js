@@ -14,7 +14,6 @@ angular.module('bsis')
       DonorService.findDonor($scope.donorSearch).then(function (response) {
           data = response.data.donors;
           $scope.data = data;
-
           $scope.searchResults = true;
         }, function () {
           $scope.searchResults = false;
@@ -78,13 +77,27 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $filter, $q, ngTableParams) {
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams) {
 
     var data = {};
     $scope.data  = data;
     var deferralReasons = [];
 
     $scope.donor = DonorService.getDonor();
+
+    /* TODO: Update service call above (getDonor()) to include donorFormFields, so that two service calls are not required*/
+    DonorService.getDonorFormFields().then(function (response) {
+        var data = response.data;
+        $scope.addressTypes = data.addressTypes;
+        $scope.languages = data.languages;
+        $scope.donorPanels = data.donorPanels;
+        $scope.idTypes = data.idTypes;
+        $scope.title = TITLE.options;
+        $scope.month = MONTH.options;
+        $scope.gender = GENDER.options;
+
+        }, function () {
+      });
 
     $scope.getDeferrals = function () {
 
