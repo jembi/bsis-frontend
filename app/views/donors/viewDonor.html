@@ -1,59 +1,59 @@
 <form editable-form name="editableForm" onaftersave="saveDonor()">
 
-<span class="h2"> 
-  <span size="10" editable-text="donor.firstName" e-name="firstName"  e-required>{{donor.firstName}}</span> 
-  <span editable-text="donor.lastName" e-name="lastName"  e-required>{{donor.lastName}}</span><small><em>
-  (<span editable-text="donor.title" e-name="title"  e-required>{{donor.title}}</span>. 
-  <span editable-text="donor.callingName" e-name="callingName"  e-required>{{donor.callingName}}</span>)</em></small>
-</span>
-
-  <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
-    <span ng-switch-when="male" class="fa-stack fa-1x">
-      <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-      <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
-    </span>
-    <span ng-switch-when="female" class="fa-stack fa-1x">
-      <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-      <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
-    </span>
-  </span>
-  <span class="h3" style="vertical-align: 0.3em; padding-left:5px;">
-    <span class="fa-stack fa-1x">
-      <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-      <i class="fa fa-stack-1x fa-inverse">{{donor.bloodGroup}}</i>
-    </span>
+  <span class="h2"> 
+    <span editable-text="donor.firstName" e-name="firstName"  e-required>{{donor.firstName}}</span> 
+    <span editable-text="donor.lastName" e-name="lastName"  e-required>{{donor.lastName}}</span><small><em>
+    (<span editable-text="donor.title" e-name="title"  e-required>{{donor.title}}</span>. 
+    <span editable-text="donor.callingName" e-name="callingName"  e-required>{{donor.callingName}}</span>)</em></small>
   </span>
 
-  <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
-    <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  
-    <span ng-show="!editableForm.$visible"> | 
+    <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
+      <span ng-switch-when="male" class="fa-stack fa-1x">
+        <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+        <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
+      </span>
+      <span ng-switch-when="female" class="fa-stack fa-1x">
+        <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+        <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
+      </span>
+    </span>
+    <span class="h3" style="vertical-align: 0.3em; padding-left:5px;">
+      <span class="fa-stack fa-1x">
+        <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+        <i class="fa fa-stack-1x fa-inverse">{{donor.bloodGroup}}</i>
+      </span>
     </span>
 
+    <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
+      <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  
+      <span ng-show="!editableForm.$visible"> | 
+      </span>
 
-  <span ng-show="editableForm.$visible">
-          <em><a href="" ng-click="saveDonor()" ng-disabled="editableForm.$waiting">Save</a></em> | 
-          <em><a href="" ng-click="editableForm.$cancel()" ng-disabled="editableForm.$waiting">Cancel</a></em>
-  </span>
 
-    <em><a ng-show="!editableForm.$visible" href="">Remove</a></em></small>
-  </span>
+    <span ng-show="editableForm.$visible">
+            <em><a href="" ng-click="saveDonor()" ng-disabled="editableForm.$waiting">Save</a></em> | 
+            <em><a href="" ng-click="editableForm.$cancel()" ng-disabled="editableForm.$waiting">Cancel</a></em>
+    </span>
 
-<hr/>
+      <em><a ng-show="!editableForm.$visible" href="">Remove</a></em></small>
+    </span>
 
-<div class = "h4"> 
-  <small><em>Age: </em></small>
-  {{donor.age}} <small>
-  <span editable-text="donor.birthDate" e-name="birthDate"  e-required>({{donor.birthDate}})</span>
-  </small> 
-  | 
-  <small><em>Donor Number: </em></small> {{donor.donorNumber}}
-  | 
-  <small><em>Donor Panel: </em></small> 
-  <span editable-text="donor.donorPanel" e-name="donorPanel"  e-required>{{donor.donorPanel}}</span>
-  | 
-  <small><em>Preferred Language: </em></small> 
-  <span editable-text="donor.preferredLanguage" e-name="preferredLanguage"  e-required>{{donor.preferredLanguage}}</span>
-</div>
+  <hr/>
+
+  <div class = "h4"> 
+    <small><em>Age: </em></small>
+    {{donor.age}} <small>
+    <span editable-text="donor.birthDate" e-name="birthDate"  e-required>({{donor.birthDate}})</span>
+    </small> 
+    | 
+    <small><em>Donor Number: </em></small> {{donor.donorNumber}}
+    | 
+    <small><em>Donor Panel: </em></small> 
+    <span editable-text="donor.donorPanel" e-name="donorPanel"  e-required>{{donor.donorPanel}}</span>
+    | 
+    <small><em>Preferred Language: </em></small> 
+    <span editable-text="donor.preferredLanguage" e-name="preferredLanguage"  e-required>{{donor.preferredLanguage}}</span>
+  </div>
 
 </form>
 

@@ -491,12 +491,9 @@ padding-left: 5px;
 padding-right: 5px;
 }
 
+/* css to control angular-xeditable input fields */
 .editable-input{
-  #height: 30px;
-  #padding: 0px 8px;
-  #font-size: 14px;
-  #line-height: 1.5;
-  #border-radius: 3px;
+  padding: 0px 0px;
   font-size: 0.9em;
   width: 110px;
 }
