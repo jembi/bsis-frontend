@@ -49,10 +49,10 @@
     <small><em>Donor Number: </em></small> {{donor.donorNumber}}
     | 
     <small><em>Donor Panel: </em></small> 
-    <span editable-select="donor.donorPanel" e-ng-options="item.id as item.name for item in donorPanels" e-name="donorPanel"  e-required>{{donor.donorPanel}}</span>
+    <span editable-select="donor.donorPanel" e-ng-options="item.name as item.name for item in donorPanels" e-name="donorPanel"  e-required>{{donor.donorPanel}}</span>
     | 
     <small><em>Preferred Language: </em></small> 
-    <span editable-select="donor.preferredLanguage" e-ng-options="item.id as item.preferredLanguage for item in languages" e-name="preferredLanguage">{{donor.preferredLanguage}}</span>
+    <span editable-select="donor.preferredLanguage" e-ng-options="item.preferredLanguage as item.preferredLanguage for item in languages" e-name="preferredLanguage">{{donor.preferredLanguage}}</span>
   </div>
 
 </form>

@@ -33,8 +33,8 @@
       "donorPanel": "Maseru",
       "age": "39",
       "idNumber": "870715900866",
-      "idType": "National ID",
-      "contactMethodType": "Mobile",
+      "idType": "National Id",
+      "contactMethodType": "Phone",
       "preferredAddressType": "Postal",
       "address": {
         "id": 1,

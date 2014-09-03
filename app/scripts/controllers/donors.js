@@ -92,6 +92,7 @@ angular.module('bsis')
         $scope.languages = data.languages;
         $scope.donorPanels = data.donorPanels;
         $scope.idTypes = data.idTypes;
+        $scope.preferredContactMethods = data.preferredContactMethods;
         $scope.title = TITLE.options;
         $scope.month = MONTH.options;
         $scope.gender = GENDER.options;
