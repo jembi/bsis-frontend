@@ -55,11 +55,7 @@ angular.module('bsis')
     };
 
     $scope.addNewDonor = function (donor){
-      //$scope.firstName = donor.firstName;
-      //$scope.lastName = donor.lastName;
       DonorService.setDonor(donor);
-      console.log("Add Donor - firstName:", donor.firstName);
-      console.log("Add Donor - lastName:", donor.lastName);
       $location.path("/addDonor");
     };
 
