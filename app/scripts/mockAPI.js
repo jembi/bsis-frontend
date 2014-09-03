@@ -17,7 +17,7 @@ var mockAPI = angular.module('mockAPI', ['ngMockE2E', 'ngResource']);
     $httpBackend.whenPOST('/login').passThrough();
 
     // findDonor mock (firstName=sample, lastName=donor)
-    $httpBackend.whenGET('/findDonor?firstName=sample&lastName=donor').respond($resource('data/donors.json').get());
+    $httpBackend.whenGET('/findDonor?firstName=Sample&lastName=Donor').respond($resource('data/donors.json').get());
     // pass through all other /findDonor requests (will respond with a 404 (Not Found))
     $httpBackend.whenGET(/findDonor?\w+.*/).passThrough();
 

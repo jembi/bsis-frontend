@@ -7,8 +7,12 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
 
-    $scope.donorSearch = {};
+    $scope.donorSearch = {
+      firstName: '',
+      lastName: ''
+    };
     $scope.searchResults = '';
+
 
     $scope.findDonor = function () {   
       DonorService.findDonor($scope.donorSearch).then(function (response) {
@@ -48,6 +52,15 @@ angular.module('bsis')
       DonorService.setDonor(item);
       console.log("\t$scope.donor: ", $scope.donor);
       $location.path("/viewDonor");
+    };
+
+    $scope.addNewDonor = function (donor){
+      //$scope.firstName = donor.firstName;
+      //$scope.lastName = donor.lastName;
+      DonorService.setDonor(donor);
+      console.log("Add Donor - firstName:", donor.firstName);
+      console.log("Add Donor - lastName:", donor.lastName);
+      $location.path("/addDonor");
     };
 
     $scope.addDonor = function (newDonor){
@@ -280,6 +293,12 @@ angular.module('bsis')
         $scope.languages = data.languages;
         $scope.donorPanels = data.donorPanels;
         $scope.donor = data.addDonorForm;
+        $scope.searchDonor = DonorService.getDonor();
+        $scope.donor.firstName = $scope.searchDonor.firstName;
+        $scope.donor.lastName = $scope.searchDonor.lastName;
+
+        console.log("AddDonorCtrl firstName: ", $scope.searchDonor.firstName);
+        console.log("AddDonorCtrl lastName: ", $scope.searchDonor.lastName);
 
         $scope.title = TITLE.options;
         $scope.month = MONTH.options;
