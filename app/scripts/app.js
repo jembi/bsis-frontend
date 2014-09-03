@@ -219,6 +219,10 @@ angular.module('bsis', [
       });
   })
 
+  .run(function(editableOptions) {
+    editableOptions.theme = 'bs3';
+  })
+
   .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
     $rootScope.$on('$locationChangeStart', function(event){
       //console.log("in locationChangeStart: ");
