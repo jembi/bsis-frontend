@@ -265,7 +265,7 @@ angular.module('bsis')
   })
 
   // Controller for Viewing/Exporting Donor Lists
-  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, $filter, ngTableParams, $timeout) {
+  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, $filter, ngTableParams) {
 
     $scope.icons = ICONS;
 
@@ -327,6 +327,63 @@ angular.module('bsis')
     $scope.donationDateFromOpen = false;
     $scope.donationDateToOpen = false;
     $scope.dueToDonateOpen = false;
+
+  })
+
+  // Controller for Adding Donations
+  .controller('AddDonationCtrl', function ($scope, $location, DonorService, PACKTYPE) {
+
+    $scope.packTypes = PACKTYPE.packtypes;
+
+  })
+
+  // Controller for Managing the Donor Clinic
+  .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams) {
+
+    $scope.icons = ICONS;
+    $scope.packTypes = PACKTYPE.packtypes;
+
+    var data = {};
+    $scope.data = data;
+
+    DonorService.getDonationBatch().then(function (response) {
+        data = response.data.donations;
+        $scope.data = data;
+      }, function () {
+    });
+
+    $scope.donorClinicTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 8,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+    $scope.packTypeFilter = function(column) {
+        var def = $q.defer();
+        var arr = [];
+        angular.forEach(PACKTYPE.packtypes, function(item){
+          arr.push({
+              'id': item.name,
+              'title': item.name
+          });
+        });
+        def.resolve(arr);
+        return def;
+      };
 
   })
 

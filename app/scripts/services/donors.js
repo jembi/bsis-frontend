@@ -69,6 +69,15 @@ angular.module('bsis')
       .error(function(data){
         console.log("Get Donor Donations Unsuccessful");
       });
+    },
+    getDonationBatch: function (donor) {
+       return $http.get('/getDonationBatch')
+        .success(function(data, status, headers, config){
+          return data;
+      })
+      .error(function(data){
+        console.log("Get Donation Batch Unsuccessful");
+      });
     }
   };
 });

@@ -54,7 +54,7 @@ angular.module('bsis', [
       })
       .when('/manageClinic', {
         templateUrl : 'views/donors.html',
-        controller  : 'DonorsCtrl',
+        controller  : 'DonorClinicCtrl',
         data: {
           permission: PERMISSIONS.MANAGE_CLINIC
         }
