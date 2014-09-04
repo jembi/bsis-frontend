@@ -10,6 +10,7 @@ angular.module('bsis')
   if(~$location.path().indexOf('donors')        ||
     ~$location.path().indexOf('findDonor')      ||
     ~$location.path().indexOf('addDonor')       ||
+    ~$location.path().indexOf('viewDonor')       ||
     ~$location.path().indexOf('linkDonation')   ||
     ~$location.path().indexOf('manageClinic')   ||
     ~$location.path().indexOf('exportDonorList')
@@ -317,6 +318,7 @@ angular.module('bsis')
     if(~$location.path().indexOf('donors')          ||
       ~$location.path().indexOf('findDonor')        ||
       ~$location.path().indexOf('addDonor')         ||
+      ~$location.path().indexOf('viewDonor')         ||
       ~$location.path().indexOf('linkDonation')     ||
       ~$location.path().indexOf('manageClinic')     ||
       ~$location.path().indexOf('exportDonorList')

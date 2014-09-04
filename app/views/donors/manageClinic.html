@@ -1,4 +1,43 @@
-<h3 class="page-header">Manage Clinic</h3>
+<form editable-form name="editableForm" onaftersave="updateDonationBatch()">
+  <span class="h3"> 
+    <small><em>Current Batch Number:</em></small> DB56790099MS
+  </span> 
 
-<form class="form-horizontal" role="form" method="get" action="">
+    <span class="h4" style="float: right; margin-top: 5px; margin-bottom: 5px; padding-right: 15px;">
+      <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  
+      <span ng-show="!editableForm.$visible"> | 
+    </span>
+    <span ng-show="editableForm.$visible">
+      <em><a href="" ng-click="updateDonationBatch()" ng-disabled="editableForm.$waiting">Save</a></em> | 
+      <em><a href="" ng-click="editableForm.$cancel()" ng-disabled="editableForm.$waiting">Cancel</a></em>
+    </span>  
+    <em><a ng-show="!editableForm.$visible" href="">Close Batch</a></em></small>
+    </span>
+
+  <hr/>
+
+  <div class = "h4"> 
+    <small><em>Date Bled: </em></small> <span editable-text="donationBatch.date" e-name="date"  e-required>03/09/2014</span>
+    | 
+    <small><em>Venue: </em></small> <span editable-select="donationBatch.venue" e-ng-options="item.name as item.name for item in donorPanels" e-name="donorPanel"  e-required>{{donationBatch.venue}}</span>
+    | 
+    <small><em>Number of Registered Donors: </em></small> 8
+  </div>
 </form>
+
+  <hr/>
+
+  <div style="padding-bottom: 5px"></div>
+
+  <div class="col-sm-12">
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div ng-switch on="donationBatchView">
+            <div ng-switch-when="viewDonationBatch"><div ng-include="'views/donors/viewDonationBatch.html'"></div></div>
+            <div ng-switch-when="viewDonationSummary"><div ng-include="'views/donors/viewDonationSummary.html'"></div></div>
+            <div ng-switch-default><div ng-include="'views/donors/viewDonationBatch.html'"></div></div>
+          </div>
+      </div>
+    </div>
+  </div>

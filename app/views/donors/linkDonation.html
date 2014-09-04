@@ -1,4 +1,90 @@
-<h3 class="page-header">Link Donors and Donations</h3>
+<h3 class="page-header">Link Donor and Donation</h3>
 
-<form class="form-horizontal" role="form" method="get" action="">
+<form class="form-horizontal col-sm-12" role="form" ng-submit="adDonation(donation)">
+
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label">Donor #</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="15" type="donorNumber" id="donorNumber" class="form-control input-sm" placeholder="" ng-model="donation.donorNumber">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label">DIN</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="donation.donationIdentificationNumber">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label">Pack Type</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <select class="form-control input-sm" ng-model="donation.packType" ng-options="item.id as item.name for item in packTypes">
+            <option value=""></option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label">Time</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="6" type="timeStarted" id="timeStarted" class="form-control input-sm" placeholder="Start" ng-model="donation.timeStarted">
+        <input size="6" type="timeEnded" id="timeEnded" class="form-control input-sm" placeholder="End" ng-model="donation.timeEnded">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label">Weight</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="4" type="donorWeight" id="donorWeight" class="form-control input-sm" placeholder="" ng-model="donation.donorWeight"> <em> kg </em>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label">Hb</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="4" type="haemoglobinCount" id="haemoglobinCount" class="form-control input-sm" placeholder="" ng-model="donation.haemoglobinCount">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label">BP</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="1" type="bloodPressureSystolic" id="bloodPressureSystolic" class="form-control input-sm" placeholder="" ng-model="donation.bloodPressureSystolic"> / 
+        <input size="1" type="bloodPressureDiastolic" id="bloodPressureDiastolic" class="form-control input-sm" placeholder="" ng-model="donation.bloodPressureDiastolic">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label">Pulse</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="4" type="donorPulse" id="donorPulse" class="form-control input-sm" placeholder="" ng-model="donation.donorPulse">
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="form-group"> 
+    <div class="col-sm-offset-1 col-sm-4">
+      <button class="btn btn-primary" type="submit">Save</button>
+      <button class="btn btn-primary" ng-click="">Clear</button>
+    </div>
+  </div>
+
 </form>

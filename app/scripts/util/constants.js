@@ -60,5 +60,54 @@ angular.module('bsis')
     SETTINGS: 'fa-cogs',
     USER: 'fa-user',
     ACCOUNT: 'fa-cog',
-    LOGOUT: 'fa-sign-out'
+    LOGOUT: 'fa-sign-out',
+    MALE: 'fa-male',
+    FEMALE: 'fa-female',
+    CALENDAR: 'fa-calendar',
+    WARNING: 'fa-warning',
+    PLUS: 'fa-plus-square',
+    INFO: 'fa-info',
+    INFOCIRCLE: 'fa-info-circle',
+    COMMENT: 'fa-comment',
+    CIRCLE: 'fa-circle',
+    CIRCLEO: 'fa-circle-o',
+    TINT: 'fa-tint',
+    BARS: 'fa-bars',
+    ARCHIVE: 'fa-archive',
+    PHONE: 'fa-phone',
+    GLOBE: 'fa-globe'
+  })
+
+  .constant('BLOODGROUP', {
+    options: ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
+  })
+  .constant('MONTH', {
+    options: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  })
+  .constant('TITLE', {
+    options: ["Mr","Mrs","Ms","Dr","Prof"]
+  })
+  .constant('GENDER', {
+    options: ["Male","Female"]
+  })
+  .constant('PACKTYPE', {
+    "packtypes": [
+    {
+      "id": 1,
+      "name": "Single",
+      "isDeleted": false
+    },
+    {
+      "id": 2,
+      "name": "Triple",
+      "isDeleted": false
+    },
+    {
+      "id": 3,
+      "name": "Quad",
+      "isDeleted": false
+    }
+  ]
   });
+
+  

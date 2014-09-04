@@ -23,6 +23,13 @@
     <link href="http://fonts.googleapis.com/css?family=Istok+Web" rel="stylesheet" type="text/css">
 
 
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ng-table/ng-table.css" />
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -45,13 +52,6 @@
     <div ng-view></div>
     
   </div>
-  
-  <div id="footer">
-    <div class="container">
-      <hr>
-      <p>© 2014 <a href="www.jembi.org">Jembi Health Systems</a></p>
-    </div>
-  </div>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
@@ -60,6 +60,9 @@
     <script src="bower_components/angular-loader/angular-loader.js"></script>
     <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/ng-table/ng-table.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
