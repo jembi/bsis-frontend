@@ -1,0 +1,182 @@
+<form editable-form name="editableForm" onaftersave="saveDonor()">
+
+  <span class="h2"> 
+    <span editable-text="donor.firstName" e-name="firstName"  e-required>{{donor.firstName}}</span> 
+    <span editable-text="donor.lastName" e-name="lastName"  e-required>{{donor.lastName}}</span><small><em>
+    (<span editable-select="donor.title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span>. 
+    <span editable-text="donor.callingName" e-name="callingName"  e-required>{{donor.callingName}}</span>)</em></small>
+  </span>
+
+    <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
+      <span ng-switch-when="male" class="fa-stack fa-1x">
+        <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+        <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
+      </span>
+      <span ng-switch-when="female" class="fa-stack fa-1x">
+        <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+        <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
+      </span>
+    </span>
+    <span class="h3" style="vertical-align: 0.3em; padding-left:5px;">
+      <span class="fa-stack fa-1x">
+        <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+        <i class="fa fa-stack-1x fa-inverse">{{donor.bloodGroup}}</i>
+      </span>
+    </span>
+
+    <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
+      <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  
+      <span ng-show="!editableForm.$visible"> | 
+      </span>
+
+
+    <span ng-show="editableForm.$visible">
+            <em><a href="" ng-click="saveDonor()" ng-disabled="editableForm.$waiting">Save</a></em> | 
+            <em><a href="" ng-click="editableForm.$cancel()" ng-disabled="editableForm.$waiting">Cancel</a></em>
+    </span>
+
+      <em><a ng-show="!editableForm.$visible" href="">Remove</a></em></small>
+    </span>
+
+  <hr/>
+
+  <div class = "h4"> 
+    <small><em>Age: </em></small>
+    {{donor.age}} 
+    <em>(<span editable-text="donor.birthDate" e-name="birthDate"  e-required>{{donor.birthDate}}</span>)</em>
+    | 
+    <small><em>Donor Number: </em></small> {{donor.donorNumber}}
+    | 
+    <small><em>Donor Panel: </em></small> 
+    <span editable-select="donor.donorPanel" e-ng-options="item.name as item.name for item in donorPanels" e-name="donorPanel"  e-required>{{donor.donorPanel}}</span>
+    | 
+    <small><em>Preferred Language: </em></small> 
+    <span editable-select="donor.preferredLanguage" e-ng-options="item.preferredLanguage as item.preferredLanguage for item in languages" e-name="preferredLanguage">{{donor.preferredLanguage}}</span>
+  </div>
+
+</form>
+
+<hr/>
+
+<div style="padding-bottom: 5px"></div>
+
+<div class="col-sm-12">
+
+  <tabset justified="true" >
+    <tab>
+      <tab-heading>
+        <i class="fa {{icons.INFOCIRCLE}}"></i> Overview
+      </tab-heading>
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <table class="dash-table">
+            <tbody>
+              <tr>
+                <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
+                <td class="field">Due To Donate: </td>
+                <td class="value green">August 12, 2014</td>
+              </tr>
+              <tr>
+                <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
+                <td class="field">Current Deferrals: </td>
+                <td class="value red"> On Medication <em>(ends 21 September 2014)</em>
+                  <span style="font-size: 0.8em;">
+                    <em><a href=""> Edit</a></em>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="icon"></td>
+                <td class="field"></td>
+                <td class="value red"> Illness or Operation <em>(ends 12 December 2014)</em>
+                  <span style="font-size: 0.8em;">
+                    <em><a href=""> Edit</a></em>
+                  </span>
+                </td>
+              </tr>
+              <tr><td></td></tr>
+              <tr>
+                <td class="icon"><i class="fa {{icons.PLUS}}"></i></td>
+                <td class="field">Total Donations: </td>
+                <td class="value">{{donor.totalDonations}}</td>
+              </tr>
+              <tr>
+                <td class="icon"><i class="fa {{icons.CIRCLEO}}"></i></td>
+                <td class="field">Date of First Donation: </td>
+                <td class="value">{{donor.dateOfFirstDonation | date:'longDate'}}</td>
+              </tr>
+              <tr>
+                <td class="icon"><i class="fa {{icons.CIRCLE}}"></i></td>
+                <td class="field">Previous Donation: </td>
+                <td class="value">{{donor.dateOfLastDonation | date:'longDate'}} <em>(71 days ago)</em><br/>
+                    <em>Venue</em>: Maseru | <em>Pack Type</em>: Single<br/>
+                    <em>Wt</em>: 81kg | <em>BP</em>: 110/70 |
+                    <em>Hb</em>: 13.7 | <em>P</em>: 61 </td>
+              </tr>
+              <tr><td></td></tr>
+              <tr>
+                <td class="icon"><i class="fa {{icons.COMMENT}}"></i></td>
+                <td class="field">Comments: </td>
+                <td class="value">12/09/10 - Sample comment about donor  
+                    <br/>21/06/13 - Another sample comment about donor</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+    </tab>
+    <tab>
+      <tab-heading>
+        <i class="fa {{icons.BARS}}"></i> Demographics
+      </tab-heading>
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div ng-include="'views/donors/viewDonorDemographics.html'"></div>
+        </div>
+      </div>
+
+    </tab>
+
+    <tab select="getDonations()">
+      <tab-heading>
+        <i class="fa {{icons.ARCHIVE}}"></i> Donations
+      </tab-heading>
+      
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <div ng-switch on="donationsView">
+            <div ng-switch-when="viewDonations"><div ng-include="'views/donors/viewDonations.html'"></div></div>
+            <div ng-switch-when="viewDonationDetails"><div ng-include="'views/donors/viewDonationDetails.html'"></div></div>
+            <div ng-switch-default><div ng-include="'views/donors/viewDonations.html'"></div></div>
+          </div>
+
+        </div>
+      </div>
+    </tab>
+
+    <tab select="getDeferrals()">
+      <tab-heading>
+        <i class="fa {{icons.WARNING}}"></i> Deferrals
+      </tab-heading>
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+        <div ng-switch on="deferralView">
+          <div ng-switch-when="viewDeferrals"><div ng-include="'views/donors/viewDeferrals.html'"></div></div>
+          <div ng-switch-when="manageDeferral"><div ng-include="'views/donors/manageDeferral.html'"></div></div>
+          <div ng-switch-default><div ng-include="'views/donors/viewDeferrals.html'"></div></div>
+        </div>
+
+        </div>
+      </div>
+
+    </tab>
+  </tabset>
+  
+</div>

@@ -1,77 +1,105 @@
 <h3 class="page-header">Find Donor</h3>
 
-<alert type="success">Sample donor to use: fname:sample, lname: donor</alert>
-<form class="form-horizontal"  role="form" ng-submit="findDonor()">
+<form class="form-horizontal col-sm-12"  role="form" ng-submit="findDonor()">
   <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-3">
-      <input type="firstName" id="firstName" class="form-control input-md" placeholder="First "  autofocus="true" ng-model="donorSearch.firstName">
-      <input type="lastName " id="lastName" class="form-control input-md" placeholder="Last " ng-model="donorSearch.lastName">
+    <label for="name" class="col-sm-1 control-label">Name</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="15"  type="firstName" id="firstName" class="form-control input-sm" placeholder="First"  autofocus="true" ng-model="donorSearch.firstName" capitalize-first-letter>
+        <input size="15"  type="lastName " id="lastName" class="form-control input-sm" placeholder="Last" ng-model="donorSearch.lastName" capitalize-first-letter>
+        <input  type="checkbox" > Include Similar Results
+      </div>
     </div>
-  </div>  
-  <div class="form-group">
-    <label for="name" class="col-sm-2 control-label" >Donor #</label>
+  </div>
+  <div class="form-group" style="display:none;">
+    <label for="name" class="col-sm-1 control-label">Date of Birth</label>
     <div class="col-sm-3">
-      <input type="donorNum" id="donorNum" class="form-control input-md" placeholder="" ng-model="donorSearch.donorNum">
+      <div id="dob" class="form-control input-sm dob">
+        <input id="day" type="tel" ng-model="donorSearch.dob.day" maxlength="2" bsis-tab-to="month" placeholder="DD"/>/
+        <input id="month" type="tel" ng-model="donorSearch.dob.month" maxlength="2" bsis-tab-to="year" placeholder="MM"/>/
+        <input id="year" type="tel" ng-model="donorSearch.dob.year" maxlength="4" placeholder="YYYY"/>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" style="display:none;">
+      <label for="name" class="col-sm-1 control-label">Gender</label>
+    <div class="col-sm-3" style="padding-top:5px;">
+      <input type="radio"  ng-model="donorSearch.gender" value="male" /> Male 
+      <input type="radio"  ng-model="donorSearch.gender" value="female" /> Female
     </div>
   </div>
   <div class="form-group">
-    <div class=" col-sm-offset-2 col-sm-3">
-      <input  type="checkbox" > Include Similar Results
+    <label for="name" class="col-sm-1 control-label" >Donor #</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="15" type="donorNumber" id="donorNumber" class="form-control input-sm" placeholder="" ng-model="donorSearch.donorNumber">
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label" >DIN</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="15" type="din" id="din" class="form-control input-sm" placeholder="" ng-model="donorSearch.din">
+      </div>
     </div>
   </div>
   <div class="form-group"> 
-    <div class="col-sm-offset-2 col-sm-10">
-      <button class="btn btn-primary" type="submit"> Search </button>
+    <div class="col-sm-offset-1 col-sm-3">
+      <button class="btn btn-primary" type="submit">Search</button>
+      <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
     </div>
   </div>
 </form>
 
-<div ng-switch="searchResults">
-  <style type="text/css">
-    .displayTable {
-      width: 480px;
-      border-collapse: collapse;
-      text-align: left;
-      margin: 30px;
-    }
+<div ng-switch="searchResults" class="col-sm-12">
+<div style="padding-bottom: 10px"></div>
 
-    .displayTable thead {
-      border-bottom:  solid 0.08em black;
-    }
+  <div ng-switch-when="true">
+    <div class="panel panel-default">
+      <div class="panel-body">
 
-    .displayTable thead tr{
-      font-size: 1.2em;
-    }
+          <p>
+            <em> {{data.length}} donors found </em> | <em> <a href="" ng-click="addNewDonor(donorSearch)" >Add New Donor</a></em>  
+          </p>
 
-    .displayTable tbody tr:hover {
-      background-color: #f5f5f5;
-    }
+          <table ng-table="tableParams" show-filter="false" class="table">
+              <tr ng-repeat="donor in $data"
+                  ng-click="viewDonor(donor); changeSelection(donor);"
+                  ng-mouseenter="donor.$selected = true"
+                  ng-mouseleave="donor.$selected = false"
+                  ng-class="{'active': donor.$selected}">
+                  <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+                      {{donor.donorNumber}}
+                  </td>
+                  <td data-title="'First Name'" header-class="text-left" sortable="'firstName'">
+                      {{donor.firstName}}
+                  </td>
+                  <td data-title="'Last Name'" header-class="text-left" sortable="'lastName'">
+                      {{donor.lastName}}
+                  </td>
+                  <td data-title="'Gender'" header-class="text-left" sortable="'gender'">
+                      {{donor.gender}}
+                  </td>
+                  <td data-title="'Age'" header-class="text-left" class="text-center"  sortable="'age'">
+                      {{donor.age}}
+                  </td>
+                  <td data-title="'Date of Birth'" header-class="text-left" class="text-center" sortable="'birthDate'">
+                      {{donor.birthDate}}
+                  </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+  </div>
+  <div ng-switch-when="false">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>
+          <em> No donors found </em> | <em> <a href="" ng-click="addNewDonor(donorSearch)" >Add New Donor</a></em>  
+        </p>
+      </div>
+    </div>
+  </div>
 
-    .displayTable tbody tr {
-      font-size: 1.1em;
-    }
-  </style>
-  <table ng-switch-when="true" class="displayTable">
-    <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Donor #</th>
-      <th>Gender</th>
-      <th>Birthdate</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr><a href>
-      <td>{{donor.firstName}}</td>
-      <td>{{donor.lastName}}</td>
-      <td>{{donor.donorNum}}</td>
-      <td>{{donor.gender}}</td>
-      <td>{{donor.birthDate}}</td>
-      </a>
-    </tr>
-    </tbody>
-  </table>
-  <h4 ng-switch-when="false"><em>No Donors Found</em></h4>
 </div>
