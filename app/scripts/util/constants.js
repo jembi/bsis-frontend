@@ -78,6 +78,9 @@ angular.module('bsis')
     GLOBE: 'fa-globe'
   })
 
+  .constant('BLOODGROUP', {
+    options: ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
+  })
   .constant('MONTH', {
     options: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   })

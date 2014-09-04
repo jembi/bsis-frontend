@@ -1,4 +1,114 @@
 <h3 class="page-header">View / Export Donor List</h3>
 
-<form class="form-horizontal" role="form" method="get" action="">
+<form class="form-horizontal col-sm-12"  role="form" ng-submit="getDonors()">
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Donor Panel</label>
+    <div class="row col-sm-10">
+      <div class="form-inline" style="padding-left:5px;">
+        <select class="form-control input-sm" ng-model="donorList.donorPanel" ng-options="item.id as item.name for item in donorPanels">
+            <option value="" ng-disabled="false"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Blood Group</label>
+    <div class="row col-sm-10">
+      <div class="form-inline" style="padding-left:5px;">
+        <select class="form-control input-sm" ng-model="donorList.bloodGroup" ng-options="item as item for item in bloodGroups">
+            <option value="" ng-disabled="false"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Previous Donation</label>
+    <div class="row col-sm-10">
+      <div class="form-inline" style="padding-left:5px;">
+        <em>From: </em>
+        <input size="2"  type="day" id="day" class="form-control input-sm" placeholder="Day" ng-model="donorList.donationDateFrom.day">
+        <select class="form-control input-sm" ng-model="donorList.donationDateFrom.month" ng-options="item as item for item in month">
+            <option value="" ng-disabled="true">Month</option>
+        </select>
+        <input size="4" type="year" id="year" class="form-control input-sm" placeholder="Year" ng-model="donorList.donationDateFrom.year">
+
+        <em> To: </em>
+        <input size="2"  type="day" id="day" class="form-control input-sm" placeholder="Day" ng-model="donorList.donationDateTo.day">
+        <select class="form-control input-sm" ng-model="donorList.donationDateTo.month" ng-options="item as item for item in month">
+            <option value="" ng-disabled="true">Month</option>
+        </select>
+        <input size="4" type="year" id="year" class="form-control input-sm" placeholder="Year" ng-model="donorList.donationDateTo.year">
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Due To Donate</label>
+    <div class="row col-sm-10">
+      <div class="form-inline" style="padding-left:5px;">
+        <div class="input-group col-sm-2">
+          <input name="dateFrom" size="20" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="donorList.dueToDonate" is-open="dueToDonateOpen" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="false" close-text="Close"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open($event,'dueToDonateOpen')"><i class="fa {{icons.CALENDAR}}"></i></button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-3">
+      <button class="btn btn-primary" type="submit">Search</button>
+      <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+    </div>
+  </div>
 </form>
+<div ng-switch="donorListsearchResults" class="col-sm-12">
+<div style="padding-bottom: 10px"></div>
+
+  <div ng-switch-when="true">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+          <p>
+            <em> {{data.length}} donors found </em>
+          </p>
+
+          <table ng-table="donorListTableParams" show-filter="false" class="table">
+              <tr ng-repeat="donor in $data"
+                  ng-click="viewDonor(donor); changeSelection(donor);"
+                  ng-mouseenter="donor.$selected = true"
+                  ng-mouseleave="donor.$selected = false"
+                  ng-class="{'active': donor.$selected}">
+                  <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+                      {{donor.donorNumber}}
+                  </td>
+                  <td data-title="'First Name'" header-class="text-left" sortable="'firstName'">
+                      {{donor.firstName}}
+                  </td>
+                  <td data-title="'Last Name'" header-class="text-left" sortable="'lastName'">
+                      {{donor.lastName}}
+                  </td>
+                  <td data-title="'Date of Last Donation'" header-class="text-left" class="text-center" sortable="'dateOfLastDonation'">
+                      {{donor.dateOfLastDonation}}
+                  </td>
+                  <td data-title="'Blood Group'" header-class="text-left" sortable="'bloodGroup'">
+                      {{donor.bloodGroup}}
+                  </td>
+                  <td data-title="'Donor Panel'" header-class="text-left"  sortable="'donorPanel'">
+                      {{donor.donorPanel}}
+                  </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+  </div>
+  <div ng-switch-when="false">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>
+          <em> No donors found </em>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>

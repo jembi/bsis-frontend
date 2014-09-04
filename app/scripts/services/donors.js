@@ -40,6 +40,15 @@ angular.module('bsis')
         console.log("Get Donor Form Unsuccessful");
       });
     },
+    getDonorListFormFields: function(){
+      return $http.get('/getDonorListFormFields')
+        .success(function(data, status, headers, config){
+          return data;
+      })
+      .error(function(data){
+        console.log("Get Donor Form Unsuccessful");
+      });
+    },
     setDonor: function(donor) {
       donorObj = donor;
     },

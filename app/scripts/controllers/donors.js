@@ -311,6 +311,110 @@ angular.module('bsis')
 
   })
 
+  // Controller for Viewing/Exporting Donor Lists
+  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, $filter, ngTableParams) {
+
+    $scope.icons = ICONS;
+
+    var data = {};
+    $scope.data = data;
+    $scope.donorListsearchResults = '';
+
+    DonorService.getDonorListFormFields().then(function (response) {
+        var data = response.data;
+        $scope.donorPanels = data.donorPanels;
+      }, function () {
+    });
+
+    $scope.bloodGroups = BLOODGROUP.options;
+    $scope.month = MONTH.options;
+
+    $scope.getDonors = function () {
+
+      $scope.donorSearch = {
+        'firstName': 'Sample',
+        'lastName': 'Donor'
+      };
+
+      DonorService.findDonor($scope.donorSearch).then(function (response) {
+          data = response.data.donors;
+          $scope.data = data;
+          console.log("DATA.DONORS.LENGTH: ", $scope.data.length);
+          $scope.donorListsearchResults = true;
+        }, function () {
+          $scope.donorListsearchResults = false;
+      });
+    };
+
+    $scope.donorListTableParams = new ngTableParams({
+        page: 1,            // show first page
+        count: 6,          // count per page
+        sorting: {}
+    }, {
+        defaultSort: 'asc',
+        counts: [], // hide page counts control
+        total: data.length, // length of data
+        getData: function ($defer, params) {
+            var orderedData = params.sorting() ?
+              $filter('orderBy')(data, params.orderBy()) : data;
+            params.total(orderedData.length); // set total for pagination
+            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+    }); 
+
+
+
+
+    /* datePicker options */
+    $scope.dueToDonateOpen = false;
+
+    $scope.today = function() {
+      $scope.dueToDonate = new Date();
+    };
+
+    $scope.today();
+
+    $scope.clear = function () {
+      $scope.dueToDonate = new Date();
+    };
+
+    $scope.toggleMin = function() {
+      $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    $scope.toggleMin();
+
+    $scope.open = function($event, datePicker) {
+
+      console.log("datePicker: ", datePicker);
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope.closeAll();
+
+      if (datePicker === 'dateFromOpen'){
+        $scope.dueToDonateOpen = true;
+      }
+
+    };
+
+    $scope.closeAll = function() {
+        $scope.dueToDonateOpen = false;
+    };
+
+    $scope.dateOptions = {
+      formatYear: 'yy',
+      startingDay: 1
+    };
+
+    $scope.initDate = new Date();
+    //$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    //$scope.format = $scope.formats[0];
+    $scope.format = 'dd/MM/yyyy';
+
+
+
+  })
+
 ;
 
 

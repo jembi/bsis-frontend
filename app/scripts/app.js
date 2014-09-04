@@ -61,7 +61,7 @@ angular.module('bsis', [
       })
       .when('/exportDonorList', {
         templateUrl : 'views/donors.html',
-        controller  : 'DonorsCtrl',
+        controller  : 'DonorListCtrl',
         data: {
           permission: PERMISSIONS.EXPORT_DONOR_LIST
         }
