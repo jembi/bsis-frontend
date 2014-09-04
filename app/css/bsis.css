@@ -495,11 +495,27 @@ padding-right: 5px;
 .editable-input{
   padding: 0px 0px;
   font-size: 0.9em;
-  width: 110px;
+  width: 120px;
 }
-.editable-select{
+.editable-input>select{
   padding: 4px 4px;
 }
+.h2 .editable-controls>input{
+  height: 1.4em;
+}
+.h2 .editable-controls>select{
+  height: 1.5em;
+}
+.h4 .editable-controls>input{
+  height: 1.4em;
+}
+.h4 .editable-controls>select{
+  height: 1.5em;
+}
+.panel .editable-input {
+  height: 23px;
+}
+
 
 /* --> general css */
 
