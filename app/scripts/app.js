@@ -289,7 +289,6 @@ angular.module('bsis', [
       },
       link: function($scope, element, attrs) {
         $scope.open = function(event){
-          console.log("datepicker open");
           event.preventDefault();
           event.stopPropagation();
           $scope.opened = true;
