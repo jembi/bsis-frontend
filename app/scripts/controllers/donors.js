@@ -386,9 +386,12 @@ angular.module('bsis')
       return def;
     };
 
+
+
     $scope.viewDonationBatch = function () {
 
       $scope.donationBatchView = 'viewDonationBatch';
+      $scope.donorClinicTableParams.reload();
 
     };
 

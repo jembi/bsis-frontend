@@ -14,7 +14,9 @@
       "bloodPressureDiastolic": 80,
       "donorWeight": 80.7,
       "donorPulse": 87,
-      "haemoglobinCount": 13.5
+      "haemoglobinCount": 13.5,
+      "timeStarted": "12:10",
+      "notes": "sample donation comment"
     },
     {
       "donorNumber": "444422221",
@@ -30,7 +32,9 @@
       "bloodPressureDiastolic": 80,
       "donorWeight": 81.4,
       "donorPulse": 90,
-      "haemoglobinCount": 13.5
+      "haemoglobinCount": 13.5,
+      "timeStarted": "12:10",
+      "notes": "sample donation comment"
     },
     {
       "donorNumber": "271827112",
@@ -46,7 +50,9 @@
       "bloodPressureDiastolic": 80,
       "donorWeight": 80.8,
       "donorPulse": 90,
-      "haemoglobinCount": 13.5
+      "haemoglobinCount": 13.5,
+      "timeStarted": "12:10",
+      "notes": "sample donation comment"
     },
     {
       "donorNumber": "117822224",
@@ -62,7 +68,9 @@
       "bloodPressureDiastolic": 80,
       "donorWeight": 76.2,
       "donorPulse": 93,
-      "haemoglobinCount": 13.2
+      "haemoglobinCount": 13.2,
+      "timeStarted": "12:10",
+      "notes": "sample donation comment"
     },
     {
       "donorNumber": "378237821",
@@ -78,7 +86,9 @@
       "bloodPressureDiastolic": 80,
       "donorWeight": 78.1,
       "donorPulse": 84,
-      "haemoglobinCount": 13.5
+      "haemoglobinCount": 13.5,
+      "timeStarted": "12:10",
+      "notes": "sample donation comment"
     },
     {
       "donorNumber": "112676222",
@@ -94,7 +104,9 @@
       "bloodPressureDiastolic": 80,
       "donorWeight": 79.7,
       "donorPulse": 90,
-      "haemoglobinCount": 13.7
+      "haemoglobinCount": 13.7,
+      "timeStarted": "12:10",
+      "notes": "sample donation comment"
     },
     {
       "donorNumber": "1565633222",
@@ -110,7 +122,9 @@
       "bloodPressureDiastolic": 80,
       "donorWeight": 80.7,
       "donorPulse": 90,
-      "haemoglobinCount": 13.5
+      "haemoglobinCount": 13.5,
+      "timeStarted": "12:10",
+      "notes": "sample donation comment"
     },
     {
       "donorNumber": "342432432",
@@ -126,7 +140,9 @@
       "bloodPressureDiastolic": 80,
       "donorWeight": 80.8,
       "donorPulse": 90,
-      "haemoglobinCount": 13.8
+      "haemoglobinCount": 13.8,
+      "timeStarted": "12:10",
+      "notes": "sample donation comment"
     }
   ],
   "donorPanels": [
