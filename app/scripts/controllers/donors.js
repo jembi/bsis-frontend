@@ -341,10 +341,15 @@ angular.module('bsis')
 
     var data = {};
     $scope.data = data;
+    $scope.donationBatch = {
+      'date': '03/09/2014',
+      'venue': 'Maseru'
+    };
 
     DonorService.getDonationBatch().then(function (response) {
       data = response.data.donations;
       $scope.data = data;
+      $scope.donorPanels = response.data.donorPanels;
       }, function () {
     });
 
@@ -384,7 +389,7 @@ angular.module('bsis')
     $scope.viewDonationBatch = function () {
 
       $scope.donationBatchView = 'viewDonationBatch';
-      
+
     };
 
     $scope.viewDonationSummary = function (din) {

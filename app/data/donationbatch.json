@@ -128,5 +128,40 @@
       "donorPulse": 90,
       "haemoglobinCount": 13.8
     }
+  ],
+  "donorPanels": [
+    {
+      "id": 3,
+      "name": "Maseru",
+      "isCollectionCenter": true,
+      "isCollectionSite": true,
+      "isUsageSite": true,
+      "isMobileSite": false,
+      "isDonorPanel": true,
+      "isDeleted": false,
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "name": "Mohale's Hoek",
+      "isCollectionCenter": true,
+      "isCollectionSite": false,
+      "isUsageSite": false,
+      "isMobileSite": false,
+      "isDonorPanel": true,
+      "isDeleted": false,
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "name": "Leribe",
+      "isCollectionCenter": true,
+      "isCollectionSite": true,
+      "isUsageSite": true,
+      "isMobileSite": false,
+      "isDonorPanel": true,
+      "isDeleted": false,
+      "notes": ""
+    }
   ]
 }
