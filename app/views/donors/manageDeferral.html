@@ -3,33 +3,13 @@
     <label for="name" class="col-sm-1 control-label" >Period</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-
-
-        <div class="input-group col-sm-2">
-          <input name="dateFrom" size="20" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="deferral.deferredOn" is-open="dateFromOpen" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open($event,'dateFromOpen')"><i class="fa {{icons.CALENDAR}}"></i></button>
-          </span>
-        </div>
-
-
-
+        <dateselect ng-model="deferral.deferredOn" date-options="dateOptions" format="format" opened="dateFromOpen" cal-icon="icons.CALENDAR">
+        </dateselect>
         <span>
         <em> To: </em>
         </span>
-
-
-
-        <div class="input-group col-sm-2">
-          <input name="dateTo" size="20" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="deferral.deferredUntil" is-open="dateToOpen" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open($event,'dateToOpen')"><i class="fa {{icons.CALENDAR}}"></i></button>
-          </span>
-        </div>
-
-
-
-
+        <dateselect ng-model="deferral.deferredUntil" date-options="dateOptions" format="format" opened="dateToOpen" cal-icon="icons.CALENDAR">
+        </dateselect>
       </div>
     </div>
   </div>
