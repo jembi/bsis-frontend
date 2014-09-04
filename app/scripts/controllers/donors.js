@@ -312,7 +312,7 @@ angular.module('bsis')
   })
 
   // Controller for Viewing/Exporting Donor Lists
-  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, $filter, ngTableParams) {
+  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
 
@@ -362,56 +362,18 @@ angular.module('bsis')
         }
     }); 
 
-
-
-
-    /* datePicker options */
-    $scope.dueToDonateOpen = false;
-
-    $scope.today = function() {
-      $scope.dueToDonate = new Date();
-    };
-
-    $scope.today();
-
-    $scope.clear = function () {
-      $scope.dueToDonate = new Date();
-    };
-
-    $scope.toggleMin = function() {
-      $scope.minDate = $scope.minDate ? null : new Date();
-    };
-    $scope.toggleMin();
-
-    $scope.open = function($event, datePicker) {
-
-      console.log("datePicker: ", datePicker);
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope.closeAll();
-
-      if (datePicker === 'dateFromOpen'){
-        $scope.dueToDonateOpen = true;
-      }
-
-    };
-
-    $scope.closeAll = function() {
-        $scope.dueToDonateOpen = false;
-    };
-
     $scope.dateOptions = {
-      formatYear: 'yy',
-      startingDay: 1
+      'formatYear': 'yy',
+      'startingDay': 1,
+      'show-weeks': false
     };
-
-    $scope.initDate = new Date();
-    //$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    //$scope.format = $scope.formats[0];
     $scope.format = 'dd/MM/yyyy';
+    $scope.initDate = new Date();
+    $scope.calIcon = 'fa-calendar';
 
-
+    $scope.donationDateFromOpen = false;
+    $scope.donationDateToOpen = false;
+    $scope.dueToDonateOpen = false;
 
   })
 

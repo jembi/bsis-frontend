@@ -25,19 +25,12 @@
     <label for="name" class="col-sm-2 control-label">Previous Donation</label>
     <div class="row col-sm-10">
       <div class="form-inline" style="padding-left:5px;">
-        <em>From: </em>
-        <input size="2"  type="day" id="day" class="form-control input-sm" placeholder="Day" ng-model="donorList.donationDateFrom.day">
-        <select class="form-control input-sm" ng-model="donorList.donationDateFrom.month" ng-options="item as item for item in month">
-            <option value="" ng-disabled="true">Month</option>
-        </select>
-        <input size="4" type="year" id="year" class="form-control input-sm" placeholder="Year" ng-model="donorList.donationDateFrom.year">
-
-        <em> To: </em>
-        <input size="2"  type="day" id="day" class="form-control input-sm" placeholder="Day" ng-model="donorList.donationDateTo.day">
-        <select class="form-control input-sm" ng-model="donorList.donationDateTo.month" ng-options="item as item for item in month">
-            <option value="" ng-disabled="true">Month</option>
-        </select>
-        <input size="4" type="year" id="year" class="form-control input-sm" placeholder="Year" ng-model="donorList.donationDateTo.year">
+        <span><em>From: </em></span>
+        <dateselect ng-model="donorList.donationDateFrom" date-options="dateOptions" format="format" opened="donationDateFromOpen" cal-icon="icons.CALENDAR">
+        </dateselect>
+        <span><em> To: </em></span>
+        <dateselect ng-model="donorList.donationDateTo" date-options="dateOptions" format="format" opened="donationDateToOpen" cal-icon="icons.CALENDAR">
+        </dateselect>
       </div>
     </div>
   </div>
@@ -45,12 +38,8 @@
     <label for="name" class="col-sm-2 control-label">Due To Donate</label>
     <div class="row col-sm-10">
       <div class="form-inline" style="padding-left:5px;">
-        <div class="input-group col-sm-2">
-          <input name="dateFrom" size="20" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="donorList.dueToDonate" is-open="dueToDonateOpen" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="false" close-text="Close"/>
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open($event,'dueToDonateOpen')"><i class="fa {{icons.CALENDAR}}"></i></button>
-          </span>
-        </div>
+        <dateselect ng-model="donorList.dueToDonate" date-options="dateOptions" format="format" opened="dueToDonateOpen" cal-icon="icons.CALENDAR">
+        </dateselect>
       </div>
     </div>
   </div>
