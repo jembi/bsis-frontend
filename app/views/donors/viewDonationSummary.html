@@ -1,0 +1,59 @@
+<span style="float: right; padding-right: 15px; font-size: 0.9em">
+  <em><a href="" ng-click="viewDonationBatch()">Done</a></em>
+</span>
+<div class="row equal">
+<div class="col-sm-10" style="height:100%; border-right: 2px solid #f5f5f5; ">
+  <table class="dash-table">
+    <tbody>
+      <tr>
+        <td class="field">Donor #: </td>
+        <td class="value">{{donation.donationIdentificationNumber}}</td>
+      </tr>
+      <tr>
+        <td class="field">DIN: </td>
+        <td class="value">{{donation.donationIdentificationNumber}}</td>
+      </tr>
+      <tr>
+        <td class="field">Batch: </td>
+        <td class="value">{{donation.collectionBatch}}</td>
+      </tr>
+      <tr>
+        <td class="field">Date Bled: </td>
+        <td class="value">{{donation.collectedOn}}</td>
+      </tr>
+      <tr>
+        <td class="field">Time Bled: </td>
+        <td class="value">12:20:00</td>
+      </tr>
+      <tr>
+        <td class="field">Venue: </td>
+        <td class="value">{{donation.collectionSite}}</td>
+      </tr>
+      <tr>
+        <td class="field">Pack Type: </td>
+        <td class="value">{{donation.bloodBagType}}</td>
+      </tr>
+      <tr>
+        <td class="field">Pulse: </td>
+        <td class="value">{{donation.donorPulse}}</td>
+      </tr>
+      <tr>
+        <td class="field">Hb:: </td>
+        <td class="value">{{donation.haemoglobinCount}}</td>
+      </tr>
+      <tr>
+        <td class="field">BP: </td>
+        <td class="value">{{donation.bloodPressureSystolic}}/{{donation.bloodPressureDiastolic}}</td>
+      </tr>
+      <tr>
+        <td class="field">Weight: </td>
+        <td class="value">{{donation.donorWeight}}</td>
+      </tr>
+      <tr>
+        <td class="field">Comment: </td>
+        <td class="valuesml">sample donation comment</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

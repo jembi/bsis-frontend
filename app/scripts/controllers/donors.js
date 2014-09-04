@@ -224,12 +224,8 @@ angular.module('bsis')
     };
 
     $scope.viewDonationDetails = function (din) {
-      console.log("din: ", din);
       $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
-      console.log("$scope.donation: ", $scope.donation);
-
       $scope.donationsView = 'viewDonationDetails';
-
     };
 
   })
@@ -347,8 +343,8 @@ angular.module('bsis')
     $scope.data = data;
 
     DonorService.getDonationBatch().then(function (response) {
-        data = response.data.donations;
-        $scope.data = data;
+      data = response.data.donations;
+      $scope.data = data;
       }, function () {
     });
 
@@ -373,17 +369,28 @@ angular.module('bsis')
     });
 
     $scope.packTypeFilter = function(column) {
-        var def = $q.defer();
-        var arr = [];
-        angular.forEach(PACKTYPE.packtypes, function(item){
-          arr.push({
-              'id': item.name,
-              'title': item.name
-          });
+      var def = $q.defer();
+      var arr = [];
+      angular.forEach(PACKTYPE.packtypes, function(item){
+        arr.push({
+            'id': item.name,
+            'title': item.name
         });
-        def.resolve(arr);
-        return def;
-      };
+      });
+      def.resolve(arr);
+      return def;
+    };
+
+    $scope.viewDonationBatch = function () {
+
+      $scope.donationBatchView = 'viewDonationBatch';
+      
+    };
+
+    $scope.viewDonationSummary = function (din) {
+      $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
+      $scope.donationBatchView = 'viewDonationSummary';
+    };
 
   })
 
