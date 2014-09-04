@@ -273,4 +273,35 @@ angular.module('bsis', [
    };
   })
 
+  /* Custom datepicker directive, makes use of angular-ui datepicker */
+  .directive("dateselect", function(){
+    return {
+      restrict: "E",
+      scope:{
+        ngModel: "=",
+        dateOptions: "=",
+        minDate: "=",
+        maxDate: "=",
+        opened: "=",
+        format: "=",
+        initDate: "@",
+        calIcon: "="
+      },
+      link: function($scope, element, attrs) {
+        $scope.open = function(event){
+          console.log("datepicker open");
+          event.preventDefault();
+          event.stopPropagation();
+          $scope.opened = true;
+          $scope.calIcon = 'fa-calendar';
+        };
+
+        $scope.clear = function () {
+          $scope.ngModel = null;
+        };
+      },
+      templateUrl: 'views/template/dateselect.html'
+    };
+  })
+
 ;
