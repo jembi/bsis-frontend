@@ -19,6 +19,12 @@ package { "apache2": }
 package { "git": }
 package { "libfontconfig1": }
 
+#Ensure /var/www/bsis directory exists
+file {
+"/var/www/bsis":
+	ensure => "directory",
+}
+
 class { "nodejs":
 	version => "stable",
 }
@@ -45,6 +51,7 @@ exec { "install-grunt":
 
 exec { "bower-install":
 	cwd => "$source_dir",
+	environment => ["HOME=/root"],
 	command => "bower --allow-root install",
 	require => Exec["install-bower"],
 }
@@ -58,7 +65,7 @@ exec { "grunt-build":
 
 exec { "copy-to-apache":
 	cwd => "$source_dir",
-	command => "cp -R dist/* /var/www/html",
+	command => "cp -R dist/* /var/www/bsis",
 	require => [ Exec["grunt-build"], Package["apache2"] ],
 }
 

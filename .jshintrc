@@ -3,5 +3,7 @@
   "globals": {
     "angular": false
   },
-  "-W117" : true /* hide "... is not defined" warnings */
+  "-W117" : true, /* hide "... is not defined" warnings */
+  "-W055" : true /* hide "... constructor name should start with an uppercase letter" warnings caused by ngTable */
+
 }
