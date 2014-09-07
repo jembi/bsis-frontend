@@ -19,9 +19,9 @@ package { "apache2": }
 package { "git": }
 package { "libfontconfig1": }
 
-#Ensure /var/www/html directory exists
+#Ensure /var/www/bsis directory exists
 file {
-"/var/www/html":
+"/var/www/bsis":
 	ensure => "directory",
 }
 
@@ -65,7 +65,7 @@ exec { "grunt-build":
 
 exec { "copy-to-apache":
 	cwd => "$source_dir",
-	command => "cp -R dist/* /var/www/html",
+	command => "cp -R dist/* /var/www/bsis",
 	require => [ Exec["grunt-build"], Package["apache2"] ],
 }
 
