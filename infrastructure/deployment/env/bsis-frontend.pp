@@ -45,6 +45,7 @@ exec { "install-grunt":
 
 exec { "bower-install":
 	cwd => "$source_dir",
+	environment => ["HOME=/root"],
 	command => "bower --allow-root install",
 	require => Exec["install-bower"],
 }
