@@ -19,6 +19,12 @@ package { "apache2": }
 package { "git": }
 package { "libfontconfig1": }
 
+#Ensure /var/www/html directory exists
+file {
+"/var/www/html":
+	ensure => "directory",
+}
+
 class { "nodejs":
 	version => "stable",
 }
