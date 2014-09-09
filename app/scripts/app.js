@@ -255,7 +255,7 @@ angular.module('bsis', [
   }])
 
   /* Custom directive to capitalize the first lettter of input fields */
-  .directive('capitalizeFirstLetter', function($parse) {
+  .directive('capitalizeFirstLetter', ['$parse', function($parse) {
    return {
      require: 'ngModel',
      link: function(scope, element, attrs, modelCtrl) {
@@ -271,7 +271,7 @@ angular.module('bsis', [
            capitalize($parse(attrs.ngModel)(scope)); // capitalize first letter
        }
    };
-  })
+  }])
 
   /* Custom datepicker directive, makes use of angular-ui datepicker */
   .directive("dateselect", function(){

@@ -232,6 +232,7 @@ angular.module('bsis')
 
   // Controller for Adding Donors
   .controller('AddDonorCtrl', function ($scope, $location, DonorService, MONTH, TITLE, GENDER) {
+
       DonorService.addDonor().then(function (response) {
         var data = response.data;
         $scope.addressTypes = data.addressTypes;
@@ -242,8 +243,9 @@ angular.module('bsis')
         $scope.donor.firstName = $scope.searchDonor.firstName;
         $scope.donor.lastName = $scope.searchDonor.lastName;
 
-        console.log("AddDonorCtrl firstName: ", $scope.searchDonor.firstName);
-        console.log("AddDonorCtrl lastName: ", $scope.searchDonor.lastName);
+        // clear $scope.searchDonor fields after assigning them to $scope.donor 
+        $scope.searchDonor.firstName = '';
+        $scope.searchDonor.lastName = '';
 
         $scope.title = TITLE.options;
         $scope.month = MONTH.options;
