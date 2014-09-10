@@ -7,8 +7,7 @@ angular.module('bsis')
        return $http.get('/getComponentsByDIN', {params: { din: donationIdentificationNumber }})
         .success(function(data, status, headers, config){
         if (donationIdentificationNumber.Error === undefined) {
-          console.log("data.components: ", data.components);
-          return data.components;
+          return data;
         }
       })
       .error(function(data){
