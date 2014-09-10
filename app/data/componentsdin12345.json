@@ -9,5 +9,16 @@
       "expiresOn": "15/11/2014",
       "parentComponent": ""
     }
+  ],
+  "componentTypes": [
+    {
+      "name": "Red Cell Concentrate"
+    },
+    {
+      "name": "Fresh Frozen Plasma"
+    },
+    {
+      "name": "Buffy Coat"
+    }
   ]
 }
