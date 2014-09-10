@@ -24,13 +24,28 @@ angular.module('bsis')
     $scope.component = {};
 
     $scope.componentsSearch = {
-      donationIdentificationNumber: ''
+      donationIdentificationNumber: '',
+      startDate: '',
+      endDate: ''
     };
     $scope.searchResults = '';
+
+    $scope.dateOptions = {
+      'formatYear': 'yy',
+      'startingDay': 1,
+      'show-weeks': false
+    };
+    $scope.format = 'dd/MM/yyyy';
+    $scope.initDate = new Date();
+    $scope.calIcon = 'fa-calendar';
+
+    $scope.startDateOpen = false;
+    $scope.endDateOpen = false;
 
     $scope.clear = function () {
       $scope.componentsSearch = {};
       $scope.searchResults = '';
+      //$scope.componentsSearchStartDate = '';
     };
 
     $scope.clearProcessComponentForm = function () {
