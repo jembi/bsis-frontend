@@ -277,8 +277,11 @@ angular.module('bsis', [
   .directive("dateselect", function(){
     return {
       restrict: "E",
+      require: "^ngModel",
+      replace: "true",
       scope:{
         ngModel: "=",
+        ngRequired: "=",
         dateOptions: "=",
         minDate: "=",
         maxDate: "=",
