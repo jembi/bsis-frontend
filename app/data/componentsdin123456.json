@@ -36,5 +36,25 @@
       "expiresOn": "15/11/2014",
       "parentComponent": "111"
     }
+  ],
+  "discardReasons": [
+    {
+      "name": "Incomplete Donation"
+    },
+    {
+      "name": "Reactive TTI"
+    },
+    {
+      "name": "Expired"
+    },
+    {
+      "name": "Storage Problems"
+    },
+    {
+      "name": "Transport Problems"
+    },
+    {
+      "name": "Processing Problems"
+    }
   ]
 }
