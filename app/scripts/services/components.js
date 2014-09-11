@@ -17,7 +17,6 @@ angular.module('bsis')
     getComponentsSummary: function () {
       return $http.get('/getComponentsSummary')
         .success(function(data, status, headers, config){
-          console.log("service - data: ",data);
           return data;
       })
       .error(function(data){

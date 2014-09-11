@@ -84,11 +84,11 @@ angular.module('bsis')
 
     };
 
-    $scope.getComponentsSummary = function () {   
+    $scope.getComponentsSummary = function () {
+      $scope.componentsView = 'viewDonations';
+
       ComponentService.getComponentsSummary().then(function (response) {
           data = response.data.donations;
-          console.log("data: ",data);
-          console.log("response.data.donations: ",response.data.donations);
           $scope.data = data;
           $scope.searchResults = true;
         }, function () {
@@ -114,8 +114,13 @@ angular.module('bsis')
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
-
     };
+
+    $scope.viewComponents = function (din) {
+      $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
+      $scope.componentsView = 'viewComponents';
+    };
+
 
   })
 ;
