@@ -22,6 +22,15 @@ angular.module('bsis')
       .error(function(data){
         console.log("Find Components Summary Unsuccessful");
       });
+    },
+    getDiscardsSummary: function () {
+      return $http.get('/getDiscardsSummary')
+        .success(function(data, status, headers, config){
+          return data;
+      })
+      .error(function(data){
+        console.log("Find Discards Summary Unsuccessful");
+      });
     }
   };
 });

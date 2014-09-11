@@ -58,6 +58,9 @@ var mockAPI = angular.module('mockAPI', ['ngMockE2E', 'ngResource']);
     // getComponentsSummary mock
     $httpBackend.whenGET('/getComponentsSummary').respond($resource('data/componentssummary.json').get());
 
+    // getDiscardsSummary mock
+    $httpBackend.whenGET('/getDiscardsSummary').respond($resource('data/discardssummary.json').get());
+
     // Don't mock html views
     $httpBackend.whenGET(/views\/\w+.*/).passThrough();
     $httpBackend.whenGET(/^\w+.*/).passThrough();
