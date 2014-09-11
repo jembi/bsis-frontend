@@ -50,6 +50,8 @@ var mockAPI = angular.module('mockAPI', ['ngMockE2E', 'ngResource']);
 
     // getComponentsByDIN mock (din=12345)
     $httpBackend.whenGET('/getComponentsByDIN?din=12345').respond($resource('data/componentsdin12345.json').get());
+    // getComponentsByDIN mock (din=123456)
+    $httpBackend.whenGET('/getComponentsByDIN?din=123456').respond($resource('data/componentsdin123456.json').get());
     // pass through all other /getComponentsByDIN requests (will respond with a 404 (Not Found))
     $httpBackend.whenGET(/getComponentsByDIN?\w+.*/).passThrough();
 
