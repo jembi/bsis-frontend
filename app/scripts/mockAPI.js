@@ -53,6 +53,8 @@ var mockAPI = angular.module('mockAPI', ['ngMockE2E', 'ngResource']);
     // pass through all other /getComponentsByDIN requests (will respond with a 404 (Not Found))
     $httpBackend.whenGET(/getComponentsByDIN?\w+.*/).passThrough();
 
+    // getComponentsSummary mock
+    $httpBackend.whenGET('/getComponentsSummary').respond($resource('data/componentssummary.json').get());
 
     // Don't mock html views
     $httpBackend.whenGET(/views\/\w+.*/).passThrough();
