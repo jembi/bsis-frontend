@@ -96,6 +96,20 @@ angular.module('bsis', [
           permission: PERMISSIONS.VIEW_COMPONENTS
         }
       })
+      .when('/discardComponents', {
+        templateUrl : 'views/components.html',
+        controller  : 'DiscardsCtrl',
+        data: {
+          permission: PERMISSIONS.VIEW_COMPONENTS
+        }
+      })
+      .when('/findDiscards', {
+        templateUrl : 'views/components.html',
+        controller  : 'DiscardsCtrl',
+        data: {
+          permission: PERMISSIONS.VIEW_COMPONENTS
+        }
+      })
 
       // TESTING URLs
       .when('/testing', {
