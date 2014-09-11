@@ -1,18 +1,19 @@
 <span class="input-group col-sm-2">
   <input 
     type="text"
-    ng-model="dt"
-    class="form-control" 
-    datepicker-popup="{{format}}"  
+    ng-model='ngModel'
+    class="form-control"
+    datepicker-popup="{{format}}"
     is-open="opened" 
-    min-date="minDate"
-    max-date="maxDate"
-    datepicker-options="dateOptions" 
-    date-disabled="disabled(date, mode)" 
-    ng-required="false" 
+    min-date="{{minDate}}"
+    max-date="{{maxDate}}"
+    datepicker-options="{{dateOptions}}"
+    date-disabled="disabled(date, mode)"
+    ng-required="{{ngRequired}}"
     close-text="Close"
   >
   <span class="input-group-btn">
     <button class="btn btn-default" ng-click="open($event)"><i class="fa {{calIcon}}"></i></button>
   </span>
+
 </span>

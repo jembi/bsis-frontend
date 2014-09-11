@@ -47,7 +47,9 @@ angular.module('bsis')
   // else if on components page, set menu to COMPONENTS
   else if(~$location.path().indexOf('components')        ||
       ~$location.path().indexOf('findComponents')   ||
-      ~$location.path().indexOf('recordComponents')
+      ~$location.path().indexOf('recordComponents') ||
+      ~$location.path().indexOf('findDiscards')   ||
+      ~$location.path().indexOf('discardComponents')
     ){
       $scope.currentSection = 'COMPONENTS';
       $scope.sectionList = [
@@ -355,7 +357,9 @@ angular.module('bsis')
     // else if on components page, set menu to COMPONENTS
     else if(~$location.path().indexOf('components')        ||
         ~$location.path().indexOf('findComponents')   ||
-        ~$location.path().indexOf('recordComponents')
+        ~$location.path().indexOf('recordComponents') ||
+        ~$location.path().indexOf('findDiscards')   ||
+        ~$location.path().indexOf('discardComponents')
     ){
       $scope.currentSection = 'COMPONENTS';
       $scope.sectionList = [

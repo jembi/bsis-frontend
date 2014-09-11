@@ -96,6 +96,20 @@ angular.module('bsis', [
           permission: PERMISSIONS.VIEW_COMPONENTS
         }
       })
+      .when('/discardComponents', {
+        templateUrl : 'views/components.html',
+        controller  : 'ComponentsCtrl',
+        data: {
+          permission: PERMISSIONS.VIEW_COMPONENTS
+        }
+      })
+      .when('/findDiscards', {
+        templateUrl : 'views/components.html',
+        controller  : 'ComponentsCtrl',
+        data: {
+          permission: PERMISSIONS.VIEW_COMPONENTS
+        }
+      })
 
       // TESTING URLs
       .when('/testing', {
@@ -277,8 +291,11 @@ angular.module('bsis', [
   .directive("dateselect", function(){
     return {
       restrict: "E",
+      require: "^ngModel",
+      replace: "true",
       scope:{
         ngModel: "=",
+        ngRequired: "=",
         dateOptions: "=",
         minDate: "=",
         maxDate: "=",
