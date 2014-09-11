@@ -14,6 +14,8 @@
        <div ng-switch on="selection">
           <div ng-switch-when="/recordComponents"><div ng-include="'views/components/recordComponents.html'"></div></div>
           <div ng-switch-when="/findComponents"><div ng-include="'views/components/findComponents.html'"></div></div>
+          <div ng-switch-when="/discardComponents"><div ng-include="'views/components/discardComponents.html'"></div></div>
+          <div ng-switch-when="/findDiscards"><div ng-include="'views/components/findDiscards.html'"></div></div>
           <div ng-switch-default><div ng-include="'views/components/recordComponents.html'"></div></div>
         </div>
 
