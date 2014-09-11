@@ -121,6 +121,10 @@ angular.module('bsis')
       $scope.componentsView = 'viewComponents';
     };
 
+    $scope.setcomponentsView = function (view) {
+      $scope.componentsView = view;
+    };
+
 
   })
 ;
