@@ -1,0 +1,28 @@
+<span style="float: right; padding-right: 15px; font-size: 0.9em">
+  <em><a href="" ng-click="setcomponentsView('viewDonations');">Done</a></em>
+</span>
+
+<span class="h3"> 
+  <small><em>DIN:</em></small> {{donation.donationIdentificationNumber}}
+</span> 
+
+<table class="dash-table" style="width:70%;">
+  <thead>
+    <tr><td></td></tr>
+    <tr>
+      <th>Component Type</th>
+      <th>Status</th>
+      <th class="center">Created On</th>
+      <th class="center">Expires On</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td></td></tr>
+    <tr ng-repeat="component in donation.components">
+      <td class="value">{{component.componentType}}</td>
+      <td class="value">{{component.status}}</td>
+      <td class="value center">{{component.createdOn}}</td>
+      <td class="value center">{{component.expiresOn}}</td>
+    </tr>
+  </tbody>
+</table>
