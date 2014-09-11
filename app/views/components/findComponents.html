@@ -1,6 +1,6 @@
 <h3 class="page-header">View Components</h3>
 
-<form class="form-horizontal col-sm-12"  role="form" ng-submit="getComponentsByDIN()">
+<form class="form-horizontal col-sm-12"  role="form" ng-submit="getComponentsSummary()">
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label" >DIN</label>
     <div class="row col-sm-11">
@@ -38,23 +38,25 @@
     <div class="panel panel-default">
       <div class="panel-body">
 
-        <table ng-table="componentsTableParams" show-filter="false" class="table">
-          <tr ng-repeat="component in $data"
-              ng-click="changeSelection(component);"
-              ng-mouseenter="component.$selected = true"
-              ng-mouseleave="component.$selected = false"
-              ng-class="{'active': component.$selected}">
-              <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
-                  {{component.componentType}}
-              </td>
-              <td data-title="'Status'" header-class="text-left" sortable="'status'">
-                  {{component.status}}
+        <table ng-table="componentsSummaryTableParams" show-filter="false" class="table">
+          <tr ng-repeat="donation in $data"
+              ng-click="changeSelection(donation);"
+              ng-mouseenter="donation.$selected = true"
+              ng-mouseleave="donation.$selected = false"
+              ng-class="{'active': donation.$selected}">
+              <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
+                  {{donation.donationIdentificationNumber}}
               </td>
               <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
-                  {{component.createdOn}}
+                  {{donation.createdOn}}
               </td>
-              <td data-title="'Expires On'" header-class="text-left" class="text-center" sortable="'expiresOn'">
-                  {{component.expiresOn}}
+              <td data-title="'Components Produced'" header-class="text-left" sortable="'componentsProduced'">
+                  {{donation.componentsProduced}}
+              </td>
+              <td data-title="''" style="width:10%;" class="text-center">
+                <span style="font-size: 0.9em;">
+                  <em><a ng-click="viewComponents(donation.donationIdentificationNumber)"> View</a></em>
+                </span>
               </td>
           </tr>
         </table>

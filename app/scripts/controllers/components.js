@@ -84,5 +84,38 @@ angular.module('bsis')
 
     };
 
+    $scope.getComponentsSummary = function () {   
+      ComponentService.getComponentsSummary().then(function (response) {
+          data = response.data.donations;
+          console.log("data: ",data);
+          console.log("response.data.donations: ",response.data.donations);
+          $scope.data = data;
+          $scope.searchResults = true;
+        }, function () {
+          $scope.searchResults = false;
+      });
+
+      $scope.componentsSummaryTableParams = new ngTableParams({
+        page: 1,            // show first page
+        count: 6,          // count per page
+        filter: {},
+        sorting: {}
+      }, 
+      {
+        defaultSort: 'asc',
+        counts: [], // hide page counts control
+        total: data.length, // length of data
+        getData: function ($defer, params) {
+          var filteredData = params.filter() ?
+            $filter('filter')(data, params.filter()) : data;
+          var orderedData = params.sorting() ?
+            $filter('orderBy')(filteredData, params.orderBy()) : data;
+          params.total(orderedData.length); // set total for pagination
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
+
+    };
+
   })
 ;
