@@ -22,6 +22,7 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
     $scope.component = {};
+    $scope.discard = {};
 
     $scope.componentsSearch = {
       donationIdentificationNumber: '',
@@ -52,11 +53,16 @@ angular.module('bsis')
       $scope.component = {};
     };
 
+    $scope.clearDiscardComponentForm = function () {
+      $scope.discard = {};
+    };
+
     $scope.getComponentsByDIN = function () {   
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber).then(function (response) {
           data = response.data.components;
           $scope.data = data;
           $scope.componentTypes = response.data.componentTypes;
+          $scope.discardReasons = response.data.discardReasons;
           $scope.searchResults = true;
         }, function () {
           $scope.searchResults = false;

@@ -98,7 +98,7 @@ angular.module('bsis', [
       })
       .when('/discardComponents', {
         templateUrl : 'views/components.html',
-        controller  : 'DiscardsCtrl',
+        controller  : 'ComponentsCtrl',
         data: {
           permission: PERMISSIONS.VIEW_COMPONENTS
         }
