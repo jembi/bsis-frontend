@@ -133,9 +133,4 @@ angular.module('bsis')
 
 
   })
-
-  .controller('DiscardsCtrl', function ($scope, $location, ComponentService, ICONS, $filter, ngTableParams) {
-
-    $scope.icons = ICONS;
-  })
 ;

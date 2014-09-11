@@ -105,7 +105,7 @@ angular.module('bsis', [
       })
       .when('/findDiscards', {
         templateUrl : 'views/components.html',
-        controller  : 'DiscardsCtrl',
+        controller  : 'ComponentsCtrl',
         data: {
           permission: PERMISSIONS.VIEW_COMPONENTS
         }
