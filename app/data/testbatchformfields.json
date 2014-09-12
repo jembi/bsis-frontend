@@ -1,0 +1,16 @@
+{
+  "testBatches": [
+    {
+      "batchNumber": "1000334",
+      "createdOn": "09/10/2014",
+      "numSamples": "10",
+      "status": "Complete"
+    },
+    {
+      "batchNumber": "1000335",
+      "createdOn": "10/10/2014",
+      "numSamples": "22",
+      "status": "Incomplete"
+    }
+  ]
+}
