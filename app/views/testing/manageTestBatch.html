@@ -1,4 +1,30 @@
 <h3 class="page-header">Manage Test Batches</h3>
 
-<form class="form-horizontal" role="form" method="get" action="">
-</form>
+<h4>Open Test Batches</h4>
+<div style="padding-bottom: 10px"></div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <table ng-table="testBatchTableParams" show-filter="false" class="table">
+          <tr ng-repeat="testBatch in $data"
+              ng-click=""
+              ng-mouseenter="testBatch.$selected = true"
+              ng-mouseleave="testBatch.$selected = false"
+              ng-class="{'active': testBatch.$selected}">
+              <td data-title="'Batch Number'" header-class="text-left" class="text-center" sortable="'batchNumber'">
+                  {{testBatch.batchNumber}}
+              </td>
+              <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
+                  {{testBatch.createdOn}}
+              </td>
+              <td data-title="'Test Samples'" header-class="text-left" sortable="'numSamples'">
+                  {{testBatch.numSamples}}
+              </td>
+              <td data-title="'Status'" header-class="text-left" class="text-center" sortable="'status'">
+                  {{testBatch.status}}
+              </td>
+          </tr>
+        </table>
+
+      </div>
+    </div>

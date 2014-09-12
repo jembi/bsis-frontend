@@ -6,6 +6,7 @@ angular.module('bsis')
     $scope.icons = ICONS;
     var data = {};
     $scope.data = data;
+    $scope.searchResults = '';
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
@@ -25,12 +26,14 @@ angular.module('bsis')
       TestingService.getTestBatchFormFields().then(function (response) {
           data = response.data.testBatches;
           $scope.data = data;
+          $scope.searchResults = true;
         }, function () {
+          $scope.searchResults = false;
       });
 
       $scope.testBatchTableParams = new ngTableParams({
         page: 1,            // show first page
-        count: 6,          // count per page
+        count: 4,          // count per page
         filter: {},
         sorting: {}
       }, 
