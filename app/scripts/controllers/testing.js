@@ -22,37 +22,46 @@ angular.module('bsis')
       }
     };
 
-    $scope.getTestBatchFormFields = function () {
-      TestingService.getTestBatchFormFields().then(function (response) {
-          data = response.data.testBatches;
-          $scope.data = data;
-          $scope.searchResults = true;
-        }, function () {
-          $scope.searchResults = false;
-      });
+  })
 
-      $scope.testBatchTableParams = new ngTableParams({
-        page: 1,            // show first page
-        count: 4,          // count per page
-        filter: {},
-        sorting: {}
-      }, 
-      {
-        defaultSort: 'asc',
-        counts: [], // hide page counts control
-        total: data.length, // length of data
-        getData: function ($defer, params) {
-          var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
-          params.total(orderedData.length); // set total for pagination
-          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+  .controller('TestBatchCtrl', function ($scope, $location, TestingService, ICONS, $filter, ngTableParams) {
+
+    var data = {};
+    $scope.data = data;
+    $scope.openTestBatches = false;
+
+    TestingService.getTestBatchFormFields().then(function (response) {
+        data = response.data.testBatches;
+        $scope.data = data;
+        if (data.length > 0){
+          $scope.openTestBatches = true;
         }
-      });
+        else {
+          $scope.openTestBatches = false;
+        }
+      }, function () {
+        $scope.openTestBatches = false;
+    });
 
-    };
+    $scope.testBatchTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 4,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
 
-
-
-  });
+  })
+;

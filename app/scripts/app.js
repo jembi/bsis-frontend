@@ -128,7 +128,7 @@ angular.module('bsis', [
       })
       .when('/manageTestBatch', {
         templateUrl : 'views/testing.html',
-        controller  : 'TestingCtrl',
+        controller  : 'TestBatchCtrl',
         data: {
           permission: PERMISSIONS.VIEW_TESTING
         }
