@@ -19,11 +19,16 @@
               <td data-title="'Created On'" style="width:25%;" header-class="text-left" class="text-center" sortable="'createdOn'">
                   {{testBatch.createdOn}}
               </td>
-              <td data-title="'Test Samples'" style="width:20%;" header-class="text-left" class="text-center" sortable="'numSamples'">
+              <td data-title="'Test Samples'" style="width:15%;" header-class="text-left" class="text-center" sortable="'numSamples'">
                   {{testBatch.numSamples}}
               </td>
-              <td data-title="'Status'" style="width:30%;" header-class="text-left" class="text-center" sortable="'status'">
+              <td data-title="'Status'" style="width:25%;" header-class="text-left" class="text-center" sortable="'status'">
                   {{testBatch.status}}
+              </td>
+              <td data-title="" style="width:10%;" header-class="text-left" class="text-center">
+                <span style="font-size: 0.9em;">
+                  <em><a ng-click="viewTestBatch(testBatch.batchNumber)"> View </a></em>
+                </span>
               </td>
           </tr>
         </table>
@@ -41,3 +46,26 @@
     </div>
   </div>
 </div>
+
+<h4>New Test Batch</h4>
+<form class="form-horizontal col-sm-12" role="form" ng-submit="addTestBatch(donationBatch)">
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Donation Batch</label>
+    <div class="row col-sm-10">
+      <div class="form-inline" style="padding-left:5px;">
+        <select class="form-control input-sm" ng-model="donationBatch.donorPanel" ng-options="item.batchNumber as item.batchNumber for item in donationBatches">
+            <option value="" ng-disabled="true"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-4">
+      <button class="btn btn-primary" type="submit">Add Batch</button>
+      <button class="btn btn-primary" type="submit">Clear</button>
+    </div>
+  </div>
+
+</form>
+

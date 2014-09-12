@@ -29,10 +29,12 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
     $scope.openTestBatches = false;
+    $scope.donationBatches = '';
 
     TestingService.getTestBatchFormFields().then(function (response) {
         data = response.data.testBatches;
         $scope.data = data;
+        $scope.donationBatches = response.data.donationBatches;
         if (data.length > 0){
           $scope.openTestBatches = true;
         }
