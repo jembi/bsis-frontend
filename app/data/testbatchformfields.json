@@ -12,5 +12,25 @@
       "numSamples": "22",
       "status": "Incomplete"
     }
+  ],
+  "donationBatches": [
+    {
+      "batchNumber": "1100002",
+      "createdOn": "09/10/2014",
+      "numSamples": "5",
+      "donorPanel": "Maseru"
+    },
+    {
+      "batchNumber": "1100003",
+      "createdOn": "10/10/2014",
+      "numSamples": "10",
+      "donorPanel": "Maseru"
+    },
+    {
+      "batchNumber": "1100004",
+      "createdOn": "10/10/2014",
+      "numSamples": "8",
+      "donorPanel": "Mohale's Hoek"
+    }
   ]
 }
