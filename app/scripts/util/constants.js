@@ -137,7 +137,7 @@ angular.module('bsis')
       "isDeleted": false
     }
   ]
-  });
+  })
 ;
 
   
