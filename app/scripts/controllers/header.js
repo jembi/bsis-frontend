@@ -10,7 +10,7 @@ angular.module('bsis')
   if(~$location.path().indexOf('donors')        ||
     ~$location.path().indexOf('findDonor')      ||
     ~$location.path().indexOf('addDonor')       ||
-    ~$location.path().indexOf('viewDonor')       ||
+    ~$location.path().indexOf('viewDonor')      ||
     ~$location.path().indexOf('linkDonation')   ||
     ~$location.path().indexOf('manageClinic')   ||
     ~$location.path().indexOf('exportDonorList')
@@ -45,10 +45,10 @@ angular.module('bsis')
     }
 
   // else if on components page, set menu to COMPONENTS
-  else if(~$location.path().indexOf('components')        ||
+  else if(~$location.path().indexOf('components')   ||
       ~$location.path().indexOf('findComponents')   ||
       ~$location.path().indexOf('recordComponents') ||
-      ~$location.path().indexOf('findDiscards')   ||
+      ~$location.path().indexOf('findDiscards')     ||
       ~$location.path().indexOf('discardComponents')
     ){
       $scope.currentSection = 'COMPONENTS';
@@ -81,9 +81,10 @@ angular.module('bsis')
     }
 
   // else if on testing page, set menu to TESTING
-  else if(~$location.path().indexOf('testing')           ||
+  else if(~$location.path().indexOf('testing')      ||
       ~$location.path().indexOf('viewTestResults')  ||
       ~$location.path().indexOf('manageTestBatch')  ||
+      ~$location.path().indexOf('viewTestBatch')    ||
       ~$location.path().indexOf('serologyTesting')  ||
       ~$location.path().indexOf('ttiTesting')       ||
       ~$location.path().indexOf('uploadTestResults')
@@ -118,10 +119,10 @@ angular.module('bsis')
     }
 
   // else if on inventory page, set menu to INVENTORY
-  else if(~$location.path().indexOf('inventory')           ||
-      ~$location.path().indexOf('manageInventory')  ||
-      ~$location.path().indexOf('transferComponents')  ||
-      ~$location.path().indexOf('issueComponents')  ||
+  else if(~$location.path().indexOf('inventory')        ||
+      ~$location.path().indexOf('manageInventory')      ||
+      ~$location.path().indexOf('transferComponents')   ||
+      ~$location.path().indexOf('issueComponents')      ||
       ~$location.path().indexOf('componentUsage')
     ){
       $scope.currentSection = 'INVENTORY';
@@ -320,7 +321,7 @@ angular.module('bsis')
     if(~$location.path().indexOf('donors')          ||
       ~$location.path().indexOf('findDonor')        ||
       ~$location.path().indexOf('addDonor')         ||
-      ~$location.path().indexOf('viewDonor')         ||
+      ~$location.path().indexOf('viewDonor')        ||
       ~$location.path().indexOf('linkDonation')     ||
       ~$location.path().indexOf('manageClinic')     ||
       ~$location.path().indexOf('exportDonorList')
@@ -355,10 +356,10 @@ angular.module('bsis')
     }
     
     // else if on components page, set menu to COMPONENTS
-    else if(~$location.path().indexOf('components')        ||
+    else if(~$location.path().indexOf('components')   ||
         ~$location.path().indexOf('findComponents')   ||
         ~$location.path().indexOf('recordComponents') ||
-        ~$location.path().indexOf('findDiscards')   ||
+        ~$location.path().indexOf('findDiscards')     ||
         ~$location.path().indexOf('discardComponents')
     ){
       $scope.currentSection = 'COMPONENTS';
@@ -391,9 +392,10 @@ angular.module('bsis')
     }
 
     // else if on testing page, set menu to TESTING
-    else if(~$location.path().indexOf('testing')           ||
+    else if(~$location.path().indexOf('testing')    ||
       ~$location.path().indexOf('viewTestResults')  ||
       ~$location.path().indexOf('manageTestBatch')  ||
+      ~$location.path().indexOf('viewTestBatch')    ||
       ~$location.path().indexOf('serologyTesting')  ||
       ~$location.path().indexOf('ttiTesting')       ||
       ~$location.path().indexOf('uploadTestResults')
@@ -428,10 +430,10 @@ angular.module('bsis')
     }
 
       // else if on inventory page, set menu to INVENTORY
-    else if(~$location.path().indexOf('inventory')           ||
-        ~$location.path().indexOf('manageInventory')  ||
-        ~$location.path().indexOf('transferComponents')  ||
-        ~$location.path().indexOf('issueComponents')  ||
+    else if(~$location.path().indexOf('inventory')        ||
+        ~$location.path().indexOf('manageInventory')      ||
+        ~$location.path().indexOf('transferComponents')   ||
+        ~$location.path().indexOf('issueComponents')      ||
         ~$location.path().indexOf('componentUsage')
       ){
         $scope.currentSection = 'INVENTORY';
