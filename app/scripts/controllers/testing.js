@@ -81,9 +81,8 @@ angular.module('bsis')
   .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, ICONS, $filter, ngTableParams) {
     var data = {};
     $scope.data  = data;
-    var deferralReasons = [];
 
     $scope.testBatch = TestingService.getTestBatch();
-    console.log("ViewTestBatchCtrl $scope.testBatch: ", $scope.testBatch);
+    $scope.donationBatches = $scope.testBatch.donationBatches;
   })
 ;

@@ -21,9 +21,26 @@
 <div style="padding-bottom: 5px"></div>
 
 <div class="col-sm-12">
-
   <div class="panel panel-default">
     <div class="panel-body">
+      <table class="dash-table dash-table-sml" style="width:50%;">
+        <thead>
+          <tr>
+            <th class="center">Clinic #</th>
+            <th class="center">Created On</th>
+            <th>Donor Panel</th>
+            <th class="center"># of Donations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="donationBatch in donationBatches">
+            <td class="value center">{{donationBatch.batchNumber}}</td>
+            <td class="value center">{{donationBatch.createdOn}}</td>
+            <td class="value">{{donationBatch.donorPanel}}</td>
+            <td class="value center">{{donationBatch.numDonations}}</td>
+          </tr>
+        </tbody>
+      </table>
 
     </div>
   </div>
