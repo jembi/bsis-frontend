@@ -430,6 +430,17 @@ table.ng-table tr td{
   color: #a94442;
 }
 
+.dash-table-sml{
+  font-size: 0.85em;
+}
+.dash-table-sml > th {
+  padding: 2px;
+}
+.dash-table-sml > td {
+  padding: 2px;
+}
+
+
 .form-group {
   margin-bottom: 5px;
 }
