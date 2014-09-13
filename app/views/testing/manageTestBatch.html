@@ -9,7 +9,7 @@
 
         <table ng-table="testBatchTableParams" show-filter="false" class="table">
           <tr ng-repeat="testBatch in $data"
-              ng-click=""
+              ng-click="viewTestBatch(testBatch); changeSelection(testBatch);"
               ng-mouseenter="testBatch.$selected = true"
               ng-mouseleave="testBatch.$selected = false"
               ng-class="{'active': testBatch.$selected}">
@@ -27,7 +27,7 @@
               </td>
               <td data-title="" style="width:10%;" header-class="text-left" class="text-center">
                 <span style="font-size: 0.9em;">
-                  <em><a ng-click="viewTestBatch(testBatch.batchNumber)"> View </a></em>
+                  <em><a ng-click="viewTestBatch(testBatch)"> View </a></em>
                 </span>
               </td>
           </tr>
