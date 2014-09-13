@@ -133,6 +133,13 @@ angular.module('bsis', [
           permission: PERMISSIONS.VIEW_TESTING
         }
       })
+      .when('/viewTestBatch', {
+        templateUrl : 'views/testing.html',
+        controller  : 'TestBatchCtrl',
+        data: {
+          permission: PERMISSIONS.VIEW_TESTING
+        }
+      })
       .when('/serologyTesting', {
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',
