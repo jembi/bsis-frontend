@@ -16,12 +16,10 @@ angular.module('bsis')
       });
     },
     getTestBatch: function(){
-      console.log("getTestBatch testBatchObj:", testBatchObj);
       return testBatchObj;
     },
     setTestBatch: function(testBatch){
       testBatchObj = testBatch;
-      console.log("setTestBatch testBatchObj:", testBatchObj);
     }
   };
 });
