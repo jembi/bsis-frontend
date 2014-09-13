@@ -84,5 +84,6 @@ angular.module('bsis')
 
     $scope.testBatch = TestingService.getTestBatch();
     $scope.donationBatches = $scope.testBatch.donationBatches;
+    $scope.testSamples = $scope.testBatch.samples;
   })
 ;
