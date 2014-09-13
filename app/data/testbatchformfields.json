@@ -178,7 +178,7 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Incomplete"
         },
         {
           "donationIdentificationNumber": "D12345681MS",
@@ -190,7 +190,7 @@
           "bloodAbo": "A",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Incomplete"
         },
         {
           "donationIdentificationNumber": "D12345682MS",
@@ -202,7 +202,7 @@
           "bloodAbo": "A",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Incomplete"
         },
         {
           "donationIdentificationNumber": "D12345683MS",
@@ -214,7 +214,7 @@
           "bloodAbo": "A",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Incomplete"
         },
         {
           "donationIdentificationNumber": "D12345684MS",
@@ -226,7 +226,7 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Incomplete"
         },
         {
           "donationIdentificationNumber": "D12345685MS",
@@ -238,7 +238,7 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Incomplete"
         },
         {
           "donationIdentificationNumber": "D12345686MS",
@@ -250,7 +250,7 @@
           "bloodAbo": "B",
           "bloodRh": "-",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Incomplete"
         },
         {
           "donationIdentificationNumber": "D12345687MS",
@@ -262,7 +262,7 @@
           "bloodAbo": "B",
           "bloodRh": "-",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Incomplete"
         }
       ]
     }
