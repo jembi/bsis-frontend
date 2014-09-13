@@ -7,9 +7,13 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
     $scope.searchResults = '';
+    $scope.testBatch = '';
 
     $scope.isCurrent = function(path) {
-      if (path.length > 1 && $location.path().substr(0, path.length) === path) {
+      if ($location.path() === "/viewTestBatch" && path === "/manageTestBatch") {
+        $scope.selection = $location.path();
+        return true;
+      } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
         $location.path(path);
         $scope.selection = path;
         return true;
@@ -30,6 +34,8 @@ angular.module('bsis')
     $scope.data = data;
     $scope.openTestBatches = false;
     $scope.donationBatches = '';
+    //$scope.testBatch = '';
+    $scope.testBatchView = 'yeah';
 
     TestingService.getTestBatchFormFields().then(function (response) {
         data = response.data.testBatches;
@@ -65,5 +71,20 @@ angular.module('bsis')
       }
     });
 
+    $scope.viewTestBatch = function (item) {
+      console.log("testBatch: ", item);
+      TestingService.setTestBatch(item);
+      $location.path("/viewTestBatch");
+    };
+
+  })
+
+  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, ICONS, $filter, ngTableParams) {
+    var data = {};
+    $scope.data  = data;
+    var deferralReasons = [];
+
+    $scope.testBatch = TestingService.getTestBatch();
+    console.log("ViewTestBatchCtrl $scope.testBatch: ", $scope.testBatch);
   })
 ;
