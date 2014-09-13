@@ -18,31 +18,251 @@
           "donorPanel": "Maseru",
           "numDonations": "6"
         }
+      ],
+      "samples": [
+        {
+          "donationIdentificationNumber": "D12345670MS",
+          "collectionBatch": "DB11100002MS",
+          "collectionSite": "Maseru",
+          "collectedOn": "08/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "O",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345671MS",
+          "collectionBatch": "DB11100002MS",
+          "collectionSite": "Maseru",
+          "collectedOn": "08/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "A",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345672MS",
+          "collectionBatch": "DB11100002MS",
+          "collectionSite": "Maseru",
+          "collectedOn": "08/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "O",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345673MS",
+          "collectionBatch": "DB11100002MS",
+          "collectionSite": "Maseru",
+          "collectedOn": "08/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "O",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345674MS",
+          "collectionBatch": "DB11100003MS",
+          "collectionSite": "Mohale's Hoek",
+          "collectedOn": "09/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "O",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345675MS",
+          "collectionBatch": "DB11100003MS",
+          "collectionSite": "Mohale's Hoek",
+          "collectedOn": "09/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "O",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345676MS",
+          "collectionBatch": "DB11100003MS",
+          "collectionSite": "Mohale's Hoek",
+          "collectedOn": "09/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "O",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345677MS",
+          "collectionBatch": "DB11100003MS",
+          "collectionSite": "Mohale's Hoek",
+          "collectedOn": "09/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "O",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345678MS",
+          "collectionBatch": "DB11100003MS",
+          "collectionSite": "Mohale's Hoek",
+          "collectedOn": "09/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "O",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345679MS",
+          "collectionBatch": "DB11100003MS",
+          "collectionSite": "Mohale's Hoek",
+          "collectedOn": "09/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "O",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        }
       ]
     },
     {
       "batchNumber": "1000335",
       "createdOn": "10/10/2014",
-      "numSamples": "14",
+      "numSamples": "8",
       "status": "Incomplete",
       "donationBatches": [
         {
           "batchNumber": "DB11100004MS",
           "createdOn": "10/10/2014",
           "donorPanel": "Maseru",
-          "numDonations": "6"
+          "numDonations": "4"
         },
         {
           "batchNumber": "DB11100005MH",
           "createdOn": "10/10/2014",
           "donorPanel": "Mohale's Hoek",
-          "numDonations": "5"
+          "numDonations": "2"
         },
         {
           "batchNumber": "DB11100006LR",
           "createdOn": "10/10/2014",
           "donorPanel": "Leribe",
-          "numDonations": "3"
+          "numDonations": "2"
+        }
+      ],
+      "samples": [
+        {
+          "donationIdentificationNumber": "D12345680MS",
+          "collectionBatch": "DB11100004MS",
+          "collectionSite": "Maseru",
+          "collectedOn": "10/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "O",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345681MS",
+          "collectionBatch": "DB11100004MS",
+          "collectionSite": "Maseru",
+          "collectedOn": "10/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "A",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345682MS",
+          "collectionBatch": "DB11100004MS",
+          "collectionSite": "Maseru",
+          "collectedOn": "10/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "A",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345683MS",
+          "collectionBatch": "DB11100004MS",
+          "collectionSite": "Maseru",
+          "collectedOn": "10/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "A",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345684MS",
+          "collectionBatch": "DB11100005MH",
+          "collectionSite": "Mohale's Hoek",
+          "collectedOn": "10/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "O",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345685MS",
+          "collectionBatch": "DB11100005MH",
+          "collectionSite": "Mohale's Hoek",
+          "collectedOn": "10/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "O",
+          "bloodRh": "+",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345686MS",
+          "collectionBatch": "DB11100006LR",
+          "collectionSite": "Leribe",
+          "collectedOn": "10/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "B",
+          "bloodRh": "-",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
+        },
+        {
+          "donationIdentificationNumber": "D12345687MS",
+          "collectionBatch": "DB11100006LR",
+          "collectionSite": "Leribe",
+          "collectedOn": "10/10/2014",
+          "donationCreatedBy": "administrator",
+          "bloodBagType": "Single",
+          "bloodAbo": "B",
+          "bloodRh": "-",
+          "bloodTypingStatus": "Complete",
+          "ttiStatus": "Complete"
         }
       ]
     }
