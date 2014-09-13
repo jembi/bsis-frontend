@@ -7,7 +7,6 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
     $scope.searchResults = '';
-    $scope.testBatch = '';
 
     $scope.isCurrent = function(path) {
       if ($location.path() === "/viewTestBatch" && path === "/manageTestBatch") {
