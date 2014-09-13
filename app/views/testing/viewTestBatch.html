@@ -42,6 +42,33 @@
         </tbody>
       </table>
 
+      <table ng-table="testSamplesTableParams" show-filter="false" class="table">
+        <tr ng-repeat="sample in $data"
+            ng-click=""
+            ng-mouseenter="sample.$selected = true"
+            ng-mouseleave="sample.$selected = false"
+            ng-class="{'active': sample.$selected}">
+            <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
+                {{sample.donationIdentificationNumber}}
+            </td>
+            <td data-title="'Collected On'" header-class="text-left" class="text-center" sortable="'collectedOn'">
+                {{sample.collectedOn}}
+            </td>
+            <td data-title="'Pack Type'" header-class="text-left" sortable="'bloodBagType'">
+                {{sample.bloodBagType}}
+            </td>
+            <td data-title="'Clinic'" header-class="text-left" sortable="'collectionBatch'">
+                {{sample.collectionBatch}} <em>({{sample.collectionSite}})</em>
+            </td>
+            <td data-title="'TTI Testing'" header-class="text-left" sortable="'ttiStatus'">
+                {{sample.ttiStatus}}
+            </td>
+            <td data-title="'Blood Group Serology'" header-class="text-left" sortable="'bloodTypingStatus'">
+                {{sample.bloodTypingStatus}} <em>({{sample.bloodAbo}}{{sample.bloodRh}})
+            </td>
+        </tr>
+      </table>
+
     </div>
   </div>
 </div>

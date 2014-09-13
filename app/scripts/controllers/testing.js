@@ -83,6 +83,28 @@ angular.module('bsis')
 
     $scope.testBatch = TestingService.getTestBatch();
     $scope.donationBatches = $scope.testBatch.donationBatches;
-    $scope.testSamples = $scope.testBatch.samples;
+    data = $scope.testBatch.samples;
+    $scope.data = data;
+
+    $scope.testSamplesTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 8,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
   })
 ;
