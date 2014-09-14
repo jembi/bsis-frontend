@@ -32,7 +32,11 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Complete",
+          "HIV": "NEG",
+          "HBV": "NEG",
+          "HCV": "NEG",
+          "Syphilis": "NEG"
         },
         {
           "donationIdentificationNumber": "D12345671MS",
@@ -44,7 +48,11 @@
           "bloodAbo": "A",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Complete",
+          "HIV": "NEG",
+          "HBV": "NEG",
+          "HCV": "NEG",
+          "Syphilis": "NEG"
         },
         {
           "donationIdentificationNumber": "D12345672MS",
@@ -56,7 +64,11 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Complete",
+          "HIV": "NEG",
+          "HBV": "NEG",
+          "HCV": "NEG",
+          "Syphilis": "NEG"
         },
         {
           "donationIdentificationNumber": "D12345673MS",
@@ -68,7 +80,11 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Complete",
+          "HIV": "NEG",
+          "HBV": "NEG",
+          "HCV": "NEG",
+          "Syphilis": "NEG"
         },
         {
           "donationIdentificationNumber": "D12345674MS",
@@ -80,7 +96,11 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Complete",
+          "HIV": "NEG",
+          "HBV": "NEG",
+          "HCV": "NEG",
+          "Syphilis": "NEG"
         },
         {
           "donationIdentificationNumber": "D12345675MS",
@@ -92,7 +112,11 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Complete",
+          "HIV": "NEG",
+          "HBV": "NEG",
+          "HCV": "NEG",
+          "Syphilis": "NEG"
         },
         {
           "donationIdentificationNumber": "D12345676MS",
@@ -104,7 +128,11 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Complete",
+          "HIV": "NEG",
+          "HBV": "NEG",
+          "HCV": "NEG",
+          "Syphilis": "NEG"
         },
         {
           "donationIdentificationNumber": "D12345677MS",
@@ -116,7 +144,11 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Complete",
+          "HIV": "NEG",
+          "HBV": "NEG",
+          "HCV": "NEG",
+          "Syphilis": "NEG"
         },
         {
           "donationIdentificationNumber": "D12345678MS",
@@ -128,7 +160,11 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Complete",
+          "HIV": "NEG",
+          "HBV": "NEG",
+          "HCV": "NEG",
+          "Syphilis": "NEG"
         },
         {
           "donationIdentificationNumber": "D12345679MS",
@@ -140,7 +176,11 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Complete"
+          "ttiStatus": "Complete",
+          "HIV": "NEG",
+          "HBV": "NEG",
+          "HCV": "NEG",
+          "Syphilis": "NEG"
         }
       ]
     },
