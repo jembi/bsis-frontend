@@ -1,4 +1,43 @@
 <h3 class="page-header">TTI Testing</h3>
 
-<form class="form-horizontal" role="form" method="get" action="">
-</form>
+<h4>Select Test Batch:</h4>
+<div ng-switch="openTestBatches" class="col-sm-12">
+  <div ng-switch-when="true">
+  <div style="padding-bottom: 10px"></div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <table ng-table="testBatchTableParams" show-filter="false" class="table">
+          <tr ng-repeat="testBatch in $data"
+              ng-click="viewTestBatch(testBatch); changeSelection(testBatch);"
+              ng-mouseenter="testBatch.$selected = true"
+              ng-mouseleave="testBatch.$selected = false"
+              ng-class="{'active': testBatch.$selected}">
+              <td data-title="'Batch Number'" style="width:25%;" header-class="text-left" class="text-center" sortable="'batchNumber'">
+                  {{testBatch.batchNumber}}
+              </td>
+              <td data-title="'Created On'" style="width:25%;" header-class="text-left" class="text-center" sortable="'createdOn'">
+                  {{testBatch.createdOn}}
+              </td>
+              <td data-title="'Test Samples'" style="width:20%;" header-class="text-left" class="text-center" sortable="'numSamples'">
+                  {{testBatch.numSamples}}
+              </td>
+              <td data-title="'Status'" style="width:30%;" header-class="text-left" class="text-center" sortable="'status'">
+                  {{testBatch.status}}
+              </td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+  <div ng-switch-when="false">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>
+          <em> No open test batches. </em>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
