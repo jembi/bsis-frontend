@@ -12,6 +12,9 @@ angular.module('bsis')
       if ($location.path() === "/viewTestBatch" && path === "/manageTestBatch") {
         $scope.selection = $location.path();
         return true;
+      } else if ($location.path() === "/manageTTITesting" && path === "/ttiTesting") {
+        $scope.selection = $location.path();
+        return true;
       } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
         $location.path(path);
         $scope.selection = path;
@@ -75,6 +78,11 @@ angular.module('bsis')
       $location.path("/viewTestBatch");
     };
 
+    $scope.viewTestBatchTTI = function (item) {
+      TestingService.setTestBatch(item);
+      $location.path("/manageTTITesting");
+    };
+
   })
 
   .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, ICONS, $filter, ngTableParams) {
@@ -89,6 +97,36 @@ angular.module('bsis')
     $scope.testSamplesTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 8,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+  })
+
+  .controller('TTITestBatchCtrl', function ($scope, $location, TestingService, ICONS, $filter, ngTableParams) {
+    var data = {};
+    $scope.data  = data;
+
+    $scope.testBatch = TestingService.getTestBatch();
+    data = $scope.testBatch.samples;
+    $scope.data = data;
+
+    $scope.testSamplesTTITableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 10,          // count per page
       filter: {},
       sorting: {}
     }, 
