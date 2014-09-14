@@ -9,7 +9,7 @@
 
         <table ng-table="testBatchTableParams" show-filter="false" class="table">
           <tr ng-repeat="testBatch in $data"
-              ng-click="viewTestBatch(testBatch); changeSelection(testBatch);"
+              ng-click="viewTestBatchTTI(testBatch); changeSelection(testBatch);"
               ng-mouseenter="testBatch.$selected = true"
               ng-mouseleave="testBatch.$selected = false"
               ng-class="{'active': testBatch.$selected}">
