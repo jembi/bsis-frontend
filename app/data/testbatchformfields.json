@@ -5,6 +5,8 @@
       "createdOn": "09/10/2014",
       "numSamples": "10",
       "status": "Complete",
+      "ttiStatus": "Complete",
+      "bloodTypingStatus": "Complete",
       "donationBatches": [
         {
           "batchNumber": "DB11100002MS",
@@ -147,6 +149,8 @@
       "createdOn": "10/10/2014",
       "numSamples": "8",
       "status": "Incomplete",
+      "ttiStatus": "Complete",
+      "bloodTypingStatus": "Complete",
       "donationBatches": [
         {
           "batchNumber": "DB11100004MS",
