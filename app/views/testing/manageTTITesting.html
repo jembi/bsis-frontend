@@ -29,17 +29,20 @@
             <td data-title="'Date Bled'" header-class="text-left" class="text-center" sortable="'collectedOn'">
                 {{sample.collectedOn}}
             </td>
-            <td data-title="'Pack'" header-class="text-left" sortable="'bloodBagType'">
-                {{sample.bloodBagType}}
-            </td>
-            <td data-title="'Clinic'" header-class="text-left" sortable="'collectionBatch'">
-                {{sample.collectionBatch}} <em>({{sample.collectionSite}})</em>
-            </td>
             <td data-title="'TTI Testing'" header-class="text-left" sortable="'ttiStatus'">
                 {{sample.ttiStatus}}
             </td>
-            <td data-title="'Blood Group Serology'" header-class="text-left" sortable="'bloodTypingStatus'">
-                {{sample.bloodTypingStatus}} <em>({{sample.bloodAbo}}{{sample.bloodRh}})
+            <td data-title="'HIV'" header-class="text-left" class="text-center" sortable="'HIV'">
+                {{sample.HIV}}
+            </td>
+            <td data-title="'HBV'" header-class="text-left" class="text-center" sortable="'HBV'">
+                {{sample.HBV}}
+            </td>
+            <td data-title="'HCV'" header-class="text-left" class="text-center" sortable="'HCV'">
+                {{sample.HCV}}
+            </td>
+            <td data-title="'Syphilis'" header-class="text-left" class="text-center" sortable="'Syphilis'">
+                {{sample.Syphilis}}
             </td>
         </tr>
       </table>
