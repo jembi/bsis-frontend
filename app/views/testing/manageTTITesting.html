@@ -33,16 +33,52 @@
                 {{sample.ttiStatus}}
             </td>
             <td data-title="'HIV'" header-class="text-left" class="text-center" sortable="'HIV'">
-                {{sample.HIV}}
+                <span ng-switch on="sample.HIV">
+                  <span ng-switch-when="NEG">{{sample.HIV}}</span>
+                  <span ng-switch-default>
+                    <select class="form-control input-sm" >
+                      <option value=""></option>
+                      <option value="POS">POS</option>
+                      <option value="NEG">NEG</option>
+                    </select>
+                  </span>
+                </span>
             </td>
             <td data-title="'HBV'" header-class="text-left" class="text-center" sortable="'HBV'">
-                {{sample.HBV}}
+                <span ng-switch on="sample.HBV">
+                  <span ng-switch-when="NEG">{{sample.HBV}}</span>
+                  <span ng-switch-default>
+                    <select class="form-control input-sm" >
+                      <option value=""></option>
+                      <option value="POS">POS</option>
+                      <option value="NEG">NEG</option>
+                    </select>
+                  </span>
+                </span>
             </td>
             <td data-title="'HCV'" header-class="text-left" class="text-center" sortable="'HCV'">
-                {{sample.HCV}}
+                <span ng-switch on="sample.HCV">
+                  <span ng-switch-when="NEG">{{sample.HCV}}</span>
+                  <span ng-switch-default>
+                    <select class="form-control input-sm" >
+                      <option value=""></option>
+                      <option value="POS">POS</option>
+                      <option value="NEG">NEG</option>
+                    </select>
+                  </span>
+                </span>
             </td>
             <td data-title="'Syphilis'" header-class="text-left" class="text-center" sortable="'Syphilis'">
-                {{sample.Syphilis}}
+                <span ng-switch on="sample.Syphilis">
+                  <span ng-switch-when="NEG">{{sample.Syphilis}}</span>
+                  <span ng-switch-default>
+                    <select class="form-control input-sm" >
+                      <option value=""></option>
+                      <option value="POS">POS</option>
+                      <option value="NEG">NEG</option>
+                    </select>
+                  </span>
+                </span>
             </td>
         </tr>
       </table>
