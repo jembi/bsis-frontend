@@ -2,22 +2,28 @@
 
 <form class="form-horizontal col-sm-12"  role="form" ng-submit="getDonors()">
   <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Donor Panel</label>
+    <label for="name" class="col-sm-2 control-label">Donor Panels</label>
     <div class="row col-sm-10">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donorList.donorPanel" ng-options="item.id as item.name for item in donorPanels">
-            <option value="" ng-disabled="false"></option>
-        </select>
+        <ui-select multiple ng-model="donorList.donorPanels" theme="bootstrap" ng-disabled="disabled" style="width: 470px;">
+          <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
+          <ui-select-choices repeat="donorPanel in donorPanels | filter:$select.search">
+            {{donorPanel.name}}
+          </ui-select-choices>
+        </ui-select>
       </div>
     </div>
   </div>
   <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Blood Group</label>
+    <label for="name" class="col-sm-2 control-label">Blood Groups</label>
     <div class="row col-sm-10">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donorList.bloodGroup" ng-options="item as item for item in bloodGroups">
-            <option value="" ng-disabled="false"></option>
-        </select>
+        <ui-select multiple ng-model="donorList.bloodGroups" theme="bootstrap" ng-disabled="disabled" style="width: 470px;">
+          <ui-select-match placeholder="Select:">{{$item}}</ui-select-match>
+          <ui-select-choices repeat="bloodGroup in bloodGroups | filter:$select.search">
+            {{bloodGroup}}
+          </ui-select-choices>
+        </ui-select>
       </div>
     </div>
   </div>
