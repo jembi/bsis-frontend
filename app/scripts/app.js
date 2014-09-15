@@ -6,7 +6,8 @@ angular.module('bsis', [
   'mockAPI',
   'ngTable',
   'xeditable',
-  'ui.select'
+  'ui.select',
+  'ngSanitize'
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
