@@ -45,12 +45,15 @@
 <h4>New Test Batch</h4>
 <form class="form-horizontal col-sm-12" role="form" ng-submit="addTestBatch(donationBatch)">
   <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Donation Batch</label>
+    <label for="name" class="col-sm-2 control-label">Donation Batches</label>
     <div class="row col-sm-10">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donationBatch.donorPanel" ng-options="item.batchNumber as item.batchNumber for item in donationBatches">
-            <option value="" ng-disabled="true">Select:</option>
-        </select>
+        <ui-select multiple ng-model="testBatch.donationBatches" theme="bootstrap" ng-disabled="disabled" style="width: 500px;">
+          <ui-select-match placeholder="Select:">{{$item.batchNumber}}</ui-select-match>
+          <ui-select-choices repeat="donationBatch in donationBatches | filter:$select.search">
+            {{donationBatch.batchNumber}}
+          </ui-select-choices>
+        </ui-select>
       </div>
     </div>
   </div>
