@@ -54,6 +54,18 @@
             {{donationBatch.batchNumber}}
           </ui-select-choices>
         </ui-select>
+
+
+        <ui-select multiple ng-model="testBatch.donationBatches" theme="bootstrap" ng-disabled="disabled" style="width: 800px;">
+          <ui-select-match placeholder="Select:">{{$item.batchNumber}} ({{$item.donorPanel}})</ui-select-match>
+          <ui-select-choices repeat="donationBatch.batchNumber as donationBatch in donationBatches">
+            <div ng-bind-html="donationBatch.batchNumber"></div>
+            <small>
+              Donor Panel: {{donationBatch.donorPanel}}
+              Created On:  {{donationBatch.createdOn}}
+            </small>
+          </ui-select-choices>
+        </ui-select>
       </div>
     </div>
   </div>
