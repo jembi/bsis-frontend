@@ -540,10 +540,15 @@ label {
 .panel .editable-input {
   height: 23px;
 }
+/* -------------------- */
 
+small {
+  color: #888 ;
+}
+
+.ui-select-bootstrap .ui-select-choices-row.active>a>small{
+  color: #fff;
+}
 
 /* --> general css */
 
-small {
-  color: #888 !important
-}
