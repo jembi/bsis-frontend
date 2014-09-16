@@ -4,25 +4,43 @@
   "collectionSite": "Maseru",
   "collectedOn": "08/10/2014",
   "testBatch": "1000331",
+  "testedOn": "09/10/2014",
   "donationCreatedBy": "administrator",
   "bloodBagType": "Single",
   "bloodAbo": "O",
   "bloodRh": "+",
   "bloodTypingStatus": "Complete",
   "ttiStatus": "Complete",
-  "ttiOutcomes": [
+  "ttiTests": [
     {
-      "HIV": "NEG",
-      "HBV": "NEG",
-      "HCV": "NEG",
-      "Syphilis": "NEG"
+      "testName": "HIV",
+      "outcome": "NEG"
+    },
+    {
+      "testName": "HBV",
+      "outcome": "NEG"
+    },
+    {
+      "testName": "HCV",
+      "outcome": "NEG"
+    },
+    {
+      "testName": "Syphilis",
+      "outcome": "NEG"
     }
   ],
-  "bloodGroupingOutcomes": [
+  "bloodGroupingTests": [
     {
-      "ABO": "O",
-      "Rh": "+",
-      "Du": "NEG"
+      "testName": "ABO",
+      "outcome": "O"
+    },
+    {
+      "testName": "Rh",
+      "outcome": "+"
+    },
+    {
+      "testName": "Du",
+      "outcome": "NEG"
     }
   ]
 }

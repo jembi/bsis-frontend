@@ -23,7 +23,42 @@
   <div ng-switch-when="true">
     <div class="panel panel-default">
       <div class="panel-body">
-      
+
+      <span class="h3"> 
+        <small><em>DIN:</em></small> {{data.donationIdentificationNumber}}
+      </span> 
+
+      <hr/>
+
+      <span class="h4"> 
+        <small><em>Test Batch:</em></small> {{data.testBatch}} <em>(Tested on {{data.testedOn}})</em>
+      </span><br/>
+      <span class="h4"> 
+        <small><em>Donation Batch:</em></small> {{data.collectionBatch}} <em>(Collected on {{data.collectedOn}})</em>
+      </span>
+
+      <hr/>
+
+      <span class="h4"> 
+        TTI Outcomes
+      </span>
+
+      <table class="dash-table" style="width:30%;">
+        <thead>
+          <tr><td></td></tr>
+          <tr>
+            <th>Test</th>
+            <th>Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td></td></tr>
+          <tr ng-repeat="test in data.ttiTests">
+            <td class="value">{{test.testName}}</td>
+            <td class="value">{{test.outcome}}</td>
+          </tr>
+        </tbody>
+      </table>
 
       </div>
     </div>
