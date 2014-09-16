@@ -1,0 +1,28 @@
+{
+  "donationIdentificationNumber": "12345",
+  "collectionBatch": "DB11100002MS",
+  "collectionSite": "Maseru",
+  "collectedOn": "08/10/2014",
+  "testBatch": "1000331",
+  "donationCreatedBy": "administrator",
+  "bloodBagType": "Single",
+  "bloodAbo": "O",
+  "bloodRh": "+",
+  "bloodTypingStatus": "Complete",
+  "ttiStatus": "Complete",
+  "ttiOutcomes": [
+    {
+      "HIV": "NEG",
+      "HBV": "NEG",
+      "HCV": "NEG",
+      "Syphilis": "NEG"
+    }
+  ],
+  "bloodGroupingOutcomes": [
+    {
+      "ABO": "O",
+      "Rh": "+",
+      "Du": "NEG"
+    }
+  ]
+}
