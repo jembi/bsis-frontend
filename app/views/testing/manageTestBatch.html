@@ -53,8 +53,9 @@
           <ui-select-choices repeat="donationBatch.batchNumber as donationBatch in donationBatches | filter:$select.search">
             <div ng-bind-html="donationBatch.batchNumber"></div>
             <small>
-              Donor Panel: {{donationBatch.donorPanel}}
-              Created On:  {{donationBatch.createdOn}}
+              {{donationBatch.donorPanel}} | 
+              {{donationBatch.createdOn}} | 
+              {{donationBatch.numSamples}} donations
             </small>
           </ui-select-choices>
         </ui-select>
