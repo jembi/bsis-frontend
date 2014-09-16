@@ -19,6 +19,9 @@ angular.module('bsis')
       } else if ($location.path() === "/manageTTITesting" && path === "/ttiTesting") {
         $scope.selection = $location.path();
         return true;
+      } else if ($location.path() === "/manageBloodGroupTesting" && path === "/ttiTesting") {
+        $scope.selection = $location.path();
+        return true;
       } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
         $location.path(path);
         $scope.selection = path;
@@ -94,9 +97,15 @@ angular.module('bsis')
       $location.path("/viewTestBatch");
     };
 
-    $scope.viewTestBatchTTI = function (item) {
+    $scope.viewTestBatchTTI = function (item, testCategory) {
+      console.log("testCategory: ",testCategory);
       TestingService.setTestBatch(item);
-      $location.path("/manageTTITesting");
+      if(testCategory === 'tti'){
+        $location.path("/manageTTITesting");
+      }
+      else if (testCategory === 'bloodGrouping'){
+        $location.path("/manageBloodGroupTesting");
+      }
     };
 
   })
