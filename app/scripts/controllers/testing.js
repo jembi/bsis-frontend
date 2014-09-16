@@ -35,14 +35,13 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
     $scope.openTestBatches = false;
-    $scope.donationBatches = '';
-    //$scope.testBatch = '';
-    $scope.testBatchView = 'yeah';
+    $scope.testBatchView = '';
 
     TestingService.getTestBatchFormFields().then(function (response) {
         data = response.data.testBatches;
         $scope.data = data;
-        $scope.donationBatches = response.data.donationBatches;
+        TestingService.setDonationBatches(response.data.donationBatches);
+        $scope.donationBatches = TestingService.getDonationBatches();
         if (data.length > 0){
           $scope.openTestBatches = true;
         }
@@ -52,6 +51,8 @@ angular.module('bsis')
       }, function () {
         $scope.openTestBatches = false;
     });
+
+    $scope.donationBatches = TestingService.getDonationBatches();
 
     $scope.testBatchTableParams = new ngTableParams({
       page: 1,            // show first page
