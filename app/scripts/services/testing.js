@@ -10,7 +10,6 @@ angular.module('bsis')
     getTestBatchFormFields: function () {
       return $http.get('/getTestBatchFormFields')
         .success(function(data, status, headers, config){
-          //donationBatchesObj = data.donationBatches;
           return data;
       })
       .error(function(data){

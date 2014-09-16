@@ -43,12 +43,12 @@
 </div>
 
 <h4>New Test Batch</h4>
-<form class="form-horizontal col-sm-12" role="form" ng-submit="addTestBatch(donationBatch)">
+<form class="form-horizontal col-sm-12" role="form" ng-submit="addTestBatch(selectedDonationBatches)">
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Donation Batches</label>
     <div class="row col-sm-10">
       <div class="form-inline" style="padding-left:5px;">
-        <ui-select multiple ng-model="testBatch.donationBatches" theme="bootstrap" ng-disabled="disabled" style="width: 800px;">
+        <ui-select multiple ng-model="selectedDonationBatches" theme="bootstrap" ng-disabled="disabled" style="width: 800px;">
           <ui-select-match placeholder="Select:">{{$item.batchNumber}} ({{$item.donorPanel}})</ui-select-match>
           <ui-select-choices repeat="donationBatch.batchNumber as donationBatch in donationBatches | filter:$select.search">
             <div ng-bind-html="donationBatch.batchNumber"></div>
@@ -64,8 +64,8 @@
 
   <div class="form-group"> 
     <div class="col-sm-offset-2 col-sm-4">
-      <button class="btn btn-primary" type="submit">Add Batch</button>
-      <button class="btn btn-primary" type="submit">Clear</button>
+      <button class="btn btn-primary" type="submit">Add Test Batch</button>
+      <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
     </div>
   </div>
 

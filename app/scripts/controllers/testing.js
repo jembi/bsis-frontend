@@ -28,6 +28,10 @@ angular.module('bsis')
       }
     };
 
+    $scope.clear = function () {
+      $scope.selectedDonationBatches = {};
+    };
+
   })
 
   .controller('TestBatchCtrl', function ($scope, $location, TestingService, ICONS, $filter, ngTableParams) {
