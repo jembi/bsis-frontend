@@ -39,6 +39,13 @@ angular.module('bsis')
       $scope.selectedDonationBatches = {};
       $scope.searchResults = '';
       $scope.testResultsSearch = {};
+      $scope.file = {};
+    };
+
+    $scope.setFile = function(element) {
+      $scope.$apply(function($scope) {
+        $scope.file = element.files[0];
+      });
     };
 
     TestingService.getTestBatchFormFields().then(function (response) {
