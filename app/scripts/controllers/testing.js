@@ -6,7 +6,7 @@ angular.module('bsis')
     $scope.icons = ICONS;
     var data = {};
     $scope.data = data;
-    $scope.searchResults = '';
+    $scope.openTestBatches = false;
 
     $scope.isCurrent = function(path) {
       if ($location.path() === "/viewTestBatch" && path === "/manageTestBatch") {
@@ -21,7 +21,7 @@ angular.module('bsis')
         return true;
       } else if ($location.path() === path) {
         return true;
-      } else if ($location.path() === "/testing" && path === "/viewTestResults") {
+      } else if ($location.path() === "/testing" && path === "/manageTestBatch") {
         return true;
       } else {
         return false;
@@ -31,15 +31,6 @@ angular.module('bsis')
     $scope.clear = function () {
       $scope.selectedDonationBatches = {};
     };
-
-  })
-
-  .controller('TestBatchCtrl', function ($scope, $location, TestingService, ICONS, $filter, ngTableParams) {
-
-    var data = {};
-    $scope.data = data;
-    $scope.openTestBatches = false;
-    $scope.testBatchView = '';
 
     TestingService.getTestBatchFormFields().then(function (response) {
         data = response.data.testBatches;
@@ -77,6 +68,10 @@ angular.module('bsis')
         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
+
+  })
+
+  .controller('TestBatchCtrl', function ($scope, $location, TestingService, ICONS, $filter, ngTableParams) {
 
     $scope.viewTestBatch = function (item) {
       TestingService.setTestBatch(item);
