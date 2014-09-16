@@ -8,6 +8,9 @@ angular.module('bsis')
     $scope.data = data;
     $scope.openTestBatches = false;
     $scope.searchResults = '';
+    $scope.testResultsSearch = {
+      donationIdentificationNumber: ''
+    };
 
     $scope.isCurrent = function(path) {
       if ($location.path() === "/viewTestBatch" && path === "/manageTestBatch") {
@@ -32,6 +35,7 @@ angular.module('bsis')
     $scope.clear = function () {
       $scope.selectedDonationBatches = {};
       $scope.searchResults = '';
+      $scope.testResultsSearch = {};
     };
 
     TestingService.getTestBatchFormFields().then(function (response) {
@@ -71,9 +75,9 @@ angular.module('bsis')
       }
     });
 
-    $scope.getTestResultsByDIN = function () {   
+    $scope.getTestResultsByDIN = function () {
       TestingService.getTestResultsByDIN($scope.testResultsSearch.donationIdentificationNumber).then(function (response) {
-          data = response.data.testResults;
+          data = response.data;
           $scope.data = data;
           $scope.searchResults = true;
         }, function () {

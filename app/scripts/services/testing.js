@@ -27,6 +27,17 @@ angular.module('bsis')
     },
     setDonationBatches: function(donationBatch){
       donationBatchesObj = donationBatch;
+    },
+    getTestResultsByDIN: function (donationIdentificationNumber) {
+      return $http.get('/getTestResultsByDIN', {params: { din: donationIdentificationNumber }})
+        .success(function(data, status, headers, config){
+        if (donationIdentificationNumber.Error === undefined) {
+          return data;
+        }
+      })
+      .error(function(data){
+        console.log("Find Test Results Unsuccessful");
+      });
     }
   };
 });
