@@ -25,40 +25,78 @@
       <div class="panel-body">
 
       <span class="h3"> 
-        <small><em>DIN:</em></small> {{data.donationIdentificationNumber}}
+        <small><em>DIN:</em></small> {{data.donationIdentificationNumber}} | 
       </span> 
+      <span class="h4">
+        {{data.bloodAbo}}{{data.bloodRh}} | 
+        <small><em>Pack Type:</em></small> {{data.bloodBagType}}
+      </span>
 
       <hr/>
 
       <span class="h4"> 
-        <small><em>Test Batch:</em></small> {{data.testBatch}} <em>(Tested on {{data.testedOn}})</em>
+        <small><em>Test Batch:</em> {{data.testBatch}} <em>(Tested on {{data.testedOn}})</em> </small>
       </span><br/>
       <span class="h4"> 
-        <small><em>Donation Batch:</em></small> {{data.collectionBatch}} <em>(Collected on {{data.collectedOn}})</em>
+        <small><em>Donation Batch:</em> {{data.collectionBatch}} ({{data.collectionSite}}) <em>(Collected on {{data.collectedOn}})</em> </small>
       </span>
 
       <hr/>
 
-      <span class="h4"> 
-        TTI Outcomes
-      </span>
-
-      <table class="dash-table" style="width:30%;">
-        <thead>
-          <tr><td></td></tr>
-          <tr>
-            <th>Test</th>
-            <th>Outcome</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td></td></tr>
-          <tr ng-repeat="test in data.ttiTests">
-            <td class="value">{{test.testName}}</td>
-            <td class="value">{{test.outcome}}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="form-horizontal col-sm-12">
+      <div class="row">
+        <span class="col-sm-6">
+        <span class="h4"> 
+          TTI Outcomes
+        </span>
+        <table class="dash-table" style="width:80%;">
+          <thead>
+            <tr><td></td></tr>
+            <tr>
+              <th>Test</th>
+              <th>Outcome</th>
+              <th>User</th>
+              <th class="center">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td></td></tr>
+            <tr ng-repeat="test in data.ttiTests">
+              <td class="value">{{test.testName}}</td>
+              <td class="value">{{test.outcome}}</td>
+              <td class="value">{{test.user}}</td>
+              <td class="value center">{{test.dateTested}}</td>
+            </tr>
+          </tbody>
+        </table>
+        </span>
+        <span class="col-sm-6">
+        <span class="h4"> 
+          Blood Group Serology Outcomes
+        </span>
+        <table class="dash-table" style="width:80%;">
+          <thead>
+            <tr><td></td></tr>
+            <tr>
+              <th>Test</th>
+              <th>Outcome</th>
+              <th>User</th>
+              <th class="center">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td></td></tr>
+            <tr ng-repeat="test in data.bloodGroupingTests">
+              <td class="value">{{test.testName}}</td>
+              <td class="value">{{test.outcome}}</td>
+              <td class="value">{{test.user}}</td>
+              <td class="value center">{{test.dateTested}}</td>
+            </tr>
+          </tbody>
+        </table>
+        </span>
+      </div>
+    </div>
 
       </div>
     </div>

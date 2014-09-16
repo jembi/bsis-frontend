@@ -14,33 +14,47 @@
   "ttiTests": [
     {
       "testName": "HIV",
-      "outcome": "NEG"
+      "outcome": "NEG",
+      "user": "administrator",
+      "dateTested": "09/10/2014"
     },
     {
       "testName": "HBV",
-      "outcome": "NEG"
+      "outcome": "NEG",
+      "user": "administrator",
+      "dateTested": "09/10/2014"
     },
     {
       "testName": "HCV",
-      "outcome": "NEG"
+      "outcome": "NEG",
+      "user": "administrator",
+      "dateTested": "09/10/2014"
     },
     {
       "testName": "Syphilis",
-      "outcome": "NEG"
+      "outcome": "NEG",
+      "user": "administrator",
+      "dateTested": "09/10/2014"
     }
   ],
   "bloodGroupingTests": [
     {
       "testName": "ABO",
-      "outcome": "O"
+      "outcome": "O",
+      "user": "administrator",
+      "dateTested": "09/10/2014"
     },
     {
       "testName": "Rh",
-      "outcome": "+"
+      "outcome": "+",
+      "user": "administrator",
+      "dateTested": "09/10/2014"
     },
     {
       "testName": "Du",
-      "outcome": "NEG"
+      "outcome": "NEG",
+      "user": "administrator",
+      "dateTested": "09/10/2014"
     }
   ]
 }
