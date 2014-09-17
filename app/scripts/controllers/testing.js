@@ -11,6 +11,21 @@ angular.module('bsis')
     $scope.testResultsSearch = {
       donationIdentificationNumber: ''
     };
+    
+    $scope.ttiTests = [
+      {
+        "testName": "HIV"
+      },
+      {
+        "testName": "HBV"
+      },
+      {
+        "testName": "HCV"
+      },
+      {
+        "testName": "Syphilis"
+      }
+    ];
 
     $scope.isCurrent = function(path) {
       if ($location.path() === "/viewTestBatch" && path === "/manageTestBatch") {
@@ -108,6 +123,7 @@ angular.module('bsis')
       console.log("testCategory: ",testCategory);
       TestingService.setTestBatch(item);
       if(testCategory === 'tti'){
+        console.log("$scope.ttiTests: ",$scope.ttiTests);
         $location.path("/manageTTITesting");
       }
       else if (testCategory === 'bloodGrouping'){
