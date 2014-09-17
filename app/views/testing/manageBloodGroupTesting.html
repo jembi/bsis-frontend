@@ -18,52 +18,73 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <table ng-table="testSamplesTTITableParams" show-filter="false" class="table">
+
+        <th class="text-left sortable" 
+          ng-class="{
+            'sort-asc': testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'asc'),
+            'sort-desc': testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'desc')
+          }"
+          ng-click="testSamplesTTITableParams.sorting('donationIdentificationNumber', testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'asc') ? 'desc' : 'asc')">
+          <div>DIN</div>
+        </th>
+        <th class="text-center sortable" 
+          ng-class="{
+            'sort-asc': testSamplesTTITableParams.isSortBy('collectedOn', 'asc'),
+            'sort-desc': testSamplesTTITableParams.isSortBy('collectedOn', 'desc')
+          }"
+          ng-click="testSamplesTTITableParams.sorting('collectedOn', testSamplesTTITableParams.isSortBy('collectedOn', 'asc') ? 'desc' : 'asc')">
+          <div>Collected On</div>
+        </th>
+        <th class="text-center sortable" 
+          ng-class="{
+            'sort-asc': testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'asc'),
+            'sort-desc': testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'desc')
+          }"
+          ng-click="testSamplesTTITableParams.sorting('bloodTypingStatus', testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'asc') ? 'desc' : 'asc')">
+          <div>Blood Typing Testing</div>
+        </th>
+        <th ng-repeat="column in bloodTypingTests" ng-show="true"
+            class="text-center" ng-class=""
+            ng-click="">
+            <div>{{column.testName}}</div>
+        </th>
         <tr ng-repeat="sample in $data"
             ng-click=""
             ng-mouseenter="sample.$selected = true"
             ng-mouseleave="sample.$selected = false"
             ng-class="{'active': sample.$selected}">
-            <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
+            <td class="text-center" >
                 {{sample.donationIdentificationNumber}}
             </td>
-            <td data-title="'Date Bled'" header-class="text-left" class="text-center" sortable="'collectedOn'">
+            <td class="text-center">
                 {{sample.collectedOn}}
             </td>
-            <td data-title="'Status'" header-class="text-left" sortable="'bloodTypingStatus'">
-                {{sample.bloodTypingStatus}}
+            <td >
+                {{sample.ttiStatus}}
             </td>
-            <td data-title="'ABO'" header-class="text-left" class="text-center" sortable="'bloodAbo'">
-                <span ng-switch on="sample.bloodAbo">
-                  <span ng-switch-when="">
-                    <select class="form-control input-sm" >
-                      <option value=""></option>
-                      <option value="A">A</option>
-                      <option value="B">B</option>
-                      <option value="AB">AB</option>
-                      <option value="O">O</option>
-                    </select>
-                  </span>
-                  <span ng-switch-default>
-                    {{sample.bloodAbo}}
-                  </span>
+            <td class="text-center" ng-repeat="test in sample.bloodTypingTests">
+              <span ng-switch on="test.outcome">
+                <span ng-switch-when="">
+                  <select class="form-control input-sm" >
+                    <option value=""></option>
+                    <option value="POS">POS</option>
+                    <option value="NEG">NEG</option>
+                  </select>
                 </span>
-            </td>
-            <td data-title="'Rh'" header-class="text-left" class="text-center" sortable="'bloodRh'">
-                <span ng-switch on="sample.bloodRh">
-                  <span ng-switch-when="">
-                    <select class="form-control input-sm" >
-                      <option value=""></option>
-                      <option value="+">+</option>
-                      <option value="-">-</option>
-                    </select>
-                  </span>
-                  <span ng-switch-default>
-                    {{sample.bloodRh}}
-                  </span>
+                <span ng-switch-default>
+                  {{test.outcome}}
                 </span>
+              </span>
             </td>
         </tr>
       </table>
+
+
+
+
+
+
+
     </div>
   </div>
 </div>

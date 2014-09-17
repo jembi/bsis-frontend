@@ -13,6 +13,7 @@ angular.module('bsis')
     };
     
     $scope.ttiTests = [];
+    $scope.bloodTypingStatus = [];
 
     $scope.isCurrent = function(path) {
       if ($location.path() === "/viewTestBatch" && path === "/manageTestBatch") {
@@ -56,6 +57,7 @@ angular.module('bsis')
         TestingService.setDonationBatches(response.data.donationBatches);
         $scope.donationBatches = TestingService.getDonationBatches();
         $scope.ttiTests = response.data.ttiTests;
+        $scope.bloodTypingTests = response.data.bloodTypingTests;
         if (data.length > 0){
           $scope.openTestBatches = true;
         }
