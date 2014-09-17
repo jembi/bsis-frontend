@@ -12,20 +12,7 @@ angular.module('bsis')
       donationIdentificationNumber: ''
     };
     
-    $scope.ttiTests = [
-      {
-        "testName": "HIV"
-      },
-      {
-        "testName": "HBV"
-      },
-      {
-        "testName": "HCV"
-      },
-      {
-        "testName": "Syphilis"
-      }
-    ];
+    $scope.ttiTests = [];
 
     $scope.isCurrent = function(path) {
       if ($location.path() === "/viewTestBatch" && path === "/manageTestBatch") {
@@ -68,6 +55,7 @@ angular.module('bsis')
         $scope.data = data;
         TestingService.setDonationBatches(response.data.donationBatches);
         $scope.donationBatches = TestingService.getDonationBatches();
+        $scope.ttiTests = response.data.ttiTests;
         if (data.length > 0){
           $scope.openTestBatches = true;
         }
@@ -123,7 +111,6 @@ angular.module('bsis')
       console.log("testCategory: ",testCategory);
       TestingService.setTestBatch(item);
       if(testCategory === 'tti'){
-        console.log("$scope.ttiTests: ",$scope.ttiTests);
         $location.path("/manageTTITesting");
       }
       else if (testCategory === 'bloodGrouping'){

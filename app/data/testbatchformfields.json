@@ -758,5 +758,19 @@
       "numSamples": "8",
       "donorPanel": "Mohale's Hoek"
     }
+  ],
+  "ttiTests": [
+      {
+        "testName": "HIV"
+      },
+      {
+        "testName": "HBV"
+      },
+      {
+        "testName": "HCV"
+      },
+      {
+        "testName": "Syphilis"
+      }
   ]
 }
