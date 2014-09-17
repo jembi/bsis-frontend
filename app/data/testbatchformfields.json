@@ -33,10 +33,32 @@
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
           "ttiStatus": "Complete",
-          "HIV": "NEG",
-          "HBV": "NEG",
-          "HCV": "NEG",
-          "Syphilis": "NEG"
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345671MS",
@@ -49,10 +71,32 @@
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
           "ttiStatus": "Complete",
-          "HIV": "NEG",
-          "HBV": "NEG",
-          "HCV": "NEG",
-          "Syphilis": "NEG"
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345672MS",
@@ -65,10 +109,32 @@
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
           "ttiStatus": "Complete",
-          "HIV": "NEG",
-          "HBV": "NEG",
-          "HCV": "NEG",
-          "Syphilis": "NEG"
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345673MS",
@@ -81,10 +147,32 @@
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
           "ttiStatus": "Complete",
-          "HIV": "NEG",
-          "HBV": "NEG",
-          "HCV": "NEG",
-          "Syphilis": "NEG"
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "POS",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345674MS",
@@ -97,10 +185,32 @@
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
           "ttiStatus": "Complete",
-          "HIV": "NEG",
-          "HBV": "NEG",
-          "HCV": "NEG",
-          "Syphilis": "NEG"
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "POS",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345675MS",
@@ -113,10 +223,32 @@
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
           "ttiStatus": "Complete",
-          "HIV": "NEG",
-          "HBV": "NEG",
-          "HCV": "NEG",
-          "Syphilis": "NEG"
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345676MS",
@@ -129,10 +261,32 @@
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
           "ttiStatus": "Complete",
-          "HIV": "NEG",
-          "HBV": "NEG",
-          "HCV": "NEG",
-          "Syphilis": "NEG"
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345677MS",
@@ -145,10 +299,32 @@
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
           "ttiStatus": "Complete",
-          "HIV": "NEG",
-          "HBV": "NEG",
-          "HCV": "NEG",
-          "Syphilis": "NEG"
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345678MS",
@@ -161,10 +337,32 @@
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
           "ttiStatus": "Complete",
-          "HIV": "NEG",
-          "HBV": "NEG",
-          "HCV": "NEG",
-          "Syphilis": "NEG"
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345679MS",
@@ -177,10 +375,32 @@
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
           "ttiStatus": "Complete",
-          "HIV": "NEG",
-          "HBV": "NEG",
-          "HCV": "NEG",
-          "Syphilis": "NEG"
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         }
       ]
     },
@@ -222,7 +442,33 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Incomplete"
+          "ttiStatus": "Incomplete",
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345681MS",
@@ -234,7 +480,33 @@
           "bloodAbo": "A",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Incomplete"
+          "ttiStatus": "Incomplete",
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345682MS",
@@ -246,7 +518,33 @@
           "bloodAbo": "A",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Incomplete"
+          "ttiStatus": "Incomplete",
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345683MS",
@@ -258,7 +556,33 @@
           "bloodAbo": "A",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Incomplete"
+          "ttiStatus": "Incomplete",
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345684MS",
@@ -270,7 +594,33 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Incomplete"
+          "ttiStatus": "Incomplete",
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345685MS",
@@ -282,7 +632,33 @@
           "bloodAbo": "O",
           "bloodRh": "+",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Incomplete"
+          "ttiStatus": "Incomplete",
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345686MS",
@@ -294,7 +670,33 @@
           "bloodAbo": "B",
           "bloodRh": "-",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Incomplete"
+          "ttiStatus": "Incomplete",
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         },
         {
           "donationIdentificationNumber": "D12345687MS",
@@ -306,7 +708,33 @@
           "bloodAbo": "B",
           "bloodRh": "-",
           "bloodTypingStatus": "Complete",
-          "ttiStatus": "Incomplete"
+          "ttiStatus": "Incomplete",
+          "ttiTests": [
+            {
+              "testName": "HIV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HBV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "HCV",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Syphilis",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ]
         }
       ]
     }
