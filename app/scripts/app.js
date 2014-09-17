@@ -149,7 +149,7 @@ angular.module('bsis', [
           permission: PERMISSIONS.VIEW_TESTING
         }
       })
-      .when('/ttiTesting', {
+      .when('/recordTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
         data: {
