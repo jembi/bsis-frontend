@@ -35,7 +35,7 @@
           ng-click="testSamplesTTITableParams.sorting('collectedOn', testSamplesTTITableParams.isSortBy('collectedOn', 'asc') ? 'desc' : 'asc')">
           <div>Collected On</div>
         </th>
-        <th class="text-center sortable" 
+        <th class="text-center sortable" style="width:25%;"
           ng-class="{
             'sort-asc': testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'asc'),
             'sort-desc': testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'desc')
@@ -89,6 +89,7 @@
                         <option value="NEG">NEG</option>
                       </select>
                     </span>
+                  </span>
                 </span>
                 <span ng-switch-default>
                   {{test.outcome}}
