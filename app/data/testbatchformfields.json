@@ -58,6 +58,26 @@
               "user": "administrator",
               "dateTested": "09/10/2014"
             }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "O",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "+",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
           ]
         },
         {
@@ -92,6 +112,26 @@
             },
             {
               "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "A",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "+",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
               "outcome": "NEG",
               "user": "administrator",
               "dateTested": "09/10/2014"
@@ -134,6 +174,26 @@
               "user": "administrator",
               "dateTested": "09/10/2014"
             }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "O",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "+",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
           ]
         },
         {
@@ -168,6 +228,26 @@
             },
             {
               "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "O",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "+",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
               "outcome": "NEG",
               "user": "administrator",
               "dateTested": "09/10/2014"
@@ -210,6 +290,26 @@
               "user": "administrator",
               "dateTested": "09/10/2014"
             }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "O",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "+",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
           ]
         },
         {
@@ -244,6 +344,26 @@
             },
             {
               "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "O",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "+",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
               "outcome": "NEG",
               "user": "administrator",
               "dateTested": "09/10/2014"
@@ -286,6 +406,26 @@
               "user": "administrator",
               "dateTested": "09/10/2014"
             }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "O",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "+",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
           ]
         },
         {
@@ -295,8 +435,8 @@
           "collectedOn": "09/10/2014",
           "donationCreatedBy": "administrator",
           "bloodBagType": "Single",
-          "bloodAbo": "O",
-          "bloodRh": "+",
+          "bloodAbo": "B",
+          "bloodRh": "-",
           "bloodTypingStatus": "Complete",
           "ttiStatus": "Complete",
           "ttiTests": [
@@ -320,6 +460,26 @@
             },
             {
               "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "B",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "-",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
               "outcome": "NEG",
               "user": "administrator",
               "dateTested": "09/10/2014"
@@ -362,6 +522,26 @@
               "user": "administrator",
               "dateTested": "09/10/2014"
             }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "O",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "+",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
           ]
         },
         {
@@ -396,6 +576,26 @@
             },
             {
               "testName": "Syphilis",
+              "outcome": "NEG",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "O",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "+",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
               "outcome": "NEG",
               "user": "administrator",
               "dateTested": "09/10/2014"
@@ -468,6 +668,26 @@
               "user": "administrator",
               "dateTested": "09/10/2014"
             }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
           ]
         },
         {
@@ -502,6 +722,26 @@
             },
             {
               "testName": "Syphilis",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
               "outcome": "",
               "user": "administrator",
               "dateTested": "09/10/2014"
@@ -544,6 +784,26 @@
               "user": "administrator",
               "dateTested": "09/10/2014"
             }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
           ]
         },
         {
@@ -578,6 +838,26 @@
             },
             {
               "testName": "Syphilis",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
               "outcome": "",
               "user": "administrator",
               "dateTested": "09/10/2014"
@@ -620,6 +900,26 @@
               "user": "administrator",
               "dateTested": "09/10/2014"
             }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
           ]
         },
         {
@@ -654,6 +954,26 @@
             },
             {
               "testName": "Syphilis",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
               "outcome": "",
               "user": "administrator",
               "dateTested": "09/10/2014"
@@ -696,6 +1016,26 @@
               "user": "administrator",
               "dateTested": "09/10/2014"
             }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
           ]
         },
         {
@@ -730,6 +1070,26 @@
             },
             {
               "testName": "Syphilis",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            }
+          ],
+          "bloodTypingTests": [
+            {
+              "testName": "ABO",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Rh",
+              "outcome": "",
+              "user": "administrator",
+              "dateTested": "09/10/2014"
+            },
+            {
+              "testName": "Du",
               "outcome": "",
               "user": "administrator",
               "dateTested": "09/10/2014"
@@ -771,6 +1131,18 @@
       },
       {
         "testName": "Syphilis"
+      }
+  ]
+  ,
+  "bloodTypingTests": [
+      {
+        "testName": "ABO"
+      },
+      {
+        "testName": "Rh"
+      },
+      {
+        "testName": "Du"
       }
   ]
 }
