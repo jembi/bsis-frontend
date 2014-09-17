@@ -65,11 +65,30 @@
             <td class="text-center" ng-repeat="test in sample.bloodTypingTests">
               <span ng-switch on="test.outcome">
                 <span ng-switch-when="">
-                  <select class="form-control input-sm" >
-                    <option value=""></option>
-                    <option value="POS">POS</option>
-                    <option value="NEG">NEG</option>
-                  </select>
+                  <span ng-switch on="test.testName">
+                    <span ng-switch-when="ABO">
+                      <select class="form-control input-sm" >
+                        <option value=""></option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="AB">AB</option>
+                        <option value="O">O</option>
+                      </select>
+                    </span>
+                    <span ng-switch-when="Rh">
+                      <select class="form-control input-sm" >
+                        <option value=""></option>
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                      </select>
+                    </span>
+                    <span ng-switch-default>
+                      <select class="form-control input-sm" >
+                        <option value=""></option>
+                        <option value="POS">POS</option>
+                        <option value="NEG">NEG</option>
+                      </select>
+                    </span>
                 </span>
                 <span ng-switch-default>
                   {{test.outcome}}
