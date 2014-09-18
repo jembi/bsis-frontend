@@ -1,4 +1,114 @@
 <h3 class="page-header">View Test Results</h3>
 
-<form class="form-horizontal" role="form" method="get" action="">
+<form class="form-horizontal col-sm-12"  role="form" ng-submit="getTestResultsByDIN()">
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label" >DIN</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="testResultsSearch.donationIdentificationNumber">
+      </div>
+    </div>
+  </div>
+  <div class="form-group"> 
+    <div class="col-sm-offset-1 col-sm-3">
+      <button class="btn btn-primary" type="submit">Search</button>
+      <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+    </div>
+  </div>
 </form>
+
+<div ng-switch="searchResults" class="col-sm-12">
+<div style="padding-bottom: 10px"></div>
+
+  <div ng-switch-when="true">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+      <span class="h3"> 
+        <small><em>DIN:</em></small> {{data.donationIdentificationNumber}} | 
+      </span> 
+      <span class="h4">
+        <small><em>Blood Group:</em></small> {{data.bloodAbo}}{{data.bloodRh}} | 
+        <small><em>Pack Type:</em></small> {{data.bloodBagType}}
+      </span>
+
+      <hr/>
+
+      <span class="h4"> 
+        <small><em>Test Batch:</em> {{data.testBatch}} <em>(Tested on {{data.testedOn}})</em> </small>
+      </span><br/>
+      <span class="h4"> 
+        <small><em>Donation Batch:</em> {{data.collectionBatch}} ({{data.collectionSite}}) <em>(Collected on {{data.collectedOn}})</em> </small>
+      </span>
+
+      <hr/>
+
+    <div class="form-horizontal col-sm-12">
+      <div class="row">
+        <span class="col-sm-6">
+        <span class="h4"> 
+          TTI Outcomes
+        </span>
+        <table class="dash-table" style="width:80%;">
+          <thead>
+            <tr><td></td></tr>
+            <tr>
+              <th>Test</th>
+              <th>Outcome</th>
+              <th>User</th>
+              <th class="center">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td></td></tr>
+            <tr ng-repeat="test in data.ttiTests">
+              <td class="value">{{test.testName}}</td>
+              <td class="value">{{test.outcome}}</td>
+              <td class="value">{{test.user}}</td>
+              <td class="value center">{{test.dateTested}}</td>
+            </tr>
+          </tbody>
+        </table>
+        </span>
+        <span class="col-sm-6">
+        <span class="h4"> 
+          Blood Group Serology Outcomes
+        </span>
+        <table class="dash-table" style="width:80%;">
+          <thead>
+            <tr><td></td></tr>
+            <tr>
+              <th>Test</th>
+              <th>Outcome</th>
+              <th>User</th>
+              <th class="center">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td></td></tr>
+            <tr ng-repeat="test in data.bloodGroupingTests">
+              <td class="value">{{test.testName}}</td>
+              <td class="value">{{test.outcome}}</td>
+              <td class="value">{{test.user}}</td>
+              <td class="value center">{{test.dateTested}}</td>
+            </tr>
+          </tbody>
+        </table>
+        </span>
+      </div>
+    </div>
+
+      </div>
+    </div>
+  </div>
+  <div ng-switch-when="false">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>
+          <em> Not found. Please re-enter DIN. </em>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>

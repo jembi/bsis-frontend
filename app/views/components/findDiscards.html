@@ -5,7 +5,7 @@
     <label for="name" class="col-sm-1 control-label" >Type</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <ui-select multiple ng-model="discardsSearch.componentTypes" theme="bootstrap" ng-disabled="disabled" style="width: 470px;">
+        <ui-select multiple ng-model="selectedComponentTypes" theme="bootstrap" ng-disabled="disabled" style="width: 550px;">
           <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
           <ui-select-choices repeat="componentType in componentTypes | filter:$select.search">
             {{componentType.name}}

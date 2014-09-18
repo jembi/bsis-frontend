@@ -14,10 +14,13 @@
        <div ng-switch on="selection">
           <div ng-switch-when="/viewTestResults"><div ng-include="'views/testing/viewTestResults.html'"></div></div>
           <div ng-switch-when="/serologyTesting"><div ng-include="'views/testing/serologyTesting.html'"></div></div>
-          <div ng-switch-when="/ttiTesting"><div ng-include="'views/testing/ttiTesting.html'"></div></div>
+          <div ng-switch-when="/recordTestResults"><div ng-include="'views/testing/recordTestResults.html'"></div></div>
+          <div ng-switch-when="/manageTTITesting"><div ng-include="'views/testing/manageTTITesting.html'"></div></div>
+          <div ng-switch-when="/manageBloodGroupTesting"><div ng-include="'views/testing/manageBloodGroupTesting.html'"></div></div>
           <div ng-switch-when="/uploadTestResults"><div ng-include="'views/testing/uploadTestResults.html'"></div></div>
           <div ng-switch-when="/manageTestBatch"><div ng-include="'views/testing/manageTestBatch.html'"></div></div>
-          <div ng-switch-default><div ng-include="'views/testing/viewTestResults.html'"></div></div>
+          <div ng-switch-when="/viewTestBatch"><div ng-include="'views/testing/viewTestBatch.html'"></div></div>
+          <div ng-switch-default><div ng-include="'views/testing/manageTestBatch.html'"></div></div>
         </div>
 
        </div>

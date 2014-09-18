@@ -1,0 +1,104 @@
+<span class="h3"> 
+  <small><em>Test Batch Number: </em></small> {{testBatch.batchNumber}}
+</span> 
+
+<hr/>
+
+<div class = "h4"> 
+  <small><em>Created On: </em></small>{{testBatch.createdOn}}
+  | 
+  <small><em>TTI Testing: </em></small>{{testBatch.ttiStatus}}
+  | 
+  <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
+</div>
+
+<span  class="h4" style="float: right; margin-top: 5px; margin-bottom: 5px; padding-right: 15px;">
+  <small><em> <a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit Saved Results</a></em>
+  <span ng-show="editableForm.$visible">
+    <em><a href="" ng-click="editableForm.$hide()" ng-disabled="editableForm.$waiting">Done</a></em>
+  </span>
+  </small>
+</span>
+
+<div style="padding-bottom: 5px"></div>
+<div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form editable-form name="editableForm" onaftersave="updateTestResults()">
+        <table ng-table="testSamplesTTITableParams" show-filter="false" class="table">
+        <thead>
+          <th class="text-left sortable" 
+            ng-class="{
+              'sort-asc': testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'asc'),
+              'sort-desc': testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'desc')
+            }"
+            ng-click="testSamplesTTITableParams.sorting('donationIdentificationNumber', testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'asc') ? 'desc' : 'asc')">
+            <div>DIN</div>
+          </th>
+          <th class="text-center sortable" 
+            ng-class="{
+              'sort-asc': testSamplesTTITableParams.isSortBy('collectedOn', 'asc'),
+              'sort-desc': testSamplesTTITableParams.isSortBy('collectedOn', 'desc')
+            }"
+            ng-click="testSamplesTTITableParams.sorting('collectedOn', testSamplesTTITableParams.isSortBy('collectedOn', 'asc') ? 'desc' : 'asc')">
+            <div>Collected On</div>
+          </th>
+          <th class="text-center sortable" style="width:25%;"
+            ng-class="{
+              'sort-asc': testSamplesTTITableParams.isSortBy('ttiStatus', 'asc'),
+              'sort-desc': testSamplesTTITableParams.isSortBy('ttiStatus', 'desc')
+            }"
+            ng-click="testSamplesTTITableParams.sorting('ttiStatus', testSamplesTTITableParams.isSortBy('ttiStatus', 'asc') ? 'desc' : 'asc')">
+            <div>TTI Testing</div>
+          </th>
+          <th ng-repeat="column in ttiTests" ng-show="true"
+              class="text-center" ng-class=""
+              ng-click="">
+              <div>{{column.testName}}</div>
+          </th>
+          </thead>
+          <tbody>
+          <tr ng-repeat="sample in $data"
+              ng-click=""
+              ng-mouseenter="sample.$selected = true"
+              ng-mouseleave="sample.$selected = false"
+              ng-class="{'active': sample.$selected}">
+              <td class="text-center" >
+                  {{sample.donationIdentificationNumber}}
+              </td>
+              <td class="text-center">
+                  {{sample.collectedOn}}
+              </td>
+              <td >
+                  {{sample.ttiStatus}}
+              </td>
+              <td class="text-center" ng-repeat="test in sample.ttiTests">
+                <span ng-switch on="test.outcome">
+                  <span ng-switch-when="">
+                    <select class="form-control input-sm" >
+                      <option value=""></option>
+                      <option value="POS">POS</option>
+                      <option value="NEG">NEG</option>
+                    </select>
+                  </span>
+                  <span ng-switch-default >
+                    <span editable-text="test.outcome" e-name="outcome">{{test.outcome}}</span>
+                  </span>
+                </span>
+              </td>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+
+      <div class="form-group"> 
+        <div class="col-sm-3">
+          <button class="btn btn-primary" type="submit">Save Test Results</button>
+          <button class="btn btn-primary" type="button" ng-click="go('/recordTestResults')" >Cancel</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

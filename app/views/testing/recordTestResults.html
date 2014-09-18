@@ -1,0 +1,59 @@
+<h3 class="page-header">Record Test Results</h3>
+
+<div ng-switch="openTestBatches" class="col-sm-12">
+  <div ng-switch-when="true">
+  <div style="padding-bottom: 10px"></div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <h4>Select Testing Category:</h4>
+        <div class="col-sm-12">
+          <div class="form-inline" style="padding-left:5px;">
+            <input id="tti" type="radio" name="tti" data-ng-model="testCategory" value="tti"/> <label style="display: inline-block; width: 160px; cursor: pointer; cursor: hand;" for="tti"> TTI </label><br/>
+            <input id="bloodGrouping" type="radio" name="bloodGrouping" data-ng-model="testCategory" value="bloodGrouping"/> <label style="display: inline-block; width: 160px; cursor: pointer; cursor: hand;" for="bloodGrouping"> Blood Group Serology </label>
+          </div>
+        </div>
+
+        <div class="col-sm-12" style="padding-bottom:15px;"></div>
+
+        <h4>Select Test Batch:</h4>
+        <table ng-table="testBatchTableParams" show-filter="false" class="table">
+          <tr ng-repeat="testBatch in $data"
+              ng-click="viewTestBatchTTI(testBatch, testCategory)"
+              ng-mouseenter="testBatch.$selected = true"
+              ng-mouseleave="testBatch.$selected = false"
+              ng-class="{'active': testBatch.$selected}">
+              <td data-title="'Batch Number'" header-class="text-left" class="text-center" sortable="'batchNumber'">
+                  {{testBatch.batchNumber}}
+              </td>
+              <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
+                  {{testBatch.createdOn}}
+              </td>
+              <td data-title="'Samples'" header-class="text-left" class="text-center" sortable="'numSamples'">
+                  {{testBatch.numSamples}}
+              </td>
+              <td data-title="'Test Batch Status'" header-class="text-left" class="text-center" sortable="'status'">
+                  {{testBatch.status}}
+              </td>
+              <td data-title="'TTI'" header-class="text-left" class="text-center" sortable="'ttiStatus'">
+                  {{testBatch.ttiStatus}}
+              </td>
+              <td data-title="'Blood Grouping'" header-class="text-left" class="text-center" sortable="'bloodTypingStatus'">
+                  {{testBatch.bloodTypingStatus}}
+              </td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+  <div ng-switch-when="false">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>
+          <em> No open test batches. </em>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -430,6 +430,17 @@ table.ng-table tr td{
   color: #a94442;
 }
 
+.dash-table-sml{
+  font-size: 0.85em;
+}
+.dash-table-sml > th {
+  padding: 2px;
+}
+.dash-table-sml > td {
+  padding: 2px;
+}
+
+
 .form-group {
   margin-bottom: 5px;
 }
@@ -529,10 +540,15 @@ label {
 .panel .editable-input {
   height: 23px;
 }
+/* -------------------- */
 
+small {
+  color: #888 ;
+}
+
+.ui-select-bootstrap .ui-select-choices-row.active>a>small{
+  color: #fff;
+}
 
 /* --> general css */
 
-small {
-  color: #888 !important
-}
