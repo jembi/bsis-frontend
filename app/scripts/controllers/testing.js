@@ -38,6 +38,10 @@ angular.module('bsis')
       }
     };
 
+    $scope.go = function (path) {
+      $location.path(path);
+    };
+
     $scope.clear = function () {
       $scope.selectedDonationBatches = {};
       $scope.searchResults = '';
