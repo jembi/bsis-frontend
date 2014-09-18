@@ -1,4 +1,74 @@
-<h3 class="page-header">Manage Test Batch</h3>
+<h3 class="page-header">Manage Test Batches</h3>
 
-<form class="form-horizontal" role="form" method="get" action="">
+<h4>Open Test Batches</h4>
+<div ng-switch="openTestBatches" class="col-sm-12">
+  <div ng-switch-when="true">
+  <div style="padding-bottom: 10px"></div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <table ng-table="testBatchTableParams" show-filter="false" class="table">
+          <tr ng-repeat="testBatch in $data"
+              ng-click="viewTestBatch(testBatch); changeSelection(testBatch);"
+              ng-mouseenter="testBatch.$selected = true"
+              ng-mouseleave="testBatch.$selected = false"
+              ng-class="{'active': testBatch.$selected}">
+              <td data-title="'Batch Number'" style="width:25%;" header-class="text-left" class="text-center" sortable="'batchNumber'">
+                  {{testBatch.batchNumber}}
+              </td>
+              <td data-title="'Created On'" style="width:25%;" header-class="text-left" class="text-center" sortable="'createdOn'">
+                  {{testBatch.createdOn}}
+              </td>
+              <td data-title="'Test Samples'" style="width:20%;" header-class="text-left" class="text-center" sortable="'numSamples'">
+                  {{testBatch.numSamples}}
+              </td>
+              <td data-title="'Status'" style="width:30%;" header-class="text-left" class="text-center" sortable="'status'">
+                  {{testBatch.status}}
+              </td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+  <div ng-switch-when="false">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>
+          <em> No open test batches. </em>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4>New Test Batch</h4>
+<form class="form-horizontal col-sm-12" role="form" ng-submit="addTestBatch(selectedDonationBatches)">
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Donation Batches</label>
+    <div class="row col-sm-10">
+      <div class="form-inline" style="padding-left:5px;">
+        <ui-select multiple ng-model="selectedDonationBatches" theme="bootstrap" ng-disabled="disabled" style="width: 800px;">
+          <ui-select-match placeholder="Select:">{{$item.batchNumber}} ({{$item.donorPanel}})</ui-select-match>
+          <ui-select-choices repeat="donationBatch.batchNumber as donationBatch in donationBatches | filter:$select.search">
+            <div ng-bind-html="donationBatch.batchNumber"></div>
+            <small>
+              {{donationBatch.donorPanel}} | 
+              {{donationBatch.createdOn}} | 
+              {{donationBatch.numSamples}} donations
+            </small>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-4">
+      <button class="btn btn-primary" type="submit">Add Test Batch</button>
+      <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+    </div>
+  </div>
+
 </form>
+

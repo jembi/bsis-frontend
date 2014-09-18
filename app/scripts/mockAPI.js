@@ -61,6 +61,14 @@ var mockAPI = angular.module('mockAPI', ['ngMockE2E', 'ngResource']);
     // getDiscardsSummary mock
     $httpBackend.whenGET('/getDiscardsSummary').respond($resource('data/discardssummary.json').get());
 
+    // getTestBatchBackingForm mock
+    $httpBackend.whenGET('/getTestBatchFormFields').respond($resource('data/testbatchformfields.json').get());
+
+    // getTestResultsByDIN mock (din=12345)
+    $httpBackend.whenGET('/getTestResultsByDIN?din=12345').respond($resource('data/testresultsdin123456.json').get());
+    // pass through all other /getComponentsByDIN requests (will respond with a 404 (Not Found))
+    $httpBackend.whenGET(/getTestResultsByDIN?\w+.*/).passThrough();
+
     // Don't mock html views
     $httpBackend.whenGET(/views\/\w+.*/).passThrough();
     $httpBackend.whenGET(/^\w+.*/).passThrough();

@@ -49,6 +49,7 @@ angular.module('bsis')
       $scope.componentsSearch = {};
       $scope.discardsSearch = {};
       $scope.searchResults = '';
+      $scope.selectedComponentTypes = {};
     };
 
     $scope.clearProcessComponentForm = function () {

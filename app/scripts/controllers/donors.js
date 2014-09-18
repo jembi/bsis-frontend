@@ -47,10 +47,8 @@ angular.module('bsis')
     };
 
     $scope.viewDonor = function (item) {
-      console.log("\tITEM: ", item);
       $scope.donor = item;
       DonorService.setDonor(item);
-      console.log("\t$scope.donor: ", $scope.donor);
       $location.path("/viewDonor");
     };
 

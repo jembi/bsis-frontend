@@ -6,7 +6,8 @@ angular.module('bsis', [
   'mockAPI',
   'ngTable',
   'xeditable',
-  'ui.select'
+  'ui.select',
+  'ngSanitize'
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
@@ -115,7 +116,7 @@ angular.module('bsis', [
       // TESTING URLs
       .when('/testing', {
         templateUrl : 'views/testing.html',
-        controller  : 'TestingCtrl',
+        controller  : 'TestBatchCtrl',
         data: {
           permission: PERMISSIONS.VIEW_TESTING
         }
@@ -129,7 +130,14 @@ angular.module('bsis', [
       })
       .when('/manageTestBatch', {
         templateUrl : 'views/testing.html',
-        controller  : 'TestingCtrl',
+        controller  : 'TestBatchCtrl',
+        data: {
+          permission: PERMISSIONS.VIEW_TESTING
+        }
+      })
+      .when('/viewTestBatch', {
+        templateUrl : 'views/testing.html',
+        controller  : 'ViewTestBatchCtrl',
         data: {
           permission: PERMISSIONS.VIEW_TESTING
         }
@@ -141,9 +149,23 @@ angular.module('bsis', [
           permission: PERMISSIONS.VIEW_TESTING
         }
       })
-      .when('/ttiTesting', {
+      .when('/recordTestResults', {
         templateUrl : 'views/testing.html',
-        controller  : 'TestingCtrl',
+        controller  : 'TestBatchCtrl',
+        data: {
+          permission: PERMISSIONS.VIEW_TESTING
+        }
+      })
+      .when('/manageTTITesting', {
+        templateUrl : 'views/testing.html',
+        controller  : 'TTITestBatchCtrl',
+        data: {
+          permission: PERMISSIONS.VIEW_TESTING
+        }
+      })
+      .when('/manageBloodGroupTesting', {
+        templateUrl : 'views/testing.html',
+        controller  : 'TTITestBatchCtrl',
         data: {
           permission: PERMISSIONS.VIEW_TESTING
         }
