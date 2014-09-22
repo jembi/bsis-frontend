@@ -519,7 +519,7 @@ small {
   color: #fff;
 }
 
-/* css for x-editable fields */
+/* css for xeditable fields */
 .xeditable {
   font-size: 0.9em;
   height: 1.5em;
@@ -536,6 +536,9 @@ small {
 }
 .xeditable.language {
   width: 140px;
+}
+.xeditable.result {
+  width: 50px;
 }
 /* --> css for x-editable fields */
 
