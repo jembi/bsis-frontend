@@ -402,6 +402,17 @@ angular.module('bsis')
 
     $scope.viewDonationBatch = function () {
 
+      $scope.dateOptions = {
+        'formatYear': 'yy',
+        'startingDay': 1,
+        'show-weeks': false
+      };
+      $scope.format = 'dd/MM/yyyy';
+      $scope.initDate = '';
+      $scope.calIcon = 'fa-calendar';
+
+      $scope.donationBatchDateOpen = false;
+
       $scope.donationBatchView = 'viewDonationBatch';
       $scope.donorClinicTableParams.reload();
 
