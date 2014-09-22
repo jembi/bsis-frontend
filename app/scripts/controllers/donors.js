@@ -132,6 +132,10 @@ angular.module('bsis')
         $scope.deferralResults = false;
       });
 
+      $scope.$watch("data", function () {
+        $scope.deferralTableParams.reload();
+      }); 
+
       $scope.deferralTableParams = new ngTableParams({
         page: 1,            // show first page
         count: 6,          // count per page
@@ -149,7 +153,8 @@ angular.module('bsis')
             $filter('orderBy')(filteredData, params.orderBy()) : data;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
+        },
+        $scope: { $data: {} }
       });
 
       $scope.deferralReasonsFilter = function(column) {
@@ -179,6 +184,10 @@ angular.module('bsis')
         $scope.donationResults = false;
       });
 
+      $scope.$watch("data", function () {
+        $scope.donationTableParams.reload();
+      }); 
+
       $scope.donationTableParams = new ngTableParams({
         page: 1,            // show first page
         count: 6,          // count per page
@@ -196,7 +205,8 @@ angular.module('bsis')
             $filter('orderBy')(filteredData, params.orderBy()) : data;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
+        },
+        $scope: { $data: {} }
       });
 
       $scope.packTypeFilter = function(column) {
@@ -402,8 +412,6 @@ angular.module('bsis')
       def.resolve(arr);
       return def;
     };
-
-
 
     $scope.viewDonationBatch = function () {
 
