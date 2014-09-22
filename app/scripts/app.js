@@ -158,14 +158,14 @@ angular.module('bsis', [
       })
       .when('/manageTTITesting', {
         templateUrl : 'views/testing.html',
-        controller  : 'TTITestBatchCtrl',
+        controller  : 'RecordTestResultsCtrl',
         data: {
           permission: PERMISSIONS.VIEW_TESTING
         }
       })
       .when('/manageBloodGroupTesting', {
         templateUrl : 'views/testing.html',
-        controller  : 'TTITestBatchCtrl',
+        controller  : 'RecordTestResultsCtrl',
         data: {
           permission: PERMISSIONS.VIEW_TESTING
         }
