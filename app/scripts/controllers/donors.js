@@ -386,7 +386,8 @@ angular.module('bsis')
           $filter('orderBy')(filteredData, params.orderBy()) : data;
         params.total(orderedData.length); // set total for pagination
         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      }
+      },
+      $scope: { $data: {} }
     });
 
     $scope.packTypeFilter = function(column) {
