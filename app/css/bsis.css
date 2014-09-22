@@ -262,8 +262,7 @@ hr { display: block; height: 1px;
   cursor: default;
 }
 
-/* <-- login form css */
-
+/* login form css */
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -309,11 +308,9 @@ img.main {
   width:100%;
   padding:0px;
 }
-
 /* --> login form css */
 
 /* angular-ui tabs - custom css */
-
 .nav-tabs.nav-justified > li.active > a {
   background-color: #eee !important;
   color: #242424 !important;
@@ -347,8 +344,6 @@ img.main {
   border: none;
   border-radius: 0;
 }
-
-
 /* --> angular-ui tabs - custom css */
 
 /* general css */
@@ -516,32 +511,6 @@ label {
   padding: 0;
 }
 
-/* css to control angular-xeditable input fields */
-.editable-input{
-  padding: 0px 0px;
-  font-size: 0.9em;
-  width: 120px;
-}
-.editable-input>select{
-  padding: 4px 4px;
-}
-.h2 .editable-controls>input{
-  height: 1.4em;
-}
-.h2 .editable-controls>select{
-  height: 1.5em;
-}
-.h4 .editable-controls>input{
-  height: 1.4em;
-}
-.h4 .editable-controls>select{
-  height: 1.5em;
-}
-.panel .editable-input {
-  height: 23px;
-}
-/* -------------------- */
-
 small {
   color: #888 ;
 }
@@ -549,6 +518,26 @@ small {
 .ui-select-bootstrap .ui-select-choices-row.active>a>small{
   color: #fff;
 }
+
+/* css for x-editable fields */
+.xeditable {
+  font-size: 0.9em;
+  height: 1.5em;
+  padding: 3px 3px;
+}
+.xeditable.name{
+  width: 120px;
+}
+.xeditable.title {
+  width: 75px;
+}
+.xeditable.donor-panel {
+  width: 160px;
+}
+.xeditable.language {
+  width: 140px;
+}
+/* --> css for x-editable fields */
 
 /* --> general css */
 
