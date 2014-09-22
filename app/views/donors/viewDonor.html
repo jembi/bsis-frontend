@@ -1,10 +1,10 @@
 <form editable-form name="editableForm" onaftersave="saveDonor()">
 
   <span class="h2"> 
-    <span editable-text="donor.firstName" e-name="firstName"  e-required>{{donor.firstName}}</span> 
-    <span editable-text="donor.lastName" e-name="lastName"  e-required>{{donor.lastName}}</span><small><em>
-    (<span editable-select="donor.title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span>. 
-    <span editable-text="donor.callingName" e-name="callingName"  e-required>{{donor.callingName}}</span>)</em></small>
+    <span editable-text="donor.firstName" e-name="firstName" e-class="xeditable name" e-required>{{donor.firstName}}</span> 
+    <span editable-text="donor.lastName" e-name="lastName" e-class="xeditable name" e-required>{{donor.lastName}}</span><small><em>
+    (<span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span>. 
+    <span editable-text="donor.callingName" e-name="callingName" e-class="xeditable name" e-required>{{donor.callingName}}</span>)</em></small>
   </span>
 
     <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
@@ -43,15 +43,15 @@
   <div class = "h4"> 
     <small><em>Age: </em></small>
     {{donor.age}} 
-    <em>(<span editable-text="donor.birthDate" e-name="birthDate"  e-required>{{donor.birthDate}}</span>)</em>
+    <em>(<span editable-text="donor.birthDate" e-class="xeditable name" e-name="birthDate"  e-required>{{donor.birthDate}}</span>)</em>
     | 
     <small><em>Donor Number: </em></small> {{donor.donorNumber}}
     | 
     <small><em>Donor Panel: </em></small> 
-    <span editable-select="donor.donorPanel" e-ng-options="item.name as item.name for item in donorPanels" e-name="donorPanel"  e-required>{{donor.donorPanel}}</span>
+    <span editable-select="donor.donorPanel" e-class="xeditable donor-panel" e-ng-options="item.name as item.name for item in donorPanels" e-name="donorPanel"  e-required>{{donor.donorPanel}}</span>
     | 
     <small><em>Preferred Language: </em></small> 
-    <span editable-select="donor.preferredLanguage" e-ng-options="item.preferredLanguage as item.preferredLanguage for item in languages" e-name="preferredLanguage">{{donor.preferredLanguage}}</span>
+    <span editable-select="donor.preferredLanguage" e-ng-options="item.preferredLanguage as item.preferredLanguage for item in languages" e-class="xeditable language" e-name="preferredLanguage">{{donor.preferredLanguage}}</span>
   </div>
 
 </form>
