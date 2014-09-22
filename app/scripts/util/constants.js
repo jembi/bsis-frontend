@@ -138,6 +138,18 @@ angular.module('bsis')
     }
   ]
   })
+  .constant('TTIOUTCOME', {
+    options: ["POS","NEG"]
+  })
+  .constant('BGSOUTCOME', {
+    options: ["POS","NEG"]
+  })
+  .constant('ABO', {
+    options: ["A","B","AB","O"]
+  })
+  .constant('RH', {
+    options: ["+","-"]
+  })
 ;
 
   
