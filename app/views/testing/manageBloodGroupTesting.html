@@ -101,7 +101,17 @@
                     </span>
                   </span>
                   <span ng-switch-default>
-                    <span editable-text="test.outcome" e-name="outcome">{{test.outcome}}</span>
+                    <span ng-switch on="test.testName">
+                      <span ng-switch-when="ABO">
+                        <span editable-select="test.outcome" e-class="xeditable result" e-ng-options="item as item for item in abo" e-name="outcome" >{{test.outcome}}</span>
+                      </span>
+                      <span ng-switch-when="Rh">
+                        <span editable-select="test.outcome" e-class="xeditable result" e-ng-options="item as item for item in rh" e-name="outcome" >{{test.outcome}}</span>
+                      </span>
+                      <span ng-switch-default>
+                        <span editable-select="test.outcome" e-class="xeditable result" e-ng-options="item as item for item in bgsOutcomes" e-name="outcome" >{{test.outcome}}</span>
+                      </span>
+                    </span>
                   </span>
                 </span>
               </td>
@@ -111,7 +121,7 @@
 
       <div class="form-group"> 
         <div class="col-sm-3">
-          <button class="btn btn-primary" type="submit">Record Test Results</button>
+          <button class="btn btn-primary" type="submit">Save Test Results</button>
           <button class="btn btn-primary" type="button" ng-click="go('/recordTestResults')" >Cancel</button>
         </div>
       </div>

@@ -49,6 +49,18 @@ angular.module('bsis')
     $scope.viewDonor = function (item) {
       $scope.donor = item;
       DonorService.setDonor(item);
+
+      $scope.dateOptions = {
+        'formatYear': 'yy',
+        'startingDay': 1,
+        'show-weeks': false
+      };
+      $scope.format = 'dd/MM/yyyy';
+      $scope.initDate = item.birthDate;
+      $scope.calIcon = 'fa-calendar';
+
+      $scope.donorBirthDateOpen = false;
+
       $location.path("/viewDonor");
     };
 
@@ -389,6 +401,17 @@ angular.module('bsis')
 
 
     $scope.viewDonationBatch = function () {
+
+      $scope.dateOptions = {
+        'formatYear': 'yy',
+        'startingDay': 1,
+        'show-weeks': false
+      };
+      $scope.format = 'dd/MM/yyyy';
+      $scope.initDate = '';
+      $scope.calIcon = 'fa-calendar';
+
+      $scope.donationBatchDateOpen = false;
 
       $scope.donationBatchView = 'viewDonationBatch';
       $scope.donorClinicTableParams.reload();

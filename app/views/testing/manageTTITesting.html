@@ -82,7 +82,7 @@
                     </select>
                   </span>
                   <span ng-switch-default >
-                    <span editable-text="test.outcome" e-name="outcome">{{test.outcome}}</span>
+                    <span editable-select="test.outcome" e-class="xeditable result" e-ng-options="item as item for item in ttiOutcomes" e-name="outcome" >{{test.outcome}}</span>
                   </span>
                 </span>
               </td>

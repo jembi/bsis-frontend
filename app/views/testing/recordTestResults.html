@@ -19,7 +19,7 @@
         <h4>Select Test Batch:</h4>
         <table ng-table="testBatchTableParams" show-filter="false" class="table">
           <tr ng-repeat="testBatch in $data"
-              ng-click="viewTestBatchTTI(testBatch, testCategory)"
+              ng-click="recordTestResults(testBatch, testCategory)"
               ng-mouseenter="testBatch.$selected = true"
               ng-mouseleave="testBatch.$selected = false"
               ng-class="{'active': testBatch.$selected}">

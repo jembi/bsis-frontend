@@ -106,15 +106,16 @@ angular.module('bsis')
 
   })
 
-  .controller('TestBatchCtrl', function ($scope, $location, TestingService, ICONS, $filter, ngTableParams) {
+  .controller('TestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams) {
+
+    
 
     $scope.viewTestBatch = function (item) {
       TestingService.setTestBatch(item);
       $location.path("/viewTestBatch");
     };
 
-    $scope.viewTestBatchTTI = function (item, testCategory) {
-      console.log("testCategory: ",testCategory);
+    $scope.recordTestResults = function (item, testCategory) {
       TestingService.setTestBatch(item);
       if(testCategory === 'tti'){
         $location.path("/manageTTITesting");
@@ -126,7 +127,7 @@ angular.module('bsis')
 
   })
 
-  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, ICONS, $filter, ngTableParams) {
+  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams) {
     var data = {};
     $scope.data  = data;
 
@@ -157,9 +158,13 @@ angular.module('bsis')
 
   })
 
-  .controller('TTITestBatchCtrl', function ($scope, $location, TestingService, ICONS, $filter, ngTableParams) {
+  .controller('RecordTestResultsCtrl', function ($scope, $location, TestingService, TTIOUTCOME, BGSOUTCOME, ABO, RH, $filter, ngTableParams) {
     var data = {};
     $scope.data  = data;
+    $scope.ttiOutcomes = TTIOUTCOME.options;
+    $scope.bgsOutcomes = BGSOUTCOME.options;
+    $scope.abo = ABO.options;
+    $scope.rh = RH.options;
 
     $scope.testBatch = TestingService.getTestBatch();
     data = $scope.testBatch.samples;
