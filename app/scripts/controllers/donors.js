@@ -365,6 +365,10 @@ angular.module('bsis')
       }, function () {
     });
 
+    $scope.$watch("data", function () {
+        $scope.donorClinicTableParams.reload();
+    }); 
+
     $scope.donorClinicTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 8,          // count per page
