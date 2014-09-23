@@ -108,11 +108,11 @@ angular.module('bsis')
     /* TODO: Update service call above (getDonor()) to include donorFormFields, so that two service calls are not required*/
     DonorService.getDonorFormFields().then(function (response) {
         $scope.data = response.data;
-        $scope.addressTypes = data.addressTypes;
-        $scope.languages = data.languages;
-        $scope.donorPanels = data.donorPanels;
-        $scope.idTypes = data.idTypes;
-        $scope.preferredContactMethods = data.preferredContactMethods;
+        $scope.addressTypes = $scope.data.addressTypes;
+        $scope.languages = $scope.data.languages;
+        $scope.donorPanels = $scope.data.donorPanels;
+        $scope.idTypes = $scope.data.idTypes;
+        $scope.preferredContactMethods = $scope.data.preferredContactMethods;
         $scope.title = TITLE.options;
         $scope.month = MONTH.options;
         $scope.gender = GENDER.options;
