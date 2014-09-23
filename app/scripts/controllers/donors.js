@@ -98,15 +98,16 @@ angular.module('bsis')
   // Controller for Viewing Donors
   .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams) {
 
-    var data = {};
-    $scope.data  = data;
+    $scope.data = {};
+    $scope.deferralsData = {};
+    $scope.donationsData = {};
     var deferralReasons = [];
 
     $scope.donor = DonorService.getDonor();
 
     /* TODO: Update service call above (getDonor()) to include donorFormFields, so that two service calls are not required*/
     DonorService.getDonorFormFields().then(function (response) {
-        var data = response.data;
+        $scope.data = response.data;
         $scope.addressTypes = data.addressTypes;
         $scope.languages = data.languages;
         $scope.donorPanels = data.donorPanels;
@@ -124,15 +125,14 @@ angular.module('bsis')
       $scope.deferralView = 'viewDeferrals';
 
       DonorService.getDeferrals().then(function (response) {
-        data = response.data.allDonorDeferrals;
-        $scope.data = data;
+        $scope.deferralsData = response.data.allDonorDeferrals;
         deferralReasons = response.data.deferralReasons;
         $scope.deferralResults = true;
       }, function () {
         $scope.deferralResults = false;
       });
 
-      $scope.$watch("data", function () {
+      $scope.$watch("deferralsData", function () {
         $scope.deferralTableParams.reload();
       }); 
 
@@ -145,16 +145,17 @@ angular.module('bsis')
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
-        total: data.length, // length of data
+        total: $scope.deferralsData.length, // length of data
         getData: function ($defer, params) {
+          var deferralsData = $scope.deferralsData;
           var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
+            $filter('filter')(deferralsData, params.filter()) : deferralsData;
           var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
+            $filter('orderBy')(filteredData, params.orderBy()) : deferralsData;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         },
-        $scope: { $data: {} }
+        $scope: { $deferralsData: {} }
       });
 
       $scope.deferralReasonsFilter = function(column) {
@@ -177,14 +178,13 @@ angular.module('bsis')
       $scope.donationsView = 'viewDonations';
 
       DonorService.getDonations().then(function (response) {
-        data = response.data.donations;
-        $scope.data = data;
+        $scope.donationsData = response.data.donations;
         $scope.donationResults = true;
       }, function () {
         $scope.donationResults = false;
       });
 
-      $scope.$watch("data", function () {
+      $scope.$watch("donationsData", function () {
         $scope.donationTableParams.reload();
       }); 
 
@@ -197,16 +197,17 @@ angular.module('bsis')
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
-        total: data.length, // length of data
+        total: $scope.donationsData.length, // length of data
         getData: function ($defer, params) {
+          var donationsData = $scope.donationsData;
           var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
+            $filter('filter')(donationsData, params.filter()) : donationsData;
           var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
+            $filter('orderBy')(filteredData, params.orderBy()) : donationsData;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         },
-        $scope: { $data: {} }
+        $scope: { $donationsData: {} }
       });
 
       $scope.packTypeFilter = function(column) {
