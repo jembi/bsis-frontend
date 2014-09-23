@@ -296,11 +296,11 @@ angular.module('bsis')
 
     var data = {};
     $scope.data = data;
-    $scope.donorListsearchResults = '';
+    $scope.donorListSearchResults = '';
+    $scope.donorPanels = [];
 
     DonorService.getDonorListFormFields().then(function (response) {
-        var data = response.data;
-        $scope.donorPanels = data.donorPanels;
+        $scope.donorPanels = response.data.donorPanels;
       }, function () {
     });
 
@@ -317,9 +317,9 @@ angular.module('bsis')
       DonorService.findDonor($scope.donorSearch).then(function (response) {
           data = response.data.donors;
           $scope.data = data;
-          $scope.donorListsearchResults = true;
+          $scope.donorListSearchResults = true;
         }, function () {
-          $scope.donorListsearchResults = false;
+          $scope.donorListSearchResults = false;
       });
     };
 
@@ -367,16 +367,14 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
 
-    var data = {};
-    $scope.data = data;
+    $scope.data = {};
     $scope.donationBatch = {
       'date': '03/09/2014',
       'venue': 'Maseru'
     };
 
     DonorService.getDonationBatch().then(function (response) {
-      data = response.data.donations;
-      $scope.data = data;
+      $scope.data = response.data.donations;
       $scope.donorPanels = response.data.donorPanels;
       }, function () {
     });
@@ -396,18 +394,26 @@ angular.module('bsis')
     {
       defaultSort: 'asc',
       counts: [], // hide page counts control
-      total: data.length, // length of data
+      total: $scope.data.length, // length of data
       getData: function ($defer, params) {
-        var filteredData = params.filter() ?
-          $filter('filter')(data, params.filter()) : data;
-        var orderedData = params.sorting() ?
-          $filter('orderBy')(filteredData, params.orderBy()) : data;
-        params.total(orderedData.length); // set total for pagination
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        DonorService.getDonationBatch().then(function (response) {
+          $scope.data = response.data.donations;
+          $scope.donorPanels = response.data.donorPanels;
+
+          var data = $scope.data;
+          var filteredData = params.filter() ?
+            $filter('filter')(data, params.filter()) : data;
+          var orderedData = params.sorting() ?
+            $filter('orderBy')(filteredData, params.orderBy()) : data;
+          params.total(orderedData.length); // set total for pagination
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+
+        }, function () {
+        });
       }
     });
 
-     $scope.donorClinicTableParams.settings().$scope = $scope;
+    $scope.donorClinicTableParams.settings().$scope = $scope;
 
     $scope.packTypeFilter = function(column) {
       var def = $q.defer();
