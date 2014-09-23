@@ -311,7 +311,6 @@ angular.module('bsis')
       DonorService.findDonor($scope.donorSearch).then(function (response) {
           data = response.data.donors;
           $scope.data = data;
-          console.log("DATA.DONORS.LENGTH: ", $scope.data.length);
           $scope.donorListsearchResults = true;
         }, function () {
           $scope.donorListsearchResults = false;
