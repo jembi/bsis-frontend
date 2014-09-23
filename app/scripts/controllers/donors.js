@@ -98,20 +98,21 @@ angular.module('bsis')
   // Controller for Viewing Donors
   .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams) {
 
-    var data = {};
-    $scope.data  = data;
+    $scope.data = {};
+    $scope.deferralsData = {};
+    $scope.donationsData = {};
     var deferralReasons = [];
 
     $scope.donor = DonorService.getDonor();
 
     /* TODO: Update service call above (getDonor()) to include donorFormFields, so that two service calls are not required*/
     DonorService.getDonorFormFields().then(function (response) {
-        var data = response.data;
-        $scope.addressTypes = data.addressTypes;
-        $scope.languages = data.languages;
-        $scope.donorPanels = data.donorPanels;
-        $scope.idTypes = data.idTypes;
-        $scope.preferredContactMethods = data.preferredContactMethods;
+        $scope.data = response.data;
+        $scope.addressTypes = $scope.data.addressTypes;
+        $scope.languages = $scope.data.languages;
+        $scope.donorPanels = $scope.data.donorPanels;
+        $scope.idTypes = $scope.data.idTypes;
+        $scope.preferredContactMethods = $scope.data.preferredContactMethods;
         $scope.title = TITLE.options;
         $scope.month = MONTH.options;
         $scope.gender = GENDER.options;
@@ -124,13 +125,18 @@ angular.module('bsis')
       $scope.deferralView = 'viewDeferrals';
 
       DonorService.getDeferrals().then(function (response) {
-        data = response.data.allDonorDeferrals;
-        $scope.data = data;
+        $scope.deferralsData = response.data.allDonorDeferrals;
         deferralReasons = response.data.deferralReasons;
         $scope.deferralResults = true;
       }, function () {
         $scope.deferralResults = false;
       });
+
+      $scope.$watch("deferralsData", function () {
+        if ($scope.deferralTableParams.data.length > 0) {
+          $scope.deferralTableParams.reload();
+        }
+      }); 
 
       $scope.deferralTableParams = new ngTableParams({
         page: 1,            // show first page
@@ -141,16 +147,19 @@ angular.module('bsis')
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
-        total: data.length, // length of data
+        total: $scope.deferralsData.length, // length of data
         getData: function ($defer, params) {
+          var deferralsData = $scope.deferralsData;
           var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
+            $filter('filter')(deferralsData, params.filter()) : deferralsData;
           var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
+            $filter('orderBy')(filteredData, params.orderBy()) : deferralsData;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
+
+      $scope.deferralTableParams.settings().$scope = $scope;
 
       $scope.deferralReasonsFilter = function(column) {
         var def = $q.defer();
@@ -172,12 +181,17 @@ angular.module('bsis')
       $scope.donationsView = 'viewDonations';
 
       DonorService.getDonations().then(function (response) {
-        data = response.data.donations;
-        $scope.data = data;
+        $scope.donationsData = response.data.donations;
         $scope.donationResults = true;
       }, function () {
         $scope.donationResults = false;
       });
+
+      $scope.$watch("donationsData", function () {
+        if ($scope.donationTableParams.data.length > 0) {
+          $scope.donationTableParams.reload();
+        }
+      }); 
 
       $scope.donationTableParams = new ngTableParams({
         page: 1,            // show first page
@@ -188,16 +202,19 @@ angular.module('bsis')
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
-        total: data.length, // length of data
+        total: $scope.donationsData.length, // length of data
         getData: function ($defer, params) {
+          var donationsData = $scope.donationsData;
           var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
+            $filter('filter')(donationsData, params.filter()) : donationsData;
           var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
+            $filter('orderBy')(filteredData, params.orderBy()) : donationsData;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
+
+      $scope.donationTableParams.settings().$scope = $scope;
 
       $scope.packTypeFilter = function(column) {
         var def = $q.defer();
@@ -300,7 +317,6 @@ angular.module('bsis')
       DonorService.findDonor($scope.donorSearch).then(function (response) {
           data = response.data.donors;
           $scope.data = data;
-          console.log("DATA.DONORS.LENGTH: ", $scope.data.length);
           $scope.donorListsearchResults = true;
         }, function () {
           $scope.donorListsearchResults = false;
@@ -365,6 +381,12 @@ angular.module('bsis')
       }, function () {
     });
 
+    $scope.$watch("data", function () {
+      if ($scope.donorClinicTableParams.data.length > 0) {
+        $scope.donorClinicTableParams.reload();
+      }
+    }); 
+
     $scope.donorClinicTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 8,          // count per page
@@ -385,6 +407,8 @@ angular.module('bsis')
       }
     });
 
+     $scope.donorClinicTableParams.settings().$scope = $scope;
+
     $scope.packTypeFilter = function(column) {
       var def = $q.defer();
       var arr = [];
@@ -398,8 +422,6 @@ angular.module('bsis')
       return def;
     };
 
-
-
     $scope.viewDonationBatch = function () {
 
       $scope.dateOptions = {
@@ -412,9 +434,7 @@ angular.module('bsis')
       $scope.calIcon = 'fa-calendar';
 
       $scope.donationBatchDateOpen = false;
-
       $scope.donationBatchView = 'viewDonationBatch';
-      $scope.donorClinicTableParams.reload();
 
     };
 
