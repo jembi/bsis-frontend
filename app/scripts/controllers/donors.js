@@ -133,7 +133,9 @@ angular.module('bsis')
       });
 
       $scope.$watch("deferralsData", function () {
-        $scope.deferralTableParams.reload();
+        if ($scope.deferralTableParams.data.length > 0) {
+          $scope.deferralTableParams.reload();
+        }
       }); 
 
       $scope.deferralTableParams = new ngTableParams({
@@ -154,9 +156,10 @@ angular.module('bsis')
             $filter('orderBy')(filteredData, params.orderBy()) : deferralsData;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        },
-        $scope: { $deferralsData: {} }
+        }
       });
+
+      $scope.deferralTableParams.settings().$scope = $scope;
 
       $scope.deferralReasonsFilter = function(column) {
         var def = $q.defer();
@@ -185,7 +188,9 @@ angular.module('bsis')
       });
 
       $scope.$watch("donationsData", function () {
-        $scope.donationTableParams.reload();
+        if ($scope.donationTableParams.data.length > 0) {
+          $scope.donationTableParams.reload();
+        }
       }); 
 
       $scope.donationTableParams = new ngTableParams({
@@ -206,9 +211,10 @@ angular.module('bsis')
             $filter('orderBy')(filteredData, params.orderBy()) : donationsData;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        },
-        $scope: { $donationsData: {} }
+        }
       });
+
+      $scope.donationTableParams.settings().$scope = $scope;
 
       $scope.packTypeFilter = function(column) {
         var def = $q.defer();
@@ -428,9 +434,7 @@ angular.module('bsis')
       $scope.calIcon = 'fa-calendar';
 
       $scope.donationBatchDateOpen = false;
-
       $scope.donationBatchView = 'viewDonationBatch';
-      $scope.donorClinicTableParams.reload();
 
     };
 
