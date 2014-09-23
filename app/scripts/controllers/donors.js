@@ -297,10 +297,10 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
     $scope.donorListSearchResults = '';
+    $scope.donorPanels = [];
 
     DonorService.getDonorListFormFields().then(function (response) {
-        var data = response.data;
-        $scope.donorPanels = data.donorPanels;
+        $scope.donorPanels = response.data.donorPanels;
       }, function () {
     });
 
