@@ -376,7 +376,9 @@ angular.module('bsis')
     });
 
     $scope.$watch("data", function () {
+      if ($scope.donorClinicTableParams.data.length > 0) {
         $scope.donorClinicTableParams.reload();
+      }
     }); 
 
     $scope.donorClinicTableParams = new ngTableParams({
@@ -396,9 +398,10 @@ angular.module('bsis')
           $filter('orderBy')(filteredData, params.orderBy()) : data;
         params.total(orderedData.length); // set total for pagination
         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      },
-      $scope: { $data: {} }
+      }
     });
+
+     $scope.donorClinicTableParams.settings().$scope = $scope;
 
     $scope.packTypeFilter = function(column) {
       var def = $q.defer();
