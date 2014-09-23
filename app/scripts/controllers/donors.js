@@ -296,7 +296,7 @@ angular.module('bsis')
 
     var data = {};
     $scope.data = data;
-    $scope.donorListsearchResults = '';
+    $scope.donorListSearchResults = '';
 
     DonorService.getDonorListFormFields().then(function (response) {
         var data = response.data;
@@ -317,9 +317,9 @@ angular.module('bsis')
       DonorService.findDonor($scope.donorSearch).then(function (response) {
           data = response.data.donors;
           $scope.data = data;
-          $scope.donorListsearchResults = true;
+          $scope.donorListSearchResults = true;
         }, function () {
-          $scope.donorListsearchResults = false;
+          $scope.donorListSearchResults = false;
       });
     };
 
