@@ -56,13 +56,21 @@ angular.module('bsis')
       },
       */
 
-     logout: function() {
-        $rootScope.user = {
-          id : '',
-          userId: '',
-          role : ROLES.guest
-        };
-        $rootScope.isLoggedIn = false;
-      }
+    logout: function () {
+      userProfile = null;
+      $rootScope.user = {
+        id : '',
+        userId: '',
+        role : ROLES.guest
+      };
+      $rootScope.isLoggedIn = false;
+    },
+    getLoggedInUser: function () {
+      return userProfile;
+    },
+    isLoggedIn: function () {
+      return $rootScope.isLoggedIn;
+    }
+
   };
 });
