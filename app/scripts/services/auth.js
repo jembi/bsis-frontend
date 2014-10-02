@@ -1,9 +1,14 @@
 'use strict';
 
 angular.module('bsis')
-.factory('AuthService', function ($http, $rootScope, ROLES) {
+.factory('AuthService', function ($http, $rootScope, ROLES, Api, Base64) {
+
+  var userProfile = {};
+
   return {
 
+    // MOCKAPI LOGIN FUNCTION
+    /* 
     login: function (credentials) {
        return $http.post('/login', {username: credentials.username, password: credentials.password})
         .success(function(user){
@@ -17,6 +22,24 @@ angular.module('bsis')
       })
       .error(function(data){
         console.log("Login Unsuccessful");
+      });
+    },
+    */
+
+    login: function (credentials, done) {
+      var encoded = Base64.encode(credentials.username + ':' + credentials.password);
+      $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
+      Api.User.get({}, function (profile) {
+        userProfile = profile;
+        $rootScope.user = userProfile;
+        $rootScope.isLoggedIn = true;
+        console.log("Login Successful");
+        done(true);
+      }, function (){
+        $rootScope.isLoggedIn = false;
+        $rootScope.user = {};
+        console.log("Login Unsuccessful");
+        done(false);
       });
     },
 
@@ -34,7 +57,6 @@ angular.module('bsis')
       */
 
      logout: function() {
-      console.log("INNNN LOGOUT!!!");
         $rootScope.user = {
           id : '',
           userId: '',
