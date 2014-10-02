@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.factory('AuthService', function ($http, $rootScope, ROLES, Api, Base64) {
+.factory('AuthService', function ($http, $rootScope, ROLES, Api, Authinterceptor, Base64) {
 
   var userProfile = {};
 
@@ -33,6 +33,7 @@ angular.module('bsis')
         userProfile = profile;
         $rootScope.user = userProfile;
         $rootScope.isLoggedIn = true;
+        Authinterceptor.setLoggedInUser(userProfile, encoded);
         console.log("Login Successful");
         done(true);
       }, function (){
