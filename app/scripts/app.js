@@ -309,9 +309,6 @@ angular.module('bsis', [
           localStorage.setItem('consoleSession', JSON.stringify( consoleSessionObject ));
           
           $rootScope.sessionUserName = sessionUserName;
-
-          console.log("$rootScope.sessionUser: ", $rootScope.sessionUser);
-
         }
 
       }else{

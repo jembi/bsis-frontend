@@ -10,11 +10,8 @@ angular.module('bsis')
       User: $resource(url + '/user' , {}, {
         get: {
           method: 'GET'
-         // headers: {'Authorization': 'Basic c3VwZXJ1c2VyOnN1cGVydXNlcg=='}
         }
       })
-
-
 
     };
 });
