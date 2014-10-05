@@ -14,7 +14,7 @@ angular.module('bsis')
         .success(function(user){
         if (user.Error === undefined) {
           $rootScope.user = user.user;
-          $rootScope.isLoggedIn = true;
+          $rootScope.displayHeader = true;
           //$rootScope.user = data;
           console.log("user.userid: ",user.user.userId);
           console.log("Login Successful");
@@ -32,12 +32,12 @@ angular.module('bsis')
       Api.User.get({}, function (profile) {
         userProfile = profile;
         $rootScope.user = userProfile;
-        $rootScope.isLoggedIn = true;
+        $rootScope.displayHeader = true;
         Authinterceptor.setLoggedInUser(userProfile, encoded);
         console.log("Login Successful");
         done(true);
       }, function (){
-        $rootScope.isLoggedIn = false;
+        $rootScope.displayHeader = false;
         $rootScope.user = {};
         console.log("Login Unsuccessful");
         done(false);
@@ -64,7 +64,7 @@ angular.module('bsis')
         userId: '',
         role : ROLES.guest
       };
-      $rootScope.isLoggedIn = false;
+      $rootScope.displayHeader = false;
       localStorage.removeItem('consoleSession');
       localStorage.removeItem('auth');
       localStorage.removeItem('loggedOnUser');
@@ -73,7 +73,11 @@ angular.module('bsis')
       return userProfile;
     },
     isLoggedIn: function () {
-      return $rootScope.isLoggedIn;
+      if (userProfile !== null){
+        return true;
+      } else {
+        return false;
+      }
     }
 
   };

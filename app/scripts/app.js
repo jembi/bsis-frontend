@@ -274,7 +274,7 @@ angular.module('bsis', [
       consoleSession = JSON.parse(consoleSession);
 
       //used to control if header is displayed
-      $rootScope.isLoggedIn = false;
+      $rootScope.displayHeader = false;
 
       //check if session exists
       if( consoleSession ){
@@ -299,7 +299,7 @@ angular.module('bsis', [
           var sessionUserRoles = consoleSession.sessionUserRoles;
 
           //set the header to display
-          $rootScope.isLoggedIn = true;
+          $rootScope.displayHeader = true;
 
           //create session object
           var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserRoles': sessionUserRoles, 'expires': expireTime };
