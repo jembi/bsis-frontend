@@ -7,7 +7,6 @@ angular.module('bsis')
       password: ''
     };
 
-    //if url "#/logout" is returned then destroy the session
     if ($location.path() === "/logout"){
       AuthService.logout();
     }
@@ -62,8 +61,22 @@ angular.module('bsis')
 
           var sessionUserRoles = userProfile.roles;
 
+          var sessionUser = userProfile.username;
+
+          var firstName = '';
+          // if firstName hasn't been set, use '' rather than null
+          if (userProfile.firstName !== null){
+            firstName = userProfile.firstName;
+          }
+          var lastName = '';
+          // if lastName hasn't been set, use '' rather than null
+          if (userProfile.lastName !== null){
+            lastName = userProfile.lastName;
+          }
+          var sessionUserName = firstName + ' ' + lastName;
+
           //create session object
-          var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': credentials.username, 'sessionUserRoles': sessionUserRoles, 'expires': expireTime };
+          var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserName': sessionUserName, 'sessionUserRoles': sessionUserRoles, 'expires': expireTime };
 
           // Put the object into storage
           localStorage.setItem('consoleSession', JSON.stringify( consoleSessionObject ));

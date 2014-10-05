@@ -296,17 +296,21 @@ angular.module('bsis', [
           //get sessionID
           var sessionID = consoleSession.sessionID;
           var sessionUser = consoleSession.sessionUser;
+          var sessionUserName = consoleSession.sessionUserName;
           var sessionUserRoles = consoleSession.sessionUserRoles;
 
           //set the header to display
           $rootScope.displayHeader = true;
 
           //create session object
-          var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserRoles': sessionUserRoles, 'expires': expireTime };
+          var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserName': sessionUserName, 'sessionUserRoles': sessionUserRoles, 'expires': expireTime };
 
           // Put updated object into storage
           localStorage.setItem('consoleSession', JSON.stringify( consoleSessionObject ));
-          $rootScope.sessionUser = sessionUser;
+          
+          $rootScope.sessionUserName = sessionUserName;
+
+          console.log("$rootScope.sessionUser: ", $rootScope.sessionUser);
 
         }
 

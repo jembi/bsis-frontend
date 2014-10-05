@@ -26,7 +26,7 @@ angular.module('bsis')
     },
     */
 
-    login: function (credentials, done) {
+    login: function (credentials, loginSuccess) {
       var encoded = Base64.encode(credentials.username + ':' + credentials.password);
       $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
       Api.User.get({}, function (profile) {
@@ -35,12 +35,12 @@ angular.module('bsis')
         $rootScope.displayHeader = true;
         Authinterceptor.setLoggedInUser(userProfile, encoded);
         console.log("Login Successful");
-        done(true);
+        loginSuccess(true);
       }, function (){
         $rootScope.displayHeader = false;
         $rootScope.user = {};
         console.log("Login Unsuccessful");
-        done(false);
+        loginSuccess(false);
       });
     },
 
