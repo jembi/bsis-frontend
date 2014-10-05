@@ -247,6 +247,7 @@ angular.module('bsis', [
           localStorage.setItem('consoleSession', JSON.stringify( consoleSessionObject ));
           
           $rootScope.sessionUserName = sessionUserName;
+          $rootScope.sessionUserPermissions = sessionUserPermissions;
         }
 
       }else{
