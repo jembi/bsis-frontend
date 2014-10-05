@@ -273,8 +273,12 @@ angular.module('bsis', [
       var consoleSession = localStorage.getItem('consoleSession');
       consoleSession = JSON.parse(consoleSession);
 
+      //used to control if header is displayed
+      $rootScope.isLoggedIn = false;
+
       //check if session exists
       if( consoleSession ){
+
         //check if session has expired
         var currentTime = new Date();
         currentTime = currentTime.toISOString();
@@ -293,6 +297,9 @@ angular.module('bsis', [
           var sessionID = consoleSession.sessionID;
           var sessionUser = consoleSession.sessionUser;
           var sessionUserRoles = consoleSession.sessionUserRoles;
+
+          //set the header to display
+          $rootScope.isLoggedIn = true;
 
           //create session object
           var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserRoles': sessionUserRoles, 'expires': expireTime };
