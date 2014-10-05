@@ -1,26 +1,86 @@
 'use strict';
 
 angular.module('bsis')
-.controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthService, $location) {
+.controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthService, Authinterceptor, $location) {
     $scope.credentials = {
       username: '',
       password: ''
     };
+
+    if ($location.path() === "/logout"){
+      AuthService.logout();
+    }
+
     $scope.login = function (credentials) {
-      console.log(credentials.username);
-      console.log(credentials.password);
-          AuthService.login(credentials).then(function () {
+      AuthService.login(credentials, function(loggedIn){
+        if (loggedIn){
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-          console.log("user.id: ", $rootScope.user.id);
-          console.log("user.userId: ", $rootScope.user.userId);
-          console.log("user.Role: ", $rootScope.user.role);
           $location.path( "/home" );
           $scope.loginInvalid = false;
-        }, function () {
+
+          //Create the session for the logged in user
+          $scope.createUserSession(credentials);
+        }
+        else{
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
           $scope.loginInvalid = true;
           $scope.credentials.username = null;
           $scope.credentials.password = null;
+        }
       });
+        
+      // MOCKAPI LOGIN FUNCTION
+      /*
+      AuthService.login(credentials, ).then(function () {
+        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+        $location.path( "/home" );
+        $scope.loginInvalid = false;
+      }, function () {
+        $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+        $scope.loginInvalid = true;
+        $scope.credentials.username = null;
+        $scope.credentials.password = null;
+      });
+      */
+      
     };
+
+    $scope.createUserSession = function(credentials){
+
+         // get the logged in user details
+        var userProfile = AuthService.getLoggedInUser();
+        // check if userProfile exists
+        if ( !userProfile.roles ){
+          return 'Logged in user could not be found!';
+        }else{
+          var currentTime = new Date();
+          //add 1 hour onto timestamp (1 hour persistence time)
+          var expireTime = new Date(currentTime.getTime() + (1*1000*60*60));
+          //generate random sessionID
+          var sessionID = Math.random().toString(36).slice(2).toUpperCase();
+
+          var sessionUserRoles = userProfile.roles;
+
+          var sessionUser = userProfile.username;
+
+          var firstName = '';
+          // if firstName hasn't been set, use '' rather than null
+          if (userProfile.firstName !== null){
+            firstName = userProfile.firstName;
+          }
+          var lastName = '';
+          // if lastName hasn't been set, use '' rather than null
+          if (userProfile.lastName !== null){
+            lastName = userProfile.lastName;
+          }
+          var sessionUserName = firstName + ' ' + lastName;
+
+          //create session object
+          var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserName': sessionUserName, 'sessionUserRoles': sessionUserRoles, 'expires': expireTime };
+
+          // Put the object into storage
+          localStorage.setItem('consoleSession', JSON.stringify( consoleSessionObject ));
+        }
+    };
+
   });
