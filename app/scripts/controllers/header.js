@@ -85,7 +85,6 @@ angular.module('bsis')
       ~$location.path().indexOf('viewTestResults')          ||
       ~$location.path().indexOf('manageTestBatch')          ||
       ~$location.path().indexOf('viewTestBatch')            ||
-      ~$location.path().indexOf('serologyTesting')          ||
       ~$location.path().indexOf('recordTestResults')        ||
       ~$location.path().indexOf('manageTTITesting')         ||
       ~$location.path().indexOf('manageBloodGroupTesting')  ||
@@ -398,7 +397,6 @@ angular.module('bsis')
       ~$location.path().indexOf('viewTestResults')          ||
       ~$location.path().indexOf('manageTestBatch')          ||
       ~$location.path().indexOf('viewTestBatch')            ||
-      ~$location.path().indexOf('serologyTesting')          ||
       ~$location.path().indexOf('recordTestResults')        ||
       ~$location.path().indexOf('manageTTITesting')         ||
       ~$location.path().indexOf('manageBloodGroupTesting')  ||
