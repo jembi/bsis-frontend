@@ -65,6 +65,9 @@ angular.module('bsis')
         role : ROLES.guest
       };
       $rootScope.isLoggedIn = false;
+      localStorage.removeItem('consoleSession');
+      localStorage.removeItem('auth');
+      localStorage.removeItem('loggedOnUser');
     },
     getLoggedInUser: function () {
       return userProfile;

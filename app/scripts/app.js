@@ -17,6 +17,12 @@ angular.module('bsis', [
         controller  : 'LoginCtrl'
       })
 
+      // LOGOUT PAGE
+      .when('/logout', {
+        templateUrl : 'views/login.html',
+        controller  : 'LoginCtrl'
+      })
+
       .when('/home', {
         templateUrl : 'views/home.html',
         controller  : 'HomeCtrl',
@@ -262,6 +268,47 @@ angular.module('bsis', [
 
   .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
     $rootScope.$on('$locationChangeStart', function(event){
+      
+      // Retrieve the session from storage
+      var consoleSession = localStorage.getItem('consoleSession');
+      consoleSession = JSON.parse(consoleSession);
+
+      //check if session exists
+      if( consoleSession ){
+        //check if session has expired
+        var currentTime = new Date();
+        currentTime = currentTime.toISOString();
+        if( currentTime >= consoleSession.expires ){
+          localStorage.removeItem('consoleSession');
+          //session expired - user needs to log in
+          $location.path( "/" );
+
+        }else{
+
+          //session still active - update expires time
+          currentTime = new Date();
+          //add 1 hour onto timestamp (1 hour persistence time)
+          var expireTime = new Date(currentTime.getTime() + (1*1000*60*60));
+          //get sessionID
+          var sessionID = consoleSession.sessionID;
+          var sessionUser = consoleSession.sessionUser;
+          var sessionUserRoles = consoleSession.sessionUserRoles;
+
+          //create session object
+          var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserRoles': sessionUserRoles, 'expires': expireTime };
+
+          // Put updated object into storage
+          localStorage.setItem('consoleSession', JSON.stringify( consoleSessionObject ));
+          $rootScope.sessionUser = sessionUser;
+
+        }
+
+      }else{
+        // no session - user needs to log in
+        $location.path( "/" );
+      }
+
+      /*
       //console.log("in locationChangeStart: ");
       //if (!AuthService.isAuthorized($location.path)) {
       if (!$rootScope.isLoggedIn){
@@ -273,6 +320,7 @@ angular.module('bsis', [
             $location.path( "/" );
         }
       }
+      */
     });
   }])
 
