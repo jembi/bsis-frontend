@@ -32,12 +32,12 @@ angular.module('bsis', [
       .when('/donors', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorsCtrl',
-        permission: PERMISSIONS.VIEW_DONORS
+        permission: PERMISSIONS.VIEW_DONOR
       })
       .when('/findDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorsCtrl',
-        permission: PERMISSIONS.FIND_DONOR
+        permission: PERMISSIONS.VIEW_DONOR
       })
       .when('/addDonor', {
         templateUrl : 'views/donors.html',
@@ -47,151 +47,151 @@ angular.module('bsis', [
       .when('/linkDonation', {
         templateUrl : 'views/donors.html',
         controller  : 'AddDonationCtrl',
-        permission: PERMISSIONS.LINK_DONATION
+        permission: PERMISSIONS.ADD_DONATION
       })
       .when('/manageClinic', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorClinicCtrl',
-        permission: PERMISSIONS.MANAGE_CLINIC
+        permission: PERMISSIONS.VIEW_DONATION_BATCH
       })
       .when('/exportDonorList', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorListCtrl',
-        permission: PERMISSIONS.EXPORT_DONOR_LIST
+        permission: PERMISSIONS.VIEW_DONOR
       })
       .when('/viewDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'ViewDonorCtrl',
-        permission: PERMISSIONS.VIEW_DONORS
+        permission: PERMISSIONS.VIEW_DONOR
       })
 
       // COMPONENTS URLs
       .when('/components', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENTS
+        permission: PERMISSIONS.VIEW_COMPONENT
       })
       .when('/recordComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENTS
+        permission: PERMISSIONS.ADD_COMPONENT
       })
       .when('/findComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENTS
+        permission: PERMISSIONS.VIEW_COMPONENT
       })
       .when('/discardComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENTS
+        permission: PERMISSIONS.DISCARD_COMPONENT
       })
       .when('/findDiscards', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENTS
+        permission: PERMISSIONS.VIEW_DISCARDS
       })
 
       // TESTING URLs
       .when('/testing', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TESTING
+        permission: PERMISSIONS.VIEW_TEST_OUTCOME
       })
       .when('/viewTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',
-        permission: PERMISSIONS.VIEW_TESTING
+        permission: PERMISSIONS.VIEW_TEST_OUTCOME
       })
       .when('/manageTestBatch', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TESTING
+        permission: PERMISSIONS.VIEW_TEST_OUTCOME
       })
       .when('/viewTestBatch', {
         templateUrl : 'views/testing.html',
         controller  : 'ViewTestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TESTING
+        permission: PERMISSIONS.VIEW_TEST_OUTCOME
       })
       .when('/serologyTesting', {
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',
-        permission: PERMISSIONS.VIEW_TESTING
+        permission: PERMISSIONS.VIEW_BLOOD_TYPING_OUTCOME
       })
       .when('/recordTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TESTING
+        permission: PERMISSIONS.ADD_TEST_OUTCOME
       })
       .when('/manageTTITesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        permission: PERMISSIONS.VIEW_TESTING
+        permission: PERMISSIONS.VIEW_TTI_OUTCOME
       })
       .when('/manageBloodGroupTesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        permission: PERMISSIONS.VIEW_TESTING
+        permission: PERMISSIONS.VIEW_BLOOD_TYPING_OUTCOME
       })
       .when('/uploadTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',
-        permission: PERMISSIONS.VIEW_TESTING
+        permission: PERMISSIONS.ADD_TEST_OUTCOME
       })
 
       // INVENTORY URLs
       .when('/inventory', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
       })
       .when('/manageInventory', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
       })
       .when('/transferComponents', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
       })
       .when('/issueComponents', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
       })
       .when('/componentUsage', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
       })
 
       // LABELLING URLs
       .when('/labelling', {
         templateUrl : 'views/labelling.html',
         controller  : 'LabellingCtrl',
-        permission: PERMISSIONS.VIEW_LABELLING
+        permission: PERMISSIONS.COMPONENT_LABELLING
       })
 
       // REPORTS URLs
       .when('/reports', {
         templateUrl : 'views/reports.html',
         controller  : 'ReportsCtrl',
-        permission: PERMISSIONS.VIEW_REPORTS
+        permission: PERMISSIONS.VIEW_REPORTING_INFORMATION
       })
 
       // MOBILE URLs
       .when('/mobile', {
         templateUrl : 'views/mobile.html',
         controller  : 'MobileCtrl',
-        permission: PERMISSIONS.VIEW_MOBILE
+        permission: PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION
       })
 
       // SETTINGS URLs
       .when('/settings', {
         templateUrl : 'views/settings.html',
         controller  : 'SettingsCtrl',
-        permission: PERMISSIONS.VIEW_LABELLING
+        permission: PERMISSIONS.VIEW_ADMIN_INFORMATION
       })
 
       .otherwise({
