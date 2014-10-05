@@ -25,236 +25,173 @@ angular.module('bsis', [
 
       .when('/home', {
         templateUrl : 'views/home.html',
-        controller  : 'HomeCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_HOME
-        }
+        controller  : 'HomeCtrl'
       })
 
       // DONORS URLs
       .when('/donors', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_DONORS
-        }
+        permission: PERMISSIONS.VIEW_DONORS
       })
       .when('/findDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorsCtrl',
-        data: {
-          permission: PERMISSIONS.FIND_DONOR
-        }
+        permission: PERMISSIONS.FIND_DONOR
       })
       .when('/addDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'AddDonorCtrl',
-        data: {
-          permission: PERMISSIONS.ADD_DONOR
-        }
+        permission: PERMISSIONS.ADD_DONOR
       })
       .when('/linkDonation', {
         templateUrl : 'views/donors.html',
         controller  : 'AddDonationCtrl',
-        data: {
-          permission: PERMISSIONS.LINK_DONATION
-        }
+        permission: PERMISSIONS.LINK_DONATION
       })
       .when('/manageClinic', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorClinicCtrl',
-        data: {
-          permission: PERMISSIONS.MANAGE_CLINIC
-        }
+        permission: PERMISSIONS.MANAGE_CLINIC
       })
       .when('/exportDonorList', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorListCtrl',
-        data: {
-          permission: PERMISSIONS.EXPORT_DONOR_LIST
-        }
+        permission: PERMISSIONS.EXPORT_DONOR_LIST
       })
       .when('/viewDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'ViewDonorCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_DONORS
-        }
+        permission: PERMISSIONS.VIEW_DONORS
       })
 
       // COMPONENTS URLs
       .when('/components', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_COMPONENTS
-        }
+        permission: PERMISSIONS.VIEW_COMPONENTS
       })
       .when('/recordComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_COMPONENTS
-        }
+        permission: PERMISSIONS.VIEW_COMPONENTS
       })
       .when('/findComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_COMPONENTS
-        }
+        permission: PERMISSIONS.VIEW_COMPONENTS
       })
       .when('/discardComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_COMPONENTS
-        }
+        permission: PERMISSIONS.VIEW_COMPONENTS
       })
       .when('/findDiscards', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_COMPONENTS
-        }
+        permission: PERMISSIONS.VIEW_COMPONENTS
       })
 
       // TESTING URLs
       .when('/testing', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TESTING
       })
       .when('/viewTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TESTING
       })
       .when('/manageTestBatch', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TESTING
       })
       .when('/viewTestBatch', {
         templateUrl : 'views/testing.html',
         controller  : 'ViewTestBatchCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TESTING
       })
       .when('/serologyTesting', {
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TESTING
       })
       .when('/recordTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TESTING
       })
       .when('/manageTTITesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TESTING
       })
       .when('/manageBloodGroupTesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TESTING
       })
       .when('/uploadTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TESTING
       })
 
       // INVENTORY URLs
       .when('/inventory', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_INVENTORY
-        }
+        permission: PERMISSIONS.VIEW_INVENTORY
       })
       .when('/manageInventory', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_INVENTORY
-        }
+        permission: PERMISSIONS.VIEW_INVENTORY
       })
       .when('/transferComponents', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_INVENTORY
-        }
+        permission: PERMISSIONS.VIEW_INVENTORY
       })
       .when('/issueComponents', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_INVENTORY
-        }
+        permission: PERMISSIONS.VIEW_INVENTORY
       })
       .when('/componentUsage', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_INVENTORY
-        }
+        permission: PERMISSIONS.VIEW_INVENTORY
       })
 
       // LABELLING URLs
       .when('/labelling', {
         templateUrl : 'views/labelling.html',
         controller  : 'LabellingCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_LABELLING
-        }
+        permission: PERMISSIONS.VIEW_LABELLING
       })
 
       // REPORTS URLs
       .when('/reports', {
         templateUrl : 'views/reports.html',
         controller  : 'ReportsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_REPORTS
-        }
+        permission: PERMISSIONS.VIEW_REPORTS
       })
 
       // MOBILE URLs
       .when('/mobile', {
         templateUrl : 'views/mobile.html',
         controller  : 'MobileCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_MOBILE
-        }
+        permission: PERMISSIONS.VIEW_MOBILE
       })
 
       // SETTINGS URLs
       .when('/settings', {
         templateUrl : 'views/settings.html',
         controller  : 'SettingsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_LABELLING
-        }
+        permission: PERMISSIONS.VIEW_LABELLING
       })
 
       .otherwise({
@@ -267,6 +204,7 @@ angular.module('bsis', [
   })
 
   .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
+
     $rootScope.$on('$locationChangeStart', function(event){
       
       // Retrieve the session from storage
