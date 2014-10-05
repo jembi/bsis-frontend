@@ -205,6 +205,19 @@ angular.module('bsis', [
 
   .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
 
+    // on route change, check to see if user has appropriate permissions
+    $rootScope.$on('$routeChangeStart', function(scope, next, current) {
+      var permission = next.$$route.permission;
+      // if the required permission is not in the current user's permissions list, redirect to logout
+      if (permission !== undefined && $rootScope.sessionUserPermissions.indexOf(permission) <= -1){
+        $location.path('/logout');
+      }
+    });
+    
+  }])
+
+  .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
+
     $rootScope.$on('$locationChangeStart', function(event){
       
       // Retrieve the session from storage
