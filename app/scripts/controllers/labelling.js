@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('LabellingCtrl', function ($scope, $location, LabellingService, ICONS) {
+  .controller('LabellingCtrl', function ($scope, $location, LabellingService, ICONS, PERMISSIONS) {
 
     $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
