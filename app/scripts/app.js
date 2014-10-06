@@ -349,11 +349,11 @@ angular.module('bsis', [
   .directive('hasPermission', function ($rootScope)  {
     return {
       link: function(scope, element, attrs) {
-        // if the permission is empty, throw error
-        if(attrs.hasPermission === ''){
-          throw "has-permission value not valid";
+        // if the permission is not an empty string, determine if element should be displayed
+        if(attrs.hasPermission !== ''){
+          var permission = attrs.hasPermission;
+          showOrHide();
         }
-        var permission = attrs.hasPermission;
 
         // determine if user has permission to view the element - 
         function showOrHide() {
@@ -368,7 +368,6 @@ angular.module('bsis', [
             element.remove();
           }
         }
-        showOrHide();
       }
     };
   })
