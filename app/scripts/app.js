@@ -346,4 +346,32 @@ angular.module('bsis', [
     };
   })
 
+  .directive('hasPermission', function ($rootScope)  {
+    return {
+      link: function(scope, element, attrs) {
+        // if the permission is empty, throw error
+        if(attrs.hasPermission === ''){
+          throw "has-permission value not valid";
+        }
+        var permission = attrs.hasPermission;
+
+        // determine if user has permission to view the element - 
+        function showOrHide() {
+          var hasPermission = false;
+          // if user has the appropriate permission, set hasPermission to TRUE
+          if ($rootScope.sessionUserPermissions.indexOf(permission) > -1){
+            hasPermission = true;
+          }
+
+          // remove the element if the user does not have the appropriate permission 
+          if(!hasPermission){
+            element.remove();
+          }
+        }
+        showOrHide();
+      }
+    };
+  })
+
+
 ;
