@@ -11,7 +11,7 @@ angular.module('bsis', [
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
-      // HOME PAGE
+      // LOGIN PAGE
       .when('/', {
         templateUrl : 'views/login.html',
         controller  : 'LoginCtrl'
@@ -22,7 +22,8 @@ angular.module('bsis', [
         templateUrl : 'views/login.html',
         controller  : 'LoginCtrl'
       })
-
+      
+      // HOME PAGE
       .when('/home', {
         templateUrl : 'views/home.html',
         controller  : 'HomeCtrl'
