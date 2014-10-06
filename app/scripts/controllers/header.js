@@ -1,38 +1,56 @@
 'use strict';
 
 angular.module('bsis')
-.controller('HeaderCtrl', function ($scope, $location, AuthService, ICONS) {
+.controller('HeaderCtrl', function ($scope, $location, AuthService, ICONS, PERMISSIONS) {
 
   $scope.icons = ICONS;
 
   $scope.sectionList = [
     {'title': 'HOME',
      'href': '#home',
-     'icon': ICONS.HOME},
+     'icon': ICONS.HOME,
+     'permission': ''
+    },
     {'title': 'DONORS',
      'href': '#donors',
-     'icon': ICONS.DONORS},
+     'icon': ICONS.DONORS,
+     'permission': PERMISSIONS.VIEW_DONOR_INFORMATION
+    },
     {'title': 'COMPONENTS',
      'href': '#components',
-     'icon': ICONS.COMPONENTS},
+     'icon': ICONS.COMPONENTS,
+     'permission': PERMISSIONS.VIEW_COMPONENT_INFORMATION
+    },
     {'title': 'TESTING',
      'href': '#testing',
-     'icon': ICONS.TESTING},
+     'icon': ICONS.TESTING,
+     'permission': PERMISSIONS.VIEW_TESTING_INFORMATION
+    },
     {'title': 'INVENTORY',
      'href': '#inventory',
-     'icon': ICONS.INVENTORY},
+     'icon': ICONS.INVENTORY,
+     'permission': PERMISSIONS.VIEW_INVENTORY_INFORMATION
+    },
     {'title': 'LABELLING',
      'href': '#labelling',
-     'icon': ICONS.LABELLING},
+     'icon': ICONS.LABELLING,
+     'permission': PERMISSIONS.LABEL_COMPONENT
+    },
     {'title': 'REPORTS',
      'href': '#reports',
-     'icon': ICONS.REPORTS},
+     'icon': ICONS.REPORTS,
+     'permission': PERMISSIONS.VIEW_REPORTING_INFORMATION
+    },
     {'title': 'MOBILE CLINIC',
      'href': '#mobile',
-     'icon': ICONS.MOBILE},
+     'icon': ICONS.MOBILE,
+     'permission': PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION
+    },
     {'title': 'SETTINGS',
      'href': '#settings',
-     'icon': ICONS.SETTINGS}
+     'icon': ICONS.SETTINGS,
+     'permission': PERMISSIONS.VIEW_ADMIN_INFORMATION
+    }
   ];
 
   // set menu on initial load
