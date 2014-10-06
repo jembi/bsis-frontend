@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('InventoryCtrl', function ($scope, $location, InventoryService, ICONS) {
+  .controller('InventoryCtrl', function ($scope, $location, InventoryService, ICONS, PERMISSIONS) {
 
     $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {

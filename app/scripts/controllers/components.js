@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ComponentsCtrl', function ($scope, $location, ComponentService, ICONS, COMPONENTTYPE, $filter, ngTableParams) {
+  .controller('ComponentsCtrl', function ($scope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, $filter, ngTableParams) {
 
     $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
     $scope.componentTypes = COMPONENTTYPE.componentTypes;
 
     $scope.isCurrent = function(path) {
