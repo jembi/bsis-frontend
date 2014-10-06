@@ -68,7 +68,7 @@ angular.module('bsis')
   ISSUE_COMPONENT: 'Issue Component',
 
   // Inventory Permissions
-  COMPONENT_LABELLING: 'Component Labelling',
+  LABEL_COMPONENT: 'Label Component',
 
   // Discard Permissions
   DISCARD_COMPONENT: 'Discard Component',
