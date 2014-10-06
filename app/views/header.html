@@ -16,8 +16,9 @@
               <a href class="dropdown-toggle" style=" padding: 17px 5px 0 5px; font-size: 1.7rem;">
                {{currentSection}} <b class="caret"></b></a>
               <ul class="dropdown-menu dropdown-ext">
-              <li ng-repeat="section in sectionList">
-                <a href="{{section.href}}">{{section.title}}<i class="fa {{section.icon}}" style="float: right; padding: 0px 5px;"></i></a>
+              <li ng-repeat="section in sectionList" >
+                  <a has-permission="{{section.permission}}" ng-show='section.title != currentSection' href="{{section.href}}" >{{section.title}}<i class="fa {{section.icon}}" style="float: right; padding: 0px 5px;"></i></a>
+                  <a has-permission="{{section.permission}}" ng-show='section.title == currentSection' href="{{section.href}}" style="color:#888;" >{{section.title}}<i class="fa {{section.icon}}" style="float: right; padding: 0px 5px;"></i></a>
               </li>
               </ul>
             </li>

@@ -59,7 +59,20 @@ angular.module('bsis')
           //generate random sessionID
           var sessionID = Math.random().toString(36).slice(2).toUpperCase();
 
-          var sessionUserRoles = userProfile.roles;
+          var sessionUserPermissions = [];
+          var role = '';
+          var permission = '';
+          // iterate through the user's roles and associated permissions, and populate sessionUserPermissions with these permissions 
+          for (var roleIndex in userProfile.roles){
+            role = userProfile.roles[roleIndex];
+            for (var permissionIndex in role.permissions){
+              permission = role.permissions[permissionIndex];
+              // if the permission is not already in the user permissions array, add it to the array
+              if (sessionUserPermissions.indexOf(permission.name) <= -1){
+                sessionUserPermissions.push(permission.name);
+              }
+            }
+          }
 
           var sessionUser = userProfile.username;
 
@@ -76,7 +89,7 @@ angular.module('bsis')
           var sessionUserName = firstName + ' ' + lastName;
 
           //create session object
-          var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserName': sessionUserName, 'sessionUserRoles': sessionUserRoles, 'expires': expireTime };
+          var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserName': sessionUserName, 'sessionUserPermissions': sessionUserPermissions, 'expires': expireTime };
 
           // Put the object into storage
           localStorage.setItem('consoleSession', JSON.stringify( consoleSessionObject ));

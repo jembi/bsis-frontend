@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $location, DonorService, ICONS, $filter, ngTableParams) {
+  .controller('DonorsCtrl', function ($scope, $location, DonorService, ICONS, PERMISSIONS, $filter, ngTableParams) {
 
     $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
     var data = {};
     $scope.data = data;
 

@@ -11,7 +11,7 @@ angular.module('bsis', [
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
-      // HOME PAGE
+      // LOGIN PAGE
       .when('/', {
         templateUrl : 'views/login.html',
         controller  : 'LoginCtrl'
@@ -22,239 +22,172 @@ angular.module('bsis', [
         templateUrl : 'views/login.html',
         controller  : 'LoginCtrl'
       })
-
+      
+      // HOME PAGE
       .when('/home', {
         templateUrl : 'views/home.html',
-        controller  : 'HomeCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_HOME
-        }
+        controller  : 'HomeCtrl'
       })
 
       // DONORS URLs
       .when('/donors', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_DONORS
-        }
+        permission: PERMISSIONS.VIEW_DONOR
       })
       .when('/findDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorsCtrl',
-        data: {
-          permission: PERMISSIONS.FIND_DONOR
-        }
+        permission: PERMISSIONS.VIEW_DONOR
       })
       .when('/addDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'AddDonorCtrl',
-        data: {
-          permission: PERMISSIONS.ADD_DONOR
-        }
+        permission: PERMISSIONS.ADD_DONOR
       })
       .when('/linkDonation', {
         templateUrl : 'views/donors.html',
         controller  : 'AddDonationCtrl',
-        data: {
-          permission: PERMISSIONS.LINK_DONATION
-        }
+        permission: PERMISSIONS.ADD_DONATION
       })
       .when('/manageClinic', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorClinicCtrl',
-        data: {
-          permission: PERMISSIONS.MANAGE_CLINIC
-        }
+        permission: PERMISSIONS.VIEW_DONATION_BATCH
       })
       .when('/exportDonorList', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorListCtrl',
-        data: {
-          permission: PERMISSIONS.EXPORT_DONOR_LIST
-        }
+        permission: PERMISSIONS.VIEW_DONOR
       })
       .when('/viewDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'ViewDonorCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_DONORS
-        }
+        permission: PERMISSIONS.VIEW_DONOR
       })
 
       // COMPONENTS URLs
       .when('/components', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_COMPONENTS
-        }
+        permission: PERMISSIONS.VIEW_COMPONENT
       })
       .when('/recordComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_COMPONENTS
-        }
+        permission: PERMISSIONS.ADD_COMPONENT
       })
       .when('/findComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_COMPONENTS
-        }
+        permission: PERMISSIONS.VIEW_COMPONENT
       })
       .when('/discardComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_COMPONENTS
-        }
+        permission: PERMISSIONS.DISCARD_COMPONENT
       })
       .when('/findDiscards', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_COMPONENTS
-        }
+        permission: PERMISSIONS.VIEW_DISCARDS
       })
 
       // TESTING URLs
       .when('/testing', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TEST_OUTCOME
       })
       .when('/viewTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TEST_OUTCOME
       })
       .when('/manageTestBatch', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TEST_OUTCOME
       })
       .when('/viewTestBatch', {
         templateUrl : 'views/testing.html',
         controller  : 'ViewTestBatchCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
-      })
-      .when('/serologyTesting', {
-        templateUrl : 'views/testing.html',
-        controller  : 'TestingCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TEST_OUTCOME
       })
       .when('/recordTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.ADD_TEST_OUTCOME
       })
       .when('/manageTTITesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_TTI_OUTCOME
       })
       .when('/manageBloodGroupTesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.VIEW_BLOOD_TYPING_OUTCOME
       })
       .when('/uploadTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_TESTING
-        }
+        permission: PERMISSIONS.ADD_TEST_OUTCOME
       })
 
       // INVENTORY URLs
       .when('/inventory', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_INVENTORY
-        }
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
       })
       .when('/manageInventory', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_INVENTORY
-        }
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
       })
       .when('/transferComponents', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_INVENTORY
-        }
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
       })
       .when('/issueComponents', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_INVENTORY
-        }
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
       })
       .when('/componentUsage', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_INVENTORY
-        }
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
       })
 
       // LABELLING URLs
       .when('/labelling', {
         templateUrl : 'views/labelling.html',
         controller  : 'LabellingCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_LABELLING
-        }
+        permission: PERMISSIONS.COMPONENT_LABELLING
       })
 
       // REPORTS URLs
       .when('/reports', {
         templateUrl : 'views/reports.html',
         controller  : 'ReportsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_REPORTS
-        }
+        permission: PERMISSIONS.VIEW_REPORTING_INFORMATION
       })
 
       // MOBILE URLs
       .when('/mobile', {
         templateUrl : 'views/mobile.html',
         controller  : 'MobileCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_MOBILE
-        }
+        permission: PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION
       })
 
       // SETTINGS URLs
       .when('/settings', {
         templateUrl : 'views/settings.html',
         controller  : 'SettingsCtrl',
-        data: {
-          permission: PERMISSIONS.VIEW_LABELLING
-        }
+        permission: PERMISSIONS.VIEW_ADMIN_INFORMATION
       })
 
       .otherwise({
@@ -267,6 +200,20 @@ angular.module('bsis', [
   })
 
   .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
+
+    // on route change, check to see if user has appropriate permissions
+    $rootScope.$on('$routeChangeStart', function(scope, next, current) {
+      var permission = next.$$route.permission;
+      // if the required permission is not in the current user's permissions list, redirect to logout
+      if (permission !== undefined && $rootScope.sessionUserPermissions.indexOf(permission) <= -1){
+        $location.path('/logout');
+      }
+    });
+    
+  }])
+
+  .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
+
     $rootScope.$on('$locationChangeStart', function(event){
       
       // Retrieve the session from storage
@@ -297,18 +244,19 @@ angular.module('bsis', [
           var sessionID = consoleSession.sessionID;
           var sessionUser = consoleSession.sessionUser;
           var sessionUserName = consoleSession.sessionUserName;
-          var sessionUserRoles = consoleSession.sessionUserRoles;
+          var sessionUserPermissions = consoleSession.sessionUserPermissions;
 
           //set the header to display
           $rootScope.displayHeader = true;
 
           //create session object
-          var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserName': sessionUserName, 'sessionUserRoles': sessionUserRoles, 'expires': expireTime };
+          var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserName': sessionUserName, 'sessionUserPermissions': sessionUserPermissions, 'expires': expireTime };
 
           // Put updated object into storage
           localStorage.setItem('consoleSession', JSON.stringify( consoleSessionObject ));
           
           $rootScope.sessionUserName = sessionUserName;
+          $rootScope.sessionUserPermissions = sessionUserPermissions;
         }
 
       }else{
@@ -398,5 +346,32 @@ angular.module('bsis', [
       templateUrl: 'views/template/dateselect.html'
     };
   })
+
+  .directive('hasPermission', function ($rootScope)  {
+    return {
+      link: function(scope, element, attrs) {
+        // if the permission is not an empty string, determine if element should be displayed
+        if(attrs.hasPermission !== ''){
+          var permission = attrs.hasPermission;
+          showOrHide();
+        }
+
+        // determine if user has permission to view the element - 
+        function showOrHide() {
+          var hasPermission = false;
+          // if user has the appropriate permission, set hasPermission to TRUE
+          if ($rootScope.sessionUserPermissions.indexOf(permission) > -1){
+            hasPermission = true;
+          }
+
+          // remove the element if the user does not have the appropriate permission 
+          if(!hasPermission){
+            element.remove();
+          }
+        }
+      }
+    };
+  })
+
 
 ;

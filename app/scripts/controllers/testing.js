@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('TestingCtrl', function ($scope, $location, TestingService, ICONS, $filter, ngTableParams) {
+  .controller('TestingCtrl', function ($scope, $location, TestingService, ICONS, PERMISSIONS, $filter, ngTableParams) {
 
     $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
     var data = {};
     $scope.data = data;
     $scope.openTestBatches = false;
