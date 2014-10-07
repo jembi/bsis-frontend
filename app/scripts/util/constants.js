@@ -104,7 +104,15 @@ angular.module('bsis')
     options: ["Mr","Mrs","Ms","Dr","Prof"]
   })
   .constant('GENDER', {
-    options: ["Male","Female"]
+    "options": [
+    {
+      "id": "male",
+      "name": "Male"
+    },
+    {
+      "id": "female",
+      "name": "Female"
+    }
   })
   .constant('PACKTYPE', {
     "packtypes": [

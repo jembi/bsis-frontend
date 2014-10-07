@@ -33,7 +33,7 @@
     <label for="name" class="col-sm-1 control-label">Gender</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donor.gender" ng-options="item as item for item in gender">
+        <select class="form-control input-sm" ng-model="donor.gender" ng-options="item.id as item.name for item in gender">
             <option value="" ng-disabled="true"></option>
         </select>
       </div>
