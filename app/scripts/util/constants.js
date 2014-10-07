@@ -113,6 +113,7 @@ angular.module('bsis')
       "id": "female",
       "name": "Female"
     }
+  ]
   })
   .constant('PACKTYPE', {
     "packtypes": [
