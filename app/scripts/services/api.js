@@ -11,6 +11,14 @@ angular.module('bsis')
         get: {
           method: 'GET'
         }
+      }),
+
+      Donor: $resource(url + '/donor:id'),
+
+      DonorFormFields: $resource(url + '/donor' , {}, {
+        get: {
+          method: 'GET'
+        }
       })
 
     };
