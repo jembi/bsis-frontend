@@ -71,9 +71,28 @@ angular.module('bsis')
     };
 
     $scope.addDonor = function (newDonor){
-      console.log("Add Donor - firstName:", newDonor.firstName);
-      console.log("Add Donor - lastName:", newDonor.lastName);
-      console.log("Add Donor - preferredLanguage:", newDonor.preferredLanguage);
+
+      DonorService.addDonor(newDonor, function(response){
+        if (response === true){
+
+          $scope.dateOptions = {
+            'formatYear': 'yy',
+            'startingDay': 1,
+            'show-weeks': false
+          };
+          $scope.format = 'dd/MM/yyyy';
+          $scope.initDate = $scope.donor.birthDate;
+          $scope.calIcon = 'fa-calendar';
+
+          $scope.donorBirthDateOpen = false;
+
+          $location.path("/viewDonor");
+          
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
     };
 
     $scope.edit = function () {
@@ -107,8 +126,24 @@ angular.module('bsis')
     $scope.donor = DonorService.getDonor();
 
     /* TODO: Update service call above (getDonor()) to include donorFormFields, so that two service calls are not required*/
+    /*
     DonorService.getDonorFormFields().then(function (response) {
-        $scope.data = response.data;
+      $scope.data = response.data;
+      $scope.addressTypes = $scope.data.addressTypes;
+      $scope.languages = $scope.data.languages;
+      $scope.donorPanels = $scope.data.donorPanels;
+      $scope.idTypes = $scope.data.idTypes;
+      $scope.preferredContactMethods = $scope.data.preferredContactMethods;
+      $scope.title = TITLE.options;
+      $scope.month = MONTH.options;
+      $scope.gender = GENDER.options;
+
+      }, function () {
+    });
+    */
+    DonorService.getDonorFormFields(function(response){
+      if (response !== false){
+        $scope.data = response;
         $scope.addressTypes = $scope.data.addressTypes;
         $scope.languages = $scope.data.languages;
         $scope.donorPanels = $scope.data.donorPanels;
@@ -117,9 +152,10 @@ angular.module('bsis')
         $scope.title = TITLE.options;
         $scope.month = MONTH.options;
         $scope.gender = GENDER.options;
-
-        }, function () {
-      });
+      }
+      else{
+      }
+    });
 
     $scope.getDeferrals = function () {
 
@@ -261,7 +297,8 @@ angular.module('bsis')
   // Controller for Adding Donors
   .controller('AddDonorCtrl', function ($scope, $location, DonorService, MONTH, TITLE, GENDER) {
 
-      DonorService.addDonor().then(function (response) {
+      /*
+        DonorService.getDonorFormFields().then(function (response) {
         var data = response.data;
         $scope.addressTypes = data.addressTypes;
         $scope.languages = data.languages;
@@ -281,6 +318,31 @@ angular.module('bsis')
 
       }, function () {
       });
+    */
+    DonorService.getDonorFormFields(function(response){
+      if (response !== false){
+        $scope.data = response;
+        $scope.addressTypes = $scope.data.addressTypes;
+        $scope.languages = $scope.data.languages;
+        $scope.donorPanels = $scope.data.donorPanels;
+        $scope.donor = $scope.data.addDonorForm;
+        $scope.searchDonor = DonorService.getDonor();
+        $scope.donor.firstName = $scope.searchDonor.firstName;
+        $scope.donor.lastName = $scope.searchDonor.lastName;
+
+        // clear $scope.searchDonor fields after assigning them to $scope.donor 
+        $scope.searchDonor.firstName = '';
+        $scope.searchDonor.lastName = '';
+
+        $scope.title = TITLE.options;
+        $scope.month = MONTH.options;
+        $scope.gender = GENDER.options;
+      }
+      else{
+      }
+    });
+
+
   })
 
   // Controller for Adding Donations
