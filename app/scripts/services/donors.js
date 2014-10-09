@@ -50,6 +50,22 @@ angular.module('bsis')
       });
       */
     },
+    updateDonor: function (donor, response){
+      console.log("IN DONOR SERVICE...");
+      console.log("donor.idNumber: ", donor.idNumber);
+      console.log("donor.id: ", donor.id);
+      console.log("donor: ", donor);
+
+      var updateDonor = Api.Donor.get({id:donor.id}, function() {
+        updateDonor.idNumber = '1234567890';
+
+        var yesDonor = Api.Donor.update({id:donor.id}, updateDonor, function() {
+         response(true);
+        });
+
+      });
+
+    },
     getDonor: function(){
       return donorObj;
     },
