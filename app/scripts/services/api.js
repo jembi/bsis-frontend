@@ -7,15 +7,15 @@ angular.module('bsis')
     var url = 'http://' + APIHOST + ':' + APIPORT + '/' + APIAPP;
 
     return {
-      User: $resource(url + '/user' , {}, {
+      User: $resource(url + '/users/current' , {}, {
         get: {
           method: 'GET'
         }
       }),
 
-      Donor: $resource(url + '/donor:id'),
+      Donor: $resource(url + '/donors:id'),
 
-      DonorFormFields: $resource(url + '/donor')
+      DonorFormFields: $resource(url + '/donors/form')
 
     };
 });
