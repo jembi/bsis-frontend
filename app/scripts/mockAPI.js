@@ -73,5 +73,6 @@ var mockAPI = angular.module('mockAPI', ['ngMockE2E', 'ngResource']);
     $httpBackend.whenGET(/views\/\w+.*/).passThrough();
     $httpBackend.whenGET(/^\w+.*/).passThrough();
     $httpBackend.whenPOST(/^\w+.*/).passThrough();
+    $httpBackend.whenPUT(/^\w+.*/).passThrough();
 
   });
