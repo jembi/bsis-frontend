@@ -13,7 +13,11 @@ angular.module('bsis')
         }
       }),
 
-      Donor: $resource(url + '/donors:id'),
+      Donor: $resource(url + '/donors/:id', null, 
+        {
+          update: {method:'PUT'}
+        }
+      ),
 
       DonorFormFields: $resource(url + '/donors/form')
 
