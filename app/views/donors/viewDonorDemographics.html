@@ -1,9 +1,9 @@
-<form editable-form name="demographicsForm" onaftersave="saveDonorDemographics()">
+<form editable-form name="demographicsForm" onaftersave="updateDonor(donor)">
 
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
     <em><a href="" ng-click="demographicsForm.$show()" ng-show="!demographicsForm.$visible">Edit</a></em>
     <span ng-show="demographicsForm.$visible">
-      <em><a href="" ng-click="saveDonor()" ng-disabled="demographicsForm.$waiting">Save</a></em> | 
+      <em><a href="" ng-click="updateDonor(donor)" ng-disabled="demographicsForm.$waiting">Save</a></em> | 
       <em><a href="" ng-click="demographicsForm.$cancel()" ng-disabled="demographicsForm.$waiting">Cancel</a></em>
     </span>
   </span>
