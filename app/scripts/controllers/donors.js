@@ -7,13 +7,13 @@ angular.module('bsis')
     $scope.permissions = PERMISSIONS;
     var data = {};
     $scope.data = data;
+    $scope.age = '';
 
     $scope.donorSearch = {
       firstName: '',
       lastName: ''
     };
     $scope.searchResults = '';
-
 
     $scope.findDonor = function () {   
       DonorService.findDonor($scope.donorSearch, function(response){
@@ -153,6 +153,7 @@ angular.module('bsis')
   .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams) {
 
     $scope.data = {};
+    $scope.age = '';
     $scope.deferralsData = {};
     $scope.donationsData = {};
     var deferralReasons = [];
