@@ -7,8 +7,19 @@ angular.module('bsis')
   var donorsObj = {};
 
   return {
-    findDonor: function (donor) {
-       return $http.get('/findDonor', {params: { firstName: donor.firstName, lastName:  donor.lastName }})
+    findDonor: function (donorSearch, response) {
+      var donors = Api.FindDonors.query({firstName: donorSearch.firstName, lastName: donorSearch.lastName}, function(){
+        console.log("findDonors: ", donors);
+        donors = donors.donors;
+        donorsObj = donors;
+        response(donorsObj);
+      }, function (){
+        response(false);  
+      });
+
+      // MOCKAPI FIND DONOR FUNCTION
+      /*
+       return $http.get('/findDonor', {params: { firstName: donor.donorSearch, lastName:  donor.donorSearch }})
         .success(function(data, status, headers, config){
         if (donor.Error === undefined) {
           donorsObj = data.donors;
@@ -18,6 +29,7 @@ angular.module('bsis')
       .error(function(data){
         console.log("Find Donor Unsuccessful");
       });
+      */
     },
     addDonor: function (donor, response){
       // create $Resource object and assign donor values
@@ -57,6 +69,8 @@ angular.module('bsis')
       console.log("donor: ", donor);
 
       var updateDonor = Api.Donor.get({id:donor.id}, function() {
+        updateDonor = updateDonor.donor;
+
         updateDonor.idNumber = '1234567890';
 
         var yesDonor = Api.Donor.update({id:donor.id}, updateDonor, function() {
@@ -68,6 +82,9 @@ angular.module('bsis')
     },
     getDonor: function(){
       return donorObj;
+    },
+    getDonors: function(){
+      return donorsObj;
     },
     getDonorFormFields: function(response){
       Api.DonorFormFields.get({}, function (backingForm) {
@@ -96,6 +113,9 @@ angular.module('bsis')
     },
     setDonor: function(donor) {
       donorObj = donor;
+    },
+    setDonors: function(donors) {
+      donorsObj = donors;
     },
     getDeferrals: function (donor) {
        return $http.get('/getDeferrals')

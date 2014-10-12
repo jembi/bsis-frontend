@@ -16,14 +16,32 @@ angular.module('bsis')
 
 
     $scope.findDonor = function () {   
-      DonorService.findDonor($scope.donorSearch).then(function (response) {
-          data = response.data.donors;
-          $scope.data = data;
-          $scope.searchResults = true;
-        }, function () {
-          $scope.searchResults = false;
-      });
-    };
+      DonorService.findDonor($scope.donorSearch, function(response){
+      if (response !== false){
+        //data = response.data.donors;
+        //data = DonorService.getDonors();
+        data = response;
+        console.log("DonorService.getDonors(): ", DonorService.getDonors());
+        $scope.data = data;
+        console.log("$scope.data: ", $scope.data);
+        $scope.searchResults = true;
+      }
+      else{
+        $scope.searchResults = false;
+      }
+    });
+
+    // MOCKAPI FIND DONOR FUNCTION
+    /*
+    DonorService.findDonor($scope.donorSearch).then(function (response) {
+        data = response.data.donors;
+        $scope.data = data;
+        $scope.searchResults = true;
+      }, function () {
+        $scope.searchResults = false;
+    });
+    */
+  };
 
     $scope.isCurrent = function(path) {
       if ($location.path() === "/viewDonor" && path === "/findDonor") {
