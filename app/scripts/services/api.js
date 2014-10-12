@@ -19,7 +19,17 @@ angular.module('bsis')
         }
       ),
 
-      DonorFormFields: $resource(url + '/donors/form')
+      DonorFormFields: $resource(url + '/donors/form'),
+
+      FindDonors: $resource(url + '/donors/search', {}, 
+        {
+          query: {
+            method: 'GET', 
+            params:{firstName:'@firstName', lastName:'@lastName' }
+          }
+        }
+      )
+
 
     };
 });
