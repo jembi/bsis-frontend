@@ -17,7 +17,7 @@
         <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
       </span>
     </span>
-    <span class="h3" style="vertical-align: 0.3em; padding-left:5px;">
+    <span class="h3" ng-if="donor.bloodGroup !== ''" style="vertical-align: 0.3em; padding-left:5px;">
       <span class="fa-stack fa-1x">
         <i class="fa fa-circle fa-stack-2x fa-fw"></i>
         <i class="fa fa-stack-1x fa-inverse">{{donor.bloodGroup}}</i>
