@@ -81,11 +81,11 @@
                   <td data-title="'Gender'" header-class="text-left" sortable="'gender'">
                       {{donor.gender}}
                   </td>
-                  <td data-title="'Age'" header-class="text-left" class="text-center"  sortable="'age'">
-                      {{donor.age}}
+                  <td data-title="'Age'" header-class="text-left" class="text-center" calculate-age dob="{{donor.birthDate}}" age="age">
+                      {{age}}
                   </td>
                   <td data-title="'Date of Birth'" header-class="text-left" class="text-center" sortable="'birthDate'">
-                      {{donor.birthDate}}
+                      {{ (donor.birthDate | date:"dd/MM/yyyy") || '' }}
                   </td>
               </tr>
           </table>
