@@ -373,5 +373,33 @@ angular.module('bsis', [
     };
   })
 
+  /*  Custom directive to calculate age from birthDate
+      example use: <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
+  */
+  .directive('calculateAge', function() {
+    return {
+        restrict: 'EA',
+        scope: {
+            dob: '@',
+            age: '=',
+        },
+        controller: function ($scope) {
+          var age = '';
+          if($scope.dob === ''){
+            $scope.age = '';
+          }
+          else{
+            var today = new Date();
+            var birthDate = new Date($scope.dob);
+            age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            $scope.age = age;
+          }
+        }
+    };
+  })
 
 ;
