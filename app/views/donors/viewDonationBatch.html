@@ -1,8 +1,8 @@
 <table ng-table="donorClinicTableParams" show-filter="true" class="table">
   <tr ng-repeat="donation in $data"
     ng-click="changeSelection(donation);"
-    ng-mouseenter="donation.$selected = true"
-    ng-mouseleave="donation.$selected = false"
+    ng-mouseenter="this.$selected = true"
+    ng-mouseleave="this.$selected = false"
     ng-class="{'active': donation.$selected}">
     <td data-title="'Donor #'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donorNumber'"  filter="{ 'donorNumber': 'text' }">
         {{donation.donorNumber}}

@@ -1,8 +1,8 @@
 <table ng-table="componentsSummaryTableParams" show-filter="false" class="table">
   <tr ng-repeat="donation in $data"
       ng-click="changeSelection(donation);"
-      ng-mouseenter="donation.$selected = true"
-      ng-mouseleave="donation.$selected = false"
+      ng-mouseenter="this.$selected = true"
+      ng-mouseleave="this.$selected = false"
       ng-class="{'active': donation.$selected}">
       <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
           {{donation.donationIdentificationNumber}}

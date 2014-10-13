@@ -31,8 +31,8 @@
   <table ng-table="deferralTableParams" show-filter="true" class="table">
       <tr ng-repeat="deferral in $data"
           ng-click="changeSelection(deferral);"
-          ng-mouseenter="deferral.$selected = true"
-          ng-mouseleave="deferral.$selected = false"
+          ng-mouseenter="this.$selected = true"
+          ng-mouseleave="this.$selected = false"
           ng-class="{'active': deferral.$selected}">
           <td data-title="'Deferred On'" style="width:15%;" header-class="text-left" class="text-center" sortable="'deferredOn'"  filter="{ 'deferredOn': 'text' }">
               {{deferral.deferredOn}}

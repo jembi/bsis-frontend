@@ -46,8 +46,8 @@
         <table ng-table="discardsSummaryTableParams" show-filter="false" class="table">
           <tr ng-repeat="discard in $data"
               ng-click=""
-              ng-mouseenter="discard.$selected = true"
-              ng-mouseleave="discard.$selected = false"
+              ng-mouseenter="this.$selected = true"
+              ng-mouseleave="this.$selected = false"
               ng-class="{'active': discard.$selected}">
               <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
                   {{discard.donationIdentificationNumber}}

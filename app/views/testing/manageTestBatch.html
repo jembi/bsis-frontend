@@ -10,8 +10,8 @@
         <table ng-table="testBatchTableParams" show-filter="false" class="table">
           <tr ng-repeat="testBatch in $data"
               ng-click="viewTestBatch(testBatch); changeSelection(testBatch);"
-              ng-mouseenter="testBatch.$selected = true"
-              ng-mouseleave="testBatch.$selected = false"
+              ng-mouseenter="this.$selected = true"
+              ng-mouseleave="this.$selected = false"
               ng-class="{'active': testBatch.$selected}">
               <td data-title="'Batch Number'" style="width:25%;" header-class="text-left" class="text-center" sortable="'batchNumber'">
                   {{testBatch.batchNumber}}

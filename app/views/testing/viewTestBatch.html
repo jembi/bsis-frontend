@@ -31,8 +31,8 @@
       <table ng-table="testSamplesTableParams" show-filter="false" class="table">
         <tr ng-repeat="sample in $data"
             ng-click=""
-            ng-mouseenter="sample.$selected = true"
-            ng-mouseleave="sample.$selected = false"
+            ng-mouseenter="this.$selected = true"
+            ng-mouseleave="this.$selected = false"
             ng-class="{'active': sample.$selected}">
             <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
                 {{sample.donationIdentificationNumber}}

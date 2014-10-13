@@ -27,8 +27,8 @@
         <table ng-table="componentsTableParams" show-filter="false" class="table">
           <tr ng-repeat="component in $data"
               ng-click="changeSelection(component);"
-              ng-mouseenter="component.$selected = true"
-              ng-mouseleave="component.$selected = false"
+              ng-mouseenter="this.$selected = true"
+              ng-mouseleave="this.$selected = false"
               ng-class="{'active': component.$selected}">
               <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
                   {{component.componentType}}

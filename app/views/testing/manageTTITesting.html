@@ -60,8 +60,8 @@
           <tbody>
           <tr ng-repeat="sample in $data"
               ng-click=""
-              ng-mouseenter="sample.$selected = true"
-              ng-mouseleave="sample.$selected = false"
+              ng-mouseenter="this.$selected = true"
+              ng-mouseleave="this.$selected = false"
               ng-class="{'active': sample.$selected}">
               <td class="text-center" >
                   {{sample.donationIdentificationNumber}}

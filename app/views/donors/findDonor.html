@@ -66,8 +66,8 @@
           <table ng-table="tableParams" show-filter="false" class="table">
               <tr ng-repeat="donor in $data"
                   ng-click="viewDonor(donor); changeSelection(donor);"
-                  ng-mouseenter="donor.$selected = true"
-                  ng-mouseleave="donor.$selected = false"
+                  ng-mouseenter="this.$selected = true"
+                  ng-mouseleave="this.$selected = false"
                   ng-class="{'active': donor.$selected}">
                   <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
                       {{donor.donorNumber}}
