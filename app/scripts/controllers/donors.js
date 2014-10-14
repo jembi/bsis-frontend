@@ -114,19 +114,16 @@ angular.module('bsis')
     };
 
     $scope.updateDonor = function (donor){
-
-      console.log("IN DONOR CONTROLLER...");
-      console.log("donor.idNumber: ", donor.idNumber);
-      console.log("donor.id: ", donor.id);
-      console.log("donor: ", donor);
+      
       DonorService.updateDonor(donor, function(response){
-        if (response === true){
-          
+        if (response !== false){
+          $scope.donor = response;
         }
         else{
           // TODO: handle case where response == false
         }
       });
+      
     };
 
     $scope.edit = function () {

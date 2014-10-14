@@ -34,15 +34,10 @@ angular.module('bsis')
     addDonor: function (donor, response){
       // create $Resource object and assign donor values
       var addDonor = new Api.Donor();
-      addDonor.firstName = donor.firstName;
-      addDonor.lastName = donor.lastName;
-      addDonor.title = donor.title;
-      addDonor.gender = donor.gender;
-      addDonor.donorPanel = donor.donorPanel;
-      addDonor.preferredLanguage = donor.preferredLanguage;
-      addDonor.dayOfMonth = donor.dayOfMonth;
-      addDonor.month = donor.month;
-      addDonor.year = donor.year;
+
+      console.log("donor: ", donor);
+      angular.copy(donor, addDonor);
+      console.log("addDonor: ", addDonor);
 
       // save donor (POST /donor) and assign response donor object to 'donorObj'
       addDonor.$save(function(data){ 
@@ -63,19 +58,20 @@ angular.module('bsis')
       */
     },
     updateDonor: function (donor, response){
-      console.log("IN DONOR SERVICE...");
-      console.log("donor.idNumber: ", donor.idNumber);
-      console.log("donor.id: ", donor.id);
-      console.log("donor: ", donor);
 
       var updateDonor = Api.Donor.get({id:donor.id}, function() {
         updateDonor = updateDonor.donor;
 
-        updateDonor.idNumber = '1234567890';
+        angular.copy(donor, updateDonor);
+        console.log("updateDonor: ", updateDonor);
 
-        var yesDonor = Api.Donor.update({id:donor.id}, updateDonor, function() {
-         response(true);
-        });
+        Api.Donor.update({id:donor.id}, updateDonor, function(data) {
+         donorObj = data.donor;
+         console.log("updateDonor response: ", donorObj);
+         response(donorObj);
+        }, function (){
+          response(false);
+        }); 
 
       });
 
