@@ -44,7 +44,7 @@
     <label for="name" class="col-sm-1 control-label">Panel</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donor.donorPanel" ng-options="item.id as item.name for item in donorPanels">
+        <select class="form-control input-sm" ng-model="donor.donorPanel" ng-options="item as item.name for item in donorPanels">
             <option value="" ng-disabled="true"></option>
         </select>
       </div>
@@ -55,7 +55,7 @@
     <label for="name" class="col-sm-1 control-label">Language</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donor.preferredLanguage" ng-options="item.id as item.preferredLanguage for item in languages">
+        <select class="form-control input-sm" ng-model="donor.preferredLanguage" ng-options="item as item.preferredLanguage for item in languages">
             <option value=""></option>
         </select>
       </div>
