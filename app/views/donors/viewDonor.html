@@ -31,14 +31,14 @@
 
 
     <span ng-show="editableForm.$visible">
-            <em>
-            <button type="submit" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="editableForm.$waiting">
-              Save
-            </button>
-            <button type="button" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
-              Cancel
-            </button>
-            </em>
+      <em>
+      <button type="submit" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="editableForm.$waiting">
+        Save
+      </button>
+      <button type="button" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+        Cancel
+      </button>
+      </em>
     </span>
 
       <em><a ng-show="!editableForm.$visible" href="">Remove</a></em></small>
