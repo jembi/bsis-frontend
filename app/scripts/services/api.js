@@ -28,7 +28,11 @@ angular.module('bsis')
             params:{firstName:'@firstName', lastName:'@lastName', donorNumber: '@donorNumber', donationIdentificationNumber: '@donationIdentificationNumber', usePhraseMatch: '@usePhraseMatch' }
           }
         }
-      )
+      ),
+
+      DonorDonations: $resource(url + '/donors/:id/donations'),
+
+      DonorDeferrals: $resource(url + '/donors/:id/deferrals')
 
 
     };
