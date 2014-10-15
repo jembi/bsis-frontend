@@ -410,9 +410,40 @@ angular.module('bsis')
   })
 
   // Controller for Adding Donations
-  .controller('AddDonationCtrl', function ($scope, $location, DonorService, PACKTYPE) {
+  .controller('AddDonationCtrl', function ($scope, $location, DonorService) {
 
-    $scope.packTypes = PACKTYPE.packtypes;
+    DonorService.getDonationsFormFields(function(response){
+      if (response !== false){
+        $scope.data = response;
+        $scope.sites = $scope.data.sites;
+        $scope.centers = $scope.data.centers;
+        $scope.packTypes = $scope.data.packTypes;
+        $scope.donationTypes = $scope.data.donationTypes;
+        $scope.donation = $scope.data.addDonationForm;
+      }
+      else{
+      }
+    });
+
+    $scope.addDonation = function (donation){
+
+      DonorService.addDonation(donation, function(response){
+        if (response === true){
+
+          console.log("Donation Added");
+
+          $location.path("/addDonation");
+          
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
+    };
+
+    $scope.clear = function(){
+      $scope.donation = {};
+    };
 
   })
 
@@ -478,13 +509,6 @@ angular.module('bsis')
     $scope.donationDateFromOpen = false;
     $scope.donationDateToOpen = false;
     $scope.dueToDonateOpen = false;
-
-  })
-
-  // Controller for Adding Donations
-  .controller('AddDonationCtrl', function ($scope, $location, DonorService, PACKTYPE) {
-
-    $scope.packTypes = PACKTYPE.packtypes;
 
   })
 
