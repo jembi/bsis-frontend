@@ -116,6 +116,20 @@ angular.module('bsis')
     setDonors: function(donors) {
       donorsObj = donors;
     },
+    getDonationsFormFields: function(response){
+      Api.DonationsFormFields.get({}, function (backingForm) {
+        response(backingForm);
+      }, function (){
+        response(false);
+      });
+    },
+    getDeferralsFormFields: function(response){
+      Api.DeferralsFormFields.get({}, function (backingForm) {
+        response(backingForm);
+      }, function (){
+        response(false);
+      });
+    },
     getDeferrals: function (donorId, response) {
       Api.DonorDeferrals.get({id:donorId}, function (deferrals) {
         response(deferrals);
