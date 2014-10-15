@@ -32,6 +32,8 @@ angular.module('bsis')
       ),
 
       DonorFormFields: $resource(url + '/donors/form'),
+      DonationsFormFields: $resource(url + '/donations/form'),
+      DeferralsFormFields: $resource(url + '/deferrals/form'),
 
       FindDonors: $resource(url + '/donors/search', {}, 
         {
