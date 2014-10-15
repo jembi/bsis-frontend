@@ -328,7 +328,7 @@ angular.module('bsis', [
         maxDate: "=",
         opened: "=",
         format: "=",
-        initDate: "@",
+        initDate: "=",
         calIcon: "="
       },
       link: function($scope, element, attrs) {
