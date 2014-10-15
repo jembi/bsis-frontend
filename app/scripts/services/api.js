@@ -7,7 +7,7 @@ angular.module('bsis')
     var url = 'http://' + APIHOST + ':' + APIPORT + '/' + APIAPP;
 
     return {
-      User: $resource(url + '/users/current' , {}, {
+      User: $resource(url + '/users/login-user-details' , {}, {
         get: {
           method: 'GET'
         }
