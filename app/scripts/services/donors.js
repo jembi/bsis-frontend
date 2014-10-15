@@ -123,6 +123,28 @@ angular.module('bsis')
         response(false);
       });
     },
+    addDonation: function (donation, response){
+      // create $Resource object and assign donation values
+      var addDonation = new Api.Donations();
+
+      console.log("donation: ", donation);
+      angular.copy(donation, addDonation);
+
+      // set temporary donationDate, site & center values
+      addDonation.collectedOn = '10/16/2014 12:00:00 am';
+      addDonation.collectionSite = '3';
+      addDonation.collectionCenter = '3';
+      
+      console.log("addDonation: ", addDonation);
+
+      // save donation (POST /donations)
+      addDonation.$save(function(data){ 
+        response(true);
+        console.log("addDonation response: ",data.donation);
+      }, function (){
+        response(false);
+      }); 
+    },
     getDeferralsFormFields: function(response){
       Api.DeferralsFormFields.get({}, function (backingForm) {
         response(backingForm);
