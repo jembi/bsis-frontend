@@ -19,6 +19,18 @@ angular.module('bsis')
         }
       ),
 
+      Deferrals: $resource(url + '/deferrals/:id', null, 
+        {
+          update: {method:'PUT'}
+        }
+      ),
+
+      Donations: $resource(url + '/donations/:id', null, 
+        {
+          update: {method:'PUT'}
+        }
+      ),
+
       DonorFormFields: $resource(url + '/donors/form'),
 
       FindDonors: $resource(url + '/donors/search', {}, 
