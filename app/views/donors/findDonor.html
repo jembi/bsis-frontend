@@ -7,7 +7,7 @@
       <div class="form-inline" style="padding-left:5px;">
         <input size="15"  type="firstName" id="firstName" class="form-control input-sm" placeholder="First"  autofocus="true" ng-model="donorSearch.firstName" capitalize-first-letter>
         <input size="15"  type="lastName " id="lastName" class="form-control input-sm" placeholder="Last" ng-model="donorSearch.lastName" capitalize-first-letter>
-        <input  type="checkbox" > Include Similar Results
+        <input  type="checkbox" ng-model="donorSearch.usePhraseMatch" > Include Similar Results
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@
     <label for="name" class="col-sm-1 control-label" >DIN</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <input size="15" type="din" id="din" class="form-control input-sm" placeholder="" ng-model="donorSearch.din">
+        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="donorSearch.donationIdentificationNumber">
       </div>
     </div>
   </div>
@@ -60,7 +60,7 @@
       <div class="panel-body">
 
           <p>
-            <em> {{data.length}} donors found </em> | <em> <a href="" ng-click="addNewDonor(donorSearch)" >Add New Donor</a></em>  
+            <em> {{data.length}} donor(s) found </em> | <em> <a href="" ng-click="addNewDonor(donorSearch)" >Add New Donor</a></em>  
           </p>
 
           <table ng-table="tableParams" show-filter="false" class="table">
