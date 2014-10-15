@@ -59,7 +59,7 @@ angular.module('bsis')
     ~$location.path().indexOf('findDonor')      ||
     ~$location.path().indexOf('addDonor')       ||
     ~$location.path().indexOf('viewDonor')      ||
-    ~$location.path().indexOf('linkDonation')   ||
+    ~$location.path().indexOf('addDonation')    ||
     ~$location.path().indexOf('manageClinic')   ||
     ~$location.path().indexOf('exportDonorList')
     ){
@@ -138,7 +138,7 @@ angular.module('bsis')
       ~$location.path().indexOf('findDonor')        ||
       ~$location.path().indexOf('addDonor')         ||
       ~$location.path().indexOf('viewDonor')        ||
-      ~$location.path().indexOf('linkDonation')     ||
+      ~$location.path().indexOf('addDonation')      ||
       ~$location.path().indexOf('manageClinic')     ||
       ~$location.path().indexOf('exportDonorList')
     ){

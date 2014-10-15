@@ -45,7 +45,7 @@ angular.module('bsis', [
         controller  : 'AddDonorCtrl',
         permission: PERMISSIONS.ADD_DONOR
       })
-      .when('/linkDonation', {
+      .when('/addDonation', {
         templateUrl : 'views/donors.html',
         controller  : 'AddDonationCtrl',
         permission: PERMISSIONS.ADD_DONATION
