@@ -25,6 +25,11 @@ angular.module('bsis')
         $scope.data = data;
         console.log("$scope.data: ", $scope.data);
         $scope.searchResults = true;
+        
+        if ($scope.tableParams.data.length > 0){
+          $scope.tableParams.reload();
+        }
+        
       }
       else{
         $scope.searchResults = false;
