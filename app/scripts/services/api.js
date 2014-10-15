@@ -25,7 +25,7 @@ angular.module('bsis')
         {
           query: {
             method: 'GET', 
-            params:{firstName:'@firstName', lastName:'@lastName' }
+            params:{firstName:'@firstName', lastName:'@lastName', donorNumber: '@donorNumber', donationIdentificationNumber: '@donationIdentificationNumber', usePhraseMatch: '@usePhraseMatch' }
           }
         }
       )
