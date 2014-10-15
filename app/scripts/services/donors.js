@@ -125,14 +125,21 @@ angular.module('bsis')
         console.log("Get Donor Deferrals Unsuccessful");
       });
     },
-    getDonations: function (donor) {
-       return $http.get('/getDonations')
+    getDonations: function (donorId, response) {
+      Api.DonorDonations.get({id:donorId}, function (donations) {
+        response(donations);
+      }, function (){
+        response(false);
+      });
+      /*
+      return $http.get('/getDonations')
         .success(function(data, status, headers, config){
           return data;
       })
       .error(function(data){
         console.log("Get Donor Donations Unsuccessful");
       });
+      */
     },
     getDonationBatch: function (donor) {
        return $http.get('/getDonationBatch')

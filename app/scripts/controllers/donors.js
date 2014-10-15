@@ -18,8 +18,6 @@ angular.module('bsis')
     $scope.findDonor = function () {   
       DonorService.findDonor($scope.donorSearch, function(response){
       if (response !== false){
-        //data = response.data.donors;
-        //data = DonorService.getDonors();
         data = response;
         console.log("DonorService.getDonors(): ", DonorService.getDonors());
         $scope.data = data;
@@ -250,16 +248,31 @@ angular.module('bsis')
 
     };
 
-    $scope.getDonations = function () {
+    $scope.getDonations = function (donorId) {
 
       $scope.donationsView = 'viewDonations';
 
+
+      DonorService.getDonations(donorId, function(response){
+        if (response !== false){
+          $scope.donationsData = response.allCollectedSamples;
+          console.log("$scope.donationsData: ", $scope.donationsData);
+          $scope.donationResults = true;
+        }
+        else{
+          $scope.donationResults = false;
+        }
+      });
+
+      // MOCKAPI FIND GETDONATIONS FUNCTION
+      /*
       DonorService.getDonations().then(function (response) {
         $scope.donationsData = response.data.donations;
         $scope.donationResults = true;
       }, function () {
         $scope.donationResults = false;
       });
+      */
 
       $scope.$watch("donationsData", function () {
         if ($scope.donationTableParams.data.length > 0) {
