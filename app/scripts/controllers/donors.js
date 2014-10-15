@@ -192,10 +192,23 @@ angular.module('bsis')
       }
     });
 
-    $scope.getDeferrals = function () {
+    $scope.getDeferrals = function (donorId) {
 
       $scope.deferralView = 'viewDeferrals';
 
+      DonorService.getDeferrals(donorId, function(response){
+        if (response !== false){
+          $scope.deferralsData = response.allDonorDeferrals;
+          console.log("$scope.deferralsData: ", $scope.deferralsData);
+          $scope.deferralResults = true;
+        }
+        else{
+          $scope.deferralResults = false;
+        }
+      });
+
+      // MOCKAPI FIND GETDEFERRALS FUNCTION
+      /*
       DonorService.getDeferrals().then(function (response) {
         $scope.deferralsData = response.data.allDonorDeferrals;
         deferralReasons = response.data.deferralReasons;
@@ -203,6 +216,7 @@ angular.module('bsis')
       }, function () {
         $scope.deferralResults = false;
       });
+      */
 
       $scope.$watch("deferralsData", function () {
         if ($scope.deferralTableParams.data.length > 0) {

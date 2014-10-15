@@ -116,14 +116,21 @@ angular.module('bsis')
     setDonors: function(donors) {
       donorsObj = donors;
     },
-    getDeferrals: function (donor) {
-       return $http.get('/getDeferrals')
+    getDeferrals: function (donorId, response) {
+      Api.DonorDeferrals.get({id:donorId}, function (deferrals) {
+        response(deferrals);
+      }, function (){
+        response(false);
+      });
+      /*
+      return $http.get('/getDeferrals')
         .success(function(data, status, headers, config){
           return data;
       })
       .error(function(data){
         console.log("Get Donor Deferrals Unsuccessful");
       });
+      */
     },
     getDonations: function (donorId, response) {
       Api.DonorDonations.get({id:donorId}, function (donations) {
