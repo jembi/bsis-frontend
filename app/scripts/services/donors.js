@@ -8,7 +8,9 @@ angular.module('bsis')
 
   return {
     findDonor: function (donorSearch, response) {
-      var donors = Api.FindDonors.query({firstName: donorSearch.firstName, lastName: donorSearch.lastName}, function(){
+      var donors = Api.FindDonors.query({firstName: donorSearch.firstName, lastName: donorSearch.lastName, 
+          donorNumber: donorSearch.donorNumber, donationIdentificationNumber: donorSearch.donationIdentificationNumber, usePhraseMatch: donorSearch.usePhraseMatch}, function(){
+        console.log("donorSearch: ", donorSearch);
         console.log("findDonors: ", donors);
         donors = donors.donors;
         donorsObj = donors;
