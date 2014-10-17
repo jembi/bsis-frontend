@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.factory('DonorService', function ($http, Api) {
+.factory('DonorService', function ($http, Api, $filter) {
 
   var donorObj = {};
   var donorsObj = {};
@@ -134,7 +134,7 @@ angular.module('bsis')
       addDonation.collectedOn = '10/16/2014 12:00:00 am';
       addDonation.collectionSite = '3';
       addDonation.collectionCenter = '3';
-      
+
       console.log("addDonation: ", addDonation);
 
       // save donation (POST /donations)
@@ -151,6 +151,26 @@ angular.module('bsis')
       }, function (){
         response(false);
       });
+    },
+    addDeferral: function (deferral, response){
+      // create $Resource object and assign donation values
+      var addDeferral = new Api.Deferrals();
+
+      
+      angular.copy(deferral, addDeferral);
+
+      addDeferral.deferredOn = $filter('date')(deferral.deferredOn,'MM/dd/yyyy');
+      addDeferral.deferredUntil = $filter('date')(deferral.deferredUntil,'MM/dd/yyyy');
+
+      console.log("addDeferral: ", addDeferral);
+
+      // save deferral (POST /deferral)
+      addDeferral.$save(function(data){ 
+        response(true);
+        console.log("addDeferral response: ",data.deferral);
+      }, function (){
+        response(false);
+      }); 
     },
     getDeferrals: function (donorId, response) {
       Api.DonorDeferrals.get({id:donorId}, function (deferrals) {
