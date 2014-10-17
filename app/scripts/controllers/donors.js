@@ -67,6 +67,7 @@ angular.module('bsis')
       $scope.donorSearch = {};
       $scope.searchResults = '';
       $scope.donation = {};
+      $scope.deferral = {};
     };
 
     $scope.viewDonor = function (item) {
@@ -157,7 +158,6 @@ angular.module('bsis')
     $scope.age = '';
     $scope.deferralsData = {};
     $scope.donationsData = {};
-    var deferralReasons = [];
 
     $scope.donor = DonorService.getDonor();
 
@@ -188,6 +188,15 @@ angular.module('bsis')
         $scope.title = TITLE.options;
         $scope.month = MONTH.options;
         $scope.gender = GENDER.options;
+      }
+      else{
+      }
+    });
+
+    DonorService.getDeferralsFormFields(function(response){
+      if (response !== false){
+        $scope.data = response;
+        $scope.deferralReasons = $scope.data.deferralReasons;
       }
       else{
       }
@@ -251,7 +260,7 @@ angular.module('bsis')
       $scope.deferralReasonsFilter = function(column) {
         var def = $q.defer();
         var arr = [];
-        angular.forEach(deferralReasons, function(item){
+        angular.forEach($scope.deferralReasons, function(item){
           arr.push({
             'id': item.reason,
             'title': item.reason
@@ -348,13 +357,29 @@ angular.module('bsis')
       $scope.dateToOpen = false;
 
       $scope.deferralView = 'manageDeferral';
-      $scope.deferralReasons = deferralReasons;
 
     };
 
     $scope.viewDonationDetails = function (din) {
       $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
       $scope.donationsView = 'viewDonationDetails';
+    };
+
+    $scope.addDeferral = function (deferral){
+
+      deferral.deferredDonor = $scope.donor.id;
+
+      DonorService.addDeferral(deferral, function(response){
+        if (response === true){
+
+          $scope.deferral = {};
+          //$location.path("/addDonation");
+
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
     };
 
   })
