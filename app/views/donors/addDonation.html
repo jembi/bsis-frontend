@@ -1,5 +1,8 @@
 <h3 class="page-header">Add Donation</h3>
 
+<div ng-if="$parent.addDonationSuccess === true" ng-hide="$parent.addDonationSuccess !== true" style="padding-top:10px;"><alert type="success" close="$parent.addDonationSuccess = ''">Donation Added Successfully.</alert></div>
+<div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false" style="padding-top:10px;"><alert type="danger" close="$parent.addDonationSuccess = ''">Error Adding Donation, please resolve issues and try again.</alert></div>
+
 <form class="form-horizontal col-sm-12" role="form" ng-submit="addDonation(donation)">
 
   <div class="form-group">

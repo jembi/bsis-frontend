@@ -413,6 +413,8 @@ angular.module('bsis')
   // Controller for Adding Donations
   .controller('AddDonationCtrl', function ($scope, $location, DonorService) {
 
+    $scope.addDonationSuccess = '';
+
     DonorService.getDonationsFormFields(function(response){
       if (response !== false){
         $scope.data = response;
@@ -428,17 +430,19 @@ angular.module('bsis')
 
     $scope.addDonation = function (donation){
 
+      $scope.addDonationSuccess = '';
+
       DonorService.addDonation(donation, function(response){
         if (response === true){
 
-          console.log("Donation Added");
-
-          $location.path("/addDonation");
+          $scope.addDonationSuccess = true;
           $scope.donation = {};
-          
+          $location.path("/addDonation");
+
         }
         else{
           // TODO: handle case where response == false
+          $scope.addDonationSuccess = false;
         }
       });
     };
