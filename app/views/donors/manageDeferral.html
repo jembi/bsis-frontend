@@ -1,4 +1,4 @@
-<form class="form-horizontal col-sm-12"  role="form" ng-submit="addDeferral()">
+<form class="form-horizontal col-sm-12"  role="form" ng-submit="addDeferral(deferral)">
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label" >Period</label>
     <div class="row col-sm-11">
@@ -17,10 +17,10 @@
     <label for="name" class="col-sm-1 control-label" >Reason</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="deferral.reason" ng-options="item.reason as item.reason for item in deferralReasons">
+        <select class="form-control input-sm" ng-model="deferral.deferralReason" ng-options="item as item.reason for item in deferralReasons">
           <option value="" ng-disabled="true">Select:</option>
         </select>
-        <input size="30" type="comment" id="comment" class="form-control input-sm" placeholder="" ng-model="deferral.comment">
+        <input size="30" type="comment" id="deferralReasonText" class="form-control input-sm" placeholder="" ng-model="deferral.deferralReasonText">
       </div>
     </div>
   </div>
