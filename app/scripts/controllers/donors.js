@@ -66,6 +66,7 @@ angular.module('bsis')
     $scope.clear = function () {
       $scope.donorSearch = {};
       $scope.searchResults = '';
+      $scope.donation = {};
     };
 
     $scope.viewDonor = function (item) {
@@ -433,16 +434,13 @@ angular.module('bsis')
           console.log("Donation Added");
 
           $location.path("/addDonation");
+          $scope.donation = {};
           
         }
         else{
           // TODO: handle case where response == false
         }
       });
-    };
-
-    $scope.clear = function(){
-      $scope.donation = {};
     };
 
   })
