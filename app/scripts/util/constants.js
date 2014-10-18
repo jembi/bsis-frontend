@@ -42,7 +42,10 @@ angular.module('bsis')
     BARS: 'fa-bars',
     ARCHIVE: 'fa-archive',
     PHONE: 'fa-phone',
-    GLOBE: 'fa-globe'
+    GLOBE: 'fa-globe',
+    BARCODE: 'fa-barcode',
+    EDIT: 'fa-edit',
+    REMOVE: 'fa-times-circle'
   })
 
   .constant('BLOODGROUP', {
