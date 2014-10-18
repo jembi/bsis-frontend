@@ -371,10 +371,8 @@ angular.module('bsis')
 
       DonorService.addDeferral(deferral, function(response){
         if (response === true){
-
           $scope.deferral = {};
-          //$location.path("/addDonation");
-
+          $scope.getDeferrals($scope.donor.id);
         }
         else{
           // TODO: handle case where response == false
