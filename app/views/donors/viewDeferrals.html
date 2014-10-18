@@ -34,8 +34,8 @@
           ng-mouseenter="this.$selected = true"
           ng-mouseleave="this.$selected = false"
           ng-class="{'active': deferral.$selected}">
-          <td data-title="'Deferred On'" style="width:15%;" header-class="text-left" class="text-center" sortable="'deferredOn'"  filter="{ 'deferredOn': 'text' }">
-              {{deferral.deferredOn}}
+          <td data-title="'Deferred From'" style="width:15%;" header-class="text-left" class="text-center" sortable="'createdDate'"  filter="{ 'createdDate': 'text' }">
+              {{deferral.createdDate}}
           </td>
           <td data-title="'Deferred Until'" style="width:15%;" header-class="text-left" class="text-center" sortable="'deferredUntil'" filter="{ 'deferredUntil': 'text' }">
               {{deferral.deferredUntil}}
@@ -47,8 +47,8 @@
           <td data-title="'Comment'" header-class="text-left" sortable="'deferralReasonText'">
               {{deferral.deferralReasonText}}
           </td>
-          <td data-title="'Deferred By'" style="width:15%;" header-class="text-left" sortable="'deferredBy'" filter="{ 'deferredBy': 'text' }">
-              {{deferral.deferredBy}}
+          <td data-title="'Deferred By'" style="width:15%;" header-class="text-left" sortable="'createdBy'" filter="{ 'createdBy': 'text' }">
+              {{deferral.createdBy}}
           </td>
           <td data-title="''" style="width:8%;" class="text-center">
             <span style="font-size: 0.9em;">
