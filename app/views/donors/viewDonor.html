@@ -94,47 +94,36 @@
               </tr>
               <tr>
                 <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
-                <td class="field">Current Deferrals: </td>
-                <td class="value red"> On Medication <em>(ends 21 September 2014)</em>
-                  <span style="font-size: 0.8em;">
-                    <em><a href=""> Edit</a></em>
-                  </span>
-                </td>
+                <td class="field">Currently Deferred: </td>
+                <td ng-if="currentlyDeferred" class="value red"> Deferred until {{deferredUntil}}</td>
+                <td ng-if="!currentlyDeferred" class="value green"> No current defferals</td>
               </tr>
-              <tr>
-                <td class="icon"></td>
-                <td class="field"></td>
-                <td class="value red"> Illness or Operation <em>(ends 12 December 2014)</em>
-                  <span style="font-size: 0.8em;">
-                    <em><a href=""> Edit</a></em>
-                  </span>
-                </td>
               </tr>
               <tr><td></td></tr>
               <tr>
                 <td class="icon"><i class="fa {{icons.PLUS}}"></i></td>
                 <td class="field">Total Donations: </td>
-                <td class="value">{{donor.totalDonations}}</td>
+                <td class="value">{{totalDonations}}</td>
               </tr>
               <tr>
                 <td class="icon"><i class="fa {{icons.CIRCLEO}}"></i></td>
                 <td class="field">Date of First Donation: </td>
-                <td class="value">{{donor.dateOfFirstDonation | date:'longDate'}}</td>
+                <td class="value">{{dateOfFirstDonation | date:'longDate'}}</td>
               </tr>
               <tr>
                 <td class="icon"><i class="fa {{icons.CIRCLE}}"></i></td>
                 <td class="field">Previous Donation: </td>
-                <td class="value">{{donor.dateOfLastDonation | date:'longDate'}} <em>(71 days ago)</em><br/>
-                    <em>Venue</em>: Maseru | <em>Pack Type</em>: Single<br/>
-                    <em>Wt</em>: 81kg | <em>BP</em>: 110/70 |
-                    <em>Hb</em>: 13.7 | <em>P</em>: 61 </td>
+                <td class="value"><em>Date</em>: {{ (lastDonation.collectedOn | date:"dd/MM/yyyy") || '' }}<br/>
+                    <em>Venue</em>: {{lastDonation.collectionCenter.name}} <br/>
+                    <em>Donation Type</em>: {{lastDonation.donationType.donationType}} | <em>Pack Type</em>: {{lastDonation.packType.bloodBagType}}<br/>
+                    <em>Wt</em>: {{lastDonation.donorWeight}}kg | <em>BP</em>: {{lastDonation.bloodPressureDiastolic}}/{{lastDonation.bloodPressureSystolic}} |
+                    <em>Hb</em>: {{lastDonation.haemoglobinCount}} | <em>P</em>: {{lastDonation.donorPulse}} </td>
               </tr>
               <tr><td></td></tr>
               <tr>
                 <td class="icon"><i class="fa {{icons.COMMENT}}"></i></td>
                 <td class="field">Comments: </td>
-                <td class="value">12/09/10 - Sample comment about donor  
-                    <br/>21/06/13 - Another sample comment about donor</td>
+                <td class="value">{{donor.notes}}</td>
               </tr>
             </tbody>
           </table>
