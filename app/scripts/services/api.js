@@ -44,8 +44,8 @@ angular.module('bsis')
         }
       ),
 
+      DonorOverview:  $resource(url + '/donors/:id/overview'),
       DonorDonations: $resource(url + '/donors/:id/donations'),
-
       DonorDeferrals: $resource(url + '/donors/:id/deferrals')
 
 
