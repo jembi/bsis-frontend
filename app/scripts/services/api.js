@@ -39,7 +39,8 @@ angular.module('bsis')
         {
           query: {
             method: 'GET', 
-            params:{firstName:'@firstName', lastName:'@lastName', donorNumber: '@donorNumber', donationIdentificationNumber: '@donationIdentificationNumber', usePhraseMatch: '@usePhraseMatch' }
+            params:{firstName:'@firstName', lastName:'@lastName', donorNumber: '@donorNumber', 
+            donationIdentificationNumber: '@donationIdentificationNumber', usePhraseMatch: '@usePhraseMatch' }
           }
         }
       ),
@@ -47,7 +48,18 @@ angular.module('bsis')
       DonorOverview:  $resource(url + '/donors/:id/overview'),
       DonorDonations: $resource(url + '/donors/:id/donations'),
       DonorDeferrals: $resource(url + '/donors/:id/deferrals'),
-      DonorBarcode:   $resource(url + '/donors/:id/print')
+      DonorBarcode:   $resource(url + '/donors/:id/print'),
+
+      DonorCommunicationsFormFields: $resource(url + '/donorcommunications/form'),
+      DonorCommunicationsSearch: $resource(url + '/donorcommunications/search', {}, 
+        {
+          query: {
+            method: 'GET', 
+            params:{bloodGroups:'@bloodGroups', donorPanels:'@donorPanels', clinicDate: '@clinicDate', 
+            lastDonationFromDate: '@lastDonationFromDate', lastDonationToDate: '@lastDonationToDate', anyBloodGroup: '@anyBloodGroup' }
+          }
+        }
+      )
 
     };
 });
