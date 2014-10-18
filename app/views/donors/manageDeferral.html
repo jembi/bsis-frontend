@@ -1,13 +1,9 @@
+<h4> Add Deferral </h4>
 <form class="form-horizontal col-sm-12"  role="form" ng-submit="addDeferral(deferral)">
   <div class="form-group">
-    <label for="name" class="col-sm-1 control-label" >Period</label>
+    <label for="name" class="col-sm-1 control-label" >Defer Until:</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <dateselect ng-model="deferral.deferredOn" date-options="dateOptions" format="format" opened="dateFromOpen" cal-icon="icons.CALENDAR">
-        </dateselect>
-        <span>
-        <em> To: </em>
-        </span>
         <dateselect ng-model="deferral.deferredUntil" date-options="dateOptions" format="format" opened="dateToOpen" cal-icon="icons.CALENDAR">
         </dateselect>
       </div>
@@ -27,7 +23,7 @@
   <div class="form-group"> 
     <div class="col-sm-offset-1 col-sm-3">
       <button class="btn btn-primary" type="submit">Add Deferral</button>
-      <button class="btn btn-primary" type="button" ng-click="getDeferrals()">Cancel</button>
+      <button class="btn btn-primary" type="button" ng-click="getDeferrals(donor.id)">Cancel</button>
     </div>
   </div>
 </form>
