@@ -196,7 +196,11 @@ angular.module('bsis')
     DonorService.getDonorOverview($scope.donor.id, function(response){
       if (response !== false){
         $scope.data = response;
-
+        $scope.currentlyDeferred = $scope.data.currentlyDeferred;
+        $scope.deferredUntil = $scope.data.deferredUntil;
+        $scope.lastDonation = $scope.data.lastDonation;
+        $scope.dateOfFirstDonation = $scope.data.dateOfFirstDonation;
+        $scope.totalDonations = $scope.data.totalDonations;
       }
       else{
       }
