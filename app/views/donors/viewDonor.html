@@ -25,7 +25,7 @@
     </span>
 
     <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
-      <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  
+      <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit Donor</a></em>  
       <span ng-show="!editableForm.$visible"> | 
       </span>
 
@@ -41,7 +41,7 @@
       </em>
     </span>
 
-      <em><a ng-show="!editableForm.$visible" href="">Remove</a></em></small>
+      <em><a ng-show="!editableForm.$visible" href="">Void Donor</a></em></small>
     </span>
 
   <hr/>
@@ -65,6 +65,14 @@
     <small><em>Preferred Language: </em></small> 
     <span editable-select="donor.preferredLanguage.id" e-ng-options="item.id as item.preferredLanguage for item in languages" e-class="xeditable language" e-name="preferredLanguage">
       {{donor.preferredLanguage.preferredLanguage}}
+    </span>
+
+    <span style="float: right; padding-right: 15px;">
+      <small>
+      <em>
+      <a href="" ng-click="printDonorBarcode()" >Print Donor Barcode</a>
+      </em>
+      </small>
     </span>
   </div>
 
