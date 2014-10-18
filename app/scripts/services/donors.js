@@ -101,6 +101,14 @@ angular.module('bsis')
       });
       */
     },
+    getDonorOverview: function (donorId, response) {
+      Api.DonorOverview.get({id:donorId}, function (overview) {
+        response(overview);
+        console.log("DONOR OVERVIEW: ", overview);
+      }, function (){
+        response(false);
+      });
+    },
     getDonorListFormFields: function(){
       return $http.get('/getDonorListFormFields')
         .success(function(data, status, headers, config){

@@ -193,6 +193,15 @@ angular.module('bsis')
       }
     });
 
+    DonorService.getDonorOverview($scope.donor.id, function(response){
+      if (response !== false){
+        $scope.data = response;
+
+      }
+      else{
+      }
+    });
+
     DonorService.getDeferralsFormFields(function(response){
       if (response !== false){
         $scope.data = response;
