@@ -215,6 +215,17 @@ angular.module('bsis')
       }
     });
 
+    $scope.printDonorBarcode = function () {
+      DonorService.getDonorBarcode($scope.donor.id, function(response){
+        if (response !== false){
+          $scope.labelZPL = response.labelZPL;
+          console.log("$scope.labelZPL: ", $scope.labelZPL);
+        }
+        else{
+        }
+      });
+    };
+
     $scope.getDeferrals = function (donorId) {
 
       $scope.deferralView = 'viewDeferrals';

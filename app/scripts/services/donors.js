@@ -104,7 +104,6 @@ angular.module('bsis')
     getDonorOverview: function (donorId, response) {
       Api.DonorOverview.get({id:donorId}, function (overview) {
         response(overview);
-        console.log("DONOR OVERVIEW: ", overview);
       }, function (){
         response(false);
       });
@@ -211,6 +210,13 @@ angular.module('bsis')
         console.log("Get Donor Donations Unsuccessful");
       });
       */
+    },
+    getDonorBarcode: function (donorId, response) {
+      Api.DonorBarcode.get({id:donorId}, function (label) {
+        response(label);
+      }, function (){
+        response(false);
+      });
     },
     getDonationBatch: function (donor) {
        return $http.get('/getDonationBatch')
