@@ -34,6 +34,8 @@ angular.module('bsis')
       DonorFormFields: $resource(url + '/donors/form'),
       DonationsFormFields: $resource(url + '/donations/form'),
       DeferralsFormFields: $resource(url + '/deferrals/form'),
+      DonorCommunicationsFormFields: $resource(url + '/donorcommunications/form'),
+      ComponentsFormFields: $resource(url + '/components/form'),
 
       FindDonors: $resource(url + '/donors/search', {}, 
         {
@@ -50,7 +52,7 @@ angular.module('bsis')
       DonorDeferrals: $resource(url + '/donors/:id/deferrals'),
       DonorBarcode:   $resource(url + '/donors/:id/print'),
 
-      DonorCommunicationsFormFields: $resource(url + '/donorcommunications/form'),
+      
       DonorCommunicationsSearch: $resource(url + '/donorcommunications/search', {}, 
         {
           query: {
