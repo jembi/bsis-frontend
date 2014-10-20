@@ -504,18 +504,66 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
     $scope.donorListSearchResults = '';
-    $scope.donorPanels = [];
+    $scope.donorList = {};
+    $scope.donorList.donorPanels = [];
+    $scope.donorList.bloodGroups = [];
 
+    DonorService.getDonorListFormFields(function(response){
+      if (response !== false){
+        console.log("response: ", response);
+        $scope.donorPanels = response.donorPanels;
+        //$scope.bloodGroups = response.bloodGroups;
+        $scope.bloodGroups = BLOODGROUP.options;
+      }
+      else{
+      }
+    });
+    /*
     DonorService.getDonorListFormFields().then(function (response) {
         $scope.donorPanels = response.data.donorPanels;
       }, function () {
     });
+    */
 
-    $scope.bloodGroups = BLOODGROUP.options;
-    $scope.month = MONTH.options;
+    $scope.getDonors = function (searchParameters) {
 
-    $scope.getDonors = function () {
+      console.log("searchParameters: ", searchParameters);
+      
+      $scope.selectedDonorPanels = [];
+      angular.forEach(searchParameters.donorPanels,function(value,index){
+          $scope.selectedDonorPanels.push(value.id);
+      });
+      searchParameters.donorPanels = $scope.selectedDonorPanels;
 
+      $scope.selectedBloodGroups = [];
+      angular.forEach(searchParameters.bloodGroups,function(value,index){
+          $scope.selectedBloodGroups.push(value);
+      });
+      searchParameters.bloodGroups = $scope.selectedBloodGroups;
+
+      searchParameters.anyBloodGroup = true;
+
+      console.log("searchParameters: ", searchParameters);
+
+      DonorService.findDonorListDonors(searchParameters, function(response){
+        if (response !== false){
+          data = response;
+          console.log("DonorService.getDonors(): ", DonorService.getDonors());
+          $scope.data = data;
+          console.log("$scope.data: ", $scope.data);
+          $scope.searchResults = true;
+          
+          if ($scope.tableParams.data.length > 0){
+            $scope.tableParams.reload();
+          }
+          
+        }
+        else{
+          $scope.searchResults = false;
+        }
+      });
+
+      /*
       $scope.donorSearch = {
         'firstName': 'Sample',
         'lastName': 'Donor'
@@ -528,6 +576,7 @@ angular.module('bsis')
         }, function () {
           $scope.donorListSearchResults = false;
       });
+      */
     };
 
     $scope.donorListTableParams = new ngTableParams({
