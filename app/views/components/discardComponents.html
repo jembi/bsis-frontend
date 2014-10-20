@@ -55,7 +55,7 @@
             <label for="name" class="col-sm-2 control-label" >Discard Reason</label>
             <div class="row col-sm-10">
               <div class="form-inline" style="padding-left:5px;">
-                <select class="form-control input-sm" ng-model="discard.discardReason" ng-options="item.name as item.name for item in discardReasons">
+                <select class="form-control input-sm" ng-model="discard.discardReason" ng-options="item.id as item.statusChangeReason for item in discardReasons">
                     <option value="" ng-disabled="true">Select:</option>
                 </select>
               </div>
