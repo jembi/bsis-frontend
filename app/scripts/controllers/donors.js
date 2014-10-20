@@ -541,8 +541,6 @@ angular.module('bsis')
       });
       searchParameters.bloodGroups = $scope.selectedBloodGroups;
 
-      searchParameters.anyBloodGroup = true;
-
       console.log("searchParameters: ", searchParameters);
 
       DonorService.findDonorListDonors(searchParameters, function(response){
