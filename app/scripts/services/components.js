@@ -1,8 +1,15 @@
 'use strict';
 
 angular.module('bsis')
-.factory('ComponentService', function ($http) {
+.factory('ComponentService', function ($http, Api) {
   return {
+    getComponentsFormFields: function(response){
+      Api.ComponentsFormFields.get({}, function (backingForm) {
+        response(backingForm);
+      }, function (){
+        response(false);
+      });
+    },
     getComponentsByDIN: function (donationIdentificationNumber) {
       return $http.get('/getComponentsByDIN', {params: { din: donationIdentificationNumber }})
         .success(function(data, status, headers, config){
