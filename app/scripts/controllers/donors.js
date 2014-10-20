@@ -546,18 +546,17 @@ angular.module('bsis')
       DonorService.findDonorListDonors(searchParameters, function(response){
         if (response !== false){
           data = response;
-          console.log("DonorService.getDonors(): ", DonorService.getDonors());
           $scope.data = data;
           console.log("$scope.data: ", $scope.data);
-          $scope.searchResults = true;
+          $scope.donorListSearchResults = true;
           
-          if ($scope.tableParams.data.length > 0){
-            $scope.tableParams.reload();
+          if ($scope.donorListTableParams.data.length > 0){
+            $scope.donorListTableParams.reload();
           }
           
         }
         else{
-          $scope.searchResults = false;
+          $scope.donorListSearchResults = false;
         }
       });
 

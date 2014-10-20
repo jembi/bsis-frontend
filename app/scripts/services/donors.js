@@ -130,7 +130,7 @@ angular.module('bsis')
           clinicDate: $filter('date')(donorSearch.clinicDate,'MM/dd/yyyy'), lastDonationFromDate: $filter('date')(donorSearch.lastDonationFromDate,'MM/dd/yyyy'), 
           lastDonationToDate: $filter('date')(donorSearch.lastDonationToDate,'MM/dd/yyyy'), anyBloodGroup: donorSearch.anyBloodGroup}, function(){
         console.log("donorList response: ", donors);
-        response(donors);
+        response(donors.donors);
       }, function (){
         response(false);  
       });
