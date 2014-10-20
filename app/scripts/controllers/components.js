@@ -46,6 +46,17 @@ angular.module('bsis')
     $scope.startDateOpen = false;
     $scope.endDateOpen = false;
 
+    ComponentService.getComponentsFormFields(function(response){
+      if (response !== false){
+        $scope.data = response;
+        $scope.componentTypes = $scope.data.componentTypes;
+        $scope.returnReasons = $scope.data.returnReasons;
+        $scope.discardReasons = $scope.data.discardReasons;
+      }
+      else{
+      }
+    });
+
     $scope.clear = function () {
       $scope.componentsSearch = {};
       $scope.discardsSearch = {};
@@ -65,8 +76,8 @@ angular.module('bsis')
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber).then(function (response) {
           data = response.data.components;
           $scope.data = data;
-          $scope.componentTypes = response.data.componentTypes;
-          $scope.discardReasons = response.data.discardReasons;
+          //$scope.componentTypes = response.data.componentTypes;
+          //$scope.discardReasons = response.data.discardReasons;
           $scope.searchResults = true;
         }, function () {
           $scope.searchResults = false;
