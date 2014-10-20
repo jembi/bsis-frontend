@@ -108,13 +108,31 @@ angular.module('bsis')
         response(false);
       });
     },
-    getDonorListFormFields: function(){
+    getDonorListFormFields: function(response){
+      Api.DonorCommunicationsFormFields.get({}, function (backingForm) {
+        response(backingForm);
+      }, function (){
+        response(false);
+      });
+
+      /*
       return $http.get('/getDonorListFormFields')
         .success(function(data, status, headers, config){
           return data;
       })
       .error(function(data){
         console.log("Get Donor Form Unsuccessful");
+      });
+      */
+    },
+    findDonorListDonors: function (donorSearch, response) {
+      var donors = Api.DonorCommunicationsSearch.query({bloodGroups: donorSearch.bloodGroups, donorPanels: donorSearch.donorPanels, 
+          clinicDate: $filter('date')(donorSearch.clinicDate,'MM/dd/yyyy'), lastDonationFromDate: $filter('date')(donorSearch.lastDonationFromDate,'MM/dd/yyyy'), 
+          lastDonationToDate: $filter('date')(donorSearch.lastDonationToDate,'MM/dd/yyyy'), anyBloodGroup: donorSearch.anyBloodGroup}, function(){
+        console.log("donorList response: ", donors);
+        response(donors);
+      }, function (){
+        response(false);  
       });
     },
     setDonor: function(donor) {
