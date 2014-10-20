@@ -1,6 +1,6 @@
 <h3 class="page-header">View / Export Donor List</h3>
 
-<form class="form-horizontal col-sm-12"  role="form" ng-submit="getDonors()">
+<form class="form-horizontal col-sm-12"  role="form" ng-submit="getDonors(donorList)">
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Donor Panels</label>
     <div class="row col-sm-10">
@@ -31,10 +31,10 @@
     <label for="name" class="col-sm-2 control-label">Previous Donation</label>
     <div class="row col-sm-10">
       <div class="form-inline" style="padding-left:5px;">
-        <dateselect ng-model="donorList.donationDateFrom" date-options="dateOptions" format="format" opened="donationDateFromOpen" cal-icon="icons.CALENDAR">
+        <dateselect ng-model="donorList.lastDonationFromDate" date-options="dateOptions" format="format" opened="donationDateFromOpen" cal-icon="icons.CALENDAR">
         </dateselect>
         <span><em> To: </em></span>
-        <dateselect ng-model="donorList.donationDateTo" date-options="dateOptions" format="format" opened="donationDateToOpen" cal-icon="icons.CALENDAR">
+        <dateselect ng-model="donorList.lastDonationToDate" date-options="dateOptions" format="format" opened="donationDateToOpen" cal-icon="icons.CALENDAR">
         </dateselect>
       </div>
     </div>
@@ -43,7 +43,7 @@
     <label for="name" class="col-sm-2 control-label">Due To Donate</label>
     <div class="row col-sm-10">
       <div class="form-inline" style="padding-left:5px;">
-        <dateselect ng-model="donorList.dueToDonate" date-options="dateOptions" format="format" opened="dueToDonateOpen" cal-icon="icons.CALENDAR">
+        <dateselect ng-model="donorList.clinicDate" date-options="dateOptions" format="format" opened="dueToDonateOpen" cal-icon="icons.CALENDAR">
         </dateselect>
       </div>
     </div>
