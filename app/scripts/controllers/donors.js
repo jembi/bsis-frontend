@@ -549,8 +549,11 @@ angular.module('bsis')
           $scope.data = data;
           console.log("$scope.data: ", $scope.data);
           $scope.donorListSearchResults = true;
+          console.log("$scope.data.length: ", $scope.data.length);
+          $scope.donorListSearchCount = $scope.data.length;
+
           
-          if ($scope.donorListTableParams.data.length > 0){
+          if ($scope.donorListTableParams.data.length >= 0){
             $scope.donorListTableParams.reload();
           }
           
