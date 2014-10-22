@@ -61,6 +61,16 @@ angular.module('bsis')
             lastDonationFromDate: '@lastDonationFromDate', lastDonationToDate: '@lastDonationToDate', anyBloodGroup: '@anyBloodGroup' }
           }
         }
+      ),
+
+      ComponentsSearch: $resource(url + '/components/search', {}, 
+        {
+          query: {
+            method: 'GET', 
+            params:{donationIdentificationNumber:'@donationIdentificationNumber', componentTypes:'@componentTypes', status: '@status', 
+            donationDateFrom: '@donationDateFrom', donationDateTo: '@donationDateTo' }
+          }
+        }
       )
 
     };
