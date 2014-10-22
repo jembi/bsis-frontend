@@ -31,7 +31,7 @@
               ng-mouseleave="this.$selected = false"
               ng-class="{'active': component.$selected}">
               <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
-                  {{component.componentType}}
+                  {{component.productType.productTypeName}}
               </td>
               <td data-title="'Status'" header-class="text-left" sortable="'status'">
                   {{component.status}}
@@ -40,7 +40,7 @@
                   {{component.createdOn}}
               </td>
               <td data-title="'Expires On'" header-class="text-left" class="text-center" sortable="'expiresOn'">
-                  {{component.expiresOn}}
+                  {{component.expiresOn}} <em>({{component.expiryStatus}})</em>
               </td>
           </tr>
         </table>
