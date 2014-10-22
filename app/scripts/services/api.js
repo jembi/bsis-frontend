@@ -71,7 +71,16 @@ angular.module('bsis')
             donationDateFrom: '@donationDateFrom', donationDateTo: '@donationDateTo' }
           }
         }
-      )
+      ),
+
+      getComponentsByDIN:  $resource(url + '/components/donations/:donationIdentificationNumber', {}, 
+        {
+          query: {
+            method: 'GET', 
+            params:{donationIdentificationNumber:'@donationIdentificationNumber'}
+          }
+        }
+      ),
 
     };
 });
