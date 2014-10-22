@@ -105,9 +105,37 @@ angular.module('bsis')
 
     };
 
-    $scope.getComponentsSummary = function () {
+    $scope.findComponents = function (componentsSearch) {
       $scope.componentsView = 'viewDonations';
 
+      $scope.selectedComponentTypes = [];
+      angular.forEach(componentsSearch.componentTypes,function(value,index){
+          $scope.selectedComponentTypes.push(value.id);
+      });
+      componentsSearch.componentTypes = $scope.selectedComponentTypes;
+
+      console.log("componentsSearch: ", componentsSearch);
+
+      ComponentService.ComponentsSearch(componentsSearch, function(response){
+        if (response !== false){
+          data = response;
+          $scope.data = data;
+          console.log("$scope.data: ", $scope.data);
+          $scope.searchResults = true;
+          console.log("$scope.data.length: ", $scope.data.length);
+          $scope.componentsSearchCount = $scope.data.length;
+
+          if ($scope.componentsSummaryTableParams.data.length >= 0){
+            $scope.componentsSummaryTableParams.reload();
+          }
+          
+        }
+        else{
+          $scope.searchResults = false;
+        }
+      });
+
+      /*
       ComponentService.getComponentsSummary().then(function (response) {
           data = response.data.donations;
           $scope.data = data;
@@ -115,6 +143,7 @@ angular.module('bsis')
         }, function () {
           $scope.searchResults = false;
       });
+      */
 
       $scope.componentsSummaryTableParams = new ngTableParams({
         page: 1,            // show first page

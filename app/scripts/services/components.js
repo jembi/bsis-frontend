@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.factory('ComponentService', function ($http, Api) {
+.factory('ComponentService', function ($http, Api, $filter) {
   return {
     getComponentsFormFields: function(response){
       Api.ComponentsFormFields.get({}, function (backingForm) {
@@ -37,6 +37,16 @@ angular.module('bsis')
       })
       .error(function(data){
         console.log("Find Discards Summary Unsuccessful");
+      });
+    },
+    ComponentsSearch: function (componentsSearch, response) {
+      var components = Api.ComponentsSearch.query({donationIdentificationNumber: componentsSearch.donationIdentificationNumber, 
+        componentTypes: componentsSearch.componentTypes, status: componentsSearch.status, 
+        donationDateFrom: $filter('date')(componentsSearch.donationDateFrom,'MM/dd/yyyy'), donationDateTo: $filter('date')(componentsSearch.donationDateTo)}, function(){
+          console.log("components response: ", components);
+          response(components.components);
+      }, function (){
+        response(false);  
       });
     }
   };
