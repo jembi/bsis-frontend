@@ -73,6 +73,25 @@ angular.module('bsis')
     };
 
     $scope.getComponentsByDIN = function () {   
+      ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(response){
+        if (response !== false){
+          data = response.components;
+          $scope.data = data;
+          console.log("$scope.data: ", $scope.data);
+          $scope.searchResults = true;
+          console.log("$scope.data.length: ", $scope.data.length);
+          $scope.componentsSearchCount = $scope.data.length;
+
+          if ($scope.componentsTableParams.data.length >= 0){
+            $scope.componentsTableParams.reload();
+          }
+          
+        }
+        else{
+          $scope.searchResults = false;
+        }
+      });
+      /*
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber).then(function (response) {
           data = response.data.components;
           $scope.data = data;
@@ -82,6 +101,7 @@ angular.module('bsis')
         }, function () {
           $scope.searchResults = false;
       });
+      */
 
       $scope.componentsTableParams = new ngTableParams({
         page: 1,            // show first page
@@ -118,7 +138,7 @@ angular.module('bsis')
 
       ComponentService.ComponentsSearch(componentsSearch, function(response){
         if (response !== false){
-          data = response;
+          data = response.components;
           $scope.data = data;
           console.log("$scope.data: ", $scope.data);
           $scope.searchResults = true;

@@ -10,7 +10,14 @@ angular.module('bsis')
         response(false);
       });
     },
-    getComponentsByDIN: function (donationIdentificationNumber) {
+    getComponentsByDIN: function (donationIdentificationNumber, response) {
+      var apiResponse = Api.getComponentsByDIN.query({donationIdentificationNumber: donationIdentificationNumber}, function(){
+        console.log("components response: ", apiResponse);
+        response(apiResponse);
+      }, function (){
+        response(false);  
+      });
+      /*
       return $http.get('/getComponentsByDIN', {params: { din: donationIdentificationNumber }})
         .success(function(data, status, headers, config){
         if (donationIdentificationNumber.Error === undefined) {
@@ -20,6 +27,7 @@ angular.module('bsis')
       .error(function(data){
         console.log("Find Components Unsuccessful");
       });
+      */
     },
     getComponentsSummary: function () {
       return $http.get('/getComponentsSummary')
@@ -42,9 +50,9 @@ angular.module('bsis')
     ComponentsSearch: function (componentsSearch, response) {
       var components = Api.ComponentsSearch.query({donationIdentificationNumber: componentsSearch.donationIdentificationNumber, 
         componentTypes: componentsSearch.componentTypes, status: componentsSearch.status, 
-        donationDateFrom: $filter('date')(componentsSearch.donationDateFrom,'MM/dd/yyyy'), donationDateTo: $filter('date')(componentsSearch.donationDateTo)}, function(){
+        donationDateFrom: $filter('date')(componentsSearch.donationDateFrom,'MM/dd/yyyy'), donationDateTo: $filter('date')(componentsSearch.donationDateTo,'MM/dd/yyyy')}, function(){
           console.log("components response: ", components);
-          response(components.components);
+          response(components);
       }, function (){
         response(false);  
       });
