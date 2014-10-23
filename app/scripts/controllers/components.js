@@ -6,6 +6,7 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.componentTypes = COMPONENTTYPE.componentTypes;
+    $scope.selectedComponents = [];
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
@@ -225,6 +226,40 @@ angular.module('bsis')
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
+    };
+
+    $scope.discardComponents = function () {
+
+      $scope.discard.selectedComponents = $scope.selectedComponents;
+
+      console.log("components to discard: ",$scope.discard);
+
+      ComponentService.discardComponents($scope.discard, function(response){
+        if (response === true){
+
+          console.log("COMPONENTS DISCARDED :)");
+
+        }
+        else{
+          // TODO: handle case where response == false
+          console.log("COMPONENTS NOT DISCARDED :(");
+        }
+      });
+
+
+    };
+
+    // toggle selection for a given employee by name
+    $scope.toggleSelection = function toggleSelection(componentId) {
+      var idx = $scope.selectedComponents.indexOf(componentId);
+      // is currently selected
+      if (idx > -1) {
+        $scope.selectedComponents.splice(idx, 1);
+      }
+      // is newly selected
+      else {
+        $scope.selectedComponents.push(componentId);
+      }
     };
 
   })

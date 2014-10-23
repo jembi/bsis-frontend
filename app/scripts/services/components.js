@@ -56,6 +56,18 @@ angular.module('bsis')
       }, function (){
         response(false);  
       });
-    }
+    },
+    discardComponents: function (components, response) {
+      angular.forEach(components.selectedComponents, function(componentId) {
+        console.log("component.componentId: ", componentId);
+      //for (componentId : components.selectedComponents){
+        //Api.discardComponents.update({id: component.componentId, discardReasonId: components.discardReason, discardReasonText: components.discardReasonText}, function(){
+          Api.discardComponents.update({id: componentId, discardReasonId: components.discardReason, discardReasonText: components.discardReasonText}, function(){
+            response(true);
+        }, function (){
+          response(false);  
+        });
+      });
+    },
   };
 });
