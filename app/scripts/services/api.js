@@ -82,5 +82,14 @@ angular.module('bsis')
         }
       ),
 
+      discardComponents:  $resource(url + '/components/:id/discard', {}, 
+        {
+          update: {
+            method: 'PUT', 
+            params:{id: '@id', discardReasonId: '@discardReasonId', discardReasonText: '@discardReasonText'}
+          }
+        }
+      )
+
     };
 });
