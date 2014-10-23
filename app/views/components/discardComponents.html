@@ -31,7 +31,7 @@
               ng-mouseleave="this.$selected = false"
               ng-class="{'active': component.$selected}">
               <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
-                  {{component.componentType}}
+                  {{component.productType.productTypeName}}
               </td>
               <td data-title="'Status'" header-class="text-left" sortable="'status'">
                   {{component.status}}
@@ -42,14 +42,17 @@
               <td data-title="'Expires On'" header-class="text-left" class="text-center" sortable="'expiresOn'">
                   {{component.expiresOn}}
               </td>
-              <td data-title="" header-class="text-left" class="text-center">
-                  <span style="font-size: 0.9em;" ng-if="component.status == 'Labelled'">
-                    <input type="checkbox"><em> Discard </em>
+              <td data-title="" header-class="text-left" class="text-left" >
+                  <span 
+                    style="font-size: 0.9em;" 
+                    ng-if="component.status != 'DISCARDED' && component.status != 'ISSUED' && component.status != 'USED' && component.status != 'SPLIT' && component.status != 'PROCESSED'" 
+                  >
+                    <input type="checkbox" id="{{component.id}}" value="{{component.id}}" ng-checked="selectedComponents.indexOf(component.id) > -1" ng-click="toggleSelection(component.id)">
+                    <em><label style="margin:0px; cursor: pointer; cursor: hand;" for="{{component.id}}"> Discard </label></em>
                   </span>
               </td>
           </tr>
         </table>
-
         <form class="form-horizontal col-sm-12"  role="form" ng-submit="discardComponents()">
           <div class="form-group">
             <label for="name" class="col-sm-2 control-label" >Discard Reason</label>
@@ -58,15 +61,7 @@
                 <select class="form-control input-sm" ng-model="discard.discardReason" ng-options="item.id as item.statusChangeReason for item in discardReasons">
                     <option value="" ng-disabled="true">Select:</option>
                 </select>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="name" class="col-sm-2 control-label" >Discard Date</label>
-            <div class="row col-sm-10">
-              <div class="form-inline" style="padding-left:5px;">
-                <dateselect ng-model="discard.discardDate" date-options="dateOptions" ng-required="false" format="format" opened="discardDateOpen" cal-icon="icons.CALENDAR">
-                </dateselect>
+                <input size="35" class="form-control input-sm" placeholder="" ng-model="discard.discardReasonText">
               </div>
             </div>
           </div>
