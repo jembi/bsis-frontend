@@ -27,7 +27,7 @@
     <label for="name" class="col-sm-1 control-label">Pack Type</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donation.packType" ng-options="item.id as item.bloodBagType for item in packTypes">
+        <select class="form-control input-sm" ng-model="donation.packType" ng-options="item as item.bloodBagType for item in packTypes">
             <option value=""></option>
         </select>
       </div>
@@ -38,7 +38,7 @@
     <label for="name" class="col-sm-1 control-label">Donation Type</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donation.donationType" ng-options="item.id as item.donationType for item in donationTypes">
+        <select class="form-control input-sm" ng-model="donation.donationType" ng-options="item as item.donationType for item in donationTypes">
             <option value=""></option>
         </select>
       </div>
