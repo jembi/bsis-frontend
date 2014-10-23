@@ -34,6 +34,12 @@ angular.module('bsis')
       }
     });
 
+    $scope.$watch("data", function () {
+      if ($scope.tableParams.data.length > 0) {
+        $scope.tableParams.reload();
+      }
+    }); 
+
     // MOCKAPI FIND DONOR FUNCTION
     /*
     DonorService.findDonor($scope.donorSearch).then(function (response) {
