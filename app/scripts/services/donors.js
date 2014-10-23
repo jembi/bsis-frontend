@@ -157,8 +157,6 @@ angular.module('bsis')
 
       // set temporary donationDate, site & center values
       addDonation.collectedOn = '10/16/2014 12:00:00 am';
-      addDonation.collectionSite = '3';
-      addDonation.collectionCenter = '3';
 
       console.log("addDonation: ", addDonation);
 

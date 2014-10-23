@@ -479,6 +479,10 @@ angular.module('bsis')
 
       $scope.addDonationSuccess = '';
 
+      // set temporary donation center & site - should be auto-populated from donation batch info
+      donation.collectionCenter = $scope.centers[0];
+      donation.collectionSite = $scope.sites[0];
+
       DonorService.addDonation(donation, function(response){
         if (response === true){
 
