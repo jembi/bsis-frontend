@@ -237,12 +237,14 @@ angular.module('bsis')
       ComponentService.discardComponents($scope.discard, function(response){
         if (response === true){
 
-          console.log("COMPONENTS DISCARDED :)");
+          $scope.getComponentsByDIN();
+          if ($scope.componentsTableParams.data.length > 0){
+            $scope.componentsTableParams.reload();
+          }
 
         }
         else{
           // TODO: handle case where response == false
-          console.log("COMPONENTS NOT DISCARDED :(");
         }
       });
 
