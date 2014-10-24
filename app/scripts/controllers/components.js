@@ -83,7 +83,7 @@ angular.module('bsis')
           console.log("$scope.data.length: ", $scope.data.length);
           $scope.componentsSearchCount = $scope.data.length;
 
-          if ($scope.componentsTableParams.data.length >= 0){
+          if ($scope.componentsTableParams.data.length > 0){
             $scope.componentsTableParams.reload();
           }
           
@@ -124,6 +124,12 @@ angular.module('bsis')
         }
       });
 
+      $scope.$watch("data", function () {
+        if ($scope.componentsTableParams.data.length > 0) {
+          $scope.componentsTableParams.reload();
+        }
+      }); 
+
     };
 
     $scope.findComponents = function (componentsSearch) {
@@ -146,7 +152,7 @@ angular.module('bsis')
           console.log("$scope.data.length: ", $scope.data.length);
           $scope.componentsSearchCount = $scope.data.length;
 
-          if ($scope.componentsSummaryTableParams.data.length >= 0){
+          if ($scope.componentsSummaryTableParams.data.length > 0){
             $scope.componentsSummaryTableParams.reload();
           }
           
@@ -185,6 +191,12 @@ angular.module('bsis')
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
+
+      $scope.$watch("data", function () {
+        if ($scope.componentsSummaryTableParams.data.length > 0) {
+          $scope.componentsSummaryTableParams.reload();
+        }
+      }); 
     };
 
     $scope.viewComponents = function (din) {
@@ -203,6 +215,10 @@ angular.module('bsis')
           $scope.data = data;
           
           $scope.searchResults = true;
+
+          if ($scope.discardsSummaryTableParams.data.length > 0){
+            $scope.discardsSummaryTableParams.reload();
+          }
         }, function () {
           $scope.searchResults = false;
       });
@@ -226,6 +242,13 @@ angular.module('bsis')
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
+
+      $scope.$watch("data", function () {
+        if ($scope.discardsSummaryTableParams.data.length > 0) {
+          $scope.discardsSummaryTableParams.reload();
+        }
+      }); 
+
     };
 
     $scope.discardComponents = function () {
@@ -238,6 +261,7 @@ angular.module('bsis')
         if (response === true){
 
           $scope.getComponentsByDIN();
+
           if ($scope.componentsTableParams.data.length > 0){
             $scope.componentsTableParams.reload();
           }
