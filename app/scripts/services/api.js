@@ -89,6 +89,15 @@ angular.module('bsis')
             params:{id: '@id', discardReasonId: '@discardReasonId', discardReasonText: '@discardReasonText'}
           }
         }
+      ),
+
+      LabellingStatus:  $resource(url + '/lotreleases/find/:donationIdentificationNumber', {}, 
+        {
+          query: {
+            method: 'GET', 
+            params:{donationIdentificationNumber:'@donationIdentificationNumber'}
+          }
+        }
       )
 
     };
