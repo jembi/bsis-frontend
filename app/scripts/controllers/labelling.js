@@ -13,7 +13,7 @@ angular.module('bsis')
         return true;
       } else if ($location.path() === path) {
         return true;
-      } else if ($location.path() === "/labelling" && path === "/labelling") {
+      } else if ($location.path() === "/labelling" && path === "/labelComponents") {
         return true;
       } else {
         return false;

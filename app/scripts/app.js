@@ -168,6 +168,11 @@ angular.module('bsis', [
         controller  : 'LabellingCtrl',
         permission: PERMISSIONS.COMPONENT_LABELLING
       })
+      .when('/labelComponents', {
+        templateUrl : 'views/labelling.html',
+        controller  : 'LabellingCtrl',
+        permission: PERMISSIONS.COMPONENT_LABELLING
+      })
 
       // REPORTS URLs
       .when('/reports', {
