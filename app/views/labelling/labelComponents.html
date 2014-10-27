@@ -1,11 +1,11 @@
 <h3 class="page-header">Label Components</h3>
 
-<form class="form-horizontal col-sm-12"  role="form" ng-submit="checkLabellingStatus(donationIdentificationNumber)">
+<form class="form-horizontal col-sm-12"  role="form" ng-submit="checkLabellingStatus(search.donationIdentificationNumber)">
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label" >DIN</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="donationIdentificationNumber">
+        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="search.donationIdentificationNumber">
       </div>
     </div>
   </div>
@@ -23,9 +23,15 @@
   <div ng-switch-when="true">
     <div class="panel panel-default">
       <div class="panel-body">
-      <div ng-if="printPackLabel"><em>Component(s) are ready to be labelled.</em></div>
-      <div ng-if="printDiscardLabel"><em>Component(s) have been discarded.</em></div>
-      <div ng-if="!printPackLabel && !printDiscardLabel"><em>Cannot print pack or discard label(s) for components.</em></div>
+        <div ng-if="printPackLabelBoolean">
+          <em>Component(s) are ready to be labelled.</em> 
+          <button style="margin:0;" class="btn btn-primary" type="button" ng-click="printPackLabel()">Print Pack Label</button></div>
+        <div ng-if="printDiscardLabelBoolean">
+          <em>Component(s) have been discarded.</em> 
+          <button style="margin:0;" class="btn btn-primary" type="button" ng-click="printDiscardLabel()">Print Discard Label</button></div>
+        <div ng-if="!printPackLabelBoolean && !printDiscardLabelBoolean">
+          <em>Cannot print pack or discard labels for components.</em>
+        </div>
       </div>
     </div>
   </div>
