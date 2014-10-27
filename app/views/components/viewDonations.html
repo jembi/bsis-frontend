@@ -7,8 +7,11 @@
       ng-mouseenter="this.$selected = true"
       ng-mouseleave="this.$selected = false"
       ng-class="{'active': donation.$selected}">
-      <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
-          {{component.donationIdentificationNumber}}
+      <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'collectionNumber'">
+          {{component.collectionNumber}}
+      </td>
+      <td data-title="'Component Identifier'" header-class="text-left" class="text-center" sortable="'componentIdentificationNumber'">
+          {{component.componentIdentificationNumber}}
       </td>
       <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
           {{component.createdOn}}
