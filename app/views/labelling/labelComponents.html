@@ -16,3 +16,24 @@
     </div>
   </div>
 </form>
+
+<div ng-switch="searchResults" class="col-sm-12">
+<div style="padding-bottom: 10px"></div>
+
+  <div ng-switch-when="true">
+    <div class="panel panel-default">
+      <div class="panel-body">
+      <div ng-if="printPackLabel"><em>Component(s) are ready to be labelled.</em></div>
+      <div ng-if="printDiscardLabel"><em>Component(s) have been discarded.</em></div>
+      <div ng-if="!printPackLabel && !printDiscardLabel"><em>Cannot print pack or discard label(s) for components.</em></div>
+      </div>
+    </div>
+  </div>
+  <div ng-switch-when="false">
+    <div class="panel panel-default">
+      <div class="panel-body">
+          <em>Not found. Please re-enter DIN.</em>
+      </div>
+    </div>
+  </div>
+</div>

@@ -28,6 +28,8 @@ angular.module('bsis')
         if (response !== false){
           data = response;
           $scope.data = data;
+          $scope.printPackLabel = data.printPackLabel;
+          $scope.printDiscardLabel = data.printDiscardLabel;
           console.log("$scope.data: ", $scope.data);
           $scope.searchResults = true;
 
