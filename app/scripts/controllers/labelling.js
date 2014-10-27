@@ -8,6 +8,10 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
     $scope.searchResults = '';
+    $scope.search = {
+      "donationIdentificationNumber": ''
+    };
+    $scope.packDIN = '';
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
@@ -28,12 +32,10 @@ angular.module('bsis')
         if (response !== false){
           data = response;
           $scope.data = data;
-          $scope.printPackLabel = data.printPackLabel;
-          $scope.printDiscardLabel = data.printDiscardLabel;
-          console.log("$scope.data: ", $scope.data);
+          $scope.printPackLabelBoolean = data.printPackLabel;
+          $scope.printDiscardLabelBoolean = data.printDiscardLabel;
           $scope.searchResults = true;
-
-          
+          $scope.packDIN = donationIdentificationNumber;
         }
         else{
           $scope.searchResults = false;
@@ -41,5 +43,37 @@ angular.module('bsis')
       });
     };
 
+    $scope.printPackLabel = function () {   
+      LabellingService.printPackLabel($scope.packDIN, function(response){
+        if (response !== false){
+          data = response;
+          $scope.data = data;
+          $scope.labelZPL = data.labelZPL;
+          console.log("$scope.labelZPL: ", $scope.labelZPL);
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.printDiscardLabel = function () {   
+      console.log("$scope.packDIN: ", $scope.packDIN);
+      LabellingService.printDiscardLabel($scope.packDIN, function(response){
+        if (response !== false){
+          data = response;
+          $scope.data = data;
+          $scope.labelZPL = data.labelZPL;
+          console.log("$scope.labelZPL: ", $scope.labelZPL);
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.clear = function () {
+      $scope.packDIN = '';
+      $scope.search = {};
+      $scope.searchResults = '';
+    };
 
   });
