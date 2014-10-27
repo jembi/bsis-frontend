@@ -5,6 +5,9 @@ angular.module('bsis')
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
+    var data = {};
+    $scope.data = data;
+    $scope.searchResults = '';
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
@@ -19,4 +22,22 @@ angular.module('bsis')
         return false;
       }
     };
+
+    $scope.checkLabellingStatus = function (donationIdentificationNumber) {   
+      LabellingService.checkLabellingStatus(donationIdentificationNumber, function(response){
+        if (response !== false){
+          data = response;
+          $scope.data = data;
+          console.log("$scope.data: ", $scope.data);
+          $scope.searchResults = true;
+
+          
+        }
+        else{
+          $scope.searchResults = false;
+        }
+      });
+    };
+
+
   });
