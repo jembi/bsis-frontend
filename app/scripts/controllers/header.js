@@ -26,15 +26,15 @@ angular.module('bsis')
      'icon': ICONS.TESTING,
      'permission': PERMISSIONS.VIEW_TESTING_INFORMATION
     },
-    {'title': 'INVENTORY',
-     'href': '#inventory',
-     'icon': ICONS.INVENTORY,
-     'permission': PERMISSIONS.VIEW_INVENTORY_INFORMATION
-    },
     {'title': 'LABELLING',
      'href': '#labelling',
      'icon': ICONS.LABELLING,
      'permission': PERMISSIONS.LABEL_COMPONENT
+    },
+    {'title': 'INVENTORY',
+     'href': '#inventory',
+     'icon': ICONS.INVENTORY,
+     'permission': PERMISSIONS.VIEW_INVENTORY_INFORMATION
     },
     {'title': 'REPORTS',
      'href': '#reports',
