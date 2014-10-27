@@ -91,14 +91,9 @@ angular.module('bsis')
         }
       ),
 
-      LabellingStatus:  $resource(url + '/lotreleases/find/:donationIdentificationNumber', {}, 
-        {
-          query: {
-            method: 'GET', 
-            params:{donationIdentificationNumber:'@donationIdentificationNumber'}
-          }
-        }
-      )
+      LabellingStatus:  $resource(url + '/labels/status/:donationIdentificationNumber'),
+      PrintPackLabel:  $resource(url + '/labels/print/packlabel/:donationIdentificationNumber'),
+      PrintDiscardLabel: $resource(url + '/labels/print/discardlabel/:donationIdentificationNumber')
 
     };
 });
