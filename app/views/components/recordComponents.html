@@ -42,18 +42,27 @@
               <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
                   {{component.createdOn}}
               </td>
-              <td data-title="'Expires On'" header-class="text-left" class="text-center" sortable="'expiresOn'">
-                  {{component.expiresOn}} <em>({{component.expiryStatus}})</em>
+              <td data-title="'Expires On'" header-class="text-left" class="text-center" sortable="'expiryStatus'">
+                  {{component.expiryStatus}}
               </td>
+              <td data-title="" header-class="text-left" class="text-left" >
+                <span 
+                  style="font-size: 0.9em;" 
+                  ng-if="component.status != 'DISCARDED' && component.status != 'ISSUED' && component.status != 'USED' && component.status != 'SPLIT' && component.status != 'PROCESSED'" 
+                >
+                  <input type="checkbox" id="{{component.id}}" value="{{component.id}}" ng-checked="selectedComponents.indexOf(component.id) > -1" ng-click="toggleSelection(component.id)">
+                  <em><label style="margin:0px; cursor: pointer; cursor: hand;" for="{{component.id}}"> Select </label></em>
+                </span>
+            </td>
           </tr>
         </table>
 
-        <form class="form-horizontal col-sm-12"  role="form" ng-submit="addComponents()">
+        <form class="form-horizontal col-sm-12"  role="form" ng-submit="recordComponents(component)">
           <div class="form-group">
             <label for="name" class="col-sm-2 control-label" >Process Component</label>
             <div class="row col-sm-10">
               <div class="form-inline" style="padding-left:5px;">
-                <select class="form-control input-sm" ng-model="component.componentTypes" ng-options="item.id as item.productTypeName for item in componentTypes">
+                <select class="form-control input-sm" ng-model="component.childComponentTypeId" ng-options="item.id as item.productTypeName for item in componentTypes">
                   <option value="" ng-disabled="true">Select:</option>
                 </select>
               </div>
@@ -63,11 +72,11 @@
             <label for="name" class="col-sm-2 control-label" >Process Paediatric</label>
             <div class="row col-sm-10">
               <div class="form-inline" style="padding-left:5px;">
-                <input id="paediatricCount2" type="radio" name="paediatricCount2" data-ng-model="component.paediatricCount" value="2"/> <label for="paediatricCount2"> 2 units </label>
-                <input id="paediatricCount3" type="radio" name="paediatricCount3" data-ng-model="component.paediatricCount" value="3"/> <label for="paediatricCount3"> 3 units </label>
-                <input id="paediatricCount4" type="radio" name="paediatricCount4" data-ng-model="component.paediatricCount" value="4"/> <label for="paediatricCount4"> 4 units </label>
-                <input id="paediatricCount5" type="radio" name="paediatricCount5" data-ng-model="component.paediatricCount" value="5"/> <label for="paediatricCount5"> 5 units </label>
-                <input id="paediatricCount6" type="radio" name="paediatricCount6" data-ng-model="component.paediatricCount" value="6"/> <label for="paediatricCount6"> 6 units </label>
+                <input id="paediatricCount2" type="radio" name="paediatricCount2" data-ng-model="component.numUnits" value="2"/> <label for="paediatricCount2"> 2 units </label>
+                <input id="paediatricCount3" type="radio" name="paediatricCount3" data-ng-model="component.numUnits" value="3"/> <label for="paediatricCount3"> 3 units </label>
+                <input id="paediatricCount4" type="radio" name="paediatricCount4" data-ng-model="component.numUnits" value="4"/> <label for="paediatricCount4"> 4 units </label>
+                <input id="paediatricCount5" type="radio" name="paediatricCount5" data-ng-model="component.numUnits" value="5"/> <label for="paediatricCount5"> 5 units </label>
+                <input id="paediatricCount6" type="radio" name="paediatricCount6" data-ng-model="component.numUnits" value="6"/> <label for="paediatricCount6"> 6 units </label>
               </div>
             </div>
           </div>
