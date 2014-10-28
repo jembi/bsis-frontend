@@ -251,6 +251,36 @@ angular.module('bsis')
 
     };
 
+    $scope.recordComponents = function () {
+
+      $scope.recordComponent = {};
+
+      $scope.recordComponent.parentComponentId = $scope.selectedComponents[0];
+      $scope.recordComponent.childComponentTypeId = $scope.component.childComponentTypeId;
+      $scope.recordComponent.numUnits = $scope.component.numUnits;
+
+      console.log("component to record: ",$scope.recordComponent);
+
+      ComponentService.recordComponents($scope.recordComponent, function(response){
+        if (response !== false){
+
+          data = response.components;
+          $scope.data = data;
+          console.log("$scope.data: ", $scope.data);
+
+          if ($scope.componentsTableParams.data.length > 0){
+            $scope.componentsTableParams.reload();
+          }
+
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
+
+
+    };
+
     $scope.discardComponents = function () {
 
       $scope.discard.selectedComponents = $scope.selectedComponents;
@@ -271,7 +301,6 @@ angular.module('bsis')
           // TODO: handle case where response == false
         }
       });
-
 
     };
 

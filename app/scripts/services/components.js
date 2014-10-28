@@ -57,6 +57,17 @@ angular.module('bsis')
         response(false);  
       });
     },
+    recordComponents: function (component, response) {
+
+      var addComponent = new Api.RecordComponents();
+      
+      addComponent.$save(function(data){ 
+        response(data);
+      }, function (){
+        response(false);
+      }); 
+
+    },
     discardComponents: function (components, response) {
       angular.forEach(components.selectedComponents, function(componentId) {
         console.log("component.componentId: ", componentId);
