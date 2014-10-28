@@ -113,12 +113,12 @@
                 <td class="field">Total Donations: </td>
                 <td class="value">{{totalDonations}}</td>
               </tr>
-              <tr>
+              <tr ng-show="totalDonations > 0">
                 <td class="icon"><i class="fa {{icons.CIRCLEO}}"></i></td>
                 <td class="field">Date of First Donation: </td>
                 <td class="value">{{dateOfFirstDonation | date:'longDate'}}</td>
               </tr>
-              <tr>
+              <tr ng-show="totalDonations > 0">
                 <td class="icon"><i class="fa {{icons.CIRCLE}}"></i></td>
                 <td class="field">Previous Donation: </td>
                 <td class="value"><em>Date</em>: {{ (lastDonation.collectedOn | date:"dd/MM/yyyy") || '' }}<br/>
