@@ -91,6 +91,8 @@ angular.module('bsis')
         }
       ),
 
+      RecordComponents: $resource(url + '/components/record'),
+
       LabellingStatus:  $resource(url + '/labels/status/:donationIdentificationNumber'),
       PrintPackLabel:  $resource(url + '/labels/print/packlabel/:donationIdentificationNumber'),
       PrintDiscardLabel: $resource(url + '/labels/print/discardlabel/:donationIdentificationNumber')
