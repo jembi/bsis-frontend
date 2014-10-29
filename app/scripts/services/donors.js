@@ -242,6 +242,30 @@ angular.module('bsis')
       .error(function(data){
         console.log("Get Donation Batch Unsuccessful");
       });
+    },
+    getDonationBatchFormFields: function(response){
+      Api.DonationBatchFormFields.get({}, function (backingForm) {
+        response(backingForm);
+      }, function (){
+        response(false);
+      });
+    },
+    getOpenDonationBatches: function (response) {
+      Api.FindDonationBatches.query({isClosed:false}, function (donationBatches) {
+        response(donationBatches);
+        console.log("donationBatches: ", donationBatches);
+      }, function (){
+        response(false);
+      });
+      /*
+      return $http.get('/getDonations')
+        .success(function(data, status, headers, config){
+          return data;
+      })
+      .error(function(data){
+        console.log("Get Donor Donations Unsuccessful");
+      });
+      */
     }
   };
 });

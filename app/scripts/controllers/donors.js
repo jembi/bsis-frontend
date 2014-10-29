@@ -626,12 +626,71 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
 
-    $scope.data = {};
-    $scope.donationBatch = {
-      'date': '03/09/2014',
-      'venue': 'Maseru'
-    };
-    $scope.donationBatchView = 'viewDonationBatch';
+    var data = {};
+    $scope.data = data;
+    $scope.openDonationBatches = false;
+    $scope.donationBatch = {};
+
+
+
+
+    DonorService.getDonationBatchFormFields( function(response){
+      if (response !== false){
+        data = response;
+        $scope.data = data;
+        console.log("$scope.data: ", $scope.data);
+        $scope.centers = data.centers;
+        $scope.sites = data.sites;
+      }
+      else{
+      }
+    });
+
+    DonorService.getOpenDonationBatches( function(response){
+      if (response !== false){
+        data = response.allCollectionBatches;
+        $scope.data = data;
+        console.log("$scope.data: ", $scope.data);
+        if ($scope.donationBatchTableParams.data.length >= 0){
+          $scope.donationBatchTableParams.reload();
+        }
+        if (data.length > 0){
+          $scope.openDonationBatches = true;
+        }
+        else {
+          $scope.openDonationBatches = false;
+        }
+        
+      }
+      else{
+      }
+    });
+
+    $scope.donationBatchTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 4,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+
+
+
+
+
 
     DonorService.getDonationBatch().then(function (response) {
       $scope.data = response.data.donations;
