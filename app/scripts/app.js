@@ -65,6 +65,11 @@ angular.module('bsis', [
         controller  : 'ViewDonorCtrl',
         permission: PERMISSIONS.VIEW_DONOR
       })
+      .when('/manageDonationBatches', {
+        templateUrl : 'views/donors.html',
+        controller  : 'DonorClinicCtrl',
+        permission: PERMISSIONS.VIEW_DONATION_BATCH
+      })
 
       // COMPONENTS URLs
       .when('/components', {
