@@ -1,3 +1,8 @@
+<p>
+  <em> 
+    {{donationBatch.numCollections}} donation(s) in batch </em> | <em> <a href="" ng-click="viewAddDonationForm()" >Add Donation</a></em>  
+</p>
+
 <table ng-table="donorClinicTableParams" show-filter="true" class="table">
   <tr ng-repeat="donation in $data"
     ng-click="viewDonationSummary(donation.donationIdentificationNumber); changeSelection(donation);"
