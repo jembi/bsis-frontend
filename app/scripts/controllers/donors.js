@@ -492,6 +492,8 @@ angular.module('bsis')
       // set temporary donation center & site - should be auto-populated from donation batch info
       donation.collectionCenter = $scope.centers[0];
       donation.collectionSite = $scope.sites[0];
+      // set temporary donationDate
+      donation.collectedOn = '10/16/2014 12:00:00 am';
 
       DonorService.addDonation(donation, function(response){
         if (response === true){
@@ -762,7 +764,7 @@ angular.module('bsis')
       counts: [], // hide page counts control
       total: $scope.data.length, // length of data
       getData: function ($defer, params) {
-        DonorService.getDonationBatch().then(function (response) {
+        DonorService.getDonationBatchDonations().then(function (response) {
           $scope.data = response.data.donations;
           $scope.donorPanels = response.data.donorPanels;
 
@@ -813,6 +815,50 @@ angular.module('bsis')
     $scope.viewDonationSummary = function (din) {
       $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
       $scope.donationBatchView = 'viewDonationSummary';
+    };
+
+    $scope.viewAddDonationForm = function (){
+      $scope.donationBatchView = "addDonation";
+
+      DonorService.getDonationsFormFields(function(response){
+        if (response !== false){
+          $scope.data = response;
+          $scope.sites = $scope.data.sites;
+          $scope.centers = $scope.data.centers;
+          $scope.packTypes = $scope.data.packTypes;
+          $scope.donationTypes = $scope.data.donationTypes;
+          $scope.donation = $scope.data.addDonationForm;
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.addDonationSuccess = '';
+
+    $scope.addDonation = function (donation){
+
+      $scope.addDonationSuccess = '';
+
+      // set donation center, site & date to those of the donation batch
+      donation.collectionCenter = $scope.donationBatch.collectionCenter;
+      donation.collectionSite = $scope.donationBatch.collectionSite;
+      donation.collectedOn = $scope.donationBatch.createdDate;
+      donation.collectionBatchNumber = $scope.donationBatch.batchNumber;
+
+      DonorService.addDonation(donation, function(response){
+        if (response === true){
+
+          $scope.addDonationSuccess = true;
+          $scope.donation = {};
+          $scope.donationBatchView = 'viewDonationBatch';
+
+        }
+        else{
+          // TODO: handle case where response == false
+          $scope.addDonationSuccess = false;
+        }
+      });
     };
 
   })
