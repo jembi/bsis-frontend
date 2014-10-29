@@ -56,6 +56,9 @@ angular.module('bsis')
       if ($location.path() === "/viewDonor" && path === "/findDonor") {
         $scope.selection = $location.path();
         return true;
+      } else if ($location.path() === "/manageClinic" && path === "/manageDonationBatches") {
+        $scope.selection = $location.path();
+        return true;
       } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
         $location.path(path);
         $scope.selection = path;
@@ -74,7 +77,7 @@ angular.module('bsis')
       $scope.searchResults = '';
       $scope.donation = {};
       $scope.deferral = {};
-      $scope.donationBatch = {};
+      $scope.newDonationBatch = {};
     };
 
     $scope.viewDonor = function (item) {
@@ -630,7 +633,7 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
     $scope.openDonationBatches = false;
-    $scope.donationBatch = {};
+    $scope.newDonationBatch = {};
 
     DonorService.getDonationBatchFormFields( function(response){
       if (response !== false){
@@ -702,7 +705,41 @@ angular.module('bsis')
       });
     };
 
-    DonorService.getDonationBatch().then(function (response) {
+    $scope.manageClinic = function (item){
+      
+      $scope.donationBatch = item;
+      DonorService.setDonationBatch($scope.donationBatch);
+      console.log("VIEW DONATIONBATCH - ", $scope.donationBatch);
+      $location.path("/manageClinic");
+      
+    };
+
+  })
+
+  // Controller for Managing the Donor Clinic
+  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams) {
+
+    $scope.icons = ICONS;
+    $scope.packTypes = PACKTYPE.packtypes;
+
+    var data = {};
+    $scope.data = data;
+
+    $scope.donationBatch = DonorService.getDonationBatch();
+
+    DonorService.getDonationBatchFormFields( function(response){
+      if (response !== false){
+        data = response;
+        $scope.data = data;
+        console.log("$scope.data: ", $scope.data);
+        $scope.centers = data.centers;
+        $scope.sites = data.sites;
+      }
+      else{
+      }
+    });
+
+    DonorService.getDonationBatchDonations().then(function (response) {
       $scope.data = response.data.donations;
       $scope.donorPanels = response.data.donorPanels;
       }, function () {
