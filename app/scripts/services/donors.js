@@ -162,9 +162,6 @@ angular.module('bsis')
       console.log("donation: ", donation);
       angular.copy(donation, addDonation);
 
-      // set temporary donationDate, site & center values
-      addDonation.collectedOn = '10/16/2014 12:00:00 am';
-
       console.log("addDonation: ", addDonation);
 
       // save donation (POST /donations)
