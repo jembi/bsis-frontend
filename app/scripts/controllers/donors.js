@@ -74,6 +74,7 @@ angular.module('bsis')
       $scope.searchResults = '';
       $scope.donation = {};
       $scope.deferral = {};
+      $scope.donationBatch = {};
     };
 
     $scope.viewDonor = function (item) {
@@ -631,9 +632,6 @@ angular.module('bsis')
     $scope.openDonationBatches = false;
     $scope.donationBatch = {};
 
-
-
-
     DonorService.getDonationBatchFormFields( function(response){
       if (response !== false){
         data = response;
@@ -646,25 +644,30 @@ angular.module('bsis')
       }
     });
 
-    DonorService.getOpenDonationBatches( function(response){
-      if (response !== false){
-        data = response.allCollectionBatches;
-        $scope.data = data;
-        console.log("$scope.data: ", $scope.data);
-        if ($scope.donationBatchTableParams.data.length >= 0){
-          $scope.donationBatchTableParams.reload();
+    $scope.getOpenDonationBatches = function (){
+
+      DonorService.getOpenDonationBatches( function(response){
+        if (response !== false){
+          data = response.allCollectionBatches;
+          $scope.data = data;
+          console.log("$scope.data: ", $scope.data);
+          if ($scope.donationBatchTableParams.data.length >= 0){
+            $scope.donationBatchTableParams.reload();
+          }
+          if (data.length > 0){
+            $scope.openDonationBatches = true;
+          }
+          else {
+            $scope.openDonationBatches = false;
+          }
+          
         }
-        if (data.length > 0){
-          $scope.openDonationBatches = true;
+        else{
         }
-        else {
-          $scope.openDonationBatches = false;
-        }
-        
-      }
-      else{
-      }
-    });
+      });
+    };
+
+    $scope.getOpenDonationBatches();
 
     $scope.donationBatchTableParams = new ngTableParams({
       page: 1,            // show first page
@@ -686,11 +689,18 @@ angular.module('bsis')
       }
     });
 
+    $scope.addDonationBatch = function (donationBatch){
 
-
-
-
-
+      DonorService.addDonationBatch(donationBatch, function(response){
+        if (response === true){
+          $scope.donationBatch = {};
+          $scope.getOpenDonationBatches();
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
+    };
 
     DonorService.getDonationBatch().then(function (response) {
       $scope.data = response.data.donations;

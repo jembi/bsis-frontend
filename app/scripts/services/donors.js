@@ -257,15 +257,20 @@ angular.module('bsis')
       }, function (){
         response(false);
       });
-      /*
-      return $http.get('/getDonations')
-        .success(function(data, status, headers, config){
-          return data;
-      })
-      .error(function(data){
-        console.log("Get Donor Donations Unsuccessful");
-      });
-      */
-    }
+    },
+    addDonationBatch: function (donationBatch, response){
+      // create $Resource object and assign donation values
+      var addDonationBatch = new Api.DonationBatches();
+
+      angular.copy(donationBatch, addDonationBatch);
+
+      // save deferral (POST /deferral)
+      addDonationBatch.$save(function(data){ 
+        response(true);
+        console.log("addDonationBatch response: ",data);
+      }, function (){
+        response(false);
+      }); 
+    },
   };
 });
