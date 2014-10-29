@@ -4,6 +4,7 @@ angular.module('bsis')
 .factory('DonorService', function ($http, Api, $filter) {
 
   var donorObj = {};
+  var donationBatchObj = {};
   var donorsObj = {};
 
   return {
@@ -82,6 +83,9 @@ angular.module('bsis')
     getDonor: function(){
       return donorObj;
     },
+    getDonationBatch: function(){
+      return donationBatchObj;
+    },
     getDonors: function(){
       return donorsObj;
     },
@@ -137,6 +141,9 @@ angular.module('bsis')
     },
     setDonor: function(donor) {
       donorObj = donor;
+    },
+    setDonationBatch: function(donationBatch) {
+      donationBatchObj = donationBatch;
     },
     setDonors: function(donors) {
       donorsObj = donors;
@@ -234,7 +241,7 @@ angular.module('bsis')
         response(false);
       });
     },
-    getDonationBatch: function (donor) {
+    getDonationBatchDonations: function (donor) {
        return $http.get('/getDonationBatch')
         .success(function(data, status, headers, config){
           return data;
