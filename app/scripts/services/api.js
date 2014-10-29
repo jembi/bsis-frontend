@@ -31,6 +31,12 @@ angular.module('bsis')
         }
       ),
 
+      DonationBatches: $resource(url + '/donationbatches/:id', null, 
+        {
+          update: {method:'PUT'}
+        }
+      ),
+
       DonorFormFields: $resource(url + '/donors/form'),
       DonationsFormFields: $resource(url + '/donations/form'),
       DeferralsFormFields: $resource(url + '/deferrals/form'),
