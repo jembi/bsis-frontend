@@ -36,6 +36,7 @@ angular.module('bsis')
       DeferralsFormFields: $resource(url + '/deferrals/form'),
       DonorCommunicationsFormFields: $resource(url + '/donorcommunications/form'),
       ComponentsFormFields: $resource(url + '/components/form'),
+      DonationBatchFormFields: $resource(url + '/donationbatches/form'),
 
       FindDonors: $resource(url + '/donors/search', {}, 
         {
@@ -95,7 +96,16 @@ angular.module('bsis')
 
       LabellingStatus:  $resource(url + '/labels/status/:donationIdentificationNumber'),
       PrintPackLabel:  $resource(url + '/labels/print/packlabel/:donationIdentificationNumber'),
-      PrintDiscardLabel: $resource(url + '/labels/print/discardlabel/:donationIdentificationNumber')
+      PrintDiscardLabel: $resource(url + '/labels/print/discardlabel/:donationIdentificationNumber'),
+
+      FindDonationBatches: $resource(url + '/donationbatches/search', {}, 
+        {
+          query: {
+            method: 'GET', 
+            params:{isClosed:'@isClosed', collectionCenters:'@collectionCenters', collectionSites: '@collectionSites'}
+          }
+        }
+      ),
 
     };
 });
