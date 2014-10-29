@@ -631,6 +631,7 @@ angular.module('bsis')
       'date': '03/09/2014',
       'venue': 'Maseru'
     };
+    $scope.donationBatchView = 'viewDonationBatch';
 
     DonorService.getDonationBatch().then(function (response) {
       $scope.data = response.data.donations;
