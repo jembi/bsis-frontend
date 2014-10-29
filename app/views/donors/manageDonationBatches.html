@@ -1,4 +1,6 @@
-<h3 class="page-header">Manage Donation Batches</h3>
+<span class="h3 page-header">Manage Donation Batches</span>
+
+<hr/>
 
 <h4>Open Donation Batches</h4>
 <div ng-switch="openDonationBatches" class="col-sm-12">
@@ -9,7 +11,7 @@
 
         <table ng-table="donationBatchTableParams" show-filter="false" class="table">
           <tr ng-repeat="donationBatch in $data"
-              ng-click="viewTestBatch(donationBatch); changeSelection(donationBatch);"
+              ng-click="manageClinic(donationBatch); changeSelection(donationBatch);"
               ng-mouseenter="this.$selected = true"
               ng-mouseleave="this.$selected = false"
               ng-class="{'active': donationBatch.$selected}">
@@ -44,12 +46,12 @@
 </div>
 
 <h4>New Donation Batch</h4>
-<form class="form-horizontal col-sm-12" role="form" ng-submit="addDonationBatch(donationBatch)">
+<form class="form-horizontal col-sm-12" role="form" ng-submit="addDonationBatch(newDonationBatch)">
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label">Center</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donationBatch.collectionCenter" ng-options="item.id as item.name for item in centers">
+        <select class="form-control input-sm" ng-model="newDonationBatch.collectionCenter" ng-options="item.id as item.name for item in centers">
             <option value="" ng-disabled="true"></option>
         </select>
       </div>
@@ -59,7 +61,7 @@
     <label for="name" class="col-sm-1 control-label">Site</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donationBatch.collectionSite" ng-options="item.id as item.name for item in sites">
+        <select class="form-control input-sm" ng-model="newDonationBatch.collectionSite" ng-options="item.id as item.name for item in sites">
             <option value="" ng-disabled="true"></option>
         </select>
       </div>
