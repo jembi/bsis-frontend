@@ -16,10 +16,7 @@
     |
     <small><em>Site: </em></small> <span e-class="xeditable donor-panel" editable-select="donationBatch.collectionSite.name" e-ng-options="item.name as item.name for item in donorPanels" e-name="donorPanel"  e-required>{{donationBatch.collectionSite.name}}</span>
     |
-    <small><em>Number of Donations: </em></small> 
-    <span ng-if="donationBatch.collectionsInBatch > 0">{{donationBatch.collectionsInBatch}}</span>
-    <span ng-if="donationBatch.collectionsInBatch === null">0</span>
-
+    <small><em>Number of Donations: </em></small> {{donationBatch.numCollections}}
     <span class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
       <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  
       <span ng-show="!editableForm.$visible"> | 
@@ -43,6 +40,7 @@
       <div class="panel-body">
         <div ng-switch on="donationBatchView">
             <div ng-switch-when="viewDonationBatch"><div ng-include="'views/donors/viewDonationBatch.html'"></div></div>
+            <div ng-switch-when="addDonation"><div ng-include="'views/donors/addDonation.html'"></div></div>
             <div ng-switch-when="viewDonationSummary"><div ng-include="'views/donors/viewDonationSummary.html'"></div></div>
             <div ng-switch-default><div ng-include="'views/donors/viewDonationBatch.html'"></div></div>
           </div>
