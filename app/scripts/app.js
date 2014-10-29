@@ -52,7 +52,7 @@ angular.module('bsis', [
       })
       .when('/manageClinic', {
         templateUrl : 'views/donors.html',
-        controller  : 'DonorClinicCtrl',
+        controller  : 'ViewDonationBatchCtrl',
         permission: PERMISSIONS.VIEW_DONATION_BATCH
       })
       .when('/exportDonorList', {
