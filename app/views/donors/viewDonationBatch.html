@@ -12,12 +12,15 @@
     <td data-title="'Donor #'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donorNumber'"  filter="{ 'donorNumber': 'text' }">
         {{donation.donorNumber}}
     </td>
-    <td data-title="'DIN'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'"  filter="{ 'donationIdentificationNumber': 'text' }">
-        {{donation.donationIdentificationNumber}}
+    <td data-title="'DIN'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'"  filter="{ 'collectionNumber': 'text' }">
+        {{donation.collectionNumber}}
     </td>
-    <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'bloodBagType'" filter="{ 'bloodBagType': 'select' }"
+    <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'bloodBagType'" filter="{ 'packType.bloodBagType': 'select' }"
         filter-data="packTypeFilter($column)">
-        {{donation.bloodBagType}}
+        {{donation.packType.bloodBagType}}
+    </td>
+    <td data-title="'Donation Type'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donationType'" >
+        {{donation.donationType.donationType}}
     </td>
   </tr>
 </table>
