@@ -639,11 +639,8 @@ angular.module('bsis')
 
     DonorService.getDonationBatchFormFields( function(response){
       if (response !== false){
-        data = response;
-        $scope.data = data;
-        console.log("$scope.data: ", $scope.data);
-        $scope.centers = data.centers;
-        $scope.sites = data.sites;
+        $scope.centers = response.centers;
+        $scope.sites = response.sites;
       }
       else{
       }
@@ -712,6 +709,8 @@ angular.module('bsis')
       $scope.donationBatch = item;
       DonorService.setDonationBatch($scope.donationBatch);
       console.log("VIEW DONATIONBATCH - ", $scope.donationBatch);
+      data = $scope.donationBatch.collectionsInBatch;
+      $scope.data = data;
       $location.path("/manageClinic");
       
     };
@@ -727,31 +726,25 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
 
-    $scope.donationBatch = DonorService.getDonationBatch();
+    $scope.init = function () {
+      $scope.donationBatch = DonorService.getDonationBatch();
+      data = $scope.donationBatch.collectionsInBatch;
+      $scope.data = data;
 
-    DonorService.getDonationBatchFormFields( function(response){
-      if (response !== false){
-        data = response;
-        $scope.data = data;
-        console.log("$scope.data: ", $scope.data);
-        $scope.centers = data.centers;
-        $scope.sites = data.sites;
-      }
-      else{
-      }
-    });
+      console.log("data data: ",data);
 
-    DonorService.getDonationBatchDonations().then(function (response) {
-      $scope.data = response.data.donations;
-      $scope.donorPanels = response.data.donorPanels;
-      }, function () {
-    });
+      DonorService.getDonationBatchFormFields( function(response){
+        if (response !== false){
+          $scope.centers = response.centers;
+          $scope.sites = response.sites;
+        }
+        else{
+        }
+      });
+    };
 
-    $scope.$watch("data", function () {
-      if ($scope.donorClinicTableParams.data.length > 0) {
-        $scope.donorClinicTableParams.reload();
-      }
-    }); 
+    $scope.init();
+
 
     $scope.donorClinicTableParams = new ngTableParams({
       page: 1,            // show first page
@@ -762,26 +755,23 @@ angular.module('bsis')
     {
       defaultSort: 'asc',
       counts: [], // hide page counts control
-      total: $scope.data.length, // length of data
+      total: data.length, // length of data
       getData: function ($defer, params) {
-        DonorService.getDonationBatchDonations().then(function (response) {
-          $scope.data = response.data.donations;
-          $scope.donorPanels = response.data.donorPanels;
-
-          var data = $scope.data;
-          var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
-          params.total(orderedData.length); // set total for pagination
-          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-
-        }, function () {
-        });
+        var filteredData = params.filter() ?
+          $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
 
-    $scope.donorClinicTableParams.settings().$scope = $scope;
+
+    $scope.$watch("data", function () {
+      if ($scope.donorClinicTableParams.data.length > 0) {
+        $scope.donorClinicTableParams.reload();
+      }
+    }); 
 
     $scope.packTypeFilter = function(column) {
       var def = $q.defer();
