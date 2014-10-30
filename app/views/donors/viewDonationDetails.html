@@ -7,27 +7,23 @@
     <tbody>
       <tr>
         <td class="field">DIN: </td>
-        <td class="value">{{donation.donationIdentificationNumber}}</td>
-      </tr>
-      <tr>
-        <td class="field">Batch: </td>
-        <td class="value">{{donation.collectionBatch}}</td>
+        <td class="value">{{donation.collectionNumber}}</td>
       </tr>
       <tr>
         <td class="field">Date Bled: </td>
         <td class="value">{{donation.collectedOn}}</td>
       </tr>
       <tr>
-        <td class="field">Time Bled: </td>
-        <td class="value">12:20:00</td>
-      </tr>
-      <tr>
         <td class="field">Venue: </td>
-        <td class="value">{{donation.collectionSite}}</td>
+        <td class="value">{{donation.collectionSite.name}}</td>
       </tr>
       <tr>
         <td class="field">Pack Type: </td>
-        <td class="value">{{donation.bloodBagType}}</td>
+        <td class="value">{{donation.packType.bloodBagType}}</td>
+      </tr>
+      <tr>
+        <td class="field">Donation Type: </td>
+        <td class="value">{{donation.donationType.donationType}}</td>
       </tr>
       <tr>
         <td class="field">Blood Group: </td>
