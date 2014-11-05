@@ -8,6 +8,8 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
     $scope.openTestBatches = false;
+    $scope.selectedDonationBatches = {};
+    $scope.selectedDonationBatches.ids = [];
     $scope.searchResults = '';
     $scope.testResultsSearch = {
       donationIdentificationNumber: ''
@@ -108,6 +110,21 @@ angular.module('bsis')
     */
 
     $scope.donationBatches = TestingService.getDonationBatches();
+
+    $scope.addTestBatch = function (donationBatches){
+
+      //console.log("$scope.selectedDonationBatches.ids: ", $scope.multiselect.selectedDonationBatches);
+      console.log("selectedDonationBatches: ", donationBatches);
+
+      TestingService.addTestBatch(donationBatches, function(response){
+        if (response === true){
+          $scope.getOpenTestBatches();
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
+    };
 
     $scope.testBatchTableParams = new ngTableParams({
       page: 1,            // show first page
