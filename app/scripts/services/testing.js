@@ -65,5 +65,19 @@ angular.module('bsis')
         response(false);
       });
     },
+    addTestBatch: function (donationBatches, response){
+      // create $Resource object and assign donation values
+      var addTestBatch = new Api.TestBatches();
+
+      //angular.copy(donationBatches, addTestBatch);
+      addTestBatch.collectionBatchIds = donationBatches;
+
+      // save deferral (POST /deferral)
+      addTestBatch.$save(function(data){ 
+        response(true);
+      }, function (){
+        response(false);
+      }); 
+    }
   };
 });
