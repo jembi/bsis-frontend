@@ -745,7 +745,6 @@ angular.module('bsis')
 
     $scope.init();
 
-
     $scope.donorClinicTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 8,          // count per page
@@ -765,7 +764,6 @@ angular.module('bsis')
         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
-
 
     $scope.$watch("data", function () {
       if ($scope.donorClinicTableParams.data.length > 0) {
@@ -842,6 +840,14 @@ angular.module('bsis')
           $scope.addDonationSuccess = true;
           $scope.donation = {};
           $scope.donationBatchView = 'viewDonationBatch';
+
+          $scope.donationBatch = DonorService.refreshDonationBatch();
+          data = $scope.donationBatch.collectionsInBatch;
+          $scope.data = data;
+
+          if ($scope.donorClinicTableParams.data.length > 0) {
+            $scope.donorClinicTableParams.reload();
+          }
 
         }
         else{

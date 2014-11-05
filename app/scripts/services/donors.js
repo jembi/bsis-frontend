@@ -86,6 +86,13 @@ angular.module('bsis')
     getDonationBatch: function(){
       return donationBatchObj;
     },
+    refreshDonationBatch: function(){
+      Api.DonationBatches.get({id:donationBatchObj.id}, function (donationBatch){
+          donationBatchObj = donationBatch;
+          console.log("donationBatchObj: ", donationBatchObj);
+      });
+      return donationBatchObj;
+    },
     getDonors: function(){
       return donorsObj;
     },
