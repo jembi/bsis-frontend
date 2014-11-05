@@ -7,6 +7,14 @@ angular.module('bsis')
   var donationBatchesObj = [];
 
   return {
+    getTestBatchFormFields: function(response){
+      Api.TestBatchFormFields.get({}, function (backingForm) {
+        response(backingForm);
+      }, function (){
+        response(false);
+      });
+    },
+    /*
     getTestBatchFormFields: function () {
       return $http.get('/getTestBatchFormFields')
         .success(function(data, status, headers, config){
@@ -16,6 +24,7 @@ angular.module('bsis')
         console.log("Find Test Batch Form Fields Unsuccessful");
       });
     },
+    */
     getTestBatch: function(){
       return testBatchObj;
     },

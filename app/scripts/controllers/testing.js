@@ -81,6 +81,15 @@ angular.module('bsis')
 
     $scope.getOpenTestBatches();
 
+    TestingService.getTestBatchFormFields( function(response){
+      if (response !== false){
+        TestingService.setDonationBatches(response.donationBatches);
+        $scope.donationBatches = TestingService.getDonationBatches();
+      }
+      else{
+      }
+    });
+    /*
     TestingService.getTestBatchFormFields().then(function (response) {
 
         TestingService.setDonationBatches(response.data.donationBatches);
@@ -96,6 +105,7 @@ angular.module('bsis')
       }, function () {
         $scope.openTestBatches = false;
     });
+    */
 
     $scope.donationBatches = TestingService.getDonationBatches();
 
