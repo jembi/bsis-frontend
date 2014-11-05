@@ -43,6 +43,7 @@ angular.module('bsis')
       DonorCommunicationsFormFields: $resource(url + '/donorcommunications/form'),
       ComponentsFormFields: $resource(url + '/components/form'),
       DonationBatchFormFields: $resource(url + '/donationbatches/form'),
+      TestBatchFormFields: $resource(url + '/testbatches/form'),
 
       FindDonors: $resource(url + '/donors/search', {}, 
         {
