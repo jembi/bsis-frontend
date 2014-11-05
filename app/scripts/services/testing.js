@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.factory('TestingService', function ($http) {
+.factory('TestingService', function ($http, Api) {
 
   var testBatchObj = {};
   var donationBatchesObj = [];
@@ -28,6 +28,14 @@ angular.module('bsis')
     setDonationBatches: function(donationBatch){
       donationBatchesObj = donationBatch;
     },
+    getTestResultsByDIN: function (donationIdentificationNumber, response) {
+      Api.TestResults.get({donationIdentificationNumber:donationIdentificationNumber}, function (overview) {
+        response(overview);
+      }, function (){
+        response(false);
+      });
+    }
+    /*
     getTestResultsByDIN: function (donationIdentificationNumber) {
       return $http.get('/getTestResultsByDIN', {params: { din: donationIdentificationNumber }})
         .success(function(data, status, headers, config){
@@ -39,5 +47,6 @@ angular.module('bsis')
         console.log("Find Test Results Unsuccessful");
       });
     }
+    */
   };
 });

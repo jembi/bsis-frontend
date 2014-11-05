@@ -95,6 +95,22 @@ angular.module('bsis')
       }
     });
 
+    $scope.getTestResultsByDIN = function (testResultsSearch) {
+      TestingService.getTestResultsByDIN(testResultsSearch.donationIdentificationNumber, function(response){
+        if (response !== false){
+          $scope.donation = response.donation;
+          $scope.overview = response.overview;
+          console.log("$scope.donation: ", $scope.donation);
+          console.log("$scope.overview: ", $scope.overview);
+          $scope.searchResults = true;
+        }
+        else{
+          $scope.searchResults = false;
+        }
+      });
+    };
+
+    /*
     $scope.getTestResultsByDIN = function () {
       TestingService.getTestResultsByDIN($scope.testResultsSearch.donationIdentificationNumber).then(function (response) {
           data = response.data;
@@ -104,6 +120,7 @@ angular.module('bsis')
           $scope.searchResults = false;
       });
     };
+    */
 
   })
 
