@@ -99,7 +99,7 @@ angular.module('bsis')
       TestingService.getTestResultsByDIN(testResultsSearch.donationIdentificationNumber, function(response){
         if (response !== false){
           $scope.donation = response.donation;
-          $scope.overview = response.overview;
+          $scope.testResults = response.overview.recentTestResults;
           console.log("$scope.donation: ", $scope.donation);
           console.log("$scope.overview: ", $scope.overview);
           $scope.searchResults = true;

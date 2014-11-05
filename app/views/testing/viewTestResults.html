@@ -60,15 +60,13 @@
             <tr>
               <th>Test</th>
               <th>Outcome</th>
-              <th class="center">Date</th>
             </tr>
           </thead>
           <tbody>
             <tr><td></td></tr>
-            <tr ng-repeat="test in data.ttiTests">
-              <td class="value">{{test.testName}}</td>
-              <td class="value">{{test.outcome}}</td>
-              <td class="value center">{{test.dateTested}}</td>
+            <tr ng-repeat="test in testResults">
+              <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.bloodTest.testNameShort}}</td>
+              <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.result}}</td>
             </tr>
           </tbody>
         </table>
@@ -83,15 +81,13 @@
             <tr>
               <th>Test</th>
               <th>Outcome</th>
-              <th class="center">Date</th>
             </tr>
           </thead>
           <tbody>
             <tr><td></td></tr>
-            <tr ng-repeat="test in data.bloodGroupingTests">
-              <td class="value">{{test.testName}}</td>
-              <td class="value">{{test.outcome}}</td>
-              <td class="value center">{{test.dateTested}}</td>
+            <tr ng-repeat="test in testResults">
+              <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.bloodTest.testNameShort}}</td>
+              <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.result}}</td>
             </tr>
           </tbody>
         </table>
