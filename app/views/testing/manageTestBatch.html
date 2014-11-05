@@ -40,14 +40,14 @@
 </div>
 
 <h4>New Test Batch</h4>
-<form class="form-horizontal col-sm-12" role="form" ng-submit="addTestBatch(selectedDonationBatches)">
+<form class="form-horizontal col-sm-12" role="form" ng-submit="addTestBatch(selectedDonationBatches.ids)">
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Donation Batches</label>
     <div class="row col-sm-10">
       <div class="form-inline" style="padding-left:5px;">
-        <ui-select multiple ng-model="selectedDonationBatches" theme="bootstrap" ng-disabled="disabled" style="width: 800px;">
+        <ui-select multiple ng-model="selectedDonationBatches.ids" theme="bootstrap" ng-disabled="disabled" style="width: 800px;">
           <ui-select-match placeholder="Select:">{{$item.collectionCenter.name}} ({{$item.createdDate}})</ui-select-match>
-          <ui-select-choices repeat="donationBatch as donationBatch in donationBatches | filter:$select.search">
+          <ui-select-choices repeat="donationBatch.id as donationBatch in donationBatches | filter:$select.search">
             <div ng-bind-html="donationBatch.collectionCenter.name"></div>
             <small>
               {{donationBatch.createdDate}} | 
