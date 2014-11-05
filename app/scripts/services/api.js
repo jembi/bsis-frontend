@@ -131,5 +131,14 @@ angular.module('bsis')
         }
       ),
 
+      FindTestResults: $resource(url + '/testresults/results/list', {}, 
+        {
+          query: {
+            method: 'GET', 
+            params:{testBatch:'@testBatch'}
+          }
+        }
+      ),
+
     };
 });
