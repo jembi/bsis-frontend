@@ -65,6 +65,14 @@ angular.module('bsis')
         response(false);
       });
     },
+    getTestResults: function (testBatch, response) {
+      Api.FindTestResults.query({testBatch:testBatch}, function (testResults) {
+        response(testResults);
+        console.log("testResults: ", testResults);
+      }, function (){
+        response(false);
+      });
+    },
     addTestBatch: function (donationBatches, response){
       // create $Resource object and assign donation values
       var addTestBatch = new Api.TestBatches();

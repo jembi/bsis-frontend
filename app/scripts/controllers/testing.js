@@ -172,12 +172,11 @@ angular.module('bsis')
       });
     };
     */
+    
 
   })
 
   .controller('TestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams) {
-
-    
 
     $scope.viewTestBatch = function (item) {
       TestingService.setTestBatch(item);
@@ -235,17 +234,30 @@ angular.module('bsis')
 
   })
 
-  .controller('RecordTestResultsCtrl', function ($scope, $location, TestingService, TTIOUTCOME, BGSOUTCOME, ABO, RH, $filter, ngTableParams) {
+  .controller('RecordTestResultsCtrl', function ($scope, $location, TestingService, TTITESTS, BLOODTYPINGTESTS, TTIOUTCOME, BGSOUTCOME, ABO, RH, $filter, ngTableParams) {
     var data = {};
     $scope.data  = data;
+    $scope.ttiTests = TTITESTS.options;
+    $scope.bloodTypingTests = BLOODTYPINGTESTS.options;
     $scope.ttiOutcomes = TTIOUTCOME.options;
     $scope.bgsOutcomes = BGSOUTCOME.options;
     $scope.abo = ABO.options;
     $scope.rh = RH.options;
 
     $scope.testBatch = TestingService.getTestBatch();
-    data = $scope.testBatch.samples;
-    $scope.data = data;
+
+    $scope.getTestResults = function () {
+      TestingService.getTestResults($scope.testBatch.id, function(response){
+        if (response !== false){
+          data = response.testresults;
+          $scope.data = data;
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getTestResults();
 
     $scope.testSamplesTTITableParams = new ngTableParams({
       page: 1,            // show first page
