@@ -82,8 +82,7 @@ angular.module('bsis')
     $scope.getOpenTestBatches();
 
     TestingService.getTestBatchFormFields().then(function (response) {
-        //data = response.data.testBatches;
-        //$scope.data = data;
+
         TestingService.setDonationBatches(response.data.donationBatches);
         $scope.donationBatches = TestingService.getDonationBatches();
         $scope.ttiTests = response.data.ttiTests;
@@ -175,8 +174,16 @@ angular.module('bsis')
     $scope.data  = data;
 
     $scope.testBatch = TestingService.getTestBatch();
-    $scope.donationBatches = $scope.testBatch.donationBatches;
-    data = $scope.testBatch.samples;
+
+    var donations = [];
+    angular.forEach($scope.testBatch.collectionBatches, function(batch){
+      angular.forEach(batch.collectionsInBatch, function(donation){
+        donations.push(donation);
+      });
+    });
+
+    console.log("donations: ", donations);
+    data = donations;
     $scope.data = data;
 
     $scope.testSamplesTableParams = new ngTableParams({
