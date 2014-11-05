@@ -113,5 +113,7 @@ angular.module('bsis')
         }
       ),
 
+      TestResults:  $resource(url + '/testresults/:donationIdentificationNumber')
+
     };
 });
