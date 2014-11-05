@@ -56,9 +56,34 @@ angular.module('bsis')
       });
     };
 
+    $scope.getOpenTestBatches = function(){
+
+      TestingService.getOpenTestBatches( function(response){
+        if (response !== false){
+          data = response.testBatches;
+          $scope.data = data;
+          console.log("$scope.data: ", $scope.data);
+          if ($scope.testBatchTableParams.data.length >= 0){
+            $scope.testBatchTableParams.reload();
+          }
+          if (data.length > 0){
+            $scope.openTestBatches = true;
+          }
+          else {
+            $scope.openTestBatches = false;
+          }
+          
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getOpenTestBatches();
+
     TestingService.getTestBatchFormFields().then(function (response) {
-        data = response.data.testBatches;
-        $scope.data = data;
+        //data = response.data.testBatches;
+        //$scope.data = data;
         TestingService.setDonationBatches(response.data.donationBatches);
         $scope.donationBatches = TestingService.getDonationBatches();
         $scope.ttiTests = response.data.ttiTests;

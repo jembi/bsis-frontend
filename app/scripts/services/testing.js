@@ -34,7 +34,7 @@ angular.module('bsis')
       }, function (){
         response(false);
       });
-    }
+    },
     /*
     getTestResultsByDIN: function (donationIdentificationNumber) {
       return $http.get('/getTestResultsByDIN', {params: { din: donationIdentificationNumber }})
@@ -48,5 +48,13 @@ angular.module('bsis')
       });
     }
     */
+    getOpenTestBatches: function (response) {
+      Api.FindTestBatches.query({status:'OPEN'}, function (testBatches) {
+        response(testBatches);
+        console.log("testBatches: ", testBatches);
+      }, function (){
+        response(false);
+      });
+    },
   };
 });
