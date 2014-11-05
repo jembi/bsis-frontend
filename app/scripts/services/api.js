@@ -113,7 +113,16 @@ angular.module('bsis')
         }
       ),
 
-      TestResults:  $resource(url + '/testresults/:donationIdentificationNumber')
+      TestResults:  $resource(url + '/testresults/:donationIdentificationNumber'),
+
+      FindTestBatches: $resource(url + '/testbatches/search', {}, 
+        {
+          query: {
+            method: 'GET', 
+            params:{status:'@status', createdBeforeDate:'@createdBeforeDate', createdAfterDate: '@createdAfterDate'}
+          }
+        }
+      ),
 
     };
 });
