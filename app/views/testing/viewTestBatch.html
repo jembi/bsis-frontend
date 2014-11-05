@@ -4,6 +4,11 @@
   <em><a href="" ng-click="releaseTestBatch()">Release Batch</a> </em>|<em> <a href="" ng-click="closeTestBatch()">Close Batch</a></em></small>
 </span>
 
+<span class="h4" style="float: right; margin-top: 5px; padding-right: 15px;">
+  <small><em><a href="" ng-click="recordTestResults(testBatch, 'tti')" >Record TTI Test Results</a></em></small> | 
+  <small><em><a href="" ng-click="recordTestResults(testBatch, 'bloodGrouping')" >Record Blood Group Serology Results</a></em></small>
+</span>
+
 <hr/>
 
 <div class = "h4"> 
@@ -15,7 +20,6 @@
 </div>
 
 <hr/>
-<span class = "h4"><small><em>Donation Batches:</em></small></span><br/>
 <span class = "h4" ng-repeat="donationBatch in testBatch.collectionBatches"> 
   <small><em>Center: </em></small>{{donationBatch.collectionCenter.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate}} | <small><em>Number of Donations: </em></small> {{donationBatch.numCollections}} 
   <br/>
