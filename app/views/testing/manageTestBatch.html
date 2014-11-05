@@ -46,13 +46,12 @@
     <div class="row col-sm-10">
       <div class="form-inline" style="padding-left:5px;">
         <ui-select multiple ng-model="selectedDonationBatches" theme="bootstrap" ng-disabled="disabled" style="width: 800px;">
-          <ui-select-match placeholder="Select:">{{$item.batchNumber}} ({{$item.donorPanel}})</ui-select-match>
-          <ui-select-choices repeat="donationBatch.batchNumber as donationBatch in donationBatches | filter:$select.search">
-            <div ng-bind-html="donationBatch.batchNumber"></div>
+          <ui-select-match placeholder="Select:">{{$item.collectionCenter.name}} ({{$item.createdDate}})</ui-select-match>
+          <ui-select-choices repeat="donationBatch as donationBatch in donationBatches | filter:$select.search">
+            <div ng-bind-html="donationBatch.collectionCenter.name"></div>
             <small>
-              {{donationBatch.donorPanel}} | 
-              {{donationBatch.createdOn}} | 
-              {{donationBatch.numSamples}} donations
+              {{donationBatch.createdDate}} | 
+              {{donationBatch.numCollections}} donations
             </small>
           </ui-select-choices>
         </ui-select>
