@@ -25,20 +25,25 @@
       <div class="panel-body">
 
       <span class="h3"> 
-        <small><em>DIN:</em></small> {{data.donationIdentificationNumber}} | 
+        <small><em>DIN:</em></small> {{donation.collectionNumber}}
       </span> 
       <span class="h4">
-        <small><em>Blood Group:</em></small> {{data.bloodAbo}}{{data.bloodRh}} | 
-        <small><em>Pack Type:</em></small> {{data.bloodBagType}}
+        | 
+        <small><em>Venue:</em></small> {{donation.collectionCenter.name}} | 
+        <small><em> Date: </em></small> {{donation.collectedOn}} | 
+        <small><em>Blood Group:</em></small> 
+          <span ng-if="donation.bloodGroup !== ''" >{{donation.bloodGroup}}</span>
+          <span ng-if="donation.bloodGroup == ''" >Unknown</span>
+           | 
+
+        <small><em>Pack Type:</em></small> {{donation.packType.bloodBagType}}
       </span>
 
       <hr/>
-
-      <span class="h4"> 
-        <small><em>Test Batch:</em> {{data.testBatch}} <em>(Tested on {{data.testedOn}})</em> </small>
-      </span><br/>
-      <span class="h4"> 
-        <small><em>Donation Batch:</em> {{data.collectionBatch}} ({{data.collectionSite}}) <em>(Collected on {{data.collectedOn}})</em> </small>
+      <span class="h4">
+        <small><em>TTI Test Status:</em></small> {{donation.ttistatus}}
+        <br/>
+        <small><em>Blood Group Serology Test Status:</em></small> {{donation.bloodTypingStatus}} 
       </span>
 
       <hr/>
@@ -55,7 +60,6 @@
             <tr>
               <th>Test</th>
               <th>Outcome</th>
-              <th>User</th>
               <th class="center">Date</th>
             </tr>
           </thead>
@@ -64,7 +68,6 @@
             <tr ng-repeat="test in data.ttiTests">
               <td class="value">{{test.testName}}</td>
               <td class="value">{{test.outcome}}</td>
-              <td class="value">{{test.user}}</td>
               <td class="value center">{{test.dateTested}}</td>
             </tr>
           </tbody>
@@ -80,7 +83,6 @@
             <tr>
               <th>Test</th>
               <th>Outcome</th>
-              <th>User</th>
               <th class="center">Date</th>
             </tr>
           </thead>
@@ -89,7 +91,6 @@
             <tr ng-repeat="test in data.bloodGroupingTests">
               <td class="value">{{test.testName}}</td>
               <td class="value">{{test.outcome}}</td>
-              <td class="value">{{test.user}}</td>
               <td class="value center">{{test.dateTested}}</td>
             </tr>
           </tbody>
