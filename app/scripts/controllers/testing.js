@@ -173,6 +173,15 @@ angular.module('bsis')
     };
     */
     
+    $scope.recordTestResults = function (item, testCategory) {
+      TestingService.setTestBatch(item);
+      if(testCategory === 'tti'){
+        $location.path("/manageTTITesting");
+      }
+      else if (testCategory === 'bloodGrouping'){
+        $location.path("/manageBloodGroupTesting");
+      }
+    };
 
   })
 
