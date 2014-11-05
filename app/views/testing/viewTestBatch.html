@@ -1,6 +1,4 @@
-<span class="h3"> 
-  <small><em>Test Batch Number: </em></small> {{testBatch.batchNumber}}
-</span> 
+<span class="h3 page-header">Manage Test Batch</span>
 
 <span ng-if="testBatch.status == 'Complete'" class="h4" style="float: right; margin-top: 5px; margin-bottom: 5px; padding-right: 15px;">
   <em><a href="" ng-click="releaseTestBatch()">Release Batch</a> </em>|<em> <a href="" ng-click="closeTestBatch()">Close Batch</a></em></small>
@@ -9,7 +7,7 @@
 <hr/>
 
 <div class = "h4"> 
-  <small><em>Created On: </em></small>{{testBatch.createdOn}}
+  <small><em>Created On: </em></small>{{testBatch.createdDate}}
   | 
   <small><em>Status: </em></small>{{testBatch.status}}
   | 
@@ -17,8 +15,9 @@
 </div>
 
 <hr/>
-<span class = "h4" ng-repeat="donationBatch in donationBatches"> 
-  <small>{{donationBatch.batchNumber}} <em>({{donationBatch.donorPanel}}, {{donationBatch.createdOn}})</em> - {{donationBatch.numDonations}} donations</small>
+<span class = "h4"><small><em>Donation Batches:</em></small></span><br/>
+<span class = "h4" ng-repeat="donationBatch in testBatch.collectionBatches"> 
+  <small><em>Center: </em></small>{{donationBatch.collectionCenter.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate}} | <small><em>Number of Donations: </em></small> {{donationBatch.numCollections}} 
   <br/>
 </span>
 <hr/>
