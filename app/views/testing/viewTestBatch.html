@@ -34,19 +34,19 @@
             ng-mouseleave="this.$selected = false"
             ng-class="{'active': sample.$selected}">
             <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
-                {{sample.donationIdentificationNumber}}
+                {{sample.collectionNumber}}
             </td>
             <td data-title="'Date Bled'" header-class="text-left" class="text-center" sortable="'collectedOn'">
                 {{sample.collectedOn}}
             </td>
             <td data-title="'Pack'" header-class="text-left" sortable="'bloodBagType'">
-                {{sample.bloodBagType}}
+                {{sample.packType.bloodBagType}}
             </td>
-            <td data-title="'Clinic'" header-class="text-left" sortable="'collectionBatch'">
-                {{sample.collectionBatch}} <em>({{sample.collectionSite}})</em>
+            <td data-title="'Clinic'" header-class="text-left" sortable="'center'">
+                {{sample.collectionCenter.name}}
             </td>
             <td data-title="'TTI Testing'" header-class="text-left" sortable="'ttiStatus'">
-                {{sample.ttiStatus}}
+                {{sample.ttistatus}}
             </td>
             <td data-title="'Blood Group Serology'" header-class="text-left" sortable="'bloodTypingStatus'">
                 {{sample.bloodTypingStatus}} <em>({{sample.bloodAbo}}{{sample.bloodRh}})
