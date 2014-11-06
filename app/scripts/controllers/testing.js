@@ -266,8 +266,8 @@ angular.module('bsis')
       });
       TestingService.getBloodGroupTestingFormFields( function(response){
         if (response !== false){
-          $scope.bloodGroupingTestsBasic = response.basicBloodTypingTests;
-          console.log("$scope.bloodGroupingTestsBasic: ",$scope.bloodGroupingTestsBasic);
+          $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
+          console.log("$scope.bloodTypingTestsBasic: ",$scope.bloodTypingTestsBasic);
         }
         else{
         }
@@ -291,6 +291,23 @@ angular.module('bsis')
 
     $scope.getTests();
     $scope.getTestResults();
+
+    $scope.saveTTITestResults = function (testResults) {
+
+      angular.forEach(testResults, function(value, key) {
+        TestingService.saveTTITestResults(value, function(response){
+          if (response === true){
+          }
+          else{
+            // TODO: handle case where response == false
+          }
+        });
+        
+      });
+
+      $location.path("/viewTestBatch");
+
+    };
 
     $scope.testSamplesTTITableParams = new ngTableParams({
       page: 1,            // show first page
