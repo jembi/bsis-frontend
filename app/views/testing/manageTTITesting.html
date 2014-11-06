@@ -50,7 +50,7 @@
               'sort-desc': testSamplesTTITableParams.isSortBy('ttiStatus', 'desc')
             }"
             ng-click="testSamplesTTITableParams.sorting('ttiStatus', testSamplesTTITableParams.isSortBy('ttiStatus', 'asc') ? 'desc' : 'asc')">
-            <div>TTI Testing</div>
+            <div>TTI Testing Status</div>
           </th>
           <th ng-repeat="column in ttiTests" ng-show="true"
               class="text-center" ng-class=""
@@ -65,13 +65,13 @@
               ng-mouseleave="this.$selected = false"
               ng-class="{'active': sample.$selected}">
               <td class="text-center" >
-                  {{sample.donationIdentificationNumber}}
+                  {{sample.collectedSample.collectionNumber}}
               </td>
               <td class="text-center">
-                  {{sample.collectedOn}}
+                  {{sample.collectedSample.collectedOn}}
               </td>
               <td >
-                  {{sample.ttiStatus}}
+                  {{sample.ttistatus}}
               </td>
               <td class="text-center" ng-repeat="test in sample.ttiTests">
                 <span ng-switch on="test.outcome">
