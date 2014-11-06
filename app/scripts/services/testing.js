@@ -88,14 +88,23 @@ angular.module('bsis')
       });
     },
     addTestBatch: function (donationBatches, response){
-      // create $Resource object and assign donation values
       var addTestBatch = new Api.TestBatches();
 
-      //angular.copy(donationBatches, addTestBatch);
       addTestBatch.collectionBatchIds = donationBatches;
 
-      // save deferral (POST /deferral)
       addTestBatch.$save(function(data){ 
+        response(true);
+      }, function (){
+        response(false);
+      }); 
+    },
+    saveTTITestResults: function (ttiTestResults, response){
+      var saveTestResults = new Api.TTITestResults();
+
+      angular.copy(ttiTestResults, saveTestResults);
+
+      saveTestResults.$save(function(data){ 
+        console.log("saveTestResults response: ",data);
         response(true);
       }, function (){
         response(false);
