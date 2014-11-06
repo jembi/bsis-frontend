@@ -142,5 +142,11 @@ angular.module('bsis')
         }
       ),
 
+      TTITestResults: $resource(url + '/ttitests/results', null, 
+        {
+          update: {method:'PUT'}
+        }
+      ),
+
     };
 });
