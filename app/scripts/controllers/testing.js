@@ -255,6 +255,25 @@ angular.module('bsis')
 
     $scope.testBatch = TestingService.getTestBatch();
 
+    $scope.getTests = function () {
+      TestingService.getTTITestingFormFields( function(response){
+        if (response !== false){
+          $scope.ttiTestsBasic = response.basicTTITests;
+          console.log("$scope.ttiTestsBasic: ",$scope.ttiTestsBasic);
+        }
+        else{
+        }
+      });
+      TestingService.getBloodGroupTestingFormFields( function(response){
+        if (response !== false){
+          $scope.bloodGroupingTestsBasic = response.basicBloodTypingTests;
+          console.log("$scope.bloodGroupingTestsBasic: ",$scope.bloodGroupingTestsBasic);
+        }
+        else{
+        }
+      });
+    };
+
     $scope.getTestResults = function () {
       TestingService.getTestResults($scope.testBatch.id, function(response){
         if (response !== false){
@@ -270,6 +289,7 @@ angular.module('bsis')
       });
     };
 
+    $scope.getTests();
     $scope.getTestResults();
 
     $scope.testSamplesTTITableParams = new ngTableParams({
