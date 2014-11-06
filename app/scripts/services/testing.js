@@ -104,7 +104,6 @@ angular.module('bsis')
       angular.copy(ttiTestResults, saveTestResults);
 
       saveTestResults.$save(function(data){ 
-        console.log("saveTestResults response: ",data);
         response(true);
       }, function (){
         response(false);

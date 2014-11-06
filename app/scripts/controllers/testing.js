@@ -64,7 +64,6 @@ angular.module('bsis')
         if (response !== false){
           data = response.testBatches;
           $scope.data = data;
-          console.log("$scope.data: ", $scope.data);
           if ($scope.testBatchTableParams.data.length >= 0){
             $scope.testBatchTableParams.reload();
           }
@@ -113,9 +112,6 @@ angular.module('bsis')
 
     $scope.addTestBatch = function (donationBatches){
 
-      //console.log("$scope.selectedDonationBatches.ids: ", $scope.multiselect.selectedDonationBatches);
-      console.log("selectedDonationBatches: ", donationBatches);
-
       TestingService.addTestBatch(donationBatches, function(response){
         if (response === true){
           $scope.getOpenTestBatches();
@@ -151,8 +147,6 @@ angular.module('bsis')
         if (response !== false){
           $scope.donation = response.donation;
           $scope.testResults = response.overview.recentTestResults;
-          console.log("$scope.donation: ", $scope.donation);
-          console.log("$scope.overview: ", $scope.overview);
           $scope.searchResults = true;
         }
         else{
@@ -217,7 +211,6 @@ angular.module('bsis')
       });
     });
 
-    console.log("donations: ", donations);
     data = donations;
     $scope.data = data;
 
