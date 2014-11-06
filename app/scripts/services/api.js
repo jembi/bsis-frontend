@@ -50,6 +50,8 @@ angular.module('bsis')
       ComponentsFormFields: $resource(url + '/components/form'),
       DonationBatchFormFields: $resource(url + '/donationbatches/form'),
       TestBatchFormFields: $resource(url + '/testbatches/form'),
+      TTITestingFormFields: $resource(url + '/ttitests/form'),
+      BloodGroupTestingFormFields: $resource(url + '/bloodgroupingtests/form'),
 
       FindDonors: $resource(url + '/donors/search', {}, 
         {
