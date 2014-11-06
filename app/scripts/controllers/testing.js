@@ -260,6 +260,10 @@ angular.module('bsis')
         if (response !== false){
           data = response.testresults;
           $scope.data = data;
+
+          if ($scope.testSamplesTTITableParams.data.length >= 0){
+            $scope.testSamplesTTITableParams.reload();
+          }
         }
         else{
         }
