@@ -270,7 +270,7 @@ angular.module('bsis')
     $scope.getTestResults = function () {
       TestingService.getTestResults($scope.testBatch.id, function(response){
         if (response !== false){
-          data = response.testresults;
+          data = response.testResults;
           $scope.data = data;
 
           $scope.addTestResults = {};
