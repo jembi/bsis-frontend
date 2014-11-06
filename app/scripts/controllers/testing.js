@@ -280,6 +280,11 @@ angular.module('bsis')
           data = response.testresults;
           $scope.data = data;
 
+          $scope.addTestResults = {};
+          angular.forEach($scope.data, function(value, key) {
+            $scope.addTestResults[value.collectedSample.collectionNumber] = {"donationIdentificationNumber": value.collectedSample.collectionNumber};
+          });
+
           if ($scope.testSamplesTTITableParams.data.length >= 0){
             $scope.testSamplesTTITableParams.reload();
           }
