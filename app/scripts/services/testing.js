@@ -25,6 +25,20 @@ angular.module('bsis')
       });
     },
     */
+    getTTITestingFormFields: function(response){
+      Api.TTITestingFormFields.get({}, function (backingForm) {
+        response(backingForm);
+      }, function (){
+        response(false);
+      });
+    },
+    getBloodGroupTestingFormFields: function(response){
+      Api.BloodGroupTestingFormFields.get({}, function (backingForm) {
+        response(backingForm);
+      }, function (){
+        response(false);
+      });
+    },
     getTestBatch: function(){
       return testBatchObj;
     },
