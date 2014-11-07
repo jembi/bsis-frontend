@@ -58,8 +58,10 @@ angular.module('bsis')
       });
     },
     recordComponents: function (component, response) {
-
+      
       var addComponent = new Api.RecordComponents();
+
+      angular.copy(component, addComponent);
       
       addComponent.$save(function(data){ 
         response(data);
