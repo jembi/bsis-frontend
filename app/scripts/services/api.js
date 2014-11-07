@@ -122,8 +122,6 @@ angular.module('bsis')
         }
       ),
 
-      TestResults:  $resource(url + '/testresults/:donationIdentificationNumber'),
-
       FindTestBatches: $resource(url + '/testbatches/search', {}, 
         {
           query: {
@@ -133,7 +131,7 @@ angular.module('bsis')
         }
       ),
 
-      FindTestResults: $resource(url + '/testresults/results/list', {}, 
+      FindTestResults: $resource(url + '/testresults/search', {}, 
         {
           query: {
             method: 'GET', 
@@ -142,7 +140,7 @@ angular.module('bsis')
         }
       ),
 
-      TTITestResults: $resource(url + '/ttitests/results', null, 
+      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', null, 
         {
           update: {method:'PUT'}
         }
