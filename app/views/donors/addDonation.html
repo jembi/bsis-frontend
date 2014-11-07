@@ -1,4 +1,5 @@
-<h3 class="page-header">Add Donation</h3>
+<span class="h4">Add Donation</span>
+<hr style="margin-top:8px;"/>
 
 <div ng-if="$parent.addDonationSuccess === true" ng-hide="$parent.addDonationSuccess !== true" style="padding-top:10px;"><alert type="success" close="$parent.addDonationSuccess = ''">Donation Added Successfully.</alert></div>
 <div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false" style="padding-top:10px;"><alert type="danger" close="$parent.addDonationSuccess = ''">Error Adding Donation, please resolve issues and try again.</alert></div>
@@ -97,7 +98,7 @@
   <div class="form-group"> 
     <div class="col-sm-offset-1 col-sm-4">
       <button class="btn btn-primary" type="submit">Save</button>
-      <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+      <button class="btn btn-primary" type="button" ng-click="viewDonationBatch()"/>Cancel</button>
     </div>
   </div>
 
