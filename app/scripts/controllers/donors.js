@@ -56,6 +56,9 @@ angular.module('bsis')
       if ($location.path() === "/viewDonor" && path === "/findDonor") {
         $scope.selection = $location.path();
         return true;
+      } else if ($location.path() === "/addDonor" && path === "/findDonor") {
+        $scope.selection = $location.path();
+        return true;
       } else if ($location.path() === "/manageClinic" && path === "/manageDonationBatches") {
         $scope.selection = $location.path();
         return true;
@@ -407,6 +410,7 @@ angular.module('bsis')
         if (response === true){
           $scope.deferral = {};
           $scope.getDeferrals($scope.donor.id);
+
         }
         else{
           // TODO: handle case where response == false
