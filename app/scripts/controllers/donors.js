@@ -411,6 +411,9 @@ angular.module('bsis')
           $scope.deferral = {};
           $scope.getDeferrals($scope.donor.id);
 
+          if ($scope.deferralTableParams.data.length >= 0){
+            $scope.deferralTableParams.reload();
+          }
         }
         else{
           // TODO: handle case where response == false
