@@ -146,7 +146,7 @@ angular.module('bsis')
       TestingService.getTestResultsByDIN(testResultsSearch.donationIdentificationNumber, function(response){
         if (response !== false){
           $scope.donation = response.donation;
-          $scope.testResults = response.overview.recentTestResults;
+          $scope.testResults = response.testResults.recentTestResults;
           $scope.searchResults = true;
         }
         else{
