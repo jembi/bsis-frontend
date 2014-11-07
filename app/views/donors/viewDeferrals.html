@@ -4,23 +4,10 @@
 <table class="dash-table">
     <tr>
       <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
-      <td class="field">Current Deferrals: </td>
-      <td class="value red"> On Medication <em>(ends 21 September 2014)</em> 
-        <span style="font-size: 0.8em;">
-          <em><a href=""> Edit</a></em>
-        </span>
-      </td>
+      <td class="field">Currently Deferred: </td>
+      <td ng-if="currentlyDeferred" class="value red"> Deferred until {{deferredUntil}}</td>
+      <td ng-if="!currentlyDeferred" class="value green"> No current defferals</td>
     </tr>
-    <tr>
-      <td class="icon"></td>
-      <td class="field"></td>
-      <td class="value red"> Illness or Operation <em>(ends 12 December 2014)</em>
-        <span style="font-size: 0.8em;">
-          <em><a href=""> Edit</a></em>
-        </span>
-      </td>
-    </tr>
-
     <tr><td></td></tr>
   </tbody>
 </table>
