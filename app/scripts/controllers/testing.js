@@ -168,7 +168,7 @@ angular.module('bsis')
     */
     
     $scope.recordTestResults = function (item, testCategory) {
-      TestingService.setTestBatch(item);
+      TestingService.setCurrentTestBatch(item.id);
       if(testCategory === 'tti'){
         $location.path("/manageTTITesting");
       }
@@ -182,12 +182,12 @@ angular.module('bsis')
   .controller('TestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams) {
 
     $scope.viewTestBatch = function (item) {
-      TestingService.setTestBatch(item);
+      TestingService.setCurrentTestBatch(item.id);
       $location.path("/viewTestBatch");
     };
 
     $scope.recordTestResults = function (item, testCategory) {
-      TestingService.setTestBatch(item);
+      TestingService.setCurrentTestBatch(item.id);
       if(testCategory === 'tti'){
         $location.path("/manageTTITesting");
       }
@@ -202,17 +202,32 @@ angular.module('bsis')
     var data = {};
     $scope.data  = data;
 
-    $scope.testBatch = TestingService.getTestBatch();
+    $scope.getCurrentTestBatch = function () {
+      TestingService.getCurrentTestBatch( function(response){
+        if (response !== false){
+          $scope.testBatch = response.testBatch;
 
-    var donations = [];
-    angular.forEach($scope.testBatch.collectionBatches, function(batch){
-      angular.forEach(batch.collectionsInBatch, function(donation){
-        donations.push(donation);
+          var donations = [];
+          angular.forEach($scope.testBatch.collectionBatches, function(batch){
+            angular.forEach(batch.collectionsInBatch, function(donation){
+              donations.push(donation);
+            });
+          });
+
+          data = donations;
+          $scope.data = data;
+
+          if ($scope.testSamplesTableParams.data.length >= 0){
+            $scope.testSamplesTableParams.reload();
+          }
+
+        }
+        else{
+        }
       });
-    });
+    };
 
-    data = donations;
-    $scope.data = data;
+    $scope.getCurrentTestBatch();
 
     $scope.testSamplesTableParams = new ngTableParams({
       page: 1,            // show first page
@@ -246,7 +261,16 @@ angular.module('bsis')
     $scope.abo = ABO.options;
     $scope.rh = RH.options;
 
-    $scope.testBatch = TestingService.getTestBatch();
+    $scope.getCurrentTestBatch = function () {
+      TestingService.getCurrentTestBatch( function(response){
+        if (response !== false){
+          $scope.testBatch = response.testBatch;
+
+        }
+        else{
+        }
+      });
+    };
 
     $scope.getTests = function () {
       TestingService.getTTITestingFormFields( function(response){
@@ -267,8 +291,9 @@ angular.module('bsis')
       });
     };
 
-    $scope.getTestResults = function () {
-      TestingService.getTestResults($scope.testBatch.id, function(response){
+    $scope.getCurrentTestResults = function () {
+
+      TestingService.getCurrentTestResults(function(response){
         if (response !== false){
           data = response.testResults;
           $scope.data = data;
@@ -287,8 +312,9 @@ angular.module('bsis')
       });
     };
 
+    $scope.getCurrentTestBatch();
     $scope.getTests();
-    $scope.getTestResults();
+    $scope.getCurrentTestResults();
 
     $scope.saveTestResults = function (testResults) {
 

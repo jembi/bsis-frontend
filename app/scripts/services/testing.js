@@ -3,7 +3,7 @@
 angular.module('bsis')
 .factory('TestingService', function ($http, Api) {
 
-  var testBatchObj = {};
+  var currentTestBatchId = '';
   var donationBatchesObj = [];
 
   return {
@@ -39,11 +39,22 @@ angular.module('bsis')
         response(false);
       });
     },
-    getTestBatch: function(){
-      return testBatchObj;
+    getTestBatch: function (id, response) {
+      Api.TestBatches.get({id:id}, function (testBatch) {
+        response(testBatch);
+      }, function (){
+        response(false);
+      });
     },
-    setTestBatch: function(testBatch){
-      testBatchObj = testBatch;
+    getCurrentTestBatch: function(response){
+      Api.TestBatches.get({id:currentTestBatchId}, function (testBatch) {
+        response(testBatch);
+      }, function (){
+        response(false);
+      });
+    },
+    setCurrentTestBatch: function(testBatchId){
+      currentTestBatchId = testBatchId;
     },
     getDonationBatches: function(){
       return donationBatchesObj;
@@ -81,6 +92,14 @@ angular.module('bsis')
     },
     getTestResults: function (testBatch, response) {
       Api.FindTestResults.query({testBatch:testBatch}, function (testResults) {
+        response(testResults);
+        console.log("testResults: ", testResults);
+      }, function (){
+        response(false);
+      });
+    },
+    getCurrentTestResults: function (response) {
+      Api.FindTestResults.query({testBatch:currentTestBatchId}, function (testResults) {
         response(testResults);
         console.log("testResults: ", testResults);
       }, function (){
