@@ -98,10 +98,10 @@ angular.module('bsis')
         response(false);
       }); 
     },
-    saveTTITestResults: function (ttiTestResults, response){
+    saveTestResults: function (testResults, response){
       var saveTestResults = new Api.TestResults();
 
-      angular.copy(ttiTestResults, saveTestResults);
+      angular.copy(testResults, saveTestResults);
 
       saveTestResults.$save(function(data){ 
         response(true);

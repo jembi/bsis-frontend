@@ -290,10 +290,10 @@ angular.module('bsis')
     $scope.getTests();
     $scope.getTestResults();
 
-    $scope.saveTTITestResults = function (testResults) {
+    $scope.saveTestResults = function (testResults) {
 
       angular.forEach(testResults, function(value, key) {
-        TestingService.saveTTITestResults(value, function(response){
+        TestingService.saveTestResults(value, function(response){
           if (response === true){
           }
           else{
