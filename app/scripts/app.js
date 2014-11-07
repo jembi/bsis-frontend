@@ -127,12 +127,12 @@ angular.module('bsis', [
       .when('/manageTTITesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        permission: PERMISSIONS.VIEW_TTI_OUTCOME
+        permission: PERMISSIONS.ADD_TEST_OUTCOME
       })
       .when('/manageBloodGroupTesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        permission: PERMISSIONS.VIEW_BLOOD_TYPING_OUTCOME
+        permission: PERMISSIONS.ADD_TEST_OUTCOME
       })
       .when('/uploadTestResults', {
         templateUrl : 'views/testing.html',
