@@ -119,11 +119,6 @@ angular.module('bsis', [
         controller  : 'ViewTestBatchCtrl',
         permission: PERMISSIONS.VIEW_TEST_OUTCOME
       })
-      .when('/recordTestResults', {
-        templateUrl : 'views/testing.html',
-        controller  : 'TestBatchCtrl',
-        permission: PERMISSIONS.ADD_TEST_OUTCOME
-      })
       .when('/manageTTITesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
