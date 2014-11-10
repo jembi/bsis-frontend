@@ -1,10 +1,16 @@
-<form editable-form name="demographicsForm" onaftersave="saveDonorDemographics()">
+<form editable-form name="demographicsForm" onaftersave="updateDonor(donor)">
 
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
     <em><a href="" ng-click="demographicsForm.$show()" ng-show="!demographicsForm.$visible">Edit</a></em>
     <span ng-show="demographicsForm.$visible">
-      <em><a href="" ng-click="saveDonor()" ng-disabled="demographicsForm.$waiting">Save</a></em> | 
-      <em><a href="" ng-click="demographicsForm.$cancel()" ng-disabled="demographicsForm.$waiting">Cancel</a></em>
+      <em>
+      <button type="submit" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="demographicsForm.$waiting">
+        Save
+      </button>
+      <button type="button" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="demographicsForm.$waiting" ng-click="demographicsForm.$cancel()">
+        Cancel
+      </button>
+      </em>
     </span>
   </span>
 
@@ -15,7 +21,9 @@
         <td class="field">Identifier: </td>
         <td class="value">
         <span e-class="xeditable" editable-text="donor.idNumber" e-name="idNumber">{{donor.idNumber}}</span> <em>
-        (<span e-class="xeditable" editable-select="donor.idType" e-ng-options="item.idType as item.idType for item in idTypes" e-name="idType">{{donor.idType}}</span>)</em></td>
+        (<span e-class="xeditable" editable-select="donor.idType.id" e-ng-options="item.id as item.idType for item in idTypes" e-name="idType">
+          {{donor.idType.idType}}
+        </span>)</em></td>
       </tr>
 
       <tr><td></td></tr>
@@ -24,7 +32,9 @@
         <td class="icon"><i class="fa {{icons.PHONE}}"></i></td>
         <td class="field">Preferred Contact Type: </td>
         <td class="value">
-          <span e-class="xeditable" editable-select="donor.contactMethodType" e-ng-options="item.contactMethodType as item.contactMethodType for item in preferredContactMethods" e-name="contactMethodType">{{donor.contactMethodType}}</span>
+          <span e-class="xeditable" editable-select="donor.contactMethodType.id" e-ng-options="item.id as item.contactMethodType for item in preferredContactMethods" e-name="contactMethodType">
+            {{donor.contactMethodType.contactMethodType}}
+          </span>
         </td>
       </tr>
       <tr>

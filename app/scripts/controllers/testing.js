@@ -8,6 +8,8 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
     $scope.openTestBatches = false;
+    $scope.selectedDonationBatches = {};
+    $scope.selectedDonationBatches.ids = [];
     $scope.searchResults = '';
     $scope.testResultsSearch = {
       donationIdentificationNumber: ''
@@ -20,10 +22,10 @@ angular.module('bsis')
       if ($location.path() === "/viewTestBatch" && path === "/manageTestBatch") {
         $scope.selection = $location.path();
         return true;
-      } else if ($location.path() === "/manageTTITesting" && path === "/recordTestResults") {
+      } else if ($location.path() === "/manageTTITesting" && path === "/manageTestBatch") {
         $scope.selection = $location.path();
         return true;
-      } else if ($location.path() === "/manageBloodGroupTesting" && path === "/recordTestResults") {
+      } else if ($location.path() === "/manageBloodGroupTesting" && path === "/manageTestBatch") {
         $scope.selection = $location.path();
         return true;
       } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
@@ -56,24 +58,52 @@ angular.module('bsis')
       });
     };
 
-    TestingService.getTestBatchFormFields().then(function (response) {
-        data = response.data.testBatches;
-        $scope.data = data;
-        TestingService.setDonationBatches(response.data.donationBatches);
+    $scope.getOpenTestBatches = function(){
+
+      TestingService.getOpenTestBatches( function(response){
+        if (response !== false){
+          data = response.testBatches;
+          $scope.data = data;
+          if ($scope.testBatchTableParams.data.length >= 0){
+            $scope.testBatchTableParams.reload();
+          }
+          if (data.length > 0){
+            $scope.openTestBatches = true;
+          }
+          else {
+            $scope.openTestBatches = false;
+          }
+          
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getOpenTestBatches();
+
+    TestingService.getTestBatchFormFields( function(response){
+      if (response !== false){
+        TestingService.setDonationBatches(response.donationBatches);
         $scope.donationBatches = TestingService.getDonationBatches();
-        $scope.ttiTests = response.data.ttiTests;
-        $scope.bloodTypingTests = response.data.bloodTypingTests;
-        if (data.length > 0){
-          $scope.openTestBatches = true;
-        }
-        else {
-          $scope.openTestBatches = false;
-        }
-      }, function () {
-        $scope.openTestBatches = false;
+      }
+      else{
+      }
     });
 
     $scope.donationBatches = TestingService.getDonationBatches();
+
+    $scope.addTestBatch = function (donationBatches){
+
+      TestingService.addTestBatch(donationBatches, function(response){
+        if (response === true){
+          $scope.getOpenTestBatches();
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
+    };
 
     $scope.testBatchTableParams = new ngTableParams({
       page: 1,            // show first page
@@ -95,29 +125,40 @@ angular.module('bsis')
       }
     });
 
-    $scope.getTestResultsByDIN = function () {
-      TestingService.getTestResultsByDIN($scope.testResultsSearch.donationIdentificationNumber).then(function (response) {
-          data = response.data;
-          $scope.data = data;
+    $scope.getTestResultsByDIN = function (testResultsSearch) {
+      TestingService.getTestResultsByDIN(testResultsSearch.donationIdentificationNumber, function(response){
+        if (response !== false){
+          $scope.donation = response.donation;
+          $scope.testResults = response.testResults.recentTestResults;
           $scope.searchResults = true;
-        }, function () {
+        }
+        else{
           $scope.searchResults = false;
+        }
       });
+    };
+    
+    $scope.recordTestResults = function (item, testCategory) {
+      TestingService.setCurrentTestBatch(item.id);
+      if(testCategory === 'tti'){
+        $location.path("/manageTTITesting");
+      }
+      else if (testCategory === 'bloodGrouping'){
+        $location.path("/manageBloodGroupTesting");
+      }
     };
 
   })
 
   .controller('TestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams) {
 
-    
-
     $scope.viewTestBatch = function (item) {
-      TestingService.setTestBatch(item);
+      TestingService.setCurrentTestBatch(item.id);
       $location.path("/viewTestBatch");
     };
 
     $scope.recordTestResults = function (item, testCategory) {
-      TestingService.setTestBatch(item);
+      TestingService.setCurrentTestBatch(item.id);
       if(testCategory === 'tti'){
         $location.path("/manageTTITesting");
       }
@@ -132,10 +173,32 @@ angular.module('bsis')
     var data = {};
     $scope.data  = data;
 
-    $scope.testBatch = TestingService.getTestBatch();
-    $scope.donationBatches = $scope.testBatch.donationBatches;
-    data = $scope.testBatch.samples;
-    $scope.data = data;
+    $scope.getCurrentTestBatch = function () {
+      TestingService.getCurrentTestBatch( function(response){
+        if (response !== false){
+          $scope.testBatch = response.testBatch;
+
+          var donations = [];
+          angular.forEach($scope.testBatch.collectionBatches, function(batch){
+            angular.forEach(batch.collectionsInBatch, function(donation){
+              donations.push(donation);
+            });
+          });
+
+          data = donations;
+          $scope.data = data;
+
+          if ($scope.testSamplesTableParams.data.length >= 0){
+            $scope.testSamplesTableParams.reload();
+          }
+
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getCurrentTestBatch();
 
     $scope.testSamplesTableParams = new ngTableParams({
       page: 1,            // show first page
@@ -159,17 +222,87 @@ angular.module('bsis')
 
   })
 
-  .controller('RecordTestResultsCtrl', function ($scope, $location, TestingService, TTIOUTCOME, BGSOUTCOME, ABO, RH, $filter, ngTableParams) {
+  .controller('RecordTestResultsCtrl', function ($scope, $location, TestingService, TTITESTS, BLOODTYPINGTESTS, TTIOUTCOME, BGSOUTCOME, ABO, RH, $filter, ngTableParams) {
     var data = {};
     $scope.data  = data;
+    $scope.ttiTests = TTITESTS.options;
+    $scope.bloodTypingTests = BLOODTYPINGTESTS.options;
     $scope.ttiOutcomes = TTIOUTCOME.options;
     $scope.bgsOutcomes = BGSOUTCOME.options;
     $scope.abo = ABO.options;
     $scope.rh = RH.options;
 
-    $scope.testBatch = TestingService.getTestBatch();
-    data = $scope.testBatch.samples;
-    $scope.data = data;
+    $scope.getCurrentTestBatch = function () {
+      TestingService.getCurrentTestBatch( function(response){
+        if (response !== false){
+          $scope.testBatch = response.testBatch;
+
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getTests = function () {
+      TestingService.getTTITestingFormFields( function(response){
+        if (response !== false){
+          $scope.ttiTestsBasic = response.basicTTITests;
+          console.log("$scope.ttiTestsBasic: ",$scope.ttiTestsBasic);
+        }
+        else{
+        }
+      });
+      TestingService.getBloodGroupTestingFormFields( function(response){
+        if (response !== false){
+          $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
+          console.log("$scope.bloodTypingTestsBasic: ",$scope.bloodTypingTestsBasic);
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getCurrentTestResults = function () {
+
+      TestingService.getCurrentTestResults(function(response){
+        if (response !== false){
+          data = response.testResults;
+          $scope.data = data;
+
+          $scope.addTestResults = {};
+          angular.forEach($scope.data, function(value, key) {
+            $scope.addTestResults[value.collectedSample.collectionNumber] = {"donationIdentificationNumber": value.collectedSample.collectionNumber};
+          });
+
+          if ($scope.testSamplesTTITableParams.data.length >= 0){
+            $scope.testSamplesTTITableParams.reload();
+          }
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getCurrentTestBatch();
+    $scope.getTests();
+    $scope.getCurrentTestResults();
+
+    $scope.saveTestResults = function (testResults) {
+
+      angular.forEach(testResults, function(value, key) {
+        TestingService.saveTestResults(value, function(response){
+          if (response === true){
+          }
+          else{
+            // TODO: handle case where response == false
+          }
+        });
+        
+      });
+
+      $location.path("/viewTestBatch");
+
+    };
 
     $scope.testSamplesTTITableParams = new ngTableParams({
       page: 1,            // show first page

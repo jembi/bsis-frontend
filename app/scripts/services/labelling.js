@@ -1,8 +1,29 @@
 'use strict';
 
 angular.module('bsis')
-.factory('LabellingService', function ($http) {
+.factory('LabellingService', function ($http, Api, $filter) {
   return {
+    checkLabellingStatus: function (donationIdentificationNumber, response) {
+      var status = Api.LabellingStatus.get({donationIdentificationNumber: donationIdentificationNumber}, function(){
+          response(status);
+      }, function (){
+        response(false);  
+      });
+    },
+    printPackLabel: function (componentId, response) {
+      var label = Api.PrintPackLabel.get({componentId: componentId}, function(){
+          response(label);
+      }, function (){
+        response(false);  
+      });
+    },
+    printDiscardLabel: function (componentId, response) {
+      var label = Api.PrintDiscardLabel.get({componentId: componentId}, function(){
+          response(label);
+      }, function (){
+        response(false);  
+      });
+    }
 
   };
 });

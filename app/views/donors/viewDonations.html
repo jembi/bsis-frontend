@@ -3,7 +3,7 @@
     <tr>
       <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
       <td class="field">Due To Donate: </td>
-      <td class="value green">12 August 2014</td>
+      <td class="value green"></td>
     </tr>
 
     <tr><td></td></tr>
@@ -16,18 +16,18 @@
   <table ng-table="donationTableParams" show-filter="true" class="table">
       <tr ng-repeat="donation in $data"
           ng-click="changeSelection(donation);"
-          ng-mouseenter="donation.$selected = true"
-          ng-mouseleave="donation.$selected = false"
+          ng-mouseenter="this.$selected = true"
+          ng-mouseleave="this.$selected = false"
           ng-class="{'active': donation.$selected}">
           <td data-title="'Date'" style="width:18%;" header-class="text-left" class="text-center" sortable="'collectedOn'"  filter="{ 'collectedOn': 'text' }">
               {{donation.collectedOn}}
           </td>
           <td data-title="'Venue'" style="width:17%;" header-class="text-left" sortable="'collectionSite'" filter="{ 'collectionSite': 'text' }">
-              {{donation.collectionSite}}
+              {{donation.collectionSite.name}}
           </td>
           <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'bloodBagType'" filter="{ 'bloodBagType': 'select' }"
               filter-data="packTypeFilter($column)">
-              {{donation.bloodBagType}}
+              {{donation.packType.bloodBagType}}
           </td>
           <td data-title="'Wt'" style="width:10%;" header-class="text-left" class="text-center" sortable="'donorWeight'">
               {{donation.donorWeight}}

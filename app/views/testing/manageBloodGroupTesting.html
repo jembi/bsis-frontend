@@ -1,33 +1,25 @@
-<span class="h3"> 
-  <small><em>Test Batch Number: </em></small> {{testBatch.batchNumber}}
-</span> 
+<span class="h3 page-header">Record Test Results</span>
 
 <hr/>
 
 <div class = "h4"> 
-  <small><em>Created On: </em></small>{{testBatch.createdOn}}
+  <small><em>Created On: </em></small>{{testBatch.createdDate}}
   | 
-  <small><em>Blood Group Serology Testing: </em></small>{{testBatch.bloodTypingStatus}}
+  <small><em>Status: </em></small>{{testBatch.status}}
   | 
   <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
 </div>
 
-<span  class="h4" style="float: right; margin-top: 5px; margin-bottom: 5px; padding-right: 15px;">
-  <small><em> <a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit Saved Results</a></em>
-  <span ng-show="editableForm.$visible">
-    <em><a href="" ng-click="editableForm.$hide()" ng-disabled="editableForm.$waiting">Done</a></em>
-  </span>
-  </small>
-</span>
+<hr/>
 
 <div style="padding-bottom: 5px"></div>
 
 <div class="col-sm-12">
   <div class="panel panel-default">
     <div class="panel-body">
-      <form editable-form name="editableForm" onaftersave="updateTestResults()">
+      <form ng-submit="saveTestResults(addTestResults)">
         <table ng-table="testSamplesTTITableParams" show-filter="false" class="table">
-
+        <thead>
           <th class="text-left sortable" 
             ng-class="{
               'sort-asc': testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'asc'),
@@ -50,81 +42,48 @@
               'sort-desc': testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'desc')
             }"
             ng-click="testSamplesTTITableParams.sorting('bloodTypingStatus', testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'asc') ? 'desc' : 'asc')">
-            <div>Blood Typing Testing</div>
+            <div>Blood Typing Status</div>
           </th>
-          <th ng-repeat="column in bloodTypingTests" ng-show="true"
+          <th ng-repeat="column in bloodTypingTestsBasic" ng-show="true"
               class="text-center" ng-class=""
               ng-click="">
-              <div>{{column.testName}}</div>
+              <div>{{column.testNameShort}}</div>
           </th>
+        </thead>
+        <tbody>
           <tr ng-repeat="sample in $data"
               ng-click=""
-              ng-mouseenter="sample.$selected = true"
-              ng-mouseleave="sample.$selected = false"
+              ng-mouseenter="this.$selected = true"
+              ng-mouseleave="this.$selected = false"
               ng-class="{'active': sample.$selected}">
               <td class="text-center" >
-                  {{sample.donationIdentificationNumber}}
+                  {{sample.collectedSample.collectionNumber}}
               </td>
               <td class="text-center">
-                  {{sample.collectedOn}}
+                  {{sample.collectedSample.collectedOn}}
               </td>
               <td >
-                  {{sample.ttiStatus}}
+                  {{sample.bloodTypingStatus}}
               </td>
-              <td class="text-center" ng-repeat="test in sample.bloodTypingTests">
-                <span ng-switch on="test.outcome">
-                  <span ng-switch-when="">
-                    <span ng-switch on="test.testName">
-                      <span ng-switch-when="ABO">
-                        <select class="form-control input-sm" >
-                          <option value=""></option>
-                          <option value="A">A</option>
-                          <option value="B">B</option>
-                          <option value="AB">AB</option>
-                          <option value="O">O</option>
-                        </select>
-                      </span>
-                      <span ng-switch-when="Rh">
-                        <select class="form-control input-sm" >
-                          <option value=""></option>
-                          <option value="+">+</option>
-                          <option value="-">-</option>
-                        </select>
-                      </span>
-                      <span ng-switch-default>
-                        <select class="form-control input-sm" >
-                          <option value=""></option>
-                          <option value="POS">POS</option>
-                          <option value="NEG">NEG</option>
-                        </select>
-                      </span>
-                    </span>
-                  </span>
-                  <span ng-switch-default>
-                    <span ng-switch on="test.testName">
-                      <span ng-switch-when="ABO">
-                        <span editable-select="test.outcome" e-class="xeditable result" e-ng-options="item as item for item in abo" e-name="outcome" >{{test.outcome}}</span>
-                      </span>
-                      <span ng-switch-when="Rh">
-                        <span editable-select="test.outcome" e-class="xeditable result" e-ng-options="item as item for item in rh" e-name="outcome" >{{test.outcome}}</span>
-                      </span>
-                      <span ng-switch-default>
-                        <span editable-select="test.outcome" e-class="xeditable result" e-ng-options="item as item for item in bgsOutcomes" e-name="outcome" >{{test.outcome}}</span>
-                      </span>
-                    </span>
-                  </span>
-                </span>
+              <td align="center" ng-repeat="test in bloodTypingTestsBasic">
+                <select style="width:70px;" class="form-control input-sm" ng-init="addTestResults[sample.collectedSample.collectionNumber].testResults[test.id] = sample.recentTestResults[test.id].result" 
+                  ng-model="addTestResults[sample.collectedSample.collectionNumber].testResults[test.id]" 
+                  ng-options="result for result in test.validResults">
+                </select>
+              </td>
               </td>
           </tr>
+        </tbody>
         </table>
-      </form>
-
+      
       <div class="form-group"> 
         <div class="col-sm-3">
           <button class="btn btn-primary" type="submit">Save Test Results</button>
-          <button class="btn btn-primary" type="button" ng-click="go('/recordTestResults')" >Cancel</button>
+          <button class="btn btn-primary" type="button" ng-click="go('/viewTestBatch')" >Cancel</button>
         </div>
       </div>
+
+      </form>
 
     </div>
   </div>

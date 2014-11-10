@@ -42,20 +42,81 @@ angular.module('bsis')
     BARS: 'fa-bars',
     ARCHIVE: 'fa-archive',
     PHONE: 'fa-phone',
-    GLOBE: 'fa-globe'
+    GLOBE: 'fa-globe',
+    BARCODE: 'fa-barcode',
+    EDIT: 'fa-edit',
+    REMOVE: 'fa-times-circle'
   })
 
   .constant('BLOODGROUP', {
     options: ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
   })
   .constant('MONTH', {
-    options: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    "options": [
+    {
+      "id": 1,
+      "name": "January"
+    },
+    {
+      "id": 2,
+      "name": "February"
+    },
+    {
+      "id": 3,
+      "name": "March"
+    },
+    {
+      "id": 4,
+      "name": "April"
+    },
+    {
+      "id": 5,
+      "name": "May"
+    },
+    {
+      "id": 6,
+      "name": "June"
+    },
+    {
+      "id": 7,
+      "name": "July"
+    },
+    {
+      "id": 8,
+      "name": "August"
+    },
+    {
+      "id": 9,
+      "name": "September"
+    },
+    {
+      "id": 10,
+      "name": "October"
+    },
+    {
+      "id": 11,
+      "name": "November"
+    },
+    {
+      "id": 12,
+      "name": "December"
+    }
+  ]
   })
   .constant('TITLE', {
     options: ["Mr","Mrs","Ms","Dr","Prof"]
   })
   .constant('GENDER', {
-    options: ["Male","Female"]
+    "options": [
+    {
+      "id": "male",
+      "name": "Male"
+    },
+    {
+      "id": "female",
+      "name": "Female"
+    }
+  ]
   })
   .constant('PACKTYPE', {
     "packtypes": [
@@ -104,6 +165,35 @@ angular.module('bsis')
       "isDeleted": false
     }
   ]
+  })
+  .constant('TTITESTS', {
+    options: [
+      {
+        "testName": "HIV"
+      },
+      {
+        "testName": "HBV"
+      },
+      {
+        "testName": "HCV"
+      },
+      {
+        "testName": "Syphilis"
+      }
+    ]
+  })
+  .constant('BLOODTYPINGTESTS', {
+    options: [
+      {
+        "testName": "ABO"
+      },
+      {
+        "testName": "Rh"
+      },
+      {
+        "testName": "Du"
+      }
+    ]
   })
   .constant('TTIOUTCOME', {
     options: ["POS","NEG"]

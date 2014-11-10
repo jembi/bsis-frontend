@@ -13,12 +13,8 @@
     <table class="dash-table">
       <tbody>
         <tr>
-          <td class="field">Batch: </td>
-          <td class="value">{{donation.collectionBatch}}</td>
-        </tr>
-        <tr>
           <td class="field">DIN: </td>
-          <td class="value">{{donation.donationIdentificationNumber}}</td>
+          <td class="value">{{donation.collectionNumber}}</td>
         </tr>
         <tr>
           <td class="field">Donor #: </td>
@@ -29,16 +25,16 @@
           <td class="value">{{donation.collectedOn}}</td>
         </tr>
         <tr>
-          <td class="field">Time Bled: </td>
-          <td class="value"><span editable-text="donation.timeStarted" e-name="timeStarted" e-required>{{donation.timeStarted}}</span></td>
-        </tr>
-        <tr>
           <td class="field">Venue: </td>
-          <td class="value">{{donation.collectionSite}}</td>
+          <td class="value">{{donation.collectionSite.name}}</td>
         </tr>
         <tr>
           <td class="field">Pack Type: </td>
-          <td class="value">{{donation.bloodBagType}}</td>
+          <td class="value">{{donation.packType.bloodBagType}}</td>
+        </tr>
+        <tr>
+          <td class="field">Donation Type: </td>
+          <td class="value">{{donation.donationType.donationType}}</td>
         </tr>
         <tr>
           <td class="field">Pulse: </td>

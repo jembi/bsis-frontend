@@ -1,21 +1,33 @@
+<p>
+  <em> {{componentsSearchCount}} component(s) found </em>
+</p>
 <table ng-table="componentsSummaryTableParams" show-filter="false" class="table">
-  <tr ng-repeat="donation in $data"
+  <tr ng-repeat="component in $data"
       ng-click="changeSelection(donation);"
-      ng-mouseenter="donation.$selected = true"
-      ng-mouseleave="donation.$selected = false"
+      ng-mouseenter="this.$selected = true"
+      ng-mouseleave="this.$selected = false"
       ng-class="{'active': donation.$selected}">
-      <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
-          {{donation.donationIdentificationNumber}}
+      <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'collectionNumber'">
+          {{component.collectionNumber}}
+      </td>
+      <td data-title="'Component Identifier'" header-class="text-left" class="text-center" sortable="'componentIdentificationNumber'">
+          {{component.componentIdentificationNumber}}
       </td>
       <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
-          {{donation.createdOn}}
+          {{component.createdOn}}
       </td>
-      <td data-title="'Components Produced'" header-class="text-left" sortable="'componentsProduced'">
-          {{donation.componentsProduced}}
+      <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
+          {{component.productType.productTypeName}}
+      </td>
+      <td data-title="'Status'" header-class="text-left" sortable="'status'">
+          {{component.status}}
+      </td>
+      <td data-title="'Expiry Status'" header-class="text-left" sortable="'expiryStatus'">
+          {{component.expiryStatus}}
       </td>
       <td data-title="''" style="width:10%;" class="text-center">
         <span style="font-size: 0.9em;">
-          <em><a ng-click="viewComponents(donation.donationIdentificationNumber)"> View</a></em>
+          <em><a ng-click="viewComponents(component.donationIdentificationNumber)"> View</a></em>
         </span>
       </td>
   </tr>

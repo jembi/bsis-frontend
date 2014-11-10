@@ -1,9 +1,23 @@
 <form editable-form name="editableForm" onaftersave="updateDonationBatch()">
   <span class="h3"> 
-    <small><em>Current Batch Number:</em></small> DB56790099MS
+    Manage Donation Batch
   </span> 
 
-    <span class="h4" style="float: right; margin-top: 5px; margin-bottom: 5px; padding-right: 15px;">
+  <hr/>
+
+  <div class = "h4"> 
+    <small><em>Date Created: </em></small> <span ng-show="!editableForm.$visible">{{ (donationBatch.createdDate | date:"dd/MM/yyyy") || '' }}</span>
+    <span ng-show="editableForm.$visible">
+      <dateselect ng-model="donationBatch.tempDate" initDate="donationBatch.date" date-options="dateOptions" format="format" opened="donationBatchDateOpen" cal-icon="icons.CALENDAR">
+      </dateselect>
+    </span>
+    | 
+    <small><em>Center: </em></small> <span e-class="xeditable donor-panel" editable-select="donationBatch.collectionCenter.name" e-ng-options="item.name as item.name for item in donorPanels" e-name="donorPanel"  e-required>{{donationBatch.collectionCenter.name}}</span>
+    |
+    <small><em>Site: </em></small> <span e-class="xeditable donor-panel" editable-select="donationBatch.collectionSite.name" e-ng-options="item.name as item.name for item in donorPanels" e-name="donorPanel"  e-required>{{donationBatch.collectionSite.name}}</span>
+    |
+    <small><em>Number of Donations: </em></small> {{donationBatch.numCollections}}
+    <span class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
       <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  
       <span ng-show="!editableForm.$visible"> | 
     </span>
@@ -13,19 +27,6 @@
     </span>  
     <em><a ng-show="!editableForm.$visible" href="">Close Batch</a></em></small>
     </span>
-
-  <hr/>
-
-  <div class = "h4"> 
-    <small><em>Date Bled: </em></small> <span ng-show="!editableForm.$visible">{{ (donationBatch.date | date:"dd/MM/yyyy") || 'empty' }}</span>
-    <span ng-show="editableForm.$visible">
-      <dateselect ng-model="donationBatch.tempDate" initDate="donationBatch.date" date-options="dateOptions" format="format" opened="donationBatchDateOpen" cal-icon="icons.CALENDAR">
-      </dateselect>
-    </span>
-    | 
-    <small><em>Venue: </em></small> <span e-class="xeditable donor-panel" editable-select="donationBatch.venue" e-ng-options="item.name as item.name for item in donorPanels" e-name="donorPanel"  e-required>{{donationBatch.venue}}</span>
-    | 
-    <small><em>Number of Registered Donors: </em></small> 8
   </div>
 </form>
 
@@ -39,6 +40,7 @@
       <div class="panel-body">
         <div ng-switch on="donationBatchView">
             <div ng-switch-when="viewDonationBatch"><div ng-include="'views/donors/viewDonationBatch.html'"></div></div>
+            <div ng-switch-when="addDonation"><div ng-include="'views/donors/addDonation.html'"></div></div>
             <div ng-switch-when="viewDonationSummary"><div ng-include="'views/donors/viewDonationSummary.html'"></div></div>
             <div ng-switch-default><div ng-include="'views/donors/viewDonationBatch.html'"></div></div>
           </div>

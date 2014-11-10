@@ -26,15 +26,15 @@ angular.module('bsis')
      'icon': ICONS.TESTING,
      'permission': PERMISSIONS.VIEW_TESTING_INFORMATION
     },
-    {'title': 'INVENTORY',
-     'href': '#inventory',
-     'icon': ICONS.INVENTORY,
-     'permission': PERMISSIONS.VIEW_INVENTORY_INFORMATION
-    },
     {'title': 'LABELLING',
      'href': '#labelling',
      'icon': ICONS.LABELLING,
      'permission': PERMISSIONS.LABEL_COMPONENT
+    },
+    {'title': 'INVENTORY',
+     'href': '#inventory',
+     'icon': ICONS.INVENTORY,
+     'permission': PERMISSIONS.VIEW_INVENTORY_INFORMATION
     },
     {'title': 'REPORTS',
      'href': '#reports',
@@ -59,7 +59,7 @@ angular.module('bsis')
     ~$location.path().indexOf('findDonor')      ||
     ~$location.path().indexOf('addDonor')       ||
     ~$location.path().indexOf('viewDonor')      ||
-    ~$location.path().indexOf('linkDonation')   ||
+    ~$location.path().indexOf('addDonation')    ||
     ~$location.path().indexOf('manageClinic')   ||
     ~$location.path().indexOf('exportDonorList')
     ){
@@ -82,7 +82,6 @@ angular.module('bsis')
       ~$location.path().indexOf('viewTestResults')          ||
       ~$location.path().indexOf('manageTestBatch')          ||
       ~$location.path().indexOf('viewTestBatch')            ||
-      ~$location.path().indexOf('recordTestResults')        ||
       ~$location.path().indexOf('manageTTITesting')         ||
       ~$location.path().indexOf('manageBloodGroupTesting')  ||
       ~$location.path().indexOf('uploadTestResults')
@@ -138,7 +137,7 @@ angular.module('bsis')
       ~$location.path().indexOf('findDonor')        ||
       ~$location.path().indexOf('addDonor')         ||
       ~$location.path().indexOf('viewDonor')        ||
-      ~$location.path().indexOf('linkDonation')     ||
+      ~$location.path().indexOf('addDonation')      ||
       ~$location.path().indexOf('manageClinic')     ||
       ~$location.path().indexOf('exportDonorList')
     ){
@@ -160,7 +159,6 @@ angular.module('bsis')
       ~$location.path().indexOf('viewTestResults')          ||
       ~$location.path().indexOf('manageTestBatch')          ||
       ~$location.path().indexOf('viewTestBatch')            ||
-      ~$location.path().indexOf('recordTestResults')        ||
       ~$location.path().indexOf('manageTTITesting')         ||
       ~$location.path().indexOf('manageBloodGroupTesting')  ||
       ~$location.path().indexOf('uploadTestResults')

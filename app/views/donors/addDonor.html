@@ -20,8 +20,8 @@
     <label for="name" class="col-sm-1 control-label">DOB</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <input size="2"  type="day" id="day" class="form-control input-sm" placeholder="Day" ng-model="donor.day">
-        <select class="form-control input-sm" ng-model="donor.month" ng-options="item as item for item in month">
+        <input size="2"  type="day" id="day" class="form-control input-sm" placeholder="Day" ng-model="donor.dayOfMonth">
+        <select class="form-control input-sm" ng-model="donor.month" ng-options="item.id as item.name for item in month">
             <option value="" ng-disabled="true">Month</option>
         </select>
         <input size="4" type="year" id="year" class="form-control input-sm" placeholder="Year" ng-model="donor.year">
@@ -33,7 +33,7 @@
     <label for="name" class="col-sm-1 control-label">Gender</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donor.gender" ng-options="item as item for item in gender">
+        <select class="form-control input-sm" ng-model="donor.gender" ng-options="item.id as item.name for item in gender">
             <option value="" ng-disabled="true"></option>
         </select>
       </div>
@@ -44,7 +44,7 @@
     <label for="name" class="col-sm-1 control-label">Panel</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donor.donorPanel" ng-options="item.id as item.name for item in donorPanels">
+        <select class="form-control input-sm" ng-model="donor.donorPanel" ng-options="item as item.name for item in donorPanels">
             <option value="" ng-disabled="true"></option>
         </select>
       </div>
@@ -55,7 +55,7 @@
     <label for="name" class="col-sm-1 control-label">Language</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donor.preferredLanguage" ng-options="item.id as item.preferredLanguage for item in languages">
+        <select class="form-control input-sm" ng-model="donor.preferredLanguage" ng-options="item as item.preferredLanguage for item in languages">
             <option value=""></option>
         </select>
       </div>

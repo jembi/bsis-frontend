@@ -1,24 +1,26 @@
+<p>
+  <em> 
+    {{donationBatch.numCollections}} donation(s) in batch </em> | <em> <a href="" ng-click="viewAddDonationForm()" >Add Donation</a></em>  
+</p>
+
 <table ng-table="donorClinicTableParams" show-filter="true" class="table">
   <tr ng-repeat="donation in $data"
-    ng-click="changeSelection(donation);"
-    ng-mouseenter="donation.$selected = true"
-    ng-mouseleave="donation.$selected = false"
+    ng-click="viewDonationSummary(donation.donationIdentificationNumber); changeSelection(donation);"
+    ng-mouseenter="this.$selected = true"
+    ng-mouseleave="this.$selected = false"
     ng-class="{'active': donation.$selected}">
     <td data-title="'Donor #'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donorNumber'"  filter="{ 'donorNumber': 'text' }">
         {{donation.donorNumber}}
     </td>
-    <td data-title="'DIN'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'"  filter="{ 'donationIdentificationNumber': 'text' }">
-        {{donation.donationIdentificationNumber}}
+    <td data-title="'DIN'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'"  filter="{ 'collectionNumber': 'text' }">
+        {{donation.collectionNumber}}
     </td>
-    <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'bloodBagType'" filter="{ 'bloodBagType': 'select' }"
+    <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'bloodBagType'" filter="{ 'packType.bloodBagType': 'select' }"
         filter-data="packTypeFilter($column)">
-        {{donation.bloodBagType}}
+        {{donation.packType.bloodBagType}}
     </td>
-    <td data-title="''" style="width:10%;" class="text-center">
-      <span style="font-size: 0.9em;">
-        <em><a ng-click="viewDonationSummary(donation.donationIdentificationNumber); donation.$selected = false;"> View</a></em>
-      </span>
-    </td>
+    <td data-title="'Donation Type'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donationType'" >
+        {{donation.donationType.donationType}}
     </td>
   </tr>
 </table>
