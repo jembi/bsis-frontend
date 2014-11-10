@@ -6,7 +6,7 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     var data = {};
-    $scope.data = data;
+    //$scope.data = data;
     $scope.searchResults = '';
     $scope.search = {
       "donationIdentificationNumber": ''
@@ -31,9 +31,10 @@ angular.module('bsis')
       LabellingService.checkLabellingStatus(donationIdentificationNumber, function(response){
         if (response !== false){
           data = response;
-          $scope.data = data;
-          $scope.printPackLabelBoolean = data.printPackLabel;
-          $scope.printDiscardLabelBoolean = data.printDiscardLabel;
+          //$scope.data = data;
+          $scope.components = data.components;
+          //$scope.printPackLabelBoolean = data.printPackLabel;
+          //$scope.printDiscardLabelBoolean = data.printDiscardLabel;
           $scope.searchResults = true;
           $scope.packDIN = donationIdentificationNumber;
         }
@@ -43,8 +44,8 @@ angular.module('bsis')
       });
     };
 
-    $scope.printPackLabel = function () {   
-      LabellingService.printPackLabel($scope.packDIN, function(response){
+    $scope.printPackLabel = function (componentId) {   
+      LabellingService.printPackLabel(componentId, function(response){
         if (response !== false){
           data = response;
           $scope.data = data;
@@ -56,9 +57,8 @@ angular.module('bsis')
       });
     };
 
-    $scope.printDiscardLabel = function () {   
-      console.log("$scope.packDIN: ", $scope.packDIN);
-      LabellingService.printDiscardLabel($scope.packDIN, function(response){
+    $scope.printDiscardLabel = function (componentId) {   
+      LabellingService.printDiscardLabel(componentId, function(response){
         if (response !== false){
           data = response;
           $scope.data = data;

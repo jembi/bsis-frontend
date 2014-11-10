@@ -10,15 +10,15 @@ angular.module('bsis')
         response(false);  
       });
     },
-    printPackLabel: function (donationIdentificationNumber, response) {
-      var label = Api.PrintPackLabel.get({donationIdentificationNumber: donationIdentificationNumber}, function(){
+    printPackLabel: function (componentId, response) {
+      var label = Api.PrintPackLabel.get({componentId: componentId}, function(){
           response(label);
       }, function (){
         response(false);  
       });
     },
-    printDiscardLabel: function (donationIdentificationNumber, response) {
-      var label = Api.PrintDiscardLabel.get({donationIdentificationNumber: donationIdentificationNumber}, function(){
+    printDiscardLabel: function (componentId, response) {
+      var label = Api.PrintDiscardLabel.get({componentId: componentId}, function(){
           response(label);
       }, function (){
         response(false);  
