@@ -22,10 +22,10 @@ angular.module('bsis')
       if ($location.path() === "/viewTestBatch" && path === "/manageTestBatch") {
         $scope.selection = $location.path();
         return true;
-      } else if ($location.path() === "/manageTTITesting" && path === "/recordTestResults") {
+      } else if ($location.path() === "/manageTTITesting" && path === "/manageTestBatch") {
         $scope.selection = $location.path();
         return true;
-      } else if ($location.path() === "/manageBloodGroupTesting" && path === "/recordTestResults") {
+      } else if ($location.path() === "/manageBloodGroupTesting" && path === "/manageTestBatch") {
         $scope.selection = $location.path();
         return true;
       } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
