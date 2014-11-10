@@ -7,7 +7,7 @@
       <div class="form-inline" style="padding-left:5px;">
         <input size="15"  type="firstName" id="firstName" class="form-control input-sm" placeholder="First"  autofocus="true" ng-model="donorSearch.firstName" capitalize-first-letter>
         <input size="15"  type="lastName " id="lastName" class="form-control input-sm" placeholder="Last" ng-model="donorSearch.lastName" capitalize-first-letter>
-        <input  type="checkbox" > Include Similar Results
+        <input  type="checkbox" id="usePhraseMatch" ng-model="donorSearch.usePhraseMatch" > <label style="display: inline-block; cursor: pointer; cursor: hand;" for="usePhraseMatch"> Include Similar Results </label> 
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@
     <label for="name" class="col-sm-1 control-label" >DIN</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <input size="15" type="din" id="din" class="form-control input-sm" placeholder="" ng-model="donorSearch.din">
+        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="donorSearch.donationIdentificationNumber">
       </div>
     </div>
   </div>
@@ -60,14 +60,14 @@
       <div class="panel-body">
 
           <p>
-            <em> {{data.length}} donors found </em> | <em> <a href="" ng-click="addNewDonor(donorSearch)" >Add New Donor</a></em>  
+            <em> {{data.length}} donor(s) found </em> | <em> <a href="" ng-click="addNewDonor(donorSearch)" >Add New Donor</a></em>  
           </p>
 
           <table ng-table="tableParams" show-filter="false" class="table">
               <tr ng-repeat="donor in $data"
                   ng-click="viewDonor(donor); changeSelection(donor);"
-                  ng-mouseenter="donor.$selected = true"
-                  ng-mouseleave="donor.$selected = false"
+                  ng-mouseenter="this.$selected = true"
+                  ng-mouseleave="this.$selected = false"
                   ng-class="{'active': donor.$selected}">
                   <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
                       {{donor.donorNumber}}
@@ -81,16 +81,16 @@
                   <td data-title="'Gender'" header-class="text-left" sortable="'gender'">
                       {{donor.gender}}
                   </td>
-                  <td data-title="'Age'" header-class="text-left" class="text-center"  sortable="'age'">
-                      {{donor.age}}
+                  <td data-title="'Age'" header-class="text-left" class="text-center" calculate-age dob="{{donor.birthDate}}" age="age">
+                      {{age}}
                   </td>
                   <td data-title="'Date of Birth'" header-class="text-left" class="text-center" sortable="'birthDate'">
-                      {{donor.birthDate}}
+                      {{ (donor.birthDate | date:"dd/MM/yyyy") || '' }}
                   </td>
               </tr>
           </table>
-        </div>
       </div>
+    </div>
   </div>
   <div ng-switch-when="false">
     <div class="panel panel-default">

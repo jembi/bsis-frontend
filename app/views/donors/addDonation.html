@@ -1,6 +1,10 @@
-<h3 class="page-header">Link Donor and Donation</h3>
+<span class="h4">Add Donation</span>
+<hr style="margin-top:8px;"/>
 
-<form class="form-horizontal col-sm-12" role="form" ng-submit="adDonation(donation)">
+<div ng-if="$parent.addDonationSuccess === true" ng-hide="$parent.addDonationSuccess !== true" style="padding-top:10px;"><alert type="success" close="$parent.addDonationSuccess = ''">Donation Added Successfully.</alert></div>
+<div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false" style="padding-top:10px;"><alert type="danger" close="$parent.addDonationSuccess = ''">Error Adding Donation, please resolve issues and try again.</alert></div>
+
+<form class="form-horizontal col-sm-12" role="form" ng-submit="addDonation(donation)">
 
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label">Donor #</label>
@@ -15,7 +19,7 @@
     <label for="name" class="col-sm-1 control-label">DIN</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="donation.donationIdentificationNumber">
+        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="donation.collectionNumber">
       </div>
     </div>
   </div>
@@ -24,7 +28,18 @@
     <label for="name" class="col-sm-1 control-label">Pack Type</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="donation.packType" ng-options="item.id as item.name for item in packTypes">
+        <select class="form-control input-sm" ng-model="donation.packType" ng-options="item as item.bloodBagType for item in packTypes">
+            <option value=""></option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label">Donation Type</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <select class="form-control input-sm" ng-model="donation.donationType" ng-options="item as item.donationType for item in donationTypes">
             <option value=""></option>
         </select>
       </div>
@@ -35,8 +50,8 @@
     <label for="name" class="col-sm-1 control-label">Time</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <input size="6" type="timeStarted" id="timeStarted" class="form-control input-sm" placeholder="Start" ng-model="donation.timeStarted">
-        <input size="6" type="timeEnded" id="timeEnded" class="form-control input-sm" placeholder="End" ng-model="donation.timeEnded">
+        <input size="6" type="timeStarted" id="timeStarted" class="form-control input-sm" placeholder="Start" ng-model="timeStarted">
+        <input size="6" type="timeEnded" id="timeEnded" class="form-control input-sm" placeholder="End" ng-model="timeEnded">
       </div>
     </div>
   </div>
@@ -83,7 +98,7 @@
   <div class="form-group"> 
     <div class="col-sm-offset-1 col-sm-4">
       <button class="btn btn-primary" type="submit">Save</button>
-      <button class="btn btn-primary" ng-click="">Clear</button>
+      <button class="btn btn-primary" type="button" ng-click="viewDonationBatch()"/>Cancel</button>
     </div>
   </div>
 

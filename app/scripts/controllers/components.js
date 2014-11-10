@@ -6,6 +6,7 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.componentTypes = COMPONENTTYPE.componentTypes;
+    $scope.selectedComponents = [];
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
@@ -46,6 +47,17 @@ angular.module('bsis')
     $scope.startDateOpen = false;
     $scope.endDateOpen = false;
 
+    ComponentService.getComponentsFormFields(function(response){
+      if (response !== false){
+        $scope.data = response;
+        $scope.componentTypes = $scope.data.componentTypes;
+        $scope.returnReasons = $scope.data.returnReasons;
+        $scope.discardReasons = $scope.data.discardReasons;
+      }
+      else{
+      }
+    });
+
     $scope.clear = function () {
       $scope.componentsSearch = {};
       $scope.discardsSearch = {};
@@ -62,47 +74,81 @@ angular.module('bsis')
     };
 
     $scope.getComponentsByDIN = function () {   
-      ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber).then(function (response) {
-          data = response.data.components;
+      ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(response){
+        if (response !== false){
+          data = response.components;
           $scope.data = data;
-          $scope.componentTypes = response.data.componentTypes;
-          $scope.discardReasons = response.data.discardReasons;
+          console.log("$scope.data: ", $scope.data);
           $scope.searchResults = true;
-        }, function () {
-          $scope.searchResults = false;
-      });
+          console.log("$scope.data.length: ", $scope.data.length);
+          $scope.componentsSearchCount = $scope.data.length;
 
-      $scope.componentsTableParams = new ngTableParams({
-        page: 1,            // show first page
-        count: 6,          // count per page
-        filter: {},
-        sorting: {}
-      }, 
-      {
-        defaultSort: 'asc',
-        counts: [], // hide page counts control
-        total: data.length, // length of data
-        getData: function ($defer, params) {
-          var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
-          params.total(orderedData.length); // set total for pagination
-          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+          if ($scope.componentsTableParams.data.length >= 0){
+            $scope.componentsTableParams.reload();
+          }
+          
+        }
+        else{
+          $scope.searchResults = false;
         }
       });
 
     };
 
-    $scope.getComponentsSummary = function () {
+    $scope.componentsTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 6,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+    $scope.$watch("data", function () {
+      if ($scope.componentsTableParams.data.length >= 0) {
+        $scope.componentsTableParams.reload();
+      }
+    }); 
+
+    $scope.findComponents = function (componentsSearch) {
       $scope.componentsView = 'viewDonations';
 
-      ComponentService.getComponentsSummary().then(function (response) {
-          data = response.data.donations;
+      $scope.selectedComponentTypes = [];
+      angular.forEach(componentsSearch.componentTypes,function(value,index){
+          $scope.selectedComponentTypes.push(value.id);
+      });
+      componentsSearch.componentTypes = $scope.selectedComponentTypes;
+
+      console.log("componentsSearch: ", componentsSearch);
+
+      ComponentService.ComponentsSearch(componentsSearch, function(response){
+        if (response !== false){
+          data = response.components;
           $scope.data = data;
+          console.log("$scope.data: ", $scope.data);
           $scope.searchResults = true;
-        }, function () {
+          console.log("$scope.data.length: ", $scope.data.length);
+          $scope.componentsSearchCount = $scope.data.length;
+
+          if ($scope.componentsSummaryTableParams.data.length > 0){
+            $scope.componentsSummaryTableParams.reload();
+          }
+          
+        }
+        else{
           $scope.searchResults = false;
+        }
       });
 
       $scope.componentsSummaryTableParams = new ngTableParams({
@@ -124,6 +170,12 @@ angular.module('bsis')
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
+
+      $scope.$watch("data", function () {
+        if ($scope.componentsSummaryTableParams.data.length > 0) {
+          $scope.componentsSummaryTableParams.reload();
+        }
+      }); 
     };
 
     $scope.viewComponents = function (din) {
@@ -142,6 +194,10 @@ angular.module('bsis')
           $scope.data = data;
           
           $scope.searchResults = true;
+
+          if ($scope.discardsSummaryTableParams.data.length > 0){
+            $scope.discardsSummaryTableParams.reload();
+          }
         }, function () {
           $scope.searchResults = false;
       });
@@ -165,6 +221,75 @@ angular.module('bsis')
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
+
+      $scope.$watch("data", function () {
+        if ($scope.discardsSummaryTableParams.data.length > 0) {
+          $scope.discardsSummaryTableParams.reload();
+        }
+      }); 
+
+    };
+
+    $scope.recordComponents = function () {
+
+      $scope.recordComponent = {};
+
+      $scope.recordComponent.parentComponentId = $scope.selectedComponents[0];
+      $scope.recordComponent.childComponentTypeId = $scope.component.childComponentTypeId;
+      $scope.recordComponent.numUnits = $scope.component.numUnits;
+
+      console.log("component to record: ",$scope.recordComponent);
+
+      ComponentService.recordComponents($scope.recordComponent, function(response){
+        if (response !== false){
+
+          data = response.components;
+          $scope.data = data;
+          console.log("$scope.data: ", $scope.data);
+
+          if ($scope.componentsTableParams.data.length > 0){
+            $scope.componentsTableParams.reload();
+          }
+
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
+
+
+    };
+
+    $scope.discardComponents = function () {
+
+      $scope.discard.selectedComponents = $scope.selectedComponents;
+
+      console.log("components to discard: ",$scope.discard);
+
+      ComponentService.discardComponents($scope.discard, function(response){
+        if (response === true){
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
+
+      $scope.discard = {};
+      $scope.getComponentsByDIN();
+
+    };
+
+    // toggle selection for a given employee by name
+    $scope.toggleSelection = function toggleSelection(componentId) {
+      var idx = $scope.selectedComponents.indexOf(componentId);
+      // is currently selected
+      if (idx > -1) {
+        $scope.selectedComponents.splice(idx, 1);
+      }
+      // is newly selected
+      else {
+        $scope.selectedComponents.push(componentId);
+      }
     };
 
   })

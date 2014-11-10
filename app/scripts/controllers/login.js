@@ -28,20 +28,6 @@ angular.module('bsis')
           $scope.credentials.password = null;
         }
       });
-        
-      // MOCKAPI LOGIN FUNCTION
-      /*
-      AuthService.login(credentials, ).then(function () {
-        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-        $location.path( "/home" );
-        $scope.loginInvalid = false;
-      }, function () {
-        $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-        $scope.loginInvalid = true;
-        $scope.credentials.username = null;
-        $scope.credentials.password = null;
-      });
-      */
       
     };
 

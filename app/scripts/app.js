@@ -45,14 +45,14 @@ angular.module('bsis', [
         controller  : 'AddDonorCtrl',
         permission: PERMISSIONS.ADD_DONOR
       })
-      .when('/linkDonation', {
+      .when('/addDonation', {
         templateUrl : 'views/donors.html',
         controller  : 'AddDonationCtrl',
         permission: PERMISSIONS.ADD_DONATION
       })
       .when('/manageClinic', {
         templateUrl : 'views/donors.html',
-        controller  : 'DonorClinicCtrl',
+        controller  : 'ViewDonationBatchCtrl',
         permission: PERMISSIONS.VIEW_DONATION_BATCH
       })
       .when('/exportDonorList', {
@@ -64,6 +64,11 @@ angular.module('bsis', [
         templateUrl : 'views/donors.html',
         controller  : 'ViewDonorCtrl',
         permission: PERMISSIONS.VIEW_DONOR
+      })
+      .when('/manageDonationBatches', {
+        templateUrl : 'views/donors.html',
+        controller  : 'DonorClinicCtrl',
+        permission: PERMISSIONS.VIEW_DONATION_BATCH
       })
 
       // COMPONENTS URLs
@@ -114,20 +119,15 @@ angular.module('bsis', [
         controller  : 'ViewTestBatchCtrl',
         permission: PERMISSIONS.VIEW_TEST_OUTCOME
       })
-      .when('/recordTestResults', {
-        templateUrl : 'views/testing.html',
-        controller  : 'TestBatchCtrl',
-        permission: PERMISSIONS.ADD_TEST_OUTCOME
-      })
       .when('/manageTTITesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        permission: PERMISSIONS.VIEW_TTI_OUTCOME
+        permission: PERMISSIONS.ADD_TEST_OUTCOME
       })
       .when('/manageBloodGroupTesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        permission: PERMISSIONS.VIEW_BLOOD_TYPING_OUTCOME
+        permission: PERMISSIONS.ADD_TEST_OUTCOME
       })
       .when('/uploadTestResults', {
         templateUrl : 'views/testing.html',
@@ -164,6 +164,11 @@ angular.module('bsis', [
 
       // LABELLING URLs
       .when('/labelling', {
+        templateUrl : 'views/labelling.html',
+        controller  : 'LabellingCtrl',
+        permission: PERMISSIONS.COMPONENT_LABELLING
+      })
+      .when('/labelComponents', {
         templateUrl : 'views/labelling.html',
         controller  : 'LabellingCtrl',
         permission: PERMISSIONS.COMPONENT_LABELLING
@@ -328,7 +333,7 @@ angular.module('bsis', [
         maxDate: "=",
         opened: "=",
         format: "=",
-        initDate: "@",
+        initDate: "=",
         calIcon: "="
       },
       link: function($scope, element, attrs) {
@@ -373,5 +378,33 @@ angular.module('bsis', [
     };
   })
 
+  /*  Custom directive to calculate age from birthDate
+      example use: <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
+  */
+  .directive('calculateAge', function() {
+    return {
+        restrict: 'EA',
+        scope: {
+            dob: '@',
+            age: '=',
+        },
+        controller: function ($scope) {
+          var age = '';
+          if($scope.dob === ''){
+            $scope.age = '';
+          }
+          else{
+            var today = new Date();
+            var birthDate = new Date($scope.dob);
+            age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            $scope.age = age;
+          }
+        }
+    };
+  })
 
 ;

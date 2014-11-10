@@ -7,25 +7,6 @@ angular.module('bsis')
 
   return {
 
-    // MOCKAPI LOGIN FUNCTION
-    /* 
-    login: function (credentials) {
-       return $http.post('/login', {username: credentials.username, password: credentials.password})
-        .success(function(user){
-        if (user.Error === undefined) {
-          $rootScope.user = user.user;
-          $rootScope.displayHeader = true;
-          //$rootScope.user = data;
-          console.log("user.userid: ",user.user.userId);
-          console.log("Login Successful");
-        }
-      })
-      .error(function(data){
-        console.log("Login Unsuccessful");
-      });
-    },
-    */
-
     login: function (credentials, loginSuccess) {
       var encoded = Base64.encode(credentials.username + ':' + credentials.password);
       $http.defaults.headers.common.Authorization = 'Basic ' + encoded;

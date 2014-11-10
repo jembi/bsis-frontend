@@ -2,13 +2,21 @@
 
 <form class="form-horizontal col-sm-12"  role="form" ng-submit="getDiscardsSummary()">
   <div class="form-group">
+    <label for="name" class="col-sm-1 control-label" >DIN</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="componentsSearch.donationIdentificationNumber">
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
     <label for="name" class="col-sm-1 control-label" >Type</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
         <ui-select multiple ng-model="selectedComponentTypes" theme="bootstrap" ng-disabled="disabled" style="width: 550px;">
-          <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
+          <ui-select-match placeholder="Select:">{{$item.productTypeName}}</ui-select-match>
           <ui-select-choices repeat="componentType in componentTypes | filter:$select.search">
-            {{componentType.name}}
+            {{componentType.productTypeName}}
           </ui-select-choices>
         </ui-select>
       </div>
@@ -46,8 +54,8 @@
         <table ng-table="discardsSummaryTableParams" show-filter="false" class="table">
           <tr ng-repeat="discard in $data"
               ng-click=""
-              ng-mouseenter="discard.$selected = true"
-              ng-mouseleave="discard.$selected = false"
+              ng-mouseenter="this.$selected = true"
+              ng-mouseleave="this.$selected = false"
               ng-class="{'active': discard.$selected}">
               <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
                   {{discard.donationIdentificationNumber}}
