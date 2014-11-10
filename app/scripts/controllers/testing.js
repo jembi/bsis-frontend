@@ -90,23 +90,6 @@ angular.module('bsis')
       else{
       }
     });
-    /*
-    TestingService.getTestBatchFormFields().then(function (response) {
-
-        TestingService.setDonationBatches(response.data.donationBatches);
-        $scope.donationBatches = TestingService.getDonationBatches();
-        $scope.ttiTests = response.data.ttiTests;
-        $scope.bloodTypingTests = response.data.bloodTypingTests;
-        if (data.length > 0){
-          $scope.openTestBatches = true;
-        }
-        else {
-          $scope.openTestBatches = false;
-        }
-      }, function () {
-        $scope.openTestBatches = false;
-    });
-    */
 
     $scope.donationBatches = TestingService.getDonationBatches();
 
@@ -154,18 +137,6 @@ angular.module('bsis')
         }
       });
     };
-
-    /*
-    $scope.getTestResultsByDIN = function () {
-      TestingService.getTestResultsByDIN($scope.testResultsSearch.donationIdentificationNumber).then(function (response) {
-          data = response.data;
-          $scope.data = data;
-          $scope.searchResults = true;
-        }, function () {
-          $scope.searchResults = false;
-      });
-    };
-    */
     
     $scope.recordTestResults = function (item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);

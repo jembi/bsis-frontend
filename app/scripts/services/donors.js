@@ -19,20 +19,6 @@ angular.module('bsis')
       }, function (){
         response(false);  
       });
-
-      // MOCKAPI FIND DONOR FUNCTION
-      /*
-       return $http.get('/findDonor', {params: { firstName: donor.donorSearch, lastName:  donor.donorSearch }})
-        .success(function(data, status, headers, config){
-        if (donor.Error === undefined) {
-          donorsObj = data.donors;
-          return data.donors;
-        }
-      })
-      .error(function(data){
-        console.log("Find Donor Unsuccessful");
-      });
-      */
     },
     addDonor: function (donor, response){
       // create $Resource object and assign donor values
@@ -50,23 +36,19 @@ angular.module('bsis')
       }, function (){
         response(false);
       }); 
-
-      /*
-      return $http.get('/addDonor')
-        .success(function(data, status, headers, config){
-          return data;
-      })
-      .error(function(data){
-        console.log("Add Donor Form Unsuccessful");
-      });
-      */
     },
     updateDonor: function (donor, response){
 
       var updateDonor = Api.Donor.get({id:donor.id}, function() {
         updateDonor = updateDonor.donor;
 
+        console.log("updateDonor.birthDate: ",updateDonor.birthDate);
+
+        var birthDate = updateDonor.birthDate;
+
         angular.copy(donor, updateDonor);
+        console.log("updateDonor: ", updateDonor);
+        updateDonor.birthDate = birthDate;
         console.log("updateDonor: ", updateDonor);
 
         Api.Donor.update({id:donor.id}, updateDonor, function(data) {
@@ -102,15 +84,6 @@ angular.module('bsis')
       }, function (){
         response(false);
       });
-      /*
-      return $http.get('/getDonorFormFields')
-        .success(function(data, status, headers, config){
-          return data;
-      })
-      .error(function(data){
-        console.log("Get Donor Form Unsuccessful");
-      });
-      */
     },
     getDonorOverview: function (donorId, response) {
       Api.DonorOverview.get({id:donorId}, function (overview) {
@@ -125,16 +98,6 @@ angular.module('bsis')
       }, function (){
         response(false);
       });
-
-      /*
-      return $http.get('/getDonorListFormFields')
-        .success(function(data, status, headers, config){
-          return data;
-      })
-      .error(function(data){
-        console.log("Get Donor Form Unsuccessful");
-      });
-      */
     },
     findDonorListDonors: function (donorSearch, response) {
       var donors = Api.DonorCommunicationsSearch.query({bloodGroups: donorSearch.bloodGroups, donorPanels: donorSearch.donorPanels, 
@@ -212,15 +175,6 @@ angular.module('bsis')
       }, function (){
         response(false);
       });
-      /*
-      return $http.get('/getDeferrals')
-        .success(function(data, status, headers, config){
-          return data;
-      })
-      .error(function(data){
-        console.log("Get Donor Deferrals Unsuccessful");
-      });
-      */
     },
     getDonations: function (donorId, response) {
       Api.DonorDonations.get({id:donorId}, function (donations) {
@@ -228,15 +182,6 @@ angular.module('bsis')
       }, function (){
         response(false);
       });
-      /*
-      return $http.get('/getDonations')
-        .success(function(data, status, headers, config){
-          return data;
-      })
-      .error(function(data){
-        console.log("Get Donor Donations Unsuccessful");
-      });
-      */
     },
     getDonorBarcode: function (donorId, response) {
       Api.DonorBarcode.get({id:donorId}, function (label) {

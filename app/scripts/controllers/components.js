@@ -92,17 +92,6 @@ angular.module('bsis')
           $scope.searchResults = false;
         }
       });
-      /*
-      ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber).then(function (response) {
-          data = response.data.components;
-          $scope.data = data;
-          //$scope.componentTypes = response.data.componentTypes;
-          //$scope.discardReasons = response.data.discardReasons;
-          $scope.searchResults = true;
-        }, function () {
-          $scope.searchResults = false;
-      });
-      */
 
     };
 
@@ -161,16 +150,6 @@ angular.module('bsis')
           $scope.searchResults = false;
         }
       });
-
-      /*
-      ComponentService.getComponentsSummary().then(function (response) {
-          data = response.data.donations;
-          $scope.data = data;
-          $scope.searchResults = true;
-        }, function () {
-          $scope.searchResults = false;
-      });
-      */
 
       $scope.componentsSummaryTableParams = new ngTableParams({
         page: 1,            // show first page

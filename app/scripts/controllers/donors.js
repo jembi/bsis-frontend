@@ -39,17 +39,6 @@ angular.module('bsis')
         $scope.tableParams.reload();
       }
     }); 
-
-    // MOCKAPI FIND DONOR FUNCTION
-    /*
-    DonorService.findDonor($scope.donorSearch).then(function (response) {
-        data = response.data.donors;
-        $scope.data = data;
-        $scope.searchResults = true;
-      }, function () {
-        $scope.searchResults = false;
-    });
-    */
   };
 
     $scope.isCurrent = function(path) {
@@ -174,22 +163,6 @@ angular.module('bsis')
 
     $scope.donor = DonorService.getDonor();
 
-    /* TODO: Update service call above (getDonor()) to include donorFormFields, so that two service calls are not required*/
-    /*
-    DonorService.getDonorFormFields().then(function (response) {
-      $scope.data = response.data;
-      $scope.addressTypes = $scope.data.addressTypes;
-      $scope.languages = $scope.data.languages;
-      $scope.donorPanels = $scope.data.donorPanels;
-      $scope.idTypes = $scope.data.idTypes;
-      $scope.preferredContactMethods = $scope.data.preferredContactMethods;
-      $scope.title = TITLE.options;
-      $scope.month = MONTH.options;
-      $scope.gender = GENDER.options;
-
-      }, function () {
-    });
-    */
     DonorService.getDonorFormFields(function(response){
       if (response !== false){
         $scope.data = response;
@@ -254,17 +227,6 @@ angular.module('bsis')
         }
       });
 
-      // MOCKAPI FIND GETDEFERRALS FUNCTION
-      /*
-      DonorService.getDeferrals().then(function (response) {
-        $scope.deferralsData = response.data.allDonorDeferrals;
-        deferralReasons = response.data.deferralReasons;
-        $scope.deferralResults = true;
-      }, function () {
-        $scope.deferralResults = false;
-      });
-      */
-
       $scope.$watch("deferralsData", function () {
         if ($scope.deferralTableParams.data.length > 0) {
           $scope.deferralTableParams.reload();
@@ -324,16 +286,6 @@ angular.module('bsis')
           $scope.donationResults = false;
         }
       });
-
-      // MOCKAPI FIND GETDONATIONS FUNCTION
-      /*
-      DonorService.getDonations().then(function (response) {
-        $scope.donationsData = response.data.donations;
-        $scope.donationResults = true;
-      }, function () {
-        $scope.donationResults = false;
-      });
-      */
 
       $scope.$watch("donationsData", function () {
         if ($scope.donationTableParams.data.length > 0) {
@@ -426,28 +378,6 @@ angular.module('bsis')
   // Controller for Adding Donors
   .controller('AddDonorCtrl', function ($scope, $location, DonorService, MONTH, TITLE, GENDER) {
 
-      /*
-        DonorService.getDonorFormFields().then(function (response) {
-        var data = response.data;
-        $scope.addressTypes = data.addressTypes;
-        $scope.languages = data.languages;
-        $scope.donorPanels = data.donorPanels;
-        $scope.donor = data.addDonorForm;
-        $scope.searchDonor = DonorService.getDonor();
-        $scope.donor.firstName = $scope.searchDonor.firstName;
-        $scope.donor.lastName = $scope.searchDonor.lastName;
-
-        // clear $scope.searchDonor fields after assigning them to $scope.donor 
-        $scope.searchDonor.firstName = '';
-        $scope.searchDonor.lastName = '';
-
-        $scope.title = TITLE.options;
-        $scope.month = MONTH.options;
-        $scope.gender = GENDER.options;
-
-      }, function () {
-      });
-    */
     DonorService.getDonorFormFields(function(response){
       if (response !== false){
         $scope.data = response;
@@ -541,12 +471,6 @@ angular.module('bsis')
       else{
       }
     });
-    /*
-    DonorService.getDonorListFormFields().then(function (response) {
-        $scope.donorPanels = response.data.donorPanels;
-      }, function () {
-    });
-    */
 
     $scope.getDonors = function (searchParameters) {
 
@@ -585,21 +509,6 @@ angular.module('bsis')
           $scope.donorListSearchResults = false;
         }
       });
-
-      /*
-      $scope.donorSearch = {
-        'firstName': 'Sample',
-        'lastName': 'Donor'
-      };
-
-      DonorService.findDonor($scope.donorSearch).then(function (response) {
-          data = response.data.donors;
-          $scope.data = data;
-          $scope.donorListSearchResults = true;
-        }, function () {
-          $scope.donorListSearchResults = false;
-      });
-      */
     };
 
     $scope.donorListTableParams = new ngTableParams({

@@ -14,17 +14,6 @@ angular.module('bsis')
         response(false);
       });
     },
-    /*
-    getTestBatchFormFields: function () {
-      return $http.get('/getTestBatchFormFields')
-        .success(function(data, status, headers, config){
-          return data;
-      })
-      .error(function(data){
-        console.log("Find Test Batch Form Fields Unsuccessful");
-      });
-    },
-    */
     getTTITestingFormFields: function(response){
       Api.TTITestingFormFields.get({}, function (backingForm) {
         response(backingForm);
@@ -69,19 +58,6 @@ angular.module('bsis')
         response(false);
       });
     },
-    /*
-    getTestResultsByDIN: function (donationIdentificationNumber) {
-      return $http.get('/getTestResultsByDIN', {params: { din: donationIdentificationNumber }})
-        .success(function(data, status, headers, config){
-        if (donationIdentificationNumber.Error === undefined) {
-          return data;
-        }
-      })
-      .error(function(data){
-        console.log("Find Test Results Unsuccessful");
-      });
-    }
-    */
     getOpenTestBatches: function (response) {
       Api.FindTestBatches.query({status:'OPEN'}, function (testBatches) {
         response(testBatches);

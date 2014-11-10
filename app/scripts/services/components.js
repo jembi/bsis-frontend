@@ -17,17 +17,6 @@ angular.module('bsis')
       }, function (){
         response(false);  
       });
-      /*
-      return $http.get('/getComponentsByDIN', {params: { din: donationIdentificationNumber }})
-        .success(function(data, status, headers, config){
-        if (donationIdentificationNumber.Error === undefined) {
-          return data;
-        }
-      })
-      .error(function(data){
-        console.log("Find Components Unsuccessful");
-      });
-      */
     },
     getComponentsSummary: function () {
       return $http.get('/getComponentsSummary')
@@ -73,8 +62,6 @@ angular.module('bsis')
     discardComponents: function (components, response) {
       angular.forEach(components.selectedComponents, function(componentId) {
         console.log("component.componentId: ", componentId);
-      //for (componentId : components.selectedComponents){
-        //Api.discardComponents.update({id: component.componentId, discardReasonId: components.discardReason, discardReasonText: components.discardReasonText}, function(){
           Api.discardComponents.update({id: componentId, discardReasonId: components.discardReason, discardReasonText: components.discardReasonText}, function(){
             response(true);
         }, function (){
