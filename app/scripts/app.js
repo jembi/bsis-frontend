@@ -388,7 +388,7 @@ angular.module('bsis', [
             dob: '@',
             age: '=',
         },
-        controller: function ($scope) {
+        link: function ($scope) {
           var age = '';
           if($scope.dob === ''){
             $scope.age = '';
