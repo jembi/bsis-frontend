@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $location, DonorService, ICONS, PERMISSIONS, $filter, ngTableParams) {
+  .controller('DonorsCtrl', function ($scope, $location, DonorService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -24,10 +24,6 @@ angular.module('bsis')
         console.log("$scope.data: ", $scope.data);
         $scope.searchResults = true;
         
-        if ($scope.tableParams.data.length > 0){
-          $scope.tableParams.reload();
-        }
-        
       }
       else{
         $scope.searchResults = false;
@@ -35,10 +31,9 @@ angular.module('bsis')
     });
 
     $scope.$watch("data", function () {
-      if ($scope.tableParams.data.length > 0) {
-        $scope.tableParams.reload();
-      }
-    }); 
+      $timeout(function(){ $scope.tableParams.reload(); });
+    });
+
   };
 
     $scope.isCurrent = function(path) {
@@ -70,6 +65,8 @@ angular.module('bsis')
       $scope.donation = {};
       $scope.deferral = {};
       $scope.newDonationBatch = {};
+      $scope.donorListSearchResults = '';
+      $scope.donorList = {};
     };
 
     $scope.viewDonor = function (item) {
@@ -154,7 +151,7 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams) {
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
     $scope.age = '';
@@ -254,7 +251,9 @@ angular.module('bsis')
         }
       });
 
-      $scope.deferralTableParams.settings().$scope = $scope;
+      $scope.$watch("data", function () {
+        $timeout(function(){ $scope.deferralTableParams.reload(); });
+      });
 
       $scope.deferralReasonsFilter = function(column) {
         var def = $q.defer();
@@ -275,7 +274,6 @@ angular.module('bsis')
 
       $scope.donationsView = 'viewDonations';
 
-
       DonorService.getDonations(donorId, function(response){
         if (response !== false){
           $scope.donationsData = response.allCollectedSamples;
@@ -286,12 +284,6 @@ angular.module('bsis')
           $scope.donationResults = false;
         }
       });
-
-      $scope.$watch("donationsData", function () {
-        if ($scope.donationTableParams.data.length > 0) {
-          $scope.donationTableParams.reload();
-        }
-      }); 
 
       $scope.donationTableParams = new ngTableParams({
         page: 1,            // show first page
@@ -314,7 +306,9 @@ angular.module('bsis')
         }
       });
 
-      $scope.donationTableParams.settings().$scope = $scope;
+      $scope.$watch("donationsData", function () {
+        $timeout(function(){ $scope.donationTableParams.reload(); });
+      });
 
       $scope.packTypeFilter = function(column) {
         var def = $q.defer();
@@ -362,10 +356,6 @@ angular.module('bsis')
         if (response === true){
           $scope.deferral = {};
           $scope.getDeferrals($scope.donor.id);
-
-          if ($scope.deferralTableParams.data.length >= 0){
-            $scope.deferralTableParams.reload();
-          }
         }
         else{
           // TODO: handle case where response == false
@@ -450,7 +440,7 @@ angular.module('bsis')
   })
 
   // Controller for Viewing/Exporting Donor Lists
-  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, $filter, ngTableParams) {
+  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
 
@@ -498,11 +488,6 @@ angular.module('bsis')
           $scope.donorListSearchResults = true;
           console.log("$scope.data.length: ", $scope.data.length);
           $scope.donorListSearchCount = $scope.data.length;
-
-          
-          if ($scope.donorListTableParams.data.length >= 0){
-            $scope.donorListTableParams.reload();
-          }
           
         }
         else{
@@ -527,6 +512,10 @@ angular.module('bsis')
         }
     }); 
 
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.donorListTableParams.reload(); });
+    });
+
     $scope.dateOptions = {
       'formatYear': 'yy',
       'startingDay': 1,
@@ -543,7 +532,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams) {
+  .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -568,17 +557,12 @@ angular.module('bsis')
         if (response !== false){
           data = response.donationBatches;
           $scope.data = data;
-          console.log("$scope.data: ", $scope.data);
-          if ($scope.donationBatchTableParams.data.length >= 0){
-            $scope.donationBatchTableParams.reload();
-          }
           if (data.length > 0){
             $scope.openDonationBatches = true;
           }
           else {
             $scope.openDonationBatches = false;
           }
-          
         }
         else{
         }
@@ -589,7 +573,7 @@ angular.module('bsis')
 
     $scope.donationBatchTableParams = new ngTableParams({
       page: 1,            // show first page
-      count: 4,          // count per page
+      count: 5,          // count per page
       filter: {},
       sorting: {}
     }, 
@@ -607,11 +591,15 @@ angular.module('bsis')
       }
     });
 
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.donationBatchTableParams.reload(); });
+    });
+
     $scope.addDonationBatch = function (donationBatch){
 
       DonorService.addDonationBatch(donationBatch, function(response){
         if (response === true){
-          $scope.donationBatch = {};
+          $scope.newDonationBatch = {};
           $scope.getOpenDonationBatches();
         }
         else{
@@ -634,7 +622,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams) {
+  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -646,8 +634,6 @@ angular.module('bsis')
       $scope.donationBatch = DonorService.getDonationBatch();
       data = $scope.donationBatch.collectionsInBatch;
       $scope.data = data;
-
-      console.log("data data: ",data);
 
       DonorService.getDonationBatchFormFields( function(response){
         if (response !== false){
@@ -682,10 +668,8 @@ angular.module('bsis')
     });
 
     $scope.$watch("data", function () {
-      if ($scope.donorClinicTableParams.data.length > 0) {
-        $scope.donorClinicTableParams.reload();
-      }
-    }); 
+      $timeout(function(){ $scope.donorClinicTableParams.reload(); });
+    });
 
     $scope.packTypeFilter = function(column) {
       var def = $q.defer();
@@ -750,21 +734,16 @@ angular.module('bsis')
       donation.collectedOn = $scope.donationBatch.createdDate;
       donation.collectionBatchNumber = $scope.donationBatch.batchNumber;
 
-      DonorService.addDonation(donation, function(response){
-        if (response === true){
+      DonorService.addDonationToBatch(donation, function(response){
+        if (response !== false){
 
           $scope.addDonationSuccess = true;
           $scope.donation = {};
           $scope.donationBatchView = 'viewDonationBatch';
 
-          $scope.donationBatch = DonorService.refreshDonationBatch();
+          $scope.donationBatch = response;
           data = $scope.donationBatch.collectionsInBatch;
           $scope.data = data;
-
-          if ($scope.donorClinicTableParams.data.length > 0) {
-            $scope.donorClinicTableParams.reload();
-          }
-
         }
         else{
           // TODO: handle case where response == false

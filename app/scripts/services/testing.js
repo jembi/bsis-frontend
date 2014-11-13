@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.factory('TestingService', function ($http, Api) {
+.factory('TestingService', function ($http, Api, $q) {
 
   var currentTestBatchId = '';
   var donationBatchesObj = [];
@@ -94,15 +94,19 @@ angular.module('bsis')
       }); 
     },
     saveTestResults: function (testResults, response){
+      var deferred = $q.defer();
       var saveTestResults = new Api.TestResults();
 
       angular.copy(testResults, saveTestResults);
 
       saveTestResults.$save(function(data){ 
         response(true);
+        deferred.resolve();
       }, function (){
         response(false);
+        deferred.reject();
       }); 
+      return deferred.promise;
     }
   };
 });
