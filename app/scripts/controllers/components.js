@@ -78,15 +78,10 @@ angular.module('bsis')
         if (response !== false){
           data = response.components;
           $scope.data = data;
-          console.log("$scope.data: ", $scope.data);
           $scope.searchResults = true;
-          console.log("$scope.data.length: ", $scope.data.length);
-          $scope.componentsSearchCount = $scope.data.length;
-
-          if ($scope.componentsTableParams.data.length >= 0){
-            $scope.componentsTableParams.reload();
+          if ($scope.data.length === 0){
+            $scope.searchResults = false;
           }
-          
         }
         else{
           $scope.searchResults = false;
@@ -134,9 +129,7 @@ angular.module('bsis')
         if (response !== false){
           data = response.components;
           $scope.data = data;
-          console.log("$scope.data: ", $scope.data);
           $scope.searchResults = true;
-          console.log("$scope.data.length: ", $scope.data.length);
           $scope.componentsSearchCount = $scope.data.length;
           
         }
@@ -248,8 +241,10 @@ angular.module('bsis')
 
       ComponentService.discardComponents($scope.discard, function(response){
         if (response === true){
+          $scope.searchResults = true;
         }
         else{
+          $scope.searchResults = false;
           // TODO: handle case where response == false
         }
       });
@@ -259,7 +254,7 @@ angular.module('bsis')
 
     };
 
-    // toggle selection for a given employee by name
+    // toggle selection util method to toggle checkboxes
     $scope.toggleSelection = function toggleSelection(componentId) {
       var idx = $scope.selectedComponents.indexOf(componentId);
       // is currently selected
