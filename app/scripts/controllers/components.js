@@ -237,20 +237,23 @@ angular.module('bsis')
 
       $scope.discard.selectedComponents = $scope.selectedComponents;
 
-      console.log("components to discard: ",$scope.discard);
+      angular.forEach($scope.discard.selectedComponents, function(component) {
+        $scope.componentToDiscard = {};
+        $scope.componentToDiscard.componentId = component;
+        $scope.componentToDiscard.discardReason = $scope.discard.discardReason;
+        $scope.componentToDiscard.discardReasonText = $scope.discard.discardReasonText;
 
-      ComponentService.discardComponents($scope.discard, function(response){
-        if (response === true){
-          $scope.searchResults = true;
-        }
-        else{
-          $scope.searchResults = false;
-          // TODO: handle case where response == false
-        }
+        ComponentService.discardComponent($scope.componentToDiscard, function(response){
+          if (response !== false){
+            data = response.components;
+            $scope.data = data;
+            $scope.discard = {};
+          }
+          else{
+            // TODO: handle case where response == false
+          }
+        });
       });
-
-      $scope.discard = {};
-      $scope.getComponentsByDIN();
 
     };
 
