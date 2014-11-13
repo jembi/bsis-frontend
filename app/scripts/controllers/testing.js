@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('TestingCtrl', function ($scope, $location, TestingService, ICONS, PERMISSIONS, $filter, ngTableParams) {
+  .controller('TestingCtrl', function ($scope, $location, TestingService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -78,26 +78,34 @@ angular.module('bsis')
         else{
         }
       });
+
+    };
+
+    $scope.getTestBatchFormFields = function(){
+
+      TestingService.getTestBatchFormFields( function(response){
+        if (response !== false){
+          TestingService.setDonationBatches(response.donationBatches);
+          $scope.donationBatches = TestingService.getDonationBatches();
+        }
+        else{
+        }
+      });
+
+      $scope.donationBatches = TestingService.getDonationBatches();
+
     };
 
     $scope.getOpenTestBatches();
-
-    TestingService.getTestBatchFormFields( function(response){
-      if (response !== false){
-        TestingService.setDonationBatches(response.donationBatches);
-        $scope.donationBatches = TestingService.getDonationBatches();
-      }
-      else{
-      }
-    });
-
-    $scope.donationBatches = TestingService.getDonationBatches();
+    $scope.getTestBatchFormFields();
 
     $scope.addTestBatch = function (donationBatches){
 
       TestingService.addTestBatch(donationBatches, function(response){
         if (response === true){
+          $scope.selectedDonationBatches = {};
           $scope.getOpenTestBatches();
+          $scope.getTestBatchFormFields();
         }
         else{
           // TODO: handle case where response == false
@@ -123,6 +131,10 @@ angular.module('bsis')
         params.total(orderedData.length); // set total for pagination
         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
+    });
+
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.testBatchTableParams.reload(); });
     });
 
     $scope.getTestResultsByDIN = function (testResultsSearch) {
@@ -169,7 +181,7 @@ angular.module('bsis')
 
   })
 
-  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams) {
+  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams, $timeout) {
     var data = {};
     $scope.data  = data;
 
@@ -187,10 +199,6 @@ angular.module('bsis')
 
           data = donations;
           $scope.data = data;
-
-          if ($scope.testSamplesTableParams.data.length >= 0){
-            $scope.testSamplesTableParams.reload();
-          }
 
         }
         else{
@@ -220,9 +228,13 @@ angular.module('bsis')
       }
     });
 
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.testSamplesTableParams.reload(); });
+    });
+
   })
 
-  .controller('RecordTestResultsCtrl', function ($scope, $location, TestingService, TTITESTS, BLOODTYPINGTESTS, TTIOUTCOME, BGSOUTCOME, ABO, RH, $filter, ngTableParams) {
+  .controller('RecordTestResultsCtrl', function ($scope, $location, TestingService, TTITESTS, BLOODTYPINGTESTS, TTIOUTCOME, BGSOUTCOME, ABO, RH, $q, $filter, ngTableParams, $timeout) {
     var data = {};
     $scope.data  = data;
     $scope.ttiTests = TTITESTS.options;
@@ -231,6 +243,10 @@ angular.module('bsis')
     $scope.bgsOutcomes = BGSOUTCOME.options;
     $scope.abo = ABO.options;
     $scope.rh = RH.options;
+
+    $scope.go = function (path) {
+      $location.path(path);
+    };
 
     $scope.getCurrentTestBatch = function () {
       TestingService.getCurrentTestBatch( function(response){
@@ -274,9 +290,6 @@ angular.module('bsis')
             $scope.addTestResults[value.collectedSample.collectionNumber] = {"donationIdentificationNumber": value.collectedSample.collectionNumber};
           });
 
-          if ($scope.testSamplesTTITableParams.data.length >= 0){
-            $scope.testSamplesTTITableParams.reload();
-          }
         }
         else{
         }
@@ -289,18 +302,23 @@ angular.module('bsis')
 
     $scope.saveTestResults = function (testResults) {
 
+      var requests = [];
+
       angular.forEach(testResults, function(value, key) {
-        TestingService.saveTestResults(value, function(response){
+        var request = TestingService.saveTestResults(value, function(response){
           if (response === true){
           }
           else{
             // TODO: handle case where response == false
           }
         });
-        
+
+        requests.push(request);
       });
 
-      $location.path("/viewTestBatch");
+      $q.all(requests).then(function(){
+        $location.path("/viewTestBatch");
+      });
 
     };
 
@@ -322,6 +340,10 @@ angular.module('bsis')
         params.total(orderedData.length); // set total for pagination
         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
+    });
+
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.testSamplesTTITableParams.reload(); });
     });
 
   })

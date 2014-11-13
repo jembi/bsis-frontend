@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ComponentsCtrl', function ($scope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, $filter, ngTableParams) {
+  .controller('ComponentsCtrl', function ($scope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -78,15 +78,10 @@ angular.module('bsis')
         if (response !== false){
           data = response.components;
           $scope.data = data;
-          console.log("$scope.data: ", $scope.data);
           $scope.searchResults = true;
-          console.log("$scope.data.length: ", $scope.data.length);
-          $scope.componentsSearchCount = $scope.data.length;
-
-          if ($scope.componentsTableParams.data.length >= 0){
-            $scope.componentsTableParams.reload();
+          if ($scope.data.length === 0){
+            $scope.searchResults = false;
           }
-          
         }
         else{
           $scope.searchResults = false;
@@ -116,10 +111,8 @@ angular.module('bsis')
     });
 
     $scope.$watch("data", function () {
-      if ($scope.componentsTableParams.data.length >= 0) {
-        $scope.componentsTableParams.reload();
-      }
-    }); 
+      $timeout(function(){ $scope.componentsTableParams.reload(); });
+    });
 
     $scope.findComponents = function (componentsSearch) {
       $scope.componentsView = 'viewDonations';
@@ -136,14 +129,8 @@ angular.module('bsis')
         if (response !== false){
           data = response.components;
           $scope.data = data;
-          console.log("$scope.data: ", $scope.data);
           $scope.searchResults = true;
-          console.log("$scope.data.length: ", $scope.data.length);
           $scope.componentsSearchCount = $scope.data.length;
-
-          if ($scope.componentsSummaryTableParams.data.length > 0){
-            $scope.componentsSummaryTableParams.reload();
-          }
           
         }
         else{
@@ -151,32 +138,31 @@ angular.module('bsis')
         }
       });
 
-      $scope.componentsSummaryTableParams = new ngTableParams({
-        page: 1,            // show first page
-        count: 6,          // count per page
-        filter: {},
-        sorting: {}
-      }, 
-      {
-        defaultSort: 'asc',
-        counts: [], // hide page counts control
-        total: data.length, // length of data
-        getData: function ($defer, params) {
-          var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
-          params.total(orderedData.length); // set total for pagination
-          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
-      });
-
-      $scope.$watch("data", function () {
-        if ($scope.componentsSummaryTableParams.data.length > 0) {
-          $scope.componentsSummaryTableParams.reload();
-        }
-      }); 
     };
+
+    $scope.componentsSummaryTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 6,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.componentsSummaryTableParams.reload(); });
+    });
 
     $scope.viewComponents = function (din) {
       $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
@@ -192,43 +178,35 @@ angular.module('bsis')
       ComponentService.getDiscardsSummary().then(function (response) {
           data = response.data.discards;
           $scope.data = data;
-          
           $scope.searchResults = true;
-
-          if ($scope.discardsSummaryTableParams.data.length > 0){
-            $scope.discardsSummaryTableParams.reload();
-          }
         }, function () {
           $scope.searchResults = false;
       });
-
-      $scope.discardsSummaryTableParams = new ngTableParams({
-        page: 1,            // show first page
-        count: 6,          // count per page
-        filter: {},
-        sorting: {}
-      }, 
-      {
-        defaultSort: 'asc',
-        counts: [], // hide page counts control
-        total: data.length, // length of data
-        getData: function ($defer, params) {
-          var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
-          params.total(orderedData.length); // set total for pagination
-          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
-      });
-
-      $scope.$watch("data", function () {
-        if ($scope.discardsSummaryTableParams.data.length > 0) {
-          $scope.discardsSummaryTableParams.reload();
-        }
-      }); 
-
     };
+
+    $scope.discardsSummaryTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 6,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.discardsSummaryTableParams.reload(); });
+    });
 
     $scope.recordComponents = function () {
 
@@ -238,25 +216,20 @@ angular.module('bsis')
       $scope.recordComponent.childComponentTypeId = $scope.component.childComponentTypeId;
       $scope.recordComponent.numUnits = $scope.component.numUnits;
 
-      console.log("component to record: ",$scope.recordComponent);
+      $scope.component = {};
+      $scope.selectedComponents = [];
 
       ComponentService.recordComponents($scope.recordComponent, function(response){
         if (response !== false){
-
           data = response.components;
           $scope.data = data;
+          $scope.recordComponent = {};
           console.log("$scope.data: ", $scope.data);
-
-          if ($scope.componentsTableParams.data.length > 0){
-            $scope.componentsTableParams.reload();
-          }
-
         }
         else{
           // TODO: handle case where response == false
         }
       });
-
 
     };
 
@@ -264,22 +237,27 @@ angular.module('bsis')
 
       $scope.discard.selectedComponents = $scope.selectedComponents;
 
-      console.log("components to discard: ",$scope.discard);
+      angular.forEach($scope.discard.selectedComponents, function(component) {
+        $scope.componentToDiscard = {};
+        $scope.componentToDiscard.componentId = component;
+        $scope.componentToDiscard.discardReason = $scope.discard.discardReason;
+        $scope.componentToDiscard.discardReasonText = $scope.discard.discardReasonText;
 
-      ComponentService.discardComponents($scope.discard, function(response){
-        if (response === true){
-        }
-        else{
-          // TODO: handle case where response == false
-        }
+        ComponentService.discardComponent($scope.componentToDiscard, function(response){
+          if (response !== false){
+            data = response.components;
+            $scope.data = data;
+            $scope.discard = {};
+          }
+          else{
+            // TODO: handle case where response == false
+          }
+        });
       });
-
-      $scope.discard = {};
-      $scope.getComponentsByDIN();
 
     };
 
-    // toggle selection for a given employee by name
+    // toggle selection util method to toggle checkboxes
     $scope.toggleSelection = function toggleSelection(componentId) {
       var idx = $scope.selectedComponents.indexOf(componentId);
       // is currently selected

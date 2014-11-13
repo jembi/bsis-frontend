@@ -59,14 +59,11 @@ angular.module('bsis')
       }); 
 
     },
-    discardComponents: function (components, response) {
-      angular.forEach(components.selectedComponents, function(componentId) {
-        console.log("component.componentId: ", componentId);
-          Api.discardComponents.update({id: componentId, discardReasonId: components.discardReason, discardReasonText: components.discardReasonText}, function(){
-            response(true);
-        }, function (){
-          response(false);  
-        });
+    discardComponent: function (component, response) {
+      Api.discardComponents.update({id: component.componentId, discardReasonId: component.discardReason, discardReasonText: component.discardReasonText}, function(data){
+          response(data);
+      }, function (){
+        response(false);  
       });
     },
   };
