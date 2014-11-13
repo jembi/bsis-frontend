@@ -145,31 +145,31 @@ angular.module('bsis')
         }
       });
 
-      $scope.componentsSummaryTableParams = new ngTableParams({
-        page: 1,            // show first page
-        count: 6,          // count per page
-        filter: {},
-        sorting: {}
-      }, 
-      {
-        defaultSort: 'asc',
-        counts: [], // hide page counts control
-        total: data.length, // length of data
-        getData: function ($defer, params) {
-          var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
-          params.total(orderedData.length); // set total for pagination
-          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
-      });
-
-      $scope.$watch("data", function () {
-        $timeout(function(){ $scope.componentsSummaryTableParams.reload(); });
-      });
-
     };
+
+    $scope.componentsSummaryTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 6,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.componentsSummaryTableParams.reload(); });
+    });
 
     $scope.viewComponents = function (din) {
       $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
