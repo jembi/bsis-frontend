@@ -68,13 +68,6 @@ angular.module('bsis')
     getDonationBatch: function(){
       return donationBatchObj;
     },
-    refreshDonationBatch: function(){
-      Api.DonationBatches.get({id:donationBatchObj.id}, function (donationBatch){
-          donationBatchObj = donationBatch;
-          console.log("donationBatchObj: ", donationBatchObj);
-      });
-      return donationBatchObj;
-    },
     getDonors: function(){
       return donorsObj;
     },
@@ -124,6 +117,26 @@ angular.module('bsis')
       }, function (){
         response(false);
       });
+    },
+    addDonationToBatch: function (donation, response){
+      // create $Resource object and assign donation values
+      var addDonation = new Api.Donations();
+
+      console.log("donation: ", donation);
+      angular.copy(donation, addDonation);
+
+      console.log("addDonation: ", addDonation);
+
+      // save donation (POST /donations)
+      addDonation.$save(function(data){ 
+        // refresh donation batch after adding donation to it, and add to response
+        Api.DonationBatches.get({id:donationBatchObj.id}, function (donationBatch){
+          donationBatchObj = donationBatch.collectionBatch;
+          response(donationBatch.collectionBatch);
+        });
+      }, function (){
+        response(false);
+      }); 
     },
     addDonation: function (donation, response){
       // create $Resource object and assign donation values

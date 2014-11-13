@@ -621,7 +621,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams) {
+  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -633,8 +633,6 @@ angular.module('bsis')
       $scope.donationBatch = DonorService.getDonationBatch();
       data = $scope.donationBatch.collectionsInBatch;
       $scope.data = data;
-
-      console.log("data data: ",data);
 
       DonorService.getDonationBatchFormFields( function(response){
         if (response !== false){
@@ -669,10 +667,8 @@ angular.module('bsis')
     });
 
     $scope.$watch("data", function () {
-      if ($scope.donorClinicTableParams.data.length > 0) {
-        $scope.donorClinicTableParams.reload();
-      }
-    }); 
+      $timeout(function(){ $scope.donorClinicTableParams.reload(); });
+    });
 
     $scope.packTypeFilter = function(column) {
       var def = $q.defer();
@@ -737,21 +733,16 @@ angular.module('bsis')
       donation.collectedOn = $scope.donationBatch.createdDate;
       donation.collectionBatchNumber = $scope.donationBatch.batchNumber;
 
-      DonorService.addDonation(donation, function(response){
-        if (response === true){
+      DonorService.addDonationToBatch(donation, function(response){
+        if (response !== false){
 
           $scope.addDonationSuccess = true;
           $scope.donation = {};
           $scope.donationBatchView = 'viewDonationBatch';
 
-          $scope.donationBatch = DonorService.refreshDonationBatch();
+          $scope.donationBatch = response;
           data = $scope.donationBatch.collectionsInBatch;
           $scope.data = data;
-
-          if ($scope.donorClinicTableParams.data.length > 0) {
-            $scope.donorClinicTableParams.reload();
-          }
-
         }
         else{
           // TODO: handle case where response == false
