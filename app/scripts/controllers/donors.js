@@ -33,7 +33,7 @@ angular.module('bsis')
     $scope.$watch("data", function () {
       $timeout(function(){ $scope.tableParams.reload(); });
     });
-    
+
   };
 
     $scope.isCurrent = function(path) {
@@ -149,7 +149,7 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams) {
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
     $scope.age = '';
@@ -249,7 +249,9 @@ angular.module('bsis')
         }
       });
 
-      $scope.deferralTableParams.settings().$scope = $scope;
+      $scope.$watch("data", function () {
+        $timeout(function(){ $scope.deferralTableParams.reload(); });
+      });
 
       $scope.deferralReasonsFilter = function(column) {
         var def = $q.defer();
@@ -270,7 +272,6 @@ angular.module('bsis')
 
       $scope.donationsView = 'viewDonations';
 
-
       DonorService.getDonations(donorId, function(response){
         if (response !== false){
           $scope.donationsData = response.allCollectedSamples;
@@ -281,12 +282,6 @@ angular.module('bsis')
           $scope.donationResults = false;
         }
       });
-
-      $scope.$watch("donationsData", function () {
-        if ($scope.donationTableParams.data.length > 0) {
-          $scope.donationTableParams.reload();
-        }
-      }); 
 
       $scope.donationTableParams = new ngTableParams({
         page: 1,            // show first page
@@ -309,7 +304,9 @@ angular.module('bsis')
         }
       });
 
-      $scope.donationTableParams.settings().$scope = $scope;
+      $scope.$watch("donationsData", function () {
+        $timeout(function(){ $scope.donationTableParams.reload(); });
+      });
 
       $scope.packTypeFilter = function(column) {
         var def = $q.defer();
@@ -357,10 +354,6 @@ angular.module('bsis')
         if (response === true){
           $scope.deferral = {};
           $scope.getDeferrals($scope.donor.id);
-
-          if ($scope.deferralTableParams.data.length >= 0){
-            $scope.deferralTableParams.reload();
-          }
         }
         else{
           // TODO: handle case where response == false
