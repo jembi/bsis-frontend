@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('TestingCtrl', function ($scope, $location, TestingService, ICONS, PERMISSIONS, $filter, ngTableParams) {
+  .controller('TestingCtrl', function ($scope, $location, TestingService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -78,26 +78,34 @@ angular.module('bsis')
         else{
         }
       });
+
+    };
+
+    $scope.getTestBatchFormFields = function(){
+
+      TestingService.getTestBatchFormFields( function(response){
+        if (response !== false){
+          TestingService.setDonationBatches(response.donationBatches);
+          $scope.donationBatches = TestingService.getDonationBatches();
+        }
+        else{
+        }
+      });
+
+      $scope.donationBatches = TestingService.getDonationBatches();
+
     };
 
     $scope.getOpenTestBatches();
-
-    TestingService.getTestBatchFormFields( function(response){
-      if (response !== false){
-        TestingService.setDonationBatches(response.donationBatches);
-        $scope.donationBatches = TestingService.getDonationBatches();
-      }
-      else{
-      }
-    });
-
-    $scope.donationBatches = TestingService.getDonationBatches();
+    $scope.getTestBatchFormFields();
 
     $scope.addTestBatch = function (donationBatches){
 
       TestingService.addTestBatch(donationBatches, function(response){
         if (response === true){
+          $scope.selectedDonationBatches = {};
           $scope.getOpenTestBatches();
+          $scope.getTestBatchFormFields();
         }
         else{
           // TODO: handle case where response == false
@@ -123,6 +131,10 @@ angular.module('bsis')
         params.total(orderedData.length); // set total for pagination
         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
+    });
+
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.testBatchTableParams.reload(); });
     });
 
     $scope.getTestResultsByDIN = function (testResultsSearch) {
