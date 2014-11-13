@@ -185,43 +185,35 @@ angular.module('bsis')
       ComponentService.getDiscardsSummary().then(function (response) {
           data = response.data.discards;
           $scope.data = data;
-          
           $scope.searchResults = true;
-
-          if ($scope.discardsSummaryTableParams.data.length > 0){
-            $scope.discardsSummaryTableParams.reload();
-          }
         }, function () {
           $scope.searchResults = false;
       });
-
-      $scope.discardsSummaryTableParams = new ngTableParams({
-        page: 1,            // show first page
-        count: 6,          // count per page
-        filter: {},
-        sorting: {}
-      }, 
-      {
-        defaultSort: 'asc',
-        counts: [], // hide page counts control
-        total: data.length, // length of data
-        getData: function ($defer, params) {
-          var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
-          params.total(orderedData.length); // set total for pagination
-          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
-      });
-
-      $scope.$watch("data", function () {
-        if ($scope.discardsSummaryTableParams.data.length > 0) {
-          $scope.discardsSummaryTableParams.reload();
-        }
-      }); 
-
     };
+
+    $scope.discardsSummaryTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 6,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.discardsSummaryTableParams.reload(); });
+    });
 
     $scope.recordComponents = function () {
 
