@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $location, DonorService, ICONS, PERMISSIONS, $filter, ngTableParams) {
+  .controller('DonorsCtrl', function ($scope, $location, DonorService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -24,10 +24,6 @@ angular.module('bsis')
         console.log("$scope.data: ", $scope.data);
         $scope.searchResults = true;
         
-        if ($scope.tableParams.data.length > 0){
-          $scope.tableParams.reload();
-        }
-        
       }
       else{
         $scope.searchResults = false;
@@ -35,10 +31,9 @@ angular.module('bsis')
     });
 
     $scope.$watch("data", function () {
-      if ($scope.tableParams.data.length > 0) {
-        $scope.tableParams.reload();
-      }
-    }); 
+      $timeout(function(){ $scope.tableParams.reload(); });
+    });
+    
   };
 
     $scope.isCurrent = function(path) {
