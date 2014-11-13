@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ComponentsCtrl', function ($scope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, $filter, ngTableParams) {
+  .controller('ComponentsCtrl', function ($scope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -116,10 +116,8 @@ angular.module('bsis')
     });
 
     $scope.$watch("data", function () {
-      if ($scope.componentsTableParams.data.length >= 0) {
-        $scope.componentsTableParams.reload();
-      }
-    }); 
+      $timeout(function(){ $scope.componentsTableParams.reload(); });
+    });
 
     $scope.findComponents = function (componentsSearch) {
       $scope.componentsView = 'viewDonations';
@@ -140,10 +138,6 @@ angular.module('bsis')
           $scope.searchResults = true;
           console.log("$scope.data.length: ", $scope.data.length);
           $scope.componentsSearchCount = $scope.data.length;
-
-          if ($scope.componentsSummaryTableParams.data.length > 0){
-            $scope.componentsSummaryTableParams.reload();
-          }
           
         }
         else{
@@ -172,10 +166,9 @@ angular.module('bsis')
       });
 
       $scope.$watch("data", function () {
-        if ($scope.componentsSummaryTableParams.data.length > 0) {
-          $scope.componentsSummaryTableParams.reload();
-        }
-      }); 
+        $timeout(function(){ $scope.componentsSummaryTableParams.reload(); });
+      });
+
     };
 
     $scope.viewComponents = function (din) {
@@ -238,25 +231,20 @@ angular.module('bsis')
       $scope.recordComponent.childComponentTypeId = $scope.component.childComponentTypeId;
       $scope.recordComponent.numUnits = $scope.component.numUnits;
 
-      console.log("component to record: ",$scope.recordComponent);
+      $scope.component = {};
+      $scope.selectedComponents = [];
 
       ComponentService.recordComponents($scope.recordComponent, function(response){
         if (response !== false){
-
           data = response.components;
           $scope.data = data;
+          $scope.recordComponent = {};
           console.log("$scope.data: ", $scope.data);
-
-          if ($scope.componentsTableParams.data.length > 0){
-            $scope.componentsTableParams.reload();
-          }
-
         }
         else{
           // TODO: handle case where response == false
         }
       });
-
 
     };
 
