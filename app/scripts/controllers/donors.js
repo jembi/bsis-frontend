@@ -65,6 +65,8 @@ angular.module('bsis')
       $scope.donation = {};
       $scope.deferral = {};
       $scope.newDonationBatch = {};
+      $scope.donorListSearchResults = '';
+      $scope.donorList = {};
     };
 
     $scope.viewDonor = function (item) {
@@ -438,7 +440,7 @@ angular.module('bsis')
   })
 
   // Controller for Viewing/Exporting Donor Lists
-  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, $filter, ngTableParams) {
+  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
 
@@ -486,11 +488,6 @@ angular.module('bsis')
           $scope.donorListSearchResults = true;
           console.log("$scope.data.length: ", $scope.data.length);
           $scope.donorListSearchCount = $scope.data.length;
-
-          
-          if ($scope.donorListTableParams.data.length >= 0){
-            $scope.donorListTableParams.reload();
-          }
           
         }
         else{
@@ -514,6 +511,10 @@ angular.module('bsis')
             $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
     }); 
+
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.donorListTableParams.reload(); });
+    });
 
     $scope.dateOptions = {
       'formatYear': 'yy',
