@@ -165,8 +165,18 @@ angular.module('bsis')
     });
 
     $scope.viewComponents = function (din) {
-      $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
-      $scope.componentsView = 'viewComponents';
+
+      $scope.din = din;
+
+      ComponentService.getComponentsByDIN(din, function(response){
+        if (response !== false){
+          $scope.components = response.components;
+          $scope.componentsView = 'viewComponents';
+        }
+        else{
+        }
+      });
+      
     };
 
     $scope.setcomponentsView = function (view) {
