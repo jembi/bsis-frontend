@@ -173,15 +173,35 @@ angular.module('bsis')
       $scope.componentsView = view;
     };
 
-    $scope.getDiscardsSummary = function () {
+    $scope.findDiscards = function (discardsSearch) {
+      $scope.componentsView = 'viewDonations';
 
-      ComponentService.getDiscardsSummary().then(function (response) {
-          data = response.data.discards;
+      $scope.selectedComponentTypes = [];
+      angular.forEach(discardsSearch.componentTypes,function(value,index){
+          $scope.selectedComponentTypes.push(value.id);
+      });
+      discardsSearch.componentTypes = $scope.selectedComponentTypes;
+
+      // limit results to DISCARDED components
+      $scope.status = [];
+      $scope.status.push("DISCARDED");
+      discardsSearch.status = $scope.status;
+
+      console.log("discardsSearch: ", discardsSearch);
+
+      ComponentService.ComponentsSearch(discardsSearch, function(response){
+        if (response !== false){
+          data = response.components;
           $scope.data = data;
           $scope.searchResults = true;
-        }, function () {
+          $scope.componentsSearchCount = $scope.data.length;
+          
+        }
+        else{
           $scope.searchResults = false;
+        }
       });
+
     };
 
     $scope.discardsSummaryTableParams = new ngTableParams({
