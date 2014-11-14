@@ -7,7 +7,8 @@ angular.module('bsis', [
   'ngTable',
   'xeditable',
   'ui.select',
-  'ngSanitize'
+  'ngSanitize',
+  'bsisFilters'
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
