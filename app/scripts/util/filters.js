@@ -6,7 +6,6 @@ angular.module('bsisFilters', [])
   .filter('expiryStatus', function() {
 
     return function(input) {
-      console.log("input.status", input.status);
       if (input.status === "DISCARDED" || input.status === "PROCESSED" || input.status === "SPLIT"){
         return "N/A";
       }
