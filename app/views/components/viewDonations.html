@@ -23,11 +23,11 @@
           {{component.status}}
       </td>
       <td data-title="'Expiry Status'" header-class="text-left" sortable="'expiryStatus'">
-          {{component.expiryStatus}}
+          {{ component | expiryStatus }}
       </td>
       <td data-title="''" style="width:10%;" class="text-center">
         <span style="font-size: 0.9em;">
-          <em><a ng-click="viewComponents(component.donationIdentificationNumber)"> View</a></em>
+          <em><a ng-click="viewComponents(component.collectionNumber)">View Summary</a></em>
         </span>
       </td>
   </tr>

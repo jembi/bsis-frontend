@@ -1,11 +1,11 @@
 <h3 class="page-header">Find Discards</h3>
 
-<form class="form-horizontal col-sm-12"  role="form" ng-submit="getDiscardsSummary()">
+<form class="form-horizontal col-sm-12"  role="form" ng-submit="findDiscards(discardsSearch)">
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label" >DIN</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="componentsSearch.donationIdentificationNumber">
+        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="discardsSearch.donationIdentificationNumber">
       </div>
     </div>
   </div>
@@ -13,7 +13,7 @@
     <label for="name" class="col-sm-1 control-label" >Type</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <ui-select multiple ng-model="selectedComponentTypes" theme="bootstrap" ng-disabled="disabled" style="width: 550px;">
+        <ui-select multiple ng-model="discardsSearch.componentTypes" theme="bootstrap" ng-disabled="disabled" style="width: 550px;">
           <ui-select-match placeholder="Select:">{{$item.productTypeName}}</ui-select-match>
           <ui-select-choices repeat="componentType in componentTypes | filter:$select.search">
             {{componentType.productTypeName}}
@@ -26,12 +26,12 @@
     <label for="name" class="col-sm-1 control-label" >Period</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <dateselect ng-model="discardsSearch.startDate" date-options="dateOptions" ng-required="false" format="format" opened="startDateOpen" cal-icon="icons.CALENDAR">
+        <dateselect ng-model="discardsSearch.donationDateFrom" date-options="dateOptions" ng-required="false" format="format" opened="startDateOpen" cal-icon="icons.CALENDAR">
         </dateselect>
         <span>
         <em> To: </em>
         </span>
-        <dateselect ng-model="discardsSearch.endDate" date-options="dateOptions" ng-required="false" format="format" opened="endDateOpen" cal-icon="icons.CALENDAR">
+        <dateselect ng-model="discardsSearch.donationDateTo" date-options="dateOptions" ng-required="false" format="format" opened="endDateOpen" cal-icon="icons.CALENDAR">
         </dateselect>
       </div>
     </div>
@@ -51,29 +51,11 @@
     <div class="panel panel-default">
       <div class="panel-body">
 
-        <table ng-table="discardsSummaryTableParams" show-filter="false" class="table">
-          <tr ng-repeat="discard in $data"
-              ng-click=""
-              ng-mouseenter="this.$selected = true"
-              ng-mouseleave="this.$selected = false"
-              ng-class="{'active': discard.$selected}">
-              <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
-                  {{discard.donationIdentificationNumber}}
-              </td>
-              <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
-                  {{discard.createdOn}}
-              </td>
-              <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
-                  {{discard.componentType}}
-              </td>
-              <td data-title="'Date Discarded'" header-class="text-left" class="text-center" sortable="'discardedOn'">
-                  {{discard.discardedOn}}
-              </td>
-              <td data-title="'Discard Reason'" header-class="text-left" sortable="'discardReason'">
-                  {{discard.discardReason}}
-              </td>
-          </tr>
-        </table>
+        <div ng-switch on="componentsView">
+          <div ng-switch-when="viewDonations"><div ng-include="'views/components/viewDonations.html'"></div></div>
+          <div ng-switch-when="viewComponents"><div ng-include="'views/components/viewComponents.html'"></div></div>
+          <div ng-switch-default><div ng-include="'views/components/viewDonations.html'"></div></div>
+        </div>
 
       </div>
     </div>
@@ -82,7 +64,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <p>
-          <em> No discards found. </em>
+          <em> No components found. </em>
         </p>
       </div>
     </div>
