@@ -42,8 +42,8 @@
               <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
                   {{component.createdOn}}
               </td>
-              <td data-title="'Expires On'" header-class="text-left" class="text-center" sortable="'expiryStatus'">
-                  {{component.expiryStatus}}
+              <td data-title="'Expiry Status'" header-class="text-left" class="text-center" sortable="'expiryStatus'">
+                  {{ component | expiryStatus }}
               </td>
               <td data-title="" header-class="text-left" class="text-left" >
                 <span 
