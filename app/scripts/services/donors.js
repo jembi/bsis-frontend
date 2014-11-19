@@ -26,7 +26,6 @@ angular.module('bsis')
 
       console.log("donor: ", donor);
       angular.copy(donor, addDonor);
-      addDonor.birthDate = addDonor.month + "/" + addDonor.dayOfMonth + "/" + addDonor.year;
       console.log("addDonor: ", addDonor);
 
       // save donor (POST /donor) and assign response donor object to 'donorObj'
