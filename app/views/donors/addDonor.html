@@ -1,6 +1,6 @@
 <h3 class="page-header">Add Donor</h3>
 
-<form class="form-horizontal col-sm-12" role="form" ng-submit="addDonor(donor)">
+<form class="form-horizontal col-sm-12" role="form" ng-submit="addDonor(donor, dob)">
 
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label">Name</label>
@@ -20,11 +20,11 @@
     <label for="name" class="col-sm-1 control-label">DOB</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <input size="2"  type="day" id="day" class="form-control input-sm" placeholder="Day" ng-model="donor.dayOfMonth">
-        <select class="form-control input-sm" ng-model="donor.month" ng-options="item.id as item.name for item in month">
+        <input size="2"  type="day" id="day" class="form-control input-sm" placeholder="Day" ng-model="dob.dayOfMonth">
+        <select class="form-control input-sm" ng-model="dob.month" ng-options="item.id as item.name for item in month">
             <option value="" ng-disabled="true">Month</option>
         </select>
-        <input size="4" type="year" id="year" class="form-control input-sm" placeholder="Year" ng-model="donor.year">
+        <input size="4" type="year" id="year" class="form-control input-sm" placeholder="Year" ng-model="dob.year">
       </div>
     </div>
   </div>

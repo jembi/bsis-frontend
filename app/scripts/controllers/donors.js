@@ -92,7 +92,9 @@ angular.module('bsis')
       $location.path("/addDonor");
     };
 
-    $scope.addDonor = function (newDonor){
+    $scope.addDonor = function (newDonor, dob){
+
+      newDonor.birthDate = dob.month + "/" + dob.dayOfMonth + "/" + dob.year;
 
       DonorService.addDonor(newDonor, function(response){
         if (response === true){
