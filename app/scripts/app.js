@@ -16,7 +16,8 @@ angular.module('bsis', [
       // DEFAULT VIEW - DISPLAY HOME PAGE IF USER AUTHENTICATED
       .when('/', {
         templateUrl : 'views/home.html',
-        controller  : 'HomeCtrl'
+        controller  : 'HomeCtrl',
+        permission: PERMISSIONS.AUTHENTICATED
       })
 
       // LOGIN PAGE
@@ -34,7 +35,8 @@ angular.module('bsis', [
       // HOME PAGE
       .when('/home', {
         templateUrl : 'views/home.html',
-        controller  : 'HomeCtrl'
+        controller  : 'HomeCtrl',
+        permission: PERMISSIONS.AUTHENTICATED
       })
 
       // DONORS URLs
