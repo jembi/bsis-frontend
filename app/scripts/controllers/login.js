@@ -9,6 +9,7 @@ angular.module('bsis')
 
     if ($location.path() === "/logout"){
       AuthService.logout();
+      $location.path( "/login" );
     }
 
     $scope.login = function (credentials) {
