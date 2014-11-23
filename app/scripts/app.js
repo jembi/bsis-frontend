@@ -12,8 +12,15 @@ angular.module('bsis', [
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
-      // LOGIN PAGE
+
+      // DEFAULT VIEW - DISPLAY HOME PAGE IF USER AUTHENTICATED
       .when('/', {
+        templateUrl : 'views/home.html',
+        controller  : 'HomeCtrl'
+      })
+
+      // LOGIN PAGE
+      .when('/login', {
         templateUrl : 'views/login.html',
         controller  : 'LoginCtrl'
       })
@@ -23,7 +30,7 @@ angular.module('bsis', [
         templateUrl : 'views/login.html',
         controller  : 'LoginCtrl'
       })
-      
+
       // HOME PAGE
       .when('/home', {
         templateUrl : 'views/home.html',
@@ -238,7 +245,7 @@ angular.module('bsis', [
         if( currentTime >= consoleSession.expires ){
           localStorage.removeItem('consoleSession');
           //session expired - user needs to log in
-          $location.path( "/" );
+          $location.path( "/login" );
 
         }else{
 
@@ -267,7 +274,7 @@ angular.module('bsis', [
 
       }else{
         // no session - user needs to log in
-        $location.path( "/" );
+        $location.path( "/login" );
       }
 
       /*
