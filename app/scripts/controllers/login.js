@@ -20,12 +20,12 @@ angular.module('bsis')
 
           //Create the session for the logged in user
           $scope.createUserSession(credentials);
+          $scope.credentials.username = null;
+          $scope.credentials.password = null;
         }
         else{
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
           $scope.loginInvalid = true;
-          $scope.credentials.username = null;
-          $scope.credentials.password = null;
         }
       });
       
