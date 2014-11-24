@@ -507,6 +507,13 @@ small {
   color: #fff;
 }
 
+// Hide number input spinners
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 /* css for xeditable fields */
 .xeditable {
   font-size: 0.9em;
