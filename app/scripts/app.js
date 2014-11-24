@@ -428,4 +428,26 @@ angular.module('bsis', [
     };
   })
 
+  
+  .directive('integer', function(REGEX) {
+    var INTEGER_REGEXP = REGEX.INTEGER;
+    return {
+      require: 'ngModel',
+      link: function(scope, elm, attrs, ctrl) {
+        ctrl.$validators.integer = function(modelValue, viewValue) {
+          if (ctrl.$isEmpty(modelValue)) {
+            // empty input is valid
+            return true;
+          }
+          if (INTEGER_REGEXP.test(viewValue)) {
+            // input valid
+            return true;
+          }
+          // input invalid
+          return false;
+        };
+      }
+    };
+  })
+
 ;
