@@ -48,6 +48,11 @@ angular.module('bsis')
     REMOVE: 'fa-times-circle'
   })
 
+  .constant('REGEX', {
+    INTEGER: /^\-?\d+$/,
+    NAME: /^[a-zA-Z \-\.]*$/
+  })
+
   .constant('BLOODGROUP', {
     options: ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
   })
