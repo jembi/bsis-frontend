@@ -491,18 +491,6 @@ dob {
   display: inline-block;
 }
 
-.dob input { 
-  width: 2em;
-  border: none; 
-  font-size: 100%; 
-  background: none;
-  color: #000;
-}
-
-.dob input#day { margin: 0 0 0 0.5em; }
-.dob input#year { width:3em; }
-.dob input:focus { outline:none; }
-
 label {
   margin-top: 8px;
 }
