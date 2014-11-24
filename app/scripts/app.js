@@ -450,4 +450,25 @@ angular.module('bsis', [
     };
   })
 
+  .directive('alphaName', function(REGEX) {
+    var ALPHA_REGEXP = REGEX.NAME;
+    return {
+      require: 'ngModel',
+      link: function(scope, elm, attrs, ctrl) {
+        ctrl.$validators.alphaName = function(modelValue, viewValue) {
+          if (ctrl.$isEmpty(modelValue)) {
+            // empty input is valid
+            return true;
+          }
+          if (ALPHA_REGEXP.test(viewValue)) {
+            // input valid
+            return true;
+          }
+            // input invalid
+          return false;
+        };
+      }
+    };
+  })
+
 ;
