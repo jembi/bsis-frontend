@@ -2,6 +2,10 @@
 
 <hr/>
 
+<p>
+ submitted: {{submitted}}
+</p>
+
 <h4>Open Donation Batches</h4>
 <div ng-switch="openDonationBatches" class="col-sm-12">
   <div ng-switch-when="true">
@@ -45,14 +49,23 @@
 </div>
 
 <h4>New Donation Batch</h4>
-<form class="form-horizontal col-sm-12" role="form" ng-submit="addDonationBatch(newDonationBatch)">
+<form name="addDonationBatchForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addDonationBatch(newDonationBatch, addDonationBatchForm)">
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label">Center</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="newDonationBatch.collectionCenter" ng-options="item.id as item.name for item in centers">
+        <select name="center" class="form-control input-sm" ng-model="newDonationBatch.collectionCenter" ng-options="item.id as item.name for item in centers" required 
+        ng-class="{'ng-invalid ng-dirty' : addDonationBatchForm.center.$invalid && submitted}">
             <option value="" ng-disabled="true"></option>
         </select>
+        <span>
+          <small class="error" 
+            ng-show="
+              (addDonationBatchForm.center.$invalid && (addDonationBatchForm.center.$dirty || submitted))
+            ">
+            Invalid input - required field
+          </small>
+        </span>
       </div>
     </div>
   </div>
@@ -60,9 +73,18 @@
     <label for="name" class="col-sm-1 control-label">Site</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <select class="form-control input-sm" ng-model="newDonationBatch.collectionSite" ng-options="item.id as item.name for item in sites">
+        <select name="site" class="form-control input-sm" ng-model="newDonationBatch.collectionSite" ng-options="item.id as item.name for item in sites" required 
+        ng-class="{'ng-invalid ng-dirty' : addDonationBatchForm.site.$invalid && submitted}" >
             <option value="" ng-disabled="true"></option>
         </select>
+        <span>
+          <small class="error" 
+            ng-show="
+              (addDonationBatchForm.site.$invalid && (addDonationBatchForm.site.$dirty || submitted))
+            ">
+            Invalid input - required field
+          </small>
+        </span>
       </div>
     </div>
   </div>
