@@ -50,6 +50,7 @@ angular.module('bsis')
 
   .constant('REGEX', {
     INTEGER: /^\-?\d+$/,
+    DECIMAL: /^\d+(\.\d{1,2})?$/,
     NAME: /^[a-zA-Z \-\.]*$/
   })
 
