@@ -741,32 +741,39 @@ angular.module('bsis')
 
     $scope.addDonationSuccess = '';
 
-    $scope.addDonation = function (donation){
+    $scope.addDonation = function (donation, valid){
 
-      $scope.addDonationSuccess = '';
+      if(valid){
+        $scope.addDonationSuccess = '';
 
-      // set donation center, site & date to those of the donation batch
-      donation.collectionCenter = $scope.donationBatch.collectionCenter;
-      donation.collectionSite = $scope.donationBatch.collectionSite;
-      donation.collectedOn = $scope.donationBatch.createdDate;
-      donation.collectionBatchNumber = $scope.donationBatch.batchNumber;
+        // set donation center, site & date to those of the donation batch
+        donation.collectionCenter = $scope.donationBatch.collectionCenter;
+        donation.collectionSite = $scope.donationBatch.collectionSite;
+        donation.collectedOn = $scope.donationBatch.createdDate;
+        donation.collectionBatchNumber = $scope.donationBatch.batchNumber;
 
-      DonorService.addDonationToBatch(donation, function(response){
-        if (response !== false){
+        DonorService.addDonationToBatch(donation, function(response){
+          if (response !== false){
 
-          $scope.addDonationSuccess = true;
-          $scope.donation = {};
-          $scope.donationBatchView = 'viewDonationBatch';
+            $scope.addDonationSuccess = true;
+            $scope.donation = {};
+            $scope.donationBatchView = 'viewDonationBatch';
 
-          $scope.donationBatch = response;
-          data = $scope.donationBatch.collectionsInBatch;
-          $scope.data = data;
-        }
-        else{
-          // TODO: handle case where response == false
-          $scope.addDonationSuccess = false;
-        }
-      });
+            $scope.donationBatch = response;
+            data = $scope.donationBatch.collectionsInBatch;
+            $scope.data = data;
+            $scope.submitted = '';
+          }
+          else{
+            // TODO: handle case where response == false
+            $scope.addDonationSuccess = false;
+          }
+        });
+      }
+      else {
+        $scope.submitted = true;
+        console.log("FORM NOT VALID");
+      }
     };
 
   })
