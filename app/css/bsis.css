@@ -194,8 +194,8 @@ body {
   background: linear-gradient(10deg, rgba(36,36,36,0.85), rgba(40,40,40,0.85)); /* Standard syntax */
 }
 
-.placeholder .glyphicon {
-  top: 6px;
+.icon-container {
+  padding: 5px 0 15px 0;
 }
 
 .placeholder .fa {
@@ -220,16 +220,12 @@ h1 h2 h3 h4 {
 .placeholder p {
   text-align: center;
   margin-top: 2px;
+  margin-bottom: 0px;
   font-size: 1.1rem;
-}
-
-.p-info {
-  #display: none;
 }
 
 #footer {
   color: #aaa;
-  #margin: 1rem 0 1rem 0;
   text-align: center;
   background-color: #eee;
 }
@@ -284,7 +280,6 @@ hr { display: block; height: 1px;
   padding: 10px 15px;
   text-align: -webkit-match-parent;
   font-size: 1.23rem;
-  color: #242424 !important;
   font-weight: bold;
   cursor: default;
 }
