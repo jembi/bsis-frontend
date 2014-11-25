@@ -450,6 +450,27 @@ angular.module('bsis', [
     };
   })
 
+  .directive('decimal', function(REGEX) {
+    var DECIMAL_REGEXP = REGEX.DECIMAL;
+    return {
+      require: 'ngModel',
+      link: function(scope, elm, attrs, ctrl) {
+        ctrl.$validators.decimal = function(modelValue, viewValue) {
+          if (ctrl.$isEmpty(modelValue)) {
+            // empty input is valid
+            return true;
+          }
+          if (DECIMAL_REGEXP.test(viewValue)) {
+            // input valid
+            return true;
+          }
+          // input invalid
+          return false;
+        };
+      }
+    };
+  })
+
   .directive('alphaName', function(REGEX) {
     var ALPHA_REGEXP = REGEX.NAME;
     return {
