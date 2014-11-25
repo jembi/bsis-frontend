@@ -92,31 +92,37 @@ angular.module('bsis')
       $location.path("/addDonor");
     };
 
-    $scope.addDonor = function (newDonor, dob){
+    $scope.addDonor = function (newDonor, dob, valid){
 
-      newDonor.birthDate = dob.month + "/" + dob.dayOfMonth + "/" + dob.year;
+      if (valid){
 
-      DonorService.addDonor(newDonor, function(response){
-        if (response === true){
+        newDonor.birthDate = dob.month + "/" + dob.dayOfMonth + "/" + dob.year;
 
-          $scope.dateOptions = {
-            'formatYear': 'yy',
-            'startingDay': 1,
-            'show-weeks': false
-          };
-          $scope.format = 'dd/MM/yyyy';
-          $scope.initDate = $scope.donor.birthDate;
-          $scope.calIcon = 'fa-calendar';
+        DonorService.addDonor(newDonor, function(response){
+          if (response === true){
 
-          $scope.donorBirthDateOpen = false;
+            $scope.dateOptions = {
+              'formatYear': 'yy',
+              'startingDay': 1,
+              'show-weeks': false
+            };
+            $scope.format = 'dd/MM/yyyy';
+            $scope.initDate = $scope.donor.birthDate;
+            $scope.calIcon = 'fa-calendar';
 
-          $location.path("/viewDonor");
-          
-        }
-        else{
-          // TODO: handle case where response == false
-        }
-      });
+            $scope.donorBirthDateOpen = false;
+            $scope.submitted = '';
+            $location.path("/viewDonor");
+          }
+          else{
+            // TODO: handle case where response == false
+          }
+        });
+      }
+      else{
+        $scope.submitted = true;
+        console.log("FORM NOT VALID");
+      }
     };
 
     $scope.updateDonor = function (donor){
