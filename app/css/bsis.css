@@ -198,6 +198,10 @@ body {
   padding: 5px 0 15px 0;
 }
 
+.icon-sidebar-container {
+  padding: 10px 0 5px 0;
+}
+
 .placeholder .fa {
   padding-top: 25px;
 }
