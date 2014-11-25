@@ -143,11 +143,27 @@ body {
   margin: 0em;
 }
 
-.placeholders a:hover { 
-  color:#b7b7b7;
+
+.menue{display:block;
+  width:100px;
+  height:100px;
+  border-radius:50px;
+  font-size:20px;
+  color:#fff;
+  line-height:100px;
+  text-align:center;
+  text-decoration:none;
+  background:#000;
+}
+.menue:hover{
+  color:#ccc;
+  text-decoration:none;
+  background:#333
 }
 
-.placeholder div {
+.placeholder a {
+  display:block;
+  text-decoration:none;
   text-align: center;
   border-radius: 50%;
   height: 11rem;
@@ -162,7 +178,11 @@ body {
 }
 
 .placeholder i {
-  vertical-align: middle; 
+  height: 11rem;
+  width: 11rem;
+  text-align: center;
+  font-size: 6rem;
+  border-radius: 50%;
   color: #f5f5f5;
 }
 
@@ -179,7 +199,7 @@ body {
 }
 
 .placeholder .fa {
-  margin-top: 20px;
+  padding-top: 25px;
 }
 
 body {
