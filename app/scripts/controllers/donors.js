@@ -15,6 +15,10 @@ angular.module('bsis')
     };
     $scope.searchResults = '';
 
+    var currentTime = new Date();
+    $scope.currentYear = currentTime.getFullYear();
+    $scope.minYear = $scope.currentYear - 100;
+
     $scope.findDonor = function () {   
       DonorService.findDonor($scope.donorSearch, function(response){
       if (response !== false){
