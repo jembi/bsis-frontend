@@ -507,7 +507,18 @@ small {
   color: #fff;
 }
 
-// Hide number input spinners
+/* Form Validation inputs and error messages  */
+.form-group input.ng-invalid.ng-dirty {
+  border: 1px solid #B52E31;
+}
+.form-group select.ng-invalid.ng-dirty {
+  border: 1px solid #B52E31;
+}
+.error {
+  color: #B52E31;
+}
+
+/* Hide number input spinners */
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
