@@ -603,17 +603,26 @@ angular.module('bsis')
       $timeout(function(){ $scope.donationBatchTableParams.reload(); });
     });
 
-    $scope.addDonationBatch = function (donationBatch){
+    $scope.addDonationBatch = function (donationBatch, donationBatchForm){
+      if(donationBatchForm.$valid){
 
-      DonorService.addDonationBatch(donationBatch, function(response){
-        if (response === true){
-          $scope.newDonationBatch = {};
-          $scope.getOpenDonationBatches();
-        }
-        else{
-          // TODO: handle case where response == false
-        }
-      });
+        DonorService.addDonationBatch(donationBatch, function(response){
+          if (response === true){
+            $scope.newDonationBatch = {};
+            $scope.getOpenDonationBatches();
+            // set form back to pristine state
+            donationBatchForm.$setPristine();
+            $scope.submitted = '';
+          }
+          else{
+            // TODO: handle case where response == false
+          }
+        });
+      }
+      else{
+        $scope.submitted = true;
+        console.log("FORM NOT VALID");
+      }
     };
 
     $scope.manageClinic = function (item){
