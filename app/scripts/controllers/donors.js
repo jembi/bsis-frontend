@@ -73,6 +73,11 @@ angular.module('bsis')
       $scope.donorList = {};
     };
 
+    $scope.clearForm = function(form){
+      form.$setPristine();
+      $scope.submitted = '';
+    };
+
     $scope.viewDonor = function (item) {
       $scope.donor = item;
       DonorService.setDonor(item);
