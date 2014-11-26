@@ -2,10 +2,6 @@
 
 <hr/>
 
-<p>
- submitted: {{submitted}}
-</p>
-
 <h4>Open Donation Batches</h4>
 <div ng-switch="openDonationBatches" class="col-sm-12">
   <div ng-switch-when="true">
@@ -58,14 +54,14 @@
         ng-class="{'ng-invalid ng-dirty' : addDonationBatchForm.center.$invalid && submitted}">
             <option value="" ng-disabled="true"></option>
         </select>
-        <span>
+        <div>
           <small class="error" 
             ng-show="
               (addDonationBatchForm.center.$invalid && (addDonationBatchForm.center.$dirty || submitted))
             ">
-            Invalid input - required field
+            This cannot be empty
           </small>
-        </span>
+        </div>
       </div>
     </div>
   </div>
@@ -77,14 +73,14 @@
         ng-class="{'ng-invalid ng-dirty' : addDonationBatchForm.site.$invalid && submitted}" >
             <option value="" ng-disabled="true"></option>
         </select>
-        <span>
+        <div>
           <small class="error" 
             ng-show="
               (addDonationBatchForm.site.$invalid && (addDonationBatchForm.site.$dirty || submitted))
             ">
-            Invalid input - required field
+            This cannot be empty
           </small>
-        </span>
+        </div>
       </div>
     </div>
   </div>
