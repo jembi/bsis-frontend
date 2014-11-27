@@ -241,12 +241,6 @@ angular.module('bsis')
         }
       });
 
-      $scope.$watch("deferralsData", function () {
-        if ($scope.deferralTableParams.data.length > 0) {
-          $scope.deferralTableParams.reload();
-        }
-      }); 
-
       $scope.deferralTableParams = new ngTableParams({
         page: 1,            // show first page
         count: 6,          // count per page
@@ -268,7 +262,7 @@ angular.module('bsis')
         }
       });
 
-      $scope.$watch("data", function () {
+      $scope.$watch("deferralsData", function () {
         $timeout(function(){ $scope.deferralTableParams.reload(); });
       });
 
