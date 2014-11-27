@@ -575,5 +575,11 @@ input[type=number]::-webkit-outer-spin-button {
 }
 /* --> css for x-editable fields */
 
+div .alert {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
 /* --> general css */
 
