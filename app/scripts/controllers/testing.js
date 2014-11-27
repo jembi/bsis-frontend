@@ -52,6 +52,11 @@ angular.module('bsis')
       $scope.file = {};
     };
 
+    $scope.clearForm = function(form){
+      form.$setPristine();
+      $scope.submitted = '';
+    };
+
     $scope.setFile = function(element) {
       $scope.$apply(function($scope) {
         $scope.file = element.files[0];
