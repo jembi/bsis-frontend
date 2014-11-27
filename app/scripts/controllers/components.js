@@ -250,9 +250,9 @@ angular.module('bsis')
       $timeout(function(){ $scope.discardsSummaryTableParams.reload(); });
     });
 
-    $scope.recordComponents = function (valid) {
+    $scope.recordComponents = function (recordComponentsForm) {
 
-      if(valid && $scope.selectedComponents.length > 0){
+      if(recordComponentsForm.$valid && $scope.selectedComponents.length > 0){
 
         $scope.recordComponent = {};
 
@@ -269,8 +269,10 @@ angular.module('bsis')
             $scope.data = data;
             $scope.recordComponent = {};
             console.log("$scope.data: ", $scope.data);
+            recordComponentsForm.$setPristine();
             $scope.submitted = '';
             $scope.componentSelected = '';
+            $scope.selectedComponents = [];
           }
           else{
             // TODO: handle case where response == false
@@ -285,7 +287,6 @@ angular.module('bsis')
         else {
           $scope.componentSelected = false;
         }
-        
         console.log("FORM NOT VALID");
       }
 

@@ -24,7 +24,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
       <div ng-if="componentSelected === false" ng-hide="componentSelected !== false" style="padding-top:10px;">
-        <alert type="danger" >Select a component to be processed</alert>
+        <alert type="danger" >Select a component to process</alert>
       </div>
 
         <table ng-table="componentsTableParams" show-filter="false" class="table">
@@ -53,14 +53,14 @@
                   style="font-size: 0.9em;" 
                   ng-if="component.status != 'DISCARDED' && component.status != 'ISSUED' && component.status != 'USED' && component.status != 'SPLIT' && component.status != 'PROCESSED'" 
                 >
-                  <input type="checkbox" id="{{component.id}}" value="{{component.id}}" ng-checked="selectedComponents.indexOf(component.id) > -1" ng-click="toggleSelection(component.id)">
+                  <input type="checkbox" id="{{component.id}}" value="{{component.id}}" ng-checked="selectedComponents.indexOf(component.id) > -1" ng-click="toggleMutualSelection(component.id)">
                   <em><label style="margin:0px; cursor: pointer; cursor: hand;" for="{{component.id}}"> Select </label></em>
                 </span>
             </td>
           </tr>
         </table>
 
-        <form name="recordComponentsForm" novalidate class="form-horizontal col-sm-12"  role="form" ng-submit="recordComponents(recordComponentsForm.$valid)">
+        <form name="recordComponentsForm" novalidate class="form-horizontal col-sm-12"  role="form" ng-submit="recordComponents(recordComponentsForm)">
           <div class="form-group">
             <label for="name" class="col-sm-2 control-label" >Process Component</label>
             <div class="row col-sm-10">
