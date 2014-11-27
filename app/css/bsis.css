@@ -118,7 +118,8 @@ body {
   background: -webkit-linear-gradient(30deg, #202020, #303030); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(30deg, #202020, #303030); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(30deg, #202020, #303030); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(30deg, #202020, #303030); /* Standard syntax */
+  /* background: linear-gradient(30deg, #202020, #303030); /* Standard syntax */
+  background: linear-gradient(30deg, #202020, #332525);
   font-size: 1.7rem;
   font-style: normal;
 }
@@ -174,7 +175,8 @@ body {
   background: -webkit-linear-gradient(30deg, #202020, #353535); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(30deg, #202020, #353535); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(30deg, #202020, #353535); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(30deg, #202020, #353535); /* Standard syntax */
+  /* background: linear-gradient(30deg, #202020, #353535); /* Standard syntax */
+  background: linear-gradient(30deg, #202020, #332525); /* Standard syntax */
 }
 
 .placeholder i {
@@ -191,7 +193,8 @@ body {
   background: -webkit-linear-gradient(10deg, rgba(36,36,36,0.85), rgba(40,40,40,0.85)); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(10deg, rgba(36,36,36,0.85), rgba(40,40,40,0.85)); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(10deg, rgba(36,36,36,0.85), rgba(40,40,40,0.85)); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(10deg, rgba(36,36,36,0.85), rgba(40,40,40,0.85)); /* Standard syntax */
+  /* background: linear-gradient(10deg, rgba(36,36,36,0.85), rgba(40,40,40,0.85)); /* Standard syntax */
+  background: linear-gradient(10deg, rgba(40,30,30,0.85), rgba(40,40,40,0.85)); /* Standard syntax */
 }
 
 .icon-container {
