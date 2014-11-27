@@ -23,10 +23,7 @@ angular.module('bsis')
     addDonor: function (donor, response){
       // create $Resource object and assign donor values
       var addDonor = new Api.Donor();
-
-      console.log("donor: ", donor);
       angular.copy(donor, addDonor);
-      console.log("addDonor: ", addDonor);
 
       // save donor (POST /donor) and assign response donor object to 'donorObj'
       addDonor.$save(function(data){ 
@@ -40,19 +37,13 @@ angular.module('bsis')
 
       var updateDonor = Api.Donor.get({id:donor.id}, function() {
         updateDonor = updateDonor.donor;
-
-        console.log("updateDonor.birthDate: ",updateDonor.birthDate);
-
         var birthDate = updateDonor.birthDate;
 
         angular.copy(donor, updateDonor);
-        console.log("updateDonor: ", updateDonor);
         updateDonor.birthDate = birthDate;
-        console.log("updateDonor: ", updateDonor);
 
         Api.Donor.update({id:donor.id}, updateDonor, function(data) {
          donorObj = data.donor;
-         console.log("updateDonor response: ", donorObj);
          response(donorObj);
         }, function (){
           response(false);
@@ -121,10 +112,7 @@ angular.module('bsis')
       // create $Resource object and assign donation values
       var addDonation = new Api.Donations();
 
-      console.log("donation: ", donation);
       angular.copy(donation, addDonation);
-
-      console.log("addDonation: ", addDonation);
 
       // save donation (POST /donations)
       addDonation.$save(function(data){ 
@@ -141,15 +129,11 @@ angular.module('bsis')
       // create $Resource object and assign donation values
       var addDonation = new Api.Donations();
 
-      console.log("donation: ", donation);
       angular.copy(donation, addDonation);
-
-      console.log("addDonation: ", addDonation);
 
       // save donation (POST /donations)
       addDonation.$save(function(data){ 
         response(true);
-        console.log("addDonation response: ",data.donation);
       }, function (){
         response(false);
       }); 
@@ -164,14 +148,11 @@ angular.module('bsis')
     addDeferral: function (deferral, response){
       // create $Resource object and assign donation values
       var addDeferral = new Api.Deferrals();
-
       
       angular.copy(deferral, addDeferral);
 
       addDeferral.deferredOn = $filter('date')(deferral.deferredOn,'MM/dd/yyyy');
       addDeferral.deferredUntil = $filter('date')(deferral.deferredUntil,'MM/dd/yyyy');
-
-      console.log("addDeferral: ", addDeferral);
 
       // save deferral (POST /deferral)
       addDeferral.$save(function(data){ 
@@ -221,7 +202,6 @@ angular.module('bsis')
     getOpenDonationBatches: function (response) {
       Api.FindDonationBatches.query({isClosed:false}, function (donationBatches) {
         response(donationBatches);
-        console.log("donationBatches: ", donationBatches);
       }, function (){
         response(false);
       });
@@ -235,7 +215,6 @@ angular.module('bsis')
       // save deferral (POST /deferral)
       addDonationBatch.$save(function(data){ 
         response(true);
-        console.log("addDonationBatch response: ",data);
       }, function (){
         response(false);
       }); 
