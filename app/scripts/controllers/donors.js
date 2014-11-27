@@ -726,6 +726,19 @@ angular.module('bsis')
 
     };
 
+    $scope.closeDonationBatch = function (donationBatch){
+      console.log("CLOSE DONATION BATCH");
+      DonorService.closeDonationBatch(donationBatch, function(response){
+        if (response !== false){
+          $location.path("/manageDonationBatches");
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
+      
+    };
+
     $scope.viewDonationSummary = function (din) {
       $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
       $scope.donationBatchView = 'viewDonationSummary';
