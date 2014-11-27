@@ -63,10 +63,19 @@ angular.module('bsis')
       $scope.discardsSearch = {};
       $scope.searchResults = '';
       $scope.selectedComponentTypes = {};
+      $scope.componentSelected = '';
+    };
+
+    $scope.clearForm = function(form){
+      form.$setPristine();
+      $scope.submitted = '';
     };
 
     $scope.clearProcessComponentForm = function () {
       $scope.component = {};
+      $scope.componentSelected = '';
+      $scope.submitted = '';
+      $scope.selectedComponents = [];
     };
 
     $scope.clearDiscardComponentForm = function () {
