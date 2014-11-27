@@ -25,7 +25,7 @@
       <em><a href="" ng-click="updateDonationBatch()" ng-disabled="editableForm.$waiting">Save</a></em> | 
       <em><a href="" ng-click="editableForm.$cancel()" ng-disabled="editableForm.$waiting">Cancel</a></em>
     </span>  
-    <em><a ng-show="!editableForm.$visible" href="">Close Batch</a></em></small>
+    <em><a ng-show="!editableForm.$visible" ng-click="closeDonationBatch(donationBatch)" href="">Close Batch</a></em></small>
     </span>
   </div>
 </form>

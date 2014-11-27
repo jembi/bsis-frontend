@@ -12,7 +12,7 @@
   <div class="form-group"> 
     <div class="col-sm-offset-1 col-sm-3">
       <button class="btn btn-primary" type="submit">Search</button>
-      <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+      <button class="btn btn-primary" type="button" ng-click="clearDiscardComponentForm(); clear()">Clear</button>
     </div>
   </div>
 </form>
@@ -23,6 +23,9 @@
   <div ng-switch-when="true">
     <div class="panel panel-default">
       <div class="panel-body">
+      <div ng-if="componentSelected === false" ng-hide="componentSelected !== false" style="padding-top:10px;">
+        <alert type="danger" >Select one or more components to discard</alert>
+      </div>
 
         <table ng-table="componentsTableParams" show-filter="false" class="table">
           <tr ng-repeat="component in $data"
@@ -56,22 +59,30 @@
               </td>
           </tr>
         </table>
-        <form class="form-horizontal col-sm-12"  role="form" ng-submit="discardComponents()">
+        <form name="discardComponentsForm" novalidate class="form-horizontal col-sm-12"  role="form" ng-submit="discardComponents(discardComponentsForm)">
           <div class="form-group">
             <label for="name" class="col-sm-2 control-label" >Discard Reason</label>
             <div class="row col-sm-10">
               <div class="form-inline" style="padding-left:5px;">
-                <select class="form-control input-sm" ng-model="discard.discardReason" ng-options="item.id as item.statusChangeReason for item in discardReasons">
+                <select name="discardReason" class="form-control input-sm" ng-model="discard.discardReason" ng-options="item.id as item.statusChangeReason for item in discardReasons" required ng-class="{'ng-invalid ng-dirty' : discardComponentsForm.discardReason.$invalid && submitted}">
                     <option value="" ng-disabled="true">Select:</option>
                 </select>
                 <input size="35" class="form-control input-sm" placeholder="" ng-model="discard.discardReasonText">
+                <div>
+                  <small class="error" 
+                    ng-show="
+                      (discardComponentsForm.discardReason.$invalid && (discardComponentsForm.discardReason.$dirty || submitted))
+                    ">
+                    This cannot be empty
+                  </small>
+                </div>
               </div>
             </div>
           </div>
           <div class="form-group"> 
             <div class="col-sm-offset-2 col-sm-3">
               <button class="btn btn-primary" type="submit">Discard Components</button>
-              <button class="btn btn-primary" type="button" ng-click="clearDiscardComponentForm()">Clear</button>
+              <button class="btn btn-primary" type="button" ng-click="clearForm(discardComponentsForm); clearDiscardComponentForm()">Clear</button>
             </div>
           </div>
         </form>

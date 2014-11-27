@@ -1,8 +1,8 @@
 <div class="container">
         <form class="form-signin" name="loginForm" ng-submit="login(credentials)" novalidate>
           <img class="main" src="images/bsis_logo.png">
-          <input type="username" id="username" class="form-control input-md" placeholder="Username" required="" autofocus="true" ng-model="credentials.username">
-          <input type="password" id="password" class="form-control" placeholder="Password" required="" ng-model="credentials.password">
+          <input type="username" id="username" class="form-control input-md" placeholder="Username" required="" autofocus="true" ng-model="credentials.username" select-on-focus>
+          <input type="password" id="password" class="form-control" placeholder="Password" required="" ng-model="credentials.password" select-on-focus>
           <button class="btn  btn-primary btn-block" type="submit" > Log in </button>
           <div ng-if="loginInvalid" style="padding-top:10px;"><alert type="danger">Invalid Username / Password.</alert></div>
         </form>

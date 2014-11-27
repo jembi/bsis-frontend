@@ -55,12 +55,13 @@ angular.module('bsis')
 
   // set menu on initial load
   // if on donors page, set menu to DONORS
-  if(~$location.path().indexOf('donors')        ||
-    ~$location.path().indexOf('findDonor')      ||
-    ~$location.path().indexOf('addDonor')       ||
-    ~$location.path().indexOf('viewDonor')      ||
-    ~$location.path().indexOf('addDonation')    ||
-    ~$location.path().indexOf('manageClinic')   ||
+  if(~$location.path().indexOf('donors')                  ||
+    ~$location.path().indexOf('findDonor')                ||
+    ~$location.path().indexOf('addDonor')                 ||
+    ~$location.path().indexOf('viewDonor')                ||
+    ~$location.path().indexOf('addDonation')              ||
+    ~$location.path().indexOf('manageDonationBatches')    ||
+    ~$location.path().indexOf('manageClinic')             ||
     ~$location.path().indexOf('exportDonorList')
     ){
       $scope.currentSection = 'DONORS';
@@ -133,16 +134,18 @@ angular.module('bsis')
   $scope.$on('$locationChangeStart', function(event){
 
     // if on donors page, set menu to DONORS
-    if(~$location.path().indexOf('donors')          ||
-      ~$location.path().indexOf('findDonor')        ||
-      ~$location.path().indexOf('addDonor')         ||
-      ~$location.path().indexOf('viewDonor')        ||
-      ~$location.path().indexOf('addDonation')      ||
-      ~$location.path().indexOf('manageClinic')     ||
+    if(~$location.path().indexOf('donors')                  ||
+      ~$location.path().indexOf('findDonor')                ||
+      ~$location.path().indexOf('addDonor')                 ||
+      ~$location.path().indexOf('viewDonor')                ||
+      ~$location.path().indexOf('addDonation')              ||
+      ~$location.path().indexOf('manageDonationBatches')    ||
+      ~$location.path().indexOf('manageClinic')             ||
       ~$location.path().indexOf('exportDonorList')
-    ){
-      $scope.currentSection = 'DONORS';
-    }
+      ){
+        $scope.currentSection = 'DONORS';
+        
+      }
     
     // else if on components page, set menu to COMPONENTS
     else if(~$location.path().indexOf('components')   ||

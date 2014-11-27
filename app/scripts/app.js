@@ -12,8 +12,16 @@ angular.module('bsis', [
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
-      // LOGIN PAGE
+
+      // DEFAULT VIEW - DISPLAY HOME PAGE IF USER AUTHENTICATED
       .when('/', {
+        templateUrl : 'views/home.html',
+        controller  : 'HomeCtrl',
+        permission: PERMISSIONS.AUTHENTICATED
+      })
+
+      // LOGIN PAGE
+      .when('/login', {
         templateUrl : 'views/login.html',
         controller  : 'LoginCtrl'
       })
@@ -23,11 +31,12 @@ angular.module('bsis', [
         templateUrl : 'views/login.html',
         controller  : 'LoginCtrl'
       })
-      
+
       // HOME PAGE
       .when('/home', {
         templateUrl : 'views/home.html',
-        controller  : 'HomeCtrl'
+        controller  : 'HomeCtrl',
+        permission: PERMISSIONS.AUTHENTICATED
       })
 
       // DONORS URLs
@@ -238,7 +247,7 @@ angular.module('bsis', [
         if( currentTime >= consoleSession.expires ){
           localStorage.removeItem('consoleSession');
           //session expired - user needs to log in
-          $location.path( "/" );
+          $location.path( "/login" );
 
         }else{
 
@@ -267,7 +276,7 @@ angular.module('bsis', [
 
       }else{
         // no session - user needs to log in
-        $location.path( "/" );
+        $location.path( "/login" );
       }
 
       /*
@@ -405,6 +414,81 @@ angular.module('bsis', [
             $scope.age = age;
           }
         }
+    };
+  })
+
+  .directive('selectOnFocus', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            element.on('click', function () {
+                this.select();
+            });
+        }
+    };
+  })
+
+  
+  .directive('integer', function(REGEX) {
+    var INTEGER_REGEXP = REGEX.INTEGER;
+    return {
+      require: 'ngModel',
+      link: function(scope, elm, attrs, ctrl) {
+        ctrl.$validators.integer = function(modelValue, viewValue) {
+          if (ctrl.$isEmpty(modelValue)) {
+            // empty input is valid
+            return true;
+          }
+          if (INTEGER_REGEXP.test(viewValue)) {
+            // input valid
+            return true;
+          }
+          // input invalid
+          return false;
+        };
+      }
+    };
+  })
+
+  .directive('decimal', function(REGEX) {
+    var DECIMAL_REGEXP = REGEX.DECIMAL;
+    return {
+      require: 'ngModel',
+      link: function(scope, elm, attrs, ctrl) {
+        ctrl.$validators.decimal = function(modelValue, viewValue) {
+          if (ctrl.$isEmpty(modelValue)) {
+            // empty input is valid
+            return true;
+          }
+          if (DECIMAL_REGEXP.test(viewValue)) {
+            // input valid
+            return true;
+          }
+          // input invalid
+          return false;
+        };
+      }
+    };
+  })
+
+  .directive('alphaName', function(REGEX) {
+    var ALPHA_REGEXP = REGEX.NAME;
+    return {
+      require: 'ngModel',
+      link: function(scope, elm, attrs, ctrl) {
+        ctrl.$validators.alphaName = function(modelValue, viewValue) {
+          if (ctrl.$isEmpty(modelValue)) {
+            // empty input is valid
+            return true;
+          }
+          if (ALPHA_REGEXP.test(viewValue)) {
+            // input valid
+            return true;
+          }
+            // input invalid
+          return false;
+        };
+      }
     };
   })
 
