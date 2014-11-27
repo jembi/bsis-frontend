@@ -80,6 +80,9 @@ angular.module('bsis')
 
     $scope.clearDiscardComponentForm = function () {
       $scope.discard = {};
+      $scope.componentSelected = '';
+      $scope.submitted = '';
+      $scope.selectedComponents = [];
     };
 
     $scope.getComponentsByDIN = function () {   
@@ -288,27 +291,44 @@ angular.module('bsis')
 
     };
 
-    $scope.discardComponents = function () {
+    $scope.discardComponents = function (discardComponentsForm) {
 
-      $scope.discard.selectedComponents = $scope.selectedComponents;
+      if (discardComponentsForm.$valid && $scope.selectedComponents.length > 0){
 
-      angular.forEach($scope.discard.selectedComponents, function(component) {
-        $scope.componentToDiscard = {};
-        $scope.componentToDiscard.componentId = component;
-        $scope.componentToDiscard.discardReason = $scope.discard.discardReason;
-        $scope.componentToDiscard.discardReasonText = $scope.discard.discardReasonText;
+        $scope.discard.selectedComponents = $scope.selectedComponents;
 
-        ComponentService.discardComponent($scope.componentToDiscard, function(response){
-          if (response !== false){
-            data = response.components;
-            $scope.data = data;
-            $scope.discard = {};
-          }
-          else{
-            // TODO: handle case where response == false
-          }
+        angular.forEach($scope.discard.selectedComponents, function(component) {
+          $scope.componentToDiscard = {};
+          $scope.componentToDiscard.componentId = component;
+          $scope.componentToDiscard.discardReason = $scope.discard.discardReason;
+          $scope.componentToDiscard.discardReasonText = $scope.discard.discardReasonText;
+
+          ComponentService.discardComponent($scope.componentToDiscard, function(response){
+            if (response !== false){
+              data = response.components;
+              $scope.data = data;
+              $scope.discard = {};
+              discardComponentsForm.$setPristine();
+              $scope.submitted = '';
+              $scope.componentSelected = '';
+              $scope.selectedComponents = [];
+            }
+            else{
+              // TODO: handle case where response == false
+            }
+          });
         });
-      });
+      }
+      else{
+        $scope.submitted = true;
+        if($scope.selectedComponents.length > 0){
+          $scope.componentSelected = true;
+        }
+        else {
+          $scope.componentSelected = false;
+        }
+        console.log("FORM NOT VALID");
+      }
 
     };
 
