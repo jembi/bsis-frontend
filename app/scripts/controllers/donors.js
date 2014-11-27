@@ -363,20 +363,30 @@ angular.module('bsis')
       $scope.donationsView = 'viewDonationDetails';
     };
 
-    $scope.addDeferral = function (deferral){
+    $scope.addDeferral = function (deferral, addDeferralForm){
 
-      deferral.deferredDonor = $scope.donor.id;
+      if (addDeferralForm.$valid){
+        deferral.deferredDonor = $scope.donor.id;
 
-      DonorService.addDeferral(deferral, function(response){
-        if (response === true){
-          $scope.deferral = {};
-          $scope.getDeferrals($scope.donor.id);
-          $scope.getDonorOverview();
-        }
-        else{
-          // TODO: handle case where response == false
-        }
-      });
+        DonorService.addDeferral(deferral, function(response){
+          if (response === true){
+            $scope.deferral = {};
+            $scope.getDeferrals($scope.donor.id);
+            $scope.getDonorOverview();
+            $scope.submitted = '';
+            $scope.deferral = {};
+            // set form back to pristine state
+            addDeferralForm.$setPristine();
+          }
+          else{
+            // TODO: handle case where response == false
+          }
+        });
+      }
+      else{
+        $scope.submitted = true;
+        console.log("FORM NOT VALID");
+      }
     };
 
   })
