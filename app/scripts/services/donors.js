@@ -240,5 +240,21 @@ angular.module('bsis')
         response(false);
       }); 
     },
+    closeDonationBatch: function (donationBatch, response){
+      var updateDonationBatch = Api.DonationBatches.get({id:donationBatch.id}, function() {
+        updateDonationBatch = updateDonationBatch.collectionBatch;
+
+        updateDonationBatch.isClosed = true;
+        updateDonationBatch.collectionCenter = updateDonationBatch.collectionCenter.id;
+        updateDonationBatch.collectionSite = updateDonationBatch.collectionSite.id;
+
+        Api.DonationBatches.update({id:donationBatch.id}, updateDonationBatch, function(data) {
+         response(data.collectionBatch);
+        }, function (){
+          response(false);
+        }); 
+
+      });
+    }
   };
 });
