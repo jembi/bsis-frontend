@@ -296,6 +296,9 @@ angular.module('bsis')
       }
       // is newly selected
       else {
+        // set selectedComponents to an empty array
+        // - this is for mutual selection (radio button behaviour, rather than multiple checkbox selection)
+        $scope.selectedComponents = [];
         $scope.selectedComponents.push(componentId);
       }
     };
