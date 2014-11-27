@@ -52,6 +52,11 @@ angular.module('bsis')
       $scope.file = {};
     };
 
+    $scope.clearForm = function(form){
+      form.$setPristine();
+      $scope.submitted = '';
+    };
+
     $scope.setFile = function(element) {
       $scope.$apply(function($scope) {
         $scope.file = element.files[0];
@@ -99,18 +104,25 @@ angular.module('bsis')
     $scope.getOpenTestBatches();
     $scope.getTestBatchFormFields();
 
-    $scope.addTestBatch = function (donationBatches){
+    $scope.addTestBatch = function (donationBatches, valid){
+      if (valid){
 
-      TestingService.addTestBatch(donationBatches, function(response){
-        if (response === true){
-          $scope.selectedDonationBatches = {};
-          $scope.getOpenTestBatches();
-          $scope.getTestBatchFormFields();
-        }
-        else{
-          // TODO: handle case where response == false
-        }
-      });
+        TestingService.addTestBatch(donationBatches, function(response){
+          if (response === true){
+            $scope.selectedDonationBatches = {};
+            $scope.getOpenTestBatches();
+            $scope.getTestBatchFormFields();
+            $scope.submitted = '';
+          }
+          else{
+            // TODO: handle case where response == false
+          }
+        });
+      }
+      else{
+        $scope.submitted = true;
+        console.log("FORM NOT VALID");
+      }
     };
 
     $scope.testBatchTableParams = new ngTableParams({

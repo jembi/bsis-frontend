@@ -4,6 +4,9 @@ angular.module('bsis')
 
 .constant('PERMISSIONS', {
 
+  // Authenticated Permission
+  AUTHENTICATED: 'Authenticated',
+
   // Donor Permissions
   ADD_DONOR: 'Add Donor',
   VIEW_DONOR: 'View Donor',
