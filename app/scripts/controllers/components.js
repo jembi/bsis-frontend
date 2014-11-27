@@ -247,28 +247,44 @@ angular.module('bsis')
       $timeout(function(){ $scope.discardsSummaryTableParams.reload(); });
     });
 
-    $scope.recordComponents = function () {
+    $scope.recordComponents = function (valid) {
 
-      $scope.recordComponent = {};
+      if(valid && $scope.selectedComponents.length > 0){
 
-      $scope.recordComponent.parentComponentId = $scope.selectedComponents[0];
-      $scope.recordComponent.childComponentTypeId = $scope.component.childComponentTypeId;
-      $scope.recordComponent.numUnits = $scope.component.numUnits;
+        $scope.recordComponent = {};
 
-      $scope.component = {};
-      $scope.selectedComponents = [];
+        $scope.recordComponent.parentComponentId = $scope.selectedComponents[0];
+        $scope.recordComponent.childComponentTypeId = $scope.component.childComponentTypeId;
+        $scope.recordComponent.numUnits = $scope.component.numUnits;
 
-      ComponentService.recordComponents($scope.recordComponent, function(response){
-        if (response !== false){
-          data = response.components;
-          $scope.data = data;
-          $scope.recordComponent = {};
-          console.log("$scope.data: ", $scope.data);
+        $scope.component = {};
+        $scope.selectedComponents = [];
+
+        ComponentService.recordComponents($scope.recordComponent, function(response){
+          if (response !== false){
+            data = response.components;
+            $scope.data = data;
+            $scope.recordComponent = {};
+            console.log("$scope.data: ", $scope.data);
+            $scope.submitted = '';
+            $scope.componentSelected = '';
+          }
+          else{
+            // TODO: handle case where response == false
+          }
+        });
+      }
+      else{
+        $scope.submitted = true;
+        if($scope.selectedComponents.length > 0){
+          $scope.componentSelected = true;
         }
-        else{
-          // TODO: handle case where response == false
+        else {
+          $scope.componentSelected = false;
         }
-      });
+        
+        console.log("FORM NOT VALID");
+      }
 
     };
 
