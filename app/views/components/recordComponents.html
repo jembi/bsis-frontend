@@ -12,7 +12,7 @@
   <div class="form-group"> 
     <div class="col-sm-offset-1 col-sm-3">
       <button class="btn btn-primary" type="submit">Search</button>
-      <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+      <button class="btn btn-primary" type="button" ng-click="clearProcessComponentForm(); clear()">Clear</button>
     </div>
   </div>
 </form>
@@ -23,6 +23,9 @@
   <div ng-switch-when="true">
     <div class="panel panel-default">
       <div class="panel-body">
+      <div ng-if="componentSelected === false" ng-hide="componentSelected !== false" style="padding-top:10px;">
+        <alert type="danger" >Select a component to be processed</alert>
+      </div>
 
         <table ng-table="componentsTableParams" show-filter="false" class="table">
           <tr ng-repeat="component in $data"
@@ -57,14 +60,23 @@
           </tr>
         </table>
 
-        <form class="form-horizontal col-sm-12"  role="form" ng-submit="recordComponents(component)">
+        <form name="recordComponentsForm" novalidate class="form-horizontal col-sm-12"  role="form" ng-submit="recordComponents(recordComponentsForm.$valid)">
           <div class="form-group">
             <label for="name" class="col-sm-2 control-label" >Process Component</label>
             <div class="row col-sm-10">
               <div class="form-inline" style="padding-left:5px;">
-                <select class="form-control input-sm" ng-model="component.childComponentTypeId" ng-options="item.id as item.productTypeName for item in componentTypes">
+                <select name="componentType" class="form-control input-sm" ng-model="component.childComponentTypeId" ng-options="item.id as item.productTypeName for item in componentTypes"
+                required ng-class="{'ng-invalid ng-dirty' : recordComponentsForm.componentType.$invalid && submitted}">
                   <option value="" ng-disabled="true">Select:</option>
                 </select>
+                <div>
+                  <small class="error" 
+                    ng-show="
+                      (recordComponentsForm.componentType.$invalid && (recordComponentsForm.componentType.$dirty || submitted))
+                    ">
+                    This cannot be empty
+                  </small>
+                </div>
               </div>
             </div>
           </div>
@@ -83,7 +95,10 @@
           <div class="form-group"> 
             <div class="col-sm-offset-2 col-sm-3">
               <button class="btn btn-primary" type="submit">Process Component</button>
-              <button class="btn btn-primary" type="button" ng-click="clearProcessComponentForm()">Clear</button>
+              <button class="btn btn-primary" type="button" 
+                ng-click="clearForm(recordComponentsForm); 
+                clearProcessComponentForm()"
+              >Clear</button>
             </div>
           </div>
         </form>
