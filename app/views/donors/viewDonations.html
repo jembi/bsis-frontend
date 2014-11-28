@@ -22,8 +22,8 @@
           <td data-title="'Date'" style="width:18%;" header-class="text-left" class="text-center" sortable="'collectedOn'"  filter="{ 'collectedOn': 'text' }">
               {{donation.collectedOn}}
           </td>
-          <td data-title="'Venue'" style="width:17%;" header-class="text-left" sortable="'collectionSite'" filter="{ 'collectionSite': 'text' }">
-              {{donation.collectionSite.name}}
+          <td data-title="'Panel'" style="width:17%;" header-class="text-left" sortable="'donorPanel'" filter="{ 'collectionSite': 'text' }">
+              {{donation.donorPanel.name}}
           </td>
           <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'bloodBagType'" filter="{ 'bloodBagType': 'select' }"
               filter-data="packTypeFilter($column)">

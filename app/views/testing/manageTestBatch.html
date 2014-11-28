@@ -52,9 +52,9 @@
         <div class="row col-sm-10">
           <div class="form-inline" style="padding-left:5px;">
             <ui-select name="donationBatches" required multiple ng-model="selectedDonationBatches.ids" theme="bootstrap" ng-disabled="disabled" style="width: 800px;" >
-              <ui-select-match placeholder="Select:">{{$item.collectionCenter.name}} ({{$item.createdDate}})</ui-select-match>
+              <ui-select-match placeholder="Select:">{{$item.donorPanel.name}} ({{$item.createdDate}})</ui-select-match>
               <ui-select-choices repeat="donationBatch.id as donationBatch in donationBatches | filter:$select.search">
-                <div ng-bind-html="donationBatch.collectionCenter.name"></div>
+                <div ng-bind-html="donationBatch.donorPanel.name"></div>
                 <small>
                   {{donationBatch.createdDate}} | 
                   {{donationBatch.numCollections}} donations
