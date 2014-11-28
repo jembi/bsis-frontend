@@ -428,8 +428,7 @@ angular.module('bsis')
     DonorService.getDonationsFormFields(function(response){
       if (response !== false){
         $scope.data = response;
-        $scope.sites = $scope.data.sites;
-        $scope.centers = $scope.data.centers;
+        $scope.donorPanels = response.donorPanels;
         $scope.packTypes = $scope.data.packTypes;
         $scope.donationTypes = $scope.data.donationTypes;
         $scope.donation = $scope.data.addDonationForm;
@@ -442,9 +441,8 @@ angular.module('bsis')
 
       $scope.addDonationSuccess = '';
 
-      // set temporary donation center & site - should be auto-populated from donation batch info
-      donation.collectionCenter = $scope.centers[0];
-      donation.collectionSite = $scope.sites[0];
+      // set temporary donor panel - should be auto-populated from donation batch info
+      donation.donorPanel = $scope.donorPanels[0];
       // set temporary donationDate
       donation.collectedOn = '10/16/2014 12:00:00 am';
 
@@ -570,8 +568,7 @@ angular.module('bsis')
 
     DonorService.getDonationBatchFormFields( function(response){
       if (response !== false){
-        $scope.centers = response.centers;
-        $scope.sites = response.sites;
+        $scope.donorPanels = response.donorPanels;
       }
       else{
       }
@@ -672,8 +669,7 @@ angular.module('bsis')
 
       DonorService.getDonationBatchFormFields( function(response){
         if (response !== false){
-          $scope.centers = response.centers;
-          $scope.sites = response.sites;
+          $scope.donorPanels = response.donorPanels;
         }
         else{
         }
@@ -759,8 +755,7 @@ angular.module('bsis')
       DonorService.getDonationsFormFields(function(response){
         if (response !== false){
           $scope.data = response;
-          $scope.sites = $scope.data.sites;
-          $scope.centers = $scope.data.centers;
+          $scope.donorPanels = response.donorPanels;
           $scope.packTypes = $scope.data.packTypes;
           $scope.donationTypes = $scope.data.donationTypes;
           $scope.donation = $scope.data.addDonationForm;
@@ -778,8 +773,7 @@ angular.module('bsis')
         $scope.addDonationSuccess = '';
 
         // set donation center, site & date to those of the donation batch
-        donation.collectionCenter = $scope.donationBatch.collectionCenter;
-        donation.collectionSite = $scope.donationBatch.collectionSite;
+        donation.donorPanel = $scope.donationBatch.donorPanel;
         donation.collectedOn = $scope.donationBatch.createdDate;
         donation.collectionBatchNumber = $scope.donationBatch.batchNumber;
 
