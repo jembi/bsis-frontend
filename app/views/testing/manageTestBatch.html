@@ -43,7 +43,7 @@
 
 <div ng-switch on="donationBatches.length">
   <div ng-switch-when="0">
-    <p><em>There are no current donations to test</em></p>
+    <p><em>There are no donation batches to test.</em></p>
   </div>
   <div ng-switch-default>
     <form name="addTestBatchForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addTestBatch(selectedDonationBatches.ids, addTestBatchForm.$valid)">
