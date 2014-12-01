@@ -362,7 +362,7 @@ angular.module('bsis', [
     };
   })
 
-  .directive('hasPermission', function ($rootScope)  {
+  .directive('hasPermission', ['$rootScope', function ($rootScope)  {
     return {
       link: function(scope, element, attrs) {
         // if the permission is not an empty string, determine if element should be displayed
@@ -386,7 +386,7 @@ angular.module('bsis', [
         }
       }
     };
-  })
+  }])
 
   /*  Custom directive to calculate age from birthDate
       example use: <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
@@ -429,11 +429,11 @@ angular.module('bsis', [
   })
 
   
-  .directive('integer', function(REGEX) {
+  .directive('integer', ['REGEX', function(REGEX) {
     var INTEGER_REGEXP = REGEX.INTEGER;
     return {
       require: 'ngModel',
-      link: function(scope, elm, attrs, ctrl) {
+      link: function($scope, elm, attrs, ctrl) {
         ctrl.$validators.integer = function(modelValue, viewValue) {
           if (ctrl.$isEmpty(modelValue)) {
             // empty input is valid
@@ -448,13 +448,13 @@ angular.module('bsis', [
         };
       }
     };
-  })
+  }])
 
-  .directive('decimal', function(REGEX) {
+  .directive('decimal', ['REGEX', function(REGEX) {
     var DECIMAL_REGEXP = REGEX.DECIMAL;
     return {
       require: 'ngModel',
-      link: function(scope, elm, attrs, ctrl) {
+      link: function($scope, elm, attrs, ctrl) {
         ctrl.$validators.decimal = function(modelValue, viewValue) {
           if (ctrl.$isEmpty(modelValue)) {
             // empty input is valid
@@ -469,13 +469,13 @@ angular.module('bsis', [
         };
       }
     };
-  })
+  }])
 
-  .directive('alphaName', function(REGEX) {
+  .directive('alphaName', ['REGEX', function(REGEX) {
     var ALPHA_REGEXP = REGEX.NAME;
     return {
       require: 'ngModel',
-      link: function(scope, elm, attrs, ctrl) {
+      link: function($scope, elm, attrs, ctrl) {
         ctrl.$validators.alphaName = function(modelValue, viewValue) {
           if (ctrl.$isEmpty(modelValue)) {
             // empty input is valid
@@ -490,6 +490,6 @@ angular.module('bsis', [
         };
       }
     };
-  })
+  }])
 
 ;
