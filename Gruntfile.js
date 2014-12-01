@@ -178,7 +178,8 @@ module.exports = function (grunt) {
           html: {
             steps: {
               js: ['concat', 'uglifyjs'],
-              css: ['cssmin']
+              //css: ['cssmin']
+              css: ['concat']
             },
             post: {}
           }
@@ -381,7 +382,7 @@ module.exports = function (grunt) {
     'ngmin',
     'copy:dist',
     'cdnify',
-    'cssmin',
+    //'cssmin',
     'uglify',
     'rev',
     'usemin',
