@@ -538,10 +538,10 @@ small {
 }
 
 /* Form Validation inputs and error messages  */
-.form-group input.ng-invalid.ng-dirty {
+input.ng-invalid.ng-dirty {
   border: 1px solid #B52E31;
 }
-.form-group select.ng-invalid.ng-dirty {
+select.ng-invalid.ng-dirty {
   border: 1px solid #B52E31;
 }
 .error {
