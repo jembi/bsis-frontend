@@ -87,6 +87,9 @@
                   <td data-title="'Date of Birth'" header-class="text-left" class="text-center" sortable="'birthDate'">
                       {{ (donor.birthDate | date:"dd/MM/yyyy") || '' }}
                   </td>
+                  <td data-title="'Panel'" header-class="text-left" sortable="'panel'">
+                      {{donor.donorPanel.name}}
+                  </td>
               </tr>
           </table>
       </div>
