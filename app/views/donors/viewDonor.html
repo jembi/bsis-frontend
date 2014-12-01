@@ -122,7 +122,7 @@
                 <td class="icon"><i class="fa {{icons.CIRCLE}}"></i></td>
                 <td class="field">Previous Donation: </td>
                 <td class="value"><em>Date</em>: {{ (lastDonation.collectedOn | date:"dd/MM/yyyy") || '' }}<br/>
-                    <em>Venue</em>: {{lastDonation.collectionCenter.name}} <br/>
+                    <em>Panel</em>: {{lastDonation.donorPanel.name}} <br/>
                     <em>Donation Type</em>: {{lastDonation.donationType.donationType}} | <em>Pack Type</em>: {{lastDonation.packType.bloodBagType}}<br/>
                     <em>Wt</em>: {{lastDonation.donorWeight}}kg | <em>BP</em>: {{lastDonation.bloodPressureDiastolic}}/{{lastDonation.bloodPressureSystolic}} |
                     <em>Hb</em>: {{lastDonation.haemoglobinCount}} | <em>P</em>: {{lastDonation.donorPulse}} </td>

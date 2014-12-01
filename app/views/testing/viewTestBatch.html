@@ -21,7 +21,7 @@
 
 <hr/>
 <span class = "h4" ng-repeat="donationBatch in testBatch.collectionBatches"> 
-  <small><em>Center: </em></small>{{donationBatch.collectionCenter.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate}} | <small><em>Number of Donations: </em></small> {{donationBatch.numCollections}} 
+  <small><em>Center: </em></small>{{donationBatch.donorPanel.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate}} | <small><em>Number of Donations: </em></small> {{donationBatch.numCollections}} 
   <br/>
 </span>
 <hr/>
@@ -47,7 +47,7 @@
                 {{sample.packType.bloodBagType}}
             </td>
             <td data-title="'Clinic'" header-class="text-left" sortable="'center'">
-                {{sample.collectionCenter.name}}
+                {{sample.donorPanel.name}}
             </td>
             <td data-title="'TTI Testing'" header-class="text-left" sortable="'ttiStatus'">
                 {{sample.ttistatus}}

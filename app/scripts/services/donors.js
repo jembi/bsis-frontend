@@ -224,8 +224,7 @@ angular.module('bsis')
         updateDonationBatch = updateDonationBatch.collectionBatch;
 
         updateDonationBatch.isClosed = true;
-        updateDonationBatch.collectionCenter = updateDonationBatch.collectionCenter.id;
-        updateDonationBatch.collectionSite = updateDonationBatch.collectionSite.id;
+        updateDonationBatch.donorPanel = updateDonationBatch.donorPanel.id;
 
         Api.DonationBatches.update({id:donationBatch.id}, updateDonationBatch, function(data) {
          response(data.collectionBatch);
