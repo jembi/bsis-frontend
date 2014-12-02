@@ -1,10 +1,14 @@
 <div class="container">
-        <form class="form-signin" name="loginForm" ng-submit="login(credentials)" novalidate>
-          <img class="main" src="images/bsis_logo.png">
-          <input type="username" id="username" class="form-control input-md" placeholder="Username" required="" autofocus="true" ng-model="credentials.username" select-on-focus>
-          <input type="password" id="password" class="form-control" placeholder="Password" required="" ng-model="credentials.password" select-on-focus>
-          <button class="btn  btn-primary btn-block" type="submit" > Log in </button>
-          <div ng-if="loginInvalid" style="padding-top:10px;"><alert type="danger">Invalid Username / Password.</alert></div>
-        </form>
+  <form class="form-signin" name="loginForm" ng-submit="login(credentials, loginForm)" novalidate>
+    <img class="main" src="images/bsis_logo.png">
+    <input type="username" id="username" name="username" class="form-control input-md" placeholder="Username" required autofocus="true" 
+      ng-model="credentials.username" select-on-focus ng-class="{'ng-invalid ng-dirty' : loginForm.username.$invalid && loginInvalid}"
+      ng-model-options="{ updateOn: 'blur', debounce: { blur: 1000 } }">
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required
+      ng-model="credentials.password" select-on-focus ng-class="{'ng-invalid ng-dirty' : loginForm.password.$invalid && loginInvalid}"
+      ng-model-options="{ updateOn: 'blur', debounce: { blur: 1000 } }">
+    <button class="btn  btn-primary btn-block" type="submit" > Log in </button>
+    <div ng-if="loginInvalid" style="padding-top:10px;"><alert type="danger">Invalid Username / Password.</alert></div>
+  </form>
 </div>
 <div ng-include="'views/sidebarFooter.html'"></div>
