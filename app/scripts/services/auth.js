@@ -45,12 +45,11 @@ angular.module('bsis')
         userId: '',
         role : ROLES.guest
       };
+      Authinterceptor.removeLoggedInUser();
       $rootScope.displayHeader = false;
       $rootScope.sessionUserName = '';
       $rootScope.sessionUserPermissions = '';
       localStorage.removeItem('consoleSession');
-      localStorage.removeItem('auth');
-      localStorage.removeItem('loggedOnUser');
     },
     getLoggedInUser: function () {
       return userProfile;

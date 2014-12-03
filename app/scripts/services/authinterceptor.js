@@ -20,6 +20,12 @@ angular.module('bsis')
         user = JSON.parse(user);
         return user;
       },
+      'removeLoggedInUser': function () {
+        user = null;
+        localStorage.removeItem('loggedOnUser');
+        auth = null;
+        localStorage.removeItem('auth');
+      },
       'request': function (config) {
 
         if (user) {
