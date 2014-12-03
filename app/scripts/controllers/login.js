@@ -12,23 +12,35 @@ angular.module('bsis')
       $location.path( "/login" );
     }
 
-    $scope.login = function (credentials) {
-      AuthService.login(credentials, function(loggedIn){
-        if (loggedIn){
-          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-          $location.path( "/home" );
-          $scope.loginInvalid = false;
+    $scope.login = function (credentials, loginForm) {
 
-          //Create the session for the logged in user
-          $scope.createUserSession(credentials);
-          $scope.credentials.username = null;
-          $scope.credentials.password = null;
-        }
-        else{
-          $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-          $scope.loginInvalid = true;
-        }
-      });
+      if(loginForm.$valid){
+
+        AuthService.login(credentials, function(loggedIn){
+          if (loggedIn){
+            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+
+            // set form back to pristine state
+            loginForm.$setPristine();
+
+            $location.path( "/home" );
+            $scope.loginInvalid = false;
+
+            //Create the session for the logged in user
+            $scope.createUserSession(credentials);
+            $scope.credentials.username = null;
+            $scope.credentials.password = null;
+          }
+          else{
+            $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+            $scope.loginInvalid = true;
+          }
+        });
+      }
+      else{
+        $scope.loginInvalid = true;
+        console.log("FORM NOT VALID");
+      }
       
     };
 
