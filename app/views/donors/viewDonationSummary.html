@@ -9,7 +9,7 @@
   </span>  
   <em><a ng-show="!donationSummaryForm.$visible" href="" ng-click="viewDonationBatch()">Done</a></em></small>
   </span>
-  <div class="col-sm-10" style="height:100%; border-right: 2px solid #f5f5f5; ">
+  <div class="col-sm-10" style="height:100%;">
     <table class="dash-table">
       <tbody>
         <tr>
@@ -23,6 +23,10 @@
         <tr>
           <td class="field">Date Bled: </td>
           <td class="value">{{donation.collectedOn}}</td>
+        </tr>
+        <tr>
+          <td class="field">Bleed Time: </td>
+          <td class="value">{{donation.bleedStartTime}} to {{donation.bleedEndTime}}</td>
         </tr>
         <tr>
           <td class="field">Venue: </td>
