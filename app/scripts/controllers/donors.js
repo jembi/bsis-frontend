@@ -662,8 +662,11 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
 
-    $scope.startTime = new Date();
-    $scope.endTime = new Date();
+    $scope.donation = {
+      "bleedStartTime": new Date(),
+      "bleedEndTime": new Date()
+    };
+
     $scope.hstep = 1;
     $scope.mstep = 5;
     $scope.options = {
