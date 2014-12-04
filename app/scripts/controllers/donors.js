@@ -359,7 +359,7 @@ angular.module('bsis')
     };
 
     $scope.viewDonationDetails = function (din) {
-      $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
+      $scope.donation = $filter('filter')($scope.donationsData, {collectionNumber : din})[0];
       $scope.donationsView = 'viewDonationDetails';
     };
 
@@ -755,7 +755,7 @@ angular.module('bsis')
     };
 
     $scope.viewDonationSummary = function (din) {
-      $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
+      $scope.donation = $filter('filter')($scope.data, {collectionNumber : din})[0];
       $scope.donationBatchView = 'viewDonationSummary';
     };
 

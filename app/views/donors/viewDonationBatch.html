@@ -5,7 +5,7 @@
 
 <table ng-table="donorClinicTableParams" show-filter="true" class="table">
   <tr ng-repeat="donation in $data"
-    ng-click="viewDonationSummary(donation.donationIdentificationNumber); changeSelection(donation);"
+    ng-click="viewDonationSummary(donation.collectionNumber); changeSelection(donation);"
     ng-mouseenter="this.$selected = true"
     ng-mouseleave="this.$selected = false"
     ng-class="{'active': donation.$selected}">
