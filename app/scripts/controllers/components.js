@@ -260,9 +260,6 @@ angular.module('bsis')
         $scope.recordComponent.childComponentTypeId = $scope.component.childComponentTypeId;
         $scope.recordComponent.numUnits = $scope.component.numUnits;
 
-        $scope.component = {};
-        $scope.selectedComponents = [];
-
         ComponentService.recordComponents($scope.recordComponent, function(response){
           if (response !== false){
             data = response.components;
@@ -272,6 +269,7 @@ angular.module('bsis')
             recordComponentsForm.$setPristine();
             $scope.submitted = '';
             $scope.componentSelected = '';
+            $scope.component = {};
             $scope.selectedComponents = [];
           }
           else{
