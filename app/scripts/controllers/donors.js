@@ -168,7 +168,7 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams, $timeout) {
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
     $scope.age = '';
@@ -359,8 +359,25 @@ angular.module('bsis')
     };
 
     $scope.viewDonationDetails = function (din) {
-      $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
-      $scope.donationsView = 'viewDonationDetails';
+
+      var requests = [];
+      $scope.donation = $filter('filter')($scope.donationsData, {collectionNumber : din})[0];
+      $scope.testResults = {};
+
+      var testResultsRequest = TestingService.getTestResultsByDIN(din, function(response){
+        if (response !== false){
+          $scope.testResults = response.testResults.recentTestResults;
+          console.log("testresults response: ", response);
+        }
+        else{
+        }
+        requests.push(testResultsRequest);
+      });
+
+      $q.all(requests).then(function(){
+        $scope.donationsView = 'viewDonationDetails';
+      });
+      
     };
 
     $scope.addDeferral = function (deferral, addDeferralForm){
@@ -662,6 +679,13 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
 
+    $scope.hstep = 1;
+    $scope.mstep = 5;
+    $scope.options = {
+      hstep: [1, 2, 3],
+      mstep: [1, 5, 10, 15, 25, 30]
+    };
+
     $scope.init = function () {
       $scope.donationBatch = DonorService.getDonationBatch();
       data = $scope.donationBatch.collectionsInBatch;
@@ -745,11 +769,16 @@ angular.module('bsis')
     };
 
     $scope.viewDonationSummary = function (din) {
-      $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
+      $scope.donation = $filter('filter')($scope.data, {collectionNumber : din})[0];
       $scope.donationBatchView = 'viewDonationSummary';
     };
 
     $scope.viewAddDonationForm = function (){
+
+      // set initial bleed times
+      $scope.bleedStartTime = new Date();
+      $scope.bleedEndTime = new Date();
+
       $scope.donationBatchView = "addDonation";
 
       DonorService.getDonationsFormFields(function(response){
@@ -767,7 +796,7 @@ angular.module('bsis')
 
     $scope.addDonationSuccess = '';
 
-    $scope.addDonation = function (donation, valid){
+    $scope.addDonation = function (donation, bleedStartTime, bleedEndTime, valid){
 
       if(valid){
         $scope.addDonationSuccess = '';
@@ -776,6 +805,8 @@ angular.module('bsis')
         donation.donorPanel = $scope.donationBatch.donorPanel;
         donation.collectedOn = $scope.donationBatch.createdDate;
         donation.collectionBatchNumber = $scope.donationBatch.batchNumber;
+        donation.bleedStartTime = $filter('date')(bleedStartTime, 'hh:mm:ss a');
+        donation.bleedEndTime = $filter('date')(bleedEndTime, 'hh:mm:ss a');
 
         DonorService.addDonationToBatch(donation, function(response){
           if (response !== false){

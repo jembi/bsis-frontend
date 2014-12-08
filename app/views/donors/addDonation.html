@@ -4,7 +4,7 @@
 <div ng-if="$parent.addDonationSuccess === true" ng-hide="$parent.addDonationSuccess !== true" style="padding-top:10px;"><alert type="success" close="$parent.addDonationSuccess = ''">Donation Added Successfully.</alert></div>
 <div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false" style="padding-top:10px;"><alert type="danger" close="$parent.addDonationSuccess = ''">Error Adding Donation, please resolve issues and try again.</alert></div>
 
-<form name="addDonationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addDonation(donation, addDonationForm.$valid)">
+<form name="addDonationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addDonation(donation, bleedStartTime, bleedEndTime, addDonationForm.$valid)">
 
   <div class="col-md-4">
 
@@ -110,16 +110,29 @@
       </div>
     </div>
 
+  </div>
+    <div class="col-md-4">
+
+    <p><em>Bleed Times</em></p>
+    <hr style="margin-top:8px; margin-bottom:1px;"/>
+
     <div class="form-group">
-      <label for="name" class="col-sm-3 control-label">Time</label>
-      <div class="row col-sm-9">
-        <div class="form-inline" style="padding-left:5px;">
-          <input size="6" type="timeStarted" id="timeStarted" class="form-control input-sm" placeholder="Start" ng-model="timeStarted">
-          <input size="6" type="timeEnded" id="timeEnded" class="form-control input-sm" placeholder="End" ng-model="timeEnded">
+      <label for="name" class="col-sm-2 control-label" style="padding-top:30px;">Start</label>
+      <div class="row col-sm-10">
+        <div style="padding-left:5px;">
+          <timepicker ng-model="bleedStartTime" hour-step="hstep" minute-step="mstep"></timepicker>
         </div>
       </div>
     </div>
 
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label" style="padding-top:30px;">End</label>
+      <div class="row col-sm-10">
+        <div style="padding-left:5px;">
+          <timepicker ng-model="bleedEndTime" hour-step="hstep" minute-step="mstep"></timepicker>
+        </div>
+      </div>
+    </div>
 
 
   </div>
