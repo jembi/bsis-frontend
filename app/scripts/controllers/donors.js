@@ -662,9 +662,6 @@ angular.module('bsis')
     var data = {};
     $scope.data = data;
 
-    $scope.bleedStartTime = new Date();
-    $scope.bleedEndTime = new Date();
-
     $scope.hstep = 1;
     $scope.mstep = 5;
     $scope.options = {
@@ -760,6 +757,11 @@ angular.module('bsis')
     };
 
     $scope.viewAddDonationForm = function (){
+
+      // set initial bleed times
+      $scope.bleedStartTime = new Date();
+      $scope.bleedEndTime = new Date();
+
       $scope.donationBatchView = "addDonation";
 
       DonorService.getDonationsFormFields(function(response){
