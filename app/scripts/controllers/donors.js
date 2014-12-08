@@ -168,7 +168,7 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams, $timeout) {
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
     $scope.age = '';
@@ -359,8 +359,25 @@ angular.module('bsis')
     };
 
     $scope.viewDonationDetails = function (din) {
+
+      var requests = [];
       $scope.donation = $filter('filter')($scope.donationsData, {collectionNumber : din})[0];
-      $scope.donationsView = 'viewDonationDetails';
+      $scope.testResults = {};
+
+      var testResultsRequest = TestingService.getTestResultsByDIN(din, function(response){
+        if (response !== false){
+          $scope.testResults = response.testResults.recentTestResults;
+          console.log("testresults response: ", response);
+        }
+        else{
+        }
+        requests.push(testResultsRequest);
+      });
+
+      $q.all(requests).then(function(){
+        $scope.donationsView = 'viewDonationDetails';
+      });
+      
     };
 
     $scope.addDeferral = function (deferral, addDeferralForm){
