@@ -22,8 +22,18 @@ angular.module('bsis')
 
     var data = {};
     $scope.data = data;
+    $scope.location = {};
 
-    $scope.getLocations = function () {   
+    $scope.clear = function () {
+      $scope.location = {};
+    };
+
+    $scope.clearForm = function(form){
+      form.$setPristine();
+      $scope.submitted = '';
+    };
+
+    $scope.getLocations = function () {
       SettingsService.getLocations(function(response){
         if (response !== false){
           data = response;
