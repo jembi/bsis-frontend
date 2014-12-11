@@ -205,6 +205,13 @@ angular.module('bsis', [
         permission: PERMISSIONS.VIEW_ADMIN_INFORMATION
       })
 
+      // SETTINGS URLs
+      .when('/locations', {
+        templateUrl : 'views/settings.html',
+        controller  : 'SettingsCtrl',
+        permission: PERMISSIONS.MANAGE_DONATION_SITES
+      })
+
       .otherwise({
         redirectTo: '/home'
       });

@@ -13,7 +13,7 @@ angular.module('bsis')
         return true;
       } else if ($location.path() === path) {
         return true;
-      } else if ($location.path() === "/settings" && path === "/settings") {
+      } else if ($location.path() === "/settings" && path === "/locations") {
         return true;
       } else {
         return false;
