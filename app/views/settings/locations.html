@@ -14,17 +14,28 @@
               <td data-title="'Name'" style="width:30%;" header-class="text-left" sortable="'name'">
                   {{location.name}}
               </td>
-              <td data-title="'Donor Panel'" style="width:25%;" header-class="text-left" sortable="'panel'" class="text-center">
+              <td data-title="'Donor Panel'" style="width:15%;" header-class="text-left" sortable="'panel'" class="text-center">
                   <span ng-if="location.isDonorPanel=='true'"><i class="fa {{icons.SQUARECHECK}}"></i></span>
                   <span ng-if="location.isDonorPanel=='false'"><i class="fa {{icons.SQUARE}}"></i></span>
               </td>
-              <td data-title="'Mobile Site'" style="width:25%;" header-class="text-left" sortable="'mobileSite'" class="text-center">
+              <td data-title="'Mobile Site'" style="width:15%;" header-class="text-left" sortable="'mobileSite'" class="text-center">
                   <span ng-if="location.isMobileSite=='true'"><i class="fa {{icons.SQUARECHECK}}"></i></span>
                   <span ng-if="location.isMobileSite=='false'"><i class="fa {{icons.SQUARE}}"></i></span>
               </td>
-              <td data-title="'Request Site'" style="width:25%;" header-class="text-left" sortable="'requestSite'" class="text-center">
+              <td data-title="'Request Site'" style="width:15%;" header-class="text-left" sortable="'requestSite'" class="text-center">
                   <span ng-if="location.isUsageSite=='true'"><i class="fa {{icons.SQUARECHECK}}"></i></span>
                   <span ng-if="location.isUsageSite=='false'"><i class="fa {{icons.SQUARE}}"></i></span>
+              </td>
+              <td data-title="" style="width:25%;" header-class="text-left" sortable="" class="text-center">
+                <span style="font-size: 0.9em;">
+                  <span ng-if="locationToRemove == location.id">
+                    <em><a ng-click="removeLocation(location)"> Confirm</a></em> | 
+                    <em><a ng-click="cancelRemoveLocation()"> Cancel</a></em>
+                  </span>
+                  <span ng-if="locationToRemove != location.id">
+                    <em><a ng-click="removeLocationCheck(location)"> Remove</a></em>
+                  </span>
+                </span>
               </td>
           </tr>
         </table>
