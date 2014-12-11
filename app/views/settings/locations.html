@@ -35,12 +35,12 @@
 </div>
 
 <h4>Add Location</h4>
-<form name="addLocationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addLocation(newLocation, addLocationForm)">
+<form name="addLocationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addLocation(location, addLocationForm)">
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label">Name</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <input size="15"  id="name" name="name" class="form-control input-sm" ng-model="newLocation.name" required ng-minlength=1 ng-maxlength=20 
+        <input size="15"  id="name" name="name" class="form-control input-sm" ng-model="location.name" required ng-minlength=1 ng-maxlength=20 
         ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
         ng-class="{'ng-invalid ng-dirty' : addLocationForm.name.$invalid && submitted}"
         >
@@ -54,12 +54,38 @@
         </div>
       </div>
     </div>
+    <label for="type" class="col-sm-1 control-label">Type</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input  type="checkbox" id="donorPanel" name="donorPanel" ng-init="location.isDonorPanel=false" ng-model="location.isDonorPanel" 
+          ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+          ng-class="{'ng-invalid ng-dirty' : !addLocationForm.donorPanel.$viewValue && submitted}"> 
+        <label style="display: inline-block; cursor: pointer; cursor: hand;" for="donorPanel"> Donor Panel </label> 
+        <input  type="checkbox" id="mobileSite" name="mobileSite" ng-init="location.isMobileSite=false" ng-model="location.isMobileSite" 
+          ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+          ng-class="{'ng-invalid ng-dirty' : !addLocationForm.mobileSite.$viewValue && submitted}">  
+        <label style="display: inline-block; cursor: pointer; cursor: hand;" for="mobileSite"> Mobile Site </label> 
+        <input  type="checkbox" id="requestSite" name="requestSite" ng-init="location.isUsageSite=false" ng-model="location.isUsageSite"
+          ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+          ng-class="{'ng-invalid ng-dirty' : !addLocationForm.requestSite.$viewValue && submitted}">  
+        <label style="display: inline-block; cursor: pointer; cursor: hand;" for="requestSite"> Request Site </label> 
+        <div>
+          <small class="error" 
+            ng-show="
+              (!addLocationForm.donorPanel.$viewValue && !addLocationForm.mobileSite.$viewValue && !addLocationForm.requestSite.$viewValue 
+              && ((addLocationForm.donorPanel.$dirty || addLocationForm.mobileSite.$dirty || addLocationForm.requestSite.$viewValue) || submitted))
+            ">
+            Select one or more options
+          </small>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="form-group"> 
     <div class="col-sm-offset-1 col-sm-4">
       <button class="btn btn-primary" type="submit">Add Location</button>
-      <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+      <button class="btn btn-primary" type="button" ng-click="clear(); clearForm(addLocationForm);">Clear</button>
     </div>
   </div>
 
