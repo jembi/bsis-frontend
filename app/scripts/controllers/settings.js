@@ -70,6 +70,26 @@ angular.module('bsis')
       }
     };
 
+    $scope.removeLocationCheck = function(location){
+      $scope.locationToRemove = location.id;
+    };
+
+    $scope.cancelRemoveLocation = function(){
+      $scope.locationToRemove = '';
+    };
+
+    $scope.removeLocation = function(location){
+      location.isDeleted = true;
+      SettingsService.updateLocation(location, function(response){
+        if (response !== false){
+          $scope.locationToRemove = '';
+          $scope.getLocations();
+        }
+        else{
+        }
+      });
+    };
+
     $scope.locationsTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 6,          // count per page
