@@ -21,7 +21,22 @@ angular.module('bsis')
         response(false);
       }); 
 
-    }
+    },
+    updateLocation: function (location, response){
+
+      var updateLocation = Api.Locations.get({id:location.id}, function() {
+        updateLocation = updateLocation.location;
+        angular.copy(location, updateLocation);
+
+        Api.Locations.update({id:location.id}, updateLocation, function(data) {
+         response(data);
+        }, function (){
+          response(false);
+        }); 
+
+      });
+
+    },
 
   };
 });
