@@ -22,10 +22,18 @@ angular.module('bsis')
 
     var data = {};
     $scope.data = data;
-    $scope.location = {};
+    $scope.location = {
+      "isDonorPanel" : false,
+      "isMobileSite" : false,
+      "isUsageSite" : false
+    };
 
     $scope.clear = function () {
-      $scope.location = {};
+      $scope.location = {
+        "isDonorPanel" : false,
+        "isMobileSite" : false,
+        "isUsageSite" : false
+      };
     };
 
     $scope.clearForm = function(form){
@@ -55,7 +63,11 @@ angular.module('bsis')
 
         SettingsService.addLocation(location, function(response){
           if (response !== false){
-            $scope.location = {};
+            $scope.location = {
+              "isDonorPanel" : false,
+              "isMobileSite" : false,
+              "isUsageSite" : false
+            };
             locationForm.$setPristine();
             $scope.submitted = '';
             $scope.getLocations();
