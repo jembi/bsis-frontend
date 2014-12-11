@@ -19,4 +19,24 @@ angular.module('bsis')
         return false;
       }
     };
+
+    var data = {};
+    $scope.data = data;
+
+    $scope.getLocations = function () {   
+      SettingsService.getLocations(function(response){
+        if (response !== false){
+          data = response;
+          $scope.data = data;
+          console.log("locations: ",data);
+        }
+        else{
+
+        }
+      });
+
+    };
+
+    $scope.getLocations();
+
   });
