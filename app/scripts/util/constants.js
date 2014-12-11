@@ -45,7 +45,9 @@ angular.module('bsis')
     GLOBE: 'fa-globe',
     BARCODE: 'fa-barcode',
     EDIT: 'fa-edit',
-    REMOVE: 'fa-times-circle'
+    REMOVE: 'fa-times-circle',
+    SQUARE: 'fa-square-o',
+    SQUARECHECK: 'fa-check-square-o'
   })
 
   .constant('REGEX', {
