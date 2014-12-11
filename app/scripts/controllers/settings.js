@@ -39,6 +39,27 @@ angular.module('bsis')
 
     $scope.getLocations();
 
+    $scope.addLocation = function (location, locationForm) {
+
+      if(locationForm.$valid && !(!locationForm.donorPanel.$viewValue && !locationForm.mobileSite.$viewValue && !locationForm.requestSite.$viewValue)){
+
+        SettingsService.addLocation(location, function(response){
+          if (response !== false){
+            $scope.location = {};
+            locationForm.$setPristine();
+            $scope.submitted = '';
+            $scope.getLocations();
+          }
+          else{
+          }
+        });
+      }
+      else{
+        $scope.submitted = true;
+        console.log("FORM NOT VALID");
+      }
+    };
+
     $scope.locationsTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 6,          // count per page

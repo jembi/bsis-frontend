@@ -9,6 +9,18 @@ angular.module('bsis')
       }, function (){
         response(false);
       });
+    },
+    addLocation: function (location, response) {
+
+      var addLocation = new Api.Locations();
+      angular.copy(location, addLocation);
+
+      addLocation.$save(function(data){ 
+        response(data);
+      }, function (){
+        response(false);
+      }); 
+
     }
 
   };
