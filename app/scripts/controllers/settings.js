@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('SettingsCtrl', function ($scope, $location, SettingsService, ICONS, PERMISSIONS) {
+  .controller('SettingsCtrl', function ($scope, $location, SettingsService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -38,5 +38,29 @@ angular.module('bsis')
     };
 
     $scope.getLocations();
+
+    $scope.locationsTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 6,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.locationsTableParams.reload(); });
+    });
 
   });
