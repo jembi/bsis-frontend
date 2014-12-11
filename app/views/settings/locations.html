@@ -1,1 +1,66 @@
 <h3 class="page-header">Manage Locations</h3>
+
+<div class="col-sm-12">
+  <div style="padding-bottom: 10px"></div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <table ng-table="locationsTableParams" show-filter="false" class="table">
+          <tr ng-repeat="location in $data"
+              ng-click="manageLocation(location); changeSelection(location);"
+              ng-mouseenter="this.$selected = true"
+              ng-mouseleave="this.$selected = false"
+              ng-class="{'active': location.$selected}">
+              <td data-title="'Name'" style="width:30%;" header-class="text-left" sortable="'name'">
+                  {{location.name}}
+              </td>
+              <td data-title="'Donor Panel'" style="width:25%;" header-class="text-left" sortable="'panel'" class="text-center">
+                  <span ng-if="location.isDonorPanel=='true'"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                  <span ng-if="location.isDonorPanel=='false'"><i class="fa {{icons.SQUARE}}"></i></span>
+              </td>
+              <td data-title="'Mobile Site'" style="width:25%;" header-class="text-left" sortable="'mobileSite'" class="text-center">
+                  <span ng-if="location.isMobileSite=='true'"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                  <span ng-if="location.isMobileSite=='false'"><i class="fa {{icons.SQUARE}}"></i></span>
+              </td>
+              <td data-title="'Request Site'" style="width:25%;" header-class="text-left" sortable="'requestSite'" class="text-center">
+                  <span ng-if="location.isUsageSite=='true'"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                  <span ng-if="location.isUsageSite=='false'"><i class="fa {{icons.SQUARE}}"></i></span>
+              </td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4>Add Location</h4>
+<form name="addLocationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addLocation(newLocation, addLocationForm)">
+  <div class="form-group">
+    <label for="name" class="col-sm-1 control-label">Name</label>
+    <div class="row col-sm-11">
+      <div class="form-inline" style="padding-left:5px;">
+        <input size="15"  id="name" name="name" class="form-control input-sm" ng-model="newLocation.name" required ng-minlength=1 ng-maxlength=20 
+        ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+        ng-class="{'ng-invalid ng-dirty' : addLocationForm.name.$invalid && submitted}"
+        >
+        <div>
+          <small class="error" 
+            ng-show="
+              (addLocationForm.name.$error.required && (addLocationForm.name.$dirty || submitted))
+            ">
+            This cannot be empty
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group"> 
+    <div class="col-sm-offset-1 col-sm-4">
+      <button class="btn btn-primary" type="submit">Add Location</button>
+      <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+    </div>
+  </div>
+
+</form>
