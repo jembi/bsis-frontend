@@ -68,7 +68,6 @@ angular.module('bsis')
       DonorDeferrals: $resource(url + '/donors/:id/deferrals'),
       DonorBarcode:   $resource(url + '/donors/:id/print'),
 
-      
       DonorCommunicationsSearch: $resource(url + '/donorcommunications/search', {}, 
         {
           query: {
@@ -145,6 +144,13 @@ angular.module('bsis')
           update: {method:'PUT'}
         }
       ),
+
+      // Admin Configuration API endpoints
+      Locations: $resource(url + '/locations/:id', null, 
+        {
+          update: {method:'PUT'}
+        }
+      )
 
     };
 });

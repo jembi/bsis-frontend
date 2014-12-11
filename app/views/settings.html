@@ -1,26 +1,20 @@
 
       <div class="container-fluid">
-      <div class="row  main-page" ng-controller="SettingsCtrl">
+      <div class="row main-page" ng-controller="SettingsCtrl">
 
   <div ng-include="'views/settings/sidebar.html'"></div>
           
-
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       
        <div class="row  main-page">
 
-       <div class="col-lg-12" >
-       
-       <div ng-switch on="selection">
-          <div ng-switch-when="/"><div ng-include="'views/settings/.html'"></div></div>
-          <div ng-switch-default><div ng-include="'views/settings/.html'"></div></div>
-        </div>
-
+         <div class="col-lg-12" >
+           <div ng-switch on="selection">
+              <div ng-switch-when="/locations"><div ng-include="'views/settings/locations.html'"></div></div>
+              <div ng-switch-default><div ng-include="'views/settings/locations.html'"></div></div>
+            </div>
+         </div>
        </div>
-
-       </div>
-        
       </div>
-
     </div>
   </div>
