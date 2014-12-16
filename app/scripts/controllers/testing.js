@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('TestingCtrl', function ($scope, $location, TestingService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('TestingCtrl', function ($scope, $rootScope, $location, TestingService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -19,6 +19,7 @@ angular.module('bsis')
     $scope.bloodTypingStatus = [];
 
     $scope.isCurrent = function(path) {
+      var initialView = '';
       if ($location.path() === "/viewTestBatch" && path === "/manageTestBatch") {
         $scope.selection = $location.path();
         return true;
@@ -34,9 +35,23 @@ angular.module('bsis')
         return true;
       } else if ($location.path() === path) {
         return true;
-      } else if ($location.path() === "/testing" && path === "/manageTestBatch") {
-        return true;
       } else {
+        // for first time load of /testing view, determine the initial view
+        if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_TEST_BATCH) > -1)){
+          initialView = '/manageTestBatch';
+        }
+        else if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_TEST_OUTCOME) > -1)){
+          initialView = '/viewTestResults';
+        }
+        else if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.ADD_TEST_OUTCOME) > -1)){
+          initialView = '/uploadTestResults';
+        }
+
+        // if first time load of /testing view , and path === initialView, return true
+        if ($location.path() === "/testing" && path === initialView){
+          return true;
+        }
+
         return false;
       }
     };
