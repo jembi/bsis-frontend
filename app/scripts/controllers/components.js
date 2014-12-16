@@ -65,16 +65,21 @@ angular.module('bsis')
     $scope.startDateOpen = false;
     $scope.endDateOpen = false;
 
-    ComponentService.getComponentsFormFields(function(response){
-      if (response !== false){
-        $scope.data = response;
-        $scope.componentTypes = $scope.data.componentTypes;
-        $scope.returnReasons = $scope.data.returnReasons;
-        $scope.discardReasons = $scope.data.discardReasons;
-      }
-      else{
-      }
-    });
+
+    $scope.getComponentsFormFields = function() {
+      ComponentService.getComponentsFormFields(function(response){
+        if (response !== false){
+          $scope.data = response;
+          $scope.componentTypes = $scope.data.componentTypes;
+          $scope.returnReasons = $scope.data.returnReasons;
+          $scope.discardReasons = $scope.data.discardReasons;
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getComponentsFormFields();
 
     $scope.clear = function () {
       $scope.componentsSearch = {};

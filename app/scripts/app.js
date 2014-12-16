@@ -224,6 +224,7 @@ angular.module('bsis', [
     // on route change, check to see if user has appropriate permissions
     $rootScope.$on('$routeChangeStart', function(scope, next, current) {
 
+      // set initial accessDenied value to false
       if (!($rootScope.accessDenied === true && $location.path() == '/home')){
         $rootScope.accessDenied = false;
       }
