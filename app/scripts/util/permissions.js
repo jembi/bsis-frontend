@@ -61,6 +61,12 @@ angular.module('bsis')
   EDIT_TTI_OUTCOME: 'Edit TTI Outcome',
   VIEW_TTI_OUTCOME: 'View TTI Outcome',
 
+  //Test Batch Permissions
+  ADD_TEST_BATCH: 'Add Test Batch',
+  VIEW_TEST_BATCH: 'View Test Batch',
+  EDIT_TEST_BATCH: 'Edit Test Batch',
+  VOID_TEST_BATCH: 'Void Test Batch',
+
   // Blood Typing Permissions
   EDIT_BLOOD_TYPING_OUTCOMES: 'Edit Blood Typing Outcome',
   ADD_BLOOD_TYPING_OUTCOME: 'Add Blood Typing Outcome',
