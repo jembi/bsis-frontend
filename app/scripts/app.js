@@ -374,6 +374,9 @@ angular.module('bsis', [
     };
   })
 
+  /*  Custom directive to check if user has associated permission
+      example use: <span has-permission="{{permissions.SOME_PERMISSION}}"> 
+  */
   .directive('hasPermission', ['$rootScope', function ($rootScope)  {
     return {
       link: function(scope, element, attrs) {
@@ -393,6 +396,42 @@ angular.module('bsis', [
 
           // remove the element if the user does not have the appropriate permission 
           if(!hasPermission){
+            element.remove();
+          }
+        }
+      }
+    };
+  }])
+
+  /*  Custom directive to check if user has associated permissions - use a semicolon (;) separated list of permissions
+      example use: <span has-permissions="{{permissions.SOME_PERMISSION}};{{permissions.SOME_PERMISSION_#2}}">
+  */
+  .directive('hasPermissions', ['$rootScope', function ($rootScope)  {
+    return {
+      link: function(scope, element, attrs) {
+        // if the permission is not an empty string, determine if element should be displayed
+        if(attrs.hasPermissions !== ''){
+          //var permissions = JSON.parse(attrs.hasPermissions);
+          var permissions = attrs.hasPermissions.split(';');
+          console.log("permissions: ", permissions);
+          //console.log("attrs.hasPermissions: ", attrs.hasPermissions);
+          showOrHide();
+        }
+
+        // determine if user has permissions to view the element - 
+        function showOrHide() {
+          var hasPermissions = true;
+          for (var permission in permissions){
+            console.log("permission: ", permissions[permission]);
+            // if user doesn't have one of the appropriate permissions, set to FALSE
+            if ($rootScope.sessionUserPermissions.indexOf(permissions[permission]) < 0){
+              hasPermissions = false;
+            }
+            console.log("hasPermissions: ", hasPermissions);
+          }
+
+          // remove the element if the user does not have the appropriate permission 
+          if(!hasPermissions){
             element.remove();
           }
         }
