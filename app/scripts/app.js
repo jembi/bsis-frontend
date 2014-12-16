@@ -43,7 +43,7 @@ angular.module('bsis', [
       .when('/donors', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorsCtrl',
-        permission: PERMISSIONS.VIEW_DONOR
+        permission: PERMISSIONS.VIEW_DONOR_INFORMATION
       })
       .when('/findDonor', {
         templateUrl : 'views/donors.html',
@@ -85,7 +85,7 @@ angular.module('bsis', [
       .when('/components', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENT
+        permission: PERMISSIONS.VIEW_COMPONENT_INFORMATION
       })
       .when('/recordComponents', {
         templateUrl : 'views/components.html',
@@ -112,7 +112,7 @@ angular.module('bsis', [
       .when('/testing', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TEST_OUTCOME
+        permission: PERMISSIONS.VIEW_TESTING_INFORMATION
       })
       .when('/viewTestResults', {
         templateUrl : 'views/testing.html',
