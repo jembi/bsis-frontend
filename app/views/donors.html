@@ -10,7 +10,7 @@
        <div class="row  main-page">
 
        <div class="col-lg-12" >
-       
+
        <div ng-switch on="selection">
           <div ng-switch-when="/findDonor"><div ng-include="'views/donors/findDonor.html'"></div></div>
           <div ng-switch-when="/addDonor"><div ng-include="'views/donors/addDonor.html'"></div></div>
@@ -19,7 +19,26 @@
           <div ng-switch-when="/manageDonationBatches"><div ng-include="'views/donors/manageDonationBatches.html'"></div></div>
           <div ng-switch-when="/exportDonorList"><div ng-include="'views/donors/exportDonorList.html'"></div></div>
           <div ng-switch-when="/viewDonor"><div ng-include="'views/donors/viewDonor.html'"></div></div>
-          <div ng-switch-default><div ng-include="'views/donors/findDonor.html'"></div></div>
+          <div ng-switch-default>
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DONOR) < 0) && 
+                        (sessionUserPermissions.indexOf(permissions.VIEW_DONATION_BATCH) < 0) &&
+                        (sessionUserPermissions.indexOf(permissions.EXPORT_CLINIC_DATA) > -1)"
+                ng-include="'views/donors/exportDonorList.html'">
+            </div>
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DONOR) < 0) && 
+                        (sessionUserPermissions.indexOf(permissions.VIEW_DONATION_BATCH) > -1) &&
+                        (sessionUserPermissions.indexOf(permissions.EXPORT_CLINIC_DATA) < 0)"
+                ng-include="'views/donors/manageClinic.html'">
+            </div>
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DONOR) < 0) && 
+                        (sessionUserPermissions.indexOf(permissions.VIEW_DONATION_BATCH) > -1) &&
+                        (sessionUserPermissions.indexOf(permissions.EXPORT_CLINIC_DATA) > -1)"
+                ng-include="'views/donors/manageClinic.html'">
+            </div>
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DONOR) > -1)"
+                ng-include="'views/donors/findDonor.html'">
+            </div>
+          </div>
         </div>
 
        </div>
