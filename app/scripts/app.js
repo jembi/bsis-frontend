@@ -204,8 +204,6 @@ angular.module('bsis', [
         controller  : 'SettingsCtrl',
         permission: PERMISSIONS.VIEW_ADMIN_INFORMATION
       })
-
-      // SETTINGS URLs
       .when('/locations', {
         templateUrl : 'views/settings.html',
         controller  : 'SettingsCtrl',
