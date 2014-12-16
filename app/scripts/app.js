@@ -154,22 +154,22 @@ angular.module('bsis', [
       .when('/manageInventory', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
+        permission: PERMISSIONS.VIEW_COMPONENT
       })
       .when('/transferComponents', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
+        permission: PERMISSIONS.ISSUE_COMPONENT
       })
       .when('/issueComponents', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
+        permission: PERMISSIONS.ISSUE_COMPONENT
       })
       .when('/componentUsage', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
+        permission: PERMISSIONS.VIEW_COMPONENT
       })
 
       // LABELLING URLs
