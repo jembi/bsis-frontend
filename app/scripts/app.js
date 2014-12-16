@@ -411,10 +411,7 @@ angular.module('bsis', [
       link: function(scope, element, attrs) {
         // if the permission is not an empty string, determine if element should be displayed
         if(attrs.hasPermissions !== ''){
-          //var permissions = JSON.parse(attrs.hasPermissions);
           var permissions = attrs.hasPermissions.split(';');
-          console.log("permissions: ", permissions);
-          //console.log("attrs.hasPermissions: ", attrs.hasPermissions);
           showOrHide();
         }
 
@@ -422,12 +419,10 @@ angular.module('bsis', [
         function showOrHide() {
           var hasPermissions = true;
           for (var permission in permissions){
-            console.log("permission: ", permissions[permission]);
             // if user doesn't have one of the appropriate permissions, set to FALSE
             if ($rootScope.sessionUserPermissions.indexOf(permissions[permission]) < 0){
               hasPermissions = false;
             }
-            console.log("hasPermissions: ", hasPermissions);
           }
 
           // remove the element if the user does not have the appropriate permission 
