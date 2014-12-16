@@ -122,12 +122,12 @@ angular.module('bsis', [
       .when('/manageTestBatch', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TEST_OUTCOME
+        permission: PERMISSIONS.VIEW_TEST_BATCH
       })
       .when('/viewTestBatch', {
         templateUrl : 'views/testing.html',
         controller  : 'ViewTestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TEST_OUTCOME
+        permission: PERMISSIONS.VIEW_TEST_BATCH
       })
       .when('/manageTTITesting', {
         templateUrl : 'views/testing.html',
