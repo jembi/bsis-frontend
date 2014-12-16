@@ -68,7 +68,7 @@ angular.module('bsis', [
       .when('/exportDonorList', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorListCtrl',
-        permission: PERMISSIONS.VIEW_DONOR
+        permission: PERMISSIONS.EXPORT_CLINIC_DATA
       })
       .when('/viewDonor', {
         templateUrl : 'views/donors.html',
@@ -255,6 +255,8 @@ angular.module('bsis', [
       //check if session exists
       if( consoleSession ){
 
+        console.log("consoleSession exists");
+
         //check if session has expired
         var currentTime = new Date();
         currentTime = currentTime.toISOString();
@@ -264,6 +266,8 @@ angular.module('bsis', [
           $location.path( "/login" );
 
         }else{
+
+          console.log("consoleSession still active");
 
           //session still active - update expires time
           currentTime = new Date();
@@ -289,6 +293,7 @@ angular.module('bsis', [
         }
 
       }else{
+        console.log("consoleSession does not exist");
         // no session - user needs to log in
         $location.path( "/login" );
       }
