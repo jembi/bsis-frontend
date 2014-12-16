@@ -225,10 +225,17 @@ angular.module('bsis', [
 
     // on route change, check to see if user has appropriate permissions
     $rootScope.$on('$routeChangeStart', function(scope, next, current) {
+
+      if (!($rootScope.accessDenied === true && $location.path() == '/home')){
+        $rootScope.accessDenied = false;
+      }
+
       var permission = next.$$route.permission;
-      // if the required permission is not in the current user's permissions list, redirect to logout
+
+      // if the required permission is not in the current user's permissions list, redirect to home page and display alert
       if (permission !== undefined && $rootScope.sessionUserPermissions.indexOf(permission) <= -1){
-        $location.path('/logout');
+        $rootScope.accessDenied = true;
+        $location.path('/home');
       }
     });
     
