@@ -39,48 +39,50 @@
   </div>
 </div>
 
-<h4>New Test Batch</h4>
+<div has-permission="{{permissions.ADD_TEST_BATCH}}">
+  <h4>New Test Batch</h4>
 
-<div ng-switch on="donationBatches.length">
-  <div ng-switch-when="0">
-    <p><em>There are no donation batches to test.</em></p>
-  </div>
-  <div ng-switch-default>
-    <form name="addTestBatchForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addTestBatch(selectedDonationBatches.ids, addTestBatchForm.$valid)">
-      <div class="form-group">
-        <label for="name" class="col-sm-2 control-label">Donation Batches</label>
-        <div class="row col-sm-10">
-          <div class="form-inline" style="padding-left:5px;">
-            <ui-select name="donationBatches" required multiple ng-model="selectedDonationBatches.ids" theme="bootstrap" ng-disabled="disabled" style="width: 800px;" >
-              <ui-select-match placeholder="Select:">{{$item.donorPanel.name}} ({{$item.createdDate}})</ui-select-match>
-              <ui-select-choices repeat="donationBatch.id as donationBatch in donationBatches | filter:$select.search">
-                <div ng-bind-html="donationBatch.donorPanel.name"></div>
-                <small>
-                  {{donationBatch.createdDate}} | 
-                  {{donationBatch.numCollections}} donations
-                </small>
-              </ui-select-choices>
-            </ui-select>
-            <div>
-            <small class="error" 
-              ng-show="
-                (addTestBatchForm.donationBatches.$invalid && (addTestBatchForm.donationBatches.$dirty || submitted))
-              ">
-              Select one or more donation batches
-            </small>
-          </div>
+  <div ng-switch on="donationBatches.length">
+    <div ng-switch-when="0">
+      <p><em>There are no donation batches to test.</em></p>
+    </div>
+    <div ng-switch-default>
+      <form name="addTestBatchForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addTestBatch(selectedDonationBatches.ids, addTestBatchForm.$valid)">
+        <div class="form-group">
+          <label for="name" class="col-sm-2 control-label">Donation Batches</label>
+          <div class="row col-sm-10">
+            <div class="form-inline" style="padding-left:5px;">
+              <ui-select name="donationBatches" required multiple ng-model="selectedDonationBatches.ids" theme="bootstrap" ng-disabled="disabled" style="width: 800px;" >
+                <ui-select-match placeholder="Select:">{{$item.donorPanel.name}} ({{$item.createdDate}})</ui-select-match>
+                <ui-select-choices repeat="donationBatch.id as donationBatch in donationBatches | filter:$select.search">
+                  <div ng-bind-html="donationBatch.donorPanel.name"></div>
+                  <small>
+                    {{donationBatch.createdDate}} | 
+                    {{donationBatch.numCollections}} donations
+                  </small>
+                </ui-select-choices>
+              </ui-select>
+              <div>
+              <small class="error" 
+                ng-show="
+                  (addTestBatchForm.donationBatches.$invalid && (addTestBatchForm.donationBatches.$dirty || submitted))
+                ">
+                Select one or more donation batches
+              </small>
+            </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group"> 
-        <div class="col-sm-offset-2 col-sm-4">
-          <button class="btn btn-primary" type="submit">Add Test Batch</button>
-          <button class="btn btn-primary" type="button" ng-click="clearForm(addTestBatchForm); clear()">Clear</button>
+        <div class="form-group"> 
+          <div class="col-sm-offset-2 col-sm-4">
+            <button class="btn btn-primary" type="submit">Add Test Batch</button>
+            <button class="btn btn-primary" type="button" ng-click="clearForm(addTestBatchForm); clear()">Clear</button>
+          </div>
         </div>
-      </div>
 
-    </form>
+      </form>
+    </div>
   </div>
 </div>
 
