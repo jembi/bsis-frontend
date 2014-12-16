@@ -1,5 +1,5 @@
 <span style="float: right; padding-right: 15px; font-size: 0.9em">
-  <em><a href="" ng-click="manageDeferral()">Add Deferral</a></em>
+  <em><a has-permission="{{permissions.ADD_DEFERRAL}}" href="" ng-click="manageDeferral()">Add Deferral</a></em>
 </span>
 <table class="dash-table">
     <tr>
@@ -37,7 +37,7 @@
           <td data-title="'Deferred By'" style="width:15%;" header-class="text-left" sortable="'createdBy'" filter="{ 'createdBy': 'text' }">
               {{deferral.createdBy}}
           </td>
-          <td data-title="''" style="width:8%;" class="text-center">
+          <td ng-hide="true === true" data-title="''" style="width:8%;" class="text-center">
             <span style="font-size: 0.9em;">
               <em><a href=""> Edit</a></em>
             </span>

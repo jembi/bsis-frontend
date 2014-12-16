@@ -1,7 +1,7 @@
 <form editable-form name="demographicsForm" onaftersave="updateDonor(donor)">
 
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
-    <em><a href="" ng-click="demographicsForm.$show()" ng-show="!demographicsForm.$visible">Edit</a></em>
+    <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="demographicsForm.$show()" ng-show="!demographicsForm.$visible">Edit</a></em>
     <span ng-show="demographicsForm.$visible">
       <em>
       <button type="submit" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="demographicsForm.$waiting">

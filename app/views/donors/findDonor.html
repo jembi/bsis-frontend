@@ -60,7 +60,7 @@
       <div class="panel-body">
 
           <p>
-            <em> {{data.length}} donor(s) found </em> | <em> <a href="" ng-click="addNewDonor(donorSearch)" >Add New Donor</a></em>  
+            <em> {{data.length}} donor(s) found </em> <span has-permission="{{permissions.ADD_DONOR}}"> | <em> <a href="" ng-click="addNewDonor(donorSearch)" >Add New Donor</a></em> </span> 
           </p>
 
           <table ng-table="tableParams" show-filter="false" class="table">
