@@ -9,7 +9,7 @@ angular.module('bsis')
 
     login: function (credentials, loginSuccess) {
       var encoded = Base64.encode(credentials.username + ':' + credentials.password);
-      $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
+      $http.defaults.headers.common.authorization = 'Basic ' + encoded;
       Api.User.get({}, function (profile) {
         userProfile = profile;
         $rootScope.user = userProfile;
@@ -40,6 +40,7 @@ angular.module('bsis')
 
     logout: function () {
       userProfile = null;
+      $http.defaults.headers.common.authorization = '';
       $rootScope.user = {
         id : '',
         userId: '',
