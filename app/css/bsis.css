@@ -582,6 +582,9 @@ input[type=number] {
 .xeditable.result {
   width: 60px;
 }
+.xeditable.w50 {
+  width: 50px;
+}
 /* --> css for x-editable fields */
 
 div .alert {
