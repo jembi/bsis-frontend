@@ -847,6 +847,26 @@ angular.module('bsis')
       }
     };
 
+    
+    $scope.updateDonation = function (donation){
+
+      //$scope.addDonationSuccess = '';
+
+      DonorService.updateDonation(donation, function(response){
+        if (response === true){
+
+          $scope.addDonationSuccess = true;
+          $scope.donation = {};
+          $location.path("/addDonation");
+
+        }
+        else{
+          // TODO: handle case where response == false
+          $scope.addDonationSuccess = false;
+        }
+      });
+    };
+
   })
 
 ;
