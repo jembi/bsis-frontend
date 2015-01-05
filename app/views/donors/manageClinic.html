@@ -16,12 +16,14 @@
     |
     <small><em>Number of Donations: </em></small> {{donationBatch.numCollections}}
     <span has-permission="{{permissions.EDIT_DONATION_BATCH}}" class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
-      <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  
-      <span ng-show="!editableForm.$visible"> | 
-    </span>
-    <span ng-show="editableForm.$visible">
-      <em><a href="" ng-click="updateDonationBatch()" ng-disabled="editableForm.$waiting">Save</a></em> | 
-      <em><a href="" ng-click="editableForm.$cancel()" ng-disabled="editableForm.$waiting">Cancel</a></em>
+      <span has-permission="{{permissions.HIDDEN}}">
+        <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  
+        <span ng-show="!editableForm.$visible"> | 
+        </span>
+        <span ng-show="editableForm.$visible">
+        <em><a href="" ng-click="updateDonationBatch()" ng-disabled="editableForm.$waiting">Save</a></em> | 
+        <em><a href="" ng-click="editableForm.$cancel()" ng-disabled="editableForm.$waiting">Cancel</a></em>
+      </span>
     </span>  
     <em><a ng-show="!editableForm.$visible" ng-click="closeDonationBatch(donationBatch)" href="">Close Batch</a></em></small>
     </span>
