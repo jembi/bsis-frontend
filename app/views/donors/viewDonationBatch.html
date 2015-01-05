@@ -1,6 +1,6 @@
 <p>
   <em> 
-    {{donationBatch.numCollections}} donation(s) in batch </em> | <em> <a href="" ng-click="viewAddDonationForm()" >Add Donation</a></em>  
+    {{donationBatch.numCollections}} donation(s) in batch </em> <span has-permission="{{permissions.ADD_DONATION}}"> | <em> <a href="" ng-click="viewAddDonationForm()" >Add Donation</a></em> </span>
 </p>
 
 <table ng-table="donorClinicTableParams" show-filter="true" class="table">

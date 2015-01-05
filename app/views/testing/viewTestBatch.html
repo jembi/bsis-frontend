@@ -5,8 +5,9 @@
 </span>
 
 <span class="h4" style="float: right; margin-top: 5px; padding-right: 15px;">
-  <small><em><a href="" ng-click="recordTestResults(testBatch, 'tti')" >Record TTI Test Results</a></em></small> | 
-  <small><em><a href="" ng-click="recordTestResults(testBatch, 'bloodGrouping')" >Record Blood Group Serology Results</a></em></small>
+  <span has-permission="{{permissions.ADD_TTI_OUTCOME}}"> <small><em><a href="" ng-click="recordTestResults(testBatch, 'tti')" >Record TTI Test Results</a></em></small> </span>
+  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> | </span>
+  <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> <small><em><a href="" ng-click="recordTestResults(testBatch, 'bloodGrouping')" >Record Blood Group Serology Results</a></em></small> </span>
 </span>
 
 <hr/>

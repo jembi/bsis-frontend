@@ -1,7 +1,7 @@
 <form editable-form name="demographicsForm" onaftersave="updateDonor(donor)">
 
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
-    <em><a href="" ng-click="demographicsForm.$show()" ng-show="!demographicsForm.$visible">Edit</a></em>
+    <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="demographicsForm.$show()" ng-show="!demographicsForm.$visible">Edit</a></em>
     <span ng-show="demographicsForm.$visible">
       <em>
       <button type="submit" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="demographicsForm.$waiting">
@@ -39,6 +39,11 @@
       </tr>
       <tr>
         <td class="icon"></td>
+        <td class="field">Email: </td>
+        <td class="value"><span e-class="xeditable" editable-text="donor.contact.email" e-name="mobileNumber">{{donor.contact.email}}</span></td>
+      </tr>
+      <tr>
+        <td class="icon"></td>
         <td class="field">Mobile: </td>
         <td class="value"><span e-class="xeditable" editable-text="donor.contact.mobileNumber" e-name="mobileNumber">{{donor.contact.mobileNumber}}</span></td>
       </tr>
@@ -65,7 +70,7 @@
         <td class="icon"><i class="fa {{icons.GLOBE}}"></i></td>
         <td class="field">Address Type: </td>
         <td class="value" style="width:29%;"><em>Home</em></td>
-        <td class="value" style="width:29%;"><em>Postal (Preferred)</em></td>
+        <td class="value" style="width:29%;"><em>Postal</em></td>
         <td class="value" style="width:29%;"><em>Work</em></td>
       </tr>
       <tr>

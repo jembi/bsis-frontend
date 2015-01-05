@@ -573,11 +573,17 @@ input[type=number] {
 .xeditable.donor-panel {
   width: 160px;
 }
+.xeditable.notes {
+  width: 350px;
+}
 .xeditable.language {
   width: 140px;
 }
 .xeditable.result {
   width: 60px;
+}
+.xeditable.w50 {
+  width: 50px;
 }
 /* --> css for x-editable fields */
 

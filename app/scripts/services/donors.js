@@ -138,6 +138,21 @@ angular.module('bsis')
         response(false);
       }); 
     },
+    updateDonation: function (donation, response){
+
+      var updateDonation = Api.Donations.get({id:donation.id}, function() {
+        updateDonation = updateDonation.donation;
+
+        angular.copy(donation, updateDonation);
+
+        Api.Donations.update({id:donation.id}, updateDonation, function(data) {
+         response(data.donation);
+        }, function (){
+          response(false);
+        }); 
+
+      });
+    },
     getDeferralsFormFields: function(response){
       Api.DeferralsFormFields.get({}, function (backingForm) {
         response(backingForm);

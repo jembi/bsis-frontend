@@ -25,8 +25,8 @@
     </span>
 
     <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
-      <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit Donor</a></em>  
-      <span ng-show="!editableForm.$visible"> | 
+      <small><em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit Donor</a></em>  
+      <span ng-show="!editableForm.$visible">
       </span>
 
 
@@ -41,7 +41,7 @@
       </em>
     </span>
 
-      <em><a ng-show="!editableForm.$visible" href="">Void Donor</a></em></small>
+    <span has-permission="{{permissions.VOID_DONOR}}">  |  <em><a ng-show="!editableForm.$visible" href="">Void Donor</a></em></small> </span>
     </span>
 
   <hr/>
@@ -131,7 +131,26 @@
               <tr>
                 <td class="icon"><i class="fa {{icons.COMMENT}}"></i></td>
                 <td class="field">Comments: </td>
-                <td class="value">{{donor.notes}}</td>
+                <td class="value">
+                <form editable-form name="donorNotesForm" onaftersave="updateDonor(donor)">
+
+                <span style="float: right; padding-right: 15px; padding-left: 15px; font-size: 0.9em">
+                  <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="donorNotesForm.$show()" ng-show="!donorNotesForm.$visible">Edit</a></em>
+                  <span ng-show="donorNotesForm.$visible">
+                    <em>
+                    <button type="submit" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="donorNotesForm.$waiting">
+                      Save
+                    </button>
+                    <button type="button" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="donorNotesForm.$waiting" ng-click="donorNotesForm.$cancel()">
+                      Cancel
+                    </button>
+                    </em>
+                  </span>
+                </span>
+
+                <span style="white-space: pre;" e-class="xeditable notes" editable-textarea="donor.notes" e-escape="true" e-rows="4" e-name="notes">{{donor.notes}}</span>
+
+                </td>
               </tr>
             </tbody>
           </table>
@@ -153,7 +172,7 @@
 
     </tab>
 
-    <tab select="getDonations(donor.id)">
+    <tab select="getDonations(donor.id)" has-permission="{{permissions.VIEW_DONATION}}">
       <tab-heading>
         <i class="fa {{icons.ARCHIVE}}"></i> Donations
       </tab-heading>
@@ -171,7 +190,7 @@
       </div>
     </tab>
 
-    <tab select="getDeferrals(donor.id)">
+    <tab select="getDeferrals(donor.id)" has-permission="{{permissions.VIEW_DEFERRAL}}">
       <tab-heading>
         <i class="fa {{icons.WARNING}}"></i> Deferrals
       </tab-heading>

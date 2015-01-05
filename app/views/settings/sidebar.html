@@ -9,8 +9,8 @@
         </div>
       </span>
     </li>
-    <li class="disabled"><span>SETTINGS</span></li>
-    <li ng-class="{current: isCurrent('/locations')}"><a href="#/locations">Manage Locations</a></li>
+    <li class="disabled" has-permission="{{permissions.VIEW_ADMIN_INFORMATION}}"><span>SETTINGS</span></li>
+    <li ng-class="{current: isCurrent('/locations')}" has-permission="{{permissions.MANAGE_DONATION_SITES}}"><a href="#/locations">Manage Locations</a></li>
   </ul>
   <div ng-include="'views/sidebarFooter.html'"></div>
 </div>

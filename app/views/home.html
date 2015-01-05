@@ -6,6 +6,10 @@
       <div class="navbar-sub">Welcome to BSIS - The Blood Safety Information System</div>
       <hr class="hr-top">
 
+      <div ng-if="accessDenied === true" ng-hide="accessDenied === false" style="padding-top:10px; width:60%; margin:auto;">
+        <alert type="danger" close="accessDenied = false">You do not have sufficient permissions to access that page</alert>
+      </div>
+
         <div class="row placeholders home-page">
           <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_DONOR_INFORMATION}}">
             <div class="icon-container">

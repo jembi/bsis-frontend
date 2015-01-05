@@ -43,7 +43,7 @@ angular.module('bsis', [
       .when('/donors', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorsCtrl',
-        permission: PERMISSIONS.VIEW_DONOR
+        permission: PERMISSIONS.VIEW_DONOR_INFORMATION
       })
       .when('/findDonor', {
         templateUrl : 'views/donors.html',
@@ -68,7 +68,7 @@ angular.module('bsis', [
       .when('/exportDonorList', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorListCtrl',
-        permission: PERMISSIONS.VIEW_DONOR
+        permission: PERMISSIONS.EXPORT_CLINIC_DATA
       })
       .when('/viewDonor', {
         templateUrl : 'views/donors.html',
@@ -85,7 +85,7 @@ angular.module('bsis', [
       .when('/components', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENT
+        permission: PERMISSIONS.VIEW_COMPONENT_INFORMATION
       })
       .when('/recordComponents', {
         templateUrl : 'views/components.html',
@@ -112,7 +112,7 @@ angular.module('bsis', [
       .when('/testing', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TEST_OUTCOME
+        permission: PERMISSIONS.VIEW_TESTING_INFORMATION
       })
       .when('/viewTestResults', {
         templateUrl : 'views/testing.html',
@@ -122,22 +122,22 @@ angular.module('bsis', [
       .when('/manageTestBatch', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TEST_OUTCOME
+        permission: PERMISSIONS.VIEW_TEST_BATCH
       })
       .when('/viewTestBatch', {
         templateUrl : 'views/testing.html',
         controller  : 'ViewTestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TEST_OUTCOME
+        permission: PERMISSIONS.VIEW_TEST_BATCH
       })
       .when('/manageTTITesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        permission: PERMISSIONS.ADD_TEST_OUTCOME
+        permission: PERMISSIONS.ADD_TTI_OUTCOME
       })
       .when('/manageBloodGroupTesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        permission: PERMISSIONS.ADD_TEST_OUTCOME
+        permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME
       })
       .when('/uploadTestResults', {
         templateUrl : 'views/testing.html',
@@ -154,22 +154,22 @@ angular.module('bsis', [
       .when('/manageInventory', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
+        permission: PERMISSIONS.VIEW_COMPONENT
       })
       .when('/transferComponents', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
+        permission: PERMISSIONS.ISSUE_COMPONENT
       })
       .when('/issueComponents', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
+        permission: PERMISSIONS.ISSUE_COMPONENT
       })
       .when('/componentUsage', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
+        permission: PERMISSIONS.VIEW_COMPONENT
       })
 
       // LABELLING URLs
@@ -204,8 +204,6 @@ angular.module('bsis', [
         controller  : 'SettingsCtrl',
         permission: PERMISSIONS.VIEW_ADMIN_INFORMATION
       })
-
-      // SETTINGS URLs
       .when('/locations', {
         templateUrl : 'views/settings.html',
         controller  : 'SettingsCtrl',
@@ -225,10 +223,18 @@ angular.module('bsis', [
 
     // on route change, check to see if user has appropriate permissions
     $rootScope.$on('$routeChangeStart', function(scope, next, current) {
+
+      // set initial accessDenied value to false
+      if (!($rootScope.accessDenied === true && $location.path() == '/home')){
+        $rootScope.accessDenied = false;
+      }
+
       var permission = next.$$route.permission;
-      // if the required permission is not in the current user's permissions list, redirect to logout
+
+      // if the required permission is not in the current user's permissions list, redirect to home page and display alert
       if (permission !== undefined && $rootScope.sessionUserPermissions.indexOf(permission) <= -1){
-        $location.path('/logout');
+        $rootScope.accessDenied = true;
+        $location.path('/home');
       }
     });
     
@@ -247,7 +253,6 @@ angular.module('bsis', [
 
       //check if session exists
       if( consoleSession ){
-
         //check if session has expired
         var currentTime = new Date();
         currentTime = currentTime.toISOString();
@@ -369,6 +374,9 @@ angular.module('bsis', [
     };
   })
 
+  /*  Custom directive to check if user has associated permission
+      example use: <span has-permission="{{permissions.SOME_PERMISSION}}"> 
+  */
   .directive('hasPermission', ['$rootScope', function ($rootScope)  {
     return {
       link: function(scope, element, attrs) {
@@ -388,6 +396,37 @@ angular.module('bsis', [
 
           // remove the element if the user does not have the appropriate permission 
           if(!hasPermission){
+            element.remove();
+          }
+        }
+      }
+    };
+  }])
+
+  /*  Custom directive to check if user has associated permissions - use a semicolon (;) separated list of permissions
+      example use: <span has-permissions="{{permissions.SOME_PERMISSION}};{{permissions.SOME_PERMISSION_#2}}">
+  */
+  .directive('hasPermissions', ['$rootScope', function ($rootScope)  {
+    return {
+      link: function(scope, element, attrs) {
+        // if the permission is not an empty string, determine if element should be displayed
+        if(attrs.hasPermissions !== ''){
+          var permissions = attrs.hasPermissions.split(';');
+          showOrHide();
+        }
+
+        // determine if user has permissions to view the element - 
+        function showOrHide() {
+          var hasPermissions = true;
+          for (var permission in permissions){
+            // if user doesn't have one of the appropriate permissions, set to FALSE
+            if ($rootScope.sessionUserPermissions.indexOf(permissions[permission]) < 0){
+              hasPermissions = false;
+            }
+          }
+
+          // remove the element if the user does not have the appropriate permission 
+          if(!hasPermissions){
             element.remove();
           }
         }

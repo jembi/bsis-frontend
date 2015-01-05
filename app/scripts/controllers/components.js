@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ComponentsCtrl', function ($scope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, $filter, ngTableParams, $timeout) {
+  .controller('ComponentsCtrl', function ($scope, $rootScope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -9,15 +9,33 @@ angular.module('bsis')
     $scope.selectedComponents = [];
 
     $scope.isCurrent = function(path) {
+      var initialView = '';
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
         $location.path(path);
         $scope.selection = path;
         return true;
       } else if ($location.path() === path) {
         return true;
-      } else if ($location.path() === "/components" && path === "/recordComponents") {
-        return true;
       } else {
+        // for first time load of /components view, determine the initial view
+        if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.ADD_COMPONENT) > -1)){
+          initialView = '/recordComponents';
+        }
+        else if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_COMPONENT) > -1)){
+          initialView = '/findComponents';
+        }
+        else if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.DISCARD_COMPONENT) > -1)){
+          initialView = '/discardComponents';
+        }
+        else if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_DISCARDS) > -1)){
+          initialView = '/findDiscards';
+        }
+
+        // if first time load of /components view , and path === initialView, return true
+        if ($location.path() === "/components" && path === initialView){
+          return true;
+        }
+
         return false;
       }
     };
@@ -47,16 +65,21 @@ angular.module('bsis')
     $scope.startDateOpen = false;
     $scope.endDateOpen = false;
 
-    ComponentService.getComponentsFormFields(function(response){
-      if (response !== false){
-        $scope.data = response;
-        $scope.componentTypes = $scope.data.componentTypes;
-        $scope.returnReasons = $scope.data.returnReasons;
-        $scope.discardReasons = $scope.data.discardReasons;
-      }
-      else{
-      }
-    });
+
+    $scope.getComponentsFormFields = function() {
+      ComponentService.getComponentsFormFields(function(response){
+        if (response !== false){
+          $scope.data = response;
+          $scope.componentTypes = $scope.data.componentTypes;
+          $scope.returnReasons = $scope.data.returnReasons;
+          $scope.discardReasons = $scope.data.discardReasons;
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getComponentsFormFields();
 
     $scope.clear = function () {
       $scope.componentsSearch = {};

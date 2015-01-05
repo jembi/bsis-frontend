@@ -18,7 +18,26 @@
           <div ng-switch-when="/uploadTestResults"><div ng-include="'views/testing/uploadTestResults.html'"></div></div>
           <div ng-switch-when="/manageTestBatch"><div ng-include="'views/testing/manageTestBatch.html'"></div></div>
           <div ng-switch-when="/viewTestBatch"><div ng-include="'views/testing/viewTestBatch.html'"></div></div>
-          <div ng-switch-default><div ng-include="'views/testing/manageTestBatch.html'"></div></div>
+          <div ng-switch-default>
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_TEST_BATCH) < 0) && 
+                        (sessionUserPermissions.indexOf(permissions.ADD_TEST_OUTCOME) < 0) &&
+                        (sessionUserPermissions.indexOf(permissions.VIEW_TEST_OUTCOME) > -1)"
+                ng-include="'views/testing/viewTestResults.html'">
+            </div>
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_TEST_BATCH) < 0) && 
+                        (sessionUserPermissions.indexOf(permissions.ADD_TEST_OUTCOME) > -1) &&
+                        (sessionUserPermissions.indexOf(permissions.VIEW_TEST_OUTCOME) < 0)"
+                ng-include="'views/testing/uploadTestResults.html'">
+            </div>
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_TEST_BATCH) < 0) && 
+                        (sessionUserPermissions.indexOf(permissions.ADD_TEST_OUTCOME) > -1) &&
+                        (sessionUserPermissions.indexOf(permissions.VIEW_TEST_OUTCOME) > -1)"
+                ng-include="'views/testing/viewTestResults.html'">
+            </div>
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_TEST_BATCH) > -1)"
+                ng-include="'views/testing/manageTestBatch.html'">
+            </div>
+          </div>
         </div>
 
        </div>

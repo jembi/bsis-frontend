@@ -1,14 +1,22 @@
-<form editable-form name="donationSummaryForm" onaftersave="updateDonation()">
+<form editable-form name="donationSummaryForm" onaftersave="updateDonation(donation)">
+
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
-  <small><em><a href="" ng-click="donationSummaryForm.$show()" ng-show="!donationSummaryForm.$visible">Edit</a></em>  
-    <span ng-show="!donationSummaryForm.$visible"> | 
+    <span ng-show="!donationSummaryForm.$visible">
+      <em><a has-permission="{{permissions.EDIT_DONATION}}" href="" ng-click="donationSummaryForm.$show()" >Edit</a></em> | 
+      <em><a href="" ng-click="viewDonationBatch()">Done</a></em>
+    </span>
+    <span ng-show="donationSummaryForm.$visible">
+      <em>
+      <button type="submit" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="donationSummaryForm.$waiting">
+        Save
+      </button>
+      <button type="button" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="donationSummaryForm.$waiting" ng-click="donationSummaryForm.$cancel()">
+        Cancel
+      </button>
+      </em>
+    </span>
   </span>
-  <span ng-show="donationSummaryForm.$visible">
-    <em><a href="" ng-click="updateDonation()" ng-disabled="donationSummaryForm.$waiting">Save</a></em> | 
-    <em><a href="" ng-click="donationSummaryForm.$cancel()" ng-disabled="donationSummaryForm.$waiting">Cancel</a></em>
-  </span>  
-  <em><a ng-show="!donationSummaryForm.$visible" href="" ng-click="viewDonationBatch()">Done</a></em></small>
-  </span>
+
   <div class="col-sm-10" style="height:100%;">
     <table class="dash-table">
       <tbody>
@@ -42,23 +50,23 @@
         </tr>
         <tr>
           <td class="field">Pulse: </td>
-          <td class="value"><span editable-text="donation.donorPulse" e-name="donorPulse" e-required>{{donation.donorPulse}}</span></td>
+          <td class="value"><span e-class="xeditable w50" editable-text="donation.donorPulse" e-name="donorPulse">{{donation.donorPulse}}</span></td>
         </tr>
         <tr>
-          <td class="field">Hb:: </td>
-          <td class="value"><span editable-text="donation.haemoglobinCount" e-name="haemoglobinCount" e-required>{{donation.haemoglobinCount}}</span></td>
+          <td class="field">Hb: </td>
+          <td class="value"><span e-class="xeditable w50" editable-text="donation.haemoglobinCount" e-name="haemoglobinCount">{{donation.haemoglobinCount}}</span></td>
         </tr>
         <tr>
           <td class="field">BP: </td>
-          <td class="value"><span editable-text="donation.bloodPressureSystolic" e-name="bloodPressureSystolic" e-required>{{donation.bloodPressureSystolic}}</span>/<span editable-text="donation.bloodPressureDiastolic" e-name="bloodPressureDiastolic" e-required>{{donation.bloodPressureDiastolic}}</span></td>
+          <td class="value"><span e-class="xeditable w50" editable-text="donation.bloodPressureSystolic" e-name="bloodPressureSystolic">{{donation.bloodPressureSystolic}}</span>/<span e-class="xeditable w50" editable-text="donation.bloodPressureDiastolic" e-name="bloodPressureDiastolic">{{donation.bloodPressureDiastolic}}</span></td>
         </tr>
         <tr>
           <td class="field">Weight: </td>
-          <td class="value"><span editable-text="donation.donorWeight" e-name="donorWeight" e-required>{{donation.donorWeight}}</span></td>
+          <td class="value"><span e-class="xeditable w50" editable-text="donation.donorWeight" e-name="donorWeight">{{donation.donorWeight}}</span></td>
         </tr>
         <tr>
           <td class="field">Comment: </td>
-          <td class="valuesml"><span editable-text="donation.notes" e-name="notes" e-required>{{donation.notes}}</span></td>
+          <td class="value"><span e-class="xeditable notes" editable-text="donation.notes" e-name="notes">{{donation.notes}}</span></td>
         </tr>
       </tbody>
     </table>

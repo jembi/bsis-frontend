@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $location, DonorService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, DonorService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -41,6 +41,7 @@ angular.module('bsis')
   };
 
     $scope.isCurrent = function(path) {
+      var initialView = '';
       if ($location.path() === "/viewDonor" && path === "/findDonor") {
         $scope.selection = $location.path();
         return true;
@@ -56,9 +57,23 @@ angular.module('bsis')
         return true;
       } else if ($location.path() === path) {
         return true;
-      } else if ($location.path() === "/donors" && path === "/findDonor") {
-        return true;
       } else {
+        // for first time load of /donors view, determine the initial view
+        if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_DONOR) > -1)){
+          initialView = '/findDonor';
+        }
+        else if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_DONATION_BATCH) > -1)){
+          initialView = '/manageClinic';
+        }
+        else if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.EXPORT_CLINIC_DATA) > -1)){
+          initialView = '/exportDonorList';
+        }
+
+        // if first time load of /donors view , and path === initialView, return true
+        if ($location.path() === "/donors" && path === initialView){
+          return true;
+        }
+
         return false;
       }
     };
@@ -830,6 +845,26 @@ angular.module('bsis')
         $scope.submitted = true;
         console.log("FORM NOT VALID");
       }
+    };
+
+    
+    $scope.updateDonation = function (donation){
+
+      //$scope.addDonationSuccess = '';
+
+      DonorService.updateDonation(donation, function(response){
+        if (response === true){
+
+          $scope.addDonationSuccess = true;
+          $scope.donation = {};
+          $location.path("/addDonation");
+
+        }
+        else{
+          // TODO: handle case where response == false
+          $scope.addDonationSuccess = false;
+        }
+      });
     };
 
   })
