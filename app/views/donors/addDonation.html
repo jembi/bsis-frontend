@@ -120,7 +120,7 @@
       <label for="name" class="col-sm-2 control-label" style="padding-top:30px;">Start</label>
       <div class="row col-sm-10">
         <div style="padding-left:5px;">
-          <timepicker ng-model="bleedStartTime" hour-step="hstep" minute-step="mstep"></timepicker>
+          <timepicker ng-model="bleedStartTime" name="bleedStartTime" hour-step="hstep" minute-step="mstep"></timepicker>
         </div>
       </div>
     </div>
@@ -129,9 +129,27 @@
       <label for="name" class="col-sm-2 control-label" style="padding-top:30px;">End</label>
       <div class="row col-sm-10">
         <div style="padding-left:5px;">
-          <timepicker ng-model="bleedEndTime" hour-step="hstep" minute-step="mstep"></timepicker>
+          <timepicker ng-model="bleedEndTime" name="bleedEndTime" hour-step="hstep" minute-step="mstep"></timepicker>
         </div>
       </div>
+    </div>
+
+    <div>
+      <small class="error" 
+        ng-show="
+         addDonationForm.bleedStartTime.$error.time || addDonationForm.bleedEndTime.$error.time
+        ">
+        Invalid input
+      </small>
+    </div>
+
+    <div>
+      <small class="error" 
+        ng-show="
+          (bleedEndTime < bleedStartTime) && !addDonationForm.bleedStartTime.$error.time && !addDonationForm.bleedEndTime.$error.time
+        ">
+        End time should be after Start time
+      </small>
     </div>
 
 
