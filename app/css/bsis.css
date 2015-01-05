@@ -573,6 +573,9 @@ input[type=number] {
 .xeditable.donor-panel {
   width: 160px;
 }
+.xeditable.notes {
+  width: 350px;
+}
 .xeditable.language {
   width: 140px;
 }
