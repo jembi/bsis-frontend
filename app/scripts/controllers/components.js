@@ -33,6 +33,7 @@ angular.module('bsis')
 
         // if first time load of /components view , and path === initialView, return true
         if ($location.path() === "/components" && path === initialView){
+          $location.path(initialView);
           return true;
         }
 

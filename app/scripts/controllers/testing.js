@@ -49,6 +49,7 @@ angular.module('bsis')
 
         // if first time load of /testing view , and path === initialView, return true
         if ($location.path() === "/testing" && path === initialView){
+          $location.path(initialView);
           return true;
         }
 

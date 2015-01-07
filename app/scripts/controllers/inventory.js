@@ -25,6 +25,7 @@ angular.module('bsis')
 
         // if first time load of /inventory view , and path === initialView, return true
         if ($location.path() === "/inventory" && path === initialView){
+          $location.path(initialView);
           return true;
         }
 

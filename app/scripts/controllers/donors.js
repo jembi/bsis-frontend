@@ -71,6 +71,7 @@ angular.module('bsis')
 
         // if first time load of /donors view , and path === initialView, return true
         if ($location.path() === "/donors" && path === initialView){
+          $location.path(initialView);
           return true;
         }
 
@@ -847,7 +848,6 @@ angular.module('bsis')
       }
     };
 
-    
     $scope.updateDonation = function (donation){
 
       //$scope.addDonationSuccess = '';
