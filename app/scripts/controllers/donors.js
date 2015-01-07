@@ -63,7 +63,7 @@ angular.module('bsis')
           initialView = '/findDonor';
         }
         else if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_DONATION_BATCH) > -1)){
-          initialView = '/manageClinic';
+          initialView = '/manageDonationBatches';
         }
         else if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.EXPORT_CLINIC_DATA) > -1)){
           initialView = '/exportDonorList';
