@@ -194,6 +194,13 @@ angular.module('bsis')
     getDonorBarcode: function (donorId, response) {
       Api.DonorBarcode.get({id:donorId}, function (label) {
         response(label);
+
+        var hiddenElement = document.createElement('a');
+        hiddenElement.href = 'data:attachment/zpl,' + encodeURI(label.labelZPL);
+        hiddenElement.target = '_blank';
+        hiddenElement.download = 'barcode.bc';
+        hiddenElement.click();
+
       }, function (){
         response(false);
       });
