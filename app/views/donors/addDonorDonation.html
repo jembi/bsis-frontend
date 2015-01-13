@@ -1,0 +1,257 @@
+<span class="h4">Add Donation</span>
+<hr style="margin-top:8px;"/>
+
+<div ng-if="$parent.addDonationSuccess === true" ng-hide="$parent.addDonationSuccess !== true" style="padding-top:10px;"><alert type="success" close="$parent.addDonationSuccess = ''">Donation Added Successfully.</alert></div>
+<div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false" style="padding-top:10px;"><alert type="danger" close="$parent.addDonationSuccess = ''">Error Adding Donation, please resolve issues and try again.</alert></div>
+
+<form name="addDonationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addDonation(donation, donationBatch, bleedStartTime, bleedEndTime, addDonationForm.$valid)">
+
+  <div class="col-md-4">
+
+    <p><em>Donation Information</em></p>
+    <hr style="margin-top:8px;"/>
+
+    <div class="form-group">
+      <label for="name" class="col-sm-3 control-label">Batch</label>
+      <div class="row col-sm-9">
+        <div class="form-inline" style="padding-left:5px;">
+          <div style="padding-top:7px; padding-bottom:5px;" ng-show="donationBatches.length==0"><em>No open clinics</em></div>
+          <select ng-show="donationBatches.length>0" name="donationBatch" class="form-control input-sm" ng-model="donationBatch" ng-options="item as item.donorPanel.name for item in donationBatches" required 
+          ng-class="{'ng-invalid ng-dirty' : addDonationForm.donationBatch.$invalid && submitted}"
+          >
+              <option value=""></option>
+          </select>
+          <div>
+            <small class="error" 
+              ng-show="
+                (addDonationForm.donationBatch.$invalid && (addDonationForm.donationBatch.$dirty || submitted))
+              ">
+              This cannot be empty
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name" class="col-sm-3 control-label">DIN</label>
+      <div class="row col-sm-9">
+        <div class="form-inline" style="padding-left:5px;">
+          <input name="din" size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="donation.collectionNumber"
+          required integer ng-maxlength=6 
+          ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+          ng-class="{'ng-invalid ng-dirty' : addDonationForm.din.$invalid && submitted}"
+          >
+          <div>
+            <small class="error" 
+              ng-show="
+                (addDonationForm.din.$error.required && (addDonationForm.din.$dirty || submitted))
+              ">
+              This cannot be empty
+            </small>
+          </div>
+          <div>
+            <small class="error" 
+              ng-show="
+                (!addDonationForm.din.$error.required && addDonationForm.din.$invalid && (addDonationForm.din.$dirty || submitted))
+              ">
+              Invalid input
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name" class="col-sm-3 control-label">Pack</label>
+      <div class="row col-sm-9">
+        <div class="form-inline" style="padding-left:5px;">
+          <select name="packType" class="form-control input-sm" ng-model="donation.packType" ng-options="item as item.bloodBagType for item in packTypes" required 
+          ng-class="{'ng-invalid ng-dirty' : addDonationForm.packType.$invalid && submitted}"
+          >
+              <option value=""></option>
+          </select>
+          <div>
+            <small class="error" 
+              ng-show="
+                (addDonationForm.packType.$invalid && (addDonationForm.packType.$dirty || submitted))
+              ">
+              This cannot be empty
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name" class="col-sm-3 control-label">Donation</label>
+      <div class="row col-sm-9">
+        <div class="form-inline" style="padding-left:5px;">
+          <select name="donationType" class="form-control input-sm" ng-model="donation.donationType" ng-options="item as item.donationType for item in donationTypes" required 
+          ng-class="{'ng-invalid ng-dirty' : addDonationForm.donationType.$invalid && submitted}"
+          >
+              <option value=""></option>
+          </select>
+          <div>
+            <small class="error" 
+              ng-show="
+                (addDonationForm.donationType.$invalid && (addDonationForm.donationType.$dirty || submitted))
+              ">
+              This cannot be empty
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+    <div class="col-md-4">
+
+    <p><em>Bleed Times</em></p>
+    <hr style="margin-top:8px; margin-bottom:1px;"/>
+
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label" style="padding-top:30px;">Start</label>
+      <div class="row col-sm-10">
+        <div style="padding-left:5px;">
+          <timepicker ng-model="bleedStartTime" name="bleedStartTime" hour-step="hstep" minute-step="mstep"></timepicker>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label" style="padding-top:30px;">End</label>
+      <div class="row col-sm-10">
+        <div style="padding-left:5px;">
+          <timepicker ng-model="bleedEndTime" name="bleedEndTime" hour-step="hstep" minute-step="mstep"></timepicker>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <small class="error" 
+        ng-show="
+         addDonationForm.bleedStartTime.$error.time || addDonationForm.bleedEndTime.$error.time
+        ">
+        Invalid input
+      </small>
+    </div>
+
+    <div>
+      <small class="error" 
+        ng-show="
+          (bleedEndTime < bleedStartTime) && !addDonationForm.bleedStartTime.$error.time && !addDonationForm.bleedEndTime.$error.time
+        ">
+        End time should be after Start time
+      </small>
+    </div>
+
+
+  </div>
+  <div class="col-md-4">
+
+    <p><em>Donor Assessment</em></p>
+    <hr style="margin-top:8px;"/>
+
+    <div class="form-group">
+      <label for="name" class="col-sm-3 control-label">Weight</label>
+      <div class="row col-sm-9">
+        <div class="form-inline" style="padding-left:5px;">
+          <input name="donorWeight" size="4" type="number" id="donorWeight" class="form-control input-sm" placeholder="" ng-model="donation.donorWeight" 
+          decimal min=0 max=300 
+          ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+          ng-class="{'ng-invalid ng-dirty' : addDonationForm.donorWeight.$invalid && submitted}"
+          > <em> kg </em>
+          <div>
+            <small class="error" 
+              ng-show="
+                (addDonationForm.donorWeight.$invalid && (addDonationForm.donorWeight.$dirty || submitted))
+              ">
+              Invalid input
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name" class="col-sm-3 control-label">Hb</label>
+      <div class="row col-sm-9">
+        <div class="form-inline" style="padding-left:5px;">
+          <input name="hb" size="4" type="number" id="haemoglobinCount" class="form-control input-sm" placeholder="" ng-model="donation.haemoglobinCount"
+          decimal min=0 max=50
+          ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+          ng-class="{'ng-invalid ng-dirty' : addDonationForm.hb.$invalid && submitted}"
+          >
+          <div>
+            <small class="error" 
+              ng-show="
+                (addDonationForm.hb.$invalid && (addDonationForm.hb.$dirty || submitted))
+              ">
+              Invalid input
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name" class="col-sm-3 control-label">BP</label>
+      <div class="row col-sm-9">
+        <div class="form-inline" style="padding-left:5px;">
+          <input name="bpSystolic" size="1" type="number" id="bloodPressureSystolic" class="form-control input-sm" placeholder="" ng-model="donation.bloodPressureSystolic"
+          integer min=0 max=200
+          ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+          ng-class="{'ng-invalid ng-dirty' : addDonationForm.bpSystolic.$invalid && submitted}"
+          > / 
+          <input name="bpDiastolic" size="1" type="number" id="bloodPressureDiastolic" class="form-control input-sm" placeholder="" ng-model="donation.bloodPressureDiastolic"
+          integer min=0 max=150
+          ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+          ng-class="{'ng-invalid ng-dirty' : addDonationForm.bpDiastolic.$invalid && submitted}"
+          >
+          <div>
+            <small class="error" 
+              ng-show="
+                (addDonationForm.bpSystolic.$invalid && (addDonationForm.bpSystolic.$dirty || submitted)) ||
+                (addDonationForm.bpDiastolic.$invalid && (addDonationForm.bpDiastolic.$dirty || submitted))
+              ">
+              Invalid input
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name" class="col-sm-3 control-label">Pulse</label>
+      <div class="row col-sm-9">
+        <div class="form-inline" style="padding-left:5px;">
+          <input name="pulse" size="4" type="number" id="donorPulse" class="form-control input-sm" placeholder="" ng-model="donation.donorPulse"
+          integer min=0 max=300 
+          ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+          ng-class="{'ng-invalid ng-dirty' : addDonationForm.pulse.$invalid && submitted}"
+          >
+          <div>
+            <small class="error" 
+              ng-show="
+                (addDonationForm.pulse.$invalid && (addDonationForm.pulse.$dirty || submitted))
+              ">
+              Invalid input
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group"> 
+    <div class="col-sm-offset-1 col-sm-11">
+      <button class="btn btn-primary" type="submit">Save</button>
+      <button class="btn btn-primary" type="button" ng-click="clearForm(addDonationForm); getDonations(donor.id)"/>Cancel</button>
+    </div>
+  </div>
+
+
+
+</form>
