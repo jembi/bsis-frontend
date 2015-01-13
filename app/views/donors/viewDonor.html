@@ -69,7 +69,7 @@
       {{donor.preferredLanguage.preferredLanguage}}
     </span>
 
-    <span style="float: right; padding-right: 15px;">
+    <span ng-show="!editableForm.$visible" style="float: right; padding-right: 15px;">
       <small>
       <em>
       <a href="" ng-click="printDonorBarcode()" >Print Donor Barcode</a>
