@@ -3,8 +3,10 @@
   <span class="h2"> 
     <span editable-text="donor.firstName" e-name="firstName" e-class="xeditable name" e-required>{{donor.firstName}}</span> 
     <span editable-text="donor.lastName" e-name="lastName" e-class="xeditable name" e-required>{{donor.lastName}}</span><small><em>
-    (<span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span>. 
-    <span editable-text="donor.callingName" e-name="callingName" e-class="xeditable name">{{donor.callingName}}</span>)</em></small>
+    <span ng-if="donor.title"> 
+    <span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span>.</span>
+    <span editable-text="donor.callingName" e-name="callingName" e-class="xeditable name">{{donor.callingName}}</span>
+    </em></small>
   </span>
 
     <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
