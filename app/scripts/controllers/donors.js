@@ -771,10 +771,19 @@ angular.module('bsis')
 
     };
 
+    $scope.closeDonationBatchCheck = function(donationBatch){
+      console.log("donationBatch.id: ", donationBatch.id);
+      $scope.donationBatchToClose = donationBatch.id;
+    };
+
+    $scope.closeDonationBatchCancel = function(){
+      $scope.donationBatchToClose = '';
+    };
+
     $scope.closeDonationBatch = function (donationBatch){
-      console.log("CLOSE DONATION BATCH");
       DonorService.closeDonationBatch(donationBatch, function(response){
         if (response !== false){
+          $scope.donationBatchToClose = '';
           $location.path("/manageDonationBatches");
         }
         else{
