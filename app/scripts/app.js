@@ -257,10 +257,9 @@ angular.module('bsis', [
         var currentTime = new Date();
         currentTime = currentTime.toISOString();
         if( currentTime >= consoleSession.expires ){
-          localStorage.removeItem('consoleSession');
           //session expired - user needs to log in
+          AuthService.logout();
           $location.path( "/login" );
-
         }else{
 
           //session still active - update expires time
