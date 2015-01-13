@@ -225,6 +225,7 @@ angular.module('bsis')
           $scope.lastDonation = $scope.data.lastDonation;
           $scope.dateOfFirstDonation = $scope.data.dateOfFirstDonation;
           $scope.totalDonations = $scope.data.totalDonations;
+          $scope.dueToDonate = $scope.data.dueToDonate;
         }
         else{
         }
