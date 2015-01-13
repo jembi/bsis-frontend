@@ -443,6 +443,7 @@ angular.module('bsis')
 
             $scope.addDonationSuccess = true;
             $scope.donation = {};
+            $scope.getDonations($scope.donor.id);
             $scope.donationsView = 'viewDonations';
             $scope.submitted = '';
           }
