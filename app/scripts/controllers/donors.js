@@ -452,6 +452,10 @@ angular.module('bsis')
             // TODO: handle case where response == false
             $scope.addDonationSuccess = false;
           }
+
+          // refresh donor overview after adding donation
+          $scope.getDonorOverview();
+
         });
       }
       else {
