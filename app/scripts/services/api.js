@@ -121,6 +121,8 @@ angular.module('bsis')
         }
       ),
 
+      RecentDonationBatches: $resource(url + '/donationbatches/recent/:count'),
+
       FindTestBatches: $resource(url + '/testbatches/search', {}, 
         {
           query: {

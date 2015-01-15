@@ -692,8 +692,11 @@ angular.module('bsis')
     $scope.packTypes = PACKTYPE.packtypes;
 
     var data = {};
+    var recentDonationBatchData = {};
     $scope.data = data;
+    $scope.recentDonationBatchData = recentDonationBatchData;
     $scope.openDonationBatches = false;
+    $scope.recentDonationBatches = false;
     $scope.newDonationBatch = {};
 
     DonorService.getDonationBatchFormFields( function(response){
@@ -724,9 +727,32 @@ angular.module('bsis')
 
     $scope.getOpenDonationBatches();
 
+    $scope.getRecentDonationBatches = function (){
+
+      DonorService.getRecentDonationBatches( function(response){
+        if (response !== false){
+          recentDonationBatchData = response.donationBatches;
+          $scope.recentDonationBatchData = recentDonationBatchData;
+          console.log("recentDonationBatchData: ", recentDonationBatchData);
+          console.log("recentDonationBatchData.length: ", recentDonationBatchData.length);
+
+          if (recentDonationBatchData.length > 0){
+            $scope.recentDonationBatches = true;
+          }
+          else {
+            $scope.recentDonationBatches = false;
+          }
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getRecentDonationBatches();
+
     $scope.donationBatchTableParams = new ngTableParams({
       page: 1,            // show first page
-      count: 5,          // count per page
+      count: 6,          // count per page
       filter: {},
       sorting: {}
     }, 
@@ -746,6 +772,30 @@ angular.module('bsis')
 
     $scope.$watch("data", function () {
       $timeout(function(){ $scope.donationBatchTableParams.reload(); });
+    });
+
+    $scope.recentDonationBatchesTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 8,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: recentDonationBatchData.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(recentDonationBatchData, params.filter()) : recentDonationBatchData;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : recentDonationBatchData;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+    $scope.$watch("recentDonationBatchData", function () {
+      $timeout(function(){ $scope.recentDonationBatchesTableParams.reload(); });
     });
 
     $scope.addDonationBatch = function (donationBatch, donationBatchForm){
