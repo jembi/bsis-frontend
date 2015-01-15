@@ -228,6 +228,13 @@ angular.module('bsis')
         response(false);
       });
     },
+    getRecentDonationBatches: function (response) {
+      Api.RecentDonationBatches.get({count:10}, function (donationBatches) {
+        response(donationBatches);
+      }, function (){
+        response(false);
+      });
+    },
     addDonationBatch: function (donationBatch, response){
       // create $Resource object and assign donation values
       var addDonationBatch = new Api.DonationBatches();

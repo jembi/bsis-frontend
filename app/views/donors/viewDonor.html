@@ -3,8 +3,10 @@
   <span class="h2"> 
     <span editable-text="donor.firstName" e-name="firstName" e-class="xeditable name" e-required>{{donor.firstName}}</span> 
     <span editable-text="donor.lastName" e-name="lastName" e-class="xeditable name" e-required>{{donor.lastName}}</span><small><em>
-    (<span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span>. 
-    <span editable-text="donor.callingName" e-name="callingName" e-class="xeditable name">{{donor.callingName}}</span>)</em></small>
+    <span ng-if="donor.title"> 
+    <span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span>.</span>
+    <span editable-text="donor.callingName" e-name="callingName" e-class="xeditable name">{{donor.callingName}}</span>
+    </em></small>
   </span>
 
     <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
@@ -41,7 +43,7 @@
       </em>
     </span>
 
-    <span has-permission="{{permissions.VOID_DONOR}}">  |  <em><a ng-show="!editableForm.$visible" href="">Void Donor</a></em></small> </span>
+    <span ng-show="!editableForm.$visible" has-permission="{{permissions.HIDDEN}}">  |  <em><a href="">Void Donor</a></em></small> </span>
     </span>
 
   <hr/>
@@ -67,7 +69,7 @@
       {{donor.preferredLanguage.preferredLanguage}}
     </span>
 
-    <span style="float: right; padding-right: 15px;">
+    <span ng-show="!editableForm.$visible" style="float: right; padding-right: 15px;">
       <small>
       <em>
       <a href="" ng-click="printDonorBarcode()" >Print Donor Barcode</a>
@@ -98,7 +100,7 @@
               <tr>
                 <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
                 <td class="field">Due To Donate: </td>
-                <td class="value green"></td>
+                <td class="value">{{dueToDonate | date:'longDate'}}</td>
               </tr>
               <tr>
                 <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
@@ -128,28 +130,60 @@
                     <em>Hb</em>: {{lastDonation.haemoglobinCount}} | <em>P</em>: {{lastDonation.donorPulse}} </td>
               </tr>
               <tr><td></td></tr>
+
+              <tr>
+                <td class="icon"><i class="fa {{icons.INFO}}"></i></td>
+                <td class="field">Identifier: </td>
+                <td class="value">
+                  <form editable-form name="donorIdentifierForm" onaftersave="updateDonor(donor)">
+                    <span style="float: right; padding-right: 15px; padding-left: 15px; font-size: 0.9em">
+                      <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="donorIdentifierForm.$show()" ng-show="!donorIdentifierForm.$visible">Edit</a></em>
+                      <span ng-show="donorIdentifierForm.$visible">
+                        <em>
+                        <button type="submit" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="donorIdentifierForm.$waiting">
+                          Save
+                        </button>
+                        <button type="button" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="donorIdentifierForm.$waiting" ng-click="donorIdentifierForm.$cancel()">
+                          Cancel
+                        </button>
+                        </em>
+                      </span>
+                    </span>
+                    <span e-class="xeditable" editable-text="donor.idNumber" e-name="idNumber">{{donor.idNumber}}</span> 
+                    <em>
+                    <span ng-if="donor.idType.id">(</span>
+                    <span e-class="xeditable" editable-select="donor.idType.id" e-ng-options="item.id as item.idType for item in idTypes" e-name="idType">
+                      {{donor.idType.idType}}
+                    </span>
+                    <span ng-if="donor.idType.id">)</span>
+                    </em>
+                  </form>
+                </td>
+              </tr>
+
+              <tr><td></td></tr>
+
+
               <tr>
                 <td class="icon"><i class="fa {{icons.COMMENT}}"></i></td>
                 <td class="field">Comments: </td>
                 <td class="value">
-                <form editable-form name="donorNotesForm" onaftersave="updateDonor(donor)">
-
-                <span style="float: right; padding-right: 15px; padding-left: 15px; font-size: 0.9em">
-                  <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="donorNotesForm.$show()" ng-show="!donorNotesForm.$visible">Edit</a></em>
-                  <span ng-show="donorNotesForm.$visible">
-                    <em>
-                    <button type="submit" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="donorNotesForm.$waiting">
-                      Save
-                    </button>
-                    <button type="button" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="donorNotesForm.$waiting" ng-click="donorNotesForm.$cancel()">
-                      Cancel
-                    </button>
-                    </em>
-                  </span>
-                </span>
-
-                <span style="white-space: pre;" e-class="xeditable notes" editable-textarea="donor.notes" e-escape="true" e-rows="4" e-name="notes">{{donor.notes}}</span>
-
+                  <form editable-form name="donorNotesForm" onaftersave="updateDonor(donor)">
+                    <span style="float: right; padding-right: 15px; padding-left: 15px; font-size: 0.9em">
+                      <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="donorNotesForm.$show()" ng-show="!donorNotesForm.$visible">Edit</a></em>
+                      <span ng-show="donorNotesForm.$visible">
+                        <em>
+                        <button type="submit" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="donorNotesForm.$waiting">
+                          Save
+                        </button>
+                        <button type="button" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="donorNotesForm.$waiting" ng-click="donorNotesForm.$cancel()">
+                          Cancel
+                        </button>
+                        </em>
+                      </span>
+                    </span>
+                    <span style="white-space: pre;" e-class="xeditable notes" editable-textarea="donor.notes" e-escape="true" e-rows="4" e-name="notes">{{donor.notes}}</span>
+                  </form>
                 </td>
               </tr>
             </tbody>
@@ -183,6 +217,7 @@
           <div ng-switch on="donationsView">
             <div ng-switch-when="viewDonations"><div ng-include="'views/donors/viewDonations.html'"></div></div>
             <div ng-switch-when="viewDonationDetails"><div ng-include="'views/donors/viewDonationDetails.html'"></div></div>
+            <div ng-switch-when="addDonation"><div ng-include="'views/donors/addDonorDonation.html'"></div></div>
             <div ng-switch-default><div ng-include="'views/donors/viewDonations.html'"></div></div>
           </div>
 

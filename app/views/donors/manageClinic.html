@@ -23,10 +23,22 @@
         <span ng-show="editableForm.$visible">
         <em><a href="" ng-click="updateDonationBatch()" ng-disabled="editableForm.$waiting">Save</a></em> | 
         <em><a href="" ng-click="editableForm.$cancel()" ng-disabled="editableForm.$waiting">Cancel</a></em>
+        </span> 
       </span>
-    </span>  
-    <em><a ng-show="!editableForm.$visible" ng-click="closeDonationBatch(donationBatch)" href="">Close Batch</a></em></small>
+
+      <span ng-show="!editableForm.$visible">
+        <span ng-if="donationBatchToClose == donationBatch.id">
+          <em><a href="" ng-click="closeDonationBatch(donationBatch)"> Confirm</a></em> | 
+          <em><a href="" ng-click="closeDonationBatchCancel()"> Cancel</a></em>
+        </span>
+        <span ng-if="donationBatchToClose != donationBatch.id">
+          <em><a href="" ng-click="closeDonationBatchCheck(donationBatch)">Close Batch</a></em>
+        </span>
+      </span>
+      </small>
     </span>
+
+
   </div>
 </form>
 

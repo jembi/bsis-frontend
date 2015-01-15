@@ -67,7 +67,7 @@
                 <select name="discardReason" class="form-control input-sm" ng-model="discard.discardReason" ng-options="item.id as item.statusChangeReason for item in discardReasons" required ng-class="{'ng-invalid ng-dirty' : discardComponentsForm.discardReason.$invalid && submitted}">
                     <option value="" ng-disabled="true">Select:</option>
                 </select>
-                <input size="35" class="form-control input-sm" placeholder="" ng-model="discard.discardReasonText">
+                <input size="35" class="form-control input-sm" placeholder="Comments" ng-model="discard.discardReasonText">
                 <div>
                   <small class="error" 
                     ng-show="

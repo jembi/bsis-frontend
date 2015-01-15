@@ -1,9 +1,12 @@
+<span style="float: right; padding-right: 15px; font-size: 0.9em">
+  <em><a has-permission="{{permissions.ADD_DONATION}}" href="" ng-click="viewAddDonationForm()">Add Donation</a></em>
+</span>
 <table class="dash-table">
   <tbody>
     <tr>
       <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
       <td class="field">Due To Donate: </td>
-      <td class="value green"></td>
+      <td class="value">{{dueToDonate | date:'longDate'}}</td>
     </tr>
 
     <tr><td></td></tr>

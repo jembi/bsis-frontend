@@ -1,4 +1,6 @@
 <h4> Add Deferral </h4>
+<hr style="margin-top:8px;"/>
+
 <form name="addDeferralForm" novalidate class="form-horizontal col-sm-12"  role="form" 
   ng-submit="addDeferral(deferral, addDeferralForm)">
 
@@ -28,7 +30,7 @@
         ng-class="{'ng-invalid ng-dirty' : addDeferralForm.deferralReason.$invalid && submitted}">
           <option value="" ng-disabled="true">Select:</option>
         </select>
-        <input size="30" type="comment" id="deferralReasonText" class="form-control input-sm" placeholder="" ng-model="deferral.deferralReasonText">
+        <input size="30" type="comment" id="deferralReasonText" class="form-control input-sm" placeholder="Comments" ng-model="deferral.deferralReasonText">
         <div>
           <small class="error" 
             ng-show="
