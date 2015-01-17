@@ -82,6 +82,19 @@ angular.module('bsis')
 
     $scope.getComponentsFormFields();
 
+    $scope.getComponentCombinations = function() {
+      ComponentService.getComponentCombinations(function(response){
+        if (response !== false){
+          $scope.data = response;
+          $scope.combinations = $scope.data.combinations;
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getComponentCombinations();
+
     $scope.clear = function () {
       $scope.componentsSearch = {};
       $scope.discardsSearch = {};

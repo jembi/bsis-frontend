@@ -48,6 +48,7 @@ angular.module('bsis')
       DeferralsFormFields: $resource(url + '/deferrals/form'),
       DonorCommunicationsFormFields: $resource(url + '/donorcommunications/form'),
       ComponentsFormFields: $resource(url + '/components/form'),
+      ComponentCombinations: $resource(url + '/components/combinations'),
       DonationBatchFormFields: $resource(url + '/donationbatches/form'),
       TestBatchFormFields: $resource(url + '/testbatches/form'),
       TTITestingFormFields: $resource(url + '/ttitests/form'),
