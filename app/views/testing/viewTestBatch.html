@@ -54,7 +54,7 @@
                 {{sample.ttistatus}}
             </td>
             <td data-title="'Blood Group Serology'" header-class="text-left" sortable="'bloodTypingStatus'">
-                {{sample.bloodTypingStatus}} <em><span ng-if="sample.bloodAbo || sample.bloodRh"> ({{sample.bloodAbo}}{{sample.bloodRh}}) </span></em>
+                <span ng-if="sample.bloodTypingStatus!= 'NOT_DONE'">{{sample.bloodTypingStatus}} - </span>{{sample.bloodTypingMatchStatus}} <em><span ng-if="sample.bloodAbo || sample.bloodRh"> ({{sample.bloodAbo}}{{sample.bloodRh}}) </span></em>
             </td>
         </tr>
       </table>

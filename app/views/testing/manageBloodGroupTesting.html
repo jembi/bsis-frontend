@@ -63,7 +63,7 @@
                   {{sample.collectedSample.collectedOn}}
               </td>
               <td >
-                  {{sample.bloodTypingStatus}}
+                  <span ng-if="sample.bloodTypingStatus!= 'NOT_DONE'">{{sample.bloodTypingStatus}} - </span>{{sample.bloodTypingMatchStatus}} 
               </td>
               <td align="center" ng-repeat="test in bloodTypingTestsBasic">
                 <select style="width:70px;" class="form-control input-sm" ng-init="addTestResults[sample.collectedSample.collectionNumber].testResults[test.id] = sample.recentTestResults[test.id].result" 
