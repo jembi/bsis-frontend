@@ -45,6 +45,20 @@ angular.module('bsis')
     setCurrentTestBatch: function(testBatchId){
       currentTestBatchId = testBatchId;
     },
+    getTestBatchOverview: function (id, response) {
+      Api.TestBatchOverview.get({id:id}, function (testBatch) {
+        response(testBatch);
+      }, function (){
+        response(false);
+      });
+    },
+    getCurrentTestBatchOverview: function(response){
+      Api.TestBatchOverview.get({testBatch:currentTestBatchId}, function (testBatch) {
+        response(testBatch);
+      }, function (){
+        response(false);
+      });
+    },
     getDonationBatches: function(){
       return donationBatchesObj;
     },

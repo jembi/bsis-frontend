@@ -148,6 +148,15 @@ angular.module('bsis')
         }
       ),
 
+      TestBatchOverview: $resource(url + '/testresults/overview', {}, 
+        {
+          query: {
+            method: 'GET', 
+            params:{testBatch:'@testBatch'}
+          }
+        }
+      ),
+
       // Admin Configuration API endpoints
       Locations: $resource(url + '/locations/:id', null, 
         {

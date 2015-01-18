@@ -236,6 +236,23 @@ angular.module('bsis')
 
     $scope.getCurrentTestBatch();
 
+    $scope.getCurrentTestBatchOverview = function () {
+      TestingService.getCurrentTestBatchOverview( function(response){
+        if (response !== false){
+          $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
+          $scope.pendingTTITests = response.pendingTTITests;
+
+          console.log("pendingBloodTypingTests: ", $scope.pendingBloodTypingTests);
+          console.log("pendingTTITests: ", $scope.pendingTTITests);
+
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getCurrentTestBatchOverview();
+
     $scope.testSamplesTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 8,          // count per page
