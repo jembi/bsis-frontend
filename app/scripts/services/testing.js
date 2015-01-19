@@ -121,6 +121,20 @@ angular.module('bsis')
         deferred.reject();
       }); 
       return deferred.promise;
+    },
+    saveBloodGroupMatchTestResults: function (testResults, response){
+      var deferred = $q.defer();
+
+      Api.BloodGroupMatchTestResults.get({donationIdentificationNumber:testResults.donationIdentificationNumber,
+        bloodAbo:testResults.bloodAbo, bloodRh:testResults.bloodRh}, function (donor) {
+        response(true);
+        deferred.resolve();
+      }, function (){
+        response(false);
+        deferred.reject();
+      });
+      return deferred.promise;
+    },
     }
   };
 });

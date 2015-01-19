@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('TestingCtrl', function ($scope, $rootScope, $location, TestingService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('TestingCtrl', function ($scope, $rootScope, $location, TestingService, ICONS, PERMISSIONS, BLOODABO, BLOODRH, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
+    $scope.bloodAboOptions = BLOODABO;
+    $scope.bloodRhOptions = BLOODRH;
+
     var data = {};
     $scope.data = data;
     $scope.openTestBatches = false;
@@ -26,7 +29,13 @@ angular.module('bsis')
       } else if ($location.path() === "/manageTTITesting" && path === "/manageTestBatch") {
         $scope.selection = $location.path();
         return true;
+      } else if ($location.path() === "/managePendingTests" && path === "/manageTestBatch") {
+        $scope.selection = $location.path();
+        return true;
       } else if ($location.path() === "/manageBloodGroupTesting" && path === "/manageTestBatch") {
+        $scope.selection = $location.path();
+        return true;
+      } else if ($location.path() === "/manageBloodGroupMatchTesting" && path === "/manageTestBatch") {
         $scope.selection = $location.path();
         return true;
       } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
@@ -188,6 +197,16 @@ angular.module('bsis')
       }
     };
 
+    $scope.recordPendingBloodGroupMatchTests = function (item) {
+      TestingService.setCurrentTestBatch(item.id);
+        $location.path("/manageBloodGroupMatchTesting");
+    };
+
+    $scope.recordPendingTestResults = function (item, testCategory) {
+      TestingService.setCurrentTestBatch(item.id);
+      $location.path("/managePendingTests");
+    };
+
   })
 
   .controller('TestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams) {
@@ -239,12 +258,12 @@ angular.module('bsis')
     $scope.getCurrentTestBatchOverview = function () {
       TestingService.getCurrentTestBatchOverview( function(response){
         if (response !== false){
+          $scope.testBatchOverview = response;
           $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
           $scope.pendingTTITests = response.pendingTTITests;
-
-          console.log("pendingBloodTypingTests: ", $scope.pendingBloodTypingTests);
-          console.log("pendingTTITests: ", $scope.pendingTTITests);
-
+          $scope.pendingBloodTypingMatchTests = response.pendingBloodTypingMatchTests;
+          $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
+          $scope.basicTTIComplete = response.basicTTIComplete;
         }
         else{
         }
@@ -309,6 +328,8 @@ angular.module('bsis')
         if (response !== false){
           $scope.ttiTestsBasic = response.basicTTITests;
           console.log("$scope.ttiTestsBasic: ",$scope.ttiTestsBasic);
+          $scope.ttiTestsConfirmatory = response.confirmatoryTTITests;
+          console.log("$scope.ttiTestsConfirmatory: ",$scope.ttiTestsConfirmatory);
         }
         else{
         }
@@ -331,8 +352,13 @@ angular.module('bsis')
           $scope.data = data;
 
           $scope.addTestResults = {};
+          $scope.addTestMatchResults = {};
           angular.forEach($scope.data, function(value, key) {
             $scope.addTestResults[value.collectedSample.collectionNumber] = {"donationIdentificationNumber": value.collectedSample.collectionNumber};
+
+            $scope.addTestMatchResults[value.collectedSample.collectionNumber] = {"donationIdentificationNumber": value.collectedSample.collectionNumber};
+            $scope.addTestMatchResults[value.collectedSample.collectionNumber] = {"bloodAbo": ""};
+            $scope.addTestMatchResults[value.collectedSample.collectionNumber] = {"bloodRh": ""};
           });
 
         }
@@ -359,6 +385,30 @@ angular.module('bsis')
         });
 
         requests.push(request);
+      });
+
+      $q.all(requests).then(function(){
+        $location.path("/viewTestBatch");
+      });
+
+    };
+
+    $scope.saveBloodGroupMatchTestResults = function (testResults) {
+
+      var requests = [];
+
+      angular.forEach(testResults, function(value, key) {
+        if(value.confirm){
+          var request = TestingService.saveBloodGroupMatchTestResults(value, function(response){
+            if (response === true){
+            }
+            else{
+              // TODO: handle case where response == false
+            }
+          });
+          requests.push(request);
+        }
+        
       });
 
       $q.all(requests).then(function(){
