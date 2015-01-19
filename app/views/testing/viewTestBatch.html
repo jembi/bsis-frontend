@@ -8,22 +8,48 @@
   <span has-permission="{{permissions.ADD_TTI_OUTCOME}}"> <small><em><a href="" ng-click="recordTestResults(testBatch, 'tti')" >Record TTI Test Results</a></em></small> </span>
   <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> | </span>
   <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> <small><em><a href="" ng-click="recordTestResults(testBatch, 'bloodGrouping')" >Record Blood Group Serology Results</a></em></small> </span>
+
+  <span ng-if="!pendingBloodTypingTests && !pendingTTITests 
+    && basicBloodTypingComplete && basicTTIComplete
+    && !pendingBloodTypingMatchTests">
+
+    | 
+
+    <small>
+    <span ng-if="testBatchToClose == testBatch.id">
+      <em><a href="" ng-click="closeTestBatch(testBatch)"> Confirm</a></em> | 
+      <em><a href="" ng-click="closeTestBatchCancel()"> Cancel</a></em>
+    </span>
+    <span ng-if="testBatchToClose != testBatch.id">
+      <em><a href="" ng-click="closeTestBatchCheck(testBatch)">Close Batch</a></em>
+    </span>
+    </small>
+  </span>
 </span>
+
 
 <hr/>
 
-<div class = "h4"> 
+<span class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
+  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-if="pendingBloodTypingTests || pendingTTITests"> <small><em><a href="" ng-click="recordPendingTestResults(testBatch)" >Record Confirmatory Test Results</a></em></small> </span>
+  <span ng-if="(pendingBloodTypingTests || pendingTTITests) && pendingBloodTypingMatchTests"> | </span>
+  <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-if="pendingBloodTypingMatchTests"> <small><em><a href="" ng-click="recordPendingBloodGroupMatchTests(testBatch)" >Record Confirmatory Abo/Rh Results</a></em></small> </span>
+</span>
+
+<div class="h4"> 
   <small><em>Created On: </em></small>{{testBatch.createdDate}}
   | 
   <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
 </div>
 
-<hr/>
-<span class = "h4" ng-repeat="donationBatch in testBatch.collectionBatches"> 
+
+
+<hr style="margin-bottom:5px;"/>
+<span class="h4" style="font-size: 0.95em; margin-top:0px; margin-bottom:0px;" ng-repeat="donationBatch in testBatch.collectionBatches"> 
   <small><em>Center: </em></small>{{donationBatch.donorPanel.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate}} | <small><em>Number of Donations: </em></small> {{donationBatch.numCollections}} 
   <br/>
 </span>
-<hr/>
+<hr style="margin-top:5px;"/>
 
 <div style="padding-bottom: 5px"></div>
 
