@@ -134,6 +134,11 @@ angular.module('bsis', [
         controller  : 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME
       })
+      .when('/managePendingTests', {
+        templateUrl : 'views/testing.html',
+        controller  : 'RecordTestResultsCtrl',
+        permission: PERMISSIONS.ADD_TTI_OUTCOME
+      })
       .when('/manageBloodGroupTesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
