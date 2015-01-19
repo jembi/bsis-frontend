@@ -148,6 +148,15 @@ angular.module('bsis')
         }
       ),
 
+      BloodGroupMatchTestResults: $resource(url + '/testresults/bloodgroupmatches', null, 
+        {
+          query: {
+            method: 'POST', 
+            params:{donationIdentificationNumber: '@donationIdentificationNumber', bloodAdbo:'@bloodAbo', bloodRh:'@bloodRh'}
+          }
+        }
+      ),
+
       TestBatchOverview: $resource(url + '/testresults/overview', {}, 
         {
           query: {
