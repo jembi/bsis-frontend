@@ -296,6 +296,28 @@ angular.module('bsis')
       $timeout(function(){ $scope.testSamplesTableParams.reload(); });
     });
 
+    $scope.closeTestBatchCheck = function(testBatch){
+      console.log("testBatch.id: ", testBatch.id);
+      $scope.testBatchToClose = testBatch.id;
+    };
+
+    $scope.closeTestBatchCancel = function(){
+      $scope.testBatchToClose = '';
+    };
+
+    $scope.closeTestBatch = function (testBatch){
+      TestingService.closeTestBatch(testBatch, function(response){
+        if (response !== false){
+          $scope.testBatchToClose = '';
+          $location.path("/manageTestBatch");
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
+      
+    };
+
   })
 
   .controller('RecordTestResultsCtrl', function ($scope, $location, TestingService, TTITESTS, BLOODTYPINGTESTS, TTIOUTCOME, BGSOUTCOME, ABO, RH, $q, $filter, ngTableParams, $timeout) {

@@ -135,6 +135,20 @@ angular.module('bsis')
       });
       return deferred.promise;
     },
+    closeTestBatch: function (testBatch, response){
+      var getTestBatch = Api.TestBatches.get({id:testBatch.id}, function() {
+
+        var updateTestBatch = {};
+        updateTestBatch.id = getTestBatch.id;
+        updateTestBatch.status = "CLOSED";
+
+        Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
+         response(data);
+        }, function (){
+          response(false);
+        }); 
+
+      });
     }
   };
 });
