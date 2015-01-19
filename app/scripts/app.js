@@ -139,6 +139,11 @@ angular.module('bsis', [
         controller  : 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME
       })
+      .when('/manageBloodGroupMatchTesting', {
+        templateUrl : 'views/testing.html',
+        controller  : 'RecordTestResultsCtrl',
+        permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME
+      })
       .when('/uploadTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',

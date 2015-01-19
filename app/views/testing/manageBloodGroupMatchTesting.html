@@ -1,0 +1,104 @@
+<span class="h3 page-header">Record Blood Group Confirmatory Test Results</span>
+
+<hr/>
+
+<div class = "h4"> 
+  <small><em>Created On: </em></small>{{testBatch.createdDate}}
+  | 
+  <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
+</div>
+
+<hr/>
+
+<div style="padding-bottom: 5px"></div>
+
+<div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form ng-submit="saveBloodGroupMatchTestResults(addTestMatchResults)">
+        <table ng-table="testSamplesTTITableParams" show-filter="false" class="table">
+        <thead>
+          <th class="text-left sortable" 
+            ng-class="{
+              'sort-asc': testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'asc'),
+              'sort-desc': testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'desc')
+            }"
+            ng-click="testSamplesTTITableParams.sorting('donationIdentificationNumber', testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'asc') ? 'desc' : 'asc')">
+            <div>DIN</div>
+          </th>
+          <th class="text-center sortable" 
+            ng-class="{
+              'sort-asc': testSamplesTTITableParams.isSortBy('collectedOn', 'asc'),
+              'sort-desc': testSamplesTTITableParams.isSortBy('collectedOn', 'desc')
+            }"
+            ng-click="testSamplesTTITableParams.sorting('collectedOn', testSamplesTTITableParams.isSortBy('collectedOn', 'asc') ? 'desc' : 'asc')">
+            <div>Collected On</div>
+          </th>
+          <th class="text-center sortable" style="width:25%;"
+            ng-class="{
+              'sort-asc': testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'asc'),
+              'sort-desc': testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'desc')
+            }"
+            ng-click="testSamplesTTITableParams.sorting('bloodTypingStatus', testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'asc') ? 'desc' : 'asc')">
+            <div>Blood Typing Status</div>
+          </th>
+          <th class="text-center sortable">
+            <div>Blood Abo</div>
+          </th>
+          <th class="text-center sortable">
+            <div>Blood Rh</div>
+          </th>
+          <th class="text-center sortable">
+            <div>Confirm</div>
+          </th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="sample in $data"
+              ng-show="sample.bloodTypingMatchStatus == 'NO_MATCH' || sample.bloodTypingMatchStatus == 'AMBIGUOUS'"
+              ng-click=""
+              ng-mouseenter="this.$selected = true"
+              ng-mouseleave="this.$selected = false"
+              ng-class="{'active': sample.$selected}">
+              <td class="text-center" ng-init="addTestMatchResults[sample.collectedSample.collectionNumber].donationIdentificationNumber = sample.collectedSample.collectionNumber">
+                  {{sample.collectedSample.collectionNumber}}
+              </td>
+              <td class="text-center">
+                  {{sample.collectedSample.collectedOn}}
+              </td>
+              <td >
+                  {{sample.bloodTypingMatchStatus}} 
+              </td>
+              <td>
+                  <select style="width:60px;" class="form-control input-sm"
+                  ng-init="addTestMatchResults[sample.collectedSample.collectionNumber].bloodAbo = sample.bloodAbo"
+                  ng-model="addTestMatchResults[sample.collectedSample.collectionNumber].bloodAbo"
+                  ng-options="option for option in bloodAboOptions.options">
+                  </select>
+              </td>
+              <td>
+                  <select style="width:60px;" class="form-control input-sm"
+                  ng-init="addTestMatchResults[sample.collectedSample.collectionNumber].bloodRh = sample.bloodRh"
+                  ng-model="addTestMatchResults[sample.collectedSample.collectionNumber].bloodRh"
+                  ng-options="option for option in bloodRhOptions.options">
+                  </select>
+              </td>
+              <td align="center">
+                  <input  type="checkbox" ng-init="addTestMatchResults[sample.collectedSample.collectionNumber].confirm = false" ng-model="addTestMatchResults[sample.collectedSample.collectionNumber].confirm" />
+              </td>
+          </tr>
+        </tbody>
+        </table>
+      
+      <div class="form-group"> 
+        <div class="col-sm-3">
+          <button class="btn btn-primary" type="submit">Save Test Results</button>
+          <button class="btn btn-primary" type="button" ng-click="go('/viewTestBatch')" >Cancel</button>
+        </div>
+      </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
