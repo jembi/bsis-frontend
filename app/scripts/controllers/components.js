@@ -294,8 +294,7 @@ angular.module('bsis')
         $scope.recordComponent = {};
 
         $scope.recordComponent.parentComponentId = $scope.selectedComponents[0];
-        $scope.recordComponent.childComponentTypeId = $scope.component.childComponentTypeId;
-        $scope.recordComponent.numUnits = $scope.component.numUnits;
+        $scope.recordComponent.productTypeCombination = $scope.component.productTypeCombination;
 
         ComponentService.recordComponents($scope.recordComponent, function(response){
           if (response !== false){
