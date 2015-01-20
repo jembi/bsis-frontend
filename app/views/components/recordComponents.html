@@ -65,14 +65,14 @@
             <label for="name" class="col-sm-2 control-label" >Process Component</label>
             <div class="row col-sm-10">
               <div class="form-inline" style="padding-left:5px;">
-                <select name="componentType" class="form-control input-sm" ng-model="component.childComponentTypeId" ng-options="item.id as item.productTypeName for item in componentTypes"
-                required ng-class="{'ng-invalid ng-dirty' : recordComponentsForm.componentType.$invalid && submitted}">
+                <select name="combination" class="form-control input-sm" ng-model="component.productTypeCombination" ng-options="item as item.combinationName for item in combinations"
+                required ng-class="{'ng-invalid ng-dirty' : recordComponentsForm.combination.$invalid && submitted}">
                   <option value="" ng-disabled="true">Select:</option>
                 </select>
                 <div>
                   <small class="error" 
                     ng-show="
-                      (recordComponentsForm.componentType.$invalid && (recordComponentsForm.componentType.$dirty || submitted))
+                      (recordComponentsForm.combination.$invalid && (recordComponentsForm.combination.$dirty || submitted))
                     ">
                     This cannot be empty
                   </small>
