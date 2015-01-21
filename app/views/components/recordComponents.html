@@ -65,30 +65,18 @@
             <label for="name" class="col-sm-2 control-label" >Process Component</label>
             <div class="row col-sm-10">
               <div class="form-inline" style="padding-left:5px;">
-                <select name="componentType" class="form-control input-sm" ng-model="component.childComponentTypeId" ng-options="item.id as item.productTypeName for item in componentTypes"
-                required ng-class="{'ng-invalid ng-dirty' : recordComponentsForm.componentType.$invalid && submitted}">
+                <select name="combination" class="form-control input-sm" ng-model="component.productTypeCombination" ng-options="item as item.combinationName for item in combinations"
+                required ng-class="{'ng-invalid ng-dirty' : recordComponentsForm.combination.$invalid && submitted}">
                   <option value="" ng-disabled="true">Select:</option>
                 </select>
                 <div>
                   <small class="error" 
                     ng-show="
-                      (recordComponentsForm.componentType.$invalid && (recordComponentsForm.componentType.$dirty || submitted))
+                      (recordComponentsForm.combination.$invalid && (recordComponentsForm.combination.$dirty || submitted))
                     ">
                     This cannot be empty
                   </small>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="name" class="col-sm-2 control-label" >Process Paediatric</label>
-            <div class="row col-sm-10">
-              <div class="form-inline" style="padding-left:5px;">
-                <input id="paediatricCount2" type="radio" name="paediatricCount2" data-ng-model="component.numUnits" value="2"/> <label for="paediatricCount2"> 2 units </label>
-                <input id="paediatricCount3" type="radio" name="paediatricCount3" data-ng-model="component.numUnits" value="3"/> <label for="paediatricCount3"> 3 units </label>
-                <input id="paediatricCount4" type="radio" name="paediatricCount4" data-ng-model="component.numUnits" value="4"/> <label for="paediatricCount4"> 4 units </label>
-                <input id="paediatricCount5" type="radio" name="paediatricCount5" data-ng-model="component.numUnits" value="5"/> <label for="paediatricCount5"> 5 units </label>
-                <input id="paediatricCount6" type="radio" name="paediatricCount6" data-ng-model="component.numUnits" value="6"/> <label for="paediatricCount6"> 6 units </label>
               </div>
             </div>
           </div>

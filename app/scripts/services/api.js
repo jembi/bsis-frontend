@@ -48,6 +48,7 @@ angular.module('bsis')
       DeferralsFormFields: $resource(url + '/deferrals/form'),
       DonorCommunicationsFormFields: $resource(url + '/donorcommunications/form'),
       ComponentsFormFields: $resource(url + '/components/form'),
+      ComponentCombinations: $resource(url + '/components/combinations'),
       DonationBatchFormFields: $resource(url + '/donationbatches/form'),
       TestBatchFormFields: $resource(url + '/testbatches/form'),
       TTITestingFormFields: $resource(url + '/ttitests/form'),
@@ -106,7 +107,7 @@ angular.module('bsis')
         }
       ),
 
-      RecordComponents: $resource(url + '/components/record'),
+      RecordComponents: $resource(url + '/components/recordcombinations'),
 
       LabellingStatus:  $resource(url + '/labels/status/:donationIdentificationNumber'),
       PrintPackLabel:  $resource(url + '/labels/print/packlabel/:componentId'),
@@ -144,6 +145,24 @@ angular.module('bsis')
       TestResults: $resource(url + '/testresults/:donationIdentificationNumber', null, 
         {
           update: {method:'PUT'}
+        }
+      ),
+
+      BloodGroupMatchTestResults: $resource(url + '/testresults/bloodgroupmatches', null, 
+        {
+          query: {
+            method: 'POST', 
+            params:{donationIdentificationNumber: '@donationIdentificationNumber', bloodAdbo:'@bloodAbo', bloodRh:'@bloodRh'}
+          }
+        }
+      ),
+
+      TestBatchOverview: $resource(url + '/testresults/overview', {}, 
+        {
+          query: {
+            method: 'GET', 
+            params:{testBatch:'@testBatch'}
+          }
         }
       ),
 

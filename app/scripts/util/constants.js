@@ -59,6 +59,12 @@ angular.module('bsis')
   .constant('BLOODGROUP', {
     options: ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
   })
+  .constant('BLOODABO', {
+    options: ["A", "B", "AB", "O"]
+  })
+  .constant('BLOODRH', {
+    options: ["+", "-"]
+  })
   .constant('MONTH', {
     "options": [
     {

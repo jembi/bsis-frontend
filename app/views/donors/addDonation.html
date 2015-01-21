@@ -44,8 +44,8 @@
       <div class="row col-sm-9">
         <div class="form-inline" style="padding-left:5px;">
           <input name="din" size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="donation.collectionNumber"
-          required integer ng-maxlength=6 
-          ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+          required integer ng-minlength=7 ng-maxlength=7 
+          ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
           ng-class="{'ng-invalid ng-dirty' : addDonationForm.din.$invalid && submitted}"
           >
           <div>

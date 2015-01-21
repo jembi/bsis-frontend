@@ -45,6 +45,20 @@ angular.module('bsis')
     setCurrentTestBatch: function(testBatchId){
       currentTestBatchId = testBatchId;
     },
+    getTestBatchOverview: function (id, response) {
+      Api.TestBatchOverview.get({id:id}, function (testBatch) {
+        response(testBatch);
+      }, function (){
+        response(false);
+      });
+    },
+    getCurrentTestBatchOverview: function(response){
+      Api.TestBatchOverview.get({testBatch:currentTestBatchId}, function (testBatch) {
+        response(testBatch);
+      }, function (){
+        response(false);
+      });
+    },
     getDonationBatches: function(){
       return donationBatchesObj;
     },
@@ -107,6 +121,34 @@ angular.module('bsis')
         deferred.reject();
       }); 
       return deferred.promise;
+    },
+    saveBloodGroupMatchTestResults: function (testResults, response){
+      var deferred = $q.defer();
+
+      Api.BloodGroupMatchTestResults.get({donationIdentificationNumber:testResults.donationIdentificationNumber,
+        bloodAbo:testResults.bloodAbo, bloodRh:testResults.bloodRh}, function (donor) {
+        response(true);
+        deferred.resolve();
+      }, function (){
+        response(false);
+        deferred.reject();
+      });
+      return deferred.promise;
+    },
+    closeTestBatch: function (testBatch, response){
+      var getTestBatch = Api.TestBatches.get({id:testBatch.id}, function() {
+
+        var updateTestBatch = {};
+        updateTestBatch.id = getTestBatch.id;
+        updateTestBatch.status = "CLOSED";
+
+        Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
+         response(data);
+        }, function (){
+          response(false);
+        }); 
+
+      });
     }
   };
 });

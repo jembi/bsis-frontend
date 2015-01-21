@@ -82,6 +82,19 @@ angular.module('bsis')
 
     $scope.getComponentsFormFields();
 
+    $scope.getComponentCombinations = function() {
+      ComponentService.getComponentCombinations(function(response){
+        if (response !== false){
+          $scope.data = response;
+          $scope.combinations = $scope.data.combinations;
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.getComponentCombinations();
+
     $scope.clear = function () {
       $scope.componentsSearch = {};
       $scope.discardsSearch = {};
@@ -281,8 +294,7 @@ angular.module('bsis')
         $scope.recordComponent = {};
 
         $scope.recordComponent.parentComponentId = $scope.selectedComponents[0];
-        $scope.recordComponent.childComponentTypeId = $scope.component.childComponentTypeId;
-        $scope.recordComponent.numUnits = $scope.component.numUnits;
+        $scope.recordComponent.productTypeCombination = $scope.component.productTypeCombination;
 
         ComponentService.recordComponents($scope.recordComponent, function(response){
           if (response !== false){

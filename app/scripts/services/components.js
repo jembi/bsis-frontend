@@ -10,6 +10,13 @@ angular.module('bsis')
         response(false);
       });
     },
+    getComponentCombinations: function(response){
+      Api.ComponentCombinations.get({}, function (backingForm) {
+        response(backingForm);
+      }, function (){
+        response(false);
+      });
+    },
     getComponentsByDIN: function (donationIdentificationNumber, response) {
       var apiResponse = Api.getComponentsByDIN.query({donationIdentificationNumber: donationIdentificationNumber}, function(){
         console.log("components response: ", apiResponse);

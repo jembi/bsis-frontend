@@ -79,12 +79,14 @@ angular.module('bsis')
     }
 
   // else if on testing page, set menu to TESTING
-  else if(~$location.path().indexOf('testing')              ||
-      ~$location.path().indexOf('viewTestResults')          ||
-      ~$location.path().indexOf('manageTestBatch')          ||
-      ~$location.path().indexOf('viewTestBatch')            ||
-      ~$location.path().indexOf('manageTTITesting')         ||
-      ~$location.path().indexOf('manageBloodGroupTesting')  ||
+  else if(~$location.path().indexOf('testing')                   ||
+      ~$location.path().indexOf('viewTestResults')               ||
+      ~$location.path().indexOf('manageTestBatch')               ||
+      ~$location.path().indexOf('viewTestBatch')                 ||
+      ~$location.path().indexOf('manageTTITesting')              ||
+      ~$location.path().indexOf('managePendingTests')            ||
+      ~$location.path().indexOf('manageBloodGroupTesting')       ||
+      ~$location.path().indexOf('manageBloodGroupMatchTesting')  ||
       ~$location.path().indexOf('uploadTestResults')
     ){
       $scope.currentSection = 'TESTING';
@@ -159,12 +161,14 @@ angular.module('bsis')
     }
 
     // else if on testing page, set menu to TESTING
-    else if(~$location.path().indexOf('testing')            ||
-      ~$location.path().indexOf('viewTestResults')          ||
-      ~$location.path().indexOf('manageTestBatch')          ||
-      ~$location.path().indexOf('viewTestBatch')            ||
-      ~$location.path().indexOf('manageTTITesting')         ||
-      ~$location.path().indexOf('manageBloodGroupTesting')  ||
+    else if(~$location.path().indexOf('testing')                 ||
+      ~$location.path().indexOf('viewTestResults')               ||
+      ~$location.path().indexOf('manageTestBatch')               ||
+      ~$location.path().indexOf('viewTestBatch')                 ||
+      ~$location.path().indexOf('manageTTITesting')              ||
+      ~$location.path().indexOf('managePendingTests')            ||
+      ~$location.path().indexOf('manageBloodGroupTesting')       ||
+      ~$location.path().indexOf('manageBloodGroupMatchTesting')  ||
       ~$location.path().indexOf('uploadTestResults')
     ){
       $scope.currentSection = 'TESTING';
