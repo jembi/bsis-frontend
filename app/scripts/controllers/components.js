@@ -307,6 +307,7 @@ angular.module('bsis')
             $scope.componentSelected = '';
             $scope.component = {};
             $scope.selectedComponents = [];
+            $scope.selectedComponentType = {};
           }
           else{
             // TODO: handle case where response == false
@@ -382,7 +383,7 @@ angular.module('bsis')
 
     // toggle selection util method to toggle checkboxes
     // - this is for mutual selection (radio button behaviour, rather than multiple checkbox selection)
-    $scope.toggleMutualSelection = function toggleSelection(componentId) {
+    $scope.toggleMutualSelection = function toggleSelection(componentId, componentType) {
       var idx = $scope.selectedComponents.indexOf(componentId);
       // is currently selected
       if (idx > -1) {
@@ -394,6 +395,7 @@ angular.module('bsis')
         $scope.selectedComponents = [];
         $scope.selectedComponents.push(componentId);
       }
+      $scope.selectedComponentType = componentType;
     };
 
   })

@@ -17,7 +17,7 @@ angular.module('bsis')
       if(loginForm.$valid){
 
         AuthService.login(credentials, function(loggedIn){
-          if (loggedIn){
+          if (loggedIn === true){
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 
             // set form back to pristine state
@@ -34,6 +34,15 @@ angular.module('bsis')
           else{
             $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
             $scope.loginInvalid = true;
+            
+            // error message for 401 - Unauthorized response
+            if(loggedIn == "401"){
+              $scope.loginAlert = "Invalid Username / Password.";
+            }
+            // error message to display when the host is unavailable
+            if(loggedIn == "0"){
+              $scope.loginAlert = "Unable to establish a connection. Please report this issue and try again later.";
+            }
           }
         });
       }

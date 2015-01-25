@@ -17,6 +17,10 @@ angular.module('bsis')
     $scope.testResultsSearch = {
       donationIdentificationNumber: ''
     };
+
+    var recentTestBatchData = {};
+    $scope.recentTestBatchData = recentTestBatchData;
+    $scope.recentTestBatches = false;
     
     $scope.ttiTests = [];
     $scope.bloodTypingStatus = [];
@@ -111,6 +115,29 @@ angular.module('bsis')
 
     };
 
+    $scope.getRecentTestBatches = function (){
+
+      TestingService.getRecentTestBatches( function(response){
+        if (response !== false){
+          recentTestBatchData = response.testBatches;
+          $scope.recentTestBatchData = recentTestBatchData;
+          console.log("recentTestBatchData: ", recentTestBatchData);
+          console.log("recentTestBatchData.length: ", recentTestBatchData.length);
+
+          if (recentTestBatchData.length > 0){
+            $scope.recentTestBatches = true;
+          }
+          else {
+            $scope.recentTestBatches = false;
+          }
+        }
+        else{
+        }
+      });
+    };
+
+    
+
     $scope.getTestBatchFormFields = function(){
 
       TestingService.getTestBatchFormFields( function(response){
@@ -127,6 +154,7 @@ angular.module('bsis')
     };
 
     $scope.getOpenTestBatches();
+    $scope.getRecentTestBatches();
     $scope.getTestBatchFormFields();
 
     $scope.addTestBatch = function (donationBatches, valid){
@@ -172,6 +200,30 @@ angular.module('bsis')
 
     $scope.$watch("data", function () {
       $timeout(function(){ $scope.testBatchTableParams.reload(); });
+    });
+
+    $scope.recentTestBatchesTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 8,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: recentTestBatchData.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ?
+          $filter('filter')(recentTestBatchData, params.filter()) : recentTestBatchData;
+        var orderedData = params.sorting() ?
+          $filter('orderBy')(filteredData, params.orderBy()) : recentTestBatchData;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+    $scope.$watch("recentTestBatchData", function () {
+      $timeout(function(){ $scope.recentTestBatchesTableParams.reload(); });
     });
 
     $scope.getTestResultsByDIN = function (testResultsSearch) {
