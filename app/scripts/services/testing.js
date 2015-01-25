@@ -139,7 +139,7 @@ angular.module('bsis')
       var getTestBatch = Api.TestBatches.get({id:testBatch.id}, function() {
 
         var updateTestBatch = {};
-        updateTestBatch.id = getTestBatch.id;
+        updateTestBatch.id = testBatch.id;
         updateTestBatch.status = "CLOSED";
 
         Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
