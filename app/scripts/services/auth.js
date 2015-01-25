@@ -17,11 +17,11 @@ angular.module('bsis')
         Authinterceptor.setLoggedInUser(userProfile, encoded);
         console.log("Login Successful");
         loginSuccess(true);
-      }, function (){
+      }, function (error){
         $rootScope.displayHeader = false;
         $rootScope.user = {};
         console.log("Login Unsuccessful");
-        loginSuccess(false);
+        loginSuccess(error.status);
       });
     },
 
