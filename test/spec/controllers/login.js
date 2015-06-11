@@ -111,6 +111,13 @@ describe('Controller: LoginCtrl', function () {
       expect( sessionResult ).toBe( 'Session created!' );
 
 
+      var consoleSession = localStorage.getItem('consoleSession');
+      expect( consoleSession ).not.toBe(null);
+
+
+      expect( JSON.parse( consoleSession).sessionUserName ).toBe('Super User');
+      expect( JSON.parse( consoleSession).sessionUser ).toBe('superuser');
+
     });
 
   });

@@ -367,6 +367,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
+    'newer:jshint',
     'karma'
   ]);
 
@@ -376,6 +377,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'newer:jshint',
     'concat',
     'ngmin',
     'copy:dist',
