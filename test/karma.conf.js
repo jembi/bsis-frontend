@@ -18,7 +18,6 @@ module.exports = function(config){
       'app/scripts/**/*.js',
       'test/spec/**/*.js',
       'test/spec/*.js',
-      'test/mockAPI.js',
       {pattern: 'test/mockData/*.json', included: false}
     ],
 
