@@ -3,7 +3,7 @@
 angular.module('bsis', [
   'ngRoute',
   'ui.bootstrap',
-  'mockAPI',
+  'ngResource',
   'ngTable',
   'xeditable',
   'ui.select',

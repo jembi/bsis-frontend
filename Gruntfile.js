@@ -366,10 +366,8 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
-    'connect:test'
-    /*,
+    'connect:test',
     'karma'
-    */
   ]);
 
   grunt.registerTask('build', [
@@ -394,4 +392,6 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  //grunt.loadNpmTasks('grunt-karma');
 };

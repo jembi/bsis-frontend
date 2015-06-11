@@ -6,14 +6,10 @@
   "repository": "https://github.com/jembi/bsis",
   "license": "MIT",
   "devDependencies": {
-    "karma": "^0.12.3",
-    "karma-coffee-preprocessor": "~0.1",
-    "protractor": "~0.20.1",
-    "http-server": "^0.6.1",
     "bower": "^1.3.1",
     "chalk": "~0.4.0",
-    "shelljs": "^0.2.6",
-    "karma-junit-reporter": "^0.2.2",
+    "coffee-script": "~1.3.3",
+    "dateformat": "~1.0.2-1.2.3",
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",
     "grunt-bower-install": "~1.0.0",
@@ -29,25 +25,23 @@
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-watch": "~0.5.2",
     "grunt-google-cdn": "~0.2.0",
+    "grunt-karma": "^0.11.0",
     "grunt-newer": "~0.6.1",
     "grunt-ngmin": "~0.0.2",
     "grunt-rev": "~0.1.0",
     "grunt-svgmin": "~0.2.0",
     "grunt-usemin": "~2.0.0",
+    "http-server": "^0.6.1",
+    "jasmine-core": "^2.3.4",
     "jshint-stylish": "~0.1.3",
+    "karma": "^0.12.36",
+    "karma-jasmine": "^0.3.5",
+    "karma-phantomjs-launcher": "^0.2.0",
     "load-grunt-tasks": "~0.4.0",
-    "time-grunt": "~0.2.1",
-    "karma-ng-scenario": "^0.1.0",
-    "grunt-karma": "^0.8.2",
-    "karma-ng-html2js-preprocessor": "^0.1.0",
-    "karma-chrome-launcher": "0.1.3",
-    "mocha": "^1.18.2",
-    "karma-mocha": "^0.1.3",
-    "chai": "^1.9.1",
-    "karma-chai": "^0.1.0",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "coffee-script": "~1.3.3",
-    "dateformat": "~1.0.2-1.2.3"
+    "phantomjs": "^1.9.17",
+    "protractor": "~0.20.1",
+    "shelljs": "^0.2.6",
+    "time-grunt": "~0.2.1"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -64,5 +58,8 @@
     "preprotractor": "npm run update-webdriver",
     "protractor": "protractor test/protractor-conf.js",
     "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + cat('app/bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'app/index-async.html');\""
+  },
+  "dependencies": {
+    "angular-node-fs": "0.0.1"
   }
 }
