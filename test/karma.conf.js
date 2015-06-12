@@ -6,28 +6,28 @@ module.exports = function(config){
     files : [
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-route/angular-route.js',
+      'app/bower_components/angular-resource/angular-resource.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
+      'app/bower_components/angular-sanitize/angular-sanitize.js',
+      'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'app/bower_components/ng-table/ng-table.js',
+      'app/bower_components/angular-xeditable/dist/js/xeditable.js',
+      'app/bower_components/angular-ui-select/dist/select.js',
+      'app/bower_components/karma-read-json/karma-read-json.js',
+      'app/scripts/*.js',
       'app/scripts/**/*.js',
-      'test/unit/**/*.js'
+      'test/spec/**/*.js',
+      'test/spec/*.js',
+      {pattern: 'test/mockData/*.json', included: false}
     ],
 
     autoWatch : true,
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome'],
+    browsers : ['PhantomJS'],
 
-    plugins : [
-            'karma-chrome-launcher',
-            'karma-firefox-launcher',
-            'karma-jasmine',
-            'karma-junit-reporter'
-            ],
-
-    junitReporter : {
-      outputFile: 'test_out/unit.xml',
-      suite: 'unit'
-    }
+    singleRun: true
 
   });
 };

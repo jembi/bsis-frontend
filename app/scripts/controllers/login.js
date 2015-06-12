@@ -48,6 +48,7 @@ angular.module('bsis')
       }
       else{
         $scope.loginInvalid = true;
+        $scope.loginAlert = "Please supply all fields";
         console.log("FORM NOT VALID");
       }
       
@@ -57,6 +58,7 @@ angular.module('bsis')
 
          // get the logged in user details
         var userProfile = AuthService.getLoggedInUser();
+
         // check if userProfile exists
         if ( !userProfile.roles ){
           return 'Logged in user could not be found!';
@@ -101,6 +103,8 @@ angular.module('bsis')
 
           // Put the object into storage
           localStorage.setItem('consoleSession', JSON.stringify( consoleSessionObject ));
+
+          return 'Session created!';
         }
     };
 
