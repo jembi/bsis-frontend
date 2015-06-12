@@ -211,12 +211,12 @@ angular.module('bsis', [
       // SETTINGS URLs
       .when('/settings', {
         templateUrl : 'views/settings.html',
-        controller  : 'SettingsCtrl',
+        controller  : 'ConfigurationsCtrl',
         permission: PERMISSIONS.VIEW_ADMIN_INFORMATION
       })
       .when('/locations', {
         templateUrl : 'views/settings.html',
-        controller  : 'SettingsCtrl',
+        controller  : 'LocationsCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
       .when('/configurations', {
