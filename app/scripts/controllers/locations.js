@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('SettingsCtrl', function ($scope, $location, SettingsService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('LocationsCtrl', function ($scope, $location, LocationsService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -42,7 +42,7 @@ angular.module('bsis')
     };
 
     $scope.getLocations = function () {
-      SettingsService.getLocations(function(response){
+      LocationsService.getLocations(function(response){
         if (response !== false){
           data = response;
           $scope.data = data;
@@ -61,7 +61,7 @@ angular.module('bsis')
 
       if(locationForm.$valid && !(!locationForm.donorPanel.$viewValue && !locationForm.mobileSite.$viewValue && !locationForm.requestSite.$viewValue)){
 
-        SettingsService.addLocation(location, function(response){
+        LocationsService.addLocation(location, function(response){
           if (response !== false){
             $scope.location = {
               "isDonorPanel" : false,
