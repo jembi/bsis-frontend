@@ -234,6 +234,23 @@ angular.module('bsis', [
     editableOptions.theme = 'bs3';
   })
 
+  // load general configurations into $rootScope.configurations on startup
+  .run( ['$rootScope', 'ConfigurationsService', function ($rootScope, ConfigurationsService) {
+
+    var data = {};
+    
+    ConfigurationsService.getConfigurations(function(response){
+      if (response !== false){
+        data = response;
+        $rootScope.configurations = data;
+      }
+      else{
+
+      }
+      });
+
+  }])
+
   .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
 
     // on route change, check to see if user has appropriate permissions
