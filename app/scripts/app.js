@@ -229,6 +229,11 @@ angular.module('bsis', [
         controller : 'UsersCtrl',
         permission: PERMISSIONS.MANAGE_USERS
       })
+      .when('/roles', {
+        templateUrl : 'views/settings.html',
+        controller : 'RolesCtrl',
+        permission: PERMISSIONS.MANAGE_ROLES
+      })
 
       .otherwise({
         redirectTo: '/home'

@@ -19,6 +19,12 @@ angular.module('bsis')
         }
       ),
 
+      Roles : $resource(url + '/roles/:id', null,
+        {
+          update: {method: 'PUT'}
+        }
+      ),
+
       Donor: $resource(url + '/donors/:id', null,
         {
           update: {method:'PUT'}

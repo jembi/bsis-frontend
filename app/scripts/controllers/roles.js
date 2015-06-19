@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('UsersCtrl', function ($scope, $location, UsersService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('RolesCtrl', function ($scope, $location, RolesService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -13,7 +13,7 @@ angular.module('bsis')
         return true;
       } else if ($location.path() === path) {
         return true;
-      } else if ($location.path() === "/settings" && path === "/users") {
+      } else if ($location.path() === "/settings" && path === "/roles") {
         return true;
       } else {
         return false;
@@ -22,7 +22,7 @@ angular.module('bsis')
 
     var data = [];
     $scope.data = data;
-    $scope.users = {};
+    $scope.roles = {};
 
     $scope.clear = function () {
 
@@ -33,12 +33,12 @@ angular.module('bsis')
       $scope.submitted = '';
     };
 
-    $scope.getUsers = function () {
-      UsersService.getUsers(function (response) {
+    $scope.getRoles = function () {
+      RolesService.getRoles(function (response) {
         if (response !== false) {
           data = response;
           $scope.data = data;
-          console.log("users: ", response);
+          console.log("roles: ", response);
         }
         else {
 
@@ -47,12 +47,12 @@ angular.module('bsis')
 
     };
 
-    $scope.getUser = function () {
-      UsersService.getUser(1, function (response) {
+    $scope.getRole = function () {
+      RolesService.getRole(1, function (response) {
         if (response !== false) {
           //data = response;
           //$scope.data = data;
-          console.log("user id 1: ", response);
+          console.log("role id 1: ", response);
         }
         else {
 
@@ -61,10 +61,10 @@ angular.module('bsis')
 
     };
 
-    $scope.getUsers();
-    //$scope.getUser();
+    $scope.getRoles();
+    // $scope.getRole();
 
-    $scope.usersTableParams = new ngTableParams({
+    $scope.rolesTableParams = new ngTableParams({
         page: 1,            // show first page
         count: 6,          // count per page
         filter: {},
@@ -86,7 +86,7 @@ angular.module('bsis')
 
     $scope.$watch("data", function () {
       $timeout(function () {
-        $scope.usersTableParams.reload();
+        $scope.rolesTableParams.reload();
       });
     });
   });
