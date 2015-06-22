@@ -1,0 +1,37 @@
+<h3 class="page-header">Set Role Permissions</h3>
+
+<form class="form-horizontal col-sm-12"  role="form" ng-submit="updateRole(role)">
+    <div class="form-group">
+        <label for="name" class="col-sm-1 control-label" >Role Name</label>
+        <div class="row col-sm-11">
+            <div class="form-inline" style="padding-left:5px;">
+                <input size="15" type="text" id="name" class="form-control input-sm" placeholder="" ng-model="role.name">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="description" class="col-sm-1 control-label" >Description</label>
+        <div class="row col-sm-11">
+            <div class="form-inline" style="padding-left:5px;">
+                <input size="15" type="text" id="description" class="form-control input-sm" placeholder="" ng-model="role.description">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="" class="col-sm-1 control-label" >Permissions </label>
+    </div>
+    <div class="form-group" style="width: 100%">
+        <div ng-repeat="entity in permissionList" class="row  pull-left" style="width: 20%">
+            <input type="checkbox" checklist-model="role.permissions" checklist-value="entity" /> {{entity.name}}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-4">
+            <button class="btn btn-primary" type="submit">Set Role</button>
+            <!-- <button class="btn btn-primary" type="submit">Save and Add Another Donor</button> -->
+        </div>
+    </div>
+</form>

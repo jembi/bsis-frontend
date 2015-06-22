@@ -8,7 +8,8 @@ angular.module('bsis', [
   'xeditable',
   'ui.select',
   'ngSanitize',
-  'bsisFilters'
+  'bsisFilters',
+  'checklist-model'
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
@@ -232,6 +233,11 @@ angular.module('bsis', [
       .when('/roles', {
         templateUrl : 'views/settings.html',
         controller : 'RolesCtrl',
+        permission: PERMISSIONS.MANAGE_ROLES
+      })
+      .when('/role', {
+        templateUrl : 'views/settings.html',
+        controller : 'ViewRoleCtrl',
         permission: PERMISSIONS.MANAGE_ROLES
       })
 

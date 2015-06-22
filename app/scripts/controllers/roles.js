@@ -48,11 +48,34 @@ angular.module('bsis')
     };
 
     $scope.getRole = function () {
-      RolesService.getRole(1, function (response) {
+      RolesService.getRoleById(1, function (response) {
         if (response !== false) {
           //data = response;
           //$scope.data = data;
           console.log("role id 1: ", response);
+        }
+        else {
+
+        }
+      });
+    };
+
+    $scope.getPermissions = function () {
+
+    };
+
+
+
+    $scope.manageRole = function (item) {
+
+      RolesService.getRoleById(1, function (response) {
+        if (response !== false) {
+          console.log("role id 1: ", response);
+          $scope.permissionList = response.permissions;
+          RolesService.setPermissions(response.role.permissions);
+          $scope.role = item;
+          RolesService.setRole(item);
+          $location.path("/role");
         }
         else {
 
@@ -89,4 +112,28 @@ angular.module('bsis')
         $scope.rolesTableParams.reload();
       });
     });
+  })
+
+  .controller('ViewRoleCtrl', function ($scope, $location, RolesService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+    $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
+    $scope.selection = "/role";
+
+    $scope.role = RolesService.getRole();
+    $scope.permissionList = RolesService.getPermissions();
+
+
+    $scope.updateRole = function () {
+
+    };
+
+    $scope.clear = function () {
+
+    };
+
+    $scope.clearForm = function (form) {
+      form.$setPristine();
+      $scope.submitted = '';
+    };
+
   });

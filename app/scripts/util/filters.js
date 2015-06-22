@@ -11,6 +11,14 @@ angular.module('bsisFilters', [])
       }
       return input.expiryStatus;
     };
-  }
+  })
 
-);
+  .filter('slice', function() {
+    return function(arr, start, end) {
+      return arr.slice(start, end);
+    };
+  });
+
+
+
+
