@@ -123,8 +123,12 @@ angular.module('bsis')
     $scope.permissionList = RolesService.getPermissions();
 
 
-    $scope.updateRole = function () {
+    $scope.updateRole = function (role) {
+      console.log('updating role ' + role);
+      RolesService.updateRole(role, function (response) {
 
+        console.log('role service response' + response);
+      });
     };
 
     $scope.clear = function () {
