@@ -83,13 +83,18 @@ angular.module('bsis')
       });
     },
     findDonorListDonors: function (donorSearch, response) {
-      var donors = Api.DonorCommunicationsSearch.query({bloodGroups: donorSearch.bloodGroups, donorPanels: donorSearch.donorPanels, 
-          clinicDate: $filter('date')(donorSearch.clinicDate,'MM/dd/yyyy'), lastDonationFromDate: $filter('date')(donorSearch.lastDonationFromDate,'MM/dd/yyyy'), 
-          lastDonationToDate: $filter('date')(donorSearch.lastDonationToDate,'MM/dd/yyyy'), anyBloodGroup: donorSearch.anyBloodGroup}, function(){
+      var donors = Api.DonorCommunicationsSearch.query({
+        bloodGroups: donorSearch.bloodGroups,
+        donorPanels: donorSearch.donorPanels,
+        clinicDate: donorSearch.clinicDate,
+        lastDonationFromDate: donorSearch.lastDonationFromDate,
+        lastDonationToDate: donorSearch.lastDonationToDate,
+        anyBloodGroup: donorSearch.anyBloodGroup
+      }, function () {
         console.log("donorList response: ", donors);
         response(donors.donors);
-      }, function (){
-        response(false);  
+      }, function () {
+        response(false);
       });
     },
     setDonor: function(donor) {
@@ -165,9 +170,6 @@ angular.module('bsis')
       var addDeferral = new Api.Deferrals();
       
       angular.copy(deferral, addDeferral);
-
-      addDeferral.deferredOn = $filter('date')(deferral.deferredOn,'MM/dd/yyyy');
-      addDeferral.deferredUntil = $filter('date')(deferral.deferredUntil,'MM/dd/yyyy');
 
       // save deferral (POST /deferral)
       addDeferral.$save(function(data){ 

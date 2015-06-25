@@ -103,7 +103,7 @@ angular.module('bsis')
         'startingDay': 1,
         'show-weeks': false
       };
-      $scope.format = 'dd/MM/yyyy';
+      $scope.format = 'yyyy-MM-dd';
       $scope.initDate = item.birthDate;
       $scope.calIcon = 'fa-calendar';
 
@@ -121,7 +121,7 @@ angular.module('bsis')
 
       if (valid){
 
-        newDonor.birthDate = dob.month + "/" + dob.dayOfMonth + "/" + dob.year;
+        newDonor.birthDate = dob.year + "-" + dob.month + "-" + dob.dayOfMonth;
 
         DonorService.addDonor(newDonor, function(response){
           if (response === true){
@@ -131,7 +131,7 @@ angular.module('bsis')
               'startingDay': 1,
               'show-weeks': false
             };
-            $scope.format = 'dd/MM/yyyy';
+            $scope.format = 'yyyy-MM-dd';
             $scope.initDate = $scope.donor.birthDate;
             $scope.calIcon = 'fa-calendar';
 
@@ -376,7 +376,7 @@ angular.module('bsis')
         'startingDay': 1,
         'show-weeks': false
       };
-      $scope.format = 'dd/MM/yyyy';
+      $scope.format = 'yyyy-MM-dd';
       $scope.initDate = new Date();
       $scope.calIcon = 'fa-calendar';
 
@@ -679,7 +679,7 @@ angular.module('bsis')
       'startingDay': 1,
       'show-weeks': false
     };
-    $scope.format = 'dd/MM/yyyy';
+    $scope.format = 'yyyy-MM-dd';
     $scope.initDate = new Date();
     $scope.calIcon = 'fa-calendar';
 
@@ -913,7 +913,7 @@ angular.module('bsis')
         'startingDay': 1,
         'show-weeks': false
       };
-      $scope.format = 'dd/MM/yyyy';
+      $scope.format = 'yyyy-MM-dd';
       $scope.initDate = '';
       $scope.calIcon = 'fa-calendar';
 

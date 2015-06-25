@@ -21,7 +21,7 @@
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': donationBatch.$selected}">
                     <td data-title="'Created'" style="width:30%;" header-class="text-left" sortable="'date'">
-                        {{donationBatch.createdDate}}
+                        {{donationBatch.createdDate | bsisDate}}
                     </td>
                     <td data-title="'Panel'" style="width:25%;" header-class="text-left" sortable="'center'">
                         {{donationBatch.donorPanel.name}}
@@ -92,10 +92,10 @@
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': donationBatch.$selected}">
                     <td data-title="'Created'" style="width:20%;" header-class="text-left" sortable="'date'">
-                        {{donationBatch.createdDate}}
+                        {{donationBatch.createdDate | bsisDate}}
                     </td>
                     <td data-title="'Closed'" style="width:30%;" header-class="text-left" sortable="'date'">
-                        {{donationBatch.lastUpdated}}
+                        {{donationBatch.lastUpdated | bsisDate }}
                     </td>
                     <td data-title="'Panel'" style="width:25%;" header-class="text-left" sortable="'center'">
                         {{donationBatch.donorPanel.name}}
