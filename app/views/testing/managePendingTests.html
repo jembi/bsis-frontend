@@ -3,7 +3,7 @@
 <hr/>
 
 <div class = "h4"> 
-  <small><em>Created On: </em></small>{{testBatch.createdDate}}
+  <small><em>Created On: </em></small>{{testBatch.createdDate | bsisDate}}
   | 
   <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
 </div>
@@ -58,7 +58,7 @@
                   {{sample.collectedSample.collectionNumber}}
               </td>
               <td class="text-center">
-                  {{sample.collectedSample.collectedOn}}
+                  {{sample.collectedSample.collectedOn | bsisDate}}
               </td>
               <td >
                   {{sample.ttistatus}}
