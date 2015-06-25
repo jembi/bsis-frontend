@@ -14,7 +14,7 @@
           {{component.componentIdentificationNumber}}
       </td>
       <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
-          {{component.createdOn}}
+          {{component.createdOn | bsisDate}}
       </td>
       <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
           {{component.productType.productTypeName}}
