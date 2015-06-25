@@ -44,13 +44,17 @@ angular.module('bsis')
       });
     },
     ComponentsSearch: function (componentsSearch, response) {
-      var components = Api.ComponentsSearch.query({donationIdentificationNumber: componentsSearch.donationIdentificationNumber, 
-        componentTypes: componentsSearch.componentTypes, status: componentsSearch.status, 
-        donationDateFrom: $filter('date')(componentsSearch.donationDateFrom,'MM/dd/yyyy'), donationDateTo: $filter('date')(componentsSearch.donationDateTo,'MM/dd/yyyy')}, function(){
-          console.log("components response: ", components);
-          response(components);
-      }, function (){
-        response(false);  
+      var components = Api.ComponentsSearch.query({
+        donationIdentificationNumber: componentsSearch.donationIdentificationNumber,
+        componentTypes: componentsSearch.componentTypes,
+        status: componentsSearch.status,
+        donationDateFrom: componentsSearch.donationDateFrom,
+        donationDateTo: componentsSearch.donationDateTo
+      }, function () {
+        console.log("components response: ", components);
+        response(components);
+      }, function () {
+        response(false);
       });
     },
     recordComponents: function (component, response) {
