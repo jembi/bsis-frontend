@@ -25,6 +25,8 @@ angular.module('bsis')
         }
       ),
 
+      Permissions: $resource(url + '/roles/permissions'),
+
       Donor: $resource(url + '/donors/:id', null,
         {
           update: {method:'PUT'}

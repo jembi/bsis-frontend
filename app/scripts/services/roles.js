@@ -10,7 +10,15 @@ angular.module('bsis')
 
     getRoles: function(response){
       Api.Roles.get({}, function (apiResponse) {
-        response(apiResponse.allRoles);
+        response(apiResponse.roles);
+      }, function (){
+        response(false);
+      });
+    },
+
+    getAllPermissions : function (response){
+      Api.Permissions.get({}, function (apiResponse) {
+        response(apiResponse);
       }, function (){
         response(false);
       });

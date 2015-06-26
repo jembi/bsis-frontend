@@ -23,7 +23,6 @@ angular.module('bsis')
     var data = [];
     $scope.data = data;
     $scope.roles = {};
-
     $scope.clear = function () {
 
     };
@@ -44,21 +43,9 @@ angular.module('bsis')
 
         }
       });
-
     };
 
-    $scope.getRole = function () {
-      RolesService.getRoleById(1, function (response) {
-        if (response !== false) {
-          //data = response;
-          //$scope.data = data;
-          console.log("role id 1: ", response);
-        }
-        else {
 
-        }
-      });
-    };
 
     $scope.getPermissions = function () {
 
@@ -68,11 +55,10 @@ angular.module('bsis')
 
     $scope.manageRole = function (item) {
 
-      RolesService.getRoleById(1, function (response) {
+      RolesService.getAllPermissions( function (response) {
         if (response !== false) {
-          console.log("role id 1: ", response);
           $scope.permissionList = response.permissions;
-          RolesService.setPermissions(response.role.permissions);
+          RolesService.setPermissions(response.permissions);
           $scope.role = item;
           RolesService.setRole(item);
           $location.path("/role");
@@ -81,11 +67,10 @@ angular.module('bsis')
 
         }
       });
-
     };
 
     $scope.getRoles();
-    // $scope.getRole();
+
 
     $scope.rolesTableParams = new ngTableParams({
         page: 1,            // show first page
@@ -133,6 +118,10 @@ angular.module('bsis')
 
     $scope.clear = function () {
 
+    };
+
+    $scope.go = function (path) {
+      $location.path(path);
     };
 
     $scope.clearForm = function (form) {

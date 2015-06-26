@@ -1,6 +1,6 @@
 <h3 class="page-header">Set Role Permissions</h3>
 
-<form class="form-horizontal col-sm-12"  role="form" ng-submit="updateRole(role)">
+<form name="roleForm" class="form-horizontal col-sm-12"  role="form" ng-submit="updateRole(role)">
     <div class="form-group">
         <label for="name" class="col-sm-1 control-label" >Role Name</label>
         <div class="row col-sm-11">
@@ -22,7 +22,7 @@
     <div class="form-group">
         <label for="" class="col-sm-1 control-label" >Permissions </label>
     </div>
-    <div class="form-group" style="width: 100%">
+    <div class="form-group" style="margin-left: 30px; width: 70%">
         <div ng-repeat="entity in permissionList" class="row  pull-left" style="width: 20%">
             <input type="checkbox" checklist-model="role.permissions" checklist-value="entity" /> {{entity.name}}
         </div>
@@ -31,7 +31,7 @@
     <div class="form-group">
         <div class="col-sm-offset-1 col-sm-4">
             <button class="btn btn-primary" type="submit">Set Role</button>
-            <!-- <button class="btn btn-primary" type="submit">Save and Add Another Donor</button> -->
+            <button class="btn btn-primary" type="button" ng-click="go('/roles')" >Cancel</button>
         </div>
     </div>
 </form>

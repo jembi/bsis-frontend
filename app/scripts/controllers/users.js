@@ -50,8 +50,6 @@ angular.module('bsis')
     $scope.getUser = function () {
       UsersService.getUser(1, function (response) {
         if (response !== false) {
-          //data = response;
-          //$scope.data = data;
           console.log("user id 1: ", response);
         }
         else {
