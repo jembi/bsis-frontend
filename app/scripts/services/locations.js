@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.factory('SettingsService', function ($http, Api, $filter) {
+.factory('LocationsService', function ($http, Api, $filter) {
   return {
     getLocations: function(response){
       Api.Locations.get({}, function (apiResponse) {

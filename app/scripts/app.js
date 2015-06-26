@@ -211,12 +211,17 @@ angular.module('bsis', [
       // SETTINGS URLs
       .when('/settings', {
         templateUrl : 'views/settings.html',
-        controller  : 'SettingsCtrl',
+        controller  : 'ConfigurationsCtrl',
         permission: PERMISSIONS.VIEW_ADMIN_INFORMATION
       })
       .when('/locations', {
         templateUrl : 'views/settings.html',
-        controller  : 'SettingsCtrl',
+        controller  : 'LocationsCtrl',
+        permission: PERMISSIONS.MANAGE_DONATION_SITES
+      })
+      .when('/configurations', {
+        templateUrl : 'views/settings.html',
+        controller  : 'ConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
 
@@ -228,6 +233,23 @@ angular.module('bsis', [
   .run(function(editableOptions) {
     editableOptions.theme = 'bs3';
   })
+
+  // load general configurations into $rootScope.configurations on startup
+  .run( ['$rootScope', 'ConfigurationsService', function ($rootScope, ConfigurationsService) {
+
+    var data = {};
+    
+    ConfigurationsService.getConfigurations(function(response){
+      if (response !== false){
+        data = response;
+        $rootScope.configurations = data;
+      }
+      else{
+
+      }
+      });
+
+  }])
 
   .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
 

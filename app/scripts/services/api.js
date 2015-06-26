@@ -172,6 +172,12 @@ angular.module('bsis')
         {
           update: {method:'PUT'}
         }
+      ),
+
+      Configurations: $resource(url + '/configurations/:id', null, 
+        {
+          update: {method:'PUT'}
+        }
       )
 
     };

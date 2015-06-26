@@ -123,7 +123,8 @@ angular.module('bsis')
 
   // else if on settings page, set menu to SETTINGS
   else if(~$location.path().indexOf('settings')        ||
-      ~$location.path().indexOf('locations')
+      ~$location.path().indexOf('locations')           ||
+      ~$location.path().indexOf('configurations')
     ){
       $scope.currentSection = 'SETTINGS';
     }
@@ -205,7 +206,8 @@ angular.module('bsis')
 
     // else if on settings page, set menu to SETTINGS
     else if(~$location.path().indexOf('settings')        ||
-      ~$location.path().indexOf('locations')
+      ~$location.path().indexOf('locations')           ||
+      ~$location.path().indexOf('configurations')
       ){
         $scope.currentSection = 'SETTINGS';
       }
