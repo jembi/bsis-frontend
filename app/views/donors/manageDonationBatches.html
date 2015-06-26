@@ -92,7 +92,7 @@
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': donationBatch.$selected}">
                     <td data-title="'Created'" style="width:20%;" header-class="text-left" sortable="'date'">
-                        {{donationBatch.createdDate | bsisDateTime}}
+                        {{donationBatch.createdDate | bsisDate}}
                     </td>
                     <td data-title="'Closed'" style="width:30%;" header-class="text-left" sortable="'date'">
                         {{donationBatch.lastUpdated | bsisDateTime }}

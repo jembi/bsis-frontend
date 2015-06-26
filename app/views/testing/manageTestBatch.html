@@ -115,7 +115,7 @@
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': testBatch.$selected}">
                     <td data-title="'Created On'" style="width:25%;" header-class="text-left" class="text-center" sortable="'createdOn'">
-                        {{testBatch.createdDate | bsisDateTime}}
+                        {{testBatch.createdDate | bsisDate}}
                     </td>
                     <td data-title="'Closed'" style="width:30%;" header-class="text-left" sortable="'date'">
                         {{testBatch.lastUpdated | bsisDateTime}}
