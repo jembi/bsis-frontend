@@ -23,7 +23,7 @@
           ng-mouseleave="this.$selected = false"
           ng-class="{'active': donation.$selected}">
           <td data-title="'Date'" style="width:18%;" header-class="text-left" class="text-center" sortable="'collectedOn'"  filter="{ 'collectedOn': 'text' }">
-              {{donation.collectedOn | bsisDateTime }}
+              {{donation.collectedOn | bsisDate }}
           </td>
           <td data-title="'Panel'" style="width:17%;" header-class="text-left" sortable="'donorPanel'" filter="{ 'collectionSite': 'text' }">
               {{donation.donorPanel.name}}

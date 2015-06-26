@@ -69,7 +69,7 @@
             <tr ng-repeat="test in testResults">
               <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.bloodTest.testNameShort}}</td>
               <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.result}}</td>
-              <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.testedOn | bsisDateTime}}</td>
+              <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.testedOn | bsisDate}}</td>
             </tr>
           </tbody>
         </table>
@@ -93,7 +93,7 @@
             <tr ng-repeat="test in testResults">
               <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.bloodTest.testNameShort}}</td>
               <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.result}}</td>
-              <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.testedOn | bsisDateTime}}</td>
+              <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.testedOn | bsisDate}}</td>
             </tr>
           </tbody>
         </table>
