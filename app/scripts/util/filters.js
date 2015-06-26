@@ -17,4 +17,19 @@ angular.module('bsisFilters', [])
     return function (theDate) {
       return angularDateFilter(theDate, $rootScope.dateFormat);
     };
-  });
+  })
+
+  .filter('bsisDateTime', function ($filter,$rootScope) {
+    var angularDateFilter = $filter('date');
+    return function (theDate) {
+      return angularDateFilter(theDate, $rootScope.dateTimeFormat);
+    };
+  })
+
+  .filter('bsisTime', function ($filter,$rootScope) {
+    var angularDateFilter = $filter('date');
+    return function (theDate) {
+      return angularDateFilter(theDate, $rootScope.timeFormat);
+    };
+  })
+;

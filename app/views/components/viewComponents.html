@@ -21,7 +21,7 @@
     <tr ng-repeat="component in components">
       <td class="value">{{component.productType.productTypeName}}</td>
       <td class="value">{{component.status}}</td>
-      <td class="value center">{{component.createdOn | bsisDate}}</td>
+      <td class="value center">{{component.createdOn | bsisDateTime}}</td>
       <td class="value center">{{ component | expiryStatus }}</em></td>
     </tr>
   </tbody>
