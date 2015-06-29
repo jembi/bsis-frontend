@@ -52,6 +52,19 @@ angular.module('bsis')
 
     },
 
+    addRole : function (role, response) {
+
+      var addRole = new Api.Roles();
+      angular.copy(role, addRole);
+
+      addRole.$save(function(data){
+        response(data);
+      }, function (){
+        response(false);
+      });
+
+    },
+
     setRole: function (role) {
       roleObj = role;
     },

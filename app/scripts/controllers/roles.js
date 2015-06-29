@@ -6,6 +6,7 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
 
+
     $scope.isCurrent = function (path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
         $location.path(path);
@@ -42,12 +43,39 @@ angular.module('bsis')
         else {
 
         }
+        RolesService.getAllPermissions(function (response) {
+          $scope.permissionList = response.permissions;
+          RolesService.setPermissions(response.permissions);
+        });
       });
     };
 
 
-    $scope.getPermissions = function () {
 
+
+
+
+    $scope.addRole = function (role, roleForm) {
+
+      if(roleForm.$valid){
+        RolesService.addRole(role, function(response){
+          if (response !== false){
+            $scope.role = {
+              name: '',
+              description: ''
+            };
+            roleForm.$setPristine();
+            $scope.submitted = '';
+            $scope.getRoles();
+          }
+          else{
+          }
+        });
+      }
+      else{
+        $scope.submitted = true;
+        console.log("FORM NOT VALID");
+      }
     };
 
 
@@ -97,18 +125,7 @@ angular.module('bsis')
     });
   })
 
-  .controller('AddRole', function ($scope, $location, RoleService, ICONS, PERMISSIONS){
-    $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
-    $scope.selection = "/role";
 
-    $scope.permissionList = RolesService.getPermissions();
-
-    $scope.go = function (path) {
-      $location.path(path);
-    };
-
-  })
 
   .controller('ViewRoleCtrl', function ($scope, $location, RolesService, ICONS, PERMISSIONS) {
     $scope.icons = ICONS;

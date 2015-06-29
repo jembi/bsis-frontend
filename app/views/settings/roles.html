@@ -26,3 +26,54 @@
 </div>
 
 </form>
+
+<h4>Add Role</h4>
+<form name="addRoleForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addRole(role, addRoleForm)">
+    <div class="form-group">
+        <label for="name" class="col-sm-1 control-label">Name</label>
+        <div class="row col-sm-11">
+            <div class="form-inline" style="padding-left:5px;">
+                <input size="45"  id="name" name="name" class="form-control input-sm" ng-model="role.name" required ng-minlength=1 ng-maxlength=30
+                       ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                       ng-class="{'ng-invalid ng-dirty' : addRoleForm.name.$invalid && submitted}">
+                <div>
+                    <small class="error"  ng-show="(addRoleForm.name.$error.required && (addRoleForm.name.$dirty || submitted))">
+                        This cannot be empty
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description" class="col-sm-1 control-label">Description</label>
+        <div class="row col-sm-11">
+            <div class="form-inline" style="padding-left:5px;">
+                <input size="45"  id="description" name="description" class="form-control input-sm" ng-model="role.description" required ng-minlength=1 ng-maxlength=30
+                       ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                       ng-class="{'ng-invalid ng-dirty' : addRoleForm.description.$invalid && submitted}">
+                <div>
+                    <small class="error" ng-show="(addRoleForm.description.$error.required && (addRoleForm.description.$dirty || submitted))">
+                        This cannot be empty
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="" class="col-sm-1 control-label" >Permissions </label>
+        <div class="row col-sm-11" style="margin-left: 30px; width: 70%">
+            <div ng-repeat="entity in permissionList" class="row  pull-left" style="width: 20%">
+                <input type="checkbox" checklist-model="role.permissions" checklist-value="entity" /> {{entity.name}}
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-4">
+            <button class="btn btn-primary" type="submit">Add Role</button>
+            <button class="btn btn-primary" type="button" ng-click="clear(); clearForm(addRoleForm);">Clear</button>
+        </div>
+    </div>
+
+</form>
