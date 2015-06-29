@@ -79,6 +79,8 @@ angular.module('bsis')
         }
       ),
 
+      DonorSummaries: $resource(url + '/donors/summaries'),
+
       ComponentsSearch: $resource(url + '/components/search', {}, 
         {
           query: {
