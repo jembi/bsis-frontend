@@ -65,6 +65,15 @@ angular.module('bsis')
 
     },
 
+    removeRole : function (role, response) {
+      var apiResponse = Api.Roles.remove({id: role.id}, function(){
+        console.log("role response: ", apiResponse);
+        response(apiResponse);
+      }, function (){
+        response(false);
+      });
+    },
+
     setRole: function (role) {
       roleObj = role;
     },

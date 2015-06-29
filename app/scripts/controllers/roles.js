@@ -50,11 +50,6 @@ angular.module('bsis')
       });
     };
 
-
-
-
-
-
     $scope.addRole = function (role, roleForm) {
 
       if(roleForm.$valid){
@@ -96,6 +91,24 @@ angular.module('bsis')
     };
 
     $scope.getRoles();
+
+    $scope.removeRoleCheck = function(role){
+      $scope.roleToRemove = role.id;
+    };
+
+    $scope.cancelRemoveRole = function(){
+      $scope.roleToRemove = '';
+    };
+
+    $scope.removeRole = function(role){
+      RolesService.removeRole(role, function(response){
+        if (response !== false){
+          $scope.getRoles();
+        }
+        else{
+        }
+      });
+    };
 
 
     $scope.rolesTableParams = new ngTableParams({
