@@ -38,7 +38,6 @@ angular.module('bsis')
         if (response !== false) {
           data = response;
           $scope.data = data;
-          console.log("roles: ", response);
         }
         else {
 
