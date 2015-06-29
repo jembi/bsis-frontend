@@ -22,7 +22,7 @@ angular.module('bsis')
     };
 
     var data = [];
-    $scope.data = data;
+
     $scope.roles = {};
     $scope.clear = function () {
 
@@ -37,39 +37,17 @@ angular.module('bsis')
       RolesService.getRoles(function (response) {
         if (response !== false) {
           data = response;
-          $scope.data = data;
+          $scope.data = response;
+          $scope.rolesCount = $scope.data.length;
         }
         else {
 
         }
-        RolesService.getAllPermissions(function (response) {
-          $scope.permissionList = response.permissions;
-          RolesService.setPermissions(response.permissions);
-        });
       });
     };
 
-    $scope.addRole = function (role, roleForm) {
-
-      if(roleForm.$valid){
-        RolesService.addRole(role, function(response){
-          if (response !== false){
-            $scope.role = {
-              name: '',
-              description: ''
-            };
-            roleForm.$setPristine();
-            $scope.submitted = '';
-            $scope.getRoles();
-          }
-          else{
-          }
-        });
-      }
-      else{
-        $scope.submitted = true;
-        console.log("FORM NOT VALID");
-      }
+    $scope.addNewRole = function () {
+      $location.path('/add_role');
     };
 
 
@@ -109,7 +87,6 @@ angular.module('bsis')
       });
     };
 
-
     $scope.rolesTableParams = new ngTableParams({
         page: 1,            // show first page
         count: 6,          // count per page
@@ -135,6 +112,53 @@ angular.module('bsis')
         $scope.rolesTableParams.reload();
       });
     });
+  })
+
+  .controller('AddRoleCtrl', function($scope, $location, RolesService, ICONS, PERMISSIONS) {
+    $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
+    $scope.selection = "/add_role";
+    $scope.loadPermissions = function (){
+      RolesService.getAllPermissions(function (response) {
+        if (response !== false) {
+          $scope.permissionList = response.permissions;
+          RolesService.setPermissions(response.permissions);
+          $location.path("/add_role");
+        }
+        else {
+
+        }
+      });
+    };
+
+    $scope.role = {};
+    $scope.addRole = function (role, roleForm) {
+
+      if(roleForm.$valid){
+        RolesService.addRole(role, function(response){
+          if (response !== false){
+            $scope.role = {
+              name: '',
+              description: ''
+            };
+            roleForm.$setPristine();
+            $scope.submitted = '';
+            $scope.go('/roles');
+          }
+          else{
+          }
+        });
+      }
+      else{
+        $scope.submitted = true;
+      }
+    };
+
+    $scope.loadPermissions();
+
+    $scope.go = function (path) {
+      $location.path(path);
+    };
   })
 
 
