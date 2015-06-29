@@ -46,16 +46,14 @@ angular.module('bsis')
     };
 
 
-
     $scope.getPermissions = function () {
 
     };
 
 
-
     $scope.manageRole = function (item) {
 
-      RolesService.getAllPermissions( function (response) {
+      RolesService.getAllPermissions(function (response) {
         if (response !== false) {
           $scope.permissionList = response.permissions;
           RolesService.setPermissions(response.permissions);
@@ -99,7 +97,20 @@ angular.module('bsis')
     });
   })
 
-  .controller('ViewRoleCtrl', function ($scope, $location, RolesService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('AddRole', function ($scope, $location, RoleService, ICONS, PERMISSIONS){
+    $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
+    $scope.selection = "/role";
+
+    $scope.permissionList = RolesService.getPermissions();
+
+    $scope.go = function (path) {
+      $location.path(path);
+    };
+
+  })
+
+  .controller('ViewRoleCtrl', function ($scope, $location, RolesService, ICONS, PERMISSIONS) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = "/role";
@@ -109,10 +120,9 @@ angular.module('bsis')
 
 
     $scope.updateRole = function (role) {
-      console.log('updating role ' + role);
-      RolesService.updateRole(role, function (response) {
 
-        console.log('role service response' + response);
+      RolesService.updateRole(role, function (response) {
+        $scope.go('/roles');
       });
     };
 

@@ -37,18 +37,13 @@ angular.module('bsis')
 
       var roleObj = {};
 
-      var updatedRole = {
-        id : role.id,
-        name : role.name,
-        description: role.description,
-        permissionValues : []
-      };
+      var updatedRole = angular.copy(role);
 
       role.permissions.forEach( function (item) {
-        updatedRole.permissionValues.push("" + item.id);
+        updatedRole.permissions.push("" + item.id);
       });
 
-      Api.Roles.update({id:role.id}, updatedRole, function(data) {
+      Api.Roles.update({id:role.id}, role, function(data) {
         roleObj = data.role;
         response(roleObj);
       }, function (){
