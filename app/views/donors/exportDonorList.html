@@ -83,7 +83,7 @@
                       {{donor.lastName}}
                   </td>
                   <td data-title="'Date of Last Donation'" header-class="text-left" class="text-center" sortable="'dateOfLastDonation'">
-                      {{donor.dateOfLastDonation}}
+                      {{donor.dateOfLastDonation | bsisDate}}
                   </td>
                   <td data-title="'Blood Group'" header-class="text-left" sortable="'bloodGroup'">
                       {{donor.bloodGroup}}
