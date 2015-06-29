@@ -74,7 +74,7 @@ angular.module('bsis')
           query: {
             method: 'GET', 
             params:{bloodGroups:'@bloodGroups', donorPanels:'@donorPanels', clinicDate: '@clinicDate', 
-            lastDonationFromDate: '@lastDonationFromDate', lastDonationToDate: '@lastDonationToDate', anyBloodGroup: '@anyBloodGroup' }
+            lastDonationFromDate: '@lastDonationFromDate', lastDonationToDate: '@lastDonationToDate', anyBloodGroup: '@anyBloodGroup', noBloodGroup: '@noBloodGroup' }
           }
         }
       ),
