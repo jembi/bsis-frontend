@@ -4,9 +4,9 @@
         <div class="form-inline" style="padding-left:5px;">
             <input size="45"  id="name" name="name" class="form-control input-sm" ng-model="role.name" required ng-minlength=1 ng-maxlength=30
                    ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                   ng-class="{'ng-invalid ng-dirty' : addRoleForm.name.$invalid && submitted}">
+                   ng-class="{'ng-invalid ng-dirty' : roleForm.name.$invalid && submitted}">
             <div>
-                <small class="error"  ng-show="(addRoleForm.name.$error.required && (addRoleForm.name.$dirty || submitted))">
+                <small class="error"  ng-show="(roleForm.name.$error.required && (roleForm.name.$dirty || submitted))">
                     This cannot be empty
                 </small>
             </div>
@@ -19,9 +19,9 @@
         <div class="form-inline" style="padding-left:5px;">
             <input size="45"  id="description" name="description" class="form-control input-sm" ng-model="role.description" required ng-minlength=1 ng-maxlength=30
                    ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                   ng-class="{'ng-invalid ng-dirty' : addRoleForm.description.$invalid && submitted}">
+                   ng-class="{'ng-invalid ng-dirty' : roleForm.description.$invalid && submitted}">
             <div>
-                <small class="error" ng-show="(addRoleForm.description.$error.required && (addRoleForm.description.$dirty || submitted))">
+                <small class="error" ng-show="(roleForm.description.$error.required && (roleForm.description.$dirty || submitted))">
                     This cannot be empty
                 </small>
             </div>
