@@ -5,7 +5,7 @@
     <tr>
       <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
       <td class="field">Currently Deferred: </td>
-      <td ng-if="currentlyDeferred" class="value red"> Deferred until {{deferredUntil}}</td>
+      <td ng-if="currentlyDeferred" class="value red"> Deferred until {{deferredUntil | bsisDate}}</td>
       <td ng-if="!currentlyDeferred" class="value green"> No current deferrals</td>
     </tr>
     <tr><td></td></tr>
@@ -22,10 +22,10 @@
           ng-mouseleave="this.$selected = false"
           ng-class="{'active': deferral.$selected}">
           <td data-title="'Deferred From'" style="width:15%;" header-class="text-left" class="text-center" sortable="'createdDate'"  filter="{ 'createdDate': 'text' }">
-              {{deferral.createdDate}}
+              {{deferral.createdDate | bsisDate}}
           </td>
           <td data-title="'Deferred Until'" style="width:15%;" header-class="text-left" class="text-center" sortable="'deferredUntil'" filter="{ 'deferredUntil': 'text' }">
-              {{deferral.deferredUntil}}
+              {{deferral.deferredUntil | bsisDate}}
           </td>
           <td data-title="'Reason'" style="width:22%;" header-class="text-left" sortable="'deferralReason.reason'" filter="{ 'deferralReason.reason': 'select' }" 
               filter-data="deferralReasonsFilter($column)">

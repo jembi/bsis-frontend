@@ -6,7 +6,7 @@
     <tr>
       <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
       <td class="field">Due To Donate: </td>
-      <td class="value">{{dueToDonate | date:'longDate'}}</td>
+      <td class="value">{{dueToDonate | bsisDate:'longDate'}}</td>
     </tr>
 
     <tr><td></td></tr>
@@ -23,7 +23,7 @@
           ng-mouseleave="this.$selected = false"
           ng-class="{'active': donation.$selected}">
           <td data-title="'Date'" style="width:18%;" header-class="text-left" class="text-center" sortable="'collectedOn'"  filter="{ 'collectedOn': 'text' }">
-              {{donation.collectedOn}}
+              {{donation.collectedOn | bsisDate }}
           </td>
           <td data-title="'Panel'" style="width:17%;" header-class="text-left" sortable="'donorPanel'" filter="{ 'collectionSite': 'text' }">
               {{donation.donorPanel.name}}

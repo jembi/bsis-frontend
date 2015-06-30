@@ -30,11 +30,11 @@
         </tr>
         <tr>
           <td class="field">Date Bled: </td>
-          <td class="value">{{donation.collectedOn}}</td>
+          <td class="value">{{donation.collectedOn | bsisDate }}</td>
         </tr>
         <tr>
           <td class="field">Bleed Time: </td>
-          <td class="value">{{donation.bleedStartTime}} to {{donation.bleedEndTime}}</td>
+          <td class="value">{{donation.bleedStartTime | bsisTime }} to {{donation.bleedEndTime | bsisTime }}</td>
         </tr>
         <tr>
           <td class="field">Venue: </td>
