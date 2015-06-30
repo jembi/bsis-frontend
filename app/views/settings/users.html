@@ -4,8 +4,12 @@
   <div style="padding-bottom: 10px"></div>
     <div class="panel panel-default">
       <div class="panel-body">
+          <p>
+              <em> {{usersCount}} user(s) found </em> <span has-permission="{{permissions.ADD_USERS}}"> | <em> <a href="" ng-click="addNewUser()" >Add New User</a></em> </span>
+          </p>
 
-        <table ng-table="usersTableParams" show-filter="false" class="table">
+
+          <table ng-table="usersTableParams" show-filter="false" class="table">
           <tr ng-repeat="user in $data"
               ng-click="manageUser(user); changeSelection(user);"
               ng-mouseenter="this.$selected = true"
@@ -14,8 +18,19 @@
               <td data-title="'Username'" style="width:30%;" header-class="text-left" sortable="'name'">
                   {{user.username}}
               </td>
-              <td data-title="'First Name'" style="width:30%;" header-class="text-left" sortable="'name'">
-                  {{user.firstName}}
+              <td data-title="'First and Last Name'" header-class="text-left" sortable="'name'">
+                  {{user.firstName}} {{user.lastName}}
+              </td>
+              <td data-title="" style="width:25%;" header-class="text-left" sortable="" class="text-center">
+                <span style="font-size: 0.9em;">
+                  <span ng-if="userToRemove == user.id">
+                    <em><a ng-click="removeUser(user)"> Confirm</a></em> |
+                    <em><a ng-click="cancelRemoveUser()"> Cancel</a></em>
+                  </span>
+                  <span ng-if="userToRemove != user.id">
+                    <em><a ng-click="removeUserCheck(user)"> Remove</a></em>
+                  </span>
+                </span>
               </td>
           </tr>
         </table>

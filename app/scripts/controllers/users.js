@@ -38,6 +38,7 @@ angular.module('bsis')
         if (response !== false) {
           data = response;
           $scope.data = data;
+          $scope.usersCount = $scope.data.length;
           console.log("users: ", response);
         }
         else {
@@ -60,7 +61,29 @@ angular.module('bsis')
     };
 
     $scope.getUsers();
-    //$scope.getUser();
+
+    $scope.removeUserCheck = function(user){
+      $scope.userToRemove = user.id;
+    };
+
+    $scope.cancelRemoveUser = function(){
+      $scope.userToRemove = '';
+    };
+
+    $scope.removeUser = function(user){
+      UsersService.removeUser(user, function(response){
+        if (response !== false){
+          $scope.getUsers();
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.addNewUser = function () {
+      $location.path('/add_user');
+    };
+
 
     $scope.usersTableParams = new ngTableParams({
         page: 1,            // show first page
@@ -87,4 +110,8 @@ angular.module('bsis')
         $scope.usersTableParams.reload();
       });
     });
-  });
+  })
+  .controller('AddUserCtrl', function(){
+
+  })
+;
