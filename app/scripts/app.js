@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis', [
+var app = angular.module('bsis', [
   'ngRoute',
   'ui.bootstrap',
   'ngResource',
@@ -581,5 +581,24 @@ angular.module('bsis', [
       }
     };
   }])
-
 ;
+
+// initialize config before app starts
+(function() {
+
+  function initializeConfig() {
+    var initInjector = angular.injector(['ng']);
+    var $http = initInjector.get('$http');
+
+    return $http.get('config/config.json').then(function(response) {
+      app.constant('CONFIG', response.data);
+    }, function() {
+      // Handle error case
+      app.constant('CONFIG', 'No Config Loaded');
+    });
+
+  }
+
+  initializeConfig();
+
+}());
