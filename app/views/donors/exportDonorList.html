@@ -25,6 +25,7 @@
           </ui-select-choices>
         </ui-select>
         <input  type="checkbox" id="anyBloodGroup" ng-model="donorList.anyBloodGroup" > <label style="display: inline-block; cursor: pointer; cursor: hand;" for="anyBloodGroup"> Any Blood Group </label> 
+        <input  type="checkbox" id="noBloodGroup" ng-model="donorList.noBloodGroup" > <label style="display: inline-block; cursor: pointer; cursor: hand;" for="noBloodGroup"> No Blood Group </label> 
       </div>
     </div>
   </div>
@@ -83,7 +84,7 @@
                       {{donor.lastName}}
                   </td>
                   <td data-title="'Date of Last Donation'" header-class="text-left" class="text-center" sortable="'dateOfLastDonation'">
-                      {{donor.dateOfLastDonation}}
+                      {{donor.dateOfLastDonation | bsisDate}}
                   </td>
                   <td data-title="'Blood Group'" header-class="text-left" sortable="'bloodGroup'">
                       {{donor.bloodGroup}}

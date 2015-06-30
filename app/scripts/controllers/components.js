@@ -59,7 +59,7 @@ angular.module('bsis')
       'startingDay': 1,
       'show-weeks': false
     };
-    $scope.format = 'dd/MM/yyyy';
+    $scope.format = $rootScope.dateFormat;
     $scope.initDate = new Date();
     $scope.calIcon = 'fa-calendar';
 

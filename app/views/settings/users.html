@@ -18,7 +18,7 @@
               <td data-title="'Username'" style="width:30%;" header-class="text-left" sortable="'name'">
                   {{user.username}}
               </td>
-              <td data-title="'First and Last Name'" header-class="text-left" sortable="'name'">
+              <td data-title="'First Name'" header-class="text-left" sortable="'name'">
                   {{user.firstName}} {{user.lastName}}
               </td>
               <td data-title="" style="width:25%;" header-class="text-left" sortable="" class="text-center">
@@ -28,7 +28,7 @@
                     <em><a ng-click="cancelRemoveUser()"> Cancel</a></em>
                   </span>
                   <span ng-if="userToRemove != user.id">
-                    <em><a ng-click="removeUserCheck(user)"> Remove</a></em>
+                    <em><a ng-click="removeRoleCheck(user)"> Remove</a></em>
                   </span>
                 </span>
               </td>

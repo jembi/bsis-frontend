@@ -174,7 +174,7 @@ angular.module('bsis')
 
     $scope.updateRole = function (role) {
 
-      RolesService.updateRole(role, function (response) {
+      RolesService.updateRole(role, function () {
         $scope.go('/roles');
       });
     };

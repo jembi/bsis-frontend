@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('UsersCtrl', function ($scope, $location, UsersService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('UsersCtrl', function ($scope, $location, UsersService, RolesService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -84,6 +84,22 @@ angular.module('bsis')
       $location.path('/add_user');
     };
 
+    $scope.manageUser = function (item) {
+
+      RolesService.getRoles(function (response) {
+        if (response !== false) {
+          $scope.roleList = response;
+          UsersService.setRoles(response);
+          $scope.user = item;
+          UsersService.setUser(item);
+          $location.path("/user");
+        }
+        else {
+
+        }
+      });
+    };
+
 
     $scope.usersTableParams = new ngTableParams({
         page: 1,            // show first page
@@ -111,7 +127,83 @@ angular.module('bsis')
       });
     });
   })
-  .controller('AddUserCtrl', function(){
+  .controller('AddUserCtrl', function($scope, $rootScope, UsersService, RolesService, ICONS, PERMISSIONS, $location, ngTableParams, $timeout){
+    $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
+    $scope.selection = '/add_user';
+
+    $scope.loadRoles = function (){
+      RolesService.getRoles(function (response) {
+        if (response !== false) {
+          $scope.roleList = response;
+          UsersService.setRoles(response);
+          $location.path("/add_user");
+        }
+        else {
+
+        }
+      });
+    };
+
+    $scope.user = {};
+    $scope.addUser = function (user, userForm) {
+
+      if(userForm.$valid){
+        UsersService.addUser(user, function(response){
+          if (response !== false){
+            $scope.user = {
+              name: '',
+              description: ''
+            };
+            userForm.$setPristine();
+            $scope.submitted = '';
+            $scope.go('/users');
+          }
+          else{
+          }
+        });
+      }
+      else{
+        $scope.submitted = true;
+      }
+    };
+
+    $scope.loadRoles();
+
+    $scope.go = function (path) {
+      $location.path(path);
+    };
 
   })
+
+  .controller('ViewUserCtrl', function($scope, $location, UsersService, RolesService, ICONS, PERMISSIONS){
+    $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
+    $scope.selection = "/user";
+
+    $scope.user = UsersService.getUser();
+    $scope.roleList = RolesService.getRoles();
+
+
+    $scope.updateUser = function (role) {
+
+      UsersService.updateUser(role, function () {
+        $scope.go('/roles');
+      });
+    };
+
+    $scope.clear = function () {
+
+    };
+
+    $scope.go = function (path) {
+      $location.path(path);
+    };
+
+    $scope.clearForm = function (form) {
+      form.$setPristine();
+      $scope.submitted = '';
+    };
+  })
+
 ;

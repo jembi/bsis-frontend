@@ -230,6 +230,16 @@ angular.module('bsis', [
         controller : 'UsersCtrl',
         permission: PERMISSIONS.MANAGE_USERS
       })
+      .when('/user', {
+        templateUrl : 'views/settings.html',
+        controller : 'ViewUserCtrl',
+        permission: PERMISSIONS.MANAGE_USERS
+      })
+      .when('/add_user', {
+        templateUrl : 'views/settings.html',
+        controller : 'AddUserCtrl',
+        permission: PERMISSIONS.MANAGE_USERS
+      })
       .when('/roles', {
         templateUrl : 'views/settings.html',
         controller : 'RolesCtrl',
@@ -264,6 +274,19 @@ angular.module('bsis', [
       if (response !== false){
         data = response;
         $rootScope.configurations = data;
+        $rootScope.configurations.forEach(function(entry) {
+          if (entry.name == 'dateFormat'){
+            $rootScope.dateFormat = entry.value;
+          }
+
+          if (entry.name == 'dateTimeFormat'){
+            $rootScope.dateTimeFormat = entry.value;
+          }
+
+          if (entry.name == 'timeFormat'){
+            $rootScope.timeFormat = entry.value;
+          }
+        });
       }
       else{
 
