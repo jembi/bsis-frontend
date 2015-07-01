@@ -583,7 +583,7 @@ var app = angular.module('bsis', [
   }])
 ;
 
-// initialize config before app starts
+// initialize system & user config before app starts
 (function() {
 
   function initializeConfig() {
@@ -591,10 +591,21 @@ var app = angular.module('bsis', [
     var $http = initInjector.get('$http');
 
     return $http.get('config/config.json').then(function(response) {
-      app.constant('CONFIG', response.data);
+      app.constant('SYSTEMCONFIG', response.data);
+
+        var url = 'http://' + response.data.apiHost + ':' + response.data.apiPort + '/' + response.data.apiApp;
+        return $http.get(url+'/configurations').then(function(response) {
+          app.constant('USERCONFIG', response.data);
+          console.log("USERCONFIG: ", response.data);
+        }, function() {
+          // Handle error case
+          app.constant('CONFIGAPI', 'No Config Loaded');
+        });
+
+
     }, function() {
       // Handle error case
-      app.constant('CONFIG', 'No Config Loaded');
+      app.constant('SYSTEMCONFIG', 'No Config Loaded');
     });
 
   }

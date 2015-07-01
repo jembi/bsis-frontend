@@ -2,9 +2,9 @@
 
 angular.module('bsis')
 
-  .factory('Api', function ($resource, $http, CONFIG) {
+  .factory('Api', function ($resource, $http, SYSTEMCONFIG) {
 
-    var url = 'http://' + CONFIG.apiHost + ':' + CONFIG.apiPort + '/' + CONFIG.apiApp;
+    var url = 'http://' + SYSTEMCONFIG.apiHost + ':' + SYSTEMCONFIG.apiPort + '/' + SYSTEMCONFIG.apiApp;
 
     return {
       User: $resource(url + '/users/login-user-details' , {}, {
