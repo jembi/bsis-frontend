@@ -14,6 +14,7 @@ module.exports = function(config){
       'app/bower_components/angular-xeditable/dist/js/xeditable.js',
       'app/bower_components/angular-ui-select/dist/select.js',
       'app/bower_components/karma-read-json/karma-read-json.js',
+      'app/bower_components/checklist-model/checklist-model.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/spec/**/*.js',
