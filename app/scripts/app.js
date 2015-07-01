@@ -224,6 +224,11 @@ angular.module('bsis', [
         controller  : 'ConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
+      .when('/profile', {
+        templateUrl: 'views/settings.html',
+        controller: 'ConfigurationsCtrl',
+        permission: PERMISSIONS.AUTHENTICATED
+      })
 
       .otherwise({
         redirectTo: '/home'

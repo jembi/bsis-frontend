@@ -12,7 +12,8 @@
            <div ng-switch on="selection">
               <div ng-switch-when="/locations"><div ng-include="'views/settings/locations.html'"></div></div>
               <div ng-switch-when="/configurations"><div ng-include="'views/settings/configurations.html'"></div></div>
-              <div ng-switch-default><div ng-include="'views/settings/configurations.html'"></div></div>
+              <div ng-switch-when="/profile"><div ng-include="'views/settings/profile.html'"></div></div>
+              <div ng-switch-default><div ng-include="'views/settings/profile.html'"></div></div>
             </div>
          </div>
        </div>
