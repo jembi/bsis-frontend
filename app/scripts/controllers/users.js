@@ -182,13 +182,15 @@ angular.module('bsis')
     $scope.selection = "/user";
 
     $scope.user = UsersService.getUser();
-    $scope.roleList = RolesService.getRoles();
+    RolesService.getRoles(function(list){
+      $scope.roleList = list;
+    });
 
 
-    $scope.updateUser = function (role) {
+    $scope.updateUser = function (user) {
 
-      UsersService.updateUser(role, function () {
-        $scope.go('/roles');
+      UsersService.updateUser(user, function () {
+        $scope.go('/users');
       });
     };
 

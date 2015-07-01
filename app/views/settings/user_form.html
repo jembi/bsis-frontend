@@ -68,14 +68,13 @@
 
         <div class="form-inline col-sm-3 pull-left" style="padding-left:5px;">
             <label for="confirmPassword" class="control-label">confirm</label>
-            <input size="30"  id="confirmPassword" name="confirmPassword" class="form-control input-sm" ng-model="user.confirmPassword" required ng-minlength=1 ng-maxlength=30
-                   ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                   ng-class="{'ng-invalid ng-dirty' : userForm.confirmPassword.$invalid && submitted}">
-            <div>
-                <small class="error" ng-show="(userForm.confirmPassword.$error.required && (userForm.confirmPassword.$dirty || submitted))">
-                    This cannot be empty
-                </small>
+            <input type="password"  id="confirmPassword" name="confirmPassword" class="form-control input-sm"
+                   ng-model="user.confirmPassword"
+                   required compare-to="user.password" />
+            <div ng-show="(userForm.confirmPassword.$dirty || submitted)" ng-messages="userForm.confirmPassword.$error">
+                <small class="error" ng-messages-include="messages.html"></small>
             </div>
+
         </div>
 
     </div>
@@ -84,48 +83,55 @@
 
 <div class="form-group">
 
+</div>
+
+<hr />
+<div class="form-group row">
+    <label for="other" class="col-sm-1 control-label" >Other:</label>
+    <div id="other" class="row col-sm-11" style="margin-left: 30px; width: 70%">
+        <div class="row pull-left" style="width: 20%;">
+            <small>
+                <input type="checkbox" id="isAdmin" ng-model="user.isAdmin"  /> isAdmin
+            </small>
+        </div>
+        <div class="row pull-left" style="width: 20%">
+            <small>
+                <input type="checkbox" id="isActive" ng-model="user.isActive" /> isActive
+            </small>
+        </div>
+        <div class="row pull-left" style="width: 20%">
+            <small>
+                <input type="checkbox" id="isDeleted" ng-model="user.isDeleted" /> isDeleted
+            </small>
+        </div>
+        <div class="row pull-left" style="width: 20%">
+            <small>
+                <input type="checkbox" id="isStaff" ng-model="user.isStaff"  /> isStaff
+            </small>
+        </div>
+        <div class="row pull-left" style="width: 20%">
+            <small>
+                <input type="checkbox" id="roleAdmin" ng-model="user.roleAdmin"  /> roleAdmin
+            </small>
+        </div>
+    </div>
 </div>
 
 <div class="form-group row">
-
-    <div class="row col-sm-2 pull-left">
-        <label for="isAdmin" class="control-label" >isAdmin </label>
-        <input type="checkbox" id="isAdmin" ng-model="user.isAdmin"  />
-    </div>
-    <div class="row col-sm-2 pull-left">
-        <label for="isActive" class="control-label">isActive</label>
-        <input type="checkbox" id="isActive" ng-model="user.isActive" />
-    </div>
-    <div class="row col-sm-2 pull-left">
-        <label for="isDeleted" class="control-label">isDeleted</label>
-        <input type="checkbox" id="isDeleted" ng-model="user.isDeleted" />
-    </div>
-    <div class="row col-sm-2 pull-left">
-        <label for="isStaff" class="control-label">isStaff</label>
-        <input type="checkbox" id="isStaff" ng-model="user.isStaff"  />
-    </div>
-</div>
-
-<div class="form-group">
-
-    <div class="row col-sm-11">
-        <div class="form-inline" style="padding-left:5px;">
-
+    <label for="other" class="col-sm-1 control-label" >Notes:</label>
+    <div id="notes" class="row col-sm-11" style="margin-left: 30px; width: 70%">
+        <div class="row" style="width: 100%">
+            <small>
+                <textarea ng-model="user.notes" class="form-control"></textarea>
+            </small>
         </div>
     </div>
 </div>
 
-<div class="form-group">
-
-    <div class="row col-sm-11">
-        <div class="form-inline" style="padding-left:5px;">
-
-        </div>
-    </div>
-</div>
+<hr />
 
 <div class="form-group">
-    <label for="roles" class="col-sm-1 control-label" >Roles </label>
+    <label for="roles" class="col-sm-1 control-label" >Roles: </label>
     <div id="roles" class="row col-sm-11" style="margin-left: 30px; width: 70%">
         <div ng-repeat="entity in roleList" class="row  pull-left" style="width: 20%">
             <small>

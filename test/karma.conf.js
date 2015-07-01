@@ -15,6 +15,7 @@ module.exports = function(config){
       'app/bower_components/angular-ui-select/dist/select.js',
       'app/bower_components/karma-read-json/karma-read-json.js',
       'app/bower_components/checklist-model/checklist-model.js',
+      'app/bower_components/angular-messages/angular-messages.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/spec/**/*.js',
