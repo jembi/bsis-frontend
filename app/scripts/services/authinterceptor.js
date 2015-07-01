@@ -17,6 +17,10 @@ angular.module('bsis')
         localStorage.removeItem('auth');
       },
 
+      getCredentials: function() {
+        return credentials;
+      },
+
       request: function (config) {
 
         if (!credentials) {
