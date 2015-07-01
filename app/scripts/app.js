@@ -292,8 +292,7 @@ angular.module('bsis', [
     $rootScope.$on('$locationChangeStart', function(event){
       
       // Retrieve the session from storage
-      var consoleSession = localStorage.getItem('consoleSession');
-      consoleSession = JSON.parse(consoleSession);
+      var consoleSession = AuthService.getSession();
 
       //used to control if header is displayed
       $rootScope.displayHeader = false;
@@ -309,27 +308,7 @@ angular.module('bsis', [
           $location.path( "/login" );
         }else{
 
-          //session still active - update expires time
-          currentTime = new Date();
-          //add 1 hour onto timestamp (1 hour persistence time)
-          var expireTime = new Date(currentTime.getTime() + (1*1000*60*60));
-          //get sessionID
-          var sessionID = consoleSession.sessionID;
-          var sessionUser = consoleSession.sessionUser;
-          var sessionUserName = consoleSession.sessionUserName;
-          var sessionUserPermissions = consoleSession.sessionUserPermissions;
-
-          //set the header to display
-          $rootScope.displayHeader = true;
-
-          //create session object
-          var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserName': sessionUserName, 'sessionUserPermissions': sessionUserPermissions, 'expires': expireTime };
-
-          // Put updated object into storage
-          localStorage.setItem('consoleSession', JSON.stringify( consoleSessionObject ));
-          
-          $rootScope.sessionUserName = sessionUserName;
-          $rootScope.sessionUserPermissions = sessionUserPermissions;
+          AuthService.refreshSession();
         }
 
       }else{
