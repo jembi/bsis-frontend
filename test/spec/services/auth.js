@@ -3,8 +3,6 @@
 
 describe('Service: Auth', function() {
 
-  var httpBackend;
-
   beforeEach(function() {
     jasmine.addMatchers({
       toDeepEqual: function() {
@@ -34,25 +32,27 @@ describe('Service: Auth', function() {
     });
   });
 
-  beforeEach(inject(function($httpBackend, Authinterceptor) {
-    httpBackend = $httpBackend;
-
-    httpBackend.whenGET(/\/configurations$/).respond(readJSON('test/mockData/config.json'));
-
+  beforeEach(inject(function($rootScope, Authinterceptor) {
+    spyOn($rootScope, '$broadcast').and.callThrough();
     spyOn(Authinterceptor, 'setCredentials');
     spyOn(Authinterceptor, 'clearCredentials');
   }));
 
-  afterEach(function() {
-    httpBackend.verifyNoOutstandingExpectation();
-    httpBackend.verifyNoOutstandingRequest();
-  });
-
   describe('login()', function() {
 
-    it('should store the logged on user and update the root scope', inject(function($rootScope, AUTH_EVENTS, AuthService, Authinterceptor, Base64) {
-      spyOn($rootScope, '$broadcast').and.callThrough();
+    var httpBackend;
 
+    beforeEach(inject(function($httpBackend) {
+      httpBackend = $httpBackend;
+      httpBackend.whenGET(/\/configurations$/).respond(readJSON('test/mockData/config.json'));
+    }));
+
+    afterEach(function() {
+      httpBackend.verifyNoOutstandingExpectation();
+      httpBackend.verifyNoOutstandingRequest();
+    });
+
+    it('should store the logged on user and update the root scope', inject(function($rootScope, AUTH_EVENTS, AuthService, Authinterceptor, Base64) {
       var mockUser = readJSON('test/mockData/superuser.json');
       var credentials = {
         username: 'user',
@@ -77,6 +77,37 @@ describe('Service: Auth', function() {
       });
 
       httpBackend.flush();
+    }));
+  });
+
+  describe('logout()', function() {
+
+    beforeEach(inject(function($rootScope) {
+      var mockUser = readJSON('test/mockData/superuser.json');
+      localStorage.setItem('loggedOnUser', angular.toJson(mockUser));
+
+      $rootScope.displayHeader = true;
+      $rootScope.user = mockUser;
+      $rootScope.sessionUserName = 'Super User';
+      $rootScope.sessionUserPermissions = ['Authenticated'];
+    }));
+
+    it('should clear the logged on user and update the root scope', inject(function($rootScope, AUTH_EVENTS, ROLES, AuthService, Authinterceptor) {
+      AuthService.logout();
+
+      var storedUser = angular.fromJson(localStorage.getItem('loggedOnUser'));
+      expect(storedUser).toBeNull();
+
+      expect(Authinterceptor.clearCredentials).toHaveBeenCalled();
+      expect($rootScope.user).toDeepEqual({
+        id: '',
+        userId: '',
+        role: ROLES.guest
+      });
+      expect($rootScope.displayHeader).toBe(false);
+      expect($rootScope.sessionUserName).toBe('');
+      expect($rootScope.sessionUserPermissions).toBe('');
+      expect($rootScope.$broadcast).toHaveBeenCalledWith(AUTH_EVENTS.logoutSuccess);
     }));
   });
 });
