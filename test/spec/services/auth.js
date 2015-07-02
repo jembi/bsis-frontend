@@ -110,4 +110,37 @@ describe('Service: Auth', function() {
       expect($rootScope.$broadcast).toHaveBeenCalledWith(AUTH_EVENTS.logoutSuccess);
     }));
   });
+
+  describe('refreshSession()', function() {
+
+    var mockUser = readJSON('test/mockData/simpleuser.json');
+
+    beforeEach(inject(function(AuthService) {
+      AuthService.__setLoggedOnUser(mockUser);
+      jasmine.clock().install();
+    }));
+
+    afterEach(function() {
+      jasmine.clock().uninstall();
+    });
+
+    it('should store a new session for the logged on user and update the root scope', inject(function($rootScope, AuthService) {
+      var currentDate = new Date();
+      var sessionUserName = mockUser.firstName + ' ' + mockUser.lastName;
+      var sessionUserPermissions = ['Authenticated', 'View Donation'];
+
+      jasmine.clock().mockDate(currentDate);
+      AuthService.refreshSession();
+
+      var storedSession = angular.fromJson(localStorage.getItem('consoleSession'));
+      expect(storedSession.expires).toBe(new Date(currentDate.getTime() + (1000 * 60 * 60)).toISOString());
+      expect(storedSession.sessionUser).toBe(mockUser.username);
+      expect(storedSession.sessionUserName).toBe(sessionUserName);
+      expect(storedSession.sessionUserPermissions).toDeepEqual(sessionUserPermissions);
+
+      expect($rootScope.displayHeader).toBe(true);
+      expect($rootScope.sessionUserName).toBe(sessionUserName);
+      expect($rootScope.sessionUserPermissions).toDeepEqual(sessionUserPermissions);
+    }));
+  });
 });

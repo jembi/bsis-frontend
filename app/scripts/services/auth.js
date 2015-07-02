@@ -11,7 +11,7 @@ angular.module('bsis')
    */
   function refreshSession() {
     var currentTime = new Date().getTime();
-    var expiryTime = new Date(currentTime + (1 * 1000 * 60 * 60));
+    var expiryTime = new Date(currentTime + (1000 * 60 * 60));
 
     // iterate through the user's roles and associated permissions, and populate the session permissions
     var permissions = [];
@@ -107,6 +107,11 @@ angular.module('bsis')
       $rootScope.displayHeader = true;
       $rootScope.sessionUserName = session.sessionUserName;
       $rootScope.sessionUserPermissions = session.sessionUserPermissions;
+    },
+
+    // Only for testing
+    __setLoggedOnUser: function(user) {
+      loggedOnUser = user;
     }
   };
 });
