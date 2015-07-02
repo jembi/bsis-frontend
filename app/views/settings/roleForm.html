@@ -1,0 +1,46 @@
+<div class="row form-group col-sm-12" style="margin-left: 30px">
+    <div class="col-sm-4 pull-left">
+        <div class="form-inline">
+            <label for="name" class="control-label">Name</label>
+            <input size="20" id="name" name="name" class="form-control input-sm" ng-model="role.name" required
+                   ng-minlength=1 ng-maxlength=30
+                   ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                   ng-class="{'ng-invalid ng-dirty' : roleForm.name.$invalid && submitted}">
+
+            <div>
+                <small class="error" ng-show="(roleForm.name.$error.required && (roleForm.name.$dirty || submitted))">
+                    This cannot be empty
+                </small>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 pull-left">
+        <div class="form-inline">
+            <label for="description" class="control-label">Description</label>
+            <input size="40" id="description" name="description" class="form-control input-sm"
+                   ng-model="role.description" required ng-minlength=1 ng-maxlength=30
+                   ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                   ng-class="{'ng-invalid ng-dirty' : roleForm.description.$invalid && submitted}">
+
+            <div>
+                <small class="error"
+                       ng-show="(roleForm.description.$error.required && (roleForm.description.$dirty || submitted))">
+                    This cannot be empty
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label for="permissions" class="col-sm-1 control-label">Permissions </label>
+    <div id="permissions" class="row col-sm-11" style="margin-left: 20px; width: 85%;">
+        <div ng-repeat="entity in permissionList" class="row  pull-left" style="width: 175px;" tooltips="" tooltip-title="{{entity.name}}">
+            <input type="checkbox" checklist-model="role.permissions" checklist-value="entity"/>
+            <small style="color: black;">{{entity.name | limitTo: 22}}</small>
+        </div>
+    </div>
+</div>
+
+

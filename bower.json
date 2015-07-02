@@ -18,7 +18,8 @@
     "angular-sanitize": "1.2.24",
     "karma-read-json": "~1.1.0",
     "checklist-model": "~0.2.4",
-    "angular-messages": "~1.4.1"
+    "angular-messages": "~1.4.1",
+    "angular-tooltips": "~0.1.13"
   },
   "resolutions": {
     "angular": "1.4.0"

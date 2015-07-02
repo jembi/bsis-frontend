@@ -33,25 +33,25 @@ angular.module('bsis')
         }
       ),
 
-      Deferrals: $resource(url + '/deferrals/:id', null, 
+      Deferrals: $resource(url + '/deferrals/:id', null,
         {
           update: {method:'PUT'}
         }
       ),
 
-      Donations: $resource(url + '/donations/:id', null, 
+      Donations: $resource(url + '/donations/:id', null,
         {
           update: {method:'PUT'}
         }
       ),
 
-      DonationBatches: $resource(url + '/donationbatches/:id', null, 
+      DonationBatches: $resource(url + '/donationbatches/:id', null,
         {
           update: {method:'PUT'}
         }
       ),
 
-      TestBatches: $resource(url + '/testbatches/:id', null, 
+      TestBatches: $resource(url + '/testbatches/:id', null,
         {
           update: {method:'PUT'}
         }
@@ -68,11 +68,11 @@ angular.module('bsis')
       TTITestingFormFields: $resource(url + '/ttitests/form'),
       BloodGroupTestingFormFields: $resource(url + '/bloodgroupingtests/form'),
 
-      FindDonors: $resource(url + '/donors/search', {}, 
+      FindDonors: $resource(url + '/donors/search', {},
         {
           query: {
-            method: 'GET', 
-            params:{firstName:'@firstName', lastName:'@lastName', donorNumber: '@donorNumber', 
+            method: 'GET',
+            params:{firstName:'@firstName', lastName:'@lastName', donorNumber: '@donorNumber',
             donationIdentificationNumber: '@donationIdentificationNumber', usePhraseMatch: '@usePhraseMatch' }
           }
         }
@@ -83,39 +83,39 @@ angular.module('bsis')
       DonorDeferrals: $resource(url + '/donors/:id/deferrals'),
       DonorBarcode:   $resource(url + '/donors/:id/print'),
 
-      DonorCommunicationsSearch: $resource(url + '/donorcommunications/search', {}, 
+      DonorCommunicationsSearch: $resource(url + '/donorcommunications/search', {},
         {
           query: {
-            method: 'GET', 
-            params:{bloodGroups:'@bloodGroups', donorPanels:'@donorPanels', clinicDate: '@clinicDate', 
+            method: 'GET',
+            params:{bloodGroups:'@bloodGroups', donorPanels:'@donorPanels', clinicDate: '@clinicDate',
             lastDonationFromDate: '@lastDonationFromDate', lastDonationToDate: '@lastDonationToDate', anyBloodGroup: '@anyBloodGroup', noBloodGroup: '@noBloodGroup' }
           }
         }
       ),
 
-      ComponentsSearch: $resource(url + '/components/search', {}, 
+      ComponentsSearch: $resource(url + '/components/search', {},
         {
           query: {
-            method: 'GET', 
-            params:{donationIdentificationNumber:'@donationIdentificationNumber', componentTypes:'@componentTypes', status: '@status', 
+            method: 'GET',
+            params:{donationIdentificationNumber:'@donationIdentificationNumber', componentTypes:'@componentTypes', status: '@status',
             donationDateFrom: '@donationDateFrom', donationDateTo: '@donationDateTo' }
           }
         }
       ),
 
-      getComponentsByDIN:  $resource(url + '/components/donations/:donationIdentificationNumber', {}, 
+      getComponentsByDIN:  $resource(url + '/components/donations/:donationIdentificationNumber', {},
         {
           query: {
-            method: 'GET', 
+            method: 'GET',
             params:{donationIdentificationNumber:'@donationIdentificationNumber'}
           }
         }
       ),
 
-      discardComponents:  $resource(url + '/components/:id/discard', {}, 
+      discardComponents:  $resource(url + '/components/:id/discard', {},
         {
           update: {
-            method: 'PUT', 
+            method: 'PUT',
             params:{id: '@id', discardReasonId: '@discardReasonId', discardReasonText: '@discardReasonText'}
           }
         }
@@ -127,10 +127,10 @@ angular.module('bsis')
       PrintPackLabel:  $resource(url + '/labels/print/packlabel/:componentId'),
       PrintDiscardLabel: $resource(url + '/labels/print/discardlabel/:componentId'),
 
-      FindDonationBatches: $resource(url + '/donationbatches/search', {}, 
+      FindDonationBatches: $resource(url + '/donationbatches/search', {},
         {
           query: {
-            method: 'GET', 
+            method: 'GET',
             params:{isClosed:'@isClosed', collectionCenters:'@collectionCenters', collectionSites: '@collectionSites'}
           }
         }
@@ -139,56 +139,56 @@ angular.module('bsis')
       RecentDonationBatches: $resource(url + '/donationbatches/recent/:count'),
       RecentTestBatches: $resource(url + '/testbatches/recent/:count'),
 
-      FindTestBatches: $resource(url + '/testbatches/search', {}, 
+      FindTestBatches: $resource(url + '/testbatches/search', {},
         {
           query: {
-            method: 'GET', 
+            method: 'GET',
             params:{status:'@status', createdBeforeDate:'@createdBeforeDate', createdAfterDate: '@createdAfterDate'}
           }
         }
       ),
 
-      FindTestResults: $resource(url + '/testresults/search', {}, 
+      FindTestResults: $resource(url + '/testresults/search', {},
         {
           query: {
-            method: 'GET', 
+            method: 'GET',
             params:{testBatch:'@testBatch'}
           }
         }
       ),
 
-      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', null, 
+      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', null,
         {
           update: {method:'PUT'}
         }
       ),
 
-      BloodGroupMatchTestResults: $resource(url + '/testresults/bloodgroupmatches', null, 
+      BloodGroupMatchTestResults: $resource(url + '/testresults/bloodgroupmatches', null,
         {
           query: {
-            method: 'POST', 
+            method: 'POST',
             params:{donationIdentificationNumber: '@donationIdentificationNumber', bloodAdbo:'@bloodAbo', bloodRh:'@bloodRh'}
           }
         }
       ),
 
-      TestBatchOverview: $resource(url + '/testresults/overview', {}, 
+      TestBatchOverview: $resource(url + '/testresults/overview', {},
         {
           query: {
-            method: 'GET', 
+            method: 'GET',
             params:{testBatch:'@testBatch'}
           }
         }
       ),
 
       // Admin Configuration API endpoints
-      Locations: $resource(url + '/locations/:id', null, 
+      Locations: $resource(url + '/locations/:id', null,
         {
           update: {method:'PUT'}
         }
       ),
 
-      Configurations: $resource(url + '/configurations/:id', null, 
+      Configurations: $resource(url + '/configurations/:id', null,
         {
           update: {method:'PUT'}
         }
