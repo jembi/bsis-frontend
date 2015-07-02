@@ -184,16 +184,16 @@ angular.module('bsis')
     $scope.user = UsersService.getUser();
     RolesService.getRoles(function(list){
       $scope.roleList = list;
+
     });
 
 
     $scope.updateUser = function (user) {
-
       UsersService.updateUser(user, function () {
         $scope.go('/users');
       });
     };
-
+    console.log('user', $scope.user.roles);
     $scope.clear = function () {
 
     };
