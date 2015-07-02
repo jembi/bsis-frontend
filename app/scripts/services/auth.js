@@ -3,8 +3,8 @@
 angular.module('bsis')
 .factory('AuthService', function ($http, $rootScope, AUTH_EVENTS, ROLES, Api, Authinterceptor, Base64) {
 
-  var loggedOnUser = JSON.parse(localStorage.getItem('loggedOnUser'));
-  var session = JSON.parse(localStorage.getItem('consoleSession'));
+  var loggedOnUser = angular.toJson(localStorage.getItem('loggedOnUser'));
+  var session = angular.toJson(localStorage.getItem('consoleSession'));
 
   /**
    * Create a new session from the logged on user's details and persist it to localStorage.
@@ -37,12 +37,12 @@ angular.module('bsis')
       expires: expiryTime
     };
 
-    localStorage.setItem('consoleSession', JSON.stringify(session));
+    localStorage.setItem('consoleSession', angular.toJson(session));
   }
 
   function setLoggedOnUser(user) {
     loggedOnUser = user;
-    localStorage.setItem('loggedOnUser', JSON.stringify(loggedOnUser));
+    localStorage.setItem('loggedOnUser', angular.toJson(loggedOnUser));
     refreshSession();
   }
 
