@@ -182,8 +182,18 @@ angular.module('bsis')
     $scope.selection = "/user";
 
     $scope.user = UsersService.getUser();
+
+    //Reset permissions in object
+    for (var roleIndex in $scope.user.roles){
+      $scope.user.roles[roleIndex].permissions = [];
+    }
     RolesService.getRoles(function(list){
       $scope.roleList = list;
+
+      //Reset permissions in object
+      for (var roleIndex in $scope.roleList){
+        $scope.roleList[roleIndex].permissions = [];
+      }
 
     });
 

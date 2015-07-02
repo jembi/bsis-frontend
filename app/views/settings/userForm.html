@@ -116,14 +116,10 @@
         </div>
     </div>
 </div>
-
+<!--
 <div class="form-group row">
     <label for="other" class="col-sm-1 control-label" >Notes:</label>
     <div id="notes" class="row col-sm-11" style="margin-left: 30px; width: 70%">
-        <pre>
-            {{fixedRoles | json}}
-        </pre>
-
         <div class="row" style="width: 100%">
             <small>
                 <textarea ng-model="user.notes" class="form-control"></textarea>
@@ -131,6 +127,7 @@
         </div>
     </div>
 </div>
+-->
 
 <hr />
 
@@ -138,7 +135,7 @@
     <label for="roles" class="col-sm-1 control-label" >Roles: </label>
     <div id="roles" class="row col-sm-11" style="margin-left: 30px; width: 70%">
         <div ng-repeat="entity in roleList" class="row pull-left" style="width: 20%">
-            <small>
+            <small style="color: black;">
                 <input type="checkbox" checklist-model="user.roles" checklist-value="entity" /> {{entity.name}}
             </small>
         </div>
