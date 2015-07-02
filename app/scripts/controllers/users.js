@@ -81,7 +81,7 @@ angular.module('bsis')
     };
 
     $scope.addNewUser = function () {
-      $location.path('/add_user');
+      $location.path('/addUser');
     };
 
     $scope.manageUser = function (item) {
@@ -130,14 +130,14 @@ angular.module('bsis')
   .controller('AddUserCtrl', function($scope, $rootScope, UsersService, RolesService, ICONS, PERMISSIONS, $location, ngTableParams, $timeout){
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
-    $scope.selection = '/add_user';
+    $scope.selection = '/addUser';
 
     $scope.loadRoles = function (){
       RolesService.getRoles(function (response) {
         if (response !== false) {
           $scope.roleList = response;
           UsersService.setRoles(response);
-          $location.path("/add_user");
+          $location.path("/addUser");
         }
         else {
 

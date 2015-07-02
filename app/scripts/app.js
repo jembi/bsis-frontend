@@ -237,7 +237,7 @@ angular.module('bsis', [
         controller : 'ViewUserCtrl',
         permission: PERMISSIONS.MANAGE_USERS
       })
-      .when('/add_user', {
+      .when('/addUser', {
         templateUrl : 'views/settings.html',
         controller : 'AddUserCtrl',
         permission: PERMISSIONS.MANAGE_USERS
