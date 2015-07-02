@@ -16,6 +16,7 @@ module.exports = function(config){
       'app/bower_components/karma-read-json/karma-read-json.js',
       'app/bower_components/checklist-model/checklist-model.js',
       'app/bower_components/angular-messages/angular-messages.js',
+      'app/bower_components/angular-tooltips/dist/angular-tooltips.min.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/spec/**/*.js',

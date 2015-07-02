@@ -9,7 +9,8 @@ angular.module('bsis', [
   'ui.select',
   'ngSanitize',
   'bsisFilters',
-  'checklist-model'
+  'checklist-model',
+  '720kb.tooltips'
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
