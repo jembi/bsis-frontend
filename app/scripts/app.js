@@ -264,6 +264,21 @@ angular.module('bsis', [
       if (response !== false){
         data = response;
         $rootScope.configurations = data;
+        if(!angular.isUndefined($rootScope.configurations)){
+          $rootScope.configurations.forEach(function(entry) {
+            if (entry.name == 'dateFormat'){
+              $rootScope.dateFormat = entry.value;
+            }
+
+            if (entry.name == 'dateTimeFormat'){
+              $rootScope.dateTimeFormat = entry.value;
+            }
+
+            if (entry.name == 'timeFormat'){
+              $rootScope.timeFormat = entry.value;
+            }
+          });
+        }
       }
       else{
 

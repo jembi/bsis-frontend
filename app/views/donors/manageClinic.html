@@ -6,7 +6,7 @@
   <hr/>
 
   <div class = "h4"> 
-    <small><em>Date Created: </em></small> <span ng-show="!editableForm.$visible">{{ (donationBatch.createdDate | date:"dd/MM/yyyy") || '' }}</span>
+    <small><em>Date Created: </em></small> <span ng-show="!editableForm.$visible">{{ (donationBatch.createdDate | bsisDate) || '' }}</span>
     <span ng-show="editableForm.$visible">
       <dateselect ng-model="donationBatch.tempDate" initDate="donationBatch.date" date-options="dateOptions" format="format" opened="donationBatchDateOpen" cal-icon="icons.CALENDAR">
       </dateselect>

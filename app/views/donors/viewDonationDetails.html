@@ -12,11 +12,11 @@
       </tr>
       <tr>
         <td class="field">Date: </td>
-        <td class="value">{{donation.collectedOn}}</td>
+        <td class="value">{{donation.collectedOn | bsisDate }}</td>
       </tr>
       <tr>
         <td class="field">Time: </td>
-        <td class="value">{{donation.bleedStartTime}} to {{donation.bleedEndTime}}</td>
+        <td class="value">{{donation.bleedStartTime | bsisTime}} to {{donation.bleedEndTime | bsisTime}}</td>
       </tr>
       <tr>
         <td class="field">Panel: </td>
@@ -90,7 +90,7 @@
           <tr ng-repeat="test in testResults">
             <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.bloodTest.testNameShort}}</td>
             <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.result}}</td>
-            <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.testedOn}}</td>
+            <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.testedOn | bsisDate}}</td>
           </tr>
         </tbody>
       </table>
@@ -114,7 +114,7 @@
           <tr ng-repeat="test in testResults">
             <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.bloodTest.testNameShort}}</td>
             <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.result}}</td>
-            <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.testedOn}}</td>
+            <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.testedOn | bsisDate}}</td>
           </tr>
         </tbody>
       </table>

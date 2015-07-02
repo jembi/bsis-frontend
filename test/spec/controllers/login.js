@@ -29,6 +29,7 @@ describe('Controller: LoginCtrl', function () {
     httpBackend = $httpBackend;
 
     httpBackend.when('GET', new RegExp('.*/users/login-user-details')).respond( readJSON('test/mockData/superuser.json') );
+    httpBackend.when('GET', new RegExp('.*/configurations')).respond( readJSON('test/mockData/config.json') );
 
     createController = function() {
       scope = $rootScope.$new();
@@ -70,6 +71,7 @@ describe('Controller: LoginCtrl', function () {
       
       // run the login function
       scope.login( credentials, loginForm );
+      httpBackend.flush();
 
       // loginAlert should have a message and loginInvalid should be true
       expect( scope.loginAlert ).toBe( 'Please supply all fields' );
@@ -90,6 +92,7 @@ describe('Controller: LoginCtrl', function () {
 
       // create the session object to store session data
       var sessionResult = scope.createUserSession(credentials);
+      httpBackend.flush();
       // user not yet logged in so no userProfile exist
       expect( sessionResult ).toBe( 'Logged in user could not be found!' );
     });
