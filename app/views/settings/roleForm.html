@@ -1,7 +1,7 @@
-<div class="row form-group col-sm-12" style="margin-left: 30px">
-    <div class="col-sm-4 pull-left">
+<div class="row form-group col-sm-12">
+    <label for="name" class="col-sm-1 control-label">Name</label>
+    <div class="col-sm-4">
         <div class="form-inline">
-            <label for="name" class="control-label">Name</label>
             <input size="20" id="name" name="name" class="form-control input-sm" ng-model="role.name" required
                    ng-minlength=1 ng-maxlength=30
                    ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
@@ -14,9 +14,11 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-6 pull-left">
+</div>
+<div class="row form-group col-sm-12">
+    <label for="description" class="col-sm-1 control-label">Description</label>
+    <div class="col-sm-6">
         <div class="form-inline">
-            <label for="description" class="control-label">Description</label>
             <input size="40" id="description" name="description" class="form-control input-sm"
                    ng-model="role.description" required ng-minlength=1 ng-maxlength=30
                    ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
@@ -34,11 +36,11 @@
 
 
 <div class="form-group">
-    <label for="permissions" class="col-sm-1 control-label">Permissions </label>
+    <label for="permissions" class="col-sm-1 control-label">Permissions</label>
     <div id="permissions" class="row col-sm-11" style="margin-left: 20px; width: 85%;">
         <div ng-repeat="entity in permissionList" class="row  pull-left" style="width: 175px;" tooltips="" tooltip-title="{{entity.name}}">
-            <input type="checkbox" checklist-model="role.permissions" checklist-value="entity"/>
-            <small style="color: black;">{{entity.name | limitTo: 22}}</small>
+            <input id="{{entity.id}}" type="checkbox" checklist-model="role.permissions" checklist-value="entity"/>
+            <small style="color: black;"><label style="display: inline-block; cursor: pointer; cursor: hand;" for="{{entity.id}}">{{entity.name | limitTo: 22}}</label></small>
         </div>
     </div>
 </div>
