@@ -40,7 +40,7 @@
     <div id="permissions" class="row col-sm-11" style="margin-left: 20px; width: 85%;">
         <div ng-repeat="entity in permissionList" class="row  pull-left" style="width: 175px;" tooltips="" tooltip-title="{{entity.name}}">
             <input id="{{entity.id}}" type="checkbox" checklist-model="role.permissions" checklist-value="entity"/>
-            <small style="color: black;"><label style="display: inline-block; cursor: pointer; cursor: hand;" for="{{entity.id}}">{{entity.name | limitTo: 22}}</label></small>
+            <small style="color: black;"><label style="display: inline-block; cursor: pointer; cursor: hand; margin: 2px 0px;" for="{{entity.id}}">{{entity.name | limitTo: 22}}</label></small>
         </div>
     </div>
 </div>
