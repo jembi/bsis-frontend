@@ -144,7 +144,7 @@ angular.module('bsis')
 
         // Update the logged on user
         var credentials = Base64.encode(updatedUser.username + ':' + update.password);
-        // TODO: Update logged on user credentials
+        Authinterceptor.setCredentials(credentials);
 
         $scope.masterDetails = updatedUser;
         $scope.resetUserPassword();
