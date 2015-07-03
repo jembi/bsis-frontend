@@ -61,28 +61,30 @@ angular.module('bsis')
 
   })
 
-  .controller('UserProfileCtrl', function($scope, Api) {
+  .controller('UserProfileCtrl', function($scope, Api, Authinterceptor, AuthService, Base64) {
 
-    // Default values
     $scope.masterDetails = {
       firstName: '',
       lastName: '',
-      email: ''
+      emailId: ''
     };
-    $scope.userDetails = {};
-    $scope.userPassword = {
+    $scope.masterPassword = {
+      currentPassword: '',
       password: '',
       confirmPassword: ''
     };
 
-    // Fetch user details
-    Api.User.get(function(response) {
-      angular.extend($scope.masterDetails, response);
-      $scope.resetUserDetails();
-    }, function(err) {
-      // TODO: Display error message
-      console.error(err);
-    });
+    $scope.userDetails = {};
+    $scope.userPassword = angular.copy($scope.masterPassword);
+
+    function updateUser(update, onSuccess, onError) {
+      // Delete fields added by angular
+      delete update.$promise;
+      delete update.$resolved;
+
+      // Make API call
+      Api.Users.update({}, update, onSuccess, onError);
+    }
 
     // Reset user details to their initial state
     $scope.resetUserDetails = function() {
@@ -94,19 +96,72 @@ angular.module('bsis')
     // Update user details on form submission
     $scope.updateUserDetails = function() {
       if ($scope.userDetailsForm.$invalid) {
-        // TODO: Display error message
-        console.log($scope.userDetailsForm.$error);
+        $scope.detailsStyle = 'alert-danger';
+        $scope.detailsMessage = 'Please complete all of the required fields.';
+        return;
       }
-      // TODO: Make API call
+
+      // Update the user details
+      var update = angular.extend({modifyPassword: false}, $scope.userDetails);
+      updateUser(update, function(updatedUser) {
+        $scope.masterDetails = updatedUser;
+        $scope.resetUserDetails();
+        $scope.detailsStyle = 'alert-success';
+        $scope.detailsMessage = 'Your details were successfully updated.';
+        // TODO: Update logged on user details
+      }, function(err) {
+        console.error(err);
+        $scope.detailsStyle = 'alert-danger';
+        $scope.detailsMessage = 'Updating details failed. Please try again.';
+      });
+    };
+
+    $scope.resetUserPassword = function() {
+      $scope.userPassword = angular.copy($scope.masterPassword);
+      $scope.userPasswordForm.$setPristine();
+      $scope.userPasswordForm.$setUntouched();
     };
 
     // Update password on form submission
     $scope.updatePassword = function() {
-      if ($scope.userPasswordForm.$invalid) {
-        // TODO: Check passwords match
-        // TODO: Display error message
-        console.log($scope.userPasswordForm.$error);
+      var form = $scope.userPasswordForm;
+      if (form.$invalid) {
+        $scope.passwordStyle = 'alert-danger';
+        $scope.passwordMessage = 'Please complete all of the required fields.';
+        return;
       }
-      // TODO: Make API call
+
+      if (form.password.$modelValue !== form.confirmPassword.$modelValue) {
+        $scope.passwordStyle = 'alert-danger';
+        $scope.passwordMessage = 'New passwords don\'t match.';
+        form.$setValidity(false);
+        return;
+      }
+
+      // Update the password
+      var update = angular.extend({modifyPassword: true}, $scope.masterDetails, $scope.userPassword);
+      updateUser(update, function(updatedUser) {
+
+        // Update the logged on user
+        var credentials = Base64.encode(updatedUser.username + ':' + update.password);
+        // TODO: Update logged on user credentials
+
+        $scope.masterDetails = updatedUser;
+        $scope.resetUserPassword();
+        $scope.passwordStyle = 'alert-success';
+        $scope.passwordMessage = 'Your password was successfully changed.';
+      }, function(err) {
+        console.error(err);
+        $scope.passwordStyle = 'alert-danger';
+        $scope.passwordMessage = 'Changing password failed. Please try again.';
+      });
     };
+
+    // Fetch user details
+    Api.User.get(function(response) {
+      angular.extend($scope.masterDetails, response);
+      $scope.resetUserDetails();
+    }, function(err) {
+      console.error(err);
+    });
   });
