@@ -108,7 +108,7 @@ angular.module('bsis')
         $scope.resetUserDetails();
         $scope.detailsStyle = 'alert-success';
         $scope.detailsMessage = 'Your details were successfully updated.';
-        // TODO: Update logged on user details
+        AuthService.setLoggedOnUser(updatedUser);
       }, function(err) {
         console.error(err);
         $scope.detailsStyle = 'alert-danger';
