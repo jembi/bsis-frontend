@@ -224,6 +224,11 @@ angular.module('bsis', [
         controller  : 'ConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
+      .when('/packTypes', {
+        templateUrl : 'views/settings.html',
+        controller  : 'PackTypesCtrl',
+        permission: PERMISSIONS.MANAGE_BLOOD_BAG_TYPES
+      })
 
       .otherwise({
         redirectTo: '/home'
