@@ -59,7 +59,7 @@ angular.module('bsis')
           RolesService.setPermissions(response.permissions);
           $scope.role = item;
           RolesService.setRole(item);
-          $location.path("/role");
+          $location.path("/manageRole");
         }
         else {
 
@@ -166,7 +166,7 @@ angular.module('bsis')
   .controller('ViewRoleCtrl', function ($scope, $location, RolesService, ICONS, PERMISSIONS) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
-    $scope.selection = "/role";
+    $scope.selection = "/manageRole";
 
     $scope.role = RolesService.getRole();
     $scope.permissionList = RolesService.getPermissions();
