@@ -47,7 +47,7 @@ angular.module('bsis')
     };
 
     $scope.addNewRole = function () {
-      $location.path('/addRole');
+      $location.path('/manageRole');
     };
 
 
@@ -123,7 +123,7 @@ angular.module('bsis')
         if (response !== false) {
           $scope.permissionList = response.permissions;
           RolesService.setPermissions(response.permissions);
-          $location.path("/addRole");
+          $location.path("/manageRole");
         }
         else {
 
