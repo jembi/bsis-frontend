@@ -10,7 +10,6 @@ angular.module('bsis')
     $scope.data = data;
     $scope.configurations = {};
 
-
     $scope.clear = function () {
 
     };
