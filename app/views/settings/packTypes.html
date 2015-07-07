@@ -5,11 +5,13 @@
     <div class="panel panel-default">
         <div class="panel-body">
 
-            <p>{{packTypes}}</p>
+            <pre>{{packTypes | json}}</pre>
+            <div ng-repeat="pack in packTypes">
+                {{pack.bloodBagType}}
+            </div>
 
         </div>
     </div>
 </div>
 </div>
 
-</form>
