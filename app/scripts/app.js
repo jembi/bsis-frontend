@@ -238,7 +238,7 @@ angular.module('bsis', [
       })
       .when('/manageRole', {
         templateUrl : 'views/settings.html',
-        controller : 'ViewRoleCtrl',
+        controller : 'ManageRolesCtrl',
         permission: PERMISSIONS.MANAGE_ROLES
       })
 

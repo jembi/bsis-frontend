@@ -5,9 +5,10 @@ angular.module('bsis')
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
+    $scope.data = {};
     var data = [];
-
     $scope.roles = {};
+
     $scope.clear = function () {
 
     };
@@ -28,50 +29,8 @@ angular.module('bsis')
 
         }
       });
-    };
 
-    $scope.addNewRole = function () {
-      $location.path('/manageRole');
-    };
-
-
-    $scope.manageRole = function (item) {
-
-      RolesService.getAllPermissions(function (response) {
-        if (response !== false) {
-          $scope.permissionList = response.permissions;
-          RolesService.setPermissions(response.permissions);
-          $scope.role = item;
-          RolesService.setRole(item);
-          $location.path("/manageRole");
-        }
-        else {
-
-        }
-      });
-    };
-
-    $scope.getRoles();
-
-    $scope.removeRoleCheck = function(role){
-      $scope.roleToRemove = role.id;
-    };
-
-    $scope.cancelRemoveRole = function(){
-      $scope.roleToRemove = '';
-    };
-
-    $scope.removeRole = function(role){
-      RolesService.removeRole(role, function(response){
-        if (response !== false){
-          $scope.getRoles();
-        }
-        else{
-        }
-      });
-    };
-
-    $scope.rolesTableParams = new ngTableParams({
+      $scope.rolesTableParams = new ngTableParams({
         page: 1,            // show first page
         count: 6,          // count per page
         filter: {},
@@ -80,7 +39,7 @@ angular.module('bsis')
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
-        total: data.length, // length of data
+        total: $scope.data.length, // length of data
         getData: function ($defer, params) {
           var filteredData = params.filter() ?
             $filter('filter')(data, params.filter()) : data;
@@ -91,22 +50,28 @@ angular.module('bsis')
         }
       });
 
-    $scope.$watch("data", function () {
-      $timeout(function () {
-        $scope.rolesTableParams.reload();
+      $scope.$watch("data", function () {
+        $timeout(function () {
+          $scope.rolesTableParams.reload();
+        });
       });
-    });
-  })
+    };
 
-  .controller('AddRoleCtrl', function($scope, $location, RolesService, ICONS, PERMISSIONS) {
-    $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
-    $scope.selection = "/addRole";
-    $scope.loadPermissions = function (){
+    $scope.addNewRole = function () {
+      RolesService.setRole("");
+      RolesService.setPermissions("");
+      $location.path('/manageRole');
+    };
+
+
+    $scope.manageRole = function (role) {
+
       RolesService.getAllPermissions(function (response) {
         if (response !== false) {
           $scope.permissionList = response.permissions;
           RolesService.setPermissions(response.permissions);
+          $scope.role = role;
+          RolesService.setRole(role);
           $location.path("/manageRole");
         }
         else {
@@ -115,7 +80,37 @@ angular.module('bsis')
       });
     };
 
-    $scope.role = {};
+    $scope.getRoles();
+
+  })
+
+.controller('ManageRolesCtrl', function ($scope, $location, RolesService, ICONS, PERMISSIONS) {
+    $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
+
+    // managing addition of new role
+    if (RolesService.getRole() === ""){
+      $scope.loadPermissions();
+      $scope.manageRoleType = "addRole";
+    }
+    // managing update of existing role
+    else {
+      $scope.role = RolesService.getRole();
+      $scope.permissionList = RolesService.getPermissions();
+      $scope.manageRoleType = "updateRole";
+    }
+
+    $scope.saveRole = function (role, roleForm) {
+
+      if ($scope.manageRoleType === "updateRole"){
+        $scope.updateRole(role);
+      }
+      else if($scope.manageRoleType === "addRole"){
+        $scope.addRole(role,roleForm);
+      }
+
+    };
+
     $scope.addRole = function (role, roleForm) {
 
       if(roleForm.$valid){
@@ -138,42 +133,36 @@ angular.module('bsis')
       }
     };
 
-    $scope.loadPermissions();
-
-    $scope.go = function (path) {
-      $location.path(path);
-    };
-  })
-
-
-
-  .controller('ViewRoleCtrl', function ($scope, $location, RolesService, ICONS, PERMISSIONS) {
-    $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
-    $scope.selection = "/manageRole";
-
-    $scope.role = RolesService.getRole();
-    $scope.permissionList = RolesService.getPermissions();
-
-
     $scope.updateRole = function (role) {
 
       RolesService.updateRole(role, function (response) {
+        RolesService.setRole("");
+        RolesService.setPermissions("");
         $scope.go('/roles');
       });
     };
 
-    $scope.clear = function () {
+    $scope.loadPermissions = function (){
+      RolesService.getAllPermissions(function (response) {
+        if (response !== false) {
+          $scope.permissionList = response.permissions;
+          RolesService.setPermissions(response.permissions);
+          $location.path("/manageRole");
+        }
+        else {
 
-    };
-
-    $scope.go = function (path) {
-      $location.path(path);
+        }
+      });
     };
 
     $scope.clearForm = function (form) {
       form.$setPristine();
       $scope.submitted = '';
+    };
+
+    $scope.cancel = function (form) {
+      $scope.clearForm(form);
+      $location.path("/roles");
     };
 
   });
