@@ -15,6 +15,10 @@ angular.module('bsis')
         return true;
       } else if ($location.path() === "/settings" && path === "/configurations") {
         return true;
+      } else if ($location.path() === "/role" && path === "/roles") {
+        return true;
+      } else if ($location.path() === "/addRole" && path === "/roles") {
+        return true;
       } else {
         return false;
       }
