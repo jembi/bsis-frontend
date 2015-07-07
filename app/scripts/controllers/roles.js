@@ -88,18 +88,6 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
 
-    // managing addition of new role
-    if (RolesService.getRole() === ""){
-      $scope.loadPermissions();
-      $scope.manageRoleType = "addRole";
-    }
-    // managing update of existing role
-    else {
-      $scope.role = RolesService.getRole();
-      $scope.permissionList = RolesService.getPermissions();
-      $scope.manageRoleType = "updateRole";
-    }
-
     $scope.saveRole = function (role, roleForm) {
 
       if ($scope.manageRoleType === "updateRole"){
@@ -138,7 +126,7 @@ angular.module('bsis')
       RolesService.updateRole(role, function (response) {
         RolesService.setRole("");
         RolesService.setPermissions("");
-        $scope.go('/roles');
+        $location.path("/roles");
       });
     };
 
@@ -164,5 +152,17 @@ angular.module('bsis')
       $scope.clearForm(form);
       $location.path("/roles");
     };
+
+    // managing addition of new role
+    if (RolesService.getRole() === ""){
+      $scope.loadPermissions();
+      $scope.manageRoleType = "addRole";
+    }
+    // managing update of existing role
+    else {
+      $scope.role = RolesService.getRole();
+      $scope.permissionList = RolesService.getPermissions();
+      $scope.manageRoleType = "updateRole";
+    }
 
   });
