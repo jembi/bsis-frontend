@@ -229,9 +229,9 @@ angular.module('bsis', [
         controller  : 'PackTypesCtrl',
         permission: PERMISSIONS.MANAGE_BLOOD_BAG_TYPES
       })
-      .when('/packType', {
+      .when('/managePackType', {
         templateUrl : 'views/settings.html',
-        controller  : 'ViewPackTypeCtrl',
+        controller  : 'ManagePackTypeCtrl',
         permission: PERMISSIONS.MANAGE_BLOOD_BAG_TYPES
       })
 
