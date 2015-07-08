@@ -137,10 +137,14 @@ angular.module('bsis')
 
     $scope.updateRole = function (role) {
 
-      RolesService.updateRole(role, function (response) {
-        RolesService.setRole("");
-        RolesService.setPermissions("");
-        $location.path("/roles");
+      RolesService.updateRole(role, function (response, err) {
+        if (response !== false) {
+          RolesService.setRole("");
+          RolesService.setPermissions("");
+          $location.path("/roles");
+        } else {
+          $scope.serverError = err["role.name"];
+        }
       });
     };
 
