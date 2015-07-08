@@ -1,0 +1,42 @@
+<div class="row form-group col-sm-12">
+    <label for="bloodBagType" class="col-sm-2 control-label">Blood Bag Type</label>
+    <div class="col-sm-8">
+        <div class="form-inline">
+            <input size="20" id="bloodBagType" name="bloodBagType" class="form-control input-sm" ng-model="packType.bloodBagType" required
+                   ng-minlength=1 ng-maxlength=30
+                   ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                   ng-class="{'ng-invalid ng-dirty' : packTypeForm.bloodBagType.$invalid && submitted}" />
+
+            <div>
+                <small class="error" ng-show="(packTypeForm.bloodBagType.$error.required && (packTypeForm.bloodBagType.$dirty || submitted))">
+                    This cannot be empty
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row form-group col-sm-12">
+    <label for="countAsDonation" class="col-sm-2 control-label">Count As Donation</label>
+    <div class="col-sm-8">
+        <div class="form-inline">
+            <input type="checkbox"  id="countAsDonation" name="countAsDonation" class="form-control input-sm" ng-model="packType.countAsDonation" />
+        </div>
+    </div>
+</div>
+<div class="row form-group col-sm-12">
+    <label for="periodBetweenDonations" class="col-sm-2 control-label">Period Between Donations</label>
+    <div class="col-sm-8">
+        <div class="form-inline">
+            <input size="20" id="periodBetweenDonations" name="periodBetweenDonations" class="form-control input-sm" ng-model="packType.periodBetweenDonations" required
+                   ng-minlength=1 ng-maxlength=30
+                   ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                   ng-class="{'ng-invalid ng-dirty' : packTypeForm.bloodBagType.$invalid && submitted}" />
+
+            <div>
+                <small class="error" ng-show="(packTypeForm.bloodBagType.$error.required && (packTypeForm.bloodBagType.$dirty || submitted))">
+                    This cannot be empty
+                </small>
+            </div>
+        </div>
+    </div>
+</div>

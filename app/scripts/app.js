@@ -229,6 +229,11 @@ angular.module('bsis', [
         controller  : 'PackTypesCtrl',
         permission: PERMISSIONS.MANAGE_BLOOD_BAG_TYPES
       })
+      .when('/packType', {
+        templateUrl : 'views/settings.html',
+        controller  : 'ViewPackTypeCtrl',
+        permission: PERMISSIONS.MANAGE_BLOOD_BAG_TYPES
+      })
 
       .otherwise({
         redirectTo: '/home'

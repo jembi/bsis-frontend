@@ -5,11 +5,25 @@
     <div class="panel panel-default">
         <div class="panel-body">
 
-            <pre>{{packTypes | json}}</pre>
-            <div ng-repeat="pack in packTypes">
-                {{pack.bloodBagType}}
-            </div>
-
+            <!--<pre>{{packTypes | json}}</pre> -->
+            <table ng-table="packTypesTableParams" show-filter="false" class="table">
+                <tr ng-repeat="pack in packTypes"
+                    ng-click="managePackType(pack); changeSelection(pack);"
+                    ng-mouseenter="this.$selected = true"
+                    ng-mouseleave="this.$selected = false"
+                    ng-class="{'active': pack.$selected}">
+                    <td data-title="'Blood bag type'" header-class="text-left" class="text-center">
+                        {{pack.bloodBagType}}
+                    </td>
+                    <td data-title="'Period between donations'"  header-class="text-left" class="text-center">
+                        {{pack.periodBetweenDonations}}
+                    </td>
+                    <td data-title="'Count as donation'" header-class="text-left" class="text-center" sortable="'countAsDonation'">
+                        <span ng-if="pack.countAsDonation == true"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                        <span ng-if="pack.countAsDonation == false"><i class="fa {{icons.SQUARE}}"></i></span>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

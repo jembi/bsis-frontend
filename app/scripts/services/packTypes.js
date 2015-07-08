@@ -2,6 +2,7 @@
 
 angular.module('bsis')
 .factory('PackTypesService', function ($http, Api, $filter) {
+  var packTypeObj = {};
   return {
 
     getPackTypes: function(response){
@@ -12,7 +13,7 @@ angular.module('bsis')
       });
     },
 
-    getPackType: function (id, response) {
+    getPackTypeById: function (id, response) {
       var apiResponse = Api.PackTypes.get({id: id}, function(){
         console.log("pack type response: ", apiResponse);
         response(apiResponse);
@@ -20,6 +21,14 @@ angular.module('bsis')
         response(false);
       });
     },
+
+    setPackType : function (packType) {
+      packTypeObj = packType;
+    },
+
+    getPackType : function () {
+      return packTypeObj;
+    }
 
   };
 });
