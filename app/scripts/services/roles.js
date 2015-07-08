@@ -58,8 +58,8 @@ angular.module('bsis')
 
       addRole.$save(function(data){
         response(data);
-      }, function (){
-        response(false);
+      }, function (err){
+        response(false, err.data);
       });
 
     },

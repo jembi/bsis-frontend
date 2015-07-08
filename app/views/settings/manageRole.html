@@ -12,6 +12,9 @@
               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
               ng-class="{'ng-invalid ng-dirty' : roleForm.name.$invalid && submitted}">
             <div>
+              <small class="error" ng-show="serverError">
+                {{serverError}}
+              </small>
               <small class="error" ng-show="(roleForm.name.$error.required && (roleForm.name.$dirty || submitted))">
                 This cannot be empty
               </small>
@@ -39,6 +42,11 @@
 
       <div class="form-group">
         <label for="permissions" class="col-sm-1 control-label">Permissions</label>
+        <div class="row col-sm-11" style="margin-left: 20px; width: 85%;">
+          <small class="error" ng-show="permissionsRequired">
+            Please select at least one permission.
+          </small>
+        </div>
         <div id="permissions" class="row col-sm-11" style="margin-left: 20px; width: 85%;">
           <div ng-repeat="entity in permissionList" class="row  pull-left" style="width: 175px;" tooltips="" tooltip-title="{{entity.name}}">
               <input id="{{entity.id}}" type="checkbox" checklist-model="role.permissions" checklist-value="entity"/>

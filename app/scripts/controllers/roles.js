@@ -89,20 +89,23 @@ angular.module('bsis')
     $scope.permissions = PERMISSIONS;
 
     $scope.saveRole = function (role, roleForm) {
-
-      if ($scope.manageRoleType === "updateRole"){
-        $scope.updateRole(role);
+      $scope.permissionsRequired = false;
+      if (typeof(role.permissions) != 'undefined' && role.permissions.length > 0) {
+        if ($scope.manageRoleType === "updateRole") {
+          $scope.updateRole(role);
+        }
+        else if ($scope.manageRoleType === "addRole") {
+          $scope.addRole(role, roleForm);
+        }
+      } else {
+        $scope.permissionsRequired = true;
       }
-      else if($scope.manageRoleType === "addRole"){
-        $scope.addRole(role,roleForm);
-      }
-
     };
 
     $scope.addRole = function (role, roleForm) {
 
       if(roleForm.$valid){
-        RolesService.addRole(role, function(response){
+        RolesService.addRole(role, function(response, err){
           if (response !== false){
             $scope.role = {
               name: '',
@@ -113,12 +116,23 @@ angular.module('bsis')
             $scope.go('/roles');
           }
           else{
+            $scope.serverError = err["role.name"];
           }
         });
       }
       else{
         $scope.submitted = true;
       }
+    };
+
+    $scope.go = function (path){
+      $location.path(path);
+    };
+
+    $scope.someSelected = function (object) {
+      return Object.keys(object).some(function (key) {
+        return object[key];
+      });
     };
 
     $scope.updateRole = function (role) {
