@@ -45,8 +45,8 @@ angular.module('bsis')
       Api.Roles.update({id:role.id}, role, function(data) {
         roleObj = data.role;
         response(roleObj);
-      }, function (){
-        response(false);
+      }, function (err){
+        response(false, err.data);
       });
 
     },
@@ -58,8 +58,8 @@ angular.module('bsis')
 
       addRole.$save(function(data){
         response(data);
-      }, function (){
-        response(false);
+      }, function (err){
+        response(false, err.data);
       });
 
     },

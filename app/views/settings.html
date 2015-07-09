@@ -1,6 +1,6 @@
 
       <div class="container-fluid">
-      <div class="row main-page" ng-controller="ConfigurationsCtrl">
+      <div class="row main-page" ng-controller="SettingsCtrl">
 
   <div ng-include="'views/settings/sidebar.html'"></div>
 
@@ -16,9 +16,8 @@
               <div ng-switch-when="/user"><div ng-include="'views/settings/user.html'"></div></div>
               <div ng-switch-when="/addUser"><div ng-include="'views/settings/addUser.html'"></div></div>
               <div ng-switch-when="/roles"><div ng-include="'views/settings/roles.html'"></div></div>
-              <div ng-switch-when="/role"><div ng-include="'views/settings/role.html'"></div></div>
-              <div ng-switch-when="/addRole"><div ng-include="'views/settings/addRole.html'"></div></div>
-              <div ng-switch-default><div ng-include="'views/settings/configurations.html'"></div></div>
+              <div ng-switch-when="/manageRole"><div ng-include="'views/settings/manageRole.html'"></div></div>
+              <div ng-switch-default><div ng-include="'views/settings'+initialView+'.html'"></div></div>
             </div>
          </div>
        </div>
