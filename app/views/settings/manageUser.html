@@ -1,0 +1,168 @@
+<h3 class="page-header">User</h3>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form name="userForm" novalidate class="form-horizontal col-sm-12" role="form"
+              ng-submit="saveUser(user, userForm)">
+            <div class="row form-group col-sm-12">
+                <label for="firstName" class="col-sm-1 control-label">First Name</label>
+
+                <div class="col-sm-4">
+                    <div class="form-inline">
+                        <input size="30" id="firstName" name="lastName" class="form-control input-sm"
+                               ng-model="user.firstName" required ng-minlength=1 ng-maxlength=30
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' : userForm.firstName.$invalid && submitted}">
+
+                        <div>
+                            <small class="error"
+                                   ng-show="(userForm.name.$error.required && (userForm.name.$dirty || submitted))">
+                                This cannot be empty
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group col-sm-12">
+                <label for="lastName" class="col-sm-1 control-label">Last Name</label>
+
+                <div class="col-sm-4">
+                    <div class="form-inline">
+                        <input size="30" id="lastName" name="lastName" class="form-control input-sm"
+                               ng-model="user.lastName" required ng-minlength=1 ng-maxlength=30
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' : userForm.lastName.$invalid && submitted}">
+
+                        <div>
+                            <small class="error"
+                                   ng-show="(userForm.name.$error.required && (userForm.name.$dirty || submitted))">
+                                This cannot be empty
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row form-group col-sm-12">
+                <label for="emailId" class="col-sm-1 control-label">Email</label>
+
+                <div class="col-sm-4">
+                    <div class="form-inline">
+                        <input size="30" type="email" id="emailId" name="emailId" class="form-control input-sm"
+                               ng-model="user.emailId" required
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' : userForm.emailId.$invalid && submitted}">
+
+                        <div>
+                            <small class="error"
+                                   ng-show="(userForm.emailId.$error.required && (userForm.emailId.$dirty || submitted))">
+                                This cannot be empty
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row form-group col-sm-12">
+
+                <label for="username" class="col-sm-1 control-label">User Name</label>
+
+                <div class="col-sm-4">
+                    <div class="form-inline">
+                        <input size="30" id="username" name="username" class="form-control input-sm"
+                               ng-model="user.username" required ng-minlength=1 ng-maxlength=30
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' : userForm.username.$invalid && submitted}">
+
+                        <div>
+                            <small class="error"
+                                   ng-show="(userForm.username.$error.required && (userForm.username.$dirty || submitted))">
+                                This cannot be empty
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row form-group col-sm-12">
+                <label for="password" class="col-sm-1 control-label">Password</label>
+
+                <div class="col-sm-4">
+                    <div class="form-inline">
+                        <input id="password" name="password" type="password"
+                               class="form-control input-sm"
+                               ng-model="user.password" required ng-minlength=1 ng-maxlength=30
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' : userForm.password.$invalid && submitted}">
+
+                        <div>
+                            <small class="error"
+                                   ng-show="(userForm.password.$error.required && (userForm.password.$dirty || submitted))">
+                                This cannot be empty
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row form-group col-sm-12">
+
+                <label for="confirmPassword" class="col-sm-1 control-label">Confirm Password</label>
+
+                <div class="col-sm-4">
+                    <div class="form-inline">
+                        <input type="password" id="confirmPassword" name="confirmPassword"
+                               class="form-control input-sm"
+                               ng-model="user.confirmPassword"
+                               required compare-to="user.password"/>
+
+                        <div ng-show="(userForm.confirmPassword.$dirty || submitted)"
+                             ng-messages="userForm.confirmPassword.$error">
+                            <small class="error" ng-messages-include="messages.html"></small>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!--
+            <div class="form-group row">
+                <label for="other" class="col-sm-1 control-label" >Notes:</label>
+                <div id="notes" class="row col-sm-11" style="margin-left: 30px; width: 70%">
+                    <div class="row" style="width: 100%">
+                        <small>
+                            <textarea ng-model="user.notes" class="form-control"></textarea>
+                        </small>
+                    </div>
+                </div>
+            </div>
+            -->
+            <div class="row form-group col-sm-12">
+                <label for="firstName" class="col-sm-1 control-label">Roles</label>
+
+                <div class="col-sm-6">
+                    <div class="form-inline">
+                        <div ng-repeat="entity in roleList" class="row pull-left"
+                             style="width: 33%">
+                            <small style="color: black;">
+                                <input type="checkbox" checklist-model="user.roles"
+                                       checklist-value="entity"/>
+                                {{entity.name}}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-4">
+                    <button class="btn btn-primary" type="submit">Save User</button>
+                    <button class="btn btn-primary" type="button"
+                            ng-click="clear(); go('/users');">Cancel
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

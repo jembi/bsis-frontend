@@ -62,37 +62,39 @@ angular.module('bsis')
 
     $scope.getUsers();
 
-    $scope.removeUserCheck = function(user){
+    $scope.removeUserCheck = function (user) {
       $scope.userToRemove = user.id;
     };
 
-    $scope.cancelRemoveUser = function(){
+    $scope.cancelRemoveUser = function () {
       $scope.userToRemove = '';
     };
 
-    $scope.removeUser = function(user){
-      UsersService.removeUser(user, function(response){
-        if (response !== false){
+    $scope.removeUser = function (user) {
+      UsersService.removeUser(user, function (response) {
+        if (response !== false) {
           $scope.getUsers();
         }
-        else{
+        else {
         }
       });
     };
 
     $scope.addNewUser = function () {
-      $location.path('/addUser');
+      UsersService.setUser("");
+      $location.path('/manageUser');
     };
 
     $scope.manageUser = function (item) {
+
+      $scope.user = item;
+      UsersService.setUser(item);
 
       RolesService.getRoles(function (response) {
         if (response !== false) {
           $scope.roleList = response;
           UsersService.setRoles(response);
-          $scope.user = item;
-          UsersService.setUser(item);
-          $location.path("/user");
+          $location.path("/manageUser");
         }
         else {
 
@@ -127,30 +129,31 @@ angular.module('bsis')
       });
     });
   })
-  .controller('AddUserCtrl', function($scope, $rootScope, UsersService, RolesService, ICONS, PERMISSIONS, $location, ngTableParams, $timeout){
+  .controller('ManageUserCtrl', function ($scope, $rootScope, UsersService, RolesService, ICONS, PERMISSIONS, $location, ngTableParams, $timeout) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
-    $scope.selection = '/addUser';
+    $scope.selection = '/manageUser';
 
-    $scope.loadRoles = function (){
-      RolesService.getRoles(function (response) {
-        if (response !== false) {
-          $scope.roleList = response;
-          UsersService.setRoles(response);
-          $location.path("/addUser");
-        }
-        else {
+    $scope.user = UsersService.getUser();
 
-        }
-      });
-    };
+    //Reset permissions in object
+    for (var roleIndex in $scope.user.roles) {
+      $scope.user.roles[roleIndex].permissions = [];
+    }
+    RolesService.getRoles(function (list) {
+      $scope.roleList = list;
+      //Reset permissions in object
+      for (var roleIndex in $scope.roleList) {
+        $scope.roleList[roleIndex].permissions = [];
+      }
 
-    $scope.user = {};
+    });
+
     $scope.addUser = function (user, userForm) {
 
-      if(userForm.$valid){
-        UsersService.addUser(user, function(response){
-          if (response !== false){
+      if (userForm.$valid) {
+        UsersService.addUser(user, function (response) {
+          if (response !== false) {
             $scope.user = {
               name: '',
               description: ''
@@ -159,16 +162,16 @@ angular.module('bsis')
             $scope.submitted = '';
             $scope.go('/users');
           }
-          else{
+          else {
           }
         });
       }
-      else{
+      else {
         $scope.submitted = true;
       }
     };
 
-    $scope.loadRoles();
+    //$scope.loadRoles();
 
     $scope.go = function (path) {
       $location.path(path);
@@ -176,7 +179,7 @@ angular.module('bsis')
 
   })
 
-  .controller('ViewUserCtrl', function($scope, $location, UsersService, RolesService, ICONS, PERMISSIONS){
+  .controller('ViewUserCtrl', function ($scope, $location, UsersService, RolesService, ICONS, PERMISSIONS) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = "/user";
@@ -184,14 +187,14 @@ angular.module('bsis')
     $scope.user = UsersService.getUser();
 
     //Reset permissions in object
-    for (var roleIndex in $scope.user.roles){
+    for (var roleIndex in $scope.user.roles) {
       $scope.user.roles[roleIndex].permissions = [];
     }
-    RolesService.getRoles(function(list){
+    RolesService.getRoles(function (list) {
       $scope.roleList = list;
 
       //Reset permissions in object
-      for (var roleIndex in $scope.roleList){
+      for (var roleIndex in $scope.roleList) {
         $scope.roleList[roleIndex].permissions = [];
       }
 
