@@ -8,7 +8,9 @@ var app = angular.module('bsis', [
   'xeditable',
   'ui.select',
   'ngSanitize',
-  'bsisFilters'
+  'bsisFilters',
+  'checklist-model',
+  '720kb.tooltips'
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
@@ -211,7 +213,7 @@ var app = angular.module('bsis', [
       // SETTINGS URLs
       .when('/settings', {
         templateUrl : 'views/settings.html',
-        controller  : 'ConfigurationsCtrl',
+        controller  : 'SettingsCtrl',
         permission: PERMISSIONS.VIEW_ADMIN_INFORMATION
       })
       .when('/locations', {
@@ -223,6 +225,21 @@ var app = angular.module('bsis', [
         templateUrl : 'views/settings.html',
         controller  : 'ConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_SITES
+      })
+      .when('/users', {
+        templateUrl : 'views/settings.html',
+        controller : 'UsersCtrl',
+        permission: PERMISSIONS.MANAGE_USERS
+      })
+      .when('/roles', {
+        templateUrl : 'views/settings.html',
+        controller : 'RolesCtrl',
+        permission: PERMISSIONS.MANAGE_ROLES
+      })
+      .when('/manageRole', {
+        templateUrl : 'views/settings.html',
+        controller : 'ManageRolesCtrl',
+        permission: PERMISSIONS.MANAGE_ROLES
       })
 
       .otherwise({
@@ -238,7 +255,7 @@ var app = angular.module('bsis', [
   .run( ['$rootScope', 'ConfigurationsService', function ($rootScope, ConfigurationsService) {
 
     var data = {};
-    
+
     ConfigurationsService.getConfigurations(function(response){
       if (response !== false){
         data = response;
@@ -284,13 +301,13 @@ var app = angular.module('bsis', [
         $location.path('/home');
       }
     });
-    
+
   }])
 
   .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
 
     $rootScope.$on('$locationChangeStart', function(event){
-      
+
       // Retrieve the session from storage
       var consoleSession = AuthService.getSession();
 
@@ -307,7 +324,6 @@ var app = angular.module('bsis', [
           AuthService.logout();
           $location.path( "/login" );
         }else{
-
           AuthService.refreshSession();
         }
 
@@ -400,7 +416,7 @@ var app = angular.module('bsis', [
   })
 
   /*  Custom directive to check if user has associated permission
-      example use: <span has-permission="{{permissions.SOME_PERMISSION}}"> 
+      example use: <span has-permission="{{permissions.SOME_PERMISSION}}">
   */
   .directive('hasPermission', ['$rootScope', function ($rootScope)  {
     return {
@@ -411,7 +427,7 @@ var app = angular.module('bsis', [
           showOrHide();
         }
 
-        // determine if user has permission to view the element - 
+        // determine if user has permission to view the element -
         function showOrHide() {
           var hasPermission = false;
           // if user has the appropriate permission, set hasPermission to TRUE
@@ -419,7 +435,7 @@ var app = angular.module('bsis', [
             hasPermission = true;
           }
 
-          // remove the element if the user does not have the appropriate permission 
+          // remove the element if the user does not have the appropriate permission
           if(!hasPermission){
             element.remove();
           }
@@ -440,7 +456,7 @@ var app = angular.module('bsis', [
           showOrHide();
         }
 
-        // determine if user has permissions to view the element - 
+        // determine if user has permissions to view the element -
         function showOrHide() {
           var hasPermissions = true;
           for (var permission in permissions){
@@ -450,7 +466,7 @@ var app = angular.module('bsis', [
             }
           }
 
-          // remove the element if the user does not have the appropriate permission 
+          // remove the element if the user does not have the appropriate permission
           if(!hasPermissions){
             element.remove();
           }
@@ -499,7 +515,7 @@ var app = angular.module('bsis', [
     };
   })
 
-  
+
   .directive('integer', ['REGEX', function(REGEX) {
     var INTEGER_REGEXP = REGEX.INTEGER;
     return {

@@ -12,6 +12,12 @@ angular.module('bsisFilters', [])
     };
   })
 
+  .filter('slice', function() {
+    return function(arr, start, end) {
+      return arr.slice(start, end);
+    };
+  })
+
   .filter('bsisDate', function ($filter,$rootScope) {
     var angularDateFilter = $filter('date');
     return function (theDate) {
