@@ -10,7 +10,7 @@
             <input size="30" id="name" name="name" class="form-control input-sm" ng-model="role.name" required
               ng-minlength=1 ng-maxlength=30
               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-              ng-class="{'ng-invalid ng-dirty' : roleForm.name.$invalid && submitted}">
+              ng-class="{'ng-invalid ng-dirty' : (roleForm.name.$invalid && submitted) || nameInvalid }">
             <div>
               <small class="error" ng-show="serverError">
                 {{serverError}}

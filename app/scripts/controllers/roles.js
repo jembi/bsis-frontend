@@ -90,7 +90,7 @@ angular.module('bsis')
 
     $scope.saveRole = function (role, roleForm) {
       $scope.permissionsRequired = false;
-      if (typeof(role.permissions) != 'undefined' && role.permissions.length > 0) {
+      if (typeof(role) != 'undefined' && typeof(role.permissions) != 'undefined' && role.permissions.length > 0) {
         if ($scope.manageRoleType === "updateRole") {
           $scope.updateRole(role);
         }
@@ -98,6 +98,7 @@ angular.module('bsis')
           $scope.addRole(role, roleForm);
         }
       } else {
+        $scope.submitted = true;
         $scope.permissionsRequired = true;
       }
     };
@@ -116,6 +117,7 @@ angular.module('bsis')
             $scope.go('/roles');
           }
           else{
+            $scope.nameInvalid = "ng-invalid";
             $scope.serverError = err["role.name"];
           }
         });
@@ -143,6 +145,7 @@ angular.module('bsis')
           RolesService.setPermissions("");
           $location.path("/roles");
         } else {
+          $scope.nameInvalid = "ng-invalid";
           $scope.serverError = err["role.name"];
         }
       });
