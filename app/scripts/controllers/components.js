@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ComponentsCtrl', function ($scope, $rootScope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, $filter, ngTableParams, $timeout) {
+  .controller('ComponentsCtrl', function ($scope, $rootScope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, DATEFORMAT, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -59,7 +59,7 @@ angular.module('bsis')
       'startingDay': 1,
       'show-weeks': false
     };
-    $scope.format = $rootScope.dateFormat;
+    $scope.format = DATEFORMAT;
     $scope.initDate = new Date();
     $scope.calIcon = 'fa-calendar';
 
