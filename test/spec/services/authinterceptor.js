@@ -1,5 +1,6 @@
 'use strict';
 /* jshint expr: true */
+/* global readJSON: true */
 
 describe('Service: Authinterceptor', function () {
 
@@ -7,6 +8,13 @@ describe('Service: Authinterceptor', function () {
 
   beforeEach(function() {
     localStorage.removeItem('auth');
+  });
+
+  beforeEach(function(){
+    module('bsis', function($provide){
+      $provide.constant( 'SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json') );
+      $provide.constant( 'USERCONFIG', readJSON('test/mockData/userconfig.json') );
+    });
   });
 
   describe('setCredentials(credentials)', function() {

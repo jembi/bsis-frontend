@@ -8,7 +8,7 @@ angular.module('bsis')
     $scope.bloodAboOptions = BLOODABO;
     $scope.bloodRhOptions = BLOODRH;
 
-    var data = {};
+    var data = [{}];
     $scope.data = data;
     $scope.openTestBatches = false;
     $scope.selectedDonationBatches = {};
@@ -18,7 +18,7 @@ angular.module('bsis')
       donationIdentificationNumber: ''
     };
 
-    var recentTestBatchData = {};
+    var recentTestBatchData = [{}];
     $scope.recentTestBatchData = recentTestBatchData;
     $scope.recentTestBatches = false;
     
@@ -281,7 +281,7 @@ angular.module('bsis')
   })
 
   .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams, $timeout) {
-    var data = {};
+    var data = [{}];
     $scope.data  = data;
 
     $scope.getCurrentTestBatch = function () {
@@ -373,7 +373,7 @@ angular.module('bsis')
   })
 
   .controller('RecordTestResultsCtrl', function ($scope, $location, TestingService, TTITESTS, BLOODTYPINGTESTS, TTIOUTCOME, BGSOUTCOME, ABO, RH, $q, $filter, ngTableParams, $timeout) {
-    var data = {};
+    var data = [{}];
     $scope.data  = data;
     $scope.ttiTests = TTITESTS.options;
     $scope.bloodTypingTests = BLOODTYPINGTESTS.options;

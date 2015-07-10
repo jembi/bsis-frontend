@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, DonorService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
-    var data = {};
+    var data = [{}];
     $scope.data = data;
     $scope.age = '';
 
@@ -103,7 +103,7 @@ angular.module('bsis')
         'startingDay': 1,
         'show-weeks': false
       };
-      $scope.format = $rootScope.dateFormat;
+      $scope.format = DATEFORMAT;
       $scope.initDate = item.birthDate;
       $scope.calIcon = 'fa-calendar';
 
@@ -131,7 +131,7 @@ angular.module('bsis')
               'startingDay': 1,
               'show-weeks': false
             };
-            $scope.format = $rootScope.dateFormat;
+            $scope.format = DATEFORMAT;
             $scope.initDate = $scope.donor.birthDate;
             $scope.calIcon = 'fa-calendar';
 
@@ -184,7 +184,7 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, $rootScope, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams, $timeout) {
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, DATEFORMAT, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
     $scope.age = '';
@@ -376,7 +376,7 @@ angular.module('bsis')
         'startingDay': 1,
         'show-weeks': false
       };
-      $scope.format = $rootScope.dateFormat;
+      $scope.format = DATEFORMAT;
       $scope.initDate = new Date();
       $scope.calIcon = 'fa-calendar';
 
@@ -526,7 +526,7 @@ angular.module('bsis')
   })
 
   // Controller for Adding Donors
-  .controller('AddDonorCtrl', function ($scope, $location, $rootScope, DonorService, MONTH, TITLE, GENDER) {
+  .controller('AddDonorCtrl', function ($scope, $location, DonorService, MONTH, TITLE, GENDER) {
 
     DonorService.getDonorFormFields(function(response){
       if (response !== false){
@@ -555,7 +555,7 @@ angular.module('bsis')
   })
 
   // Controller for Adding Donations
-  .controller('AddDonationCtrl', function ($scope, $location, $rootScope, DonorService) {
+  .controller('AddDonationCtrl', function ($scope, $location, DonorService) {
 
     $scope.addDonationSuccess = '';
 
@@ -598,11 +598,11 @@ angular.module('bsis')
   })
 
   // Controller for Viewing/Exporting Donor Lists
-  .controller('DonorListCtrl', function ($scope, $location, $rootScope, DonorService, BLOODGROUP, MONTH, ICONS, $filter, ngTableParams, $timeout) {
+  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
 
-    var data = {};
+    var data = [{}];
     $scope.data = data;
     $scope.donorListSearchResults = '';
     $scope.donorList = {};
@@ -679,7 +679,7 @@ angular.module('bsis')
       'startingDay': 1,
       'show-weeks': false
     };
-    $scope.format = $rootScope.dateFormat;
+    $scope.format = DATEFORMAT;
     $scope.initDate = new Date();
     $scope.calIcon = 'fa-calendar';
 
@@ -690,13 +690,13 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('DonorClinicCtrl', function ($scope, $location, $rootScope, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams, $timeout) {
+  .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
 
-    var data = {};
-    var recentDonationBatchData = {};
+    var data = [{}];
+    var recentDonationBatchData = [{}];
     $scope.data = data;
     $scope.recentDonationBatchData = recentDonationBatchData;
     $scope.openDonationBatches = false;
@@ -838,12 +838,12 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function ($scope, $location, $rootScope, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams, $timeout) {
+  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, DATEFORMAT, $q, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
 
-    var data = {};
+    var data = [{}];
     $scope.data = data;
 
     $scope.hstep = 1;
@@ -913,7 +913,7 @@ angular.module('bsis')
         'startingDay': 1,
         'show-weeks': false
       };
-      $scope.format = $rootScope.dateFormat;
+      $scope.format = DATEFORMAT;
       $scope.initDate = '';
       $scope.calIcon = 'fa-calendar';
 
