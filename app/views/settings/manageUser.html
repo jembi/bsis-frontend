@@ -1,4 +1,4 @@
-<h3 class="page-header">User</h3>
+<h3 class="page-header">Manage user</h3>
 <div class="panel panel-default">
     <div class="panel-body">
         <form name="userForm" novalidate class="form-horizontal col-sm-12" role="form"
@@ -158,7 +158,7 @@
                             <small style="color: black;">
                                 <input type="checkbox" id="{{entity.id}}" checklist-model="user.roles"
                                        checklist-value="entity"/>
-                                {{entity.name}}
+                                <label style="display: inline-block; cursor: pointer; cursor: hand; margin: 0px 0px; font-size: 0.8em;" for="{{entity.id}}">{{entity.name | limitTo: 22}}</label></small>
                             </small>
                         </div>
                     </div>

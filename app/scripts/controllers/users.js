@@ -48,17 +48,6 @@ angular.module('bsis')
 
     };
 
-    $scope.getUser = function () {
-      UsersService.getUser(1, function (response) {
-        if (response !== false) {
-          console.log("user id 1: ", response);
-        }
-        else {
-
-        }
-      });
-
-    };
 
     $scope.getUsers();
 
@@ -71,9 +60,11 @@ angular.module('bsis')
     };
 
     $scope.removeUser = function (user) {
-      UsersService.removeUser(user, function (response) {
+      user.isDeleted = true;
+      UsersService.deleteUser(user, function (response) {
         if (response !== false) {
           $scope.getUsers();
+          $location.path('/users');
         }
         else {
         }
@@ -174,7 +165,7 @@ angular.module('bsis')
     $scope.updateUser = function (user, userForm) {
       if (userForm.$valid) {
         UsersService.updateUser(user, function (response, err) {
-          if (response != false){
+          if (response !== false){
             $scope.go('/users');
           } else{
             if(err["user.username"]){
@@ -190,7 +181,7 @@ angular.module('bsis')
 
 
     $scope.addUser = function (user, userForm) {
-      
+
       if (userForm.$valid) {
         UsersService.addUser(user, function (response, err) {
           if (response !== false) {

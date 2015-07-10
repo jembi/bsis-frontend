@@ -38,6 +38,18 @@ angular.module('bsis')
 
     },
 
+    deleteUser: function (user, response) {
+      var deleteUser = new Api.Users();
+      angular.copy(user, deleteUser);
+
+      deleteUser.$delete({id: user.id},function(data){
+        response(data);
+      }, function (err){
+        response(false, err.data);
+      });
+
+    },
+
     setUser : function (user) {
       userObj = user;
     },

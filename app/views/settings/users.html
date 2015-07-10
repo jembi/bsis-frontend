@@ -12,24 +12,24 @@
 
             <table ng-table="usersTableParams" show-filter="false" class="table">
                 <tr ng-repeat="user in $data"
-                    ng-click="changeSelection(user); manageUser(user); "
+                    ng-click="changeSelection(user);"
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': user.$selected}">
-                    <td data-title="'Username'" style="width:30%;" header-class="text-left" sortable="'name'">
+                    <td  ng-click="manageUser(user);"  data-title="'Username'" style="width:30%;" header-class="text-left" sortable="'name'">
                         {{user.username}}
                     </td>
-                    <td data-title="'First Name'" header-class="text-left" sortable="'name'">
+                    <td ng-click="manageUser(user);"  data-title="'First Name'" header-class="text-left" sortable="'name'">
                         {{user.firstName}} {{user.lastName}}
                     </td>
-                    <td data-title="" style="width:25%;" header-class="text-left" sortable="" class="text-center">
+                    <td  data-title="" style="width:25%;" header-class="text-left" sortable="" class="text-center">
                         <span style="font-size: 0.9em;">
                           <span ng-if="userToRemove == user.id">
                             <em><a ng-click="removeUser(user)"> Confirm</a></em> |
                             <em><a ng-click="cancelRemoveUser()"> Cancel</a></em>
                           </span>
                           <span ng-if="userToRemove != user.id">
-                            <em><a ng-click="removeRoleCheck(user)"> Remove</a></em>
+                            <em><a ng-click="removeUserCheck(user)"> Remove</a></em>
                           </span>
                         </span>
                     </td>
