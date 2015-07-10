@@ -22,8 +22,8 @@ angular.module('bsis')
 
       addUser.$save(function(data){
         response(data);
-      }, function (){
-        response(false);
+      }, function (err){
+        response(false, err.data);
       });
     },
 
@@ -32,8 +32,8 @@ angular.module('bsis')
       Api.Users.update({id:user.id}, updatedUser, function(data) {
         userObj = data.role;
         response(userObj);
-      }, function (){
-        response(false);
+      }, function (err){
+        response(false, err.data);
       });
 
     },

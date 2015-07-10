@@ -72,9 +72,12 @@
                         <input size="30" id="username" name="username" class="form-control input-sm"
                                ng-model="user.username" required ng-minlength=1 ng-maxlength=30
                                ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                               ng-class="{'ng-invalid ng-dirty' : userForm.username.$invalid && submitted}">
+                               ng-class="{'ng-invalid ng-dirty' : (userForm.username.$invalid && submitted) || usernameInvalid}">
 
                         <div>
+                            <small class="error" ng-show="serverError">
+                                {{serverError}}
+                            </small>
                             <small class="error"
                                    ng-show="(userForm.username.$error.required && (userForm.username.$dirty || submitted))">
                                 This cannot be empty
@@ -143,12 +146,17 @@
             <div class="row form-group col-sm-12">
                 <label for="firstName" class="col-sm-1 control-label">Roles</label>
 
+                <small class="error" ng-show="roleRequired">
+                    Please select at least one role.
+                </small>
+
+
                 <div class="col-sm-6">
                     <div class="form-inline">
                         <div ng-repeat="entity in roleList" class="row pull-left"
                              style="width: 33%">
                             <small style="color: black;">
-                                <input type="checkbox" checklist-model="user.roles"
+                                <input type="checkbox" id="{{entity.id}}" checklist-model="user.roles"
                                        checklist-value="entity"/>
                                 {{entity.name}}
                             </small>

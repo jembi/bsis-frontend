@@ -143,11 +143,19 @@ angular.module('bsis')
 
 
     $scope.saveUser = function (user, userForm) {
-      if ($scope.user === ""){
-        $scope.addUser(user, userForm);
-
+      if (userForm.$valid) {
+        $scope.roleRequired = false;
+        if (typeof(user) != 'undefined' && typeof(user.roles) != 'undefined' && user.roles.length > 0) {
+          if (typeof(user.id) != 'undefined') {
+            $scope.updateUser(user, userForm);
+          } else {
+            $scope.addUser(user, userForm);
+          }
+        } else {
+          $scope.roleRequired = true;
+        }
       } else {
-        $scope.updateUser(user, userForm);
+        $scope.submitted = true;
       }
     };
     //Reset permissions in object
@@ -165,8 +173,15 @@ angular.module('bsis')
 
     $scope.updateUser = function (user, userForm) {
       if (userForm.$valid) {
-        UsersService.updateUser(user, function () {
-          $scope.go('/users');
+        UsersService.updateUser(user, function (response, err) {
+          if (response != false){
+            $scope.go('/users');
+          } else{
+            if(err["user.username"]){
+              $scope.usernameInvalid = "ng-invalid";
+              $scope.serverError = err["user.username"];
+            }
+          }
         });
       } else {
         $scope.submitted = true;
@@ -175,9 +190,9 @@ angular.module('bsis')
 
 
     $scope.addUser = function (user, userForm) {
-
+      
       if (userForm.$valid) {
-        UsersService.addUser(user, function (response) {
+        UsersService.addUser(user, function (response, err) {
           if (response !== false) {
             $scope.user = {
               name: '',
@@ -188,6 +203,10 @@ angular.module('bsis')
             $scope.go('/users');
           }
           else {
+            if(err["user.username"]){
+              $scope.usernameInvalid = "ng-invalid";
+              $scope.serverError = err["user.username"];
+            }
           }
         });
       }
