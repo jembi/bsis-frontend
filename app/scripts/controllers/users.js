@@ -202,39 +202,4 @@ angular.module('bsis')
       $location.path(path);
     };
   })
-
-  .controller('ViewUserCtrl', function ($scope, $location, UsersService, RolesService, ICONS, PERMISSIONS) {
-    $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
-    $scope.selection = "/user";
-
-    $scope.user = UsersService.getUser();
-
-    //Reset permissions in object
-    for (var roleIndex in $scope.user.roles) {
-      $scope.user.roles[roleIndex].permissions = [];
-    }
-    RolesService.getRoles(function (list) {
-      $scope.roleList = list;
-
-      //Reset permissions in object
-      for (var roleIndex in $scope.roleList) {
-        $scope.roleList[roleIndex].permissions = [];
-      }
-
-    });
-    $scope.clear = function () {
-
-    };
-
-    $scope.go = function (path) {
-      $location.path(path);
-    };
-
-    $scope.clearForm = function (form) {
-      form.$setPristine();
-      $scope.submitted = '';
-    };
-  })
-
 ;
