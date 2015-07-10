@@ -136,6 +136,20 @@ angular.module('bsis')
 
     $scope.user = UsersService.getUser();
 
+    if ($scope.user === ""){
+      $scope.emailRequired = "required";
+      $scope.passwordRequired = "required";
+    }
+
+
+    $scope.saveUser = function (user, userForm) {
+      if ($scope.user === ""){
+        $scope.addUser(user, userForm);
+
+      } else {
+        $scope.updateUser(user, userForm);
+      }
+    };
     //Reset permissions in object
     for (var roleIndex in $scope.user.roles) {
       $scope.user.roles[roleIndex].permissions = [];
@@ -148,6 +162,17 @@ angular.module('bsis')
       }
 
     });
+
+    $scope.updateUser = function (user, userForm) {
+      if (userForm.$valid) {
+        UsersService.updateUser(user, function () {
+          $scope.go('/users');
+        });
+      } else {
+        $scope.submitted = true;
+      }
+    };
+
 
     $scope.addUser = function (user, userForm) {
 
@@ -176,7 +201,6 @@ angular.module('bsis')
     $scope.go = function (path) {
       $location.path(path);
     };
-
   })
 
   .controller('ViewUserCtrl', function ($scope, $location, UsersService, RolesService, ICONS, PERMISSIONS) {
@@ -199,14 +223,6 @@ angular.module('bsis')
       }
 
     });
-
-
-    $scope.updateUser = function (user) {
-      UsersService.updateUser(user, function () {
-        $scope.go('/users');
-      });
-    };
-    console.log('user', $scope.user.roles);
     $scope.clear = function () {
 
     };
