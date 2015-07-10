@@ -5,7 +5,7 @@ angular.module('bsis')
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
-    var data = {};
+    var data = [{}];
     $scope.data = data;
     $scope.age = '';
 
@@ -602,7 +602,7 @@ angular.module('bsis')
 
     $scope.icons = ICONS;
 
-    var data = {};
+    var data = [{}];
     $scope.data = data;
     $scope.donorListSearchResults = '';
     $scope.donorList = {};
@@ -695,8 +695,8 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
 
-    var data = {};
-    var recentDonationBatchData = {};
+    var data = [{}];
+    var recentDonationBatchData = [{}];
     $scope.data = data;
     $scope.recentDonationBatchData = recentDonationBatchData;
     $scope.openDonationBatches = false;
@@ -843,7 +843,7 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
 
-    var data = {};
+    var data = [{}];
     $scope.data = data;
 
     $scope.hstep = 1;

@@ -6,7 +6,7 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
 
-    var data = {};
+    var data = [{}];
     $scope.data = data;
     $scope.location = {
       "isDonorPanel" : false,

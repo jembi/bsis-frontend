@@ -41,7 +41,7 @@ angular.module('bsis')
       }
     };
 
-    var data = {};
+    var data = [{}];
     $scope.data = data;
     $scope.component = {};
     $scope.discard = {};
