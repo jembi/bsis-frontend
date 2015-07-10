@@ -37,7 +37,7 @@
 </span>
 
 <div class="h4"> 
-  <small><em>Created On: </em></small>{{testBatch.createdDate}}
+  <small><em>Created On: </em></small>{{testBatch.createdDate | bsisDateTime}}
   | 
   <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
 </div>
@@ -46,7 +46,7 @@
 
 <hr style="margin-bottom:5px;"/>
 <span class="h4" style="font-size: 0.95em; margin-top:0px; margin-bottom:0px;" ng-repeat="donationBatch in testBatch.collectionBatches"> 
-  <small><em>Center: </em></small>{{donationBatch.donorPanel.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate}} | <small><em>Number of Donations: </em></small> {{donationBatch.numCollections}} 
+  <small><em>Center: </em></small>{{donationBatch.donorPanel.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate | bsisDate}} | <small><em>Number of Donations: </em></small> {{donationBatch.numCollections}}
   <br/>
 </span>
 <hr style="margin-top:5px;"/>
@@ -66,7 +66,7 @@
                 {{sample.collectionNumber}}
             </td>
             <td data-title="'Date Bled'" header-class="text-left" class="text-center" sortable="'collectedOn'">
-                {{sample.collectedOn}}
+                {{sample.collectedOn | bsisDate}}
             </td>
             <td data-title="'Pack'" header-class="text-left" sortable="'bloodBagType'">
                 {{sample.packType.bloodBagType}}

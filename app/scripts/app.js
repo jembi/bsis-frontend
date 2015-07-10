@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis', [
+var app = angular.module('bsis', [
   'ngRoute',
   'ui.bootstrap',
   'ngResource',
@@ -8,7 +8,8 @@ angular.module('bsis', [
   'xeditable',
   'ui.select',
   'ngSanitize',
-  'bsisFilters'
+  'checklist-model',
+  '720kb.tooltips'
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
@@ -211,7 +212,7 @@ angular.module('bsis', [
       // SETTINGS URLs
       .when('/settings', {
         templateUrl : 'views/settings.html',
-        controller  : 'ConfigurationsCtrl',
+        controller  : 'SettingsCtrl',
         permission: PERMISSIONS.VIEW_ADMIN_INFORMATION
       })
       .when('/locations', {
@@ -224,6 +225,21 @@ angular.module('bsis', [
         controller  : 'ConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
+      .when('/users', {
+        templateUrl : 'views/settings.html',
+        controller : 'UsersCtrl',
+        permission: PERMISSIONS.MANAGE_USERS
+      })
+      .when('/roles', {
+        templateUrl : 'views/settings.html',
+        controller : 'RolesCtrl',
+        permission: PERMISSIONS.MANAGE_ROLES
+      })
+      .when('/manageRole', {
+        templateUrl : 'views/settings.html',
+        controller : 'ManageRolesCtrl',
+        permission: PERMISSIONS.MANAGE_ROLES
+      })
 
       .otherwise({
         redirectTo: '/home'
@@ -233,23 +249,6 @@ angular.module('bsis', [
   .run(function(editableOptions) {
     editableOptions.theme = 'bs3';
   })
-
-  // load general configurations into $rootScope.configurations on startup
-  .run( ['$rootScope', 'ConfigurationsService', function ($rootScope, ConfigurationsService) {
-
-    var data = {};
-    
-    ConfigurationsService.getConfigurations(function(response){
-      if (response !== false){
-        data = response;
-        $rootScope.configurations = data;
-      }
-      else{
-
-      }
-      });
-
-  }])
 
   .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
 
@@ -269,16 +268,15 @@ angular.module('bsis', [
         $location.path('/home');
       }
     });
-    
+
   }])
 
   .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
 
     $rootScope.$on('$locationChangeStart', function(event){
-      
+
       // Retrieve the session from storage
-      var consoleSession = localStorage.getItem('consoleSession');
-      consoleSession = JSON.parse(consoleSession);
+      var consoleSession = AuthService.getSession();
 
       //used to control if header is displayed
       $rootScope.displayHeader = false;
@@ -293,28 +291,7 @@ angular.module('bsis', [
           AuthService.logout();
           $location.path( "/login" );
         }else{
-
-          //session still active - update expires time
-          currentTime = new Date();
-          //add 1 hour onto timestamp (1 hour persistence time)
-          var expireTime = new Date(currentTime.getTime() + (1*1000*60*60));
-          //get sessionID
-          var sessionID = consoleSession.sessionID;
-          var sessionUser = consoleSession.sessionUser;
-          var sessionUserName = consoleSession.sessionUserName;
-          var sessionUserPermissions = consoleSession.sessionUserPermissions;
-
-          //set the header to display
-          $rootScope.displayHeader = true;
-
-          //create session object
-          var consoleSessionObject = { 'sessionID': sessionID, 'sessionUser': sessionUser, 'sessionUserName': sessionUserName, 'sessionUserPermissions': sessionUserPermissions, 'expires': expireTime };
-
-          // Put updated object into storage
-          localStorage.setItem('consoleSession', JSON.stringify( consoleSessionObject ));
-          
-          $rootScope.sessionUserName = sessionUserName;
-          $rootScope.sessionUserPermissions = sessionUserPermissions;
+          AuthService.refreshSession();
         }
 
       }else{
@@ -406,7 +383,7 @@ angular.module('bsis', [
   })
 
   /*  Custom directive to check if user has associated permission
-      example use: <span has-permission="{{permissions.SOME_PERMISSION}}"> 
+      example use: <span has-permission="{{permissions.SOME_PERMISSION}}">
   */
   .directive('hasPermission', ['$rootScope', function ($rootScope)  {
     return {
@@ -417,7 +394,7 @@ angular.module('bsis', [
           showOrHide();
         }
 
-        // determine if user has permission to view the element - 
+        // determine if user has permission to view the element -
         function showOrHide() {
           var hasPermission = false;
           // if user has the appropriate permission, set hasPermission to TRUE
@@ -425,7 +402,7 @@ angular.module('bsis', [
             hasPermission = true;
           }
 
-          // remove the element if the user does not have the appropriate permission 
+          // remove the element if the user does not have the appropriate permission
           if(!hasPermission){
             element.remove();
           }
@@ -446,7 +423,7 @@ angular.module('bsis', [
           showOrHide();
         }
 
-        // determine if user has permissions to view the element - 
+        // determine if user has permissions to view the element -
         function showOrHide() {
           var hasPermissions = true;
           for (var permission in permissions){
@@ -456,7 +433,7 @@ angular.module('bsis', [
             }
           }
 
-          // remove the element if the user does not have the appropriate permission 
+          // remove the element if the user does not have the appropriate permission
           if(!hasPermissions){
             element.remove();
           }
@@ -505,7 +482,7 @@ angular.module('bsis', [
     };
   })
 
-  
+
   .directive('integer', ['REGEX', function(REGEX) {
     var INTEGER_REGEXP = REGEX.INTEGER;
     return {
@@ -568,5 +545,51 @@ angular.module('bsis', [
       }
     };
   }])
-
 ;
+
+// initialize system & user config before app starts
+(function() {
+
+  function initializeConfig() {
+    var initInjector = angular.injector(['ng']);
+    var $http = initInjector.get('$http');
+
+    return $http.get('config/config.json').then(function(response) {
+      app.constant('SYSTEMCONFIG', response.data);
+
+        var url = 'http://' + response.data.apiHost + ':' + response.data.apiPort + '/' + response.data.apiApp;
+        return $http.get(url+'/configurations').then(function(response) {
+          app.constant('USERCONFIG', response.data);
+
+          var config = response.data.configurations;
+
+          // initialise date/time format constants
+          for (var i=0,  tot=config.length; i < tot; i++) {
+            if (config[i].name == 'dateFormat'){
+              app.constant('DATEFORMAT', config[i].value);
+            }
+            else if (config[i].name == 'dateTimeFormat'){
+              app.constant('DATETIMEFORMAT', config[i].value);
+            }
+            else if (config[i].name == 'timeFormat'){
+              app.constant('TIMEFORMAT', config[i].value);
+            }
+          }
+
+          console.log("USERCONFIG: ", response.data);
+        }, function() {
+          // Handle error case
+          app.constant('CONFIGAPI', 'No Config Loaded');
+        });
+
+
+    }, function() {
+      // Handle error case
+      app.constant('SYSTEMCONFIG', 'No Config Loaded');
+    });
+
+  }
+
+  initializeConfig();
+
+}());

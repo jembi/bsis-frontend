@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, DonorService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
-    var data = {};
+    var data = [{}];
     $scope.data = data;
     $scope.age = '';
 
@@ -103,7 +103,7 @@ angular.module('bsis')
         'startingDay': 1,
         'show-weeks': false
       };
-      $scope.format = 'dd/MM/yyyy';
+      $scope.format = DATEFORMAT;
       $scope.initDate = item.birthDate;
       $scope.calIcon = 'fa-calendar';
 
@@ -121,7 +121,7 @@ angular.module('bsis')
 
       if (valid){
 
-        newDonor.birthDate = dob.month + "/" + dob.dayOfMonth + "/" + dob.year;
+        newDonor.birthDate = dob.year + "-" + dob.month + "-" + dob.dayOfMonth;
 
         DonorService.addDonor(newDonor, function(response){
           if (response === true){
@@ -131,7 +131,7 @@ angular.module('bsis')
               'startingDay': 1,
               'show-weeks': false
             };
-            $scope.format = 'dd/MM/yyyy';
+            $scope.format = DATEFORMAT;
             $scope.initDate = $scope.donor.birthDate;
             $scope.calIcon = 'fa-calendar';
 
@@ -184,7 +184,7 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, $filter, $q, ngTableParams, $timeout) {
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, DATEFORMAT, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
     $scope.age = '';
@@ -376,7 +376,7 @@ angular.module('bsis')
         'startingDay': 1,
         'show-weeks': false
       };
-      $scope.format = 'dd/MM/yyyy';
+      $scope.format = DATEFORMAT;
       $scope.initDate = new Date();
       $scope.calIcon = 'fa-calendar';
 
@@ -598,11 +598,11 @@ angular.module('bsis')
   })
 
   // Controller for Viewing/Exporting Donor Lists
-  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, $filter, ngTableParams, $timeout) {
+  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
 
-    var data = {};
+    var data = [{}];
     $scope.data = data;
     $scope.donorListSearchResults = '';
     $scope.donorList = {};
@@ -679,7 +679,7 @@ angular.module('bsis')
       'startingDay': 1,
       'show-weeks': false
     };
-    $scope.format = 'dd/MM/yyyy';
+    $scope.format = DATEFORMAT;
     $scope.initDate = new Date();
     $scope.calIcon = 'fa-calendar';
 
@@ -695,8 +695,8 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
 
-    var data = {};
-    var recentDonationBatchData = {};
+    var data = [{}];
+    var recentDonationBatchData = [{}];
     $scope.data = data;
     $scope.recentDonationBatchData = recentDonationBatchData;
     $scope.openDonationBatches = false;
@@ -838,12 +838,12 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams, $timeout) {
+  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, DATEFORMAT, $q, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
 
-    var data = {};
+    var data = [{}];
     $scope.data = data;
 
     $scope.hstep = 1;
@@ -913,7 +913,7 @@ angular.module('bsis')
         'startingDay': 1,
         'show-weeks': false
       };
-      $scope.format = 'dd/MM/yyyy';
+      $scope.format = DATEFORMAT;
       $scope.initDate = '';
       $scope.calIcon = 'fa-calendar';
 

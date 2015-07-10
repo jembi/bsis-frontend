@@ -43,7 +43,7 @@
                   {{component.status}}
               </td>
               <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
-                  {{component.createdOn}}
+                  {{component.createdOn | bsisDateTime}}
               </td>
               <td data-title="'Expiry Status'" header-class="text-left" class="text-center" sortable="'expiryStatus'">
                   {{ component | expiryStatus }}
