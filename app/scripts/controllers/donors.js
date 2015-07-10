@@ -951,6 +951,17 @@ angular.module('bsis')
 
     $scope.viewAddDonationForm = function (){
 
+      $scope.donation = {};
+      $scope.donorSummaryLoading = false;
+
+      $scope.$watch('donation.donorNumber', function() {
+        $scope.donorSummaryLoading = true;
+        DonorService.getDonorSummaries($scope.donation.donorNumber, function(donorSummary) {
+          $scope.donorSummary = donorSummary;
+          $scope.donorSummaryLoading = false;
+        });
+      });
+
       // set initial bleed times
       $scope.bleedStartTime = new Date();
       $scope.bleedEndTime = new Date();

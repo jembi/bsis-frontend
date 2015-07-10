@@ -93,7 +93,9 @@ angular.module('bsis')
         }
       ),
 
-      ComponentsSearch: $resource(url + '/components/search', {},
+      DonorSummaries: $resource(url + '/donors/summaries'),
+
+      ComponentsSearch: $resource(url + '/components/search', {}, 
         {
           query: {
             method: 'GET',
