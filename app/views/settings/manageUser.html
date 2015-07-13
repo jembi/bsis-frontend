@@ -72,26 +72,24 @@
             </div>
         </div>
 
-        <div class="row form-group col-sm-12">
-            <label for="modifyPassword" class="col-sm-1 control-label">Modify Password</label>
-            <div class="col-sm-4">
-                <div class="form-inline">
-                    <input type="checkbox" id="modifyPassword" name="modifyPassword" ng-model="user.modifyPassword" />
-                </div>
-            </div>
-        </div>
+
         <div class="row form-group col-sm-12">
           <label for="password" class="col-sm-1 control-label">Password </label>
 
           <div class="col-sm-4">
-            <div class="form-inline">
+            <div class="form-inline">                
+                <span ng-show="disableUsername">
+                    <input type="checkbox" id="modifyPassword" name="modifyPassword" ng-model="user.modifyPassword" />
+                    <label style="display: inline-block; cursor: pointer; cursor: hand; margin: 0px 0px; font-size: 0.8em;" for="modifyPassword">
+                        Reset Password</label>
+                </span>
+                <br />
                 <input size="34" id="password" name="password" type="password" placeholder="Enter Password"
                        ng-disabled="!user.modifyPassword"
                        class="form-control input-sm"
                        ng-model="user.password" ng-required="passwordRequired"
                        ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                        ng-class="{'ng-invalid ng-dirty' : userForm.password.$invalid && submitted}">
-
                 <div>
                   <small class="error"
                          ng-show="(userForm.password.$error.required && (userForm.password.$dirty || submitted))">
