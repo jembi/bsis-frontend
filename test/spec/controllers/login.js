@@ -8,10 +8,11 @@ describe('Controller: LoginCtrl', function () {
   beforeEach(module('bsis'));
 
 
-  // setup config constant to be used for API server details
+  // setup system & user config constants
   beforeEach(function(){
     module('bsis', function($provide){
-      $provide.constant( 'APIHOST', 'localhost' );
+      $provide.constant( 'SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json') );
+      $provide.constant( 'USERCONFIG', readJSON('test/mockData/userconfig.json') );
     });
   });
 
@@ -29,7 +30,7 @@ describe('Controller: LoginCtrl', function () {
     httpBackend = $httpBackend;
 
     httpBackend.when('GET', new RegExp('.*/users/login-user-details')).respond( readJSON('test/mockData/superuser.json') );
-    httpBackend.when('GET', new RegExp('.*/configurations')).respond( readJSON('test/mockData/config.json') );
+    httpBackend.when('GET', new RegExp('.*/configurations')).respond( readJSON('test/mockData/userconfig.json') );
 
     createController = function() {
       scope = $rootScope.$new();
@@ -66,7 +67,7 @@ describe('Controller: LoginCtrl', function () {
     it('should run the login() and reject login - loginAlert exists', function () {
       createController();
 
-      var credentials = {username: 'superuser', password: 'superuser'};
+      var credentials = {username: 'superuser', password: ''};
       var loginForm = { $valid: false, $setPristine: function(){} };
       
       // run the login function

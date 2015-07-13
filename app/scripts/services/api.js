@@ -2,9 +2,9 @@
 
 angular.module('bsis')
 
-  .factory('Api', function ($resource, $http, APIHOST, APIPORT, APIAPP) {
+  .factory('Api', function ($resource, $http, SYSTEMCONFIG) {
 
-    var url = 'http://' + APIHOST + ':' + APIPORT + '/' + APIAPP;
+    var url = 'http://' + SYSTEMCONFIG.apiHost + ':' + SYSTEMCONFIG.apiPort + '/' + SYSTEMCONFIG.apiApp;
 
     return {
       User: $resource(url + '/users/login-user-details' , {}, {
@@ -93,7 +93,9 @@ angular.module('bsis')
         }
       ),
 
-      ComponentsSearch: $resource(url + '/components/search', {},
+      DonorSummaries: $resource(url + '/donors/summaries'),
+
+      ComponentsSearch: $resource(url + '/components/search', {}, 
         {
           query: {
             method: 'GET',

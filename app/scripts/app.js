@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis', [
+var app = angular.module('bsis', [
   'ngRoute',
   'ui.bootstrap',
   'ngResource',
@@ -8,7 +8,6 @@ angular.module('bsis', [
   'xeditable',
   'ui.select',
   'ngSanitize',
-  'bsisFilters',
   'checklist-model',
   'ngMessages',
   '720kb.tooltips'
@@ -256,38 +255,6 @@ angular.module('bsis', [
   .run(function(editableOptions) {
     editableOptions.theme = 'bs3';
   })
-
-  // load general configurations into $rootScope.configurations on startup
-  .run( ['$rootScope', 'ConfigurationsService', function ($rootScope, ConfigurationsService) {
-
-    var data = {};
-
-    ConfigurationsService.getConfigurations(function(response){
-      if (response !== false){
-        data = response;
-        $rootScope.configurations = data;
-        if(!angular.isUndefined($rootScope.configurations)){
-          $rootScope.configurations.forEach(function(entry) {
-            if (entry.name == 'dateFormat'){
-              $rootScope.dateFormat = entry.value;
-            }
-
-            if (entry.name == 'dateTimeFormat'){
-              $rootScope.dateTimeFormat = entry.value;
-            }
-
-            if (entry.name == 'timeFormat'){
-              $rootScope.timeFormat = entry.value;
-            }
-          });
-        }
-      }
-      else{
-
-      }
-      });
-
-  }])
 
   .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
 
@@ -605,3 +572,50 @@ angular.module('bsis', [
   })
 
 ;
+
+// initialize system & user config before app starts
+(function() {
+
+  function initializeConfig() {
+    var initInjector = angular.injector(['ng']);
+    var $http = initInjector.get('$http');
+
+    return $http.get('config/config.json').then(function(response) {
+      app.constant('SYSTEMCONFIG', response.data);
+
+        var url = 'http://' + response.data.apiHost + ':' + response.data.apiPort + '/' + response.data.apiApp;
+        return $http.get(url+'/configurations').then(function(response) {
+          app.constant('USERCONFIG', response.data);
+
+          var config = response.data.configurations;
+
+          // initialise date/time format constants
+          for (var i=0,  tot=config.length; i < tot; i++) {
+            if (config[i].name == 'dateFormat'){
+              app.constant('DATEFORMAT', config[i].value);
+            }
+            else if (config[i].name == 'dateTimeFormat'){
+              app.constant('DATETIMEFORMAT', config[i].value);
+            }
+            else if (config[i].name == 'timeFormat'){
+              app.constant('TIMEFORMAT', config[i].value);
+            }
+          }
+
+          console.log("USERCONFIG: ", response.data);
+        }, function() {
+          // Handle error case
+          app.constant('CONFIGAPI', 'No Config Loaded');
+        });
+
+
+    }, function() {
+      // Handle error case
+      app.constant('SYSTEMCONFIG', 'No Config Loaded');
+    });
+
+  }
+
+  initializeConfig();
+
+}());
