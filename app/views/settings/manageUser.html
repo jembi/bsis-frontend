@@ -75,7 +75,7 @@
 
           <div class="col-sm-4">
             <div class="form-inline">
-                <input size="34" id="password" name="password" type="password"
+                <input size="34" id="password" name="password" type="password" placeholder="Enter Password"
                        class="form-control input-sm"
                        ng-model="user.password" ng-required="passwordRequired" ng-minlength=1 ng-maxlength=30
                        ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
@@ -93,11 +93,11 @@
         </div>
         <div class="row form-group col-sm-12">
 
-          <label for="confirmPassword" class="col-sm-1 control-label">Confirm</label>
+          <label for="confirmPassword" class="col-sm-1 control-label"></label>
 
           <div class="col-sm-4">
             <div class="form-inline">
-              <input size="34" type="password" id="confirmPassword" name="confirmPassword"
+              <input size="34" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password"
 
                      ng-class="{'ng-invalid ng-dirty' : userForm.password.$invalid && submitted}"
                      class="form-control input-sm"
