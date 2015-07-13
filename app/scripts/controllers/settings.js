@@ -22,7 +22,11 @@ angular.module('bsis')
       } else if ($location.path() === "/manageRole" && path === "/roles") {
         $scope.selection = $location.path();
         return true;
-      } else {
+      }
+      else if ($location.path() === "/manageUser" && path === "/users") {
+        $scope.selection = $location.path();
+        return true;
+      }else {
         return false;
       }
     };
