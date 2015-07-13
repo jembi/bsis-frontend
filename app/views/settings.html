@@ -12,6 +12,8 @@
            <div ng-switch on="selection">
               <div ng-switch-when="/locations"><div ng-include="'views/settings/locations.html'"></div></div>
               <div ng-switch-when="/configurations"><div ng-include="'views/settings/configurations.html'"></div></div>
+              <div ng-switch-when="/users"><div ng-include="'views/settings/users.html'"></div></div>
+              <div ng-switch-when="/manageUser"><div ng-include="'views/settings/manageUser.html'"></div></div>
               <div ng-switch-when="/roles"><div ng-include="'views/settings/roles.html'"></div></div>
               <div ng-switch-when="/manageRole"><div ng-include="'views/settings/manageRole.html'"></div></div>
               <div ng-switch-default><div ng-include="'views/settings'+initialView+'.html'"></div></div>

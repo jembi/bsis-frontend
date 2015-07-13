@@ -610,5 +610,11 @@ a.btn.btn-link {
   padding: 3px 12px 0px 12px;
 }
 
+/* Use default pointer cursor for disabled input fields */
+input[disabled] {
+    cursor: default;
+    pointer-events: none;
+}
+
 /* --> general css */
 

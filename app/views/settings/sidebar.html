@@ -12,6 +12,7 @@
     <li class="disabled" has-permission="{{permissions.VIEW_ADMIN_INFORMATION}}"><span>SETTINGS</span></li>
     <li ng-class="{current: isCurrent('/configurations')}" has-permission="{{permissions.MANAGE_DONATION_SITES}}"><a href="#/configurations">General Configurations</a></li>
     <li ng-class="{current: isCurrent('/locations')}" has-permission="{{permissions.MANAGE_DONATION_SITES}}"><a href="#/locations">Manage Locations</a></li>
+    <li ng-class="{current: isCurrent('/users')}" has-permission="{{permissions.MANAGE_USERS}}"><a href="#/users">Manage Users</a></li>
     <li ng-class="{current: isCurrent('/roles')}" has-permission="{{permissions.MANAGE_ROLES}}"><a href="#/roles">Manage Roles</a></li>
 
   </ul>

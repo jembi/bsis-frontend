@@ -9,6 +9,7 @@ var app = angular.module('bsis', [
   'ui.select',
   'ngSanitize',
   'checklist-model',
+  'ngMessages',
   '720kb.tooltips'
 ])
   .config(function($routeProvider, PERMISSIONS) {
@@ -234,6 +235,11 @@ var app = angular.module('bsis', [
       .when('/users', {
         templateUrl : 'views/settings.html',
         controller : 'UsersCtrl',
+        permission: PERMISSIONS.MANAGE_USERS
+      })
+      .when('/manageUser', {
+        templateUrl : 'views/settings.html',
+        controller : 'ManageUserCtrl',
         permission: PERMISSIONS.MANAGE_USERS
       })
       .when('/roles', {
@@ -551,6 +557,26 @@ var app = angular.module('bsis', [
       }
     };
   }])
+
+  .directive('compareTo', function(){
+    return {
+      require: "ngModel",
+      scope: {
+        otherModelValue: "=compareTo"
+      },
+      link: function(scope, element, attributes, ngModel) {
+
+        ngModel.$validators.compareTo = function(modelValue) {
+          return modelValue == scope.otherModelValue;
+        };
+
+        scope.$watch("otherModelValue", function() {
+          ngModel.$validate();
+        });
+      }
+    };
+  })
+
 ;
 
 // initialize system & user config before app starts
