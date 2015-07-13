@@ -34,7 +34,7 @@
             <div class="form-inline">
               <input size="34" type="email" id="emailId" name="emailId" class="form-control input-sm"
                      ng-model="user.emailId" ng-required="emailRequired"
-                     ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                     ng-model-options="{ updateOn:'default blur', debounce: { default: 1500, blur: 0 } }"
                      ng-class="{'ng-invalid ng-dirty' : userForm.emailId.$invalid && submitted}">
 
 
@@ -111,6 +111,7 @@
                      ng-class="{'ng-invalid ng-dirty' : userForm.password.$invalid && submitted}"
                      class="form-control input-sm"
                      ng-model="user.confirmPassword"
+                     ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                      compare-to="user.password"/>
 
               <div ng-show="(userForm.confirmPassword.$dirty || submitted)"
