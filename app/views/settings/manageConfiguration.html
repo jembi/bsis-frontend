@@ -1,0 +1,84 @@
+<h3 class="page-header">Manage Configuration</h3>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form name="configurationForm" novalidate class="form-horizontal col-sm-12"  configuration="form" ng-submit="saveConfiguration(configuration, configurationForm)">
+
+      <div class="row form-group col-sm-12">
+        <label for="name" class="col-sm-1 control-label">Name</label>
+        <div class="col-sm-4">
+          <div class="form-inline">
+            <input size="30" id="name" name="name" class="form-control input-sm" ng-model="configuration.name" required
+              ng-minlength=1 ng-maxlength=30
+              ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+              ng-class="{'ng-invalid ng-dirty' : (configurationForm.name.$invalid && submitted) || nameInvalid }">
+            <div>
+              <small class="error" ng-show="serverError">
+                {{serverError}}
+              </small>
+              <small class="error" ng-show="(configurationForm.name.$error.required && (configurationForm.name.$dirty || submitted))">
+                This cannot be empty
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row form-group col-sm-12">
+        <label for="description" class="col-sm-1 control-label">Description</label>
+        <div class="col-sm-6">
+          <div class="form-inline">
+            <input size="40" id="description" name="description" class="form-control input-sm"
+              ng-model="configuration.description" required ng-minlength=1 ng-maxlength=30
+              ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+              ng-class="{'ng-invalid ng-dirty' : configurationForm.description.$invalid && submitted}">
+            <div>
+              <small class="error"
+                ng-show="(configurationForm.description.$error.required && (configurationForm.description.$dirty || submitted))">
+                  This cannot be empty
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group col-sm-12">
+        <label for="value" class="col-sm-1 control-label">Value</label>
+        <div class="col-sm-6">
+          <div class="form-inline">
+            <input size="40" id="value" name="value" class="form-control input-sm"
+              ng-model="configuration.value" required ng-minlength=1 ng-maxlength=30
+              ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+              ng-class="{'ng-invalid ng-dirty' : configurationForm.value.$invalid && submitted}">
+            <div>
+              <small class="error"
+                ng-show="(configurationForm.value.$error.required && (configurationForm.value.$dirty || submitted))">
+                  This cannot be empty
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="permissions" class="col-sm-1 control-label">Type</label>
+        <div class="row col-sm-11" style="margin-left: 20px; width: 85%;">
+          <small class="error" ng-show="permissionsRequired">
+            Please select at least one permission.
+          </small>
+        </div>
+        <div id="permissions" class="row col-sm-11" style="margin-left: 20px; width: 85%;">
+          <div ng-repeat="entity in permissionList" class="row  pull-left" style="width: 175px;" tooltips="" tooltip-title="{{entity.name}}">
+              <input id="{{entity.id}}" type="checkbox" checklist-model="configuration.permissions" checklist-value="entity"/>
+              <small style="color: black;"><label style="display: inline-block; cursor: pointer; cursor: hand; margin: 0px 0px; font-size: 0.8em;" for="{{entity.id}}">{{entity.name | limitTo: 22}}</label></small>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-4">
+            <button class="btn btn-primary" type="submit" style="margin-top: 2px">Save Configuration</button>
+            <button class="btn btn-primary" type="button" ng-click="cancel(configurationForm)" style="margin-top: 2px">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
