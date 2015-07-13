@@ -33,23 +33,34 @@ angular.module('bsis')
 
     };
 
-    $scope.getConfiguration = function () {
-      ConfigurationsService.getConfiguration(1,function(response){
-        if (response !== false){
-          //data = response;
-          //$scope.data = data;
-          console.log("configuration id 1: ",response);
-        }
-        else{
-
+    $scope.configurationsTableParams = new ngTableParams({
+        page: 1,            // show first page
+        count: 6,          // count per page
+        filter: {},
+        sorting: {}
+      },
+      {
+        defaultSort: 'asc',
+        counts: [], // hide page counts control
+        total: $scope.data.length, // length of data
+        getData: function ($defer, params) {
+          var filteredData = params.filter() ?
+            $filter('filter')(data, params.filter()) : data;
+          var orderedData = params.sorting() ?
+            $filter('orderBy')(filteredData, params.orderBy()) : data;
+          params.total(orderedData.length); // set total for pagination
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
 
-    };
+    $scope.$watch("data", function () {
+      $timeout(function () {
+        $scope.configurationsTableParams.reload();
+      });
+    });
 
     $scope.addNewConfiguration = function () {
       ConfigurationsService.setConfiguration("");
-      ConfigurationsService.setPermissions("");
       $location.path('/manageConfiguration');
     };
 
@@ -60,11 +71,10 @@ angular.module('bsis')
     };
 
     $scope.getConfigurations();
-    $scope.getConfiguration();
 
   })
 
-  .controller('ManageConfigurationsCtrl', function ($scope, $location, ConfigurationsService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout){
+  .controller('ManageConfigurationsCtrl', function ($scope, $location, ConfigurationsService, ICONS, PERMISSIONS, DATEFORMAT){
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageConfiguration';
