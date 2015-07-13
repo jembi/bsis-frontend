@@ -72,7 +72,6 @@ describe('Controller: LoginCtrl', function () {
       
       // run the login function
       scope.login( credentials, loginForm );
-      httpBackend.flush();
 
       // loginAlert should have a message and loginInvalid should be true
       expect( scope.loginAlert ).toBe( 'Please supply all fields' );
