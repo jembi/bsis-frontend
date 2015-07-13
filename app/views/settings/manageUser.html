@@ -78,12 +78,12 @@
 
           <div class="col-sm-4">
             <div class="form-inline">                
-                <span ng-show="disableUsername">
+                <span ng-if="disableUsername">
                     <input type="checkbox" id="modifyPassword" name="modifyPassword" ng-model="user.modifyPassword" />
-                    <label style="display: inline-block; cursor: pointer; cursor: hand; margin: 0px 0px; font-size: 0.8em;" for="modifyPassword">
-                        Reset Password</label>
+                    <label style="cursor: pointer;" for="modifyPassword">Reset Password</label>
+                    <br />
                 </span>
-                <br />
+                
                 <input size="34" id="password" name="password" type="password" placeholder="Enter Password"
                        ng-disabled="!user.modifyPassword"
                        class="form-control input-sm"
