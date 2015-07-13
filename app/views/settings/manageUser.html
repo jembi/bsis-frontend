@@ -53,6 +53,7 @@
             <div class="col-sm-4">
               <div class="form-inline">
                 <input size="34" id="username" name="username" class="form-control input-sm"
+                       ng-disabled="user.username"
                        ng-model="user.username" required ng-minlength=1 ng-maxlength=30
                        ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                        ng-class="{'ng-invalid ng-dirty' : (userForm.username.$invalid && submitted) || usernameInvalid}">
