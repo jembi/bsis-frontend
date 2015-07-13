@@ -89,11 +89,11 @@ angular.module('bsis')
   .controller('ManagePackTypeCtrl', function ($scope, $location, PackTypesService, ICONS, PERMISSIONS) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
-    $scope.selection = "/packType";
+    $scope.selection = "/managePackType";
 
     $scope.packType = PackTypesService.getPackType();
-    //$scope.permissionList = PackTypesService.getPermissions();
-    $scope.savePackType = function (packType){
+
+    $scope.savePackType = function (packType, packTypeForm){
       if ($scope.managePackType == 'updatePackType'){
         $scope.updatePackType(packType);
 
@@ -103,6 +103,7 @@ angular.module('bsis')
     };
 
     $scope.addPackType = function (packType, packTypeForm) {
+      alert(JSON.stringify(packType));
       PackTypesService.addPackType(packType, function (response) {
         $scope.go('/packTypes');
       });
