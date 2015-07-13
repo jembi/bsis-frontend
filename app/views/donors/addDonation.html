@@ -40,6 +40,31 @@
     </div>
 
     <div class="form-group">
+      <label for="name" class="col-sm-3 control-label"> </label>
+      <div class="row col-sm-9">
+        <div class="form-inline" style="margin-left:5px; padding-left:8px; padding-top:3px; font-size:0.9em; height:60px; width:150px; border-radius: 5px; border: 1px solid #ddd;">
+          <i class="fa fa-spinner fa-spin" ng-show="donorSummaryLoading"></i>
+          <span class="center-block" ng-hide="donorSummaryLoading">
+            {{donorSummary.firstName}} {{donorSummary.lastName}}
+          </span>
+          <span class="center-block" ng-switch="donorSummary.gender" ng-hide="donorSummaryLoading"> 
+            <span ng-switch-when="male">
+              <i class="fa fa-male"></i>
+              Male
+            </span>
+            <span ng-switch-when="female">
+              <i class="fa fa-female"></i>
+              Female
+            </span>
+          </span>
+          <span class="center-block" ng-hide="donorSummaryLoading">
+            {{donorSummary.birthDate | bsisDate}}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label for="name" class="col-sm-3 control-label">DIN</label>
       <div class="row col-sm-9">
         <div class="form-inline" style="padding-left:5px;">

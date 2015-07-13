@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsisFilters', [])
+angular.module('bsis')
 
   // if component has been processed or discarded, expiry status info is not relevant - display 'N/A' instead
   .filter('expiryStatus', function () {
@@ -12,24 +12,30 @@ angular.module('bsisFilters', [])
     };
   })
 
-  .filter('bsisDate', function ($filter,$rootScope) {
-    var angularDateFilter = $filter('date');
-    return function (theDate) {
-      return angularDateFilter(theDate, $rootScope.dateFormat);
+  .filter('slice', function() {
+    return function(arr, start, end) {
+      return arr.slice(start, end);
     };
   })
 
-  .filter('bsisDateTime', function ($filter,$rootScope) {
+  .filter('bsisDate', function ($filter,DATEFORMAT) {
     var angularDateFilter = $filter('date');
     return function (theDate) {
-      return angularDateFilter(theDate, $rootScope.dateTimeFormat);
+      return angularDateFilter(theDate, DATEFORMAT);
     };
   })
 
-  .filter('bsisTime', function ($filter,$rootScope) {
+  .filter('bsisDateTime', function ($filter,DATETIMEFORMAT) {
     var angularDateFilter = $filter('date');
     return function (theDate) {
-      return angularDateFilter(theDate, $rootScope.timeFormat);
+      return angularDateFilter(theDate, DATETIMEFORMAT);
+    };
+  })
+
+  .filter('bsisTime', function ($filter,TIMEFORMAT) {
+    var angularDateFilter = $filter('date');
+    return function (theDate) {
+      return angularDateFilter(theDate, TIMEFORMAT);
     };
   })
 ;

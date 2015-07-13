@@ -8,10 +8,11 @@ describe('Controller: LoginCtrl', function () {
   beforeEach(module('bsis'));
 
 
-  // setup config constant to be used for API server details
+  // setup system & user config constants
   beforeEach(function(){
     module('bsis', function($provide){
-      $provide.constant( 'APIHOST', 'localhost' );
+      $provide.constant( 'SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json') );
+      $provide.constant( 'USERCONFIG', readJSON('test/mockData/userconfig.json') );
     });
   });
 
@@ -29,7 +30,7 @@ describe('Controller: LoginCtrl', function () {
     httpBackend = $httpBackend;
 
     httpBackend.when('GET', new RegExp('.*/users/login-user-details')).respond( readJSON('test/mockData/superuser.json') );
-    httpBackend.when('GET', new RegExp('.*/configurations')).respond( readJSON('test/mockData/config.json') );
+    httpBackend.when('GET', new RegExp('.*/configurations')).respond( readJSON('test/mockData/userconfig.json') );
 
     createController = function() {
       scope = $rootScope.$new();
@@ -79,52 +80,5 @@ describe('Controller: LoginCtrl', function () {
     });
 
   });
-
-
-  // Testing the createUserSession() function
-  describe('*createUserSession()', function () {
-
-    // process the createUserSession() function and throw no user profile found error
-    it('should run the createUserSession() function and throw error if user profile not found', function () {
-      createController();
-
-      var credentials = {username: 'superuser', password: 'superuser'};
-
-      // create the session object to store session data
-      var sessionResult = scope.createUserSession(credentials);
-      httpBackend.flush();
-      // user not yet logged in so no userProfile exist
-      expect( sessionResult ).toBe( 'Logged in user could not be found!' );
-    });
-
-    // process the createUserSession() function and create user session successfully
-    it('should run the createUserSession() function and create a user session successfully', function () {
-      
-      createController();
-
-      var credentials = {username: 'superuser', password: 'superuser'};
-      var loginForm = { $valid: true, $setPristine: function(){} };
-      scope.login( credentials, loginForm );
-      httpBackend.flush();
-
-      
-      // create the session object to store session data
-      var sessionResult = scope.createUserSession(credentials);
-      // user not yet logged in so no userProfile exist
-      expect( sessionResult ).toBe( 'Session created!' );
-
-
-      var consoleSession = localStorage.getItem('consoleSession');
-      expect( consoleSession ).not.toBe(null);
-
-
-      expect( JSON.parse( consoleSession).sessionUserName ).toBe('Super User');
-      expect( JSON.parse( consoleSession).sessionUser ).toBe('superuser');
-
-    });
-
-  });
-
-
 
 });

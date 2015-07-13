@@ -2,9 +2,9 @@
 
 angular.module('bsis')
 
-  .factory('Api', function ($resource, $http, APIHOST, APIPORT, APIAPP) {
+  .factory('Api', function ($resource, $http, SYSTEMCONFIG) {
 
-    var url = 'http://' + APIHOST + ':' + APIPORT + '/' + APIAPP;
+    var url = 'http://' + SYSTEMCONFIG.apiHost + ':' + SYSTEMCONFIG.apiPort + '/' + SYSTEMCONFIG.apiApp;
 
     return {
       User: $resource(url + '/users/login-user-details' , {}, {
@@ -12,6 +12,20 @@ angular.module('bsis')
           method: 'GET'
         }
       }),
+
+      Users : $resource(url + '/users/:id', null,
+        {
+          update: {method: 'PUT'}
+        }
+      ),
+
+      Roles : $resource(url + '/roles/:id', null,
+        {
+          update: {method: 'PUT'}
+        }
+      ),
+
+      Permissions: $resource(url + '/roles/permissions'),
 
       Donor: $resource(url + '/donors/:id', null,
         {
@@ -79,6 +93,8 @@ angular.module('bsis')
           }
         }
       ),
+
+      DonorSummaries: $resource(url + '/donors/summaries'),
 
       ComponentsSearch: $resource(url + '/components/search', {},
         {
