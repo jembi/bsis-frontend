@@ -132,6 +132,8 @@ angular.module('bsis')
       $scope.user.modifyPassword = true;
       $scope.emailRequired = "required";
       $scope.passwordRequired = "required";
+    } else {
+      $scope.disableUsername = true;
     }
 
 
