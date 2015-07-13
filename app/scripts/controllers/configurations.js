@@ -50,4 +50,8 @@ angular.module('bsis')
     $scope.getConfigurations();
     $scope.getConfiguration();
 
+  })
+
+  .controller('ManageConfigurationsCtrl', function ($scope, $location, ConfigurationsService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout){
+
   });

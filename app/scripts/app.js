@@ -225,6 +225,12 @@ var app = angular.module('bsis', [
         controller  : 'ConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
+      .when('/manageConfiguration', {
+        templateUrl : 'views/settings.html',
+        controller  : 'ManageConfigurationsCtrl',
+        permission: PERMISSIONS.MANAGE_DONATION_SITES
+      })
+
       .when('/users', {
         templateUrl : 'views/settings.html',
         controller : 'UsersCtrl',

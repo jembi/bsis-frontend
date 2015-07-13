@@ -17,9 +17,21 @@ angular.module('bsis')
         console.log("configuration response: ", apiResponse);
         response(apiResponse);
       }, function (){
-        response(false);  
+        response(false);
       });
     },
+
+    addConfiguration: function (configuration,response) {
+
+    },
+
+    updateConfiguration: function (configuration, response) {
+
+    },
+
+    removeConfiguration: function (id, response) {
+      
+    }
 
   };
 });
