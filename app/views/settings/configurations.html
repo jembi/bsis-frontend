@@ -4,12 +4,30 @@
   <div style="padding-bottom: 10px"></div>
     <div class="panel panel-default">
       <div class="panel-body">
-
-        <p>{{configurations}}</p>
-
+        <p>
+            <em> {{configurationsCount}} configuration(s) found </em> <span has-permission="{{permissions.MANAGE_CONFIGURATIONS}}"> | <em> <a href="" ng-click="addNewConfiguration()" >Add New Configuration</a></em> </span>
+        </p>
+        <table ng-table="configurationsTableParams" show-filter="false" class="table">
+          <tr ng-repeat="configuration in configurations"
+            ng-click="changeSelection(configuration); manageConfiguration(configuration);"
+            ng-mouseenter="this.$selected = true"
+            ng-mouseleave="this.$selected = false"
+            ng-class="{'active': configuration.$selected}">
+            <td data-title="'Name'" style="width:30%;" header-class="text-left" sortable="'name'">
+                {{configuration.name}}
+            </td>
+            <td data-title="'Description'"  header-class="text-left" sortable="''">
+                {{configuration.description}}
+            </td>
+            <td data-title="'DataType'"  header-class="text-left" sortable="''">
+                {{configuration.dataType.datatype}}
+            </td>
+            <td data-title="'Value'"  header-class="text-left" sortable="''">
+                {{configuration.value}}
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
 </div>
-
-</form>
