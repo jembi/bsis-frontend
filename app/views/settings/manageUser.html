@@ -37,12 +37,12 @@
                      ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                      ng-class="{'ng-invalid ng-dirty' : userForm.emailId.$invalid && submitted}">
 
-              <div>
-                <small class="error"
-                       ng-show="(userForm.emailId.$error.required && (userForm.emailId.$dirty || submitted))">
-                    This cannot be empty
-                </small>
+
+              <div ng-show="(userForm.emailId.$dirty || submitted)"
+                   ng-messages="userForm.emailId.$error">
+                  <small class="error" ng-messages-include="messages.html"></small>
               </div>
+
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@
                      ng-model="user.confirmPassword"
                      compare-to="user.password"/>
 
-              <div ng-show="(userForm.password.$dirty || submitted)"
+              <div ng-show="(userForm.confirmPassword.$dirty || submitted)"
                    ng-messages="userForm.confirmPassword.$error">
                   <small class="error" ng-messages-include="messages.html"></small>
               </div>
