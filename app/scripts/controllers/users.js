@@ -164,6 +164,9 @@ angular.module('bsis')
 
     $scope.updateUser = function (user, userForm) {
       if (userForm.$valid) {
+        if (user.password == user.confirmPassword){
+          user.modifyPassword = true;
+        }
         UsersService.updateUser(user, function (response, err) {
           if (response !== false){
             $scope.go('/users');
