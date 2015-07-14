@@ -258,6 +258,14 @@ angular.module('bsis')
         }); 
 
       });
+    },
+
+    getDonorSummaries: function(donorNumber, response) {
+      Api.DonorSummaries.get({donorNumber: donorNumber}, function(data) {
+        response(data.donor);
+      }, function() {
+        response(false);
+      });
     }
   };
 });
