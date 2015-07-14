@@ -10,10 +10,10 @@
             <input size="30" id="name" name="name" class="form-control input-sm" ng-model="configuration.name" required
 
               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-              ng-class="{'ng-invalid ng-dirty' : (configurationForm.name.$invalid && submitted) || nameInvalid }">
+              ng-class="{'ng-invalid ng-dirty' : (configurationForm.name.$invalid && submitted) || configurationNameInvalid }">
             <div>
-              <small class="error" ng-show="serverError">
-                {{serverError}}
+              <small class="error" ng-show="serverError.name">
+                {{serverError.name}}
               </small>
               <small class="error" ng-show="(configurationForm.name.$error.required && (configurationForm.name.$dirty || submitted))">
                 This cannot be empty
@@ -47,8 +47,11 @@
             <input size="40" id="value" name="value" class="form-control input-sm"
               ng-model="configuration.value" required
               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-              ng-class="{'ng-invalid ng-dirty' : configurationForm.value.$invalid && submitted}">
+              ng-class="{'ng-invalid ng-dirty' :( configurationForm.value.$invalid && submitted) || configurationValueInvalid }">
             <div>
+              <small class="error" ng-show="serverError.value">
+                {{serverError.value}}
+              </small>
               <small class="error"
                 ng-show="(configurationForm.value.$error.required && (configurationForm.value.$dirty || submitted))">
                   This cannot be empty

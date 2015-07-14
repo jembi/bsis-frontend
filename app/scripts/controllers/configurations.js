@@ -90,6 +90,7 @@ angular.module('bsis')
     $scope.dataTypes = DATATYPES.options;
 
     $scope.saveConfiguration = function (configuration, configurationForm) {
+
       if (configurationForm.$valid) {
         if (typeof(configuration) != 'undefined') {
           if (typeof(configuration.id) != 'undefined') {
@@ -105,6 +106,8 @@ angular.module('bsis')
       }
     };
 
+    $scope.serverError = {};
+
 
     $scope.updateConfiguration = function (configuration, configurationForm) {
       if (configurationForm.$valid) {
@@ -113,9 +116,15 @@ angular.module('bsis')
           if (response !== false){
             $scope.go('/configurations');
           } else{
-            if(err["configuration.configurationname"]){
-              $scope.configurationnameInvalid = "ng-invalid";
-              $scope.serverError = err["configuration.configurationname"];
+
+            if(err.value){
+              $scope.configurationValueInvalid = "ng-invalid";
+              $scope.serverError.value = err.value;
+            }
+
+            if(err.name){
+              $scope.configurationNameInvalid = "ng-invalid";
+              $scope.serverError.name = err.name;
             }
           }
         });
@@ -139,9 +148,14 @@ angular.module('bsis')
             $scope.go('/configurations');
           }
           else {
-            if(err["configuration.configurationname"]){
-              $scope.configurationnameInvalid = "ng-invalid";
-              $scope.serverError = err["configuration.configurationname"];
+            if(err.value){
+              $scope.configurationValueInvalid = "ng-invalid";
+              $scope.serverError.value = err.value;
+            }
+
+            if(err.name){
+              $scope.configurationNameInvalid = "ng-invalid";
+              $scope.serverError.name = err.name;
             }
           }
         });
