@@ -607,7 +607,6 @@ var app = angular.module('bsis', [
             }
           }
 
-          console.log("USERCONFIG: ", response.data);
         }, function() {
           // Handle error case
           app.constant('CONFIGAPI', 'No Config Loaded');
@@ -621,6 +620,12 @@ var app = angular.module('bsis', [
 
   }
 
-  initializeConfig();
+  function bootstrapApplication() {
+    angular.element(document).ready(function() {
+      angular.bootstrap(document, ['bsis']);
+    });
+  }
+
+  initializeConfig().then(bootstrapApplication);
 
 }());
