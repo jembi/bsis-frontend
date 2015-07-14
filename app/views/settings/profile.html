@@ -15,6 +15,9 @@
             <label class="col-sm-3 col-lg-1 control-label" for="firstName">First Name</label>
             <div class="col-sm-9 col-lg-11">
               <input class="form-control input-sm" style="width:auto;" type="text" name="firstName" ng-model="userDetails.firstName" ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}" required />
+              <ng-messages for="userDetailsForm.firstName.$error" role="alert">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
             </div>
           </div>
 
@@ -22,6 +25,9 @@
             <label class="col-sm-3 col-lg-1 control-label" for="lastName">Last Name</label>
             <div class="col-sm-9 col-lg-11">
               <input class="form-control input-sm" style="width:auto;" type="text" name="lastName" ng-model="userDetails.lastName" ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}" required />
+              <ng-messages for="userDetailsForm.lastName.$error" role="alert">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
             </div>
           </div>
 
@@ -29,6 +35,9 @@
             <label class="col-sm-3 col-lg-1 control-label" for="lastName">Email</label>
             <div class="col-sm-9 col-lg-11">
               <input class="form-control input-sm" style="width:auto;" type="email" name="emailId" ng-model="userDetails.emailId" ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}" />
+              <ng-messages for="userDetailsForm.emailId.$error" role="alert">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
             </div>
           </div>
 
@@ -54,12 +63,18 @@
           <div class="form-group" ng-class="{'has-error': (userDetailsForm.$submitted || userDetailsForm.password.$dirty) && userDetailsForm.password.$invalid}">
             <div class="col-sm-offset-3 col-lg-offset-1 col-sm-9 col-lg-11">
               <input class="form-control input-sm" style="width:auto;" type="password" name="password" ng-model="userDetails.password" ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}" ng-disabled="!userDetails.modifyPassword" placeholder="New password" ng-required="userDetails.modifyPassword" />
+              <ng-messages for="userDetailsForm.password.$error" role="alert" ng-show="userDetailsForm.$submitted || userDetailsForm.password.$dirty">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
             </div>
           </div>
 
           <div class="form-group" ng-class="{'has-error': (userDetailsForm.$submitted || userDetailsForm.confirmPassword.$dirty) && userDetailsForm.confirmPassword.$invalid}">
             <div class="col-sm-offset-3 col-lg-offset-1 col-sm-9 col-lg-11">
-              <input class="form-control input-sm" style="width:auto;" type="password" name="confirmPassword" ng-model="userDetails.confirmPassword" ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}" ng-disabled="!userDetails.modifyPassword" placeholder="Confirm password"  ng-required="userDetails.modifyPassword" />
+              <input class="form-control input-sm" style="width:auto;" type="password" name="confirmPassword" ng-model="userDetails.confirmPassword" ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}" ng-disabled="!userDetails.modifyPassword" placeholder="Confirm password" ng-required="userDetails.modifyPassword" compare-to="userDetails.password" />
+              <ng-messages for="userDetailsForm.confirmPassword.$error" role="alert" ng-show="userDetailsForm.$submitted || userDetailsForm.confirmPassword.$dirty">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
             </div>
           </div>
 
