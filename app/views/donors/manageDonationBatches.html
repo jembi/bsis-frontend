@@ -87,7 +87,7 @@
 
               <table ng-table="recentDonationBatchesTableParams" show-filter="false" class="table">
                 <tr ng-repeat="donationBatch in $data"
-                    ng-click=""
+                    ng-click="manageClinic(donationBatch); changeSelection(donationBatch);"
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': donationBatch.$selected}">
