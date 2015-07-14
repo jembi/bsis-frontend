@@ -212,7 +212,7 @@ angular.module('bsis', [
       .when('/settings', {
         templateUrl : 'views/settings.html',
         controller  : 'ConfigurationsCtrl',
-        permission: PERMISSIONS.VIEW_ADMIN_INFORMATION
+        permission: PERMISSIONS.AUTHENTICATED
       })
       .when('/locations', {
         templateUrl : 'views/settings.html',
