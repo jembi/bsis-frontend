@@ -110,7 +110,7 @@
 
               <table ng-table="recentTestBatchesTableParams" show-filter="false" class="table">
                 <tr ng-repeat="testBatch in $data"
-                    ng-click="changeSelection(testBatch);"
+                    ng-click="viewTestBatch(testBatch); changeSelection(testBatch);"
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': testBatch.$selected}">
