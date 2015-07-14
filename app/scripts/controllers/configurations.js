@@ -30,7 +30,6 @@ angular.module('bsis')
 
         }
       });
-
     };
 
     $scope.configurationsTableParams = new ngTableParams({
