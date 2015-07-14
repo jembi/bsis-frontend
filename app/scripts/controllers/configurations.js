@@ -73,7 +73,7 @@ angular.module('bsis')
 
   })
 
-  .controller('ManageConfigurationsCtrl', function ($scope, $location, ConfigurationsService, ICONS, PERMISSIONS, DATEFORMAT){
+  .controller('ManageConfigurationsCtrl', function ($scope, $location, ConfigurationsService, ICONS, PERMISSIONS, DATATYPES){
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageConfiguration';
@@ -85,6 +85,8 @@ angular.module('bsis')
     } else {
       $scope.disableConfigurationname = true;
     }
+
+    $scope.dataTypes = DATATYPES.options;
 
     $scope.saveConfiguration = function (configuration, configurationForm) {
       if (configurationForm.$valid) {

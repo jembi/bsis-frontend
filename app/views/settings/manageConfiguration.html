@@ -58,17 +58,20 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="permissions" class="col-sm-1 control-label">Type</label>
-        <div class="row col-sm-11" style="margin-left: 20px; width: 85%;">
-          <small class="error" ng-show="permissionsRequired">
-            Please select at least one permission.
-          </small>
-        </div>
-        <div id="permissions" class="row col-sm-11" style="margin-left: 20px; width: 85%;">
-          <div ng-repeat="entity in permissionList" class="row  pull-left" style="width: 175px;" tooltips="" tooltip-title="{{entity.name}}">
-              <input id="{{entity.id}}" type="checkbox" checklist-model="configuration.permissions" checklist-value="entity"/>
-              <small style="color: black;"><label style="display: inline-block; cursor: pointer; cursor: hand; margin: 0px 0px; font-size: 0.8em;" for="{{entity.id}}">{{entity.name | limitTo: 22}}</label></small>
+      <div class="row form-group col-sm-12">
+        <label for="dataType" class="col-sm-1 control-label">Data Types</label>
+        <div class="col-sm-6">
+          <div class="form-inline">
+            <select id="dataType" name="dataType" class="form-control input-sm" ng-model="configuration.dataType.id" ng-options="item.id as item.datatype for item in dataTypes" required
+                    ng-class="{'ng-invalid ng-dirty' : configurationForm.dataType.$invalid && submitted}">
+              <option value="" ng-disabled="true">DataType</option>
+            </select>
+            <div>
+              <small class="error"
+                     ng-show="(configurationForm.dataType.$error.required && (configurationForm.dataType.$dirty || submitted))">
+                This cannot be empty
+              </small>
+            </div>
           </div>
         </div>
       </div>
