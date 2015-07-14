@@ -29,6 +29,7 @@ angular.module('bsis')
     // Reset user details to their initial state
     $scope.resetUserDetails = function() {
       $scope.userDetails = angular.copy($scope.masterDetails);
+      $scope.detailsMessage = null;
       $scope.userDetailsForm.$setPristine();
       $scope.userDetailsForm.$setUntouched();
     };
