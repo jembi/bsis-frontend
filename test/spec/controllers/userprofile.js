@@ -1,7 +1,7 @@
 'use strict';
 /* global readJSON: true */
 
-describe('Controller: LoginCtrl', function () {
+describe('Controller: UserProfileCtrl', function () {
 
   beforeEach(module('bsis'));
 
