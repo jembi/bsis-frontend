@@ -43,7 +43,7 @@ angular.module('bsis')
       if ($scope.userDetails.password !== $scope.userDetails.confirmPassword) {
         $scope.detailsStyle = 'alert-danger';
         $scope.detailsMessage = 'New passwords don\'t match.';
-        form.$setValidity(false);
+        $scope.userDetailsForm.$setValidity(false);
         return;
       }
 
