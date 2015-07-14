@@ -40,13 +40,6 @@ angular.module('bsis')
         return;
       }
 
-      if ($scope.userDetails.password !== $scope.userDetails.confirmPassword) {
-        $scope.detailsStyle = 'alert-danger';
-        $scope.detailsMessage = 'New passwords don\'t match.';
-        $scope.userDetailsForm.$setValidity(false);
-        return;
-      }
-
       // Update the user details
       var update = angular.copy($scope.userDetails);
       updateUser(update, function(updatedUser) {
