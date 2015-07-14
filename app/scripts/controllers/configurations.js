@@ -24,7 +24,8 @@ angular.module('bsis')
         if (response !== false){
           data = response;
           $scope.configurations = data;
-          console.log("configurations: ",response);
+          $scope.configurationsCount = $scope.configurations.length;
+
         }
         else{
 
