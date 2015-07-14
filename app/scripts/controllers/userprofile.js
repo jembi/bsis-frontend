@@ -6,16 +6,14 @@ angular.module('bsis')
     $scope.masterDetails = {
       firstName: '',
       lastName: '',
-      emailId: ''
-    };
-    $scope.masterPassword = {
-      currentPassword: '',
+      emailId: '',
+      username: '',
+      modifyPassword: false,
       password: '',
       confirmPassword: ''
     };
 
     $scope.userDetails = {};
-    $scope.userPassword = angular.copy($scope.masterPassword);
 
     function updateUser(update, onSuccess, onError) {
       // Delete fields added by angular
@@ -42,14 +40,27 @@ angular.module('bsis')
         return;
       }
 
+      if ($scope.userDetails.password !== $scope.userDetails.confirmPassword) {
+        $scope.detailsStyle = 'alert-danger';
+        $scope.detailsMessage = 'New passwords don\'t match.';
+        form.$setValidity(false);
+        return;
+      }
+
       // Update the user details
-      var update = angular.extend({modifyPassword: false}, $scope.userDetails);
+      var update = angular.copy($scope.userDetails);
       updateUser(update, function(updatedUser) {
         $scope.masterDetails = updatedUser;
         $scope.resetUserDetails();
         $scope.detailsStyle = 'alert-success';
         $scope.detailsMessage = 'Your details were successfully updated.';
         AuthService.setLoggedOnUser(updatedUser);
+
+        if (update.modifyPassword) {
+          // Update credentials
+          var credentials = Base64.encode(updatedUser.username + ':' + update.password);
+          Authinterceptor.setCredentials(credentials);
+        }
       }, function(err) {
         console.error(err);
         $scope.detailsStyle = 'alert-danger';
@@ -57,50 +68,13 @@ angular.module('bsis')
       });
     };
 
-    $scope.resetUserPassword = function() {
-      $scope.userPassword = angular.copy($scope.masterPassword);
-      $scope.userPasswordForm.$setPristine();
-      $scope.userPasswordForm.$setUntouched();
-    };
-
-    // Update password on form submission
-    $scope.updatePassword = function() {
-      var form = $scope.userPasswordForm;
-      if (form.$invalid) {
-        $scope.passwordStyle = 'alert-danger';
-        $scope.passwordMessage = 'Please complete all of the required fields.';
-        return;
-      }
-
-      if (form.password.$modelValue !== form.confirmPassword.$modelValue) {
-        $scope.passwordStyle = 'alert-danger';
-        $scope.passwordMessage = 'New passwords don\'t match.';
-        form.$setValidity(false);
-        return;
-      }
-
-      // Update the password
-      var update = angular.extend({modifyPassword: true}, $scope.masterDetails, $scope.userPassword);
-      updateUser(update, function(updatedUser) {
-
-        // Update the logged on user
-        var credentials = Base64.encode(updatedUser.username + ':' + update.password);
-        Authinterceptor.setCredentials(credentials);
-
-        $scope.masterDetails = updatedUser;
-        $scope.resetUserPassword();
-        $scope.passwordStyle = 'alert-success';
-        $scope.passwordMessage = 'Your password was successfully changed.';
-      }, function(err) {
-        console.error(err);
-        $scope.passwordStyle = 'alert-danger';
-        $scope.passwordMessage = 'Changing password failed. Please try again.';
-      });
-    };
-
     // Fetch user details
     Api.User.get(function(response) {
-      angular.extend($scope.masterDetails, response);
+      angular.extend($scope.masterDetails, response, {
+        modifyPassword: false,
+        password: '',
+        confirmPassword: ''
+      });
       $scope.resetUserDetails();
     }, function(err) {
       console.error(err);
