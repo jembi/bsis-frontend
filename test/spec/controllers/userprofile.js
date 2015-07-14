@@ -36,18 +36,6 @@ describe('Controller: UserProfileCtrl', function () {
 
   describe('initial load', function() {
 
-    it('should set the user details', function() {
-      httpBackend.flush(1);
-
-      expect(scope.userDetails.firstName).toBe('Super');
-      expect(scope.userDetails.lastName).toBe('User');
-      expect(scope.userDetails.emailId).toBe('xxxx@jembi.org');
-      expect(scope.userDetails.username).toBe('superuser');
-      expect(scope.userDetails.modifyPassword).toBe(false);
-      expect(scope.userDetails.password).toBe('');
-      expect(scope.userDetails.confirmPassword).toBe('');
-    });
-
     it('should update the master details', function() {
       httpBackend.flush(1);
 
@@ -58,6 +46,14 @@ describe('Controller: UserProfileCtrl', function () {
       expect(scope.masterDetails.modifyPassword).toBe(false);
       expect(scope.masterDetails.password).toBe('');
       expect(scope.masterDetails.confirmPassword).toBe('');
+    });
+
+    it('should reset the user details', function() {
+      spyOn(scope, 'resetUserDetails');
+
+      httpBackend.flush(1);
+
+      expect(scope.resetUserDetails).toHaveBeenCalled();
     });
   });
 
