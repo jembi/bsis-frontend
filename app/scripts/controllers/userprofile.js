@@ -28,8 +28,11 @@ angular.module('bsis')
     $scope.resetUserDetails = function() {
       $scope.userDetails = angular.copy($scope.masterDetails);
       $scope.detailsMessage = null;
-      $scope.userDetailsForm.$setPristine();
-      $scope.userDetailsForm.$setUntouched();
+      if ($scope.userDetailsForm) {
+        // If the form exists, reset it
+        $scope.userDetailsForm.$setPristine();
+        $scope.userDetailsForm.$setUntouched();
+      }
     };
 
     // Update user details on form submission
