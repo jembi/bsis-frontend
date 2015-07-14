@@ -21,7 +21,7 @@ describe('Controller: ConfigurationsCtrl', function () {
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $httpBackend, $location) {
-    
+
     mockData = readJSON('test/mockData/generalConfigs.json');
     httpBackend = $httpBackend;
     httpBackend.when('GET', new RegExp('.*/configurations')).respond(mockData);
