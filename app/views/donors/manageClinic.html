@@ -32,7 +32,7 @@
           <em><a href="" ng-click="closeDonationBatchCancel()"> Cancel</a></em>
         </span>
         <span ng-if="donationBatchToClose != donationBatch.id">
-          <em><a href="" ng-click="closeDonationBatchCheck(donationBatch)">Close Batch</a></em>
+          <em><a ng-if="donationBatch.isClosed!=true" href="" ng-click="closeDonationBatchCheck(donationBatch)">Close Batch</a></em>
         </span>
       </span>
       </small>
