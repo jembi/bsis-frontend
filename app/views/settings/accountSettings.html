@@ -11,21 +11,16 @@
             <span role="alert" ng-class="['alert', detailsStyle]">{{detailsMessage}}</span>
           </div>
 
-          <div class="form-group" ng-class="{'has-error': (userDetailsForm.$submitted || userDetailsForm.firstName.$dirty) && userDetailsForm.firstName.$invalid}">
-            <label class="col-sm-3 col-lg-1 control-label" for="firstName">First Name</label>
-            <div class="col-sm-9 col-lg-11">
-              <input size="34" class="form-control input-sm" style="width:auto;" type="text" name="firstName" ng-model="userDetails.firstName" ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}" required />
-              <ng-messages for="userDetailsForm.firstName.$error" role="alert" ng-show="userDetailsForm.$submitted || userDetailsForm.firstName.$dirty">
-                <ng-messages-include src="messages.html"></ng-messages-include>
-              </ng-messages>
-            </div>
-          </div>
-
-          <div class="form-group" ng-class="{'has-error': (userDetailsForm.$submitted || userDetailsForm.lastName.$dirty) && userDetailsForm.lastName.$invalid}">
-            <label class="col-sm-3 col-lg-1 control-label" for="lastName">Last Name</label>
-            <div class="col-sm-9 col-lg-11">
-              <input size="34" class="form-control input-sm" style="width:auto;" type="text" name="lastName" ng-model="userDetails.lastName" ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}" required />
-              <ng-messages for="userDetailsForm.lastName.$error" role="alert" ng-show="userDetailsForm.$submitted || userDetailsForm.lastName.$dirty">
+          <div class="form-group">
+            <label class="col-sm-3 col-lg-1 control-label">Name</label>
+            <div class="col-sm-9 col-lg-11 form-inline">
+              <div class="form-group" ng-class="{'has-error': (userDetailsForm.$submitted || userDetailsForm.firstName.$dirty) && userDetailsForm.firstName.$invalid}" style="margin-left:0;margin-right:0;">
+                <input size="15" class="form-control input-sm" style="width:auto;" type="text" name="firstName" ng-model="userDetails.firstName" ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}" placeholder="First" required />
+              </div>
+              <div class="form-group" ng-class="{'has-error': (userDetailsForm.$submitted || userDetailsForm.lastName.$dirty) && userDetailsForm.lastName.$invalid}" style="margin-left:0;margin-right:0;">
+                <input size="15" class="form-control input-sm" style="width:auto;" type="text" name="lastName" ng-model="userDetails.lastName" ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}" placeholder="Last" required />
+              </div>
+              <ng-messages for="userDetailsForm.firstName.$invalid ? userDetailsForm.firstName.$error : userDetailsForm.lastName.$invalid ? userDetailsForm.lastName.$error : {}" role="alert" ng-show="userDetailsForm.$submitted || userDetailsForm.firstName.$dirty || userDetailsForm.lastName.$dirty">
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
             </div>
