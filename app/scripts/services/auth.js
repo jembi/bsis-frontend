@@ -37,10 +37,15 @@ angular.module('bsis')
       expires: expiryTime
     };
 
+    $rootScope.displayHeader = true;
+    $rootScope.sessionUserName = session.sessionUserName;
+    $rootScope.sessionUserPermissions = session.sessionUserPermissions;
+
     localStorage.setItem('consoleSession', angular.toJson(session));
   }
 
   function setLoggedOnUser(user) {
+    $rootScope.user = user;
     loggedOnUser = user;
     localStorage.setItem('loggedOnUser', angular.toJson(loggedOnUser));
     refreshSession();
@@ -64,8 +69,6 @@ angular.module('bsis')
         setLoggedOnUser(user);
         Authinterceptor.setCredentials(encodedCredentials);
 
-        $rootScope.user = user;
-        $rootScope.displayHeader = true;
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 
         onSuccess(user);
@@ -103,10 +106,10 @@ angular.module('bsis')
 
     refreshSession: function() {
       refreshSession();
+    },
 
-      $rootScope.displayHeader = true;
-      $rootScope.sessionUserName = session.sessionUserName;
-      $rootScope.sessionUserPermissions = session.sessionUserPermissions;
+    setLoggedOnUser: function(user) {
+      setLoggedOnUser(user);
     },
 
     // Only for testing
