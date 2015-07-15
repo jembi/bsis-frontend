@@ -56,6 +56,11 @@ describe('Controller: ConfigurationsCtrl', function () {
 
       scope.addNewConfiguration();
       expect(location.path()).toBe('/manageConfiguration');
+      expect(scope.configuration.name).toBe('');
+      expect(scope.configuration.description).toBe('');
+      expect(scope.configuration.value).toBe('');
+      expect(scope.configuration.dataType.id).toBe();
+      expect(scope.configuration.dataType.datatype).toBe('');
 
     });
 
@@ -119,7 +124,7 @@ describe('Controller: ManageConfigurationsCtrl', function() {
 
   describe('*saveConfiguration()', function (){
 
-    it('should route to the appropriate method', function () {
+    it('should route to the appropriate method when the form is submitted', function () {
       createController();
 
       spyOn(scope, 'addConfiguration');
@@ -138,10 +143,11 @@ describe('Controller: ManageConfigurationsCtrl', function() {
       var configurationForm = {$valid:true};
       scope.saveConfiguration(configuration, configurationForm);
       expect(scope.addConfiguration).toHaveBeenCalledWith(configuration, configurationForm);
+
+      //Add a configuration id, to show that you are editing an existing form
       configuration.id = 1;
       scope.saveConfiguration(configuration, configurationForm);
       expect(scope.updateConfiguration).toHaveBeenCalledWith(configuration, configurationForm);
-
 
     });
 
