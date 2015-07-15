@@ -19,6 +19,9 @@ angular.module('bsis')
         $scope.selection = $location.path();
         $location.path($scope.initialView);
         return true;
+      } else if ($location.path() === "/manageConfiguration" && path === "/configurations") {
+        $scope.selection = $location.path();
+        return true;
       } else if ($location.path() === "/manageRole" && path === "/roles") {
         $scope.selection = $location.path();
         return true;

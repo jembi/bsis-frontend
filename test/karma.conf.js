@@ -10,7 +10,7 @@ module.exports = function(config){
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-sanitize/angular-sanitize.js',
       'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'app/bower_components/ng-table/ng-table.js',
+      'app/bower_components/ng-table/dist/ng-table.js',
       'app/bower_components/angular-xeditable/dist/js/xeditable.js',
       'app/bower_components/angular-ui-select/dist/select.js',
       'app/bower_components/karma-read-json/karma-read-json.js',

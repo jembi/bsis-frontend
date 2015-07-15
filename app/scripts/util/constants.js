@@ -221,6 +221,26 @@ angular.module('bsis')
   .constant('RH', {
     options: ["+","-"]
   })
+  .constant('DATATYPES', {
+    options: [
+      {
+        id: 1,
+        datatype: "text"
+      },
+      {
+        "id": 2,
+        "datatype": "integer"
+      },
+      {
+        "id": 3,
+        "datatype": "decimal"
+      },
+      {
+        "id": 4,
+        "datatype": "boolean"
+      }
+    ]
+  })
 ;
 
   
