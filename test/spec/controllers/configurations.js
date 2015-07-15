@@ -56,11 +56,6 @@ describe('Controller: ConfigurationsCtrl', function () {
 
       scope.addNewConfiguration();
       expect(location.path()).toBe('/manageConfiguration');
-      expect(scope.configuration.name).toBe('');
-      expect(scope.configuration.description).toBe('');
-      expect(scope.configuration.value).toBe('');
-      expect(scope.configuration.dataType.id).toBe();
-      expect(scope.configuration.dataType.datatype).toBe('');
 
     });
 
