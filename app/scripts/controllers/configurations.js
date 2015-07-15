@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ConfigurationsCtrl', function ($scope, $location, ConfigurationsService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('ConfigurationsCtrl', function ($scope, $location, ConfigurationsService, ICONS, PERMISSIONS) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -24,24 +24,18 @@ angular.module('bsis')
         if (response !== false){
           data = response;
           $scope.configurations = data;
-          console.log("configurations: ",response);
-        }
-        else{
-
+          console.log('configurations: ', response);
         }
       });
 
     };
 
     $scope.getConfiguration = function () {
-      ConfigurationsService.getConfiguration(1,function(response){
+      ConfigurationsService.getConfiguration(1, function(response){
         if (response !== false){
           //data = response;
           //$scope.data = data;
-          console.log("configuration id 1: ",response);
-        }
-        else{
-
+          console.log('configuration id 1: ', response);
         }
       });
 
