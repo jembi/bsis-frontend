@@ -6,7 +6,7 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
 
-    var data = [{}];
+    var data = [];
     $scope.data = data;
     $scope.configurations = {};
 
@@ -23,6 +23,7 @@ angular.module('bsis')
       ConfigurationsService.getConfigurations(function(response){
         if (response !== false){
           data = response;
+          $scope.data = data;
           $scope.configurations = data;
           $scope.configurationsCount = $scope.configurations.length;
 

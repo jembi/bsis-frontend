@@ -8,7 +8,7 @@
             <em> {{configurationsCount}} configuration(s) found </em> <span has-permission="{{permissions.MANAGE_CONFIGURATIONS}}"> | <em> <a href="" ng-click="addNewConfiguration()" >Add New Configuration</a></em> </span>
         </p>
         <table ng-table="configurationsTableParams" show-filter="false" class="table">
-          <tr ng-repeat="configuration in configurations"
+          <tr ng-repeat="configuration in $data"
             ng-click="changeSelection(configuration); manageConfiguration(configuration);"
             ng-mouseenter="this.$selected = true"
             ng-mouseleave="this.$selected = false"

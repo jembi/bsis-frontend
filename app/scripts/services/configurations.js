@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('bsis')
-.factory('ConfigurationsService', function ($http, Api, $filter) {
+.factory('ConfigurationsService', function ($http, Api, $filter, USERCONFIG) {
 
   var configurationObj = {};
   return {
 
     getConfigurations: function(response){
       Api.Configurations.get({}, function (apiResponse) {
+        USERCONFIG = apiResponse;
         response(apiResponse.configurations);
       }, function (){
         response(false);
@@ -16,7 +17,6 @@ angular.module('bsis')
 
     getConfigurationById: function (id, response) {
       var apiResponse = Api.Configurations.get({id: id}, function(){
-        console.log("configuration response: ", apiResponse);
         response(apiResponse);
       }, function (){
         response(false);
