@@ -76,3 +76,75 @@ describe('Controller: ConfigurationsCtrl', function () {
 
   });
 });
+
+describe('Controller: ManageConfigurationsCtrl', function() {
+  // load the controller's module
+  beforeEach(module('bsis'));
+
+
+  // setup system & user config constants
+  beforeEach(function () {
+    module('bsis', function ($provide) {
+      $provide.constant('SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json'));
+      $provide.constant('USERCONFIG', readJSON('test/mockData/userconfig.json'));
+    });
+
+  });
+
+  // instantiate service
+  var scope, createController, httpBackend, location, mockData;
+
+  // Initialize the controller and a mock scope
+  beforeEach(inject(function ($controller, $rootScope, $httpBackend, $location) {
+
+    mockData = readJSON('test/mockData/generalConfigs.json');
+    httpBackend = $httpBackend;
+    httpBackend.when('GET', new RegExp('.*/configurations')).respond(mockData);
+
+
+
+    createController = function() {
+      scope = $rootScope.$new();
+      location = $location;
+
+      return $controller('ManageConfigurationsCtrl', { $scope: scope, $location: location });
+    };
+
+  }));
+
+  afterEach(function() {
+    httpBackend.verifyNoOutstandingExpectation();
+    httpBackend.verifyNoOutstandingRequest();
+  });
+
+  describe('*saveConfiguration()', function (){
+
+    it('should route to the appropriate method', function () {
+      createController();
+
+      spyOn(scope, 'addConfiguration');
+      spyOn(scope, 'updateConfiguration');
+
+      var configuration = {
+        name: 'name',
+        description: 'description',
+        value: 'value',
+        dataType : {
+          id: 1,
+          datatype: 'text'
+        }
+      };
+
+      var configurationForm = {$valid:true};
+      scope.saveConfiguration(configuration, configurationForm);
+      expect(scope.addConfiguration).toHaveBeenCalledWith(configuration, configurationForm);
+      configuration.id = 1;
+      scope.saveConfiguration(configuration, configurationForm);
+      expect(scope.updateConfiguration).toHaveBeenCalledWith(configuration, configurationForm);
+
+
+    });
+
+  });
+
+});
