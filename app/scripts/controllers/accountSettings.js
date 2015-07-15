@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('UserProfileCtrl', function ($scope, Api, Authinterceptor, AuthService, Base64) {
+  .controller('AccountSettingsCtrl', function ($scope, Api, Authinterceptor, AuthService, Base64) {
 
     $scope.masterDetails = {
       firstName: '',

@@ -228,7 +228,7 @@ var app = angular.module('bsis', [
       })
       .when('/accountSettings', {
         templateUrl: 'views/settings.html',
-        controller: 'UserProfileCtrl',
+        controller: 'AccountSettingsCtrl',
         permission: PERMISSIONS.AUTHENTICATED
       })
       .when('/users', {

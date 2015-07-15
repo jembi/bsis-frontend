@@ -1,7 +1,7 @@
 'use strict';
 /* global readJSON: true */
 
-describe('Controller: UserProfileCtrl', function () {
+describe('Controller: AccountSettingsCtrl', function () {
 
   beforeEach(module('bsis'));
 
@@ -23,7 +23,7 @@ describe('Controller: UserProfileCtrl', function () {
       $setUntouched: angular.noop
     };
 
-    $controller('UserProfileCtrl', {$scope: scope});
+    $controller('AccountSettingsCtrl', {$scope: scope});
 
     httpBackend = $httpBackend;
     $httpBackend.expectGET(/\/users\/login-user-details$/).respond(200, readJSON('test/mockData/superuser.json'));
