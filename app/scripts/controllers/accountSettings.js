@@ -39,7 +39,7 @@ angular.module('bsis')
     // Update user details on form submission
     $scope.updateUserDetails = function() {
       if ($scope.userDetailsForm.$invalid) {
-        $scope.detailsStyle = 'alert-danger';
+        $scope.detailsStyle = 'danger';
         $scope.detailsMessage = 'Please complete all of the required fields.';
         return;
       }
@@ -49,7 +49,7 @@ angular.module('bsis')
       updateUser(update, function(updatedUser) {
         $scope.masterDetails = updatedUser;
         $scope.resetUserDetails();
-        $scope.detailsStyle = 'alert-success';
+        $scope.detailsStyle = 'success';
         $scope.detailsMessage = 'Your details were successfully updated.';
         AuthService.setLoggedOnUser(updatedUser);
 
@@ -59,7 +59,7 @@ angular.module('bsis')
           Authinterceptor.setCredentials(credentials);
         }
       }, function(response) {
-        $scope.detailsStyle = 'alert-danger';
+        $scope.detailsStyle = 'danger';
         if (response.data && response.data['user.password']) {
           $scope.detailsMessage = response.data['user.password'];
         } else {
@@ -79,7 +79,7 @@ angular.module('bsis')
       $scope.resetUserDetails();
     }, function(err) {
       console.error(err);
-      $scope.detailsStyle = 'alert-danger';
+      $scope.detailsStyle = 'danger';
       $scope.detailsMessage = 'Loading details failed. Please try refreshing.';
     });
 

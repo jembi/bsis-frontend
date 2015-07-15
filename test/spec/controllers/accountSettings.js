@@ -116,7 +116,7 @@ describe('Controller: AccountSettingsCtrl', function () {
 
       scope.updateUserDetails();
 
-      expect(scope.detailsStyle).toBe('alert-danger');
+      expect(scope.detailsStyle).toBe('danger');
       expect(scope.detailsMessage).toBe('Please complete all of the required fields.');
     });
 
@@ -133,7 +133,7 @@ describe('Controller: AccountSettingsCtrl', function () {
 
       expect(scope.masterDetails.lastName).toBe('Tester');
       expect(scope.resetUserDetails).toHaveBeenCalled();
-      expect(scope.detailsStyle).toBe('alert-success');
+      expect(scope.detailsStyle).toBe('success');
       expect(scope.detailsMessage).toBe('Your details were successfully updated.');
       expect(AuthService.setLoggedOnUser).toHaveBeenCalled();
     }));
@@ -161,7 +161,7 @@ describe('Controller: AccountSettingsCtrl', function () {
       scope.updateUserDetails();
       httpBackend.flush(1);
 
-      expect(scope.detailsStyle).toBe('alert-danger');
+      expect(scope.detailsStyle).toBe('danger');
       expect(scope.detailsMessage).toBe('Updating details failed. Please try again.');
     });
 
@@ -174,7 +174,7 @@ describe('Controller: AccountSettingsCtrl', function () {
       scope.updateUserDetails();
       httpBackend.flush(1);
 
-      expect(scope.detailsStyle).toBe('alert-danger');
+      expect(scope.detailsStyle).toBe('danger');
       expect(scope.detailsMessage).toBe('Current password does not match');
     });
   });
