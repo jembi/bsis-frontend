@@ -9,6 +9,7 @@ angular.module('bsis')
       emailId: '',
       username: '',
       modifyPassword: false,
+      currentPassword: '',
       password: '',
       confirmPassword: ''
     };
@@ -57,9 +58,13 @@ angular.module('bsis')
           var credentials = Base64.encode(updatedUser.username + ':' + update.password);
           Authinterceptor.setCredentials(credentials);
         }
-      }, function() {
+      }, function(response) {
         $scope.detailsStyle = 'alert-danger';
-        $scope.detailsMessage = 'Updating details failed. Please try again.';
+        if (response.data && response.data['user.password']) {
+          $scope.detailsMessage = response.data['user.password'];
+        } else {
+          $scope.detailsMessage = 'Updating details failed. Please try again.';
+        }
       });
     };
 
@@ -67,6 +72,7 @@ angular.module('bsis')
     Api.User.get(function(response) {
       angular.extend($scope.masterDetails, response, {
         modifyPassword: false,
+        currentPassword: '',
         password: '',
         confirmPassword: ''
       });

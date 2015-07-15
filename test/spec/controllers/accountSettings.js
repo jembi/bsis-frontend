@@ -44,6 +44,7 @@ describe('Controller: AccountSettingsCtrl', function () {
       expect(scope.masterDetails.emailId).toBe('xxxx@jembi.org');
       expect(scope.masterDetails.username).toBe('superuser');
       expect(scope.masterDetails.modifyPassword).toBe(false);
+      expect(scope.masterDetails.currentPassword).toBe('');
       expect(scope.masterDetails.password).toBe('');
       expect(scope.masterDetails.confirmPassword).toBe('');
     });
@@ -87,6 +88,7 @@ describe('Controller: AccountSettingsCtrl', function () {
       scope.userDetails.emailId = 'test@jembi.org';
       scope.userDetails.username = 'testuser';
       scope.userDetails.modifyPassword = true;
+      scope.userDetails.currentPassword = 'oldPassword';
       scope.userDetails.password = 'test';
       scope.userDetails.confirmPassword = 'test';
 
@@ -97,6 +99,7 @@ describe('Controller: AccountSettingsCtrl', function () {
       expect(scope.userDetails.emailId).toBe('xxxx@jembi.org');
       expect(scope.userDetails.username).toBe('superuser');
       expect(scope.userDetails.modifyPassword).toBe(false);
+      expect(scope.userDetails.currentPassword).toBe('');
       expect(scope.userDetails.password).toBe('');
       expect(scope.userDetails.confirmPassword).toBe('');
     });
@@ -160,6 +163,19 @@ describe('Controller: AccountSettingsCtrl', function () {
 
       expect(scope.detailsStyle).toBe('alert-danger');
       expect(scope.detailsMessage).toBe('Updating details failed. Please try again.');
+    });
+
+    it('should display the returned error message when updating the password fails', function() {
+
+      httpBackend.expectPUT(/\/users$/, scope.userDetails).respond(400, {
+        'user.password': 'Current password does not match'
+      });
+
+      scope.updateUserDetails();
+      httpBackend.flush(1);
+
+      expect(scope.detailsStyle).toBe('alert-danger');
+      expect(scope.detailsMessage).toBe('Current password does not match');
     });
   });
 });

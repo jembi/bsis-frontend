@@ -55,6 +55,15 @@
             </div>
           </div>
 
+          <div class="form-group" ng-class="{'has-error': (userDetailsForm.$submitted || userDetailsForm.currentPassword.$dirty) && userDetailsForm.currentPassword.$invalid}">
+            <div class="col-sm-offset-3 col-lg-offset-1 col-sm-9 col-lg-11">
+              <input size="34" class="form-control input-sm" style="width:auto;" type="password" name="currentPassword" ng-model="userDetails.currentPassword" ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}" ng-disabled="!userDetails.modifyPassword" placeholder="Current password" ng-required="userDetails.modifyPassword" />
+              <ng-messages for="userDetailsForm.currentPassword.$error" role="alert" ng-show="userDetailsForm.$submitted || userDetailsForm.currentPassword.$dirty">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
+            </div>
+          </div>
+
           <div class="form-group" ng-class="{'has-error': (userDetailsForm.$submitted || userDetailsForm.password.$dirty) && userDetailsForm.password.$invalid}">
             <div class="col-sm-offset-3 col-lg-offset-1 col-sm-9 col-lg-11">
               <input size="34" class="form-control input-sm" style="width:auto;" type="password" name="password" ng-model="userDetails.password" ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}" ng-disabled="!userDetails.modifyPassword" placeholder="New password" ng-required="userDetails.modifyPassword" />
