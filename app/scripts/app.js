@@ -226,7 +226,7 @@ var app = angular.module('bsis', [
         controller  : 'ConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
-      .when('/profile', {
+      .when('/accountSettings', {
         templateUrl: 'views/settings.html',
         controller: 'UserProfileCtrl',
         permission: PERMISSIONS.AUTHENTICATED

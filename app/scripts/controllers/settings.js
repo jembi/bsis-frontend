@@ -6,7 +6,7 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
 
-    $scope.initialView = '/profile';
+    $scope.initialView = '/accountSettings';
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
