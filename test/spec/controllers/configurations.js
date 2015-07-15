@@ -59,7 +59,7 @@ describe('Controller: ConfigurationsCtrl', function () {
 
     });
 
-    it('should open the manage config page', function () {
+    it('should open the manage config page and populate the fields with data', function () {
       httpBackend.expectGET(new RegExp('.*/configurations'));
       createController();
       httpBackend.flush();
