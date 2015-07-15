@@ -86,7 +86,7 @@ angular.module('bsis')
       var donors = Api.DonorCommunicationsSearch.query({
         bloodGroups: donorSearch.bloodGroups,
         donorPanels: donorSearch.donorPanels,
-        clinicDate: donorSearch.clinicDate,
+        clinicDate: $filter('date')(donorSearch.clinicDate, 'yyyy-MM-dd'),
         lastDonationFromDate: $filter('date')(donorSearch.lastDonationFromDate, 'yyyy-MM-dd'),
         lastDonationToDate: $filter('date')(donorSearch.lastDonationToDate, 'yyyy-MM-dd'),
         anyBloodGroup: donorSearch.anyBloodGroup,
