@@ -26,7 +26,7 @@ describe('Controller: UserProfileCtrl', function () {
     $controller('UserProfileCtrl', {$scope: scope});
 
     httpBackend = $httpBackend;
-    $httpBackend.whenGET(/\/users\/login-user-details$/).respond(readJSON('test/mockData/superuser.json'));
+    $httpBackend.expectGET(/\/users\/login-user-details$/).respond(200, readJSON('test/mockData/superuser.json'));
   }));
 
   afterEach(function() {
@@ -99,6 +99,67 @@ describe('Controller: UserProfileCtrl', function () {
       expect(scope.userDetails.modifyPassword).toBe(false);
       expect(scope.userDetails.password).toBe('');
       expect(scope.userDetails.confirmPassword).toBe('');
+    });
+  });
+
+  describe('updateUserDetails()', function() {
+
+    beforeEach(function() {
+      httpBackend.flush(1);
+    });
+
+    it('should display an error message if the form is invalid', function() {
+      scope.userDetailsForm.$invalid = true;
+
+      scope.updateUserDetails();
+
+      expect(scope.detailsStyle).toBe('alert-danger');
+      expect(scope.detailsMessage).toBe('Please complete all of the required fields.');
+    });
+
+    it('should update the user details and display a message on success', inject(function(AuthService) {
+      spyOn(scope, 'resetUserDetails');
+      spyOn(AuthService, 'setLoggedOnUser');
+
+      scope.userDetails.lastName = 'Tester';
+
+      httpBackend.expectPUT(/\/users$/, scope.userDetails).respond(200, scope.userDetails);
+
+      scope.updateUserDetails();
+      httpBackend.flush(1);
+
+      expect(scope.masterDetails.lastName).toBe('Tester');
+      expect(scope.resetUserDetails).toHaveBeenCalled();
+      expect(scope.detailsStyle).toBe('alert-success');
+      expect(scope.detailsMessage).toBe('Your details were successfully updated.');
+      expect(AuthService.setLoggedOnUser).toHaveBeenCalled();
+    }));
+
+    it('should update the credentials when the password is changed', inject(function(Authinterceptor, Base64) {
+      spyOn(Authinterceptor, 'setCredentials');
+
+      scope.userDetails.modifyPassword = true;
+      scope.userDetails.password = 'newPassword';
+      scope.userDetails.confirmPassword = 'newPassword';
+
+      httpBackend.expectPUT(/\/users$/, scope.userDetails).respond(200, scope.userDetails);
+
+      scope.updateUserDetails();
+      httpBackend.flush(1);
+
+      var credentials = Base64.encode('superuser:newPassword');
+      expect(Authinterceptor.setCredentials).toHaveBeenCalledWith(credentials);
+    }));
+
+    it('should display an error message on failure', function() {
+
+      httpBackend.expectPUT(/\/users$/, scope.userDetails).respond(503, 'Service Unavailable');
+
+      scope.updateUserDetails();
+      httpBackend.flush(1);
+
+      expect(scope.detailsStyle).toBe('alert-danger');
+      expect(scope.detailsMessage).toBe('Updating details failed. Please try again.');
     });
   });
 });

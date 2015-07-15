@@ -57,8 +57,7 @@ angular.module('bsis')
           var credentials = Base64.encode(updatedUser.username + ':' + update.password);
           Authinterceptor.setCredentials(credentials);
         }
-      }, function(err) {
-        console.error(err);
+      }, function() {
         $scope.detailsStyle = 'alert-danger';
         $scope.detailsMessage = 'Updating details failed. Please try again.';
       });
