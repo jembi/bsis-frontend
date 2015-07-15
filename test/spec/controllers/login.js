@@ -67,12 +67,11 @@ describe('Controller: LoginCtrl', function () {
     it('should run the login() and reject login - loginAlert exists', function () {
       createController();
 
-      var credentials = {username: 'superuser', password: 'superuser'};
+      var credentials = {username: 'superuser', password: ''};
       var loginForm = { $valid: false, $setPristine: function(){} };
       
       // run the login function
       scope.login( credentials, loginForm );
-      httpBackend.flush();
 
       // loginAlert should have a message and loginInvalid should be true
       expect( scope.loginAlert ).toBe( 'Please supply all fields' );

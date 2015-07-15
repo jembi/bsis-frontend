@@ -828,7 +828,6 @@ angular.module('bsis')
       
       $scope.donationBatch = item;
       DonorService.setDonationBatch($scope.donationBatch);
-      console.log("VIEW DONATIONBATCH - ", $scope.donationBatch);
       data = $scope.donationBatch.collectionsInBatch;
       $scope.data = data;
       $location.path("/manageClinic");

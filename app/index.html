@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html  > <!--<![endif]-->
 
-  <html ng-app="bsis">
   <head>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -35,19 +34,19 @@
 
   </head>
 
-<body ng-app="bsis" style="padding-bottom: 0px;">
+  <body ng-cloak style="padding-bottom: 0px;">
 
-  <div ng-if="displayHeader">
-    <div ng-include="'views/header.html'"></div>
-  </div>
+    <div ng-if="displayHeader">
+      <div ng-include="'views/header.html'"></div>
+    </div>
 
-  <div id="wrap">
+    <div id="wrap">
 
-    <!-- angular templating -->
-    <!-- this is where content will be injected -->
-    <div ng-view></div>
+      <!-- angular templating -->
+      <!-- this is where content will be injected -->
+      <div ng-view></div>
 
-  </div>
+    </div>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
@@ -82,6 +81,7 @@
     <script src="scripts/services/mobile.js"></script>
     <script src="scripts/services/locations.js"></script>
     <script src="scripts/services/configurations.js"></script>
+    <script src="scripts/services/users.js"></script>
     <script src="scripts/services/roles.js"></script>
     <script src="scripts/services/packTypes.js"></script>
     <script src="scripts/services/base64.js"></script>
@@ -96,6 +96,7 @@
     <script src="scripts/controllers/mobile.js"></script>
     <script src="scripts/controllers/locations.js"></script>
     <script src="scripts/controllers/configurations.js"></script>
+    <script src="scripts/controllers/users.js"></script>
     <script src="scripts/controllers/roles.js"></script>
     <script src="scripts/controllers/settings.js"></script>
     <script src="scripts/controllers/packTypes.js"></script>
@@ -105,5 +106,5 @@
     <script src="scripts/util/filters.js"></script>
     <!-- endbuild -->
 
-</body>
+  </body>
 </html>
