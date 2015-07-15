@@ -9,7 +9,7 @@
     "angular": "1.4.2",
     "angular-route": "1.2.x",
     "angular-loader": "1.2.x",
-    "angular-bootstrap": "0.13.0",
+    "angular-bootstrap": "0.11.0",
     "ng-table": "0.5.5",
     "angular-mocks": "1.4.x",
     "angular-resource": "1.4.x",
