@@ -124,7 +124,11 @@ angular.module('bsis')
   // else if on settings page, set menu to SETTINGS
   else if(~$location.path().indexOf('settings')        ||
       ~$location.path().indexOf('locations')           ||
-      ~$location.path().indexOf('configurations')
+      ~$location.path().indexOf('configurations')      ||
+      ~$location.path().indexOf('users')               ||
+      ~$location.path().indexOf('manageUser')          ||
+      ~$location.path().indexOf('roles')               ||
+      ~$location.path().indexOf('manageRole')
     ){
       $scope.currentSection = 'SETTINGS';
     }
@@ -205,9 +209,13 @@ angular.module('bsis')
       }
 
     // else if on settings page, set menu to SETTINGS
-    else if(~$location.path().indexOf('settings')        ||
+    else if(~$location.path().indexOf('settings')      ||
       ~$location.path().indexOf('locations')           ||
-      ~$location.path().indexOf('configurations')
+      ~$location.path().indexOf('configurations')      ||
+      ~$location.path().indexOf('users')               ||
+      ~$location.path().indexOf('manageUser')          ||
+      ~$location.path().indexOf('roles')               ||
+      ~$location.path().indexOf('manageRole')
       ){
         $scope.currentSection = 'SETTINGS';
       }

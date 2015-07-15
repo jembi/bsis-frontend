@@ -214,7 +214,7 @@ var app = angular.module('bsis', [
       .when('/settings', {
         templateUrl : 'views/settings.html',
         controller  : 'SettingsCtrl',
-        permission: PERMISSIONS.VIEW_ADMIN_INFORMATION
+        permission: PERMISSIONS.AUTHENTICATED
       })
       .when('/locations', {
         templateUrl : 'views/settings.html',
@@ -231,7 +231,11 @@ var app = angular.module('bsis', [
         controller  : 'ManageConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
-
+      .when('/accountSettings', {
+        templateUrl: 'views/settings.html',
+        controller: 'AccountSettingsCtrl',
+        permission: PERMISSIONS.AUTHENTICATED
+      })
       .when('/users', {
         templateUrl : 'views/settings.html',
         controller : 'UsersCtrl',

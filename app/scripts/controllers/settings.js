@@ -6,7 +6,7 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
 
-    $scope.initialView = '/configurations';
+    $scope.initialView = '/accountSettings';
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
@@ -22,11 +22,10 @@ angular.module('bsis')
       } else if ($location.path() === "/manageRole" && path === "/roles") {
         $scope.selection = $location.path();
         return true;
-      }
-      else if ($location.path() === "/manageUser" && path === "/users") {
+      } else if ($location.path() === "/manageUser" && path === "/users") {
         $scope.selection = $location.path();
         return true;
-      }else {
+      }  else {
         return false;
       }
     };
