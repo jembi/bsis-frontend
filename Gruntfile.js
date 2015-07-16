@@ -269,7 +269,8 @@ module.exports = function (grunt) {
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'fonts/*',
-            'data/*' /* include mockAPI JSON file directory in /dist build */
+            'config/*'
+
           ]
         }, {
           expand: true,
