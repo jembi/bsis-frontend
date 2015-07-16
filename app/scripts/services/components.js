@@ -48,8 +48,8 @@ angular.module('bsis')
         donationIdentificationNumber: componentsSearch.donationIdentificationNumber,
         componentTypes: componentsSearch.componentTypes,
         status: componentsSearch.status,
-        donationDateFrom: $filter('date')(componentsSearch.donationDateFrom, 'yyyy-MM-dd'),
-        donationDateTo: $filter('date')(componentsSearch.donationDateTo, 'yyyy-MM-dd')
+        donationDateFrom: componentsSearch.donationDateFrom,
+        donationDateTo: componentsSearch.donationDateTo
       }, function () {
         console.log("components response: ", components);
         response(components);

@@ -83,15 +83,9 @@ angular.module('bsis')
       });
     },
     findDonorListDonors: function (donorSearch, response) {
-      var donors = Api.DonorCommunicationsSearch.query({
-        bloodGroups: donorSearch.bloodGroups,
-        donorPanels: donorSearch.donorPanels,
-        clinicDate: $filter('date')(donorSearch.clinicDate, 'yyyy-MM-dd'),
-        lastDonationFromDate: $filter('date')(donorSearch.lastDonationFromDate, 'yyyy-MM-dd'),
-        lastDonationToDate: $filter('date')(donorSearch.lastDonationToDate, 'yyyy-MM-dd'),
-        anyBloodGroup: donorSearch.anyBloodGroup,
-        noBloodGroup: donorSearch.noBloodGroup
-      }, function () {
+      var donors = Api.DonorCommunicationsSearch.query({bloodGroups: donorSearch.bloodGroups, donorPanels: donorSearch.donorPanels,
+          clinicDate: donorSearch.clinicDate, lastDonationFromDate: donorSearch.lastDonationFromDate,
+          lastDonationToDate: donorSearch.lastDonationToDate, anyBloodGroup: donorSearch.anyBloodGroup, noBloodGroup: donorSearch.noBloodGroup}, function(){
         response(donors.donors);
       }, function () {
         response(false);
