@@ -5,6 +5,7 @@
   "isAdmin":true,
   "userRole": "Super User",
   "username": "superuser",
+  "emailId": "xxxx@jembi.org",
   "roles":[
     { 
       "@id" :1, 
