@@ -11,6 +11,7 @@ var app = angular.module('bsis', [
   'checklist-model',
   'ngMessages',
   '720kb.tooltips'
+
 ])
   .config(function($routeProvider, PERMISSIONS) {
     $routeProvider
@@ -408,9 +409,66 @@ var app = angular.module('bsis', [
     };
   })
 
-  /*  Custom directive to check if user has associated permission
-      example use: <span has-permission="{{permissions.SOME_PERMISSION}}">
-  */
+  .directive("dateselectEnd", ["$filter", function($filter){
+    return {
+      restrict: "E",
+      require: ["^ngModel"],
+      replace: "true",
+      scope:{
+        ngModel: "=",
+        ngRequired: "=",
+        dateOptions: "=",
+        minDate: "=",
+        maxDate: "=",
+        opened: "=",
+        format: "=",
+        initDate: "=",
+        calIcon: "="
+      },
+      link: function(scope, element, attrs,ctrl) {
+        scope.open = function(event){
+          event.preventDefault();
+          event.stopPropagation();
+          scope.opened = true;
+          scope.calIcon = 'fa-calendar';
+        };
+
+        scope.clear = function () {
+          scope.ngModel = null;
+        };
+
+        var converted = false;
+        var ngModel = ctrl[0];
+        ngModel.$parsers.push(function(viewValue) {
+          converted = false;
+          return viewValue.toISOString();
+        });
+
+        if (!ngModel) return;
+
+        scope.$watch(
+          function(){
+            return ngModel.$modelValue;
+          },
+          function(modelValue){
+            if(!converted && modelValue){
+              converted = true;
+              var endOfDay = moment(modelValue).endOf('day').toDate();
+              ngModel.$setViewValue(endOfDay);
+              ngModel.$render();
+
+            }
+          });
+
+      },
+      templateUrl: 'views/template/dateselect.html'
+    };
+  }])
+
+
+    /*  Custom directive to check if user has associated permission
+        example use: <span has-permission="{{permissions.SOME_PERMISSION}}">
+    */
   .directive('hasPermission', ['$rootScope', function ($rootScope)  {
     return {
       link: function(scope, element, attrs) {
