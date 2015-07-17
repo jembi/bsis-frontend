@@ -24,8 +24,8 @@
             {{bloodGroup}}
           </ui-select-choices>
         </ui-select>
-        <input  type="checkbox" id="anyBloodGroup" ng-model="donorList.anyBloodGroup" > <label style="display: inline-block; cursor: pointer; cursor: hand;" for="anyBloodGroup"> Any Blood Group </label> 
-        <input  type="checkbox" id="noBloodGroup" ng-model="donorList.noBloodGroup" > <label style="display: inline-block; cursor: pointer; cursor: hand;" for="noBloodGroup"> No Blood Group </label> 
+        <input  type="checkbox" id="anyBloodGroup" ng-model="donorList.anyBloodGroup" > <label style="display: inline-block; cursor: pointer; cursor: hand;" for="anyBloodGroup"> Any Blood Group </label>
+        <input  type="checkbox" id="noBloodGroup" ng-model="donorList.noBloodGroup" > <label style="display: inline-block; cursor: pointer; cursor: hand;" for="noBloodGroup"> No Blood Group </label>
       </div>
     </div>
   </div>
@@ -45,12 +45,12 @@
     <label for="name" class="col-sm-2 control-label">Due To Donate</label>
     <div class="row col-sm-10">
       <div class="form-inline" style="padding-left:5px;">
-        <dateselect-end ng-model="donorList.clinicDate" date-options="dateOptions" format="format" opened="dueToDonateOpen" cal-icon="icons.CALENDAR">
-        </dateselect-end>
+        <dateselect ng-model="donorList.clinicDate" date-options="dateOptions" format="format" opened="dueToDonateOpen" cal-icon="icons.CALENDAR">
+        </dateselect>
       </div>
     </div>
   </div>
-  <div class="form-group"> 
+  <div class="form-group">
     <div class="col-sm-offset-2 col-sm-3">
       <button class="btn btn-primary" type="submit">Search</button>
       <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
