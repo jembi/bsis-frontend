@@ -430,6 +430,10 @@ var app = angular.module('bsis', [
 
         var converted = false;
         var ngModel = ctrl[0];
+        ngModel.$parsers.push(function(viewValue) {
+          converted = false;
+          return viewValue.toISOString();
+        });
 
         if (!ngModel) return;
 
@@ -440,9 +444,9 @@ var app = angular.module('bsis', [
           function(modelValue){
             if(!converted && modelValue){
               converted = true;
-
               var endOfDay = moment(modelValue).endOf('day').toDate();
-              scope.ngModel = endOfDay;
+              ngModel.$setViewValue(endOfDay);
+              ngModel.$render();
 
             }
           });
