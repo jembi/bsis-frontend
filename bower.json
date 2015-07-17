@@ -19,7 +19,8 @@
     "karma-read-json": "~1.1.0",
     "checklist-model": "~0.2.4",
     "angular-messages": "1.4.x",
-    "angular-tooltips": "~0.1.13"
+    "angular-tooltips": "~0.1.13",
+    "moment": "~0.10.1"
   },
   "resolutions": {
     "angular": "1.4.x"

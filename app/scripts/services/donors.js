@@ -83,8 +83,8 @@ angular.module('bsis')
       });
     },
     findDonorListDonors: function (donorSearch, response) {
-      var donors = Api.DonorCommunicationsSearch.query({bloodGroups: donorSearch.bloodGroups, donorPanels: donorSearch.donorPanels, 
-          clinicDate: donorSearch.clinicDate, lastDonationFromDate: donorSearch.lastDonationFromDate, 
+      var donors = Api.DonorCommunicationsSearch.query({bloodGroups: donorSearch.bloodGroups, donorPanels: donorSearch.donorPanels,
+          clinicDate: donorSearch.clinicDate, lastDonationFromDate: donorSearch.lastDonationFromDate,
           lastDonationToDate: donorSearch.lastDonationToDate, anyBloodGroup: donorSearch.anyBloodGroup, noBloodGroup: donorSearch.noBloodGroup}, function(){
         response(donors.donors);
       }, function () {
