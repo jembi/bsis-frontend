@@ -8,8 +8,8 @@
   <div class = "h4"> 
     <small><em>Date Created: </em></small> <span ng-show="!editableForm.$visible">{{ (donationBatch.createdDate | bsisDate) || '' }}</span>
     <span ng-show="editableForm.$visible">
-      <dateselect-end ng-model="donationBatch.tempDate" initDate="donationBatch.date" date-options="dateOptions" format="format" opened="donationBatchDateOpen" cal-icon="icons.CALENDAR">
-      </dateselect-end>
+      <dateselect ng-model="donationBatch.tempDate" initDate="donationBatch.date" date-options="dateOptions" format="format" opened="donationBatchDateOpen" cal-icon="icons.CALENDAR">
+      </dateselect>
     </span>
     | 
     <small><em>Panel: </em></small> <span e-class="xeditable donor-panel" editable-select="donationBatch.donorPanel.name" e-ng-options="item.name as item.name for item in donorPanels" e-name="donorPanel"  e-required>{{donationBatch.donorPanel.name}}</span>
