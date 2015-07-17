@@ -28,6 +28,12 @@ var app = angular.module('bsis', [
         controller  : 'LoginCtrl'
       })
 
+      // FORGOT PASSWORD PAGE
+      .when('/forgotPassword', {
+        templateUrl: 'views/forgotPassword.html',
+        controller: 'ForgotPasswordCtrl'
+      })
+
       // LOGOUT PAGE
       .when('/logout', {
         templateUrl : 'views/login.html',
@@ -312,7 +318,9 @@ var app = angular.module('bsis', [
 
       }else{
         // no session - user needs to log in
-        $location.path( "/login" );
+        if (['/login', '/forgotPassword'].indexOf($location.path()) === -1) {
+          $location.path( "/login" );
+        }
       }
 
       /*
