@@ -30,6 +30,7 @@ angular.module('bsis')
     };
 
     $scope.managePackType  = function (packType){
+      $scope.packType = packType;
       PackTypesService.setPackType(packType);
       $location.path("/managePackType");
     };
@@ -44,6 +45,7 @@ angular.module('bsis')
         if (response !== false){
           data = response;
           $scope.data = data;
+          $scope.packTypes = data;
           $scope.packTypesCount = $scope.data.length;
         }
         else{
@@ -85,7 +87,7 @@ angular.module('bsis')
 
   })
 
-  .controller('ManagePackTypeCtrl', function ($scope, $location, PackTypesService, ICONS, PERMISSIONS,ComponentTypesService) {
+  .controller('ManagePackTypesCtrl', function ($scope, $location, PackTypesService, ICONS, PERMISSIONS,ComponentTypesService) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = "/managePackType";
@@ -101,10 +103,12 @@ angular.module('bsis')
     });
 
     $scope.savePackType = function (packType, packTypeForm){
+
+      console.log('i am gere');
       if (packTypeForm.$valid) {
         if (typeof(packType.id) != 'undefined') {
-          $scope.updatePackType(packType);
-        } else if ($scope.managePackType == 'addPackType') {
+          $scope.updatePackType(packType, packTypeForm);
+        } else {
           $scope.addPackType(packType, packTypeForm);
         }
       } else {
@@ -121,7 +125,7 @@ angular.module('bsis')
       });
     };
 
-    $scope.updatePackType = function (packType) {
+    $scope.updatePackType = function (packType, packTypeForm) {
 
       PackTypesService.updatePackType(packType, function (response) {
         $scope.go('/packTypes');

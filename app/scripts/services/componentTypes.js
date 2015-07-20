@@ -6,7 +6,6 @@ angular.module('bsis')
 
       getComponentTypes: function (response) {
         Api.ComponentTypes.get({}, function (apiResponse) {
-          console.log("component types response: ", apiResponse);
           response(apiResponse.componentTypes);
         }, function () {
           response(false);
