@@ -9,9 +9,9 @@
                 <em> {{packTypesCount}} pack type(s) found </em> <span has-permission="{{permissions.MANAGE_BLOOD_BAG_TYPES}}"> | <em> <a href="" ng-click="addNewPackType()" >Add New Pack Type</a></em> </span>
             </p>
 
-            <!--<pre>{{packTypes | json}}</pre> -->
+
             <table ng-table="packTypesTableParams" show-filter="false" class="table">
-                <tr ng-repeat="pack in packTypes"
+                <tr ng-repeat="pack in $data"
                     ng-click="managePackType(pack); changeSelection(pack);"
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"

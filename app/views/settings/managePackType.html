@@ -29,6 +29,25 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row form-group col-sm-12">
+                        <label for="componentType" class="col-sm-2 control-label">Component Type</label>
+                        <div class="col-sm-6">
+                            <div class="form-inline">
+                                <select id="componentType" name="componentType" class="form-control input-sm" ng-model="packType.productType.id" ng-options="item.id as item.productTypeName for item in componentTypes" required
+                                        ng-class="{'ng-invalid ng-dirty' : packTypeForm.componentType.$invalid && submitted}">
+                                    <option value="" ng-disabled="true">Component Type</option>
+                                </select>
+                                <div>
+                                    <small class="error"
+                                           ng-show="(packTypeForm.componentType.$error.required && (packTypeForm.componentType.$dirty || submitted))">
+                                        This cannot be empty
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row form-group col-sm-12">
                         <label for="periodBetweenDonations" class="col-sm-2 control-label">Period Between Donations</label>
                         <div class="col-sm-8">

@@ -33,7 +33,6 @@ angular.module('bsis')
       addPackType: function (packType, response) {
         var addPackType = new Api.PackTypes();
         angular.copy(packType, addPackType);
-        alert(packType);
         addPackType.$save(function (data) {
           response(data);
         }, function (err) {
