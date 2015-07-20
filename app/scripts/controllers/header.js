@@ -130,7 +130,9 @@ angular.module('bsis')
       ~$location.path().indexOf('users')               ||
       ~$location.path().indexOf('manageUser')          ||
       ~$location.path().indexOf('roles')               ||
-      ~$location.path().indexOf('manageRole')
+      ~$location.path().indexOf('manageRole')          ||
+      ~$location.path().indexOf('packTypes')           ||
+      ~$location.path().indexOf('managePackType')
     ){
       $scope.currentSection = 'SETTINGS';
     }

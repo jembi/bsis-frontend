@@ -101,11 +101,14 @@ angular.module('bsis')
     });
 
     $scope.savePackType = function (packType, packTypeForm){
-
-      if (typeof(packType.id) != 'undefined') {
-        $scope.updatePackType(packType);
-      } else if ($scope.managePackType == 'addPackType'){
-        $scope.addPackType(packType, packTypeForm);
+      if (packTypeForm.$valid) {
+        if (typeof(packType.id) != 'undefined') {
+          $scope.updatePackType(packType);
+        } else if ($scope.managePackType == 'addPackType') {
+          $scope.addPackType(packType, packTypeForm);
+        }
+      } else {
+        $scope.submitted = true;
       }
     };
 

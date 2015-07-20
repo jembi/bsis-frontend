@@ -5,7 +5,7 @@
             <form name="packTypeForm" novalidate class="form-horizontal col-sm-12"  role="form" ng-submit="savePackType(packType,packTypeForm)">
                 <div>
                     <div class="row form-group col-sm-12">
-                        <label for="bloodBagType" class="col-sm-2 control-label">Blood Bag Type</label>
+                        <label for="bloodBagType" class="col-sm-2 control-label">Pack Type</label>
                         <div class="col-sm-8">
                             <div class="form-inline">
                                 <input size="20" id="bloodBagType" name="bloodBagType" class="form-control input-sm" ng-model="packType.bloodBagType" required
@@ -24,8 +24,8 @@
                     <div class="row form-group col-sm-12">
                         <label for="countAsDonation" class="col-sm-2 control-label">Count As Donation</label>
                         <div class="col-sm-8">
-                            <div class="form-inline">
-                                <input type="checkbox"  id="countAsDonation" name="countAsDonation" class="form-control input-sm" ng-model="packType.countAsDonation" />
+                            <div class="checkbox">
+                                <input type="checkbox"  id="countAsDonation" name="countAsDonation"  ng-model="packType.countAsDonation" />
                             </div>
                         </div>
                     </div>
@@ -64,15 +64,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-1 col-sm-4">
-                        <!--
-                        <pre>
-                            {{packType | json}}
-                        </pre>
-                        -->
                     </div>
                 </div>
                 <div class="form-group">
