@@ -26,6 +26,8 @@ angular.module('bsis')
           $scope.credentials.password = null;
           loginForm.$setPristine();
 
+          $location.path('/home');
+
           if (user.passwordReset) {
             $modal.open({
               controller: 'PasswordResetCtrl',
@@ -41,8 +43,6 @@ angular.module('bsis')
                 }
               }
             });
-          } else {
-            $location.path('/home');
           }
         }, function(statusCode) {
           $scope.loginInvalid = true;

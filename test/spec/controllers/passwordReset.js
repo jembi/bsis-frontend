@@ -65,8 +65,7 @@ describe('Controller: PasswordResetCtrl', function () {
       expect(childScope.errorMessage).toBe('Setting your new password failed. Please try again.');
     }));
 
-    it('should redirect to the home page on success', inject(function($location, UsersService) {
-      spyOn($location, 'path');
+    it('should close the modal on success', inject(function(UsersService) {
       spyOn(modalInstance, 'close');
       spyOn(UsersService, 'updateLoggedOnUser').and.callFake(function(update, onSuccess) {
         expect(update.modifyPassword).toBe(true);
@@ -85,7 +84,6 @@ describe('Controller: PasswordResetCtrl', function () {
       });
 
       expect(UsersService.updateLoggedOnUser).toHaveBeenCalled();
-      expect($location.path).toHaveBeenCalledWith('/home');
       expect(modalInstance.close).toHaveBeenCalled();
     }));
   });
