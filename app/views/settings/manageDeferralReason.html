@@ -1,0 +1,34 @@
+<h3 class="page-header">Manage Deferral</h3>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form name="deferralForm" novalidate class="form-horizontal col-sm-12"  deferral="form" ng-submit="saveDeferralReason(deferral, deferralForm)">
+
+      <div class="row form-group col-sm-12">
+        <label for="reason" class="col-sm-1 control-label">Reason</label>
+        <div class="col-sm-4">
+          <div class="form-inline">
+            <input size="30" id="reason" name="reason" class="form-control input-sm" ng-model="deferral.reason" required
+
+              ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+              ng-class="{'ng-invalid ng-dirty' : (deferralForm.reason.$invalid && submitted) || deferralNameInvalid }">
+            <div>
+              <small class="error" ng-show="serverError.reason">
+                {{serverError.reason}}
+              </small>
+              <small class="error" ng-show="(deferralForm.reason.$error.required && (deferralForm.reason.$dirty || submitted))">
+                This cannot be empty
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-4">
+            <button class="btn btn-primary" type="submit" style="margin-top: 2px">Save Deferral Reason</button>
+            <button class="btn btn-primary" type="button" ng-click="cancel(deferralForm)" style="margin-top: 2px">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DeferralsCtrl', function ($scope, $location, DeferralsService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
+  .controller('DeferralReasonsCtrl', function ($scope, $location, DeferralReasonsService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
 
     var data = [{}];
     $scope.data = data;
-    $scope.deferrals = {};
+    $scope.deferralReasons = {};
 
     $scope.clear = function () {
 
@@ -20,12 +20,12 @@ angular.module('bsis')
     };
 
     $scope.getDeferrals = function () {
-      DeferralsService.getDeferrals(function(response){
+      DeferralReasonsService.getDeferrals(function(response){
         if (response !== false){
           data = response;
           $scope.data = data;
-          $scope.deferrals = data;
-          $scope.deferralsCount = $scope.deferrals.length;
+          $scope.deferralReasons = data;
+          $scope.deferralReasonsCount = $scope.deferralReasons.length;
 
         }
         else{
@@ -59,27 +59,27 @@ angular.module('bsis')
       });
     });
 
-    $scope.addNewDeferral = function () {
-      DeferralsService.setDeferral("");
-      $location.path('/manageDeferral');
+    $scope.addNewDeferralReason = function () {
+      DeferralReasonsService.setDeferralReason("");
+      $location.path('/manageDeferralReason');
     };
 
-    $scope.manageDeferral = function (deferral) {
+    $scope.manageDeferralReason = function (deferral) {
       $scope.deferral = deferral;
-      DeferralsService.setDeferral(deferral);
-      $location.path("/manageDeferral");
+      DeferralReasonsService.setDeferralReason(deferral);
+      $location.path("/manageDeferralReason");
     };
 
     $scope.getDeferrals();
 
   })
 
-  .controller('ManageDeferralsCtrl', function ($scope, $location, DeferralsService, ICONS, PERMISSIONS, DATATYPES){
+  .controller('ManageDeferralReasonsCtrl', function ($scope, $location, DeferralReasonsService, ICONS, PERMISSIONS, DATATYPES){
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
-    $scope.selection = '/manageDeferral';
+    $scope.selection = '/manageDeferralReason';
 
-    $scope.deferral = DeferralsService.getDeferral();
+    $scope.deferral = DeferralReasonsService.getDeferralReason();
 
     if ($scope.deferral === ""){
       $scope.deferral = {};
@@ -89,14 +89,14 @@ angular.module('bsis')
 
     $scope.dataTypes = DATATYPES.options;
 
-    $scope.saveDeferral = function (deferral, deferralForm) {
+    $scope.saveDeferralReason = function (deferral, deferralForm) {
 
       if (deferralForm.$valid) {
         if (typeof(deferral) != 'undefined') {
           if (typeof(deferral.id) != 'undefined') {
-            $scope.updateDeferral(deferral, deferralForm);
+            $scope.updateDeferralReason(deferral, deferralForm);
           } else {
-            $scope.addDeferral(deferral, deferralForm);
+            $scope.addDeferralReason(deferral, deferralForm);
           }
         } else {
 
@@ -109,22 +109,17 @@ angular.module('bsis')
     $scope.serverError = {};
 
 
-    $scope.updateDeferral = function (deferral, deferralForm) {
+    $scope.updateDeferralReason = function (deferral, deferralForm) {
       if (deferralForm.$valid) {
 
-        DeferralsService.updateDeferral(deferral, function (response, err) {
+        DeferralReasonsService.updateDeferralReason(deferral, function (response, err) {
           if (response !== false){
-            $scope.go('/deferrals');
+            $scope.go('/deferralReasons');
           } else{
 
-            if(err.value){
+            if(err.reason){
               $scope.deferralValueInvalid = "ng-invalid";
-              $scope.serverError.value = err.value;
-            }
-
-            if(err.name){
-              $scope.deferralNameInvalid = "ng-invalid";
-              $scope.serverError.name = err.name;
+              $scope.serverError.reason = err.reason;
             }
           }
         });
@@ -134,28 +129,24 @@ angular.module('bsis')
     };
 
 
-    $scope.addDeferral = function (deferral, deferralForm) {
+    $scope.addDeferralReason = function (deferral, deferralForm) {
 
       if (deferralForm.$valid) {
-        DeferralsService.addDeferral(deferral, function (response, err) {
+        deferral.isDeleted = false;
+        DeferralReasonsService.addDeferralReason(deferral, function (response, err) {
           if (response !== false) {
             $scope.deferral = {
-              name: '',
-              description: ''
+              reason: '',
+              isDeleted: false
             };
             deferralForm.$setPristine();
             $scope.submitted = '';
-            $scope.go('/deferrals');
+            $scope.go('/deferralReasons');
           }
           else {
-            if(err.value){
+            if(err.reason){
               $scope.deferralValueInvalid = "ng-invalid";
-              $scope.serverError.value = err.value;
-            }
-
-            if(err.name){
-              $scope.deferralNameInvalid = "ng-invalid";
-              $scope.serverError.name = err.name;
+              $scope.serverError.reason = err.reason;
             }
           }
         });
@@ -172,7 +163,7 @@ angular.module('bsis')
 
     $scope.cancel = function (form) {
       $scope.clearForm(form);
-      $location.path("/deferrals");
+      $location.path("/deferralReasons");
     };
 
 
