@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.controller('LoginCtrl', function ($scope, AuthService, $location) {
+.controller('LoginCtrl', function ($scope, $location, $modal, AuthService) {
     $scope.credentials = {
       username: '',
       password: ''
@@ -16,18 +16,34 @@ angular.module('bsis')
 
       if(loginForm.$valid){
 
-        AuthService.login(credentials, function(){
+        AuthService.login(credentials, function(user) {
 
+          var password = $scope.credentials.password;
+
+          // Reset the login form
           $scope.loginInvalid = false;
-
-          //Create the session for the logged in user
           $scope.credentials.username = null;
           $scope.credentials.password = null;
-
-          // set form back to pristine state
           loginForm.$setPristine();
 
-          $location.path('/home');
+          if (user.passwordReset) {
+            $modal.open({
+              controller: 'PasswordResetCtrl',
+              templateUrl: 'views/template/passwordResetModal.html',
+              backdrop: 'static',
+              keyboard: false,
+              resolve: {
+                user: function() {
+                  return user;
+                },
+                password: function() {
+                  return password;
+                }
+              }
+            });
+          } else {
+            $location.path('/home');
+          }
         }, function(statusCode) {
           $scope.loginInvalid = true;
 
@@ -50,4 +66,27 @@ angular.module('bsis')
 
     };
 
+  })
+  .controller('PasswordResetCtrl', function($scope, $location, UsersService, user, password) {
+
+    $scope.setPassword = function(scope) {
+
+      if (scope.passwordResetForm.$invalid) {
+        // Don't update
+        return;
+      }
+
+      // Update the user details
+      var update = angular.copy(user);
+      update.modifyPassword = true;
+      update.currentPassword = password;
+      update.password = scope.newPassword;
+      update.confirmPassword = scope.confirmPassword;
+
+      UsersService.updateLoggedOnUser(update, function() {
+        $location.path('/home');
+      }, function() {
+        scope.errorMessage = 'Setting your new password failed. Please try again.';
+      });
+    };
   });
