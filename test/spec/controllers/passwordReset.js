@@ -44,6 +44,7 @@ describe('Controller: PasswordResetCtrl', function () {
     }));
 
     it('should display an error message on error', inject(function(UsersService) {
+      spyOn(modalInstance, 'close');
       spyOn(UsersService, 'updateLoggedOnUser').and.callFake(function(update, onSuccess, onError) {
         expect(update.modifyPassword).toBe(true);
         expect(update.currentPassword).toBe('currentPassword');
@@ -62,6 +63,7 @@ describe('Controller: PasswordResetCtrl', function () {
       scope.setPassword(childScope);
 
       expect(UsersService.updateLoggedOnUser).toHaveBeenCalled();
+      expect(modalInstance.close).not.toHaveBeenCalled();
       expect(childScope.errorMessage).toBe('Setting your new password failed. Please try again.');
     }));
 
