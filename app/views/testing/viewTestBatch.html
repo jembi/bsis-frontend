@@ -45,8 +45,8 @@
 
 
 <hr style="margin-bottom:5px;"/>
-<span class="h4" style="font-size: 0.95em; margin-top:0px; margin-bottom:0px;" ng-repeat="donationBatch in testBatch.collectionBatches"> 
-  <small><em>Center: </em></small>{{donationBatch.donorPanel.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate | bsisDate}} | <small><em>Number of Donations: </em></small> {{donationBatch.numCollections}}
+<span class="h4" style="font-size: 0.95em; margin-top:0px; margin-bottom:0px;" ng-repeat="donationBatch in testBatch.donationBatches"> 
+  <small><em>Center: </em></small>{{donationBatch.donorPanel.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate | bsisDate}} | <small><em>Number of Donations: </em></small> {{donationBatch.numDonations}}
   <br/>
 </span>
 <hr style="margin-top:5px;"/>
@@ -63,10 +63,10 @@
             ng-mouseleave="this.$selected = false"
             ng-class="{'active': sample.$selected}">
             <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
-                {{sample.collectionNumber}}
+                {{sample.donationIdentificationNumber}}
             </td>
-            <td data-title="'Date Bled'" header-class="text-left" class="text-center" sortable="'collectedOn'">
-                {{sample.collectedOn | bsisDate}}
+            <td data-title="'Date Bled'" header-class="text-left" class="text-center" sortable="'donationDate'">
+                {{sample.donationDate | bsisDate}}
             </td>
             <td data-title="'Pack'" header-class="text-left" sortable="'bloodBagType'">
                 {{sample.packType.bloodBagType}}

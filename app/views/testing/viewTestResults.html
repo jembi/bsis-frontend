@@ -25,12 +25,12 @@
       <div class="panel-body">
 
       <span class="h3"> 
-        <small><em>DIN:</em></small> {{donation.collectionNumber}}
+        <small><em>DIN:</em></small> {{donation.donationIdentificationNumber}}
       </span> 
       <span class="h4">
         | 
         <small><em>Panel:</em></small> {{donation.donorPanel.name}} | 
-        <small><em> Date: </em></small> {{donation.collectedOn | bsisDate}} |
+        <small><em> Date: </em></small> {{donation.donationDate | bsisDate}} |
         <small><em>Blood Group:</em></small> 
           <span ng-if="donation.bloodGroup !== ''" >{{donation.bloodGroup}}</span>
           <span ng-if="donation.bloodGroup == ''" >Unknown</span>

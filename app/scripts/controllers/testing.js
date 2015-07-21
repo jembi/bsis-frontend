@@ -290,8 +290,8 @@ angular.module('bsis')
           $scope.testBatch = response.testBatch;
 
           var donations = [];
-          angular.forEach($scope.testBatch.collectionBatches, function(batch){
-            angular.forEach(batch.collectionsInBatch, function(donation){
+          angular.forEach($scope.testBatch.donationBatches, function(batch){
+            angular.forEach(batch.donations, function(donation){
               donations.push(donation);
             });
           });
@@ -428,11 +428,11 @@ angular.module('bsis')
           $scope.addTestResults = {};
           $scope.addTestMatchResults = {};
           angular.forEach($scope.data, function(value, key) {
-            $scope.addTestResults[value.collectedSample.collectionNumber] = {"donationIdentificationNumber": value.collectedSample.collectionNumber};
+            $scope.addTestResults[value.donation.donationIdentificationNumber] = {"donationIdentificationNumber": value.donation.donationIdentificationNumber};
 
-            $scope.addTestMatchResults[value.collectedSample.collectionNumber] = {"donationIdentificationNumber": value.collectedSample.collectionNumber};
-            $scope.addTestMatchResults[value.collectedSample.collectionNumber] = {"bloodAbo": ""};
-            $scope.addTestMatchResults[value.collectedSample.collectionNumber] = {"bloodRh": ""};
+            $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {"donationIdentificationNumber": value.donation.donationIdentificationNumber};
+            $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {"bloodAbo": ""};
+            $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {"bloodRh": ""};
           });
 
         }

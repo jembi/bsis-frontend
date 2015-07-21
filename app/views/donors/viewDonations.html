@@ -22,10 +22,10 @@
           ng-mouseenter="this.$selected = true"
           ng-mouseleave="this.$selected = false"
           ng-class="{'active': donation.$selected}">
-          <td data-title="'Date'" style="width:18%;" header-class="text-left" class="text-center" sortable="'collectedOn'"  filter="{ 'collectedOn': 'text' }">
-              {{donation.collectedOn | bsisDate }}
+          <td data-title="'Date'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donationDate'"  filter="{ 'donationDate': 'text' }">
+              {{donation.donationDate | bsisDate }}
           </td>
-          <td data-title="'Panel'" style="width:17%;" header-class="text-left" sortable="'donorPanel'" filter="{ 'collectionSite': 'text' }">
+          <td data-title="'Panel'" style="width:17%;" header-class="text-left" sortable="'donorPanel'" filter="{ 'donorPanel': 'text' }">
               {{donation.donorPanel.name}}
           </td>
           <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'bloodBagType'" filter="{ 'bloodBagType': 'select' }"
@@ -46,7 +46,7 @@
           </td>
           <td data-title="''" style="width:10%;" class="text-center">
             <span style="font-size: 0.9em;">
-              <em><a ng-click="viewDonationDetails(donation.collectionNumber)"> View</a></em>
+              <em><a ng-click="viewDonationDetails(donation.donationIdentificationNumber)"> View</a></em>
             </span>
           </td>
       </tr>
