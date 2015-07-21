@@ -16,6 +16,11 @@
             <td data-title="'Reason'" style="width:30%;" header-class="text-left" sortable="'reason'">
                 {{deferral.reason}}
             </td>
+            <td data-title="'Enabled'" style="width:15%;" header-class="text-left"  class="text-center">
+              <span ng-show="!deferral.isDeleted"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+              <span ng-show="deferral.isDeleted"><i class="fa {{icons.SQUARE}}"></i></span>
+            </td>
+
           </tr>
         </table>
       </div>
