@@ -12,12 +12,18 @@ describe('Controller: PasswordResetCtrl', function () {
   });
 
   var scope;
+  var modalInstance;
 
   beforeEach(inject(function($controller, $rootScope) {
     scope = $rootScope.$new();
 
+    modalInstance = {
+      close: angular.noop
+    };
+
     $controller('PasswordResetCtrl', {
       $scope: scope,
+      $modalInstance: modalInstance,
       user: readJSON('test/mockData/superuser.json'),
       password: 'currentPassword'
     });
@@ -61,6 +67,7 @@ describe('Controller: PasswordResetCtrl', function () {
 
     it('should redirect to the home page on success', inject(function($location, UsersService) {
       spyOn($location, 'path');
+      spyOn(modalInstance, 'close');
       spyOn(UsersService, 'updateLoggedOnUser').and.callFake(function(update, onSuccess) {
         expect(update.modifyPassword).toBe(true);
         expect(update.currentPassword).toBe('currentPassword');
@@ -79,6 +86,7 @@ describe('Controller: PasswordResetCtrl', function () {
 
       expect(UsersService.updateLoggedOnUser).toHaveBeenCalled();
       expect($location.path).toHaveBeenCalledWith('/home');
+      expect(modalInstance.close).toHaveBeenCalled();
     }));
   });
 });
