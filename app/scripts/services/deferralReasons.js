@@ -47,7 +47,7 @@ angular.module('bsis')
         var updatedDeferral = angular.copy(deferral);
         Api.deferralReasons.update({id:deferral.id}, updatedDeferral, function(data) {
           deferralReasonObj = data.reason;
-          response(deferralObj);
+          response(deferralReasonObj);
         }, function (err){
           response(false, err.data);
         });
