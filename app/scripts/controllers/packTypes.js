@@ -104,7 +104,6 @@ angular.module('bsis')
 
     $scope.savePackType = function (packType, packTypeForm){
 
-      console.log('i am gere');
       if (packTypeForm.$valid) {
         if (typeof(packType.id) != 'undefined') {
           $scope.updatePackType(packType, packTypeForm);
