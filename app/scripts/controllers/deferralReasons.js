@@ -82,7 +82,9 @@ angular.module('bsis')
     $scope.deferral = DeferralReasonsService.getDeferralReason();
 
     if ($scope.deferral === ""){
-      $scope.deferral = {};
+      $scope.deferral = {
+        isDeleted : false
+      };
     } else {
       $scope.disableDeferralname = true;
     }
@@ -118,7 +120,7 @@ angular.module('bsis')
           } else{
 
             if(err.reason){
-              $scope.deferralValueInvalid = "ng-invalid";
+              $scope.deferralReasonInvalid = "ng-invalid";
               $scope.serverError.reason = err.reason;
             }
           }

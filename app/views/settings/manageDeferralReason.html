@@ -10,7 +10,7 @@
             <input size="30" id="reason" name="reason" class="form-control input-sm" ng-model="deferral.reason" required
 
               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-              ng-class="{'ng-invalid ng-dirty' : (deferralForm.reason.$invalid && submitted) || deferralNameInvalid }">
+              ng-class="{'ng-invalid ng-dirty' : (deferralForm.reason.$invalid && submitted) || deferralReasonInvalid }">
             <div>
               <small class="error" ng-show="serverError.reason">
                 {{serverError.reason}}
@@ -24,10 +24,10 @@
       </div>
 
       <div class="row form-group col-sm-12">
-        <label for="isDeleted" class="col-sm-1 control-label">Disabled</label>
+        <label for="isDeleted" class="col-sm-1 control-label">Enabled</label>
         <div class="col-sm-4">
           <div class="checkbox">
-            <input type="checkbox"  id="isDeleted" name="isDeleted"  ng-model="deferral.isDeleted" />
+            <input type="checkbox"  id="isDeleted" name="isDeleted" ng-model="deferral.isDeleted" ng-true-value="false" ng-false-value="true" />
           </div>
         </div>
       </div>
