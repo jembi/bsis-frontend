@@ -257,6 +257,16 @@ var app = angular.module('bsis', [
         controller : 'ManageRolesCtrl',
         permission: PERMISSIONS.MANAGE_ROLES
       })
+      .when('/discardReasons', {
+        templateUrl : 'views/settings.html',
+        controller : 'DiscardReasonsCtrl',
+        permission: PERMISSIONS.MANAGE_DISCARD_REASONS
+      })
+      .when('/manageDiscardReasons', {
+        templateUrl : 'views/settings.html',
+        controller : 'ManageDiscardReasonsCtrl',
+        permission: PERMISSIONS.MANAGE_DISCARD_REASONS
+      })
 
       .otherwise({
         redirectTo: '/home'
