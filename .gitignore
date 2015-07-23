@@ -1,4 +1,5 @@
 *.swp
+coverage/
 logs/*
 !.gitkeep
 node_modules
