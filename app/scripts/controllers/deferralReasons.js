@@ -147,7 +147,7 @@ angular.module('bsis')
           }
           else {
             if(err.reason){
-              $scope.deferralValueInvalid = "ng-invalid";
+              $scope.deferralReasonInvalid = "ng-invalid";
               $scope.serverError.reason = err.reason;
             }
           }
