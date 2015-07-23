@@ -11,9 +11,12 @@
                                 <input size="20" id="bloodBagType" name="bloodBagType" class="form-control input-sm" ng-model="packType.bloodBagType" required
                                        ng-minlength=1 ng-maxlength=30
                                        ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                                       ng-class="{'ng-invalid ng-dirty' : packTypeForm.bloodBagType.$invalid && submitted}" />
+                                       ng-class="{'ng-invalid ng-dirty' : (packTypeForm.bloodBagType.$invalid && submitted) || bloodBagTypeInvalid }" />
 
                                 <div>
+                                    <small class="error" ng-show="serverError.bloodBagType">
+                                        {{serverError.bloodBagType}}
+                                    </small>
                                     <small class="error" ng-show="(packTypeForm.bloodBagType.$error.required && (packTypeForm.bloodBagType.$dirty || submitted))">
                                         This cannot be empty
                                     </small>

@@ -92,6 +92,7 @@ angular.module('bsis')
     $scope.permissions = PERMISSIONS;
     $scope.selection = "/managePackType";
     $scope.packType = PackTypesService.getPackType();
+    $scope.serverError = {};
 
     ComponentTypesService.getComponentTypes(function(response) {
       if (response !== false) {
@@ -119,15 +120,29 @@ angular.module('bsis')
       packType.isDeleted = false;
       packType.canPool = null;
       packType.canSplit = null;
-      PackTypesService.addPackType(packType, function (response) {
-        $scope.go('/packTypes');
+      PackTypesService.addPackType(packType, function (response, err) {
+        if (response !== false) {
+          $scope.go('/packTypes');
+        } else {
+          if(err.bloodBagType){
+            $scope.bloodBagTypeInvalid = "ng-invalid";
+            $scope.serverError.bloodBagType = err.bloodBagType;
+          }
+        }
       });
     };
 
     $scope.updatePackType = function (packType, packTypeForm) {
 
-      PackTypesService.updatePackType(packType, function (response) {
-        $scope.go('/packTypes');
+      PackTypesService.updatePackType(packType, function (response, err) {
+        if (response !== false) {
+          $scope.go('/packTypes');
+        } else {
+          if(err.bloodBagType){
+            $scope.bloodBagTypeInvalid = "ng-invalid";
+            $scope.serverError.bloodBagType = err.bloodBagType;
+          }
+        }
       });
     };
 
