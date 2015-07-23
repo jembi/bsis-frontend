@@ -39,6 +39,12 @@ angular.module('bsis')
         }
       ),
 
+      deferralReasons: $resource(url + '/deferralreasons/:id', null,
+        {
+          update: {method:'PUT'}
+        }
+      ),
+
       Donations: $resource(url + '/donations/:id', null,
         {
           update: {method:'PUT'}
@@ -95,7 +101,7 @@ angular.module('bsis')
 
       DonorSummaries: $resource(url + '/donors/summaries'),
 
-      ComponentsSearch: $resource(url + '/components/search', {}, 
+      ComponentsSearch: $resource(url + '/components/search', {},
         {
           query: {
             method: 'GET',
