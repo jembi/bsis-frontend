@@ -200,6 +200,12 @@ angular.module('bsis')
         {
           update: {method:'PUT'}
         }
+      ),
+
+      DiscardReasons: $resource(url + '/discardreasons/:id', null,
+        {
+          update: {method:'PUT'}
+        }
       )
 
     };
