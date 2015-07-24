@@ -127,6 +127,8 @@ angular.module('bsis')
       ~$location.path().indexOf('locations')           ||
       ~$location.path().indexOf('deferralReasons')     ||
       ~$location.path().indexOf('manageDeferralReason')||
+      ~$location.path().indexOf('discardReasons')      ||
+      ~$location.path().indexOf('manageDiscardReason') ||
       ~$location.path().indexOf('configurations')      ||
       ~$location.path().indexOf('manageConfiguration') ||
       ~$location.path().indexOf('users')               ||
@@ -218,6 +220,8 @@ angular.module('bsis')
       ~$location.path().indexOf('locations')           ||
       ~$location.path().indexOf('deferralReasons')     ||
       ~$location.path().indexOf('manageDeferralReason')||
+      ~$location.path().indexOf('discardReasons')      ||
+      ~$location.path().indexOf('manageDiscardReason') ||
       ~$location.path().indexOf('configurations')      ||
       ~$location.path().indexOf('manageConfigurations')||
       ~$location.path().indexOf('users')               ||
