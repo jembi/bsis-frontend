@@ -126,6 +126,11 @@ angular.module('bsis')
       packType.isDeleted = false;
       packType.canPool = null;
       packType.canSplit = null;
+
+      if(!packType.countAsDonation) {
+        delete packType.productType;
+      }
+
       PackTypesService.addPackType(packType, function (response, err) {
         if (response !== false) {
           $scope.go('/packTypes');
@@ -139,6 +144,10 @@ angular.module('bsis')
     };
 
     $scope.updatePackType = function (packType, packTypeForm) {
+
+      if(!packType.countAsDonation) {
+        delete packType.productType;
+      }
 
       PackTypesService.updatePackType(packType, function (response, err) {
         if (response !== false) {
