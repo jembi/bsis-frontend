@@ -94,6 +94,12 @@ angular.module('bsis')
     $scope.packType = PackTypesService.getPackType();
     $scope.serverError = {};
 
+    if ($scope.packType === ""){
+      $scope.packType = {
+        countAsDonation : false
+      };
+    }
+
     ComponentTypesService.getComponentTypes(function(response) {
       if (response !== false) {
         $scope.componentTypes = response;
