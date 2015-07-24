@@ -35,6 +35,12 @@ var app = angular.module('bsis', [
         controller: 'ForgotPasswordCtrl'
       })
 
+      // PASSWORD RESET PAGE
+      .when('/passwordReset', {
+        templateUrl: 'views/passwordReset.html',
+        controller: 'PasswordResetCtrl'
+      })
+
       // LOGOUT PAGE
       .when('/logout', {
         templateUrl : 'views/login.html',
@@ -315,6 +321,11 @@ var app = angular.module('bsis', [
           $location.path( "/login" );
         }else{
           AuthService.refreshSession();
+
+          // Check if the user must reset their password
+          if (AuthService.getLoggedOnUser().passwordReset) {
+            $location.path('/passwordReset');
+          }
         }
 
       }else{

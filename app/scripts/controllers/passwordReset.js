@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('PasswordResetCtrl', function($scope, $modalInstance, UsersService, user, password) {
+  .controller('PasswordResetCtrl', function($scope, $location, UsersService, AuthService) {
 
     $scope.setPassword = function(scope) {
 
@@ -10,15 +10,21 @@ angular.module('bsis')
         return;
       }
 
+      var user = AuthService.getLoggedOnUser();
+
+      if (!user) {
+        $location.path('/login');
+        return;
+      }
+
       // Update the user details
       var update = angular.copy(user);
       update.modifyPassword = true;
-      update.currentPassword = password;
       update.password = scope.newPassword;
       update.confirmPassword = scope.confirmPassword;
 
       UsersService.updateLoggedOnUser(update, function() {
-        $modalInstance.close();
+        $location.path('/home');
       }, function() {
         scope.errorMessage = 'Setting your new password failed. Please try again.';
       });

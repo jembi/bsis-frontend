@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.controller('LoginCtrl', function ($scope, $location, $modal, AuthService) {
+  .controller('LoginCtrl', function ($scope, $location, AuthService) {
     $scope.credentials = {
       username: '',
       password: ''
@@ -16,9 +16,7 @@ angular.module('bsis')
 
       if(loginForm.$valid){
 
-        AuthService.login(credentials, function(user) {
-
-          var password = $scope.credentials.password;
+        AuthService.login(credentials, function() {
 
           // Reset the login form
           $scope.loginInvalid = false;
@@ -27,23 +25,6 @@ angular.module('bsis')
           loginForm.$setPristine();
 
           $location.path('/home');
-
-          if (user.passwordReset) {
-            $modal.open({
-              controller: 'PasswordResetCtrl',
-              templateUrl: 'views/template/passwordResetModal.html',
-              backdrop: 'static',
-              keyboard: false,
-              resolve: {
-                user: function() {
-                  return user;
-                },
-                password: function() {
-                  return password;
-                }
-              }
-            });
-          }
         }, function(statusCode) {
           $scope.loginInvalid = true;
 

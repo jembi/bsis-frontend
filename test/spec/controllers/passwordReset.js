@@ -12,20 +12,16 @@ describe('Controller: PasswordResetCtrl', function () {
   });
 
   var scope;
-  var modalInstance;
 
-  beforeEach(inject(function($controller, $rootScope) {
+  beforeEach(inject(function($controller, $rootScope, AuthService) {
     scope = $rootScope.$new();
 
-    modalInstance = {
-      close: angular.noop
-    };
+    spyOn(AuthService, 'getLoggedOnUser').and.callFake(function() {
+      return readJSON('test/mockData/superuser.json');
+    });
 
     $controller('PasswordResetCtrl', {
-      $scope: scope,
-      $modalInstance: modalInstance,
-      user: readJSON('test/mockData/superuser.json'),
-      password: 'currentPassword'
+      $scope: scope
     });
   }));
 
@@ -43,11 +39,10 @@ describe('Controller: PasswordResetCtrl', function () {
       expect(UsersService.updateLoggedOnUser).not.toHaveBeenCalled();
     }));
 
-    it('should display an error message on error', inject(function(UsersService) {
-      spyOn(modalInstance, 'close');
+    it('should display an error message on error', inject(function($location, UsersService) {
+      spyOn($location, 'path');
       spyOn(UsersService, 'updateLoggedOnUser').and.callFake(function(update, onSuccess, onError) {
         expect(update.modifyPassword).toBe(true);
-        expect(update.currentPassword).toBe('currentPassword');
         expect(update.password).toBe('newPassword');
         expect(update.confirmPassword).toBe('newPassword');
         onError();
@@ -63,15 +58,14 @@ describe('Controller: PasswordResetCtrl', function () {
       scope.setPassword(childScope);
 
       expect(UsersService.updateLoggedOnUser).toHaveBeenCalled();
-      expect(modalInstance.close).not.toHaveBeenCalled();
+      expect($location.path).not.toHaveBeenCalled();
       expect(childScope.errorMessage).toBe('Setting your new password failed. Please try again.');
     }));
 
-    it('should close the modal on success', inject(function(UsersService) {
-      spyOn(modalInstance, 'close');
+    it('should close the modal on success', inject(function($location, UsersService) {
+      spyOn($location, 'path');
       spyOn(UsersService, 'updateLoggedOnUser').and.callFake(function(update, onSuccess) {
         expect(update.modifyPassword).toBe(true);
-        expect(update.currentPassword).toBe('currentPassword');
         expect(update.password).toBe('newPassword');
         expect(update.confirmPassword).toBe('newPassword');
         onSuccess();
@@ -86,7 +80,7 @@ describe('Controller: PasswordResetCtrl', function () {
       });
 
       expect(UsersService.updateLoggedOnUser).toHaveBeenCalled();
-      expect(modalInstance.close).toHaveBeenCalled();
+      expect($location.path).toHaveBeenCalledWith('/home');
     }));
   });
 });
