@@ -272,7 +272,7 @@ var app = angular.module('bsis', [
         controller : 'DiscardReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DISCARD_REASONS
       })
-      .when('/manageDiscardReasons', {
+      .when('/manageDiscardReason', {
         templateUrl : 'views/settings.html',
         controller : 'ManageDiscardReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DISCARD_REASONS

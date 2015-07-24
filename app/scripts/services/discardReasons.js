@@ -7,7 +7,7 @@ angular.module('bsis')
     return {
 
       getDiscards: function(response){
-        Api.discardReasons.get({}, function (apiResponse) {
+        Api.DiscardReasons.get({}, function (apiResponse) {
           response(apiResponse.allDiscardReasons);
         }, function (){
           response(false);
@@ -15,7 +15,7 @@ angular.module('bsis')
       },
 
       getDiscardById: function (id, response) {
-        var apiResponse = Api.discardReasons.get({id: id}, function(){
+        var apiResponse = Api.DiscardReasons.get({id: id}, function(){
           response(apiResponse.reason);
         }, function (){
           response(false);
@@ -31,7 +31,7 @@ angular.module('bsis')
       },
 
       addDiscardReason: function (discard,response) {
-        var addDiscard = new Api.discardReasons();
+        var addDiscard = new Api.DiscardReasons();
         angular.copy(discard, addDiscard);
 
         addDiscard.$save(function(data){
@@ -45,7 +45,7 @@ angular.module('bsis')
       updateDiscardReason: function (discard, response) {
 
         var updatedDiscard = angular.copy(discard);
-        Api.discardReasons.update({id:discard.id}, updatedDiscard, function(data) {
+        Api.DiscardReasons.update({id:discard.id}, updatedDiscard, function(data) {
           discardReasonObj = data.reason;
           response(discardReasonObj);
         }, function (err){
@@ -55,7 +55,7 @@ angular.module('bsis')
       },
 
       removeDiscardReason: function (discard, response) {
-        var deleteDiscard = new Api.discardReasons();
+        var deleteDiscard = new Api.DiscardReasons();
         angular.copy(discard, deleteDiscard);
 
         deleteDiscard.$delete({id: discard.id},function(data){

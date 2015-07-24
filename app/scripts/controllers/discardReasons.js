@@ -82,7 +82,9 @@ angular.module('bsis')
     $scope.discard = DiscardReasonsService.getDiscardReason();
 
     if ($scope.discard === "") {
-      $scope.discard = {};
+      $scope.discard = {
+        isDeleted : false
+      };
     } else {
       $scope.disableDiscardname = true;
     }
@@ -118,7 +120,7 @@ angular.module('bsis')
           } else {
 
             if (err.reason) {
-              $scope.discardValueInvalid = "ng-invalid";
+              $scope.discardReasonInvalid = "ng-invalid";
               $scope.serverError.reason = err.reason;
             }
           }
@@ -145,7 +147,7 @@ angular.module('bsis')
           }
           else {
             if (err.reason) {
-              $scope.discardValueInvalid = "ng-invalid";
+              $scope.discardReasonInvalid = "ng-invalid";
               $scope.serverError.reason = err.reason;
             }
           }
