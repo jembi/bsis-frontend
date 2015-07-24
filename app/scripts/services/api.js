@@ -39,6 +39,12 @@ angular.module('bsis')
         }
       ),
 
+      deferralReasons: $resource(url + '/deferralreasons/:id', null,
+        {
+          update: {method:'PUT'}
+        }
+      ),
+
       Donations: $resource(url + '/donations/:id', null,
         {
           update: {method:'PUT'}
@@ -198,6 +204,12 @@ angular.module('bsis')
       ),
 
       PackTypes: $resource(url + '/packtypes/:id', null,
+        {
+          update: {method:'PUT'}
+        }
+      ),
+
+      DiscardReasons: $resource(url + '/discardreasons/:id', null,
         {
           update: {method:'PUT'}
         }

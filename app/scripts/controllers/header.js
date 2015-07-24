@@ -125,8 +125,12 @@ angular.module('bsis')
   else if(~$location.path().indexOf('settings')        ||
       ~$location.path().indexOf('accountSettings')     ||
       ~$location.path().indexOf('locations')           ||
+      ~$location.path().indexOf('deferralReasons')     ||
+      ~$location.path().indexOf('manageDeferralReason')||
+      ~$location.path().indexOf('discardReasons')      ||
+      ~$location.path().indexOf('manageDiscardReason') ||
       ~$location.path().indexOf('configurations')      ||
-      ~$location.path().indexOf('manageConfigurations')||
+      ~$location.path().indexOf('manageConfiguration') ||
       ~$location.path().indexOf('users')               ||
       ~$location.path().indexOf('manageUser')          ||
       ~$location.path().indexOf('roles')               ||
@@ -216,6 +220,10 @@ angular.module('bsis')
     else if(~$location.path().indexOf('settings')      ||
       ~$location.path().indexOf('accountSettings')     ||
       ~$location.path().indexOf('locations')           ||
+      ~$location.path().indexOf('deferralReasons')     ||
+      ~$location.path().indexOf('manageDeferralReason')||
+      ~$location.path().indexOf('discardReasons')      ||
+      ~$location.path().indexOf('manageDiscardReason') ||
       ~$location.path().indexOf('configurations')      ||
       ~$location.path().indexOf('manageConfigurations')||
       ~$location.path().indexOf('packTypes')           ||

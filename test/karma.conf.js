@@ -30,7 +30,13 @@ module.exports = function(config){
 
     browsers : ['PhantomJS'],
 
-    singleRun: true
+    singleRun: true,
+
+    reporters: ['progress', 'coverage'],
+
+    preprocessors: {
+      'app/scripts/**/*.js': ['coverage']
+    }
 
   });
 };
