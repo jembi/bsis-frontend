@@ -13,12 +13,8 @@ describe('Controller: PasswordResetCtrl', function () {
 
   var scope;
 
-  beforeEach(inject(function($controller, $rootScope, AuthService) {
+  beforeEach(inject(function($controller, $rootScope) {
     scope = $rootScope.$new();
-
-    spyOn(AuthService, 'getLoggedOnUser').and.callFake(function() {
-      return readJSON('test/mockData/superuser.json');
-    });
 
     $controller('PasswordResetCtrl', {
       $scope: scope
@@ -27,7 +23,10 @@ describe('Controller: PasswordResetCtrl', function () {
 
   describe('setPassword()', function() {
 
-    it('should do nothing if the form is invalid', inject(function(UsersService) {
+    it('should do nothing if the form is invalid', inject(function(AuthService, UsersService) {
+      spyOn(AuthService, 'getLoggedOnUser').and.callFake(function() {
+        return readJSON('test/mockData/superuser.json');
+      });
       spyOn(UsersService, 'updateLoggedOnUser');
 
       scope.setPassword({
@@ -39,14 +38,34 @@ describe('Controller: PasswordResetCtrl', function () {
       expect(UsersService.updateLoggedOnUser).not.toHaveBeenCalled();
     }));
 
-    it('should display an error message on error', inject(function($location, UsersService) {
+    it('should redirect to the login page if there is no logged on user', inject(function($location, AuthService, UsersService) {
+      spyOn(AuthService, 'getLoggedOnUser').and.callFake(function() {
+        return null;
+      });
+      spyOn(UsersService, 'updateLoggedOnUser');
       spyOn($location, 'path');
+
+      scope.setPassword({
+        passwordResetForm: {
+          $invalid: false
+        }
+      });
+
+      expect(UsersService.updateLoggedOnUser).not.toHaveBeenCalled();
+      expect($location.path).toHaveBeenCalledWith('/login');
+    }));
+
+    it('should display an error message on error', inject(function($location, AuthService, UsersService) {
+      spyOn(AuthService, 'getLoggedOnUser').and.callFake(function() {
+        return readJSON('test/mockData/superuser.json');
+      });
       spyOn(UsersService, 'updateLoggedOnUser').and.callFake(function(update, onSuccess, onError) {
         expect(update.modifyPassword).toBe(true);
         expect(update.password).toBe('newPassword');
         expect(update.confirmPassword).toBe('newPassword');
         onError();
       });
+      spyOn($location, 'path');
 
       var childScope = {
         passwordResetForm: {
@@ -62,14 +81,17 @@ describe('Controller: PasswordResetCtrl', function () {
       expect(childScope.errorMessage).toBe('Setting your new password failed. Please try again.');
     }));
 
-    it('should close the modal on success', inject(function($location, UsersService) {
-      spyOn($location, 'path');
+    it('should close the modal on success', inject(function($location, AuthService, UsersService) {
+      spyOn(AuthService, 'getLoggedOnUser').and.callFake(function() {
+        return readJSON('test/mockData/superuser.json');
+      });
       spyOn(UsersService, 'updateLoggedOnUser').and.callFake(function(update, onSuccess) {
         expect(update.modifyPassword).toBe(true);
         expect(update.password).toBe('newPassword');
         expect(update.confirmPassword).toBe('newPassword');
         onSuccess();
       });
+      spyOn($location, 'path');
 
       scope.setPassword({
         passwordResetForm: {
