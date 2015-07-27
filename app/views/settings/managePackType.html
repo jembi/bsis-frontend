@@ -28,7 +28,7 @@
                         <label for="countAsDonation" class="col-sm-2 control-label">Count As Donation</label>
                         <div class="col-sm-8">
                             <div class="checkbox">
-                                <input type="checkbox"  id="countAsDonation" name="countAsDonation"  ng-model="packType.countAsDonation" />
+                                <input type="checkbox"  id="countAsDonation" name="countAsDonation"  ng-model="packType.countAsDonation" ng-change="change()" />
                             </div>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                         <label for="componentType" class="col-sm-2 control-label">Component Type</label>
                         <div class="col-sm-6">
                             <div class="form-inline">
-                                <select  ng-disabled="!packType.countAsDonation" id="componentType" name="componentType" class="form-control input-sm" ng-model="packType.productType.id" ng-options="item.id as item.productTypeName for item in componentTypes"  ng-required="packType.countAsDonation"
+                                <select ng-disabled="!packType.countAsDonation" id="componentType" name="componentType" class="form-control input-sm" ng-model="packType.productType.id" ng-options="item.id as item.productTypeName for item in componentTypes"  ng-required="packType.countAsDonation"
                                         ng-class="{'ng-invalid ng-dirty' : packTypeForm.componentType.$invalid && submitted}">
                                     <option value="" ng-disabled="true">Component Type</option>
                                 </select>

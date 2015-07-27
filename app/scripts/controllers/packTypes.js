@@ -143,6 +143,12 @@ angular.module('bsis')
       });
     };
 
+    $scope.change = function (){
+      if(!$scope.packType.countAsDonation) {
+        $scope.packType.productType.id = "";
+      }
+    };
+
     $scope.updatePackType = function (packType, packTypeForm) {
 
       if(!packType.countAsDonation) {
