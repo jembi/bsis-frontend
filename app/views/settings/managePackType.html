@@ -39,7 +39,7 @@
                             <div class="form-inline">
                                 <select ng-disabled="!packType.countAsDonation" id="componentType" name="componentType" class="form-control input-sm" ng-model="packType.productType.id" ng-options="item.id as item.productTypeName for item in componentTypes"  ng-required="packType.countAsDonation"
                                         ng-class="{'ng-invalid ng-dirty' : packTypeForm.componentType.$invalid && submitted}">
-                                    <option value="" ng-disabled="true">Component Type</option>
+                                    <option value="" ng-disabled="true">Select:</option>
                                 </select>
                                 <div>
                                     <small class="error"
