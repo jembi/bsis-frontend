@@ -22,6 +22,8 @@
                <div ng-switch-when="/discardReasons"><div ng-include="'views/settings/discardReasons.html'"></div></div>
                <div ng-switch-when="/manageDiscardReason"><div ng-include="'views/settings/manageDiscardReason.html'"></div></div>
               <div ng-switch-default><div ng-include="'views/settings'+initialView+'.html'"></div></div>
+              <div ng-switch-when="/packTypes"><div ng-include="'views/settings/packTypes.html'"></div></div>
+              <div ng-switch-when="/managePackType"><div ng-include="'views/settings/managePackType.html'"></div></div>
             </div>
          </div>
        </div>
