@@ -145,7 +145,7 @@ angular.module('bsis')
 
     $scope.change = function (){
       if(!$scope.packType.countAsDonation) {
-        $scope.packType.productType.id = "";
+        $scope.packType.productType = "";
       }
     };
 

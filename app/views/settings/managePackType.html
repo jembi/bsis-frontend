@@ -37,7 +37,7 @@
                         <label for="componentType" class="col-sm-2 control-label">Component Type</label>
                         <div class="col-sm-6">
                             <div class="form-inline">
-                                <select ng-disabled="!packType.countAsDonation" id="componentType" name="componentType" class="form-control input-sm" ng-model="packType.productType.id" ng-options="item.id as item.productTypeName for item in componentTypes"  ng-required="packType.countAsDonation"
+                                <select ng-disabled="!packType.countAsDonation" id="componentType" name="componentType" class="form-control input-sm" ng-model="packType.productType" ng-options="item as item.productTypeName for item in componentTypes track by item.id"  ng-required="packType.countAsDonation"
                                         ng-class="{'ng-invalid ng-dirty' : packTypeForm.componentType.$invalid && submitted}">
                                     <option value="" ng-disabled="true">Select:</option>
                                 </select>
