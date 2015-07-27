@@ -56,6 +56,16 @@ describe('Controller: AccountSettingsCtrl', function () {
 
       expect(scope.resetUserDetails).toHaveBeenCalled();
     });
+
+    it('should display an error when fetching the logged on user fails', function() {
+      httpBackend.resetExpectations();
+      httpBackend.expectGET(/\/users\/login-user-details$/).respond(500);
+
+      httpBackend.flush(1);
+
+      expect(scope.detailsStyle).toBe('danger');
+      expect(scope.detailsMessage).toBe('Loading details failed. Please try refreshing.');
+    });
   });
 
   describe('resetUserDetails()', function() {
