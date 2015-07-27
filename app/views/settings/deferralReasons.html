@@ -1,0 +1,29 @@
+<h3 class="page-header">Manage Deferral Reasons</h3>
+
+<div class="col-sm-12">
+  <div style="padding-bottom: 10px"></div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>
+            <em> {{deferralReasonsCount}} deferral reason(s) found </em> <span has-permission="{{permissions.MANAGE_CONFIGURATIONS}}"> | <em> <a href="" ng-click="addNewDeferralReason()" >Add New Deferral Reason</a></em> </span>
+        </p>
+        <table ng-table="deferralsTableParams" show-filter="false" class="table">
+          <tr ng-repeat="deferral in $data"
+            ng-click="changeSelection(deferral); manageDeferralReason(deferral);"
+            ng-mouseenter="this.$selected = true"
+            ng-mouseleave="this.$selected = false"
+            ng-class="{'active': deferral.$selected}">
+            <td data-title="'Reason'" style="width:30%;" header-class="text-left" sortable="'reason'">
+                {{deferral.reason}}
+            </td>
+            <td data-title="'Enabled'" style="width:15%;" header-class="text-left"  class="text-center">
+              <span ng-show="!deferral.isDeleted"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+              <span ng-show="deferral.isDeleted"><i class="fa {{icons.SQUARE}}"></i></span>
+            </td>
+
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
