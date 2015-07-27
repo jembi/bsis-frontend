@@ -436,8 +436,8 @@ angular.module('bsis')
         donation.donorNumber = $scope.donor.donorNumber;
         console.log("$scope.donor.donorNumber: ", $scope.donor.donorNumber);
 
-        donation.bleedStartTime = $filter('date')(bleedStartTime, 'hh:mm:ss a');
-        donation.bleedEndTime = $filter('date')(bleedEndTime, 'hh:mm:ss a');
+        donation.bleedStartTime = bleedStartTime;
+        donation.bleedEndTime = bleedEndTime;
 
         DonorService.addDonation(donation, function(response){
           if (response !== false){
@@ -991,8 +991,8 @@ angular.module('bsis')
         donation.donorPanel = $scope.donationBatch.donorPanel;
         donation.collectedOn = $scope.donationBatch.createdDate;
         donation.collectionBatchNumber = $scope.donationBatch.batchNumber;
-        donation.bleedStartTime = $filter('date')(bleedStartTime, 'hh:mm:ss a');
-        donation.bleedEndTime = $filter('date')(bleedEndTime, 'hh:mm:ss a');
+        donation.bleedStartTime = bleedStartTime;
+        donation.bleedEndTime = bleedEndTime;
 
         DonorService.addDonationToBatch(donation, function(response){
           if (response !== false){
