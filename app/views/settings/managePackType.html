@@ -66,6 +66,14 @@
                                         This cannot be empty
                                     </small>
                                 </div>
+                                <div>
+                                  <small class="error" 
+                                    ng-show="
+                                      (!packTypeForm.periodBetweenDonations.$error.required && packTypeForm.periodBetweenDonations.$invalid && (packTypeForm.periodBetweenDonations.$dirty || submitted))
+                                    ">
+                                    Invalid input
+                                  </small>
+                                </div>
                             </div>
                         </div>
                     </div>
