@@ -145,7 +145,12 @@ angular.module('bsis')
 
     $scope.change = function (){
       if(!$scope.packType.countAsDonation) {
+        $scope.tempProductType = $scope.packType.productType;
         $scope.packType.productType = "";
+      }
+      else {
+        $scope.packType.productType= $scope.tempProductType;
+        $scope.tempProductType = "";
       }
     };
 
