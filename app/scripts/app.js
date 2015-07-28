@@ -277,6 +277,16 @@ var app = angular.module('bsis', [
         controller : 'ManageDiscardReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DISCARD_REASONS
       })
+      .when('/donationTypes', {
+        templateUrl : 'views/settings.html',
+        controller : 'DonationTypesCtrl',
+        permission: PERMISSIONS.MANAGE_DISCARD_REASONS
+      })
+      .when('/manageDonationType', {
+        templateUrl : 'views/settings.html',
+        controller : 'ManageDonationTypesCtrl',
+        permission: PERMISSIONS.MANAGE_DISCARD_REASONS
+      })
 
       .otherwise({
         redirectTo: '/home'

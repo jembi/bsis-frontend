@@ -206,6 +206,12 @@ angular.module('bsis')
         {
           update: {method:'PUT'}
         }
+      ),
+
+      DonationTypes: $resource(url + '/donationtypes/:id', null,
+        {
+          update: {method:'PUT'}
+        }
       )
 
     };
