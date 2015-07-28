@@ -39,8 +39,12 @@
         <td class="value">{{donation.donorPulse}}</td>
       </tr>
       <tr>
-        <td class="field">Hb:: </td>
+        <td class="field">Hb: </td>
         <td class="value">{{donation.haemoglobinCount}}</td>
+      </tr>
+      <tr>
+        <td class="field">Hb level: </td>
+        <td class="value" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase}}</td>
       </tr>
       <tr>
         <td class="field">BP: </td>

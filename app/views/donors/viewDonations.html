@@ -41,6 +41,9 @@
           <td data-title="'Hb'" style="width:10%;" header-class="text-left" class="text-center" sortable="'haemoglobinCount'">
               {{donation.haemoglobinCount}}
           </td>
+          <td data-title="'Hb level'" style="text-transform:capitalize;width:10%;" header-class="text-left" class="text-center" sortable="'haemoglobinLevel'">
+              {{donation.haemoglobinLevel | lowercase}}
+          </td>
           <td data-title="'Pulse'" style="width:10%;" header-class="text-left" class="text-center" sortable="'donorPulse'">
               {{donation.donorPulse}}
           </td>
