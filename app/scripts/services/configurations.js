@@ -64,6 +64,21 @@ angular.module('bsis')
       }, function (err){
         response(false, err.data);
       });
+    },
+
+    getBooleanValue: function(name) {
+
+      var configs = USERCONFIG.configurations;
+
+      for (var i = 0; i < configs.length; i++) {
+        if (configs[i].name === name) {
+          var value = configs[i].value;
+          return angular.isString(value) &&
+             angular.lowercase(value) === 'true';
+        }
+      }
+
+      return false;
     }
 
   };

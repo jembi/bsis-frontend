@@ -269,6 +269,16 @@ var app = angular.module('bsis', [
         controller : 'ManageRolesCtrl',
         permission: PERMISSIONS.MANAGE_ROLES
       })
+      .when('/packTypes', {
+        templateUrl : 'views/settings.html',
+        controller  : 'PackTypesCtrl',
+        permission: PERMISSIONS.MANAGE_BLOOD_BAG_TYPES
+      })
+      .when('/managePackType', {
+        templateUrl : 'views/settings.html',
+        controller  : 'ManagePackTypesCtrl',
+        permission: PERMISSIONS.MANAGE_BLOOD_BAG_TYPES
+      })
       .when('/deferralReasons', {
         templateUrl : 'views/settings.html',
         controller : 'DeferralReasonsCtrl',
