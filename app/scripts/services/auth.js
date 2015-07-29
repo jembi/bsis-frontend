@@ -108,6 +108,10 @@ angular.module('bsis')
       refreshSession();
     },
 
+    getLoggedOnUser: function() {
+      return loggedOnUser;
+    },
+
     setLoggedOnUser: function(user) {
       setLoggedOnUser(user);
     },

@@ -213,7 +213,9 @@ angular.module('bsis')
         {
           update: {method:'PUT'}
         }
-      )
+      ),
+
+      PasswordResets: $resource(url + '/passwordresets')
 
     };
 });

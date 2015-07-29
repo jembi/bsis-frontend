@@ -12,7 +12,7 @@
           <li>
             <a href="#home" style="padding:0 0;"><img class="navbar-brand" src="images/bsis_logo_min_white.png" style="height:50px; padding: 5px;"/></a>
           </li>
-            <li class="dropdown" on-toggle="toggled(open)">
+            <li class="dropdown" on-toggle="toggled(open)" ng-hide="isPasswordReset()">
               <a href class="dropdown-toggle" style=" padding: 17px 5px 0 5px; font-size: 1.7rem;">
                {{currentSection}} <b class="caret"></b></a>
               <ul class="dropdown-menu dropdown-ext">

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.controller('LoginCtrl', function ($scope, AuthService, $location) {
+  .controller('LoginCtrl', function ($scope, $location, AuthService) {
     $scope.credentials = {
       username: '',
       password: ''
@@ -16,15 +16,12 @@ angular.module('bsis')
 
       if(loginForm.$valid){
 
-        AuthService.login(credentials, function(){
+        AuthService.login(credentials, function() {
 
+          // Reset the login form
           $scope.loginInvalid = false;
-
-          //Create the session for the logged in user
           $scope.credentials.username = null;
           $scope.credentials.password = null;
-
-          // set form back to pristine state
           loginForm.$setPristine();
 
           $location.path('/home');
