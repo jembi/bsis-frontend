@@ -949,6 +949,12 @@ angular.module('bsis')
     $scope.viewDonationSummary = function (din) {
       $scope.donation = $filter('filter')($scope.data, {collectionNumber : din})[0];
       $scope.donationBatchView = 'viewDonationSummary';
+
+      DonorService.getDonationsFormFields(function(response) {
+        if (response !== false) {
+          $scope.haemoglobinLevels = response.haemoglobinLevels;
+        }
+      });
     };
 
     $scope.viewAddDonationForm = function (){
