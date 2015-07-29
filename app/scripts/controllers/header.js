@@ -135,6 +135,8 @@ angular.module('bsis')
       ~$location.path().indexOf('manageUser')          ||
       ~$location.path().indexOf('roles')               ||
       ~$location.path().indexOf('manageRole')          ||
+      ~$location.path().indexOf('donationTypes')       ||
+      ~$location.path().indexOf('manageDonationType')  ||
       ~$location.path().indexOf('packTypes')           ||
       ~$location.path().indexOf('managePackType')
     ){
@@ -228,6 +230,8 @@ angular.module('bsis')
       ~$location.path().indexOf('manageConfigurations')||
       ~$location.path().indexOf('packTypes')           ||
       ~$location.path().indexOf('managePackType')      ||
+      ~$location.path().indexOf('donationTypes')       ||
+      ~$location.path().indexOf('manageDonationType')  ||
       ~$location.path().indexOf('users')               ||
       ~$location.path().indexOf('manageUser')          ||
       ~$location.path().indexOf('roles')               ||
