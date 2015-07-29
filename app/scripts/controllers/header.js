@@ -5,6 +5,11 @@ angular.module('bsis')
 
   $scope.icons = ICONS;
 
+  $scope.isPasswordReset = function() {
+    var loggedOnUser = AuthService.getLoggedOnUser();
+    return loggedOnUser && loggedOnUser.passwordReset;
+  };
+
   $scope.sectionList = [
     {'title': 'HOME',
      'href': '#home',
