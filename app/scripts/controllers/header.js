@@ -65,7 +65,7 @@ angular.module('bsis')
     ~$location.path().indexOf('exportDonorList')
     ){
       $scope.currentSection = 'DONORS';
-      
+
     }
 
   // else if on components page, set menu to COMPONENTS
@@ -134,7 +134,9 @@ angular.module('bsis')
       ~$location.path().indexOf('users')               ||
       ~$location.path().indexOf('manageUser')          ||
       ~$location.path().indexOf('roles')               ||
-      ~$location.path().indexOf('manageRole')
+      ~$location.path().indexOf('manageRole')          ||
+      ~$location.path().indexOf('packTypes')           ||
+      ~$location.path().indexOf('managePackType')
     ){
       $scope.currentSection = 'SETTINGS';
     }
@@ -158,9 +160,9 @@ angular.module('bsis')
       ~$location.path().indexOf('exportDonorList')
       ){
         $scope.currentSection = 'DONORS';
-        
+
       }
-    
+
     // else if on components page, set menu to COMPONENTS
     else if(~$location.path().indexOf('components')   ||
         ~$location.path().indexOf('findComponents')   ||
@@ -224,6 +226,8 @@ angular.module('bsis')
       ~$location.path().indexOf('manageDiscardReason') ||
       ~$location.path().indexOf('configurations')      ||
       ~$location.path().indexOf('manageConfigurations')||
+      ~$location.path().indexOf('packTypes')           ||
+      ~$location.path().indexOf('managePackType')      ||
       ~$location.path().indexOf('users')               ||
       ~$location.path().indexOf('manageUser')          ||
       ~$location.path().indexOf('roles')               ||

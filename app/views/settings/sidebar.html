@@ -19,6 +19,7 @@
     <li ng-class="{current: isCurrent('/discardReasons')}" has-permission="{{permissions.MANAGE_ROLES}}"><a href="#/discardReasons">Manage Discard Reasons</a></li>
     <li ng-class="{current: isCurrent('/donationTypes')}" has-permission="{{permissions.MANAGE_ROLES}}"><a href="#/donationTypes">Manage Donation Types</a></li>
 
+    <li ng-class="{current: isCurrent('/packTypes')}" has-permission="{{permissions.MANAGE_DONATION_SITES}}"><a href="#/packTypes">Manage Pack Types</a></li>
   </ul>
   <div ng-include="'views/sidebarFooter.html'"></div>
 </div>

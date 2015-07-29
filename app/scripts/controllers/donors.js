@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
+    $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
+
     var data = [{}];
     $scope.data = data;
     $scope.age = '';
@@ -436,8 +438,8 @@ angular.module('bsis')
         donation.donorNumber = $scope.donor.donorNumber;
         console.log("$scope.donor.donorNumber: ", $scope.donor.donorNumber);
 
-        donation.bleedStartTime = $filter('date')(bleedStartTime, 'hh:mm:ss a');
-        donation.bleedEndTime = $filter('date')(bleedEndTime, 'hh:mm:ss a');
+        donation.bleedStartTime = bleedStartTime;
+        donation.bleedEndTime = bleedEndTime;
 
         DonorService.addDonation(donation, function(response){
           if (response !== false){
@@ -491,6 +493,7 @@ angular.module('bsis')
             $scope.packTypes = $scope.data.packTypes;
             $scope.donationTypes = $scope.data.donationTypes;
             $scope.donation = $scope.data.addDonationForm;
+            $scope.haemoglobinLevels = $scope.data.haemoglobinLevels;
           }
           else{
           }
@@ -946,6 +949,12 @@ angular.module('bsis')
     $scope.viewDonationSummary = function (din) {
       $scope.donation = $filter('filter')($scope.data, {collectionNumber : din})[0];
       $scope.donationBatchView = 'viewDonationSummary';
+
+      DonorService.getDonationsFormFields(function(response) {
+        if (response !== false) {
+          $scope.haemoglobinLevels = response.haemoglobinLevels;
+        }
+      });
     };
 
     $scope.viewAddDonationForm = function (){
@@ -974,6 +983,7 @@ angular.module('bsis')
           $scope.packTypes = $scope.data.packTypes;
           $scope.donationTypes = $scope.data.donationTypes;
           $scope.donation = $scope.data.addDonationForm;
+          $scope.haemoglobinLevels = $scope.data.haemoglobinLevels;
         }
         else{
         }
@@ -991,8 +1001,8 @@ angular.module('bsis')
         donation.donorPanel = $scope.donationBatch.donorPanel;
         donation.collectedOn = $scope.donationBatch.createdDate;
         donation.collectionBatchNumber = $scope.donationBatch.batchNumber;
-        donation.bleedStartTime = $filter('date')(bleedStartTime, 'hh:mm:ss a');
-        donation.bleedEndTime = $filter('date')(bleedEndTime, 'hh:mm:ss a');
+        donation.bleedStartTime = bleedStartTime;
+        donation.bleedEndTime = bleedEndTime;
 
         DonorService.addDonationToBatch(donation, function(response){
           if (response !== false){
