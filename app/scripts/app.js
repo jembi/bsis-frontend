@@ -270,32 +270,32 @@ var app = angular.module('bsis', [
       .when('/deferralReasons', {
         templateUrl : 'views/settings.html',
         controller : 'DeferralReasonsCtrl',
-        permission: PERMISSIONS.MANAGE_ROLES
+        permission: PERMISSIONS.MANAGE_DONOR_DEFER_REASONS
       })
       .when('/manageDeferralReason', {
         templateUrl : 'views/settings.html',
         controller : 'ManageDeferralReasonsCtrl',
-        permission: PERMISSIONS.MANAGE_ROLES
+        permission: PERMISSIONS.MANAGE_DONOR_DEFER_REASONS
       })
       .when('/discardReasons', {
         templateUrl : 'views/settings.html',
         controller : 'DiscardReasonsCtrl',
-        permission: PERMISSIONS.MANAGE_DISCARD_REASONS
+        permission: PERMISSIONS.DISCARD_COMPONENT
       })
       .when('/manageDiscardReason', {
         templateUrl : 'views/settings.html',
         controller : 'ManageDiscardReasonsCtrl',
-        permission: PERMISSIONS.MANAGE_DISCARD_REASONS
+        permission: PERMISSIONS.DISCARD_COMPONENT
       })
       .when('/donationTypes', {
         templateUrl : 'views/settings.html',
         controller : 'DonationTypesCtrl',
-        permission: PERMISSIONS.MANAGE_DISCARD_REASONS
+        permission: PERMISSIONS.MANAGE_DONATION_TYPES
       })
       .when('/manageDonationType', {
         templateUrl : 'views/settings.html',
         controller : 'ManageDonationTypesCtrl',
-        permission: PERMISSIONS.MANAGE_DISCARD_REASONS
+        permission: PERMISSIONS.MANAGE_DONATION_TYPES
       })
 
       .otherwise({
