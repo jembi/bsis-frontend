@@ -39,8 +39,15 @@
         <td class="value">{{donation.donorPulse}}</td>
       </tr>
       <tr>
-        <td class="field">Hb:: </td>
-        <td class="value">{{donation.haemoglobinCount}}</td>
+        <td class="field">Hb: </td>
+        <td class="value">
+          
+          <span ng-show="getBooleanValue('donation.hbNumericValue')">{{donation.haemoglobinCount}}</span>
+          <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
+          <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase}}</span>
+          <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> )</span>
+
+        </td>
       </tr>
       <tr>
         <td class="field">BP: </td>
