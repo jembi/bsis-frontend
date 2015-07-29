@@ -134,7 +134,7 @@
                     <em>Hb</em>: 
                       <span ng-show="getBooleanValue('donation.hbNumericValue')">{{lastDonation.haemoglobinCount}}</span>
                       <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">(</span>
-                      <span ng-show="getBooleanValue('donation.hbQualitativeValue')">{{lastDonation.haemoglobinLevel | lowercase}}</span>
+                      <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span>
                       <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">)</span> |
                   </span>
                   <em>P</em>: {{lastDonation.donorPulse}} </td>
