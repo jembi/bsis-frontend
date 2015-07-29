@@ -1,11 +1,10 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, HAEMOGLOBIN_LEVELS, $filter, ngTableParams, $timeout) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
-    $scope.haemoglobinLevels = HAEMOGLOBIN_LEVELS;
     $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
 
     var data = [{}];
@@ -494,6 +493,7 @@ angular.module('bsis')
             $scope.packTypes = $scope.data.packTypes;
             $scope.donationTypes = $scope.data.donationTypes;
             $scope.donation = $scope.data.addDonationForm;
+            $scope.haemoglobinLevels = $scope.data.haemoglobinLevels;
           }
           else{
           }
@@ -977,6 +977,7 @@ angular.module('bsis')
           $scope.packTypes = $scope.data.packTypes;
           $scope.donationTypes = $scope.data.donationTypes;
           $scope.donation = $scope.data.addDonationForm;
+          $scope.haemoglobinLevels = $scope.data.haemoglobinLevels;
         }
         else{
         }

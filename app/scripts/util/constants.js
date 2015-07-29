@@ -241,18 +241,6 @@ angular.module('bsis')
       }
     ]
   })
-  .constant('HAEMOGLOBIN_LEVELS', [
-    {
-      label: 'Low',
-      value: 'LOW'
-    }, {
-      label: 'Normal',
-      value: 'NORMAL'
-    }, {
-      label: 'High',
-      value: 'HIGH'
-    }
-  ])
 ;
 
   
