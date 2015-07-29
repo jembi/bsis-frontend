@@ -130,11 +130,12 @@
                   <em>Pack Type</em>: {{lastDonation.packType.bloodBagType}}<br/>
                   <em>Wt</em>: {{lastDonation.donorWeight}}kg | 
                   <em>BP</em>: {{lastDonation.bloodPressureDiastolic}}/{{lastDonation.bloodPressureSystolic}} | 
-                  <span ng-show="getBooleanValue('donation.hbNumericValue')">
-                    <em>Hb</em>: {{lastDonation.haemoglobinCount}} | 
-                  </span>
-                  <span ng-show="getBooleanValue('donation.hbQualitativeValue')">
-                    <em>Hb level</em>: <span style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span> | 
+                  <span>
+                    <em>Hb</em>: 
+                      <span ng-show="getBooleanValue('donation.hbNumericValue')">{{lastDonation.haemoglobinCount}}</span>
+                      <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">(</span>
+                      <span ng-show="getBooleanValue('donation.hbQualitativeValue')">{{lastDonation.haemoglobinLevel | lowercase}}</span>
+                      <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">)</span> |
                   </span>
                   <em>P</em>: {{lastDonation.donorPulse}} </td>
               </tr>

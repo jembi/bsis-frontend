@@ -52,14 +52,13 @@
           <td class="field">Pulse: </td>
           <td class="value"><span e-class="xeditable w50" editable-text="donation.donorPulse" e-name="donorPulse">{{donation.donorPulse}}</span></td>
         </tr>
-        <tr ng-show="getBooleanValue('donation.hbNumericValue')">
+        <tr >
           <td class="field">Hb: </td>
-          <td class="value"><span e-class="xeditable w50" editable-text="donation.haemoglobinCount" e-name="haemoglobinCount">{{donation.haemoglobinCount}}</span></td>
-        </tr>
-        <tr ng-show="getBooleanValue('donation.hbQualitativeValue')">
-          <td class="field">Hb level: </td>
-          <td class="value" style="text-transform:capitalize;">
-            <span editable-select="donation.haemoglobinLevel" e-name="haemoglobinLevel" e-ng-options="l.value as l.label for l in haemoglobinLevels">{{donation.haemoglobinLevel | lowercase}}</span>
+          <td class="value">
+            <span ng-show="getBooleanValue('donation.hbNumericValue')" e-class="xeditable w50" editable-text="donation.haemoglobinCount" e-name="haemoglobinCount">{{donation.haemoglobinCount}}</span>
+            <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
+            <span ng-show="getBooleanValue('donation.hbQualitativeValue')" editable-select="donation.haemoglobinLevel" e-name="haemoglobinLevel" e-ng-options="l.value as l.label for l in haemoglobinLevels">{{donation.haemoglobinLevel | lowercase}}</span>
+            <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> )</span>
           </td>
         </tr>
         <tr>
