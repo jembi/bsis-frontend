@@ -38,10 +38,10 @@
           <td data-title="'BP'" style="width:10%;" header-class="text-left" class="text-center" sortable="'bloodPressureSystolic'">
               {{donation.bloodPressureSystolic}}/{{donation.bloodPressureDiastolic}}
           </td>
-          <td data-title="'Hb'" style="width:10%;" header-class="text-left" class="text-center" sortable="'haemoglobinCount'">
+          <td data-title="'Hb'" style="width:10%;" header-class="text-left" class="text-center" sortable="'haemoglobinCount'" ng-show="getBooleanValue('donation.hbNumericValue')">
               {{donation.haemoglobinCount}}
           </td>
-          <td data-title="'Hb level'" style="text-transform:capitalize;width:10%;" header-class="text-left" class="text-center" sortable="'haemoglobinLevel'">
+          <td data-title="'Hb level'" style="text-transform:capitalize;width:10%;" header-class="text-left" class="text-center" sortable="'haemoglobinLevel'" ng-show="getBooleanValue('donation.hbQualitativeValue')">
               {{donation.haemoglobinLevel | lowercase}}
           </td>
           <td data-title="'Pulse'" style="width:10%;" header-class="text-left" class="text-center" sortable="'donorPulse'">

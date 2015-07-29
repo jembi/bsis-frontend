@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, DonorService, ICONS, PERMISSIONS, DATEFORMAT, HAEMOGLOBIN_LEVELS, $filter, ngTableParams, $timeout) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, HAEMOGLOBIN_LEVELS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.haemoglobinLevels = HAEMOGLOBIN_LEVELS;
+    $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
+
     var data = [{}];
     $scope.data = data;
     $scope.age = '';

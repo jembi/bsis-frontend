@@ -123,11 +123,20 @@
               <tr ng-show="totalDonations > 0">
                 <td class="icon"><i class="fa {{icons.CIRCLE}}"></i></td>
                 <td class="field">Previous Donation: </td>
-                <td class="value"><em>Date</em>: {{ (lastDonation.collectedOn | bsisDateTime) || '' }}<br/>
-                    <em>Panel</em>: {{lastDonation.donorPanel.name}} <br/>
-                    <em>Donation Type</em>: {{lastDonation.donationType.donationType}} | <em>Pack Type</em>: {{lastDonation.packType.bloodBagType}}<br/>
-                    <em>Wt</em>: {{lastDonation.donorWeight}}kg | <em>BP</em>: {{lastDonation.bloodPressureDiastolic}}/{{lastDonation.bloodPressureSystolic}} |
-                    <em>Hb</em>: {{lastDonation.haemoglobinCount}} | <em>Hb level</em>: <span style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span> | <em>P</em>: {{lastDonation.donorPulse}} </td>
+                <td class="value">
+                  <em>Date</em>: {{ (lastDonation.collectedOn | bsisDateTime) || '' }}<br/>
+                  <em>Panel</em>: {{lastDonation.donorPanel.name}} <br/>
+                  <em>Donation Type</em>: {{lastDonation.donationType.donationType}} | 
+                  <em>Pack Type</em>: {{lastDonation.packType.bloodBagType}}<br/>
+                  <em>Wt</em>: {{lastDonation.donorWeight}}kg | 
+                  <em>BP</em>: {{lastDonation.bloodPressureDiastolic}}/{{lastDonation.bloodPressureSystolic}} | 
+                  <span ng-show="getBooleanValue('donation.hbNumericValue')">
+                    <em>Hb</em>: {{lastDonation.haemoglobinCount}} | 
+                  </span>
+                  <span ng-show="getBooleanValue('donation.hbQualitativeValue')">
+                    <em>Hb level</em>: <span style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span> | 
+                  </span>
+                  <em>P</em>: {{lastDonation.donorPulse}} </td>
               </tr>
               <tr><td></td></tr>
 

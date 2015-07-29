@@ -38,11 +38,11 @@
         <td class="field">Pulse: </td>
         <td class="value">{{donation.donorPulse}}</td>
       </tr>
-      <tr>
+      <tr ng-show="getBooleanValue('donation.hbNumericValue')">
         <td class="field">Hb: </td>
         <td class="value">{{donation.haemoglobinCount}}</td>
       </tr>
-      <tr>
+      <tr ng-show="getBooleanValue('donation.hbQualitativeValue')">
         <td class="field">Hb level: </td>
         <td class="value" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase}}</td>
       </tr>
