@@ -69,6 +69,7 @@ angular.module('bsis')
       DonorCommunicationsFormFields: $resource(url + '/donorcommunications/form'),
       ComponentsFormFields: $resource(url + '/components/form'),
       ComponentCombinations: $resource(url + '/components/combinations'),
+      ComponentTypes: $resource(url + '/componenttypes'),
       DonationBatchFormFields: $resource(url + '/donationbatches/form'),
       TestBatchFormFields: $resource(url + '/testbatches/form'),
       TTITestingFormFields: $resource(url + '/ttitests/form'),
@@ -202,11 +203,25 @@ angular.module('bsis')
         }
       ),
 
+      PackTypes: $resource(url + '/packtypes/:id', null,
+        {
+          update: {method:'PUT'}
+        }
+      ),
+
       DiscardReasons: $resource(url + '/discardreasons/:id', null,
         {
           update: {method:'PUT'}
         }
-      )
+      ),
+
+      DonationTypes: $resource(url + '/donationtypes/:id', null,
+        {
+          update: {method:'PUT'}
+        }
+      ),
+
+      PasswordResets: $resource(url + '/passwordresets')
 
     };
 });

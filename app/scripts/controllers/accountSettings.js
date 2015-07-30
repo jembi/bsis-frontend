@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('AccountSettingsCtrl', function ($scope, Api, Authinterceptor, AuthService, Base64) {
+  .controller('AccountSettingsCtrl', function ($scope, UsersService) {
 
     $scope.masterDetails = {
       firstName: '',
@@ -15,15 +15,6 @@ angular.module('bsis')
     };
 
     $scope.userDetails = {};
-
-    function updateUser(update, onSuccess, onError) {
-      // Delete fields added by angular
-      delete update.$promise;
-      delete update.$resolved;
-
-      // Make API call
-      Api.Users.update({}, update, onSuccess, onError);
-    }
 
     // Reset user details to their initial state
     $scope.resetUserDetails = function() {
@@ -45,19 +36,11 @@ angular.module('bsis')
       }
 
       // Update the user details
-      var update = angular.copy($scope.userDetails);
-      updateUser(update, function(updatedUser) {
+      UsersService.updateLoggedOnUser($scope.userDetails, function(updatedUser) {
         $scope.masterDetails = updatedUser;
         $scope.resetUserDetails();
         $scope.detailsStyle = 'success';
         $scope.detailsMessage = 'Your details were successfully updated.';
-        AuthService.setLoggedOnUser(updatedUser);
-
-        if (update.modifyPassword) {
-          // Update credentials
-          var credentials = Base64.encode(updatedUser.username + ':' + update.password);
-          Authinterceptor.setCredentials(credentials);
-        }
       }, function(response) {
         $scope.detailsStyle = 'danger';
         if (response.data && response.data['user.password']) {
@@ -69,7 +52,7 @@ angular.module('bsis')
     };
 
     // Fetch user details
-    Api.User.get(function(response) {
+    UsersService.getLoggedOnUser(function(response) {
       angular.extend($scope.masterDetails, response, {
         modifyPassword: false,
         currentPassword: '',
