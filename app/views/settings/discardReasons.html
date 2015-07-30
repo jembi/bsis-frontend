@@ -5,7 +5,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <p>
-                <em> {{discardReasonsCount}} discard reason(s) found </em> <span has-permission="{{permissions.MANAGE_CONFIGURATIONS}}"> | <em> <a href="" ng-click="addNewDiscardReason()" >Add New Discard Reason</a></em> </span>
+                <em> {{discardReasonsCount}} discard reason(s) found </em> <span has-permission="{{permissions.MANAGE_DISCARD_REASONS}}"> | <em> <a href="" ng-click="addNewDiscardReason()" >Add New Discard Reason</a></em> </span>
             </p>
             <table ng-table="discardsTableParams" show-filter="false" class="table">
                 <tr ng-repeat="discard in $data"

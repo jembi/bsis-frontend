@@ -5,7 +5,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <p>
-                <em> {{donationTypesCount}} donation type(s) found </em> <span has-permission="{{permissions.MANAGE_CONFIGURATIONS}}"> | <em> <a href="" ng-click="addNewDonationType()" >Add New Donation Type</a></em> </span>
+                <em> {{donationTypesCount}} donation type(s) found </em> <span has-permission="{{permissions.MANAGE_DONATION_TYPES}}"> | <em> <a href="" ng-click="addNewDonationType()" >Add New Donation Type</a></em> </span>
             </p>
             <table ng-table="donationsTableParams" show-filter="false" class="table">
                 <tr ng-repeat="donationType in donationTypes"
