@@ -717,6 +717,8 @@ var app = angular.module('bsis', [
             else if (config[i].name == 'timeFormat'){
               app.constant('TIMEFORMAT', config[i].value);
             }
+
+            // Donor form units
             else if (config[i].name == 'donation.bpUnit'){
               app.constant('BPUNIT', config[i].value);
             }
@@ -729,12 +731,56 @@ var app = angular.module('bsis', [
             else if (config[i].name == 'donation.pulseUnit'){
               app.constant('PULSEUNIT', config[i].value);
             }
+
+          // donor form constants
+
+            else if (config[i].name == 'donation.donor.bpSystolicMin'){
+              app.constant('BP_SYSTOLIC_MIN', config[i].value);
+            }
+            else if (config[i].name == 'donation.donor.bpSystolicMax'){
+              app.constant('BP_SYSTOLIC_MAX', config[i].value);
+            }
+            else if (config[i].name == 'donation.donor.bpDiastolicMin'){
+              app.constant('BP_DIASTOLIC_MIN', config[i].value);
+            }
+            else if (config[i].name == 'donation.donor.bpDiastolicMax'){
+              app.constant('BP_DIASTOLIC_MAX', config[i].value);
+            }
+            else if (config[i].name == 'donation.donor.hbMin'){
+              app.constant('HB_MIN', config[i].value);
+            }
+            else if (config[i].name == 'donation.donor.hbMax'){
+              app.constant('HB_MAX', config[i].value);
+            }
+            else if (config[i].name == 'donation.donor.weightMin'){
+              app.constant('WEIGHT_MIN', config[i].value);
+            }
+            else if (config[i].name == 'donation.donor.weightMax'){
+              app.constant('WEIGHT_MAX', config[i].value);
+            }
+            else if (config[i].name == 'donation.donor.pulseMin'){
+              app.constant('PULSE_MIN', config[i].value);
+            }
+            else if (config[i].name == 'donation.donor.pulseMax'){
+              app.constant('PULSE_MAX', config[i].value);
+            }
+
           }
 
         }, function() {
           // Handle error case
           app.constant('CONFIGAPI', 'No Config Loaded');
         });
+      //donation.donor.bpSystolicMin - 70
+      //donation.donor.bpSystolicMax - 190
+      //donation.donor.bpDiastolicMin - 40
+      //donation.donor.bpDiastolicMax - 100
+      //donation.donor.hbMin - 1
+      //donation.donor.hbMax - 25
+      //donation.donor.weightMin - 30
+      //donation.donor.weightMax - 300
+      //donation.donor.pulseMin - 30
+      //donation.donor.pulseMax - 200
 
 
     }, function() {
