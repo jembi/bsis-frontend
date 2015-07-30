@@ -29,6 +29,18 @@ var app = angular.module('bsis', [
         controller  : 'LoginCtrl'
       })
 
+      // FORGOT PASSWORD PAGE
+      .when('/forgotPassword', {
+        templateUrl: 'views/forgotPassword.html',
+        controller: 'ForgotPasswordCtrl'
+      })
+
+      // PASSWORD RESET PAGE
+      .when('/passwordReset', {
+        templateUrl: 'views/passwordReset.html',
+        controller: 'PasswordResetCtrl'
+      })
+
       // LOGOUT PAGE
       .when('/logout', {
         templateUrl : 'views/login.html',
@@ -349,11 +361,18 @@ var app = angular.module('bsis', [
           $location.path( "/login" );
         }else{
           AuthService.refreshSession();
+
+          // Check if the user must reset their password
+          if (AuthService.getLoggedOnUser().passwordReset) {
+            $location.path('/passwordReset');
+          }
         }
 
       }else{
         // no session - user needs to log in
-        $location.path( "/login" );
+        if (['/login', '/forgotPassword'].indexOf($location.path()) === -1) {
+          $location.path( "/login" );
+        }
       }
 
       /*
