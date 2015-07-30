@@ -99,9 +99,9 @@ angular.module('bsis')
   MANAGE_COMPONENT_COMBINATIONS: 'Manage Component Combinations',
   MANAGE_CROSS_MATCH_TYPES: 'Manage Cross Match Types',
   MANAGE_BLOOD_TYPING_RULES: 'Manage Blood Typing Rules',
-  MANAGE_BLOOD_BAG_TYPES: 'Manage Blood Bag Types',
+  MANAGE_PACK_TYPES: 'Manage Blood Bag Types',
   MANAGE_DISCARD_REASONS: 'Manage Discard Reasons',
-  MANAGE_DONOR_DEFER_REASONS: 'Manage Donor Defer Reasons',
+  MANAGE_DEFERRAL_REASONS: 'Manage Deferral Reasons',
   MANAGE_DONOR_CODES: 'Manage Donor Codes',
   MANAGE_DIAGNOSES_CODES: 'Manage Diagnoses Codes',
   MANAGE_LAB_SETUP: 'Manage Lab Setup',
@@ -111,6 +111,7 @@ angular.module('bsis')
   MANAGE_BLOOD_TESTS: 'Manage Blood Tests',
   MANAGE_TIPS: 'Manage Tips',
   MANAGE_REQUESTS: 'Manage Requests',
+  MANAGE_GENERAL_CONFIGS: "Manage General Configs",
 
   //Page Control Permissions
   VIEW_DONOR_INFORMATION: 'View Donor Information',
