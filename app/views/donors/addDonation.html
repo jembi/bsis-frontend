@@ -192,7 +192,7 @@
           decimal min=0 max=300 
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
           ng-class="{'ng-invalid ng-dirty' : addDonationForm.donorWeight.$invalid && submitted}"
-          > <em> kg </em>
+          > <em> {{weightUnit}} </em>
           <div>
             <small class="error" 
               ng-show="
@@ -213,7 +213,7 @@
           decimal min=0 max=50.0
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
           ng-class="{'ng-invalid ng-dirty' : addDonationForm.hb.$invalid && submitted}"
-          >
+          > <em> {{hbUnit}} </em>
           <select ng-show="getBooleanValue('donation.hbQualitativeValue')" class="form-control input-sm" ng-model="donation.haemoglobinLevel" ng-options="l.value as l.label for l in haemoglobinLevels">
             <option value="" ng-disabled="true">Level</option>
           </select>
@@ -242,7 +242,7 @@
           integer min=0 max=150
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
           ng-class="{'ng-invalid ng-dirty' : addDonationForm.bpDiastolic.$invalid && submitted}"
-          >
+          > <em> {{bpUnit}} </em>
           <div>
             <small class="error" 
               ng-show="
@@ -264,7 +264,7 @@
           integer min=0 max=300 
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
           ng-class="{'ng-invalid ng-dirty' : addDonationForm.pulse.$invalid && submitted}"
-          >
+          > <em> {{pulseUnit}} </em>
           <div>
             <small class="error" 
               ng-show="

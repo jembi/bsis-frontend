@@ -186,7 +186,8 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, DATEFORMAT, $filter, $q, ngTableParams, $timeout) {
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
+                                         GENDER, DATEFORMAT, BPUNIT, HBUNIT, WEIGHTUNIT, PULSEUNIT, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
     $scope.age = '';
@@ -199,6 +200,11 @@ angular.module('bsis')
       hstep: [1, 2, 3],
       mstep: [1, 5, 10, 15, 25, 30]
     };
+
+    $scope.bpUnit = BPUNIT;
+    $scope.hbUnit = HBUNIT;
+    $scope.weightUnit = WEIGHTUNIT;
+    $scope.pulseUnit = PULSEUNIT;
 
     $scope.donor = DonorService.getDonor();
 
@@ -558,7 +564,12 @@ angular.module('bsis')
   })
 
   // Controller for Adding Donations
-  .controller('AddDonationCtrl', function ($scope, $location, DonorService) {
+  .controller('AddDonationCtrl', function ($scope, $location, DonorService, BPUNIT, HBUNIT, WEIGHTUNIT, PULSEUNIT) {
+
+    $scope.bpUnit = BPUNIT;
+    $scope.hbUnit = HBUNIT;
+    $scope.weightUnit = WEIGHTUNIT;
+    $scope.pulseUnit = PULSEUNIT;
 
     $scope.addDonationSuccess = '';
 
@@ -840,7 +851,8 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, DATEFORMAT, $q, $filter, ngTableParams, $timeout) {
+  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE,  DATEFORMAT, BPUNIT,
+                                                 HBUNIT, WEIGHTUNIT, PULSEUNIT, $q, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -854,6 +866,13 @@ angular.module('bsis')
       hstep: [1, 2, 3],
       mstep: [1, 5, 10, 15, 25, 30]
     };
+
+
+
+    $scope.bpUnit = BPUNIT;
+    $scope.hbUnit = HBUNIT;
+    $scope.weightUnit = WEIGHTUNIT;
+    $scope.pulseUnit = PULSEUNIT;
 
     $scope.init = function () {
       $scope.donationBatch = DonorService.getDonationBatch();

@@ -717,6 +717,18 @@ var app = angular.module('bsis', [
             else if (config[i].name == 'timeFormat'){
               app.constant('TIMEFORMAT', config[i].value);
             }
+            else if (config[i].name == 'donation.bpUnit'){
+              app.constant('BPUNIT', config[i].value);
+            }
+            else if (config[i].name == 'donation.hbUnit'){
+              app.constant('HBUNIT', config[i].value);
+            }
+            else if (config[i].name == 'donation.weightUnit'){
+              app.constant('WEIGHTUNIT', config[i].value);
+            }
+            else if (config[i].name == 'donation.pulseUnit'){
+              app.constant('PULSEUNIT', config[i].value);
+            }
           }
 
         }, function() {
