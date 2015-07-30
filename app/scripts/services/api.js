@@ -215,6 +215,12 @@ angular.module('bsis')
         }
       ),
 
+      DonationTypes: $resource(url + '/donationtypes/:id', null,
+        {
+          update: {method:'PUT'}
+        }
+      ),
+
       PasswordResets: $resource(url + '/passwordresets')
 
     };
