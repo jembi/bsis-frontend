@@ -61,7 +61,6 @@ angular.module('bsis')
       });
       $scope.resetUserDetails();
     }, function(err) {
-      console.error(err);
       $scope.detailsStyle = 'danger';
       $scope.detailsMessage = 'Loading details failed. Please try refreshing.';
     });

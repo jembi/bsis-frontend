@@ -27,7 +27,7 @@ angular.module('bsis')
         }, function() {
           $scope.resetting = false;
           $scope.messageStyle = 'danger';
-          $scope.message = 'Resetting your password failed. Please make sure that you have enetered the correct username and try again.';
+          $scope.message = 'Password reset failed. Please make sure that you have entered the correct username and try again.';
         });
       };
     });
