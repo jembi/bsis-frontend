@@ -82,7 +82,7 @@ describe('Controller: ForgotPasswordCtrl', function () {
       expect(scope.resetting).toBe(false);
       expect(scope.username).toBe('nobody');
       expect(scope.messageStyle).toBe('danger');
-      expect(scope.message).toBe('Resetting your password failed. Please make sure that you have enetered the correct username and try again.');
+      expect(scope.message).toBe('Password reset failed. Please make sure that you have entered the correct username and try again.');
     });
   });
 });
