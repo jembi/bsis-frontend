@@ -771,17 +771,6 @@ var app = angular.module('bsis', [
           // Handle error case
           app.constant('CONFIGAPI', 'No Config Loaded');
         });
-      //donation.donor.bpSystolicMin - 70
-      //donation.donor.bpSystolicMax - 190
-      //donation.donor.bpDiastolicMin - 40
-      //donation.donor.bpDiastolicMax - 100
-      //donation.donor.hbMin - 1
-      //donation.donor.hbMax - 25
-      //donation.donor.weightMin - 30
-      //donation.donor.weightMax - 300
-      //donation.donor.pulseMin - 30
-      //donation.donor.pulseMax - 200
-
 
     }, function() {
       // Handle error case

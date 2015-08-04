@@ -852,7 +852,9 @@ angular.module('bsis')
 
   // Controller for Managing the Donor Clinic
   .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE,  DATEFORMAT, BPUNIT,
-                                                 HBUNIT, WEIGHTUNIT, PULSEUNIT, $q, $filter, ngTableParams, $timeout) {
+                                                 HBUNIT, WEIGHTUNIT, PULSEUNIT, WEIGHT_MIN, WEIGHT_MAX, BP_SYSTOLIC_MIN,
+                                                 BP_SYSTOLIC_MAX, BP_DIASTOLIC_MIN, BP_DIASTOLIC_MAX,HB_MIN, HB_MAX,
+                                                 PULSE_MIN, PULSE_MAX, $q, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -873,6 +875,8 @@ angular.module('bsis')
     $scope.hbUnit = HBUNIT;
     $scope.weightUnit = WEIGHTUNIT;
     $scope.pulseUnit = PULSEUNIT;
+    $scope.weightMin = WEIGHT_MIN;
+    $scope.weightMax = WEIGHT_MAX;
 
     $scope.init = function () {
       $scope.donationBatch = DonorService.getDonationBatch();
