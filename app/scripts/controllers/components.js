@@ -172,8 +172,6 @@ angular.module('bsis')
       });
       componentsSearch.componentTypes = $scope.selectedComponentTypes;
 
-      console.log("componentsSearch: ", componentsSearch);
-
       ComponentService.ComponentsSearch(componentsSearch, function(response){
         if (response !== false){
           data = response.components;
@@ -246,8 +244,6 @@ angular.module('bsis')
       $scope.status.push("DISCARDED");
       discardsSearch.status = $scope.status;
 
-      console.log("discardsSearch: ", discardsSearch);
-
       ComponentService.ComponentsSearch(discardsSearch, function(response){
         if (response !== false){
           data = response.components;
@@ -301,7 +297,6 @@ angular.module('bsis')
             data = response.components;
             $scope.data = data;
             $scope.recordComponent = {};
-            console.log("$scope.data: ", $scope.data);
             recordComponentsForm.$setPristine();
             $scope.submitted = '';
             $scope.componentSelected = '';

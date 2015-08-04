@@ -25,9 +25,7 @@ angular.module('bsis')
       DonorService.findDonor($scope.donorSearch, function(response){
       if (response !== false){
         data = response;
-        console.log("DonorService.getDonors(): ", DonorService.getDonors());
         $scope.data = data;
-        console.log("$scope.data: ", $scope.data);
         $scope.searchResults = true;
         
       }
@@ -148,7 +146,6 @@ angular.module('bsis')
       }
       else{
         $scope.submitted = true;
-        console.log("FORM NOT VALID");
       }
     };
 
@@ -263,7 +260,6 @@ angular.module('bsis')
       DonorService.getDeferrals(donorId, function(response){
         if (response !== false){
           $scope.deferralsData = response.allDonorDeferrals;
-          console.log("$scope.deferralsData: ", $scope.deferralsData);
           $scope.deferralResults = true;
         }
         else{
@@ -318,7 +314,6 @@ angular.module('bsis')
       DonorService.getDonations(donorId, function(response){
         if (response !== false){
           $scope.donationsData = response.allDonations;
-          console.log("$scope.donationsData: ", $scope.donationsData);
           if ($scope.donationsData.length > 0){
             $scope.donationResults = true;
           }
@@ -398,7 +393,6 @@ angular.module('bsis')
       var testResultsRequest = TestingService.getTestResultsByDIN(din, function(response){
         if (response !== false){
           $scope.testResults = response.testResults.recentTestResults;
-          console.log("testresults response: ", response);
         }
         else{
         }
@@ -436,7 +430,6 @@ angular.module('bsis')
         donation.donationBatchNumber = donationBatch.batchNumber;
 
         donation.donorNumber = $scope.donor.donorNumber;
-        console.log("$scope.donor.donorNumber: ", $scope.donor.donorNumber);
 
         donation.bleedStartTime = bleedStartTime;
         donation.bleedEndTime = bleedEndTime;
@@ -612,7 +605,6 @@ angular.module('bsis')
 
     DonorService.getDonorListFormFields(function(response){
       if (response !== false){
-        console.log("response: ", response);
         $scope.donorPanels = response.donorPanels;
         //$scope.bloodGroups = response.bloodGroups;
         $scope.bloodGroups = BLOODGROUP.options;
@@ -622,8 +614,6 @@ angular.module('bsis')
     });
 
     $scope.getDonors = function (searchParameters) {
-
-      console.log("searchParameters: ", searchParameters);
       
       $scope.selectedDonorPanels = [];
       angular.forEach(searchParameters.donorPanels,function(value,index){
@@ -637,15 +627,11 @@ angular.module('bsis')
       });
       searchParameters.bloodGroups = $scope.selectedBloodGroups;
 
-      console.log("searchParameters: ", searchParameters);
-
       DonorService.findDonorListDonors(searchParameters, function(response){
         if (response !== false){
           data = response;
           $scope.data = data;
-          console.log("$scope.data: ", $scope.data);
           $scope.donorListSearchResults = true;
-          console.log("$scope.data.length: ", $scope.data.length);
           $scope.donorListSearchCount = $scope.data.length;
           
         }
@@ -738,9 +724,6 @@ angular.module('bsis')
         if (response !== false){
           recentDonationBatchData = response.donationBatches;
           $scope.recentDonationBatchData = recentDonationBatchData;
-          console.log("recentDonationBatchData: ", recentDonationBatchData);
-          console.log("recentDonationBatchData.length: ", recentDonationBatchData.length);
-
           if (recentDonationBatchData.length > 0){
             $scope.recentDonationBatches = true;
           }
@@ -829,7 +812,6 @@ angular.module('bsis')
       
       $scope.donationBatch = item;
       DonorService.setDonationBatch($scope.donationBatch);
-      console.log("VIEW DONATIONBATCH - ", $scope.donationBatch);
       data = $scope.donationBatch.donations;
       $scope.data = data;
       $location.path("/manageClinic");
@@ -924,7 +906,6 @@ angular.module('bsis')
     };
 
     $scope.closeDonationBatchCheck = function(donationBatch){
-      console.log("donationBatch.id: ", donationBatch.id);
       $scope.donationBatchToClose = donationBatch.id;
     };
 

@@ -121,8 +121,6 @@ angular.module('bsis')
         if (response !== false){
           recentTestBatchData = response.testBatches;
           $scope.recentTestBatchData = recentTestBatchData;
-          console.log("recentTestBatchData: ", recentTestBatchData);
-          console.log("recentTestBatchData.length: ", recentTestBatchData.length);
 
           if (recentTestBatchData.length > 0){
             $scope.recentTestBatches = true;
@@ -349,7 +347,6 @@ angular.module('bsis')
     });
 
     $scope.closeTestBatchCheck = function(testBatch){
-      console.log("testBatch.id: ", testBatch.id);
       $scope.testBatchToClose = testBatch.id;
     };
 
@@ -401,9 +398,7 @@ angular.module('bsis')
       TestingService.getTTITestingFormFields( function(response){
         if (response !== false){
           $scope.ttiTestsBasic = response.basicTTITests;
-          console.log("$scope.ttiTestsBasic: ",$scope.ttiTestsBasic);
           $scope.ttiTestsConfirmatory = response.confirmatoryTTITests;
-          console.log("$scope.ttiTestsConfirmatory: ",$scope.ttiTestsConfirmatory);
         }
         else{
         }
@@ -411,7 +406,6 @@ angular.module('bsis')
       TestingService.getBloodGroupTestingFormFields( function(response){
         if (response !== false){
           $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
-          console.log("$scope.bloodTypingTestsBasic: ",$scope.bloodTypingTestsBasic);
         }
         else{
         }
