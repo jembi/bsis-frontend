@@ -118,7 +118,7 @@ angular.module('bsis')
         // refresh donation batch after adding donation to it, and add to response
         Api.DonationBatches.get({id:donationBatchObj.id}, function (donationBatch){
           donationBatchObj = donationBatch.donationBatch;
-          response(donationBatch.donations);
+          response(donationBatch.donationBatch);
         });
       }, function (){
         response(false);

@@ -470,10 +470,8 @@ angular.module('bsis')
 
       DonorService.getOpenDonationBatches( function(response){
         if (response !== false){
-          //data = response.donationBatches;
-          //$scope.data = data;
           $scope.donationBatches = response.donationBatches;
-          if (data.length > 0){
+          if ($scope.donationBatches.length > 0){
             $scope.openDonationBatches = true;
           }
           else {
