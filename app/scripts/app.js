@@ -728,6 +728,31 @@ var app = angular.module('bsis', [
               app.constant('TIMEFORMAT', config[i].value);
             }
 
+            //Home Tabs constants
+
+            else if (config[i].name == 'ui.donorsTabEnabled'){
+              app.constant('DONORS_TAB_ENABLED', config[i].value);
+            }
+            else if (config[i].name == 'ui.componentsTabEnabled'){
+              app.constant('COMPONENTS_TAB_ENABLED', config[i].value);
+            }
+            else if (config[i].name == 'ui.testingTabEnabled'){
+              app.constant('TESTING_TAB_ENABLED', config[i].value);
+            }
+            else if (config[i].name == 'ui.labellingTabEnabled'){
+              app.constant('LABELLING_TAB_ENABLED', config[i].value);
+            }
+            else if (config[i].name == 'ui.inventoryTabEnabled'){
+              app.constant('INVENTORY_TAB_ENABLED', config[i].value);
+            }
+            else if (config[i].name == 'ui.reportsTabEnabled'){
+              app.constant('REPORTS_TAB_ENABLED', config[i].value);
+            }
+            else if (config[i].name == 'ui.mobileClinicTabEnabled'){
+              app.constant('MOBILE_CLINIC_TAB_ENABLED', config[i].value);
+            }
+
+
             // Donor form units
             else if (config[i].name == 'donation.bpUnit'){
               app.constant('BPUNIT', config[i].value);

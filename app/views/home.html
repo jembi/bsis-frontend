@@ -11,7 +11,7 @@
       </div>
 
         <div class="row placeholders home-page">
-          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_DONOR_INFORMATION}}">
+          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_DONOR_INFORMATION}}" ng-show="{{donorsTabEnabled}}">
             <div class="icon-container">
               <a href="#donors" class="placeholder">
                 <i class="fa {{icons.DONORS}}"></i>
@@ -22,7 +22,7 @@
             <p class="p-info">Manage Donor Records, Donation Batches and Donor Communications</p>
           </div>
 
-          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_COMPONENT_INFORMATION}}">
+          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_COMPONENT_INFORMATION}}" ng-show="{{componentsTabEnabled}}">
             <div class="icon-container">
               <a href="#components" class="placeholder">
               <div>
@@ -35,7 +35,7 @@
             <p class="p-info">Component Production Laboratory</p>
           </div>
 
-          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_TESTING_INFORMATION}}">
+          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_TESTING_INFORMATION}}" ng-show="{{testingTabEnabled}}">
           <div class="icon-container">
             <a href="#testing" class="placeholder">
             <div>
@@ -48,7 +48,7 @@
           <p class="p-info">Manage, Submit and Import Serology and TTI Test Results and Outcomes</p>
           </div>
 
-          <div class="col-lg-3 placeholder" has-permission="{{permissions.LABEL_COMPONENT}}">
+          <div class="col-lg-3 placeholder" has-permission="{{permissions.LABEL_COMPONENT}}" ng-show="{{labellingTabEnabled}}">
           <div class="icon-container">
             <a href="#labelling" class="placeholder">
             <div>
@@ -65,7 +65,7 @@
         <hr style="width:60%; margin: 0px auto;">
         <div class="row placeholders home-page">
           
-          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_INVENTORY_INFORMATION}}">
+          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_INVENTORY_INFORMATION}}" ng-show="{{inventoryTabEnabled}}">
           <div class="icon-container">
             <a href="#inventory" class="placeholder">
             <div>
@@ -78,7 +78,7 @@
           <p class="p-info">Manage Blood Bank Inventory, Requests, Transfers and Issues</p>
           </div>
 
-          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_REPORTING_INFORMATION}}">
+          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_REPORTING_INFORMATION}}" ng-show="{{reportsTabEnabled}}">
           <div class="icon-container">
             <a href="#reports" class="placeholder">
             <div>
@@ -91,7 +91,7 @@
           <p class="p-info">View Charts and Export Reports</p>
           </div>
 
-          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_MOBILE_CLINIC_INFORMATION}}">
+          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_MOBILE_CLINIC_INFORMATION}}" ng-show="{{mobileClinicTabEnabled}}">
           <div class="icon-container">
             <a href="#mobile" class="placeholder">
             <div>
