@@ -99,7 +99,7 @@ angular.module('bsis')
     addTestBatch: function (donationBatches, response){
       var addTestBatch = new Api.TestBatches();
 
-      addTestBatch.collectionBatchIds = donationBatches;
+      addTestBatch.donationBatchIds = donationBatches;
 
       addTestBatch.$save(function(data){ 
         response(true);

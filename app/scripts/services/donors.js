@@ -117,8 +117,8 @@ angular.module('bsis')
       addDonation.$save(function(data){ 
         // refresh donation batch after adding donation to it, and add to response
         Api.DonationBatches.get({id:donationBatchObj.id}, function (donationBatch){
-          donationBatchObj = donationBatch.collectionBatch;
-          response(donationBatch.collectionBatch);
+          donationBatchObj = donationBatch.donationBatch;
+          response(donationBatch.donationBatch);
         });
       }, function (){
         response(false);
@@ -246,13 +246,13 @@ angular.module('bsis')
     },
     closeDonationBatch: function (donationBatch, response){
       var updateDonationBatch = Api.DonationBatches.get({id:donationBatch.id}, function() {
-        updateDonationBatch = updateDonationBatch.collectionBatch;
+        updateDonationBatch = updateDonationBatch.donationBatch;
 
         updateDonationBatch.isClosed = true;
         updateDonationBatch.donorPanel = updateDonationBatch.donorPanel.id;
 
         Api.DonationBatches.update({id:donationBatch.id}, updateDonationBatch, function(data) {
-         response(data.collectionBatch);
+         response(data.donationBatch);
         }, function (){
           response(false);
         }); 

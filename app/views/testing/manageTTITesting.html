@@ -28,11 +28,11 @@
           </th>
           <th class="text-center sortable" 
             ng-class="{
-              'sort-asc': testSamplesTTITableParams.isSortBy('collectedOn', 'asc'),
-              'sort-desc': testSamplesTTITableParams.isSortBy('collectedOn', 'desc')
+              'sort-asc': testSamplesTTITableParams.isSortBy('donationDate', 'asc'),
+              'sort-desc': testSamplesTTITableParams.isSortBy('donationDate', 'desc')
             }"
-            ng-click="testSamplesTTITableParams.sorting('collectedOn', testSamplesTTITableParams.isSortBy('collectedOn', 'asc') ? 'desc' : 'asc')">
-            <div>Collected On</div>
+            ng-click="testSamplesTTITableParams.sorting('donationDate', testSamplesTTITableParams.isSortBy('donationDate', 'asc') ? 'desc' : 'asc')">
+            <div>Donation Date</div>
           </th>
           <th class="text-center sortable" style="width:25%;"
             ng-class="{
@@ -55,17 +55,17 @@
               ng-mouseleave="this.$selected = false"
               ng-class="{'active': sample.$selected}">
               <td class="text-center" >
-                  {{sample.collectedSample.collectionNumber}}
+                  {{sample.donation.donationIdentificationNumber}}
               </td>
               <td class="text-center">
-                  {{sample.collectedSample.collectedOn | bsisDate}}
+                  {{sample.donation.donationDate | bsisDate}}
               </td>
               <td >
                   {{sample.ttistatus}}
               </td>
               <td align="center" ng-repeat="test in ttiTestsBasic">
-                <select style="width:70px;" class="form-control input-sm" ng-init="addTestResults[sample.collectedSample.collectionNumber].testResults[test.id] = sample.recentTestResults[test.id].result" 
-                  ng-model="addTestResults[sample.collectedSample.collectionNumber].testResults[test.id]" 
+                <select style="width:70px;" class="form-control input-sm" ng-init="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id] = sample.recentTestResults[test.id].result" 
+                  ng-model="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id]" 
                   ng-options="result for result in test.validResults">
                 </select>
               </td>

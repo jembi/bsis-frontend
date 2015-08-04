@@ -39,7 +39,6 @@ angular.module('bsis')
           data = response;
           $scope.data = data;
           $scope.usersCount = $scope.data.length;
-          console.log("users: ", response);
         }
         else {
 

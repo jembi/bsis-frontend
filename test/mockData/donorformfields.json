@@ -608,8 +608,6 @@
     {
       "id": 3,
       "name": "Maseru",
-      "isCollectionCenter": true,
-      "isCollectionSite": true,
       "isUsageSite": true,
       "isMobileSite": false,
       "isDonorPanel": true,
@@ -619,8 +617,6 @@
     {
       "id": 4,
       "name": "Mohale's Hoek",
-      "isCollectionCenter": true,
-      "isCollectionSite": false,
       "isUsageSite": false,
       "isMobileSite": false,
       "isDonorPanel": true,
@@ -630,8 +626,6 @@
     {
       "id": 7,
       "name": "Leribe",
-      "isCollectionCenter": true,
-      "isCollectionSite": true,
       "isUsageSite": true,
       "isMobileSite": false,
       "isDonorPanel": true,

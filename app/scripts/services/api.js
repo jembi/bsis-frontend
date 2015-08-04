@@ -140,7 +140,7 @@ angular.module('bsis')
         {
           query: {
             method: 'GET',
-            params:{isClosed:'@isClosed', collectionCenters:'@collectionCenters', collectionSites: '@collectionSites'}
+            params:{isClosed:'@isClosed', donorPanels:'@donorPanels'}
           }
         }
       ),

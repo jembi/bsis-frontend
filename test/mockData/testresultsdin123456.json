@@ -1,8 +1,8 @@
 {
   "donationIdentificationNumber": "12345",
-  "collectionBatch": "DB11100002MS",
-  "collectionSite": "Maseru",
-  "collectedOn": "08/10/2014",
+  "donationBatch": "DB11100002MS",
+  "donorPanel": "Maseru",
+  "donationDate": "08/10/2014",
   "testBatch": "1000331",
   "testedOn": "09/10/2014",
   "donationCreatedBy": "administrator",
