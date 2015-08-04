@@ -5,6 +5,11 @@ angular.module('bsis')
 
   $scope.icons = ICONS;
 
+  $scope.isPasswordReset = function() {
+    var loggedOnUser = AuthService.getLoggedOnUser();
+    return loggedOnUser && loggedOnUser.passwordReset;
+  };
+
   $scope.sectionList = [
     {'title': 'HOME',
      'href': '#home',
@@ -53,182 +58,131 @@ angular.module('bsis')
     }
   ];
 
-  // set menu on initial load
-  // if on donors page, set menu to DONORS
-  if(~$location.path().indexOf('donors')                  ||
-    ~$location.path().indexOf('findDonor')                ||
-    ~$location.path().indexOf('addDonor')                 ||
-    ~$location.path().indexOf('viewDonor')                ||
-    ~$location.path().indexOf('addDonation')              ||
-    ~$location.path().indexOf('manageDonationBatches')    ||
-    ~$location.path().indexOf('manageClinic')             ||
-    ~$location.path().indexOf('exportDonorList')
-    ){
-      $scope.currentSection = 'DONORS';
-      
-    }
+  var donorRoutes = [
+    '/donors',
+    '/findDonor',
+    '/addDonor',
+    '/viewDonor',
+    '/addDonation',
+    '/manageDonationBatches',
+    '/manageClinic',
+    '/exportDonorList'
+  ];
 
-  // else if on components page, set menu to COMPONENTS
-  else if(~$location.path().indexOf('components')   ||
-      ~$location.path().indexOf('findComponents')   ||
-      ~$location.path().indexOf('recordComponents') ||
-      ~$location.path().indexOf('findDiscards')     ||
-      ~$location.path().indexOf('discardComponents')
-    ){
-      $scope.currentSection = 'COMPONENTS';
-    }
+  var componentsRoutes = [
+    '/components',
+    '/findComponents',
+    '/recordComponents',
+    '/findDiscards',
+    '/discardComponents'
+  ];
 
-  // else if on testing page, set menu to TESTING
-  else if(~$location.path().indexOf('testing')                   ||
-      ~$location.path().indexOf('viewTestResults')               ||
-      ~$location.path().indexOf('manageTestBatch')               ||
-      ~$location.path().indexOf('viewTestBatch')                 ||
-      ~$location.path().indexOf('manageTTITesting')              ||
-      ~$location.path().indexOf('managePendingTests')            ||
-      ~$location.path().indexOf('manageBloodGroupTesting')       ||
-      ~$location.path().indexOf('manageBloodGroupMatchTesting')  ||
-      ~$location.path().indexOf('uploadTestResults')
-    ){
-      $scope.currentSection = 'TESTING';
-    }
+  var testingRoutes = [
+    '/testing',
+    '/viewTestResults',
+    '/manageTestBatch',
+    '/viewTestBatch',
+    '/manageTTITesting',
+    '/managePendingTests',
+    '/manageBloodGroupTesting',
+    '/manageBloodGroupMatchTesting',
+    '/uploadTestResults'
+  ];
 
-  // else if on inventory page, set menu to INVENTORY
-  else if(~$location.path().indexOf('inventory')        ||
-      ~$location.path().indexOf('manageInventory')      ||
-      ~$location.path().indexOf('transferComponents')   ||
-      ~$location.path().indexOf('issueComponents')      ||
-      ~$location.path().indexOf('componentUsage')
-    ){
-      $scope.currentSection = 'INVENTORY';
-    }
+  var inventoryRoutes = [
+    '/inventory',
+    '/manageInventory',
+    '/transferComponents',
+    '/issueComponents',
+    '/componentUsage'
+  ];
 
-  // else if on labelling page, set menu to LABELLING
-  else if(~$location.path().indexOf('labelling')           ||
-      ~$location.path().indexOf('labelComponents')
-    ){
-      $scope.currentSection = 'LABELLING';
-    }
+  var labellingRoutes = [
+    '/labelling',
+    '/labelComponents'
+  ];
 
-  // else if on reports page, set menu to REPORTS
-  else if(~$location.path().indexOf('reports')
-    ){
-      $scope.currentSection = 'REPORTS';
-    }
+  var reportsRoutes = [
+    '/reports'
+  ];
 
-  // else if on mobile clinic page, set menu to MOBILE
-  else if(~$location.path().indexOf('mobile')
-    ){
-      $scope.currentSection = 'MOBILE';
-    }
+  var mobileRoutes = [
+    '/mobile'
+  ];
 
-  // else if on settings page, set menu to SETTINGS
-  else if(~$location.path().indexOf('settings')        ||
-      ~$location.path().indexOf('accountSettings')     ||
-      ~$location.path().indexOf('locations')           ||
-      ~$location.path().indexOf('configurations')      ||
-      ~$location.path().indexOf('manageConfigurations')||
-      ~$location.path().indexOf('users')               ||
-      ~$location.path().indexOf('manageUser')          ||
-      ~$location.path().indexOf('roles')               ||
-      ~$location.path().indexOf('manageRole')
-    ){
-      $scope.currentSection = 'SETTINGS';
-    }
+  var settingsRoutes = [
+    '/settings',
+    '/accountSettings',
+    '/locations',
+    '/deferralReasons',
+    '/manageDeferralReason',
+    '/discardReasons',
+    '/manageDiscardReason',
+    '/configurations',
+    '/manageConfiguration',
+    '/users',
+    '/manageUser',
+    '/roles',
+    '/manageRole',
+    '/donationTypes',
+    '/manageDonationType',
+    '/packTypes',
+    '/managePackType'
+  ];
 
-  // else set menu to HOME
-  else{
-      $scope.currentSection = 'HOME';
-    }
-
-  //set menu on location change
-  $scope.$on('$locationChangeStart', function(event){
+  var setMenuSelection = function() {
 
     // if on donors page, set menu to DONORS
-    if(~$location.path().indexOf('donors')                  ||
-      ~$location.path().indexOf('findDonor')                ||
-      ~$location.path().indexOf('addDonor')                 ||
-      ~$location.path().indexOf('viewDonor')                ||
-      ~$location.path().indexOf('addDonation')              ||
-      ~$location.path().indexOf('manageDonationBatches')    ||
-      ~$location.path().indexOf('manageClinic')             ||
-      ~$location.path().indexOf('exportDonorList')
-      ){
-        $scope.currentSection = 'DONORS';
-        
-      }
-    
+    if (donorRoutes.indexOf($location.path()) >= 0) {
+      $scope.currentSection = 'DONORS';
+    }
+
     // else if on components page, set menu to COMPONENTS
-    else if(~$location.path().indexOf('components')   ||
-        ~$location.path().indexOf('findComponents')   ||
-        ~$location.path().indexOf('recordComponents') ||
-        ~$location.path().indexOf('findDiscards')     ||
-        ~$location.path().indexOf('discardComponents')
-    ){
+    else if (componentsRoutes.indexOf($location.path()) >= 0) {
       $scope.currentSection = 'COMPONENTS';
     }
 
     // else if on testing page, set menu to TESTING
-    else if(~$location.path().indexOf('testing')                 ||
-      ~$location.path().indexOf('viewTestResults')               ||
-      ~$location.path().indexOf('manageTestBatch')               ||
-      ~$location.path().indexOf('viewTestBatch')                 ||
-      ~$location.path().indexOf('manageTTITesting')              ||
-      ~$location.path().indexOf('managePendingTests')            ||
-      ~$location.path().indexOf('manageBloodGroupTesting')       ||
-      ~$location.path().indexOf('manageBloodGroupMatchTesting')  ||
-      ~$location.path().indexOf('uploadTestResults')
-    ){
+    else if (testingRoutes.indexOf($location.path()) >= 0) {
       $scope.currentSection = 'TESTING';
     }
 
       // else if on inventory page, set menu to INVENTORY
-    else if(~$location.path().indexOf('inventory')        ||
-        ~$location.path().indexOf('manageInventory')      ||
-        ~$location.path().indexOf('transferComponents')   ||
-        ~$location.path().indexOf('issueComponents')      ||
-        ~$location.path().indexOf('componentUsage')
-      ){
-        $scope.currentSection = 'INVENTORY';
-      }
+    else if (inventoryRoutes.indexOf($location.path()) >= 0) {
+      $scope.currentSection = 'INVENTORY';
+    }
 
       // else if on labelling page, set menu to LABELLING
-    else if(~$location.path().indexOf('labelling')           ||
-        ~$location.path().indexOf('labelComponents')
-      ){
-        $scope.currentSection = 'LABELLING';
-      }
+    else if (labellingRoutes.indexOf($location.path()) >= 0) {
+      $scope.currentSection = 'LABELLING';
+    }
 
     // else if on reports page, set menu to REPORTS
-    else if(~$location.path().indexOf('reports')
-      ){
-        $scope.currentSection = 'REPORTS';
-      }
+    else if (reportsRoutes.indexOf($location.path()) >= 0) {
+      $scope.currentSection = 'REPORTS';
+    }
 
     // else if on mobile clinic page, set menu to MOBILE
-    else if(~$location.path().indexOf('mobile')
-      ){
-        $scope.currentSection = 'MOBILE';
-      }
+    else if (mobileRoutes.indexOf($location.path()) >= 0) {
+      $scope.currentSection = 'MOBILE';
+    }
 
     // else if on settings page, set menu to SETTINGS
-    else if(~$location.path().indexOf('settings')      ||
-      ~$location.path().indexOf('accountSettings')     ||
-      ~$location.path().indexOf('locations')           ||
-      ~$location.path().indexOf('configurations')      ||
-      ~$location.path().indexOf('manageConfigurations')||
-      ~$location.path().indexOf('users')               ||
-      ~$location.path().indexOf('manageUser')          ||
-      ~$location.path().indexOf('roles')               ||
-      ~$location.path().indexOf('manageRole')
-      ){
-        $scope.currentSection = 'SETTINGS';
-      }
+    else if (settingsRoutes.indexOf($location.path()) >= 0) {
+      $scope.currentSection = 'SETTINGS';
+    }
 
     // else set menu to HOME
-    else{
+    else {
       $scope.currentSection = 'HOME';
     }
 
+  };
+
+  //set menu on location change
+  var unregisterLocationListener = $scope.$on('$locationChangeStart', setMenuSelection);
+  $scope.$on('$destroy', function() {
+    unregisterLocationListener();
   });
 
   $scope.status = {
@@ -243,7 +197,10 @@ angular.module('bsis')
 
   $scope.logout = function () {
     AuthService.logout();
-    $location.path( "/" );
+    $location.path('/');
   };
+
+  // set menu on initial load
+  setMenuSelection();
 
 });

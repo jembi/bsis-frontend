@@ -29,6 +29,18 @@ var app = angular.module('bsis', [
         controller  : 'LoginCtrl'
       })
 
+      // FORGOT PASSWORD PAGE
+      .when('/forgotPassword', {
+        templateUrl: 'views/forgotPassword.html',
+        controller: 'ForgotPasswordCtrl'
+      })
+
+      // PASSWORD RESET PAGE
+      .when('/passwordReset', {
+        templateUrl: 'views/passwordReset.html',
+        controller: 'PasswordResetCtrl'
+      })
+
       // LOGOUT PAGE
       .when('/logout', {
         templateUrl : 'views/login.html',
@@ -225,12 +237,12 @@ var app = angular.module('bsis', [
       .when('/configurations', {
         templateUrl : 'views/settings.html',
         controller  : 'ConfigurationsCtrl',
-        permission: PERMISSIONS.MANAGE_DONATION_SITES
+        permission: PERMISSIONS.MANAGE_GENERAL_CONFIGS
       })
       .when('/manageConfiguration', {
         templateUrl : 'views/settings.html',
         controller  : 'ManageConfigurationsCtrl',
-        permission: PERMISSIONS.MANAGE_DONATION_SITES
+        permission: PERMISSIONS.MANAGE_GENERAL_CONFIGS
       })
       .when('/accountSettings', {
         templateUrl: 'views/settings.html',
@@ -256,6 +268,46 @@ var app = angular.module('bsis', [
         templateUrl : 'views/settings.html',
         controller : 'ManageRolesCtrl',
         permission: PERMISSIONS.MANAGE_ROLES
+      })
+      .when('/packTypes', {
+        templateUrl : 'views/settings.html',
+        controller  : 'PackTypesCtrl',
+        permission: PERMISSIONS.MANAGE_PACK_TYPES
+      })
+      .when('/managePackType', {
+        templateUrl : 'views/settings.html',
+        controller  : 'ManagePackTypesCtrl',
+        permission: PERMISSIONS.MANAGE_PACK_TYPES
+      })
+      .when('/deferralReasons', {
+        templateUrl : 'views/settings.html',
+        controller : 'DeferralReasonsCtrl',
+        permission: PERMISSIONS.MANAGE_DEFERRAL_REASONS
+      })
+      .when('/manageDeferralReason', {
+        templateUrl : 'views/settings.html',
+        controller : 'ManageDeferralReasonsCtrl',
+        permission: PERMISSIONS.MANAGE_DEFERRAL_REASONS
+      })
+      .when('/discardReasons', {
+        templateUrl : 'views/settings.html',
+        controller : 'DiscardReasonsCtrl',
+        permission: PERMISSIONS.MANAGE_DISCARD_REASONS
+      })
+      .when('/manageDiscardReason', {
+        templateUrl : 'views/settings.html',
+        controller : 'ManageDiscardReasonsCtrl',
+        permission: PERMISSIONS.MANAGE_DISCARD_REASONS
+      })
+      .when('/donationTypes', {
+        templateUrl : 'views/settings.html',
+        controller : 'DonationTypesCtrl',
+        permission: PERMISSIONS.MANAGE_DONATION_TYPES
+      })
+      .when('/manageDonationType', {
+        templateUrl : 'views/settings.html',
+        controller : 'ManageDonationTypesCtrl',
+        permission: PERMISSIONS.MANAGE_DONATION_TYPES
       })
 
       .otherwise({
@@ -309,11 +361,18 @@ var app = angular.module('bsis', [
           $location.path( "/login" );
         }else{
           AuthService.refreshSession();
+
+          // Check if the user must reset their password
+          if (AuthService.getLoggedOnUser().passwordReset) {
+            $location.path('/passwordReset');
+          }
         }
 
       }else{
         // no session - user needs to log in
-        $location.path( "/login" );
+        if (['/login', '/forgotPassword'].indexOf($location.path()) === -1) {
+          $location.path( "/login" );
+        }
       }
 
       /*

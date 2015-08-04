@@ -22,13 +22,26 @@ angular.module('bsis')
       } else if ($location.path() === "/manageConfiguration" && path === "/configurations") {
         $scope.selection = $location.path();
         return true;
+      } else if ($location.path() === "/manageDeferralReason" && path === "/deferralReasons") {
+        $scope.selection = $location.path();
+        return true;
+      } else if ($location.path() === "/manageDiscardReason" && path === "/discardReasons") {
+        $scope.selection = $location.path();
+        return true;
       } else if ($location.path() === "/manageRole" && path === "/roles") {
         $scope.selection = $location.path();
         return true;
       } else if ($location.path() === "/manageUser" && path === "/users") {
         $scope.selection = $location.path();
         return true;
-      }  else {
+      }else if ($location.path() === "/manageDonationType" && path === "/donationTypes") {
+        $scope.selection = $location.path();
+        return true;
+      }
+      else if ($location.path() === "/managePackType" && path === "/packTypes") {
+        $scope.selection = $location.path();
+        return true;
+      } else {
         return false;
       }
     };

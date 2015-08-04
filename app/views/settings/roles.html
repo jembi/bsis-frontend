@@ -6,7 +6,7 @@
       <div class="panel-body">
 
         <p>
-            <em> {{rolesCount}} role(s) found </em> <span has-permission="{{permissions.ADD_ROLES}}"> | <em> <a href="" ng-click="addNewRole()" >Add New Role</a></em> </span>
+            <em> {{rolesCount}} role(s) found </em> <span has-permission="{{permissions.MANAGE_ROLES}}"> | <em> <a href="" ng-click="addNewRole()" >Add New Role</a></em> </span>
         </p>
 
         <table ng-table="rolesTableParams" show-filter="false" class="table">
