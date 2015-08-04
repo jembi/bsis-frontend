@@ -140,7 +140,7 @@ angular.module('bsis')
         {
           query: {
             method: 'GET',
-            params:{isClosed:'@isClosed', collectionCenters:'@collectionCenters', collectionSites: '@collectionSites'}
+            params:{isClosed:'@isClosed', donorPanels:'@donorPanels'}
           }
         }
       ),
@@ -210,6 +210,12 @@ angular.module('bsis')
       ),
 
       DiscardReasons: $resource(url + '/discardreasons/:id', null,
+        {
+          update: {method:'PUT'}
+        }
+      ),
+
+      DonationTypes: $resource(url + '/donationtypes/:id', null,
         {
           update: {method:'PUT'}
         }

@@ -121,8 +121,6 @@ angular.module('bsis')
         if (response !== false){
           recentTestBatchData = response.testBatches;
           $scope.recentTestBatchData = recentTestBatchData;
-          console.log("recentTestBatchData: ", recentTestBatchData);
-          console.log("recentTestBatchData.length: ", recentTestBatchData.length);
 
           if (recentTestBatchData.length > 0){
             $scope.recentTestBatches = true;
@@ -290,8 +288,8 @@ angular.module('bsis')
           $scope.testBatch = response.testBatch;
 
           var donations = [];
-          angular.forEach($scope.testBatch.collectionBatches, function(batch){
-            angular.forEach(batch.collectionsInBatch, function(donation){
+          angular.forEach($scope.testBatch.donationBatches, function(batch){
+            angular.forEach(batch.donations, function(donation){
               donations.push(donation);
             });
           });
@@ -349,7 +347,6 @@ angular.module('bsis')
     });
 
     $scope.closeTestBatchCheck = function(testBatch){
-      console.log("testBatch.id: ", testBatch.id);
       $scope.testBatchToClose = testBatch.id;
     };
 
@@ -401,9 +398,7 @@ angular.module('bsis')
       TestingService.getTTITestingFormFields( function(response){
         if (response !== false){
           $scope.ttiTestsBasic = response.basicTTITests;
-          console.log("$scope.ttiTestsBasic: ",$scope.ttiTestsBasic);
           $scope.ttiTestsConfirmatory = response.confirmatoryTTITests;
-          console.log("$scope.ttiTestsConfirmatory: ",$scope.ttiTestsConfirmatory);
         }
         else{
         }
@@ -411,7 +406,6 @@ angular.module('bsis')
       TestingService.getBloodGroupTestingFormFields( function(response){
         if (response !== false){
           $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
-          console.log("$scope.bloodTypingTestsBasic: ",$scope.bloodTypingTestsBasic);
         }
         else{
         }
@@ -428,11 +422,11 @@ angular.module('bsis')
           $scope.addTestResults = {};
           $scope.addTestMatchResults = {};
           angular.forEach($scope.data, function(value, key) {
-            $scope.addTestResults[value.collectedSample.collectionNumber] = {"donationIdentificationNumber": value.collectedSample.collectionNumber};
+            $scope.addTestResults[value.donation.donationIdentificationNumber] = {"donationIdentificationNumber": value.donation.donationIdentificationNumber};
 
-            $scope.addTestMatchResults[value.collectedSample.collectionNumber] = {"donationIdentificationNumber": value.collectedSample.collectionNumber};
-            $scope.addTestMatchResults[value.collectedSample.collectionNumber] = {"bloodAbo": ""};
-            $scope.addTestMatchResults[value.collectedSample.collectionNumber] = {"bloodRh": ""};
+            $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {"donationIdentificationNumber": value.donation.donationIdentificationNumber};
+            $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {"bloodAbo": ""};
+            $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {"bloodRh": ""};
           });
 
         }

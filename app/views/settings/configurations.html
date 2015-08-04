@@ -5,7 +5,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <p>
-            <em> {{configurationsCount}} configuration(s) found </em> <span has-permission="{{permissions.MANAGE_CONFIGURATIONS}}"> | <em> <a href="" ng-click="addNewConfiguration()" >Add New Configuration</a></em> </span>
+            <em> {{configurationsCount}} configuration(s) found </em> <span has-permission="{{permissions.MANAGE_GENERAL_CONFIGS}}"> | <em> <a href="" ng-click="addNewConfiguration()" >Add New Configuration</a></em> </span>
         </p>
         <table ng-table="configurationsTableParams" show-filter="false" class="table">
           <tr ng-repeat="configuration in $data"

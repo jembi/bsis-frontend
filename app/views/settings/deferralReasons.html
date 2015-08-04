@@ -5,7 +5,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <p>
-            <em> {{deferralReasonsCount}} deferral reason(s) found </em> <span has-permission="{{permissions.MANAGE_CONFIGURATIONS}}"> | <em> <a href="" ng-click="addNewDeferralReason()" >Add New Deferral Reason</a></em> </span>
+            <em> {{deferralReasonsCount}} deferral reason(s) found </em> <span has-permission="{{permissions.MANAGE_DEFERRAL_REASONS}}"> | <em> <a href="" ng-click="addNewDeferralReason()" >Add New Deferral Reason</a></em> </span>
         </p>
         <table ng-table="deferralsTableParams" show-filter="false" class="table">
           <tr ng-repeat="deferral in $data"

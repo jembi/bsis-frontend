@@ -1,0 +1,176 @@
+'use strict';
+
+angular.module('bsis')
+  .controller('DonationTypesCtrl', function ($scope, $location, DonationTypesService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
+
+    $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
+
+    var data = [{}];
+    $scope.data = data;
+    $scope.donationTypes = {};
+
+    $scope.clear = function () {
+
+    };
+
+    $scope.clearForm = function(form){
+      form.$setPristine();
+      $scope.submitted = '';
+    };
+
+    $scope.getDonationTypes = function () {
+      DonationTypesService.getDonationTypes(function(response){
+        if (response !== false){
+          data = response;
+          $scope.data = data;
+          $scope.donationTypes = data;
+          $scope.donationTypesCount = $scope.donationTypes.length;
+
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.donationTypesTableParams = new ngTableParams({
+        page: 1,            // show first page
+        count: 6,          // count per page
+        filter: {},
+        sorting: {}
+      },
+      {
+        defaultSort: 'asc',
+        counts: [], // hide page counts control
+        total: data.length, // length of data
+        getData: function ($defer, params) {
+          var filteredData = params.filter() ?
+            $filter('filter')(data, params.filter()) : data;
+          var orderedData = params.sorting() ?
+            $filter('orderBy')(filteredData, params.orderBy()) : data;
+          params.total(orderedData.length); // set total for pagination
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
+
+    $scope.$watch("data", function () {
+      $timeout(function () {
+        $scope.donationTypesTableParams.reload();
+      });
+    });
+
+    $scope.addNewDonationType = function () {
+      DonationTypesService.setDonationType("");
+      $location.path('/manageDonationType');
+    };
+
+    $scope.manageDonationType = function (donationType) {
+      console.log(donationType);
+      $scope.donationType = donationType;
+      DonationTypesService.setDonationType(donationType);
+      $location.path("/manageDonationType");
+    };
+
+    $scope.getDonationTypes();
+
+  })
+
+  .controller('ManageDonationTypesCtrl', function ($scope, $location, DonationTypesService, ICONS, PERMISSIONS){
+    $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
+    $scope.selection = '/manageDonationType';
+
+    $scope.donationType = DonationTypesService.getDonationType();
+    console.log($scope.donationType);
+
+    if ($scope.donationType === ""){
+      $scope.donationType = {
+        isDeleted : false
+      };
+    } else {
+      $scope.disableDonationTypename = true;
+    }
+
+
+    $scope.saveDonationType = function (donationType, donationTypeForm) {
+
+      if (donationTypeForm.$valid) {
+        if (typeof(donationType) != 'undefined') {
+          if (typeof(donationType.id) != 'undefined') {
+            $scope.updateDonationType(donationType, donationTypeForm);
+          } else {
+            $scope.addDonationType(donationType, donationTypeForm);
+          }
+        } else {
+
+        }
+      } else {
+        $scope.submitted = true;
+      }
+    };
+
+    $scope.serverError = {};
+
+
+    $scope.updateDonationType = function (donationType, donationTypeForm) {
+      if (donationTypeForm.$valid) {
+
+        DonationTypesService.updateDonationType(donationType, function (response, err) {
+          if (response !== false){
+            $scope.go('/donationTypes');
+          } else{
+
+            if(err.type){
+              $scope.typeInvalid = "ng-invalid";
+              $scope.serverError.type = err.type;
+            }
+          }
+        });
+      } else {
+        $scope.submitted = true;
+      }
+    };
+
+
+    $scope.addDonationType = function (donationType, donationTypeForm) {
+
+      if (donationTypeForm.$valid) {
+        donationType.isDeleted = false;
+        DonationTypesService.addDonationType(donationType, function (response, err) {
+          if (response !== false) {
+            $scope.donationType = {
+              donationType: '',
+              isDeleted: false
+            };
+            donationTypeForm.$setPristine();
+            $scope.submitted = '';
+            $scope.go('/donationTypes');
+          }
+          else {
+            if(err.type){
+              $scope.typeInvalid = "ng-invalid";
+              $scope.serverError.type = err.type;
+            }
+          }
+        });
+      }
+      else {
+        $scope.submitted = true;
+      }
+    };
+
+    $scope.clearForm = function (form) {
+      form.$setPristine();
+      $scope.submitted = '';
+    };
+
+    $scope.cancel = function (form) {
+      $scope.clearForm(form);
+      $location.path("/donationTypes");
+    };
+
+
+    $scope.go = function (path) {
+      $location.path(path);
+    };
+  });

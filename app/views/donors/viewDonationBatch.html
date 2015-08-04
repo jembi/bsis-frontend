@@ -1,19 +1,19 @@
 <p>
   <em> 
-    {{donationBatch.numCollections}} donation(s) in batch</em> <span ng-if="donationBatch.isClosed!=true" has-permission="{{permissions.ADD_DONATION}}"> | <em> <a  href="" ng-click="viewAddDonationForm()" >Add Donation</a></em> </span>
+    {{donationBatch.numDonations}} donation(s) in batch</em> <span ng-if="donationBatch.isClosed!=true" has-permission="{{permissions.ADD_DONATION}}"> | <em> <a  href="" ng-click="viewAddDonationForm()" >Add Donation</a></em> </span>
 </p>
 
 <table ng-table="donorClinicTableParams" show-filter="true" class="table">
   <tr ng-repeat="donation in $data"
-    ng-click="viewDonationSummary(donation.collectionNumber); changeSelection(donation);"
+    ng-click="viewDonationSummary(donation.donationIdentificationNumber); changeSelection(donation);"
     ng-mouseenter="this.$selected = true"
     ng-mouseleave="this.$selected = false"
     ng-class="{'active': donation.$selected}">
     <td data-title="'Donor #'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donorNumber'"  filter="{ 'donorNumber': 'text' }">
         {{donation.donorNumber}}
     </td>
-    <td data-title="'DIN'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'"  filter="{ 'collectionNumber': 'text' }">
-        {{donation.collectionNumber}}
+    <td data-title="'DIN'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'"  filter="{ 'donationIdentificationNumber': 'text' }">
+        {{donation.donationIdentificationNumber}}
     </td>
     <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'bloodBagType'" filter="{ 'packType.bloodBagType': 'select' }"
         filter-data="packTypeFilter($column)">
