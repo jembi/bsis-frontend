@@ -13,7 +13,8 @@ var app = angular.module('bsis', [
   '720kb.tooltips'
 
 ])
-  .config(function($routeProvider, PERMISSIONS) {
+  .config(function($routeProvider, PERMISSIONS, DONORS_TAB_ENABLED, COMPONENTS_TAB_ENABLED, TESTING_TAB_ENABLED,
+          INVENTORY_TAB_ENABLED, LABELLING_TAB_ENABLED, REPORTS_TAB_ENABLED, MOBILE_CLINIC_TAB_ENABLED) {
     $routeProvider
 
       // DEFAULT VIEW - DISPLAY HOME PAGE IF USER AUTHENTICATED
@@ -51,19 +52,21 @@ var app = angular.module('bsis', [
       .when('/home', {
         templateUrl : 'views/home.html',
         controller  : 'HomeCtrl',
-        permission: PERMISSIONS.AUTHENTICATED
+        permission: PERMISSIONS.AUTHENTICATED,
       })
 
       // DONORS URLs
       .when('/donors', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorsCtrl',
-        permission: PERMISSIONS.VIEW_DONOR_INFORMATION
+        permission  : PERMISSIONS.VIEW_DONOR_INFORMATION,
+        enabled : DONORS_TAB_ENABLED
       })
       .when('/findDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorsCtrl',
-        permission: PERMISSIONS.VIEW_DONOR
+        permission: PERMISSIONS.VIEW_DONOR,
+        enabled : DONORS_TAB_ENABLED
       })
       .when('/addDonor', {
         templateUrl : 'views/donors.html',
@@ -100,7 +103,8 @@ var app = angular.module('bsis', [
       .when('/components', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENT_INFORMATION
+        permission: PERMISSIONS.VIEW_COMPONENT_INFORMATION,
+        enabled : COMPONENTS_TAB_ENABLED
       })
       .when('/recordComponents', {
         templateUrl : 'views/components.html',
@@ -127,7 +131,9 @@ var app = angular.module('bsis', [
       .when('/testing', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TESTING_INFORMATION
+        permission: PERMISSIONS.VIEW_TESTING_INFORMATION,
+        enabled : TESTING_TAB_ENABLED
+
       })
       .when('/viewTestResults', {
         templateUrl : 'views/testing.html',
@@ -174,7 +180,8 @@ var app = angular.module('bsis', [
       .when('/inventory', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION,
+        enabled : INVENTORY_TAB_ENABLED
       })
       .when('/manageInventory', {
         templateUrl : 'views/inventory.html',
@@ -201,7 +208,8 @@ var app = angular.module('bsis', [
       .when('/labelling', {
         templateUrl : 'views/labelling.html',
         controller  : 'LabellingCtrl',
-        permission: PERMISSIONS.COMPONENT_LABELLING
+        permission: PERMISSIONS.COMPONENT_LABELLING,
+        enabled : LABELLING_TAB_ENABLED
       })
       .when('/labelComponents', {
         templateUrl : 'views/labelling.html',
@@ -213,14 +221,16 @@ var app = angular.module('bsis', [
       .when('/reports', {
         templateUrl : 'views/reports.html',
         controller  : 'ReportsCtrl',
-        permission: PERMISSIONS.VIEW_REPORTING_INFORMATION
+        permission: PERMISSIONS.VIEW_REPORTING_INFORMATION,
+        enabled : REPORTS_TAB_ENABLED
       })
 
       // MOBILE URLs
       .when('/mobile', {
         templateUrl : 'views/mobile.html',
         controller  : 'MobileCtrl',
-        permission: PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION
+        permission: PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION,
+        enabled : MOBILE_CLINIC_TAB_ENABLED
       })
 
       // SETTINGS URLs
@@ -330,9 +340,15 @@ var app = angular.module('bsis', [
       }
 
       var permission = next.$$route.permission;
+      var enabled = next.$$route.enabled;
+
+      if (enabled === "false"){
+        $rootScope.accessDenied = true;
+        $location.path('/home');
+      }
 
       // if the required permission is not in the current user's permissions list, redirect to home page and display alert
-      if (permission !== undefined && $rootScope.sessionUserPermissions.indexOf(permission) <= -1){
+      if (enabled !== true && permission !== undefined && $rootScope.sessionUserPermissions.indexOf(permission) <= -1){
         $rootScope.accessDenied = true;
         $location.path('/home');
       }
