@@ -55,7 +55,14 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, Api,
   }, {
     getData: function($defer, params) {
 
-      Api.AuditRevisions.query(function(auditRevisions) {
+      var query = {};
+
+      var filter = params.filter();
+      if (filter.user) {
+        query.search = filter.user;
+      }
+
+      Api.AuditRevisions.query(query, function(auditRevisions) {
         // Transform
         var data = groupModifications(unwindRevisions(auditRevisions));
         params.total(data.length);
