@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.controller('HeaderCtrl', function ($scope, $location, AuthService, ICONS, PERMISSIONS) {
+.controller('HeaderCtrl', function ($scope, $location, AuthService, ICONS, PERMISSIONS, UI) {
 
   $scope.icons = ICONS;
 
@@ -19,37 +19,45 @@ angular.module('bsis')
     {'title': 'DONORS',
      'href': '#donors',
      'icon': ICONS.DONORS,
-     'permission': PERMISSIONS.VIEW_DONOR_INFORMATION
+     'permission': PERMISSIONS.VIEW_DONOR_INFORMATION,
+     'sectionEnabled' : UI.DONORS_TAB_ENABLED
+
     },
     {'title': 'COMPONENTS',
      'href': '#components',
      'icon': ICONS.COMPONENTS,
-     'permission': PERMISSIONS.VIEW_COMPONENT_INFORMATION
+     'permission': PERMISSIONS.VIEW_COMPONENT_INFORMATION,
+      'sectionEnabled' : UI.COMPONENTS_TAB_ENABLED
     },
     {'title': 'TESTING',
      'href': '#testing',
      'icon': ICONS.TESTING,
-     'permission': PERMISSIONS.VIEW_TESTING_INFORMATION
+     'permission': PERMISSIONS.VIEW_TESTING_INFORMATION,
+      'sectionEnabled' : UI.TESTING_TAB_ENABLED
     },
     {'title': 'LABELLING',
      'href': '#labelling',
      'icon': ICONS.LABELLING,
-     'permission': PERMISSIONS.LABEL_COMPONENT
+     'permission': PERMISSIONS.LABEL_COMPONENT,
+      'sectionEnabled' : UI.LABELLING_TAB_ENABLED
     },
     {'title': 'INVENTORY',
      'href': '#inventory',
      'icon': ICONS.INVENTORY,
-     'permission': PERMISSIONS.VIEW_INVENTORY_INFORMATION
+     'permission': PERMISSIONS.VIEW_INVENTORY_INFORMATION,
+      'sectionEnabled' : UI.INVENTORY_TAB_ENABLED
     },
     {'title': 'REPORTS',
      'href': '#reports',
      'icon': ICONS.REPORTS,
-     'permission': PERMISSIONS.VIEW_REPORTING_INFORMATION
+     'permission': PERMISSIONS.VIEW_REPORTING_INFORMATION,
+      'sectionEnabled' : UI.REPORTS_TAB_ENABLED
     },
     {'title': 'MOBILE CLINIC',
      'href': '#mobile',
      'icon': ICONS.MOBILE,
-     'permission': PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION
+     'permission': PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION,
+      'sectionEnabled' : UI.MOBILE_CLINIC_TAB_ENABLED
     },
     {'title': 'SETTINGS',
      'href': '#settings',

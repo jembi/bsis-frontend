@@ -1,5 +1,7 @@
 'use strict';
 
+var UI = {};
+
 var app = angular.module('bsis', [
   'ngRoute',
   'ui.bootstrap',
@@ -13,8 +15,7 @@ var app = angular.module('bsis', [
   '720kb.tooltips'
 
 ])
-  .config(function($routeProvider, PERMISSIONS, DONORS_TAB_ENABLED, COMPONENTS_TAB_ENABLED, TESTING_TAB_ENABLED,
-          INVENTORY_TAB_ENABLED, LABELLING_TAB_ENABLED, REPORTS_TAB_ENABLED, MOBILE_CLINIC_TAB_ENABLED) {
+  .config(function($routeProvider, PERMISSIONS, UI) {
     $routeProvider
 
       // DEFAULT VIEW - DISPLAY HOME PAGE IF USER AUTHENTICATED
@@ -60,43 +61,49 @@ var app = angular.module('bsis', [
         templateUrl : 'views/donors.html',
         controller  : 'DonorsCtrl',
         permission  : PERMISSIONS.VIEW_DONOR_INFORMATION,
-        enabled : DONORS_TAB_ENABLED
+        enabled : UI.DONORS_TAB_ENABLED
       })
       .when('/findDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorsCtrl',
         permission: PERMISSIONS.VIEW_DONOR,
-        enabled : DONORS_TAB_ENABLED
+        enabled : UI.DONORS_TAB_ENABLED
       })
       .when('/addDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'AddDonorCtrl',
-        permission: PERMISSIONS.ADD_DONOR
+        permission: PERMISSIONS.ADD_DONOR,
+        enabled : UI.DONORS_TAB_ENABLED
       })
       .when('/addDonation', {
         templateUrl : 'views/donors.html',
         controller  : 'AddDonationCtrl',
-        permission: PERMISSIONS.ADD_DONATION
+        permission: PERMISSIONS.ADD_DONATION,
+        enabled : UI.DONORS_TAB_ENABLED
       })
       .when('/manageClinic', {
         templateUrl : 'views/donors.html',
         controller  : 'ViewDonationBatchCtrl',
-        permission: PERMISSIONS.VIEW_DONATION_BATCH
+        permission: PERMISSIONS.VIEW_DONATION_BATCH,
+        enabled : UI.DONORS_TAB_ENABLED
       })
       .when('/exportDonorList', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorListCtrl',
-        permission: PERMISSIONS.EXPORT_CLINIC_DATA
+        permission: PERMISSIONS.EXPORT_CLINIC_DATA,
+        enabled : UI.DONORS_TAB_ENABLED
       })
       .when('/viewDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'ViewDonorCtrl',
-        permission: PERMISSIONS.VIEW_DONOR
+        permission: PERMISSIONS.VIEW_DONOR,
+        enabled : UI.DONORS_TAB_ENABLED
       })
       .when('/manageDonationBatches', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorClinicCtrl',
-        permission: PERMISSIONS.VIEW_DONATION_BATCH
+        permission: PERMISSIONS.VIEW_DONATION_BATCH,
+        enabled : UI.DONORS_TAB_ENABLED
       })
 
       // COMPONENTS URLs
@@ -104,27 +111,31 @@ var app = angular.module('bsis', [
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
         permission: PERMISSIONS.VIEW_COMPONENT_INFORMATION,
-        enabled : COMPONENTS_TAB_ENABLED
+        enabled : UI.COMPONENTS_TAB_ENABLED
       })
       .when('/recordComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        permission: PERMISSIONS.ADD_COMPONENT
+        permission: PERMISSIONS.ADD_COMPONENT,
+        enabled : UI.COMPONENTS_TAB_ENABLED
       })
       .when('/findComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENT
+        permission: PERMISSIONS.VIEW_COMPONENT,
+        enabled : UI.COMPONENTS_TAB_ENABLED
       })
       .when('/discardComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        permission: PERMISSIONS.DISCARD_COMPONENT
+        permission: PERMISSIONS.DISCARD_COMPONENT,
+        enabled : UI.COMPONENTS_TAB_ENABLED
       })
       .when('/findDiscards', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
-        permission: PERMISSIONS.VIEW_DISCARDS
+        permission: PERMISSIONS.VIEW_DISCARDS,
+        enabled : UI.COMPONENTS_TAB_ENABLED
       })
 
       // TESTING URLs
@@ -132,48 +143,56 @@ var app = angular.module('bsis', [
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
         permission: PERMISSIONS.VIEW_TESTING_INFORMATION,
-        enabled : TESTING_TAB_ENABLED
+        enabled : UI.TESTING_TAB_ENABLED
 
       })
       .when('/viewTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',
-        permission: PERMISSIONS.VIEW_TEST_OUTCOME
+        permission: PERMISSIONS.VIEW_TEST_OUTCOME,
+        enabled : UI.TESTING_TAB_ENABLED
       })
       .when('/manageTestBatch', {
         templateUrl : 'views/testing.html',
         controller  : 'TestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TEST_BATCH
+        permission: PERMISSIONS.VIEW_TEST_BATCH,
+        enabled : UI.TESTING_TAB_ENABLED
       })
       .when('/viewTestBatch', {
         templateUrl : 'views/testing.html',
         controller  : 'ViewTestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TEST_BATCH
+        permission: PERMISSIONS.VIEW_TEST_BATCH,
+        enabled : UI.TESTING_TAB_ENABLED
       })
       .when('/manageTTITesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        permission: PERMISSIONS.ADD_TTI_OUTCOME
+        permission: PERMISSIONS.ADD_TTI_OUTCOME,
+        enabled : UI.TESTING_TAB_ENABLED
       })
       .when('/managePendingTests', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        permission: PERMISSIONS.ADD_TTI_OUTCOME
+        permission: PERMISSIONS.ADD_TTI_OUTCOME,
+        enabled : UI.TESTING_TAB_ENABLED
       })
       .when('/manageBloodGroupTesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME
+        permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
+        enabled : UI.TESTING_TAB_ENABLED
       })
       .when('/manageBloodGroupMatchTesting', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
-        permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME
+        permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
+        enabled : UI.TESTING_TAB_ENABLED
       })
       .when('/uploadTestResults', {
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',
-        permission: PERMISSIONS.ADD_TEST_OUTCOME
+        permission: PERMISSIONS.ADD_TEST_OUTCOME,
+        enabled : UI.TESTING_TAB_ENABLED
       })
 
       // INVENTORY URLs
@@ -181,27 +200,31 @@ var app = angular.module('bsis', [
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
         permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION,
-        enabled : INVENTORY_TAB_ENABLED
+        enabled : UI.INVENTORY_TAB_ENABLED
       })
       .when('/manageInventory', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENT
+        permission: PERMISSIONS.VIEW_COMPONENT,
+        enabled : UI.INVENTORY_TAB_ENABLED
       })
       .when('/transferComponents', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.ISSUE_COMPONENT
+        permission: PERMISSIONS.ISSUE_COMPONENT,
+        enabled : UI.INVENTORY_TAB_ENABLED
       })
       .when('/issueComponents', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.ISSUE_COMPONENT
+        permission: PERMISSIONS.ISSUE_COMPONENT,
+        enabled : UI.INVENTORY_TAB_ENABLED
       })
       .when('/componentUsage', {
         templateUrl : 'views/inventory.html',
         controller  : 'InventoryCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENT
+        permission: PERMISSIONS.VIEW_COMPONENT,
+        enabled : UI.INVENTORY_TAB_ENABLED
       })
 
       // LABELLING URLs
@@ -209,12 +232,13 @@ var app = angular.module('bsis', [
         templateUrl : 'views/labelling.html',
         controller  : 'LabellingCtrl',
         permission: PERMISSIONS.COMPONENT_LABELLING,
-        enabled : LABELLING_TAB_ENABLED
+        enabled : UI.LABELLING_TAB_ENABLED
       })
       .when('/labelComponents', {
         templateUrl : 'views/labelling.html',
         controller  : 'LabellingCtrl',
-        permission: PERMISSIONS.COMPONENT_LABELLING
+        permission: PERMISSIONS.COMPONENT_LABELLING,
+        enabled : UI.LABELLING_TAB_ENABLED
       })
 
       // REPORTS URLs
@@ -222,7 +246,7 @@ var app = angular.module('bsis', [
         templateUrl : 'views/reports.html',
         controller  : 'ReportsCtrl',
         permission: PERMISSIONS.VIEW_REPORTING_INFORMATION,
-        enabled : REPORTS_TAB_ENABLED
+        enabled : UI.REPORTS_TAB_ENABLED
       })
 
       // MOBILE URLs
@@ -230,7 +254,7 @@ var app = angular.module('bsis', [
         templateUrl : 'views/mobile.html',
         controller  : 'MobileCtrl',
         permission: PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION,
-        enabled : MOBILE_CLINIC_TAB_ENABLED
+        enabled : UI.MOBILE_CLINIC_TAB_ENABLED
       })
 
       // SETTINGS URLs
@@ -342,7 +366,7 @@ var app = angular.module('bsis', [
       var permission = next.$$route.permission;
       var enabled = next.$$route.enabled;
 
-      if (enabled === "false"){
+      if (enabled === "false" || enabled === false){
         $rootScope.accessDenied = true;
         $location.path('/home');
       }
@@ -722,6 +746,7 @@ var app = angular.module('bsis', [
   function initializeConfig() {
     var initInjector = angular.injector(['ng']);
     var $http = initInjector.get('$http');
+    var $window = initInjector.get('$window');
 
     return $http.get('config/config.json').then(function(response) {
       app.constant('SYSTEMCONFIG', response.data);
@@ -729,6 +754,8 @@ var app = angular.module('bsis', [
         var url = 'http://' + response.data.apiHost + ':' + response.data.apiPort + '/' + response.data.apiApp;
         return $http.get(url+'/configurations').then(function(response) {
           app.constant('USERCONFIG', response.data);
+
+          app.constant('UI', $window.UI);
 
           var config = response.data.configurations;
 
@@ -747,75 +774,74 @@ var app = angular.module('bsis', [
             //Home Tabs constants
 
             else if (config[i].name == 'ui.donorsTabEnabled'){
-              app.constant('DONORS_TAB_ENABLED', config[i].value);
+              $window.UI.DONORS_TAB_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.componentsTabEnabled'){
-              app.constant('COMPONENTS_TAB_ENABLED', config[i].value);
+              $window.UI.COMPONENTS_TAB_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.testingTabEnabled'){
-              app.constant('TESTING_TAB_ENABLED', config[i].value);
+              $window.UI.TESTING_TAB_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.labellingTabEnabled'){
-              app.constant('LABELLING_TAB_ENABLED', config[i].value);
+              $window.UI.LABELLING_TAB_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.inventoryTabEnabled'){
-              app.constant('INVENTORY_TAB_ENABLED', config[i].value);
+              $window.UI.INVENTORY_TAB_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.reportsTabEnabled'){
-              app.constant('REPORTS_TAB_ENABLED', config[i].value);
+              $window.UI.REPORTS_TAB_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.mobileClinicTabEnabled'){
-              app.constant('MOBILE_CLINIC_TAB_ENABLED', config[i].value);
+              $window.UI.MOBILE_CLINIC_TAB_ENABLED = config[i].value;
             }
 
 
             // Donor form units
             else if (config[i].name == 'donation.bpUnit'){
-              app.constant('BPUNIT', config[i].value);
+              $window.UI.BPUNIT = config[i].value;
             }
             else if (config[i].name == 'donation.hbUnit'){
-              app.constant('HBUNIT', config[i].value);
+              $window.UI.HBUNIT = config[i].value;
             }
             else if (config[i].name == 'donation.weightUnit'){
-              app.constant('WEIGHTUNIT', config[i].value);
+              $window.UI.WEIGHTUNIT = config[i].value;
             }
             else if (config[i].name == 'donation.pulseUnit'){
-              app.constant('PULSEUNIT', config[i].value);
+              $window.UI.PULSEUNIT = config[i].value;
             }
 
           // donor form constants
 
             else if (config[i].name == 'donation.donor.bpSystolicMin'){
-              app.constant('BP_SYSTOLIC_MIN', config[i].value);
+              $window.UI.BP_SYSTOLIC_MIN = config[i].value;
             }
             else if (config[i].name == 'donation.donor.bpSystolicMax'){
-              app.constant('BP_SYSTOLIC_MAX', config[i].value);
+              $window.UI.BP_SYSTOLIC_MAX = config[i].value;
             }
             else if (config[i].name == 'donation.donor.bpDiastolicMin'){
-              app.constant('BP_DIASTOLIC_MIN', config[i].value);
+              $window.UI.BP_DIASTOLIC_MIN = config[i].value;
             }
             else if (config[i].name == 'donation.donor.bpDiastolicMax'){
-              app.constant('BP_DIASTOLIC_MAX', config[i].value);
+              $window.UI.BP_DIASTOLIC_MAX = config[i].value;
             }
             else if (config[i].name == 'donation.donor.hbMin'){
-              app.constant('HB_MIN', config[i].value);
+              $window.UI.HB_MIN = config[i].value;
             }
             else if (config[i].name == 'donation.donor.hbMax'){
-              app.constant('HB_MAX', config[i].value);
+              $window.UI.HB_MAX = config[i].value;
             }
             else if (config[i].name == 'donation.donor.weightMin'){
-              app.constant('WEIGHT_MIN', config[i].value);
+              $window.UI.WEIGHT_MIN = config[i].value;
             }
             else if (config[i].name == 'donation.donor.weightMax'){
-              app.constant('WEIGHT_MAX', config[i].value);
+              $window.UI.WEIGHT_MAX = config[i].value;
             }
             else if (config[i].name == 'donation.donor.pulseMin'){
-              app.constant('PULSE_MIN', config[i].value);
+              $window.UI.PULSE_MIN = config[i].value;
             }
             else if (config[i].name == 'donation.donor.pulseMax'){
-              app.constant('PULSE_MAX', config[i].value);
+              $window.UI.PULSE_MAX = config[i].value;
             }
-
           }
 
         }, function() {

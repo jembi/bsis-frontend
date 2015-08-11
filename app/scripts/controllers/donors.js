@@ -184,10 +184,7 @@ angular.module('bsis')
   
   // Controller for Viewing Donors
   .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
-                                         GENDER, DATEFORMAT, BPUNIT, HBUNIT, WEIGHTUNIT, PULSEUNIT,
-                                         WEIGHT_MIN, WEIGHT_MAX, BP_SYSTOLIC_MIN, BP_SYSTOLIC_MAX, BP_DIASTOLIC_MIN,
-                                         BP_DIASTOLIC_MAX,HB_MIN, HB_MAX,  PULSE_MIN, PULSE_MAX,
-                                         $filter, $q, ngTableParams, $timeout) {
+                                         GENDER, DATEFORMAT, UI, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
     $scope.age = '';
@@ -201,21 +198,21 @@ angular.module('bsis')
       mstep: [1, 5, 10, 15, 25, 30]
     };
 
-    $scope.bpUnit = BPUNIT;
-    $scope.hbUnit = HBUNIT;
-    $scope.weightUnit = WEIGHTUNIT;
-    $scope.pulseUnit = PULSEUNIT;
+    $scope.bpUnit = UI.BPUNIT;
+    $scope.hbUnit = UI.HBUNIT;
+    $scope.weightUnit = UI.WEIGHTUNIT;
+    $scope.pulseUnit = UI.PULSEUNIT;
 
-    $scope.weightMin = WEIGHT_MIN;
-    $scope.weightMax = WEIGHT_MAX;
-    $scope.hbMin = HB_MIN;
-    $scope.hbMax = HB_MAX;
-    $scope.bpSystolicMin = BP_SYSTOLIC_MIN;
-    $scope.bpSystolicMax = BP_SYSTOLIC_MAX;
-    $scope.bpDiastolicMin = BP_DIASTOLIC_MIN;
-    $scope.bpDiastolicMax = BP_DIASTOLIC_MAX;
-    $scope.pulseMin = PULSE_MIN;
-    $scope.pulseMax = PULSE_MAX;
+    $scope.weightMin = UI.WEIGHT_MIN;
+    $scope.weightMax = UI.WEIGHT_MAX;
+    $scope.hbMin = UI.HB_MIN;
+    $scope.hbMax = UI.HB_MAX;
+    $scope.bpSystolicMin = UI.BP_SYSTOLIC_MIN;
+    $scope.bpSystolicMax = UI.BP_SYSTOLIC_MAX;
+    $scope.bpDiastolicMin = UI.BP_DIASTOLIC_MIN;
+    $scope.bpDiastolicMax = UI.BP_DIASTOLIC_MAX;
+    $scope.pulseMin = UI.PULSE_MIN;
+    $scope.pulseMax = UI.PULSE_MAX;
 
     $scope.donor = DonorService.getDonor();
 
@@ -846,10 +843,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE,  DATEFORMAT, BPUNIT,
-                                                 HBUNIT, WEIGHTUNIT, PULSEUNIT, WEIGHT_MIN, WEIGHT_MAX, BP_SYSTOLIC_MIN,
-                                                 BP_SYSTOLIC_MAX, BP_DIASTOLIC_MIN, BP_DIASTOLIC_MAX,HB_MIN, HB_MAX,
-                                                 PULSE_MIN, PULSE_MAX, $q, $filter, ngTableParams, $timeout) {
+  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE,  DATEFORMAT, UI, $q, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -866,20 +860,20 @@ angular.module('bsis')
 
 
 
-    $scope.bpUnit = BPUNIT;
-    $scope.hbUnit = HBUNIT;
-    $scope.weightUnit = WEIGHTUNIT;
-    $scope.pulseUnit = PULSEUNIT;
-    $scope.weightMin = WEIGHT_MIN;
-    $scope.weightMax = WEIGHT_MAX;
-    $scope.hbMin = HB_MIN;
-    $scope.hbMax = HB_MAX;
-    $scope.bpSystolicMin = BP_SYSTOLIC_MIN;
-    $scope.bpSystolicMax = BP_SYSTOLIC_MAX;
-    $scope.bpDiastolicMin = BP_DIASTOLIC_MIN;
-    $scope.bpDiastolicMax = BP_DIASTOLIC_MAX;
-    $scope.pulseMin = PULSE_MIN;
-    $scope.pulseMax = PULSE_MAX;
+    $scope.bpUnit = UI.BPUNIT;
+    $scope.hbUnit = UI.HBUNIT;
+    $scope.weightUnit = UI.WEIGHTUNIT;
+    $scope.pulseUnit = UI.PULSEUNIT;
+    $scope.weightMin = UI.WEIGHT_MIN;
+    $scope.weightMax = UI.WEIGHT_MAX;
+    $scope.hbMin = UI.HB_MIN;
+    $scope.hbMax = UI.HB_MAX;
+    $scope.bpSystolicMin = UI.BP_SYSTOLIC_MIN;
+    $scope.bpSystolicMax = UI.BP_SYSTOLIC_MAX;
+    $scope.bpDiastolicMin = UI.BP_DIASTOLIC_MIN;
+    $scope.bpDiastolicMax = UI.BP_DIASTOLIC_MAX;
+    $scope.pulseMin = UI.PULSE_MIN;
+    $scope.pulseMax = UI.PULSE_MAX;
 
 
     $scope.init = function () {
