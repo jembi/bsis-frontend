@@ -38,6 +38,24 @@ angular.module('bsis')
       return angularDateFilter(theDate, TIMEFORMAT);
     };
   })
+
+  .filter('revisionType', function() {
+    return function(revisionType) {
+      switch (revisionType) {
+        case 'ADD':
+          return 'Added';
+
+        case 'MOD':
+          return 'Modified';
+
+        case 'DEL':
+          return 'Deleted';
+
+        default:
+          return '';
+      }
+    };
+  })
 ;
 
 

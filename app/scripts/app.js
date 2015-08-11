@@ -309,6 +309,11 @@ var app = angular.module('bsis', [
         controller : 'ManageDonationTypesCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_TYPES
       })
+      .when('/auditLog', {
+        templateUrl : 'views/settings.html',
+        controller  : 'AuditLogCtrl',
+        permission: PERMISSIONS.VIEW_AUDIT_LOG
+      })
 
       .otherwise({
         redirectTo: '/home'
