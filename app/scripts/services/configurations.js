@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.factory('ConfigurationsService', function ($http, Api, $filter, USERCONFIG) {
+.factory('ConfigurationsService', function ($http, Api, $filter, USERCONFIG, $window) {
 
   var configurationObj = {};
   return {
@@ -37,6 +37,7 @@ angular.module('bsis')
 
       addConfiguration.$save(function(data){
         response(data);
+        $window.location.reload();
       }, function (err){
         response(false, err.data);
       });
@@ -49,6 +50,7 @@ angular.module('bsis')
       Api.Configurations.update({id:configuration.id}, updatedConfiguration, function(data) {
         configurationObj = data.configuration;
         response(configurationObj);
+        $window.location.reload();
       }, function (err){
         response(false, err.data);
       });
