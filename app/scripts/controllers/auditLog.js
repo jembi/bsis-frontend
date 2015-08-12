@@ -89,7 +89,6 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, 
       Api.AuditRevisions.query(query, function(auditRevisions) {
         // Transform
         var data = groupModifications(unwindRevisions(auditRevisions));
-        params.total(data.length);
 
         // Filter
         data = $filter('filter')(data, filter);
@@ -98,6 +97,9 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, 
         if (params.sorting()) {
           data = $filter('orderBy')(data, params.orderBy());
         }
+        
+        // Set total number of rows for pagination
+        params.total(data.length);
 
         // Page
         $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
