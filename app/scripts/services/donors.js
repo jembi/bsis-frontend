@@ -9,7 +9,7 @@ angular.module('bsis')
 
   return {
     findDonor: function (donorSearch, response) {
-      var donors = Api.FindDonors.query({firstName: donorSearch.firstName, lastName: donorSearch.lastName, 
+      var donors = Api.FindDonors.query({firstName: donorSearch.firstName, lastName: donorSearch.lastName,
           donorNumber: donorSearch.donorNumber, donationIdentificationNumber: donorSearch.donationIdentificationNumber, usePhraseMatch: donorSearch.usePhraseMatch}, function(){
         console.log("donorSearch: ", donorSearch);
         console.log("findDonors: ", donors);
@@ -17,7 +17,7 @@ angular.module('bsis')
         donorsObj = donors;
         response(donorsObj);
       }, function (){
-        response(false);  
+        response(false);
       });
     },
     addDonor: function (donor, response){
@@ -26,12 +26,12 @@ angular.module('bsis')
       angular.copy(donor, addDonor);
 
       // save donor (POST /donor) and assign response donor object to 'donorObj'
-      addDonor.$save(function(data){ 
+      addDonor.$save(function(data){
         response(true);
         donorObj = data.donor;
       }, function (){
         response(false);
-      }); 
+      });
     },
     updateDonor: function (donor, response){
 
@@ -47,7 +47,7 @@ angular.module('bsis')
          response(donorObj);
         }, function (){
           response(false);
-        }); 
+        });
 
       });
 
@@ -114,15 +114,15 @@ angular.module('bsis')
       angular.copy(donation, addDonation);
 
       // save donation (POST /donations)
-      addDonation.$save(function(data){ 
+      addDonation.$save(function(data){
         // refresh donation batch after adding donation to it, and add to response
         Api.DonationBatches.get({id:donationBatchObj.id}, function (donationBatch){
           donationBatchObj = donationBatch.donationBatch;
           response(donationBatch.donationBatch);
         });
-      }, function (){
-        response(false);
-      }); 
+      }, function (err){
+        response(false, err.data);
+      });
     },
     addDonation: function (donation, response){
       // create $Resource object and assign donation values
@@ -131,11 +131,11 @@ angular.module('bsis')
       angular.copy(donation, addDonation);
 
       // save donation (POST /donations)
-      addDonation.$save(function(data){ 
+      addDonation.$save(function(data){
         response(true);
-      }, function (){
-        response(false);
-      }); 
+      }, function (err){
+        response(false, err.data);
+      });
     },
     updateDonation: function (donation, response){
 
@@ -148,7 +148,7 @@ angular.module('bsis')
          response(data.donation);
         }, function (){
           response(false);
-        }); 
+        });
 
       });
     },
@@ -162,16 +162,16 @@ angular.module('bsis')
     addDeferral: function (deferral, response){
       // create $Resource object and assign donation values
       var addDeferral = new Api.Deferrals();
-      
+
       angular.copy(deferral, addDeferral);
 
       // save deferral (POST /deferral)
-      addDeferral.$save(function(data){ 
+      addDeferral.$save(function(data){
         response(true);
         console.log("addDeferral response: ",data.deferral);
       }, function (){
         response(false);
-      }); 
+      });
     },
     getDeferrals: function (donorId, response) {
       Api.DonorDeferrals.get({id:donorId}, function (deferrals) {
@@ -238,11 +238,11 @@ angular.module('bsis')
       angular.copy(donationBatch, addDonationBatch);
 
       // save deferral (POST /deferral)
-      addDonationBatch.$save(function(data){ 
+      addDonationBatch.$save(function(data){
         response(true);
       }, function (){
         response(false);
-      }); 
+      });
     },
     closeDonationBatch: function (donationBatch, response){
       var updateDonationBatch = Api.DonationBatches.get({id:donationBatch.id}, function() {
@@ -255,7 +255,7 @@ angular.module('bsis')
          response(data.donationBatch);
         }, function (){
           response(false);
-        }); 
+        });
 
       });
     },

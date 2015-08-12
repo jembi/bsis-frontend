@@ -21,13 +21,13 @@ angular.module('bsis')
     $scope.currentYear = currentTime.getFullYear();
     $scope.minYear = $scope.currentYear - 100;
 
-    $scope.findDonor = function () {   
+    $scope.findDonor = function () {
       DonorService.findDonor($scope.donorSearch, function(response){
       if (response !== false){
         data = response;
         $scope.data = data;
         $scope.searchResults = true;
-        
+
       }
       else{
         $scope.searchResults = false;
@@ -150,7 +150,7 @@ angular.module('bsis')
     };
 
     $scope.updateDonor = function (donor){
-      
+
       DonorService.updateDonor(donor, function(response){
         if (response !== false){
           $scope.donor = response;
@@ -159,7 +159,7 @@ angular.module('bsis')
           // TODO: handle case where response == false
         }
       });
-      
+
     };
 
     $scope.edit = function () {
@@ -179,9 +179,9 @@ angular.module('bsis')
             params.total(orderedData.length); // set total for pagination
             $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
-    }); 
+    });
   })
-  
+
   // Controller for Viewing Donors
   .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, DATEFORMAT, $filter, $q, ngTableParams, $timeout) {
 
@@ -198,6 +198,7 @@ angular.module('bsis')
     };
 
     $scope.donor = DonorService.getDonor();
+    $scope.serverError = {};
 
     DonorService.getDonorFormFields(function(response){
       if (response !== false){
@@ -272,7 +273,7 @@ angular.module('bsis')
         count: 6,          // count per page
         filter: {},
         sorting: {}
-      }, 
+      },
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
@@ -331,7 +332,7 @@ angular.module('bsis')
         count: 6,          // count per page
         filter: {},
         sorting: {}
-      }, 
+      },
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
@@ -402,7 +403,7 @@ angular.module('bsis')
       $q.all(requests).then(function(){
         $scope.donationsView = 'viewDonationDetails';
       });
-      
+
     };
 
     $scope.viewAddDonationForm = function (){
@@ -434,7 +435,7 @@ angular.module('bsis')
         donation.bleedStartTime = bleedStartTime;
         donation.bleedEndTime = bleedEndTime;
 
-        DonorService.addDonation(donation, function(response){
+        DonorService.addDonation(donation, function(response, err){
           if (response !== false){
 
             $scope.addDonationSuccess = true;
@@ -446,6 +447,30 @@ angular.module('bsis')
           else{
             // TODO: handle case where response == false
             $scope.addDonationSuccess = false;
+            if(err["donation.bloodPressureDiastolic"]){
+              $scope.bloodPressureDiastolicInvalid = "ng-invalid";
+              $scope.serverError.bloodPressureDiastolic = err["donation.bloodPressureDiastolic"];
+            }
+
+            if(err["donation.bloodPressureSystolic"]){
+              $scope.bloodPressureSystolicInvalid = "ng-invalid";
+              $scope.serverError.bloodPressureSystolic = err["donation.bloodPressureSystolic"];
+            }
+
+            if(err["donation.donorPulse"]){
+              $scope.donorPulseInvalid = "ng-invalid";
+              $scope.serverError.donorPulse = err["donation.donorPulse"];
+            }
+
+            if(err["donation.donorWeight"]){
+              $scope.donorWeightInvalid = "ng-invalid";
+              $scope.serverError.donorWeight = err["donation.donorWeight"];
+            }
+
+            if(err["donation.haemoglobinCount"]){
+              $scope.haemoglobinCountInvalid = "ng-invalid";
+              $scope.serverError.haemoglobinCount = err["donation.haemoglobinCount"];
+            }
           }
 
           // refresh donor overview after adding donation
@@ -533,7 +558,7 @@ angular.module('bsis')
         $scope.donor.firstName = $scope.searchDonor.firstName;
         $scope.donor.lastName = $scope.searchDonor.lastName;
 
-        // clear $scope.searchDonor fields after assigning them to $scope.donor 
+        // clear $scope.searchDonor fields after assigning them to $scope.donor
         $scope.searchDonor.firstName = '';
         $scope.searchDonor.lastName = '';
 
@@ -614,7 +639,7 @@ angular.module('bsis')
     });
 
     $scope.getDonors = function (searchParameters) {
-      
+
       $scope.selectedDonorPanels = [];
       angular.forEach(searchParameters.donorPanels,function(value,index){
           $scope.selectedDonorPanels.push(value.id);
@@ -633,7 +658,7 @@ angular.module('bsis')
           $scope.data = data;
           $scope.donorListSearchResults = true;
           $scope.donorListSearchCount = $scope.data.length;
-          
+
         }
         else{
           $scope.donorListSearchResults = false;
@@ -655,7 +680,7 @@ angular.module('bsis')
             params.total(orderedData.length); // set total for pagination
             $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
-    }); 
+    });
 
     $scope.$watch("data", function () {
       $timeout(function(){ $scope.donorListTableParams.reload(); });
@@ -743,7 +768,7 @@ angular.module('bsis')
       count: 6,          // count per page
       filter: {},
       sorting: {}
-    }, 
+    },
     {
       defaultSort: 'asc',
       counts: [], // hide page counts control
@@ -767,7 +792,7 @@ angular.module('bsis')
       count: 8,          // count per page
       filter: {},
       sorting: {}
-    }, 
+    },
     {
       defaultSort: 'asc',
       counts: [], // hide page counts control
@@ -809,13 +834,13 @@ angular.module('bsis')
     };
 
     $scope.manageClinic = function (item){
-      
+
       $scope.donationBatch = item;
       DonorService.setDonationBatch($scope.donationBatch);
       data = $scope.donationBatch.donations;
       $scope.data = data;
       $location.path("/manageClinic");
-      
+
     };
 
   })
@@ -851,13 +876,14 @@ angular.module('bsis')
     };
 
     $scope.init();
+    $scope.serverError = {};
 
     $scope.donorClinicTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 8,          // count per page
       filter: {},
       sorting: {}
-    }, 
+    },
     {
       defaultSort: 'asc',
       counts: [], // hide page counts control
@@ -923,7 +949,7 @@ angular.module('bsis')
           // TODO: handle case where response == false
         }
       });
-      
+
     };
 
     $scope.viewDonationSummary = function (din) {
@@ -984,7 +1010,7 @@ angular.module('bsis')
         donation.bleedStartTime = bleedStartTime;
         donation.bleedEndTime = bleedEndTime;
 
-        DonorService.addDonationToBatch(donation, function(response){
+        DonorService.addDonationToBatch(donation, function(response, err){
           if (response !== false){
 
             $scope.addDonationSuccess = true;
@@ -997,8 +1023,32 @@ angular.module('bsis')
             $scope.submitted = '';
           }
           else{
-            // TODO: handle case where response == false
+
             $scope.addDonationSuccess = false;
+            if(err["donation.bloodPressureDiastolic"]){
+              $scope.bloodPressureDiastolicInvalid = "ng-invalid";
+              $scope.serverError.bloodPressureDiastolic = err["donation.bloodPressureDiastolic"];
+            }
+
+            if(err["donation.bloodPressureSystolic"]){
+              $scope.bloodPressureSystolicInvalid = "ng-invalid";
+              $scope.serverError.bloodPressureSystolic = err["donation.bloodPressureSystolic"];
+            }
+
+            if(err["donation.donorPulse"]){
+              $scope.donorPulseInvalid = "ng-invalid";
+              $scope.serverError.donorPulse = err["donation.donorPulse"];
+            }
+
+            if(err["donation.donorWeight"]){
+              $scope.donorWeightInvalid = "ng-invalid";
+              $scope.serverError.donorWeight = err["donation.donorWeight"];
+            }
+
+            if(err["donation.haemoglobinCount"]){
+              $scope.haemoglobinCountInvalid = "ng-invalid";
+              $scope.serverError.haemoglobinCount = err["donation.haemoglobinCount"];
+            }
           }
         });
       }
@@ -1030,5 +1080,3 @@ angular.module('bsis')
   })
 
 ;
-
-
