@@ -1,8 +1,5 @@
 'use strict';
 
-var UI = {};
-var DONATION = {DONOR:{}};
-
 var app = angular.module('bsis', [
   'ngRoute',
   'ui.bootstrap',
@@ -747,7 +744,10 @@ var app = angular.module('bsis', [
   function initializeConfig() {
     var initInjector = angular.injector(['ng']);
     var $http = initInjector.get('$http');
-    var $window = initInjector.get('$window');
+    //var $window = initInjector.get('$window');
+
+    var UI = {};
+    var DONATION = {DONOR:{}};
 
     return $http.get('config/config.json').then(function(response) {
       app.constant('SYSTEMCONFIG', response.data);
@@ -756,8 +756,8 @@ var app = angular.module('bsis', [
         return $http.get(url+'/configurations').then(function(response) {
           app.constant('USERCONFIG', response.data);
 
-          app.constant('UI', $window.UI);
-          app.constant('DONATION', $window.DONATION);
+          app.constant('UI', UI);
+          app.constant('DONATION', DONATION);
 
           var config = response.data.configurations;
 
@@ -776,73 +776,73 @@ var app = angular.module('bsis', [
             //Home Tabs constants
 
             else if (config[i].name == 'ui.donorsTabEnabled'){
-              $window.UI.DONORS_TAB_ENABLED = config[i].value;
+              UI.DONORS_TAB_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.componentsTabEnabled'){
-              $window.UI.COMPONENTS_TAB_ENABLED = config[i].value;
+              UI.COMPONENTS_TAB_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.testingTabEnabled'){
-              $window.UI.TESTING_TAB_ENABLED = config[i].value;
+              UI.TESTING_TAB_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.labellingTabEnabled'){
-              $window.UI.LABELLING_TAB_ENABLED = config[i].value;
+              UI.LABELLING_TAB_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.inventoryTabEnabled'){
-              $window.UI.INVENTORY_TAB_ENABLED = config[i].value;
+              UI.INVENTORY_TAB_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.reportsTabEnabled'){
-              $window.UI.REPORTS_TAB_ENABLED = config[i].value;
+              UI.REPORTS_TAB_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.mobileClinicTabEnabled'){
-              $window.UI.MOBILE_CLINIC_TAB_ENABLED = config[i].value;
+              UI.MOBILE_CLINIC_TAB_ENABLED = config[i].value;
             }
 
 
             // Donor form units
             else if (config[i].name == 'donation.bpUnit'){
-              $window.DONATION.BPUNIT = config[i].value;
+              DONATION.BPUNIT = config[i].value;
             }
             else if (config[i].name == 'donation.hbUnit'){
-              $window.DONATION.HBUNIT = config[i].value;
+              DONATION.HBUNIT = config[i].value;
             }
             else if (config[i].name == 'donation.weightUnit'){
-              $window.DONATION.WEIGHTUNIT = config[i].value;
+             DONATION.WEIGHTUNIT = config[i].value;
             }
             else if (config[i].name == 'donation.pulseUnit'){
-              $window.DONATION.PULSEUNIT = config[i].value;
+              DONATION.PULSEUNIT = config[i].value;
             }
 
           // donor form constants
 
             else if (config[i].name == 'donation.donor.bpSystolicMin'){
-              $window.DONATION.DONOR.BP_SYSTOLIC_MIN = config[i].value;
+              DONATION.DONOR.BP_SYSTOLIC_MIN = config[i].value;
             }
             else if (config[i].name == 'donation.donor.bpSystolicMax'){
-              $window.DONATION.DONOR.BP_SYSTOLIC_MAX = config[i].value;
+              DONATION.DONOR.BP_SYSTOLIC_MAX = config[i].value;
             }
             else if (config[i].name == 'donation.donor.bpDiastolicMin'){
-              $window.DONATION.DONOR.BP_DIASTOLIC_MIN = config[i].value;
+              DONATION.DONOR.BP_DIASTOLIC_MIN = config[i].value;
             }
             else if (config[i].name == 'donation.donor.bpDiastolicMax'){
-              $window.DONATION.DONOR.BP_DIASTOLIC_MAX = config[i].value;
+              DONATION.DONOR.BP_DIASTOLIC_MAX = config[i].value;
             }
             else if (config[i].name == 'donation.donor.hbMin'){
-              $window.DONATION.DONOR.HB_MIN = config[i].value;
+              DONATION.DONOR.HB_MIN = config[i].value;
             }
             else if (config[i].name == 'donation.donor.hbMax'){
-              $window.DONATION.DONOR.HB_MAX = config[i].value;
+              DONATION.DONOR.HB_MAX = config[i].value;
             }
             else if (config[i].name == 'donation.donor.weightMin'){
-              $window.DONATION.DONOR.WEIGHT_MIN = config[i].value;
+              DONATION.DONOR.WEIGHT_MIN = config[i].value;
             }
             else if (config[i].name == 'donation.donor.weightMax'){
-              $window.DONATION.DONOR.WEIGHT_MAX = config[i].value;
+              DONATION.DONOR.WEIGHT_MAX = config[i].value;
             }
             else if (config[i].name == 'donation.donor.pulseMin'){
-              $window.DONATION.DONOR.PULSE_MIN = config[i].value;
+              DONATION.DONOR.PULSE_MIN = config[i].value;
             }
             else if (config[i].name == 'donation.donor.pulseMax'){
-              $window.DONATION.DONOR.PULSE_MAX = config[i].value;
+              DONATION.DONOR.PULSE_MAX = config[i].value;
             }
           }
 

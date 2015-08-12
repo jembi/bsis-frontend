@@ -129,16 +129,4 @@ angular.module('bsis')
   HIDDEN: 'Hidden Functionality'
 
 })
-
-.provider('UI', function () {
-    var ui;
-    return {
-      setValue: function (item, value) {
-        ui[item] = value;
-      },
-      $get: function () {
-        return ui;
-      }
-    };
-})
 ;
