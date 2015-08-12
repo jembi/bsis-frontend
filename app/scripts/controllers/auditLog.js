@@ -46,6 +46,21 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, Api,
     return grouped;
   }
 
+  $scope.revisionTypes = [
+    {
+      id: 'ADD',
+      title: 'Added'
+    },
+    {
+      id: 'MOD',
+      title: 'Modified'
+    },
+    {
+      id: 'DEL',
+      title: 'Deleted'
+    }
+  ];
+
   $scope.tableParams = new ngTableParams({
     page: 1,
     count: 10,
@@ -53,27 +68,35 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, Api,
       revisionDate: 'desc'
     }
   }, {
+    counts: [],
     getData: function($defer, params) {
 
-      var query = {};
+      var query = {
+        startDate: moment().subtract(7, 'days').toISOString(),
+        endDate: moment().toISOString()
+      };
 
-      var filter = params.filter();
+      var filter = angular.copy(params.filter() || {});
       if (filter.user) {
         query.search = filter.user;
       }
+      delete filter.user;
 
       Api.AuditRevisions.query(query, function(auditRevisions) {
         // Transform
         var data = groupModifications(unwindRevisions(auditRevisions));
         params.total(data.length);
 
+        // Filter
+        data = $filter('filter')(data, filter);
+
         // Sort
-        var orderedData = params.sorting() ?
-            $filter('orderBy')(data, params.orderBy()) :
-            data;
+        if (params.sorting()) {
+          data = $filter('orderBy')(data, params.orderBy());
+        }
 
         // Page
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }, $defer.reject);
     }
   });

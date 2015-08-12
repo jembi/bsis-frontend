@@ -9,8 +9,8 @@
           <tr ng-repeat="revision in $data">
             <td data-title="'Date'" sortable="'revisionDate'">{{revision.revisionDate | bsisDateTime}}</td>
             <td data-title="'User'" sortable="'user.firstName'" filter="{user: 'text'}">{{revision.user.firstName}} {{revision.user.lastName}}</td>
-            <td data-title="'Revision type'" sortable="'revisionType'">{{revision.revisionType | revisionType}}</td>
-            <td data-title="'Entity'" sortable="'entityName'">{{revision.entityName}}</td>
+            <td data-title="'Revision type'" sortable="'revisionType'" filter="{revisionType: 'select'}" filter-data="revisionTypes">{{revision.revisionType | revisionType}}</td>
+            <td data-title="'Entity'" sortable="'entityName'" filter="{entityName: 'text'}">{{revision.entityName}}</td>
             <td data-title="'Number of entities'" sortable="'count'">{{revision.count}}</td>
           </tr>
         </table>
