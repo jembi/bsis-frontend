@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, Api, ngTableParams) {
+angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, Api, ngTableParams) {
   
   function unwindRevisions(revisions) {
     var mapped = [];
@@ -46,20 +46,24 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, Api,
     return grouped;
   }
 
-  $scope.revisionTypes = [
-    {
-      id: 'ADD',
-      title: 'Added'
-    },
-    {
-      id: 'MOD',
-      title: 'Modified'
-    },
-    {
-      id: 'DEL',
-      title: 'Deleted'
-    }
-  ];
+  $scope.getRevisionTypes = function() {
+    var deferred = $q.defer();
+    deferred.resolve([
+      {
+        id: 'ADD',
+        title: 'Added'
+      },
+      {
+        id: 'MOD',
+        title: 'Modified'
+      },
+      {
+        id: 'DEL',
+        title: 'Deleted'
+      }
+    ]);
+    return deferred;
+  };
 
   $scope.tableParams = new ngTableParams({
     page: 1,
