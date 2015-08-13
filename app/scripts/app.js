@@ -10,8 +10,7 @@ var app = angular.module('bsis', [
   'ngSanitize',
   'checklist-model',
   'ngMessages',
-  '720kb.tooltips',
-  'ngBootstrap'
+  '720kb.tooltips'
 
 ])
   .config(function($routeProvider, PERMISSIONS) {
