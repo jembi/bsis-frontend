@@ -241,8 +241,8 @@ angular.module('bsis')
       }
     ]
   })
-  .constant('UI', {})
-  .constant('DONATION', {})
+  .constant('UI', UI)
+  .constant('DONATION', DONATION)
 ;
 
   

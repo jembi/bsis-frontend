@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.factory('ConfigurationsService', function ($http, Api, $filter, USERCONFIG, $window) {
+.factory('ConfigurationsService', function ($http, Api, $filter, USERCONFIG, UI, DONATION) {
 
   var configurationObj = {};
   return {
@@ -37,7 +37,7 @@ angular.module('bsis')
 
       addConfiguration.$save(function(data){
         response(data);
-        $window.location.reload();
+        //$window.location.reload();
       }, function (err){
         response(false, err.data);
       });
@@ -47,10 +47,95 @@ angular.module('bsis')
     updateConfiguration: function (configuration, response) {
 
       var updatedConfiguration = angular.copy(configuration);
+      var config = [];
       Api.Configurations.update({id:configuration.id}, updatedConfiguration, function(data) {
         configurationObj = data.configuration;
         response(configurationObj);
-        $window.location.reload();
+        config.push(updatedConfiguration);
+
+        for (var i=0,  tot=config.length; i < tot; i++) {
+          if (config[i].name == 'dateFormat'){
+            app.constant('DATEFORMAT', config[i].value);
+          }
+          else if (config[i].name == 'dateTimeFormat'){
+            app.constant('DATETIMEFORMAT', config[i].value);
+          }
+          else if (config[i].name == 'timeFormat'){
+            app.constant('TIMEFORMAT', config[i].value);
+          }
+
+          //Home Tabs constants
+
+          else if (config[i].name == 'ui.donorsTabEnabled'){
+            UI.DONORS_TAB_ENABLED = config[i].value;
+          }
+          else if (config[i].name == 'ui.componentsTabEnabled'){
+            UI.COMPONENTS_TAB_ENABLED = config[i].value;
+          }
+          else if (config[i].name == 'ui.testingTabEnabled'){
+            UI.TESTING_TAB_ENABLED = config[i].value;
+          }
+          else if (config[i].name == 'ui.labellingTabEnabled'){
+            UI.LABELLING_TAB_ENABLED = config[i].value;
+          }
+          else if (config[i].name == 'ui.inventoryTabEnabled'){
+            UI.INVENTORY_TAB_ENABLED = config[i].value;
+          }
+          else if (config[i].name == 'ui.reportsTabEnabled'){
+            UI.REPORTS_TAB_ENABLED = config[i].value;
+          }
+          else if (config[i].name == 'ui.mobileClinicTabEnabled'){
+            UI.MOBILE_CLINIC_TAB_ENABLED = config[i].value;
+          }
+
+
+          // Donor form units
+          else if (config[i].name == 'donation.bpUnit'){
+            DONATION.BPUNIT = config[i].value;
+          }
+          else if (config[i].name == 'donation.hbUnit'){
+            DONATION.HBUNIT = config[i].value;
+          }
+          else if (config[i].name == 'donation.weightUnit'){
+            DONATION.WEIGHTUNIT = config[i].value;
+          }
+          else if (config[i].name == 'donation.pulseUnit'){
+            DONATION.PULSEUNIT = config[i].value;
+          }
+
+          // donor form constants
+
+          else if (config[i].name == 'donation.donor.bpSystolicMin'){
+            DONATION.DONOR.BP_SYSTOLIC_MIN = config[i].value;
+          }
+          else if (config[i].name == 'donation.donor.bpSystolicMax'){
+            DONATION.DONOR.BP_SYSTOLIC_MAX = config[i].value;
+          }
+          else if (config[i].name == 'donation.donor.bpDiastolicMin'){
+            DONATION.DONOR.BP_DIASTOLIC_MIN = config[i].value;
+          }
+          else if (config[i].name == 'donation.donor.bpDiastolicMax'){
+            DONATION.DONOR.BP_DIASTOLIC_MAX = config[i].value;
+          }
+          else if (config[i].name == 'donation.donor.hbMin'){
+            DONATION.DONOR.HB_MIN = config[i].value;
+          }
+          else if (config[i].name == 'donation.donor.hbMax'){
+            DONATION.DONOR.HB_MAX = config[i].value;
+          }
+          else if (config[i].name == 'donation.donor.weightMin'){
+            DONATION.DONOR.WEIGHT_MIN = config[i].value;
+          }
+          else if (config[i].name == 'donation.donor.weightMax'){
+            DONATION.DONOR.WEIGHT_MAX = config[i].value;
+          }
+          else if (config[i].name == 'donation.donor.pulseMin'){
+            DONATION.DONOR.PULSE_MIN = config[i].value;
+          }
+          else if (config[i].name == 'donation.donor.pulseMax'){
+            DONATION.DONOR.PULSE_MAX = config[i].value;
+          }
+        }
       }, function (err){
         response(false, err.data);
       });

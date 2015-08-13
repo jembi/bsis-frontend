@@ -738,16 +738,17 @@ var app = angular.module('bsis', [
 
 ;
 
+var UI = {};
+var DONATION = {DONOR:{}};
 // initialize system & user config before app starts
 (function() {
 
   function initializeConfig() {
     var initInjector = angular.injector(['ng']);
     var $http = initInjector.get('$http');
-    //var $window = initInjector.get('$window');
 
-    var UI = {};
-    var DONATION = {DONOR:{}};
+
+
 
     return $http.get('config/config.json').then(function(response) {
       app.constant('SYSTEMCONFIG', response.data);
