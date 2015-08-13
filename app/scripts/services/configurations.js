@@ -66,27 +66,27 @@ angular.module('bsis')
 
           //Home Tabs constants
 
-          else if (config[i].name == 'ui.donorsTabEnabled'){
-            UI.DONORS_TAB_ENABLED = config[i].value;
-          }
-          else if (config[i].name == 'ui.componentsTabEnabled'){
-            UI.COMPONENTS_TAB_ENABLED = config[i].value;
-          }
-          else if (config[i].name == 'ui.testingTabEnabled'){
-            UI.TESTING_TAB_ENABLED = config[i].value;
-          }
-          else if (config[i].name == 'ui.labellingTabEnabled'){
-            UI.LABELLING_TAB_ENABLED = config[i].value;
-          }
-          else if (config[i].name == 'ui.inventoryTabEnabled'){
-            UI.INVENTORY_TAB_ENABLED = config[i].value;
-          }
-          else if (config[i].name == 'ui.reportsTabEnabled'){
-            UI.REPORTS_TAB_ENABLED = config[i].value;
-          }
-          else if (config[i].name == 'ui.mobileClinicTabEnabled'){
-            UI.MOBILE_CLINIC_TAB_ENABLED = config[i].value;
-          }
+          // else if (config[i].name == 'ui.donorsTabEnabled'){
+          //   UI.DONORS_TAB_ENABLED = config[i].value;
+          // }
+          // else if (config[i].name == 'ui.componentsTabEnabled'){
+          //   UI.COMPONENTS_TAB_ENABLED = config[i].value;
+          // }
+          // else if (config[i].name == 'ui.testingTabEnabled'){
+          //   UI.TESTING_TAB_ENABLED = config[i].value;
+          // }
+          // else if (config[i].name == 'ui.labellingTabEnabled'){
+          //   UI.LABELLING_TAB_ENABLED = config[i].value;
+          // }
+          // else if (config[i].name == 'ui.inventoryTabEnabled'){
+          //   UI.INVENTORY_TAB_ENABLED = config[i].value;
+          // }
+          // else if (config[i].name == 'ui.reportsTabEnabled'){
+          //   UI.REPORTS_TAB_ENABLED = config[i].value;
+          // }
+          // else if (config[i].name == 'ui.mobileClinicTabEnabled'){
+          //   UI.MOBILE_CLINIC_TAB_ENABLED = config[i].value;
+          // }
 
 
           // Donor form units
