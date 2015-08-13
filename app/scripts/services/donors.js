@@ -1,25 +1,29 @@
 'use strict';
 
 angular.module('bsis')
-.factory('DonorService', function ($http, Api, $filter) {
+.factory('DonorService', function ($http, Api) {
 
   var donorObj = {};
   var donationBatchObj = {};
   var donorsObj = {};
 
   return {
-    findDonor: function (donorSearch, response) {
-      var donors = Api.FindDonors.query({firstName: donorSearch.firstName, lastName: donorSearch.lastName, 
-          donorNumber: donorSearch.donorNumber, donationIdentificationNumber: donorSearch.donationIdentificationNumber, usePhraseMatch: donorSearch.usePhraseMatch}, function(){
-        console.log("donorSearch: ", donorSearch);
-        console.log("findDonors: ", donors);
-        donors = donors.donors;
-        donorsObj = donors;
-        response(donorsObj);
-      }, function (){
-        response(false);  
-      });
+
+    findDonor: function(donorSearch, onSuccess, onError) {
+      var query = {
+        firstName: donorSearch.firstName,
+        lastName: donorSearch.lastName, 
+        donorNumber: donorSearch.donorNumber,
+        donationIdentificationNumber: donorSearch.donationIdentificationNumber,
+        usePhraseMatch: donorSearch.usePhraseMatch
+      };
+      Api.FindDonors.query(query, function(response) {
+        // Keep a reference to the donors
+        donorsObj = response.donors;
+        onSuccess(response);
+      }, onError);
     },
+
     addDonor: function (donor, response){
       // create $Resource object and assign donor values
       var addDonor = new Api.Donor();

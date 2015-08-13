@@ -60,7 +60,17 @@
       <div class="panel-body">
 
           <p>
-            <em> {{data.length}} donor(s) found </em> <span has-permission="{{permissions.ADD_DONOR}}"> | <em> <a href="" ng-click="addNewDonor(donorSearch)" >Add New Donor</a></em> </span> 
+            <em> {{data.length}} donor(s) found </em> 
+            <span has-permission="{{permissions.ADD_DONOR}}">
+              <span> | </span>
+              <em ng-show="canAddDonors"><a href="" ng-click="addNewDonor(donorSearch)">Add New Donor</a></em>
+              <span ng-hide="canAddDonors">
+                <em>Donor Registration Blocked - No Open Donation Batches</em>
+                <span> | </span>
+                <em><a href="#/manageDonationBatches">Add Donation Batch</a></em>
+              </span>
+              </span>
+           </span> 
           </p>
 
           <table ng-table="tableParams" show-filter="false" class="table">

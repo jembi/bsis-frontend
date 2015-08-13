@@ -21,24 +21,22 @@ angular.module('bsis')
     $scope.currentYear = currentTime.getFullYear();
     $scope.minYear = $scope.currentYear - 100;
 
+    $scope.canAddDonors = false;
+
     $scope.findDonor = function () {   
-      DonorService.findDonor($scope.donorSearch, function(response){
-      if (response !== false){
-        data = response;
-        $scope.data = data;
+      DonorService.findDonor($scope.donorSearch, function(response) {
+        data = response.donors;
         $scope.searchResults = true;
-        
-      }
-      else{
+        $scope.data = response.donors;
+        $scope.canAddDonors = response.canAddDonors;
+      }, function() {
         $scope.searchResults = false;
-      }
-    });
+      });
+    };
 
     $scope.$watch("data", function () {
       $timeout(function(){ $scope.tableParams.reload(); });
     });
-
-  };
 
     $scope.isCurrent = function(path) {
       var initialView = '';
