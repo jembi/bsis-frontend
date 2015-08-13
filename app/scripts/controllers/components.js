@@ -53,12 +53,6 @@ angular.module('bsis')
     };
     $scope.discardsSearch = {};
     $scope.searchResults = '';
-
-    $scope.dateOptions = {
-      'formatYear': 'yy',
-      'startingDay': 1,
-      'show-weeks': false
-    };
     $scope.format = DATEFORMAT;
     $scope.initDate = new Date();
     $scope.calIcon = 'fa-calendar';

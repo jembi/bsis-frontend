@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, Api, ngTableParams) {
+angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, Api, ngTableParams, DATEFORMAT) {
   
   function unwindRevisions(revisions) {
     var mapped = [];
@@ -46,6 +46,23 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, 
     return grouped;
   }
 
+  $scope.dateFormat = DATEFORMAT;
+
+  $scope.dateRange = {
+    startDate: moment().subtract(7, 'days').startOf('day').toDate(),
+    endDate: moment().endOf('day').toDate()
+  };
+
+  var unwatch = $scope.$watch('dateRange', function() {
+    if ($scope.dateRange.startDate && $scope.dateRange.endDate) {
+      $scope.tableParams.reload();
+    }
+  }, true);
+
+  $scope.$on('$destroy', function() {
+    unwatch();
+  });
+
   $scope.getRevisionTypes = function() {
     var deferred = $q.defer();
     deferred.resolve([
@@ -75,9 +92,12 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, 
     counts: [],
     getData: function($defer, params) {
 
+      var endDate = $scope.dateRange.endDate;
+
       var query = {
-        startDate: moment().subtract(7, 'days').toISOString(),
-        endDate: moment().toISOString()
+        startDate: $scope.dateRange.startDate.toISOString(),
+        // Check whether endDate is a date - sometimes it's a string
+        endDate: angular.isDate(endDate) ? endDate.toISOString() : endDate
       };
 
       var filter = angular.copy(params.filter() || {});

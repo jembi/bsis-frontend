@@ -98,11 +98,6 @@ angular.module('bsis')
       $scope.donor = item;
       DonorService.setDonor(item);
 
-      $scope.dateOptions = {
-        'formatYear': 'yy',
-        'startingDay': 1,
-        'show-weeks': false
-      };
       $scope.format = DATEFORMAT;
       $scope.initDate = item.birthDate;
       $scope.calIcon = 'fa-calendar';
@@ -126,11 +121,6 @@ angular.module('bsis')
         DonorService.addDonor(newDonor, function(response){
           if (response === true){
 
-            $scope.dateOptions = {
-              'formatYear': 'yy',
-              'startingDay': 1,
-              'show-weeks': false
-            };
             $scope.format = DATEFORMAT;
             $scope.initDate = $scope.donor.birthDate;
             $scope.calIcon = 'fa-calendar';
@@ -368,11 +358,6 @@ angular.module('bsis')
 
     $scope.manageDeferral = function () {
 
-      $scope.dateOptions = {
-        'formatYear': 'yy',
-        'startingDay': 1,
-        'show-weeks': false
-      };
       $scope.format = DATEFORMAT;
       $scope.initDate = new Date();
       $scope.calIcon = 'fa-calendar';
@@ -661,11 +646,6 @@ angular.module('bsis')
       $timeout(function(){ $scope.donorListTableParams.reload(); });
     });
 
-    $scope.dateOptions = {
-      'formatYear': 'yy',
-      'startingDay': 1,
-      'show-weeks': false
-    };
     $scope.format = DATEFORMAT;
     $scope.initDate = new Date();
     $scope.calIcon = 'fa-calendar';
@@ -891,11 +871,6 @@ angular.module('bsis')
 
     $scope.viewDonationBatch = function () {
 
-      $scope.dateOptions = {
-        'formatYear': 'yy',
-        'startingDay': 1,
-        'show-weeks': false
-      };
       $scope.format = DATEFORMAT;
       $scope.initDate = '';
       $scope.calIcon = 'fa-calendar';

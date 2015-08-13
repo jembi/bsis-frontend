@@ -320,6 +320,12 @@ var app = angular.module('bsis', [
       });
   })
 
+  .config(function(datepickerConfig) {
+    datepickerConfig.formatYear = 'yy';
+    datepickerConfig.showWeeks = false;
+    datepickerConfig.startingDay = 1;
+  })
+
   .run(function(editableOptions) {
     editableOptions.theme = 'bs3';
   })
@@ -448,11 +454,13 @@ var app = angular.module('bsis', [
         calIcon: "="
       },
       link: function($scope, element, attrs) {
+
+        $scope.calIcon = $scope.calIcon || 'fa-calendar';
+
         $scope.open = function(event){
           event.preventDefault();
           event.stopPropagation();
           $scope.opened = true;
-          $scope.calIcon = 'fa-calendar';
         };
 
         $scope.clear = function () {
@@ -480,11 +488,13 @@ var app = angular.module('bsis', [
         calIcon: "="
       },
       link: function(scope, element, attrs,ctrl) {
+
+        scope.calIcon = scope.calIcon || 'fa-calendar';
+
         scope.open = function(event){
           event.preventDefault();
           event.stopPropagation();
           scope.opened = true;
-          scope.calIcon = 'fa-calendar';
         };
 
         scope.clear = function () {
