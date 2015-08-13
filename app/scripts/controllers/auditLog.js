@@ -46,6 +46,35 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, 
     return grouped;
   }
 
+  $scope.dateRange = {
+    startDate: moment().startOf('day'),
+    endDate: moment()
+  };
+
+  $scope.ranges = {
+    'Today': [
+      moment().startOf('day'),
+      moment()
+    ],
+    'Yesterday': [
+      moment().subtract(1, 'day').startOf('day'),
+      moment().subtract(1, 'day').endOf('day')
+    ],
+    'Last 7 days': [
+      moment().subtract(7, 'days'),
+      moment()
+    ]
+  };
+
+  // The date range picker does not update the model
+  // so we need to keep track of the selected date
+  // range manually.
+  var queryRange = angular.copy($scope.dateRange);
+  $scope.reloadTable = function(dateRange) {
+    queryRange = dateRange;
+    $scope.tableParams.reload();
+  };
+
   $scope.getRevisionTypes = function() {
     var deferred = $q.defer();
     deferred.resolve([
@@ -76,8 +105,8 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, 
     getData: function($defer, params) {
 
       var query = {
-        startDate: moment().subtract(7, 'days').toISOString(),
-        endDate: moment().toISOString()
+        startDate: queryRange.startDate.toISOString(),
+        endDate: queryRange.endDate.toISOString()
       };
 
       var filter = angular.copy(params.filter() || {});

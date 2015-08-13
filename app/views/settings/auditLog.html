@@ -5,6 +5,16 @@
     <div class="panel panel-default">
       <div class="panel-body">
 
+        <div class="form-inline form-group" style="padding-bottom:10px;">
+          <label>Date range</label>
+          <input type="daterange"
+              class="form-control"
+              style="width:auto;"
+              ng-model="dateRange"
+              ranges="ranges" 
+              ng-change="reloadTable(dateRange)" />
+        </div>
+
         <table class="table" style="text-align:center;" ng-table="tableParams" show-filter="true">
           <tr ng-repeat="revision in $data">
             <td data-title="'Date'" sortable="'revisionDate'">{{revision.revisionDate | bsisDateTime}}</td>

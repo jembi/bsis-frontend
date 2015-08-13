@@ -20,7 +20,8 @@
     "checklist-model": "~0.2.4",
     "angular-messages": "1.4.x",
     "angular-tooltips": "~0.1.13",
-    "moment": "2.10.3"
+    "moment": "2.10.3",
+    "ng-bs-daterangepicker": "~0.0.5"
   },
   "resolutions": {
     "angular": "1.4.x"
