@@ -121,25 +121,22 @@ angular.module('bsis')
 
         newDonor.birthDate = dob.year + "-" + dob.month + "-" + dob.dayOfMonth;
 
-        DonorService.addDonor(newDonor, function(response){
-          if (response === true){
+        DonorService.addDonor(newDonor, function() {
 
-            $scope.dateOptions = {
-              'formatYear': 'yy',
-              'startingDay': 1,
-              'show-weeks': false
-            };
-            $scope.format = DATEFORMAT;
-            $scope.initDate = $scope.donor.birthDate;
-            $scope.calIcon = 'fa-calendar';
+          $scope.dateOptions = {
+            'formatYear': 'yy',
+            'startingDay': 1,
+            'show-weeks': false
+          };
+          $scope.format = DATEFORMAT;
+          $scope.initDate = $scope.donor.birthDate;
+          $scope.calIcon = 'fa-calendar';
 
-            $scope.donorBirthDateOpen = false;
-            $scope.submitted = '';
-            $location.path("/viewDonor");
-          }
-          else{
-            // TODO: handle case where response == false
-          }
+          $scope.donorBirthDateOpen = false;
+          $scope.submitted = '';
+          $location.path("/viewDonor");
+        }, function(err) {
+          $scope.errorMessage = err.data.userMessage;
         });
       }
       else{
