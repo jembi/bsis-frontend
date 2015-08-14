@@ -83,7 +83,7 @@
           max="{{currentYear}}" 
           integer 
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : addDonorForm.year.$invalid && submitted}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonorForm.year.$invalid && submitted) || dobInvalid }"
         >
         <div>
           <small class="error" 
@@ -93,6 +93,9 @@
               (addDonorForm.year.$error.required && (addDonorForm.year.$dirty  || submitted))
             ">
             This cannot be empty
+          </small>
+          <small class="error" ng-show="serverError.dob">
+                {{serverError.dob}}
           </small>
         </div>
         <div>

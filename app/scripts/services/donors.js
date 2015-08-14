@@ -29,8 +29,8 @@ angular.module('bsis')
       addDonor.$save(function(data){
         response(true);
         donorObj = data.donor;
-      }, function (){
-        response(false);
+      }, function (err){
+        response(false, err.data);
       });
     },
     updateDonor: function (donor, response){

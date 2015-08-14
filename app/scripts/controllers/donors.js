@@ -116,6 +116,7 @@ angular.module('bsis')
       DonorService.setDonor(donor);
       $location.path("/addDonor");
     };
+    $scope.serverError = {};
 
     $scope.addDonor = function (newDonor, dob, valid){
 
@@ -123,7 +124,7 @@ angular.module('bsis')
 
         newDonor.birthDate = dob.year + "-" + dob.month + "-" + dob.dayOfMonth;
 
-        DonorService.addDonor(newDonor, function(response){
+        DonorService.addDonor(newDonor, function(response, err){
           if (response === true){
 
             $scope.dateOptions = {
@@ -140,7 +141,10 @@ angular.module('bsis')
             $location.path("/viewDonor");
           }
           else{
-            // TODO: handle case where response == false
+            if(err["donor.birthDate"]){
+              $scope.dobInvalid = "ng-invalid";
+              $scope.serverError.dob = err["donor.birthDate"];
+            }
           }
         });
       }
@@ -1075,6 +1079,66 @@ angular.module('bsis')
           $scope.addDonationSuccess = false;
         }
       });
+    };
+
+    $scope.checkPulse = function(data) {
+      var min = 10;
+      var max = 25;
+      if (data < min) {
+        return "Pulse should be greater than " + min;
+      }
+
+      if (data > max) {
+        return "Pulse should be less than " + max;
+      }
+    };
+
+    $scope.checkHb = function(data) {
+      var min = 10;
+      var max = 25;
+      if (data < min) {
+        return "Hb should be greater than " + min;
+      }
+
+      if (data > max) {
+        return "Hb should be less than " + max;
+      }
+    };
+
+    $scope.checkBpSystolic = function(data) {
+      var min = 10;
+      var max = 25;
+      if (data < min) {
+        return "BP Systolic should be greater than " + min;
+      }
+
+      if (data > max) {
+        return "BP Systolic should be less than " + max;
+      }
+    };
+
+    $scope.checkBpDiastolic = function(data) {
+      var min = 10;
+      var max = 25;
+      if (data < min) {
+        return "BP Diastolic should be greater than " + min;
+      }
+
+      if (data > max) {
+        return "BP Diastolic should be less than " + max;
+      }
+    };
+
+    $scope.checkWeight = function(data) {
+      var min = 10;
+      var max = 25;
+      if (data < min) {
+        return "Weight should be greater than " + min;
+      }
+
+      if (data > max) {
+        return "Weight should be less than " + max;
+      }
     };
 
   })
