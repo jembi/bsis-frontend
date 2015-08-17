@@ -309,10 +309,21 @@ var app = angular.module('bsis', [
         controller : 'ManageDonationTypesCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_TYPES
       })
+      .when('/auditLog', {
+        templateUrl : 'views/settings.html',
+        controller  : 'AuditLogCtrl',
+        permission: PERMISSIONS.VIEW_AUDIT_LOG
+      })
 
       .otherwise({
         redirectTo: '/home'
       });
+  })
+
+  .config(function(datepickerConfig) {
+    datepickerConfig.formatYear = 'yy';
+    datepickerConfig.showWeeks = false;
+    datepickerConfig.startingDay = 1;
   })
 
   .run(function(editableOptions) {
@@ -443,11 +454,13 @@ var app = angular.module('bsis', [
         calIcon: "="
       },
       link: function($scope, element, attrs) {
+
+        $scope.calIcon = $scope.calIcon || 'fa-calendar';
+
         $scope.open = function(event){
           event.preventDefault();
           event.stopPropagation();
           $scope.opened = true;
-          $scope.calIcon = 'fa-calendar';
         };
 
         $scope.clear = function () {
@@ -475,11 +488,13 @@ var app = angular.module('bsis', [
         calIcon: "="
       },
       link: function(scope, element, attrs,ctrl) {
+
+        scope.calIcon = scope.calIcon || 'fa-calendar';
+
         scope.open = function(event){
           event.preventDefault();
           event.stopPropagation();
           scope.opened = true;
-          scope.calIcon = 'fa-calendar';
         };
 
         scope.clear = function () {
