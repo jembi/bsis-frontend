@@ -364,8 +364,7 @@ var app = angular.module('bsis', [
       //check if session exists
       if( consoleSession ){
         //check if session has expired
-        var currentTime = new Date();
-        currentTime = currentTime.toISOString();
+        var currentTime = Date.now();
         if( currentTime >= consoleSession.expires ){
           //session expired - user needs to log in
           AuthService.logout();
