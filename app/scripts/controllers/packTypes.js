@@ -128,7 +128,7 @@ angular.module('bsis')
       packType.canSplit = null;
 
       if(!packType.countAsDonation) {
-        delete packType.productType;
+        delete packType.componentType;
       }
 
       PackTypesService.addPackType(packType, function (response, err) {
@@ -145,19 +145,19 @@ angular.module('bsis')
 
     $scope.switchCountAsDonation = function (){
       if(!$scope.packType.countAsDonation) {
-        $scope.tempProductType = $scope.packType.productType;
-        $scope.packType.productType = "";
+        $scope.tempComponentType = $scope.packType.componentType;
+        $scope.packType.componentType = "";
       }
       else {
-        $scope.packType.productType= $scope.tempProductType;
-        $scope.tempProductType = "";
+        $scope.packType.componentType= $scope.tempComponentType;
+        $scope.tempComponentType = "";
       }
     };
 
     $scope.updatePackType = function (packType, packTypeForm) {
 
       if(!packType.countAsDonation) {
-        delete packType.productType;
+        delete packType.componentType;
       }
 
       PackTypesService.updatePackType(packType, function (response, err) {
