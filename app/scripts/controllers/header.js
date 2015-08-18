@@ -12,58 +12,57 @@ angular.module('bsis')
 
   $scope.sectionList = [
     {'title': 'HOME',
-     'href': '#home',
-     'icon': ICONS.HOME,
-     'permission': ''
+      'href': '#home',
+      'icon': ICONS.HOME,
+      'permission': '',
       'sectionEnabled' : 'true'
     },
     {'title': 'DONORS',
-     'href': '#donors',
-     'icon': ICONS.DONORS,
-     'permission': PERMISSIONS.VIEW_DONOR_INFORMATION,
-     'sectionEnabled' : UI.DONORS_TAB_ENABLED
-
+      'href': '#donors',
+      'icon': ICONS.DONORS,
+      'permission': PERMISSIONS.VIEW_DONOR_INFORMATION,
+      'sectionEnabled' : UI.DONORS_TAB_ENABLED
     },
     {'title': 'COMPONENTS',
-     'href': '#components',
-     'icon': ICONS.COMPONENTS,
-     'permission': PERMISSIONS.VIEW_COMPONENT_INFORMATION,
+      'href': '#components',
+      'icon': ICONS.COMPONENTS,
+      'permission': PERMISSIONS.VIEW_COMPONENT_INFORMATION,
       'sectionEnabled' : UI.COMPONENTS_TAB_ENABLED
     },
     {'title': 'TESTING',
-     'href': '#testing',
-     'icon': ICONS.TESTING,
-     'permission': PERMISSIONS.VIEW_TESTING_INFORMATION,
+      'href': '#testing',
+      'icon': ICONS.TESTING,
+      'permission': PERMISSIONS.VIEW_TESTING_INFORMATION,
       'sectionEnabled' : UI.TESTING_TAB_ENABLED
     },
     {'title': 'LABELLING',
-     'href': '#labelling',
-     'icon': ICONS.LABELLING,
-     'permission': PERMISSIONS.LABEL_COMPONENT,
+      'href': '#labelling',
+      'icon': ICONS.LABELLING,
+      'permission': PERMISSIONS.LABEL_COMPONENT,
       'sectionEnabled' : UI.LABELLING_TAB_ENABLED
     },
     {'title': 'INVENTORY',
-     'href': '#inventory',
-     'icon': ICONS.INVENTORY,
-     'permission': PERMISSIONS.VIEW_INVENTORY_INFORMATION,
+      'href': '#inventory',
+      'icon': ICONS.INVENTORY,
+      'permission': PERMISSIONS.VIEW_INVENTORY_INFORMATION,
       'sectionEnabled' : UI.INVENTORY_TAB_ENABLED
     },
     {'title': 'REPORTS',
-     'href': '#reports',
-     'icon': ICONS.REPORTS,
-     'permission': PERMISSIONS.VIEW_REPORTING_INFORMATION,
+      'href': '#reports',
+      'icon': ICONS.REPORTS,
+      'permission': PERMISSIONS.VIEW_REPORTING_INFORMATION,
       'sectionEnabled' : UI.REPORTS_TAB_ENABLED
     },
     {'title': 'MOBILE CLINIC',
-     'href': '#mobile',
-     'icon': ICONS.MOBILE,
-     'permission': PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION,
+      'href': '#mobile',
+      'icon': ICONS.MOBILE,
+      'permission': PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION,
       'sectionEnabled' : UI.MOBILE_CLINIC_TAB_ENABLED
     },
     {'title': 'SETTINGS',
-     'href': '#settings',
-     'icon': ICONS.SETTINGS,
-     'permission': PERMISSIONS.VIEW_ADMIN_INFORMATION
+      'href': '#settings',
+      'icon': ICONS.SETTINGS,
+      'permission': PERMISSIONS.VIEW_ADMIN_INFORMATION,
       'sectionEnabled' : 'true'
     }
   ];
