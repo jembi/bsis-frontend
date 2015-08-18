@@ -58,7 +58,7 @@
         <td class="icon"><i class="fa {{icons.GLOBE}}"></i></td>
         <td class="field">Preferred Address Type:</td>
         <td class="value">
-          <span e-class="xeditable" editable-select="donor.preferredAddressType.id" e-ng-options="item.id as item.preferredAddressType for item in addressTypes" e-name="preferredAddressType">
+          <span e-class="xeditable" editable-select="donor.preferredAddressType" e-ng-options="item as item.preferredAddressType for item in addressTypes" e-name="preferredAddressType">
             {{donor.preferredAddressType.preferredAddressType}}
           </span>
         </td>

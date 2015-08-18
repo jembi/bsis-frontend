@@ -26,12 +26,12 @@
     <label for="name" class="col-sm-1 control-label" >Period</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <dateselect ng-model="componentsSearch.donationDateFrom" date-options="dateOptions" ng-required="false" format="format" opened="startDateOpen" cal-icon="icons.CALENDAR">
+        <dateselect ng-model="componentsSearch.donationDateFrom" ng-required="false" format="format" opened="startDateOpen" cal-icon="icons.CALENDAR">
         </dateselect>
         <span>
         <em> To: </em>
         </span>
-        <dateselect-end ng-model="componentsSearch.donationDateTo" date-options="dateOptions" ng-required="false" format="format" opened="endDateOpen" cal-icon="icons.CALENDAR">
+        <dateselect-end ng-model="componentsSearch.donationDateTo" format="format" opened="endDateOpen" cal-icon="icons.CALENDAR">
         </dateselect-end>
       </div>
     </div>

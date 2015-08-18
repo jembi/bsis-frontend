@@ -135,7 +135,7 @@ describe('Service: Auth', function() {
       AuthService.refreshSession();
 
       var storedSession = angular.fromJson(localStorage.getItem('consoleSession'));
-      expect(storedSession.expires).toBe(new Date(currentDate.getTime() + (1000 * 60 * 60)).toISOString());
+      expect(storedSession.expires).toBe(new Date(currentDate.getTime() + (1000 * 60 * 60)).getTime());
       expect(storedSession.sessionUser).toBe(mockUser.username);
       expect(storedSession.sessionUserName).toBe(sessionUserName);
       expect(storedSession.sessionUserPermissions).toDeepEqual(sessionUserPermissions);

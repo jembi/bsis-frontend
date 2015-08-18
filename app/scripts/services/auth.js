@@ -34,7 +34,7 @@ angular.module('bsis')
       sessionUser: loggedOnUser.username,
       sessionUserName: fullName,
       sessionUserPermissions: permissions,
-      expires: expiryTime
+      expires: expiryTime.getTime()
     };
 
     $rootScope.displayHeader = true;
