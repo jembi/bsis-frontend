@@ -15,6 +15,7 @@ angular.module('bsis')
      'href': '#home',
      'icon': ICONS.HOME,
      'permission': ''
+      'sectionEnabled' : 'true'
     },
     {'title': 'DONORS',
      'href': '#donors',
@@ -63,6 +64,7 @@ angular.module('bsis')
      'href': '#settings',
      'icon': ICONS.SETTINGS,
      'permission': PERMISSIONS.VIEW_ADMIN_INFORMATION
+      'sectionEnabled' : 'true'
     }
   ];
 
