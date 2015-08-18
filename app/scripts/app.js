@@ -51,7 +51,7 @@ var app = angular.module('bsis', [
       .when('/home', {
         templateUrl : 'views/home.html',
         controller  : 'HomeCtrl',
-        permission: PERMISSIONS.AUTHENTICATED,
+        permission: PERMISSIONS.AUTHENTICATED
       })
 
       // DONORS URLs
