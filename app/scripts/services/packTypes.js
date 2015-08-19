@@ -7,7 +7,7 @@ angular.module('bsis')
 
       getPackTypes: function (response) {
         Api.PackTypes.get({}, function (apiResponse) {
-          response(apiResponse.allBloodBagTypes);
+          response(apiResponse.allPackTypes);
         }, function () {
           response(false);
         });

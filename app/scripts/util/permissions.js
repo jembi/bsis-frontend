@@ -99,7 +99,7 @@ angular.module('bsis')
   MANAGE_COMPONENT_COMBINATIONS: 'Manage Component Combinations',
   MANAGE_CROSS_MATCH_TYPES: 'Manage Cross Match Types',
   MANAGE_BLOOD_TYPING_RULES: 'Manage Blood Typing Rules',
-  MANAGE_PACK_TYPES: 'Manage Blood Bag Types',
+  MANAGE_PACK_TYPES: 'Manage Pack Types',
   MANAGE_DISCARD_REASONS: 'Manage Discard Reasons',
   MANAGE_DEFERRAL_REASONS: 'Manage Deferral Reasons',
   MANAGE_DONOR_CODES: 'Manage Donor Codes',

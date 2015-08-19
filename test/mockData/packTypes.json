@@ -1,8 +1,8 @@
 {
-  "allBloodBagTypes": [
+  "allPackTypes": [
     {
       "isDeleted": false,
-      "bloodBagType": "Single",
+      "packType": "Single",
       "componentType": {
         "componentTypeName": "Whole Blood Single Pack - CPDA",
         "componentTypeNameShort": "0011",
@@ -38,7 +38,7 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Double",
+      "packType": "Double",
       "componentType": {
         "componentTypeName": "Whole Blood Double Pack - CPDA",
         "componentTypeNameShort": "0012",
@@ -136,7 +136,7 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Triple",
+      "packType": "Triple",
       "componentType": {
         "componentTypeName": "Whole Blood Triple Pack - CPDA",
         "componentTypeNameShort": "0013",
@@ -244,7 +244,7 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Quad",
+      "packType": "Quad",
       "componentType": {
         "componentTypeName": "Whole Blood Quad Pack - CPDA",
         "componentTypeNameShort": "0014",
@@ -310,7 +310,7 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Apheresis",
+      "packType": "Apheresis",
       "componentType": {
         "componentTypeName": "Apheresis",
         "componentTypeNameShort": "0021",
@@ -392,7 +392,7 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Dry Pack",
+      "packType": "Dry Pack",
       "componentType": null,
       "countAsDonation": false,
       "periodBetweenDonations": 0,
@@ -402,7 +402,7 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Test Only",
+      "packType": "Test Only",
       "componentType": null,
       "countAsDonation": false,
       "periodBetweenDonations": 0,
@@ -412,7 +412,7 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Did Not Bleed",
+      "packType": "Did Not Bleed",
       "componentType": null,
       "countAsDonation": false,
       "periodBetweenDonations": 0,
