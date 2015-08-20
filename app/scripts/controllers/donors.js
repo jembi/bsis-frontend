@@ -1098,8 +1098,8 @@ angular.module('bsis')
     };
 
     $scope.checkPulse = function(data) {
-      var min = 10;
-      var max = 25;
+      var min = $scope.pulseMin;
+      var max = $scope.pulseMax;
       if (data < min) {
         return "Pulse should be greater than " + min;
       }
@@ -1110,8 +1110,8 @@ angular.module('bsis')
     };
 
     $scope.checkHb = function(data) {
-      var min = 10;
-      var max = 25;
+      var min = $scope.hbMin;
+      var max = $scope.hbMax;
       if (data < min) {
         return "Hb should be greater than " + min;
       }
@@ -1122,8 +1122,8 @@ angular.module('bsis')
     };
 
     $scope.checkBpSystolic = function(data) {
-      var min = 10;
-      var max = 25;
+      var min = $scope.bpSystolicMin;
+      var max = $scope.bpSystolicMax;
       if (data < min) {
         return "BP Systolic should be greater than " + min;
       }
@@ -1134,8 +1134,8 @@ angular.module('bsis')
     };
 
     $scope.checkBpDiastolic = function(data) {
-      var min = 10;
-      var max = 25;
+      var min = $scope.bpDiastolicMin;
+      var max = $scope.bpDiastolicMax;
       if (data < min) {
         return "BP Diastolic should be greater than " + min;
       }
@@ -1146,8 +1146,8 @@ angular.module('bsis')
     };
 
     $scope.checkWeight = function(data) {
-      var min = 10;
-      var max = 25;
+      var min = $scope.weightMin;
+      var max = $scope.weightMax;
       if (data < min) {
         return "Weight should be greater than " + min;
       }
