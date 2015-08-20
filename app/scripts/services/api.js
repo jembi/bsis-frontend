@@ -223,7 +223,9 @@ angular.module('bsis')
 
       PasswordResets: $resource(url + '/passwordresets'),
 
-      AuditRevisions: $resource(url + '/auditrevisions')
+      AuditRevisions: $resource(url + '/auditrevisions'),
+      
+      Donors: $resource(url + '/donors')
 
     };
 });

@@ -10,6 +10,15 @@ angular.module('bsis')
         response(false);
       });
     },
+
+    getDonorPanels: function(onSuccess, onError) {
+      Api.Locations.get({}, function(response) {
+        onSuccess(response.allLocations.filter(function(loc) {
+          return loc.isDonorPanel;
+        }));
+      }, onError);
+    },
+
     addLocation: function (location, response) {
 
       var addLocation = new Api.Locations();
