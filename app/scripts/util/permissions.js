@@ -124,6 +124,7 @@ angular.module('bsis')
   VIEW_DISCARD_INFORMATION: 'View Discard Information',
   VIEW_REPORTING_INFORMATION: 'View Reporting Information',
   VIEW_ADMIN_INFORMATION: 'View Admin Information',
+  VIEW_AUDIT_LOG: 'View Audit Log',
 
   // Make use of this temporary permission to hide/prevent access to areas of functionality not ready for use in production
   HIDDEN: 'Hidden Functionality'
