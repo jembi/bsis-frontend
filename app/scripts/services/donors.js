@@ -20,17 +20,17 @@ angular.module('bsis')
         response(false);
       });
     },
-    addDonor: function (donor, response){
+    addDonor: function (donor, onSuccess, onError){
       // create $Resource object and assign donor values
       var addDonor = new Api.Donor();
       angular.copy(donor, addDonor);
 
       // save donor (POST /donor) and assign response donor object to 'donorObj'
       addDonor.$save(function(data){
-        response(true);
         donorObj = data.donor;
+        onSuccess();
       }, function (err){
-        response(false, err.data);
+        onError(err.data);
       });
     },
     updateDonor: function (donor, response){

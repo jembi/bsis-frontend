@@ -113,15 +113,13 @@ angular.module('bsis')
     };
     $scope.serverError = {};
 
-    $scope.addDonor = function (newDonor, dob, valid){
+    $scope.addDonor = function (newDonor, dob, valid) {
 
-      if (valid){
+      if (valid) {
 
         newDonor.birthDate = dob.year + "-" + dob.month + "-" + dob.dayOfMonth;
 
-        DonorService.addDonor(newDonor, function(response, err){
-          if (response === true){
-
+        DonorService.addDonor(newDonor, function () {
             $scope.format = DATEFORMAT;
             $scope.initDate = $scope.donor.birthDate;
             $scope.calIcon = 'fa-calendar';
@@ -129,16 +127,15 @@ angular.module('bsis')
             $scope.donorBirthDateOpen = false;
             $scope.submitted = '';
             $location.path("/viewDonor");
-          }
-          else{
-            if(err["donor.birthDate"]){
+          },
+          function (err) {
+            if (err["donor.birthDate"]) {
               $scope.dobInvalid = "ng-invalid";
               $scope.serverError.dob = err["donor.birthDate"];
             }
-          }
-        });
+          });
       }
-      else{
+      else {
         $scope.submitted = true;
       }
     };
