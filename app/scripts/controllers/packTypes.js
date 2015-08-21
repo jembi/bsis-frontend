@@ -135,9 +135,9 @@ angular.module('bsis')
         if (response !== false) {
           $scope.go('/packTypes');
         } else {
-          if(err.bloodBagType){
-            $scope.bloodBagTypeInvalid = "ng-invalid";
-            $scope.serverError.bloodBagType = err.bloodBagType;
+          if(err.packType){
+            $scope.packTypeInvalid = "ng-invalid";
+            $scope.serverError.packType = err.packType;
           }
         }
       });
@@ -164,9 +164,9 @@ angular.module('bsis')
         if (response !== false) {
           $scope.go('/packTypes');
         } else {
-          if(err.bloodBagType){
-            $scope.bloodBagTypeInvalid = "ng-invalid";
-            $scope.serverError.bloodBagType = err.bloodBagType;
+          if(err.packType){
+            $scope.packTypeInvalid = "ng-invalid";
+            $scope.serverError.packType = err.packType;
           }
         }
       });

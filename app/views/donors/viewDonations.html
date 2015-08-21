@@ -28,9 +28,9 @@
           <td data-title="'Panel'" style="width:17%;" header-class="text-left" sortable="'donorPanel'" filter="{ 'donorPanel': 'text' }">
               {{donation.donorPanel.name}}
           </td>
-          <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'bloodBagType'" filter="{ 'bloodBagType': 'select' }"
+          <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'packType'" filter="{ 'packType': 'select' }"
               filter-data="packTypeFilter($column)">
-              {{donation.packType.bloodBagType}}
+              {{donation.packType.packType}}
           </td>
           <td data-title="'Wt'" style="width:10%;" header-class="text-left" class="text-center" sortable="'donorWeight'">
               {{donation.donorWeight}} {{weightUnit}}

@@ -6,7 +6,7 @@
   "testBatch": "1000331",
   "testedOn": "09/10/2014",
   "donationCreatedBy": "administrator",
-  "bloodBagType": "Single",
+  "packType": "Single",
   "bloodAbo": "O",
   "bloodRh": "+",
   "bloodTypingStatus": "Complete",
