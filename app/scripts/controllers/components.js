@@ -53,12 +53,6 @@ angular.module('bsis')
     };
     $scope.discardsSearch = {};
     $scope.searchResults = '';
-
-    $scope.dateOptions = {
-      'formatYear': 'yy',
-      'startingDay': 1,
-      'show-weeks': false
-    };
     $scope.format = DATEFORMAT;
     $scope.initDate = new Date();
     $scope.calIcon = 'fa-calendar';
@@ -290,7 +284,7 @@ angular.module('bsis')
         $scope.recordComponent = {};
 
         $scope.recordComponent.parentComponentId = $scope.selectedComponents[0];
-        $scope.recordComponent.productTypeCombination = $scope.component.productTypeCombination;
+        $scope.recordComponent.componentTypeCombination = $scope.component.componentTypeCombination;
 
         ComponentService.recordComponents($scope.recordComponent, function(response){
           if (response !== false){

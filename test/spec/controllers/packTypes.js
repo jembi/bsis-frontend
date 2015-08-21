@@ -65,7 +65,7 @@ describe('Controller: PackTypesCtrl', function () {
       httpBackend.flush();
       scope.managePackType(scope.packTypes[0]);
       expect(location.path()).toBe('/managePackType');
-      expect(scope.packType.bloodBagType).toBe('Single');
+      expect(scope.packType.packType).toBe('Single');
       expect(scope.packType.countAsDonation).toBe(true);
       expect(scope.packType.periodBetweenDonations).toBe(90);
 
@@ -125,8 +125,8 @@ describe('Controller: ManagePackTypesCtrl', function() {
 
       var packType = {
         isDeleted: false,
-        bloodBagType: 'Did Not Bleed',
-        productType: null,
+        packType: 'Did Not Bleed',
+        componentType: null,
         countAsDonation: false,
         periodBetweenDonations: 0,
         canPool: null,

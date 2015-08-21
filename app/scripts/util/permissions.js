@@ -99,7 +99,7 @@ angular.module('bsis')
   MANAGE_COMPONENT_COMBINATIONS: 'Manage Component Combinations',
   MANAGE_CROSS_MATCH_TYPES: 'Manage Cross Match Types',
   MANAGE_BLOOD_TYPING_RULES: 'Manage Blood Typing Rules',
-  MANAGE_PACK_TYPES: 'Manage Blood Bag Types',
+  MANAGE_PACK_TYPES: 'Manage Pack Types',
   MANAGE_DISCARD_REASONS: 'Manage Discard Reasons',
   MANAGE_DEFERRAL_REASONS: 'Manage Deferral Reasons',
   MANAGE_DONOR_CODES: 'Manage Donor Codes',
@@ -124,6 +124,7 @@ angular.module('bsis')
   VIEW_DISCARD_INFORMATION: 'View Discard Information',
   VIEW_REPORTING_INFORMATION: 'View Reporting Information',
   VIEW_ADMIN_INFORMATION: 'View Admin Information',
+  VIEW_AUDIT_LOG: 'View Audit Log',
 
   // Make use of this temporary permission to hide/prevent access to areas of functionality not ready for use in production
   HIDDEN: 'Hidden Functionality'

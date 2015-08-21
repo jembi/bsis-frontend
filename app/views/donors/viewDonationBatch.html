@@ -15,9 +15,9 @@
     <td data-title="'DIN'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'"  filter="{ 'donationIdentificationNumber': 'text' }">
         {{donation.donationIdentificationNumber}}
     </td>
-    <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'bloodBagType'" filter="{ 'packType.bloodBagType': 'select' }"
+    <td data-title="'Pack Type'" style="width:15%;" header-class="text-left" sortable="'packType'" filter="{ 'packType.packType': 'select' }"
         filter-data="packTypeFilter($column)">
-        {{donation.packType.bloodBagType}}
+        {{donation.packType.packType}}
     </td>
     <td data-title="'Donation Type'" style="width:18%;" header-class="text-left" class="text-center" sortable="'donationType'" >
         {{donation.donationType.donationType}}
