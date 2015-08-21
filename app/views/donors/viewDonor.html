@@ -87,7 +87,7 @@
 <div class="col-sm-12">
 
   <tabset justified="true" >
-    <tab>
+    <tab active="tabs.overview">
       <tab-heading>
         <i class="fa {{icons.INFOCIRCLE}}"></i> Overview
       </tab-heading>
@@ -203,7 +203,7 @@
       </div>
 
     </tab>
-    <tab>
+    <tab active="tabs.demographics">
       <tab-heading>
         <i class="fa {{icons.BARS}}"></i> Demographics
       </tab-heading>
@@ -216,7 +216,7 @@
 
     </tab>
 
-    <tab select="getDonations(donor.id)" has-permission="{{permissions.VIEW_DONATION}}">
+    <tab active="tabs.donations" select="getDonations(donor.id)" has-permission="{{permissions.VIEW_DONATION}}">
       <tab-heading>
         <i class="fa {{icons.ARCHIVE}}"></i> Donations
       </tab-heading>
@@ -235,7 +235,7 @@
       </div>
     </tab>
 
-    <tab select="getDeferrals(donor.id)" has-permission="{{permissions.VIEW_DEFERRAL}}">
+    <tab active="tabs.deferrals" select="getDeferrals(donor.id)" has-permission="{{permissions.VIEW_DEFERRAL}}">
       <tab-heading>
         <i class="fa {{icons.WARNING}}"></i> Deferrals
       </tab-heading>

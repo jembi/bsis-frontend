@@ -1,11 +1,26 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
+
+    // Tabs with their active status
+    $scope.tabs = {
+      overview: false,
+      demographics: false,
+      donations: false,
+      deferrals: false
+    };
+
+    var activeTab = $routeParams.tab || 'overview';
+    if ($scope.tabs[activeTab] === false) {
+      $scope.tabs[activeTab] = true;
+    } else {
+      $scope.tabs.overview = true;
+    }
 
     var data = [{}];
     $scope.data = data;

@@ -30,7 +30,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <table class="table" style="text-align:center;" ng-table>
-      <tr ng-repeat="donor in donors">
+      <tr ng-repeat="donor in donors" ng-click="viewDonorCounselling(donor)">
         <td data-title="'Donor Number'">{{donor.donorNumber}}</td>
         <td data-title="'First Name'">{{donor.firstName}}</td>
         <td data-title="'Last Name'">{{donor.lastName}}</td>
