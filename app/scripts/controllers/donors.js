@@ -21,24 +21,22 @@ angular.module('bsis')
     $scope.currentYear = currentTime.getFullYear();
     $scope.minYear = $scope.currentYear - 100;
 
+    $scope.canAddDonors = false;
+
     $scope.findDonor = function () {   
-      DonorService.findDonor($scope.donorSearch, function(response){
-      if (response !== false){
-        data = response;
-        $scope.data = data;
+      DonorService.findDonor($scope.donorSearch, function(response) {
+        data = response.donors;
         $scope.searchResults = true;
-        
-      }
-      else{
+        $scope.data = response.donors;
+        $scope.canAddDonors = response.canAddDonors;
+      }, function() {
         $scope.searchResults = false;
-      }
-    });
+      });
+    };
 
     $scope.$watch("data", function () {
       $timeout(function(){ $scope.tableParams.reload(); });
     });
-
-  };
 
     $scope.isCurrent = function(path) {
       var initialView = '';
@@ -118,20 +116,17 @@ angular.module('bsis')
 
         newDonor.birthDate = dob.year + "-" + dob.month + "-" + dob.dayOfMonth;
 
-        DonorService.addDonor(newDonor, function(response){
-          if (response === true){
+        DonorService.addDonor(newDonor, function() {
 
-            $scope.format = DATEFORMAT;
-            $scope.initDate = $scope.donor.birthDate;
-            $scope.calIcon = 'fa-calendar';
+          $scope.format = DATEFORMAT;
+          $scope.initDate = $scope.donor.birthDate;
+          $scope.calIcon = 'fa-calendar';
 
-            $scope.donorBirthDateOpen = false;
-            $scope.submitted = '';
-            $location.path("/viewDonor");
-          }
-          else{
-            // TODO: handle case where response == false
-          }
+          $scope.donorBirthDateOpen = false;
+          $scope.submitted = '';
+          $location.path("/viewDonor");
+        }, function(err) {
+          $scope.errorMessage = err.data.userMessage;
         });
       }
       else{
