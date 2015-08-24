@@ -430,8 +430,7 @@ angular.module('bsis')
 
     $scope.updatePostDonationCounselling = function() {
 
-      if ($scope.postDonationCounsellingForm.$invalid) {
-        $scope.postDonationCounsellingForm.$submitted = true;
+      if (!$scope.postDonationCounselling.counsellingDate || !$scope.postDonationCounselling.counsellingStatus) {
         return;
       }
 
