@@ -14,7 +14,7 @@
     <li class="disabled" has-permission="{{permissions.VIEW_DONATION_BATCH}}"><span>DONOR CLINIC</span></li>
     <li ng-class="{current: isCurrent('/manageDonationBatches')}" has-permission="{{permissions.VIEW_DONATION_BATCH}}"><a href="#/manageDonationBatches">Manage Clinics</a></li>
     <li class="disabled" has-permission="{{permissions.EXPORT_CLINIC_DATA}}"><span>DONOR COMMUNICATIONS</span></li>
-    <li ng-class="{current: isCurrent('/donorCounselling')}" has-permission="{{permissions.VIEW_DONOR}}"><a href="#/donorCounselling">Donor Counselling</a></li>
+    <li ng-class="{current: isCurrent('/donorCounselling')}" has-permission="{{permissions.VIEW_POST_DONATION_COUNSELLING_DONORS}}"><a href="#/donorCounselling">Donor Counselling</a></li>
     <li ng-class="{current: isCurrent('/exportDonorList')}" has-permission="{{permissions.EXPORT_CLINIC_DATA}}"><a href="#/exportDonorList">View / Export Donor List</a></li>
   </ul>
   <div ng-include="'views/sidebarFooter.html'"></div>
