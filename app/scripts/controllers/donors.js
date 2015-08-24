@@ -421,7 +421,7 @@ angular.module('bsis')
         $scope.donationsView = 'viewDonationDetails';
       });
 
-      DonorService.getPostDonationCounsellingFormFields(function(response) {
+      PostDonationCounsellingService.getPostDonationCounsellingFormFields(function(response) {
         $scope.counsellingStatuses = response.counsellingStatuses;
       }, function(err) {
         console.error(err);
