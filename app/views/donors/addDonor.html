@@ -2,6 +2,8 @@
 
 <form class="form-horizontal col-sm-12" role="form" name="addDonorForm" novalidate ng-submit="addDonor(donor, dob, addDonorForm.$valid)">
 
+  <alert type="danger" close="errorMessage = ''" ng-show="errorMessage">{{errorMessage}}</alert>
+
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label">Name</label>
     <div class="row col-sm-11">

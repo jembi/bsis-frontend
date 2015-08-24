@@ -5,19 +5,19 @@
             <form name="packTypeForm" novalidate class="form-horizontal col-sm-12"  role="form" ng-submit="savePackType(packType,packTypeForm)">
                 <div>
                     <div class="row form-group col-sm-12">
-                        <label for="bloodBagType" class="col-sm-2 control-label">Pack Type</label>
+                        <label for="packType" class="col-sm-2 control-label">Pack Type</label>
                         <div class="col-sm-8">
                             <div class="form-inline">
-                                <input size="20" id="bloodBagType" name="bloodBagType" class="form-control input-sm" ng-model="packType.bloodBagType" required
+                                <input size="20" id="packType" name="packType" class="form-control input-sm" ng-model="packType.packType" required
                                        ng-minlength=1 ng-maxlength=30
                                        ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                                       ng-class="{'ng-invalid ng-dirty' : (packTypeForm.bloodBagType.$invalid && submitted) || bloodBagTypeInvalid }" />
+                                       ng-class="{'ng-invalid ng-dirty' : (packTypeForm.packType.$invalid && submitted) || typeInvalid }" />
 
                                 <div>
-                                    <small class="error" ng-show="serverError.bloodBagType">
-                                        {{serverError.bloodBagType}}
+                                    <small class="error" ng-show="serverError.packType">
+                                        {{serverError.packType}}
                                     </small>
-                                    <small class="error" ng-show="(packTypeForm.bloodBagType.$error.required && (packTypeForm.bloodBagType.$dirty || submitted))">
+                                    <small class="error" ng-show="(packTypeForm.packType.$error.required && (packType.packType.$dirty || submitted))">
                                         This cannot be empty
                                     </small>
                                 </div>
@@ -37,7 +37,7 @@
                         <label for="componentType" class="col-sm-2 control-label">Component Type</label>
                         <div class="col-sm-6">
                             <div class="form-inline">
-                                <select ng-disabled="!packType.countAsDonation" id="componentType" name="componentType" class="form-control input-sm" ng-model="packType.productType" ng-options="item as item.productTypeName for item in componentTypes track by item.id"  ng-required="packType.countAsDonation"
+                                <select ng-disabled="!packType.countAsDonation" id="componentType" name="componentType" class="form-control input-sm" ng-model="packType.componentType" ng-options="item as item.componentTypeName for item in componentTypes track by item.id"  ng-required="packType.countAsDonation"
                                         ng-class="{'ng-invalid ng-dirty' : packTypeForm.componentType.$invalid && submitted}">
                                     <option value="" ng-disabled="true">Select:</option>
                                 </select>

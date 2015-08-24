@@ -64,7 +64,7 @@
       </tr>
       <tr>
         <td class="field">Pack: </td>
-        <td class="value">{{donation.packType.bloodBagType}}</td>
+        <td class="value">{{donation.packType.packType}}</td>
       </tr>
       <tr>
         <td class="field">Donation: </td>
@@ -76,13 +76,13 @@
       </tr>
       <tr>
         <td class="field">Pulse: </td>
-        <td class="value">{{donation.donorPulse}}</td>
+        <td class="value">{{donation.donorPulse}} {{pulseUnit}}</td>
       </tr>
       <tr>
         <td class="field">Hb: </td>
         <td class="value">
           
-          <span ng-show="getBooleanValue('donation.hbNumericValue')">{{donation.haemoglobinCount}}</span>
+          <span ng-show="getBooleanValue('donation.hbNumericValue')">{{donation.haemoglobinCount}} {{hbUnit}}</span>
           <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
           <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase}}</span>
           <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> )</span>
@@ -91,11 +91,11 @@
       </tr>
       <tr>
         <td class="field">BP: </td>
-        <td class="value">{{donation.bloodPressureSystolic}}/{{donation.bloodPressureDiastolic}}</td>
+        <td class="value">{{donation.bloodPressureSystolic}}/{{donation.bloodPressureDiastolic}} {{bpUnit}}</td>
       </tr>
       <tr>
         <td class="field">Weight: </td>
-        <td class="value">{{donation.donorWeight}}</td>
+        <td class="value">{{donation.donorWeight}} {{weightUnit}}</td>
       </tr>
       <tr>
         <td class="field">Comment: </td>

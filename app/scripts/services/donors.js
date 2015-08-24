@@ -1,38 +1,41 @@
 'use strict';
 
 angular.module('bsis')
-.factory('DonorService', function ($http, Api, $filter) {
+.factory('DonorService', function ($http, Api) {
 
   var donorObj = {};
   var donationBatchObj = {};
   var donorsObj = {};
 
   return {
-    findDonor: function (donorSearch, response) {
-      var donors = Api.FindDonors.query({firstName: donorSearch.firstName, lastName: donorSearch.lastName, 
-          donorNumber: donorSearch.donorNumber, donationIdentificationNumber: donorSearch.donationIdentificationNumber, usePhraseMatch: donorSearch.usePhraseMatch}, function(){
-        console.log("donorSearch: ", donorSearch);
-        console.log("findDonors: ", donors);
-        donors = donors.donors;
-        donorsObj = donors;
-        response(donorsObj);
-      }, function (){
-        response(false);  
-      });
+
+    findDonor: function(donorSearch, onSuccess, onError) {
+      var query = {
+        firstName: donorSearch.firstName,
+        lastName: donorSearch.lastName, 
+        donorNumber: donorSearch.donorNumber,
+        donationIdentificationNumber: donorSearch.donationIdentificationNumber,
+        usePhraseMatch: donorSearch.usePhraseMatch
+      };
+      Api.FindDonors.query(query, function(response) {
+        // Keep a reference to the donors
+        donorsObj = response.donors;
+        onSuccess(response);
+      }, onError);
     },
-    addDonor: function (donor, response){
+
+    addDonor: function (donor, onSuccess, onError){
       // create $Resource object and assign donor values
       var addDonor = new Api.Donor();
       angular.copy(donor, addDonor);
 
       // save donor (POST /donor) and assign response donor object to 'donorObj'
-      addDonor.$save(function(data){ 
-        response(true);
-        donorObj = data.donor;
-      }, function (){
-        response(false);
-      }); 
+      addDonor.$save(function(response){ 
+        donorObj = response.donor;
+        onSuccess(response);
+      }, onError); 
     },
+
     updateDonor: function (donor, response){
 
       var updateDonor = Api.Donor.get({id:donor.id}, function() {

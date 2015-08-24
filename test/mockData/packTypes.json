@@ -1,24 +1,24 @@
 {
-  "allBloodBagTypes": [
+  "allPackTypes": [
     {
       "isDeleted": false,
-      "bloodBagType": "Single",
-      "productType": {
-        "productTypeName": "Whole Blood Single Pack - CPDA",
-        "productTypeNameShort": "0011",
+      "packType": "Single",
+      "componentType": {
+        "componentTypeName": "Whole Blood Single Pack - CPDA",
+        "componentTypeNameShort": "0011",
         "expiresAfterUnits": "DAYS",
         "expiresAfter": 35,
         "hasBloodGroup": true,
-        "producedProductTypeCombinations": [
+        "producedComponentTypeCombinations": [
           {
-            "productTypes": [
+            "componentTypes": [
               {
-                "productTypeName": "Whole Blood - CPDA",
-                "productTypeNameShort": "1001",
+                "componentTypeName": "Whole Blood - CPDA",
+                "componentTypeNameShort": "1001",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 35,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 6
               }
@@ -38,33 +38,33 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Double",
-      "productType": {
-        "productTypeName": "Whole Blood Double Pack - CPDA",
-        "productTypeNameShort": "0012",
+      "packType": "Double",
+      "componentType": {
+        "componentTypeName": "Whole Blood Double Pack - CPDA",
+        "componentTypeNameShort": "0012",
         "expiresAfterUnits": "DAYS",
         "expiresAfter": 35,
         "hasBloodGroup": true,
-        "producedProductTypeCombinations": [
+        "producedComponentTypeCombinations": [
           {
-            "productTypes": [
+            "componentTypes": [
               {
-                "productTypeName": "Packed Red Cells - CPDA",
-                "productTypeNameShort": "2001",
+                "componentTypeName": "Packed Red Cells - CPDA",
+                "componentTypeNameShort": "2001",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 35,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 8
               },
               {
-                "productTypeName": "Fresh Frozen Plasma - Whole Blood",
-                "productTypeNameShort": "3001",
+                "componentTypeName": "Fresh Frozen Plasma - Whole Blood",
+                "componentTypeNameShort": "3001",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 365,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 10
               }
@@ -73,24 +73,24 @@
             "id": 2
           },
           {
-            "productTypes": [
+            "componentTypes": [
               {
-                "productTypeName": "Packed Red Cells - CPDA",
-                "productTypeNameShort": "2001",
+                "componentTypeName": "Packed Red Cells - CPDA",
+                "componentTypeNameShort": "2001",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 35,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 8
               },
               {
-                "productTypeName": "Frozen Plasma - Whole Blood",
-                "productTypeNameShort": "3002",
+                "componentTypeName": "Frozen Plasma - Whole Blood",
+                "componentTypeNameShort": "3002",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 365,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 11
               }
@@ -99,24 +99,24 @@
             "id": 3
           },
           {
-            "productTypes": [
+            "componentTypes": [
               {
-                "productTypeName": "Whole Blood Poor Platelets - CPDA",
-                "productTypeNameShort": "1005",
+                "componentTypeName": "Whole Blood Poor Platelets - CPDA",
+                "componentTypeNameShort": "1005",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 35,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 7
               },
               {
-                "productTypeName": "Platelets Concentrate - Whole Blood - 24H",
-                "productTypeNameShort": "4011",
+                "componentTypeName": "Platelets Concentrate - Whole Blood - 24H",
+                "componentTypeNameShort": "4011",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 1,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 13
               }
@@ -136,43 +136,43 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Triple",
-      "productType": {
-        "productTypeName": "Whole Blood Triple Pack - CPDA",
-        "productTypeNameShort": "0013",
+      "packType": "Triple",
+      "componentType": {
+        "componentTypeName": "Whole Blood Triple Pack - CPDA",
+        "componentTypeNameShort": "0013",
         "expiresAfterUnits": "DAYS",
         "expiresAfter": 35,
         "hasBloodGroup": true,
-        "producedProductTypeCombinations": [
+        "producedComponentTypeCombinations": [
           {
-            "productTypes": [
+            "componentTypes": [
               {
-                "productTypeName": "Packed Red Cells - SAGM",
-                "productTypeNameShort": "2011",
+                "componentTypeName": "Packed Red Cells - SAGM",
+                "componentTypeNameShort": "2011",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 42,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 9
               },
               {
-                "productTypeName": "Fresh Frozen Plasma - Whole Blood",
-                "productTypeNameShort": "3001",
+                "componentTypeName": "Fresh Frozen Plasma - Whole Blood",
+                "componentTypeNameShort": "3001",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 365,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 10
               },
               {
-                "productTypeName": "Platelets Concentrate - Whole Blood",
-                "productTypeNameShort": "4001",
+                "componentTypeName": "Platelets Concentrate - Whole Blood",
+                "componentTypeNameShort": "4001",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 5,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 12
               }
@@ -181,24 +181,24 @@
             "id": 5
           },
           {
-            "productTypes": [
+            "componentTypes": [
               {
-                "productTypeName": "Packed Red Cells - SAGM",
-                "productTypeNameShort": "2011",
+                "componentTypeName": "Packed Red Cells - SAGM",
+                "componentTypeNameShort": "2011",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 42,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 9
               },
               {
-                "productTypeName": "Fresh Frozen Plasma - Whole Blood",
-                "productTypeNameShort": "3001",
+                "componentTypeName": "Fresh Frozen Plasma - Whole Blood",
+                "componentTypeNameShort": "3001",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 365,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 10
               }
@@ -207,24 +207,24 @@
             "id": 6
           },
           {
-            "productTypes": [
+            "componentTypes": [
               {
-                "productTypeName": "Packed Red Cells - SAGM",
-                "productTypeNameShort": "2011",
+                "componentTypeName": "Packed Red Cells - SAGM",
+                "componentTypeNameShort": "2011",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 42,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 9
               },
               {
-                "productTypeName": "Frozen Plasma - Whole Blood",
-                "productTypeNameShort": "3002",
+                "componentTypeName": "Frozen Plasma - Whole Blood",
+                "componentTypeNameShort": "3002",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 365,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 11
               }
@@ -244,53 +244,53 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Quad",
-      "productType": {
-        "productTypeName": "Whole Blood Quad Pack - CPDA",
-        "productTypeNameShort": "0014",
+      "packType": "Quad",
+      "componentType": {
+        "componentTypeName": "Whole Blood Quad Pack - CPDA",
+        "componentTypeNameShort": "0014",
         "expiresAfterUnits": "DAYS",
         "expiresAfter": 35,
         "hasBloodGroup": true,
-        "producedProductTypeCombinations": [
+        "producedComponentTypeCombinations": [
           {
-            "productTypes": [
+            "componentTypes": [
               {
-                "productTypeName": "Packed Red Cells - Paediatric - CPDA",
-                "productTypeNameShort": "2101",
+                "componentTypeName": "Packed Red Cells - Paediatric - CPDA",
+                "componentTypeNameShort": "2101",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 35,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 14
               },
               {
-                "productTypeName": "Packed Red Cells - Paediatric - CPDA",
-                "productTypeNameShort": "2101",
+                "componentTypeName": "Packed Red Cells - Paediatric - CPDA",
+                "componentTypeNameShort": "2101",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 35,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 14
               },
               {
-                "productTypeName": "Packed Red Cells - Paediatric - CPDA",
-                "productTypeNameShort": "2101",
+                "componentTypeName": "Packed Red Cells - Paediatric - CPDA",
+                "componentTypeNameShort": "2101",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 35,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 14
               },
               {
-                "productTypeName": "Fresh Frozen Plasma - Whole Blood",
-                "productTypeNameShort": "3001",
+                "componentTypeName": "Fresh Frozen Plasma - Whole Blood",
+                "componentTypeNameShort": "3001",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 365,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 10
               }
@@ -310,33 +310,33 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Apheresis",
-      "productType": {
-        "productTypeName": "Apheresis",
-        "productTypeNameShort": "0021",
+      "packType": "Apheresis",
+      "componentType": {
+        "componentTypeName": "Apheresis",
+        "componentTypeNameShort": "0021",
         "expiresAfterUnits": "DAYS",
         "expiresAfter": 5,
         "hasBloodGroup": true,
-        "producedProductTypeCombinations": [
+        "producedComponentTypeCombinations": [
           {
-            "productTypes": [
+            "componentTypes": [
               {
-                "productTypeName": "Fresh Frozen Plasma - Apheresis",
-                "productTypeNameShort": "3011",
+                "componentTypeName": "Fresh Frozen Plasma - Apheresis",
+                "componentTypeNameShort": "3011",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 365,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 15
               },
               {
-                "productTypeName": "Platelets Concentrate - Apheresis",
-                "productTypeNameShort": "4021",
+                "componentTypeName": "Platelets Concentrate - Apheresis",
+                "componentTypeNameShort": "4021",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 5,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 16
               }
@@ -345,34 +345,34 @@
             "id": 9
           },
           {
-            "productTypes": [
+            "componentTypes": [
               {
-                "productTypeName": "Fresh Frozen Plasma - Apheresis",
-                "productTypeNameShort": "3011",
+                "componentTypeName": "Fresh Frozen Plasma - Apheresis",
+                "componentTypeNameShort": "3011",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 365,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 15
               },
               {
-                "productTypeName": "Platelets Concentrate - Apheresis",
-                "productTypeNameShort": "4021",
+                "componentTypeName": "Platelets Concentrate - Apheresis",
+                "componentTypeNameShort": "4021",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 5,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 16
               },
               {
-                "productTypeName": "Platelets Concentrate - Apheresis",
-                "productTypeNameShort": "4021",
+                "componentTypeName": "Platelets Concentrate - Apheresis",
+                "componentTypeNameShort": "4021",
                 "expiresAfterUnits": "DAYS",
                 "expiresAfter": 5,
                 "hasBloodGroup": true,
-                "producedProductTypeCombinations": [],
+                "producedComponentTypeCombinations": [],
                 "description": "",
                 "id": 16
               }
@@ -392,8 +392,8 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Dry Pack",
-      "productType": null,
+      "packType": "Dry Pack",
+      "componentType": null,
       "countAsDonation": false,
       "periodBetweenDonations": 0,
       "canPool": null,
@@ -402,8 +402,8 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Test Only",
-      "productType": null,
+      "packType": "Test Only",
+      "componentType": null,
       "countAsDonation": false,
       "periodBetweenDonations": 0,
       "canPool": null,
@@ -412,8 +412,8 @@
     },
     {
       "isDeleted": false,
-      "bloodBagType": "Did Not Bleed",
-      "productType": null,
+      "packType": "Did Not Bleed",
+      "componentType": null,
       "countAsDonation": false,
       "periodBetweenDonations": 0,
       "canPool": null,

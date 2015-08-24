@@ -36,24 +36,22 @@ angular.module('bsis')
     $scope.currentYear = currentTime.getFullYear();
     $scope.minYear = $scope.currentYear - 100;
 
+    $scope.canAddDonors = false;
+
     $scope.findDonor = function () {   
-      DonorService.findDonor($scope.donorSearch, function(response){
-      if (response !== false){
-        data = response;
-        $scope.data = data;
+      DonorService.findDonor($scope.donorSearch, function(response) {
+        data = response.donors;
         $scope.searchResults = true;
-        
-      }
-      else{
+        $scope.data = response.donors;
+        $scope.canAddDonors = response.canAddDonors;
+      }, function() {
         $scope.searchResults = false;
-      }
-    });
+      });
+    };
 
     $scope.$watch("data", function () {
       $timeout(function(){ $scope.tableParams.reload(); });
     });
-
-  };
 
     $scope.isCurrent = function(path) {
       var initialView = '';
@@ -133,20 +131,17 @@ angular.module('bsis')
 
         newDonor.birthDate = dob.year + "-" + dob.month + "-" + dob.dayOfMonth;
 
-        DonorService.addDonor(newDonor, function(response){
-          if (response === true){
+        DonorService.addDonor(newDonor, function() {
 
-            $scope.format = DATEFORMAT;
-            $scope.initDate = $scope.donor.birthDate;
-            $scope.calIcon = 'fa-calendar';
+          $scope.format = DATEFORMAT;
+          $scope.initDate = $scope.donor.birthDate;
+          $scope.calIcon = 'fa-calendar';
 
-            $scope.donorBirthDateOpen = false;
-            $scope.submitted = '';
-            $location.path("/viewDonor");
-          }
-          else{
-            // TODO: handle case where response == false
-          }
+          $scope.donorBirthDateOpen = false;
+          $scope.submitted = '';
+          $location.path("/viewDonor");
+        }, function(err) {
+          $scope.errorMessage = err.data.userMessage;
         });
       }
       else{
@@ -188,7 +183,8 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, PostDonationCounsellingService, TestingService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, DATEFORMAT, $filter, $q, ngTableParams, $timeout) {
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, PostDonationCounsellingService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
+      GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
     $scope.age = '';
@@ -202,6 +198,22 @@ angular.module('bsis')
       hstep: [1, 2, 3],
       mstep: [1, 5, 10, 15, 25, 30]
     };
+
+    $scope.bpUnit = DONATION.BPUNIT;
+    $scope.hbUnit = DONATION.HBUNIT;
+    $scope.weightUnit = DONATION.WEIGHTUNIT;
+    $scope.pulseUnit = DONATION.PULSEUNIT;
+
+    $scope.weightMin = DONATION.DONOR.WEIGHT_MIN;
+    $scope.weightMax = DONATION.DONOR.WEIGHT_MAX;
+    $scope.hbMin = DONATION.DONOR.HB_MIN;
+    $scope.hbMax = DONATION.DONOR.HB_MAX;
+    $scope.bpSystolicMin = DONATION.DONOR.BP_SYSTOLIC_MIN;
+    $scope.bpSystolicMax = DONATION.DONOR.BP_SYSTOLIC_MAX;
+    $scope.bpDiastolicMin = DONATION.DONOR.BP_DIASTOLIC_MIN;
+    $scope.bpDiastolicMax = DONATION.DONOR.BP_DIASTOLIC_MAX;
+    $scope.pulseMin = DONATION.DONOR.PULSE_MIN;
+    $scope.pulseMax = DONATION.DONOR.PULSE_MAX;
 
     $scope.donor = DonorService.getDonor();
 
@@ -582,7 +594,12 @@ angular.module('bsis')
   })
 
   // Controller for Adding Donations
-  .controller('AddDonationCtrl', function ($scope, $location, DonorService) {
+  .controller('AddDonationCtrl', function ($scope, $location, DonorService, BPUNIT, HBUNIT, WEIGHTUNIT, PULSEUNIT) {
+
+    $scope.bpUnit = BPUNIT;
+    $scope.hbUnit = HBUNIT;
+    $scope.weightUnit = WEIGHTUNIT;
+    $scope.pulseUnit = PULSEUNIT;
 
     $scope.addDonationSuccess = '';
 
@@ -849,7 +866,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, DATEFORMAT, $q, $filter, ngTableParams, $timeout) {
+  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE,  DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -863,6 +880,25 @@ angular.module('bsis')
       hstep: [1, 2, 3],
       mstep: [1, 5, 10, 15, 25, 30]
     };
+
+
+
+    $scope.bpUnit = DONATION.BPUNIT;
+    $scope.hbUnit = DONATION.HBUNIT;
+    $scope.weightUnit = DONATION.WEIGHTUNIT;
+    $scope.pulseUnit = DONATION.PULSEUNIT;
+
+    $scope.weightMin = DONATION.DONOR.WEIGHT_MIN;
+    $scope.weightMax = DONATION.DONOR.WEIGHT_MAX;
+    $scope.hbMin = DONATION.DONOR.HB_MIN;
+    $scope.hbMax = DONATION.DONOR.HB_MAX;
+    $scope.bpSystolicMin = DONATION.DONOR.BP_SYSTOLIC_MIN;
+    $scope.bpSystolicMax = DONATION.DONOR.BP_SYSTOLIC_MAX;
+    $scope.bpDiastolicMin = DONATION.DONOR.BP_DIASTOLIC_MIN;
+    $scope.bpDiastolicMax = DONATION.DONOR.BP_DIASTOLIC_MAX;
+    $scope.pulseMin = DONATION.DONOR.PULSE_MIN;
+    $scope.pulseMax = DONATION.DONOR.PULSE_MAX;
+
 
     $scope.init = function () {
       $scope.donationBatch = DonorService.getDonationBatch();
