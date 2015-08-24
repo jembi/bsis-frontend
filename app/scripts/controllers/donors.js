@@ -188,12 +188,13 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, DATEFORMAT, $filter, $q, ngTableParams, $timeout) {
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, PostDonationCounsellingService, TestingService, ICONS, PACKTYPE, MONTH, TITLE, GENDER, DATEFORMAT, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
     $scope.age = '';
     $scope.deferralsData = {};
     $scope.donationsData = {};
+    $scope.dateFormat = DATEFORMAT;
 
     $scope.hstep = 1;
     $scope.mstep = 5;
@@ -390,6 +391,11 @@ angular.module('bsis')
       $scope.donation = $filter('filter')($scope.donationsData, {donationIdentificationNumber : din})[0];
       $scope.testResults = {};
 
+      if ($scope.donation.postDonationCounselling) {
+        $scope.postDonationCounselling = angular.copy($scope.donation.postDonationCounselling);
+        $scope.postDonationCounselling.notes = angular.copy($scope.donation.notes);
+      }
+
       var testResultsRequest = TestingService.getTestResultsByDIN(din, function(response){
         if (response !== false){
           $scope.testResults = response.testResults.recentTestResults;
@@ -402,7 +408,34 @@ angular.module('bsis')
       $q.all(requests).then(function(){
         $scope.donationsView = 'viewDonationDetails';
       });
-      
+
+      DonorService.getPostDonationCounsellingFormFields(function(response) {
+        $scope.counsellingStatuses = response.counsellingStatuses;
+      }, function(err) {
+        console.error(err);
+      });
+    };
+
+    $scope.updatePostDonationCounselling = function() {
+
+      if ($scope.postDonationCounsellingForm.$invalid) {
+        $scope.postDonationCounsellingForm.$submitted = true;
+        return;
+      }
+
+      var update = {
+        id: $scope.postDonationCounselling.id,
+        counsellingStatus: $scope.postDonationCounselling.counsellingStatus.id,
+        counsellingDate: $scope.postDonationCounselling.counsellingDate,
+        notes: $scope.postDonationCounselling.notes
+      };
+
+      PostDonationCounsellingService.updatePostDonationCounselling(update, function(response) {
+        $scope.donation.postDonationCounselling = response;
+        $scope.donation.notes = angular.copy(response.notes);
+      }, function(err) {
+        console.error(err);
+      });
     };
 
     $scope.viewAddDonationForm = function (){

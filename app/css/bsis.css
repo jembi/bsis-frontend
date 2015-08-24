@@ -618,3 +618,6 @@ input[disabled] {
 
 /* --> general css */
 
+.counselling-date > input.form-control {
+  width: auto !important;
+}

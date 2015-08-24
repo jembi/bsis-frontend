@@ -266,6 +266,10 @@ angular.module('bsis')
       }, function() {
         response(false);
       });
+    },
+
+    getPostDonationCounsellingFormFields: function(onSuccess, onError) {
+      Api.PostDonationCounsellingFormFields.get(onSuccess, onError);
     }
   };
 });
