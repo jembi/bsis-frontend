@@ -9,8 +9,6 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   $scope.searched = false;
 
   $scope.search = {
-    anyDonorPanel: true,
-    anyDate: true,
     selectedDonorPanels: [],
     startDate: null,
     endDate: null
@@ -28,16 +26,12 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.clearDates = function() {
-    if ($scope.search.anyDate) {
-      $scope.search.startDate = null;
-      $scope.search.endDate = null;
-    }
+    $scope.search.startDate = null;
+    $scope.search.endDate = null;
   };
 
   $scope.clearDonorPanels = function() {
-    if ($scope.search.anyDonorPanel) {
-      $scope.search.selectedDonorPanels = [];
-    }
+    $scope.search.selectedDonorPanels = [];
   };
 
   $scope.viewDonorCounselling = function(donation) {
@@ -54,15 +48,15 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       flaggedForCounselling: true
     };
 
-    if (!$scope.search.anyDate && $scope.search.startDate) {
+    if ($scope.search.startDate) {
       query.startDate = $scope.search.startDate.toISOString();
     }
 
-    if (!$scope.search.anyDate && $scope.search.endDate) {
+    if ($scope.search.endDate) {
       query.endDate = $scope.search.endDate;
     }
 
-    if (!$scope.search.anyDonorPanel && $scope.search.selectedDonorPanels.length > 0) {
+    if ($scope.search.selectedDonorPanels.length > 0) {
       query.donorPanel = $scope.search.selectedDonorPanels;
     }
 
