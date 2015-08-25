@@ -3,12 +3,14 @@
 <form class="form-horizontal" style="padding:10px 0;" ng-submit="refresh()">
 
   <div class="clearfix form-group">
-    <label class="col-sm-2 col-lg-1 control-label">Donor Panel:</label>
+    <label class="col-sm-2 col-lg-1 control-label">Donor Panels:</label>
     <div class="col-sm-10 col-lg-11">
-      <select class="form-control" style="width:auto;" ng-model="search.selectedDonorPanel">
-        <option value=""></option>
-        <option value="{{option.id}}" ng-repeat="option in donorPanels">{{option.name}}</option>
-      </select>
+      <ui-select multiple ng-model="search.selectedDonorPanels" style="max-width:500px;">
+        <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
+        <ui-select-choices repeat="donorPanel.id as donorPanel in donorPanels | filter:$select.search">
+          {{donorPanel.name}}
+        </ui-select-choices>
+      </ui-select>
     </div>
   </div>
 

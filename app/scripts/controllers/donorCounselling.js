@@ -9,7 +9,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   $scope.searched = false;
 
   $scope.search = {
-    selectedDonorPanel: null,
+    selectedDonorPanels: [],
     startDate: null,
     endDate: null
   };
@@ -47,8 +47,8 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       query.endDate = $scope.search.endDate;
     }
 
-    if ($scope.search.selectedDonorPanel) {
-      query.donorPanel = $scope.search.selectedDonorPanel;
+    if ($scope.search.selectedDonorPanels.length > 0) {
+      query.donorPanel = $scope.search.selectedDonorPanels;
     }
 
     Api.DonationSummaries.query(query, function(response) {
