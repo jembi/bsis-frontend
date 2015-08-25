@@ -479,7 +479,7 @@ var app = angular.module('bsis', [
   }])
 
   /* Custom datepicker directive, makes use of angular-ui datepicker */
-  .directive("dateselect", function(){
+  .directive("dateselect", function($compile){
     return {
       restrict: "E",
       require: "^ngModel",
@@ -487,6 +487,7 @@ var app = angular.module('bsis', [
       scope:{
         ngModel: "=",
         ngRequired: "=",
+        ngDisabled: "=",
         dateOptions: "=",
         minDate: "=",
         maxDate: "=",
@@ -508,12 +509,22 @@ var app = angular.module('bsis', [
         $scope.clear = function () {
           $scope.ngModel = null;
         };
+
+        var unwatch = $scope.$watch('ngDisabled', function(newValue, oldValue) {
+          if (newValue !== oldValue) {
+            $compile(element.contents())($scope);
+          }
+        });
+
+        $scope.$on('$destroy', function() {
+          unwatch();
+        });
       },
       templateUrl: 'views/template/dateselect.html'
     };
   })
 
-  .directive("dateselectEnd", ["$filter", function($filter){
+  .directive("dateselectEnd", function($compile){
     return {
       restrict: "E",
       require: ["^ngModel"],
@@ -521,6 +532,7 @@ var app = angular.module('bsis', [
       scope:{
         ngModel: "=",
         ngRequired: "=",
+        ngDisabled: "=",
         dateOptions: "=",
         minDate: "=",
         maxDate: "=",
@@ -566,10 +578,20 @@ var app = angular.module('bsis', [
             }
           });
 
+        var unwatch = scope.$watch('ngDisabled', function(newValue, oldValue) {
+          if (newValue !== oldValue) {
+            $compile(element.contents())(scope);
+          }
+        });
+
+        scope.$on('$destroy', function() {
+          unwatch();
+        });
+
       },
       templateUrl: 'views/template/dateselect.html'
     };
-  }])
+  })
 
 
     /*  Custom directive to check if user has associated permission
