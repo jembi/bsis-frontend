@@ -183,7 +183,7 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, PostDonationCounsellingService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
+  .controller('ViewDonorCtrl', function ($scope, $location, $routeParams, DonorService, PostDonationCounsellingService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
       GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
@@ -325,6 +325,8 @@ angular.module('bsis')
 
     };
 
+    var redirected = false;
+
     $scope.getDonations = function (donorId) {
 
       $scope.donationsView = 'viewDonations';
@@ -337,6 +339,11 @@ angular.module('bsis')
           }
           else {
             $scope.donationResults = false;
+          }
+
+          if (!redirected && $routeParams.din) {
+            redirected = true;
+            $scope.viewDonationDetails($routeParams.din);
           }
         }
         else{
