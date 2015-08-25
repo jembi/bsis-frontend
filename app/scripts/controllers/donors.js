@@ -412,6 +412,9 @@ angular.module('bsis')
 
       if ($scope.donation.postDonationCounselling) {
         $scope.postDonationCounselling = angular.copy($scope.donation.postDonationCounselling);
+        if (!$scope.postDonationCounselling.counsellingDate) {
+          $scope.postDonationCounselling.counsellingDate = new Date();
+        }
         $scope.postDonationCounselling.notes = angular.copy($scope.donation.notes);
       }
 
