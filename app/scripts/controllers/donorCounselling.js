@@ -4,6 +4,9 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
   $scope.dateFormat = DATEFORMAT;
   $scope.donorPanels = [];
+  $scope.donations = [];
+
+  $scope.searched = false;
 
   $scope.search = {
     selectedDonorPanel: null,
@@ -18,12 +21,16 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   });
 
   $scope.clearSearch = function() {
+    $scope.searched = false;
     $scope.search = angular.copy($scope.master);
   };
 
-  $scope.viewDonorCounselling = function(donor) {
-    DonorService.setDonor(donor);
-    $location.path('/viewDonor').search({tab: 'donations'});
+  $scope.viewDonorCounselling = function(donation) {
+    DonorService.setDonor(donation.donor);
+    $location.path('/viewDonor').search({
+      tab: 'donations',
+      din: donation.donationIdentificationNumber
+    });
   };
 
   $scope.refresh = function() {
@@ -44,12 +51,11 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       query.donorPanel = $scope.search.selectedDonorPanel;
     }
 
-    Api.Donors.query(query, function(response) {
-      $scope.donors = response;
+    Api.DonationSummaries.query(query, function(response) {
+      $scope.searched = true;
+      $scope.donations = response;
     }, function(err) {
       console.error(err);
     });
   };
-
-  $scope.refresh();
 });

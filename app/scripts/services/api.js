@@ -225,7 +225,7 @@ angular.module('bsis')
 
       AuditRevisions: $resource(url + '/auditrevisions'),
       
-      Donors: $resource(url + '/donors'),
+      DonationSummaries: $resource(url + '/donations/summaries'),
 
       PostDonationCounselling: $resource(url + '/postdonationcounsellings/:id', {id: '@id'}, {
         update: {method: 'PUT'}
