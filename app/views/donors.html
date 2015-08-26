@@ -20,6 +20,7 @@
           <div ng-switch-when="/exportDonorList"><div ng-include="'views/donors/exportDonorList.html'"></div></div>
           <div ng-switch-when="/viewDonor"><div ng-include="'views/donors/viewDonor.html'"></div></div>
           <div ng-switch-when="/donorCounselling"><div ng-include="'views/donors/donorCounselling.html'"></div></div>
+          <div ng-switch-when="/donorCounsellingDetails"><div ng-include="'views/donors/donorCounsellingDetails.html'"></div></div>
           <div ng-switch-default>
             <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DONOR) < 0) && 
                         (sessionUserPermissions.indexOf(permissions.VIEW_DONATION_BATCH) < 0) &&

@@ -64,6 +64,10 @@ angular.module('bsis')
       } else if ($location.path() === "/manageClinic" && path === "/manageDonationBatches") {
         $scope.selection = $location.path();
         return true;
+      } else if ($location.path().indexOf('/donorCounselling') === 0 && path.indexOf('/donorCounselling') === 0) {
+        var currentPath = $location.path();
+        $scope.selection = currentPath === '/donorCounselling' ? currentPath : '/donorCounsellingDetails';
+        return true;
       } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
         $location.path(path);
         $scope.selection = path;
@@ -183,7 +187,7 @@ angular.module('bsis')
   })
   
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, $routeParams, DonorService, PostDonationCounsellingService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
+  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
       GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
@@ -325,8 +329,6 @@ angular.module('bsis')
 
     };
 
-    var redirected = false;
-
     $scope.getDonations = function (donorId) {
 
       $scope.donationsView = 'viewDonations';
@@ -339,11 +341,6 @@ angular.module('bsis')
           }
           else {
             $scope.donationResults = false;
-          }
-
-          if (!redirected && $routeParams.din) {
-            redirected = true;
-            $scope.viewDonationDetails($routeParams.din);
           }
         }
         else{
@@ -429,33 +426,6 @@ angular.module('bsis')
 
       $q.all(requests).then(function(){
         $scope.donationsView = 'viewDonationDetails';
-      });
-
-      PostDonationCounsellingService.getPostDonationCounsellingFormFields(function(response) {
-        $scope.counsellingStatuses = response.counsellingStatuses;
-      }, function(err) {
-        console.error(err);
-      });
-    };
-
-    $scope.updatePostDonationCounselling = function() {
-
-      if (!$scope.postDonationCounselling.counsellingDate || !$scope.postDonationCounselling.counsellingStatus) {
-        return;
-      }
-
-      var update = {
-        id: $scope.postDonationCounselling.id,
-        counsellingStatus: $scope.postDonationCounselling.counsellingStatus.id,
-        counsellingDate: $scope.postDonationCounselling.counsellingDate,
-        notes: $scope.postDonationCounselling.notes
-      };
-
-      PostDonationCounsellingService.updatePostDonationCounselling(update, function(response) {
-        $scope.donation.postDonationCounselling = response;
-        $scope.donation.notes = angular.copy(response.notes);
-      }, function(err) {
-        console.error(err);
       });
     };
 

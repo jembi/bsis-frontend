@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, Api, DonorService, LocationsService, DATEFORMAT) {
+angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, Api, LocationsService, DATEFORMAT) {
 
   $scope.dateFormat = DATEFORMAT;
   $scope.donorPanels = [];
@@ -35,11 +35,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.viewDonorCounselling = function(donation) {
-    DonorService.setDonor(donation.donor);
-    $location.path('/viewDonor').search({
-      tab: 'donations',
-      din: donation.donationIdentificationNumber
-    });
+    $location.path('/donorCounselling/' + donation.donor.id);
   };
 
   $scope.refresh = function() {

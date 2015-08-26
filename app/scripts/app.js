@@ -108,6 +108,11 @@ var app = angular.module('bsis', [
         controller  : 'DonorCounsellingCtrl',
         permission: PERMISSIONS.VIEW_POST_DONATION_COUNSELLING_DONORS
       })
+      .when('/donorCounselling/:donorId', {
+        templateUrl : 'views/donors.html',
+        controller  : 'DonorCounsellingDetailsCtrl',
+        permission: PERMISSIONS.VIEW_POST_DONATION_COUNSELLING
+      })
 
       // COMPONENTS URLs
       .when('/components', {
