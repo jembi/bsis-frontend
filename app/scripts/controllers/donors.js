@@ -194,7 +194,6 @@ angular.module('bsis')
     $scope.age = '';
     $scope.deferralsData = {};
     $scope.donationsData = {};
-    $scope.dateFormat = DATEFORMAT;
 
     $scope.hstep = 1;
     $scope.mstep = 5;
@@ -407,14 +406,6 @@ angular.module('bsis')
       $scope.donation = $filter('filter')($scope.donationsData, {donationIdentificationNumber : din})[0];
       $scope.testResults = {};
 
-      if ($scope.donation.postDonationCounselling) {
-        $scope.postDonationCounselling = angular.copy($scope.donation.postDonationCounselling);
-        if (!$scope.postDonationCounselling.counsellingDate) {
-          $scope.postDonationCounselling.counsellingDate = new Date();
-        }
-        $scope.postDonationCounselling.notes = angular.copy($scope.donation.notes);
-      }
-
       var testResultsRequest = TestingService.getTestResultsByDIN(din, function(response){
         if (response !== false){
           $scope.testResults = response.testResults.recentTestResults;
@@ -427,6 +418,7 @@ angular.module('bsis')
       $q.all(requests).then(function(){
         $scope.donationsView = 'viewDonationDetails';
       });
+
     };
 
     $scope.viewAddDonationForm = function (){
