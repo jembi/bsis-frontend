@@ -47,7 +47,8 @@ angular.module('bsis')
     EDIT: 'fa-edit',
     REMOVE: 'fa-times-circle',
     SQUARE: 'fa-square-o',
-    SQUARECHECK: 'fa-check-square-o'
+    SQUARECHECK: 'fa-check-square-o',
+    FLAG: 'fa-flag'
   })
 
   .constant('REGEX', {

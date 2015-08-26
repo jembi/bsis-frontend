@@ -108,6 +108,12 @@
                 <td ng-if="currentlyDeferred" class="value red"> Deferred until {{deferredUntil | bsisDate}}</td>
                 <td ng-if="!currentlyDeferred" class="value green"> No current deferrals</td>
               </tr>
+              <tr has-permission="{{permissions.VIEW_POST_DONATION_COUNSELLING_DONORS}}">
+                <td class="icon"><i class="fa {{icons.FLAG}}"></i></td>
+                <td class="field">Flagged For Counselling: </td>
+                <td ng-if="flaggedForCounselling" class="value red"> Yes <em class="pull-right" style="padding:0 15px;"><small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small></em></td>
+                <td ng-if="!flaggedForCounselling" class="value green"> No</td>
+              </tr>
               </tr>
               <tr><td></td></tr>
               <tr>
