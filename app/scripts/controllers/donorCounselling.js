@@ -8,13 +8,13 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
   $scope.searched = false;
 
-  $scope.search = {
+  var master = {
     selectedDonorPanels: [],
     startDate: null,
     endDate: null
   };
 
-  $scope.master = angular.copy($scope.search);
+  $scope.search = angular.fromJson(sessionStorage.getItem('donorCounsellingSearch')) || angular.copy(master);
 
   LocationsService.getDonorPanels(function(donorPanels) {
     $scope.donorPanels = donorPanels;
@@ -22,7 +22,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
   $scope.clearSearch = function() {
     $scope.searched = false;
-    $scope.search = angular.copy($scope.master);
+    $scope.search = angular.copy(master);
   };
 
   $scope.clearDates = function() {
@@ -40,16 +40,20 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
   $scope.refresh = function() {
 
+    sessionStorage.setItem('donorCounsellingSearch', angular.toJson($scope.search));
+
     var query = {
       flaggedForCounselling: true
     };
 
     if ($scope.search.startDate) {
-      query.startDate = $scope.search.startDate.toISOString();
+      var startDate = $scope.search.startDate;
+      query.startDate = angular.isDate(startDate) ? startDate.toISOString() : startDate;
     }
 
     if ($scope.search.endDate) {
-      query.endDate = $scope.search.endDate;
+      var endDate = $scope.search.endDate;
+      query.endDate = angular.isDate(endDate) ? endDate.toISOString() : endDate;
     }
 
     if ($scope.search.selectedDonorPanels.length > 0) {
