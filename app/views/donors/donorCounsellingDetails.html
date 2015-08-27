@@ -52,7 +52,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <form class="form-inline" name="postDonationCounsellingForm" ng-submit="updatePostDonationCounselling()" novalidate>
-      <div class="form-group" ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingDate.$invalid}">
+      <div class="form-group" style="display:inline;" ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingDate.$invalid}">
         <label>Counselling Date:</label>
         <dateselect class="counselling-date"
             name="counsellingDate"
