@@ -103,6 +103,17 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.VIEW_DONATION_BATCH,
         enabled : UI.DONORS_TAB_ENABLED
       })
+      .when('/donorCounselling', {
+        templateUrl : 'views/donors.html',
+        controller  : 'DonorCounsellingCtrl',
+        permission: PERMISSIONS.VIEW_POST_DONATION_COUNSELLING_DONORS,
+        reloadOnSearch: false
+      })
+      .when('/donorCounselling/:donorId', {
+        templateUrl : 'views/donors.html',
+        controller  : 'DonorCounsellingDetailsCtrl',
+        permission: PERMISSIONS.VIEW_POST_DONATION_COUNSELLING
+      })
 
       // COMPONENTS URLs
       .when('/components', {
@@ -474,7 +485,7 @@ var app = angular.module('bsis', [
   }])
 
   /* Custom datepicker directive, makes use of angular-ui datepicker */
-  .directive("dateselect", function(){
+  .directive("dateselect", function($compile){
     return {
       restrict: "E",
       require: "^ngModel",
@@ -482,6 +493,7 @@ var app = angular.module('bsis', [
       scope:{
         ngModel: "=",
         ngRequired: "=",
+        ngDisabled: "=",
         dateOptions: "=",
         minDate: "=",
         maxDate: "=",
@@ -503,12 +515,22 @@ var app = angular.module('bsis', [
         $scope.clear = function () {
           $scope.ngModel = null;
         };
+
+        var unwatch = $scope.$watch('ngDisabled', function(newValue, oldValue) {
+          if (newValue !== oldValue) {
+            $compile(element.contents())($scope);
+          }
+        });
+
+        $scope.$on('$destroy', function() {
+          unwatch();
+        });
       },
       templateUrl: 'views/template/dateselect.html'
     };
   })
 
-  .directive("dateselectEnd", ["$filter", function($filter){
+  .directive("dateselectEnd", function($compile){
     return {
       restrict: "E",
       require: ["^ngModel"],
@@ -516,6 +538,7 @@ var app = angular.module('bsis', [
       scope:{
         ngModel: "=",
         ngRequired: "=",
+        ngDisabled: "=",
         dateOptions: "=",
         minDate: "=",
         maxDate: "=",
@@ -561,10 +584,20 @@ var app = angular.module('bsis', [
             }
           });
 
+        var unwatch = scope.$watch('ngDisabled', function(newValue, oldValue) {
+          if (newValue !== oldValue) {
+            $compile(element.contents())(scope);
+          }
+        });
+
+        scope.$on('$destroy', function() {
+          unwatch();
+        });
+
       },
       templateUrl: 'views/template/dateselect.html'
     };
-  }])
+  })
 
 
     /*  Custom directive to check if user has associated permission
