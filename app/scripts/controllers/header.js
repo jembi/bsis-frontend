@@ -185,7 +185,6 @@ angular.module('bsis')
 
     // else set menu to HOME
     else {
-      console.log($location.path());
       $scope.currentSection = 'HOME';
     }
 
