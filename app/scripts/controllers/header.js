@@ -75,6 +75,7 @@ angular.module('bsis')
     '/addDonation',
     '/manageDonationBatches',
     '/manageClinic',
+    '/donorCounselling',
     '/exportDonorList'
   ];
 
