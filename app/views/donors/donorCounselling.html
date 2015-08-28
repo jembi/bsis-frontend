@@ -3,8 +3,8 @@
 <form class="form-horizontal" style="padding:10px 0;" ng-submit="refresh()">
 
   <div class="clearfix form-group">
-    <label class="col-sm-2 col-lg-1 control-label">Donor Panels:</label>
-    <div class="col-sm-10 col-lg-11">
+    <label class="col-sm-2 control-label">Donor Panels:</label>
+    <div class="col-sm-10 ">
       <ui-select multiple ng-model="search.selectedDonorPanels" style="max-width:500px;min-height:34px;" ng-if="donorPanels.length > 0">
         <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
         <ui-select-choices repeat="donorPanel.id as donorPanel in donorPanels | filter:$select.search">
@@ -20,8 +20,8 @@
   </div>
 
   <div class="clearfix form-group">
-    <label class="col-sm-2 col-lg-1 control-label">Date Range:</label>
-    <div class="form-inline col-sm-10 col-lg-11">
+    <label class="col-sm-2 control-label">Donation Period:</label>
+    <div class="form-inline col-sm-10">
       <div>
         <dateselect ng-model="search.startDate" format="dateFormat"></dateselect>
         <span><em>To:</em></span>
@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <div class="col-sm-offset-2 col-lg-offset-1">
+  <div class="col-sm-offset-2 ">
     <button class="btn btn-primary" type="submit">Search</button>
     <button class="btn btn-primary" type="reset" ng-click="clearSearch()">Clear</button>
   </div>
