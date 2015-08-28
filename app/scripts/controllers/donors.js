@@ -514,6 +514,14 @@ angular.module('bsis')
       }
     };
 
+    $scope.deleteDonor = function(donorId) {
+      DonorService.deleteDonor(donorId, function() {
+        $location.path('findDonor');
+      }, function(err) {
+        console.error(err);
+      });
+    };
+
   })
 
   // Controller for Adding Donors

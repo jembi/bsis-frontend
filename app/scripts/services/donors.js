@@ -269,6 +269,10 @@ angular.module('bsis')
       }, function() {
         response(false);
       });
+    },
+
+    deleteDonor: function(donorId, onSuccess, onError) {
+      Api.Donors.delete({id: donorId}, onSuccess, onError);
     }
   };
 });

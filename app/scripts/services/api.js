@@ -75,6 +75,8 @@ angular.module('bsis')
       TTITestingFormFields: $resource(url + '/ttitests/form'),
       BloodGroupTestingFormFields: $resource(url + '/bloodgroupingtests/form'),
 
+      Donors: $resource(url + '/donors/:id', {id: '@id'}),
+
       FindDonors: $resource(url + '/donors/search', {},
         {
           query: {
