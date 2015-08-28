@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, Api, LocationsService, DATEFORMAT) {
+angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, Api, LocationsService, DATEFORMAT) {
 
   $scope.dateFormat = DATEFORMAT;
   $scope.donorPanels = [];
@@ -14,7 +14,23 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     endDate: null
   };
 
-  $scope.search = angular.fromJson(sessionStorage.getItem('donorCounsellingSearch')) || angular.copy(master);
+  $scope.search = angular.copy(master);
+
+  if ($routeParams.startDate) {
+    $scope.search.startDate = new Date($routeParams.startDate);
+  }
+
+  if ($routeParams.endDate) {
+    $scope.search.endDate = new Date($routeParams.endDate);
+  }
+
+  if ($routeParams.donorPanel) {
+    var donorPanels = $routeParams.donorPanel;
+    if (!angular.isArray(donorPanels)) {
+      donorPanels = [donorPanels];
+    }
+    $scope.search.selectedDonorPanels = donorPanels;
+  }
 
   LocationsService.getDonorPanels(function(donorPanels) {
     $scope.donorPanels = donorPanels;
@@ -38,27 +54,38 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $location.path('/donorCounselling/' + donation.donor.id);
   };
 
+  function getISOString(maybeDate) {
+    return angular.isDate(maybeDate) ? maybeDate.toISOString() : maybeDate;
+  }
+
   $scope.refresh = function() {
 
-    sessionStorage.setItem('donorCounsellingSearch', angular.toJson($scope.search));
+    var queryParams = {
+      search: true
+    };
 
     var query = {
       flaggedForCounselling: true
     };
 
     if ($scope.search.startDate) {
-      var startDate = $scope.search.startDate;
-      query.startDate = angular.isDate(startDate) ? startDate.toISOString() : startDate;
+      var startDate = getISOString($scope.search.startDate);
+      query.startDate = startDate;
+      queryParams.startDate = startDate;
     }
 
     if ($scope.search.endDate) {
-      var endDate = $scope.search.endDate;
-      query.endDate = angular.isDate(endDate) ? endDate.toISOString() : endDate;
+      var endDate = getISOString($scope.search.endDate);
+      query.endDate = endDate;
+      queryParams.endDate = endDate;
     }
 
     if ($scope.search.selectedDonorPanels.length > 0) {
       query.donorPanel = $scope.search.selectedDonorPanels;
+      queryParams.donorPanel = $scope.search.selectedDonorPanels;
     }
+
+    $location.search(queryParams);
 
     Api.DonationSummaries.query(query, function(response) {
       $scope.searched = true;
@@ -67,4 +94,8 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       console.error(err);
     });
   };
+
+  if ($routeParams.search) {
+    $scope.refresh();
+  }
 });

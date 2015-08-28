@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope, $location, $routeParams, DonorService, PostDonationCounsellingService, TestingService) {
+angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope, $window, $routeParams, DonorService, PostDonationCounsellingService, TestingService) {
 
   $scope.postDonationCounselling = {};
   $scope.donation = {};
@@ -8,6 +8,10 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
 
   $scope.counsellingStatuses = [];
   $scope.testResults = [];
+
+  $scope.goBack = function() {
+    $window.history.back();
+  };
 
   $scope.updatePostDonationCounselling = function() {
 
@@ -23,7 +27,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
     };
 
     PostDonationCounsellingService.updatePostDonationCounselling(update, function() {
-      $location.path('/donorCounselling');
+      $scope.goBack();
     }, function(err) {
       console.error(err);
     });
