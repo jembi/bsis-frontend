@@ -75,6 +75,7 @@ angular.module('bsis')
     '/addDonation',
     '/manageDonationBatches',
     '/manageClinic',
+    '/donorCounselling',
     '/exportDonorList'
   ];
 
@@ -143,7 +144,7 @@ angular.module('bsis')
   var setMenuSelection = function() {
 
     // if on donors page, set menu to DONORS
-    if (donorRoutes.indexOf($location.path()) >= 0) {
+    if (donorRoutes.indexOf($location.path()) >= 0 || /^\/donorCounselling\/\d+$/.test($location.path())) {
       $scope.currentSection = 'DONORS';
     }
 

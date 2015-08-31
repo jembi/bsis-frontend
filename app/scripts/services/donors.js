@@ -271,6 +271,10 @@ angular.module('bsis')
       });
     },
 
+    getDonorPostDonationCounselling: function(donorId, onSuccess, onError) {
+      Api.DonorPostDonationCounselling.get({donorId: donorId}, onSuccess, onError);
+    },
+
     deleteDonor: function(donorId, onSuccess, onError) {
       Api.Donors.delete({id: donorId}, onSuccess, onError);
     }

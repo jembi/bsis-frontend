@@ -111,7 +111,7 @@ angular.module('bsis')
   MANAGE_BLOOD_TESTS: 'Manage Blood Tests',
   MANAGE_TIPS: 'Manage Tips',
   MANAGE_REQUESTS: 'Manage Requests',
-  MANAGE_GENERAL_CONFIGS: "Manage General Configs",
+  MANAGE_GENERAL_CONFIGS: 'Manage General Configs',
 
   //Page Control Permissions
   VIEW_DONOR_INFORMATION: 'View Donor Information',
@@ -127,7 +127,14 @@ angular.module('bsis')
   VIEW_AUDIT_LOG: 'View Audit Log',
 
   // Make use of this temporary permission to hide/prevent access to areas of functionality not ready for use in production
-  HIDDEN: 'Hidden Functionality'
+  HIDDEN: 'Hidden Functionality',
+
+  // Post Donation Counselling Permissions
+  VIEW_POST_DONATION_COUNSELLING_DONORS: 'View Post Donation Counselling Donors',
+  ADD_POST_DONATION_COUNSELLING: 'Add Post Donation Counselling',
+  EDIT_POST_DONATION_COUNSELLING: 'Edit Post Donation Counselling',
+  VIEW_POST_DONATION_COUNSELLING: 'View Post Donation Counselling',
+  VOID_POST_DONATION_COUNSELLING: 'Void Post Donation Counselling'
 
 })
 ;

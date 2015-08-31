@@ -1,11 +1,26 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
+
+    // Tabs with their active status
+    $scope.tabs = {
+      overview: false,
+      demographics: false,
+      donations: false,
+      deferrals: false
+    };
+
+    var activeTab = $routeParams.tab || 'overview';
+    if ($scope.tabs[activeTab] === false) {
+      $scope.tabs[activeTab] = true;
+    } else {
+      $scope.tabs.overview = true;
+    }
 
     var data = [{}];
     $scope.data = data;
@@ -48,6 +63,10 @@ angular.module('bsis')
         return true;
       } else if ($location.path() === "/manageClinic" && path === "/manageDonationBatches") {
         $scope.selection = $location.path();
+        return true;
+      } else if ($location.path().indexOf('/donorCounselling') === 0 && path.indexOf('/donorCounselling') === 0) {
+        var currentPath = $location.path();
+        $scope.selection = currentPath === '/donorCounselling' ? currentPath : '/donorCounsellingDetails';
         return true;
       } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
         $location.path(path);
@@ -169,7 +188,7 @@ angular.module('bsis')
   
   // Controller for Viewing Donors
   .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
-                                         GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout) {
+      GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout) {
 
     $scope.data = {};
     $scope.age = '';
@@ -221,6 +240,7 @@ angular.module('bsis')
       DonorService.getDonorOverview($scope.donor.id, function(response){
         if (response !== false){
           $scope.data = response;
+          $scope.flaggedForCounselling = $scope.data.flaggedForCounselling;
           $scope.currentlyDeferred = $scope.data.currentlyDeferred;
           $scope.deferredUntil = $scope.data.deferredUntil;
           $scope.lastDonation = $scope.data.lastDonation;
@@ -399,7 +419,7 @@ angular.module('bsis')
       $q.all(requests).then(function(){
         $scope.donationsView = 'viewDonationDetails';
       });
-      
+
     };
 
     $scope.viewAddDonationForm = function (){
