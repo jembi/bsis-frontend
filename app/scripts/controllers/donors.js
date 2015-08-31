@@ -422,6 +422,17 @@ angular.module('bsis')
 
     };
 
+    $scope.deleteDonation = function(donationId) {
+      DonorService.deleteDonation(donationId, function() {
+        $scope.donationsData = $scope.donationsData.filter(function(donation) {
+          return donation.id !== donationId;
+        });
+      }, function(err) {
+        console.error(err);
+        $scope.confirmDelete = false;
+      });
+    };
+
     $scope.viewAddDonationForm = function (){
 
       // set initial bleed times

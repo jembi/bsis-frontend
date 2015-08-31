@@ -155,6 +155,9 @@ angular.module('bsis')
 
       });
     },
+    deleteDonation: function(donationId, onSuccess, onError) {
+      Api.Donations.delete({id: donationId}, onSuccess, onError);
+    },
     getDeferralsFormFields: function(response){
       Api.DeferralsFormFields.get({}, function (backingForm) {
         response(backingForm);

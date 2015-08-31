@@ -48,8 +48,14 @@
               {{donation.donorPulse}} {{pulseUnit}}
           </td>
           <td data-title="''" style="width:10%;" class="text-center">
-            <span style="font-size: 0.9em;">
-              <em><a ng-click="viewDonationDetails(donation.donationIdentificationNumber)"> View</a></em>
+            <span style="font-size: 0.9em;" ng-hide="confirmDelete">
+              <em><a ng-click="viewDonationDetails(donation.donationIdentificationNumber)">View</a></em>
+              <span ng-show="donation.permissions.canDelete">|</span>
+              <em ng-show="donation.permissions.canDelete"><a ng-click="confirmDelete = true">Delete</a></em>
+            </span>
+            <span style="font-size: 0.9em;" ng-show="confirmDelete">
+              <a class="text-danger" ng-click="deleteDonation(donation.id)">Delete</a>
+              <a class="text-muted" ng-click="confirmDelete = false">Cancel</a>
             </span>
           </td>
       </tr>
