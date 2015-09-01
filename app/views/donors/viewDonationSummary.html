@@ -34,7 +34,29 @@
         </tr>
         <tr>
           <td class="field">Bleed Time: </td>
-          <td class="value">{{donation.bleedStartTime | bsisTime }} to {{donation.bleedEndTime | bsisTime }}</td>
+          <td class="value bleed-times">
+            <fieldset ng-disabled="!donation.permissions.canUpdateDonationFields">
+              <table>
+                <tr>
+                  <td>
+                    <span editable-bstime="donation.bleedStartTime"
+                        e-minute-step="5"
+                        e-show-spinners="donation.permissions.canUpdateDonationFields">
+                      {{donation.bleedStartTime | bsisTime }}
+                    </span>
+                  </td>
+                  <td> to </td>
+                  <td>
+                    <span editable-bstime="donation.bleedEndTime"
+                        e-minute-step="5"
+                        e-show-spinners="donation.permissions.canUpdateDonationFields">
+                      {{donation.bleedEndTime | bsisTime }}
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
+          </td>
         </tr>
         <tr>
           <td class="field">Venue: </td>

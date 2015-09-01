@@ -617,3 +617,10 @@ input[disabled] {
 }
 
 /* --> general css */
+
+.bleed-times .editable-bstime .well {
+  background-color: inherit;
+  border: none;
+  box-shadow: none;
+  padding: 0px;
+}
