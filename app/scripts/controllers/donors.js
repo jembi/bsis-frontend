@@ -983,6 +983,7 @@ angular.module('bsis')
       DonorService.getDonationsFormFields(function(response) {
         if (response !== false) {
           $scope.haemoglobinLevels = response.haemoglobinLevels;
+          $scope.packTypes = response.packTypes;
         }
       });
     };
