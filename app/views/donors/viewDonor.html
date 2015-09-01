@@ -27,9 +27,11 @@
     </span>
 
     <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
-      <div ng-hide="editableForm.$visible" style="display:inline;">
+
+      <!-- Delete donor actions -->
+      <div has-permission="{{permissions.VOID_DONOR}}" ng-hide="editableForm.$visible" style="display:inline;">
         <em>
-          <button type="button" class="btn btn-link" has-permission="{{permissions.VOID_DONOR}}" ng-click="confirmDelete = true" ng-hide="confirmDelete" ng-disabled="!donor.permissions.canDelete">Void Donor</button>
+          <button type="button" class="btn btn-link" ng-click="confirmDelete = true" ng-hide="confirmDelete" ng-disabled="!donor.permissions.canDelete">Void Donor</button>
           <button type="button" class="btn btn-link text-danger" ng-show="confirmDelete" ng-click="deleteDonor(donor.id)">
             Void
           </button>
@@ -39,8 +41,9 @@
         </em>
       </div>
 
-      <div ng-hide="confirmDelete" style="display:inline;">
-        <em><button type="button" class="btn btn-link" has-permission="{{permissions.EDIT_DONOR}}" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit Donor</button></em>  
+      <!-- Edit donor actions -->
+      <div has-permission="{{permissions.EDIT_DONOR}}" ng-hide="confirmDelete" style="display:inline;">
+        <em><button type="button" class="btn btn-link" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit Donor</button></em>  
 
         <span ng-show="editableForm.$visible">
           <em>
