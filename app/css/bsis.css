@@ -632,3 +632,7 @@ input[disabled] {
 .btn-link.text-muted {
   color: #777;
 }
+
+.btn-link.text-success {
+  color: #3C763D;
+}
