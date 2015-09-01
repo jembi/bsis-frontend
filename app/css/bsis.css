@@ -624,3 +624,11 @@ input[disabled] {
   box-shadow: none;
   padding: 0px;
 }
+
+.btn-link.text-danger {
+  color: #A94442;
+}
+
+.btn-link.text-muted {
+  color: #777;
+}
