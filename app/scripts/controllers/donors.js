@@ -507,6 +507,11 @@ angular.module('bsis')
           }
         });
     };
+    
+    $scope.populateEndDate = function(deferral) {
+      var duration = deferral.deferralReason.defaultDuration;
+      deferral.deferredUntil = moment().add(duration, 'days').toDate();
+    };
 
     $scope.addDeferral = function (deferral, addDeferralForm){
 
