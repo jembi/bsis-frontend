@@ -13,10 +13,13 @@
             ng-mouseenter="this.$selected = true"
             ng-mouseleave="this.$selected = false"
             ng-class="{'active': deferral.$selected}">
-            <td data-title="'Reason'" style="width:30%;" header-class="text-left" sortable="'reason'">
+            <td data-title="'Reason'" sortable="'reason'">
                 {{deferral.reason}}
             </td>
-            <td data-title="'Enabled'" style="width:15%;" header-class="text-left"  class="text-center">
+            <td data-title="'Default Duration'" sortable="'defaultDuration'" class="text-center">
+                {{deferral.defaultDuration}}
+            </td>
+            <td data-title="'Enabled'" class="text-center">
               <span ng-show="!deferral.isDeleted"><i class="fa {{icons.SQUARECHECK}}"></i></span>
               <span ng-show="deferral.isDeleted"><i class="fa {{icons.SQUARE}}"></i></span>
             </td>
