@@ -97,7 +97,7 @@
       <label for="name" class="col-sm-3 control-label">Pack</label>
       <div class="row col-sm-9">
         <div class="form-inline" style="padding-left:5px;">
-          <select name="packType" class="form-control input-sm" ng-model="donation.packType" ng-options="item as item.bloodBagType for item in packTypes" required
+          <select name="packType" class="form-control input-sm" ng-model="donation.packType" ng-options="item as item.packType for item in packTypes" required
           ng-class="{'ng-invalid ng-dirty' : addDonationForm.packType.$invalid && submitted}"
           >
               <option value=""></option>

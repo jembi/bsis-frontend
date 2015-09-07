@@ -223,7 +223,16 @@ angular.module('bsis')
 
       PasswordResets: $resource(url + '/passwordresets'),
 
-      AuditRevisions: $resource(url + '/auditrevisions')
+      AuditRevisions: $resource(url + '/auditrevisions'),
+      
+      DonationSummaries: $resource(url + '/donations/summaries'),
+
+      DonorPostDonationCounselling: $resource(url + '/donors/:donorId/postdonationcounselling'),
+
+      PostDonationCounselling: $resource(url + '/postdonationcounsellings/:id', {id: '@id'}, {
+        update: {method: 'PUT'}
+      }),
+      PostDonationCounsellingFormFields: $resource(url + '/postdonationcounsellings/form')
 
     };
 });

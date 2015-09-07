@@ -1,0 +1,56 @@
+<h3 class="page-header">Donors Flagged for Counselling</h3>
+
+<form class="form-horizontal" style="padding:10px 0;" ng-submit="refresh()">
+
+  <div class="clearfix form-group">
+    <label class="col-sm-2 control-label">Donor Panels:</label>
+    <div class="col-sm-10 ">
+      <ui-select multiple ng-model="search.selectedDonorPanels" style="max-width:500px;min-height:34px;" ng-if="donorPanels.length > 0">
+        <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
+        <ui-select-choices repeat="donorPanel.id as donorPanel in donorPanels | filter:$select.search">
+          {{donorPanel.name}}
+        </ui-select-choices>
+      </ui-select>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-checked="search.selectedDonorPanels.length === 0" ng-click="clearDonorPanels()"> Any Donor Panel
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix form-group">
+    <label class="col-sm-2 control-label">Donation Period:</label>
+    <div class="form-inline col-sm-10">
+      <div>
+        <dateselect ng-model="search.startDate" format="dateFormat"></dateselect>
+        <span><em>To:</em></span>
+        <dateselect-end ng-model="search.endDate" format="dateFormat"></dateselect>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-checked="!search.startDate && !search.endDate" ng-click="clearDates()"> Any Date
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-offset-2 ">
+    <button class="btn btn-primary" type="submit">Search</button>
+    <button class="btn btn-primary" type="reset" ng-click="clearSearch()">Clear</button>
+  </div>
+</form>
+
+<div class="panel panel-default" ng-show="searched">
+  <div class="panel-body">
+    <table class="table" style="text-align:center;" ng-table>
+      <tr ng-repeat="donation in donations" ng-click="viewDonorCounselling(donation)">
+        <td data-title="'Donor Number'">{{donation.donor.donorNumber}}</td>
+        <td data-title="'First Name'">{{donation.donor.firstName}}</td>
+        <td data-title="'Last Name'">{{donation.donor.lastName}}</td>
+        <td data-title="'Donor Panel'">{{donation.donorPanel.name}}</td>
+        <td data-title="'Donation Date'">{{donation.donationDate | bsisDate}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
