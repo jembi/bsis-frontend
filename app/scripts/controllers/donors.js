@@ -1078,6 +1078,18 @@ angular.module('bsis')
       });
     };
 
+    $scope.deleteDonation = function(donationId) {
+      DonorService.deleteDonation(donationId, function() {
+        data = data.filter(function(donation) {
+          return donation.id !== donationId;
+        });
+        $scope.donorClinicTableParams.reload();
+      }, function(err) {
+        console.error(err);
+        $scope.confirmDelete = false;
+      });
+    };
+
   })
 
 ;
