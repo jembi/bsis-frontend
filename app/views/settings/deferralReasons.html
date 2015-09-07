@@ -17,13 +17,12 @@
                 {{deferral.reason}}
             </td>
             <td data-title="'Default Duration'" sortable="'defaultDuration'" class="text-center">
-                {{deferral.defaultDuration}}
+                {{deferral.durationType === 'PERMANENT' ? 'Permanent' : deferral.defaultDuration}}
             </td>
             <td data-title="'Enabled'" class="text-center">
               <span ng-show="!deferral.isDeleted"><i class="fa {{icons.SQUARECHECK}}"></i></span>
               <span ng-show="deferral.isDeleted"><i class="fa {{icons.SQUARE}}"></i></span>
             </td>
-
           </tr>
         </table>
       </div>

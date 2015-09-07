@@ -23,13 +23,27 @@
         </div>
       </div>
 
+      <div class="row form-group col-sm-12">
+        <label for="isDeleted" class="col-sm-2 control-label">Permanent</label>
+        <div class="col-sm-4">
+          <div class="checkbox">
+            <input type="checkbox" id="durationType" name="durationType"
+                ng-model="deferral.durationType"
+                ng-true-value="'PERMANENT'"
+                ng-false-value="'TEMPORARY'"
+                ng-change="handleDurationTypeChange()" />
+          </div>
+        </div>
+      </div>
+
       <div class="form-group">
         <label for="defaultDuration" class="col-sm-2 control-label">Default Duration</label>
         <div class="col-sm-4">
           <div class="form-inline">
             <input class="form-control input-sm" type="number" id="defaultDuration" name="defaultDuration" min="1" required
                 ng-model="deferral.defaultDuration"
-                ng-class="{'ng-invalid ng-dirty': deferralForm.defaultDuration.$invalid && submitted}" />
+                ng-class="{'ng-invalid ng-dirty': deferralForm.defaultDuration.$invalid && submitted}" 
+                ng-disabled="deferral.durationType === 'PERMANENT'" />
             days
             <ng-messages for="deferralForm.defaultDuration.$error" role="alert" ng-show="deferralForm.$submitted || deferralForm.defaultDuration.$dirty">
               <ng-messages-include src="messages.html"></ng-messages-include>

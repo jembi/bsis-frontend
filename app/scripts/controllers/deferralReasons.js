@@ -168,6 +168,9 @@ angular.module('bsis')
       $location.path("/deferralReasons");
     };
 
+    $scope.handleDurationTypeChange = function() {
+      $scope.deferral.defaultDuration = $scope.deferral.durationType === 'PERMANENT' ? 65535 : 0;
+    };
 
     $scope.go = function (path) {
       $location.path(path);
