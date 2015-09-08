@@ -357,6 +357,16 @@ var app = angular.module('bsis', [
         controller  : 'AuditLogCtrl',
         permission: PERMISSIONS.VIEW_AUDIT_LOG
       })
+      .when('/adverseEventTypes', {
+        templateUrl: 'views/settings.html',
+        controller: 'AdverseEventTypesCtrl',
+        permission: PERMISSIONS.VIEW_ADVERSE_EVENT_TYPES
+      })
+      .when('/addAdverseEventType', {
+        templateUrl: 'views/settings.html',
+        controller: 'AddAdverseEventTypeCtrl',
+        permission: PERMISSIONS.ADD_ADVERSE_EVENT_TYPES
+      })
 
       .otherwise({
         redirectTo: '/home'

@@ -1,0 +1,29 @@
+<h3 class="page-header">Manage Adverse Event Types</h3>
+
+<div class="col-sm-12">
+  <div style="padding-bottom:10px;"></div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <p>
+            <em>{{tableParams.data.length}} adverse event type(s) found</em>
+            <span has-permission="{{permissions.ADD_ADVERSE_EVENT_TYPES}}">
+              | <em><a href="#/addAdverseEventType">Add Adverse Event Type</a></em>
+            </span>
+        </p>
+
+        <table class="table" style="text-align:center;" ng-table="tableParams" show-filter="false">
+          <tr ng-repeat="adverseEventType in $data">
+            <td data-title="'Name'" sortable="'name'">{{adverseEventType.name}}</td>
+            <td data-title="'Description'" sortable="'description'">{{adverseEventType.description}}</td>
+            <td data-title="'Enabled'">
+              <span ng-show="!adverseEventType.isDeleted"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+              <span ng-show="adverseEventType.isDeleted"><i class="fa {{icons.SQUARE}}"></i></span>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>

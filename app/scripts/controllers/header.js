@@ -138,7 +138,9 @@ angular.module('bsis')
     '/manageDonationType',
     '/packTypes',
     '/managePackType',
-    '/auditLog'
+    '/auditLog',
+    '/adverseEventTypes',
+    '/addAdverseEventType'
   ];
 
   var setMenuSelection = function() {
