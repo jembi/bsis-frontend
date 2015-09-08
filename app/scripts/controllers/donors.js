@@ -707,13 +707,6 @@ angular.module('bsis')
     $scope.recentDonationBatches = false;
     $scope.newDonationBatch = {};
 
-    DonorService.getDonationBatchFormFields( function(response){
-      if (response !== false){
-        $scope.donorPanels = response.donorPanels;
-      }
-      else{
-      }
-    });
 
     $scope.getOpenDonationBatches = function (){
 
@@ -721,6 +714,19 @@ angular.module('bsis')
         if (response !== false){
           data = response.donationBatches;
           $scope.data = data;
+          DonorService.getDonationBatchFormFields( function(response){
+            if (response !== false){
+              $scope.donorPanels = response.donorPanels;
+              angular.forEach(data, function(item) {
+                $scope.donorPanels =  $scope.donorPanels.filter(function (el) {
+                    return el.name !== item.donorPanel.name;
+                });
+              });
+            }
+            else{
+            }
+          });
+
           if (data.length > 0){
             $scope.openDonationBatches = true;
           }
