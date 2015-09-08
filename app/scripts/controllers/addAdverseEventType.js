@@ -8,7 +8,11 @@ angular.module('bsis').controller('AddAdverseEventTypeCtrl', function($scope, $l
     isDeleted: false
   };
 
-  $scope.saveAdverseEventType = function() {
+  $scope.saveAdverseEventType = function(form) {
+    if (form.$invalid) {
+      return;
+    }
+
     var adverseEventType = {
       name: $scope.adverseEventType.name,
       description: $scope.adverseEventType.description,

@@ -15,7 +15,11 @@ angular.module('bsis').controller('EditAdverseEventTypeCtrl', function($scope, $
     console.error(err);
   });
 
-  $scope.saveAdverseEventType = function() {
+  $scope.saveAdverseEventType = function(form) {
+    if (form.$invalid) {
+      return;
+    }
+
     var adverseEventType = {
       id: $scope.adverseEventType.id,
       name: $scope.adverseEventType.name,
