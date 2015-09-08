@@ -27,26 +27,38 @@
     </span>
 
     <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
-      <small><em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit Donor</a></em>  
-      <span ng-show="!editableForm.$visible">
-      </span>
 
+      <!-- Delete donor actions -->
+      <div has-permission="{{permissions.VOID_DONOR}}" ng-hide="editableForm.$visible" style="display:inline;">
+        <em>
+          <button type="button" class="btn btn-link" ng-click="confirmDelete = true" ng-hide="confirmDelete" ng-disabled="!donor.permissions.canDelete">Void Donor</button>
+          <button type="button" class="btn btn-link text-danger" ng-show="confirmDelete" ng-click="deleteDonor(donor.id)">
+            Void
+          </button>
+          <button type="button" class="btn btn-link text-muted" ng-show="confirmDelete" ng-click="confirmDelete = false">
+            Cancel
+          </button>
+        </em>
+      </div>
 
-    <span ng-show="editableForm.$visible">
-      <em>
-      <button type="submit" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="editableForm.$waiting">
-        Save
-      </button>
-      <button type="button" class="btn" style="background:none!important; border:none;  cursor: pointer;" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
-        Cancel
-      </button>
-      </em>
+      <!-- Edit donor actions -->
+      <div has-permission="{{permissions.EDIT_DONOR}}" ng-hide="confirmDelete" style="display:inline;">
+        <em><button type="button" class="btn btn-link" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit Donor</button></em>  
+
+        <span ng-show="editableForm.$visible">
+          <em>
+            <button type="submit" class="btn btn-link text-success" ng-disabled="editableForm.$waiting">
+              Save
+            </button>
+            <button type="button" class="btn btn-link text-muted" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+              Cancel
+            </button>
+          </em>
+        </span>
+      </div>
     </span>
 
-    <span ng-show="!editableForm.$visible" has-permission="{{permissions.HIDDEN}}">  |  <em><a href="">Void Donor</a></em></small> </span>
-    </span>
-
-  <hr/>
+  <hr style="clear:right;" />
 
   <div class = "h4"> 
     <small><em>Age: </em></small>
