@@ -146,9 +146,9 @@ angular.module('bsis')
             $location.path("/viewDonor");
           },
           function (err) {
+            $scope.err = err;
             if (err["donor.birthDate"]) {
-              $scope.dobInvalid = "ng-invalid";
-              $scope.serverError.dob = err["donor.birthDate"];
+              $scope.dobValid = false;
             }
           });
       }
@@ -160,13 +160,15 @@ angular.module('bsis')
     $scope.updateDonor = function (donor){
 
       DonorService.updateDonor(donor, function(response){
-        if (response !== false){
           $scope.donor = response;
-        }
-        else{
-          // TODO: handle case where response == false
-        }
-      });
+        },
+        // display error from back end
+        function(err){
+          $scope.err = err;
+          if (err["donor.birthDate"]) {
+            $scope.dobValid = false;
+          }
+        });
 
     };
 
@@ -441,9 +443,9 @@ angular.module('bsis')
 
     $scope.addDonationSuccess = '';
 
-    $scope.addDonation = function (donation, donationBatch, bleedStartTime, bleedEndTime, valid){
+    $scope.addDonation = function (donation, donationBatch, bleedStartTime, bleedEndTime, valid) {
 
-      if(valid){
+      if (valid) {
         $scope.addDonationSuccess = '';
 
         // set donation center, site & date to those of the donation batch
@@ -456,47 +458,37 @@ angular.module('bsis')
         donation.bleedStartTime = bleedStartTime;
         donation.bleedEndTime = bleedEndTime;
 
-        DonorService.addDonation(donation, function(response, err){
-          if (response !== false){
-
-            $scope.addDonationSuccess = true;
-            $scope.donation = {};
-            $scope.getDonations($scope.donor.id);
-            $scope.donationsView = 'viewDonations';
-            $scope.submitted = '';
-          }
-          else{
-            // TODO: handle case where response == false
-            $scope.addDonationSuccess = false;
-            if(err["donation.bloodPressureDiastolic"]){
-              $scope.bloodPressureDiastolicInvalid = "ng-invalid";
-              $scope.serverError.bloodPressureDiastolic = err["donation.bloodPressureDiastolic"];
-            }
-
-            if(err["donation.bloodPressureSystolic"]){
-              $scope.bloodPressureSystolicInvalid = "ng-invalid";
-              $scope.serverError.bloodPressureSystolic = err["donation.bloodPressureSystolic"];
-            }
-
-            if(err["donation.donorPulse"]){
-              $scope.donorPulseInvalid = "ng-invalid";
-              $scope.serverError.donorPulse = err["donation.donorPulse"];
-            }
-
-            if(err["donation.donorWeight"]){
-              $scope.donorWeightInvalid = "ng-invalid";
-              $scope.serverError.donorWeight = err["donation.donorWeight"];
-            }
-
-            if(err["donation.haemoglobinCount"]){
-              $scope.haemoglobinCountInvalid = "ng-invalid";
-              $scope.serverError.haemoglobinCount = err["donation.haemoglobinCount"];
-            }
+        DonorService.addDonation(donation, function (response) {
+          $scope.addDonationSuccess = true;
+          $scope.donation = {};
+          $scope.getDonations($scope.donor.id);
+          $scope.donationsView = 'viewDonations';
+          $scope.submitted = '';
+          $scope.getDonorOverview();
+        }, function (err) {
+          $scope.err = err;
+          $scope.addDonationSuccess = false;
+          if (err["donation.bloodPressureDiastolic"]) {
+            $scope.bloodPressureDiastolicValid = false;
           }
 
+          if (err["donation.bloodPressureSystolic"]) {
+            $scope.bloodPressureSystolicValid = false;
+          }
+
+          if (err["donation.donorPulse"]) {
+            $scope.donorPulseValid = false;
+          }
+
+          if (err["donation.donorWeight"]) {
+            $scope.donorWeightValid = false;
+          }
+
+          if (err["donation.haemoglobinCount"]) {
+            $scope.haemoglobinCountValid = false;
+          }
           // refresh donor overview after adding donation
           $scope.getDonorOverview();
-
         });
       }
       else {
@@ -1045,8 +1037,8 @@ angular.module('bsis')
         donation.bleedStartTime = bleedStartTime;
         donation.bleedEndTime = bleedEndTime;
 
-        DonorService.addDonationToBatch(donation, function(response, err){
-          if (response !== false){
+        DonorService.addDonationToBatch(donation, function(response){
+
 
             $scope.addDonationSuccess = true;
             $scope.donation = {};
@@ -1056,35 +1048,29 @@ angular.module('bsis')
             data = $scope.donationBatch.donations;
             $scope.data = data;
             $scope.submitted = '';
-          }
-          else{
-
+          },
+          function (err) {
+            $scope.err = err;
             $scope.addDonationSuccess = false;
             if(err["donation.bloodPressureDiastolic"]){
-              $scope.bloodPressureDiastolicInvalid = "ng-invalid";
-              $scope.serverError.bloodPressureDiastolic = err["donation.bloodPressureDiastolic"];
+              $scope.bloodPressureDiastolicValid = false;
             }
 
             if(err["donation.bloodPressureSystolic"]){
-              $scope.bloodPressureSystolicInvalid = "ng-invalid";
-              $scope.serverError.bloodPressureSystolic = err["donation.bloodPressureSystolic"];
+              $scope.bloodPressureSystolicValid = false;
             }
 
             if(err["donation.donorPulse"]){
-              $scope.donorPulseInvalid = "ng-invalid";
-              $scope.serverError.donorPulse = err["donation.donorPulse"];
+              $scope.donorPulseValid = false;
             }
 
             if(err["donation.donorWeight"]){
-              $scope.donorWeightInvalid = "ng-invalid";
-              $scope.serverError.donorWeight = err["donation.donorWeight"];
+              $scope.donorWeightValid = false;
             }
 
             if(err["donation.haemoglobinCount"]){
-              $scope.haemoglobinCountInvalid = "ng-invalid";
-              $scope.serverError.haemoglobinCount = err["donation.haemoglobinCount"];
+              $scope.haemoglobinCountValid = false;
             }
-          }
         });
       }
       else {
