@@ -367,6 +367,11 @@ var app = angular.module('bsis', [
         controller: 'AddAdverseEventTypeCtrl',
         permission: PERMISSIONS.ADD_ADVERSE_EVENT_TYPES
       })
+      .when('/editAdverseEventType/:id', {
+        templateUrl: 'views/settings.html',
+        controller: 'EditAdverseEventTypeCtrl',
+        permission: PERMISSIONS.EDIT_ADVERSE_EVENT_TYPES
+      })
 
       .otherwise({
         redirectTo: '/home'

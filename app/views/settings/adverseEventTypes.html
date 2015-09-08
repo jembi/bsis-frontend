@@ -13,7 +13,7 @@
         </p>
 
         <table class="table" style="text-align:center;" ng-table="tableParams" show-filter="false">
-          <tr ng-repeat="adverseEventType in $data">
+          <tr ng-repeat="adverseEventType in $data" ng-click="editAdverseEventType(adverseEventType.id);">
             <td data-title="'Name'" sortable="'name'">{{adverseEventType.name}}</td>
             <td data-title="'Description'" sortable="'description'">{{adverseEventType.description}}</td>
             <td data-title="'Enabled'">

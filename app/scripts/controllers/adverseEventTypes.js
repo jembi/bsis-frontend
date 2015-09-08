@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('AdverseEventTypesCtrl', function($scope, $filter, ICONS, AdverseEventsService, ngTableParams) {
+angular.module('bsis').controller('AdverseEventTypesCtrl', function($scope, $filter, $location, ICONS, AdverseEventsService, ngTableParams) {
 
   $scope.icons = ICONS;
 
@@ -22,4 +22,8 @@ angular.module('bsis').controller('AdverseEventTypesCtrl', function($scope, $fil
       });
     }
   });
+
+  $scope.editAdverseEventType = function(id) {
+    $location.path('/editAdverseEventType/' + id);
+  };
 });

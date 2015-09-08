@@ -181,7 +181,7 @@ angular.module('bsis')
     }
 
     // else if on settings page, set menu to SETTINGS
-    else if (settingsRoutes.indexOf($location.path()) >= 0) {
+    else if (settingsRoutes.indexOf($location.path()) >= 0 || /^\/editAdverseEventType\/\d+$/.test($location.path())) {
       $scope.currentSection = 'SETTINGS';
     }
 
