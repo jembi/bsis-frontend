@@ -24,11 +24,11 @@
     </td>
     <td class="col-sm-1 text-center">
       <span style="font-size: 0.9em;" ng-hide="confirmDelete">
-        <em><button class="btn btn-link btn-sm" ng-click="$event.stopPropagation(); confirmDelete = true" ng-disabled="!donation.permissions.canDelete">Void</button></em>
+        <em><button class="btn btn-link btn-sm" style="padding:5px;" ng-click="$event.stopPropagation(); confirmDelete = true" ng-disabled="!donation.permissions.canDelete">Void</button></em>
       </span>
       <span style="font-size: 0.9em;" ng-show="confirmDelete">
-        <button class="btn btn-link btn-sm text-danger" ng-click="$event.stopPropagation(); deleteDonation(donation.id);">Void</button>
-        <button class="btn btn-link btn-sm text-muted" ng-click="$event.stopPropagation(); confirmDelete = false">Cancel</button>
+        <button class="btn btn-link btn-sm text-danger" style="padding:5px;" ng-click="$event.stopPropagation(); deleteDonation(donation.id);">Void</button>
+        <button class="btn btn-link btn-sm text-muted" style="padding:5px;" ng-click="$event.stopPropagation(); confirmDelete = false">Cancel</button>
       </span>
     </td>
   </tr>
