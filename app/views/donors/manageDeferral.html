@@ -27,12 +27,16 @@
   </div>
 
   <!-- End date -->
-  <div class="form-group">
-    <label for="name" class="col-sm-1 control-label" >End Date</label>
+  <div class="form-group" ng-class="{'has-error' : addDeferralForm.deferredUntil.$invalid && submitted}">
+    <label for="name" class="col-sm-1 control-label" style="color:inherit;">End Date</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <dateselect-end name="deferredUntil" ng-model="deferral.deferredUntil" format="format" opened="dateToOpen" cal-icon="icons.CALENDAR" required
-        ng-class="{'ng-invalid ng-dirty' : addDeferralForm.deferredUntil.$invalid && submitted}">
+        <dateselect-end name="deferredUntil"
+            ng-model="deferral.deferredUntil"
+            format="format"
+            opened="dateToOpen"
+            required
+            ng-disabled="deferral.deferralReason.durationType === 'PERMANENT'">
         </dateselect-end>
         <div>
           <small class="error" 
