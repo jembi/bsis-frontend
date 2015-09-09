@@ -844,7 +844,7 @@ angular.module('bsis')
 
         }, function (err){
           $scope.err = err;
-          console.log(err);
+         
         });
       }
       else{
