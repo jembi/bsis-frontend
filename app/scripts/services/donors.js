@@ -157,6 +157,9 @@ angular.module('bsis')
 
       });
     },
+    deleteDonation: function(donationId, onSuccess, onError) {
+      Api.Donations.delete({id: donationId}, onSuccess, onError);
+    },
     getDeferralsFormFields: function(response){
       Api.DeferralsFormFields.get({}, function (backingForm) {
         response(backingForm);
@@ -275,6 +278,10 @@ angular.module('bsis')
 
     getDonorPostDonationCounselling: function(donorId, onSuccess, onError) {
       Api.DonorPostDonationCounselling.get({donorId: donorId}, onSuccess, onError);
+    },
+
+    deleteDonor: function(donorId, onSuccess, onError) {
+      Api.Donors.delete({id: donorId}, onSuccess, onError);
     }
   };
 });
