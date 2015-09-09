@@ -422,6 +422,17 @@ angular.module('bsis')
 
     };
 
+    $scope.deleteDonation = function(donationId) {
+      DonorService.deleteDonation(donationId, function() {
+        $scope.donationsData = $scope.donationsData.filter(function(donation) {
+          return donation.id !== donationId;
+        });
+      }, function(err) {
+        console.error(err);
+        $scope.confirmDelete = false;
+      });
+    };
+
     $scope.viewAddDonationForm = function (){
 
       // set initial bleed times
@@ -532,6 +543,14 @@ angular.module('bsis')
         $scope.submitted = true;
         console.log("FORM NOT VALID");
       }
+    };
+
+    $scope.deleteDonor = function(donorId) {
+      DonorService.deleteDonor(donorId, function() {
+        $location.path('findDonor');
+      }, function(err) {
+        console.error(err);
+      });
     };
 
   })
@@ -970,6 +989,7 @@ angular.module('bsis')
       DonorService.getDonationsFormFields(function(response) {
         if (response !== false) {
           $scope.haemoglobinLevels = response.haemoglobinLevels;
+          $scope.packTypes = response.packTypes;
         }
       });
     };
@@ -1061,6 +1081,18 @@ angular.module('bsis')
           // TODO: handle case where response == false
           $scope.addDonationSuccess = false;
         }
+      });
+    };
+
+    $scope.deleteDonation = function(donationId) {
+      DonorService.deleteDonation(donationId, function() {
+        data = data.filter(function(donation) {
+          return donation.id !== donationId;
+        });
+        $scope.donorClinicTableParams.reload();
+      }, function(err) {
+        console.error(err);
+        $scope.confirmDelete = false;
       });
     };
 
