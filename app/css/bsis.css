@@ -362,14 +362,18 @@ img.main {
   border-right: 1px solid #eee;
   border-radius: 0;
 }
+.nav-tabs.nav-justified > li.active > a:link, 
+.nav-tabs.nav-justified > li.active > a:visited, 
 .nav-tabs.nav-justified > li.active > a:hover {
   background-color: #eee !important;
   color: #242424 !important;
-  border: none;
+  border-top: none;
+  border-bottom: none;
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
   border-radius: 0;
-} 
+}
+
 .nav-tabs.nav-justified {
   margin-bottom: 15px;
 }
