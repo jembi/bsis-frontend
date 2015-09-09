@@ -2,7 +2,10 @@
 <hr style="margin-top:8px;"/>
 
 <div ng-if="$parent.addDonationSuccess === true" ng-hide="$parent.addDonationSuccess !== true" style="padding-top:10px;"><alert type="success" close="$parent.addDonationSuccess = ''">Donation Added Successfully.</alert></div>
-<div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false" style="padding-top:10px;"><alert type="danger" close="$parent.addDonationSuccess = ''">Error Adding Donation, please resolve issues and try again.</alert></div>
+<div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false" style="padding-top:10px;">
+    <alert type="danger" close="$parent.addDonationSuccess = ''">Error Adding Donation, please resolve issues and try again.</alert>
+    <alert ng-show="err['userMessage']" type="danger" close="$parent.addDonationSuccess = ''">{{err['userMessage']}}</alert>
+</div>
 
 <form name="addDonationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addDonation(donation, bleedStartTime, bleedEndTime, addDonationForm.$valid)">
 
@@ -17,7 +20,7 @@
         <div class="form-inline" style="padding-left:5px;">
           <input name="donorNumber" size="15" type="donorNumber" id="donorNumber" class="form-control input-sm" placeholder="" ng-model="donation.donorNumber" required integer ng-maxlength=6
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : addDonationForm.donorNumber.$invalid && submitted}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.donorNumber.$invalid && submitted) || donorValid == false}"
           >
           <div>
             <small class="error"
@@ -34,6 +37,9 @@
               ">
               Invalid input
             </small>
+              <small class="error" ng-show="err['donation.donor']">
+                  {{err["donation.donor"]}}
+              </small>
           </div>
         </div>
       </div>
@@ -61,6 +67,7 @@
             {{donorSummary.birthDate | bsisDate}}
           </span>
         </div>
+
       </div>
     </div>
 
@@ -71,7 +78,7 @@
           <input name="din" size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="donation.donationIdentificationNumber"
           required integer ng-minlength=7 ng-maxlength=7
           ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : addDonationForm.din.$invalid && submitted}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.din.$invalid && submitted) || donationIdentificationNumberValid == false}"
           >
           <div>
             <small class="error"
@@ -88,6 +95,9 @@
               ">
               Invalid input
             </small>
+              <small class="error" ng-show="err['donation.donationIdentificationNumber']">
+                  {{err["donation.donationIdentificationNumber"]}}
+              </small>
           </div>
         </div>
       </div>

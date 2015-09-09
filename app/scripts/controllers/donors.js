@@ -1057,7 +1057,7 @@ angular.module('bsis')
         DonorService.addDonationToBatch(donation, function(response){
 
 
-            $scope.addDonationSuccess = true;
+            //$scope.addDonationSuccess = true;
             $scope.donation = {};
             $scope.donationBatchView = 'viewDonationBatch';
 
@@ -1065,10 +1065,17 @@ angular.module('bsis')
             data = $scope.donationBatch.donations;
             $scope.data = data;
             $scope.submitted = '';
+            $scope.err = {};
           },
           function (err) {
             $scope.err = err;
             $scope.addDonationSuccess = false;
+            if(err["donation.donationIdentificationNumber"]){
+              $scope.donationIdentificationNumberValid = false;
+            }
+            if(err["donation.donor"]){
+              $scope.donorValid = false;
+            }
             if(err["donation.bloodPressureDiastolic"]){
               $scope.bloodPressureDiastolicValid = false;
             }
