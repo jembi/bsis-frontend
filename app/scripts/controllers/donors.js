@@ -737,8 +737,12 @@ angular.module('bsis')
             if (response !== false){
               $scope.donorPanels = response.donorPanels;
               angular.forEach(data, function(item) {
-                $scope.donorPanels =  $scope.donorPanels.filter(function (el) {
-                    return el.name !== item.donorPanel.name;
+                var i = 0;
+                angular.forEach($scope.donorPanels, function(panel){
+                  if (panel.name == item.donorPanel.name){
+                    $scope.donorPanels[i].disabled = true;
+                  }
+                  i++;
                 });
               });
             }
@@ -832,16 +836,15 @@ angular.module('bsis')
       if(donationBatchForm.$valid){
 
         DonorService.addDonationBatch(donationBatch, function(response){
-          if (response === true){
             $scope.newDonationBatch = {};
             $scope.getOpenDonationBatches();
             // set form back to pristine state
             donationBatchForm.$setPristine();
             $scope.submitted = '';
-          }
-          else{
-            // TODO: handle case where response == false
-          }
+
+        }, function (err){
+          $scope.err = err;
+          console.log(err);
         });
       }
       else{
