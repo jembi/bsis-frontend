@@ -617,3 +617,22 @@ input[disabled] {
 }
 
 /* --> general css */
+
+.bleed-times .editable-bstime .well {
+  background-color: inherit;
+  border: none;
+  box-shadow: none;
+  padding: 0px;
+}
+
+.btn-link.text-danger {
+  color: #A94442;
+}
+
+.btn-link.text-muted {
+  color: #777;
+}
+
+.btn-link.text-success {
+  color: #3C763D;
+}
