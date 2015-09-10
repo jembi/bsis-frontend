@@ -584,6 +584,73 @@ angular.module('bsis')
 
   })
 
+  // Controller for Viewing Duplicate Donors
+  .controller('DonorsDuplicateCtrl', function ($scope, $location, DonorService, $filter, ngTableParams, $timeout) {
+
+    var data = [{}];
+    $scope.data = data;
+    $scope.hasDuplicates = false;
+
+    $scope.findDonorDuplicates = function (){
+      DonorService.findDonorDuplicates(function(response) {
+        if (response !== false) {
+          // take the duplicate donor data and convert from a map to an array
+          data = [];
+          var duplicateCount = 0;
+          var duplicateGroups = response.duplicates;
+          var len = duplicateGroups.length;
+          // go through the duplicate groups which are stored as a map of arrays
+          for (var groupKey in duplicateGroups) {
+            duplicateCount++;
+            var duplicates = duplicateGroups[groupKey];
+            for (var duplicateIndex in duplicates) {
+              // generate a new object that contains the group key and donor properties
+              var donor = duplicates[duplicateIndex];
+              var duplicate = {};
+              duplicate.duplicateKey = groupKey;
+              for (var key in donor) {
+                duplicate[key] = donor[key];
+              }
+              // add the new object to the flattened list of duplicate donors
+              data.push(duplicate);
+            }
+          }
+          $scope.data = data;
+          $scope.duplicateDonorCount = duplicateCount;
+          $scope.totalCount = $scope.data.length;
+          $scope.duplicateCount = $scope.totalCount - $scope.duplicateDonorCount;
+          if ($scope.totalCount > 0) {
+            $scope.hasDuplicates = true;
+          }
+        }
+      });
+    };
+
+    $scope.findDonorDuplicates();
+
+    $scope.duplicateDonorTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 12,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: $scope.data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.duplicateDonorTableParams.reload(); });
+    });
+  })
+
   // Controller for Adding Donations
   .controller('AddDonationCtrl', function ($scope, $location, DonorService, BPUNIT, HBUNIT, WEIGHTUNIT, PULSEUNIT) {
 
