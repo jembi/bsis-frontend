@@ -477,25 +477,6 @@ angular.module('bsis')
         }, function (err) {
           $scope.err = err;
           $scope.addDonationSuccess = false;
-          if (err["donation.bloodPressureDiastolic"]) {
-            $scope.bloodPressureDiastolicValid = false;
-          }
-
-          if (err["donation.bloodPressureSystolic"]) {
-            $scope.bloodPressureSystolicValid = false;
-          }
-
-          if (err["donation.donorPulse"]) {
-            $scope.donorPulseValid = false;
-          }
-
-          if (err["donation.donorWeight"]) {
-            $scope.donorWeightValid = false;
-          }
-
-          if (err["donation.haemoglobinCount"]) {
-            $scope.haemoglobinCountValid = false;
-          }
           // refresh donor overview after adding donation
           $scope.getDonorOverview();
         });
@@ -1070,31 +1051,6 @@ angular.module('bsis')
           function (err) {
             $scope.err = err;
             $scope.addDonationSuccess = false;
-            if(err["donation.donationIdentificationNumber"]){
-              $scope.donationIdentificationNumberValid = false;
-            }
-            if(err["donation.donor"]){
-              $scope.donorValid = false;
-            }
-            if(err["donation.bloodPressureDiastolic"]){
-              $scope.bloodPressureDiastolicValid = false;
-            }
-
-            if(err["donation.bloodPressureSystolic"]){
-              $scope.bloodPressureSystolicValid = false;
-            }
-
-            if(err["donation.donorPulse"]){
-              $scope.donorPulseValid = false;
-            }
-
-            if(err["donation.donorWeight"]){
-              $scope.donorWeightValid = false;
-            }
-
-            if(err["donation.haemoglobinCount"]){
-              $scope.haemoglobinCountValid = false;
-            }
         });
       }
       else {

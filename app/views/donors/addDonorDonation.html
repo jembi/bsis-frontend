@@ -1,7 +1,10 @@
 <span class="h4">Add Donation</span>
 <hr style="margin-top:8px;"/>
 
-<div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false" style="padding-top:10px;"><alert type="danger" close="$parent.addDonationSuccess = ''">Error Adding Donation, please resolve issues and try again.</alert></div>
+<div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false" style="padding-top:10px;">
+    <alert type="danger" close="$parent.addDonationSuccess = ''">Error Adding Donation, please resolve issues and try again.</alert>
+    <alert ng-show="err['userMessage']" type="danger" close="$parent.addDonationSuccess = ''">{{err['userMessage']}}</alert>
+</div>
 
 <form name="addDonationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addDonation(donation, donationBatch, bleedStartTime, bleedEndTime, addDonationForm.$valid)">
 
@@ -39,7 +42,7 @@
           <input name="din" size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="donation.donationIdentificationNumber"
           required integer ng-minlength=7 ng-maxlength=7
           ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : addDonationForm.din.$invalid && submitted}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.din.$invalid && submitted) || err['donation.donationIdentificationNumber']}"
           >
           <div>
             <small class="error"
@@ -56,6 +59,9 @@
               ">
               Invalid input
             </small>
+              <small class="error" ng-show="err['donation.donationIdentificationNumber']">
+                  {{err["donation.donationIdentificationNumber"]}}
+              </small>
           </div>
         </div>
       </div>
@@ -157,9 +163,9 @@
       <div class="row col-sm-9">
         <div class="form-inline" style="padding-left:5px;">
           <input name="donorWeight" size="4" type="number" id="donorWeight" class="form-control input-sm" placeholder="" ng-model="donation.donorWeight"
-          decimal min={{weightMin}} max={{weightMax}}
+          decimal min={{weightMin}} max={{weightMax}} required
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.donorWeight.$invalid && submitted) || donorWeightValid === false}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.donorWeight.$invalid && submitted) || err['donation.donorWeight']}"
           > <em> {{weightUnit}} </em>
           <div>
             <small class="error"
@@ -181,9 +187,9 @@
       <div class="row col-sm-9">
         <div class="form-inline" style="padding-left:5px;">
           <input ng-show="getBooleanValue('donation.hbNumericValue')" name="hb" size="5" type="number" id="haemoglobinCount" class="form-control input-sm" placeholder="" ng-model="donation.haemoglobinCount"
-          decimal min={{hbMin}} max={{hbMax}}
+          decimal min={{hbMin}} max={{hbMax}} required
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.hb.$invalid && submitted) || haemoglobinCountValid === false}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.hb.$invalid && submitted) || err['donation.haemoglobinCount']}"
           > <em> {{hbUnit}} </em>
           <select ng-show="getBooleanValue('donation.hbQualitativeValue')" class="form-control input-sm" ng-model="donation.haemoglobinLevel" ng-options="l.value as l.label for l in haemoglobinLevels">
             <option value="" ng-disabled="true">Level</option>
@@ -208,14 +214,14 @@
       <div class="row col-sm-9">
         <div class="form-inline" style="padding-left:5px;">
           <input name="bpSystolic" size="1" type="number" id="bloodPressureSystolic" class="form-control input-sm" placeholder="" ng-model="donation.bloodPressureSystolic"
-          integer min={{bpSystolicMin}} max={{bpSystolicMax}}
+          integer min={{bpSystolicMin}} max={{bpSystolicMax}} required
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.bpSystolic.$invalid && submitted) || bloodPressureSystolicValid === false}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.bpSystolic.$invalid && submitted) || err['donation.bloodPressureSystolic']}"
           > /
           <input name="bpDiastolic" size="1" type="number" id="bloodPressureDiastolic" class="form-control input-sm" placeholder="" ng-model="donation.bloodPressureDiastolic"
-          integer min={{bpDiastolicMin}} max={{bpDiastolicMax}}
+          integer min={{bpDiastolicMin}} max={{bpDiastolicMax}} required
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.bpDiastolic.$invalid && submitted) || bloodPressureDiastolicValid === false}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.bpDiastolic.$invalid && submitted) || err['donation.bloodPressureDiastolic']}"
           > <em> {{bpUnit}} </em>
           <div>
             <small class="error"
@@ -241,9 +247,9 @@
       <div class="row col-sm-9">
         <div class="form-inline" style="padding-left:5px;">
           <input name="pulse" size="4" type="number" id="donorPulse" class="form-control input-sm" placeholder="" ng-model="donation.donorPulse"
-          integer min={{pulseMin}} max={{pulseMax}}
+          integer min={{pulseMin}} max={{pulseMax}} required
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.pulse.$invalid && submitted) || donorPulseValid === false }"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.pulse.$invalid && submitted) || err['donation.donorPulse'] }"
           > <em> {{pulseUnit}} </em>
           <div>
             <small class="error"
