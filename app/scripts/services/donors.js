@@ -237,17 +237,17 @@ angular.module('bsis')
         response(false);
       });
     },
-    addDonationBatch: function (donationBatch, response){
+    addDonationBatch: function (donationBatch, onSuccess, onError){
       // create $Resource object and assign donation values
       var addDonationBatch = new Api.DonationBatches();
 
       angular.copy(donationBatch, addDonationBatch);
 
       // save deferral (POST /deferral)
-      addDonationBatch.$save(function(data){ 
-        response(true);
-      }, function (){
-        response(false);
+      addDonationBatch.$save(function(data){
+        onSuccess(true);
+      }, function (err){
+        onError(err.data);
       }); 
     },
     closeDonationBatch: function (donationBatch, response){

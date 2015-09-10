@@ -45,7 +45,7 @@
                   <label for="name" class="col-sm-1 control-label">Panel</label>
                   <div class="row col-sm-11">
                     <div class="form-inline" style="padding-left:5px;">
-                      <select name="donorPanel" class="form-control input-sm" ng-model="newDonationBatch.donorPanel" ng-options="item.id as item.name for item in donorPanels" required 
+                      <select name="donorPanel" class="form-control input-sm" ng-model="newDonationBatch.donorPanel" ng-options="item.id as item.name disable when item.disabled for item in donorPanels" required
                       ng-class="{'ng-invalid ng-dirty' : addDonationBatchForm.donorPanel.$invalid && submitted}">
                           <option value="" ng-disabled="true"></option>
                       </select>
@@ -56,6 +56,7 @@
                           ">
                           This cannot be empty
                         </small>
+                          <small class="error" ng-show="err['donationBatch.donorPanel']">{{err["donationBatch.donorPanel"]}}</small>
                       </div>
                     </div>
                   </div>
