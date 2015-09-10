@@ -67,16 +67,16 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.VIEW_DONOR,
         enabled : UI.DONORS_TAB_ENABLED
       })
-      .when('/duplicateDonors', {
-        templateUrl : 'views/donors.html',
-        controller  : 'DonorsDuplicateCtrl',
-        permission: PERMISSIONS.VIEW_DONOR,
-        enabled : UI.DONORS_TAB_ENABLED
-      })
       .when('/addDonor', {
         templateUrl : 'views/donors.html',
         controller  : 'AddDonorCtrl',
         permission: PERMISSIONS.ADD_DONOR,
+        enabled : UI.DONORS_TAB_ENABLED
+      })
+      .when('/duplicateDonors', {
+        templateUrl : 'views/donors.html',
+        controller  : 'DonorsDuplicateCtrl',
+        permission: PERMISSIONS.VIEW_DONOR,
         enabled : UI.DONORS_TAB_ENABLED
       })
       .when('/addDonation', {

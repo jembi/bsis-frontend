@@ -9,40 +9,29 @@
       <div class="panel-body">
 
           <p>
-            <em> {{duplicateCount}} duplicates found for {{duplicateDonorCount}} donor(s) </em>
+            <em> Duplicates found for {{duplicateDonorCount}} donor(s) </em>
           </p>
 
           <table ng-table="duplicateDonorTableParams" show-filter="false" class="table">
-            <tr ng-repeat="donor in $data"
+            <tr ng-repeat="duplicate in $data"
+                    ng-click="viewDonor(donor); changeSelection(donor);"
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': donor.$selected}">
-                  <td data-title="'Duplicate'" header-class="text-left" class="text-center" sortable="'duplicateKey'">
-                      {{donor.duplicateKey}}
-                  </td>
-                  <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
-                      {{donor.donorNumber}}
-                  </td>
                   <td data-title="'First Name'" header-class="text-left" sortable="'firstName'">
-                      {{donor.firstName}}
+                      {{duplicate.firstName}}
                   </td>
                   <td data-title="'Last Name'" header-class="text-left" sortable="'lastName'">
-                      {{donor.lastName}}
+                      {{duplicate.lastName}}
                   </td>
-                  <td data-title="'Gender'" header-class="text-left" sortable="'gender'">
-                      {{donor.gender}}
+                  <td data-title="'Gender'" header-class="text-left" class="text-center" sortable="'gender'">
+                      {{duplicate.gender}}
                   </td>
-                  <td data-title="'Birth Date'" header-class="text-left" sortable="'birthDate'">
-                      {{ (donor.birthDate | bsisDate) || '' }}
+                  <td data-title="'Birth Date'" header-class="text-left" class="text-center" sortable="'birthDate'">
+                      {{ (duplicate.birthDate | bsisDate) || '' }}
                   </td>
-                  <td data-title="'Date of Last Donation'" header-class="text-left" class="text-center" sortable="'dateOfLastDonation'">
-                      {{ (donor.dateOfLastDonation | bsisDate) || '' }}
-                  </td>
-                  <td data-title="'Blood Group'" header-class="text-left" sortable="'bloodGroup'">
-                      {{donor.bloodGroup}}
-                  </td>
-                  <td data-title="'Donor Panel'" header-class="text-left"  sortable="'donorPanel'">
-                      {{donor.donorPanel.name}}
+                  <td data-title="'Number of duplicates'" header-class="text-left" class="text-center" sortable="'count'">
+                      {{duplicate.count}}
                   </td>
               </tr>
           </table>

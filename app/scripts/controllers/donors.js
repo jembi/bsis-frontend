@@ -589,36 +589,41 @@ angular.module('bsis')
 
     var data = [{}];
     $scope.data = data;
+    var duplicateGroups = [{}];
+    $scope.duplicateGroups = duplicateGroups;
     $scope.hasDuplicates = false;
 
     $scope.findDonorDuplicates = function (){
       DonorService.findDonorDuplicates(function(response) {
         if (response !== false) {
-          // take the duplicate donor data and convert from a map to an array
+          // take the duplicate donor data and convert into a summary array
           data = [];
           var duplicateCount = 0;
-          var duplicateGroups = response.duplicates;
+          duplicateGroups = response.duplicates;
           var len = duplicateGroups.length;
           // go through the duplicate groups which are stored as a map of arrays
           for (var groupKey in duplicateGroups) {
             duplicateCount++;
             var duplicates = duplicateGroups[groupKey];
-            for (var duplicateIndex in duplicates) {
-              // generate a new object that contains the group key and donor properties
-              var donor = duplicates[duplicateIndex];
-              var duplicate = {};
-              duplicate.duplicateKey = groupKey;
-              for (var key in donor) {
-                duplicate[key] = donor[key];
+            if (duplicates) {
+              // create a summary for the 1st donor
+              var donor = duplicates[0];
+              if (donor) {
+                var duplicateSummary = {};
+                duplicateSummary.groupKey = groupKey;
+                duplicateSummary.firstName = donor.firstName;
+                duplicateSummary.lastName = donor.lastName;
+                duplicateSummary.birthDate = donor.birthDate;
+                duplicateSummary.gender = donor.gender;
+                duplicateSummary.count = duplicates.length;
+                data.push(duplicateSummary);
               }
-              // add the new object to the flattened list of duplicate donors
-              data.push(duplicate);
             }
           }
           $scope.data = data;
+          $scope.duplicateGroups = duplicateGroups;
           $scope.duplicateDonorCount = duplicateCount;
           $scope.totalCount = $scope.data.length;
-          $scope.duplicateCount = $scope.totalCount - $scope.duplicateDonorCount;
           if ($scope.totalCount > 0) {
             $scope.hasDuplicates = true;
           }
@@ -649,6 +654,11 @@ angular.module('bsis')
     $scope.$watch("data", function () {
       $timeout(function(){ $scope.duplicateDonorTableParams.reload(); });
     });
+
+    $scope.viewDuplicates = function (item) {
+      $scope.duplicate = item;
+      $location.path("/viewDuplicates");
+    };
   })
 
   // Controller for Adding Donations
