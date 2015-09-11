@@ -12,7 +12,7 @@ angular.module('bsis')
     findDonor: function(donorSearch, onSuccess, onError) {
       var query = {
         firstName: donorSearch.firstName,
-        lastName: donorSearch.lastName,
+        lastName: donorSearch.lastName, 
         donorNumber: donorSearch.donorNumber,
         donationIdentificationNumber: donorSearch.donationIdentificationNumber,
         usePhraseMatch: donorSearch.usePhraseMatch
@@ -239,7 +239,7 @@ angular.module('bsis')
         response(false);
       });
     },
-    addDonationBatch: function (donationBatch, response){
+    addDonationBatch: function (donationBatch, onSuccess, onError){
       // create $Resource object and assign donation values
       var addDonationBatch = new Api.DonationBatches();
 
@@ -247,10 +247,10 @@ angular.module('bsis')
 
       // save deferral (POST /deferral)
       addDonationBatch.$save(function(data){
-        response(true);
-      }, function (){
-        response(false);
-      });
+        onSuccess(true);
+      }, function (err){
+        onError(err.data);
+      }); 
     },
     closeDonationBatch: function (donationBatch, response){
       var updateDonationBatch = Api.DonationBatches.get({id:donationBatch.id}, function() {
