@@ -27,7 +27,7 @@
                         (sessionUserPermissions.indexOf(permissions.EXPORT_CLINIC_DATA) > -1)"
                 ng-include="'views/donors/exportDonorList.html'">
             </div>
-            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DONOR) < 0) && 
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DONOR) < 0) &&
                         (sessionUserPermissions.indexOf(permissions.VIEW_DONATION_BATCH) > -1) &&
                         (sessionUserPermissions.indexOf(permissions.EXPORT_CLINIC_DATA) < 0)"
                 ng-include="'views/donors/manageDonationBatches.html'">

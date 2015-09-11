@@ -144,7 +144,7 @@ angular.module('bsis')
   var setMenuSelection = function() {
 
     // if on donors page, set menu to DONORS
-    if (donorRoutes.indexOf($location.path()) >= 0 || /^\/donorCounselling\/\d+$/.test($location.path())) {
+    if (donorRoutes.indexOf($location.path()) >= 0 || /^\/donorCounselling\/\d+$/.test($location.path()) || /^\/viewDonor\/\d+$/.test($location.path())) {
       $scope.currentSection = 'DONORS';
     }
 

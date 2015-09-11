@@ -26,10 +26,7 @@ angular.module('bsis')
     $scope.data = data;
     $scope.age = '';
 
-    $scope.donorSearch = {
-      firstName: '',
-      lastName: ''
-    };
+    $scope.donorSearch = $routeParams;
     $scope.searchResults = '';
 
     var currentTime = new Date();
@@ -38,7 +35,11 @@ angular.module('bsis')
 
     $scope.canAddDonors = false;
 
-    $scope.findDonor = function () {   
+
+
+    $scope.findDonor = function () {
+      $scope.donorSearch.search = true;
+      $location.search($scope.donorSearch);
       DonorService.findDonor($scope.donorSearch, function(response) {
         data = response.donors;
         $scope.searchResults = true;
@@ -49,14 +50,18 @@ angular.module('bsis')
       });
     };
 
+    if ($routeParams.search) {
+      $scope.findDonor();
+    }
+
     $scope.$watch("data", function () {
       $timeout(function(){ $scope.tableParams.reload(); });
     });
 
     $scope.isCurrent = function(path) {
       var initialView = '';
-      if ($location.path() === "/viewDonor" && path === "/findDonor") {
-        $scope.selection = $location.path();
+      if ($location.path().indexOf('/viewDonor') === 0 && path === "/findDonor") {
+        $scope.selection = '/viewDonor';
         return true;
       } else if ($location.path() === "/addDonor" && path === "/findDonor") {
         $scope.selection = $location.path();
@@ -112,6 +117,7 @@ angular.module('bsis')
     };
 
     $scope.viewDonor = function (item) {
+
       $scope.donor = item;
       DonorService.setDonor(item);
 
@@ -121,7 +127,7 @@ angular.module('bsis')
 
       $scope.donorBirthDateOpen = false;
 
-      $location.path("/viewDonor");
+      $location.path("/viewDonor/" + item.id).search({});
     };
 
     $scope.addNewDonor = function (donor){
@@ -188,7 +194,14 @@ angular.module('bsis')
   
   // Controller for Viewing Donors
   .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
-      GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout) {
+      GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout,$routeParams) {
+
+    DonorService.getDonorById($routeParams.id, function (donor) {
+      DonorService.setDonor(donor);
+      $scope.donor = donor;
+    }, function(err){
+      $location.path('/findDonor');
+    });
 
     $scope.data = {};
     $scope.age = '';
@@ -218,7 +231,7 @@ angular.module('bsis')
     $scope.pulseMin = DONATION.DONOR.PULSE_MIN;
     $scope.pulseMax = DONATION.DONOR.PULSE_MAX;
 
-    $scope.donor = DonorService.getDonor();
+
 
     DonorService.getDonorFormFields(function(response){
       if (response !== false){
@@ -237,7 +250,7 @@ angular.module('bsis')
     });
 
     $scope.getDonorOverview = function () {
-      DonorService.getDonorOverview($scope.donor.id, function(response){
+      DonorService.getDonorOverview($routeParams.id, function(response){
         if (response !== false){
           $scope.data = response;
           $scope.flaggedForCounselling = $scope.data.flaggedForCounselling;

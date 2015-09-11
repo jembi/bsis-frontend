@@ -91,7 +91,7 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.EXPORT_CLINIC_DATA,
         enabled : UI.DONORS_TAB_ENABLED
       })
-      .when('/viewDonor', {
+      .when('/viewDonor/:id', {
         templateUrl : 'views/donors.html',
         controller  : 'ViewDonorCtrl',
         permission: PERMISSIONS.VIEW_DONOR,
@@ -471,12 +471,14 @@ var app = angular.module('bsis', [
      require: 'ngModel',
      link: function(scope, element, attrs, modelCtrl) {
           var capitalize = function(inputValue) {
-             var capitalized = inputValue.charAt(0).toUpperCase() + inputValue.substring(1);
-             if(capitalized !== inputValue) {
+            if (inputValue){
+              var capitalized = inputValue.charAt(0).toUpperCase() + inputValue.substring(1);
+              if(capitalized !== inputValue) {
                 modelCtrl.$setViewValue(capitalized);
                 modelCtrl.$render();
               }
               return capitalized;
+            }
           };
            modelCtrl.$parsers.push(capitalize);
            capitalize($parse(attrs.ngModel)(scope)); // capitalize first letter
