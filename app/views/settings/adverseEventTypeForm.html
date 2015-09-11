@@ -1,6 +1,6 @@
-<form class="form-horizontal" name="adverseEventTypeForm" ng-submit="saveAdverseEventType(adverseEventTypeForm)" novalidate>
+<form class="form-horizontal" name="forms.adverseEventTypeForm" ng-submit="saveAdverseEventType(forms.adverseEventTypeForm)" novalidate>
 
-  <div class="form-group" ng-class="{'has-error': (adverseEventTypeForm.$submitted || adverseEventTypeForm.name.$dirty) && adverseEventTypeForm.name.$invalid}">
+  <div class="form-group" ng-class="{'has-error': (forms.adverseEventTypeForm.$submitted || forms.adverseEventTypeForm.name.$dirty) && forms.adverseEventTypeForm.name.$invalid}">
     <label class="col-sm-2 control-label" style="color:inherit;">Name</label>
     <div class="col-sm-10">
       <input class="form-control"
@@ -11,7 +11,7 @@
         placeholder="Adverse Event Type Name"
         required
         ng-model="adverseEventType.name" />
-      <ng-messages for="adverseEventTypeForm.name.$error" role="alert" ng-show="adverseEventTypeForm.$submitted || adverseEventTypeForm.name.$dirty">
+      <ng-messages for="forms.adverseEventTypeForm.name.$error" role="alert" ng-show="forms.adverseEventTypeForm.$submitted || forms.adverseEventTypeForm.name.$dirty">
         <ng-messages-include src="messages.html"></ng-messages-include>
       </ng-messages>
     </div>

@@ -8,6 +8,15 @@ angular.module('bsis').controller('AddAdverseEventTypeCtrl', function($scope, $l
     isDeleted: false
   };
 
+  $scope.forms = {};
+
+  $scope.$watch('adverseEventType.name', function() {
+    if (!$scope.forms.adverseEventTypeForm) {
+      return;
+    }
+    $scope.forms.adverseEventTypeForm.name.$setValidity('duplicate', true);
+  });
+
   $scope.saveAdverseEventType = function(form) {
     if (form.$invalid) {
       return;
@@ -18,10 +27,15 @@ angular.module('bsis').controller('AddAdverseEventTypeCtrl', function($scope, $l
       description: $scope.adverseEventType.description,
       isDeleted: $scope.adverseEventType.isDeleted
     };
+
     AdverseEventsService.createAdverseEventType(adverseEventType, function() {
       $location.path('/adverseEventTypes');
-    }, function(err) {
-      console.error(err);
+    }, function(response) {
+      if (response.data && response.data.name) {
+        form.name.$setValidity('duplicate', false);
+      } else {
+        console.error(response);
+      }
     });
   };
 });
