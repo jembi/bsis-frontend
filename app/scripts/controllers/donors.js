@@ -518,6 +518,13 @@ angular.module('bsis')
           }
         });
     };
+    
+    $scope.populateEndDate = function(deferral) {
+      var deferralReason = deferral.deferralReason;
+      deferral.deferredUntil = deferralReason.durationType === 'PERMANENT' ?
+          moment('2100-01-01').toDate() :
+          moment().add(deferralReason.defaultDuration, 'days').toDate();
+    };
 
     $scope.addDeferral = function (deferral, addDeferralForm){
 
@@ -726,13 +733,6 @@ angular.module('bsis')
     $scope.recentDonationBatches = false;
     $scope.newDonationBatch = {};
 
-    DonorService.getDonationBatchFormFields( function(response){
-      if (response !== false){
-        $scope.donorPanels = response.donorPanels;
-      }
-      else{
-      }
-    });
 
     $scope.getOpenDonationBatches = function (){
 
@@ -740,6 +740,23 @@ angular.module('bsis')
         if (response !== false){
           data = response.donationBatches;
           $scope.data = data;
+          DonorService.getDonationBatchFormFields( function(response){
+            if (response !== false){
+              $scope.donorPanels = response.donorPanels;
+              angular.forEach(data, function(item) {
+                var i = 0;
+                angular.forEach($scope.donorPanels, function(panel){
+                  if (panel.name == item.donorPanel.name){
+                    $scope.donorPanels[i].disabled = true;
+                  }
+                  i++;
+                });
+              });
+            }
+            else{
+            }
+          });
+
           if (data.length > 0){
             $scope.openDonationBatches = true;
           }
@@ -826,16 +843,15 @@ angular.module('bsis')
       if(donationBatchForm.$valid){
 
         DonorService.addDonationBatch(donationBatch, function(response){
-          if (response === true){
             $scope.newDonationBatch = {};
             $scope.getOpenDonationBatches();
             // set form back to pristine state
             donationBatchForm.$setPristine();
             $scope.submitted = '';
-          }
-          else{
-            // TODO: handle case where response == false
-          }
+
+        }, function (err){
+          $scope.err = err;
+         
         });
       }
       else{
