@@ -234,7 +234,11 @@ angular.module('bsis')
       PostDonationCounselling: $resource(url + '/postdonationcounsellings/:id', {id: '@id'}, {
         update: {method: 'PUT'}
       }),
-      PostDonationCounsellingFormFields: $resource(url + '/postdonationcounsellings/form')
+      PostDonationCounsellingFormFields: $resource(url + '/postdonationcounsellings/form'),
+
+      AdverseEventTypes: $resource(url + '/adverseevents/types/:id', {id: '@id'}, {
+        update: {method: 'PUT'}
+      })
 
     };
 });
