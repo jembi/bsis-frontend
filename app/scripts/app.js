@@ -79,7 +79,7 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.ADD_DONATION,
         enabled : UI.DONORS_TAB_ENABLED
       })
-      .when('/manageClinic', {
+      .when('/manageClinic/:id', {
         templateUrl : 'views/donors.html',
         controller  : 'ViewDonationBatchCtrl',
         permission: PERMISSIONS.VIEW_DONATION_BATCH,

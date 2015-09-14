@@ -66,8 +66,8 @@ angular.module('bsis')
       } else if ($location.path() === "/addDonor" && path === "/findDonor") {
         $scope.selection = $location.path();
         return true;
-      } else if ($location.path() === "/manageClinic" && path === "/manageDonationBatches") {
-        $scope.selection = $location.path();
+      } else if ($location.path().indexOf("/manageClinic") === 0 && path === "/manageDonationBatches") {
+        $scope.selection = '/manageClinic';
         return true;
       } else if ($location.path().indexOf('/donorCounselling') === 0 && path.indexOf('/donorCounselling') === 0) {
         var currentPath = $location.path();
@@ -879,14 +879,14 @@ angular.module('bsis')
       DonorService.setDonationBatch($scope.donationBatch);
       data = $scope.donationBatch.donations;
       $scope.data = data;
-      $location.path("/manageClinic");
+      $location.path("/manageClinic/" + item.id);
       
     };
 
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE,  DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout) {
+  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE,  DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout, $routeParams) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -921,17 +921,21 @@ angular.module('bsis')
 
 
     $scope.init = function () {
-      $scope.donationBatch = DonorService.getDonationBatch();
-      data = $scope.donationBatch.donations;
-      $scope.data = data;
+     DonorService.getDonationBatchById($routeParams.id, function (donationBatch) {
+       $scope.donationBatch = donationBatch;
+       data = donationBatch.donations;
+       $scope.data = data;
 
-      DonorService.getDonationBatchFormFields( function(response){
-        if (response !== false){
-          $scope.donorPanels = response.donorPanels;
-        }
-        else{
-        }
-      });
+       DonorService.getDonationBatchFormFields(function (response) {
+         if (response !== false) {
+           $scope.donorPanels = response.donorPanels;
+         }
+         else {
+         }
+       });
+     }, function (err) {
+
+     });
     };
 
     $scope.init();

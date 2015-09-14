@@ -70,6 +70,15 @@ angular.module('bsis')
     getDonationBatch: function(){
       return donationBatchObj;
     },
+
+    getDonationBatchById: function (id, onSuccess, onFailure) {
+      Api.DonationBatches.get({id:id}, function(response) {
+        onSuccess(response.donationBatch);
+      }, function (err){
+        onFailure(err.data);
+      });
+    },
+
     getDonors: function(){
       return donorsObj;
     },
