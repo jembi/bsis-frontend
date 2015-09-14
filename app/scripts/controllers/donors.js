@@ -141,7 +141,7 @@ angular.module('bsis')
 
         newDonor.birthDate = dob.year + "-" + dob.month + "-" + dob.dayOfMonth;
 
-        DonorService.addDonor(newDonor, function() {
+        DonorService.addDonor(newDonor, function(donor) {
 
           $scope.format = DATEFORMAT;
           $scope.initDate = $scope.donor.birthDate;
@@ -149,7 +149,7 @@ angular.module('bsis')
 
           $scope.donorBirthDateOpen = false;
           $scope.submitted = '';
-          $location.path("/viewDonor");
+          $location.path("/viewDonor/" + donor.id).search({});
         }, function(err) {
           $scope.errorMessage = err.data.userMessage;
         });

@@ -32,8 +32,10 @@ angular.module('bsis')
       // save donor (POST /donor) and assign response donor object to 'donorObj'
       addDonor.$save(function(response){ 
         donorObj = response.donor;
-        onSuccess(response);
-      }, onError); 
+        onSuccess(response.donor);
+      }, function (err){
+        onError(err.data);
+      });
     },
 
     updateDonor: function (donor, response){
