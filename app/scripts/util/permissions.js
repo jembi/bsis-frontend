@@ -134,7 +134,13 @@ angular.module('bsis')
   ADD_POST_DONATION_COUNSELLING: 'Add Post Donation Counselling',
   EDIT_POST_DONATION_COUNSELLING: 'Edit Post Donation Counselling',
   VIEW_POST_DONATION_COUNSELLING: 'View Post Donation Counselling',
-  VOID_POST_DONATION_COUNSELLING: 'Void Post Donation Counselling'
+  VOID_POST_DONATION_COUNSELLING: 'Void Post Donation Counselling',
+
+  // Adverse Events Permissions
+  ADD_ADVERSE_EVENT_TYPES: 'Add Adverse Event Types',
+  EDIT_ADVERSE_EVENT_TYPES: 'Edit Adverse Event Types',
+  VIEW_ADVERSE_EVENT_TYPES: 'View Adverse Event Types',
+  VOID_ADVERSE_EVENT_TYPES: 'Void Adverse Event Types'
 
 })
 ;
