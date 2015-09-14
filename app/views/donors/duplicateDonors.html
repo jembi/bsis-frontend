@@ -14,10 +14,13 @@
 
           <table ng-table="duplicateDonorTableParams" show-filter="false" class="table">
             <tr ng-repeat="duplicate in $data"
-                    ng-click="viewDonor(donor); changeSelection(donor);"
+                    ng-click="viewDuplicates(duplicate); changeSelection(duplicate);"
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"
-                    ng-class="{'active': donor.$selected}">
+                    ng-class="{'active': duplicate.$selected}">
+                  <td data-title="'Group'" header-class="text-left" sortable="'groupKey'">
+                      {{duplicate.groupKey}}
+                  </td>
                   <td data-title="'First Name'" header-class="text-left" sortable="'firstName'">
                       {{duplicate.firstName}}
                   </td>

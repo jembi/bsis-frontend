@@ -71,6 +71,8 @@ angular.module('bsis')
     '/donors',
     '/findDonor',
     '/duplicateDonors',
+    '/manageDuplicateDonors',
+    '/manageDonors',
     '/addDonor',
     '/viewDonor',
     '/addDonation',

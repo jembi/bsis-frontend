@@ -593,7 +593,8 @@ angular.module('bsis')
     $scope.duplicateGroups = duplicateGroups;
     $scope.hasDuplicates = false;
 
-    $scope.findDonorDuplicates = function (){
+    $scope.findDonorDuplicates = function () {
+      // FIXME: since we only display the summary, the API endpoint doesn't need to return all duplicates
       DonorService.findDonorDuplicates(function(response) {
         if (response !== false) {
           // take the duplicate donor data and convert into a summary array
@@ -656,9 +657,62 @@ angular.module('bsis')
     });
 
     $scope.viewDuplicates = function (item) {
-      $scope.duplicate = item;
-      $location.path("/viewDuplicates");
+      $location.path("/manageDuplicateDonors").search({groupKey: item.groupKey});
     };
+  })
+
+  // Controller for Viewing Duplicate Donors
+  .controller('ManageDonorsDuplicateCtrl', function ($scope, $location, $routeParams, DonorService, $filter, ngTableParams, $timeout) {
+
+    var data = [{}];
+    $scope.data = data;
+    $scope.duplicateCount = 0;
+
+    var groupKey = "1";
+    if ($routeParams.groupKey) {
+      groupKey = $routeParams.groupKey;
+    }
+
+    $scope.manageDonorDuplicates = function () {
+      // FIXME: improve this backend service call so it doesn't repeat the duplicate search
+      DonorService.findDonorDuplicates(function(response) {
+        if (response !== false) {
+          data = [];
+          var duplicates = response.duplicates[groupKey];
+          angular.forEach(duplicates,function(value,index){
+            data.push(value);
+          });
+        }
+        $scope.data = data;
+        $scope.duplicateCount = $scope.data.length;
+        $scope.groupKey = groupKey;
+      });
+    };
+
+    $scope.manageDonorDuplicates();
+
+    $scope.manageDuplicateDonorTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 12,          // count per page
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: $scope.data.length, // length of data
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : data;
+        params.total(orderedData.length); // set total for pagination
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+
+    $scope.$watch("data", function () {
+      $timeout(function(){ $scope.manageDuplicateDonorTableParams.reload(); });
+    });
+
   })
 
   // Controller for Adding Donations

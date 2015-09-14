@@ -1,0 +1,48 @@
+<h3 class="page-header">Duplicate Donors</h3>
+
+<div style="padding-bottom: 10px"></div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <p>
+      <em> {{duplicateCount}} duplicates for donors in group {{groupKey}} </em>
+    </p>
+
+    <table ng-table="manageDuplicateDonorTableParams" show-filter="false" class="table">
+      <tr ng-repeat="donor in $data"
+              ng-click="viewDonor(donor); changeSelection(donor);"
+              ng-mouseenter="this.$selected = true"
+              ng-mouseleave="this.$selected = false"
+              ng-class="{'active': donor.$selected}">
+            <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+                {{donor.donorNumber}}
+            </td>
+            <td data-title="'First Name'" header-class="text-left" sortable="'firstName'">
+                {{donor.firstName}}
+            </td>
+            <td data-title="'Last Name'" header-class="text-left" sortable="'lastName'">
+                {{donor.lastName}}
+            </td>
+            <td data-title="'Gender'" header-class="text-left" sortable="'gender'">
+                {{donor.gender}}
+            </td>
+            <td data-title="'Birth Date'" header-class="text-left" sortable="'birthDate'">
+                {{ (donor.birthDate | bsisDate) || '' }}
+            </td>
+            <td data-title="'Date of Last Donation'" header-class="text-left" class="text-center" sortable="'dateOfLastDonation'">
+                {{ (donor.dateOfLastDonation | bsisDate) || '' }}
+            </td>
+            <td data-title="'Blood Group'" header-class="text-left" sortable="'bloodGroup'">
+                {{donor.bloodGroup}}
+            </td>
+            <td data-title="'Donor Panel'" header-class="text-left"  sortable="'donorPanel'">
+                {{donor.donorPanel.name}}
+            </td>
+        </tr>
+    </table>
+
+  </div>
+</div>
+
+</div>
