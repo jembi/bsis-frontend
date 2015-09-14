@@ -653,40 +653,38 @@ angular.module('bsis')
   })
 
   // Controller for Viewing/Exporting Donor Lists
-  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
+  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, DATEFORMAT, $filter, ngTableParams, $timeout, $routeParams) {
+
+
 
     $scope.icons = ICONS;
 
     var data = [{}];
     $scope.data = data;
     $scope.donorListSearchResults = '';
-    $scope.donorList = {};
-    $scope.donorList.donorPanels = [];
-    $scope.donorList.bloodGroups = [];
+
 
     DonorService.getDonorListFormFields(function(response){
       if (response !== false){
         $scope.donorPanels = response.donorPanels;
-        //$scope.bloodGroups = response.bloodGroups;
         $scope.bloodGroups = BLOODGROUP.options;
-      }
-      else{
+        $scope.donorList = $routeParams;
+        if (!$scope.donorList.donorPanels){
+          $scope.donorList.donorPanels = [];
+        }
+
+        if (!$scope.donorList.bloodGroups){
+          $scope.donorList.bloodGroups = [];
+        }
+      } else {
+
       }
     });
 
     $scope.getDonors = function (searchParameters) {
-      
-      $scope.selectedDonorPanels = [];
-      angular.forEach(searchParameters.donorPanels,function(value,index){
-          $scope.selectedDonorPanels.push(value.id);
-      });
-      searchParameters.donorPanels = $scope.selectedDonorPanels;
 
-      $scope.selectedBloodGroups = [];
-      angular.forEach(searchParameters.bloodGroups,function(value,index){
-          $scope.selectedBloodGroups.push(value);
-      });
-      searchParameters.bloodGroups = $scope.selectedBloodGroups;
+      searchParameters.search = true;
+      $location.search(searchParameters);
 
       DonorService.findDonorListDonors(searchParameters, function(response){
         if (response !== false){
@@ -701,6 +699,12 @@ angular.module('bsis')
         }
       });
     };
+
+
+
+    if ($routeParams.search) {
+      $scope.getDonors($routeParams);
+    }
 
     $scope.donorListTableParams = new ngTableParams({
         page: 1,            // show first page
