@@ -474,15 +474,18 @@ angular.module('bsis')
           $scope.donationsView = 'viewDonations';
           $scope.submitted = '';
           $scope.getDonorOverview();
+
         }, function (err) {
           $scope.err = err;
           $scope.addDonationSuccess = false;
           // refresh donor overview after adding donation
           $scope.getDonorOverview();
+
         });
       }
       else {
         $scope.submitted = true;
+        $scope.addDonationSuccess = false;
         console.log("FORM NOT VALID");
       }
     };
@@ -623,17 +626,12 @@ angular.module('bsis')
       donation.donationDate = '10/16/2014 12:00:00 am';
 
       DonorService.addDonation(donation, function(response){
-        if (response === true){
-
           $scope.addDonationSuccess = true;
           $scope.donation = {};
           $location.path("/addDonation");
-
-        }
-        else{
-          // TODO: handle case where response == false
-          $scope.addDonationSuccess = false;
-        }
+      }, function (err){
+        $scope.err = err;
+        $scope.addDonationSuccess = false;
       });
     };
 

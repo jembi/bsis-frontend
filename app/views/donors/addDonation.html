@@ -1,10 +1,8 @@
 <span class="h4">Add Donation</span>
 <hr style="margin-top:8px;"/>
 
-<div ng-if="$parent.addDonationSuccess === true" ng-hide="$parent.addDonationSuccess !== true" style="padding-top:10px;"><alert type="success" close="$parent.addDonationSuccess = ''">Donation Added Successfully.</alert></div>
 <div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false" style="padding-top:10px;">
-    <alert type="danger" close="$parent.addDonationSuccess = ''">Error Adding Donation, please resolve issues and try again.</alert>
-    <alert ng-show="err['userMessage']" type="danger" close="$parent.addDonationSuccess = ''">{{err['userMessage']}}</alert>
+    <alert type="danger" close="">Error Adding Donation, please resolve issues and try again.</alert>
 </div>
 
 <form name="addDonationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addDonation(donation, bleedStartTime, bleedEndTime, addDonationForm.$valid)">
