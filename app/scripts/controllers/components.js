@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ComponentsCtrl', function ($scope, $rootScope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, DATEFORMAT, $filter, ngTableParams, $timeout) {
+  .controller('ComponentsCtrl', function ($scope, $rootScope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, DATEFORMAT, $filter, ngTableParams, $timeout, $routeParams) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -116,7 +116,12 @@ angular.module('bsis')
       $scope.selectedComponents = [];
     };
 
-    $scope.getComponentsByDIN = function () {   
+    $scope.componentsSearch = $routeParams;
+
+    $scope.getComponentsByDIN = function () {
+      $scope.componentsSearch.search = true;
+      $location.search($scope.componentsSearch);
+
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(response){
         if (response !== false){
           data = response.components;
@@ -132,6 +137,10 @@ angular.module('bsis')
       });
 
     };
+
+    if ($routeParams.search) {
+      $scope.getComponentsByDIN();
+    }
 
     $scope.componentsTableParams = new ngTableParams({
       page: 1,            // show first page
