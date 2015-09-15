@@ -133,6 +133,10 @@ angular.module('bsis')
 
       angular.copy(donation, addDonation);
 
+      if (addDonation.adverseEvent && !addDonation.adverseEvent.type) {
+        addDonation.adverseEvent = null;
+      }
+
       // save donation (POST /donations)
       addDonation.$save(function(data){ 
         response(true);
@@ -146,6 +150,10 @@ angular.module('bsis')
         updateDonation = updateDonation.donation;
 
         angular.copy(donation, updateDonation);
+
+        if (updateDonation.adverseEvent && !updateDonation.adverseEvent.type) {
+          updateDonation.adverseEvent = null;
+        }
 
         Api.Donations.update({id:donation.id}, updateDonation, function(data) {
          response(data.donation);
