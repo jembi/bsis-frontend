@@ -27,6 +27,7 @@ angular.module('bsis')
     COMPONENTS: 'fa-filter',
     DONORS: 'fa-clipboard',
     EDIT: 'fa-edit',
+    EXCLAMATION: 'fa-exclamation-circle',
     FEMALE: 'fa-female',
     FLAG: 'fa-flag',
     GLOBE: 'fa-globe',
