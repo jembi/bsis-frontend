@@ -651,7 +651,6 @@ angular.module('bsis')
         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
-
     $scope.$watch("data", function () {
       $timeout(function(){ $scope.duplicateDonorTableParams.reload(); });
     });
@@ -662,57 +661,176 @@ angular.module('bsis')
   })
 
   // Controller for Viewing Duplicate Donors
-  .controller('ManageDonorsDuplicateCtrl', function ($scope, $location, $routeParams, DonorService, $filter, ngTableParams, $timeout) {
+  .controller('ManageDonorsDuplicateCtrl', function ($scope, $window, $location, $routeParams, DonorService, $filter, ngTableParams, $timeout) {
 
-    var data = [{}];
-    $scope.data = data;
+    var duplicatesData = [{}];
+    $scope.duplicatesData = duplicatesData;
     $scope.duplicateCount = 0;
+
+    var donationsData = [{}];
+    $scope.donationsData = donationsData;
+
+    var deferralsData = [{}];
+    $scope.deferralsData = deferralsData;
 
     var groupKey = "1";
     if ($routeParams.groupKey) {
       groupKey = $routeParams.groupKey;
     }
 
+    var currentStep = 1;
+    $scope.currentStep = currentStep;
+    $scope.lastStep = 7;
+
+    // 1: load the duplicates
     $scope.manageDonorDuplicates = function () {
       // FIXME: improve this backend service call so it doesn't repeat the duplicate search
       DonorService.findDonorDuplicates(function(response) {
         if (response !== false) {
-          data = [];
+          duplicatesData = [];
           var duplicates = response.duplicates[groupKey];
-          angular.forEach(duplicates,function(value,index){
-            data.push(value);
+          angular.forEach(duplicates,function(value,index) {
+            value.merge = null;
+            duplicatesData.push(value);
           });
         }
-        $scope.data = data;
-        $scope.duplicateCount = $scope.data.length;
+        $scope.duplicatesData = duplicatesData;
+        $scope.donor = duplicatesData[0];
+        $scope.duplicateCount = $scope.duplicatesData.length;
         $scope.groupKey = groupKey;
       });
     };
-
-    $scope.manageDonorDuplicates();
-
+    $scope.manageDonorDuplicates(); // loaded on the 1st step
     $scope.manageDuplicateDonorTableParams = new ngTableParams({
-      page: 1,            // show first page
-      count: 12,          // count per page
+      page: 1,
+      count: 100,         // don't paginate (?)
       filter: {},
       sorting: {}
     }, 
     {
       defaultSort: 'asc',
       counts: [], // hide page counts control
-      total: $scope.data.length, // length of data
+      total: $scope.duplicatesData.length,
       getData: function ($defer, params) {
-        var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
-        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : data;
-        params.total(orderedData.length); // set total for pagination
+        var filteredData = params.filter() ? $filter('filter')(duplicatesData, params.filter()) : duplicatesData;
+        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : duplicatesData;
+        params.total(orderedData.length);
         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
-
-    $scope.$watch("data", function () {
+    $scope.$watch("duplicatesData", function () {
       $timeout(function(){ $scope.manageDuplicateDonorTableParams.reload(); });
     });
 
+    // 2: load the donor's donations (loaded on the donations step)
+    $scope.viewDonorsDonations = function() {
+      $scope.donationResults = false;
+      donationsData = [];
+      angular.forEach(duplicatesData, function(donor, i) {
+        // FIXME: use only one service
+        DonorService.getDonations(donor.id, function(response) {
+          if (response !== false) {
+            angular.forEach(response.allDonations, function(donation, i) {
+              donationsData.push(donation);
+              $scope.donationsData = donationsData;
+              $scope.donationResults = true;
+            });
+          }
+        });
+      });
+    };
+    $scope.manageDuplicateDonorDonationsTableParams = new ngTableParams({
+      page: 1,
+      count: 6,
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [],
+      total: $scope.donationsData.length,
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ? $filter('filter')(donationsData, params.filter()) : donationsData;
+        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : donationsData;
+        params.total(orderedData.length);
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+    $scope.$watch("donationsData", function () {
+      $timeout(function(){ $scope.manageDuplicateDonorDonationsTableParams.reload(); });
+    });
+
+    // 3: load the donor's deferrals (loaded on the deferrals step)
+    $scope.viewDonorsDeferrals = function() {
+      $scope.deferralResults = false;
+      deferralsData = [];
+      angular.forEach(duplicatesData, function(donor, i) {
+        // FIXME: use one service that returns all the deferrals
+        DonorService.getDeferrals(donor.id, function(response) {
+          if (response !== false) {
+            angular.forEach(response.allDonorDeferrals, function(deferral, i) {
+                deferralsData.push(deferral);
+                $scope.deferralResults = true;
+                $scope.deferralsData = deferralsData;
+            });
+          }
+        });
+      });
+    };
+    $scope.manageDuplicateDonorDeferralTableParams = new ngTableParams({
+      page: 1,
+      count: 6,
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [],
+      total: $scope.deferralsData.length,
+      getData: function ($defer, params) {
+        var deferralsData = $scope.deferralsData;
+        var filteredData = params.filter() ? $filter('filter')(deferralsData, params.filter()) : deferralsData;
+        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : deferralsData;
+        params.total(orderedData.length);
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+    $scope.$watch("deferralsData", function () {
+      $timeout(function(){ $scope.manageDuplicateDonorDeferralTableParams.reload(); });
+    });
+
+    $scope.goBack = function() {
+      $window.history.back();
+    };
+
+    $scope.step = function(newStep) {
+      $scope.currentStep = newStep;
+      if (newStep == 2) {
+        // overview
+      } else if (newStep == 3) {
+        // contact
+      } else if (newStep == 4) {
+        // addresses
+      } else if (newStep == 5) {
+        // deferrals
+        $scope.hello = "steppy5";
+        $scope.viewDonorsDeferrals();
+      } else if (newStep == 6) {
+        // donations
+        $scope.hello = "steppy6";
+        $scope.viewDonorsDonations();
+      } else if (newStep == 7) {
+        // review
+      }
+    };
+
+    $scope.merge = function (item) {
+      // do something
+    };
+
+    $scope.cancel = function (item) {
+      $location.path('/duplicateDonors');
+    };
   })
 
   // Controller for Adding Donations

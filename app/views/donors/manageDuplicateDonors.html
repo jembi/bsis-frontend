@@ -1,48 +1,328 @@
-<h3 class="page-header">Duplicate Donors</h3>
+<!--<h3 class="page-header">Merge Duplicate Donor</h3>-->
 
 <div style="padding-bottom: 10px"></div>
 
-<div class="panel panel-default">
-  <div class="panel-body">
+<div ng-switch="currentStep" class="col-sm-12">
 
-    <p>
-      <em> {{duplicateCount}} duplicates for donors in group {{groupKey}} </em>
-    </p>
+  <span class="h2"> 
+    <span>{{donor.firstName}}</span> 
+    <span>{{donor.lastName}}</span><small><em>
+    <span ng-if="donor.title"><span>{{donor.title}}</span>.</span>
+    <span>{{donor.callingName}}</span>
+    </em></small>
+  </span>
+  <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
+    <span ng-switch-when="male" class="fa-stack fa-1x">
+      <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+      <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
+    </span>
+    <span ng-switch-when="female" class="fa-stack fa-1x">
+      <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+      <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
+    </span>
+  </span>
+  <span class="h3" ng-if="donor.bloodGroup !== ''" style="vertical-align: 0.3em; padding-left:5px;">
+    <span class="fa-stack fa-1x">
+      <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+      <i class="fa fa-stack-1x fa-inverse">{{donor.bloodGroup}}</i>
+    </span>
+  </span>
+  <div class="h4"> 
+    <small><em>Age: </em></small>
+    <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
+    <em>( <span ng-show="!editableForm.$visible">{{ (donor.birthDate | bsisDate) || '' }}</span>
+        <span ng-show="editableForm.$visible">
+          <dateselect ng-model="birthDate" initDate="donor.birthDate" format="format" opened="donorBirthDateOpen" cal-icon="icons.CALENDAR">
+          </dateselect>
+        </span>)
+    </em>
+  </div>
 
-    <table ng-table="manageDuplicateDonorTableParams" show-filter="false" class="table">
-      <tr ng-repeat="donor in $data"
-              ng-click="viewDonor(donor); changeSelection(donor);"
-              ng-mouseenter="this.$selected = true"
-              ng-mouseleave="this.$selected = false"
-              ng-class="{'active': donor.$selected}">
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+      <div ng-switch-when="1">
+        <h4>Merge Duplicate Donors</h4>
+        <p><em> {{duplicateCount}} duplicates for donors in group {{groupKey}} </em></p>
+        <p>Please select the correct donor information below:</p>
+        <table ng-table="manageDuplicateDonorTableParams" show-filter="false" class="table">
+          <tr ng-repeat="donor in $data"
+                  ng-click="viewDonor(donor); changeSelection(donor);"
+                  ng-mouseenter="this.$selected = true"
+                  ng-mouseleave="this.$selected = false"
+                  ng-class="{'active': donor.$selected}">
+                <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+                    {{donor.donorNumber}}
+                </td>
+                <td data-title="'First Name'" header-class="text-left" sortable="'firstName'">
+                    {{donor.firstName}}
+                </td>
+                <td data-title="'Last Name'" header-class="text-left" sortable="'lastName'">
+                    {{donor.lastName}}
+                </td>
+                <td data-title="'Gender'" header-class="text-left" sortable="'gender'">
+                    {{donor.gender}}
+                </td>
+                <td data-title="'Date of Birth'" header-class="text-left" class="text-center" sortable="'birthDate'">
+                    {{ (donor.birthDate | bsisDate) || '' }}
+                </td>
+                <td data-title="'Date of Last Donation'" header-class="text-left" class="text-center" sortable="'dateOfLastDonation'">
+                    {{ (donor.dateOfLastDonation | bsisDate) || '' }}
+                </td>
+                <td data-title="'Blood Group'" header-class="text-left" sortable="'bloodGroup'">
+                    {{donor.bloodGroup}}
+                </td>
+                <td data-title="'Panel'" header-class="text-left"  sortable="'donorPanel'">
+                    {{donor.donorPanel.name}}
+                </td>
+                <td data-title="'Merge?'" header-class="text-left" class="text-center" ng-click="$event.stopPropagation()">
+                  <label>Yes <input type="radio" ng-value="true" value="true" ng-model="donor.merge" ng-click="changeSelection(donor.merge);"></label>
+                  <label>No <input type="radio" ng-value="false" value="false" ng-model="donor.merge" ng-click="changeSelection(donor.merge);"></label>
+                </td>
+            </tr>
+        </table>
+      </div>
+
+      <div ng-switch-when="2">
+        <h4>Overview</h4>
+        <p>Please select the correct donor information below:</p>
+        <table ng-table="manageDuplicateDonorTableParams" show-filter="false" class="table">
+          <tr ng-repeat="donor in $data">
             <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
                 {{donor.donorNumber}}
             </td>
-            <td data-title="'First Name'" header-class="text-left" sortable="'firstName'">
-                {{donor.firstName}}
+            <td data-title="'Identifier'" header-class="text-left" sortable="'idNumber'">
+              <div ng-if="donor.idNumber != null && donor.idNumber != ''">
+                <input type="radio" name="idNumber">
+                {{donor.idType.idType}}: {{donor.idNumber}}
+              </div>
             </td>
-            <td data-title="'Last Name'" header-class="text-left" sortable="'lastName'">
-                {{donor.lastName}}
+            <td data-title="'Title'" header-class="text-left" sortable="'title'">
+              <div ng-if="donor.title != null && donor.title != ''">
+                <input type="radio" name="title">
+                {{donor.title}}
+              </div>
             </td>
-            <td data-title="'Gender'" header-class="text-left" sortable="'gender'">
-                {{donor.gender}}
+            <td data-title="'Calling Name'" header-class="text-left" sortable="'callingName'">
+              <div ng-if="donor.callingName != null && donor.callingName != ''">
+                <input type="radio" name="callingName">
+                {{donor.callingName}}
+              </div>
             </td>
-            <td data-title="'Birth Date'" header-class="text-left" sortable="'birthDate'">
-                {{ (donor.birthDate | bsisDate) || '' }}
+            <td data-title="'PreferredLanguage'" header-class="text-left" sortable="'preferredLanguage'">
+              <div ng-if="donor.preferredLanguage != null && donor.preferredLanguage != ''">
+                <input type="radio" name="preferredLanguage">
+                {{donor.preferredLanguage.preferredLanguage}}
+              </div>
             </td>
-            <td data-title="'Date of Last Donation'" header-class="text-left" class="text-center" sortable="'dateOfLastDonation'">
-                {{ (donor.dateOfLastDonation | bsisDate) || '' }}
+            <td data-title="'Panel'" header-class="text-left" sortable="'donorPanel'">
+              <input type="radio" name="donorPanel">
+              {{donor.donorPanel.name}}
             </td>
-            <td data-title="'Blood Group'" header-class="text-left" sortable="'bloodGroup'">
-                {{donor.bloodGroup}}
+            <td data-title="'Comments'" header-class="text-left" sortable="'notes'">
+              <div ng-if="donor.notes != null && donor.notes != ''">
+                <input type="checkbox" name="notes">
+                {{donor.notes}}
+              </div>
             </td>
-            <td data-title="'Donor Panel'" header-class="text-left"  sortable="'donorPanel'">
-                {{donor.donorPanel.name}}
-            </td>
-        </tr>
-    </table>
+          </tr>
+        </table>
+      </div>
 
+      <div ng-switch-when="3">
+        <h4>Contact</h4>
+        <p>Please select the correct donor information below:</p>
+        <table ng-table="manageDuplicateDonorTableParams" show-filter="false" class="table">
+          <tr ng-repeat="donor in $data">
+            <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+                {{donor.donorNumber}}
+            </td>
+            <td data-title="'Preferred Contact Type'" header-class="text-left" sortable="'contactMethodType'">
+              <div ng-if="donor.contactMethodType != null">
+                <input type="radio" name="contactMethodType">
+                {{donor.contactMethodType.contactMethodType}}
+              </div>
+            </td>
+            <td data-title="'Email'" header-class="text-left" sortable="'email'">
+              <div ng-if="donor.contact.email != null && donor.contact.email != ''">
+                <input type="radio" name="email">
+                {{donor.contact.email}}
+              </div>
+            </td>
+            <td data-title="'Mobile'" header-class="text-left" sortable="'mobileNumber'">
+              <div ng-if="donor.contact.mobileNumber != null && donor.contact.mobileNumber != ''">
+                <input type="radio" name="mobileNumber">
+                {{donor.contact.mobileNumber}}
+              </div>
+            </td>
+            <td data-title="'Home'" header-class="text-left" sortable="'homeNumber'">
+              <div ng-if="donor.contact.homeNumber != null && donor.contact.homeNumber != ''">
+                <input type="radio" name="homeNumber">
+                {{donor.contact.homeNumber}}
+              </div>
+            </td>
+            <td data-title="'Work'" header-class="text-left" sortable="'workNumber'">
+              <div ng-if="donor.contact.workNumber != null && donor.contact.workNumber != ''">
+                <input type="radio" name="workNumber">
+                {{donor.contact.workNumber}}
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div ng-switch-when="4">
+        <h4>Address</h4>
+        <p>Please select the correct donor information below:</p>
+        <table ng-table="manageDuplicateDonorTableParams" show-filter="false" class="table">
+          <tr ng-repeat="donor in $data">
+            <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+                {{donor.donorNumber}}
+            </td>
+            <td data-title="'Preferred Address Type'" header-class="text-left" sortable="'preferredAddressType'">
+              <div ng-if="donor.preferredAddressType != null">
+                <input type="radio" name="preferredAddressType">
+                {{donor.preferredAddressType.preferredAddressType}}
+              </div>
+            </td>
+            <td data-title="'Home'" header-class="text-left" sortable="'homeAddress'">
+              <div ng-if="donor.address.homeAddressLine1 != null && donor.address.homeAddressLine1 != ''">
+                <input type="radio" name="homeAddress">
+                <span ng-if="donor.address.homeAddressLine1 != null && donor.address.homeAddressLine1 != ''">{{donor.address.homeAddressLine1}} <br/></span>
+                <span ng-if="donor.address.homeAddressLine2 != null && donor.address.homeAddressLine2 != ''">{{donor.address.homeAddressLine2}} <br/></span>
+                <span ng-if="donor.address.homeAddressCity != null && donor.address.homeAddressCity != ''">{{donor.address.homeAddressCity}} <br/></span>
+                <span ng-if="donor.address.homeAddressProvince != null && donor.address.homeAddressProvince != ''">{{donor.address.homeAddressProvince}} <br/></span>
+                <span ng-if="donor.address.homeAddressDistrict != null && donor.address.homeAddressDistrict != ''">{{donor.address.homeAddressDistrict}} <br/></span>
+                <span ng-if="donor.address.homeAddressCountry != null && donor.address.homeAddressCountry != ''">{{donor.address.homeAddressCountry}} <br/></span>
+                <span ng-if="donor.address.homeAddressState != null && donor.address.homeAddressState != ''">{{donor.address.homeAddressState}} <br/></span>
+                <span ng-if="donor.address.homeAddressZipcode != null && donor.address.homeAddressZipcode != ''">{{donor.address.homeAddressZipcode}}</span>
+              </div>
+            </td>
+            <td data-title="'Postal'" header-class="text-left" sortable="'postalAddress'">
+              <div ng-if="donor.address.postalAddressLine1 != null && donor.address.postalAddressLine1 != ''">
+                <input type="radio" name="postalAddress">
+                <span ng-if="donor.address.postalAddressLine1 != null && donor.address.postalAddressLine1 != ''">{{donor.address.postalAddressLine1}} <br/></span>
+                <span ng-if="donor.address.homeAddressLine1 != null && donor.address.postalAddressLine2 != ''">{{donor.address.postalAddressLine2}} <br/></span>
+                <span ng-if="donor.address.postalAddressCity != null && donor.address.postalAddressCity != ''">{{donor.address.postalAddressCity}} <br/></span>
+                <span ng-if="donor.address.postalAddressProvince != null && donor.address.postalAddressProvince != ''">{{donor.address.postalAddressProvince}} <br/></span>
+                <span ng-if="donor.address.postalAddressDistrict != null && donor.address.postalAddressDistrict != ''">{{donor.address.postalAddressDistrict}} <br/></span>
+                <span ng-if="donor.address.postalAddressCountry != null && donor.address.postalAddressCountry != ''">{{donor.address.postalAddressCountry}} <br/></span>
+                <span ng-if="donor.address.postalAddressState != null && donor.address.postalAddressState != ''">{{donor.address.postalAddressState}} <br/></span>
+                <span ng-if="donor.address.postalAddressZipcode != null && donor.address.postalAddressZipcode != ''">{{donor.address.postalAddressZipcode}}</span>
+              </div>
+            </td>
+            <td data-title="'Work'" header-class="text-left" sortable="'workAddress'">
+              <div ng-if="donor.address.workAddressLine1 != null && donor.address.workAddressLine1 != ''">
+                <input type="radio" name="workAddress">
+                <span ng-if="donor.address.workAddressLine1 != null && donor.address.workAddressLine1 != ''">{{donor.address.workAddressLine1}} <br/></span>
+                <span ng-if="donor.address.workAddressLine2 != null && donor.address.workAddressLine2 != ''">{{donor.address.workAddressLine2}} <br/></span>
+                <span ng-if="donor.address.workAddressCity != null && donor.address.workAddressCity != ''">{{donor.address.workAddressCity}} <br/></span>
+                <span ng-if="donor.address.workAddressProvince != null && donor.address.workAddressProvince != ''">{{donor.address.workAddressProvince}} <br/></span>
+                <span ng-if="donor.address.workAddressDistrict != null && donor.address.workAddressDistrict != ''">{{donor.address.workAddressDistrict}} <br/></span>
+                <span ng-if="donor.address.workAddressCountry != null && donor.address.workAddressCountry != ''">{{donor.address.workAddressCountry}} <br/></span>
+                <span ng-if="donor.address.workAddressState != null && donor.address.workAddressState != ''">{{donor.address.workAddressState}} <br/></span>
+                <span ng-if="donor.address.workAddressZipcode != null && donor.address.workAddressZipcode != ''">{{donor.address.workAddressZipcode}}</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div ng-switch-when="5">
+        <h4>Deferrals</h4>
+        <p>See the deferrals for the merged donor:</p>
+        <div ng-switch="deferralResults">
+          <div ng-switch-when="true">
+            <table ng-table="manageDuplicateDonorDeferralTableParams" show-filter="false" class="table">
+              <tr ng-repeat="deferral in $data">
+                  <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+                    {{donor.donorNumber}}
+                  </td>
+                  <td data-title="'Deferred From'" header-class="text-left" class="text-center" sortable="'createdDate'">
+                      {{deferral.createdDate | bsisDate}}
+                  </td>
+                  <td data-title="'Deferred Until'" header-class="text-left" class="text-center" sortable="'deferredUntil'">
+                      {{deferral.deferredUntil | bsisDate}}
+                  </td>
+                  <td data-title="'Reason'" style="width:22%;" header-class="text-left" sortable="'deferralReason.reason'">
+                      {{deferral.deferralReason.reason}}
+                  </td>
+                  <td data-title="'Comment'" header-class="text-left" sortable="'deferralReasonText'">
+                      {{deferral.deferralReasonText}}
+                  </td>
+                  <td data-title="'Deferred By'" header-class="text-left" sortable="'createdBy'">
+                      {{deferral.createdBy}}
+                  </td>
+              </tr>
+            </table>
+          </div>
+          <div ng-switch-when="false">
+            <p><em>No Deferrals found</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div ng-switch-when="6">
+        <h4>Donations</h4>
+        <p>See the donations for the merged donor:</p>
+        <div ng-switch="donationResults">
+          <div ng-switch-when="true">
+            <table ng-table="manageDuplicateDonorDonationsTableParams" show-filter="false" class="table">
+              <tr ng-repeat="donation in $data">
+                <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+                    {{donation.donorNumber}}
+                </td>
+                <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
+                    {{donation.donationIdentificationNumber}}
+                </td>
+                <td data-title="'Batch Number'" header-class="text-left" class="text-center" sortable="'donationBatchNumber'">
+                    {{donation.donationBatchNumber}}
+                </td>
+                <td data-title="'Donation Date'" header-class="text-left" class="text-center" sortable="'donationDate'">
+                    {{donation.donationDate | bsisDate}}
+                </td>
+                <td data-title="'Type'" header-class="text-left" class="text-center" sortable="'donationType.donationType'">
+                    {{donation.donationType.donationType}}
+                </td>
+                <td data-title="'Pack Type'" header-class="text-left"  sortable="'packType.packType'">
+                    {{donation.packType.packType}}
+                </td>
+                <td data-title="'Donor Weight'" header-class="text-left" class="text-center" sortable="'donorWeight'">
+                    {{donation.donorWeight}}
+                </td>
+                <td data-title="'Donor BloodPressure'" header-class="text-left" class="text-center" sortable="'bloodPressureSystolic'">
+                    {{donation.bloodPressureSystolic}} / {{donation.bloodPressureDiastolic}}
+                </td>
+                <td data-title="'Donor Pulse'" header-class="text-left" class="text-center" sortable="'donorPulse'">
+                    {{donation.donorPulse}}
+                </td>
+                <td data-title="'Panel'" header-class="text-left" class="text-center" sortable="'donorPanel.name'">
+                    {{donation.donorPanel.name}}
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div ng-switch-when="false">
+              <p><em>No Donations found</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div ng-switch-when="7">
+        <h4>Review</h4>
+        <p></p>
+      </div>
+
+      <div class="form-group"> 
+        <div class="col-sm-4">
+          <button class="btn btn-primary" type="submit" ng-click="step(currentStep-1)" ng-disabled="currentStep==1">Back</button>
+          <button class="btn btn-primary" type="submit" ng-click="step(currentStep+1)" ng-disabled="currentStep==lastStep">Next</button>
+          <button class="btn btn-primary" type="button" ng-click="merge()" ng-disabled="currentStep!=lastStep">Finish</button>
+          <button class="btn btn-primary" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
 
 </div>
