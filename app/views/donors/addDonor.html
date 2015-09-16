@@ -2,7 +2,7 @@
 
 <form class="form-horizontal col-sm-12" role="form" name="addDonorForm" novalidate ng-submit="addDonor(donor, dob, addDonorForm.$valid)">
 
-  <alert type="danger" close="errorMessage = ''" ng-show="err.userMessage">
+  <alert type="danger" close="" ng-show="err.userMessage">
           {{err.userMessage}}
           <ul>
                   <li ng-show="err['donor.birthDate']"> {{err["donor.birthDate"]}}</li>
