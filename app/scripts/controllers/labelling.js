@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('LabellingCtrl', function ($scope, $location, LabellingService, ICONS, PERMISSIONS) {
+  .controller('LabellingCtrl', function ($scope, $location, LabellingService, ICONS, PERMISSIONS, $routeParams) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -27,7 +27,13 @@ angular.module('bsis')
       }
     };
 
-    $scope.checkLabellingStatus = function (donationIdentificationNumber) {   
+    $scope.checkLabellingStatus = function (donationIdentificationNumber) {
+      $location.search(
+        {
+          search: true,
+          donationIdentificationNumber: donationIdentificationNumber
+        }
+      );
       LabellingService.checkLabellingStatus(donationIdentificationNumber, function(response){
         if (response !== false){
           data = response;
@@ -43,6 +49,10 @@ angular.module('bsis')
         }
       });
     };
+
+    if($routeParams.search){
+      $scope.checkLabellingStatus($routeParams.donationIdentificationNumber);
+    }
 
     $scope.printPackLabel = function (componentId) {   
       LabellingService.printPackLabel(componentId, function(response){
