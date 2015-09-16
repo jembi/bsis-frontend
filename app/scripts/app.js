@@ -297,7 +297,7 @@ var app = angular.module('bsis', [
         controller : 'UsersCtrl',
         permission: PERMISSIONS.MANAGE_USERS
       })
-      .when('/manageUser', {
+      .when('/manageUser/:id', {
         templateUrl : 'views/settings.html',
         controller : 'ManageUserCtrl',
         permission: PERMISSIONS.MANAGE_USERS

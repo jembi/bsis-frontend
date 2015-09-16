@@ -72,7 +72,7 @@ angular.module('bsis')
 
     $scope.addNewUser = function () {
       UsersService.setUser("");
-      $location.path('/manageUser');
+      $location.path('/manageUser/new');
     };
 
     $scope.manageUser = function (item) {
@@ -84,7 +84,7 @@ angular.module('bsis')
         if (response !== false) {
           $scope.roleList = response;
           UsersService.setRoles(response);
-          $location.path("/manageUser");
+          $location.path("/manageUser/" + item.id);
         }
         else {
 
@@ -119,20 +119,32 @@ angular.module('bsis')
       });
     });
   })
-  .controller('ManageUserCtrl', function ($scope, $rootScope, UsersService, RolesService, ICONS, PERMISSIONS, $location, ngTableParams, $timeout) {
+  .controller('ManageUserCtrl', function ($scope, $rootScope, UsersService, RolesService, ICONS, PERMISSIONS, $location, ngTableParams, $timeout, $routeParams) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageUser';
 
-    $scope.user = UsersService.getUser();
+    $scope.getUser = function (){
+      UsersService.getUserById($routeParams.id, function (user) {
+        $scope.user = user;
+        $scope.disableUsername = true;
+        //Reset permissions in object
+        for (var roleIndex in $scope.user.roles) {
+          $scope.user.roles[roleIndex].permissions = [];
+        }
+      }, function(err){
+        console.log(err);
+      });
+    };
 
-    if ($scope.user === ""){
+
+    if ($routeParams.id == "new"){
       $scope.user = {};
       $scope.user.modifyPassword = true;
       $scope.emailRequired = "required";
       $scope.passwordRequired = "required";
     } else {
-      $scope.disableUsername = true;
+      $scope.getUser();
     }
 
 
@@ -152,10 +164,7 @@ angular.module('bsis')
         $scope.submitted = true;
       }
     };
-    //Reset permissions in object
-    for (var roleIndex in $scope.user.roles) {
-      $scope.user.roles[roleIndex].permissions = [];
-    }
+
     RolesService.getRoles(function (list) {
       $scope.roleList = list;
       //Reset permissions in object
