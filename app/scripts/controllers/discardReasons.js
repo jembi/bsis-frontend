@@ -61,31 +61,38 @@ angular.module('bsis')
 
     $scope.addNewDiscardReason = function () {
       DiscardReasonsService.setDiscardReason("");
-      $location.path('/manageDiscardReason');
+      $location.path('/manageDiscardReason/new');
     };
 
     $scope.manageDiscardReason = function (discard) {
       $scope.discard = discard;
       DiscardReasonsService.setDiscardReason(discard);
-      $location.path("/manageDiscardReason");
+      $location.path("/manageDiscardReason/" + discard.id);
     };
 
     $scope.getDiscards();
 
   })
 
-  .controller('ManageDiscardReasonsCtrl', function ($scope, $location, DiscardReasonsService, ICONS, PERMISSIONS, DATATYPES) {
+  .controller('ManageDiscardReasonsCtrl', function ($scope, $location, DiscardReasonsService, ICONS, PERMISSIONS, DATATYPES, $routeParams) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageDiscardReason';
 
-    $scope.discard = DiscardReasonsService.getDiscardReason();
+    $scope.getDiscardReason = function (){
+      DiscardReasonsService.getDiscardReasonById($routeParams.id, function(discardReason){
+        $scope.discard = discardReason;
+      }, function (err) {
+        $scope.err = err;
+      });
+    };
 
-    if ($scope.discard === "") {
+    if ($routeParams.id == "new") {
       $scope.discard = {
         isDeleted : false
       };
     } else {
+      $scope.getDiscardReason();
       $scope.disableDiscardname = true;
     }
 

@@ -337,7 +337,7 @@ var app = angular.module('bsis', [
         controller : 'DiscardReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DISCARD_REASONS
       })
-      .when('/manageDiscardReason', {
+      .when('/manageDiscardReason/:id', {
         templateUrl : 'views/settings.html',
         controller : 'ManageDiscardReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DISCARD_REASONS
@@ -347,7 +347,7 @@ var app = angular.module('bsis', [
         controller : 'DonationTypesCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_TYPES
       })
-      .when('/manageDonationType', {
+      .when('/manageDonationType/:id', {
         templateUrl : 'views/settings.html',
         controller : 'ManageDonationTypesCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_TYPES

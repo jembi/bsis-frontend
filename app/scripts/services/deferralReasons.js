@@ -15,7 +15,7 @@ angular.module('bsis')
       },
 
       getDeferralReasonById: function (id, onSuccess, onError) {
-        var apiResponse = Api.deferralReasons.get({id: id}, function(){
+         Api.deferralReasons.get({id: id}, function(apiResponse){
           onSuccess(apiResponse.reason);
         }, function (err){
           onError(err.data);
