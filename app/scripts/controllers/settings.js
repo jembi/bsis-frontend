@@ -18,8 +18,8 @@ angular.module('bsis')
         $scope.selection = $location.path();
         $location.path($scope.initialView);
         return true;
-      } else if ($location.path() === "/manageConfiguration" && path === "/configurations") {
-        $scope.selection = $location.path();
+      } else if ($location.path().indexOf('/manageConfiguration') === 0 && path === "/configurations") {
+        $scope.selection = '/manageConfiguration';
         return true;
       } else if ($location.path() === "/manageDeferralReason" && path === "/deferralReasons") {
         $scope.selection = $location.path();
@@ -27,8 +27,8 @@ angular.module('bsis')
       } else if ($location.path() === "/manageDiscardReason" && path === "/discardReasons") {
         $scope.selection = $location.path();
         return true;
-      } else if ($location.path() === "/manageRole" && path === "/roles") {
-        $scope.selection = $location.path();
+      } else if ($location.path().indexOf('/manageRole') === 0 && path === "/roles") {
+        $scope.selection = '/manageRole';
         return true;
       } else if ($location.path() === "/manageUser" && path === "/users") {
         $scope.selection = $location.path();

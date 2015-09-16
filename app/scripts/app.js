@@ -307,7 +307,7 @@ var app = angular.module('bsis', [
         controller : 'RolesCtrl',
         permission: PERMISSIONS.MANAGE_ROLES
       })
-      .when('/manageRole', {
+      .when('/manageRole/:id', {
         templateUrl : 'views/settings.html',
         controller : 'ManageRolesCtrl',
         permission: PERMISSIONS.MANAGE_ROLES
