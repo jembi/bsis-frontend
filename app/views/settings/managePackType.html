@@ -22,7 +22,7 @@
                                 <input size="20" id="packType" name="packType" class="form-control input-sm" ng-model="packType.packType" required
                                        ng-minlength=1 ng-maxlength=30
                                        ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                                       ng-class="{'ng-invalid ng-dirty' : (packTypeForm.packType.$invalid && submitted) || serverError.fieldErrors['type.packType'] }" />
+                                       ng-class="{'ng-invalid ng-dirty' : (packTypeForm.packType.$invalid && submitted) || (!packTypeForm.packType.$dirty && serverError.fieldErrors['type.packType']) }" />
 
                                 <div>
                                     <small class="error" ng-show="(packTypeForm.packType.$error.required && (packType.packType.$dirty || submitted))">
@@ -52,7 +52,7 @@
                                     ng-model="packType.countAsDonation"
                                     ng-change="switchCountAsDonation()"
                                     ng-disabled="!packType.testSampleProduced"
-                                    ng-class="{'ng-invalid ng-dirty' : (packTypeForm.countAsDonation.$invalid && submitted) || serverError.fieldErrors['type.countAsDonation'] }" />
+                                    ng-class="{'ng-invalid ng-dirty' : (packTypeForm.countAsDonation.$invalid && submitted) || (!packTypeForm.countAsDonation.$dirty && serverError.fieldErrors['type.countAsDonation']) }" />
                             </div>
                         </div>
                     </div>
