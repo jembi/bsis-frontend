@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('TestingCtrl', function ($scope, $rootScope, $location, TestingService, ICONS, PERMISSIONS, BLOODABO, BLOODRH, $filter, ngTableParams, $timeout) {
+  .controller('TestingCtrl', function ($scope, $rootScope, $location, TestingService, ICONS, PERMISSIONS, BLOODABO, BLOODRH, $filter, ngTableParams, $timeout, $routeParams) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -27,17 +27,17 @@ angular.module('bsis')
 
     $scope.isCurrent = function(path) {
       var initialView = '';
-      if ($location.path() === "/viewTestBatch" && path === "/manageTestBatch") {
-        $scope.selection = $location.path();
-        return true;
-      } else if ($location.path() === "/manageTTITesting" && path === "/manageTestBatch") {
-        $scope.selection = $location.path();
+      if ($location.path().indexOf('/viewTestBatch') === 0  && path === "/manageTestBatch") {
+          $scope.selection = '/viewTestBatch';
+          return true;
+      } else if ($location.path().indexOf("/manageTTITesting") === 0 && path === "/manageTestBatch") {
+        $scope.selection = '/manageTTITesting';
         return true;
       } else if ($location.path() === "/managePendingTests" && path === "/manageTestBatch") {
         $scope.selection = $location.path();
         return true;
-      } else if ($location.path() === "/manageBloodGroupTesting" && path === "/manageTestBatch") {
-        $scope.selection = $location.path();
+      } else if ($location.path().indexOf('/manageBloodGroupTesting') === 0 && path === "/manageTestBatch") {
+        $scope.selection = "/manageBloodGroupTesting";
         return true;
       } else if ($location.path() === "/manageBloodGroupMatchTesting" && path === "/manageTestBatch") {
         $scope.selection = $location.path();
@@ -225,6 +225,8 @@ angular.module('bsis')
     });
 
     $scope.getTestResultsByDIN = function (testResultsSearch) {
+      testResultsSearch.search = true;
+      $location.search(testResultsSearch);
       TestingService.getTestResultsByDIN(testResultsSearch.donationIdentificationNumber, function(response){
         if (response !== false){
           $scope.donation = response.donation;
@@ -236,25 +238,29 @@ angular.module('bsis')
         }
       });
     };
+
+    if ($routeParams.search){
+      $scope.getTestResultsByDIN($routeParams);
+    }
     
     $scope.recordTestResults = function (item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
       if(testCategory === 'tti'){
-        $location.path("/manageTTITesting");
+        $location.path("/manageTTITesting/" + item.id);
       }
       else if (testCategory === 'bloodGrouping'){
-        $location.path("/manageBloodGroupTesting");
+        $location.path("/manageBloodGroupTesting/" + item.id);
       }
     };
 
     $scope.recordPendingBloodGroupMatchTests = function (item) {
       TestingService.setCurrentTestBatch(item.id);
-        $location.path("/manageBloodGroupMatchTesting");
+        $location.path("/manageBloodGroupMatchTesting/" + item.id);
     };
 
     $scope.recordPendingTestResults = function (item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
-      $location.path("/managePendingTests");
+      $location.path("/managePendingTests/" + item.id);
     };
 
   })
@@ -263,50 +269,45 @@ angular.module('bsis')
 
     $scope.viewTestBatch = function (item) {
       TestingService.setCurrentTestBatch(item.id);
-      $location.path("/viewTestBatch");
+      $location.path("/viewTestBatch/" + item.id);
     };
 
     $scope.recordTestResults = function (item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
       if(testCategory === 'tti'){
-        $location.path("/manageTTITesting");
+        $location.path("/manageTTITesting/" + item.id);
       }
       else if (testCategory === 'bloodGrouping'){
-        $location.path("/manageBloodGroupTesting");
+        $location.path("/manageBloodGroupTesting/" + item.id);
       }
     };
 
   })
 
-  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams, $timeout) {
+  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams, $timeout, $routeParams) {
     var data = [{}];
     $scope.data  = data;
 
     $scope.getCurrentTestBatch = function () {
-      TestingService.getCurrentTestBatch( function(response){
-        if (response !== false){
+      TestingService.getTestBatchById($routeParams.id, function(response){
           $scope.testBatch = response.testBatch;
-
           var donations = [];
           angular.forEach($scope.testBatch.donationBatches, function(batch){
             angular.forEach(batch.donations, function(donation){
               donations.push(donation);
             });
           });
-
           data = donations;
           $scope.data = data;
-
-        }
-        else{
-        }
+      }, function (err){
+        console.log(err);
       });
     };
 
     $scope.getCurrentTestBatch();
 
     $scope.getCurrentTestBatchOverview = function () {
-      TestingService.getCurrentTestBatchOverview( function(response){
+      TestingService.getTestBatchOverviewById($routeParams.id, function(response){
         if (response !== false){
           $scope.testBatchOverview = response;
           $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
@@ -369,7 +370,7 @@ angular.module('bsis')
 
   })
 
-  .controller('RecordTestResultsCtrl', function ($scope, $location, TestingService, TTITESTS, BLOODTYPINGTESTS, TTIOUTCOME, BGSOUTCOME, ABO, RH, $q, $filter, ngTableParams, $timeout) {
+  .controller('RecordTestResultsCtrl', function ($scope, $location, TestingService, TTITESTS, BLOODTYPINGTESTS, TTIOUTCOME, BGSOUTCOME, ABO, RH, $q, $filter, ngTableParams, $timeout,$routeParams) {
     var data = [{}];
     $scope.data  = data;
     $scope.ttiTests = TTITESTS.options;
@@ -384,7 +385,7 @@ angular.module('bsis')
     };
 
     $scope.getCurrentTestBatch = function () {
-      TestingService.getCurrentTestBatch( function(response){
+      TestingService.getTestBatchById($routeParams.id,  function(response){
         if (response !== false){
           $scope.testBatch = response.testBatch;
 
@@ -414,7 +415,7 @@ angular.module('bsis')
 
     $scope.getCurrentTestResults = function () {
 
-      TestingService.getCurrentTestResults(function(response){
+      TestingService.getTestResultsById($routeParams.id, function(response){
         if (response !== false){
           data = response.testResults;
           $scope.data = data;
@@ -456,7 +457,7 @@ angular.module('bsis')
       });
 
       $q.all(requests).then(function(){
-        $location.path("/viewTestBatch");
+        $location.path("/viewTestBatch/" + $routeParams.id );
       });
 
     };
@@ -480,7 +481,7 @@ angular.module('bsis')
       });
 
       $q.all(requests).then(function(){
-        $location.path("/viewTestBatch");
+        $location.path("/viewTestBatch/" + $routeParams.id);
       });
 
     };

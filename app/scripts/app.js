@@ -167,31 +167,31 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.VIEW_TEST_BATCH,
         enabled : UI.TESTING_TAB_ENABLED
       })
-      .when('/viewTestBatch', {
+      .when('/viewTestBatch/:id', {
         templateUrl : 'views/testing.html',
         controller  : 'ViewTestBatchCtrl',
         permission: PERMISSIONS.VIEW_TEST_BATCH,
         enabled : UI.TESTING_TAB_ENABLED
       })
-      .when('/manageTTITesting', {
+      .when('/manageTTITesting/:id', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled : UI.TESTING_TAB_ENABLED
       })
-      .when('/managePendingTests', {
+      .when('/managePendingTests/:id', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled : UI.TESTING_TAB_ENABLED
       })
-      .when('/manageBloodGroupTesting', {
+      .when('/manageBloodGroupTesting/:id', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled : UI.TESTING_TAB_ENABLED
       })
-      .when('/manageBloodGroupMatchTesting', {
+      .when('/manageBloodGroupMatchTesting/:id', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
