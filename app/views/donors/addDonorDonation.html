@@ -2,7 +2,18 @@
 <hr style="margin-top:8px;"/>
 
 <div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false" style="padding-top:10px;">
-    <alert type="danger" close="">Error Adding Donation, please resolve issues and try again.</alert>
+    <alert type="danger" close="">
+        {{err.userMessage}}
+        <ul>
+            <li ng-show="err['donation.donor']"> {{err["donation.donor"]}}</li>
+            <li ng-show="err['donation.donationIdentificationNumber']"> {{err["donation.donationIdentificationNumber"]}}</li>
+            <li ng-show="err['donation.donorWeight']"> {{err["donation.donorWeight"]}}</li>
+            <li ng-show="err['donation.haemoglobinCount']"> {{err["donation.haemoglobinCount"]}}</li>
+            <li ng-show="err['donation.bloodPressureSystolic']"> {{err["donation.bloodPressureSystolic"]}}</li>
+            <li ng-show="err['donation.bloodPressureDiastolic']"> {{err["donation.bloodPressureDiastolic"]}}</li>
+            <li ng-show="err['donation.donorPulse']"> {{err["donation.donorPulse"]}}</li>
+        </ul>
+    </alert>
 </div>
 
 <form name="addDonationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addDonation(donation, donationBatch, bleedStartTime, bleedEndTime, addDonationForm.$valid)">
@@ -58,9 +69,6 @@
               ">
               Invalid input
             </small>
-              <small class="error" ng-show="err['donation.donationIdentificationNumber']">
-                  {{err["donation.donationIdentificationNumber"]}}
-              </small>
           </div>
         </div>
       </div>
@@ -173,9 +181,6 @@
               ">
               Invalid input
             </small>
-            <small class="error" ng-show="err['donation.donorWeight']">
-                {{err["donation.donorWeight"]}}
-            </small>
           </div>
         </div>
       </div>
@@ -199,9 +204,6 @@
                 (addDonationForm.hb.$invalid && (addDonationForm.hb.$dirty || submitted))
               ">
               Invalid input
-            </small>
-            <small class="error" ng-show="err['donation.haemoglobinCount']">
-                {{err["donation.haemoglobinCount"]}}
             </small>
           </div>
         </div>
@@ -230,12 +232,6 @@
               ">
               Invalid input
             </small>
-            <small class="error" ng-show="err['donation.bloodPressureSystolic']">
-                {{err["donation.bloodPressureSystolic"]}}
-            </small>
-            <small class="error" ng-show="err['donation.bloodPressureDiastolic']">
-                {{err["donation.bloodPressureDiastolic"]}}
-            </small>
           </div>
         </div>
       </div>
@@ -257,9 +253,6 @@
               ">
               Invalid input
             </small>
-            <small class="error" ng-show="err['donation.donorPulse']">
-                {{err["donation.donorPulse"]}}
-            </small>
           </div>
         </div>
       </div>
@@ -270,6 +263,7 @@
       <div class="row col-sm-8">
         <div class="form-inline" style="padding-left:5px;">
             <select class="form-control"
+                id="adverseEventType"
                 name="adverseEventType"
                 ng-model="adverseEvent.type"
                 ng-options="adverseEventType as adverseEventType.name for adverseEventType in adverseEventTypes">
@@ -284,6 +278,7 @@
       <div class="row col-sm-8">
         <div class="form-inline" style="padding-left:5px;">
             <input class="form-control"
+              id="adverseEventComment"
               type="text"
               name="adverseEventComment"
               placeholder="Description"

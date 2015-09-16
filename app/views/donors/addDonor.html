@@ -2,7 +2,12 @@
 
 <form class="form-horizontal col-sm-12" role="form" name="addDonorForm" novalidate ng-submit="addDonor(donor, dob, addDonorForm.$valid)">
 
-  <alert type="danger" close="errorMessage = ''" ng-show="err.userMessage">{{err.userMessage}}</alert>
+  <alert type="danger" close="errorMessage = ''" ng-show="err.userMessage">
+          {{err.userMessage}}
+          <ul>
+                  <li ng-show="err['donor.birthDate']"> {{err["donor.birthDate"]}}</li>
+          </ul>
+  </alert>
 
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label">Name</label>
@@ -95,9 +100,6 @@
               (addDonorForm.year.$error.required && (addDonorForm.year.$dirty  || submitted))
             ">
             This cannot be empty
-          </small>
-          <small class="error" ng-show="err['donor.birthDate']">
-                {{err["donor.birthDate"]}}
           </small>
         </div>
         <div>
