@@ -317,7 +317,7 @@ var app = angular.module('bsis', [
         controller  : 'PackTypesCtrl',
         permission: PERMISSIONS.MANAGE_PACK_TYPES
       })
-      .when('/managePackType', {
+      .when('/managePackType/:id', {
         templateUrl : 'views/settings.html',
         controller  : 'ManagePackTypesCtrl',
         permission: PERMISSIONS.MANAGE_PACK_TYPES
