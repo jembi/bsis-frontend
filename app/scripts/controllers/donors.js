@@ -495,7 +495,6 @@ angular.module('bsis')
       }
       else {
         $scope.submitted = true;
-        $scope.addDonationSuccess = false;
         console.log("FORM NOT VALID");
       }
     };

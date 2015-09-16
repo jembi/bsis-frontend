@@ -172,15 +172,17 @@
           <input name="donorWeight" size="4" type="number" id="donorWeight" class="form-control input-sm" placeholder="" ng-model="donation.donorWeight"
           decimal min={{weightMin}} max={{weightMax}}
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.donorWeight.$invalid && submitted) || err['donation.donorWeight']}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.donorWeight.$invalid && submitted)}"
           > <em> {{weightUnit}} </em>
           <div>
-            <small class="error"
-              ng-show="
-                (addDonationForm.donorWeight.$invalid && (addDonationForm.donorWeight.$dirty || submitted))
-              ">
-              Invalid input
-            </small>
+              <small class="error" ng-show="
+            (addDonationForm.donorWeight.$error.min && (addDonationForm.donorWeight.$dirty || submitted))">
+                  Please enter a value above  {{weightMin}}
+              </small>
+              <small class="error" ng-show="
+            (addDonationForm.donorWeight.$error.max && (addDonationForm.donorWeight.$dirty || submitted))">
+                  Please enter a value below {{weightMax}}
+              </small>
           </div>
         </div>
       </div>
@@ -193,18 +195,20 @@
           <input ng-show="getBooleanValue('donation.hbNumericValue')" name="hb" size="5" type="number" id="haemoglobinCount" class="form-control input-sm" placeholder="" ng-model="donation.haemoglobinCount"
           decimal min={{hbMin}} max={{hbMax}}
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.hb.$invalid && submitted) || err['donation.haemoglobinCount']}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.hb.$invalid && submitted)}"
           > <em> {{hbUnit}} </em>
           <select ng-show="getBooleanValue('donation.hbQualitativeValue')" class="form-control input-sm" ng-model="donation.haemoglobinLevel" ng-options="l.value as l.label for l in haemoglobinLevels">
             <option value="" ng-disabled="true">Level</option>
           </select>
           <div>
-            <small class="error"
-              ng-show="
-                (addDonationForm.hb.$invalid && (addDonationForm.hb.$dirty || submitted))
-              ">
-              Invalid input
-            </small>
+              <small class="error" ng-show="
+            (addDonationForm.hb.$error.min && (addDonationForm.hb.$dirty || submitted))">
+                  Please enter a value above  {{hbMin}}
+              </small>
+              <small class="error" ng-show="
+            (addDonationForm.hb.$error.max && (addDonationForm.hb.$dirty || submitted))">
+                  Please enter a value below {{hbMax}}
+              </small>
           </div>
         </div>
       </div>
@@ -217,21 +221,29 @@
           <input name="bpSystolic" size="1" type="number" id="bloodPressureSystolic" class="form-control input-sm" placeholder="" ng-model="donation.bloodPressureSystolic"
           integer min={{bpSystolicMin}} max={{bpSystolicMax}}
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.bpSystolic.$invalid && submitted) || err['donation.bloodPressureSystolic']}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.bpSystolic.$invalid && submitted)}"
           > /
           <input name="bpDiastolic" size="1" type="number" id="bloodPressureDiastolic" class="form-control input-sm" placeholder="" ng-model="donation.bloodPressureDiastolic"
           integer min={{bpDiastolicMin}} max={{bpDiastolicMax}}
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.bpDiastolic.$invalid && submitted) || err['donation.bloodPressureDiastolic']}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.bpDiastolic.$invalid && submitted)}"
           > <em> {{bpUnit}} </em>
           <div>
-            <small class="error"
-              ng-show="
-                (addDonationForm.bpSystolic.$invalid && (addDonationForm.bpSystolic.$dirty || submitted)) ||
-                (addDonationForm.bpDiastolic.$invalid && (addDonationForm.bpDiastolic.$dirty || submitted))
-              ">
-              Invalid input
-            </small>
+              <small class="error" ng-show="
+            (addDonationForm.bpSystolic.$error.min && (addDonationForm.bpSystolic.$dirty || submitted))">
+                  Please enter a value above  {{bpSystolicMin}}
+              </small>
+              <small class="error" ng-show="
+            (addDonationForm.bpSystolic.$error.max && (addDonationForm.bpSystolic.$dirty || submitted))">
+                  Please enter a value below {{bpSystolicMax}}
+              </small><small class="error" ng-show="
+            (addDonationForm.bpDiastolic.$error.min && (addDonationForm.bpDiastolic.$dirty || submitted))">
+              Please enter a value above  {{bpDiastolicMin}}
+          </small>
+              <small class="error" ng-show="
+            (addDonationForm.bpDiastolic.$error.max && (addDonationForm.bpDiastolic.$dirty || submitted))">
+                  Please enter a value below {{bpDiastolicMax}}
+              </small>
           </div>
         </div>
       </div>
@@ -244,15 +256,17 @@
           <input name="pulse" size="4" type="number" id="donorPulse" class="form-control input-sm" placeholder="" ng-model="donation.donorPulse"
           integer min={{pulseMin}} max={{pulseMax}}
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.pulse.$invalid && submitted) || err['donation.donorPulse'] }"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.pulse.$invalid && submitted) }"
           > <em> {{pulseUnit}} </em>
           <div>
-            <small class="error"
-              ng-show="
-                (addDonationForm.pulse.$invalid && (addDonationForm.pulse.$dirty || submitted))
-              ">
-              Invalid input
-            </small>
+              <small class="error" ng-show="
+            (addDonationForm.pulse.$error.min && (addDonationForm.pulse.$dirty || submitted))">
+                  Please enter a value above  {{pulseMin}}
+              </small>
+              <small class="error" ng-show="
+            (addDonationForm.pulse.$error.max && (addDonationForm.pulse.$dirty || submitted))">
+                  Please enter a value below {{pulseMax}}
+              </small>
           </div>
         </div>
       </div>
