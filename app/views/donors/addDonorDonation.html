@@ -52,7 +52,7 @@
           <input name="din" size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="donation.donationIdentificationNumber"
           required integer ng-minlength=7 ng-maxlength=7
           ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.din.$invalid && submitted) || err['donation.donationIdentificationNumber']}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonationForm.din.$invalid && submitted)}"
           >
           <div>
             <small class="error"
@@ -231,14 +231,15 @@
           <div>
               <small class="error" ng-show="
             (addDonationForm.bpSystolic.$error.min && (addDonationForm.bpSystolic.$dirty || submitted))">
-                  Please enter a value above  {{bpSystolicMin}}
+                  Please enter a value above  {{bpSystolicMin}} <br />
               </small>
               <small class="error" ng-show="
             (addDonationForm.bpSystolic.$error.max && (addDonationForm.bpSystolic.$dirty || submitted))">
-                  Please enter a value below {{bpSystolicMax}}
-              </small><small class="error" ng-show="
+                  Please enter a value below {{bpSystolicMax}} <br />
+              </small>
+              <small class="error" ng-show="
             (addDonationForm.bpDiastolic.$error.min && (addDonationForm.bpDiastolic.$dirty || submitted))">
-              Please enter a value above  {{bpDiastolicMin}}
+              Please enter a value above {{bpDiastolicMin}}
           </small>
               <small class="error" ng-show="
             (addDonationForm.bpDiastolic.$error.max && (addDonationForm.bpDiastolic.$dirty || submitted))">
