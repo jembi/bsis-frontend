@@ -61,33 +61,40 @@ angular.module('bsis')
 
     $scope.addNewDonationType = function () {
       DonationTypesService.setDonationType("");
-      $location.path('/manageDonationType');
+      $location.path('/manageDonationType/new');
     };
 
     $scope.manageDonationType = function (donationType) {
       console.log(donationType);
       $scope.donationType = donationType;
       DonationTypesService.setDonationType(donationType);
-      $location.path("/manageDonationType");
+      $location.path("/manageDonationType/" + donationType.id);
     };
 
     $scope.getDonationTypes();
 
   })
 
-  .controller('ManageDonationTypesCtrl', function ($scope, $location, DonationTypesService, ICONS, PERMISSIONS){
+  .controller('ManageDonationTypesCtrl', function ($scope, $location, DonationTypesService, ICONS, PERMISSIONS, $routeParams){
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageDonationType';
 
-    $scope.donationType = DonationTypesService.getDonationType();
-    console.log($scope.donationType);
+    $scope.getDonationType = function () {
+      DonationTypesService.getDonationTypeById($routeParams.id, function (donationType){
+        $scope.donationType = donationType;
+      }, function (err){
+        $scope.err = err;
+      });
+    };
 
-    if ($scope.donationType === ""){
+
+    if ($routeParams.id == "new"){
       $scope.donationType = {
         isDeleted : false
       };
     } else {
+      $scope.getDonationType();
       $scope.disableDonationTypename = true;
     }
 
