@@ -1125,62 +1125,67 @@ angular.module('bsis')
       });
     };
 
-    $scope.checkPulse = function(data) {
-      var min = $scope.pulseMin;
-      var max = $scope.pulseMax;
-      if (data < min) {
+    $scope.checkPulse = function(pulseData) {
+      var min = parseInt($scope.pulseMin);
+      var max = parseInt($scope.pulseMax);
+
+      if (pulseData < min) {
         return "Pulse should be greater than " + min;
       }
 
-      if (data > max) {
-        return "Pulse should be less than " + max;
+      if (pulseData > max) {
+        return pulseData + " Pulse should be less than " + max;
       }
     };
 
-    $scope.checkHb = function(data) {
-      var min = $scope.hbMin;
-      var max = $scope.hbMax;
-      if (data < min) {
+    $scope.checkHb = function(hbData) {
+      var min = parseInt($scope.hbMin);
+      var max = parseInt($scope.hbMax);
+
+      if (hbData < min) {
         return "Hb should be greater than " + min;
       }
 
-      if (data > max) {
+      if (hbData > max) {
         return "Hb should be less than " + max;
       }
     };
 
-    $scope.checkBpSystolic = function(data) {
-      var min = $scope.bpSystolicMin;
-      var max = $scope.bpSystolicMax;
-      if (data < min) {
+    $scope.checkBpSystolic = function(bpSystolicData) {
+      var min = parseInt($scope.bpSystolicMin);
+      var max = parseInt($scope.bpSystolicMax);
+
+      if (bpSystolicData < min) {
         return "BP Systolic should be greater than " + min;
       }
 
-      if (data > max) {
+      if (bpSystolicData > max) {
         return "BP Systolic should be less than " + max;
       }
     };
 
-    $scope.checkBpDiastolic = function(data) {
-      var min = $scope.bpDiastolicMin;
-      var max = $scope.bpDiastolicMax;
-      if (data < min) {
+    $scope.checkBpDiastolic = function(bpDiastolicData) {
+      var min = parseInt($scope.bpDiastolicMin);
+      var max = parseInt($scope.bpDiastolicMax);
+
+      if (bpDiastolicData < min) {
         return "BP Diastolic should be greater than " + min;
       }
 
-      if (data > max) {
+      if (bpDiastolicData > max) {
         return "BP Diastolic should be less than " + max;
       }
     };
 
-    $scope.checkWeight = function(data) {
-      var min = $scope.weightMin;
-      var max = $scope.weightMax;
-      if (data < min) {
+    $scope.checkWeight = function(weightData) {
+      var min = parseInt($scope.weightMin);
+      var max = parseInt($scope.weightMax);
+
+      if (weightData < min) {
         return "Weight should be greater than " + min;
       }
 
-      if (data > max) {
+      if (weightData > max) {
         return "Weight should be less than " + max;
       }
     };
