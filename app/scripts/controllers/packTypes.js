@@ -122,7 +122,7 @@ angular.module('bsis')
       }
     };
 
-    $scope.addPackType = function (packType, packTypeForm) {
+    $scope.addPackType = function (packType) {
       packType.isDeleted = false;
       packType.canPool = null;
       packType.canSplit = null;
@@ -134,7 +134,6 @@ angular.module('bsis')
       PackTypesService.addPackType(packType, function () {
         $scope.go('/packTypes');
       }, function(err) {
-        packTypeForm.$setPristine();
         $scope.serverError = {
           userMessage: err.userMessage,
           fieldErrors: {
@@ -163,7 +162,7 @@ angular.module('bsis')
       }
     };
 
-    $scope.updatePackType = function (packType, packTypeForm) {
+    $scope.updatePackType = function (packType) {
 
       if(!packType.countAsDonation) {
         delete packType.componentType;
@@ -172,7 +171,6 @@ angular.module('bsis')
       PackTypesService.updatePackType(packType, function () {
         $scope.go('/packTypes');
       }, function(err) {
-        packTypeForm.$setPristine();
         $scope.serverError = {
           userMessage: err.userMessage,
           fieldErrors: {
