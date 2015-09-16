@@ -282,7 +282,7 @@ var app = angular.module('bsis', [
         controller  : 'ConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_GENERAL_CONFIGS
       })
-      .when('/manageConfiguration', {
+      .when('/manageConfiguration/:id', {
         templateUrl : 'views/settings.html',
         controller  : 'ManageConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_GENERAL_CONFIGS
