@@ -61,31 +61,38 @@ angular.module('bsis')
 
     $scope.addNewDeferralReason = function () {
       DeferralReasonsService.setDeferralReason("");
-      $location.path('/manageDeferralReason');
+      $location.path('/manageDeferralReason/new');
     };
 
     $scope.manageDeferralReason = function (deferral) {
       $scope.deferral = deferral;
       DeferralReasonsService.setDeferralReason(deferral);
-      $location.path("/manageDeferralReason");
+      $location.path("/manageDeferralReason/" + deferral.id);
     };
 
     $scope.getDeferrals();
 
   })
 
-  .controller('ManageDeferralReasonsCtrl', function ($scope, $location, DeferralReasonsService, ICONS, PERMISSIONS, DATATYPES){
+  .controller('ManageDeferralReasonsCtrl', function ($scope, $location, DeferralReasonsService, ICONS, PERMISSIONS, DATATYPES, $routeParams){
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageDeferralReason';
 
-    $scope.deferral = DeferralReasonsService.getDeferralReason();
+    $scope.getDeferralReason = function () {
+      DeferralReasonsService.getDeferralReasonById($routeParams.id, function(deferralReason){
+        $scope.deferral = deferralReason;
+      }, function (err){
+        $scope.err = err;
+      });
+    };
 
-    if ($scope.deferral === ""){
+    if ($routeParams.id == "new"){
       $scope.deferral = {
         isDeleted : false
       };
     } else {
+      $scope.getDeferralReason();
       $scope.disableDeferralname = true;
     }
 

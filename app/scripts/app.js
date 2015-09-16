@@ -327,7 +327,7 @@ var app = angular.module('bsis', [
         controller : 'DeferralReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DEFERRAL_REASONS
       })
-      .when('/manageDeferralReason', {
+      .when('/manageDeferralReason/:id', {
         templateUrl : 'views/settings.html',
         controller : 'ManageDeferralReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DEFERRAL_REASONS
