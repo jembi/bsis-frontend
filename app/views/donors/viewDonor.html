@@ -133,6 +133,11 @@
                 <td class="field">Total Donations: </td>
                 <td class="value">{{totalDonations}}</td>
               </tr>
+              <tr>
+                <td class="icon"><i class="fa {{icons.EXCLAMATION}}"></i></td>
+                <td class="field">Total Adverse Events: </td>
+                <td class="value" ng-class="{'text-success': totalAdverseEvents < 1, 'text-danger': totalAdverseEvents > 0}">{{totalAdverseEvents}}</td>
+              </tr>
               <tr ng-show="totalDonations > 0">
                 <td class="icon"><i class="fa {{icons.CIRCLEO}}"></i></td>
                 <td class="field">Date of First Donation: </td>

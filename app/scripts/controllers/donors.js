@@ -252,6 +252,7 @@ angular.module('bsis')
           $scope.dateOfFirstDonation = $scope.data.dateOfFirstDonation;
           $scope.totalDonations = $scope.data.totalDonations;
           $scope.dueToDonate = $scope.data.dueToDonate;
+          $scope.totalAdverseEvents = response.totalAdverseEvents;
         }
         else{
         }
@@ -443,6 +444,10 @@ angular.module('bsis')
       // set initial bleed times
       $scope.bleedStartTime = new Date();
       $scope.bleedEndTime = new Date();
+      $scope.adverseEvent = {
+        type: null,
+        comment: ''
+      };
 
       $scope.donationsView = "addDonation";
 
@@ -467,14 +472,18 @@ angular.module('bsis')
         donation.bleedStartTime = bleedStartTime;
         donation.bleedEndTime = bleedEndTime;
 
+        if ($scope.adverseEvent.type) {
+          donation.adverseEvent = $scope.adverseEvent;
+        }
+
         DonorService.addDonation(donation, function (response) {
+
           $scope.addDonationSuccess = true;
           $scope.donation = {};
           $scope.getDonations($scope.donor.id);
           $scope.donationsView = 'viewDonations';
           $scope.submitted = '';
           $scope.getDonorOverview();
-
         }, function (err) {
           $scope.err = err;
           $scope.addDonationSuccess = false;
@@ -482,6 +491,7 @@ angular.module('bsis')
           $scope.getDonorOverview();
 
         });
+
       }
       else {
         $scope.submitted = true;
@@ -516,6 +526,7 @@ angular.module('bsis')
             $scope.donationTypes = $scope.data.donationTypes;
             $scope.donation = $scope.data.addDonationForm;
             $scope.haemoglobinLevels = $scope.data.haemoglobinLevels;
+            $scope.adverseEventTypes = response.adverseEventTypes;
           }
           else{
           }
@@ -604,6 +615,11 @@ angular.module('bsis')
 
     $scope.addDonationSuccess = '';
 
+    $scope.adverseEvent = {
+      type: null,
+      comment: ''
+    };
+
     DonorService.getDonationsFormFields(function(response){
       if (response !== false){
         $scope.data = response;
@@ -611,6 +627,7 @@ angular.module('bsis')
         $scope.packTypes = $scope.data.packTypes;
         $scope.donationTypes = $scope.data.donationTypes;
         $scope.donation = $scope.data.addDonationForm;
+        $scope.adverseEventTypes = response.adverseEventTypes;
       }
       else{
       }
@@ -624,6 +641,10 @@ angular.module('bsis')
       donation.donorPanel = $scope.donorPanels[0];
       // set temporary donationDate
       donation.donationDate = '10/16/2014 12:00:00 am';
+
+      if ($scope.adverseEvent.type) {
+        donation.adverseEvent = $scope.adverseEvent;
+      }
 
       DonorService.addDonation(donation, function(response){
           $scope.addDonationSuccess = true;
@@ -997,6 +1018,7 @@ angular.module('bsis')
         if (response !== false) {
           $scope.haemoglobinLevels = response.haemoglobinLevels;
           $scope.packTypes = response.packTypes;
+          $scope.adverseEventTypes = [null].concat(response.adverseEventTypes);
         }
       });
     };
@@ -1028,6 +1050,7 @@ angular.module('bsis')
           $scope.donationTypes = $scope.data.donationTypes;
           $scope.donation = $scope.data.addDonationForm;
           $scope.haemoglobinLevels = $scope.data.haemoglobinLevels;
+          $scope.adverseEventTypes = response.adverseEventTypes;
         }
         else{
         }

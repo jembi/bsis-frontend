@@ -109,6 +109,24 @@
           <td class="field">Comment: </td>
           <td class="value"><span e-class="xeditable notes" editable-text="donation.notes" e-name="notes">{{donation.notes}}</span></td>
         </tr>
+        <tr>
+          <td class="field">Averse Event Type: </td>
+          <td class="value">
+            <span e-name="adverseEventType"
+                editable-select="donation.adverseEvent.type"
+                e-ng-options="aet as aet.name for aet in adverseEventTypes track by aet.id">
+              {{donation.adverseEvent.type.name}}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="field">Adverse Event Comment: </td>
+          <td class="value">
+            <span e-name="adverseEventComment" e-class="xeditable notes" editable-text="donation.adverseEvent.comment">
+              {{donation.adverseEvent.comment}}
+            </span>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

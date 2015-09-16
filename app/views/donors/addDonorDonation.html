@@ -158,8 +158,8 @@
     <hr style="margin-top:8px;"/>
 
     <div class="form-group">
-      <label for="donorWeight" class="col-sm-3 control-label">Weight</label>
-      <div class="row col-sm-9">
+      <label for="donorWeight" class="col-sm-4 control-label">Weight</label>
+      <div class="row col-sm-8">
         <div class="form-inline" style="padding-left:5px;">
           <input name="donorWeight" size="4" type="number" id="donorWeight" class="form-control input-sm" placeholder="" ng-model="donation.donorWeight"
           decimal min={{weightMin}} max={{weightMax}}
@@ -182,8 +182,8 @@
     </div>
 
     <div class="form-group">
-      <label for="haemoglobinCount" class="col-sm-3 control-label">Hb</label>
-      <div class="row col-sm-9">
+      <label for="haemoglobinCount" class="col-sm-4 control-label">Hb</label>
+      <div class="row col-sm-8">
         <div class="form-inline" style="padding-left:5px;">
           <input ng-show="getBooleanValue('donation.hbNumericValue')" name="hb" size="5" type="number" id="haemoglobinCount" class="form-control input-sm" placeholder="" ng-model="donation.haemoglobinCount"
           decimal min={{hbMin}} max={{hbMax}}
@@ -209,8 +209,8 @@
     </div>
 
     <div class="form-group">
-      <label for="bloodPressureSystolic" class="col-sm-3 control-label">BP</label>
-      <div class="row col-sm-9">
+      <label for="bloodPressureSystolic" class="col-sm-4 control-label">BP</label>
+      <div class="row col-sm-8">
         <div class="form-inline" style="padding-left:5px;">
           <input name="bpSystolic" size="1" type="number" id="bloodPressureSystolic" class="form-control input-sm" placeholder="" ng-model="donation.bloodPressureSystolic"
           integer min={{bpSystolicMin}} max={{bpSystolicMax}}
@@ -242,8 +242,8 @@
     </div>
 
     <div class="form-group">
-      <label for="donorPulse" class="col-sm-3 control-label">Pulse</label>
-      <div class="row col-sm-9">
+      <label for="donorPulse" class="col-sm-4 control-label">Pulse</label>
+      <div class="row col-sm-8">
         <div class="form-inline" style="padding-left:5px;">
           <input name="pulse" size="4" type="number" id="donorPulse" class="form-control input-sm" placeholder="" ng-model="donation.donorPulse"
           integer min={{pulseMin}} max={{pulseMax}}
@@ -261,6 +261,34 @@
                 {{err["donation.donorPulse"]}}
             </small>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="adverseEventType" class="col-sm-4 control-label">Adverse Event</label>
+      <div class="row col-sm-8">
+        <div class="form-inline" style="padding-left:5px;">
+            <select class="form-control"
+                name="adverseEventType"
+                ng-model="adverseEvent.type"
+                ng-options="adverseEventType as adverseEventType.name for adverseEventType in adverseEventTypes">
+              <option value=""></option>
+            </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="adverseEventType" class="col-sm-4 control-label"></label>
+      <div class="row col-sm-8">
+        <div class="form-inline" style="padding-left:5px;">
+            <input class="form-control"
+              type="text"
+              name="adverseEventComment"
+              placeholder="Description"
+              ng-model="adverseEvent.comment" 
+              ng-disabled="!adverseEvent.type" />
         </div>
       </div>
     </div>
