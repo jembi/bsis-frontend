@@ -79,7 +79,8 @@ angular.module('bsis')
     '/manageDonationBatches',
     '/manageClinic',
     '/donorCounselling',
-    '/exportDonorList'
+    '/exportDonorList',
+    '/donorCounselling/\\d+'
   ];
 
   var componentsRoutes = [
@@ -141,48 +142,65 @@ angular.module('bsis')
     '/manageDonationType',
     '/packTypes',
     '/managePackType',
-    '/auditLog'
+    '/auditLog',
+    '/adverseEventTypes',
+    '/addAdverseEventType',
+    '/editAdverseEventType/\\d+'
   ];
+
+  /**
+   * Test the path against the provided regular expressions.
+   *
+   * The expressions are prefixed with ^ and suffixed with $ so that only exact
+   * matches are counted.
+   *
+   * @returns {Boolean} true if at least one route matches.
+   */
+  function matchesRoutes(path, routes) {
+    return routes.some(function(route) {
+      return new RegExp('^' + route + '$').test(path);
+    });
+  }
 
   var setMenuSelection = function() {
 
     // if on donors page, set menu to DONORS
-    if (donorRoutes.indexOf($location.path()) >= 0 || /^\/donorCounselling\/\d+$/.test($location.path())) {
+    if (matchesRoutes($location.path(), donorRoutes)) {
       $scope.currentSection = 'DONORS';
     }
 
     // else if on components page, set menu to COMPONENTS
-    else if (componentsRoutes.indexOf($location.path()) >= 0) {
+    else if (matchesRoutes($location.path(), componentsRoutes)) {
       $scope.currentSection = 'COMPONENTS';
     }
 
     // else if on testing page, set menu to TESTING
-    else if (testingRoutes.indexOf($location.path()) >= 0) {
+    else if (matchesRoutes($location.path(), testingRoutes)) {
       $scope.currentSection = 'TESTING';
     }
 
       // else if on inventory page, set menu to INVENTORY
-    else if (inventoryRoutes.indexOf($location.path()) >= 0) {
+    else if (matchesRoutes($location.path(), inventoryRoutes)) {
       $scope.currentSection = 'INVENTORY';
     }
 
       // else if on labelling page, set menu to LABELLING
-    else if (labellingRoutes.indexOf($location.path()) >= 0) {
+    else if (matchesRoutes($location.path(), labellingRoutes)) {
       $scope.currentSection = 'LABELLING';
     }
 
     // else if on reports page, set menu to REPORTS
-    else if (reportsRoutes.indexOf($location.path()) >= 0) {
+    else if (matchesRoutes($location.path(), reportsRoutes)) {
       $scope.currentSection = 'REPORTS';
     }
 
     // else if on mobile clinic page, set menu to MOBILE
-    else if (mobileRoutes.indexOf($location.path()) >= 0) {
+    else if (matchesRoutes($location.path(), mobileRoutes)) {
       $scope.currentSection = 'MOBILE';
     }
 
     // else if on settings page, set menu to SETTINGS
-    else if (settingsRoutes.indexOf($location.path()) >= 0) {
+    else if (matchesRoutes($location.path(), settingsRoutes)) {
       $scope.currentSection = 'SETTINGS';
     }
 

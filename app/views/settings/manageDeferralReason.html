@@ -1,10 +1,10 @@
 <h3 class="page-header">Manage Deferral Reason</h3>
 <div class="panel panel-default">
   <div class="panel-body">
-    <form name="deferralForm" novalidate class="form-horizontal col-sm-12"  deferral="form" ng-submit="saveDeferralReason(deferral, deferralForm)">
+    <form name="deferralForm" novalidate class="form-horizontal col-sm-12 col-lg-7"  deferral="form" ng-submit="saveDeferralReason(deferral, deferralForm)">
 
-      <div class="row form-group col-sm-12">
-        <label for="reason" class="col-sm-1 control-label">Reason</label>
+      <div class="form-group">
+        <label for="reason" class="col-sm-3 control-label">Reason</label>
         <div class="col-sm-4">
           <div class="form-inline">
             <input size="30" id="reason" name="reason" class="form-control input-sm" ng-model="deferral.reason" required
@@ -24,8 +24,38 @@
       </div>
 
       <div class="row form-group col-sm-12">
-        <label for="isDeleted" class="col-sm-1 control-label">Enabled</label>
+        <label for="isDeleted" class="col-sm-3 control-label">Permanent</label>
         <div class="col-sm-4">
+          <div class="checkbox">
+            <input type="checkbox" id="durationType" name="durationType"
+                ng-model="deferral.durationType"
+                ng-true-value="'PERMANENT'"
+                ng-false-value="'TEMPORARY'"
+                ng-change="handleDurationTypeChange()" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="defaultDuration" class="col-sm-3 control-label">Default Duration</label>
+        <div class="col-sm-6">
+          <div class="form-inline">
+            <input size="3" style="width:4em;" class="form-control input-sm" type="number" id="defaultDuration" name="defaultDuration" min="1"
+                ng-model="deferral.defaultDuration"
+                ng-class="{'ng-invalid ng-dirty': deferralForm.defaultDuration.$invalid && submitted}" 
+                ng-disabled="deferral.durationType === 'PERMANENT'"
+                ng-required="deferral.durationType !== 'PERMANENT'" />
+            day(s)
+            <ng-messages for="deferralForm.defaultDuration.$error" role="alert" ng-show="deferralForm.$submitted || deferralForm.defaultDuration.$dirty">
+              <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group col-sm-12">
+        <label for="isDeleted" class="col-sm-3 control-label">Enabled</label>
+        <div class="col-sm-6">
           <div class="checkbox">
             <input type="checkbox"  id="isDeleted" name="isDeleted" ng-model="deferral.isDeleted" ng-true-value="false" ng-false-value="true" />
           </div>
@@ -33,7 +63,7 @@
       </div>
 
       <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-4">
+        <div class="col-sm-offset-3 col-sm-6">
             <button class="btn btn-primary" type="submit" style="margin-top: 2px">Save Deferral Reason</button>
             <button class="btn btn-primary" type="button" ng-click="cancel(deferralForm)" style="margin-top: 2px">Cancel</button>
         </div>

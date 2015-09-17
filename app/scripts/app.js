@@ -369,6 +369,21 @@ var app = angular.module('bsis', [
         controller  : 'AuditLogCtrl',
         permission: PERMISSIONS.VIEW_AUDIT_LOG
       })
+      .when('/adverseEventTypes', {
+        templateUrl: 'views/settings.html',
+        controller: 'AdverseEventTypesCtrl',
+        permission: PERMISSIONS.VIEW_ADVERSE_EVENT_TYPES
+      })
+      .when('/addAdverseEventType', {
+        templateUrl: 'views/settings.html',
+        controller: 'AddAdverseEventTypeCtrl',
+        permission: PERMISSIONS.ADD_ADVERSE_EVENT_TYPES
+      })
+      .when('/editAdverseEventType/:id', {
+        templateUrl: 'views/settings.html',
+        controller: 'EditAdverseEventTypeCtrl',
+        permission: PERMISSIONS.EDIT_ADVERSE_EVENT_TYPES
+      })
 
       .otherwise({
         redirectTo: '/home'
@@ -573,12 +588,7 @@ var app = angular.module('bsis', [
           scope.ngModel = null;
         };
 
-        var converted = false;
         var ngModel = ctrl[0];
-        ngModel.$parsers.push(function(viewValue) {
-          converted = false;
-          return viewValue.toISOString();
-        });
 
         if (!ngModel) return;
 
@@ -587,14 +597,13 @@ var app = angular.module('bsis', [
             return ngModel.$modelValue;
           },
           function(modelValue){
-            if(!converted && modelValue){
-              converted = true;
+            if (modelValue) {
               var endOfDay = moment(modelValue).endOf('day').toDate();
               ngModel.$setViewValue(endOfDay);
               ngModel.$render();
-
             }
-          });
+          },
+          true);
 
         var unwatch = scope.$watch('ngDisabled', function(newValue, oldValue) {
           if (newValue !== oldValue) {

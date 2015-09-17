@@ -30,10 +30,12 @@ angular.module('bsis')
       angular.copy(donor, addDonor);
 
       // save donor (POST /donor) and assign response donor object to 'donorObj'
-      addDonor.$save(function(response){ 
+      addDonor.$save(function(response){
         donorObj = response.donor;
         onSuccess(response);
-      }, onError); 
+      }, function (err) {
+        onError(err.data);
+      });
     },
 
     updateDonor: function (donor, response){
@@ -50,7 +52,7 @@ angular.module('bsis')
          response(donorObj);
         }, function (){
           response(false);
-        }); 
+        });
 
       });
 
@@ -110,35 +112,39 @@ angular.module('bsis')
         response(false);
       });
     },
-    addDonationToBatch: function (donation, response){
+    addDonationToBatch: function (donation, onSuccess, onError){
       // create $Resource object and assign donation values
       var addDonation = new Api.Donations();
 
       angular.copy(donation, addDonation);
 
       // save donation (POST /donations)
-      addDonation.$save(function(data){ 
+      addDonation.$save(function(data){
         // refresh donation batch after adding donation to it, and add to response
         Api.DonationBatches.get({id:donationBatchObj.id}, function (donationBatch){
           donationBatchObj = donationBatch.donationBatch;
-          response(donationBatch.donationBatch);
+          onSuccess(donationBatch.donationBatch);
         });
-      }, function (){
-        response(false);
-      }); 
+      }, function (err){
+        onError(err.data);
+      });
     },
-    addDonation: function (donation, response){
+    addDonation: function (donation, onSuccess, onError){
       // create $Resource object and assign donation values
       var addDonation = new Api.Donations();
 
       angular.copy(donation, addDonation);
 
+      if (addDonation.adverseEvent && !addDonation.adverseEvent.type) {
+        addDonation.adverseEvent = null;
+      }
+
       // save donation (POST /donations)
-      addDonation.$save(function(data){ 
-        response(true);
-      }, function (){
-        response(false);
-      }); 
+      addDonation.$save(function(data){
+        onSuccess(true);
+      }, function (err){
+        onError(err.data);
+      });
     },
     updateDonation: function (donation, response){
 
@@ -147,11 +153,15 @@ angular.module('bsis')
 
         angular.copy(donation, updateDonation);
 
+        if (updateDonation.adverseEvent && !updateDonation.adverseEvent.type) {
+          updateDonation.adverseEvent = null;
+        }
+
         Api.Donations.update({id:donation.id}, updateDonation, function(data) {
          response(data.donation);
         }, function (){
           response(false);
-        }); 
+        });
 
       });
     },
@@ -168,16 +178,16 @@ angular.module('bsis')
     addDeferral: function (deferral, response){
       // create $Resource object and assign donation values
       var addDeferral = new Api.Deferrals();
-      
+
       angular.copy(deferral, addDeferral);
 
       // save deferral (POST /deferral)
-      addDeferral.$save(function(data){ 
+      addDeferral.$save(function(data){
         response(true);
         console.log("addDeferral response: ",data.deferral);
       }, function (){
         response(false);
-      }); 
+      });
     },
     getDeferrals: function (donorId, response) {
       Api.DonorDeferrals.get({id:donorId}, function (deferrals) {
@@ -237,17 +247,17 @@ angular.module('bsis')
         response(false);
       });
     },
-    addDonationBatch: function (donationBatch, response){
+    addDonationBatch: function (donationBatch, onSuccess, onError){
       // create $Resource object and assign donation values
       var addDonationBatch = new Api.DonationBatches();
 
       angular.copy(donationBatch, addDonationBatch);
 
       // save deferral (POST /deferral)
-      addDonationBatch.$save(function(data){ 
-        response(true);
-      }, function (){
-        response(false);
+      addDonationBatch.$save(function(data){
+        onSuccess(true);
+      }, function (err){
+        onError(err.data);
       }); 
     },
     closeDonationBatch: function (donationBatch, response){
@@ -261,7 +271,7 @@ angular.module('bsis')
          response(data.donationBatch);
         }, function (){
           response(false);
-        }); 
+        });
 
       });
     },

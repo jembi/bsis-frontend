@@ -2,7 +2,12 @@
 
 <form class="form-horizontal col-sm-12" role="form" name="addDonorForm" novalidate ng-submit="addDonor(donor, dob, addDonorForm.$valid)">
 
-  <alert type="danger" close="errorMessage = ''" ng-show="errorMessage">{{errorMessage}}</alert>
+  <alert type="danger" close="" ng-show="err.userMessage">
+          {{err.userMessage}}
+          <ul>
+                  <li ng-show="err['donor.birthDate']"> {{err["donor.birthDate"]}}</li>
+          </ul>
+  </alert>
 
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label">Name</label>
@@ -85,7 +90,7 @@
           max="{{currentYear}}" 
           integer 
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : addDonorForm.year.$invalid && submitted}"
+          ng-class="{'ng-invalid ng-dirty' : (addDonorForm.year.$invalid && submitted) || dobValid === false }"
         >
         <div>
           <small class="error" 
