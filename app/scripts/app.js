@@ -13,7 +13,7 @@ var app = angular.module('bsis', [
   '720kb.tooltips'
 
 ])
-  .config(function($routeProvider, PERMISSIONS, UI) {
+  .config(function($routeProvider, PERMISSIONS, UI, SYSTEMCONFIG) {
     $routeProvider
 
       // DEFAULT VIEW - DISPLAY HOME PAGE IF USER AUTHENTICATED
@@ -107,7 +107,7 @@ var app = angular.module('bsis', [
         templateUrl : 'views/donors.html',
         controller  : 'DonorCounsellingCtrl',
         permission: PERMISSIONS.VIEW_POST_DONATION_COUNSELLING_DONORS,
-        reloadOnSearch: false
+        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
       })
       .when('/donorCounselling/:donorId', {
         templateUrl : 'views/donors.html',
@@ -120,31 +120,36 @@ var app = angular.module('bsis', [
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
         permission: PERMISSIONS.VIEW_COMPONENT_INFORMATION,
-        enabled : UI.COMPONENTS_TAB_ENABLED
+        enabled : UI.COMPONENTS_TAB_ENABLED,
+        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
       })
       .when('/recordComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
         permission: PERMISSIONS.ADD_COMPONENT,
-        enabled : UI.COMPONENTS_TAB_ENABLED
+        enabled : UI.COMPONENTS_TAB_ENABLED,
+        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
       })
       .when('/findComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
         permission: PERMISSIONS.VIEW_COMPONENT,
-        enabled : UI.COMPONENTS_TAB_ENABLED
+        enabled : UI.COMPONENTS_TAB_ENABLED,
+        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
       })
       .when('/discardComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
         permission: PERMISSIONS.DISCARD_COMPONENT,
-        enabled : UI.COMPONENTS_TAB_ENABLED
+        enabled : UI.COMPONENTS_TAB_ENABLED,
+        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
       })
       .when('/findDiscards', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
         permission: PERMISSIONS.VIEW_DISCARDS,
-        enabled : UI.COMPONENTS_TAB_ENABLED
+        enabled : UI.COMPONENTS_TAB_ENABLED,
+        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
       })
 
       // TESTING URLs
@@ -159,7 +164,8 @@ var app = angular.module('bsis', [
         templateUrl : 'views/testing.html',
         controller  : 'TestingCtrl',
         permission: PERMISSIONS.VIEW_TEST_OUTCOME,
-        enabled : UI.TESTING_TAB_ENABLED
+        enabled : UI.TESTING_TAB_ENABLED,
+        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
       })
       .when('/manageTestBatch', {
         templateUrl : 'views/testing.html',
@@ -241,7 +247,8 @@ var app = angular.module('bsis', [
         templateUrl : 'views/labelling.html',
         controller  : 'LabellingCtrl',
         permission: PERMISSIONS.COMPONENT_LABELLING,
-        enabled : UI.LABELLING_TAB_ENABLED
+        enabled : UI.LABELLING_TAB_ENABLED,
+        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
       })
       .when('/labelComponents', {
         templateUrl : 'views/labelling.html',
