@@ -104,7 +104,16 @@ angular.module('bsis')
 
       DonorSummaries: $resource(url + '/donors/summaries'),
 
-      DonorDuplicates: $resource(url + '/donors/duplicates'),
+      AllDonorDuplicates: $resource(url + '/donors/duplicates/all'),
+
+      DonorDuplicates: $resource(url + '/donors/duplicates', {},
+        {
+          query: {
+            method: 'GET',
+            params:{donorNumber:'@donorNumber'}
+          }
+        }
+      ),
 
       ComponentsSearch: $resource(url + '/components/search', {},
         {

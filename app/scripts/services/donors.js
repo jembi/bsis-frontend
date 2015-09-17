@@ -292,8 +292,16 @@ angular.module('bsis')
       Api.Donors.delete({id: donorId}, onSuccess, onError);
     },
 
-    findDonorDuplicates: function(response){
-      Api.DonorDuplicates.get({}, function (data) {
+    findAllDonorDuplicates: function(response){
+      Api.AllDonorDuplicates.get({}, function (data) {
+        response(data);
+      }, function (){
+        response(false);
+      });
+    },
+
+    findDonorDuplicates: function(donorNumber, response){
+      Api.DonorDuplicates.get({donorNumber: donorNumber}, function (data) {
         response(data);
       }, function (){
         response(false);

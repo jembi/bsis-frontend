@@ -615,7 +615,7 @@ angular.module('bsis')
 
     $scope.findDonorDuplicates = function () {
       // FIXME: since we only display the summary, the API endpoint doesn't need to return all duplicates
-      DonorService.findDonorDuplicates(function(response) {
+      DonorService.findAllDonorDuplicates(function(response) {
         if (response !== false) {
           // take the duplicate donor data and convert into a summary array
           data = [];
@@ -704,14 +704,13 @@ angular.module('bsis')
 
     // 1: load the duplicates
     $scope.manageDonorDuplicates = function () {
-      // FIXME: improve this backend service call so it doesn't repeat the duplicate search
-      DonorService.findDonorDuplicates(function(response) {
+      DonorService.findDonorDuplicates(groupKey, function(response) {
         if (response !== false) {
           duplicatesData = [];
-          var duplicates = response.duplicates[groupKey];
-          angular.forEach(duplicates,function(value,index) {
-            value.merge = null;
-            duplicatesData.push(value);
+          var duplicates = response.duplicates;
+          angular.forEach(duplicates, function(donor, index) {
+            donor.merge = null;
+            duplicatesData.push(donor);
           });
         }
         $scope.duplicatesData = duplicatesData;
