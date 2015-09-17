@@ -38,7 +38,7 @@ angular.module('bsis')
 
     $scope.canAddDonors = false;
 
-    $scope.findDonor = function () {   
+    $scope.findDonor = function () {
       DonorService.findDonor($scope.donorSearch, function(response) {
         data = response.donors;
         $scope.searchResults = true;
@@ -129,41 +129,46 @@ angular.module('bsis')
       $location.path("/addDonor");
     };
 
-    $scope.addDonor = function (newDonor, dob, valid){
+    $scope.addDonor = function (newDonor, dob, valid) {
 
-      if (valid){
+      if (valid) {
 
         newDonor.birthDate = dob.year + "-" + dob.month + "-" + dob.dayOfMonth;
 
-        DonorService.addDonor(newDonor, function() {
+        DonorService.addDonor(newDonor, function () {
+            $scope.format = DATEFORMAT;
+            $scope.initDate = $scope.donor.birthDate;
+            $scope.calIcon = 'fa-calendar';
 
-          $scope.format = DATEFORMAT;
-          $scope.initDate = $scope.donor.birthDate;
-          $scope.calIcon = 'fa-calendar';
-
-          $scope.donorBirthDateOpen = false;
-          $scope.submitted = '';
-          $location.path("/viewDonor");
-        }, function(err) {
-          $scope.errorMessage = err.data.userMessage;
-        });
+            $scope.donorBirthDateOpen = false;
+            $scope.submitted = '';
+            $location.path("/viewDonor");
+          },
+          function (err) {
+            $scope.err = err;
+            if (err["donor.birthDate"]) {
+              $scope.dobValid = false;
+            }
+          });
       }
-      else{
+      else {
         $scope.submitted = true;
       }
     };
 
     $scope.updateDonor = function (donor){
-      
+
       DonorService.updateDonor(donor, function(response){
-        if (response !== false){
           $scope.donor = response;
-        }
-        else{
-          // TODO: handle case where response == false
-        }
-      });
-      
+        },
+        // display error from back end
+        function(err){
+          $scope.err = err;
+          if (err["donor.birthDate"]) {
+            $scope.dobValid = false;
+          }
+        });
+
     };
 
     $scope.edit = function () {
@@ -183,9 +188,9 @@ angular.module('bsis')
             params.total(orderedData.length); // set total for pagination
             $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
-    }); 
+    });
   })
-  
+
   // Controller for Viewing Donors
   .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
       GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout) {
@@ -295,7 +300,7 @@ angular.module('bsis')
         count: 6,          // count per page
         filter: {},
         sorting: {}
-      }, 
+      },
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
@@ -354,7 +359,7 @@ angular.module('bsis')
         count: 6,          // count per page
         filter: {},
         sorting: {}
-      }, 
+      },
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
@@ -452,9 +457,9 @@ angular.module('bsis')
 
     $scope.addDonationSuccess = '';
 
-    $scope.addDonation = function (donation, donationBatch, bleedStartTime, bleedEndTime, valid){
+    $scope.addDonation = function (donation, donationBatch, bleedStartTime, bleedEndTime, valid) {
 
-      if(valid){
+      if (valid) {
         $scope.addDonationSuccess = '';
 
         // set donation center, site & date to those of the donation batch
@@ -471,24 +476,22 @@ angular.module('bsis')
           donation.adverseEvent = $scope.adverseEvent;
         }
 
-        DonorService.addDonation(donation, function(response){
-          if (response !== false){
+        DonorService.addDonation(donation, function (response) {
 
-            $scope.addDonationSuccess = true;
-            $scope.donation = {};
-            $scope.getDonations($scope.donor.id);
-            $scope.donationsView = 'viewDonations';
-            $scope.submitted = '';
-          }
-          else{
-            // TODO: handle case where response == false
-            $scope.addDonationSuccess = false;
-          }
-
+          $scope.addDonationSuccess = true;
+          $scope.donation = {};
+          $scope.getDonations($scope.donor.id);
+          $scope.donationsView = 'viewDonations';
+          $scope.submitted = '';
+          $scope.getDonorOverview();
+        }, function (err) {
+          $scope.err = err;
+          $scope.addDonationSuccess = false;
           // refresh donor overview after adding donation
           $scope.getDonorOverview();
 
         });
+
       }
       else {
         $scope.submitted = true;
@@ -586,7 +589,7 @@ angular.module('bsis')
         $scope.donor.firstName = $scope.searchDonor.firstName;
         $scope.donor.lastName = $scope.searchDonor.lastName;
 
-        // clear $scope.searchDonor fields after assigning them to $scope.donor 
+        // clear $scope.searchDonor fields after assigning them to $scope.donor
         $scope.searchDonor.firstName = '';
         $scope.searchDonor.lastName = '';
 
@@ -643,17 +646,12 @@ angular.module('bsis')
       }
 
       DonorService.addDonation(donation, function(response){
-        if (response === true){
-
           $scope.addDonationSuccess = true;
           $scope.donation = {};
           $location.path("/addDonation");
-
-        }
-        else{
-          // TODO: handle case where response == false
-          $scope.addDonationSuccess = false;
-        }
+      }, function (err){
+        $scope.err = err;
+        $scope.addDonationSuccess = false;
       });
     };
 
@@ -682,7 +680,7 @@ angular.module('bsis')
     });
 
     $scope.getDonors = function (searchParameters) {
-      
+
       $scope.selectedDonorPanels = [];
       angular.forEach(searchParameters.donorPanels,function(value,index){
           $scope.selectedDonorPanels.push(value.id);
@@ -701,7 +699,7 @@ angular.module('bsis')
           $scope.data = data;
           $scope.donorListSearchResults = true;
           $scope.donorListSearchCount = $scope.data.length;
-          
+
         }
         else{
           $scope.donorListSearchResults = false;
@@ -723,7 +721,7 @@ angular.module('bsis')
             params.total(orderedData.length); // set total for pagination
             $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
-    }); 
+    });
 
     $scope.$watch("data", function () {
       $timeout(function(){ $scope.donorListTableParams.reload(); });
@@ -816,7 +814,7 @@ angular.module('bsis')
       count: 6,          // count per page
       filter: {},
       sorting: {}
-    }, 
+    },
     {
       defaultSort: 'asc',
       counts: [], // hide page counts control
@@ -840,7 +838,7 @@ angular.module('bsis')
       count: 8,          // count per page
       filter: {},
       sorting: {}
-    }, 
+    },
     {
       defaultSort: 'asc',
       counts: [], // hide page counts control
@@ -871,7 +869,6 @@ angular.module('bsis')
 
         }, function (err){
           $scope.err = err;
-         
         });
       }
       else{
@@ -881,13 +878,13 @@ angular.module('bsis')
     };
 
     $scope.manageClinic = function (item){
-      
+
       $scope.donationBatch = item;
       DonorService.setDonationBatch($scope.donationBatch);
       data = $scope.donationBatch.donations;
       $scope.data = data;
       $location.path("/manageClinic");
-      
+
     };
 
   })
@@ -948,7 +945,7 @@ angular.module('bsis')
       count: 8,          // count per page
       filter: {},
       sorting: {}
-    }, 
+    },
     {
       defaultSort: 'asc',
       counts: [], // hide page counts control
@@ -1009,7 +1006,7 @@ angular.module('bsis')
           // TODO: handle case where response == false
         }
       });
-      
+
     };
 
     $scope.viewDonationSummary = function (din) {
@@ -1074,9 +1071,9 @@ angular.module('bsis')
         donation.bleedEndTime = bleedEndTime;
 
         DonorService.addDonationToBatch(donation, function(response){
-          if (response !== false){
 
-            $scope.addDonationSuccess = true;
+
+            //$scope.addDonationSuccess = true;
             $scope.donation = {};
             $scope.donationBatchView = 'viewDonationBatch';
 
@@ -1084,11 +1081,11 @@ angular.module('bsis')
             data = $scope.donationBatch.donations;
             $scope.data = data;
             $scope.submitted = '';
-          }
-          else{
-            // TODO: handle case where response == false
+            $scope.err = {};
+          },
+          function (err) {
+            $scope.err = err;
             $scope.addDonationSuccess = false;
-          }
         });
       }
       else {
@@ -1128,8 +1125,66 @@ angular.module('bsis')
       });
     };
 
+    $scope.checkPulse = function(data) {
+      var min = $scope.pulseMin;
+      var max = $scope.pulseMax;
+      if (data < min) {
+        return "Pulse should be greater than " + min;
+      }
+
+      if (data > max) {
+        return "Pulse should be less than " + max;
+      }
+    };
+
+    $scope.checkHb = function(data) {
+      var min = $scope.hbMin;
+      var max = $scope.hbMax;
+      if (data < min) {
+        return "Hb should be greater than " + min;
+      }
+
+      if (data > max) {
+        return "Hb should be less than " + max;
+      }
+    };
+
+    $scope.checkBpSystolic = function(data) {
+      var min = $scope.bpSystolicMin;
+      var max = $scope.bpSystolicMax;
+      if (data < min) {
+        return "BP Systolic should be greater than " + min;
+      }
+
+      if (data > max) {
+        return "BP Systolic should be less than " + max;
+      }
+    };
+
+    $scope.checkBpDiastolic = function(data) {
+      var min = $scope.bpDiastolicMin;
+      var max = $scope.bpDiastolicMax;
+      if (data < min) {
+        return "BP Diastolic should be greater than " + min;
+      }
+
+      if (data > max) {
+        return "BP Diastolic should be less than " + max;
+      }
+    };
+
+    $scope.checkWeight = function(data) {
+      var min = $scope.weightMin;
+      var max = $scope.weightMax;
+      if (data < min) {
+        return "Weight should be greater than " + min;
+      }
+
+      if (data > max) {
+        return "Weight should be less than " + max;
+      }
+    };
+
   })
 
 ;
-
-
