@@ -2,7 +2,7 @@
 
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
     <span ng-show="!donationSummaryForm.$visible">
-      <em><a has-permission="{{permissions.EDIT_DONATION}}" href="" ng-click="donationSummaryForm.$show()" >Edit</a></em> | 
+      <em><a has-permission="{{permissions.EDIT_DONATION}}" href="" ng-click="donationSummaryForm.$show()" >Edit</a></em> |
       <em><a href="" ng-click="viewDonationBatch()">Done</a></em>
     </span>
     <span ng-show="donationSummaryForm.$visible">
@@ -77,14 +77,14 @@
         <tr>
           <td class="field">Pulse: </td>
           <td class="value">
-              <span e-class="xeditable w50" editable-text="donation.donorPulse"  onbeforesave="checkPulse($data)" e-name="donorPulse">{{donation.donorPulse}}</span>
+              <span e-class="xeditable w50" editable-number="donation.donorPulse"  onbeforesave="checkPulse($data)" e-name="donorPulse">{{donation.donorPulse}}</span>
               <span> {{pulseUnit}}</span>
           </td>
         </tr>
         <tr >
           <td class="field">Hb: </td>
           <td class="value">
-            <span ng-show="getBooleanValue('donation.hbNumericValue')" e-class="xeditable w50" editable-text="donation.haemoglobinCount" onbeforesave="checkHb($data)" e-name="haemoglobinCount">{{donation.haemoglobinCount}}</span>
+            <span ng-show="getBooleanValue('donation.hbNumericValue')" e-class="xeditable w50" editable-number="donation.haemoglobinCount" onbeforesave="checkHb($data)" e-name="haemoglobinCount">{{donation.haemoglobinCount}}</span>
               <span> {{hbUnit}}</span>
             <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
             <span ng-show="getBooleanValue('donation.hbQualitativeValue')" editable-select="donation.haemoglobinLevel" e-name="haemoglobinLevel" e-ng-options="l.value as l.label for l in haemoglobinLevels" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase}}</span>
@@ -94,14 +94,14 @@
         <tr>
           <td class="field">BP: </td>
           <td class="value">
-              <span e-class="xeditable w50" editable-text="donation.bloodPressureSystolic" onbeforesave="checkBpSystolic($data)" e-name="bloodPressureSystolic">{{donation.bloodPressureSystolic}}</span>/<span e-class="xeditable w50" editable-text="donation.bloodPressureDiastolic" onbeforesave="checkBpDiastolic($data)" e-name="bloodPressureDiastolic">{{donation.bloodPressureDiastolic}}</span>
+              <span e-class="xeditable w50" editable-number="donation.bloodPressureSystolic" onbeforesave="checkBpSystolic($data)" e-name="bloodPressureSystolic">{{donation.bloodPressureSystolic}}</span>/<span e-class="xeditable w50" editable-number="donation.bloodPressureDiastolic" onbeforesave="checkBpDiastolic($data)" e-name="bloodPressureDiastolic">{{donation.bloodPressureDiastolic}}</span>
               <span> {{bpUnit}}</span>
           </td>
         </tr>
         <tr>
           <td class="field">Weight: </td>
           <td class="value">
-              <span e-class="xeditable w50" editable-text="donation.donorWeight" onbeforesave="checkWeight($data)" e-name="donorWeight">{{donation.donorWeight}}</span>
+              <span e-class="xeditable w50" editable-number="donation.donorWeight" onbeforesave="checkWeight($data)" e-name="donorWeight">{{donation.donorWeight}}</span>
               <span> {{weightUnit}}</span>
           </td>
         </tr>
@@ -131,4 +131,3 @@
     </table>
   </div>
 </form>
-
