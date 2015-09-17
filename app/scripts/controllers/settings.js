@@ -21,24 +21,24 @@ angular.module('bsis')
       } else if ($location.path().indexOf('/manageConfiguration') === 0 && path === "/configurations") {
         $scope.selection = '/manageConfiguration';
         return true;
-      } else if ($location.path() === "/manageDeferralReason" && path === "/deferralReasons") {
-        $scope.selection = $location.path();
+      } else if ($location.path().indexOf("/manageDeferralReason") === 0 && path === "/deferralReasons") {
+        $scope.selection = '/manageDeferralReason';
         return true;
-      } else if ($location.path() === "/manageDiscardReason" && path === "/discardReasons") {
-        $scope.selection = $location.path();
+      } else if ($location.path().indexOf("/manageDiscardReason") === 0 && path === "/discardReasons") {
+        $scope.selection = '/manageDiscardReason';
         return true;
       } else if ($location.path().indexOf('/manageRole') === 0 && path === "/roles") {
         $scope.selection = '/manageRole';
         return true;
-      } else if ($location.path() === "/manageUser" && path === "/users") {
-        $scope.selection = $location.path();
+      } else if ($location.path().indexOf("/manageUser") === 0 && path === "/users") {
+        $scope.selection = "/manageUser";
         return true;
-      }else if ($location.path() === "/manageDonationType" && path === "/donationTypes") {
-        $scope.selection = $location.path();
+      }else if ($location.path().indexOf( "/manageDonationType") === 0 && path === "/donationTypes") {
+        $scope.selection =  "/manageDonationType";
         return true;
       }
-      else if ($location.path() === "/managePackType" && path === "/packTypes") {
-        $scope.selection = $location.path();
+      else if ($location.path().indexOf("/managePackType") === 0 && path === "/packTypes") {
+        $scope.selection = "/managePackType";
         return true;
       } else {
         return false;
