@@ -705,8 +705,6 @@ angular.module('bsis')
 
 
     $scope.getDonors = function (searchParameters) {
-      
-      $scope.selectedDonorPanels = [];
 
       searchParameters.search = true;
       $location.search(searchParameters);
@@ -740,6 +738,22 @@ angular.module('bsis')
         var clinicDate = getISOString($scope.donorList.clinicDate);
         $scope.donorList.clinicDate = clinicDate;
       }
+      if ($routeParams.bloodGroups) {
+        var bloodGroups = $routeParams.bloodGroups;
+        if (!angular.isArray(bloodGroups)) {
+          bloodGroups = [bloodGroups];
+        }
+        $scope.donorList.bloodGroups = bloodGroups;
+      }
+
+      if ($routeParams.donorPanels) {
+        var donorPanels = $routeParams.donorPanels;
+        if (!angular.isArray(donorPanels)) {
+          donorPanels = [donorPanels];
+        }
+        $scope.donorList.donorPanels = donorPanels;
+      }
+
       $scope.getDonors($scope.donorList);
     }
 
