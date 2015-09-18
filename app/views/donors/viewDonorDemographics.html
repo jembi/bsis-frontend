@@ -30,8 +30,9 @@
         <td class="field">Email: </td>
         <td class="value">
             <span e-class="xeditable" editable-email="donor.contact.email" e-name="email">{{donor.contact.email}}</span>
+            <br />
             <small class="error" ng-show="demographicsForm.email.$invalid">
-                Email address format invalid
+                Invalid input
             </small>
         </td>
       </tr>
