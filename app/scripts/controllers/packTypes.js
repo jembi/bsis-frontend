@@ -58,7 +58,7 @@ angular.module('bsis')
 
     $scope.addNewPackType = function () {
       PackTypesService.setPackType("");
-      $location.path('/managePackType/new');
+      $location.path('/managePackType');
     };
 
     $scope.packTypesTableParams = new ngTableParams({
@@ -203,7 +203,7 @@ angular.module('bsis')
     };
 
     // managing addition of new pack type
-    if ($routeParams.id == "new") {
+    if (!$routeParams.id) {
       $scope.managePackType = 'addPackType';
       $scope.packType = {
         testSampleProduced: true,

@@ -61,7 +61,7 @@ angular.module('bsis')
 
     $scope.addNewDiscardReason = function () {
       DiscardReasonsService.setDiscardReason("");
-      $location.path('/manageDiscardReason/new');
+      $location.path('/manageDiscardReason');
     };
 
     $scope.manageDiscardReason = function (discard) {
@@ -87,7 +87,7 @@ angular.module('bsis')
       });
     };
 
-    if ($routeParams.id == "new") {
+    if (!$routeParams.id) {
       $scope.discard = {
         isDeleted : false
       };

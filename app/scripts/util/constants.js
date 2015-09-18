@@ -245,7 +245,6 @@ angular.module('bsis')
   })
   .constant('UI', UI)
   .constant('DONATION', DONATION)
-  .constant('SYSTEMCONFIG', SYSTEMCONFIG)
 ;
 
   

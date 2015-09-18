@@ -61,7 +61,7 @@ angular.module('bsis')
 
     $scope.addNewDeferralReason = function () {
       DeferralReasonsService.setDeferralReason("");
-      $location.path('/manageDeferralReason/new');
+      $location.path('/manageDeferralReason');
     };
 
     $scope.manageDeferralReason = function (deferral) {
@@ -87,7 +87,7 @@ angular.module('bsis')
       });
     };
 
-    if ($routeParams.id == "new"){
+    if (!$routeParams.id){
       $scope.deferral = {
         isDeleted : false
       };

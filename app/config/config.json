@@ -1,6 +1,5 @@
 {
   "apiHost": "localhost",
   "apiPort": "8080",
-  "apiApp": "bsis",
-  "reloadOnSearch": false
+  "apiApp": "bsis"
 }

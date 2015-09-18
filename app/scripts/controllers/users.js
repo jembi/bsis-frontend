@@ -72,7 +72,7 @@ angular.module('bsis')
 
     $scope.addNewUser = function () {
       UsersService.setUser("");
-      $location.path('/manageUser/new');
+      $location.path('/manageUser');
     };
 
     $scope.manageUser = function (item) {
@@ -138,7 +138,7 @@ angular.module('bsis')
     };
 
 
-    if ($routeParams.id == "new"){
+    if (!$routeParams.id){
       $scope.user = {};
       $scope.user.modifyPassword = true;
       $scope.emailRequired = "required";

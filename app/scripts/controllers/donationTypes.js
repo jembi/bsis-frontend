@@ -61,7 +61,7 @@ angular.module('bsis')
 
     $scope.addNewDonationType = function () {
       DonationTypesService.setDonationType("");
-      $location.path('/manageDonationType/new');
+      $location.path('/manageDonationType');
     };
 
     $scope.manageDonationType = function (donationType) {
@@ -89,7 +89,7 @@ angular.module('bsis')
     };
 
 
-    if ($routeParams.id == "new"){
+    if (!$routeParams.id){
       $scope.donationType = {
         isDeleted : false
       };

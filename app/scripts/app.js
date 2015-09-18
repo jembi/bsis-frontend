@@ -13,7 +13,10 @@ var app = angular.module('bsis', [
   '720kb.tooltips'
 
 ])
-  .config(function($routeProvider, PERMISSIONS, UI, SYSTEMCONFIG) {
+  .config(function($routeProvider, PERMISSIONS, UI) {
+    
+    var reloadOnSearch = false;
+    
     $routeProvider
 
       // DEFAULT VIEW - DISPLAY HOME PAGE IF USER AUTHENTICATED
@@ -79,7 +82,7 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.ADD_DONATION,
         enabled : UI.DONORS_TAB_ENABLED
       })
-      .when('/manageClinic/:id', {
+      .when('/manageClinic/:id?', {
         templateUrl : 'views/donors.html',
         controller  : 'ViewDonationBatchCtrl',
         permission: PERMISSIONS.VIEW_DONATION_BATCH,
@@ -91,7 +94,7 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.EXPORT_CLINIC_DATA,
         enabled : UI.DONORS_TAB_ENABLED
       })
-      .when('/viewDonor/:id', {
+      .when('/viewDonor/:id?', {
         templateUrl : 'views/donors.html',
         controller  : 'ViewDonorCtrl',
         permission: PERMISSIONS.VIEW_DONOR,
@@ -107,7 +110,7 @@ var app = angular.module('bsis', [
         templateUrl : 'views/donors.html',
         controller  : 'DonorCounsellingCtrl',
         permission: PERMISSIONS.VIEW_POST_DONATION_COUNSELLING_DONORS,
-        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
+        reloadOnSearch: reloadOnSearch
       })
       .when('/donorCounselling/:donorId', {
         templateUrl : 'views/donors.html',
@@ -121,35 +124,35 @@ var app = angular.module('bsis', [
         controller  : 'ComponentsCtrl',
         permission: PERMISSIONS.VIEW_COMPONENT_INFORMATION,
         enabled : UI.COMPONENTS_TAB_ENABLED,
-        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
+        reloadOnSearch: reloadOnSearch
       })
       .when('/recordComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
         permission: PERMISSIONS.ADD_COMPONENT,
         enabled : UI.COMPONENTS_TAB_ENABLED,
-        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
+        reloadOnSearch: reloadOnSearch
       })
       .when('/findComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
         permission: PERMISSIONS.VIEW_COMPONENT,
         enabled : UI.COMPONENTS_TAB_ENABLED,
-        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
+        reloadOnSearch: reloadOnSearch
       })
       .when('/discardComponents', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
         permission: PERMISSIONS.DISCARD_COMPONENT,
         enabled : UI.COMPONENTS_TAB_ENABLED,
-        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
+        reloadOnSearch: reloadOnSearch
       })
       .when('/findDiscards', {
         templateUrl : 'views/components.html',
         controller  : 'ComponentsCtrl',
         permission: PERMISSIONS.VIEW_DISCARDS,
         enabled : UI.COMPONENTS_TAB_ENABLED,
-        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
+        reloadOnSearch: reloadOnSearch
       })
 
       // TESTING URLs
@@ -165,7 +168,7 @@ var app = angular.module('bsis', [
         controller  : 'TestingCtrl',
         permission: PERMISSIONS.VIEW_TEST_OUTCOME,
         enabled : UI.TESTING_TAB_ENABLED,
-        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
+        reloadOnSearch: reloadOnSearch
       })
       .when('/manageTestBatch', {
         templateUrl : 'views/testing.html',
@@ -173,31 +176,31 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.VIEW_TEST_BATCH,
         enabled : UI.TESTING_TAB_ENABLED
       })
-      .when('/viewTestBatch/:id', {
+      .when('/viewTestBatch/:id?', {
         templateUrl : 'views/testing.html',
         controller  : 'ViewTestBatchCtrl',
         permission: PERMISSIONS.VIEW_TEST_BATCH,
         enabled : UI.TESTING_TAB_ENABLED
       })
-      .when('/manageTTITesting/:id', {
+      .when('/manageTTITesting/:id?', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled : UI.TESTING_TAB_ENABLED
       })
-      .when('/managePendingTests/:id', {
+      .when('/managePendingTests/:id?', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled : UI.TESTING_TAB_ENABLED
       })
-      .when('/manageBloodGroupTesting/:id', {
+      .when('/manageBloodGroupTesting/:id?', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled : UI.TESTING_TAB_ENABLED
       })
-      .when('/manageBloodGroupMatchTesting/:id', {
+      .when('/manageBloodGroupMatchTesting/:id?', {
         templateUrl : 'views/testing.html',
         controller  : 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
@@ -248,7 +251,7 @@ var app = angular.module('bsis', [
         controller  : 'LabellingCtrl',
         permission: PERMISSIONS.COMPONENT_LABELLING,
         enabled : UI.LABELLING_TAB_ENABLED,
-        reloadOnSearch: SYSTEMCONFIG.reloadOnSearch
+        reloadOnSearch: reloadOnSearch
       })
       .when('/labelComponents', {
         templateUrl : 'views/labelling.html',
@@ -289,7 +292,7 @@ var app = angular.module('bsis', [
         controller  : 'ConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_GENERAL_CONFIGS
       })
-      .when('/manageConfiguration/:id', {
+      .when('/manageConfiguration/:id?', {
         templateUrl : 'views/settings.html',
         controller  : 'ManageConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_GENERAL_CONFIGS
@@ -304,7 +307,7 @@ var app = angular.module('bsis', [
         controller : 'UsersCtrl',
         permission: PERMISSIONS.MANAGE_USERS
       })
-      .when('/manageUser/:id', {
+      .when('/manageUser/:id?', {
         templateUrl : 'views/settings.html',
         controller : 'ManageUserCtrl',
         permission: PERMISSIONS.MANAGE_USERS
@@ -314,7 +317,7 @@ var app = angular.module('bsis', [
         controller : 'RolesCtrl',
         permission: PERMISSIONS.MANAGE_ROLES
       })
-      .when('/manageRole/:id', {
+      .when('/manageRole/:id?', {
         templateUrl : 'views/settings.html',
         controller : 'ManageRolesCtrl',
         permission: PERMISSIONS.MANAGE_ROLES
@@ -324,7 +327,7 @@ var app = angular.module('bsis', [
         controller  : 'PackTypesCtrl',
         permission: PERMISSIONS.MANAGE_PACK_TYPES
       })
-      .when('/managePackType/:id', {
+      .when('/managePackType/:id?', {
         templateUrl : 'views/settings.html',
         controller  : 'ManagePackTypesCtrl',
         permission: PERMISSIONS.MANAGE_PACK_TYPES
@@ -334,7 +337,7 @@ var app = angular.module('bsis', [
         controller : 'DeferralReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DEFERRAL_REASONS
       })
-      .when('/manageDeferralReason/:id', {
+      .when('/manageDeferralReason/:id?', {
         templateUrl : 'views/settings.html',
         controller : 'ManageDeferralReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DEFERRAL_REASONS
@@ -344,7 +347,7 @@ var app = angular.module('bsis', [
         controller : 'DiscardReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DISCARD_REASONS
       })
-      .when('/manageDiscardReason/:id', {
+      .when('/manageDiscardReason/:id?', {
         templateUrl : 'views/settings.html',
         controller : 'ManageDiscardReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DISCARD_REASONS
@@ -354,7 +357,7 @@ var app = angular.module('bsis', [
         controller : 'DonationTypesCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_TYPES
       })
-      .when('/manageDonationType/:id', {
+      .when('/manageDonationType/:id?', {
         templateUrl : 'views/settings.html',
         controller : 'ManageDonationTypesCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_TYPES
@@ -374,7 +377,7 @@ var app = angular.module('bsis', [
         controller: 'AddAdverseEventTypeCtrl',
         permission: PERMISSIONS.ADD_ADVERSE_EVENT_TYPES
       })
-      .when('/editAdverseEventType/:id', {
+      .when('/editAdverseEventType/:id?', {
         templateUrl: 'views/settings.html',
         controller: 'EditAdverseEventTypeCtrl',
         permission: PERMISSIONS.EDIT_ADVERSE_EVENT_TYPES
@@ -805,7 +808,6 @@ var app = angular.module('bsis', [
 
 var UI = {};
 var DONATION = {DONOR:{}};
-var SYSTEMCONFIG = {};
 // initialize system & user config before app starts
 (function() {
 
@@ -817,7 +819,6 @@ var SYSTEMCONFIG = {};
 
 
     return $http.get('config/config.json').then(function(response) {
-      SYSTEMCONFIG = response.data;
       app.constant('SYSTEMCONFIG', response.data);
 
         var url = 'http://' + response.data.apiHost + ':' + response.data.apiPort + '/' + response.data.apiApp;

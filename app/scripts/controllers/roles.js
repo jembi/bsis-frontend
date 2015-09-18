@@ -60,7 +60,7 @@ angular.module('bsis')
     $scope.addNewRole = function () {
       RolesService.setRole("");
       RolesService.setPermissions("");
-      $location.path('/manageRole/new');
+      $location.path('/manageRole');
     };
 
 
@@ -184,7 +184,7 @@ angular.module('bsis')
     };
 
     // managing addition of new role
-    if ($routeParams.id == "new"){
+    if (!$routeParams.id){
       $scope.role = {
         permissions: []
       };

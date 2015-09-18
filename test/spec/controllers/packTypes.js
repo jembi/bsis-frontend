@@ -55,7 +55,7 @@ describe('Controller: PackTypesCtrl', function () {
       httpBackend.flush();
 
       scope.addNewPackType();
-      expect(location.path()).toBe('/managePackType/new');
+      expect(location.path()).toBe('/managePackType');
 
     });
 

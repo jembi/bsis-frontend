@@ -57,7 +57,7 @@ describe('Controller: ConfigurationsCtrl', function () {
       httpBackend.flush();
 
       scope.addNewConfiguration();
-      expect(location.path()).toBe('/manageConfiguration/new');
+      expect(location.path()).toBe('/manageConfiguration');
 
     });
 

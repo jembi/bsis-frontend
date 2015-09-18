@@ -61,7 +61,7 @@ angular.module('bsis')
 
     $scope.addNewConfiguration = function () {
       ConfigurationsService.setConfiguration("");
-      $location.path('/manageConfiguration/new');
+      $location.path('/manageConfiguration');
     };
 
     $scope.manageConfiguration = function (configuration) {
@@ -88,7 +88,7 @@ angular.module('bsis')
       });
     };
 
-    if ($routeParams.id == 'new') {
+    if (!$routeParams.id) {
       $scope.configuration = {};
     } else {
       $scope.getConfig();
