@@ -197,6 +197,10 @@ angular.module('bsis')
     // managing addition of new pack type
     if (PackTypesService.getPackType() === '') {
       $scope.managePackType = 'addPackType';
+      $scope.packType = {
+        testSampleProduced: true,
+        countAsDonation: true
+      };
     }
     // managing update of existing pack type
     else {
