@@ -28,22 +28,27 @@
       <tr>
         <td class="icon"></td>
         <td class="field">Email: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.contact.email" e-name="mobileNumber">{{donor.contact.email}}</span></td>
+        <td class="value">
+            <span e-class="xeditable" editable-email="donor.contact.email" e-name="email">{{donor.contact.email}}</span>
+            <small class="error" ng-show="demographicsForm.email.$invalid">
+                Email address format invalid
+            </small>
+        </td>
       </tr>
       <tr>
         <td class="icon"></td>
         <td class="field">Mobile: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.contact.mobileNumber" e-name="mobileNumber">{{donor.contact.mobileNumber}}</span></td>
+        <td class="value"><span e-class="xeditable" editable-number="donor.contact.mobileNumber" e-name="mobileNumber">{{donor.contact.mobileNumber}}</span></td>
       </tr>
       <tr>
         <td class="icon"></td>
         <td class="field">Home: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.contact.homeNumber" e-name="homeNumber">{{donor.contact.homeNumber}}</span></td>
+        <td class="value"><span e-class="xeditable" editable-number="donor.contact.homeNumber" e-name="homeNumber">{{donor.contact.homeNumber}}</span></td>
       </tr>
       <tr>
         <td class="icon"></td>
         <td class="field">Work: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.contact.workNumber" e-name="workNumber">{{donor.contact.workNumber}}</span></td>
+        <td class="value"><span e-class="xeditable" editable-number="donor.contact.workNumber" e-name="workNumber">{{donor.contact.workNumber}}</span></td>
       </tr>
 
       <tr><td></td></tr>
