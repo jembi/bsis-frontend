@@ -13,7 +13,7 @@ angular.module('bsis')
         return true;
       } else if ($location.path() === path) {
         return true;
-      } else if ($location.path() === "/settings" && path === "/packTypes") {
+      } else if ($location.path() === '/settings' && path === '/packTypes') {
         return true;
       } else {
         return false;
@@ -81,7 +81,7 @@ angular.module('bsis')
         }
       });
 
-    $scope.$watch("data", function () {
+    $scope.$watch('data', function () {
       $timeout(function(){ $scope.packTypesTableParams.reload(); });
     });
 
@@ -90,11 +90,11 @@ angular.module('bsis')
   .controller('ManagePackTypesCtrl', function ($scope, $location, PackTypesService, ICONS, PERMISSIONS,ComponentTypesService, $routeParams) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
-    $scope.selection = "/managePackType";
+    $scope.selection = '/managePackType';
     $scope.packType = PackTypesService.getPackType();
-    $scope.serverError = {};
+    $scope.serverError = null;
 
-    if ($scope.packType === ""){
+    if ($scope.packType === ''){
       $scope.packType = {
         countAsDonation : false
       };
@@ -122,7 +122,7 @@ angular.module('bsis')
       }
     };
 
-    $scope.addPackType = function (packType, packTypeForm) {
+    $scope.addPackType = function (packType) {
       packType.isDeleted = false;
       packType.canPool = null;
       packType.canSplit = null;
@@ -131,44 +131,53 @@ angular.module('bsis')
         delete packType.componentType;
       }
 
-      PackTypesService.addPackType(packType, function (response, err) {
-        if (response !== false) {
-          $scope.go('/packTypes');
-        } else {
-          if(err.packType){
-            $scope.packTypeInvalid = "ng-invalid";
-            $scope.serverError.packType = err.packType;
+      PackTypesService.addPackType(packType, function () {
+        $scope.go('/packTypes');
+      }, function(err) {
+        $scope.serverError = {
+          userMessage: err.userMessage,
+          fieldErrors: {
+            'type.packType': err['type.packType'],
+            'type.countAsDonation': err['type.countAsDonation']
           }
-        }
+        };
       });
     };
 
     $scope.switchCountAsDonation = function (){
       if(!$scope.packType.countAsDonation) {
         $scope.tempComponentType = $scope.packType.componentType;
-        $scope.packType.componentType = "";
+        $scope.packType.componentType = '';
       }
       else {
         $scope.packType.componentType= $scope.tempComponentType;
-        $scope.tempComponentType = "";
+        $scope.tempComponentType = '';
       }
     };
 
-    $scope.updatePackType = function (packType, packTypeForm) {
+    $scope.handleTestSampleProducedToggle = function() {
+      if (!$scope.packType.testSampleProduced) {
+        $scope.packType.countAsDonation = false;
+        $scope.switchCountAsDonation();
+      }
+    };
+
+    $scope.updatePackType = function (packType) {
 
       if(!packType.countAsDonation) {
         delete packType.componentType;
       }
 
-      PackTypesService.updatePackType(packType, function (response, err) {
-        if (response !== false) {
-          $scope.go('/packTypes');
-        } else {
-          if(err.packType){
-            $scope.packTypeInvalid = "ng-invalid";
-            $scope.serverError.packType = err.packType;
+      PackTypesService.updatePackType(packType, function () {
+        $scope.go('/packTypes');
+      }, function(err) {
+        $scope.serverError = {
+          userMessage: err.userMessage,
+          fieldErrors: {
+            'type.packType': err['type.packType'],
+            'type.countAsDonation': err['type.countAsDonation']
           }
-        }
+        };
       });
     };
 
@@ -195,7 +204,11 @@ angular.module('bsis')
 
     // managing addition of new pack type
     if ($routeParams.id == "new") {
-      $scope.managePackType = "addPackType";
+      $scope.managePackType = 'addPackType';
+      $scope.packType = {
+        testSampleProduced: true,
+        countAsDonation: true
+      };
     }
     // managing update of existing pack type
     else {

@@ -22,7 +22,11 @@
                     <td data-title="'Period between donations'"  header-class="text-left" class="text-center">
                         {{pack.periodBetweenDonations}}
                     </td>
-                    <td data-title="'Count as donation'" header-class="text-left" class="text-center" sortable="'countAsDonation'">
+                    <td data-title="'Test Sample Produced'" header-class="text-left" class="text-center" sortable="'testSampleProduced'">
+                        <span ng-if="pack.testSampleProduced"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                        <span ng-if="!pack.testSampleProduced"><i class="fa {{icons.SQUARE}}"></i></span>
+                    </td>
+                    <td data-title="'Components Produced'" header-class="text-left" class="text-center" sortable="'countAsDonation'">
                         <span ng-if="pack.countAsDonation == true"><i class="fa {{icons.SQUARECHECK}}"></i></span>
                         <span ng-if="pack.countAsDonation == false"><i class="fa {{icons.SQUARE}}"></i></span>
                     </td>
