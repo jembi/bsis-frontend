@@ -37,6 +37,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   });
 
   $scope.clearSearch = function() {
+    $location.search({});
     $scope.searched = false;
     $scope.search = angular.copy(master);
   };

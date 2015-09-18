@@ -94,14 +94,17 @@ angular.module('bsis')
       $scope.searchResults = '';
       $scope.selectedComponentTypes = {};
       $scope.componentSelected = '';
+      $location.search({});
     };
 
     $scope.clearForm = function(form){
       form.$setPristine();
+      $location.search({});
       $scope.submitted = '';
     };
 
     $scope.clearProcessComponentForm = function () {
+      $location.search({});
       $scope.component = {};
       $scope.componentSelected = '';
       $scope.submitted = '';
@@ -109,6 +112,7 @@ angular.module('bsis')
     };
 
     $scope.clearDiscardComponentForm = function () {
+      $location.search({});
       $scope.discard = {};
       $scope.componentSelected = '';
       $scope.submitted = '';

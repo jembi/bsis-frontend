@@ -81,6 +81,7 @@ angular.module('bsis')
     };
 
     $scope.clear = function () {
+      $location.search({});
       $scope.packDIN = '';
       $scope.search = {};
       $scope.searchResults = '';

@@ -102,6 +102,7 @@ angular.module('bsis')
     };
 
     $scope.clear = function () {
+      $location.search({});
       $scope.donorSearch = {};
       $scope.searchResults = '';
       $scope.donation = {};
@@ -113,6 +114,7 @@ angular.module('bsis')
 
     $scope.clearForm = function(form){
       form.$setPristine();
+      $location.search({});
       $scope.submitted = '';
     };
 
@@ -705,10 +707,6 @@ angular.module('bsis')
     $scope.getDonors = function (searchParameters) {
       
       $scope.selectedDonorPanels = [];
-      angular.forEach(searchParameters.donorPanels,function(value,index){
-          $scope.selectedDonorPanels.push(value.id);
-      });
-      searchParameters.donorPanels = $scope.selectedDonorPanels;
 
       searchParameters.search = true;
       $location.search(searchParameters);

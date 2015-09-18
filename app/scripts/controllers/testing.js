@@ -75,6 +75,7 @@ angular.module('bsis')
     };
 
     $scope.clear = function () {
+      $location.search({});
       $scope.selectedDonationBatches = {};
       $scope.searchResults = '';
       $scope.testResultsSearch = {};
@@ -82,6 +83,7 @@ angular.module('bsis')
     };
 
     $scope.clearForm = function(form){
+      $location.search({});
       form.$setPristine();
       $scope.submitted = '';
     };
