@@ -171,6 +171,14 @@ angular.module('bsis')
 
     };
 
+    $scope.validateForm = function (form){
+      if (form.$valid) {
+        return true;
+      } else {
+        return '';
+      }
+    };
+
     $scope.edit = function () {
     };
 

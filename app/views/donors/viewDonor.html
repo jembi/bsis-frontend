@@ -1,13 +1,34 @@
-<form editable-form name="editableForm" onaftersave="updateDonor(donor)">
+<form editable-form name="editableForm" onaftersave="updateDonor(donor)" onbeforesave="validateForm(editableForm)" novalidate >
 
-  <span class="h2"> 
-    <span editable-text="donor.firstName" e-name="firstName" e-class="xeditable name" e-required>{{donor.firstName}}</span> 
-    <span editable-text="donor.lastName" e-name="lastName" e-class="xeditable name" e-required>{{donor.lastName}}</span><small><em>
-    <span ng-if="donor.title"> 
-    <span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span>.</span>
-    <span editable-text="donor.callingName" e-name="callingName" e-class="xeditable name">{{donor.callingName}}</span>
-    </em></small>
-  </span>
+      <span class="h2">
+        <span editable-text="donor.firstName" e-name="firstName" e-class="xeditable name"
+              e-required>{{donor.firstName}}</span>
+      </span>
+    <small class="error" ng-show="editableForm.firstName.$invalid">
+        This cannot be empty
+    </small>
+    <span class="h2">
+        <span editable-text="donor.lastName" e-name="lastName" e-class="xeditable name" e-required>
+            {{donor.lastName}}
+        </span>
+    </span>
+    <small class="error" ng-show="editableForm.lastName.$invalid">
+        This cannot be empty
+    </small>
+    <span class="h2">
+        <small>
+            <em>
+                <span ng-if="donor.title">
+                    <span   editable-select="donor.title" e-class="xeditable title"
+                            e-ng-options="item as item for item in title"
+                            e-name="title">{{donor.title}}</span>.
+                </span>
+                <span   editable-text="donor.callingName" e-name="callingName"
+                        e-class="xeditable name">{{donor.callingName}}
+                </span>
+            </em>
+        </small>
+    </span>
 
     <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
       <span ng-switch-when="male" class="fa-stack fa-1x">
