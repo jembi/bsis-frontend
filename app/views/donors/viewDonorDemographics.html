@@ -1,4 +1,4 @@
-<form editable-form name="demographicsForm" onaftersave="updateDonor(donor)">
+<form editable-form name="demographicsForm" onaftersave="updateDonor(donor)" novalidate>
 
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
     <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="demographicsForm.$show()" ng-show="!demographicsForm.$visible">Edit</a></em>
@@ -32,24 +32,24 @@
             <span e-class="xeditable" editable-email="donor.contact.email" e-name="email">{{donor.contact.email}}</span>
             <br />
             <small class="error" ng-show="demographicsForm.email.$invalid">
-                Invalid input
+                Email address format invalid
             </small>
         </td>
       </tr>
       <tr>
         <td class="icon"></td>
         <td class="field">Mobile: </td>
-        <td class="value"><span e-class="xeditable" editable-number="donor.contact.mobileNumber" e-name="mobileNumber">{{donor.contact.mobileNumber}}</span></td>
+        <td class="value"><span e-class="xeditable" editable-text="donor.contact.mobileNumber" e-name="mobileNumber">{{donor.contact.mobileNumber}}</span></td>
       </tr>
       <tr>
         <td class="icon"></td>
         <td class="field">Home: </td>
-        <td class="value"><span e-class="xeditable" editable-number="donor.contact.homeNumber" e-name="homeNumber">{{donor.contact.homeNumber}}</span></td>
+        <td class="value"><span e-class="xeditable" editable-text="donor.contact.homeNumber" e-name="homeNumber">{{donor.contact.homeNumber}}</span></td>
       </tr>
       <tr>
         <td class="icon"></td>
         <td class="field">Work: </td>
-        <td class="value"><span e-class="xeditable" editable-number="donor.contact.workNumber" e-name="workNumber">{{donor.contact.workNumber}}</span></td>
+        <td class="value"><span e-class="xeditable" editable-text="donor.contact.workNumber" e-name="workNumber">{{donor.contact.workNumber}}</span></td>
       </tr>
 
       <tr><td></td></tr>

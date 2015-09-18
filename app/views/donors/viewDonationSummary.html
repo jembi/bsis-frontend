@@ -1,4 +1,4 @@
-<form editable-form name="donationSummaryForm" onaftersave="updateDonation(donation)">
+<form editable-form name="donationSummaryForm" onaftersave="updateDonation(donation)" novalidate>
 
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
     <span ng-show="!donationSummaryForm.$visible">
@@ -77,32 +77,79 @@
         <tr>
           <td class="field">Pulse: </td>
           <td class="value">
-              <span e-class="xeditable w50" editable-number="donation.donorPulse"  onbeforesave="checkPulse($data)" e-name="donorPulse">{{donation.donorPulse}}</span>
+              <span e-class="xeditable w50" editable-number="donation.donorPulse"
+                    e-max={{pulseMax}} e-min={{pulseMin}} e-decimal
+                    e-name="donorPulse">{{donation.donorPulse}}</span>
               <span> {{pulseUnit}}</span>
+              <br />
+              <small class="error" ng-show="donationSummaryForm.donorPulse.$error.min">
+                  Please enter a value above  {{pulseMin}}
+              </small>
+              <small class="error" ng-show="donationSummaryForm.donorPulse.$error.max">
+                  Please enter a value below  {{pulseMax}}
+              </small>
           </td>
         </tr>
         <tr >
           <td class="field">Hb: </td>
           <td class="value">
-            <span ng-show="getBooleanValue('donation.hbNumericValue')" e-class="xeditable w50" editable-number="donation.haemoglobinCount" onbeforesave="checkHb($data)" e-name="haemoglobinCount">{{donation.haemoglobinCount}}</span>
+            <span ng-show="getBooleanValue('donation.hbNumericValue')" e-class="xeditable w50" editable-number="donation.haemoglobinCount"
+                  e-min={{hbMin}} e-max={{hbMax}} e-decimal
+                  e-name="haemoglobinCount">{{donation.haemoglobinCount}}</span>
               <span> {{hbUnit}}</span>
+
             <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
             <span ng-show="getBooleanValue('donation.hbQualitativeValue')" editable-select="donation.haemoglobinLevel" e-name="haemoglobinLevel" e-ng-options="l.value as l.label for l in haemoglobinLevels" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase}}</span>
             <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> )</span>
+              <br />
+              <small class="error" ng-show="donationSummaryForm.haemoglobinCount.$error.min">
+                  Please enter a value above  {{hbMin}}
+              </small>
+              <small class="error" ng-show="donationSummaryForm.haemoglobinCount.$error.max">
+                  Please enter a value below  {{hbMax}}
+              </small>
           </td>
         </tr>
         <tr>
           <td class="field">BP: </td>
           <td class="value">
-              <span e-class="xeditable w50" editable-number="donation.bloodPressureSystolic" onbeforesave="checkBpSystolic($data)" e-name="bloodPressureSystolic">{{donation.bloodPressureSystolic}}</span>/<span e-class="xeditable w50" editable-number="donation.bloodPressureDiastolic" onbeforesave="checkBpDiastolic($data)" e-name="bloodPressureDiastolic">{{donation.bloodPressureDiastolic}}</span>
+              <span e-class="xeditable w50" editable-number="donation.bloodPressureSystolic"
+                    e-min={{bpSystolicMin}} e-max={{bpSystolicMax}} e-decimal
+                    e-name="bloodPressureSystolic">{{donation.bloodPressureSystolic}}</span>/
+              <span e-class="xeditable w50" editable-number="donation.bloodPressureDiastolic"
+                    e-min={{bpDiastolicMin}} e-max={{bpDiastolicMax}} e-decimal
+                    e-name="bloodPressureDiastolic">{{donation.bloodPressureDiastolic}}</span>
               <span> {{bpUnit}}</span>
+              <br />
+              <small class="error" ng-show="donationSummaryForm.bloodPressureSystolic.$error.min">
+                  Please enter a value above  {{bpSystolicMin}}
+              </small>
+              <small class="error" ng-show="donationSummaryForm.bloodPressureSystolic.$error.max">
+                  Please enter a value below  {{bpSystolicMax}}
+              </small>
+              <br />
+              <small class="error" ng-show="donationSummaryForm.bloodPressureDiastolic.$error.min">
+                  Please enter a value above  {{bpDiastolicMin}}
+              </small>
+              <small class="error" ng-show="donationSummaryForm.bloodPressureDiastolic.$error.max">
+                  Please enter a value below  {{bpDiastolicMax}}
+              </small>
           </td>
         </tr>
         <tr>
           <td class="field">Weight: </td>
           <td class="value">
-              <span e-class="xeditable w50" editable-number="donation.donorWeight" onbeforesave="checkWeight($data)" e-name="donorWeight">{{donation.donorWeight}}</span>
-              <span> {{weightUnit}}</span>
+              <span e-class="xeditable w50" editable-number="donation.donorWeight"
+                    e-min={{weightMin}} e-max={{weightMax}} e-decimal
+                    e-name="donorWeight">{{donation.donorWeight}}</span>
+              <span>{{weightUnit}}</span>
+              <br />
+              <small class="error" ng-show="donationSummaryForm.donorWeight.$error.min">
+                  Please enter a value above  {{weightMin}}
+              </small>
+              <small class="error" ng-show="donationSummaryForm.donorWeight.$error.max">
+                  Please enter a value below  {{weightMax}}
+              </small>
           </td>
         </tr>
         <tr>
