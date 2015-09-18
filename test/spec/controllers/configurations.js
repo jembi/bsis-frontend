@@ -25,6 +25,7 @@ describe('Controller: ConfigurationsCtrl', function () {
     mockData = readJSON('test/mockData/generalConfigs.json');
     httpBackend = $httpBackend;
     httpBackend.when('GET', new RegExp('.*/configurations')).respond(mockData);
+    httpBackend.when('GET', new RegExp('.*/configurations/1')).respond(mockData[0]);
 
     createController = function() {
       scope = $rootScope.$new();
@@ -51,11 +52,12 @@ describe('Controller: ConfigurationsCtrl', function () {
 
     it('should open the manage config page to create a new config', function () {
       httpBackend.expectGET(new RegExp('.*/configurations'));
+
       createController();
       httpBackend.flush();
 
       scope.addNewConfiguration();
-      expect(location.path()).toBe('/manageConfiguration');
+      expect(location.path()).toBe('/manageConfiguration/new');
 
     });
 
@@ -63,9 +65,10 @@ describe('Controller: ConfigurationsCtrl', function () {
       httpBackend.expectGET(new RegExp('.*/configurations'));
       createController();
       httpBackend.flush();
-
       scope.manageConfiguration(scope.configurations[0]);
-      expect(location.path()).toBe('/manageConfiguration');
+
+      expect(location.path()).toBe('/manageConfiguration/1');
+
       expect(scope.configuration.name).toBe('donation.bpSystolicMax');
       expect(scope.configuration.description).toBe('Blood Pressure systolic value cannot be more than 250');
       expect(scope.configuration.value).toBe('250');
@@ -100,6 +103,7 @@ describe('Controller: ManageConfigurationsCtrl', function() {
     mockData = readJSON('test/mockData/generalConfigs.json');
     httpBackend = $httpBackend;
     httpBackend.when('GET', new RegExp('.*/configurations')).respond(mockData);
+    httpBackend.when('GET', new RegExp('.*/configurations/1')).respond(mockData[0]);
 
 
 
@@ -121,6 +125,8 @@ describe('Controller: ManageConfigurationsCtrl', function() {
 
     it('should route to the appropriate method when the form is submitted', function () {
       createController();
+      httpBackend.expectGET(new RegExp('.*/configurations'));
+      httpBackend.flush();
 
       spyOn(scope, 'addConfiguration');
       spyOn(scope, 'updateConfiguration');

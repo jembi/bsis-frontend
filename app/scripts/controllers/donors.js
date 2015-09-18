@@ -685,6 +685,10 @@ angular.module('bsis')
     var data = [{}];
     $scope.data = data;
     $scope.donorListSearchResults = '';
+    $scope.donorList = {
+      donorPanels: [],
+      bloodGroups: []
+    };
 
 
     DonorService.getDonorListFormFields(function(response){

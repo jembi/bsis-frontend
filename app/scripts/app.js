@@ -805,6 +805,7 @@ var app = angular.module('bsis', [
 
 var UI = {};
 var DONATION = {DONOR:{}};
+var SYSTEMCONFIG = {};
 // initialize system & user config before app starts
 (function() {
 
@@ -816,6 +817,7 @@ var DONATION = {DONOR:{}};
 
 
     return $http.get('config/config.json').then(function(response) {
+      SYSTEMCONFIG = response.data;
       app.constant('SYSTEMCONFIG', response.data);
 
         var url = 'http://' + response.data.apiHost + ':' + response.data.apiPort + '/' + response.data.apiApp;
