@@ -1,4 +1,4 @@
-<form editable-form name="demographicsForm" onaftersave="updateDonor(donor)" novalidate>
+<form editable-form name="demographicsForm" onbeforesave="validateForm(demographicsForm)"  onaftersave="updateDonor(donor)" novalidate>
 
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
     <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="demographicsForm.$show()" ng-show="!demographicsForm.$visible">Edit</a></em>
@@ -29,7 +29,9 @@
         <td class="icon"></td>
         <td class="field">Email: </td>
         <td class="value">
-            <span e-class="xeditable" editable-email="donor.contact.email" e-name="email">{{donor.contact.email}}</span>
+            <span e-class="xeditable" editable-email="donor.contact.email"
+                  e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
+                  e-name="email">{{donor.contact.email}}</span>
             <br />
             <small class="error" ng-show="demographicsForm.email.$invalid">
                 Email address format invalid
@@ -80,8 +82,8 @@
         <td class="icon"></td>
         <td class="field">Address: </td>
         <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressLine1" e-name="homeAddressLine1">{{donor.address.homeAddressLine1}}</span></td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressLine1" e-name="postalAddressLine1">{{donor.address.postalAddressLine1}}</td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressLine1" e-name="workAddressLine1">{{donor.address.workAddressLine1}}</td>
+        <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressLine1" e-name="postalAddressLine1">{{donor.address.postalAddressLine1}}</span></td>
+        <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressLine1" e-name="workAddressLine1">{{donor.address.workAddressLine1}}</span></td>
       </tr>
       <tr>
         <td class="icon"></td>

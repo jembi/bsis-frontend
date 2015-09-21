@@ -684,7 +684,7 @@ var app = angular.module('bsis', [
   /*  Custom directive to calculate age from birthDate
       example use: <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
   */
-  .directive('calculateAge', function() {
+  .directive('calculateAge', ['$timeout', function($timeout) {
     return {
         restrict: 'EA',
         scope: {
@@ -692,23 +692,27 @@ var app = angular.module('bsis', [
             age: '=',
         },
         link: function ($scope) {
-          var age = '';
-          if($scope.dob === ''){
-            $scope.age = '';
-          }
-          else{
-            var today = new Date();
-            var birthDate = new Date($scope.dob);
-            age = today.getFullYear() - birthDate.getFullYear();
-            var m = today.getMonth() - birthDate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
+          $timeout(function() {
+            var age = '';
+            if($scope.dob === ''){
+              $scope.age = '';
             }
-            $scope.age = age;
-          }
+            else{
+              var today = new Date();
+              var birthDate = new Date($scope.dob);
+              console.log(birthDate);
+              age = today.getFullYear() - birthDate.getFullYear();
+              var m = today.getMonth() - birthDate.getMonth();
+              if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                  age--;
+              }
+              $scope.age = age;
+            }
+          }, 200);
         }
+
     };
-  })
+  }])
 
   .directive('selectOnFocus', function () {
     return {
