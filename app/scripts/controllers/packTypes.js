@@ -32,7 +32,7 @@ angular.module('bsis')
     $scope.managePackType  = function (packType){
       $scope.packType = packType;
       PackTypesService.setPackType(packType);
-      $location.path('/managePackType');
+      $location.path("/managePackType/" + packType.id);
     };
 
     $scope.clearForm = function(form){
@@ -57,7 +57,7 @@ angular.module('bsis')
     $scope.getPackTypes();
 
     $scope.addNewPackType = function () {
-      PackTypesService.setPackType('');
+      PackTypesService.setPackType("");
       $location.path('/managePackType');
     };
 
@@ -87,7 +87,7 @@ angular.module('bsis')
 
   })
 
-  .controller('ManagePackTypesCtrl', function ($scope, $location, PackTypesService, ICONS, PERMISSIONS,ComponentTypesService) {
+  .controller('ManagePackTypesCtrl', function ($scope, $location, PackTypesService, ICONS, PERMISSIONS,ComponentTypesService, $routeParams) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/managePackType';
@@ -194,8 +194,16 @@ angular.module('bsis')
       $scope.submitted = '';
     };
 
+    $scope.getPackType = function () {
+      PackTypesService.getPackTypeById($routeParams.id, function (packType) {
+        $scope.packType = packType;
+      }, function (err){
+        $scope.serverError = err;
+      });
+    };
+
     // managing addition of new pack type
-    if (PackTypesService.getPackType() === '') {
+    if (!$routeParams.id) {
       $scope.managePackType = 'addPackType';
       $scope.packType = {
         testSampleProduced: true,
@@ -204,8 +212,8 @@ angular.module('bsis')
     }
     // managing update of existing pack type
     else {
-      $scope.packType = PackTypesService.getPackType();
-      $scope.managePackType = 'updatePackType';
+      $scope.getPackType();
+      $scope.managePackType = "updatePackType";
     }
 
   })

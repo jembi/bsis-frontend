@@ -26,10 +26,7 @@ angular.module('bsis')
     $scope.data = data;
     $scope.age = '';
 
-    $scope.donorSearch = {
-      firstName: '',
-      lastName: ''
-    };
+    $scope.donorSearch = $routeParams;
     $scope.searchResults = '';
 
     var currentTime = new Date();
@@ -38,7 +35,11 @@ angular.module('bsis')
 
     $scope.canAddDonors = false;
 
+
+
     $scope.findDonor = function () {
+      $scope.donorSearch.search = true;
+      $location.search($scope.donorSearch);
       DonorService.findDonor($scope.donorSearch, function(response) {
         data = response.donors;
         $scope.searchResults = true;
@@ -49,20 +50,24 @@ angular.module('bsis')
       });
     };
 
+    if ($routeParams.search) {
+      $scope.findDonor();
+    }
+
     $scope.$watch("data", function () {
       $timeout(function(){ $scope.tableParams.reload(); });
     });
 
     $scope.isCurrent = function(path) {
       var initialView = '';
-      if ($location.path() === "/viewDonor" && path === "/findDonor") {
-        $scope.selection = $location.path();
+      if ($location.path().indexOf('/viewDonor') === 0 && path === "/findDonor") {
+        $scope.selection = '/viewDonor';
         return true;
       } else if ($location.path() === "/addDonor" && path === "/findDonor") {
         $scope.selection = $location.path();
         return true;
-      } else if ($location.path() === "/manageClinic" && path === "/manageDonationBatches") {
-        $scope.selection = $location.path();
+      } else if ($location.path().indexOf("/manageClinic") === 0 && path === "/manageDonationBatches") {
+        $scope.selection = '/manageClinic';
         return true;
       } else if ($location.path().indexOf('/donorCounselling') === 0 && path.indexOf('/donorCounselling') === 0) {
         var currentPath = $location.path();
@@ -97,6 +102,7 @@ angular.module('bsis')
     };
 
     $scope.clear = function () {
+      $location.search({});
       $scope.donorSearch = {};
       $scope.searchResults = '';
       $scope.donation = {};
@@ -108,10 +114,12 @@ angular.module('bsis')
 
     $scope.clearForm = function(form){
       form.$setPristine();
+      $location.search({});
       $scope.submitted = '';
     };
 
     $scope.viewDonor = function (item) {
+
       $scope.donor = item;
       DonorService.setDonor(item);
 
@@ -121,7 +129,7 @@ angular.module('bsis')
 
       $scope.donorBirthDateOpen = false;
 
-      $location.path("/viewDonor");
+      $location.path("/viewDonor/" + item.id).search({});
     };
 
     $scope.addNewDonor = function (donor){
@@ -135,21 +143,22 @@ angular.module('bsis')
 
         newDonor.birthDate = dob.year + "-" + dob.month + "-" + dob.dayOfMonth;
 
-        DonorService.addDonor(newDonor, function () {
-            $scope.format = DATEFORMAT;
-            $scope.initDate = $scope.donor.birthDate;
-            $scope.calIcon = 'fa-calendar';
+        DonorService.addDonor(newDonor, function(donor) {
 
-            $scope.donorBirthDateOpen = false;
-            $scope.submitted = '';
-            $location.path("/viewDonor");
-          },
-          function (err) {
-            $scope.err = err;
-            if (err["donor.birthDate"]) {
-              $scope.dobValid = false;
-            }
-          });
+          $scope.format = DATEFORMAT;
+          $scope.initDate = $scope.donor.birthDate;
+          $scope.calIcon = 'fa-calendar';
+
+          $scope.donorBirthDateOpen = false;
+          $scope.submitted = '';
+          $location.path("/viewDonor/" + donor.id).search({});
+        }, function(err) {
+          $scope.errorMessage = err.data.userMessage;
+          $scope.err = err;
+          if (err["donor.birthDate"]) {
+            $scope.dobValid = false;
+          }
+        });
       }
       else {
         $scope.submitted = true;
@@ -193,7 +202,14 @@ angular.module('bsis')
 
   // Controller for Viewing Donors
   .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
-      GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout) {
+      GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout,$routeParams) {
+
+    DonorService.getDonorById($routeParams.id, function (donor) {
+      DonorService.setDonor(donor);
+      $scope.donor = donor;
+    }, function(err){
+      $location.path('/findDonor');
+    });
 
     $scope.data = {};
     $scope.age = '';
@@ -223,7 +239,7 @@ angular.module('bsis')
     $scope.pulseMin = DONATION.DONOR.PULSE_MIN;
     $scope.pulseMax = DONATION.DONOR.PULSE_MAX;
 
-    $scope.donor = DonorService.getDonor();
+
 
     DonorService.getDonorFormFields(function(response){
       if (response !== false){
@@ -242,7 +258,7 @@ angular.module('bsis')
     });
 
     $scope.getDonorOverview = function () {
-      DonorService.getDonorOverview($scope.donor.id, function(response){
+      DonorService.getDonorOverview($routeParams.id, function(response){
         if (response !== false){
           $scope.data = response;
           $scope.flaggedForCounselling = $scope.data.flaggedForCounselling;
@@ -658,40 +674,44 @@ angular.module('bsis')
   })
 
   // Controller for Viewing/Exporting Donor Lists
-  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
+  .controller('DonorListCtrl', function ($scope, $location, DonorService, BLOODGROUP, MONTH, ICONS, DATEFORMAT, $filter, ngTableParams, $timeout, $routeParams) {
 
+
+    function getISOString(maybeDate) {
+      return angular.isDate(maybeDate) ? maybeDate.toISOString() : maybeDate;
+    }
     $scope.icons = ICONS;
 
     var data = [{}];
     $scope.data = data;
     $scope.donorListSearchResults = '';
-    $scope.donorList = {};
-    $scope.donorList.donorPanels = [];
-    $scope.donorList.bloodGroups = [];
+    $scope.donorList = {
+      donorPanels: [],
+      bloodGroups: []
+    };
+
 
     DonorService.getDonorListFormFields(function(response){
       if (response !== false){
         $scope.donorPanels = response.donorPanels;
-        //$scope.bloodGroups = response.bloodGroups;
         $scope.bloodGroups = BLOODGROUP.options;
+        $scope.donorList = $routeParams;
+        if (!$scope.donorList.donorPanels){
+          $scope.donorList.donorPanels = [];
+        }
+
+        if (!$scope.donorList.bloodGroups){
+          $scope.donorList.bloodGroups = [];
+        }
+      } else {
+
       }
-      else{
-      }
-    });
+
 
     $scope.getDonors = function (searchParameters) {
 
-      $scope.selectedDonorPanels = [];
-      angular.forEach(searchParameters.donorPanels,function(value,index){
-          $scope.selectedDonorPanels.push(value.id);
-      });
-      searchParameters.donorPanels = $scope.selectedDonorPanels;
-
-      $scope.selectedBloodGroups = [];
-      angular.forEach(searchParameters.bloodGroups,function(value,index){
-          $scope.selectedBloodGroups.push(value);
-      });
-      searchParameters.bloodGroups = $scope.selectedBloodGroups;
+      searchParameters.search = true;
+      $location.search(searchParameters);
 
       DonorService.findDonorListDonors(searchParameters, function(response){
         if (response !== false){
@@ -706,6 +726,40 @@ angular.module('bsis')
         }
       });
     };
+
+
+
+    if ($scope.donorList.search) {
+      if ($scope.donorList.lastDonationFromDate) {
+        var lastDonationFromDate = getISOString($scope.donorList.lastDonationFromDate);
+        $scope.donorList.lastDonationFromDate = lastDonationFromDate;
+      }
+      if ($scope.donorList.lastDonationToDate) {
+        var lastDonationToDate = getISOString($scope.donorList.lastDonationToDate);
+        $scope.donorList.lastDonationToDate = lastDonationToDate;
+      }
+      if ($scope.donorList.clinicDate) {
+        var clinicDate = getISOString($scope.donorList.clinicDate);
+        $scope.donorList.clinicDate = clinicDate;
+      }
+      if ($routeParams.bloodGroups) {
+        var bloodGroups = $routeParams.bloodGroups;
+        if (!angular.isArray(bloodGroups)) {
+          bloodGroups = [bloodGroups];
+        }
+        $scope.donorList.bloodGroups = bloodGroups;
+      }
+
+      if ($routeParams.donorPanels) {
+        var donorPanels = $routeParams.donorPanels;
+        if (!angular.isArray(donorPanels)) {
+          donorPanels = [donorPanels];
+        }
+        $scope.donorList.donorPanels = donorPanels;
+      }
+
+      $scope.getDonors($scope.donorList);
+    }
 
     $scope.donorListTableParams = new ngTableParams({
         page: 1,            // show first page
@@ -734,6 +788,7 @@ angular.module('bsis')
     $scope.donationDateFromOpen = false;
     $scope.donationDateToOpen = false;
     $scope.dueToDonateOpen = false;
+    });
 
   })
 
@@ -883,14 +938,14 @@ angular.module('bsis')
       DonorService.setDonationBatch($scope.donationBatch);
       data = $scope.donationBatch.donations;
       $scope.data = data;
-      $location.path("/manageClinic");
-
+      $location.path("/manageClinic/" + item.id);
+      
     };
 
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE,  DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout) {
+  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE,  DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout, $routeParams) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -925,17 +980,21 @@ angular.module('bsis')
 
 
     $scope.init = function () {
-      $scope.donationBatch = DonorService.getDonationBatch();
-      data = $scope.donationBatch.donations;
-      $scope.data = data;
+     DonorService.getDonationBatchById($routeParams.id, function (donationBatch) {
+       $scope.donationBatch = donationBatch;
+       data = donationBatch.donations;
+       $scope.data = data;
 
-      DonorService.getDonationBatchFormFields( function(response){
-        if (response !== false){
-          $scope.donorPanels = response.donorPanels;
-        }
-        else{
-        }
-      });
+       DonorService.getDonationBatchFormFields(function (response) {
+         if (response !== false) {
+           $scope.donorPanels = response.donorPanels;
+         }
+         else {
+         }
+       });
+     }, function (err) {
+
+     });
     };
 
     $scope.init();

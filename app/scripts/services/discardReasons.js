@@ -14,11 +14,11 @@ angular.module('bsis')
         });
       },
 
-      getDiscardById: function (id, response) {
-        var apiResponse = Api.DiscardReasons.get({id: id}, function(){
-          response(apiResponse.reason);
-        }, function (){
-          response(false);
+      getDiscardReasonById: function (id, onSuccess, onError) {
+        Api.DiscardReasons.get({id: id}, function(apiResponse){
+          onSuccess(apiResponse.reason);
+        }, function (err){
+          onError(err.data);
         });
       },
 

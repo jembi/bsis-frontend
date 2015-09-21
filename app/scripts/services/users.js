@@ -15,6 +15,15 @@ angular.module('bsis')
       });
     },
 
+    getUserById: function(id, onSuccess, onError){
+      Api.Users.get({id: id}, function (apiResponse) {
+        console.log("user response: ", apiResponse.user);
+        onSuccess(apiResponse.user);
+      }, function (err){
+        onError(err.data);
+      });
+    },
+
 
     addUser: function(user, response){
       var addUser = new Api.Users();

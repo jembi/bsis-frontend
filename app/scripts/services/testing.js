@@ -42,6 +42,15 @@ angular.module('bsis')
         response(false);
       });
     },
+
+    getTestBatchById: function(id, onSuccess, onError){
+      Api.TestBatches.get({id:id}, function (testBatch) {
+        onSuccess(testBatch);
+      }, function (err){
+        onError(err.data);
+      });
+    },
+
     setCurrentTestBatch: function(testBatchId){
       currentTestBatchId = testBatchId;
     },
@@ -57,6 +66,14 @@ angular.module('bsis')
         response(testBatch);
       }, function (){
         response(false);
+      });
+    },
+
+    getTestBatchOverviewById: function (testBatchId, onSuccess, onError){
+      Api.TestBatchOverview.get({testBatch:testBatchId}, function (testBatch) {
+        onSuccess(testBatch);
+      }, function (){
+        onError(false);
       });
     },
     getDonationBatches: function(){
@@ -94,6 +111,15 @@ angular.module('bsis')
         console.log("testResults: ", testResults);
       }, function (){
         response(false);
+      });
+    },
+
+    getTestResultsById: function(id, onSuccess, onError){
+      Api.FindTestResults.query({testBatch:id}, function (testResults) {
+        onSuccess(testResults);
+        console.log("testResults: ", testResults);
+      }, function (err){
+        onError(err);
       });
     },
     addTestBatch: function (donationBatches, response){
