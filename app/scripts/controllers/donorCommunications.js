@@ -8,6 +8,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
   $scope.error = {
     message: null
   };
+  $scope.currentSearch = null;
 
   DonorService.getDonationBatchFormFields(function(res) {
     $scope.bloodGroups = BLOODGROUP.options;
@@ -17,7 +18,6 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
   });
 
   var master = $scope.master = {
-    search: false,
     donorPanels: [],
     bloodGroups: [],
     anyBloodGroup: true,
@@ -35,7 +35,6 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
   }
 
   $scope.search = {
-    search: angular.isUndefined($routeParams.search) ? master.search : $routeParams.search,
     donorPanels: (toArray($routeParams.donorPanels) || master.donorPanels).map(function(donorPanelId) {
       return {id: donorPanelId};
     }),
@@ -79,17 +78,17 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
     // PDF header
     exporterPdfHeader: function() {
 
-      var donorPanels = $scope.search.donorPanels.map(function(donorPanel) {
+      var donorPanels = $scope.currentSearch.donorPanels.map(function(donorPanel) {
         return donorPanel.name;
       });
 
-      var bloodGroups = $scope.search.bloodGroups;
+      var bloodGroups = $scope.currentSearch.bloodGroups;
 
-      if ($scope.search.anyBloodGroup) {
+      if ($scope.currentSearch.anyBloodGroup) {
         bloodGroups.push('Any');
       }
 
-      if ($scope.search.noBloodGroup) {
+      if ($scope.currentSearch.noBloodGroup) {
         bloodGroups.push('None');
       }
 
@@ -99,15 +98,15 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
       ];
 
       // Include last donation date range
-      if ($scope.search.lastDonationFromDate && $scope.search.lastDonationToDate) {
-        var fromDate = $filter('bsisDate')($scope.search.lastDonationFromDate);
-        var toDate = $filter('bsisDate')($scope.search.lastDonationToDate);
+      if ($scope.currentSearch.lastDonationFromDate && $scope.currentSearch.lastDonationToDate) {
+        var fromDate = $filter('bsisDate')($scope.currentSearch.lastDonationFromDate);
+        var toDate = $filter('bsisDate')($scope.currentSearch.lastDonationToDate);
         columns.push({text: 'Date of Last Donation: ' + fromDate + ' to ' + toDate, width: 'auto'});
       }
 
       // Include date due to donate
-      if ($scope.search.clinicDate) {
-        var dueToDonateDate = $filter('bsisDate')($scope.search.clinicDate);
+      if ($scope.currentSearch.clinicDate) {
+        var dueToDonateDate = $filter('bsisDate')($scope.currentSearch.clinicDate);
         columns.push({text: 'Date Due to Donate: ' + dueToDonateDate, width: 'auto'});
       }
 
@@ -146,14 +145,15 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
       return;
     }
 
-    $scope.search.search = true;
+    $scope.currentSearch = angular.copy($scope.search);
 
-    var search = angular.copy($scope.search);
-    search.donorPanels = search.donorPanels.map(function(donorPanel) {
-      return donorPanel.id;
+    var search = angular.extend({}, $scope.currentSearch, {
+      donorPanels: $scope.currentSearch.donorPanels.map(function(donorPanel) {
+        return donorPanel.id;
+      })
     });
 
-    $location.search(search);
+    $location.search(angular.extend({}, search, {search: true}));
 
     DonorService.findDonorListDonors(search, function(res) {
       $scope.gridOptions.data = res;
@@ -163,6 +163,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
   };
 
   $scope.onClear = function(form) {
+    $scope.currentSearch = null;
     $scope.error.message = null;
     $scope.search = angular.copy(master);
     $location.search({});
@@ -179,7 +180,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
     $scope.search.anyBloodGroup = false;
   };
 
-  if ($scope.search.search) {
+  if ($routeParams.search) {
     $scope.onSearch();
   }
 });
