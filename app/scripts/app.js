@@ -92,9 +92,10 @@ var app = angular.module('bsis', [
       })
       .when('/exportDonorList', {
         templateUrl : 'views/donors.html',
-        controller  : 'DonorListCtrl',
+        controller  : 'DonorCommunicationsCtrl',
         permission: PERMISSIONS.EXPORT_CLINIC_DATA,
-        enabled : UI.DONORS_TAB_ENABLED
+        enabled : UI.DONORS_TAB_ENABLED,
+        reloadOnSearch: reloadOnSearch
       })
       .when('/viewDonor/:id?', {
         templateUrl : 'views/donors.html',

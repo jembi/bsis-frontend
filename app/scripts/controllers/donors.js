@@ -814,21 +814,15 @@ angular.module('bsis')
           data = response.donationBatches;
           $scope.data = data;
           DonorService.getDonationBatchFormFields( function(response){
-            if (response !== false){
-              $scope.donorPanels = response.donorPanels;
-              angular.forEach(data, function(item) {
-                var i = 0;
-                angular.forEach($scope.donorPanels, function(panel){
-                  if (panel.name == item.donorPanel.name){
-                    $scope.donorPanels[i].disabled = true;
-                  }
-                  i++;
-                });
+            $scope.donorPanels = response.donorPanels;
+            angular.forEach(data, function(item) {
+              angular.forEach($scope.donorPanels, function(panel, i){
+                if (panel.name == item.donorPanel.name){
+                  $scope.donorPanels[i].disabled = true;
+                }
               });
-            }
-            else{
-            }
-          });
+            });
+          }, console.error);
 
           if (data.length > 0){
             $scope.openDonationBatches = true;
@@ -980,21 +974,15 @@ angular.module('bsis')
 
 
     $scope.init = function () {
-     DonorService.getDonationBatchById($routeParams.id, function (donationBatch) {
-       $scope.donationBatch = donationBatch;
-       data = donationBatch.donations;
-       $scope.data = data;
+      DonorService.getDonationBatchById($routeParams.id, function (donationBatch) {
+        $scope.donationBatch = donationBatch;
+        data = donationBatch.donations;
+        $scope.data = data;
 
-       DonorService.getDonationBatchFormFields(function (response) {
-         if (response !== false) {
-           $scope.donorPanels = response.donorPanels;
-         }
-         else {
-         }
-       });
-     }, function (err) {
-
-     });
+        DonorService.getDonationBatchFormFields(function (response) {
+          $scope.donorPanels = response.donorPanels;
+        }, console.error);
+      }, console.error);
     };
 
     $scope.init();
