@@ -10,8 +10,10 @@ var app = angular.module('bsis', [
   'ngSanitize',
   'checklist-model',
   'ngMessages',
-  '720kb.tooltips'
-
+  '720kb.tooltips',
+  'ui.grid',
+  'ui.grid.exporter',
+  'ui.grid.pagination'
 ])
   .config(function($routeProvider, PERMISSIONS, UI) {
     
