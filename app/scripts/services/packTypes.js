@@ -13,12 +13,11 @@ angular.module('bsis')
         });
       },
 
-      getPackTypeById: function (id, response) {
-        var apiResponse = Api.PackTypes.get({id: id}, function () {
-          console.log("pack type response: ", apiResponse);
-          response(apiResponse);
-        }, function () {
-          response(false);
+      getPackTypeById: function (id, onSuccess, onError) {
+       Api.PackTypes.get({id: id}, function (apiResponse) {
+          onSuccess(apiResponse.packtype);
+        }, function (err) {
+          onError(err.data);
         });
       },
 

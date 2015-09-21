@@ -64,7 +64,7 @@ describe('Controller: PackTypesCtrl', function () {
       createController();
       httpBackend.flush();
       scope.managePackType(scope.packTypes[0]);
-      expect(location.path()).toBe('/managePackType');
+      expect(location.path()).toBe('/managePackType/1');
       expect(scope.packType.packType).toBe('Single');
       expect(scope.packType.countAsDonation).toBe(true);
       expect(scope.packType.periodBetweenDonations).toBe(90);

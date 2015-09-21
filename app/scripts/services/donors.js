@@ -32,8 +32,8 @@ angular.module('bsis')
       // save donor (POST /donor) and assign response donor object to 'donorObj'
       addDonor.$save(function(response){
         donorObj = response.donor;
-        onSuccess(response);
-      }, function (err) {
+        onSuccess(response.donor);
+      }, function (err){
         onError(err.data);
       });
     },
@@ -60,9 +60,25 @@ angular.module('bsis')
     getDonor: function(){
       return donorObj;
     },
+    getDonorById: function (id, onSuccess, onFailure) {
+      Api.Donor.get({id:id}, function(response) {
+        onSuccess(response.donor);
+      }, function (err){
+        onFailure(err.data);
+      });
+    },
     getDonationBatch: function(){
       return donationBatchObj;
     },
+
+    getDonationBatchById: function (id, onSuccess, onFailure) {
+      Api.DonationBatches.get({id:id}, function(response) {
+        onSuccess(response.donationBatch);
+      }, function (err){
+        onFailure(err.data);
+      });
+    },
+
     getDonors: function(){
       return donorsObj;
     },

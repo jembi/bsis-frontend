@@ -14,11 +14,11 @@ angular.module('bsis')
         });
       },
 
-      getDeferralById: function (id, response) {
-        var apiResponse = Api.deferralReasons.get({id: id}, function(){
-          response(apiResponse.reason);
-        }, function (){
-          response(false);
+      getDeferralReasonById: function (id, onSuccess, onError) {
+         Api.deferralReasons.get({id: id}, function(apiResponse){
+          onSuccess(apiResponse.reason);
+        }, function (err){
+          onError(err.data);
         });
       },
 

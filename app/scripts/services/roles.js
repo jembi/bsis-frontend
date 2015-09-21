@@ -24,11 +24,11 @@ angular.module('bsis')
       });
     },
 
-    getRoleById: function (id, response) {
-      var apiResponse = Api.Roles.get({id: id}, function(){
-        response(apiResponse);
-      }, function (){
-        response(false);
+    getRoleById: function (id, onSuccess, onError) {
+      Api.Roles.get({id: id}, function(apiResponse){
+        onSuccess(apiResponse.role);
+      }, function (err){
+        onError(err.data);
       });
     },
 
