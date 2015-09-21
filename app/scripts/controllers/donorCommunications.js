@@ -13,6 +13,18 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
   DonorService.getDonationBatchFormFields(function(res) {
     $scope.bloodGroups = BLOODGROUP.options;
     $scope.donorPanels = res.donorPanels;
+
+    // Work around issue with ui-select and tracking by id
+    // See https://github.com/angular-ui/ui-select/issues/806
+    $scope.search.donorPanels = $scope.search.donorPanels.map(function(selectedDonorPanel) {
+      var donorPanels = $scope.donorPanels;
+      for (var index in donorPanels) {
+        if (donorPanels[index].id === selectedDonorPanel.id) {
+          return donorPanels[index];
+        }
+      }
+      return selectedDonorPanel;
+    });
   }, function(err) {
     $scope.error.message = err.userMessage;
   });
@@ -36,7 +48,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
 
   $scope.search = {
     donorPanels: (toArray($routeParams.donorPanels) || master.donorPanels).map(function(donorPanelId) {
-      return {id: donorPanelId};
+      return {id: +donorPanelId};
     }),
     bloodGroups: toArray($routeParams.bloodGroups) || master.bloodGroups,
     anyBloodGroup: angular.isUndefined($routeParams.search) ? master.anyBloodGroup : $routeParams.anyBloodGroup,
