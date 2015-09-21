@@ -24,7 +24,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $l
     noBloodGroup: false,
     lastDonationFromDate: null,
     lastDonationToDate: null,
-    dueToDonateDate: null
+    clinicDate: null
   };
 
   function toArray(maybeArray) {
@@ -42,7 +42,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $l
     noBloodGroup: angular.isUndefined($routeParams.search) ? master.noBloodGroup : $routeParams.noBloodGroup,
     lastDonationFromDate: angular.isUndefined($routeParams.lastDonationFromDate) ? master.lastDonationFromDate : new Date($routeParams.lastDonationFromDate),
     lastDonationToDate: angular.isUndefined($routeParams.lastDonationToDate) ? master.lastDonationToDate : new Date($routeParams.lastDonationToDate),
-    dueToDonateDate: angular.isUndefined($routeParams.dueToDonateDate) ? master.dueToDonateDate : new Date($routeParams.dueToDonateDate)
+    clinicDate: angular.isUndefined($routeParams.clinicDate) ? master.clinicDate : new Date($routeParams.clinicDate)
   };
 
   var columnDefs = [
