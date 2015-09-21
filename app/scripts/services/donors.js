@@ -38,24 +38,13 @@ angular.module('bsis')
       });
     },
 
-    updateDonor: function (donor, response){
-
-      var updateDonor = Api.Donor.get({id:donor.id}, function() {
-        updateDonor = updateDonor.donor;
-        var birthDate = updateDonor.birthDate;
-
-        angular.copy(donor, updateDonor);
-        updateDonor.birthDate = birthDate;
-
-        Api.Donor.update({id:donor.id}, updateDonor, function(data) {
-         donorObj = data.donor;
-         response(donorObj);
-        }, function (){
-          response(false);
-        });
-
+    updateDonor: function (donor, onSuccess, onError){
+      Api.Donor.update({id:donor.id}, donor, function(data) {
+       donorObj = data.donor;
+        onSuccess(donorObj);
+      }, function (err){
+        onError(err.data);
       });
-
     },
     getDonor: function(){
       return donorObj;

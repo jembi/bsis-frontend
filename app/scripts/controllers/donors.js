@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout, $q) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -166,18 +166,19 @@ angular.module('bsis')
     };
 
     $scope.updateDonor = function (donor){
-
+      var d = $q.defer();
       DonorService.updateDonor(donor, function(response){
           $scope.donor = response;
+          //Reset Error Message
+          $scope.err = null;
+          d.resolve();
         },
-        // display error from back end
         function(err){
+          $scope.donor = donor;
           $scope.err = err;
-          if (err["donor.birthDate"]) {
-            $scope.dobValid = false;
-          }
+          d.reject('Server Error');
         });
-
+      return d.promise;
     };
 
     $scope.validateForm = function (form){

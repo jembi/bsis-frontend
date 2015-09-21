@@ -1,4 +1,11 @@
 <form editable-form name="editableForm" onaftersave="updateDonor(donor)" onbeforesave="validateForm(editableForm)" novalidate >
+    <alert type="danger" close="" ng-show="err.userMessage">
+        {{err.userMessage}}
+        <ul>
+            <li ng-show="err['donor.birthDate']"> {{err["donor.birthDate"]}}</li>
+        </ul>
+    </alert>
+
 
       <span class="h2">
         <span editable-text="donor.firstName" e-name="firstName" e-class="xeditable name"
@@ -86,7 +93,7 @@
     <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
     <em>(<span ng-show="!editableForm.$visible">{{ (donor.birthDate | bsisDate) || '' }}</span>
         <span ng-show="editableForm.$visible">
-          <dateselect ng-model="birthDate" initDate="donor.birthDate" format="format" opened="donorBirthDateOpen" cal-icon="icons.CALENDAR">
+          <dateselect ng-model="donor.birthDate" initDate="donor.birthDate" format="format" opened="donorBirthDateOpen" cal-icon="icons.CALENDAR">
           </dateselect>
         </span>) </em>
     | 
