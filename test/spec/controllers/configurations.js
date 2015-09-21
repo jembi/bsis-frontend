@@ -125,8 +125,7 @@ describe('Controller: ManageConfigurationsCtrl', function() {
 
     it('should route to the appropriate method when the form is submitted', function () {
       createController();
-      httpBackend.expectGET(new RegExp('.*/configurations'));
-      httpBackend.flush();
+     
 
       spyOn(scope, 'addConfiguration');
       spyOn(scope, 'updateConfiguration');
