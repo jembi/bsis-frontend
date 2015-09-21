@@ -184,7 +184,7 @@ angular.module('bsis')
       if (form.$valid) {
         return true;
       } else {
-        return '';
+        return 'This form is not valid';
       }
     };
 
@@ -1178,6 +1178,14 @@ angular.module('bsis')
           $scope.addDonationSuccess = false;
         }
       });
+    };
+
+    $scope.validateForm = function (form){
+      if (form.$valid) {
+        return true;
+      } else {
+        return 'This form is not valid';
+      }
     };
 
     $scope.deleteDonation = function(donationId) {
