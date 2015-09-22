@@ -62,8 +62,8 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
       return {id: +donorPanelId};
     }),
     bloodGroups: toArray($routeParams.bloodGroups) || master.bloodGroups,
-    anyBloodGroup: angular.isUndefined($routeParams.search) ? master.anyBloodGroup : $routeParams.anyBloodGroup,
-    noBloodGroup: angular.isUndefined($routeParams.search) ? master.noBloodGroup : $routeParams.noBloodGroup,
+    anyBloodGroup: angular.isUndefined($routeParams.anyBloodGroup) ? master.anyBloodGroup : $routeParams.anyBloodGroup === true,
+    noBloodGroup: angular.isUndefined($routeParams.noBloodGroup) ? master.noBloodGroup : $routeParams.noBloodGroup === true,
     lastDonationFromDate: angular.isUndefined($routeParams.lastDonationFromDate) ? master.lastDonationFromDate : new Date($routeParams.lastDonationFromDate),
     lastDonationToDate: angular.isUndefined($routeParams.lastDonationToDate) ? master.lastDonationToDate : new Date($routeParams.lastDonationToDate),
     clinicDate: angular.isUndefined($routeParams.clinicDate) ? master.clinicDate : new Date($routeParams.clinicDate)
