@@ -1,4 +1,4 @@
-<form editable-form name="demographicsForm" onbeforesave="validateForm(demographicsForm)"  onaftersave="updateDonor(donor)" novalidate>
+<form editable-form name="demographicsForm" onbeforesave="validateForm(demographicsForm)"  onaftersave="updateDonor(donor)" oncancel="cancelForm()" novalidate>
 
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
     <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="demographicsForm.$show()" ng-show="!demographicsForm.$visible">Edit</a></em>
