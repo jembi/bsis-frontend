@@ -186,9 +186,13 @@ angular.module('bsis')
 
     $scope.master = DonorService.getDonor();
 
-    $scope.cancelForm = function () {
-      $scope.err = null;
-      $scope.donor = $scope.master;
+    $scope.cancelForm = function (donor) {
+      DonorService.getDonorById(donor.id, function (freshDonor) {
+        $scope.donor = freshDonor;
+        $scope.err = null;
+      }, function (err) {
+        $scope.err = err;
+      });
     };
 
     $scope.validateForm = function (form){
@@ -226,7 +230,7 @@ angular.module('bsis')
     DonorService.getDonorById($routeParams.id, function (donor) {
       DonorService.setDonor(donor);
       $scope.donor = donor;
-      $scope.master = donor;
+
 
 
     $scope.data = {};
