@@ -188,7 +188,7 @@ angular.module('bsis')
 
     $scope.cancelForm = function () {
       $scope.err = null;
-      angular.copy($scope.master, $scope.donor);
+      $scope.donor = $scope.master;
     };
 
     $scope.validateForm = function (form){
@@ -226,9 +226,8 @@ angular.module('bsis')
     DonorService.getDonorById($routeParams.id, function (donor) {
       DonorService.setDonor(donor);
       $scope.donor = donor;
-    }, function(err){
-      $location.path('/findDonor');
-    });
+      $scope.master = donor;
+
 
     $scope.data = {};
     $scope.age = '';
@@ -607,6 +606,9 @@ angular.module('bsis')
         console.error(err);
       });
     };
+    }, function(err){
+      $location.path('/findDonor');
+    });
 
   })
 
