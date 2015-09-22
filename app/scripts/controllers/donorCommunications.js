@@ -108,8 +108,8 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
       }
 
       var columns = [
-        {text: 'Donor Panel: ' + donorPanels.join(', '), width: 'auto'},
-        {text: 'Blood Group: ' + bloodGroups.join(', '), width: 'auto'}
+        {text: 'Venue(s): ' + donorPanels.join(', '), width: 'auto'},
+        {text: 'Blood Group(s): ' + bloodGroups.join(', '), width: 'auto'}
       ];
 
       // Include last donation date range
@@ -122,7 +122,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
       // Include date due to donate
       if ($scope.currentSearch.clinicDate) {
         var dueToDonateDate = $filter('bsisDate')($scope.currentSearch.clinicDate);
-        columns.push({text: 'Date Due to Donate: ' + dueToDonateDate, width: 'auto'});
+        columns.push({text: 'Due to Donate: ' + dueToDonateDate, width: 'auto'});
       }
 
       return [
