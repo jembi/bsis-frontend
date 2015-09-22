@@ -27,20 +27,20 @@ angular.module('bsis')
 
     $scope.isCurrent = function(path) {
       var initialView = '';
-      if ($location.path().indexOf('/viewTestBatch') === 0  && path === "/manageTestBatch") {
-          $scope.selection = '/viewTestBatch';
-          return true;
-      } else if ($location.path().indexOf("/manageTTITesting") === 0 && path === "/manageTestBatch") {
+      if ($location.path().indexOf('/viewTestBatch') === 0 && path === '/manageTestBatch') {
+        $scope.selection = '/viewTestBatch';
+        return true;
+      } else if ($location.path().indexOf('/manageTTITesting') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/manageTTITesting';
         return true;
-      } else if ($location.path() === "/managePendingTests" && path === "/manageTestBatch") {
-        $scope.selection = $location.path();
+      } else if ($location.path().indexOf('/managePendingTests') === 0 && path === '/manageTestBatch') {
+        $scope.selection = '/managePendingTests';
         return true;
-      } else if ($location.path().indexOf('/manageBloodGroupTesting') === 0 && path === "/manageTestBatch") {
-        $scope.selection = "/manageBloodGroupTesting";
+      } else if ($location.path().indexOf('/manageBloodGroupTesting') === 0 && path === '/manageTestBatch') {
+        $scope.selection = '/manageBloodGroupTesting';
         return true;
-      } else if ($location.path() === "/manageBloodGroupMatchTesting" && path === "/manageTestBatch") {
-        $scope.selection = $location.path();
+      } else if ($location.path().indexOf('/manageBloodGroupMatchTesting') === 0 && path === '/manageTestBatch') {
+        $scope.selection = '/manageBloodGroupMatchTesting';
         return true;
       } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
         $location.path(path);
