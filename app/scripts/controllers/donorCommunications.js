@@ -25,6 +25,17 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
       }
       return selectedDonorPanel;
     });
+    if ($scope.currentSearch && $scope.currentSearch.donorPanels) {
+      $scope.currentSearch.donorPanels = $scope.currentSearch.donorPanels.map(function(selectedDonorPanel) {
+        var donorPanels = $scope.donorPanels;
+        for (var index in donorPanels) {
+          if (donorPanels[index].id === selectedDonorPanel.id) {
+            return donorPanels[index];
+          }
+        }
+        return selectedDonorPanel;
+      });
+    }
   }, function(err) {
     $scope.error.message = err.userMessage;
   });
