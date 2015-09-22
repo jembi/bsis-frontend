@@ -76,6 +76,8 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
 
   $scope.gridOptions = {
     data: [],
+    paginationPageSize: 10,
+    paginationPageSizes: [10],
     enableGridMenu: true,
     columnDefs: columnDefs,
 
