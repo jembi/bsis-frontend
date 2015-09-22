@@ -97,7 +97,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
         return donorPanel.name;
       });
 
-      var bloodGroups = $scope.currentSearch.bloodGroups;
+      var bloodGroups = angular.copy($scope.currentSearch.bloodGroups);
 
       if ($scope.currentSearch.anyBloodGroup) {
         bloodGroups.push('Any');
