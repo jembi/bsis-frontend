@@ -103,13 +103,13 @@ angular.module('bsis')
         response(false);
       });
     },
-    findDonorListDonors: function (donorSearch, response) {
+    findDonorListDonors: function (donorSearch, onSuccess, onError) {
       var donors = Api.DonorCommunicationsSearch.query({bloodGroups: donorSearch.bloodGroups, donorPanels: donorSearch.donorPanels,
           clinicDate: donorSearch.clinicDate, lastDonationFromDate: donorSearch.lastDonationFromDate,
           lastDonationToDate: donorSearch.lastDonationToDate, anyBloodGroup: donorSearch.anyBloodGroup, noBloodGroup: donorSearch.noBloodGroup}, function(){
-        response(donors.donors);
-      }, function () {
-        response(false);
+        onSuccess(donors.donors);
+      }, function(err) {
+        onError(err.data);
       });
     },
     setDonor: function(donor) {
@@ -242,11 +242,9 @@ angular.module('bsis')
         console.log("Get Donation Batch Unsuccessful");
       });
     },
-    getDonationBatchFormFields: function(response){
-      Api.DonationBatchFormFields.get({}, function (backingForm) {
-        response(backingForm);
-      }, function (){
-        response(false);
+    getDonationBatchFormFields: function(onSuccess, onError){
+      Api.DonationBatchFormFields.get({}, onSuccess, function(err) {
+        onError(err.data);
       });
     },
     getOpenDonationBatches: function (response) {
