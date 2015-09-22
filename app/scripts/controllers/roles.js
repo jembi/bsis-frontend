@@ -72,7 +72,7 @@ angular.module('bsis')
           RolesService.setPermissions(response.permissions);
           $scope.role = role;
           RolesService.setRole(role);
-          $location.path("/manageRole");
+          $location.path("/manageRole/" + role.id);
         }
         else {
 
@@ -84,7 +84,7 @@ angular.module('bsis')
 
   })
 
-.controller('ManageRolesCtrl', function ($scope, $location, RolesService, ICONS, PERMISSIONS) {
+.controller('ManageRolesCtrl', function ($scope, $location, RolesService, ICONS, PERMISSIONS, $routeParams) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
 
@@ -155,8 +155,6 @@ angular.module('bsis')
       RolesService.getAllPermissions(function (response) {
         if (response !== false) {
           $scope.permissionList = response.permissions;
-          RolesService.setPermissions(response.permissions);
-          $location.path("/manageRole");
         }
         else {
 
@@ -174,15 +172,28 @@ angular.module('bsis')
       $location.path("/roles");
     };
 
+
+
+    $scope.getRole = function () {
+      RolesService.getRoleById($routeParams.id, function (role){
+        $scope.role = role;
+        $scope.loadPermissions();
+      }, function (err) {
+        $scope.err = err;
+      });
+    };
+
     // managing addition of new role
-    if (RolesService.getRole() === ""){
+    if (!$routeParams.id){
+      $scope.role = {
+        permissions: []
+      };
       $scope.loadPermissions();
       $scope.manageRoleType = "addRole";
     }
     // managing update of existing role
     else {
-      $scope.role = RolesService.getRole();
-      $scope.permissionList = RolesService.getPermissions();
+      $scope.getRole();
       $scope.manageRoleType = "updateRole";
     }
 

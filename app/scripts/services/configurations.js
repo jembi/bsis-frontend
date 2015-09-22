@@ -15,11 +15,11 @@ angular.module('bsis')
       });
     },
 
-    getConfigurationById: function (id, response) {
-      var apiResponse = Api.Configurations.get({id: id}, function(){
-        response(apiResponse);
-      }, function (){
-        response(false);
+    getConfigurationById: function (id, onSuccess, onError) {
+      Api.Configurations.get({id: id}, function(apiResponse){
+        onSuccess(apiResponse);
+      }, function (err){
+        onError(err.data);
       });
     },
 

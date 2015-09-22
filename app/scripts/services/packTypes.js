@@ -13,12 +13,11 @@ angular.module('bsis')
         });
       },
 
-      getPackTypeById: function (id, response) {
-        var apiResponse = Api.PackTypes.get({id: id}, function () {
-          console.log("pack type response: ", apiResponse);
-          response(apiResponse);
-        }, function () {
-          response(false);
+      getPackTypeById: function (id, onSuccess, onError) {
+       Api.PackTypes.get({id: id}, function (apiResponse) {
+          onSuccess(apiResponse.packtype);
+        }, function (err) {
+          onError(err.data);
         });
       },
 
@@ -30,21 +29,17 @@ angular.module('bsis')
         return packTypeObj;
       },
 
-      addPackType: function (packType, response) {
+      addPackType: function (packType, onSuccess, onError) {
         var addPackType = new Api.PackTypes();
         angular.copy(packType, addPackType);
-        addPackType.$save(function (data) {
-          response(data);
-        }, function (err) {
-          response(false, err.data);
+        addPackType.$save(onSuccess, function (err) {
+          onError(err.data);
         });
       },
 
-      updatePackType: function (packType, response) {
-        Api.PackTypes.update({id: packType.id}, packType, function (data) {
-          response(data);
-        }, function (err) {
-          response(false, err.data);
+      updatePackType: function (packType, onSuccess, onError) {
+        Api.PackTypes.update({id: packType.id}, packType, onSuccess, function (err) {
+          onError(err.data);
         });
       }
     };

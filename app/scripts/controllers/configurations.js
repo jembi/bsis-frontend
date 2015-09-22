@@ -67,25 +67,34 @@ angular.module('bsis')
     $scope.manageConfiguration = function (configuration) {
       $scope.configuration = configuration;
       ConfigurationsService.setConfiguration(configuration);
-      $location.path("/manageConfiguration");
+      $location.path("/manageConfiguration/" + configuration.id);
     };
 
     $scope.getConfigurations();
 
   })
 
-  .controller('ManageConfigurationsCtrl', function ($scope, $location, ConfigurationsService, ICONS, PERMISSIONS, DATATYPES){
+  .controller('ManageConfigurationsCtrl', function ($scope, $location, ConfigurationsService, ICONS, PERMISSIONS, DATATYPES, $routeParams){
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageConfiguration';
 
-    $scope.configuration = ConfigurationsService.getConfiguration();
+    $scope.getConfig = function () {
+      ConfigurationsService.getConfigurationById($routeParams.id, function (configuration) {
+        $scope.configuration = configuration;
+        $scope.disableConfigurationname = true;
+      }, function (err) {
+        console.log(err);
+      });
+    };
 
-    if ($scope.configuration === ""){
+    if (!$routeParams.id) {
       $scope.configuration = {};
     } else {
-      $scope.disableConfigurationname = true;
+      $scope.getConfig();
     }
+
+
 
     $scope.dataTypes = DATATYPES.options;
 

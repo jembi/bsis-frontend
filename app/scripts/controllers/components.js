@@ -1,11 +1,21 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ComponentsCtrl', function ($scope, $rootScope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, DATEFORMAT, $filter, ngTableParams, $timeout) {
+  .controller('ComponentsCtrl', function ($scope, $rootScope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, DATEFORMAT, $filter, ngTableParams, $timeout, $routeParams) {
+
+    function getISOString(maybeDate) {
+      return angular.isDate(maybeDate) ? maybeDate.toISOString() : maybeDate;
+    }
+    ComponentService.getComponentsFormFields(function(response){
+      if (response !== false){
+        $scope.data = response;
+        $scope.componentTypes = $scope.data.componentTypes;
+        $scope.returnReasons = $scope.data.returnReasons;
+        $scope.discardReasons = $scope.data.discardReasons;
+
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
-    $scope.componentTypes = COMPONENTTYPE.componentTypes;
     $scope.selectedComponents = [];
 
     $scope.isCurrent = function(path) {
@@ -61,20 +71,9 @@ angular.module('bsis')
     $scope.endDateOpen = false;
 
 
-    $scope.getComponentsFormFields = function() {
-      ComponentService.getComponentsFormFields(function(response){
-        if (response !== false){
-          $scope.data = response;
-          $scope.componentTypes = $scope.data.componentTypes;
-          $scope.returnReasons = $scope.data.returnReasons;
-          $scope.discardReasons = $scope.data.discardReasons;
-        }
-        else{
-        }
-      });
-    };
 
-    $scope.getComponentsFormFields();
+
+
 
     $scope.getComponentCombinations = function() {
       ComponentService.getComponentCombinations(function(response){
@@ -95,14 +94,17 @@ angular.module('bsis')
       $scope.searchResults = '';
       $scope.selectedComponentTypes = {};
       $scope.componentSelected = '';
+      $location.search({});
     };
 
     $scope.clearForm = function(form){
       form.$setPristine();
+      $location.search({});
       $scope.submitted = '';
     };
 
     $scope.clearProcessComponentForm = function () {
+      $location.search({});
       $scope.component = {};
       $scope.componentSelected = '';
       $scope.submitted = '';
@@ -110,13 +112,20 @@ angular.module('bsis')
     };
 
     $scope.clearDiscardComponentForm = function () {
+      $location.search({});
       $scope.discard = {};
       $scope.componentSelected = '';
       $scope.submitted = '';
       $scope.selectedComponents = [];
     };
 
-    $scope.getComponentsByDIN = function () {   
+    $scope.componentsSearch = $routeParams;
+
+
+    $scope.getComponentsByDIN = function () {
+      $scope.componentsSearch.search = true;
+      $location.search($scope.componentsSearch);
+
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(response){
         if (response !== false){
           data = response.components;
@@ -132,6 +141,10 @@ angular.module('bsis')
       });
 
     };
+
+    if ($routeParams.search) {
+      $scope.getComponentsByDIN();
+    }
 
     $scope.componentsTableParams = new ngTableParams({
       page: 1,            // show first page
@@ -159,12 +172,8 @@ angular.module('bsis')
 
     $scope.findComponents = function (componentsSearch) {
       $scope.componentsView = 'viewDonations';
-
-      $scope.selectedComponentTypes = [];
-      angular.forEach(componentsSearch.componentTypes,function(value,index){
-          $scope.selectedComponentTypes.push(value.id);
-      });
-      componentsSearch.componentTypes = $scope.selectedComponentTypes;
+      componentsSearch.findComponentsSearch = true;
+      $location.search(componentsSearch);
 
       ComponentService.ComponentsSearch(componentsSearch, function(response){
         if (response !== false){
@@ -178,8 +187,30 @@ angular.module('bsis')
           $scope.searchResults = false;
         }
       });
-
     };
+
+
+
+    if ($routeParams.findComponentsSearch) {
+      if ($scope.componentsSearch.donationDateFrom) {
+        var donationDateFrom = getISOString($scope.componentsSearch.donationDateFrom);
+        $scope.componentsSearch.donationDateFrom = donationDateFrom;
+      }
+
+      if ($scope.componentsSearch.donationDateTo) {
+        var donationDateTo = getISOString($scope.componentsSearch.donationDateTo);
+        $scope.componentsSearch.donationDateTo = donationDateTo;
+      }
+      $scope.findComponents($scope.componentsSearch);
+    }
+
+    if ($routeParams.componentTypes) {
+      var componentTypes = $routeParams.componentTypes;
+      if (!angular.isArray(componentTypes)) {
+        componentTypes = [componentTypes];
+      }
+      $scope.componentsSearch.componentTypes = componentTypes;
+    }
 
     $scope.componentsSummaryTableParams = new ngTableParams({
       page: 1,            // show first page
@@ -224,19 +255,17 @@ angular.module('bsis')
       $scope.componentsView = view;
     };
 
+    $scope.discardsSearch= $routeParams;
+
     $scope.findDiscards = function (discardsSearch) {
       $scope.componentsView = 'viewDonations';
 
-      $scope.selectedComponentTypes = [];
-      angular.forEach(discardsSearch.componentTypes,function(value,index){
-          $scope.selectedComponentTypes.push(value.id);
-      });
-      discardsSearch.componentTypes = $scope.selectedComponentTypes;
-
+      discardsSearch.findDiscardsSearch = true;
       // limit results to DISCARDED components
       $scope.status = [];
       $scope.status.push("DISCARDED");
       discardsSearch.status = $scope.status;
+      $location.search(discardsSearch);
 
       ComponentService.ComponentsSearch(discardsSearch, function(response){
         if (response !== false){
@@ -244,14 +273,27 @@ angular.module('bsis')
           $scope.data = data;
           $scope.searchResults = true;
           $scope.componentsSearchCount = $scope.data.length;
-          
         }
         else{
           $scope.searchResults = false;
         }
       });
-
     };
+
+    if ($routeParams.findDiscardsSearch) {
+      if ($scope.discardsSearch.donationDateFrom) {
+        var discardDonationDateFrom = getISOString($scope.discardsSearch.donationDateFrom);
+        $scope.discardsSearch.donationDateFrom = discardDonationDateFrom;
+      }
+
+      if ($scope.discardsSearch.donationDateTo) {
+        var discardDonationDateTo = getISOString($scope.discardsSearch.donationDateTo);
+        $scope.discardsSearch.donationDateTo = discardDonationDateTo;
+      }
+      $scope.findDiscards($scope.discardsSearch);
+    }
+
+
 
     $scope.discardsSummaryTableParams = new ngTableParams({
       page: 1,            // show first page
@@ -386,6 +428,11 @@ angular.module('bsis')
       }
       $scope.selectedComponentType = componentType;
     };
+
+      }
+      else{
+      }
+    });
 
   })
 ;
