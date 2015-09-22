@@ -33,11 +33,11 @@
         </ui-select-choices>
       </ui-select>
       <div class="checkbox" style="display:inline-block;">
-        <input id="anyBloodGroup" type="checkbox" ng-model="search.anyBloodGroup" ng-checked="search.anyBloodGroup" ng-change="onAnyBloodGroupChange();">
+        <input id="anyBloodGroup" type="checkbox" ng-model="search.anyBloodGroup" ng-change="onAnyBloodGroupChange();">
         <label for="anyBloodGroup">Any Blood Group</label>
       </div>
       <div class="checkbox" style="display:inline-block;">
-        <input id="noBloodGroup" type="checkbox" ng-model="search.noBloodGroup" ng-checked="search.noBloodGroup">
+        <input id="noBloodGroup" type="checkbox" ng-model="search.noBloodGroup">
         <label for="noBloodGroup">No Blood Group</label>
       </div>
     </div>
@@ -76,7 +76,7 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-primary">Search</button>
-      <button type="reset" class="btn btn-primary" ng-click="onClear(donorCommunicationsForm);">Clear</button>
+      <button type="button" class="btn btn-primary" ng-click="onClear(donorCommunicationsForm);">Clear</button>
     </div>
   </div>
 
