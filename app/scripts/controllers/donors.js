@@ -118,6 +118,9 @@ angular.module('bsis')
       $scope.submitted = '';
     };
 
+    $scope.format = DATEFORMAT;
+    $scope.calIcon = 'fa-calendar';
+
     $scope.viewDonor = function (item) {
 
       $scope.donor = item;
@@ -179,6 +182,13 @@ angular.module('bsis')
           d.reject('Server Error');
         });
       return d.promise;
+    };
+
+    $scope.master = DonorService.getDonor();
+
+    $scope.cancelForm = function () {
+      $scope.err = null;
+      angular.copy($scope.master, $scope.donor);
     };
 
     $scope.validateForm = function (form){

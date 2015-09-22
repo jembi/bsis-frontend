@@ -1,8 +1,14 @@
-<form editable-form name="editableForm" onaftersave="updateDonor(donor)" onbeforesave="validateForm(editableForm)" novalidate >
+<form editable-form name="editableForm" onaftersave="updateDonor(donor)" onbeforesave="validateForm(editableForm)" oncancel="cancelForm()" novalidate >
     <alert type="danger" close="" ng-show="err.userMessage">
         {{err.userMessage}}
         <ul>
             <li ng-show="err['donor.birthDate']"> {{err["donor.birthDate"]}}</li>
+            <li ng-show="err['contact.mobileNumber']"> {{err["contact.mobileNumber"]}}</li>
+            <li ng-show="err['contact.workNumber']"> {{err["contact.workNumber"]}}</li>
+            <li ng-show="err['contact.homeNumber']"> {{err["contact.homeNumber"]}}</li>
+            <li ng-show="err['address.homeAddressZipcode']"> {{err["address.homeAddressZipcode"]}}</li>
+            <li ng-show="err['address.homeAddressZipcode']"> {{err["address.workAddressZipcode"]}}</li>
+            <li ng-show="err['address.homeAddressZipcode']"> {{err["address.postalAddressZipcode"]}}</li>
         </ul>
     </alert>
 
