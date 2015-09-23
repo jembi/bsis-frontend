@@ -70,18 +70,20 @@
               </td>
               <td>
                 <ui-select  ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo = sample.bloodAbo"
-                            ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo" ng-disabled="disabled" >
-                  <ui-select-match placeholder="Select">{{$select.selected}}</ui-select-match>
-                  <ui-select-choices repeat="result in bloodAboOptions.options  | filter: {$: $select.search}">
+                            ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo" ng-disabled="disabled"
+                            style="width:100px" >
+                  <ui-select-match placeholder="Select" style="width:100px" >{{$select.selected}}</ui-select-match>
+                  <ui-select-choices repeat="result in bloodAboOptions.options  | filter: {$: $select.search}" style="width:100px" >
                     <div ng-bind-html="result | highlight: $select.search"></div>
                   </ui-select-choices>
                 </ui-select>
               </td>
               <td>
                 <ui-select  ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh = sample.bloodRh"
-                            ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh" ng-disabled="disabled">
-                  <ui-select-match placeholder="Select">{{$select.selected}}</ui-select-match>
-                  <ui-select-choices repeat="result in bloodRhOptions.options  | filter: {$: $select.search}">
+                            ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh" ng-disabled="disabled"
+                            style="width:100px" >
+                  <ui-select-match placeholder="Select" style="width:100px" >{{$select.selected}}</ui-select-match>
+                  <ui-select-choices repeat="result in bloodRhOptions.options  | filter: {$: $select.search}" style="width:100px" >
                     <div ng-bind-html="result | highlight: $select.search"></div>
                   </ui-select-choices>
                 </ui-select>
