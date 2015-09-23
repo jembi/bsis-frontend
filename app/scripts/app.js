@@ -13,12 +13,13 @@ var app = angular.module('bsis', [
   '720kb.tooltips',
   'ui.grid',
   'ui.grid.exporter',
-  'ui.grid.pagination'
+  'ui.grid.pagination',
+  'selector'
 ])
   .config(function($routeProvider, PERMISSIONS, UI) {
-    
+
     var reloadOnSearch = false;
-    
+
     $routeProvider
 
       // DEFAULT VIEW - DISPLAY HOME PAGE IF USER AUTHENTICATED
@@ -476,6 +477,12 @@ var app = angular.module('bsis', [
       }
       */
     });
+  }])
+  .run(['$templateCache', function ($templateCache) {
+    $templateCache.put(
+      'simple-array.html',
+      '<span ng-bind="option"></span>'
+    );
   }])
 
   .directive('bsisTabTo', [function () {

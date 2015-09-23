@@ -64,9 +64,13 @@
                   <span ng-if="sample.bloodTypingStatus!= 'NOT_DONE'">{{sample.bloodTypingStatus}} - </span>{{sample.bloodTypingMatchStatus}} 
               </td>
               <td align="center" ng-repeat="test in bloodTypingTestsBasic">
-                <select style="width:70px;" class="form-control input-sm" ng-init="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id] = sample.recentTestResults[test.id].result" 
-                  ng-model="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id]" 
-                  ng-options="result for result in test.validResults">
+                <select
+                        selector style="width:100px;"
+                        ng-init="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id] = sample.recentTestResults[test.id].result"
+                        model="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id]"
+                        options="test.validResults"
+                        view-item-template="'simple-array.html'"
+                        dropdown-item-template="'simple-array.html'">
                 </select>
               </td>
               </td>

@@ -69,17 +69,21 @@
                   {{sample.bloodTypingMatchStatus}} 
               </td>
               <td>
-                  <select style="width:60px;" class="form-control input-sm"
-                  ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo = sample.bloodAbo"
-                  ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo"
-                  ng-options="option for option in bloodAboOptions.options">
+                  <select selector style="width:60px;"
+                          ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo = sample.bloodAbo"
+                          model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo"
+                          options="bloodAboOptions.options"
+                          view-item-template="'simple-array.html'"
+                          dropdown-item-template="'simple-array.html'">
                   </select>
               </td>
               <td>
-                  <select style="width:60px;" class="form-control input-sm"
-                  ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh = sample.bloodRh"
-                  ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh"
-                  ng-options="option for option in bloodRhOptions.options">
+                  <select selector style="width:60px;"
+                          ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh = sample.bloodRh"
+                          model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh"
+                          options="bloodRhOptions.options"
+                          view-item-template="'simple-array.html'"
+                          dropdown-item-template="'simple-array.html'">
                   </select>
               </td>
               <td align="center">
