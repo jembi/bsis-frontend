@@ -33,8 +33,12 @@
                   e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                   e-name="email">{{donor.contact.email}}</span>
             <br />
-            <small class="error" ng-show="demographicsForm.email.$invalid">
-                Email address format invalid
+            <small class="error" 
+              ng-show="
+                (demographicsForm.email.$invalid && (demographicsForm.email.$dirty || submitted)) ||
+                (demographicsForm.email.$invalid && (demographicsForm.email.$dirty  || submitted)) 
+              ">
+              Invalid email address
             </small>
         </td>
       </tr>
