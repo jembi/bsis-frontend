@@ -13,8 +13,7 @@ var app = angular.module('bsis', [
   '720kb.tooltips',
   'ui.grid',
   'ui.grid.exporter',
-  'ui.grid.pagination',
-  'selector'
+  'ui.grid.pagination'
 ])
   .config(function($routeProvider, PERMISSIONS, UI) {
 
@@ -477,12 +476,6 @@ var app = angular.module('bsis', [
       }
       */
     });
-  }])
-  .run(['$templateCache', function ($templateCache) {
-    $templateCache.put(
-      'simple-array.html',
-      '<span ng-bind="option"></span>'
-    );
   }])
 
   .directive('bsisTabTo', [function () {
