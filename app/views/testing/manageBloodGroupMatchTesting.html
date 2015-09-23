@@ -70,7 +70,7 @@
               </td>
               <td>
                 <ui-select  ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo = sample.bloodAbo"
-                            ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo" ng-disabled="disabled" style="min-width: 300px;">
+                            ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo" ng-disabled="disabled" >
                   <ui-select-match placeholder="Select">{{$select.selected}}</ui-select-match>
                   <ui-select-choices repeat="result in bloodAboOptions.options  | filter: {$: $select.search}">
                     <div ng-bind-html="result | highlight: $select.search"></div>
@@ -79,7 +79,7 @@
               </td>
               <td>
                 <ui-select  ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh = sample.bloodRh"
-                            ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh" ng-disabled="disabled" style="min-width: 300px;">
+                            ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh" ng-disabled="disabled">
                   <ui-select-match placeholder="Select">{{$select.selected}}</ui-select-match>
                   <ui-select-choices repeat="result in bloodRhOptions.options  | filter: {$: $select.search}">
                     <div ng-bind-html="result | highlight: $select.search"></div>

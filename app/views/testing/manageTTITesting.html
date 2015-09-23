@@ -65,7 +65,7 @@
               </td>
               <td align="center" ng-repeat="test in ttiTestsBasic">
                 <ui-select  ng-init="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id] = sample.recentTestResults[test.id].result"
-                            ng-model="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id]" ng-disabled="disabled" style="min-width: 300px;">
+                            ng-model="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id]" ng-disabled="disabled">
                   <ui-select-match placeholder="Select">{{$select.selected}}</ui-select-match>
                   <ui-select-choices repeat="result in test.validResults  | filter: {$: $select.search}">
                     <div ng-bind-html="result | highlight: $select.search"></div>
