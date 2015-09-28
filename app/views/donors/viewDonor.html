@@ -72,7 +72,7 @@
     <small><em>Donor Number: </em></small> {{donor.donorNumber}}
     | 
     <small><em>Venue: </em></small>
-    <span editable-select="donor.venue.id" e-class="xeditable donor-panel" e-ng-options="item.id as item.name for item in venues" e-name="venue"  e-required>
+    <span editable-select="donor.venue.id" e-class="xeditable venue" e-ng-options="item.id as item.name for item in venues" e-name="venue"  e-required>
       {{donor.venue.name}}
     </span>
     | 

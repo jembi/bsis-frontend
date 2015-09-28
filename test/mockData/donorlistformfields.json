@@ -1,11 +1,11 @@
 {
-  "donorPanels": [
+  "venues": [
     {
       "id": 3,
       "name": "Maseru",
       "isUsageSite": true,
       "isMobileSite": false,
-      "isDonorPanel": true,
+      "isVenue": true,
       "isDeleted": false,
       "notes": ""
     },
@@ -14,7 +14,7 @@
       "name": "Mohale's Hoek",
       "isUsageSite": false,
       "isMobileSite": false,
-      "isDonorPanel": true,
+      "isVenue": true,
       "isDeleted": false,
       "notes": ""
     },
@@ -23,7 +23,7 @@
       "name": "Leribe",
       "isUsageSite": true,
       "isMobileSite": false,
-      "isDonorPanel": true,
+      "isVenue": true,
       "isDeleted": false,
       "notes": ""
     }

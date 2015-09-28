@@ -652,7 +652,7 @@ angular.module('bsis')
 
       $scope.addDonationSuccess = '';
 
-      // set temporary donor panel - should be auto-populated from donation batch info
+      // set temporary venue - should be auto-populated from donation batch info
       donation.venue = $scope.venues[0];
       // set temporary donationDate
       donation.donationDate = '10/16/2014 12:00:00 am';
