@@ -69,18 +69,26 @@
                   {{sample.bloodTypingMatchStatus}} 
               </td>
               <td>
-                  <select style="width:60px;" class="form-control input-sm"
-                  ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo = sample.bloodAbo"
-                  ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo"
-                  ng-options="option for option in bloodAboOptions.options">
-                  </select>
+                <div style="width:90px;">
+                  <ui-select  ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo = sample.bloodAbo"
+                              ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo" ng-disabled="disabled">
+                    <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
+                    <ui-select-choices repeat="result in bloodAboOptions.options  | filter: {$: $select.search}">
+                      <div ng-bind-html="result | highlight: $select.search"></div>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
               </td>
               <td>
-                  <select style="width:60px;" class="form-control input-sm"
-                  ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh = sample.bloodRh"
-                  ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh"
-                  ng-options="option for option in bloodRhOptions.options">
-                  </select>
+                <div style="width:90px;">
+                  <ui-select  ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh = sample.bloodRh"
+                              ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh" ng-disabled="disabled" >
+                    <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
+                    <ui-select-choices repeat="result in bloodRhOptions.options  | filter: {$: $select.search}">
+                      <div ng-bind-html="result | highlight: $select.search"></div>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
               </td>
               <td align="center">
                   <input  type="checkbox" ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].confirm = false" ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].confirm" />
