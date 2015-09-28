@@ -64,16 +64,16 @@
                   <span ng-if="sample.bloodTypingStatus!= 'NOT_DONE'">{{sample.bloodTypingStatus}} - </span>{{sample.bloodTypingMatchStatus}} 
               </td>
               <td align="center" ng-repeat="test in bloodTypingTestsBasic">
-                <ui-select
-                        ng-init="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id] = sample.recentTestResults[test.id].result"
-                        ng-model="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id]" ng-disabled="disabled"
-                        style="width:100px" >
-                  <ui-select-match placeholder="Select" style="width:100px" >{{$select.selected}}</ui-select-match>
-                  <ui-select-choices repeat="result in test.validResults  | filter: {$: $select.search}" style="width:100px" >
-                    <div ng-bind-html="result | highlight: $select.search"></div>
-                  </ui-select-choices>
-                </ui-select>
-              </td>
+                <div style="width:90px;">
+                  <ui-select
+                          ng-init="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id] = sample.recentTestResults[test.id].result"
+                          ng-model="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id]" ng-disabled="disabled">
+                    <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
+                    <ui-select-choices repeat="result in test.validResults  | filter: {$: $select.search}">
+                      <div ng-bind-html="result | highlight: $select.search"></div>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
               </td>
           </tr>
         </tbody>
