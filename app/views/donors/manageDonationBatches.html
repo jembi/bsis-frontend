@@ -23,8 +23,8 @@
                     <td data-title="'Created'" style="width:30%;" header-class="text-left" sortable="'date'">
                         {{donationBatch.createdDate | bsisDate}}
                     </td>
-                    <td data-title="'Panel'" style="width:25%;" header-class="text-left" sortable="'center'">
-                        {{donationBatch.donorPanel.name}}
+                    <td data-title="'Venue'" style="width:25%;" header-class="text-left" sortable="'center'">
+                        {{donationBatch.venue.name}}
                     </td>
                     <td data-title="'# of Donations'" style="width:20%;" header-class="text-left" class="text-center" sortable="'numDonations'">
                         {{donationBatch.numDonations}}
@@ -42,21 +42,21 @@
               <h4>New Donation Batch</h4>
               <form name="addDonationBatchForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addDonationBatch(newDonationBatch, addDonationBatchForm)">
                 <div class="form-group">
-                  <label for="name" class="col-sm-1 control-label">Panel</label>
+                  <label for="name" class="col-sm-1 control-label">Venue</label>
                   <div class="row col-sm-11">
                     <div class="form-inline" style="padding-left:5px;">
-                      <select name="donorPanel" class="form-control input-sm" ng-model="newDonationBatch.donorPanel" ng-options="item.id as item.name disable when item.disabled for item in donorPanels" required
-                      ng-class="{'ng-invalid ng-dirty' : addDonationBatchForm.donorPanel.$invalid && submitted}">
+                      <select name="venue" class="form-control input-sm" ng-model="newDonationBatch.venue" ng-options="item.id as item.name disable when item.disabled for item in venues" required
+                      ng-class="{'ng-invalid ng-dirty' : addDonationBatchForm.venue.$invalid && submitted}">
                           <option value="" ng-disabled="true"></option>
                       </select>
                       <div>
                         <small class="error" 
                           ng-show="
-                            (addDonationBatchForm.donorPanel.$invalid && (addDonationBatchForm.donorPanel.$dirty || submitted))
+                            (addDonationBatchForm.venue.$invalid && (addDonationBatchForm.venue.$dirty || submitted))
                           ">
                           This cannot be empty
                         </small>
-                          <small class="error" ng-show="err['donationBatch.donorPanel']">{{err["donationBatch.donorPanel"]}}</small>
+                          <small class="error" ng-show="err['donationBatch.venue']">{{err["donationBatch.venue"]}}</small>
                       </div>
                     </div>
                   </div>
@@ -98,8 +98,8 @@
                     <td data-title="'Closed'" style="width:30%;" header-class="text-left" sortable="'date'">
                         {{donationBatch.lastUpdated | bsisDateTime }}
                     </td>
-                    <td data-title="'Panel'" style="width:25%;" header-class="text-left" sortable="'center'">
-                        {{donationBatch.donorPanel.name}}
+                    <td data-title="'Venue'" style="width:25%;" header-class="text-left" sortable="'center'">
+                        {{donationBatch.venue.name}}
                     </td>
                     <td data-title="'# of Donations'" style="width:25%;" header-class="text-left" class="text-center" sortable="'numDonations'">
                         {{donationBatch.numDonations}}

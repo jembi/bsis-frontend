@@ -3,13 +3,13 @@
 angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, Api, LocationsService, DATEFORMAT) {
 
   $scope.dateFormat = DATEFORMAT;
-  $scope.donorPanels = [];
+  $scope.venues = [];
   $scope.donations = [];
 
   $scope.searched = false;
 
   var master = {
-    selectedDonorPanels: [],
+    selectedVenues: [],
     startDate: null,
     endDate: null
   };
@@ -24,16 +24,16 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $scope.search.endDate = new Date($routeParams.endDate);
   }
 
-  if ($routeParams.donorPanel) {
-    var donorPanels = $routeParams.donorPanel;
-    if (!angular.isArray(donorPanels)) {
-      donorPanels = [donorPanels];
+  if ($routeParams.venue) {
+    var venues = $routeParams.venue;
+    if (!angular.isArray(venues)) {
+      venues = [venues];
     }
-    $scope.search.selectedDonorPanels = donorPanels;
+    $scope.search.selectedVenues = venues;
   }
 
-  LocationsService.getDonorPanels(function(donorPanels) {
-    $scope.donorPanels = donorPanels;
+  LocationsService.getVenues(function(venues) {
+    $scope.venues = venues;
   });
 
   $scope.clearSearch = function() {
@@ -47,8 +47,8 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $scope.search.endDate = null;
   };
 
-  $scope.clearDonorPanels = function() {
-    $scope.search.selectedDonorPanels = [];
+  $scope.clearVenues = function() {
+    $scope.search.selectedVenues = [];
   };
 
   $scope.viewDonorCounselling = function(donation) {
@@ -81,9 +81,9 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       queryParams.endDate = endDate;
     }
 
-    if ($scope.search.selectedDonorPanels.length > 0) {
-      query.donorPanel = $scope.search.selectedDonorPanels;
-      queryParams.donorPanel = $scope.search.selectedDonorPanels;
+    if ($scope.search.selectedVenues.length > 0) {
+      query.venue = $scope.search.selectedVenues;
+      queryParams.venue = $scope.search.selectedVenues;
     }
 
     $location.search(queryParams);

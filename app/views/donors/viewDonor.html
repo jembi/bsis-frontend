@@ -71,9 +71,9 @@
     | 
     <small><em>Donor Number: </em></small> {{donor.donorNumber}}
     | 
-    <small><em>Donor Panel: </em></small> 
-    <span editable-select="donor.donorPanel.id" e-class="xeditable donor-panel" e-ng-options="item.id as item.name for item in donorPanels" e-name="donorPanel"  e-required>
-      {{donor.donorPanel.name}}
+    <small><em>Venue: </em></small>
+    <span editable-select="donor.venue.id" e-class="xeditable donor-panel" e-ng-options="item.id as item.name for item in venues" e-name="venue"  e-required>
+      {{donor.venue.name}}
     </span>
     | 
     <small><em>Preferred Language: </em></small> 
@@ -148,7 +148,7 @@
                 <td class="field">Previous Donation: </td>
                 <td class="value">
                   <em>Date</em>: {{ (lastDonation.donationDate | bsisDateTime) || '' }}<br/>
-                  <em>Panel</em>: {{lastDonation.donorPanel.name}} <br/>
+                  <em>Venue</em>: {{lastDonation.venue.name}} <br/>
                   <em>Donation Type</em>: {{lastDonation.donationType.donationType}} | 
                   <em>Pack Type</em>: {{lastDonation.packType.packType}}<br/>
                   <em>Wt</em>: {{lastDonation.donorWeight}} {{weightUnit}} |
