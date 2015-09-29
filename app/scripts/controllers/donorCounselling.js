@@ -150,19 +150,6 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
         {text: 'Venue(s): ' + venues.join(', '), width: 'auto'}
       ];
 
-      //// Include last donation date range
-      //if ($scope.lastDonationFromDate && $scope.currentSearch.lastDonationToDate) {
-      //  var fromDate = $filter('bsisDate')($scope.currentSearch.lastDonationFromDate);
-      //  var toDate = $filter('bsisDate')($scope.currentSearch.lastDonationToDate);
-      //  columns.push({text: 'Date of Last Donation: ' + fromDate + ' to ' + toDate, width: 'auto'});
-      //}
-      //
-      //// Include date due to donate
-      //if ($scope.clinicDate) {
-      //  var dueToDonateDate = $filter('bsisDate')($scope.currentSearch.clinicDate);
-      //  columns.push({text: 'Due to Donate: ' + dueToDonateDate, width: 'auto'});
-      //}
-
       return [
         {
           text: 'Donors List',
