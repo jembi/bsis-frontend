@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, Api, LocationsService, DATEFORMAT) {
+angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, Api, LocationsService, DATEFORMAT, $filter) {
 
   $scope.dateFormat = DATEFORMAT;
   $scope.venues = [];
@@ -91,9 +91,105 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     Api.DonationSummaries.query(query, function(response) {
       $scope.searched = true;
       $scope.donations = response;
+      $scope.gridOptions.data = response;
     }, function(err) {
       console.error(err);
     });
+  };
+
+  var columnDefs = [
+    {name: 'Donor Number', field: 'donor.donorNumber'},
+    {name: 'First Name', field: 'donor.firstName'},
+    {name: 'Last Name', field: 'donor.lastName'},
+    {
+      name: 'Date of Last Donation',
+      field: 'donationDate',
+      cellFilter: 'bsisDate'
+    },
+    {name: 'Blood Group', field: 'donor.bloodGroup'},
+    {
+      name: 'Venue',
+      field: 'venue.name'
+    }
+  ];
+
+  $scope.gridOptions = {
+    data: [],
+    paginationPageSize: 10,
+    paginationPageSizes: [10],
+    paginationTemplate: 'views/template/pagination.html',
+    enableGridMenu: true,
+    columnDefs: columnDefs,
+
+    // Format values for exports
+    exporterFieldCallback: function(grid, row, col, value) {
+      if (col.name === 'Date of Last Donation') {
+        return $filter('bsisDate')(value);
+      }
+      return value;
+    },
+
+    // PDF header
+    exporterPdfHeader: function() {
+
+      var venues = $scope.venues.map(function(venue) {
+        return venue.name;
+      });
+
+      var bloodGroups = angular.copy($scope.bloodGroups);
+
+      if ($scope.anyBloodGroup) {
+        bloodGroups.push('Any');
+      }
+
+      if ($scope.noBloodGroup) {
+        bloodGroups.push('None');
+      }
+
+      var columns = [
+        {text: 'Venue(s): ' + venues.join(', '), width: 'auto'}
+      ];
+
+      //// Include last donation date range
+      //if ($scope.lastDonationFromDate && $scope.currentSearch.lastDonationToDate) {
+      //  var fromDate = $filter('bsisDate')($scope.currentSearch.lastDonationFromDate);
+      //  var toDate = $filter('bsisDate')($scope.currentSearch.lastDonationToDate);
+      //  columns.push({text: 'Date of Last Donation: ' + fromDate + ' to ' + toDate, width: 'auto'});
+      //}
+      //
+      //// Include date due to donate
+      //if ($scope.clinicDate) {
+      //  var dueToDonateDate = $filter('bsisDate')($scope.currentSearch.clinicDate);
+      //  columns.push({text: 'Due to Donate: ' + dueToDonateDate, width: 'auto'});
+      //}
+
+      return [
+        {
+          text: 'Donors List',
+          bold: true,
+          margin: [30, 10, 30, 0]
+        },
+        {
+          columns: columns,
+          columnGap: 10,
+          margin: [30, 0]
+        }
+      ];
+    },
+
+    // PDF footer
+    exporterPdfFooter: function(currentPage, pageCount) {
+      var columns = [
+        {text: 'Total donors: ' + $scope.gridOptions.data.length, width: 'auto'},
+        {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
+        {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+      ];
+      return {
+        columns: columns,
+        columnGap: 10,
+        margin: [30, 0]
+      };
+    }
   };
 
   if ($routeParams.search) {
