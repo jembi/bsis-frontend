@@ -78,7 +78,7 @@ angular.module('bsis')
 
     $scope.removeLocation = function(location){
       location.isDeleted = true;
-      SettingsService.updateLocation(location, function(response){
+      LocationsService.updateLocation(location, function(response){
         if (response !== false){
           $scope.locationToRemove = '';
           $scope.getLocations();
