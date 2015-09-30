@@ -134,14 +134,14 @@
       "displayName": "State",
       "isAutoGeneratable": false
     },
-    "donorPanel": {
+    "venue": {
       "shortDisplayName": null,
       "hidden": false,
       "useCurrentTime": false,
       "isTimeField": false,
       "autoGenerate": false,
       "defaultValue": "",
-      "displayName": "Donor Panel",
+      "displayName": "Venue",
       "isAutoGeneratable": false
     },
     "contactMethodType": {
@@ -604,13 +604,13 @@
       "isDeleted": false
     }
   ],
-  "donorPanels": [
+  "venues": [
     {
       "id": 3,
       "name": "Maseru",
       "isUsageSite": true,
       "isMobileSite": false,
-      "isDonorPanel": true,
+      "isVenue": true,
       "isDeleted": false,
       "notes": ""
     },
@@ -619,7 +619,7 @@
       "name": "Mohale's Hoek",
       "isUsageSite": false,
       "isMobileSite": false,
-      "isDonorPanel": true,
+      "isVenue": true,
       "isDeleted": false,
       "notes": ""
     },
@@ -628,7 +628,7 @@
       "name": "Leribe",
       "isUsageSite": true,
       "isMobileSite": false,
-      "isDonorPanel": true,
+      "isVenue": true,
       "isDeleted": false,
       "notes": ""
     }
@@ -659,7 +659,7 @@
     "callingName": null,
     "preferredLanguage": null,
     "lastUpdated": null,
-    "donorPanel": null,
+    "venue": null,
     "age": null,
     "idNumber": null,
     "idType": null,

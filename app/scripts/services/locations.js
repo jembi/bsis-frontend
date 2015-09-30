@@ -11,10 +11,10 @@ angular.module('bsis')
       });
     },
 
-    getDonorPanels: function(onSuccess, onError) {
+    getVenues: function(onSuccess, onError) {
       Api.Locations.get({}, function(response) {
         onSuccess(response.allLocations.filter(function(loc) {
-          return loc.isDonorPanel;
+          return loc.isVenue;
         }));
       }, onError);
     },

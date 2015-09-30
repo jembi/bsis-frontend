@@ -246,7 +246,7 @@ angular.module('bsis')
         $scope.data = response;
         $scope.addressTypes = $scope.data.addressTypes;
         $scope.languages = $scope.data.languages;
-        $scope.donorPanels = $scope.data.donorPanels;
+        $scope.venues = $scope.data.venues;
         $scope.idTypes = $scope.data.idTypes;
         $scope.preferredContactMethods = $scope.data.preferredContactMethods;
         $scope.title = TITLE.options;
@@ -479,7 +479,7 @@ angular.module('bsis')
         $scope.addDonationSuccess = '';
 
         // set donation center, site & date to those of the donation batch
-        donation.donorPanel = donationBatch.donorPanel;
+        donation.venue = donationBatch.venue;
         donation.donationDate = donationBatch.createdDate;
         donation.donationBatchNumber = donationBatch.batchNumber;
 
@@ -599,7 +599,7 @@ angular.module('bsis')
         $scope.data = response;
         $scope.addressTypes = $scope.data.addressTypes;
         $scope.languages = $scope.data.languages;
-        $scope.donorPanels = $scope.data.donorPanels;
+        $scope.venues = $scope.data.venues;
         $scope.donor = $scope.data.addDonorForm;
         $scope.searchDonor = DonorService.getDonor();
         $scope.donor.firstName = $scope.searchDonor.firstName;
@@ -638,7 +638,7 @@ angular.module('bsis')
     DonorService.getDonationsFormFields(function(response){
       if (response !== false){
         $scope.data = response;
-        $scope.donorPanels = response.donorPanels;
+        $scope.venues = response.venues;
         $scope.packTypes = $scope.data.packTypes;
         $scope.donationTypes = $scope.data.donationTypes;
         $scope.donation = $scope.data.addDonationForm;
@@ -652,8 +652,8 @@ angular.module('bsis')
 
       $scope.addDonationSuccess = '';
 
-      // set temporary donor panel - should be auto-populated from donation batch info
-      donation.donorPanel = $scope.donorPanels[0];
+      // set temporary venue - should be auto-populated from donation batch info
+      donation.venue = $scope.venues[0];
       // set temporary donationDate
       donation.donationDate = '10/16/2014 12:00:00 am';
 
@@ -695,11 +695,11 @@ angular.module('bsis')
           data = response.donationBatches;
           $scope.data = data;
           DonorService.getDonationBatchFormFields( function(response){
-            $scope.donorPanels = response.donorPanels;
+            $scope.venues = response.venues;
             angular.forEach(data, function(item) {
-              angular.forEach($scope.donorPanels, function(panel, i){
-                if (panel.name == item.donorPanel.name){
-                  $scope.donorPanels[i].disabled = true;
+              angular.forEach($scope.venues, function(panel, i){
+                if (panel.name == item.venue.name){
+                  $scope.venues[i].disabled = true;
                 }
               });
             });
@@ -861,7 +861,7 @@ angular.module('bsis')
         $scope.data = data;
 
         DonorService.getDonationBatchFormFields(function (response) {
-          $scope.donorPanels = response.donorPanels;
+          $scope.venues = response.venues;
         }, console.error);
       }, console.error);
     };
@@ -972,7 +972,7 @@ angular.module('bsis')
       DonorService.getDonationsFormFields(function(response){
         if (response !== false){
           $scope.data = response;
-          $scope.donorPanels = response.donorPanels;
+          $scope.venues = response.venues;
           $scope.packTypes = $scope.data.packTypes;
           $scope.donationTypes = $scope.data.donationTypes;
           $scope.donation = $scope.data.addDonationForm;
@@ -992,7 +992,7 @@ angular.module('bsis')
         $scope.addDonationSuccess = '';
 
         // set donation center, site & date to those of the donation batch
-        donation.donorPanel = $scope.donationBatch.donorPanel;
+        donation.venue = $scope.donationBatch.venue;
         donation.donationDate = $scope.donationBatch.createdDate;
         donation.donationBatchNumber = $scope.donationBatch.batchNumber;
         donation.bleedStartTime = bleedStartTime;

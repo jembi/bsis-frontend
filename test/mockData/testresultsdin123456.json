@@ -1,7 +1,7 @@
 {
   "donationIdentificationNumber": "12345",
   "donationBatch": "DB11100002MS",
-  "donorPanel": "Maseru",
+  "venue": "Maseru",
   "donationDate": "08/10/2014",
   "testBatch": "1000331",
   "testedOn": "09/10/2014",

@@ -3,7 +3,7 @@
 angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $filter, $location, $routeParams, BLOODGROUP, DATEFORMAT, DonorService) {
 
   $scope.dateFormat = DATEFORMAT;
-  $scope.donorPanels = [];
+  $scope.venues = [];
   $scope.bloodGroups = [];
   $scope.error = {
     message: null
@@ -12,28 +12,28 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
 
   DonorService.getDonationBatchFormFields(function(res) {
     $scope.bloodGroups = BLOODGROUP.options;
-    $scope.donorPanels = res.donorPanels;
+    $scope.venues = res.venues;
 
     // Work around issue with ui-select and tracking by id
     // See https://github.com/angular-ui/ui-select/issues/806
-    $scope.search.donorPanels = $scope.search.donorPanels.map(function(selectedDonorPanel) {
-      var donorPanels = $scope.donorPanels;
-      for (var index in donorPanels) {
-        if (donorPanels[index].id === selectedDonorPanel.id) {
-          return donorPanels[index];
+    $scope.search.venues = $scope.search.venues.map(function(selectedVenue) {
+      var venues = $scope.venues;
+      for (var index in venues) {
+        if (venues[index].id === selectedVenue.id) {
+          return venues[index];
         }
       }
-      return selectedDonorPanel;
+      return selectedVenue;
     });
-    if ($scope.currentSearch && $scope.currentSearch.donorPanels) {
-      $scope.currentSearch.donorPanels = $scope.currentSearch.donorPanels.map(function(selectedDonorPanel) {
-        var donorPanels = $scope.donorPanels;
-        for (var index in donorPanels) {
-          if (donorPanels[index].id === selectedDonorPanel.id) {
-            return donorPanels[index];
+    if ($scope.currentSearch && $scope.currentSearch.venues) {
+      $scope.currentSearch.venues = $scope.currentSearch.venues.map(function(selectedVenue) {
+        var venues = $scope.venues;
+        for (var index in venues) {
+          if (venues[index].id === selectedVenue.id) {
+            return venues[index];
           }
         }
-        return selectedDonorPanel;
+        return selectedVenue;
       });
     }
   }, function(err) {
@@ -41,7 +41,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
   });
 
   var master = $scope.master = {
-    donorPanels: [],
+    venues: [],
     bloodGroups: [],
     anyBloodGroup: true,
     noBloodGroup: false,
@@ -58,8 +58,8 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
   }
 
   $scope.search = {
-    donorPanels: (toArray($routeParams.donorPanels) || master.donorPanels).map(function(donorPanelId) {
-      return {id: +donorPanelId};
+    venues: (toArray($routeParams.venues) || master.venues).map(function(venueId) {
+      return {id: +venueId};
     }),
     bloodGroups: toArray($routeParams.bloodGroups) || master.bloodGroups,
     anyBloodGroup: angular.isUndefined($routeParams.anyBloodGroup) ? master.anyBloodGroup : $routeParams.anyBloodGroup === true,
@@ -80,8 +80,8 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
     },
     {field: 'bloodGroup'},
     {
-      name: 'Donor Panel',
-      field: 'donorPanel.name'
+      name: 'Venue',
+      field: 'venue.name'
     }
   ];
 
@@ -104,8 +104,8 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
     // PDF header
     exporterPdfHeader: function() {
 
-      var donorPanels = $scope.currentSearch.donorPanels.map(function(donorPanel) {
-        return donorPanel.name;
+      var venues = $scope.currentSearch.venues.map(function(venue) {
+        return venue.name;
       });
 
       var bloodGroups = angular.copy($scope.currentSearch.bloodGroups);
@@ -119,7 +119,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
       }
 
       var columns = [
-        {text: 'Venue(s): ' + donorPanels.join(', '), width: 'auto'},
+        {text: 'Venue(s): ' + venues.join(', '), width: 'auto'},
         {text: 'Blood Group(s): ' + bloodGroups.join(', '), width: 'auto'}
       ];
 
@@ -174,8 +174,8 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
     $scope.currentSearch = angular.copy($scope.search);
 
     var search = angular.extend({}, $scope.currentSearch, {
-      donorPanels: $scope.currentSearch.donorPanels.map(function(donorPanel) {
-        return donorPanel.id;
+      venues: $scope.currentSearch.venues.map(function(venue) {
+        return venue.id;
       })
     });
 
