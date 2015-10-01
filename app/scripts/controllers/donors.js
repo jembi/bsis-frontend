@@ -717,12 +717,11 @@ angular.module('bsis')
     var currentStep = 1;
     $scope.currentStep = currentStep;
     $scope.lastStep = 7;
+    var donorFields = {};
+    $scope.donorFields = donorFields;
 
     var selectedDonorsData = [{}];
     $scope.selectedDonorsData = selectedDonorsData;
-
-    var donorFields = {};
-    $scope.donorFields = donorFields;
 
     var mergedDonor = {};
     $scope.mergedDonor = mergedDonor;
@@ -938,8 +937,49 @@ angular.module('bsis')
           return;
         }
       } else if (newStep == 3) {
+        // set the idType and idNumber according to which option was selected
+        angular.forEach(selectedDonorsData, function(donor, i) {
+          if (donor.id == mergedDonor.idNumberId) {
+            mergedDonor.idType = donor.idType;
+            mergedDonor.idNumber = donor.idNumber;
+          }
+        });
       } else if (newStep == 4) {
       } else if (newStep == 5) {
+        // set the work, home and postal addresses according to which option was selected
+        mergedDonor.address = {};
+        angular.forEach(selectedDonorsData, function(donor, i) {
+          if (donor.address.id == mergedDonor.homeAddress) {
+            mergedDonor.address.homeAddressLine1 = donor.address.homeAddressLine1;
+            mergedDonor.address.homeAddressLine2 = donor.address.homeAddressLine2;
+            mergedDonor.address.homeAddressCity = donor.address.homeAddressCity;
+            mergedDonor.address.homeAddressProvince = donor.address.homeAddressProvince;
+            mergedDonor.address.homeAddressDistrict = donor.address.homeAddressDistrict;
+            mergedDonor.address.homeAddressCountry = donor.address.homeAddressCountry;
+            mergedDonor.address.homeAddressState = donor.address.homeAddressState;
+            mergedDonor.address.homeAddressZipcode = donor.address.homeAddressZipcode;
+          }
+          if (donor.address.id == mergedDonor.postalAddress) {
+            mergedDonor.address.postalAddressLine1 = donor.address.postalAddressLine1;
+            mergedDonor.address.postalAddressLine2 = donor.address.postalAddressLine2;
+            mergedDonor.address.postalAddressCity = donor.address.postalAddressCity;
+            mergedDonor.address.postalAddressProvince = donor.address.postalAddressProvince;
+            mergedDonor.address.postalAddressDistrict = donor.address.postalAddressDistrict;
+            mergedDonor.address.postalAddressCountry = donor.address.postalAddressCountry;
+            mergedDonor.address.postalAddressState = donor.address.postalAddressState;
+            mergedDonor.address.postalAddressZipcode = donor.address.postalAddressZipcode;
+          }
+          if (donor.address.id == mergedDonor.workAddress) {
+            mergedDonor.address.workAddressLine1 = donor.address.workAddressLine1;
+            mergedDonor.address.workAddressLine2 = donor.address.workAddressLine2;
+            mergedDonor.address.workAddressCity = donor.address.workAddressCity;
+            mergedDonor.address.workAddressProvince = donor.address.workAddressProvince;
+            mergedDonor.address.workAddressDistrict = donor.address.workAddressDistrict;
+            mergedDonor.address.workAddressCountry = donor.address.workAddressCountry;
+            mergedDonor.address.workAddressState = donor.address.workAddressState;
+            mergedDonor.address.workAddressZipcode = donor.address.workAddressZipcode;
+          }
+        });
         // load data for next step
         $scope.viewDonorsDeferrals();
       } else if (newStep == 6) {
@@ -952,13 +992,37 @@ angular.module('bsis')
     };
 
     $scope.merge = function (item) {
+      // set the data that isn't selectable
+      mergedDonor.firstName = selectedDonorsData[0].firstName;
+      mergedDonor.lastName = selectedDonorsData[0].lastName;
+      mergedDonor.gender = selectedDonorsData[0].gender;
+      mergedDonor.birthDate = selectedDonorsData[0].birthDate;
+      // clear the temporary selections
+      delete mergedDonor.idNumberId;
+      delete mergedDonor.homeAddress;
+      delete mergedDonor.workAddress;
+      delete mergedDonor.postalAddress;
       // clear the none selections
       angular.forEach(mergedDonor, function(attribute, i) {
         if (attribute == "none") {
           mergedDonor[i] = null;
         }
       });
-      // FIXME: submit
+      // set the duplicate donor numbers
+      mergedDonor.duplicateDonorNumbers = [];
+      angular.forEach(selectedDonorsData, function(donor, i) {
+        mergedDonor.duplicateDonorNumbers.push(donor.donorNumber);
+      });
+      // submit
+      DonorService.mergeDonorsDuplicate(groupKey, mergedDonor, 
+        function(mergedDonor) {
+          $location.path("/viewDonor/" + mergedDonor.id).search({});
+        }, 
+        function(err) {
+          $scope.hasMessage = true;
+          $scope.message = "Error merging the duplicate Donors. More information: "+err.moreInfo+" ... "+JSON.stringify(err);
+        }
+      );
     };
 
     $scope.cancel = function (item) {

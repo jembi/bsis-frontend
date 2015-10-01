@@ -115,6 +115,15 @@ angular.module('bsis')
         }
       ),
 
+      DonorMergeDuplicates: $resource(url + '/donors/duplicates/merge', {},
+        {
+          query: {
+            method: 'POST',
+            params:{donorNumber: '@donorNumber'}
+          }
+        }
+      ),
+
       ComponentsSearch: $resource(url + '/components/search', {},
         {
           query: {

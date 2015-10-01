@@ -321,6 +321,18 @@ angular.module('bsis')
       }, function (){
         response(false);
       });
+    },
+
+    mergeDonorsDuplicate: function(donorNumber, donors, onSuccess, onError) {
+      // create $Resource object and assign donor values
+      var duplicateDonors = new Api.DonorMergeDuplicates();
+      angular.copy(donors, duplicateDonors);
+      // save donation (POST /donations)
+      duplicateDonors.$save({donorNumber: donorNumber}, function(data) {
+        onSuccess(data.donor);
+      }, function (err){
+        onError(err.data);
+      });
     }
 
   };

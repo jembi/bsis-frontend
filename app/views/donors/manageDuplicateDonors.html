@@ -97,7 +97,7 @@
               </td>
               <td data-title="'Identifier'" header-class="text-left" sortable="'idNumber'">
                 <div ng-if="donor.idNumber != null && donor.idNumber != ''">
-                  <input type="radio" name="idNumber" ng-model="mergedDonor.idNumber" ng-value="donor.idNumber" required>
+                  <input type="radio" name="idNumber" ng-model="mergedDonor.idNumberId" ng-value="donor.id" required>
                   {{donor.idType.idType}}: {{donor.idNumber}}
                 </div>
               </td>
@@ -115,12 +115,12 @@
               </td>
               <td data-title="'PreferredLanguage'" header-class="text-left" sortable="'preferredLanguage'">
                 <div ng-if="donor.preferredLanguage != null && donor.preferredLanguage != ''">
-                  <input type="radio" name="preferredLanguage" ng-model="mergedDonor.preferredLanguage" ng-value="donor.preferredLanguage.preferredLanguage" required>
+                  <input type="radio" name="preferredLanguage" ng-model="mergedDonor.preferredLanguage" ng-value="donor.preferredLanguage" required>
                   {{donor.preferredLanguage.preferredLanguage}}
                 </div>
               </td>
               <td data-title="'Panel'" header-class="text-left" sortable="'donorPanel'">
-                <input type="radio" name="donorPanel" ng-model="mergedDonor.donorPanel" ng-value="donor.donorPanel.name" required>
+                <input type="radio" name="donorPanel" ng-model="mergedDonor.donorPanel" ng-value="donor.donorPanel" required>
                 {{donor.donorPanel.name}}
               </td>
               <td data-title="'Comments'" header-class="text-left" sortable="'notes'">
@@ -138,7 +138,7 @@
               </td>
               <td data-title="'Identifier'" header-class="text-left" sortable="'idNumber'">
                 <div ng-if="donorFields['idNumber']">
-                  <input type="radio" name="idNumber" ng-model="mergedDonor.idNumber" value="none" required>
+                  <input type="radio" name="idNumber" ng-model="mergedDonor.idNumberId" value="none" required>
                   None of the above
                   <small class="error" ng-show="(mergeDonorForm.idNumber.$invalid && (mergeDonorForm.idNumber.$dirty || invalid))">
                     <br/>Please select one
@@ -195,31 +195,31 @@
               </td>
               <td data-title="'Preferred Contact Type'" header-class="text-left" sortable="'contactMethodType'">
                 <div ng-if="donor.contactMethodType != null">
-                  <input type="radio" name="contactMethodType" ng-model="mergedDonor.contactMethodType" ng-value="donor.contactMethodType.contactMethodType" required>
+                  <input type="radio" name="contactMethodType" ng-model="mergedDonor.contactMethodType" ng-value="donor.contactMethodType" required>
                   {{donor.contactMethodType.contactMethodType}}
                 </div>
               </td>
               <td data-title="'Email'" header-class="text-left" sortable="'email'">
                 <div ng-if="donor.contact.email != null && donor.contact.email != ''">
-                  <input type="radio" name="email" ng-model="mergedDonor.email" ng-value="donor.contact.email" required>
+                  <input type="radio" name="email" ng-model="mergedDonor.contact.email" ng-value="donor.contact.email" required>
                   {{donor.contact.email}}
                 </div>
               </td>
               <td data-title="'Mobile'" header-class="text-left" sortable="'mobileNumber'">
                 <div ng-if="donor.contact.mobileNumber != null && donor.contact.mobileNumber != ''">
-                  <input type="radio" name="mobileNumber" ng-model="mergedDonor.mobileNumber" ng-value="donor.contact.mobileNumber" required>
+                  <input type="radio" name="mobileNumber" ng-model="mergedDonor.contact.mobileNumber" ng-value="donor.contact.mobileNumber" required>
                   {{donor.contact.mobileNumber}}
                 </div>
               </td>
               <td data-title="'Home'" header-class="text-left" sortable="'homeNumber'">
                 <div ng-if="donor.contact.homeNumber != null && donor.contact.homeNumber != ''">
-                  <input type="radio" name="homeNumber" ng-model="mergedDonor.homeNumber" ng-value="donor.contact.homeNumber" required>
+                  <input type="radio" name="homeNumber" ng-model="mergedDonor.contact.homeNumber" ng-value="donor.contact.homeNumber" required>
                   {{donor.contact.homeNumber}}
                 </div>
               </td>
               <td data-title="'Work'" header-class="text-left" sortable="'workNumber'">
                 <div ng-if="donor.contact.workNumber != null && donor.contact.workNumber != ''">
-                  <input type="radio" name="workNumber" ng-model="mergedDonor.workNumber" ng-value="donor.contact.workNumber" required>
+                  <input type="radio" name="workNumber" ng-model="mergedDonor.contact.workNumber" ng-value="donor.contact.workNumber" required>
                   {{donor.contact.workNumber}}
                 </div>
               </td>
@@ -241,36 +241,36 @@
               </td>
               <td data-title="'Email'" header-class="text-left" sortable="'email'">
                 <div ng-if="donorFields['email']">
-                    <input type="radio" name="email" ng-model="mergedDonor.email" value="none" required>
+                    <input type="radio" name="email" ng-model="mergedDonor.contact.email" value="none" required>
                     None of the above
-                    <small class="error" ng-show="(mergeDonorForm.email.$invalid && (mergeDonorForm.email.$dirty || invalid))">
+                    <small class="error" ng-show="(mergeDonorForm.contact.email.$invalid && (mergeDonorForm.contact.email.$dirty || invalid))">
                       <br/>Please select one
                     </small>
                 </div>
               </td>
               <td data-title="'Mobile'" header-class="text-left" sortable="'mobileNumber'">
                 <div ng-if="donorFields['mobileNumber']">
-                    <input type="radio" name="mobileNumber" ng-model="mergedDonor.mobileNumber" value="none" required>
+                    <input type="radio" name="mobileNumber" ng-model="mergedDonor.contact.mobileNumber" value="none" required>
                     None of the above
-                    <small class="error" ng-show="(mergeDonorForm.mobileNumber.$invalid && (mergeDonorForm.mobileNumber.$dirty || invalid))">
+                    <small class="error" ng-show="(mergeDonorForm.contact.mobileNumber.$invalid && (mergeDonorForm.contact.mobileNumber.$dirty || invalid))">
                       <br/>Please select one
                     </small>
                 </div>
               </td>
               <td data-title="'Home'" header-class="text-left" sortable="'homeNumber'">
                 <div ng-if="donorFields['homeNumber']">
-                    <input type="radio" name="homeNumber" ng-model="mergedDonor.homeNumber" value="none" required>
+                    <input type="radio" name="homeNumber" ng-model="mergedDonor.contact.homeNumber" value="none" required>
                     None of the above
-                    <small class="error" ng-show="(mergeDonorForm.homeNumber.$invalid && (mergeDonorForm.homeNumber.$dirty || invalid))">
+                    <small class="error" ng-show="(mergeDonorForm.contact.homeNumber.$invalid && (mergeDonorForm.contact.homeNumber.$dirty || invalid))">
                       <br/>Please select one
                     </small>
                 </div>
               </td>
               <td data-title="'Work'" header-class="text-left" sortable="'workNumber'">
                 <div ng-if="donorFields['workNumber']">
-                    <input type="radio" name="workNumber" ng-model="mergedDonor.workNumber" value="none" required>
+                    <input type="radio" name="workNumber" ng-model="mergedDonor.contact.workNumber" value="none" required>
                     None of the above
-                    <small class="error" ng-show="(mergeDonorForm.workNumber.$invalid && (mergeDonorForm.workNumber.$dirty || invalid))">
+                    <small class="error" ng-show="(mergeDonorForm.contact.workNumber.$invalid && (mergeDonorForm.contact.workNumber.$dirty || invalid))">
                       <br/>Please select one
                     </small>
                 </div>
@@ -291,7 +291,7 @@
               </td>
               <td data-title="'Preferred Address Type'" header-class="text-left" sortable="'preferredAddressType'">
                 <div ng-if="donor.preferredAddressType != null">
-                  <input type="radio" name="preferredAddressType" ng-model="mergedDonor.preferredAddressType" ng-value="donor.preferredAddressType.preferredAddressType" required>
+                  <input type="radio" name="preferredAddressType" ng-model="mergedDonor.preferredAddressType" ng-value="donor.preferredAddressType" required>
                   {{donor.preferredAddressType.preferredAddressType}}
                 </div>
               </td>
@@ -464,9 +464,57 @@
 
       <div ng-switch-when="7">
         <h4>Review</h4>
+        <alert type="danger" close="" ng-show="hasMessage">
+          {{message}}
+          <ul>
+            <li ng-repeat="(key, value) in message"> {{key}}: {{value}} </li>
+          </ul>
+        </alert>
         <p></p>
         <ul>
-          <li ng-repeat="(key, value) in mergedDonor"> {{key}}: {{value}} </li>
+          <li ng-if="mergedDonor.idNumber != null && mergedDonor.idNumber != ''"><b>Identifier</b>: {{mergedDonor.idType.idType}} {{mergedDonor.idNumber}}</li>
+          <li ng-if="mergedDonor.title != null && mergedDonor.title != ''"><b>Title</b>: {{mergedDonor.title}}</li>
+          <li ng-if="mergedDonor.callingName != null && mergedDonor.callingName != ''"><b>Calling Name</b>: {{mergedDonor.callingName}}</li>
+          <li ng-if="mergedDonor.preferredLanguage != null"><b>Preferred Language</b>: {{mergedDonor.preferredLanguage.preferredLanguage}}</li>
+          <li><b>Donor Panel</b>: {{mergedDonor.donorPanel.name}}</li>
+          <li ng-if="mergedDonor.comments != null && mergedDonor.comments != ''"><b>Comments</b>: {{mergedDonor.comments}}</li>
+          <li ng-if="mergedDonor.contactMethodType != null"><b>Preferred Contact Type</b>: {{mergedDonor.contactMethodType.contactMethodType}}</li>
+          <li ng-if="mergedDonor.contact.email != null && mergedDonor.contact.email != ''"><b>Email</b>: {{mergedDonor.contact.email}}</li>
+          <li ng-if="mergedDonor.contact.mobileNumber != null && mergedDonor.contact.mobileNumber != ''"><b>Mobile Number</b>: {{mergedDonor.contact.mobileNumber}}</li>
+          <li ng-if="mergedDonor.contact.homeNumber != null && mergedDonor.contact.homeNumber != ''"><b>Home Number</b>: {{mergedDonor.contact.homeNumber}}</li>
+          <li ng-if="mergedDonor.contact.workNumber != null && mergedDonor.contact.workNumber != ''"><b>Work Number</b>: {{mergedDonor.contact.workNumber}}</li>
+          <li ng-if="mergedDonor.contact.workNumber != null && mergedDonor.contact.workNumber != ''"><b>Work Number</b>: {{mergedDonor.contact.workNumber}}</li>
+          <li ng-if="mergedDonor.preferredAddressType != null"><b>Preferred Address Type</b>: {{mergedDonor.preferredAddressType.preferredAddressType}}</li>
+          <li ng-if="mergedDonor.address.homeAddressLine1 != null && mergedDonor.address.homeAddressLine1 != ''"><b>Home Address</b>:
+              <span ng-if="mergedDonor.address.homeAddressLine1 != null && mergedDonor.address.homeAddressLine1 != ''">{{mergedDonor.address.homeAddressLine1}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressLine2 != null && mergedDonor.address.homeAddressLine2 != ''">{{mergedDonor.address.homeAddressLine2}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressCity != null && mergedDonor.address.homeAddressCity != ''">{{mergedDonor.address.homeAddressCity}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressProvince != null && mergedDonor.address.homeAddressProvince != ''">{{mergedDonor.address.homeAddressProvince}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressDistrict != null && mergedDonor.address.homeAddressDistrict != ''">{{mergedDonor.address.homeAddressDistrict}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressCountry != null && mergedDonor.address.homeAddressCountry != ''">{{mergedDonor.address.homeAddressCountry}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressState != null && mergedDonor.address.homeAddressState != ''">{{mergedDonor.address.homeAddressState}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressZipcode != null && mergedDonor.address.homeAddressZipcode != ''">{{mergedDonor.address.homeAddressZipcode}}</span>
+          </li>
+          <li ng-if="mergedDonor.address.postalAddressLine1 != null && mergedDonor.address.postalAddressLine1 != ''"><b>Postal Address</b>:
+              <span ng-if="mergedDonor.address.postalAddressLine1 != null && mergedDonor.address.postalAddressLine1 != ''">{{mergedDonor.address.postalAddressLine1}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressLine2 != null && mergedDonor.address.postalAddressLine2 != ''">{{mergedDonor.address.postalAddressLine2}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressCity != null && mergedDonor.address.postalAddressCity != ''">{{mergedDonor.address.postalAddressCity}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressProvince != null && mergedDonor.address.postalAddressProvince != ''">{{mergedDonor.address.postalAddressProvince}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressDistrict != null && mergedDonor.address.postalAddressDistrict != ''">{{mergedDonor.address.postalAddressDistrict}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressCountry != null && mergedDonor.address.postalAddressCountry != ''">{{mergedDonor.address.postalAddressCountry}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressState != null && mergedDonor.address.postalAddressState != ''">{{mergedDonor.address.postalAddressState}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressZipcode != null && mergedDonor.address.postalAddressZipcode != ''">{{mergedDonor.address.postalAddressZipcode}}</span>
+          </li>
+          <li ng-if="mergedDonor.address.workAddressLine1 != null && mergedDonor.address.workAddressLine1 != ''"><b>Work Address</b>:
+              <span ng-if="mergedDonor.address.workAddressLine1 != null && mergedDonor.address.workAddressLine1 != ''">{{mergedDonor.address.workAddressLine1}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressLine2 != null && mergedDonor.address.workAddressLine2 != ''">{{mergedDonor.address.workAddressLine2}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressCity != null && mergedDonor.address.workAddressCity != ''">{{mergedDonor.address.workAddressCity}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressProvince != null && mergedDonor.address.workAddressProvince != ''">{{mergedDonor.address.workAddressProvince}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressDistrict != null && mergedDonor.address.workAddressDistrict != ''">{{mergedDonor.address.workAddressDistrict}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressCountry != null && mergedDonor.address.workAddressCountry != ''">{{mergedDonor.address.workAddressCountry}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressState != null && mergedDonor.address.workAddressState != ''">{{mergedDonor.address.workAddressState}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressZipcode != null && mergedDonor.address.workAddressZipcode != ''">{{mergedDonor.address.workAddressZipcode}}</span>
+          </li>
         </ul>
       </div>
 
