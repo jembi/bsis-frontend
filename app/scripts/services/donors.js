@@ -6,6 +6,7 @@ angular.module('bsis')
   var donorObj = {};
   var donationBatchObj = {};
   var donorsObj = {};
+  var mergedDonor = {};
 
   return {
 

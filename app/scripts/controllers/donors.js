@@ -718,7 +718,16 @@ angular.module('bsis')
     $scope.currentStep = currentStep;
     $scope.lastStep = 7;
 
-    // 1: load the duplicates
+    var selectedDonorsData = [{}];
+    $scope.selectedDonorsData = selectedDonorsData;
+
+    var donorFields = {};
+    $scope.donorFields = donorFields;
+
+    var mergedDonor = {};
+    $scope.mergedDonor = mergedDonor;
+
+    // 1a: load the duplicates
     $scope.manageDonorDuplicates = function () {
       DonorService.findDonorDuplicates(groupKey, function(response) {
         if (response !== false) {
@@ -757,11 +766,33 @@ angular.module('bsis')
       $timeout(function(){ $scope.manageDuplicateDonorTableParams.reload(); });
     });
 
+    // 1b: selected donors to merge
+    $scope.manageSelectedDuplicateDonorTableParams = new ngTableParams({
+      page: 1,
+      count: 100,         // don't paginate (?)
+      filter: {},
+      sorting: {}
+    }, 
+    {
+      defaultSort: 'asc',
+      counts: [], // hide page counts control
+      total: $scope.selectedDonorsData.length,
+      getData: function ($defer, params) {
+        var filteredData = params.filter() ? $filter('filter')(selectedDonorsData, params.filter()) : selectedDonorsData;
+        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : selectedDonorsData;
+        params.total(orderedData.length);
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
+    $scope.$watch("selectedDonorsData", function () {
+      $timeout(function(){ $scope.manageSelectedDuplicateDonorTableParams.reload(); });
+    });
+
     // 2: load the donor's donations (loaded on the donations step)
     $scope.viewDonorsDonations = function() {
       $scope.donationResults = false;
       donationsData = [];
-      angular.forEach(duplicatesData, function(donor, i) {
+      angular.forEach(selectedDonorsData, function(donor, i) {
         // FIXME: use only one service
         DonorService.getDonations(donor.id, function(response) {
           if (response !== false) {
@@ -799,7 +830,7 @@ angular.module('bsis')
     $scope.viewDonorsDeferrals = function() {
       $scope.deferralResults = false;
       deferralsData = [];
-      angular.forEach(duplicatesData, function(donor, i) {
+      angular.forEach(selectedDonorsData, function(donor, i) {
         // FIXME: use one service that returns all the deferrals
         DonorService.getDeferrals(donor.id, function(response) {
           if (response !== false) {
@@ -838,29 +869,96 @@ angular.module('bsis')
       $window.history.back();
     };
 
-    $scope.step = function(newStep) {
-      $scope.currentStep = newStep;
+    $scope.step = function(newStep, mergeDonorForm) {
+      $scope.invalid = false;
+      $scope.hasMessage = false;
+      $scope.message = "";
+      if ($scope.currentStep < newStep && !mergeDonorForm.$valid) {
+        $scope.invalid = true;
+        return;
+      }
       if (newStep == 2) {
-        // overview
+        // see which donors have been selected and then move onto the overview page
+        selectedDonorsData = [];
+        var donorFields = {};
+        // set up the "None of the above" option and required error message flags
+        donorFields.idNumber = false;
+        donorFields.title = false;
+        donorFields.callingName = false;
+        donorFields.preferredLanguage = false;
+        donorFields.donorPanel = false;
+        donorFields.contactMethodType = false;
+        donorFields.email = false;
+        donorFields.mobileNumber = false;
+        donorFields.homeNumber = false;
+        donorFields.workNumber = false;
+
+        angular.forEach(duplicatesData, function(donor, i) {
+          // if the donor is selected
+          if (donor.merge) {
+            // check if the donor has got any data and set the flags for the error message and none option to display
+            if (donor.idNumber !== null && donor.idNumber !== '')
+              donorFields.idNumber = true;
+            if (donor.title !== null && donor.title !== '')
+              donorFields.title = true;
+            if (donor.callingName !== null && donor.callingName !== '')
+              donorFields.callingName = true;
+            if (donor.preferredLanguage !== null && donor.preferredLanguage !== '')
+              donorFields.preferredLanguage = true;
+            if (donor.donorPanel !== null && donor.donorPanel !== '')
+              donorFields.donorPanel = true;
+            if (donor.contactMethodType !== null && donor.contactMethodType !== '')
+              donorFields.contactMethodType = true;
+            if (donor.contact.email !== null && donor.contact.email !== '')
+              donorFields.email = true;
+            if (donor.contact.mobileNumber !== null && donor.contact.mobileNumber !== '')
+              donorFields.mobileNumber = true;
+            if (donor.contact.homeNumber !== null && donor.contact.homeNumber !== '')
+              donorFields.homeNumber = true;
+            if (donor.contact.workNumber !== null && donor.contact.workNumber !== '')
+              donorFields.workNumber = true;
+            if (donor.preferredAddressType !== null && donor.preferredAddressType !== '')
+              donorFields.preferredAddressType = true;
+            if (donor.address.homeAddressLine1 !== null && donor.address.homeAddressLine1 !== '')
+              donorFields.homeAddress = true;
+            if (donor.address.workAddressLine1 !== null && donor.address.workAddressLine1 !== '')
+              donorFields.workAddress = true;
+            if (donor.address.postalAddressLine1 !== null && donor.address.postalAddressLine1 !== '')
+              donorFields.postalAddress = true;
+            // save the donor
+            selectedDonorsData.push(donor);
+          }
+        });
+        $scope.selectedDonorsData = selectedDonorsData;
+        $scope.donorFields = donorFields;
+        if (selectedDonorsData === null || selectedDonorsData.length<=1) {
+          $scope.message = "Please select at least two donors.";
+          $scope.invalid = true;
+          $scope.hasMessage = true;
+          return;
+        }
       } else if (newStep == 3) {
-        // contact
       } else if (newStep == 4) {
-        // addresses
       } else if (newStep == 5) {
-        // deferrals
-        $scope.hello = "steppy5";
+        // load data for next step
         $scope.viewDonorsDeferrals();
       } else if (newStep == 6) {
-        // donations
-        $scope.hello = "steppy6";
+        // load data for next step
         $scope.viewDonorsDonations();
       } else if (newStep == 7) {
-        // review
+        // FIXME: review & run tests!!
       }
+      $scope.currentStep = newStep;
     };
 
     $scope.merge = function (item) {
-      // do something
+      // clear the none selections
+      angular.forEach(mergedDonor, function(attribute, i) {
+        if (attribute == "none") {
+          mergedDonor[i] = null;
+        }
+      });
+      // FIXME: submit
     };
 
     $scope.cancel = function (item) {
