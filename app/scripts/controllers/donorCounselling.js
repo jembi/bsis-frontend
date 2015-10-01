@@ -102,10 +102,9 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
   var columnDefs = [
     {name: 'Donor #', field: 'donor.donorNumber'},
-    {name: 'Name', field: 'donor.firstName'},
+    {name: 'First Name', field: 'donor.firstName'},
     {name: 'Last Name', field: 'donor.lastName'},
     {name: 'Gender', field: 'donor.gender'},
-    {name: 'DIN', field: 'donationIdentificationNumber'},
 
     {
       name: 'Date of Birth',
@@ -113,11 +112,17 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       cellFilter: 'bsisDate'
     },
     {
+      name: 'Blood Group',
+      field: 'donor.bloodGroup'
+    },
+    {
+      name: 'DIN',
+      field: 'donationIdentificationNumber'},
+    {
       name: 'Date of Last Donation',
       field: 'donationDate',
       cellFilter: 'bsisDate'
     },
-    {name: 'Blood Group', field: 'donor.bloodGroup'},
     {
       name: 'Venue',
       field: 'venue.name'
@@ -145,29 +150,30 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     // PDF header
     exporterPdfHeader: function() {
 
-      var venues = $scope.venues.map(function(venue) {
-        return venue.name;
+      var venues = $scope.search.selectedVenues.map(function(selectedVenue) {
+        for (var index in $scope.venues) {
+          if ($scope.venues[index].id === selectedVenue) {
+            return $scope.venues[index].name;
+          }
+        }
       });
 
-      var bloodGroups = angular.copy($scope.bloodGroups);
-
-      if ($scope.anyBloodGroup) {
-        bloodGroups.push('Any');
-      }
-
-      if ($scope.noBloodGroup) {
-        bloodGroups.push('None');
-      }
-
       var columns = [
-        {text: 'Venue(s): ' + venues.join(', '), width: 'auto'}
+        {text: 'Venue(s): ' + (venues.join(',') || 'Any'), width: 'auto'}
       ];
+
+      // Include last donation date range
+      if ($scope.search.startDate && $scope.search.endDate) {
+        var fromDate = $filter('bsisDate')($scope.search.startDate);
+        var toDate = $filter('bsisDate')($scope.search.endDate);
+        columns.push({text: 'Donation Period: ' + fromDate + ' to ' + toDate, width: 'auto'});
+      }
 
       return [
         {
           text: 'List of donors for post donation counselling',
           bold: true,
-          margin: [30, 10, 30, 30]
+          margin: [30, 10, 30, 0]
         },
         {
           columns: columns,
