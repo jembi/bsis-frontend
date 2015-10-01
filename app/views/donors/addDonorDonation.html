@@ -28,7 +28,7 @@
       <div class="row col-sm-9">
         <div class="form-inline" style="padding-left:5px;">
           <div style="padding-top:7px; padding-bottom:5px;" ng-show="donationBatches.length==0"><em>No open clinics</em></div>
-          <select ng-show="donationBatches.length>0" name="donationBatch" class="form-control input-sm" ng-model="donationBatch" ng-options="item as item.donorPanel.name for item in donationBatches" required
+          <select ng-show="donationBatches.length>0" name="donationBatch" class="form-control input-sm" ng-model="donationBatch" ng-options="item as item.venue.name for item in donationBatches" required
           ng-class="{'ng-invalid ng-dirty' : addDonationForm.donationBatch.$invalid && submitted}"
           >
               <option value=""></option>

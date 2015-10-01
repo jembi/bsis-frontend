@@ -96,7 +96,7 @@ angular.module('bsis')
         {
           query: {
             method: 'GET',
-            params:{bloodGroups:'@bloodGroups', donorPanels:'@donorPanels', clinicDate: '@clinicDate',
+            params:{bloodGroups:'@bloodGroups', venues:'@venues', clinicDate: '@clinicDate',
             lastDonationFromDate: '@lastDonationFromDate', lastDonationToDate: '@lastDonationToDate', anyBloodGroup: '@anyBloodGroup', noBloodGroup: '@noBloodGroup' }
           }
         }
@@ -153,7 +153,7 @@ angular.module('bsis')
         {
           query: {
             method: 'GET',
-            params:{isClosed:'@isClosed', donorPanels:'@donorPanels'}
+            params:{isClosed:'@isClosed', venues:'@venues'}
           }
         }
       ),

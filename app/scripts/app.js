@@ -10,13 +10,15 @@ var app = angular.module('bsis', [
   'ngSanitize',
   'checklist-model',
   'ngMessages',
-  '720kb.tooltips'
-
+  '720kb.tooltips',
+  'ui.grid',
+  'ui.grid.exporter',
+  'ui.grid.pagination'
 ])
   .config(function($routeProvider, PERMISSIONS, UI) {
-    
+
     var reloadOnSearch = false;
-    
+
     $routeProvider
 
       // DEFAULT VIEW - DISPLAY HOME PAGE IF USER AUTHENTICATED
@@ -102,9 +104,10 @@ var app = angular.module('bsis', [
       })
       .when('/exportDonorList', {
         templateUrl : 'views/donors.html',
-        controller  : 'DonorListCtrl',
+        controller  : 'DonorCommunicationsCtrl',
         permission: PERMISSIONS.EXPORT_CLINIC_DATA,
-        enabled : UI.DONORS_TAB_ENABLED
+        enabled : UI.DONORS_TAB_ENABLED,
+        reloadOnSearch: reloadOnSearch
       })
       .when('/viewDonor/:id?', {
         templateUrl : 'views/donors.html',
