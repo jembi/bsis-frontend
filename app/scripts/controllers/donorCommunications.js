@@ -90,7 +90,6 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
     paginationPageSize: 10,
     paginationPageSizes: [10],
     paginationTemplate: 'views/template/pagination.html',
-    enableGridMenu: true,
     columnDefs: columnDefs,
 
     // Format values for exports
@@ -162,6 +161,10 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
         columnGap: 10,
         margin: [30, 0]
       };
+    },
+
+    onRegisterApi: function(gridApi){ 
+      $scope.gridApi = gridApi;
     }
   };
 
@@ -209,4 +212,14 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
   if ($routeParams.search) {
     $scope.onSearch();
   }
+
+  $scope.export = function(format){
+    if(format === 'pdf'){
+      $scope.gridApi.exporter.pdfExport('all', 'all');
+    }
+    else if (format === 'csv'){
+      $scope.gridApi.exporter.csvExport('all', 'all');
+    }
+  };
+
 });

@@ -648,3 +648,10 @@ bootstrap.min.css sets .dropdown-menu min-width to 160px by default
 .ui-select-bootstrap .dropdown-menu {
   min-width: inherit  !important;
 }
+
+/* ui-grid custom data export button styling */
+.btn-ui-grid-export {
+  margin-top:0px; 
+  padding-top: 2px;
+  padding-bottom: 0px;
+}
