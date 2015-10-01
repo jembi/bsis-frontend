@@ -1,13 +1,6 @@
 'use strict';
 
 angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, Api, LocationsService, DATEFORMAT, $filter) {
-
-  $scope.dateFormat = DATEFORMAT;
-  $scope.venues = [];
-  $scope.donations = [];
-
-  $scope.searched = false;
-
   var master = {
     selectedVenues: [],
     startDate: null,
@@ -15,6 +8,23 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.search = angular.copy(master);
+  LocationsService.getVenues(function(allVenues) {
+    $scope.venues = allVenues;
+    if ($routeParams.venue) {
+      var venues = $routeParams.venue;
+      if (!angular.isArray(venues)) {
+        $scope.search.selectedVenues = [venues];
+      } else {
+        $scope.search.selectedVenues = venues;
+      }
+    }
+
+  $scope.dateFormat = DATEFORMAT;
+  $scope.donations = [];
+
+  $scope.searched = false;
+
+
 
   if ($routeParams.startDate) {
     $scope.search.startDate = new Date($routeParams.startDate);
@@ -24,17 +34,9 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $scope.search.endDate = new Date($routeParams.endDate);
   }
 
-  if ($routeParams.venue) {
-    var venues = $routeParams.venue;
-    if (!angular.isArray(venues)) {
-      venues = [venues];
-    }
-    $scope.search.selectedVenues = venues;
-  }
 
-  LocationsService.getVenues(function(venues) {
-    $scope.venues = venues;
-  });
+
+
 
   $scope.clearSearch = function() {
     $location.search({});
@@ -92,15 +94,24 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       $scope.searched = true;
       $scope.donations = response;
       $scope.gridOptions.data = response;
+      console.log(response);
     }, function(err) {
       console.error(err);
     });
   };
 
   var columnDefs = [
-    {name: 'Donor Number', field: 'donor.donorNumber'},
-    {name: 'First Name', field: 'donor.firstName'},
+    {name: 'Donor #', field: 'donor.donorNumber'},
+    {name: 'Name', field: 'donor.firstName'},
     {name: 'Last Name', field: 'donor.lastName'},
+    {name: 'Gender', field: 'donor.gender'},
+    {name: 'DIN', field: 'donationIdentificationNumber'},
+
+    {
+      name: 'Date of Birth',
+      field: 'donor.birthDate',
+      cellFilter: 'bsisDate'
+    },
     {
       name: 'Date of Last Donation',
       field: 'donationDate',
@@ -123,11 +134,13 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
     // Format values for exports
     exporterFieldCallback: function(grid, row, col, value) {
-      if (col.name === 'Date of Last Donation') {
+      if (col.name === 'Date of Last Donation' || col.name === 'Date of Birth') {
         return $filter('bsisDate')(value);
       }
       return value;
     },
+
+    exporterPdfMaxGridWidth: 700,
 
     // PDF header
     exporterPdfHeader: function() {
@@ -152,9 +165,9 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
       return [
         {
-          text: 'Donors List',
+          text: 'List of donors for post donation counselling',
           bold: true,
-          margin: [30, 10, 30, 0]
+          margin: [30, 10, 30, 30]
         },
         {
           columns: columns,
@@ -182,4 +195,5 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   if ($routeParams.search) {
     $scope.refresh();
   }
+  });
 });
