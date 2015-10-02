@@ -195,8 +195,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
         columnGap: 10,
         margin: [30, 0]
       };
-    }
-    ,
+    },
 
     onRegisterApi: function(gridApi){
       $scope.gridApi = gridApi;
@@ -207,13 +206,13 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $scope.refresh();
   }
 
-    $scope.export = function(format){
-      if(format === 'pdf'){
-        $scope.gridApi.exporter.pdfExport('all', 'all');
-      }
-      else if (format === 'csv'){
-        $scope.gridApi.exporter.csvExport('all', 'all');
-      }
-    };
+  $scope.export = function(format){
+    if(format === 'pdf'){
+      $scope.gridApi.exporter.pdfExport('all', 'all');
+    }
+    else if (format === 'csv'){
+      $scope.gridApi.exporter.csvExport('all', 'all');
+    }
+  };
   });
 });
