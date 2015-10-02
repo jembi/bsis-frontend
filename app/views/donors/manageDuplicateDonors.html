@@ -1,9 +1,19 @@
-<!--<h3 class="page-header">Merge Duplicate Donor</h3>-->
+<span ng-switch="currentStep">
 
+<h3 class="page-header">Donor Merging</h3>
 
 <form name="mergeDonorForm" novalidate>
   <div class="panel panel-default">
     <div class="panel-body">
+
+  <h3 ng-switch-when="1" class="page-header">Select Donors to Merge <span class="h4">(Step 1 of 7)</span> </h3>
+  <h3 ng-switch-when="2" class="page-header">Donor Overview Merge <span class="h4">(Step 2 of 7)</span></h3>
+  <h3 ng-switch-when="3" class="page-header">Donor Contact Merge <span class="h4">(Step 3 of 7)</span></h3>
+  <h3 ng-switch-when="4" class="page-header">Donor Address Merge <span class="h4">(Step 4 of 7)</span></h3>
+  <h3 ng-switch-when="5" class="page-header">Donor Deferrals Review <span class="h4">(Step 5 of 7)</span></h3>
+  <h3 ng-switch-when="6" class="page-header">Donor Donations Review <span class="h4">(Step 6 of 7)</span></h3>
+  <h3 ng-switch-when="7" class="page-header">Final Review <span class="h4">(Step 7 of 7)</span></h3>
+
 
     <div class="h4"> 
       <span>{{donor.firstName}}</span> 
@@ -21,8 +31,7 @@
   <hr/>
 
       <div ng-switch-when="1">
-        <h4>Merge Duplicate Donors</h4>
-        <p><em> {{duplicateCount}} duplicates for donors in group {{groupKey}} </em></p>
+        <p><em> {{duplicateCount}} possible duplicate donors identified. </em></p>
         <p>Please select the correct donor information below:</p>
         <alert type="danger" close="" ng-show="hasMessage">
           {{message}}
@@ -69,7 +78,6 @@
       </div>
 
       <div ng-switch-when="2">
-        <h4>Overview</h4>
         <p>Please select the correct donor information below:</p>
         <table ng-table="manageSelectedDuplicateDonorTableParams" show-filter="false" class="table">
           <tbody>
@@ -167,7 +175,6 @@
       </div>
 
       <div ng-switch-when="3">
-        <h4>Contact</h4>
         <p>Please select the correct donor information below:</p>
         <table ng-table="manageSelectedDuplicateDonorTableParams" show-filter="false" class="table">
           <tbody>
@@ -263,7 +270,6 @@
       </div>
 
       <div ng-switch-when="4">
-        <h4>Address</h4>
         <p>Please select the correct donor information below:</p>
         <table ng-table="manageSelectedDuplicateDonorTableParams" show-filter="false" class="table">
           <tbody>
@@ -365,7 +371,6 @@
       </div>
 
       <div ng-switch-when="5">
-        <h4>Deferrals</h4>
         <p>See the deferrals for the merged donor:</p>
         <div ng-switch="deferralResults">
           <div ng-switch-when="true">
@@ -399,7 +404,6 @@
       </div>
 
       <div ng-switch-when="6">
-        <h4>Donations</h4>
         <p>See the donations for the merged donor:</p>
         <div ng-switch="donationResults">
           <div ng-switch-when="true">
@@ -445,7 +449,6 @@
       </div>
 
       <div ng-switch-when="7">
-        <h4>Review</h4>
         <alert type="danger" close="" ng-show="hasMessage">
           {{message}}
           <ul>
@@ -513,4 +516,4 @@
   </div>
 </form>
 
-</div>
+</span>
