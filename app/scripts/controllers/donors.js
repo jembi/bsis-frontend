@@ -858,6 +858,7 @@ angular.module('bsis')
       DonorService.getDonationBatchById($routeParams.id, function (donationBatch) {
         $scope.donationBatch = donationBatch;
         data = donationBatch.donations;
+        $scope.gridOptions.data = donationBatch.donations;
         $scope.data = data;
 
         DonorService.getDonationBatchFormFields(function (response) {
@@ -866,7 +867,107 @@ angular.module('bsis')
       }, console.error);
     };
 
+    var columnDefs = [
+      {
+        name: 'Donor #',
+        field: 'donorNumber'
+      },
+      ,
+      {
+        name: 'DIN',
+        field: 'donationIdentificationNumber'
+      },
+      ,
+      {
+        name: 'Pack Type',
+        field: 'packType.packType'
+      },
+      {
+        name: 'Donation Type',
+        field: 'donationType.donationType'
+      }
+    ];
+
+    $scope.gridOptions = {
+      data: [],
+      paginationPageSize: 10,
+      paginationPageSizes: [10],
+      paginationTemplate: 'views/template/pagination.html',
+      rowTemplate: 'views/template/clickablerow.html',
+      enableGridMenu: true,
+      columnDefs: columnDefs,
+
+      // Format values for exports
+      exporterFieldCallback: function(grid, row, col, value) {
+        if (col.name === 'Date of Last Donation') {
+          return $filter('bsisDate')(value);
+        }
+        return value;
+      },
+
+      // PDF header
+      exporterPdfHeader: function() {
+
+        var venue = $scope.donationBatch.venue.name;
+        var dateCreated = $filter('bsisDate')($scope.donationBatch.createdDate);
+        var lastUpdated = $filter('bsisDate')($scope.donationBatch.lastUpdated);
+        var status;
+        if ($scope.donationBatch.isClosed){
+          status = "Closed";
+        } else {
+          status = "Open";
+        }
+
+        var columns = [
+          {text: 'Batch Status: ' + status, width: 'auto'},
+          {text: 'Venue: ' + venue, width: 'auto'},
+          {text: 'Date Created: ' + dateCreated , width: 'auto'},
+          {text: 'Last Updated: ' + lastUpdated , width: 'auto'}
+        ];
+
+        return [
+          {
+            text: 'Donation Batch Report',
+            bold: true,
+            margin: [30, 10, 30, 0]
+          },
+          {
+            columns: columns,
+            columnGap: 10,
+            margin: [30, 0]
+          }
+        ];
+      },
+
+      // PDF footer
+      exporterPdfFooter: function(currentPage, pageCount) {
+        var columns = [
+          {text: 'Total donations: ' + $scope.gridOptions.data.length, width: 'auto'},
+          {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
+          {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+        ];
+        return {
+          columns: columns,
+          columnGap: 10,
+          margin: [30, 0]
+        };
+      },
+
+      onRegisterApi: function(gridApi){
+        $scope.gridApi = gridApi;
+      }
+    };
+
     $scope.init();
+
+    $scope.export = function(format){
+      if(format === 'pdf'){
+        $scope.gridApi.exporter.pdfExport('all', 'all');
+      }
+      else if (format === 'csv'){
+        $scope.gridApi.exporter.csvExport('all', 'all');
+      }
+    };
 
     $scope.donorClinicTableParams = new ngTableParams({
       page: 1,            // show first page
@@ -935,6 +1036,12 @@ angular.module('bsis')
         }
       });
 
+    };
+
+
+
+    $scope.onRowClick = function (row) {
+      $scope.viewDonationSummary(row.donorIdentificationNumber);
     };
 
     $scope.viewDonationSummary = function (din) {
