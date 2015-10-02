@@ -134,7 +134,6 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     paginationPageSize: 10,
     paginationPageSizes: [10],
     paginationTemplate: 'views/template/pagination.html',
-    enableGridMenu: true,
     columnDefs: columnDefs,
 
     // Format values for exports
