@@ -72,8 +72,8 @@
                 <td data-title="'Blood Group'" header-class="text-left" sortable="'bloodGroup'">
                     {{donor.bloodGroup}}
                 </td>
-                <td data-title="'Panel'" header-class="text-left"  sortable="'donorPanel'">
-                    {{donor.donorPanel.name}}
+                <td data-title="'Venue'" header-class="text-left"  sortable="'Venue'">
+                    {{donor.venue.name}}
                 </td>
                 <td class="form-inline" data-title="'Merge?'" header-class="text-left" class="text-center" ng-click="$event.stopPropagation()">
                   <label>Yes <input type="radio" name="merge{{donor.donorNumber}}" ng-value="true" value="true" ng-model="donor.merge" ng-click="changeSelection(donor.merge);" required></label>
@@ -119,9 +119,9 @@
                   {{donor.preferredLanguage.preferredLanguage}}
                 </div>
               </td>
-              <td data-title="'Panel'" header-class="text-left" sortable="'donorPanel'">
-                <input type="radio" name="donorPanel" ng-model="mergedDonor.donorPanel" ng-value="donor.donorPanel" required>
-                {{donor.donorPanel.name}}
+              <td data-title="'Venue'" header-class="text-left" sortable="'venue'">
+                <input type="radio" name="venue" ng-model="mergedDonor.venue" ng-value="donor.venue" required>
+                {{donor.venue.name}}
               </td>
               <td data-title="'Comments'" header-class="text-left" sortable="'notes'">
                 <div ng-if="donor.notes != null && donor.notes != ''">
@@ -170,9 +170,9 @@
                   </small>
                 </div>
               </td>
-              <td data-title="'Panel'" header-class="text-left" sortable="'donorPanel'">
-                <div ng-if="donorFields['donorPanel']">
-                  <small class="error" ng-show="(mergeDonorForm.donorPanel.$invalid && (mergeDonorForm.donorPanel.$dirty || invalid))">
+              <td data-title="'Venue'" header-class="text-left" sortable="'venue'">
+                <div ng-if="donorFields['venue']">
+                  <small class="error" ng-show="(mergeDonorForm.venue.$invalid && (mergeDonorForm.venue.$dirty || invalid))">
                     Please select one
                   </small>
                 </div>
@@ -450,8 +450,8 @@
                 <td data-title="'Donor Pulse'" header-class="text-left" class="text-center" sortable="'donorPulse'">
                     {{donation.donorPulse}}
                 </td>
-                <td data-title="'Panel'" header-class="text-left" class="text-center" sortable="'donorPanel.name'">
-                    {{donation.donorPanel.name}}
+                <td data-title="'Venue'" header-class="text-left" class="text-center" sortable="'venue.name'">
+                    {{donation.venue.name}}
                 </td>
               </tr>
             </table>
@@ -476,7 +476,7 @@
           <li ng-if="mergedDonor.title != null && mergedDonor.title != ''"><b>Title</b>: {{mergedDonor.title}}</li>
           <li ng-if="mergedDonor.callingName != null && mergedDonor.callingName != ''"><b>Calling Name</b>: {{mergedDonor.callingName}}</li>
           <li ng-if="mergedDonor.preferredLanguage != null"><b>Preferred Language</b>: {{mergedDonor.preferredLanguage.preferredLanguage}}</li>
-          <li><b>Donor Panel</b>: {{mergedDonor.donorPanel.name}}</li>
+          <li><b>Venue</b>: {{mergedDonor.venue.name}}</li>
           <li ng-if="mergedDonor.comments != null && mergedDonor.comments != ''"><b>Comments</b>: {{mergedDonor.comments}}</li>
           <li ng-if="mergedDonor.contactMethodType != null"><b>Preferred Contact Type</b>: {{mergedDonor.contactMethodType.contactMethodType}}</li>
           <li ng-if="mergedDonor.contact.email != null && mergedDonor.contact.email != ''"><b>Email</b>: {{mergedDonor.contact.email}}</li>
