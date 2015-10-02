@@ -120,7 +120,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       displayName: 'DIN',
       field: 'donationIdentificationNumber'},
     {
-      name: 'Date of Last Donation',
+      name: 'Date of Donation',
       field: 'donationDate',
       cellFilter: 'bsisDate'
     },
@@ -139,7 +139,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
     // Format values for exports
     exporterFieldCallback: function(grid, row, col, value) {
-      if (col.name === 'Date of Last Donation' || col.name === 'Date of Birth') {
+      if (col.name === 'Date of Donation' || col.name === 'Date of Birth') {
         return $filter('bsisDate')(value);
       }
       return value;
