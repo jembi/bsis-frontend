@@ -1,42 +1,24 @@
 <!--<h3 class="page-header">Merge Duplicate Donor</h3>-->
 
-<div style="padding-bottom: 10px"></div>
-
-<div ng-switch="currentStep" class="col-sm-12">
-
-  <span class="h2"> 
-    <span>{{donor.firstName}}</span> 
-    <span>{{donor.lastName}}</span><small><em>
-    <span ng-if="donor.title"><span>{{donor.title}}</span>.</span>
-    <span>{{donor.callingName}}</span>
-    </em></small>
-  </span>
-  <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
-    <span ng-switch-when="male" class="fa-stack fa-1x">
-      <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-      <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
-    </span>
-    <span ng-switch-when="female" class="fa-stack fa-1x">
-      <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-      <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
-    </span>
-  </span>
-  <span class="h3" ng-if="donor.bloodGroup !== ''" style="vertical-align: 0.3em; padding-left:5px;">
-    <span class="fa-stack fa-1x">
-      <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-      <i class="fa fa-stack-1x fa-inverse">{{donor.bloodGroup}}</i>
-    </span>
-  </span>
-  <div class="h4"> 
-    <small><em>Age: </em></small>
-    <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
-    <em>(<span>{{ (donor.birthDate | bsisDate) || '' }}</span>)
-    </em>
-  </div>
 
 <form name="mergeDonorForm" novalidate>
   <div class="panel panel-default">
     <div class="panel-body">
+
+    <div class="h4"> 
+      <span>{{donor.firstName}}</span> 
+      <span>{{donor.lastName}}</span><small><em>
+      <span ng-if="donor.title"><span>{{donor.title}}</span>.</span>
+      <span>{{donor.callingName}}</span>
+      </em></small> 
+      | <small><em>Gender:</em></small> {{donor.gender}} 
+      | <small><em>Age: </em></small>
+      <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
+      <em>(<span>{{ (donor.birthDate | bsisDate) || '' }}</span>)
+      </em>
+    </div>
+  
+  <hr/>
 
       <div ng-switch-when="1">
         <h4>Merge Duplicate Donors</h4>
