@@ -117,6 +117,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     },
     {
       name: 'DIN',
+      displayName: 'DIN',
       field: 'donationIdentificationNumber'},
     {
       name: 'Date of Last Donation',
