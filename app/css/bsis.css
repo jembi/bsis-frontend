@@ -655,3 +655,6 @@ bootstrap.min.css sets .dropdown-menu min-width to 160px by default
   padding-top: 2px;
   padding-bottom: 0px;
 }
+
+.ui-grid-row:nth-child(odd):hover .ui-grid-cell-clickable{cursor: pointer; background:#eee}
+.ui-grid-row:nth-child(even):hover .ui-grid-cell-clickable{cursor: pointer; background:#eee}
