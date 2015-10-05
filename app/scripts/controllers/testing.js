@@ -371,7 +371,7 @@ angular.module('bsis')
 
         if (col.name === 'Results') {
           var formatted = [];
-          var arr = ['HIV', 'HBV', 'HCV', 'Syphilis'];
+          var arr = ['ABO', 'Rh', 'Titre', 'Weak D', 'HIV', 'HBV', 'HCV', 'Syphilis'];
           for (var test in value) {
             if (arr.indexOf(value[test].bloodTest.testNameShort) > -1){
               formatted.push(value[test].bloodTest.testNameShort + ': ' + value[test].result);
@@ -390,7 +390,7 @@ angular.module('bsis')
 
         return [
           {
-            text: 'Test Batch Report',
+            text: 'Test Batch Outcomes Summary Report',
             bold: true,
             margin: [30, 10, 30, 0]
           },
