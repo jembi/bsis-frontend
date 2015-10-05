@@ -15,7 +15,9 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       if (!angular.isArray(venues)) {
         $scope.search.selectedVenues = [venues];
       } else {
-        $scope.search.selectedVenues = venues;
+        angular.forEach (venues, function(value,index){
+          $scope.search.selectedVenues.push(parseInt(value));
+        });
       }
     }
 
