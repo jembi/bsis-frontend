@@ -371,8 +371,11 @@ angular.module('bsis')
 
         if (col.name === 'Results') {
           var formatted = [];
+          var arr = ['HIV', 'HBV', 'HCV', 'Syphilis'];
           for (var test in value) {
-            formatted.push(value[test].bloodTest.testNameShort + ': ' + value[test].result);
+            if (arr.indexOf(value[test].bloodTest.testNameShort) > -1){
+              formatted.push(value[test].bloodTest.testNameShort + ': ' + value[test].result);
+            }
           }
           return formatted.join("\n");
         }
