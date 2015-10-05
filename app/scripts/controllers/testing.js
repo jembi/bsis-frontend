@@ -330,6 +330,7 @@ angular.module('bsis')
 
       {
         name: 'DIN',
+        displayName: 'DIN',
         field: 'donationIdentificationNumber'
       },
 
@@ -368,7 +369,6 @@ angular.module('bsis')
       paginationPageSize: 10,
       paginationPageSizes: [10],
       paginationTemplate: 'views/template/pagination.html',
-      enableGridMenu: true,
       columnDefs: columnDefs,
 
       // Format values for exports
