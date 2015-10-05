@@ -335,7 +335,10 @@ angular.module('bsis')
       },
 
       {
-        field: 'dateBled'
+        name: 'Date Bled',
+        displayName: 'Date Bled',
+        field: 'bleedStartTime',
+        cellFilter: 'bsisDate'
       },
       {
         name: 'Pack Type',
@@ -344,24 +347,13 @@ angular.module('bsis')
       {
         field: 'venue.name'
       },
-
       {
-        field: 'ttistatus'
-      },
-      {
-        field: 'bloodTypingStatus'
-      },
-      {
-
-        field: 'bloodTypingMatchStatus'
-      },
-      {
-        field: 'bloodAbo'
-      },
-      {
-        field: 'bloodRh'
+        name: 'Results',
+        displayName: 'Test Results',
+        field: 'testResults.recentTestResults',
+        visible: false,
+        width: '200'
       }
-
     ];
 
     $scope.gridOptions = {
@@ -373,8 +365,16 @@ angular.module('bsis')
 
       // Format values for exports
       exporterFieldCallback: function(grid, row, col, value) {
-        if (col.name === 'Date of Last Donation') {
+        if (col.name === 'Date Bled') {
           return $filter('bsisDate')(value);
+        }
+
+        if (col.name === 'Results') {
+          var formatted = [];
+          for (var test in value) {
+            formatted.push(value[test].bloodTest.testNameShort + ': ' + value[test].result);
+          }
+          return formatted.join("\n")
         }
         return value;
       },
@@ -382,26 +382,12 @@ angular.module('bsis')
       // PDF header
       exporterPdfHeader: function() {
 
-        var venue = $scope.donationBatch.venue.name;
-        var dateCreated = $filter('bsisDate')($scope.donationBatch.createdDate);
-        var lastUpdated = $filter('bsisDate')($scope.donationBatch.lastUpdated);
-        var status;
-        if ($scope.donationBatch.isClosed){
-          status = "Closed";
-        } else {
-          status = "Open";
-        }
 
-        var columns = [
-          {text: 'Batch Status: ' + status, width: 'auto'},
-          {text: 'Venue: ' + venue, width: 'auto'},
-          {text: 'Date Created: ' + dateCreated , width: 'auto'},
-          {text: 'Last Updated: ' + lastUpdated , width: 'auto'}
-        ];
+        var columns = [];
 
         return [
           {
-            text: 'Donation Batch Report',
+            text: 'Test Batch Report',
             bold: true,
             margin: [30, 10, 30, 0]
           },
@@ -430,6 +416,24 @@ angular.module('bsis')
       onRegisterApi: function(gridApi){
         $scope.gridApi = gridApi;
       }
+    };
+
+    $scope.export = function(format){
+      TestingService.getTestResults($routeParams.id, function (testResults){
+        angular.forEach($scope.gridOptions.data, function (item, key) {
+          angular.forEach(testResults.testResults, function(testResult){
+            if (item.id == testResult.donation.id){
+              $scope.gridOptions.data[key].testResults = testResult;
+            }
+          });
+        });
+        if(format === 'pdf'){
+          $scope.gridApi.exporter.pdfExport('all', 'all');
+        }
+        else if (format === 'csv'){
+          $scope.gridApi.exporter.csvExport('all', 'all');
+        }
+      });
     };
 
     $scope.testSamplesTableParams = new ngTableParams({
