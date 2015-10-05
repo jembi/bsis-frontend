@@ -374,7 +374,7 @@ angular.module('bsis')
           for (var test in value) {
             formatted.push(value[test].bloodTest.testNameShort + ': ' + value[test].result);
           }
-          return formatted.join("\n")
+          return formatted.join("\n");
         }
         return value;
       },
