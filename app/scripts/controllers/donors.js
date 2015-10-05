@@ -872,12 +872,11 @@ angular.module('bsis')
         name: 'Donor #',
         field: 'donorNumber'
       },
-      ,
       {
         name: 'DIN',
+        displayName: 'DIN',
         field: 'donationIdentificationNumber'
       },
-      ,
       {
         name: 'Pack Type',
         field: 'packType.packType'
@@ -894,7 +893,6 @@ angular.module('bsis')
       paginationPageSizes: [10],
       paginationTemplate: 'views/template/pagination.html',
       rowTemplate: 'views/template/clickablerow.html',
-      enableGridMenu: true,
       columnDefs: columnDefs,
 
       // Format values for exports
@@ -1098,6 +1096,8 @@ angular.module('bsis')
       if(valid){
         $scope.addDonationSuccess = '';
 
+        DonorService.setDonationBatch($scope.donationBatch);
+
         // set donation center, site & date to those of the donation batch
         donation.venue = $scope.donationBatch.venue;
         donation.donationDate = $scope.donationBatch.createdDate;
@@ -1105,20 +1105,20 @@ angular.module('bsis')
         donation.bleedStartTime = bleedStartTime;
         donation.bleedEndTime = bleedEndTime;
 
+
         DonorService.addDonationToBatch(donation, function(response){
-
-
-            //$scope.addDonationSuccess = true;
+            $scope.addDonationSuccess = true;
             $scope.donation = {};
             $scope.donationBatchView = 'viewDonationBatch';
 
             $scope.donationBatch = response;
-            data = $scope.donationBatch.donations;
+            $scope.gridOptions.data = $scope.donationBatch.donations;
             $scope.data = data;
             $scope.submitted = '';
             $scope.err = {};
           },
           function (err) {
+
             $scope.err = err;
             $scope.addDonationSuccess = false;
         });
