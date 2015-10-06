@@ -437,7 +437,10 @@ angular.module('bsis')
         }
 
         if (col.name === 'bloodAboRh'){
-          var bloodSerology = row.entity.bloodTypingStatus + ' ' + row.entity.bloodTypingMatchStatus + ' (' + row.entity.bloodAbo + row.entity.bloodRh + ')';
+          var bloodSerology = 'Not Done';
+          if (row.entity.bloodTypingStatus !== 'NOT_DONE'){
+            bloodSerology = row.entity.bloodTypingStatus + ' ' + row.entity.bloodTypingMatchStatus + ' (' + row.entity.bloodAbo + row.entity.bloodRh + ')';
+          }
           return bloodSerology;
         }
 
@@ -446,9 +449,10 @@ angular.module('bsis')
           col.name === 'HIV' || col.name === 'HBV' || col.name === 'HCV' || col.name === 'Syphilis') {
           for (var test in value) {
             if (value[test].bloodTest.testNameShort == col.name){
-              return value[test].result;
+              return value[test].result || 'Not Done';
             }
           }
+          return 'Not Done';
         }
 
         return value;
