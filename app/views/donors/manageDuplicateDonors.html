@@ -232,7 +232,7 @@
                 <div ng-if="donorFields['email']">
                     <input type="radio" name="email" ng-model="mergedDonor.contact.email" value="none" required>
                     None of the above
-                    <small class="error" ng-show="(mergeDonorForm.contact.email.$invalid && (mergeDonorForm.contact.email.$dirty || invalid))">
+                    <small class="error" ng-show="(mergeDonorForm.email.$invalid && (mergeDonorForm.email.$dirty || invalid))">
                       <br/>Please select one
                     </small>
                 </div>
@@ -241,7 +241,7 @@
                 <div ng-if="donorFields['mobileNumber']">
                     <input type="radio" name="mobileNumber" ng-model="mergedDonor.contact.mobileNumber" value="none" required>
                     None of the above
-                    <small class="error" ng-show="(mergeDonorForm.contact.mobileNumber.$invalid && (mergeDonorForm.contact.mobileNumber.$dirty || invalid))">
+                    <small class="error" ng-show="(mergeDonorForm.mobileNumber.$invalid && (mergeDonorForm.mobileNumber.$dirty || invalid))">
                       <br/>Please select one
                     </small>
                 </div>
@@ -250,7 +250,7 @@
                 <div ng-if="donorFields['homeNumber']">
                     <input type="radio" name="homeNumber" ng-model="mergedDonor.contact.homeNumber" value="none" required>
                     None of the above
-                    <small class="error" ng-show="(mergeDonorForm.contact.homeNumber.$invalid && (mergeDonorForm.contact.homeNumber.$dirty || invalid))">
+                    <small class="error" ng-show="(mergeDonorForm.homeNumber.$invalid && (mergeDonorForm.homeNumber.$dirty || invalid))">
                       <br/>Please select one
                     </small>
                 </div>
@@ -259,7 +259,7 @@
                 <div ng-if="donorFields['workNumber']">
                     <input type="radio" name="workNumber" ng-model="mergedDonor.contact.workNumber" value="none" required>
                     None of the above
-                    <small class="error" ng-show="(mergeDonorForm.contact.workNumber.$invalid && (mergeDonorForm.contact.workNumber.$dirty || invalid))">
+                    <small class="error" ng-show="(mergeDonorForm.workNumber.$invalid && (mergeDonorForm.workNumber.$dirty || invalid))">
                       <br/>Please select one
                     </small>
                 </div>
