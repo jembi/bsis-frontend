@@ -25,7 +25,7 @@
       <div>
         <dateselect ng-model="search.startDate" format="dateFormat"></dateselect>
         <span><em>To:</em></span>
-        <dateselect-end ng-model="search.endDate" format="dateFormat"></dateselect>
+        <dateselect-end ng-model="search.endDate" format="dateFormat"></dateselect-end>
       </div>
       <div class="checkbox">
         <label>
@@ -41,16 +41,13 @@
   </div>
 </form>
 
-<div class="panel panel-default" ng-show="searched">
+<div class="panel panel-default" ng-if="searched">
   <div class="panel-body">
-    <table class="table" style="text-align:center;" ng-table>
-      <tr ng-repeat="donation in donations" ng-click="viewDonorCounselling(donation)">
-        <td data-title="'Donor Number'">{{donation.donor.donorNumber}}</td>
-        <td data-title="'First Name'">{{donation.donor.firstName}}</td>
-        <td data-title="'Last Name'">{{donation.donor.lastName}}</td>
-        <td data-title="'Venue'">{{donation.venue.name}}</td>
-        <td data-title="'Donation Date'">{{donation.donationDate | bsisDate}}</td>
-      </tr>
-    </table>
+    <p>
+      <em>{{gridOptions.data.length}} donor(s) found</em>  |  <em> Data export: </em>
+      <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')">PDF</button>
+      <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
+    </p>
+    <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
   </div>
 </div>
