@@ -333,7 +333,6 @@ angular.module('bsis')
         displayName: 'DIN',
         field: 'donationIdentificationNumber'
       },
-
       {
         name: 'Date Bled',
         displayName: 'Date Bled',
@@ -345,7 +344,19 @@ angular.module('bsis')
         field: 'packType.packType'
       },
       {
+        name: 'Venue',
+        displayName: 'Venue',
         field: 'venue.name'
+      },
+      {
+        name: 'ttistatus',
+        displayName: 'TTI Status',
+        field: 'ttistatus'
+      },
+      {
+        name:'bloodAboRh',
+        displayName: 'Blood Group Serology',
+        cellTemplate: '<div class="ui-grid-cell-contents ng-binding ng-scope">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>'
       },
       {
         name: 'Results',
@@ -369,15 +380,21 @@ angular.module('bsis')
           return $filter('bsisDate')(value);
         }
 
+        if (col.name === 'bloodAboRh'){
+          var bloodSerology = row.entity.bloodTypingStatus + ' ' + row.entity.bloodTypingMatchStatus + ' (' + row.entity.bloodAbo + row.entity.bloodRh + ')';
+          return bloodSerology;
+        }
+
+
         if (col.name === 'Results') {
           var formatted = [];
           var arr = ['ABO', 'Rh', 'Titre', 'Weak D', 'HIV', 'HBV', 'HCV', 'Syphilis'];
           for (var test in value) {
             if (arr.indexOf(value[test].bloodTest.testNameShort) > -1){
-              formatted.push(value[test].bloodTest.testNameShort + ': ' + value[test].result);
+              formatted.push('[' + value[test].bloodTest.testNameShort + ': ' + value[test].result + ']');
             }
           }
-          return formatted.join("\n");
+          return formatted.join(" ");
         }
         return value;
       },
