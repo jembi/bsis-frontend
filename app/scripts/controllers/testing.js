@@ -401,7 +401,7 @@ angular.module('bsis')
               formatted.push(value[test].bloodTest.testNameShort + ': ' + value[test].result);
             }
           }
-          return formatted.join(" ");
+          return formatted.join("\r\n");
         }
 
         if (col.name === 'ttiOutcomes') {
@@ -412,7 +412,7 @@ angular.module('bsis')
               formatted.push(value[test].bloodTest.testNameShort + ': ' + value[test].result);
             }
           }
-          return formatted.join(" ");
+          return formatted.join("\r\n");
         }
 
         return value;
