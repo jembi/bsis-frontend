@@ -885,7 +885,7 @@ angular.module('bsis')
         donorFields.title = false;
         donorFields.callingName = false;
         donorFields.preferredLanguage = false;
-        donorFields.donorPanel = false;
+        donorFields.venue = false;
         donorFields.contactMethodType = false;
         donorFields.email = false;
         donorFields.mobileNumber = false;
@@ -904,8 +904,8 @@ angular.module('bsis')
               donorFields.callingName = true;
             if (donor.preferredLanguage !== null && donor.preferredLanguage !== '')
               donorFields.preferredLanguage = true;
-            if (donor.donorPanel !== null && donor.donorPanel !== '')
-              donorFields.donorPanel = true;
+            if (donor.venue !== null && donor.venue !== '')
+              donorFields.venue = true;
             if (donor.contactMethodType !== null && donor.contactMethodType !== '')
               donorFields.contactMethodType = true;
             if (donor.contact.email !== null && donor.contact.email !== '')
