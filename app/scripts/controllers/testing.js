@@ -356,7 +356,7 @@ angular.module('bsis')
       {
         name:'bloodAboRh',
         displayName: 'Blood Group Serology',
-        cellTemplate: '<div class="ui-grid-cell-contents ng-binding ng-scope">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>'
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>'
       },
       {
         name: 'Results',
