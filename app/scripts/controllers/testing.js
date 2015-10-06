@@ -463,8 +463,21 @@ angular.module('bsis')
       // PDF header
       exporterPdfHeader: function() {
 
+        var  columns = [];
 
-        var columns = [];
+        angular.forEach($scope.testBatch.donationBatches, function(val){
+            console.log(val);
+            var venue = val.venue.name;
+            var dateCreated = $filter('bsisDate')(val.createdDate);
+            var numDonations = val.numDonations;
+            columns.push({text: 'Date Created: ' + dateCreated , width: 'auto'});
+            columns.push({text: 'Venue: ' + venue, width: 'auto'});
+            columns.push({text: 'Number of Donations: ' + numDonations, width: 'auto'});
+
+        });
+
+
+
 
         return [
           {
