@@ -451,17 +451,6 @@ angular.module('bsis')
           }
         }
 
-        if (col.name === 'ttiOutcomes') {
-          var formatted2 = [];
-          var arr2 = ['HIV', 'HBV', 'HCV', 'Syphilis'];
-          for (var test2 in value) {
-            if (arr2.indexOf(value[test2].bloodTest.testNameShort) > -1){
-              formatted2.push(value[test2].bloodTest.testNameShort + ': ' + value[test2].result);
-            }
-          }
-          return formatted2.join("\r\n");
-        }
-
         return value;
       },
 
