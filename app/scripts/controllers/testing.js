@@ -359,8 +359,15 @@ angular.module('bsis')
         cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>'
       },
       {
-        name: 'Results',
-        displayName: 'Test Results',
+        name: 'bloodSerologyOutcomes',
+        displayName: 'Serology Outcomes',
+        field: 'testResults.recentTestResults',
+        visible: false,
+        width: '200'
+      },
+      {
+        name: 'ttiOutcomes',
+        displayName: 'TTI Outcomes',
         field: 'testResults.recentTestResults',
         visible: false,
         width: '200'
@@ -386,16 +393,28 @@ angular.module('bsis')
         }
 
 
-        if (col.name === 'Results') {
+        if (col.name === 'bloodSerologyOutcomes') {
           var formatted = [];
-          var arr = ['ABO', 'Rh', 'Titre', 'Weak D', 'HIV', 'HBV', 'HCV', 'Syphilis'];
+          var arr = ['ABO', 'Rh', 'Titre', 'Weak D'];
           for (var test in value) {
             if (arr.indexOf(value[test].bloodTest.testNameShort) > -1){
-              formatted.push('[' + value[test].bloodTest.testNameShort + ': ' + value[test].result + ']');
+              formatted.push(value[test].bloodTest.testNameShort + ': ' + value[test].result);
             }
           }
           return formatted.join(" ");
         }
+
+        if (col.name === 'ttiOutcomes') {
+          var formatted = [];
+          var arr = ['HIV', 'HBV', 'HCV', 'Syphilis'];
+          for (var test in value) {
+            if (arr.indexOf(value[test].bloodTest.testNameShort) > -1){
+              formatted.push(value[test].bloodTest.testNameShort + ': ' + value[test].result);
+            }
+          }
+          return formatted.join(" ");
+        }
+
         return value;
       },
 
