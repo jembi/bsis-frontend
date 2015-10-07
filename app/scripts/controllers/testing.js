@@ -537,32 +537,33 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
+        var finalArray = [
+            {
+              text: 'Test Batch Outcomes Summary Report',
+              bold: true,
+              margin: [30, 10, 30, 0]
+            },
+            {
+              text: 'Created On: ' + $filter('bsisDate')($scope.testBatch.createdDate),
+              margin: [30, 0]
+            }
+        ];
 
-        var  columns = [];
 
         angular.forEach($scope.testBatch.donationBatches, function(val){
             var venue = val.venue.name;
             var dateCreated = $filter('bsisDate')(val.createdDate);
             var numDonations = val.numDonations;
-            columns.push([
-              {text: 'Date Created: ' + dateCreated , width: 'auto'},
-              {text: 'Venue: ' + venue, width: 'auto'},
-              {text: 'Number of Donations: ' + numDonations, width: 'auto'}]);          
-
+            finalArray.push(
+              {
+                text: 'Venue: ' + venue +' Date Created: ' + dateCreated +  ' Number of Donations: ' + numDonations,
+                margin: [30, 0]
+              }
+            );
         });
 
-        return [
-          {
-            text: 'Test Batch Outcomes Summary Report',
-            bold: true,
-            margin: [30, 10, 30, 0]
-          },
-          {
-            columns: columns,
-            columnGap: 10,
-            margin: [30, 0]
-          }
-        ];
+        return finalArray;
+
       },
 
       // PDF footer
