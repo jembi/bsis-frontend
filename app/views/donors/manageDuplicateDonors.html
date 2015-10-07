@@ -415,30 +415,33 @@
                 <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
                     {{donation.donationIdentificationNumber}}
                 </td>
-                <td data-title="'Batch Number'" header-class="text-left" class="text-center" sortable="'donationBatchNumber'">
-                    {{donation.donationBatchNumber}}
-                </td>
-                <td data-title="'Donation Date'" header-class="text-left" class="text-center" sortable="'donationDate'">
+                <td data-title="'Date'" header-class="text-left" class="text-center" sortable="'donationDate'">
                     {{donation.donationDate | bsisDate}}
                 </td>
-                <td data-title="'Type'" header-class="text-left" class="text-center" sortable="'donationType.donationType'">
-                    {{donation.donationType.donationType}}
+                <td data-title="'Venue'" header-class="text-left" sortable="'venue.name'">
+                    {{donation.venue.name}}
                 </td>
                 <td data-title="'Pack Type'" header-class="text-left"  sortable="'packType.packType'">
                     {{donation.packType.packType}}
                 </td>
-                <td data-title="'Donor Weight'" header-class="text-left" class="text-center" sortable="'donorWeight'">
+                <td data-title="'TTI Test Status'" header-class="text-left"  sortable="'ttiStatus'">
+                    {{donation.ttistatus}}
+                </td>
+                <td data-title="'ABO/Rh'" header-class="text-left" class="text-center" sortable="'bloodAbo'">
+                    {{donation.bloodAbo}}{{donation.bloodRh}}
+                </td>
+                <td data-title="'Wt (kg)'" header-class="text-left" class="text-center" sortable="'donorWeight'">
                     {{donation.donorWeight}}
                 </td>
-                <td data-title="'Donor BloodPressure'" header-class="text-left" class="text-center" sortable="'bloodPressureSystolic'">
+                <!--<td data-title="'BP (mmHg)'" header-class="text-left" class="text-center" sortable="'bloodPressureSystolic'">
                     {{donation.bloodPressureSystolic}} / {{donation.bloodPressureDiastolic}}
                 </td>
-                <td data-title="'Donor Pulse'" header-class="text-left" class="text-center" sortable="'donorPulse'">
+                <td data-title="'Hb (g/dL)'" header-class="text-left" class="text-center" sortable="'haemoglobinLevel'">
+                    {{donation.haemoglobinLevel}}
+                </td>
+                <td data-title="'Pulse'" header-class="text-left" class="text-center" sortable="'donorPulse'">
                     {{donation.donorPulse}}
-                </td>
-                <td data-title="'Venue'" header-class="text-left" class="text-center" sortable="'venue.name'">
-                    {{donation.venue.name}}
-                </td>
+                </td>-->
               </tr>
             </table>
           </div>
@@ -461,6 +464,9 @@
           <li ng-if="mergedDonor.title != null && mergedDonor.title != ''"><b>Title</b>: {{mergedDonor.title}}</li>
           <li ng-if="mergedDonor.callingName != null && mergedDonor.callingName != ''"><b>Calling Name</b>: {{mergedDonor.callingName}}</li>
           <li ng-if="mergedDonor.bloodAbo != null"><b>Blood Group</b>: {{mergedDonor.bloodAbo}}{{mergedDonor.bloodRh}}</li>
+          <li ng-if="mergedDonor.dueToDonate != null"><b>Due To Donate</b>: {{mergedDonor.dueToDonate | bsisDate:'longDate'}}</li>
+          <li ng-if="mergedDonor.dateOfFirstDonation != null"><b>Date of First Donation</b>: {{mergedDonor.dateOfFirstDonation | bsisDate:'longDate'}}</li>
+          <li ng-if="mergedDonor.dateOfLastDonation != null"><b>Date of Last Donation</b>: {{mergedDonor.dateOfLastDonation | bsisDate:'longDate'}}</li>
           <li ng-if="mergedDonor.preferredLanguage != null"><b>Preferred Language</b>: {{mergedDonor.preferredLanguage.preferredLanguage}}</li>
           <li><b>Venue</b>: {{mergedDonor.venue.name}}</li>
           <li ng-if="mergedDonor.comments != null && mergedDonor.comments != ''"><b>Comments</b>: {{mergedDonor.comments}}</li>

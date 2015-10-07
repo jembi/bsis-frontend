@@ -787,23 +787,66 @@ angular.module('bsis')
       $timeout(function(){ $scope.manageSelectedDuplicateDonorTableParams.reload(); });
     });
 
-    // 2: load the donor's donations (loaded on the donations step)
-    $scope.viewDonorsDonations = function() {
-      $scope.donationResults = false;
-      donationsData = [];
-      angular.forEach(selectedDonorsData, function(donor, i) {
-        // FIXME: use only one service
-        DonorService.getDonations(donor.id, function(response) {
-          if (response !== false) {
-            angular.forEach(response.allDonations, function(donation, i) {
-              donationsData.push(donation);
-              $scope.donationsData = donationsData;
-              $scope.donationResults = true;
-            });
-          }
-        });
-      });
+    // 2: do a preview of the merge and load the donations and the deferrals
+    $scope.previewMerge = function() {
+      DonorService.mergePreviewDonorsDuplicate(groupKey, $scope.copyMergedDonor(mergedDonor), 
+        function(response) {
+          // process donations
+          donationsData = response.allDonations;
+          $scope.donationsData = donationsData;
+          if (donationsData.length === 0)
+            $scope.donationResults = false;
+          else
+            $scope.donationResults = true;
+          // process deferrals
+          deferralsData = response.allDeferrals;
+          if (deferralsData.length === 0)
+            $scope.deferralResults = false;
+          else
+            $scope.deferralResults = true;
+          $scope.deferralsData = deferralsData;
+          // update mergedDonor
+          $scope.updatedMergedDonor = response.mergedDonor;
+          mergedDonor.dateOfFirstDonation = response.mergedDonor.dateOfFirstDonation;
+          mergedDonor.dueToDonate = response.mergedDonor.dueToDonate;
+          mergedDonor.dateOfLastDonation = response.mergedDonor.dateOfLastDonation;
+        }, 
+        function(err) {
+          $scope.hasMessage = true;
+          $scope.message = "Error merging the duplicate Donors. More information: "+err.moreInfo+" ... "+JSON.stringify(err);
+        }
+      );
     };
+
+    $scope.copyMergedDonor = function() {
+      // copy the existing mergedDonor
+      var newMergedDonor = angular.copy(mergedDonor);
+      $scope.newMergedDonor = newMergedDonor;
+      // set the data that isn't selectable
+      newMergedDonor.firstName = selectedDonorsData[0].firstName;
+      newMergedDonor.lastName = selectedDonorsData[0].lastName;
+      newMergedDonor.gender = selectedDonorsData[0].gender;
+      newMergedDonor.birthDate = selectedDonorsData[0].birthDate;
+      // clear the temporary selections
+      delete newMergedDonor.idNumberId;
+      delete newMergedDonor.homeAddress;
+      delete newMergedDonor.workAddress;
+      delete newMergedDonor.postalAddress;
+      // clear the none selections
+      angular.forEach(newMergedDonor, function(attribute, i) {
+        if (attribute == "none") {
+          newMergedDonor[i] = null;
+        }
+      });
+      // set the duplicate donor numbers
+      newMergedDonor.duplicateDonorNumbers = [];
+      angular.forEach(selectedDonorsData, function(donor, i) {
+        newMergedDonor.duplicateDonorNumbers.push(donor.donorNumber);
+      });
+      return newMergedDonor;
+    };
+
+    // Donations Table
     $scope.manageDuplicateDonorDonationsTableParams = new ngTableParams({
       page: 1,
       count: 6,
@@ -825,23 +868,7 @@ angular.module('bsis')
       $timeout(function(){ $scope.manageDuplicateDonorDonationsTableParams.reload(); });
     });
 
-    // 3: load the donor's deferrals (loaded on the deferrals step)
-    $scope.viewDonorsDeferrals = function() {
-      $scope.deferralResults = false;
-      deferralsData = [];
-      angular.forEach(selectedDonorsData, function(donor, i) {
-        // FIXME: use one service that returns all the deferrals
-        DonorService.getDeferrals(donor.id, function(response) {
-          if (response !== false) {
-            angular.forEach(response.allDonorDeferrals, function(deferral, i) {
-                deferralsData.push(deferral);
-                $scope.deferralResults = true;
-                $scope.deferralsData = deferralsData;
-            });
-          }
-        });
-      });
-    };
+    // Deferrals Table
     $scope.manageDuplicateDonorDeferralTableParams = new ngTableParams({
       page: 1,
       count: 6,
@@ -1012,10 +1039,11 @@ angular.module('bsis')
           }
         });
         // load data for next step
-        $scope.viewDonorsDeferrals();
+        //$scope.viewDonorsDeferrals();
+        $scope.previewMerge();
       } else if (newStep == 6) {
         // load data for next step
-        $scope.viewDonorsDonations();
+        //$scope.viewDonorsDonations();
       } else if (newStep == 7) {
         // FIXME: review & run tests!!
       }
@@ -1023,29 +1051,8 @@ angular.module('bsis')
     };
 
     $scope.merge = function (item) {
-      // set the data that isn't selectable
-      mergedDonor.firstName = selectedDonorsData[0].firstName;
-      mergedDonor.lastName = selectedDonorsData[0].lastName;
-      mergedDonor.gender = selectedDonorsData[0].gender;
-      mergedDonor.birthDate = selectedDonorsData[0].birthDate;
-      // clear the temporary selections
-      delete mergedDonor.idNumberId;
-      delete mergedDonor.homeAddress;
-      delete mergedDonor.workAddress;
-      delete mergedDonor.postalAddress;
-      // clear the none selections
-      angular.forEach(mergedDonor, function(attribute, i) {
-        if (attribute == "none") {
-          mergedDonor[i] = null;
-        }
-      });
-      // set the duplicate donor numbers
-      mergedDonor.duplicateDonorNumbers = [];
-      angular.forEach(selectedDonorsData, function(donor, i) {
-        mergedDonor.duplicateDonorNumbers.push(donor.donorNumber);
-      });
       // submit
-      DonorService.mergeDonorsDuplicate(groupKey, mergedDonor, 
+      DonorService.mergeDonorsDuplicate(groupKey, $scope.copyMergedDonor(mergedDonor), 
         function(mergedDonor) {
           $location.path("/viewDonor/" + mergedDonor.id).search({});
         }, 
