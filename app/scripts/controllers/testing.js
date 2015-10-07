@@ -332,95 +332,160 @@ angular.module('bsis')
         name: 'DIN',
         displayName: 'DIN',
         field: 'donationIdentificationNumber',
-        width: '100'
-
+        visible: true,
       },
       {
         name: 'Date Bled',
         displayName: 'Date Bled',
         field: 'bleedStartTime',
         cellFilter: 'bsisDate',
-        width: '120'
+        visible: true,
       },
       {
         name: 'Pack Type',
         field: 'packType.packType',
-        width: '120'
+        visible: true,
       },
       {
         name: 'Venue',
         displayName: 'Venue',
         field: 'venue.name',
-        width: '150'
+        visible: true,
       },
       {
         name: 'ttistatus',
         displayName: 'TTI Status',
         field: 'ttistatus',
-        width: '160'
+        cellFilter: 'mapTTIStatus',
+        visible: true,
       },
       {
         name:'bloodAboRh',
         displayName: 'Blood Group Serology',
         cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
-        width: '150'
+        visible: true,
       },
       {
         name: 'ABO',
         displayName: 'ABO',
         field: 'testResults.recentTestResults',
         visible: false,
-        width: '50'
+
       },
       {
         name: 'Rh',
         displayName: 'RH',
         field: 'testResults.recentTestResults',
         visible: false,
-        width: '50'
       },
       {
         name: 'Titre',
         displayName: 'Titre',
         field: 'testResults.recentTestResults',
         visible: false,
-        width: '80'
       },
       {
         name: 'Weak D',
         displayName: 'Weak D',
         field: 'testResults.recentTestResults',
         visible: false,
-        width: '80'
       },
       {
         name: 'HIV',
         displayName: 'HIV',
         field: 'testResults.recentTestResults',
         visible: false,
-        width: '50'
       },
       {
         name: 'HBV',
         displayName: 'HBV',
         field: 'testResults.recentTestResults',
         visible: false,
-        width: '50'
       },
       {
         name: 'HCV',
         displayName: 'HCV',
         field: 'testResults.recentTestResults',
         visible: false,
-        width: '50'
       },
       {
         name: 'Syphilis',
         displayName: 'Syphilis',
         field: 'testResults.recentTestResults',
         visible: false,
-        width: '100'
-      }
+      },
+      {
+        name: 'HIV Conf 1',
+        displayName: 'HIV Conf 1',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      },
+      {
+        name: 'HBV Conf 1',
+        displayName: 'HBV Conf 1',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      },
+      {
+        name: 'HCV Conf 1',
+        displayName: 'HCV Conf 1',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      },
+      {
+        name: 'Syphilis Conf 1',
+        displayName: 'Syphilis Conf 1',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      },
+      {
+        name: 'HIV Conf 2',
+        displayName: 'HIV Conf 2',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      },
+      {
+        name: 'HBV Conf 2',
+        displayName: 'HBV Conf 2',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      },
+      {
+        name: 'HCV Conf 2',
+        displayName: 'HCV Conf 2',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      },
+      {
+        name: 'Syphilis Conf 2',
+        displayName: 'Syphilis Conf 2',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      },
+      //{
+      //  name: 'HIV Conf 3',
+      //  displayName: 'HIV Conf 3',
+      //  field: 'testResults.recentTestResults',
+      //  visible: false,
+      //},
+      //{
+      //  name: 'HBV Conf 3',
+      //  displayName: 'HBV Conf 3',
+      //  field: 'testResults.recentTestResults',
+      //  visible: false,
+      //},
+      //{
+      //  name: 'HCV Conf 3',
+      //  displayName: 'HCV Conf 3',
+      //  field: 'testResults.recentTestResults',
+      //  visible: false,
+      //},
+      //{
+      //  name: 'Syphilis Conf 3',
+      //  displayName: 'Syphilis Conf 3',
+      //  field: 'testResults.recentTestResults',
+      //  visible: false,
+      //}
     ];
 
     $scope.gridOptions = {
@@ -430,10 +495,20 @@ angular.module('bsis')
       paginationTemplate: 'views/template/pagination.html',
       columnDefs: columnDefs,
 
+      exporterPdfOrientation: 'landscape',
+      exporterPdfPageSize: 'A4',
+      exporterPdfDefaultStyle: {fontSize: 6},
+      exporterPdfTableHeaderStyle: {fontSize: 6, bold: true},
+      exporterPdfMaxGridWidth: 315,
+
       // Format values for exports
       exporterFieldCallback: function(grid, row, col, value) {
         if (col.name === 'Date Bled') {
           return $filter('bsisDate')(value);
+        }
+
+        if (col.name === 'ttistatus') {
+          return $filter('mapTTIStatus')(value);
         }
 
         if (col.name === 'bloodAboRh'){
@@ -446,7 +521,7 @@ angular.module('bsis')
 
 
         if (col.name === 'ABO' || col.name === 'Rh' || col.name === 'Titre' || col.name === 'Weak D' ||
-          col.name === 'HIV' || col.name === 'HBV' || col.name === 'HCV' || col.name === 'Syphilis') {
+          col.name.indexOf('HIV') === 0 || col.name.indexOf('HBV') === 0|| col.name.indexOf('HCV') === 0 || col.name.indexOf('Syphilis') === 0) {
           for (var test in value) {
             if (value[test].bloodTest.testNameShort == col.name){
               return value[test].result || 'Not Done';
@@ -458,7 +533,7 @@ angular.module('bsis')
         return value;
       },
 
-      exporterPdfMaxGridWidth: 650,
+
 
       // PDF header
       exporterPdfHeader: function() {
@@ -466,18 +541,15 @@ angular.module('bsis')
         var  columns = [];
 
         angular.forEach($scope.testBatch.donationBatches, function(val){
-            console.log(val);
             var venue = val.venue.name;
             var dateCreated = $filter('bsisDate')(val.createdDate);
             var numDonations = val.numDonations;
-            columns.push({text: 'Date Created: ' + dateCreated , width: 'auto'});
-            columns.push({text: 'Venue: ' + venue, width: 'auto'});
-            columns.push({text: 'Number of Donations: ' + numDonations, width: 'auto'});
+            columns.push([
+              {text: 'Date Created: ' + dateCreated , width: 'auto'},
+              {text: 'Venue: ' + venue, width: 'auto'},
+              {text: 'Number of Donations: ' + numDonations, width: 'auto'}]);          
 
         });
-
-
-
 
         return [
           {
@@ -606,7 +678,7 @@ angular.module('bsis')
       TestingService.getTTITestingFormFields( function(response){
         if (response !== false){
           $scope.ttiTestsBasic = response.basicTTITests;
-          $scope.ttiTestsConfirmatory = response.confirmatoryTTITests;
+          $scope.ttiTestsConf = response.confirmatoryTTITests;
         }
         else{
         }
