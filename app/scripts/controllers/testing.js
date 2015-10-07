@@ -579,10 +579,34 @@ angular.module('bsis')
           margin: [30, 0]
         };
       },
+      enableFiltering: false,
 
       onRegisterApi: function(gridApi){
         $scope.gridApi = gridApi;
+
       }
+    };
+
+    $scope.filter = function() {
+      $scope.gridApi.grid.registerRowsProcessor( $scope.singleFilter, 200 );
+      $scope.gridApi.grid.refresh();
+    };
+
+    $scope.singleFilter = function( renderableRows ){
+      var matcher = new RegExp('TTI_SAFE');
+      renderableRows.forEach( function( row ) {
+        console.log(row);
+        var match = true;
+        [ 'ttistatus' ].forEach(function( field ){
+          if (row.entity[field].match(matcher) ){
+            match = false;
+          }
+        });
+        if ( !match ){
+          row.visible = false;
+        }
+      });
+      return renderableRows;
     };
 
     $scope.export = function(format){
@@ -599,6 +623,11 @@ angular.module('bsis')
         }
         else if (format === 'csv'){
           $scope.gridApi.exporter.csvExport('all', 'all');
+        } else if (format === 'pdfVisible'){
+          $scope.gridApi.exporter.pdfExport('visible', 'all');
+        }
+        else if (format === 'csvVisible'){
+          $scope.gridApi.exporter.csvExport('visible', 'all');
         }
       });
     };
