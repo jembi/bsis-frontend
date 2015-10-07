@@ -34,7 +34,7 @@
         <p><em> {{duplicateCount}} possible duplicate donors identified. </em></p>
         <p>Please select the correct donor information below:</p>
         <alert type="danger" close="" ng-show="hasMessage">
-          {{message}}
+          <span ng-bind-html="message"></span>
         </alert>
         <table ng-table="manageDuplicateDonorTableParams" show-filter="false" class="table">
           <tr ng-repeat="donor in $data"
@@ -460,6 +460,7 @@
           <li ng-if="mergedDonor.idNumber != null && mergedDonor.idNumber != ''"><b>Identifier</b>: {{mergedDonor.idType.idType}} {{mergedDonor.idNumber}}</li>
           <li ng-if="mergedDonor.title != null && mergedDonor.title != ''"><b>Title</b>: {{mergedDonor.title}}</li>
           <li ng-if="mergedDonor.callingName != null && mergedDonor.callingName != ''"><b>Calling Name</b>: {{mergedDonor.callingName}}</li>
+          <li ng-if="mergedDonor.bloodAbo != null"><b>Blood Group</b>: {{mergedDonor.bloodAbo}}{{mergedDonor.bloodRh}}</li>
           <li ng-if="mergedDonor.preferredLanguage != null"><b>Preferred Language</b>: {{mergedDonor.preferredLanguage.preferredLanguage}}</li>
           <li><b>Venue</b>: {{mergedDonor.venue.name}}</li>
           <li ng-if="mergedDonor.comments != null && mergedDonor.comments != ''"><b>Comments</b>: {{mergedDonor.comments}}</li>

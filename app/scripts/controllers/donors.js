@@ -892,6 +892,7 @@ angular.module('bsis')
         donorFields.homeNumber = false;
         donorFields.workNumber = false;
 
+        var bloodTypingMismatch = false;
         angular.forEach(duplicatesData, function(donor, i) {
           // if the donor is selected
           if (donor.merge) {
@@ -924,6 +925,21 @@ angular.module('bsis')
               donorFields.workAddress = true;
             if (donor.address.postalAddressLine1 !== null && donor.address.postalAddressLine1 !== '')
               donorFields.postalAddress = true;
+            // check the blood typing of the selected users
+            if (mergedDonor.bloodRh) {
+              if (donor.bloodRh && mergedDonor.bloodRh != donor.bloodRh) {
+                bloodTypingMismatch = true;
+              }
+            } else {
+              mergedDonor.bloodRh = donor.bloodRh;
+            }
+            if (mergedDonor.bloodAbo) {
+              if (donor.bloodAbo && mergedDonor.bloodAbo != donor.bloodAbo) {
+                bloodTypingMismatch = true;
+              }
+            } else {
+              mergedDonor.bloodAbo = donor.bloodAbo;
+            }
             // save the donor
             selectedDonorsData.push(donor);
           }
@@ -935,6 +951,21 @@ angular.module('bsis')
           $scope.invalid = true;
           $scope.hasMessage = true;
           return;
+        }
+        if (bloodTypingMismatch) {
+          if ($scope.bloodTypingMismatchCheck) {
+            // they've confirmed the mismatch
+            mergedDonor.bloodAbo = "";
+            mergedDonor.bloodRh = "";
+          } else {
+            // show them the mismatch message
+            $scope.message = "<b>The selected donors have different blood types.</b><p>Please either change the selected donors, if there has been a mistake,"+
+            " or continue and clear the merged donor's blood typing results - they will be treated as a first time donor.</p>";
+            $scope.invalid = true;
+            $scope.hasMessage = true;
+            $scope.bloodTypingMismatchCheck = true;
+            return;
+          }
         }
       } else if (newStep == 3) {
         // set the idType and idNumber according to which option was selected
