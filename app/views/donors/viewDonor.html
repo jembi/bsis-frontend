@@ -1,4 +1,4 @@
-<form editable-form name="editableForm" onaftersave="updateDonor(donor)" onbeforesave="validateForm(editableForm)" oncancel="cancelForm(donor)" novalidate >
+<form editable-form name="editableForm" onaftersave="updateDonor(donor)" onbeforesave="validateForm(editableForm)" oncancel="cancelForm(donor, editableForm)" novalidate >
     <alert type="danger" close="" ng-show="err.userMessage">
         {{err.userMessage}}
         <ul>
@@ -19,16 +19,24 @@
         <span editable-text="donor.firstName" e-name="firstName" e-class="xeditable name"
               e-required>{{donor.firstName}}</span>
       </span>
-    <small class="error" ng-show="editableForm.firstName.$invalid">
+      <small class="error" 
+        ng-show="
+          (editableForm.firstName.$invalid && (editableForm.firstName.$dirty || submitted)) ||
+          (editableForm.firstName.$invalid  && (editableForm.lastName.$dirty  || submitted)) 
+        ">
         This cannot be empty
-    </small>
+      </small>
     <span class="h2">
         <span editable-text="donor.lastName" e-name="lastName" e-class="xeditable name" e-required>
             {{donor.lastName}}
         </span>
     </span>
-    <small class="error" ng-show="editableForm.lastName.$invalid">
-        This cannot be empty
+    <small class="error" 
+      ng-show="
+        (editableForm.lastName.$invalid && (editableForm.lastName.$dirty || submitted)) ||
+        (editableForm.lastName.$invalid  && (editableForm.lastName.$dirty  || submitted)) 
+      ">
+      This cannot be empty
     </small>
     <span class="h2">
         <small>

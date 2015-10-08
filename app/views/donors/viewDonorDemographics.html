@@ -1,4 +1,4 @@
-<form editable-form name="demographicsForm" onbeforesave="validateForm(demographicsForm)"  onaftersave="updateDonor(donor)" oncancel="cancelForm(donor)" novalidate>
+<form editable-form name="demographicsForm" onbeforesave="validateForm(demographicsForm)"  onaftersave="updateDonor(donor)" oncancel="cancelForm(donor, demographicsForm)" novalidate>
 
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
     <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="demographicsForm.$show()" ng-show="!demographicsForm.$visible">Edit</a></em>
@@ -33,8 +33,12 @@
                   e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                   e-name="email">{{donor.contact.email}}</span>
             <br />
-            <small class="error" ng-show="demographicsForm.email.$invalid">
-                Email address format invalid
+            <small class="error" 
+              ng-show="
+                (demographicsForm.email.$invalid && (demographicsForm.email.$dirty || submitted)) ||
+                (demographicsForm.email.$invalid && (demographicsForm.email.$dirty  || submitted)) 
+              ">
+              Invalid email address
             </small>
         </td>
       </tr>

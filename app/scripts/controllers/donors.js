@@ -186,7 +186,8 @@ angular.module('bsis')
 
     $scope.master = DonorService.getDonor();
 
-    $scope.cancelForm = function (donor) {
+    $scope.cancelForm = function (donor, form) {
+      $scope.clearForm(form);
       DonorService.getDonorById(donor.id, function (freshDonor) {
         $scope.donor = freshDonor;
         $scope.err = null;
