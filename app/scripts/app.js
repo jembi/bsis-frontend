@@ -16,9 +16,9 @@ var app = angular.module('bsis', [
   'ui.grid.pagination'
 ])
   .config(function($routeProvider, PERMISSIONS, UI) {
-    
+
     var reloadOnSearch = false;
-    
+
     $routeProvider
 
       // DEFAULT VIEW - DISPLAY HOME PAGE IF USER AUTHENTICATED

@@ -587,7 +587,7 @@ input[type=number] {
 .xeditable.title {
   width: 75px;
 }
-.xeditable.donor-panel {
+.xeditable.venue {
   width: 160px;
 }
 .xeditable.notes {
@@ -640,3 +640,21 @@ input[disabled] {
 .btn-link.text-success {
   color: #3C763D;
 }
+
+/* 
+bootstrap.min.css sets .dropdown-menu min-width to 160px by default 
+- override default to inherit value from containing element
+*/
+.ui-select-bootstrap .dropdown-menu {
+  min-width: inherit  !important;
+}
+
+/* ui-grid custom data export button styling */
+.btn-ui-grid-export {
+  margin-top:0px; 
+  padding-top: 2px;
+  padding-bottom: 0px;
+}
+
+.ui-grid-row:nth-child(odd):hover .ui-grid-cell-clickable{cursor: pointer; background:#eee}
+.ui-grid-row:nth-child(even):hover .ui-grid-cell-clickable{cursor: pointer; background:#eee}

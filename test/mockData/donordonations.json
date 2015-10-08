@@ -3,7 +3,7 @@
     {
       "donationIdentificationNumber": "D12345678MS",
       "donationBatch": "DB189800MS",
-      "donorPanel": "Maseru",
+      "venue": "Maseru",
       "donationDate": "12/02/2010",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -18,7 +18,7 @@
     {
       "donationIdentificationNumber": "D543253453MS",
       "donationBatch": "DB189800MS",
-      "donorPanel": "Maseru",
+      "venue": "Maseru",
       "donationDate": "11/10/2010",
       "donationCreatedBy": "administrator",
       "packType": "Triple",
@@ -33,7 +33,7 @@
     {
       "donationIdentificationNumber": "D323234444MS",
       "donationBatch": "DB189800MS",
-      "donorPanel": "Mohale's Hoek",
+      "venue": "Mohale's Hoek",
       "donationDate": "15/01/2011",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -48,7 +48,7 @@
     {
       "donationIdentificationNumber": "D213232322MS",
       "donationBatch": "DB189800MS",
-      "donorPanel": "Mohale's Hoek",
+      "venue": "Mohale's Hoek",
       "donationDate": "20/11/2011",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -63,7 +63,7 @@
     {
       "donationIdentificationNumber": "D734674577MS",
       "donationBatch": "DB189800MS",
-      "donorPanel": "Maseru",
+      "venue": "Maseru",
       "donationDate": "12/06/2012",
       "donationCreatedBy": "administrator",
       "packType": "Quad",
@@ -78,7 +78,7 @@
     {
       "donationIdentificationNumber": "D909021111MS",
       "donationBatch": "DB189800MS",
-      "donorPanel": "Maseru",
+      "venue": "Maseru",
       "donationDate": "15/07/2013",
       "donationCreatedBy": "administrator",
       "packType": "Quad",
@@ -93,7 +93,7 @@
     {
       "donationIdentificationNumber": "D532453425MS",
       "donationBatch": "DB189800MS",
-      "donorPanel": "Maseru",
+      "venue": "Maseru",
       "donationDate": "10/01/2014",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -108,7 +108,7 @@
     {
       "donationIdentificationNumber": "D535894444MS",
       "donationBatch": "DB189800MS",
-      "donorPanel": "Maseru",
+      "venue": "Maseru",
       "donationDate": "21/05/2014",
       "donationCreatedBy": "administrator",
       "packType": "Triple",

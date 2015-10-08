@@ -93,7 +93,7 @@ angular.module('bsis')
       });
     },
     findDonorListDonors: function (donorSearch, onSuccess, onError) {
-      var donors = Api.DonorCommunicationsSearch.query({bloodGroups: donorSearch.bloodGroups, donorPanels: donorSearch.donorPanels,
+      var donors = Api.DonorCommunicationsSearch.query({bloodGroups: donorSearch.bloodGroups, venues: donorSearch.venues,
           clinicDate: donorSearch.clinicDate, lastDonationFromDate: donorSearch.lastDonationFromDate,
           lastDonationToDate: donorSearch.lastDonationToDate, anyBloodGroup: donorSearch.anyBloodGroup, noBloodGroup: donorSearch.noBloodGroup}, function(){
         onSuccess(donors.donors);
@@ -268,7 +268,7 @@ angular.module('bsis')
         updateDonationBatch = updateDonationBatch.donationBatch;
 
         updateDonationBatch.isClosed = true;
-        updateDonationBatch.donorPanel = updateDonationBatch.donorPanel.id;
+        updateDonationBatch.venue = updateDonationBatch.venue.id;
 
         Api.DonationBatches.update({id:donationBatch.id}, updateDonationBatch, function(data) {
          response(data.donationBatch);

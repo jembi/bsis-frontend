@@ -9,7 +9,7 @@
     {
       "donationIdentificationNumber": "D12345670MS",
       "donationBatch": "DB11100002MS",
-      "donorPanel": "Maseru",
+      "venue": "Maseru",
       "donationDate": "08/10/2014",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -29,7 +29,7 @@
     {
       "donationIdentificationNumber": "D12345671MS",
       "donationBatch": "DB11100002MS",
-      "donorPanel": "Maseru",
+      "venue": "Maseru",
       "donationDate": "08/10/2014",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -49,7 +49,7 @@
     {
       "donationIdentificationNumber": "D12345672MS",
       "donationBatch": "DB11100002MS",
-      "donorPanel": "Maseru",
+      "venue": "Maseru",
       "donationDate": "08/10/2014",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -69,7 +69,7 @@
     {
       "donationIdentificationNumber": "D12345673MS",
       "donationBatch": "DB11100002MS",
-      "donorPanel": "Maseru",
+      "venue": "Maseru",
       "donationDate": "08/10/2014",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -89,7 +89,7 @@
     {
       "donationIdentificationNumber": "D12345674MS",
       "donationBatch": "DB11100003MS",
-      "donorPanel": "Mohale's Hoek",
+      "venue": "Mohale's Hoek",
       "donationDate": "09/10/2014",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -109,7 +109,7 @@
     {
       "donationIdentificationNumber": "D12345675MS",
       "donationBatch": "DB11100003MS",
-      "donorPanel": "Mohale's Hoek",
+      "venue": "Mohale's Hoek",
       "donationDate": "09/10/2014",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -129,7 +129,7 @@
     {
       "donationIdentificationNumber": "D12345676MS",
       "donationBatch": "DB11100003MS",
-      "donorPanel": "Mohale's Hoek",
+      "venue": "Mohale's Hoek",
       "donationDate": "09/10/2014",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -149,7 +149,7 @@
     {
       "donationIdentificationNumber": "D12345677MS",
       "donationBatch": "DB11100003MS",
-      "donorPanel": "Mohale's Hoek",
+      "venue": "Mohale's Hoek",
       "donationDate": "09/10/2014",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -169,7 +169,7 @@
     {
       "donationIdentificationNumber": "D12345678MS",
       "donationBatch": "DB11100003MS",
-      "donorPanel": "Mohale's Hoek",
+      "venue": "Mohale's Hoek",
       "donationDate": "09/10/2014",
       "donationCreatedBy": "administrator",
       "packType": "Single",
@@ -189,7 +189,7 @@
     {
       "donationIdentificationNumber": "D12345679MS",
       "donationBatch": "DB11100003MS",
-      "donorPanel": "Mohale's Hoek",
+      "venue": "Mohale's Hoek",
       "donationDate": "09/10/2014",
       "donationCreatedBy": "administrator",
       "packType": "Single",
