@@ -286,7 +286,7 @@ angular.module('bsis')
 
   })
 
-  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams, $timeout, $routeParams, $q, $route) {
     var data = [{}];
     $scope.data  = data;
 
@@ -587,24 +587,24 @@ angular.module('bsis')
       }
     };
 
-    $scope.filter = function() {
+    $scope.filter = function(filterKey) {
       $scope.gridApi.grid.registerRowsProcessor( $scope.singleFilter, 200 );
       $scope.gridApi.grid.refresh();
+      $scope.filterKey = filterKey;
     };
 
-    $scope.singleFilter = function( renderableRows ){
-      var matcher = new RegExp('TTI_SAFE');
-      renderableRows.forEach( function( row ) {
-        console.log(row);
-        var match = true;
-        [ 'ttistatus' ].forEach(function( field ){
+    $scope.resetGrid = function () {
+      $route.reload();
+    };
+
+    $scope.singleFilter = function(renderableRows){
+      var matcher = new RegExp($scope.filterKey);
+      renderableRows.forEach( function(row) {
+        [ 'ttistatus', 'bloodTypingStatus', 'bloodTypingMatchStatus' ].forEach(function( field ){
           if (row.entity[field].match(matcher) ){
-            match = false;
+            row.visible = false;
           }
         });
-        if ( !match ){
-          row.visible = false;
-        }
       });
       return renderableRows;
     };
