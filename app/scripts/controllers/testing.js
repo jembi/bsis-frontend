@@ -541,11 +541,11 @@ angular.module('bsis')
             {
               text: 'Test Batch Outcomes Summary Report',
               bold: true,
-              margin: [30, 10, 30, 0]
+              margin: [30, 10, 10, 2]
             },
             {
               text: 'Created On: ' + $filter('bsisDate')($scope.testBatch.createdDate),
-              margin: [30, 0]
+              margin: [300, -10, -10, 0]
             }
         ];
 
@@ -557,7 +557,7 @@ angular.module('bsis')
             finalArray.push(
               {
                 text: 'Venue: ' + venue +' Date Created: ' + dateCreated +  ' Number of Donations: ' + numDonations,
-                margin: [30, 0]
+                margin: [30, 0, 0, 0]
               }
             );
         });
