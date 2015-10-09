@@ -228,7 +228,7 @@ angular.module('bsis')
 
     $scope.getTestResultsByDIN = function (testResultsSearch) {
       testResultsSearch.search = true;
-      $location.search(testResultsSearch);
+      $location.search(testResultsSearch);q
       TestingService.getTestResultsByDIN(testResultsSearch.donationIdentificationNumber, function(response){
         if (response !== false){
           $scope.donation = response.donation;
@@ -708,7 +708,7 @@ angular.module('bsis')
       TestingService.getTTITestingFormFields( function(response){
         if (response !== false){
           $scope.ttiTestsBasic = response.basicTTITests;
-          $scope.ttiTestsConf = response.confirmatoryTTITests;
+          $scope.ttiTestsConfirmatory = response.confirmatoryTTITests;
         }
         else{
         }
