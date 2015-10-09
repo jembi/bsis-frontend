@@ -286,7 +286,7 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.AUTHENTICATED
       })
       .when('/locations', {
-        templateUrl : 'views/settings.html',
+        templateUrl : 'views/donors.html',
         controller  : 'LocationsCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_SITES
       })

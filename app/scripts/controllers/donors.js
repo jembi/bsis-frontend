@@ -69,7 +69,12 @@ angular.module('bsis')
       } else if ($location.path().indexOf("/manageClinic") === 0 && path === "/manageDonationBatches") {
         $scope.selection = '/manageClinic';
         return true;
-      } else if ($location.path().indexOf('/donorCounselling') === 0 && path.indexOf('/donorCounselling') === 0) {
+      }
+      else if ($location.path().indexOf("/locations") === 0) {
+        $scope.selection = '/locations';
+        return true;
+      }
+      else if ($location.path().indexOf('/donorCounselling') === 0 && path.indexOf('/donorCounselling') === 0) {
         var currentPath = $location.path();
         $scope.selection = currentPath === '/donorCounselling' ? currentPath : '/donorCounsellingDetails';
         return true;
@@ -78,6 +83,7 @@ angular.module('bsis')
         $scope.selection = path;
         return true;
       } else if ($location.path() === path) {
+
         return true;
       } else {
         // for first time load of /donors view, determine the initial view
