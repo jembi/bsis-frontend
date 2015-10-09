@@ -539,7 +539,7 @@ angular.module('bsis')
       exporterPdfHeader: function() {
         var finalArray = [
             {
-              text: 'Test Batch Outcomes Summary Report',
+              text: $scope.reportName,
               bold: true,
               margin: [30, 10, 10, 2]
             },
@@ -619,11 +619,20 @@ angular.module('bsis')
           });
         });
         if(format === 'pdf'){
+          $scope.reportName = 'Test Batch Outcomes Summary Report';
           $scope.gridApi.exporter.pdfExport('all', 'all');
         }
         else if (format === 'csv'){
           $scope.gridApi.exporter.csvExport('all', 'all');
         } else if (format === 'pdfVisible'){
+          if ($scope.filterKey == 'TTI_SAFE') {
+            $scope.reportName = 'Unsafe Test Batch Outcomes Summary Report';
+          }
+
+          if ($scope.filterKey == 'COMPLETE') {
+            $scope.reportName = 'Blood Serology Not Done Test Batch Outcomes Summary Report';
+          }
+
           $scope.gridApi.exporter.pdfExport('visible', 'all');
         }
         else if (format === 'csvVisible'){
