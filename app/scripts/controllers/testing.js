@@ -228,7 +228,7 @@ angular.module('bsis')
 
     $scope.getTestResultsByDIN = function (testResultsSearch) {
       testResultsSearch.search = true;
-      $location.search(testResultsSearch);q
+      $location.search(testResultsSearch);
       TestingService.getTestResultsByDIN(testResultsSearch.donationIdentificationNumber, function(response){
         if (response !== false){
           $scope.donation = response.donation;
