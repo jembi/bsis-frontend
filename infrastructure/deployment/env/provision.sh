@@ -32,10 +32,17 @@ if [ -d "/opt/bsis-frontend" ]; then
   git checkout ${1:-master}
   git merge --ff-only origin/${1:-master}
 else 
+  if [ "$(ssh-add -l)" == "The agent has no identities." ]; then
+    # Fall back to http
+    BSIS_REPOSITORY=https://github.com/jembi/bsis-frontend.git
+  else
+    # Use ssh
+    BSIS_REPOSITORY=git@github.com:jembi/bsis-frontend.git
+  fi
   # Clone the repository
   sudo mkdir --parents /opt/bsis-frontend
   sudo chown --recursive $(whoami):$(groups | awk '{print $1;}') /opt/bsis-frontend
-  git clone --branch ${1:-master} --no-single-branch --depth=1 git@github.com:jembi/bsis-frontend.git /opt/bsis-frontend
+  git clone --branch ${1:-master} --no-single-branch --depth=1 ${BSIS_REPOSITORY} /opt/bsis-frontend
   cd /opt/bsis-frontend
 fi
 
