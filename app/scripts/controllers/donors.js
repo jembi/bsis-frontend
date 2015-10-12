@@ -70,7 +70,7 @@ angular.module('bsis')
         $scope.selection = '/manageClinic';
         return true;
       }
-      else if ($location.path().indexOf("/locations") === 0) {
+      else if ($location.path().indexOf("/locations") === 0 && path === initialView) {
         $scope.selection = '/locations';
         return true;
       }
