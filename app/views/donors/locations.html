@@ -43,6 +43,13 @@
 </div>
 
 <h4>Add Location</h4>
+
+<alert type="danger" close="" ng-show="err.userMessage">
+    {{err.userMessage}}
+    <ul>
+        <li ng-show="err['name']"> {{err["name"]}}</li>
+    </ul>
+</alert>
 <form name="addLocationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addLocation(location, addLocationForm)">
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label">Name</label>

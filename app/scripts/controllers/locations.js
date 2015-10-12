@@ -57,9 +57,12 @@ angular.module('bsis')
             locationForm.$setPristine();
             $scope.submitted = '';
             $scope.getLocations();
+            $scope.err = null;
           }
           else{
           }
+        }, function (err) {
+          $scope.err = err;
         });
       }
       else{
