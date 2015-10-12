@@ -9,14 +9,14 @@ angular.module('bsis')
     var data = [{}];
     $scope.data = data;
     $scope.location = {
-      "isVenue" : false,
+      "isVenue" : true,
       "isMobileSite" : false,
       "isUsageSite" : false
     };
 
     $scope.clear = function () {
       $scope.location = {
-        "isVenue" : false,
+        "isVenue" : true,
         "isMobileSite" : false,
         "isUsageSite" : false
       };
@@ -50,7 +50,7 @@ angular.module('bsis')
         LocationsService.addLocation(location, function(response){
           if (response !== false){
             $scope.location = {
-              "isVenue" : false,
+              "isVenue" : true,
               "isMobileSite" : false,
               "isUsageSite" : false
             };
@@ -78,6 +78,18 @@ angular.module('bsis')
 
     $scope.removeLocation = function(location){
       location.isDeleted = true;
+      LocationsService.updateLocation(location, function(response){
+        if (response !== false){
+          $scope.locationToRemove = '';
+          $scope.getLocations();
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.enableLocation = function(location){
+      location.isDeleted = false;
       LocationsService.updateLocation(location, function(response){
         if (response !== false){
           $scope.locationToRemove = '';
