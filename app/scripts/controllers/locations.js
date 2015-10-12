@@ -45,7 +45,7 @@ angular.module('bsis')
 
     $scope.addLocation = function (location, locationForm) {
 
-      if(locationForm.$valid && !(!locationForm.venue.$viewValue && !locationForm.mobileSite.$viewValue && !locationForm.requestSite.$viewValue)){
+      if(locationForm.$valid){
 
         LocationsService.addLocation(location, function(response){
           if (response !== false){
