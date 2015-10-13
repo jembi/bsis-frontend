@@ -66,13 +66,9 @@
             ">
             This cannot be empty
           </small>
-            <small class="error"
-                   ng-show="
-              (addLocationForm.name.$error.maxlength && (addLocationForm.name.$dirty || submitted))
-            ">
+            <small class="error" ng-show="(addLocationForm.name.$error.maxlength && (addLocationForm.name.$dirty || submitted))">
                 This field cannot be longer than 50 characters
             </small>
-
         </div>
       </div>
     </div>
@@ -90,7 +86,7 @@
   <div class="form-group"> 
     <div class="col-sm-offset-1 col-sm-4">
       <button class="btn btn-primary" type="submit">Add Location</button>
-      <button class="btn btn-primary" type="reset" ng-clear="clear(); clearForm(addLocationForm);">Clear</button>
+      <button class="btn btn-primary" type="reset" ng-click="reset(addLocationForm);">Clear</button>
     </div>
   </div>
 

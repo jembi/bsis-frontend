@@ -14,19 +14,17 @@ angular.module('bsis')
       "isUsageSite" : false
     };
 
-    $scope.clear = function () {
+
+
+    $scope.reset = function(addLocationForm){
       $scope.location = {
         "isVenue" : true,
         "isMobileSite" : false,
-        "isUsageSite" : false,
-        "name" : ''
+        "isUsageSite" : false
       };
-    };
-
-    $scope.clearForm = function(form){
-      form.$setPristine();
-      $scope.submitted = '';
-
+      addLocationForm.$setPristine();
+      addLocationForm.$setUntouched();
+      $scope.submitted = false;
     };
 
     $scope.getLocations = function () {
