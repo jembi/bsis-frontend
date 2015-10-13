@@ -26,7 +26,7 @@ angular.module('bsis')
     $scope.clearForm = function(form){
       form.$setPristine();
       $scope.submitted = '';
-      
+
     };
 
     $scope.getLocations = function () {
