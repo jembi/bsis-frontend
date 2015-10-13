@@ -18,7 +18,9 @@ angular.module('bsis')
       $scope.location = {
         "isVenue" : true,
         "isMobileSite" : false,
-        "isUsageSite" : false
+        "isUsageSite" : false,
+        "name" : ''
+
       };
     };
 
