@@ -18,7 +18,7 @@ sudo apt-get install --quiet --assume-yes \
 if ! fgrep --silent ".npm-packages" ~/.profile; then
   # Configure the directory for global npm installs
   echo "prefix = ${HOME}/.npm-packages" > ~/.npmrc
-  echo 'export PATH="${HOME}/.npm-packages/bin:${PATH}"' >> ~/.profile
+  echo "export PATH=\"${HOME}/.npm-packages/bin:\${PATH}\"" >> ~/.profile
   source ~/.profile
 fi
 
