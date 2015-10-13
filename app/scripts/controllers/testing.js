@@ -327,30 +327,15 @@ angular.module('bsis')
     $scope.getCurrentTestBatchOverview();
 
     var columnDefs = [
-
       {
         name: 'DIN',
-        displayName: 'DIN',
-        field: 'donationIdentificationNumber',
+        displayName: 'Donation Info',
         visible: true,
-      },
-      {
-        name: 'Date Bled',
-        displayName: 'Date Bled',
-        field: 'bleedStartTime',
-        cellFilter: 'bsisDate',
-        visible: true,
-      },
-      {
-        name: 'Pack Type',
-        field: 'packType.packType',
-        visible: true,
-      },
-      {
-        name: 'Venue',
-        displayName: 'Venue',
-        field: 'venue.name',
-        visible: true,
+        cellTemplate: '<div class="ui-grid-cell-contents">' +
+        '{{row.entity.donationIdentificationNumber}} ' +
+        'on {{row.entity.bleedStartTime | bsisDate}} ' +
+        'at: {{row.entity.venue.name}} ' +
+        '</div>'
       },
       {
         name: 'ttistatus',
@@ -362,7 +347,9 @@ angular.module('bsis')
       {
         name:'bloodAboRh',
         displayName: 'Blood Group Serology',
-        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.bloodTypingStatus}} - {{row.entity.bloodTypingMatchStatus}} <em>' +
+        '({{row.entity.bloodAbo}}{{row.entity.bloodRh}}) ' +
+        'in {{row.entity.packType.packType}} pack</em> </div>',
         visible: true,
       },
       {
@@ -387,6 +374,12 @@ angular.module('bsis')
       {
         name: 'Weak D',
         displayName: 'Weak D',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      },
+      {
+        name: 'AbScr',
+        displayName: 'AbScr',
         field: 'testResults.recentTestResults',
         visible: false,
       },
@@ -462,32 +455,51 @@ angular.module('bsis')
         field: 'testResults.recentTestResults',
         visible: false,
       },
-      //{
-      //  name: 'HIV Conf 3',
-      //  displayName: 'HIV Conf 3',
-      //  field: 'testResults.recentTestResults',
-      //  visible: false,
-      //},
-      //{
-      //  name: 'HBV Conf 3',
-      //  displayName: 'HBV Conf 3',
-      //  field: 'testResults.recentTestResults',
-      //  visible: false,
-      //},
-      //{
-      //  name: 'HCV Conf 3',
-      //  displayName: 'HCV Conf 3',
-      //  field: 'testResults.recentTestResults',
-      //  visible: false,
-      //},
-      //{
-      //  name: 'Syphilis Conf 3',
-      //  displayName: 'Syphilis Conf 3',
-      //  field: 'testResults.recentTestResults',
-      //  visible: false,
-      //}
+      {
+        name: 'HIV Conf 3',
+        displayName: 'HIV Conf 3',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      },
+      {
+        name: 'HBV Conf 3',
+        displayName: 'HBV Conf 3',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      },
+      {
+        name: 'HCV Conf 3',
+        displayName: 'HCV Conf 3',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      },
+      {
+        name: 'Syphilis Conf 3',
+        displayName: 'Syphilis Conf 3',
+        field: 'testResults.recentTestResults',
+        visible: false,
+      }
     ];
 
+
+    $scope.getTests = function () {
+      TestingService.getTTITestingFormFields( function(response){
+        if (response !== false){
+          $scope.ttiTestsBasic = response.basicTTITests;
+          $scope.ttiTestsConfirmatory = response.confirmatoryTTITests;
+        }
+        else{
+        }
+      });
+      TestingService.getBloodGroupTestingFormFields( function(response){
+        if (response !== false){
+          $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
+        }
+        else{
+        }
+      });
+    };
+    $scope.getTests();
     $scope.gridOptions = {
       data: [],
       paginationPageSize: 10,
@@ -499,7 +511,7 @@ angular.module('bsis')
       exporterPdfPageSize: 'A4',
       exporterPdfDefaultStyle: {fontSize: 6},
       exporterPdfTableHeaderStyle: {fontSize: 6, bold: true},
-      exporterPdfMaxGridWidth: 315,
+      exporterPdfMaxGridWidth: 250,
 
       // Format values for exports
       exporterFieldCallback: function(grid, row, col, value) {
@@ -514,13 +526,18 @@ angular.module('bsis')
         if (col.name === 'bloodAboRh'){
           var bloodSerology = 'Not Done';
           if (row.entity.bloodTypingStatus !== 'NOT_DONE'){
-            bloodSerology = row.entity.bloodTypingStatus + ' ' + row.entity.bloodTypingMatchStatus + ' (' + row.entity.bloodAbo + row.entity.bloodRh + ')';
+            bloodSerology = row.entity.bloodTypingStatus + ' ' + row.entity.bloodTypingMatchStatus + ' (' + row.entity.bloodAbo + row.entity.bloodRh + ') in ' + row.entity.packType.packType + ' pack';
           }
           return bloodSerology;
         }
 
+        if (col.name === 'DIN'){
+            var din = row.entity.donationIdentificationNumber + ' on ' + $filter('bsisDate')(row.entity.bleedStartTime)  +'  from  ' + row.entity.venue.name;
+            return din;
+        }
 
-        if (col.name === 'ABO' || col.name === 'Rh' || col.name === 'Titre' || col.name === 'Weak D' ||
+
+        if (col.name === 'ABO' || col.name === 'Rh' || col.name === 'Titre' || col.name === 'Weak D' || col.name === 'AbScr' ||
           col.name.indexOf('HIV') === 0 || col.name.indexOf('HBV') === 0|| col.name.indexOf('HCV') === 0 || col.name.indexOf('Syphilis') === 0) {
           for (var test in value) {
             if (value[test].bloodTest.testNameShort == col.name){
