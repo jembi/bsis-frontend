@@ -32,7 +32,7 @@ if [ -d "/opt/bsis-frontend" ]; then
   git checkout ${1:-master}
   git merge --ff-only origin/${1:-master}
 else 
-  if [ "$(ssh-add -l)" == "The agent has no identities." ]; then
+  if ! ssh-add -l; then
     # Fall back to http
     BSIS_REPOSITORY=https://github.com/jembi/bsis-frontend.git
   else
