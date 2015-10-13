@@ -832,6 +832,7 @@ angular.module('bsis')
       delete newMergedDonor.homeAddress;
       delete newMergedDonor.workAddress;
       delete newMergedDonor.postalAddress;
+      delete newMergedDonor.noteSelection;
       // clear the none selections
       angular.forEach(newMergedDonor, function(attribute, i) {
         if (attribute == "none") {
@@ -1000,6 +1001,17 @@ angular.module('bsis')
           if (donor.id == mergedDonor.idNumberId) {
             mergedDonor.idType = donor.idType;
             mergedDonor.idNumber = donor.idNumber;
+          }
+          // set the notes according to what was selected
+          if (mergedDonor.noteSelection[donor.id]) {
+            if (mergedDonor.notes) {
+              if (mergedDonor.notes.length > 0) {
+                mergedDonor.notes = mergedDonor.notes.concat(", ");
+              }
+              mergedDonor.notes = mergedDonor.notes.concat(donor.notes);
+            } else {
+              mergedDonor.notes = donor.notes;
+            }
           }
         });
       } else if (newStep == 4) {
