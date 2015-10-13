@@ -50,7 +50,7 @@
         <li ng-show="err['name']"> {{err["name"]}}</li>
     </ul>
 </alert>
-<form name="addLocationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addLocation(location, addLocationForm)">
+<form name="addLocationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addLocation(location, addLocationForm)" ng-controller="LocationsCtrl">
   <div class="form-group">
     <label for="name" class="col-sm-1 control-label">Name</label>
     <div class="row col-sm-11">
@@ -70,7 +70,7 @@
                    ng-show="
               (addLocationForm.name.$error.maxlength && (addLocationForm.name.$dirty || submitted))
             ">
-                This is greater than the max length of 50 characters
+                This field cannot be longer than 50 characters
             </small>
 
         </div>
@@ -90,7 +90,7 @@
   <div class="form-group"> 
     <div class="col-sm-offset-1 col-sm-4">
       <button class="btn btn-primary" type="submit">Add Location</button>
-      <button class="btn btn-primary"  ng-click="clear(); clearForm(addLocationForm);">Clear</button>
+      <button class="btn btn-primary" ng-click="clear(); clearForm(addLocationForm);">Clear</button>
     </div>
   </div>
 

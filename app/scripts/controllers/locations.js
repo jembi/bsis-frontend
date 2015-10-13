@@ -20,13 +20,13 @@ angular.module('bsis')
         "isMobileSite" : false,
         "isUsageSite" : false,
         "name" : ''
-
       };
     };
 
     $scope.clearForm = function(form){
       form.$setPristine();
       $scope.submitted = '';
+      
     };
 
     $scope.getLocations = function () {
