@@ -201,7 +201,7 @@ angular.module('bsis')
   })
 
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
+  .controller('ViewDonorCtrl', function ($scope, $location, $modal, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
       GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout,$routeParams) {
 
     DonorService.getDonorById($routeParams.id, function (donor) {
@@ -581,13 +581,66 @@ angular.module('bsis')
       }
     };
 
+
+
+    /**
+     *  Delete Donor Logic
+     *
+     */
+
+    $scope.confirmDelete = function(donor){
+      //Alerting.AlertReset();
+
+      var deleteObject = {
+        title: 'Delete Donor',
+        button: 'Delete',
+        message: 'Are you sure you wish to delete the donor "' + donor.firstName + ' ' + donor.lastName + '"?'
+      };
+
+      var modalInstance = $modal.open({
+        templateUrl: 'views/confirmModal.html',
+        controller: 'ConfirmModalCtrl',
+        resolve: {
+          confirmObject: function () {
+            return deleteObject;
+          }
+        }
+      });
+
+      modalInstance.result.then(function () {
+        // Delete confirmed - delete the donor
+        $scope.deleteDonor(donor.id);
+      }, function () {
+        // delete cancelled - do nothing
+      });
+
+    };
+
     $scope.deleteDonor = function(donorId) {
       DonorService.deleteDonor(donorId, function() {
+        deleteSuccess();
         $location.path('findDonor');
       }, function(err) {
+        deleteError(err);
         console.error(err);
       });
     };
+
+    var deleteSuccess = function () {
+      alert('The donor has been deleted');
+      // On success
+      //$scope.channels = Api.Channels.query();
+      //Alerting.AlertAddMsg('top', 'success', 'The channel has been deleted successfully');
+    };
+
+    var deleteError = function (err) {
+      console.log(err);
+      alert(err.data.developerMessage);
+      // add the error message
+      // Alerting.AlertAddMsg('top', 'danger', 'An error has occurred while deleting the channel: #' + err.status + ' - ' + err.data);
+    };
+
+
 
   })
 
