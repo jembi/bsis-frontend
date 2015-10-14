@@ -598,6 +598,7 @@ angular.module('bsis')
       };
 
       var modalInstance = $modal.open({
+        animation: false,
         templateUrl: 'views/confirmModal.html',
         controller: 'ConfirmModalCtrl',
         resolve: {
