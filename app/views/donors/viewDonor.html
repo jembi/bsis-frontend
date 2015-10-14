@@ -1,3 +1,6 @@
+<alert ng-repeat="alert in alerts.top" type="{{alert.type}}" close="closeAlert('top', $index)">
+  {{alert.msg}}
+</alert>
 <form editable-form name="editableForm" onaftersave="updateDonor(donor)">
 
   <span class="h2"> 

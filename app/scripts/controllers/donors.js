@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, Alerting, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -201,7 +201,7 @@ angular.module('bsis')
   })
 
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, $modal, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
+  .controller('ViewDonorCtrl', function ($scope, $location, $modal, Alerting, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
       GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout,$routeParams) {
 
     DonorService.getDonorById($routeParams.id, function (donor) {
@@ -589,7 +589,7 @@ angular.module('bsis')
      */
 
     $scope.confirmDelete = function(donor){
-      //Alerting.AlertReset();
+      Alerting.AlertReset();
 
       var deleteObject = {
         title: 'Delete Donor',
@@ -620,7 +620,7 @@ angular.module('bsis')
     $scope.deleteDonor = function(donorId) {
       DonorService.deleteDonor(donorId, function() {
         deleteSuccess();
-        $location.path('findDonor');
+        $timeout(function(){ $location.path('findDonor');}, 3000);
       }, function(err) {
         deleteError(err);
         console.error(err);
@@ -628,17 +628,15 @@ angular.module('bsis')
     };
 
     var deleteSuccess = function () {
-      alert('The donor has been deleted');
       // On success
-      //$scope.channels = Api.Channels.query();
-      //Alerting.AlertAddMsg('top', 'success', 'The channel has been deleted successfully');
+      Alerting.AlertAddMsg('top', 'success', 'The donor has been deleted successfully');
     };
 
     var deleteError = function (err) {
       console.log(err);
-      alert(err.data.developerMessage);
+
       // add the error message
-      // Alerting.AlertAddMsg('top', 'danger', 'An error has occurred while deleting the channel: #' + err.status + ' - ' + err.data);
+       Alerting.AlertAddMsg('top', 'danger', 'An error has occurred while deleting the donor: #' + err.status + ' - ' + err.data.developerMessage);
     };
 
 
