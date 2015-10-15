@@ -25,7 +25,7 @@ fi
 # Install grunt and bower
 npm install --global bower grunt-cli
 
-if [ -d "/opt/bsis-frontend" ]; then
+if [ -d "/opt/bsis-frontend/.git" ]; then
   # Checkout the latest version
   cd /opt/bsis-frontend
   git fetch
