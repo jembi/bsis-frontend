@@ -79,7 +79,7 @@ angular.module('bsis')
     $rootScope.$on( '$routeChangeStart', function() {
 
       // reset the alert object for each route changed
-      $rootScope.alerts = {};
+      //$rootScope.alerts = {};
 
     });
 
