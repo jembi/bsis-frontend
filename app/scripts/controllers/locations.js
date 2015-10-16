@@ -25,6 +25,7 @@ angular.module('bsis')
       addLocationForm.$setPristine();
       addLocationForm.$setUntouched();
       $scope.submitted = false;
+      $scope.err = "";
     };
 
     $scope.getLocations = function () {
