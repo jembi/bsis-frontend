@@ -547,7 +547,7 @@ angular.module('bsis')
           }
         });
     };
-    
+
     $scope.populateEndDate = function(deferral) {
       var deferralReason = deferral.deferralReason;
       deferral.deferredUntil = deferralReason.durationType === 'PERMANENT' ?
@@ -594,7 +594,7 @@ angular.module('bsis')
       var deleteObject = {
         title: 'Delete Donor',
         button: 'Delete',
-        message: 'Are you sure you wish to delete the donor "' + donor.firstName + ' ' + donor.lastName + ', Donor ID #'+ donor.id + '"?'
+        message: 'Are you sure you wish to delete the donor "' + donor.firstName + ' ' + donor.lastName + ', '+ donor.donorNumber + '"?'
       };
 
       var modalInstance = $modal.open({
@@ -636,14 +636,14 @@ angular.module('bsis')
 
     var deleteSuccess = function (donor) {
       // On success
-      Alerting.AlertAddMsg('top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ' Donor ID #' + donor.id + '" has been deleted successfully');
+      Alerting.AlertAddMsg('top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" has been deleted successfully');
     };
 
     var deleteError = function (err, donor) {
       console.log(err);
 
       // add the error message
-       Alerting.AlertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ' Donor ID #'+ donor.id + '" Error :' + err.status + ' - ' + err.data.developerMessage);
+       Alerting.AlertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', '+ donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
     };
 
 
@@ -873,7 +873,7 @@ angular.module('bsis')
       data = $scope.donationBatch.donations;
       $scope.data = data;
       $location.path("/manageClinic/" + item.id);
-      
+
     };
 
   })
