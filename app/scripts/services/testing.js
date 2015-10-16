@@ -176,6 +176,17 @@ angular.module('bsis')
 
       });
     },
+
+    releaseTestBatch: function(testBatch, onSuccess, onError) {
+
+      var updateTestBatch = {
+        id: testBatch.id,
+        status: 'RELEASED'
+      };
+
+      Api.TestBatches.update({id: testBatch.id}, updateTestBatch, onSuccess, onError); 
+    },
+
     getRecentTestBatches: function (response) {
       Api.RecentTestBatches.get({count:10}, function (testBatches) {
         response(testBatches);
