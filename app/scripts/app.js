@@ -90,6 +90,11 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.VIEW_DONATION_BATCH,
         enabled : UI.DONORS_TAB_ENABLED
       })
+      .when('/locations', {
+        templateUrl : 'views/donors.html',
+        controller  : 'LocationsCtrl',
+        permission: PERMISSIONS.MANAGE_DONATION_SITES
+      })
       .when('/exportDonorList', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorCommunicationsCtrl',
@@ -284,11 +289,6 @@ var app = angular.module('bsis', [
         templateUrl : 'views/settings.html',
         controller  : 'SettingsCtrl',
         permission: PERMISSIONS.AUTHENTICATED
-      })
-      .when('/locations', {
-        templateUrl : 'views/donors.html',
-        controller  : 'LocationsCtrl',
-        permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
       .when('/configurations', {
         templateUrl : 'views/settings.html',
