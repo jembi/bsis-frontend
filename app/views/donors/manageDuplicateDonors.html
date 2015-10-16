@@ -145,7 +145,7 @@
               </td>
               <td data-title="'Calling Name'" header-class="text-left" sortable="'callingName'">
                 <div ng-if="donorFields['callingName']">
-                  <input type="radio" name="callingName" ng-model="mergedDonor.callingName" nvalue="none" required>
+                  <input type="radio" name="callingName" ng-model="mergedDonor.callingName" value="none" required>
                   None of the above
                   <small class="error" ng-show="(mergeDonorForm.callingName.$invalid && (mergeDonorForm.callingName.$dirty || invalid))">
                     <br/>Please select one
