@@ -1003,7 +1003,7 @@ angular.module('bsis')
             mergedDonor.idNumber = donor.idNumber;
           }
           // set the notes according to what was selected
-          if (mergedDonor.noteSelection[donor.id]) {
+          if (mergedDonor.noteSelection && mergedDonor.noteSelection[donor.id]) {
             if (mergedDonor.notes) {
               if (mergedDonor.notes.length > 0) {
                 mergedDonor.notes = mergedDonor.notes.concat(", ");
