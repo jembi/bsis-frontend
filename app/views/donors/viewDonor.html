@@ -44,7 +44,7 @@
 
 
       <!-- Edit donor actions -->
-      <div has-permission="{{permissions.EDIT_DONOR}}" ng-hide="confirmDelete" style="display:inline;">
+      <div has-permission="{{permissions.EDIT_DONOR}}" style="display:inline;">
         <em><button type="button" class="btn btn-link" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit Donor</button></em>
 
         <span ng-show="editableForm.$visible">
