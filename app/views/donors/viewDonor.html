@@ -41,7 +41,7 @@
           <!--<button type="button" class="btn btn-link text-muted" ng-show="confirmDelete" ng-click="confirmDelete = false">-->
             <!--Cancel-->
           <!--</button>-->
-          <button type="button" class="btn btn-link"  ng-click="confirmDelete(donor)">Void donor</button>
+          <button type="button" class="btn btn-link"  ng-click="confirmDelete(donor)" ng-disabled="!donor.permissions.canDelete" >Void donor</button>
         </em>
       </div>
 
