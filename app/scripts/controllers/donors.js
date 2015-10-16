@@ -997,6 +997,7 @@ angular.module('bsis')
         }
       } else if (newStep == 3) {
         // set the idType and idNumber according to which option was selected
+        mergedDonor.notes = "";
         angular.forEach(selectedDonorsData, function(donor, i) {
           if (donor.id == mergedDonor.idNumberId) {
             mergedDonor.idType = donor.idType;
