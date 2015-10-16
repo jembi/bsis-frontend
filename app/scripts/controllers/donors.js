@@ -594,7 +594,7 @@ angular.module('bsis')
       var deleteObject = {
         title: 'Delete Donor',
         button: 'Delete',
-        message: 'Are you sure you wish to delete the donor "' + donor.firstName + ' ' + donor.lastName + '"?'
+        message: 'Are you sure you wish to delete the donor "' + donor.firstName + ' ' + donor.lastName + ', Donor ID #'+ donor.id + '"?'
       };
 
       var modalInstance = $modal.open({
@@ -610,37 +610,40 @@ angular.module('bsis')
 
       modalInstance.result.then(function () {
         // Delete confirmed - delete the donor
-        $scope.deleteDonor(donor.id);
+        $scope.deleteDonor(donor);
       }, function () {
         // delete cancelled - do nothing
       });
 
     };
 
-    $scope.deleteDonor = function(donorId) {
-      DonorService.deleteDonor(donorId, function() {
-        deleteSuccess();
+    $scope.deleteDonor = function(donor) {
+      DonorService.deleteDonor(donor.id, function() {
+        deleteSuccess(donor);
         $location.path('findDonor');
         $timeout(function(){
           //Reset alerts after a few seconds.
           Alerting.AlertReset();
         }, 3000);
       }, function(err) {
-        deleteError(err);
-        console.error(err);
+        deleteError(err, donor);
+        $timeout(function(){
+          //Reset alerts after a few seconds.
+          Alerting.AlertReset();
+        }, 3000);
       });
     };
 
-    var deleteSuccess = function () {
+    var deleteSuccess = function (donor) {
       // On success
-      Alerting.AlertAddMsg('top', 'success', 'The donor has been deleted successfully');
+      Alerting.AlertAddMsg('top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ' Donor ID #' + donor.id + '" has been deleted successfully');
     };
 
-    var deleteError = function (err) {
+    var deleteError = function (err, donor) {
       console.log(err);
 
       // add the error message
-       Alerting.AlertAddMsg('top', 'danger', 'An error has occurred while deleting the donor: #' + err.status + ' - ' + err.data.developerMessage);
+       Alerting.AlertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ' Donor ID#'+ donor.id + '" Error :' + err.status + ' - ' + err.data.developerMessage);
     };
 
 
