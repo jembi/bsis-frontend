@@ -643,7 +643,7 @@ angular.module('bsis')
       console.log(err);
 
       // add the error message
-       Alerting.AlertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ' Donor ID#'+ donor.id + '" Error :' + err.status + ' - ' + err.data.developerMessage);
+       Alerting.AlertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ' Donor ID #'+ donor.id + '" Error :' + err.status + ' - ' + err.data.developerMessage);
     };
 
 
