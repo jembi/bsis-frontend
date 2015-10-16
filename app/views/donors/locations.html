@@ -55,7 +55,7 @@
     <label for="name" class="col-sm-1 control-label">Name</label>
     <div class="row col-sm-11">
       <div class="form-inline" style="padding-left:5px;">
-        <input size="15"  id="name" name="name" class="form-control input-sm" ng-model="location.name" required ng-minlength=1 ng-maxlength=50
+        <input size="35"  id="name" name="name" class="form-control input-sm" ng-model="location.name" required ng-minlength=1 ng-maxlength=50
         ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
         ng-class="{'ng-invalid ng-dirty' : addLocationForm.name.$invalid && submitted}"
         >
@@ -85,7 +85,7 @@
 
   <div class="form-group"> 
     <div class="col-sm-offset-1 col-sm-4">
-      <button class="btn btn-primary" type="submit">Add Location</button>
+      <button class="btn btn-primary" type="submit">Add Venue</button>
       <button class="btn btn-primary" type="reset" ng-click="reset(addLocationForm);">Clear</button>
     </div>
   </div>
