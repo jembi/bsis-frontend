@@ -620,11 +620,7 @@ angular.module('bsis')
     $scope.deleteDonor = function(donor) {
       DonorService.deleteDonor(donor.id, function() {
         deleteSuccess(donor);
-        $location.path('findDonor');
-        $timeout(function(){
-          //Reset alerts after a few seconds.
-          Alerting.AlertReset();
-        }, 3000);
+        $location.path('findDonor').search({persistErrors: true});
       }, function(err) {
         deleteError(err, donor);
         $timeout(function(){
@@ -633,6 +629,7 @@ angular.module('bsis')
         }, 3000);
       });
     };
+
 
     var deleteSuccess = function (donor) {
       // On success

@@ -68,18 +68,25 @@ angular.module('bsis')
         $rootScope.validationPasswordConfirmMsg = 'Please confirm you password!';
         $rootScope.validationFormErrorsMsg = 'There appears to be some errors in your form. Please correct and try again.';
 
+      },
+
+      AlertClose: function (alertScope, index) {
+        $rootScope.alerts[alertScope].splice(index, 1);
       }
 
     };
 
   })
-  .run( function($rootScope) {
+  .run( function($rootScope, $location) {
 
     // register listener to watch route changes
     $rootScope.$on( '$routeChangeStart', function() {
+      console.log($location.search().persistErrors);
 
       // reset the alert object for each route changed
-      //$rootScope.alerts = {};
+      if (!$location.search().persistErrors){
+        $rootScope.alerts = {};
+      }
 
     });
 

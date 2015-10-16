@@ -3,10 +3,10 @@
       <div class="row  main-page" ng-controller="DonorsCtrl">
 
   <div ng-include="'views/donors/sidebar.html'"></div>
-          
+
 
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      
+
        <div class="row  main-page">
 
        <div class="col-lg-12" >
@@ -23,7 +23,7 @@
           <div ng-switch-when="/donorCounselling"><div ng-include="'views/donors/donorCounselling.html'"></div></div>
           <div ng-switch-when="/donorCounsellingDetails"><div ng-include="'views/donors/donorCounsellingDetails.html'"></div></div>
           <div ng-switch-default>
-            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DONOR) < 0) && 
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DONOR) < 0) &&
                         (sessionUserPermissions.indexOf(permissions.VIEW_DONATION_BATCH) < 0) &&
                         (sessionUserPermissions.indexOf(permissions.EXPORT_CLINIC_DATA) > -1)"
                 ng-include="'views/donors/exportDonorList.html'">
@@ -33,7 +33,7 @@
                         (sessionUserPermissions.indexOf(permissions.EXPORT_CLINIC_DATA) < 0)"
                 ng-include="'views/donors/manageDonationBatches.html'">
             </div>
-            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DONOR) < 0) && 
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DONOR) < 0) &&
                         (sessionUserPermissions.indexOf(permissions.VIEW_DONATION_BATCH) > -1) &&
                         (sessionUserPermissions.indexOf(permissions.EXPORT_CLINIC_DATA) > -1)"
                 ng-include="'views/donors/manageDonationBatches.html'">
@@ -47,7 +47,7 @@
        </div>
 
        </div>
-        
+
       </div>
 
     </div>
