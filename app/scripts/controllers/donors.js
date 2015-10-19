@@ -644,7 +644,7 @@ angular.module('bsis')
 
       // add the error message
        Alerting.alertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', '+ donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
-       $scope.alerts = Alerting.getAlerts();
+       $scope.$parent.alerts = Alerting.getAlerts();
     };
 
 

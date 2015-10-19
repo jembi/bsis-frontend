@@ -79,7 +79,7 @@ angular.module('bsis')
     $rootScope.$on( '$routeChangeStart', function() {
       // reset the alert object for each route changed
       if (!$location.search().persistErrors){
-        Alerting.AlertReset();
+        Alerting.alertReset();
       }
 
     });
