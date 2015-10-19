@@ -626,10 +626,7 @@ angular.module('bsis')
         $location.path('findDonor').search({persistErrors: true});
       }, function(err) {
         deleteError(err, donor);
-        $timeout(function(){
-          //Reset alerts after a few seconds.
-          Alerting.alertReset();
-        }, 3000);
+        $location.path("viewDonor/" + donor.id).search({persistErrors: true});
       });
     };
 
@@ -644,7 +641,7 @@ angular.module('bsis')
 
       // add the error message
        Alerting.alertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', '+ donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
-       $scope.$parent.alerts = Alerting.getAlerts();
+       $scope.alerts = Alerting.getAlerts();
     };
 
 
