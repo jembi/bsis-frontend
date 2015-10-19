@@ -40,6 +40,7 @@ angular.module('bsis')
 
     $scope.findDonor = function () {
       $scope.donorSearch.search = true;
+      $scope.donorSearch.persistErrors = false;
       $location.search($scope.donorSearch);
       DonorService.findDonor($scope.donorSearch, function(response) {
         data = response.donors;
