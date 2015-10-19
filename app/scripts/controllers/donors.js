@@ -205,6 +205,7 @@ angular.module('bsis')
   .controller('ViewDonorCtrl', function ($scope, $location, $modal, Alerting, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
       GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout,$routeParams) {
 
+
     DonorService.getDonorById($routeParams.id, function (donor) {
       DonorService.setDonor(donor);
       $scope.donor = donor;
@@ -212,6 +213,7 @@ angular.module('bsis')
       $location.path('/findDonor');
     });
 
+    $scope.alerts = Alerting.getAlerts();
     $scope.data = {};
     $scope.age = '';
     $scope.deferralsData = {};
@@ -590,7 +592,7 @@ angular.module('bsis')
      */
 
     $scope.confirmDelete = function(donor){
-      Alerting.AlertReset();
+      Alerting.alertReset();
 
       var deleteObject = {
         title: 'Delete Donor',
@@ -626,7 +628,7 @@ angular.module('bsis')
         deleteError(err, donor);
         $timeout(function(){
           //Reset alerts after a few seconds.
-          Alerting.AlertReset();
+          Alerting.alertReset();
         }, 3000);
       });
     };
@@ -634,14 +636,15 @@ angular.module('bsis')
 
     var deleteSuccess = function (donor) {
       // On success
-      Alerting.AlertAddMsg('top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" has been deleted successfully');
+      Alerting.alertAddMsg('top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" has been deleted successfully');
     };
 
     var deleteError = function (err, donor) {
       console.log(err);
 
       // add the error message
-       Alerting.AlertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', '+ donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
+       Alerting.alertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', '+ donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
+       $scope.alerts = Alerting.getAlerts();
     };
 
 

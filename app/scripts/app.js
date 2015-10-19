@@ -404,7 +404,7 @@ var app = angular.module('bsis', [
   .run( ['$rootScope', '$location', 'AuthService', 'Alerting', function ($rootScope, $location, AuthService, Alerting) {
 
     $rootScope.closeAlert = function (alertScope,index) {
-      Alerting.AlertClose(alertScope,index);
+      Alerting.alertClose(alertScope,index);
     };
 
     // on route change, check to see if user has appropriate permissions

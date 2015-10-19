@@ -4,12 +4,12 @@
 /* <alert ng-repeat="alert in alerts.top" type="alert.type" close="closeAlert('top', $index)">{{alert.msg}}</alert> */
 
 angular.module('bsis')
-  .factory('Alerting', function ($rootScope) {
+  .factory('Alerting', function () {
 
     var alerts = {};
 
     return {
-      AlertAddMsg: function (alertScope, alertType, alertMsg) {
+      alertAddMsg: function (alertScope, alertType, alertMsg) {
 
         // check if alertScope object exists
         if ( !alerts[alertScope] ){
@@ -23,7 +23,7 @@ angular.module('bsis')
         alerts[alertScope].push(alertObject);
 
       },
-      AlertAddServerMsg: function (errCode) {
+      alertAddServerMsg: function (errCode) {
 
         var alertMsg;
         switch (errCode){
@@ -49,7 +49,7 @@ angular.module('bsis')
         alerts.server.push(alertObject);
 
       },
-      AlertReset: function (alertScope) {
+      alertReset: function (alertScope) {
 
         if( !alertScope ){
           // reset the alerts objects
@@ -62,15 +62,7 @@ angular.module('bsis')
         }
 
       },
-      AlertValidationMsgs: function () {
-
-        validationRequiredMsg = 'This field is required!';
-        validationPasswordConfirmMsg = 'Please confirm you password!';
-        validationFormErrorsMsg = 'There appears to be some errors in your form. Please correct and try again.';
-
-      },
-
-      AlertClose: function (alertScope, index) {
+      alertClose: function (alertScope, index) {
         alerts[alertScope].splice(index, 1);
       },
 
