@@ -6,21 +6,21 @@
 angular.module('bsis')
   .factory('Alerting', function ($rootScope) {
 
-    $rootScope.alerts = {};
+    var alerts = {};
 
     return {
       AlertAddMsg: function (alertScope, alertType, alertMsg) {
 
         // check if alertScope object exists
-        if ( !$rootScope.alerts[alertScope] ){
-          $rootScope.alerts[alertScope] = [];
+        if ( !alerts[alertScope] ){
+          alerts[alertScope] = [];
         }
 
         // create alertObject
         var alertObject = { type: alertType, msg: alertMsg };
 
         // push alertObject to appropriate alertScope
-        $rootScope.alerts[alertScope].push(alertObject);
+        alerts[alertScope].push(alertObject);
 
       },
       AlertAddServerMsg: function (errCode) {
@@ -38,54 +38,56 @@ angular.module('bsis')
         }
 
         // check if server object exists
-        if ( !$rootScope.alerts.server ){
-          $rootScope.alerts.server = [];
+        if ( !alerts.server ){
+          alerts.server = [];
         }
 
         // create alertObject
         var alertObject = { type: 'danger', msg: alertMsg };
 
         // push alertObject to appropriate alertScope
-        $rootScope.alerts.server.push(alertObject);
+        alerts.server.push(alertObject);
 
       },
       AlertReset: function (alertScope) {
 
         if( !alertScope ){
           // reset the alerts objects
-          $rootScope.alerts = {};
+          alerts = {};
         }else{
-          if ( $rootScope.alerts ){
+          if ( alerts ){
             // reset the alerts objects
-            $rootScope.alerts[alertScope] = undefined;
+            alerts[alertScope] = undefined;
           }
         }
 
       },
       AlertValidationMsgs: function () {
 
-        $rootScope.validationRequiredMsg = 'This field is required!';
-        $rootScope.validationPasswordConfirmMsg = 'Please confirm you password!';
-        $rootScope.validationFormErrorsMsg = 'There appears to be some errors in your form. Please correct and try again.';
+        validationRequiredMsg = 'This field is required!';
+        validationPasswordConfirmMsg = 'Please confirm you password!';
+        validationFormErrorsMsg = 'There appears to be some errors in your form. Please correct and try again.';
 
       },
 
       AlertClose: function (alertScope, index) {
-        $rootScope.alerts[alertScope].splice(index, 1);
+        alerts[alertScope].splice(index, 1);
+      },
+
+      getAlerts: function () {
+        return alerts;
       }
 
     };
 
   })
-  .run( function($rootScope, $location) {
+  .run( function($rootScope, $location, Alerting) {
 
     // register listener to watch route changes
     $rootScope.$on( '$routeChangeStart', function() {
-      console.log($location.search().persistErrors);
-
       // reset the alert object for each route changed
       if (!$location.search().persistErrors){
-        $rootScope.alerts = {};
+        Alerting.AlertReset();
       }
 
     });

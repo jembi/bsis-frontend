@@ -6,6 +6,7 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
+    $scope.alerts = Alerting.getAlerts();
 
     // Tabs with their active status
     $scope.tabs = {
