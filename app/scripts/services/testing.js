@@ -90,7 +90,7 @@ angular.module('bsis')
       });
     },
     getOpenTestBatches: function (response) {
-      Api.FindTestBatches.get({status:'OPEN'}, function (testBatches) {
+      Api.FindTestBatches.get({status: ['OPEN', 'RELEASED']}, function (testBatches) {
         response(testBatches);
         console.log("testBatches: ", testBatches);
       }, function (){
