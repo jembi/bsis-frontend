@@ -329,13 +329,27 @@ angular.module('bsis')
     var columnDefs = [
       {
         name: 'DIN',
-        displayName: 'Donation Info',
+        displayName: 'DIN',
+        field: 'donationIdentificationNumber',
         visible: true,
-        cellTemplate: '<div class="ui-grid-cell-contents">' +
-        '{{row.entity.donationIdentificationNumber}} ' +
-        'on {{row.entity.bleedStartTime | bsisDate}} ' +
-        'at: {{row.entity.venue.name}} ' +
-        '</div>'
+      },
+      {
+        name: 'Date Bled',
+        displayName: 'Date Bled',
+        field: 'bleedStartTime',
+        cellFilter: 'bsisDate',
+        visible: true,
+      },
+      {
+        name: 'Pack Type',
+        field: 'packType.packType',
+        visible: true,
+      },
+      {
+        name: 'Venue',
+        displayName: 'Venue',
+        field: 'venue.name',
+        visible: true,
       },
       {
         name: 'ttistatus',
@@ -347,9 +361,7 @@ angular.module('bsis')
       {
         name:'bloodAboRh',
         displayName: 'Blood Group Serology',
-        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.bloodTypingStatus}} - {{row.entity.bloodTypingMatchStatus}} <em>' +
-        '({{row.entity.bloodAbo}}{{row.entity.bloodRh}}) ' +
-        'in {{row.entity.packType.packType}} pack</em> </div>',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
         visible: true,
       },
       {
@@ -531,10 +543,6 @@ angular.module('bsis')
           return bloodSerology;
         }
 
-        if (col.name === 'DIN'){
-            var din = row.entity.donationIdentificationNumber + ' on ' + $filter('bsisDate')(row.entity.bleedStartTime)  +'  from  ' + row.entity.venue.name;
-            return din;
-        }
 
 
         if (col.name === 'ABO' || col.name === 'Rh' || col.name === 'Titre' || col.name === 'Weak D' || col.name === 'AbScr' ||
