@@ -645,7 +645,7 @@ angular.module('bsis')
       }, function(err) {
         deleteError(err, donor);
         $location.path("viewDonor/" + donor.id)
-          .search({failed: true}); // Cannot figure out why alert will not show if I don't set a search parameter
+          .search({failed: true}); // If I do not set a parameter the route does not change, this needs to happen to refresh the donor.
         $timeout(function (){
           Alerting.setPersistErrors(false);
         });
