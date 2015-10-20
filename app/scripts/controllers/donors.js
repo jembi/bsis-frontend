@@ -629,7 +629,11 @@ angular.module('bsis')
         $location.path('findDonor').search({});
       }, function(err) {
         deleteError(err, donor);
-        $location.path("viewDonor/" + donor.id).search({failed: true}); // Cannot figure out why alert will not show if I don't set a search parameter
+        $location.path("viewDonor/" + donor.id)
+          .search({failed: true}); // Cannot figure out why alert will not show if I don't set a search parameter
+        $timeout(function (){
+          Alerting.setPersistErrors(false);
+        });
       });
     };
 

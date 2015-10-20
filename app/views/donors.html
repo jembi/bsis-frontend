@@ -10,9 +10,9 @@
        <div class="row  main-page">
 
        <div class="col-lg-12" >
-
+       <alert ng-repeat="alert in alerts.top" type="{{alert.type}}" close="closeAlert('top', $index)">{{alert.msg}}</alert>
        <div ng-switch on="selection">
-           <alert ng-repeat="alert in alerts.top" type="{{alert.type}}" close="closeAlert('top', $index)">{{alert.msg}}</alert>
+
           <div ng-switch-when="/findDonor"><div ng-include="'views/donors/findDonor.html'"></div></div>
           <div ng-switch-when="/addDonor"><div ng-include="'views/donors/addDonor.html'"></div></div>
           <div ng-switch-when="/addDonation"><div ng-include="'views/donors/addDonation.html'"></div></div>
