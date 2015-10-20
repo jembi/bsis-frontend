@@ -213,6 +213,7 @@ angular.module('bsis')
     DonorService.getDonorById($routeParams.id, function (donor) {
       DonorService.setDonor(donor);
       $scope.donor = donor;
+      $scope.donorPermissions.canDelete = donor.permissions.canDelete;
     }, function(err){
       $location.path('/findDonor');
     });
@@ -221,6 +222,9 @@ angular.module('bsis')
     $scope.age = '';
     $scope.deferralsData = {};
     $scope.donationsData = {};
+    $scope.donorPermissions = {
+      canDelete: false
+    };
 
     $scope.hstep = 1;
     $scope.mstep = 5;
@@ -275,6 +279,7 @@ angular.module('bsis')
           $scope.totalDonations = $scope.data.totalDonations;
           $scope.dueToDonate = $scope.data.dueToDonate;
           $scope.totalAdverseEvents = response.totalAdverseEvents;
+          $scope.donorPermissions.canDelete = response.canDelete;
         }
         else{
         }
