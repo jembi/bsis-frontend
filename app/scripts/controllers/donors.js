@@ -36,7 +36,9 @@ angular.module('bsis')
 
     $scope.canAddDonors = false;
 
-
+    $scope.closeAlert = function (alertScope,index) {
+      Alerting.alertClose(alertScope,index);
+    };
 
     $scope.findDonor = function () {
       $scope.donorSearch.search = true;
