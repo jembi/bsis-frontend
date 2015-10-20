@@ -149,6 +149,8 @@ angular.module('bsis')
 
         newDonor.birthDate = dob.year + "-" + dob.month + "-" + dob.dayOfMonth;
 
+        $scope.addingDonor = true;
+
         DonorService.addDonor(newDonor, function(donor) {
 
           $scope.format = DATEFORMAT;
@@ -164,6 +166,7 @@ angular.module('bsis')
           if (err["donor.birthDate"]) {
             $scope.dobValid = false;
           }
+          $scope.addingDonor = false;
         });
       }
       else {
@@ -498,6 +501,8 @@ angular.module('bsis')
           donation.adverseEvent = $scope.adverseEvent;
         }
 
+        $scope.addingDonation = true;
+
         DonorService.addDonation(donation, function (response) {
 
           $scope.addDonationSuccess = true;
@@ -506,12 +511,15 @@ angular.module('bsis')
           $scope.donationsView = 'viewDonations';
           $scope.submitted = '';
           $scope.getDonorOverview();
+
+          $scope.addingDonation = false;
         }, function (err) {
           $scope.err = err;
           $scope.addDonationSuccess = false;
           // refresh donor overview after adding donation
           $scope.getDonorOverview();
 
+          $scope.addingDonation = false;
         });
 
       }
@@ -566,6 +574,8 @@ angular.module('bsis')
       if (addDeferralForm.$valid){
         deferral.deferredDonor = $scope.donor.id;
 
+        $scope.addingDeferral = true;
+
         DonorService.addDeferral(deferral, function(response){
           if (response === true){
             $scope.deferral = {};
@@ -579,6 +589,7 @@ angular.module('bsis')
           else{
             // TODO: handle case where response == false
           }
+          $scope.addingDeferral = false;
         });
       }
       else{

@@ -51,7 +51,7 @@
   </div>
   <div class="form-group"> 
     <div class="col-sm-offset-1 col-sm-3">
-      <button class="btn btn-primary" type="submit">Add Deferral</button>
+      <button class="btn btn-primary" type="submit" ng-disabled="addingDeferral">{{addingDeferral ? "Adding..." : "Add Deferral"}}</button>
       <button class="btn btn-primary" type="button" ng-click="clearForm(addDeferralForm); clear(); getDeferrals(donor.id)">Cancel</button>
     </div>
   </div>
