@@ -7,6 +7,7 @@ angular.module('bsis')
   .factory('Alerting', function () {
 
     var alerts = {};
+    var persistErrors;
 
     return {
       alertAddMsg: function (alertScope, alertType, alertMsg) {
@@ -68,8 +69,15 @@ angular.module('bsis')
 
       getAlerts: function () {
         return alerts;
-      }
+      },
 
+      setPersistErrors: function (persist) {
+        persistErrors = persist;
+      },
+
+      getPersistErrors: function () {
+        return persistErrors;
+      }
     };
 
   })
@@ -78,7 +86,7 @@ angular.module('bsis')
     // register listener to watch route changes
     $rootScope.$on( '$routeChangeStart', function() {
       // reset the alert object for each route changed
-      if (!$location.search().persistErrors){
+      if (!Alerting.getPersistErrors()){
         Alerting.alertReset();
       }
 

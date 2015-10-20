@@ -42,7 +42,7 @@ angular.module('bsis')
 
     $scope.findDonor = function () {
       $scope.donorSearch.search = true;
-      $scope.donorSearch.persistErrors = false;
+      Alerting.setPersistErrors(false);
       $location.search($scope.donorSearch);
       DonorService.findDonor($scope.donorSearch, function(response) {
         data = response.donors;
@@ -626,29 +626,25 @@ angular.module('bsis')
     $scope.deleteDonor = function(donor) {
       DonorService.deleteDonor(donor.id, function() {
         deleteSuccess(donor);
-        $location.path('findDonor').search({persistErrors: true});
+        $location.path('findDonor').search({});
       }, function(err) {
         deleteError(err, donor);
-        $location.path("viewDonor/" + donor.id).search({persistErrors: true});
+        $location.path("viewDonor/" + donor.id).search({failed: true}); // Cannot figure out why alert will not show if I don't set a search parameter
       });
     };
 
 
     var deleteSuccess = function (donor) {
-      // On success
+      // On Success
+      Alerting.setPersistErrors(true);
       Alerting.alertAddMsg('top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" has been deleted successfully');
     };
 
     var deleteError = function (err, donor) {
-      console.log(err);
-
-      // add the error message
-       Alerting.alertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', '+ donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
-       $scope.alerts = Alerting.getAlerts();
+      // On Error
+      Alerting.setPersistErrors(true);
+      Alerting.alertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', '+ donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
     };
-
-
-
   })
 
   // Controller for Adding Donors
