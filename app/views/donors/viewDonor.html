@@ -31,7 +31,7 @@
       <!-- Delete donor actions -->
       <div has-permission="{{permissions.VOID_DONOR}}" ng-hide="editableForm.$visible" style="display:inline;">
         <em>
-          <button type="button" class="btn btn-link" ng-click="confirmDelete = true" ng-hide="confirmDelete" ng-disabled="!donor.permissions.canDelete">Void Donor</button>
+          <button type="button" class="btn btn-link" ng-click="confirmDelete = true" ng-hide="confirmDelete" ng-disabled="!donorPermissions.canDelete">Void Donor</button>
           <button type="button" class="btn btn-link text-danger" ng-show="confirmDelete" ng-click="deleteDonor(donor.id)">
             Void
           </button>
