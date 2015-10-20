@@ -73,7 +73,12 @@ angular.module('bsis')
       } else if ($location.path().indexOf("/manageClinic") === 0 && path === "/manageDonationBatches") {
         $scope.selection = '/manageClinic';
         return true;
-      } else if ($location.path().indexOf('/donorCounselling') === 0 && path.indexOf('/donorCounselling') === 0) {
+      }
+      else if ($location.path().indexOf("/locations") === 0 && path === initialView) {
+        $scope.selection = '/locations';
+        return true;
+      }
+      else if ($location.path().indexOf('/donorCounselling') === 0 && path.indexOf('/donorCounselling') === 0) {
         var currentPath = $location.path();
         $scope.selection = currentPath === '/donorCounselling' ? currentPath : '/donorCounsellingDetails';
         return true;
@@ -82,6 +87,7 @@ angular.module('bsis')
         $scope.selection = path;
         return true;
       } else if ($location.path() === path) {
+
         return true;
       } else {
         // for first time load of /donors view, determine the initial view
@@ -173,6 +179,9 @@ angular.module('bsis')
 
       DonorService.updateDonor(donor, function(response){
           $scope.donor = response;
+          if ($scope.donorPermissions) {
+            $scope.donorPermissions.canDelete = response.permissions.canDelete;
+          }
         },
         // display error from back end
         function(err){
@@ -212,6 +221,7 @@ angular.module('bsis')
     DonorService.getDonorById($routeParams.id, function (donor) {
       DonorService.setDonor(donor);
       $scope.donor = donor;
+      $scope.donorPermissions.canDelete = donor.permissions.canDelete;
     }, function(err){
       $location.path('/findDonor');
     });
@@ -221,6 +231,9 @@ angular.module('bsis')
     $scope.age = '';
     $scope.deferralsData = {};
     $scope.donationsData = {};
+    $scope.donorPermissions = {
+      canDelete: false
+    };
 
     $scope.hstep = 1;
     $scope.mstep = 5;
@@ -275,6 +288,7 @@ angular.module('bsis')
           $scope.totalDonations = $scope.data.totalDonations;
           $scope.dueToDonate = $scope.data.dueToDonate;
           $scope.totalAdverseEvents = response.totalAdverseEvents;
+          $scope.donorPermissions.canDelete = response.canDelete;
         }
         else{
         }
@@ -455,6 +469,7 @@ angular.module('bsis')
         $scope.donationsData = $scope.donationsData.filter(function(donation) {
           return donation.id !== donationId;
         });
+        $scope.getDonorOverview();
       }, function(err) {
         console.error(err);
         $scope.confirmDelete = false;
