@@ -640,10 +640,10 @@ angular.module('bsis')
 
     $scope.deleteDonor = function(donor) {
       DonorService.deleteDonor(donor.id, function() {
-        deleteSuccess(donor);
+        deleteCallback(false, donor);
         $location.path('findDonor').search({});
       }, function(err) {
-        deleteError(err, donor);
+        deleteCallback(err, donor);
         $location.path("viewDonor/" + donor.id)
           .search({failed: true}); // If I do not set a parameter the route does not change, this needs to happen to refresh the donor.
         $timeout(function (){
@@ -652,18 +652,14 @@ angular.module('bsis')
       });
     };
 
-
-    var deleteSuccess = function (donor) {
-      // On Success
+    var deleteCallback = function (err, donor) {
       Alerting.setPersistErrors(true);
-      Alerting.alertAddMsg('top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" has been deleted successfully');
-    };
-
-    var deleteError = function (err, donor) {
-      // On Error
-      Alerting.setPersistErrors(true);
-      Alerting.alertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', '+ donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
-    };
+      if (err) {
+        Alerting.alertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
+      } else {
+        Alerting.alertAddMsg('top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" has been deleted successfully');
+      }
+    }
   })
 
   // Controller for Adding Donors
