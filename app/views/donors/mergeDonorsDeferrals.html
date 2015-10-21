@@ -1,0 +1,30 @@
+        <p>See the deferrals for the merged donor:</p>
+        <div ng-switch="deferralResults">
+          <div ng-switch-when="true">
+            <table ng-table="manageDuplicateDonorDeferralTableParams" show-filter="false" class="table">
+              <tr ng-repeat="deferral in $data">
+                  <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+                    {{donor.donorNumber}}
+                  </td>
+                  <td data-title="'Deferred From'" header-class="text-left" class="text-center" sortable="'createdDate'">
+                      {{deferral.createdDate | bsisDate}}
+                  </td>
+                  <td data-title="'Deferred Until'" header-class="text-left" class="text-center" sortable="'deferredUntil'">
+                      {{deferral.deferredUntil | bsisDate}}
+                  </td>
+                  <td data-title="'Reason'" style="width:22%;" header-class="text-left" sortable="'deferralReason.reason'">
+                      {{deferral.deferralReason.reason}}
+                  </td>
+                  <td data-title="'Comment'" header-class="text-left" sortable="'deferralReasonText'">
+                      {{deferral.deferralReasonText}}
+                  </td>
+                  <td data-title="'Deferred By'" header-class="text-left" sortable="'createdBy'">
+                      {{deferral.createdBy}}
+                  </td>
+              </tr>
+            </table>
+          </div>
+          <div ng-switch-when="false">
+            <p><em>No Deferrals found</em></p>
+          </div>
+        </div>
