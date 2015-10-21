@@ -809,7 +809,7 @@ var app = angular.module('bsis', [
 
 ;
 
-var UI = {};
+var UI = {ADDRESS:{}};
 var DONATION = {DONOR:{}};
 // initialize system & user config before app starts
 (function() {
@@ -867,6 +867,39 @@ var DONATION = {DONOR:{}};
             }
             else if (config[i].name == 'ui.mobileClinicTabEnabled'){
               UI.MOBILE_CLINIC_TAB_ENABLED = config[i].value;
+            }
+
+            //Address fields constants
+
+            else if (config[i].name == 'ui.address.addressLine.visble'){
+              UI.ADDRESS.ADDRESS_LINE_VISIBLE = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.addressLine.name'){
+              UI.ADDRESS.ADDRESS_LINE_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.city.visible'){
+              UI.ADDRESS.CITY_VISIBLE = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.city.name'){
+              UI.ADDRESS.CITY_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.state.visible'){
+              UI.ADDRESS.STATE_VISIBLE = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.state.name'){
+              UI.ADDRESS.STATE_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.country.visible'){
+              UI.ADDRESS.COUNTRY_VISIBLE = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.country.name'){
+              UI.ADDRESS.COUNTRY_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.zipCode.visible'){
+              UI.ADDRESS.ZIPCODE_VISIBLE = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.zipCode.name'){
+              UI.ADDRESS.ZIPCODE_NAME = config[i].value;
             }
 
 
