@@ -14,12 +14,12 @@
     </span>
   </span>
 
-  <table class="dash-table">
+  <table class="dash-table col-sm-5" style="clear: right;">
     <tbody>
       <tr>
         <td class="icon"><i class="fa {{icons.PHONE}}"></i></td>
         <td class="field">Preferred Contact Type: </td>
-        <td class="value">
+        <td class="value" style="width: 60%">
           <span e-class="xeditable" editable-select="donor.contactMethodType.id" e-ng-options="item.id as item.contactMethodType for item in preferredContactMethods" e-name="contactMethodType">
             {{donor.contactMethodType.contactMethodType}}
           </span>
@@ -50,18 +50,17 @@
 
       <tr>
         <td class="icon"><i class="fa {{icons.GLOBE}}"></i></td>
-        <td class="field">Preferred Address Type:</td>
+        <td class="field">Preferred Address Type: </td>
         <td class="value">
           <span e-class="xeditable" editable-select="donor.preferredAddressType" e-ng-options="item as item.preferredAddressType for item in addressTypes" e-name="preferredAddressType">
             {{donor.preferredAddressType.preferredAddressType}}
           </span>
         </td>
       </tr>
-
     </tbody>
   </table>
 
-  <table class="dash-table col-sm-5">
+  <table class="dash-table col-sm-5" style="clear: left;">
     <tbody>
       <tr>
         <td class="icon"></td>
