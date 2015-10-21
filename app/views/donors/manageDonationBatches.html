@@ -44,9 +44,9 @@
                   <label for="name" class="col-sm-1 control-label">Venue</label>
                   <div class="row col-sm-11">
                     <div class="form-inline" style="padding-left:5px;">
-                      <select name="venue" class="form-control input-sm" ng-model="newDonationBatch.venue" ng-options="item.id as item.name disable when item.disabled for item in venues" required
+                      <select name="venue" class="form-control input-sm" ng-model="newDonationBatch.venue" ng-options="item.id as item.name disable when (item.disabled || item.isDeleted) for item in venues" required
                       ng-class="{'ng-invalid ng-dirty' : addDonationBatchForm.venue.$invalid && submitted}">
-                          <option value="" ng-disabled="true"></option>
+                          <option  value="" ng-disabled="true"></option>
                       </select>
                       <div>
                         <small class="error" 
