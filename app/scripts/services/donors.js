@@ -207,7 +207,7 @@ angular.module('bsis')
     },
     endDonorDeferral: function(donorDeferralId, comment, response) {
       Api.EndDeferral.update({id:donorDeferralId}, comment, function(data) {
-         response(data.deferral);
+         response(data);
         }, function (){
           response(false);
         });
@@ -216,27 +216,13 @@ angular.module('bsis')
       var updateDeferral = Api.Deferrals.get({id:donorDeferral.id}, function() {
         updateDeferral = updateDeferral.deferral;
         angular.copy(donorDeferral, updateDeferral);
-
         Api.Deferrals.update({id:donorDeferral.id}, updateDeferral, function(data) {
-         response(data.deferral);
+          response(data);
         }, function (){
           response(false);
         }); 
 
       });
-      /*var updateDonorDeferral = {};
-      //updateDonorDeferral.id = donorDeferral.id;
-      //updateDonorDeferral.deferralReasonText = donorDeferral.deferralReasonText;
-      //updateDonorDeferral.deferralReason = donorDeferral.deferralReason;
-      //updateDonorDeferral.deferredDonor = donorDeferral.deferredDonor;
-      //updateDonorDeferral.deferredUntil = donorDeferral.deferredUntil;
-      angular.copy(donorDeferral, updateDonorDeferral);
-      //delete updateDonorDeferral.permissions;
-      Api.Deferrals.update({id:donorDeferral.id}, updateDonorDeferral, function(data) {
-       response(data.deferral);
-      }, function (){
-        response(false);
-      });*/
     },
     getDonations: function (donorId, response) {
       Api.DonorDonations.get({id:donorId}, function (donations) {

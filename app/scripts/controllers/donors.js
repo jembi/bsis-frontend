@@ -447,44 +447,40 @@ angular.module('bsis')
         if (endDeferralForm.$valid) {
           var endDeferralPostData = {};
           endDeferralPostData.comment = comment;
-          DonorService.endDonorDeferral(deferral.id, endDeferralPostData, function() {
-            // FIXME: get reloading code to work
-            var deferralsData = $scope.deferralsData;
-            deferralsData = deferralsData.filter(function(deferralId) {
-              if (deferral.id === deferralId) {
-                deferral.deferredUntil = new Date();
-                return false;
-              }
-              return true;
-            });
-            $scope.deferralsData = deferralsData;
-            //$scope.deferralTableParams.reload();
-          }, function(err) {
-            console.error(err);
+          DonorService.endDonorDeferral(deferral.id, endDeferralPostData, function(response) {
+            if (response !== false) {
+              // edit the end date in the table
+              var updatedDeferral = response.deferral;
+              var deferralsData = $scope.deferralsData.filter(function(d) {
+                if (d.id === updatedDeferral.id) {
+                  d.deferredUntil = updatedDeferral.deferredUntil;
+                  d.deferralReasonText = updatedDeferral.deferralReasonText;
+                  return true;
+                }
+                return true;
+              });
+              $scope.deferralsData = deferralsData;
+            }
           });
         }
       };
 
       $scope.updateDonorDeferral = function(deferral) {
-        $scope.message=deferral;
-        DonorService.updateDonorDeferral(deferral, function() {
-          // no need to do anything i believe
-        }, function(err) {
-          console.error(err);
+        DonorService.updateDonorDeferral(deferral, function(response) {
+          // no need to do anything - data is already updated in the table
         });
       };
 
       $scope.deleteDonorDeferral = function(donorDeferralId) {
         DonorService.deleteDonorDeferral(donorDeferralId, function() {
-          // FIXME
-            /*deferralsData = deferralsData.filter(function(deferralId) {
-              if (deferral.id === deferralId) {
-                deferral.deferredUntil = new Date();
-                return false;
-              }
-              return true;
-            });*/
-            $scope.deferralTableParams.reload();
+          // remove item from the table once it has been deleted
+          var deferralsData = $scope.deferralsData.filter(function(deferral) {
+            if (deferral.id === donorDeferralId) {
+              return false;
+            }
+            return true;
+          });
+          $scope.deferralsData = deferralsData;
         }, function(err) {
           console.error(err);
           $scope.confirmDelete = false;
