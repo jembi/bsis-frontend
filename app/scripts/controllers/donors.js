@@ -204,7 +204,7 @@ angular.module('bsis')
         form.postalAddressProvince.$render();
         form.postalAddressCountry.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressCountry.$modelValue);
         form.postalAddressCountry.$render();
-        form.postalAddressZipcode.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressZipcode.$modelValue);
+        form.postalAddressZipcode.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  null : form.homeAddressZipcode.$modelValue);
         form.postalAddressZipcode.$render();
       }
 
@@ -219,7 +219,7 @@ angular.module('bsis')
         form.workAddressProvince.$render();
         form.workAddressCountry.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressCountry.$modelValue);
         form.workAddressCountry.$render();
-        form.workAddressZipcode.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressZipcode.$modelValue);
+        form.workAddressZipcode.$setViewValue((form.workSameAsHome.$viewValue === false) ?  null : form.homeAddressZipcode.$modelValue);
         form.workAddressZipcode.$render();
       }
 
