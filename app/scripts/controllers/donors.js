@@ -189,6 +189,21 @@ angular.module('bsis')
 
     };
 
+    $scope.sameAsHome = function (form) {
+      form.postalAddressLine1.$setViewValue(form.homeAddressLine1.$modelValue);
+      form.postalAddressLine1.$render();
+      form.postalAddressLine2.$setViewValue(form.homeAddressLine2.$modelValue);
+      form.postalAddressLine2.$render();
+      form.postalAddressCity.$setViewValue(form.homeAddressCity.$modelValue);
+      form.postalAddressCity.$render();
+      form.postalAddressProvince.$setViewValue(form.homeAddressProvince.$modelValue);
+      form.postalAddressProvince.$render();
+      form.postalAddressCountry.$setViewValue(form.homeAddressCountry.$modelValue);
+      form.postalAddressCountry.$render();
+      form.postalAddressZipcode.$setViewValue(form.homeAddressZipcode.$modelValue);
+      form.postalAddressZipcode.$render();
+    };
+
     $scope.edit = function () {
     };
 
