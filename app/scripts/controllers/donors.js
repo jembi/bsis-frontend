@@ -399,15 +399,6 @@ angular.module('bsis')
         if (response !== false){
           $scope.deferralsData = response.allDonorDeferrals;
           $scope.deferralResults = true;
-          // initialise the deferralReason with the exact objects displayed in the list so they are preselected on editing
-          angular.forEach($scope.deferralsData, function(item) {
-            item.deferralReason = $scope.deferralReasons.filter(function(d) {
-              if (d.id === item.deferralReason.id) {
-                  return true;
-                }
-                return false;
-              })[0];
-          });
         }
         else{
           $scope.deferralResults = false;

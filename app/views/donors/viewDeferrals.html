@@ -46,7 +46,7 @@
             <span ng-show="editableDeferralForm.$visible" e-required>
               <select name="deferralReason" class="form-control input-sm" 
                 ng-model="deferral.deferralReason" 
-                ng-options="item as item.reason for item in deferralReasons" 
+                ng-options="item as item.reason for item in deferralReasons track by item.reason" 
                 ng-change="updateDonorDeferralReason(deferral, deferral.deferralReason)"
                 required>
               </select>
