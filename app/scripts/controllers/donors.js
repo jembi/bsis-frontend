@@ -399,6 +399,15 @@ angular.module('bsis')
         if (response !== false){
           $scope.deferralsData = response.allDonorDeferrals;
           $scope.deferralResults = true;
+          // initialise the deferralReason with the exact objects displayed in the list so they are preselected on editing
+          angular.forEach($scope.deferralsData, function(item) {
+            item.deferralReason = $scope.deferralReasons.filter(function(d) {
+              if (d.id === item.deferralReason.id) {
+                  return true;
+                }
+                return false;
+              })[0];
+          });
         }
         else{
           $scope.deferralResults = false;
@@ -469,6 +478,17 @@ angular.module('bsis')
         DonorService.updateDonorDeferral(deferral, function(response) {
           // no need to do anything - data is already updated in the table
         });
+      };
+
+      $scope.updateDonorDeferralReason = function(deferral, deferralReason) {
+        // change end date
+        var newEndDate = new Date();
+        if (deferralReason.durationType === "PERMANENT") {
+          newEndDate.setFullYear(2100,0,1);
+        } else {
+          newEndDate.setDate(newEndDate.getDate() + deferralReason.defaultDuration);
+        }
+        deferral.deferredUntil = newEndDate;
       };
 
       $scope.deleteDonorDeferral = function(donorDeferralId) {

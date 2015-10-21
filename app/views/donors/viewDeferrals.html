@@ -29,7 +29,6 @@
           <td data-title="'Deferred Until'" style="width:14%;" header-class="text-left" class="text-center" sortable="'deferredUntil'" filter="{ 'deferredUntil': 'text' }">
             <span ng-show="!editableDeferralForm.$visible">{{ (deferral.deferredUntil | bsisDate) || '' }}</span>
             <span ng-show="editableDeferralForm.$visible" e-required>
-              <!--<dateselect ng-model="deferral.deferredUntil" initDate="deferral.deferredUntil" format="format" cal-icon="icons.CALENDAR" opened="dateToOpen"></dateselect>-->
               <dateselect-end name="deferredUntil" style="width:100%;"
                 ng-model="deferral.deferredUntil"
                 initDate="deferral.deferredUntil"
@@ -45,21 +44,15 @@
               filter-data="deferralReasonsFilter($column)">
             <span ng-show="!editableDeferralForm.$visible">{{deferral.deferralReason.reason}}</span>
             <span ng-show="editableDeferralForm.$visible" e-required>
-            <!--<span editable-select="deferral.deferralReason.reason" e-name="deferralReason.reason" e-ng-options="item.reason as item.reason for item in deferralReasons" e-required>
-              {{deferral.deferralReason.reason}}
-            </span>-->
               <select name="deferralReason" class="form-control input-sm" 
-                ng-model="deferral.deferralReason.reason" 
-                ng-init="deferral.deferralReason.reason"
-                ng-options="item.reason as item.reason for item in deferralReasons" 
+                ng-model="deferral.deferralReason" 
+                ng-options="item as item.reason for item in deferralReasons" 
+                ng-change="updateDonorDeferralReason(deferral, deferral.deferralReason)"
                 required>
               </select>
             </span>
           </td>
           <td data-title="'Comment'" header-class="text-left" sortable="'deferralReasonText'">
-            <!--<span editable-text="deferral.deferralReasonText" e-name="deferralReasonText">
-              {{deferral.deferralReasonText}}
-            </span>-->
             <span ng-show="!editableDeferralForm.$visible">{{deferral.deferralReasonText}}</span>
             <span ng-show="editableDeferralForm.$visible">
               <input size="30" type="comment" id="deferralReasonText" class="form-control input-sm" ng-model="deferral.deferralReasonText">
