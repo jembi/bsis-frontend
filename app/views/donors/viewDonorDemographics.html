@@ -67,8 +67,8 @@
         <td class="icon"></td>
         <td class="field">Address Type: </td>
         <td class="value" style="width:29%;"><em>Home</em></td>
-        <td class="value" style="width:29%;"><em>Postal <button type="button" class="btn btn-link" ng-click="sameAsHome(demographicsForm)">Same as home</button></em></td>
-        <td class="value" style="width:29%;"><em>Work</em></td>
+        <td class="value" style="width:29%;"><em>Postal <small ng-show="demographicsForm.$visible"><input type="checkbox" ng-click="sameAsHome(demographicsForm, 'Postal')" /> Same as Home</small></em></td>
+        <td class="value" style="width:29%;"><em>Work <small ng-show="demographicsForm.$visible"> <input type="checkbox" ng-click="sameAsHome(demographicsForm, 'Work')" /> Same as Home</small></em></td>
       </tr>
       <tr>
         <td class="icon"></td>
