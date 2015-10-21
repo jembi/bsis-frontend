@@ -189,34 +189,37 @@ angular.module('bsis')
 
     };
 
+    $scope.postalSameAsHome = false;
+    $scope.workSameAsHome = false;
+
     $scope.sameAsHome = function (form, addressType) {
       if (addressType == 'Postal'){
-        form.postalAddressLine1.$setViewValue(form.homeAddressLine1.$modelValue);
+        form.postalAddressLine1.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressLine1.$modelValue);
         form.postalAddressLine1.$render();
-        form.postalAddressLine2.$setViewValue(form.homeAddressLine2.$modelValue);
+        form.postalAddressLine2.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressLine2.$modelValue);
         form.postalAddressLine2.$render();
-        form.postalAddressCity.$setViewValue(form.homeAddressCity.$modelValue);
+        form.postalAddressCity.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressCity.$modelValue);
         form.postalAddressCity.$render();
-        form.postalAddressProvince.$setViewValue(form.homeAddressProvince.$modelValue);
+        form.postalAddressProvince.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressProvince.$modelValue);
         form.postalAddressProvince.$render();
-        form.postalAddressCountry.$setViewValue(form.homeAddressCountry.$modelValue);
+        form.postalAddressCountry.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressCountry.$modelValue);
         form.postalAddressCountry.$render();
-        form.postalAddressZipcode.$setViewValue(form.homeAddressZipcode.$modelValue);
+        form.postalAddressZipcode.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressZipcode.$modelValue);
         form.postalAddressZipcode.$render();
       }
 
       if (addressType == 'Work'){
-        form.workAddressLine1.$setViewValue(form.homeAddressLine1.$modelValue);
+        form.workAddressLine1.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressLine1.$modelValue);
         form.workAddressLine1.$render();
-        form.workAddressLine2.$setViewValue(form.homeAddressLine2.$modelValue);
+        form.workAddressLine2.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressLine2.$modelValue);
         form.workAddressLine2.$render();
-        form.workAddressCity.$setViewValue(form.homeAddressCity.$modelValue);
+        form.workAddressCity.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressCity.$modelValue);
         form.workAddressCity.$render();
-        form.workAddressProvince.$setViewValue(form.homeAddressProvince.$modelValue);
+        form.workAddressProvince.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressProvince.$modelValue);
         form.workAddressProvince.$render();
-        form.workAddressCountry.$setViewValue(form.homeAddressCountry.$modelValue);
+        form.workAddressCountry.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressCountry.$modelValue);
         form.workAddressCountry.$render();
-        form.workAddressZipcode.$setViewValue(form.homeAddressZipcode.$modelValue);
+        form.workAddressZipcode.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressZipcode.$modelValue);
         form.workAddressZipcode.$render();
       }
 
