@@ -14,143 +14,144 @@
     </span>
   </span>
 
-  <table class="dash-table col-sm-5" style="clear: right;">
-    <tbody>
-      <tr>
-        <td class="icon"><i class="fa {{icons.PHONE}}"></i></td>
-        <td class="field">Preferred Contact Type: </td>
-        <td class="value" style="width: 60%">
-          <span e-class="xeditable" editable-select="donor.contactMethodType.id" e-ng-options="item.id as item.contactMethodType for item in preferredContactMethods" e-name="contactMethodType">
-            {{donor.contactMethodType.contactMethodType}}
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td class="icon"></td>
-        <td class="field">Email: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.contact.email" e-name="mobileNumber">{{donor.contact.email}}</span></td>
-      </tr>
-      <tr>
-        <td class="icon"></td>
-        <td class="field">Mobile: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.contact.mobileNumber" e-name="mobileNumber">{{donor.contact.mobileNumber}}</span></td>
-      </tr>
-      <tr>
-        <td class="icon"></td>
-        <td class="field">Home: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.contact.homeNumber" e-name="homeNumber">{{donor.contact.homeNumber}}</span></td>
-      </tr>
-      <tr>
-        <td class="icon"></td>
-        <td class="field">Work: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.contact.workNumber" e-name="workNumber">{{donor.contact.workNumber}}</span></td>
-      </tr>
+  <div style="row">
+    <table class="dash-table col-sm-5" >
+      <tbody>
+        <tr>
+          <td class="icon"><i class="fa {{icons.PHONE}}"></i></td>
+          <td class="field" style="width:46%;">Preferred Contact Type: </td>
+          <td class="value" style="width:50%">
+            <span e-class="xeditable" editable-select="donor.contactMethodType.id" e-ng-options="item.id as item.contactMethodType for item in preferredContactMethods" e-name="contactMethodType">
+              {{donor.contactMethodType.contactMethodType}}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon"></td>
+          <td class="field">Email: </td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.contact.email" e-name="mobileNumber">{{donor.contact.email}}</span></td>
+        </tr>
+        <tr>
+          <td class="icon"></td>
+          <td class="field">Mobile: </td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.contact.mobileNumber" e-name="mobileNumber">{{donor.contact.mobileNumber}}</span></td>
+        </tr>
+        <tr>
+          <td class="icon"></td>
+          <td class="field">Home: </td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.contact.homeNumber" e-name="homeNumber">{{donor.contact.homeNumber}}</span></td>
+        </tr>
+        <tr>
+          <td class="icon"></td>
+          <td class="field">Work: </td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.contact.workNumber" e-name="workNumber">{{donor.contact.workNumber}}</span></td>
+        </tr>
+        <tr>
+          <td class="icon"><i class="fa {{icons.GLOBE}}"></i></td>
+          <td class="field">Preferred Address Type: </td>
+          <td class="value">
+            <span e-class="xeditable" editable-select="donor.preferredAddressType" e-ng-options="item as item.preferredAddressType for item in addressTypes" e-name="preferredAddressType">
+              {{donor.preferredAddressType.preferredAddressType}}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-      <tr><td></td></tr>
-
-      <tr>
-        <td class="icon"><i class="fa {{icons.GLOBE}}"></i></td>
-        <td class="field">Preferred Address Type: </td>
-        <td class="value">
-          <span e-class="xeditable" editable-select="donor.preferredAddressType" e-ng-options="item as item.preferredAddressType for item in addressTypes" e-name="preferredAddressType">
-            {{donor.preferredAddressType.preferredAddressType}}
-          </span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table class="dash-table col-sm-5" style="clear: left;">
-    <tbody>
-      <tr>
-        <td class="icon"></td>
-        <td class="field">Address Type: </td>
-        <td class="value" style="width:60%;"><em>Home</em></td>
-      </tr>
-      <tr>
-        <td class="icon"></td>
-        <td class="field">Address: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressLine1" e-name="homeAddressLine1">{{donor.address.homeAddressLine1}}</span></td>
-      </tr>
-      <tr>
-        <td class="icon"></td>
-        <td class="field"></td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressLine2" e-name="homeAddressLine2">{{donor.address.homeAddressLine2}}</span></td>
-      </tr>
-      <tr>
-        <td class="icon"></td>
-        <td class="field">City: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressCity" e-name="homeAddressCity">{{donor.address.homeAddressCity}}</span></td>
-      </tr>
-      <tr>
-        <td class="icon"></td>
-        <td class="field">Province: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressProvince" e-name="homeAddressProvince">{{donor.address.homeAddressProvince}}</span></td>
-      </tr>
-      <tr>
-        <td class="icon"></td>
-        <td class="field">Country: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressCountry" e-name="homeAddressCountry">{{donor.address.homeAddressCountry}}</span></td>
-      </tr>
-      <tr>
-        <td class="icon"></td>
-        <td class="field">Code: </td>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressZipcode" e-name="homeAddressZipcode">{{donor.address.homeAddressZipcode}}</span></td>
-      </tr>
-    </tbody>
-  </table> 
+  <div style="row">
+    <table class="dash-table col-sm-5" style="clear: left;">
+      <tbody>
+        <tr>
+          <td class="icon" ><i class="fa {{icons.MAPMARKER}}"></i></td>
+          <td class="field" style="width:46%;">Address Type: </td>
+          <td class="value" style="width:50%;"><em>Home</em></td>
+        </tr>
+        <tr>
+          <td class="icon"></td>
+          <td class="field">Address: </td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressLine1" e-name="homeAddressLine1">{{donor.address.homeAddressLine1}}</span></td>
+        </tr>
+        <tr>
+          <td class="icon"></td>
+          <td class="field"></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressLine2" e-name="homeAddressLine2">{{donor.address.homeAddressLine2}}</span></td>
+        </tr>
+        <tr>
+          <td class="icon"></td>
+          <td class="field">City: </td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressCity" e-name="homeAddressCity">{{donor.address.homeAddressCity}}</span></td>
+        </tr>
+        <tr>
+          <td class="icon"></td>
+          <td class="field">Province: </td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressProvince" e-name="homeAddressProvince">{{donor.address.homeAddressProvince}}</span></td>
+        </tr>
+        <tr>
+          <td class="icon"></td>
+          <td class="field">Country: </td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressCountry" e-name="homeAddressCountry">{{donor.address.homeAddressCountry}}</span></td>
+        </tr>
+        <tr>
+          <td class="icon"></td>
+          <td class="field">Code: </td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressZipcode" e-name="homeAddressZipcode">{{donor.address.homeAddressZipcode}}</span></td>
+        </tr>
+      </tbody>
+    </table> 
 
 
-  <table class="dash-table col-sm-3">
-    <tbody>
-      <tr>
-        <td class="value" ><em>Postal</em></td>
-      </tr>
-      <tr>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressLine1" e-name="postalAddressLine1">{{donor.address.postalAddressLine1}}</td>
-      </tr>
-      <tr>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressLine2" e-name="postalAddressLine2">{{donor.address.postalAddressLine2}}</span></td>
-      </tr>
-      <tr>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressCity" e-name="postalAddressCity">{{donor.address.postalAddressCity}}</span></td>
-      </tr>
-      <tr>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressProvince" e-name="postalAddressProvince">{{donor.address.postalAddressProvince}}</span></td>
-      </tr>
-      <tr>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressCountry" e-name="postalAddressCountry">{{donor.address.postalAddressCountry}}</span></td>
-      </tr>
-      <tr>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressZipcode" e-name="postalAddressZipcode">{{donor.address.postalAddressZipcode}}</span></td>
-      </tr>
-    </tbody>
-  </table> 
+    <table class="dash-table col-sm-3">
+      <tbody>
+        <tr>
+          <td class="value" ><em>Postal</em></td>
+        </tr>
+        <tr>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressLine1" e-name="postalAddressLine1">{{donor.address.postalAddressLine1}}</td>
+        </tr>
+        <tr>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressLine2" e-name="postalAddressLine2">{{donor.address.postalAddressLine2}}</span></td>
+        </tr>
+        <tr>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressCity" e-name="postalAddressCity">{{donor.address.postalAddressCity}}</span></td>
+        </tr>
+        <tr>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressProvince" e-name="postalAddressProvince">{{donor.address.postalAddressProvince}}</span></td>
+        </tr>
+        <tr>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressCountry" e-name="postalAddressCountry">{{donor.address.postalAddressCountry}}</span></td>
+        </tr>
+        <tr>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressZipcode" e-name="postalAddressZipcode">{{donor.address.postalAddressZipcode}}</span></td>
+        </tr>
+      </tbody>
+    </table> 
 
-  <table class="dash-table col-sm-3">
-    <tbody>
-      <tr>
-        <td class="value" ><em>Work</em></td>
-      </tr>
-      <tr>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressLine1" e-name="workAddressLine1">{{donor.address.workAddressLine1}}</td>
-      </tr>
-      <tr>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressLine2" e-name="workAddressLine2">{{donor.address.workAddressLine2}}</span></td>
-      </tr>
-      <tr>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressCity" e-name="workAddressCity">{{donor.address.workAddressCity}}</span></td>
-      </tr>
-      <tr>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressProvince" e-name="workAddressProvince">{{donor.address.workAddressProvince}}</span></td>
-      </tr>
-      <tr>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressCountry" e-name="workAddressCountry">{{donor.address.workAddressCountry}}</span></td>
-      </tr>
-      <tr>
-        <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressZipcode" e-name="workAddressZipcode">{{donor.address.workAddressZipcode}}</span></td>
-      </tr>
-    </tbody>
-  </table> 
+    <table class="dash-table col-sm-3">
+      <tbody>
+        <tr>
+          <td class="value" ><em>Work</em></td>
+        </tr>
+        <tr>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressLine1" e-name="workAddressLine1">{{donor.address.workAddressLine1}}</td>
+        </tr>
+        <tr>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressLine2" e-name="workAddressLine2">{{donor.address.workAddressLine2}}</span></td>
+        </tr>
+        <tr>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressCity" e-name="workAddressCity">{{donor.address.workAddressCity}}</span></td>
+        </tr>
+        <tr>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressProvince" e-name="workAddressProvince">{{donor.address.workAddressProvince}}</span></td>
+        </tr>
+        <tr>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressCountry" e-name="workAddressCountry">{{donor.address.workAddressCountry}}</span></td>
+        </tr>
+        <tr>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressZipcode" e-name="workAddressZipcode">{{donor.address.workAddressZipcode}}</span></td>
+        </tr>
+      </tbody>
+    </table> 
+  </div>
 
 </form>
