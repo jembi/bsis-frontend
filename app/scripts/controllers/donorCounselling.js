@@ -20,6 +20,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
         });
       }
     }
+  });
 
   $scope.dateFormat = DATEFORMAT;
   $scope.donations = [];
@@ -216,5 +217,4 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       $scope.gridApi.exporter.csvExport('all', 'all');
     }
   };
-  });
 });
