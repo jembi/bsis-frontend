@@ -15,7 +15,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       if (!angular.isArray(venues)) {
         $scope.search.selectedVenues = [venues];
       } else {
-        angular.forEach (venues, function(value,index){
+        angular.forEach(venues, function(value) {
           $scope.search.selectedVenues.push(parseInt(value));
         });
       }
@@ -27,8 +27,6 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
   $scope.searched = false;
 
-
-
   if ($routeParams.startDate) {
     $scope.search.startDate = new Date($routeParams.startDate);
   }
@@ -36,10 +34,6 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   if ($routeParams.endDate) {
     $scope.search.endDate = new Date($routeParams.endDate);
   }
-
-
-
-
 
   $scope.clearSearch = function() {
     $location.search({});
@@ -97,7 +91,6 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       $scope.searched = true;
       $scope.donations = response;
       $scope.gridOptions.data = response;
-      console.log(response);
     }, function(err) {
       console.error(err);
     });
@@ -200,7 +193,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       };
     },
 
-    onRegisterApi: function(gridApi){
+    onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;
     }
   };
@@ -209,11 +202,10 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $scope.refresh();
   }
 
-  $scope.export = function(format){
-    if(format === 'pdf'){
+  $scope.export = function(format) {
+    if (format === 'pdf') {
       $scope.gridApi.exporter.pdfExport('all', 'all');
-    }
-    else if (format === 'csv'){
+    } else if (format === 'csv') {
       $scope.gridApi.exporter.csvExport('all', 'all');
     }
   };
