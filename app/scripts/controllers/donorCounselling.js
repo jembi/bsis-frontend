@@ -87,12 +87,16 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
     $location.search(queryParams);
 
+    $scope.searching = true;
+
     Api.DonationSummaries.query(query, function(response) {
       $scope.searched = true;
       $scope.donations = response;
       $scope.gridOptions.data = response;
+      $scope.searching = false;
     }, function(err) {
       console.error(err);
+      $scope.searching = false;
     });
   };
 
