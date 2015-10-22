@@ -181,6 +181,9 @@ angular.module('bsis')
 
       DonorService.updateDonor(donor, function(response){
           $scope.donor = response;
+          if ($scope.donorPermissions) {
+            $scope.donorPermissions.canDelete = response.permissions.canDelete;
+          }
         },
         // display error from back end
         function(err){
@@ -219,6 +222,7 @@ angular.module('bsis')
     DonorService.getDonorById($routeParams.id, function (donor) {
       DonorService.setDonor(donor);
       $scope.donor = donor;
+      $scope.donorPermissions.canDelete = donor.permissions.canDelete;
     }, function(err){
       $location.path('/findDonor');
     });
@@ -227,6 +231,9 @@ angular.module('bsis')
     $scope.age = '';
     $scope.deferralsData = {};
     $scope.donationsData = {};
+    $scope.donorPermissions = {
+      canDelete: false
+    };
 
     $scope.hstep = 1;
     $scope.mstep = 5;
@@ -281,6 +288,7 @@ angular.module('bsis')
           $scope.totalDonations = $scope.data.totalDonations;
           $scope.dueToDonate = $scope.data.dueToDonate;
           $scope.totalAdverseEvents = response.totalAdverseEvents;
+          $scope.donorPermissions.canDelete = response.canDelete;
         }
         else{
         }
@@ -461,6 +469,7 @@ angular.module('bsis')
         $scope.donationsData = $scope.donationsData.filter(function(donation) {
           return donation.id !== donationId;
         });
+        $scope.getDonorOverview();
       }, function(err) {
         console.error(err);
         $scope.confirmDelete = false;
