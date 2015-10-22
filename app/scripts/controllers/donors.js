@@ -467,7 +467,9 @@ angular.module('bsis')
 
       $scope.updateDonorDeferral = function(deferral) {
         DonorService.updateDonorDeferral(deferral, function(response) {
-          // no need to do anything - data is already updated in the table
+          if (deferral.permissions) {
+            deferral.permissions = response.deferral.permissions;
+          }
         });
       };
 
