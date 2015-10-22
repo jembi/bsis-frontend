@@ -40,13 +40,16 @@ angular.module('bsis')
     $scope.findDonor = function () {
       $scope.donorSearch.search = true;
       $location.search($scope.donorSearch);
+      $scope.searching = true;
       DonorService.findDonor($scope.donorSearch, function(response) {
         data = response.donors;
         $scope.searchResults = true;
         $scope.data = response.donors;
         $scope.canAddDonors = response.canAddDonors;
+        $scope.searching = false;
       }, function() {
         $scope.searchResults = false;
+        $scope.searching = false;
       });
     };
 
@@ -807,15 +810,19 @@ angular.module('bsis')
     $scope.addDonationBatch = function (donationBatch, donationBatchForm){
       if(donationBatchForm.$valid){
 
+        $scope.addingDonationBatch = true;
+
         DonorService.addDonationBatch(donationBatch, function(response){
             $scope.newDonationBatch = {};
             $scope.getOpenDonationBatches();
             // set form back to pristine state
             donationBatchForm.$setPristine();
             $scope.submitted = '';
+            $scope.addingDonationBatch = false;
 
         }, function (err){
           $scope.err = err;
+          $scope.addingDonationBatch = false;
         });
       }
       else{
@@ -1122,6 +1129,7 @@ angular.module('bsis')
         donation.bleedStartTime = bleedStartTime;
         donation.bleedEndTime = bleedEndTime;
 
+        $scope.addingDonation = true;
 
         DonorService.addDonationToBatch(donation, function(response){
             $scope.addDonationSuccess = true;
@@ -1133,11 +1141,13 @@ angular.module('bsis')
             $scope.data = data;
             $scope.submitted = '';
             $scope.err = {};
+            $scope.addingDonation = false;
           },
           function (err) {
 
             $scope.err = err;
             $scope.addDonationSuccess = false;
+            $scope.addingDonation = false;
         });
       }
       else {
