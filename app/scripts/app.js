@@ -871,7 +871,7 @@ var DONATION = {DONOR:{}};
 
             //Address fields constants
 
-            else if (config[i].name == 'ui.address.addressLine.visble'){
+            else if (config[i].name == 'ui.address.addressLine.visible'){
               UI.ADDRESS.ADDRESS_LINE_VISIBLE = config[i].value;
             }
             else if (config[i].name == 'ui.address.addressLine.name'){
@@ -883,11 +883,11 @@ var DONATION = {DONOR:{}};
             else if (config[i].name == 'ui.address.city.name'){
               UI.ADDRESS.CITY_NAME = config[i].value;
             }
-            else if (config[i].name == 'ui.address.state.visible'){
-              UI.ADDRESS.STATE_VISIBLE = config[i].value;
+            else if (config[i].name == 'ui.address.province.visible'){
+              UI.ADDRESS.PROVINCE_VISIBLE = config[i].value;
             }
-            else if (config[i].name == 'ui.address.state.name'){
-              UI.ADDRESS.STATE_NAME = config[i].value;
+            else if (config[i].name == 'ui.address.province.name'){
+              UI.ADDRESS.PROVINCE_NAME = config[i].value;
             }
             else if (config[i].name == 'ui.address.country.visible'){
               UI.ADDRESS.COUNTRY_VISIBLE = config[i].value;
