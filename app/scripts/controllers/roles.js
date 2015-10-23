@@ -106,6 +106,7 @@ angular.module('bsis')
     $scope.addRole = function (role, roleForm) {
 
       if(roleForm.$valid){
+        $scope.savingRole = true;
         RolesService.addRole(role, function(response, err){
           if (response !== false){
             $scope.role = {
@@ -120,6 +121,7 @@ angular.module('bsis')
             $scope.nameInvalid = "ng-invalid";
             $scope.serverError = err["role.name"];
           }
+          $scope.savingRole = false;
         });
       }
       else{
@@ -139,6 +141,7 @@ angular.module('bsis')
 
     $scope.updateRole = function (role) {
 
+      $scope.savingRole = true;
       RolesService.updateRole(role, function (response, err) {
         if (response !== false) {
           RolesService.setRole("");
@@ -148,6 +151,7 @@ angular.module('bsis')
           $scope.nameInvalid = "ng-invalid";
           $scope.serverError = err["role.name"];
         }
+        $scope.savingRole = false;
       });
     };
 

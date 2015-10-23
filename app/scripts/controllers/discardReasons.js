@@ -121,6 +121,7 @@ angular.module('bsis')
     $scope.updateDiscardReason = function (discard, discardForm) {
       if (discardForm.$valid) {
 
+        $scope.savingDiscardReason = true;
         DiscardReasonsService.updateDiscardReason(discard, function (response, err) {
           if (response !== false) {
             $scope.go('/discardReasons');
@@ -131,6 +132,7 @@ angular.module('bsis')
               $scope.serverError.reason = err.reason;
             }
           }
+          $scope.savingDiscardReason = false;
         });
       } else {
         $scope.submitted = true;
@@ -142,6 +144,7 @@ angular.module('bsis')
 
       if (discardForm.$valid) {
         discard.isDeleted = false;
+        $scope.savingDiscardReason = true;
         DiscardReasonsService.addDiscardReason(discard, function (response, err) {
           if (response !== false) {
             $scope.discard = {
@@ -158,6 +161,7 @@ angular.module('bsis')
               $scope.serverError.reason = err.reason;
             }
           }
+          $scope.savingDiscardReason = false;
         });
       }
       else {

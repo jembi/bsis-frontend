@@ -104,8 +104,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-1 col-sm-10">
-                        <button class="btn btn-primary" type="submit"> Save </button>
-                        <button class="btn btn-primary" type="button" ng-click="clear(); go('/packTypes');">Cancel</button>
+                      <button class="btn btn-primary" type="submit" ng-disabled="savingPackType">{{savingPackType ? "Saving..." : "Save"}}</button>
+                        <button class="btn btn-primary" type="button" ng-click="clear(); go('/packTypes');" ng-disabled="savingPackType">Cancel</button>
                     </div>
                 </div>
             </form>

@@ -57,8 +57,8 @@
 
       <div class="form-group">
         <div class="col-sm-offset-1 col-sm-4">
-            <button class="btn btn-primary" type="submit" style="margin-top: 2px">Save Role</button>
-            <button class="btn btn-primary" type="button" ng-click="cancel(roleForm)" style="margin-top: 2px">Cancel</button>
+          <button class="btn btn-primary" type="submit" style="margin-top: 2px" ng-disabled="savingRole">{{savingRole ? "Saving..." : "Save Role"}}</button>
+          <button class="btn btn-primary" type="button" ng-click="cancel(roleForm)" style="margin-top: 2px" ng-disabled="savingRole">Cancel</button>
         </div>
       </div>
     </form>
