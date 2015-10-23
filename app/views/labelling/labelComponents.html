@@ -23,7 +23,8 @@
   <div ng-switch-when="true">
     <div class="panel panel-default">
       <div class="panel-body">
-        <div ng-repeat="component in components">
+        <em ng-if="!components || components.length === 0">No components for donation.</em>
+        <div ng-if="components && components.length > 0" ng-repeat="component in components">
           <div ng-if="component.printPackLabel">
             {{component.componentIdentificationNumber}} ({{component.componentName}}) - 
             <em>Component is ready to be labelled.</em> 
