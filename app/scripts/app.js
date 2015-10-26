@@ -913,10 +913,10 @@ var DONATION = {DONOR:{}};
             else if (config[i].name == 'ui.address.country.displayName'){
               UI.ADDRESS.COUNTRY_NAME = config[i].value;
             }
-            else if (config[i].name == 'ui.address.zipCode.enabled'){
+            else if (config[i].name == 'ui.address.postalCode.enabled'){
               UI.ADDRESS.POSTAL_CODE_ENABLED = config[i].value;
             }
-            else if (config[i].name == 'ui.address.zipCode.displayName'){
+            else if (config[i].name == 'ui.address.postalCode.displayName'){
               UI.ADDRESS.POSTAL_CODE_NAME = config[i].value;
             }
 
