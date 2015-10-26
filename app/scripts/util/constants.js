@@ -49,7 +49,8 @@ angular.module('bsis')
     TESTING: 'fa-flask',
     TINT: 'fa-tint',
     USER: 'fa-user',
-    WARNING: 'fa-warning'
+    WARNING: 'fa-warning',
+    MAPMARKER: 'fa-map-marker'
   })
 
   .constant('REGEX', {
