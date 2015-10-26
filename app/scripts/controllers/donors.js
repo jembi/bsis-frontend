@@ -116,7 +116,7 @@ angular.module('bsis')
       $scope.searchResults = '';
       $scope.donation = {};
       $scope.deferral = {};
-      $scope.newDonationBatch = {};
+      $scope.newDonationBatch = {backEntry: false};
       $scope.donorListSearchResults = '';
       $scope.donorList = {};
     };
@@ -714,7 +714,7 @@ angular.module('bsis')
     $scope.recentDonationBatchData = recentDonationBatchData;
     $scope.openDonationBatches = false;
     $scope.recentDonationBatches = false;
-    $scope.newDonationBatch = {};
+    $scope.newDonationBatch = {backEntry: false};
 
 
     $scope.getOpenDonationBatches = function (){
@@ -822,7 +822,7 @@ angular.module('bsis')
         $scope.addingDonationBatch = true;
 
         DonorService.addDonationBatch(donationBatch, function(response){
-            $scope.newDonationBatch = {};
+            $scope.newDonationBatch = {backEntry: false};
             $scope.getOpenDonationBatches();
             // set form back to pristine state
             donationBatchForm.$setPristine();
