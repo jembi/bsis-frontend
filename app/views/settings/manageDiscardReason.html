@@ -34,8 +34,8 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-4">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 2px">Save Discard Reason</button>
-                    <button class="btn btn-primary" type="button" ng-click="cancel(discardForm)" style="margin-top: 2px">Cancel</button>
+                  <button class="btn btn-primary" type="submit" style="margin-top: 2px" ng-disabled="savingDiscardReason">{{savingDiscardReason ? "Saving..." : "Save Discard Reason"}}</button>
+                    <button class="btn btn-primary" type="button" ng-click="cancel(discardForm)" style="margin-top: 2px" ng-disabled="savingDiscardReason">Cancel</button>
                 </div>
             </div>
         </form>

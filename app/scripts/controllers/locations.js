@@ -48,6 +48,8 @@ angular.module('bsis')
 
       if(locationForm.$valid){
 
+        $scope.addingLocation = true;
+
         LocationsService.addLocation(location, function(response){
           if (response !== false){
             $scope.location = {
@@ -59,11 +61,13 @@ angular.module('bsis')
             $scope.submitted = '';
             $scope.getLocations();
             $scope.err = null;
+            $scope.addingLocation = false;
           }
           else{
           }
         }, function (err) {
           $scope.err = err;
+          $scope.addingLocation = false;
         });
       }
       else{
