@@ -282,7 +282,7 @@ angular.module('bsis')
       TestingService.setCurrentTestBatch(item.id);
       if(testCategory === 'tti'){
         $location.path("/manageTTITesting/" + item.id);
-      
+      }
       else if (testCategory === 'bloodGrouping'){
         $location.path("/manageBloodGroupTesting/" + item.id);
       }
