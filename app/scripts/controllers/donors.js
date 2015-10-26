@@ -660,20 +660,16 @@ angular.module('bsis')
         deleteCallback(err, donor);
         $location.path("viewDonor/" + donor.id)
           .search({failed: true}); // If I do not set a parameter the route does not change, this needs to happen to refresh the donor.
-        $timeout(function (){
-          Alerting.setPersistErrors(false);
-        });
       });
     };
 
     var deleteCallback = function (err, donor) {
-      Alerting.setPersistErrors(true);
       if (err) {
-        Alerting.alertAddMsg('top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
+        Alerting.alertAddMsg(true, 'top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
       } else {
-        Alerting.alertAddMsg('top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" has been deleted successfully');
+        Alerting.alertAddMsg(true, 'top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" has been deleted successfully');
       }
-    }
+    };
   })
 
   // Controller for Adding Donors

@@ -10,8 +10,8 @@ angular.module('bsis')
     var persistErrors;
 
     return {
-      alertAddMsg: function (alertScope, alertType, alertMsg) {
-
+      alertAddMsg: function (persistErrorMessage, alertScope, alertType, alertMsg) {
+        persistErrors = persistErrorMessage;
         // check if alertScope object exists
         if ( !alerts[alertScope] ){
           alerts[alertScope] = [];
@@ -68,6 +68,7 @@ angular.module('bsis')
       },
 
       getAlerts: function () {
+        persistErrors = false; //Reset after showing errors
         return alerts;
       },
 
