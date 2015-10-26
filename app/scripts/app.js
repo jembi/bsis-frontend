@@ -871,35 +871,53 @@ var DONATION = {DONOR:{}};
 
             //Address fields constants
 
-            else if (config[i].name == 'ui.address.addressLine.visible'){
-              UI.ADDRESS.ADDRESS_LINE_VISIBLE = config[i].value;
+            else if (config[i].name == 'ui.address.addressLine1.enabled'){
+              UI.ADDRESS.ADDRESS_LINE_1_ENABLED = config[i].value;
             }
-            else if (config[i].name == 'ui.address.addressLine.name'){
-              UI.ADDRESS.ADDRESS_LINE_NAME = config[i].value;
+            else if (config[i].name == 'ui.address.addressLine1.name'){
+              UI.ADDRESS.ADDRESS_LINE_1_NAME = config[i].value;
             }
-            else if (config[i].name == 'ui.address.city.visible'){
-              UI.ADDRESS.CITY_VISIBLE = config[i].value;
+            else if (config[i].name == 'ui.address.addressLine2.enabled'){
+              UI.ADDRESS.ADDRESS_LINE_2_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.addressLine2.name'){
+              UI.ADDRESS.ADDRESS_LINE_2_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.cityTownVillage.enabled'){
+              UI.ADDRESS.CITY_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.address.city.name'){
               UI.ADDRESS.CITY_NAME = config[i].value;
             }
-            else if (config[i].name == 'ui.address.province.visible'){
-              UI.ADDRESS.PROVINCE_VISIBLE = config[i].value;
+            else if (config[i].name == 'ui.address.province.enabled'){
+              UI.ADDRESS.PROVINCE_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.address.province.name'){
               UI.ADDRESS.PROVINCE_NAME = config[i].value;
             }
-            else if (config[i].name == 'ui.address.country.visible'){
-              UI.ADDRESS.COUNTRY_VISIBLE = config[i].value;
+            else if (config[i].name == 'ui.address.state.enabled'){
+              UI.ADDRESS.STATE_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.state.name'){
+              UI.ADDRESS.STATE_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.districtRegion.enabled'){
+              UI.ADDRESS.DISTRICT_REGION_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.districtRegion.name'){
+              UI.ADDRESS.DISTRICT_REGION_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.country.enabled'){
+              UI.ADDRESS.COUNTRY_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.address.country.name'){
               UI.ADDRESS.COUNTRY_NAME = config[i].value;
             }
-            else if (config[i].name == 'ui.address.zipCode.visible'){
-              UI.ADDRESS.ZIPCODE_VISIBLE = config[i].value;
+            else if (config[i].name == 'ui.address.zipCode.enabled'){
+              UI.ADDRESS.POSTAL_CODE_ENABLED = config[i].value;
             }
             else if (config[i].name == 'ui.address.zipCode.name'){
-              UI.ADDRESS.ZIPCODE_NAME = config[i].value;
+              UI.ADDRESS.POSTAL_CODE_NAME = config[i].value;
             }
 
 
