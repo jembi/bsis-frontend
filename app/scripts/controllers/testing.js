@@ -71,7 +71,7 @@ angular.module('bsis')
     };
 
     $scope.go = function (path) {
-      $location.path(path);
+      $location.path(path + '/' + $routeParams.id);
     };
 
     $scope.clear = function () {
@@ -282,7 +282,7 @@ angular.module('bsis')
       TestingService.setCurrentTestBatch(item.id);
       if(testCategory === 'tti'){
         $location.path("/manageTTITesting/" + item.id);
-      }
+      
       else if (testCategory === 'bloodGrouping'){
         $location.path("/manageBloodGroupTesting/" + item.id);
       }
@@ -387,7 +387,7 @@ angular.module('bsis')
     $scope.rh = RH.options;
 
     $scope.go = function (path) {
-      $location.path(path);
+      $location.path(path + '/' + $routeParams.id);
     };
 
     $scope.getCurrentTestBatch = function () {
