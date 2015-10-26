@@ -886,7 +886,7 @@ var DONATION = {DONOR:{}};
             else if (config[i].name == 'ui.address.cityTownVillage.enabled'){
               UI.ADDRESS.CITY_ENABLED = config[i].value;
             }
-            else if (config[i].name == 'ui.address.city.name'){
+            else if (config[i].name == 'ui.address.cityTownVillage.name'){
               UI.ADDRESS.CITY_NAME = config[i].value;
             }
             else if (config[i].name == 'ui.address.province.enabled'){
