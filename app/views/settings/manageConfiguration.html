@@ -81,8 +81,8 @@
 
       <div class="form-group">
         <div class="col-sm-offset-1 col-sm-4">
-            <button class="btn btn-primary" type="submit" style="margin-top: 2px">Save Configuration</button>
-            <button class="btn btn-primary" type="button" ng-click="cancel(configurationForm)" style="margin-top: 2px">Cancel</button>
+          <button class="btn btn-primary" type="submit" style="margin-top: 2px" ng-disabled="savingConfiguration">{{savingConfiguration ? "Saving..." : "Save Configuration"}}</button>
+            <button class="btn btn-primary" type="button" ng-click="cancel(configurationForm)" style="margin-top: 2px" ng-disabled="savingConfiguration">Cancel</button>
         </div>
       </div>
     </form>
