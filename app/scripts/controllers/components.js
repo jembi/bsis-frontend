@@ -126,6 +126,7 @@ angular.module('bsis')
       $scope.componentsSearch.search = true;
       $location.search($scope.componentsSearch);
 
+      $scope.searching = true;
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(response){
         if (response !== false){
           data = response.components;
@@ -134,9 +135,11 @@ angular.module('bsis')
           if ($scope.data.length === 0){
             $scope.searchResults = false;
           }
+          $scope.searching = false;
         }
         else{
           $scope.searchResults = false;
+          $scope.searching = false;
         }
       });
 
@@ -175,16 +178,18 @@ angular.module('bsis')
       componentsSearch.findComponentsSearch = true;
       $location.search(componentsSearch);
 
+      $scope.searching = true;
       ComponentService.ComponentsSearch(componentsSearch, function(response){
         if (response !== false){
           data = response.components;
           $scope.data = data;
           $scope.searchResults = true;
           $scope.componentsSearchCount = $scope.data.length;
-          
+          $scope.searching = false;
         }
         else{
           $scope.searchResults = false;
+          $scope.searching = false;
         }
       });
     };
@@ -267,15 +272,18 @@ angular.module('bsis')
       discardsSearch.status = $scope.status;
       $location.search(discardsSearch);
 
+      $scope.searching = true;
       ComponentService.ComponentsSearch(discardsSearch, function(response){
         if (response !== false){
           data = response.components;
           $scope.data = data;
           $scope.searchResults = true;
           $scope.componentsSearchCount = $scope.data.length;
+          $scope.searching = false;
         }
         else{
           $scope.searchResults = false;
+          $scope.searching = false;
         }
       });
     };
@@ -328,6 +336,7 @@ angular.module('bsis')
         $scope.recordComponent.parentComponentId = $scope.selectedComponents[0];
         $scope.recordComponent.componentTypeCombination = $scope.component.componentTypeCombination;
 
+        $scope.recordingComponents = true;
         ComponentService.recordComponents($scope.recordComponent, function(response){
           if (response !== false){
             data = response.components;
@@ -339,9 +348,11 @@ angular.module('bsis')
             $scope.component = {};
             $scope.selectedComponents = [];
             $scope.selectedComponentType = {};
+            $scope.recordingComponents = false;
           }
           else{
             // TODO: handle case where response == false
+            $scope.recordingComponents = false;
           }
         });
       }
@@ -370,6 +381,7 @@ angular.module('bsis')
           $scope.componentToDiscard.discardReason = $scope.discard.discardReason;
           $scope.componentToDiscard.discardReasonText = $scope.discard.discardReasonText;
 
+          $scope.discardingComponent = true;
           ComponentService.discardComponent($scope.componentToDiscard, function(response){
             if (response !== false){
               data = response.components;
@@ -379,9 +391,11 @@ angular.module('bsis')
               $scope.submitted = '';
               $scope.componentSelected = '';
               $scope.selectedComponents = [];
+              $scope.discardingComponent = false;
             }
             else{
               // TODO: handle case where response == false
+              $scope.discardingComponent = false;
             }
           });
         });

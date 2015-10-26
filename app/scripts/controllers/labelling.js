@@ -34,6 +34,7 @@ angular.module('bsis')
           donationIdentificationNumber: donationIdentificationNumber
         }
       );
+      $scope.searching = true;
       LabellingService.checkLabellingStatus(donationIdentificationNumber, function(response){
         if (response !== false){
           data = response;
@@ -47,6 +48,7 @@ angular.module('bsis')
         else{
           $scope.searchResults = false;
         }
+        $scope.searching = false;
       });
     };
 

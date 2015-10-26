@@ -85,7 +85,7 @@
 
   <div class="form-group"> 
     <div class="col-sm-offset-1 col-sm-4">
-      <button class="btn btn-primary" type="submit">Add Venue</button>
+      <button class="btn btn-primary" type="submit" ng-disabled="addingLocation">{{addingLocation ? "Adding..." : "Add Venue"}}</button>
       <button class="btn btn-primary" type="reset" ng-click="reset(addLocationForm);">Clear</button>
     </div>
   </div>
