@@ -42,8 +42,8 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button class="btn btn-primary" type="submit">Save Adverse Event Type</button>
-      <a class="btn btn-primary" style="margin-top:10px;" href="#/adverseEventTypes">Cancel</a>
+      <button class="btn btn-primary" type="submit" ng-disabled="savingAdverseEventType">{{savingAdverseEventType ? "Saving..." : "Save Adverse Event Type"}}</button>
+      <a class="btn btn-primary" style="margin-top:10px;" href="#/adverseEventTypes" ng-disabled="savingAdverseEventType">Cancel</a>
     </div>
   </div>
 </form>

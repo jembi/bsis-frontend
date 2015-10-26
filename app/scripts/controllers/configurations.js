@@ -121,6 +121,7 @@ angular.module('bsis')
     $scope.updateConfiguration = function (configuration, configurationForm) {
       if (configurationForm.$valid) {
 
+        $scope.savingConfiguration = true;
         ConfigurationsService.updateConfiguration(configuration, function (response, err) {
           if (response !== false){
             $scope.go('/configurations');
@@ -136,6 +137,7 @@ angular.module('bsis')
               $scope.serverError.name = err.name;
             }
           }
+          $scope.savingConfiguration = false;
         });
       } else {
         $scope.submitted = true;

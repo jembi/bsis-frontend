@@ -34,8 +34,8 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-4">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 2px">Save Donation Type</button>
-                    <button class="btn btn-primary" type="button" ng-click="cancel(donationTypeForm)" style="margin-top: 2px">Cancel</button>
+                  <button class="btn btn-primary" type="submit" style="margin-top: 2px" ng-disabled="savingDonationType">{{savingDonationType ? "Saving..." : "Save Donation Type"}}</button>
+                    <button class="btn btn-primary" type="button" ng-click="cancel(donationTypeForm)" style="margin-top: 2px" ng-disabled="savingDonationType">Cancel</button>
                 </div>
             </div>
         </form>
