@@ -1000,29 +1000,6 @@ angular.module('bsis')
       }
     };
 
-    $scope.donorClinicTableParams = new ngTableParams({
-      page: 1,            // show first page
-      count: 8,          // count per page
-      filter: {},
-      sorting: {}
-    },
-    {
-      defaultSort: 'asc',
-      counts: [], // hide page counts control
-      total: data.length, // length of data
-      getData: function ($defer, params) {
-        var filteredData = params.filter() ?
-          $filter('filter')(data, params.filter()) : data;
-        var orderedData = params.sorting() ?
-          $filter('orderBy')(filteredData, params.orderBy()) : data;
-        params.total(orderedData.length); // set total for pagination
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      }
-    });
-
-    $scope.$watch("data", function () {
-      $timeout(function(){ $scope.donorClinicTableParams.reload(); });
-    });
 
     $scope.packTypeFilter = function(column) {
       var def = $q.defer();
@@ -1042,6 +1019,7 @@ angular.module('bsis')
       $scope.format = DATEFORMAT;
       $scope.initDate = '';
       $scope.calIcon = 'fa-calendar';
+      $scope.init();
 
       $scope.donationBatchDateOpen = false;
       $scope.donationBatchView = 'viewDonationBatch';
@@ -1095,10 +1073,12 @@ angular.module('bsis')
 
       $scope.$watch('donation.donorNumber', function() {
         $scope.donorSummaryLoading = true;
-        DonorService.getDonorSummaries($scope.donation.donorNumber, function(donorSummary) {
-          $scope.donorSummary = donorSummary;
-          $scope.donorSummaryLoading = false;
-        });
+        if ($scope.donation.donorNumber) {
+          DonorService.getDonorSummaries($scope.donation.donorNumber, function(donorSummary) {
+            $scope.donorSummary = donorSummary;
+            $scope.donorSummaryLoading = false;
+          });
+        }
       });
 
       // set initial bleed times
