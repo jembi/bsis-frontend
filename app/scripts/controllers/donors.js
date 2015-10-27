@@ -1072,7 +1072,7 @@ angular.module('bsis')
 
 
     $scope.onRowClick = function (row) {
-      $scope.viewDonationSummary(row.donorIdentificationNumber);
+      $scope.viewDonationSummary(row.entity.donationIdentificationNumber);
     };
 
     $scope.viewDonationSummary = function (din) {
