@@ -1035,6 +1035,7 @@ angular.module('bsis')
           if (donationBatch.permissions) {
             donationBatch.permissions = response.permissions;
           }
+          donationBatch.isClosed = response.isClosed;
         });
       } else {
         DonorService.updateDonationBatch(donationBatch, function(response) {
