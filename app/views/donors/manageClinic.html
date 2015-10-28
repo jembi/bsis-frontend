@@ -3,7 +3,6 @@
     Manage Donation Batch
   </span> 
 
-{{message}}
   <hr/>
 
   <div class = "h4"> 
@@ -32,7 +31,7 @@
 
       <!-- Edit donor actions -->
       <div has-permission="{{permissions.EDIT_DONATION_BATCH}}" ng-hide="confirmDelete || confirmClose || confirmReopen" style="display:inline;">
-        <em><a href="" type="button" class="btn btn-link" ng-click="editableForm.$show(); confirmEdit = true" ng-hide="confirmEdit">Edit</a></em>
+        <em><a href="" type="button" class="btn btn-link" ng-click="editableForm.$show(); confirmEdit = true" ng-hide="confirmEdit" ng-disabled="!donationBatch.permissions.canEdit">Edit</a></em>
         <span ng-show="confirmEdit">
           <em>
             <button type="submit" class="btn btn-link text-success" ng-disabled="editableForm.$waiting">Save</button>
