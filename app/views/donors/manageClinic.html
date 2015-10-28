@@ -45,7 +45,7 @@
         <em><a href="" type="button" class="btn btn-link" ng-click="confirmClose = true" ng-hide="confirmClose" ng-disabled="!donationBatch.permissions.canClose">Close Batch</a></em>
         <span ng-show="confirmClose">
           <em>
-            <a href="" type="submit" class="btn btn-link text-success" ng-click="closeDonationBatch(donationBatch); confirmClose = false">Save</a>
+            <a href="" type="submit" class="btn btn-link text-success" ng-click="closeDonationBatch(donationBatch); confirmClose = false">Close</a>
             <a href="" type="button" class="btn btn-link text-muted" ng-click="confirmClose = false">Cancel</a>
           </em>
         </span>
@@ -56,7 +56,7 @@
         <em><a href="" type="button" class="btn btn-link" ng-click="editableForm.$show(); confirmReopen = true" ng-hide="confirmReopen" ng-disabled="!donationBatch.permissions.canReopen">Reopen Batch</a></em>
         <span ng-show="confirmReopen">
           <em>
-            <button type="submit" class="btn btn-link text-success" ng-disabled="editableForm.$waiting">Save</button>
+            <button type="submit" class="btn btn-link text-success" ng-disabled="editableForm.$waiting">Reopen</button>
             <a href="" type="button" class="btn btn-link text-muted" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel(); confirmReopen = false">Cancel</a>
           </em>
         </span>
