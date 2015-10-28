@@ -279,6 +279,7 @@ angular.module('bsis')
         updateDonationBatch = updateDonationBatch.donationBatch;
 
         updateDonationBatch.isClosed = true;
+        updateDonationBatch.venue = updateDonationBatch.venue.id;
 
         Api.DonationBatches.update({id:donationBatch.id}, updateDonationBatch, function(data) {
          response(data.donationBatch);
