@@ -525,6 +525,7 @@ angular.module('bsis')
           $scope.getDonorOverview();
 
           $scope.addingDonation = false;
+
         }, function (err) {
           $scope.err = err;
           $scope.addDonationSuccess = false;
@@ -1131,6 +1132,7 @@ angular.module('bsis')
             $scope.submitted = '';
             $scope.err = {};
             $scope.addingDonation = false;
+            $location.path('manageClinic/' + $routeParams.id).search({reload: true});
           },
           function (err) {
 
