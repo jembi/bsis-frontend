@@ -1025,23 +1025,37 @@ angular.module('bsis')
       $scope.initDate = '';
       $scope.calIcon = 'fa-calendar';
 
-      $scope.donationBatchDateOpen = false;
       $scope.donationBatchView = 'viewDonationBatch';
 
     };
 
-    $scope.closeDonationBatchCheck = function(donationBatch){
-      $scope.donationBatchToClose = donationBatch.id;
-    };
-
-    $scope.closeDonationBatchCancel = function(){
-      $scope.donationBatchToClose = '';
+    $scope.updateDonationBatch = function(donationBatch, reopen) {
+      if (reopen) {
+        DonorService.reopenDonationBatch(donationBatch, function(response) {
+          if (donationBatch.permissions) {
+            donationBatch.permissions = response.permissions;
+          }
+        });
+      } else {
+        DonorService.updateDonationBatch(donationBatch, function(response) {
+          if (donationBatch.permissions) {
+            donationBatch.permissions = response.permissions;
+          }
+        });
+      }
     };
 
     $scope.closeDonationBatch = function (donationBatch){
       DonorService.closeDonationBatch(donationBatch, function(response){
         if (response !== false){
-          $scope.donationBatchToClose = '';
+          $location.path("/manageDonationBatches");
+        }
+      });
+    };
+
+    $scope.deleteDonationBatch = function (donationBatchId){
+      DonorService.deleteDonationBatch(donationBatchId, function(response){
+        if (response !== false){
           $location.path("/manageDonationBatches");
         }
         else{
@@ -1050,7 +1064,6 @@ angular.module('bsis')
       });
 
     };
-
 
 
     $scope.onRowClick = function (row) {
