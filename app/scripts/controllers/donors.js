@@ -1202,11 +1202,19 @@ angular.module('bsis')
       var max = $scope.pulseMax;
 
       if (data < min) {
-        return "Pulse should be greater than " + min;
+        $scope.clearError('pulse');
+        $scope.raiseError('pulse',  'Pulse should be greater than ' + min);
+        return ' ';
+      } else {
+        $scope.clearError('pulse');
       }
 
       if (data > max) {
-        return "Pulse should be less than " + max;
+        $scope.clearError('pulse');
+        $scope.raiseError('pulse', 'Pulse should be less than ' + max);
+        return ' ';
+      } else {
+        $scope.clearError('pulse');
       }
     };
 
@@ -1216,11 +1224,19 @@ angular.module('bsis')
       var max = $scope.hbMax;
 
       if (data < min) {
-        return "Hb should be greater than " + min;
+        $scope.clearError('hb');
+        $scope.raiseError('hb',  'Haemoglobin count should be greater than ' + min);
+        return ' ';
+      } else {
+        $scope.clearError('hb');
       }
 
       if (data > max) {
-        return "Hb should be less than " + max;
+        $scope.clearError('hb');
+        $scope.raiseError('hb', 'Haemoglobin count should be less than ' + max);
+        return ' ';
+      } else {
+        $scope.clearError('hbMax');
       }
     };
 
@@ -1230,11 +1246,19 @@ angular.module('bsis')
       var max = $scope.bpSystolicMax;
 
       if (data < min) {
-        return "BP Systolic should be greater than " + min;
+        $scope.clearError('bpSystolic');
+        $scope.raiseError('bpSystolic',  'BP Systolic should be more than ' + min);
+        return ' ';
+      } else {
+        $scope.clearError('bpSystolic');
       }
 
       if (data > max) {
-        return "BP Systolic should be less than " + max;
+        $scope.clearError('bpSystolic');
+        $scope.raiseError('bpSystolic', 'BP Systolic should be less than ' + max);
+        return ' ';
+      } else {
+        $scope.clearError('bpSystolic');
       }
     };
 
@@ -1242,28 +1266,80 @@ angular.module('bsis')
       data = parseFloat(data);
       var min = $scope.bpDiastolicMin;
       var max = $scope.bpDiastolicMax;
+
       if (data < min) {
-        return "BP Diastolic should be greater than " + min;
+        $scope.clearError('bpDiastolic');
+        $scope.raiseError('bpDiastolic',   "BP Diastolic should be greater than " + min);
+        return ' ';
+      } else {
+        $scope.clearError('bpDiastolic');
       }
 
       if (data > max) {
-        return "BP Diastolic should be less than " + max;
+        $scope.clearError('bpDiastolic');
+        $scope.raiseError('bpDiastolic', "BP Diastolic should be less than " + max);
+        return ' ';
+      } else {
+        $scope.clearError('bpDiastolic');
       }
     };
 
     $scope.checkWeight = function(data) {
       data = parseFloat(data);
+
       var min = $scope.weightMin;
       var max = $scope.weightMax;
+
       if (data < min) {
-        return "Weight should be greater than " + min;
+        $scope.clearError('weight');
+        $scope.raiseError('weight',  'Weight should be greater than ' + min);
+        return ' ';
+      } else {
+        $scope.clearError('weight');
       }
 
       if (data > max) {
-        return "Weight should be less than " + max;
+        $scope.clearError('weight');
+        $scope.raiseError('weight', 'Weight should be less than ' + max);
+        return ' ';
+      } else {
+        $scope.clearError('weight');
       }
     };
 
+    $scope.close = function () {
+
+    };
+
+    $scope.raiseError = function (errorName, errorMessage) {
+      $scope.formErrors.push(
+        {
+          name : errorName,
+          error: errorMessage
+        }
+      );
+    };
+
+    $scope.clearError = function (errorName) {
+      $scope.formErrors = $scope.formErrors.filter(function( obj ) {
+        return obj.name !== errorName;
+      });
+    };
+
+    $scope.formErrors = [];
+
+    $scope.checkBleedTimes = function(data) {
+
+      if (new Date(data.bleedEndTime) < new Date(data.bleedStartTime)){
+        $scope.formErrors.push(
+          {
+            name : 'bleedStartTime',
+            error: 'Bleed Start time cannot be after Bleed end time'
+          }
+        );
+        return ' ';
+      }
+    };
   })
 
 ;
