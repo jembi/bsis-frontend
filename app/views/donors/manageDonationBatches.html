@@ -63,7 +63,7 @@
 
                 <div class="form-group"> 
                   <div class="col-sm-offset-1 col-sm-4">
-                    <button class="btn btn-primary" type="submit">Add Donation Batch</button>
+                    <button class="btn btn-primary" type="submit" ng-disabled="addingDonationBatch">{{addingDonationBatch ? "Adding..." : "Add Donation Batch"}}</button>
                     <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
                   </div>
                 </div>

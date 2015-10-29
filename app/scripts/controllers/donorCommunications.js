@@ -163,7 +163,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
       };
     },
 
-    onRegisterApi: function(gridApi){ 
+    onRegisterApi: function(gridApi) { 
       $scope.gridApi = gridApi;
     }
   };
@@ -184,10 +184,13 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
 
     $location.search(angular.extend({}, search, {search: true}));
 
+    $scope.searching = true;
     DonorService.findDonorListDonors(search, function(res) {
       $scope.gridOptions.data = res;
+      $scope.searching = false;
     }, function(err) {
       $scope.error.message = err.userMessage;
+      $scope.searching = false;
     });
   };
 
@@ -213,11 +216,10 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
     $scope.onSearch();
   }
 
-  $scope.export = function(format){
-    if(format === 'pdf'){
+  $scope.export = function(format) {
+    if (format === 'pdf') {
       $scope.gridApi.exporter.pdfExport('all', 'all');
-    }
-    else if (format === 'csv'){
+    } else if (format === 'csv') {
       $scope.gridApi.exporter.csvExport('all', 'all');
     }
   };

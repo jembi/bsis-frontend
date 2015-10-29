@@ -26,10 +26,13 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
       notes: $scope.postDonationCounselling.notes
     };
 
+    $scope.updatingCounselling = true;
     PostDonationCounsellingService.updatePostDonationCounselling(update, function() {
       $scope.goBack();
+      $scope.updatingCounselling = false;
     }, function(err) {
       console.error(err);
+      $scope.updatingCounselling = false;
     });
   };
 

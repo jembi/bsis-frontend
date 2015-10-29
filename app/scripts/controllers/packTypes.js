@@ -131,6 +131,7 @@ angular.module('bsis')
         delete packType.componentType;
       }
 
+      $scope.savingPackType = true;
       PackTypesService.addPackType(packType, function () {
         $scope.go('/packTypes');
       }, function(err) {
@@ -141,6 +142,7 @@ angular.module('bsis')
             'type.countAsDonation': err['type.countAsDonation']
           }
         };
+        $scope.savingPackType = false;
       });
     };
 
@@ -168,6 +170,7 @@ angular.module('bsis')
         delete packType.componentType;
       }
 
+      $scope.savingPackType = true;
       PackTypesService.updatePackType(packType, function () {
         $scope.go('/packTypes');
       }, function(err) {
@@ -178,6 +181,7 @@ angular.module('bsis')
             'type.countAsDonation': err['type.countAsDonation']
           }
         };
+        $scope.savingPackType = false;
       });
     };
 
