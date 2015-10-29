@@ -353,7 +353,7 @@ angular.module('bsis')
       $timeout(function(){ $scope.testSamplesTableParams.reload(); });
     });
 
-    $scope.closeTestBatch = function (testBatch){
+    $scope.closeTestBatch = function (testBatch) {
 
       // TODO: Confirmation dialog
 
@@ -368,13 +368,51 @@ angular.module('bsis')
       
     };
 
-    $scope.releaseTestBatch = function (testBatch){
+    $scope.reopenTestBatch = function (testBatch) {
+
+      // TODO: Confirmation dialog
+
+      TestingService.reopenTestBatch(testBatch, function(response){
+        if (response !== false){
+          if (testBatch.permissions) {
+            testBatch.permissions = response.permissions;
+            testBatch.status = response.status;
+          }
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
+      
+    };
+
+    $scope.deleteTestBatch = function (testBatchId) {
+
+      // TODO: Confirmation dialog
+
+      TestingService.deleteTestBatch(testBatchId, function(response){
+        if (response !== false){
+          $location.path("/manageTestBatch");
+        }
+        else{
+          // TODO: handle case where response == false
+        }
+      });
+      
+    };
+
+
+    $scope.releaseTestBatch = function (testBatch)  {
 
       // TODO: Confirmation dialog
 
       TestingService.releaseTestBatch(testBatch, function(response) {
         $scope.testBatch = response;
       }, console.error);
+    };
+
+    $scope.updateTestBatch = function (testBatch) {
+      $scope.message = "hello";
     };
 
   })

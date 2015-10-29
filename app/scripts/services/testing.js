@@ -176,7 +176,21 @@ angular.module('bsis')
 
       });
     },
+    reopenTestBatch: function (testBatch, response){
+      var getTestBatch = Api.TestBatches.get({id:testBatch.id}, function() {
 
+        var updateTestBatch = {};
+        updateTestBatch.id = testBatch.id;
+        updateTestBatch.status = "OPEN";
+
+        Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
+         response(data);
+        }, function (){
+          response(false);
+        }); 
+
+      });
+    },
     releaseTestBatch: function(testBatch, onSuccess, onError) {
 
       var updateTestBatch = {
@@ -186,7 +200,9 @@ angular.module('bsis')
 
       Api.TestBatches.update({id: testBatch.id}, updateTestBatch, onSuccess, onError); 
     },
-
+    deleteTestBatch: function(testBatchId, onSuccess, onError) {
+      Api.TestBatches.delete({id: testBatchId}, onSuccess, onError);
+    },
     getRecentTestBatches: function (response) {
       Api.RecentTestBatches.get({count:10}, function (testBatches) {
         response(testBatches);
