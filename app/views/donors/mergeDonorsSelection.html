@@ -12,6 +12,9 @@
                 <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
                     {{donor.donorNumber}}
                 </td>
+                <td data-title="'Title'" header-class="text-left" sortable="'title'">
+                    {{donor.title}}
+                </td>
                 <td data-title="'First Name'" header-class="text-left" sortable="'firstName'">
                     {{donor.firstName}}
                 </td>
@@ -34,8 +37,14 @@
                     {{donor.venue.name}}
                 </td>
                 <td class="form-inline" data-title="'Merge?'" header-class="text-left" class="text-center" ng-click="$event.stopPropagation()">
-                  <label>Yes <input type="radio" name="merge{{donor.donorNumber}}" ng-value="true" value="true" ng-model="donor.merge" ng-click="changeSelection(donor.merge);" required></label>
-                  <label>No <input type="radio" name="merge{{donor.donorNumber}}" ng-value="false" value="false" ng-model="donor.merge" ng-click="changeSelection(donor.merge);" required></label>
+                  <div class="radio" style="display:inline-block;">
+                    <input id="mergeYes{{donor.donorNumber}}" type="radio" name="merge{{donor.donorNumber}}" ng-value="true" value="true" ng-model="donor.merge" ng-click="changeSelection(donor.merge);" required>
+                    <label for="mergeYes{{donor.donorNumber}}">Yes</label> 
+                  </div> 
+                  <div class="radio" style="display:inline-block;">
+                    <input id="mergeNo{{donor.donorNumber}}" type="radio" name="merge{{donor.donorNumber}}" ng-value="false" value="false" ng-model="donor.merge" ng-click="changeSelection(donor.merge);" required>
+                    <label for="mergeNo{{donor.donorNumber}}">No</label> 
+                  </div>
                   <small class="error" ng-show="(mergeDonorForm.merge{{donor.donorNumber}}.$invalid && (mergeDonorForm.merge{{donor.donorNumber}}.$dirty || invalid))">
                     <br/>This cannot be empty
                   </small>

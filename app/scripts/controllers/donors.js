@@ -1002,8 +1002,7 @@ angular.module('bsis')
             mergedDonor.bloodRh = "";
           } else {
             // show them the mismatch message
-            $scope.message = "<b>The selected donors have different blood types.</b><p>Please either change the selected donors, if there has been a mistake,"+
-            " or continue and clear the merged donor's blood typing results - they will be treated as a first time donor.</p>";
+            $scope.message = "The selected donors do not have the same blood group. If you continue, the merged donor will not be assigned a blood group, and will be considered a first time donor.";
             $scope.invalid = true;
             $scope.hasMessage = true;
             $scope.bloodTypingMismatchCheck = true;
