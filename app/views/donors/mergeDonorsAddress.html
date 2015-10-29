@@ -5,13 +5,13 @@
               <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
                   {{donor.donorNumber}}
               </td>
-              <td data-title="'Preferred Address Type'" header-class="text-left" sortable="'preferredAddressType'">
+              <td data-title="'Preferred Address Type'" header-class="text-left" sortable="'preferredAddressType'" class="form-inline">
                 <div class="radio" ng-if="donor.preferredAddressType != null">
                   <input id="preferredAddressType{{donor.donorNumber}}" type="radio" name="preferredAddressType" ng-model="mergedDonor.preferredAddressType" ng-value="donor.preferredAddressType" required>
                   <label for="preferredAddressType{{donor.donorNumber}}">{{donor.preferredAddressType.preferredAddressType}}</label>
                 </div>
               </td>
-              <td data-title="'Home'" header-class="text-left" sortable="'homeAddress'">
+              <td data-title="'Home'" header-class="text-left" sortable="'homeAddress'" class="form-inline">
                 <div class="radio" ng-if="donor.address.homeAddressLine1 != null && donor.address.homeAddressLine1 != ''">
                   <input id="homeAddressLine1{{donor.donorNumber}}" type="radio" name="homeAddress" ng-model="mergedDonor.homeAddress" ng-value="donor.address.id" required>
                   <label for="homeAddressLine1{{donor.donorNumber}}">
@@ -26,7 +26,7 @@
                   </label>
                 </div>
               </td>
-              <td data-title="'Postal'" header-class="text-left" sortable="'postalAddress'">
+              <td data-title="'Postal'" header-class="text-left" sortable="'postalAddress'" class="form-inline">
                 <div class="radio" ng-if="donor.address.postalAddressLine1 != null && donor.address.postalAddressLine1 != ''">
                   <input id="postalAddressLine1{{donor.donorNumber}}" type="radio" name="postalAddress" ng-model="mergedDonor.postalAddress" ng-value="donor.address.id" required>
                   <label for="postalAddressLine1{{donor.donorNumber}}">
@@ -41,7 +41,7 @@
                   </label>
                 </div>
               </td>
-              <td data-title="'Work'" header-class="text-left" sortable="'workAddress'">
+              <td data-title="'Work'" header-class="text-left" sortable="'workAddress'" class="form-inline">
                 <div class="radio" ng-if="donor.address.workAddressLine1 != null && donor.address.workAddressLine1 != ''">
                   <input id="workAddressLine1{{donor.donorNumber}}" type="radio" name="workAddress" ng-model="mergedDonor.workAddress" ng-value="donor.address.id" required>
                   <label for="workAddressLine1{{donor.donorNumber}}">
@@ -63,7 +63,7 @@
               <!-- row for the "None of the Above" radio buttons and error messages -->
               <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
               </td>
-              <td data-title="'Preferred Address Type'" header-class="text-left" sortable="'preferredAddressType'">
+              <td data-title="'Preferred Address Type'" header-class="text-left" sortable="'preferredAddressType'" class="form-inline">
                 <div class="radio" ng-if="donorFields['preferredAddressType']">
                     <input id="preferredAddressType" type="radio" name="preferredAddressType" ng-model="mergedDonor.preferredAddressType" value="none" required>
                     <label for="preferredAddressType">None of the above</label>
@@ -72,7 +72,7 @@
                     </small>
                 </div>
               </td>
-              <td data-title="'Home'" header-class="text-left" sortable="'homeAddress'">
+              <td data-title="'Home'" header-class="text-left" sortable="'homeAddress'" class="form-inline">
                 <div class="radio" ng-if="donorFields['homeAddress']">
                     <input id="homeAddress" type="radio" name="homeAddress" ng-model="mergedDonor.homeAddress" value="none" required>
                     <label for="homeAddress">None of the above</label>
@@ -81,7 +81,7 @@
                     </small>
                 </div>
               </td>
-              <td data-title="'Postal'" header-class="text-left" sortable="'postalAddress'">
+              <td data-title="'Postal'" header-class="text-left" sortable="'postalAddress'" class="form-inline">
                 <div class="radio" ng-if="donorFields['postalAddress']">
                     <input id="postalAddress" type="radio" name="postalAddress" ng-model="mergedDonor.postalAddress" value="none" required>
                     <label for="postalAddress">None of the above</label>
@@ -90,7 +90,7 @@
                     </small>
                 </div>
               </td>
-              <td data-title="'Work'" header-class="text-left" sortable="'workAddress'">
+              <td data-title="'Work'" header-class="text-left" sortable="'workAddress'" class="form-inline">
                 <div class="radio" ng-if="donorFields['workAddress']">
                     <input id="workAddress" type="radio" name="workAddress" ng-model="mergedDonor.workAddress" value="none" required>
                     <label for="workAddress">None of the above</label>
