@@ -525,6 +525,7 @@ angular.module('bsis')
           $scope.getDonorOverview();
 
           $scope.addingDonation = false;
+
         }, function (err) {
           $scope.err = err;
           $scope.addDonationSuccess = false;
@@ -1000,29 +1001,6 @@ angular.module('bsis')
       }
     };
 
-    $scope.donorClinicTableParams = new ngTableParams({
-      page: 1,            // show first page
-      count: 8,          // count per page
-      filter: {},
-      sorting: {}
-    },
-    {
-      defaultSort: 'asc',
-      counts: [], // hide page counts control
-      total: data.length, // length of data
-      getData: function ($defer, params) {
-        var filteredData = params.filter() ?
-          $filter('filter')(data, params.filter()) : data;
-        var orderedData = params.sorting() ?
-          $filter('orderBy')(filteredData, params.orderBy()) : data;
-        params.total(orderedData.length); // set total for pagination
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      }
-    });
-
-    $scope.$watch("data", function () {
-      $timeout(function(){ $scope.donorClinicTableParams.reload(); });
-    });
 
     $scope.packTypeFilter = function(column) {
       var def = $q.defer();
@@ -1042,6 +1020,7 @@ angular.module('bsis')
       $scope.format = DATEFORMAT;
       $scope.initDate = '';
       $scope.calIcon = 'fa-calendar';
+      $scope.init();
 
       $scope.donationBatchDateOpen = false;
       $scope.donationBatchView = 'viewDonationBatch';
@@ -1072,11 +1051,11 @@ angular.module('bsis')
 
 
     $scope.onRowClick = function (row) {
-      $scope.viewDonationSummary(row.donorIdentificationNumber);
+      $scope.viewDonationSummary(row.entity);
     };
 
-    $scope.viewDonationSummary = function (din) {
-      $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
+    $scope.viewDonationSummary = function (donation) {
+      $scope.donation = donation;
       $scope.donationBatchView = 'viewDonationSummary';
 
       DonorService.getDonationsFormFields(function(response) {
@@ -1095,10 +1074,12 @@ angular.module('bsis')
 
       $scope.$watch('donation.donorNumber', function() {
         $scope.donorSummaryLoading = true;
-        DonorService.getDonorSummaries($scope.donation.donorNumber, function(donorSummary) {
-          $scope.donorSummary = donorSummary;
-          $scope.donorSummaryLoading = false;
-        });
+        if ($scope.donation.donorNumber) {
+          DonorService.getDonorSummaries($scope.donation.donorNumber, function(donorSummary) {
+            $scope.donorSummary = donorSummary;
+            $scope.donorSummaryLoading = false;
+          });
+        }
       });
 
       // set initial bleed times
@@ -1147,10 +1128,10 @@ angular.module('bsis')
 
             $scope.donationBatch = response;
             $scope.gridOptions.data = $scope.donationBatch.donations;
-            $scope.data = data;
             $scope.submitted = '';
             $scope.err = {};
             $scope.addingDonation = false;
+
           },
           function (err) {
 
