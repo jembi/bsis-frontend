@@ -43,6 +43,12 @@
             <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DONOR) > -1)"
                 ng-include="'views/donors/findDonor.html'">
             </div>
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.VIEW_DUPLICATE_DONORS) > -1)"
+                ng-include="'views/donors/duplicateDonors.html'">
+            </div>
+            <div ng-if="(sessionUserPermissions.indexOf(permissions.MERGE_DONORS) > -1)"
+                ng-include="'views/donors/manageDuplicateDonors.html'">
+            </div>
           </div>
         </div>
 

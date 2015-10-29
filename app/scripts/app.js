@@ -81,13 +81,13 @@ var app = angular.module('bsis', [
       .when('/duplicateDonors', {
         templateUrl : 'views/donors.html',
         controller  : 'DonorsDuplicateCtrl',
-        permission: PERMISSIONS.VIEW_DONOR,
+        permission: PERMISSIONS.VIEW_DUPLICATE_DONORS,
         enabled : UI.DONORS_TAB_ENABLED
       })
       .when('/manageDuplicateDonors', {
         templateUrl : 'views/donors.html',
         controller  : 'ManageDonorsDuplicateCtrl',
-        permission: PERMISSIONS.VIEW_DONOR,
+        permission: PERMISSIONS.MERGE_DONORS,
         enabled : UI.DONORS_TAB_ENABLED
       })
       .when('/addDonation', {

@@ -11,7 +11,7 @@
     </li>
     <li class="disabled" has-permission="{{permissions.VIEW_DONOR}}"><span>DONOR RECORDS</span></li>
     <li ng-class="{current: isCurrent('/findDonor')}" has-permission="{{permissions.VIEW_DONOR}}"><a href="#/findDonor">Manage Donors</a></li>
-    <li ng-class="{current: isCurrent('/duplicateDonors') || isCurrent('/manageDuplicateDonors')}" has-permission="{{permissions.VIEW_DONOR}}"><a href="#/duplicateDonors">Duplicate Donors</a></li>
+    <li ng-class="{current: isCurrent('/duplicateDonors') || isCurrent('/manageDuplicateDonors')}" has-permission="{{permissions.VIEW_DUPLICATE_DONORS}}"><a href="#/duplicateDonors">Duplicate Donors</a></li>
     <li class="disabled" has-permission="{{permissions.VIEW_DONATION_BATCH}}"><span>DONOR CLINIC</span></li>
     <li ng-class="{current: isCurrent('/manageDonationBatches')}" has-permission="{{permissions.VIEW_DONATION_BATCH}}"><a href="#/manageDonationBatches">Manage Clinics</a></li>
     <li ng-class="{current: isCurrent('/locations')}" has-permission="{{permissions.MANAGE_DONATION_SITES}}"><a href="#/locations">Manage Venues</a></li>

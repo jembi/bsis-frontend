@@ -21,6 +21,8 @@ angular.module('bsis')
   EDIT_DONOR_CODE: 'Edit Donor Code',
   VOID_DONOR_CODE: 'Void Donor Code',
   VIEW_DONOR_CODE_GROUP: 'View Donor Code Group',
+  VIEW_DUPLICATE_DONORS: 'View Duplicate Donors',
+  MERGE_DONORS: 'Merge Donors',
 
   // Donation Permissions
   ADD_DONATION: 'Add Donation',
