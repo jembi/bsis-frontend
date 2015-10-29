@@ -6,37 +6,39 @@
                   {{donor.donorNumber}}
               </td>
               <td data-title="'Identifier'" header-class="text-left" sortable="'idNumber'">
-                <div ng-if="donor.idNumber != null && donor.idNumber != ''">
-                  <input type="radio" name="idNumber" ng-model="mergedDonor.idNumberId" ng-value="donor.id" required>
-                  {{donor.idType.idType}}: {{donor.idNumber}}
+                <div class="radio" ng-if="donor.idNumber != null && donor.idNumber != ''">
+                  <input id="idNumber{{donor.donorNumber}}" type="radio" name="idNumber" ng-model="mergedDonor.idNumberId" ng-value="donor.id" required>
+                  <label for="idNumber{{donor.donorNumber}}">{{donor.idType.idType}}: {{donor.idNumber}}</label>
                 </div>
               </td>
               <td data-title="'Title'" header-class="text-left" sortable="'title'">
-                <div ng-if="donor.title != null && donor.title != ''">
-                  <input type="radio" name="title" ng-model="mergedDonor.title" ng-value="donor.title" required>
-                  {{donor.title}}
+                <div class="radio" ng-if="donor.title != null && donor.title != ''">
+                  <input id="title{{donor.donorNumber}}" type="radio" name="title" ng-model="mergedDonor.title" ng-value="donor.title" required>
+                  <label for="title{{donor.donorNumber}}">{{donor.title}}</label>
                 </div>
               </td>
               <td data-title="'Calling Name'" header-class="text-left" sortable="'callingName'">
-                <div ng-if="donor.callingName != null && donor.callingName != ''">
-                  <input type="radio" name="callingName" ng-model="mergedDonor.callingName" ng-value="donor.callingName" required>
-                  {{donor.callingName}}
+                <div class="radio" ng-if="donor.callingName != null && donor.callingName != ''">
+                  <input id="callingName{{donor.donorNumber}}" type="radio" name="callingName" ng-model="mergedDonor.callingName" ng-value="donor.callingName" required>
+                  <label for="callingName{{donor.donorNumber}}">{{donor.callingName}}</label>
                 </div>
               </td>
               <td data-title="'PreferredLanguage'" header-class="text-left" sortable="'preferredLanguage'">
-                <div ng-if="donor.preferredLanguage != null && donor.preferredLanguage != ''">
-                  <input type="radio" name="preferredLanguage" ng-model="mergedDonor.preferredLanguage" ng-value="donor.preferredLanguage" required>
-                  {{donor.preferredLanguage.preferredLanguage}}
+                <div class="radio" ng-if="donor.preferredLanguage != null && donor.preferredLanguage != ''">
+                  <input id="preferredLanguage{{donor.donorNumber}}" type="radio" name="preferredLanguage" ng-model="mergedDonor.preferredLanguage" ng-value="donor.preferredLanguage" required>
+                  <label for="preferredLanguage{{donor.donorNumber}}">{{donor.preferredLanguage.preferredLanguage}}</label>
                 </div>
               </td>
               <td data-title="'Venue'" header-class="text-left" sortable="'venue'">
-                <input type="radio" name="venue" ng-model="mergedDonor.venue" ng-value="donor.venue" required>
-                {{donor.venue.name}}
+                <div class="radio">
+                  <input id="venue{{donor.donorNumber}}" type="radio" name="venue" ng-model="mergedDonor.venue" ng-value="donor.venue" required>
+                  <label for="venue{{donor.donorNumber}}">{{donor.venue.name}}</label>
+                </div>
               </td>
               <td data-title="'Comments'" header-class="text-left" sortable="'notes'">
-                <div ng-if="donor.notes != null && donor.notes != ''">
-                  <input type="checkbox" name="notes" ng-model="mergedDonor.noteSelection[donor.id]" ng-value="donor.notes" >
-                  {{donor.notes}}
+                <div class="radio" ng-if="donor.notes != null && donor.notes != ''">
+                  <input id="notes{{donor.donorNumber}}" type="checkbox" name="notes" ng-model="mergedDonor.noteSelection[donor.id]" ng-value="donor.notes" >
+                  <label for="notes{{donor.donorNumber}}">{{donor.notes}}</label>
                 </div>
               </td>
             </tr>
@@ -47,27 +49,27 @@
               <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
               </td>
               <td data-title="'Identifier'" header-class="text-left" sortable="'idNumber'">
-                <div ng-if="donorFields['idNumber']">
-                  <input type="radio" name="idNumber" ng-model="mergedDonor.idNumberId" value="none" required>
-                  None of the above
+                <div class="radio" ng-if="donorFields['idNumber']">
+                  <input id="idNumber" type="radio" name="idNumber" ng-model="mergedDonor.idNumberId" value="none" required>
+                  <label for="idNumber">None of the above</label>
                   <small class="error" ng-show="(mergeDonorForm.idNumber.$invalid && (mergeDonorForm.idNumber.$dirty || invalid))">
                     <br/>Please select one
                   </small>
                 </div>
               </td>
               <td data-title="'Title'" header-class="text-left" sortable="'title'">
-                <div ng-if="donorFields['title']">
-                  <input type="radio" name="title" ng-model="mergedDonor.title" value="none" required>
-                  None of the above
+                <div class="radio" ng-if="donorFields['title']">
+                  <input id="title" type="radio" name="title" ng-model="mergedDonor.title" value="none" required>
+                  <label for="title">None of the above</label>
                   <small class="error" ng-show="(mergeDonorForm.title.$invalid && (mergeDonorForm.title.$dirty || invalid))">
                     <br/>Please select one
                   </small>
                 </div>
               </td>
               <td data-title="'Calling Name'" header-class="text-left" sortable="'callingName'">
-                <div ng-if="donorFields['callingName']">
-                  <input type="radio" name="callingName" ng-model="mergedDonor.callingName" value="none" required>
-                  None of the above
+                <div class="radio" ng-if="donorFields['callingName']">
+                  <input id="callingName" type="radio" name="callingName" ng-model="mergedDonor.callingName" value="none" required>
+                  <label for="callingName">None of the above</label>
                   <small class="error" ng-show="(mergeDonorForm.callingName.$invalid && (mergeDonorForm.callingName.$dirty || invalid))">
                     <br/>Please select one
                   </small>
