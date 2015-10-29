@@ -1051,11 +1051,11 @@ angular.module('bsis')
 
 
     $scope.onRowClick = function (row) {
-      $scope.viewDonationSummary(row.entity.donationIdentificationNumber);
+      $scope.viewDonationSummary(row.entity);
     };
 
-    $scope.viewDonationSummary = function (din) {
-      $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : din})[0];
+    $scope.viewDonationSummary = function (donation) {
+      $scope.donation = donation;
       $scope.donationBatchView = 'viewDonationSummary';
 
       DonorService.getDonationsFormFields(function(response) {
@@ -1128,11 +1128,10 @@ angular.module('bsis')
 
             $scope.donationBatch = response;
             $scope.gridOptions.data = $scope.donationBatch.donations;
-            $scope.data = data;
             $scope.submitted = '';
             $scope.err = {};
             $scope.addingDonation = false;
-            $location.path('manageClinic/' + $routeParams.id).search({reload: true});
+
           },
           function (err) {
 
