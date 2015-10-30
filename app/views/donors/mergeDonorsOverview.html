@@ -1,0 +1,96 @@
+        <p>Please select the correct donor information below:</p>
+        <table ng-table="manageSelectedDuplicateDonorTableParams" show-filter="false" class="table">
+          <tbody>
+            <tr ng-repeat="donor in $data">
+              <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+                  {{donor.donorNumber}}
+              </td>
+              <td data-title="'Identifier'" header-class="text-left" sortable="'idNumber'" class="form-inline">
+                <div class="radio" ng-if="donor.idNumber != null && donor.idNumber != ''">
+                  <input id="idNumber{{donor.donorNumber}}" type="radio" name="idNumber" ng-model="mergedDonor.idNumberId" ng-value="donor.id" required>
+                  <label for="idNumber{{donor.donorNumber}}">{{donor.idType.idType}}: {{donor.idNumber}}</label>
+                </div>
+              </td>
+              <td data-title="'Title'" header-class="text-left" sortable="'title'" class="form-inline">
+                <div class="radio" ng-if="donor.title != null && donor.title != ''">
+                  <input id="title{{donor.donorNumber}}" type="radio" name="title" ng-model="mergedDonor.title" ng-value="donor.title" required>
+                  <label for="title{{donor.donorNumber}}">{{donor.title}}</label>
+                </div>
+              </td>
+              <td data-title="'Calling Name'" header-class="text-left" sortable="'callingName'" class="form-inline">
+                <div class="radio" ng-if="donor.callingName != null && donor.callingName != ''">
+                  <input id="callingName{{donor.donorNumber}}" type="radio" name="callingName" ng-model="mergedDonor.callingName" ng-value="donor.callingName" required>
+                  <label for="callingName{{donor.donorNumber}}">{{donor.callingName}}</label>
+                </div>
+              </td>
+              <td data-title="'PreferredLanguage'" header-class="text-left" sortable="'preferredLanguage'" class="form-inline">
+                <div class="radio" ng-if="donor.preferredLanguage != null && donor.preferredLanguage != ''">
+                  <input id="preferredLanguage{{donor.donorNumber}}" type="radio" name="preferredLanguage" ng-model="mergedDonor.preferredLanguage" ng-value="donor.preferredLanguage" required>
+                  <label for="preferredLanguage{{donor.donorNumber}}">{{donor.preferredLanguage.preferredLanguage}}</label>
+                </div>
+              </td>
+              <td data-title="'Venue'" header-class="text-left" sortable="'venue'" class="form-inline">
+                <div class="radio">
+                  <input id="venue{{donor.donorNumber}}" type="radio" name="venue" ng-model="mergedDonor.venue" ng-value="donor.venue" required>
+                  <label for="venue{{donor.donorNumber}}">{{donor.venue.name}}</label>
+                </div>
+              </td>
+              <td data-title="'Comments'" header-class="text-left" sortable="'notes'" class="form-inline">
+                <div class="radio" ng-if="donor.notes != null && donor.notes != ''">
+                  <input id="notes{{donor.donorNumber}}" type="checkbox" name="notes" ng-model="mergedDonor.noteSelection[donor.id]" ng-value="donor.notes" >
+                  <label for="notes{{donor.donorNumber}}">{{donor.notes}}</label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <!-- row for the "None of the Above" radio buttons and error messages -->
+              <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+              </td>
+              <td data-title="'Identifier'" header-class="text-left" sortable="'idNumber'" class="form-inline">
+                <div class="radio" ng-if="donorFields['idNumber']">
+                  <input id="idNumber" type="radio" name="idNumber" ng-model="mergedDonor.idNumberId" value="none" required>
+                  <label for="idNumber">None of the above</label>
+                  <small class="error" ng-show="(mergeDonorForm.idNumber.$invalid && (mergeDonorForm.idNumber.$dirty || invalid))">
+                    <br/>Please select one
+                  </small>
+                </div>
+              </td>
+              <td data-title="'Title'" header-class="text-left" sortable="'title'" class="form-inline">
+                <div class="radio" ng-if="donorFields['title']">
+                  <input id="title" type="radio" name="title" ng-model="mergedDonor.title" value="none" required>
+                  <label for="title">None of the above</label>
+                  <small class="error" ng-show="(mergeDonorForm.title.$invalid && (mergeDonorForm.title.$dirty || invalid))">
+                    <br/>Please select one
+                  </small>
+                </div>
+              </td>
+              <td data-title="'Calling Name'" header-class="text-left" sortable="'callingName'" class="form-inline">
+                <div class="radio" ng-if="donorFields['callingName']">
+                  <input id="callingName" type="radio" name="callingName" ng-model="mergedDonor.callingName" value="none" required>
+                  <label for="callingName">None of the above</label>
+                  <small class="error" ng-show="(mergeDonorForm.callingName.$invalid && (mergeDonorForm.callingName.$dirty || invalid))">
+                    <br/>Please select one
+                  </small>
+                </div>
+              </td>
+              <td data-title="'PreferredLanguage'" header-class="text-left" sortable="'preferredLanguage'" class="form-inline">
+                <div ng-if="donorFields['preferredLanguage']">
+                  <small class="error" ng-show="(mergeDonorForm.preferredLanguage.$invalid && (mergeDonorForm.preferredLanguage.$dirty || invalid))">
+                    Please select one
+                  </small>
+                </div>
+              </td>
+              <td data-title="'Venue'" header-class="text-left" sortable="'venue'" class="form-inline">
+                <div ng-if="donorFields['venue']">
+                  <small class="error" ng-show="(mergeDonorForm.venue.$invalid && (mergeDonorForm.venue.$dirty || invalid))">
+                    Please select one
+                  </small>
+                </div>
+              </td>
+              <td data-title="'Comments'" header-class="text-left" sortable="'notes'">
+              </td>
+            </tr>
+          </tfoot>
+        </table>

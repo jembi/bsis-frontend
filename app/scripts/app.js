@@ -78,6 +78,18 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.ADD_DONOR,
         enabled : UI.DONORS_TAB_ENABLED
       })
+      .when('/duplicateDonors', {
+        templateUrl : 'views/donors.html',
+        controller  : 'DonorsDuplicateCtrl',
+        permission: PERMISSIONS.VIEW_DUPLICATE_DONORS,
+        enabled : UI.DONORS_TAB_ENABLED
+      })
+      .when('/manageDuplicateDonors', {
+        templateUrl : 'views/donors.html',
+        controller  : 'ManageDonorsDuplicateCtrl',
+        permission: PERMISSIONS.MERGE_DONORS,
+        enabled : UI.DONORS_TAB_ENABLED
+      })
       .when('/addDonation', {
         templateUrl : 'views/donors.html',
         controller  : 'AddDonationCtrl',
@@ -687,7 +699,7 @@ var app = angular.module('bsis', [
   /*  Custom directive to calculate age from birthDate
       example use: <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
   */
-  .directive('calculateAge', function() {
+  .directive('calculateAge', function($timeout) {
     return {
         restrict: 'EA',
         scope: {
@@ -695,20 +707,26 @@ var app = angular.module('bsis', [
             age: '=',
         },
         link: function ($scope) {
-          var age = '';
-          if($scope.dob === ''){
-            $scope.age = '';
+          function doCalculation() {
+            $timeout(function () {
+              var age = '';
+              if ($scope.dob === '') {
+                $scope.age = '';
+                doCalculation();
+              }
+              else {
+                var today = new Date();
+                var birthDate = new Date($scope.dob);
+                age = today.getFullYear() - birthDate.getFullYear();
+                var m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                  age--;
+                }
+                $scope.age = age;
+              }
+            }, 100);
           }
-          else{
-            var today = new Date();
-            var birthDate = new Date($scope.dob);
-            age = today.getFullYear() - birthDate.getFullYear();
-            var m = today.getMonth() - birthDate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
-            $scope.age = age;
-          }
+          doCalculation();
         }
     };
   })

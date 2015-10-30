@@ -6,6 +6,7 @@ angular.module('bsis')
   var donorObj = {};
   var donationBatchObj = {};
   var donorsObj = {};
+  var mergedDonor = {};
 
   return {
 
@@ -304,6 +305,46 @@ angular.module('bsis')
 
     deleteDonor: function(donorId, onSuccess, onError) {
       Api.Donors.delete({id: donorId}, onSuccess, onError);
+    },
+
+    findAllDonorDuplicates: function(response){
+      Api.AllDonorDuplicates.get({}, function (data) {
+        response(data);
+      }, function (){
+        response(false);
+      });
+    },
+
+    findDonorDuplicates: function(donorNumber, response){
+      Api.DonorDuplicates.get({donorNumber: donorNumber}, function (data) {
+        response(data);
+      }, function (){
+        response(false);
+      });
+    },
+
+    mergePreviewDonorsDuplicate: function(donorNumber, donors, onSuccess, onError) {
+      var duplicateDonors = new Api.DonorPreviewMergeDuplicates();
+      angular.copy(donors, duplicateDonors);
+      // save donation (POST /duplicates/merge/preview)
+      duplicateDonors.$save({donorNumber: donorNumber}, function(data) {
+        onSuccess(data);
+      }, function (err){
+        onError(err.data);
+      });
+    },
+
+    mergeDonorsDuplicate: function(donorNumber, donors, onSuccess, onError) {
+      // create $Resource object and assign donor values
+      var duplicateDonors = new Api.DonorMergeDuplicates();
+      angular.copy(donors, duplicateDonors);
+      // save donation (POST /duplicates/merge)
+      duplicateDonors.$save({donorNumber: donorNumber}, function(data) {
+        onSuccess(data.donor);
+      }, function (err){
+        onError(err.data);
+      });
     }
+
   };
 });

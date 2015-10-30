@@ -15,7 +15,7 @@
     "angular-route": "1.2.x",
     "angular-sanitize": "1.4.2",
     "angular-tooltips": "~0.1.13",
-    "angular-ui-grid": "~3.0.6",
+    "angular-ui-grid": "~3.0.7",
     "angular-ui-select": "0.12.1",
     "angular-xeditable": "0.1.9",
     "checklist-model": "~0.2.4",
