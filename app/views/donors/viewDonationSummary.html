@@ -21,7 +21,6 @@
 
 
   <div class="col-sm-10" style="height:100%;">
-    <alert ng-repeat="alert in formErrors" type="danger" close="$remove()">{{alert.error}}</alert>
     <table class="dash-table">
       <tbody>
         <tr>
@@ -57,6 +56,9 @@
                       {{donation.bleedEndTime | bsisTime }}
                     </span>
                   </td>
+                  <td>
+                    <span ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.bleedTime[0].error }}</span>
+                  </td>
                 </tr>
               </table>
             </fieldset>
@@ -82,14 +84,16 @@
           <td class="field">Pulse: </td>
           <td class="value">
             <span e-class="xeditable w50" editable-text="donation.donorPulse" e-id="donorPulse" onbeforesave="checkPulse($data)" e-name="donorPulse">{{donation.donorPulse}}</span>
-            <span for="donorPulse" ><small>{{pulseUnit}}</small></span>
+            <span for="donorPulse" >{{pulseUnit}}</span>
+            <span ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.pulse[0].error }}</span>
           </td>
         </tr>
         <tr >
           <td class="field">Hb: </td>
           <td class="value">
             <span ng-show="getBooleanValue('donation.hbNumericValue')" e-class="xeditable w50" editable-text="donation.haemoglobinCount" onbeforesave="checkHb($data)" e-name="haemoglobinCount">{{donation.haemoglobinCount}}</span>
-            <span for="haemoglobinCount"><small>{{hbUnit}}</small></span>
+            <span for="haemoglobinCount">{{hbUnit}}</span>
+            <span ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.hb[0].error }}</span>
             <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
             <span ng-show="getBooleanValue('donation.hbQualitativeValue')" editable-select="donation.haemoglobinLevel" e-name="haemoglobinLevel" e-ng-options="l.value as l.span for l in haemoglobinLevels" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase}}</span>
             <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> )</span>
@@ -101,19 +105,20 @@
             <table>
               <tr>
                 <td>
-                  <span e-class="xeditable w50" editable-text="donation.bloodPressureSystolic" onbeforesave="checkBpSystolic($data)" e-name="bloodPressureSystolic">{{donation.bloodPressureSystolic || '-'}}</span>
-                </td>
-                <td>
-                  <span class="w50" for="bloodPressureSystolic" style="float: left"><small>{{bpUnit}}</small></span>
+                  <span e-class="xeditable w50" editable-text="donation.bloodPressureSystolic" onbeforesave="checkBpSystolic($data)" e-name="bloodPressureSystolic">{{donation.bloodPressureSystolic}}</span>
+                  <span ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.bpSystolic[0].error }}</span>
                 </td>
                 <td>
                   /
                 </td>
                 <td>
-                  <span e-class="xeditable w50" editable-text="donation.bloodPressureDiastolic" onbeforesave="checkBpDiastolic($data)" e-name="bloodPressureDiastolic">{{donation.bloodPressureDiastolic || '-'}}</span>
+                  <span e-class="xeditable w50" editable-text="donation.bloodPressureDiastolic" onbeforesave="checkBpDiastolic($data)" e-name="bloodPressureDiastolic">{{donation.bloodPressureDiastolic}}</span>
                 </td>
                 <td>
-                  <span class="w50" for="bloodPressureDiastolic" style="float: left"><small>{{bpUnit}}</small></span>
+                  <span class="w50" for="bloodPressureDiastolic" style="float: left">{{bpUnit}}</span>
+                </td>
+                <td>
+                  <span ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.bpDiastolic[0].error }}</span>
                 </td>
               </tr>
             </table>
@@ -124,7 +129,8 @@
           <td class="field">Weight: </td>
           <td class="value">
               <span e-class="xeditable w50" editable-text="donation.donorWeight" onbeforesave="checkWeight($data)" e-name="donorWeight">{{donation.donorWeight}}</span>
-              <span for="donorWeight"><small>{{weightUnit}}</small></span>
+              <span for="donorWeight">{{weightUnit}}</span>
+              <span ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.weight[0].error }}</span>
           </td>
         </tr>
         <tr>

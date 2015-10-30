@@ -1645,6 +1645,7 @@ angular.module('bsis')
       if (data < min) {
         $scope.clearError('pulse');
         $scope.raiseError('pulse',  'Pulse should be greater than ' + min);
+        $scope.getError('pulse');
         return ' ';
       } else {
         $scope.clearError('pulse');
@@ -1653,6 +1654,7 @@ angular.module('bsis')
       if (data > max) {
         $scope.clearError('pulse');
         $scope.raiseError('pulse', 'Pulse should be less than ' + max);
+        $scope.getError('pulse');
         return ' ';
       } else {
         $scope.clearError('pulse');
@@ -1667,6 +1669,7 @@ angular.module('bsis')
       if (data < min) {
         $scope.clearError('hb');
         $scope.raiseError('hb',  'Haemoglobin count should be greater than ' + min);
+        $scope.getError('hb');
         return ' ';
       } else {
         $scope.clearError('hb');
@@ -1675,9 +1678,10 @@ angular.module('bsis')
       if (data > max) {
         $scope.clearError('hb');
         $scope.raiseError('hb', 'Haemoglobin count should be less than ' + max);
+        $scope.getError('hb');
         return ' ';
       } else {
-        $scope.clearError('hbMax');
+        $scope.clearError('hb');
       }
     };
 
@@ -1689,6 +1693,7 @@ angular.module('bsis')
       if (data < min) {
         $scope.clearError('bpSystolic');
         $scope.raiseError('bpSystolic',  'BP Systolic should be more than ' + min);
+        $scope.getError('bpSystolic');
         return ' ';
       } else {
         $scope.clearError('bpSystolic');
@@ -1697,6 +1702,7 @@ angular.module('bsis')
       if (data > max) {
         $scope.clearError('bpSystolic');
         $scope.raiseError('bpSystolic', 'BP Systolic should be less than ' + max);
+        $scope.getError('bpSystolic');
         return ' ';
       } else {
         $scope.clearError('bpSystolic');
@@ -1711,6 +1717,7 @@ angular.module('bsis')
       if (data < min) {
         $scope.clearError('bpDiastolic');
         $scope.raiseError('bpDiastolic',   "BP Diastolic should be greater than " + min);
+        $scope.getError('bpDiastolic');
         return ' ';
       } else {
         $scope.clearError('bpDiastolic');
@@ -1719,6 +1726,7 @@ angular.module('bsis')
       if (data > max) {
         $scope.clearError('bpDiastolic');
         $scope.raiseError('bpDiastolic', "BP Diastolic should be less than " + max);
+        $scope.getError('bpDiastolic');
         return ' ';
       } else {
         $scope.clearError('bpDiastolic');
@@ -1734,6 +1742,7 @@ angular.module('bsis')
       if (data < min) {
         $scope.clearError('weight');
         $scope.raiseError('weight',  'Weight should be greater than ' + min);
+        $scope.getError('weight');
         return ' ';
       } else {
         $scope.clearError('weight');
@@ -1742,6 +1751,7 @@ angular.module('bsis')
       if (data > max) {
         $scope.clearError('weight');
         $scope.raiseError('weight', 'Weight should be less than ' + max);
+        $scope.getError('weight');
         return ' ';
       } else {
         $scope.clearError('weight');
@@ -1762,8 +1772,17 @@ angular.module('bsis')
     };
 
     $scope.clearError = function (errorName) {
+      $scope.errorObject[errorName] = [];
       $scope.formErrors = $scope.formErrors.filter(function( obj ) {
         return obj.name !== errorName;
+      });
+    };
+
+    $scope.errorObject = {};
+
+    $scope.getError = function (errorName) {
+      $scope.errorObject[errorName] = $scope.formErrors.filter(function( obj ) {
+        return obj.name == errorName;
       });
     };
 
@@ -1772,13 +1791,12 @@ angular.module('bsis')
     $scope.checkBleedTimes = function(data) {
 
       if (new Date(data.bleedEndTime) < new Date(data.bleedStartTime)){
-        $scope.formErrors.push(
-          {
-            name : 'bleedStartTime',
-            error: 'Bleed Start time cannot be after Bleed end time'
-          }
-        );
+        $scope.clearError('bleedTime');
+        $scope.raiseError('bleedTime',  'Bleed start time should be less than end time');
+        $scope.getError('bleedTime');
         return ' ';
+      } else {
+        $scope.clearError('bleedTime');
       }
     };
   })
