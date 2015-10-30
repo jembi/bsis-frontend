@@ -1,0 +1,56 @@
+        <alert type="danger" close="" ng-show="hasMessage">
+          {{message}}
+          <ul>
+            <li ng-repeat="(key, value) in message"> {{key}}: {{value}} </li>
+          </ul>
+        </alert>
+        <p></p>
+        <ul>
+          <li ng-if="mergedDonor.idNumber != null && mergedDonor.idNumber != ''"><b>Identifier</b>: {{mergedDonor.idType.idType}} {{mergedDonor.idNumber}}</li>
+          <li ng-if="mergedDonor.title != null && mergedDonor.title != ''"><b>Title</b>: {{mergedDonor.title}}</li>
+          <li ng-if="mergedDonor.callingName != null && mergedDonor.callingName != ''"><b>Calling Name</b>: {{mergedDonor.callingName}}</li>
+          <li ng-if="mergedDonor.bloodAbo != null"><b>Blood Group</b>: {{mergedDonor.bloodAbo}}{{mergedDonor.bloodRh}}</li>
+          <li ng-if="mergedDonor.dueToDonate != null"><b>Due To Donate</b>: {{mergedDonor.dueToDonate | bsisDate:'longDate'}}</li>
+          <li ng-if="mergedDonor.dateOfFirstDonation != null"><b>Date of First Donation</b>: {{mergedDonor.dateOfFirstDonation | bsisDate:'longDate'}}</li>
+          <li ng-if="mergedDonor.dateOfLastDonation != null"><b>Date of Last Donation</b>: {{mergedDonor.dateOfLastDonation | bsisDate:'longDate'}}</li>
+          <li ng-if="mergedDonor.preferredLanguage != null"><b>Preferred Language</b>: {{mergedDonor.preferredLanguage.preferredLanguage}}</li>
+          <li><b>Venue</b>: {{mergedDonor.venue.name}}</li>
+          <li ng-if="mergedDonor.notes != null && mergedDonor.notes != ''"><b>Comments</b>: {{mergedDonor.notes}}</li>
+          <li ng-if="mergedDonor.contactMethodType != null"><b>Preferred Contact Type</b>: {{mergedDonor.contactMethodType.contactMethodType}}</li>
+          <li ng-if="mergedDonor.contact.email != null && mergedDonor.contact.email != ''"><b>Email</b>: {{mergedDonor.contact.email}}</li>
+          <li ng-if="mergedDonor.contact.mobileNumber != null && mergedDonor.contact.mobileNumber != ''"><b>Mobile Number</b>: {{mergedDonor.contact.mobileNumber}}</li>
+          <li ng-if="mergedDonor.contact.homeNumber != null && mergedDonor.contact.homeNumber != ''"><b>Home Number</b>: {{mergedDonor.contact.homeNumber}}</li>
+          <li ng-if="mergedDonor.contact.workNumber != null && mergedDonor.contact.workNumber != ''"><b>Work Number</b>: {{mergedDonor.contact.workNumber}}</li>
+          <li ng-if="mergedDonor.contact.workNumber != null && mergedDonor.contact.workNumber != ''"><b>Work Number</b>: {{mergedDonor.contact.workNumber}}</li>
+          <li ng-if="mergedDonor.preferredAddressType != null"><b>Preferred Address Type</b>: {{mergedDonor.preferredAddressType.preferredAddressType}}</li>
+          <li ng-if="mergedDonor.address.homeAddressLine1 != null && mergedDonor.address.homeAddressLine1 != ''"><b>Home Address</b>:
+              <span ng-if="mergedDonor.address.homeAddressLine1 != null && mergedDonor.address.homeAddressLine1 != ''">{{mergedDonor.address.homeAddressLine1}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressLine2 != null && mergedDonor.address.homeAddressLine2 != ''">{{mergedDonor.address.homeAddressLine2}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressCity != null && mergedDonor.address.homeAddressCity != ''">{{mergedDonor.address.homeAddressCity}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressProvince != null && mergedDonor.address.homeAddressProvince != ''">{{mergedDonor.address.homeAddressProvince}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressDistrict != null && mergedDonor.address.homeAddressDistrict != ''">{{mergedDonor.address.homeAddressDistrict}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressCountry != null && mergedDonor.address.homeAddressCountry != ''">{{mergedDonor.address.homeAddressCountry}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressState != null && mergedDonor.address.homeAddressState != ''">{{mergedDonor.address.homeAddressState}} <br/></span>
+              <span ng-if="mergedDonor.address.homeAddressZipcode != null && mergedDonor.address.homeAddressZipcode != ''">{{mergedDonor.address.homeAddressZipcode}}</span>
+          </li>
+          <li ng-if="mergedDonor.address.postalAddressLine1 != null && mergedDonor.address.postalAddressLine1 != ''"><b>Postal Address</b>:
+              <span ng-if="mergedDonor.address.postalAddressLine1 != null && mergedDonor.address.postalAddressLine1 != ''">{{mergedDonor.address.postalAddressLine1}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressLine2 != null && mergedDonor.address.postalAddressLine2 != ''">{{mergedDonor.address.postalAddressLine2}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressCity != null && mergedDonor.address.postalAddressCity != ''">{{mergedDonor.address.postalAddressCity}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressProvince != null && mergedDonor.address.postalAddressProvince != ''">{{mergedDonor.address.postalAddressProvince}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressDistrict != null && mergedDonor.address.postalAddressDistrict != ''">{{mergedDonor.address.postalAddressDistrict}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressCountry != null && mergedDonor.address.postalAddressCountry != ''">{{mergedDonor.address.postalAddressCountry}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressState != null && mergedDonor.address.postalAddressState != ''">{{mergedDonor.address.postalAddressState}} <br/></span>
+              <span ng-if="mergedDonor.address.postalAddressZipcode != null && mergedDonor.address.postalAddressZipcode != ''">{{mergedDonor.address.postalAddressZipcode}}</span>
+          </li>
+          <li ng-if="mergedDonor.address.workAddressLine1 != null && mergedDonor.address.workAddressLine1 != ''"><b>Work Address</b>:
+              <span ng-if="mergedDonor.address.workAddressLine1 != null && mergedDonor.address.workAddressLine1 != ''">{{mergedDonor.address.workAddressLine1}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressLine2 != null && mergedDonor.address.workAddressLine2 != ''">{{mergedDonor.address.workAddressLine2}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressCity != null && mergedDonor.address.workAddressCity != ''">{{mergedDonor.address.workAddressCity}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressProvince != null && mergedDonor.address.workAddressProvince != ''">{{mergedDonor.address.workAddressProvince}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressDistrict != null && mergedDonor.address.workAddressDistrict != ''">{{mergedDonor.address.workAddressDistrict}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressCountry != null && mergedDonor.address.workAddressCountry != ''">{{mergedDonor.address.workAddressCountry}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressState != null && mergedDonor.address.workAddressState != ''">{{mergedDonor.address.workAddressState}} <br/></span>
+              <span ng-if="mergedDonor.address.workAddressZipcode != null && mergedDonor.address.workAddressZipcode != ''">{{mergedDonor.address.workAddressZipcode}}</span>
+          </li>
+        </ul>
