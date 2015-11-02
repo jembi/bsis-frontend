@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout, Alerting, UI) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
+    $scope.alerts = Alerting.getAlerts();
+    $scope.ui = UI;
 
     // Tabs with their active status
     $scope.tabs = {
@@ -35,10 +37,13 @@ angular.module('bsis')
 
     $scope.canAddDonors = false;
 
-
+    $scope.closeAlert = function (alertScope,index) {
+      Alerting.alertClose(alertScope,index);
+    };
 
     $scope.findDonor = function () {
       $scope.donorSearch.search = true;
+      Alerting.setPersistErrors(false);
       $location.search($scope.donorSearch);
       $scope.searching = true;
       DonorService.findDonor($scope.donorSearch, function(response) {
@@ -116,7 +121,7 @@ angular.module('bsis')
       $scope.searchResults = '';
       $scope.donation = {};
       $scope.deferral = {};
-      $scope.newDonationBatch = {};
+      $scope.newDonationBatch = {backEntry: false};
       $scope.donorListSearchResults = '';
       $scope.donorList = {};
     };
@@ -126,6 +131,8 @@ angular.module('bsis')
       $location.search({});
       $scope.submitted = '';
     };
+
+
 
     $scope.viewDonor = function (item) {
 
@@ -216,8 +223,9 @@ angular.module('bsis')
   })
 
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
+  .controller('ViewDonorCtrl', function ($scope, $location, $modal, Alerting, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
       GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout,$routeParams) {
+
 
     DonorService.getDonorById($routeParams.id, function (donor) {
       DonorService.setDonor(donor);
@@ -227,6 +235,7 @@ angular.module('bsis')
       $location.path('/findDonor');
     });
 
+    $scope.alerts = Alerting.getAlerts();
     $scope.data = {};
     $scope.age = '';
     $scope.deferralsData = {};
@@ -574,7 +583,7 @@ angular.module('bsis')
           }
         });
     };
-    
+
     $scope.populateEndDate = function(deferral) {
       var deferralReason = deferral.deferralReason;
       deferral.deferredUntil = deferralReason.durationType === 'PERMANENT' ?
@@ -611,14 +620,60 @@ angular.module('bsis')
       }
     };
 
-    $scope.deleteDonor = function(donorId) {
-      DonorService.deleteDonor(donorId, function() {
-        $location.path('findDonor');
+
+
+    /**
+     *  Delete Donor Logic
+     *
+     */
+
+    $scope.confirmDelete = function(donor){
+      Alerting.alertReset();
+
+      var deleteObject = {
+        title: 'Delete Donor',
+        button: 'Delete',
+        message: 'Are you sure you wish to delete the donor "' + donor.firstName + ' ' + donor.lastName + ', '+ donor.donorNumber + '"?'
+      };
+
+      var modalInstance = $modal.open({
+        animation: false,
+        templateUrl: 'views/confirmModal.html',
+        controller: 'ConfirmModalCtrl',
+        resolve: {
+          confirmObject: function () {
+            return deleteObject;
+          }
+        }
+      });
+
+      modalInstance.result.then(function () {
+        // Delete confirmed - delete the donor
+        $scope.deleteDonor(donor);
+      }, function () {
+        // delete cancelled - do nothing
+      });
+
+    };
+
+    $scope.deleteDonor = function(donor) {
+      DonorService.deleteDonor(donor.id, function() {
+        deleteCallback(false, donor);
+        $location.path('findDonor').search({});
       }, function(err) {
-        console.error(err);
+        deleteCallback(err, donor);
+        $location.path("viewDonor/" + donor.id)
+          .search({failed: true}); // If I do not set a parameter the route does not change, this needs to happen to refresh the donor.
       });
     };
 
+    var deleteCallback = function (err, donor) {
+      if (err) {
+        Alerting.alertAddMsg(true, 'top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
+      } else {
+        Alerting.alertAddMsg(true, 'top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" has been deleted successfully');
+      }
+    };
   })
 
   // Controller for Adding Donors
@@ -1175,7 +1230,7 @@ angular.module('bsis')
     $scope.recentDonationBatchData = recentDonationBatchData;
     $scope.openDonationBatches = false;
     $scope.recentDonationBatches = false;
-    $scope.newDonationBatch = {};
+    $scope.newDonationBatch = {backEntry: false};
 
 
     $scope.getOpenDonationBatches = function (){
@@ -1283,7 +1338,7 @@ angular.module('bsis')
         $scope.addingDonationBatch = true;
 
         DonorService.addDonationBatch(donationBatch, function(response){
-            $scope.newDonationBatch = {};
+            $scope.newDonationBatch = {backEntry: false};
             $scope.getOpenDonationBatches();
             // set form back to pristine state
             donationBatchForm.$setPristine();
@@ -1308,7 +1363,7 @@ angular.module('bsis')
       data = $scope.donationBatch.donations;
       $scope.data = data;
       $location.path("/manageClinic/" + item.id);
-      
+
     };
 
   })

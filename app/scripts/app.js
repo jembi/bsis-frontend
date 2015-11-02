@@ -827,7 +827,7 @@ var app = angular.module('bsis', [
 
 ;
 
-var UI = {};
+var UI = {ADDRESS:{}};
 var DONATION = {DONOR:{}};
 // initialize system & user config before app starts
 (function() {
@@ -885,6 +885,57 @@ var DONATION = {DONOR:{}};
             }
             else if (config[i].name == 'ui.mobileClinicTabEnabled'){
               UI.MOBILE_CLINIC_TAB_ENABLED = config[i].value;
+            }
+
+            //Address fields constants
+
+            else if (config[i].name == 'ui.address.addressLine1.enabled'){
+              UI.ADDRESS.ADDRESS_LINE_1_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.addressLine1.displayName'){
+              UI.ADDRESS.ADDRESS_LINE_1_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.addressLine2.enabled'){
+              UI.ADDRESS.ADDRESS_LINE_2_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.addressLine2.displayName'){
+              UI.ADDRESS.ADDRESS_LINE_2_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.cityTownVillage.enabled'){
+              UI.ADDRESS.CITY_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.cityTownVillage.displayName'){
+              UI.ADDRESS.CITY_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.province.enabled'){
+              UI.ADDRESS.PROVINCE_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.province.displayName'){
+              UI.ADDRESS.PROVINCE_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.state.enabled'){
+              UI.ADDRESS.STATE_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.state.displayName'){
+              UI.ADDRESS.STATE_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.districtRegion.enabled'){
+              UI.ADDRESS.DISTRICT_REGION_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.districtRegion.displayName'){
+              UI.ADDRESS.DISTRICT_REGION_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.country.enabled'){
+              UI.ADDRESS.COUNTRY_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.country.displayName'){
+              UI.ADDRESS.COUNTRY_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.postalCode.enabled'){
+              UI.ADDRESS.POSTAL_CODE_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.postalCode.displayName'){
+              UI.ADDRESS.POSTAL_CODE_NAME = config[i].value;
             }
 
 

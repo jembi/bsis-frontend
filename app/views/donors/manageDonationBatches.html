@@ -61,6 +61,16 @@
                   </div>
                 </div>
 
+                <div class="form-group">
+                  <div class="col-sm-offset-1 col-sm-11">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="newDonationBatch.backEntry"> Back Entry
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="form-group"> 
                   <div class="col-sm-offset-1 col-sm-4">
                     <button class="btn btn-primary" type="submit" ng-disabled="addingDonationBatch">{{addingDonationBatch ? "Adding..." : "Add Donation Batch"}}</button>
