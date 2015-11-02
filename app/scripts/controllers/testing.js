@@ -160,6 +160,7 @@ angular.module('bsis')
     $scope.addTestBatch = function (donationBatches, valid){
       if (valid){
 
+        $scope.addingTestBatch = true;
         TestingService.addTestBatch(donationBatches, function(response){
           if (response === true){
             $scope.selectedDonationBatches = {};
@@ -170,6 +171,7 @@ angular.module('bsis')
           else{
             // TODO: handle case where response == false
           }
+          $scope.addingTestBatch = false;
         });
       }
       else{
@@ -229,6 +231,7 @@ angular.module('bsis')
     $scope.getTestResultsByDIN = function (testResultsSearch) {
       testResultsSearch.search = true;
       $location.search(testResultsSearch);
+      $scope.searching = true;
       TestingService.getTestResultsByDIN(testResultsSearch.donationIdentificationNumber, function(response){
         if (response !== false){
           $scope.donation = response.donation;
@@ -238,6 +241,7 @@ angular.module('bsis')
         else{
           $scope.searchResults = false;
         }
+        $scope.searching = false;
       });
     };
 
@@ -758,6 +762,8 @@ angular.module('bsis')
 
     $scope.getCurrentTestResults = function () {
 
+      $scope.searching = true;
+
       TestingService.getTestResultsById($routeParams.id, function(response){
         if (response !== false){
           data = response.testResults;
@@ -776,6 +782,7 @@ angular.module('bsis')
         }
         else{
         }
+        $scope.searching = false;
       });
     };
 
@@ -784,6 +791,8 @@ angular.module('bsis')
     $scope.getCurrentTestResults();
 
     $scope.saveTestResults = function (testResults) {
+
+      $scope.savingTestResults = true;
 
       var requests = [];
 
@@ -801,11 +810,15 @@ angular.module('bsis')
 
       $q.all(requests).then(function(){
         $location.path("/viewTestBatch/" + $routeParams.id );
+      }).finally(function() {
+        $scope.savingTestResults = false;
       });
 
     };
 
     $scope.saveBloodGroupMatchTestResults = function (testResults) {
+
+      $scope.savingTestResults = true;
 
       var requests = [];
 
@@ -825,6 +838,8 @@ angular.module('bsis')
 
       $q.all(requests).then(function(){
         $location.path("/viewTestBatch/" + $routeParams.id);
+      }).finally(function() {
+        $scope.savingTestResults = false;
       });
 
     };
