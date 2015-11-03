@@ -65,32 +65,6 @@
           <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
         </p>
         <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
-      <!--<table ng-table="testSamplesTableParams" show-filter="false" class="table">-->
-        <!--<tr ng-repeat="sample in $data"-->
-            <!--ng-click=""-->
-            <!--ng-mouseenter="this.$selected = true"-->
-            <!--ng-mouseleave="this.$selected = false"-->
-            <!--ng-class="{'active': sample.$selected}">-->
-            <!--<td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">-->
-                <!--{{sample.donationIdentificationNumber}}-->
-            <!--</td>-->
-            <!--<td data-title="'Date Bled'" header-class="text-left" class="text-center" sortable="'donationDate'">-->
-                <!--{{sample.donationDate | bsisDate}}-->
-            <!--</td>-->
-            <!--<td data-title="'Pack'" header-class="text-left" sortable="'packType'">-->
-                <!--{{sample.packType.packType}}-->
-            <!--</td>-->
-            <!--<td data-title="'Clinic'" header-class="text-left" sortable="'center'">-->
-                <!--{{sample.venue.name}}-->
-            <!--</td>-->
-            <!--<td data-title="'TTI Testing'" header-class="text-left" sortable="'ttiStatus'">-->
-                <!--{{sample.ttistatus}}-->
-            <!--</td>-->
-            <!--<td data-title="'Blood Group Serology'" header-class="text-left" sortable="'bloodTypingStatus'">-->
-                <!--<span ng-if="sample.bloodTypingStatus!= 'NOT_DONE'">{{sample.bloodTypingStatus}} - </span>{{sample.bloodTypingMatchStatus}} <em><span ng-if="sample.bloodAbo || sample.bloodRh"> ({{sample.bloodAbo}}{{sample.bloodRh}}) </span></em>-->
-            <!--</td>-->
-        <!--</tr>-->
-      <!--</table>-->
     </div>
   </div>
 </div>

@@ -290,7 +290,7 @@ angular.module('bsis')
 
   })
 
-  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams, $timeout, $routeParams, $q, $route) {
+  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, $timeout, $routeParams, $q, $route) {
     var data = [{}];
     $scope.data  = data;
 
@@ -621,30 +621,6 @@ angular.module('bsis')
         } 
       });
     };
-
-    $scope.testSamplesTableParams = new ngTableParams({
-      page: 1,            // show first page
-      count: 8,          // count per page
-      filter: {},
-      sorting: {}
-    }, 
-    {
-      defaultSort: 'asc',
-      counts: [], // hide page counts control
-      total: data.length, // length of data
-      getData: function ($defer, params) {
-        var filteredData = params.filter() ?
-          $filter('filter')(data, params.filter()) : data;
-        var orderedData = params.sorting() ?
-          $filter('orderBy')(filteredData, params.orderBy()) : data;
-        params.total(orderedData.length); // set total for pagination
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      }
-    });
-
-    $scope.$watch("data", function () {
-      $timeout(function(){ $scope.testSamplesTableParams.reload(); });
-    });
 
     $scope.closeTestBatchCheck = function(testBatch){
       $scope.testBatchToClose = testBatch.id;
