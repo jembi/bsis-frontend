@@ -367,142 +367,39 @@ angular.module('bsis')
         displayName: 'Blood Group Serology',
         cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
         visible: true,
-      },
-      {
-        name: 'ABO',
-        displayName: 'ABO',
-        field: 'testResults.recentTestResults',
-        visible: false,
-
-      },
-      {
-        name: 'Rh',
-        displayName: 'RH',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'Titre',
-        displayName: 'Titre',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'Weak D',
-        displayName: 'Weak D',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'AbScr',
-        displayName: 'AbScr',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'HIV',
-        displayName: 'HIV',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'HBV',
-        displayName: 'HBV',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'HCV',
-        displayName: 'HCV',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'Syphilis',
-        displayName: 'Syphilis',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'HIV Conf 1',
-        displayName: 'HIV Conf 1',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'HBV Conf 1',
-        displayName: 'HBV Conf 1',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'HCV Conf 1',
-        displayName: 'HCV Conf 1',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'Syphilis Conf 1',
-        displayName: 'Syphilis Conf 1',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'HIV Conf 2',
-        displayName: 'HIV Conf 2',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'HBV Conf 2',
-        displayName: 'HBV Conf 2',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'HCV Conf 2',
-        displayName: 'HCV Conf 2',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'Syphilis Conf 2',
-        displayName: 'Syphilis Conf 2',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'HIV Conf 3',
-        displayName: 'HIV Conf 3',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'HBV Conf 3',
-        displayName: 'HBV Conf 3',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'HCV Conf 3',
-        displayName: 'HCV Conf 3',
-        field: 'testResults.recentTestResults',
-        visible: false,
-      },
-      {
-        name: 'Syphilis Conf 3',
-        displayName: 'Syphilis Conf 3',
-        field: 'testResults.recentTestResults',
-        visible: false,
       }
     ];
-
 
     $scope.getTests = function () {
       TestingService.getTTITestingFormFields( function(response){
         if (response !== false){
           $scope.ttiTestsBasic = response.basicTTITests;
           $scope.ttiTestsConfirmatory = response.confirmatoryTTITests;
+
+          // add TTI Tests Basic to report column defs
+          angular.forEach($scope.ttiTestsBasic, function(test){
+            columnDefs.push(
+              {
+                name: test.testNameShort,
+                displayName:  test.testNameShort,
+                field: 'testResults.recentTestResults',
+                visible: false,
+              }
+            );
+          });
+
+          // add TTI Tests Confirmatory to report column defs
+          angular.forEach($scope.ttiTestsConfirmatory, function(test){
+            columnDefs.push(
+              {
+                name: test.testNameShort,
+                displayName:  test.testNameShort,
+                field: 'testResults.recentTestResults',
+                visible: false,
+              }
+            );
+          });
+
         }
         else{
         }
@@ -510,12 +407,27 @@ angular.module('bsis')
       TestingService.getBloodGroupTestingFormFields( function(response){
         if (response !== false){
           $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
+
+          // add Blood Typing Tests to report column defs
+          angular.forEach($scope.bloodTypingTestsBasic, function(test){
+            columnDefs.push(
+              {
+                name: test.testNameShort,
+                displayName:  test.testNameShort,
+                field: 'testResults.recentTestResults',
+                visible: false,
+              }
+            );
+          });
+
         }
         else{
         }
       });
     };
+
     $scope.getTests();
+
     $scope.gridOptions = {
       data: [],
       paginationPageSize: 10,
@@ -535,28 +447,26 @@ angular.module('bsis')
           return $filter('bsisDate')(value);
         }
 
-        if (col.name === 'ttistatus') {
+        else if (col.name === 'ttistatus') {
           return $filter('mapTTIStatus')(value);
         }
 
-        if (col.name === 'bloodAboRh'){
-          var bloodSerology = 'Not Done';
+        else if (col.name === 'bloodAboRh'){
+          var bloodSerology = 'N/D';
           if (row.entity.bloodTypingStatus !== 'NOT_DONE'){
             bloodSerology = row.entity.bloodTypingStatus + ' ' + row.entity.bloodTypingMatchStatus + ' (' + row.entity.bloodAbo + row.entity.bloodRh + ') in ' + row.entity.packType.packType + ' pack';
           }
           return bloodSerology;
         }
 
-
-
-        if (col.name === 'ABO' || col.name === 'Rh' || col.name === 'Titre' || col.name === 'Weak D' || col.name === 'AbScr' ||
-          col.name.indexOf('HIV') === 0 || col.name.indexOf('HBV') === 0|| col.name.indexOf('HCV') === 0 || col.name.indexOf('Syphilis') === 0) {
+        // assume that column is a test outcome column, and manage empty values
+        else if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue'){
           for (var test in value) {
             if (value[test].bloodTest.testNameShort == col.name){
-              return value[test].result || 'Not Done';
+              return value[test].result || 'N/D';
             }
           }
-          return 'Not Done';
+          return 'N/D';
         }
 
         return value;
