@@ -437,7 +437,7 @@ angular.module('bsis')
 
       exporterPdfOrientation: 'landscape',
       exporterPdfPageSize: 'A4',
-      exporterPdfDefaultStyle: {fontSize: 6},
+      exporterPdfDefaultStyle: {fontSize: 5},
       exporterPdfTableHeaderStyle: {fontSize: 6, bold: true},
       exporterPdfMaxGridWidth: 250,
 
