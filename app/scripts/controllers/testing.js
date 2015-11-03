@@ -294,6 +294,31 @@ angular.module('bsis')
     var data = [{}];
     $scope.data  = data;
 
+    $scope.exportOptions = [
+      { id: 'allSamples',
+        value: 'All Samples',
+        reportName: 'Test Batch Outcomes Summary Report',
+        filterKey: '',
+        columns: [ 'ttistatus', 'bloodTypingStatus', 'bloodTypingMatchStatus' ],
+        matchType: true
+      },
+      { id: 'ttiUnsafeSample',
+        value: 'TTI Unsafe or Incomplete',
+        reportName: 'Test Batch Outcomes Summary Report - TTI Unsafe and Tests Outstanding',
+        filterKey: 'SAFE',
+        columns: [ 'ttistatus' ],
+        matchType: false
+      },
+      { id: 'testingIncompleteSamples',
+        value: 'Blood Typing Issues or Incomplete',
+        reportName: 'Test Batch Outcomes Summary Report - Blood Typing Issues and Tests Outstanding',
+        filterKey: 'COMPLETE',
+        columns: [ 'bloodTypingStatus', 'bloodTypingMatchStatus' ],
+        matchType: false
+      },
+    ];
+    $scope.dataExportType = $scope.exportOptions[0];
+
     $scope.getCurrentTestBatch = function () {
       TestingService.getTestBatchById($routeParams.id, function(response){
           $scope.testBatch = response.testBatch;
@@ -410,6 +435,7 @@ angular.module('bsis')
         else{
         }
       });
+
       TestingService.getBloodGroupTestingFormFields( function(response){
         if (response !== false){
           $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
@@ -479,8 +505,6 @@ angular.module('bsis')
         return value;
       },
 
-
-      
       // PDF header
       exporterPdfHeader: function() {
         var finalArray = [
@@ -536,14 +560,16 @@ angular.module('bsis')
 
       onRegisterApi: function(gridApi){
         $scope.gridApi = gridApi;
+        $scope.gridApi.grid.registerRowsProcessor( $scope.singleFilter, 200 );
 
       }
     };
 
-    $scope.filter = function(filterKey) {
-      $scope.gridApi.grid.registerRowsProcessor( $scope.singleFilter, 200 );
+    $scope.filter = function(filterType) {
+      $scope.getCurrentTestBatch();
+      $scope.dataExportType = filterType;
+      $scope.filterValue = $scope.dataExportType.filterKey;
       $scope.gridApi.grid.refresh();
-      $scope.filterKey = filterKey;
     };
 
     $scope.resetGrid = function () {
@@ -551,46 +577,48 @@ angular.module('bsis')
     };
 
     $scope.singleFilter = function(renderableRows){
-      var matcher = new RegExp($scope.filterKey);
-      renderableRows.forEach( function(row) {
-        [ 'ttistatus', 'bloodTypingStatus', 'bloodTypingMatchStatus' ].forEach(function( field ){
-          if (row.entity[field].match(matcher) ){
-            row.visible = false;
+        $scope.filteredData = [];
+        var matcher = new RegExp($scope.dataExportType.filterKey);
+        renderableRows.forEach( function( row ) {
+          var match = false;
+          $scope.dataExportType.columns.forEach(function( field ){
+            if ( row.entity[field].match(matcher)){
+              match = true;
+            }
+          });
+
+          if($scope.dataExportType.matchType){
+            if ( !match ){
+              row.visible = false;
+            }
+            else {
+              $scope.filteredData.push(row.entity);
+            }
+          }
+          else {
+            if ( match ){
+              row.visible = false;
+            }
+            else {
+              $scope.filteredData.push(row.entity);
+            }
           }
         });
-      });
-      return renderableRows;
+
+        $scope.gridOptions.data = $scope.filteredData;
+        return renderableRows;
     };
+
 
     $scope.export = function(format){
       TestingService.getTestResults($routeParams.id, function (testResults){
-        angular.forEach($scope.gridOptions.data, function (item, key) {
-          angular.forEach(testResults.testResults, function(testResult){
-            if (item.id == testResult.donation.id){
-              $scope.gridOptions.data[key].testResults = testResult;
-            }
-          });
-        });
+        $scope.reportName = $scope.dataExportType.reportName;
         if(format === 'pdf'){
-          $scope.reportName = 'Test Batch Outcomes Summary Report';
           $scope.gridApi.exporter.pdfExport('all', 'all');
         }
         else if (format === 'csv'){
           $scope.gridApi.exporter.csvExport('all', 'all');
-        } else if (format === 'pdfVisible'){
-          if ($scope.filterKey == 'TTI_SAFE') {
-            $scope.reportName = 'Unsafe Test Batch Outcomes Summary Report';
-          }
-
-          if ($scope.filterKey == 'COMPLETE') {
-            $scope.reportName = 'Blood Serology Not Done Test Batch Outcomes Summary Report';
-          }
-
-          $scope.gridApi.exporter.pdfExport('visible', 'all');
-        }
-        else if (format === 'csvVisible'){
-          $scope.gridApi.exporter.csvExport('visible', 'all');
-        }
+        } 
       });
     };
 
