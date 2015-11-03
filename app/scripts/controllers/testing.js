@@ -336,6 +336,7 @@ angular.module('bsis')
         displayName: 'DIN',
         field: 'donationIdentificationNumber',
         visible: true,
+        width: '*',
       },
       {
         name: 'Date Bled',
@@ -343,17 +344,20 @@ angular.module('bsis')
         field: 'bleedStartTime',
         cellFilter: 'bsisDate',
         visible: true,
+        width: '*',
       },
       {
         name: 'Pack Type',
         field: 'packType.packType',
         visible: true,
+        width: '*',
       },
       {
         name: 'Venue',
         displayName: 'Venue',
         field: 'venue.name',
         visible: true,
+        width: '*',
       },
       {
         name: 'ttistatus',
@@ -384,6 +388,7 @@ angular.module('bsis')
                 displayName:  test.testNameShort,
                 field: 'testResults.recentTestResults',
                 visible: false,
+                width: '*',
               }
             );
           });
@@ -396,6 +401,7 @@ angular.module('bsis')
                 displayName:  test.testNameShort,
                 field: 'testResults.recentTestResults',
                 visible: false,
+                width: '*',
               }
             );
           });
@@ -416,6 +422,7 @@ angular.module('bsis')
                 displayName:  test.testNameShort,
                 field: 'testResults.recentTestResults',
                 visible: false,
+                width: '*',
               }
             );
           });
