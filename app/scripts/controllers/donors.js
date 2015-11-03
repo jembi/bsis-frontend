@@ -1789,6 +1789,7 @@ angular.module('bsis')
     };
 
     $scope.checkWeight = function(data) {
+      data = parseFloat(data);
 
 
       var min = $scope.weightMin;
