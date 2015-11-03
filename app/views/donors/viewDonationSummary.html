@@ -1,8 +1,8 @@
-<form editable-form name="donationSummaryForm" onbeforesave="checkBleedTimes($data)" onaftersave="updateDonation(donation)">
+<form editable-form name="donationSummaryForm" onbeforesave="validateForm(donationSummaryForm); checkBleedTimes($data)" onaftersave="updateDonation(donation)" novalidate>
 
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
     <span ng-show="!donationSummaryForm.$visible">
-      <em><a has-permission="{{permissions.EDIT_DONATION}}" href="" ng-click="donationSummaryForm.$show()" >Edit</a></em> | 
+      <em><a has-permission="{{permissions.EDIT_DONATION}}" href="" ng-click="donationSummaryForm.$show()" >Edit</a></em> |
       <em><a href="" ng-click="viewDonationBatch()">Done</a></em>
     </span>
     <span ng-show="donationSummaryForm.$visible">
@@ -16,9 +16,6 @@
       </em>
     </span>
   </span>
-
-
-
 
   <div class="col-sm-10" style="height:100%;">
     <table class="dash-table">
@@ -42,22 +39,26 @@
               <table>
                 <tr>
                   <td>
-                    <span editable-bstime="donation.bleedStartTime" e-name="bleedStartTime"
-                        e-minute-step="5"
-                          e-show-spinners="donation.permissions.canUpdateDonationFields">
+                    <span editable-bstime="donation.bleedStartTime"
+                        e-minute-step="5" e-name="bleedStartTime" e-id="bleedStartTime"
+                        e-show-spinners="donation.permissions.canUpdateDonationFields">
                       {{donation.bleedStartTime | bsisTime }}
                     </span>
+
+                    <small class="error" ng-show="donationSummaryForm.bleedStartTime.$error.max">
+                      Please enter a value below  {{donationSummaryForm.bleedEndTime}}
+                    </small>
                   </td>
                   <td> to </td>
                   <td>
-                    <span editable-bstime="donation.bleedEndTime"
-                        e-minute-step="5"  e-name="bleedEndTime"
-                          e-show-spinners="donation.permissions.canUpdateDonationFields">
+                    <span editable-bstime="donation.bleedEndTime" e-name="bleedEndTime"
+                        e-minute-step="5"
+                        e-show-spinners="donation.permissions.canUpdateDonationFields">
                       {{donation.bleedEndTime | bsisTime }}
                     </span>
                   </td>
                   <td>
-                    <span ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.bleedTime[0].error }}</span>
+                    <small ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.bleedTime[0].error }}</small>
                   </td>
                 </tr>
               </table>
@@ -83,59 +84,89 @@
         <tr>
           <td class="field">Pulse: </td>
           <td class="value">
-            <span e-class="xeditable w50" editable-text="donation.donorPulse" e-id="donorPulse" onbeforesave="checkPulse($data)" e-name="donorPulse">{{donation.donorPulse}}</span>
-            <span for="donorPulse" >{{pulseUnit}}</span>
-            <span ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.pulse[0].error }}</span>
+              <span e-class="form-control input-sm" editable-number="donation.donorPulse"
+                    e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
+                    e-max={{pulseMax}} e-min={{pulseMin}} e-decimal
+                    e-name="donorPulse">{{donation.donorPulse}}</span>
+              <span> {{pulseUnit}}</span>
+              <br />
+              <small class="error" ng-show="donationSummaryForm.donorPulse.$error.min">
+                  Please enter a value above  {{pulseMin}}
+              </small>
+              <small class="error" ng-show="donationSummaryForm.donorPulse.$error.max">
+                  Please enter a value below  {{pulseMax}}
+              </small>
           </td>
         </tr>
         <tr >
           <td class="field">Hb: </td>
           <td class="value">
-            <span ng-show="getBooleanValue('donation.hbNumericValue')" e-class="xeditable w50" editable-text="donation.haemoglobinCount" onbeforesave="checkHb($data)" e-name="haemoglobinCount">{{donation.haemoglobinCount}}</span>
-            <span for="haemoglobinCount">{{hbUnit}}</span>
-            <span ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.hb[0].error }}</span>
+            <span ng-show="getBooleanValue('donation.hbNumericValue')" e-class="form-control input-sm w50" editable-number="donation.haemoglobinCount"
+                  e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
+                  e-min={{hbMin}} e-max={{hbMax}} e-decimal
+                  e-name="haemoglobinCount">{{donation.haemoglobinCount}}</span>
+              <span> {{hbUnit}}</span>
+
             <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
-            <span ng-show="getBooleanValue('donation.hbQualitativeValue')" editable-select="donation.haemoglobinLevel" e-name="haemoglobinLevel" e-ng-options="l.value as l.span for l in haemoglobinLevels" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase}}</span>
+            <span ng-show="getBooleanValue('donation.hbQualitativeValue')" editable-select="donation.haemoglobinLevel" e-name="haemoglobinLevel" e-ng-options="l.value as l.label for l in haemoglobinLevels" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase}}</span>
             <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> )</span>
+              <br />
+              <small class="error" ng-show="donationSummaryForm.haemoglobinCount.$error.min">
+                  Please enter a value above  {{hbMin}}
+              </small>
+              <small class="error" ng-show="donationSummaryForm.haemoglobinCount.$error.max">
+                  Please enter a value below  {{hbMax}}
+              </small>
           </td>
         </tr>
         <tr>
           <td class="field">BP: </td>
           <td class="value">
-            <table>
-              <tr>
-                <td>
-                  <span e-class="xeditable w50" editable-text="donation.bloodPressureSystolic" onbeforesave="checkBpSystolic($data)" e-name="bloodPressureSystolic">{{donation.bloodPressureSystolic}}</span>
-                  <span ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.bpSystolic[0].error }}</span>
-                </td>
-                <td>
-                  /
-                </td>
-                <td>
-                  <span e-class="xeditable w50" editable-text="donation.bloodPressureDiastolic" onbeforesave="checkBpDiastolic($data)" e-name="bloodPressureDiastolic">{{donation.bloodPressureDiastolic}}</span>
-                </td>
-                <td>
-                  <span class="w50" for="bloodPressureDiastolic" style="float: left">{{bpUnit}}</span>
-                </td>
-                <td>
-                  <span ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.bpDiastolic[0].error }}</span>
-                </td>
-              </tr>
-            </table>
-
+              <span e-class="form-control input-sm w50" editable-number="donation.bloodPressureSystolic"
+                    e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
+                    e-min={{bpSystolicMin}} e-max={{bpSystolicMax}} e-decimal
+                    e-name="bloodPressureSystolic">{{donation.bloodPressureSystolic}}</span> /
+              <span e-class="form-control input-sm w50" editable-number="donation.bloodPressureDiastolic"
+                    e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
+                    e-min={{bpDiastolicMin}} e-max={{bpDiastolicMax}} e-decimal
+                    e-name="bloodPressureDiastolic">{{donation.bloodPressureDiastolic}}</span>
+              <span> {{bpUnit}}</span>
+              <br />
+              <small class="error" ng-show="donationSummaryForm.bloodPressureSystolic.$error.min">
+                  Please enter a value above  {{bpSystolicMin}}
+              </small>
+              <small class="error" ng-show="donationSummaryForm.bloodPressureSystolic.$error.max">
+                  Please enter a value below  {{bpSystolicMax}}
+              </small>
+              <br />
+              <small class="error" ng-show="donationSummaryForm.bloodPressureDiastolic.$error.min">
+                  Please enter a value above  {{bpDiastolicMin}}
+              </small>
+              <small class="error" ng-show="donationSummaryForm.bloodPressureDiastolic.$error.max">
+                  Please enter a value below  {{bpDiastolicMax}}
+              </small>
           </td>
         </tr>
         <tr>
           <td class="field">Weight: </td>
           <td class="value">
-              <span e-class="xeditable w50" editable-text="donation.donorWeight" onbeforesave="checkWeight($data)" e-name="donorWeight">{{donation.donorWeight}}</span>
-              <span for="donorWeight">{{weightUnit}}</span>
-              <span ng-show="donationSummaryForm.$visible" class="error">{{ errorObject.weight[0].error }}</span>
+              <span e-class="form-control input-sm w50" editable-number="donation.donorWeight"
+                    e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
+                    e-min={{weightMin}} e-max={{weightMax}} e-decimal
+                    e-name="donorWeight">{{donation.donorWeight}}</span>
+              <span>{{weightUnit}}</span>
+              <br />
+              <small class="error" ng-show="donationSummaryForm.donorWeight.$error.min">
+                  Please enter a value above  {{weightMin}}
+              </small>
+              <small class="error" ng-show="donationSummaryForm.donorWeight.$error.max">
+                  Please enter a value below  {{weightMax}}
+              </small>
           </td>
         </tr>
         <tr>
           <td class="field">Comment: </td>
-          <td class="value"><span e-class="xeditable notes" editable-text="donation.notes" e-name="notes">{{donation.notes}}</span></td>
+          <td class="value"><span e-class="form-control input-sm notes" editable-text="donation.notes" e-name="notes">{{donation.notes}}</span></td>
         </tr>
         <tr>
           <td class="field">Averse Event Type: </td>
@@ -150,7 +181,7 @@
         <tr>
           <td class="field">Adverse Event Comment: </td>
           <td class="value">
-            <span e-name="adverseEventComment" e-class="xeditable notes" editable-text="donation.adverseEvent.comment">
+            <span e-name="adverseEventComment" e-class="form-control input-sm notes" editable-text="donation.adverseEvent.comment">
               {{donation.adverseEvent.comment}}
             </span>
           </td>
@@ -159,4 +190,3 @@
     </table>
   </div>
 </form>
-
