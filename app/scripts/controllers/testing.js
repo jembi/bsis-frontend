@@ -563,42 +563,49 @@ angular.module('bsis')
       },
 
 
-
+      
       // PDF header
       exporterPdfHeader: function() {
         var finalArray = [
             {
               text: $scope.reportName,
               bold: true,
-              margin: [30, 10, 10, 2]
+              margin: [30, 10, 0, 0]
             },
             {
               text: 'Created On: ' + $filter('bsisDate')($scope.testBatch.createdDate),
-              margin: [300, -10, -10, 0]
+              margin: [300, -10, 0, 0]
             }
         ];
-
-
+        return finalArray;
+      },
+      
+      
+      exporterPdfCustomFormatter: function (docDefinition) {
+        var prefix = [];
         angular.forEach($scope.testBatch.donationBatches, function(val){
             var venue = val.venue.name;
             var dateCreated = $filter('bsisDate')(val.createdDate);
             var numDonations = val.numDonations;
-            finalArray.push(
+            prefix.push(
               {
-                text: 'Venue: ' + venue +' Date Created: ' + dateCreated +  ' Number of Donations: ' + numDonations,
-                margin: [30, 0, 0, 0]
+                text: 'Venue: ' + venue +', Date Created: ' + dateCreated +  ', Number of Donations: ' + numDonations + '\n'
               }
             );
         });
 
-        return finalArray;
-
+        docDefinition.content= [{text: prefix, margin: [-10, -20, 0, 0]}].concat(docDefinition.content);
+        return docDefinition;
       },
+      
+
+      exporterPdfTableStyle: {margin: [-10, 10, 0, 0]},
+      
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
         var columns = [
-          {text: 'Total donations: ' + $scope.gridOptions.data.length, width: 'auto'},
+          {text: 'Number of Samples: ' + $scope.gridOptions.data.length, width: 'auto'},
           {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
           {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
         ];
