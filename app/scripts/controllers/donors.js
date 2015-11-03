@@ -1789,7 +1789,7 @@ angular.module('bsis')
     };
 
     $scope.checkWeight = function(data) {
-      data = parseFloat(data);
+
 
       var min = $scope.weightMin;
       var max = $scope.weightMax;
@@ -1842,6 +1842,14 @@ angular.module('bsis')
     };
 
     $scope.formErrors = [];
+
+    $scope.validateForm = function (form){
+      if (form.$valid) {
+        return true;
+      } else {
+        return 'This form is not valid';
+      }
+    };
 
     $scope.checkBleedTimes = function(data) {
 
