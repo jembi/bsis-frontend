@@ -492,7 +492,7 @@ angular.module('bsis')
         else if (col.name === 'bloodAboRh'){
           var bloodSerology = 'N/D';
           if (row.entity.bloodTypingStatus !== 'NOT_DONE'){
-            bloodSerology = row.entity.bloodTypingStatus + ' ' + row.entity.bloodTypingMatchStatus + ' (' + row.entity.bloodAbo + row.entity.bloodRh + ') in ' + row.entity.packType.packType + ' pack';
+            bloodSerology = row.entity.bloodTypingMatchStatus;
           }
           return bloodSerology;
         }
@@ -594,7 +594,7 @@ angular.module('bsis')
                 match = true;
               }
           });
-          
+
           if (match != $scope.dataExportType.matchType){
               row.visible = false;
           }
