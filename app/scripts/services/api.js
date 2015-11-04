@@ -104,6 +104,35 @@ angular.module('bsis')
 
       DonorSummaries: $resource(url + '/donors/summaries'),
 
+      AllDonorDuplicates: $resource(url + '/donors/duplicates/all'),
+
+      DonorDuplicates: $resource(url + '/donors/duplicates', {},
+        {
+          query: {
+            method: 'GET',
+            params:{donorNumber:'@donorNumber'}
+          }
+        }
+      ),
+
+      DonorPreviewMergeDuplicates: $resource(url + '/donors/duplicates/merge/preview', {},
+        {
+          query: {
+            method: 'POST',
+            params:{donorNumbers:'@donorNumbers'}
+          }
+        }
+      ),
+
+      DonorMergeDuplicates: $resource(url + '/donors/duplicates/merge', {},
+        {
+          query: {
+            method: 'POST',
+            params:{donorNumber: '@donorNumber'}
+          }
+        }
+      ),
+
       ComponentsSearch: $resource(url + '/components/search', {},
         {
           query: {

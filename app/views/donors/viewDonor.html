@@ -12,48 +12,30 @@
         </ul>
     </alert>
 
-   
-
-
-      <span class="h2">
-        <span editable-text="donor.firstName" e-name="firstName" e-class="xeditable name"
-              e-required>{{donor.firstName}}</span>
-      </span>
-      <small class="error" 
+    <span class="h2">
+      <span editable-text="donor.firstName" e-name="firstName" e-class="xeditable name" e-required>{{donor.firstName}}</span>
+      <small class="error h4" 
         ng-show="
           (editableForm.firstName.$invalid && (editableForm.firstName.$dirty || submitted)) ||
           (editableForm.firstName.$invalid  && (editableForm.lastName.$dirty  || submitted)) 
         ">
         This cannot be empty
       </small>
-    <span class="h2">
-        <span editable-text="donor.lastName" e-name="lastName" e-class="xeditable name" e-required>
-            {{donor.lastName}}
-        </span>
-    </span>
-    <small class="error" 
-      ng-show="
-        (editableForm.lastName.$invalid && (editableForm.lastName.$dirty || submitted)) ||
-        (editableForm.lastName.$invalid  && (editableForm.lastName.$dirty  || submitted)) 
-      ">
-      This cannot be empty
-    </small>
-    <span class="h2">
-        <small>
-            <em>
-                <span ng-if="donor.title">
-                    <span   editable-select="donor.title" e-class="xeditable title"
-                            e-ng-options="item as item for item in title"
-                            e-name="title">{{donor.title}}</span>.
-                </span>
-                <span   editable-text="donor.callingName" e-name="callingName"
-                        e-class="xeditable name">{{donor.callingName}}
-                </span>
-            </em>
-        </small>
+      <span editable-text="donor.lastName" e-name="lastName" e-class="xeditable name" e-required>{{donor.lastName}}</span><small><em>
+      <small class="error h4" 
+        ng-show="
+          (editableForm.lastName.$invalid && (editableForm.lastName.$dirty || submitted)) ||
+          (editableForm.lastName.$invalid  && (editableForm.lastName.$dirty  || submitted)) 
+        ">
+        This cannot be empty
+      </small>
+      <span ng-if="donor.title">
+      <span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span>.</span>
+      <span editable-text="donor.callingName" e-name="callingName" e-class="xeditable name">{{donor.callingName}}</span>
+      </em></small>
     </span>
 
-    <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
+    <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;">
       <span ng-switch-when="male" class="fa-stack fa-1x">
         <i class="fa fa-circle fa-stack-2x fa-fw"></i>
         <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
@@ -75,19 +57,14 @@
       <!-- Delete donor actions -->
       <div has-permission="{{permissions.VOID_DONOR}}" ng-hide="editableForm.$visible" style="display:inline;">
         <em>
-          <button type="button" class="btn btn-link" ng-click="confirmDelete = true" ng-hide="confirmDelete" ng-disabled="!donor.permissions.canDelete">Void Donor</button>
-          <button type="button" class="btn btn-link text-danger" ng-show="confirmDelete" ng-click="deleteDonor(donor.id)">
-            Void
-          </button>
-          <button type="button" class="btn btn-link text-muted" ng-show="confirmDelete" ng-click="confirmDelete = false">
-            Cancel
-          </button>
+          <button type="button" class="btn btn-link"  ng-click="confirmDelete(donor)" ng-disabled="!donorPermissions.canDelete" >Void donor</button>
         </em>
       </div>
 
+
       <!-- Edit donor actions -->
-      <div has-permission="{{permissions.EDIT_DONOR}}" ng-hide="confirmDelete" style="display:inline;">
-        <em><button type="button" class="btn btn-link" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit Donor</button></em>  
+      <div has-permission="{{permissions.EDIT_DONOR}}" style="display:inline;">
+        <em><button type="button" class="btn btn-link" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit Donor</button></em>
 
         <span ng-show="editableForm.$visible">
           <em>
@@ -104,7 +81,7 @@
 
   <hr style="clear:right;" />
 
-  <div class = "h4"> 
+  <div class = "h4">
     <small><em>Age: </em></small>
     <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
     <em>(<span ng-show="!editableForm.$visible">{{ (donor.birthDate | bsisDate) || '' }}</span>
@@ -112,15 +89,15 @@
           <dateselect ng-model="donor.birthDate" initDate="donor.birthDate" format="format" opened="donorBirthDateOpen" cal-icon="icons.CALENDAR">
           </dateselect>
         </span>) </em>
-    | 
+    |
     <small><em>Donor Number: </em></small> {{donor.donorNumber}}
-    | 
+    |
     <small><em>Venue: </em></small>
     <span editable-select="donor.venue.id" e-class="xeditable venue" e-ng-options="item.id as item.name for item in venues" e-name="venue"  e-required>
       {{donor.venue.name}}
     </span>
-    | 
-    <small><em>Preferred Language: </em></small> 
+    |
+    <small><em>Preferred Language: </em></small>
     <span editable-select="donor.preferredLanguage.id" e-ng-options="item.id as item.preferredLanguage for item in languages" e-class="xeditable language" e-name="preferredLanguage">
       {{donor.preferredLanguage.preferredLanguage}}
     </span>
@@ -193,12 +170,12 @@
                 <td class="value">
                   <em>Date</em>: {{ (lastDonation.donationDate | bsisDateTime) || '' }}<br/>
                   <em>Venue</em>: {{lastDonation.venue.name}} <br/>
-                  <em>Donation Type</em>: {{lastDonation.donationType.donationType}} | 
+                  <em>Donation Type</em>: {{lastDonation.donationType.donationType}} |
                   <em>Pack Type</em>: {{lastDonation.packType.packType}}<br/>
                   <em>Wt</em>: {{lastDonation.donorWeight}} {{weightUnit}} |
                   <em>BP</em>: {{lastDonation.bloodPressureDiastolic}}/{{lastDonation.bloodPressureSystolic}}  {{bpUnit}}|
                   <span>
-                    <em>Hb</em>: 
+                    <em>Hb</em>:
                       <span ng-show="getBooleanValue('donation.hbNumericValue')">{{lastDonation.haemoglobinCount}}</span>
                       <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">(</span>
                       <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span>
@@ -226,7 +203,7 @@
                         </em>
                       </span>
                     </span>
-                    <span e-class="xeditable" editable-text="donor.idNumber" e-name="idNumber">{{donor.idNumber}}</span> 
+                    <span e-class="xeditable" editable-text="donor.idNumber" e-name="idNumber">{{donor.idNumber}}</span>
                     <em>
                     <span ng-if="donor.idType.id">(</span>
                     <span e-class="xeditable" editable-select="donor.idType.id" e-ng-options="item.id as item.idType for item in idTypes" e-name="idType">
@@ -287,7 +264,7 @@
       <tab-heading>
         <i class="fa {{icons.ARCHIVE}}"></i> Donations
       </tab-heading>
-      
+
       <div class="panel panel-default">
         <div class="panel-body">
 
@@ -320,5 +297,5 @@
 
     </tab>
   </tabset>
-  
+
 </div>

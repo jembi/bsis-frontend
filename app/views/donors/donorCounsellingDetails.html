@@ -85,8 +85,8 @@
         <input type="text" class="form-control" ng-model="postDonationCounselling.notes" />
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-primary" style="margin-top:0;">Save</button>
-        <a class="btn btn-primary" style="margin-top:0;" href="" ng-click="goBack()">Cancel</a>
+        <button type="submit" class="btn btn-primary" style="margin-top:0;" ng-disabled="updatingCounselling">{{updatingCounselling ? "Saving..." : "Save"}}</button>
+        <a class="btn btn-primary" style="margin-top:0;" href="" ng-click="goBack()" ng-disabled="updatingCounselling">Cancel</a>
       </div>
     </form>
   </div>

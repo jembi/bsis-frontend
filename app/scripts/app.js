@@ -78,6 +78,18 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.ADD_DONOR,
         enabled : UI.DONORS_TAB_ENABLED
       })
+      .when('/duplicateDonors', {
+        templateUrl : 'views/donors.html',
+        controller  : 'DonorsDuplicateCtrl',
+        permission: PERMISSIONS.VIEW_DUPLICATE_DONORS,
+        enabled : UI.DONORS_TAB_ENABLED
+      })
+      .when('/manageDuplicateDonors', {
+        templateUrl : 'views/donors.html',
+        controller  : 'ManageDonorsDuplicateCtrl',
+        permission: PERMISSIONS.MERGE_DONORS,
+        enabled : UI.DONORS_TAB_ENABLED
+      })
       .when('/addDonation', {
         templateUrl : 'views/donors.html',
         controller  : 'AddDonationCtrl',
@@ -89,6 +101,11 @@ var app = angular.module('bsis', [
         controller  : 'ViewDonationBatchCtrl',
         permission: PERMISSIONS.VIEW_DONATION_BATCH,
         enabled : UI.DONORS_TAB_ENABLED
+      })
+      .when('/locations', {
+        templateUrl : 'views/donors.html',
+        controller  : 'LocationsCtrl',
+        permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
       .when('/exportDonorList', {
         templateUrl : 'views/donors.html',
@@ -284,11 +301,6 @@ var app = angular.module('bsis', [
         templateUrl : 'views/settings.html',
         controller  : 'SettingsCtrl',
         permission: PERMISSIONS.AUTHENTICATED
-      })
-      .when('/locations', {
-        templateUrl : 'views/settings.html',
-        controller  : 'LocationsCtrl',
-        permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
       .when('/configurations', {
         templateUrl : 'views/settings.html',
@@ -687,7 +699,7 @@ var app = angular.module('bsis', [
   /*  Custom directive to calculate age from birthDate
       example use: <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
   */
-  .directive('calculateAge', ['$timeout', function($timeout) {
+  .directive('calculateAge', function($timeout) {
     return {
         restrict: 'EA',
         scope: {
@@ -695,27 +707,30 @@ var app = angular.module('bsis', [
             age: '=',
         },
         link: function ($scope) {
-          $timeout(function() {
-            var age = '';
-            if($scope.dob === ''){
-              $scope.age = '';
-            }
-            else{
-              var today = new Date();
-              var birthDate = new Date($scope.dob);
-              console.log(birthDate);
-              age = today.getFullYear() - birthDate.getFullYear();
-              var m = today.getMonth() - birthDate.getMonth();
-              if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                  age--;
+          function doCalculation() {
+            $timeout(function () {
+              var age = '';
+              if ($scope.dob === '') {
+                $scope.age = '';
+                doCalculation();
               }
-              $scope.age = age;
-            }
-          }, 200);
+              else {
+                var today = new Date();
+                var birthDate = new Date($scope.dob);
+                age = today.getFullYear() - birthDate.getFullYear();
+                var m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                  age--;
+                }
+                $scope.age = age;
+              }
+            }, 100);
+          }
+          doCalculation();
         }
 
     };
-  }])
+  })
 
   .directive('selectOnFocus', function () {
     return {
@@ -813,7 +828,7 @@ var app = angular.module('bsis', [
 
 ;
 
-var UI = {};
+var UI = {ADDRESS:{}};
 var DONATION = {DONOR:{}};
 // initialize system & user config before app starts
 (function() {
@@ -871,6 +886,57 @@ var DONATION = {DONOR:{}};
             }
             else if (config[i].name == 'ui.mobileClinicTabEnabled'){
               UI.MOBILE_CLINIC_TAB_ENABLED = config[i].value;
+            }
+
+            //Address fields constants
+
+            else if (config[i].name == 'ui.address.addressLine1.enabled'){
+              UI.ADDRESS.ADDRESS_LINE_1_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.addressLine1.displayName'){
+              UI.ADDRESS.ADDRESS_LINE_1_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.addressLine2.enabled'){
+              UI.ADDRESS.ADDRESS_LINE_2_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.addressLine2.displayName'){
+              UI.ADDRESS.ADDRESS_LINE_2_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.cityTownVillage.enabled'){
+              UI.ADDRESS.CITY_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.cityTownVillage.displayName'){
+              UI.ADDRESS.CITY_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.province.enabled'){
+              UI.ADDRESS.PROVINCE_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.province.displayName'){
+              UI.ADDRESS.PROVINCE_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.state.enabled'){
+              UI.ADDRESS.STATE_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.state.displayName'){
+              UI.ADDRESS.STATE_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.districtRegion.enabled'){
+              UI.ADDRESS.DISTRICT_REGION_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.districtRegion.displayName'){
+              UI.ADDRESS.DISTRICT_REGION_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.country.enabled'){
+              UI.ADDRESS.COUNTRY_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.country.displayName'){
+              UI.ADDRESS.COUNTRY_NAME = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.postalCode.enabled'){
+              UI.ADDRESS.POSTAL_CODE_ENABLED = config[i].value;
+            }
+            else if (config[i].name == 'ui.address.postalCode.displayName'){
+              UI.ADDRESS.POSTAL_CODE_NAME = config[i].value;
             }
 
 

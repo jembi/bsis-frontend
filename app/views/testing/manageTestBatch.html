@@ -83,7 +83,7 @@
 
                     <div class="form-group"> 
                       <div class="col-sm-offset-2 col-sm-4">
-                        <button class="btn btn-primary" type="submit">Add Test Batch</button>
+                        <button class="btn btn-primary" type="submit" ng-disabled="addingTestBatch">{{addingTestBatch ? "Adding..." : "Add Test Batch"}}</button>
                         <button class="btn btn-primary" type="button" ng-click="clearForm(addTestBatchForm); clear()">Clear</button>
                       </div>
                     </div>

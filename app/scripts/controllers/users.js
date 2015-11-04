@@ -177,6 +177,7 @@ angular.module('bsis')
     $scope.updateUser = function (user, userForm) {
       if (userForm.$valid) {
 
+        $scope.savingUser = true;
         UsersService.updateUser(user, function (response, err) {
           if (response !== false){
             $scope.go('/users');
@@ -186,6 +187,7 @@ angular.module('bsis')
               $scope.serverError = err["user.username"];
             }
           }
+          $scope.savingUser = false;
         });
       } else {
         $scope.submitted = true;
@@ -196,6 +198,7 @@ angular.module('bsis')
     $scope.addUser = function (user, userForm) {
 
       if (userForm.$valid) {
+        $scope.savingUser = true;
         UsersService.addUser(user, function (response, err) {
           if (response !== false) {
             $scope.user = {
@@ -212,6 +215,7 @@ angular.module('bsis')
               $scope.serverError = err["user.username"];
             }
           }
+          $scope.savingUser = false;
         });
       }
       else {

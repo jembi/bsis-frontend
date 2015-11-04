@@ -1,0 +1,54 @@
+<h3 class="page-header">Duplicate Donors</h3>
+
+<div ng-switch="hasDuplicates" class="col-sm-12">
+<div style="padding-bottom: 10px"></div>
+
+  <div ng-switch-when="true">
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+          <p>
+            <em> {{duplicateDonorCount}} set(s) of duplicate donors found.</em>
+          </p>
+
+          <table ng-table="duplicateDonorTableParams" show-filter="false" class="table">
+            <tr ng-repeat="duplicate in $data"
+                    ng-click="viewDuplicates(duplicate); changeSelection(duplicate);"
+                    ng-mouseenter="this.$selected = true"
+                    ng-mouseleave="this.$selected = false"
+                    ng-class="{'active': duplicate.$selected}">
+                  <td data-title="'Group'" header-class="text-left" sortable="'groupKey'">
+                      {{duplicate.groupKey}}
+                  </td>
+                  <td data-title="'First Name'" header-class="text-left" sortable="'firstName'">
+                      {{duplicate.firstName}}
+                  </td>
+                  <td data-title="'Last Name'" header-class="text-left" sortable="'lastName'">
+                      {{duplicate.lastName}}
+                  </td>
+                  <td data-title="'Gender'" header-class="text-left" class="text-center" sortable="'gender'">
+                      {{duplicate.gender}}
+                  </td>
+                  <td data-title="'Birth Date'" header-class="text-left" class="text-center" sortable="'birthDate'">
+                      {{ (duplicate.birthDate | bsisDate) || '' }}
+                  </td>
+                  <td data-title="'Number of duplicates'" header-class="text-left" class="text-center" sortable="'count'">
+                      {{duplicate.count}}
+                  </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+  </div>
+  <div ng-switch-when="false">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>
+          <em> No duplicate donors found </em>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>

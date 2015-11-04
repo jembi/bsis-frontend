@@ -9,22 +9,23 @@ angular.module('bsis')
     var data = [{}];
     $scope.data = data;
     $scope.location = {
-      "isVenue" : false,
+      "isVenue" : true,
       "isMobileSite" : false,
       "isUsageSite" : false
     };
 
-    $scope.clear = function () {
+
+
+    $scope.reset = function(addLocationForm){
       $scope.location = {
-        "isVenue" : false,
+        "isVenue" : true,
         "isMobileSite" : false,
         "isUsageSite" : false
       };
-    };
-
-    $scope.clearForm = function(form){
-      form.$setPristine();
-      $scope.submitted = '';
+      addLocationForm.$setPristine();
+      addLocationForm.$setUntouched();
+      $scope.submitted = false;
+      $scope.err = "";
     };
 
     $scope.getLocations = function () {
@@ -45,21 +46,28 @@ angular.module('bsis')
 
     $scope.addLocation = function (location, locationForm) {
 
-      if(locationForm.$valid && !(!locationForm.venue.$viewValue && !locationForm.mobileSite.$viewValue && !locationForm.requestSite.$viewValue)){
+      if(locationForm.$valid){
+
+        $scope.addingLocation = true;
 
         LocationsService.addLocation(location, function(response){
           if (response !== false){
             $scope.location = {
-              "isVenue" : false,
+              "isVenue" : true,
               "isMobileSite" : false,
               "isUsageSite" : false
             };
             locationForm.$setPristine();
             $scope.submitted = '';
             $scope.getLocations();
+            $scope.err = null;
+            $scope.addingLocation = false;
           }
           else{
           }
+        }, function (err) {
+          $scope.err = err;
+          $scope.addingLocation = false;
         });
       }
       else{
@@ -78,6 +86,18 @@ angular.module('bsis')
 
     $scope.removeLocation = function(location){
       location.isDeleted = true;
+      LocationsService.updateLocation(location, function(response){
+        if (response !== false){
+          $scope.locationToRemove = '';
+          $scope.getLocations();
+        }
+        else{
+        }
+      });
+    };
+
+    $scope.enableLocation = function(location){
+      location.isDeleted = false;
       LocationsService.updateLocation(location, function(response){
         if (response !== false){
           $scope.locationToRemove = '';
