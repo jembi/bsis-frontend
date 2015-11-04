@@ -57,10 +57,12 @@
   <div class="panel panel-default">
     <div class="panel-body">
         <p>
-          <em>{{gridOptions.data.length}} sample(s) found</em>  |  <em> Data export: </em>
+          <em>{{gridOptions.data.length}} sample(s) found</em>  | Filter data: 
           <select class="input-sm" ng-model="dataExportType" 
             ng-options="item as item.value for item in exportOptions" ng-change="filter(dataExportType)">
           </select>
+          | <em> Data export: </em>
+          
           <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')">PDF</button>
           <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
         </p>
