@@ -1692,66 +1692,55 @@ angular.module('bsis')
       });
     };
 
-    $scope.checkPulse = function(data) {
-      var min = $scope.pulseMin;
-      var max = $scope.pulseMax;
-      if (data < min) {
-        return "Pulse should be greater than " + min;
-      }
 
-      if (data > max) {
-        return "Pulse should be less than " + max;
+
+    $scope.close = function () {
+
+    };
+
+    $scope.raiseError = function (errorName, errorMessage) {
+      $scope.formErrors.push(
+        {
+          name : errorName,
+          error: errorMessage
+        }
+      );
+    };
+
+    $scope.clearError = function (errorName) {
+      $scope.errorObject[errorName] = [];
+      $scope.formErrors = $scope.formErrors.filter(function( obj ) {
+        return obj.name !== errorName;
+      });
+    };
+
+    $scope.errorObject = {};
+
+    $scope.getError = function (errorName) {
+      $scope.errorObject[errorName] = $scope.formErrors.filter(function( obj ) {
+        return obj.name == errorName;
+      });
+    };
+
+    $scope.formErrors = [];
+
+    $scope.checkErrors = function (min, max) {
+      if (min || max) {
+        return ' ';
       }
     };
 
-    $scope.checkHb = function(data) {
-      var min = $scope.hbMin;
-      var max = $scope.hbMax;
-      if (data < min) {
-        return "Hb should be greater than " + min;
-      }
+    $scope.checkBleedTimes = function(data) {
 
-      if (data > max) {
-        return "Hb should be less than " + max;
-      }
-    };
-
-    $scope.checkBpSystolic = function(data) {
-      var min = $scope.bpSystolicMin;
-      var max = $scope.bpSystolicMax;
-      if (data < min) {
-        return "BP Systolic should be greater than " + min;
-      }
-
-      if (data > max) {
-        return "BP Systolic should be less than " + max;
+      if (new Date(data.bleedEndTime) < new Date(data.bleedStartTime)){
+        $scope.clearError('bleedTime');
+        $scope.raiseError('bleedTime',  'Bleed start time should be less than end time');
+        $scope.getError('bleedTime');
+        return ' ';
+      } else {
+        $scope.clearError('bleedTime');
       }
     };
-
-    $scope.checkBpDiastolic = function(data) {
-      var min = $scope.bpDiastolicMin;
-      var max = $scope.bpDiastolicMax;
-      if (data < min) {
-        return "BP Diastolic should be greater than " + min;
-      }
-
-      if (data > max) {
-        return "BP Diastolic should be less than " + max;
-      }
-    };
-
-    $scope.checkWeight = function(data) {
-      var min = $scope.weightMin;
-      var max = $scope.weightMax;
-      if (data < min) {
-        return "Weight should be greater than " + min;
-      }
-
-      if (data > max) {
-        return "Weight should be less than " + max;
-      }
-    };
-
   })
 
 ;
