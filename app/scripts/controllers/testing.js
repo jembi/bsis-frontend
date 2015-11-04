@@ -560,16 +560,16 @@ angular.module('bsis')
 
       onRegisterApi: function(gridApi){
         $scope.gridApi = gridApi;
-        $scope.gridApi.grid.registerRowsProcessor( $scope.singleFilter, 200 );
-
+        
       }
     };
 
     $scope.filter = function(filterType) {
-      $scope.getCurrentTestBatch();
+
       $scope.dataExportType = filterType;
-      $scope.filterValue = $scope.dataExportType.filterKey;
-      $scope.gridApi.grid.refresh();
+      $scope.getCurrentTestBatch();
+      $scope.gridApi.grid.registerRowsProcessor( $scope.singleFilter, 200 );
+
     };
 
     $scope.resetGrid = function () {
