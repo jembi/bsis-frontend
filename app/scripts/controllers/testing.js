@@ -400,7 +400,8 @@ angular.module('bsis')
     ];
 
     $scope.getTests = function () {
-      TestingService.getTTITestingFormFields( function(response){
+
+      var ttiTests = TestingService.getTTITestingFormFields( function(response){
         if (response !== false){
           $scope.ttiTestsBasic = response.basicTTITests;
           $scope.ttiTestsConfirmatory = response.confirmatoryTTITests;
@@ -436,27 +437,31 @@ angular.module('bsis')
         }
       });
 
-      TestingService.getBloodGroupTestingFormFields( function(response){
-        if (response !== false){
-          $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
+      $q.all(ttiTests).then(function(){
+        TestingService.getBloodGroupTestingFormFields( function(response){
+          if (response !== false){
+            $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
 
-          // add Blood Typing Tests to report column defs
-          angular.forEach($scope.bloodTypingTestsBasic, function(test){
-            columnDefs.push(
-              {
-                name: test.testNameShort,
-                displayName:  test.testNameShort,
-                field: 'testResults.recentTestResults',
-                visible: false,
-                width: '*',
-              }
-            );
-          });
+            // add Blood Typing Tests to report column defs
+            angular.forEach($scope.bloodTypingTestsBasic, function(test){
+              columnDefs.push(
+                {
+                  name: test.testNameShort,
+                  displayName:  test.testNameShort,
+                  field: 'testResults.recentTestResults',
+                  visible: false,
+                  width: '*',
+                }
+              );
+            });
 
-        }
-        else{
-        }
-      });
+          }
+          else{
+          }
+        });
+
+      }).finally(function() {});
+
     };
 
     $scope.getTests();
