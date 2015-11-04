@@ -1588,10 +1588,11 @@ angular.module('bsis')
       $scope.donorSummaryLoading = false;
 
       $scope.$watch('donation.donorNumber', function() {
-        $scope.donorSummaryLoading = true;
         if ($scope.donation.donorNumber) {
-          DonorService.getDonorSummaries($scope.donation.donorNumber, function(donorSummary) {
-            $scope.donorSummary = donorSummary;
+          $scope.donorSummaryLoading = true;
+          DonorService.getDonorSummaries($scope.donation.donorNumber, function(data) {
+            $scope.donorSummary = data.donor;
+            $scope.donorSummary.eligible = data.eligible;
             $scope.donorSummaryLoading = false;
           });
         }

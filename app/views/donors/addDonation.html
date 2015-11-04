@@ -54,7 +54,7 @@
     <div class="form-group">
       <label for="name" class="col-sm-3 control-label"> </label>
       <div class="row col-sm-9">
-        <div class="form-inline" style="margin-left:5px; padding-left:8px; padding-top:3px; font-size:0.9em; height:60px; width:150px; border-radius: 5px; border: 1px solid #ddd;">
+        <div class="form-inline" style="margin-left:5px; padding:3px 0 3px 8px; font-size:0.9em; min-height:60px; width:150px; border-radius: 5px; border: 1px solid #ddd;">
           <i class="fa fa-spinner fa-spin" ng-show="donorSummaryLoading"></i>
           <span class="center-block" ng-hide="donorSummaryLoading">
             {{donorSummary.firstName}} {{donorSummary.lastName}}
@@ -71,6 +71,9 @@
           </span>
           <span class="center-block" ng-hide="donorSummaryLoading">
             {{donorSummary.birthDate | bsisDate}}
+          </span>
+          <span class="center-block text-danger" ng-hide="donorSummaryLoading || donorSummary.eligible !== false">
+            Do not bleed
           </span>
         </div>
 
