@@ -1036,34 +1036,34 @@ angular.module('bsis')
             donationBatch.permissions = response.permissions;
           }
           donationBatch.isClosed = response.isClosed;
+        }, function(err) {
+          console.error(err);
         });
       } else {
         DonorService.updateDonationBatch(donationBatch, function(response) {
           if (donationBatch.permissions) {
             donationBatch.permissions = response.permissions;
           }
+        }, function(err) {
+          console.error(err);
         });
       }
     };
 
     $scope.closeDonationBatch = function (donationBatch){
-      DonorService.closeDonationBatch(donationBatch, function(response){
-        if (response !== false){
-          $location.path("/manageDonationBatches");
-        }
+      DonorService.closeDonationBatch(donationBatch, function(response) {
+        $location.path("/manageDonationBatches");
+      }, function(err) {
+        console.error(err);
       });
     };
 
     $scope.deleteDonationBatch = function (donationBatchId){
-      DonorService.deleteDonationBatch(donationBatchId, function(response){
-        if (response !== false){
-          $location.path("/manageDonationBatches");
-        }
-        else{
-          // TODO: handle case where response == false
-        }
+      DonorService.deleteDonationBatch(donationBatchId, function(response) {
+        $location.path("/manageDonationBatches");
+      }, function(err) {
+        console.error(err);
       });
-
     };
 
 

@@ -274,7 +274,7 @@ angular.module('bsis')
         onError(err.data);
       }); 
     },
-    closeDonationBatch: function (donationBatch, response){
+    closeDonationBatch: function (donationBatch, onSuccess, onError) {
       var updateDonationBatch = Api.DonationBatches.get({id:donationBatch.id}, function() {
         updateDonationBatch = updateDonationBatch.donationBatch;
 
@@ -282,13 +282,13 @@ angular.module('bsis')
         updateDonationBatch.venue = updateDonationBatch.venue.id;
 
         Api.DonationBatches.update({id:donationBatch.id}, updateDonationBatch, function(data) {
-         response(data.donationBatch);
-        }, function (){
-          response(false);
+          onSuccess(data.donationBatch);
+        }, function(err) {
+          onError(err.data);
         });
       });
     },
-    reopenDonationBatch: function (donationBatch, response){
+    reopenDonationBatch: function (donationBatch, onSuccess, onError) {
       var updateDonationBatch = Api.DonationBatches.get({id:donationBatch.id}, function() {
         updateDonationBatch = updateDonationBatch.donationBatch;
 
@@ -297,13 +297,13 @@ angular.module('bsis')
         updateDonationBatch.isClosed = false;
 
         Api.DonationBatches.update({id:donationBatch.id}, updateDonationBatch, function(data) {
-         response(data.donationBatch);
-        }, function (){
-          response(false);
+          onSuccess(data.donationBatch);
+        }, function(err) {
+          onError(err.data);
         });
       });
     },
-    updateDonationBatch: function (donationBatch, response){
+    updateDonationBatch: function (donationBatch, onSuccess, onError) {
       var updateDonationBatch = Api.DonationBatches.get({id:donationBatch.id}, function() {
         updateDonationBatch = updateDonationBatch.donationBatch;
 
@@ -311,9 +311,9 @@ angular.module('bsis')
         updateDonationBatch.venue = donationBatch.venue.id;
 
         Api.DonationBatches.update({id:donationBatch.id}, updateDonationBatch, function(data) {
-         response(data.donationBatch);
-        }, function (){
-          response(false);
+           onSuccess(data.donationBatch);
+        }, function(err) {
+          onError(err.data);
         });
       });
     },
