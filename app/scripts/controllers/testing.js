@@ -71,7 +71,7 @@ angular.module('bsis')
     };
 
     $scope.go = function (path) {
-      $location.path(path);
+      $location.path(path + '/' + $routeParams.id);
     };
 
     $scope.clear = function () {
@@ -428,7 +428,7 @@ angular.module('bsis')
     $scope.rh = RH.options;
 
     $scope.go = function (path) {
-      $location.path(path);
+      $location.path(path + '/' + $routeParams.id);
     };
 
     $scope.getCurrentTestBatch = function () {
