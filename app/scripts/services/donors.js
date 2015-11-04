@@ -275,8 +275,8 @@ angular.module('bsis')
       }); 
     },
     closeDonationBatch: function (donationBatch, onSuccess, onError) {
-      var updateDonationBatch = Api.DonationBatches.get({id:donationBatch.id}, function() {
-        updateDonationBatch = updateDonationBatch.donationBatch;
+      Api.DonationBatches.get({id:donationBatch.id}, function(response) {
+        var updateDonationBatch = response.donationBatch;
 
         updateDonationBatch.isClosed = true;
         updateDonationBatch.venue = updateDonationBatch.venue.id;
@@ -289,8 +289,8 @@ angular.module('bsis')
       });
     },
     reopenDonationBatch: function (donationBatch, onSuccess, onError) {
-      var updateDonationBatch = Api.DonationBatches.get({id:donationBatch.id}, function() {
-        updateDonationBatch = updateDonationBatch.donationBatch;
+      Api.DonationBatches.get({id:donationBatch.id}, function(response) {
+        var updateDonationBatch = response.donationBatch;
 
         updateDonationBatch.createdDate = donationBatch.createdDate;
         updateDonationBatch.venue = donationBatch.venue.id;
@@ -304,8 +304,8 @@ angular.module('bsis')
       });
     },
     updateDonationBatch: function (donationBatch, onSuccess, onError) {
-      var updateDonationBatch = Api.DonationBatches.get({id:donationBatch.id}, function() {
-        updateDonationBatch = updateDonationBatch.donationBatch;
+      Api.DonationBatches.get({id:donationBatch.id}, function(response) {
+        var updateDonationBatch = response.donationBatch;
 
         updateDonationBatch.createdDate = donationBatch.createdDate;
         updateDonationBatch.venue = donationBatch.venue.id;
