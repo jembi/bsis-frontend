@@ -87,7 +87,9 @@
               <span e-class="form-control input-sm" editable-number="donation.donorPulse"
                     e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                     e-max={{pulseMax}} e-min={{pulseMin}} e-decimal
-                    e-name="donorPulse">{{donation.donorPulse}}</span>
+                    e-name="donorPulse"
+                    onbeforesave="checkErrors(donationSummaryForm.donorPulse.$error.min,
+                    donationSummaryForm.donorPulse.$error.max)">{{donation.donorPulse}}</span>
               <span> {{pulseUnit}}</span>
               <br />
               <span ng-show="donationSummaryForm.$visible">
@@ -106,7 +108,9 @@
             <span ng-show="getBooleanValue('donation.hbNumericValue')" e-class="form-control input-sm w50" editable-number="donation.haemoglobinCount"
                   e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                   e-min={{hbMin}} e-max={{hbMax}} e-decimal
-                  e-name="haemoglobinCount">{{donation.haemoglobinCount}}</span>
+                  e-name="haemoglobinCount"
+                  onbeforesave="checkErrors(donationSummaryForm.haemoglobinCount.$error.min,
+                    donationSummaryForm.haemoglobinCount.$error.max)">{{donation.haemoglobinCount}}</span>
               <span> {{hbUnit}}</span>
 
             <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
@@ -129,11 +133,15 @@
               <span e-class="form-control input-sm w50" editable-number="donation.bloodPressureSystolic"
                     e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                     e-min={{bpSystolicMin}} e-max={{bpSystolicMax}} e-decimal
-                    e-name="bloodPressureSystolic">{{donation.bloodPressureSystolic}}</span> /
+                    e-name="bloodPressureSystolic"
+                    onbeforesave="checkErrors(donationSummaryForm.bloodPressureSystolic.$error.min,
+                    donationSummaryForm.bloodPressureSystolic.$error.max)">{{donation.bloodPressureSystolic}}</span> /
               <span e-class="form-control input-sm w50" editable-number="donation.bloodPressureDiastolic"
                     e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                     e-min={{bpDiastolicMin}} e-max={{bpDiastolicMax}} e-decimal
-                    e-name="bloodPressureDiastolic">{{donation.bloodPressureDiastolic}}</span>
+                    e-name="bloodPressureDiastolic"
+                    onbeforesave="checkErrors(donationSummaryForm.bloodPressureDiastolic.$error.min,
+                    donationSummaryForm.bloodPressureDiastolic.$error.max)">{{donation.bloodPressureDiastolic}}</span>
               <span> {{bpUnit}}</span>
               <br />
               <span ng-show="donationSummaryForm.$visible">
@@ -159,7 +167,7 @@
               <span e-class="form-control input-sm w50" editable-number="donation.donorWeight"
                     e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                     e-min={{weightMin}} e-max={{weightMax}} e-decimal
-                    e-name="donorWeight" onbeforesave="checkWeight($data)">{{donation.donorWeight}}</span>
+                    e-name="donorWeight" onbeforesave="checkErrors(donationSummaryForm.donorWeight.$error.min, donationSummaryForm.donorWeight.$error.max)">{{donation.donorWeight}}</span>
               <span>{{weightUnit}}</span>
               <br />
               <span ng-show="donationSummaryForm.$visible">

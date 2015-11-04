@@ -1692,127 +1692,7 @@ angular.module('bsis')
       });
     };
 
-    $scope.checkPulse = function(data) {
-      data = parseFloat(data);
-      var min = $scope.pulseMin;
-      var max = $scope.pulseMax;
 
-      if (data < min) {
-        $scope.clearError('pulse');
-        $scope.raiseError('pulse',  'Pulse should be greater than ' + min);
-        $scope.getError('pulse');
-        return ' ';
-      } else {
-        $scope.clearError('pulse');
-      }
-
-      if (data > max) {
-        $scope.clearError('pulse');
-        $scope.raiseError('pulse', 'Pulse should be less than ' + max);
-        $scope.getError('pulse');
-        return ' ';
-      } else {
-        $scope.clearError('pulse');
-      }
-    };
-
-    $scope.checkHb = function(data) {
-      data = parseFloat(data);
-      var min = $scope.hbMin;
-      var max = $scope.hbMax;
-
-      if (data < min) {
-        $scope.clearError('hb');
-        $scope.raiseError('hb',  'Haemoglobin count should be greater than ' + min);
-        $scope.getError('hb');
-        return ' ';
-      } else {
-        $scope.clearError('hb');
-      }
-
-      if (data > max) {
-        $scope.clearError('hb');
-        $scope.raiseError('hb', 'Haemoglobin count should be less than ' + max);
-        $scope.getError('hb');
-        return ' ';
-      } else {
-        $scope.clearError('hb');
-      }
-    };
-
-    $scope.checkBpSystolic = function(data) {
-      data = parseFloat(data);
-      var min = $scope.bpSystolicMin;
-      var max = $scope.bpSystolicMax;
-
-      if (data < min) {
-        $scope.clearError('bpSystolic');
-        $scope.raiseError('bpSystolic',  'BP Systolic should be more than ' + min);
-        $scope.getError('bpSystolic');
-        return ' ';
-      } else {
-        $scope.clearError('bpSystolic');
-      }
-
-      if (data > max) {
-        $scope.clearError('bpSystolic');
-        $scope.raiseError('bpSystolic', 'BP Systolic should be less than ' + max);
-        $scope.getError('bpSystolic');
-        return ' ';
-      } else {
-        $scope.clearError('bpSystolic');
-      }
-    };
-
-    $scope.checkBpDiastolic = function(data) {
-      data = parseFloat(data);
-      var min = $scope.bpDiastolicMin;
-      var max = $scope.bpDiastolicMax;
-
-      if (data < min) {
-        $scope.clearError('bpDiastolic');
-        $scope.raiseError('bpDiastolic',   "BP Diastolic should be greater than " + min);
-        $scope.getError('bpDiastolic');
-        return ' ';
-      } else {
-        $scope.clearError('bpDiastolic');
-      }
-
-      if (data > max) {
-        $scope.clearError('bpDiastolic');
-        $scope.raiseError('bpDiastolic', "BP Diastolic should be less than " + max);
-        $scope.getError('bpDiastolic');
-        return ' ';
-      } else {
-        $scope.clearError('bpDiastolic');
-      }
-    };
-
-    $scope.checkWeight = function(data) {
-      data = parseFloat(data);
-
-
-      var min = $scope.weightMin;
-      var max = $scope.weightMax;
-
-      if (data < min) {
-        $scope.clearError('weight');
-        $scope.raiseError('weight',  'Weight should be greater than ' + min);
-        $scope.getError('weight');
-        return ' ';
-      } else {
-        $scope.clearError('weight');
-      }
-
-      if (data > max) {
-        $scope.clearError('weight');
-        $scope.raiseError('weight', 'Weight should be less than ' + max);
-        $scope.getError('weight');
-        return ' ';
-      } else {
-        $scope.clearError('weight');
-      }
-    };
 
     $scope.close = function () {
 
@@ -1844,11 +1724,9 @@ angular.module('bsis')
 
     $scope.formErrors = [];
 
-    $scope.validateForm = function (form){
-      if (form.$valid) {
-        return true;
-      } else {
-        return 'This form is not valid';
+    $scope.checkErrors = function (min, max) {
+      if (min || max) {
+        return ' ';
       }
     };
 
