@@ -171,7 +171,7 @@ angular.module('bsis')
           $scope.submitted = '';
           $location.path("/viewDonor/" + donor.id).search({});
         }, function(err) {
-          $scope.errorMessage = err.data.userMessage;
+          $scope.errorMessage = err.userMessage;
           $scope.err = err;
           if (err["donor.birthDate"]) {
             $scope.dobValid = false;
