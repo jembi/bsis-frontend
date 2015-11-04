@@ -305,15 +305,15 @@ angular.module('bsis')
       { id: 'ttiUnsafeSample',
         value: 'TTI Unsafe or Incomplete',
         reportName: 'Test Batch Outcomes Summary Report - TTI Unsafe and Tests Outstanding',
-        filterKey: 'SAFE',
+        filterKey: 'TTI_SAFE',
         columns: [ 'ttistatus' ],
         matchType: false
       },
       { id: 'testingIncompleteSamples',
         value: 'Blood Typing Issues or Incomplete',
         reportName: 'Test Batch Outcomes Summary Report - Blood Typing Issues and Tests Outstanding',
-        filterKey: 'COMPLETE',
-        columns: [ 'bloodTypingStatus', 'bloodTypingMatchStatus' ],
+        filterKey: 'MATCH',
+        columns: [ 'bloodTypingMatchStatus' ],
         matchType: false
       },
     ];
@@ -578,33 +578,26 @@ angular.module('bsis')
 
     $scope.singleFilter = function(renderableRows){
         $scope.filteredData = [];
-        var matcher = new RegExp($scope.dataExportType.filterKey);
+
         renderableRows.forEach( function( row ) {
           var match = false;
           $scope.dataExportType.columns.forEach(function( field ){
-            if ( row.entity[field].match(matcher)){
-              match = true;
-            }
+              if ($scope.dataExportType.filterKey === ''){
+                match = true;
+              }
+              else if ( row.entity[field] === $scope.dataExportType.filterKey){
+                match = true;
+              }
           });
-
-          if($scope.dataExportType.matchType){
-            if ( !match ){
+          
+          if (match != $scope.dataExportType.matchType){
               row.visible = false;
-            }
-            else {
-              $scope.filteredData.push(row.entity);
-            }
           }
           else {
-            if ( match ){
-              row.visible = false;
-            }
-            else {
-              $scope.filteredData.push(row.entity);
-            }
+            $scope.filteredData.push(row.entity);
           }
         });
-
+        
         $scope.gridOptions.data = $scope.filteredData;
         return renderableRows;
     };
