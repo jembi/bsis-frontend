@@ -1584,7 +1584,10 @@ angular.module('bsis')
 
     $scope.viewAddDonationForm = function (){
 
+      $scope.err = {};
+      $scope.addDonationSuccess = null;
       $scope.donation = {};
+      $scope.donorSummary = {};
       $scope.donorSummaryLoading = false;
 
       $scope.$watch('donation.donorNumber', function() {
