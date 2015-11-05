@@ -351,7 +351,7 @@ angular.module('bsis')
 
       data = donations;
       $scope.data = data;
-    }
+    };
 
     $scope.getCurrentTestBatch();
 
