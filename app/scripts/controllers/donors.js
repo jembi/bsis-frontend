@@ -1264,15 +1264,52 @@ angular.module('bsis')
 
     $scope.getOpenDonationBatches();
 
-    $scope.getRecentDonationBatches = function (){
+    function getISOString(maybeDate) {
+      return angular.isDate(maybeDate) ? maybeDate.toISOString() : maybeDate;
+    }
 
-      DonorService.getRecentDonationBatches( function(response){
+    $scope.search = {
+      selectedVenues : []
+    };
+
+    $scope.clearDates = function() {
+      $scope.search.startDate = null;
+      $scope.search.endDate = null;
+    };
+
+    $scope.clearVenues = function() {
+      $scope.search.selectedVenues = [];
+    };
+
+
+    $scope.getRecentDonationBatches = function (){
+      var query = {
+        isClosed:true
+      };
+
+      if ($scope.search.startDate) {
+        var startDate = getISOString($scope.search.startDate);
+        query.startDate = startDate;
+      }
+
+      if ($scope.search.endDate) {
+        var endDate = getISOString($scope.search.endDate);
+        query.endDate = endDate;
+      }
+
+      if ($scope.search.selectedVenues.length > 0) {
+        query.venues = $scope.search.selectedVenues;
+      }
+
+      DonorService.getRecentDonationBatches(query,  function(response){
         if (response !== false){
           recentDonationBatchData = response.donationBatches;
           $scope.recentDonationBatchData = recentDonationBatchData;
           if (recentDonationBatchData.length > 0){
             $scope.recentDonationBatches = true;
           }
+
+
           else {
             $scope.recentDonationBatches = false;
           }
@@ -1281,6 +1318,7 @@ angular.module('bsis')
         }
       });
     };
+
 
     $scope.getRecentDonationBatches();
 

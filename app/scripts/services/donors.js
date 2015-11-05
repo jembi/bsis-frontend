@@ -255,8 +255,8 @@ angular.module('bsis')
         response(false);
       });
     },
-    getRecentDonationBatches: function (response) {
-      Api.RecentDonationBatches.get({count:10}, function (donationBatches) {
+    getRecentDonationBatches: function (searchObject,response) {
+      Api.FindDonationBatches.query(searchObject, function (donationBatches) {
         response(donationBatches);
       }, function (){
         response(false);
