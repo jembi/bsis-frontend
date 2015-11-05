@@ -136,8 +136,6 @@ angular.module('bsis')
       });
     };
 
-    
-
     $scope.getTestBatchFormFields = function(){
 
       TestingService.getTestBatchFormFields( function(response){
@@ -150,7 +148,6 @@ angular.module('bsis')
       });
 
       $scope.donationBatches = TestingService.getDonationBatches();
-
     };
 
     $scope.getOpenTestBatches();
@@ -297,12 +294,27 @@ angular.module('bsis')
     $scope.getCurrentTestBatch = function () {
       TestingService.getTestBatchById($routeParams.id, function(response){
           $scope.testBatch = response.testBatch;
+          $scope.testBatch.donationBatchIds = [];
+          $scope.testBatchAvailableDonationBatches = [];
           var donations = [];
+
+          // get the donation batches and the donations linked to this test batch
           angular.forEach($scope.testBatch.donationBatches, function(batch){
+            $scope.testBatch.donationBatchIds.push(batch.id);
+            $scope.testBatchAvailableDonationBatches.push(batch);
             angular.forEach(batch.donations, function(donation){
               donations.push(donation);
             });
           });
+          // get the available donation batches
+          TestingService.getTestBatchFormFields(function(response) {
+            if (response !== false) {
+              angular.forEach(TestingService.getDonationBatches(), function(batch) {
+                $scope.testBatchAvailableDonationBatches.push(batch);
+              });
+            }
+          });
+
           data = donations;
           $scope.data = data;
       }, function (err){
@@ -412,7 +424,9 @@ angular.module('bsis')
     };
 
     $scope.updateTestBatch = function (testBatch) {
-      $scope.message = "hello";
+      TestingService.updateTestBatch(testBatch, function(response) {
+        $scope.testBatch = response;
+      }, console.error);
     };
 
   })

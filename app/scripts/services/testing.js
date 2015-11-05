@@ -187,8 +187,7 @@ angular.module('bsis')
          response(data);
         }, function (){
           response(false);
-        }); 
-
+        });
       });
     },
     releaseTestBatch: function(testBatch, onSuccess, onError) {
@@ -199,6 +198,20 @@ angular.module('bsis')
       };
 
       Api.TestBatches.update({id: testBatch.id}, updateTestBatch, onSuccess, onError); 
+    },
+    updateTestBatch: function (testBatch, onSuccess, onError) {
+      Api.TestBatches.get({id:testBatch.id}, function(response) {
+
+        var updateTestBatch = response;
+        updateTestBatch.createdDate = testBatch.createdDate;
+        updateTestBatch.donationBatchIds = testBatch.donationBatchIds;
+
+        Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
+          onSuccess(data);
+        }, function (){
+          onError(false);
+        });
+      });
     },
     deleteTestBatch: function(testBatchId, onSuccess, onError) {
       Api.TestBatches.delete({id: testBatchId}, onSuccess, onError);
