@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout, Alerting, UI) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout, $q, Alerting, UI) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -132,8 +132,6 @@ angular.module('bsis')
       $scope.submitted = '';
     };
 
-
-
     $scope.viewDonor = function (item) {
 
       $scope.donor = item;
@@ -185,21 +183,42 @@ angular.module('bsis')
     };
 
     $scope.updateDonor = function (donor){
-
+      var d = $q.defer();
       DonorService.updateDonor(donor, function(response){
           $scope.donor = response;
+          //Reset Error Message
+          $scope.err = null;
+          d.resolve();
           if ($scope.donorPermissions) {
             $scope.donorPermissions.canDelete = response.permissions.canDelete;
           }
         },
-        // display error from back end
         function(err){
+          $scope.donor = donor;
           $scope.err = err;
-          if (err["donor.birthDate"]) {
-            $scope.dobValid = false;
-          }
+          d.reject('Server Error');
         });
+      return d.promise;
+    };
 
+    $scope.master = DonorService.getDonor();
+
+    $scope.cancelForm = function (donor, form) {
+      $scope.clearForm(form);
+      DonorService.getDonorById(donor.id, function (freshDonor) {
+        $scope.donor = freshDonor;
+        $scope.err = null;
+      }, function (err) {
+        $scope.err = err;
+      });
+    };
+
+    $scope.validateForm = function (form){
+      if (form.$valid) {
+        return true;
+      } else {
+        return 'This form is not valid';
+      }
     };
 
     $scope.edit = function () {
@@ -1680,6 +1699,14 @@ angular.module('bsis')
       });
     };
 
+    $scope.validateForm = function (form){
+      if (form.$valid) {
+        return true;
+      } else {
+        return 'This form is not valid';
+      }
+    };
+
     $scope.deleteDonation = function(donationId) {
       DonorService.deleteDonation(donationId, function() {
         data = data.filter(function(donation) {
@@ -1691,8 +1718,6 @@ angular.module('bsis')
         $scope.confirmDelete = false;
       });
     };
-
-
 
     $scope.close = function () {
 
