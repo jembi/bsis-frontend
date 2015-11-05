@@ -291,6 +291,8 @@ angular.module('bsis')
     var data = [{}];
     $scope.data  = data;
 
+    $scope.testBatchAvailableDonationBatches = [];
+
     $scope.getCurrentTestBatch = function () {
       TestingService.getTestBatchById($routeParams.id, function(response){
           $scope.testBatch = response.testBatch;
@@ -315,7 +317,9 @@ angular.module('bsis')
       // get the available donation batches
       TestingService.getTestBatchFormFields(function(response) {
         if (response !== false) {
-          angular.forEach(TestingService.getDonationBatches(), function(batch) {
+          TestingService.setDonationBatches(response.donationBatches);
+          $scope.donationBatches = response.donationBatches;
+          angular.forEach(response.donationBatches, function(batch) {
             $scope.testBatchAvailableDonationBatches.push(batch);
           });
         }
