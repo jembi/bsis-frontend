@@ -298,6 +298,7 @@ angular.module('bsis')
           $scope.dueToDonate = $scope.data.dueToDonate;
           $scope.totalAdverseEvents = response.totalAdverseEvents;
           $scope.donorPermissions.canDelete = response.canDelete;
+          $scope.isEligible = response.isEligible;
         }
         else{
         }

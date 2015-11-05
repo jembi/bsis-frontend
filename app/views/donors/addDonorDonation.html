@@ -307,11 +307,10 @@
 
   <div class="form-group">
     <div class="col-sm-offset-1 col-sm-11">
+      <span class="text-danger" style="display:block;" ng-hide="isEligible">Do not bleed</span>
       <button class="btn btn-primary" type="submit" ng-disabled="addingDonation">{{addingDonation ? "Saving..." : "Save"}}</button>
       <button class="btn btn-primary" type="button" ng-disabled="addingDonation" ng-click="clearForm(addDonationForm); getDonations(donor.id)"/>Cancel</button>
     </div>
   </div>
-
-
 
 </form>
