@@ -169,7 +169,7 @@ angular.module('bsis')
           $scope.submitted = '';
           $location.path("/viewDonor/" + donor.id).search({});
         }, function(err) {
-          $scope.errorMessage = err.data.userMessage;
+          $scope.errorMessage = err.userMessage;
           $scope.err = err;
           if (err["donor.birthDate"]) {
             $scope.dobValid = false;
@@ -1718,7 +1718,54 @@ angular.module('bsis')
         $scope.confirmDelete = false;
       });
     };
-    
+
+    $scope.close = function () {
+
+    };
+
+    $scope.raiseError = function (errorName, errorMessage) {
+      $scope.formErrors.push(
+        {
+          name : errorName,
+          error: errorMessage
+        }
+      );
+    };
+
+    $scope.clearError = function (errorName) {
+      $scope.errorObject[errorName] = [];
+      $scope.formErrors = $scope.formErrors.filter(function( obj ) {
+        return obj.name !== errorName;
+      });
+    };
+
+    $scope.errorObject = {};
+
+    $scope.getError = function (errorName) {
+      $scope.errorObject[errorName] = $scope.formErrors.filter(function( obj ) {
+        return obj.name == errorName;
+      });
+    };
+
+    $scope.formErrors = [];
+
+    $scope.checkErrors = function (min, max) {
+      if (min || max) {
+        return ' ';
+      }
+    };
+
+    $scope.checkBleedTimes = function(data) {
+
+      if (new Date(data.bleedEndTime) < new Date(data.bleedStartTime)){
+        $scope.clearError('bleedTime');
+        $scope.raiseError('bleedTime',  'Bleed start time should be less than end time');
+        $scope.getError('bleedTime');
+        return ' ';
+      } else {
+        $scope.clearError('bleedTime');
+      }
+    };
   })
 
 ;
