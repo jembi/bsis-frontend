@@ -370,14 +370,8 @@ angular.module('bsis')
       // TODO: Confirmation dialog
 
       TestingService.closeTestBatch(testBatch, function(response){
-        if (response !== false){
-          $location.path("/manageTestBatch");
-        }
-        else{
-          // TODO: handle case where response == false
-        }
-      });
-      
+        $location.path("/manageTestBatch");
+      }, console.error);
     };
 
     $scope.reopenTestBatch = function (testBatch) {
@@ -385,32 +379,20 @@ angular.module('bsis')
       // TODO: Confirmation dialog
 
       TestingService.reopenTestBatch(testBatch, function(response){
-        if (response !== false){
-          if (testBatch.permissions) {
-            testBatch.permissions = response.permissions;
-            testBatch.status = response.status;
-          }
+        if (testBatch.permissions) {
+          testBatch.permissions = response.permissions;
+          testBatch.status = response.status;
         }
-        else{
-          // TODO: handle case where response == false
-        }
-      });
-      
+      }, console.error);
     };
 
     $scope.deleteTestBatch = function (testBatchId) {
 
       // TODO: Confirmation dialog
 
-      TestingService.deleteTestBatch(testBatchId, function(response){
-        if (response !== false){
-          $location.path("/manageTestBatch");
-        }
-        else{
-          // TODO: handle case where response == false
-        }
-      });
-      
+      TestingService.deleteTestBatch(testBatchId, function(response) {
+        $location.path("/manageTestBatch");
+      }, console.error);
     };
 
 

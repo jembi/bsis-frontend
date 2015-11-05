@@ -161,33 +161,26 @@ angular.module('bsis')
       });
       return deferred.promise;
     },
-    closeTestBatch: function (testBatch, response){
-      var getTestBatch = Api.TestBatches.get({id:testBatch.id}, function() {
+    closeTestBatch: function (testBatch, onSuccess, onError) {
+      var updateTestBatch = {};
+      updateTestBatch.id = testBatch.id;
+      updateTestBatch.status = "CLOSED";
 
-        var updateTestBatch = {};
-        updateTestBatch.id = testBatch.id;
-        updateTestBatch.status = "CLOSED";
-
-        Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
-         response(data);
-        }, function (){
-          response(false);
-        }); 
-
+      Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
+        onSuccess(data);
+      }, function (){
+        onError(false);
       });
     },
-    reopenTestBatch: function (testBatch, response){
-      var getTestBatch = Api.TestBatches.get({id:testBatch.id}, function() {
+    reopenTestBatch: function (testBatch, onSuccess, onError) {
+      var updateTestBatch = {};
+      updateTestBatch.id = testBatch.id;
+      updateTestBatch.status = "OPEN";
 
-        var updateTestBatch = {};
-        updateTestBatch.id = testBatch.id;
-        updateTestBatch.status = "OPEN";
-
-        Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
-         response(data);
-        }, function (){
-          response(false);
-        });
+      Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
+        onSuccess(data);
+      }, function (){
+        onError(false);
       });
     },
     releaseTestBatch: function(testBatch, onSuccess, onError) {
