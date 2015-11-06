@@ -47,7 +47,7 @@
 
 <hr style="margin-bottom:5px;"/>
 <span class="h4" style="font-size: 0.95em; margin-top:0px; margin-bottom:0px;" ng-repeat="donationBatch in testBatch.donationBatches"> 
-  <small><em>Center: </em></small>{{donationBatch.venue.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate | bsisDate}} | <small><em>Number of Donations: </em></small> {{donationBatch.numDonations}}
+  <small><em>Venue: </em></small>{{donationBatch.venue.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate | bsisDate}} | <small><em>Number of Donations: </em></small> {{donationBatch.numDonations}}
   <br/>
 </span>
 <hr style="margin-top:5px;"/>
@@ -57,32 +57,17 @@
 <div class="col-sm-12">
   <div class="panel panel-default">
     <div class="panel-body">
-      <table ng-table="testSamplesTableParams" show-filter="false" class="table">
-        <tr ng-repeat="sample in $data"
-            ng-click=""
-            ng-mouseenter="this.$selected = true"
-            ng-mouseleave="this.$selected = false"
-            ng-class="{'active': sample.$selected}">
-            <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
-                {{sample.donationIdentificationNumber}}
-            </td>
-            <td data-title="'Date Bled'" header-class="text-left" class="text-center" sortable="'donationDate'">
-                {{sample.donationDate | bsisDate}}
-            </td>
-            <td data-title="'Pack'" header-class="text-left" sortable="'packType'">
-                {{sample.packType.packType}}
-            </td>
-            <td data-title="'Clinic'" header-class="text-left" sortable="'center'">
-                {{sample.venue.name}}
-            </td>
-            <td data-title="'TTI Testing'" header-class="text-left" sortable="'ttiStatus'">
-                {{sample.ttistatus}}
-            </td>
-            <td data-title="'Blood Group Serology'" header-class="text-left" sortable="'bloodTypingStatus'">
-                <span ng-if="sample.bloodTypingStatus!= 'NOT_DONE'">{{sample.bloodTypingStatus}} - </span>{{sample.bloodTypingMatchStatus}} <em><span ng-if="sample.bloodAbo || sample.bloodRh"> ({{sample.bloodAbo}}{{sample.bloodRh}}) </span></em>
-            </td>
-        </tr>
-      </table>
+        <p>
+          <em>{{gridOptions.data.length}} sample(s) found</em>  | Filter data: 
+          <select class="input-sm" ng-model="dataExportType" 
+            ng-options="item as item.value for item in exportOptions" ng-change="filter(dataExportType)">
+          </select>
+          | <em> Data export: </em>
+          
+          <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')">PDF</button>
+          <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
+        </p>
+        <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
     </div>
   </div>
 </div>

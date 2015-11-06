@@ -19,7 +19,7 @@
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': donationBatch.$selected}">
-                    <td data-title="'Created'" style="width:30%;" header-class="text-left" sortable="'date'">
+                    <td data-title="'Created'" style="width:15%;" header-class="text-left" sortable="'date'">
                         {{donationBatch.createdDate | bsisDate}}
                     </td>
                     <td data-title="'Venue'" style="width:25%;" header-class="text-left" sortable="'center'">
@@ -27,6 +27,10 @@
                     </td>
                     <td data-title="'# of Donations'" style="width:20%;" header-class="text-left" class="text-center" sortable="'numDonations'">
                         {{donationBatch.numDonations}}
+                    </td>
+                    <td data-title="'Historical'" style="width:15%;" header-class="text-left" class="text-center" sortable="'backEntry'">
+                      <span ng-show="donationBatch.backEntry"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                      <span ng-show="!donationBatch.backEntry"><i class="fa {{icons.SQUARE}}"></i></span>
                     </td>
                 </tr>
               </table>
@@ -65,7 +69,7 @@
                   <div class="col-sm-offset-1 col-sm-11">
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" ng-model="newDonationBatch.backEntry"> Back Entry
+                        <input type="checkbox" ng-model="newDonationBatch.backEntry"> Historical Data Entry
                       </label>
                     </div>
                   </div>
