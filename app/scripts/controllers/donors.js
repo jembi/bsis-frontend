@@ -1301,7 +1301,10 @@ angular.module('bsis')
         query.venues = $scope.search.selectedVenues;
       }
 
+      $scope.searching = true;
+
       DonorService.getRecentDonationBatches(query,  function(response){
+        $scope.searching = false;
         if (response !== false){
           recentDonationBatchData = response.donationBatches;
           $scope.recentDonationBatchData = recentDonationBatchData;
@@ -1316,6 +1319,9 @@ angular.module('bsis')
         }
         else{
         }
+      }, function(err) {
+        $scope.searching = false;
+        console.log(err);
       });
     };
 

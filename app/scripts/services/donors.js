@@ -255,11 +255,11 @@ angular.module('bsis')
         response(false);
       });
     },
-    getRecentDonationBatches: function (searchObject,response) {
+    getRecentDonationBatches: function (searchObject, onSuccess, onError) {
       Api.FindDonationBatches.query(searchObject, function (donationBatches) {
-        response(donationBatches);
-      }, function (){
-        response(false);
+        onSuccess(donationBatches);
+      }, function (err){
+        onError(err.data);
       });
     },
     addDonationBatch: function (donationBatch, onSuccess, onError){
