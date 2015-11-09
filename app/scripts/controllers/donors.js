@@ -1165,59 +1165,6 @@ angular.module('bsis')
     };
   })
 
-  // Controller for Adding Donations
-  .controller('AddDonationCtrl', function ($scope, $location, DonorService, BPUNIT, HBUNIT, WEIGHTUNIT, PULSEUNIT) {
-
-    $scope.bpUnit = BPUNIT;
-    $scope.hbUnit = HBUNIT;
-    $scope.weightUnit = WEIGHTUNIT;
-    $scope.pulseUnit = PULSEUNIT;
-
-    $scope.addDonationSuccess = '';
-
-    $scope.adverseEvent = {
-      type: null,
-      comment: ''
-    };
-
-    DonorService.getDonationsFormFields(function(response){
-      if (response !== false){
-        $scope.data = response;
-        $scope.venues = response.venues;
-        $scope.packTypes = $scope.data.packTypes;
-        $scope.donationTypes = $scope.data.donationTypes;
-        $scope.donation = $scope.data.addDonationForm;
-        $scope.adverseEventTypes = response.adverseEventTypes;
-      }
-      else{
-      }
-    });
-
-    $scope.addDonation = function (donation){
-
-      $scope.addDonationSuccess = '';
-
-      // set temporary venue - should be auto-populated from donation batch info
-      donation.venue = $scope.venues[0];
-      // set temporary donationDate
-      donation.donationDate = '10/16/2014 12:00:00 am';
-
-      if ($scope.adverseEvent.type) {
-        donation.adverseEvent = $scope.adverseEvent;
-      }
-
-      DonorService.addDonation(donation, function(response){
-          $scope.addDonationSuccess = true;
-          $scope.donation = {};
-          $location.path("/addDonation");
-      }, function (err){
-        $scope.err = err;
-        $scope.addDonationSuccess = false;
-      });
-    };
-
-  })
-
   // Controller for Managing the Donor Clinic
   .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams, $timeout) {
 
