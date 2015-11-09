@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout, Alerting, UI) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout, $q, Alerting, UI) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -132,8 +132,6 @@ angular.module('bsis')
       $scope.submitted = '';
     };
 
-
-
     $scope.viewDonor = function (item) {
 
       $scope.donor = item;
@@ -171,7 +169,7 @@ angular.module('bsis')
           $scope.submitted = '';
           $location.path("/viewDonor/" + donor.id).search({});
         }, function(err) {
-          $scope.errorMessage = err.data.userMessage;
+          $scope.errorMessage = err.userMessage;
           $scope.err = err;
           if (err["donor.birthDate"]) {
             $scope.dobValid = false;
@@ -185,21 +183,42 @@ angular.module('bsis')
     };
 
     $scope.updateDonor = function (donor){
-
+      var d = $q.defer();
       DonorService.updateDonor(donor, function(response){
           $scope.donor = response;
+          //Reset Error Message
+          $scope.err = null;
+          d.resolve();
           if ($scope.donorPermissions) {
             $scope.donorPermissions.canDelete = response.permissions.canDelete;
           }
         },
-        // display error from back end
         function(err){
+          $scope.donor = donor;
           $scope.err = err;
-          if (err["donor.birthDate"]) {
-            $scope.dobValid = false;
-          }
+          d.reject('Server Error');
         });
+      return d.promise;
+    };
 
+    $scope.master = DonorService.getDonor();
+
+    $scope.cancelForm = function (donor, form) {
+      $scope.clearForm(form);
+      DonorService.getDonorById(donor.id, function (freshDonor) {
+        $scope.donor = freshDonor;
+        $scope.err = null;
+      }, function (err) {
+        $scope.err = err;
+      });
+    };
+
+    $scope.validateForm = function (form){
+      if (form.$valid) {
+        return true;
+      } else {
+        return 'This form is not valid';
+      }
     };
 
     $scope.edit = function () {
@@ -1683,6 +1702,14 @@ angular.module('bsis')
       });
     };
 
+    $scope.validateForm = function (form){
+      if (form.$valid) {
+        return true;
+      } else {
+        return 'This form is not valid';
+      }
+    };
+
     $scope.deleteDonation = function(donationId) {
       DonorService.deleteDonation(donationId, function() {
         data = data.filter(function(donation) {
@@ -1695,66 +1722,53 @@ angular.module('bsis')
       });
     };
 
-    $scope.checkPulse = function(data) {
-      var min = $scope.pulseMin;
-      var max = $scope.pulseMax;
-      if (data < min) {
-        return "Pulse should be greater than " + min;
-      }
+    $scope.close = function () {
 
-      if (data > max) {
-        return "Pulse should be less than " + max;
+    };
+
+    $scope.raiseError = function (errorName, errorMessage) {
+      $scope.formErrors.push(
+        {
+          name : errorName,
+          error: errorMessage
+        }
+      );
+    };
+
+    $scope.clearError = function (errorName) {
+      $scope.errorObject[errorName] = [];
+      $scope.formErrors = $scope.formErrors.filter(function( obj ) {
+        return obj.name !== errorName;
+      });
+    };
+
+    $scope.errorObject = {};
+
+    $scope.getError = function (errorName) {
+      $scope.errorObject[errorName] = $scope.formErrors.filter(function( obj ) {
+        return obj.name == errorName;
+      });
+    };
+
+    $scope.formErrors = [];
+
+    $scope.checkErrors = function (min, max) {
+      if (min || max) {
+        return ' ';
       }
     };
 
-    $scope.checkHb = function(data) {
-      var min = $scope.hbMin;
-      var max = $scope.hbMax;
-      if (data < min) {
-        return "Hb should be greater than " + min;
-      }
+    $scope.checkBleedTimes = function(data) {
 
-      if (data > max) {
-        return "Hb should be less than " + max;
-      }
-    };
-
-    $scope.checkBpSystolic = function(data) {
-      var min = $scope.bpSystolicMin;
-      var max = $scope.bpSystolicMax;
-      if (data < min) {
-        return "BP Systolic should be greater than " + min;
-      }
-
-      if (data > max) {
-        return "BP Systolic should be less than " + max;
+      if (new Date(data.bleedEndTime) < new Date(data.bleedStartTime)){
+        $scope.clearError('bleedTime');
+        $scope.raiseError('bleedTime',  'Bleed start time should be less than end time');
+        $scope.getError('bleedTime');
+        return ' ';
+      } else {
+        $scope.clearError('bleedTime');
       }
     };
-
-    $scope.checkBpDiastolic = function(data) {
-      var min = $scope.bpDiastolicMin;
-      var max = $scope.bpDiastolicMax;
-      if (data < min) {
-        return "BP Diastolic should be greater than " + min;
-      }
-
-      if (data > max) {
-        return "BP Diastolic should be less than " + max;
-      }
-    };
-
-    $scope.checkWeight = function(data) {
-      var min = $scope.weightMin;
-      var max = $scope.weightMax;
-      if (data < min) {
-        return "Weight should be greater than " + min;
-      }
-
-      if (data > max) {
-        return "Weight should be less than " + max;
-      }
-    };
-
   })
 
 ;
