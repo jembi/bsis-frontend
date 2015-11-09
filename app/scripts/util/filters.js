@@ -56,6 +56,22 @@ angular.module('bsis')
       }
     };
   })
+
+  .filter('mapTTIStatus', function() {
+    return function( input ) {
+      switch( input ){
+        case 'TTI_SAFE':
+          return 'Safe';
+
+        case 'TTI_UNSAFE':
+          return 'Unsafe';
+
+        default:
+          return 'Not Done';
+
+      }
+    };
+  })
 ;
 
 

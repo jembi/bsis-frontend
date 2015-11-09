@@ -1,4 +1,4 @@
-<form editable-form name="demographicsForm" onaftersave="updateDonor(donor)">
+<form editable-form name="demographicsForm" onbeforesave="validateForm(demographicsForm)"  onaftersave="updateDonor(donor)" oncancel="cancelForm(donor, demographicsForm)" novalidate>
 
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
     <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="demographicsForm.$show()" ng-show="!demographicsForm.$visible">Edit</a></em>
@@ -29,7 +29,16 @@
         <tr>
           <td class="icon"></td>
           <td class="field">Email: </td>
-          <td class="value"><span e-class="xeditable" editable-text="donor.contact.email" e-name="mobileNumber">{{donor.contact.email}}</span></td>
+          <td class="value">
+            <span e-class="xeditable" editable-email="donor.contact.email" e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }" e-name="email">{{donor.contact.email}}</span>
+            <small class="error" 
+              ng-show="
+                (demographicsForm.email.$invalid && (demographicsForm.email.$dirty || submitted)) ||
+                (demographicsForm.email.$invalid && (demographicsForm.email.$dirty  || submitted)) 
+              ">
+              Invalid email address
+            </small>
+          </td>
         </tr>
         <tr>
           <td class="icon"></td>

@@ -728,6 +728,7 @@ var app = angular.module('bsis', [
           }
           doCalculation();
         }
+
     };
   })
 
