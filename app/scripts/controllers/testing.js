@@ -71,7 +71,7 @@ angular.module('bsis')
     };
 
     $scope.go = function (path) {
-      $location.path(path);
+      $location.path(path + '/' + $routeParams.id);
     };
 
     $scope.clear = function () {
@@ -290,9 +290,34 @@ angular.module('bsis')
 
   })
 
-  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, $timeout, $routeParams, $q, $route) {
     var data = [{}];
     $scope.data  = data;
+
+    $scope.exportOptions = [
+      { id: 'allSamples',
+        value: 'All Samples',
+        reportName: 'Test Batch Outcomes Summary Report',
+        filterKey: '',
+        columns: [ 'ttistatus', 'bloodTypingStatus', 'bloodTypingMatchStatus' ],
+        matchType: true
+      },
+      { id: 'ttiUnsafeSample',
+        value: 'TTI Unsafe or Incomplete',
+        reportName: 'Test Batch Outcomes Summary Report - TTI Unsafe and Tests Outstanding',
+        filterKey: 'TTI_SAFE',
+        columns: [ 'ttistatus' ],
+        matchType: false
+      },
+      { id: 'testingIncompleteSamples',
+        value: 'Blood Typing Issues or Incomplete',
+        reportName: 'Test Batch Outcomes Summary Report - Blood Typing Issues and Tests Outstanding',
+        filterKey: 'MATCH',
+        columns: [ 'bloodTypingMatchStatus' ],
+        matchType: false
+      },
+    ];
+    $scope.dataExportType = $scope.exportOptions[0];
 
     $scope.getCurrentTestBatch = function () {
       TestingService.getTestBatchById($routeParams.id, function(response){
@@ -304,6 +329,7 @@ angular.module('bsis')
             });
           });
           data = donations;
+        $scope.gridOptions.data = data;
           $scope.data = data;
       }, function (err){
         console.log(err);
@@ -329,29 +355,270 @@ angular.module('bsis')
 
     $scope.getCurrentTestBatchOverview();
 
-    $scope.testSamplesTableParams = new ngTableParams({
-      page: 1,            // show first page
-      count: 8,          // count per page
-      filter: {},
-      sorting: {}
-    }, 
-    {
-      defaultSort: 'asc',
-      counts: [], // hide page counts control
-      total: data.length, // length of data
-      getData: function ($defer, params) {
-        var filteredData = params.filter() ?
-          $filter('filter')(data, params.filter()) : data;
-        var orderedData = params.sorting() ?
-          $filter('orderBy')(filteredData, params.orderBy()) : data;
-        params.total(orderedData.length); // set total for pagination
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+    var columnDefs = [
+      {
+        name: 'DIN',
+        displayName: 'DIN',
+        field: 'donationIdentificationNumber',
+        visible: true,
+        width: '*',
+      },
+      {
+        name: 'Date Bled',
+        displayName: 'Date Bled',
+        field: 'bleedStartTime',
+        cellFilter: 'bsisDate',
+        visible: true,
+        width: '*',
+      },
+      {
+        name: 'Pack Type',
+        field: 'packType.packType',
+        visible: true,
+        width: '*',
+      },
+      {
+        name: 'Venue',
+        displayName: 'Venue',
+        field: 'venue.name',
+        visible: true,
+        width: '*',
+      },
+      {
+        name: 'ttistatus',
+        displayName: 'TTI Status',
+        field: 'ttistatus',
+        cellFilter: 'mapTTIStatus',
+        visible: true,
+      },
+      {
+        name:'bloodAboRh',
+        displayName: 'Blood Group Serology',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
+        visible: true,
       }
-    });
+    ];
 
-    $scope.$watch("data", function () {
-      $timeout(function(){ $scope.testSamplesTableParams.reload(); });
-    });
+    $scope.getTests = function () {
+
+      var ttiTests = TestingService.getTTITestingFormFields( function(response){
+        if (response !== false){
+          $scope.ttiTestsBasic = response.basicTTITests;
+          $scope.ttiTestsConfirmatory = response.confirmatoryTTITests;
+
+          // add TTI Tests Basic to report column defs
+          angular.forEach($scope.ttiTestsBasic, function(test){
+            columnDefs.push(
+              {
+                name: test.testNameShort,
+                displayName:  test.testNameShort,
+                field: 'testResults.recentTestResults',
+                visible: false,
+                width: '*',
+              }
+            );
+          });
+
+          // add TTI Tests Confirmatory to report column defs
+          angular.forEach($scope.ttiTestsConfirmatory, function(test){
+            columnDefs.push(
+              {
+                name: test.testNameShort,
+                displayName:  test.testNameShort,
+                field: 'testResults.recentTestResults',
+                visible: false,
+                width: '*',
+              }
+            );
+          });
+
+        }
+        else{
+        }
+      });
+
+      $q.all(ttiTests).then(function(){
+        TestingService.getBloodGroupTestingFormFields( function(response){
+          if (response !== false){
+            $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
+
+            // add Blood Typing Tests to report column defs
+            angular.forEach($scope.bloodTypingTestsBasic, function(test){
+              columnDefs.push(
+                {
+                  name: test.testNameShort,
+                  displayName:  test.testNameShort,
+                  field: 'testResults.recentTestResults',
+                  visible: false,
+                  width: '*',
+                }
+              );
+            });
+
+          }
+          else{
+          }
+        });
+
+      }).finally(function() {});
+
+    };
+
+    $scope.getTests();
+
+    $scope.gridOptions = {
+      data: [],
+      paginationPageSize: 10,
+      paginationPageSizes: [10],
+      paginationTemplate: 'views/template/pagination.html',
+      columnDefs: columnDefs,
+
+      exporterPdfOrientation: 'landscape',
+      exporterPdfPageSize: 'A4',
+      exporterPdfDefaultStyle: {fontSize: 5},
+      exporterPdfTableHeaderStyle: {fontSize: 6, bold: true},
+      exporterPdfMaxGridWidth: 250,
+
+      // Format values for exports
+      exporterFieldCallback: function(grid, row, col, value) {
+        if (col.name === 'Date Bled') {
+          return $filter('bsisDate')(value);
+        }
+
+        else if (col.name === 'ttistatus') {
+          return $filter('mapTTIStatus')(value);
+        }
+
+        else if (col.name === 'bloodAboRh'){
+          var bloodSerology = 'N/D';
+          if (row.entity.bloodTypingStatus !== 'NOT_DONE'){
+            bloodSerology = row.entity.bloodTypingMatchStatus;
+          }
+          return bloodSerology;
+        }
+
+        // assume that column is a test outcome column, and manage empty values
+        else if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue'){
+          for (var test in value) {
+            if (value[test].bloodTest.testNameShort == col.name){
+              return value[test].result || 'N/D';
+            }
+          }
+          return 'N/D';
+        }
+
+        return value;
+      },
+
+      // PDF header
+      exporterPdfHeader: function() {
+        var finalArray = [
+            {
+              text: $scope.reportName,
+              bold: true,
+              margin: [30, 10, 0, 0]
+            },
+            {
+              text: 'Created On: ' + $filter('bsisDate')($scope.testBatch.createdDate),
+              margin: [300, -10, 0, 0]
+            }
+        ];
+        return finalArray;
+      },
+      
+      
+      exporterPdfCustomFormatter: function (docDefinition) {
+        var prefix = [];
+        angular.forEach($scope.testBatch.donationBatches, function(val){
+            var venue = val.venue.name;
+            var dateCreated = $filter('bsisDate')(val.createdDate);
+            var numDonations = val.numDonations;
+            prefix.push(
+              {
+                text: 'Venue: ' + venue +', Date Created: ' + dateCreated +  ', Number of Donations: ' + numDonations + '\n'
+              }
+            );
+        });
+
+        docDefinition.content= [{text: prefix, margin: [-10, -20, 0, 0]}].concat(docDefinition.content);
+        return docDefinition;
+      },
+      
+
+      exporterPdfTableStyle: {margin: [-10, 10, 0, 0]},
+      
+
+      // PDF footer
+      exporterPdfFooter: function(currentPage, pageCount) {
+        var columns = [
+          {text: 'Number of Samples: ' + $scope.gridOptions.data.length, width: 'auto'},
+          {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
+          {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+        ];
+        return {
+          columns: columns,
+          columnGap: 10,
+          margin: [30, 0]
+        };
+      },
+      enableFiltering: false,
+
+      onRegisterApi: function(gridApi){
+        $scope.gridApi = gridApi;
+        
+      }
+    };
+
+    $scope.filter = function(filterType) {
+
+      $scope.dataExportType = filterType;
+      $scope.getCurrentTestBatch();
+      $scope.gridApi.grid.registerRowsProcessor( $scope.singleFilter, 200 );
+
+    };
+
+    $scope.resetGrid = function () {
+      $route.reload();
+    };
+
+    $scope.singleFilter = function(renderableRows){
+        $scope.filteredData = [];
+
+        renderableRows.forEach( function( row ) {
+          var match = false;
+          $scope.dataExportType.columns.forEach(function( field ){
+              if ($scope.dataExportType.filterKey === ''){
+                match = true;
+              }
+              else if ( row.entity[field] === $scope.dataExportType.filterKey){
+                match = true;
+              }
+          });
+
+          if (match != $scope.dataExportType.matchType){
+              row.visible = false;
+          }
+          else {
+            $scope.filteredData.push(row.entity);
+          }
+        });
+        
+        $scope.gridOptions.data = $scope.filteredData;
+        return renderableRows;
+    };
+
+
+    $scope.export = function(format){
+      TestingService.getTestResults($routeParams.id, function (testResults){
+        $scope.reportName = $scope.dataExportType.reportName;
+        if(format === 'pdf'){
+          $scope.gridApi.exporter.pdfExport('all', 'all');
+        }
+        else if (format === 'csv'){
+          $scope.gridApi.exporter.csvExport('all', 'all');
+        } 
+      });
+    };
 
     $scope.closeTestBatch = function (testBatch){
 
@@ -390,7 +657,7 @@ angular.module('bsis')
     $scope.rh = RH.options;
 
     $scope.go = function (path) {
-      $location.path(path);
+      $location.path(path + '/' + $routeParams.id);
     };
 
     $scope.getCurrentTestBatch = function () {
