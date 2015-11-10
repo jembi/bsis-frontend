@@ -176,11 +176,11 @@ angular.module('bsis')
 
       });
     },
-    getRecentTestBatches: function (response) {
-      Api.RecentTestBatches.get({count:10}, function (testBatches) {
-        response(testBatches);
-      }, function (){
-        response(false);
+    getRecentTestBatches: function (options, onSuccess, onError) {
+        Api.FindTestBatches.query(options, function (testBatches) {
+        onSuccess(testBatches);
+      }, function (err){
+          onError(err.data);
       });
     }
   };

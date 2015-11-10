@@ -119,7 +119,11 @@ angular.module('bsis')
 
     $scope.getRecentTestBatches = function (){
 
-      TestingService.getRecentTestBatches( function(response){
+      var query = {
+        status: "CLOSED"
+      };
+
+      TestingService.getRecentTestBatches(query, function(response){
         if (response !== false){
           recentTestBatchData = response.testBatches;
           $scope.recentTestBatchData = recentTestBatchData;

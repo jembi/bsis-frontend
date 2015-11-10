@@ -102,6 +102,27 @@
       <tab-heading>
         <i class="fa {{icons.ARCHIVE}}"></i> Recent Batches
       </tab-heading>
+        <form class="form-horizontal" style="padding:10px 0;" ng-submit="refresh()">
+            <div class="clearfix form-group">
+                <label class="col-sm-2 control-label">Period:</label>
+                <div class="form-inline col-sm-10">
+                    <div>
+                        <dateselect ng-model="search.startDate" format="dateFormat"></dateselect>
+                        <span><em>To:</em></span>
+                        <dateselect-end ng-model="search.endDate" format="dateFormat"></dateselect-end>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-checked="!search.startDate && !search.endDate" ng-click="clearDates()"> Any Date
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-offset-2 ">
+                <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}}</button>
+                <button class="btn btn-primary" type="reset" ng-click="clearSearch()">Clear</button>
+            </div>
+        </form>
       <div ng-switch="recentTestBatches" class="col-sm-12">
         <div ng-switch-when="true">
         <div style="padding-bottom: 10px"></div>
