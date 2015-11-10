@@ -123,7 +123,7 @@
     <table class="dash-table col-sm-3">
       <tbody>
         <tr>
-          <td class="value" ><em>Postal <small ng-show="demographicsForm.$visible"><label style="cursor: pointer; cursor: hand;"><input ng-model="postalSameAsHome" name="postalSameAsHome" type="checkbox" ng-click="sameAsHome(demographicsForm, 'Postal')" /> Same as Home</label> </small></em></td>
+          <td class="value" ><em>Postal  <small ng-show="demographicsForm.$visible"><label class="checkbox checkbox-inline"><input ng-model="postalSameAsHome" name="postalSameAsHome" type="checkbox" ng-click="sameAsHome(demographicsForm, 'Postal')" /> Same as Home</label> </small></em></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.ADDRESS_LINE_1_ENABLED}}">
           <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressLine1" e-name="postalAddressLine1">{{donor.address.postalAddressLine1}}</span></td>
@@ -155,7 +155,7 @@
     <table class="dash-table col-sm-3">
       <tbody>
         <tr>
-          <td class="value" ><em>Work <small ng-show="demographicsForm.$visible"> <label style="cursor: pointer; cursor: hand;"><input ng-model="workSameAsHome" name="workSameAsHome"  type="checkbox" ng-click="sameAsHome(demographicsForm, 'Work')" /> Same as Home</label></small></em></td>
+          <td class="value" ><em>Work  <small ng-show="demographicsForm.$visible"> <label class="checkbox checkbox-inline"><input ng-model="workSameAsHome" name="workSameAsHome"  type="checkbox" ng-click="sameAsHome(demographicsForm, 'Work')" /> Same as Home</label></small></em></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.ADDRESS_LINE_1_ENABLED}}">
           <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressLine1" e-name="workAddressLine1">{{donor.address.workAddressLine1}}</span></td>
