@@ -362,6 +362,7 @@ angular.module('bsis')
           $scope.dueToDonate = $scope.data.dueToDonate;
           $scope.totalAdverseEvents = response.totalAdverseEvents;
           $scope.donorPermissions.canDelete = response.canDelete;
+          $scope.isEligible = response.isEligible;
         }
         else{
         }
@@ -567,47 +568,74 @@ angular.module('bsis')
 
     $scope.addDonationSuccess = '';
 
+    function confirmAddDonation(donationBatch) {
+
+      // Only show modal if donor is not eligible and batch is back entry
+      if ($scope.isEligible || !donationBatch.backEntry) {
+        return $q.resolve(null);
+      }
+
+      var modal = $modal.open({
+        animation: false,
+        templateUrl: 'views/confirmModal.html',
+        controller: 'ConfirmModalCtrl',
+        resolve: {
+          confirmObject: {
+            title: 'Ineligible Donor',
+            button: 'Continue',
+            message: 'This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?'
+          }
+        }
+      });
+
+      return modal.result;
+    }
+
     $scope.addDonation = function (donation, donationBatch, bleedStartTime, bleedEndTime, valid) {
 
       if (valid) {
-        $scope.addDonationSuccess = '';
 
-        // set donation center, site & date to those of the donation batch
-        donation.venue = donationBatch.venue;
-        donation.donationDate = donationBatch.createdDate;
-        donation.donationBatchNumber = donationBatch.batchNumber;
+        confirmAddDonation(donationBatch).then(function () {
+          $scope.addDonationSuccess = '';
 
-        donation.donorNumber = $scope.donor.donorNumber;
+          // set donation center, site & date to those of the donation batch
+          donation.venue = donationBatch.venue;
+          donation.donationDate = donationBatch.createdDate;
+          donation.donationBatchNumber = donationBatch.batchNumber;
 
-        donation.bleedStartTime = bleedStartTime;
-        donation.bleedEndTime = bleedEndTime;
+          donation.donorNumber = $scope.donor.donorNumber;
 
-        if ($scope.adverseEvent.type) {
-          donation.adverseEvent = $scope.adverseEvent;
-        }
+          donation.bleedStartTime = bleedStartTime;
+          donation.bleedEndTime = bleedEndTime;
 
-        $scope.addingDonation = true;
+          if ($scope.adverseEvent.type) {
+            donation.adverseEvent = $scope.adverseEvent;
+          }
 
-        DonorService.addDonation(donation, function (response) {
+          $scope.addingDonation = true;
 
-          $scope.addDonationSuccess = true;
-          $scope.donation = {};
-          $scope.getDonations($scope.donor.id);
-          $scope.donationsView = 'viewDonations';
-          $scope.submitted = '';
-          $scope.getDonorOverview();
+          DonorService.addDonation(donation, function () {
 
-          $scope.addingDonation = false;
+            $scope.addDonationSuccess = true;
+            $scope.donation = {};
+            $scope.getDonations($scope.donor.id);
+            $scope.donationsView = 'viewDonations';
+            $scope.submitted = '';
+            $scope.getDonorOverview();
 
-        }, function (err) {
-          $scope.err = err;
-          $scope.addDonationSuccess = false;
-          // refresh donor overview after adding donation
-          $scope.getDonorOverview();
+            $scope.addingDonation = false;
 
-          $scope.addingDonation = false;
+          }, function (err) {
+            $scope.err = err;
+            $scope.addDonationSuccess = false;
+            // refresh donor overview after adding donation
+            $scope.getDonorOverview();
+
+            $scope.addingDonation = false;
+          });
+        }, function () {
+          // Do nothing
         });
-
       }
       else {
         $scope.submitted = true;
@@ -1229,59 +1257,6 @@ angular.module('bsis')
     };
   })
 
-  // Controller for Adding Donations
-  .controller('AddDonationCtrl', function ($scope, $location, DonorService, BPUNIT, HBUNIT, WEIGHTUNIT, PULSEUNIT) {
-
-    $scope.bpUnit = BPUNIT;
-    $scope.hbUnit = HBUNIT;
-    $scope.weightUnit = WEIGHTUNIT;
-    $scope.pulseUnit = PULSEUNIT;
-
-    $scope.addDonationSuccess = '';
-
-    $scope.adverseEvent = {
-      type: null,
-      comment: ''
-    };
-
-    DonorService.getDonationsFormFields(function(response){
-      if (response !== false){
-        $scope.data = response;
-        $scope.venues = response.venues;
-        $scope.packTypes = $scope.data.packTypes;
-        $scope.donationTypes = $scope.data.donationTypes;
-        $scope.donation = $scope.data.addDonationForm;
-        $scope.adverseEventTypes = response.adverseEventTypes;
-      }
-      else{
-      }
-    });
-
-    $scope.addDonation = function (donation){
-
-      $scope.addDonationSuccess = '';
-
-      // set temporary venue - should be auto-populated from donation batch info
-      donation.venue = $scope.venues[0];
-      // set temporary donationDate
-      donation.donationDate = '10/16/2014 12:00:00 am';
-
-      if ($scope.adverseEvent.type) {
-        donation.adverseEvent = $scope.adverseEvent;
-      }
-
-      DonorService.addDonation(donation, function(response){
-          $scope.addDonationSuccess = true;
-          $scope.donation = {};
-          $location.path("/addDonation");
-      }, function (err){
-        $scope.err = err;
-        $scope.addDonationSuccess = false;
-      });
-    };
-
-  })
-
   // Controller for Managing the Donor Clinic
   .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams, $timeout) {
 
@@ -1433,7 +1408,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE,  DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE,  DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout, $routeParams, $modal) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -1648,14 +1623,18 @@ angular.module('bsis')
 
     $scope.viewAddDonationForm = function (){
 
+      $scope.err = {};
+      $scope.addDonationSuccess = null;
       $scope.donation = {};
+      $scope.donorSummary = {};
       $scope.donorSummaryLoading = false;
 
       $scope.$watch('donation.donorNumber', function() {
-        $scope.donorSummaryLoading = true;
         if ($scope.donation.donorNumber) {
-          DonorService.getDonorSummaries($scope.donation.donorNumber, function(donorSummary) {
-            $scope.donorSummary = donorSummary;
+          $scope.donorSummaryLoading = true;
+          DonorService.getDonorSummaries($scope.donation.donorNumber, function(data) {
+            $scope.donorSummary = data.donor;
+            $scope.donorSummary.eligible = data.eligible;
             $scope.donorSummaryLoading = false;
           });
         }
@@ -1684,23 +1663,48 @@ angular.module('bsis')
 
     $scope.addDonationSuccess = '';
 
-    $scope.addDonation = function (donation, bleedStartTime, bleedEndTime, valid){
+    function confirmAddDonation() {
 
-      if(valid){
-        $scope.addDonationSuccess = '';
+      // Only show modal if donor is not eligible and batch is back entry
+      if ($scope.donorSummary.eligible || $scope.donationBatch.backEntry === false) {
+        return $q.resolve(null);
+      }
 
-        DonorService.setDonationBatch($scope.donationBatch);
+      var modal = $modal.open({
+        animation: false,
+        templateUrl: 'views/confirmModal.html',
+        controller: 'ConfirmModalCtrl',
+        resolve: {
+          confirmObject: {
+            title: 'Ineligible Donor',
+            button: 'Continue',
+            message: 'This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?'
+          }
+        }
+      });
 
-        // set donation center, site & date to those of the donation batch
-        donation.venue = $scope.donationBatch.venue;
-        donation.donationDate = $scope.donationBatch.createdDate;
-        donation.donationBatchNumber = $scope.donationBatch.batchNumber;
-        donation.bleedStartTime = bleedStartTime;
-        donation.bleedEndTime = bleedEndTime;
+      return modal.result;
+    }
 
-        $scope.addingDonation = true;
+    $scope.addDonation = function (donation, bleedStartTime, bleedEndTime, valid) {
 
-        DonorService.addDonationToBatch(donation, function(response){
+      if (valid) {
+
+        confirmAddDonation().then(function() {
+          $scope.addDonationSuccess = '';
+
+          DonorService.setDonationBatch($scope.donationBatch);
+
+          // set donation center, site & date to those of the donation batch
+          donation.venue = $scope.donationBatch.venue;
+          donation.donationDate = $scope.donationBatch.createdDate;
+          donation.donationBatchNumber = $scope.donationBatch.batchNumber;
+          donation.bleedStartTime = bleedStartTime;
+          donation.bleedEndTime = bleedEndTime;
+
+          $scope.addingDonation = true;
+
+          DonorService.addDonationToBatch(donation, function(response) {
             $scope.addDonationSuccess = true;
             $scope.donation = {};
             $scope.donationBatchView = 'viewDonationBatch';
@@ -1710,18 +1714,17 @@ angular.module('bsis')
             $scope.submitted = '';
             $scope.err = {};
             $scope.addingDonation = false;
-
-          },
-          function (err) {
+          }, function (err) {
 
             $scope.err = err;
             $scope.addDonationSuccess = false;
             $scope.addingDonation = false;
+          });
+        }, function() {
+          // Do nothing
         });
-      }
-      else {
+      } else {
         $scope.submitted = true;
-        console.log("FORM NOT VALID");
       }
     };
 
