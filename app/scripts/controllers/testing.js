@@ -610,6 +610,16 @@ angular.module('bsis')
 
     $scope.export = function(format){
       TestingService.getTestResults($routeParams.id, function (testResults){
+
+        // load test outcomes for test batch
+        angular.forEach($scope.gridOptions.data, function (item, key) {
+          angular.forEach(testResults.testResults, function(testResult){
+            if (item.id == testResult.donation.id){
+              $scope.gridOptions.data[key].testResults = testResult;
+            }
+          });
+        });
+
         $scope.reportName = $scope.dataExportType.reportName;
         if(format === 'pdf'){
           $scope.gridApi.exporter.pdfExport('all', 'all');
