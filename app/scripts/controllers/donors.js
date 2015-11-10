@@ -221,6 +221,51 @@ angular.module('bsis')
       }
     };
 
+    $scope.postalSameAsHome = false;
+    $scope.workSameAsHome = false;
+
+
+    $scope.sameAsHome = function (form, addressType) {
+      if (addressType == 'Postal'){
+        form.postalAddressLine1.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressLine1.$modelValue);
+        form.postalAddressLine1.$render();
+        form.postalAddressLine2.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressLine2.$modelValue);
+        form.postalAddressLine2.$render();
+        form.postalAddressCity.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressCity.$modelValue);
+        form.postalAddressCity.$render();
+        form.postalAddressDistrict.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressDistrict.$modelValue);
+        form.postalAddressDistrict.$render();
+        form.postalAddressState.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressState.$modelValue);
+        form.postalAddressState.$render();
+        form.postalAddressProvince.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressProvince.$modelValue);
+        form.postalAddressProvince.$render();
+        form.postalAddressCountry.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  '' : form.homeAddressCountry.$modelValue);
+        form.postalAddressCountry.$render();
+        form.postalAddressZipcode.$setViewValue((form.postalSameAsHome.$viewValue === false) ?  null : form.homeAddressZipcode.$modelValue);
+        form.postalAddressZipcode.$render();
+      }
+
+      if (addressType == 'Work'){
+        form.workAddressLine1.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressLine1.$modelValue);
+        form.workAddressLine1.$render();
+        form.workAddressLine2.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressLine2.$modelValue);
+        form.workAddressLine2.$render();
+        form.workAddressCity.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressCity.$modelValue);
+        form.workAddressCity.$render();
+        form.workAddressDistrict.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressDistrict.$modelValue);
+        form.workAddressDistrict.$render();
+        form.workAddressState.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressState.$modelValue);
+        form.workAddressState.$render();
+        form.workAddressProvince.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressProvince.$modelValue);
+        form.workAddressProvince.$render();
+        form.workAddressCountry.$setViewValue((form.workSameAsHome.$viewValue === false) ?  '' : form.homeAddressCountry.$modelValue);
+        form.workAddressCountry.$render();
+        form.workAddressZipcode.$setViewValue((form.workSameAsHome.$viewValue === false) ?  null : form.homeAddressZipcode.$modelValue);
+        form.workAddressZipcode.$render();
+      }
+
+    };
+
     $scope.edit = function () {
     };
 
