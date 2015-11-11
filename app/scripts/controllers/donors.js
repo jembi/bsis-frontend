@@ -1044,6 +1044,16 @@ angular.module('bsis')
           if (donationBatch.permissions) {
             donationBatch.permissions = response.permissions;
           }
+          // update the donations (in the case of the date or venue change)
+          donationBatch.donations = response.donations;
+          data = donationBatch.donations;
+          $scope.gridOptions.data = donationBatch.donations;
+          $scope.data = data;
+          if ($scope.donation) {
+            // update the currently selected donation
+            $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : $scope.donation.donationIdentificationNumber})[0];
+          }
+
         }, function(err) {
           console.error(err);
         });
