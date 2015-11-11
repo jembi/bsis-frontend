@@ -125,7 +125,7 @@ angular.module('bsis')
     };
 
     var master = {
-      startDate: null,
+      startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: null
     };
 
