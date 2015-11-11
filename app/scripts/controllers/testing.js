@@ -125,8 +125,9 @@ angular.module('bsis')
     };
 
     var master = {
+      status: 'CLOSED',
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
-      endDate: null
+      endDate: moment().endOf('day').toDate()
     };
 
     $scope.clearSearch = function() {
@@ -139,10 +140,7 @@ angular.module('bsis')
 
     $scope.getRecentTestBatches = function (){
 
-      var query = {
-        status: "CLOSED",
-        startDate : moment().subtract(7, 'days').startOf('day').toDate()
-      };
+      var query = angular.copy(master);
 
       if ($scope.search.startDate) {
         var startDate = moment($scope.search.startDate).startOf('day').toDate();
