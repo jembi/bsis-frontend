@@ -1303,7 +1303,8 @@ angular.module('bsis')
 
     $scope.getRecentDonationBatches = function (){
       var query = {
-        isClosed:true
+        isClosed:true,
+        startDate : moment().subtract(7, 'days').toDate()
       };
 
       if ($scope.search.startDate) {
