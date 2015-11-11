@@ -1258,7 +1258,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams, $timeout) {
+  .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, DATEFORMAT, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -1270,7 +1270,7 @@ angular.module('bsis')
     $scope.openDonationBatches = false;
     $scope.recentDonationBatches = false;
     $scope.newDonationBatch = {backEntry: false};
-
+    $scope.dateFormat = DATEFORMAT;
 
     $scope.getOpenDonationBatches = function (){
 
