@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('TestingCtrl', function ($scope, $rootScope, $location, TestingService, ICONS, PERMISSIONS, BLOODABO, BLOODRH, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('TestingCtrl', function ($scope, $rootScope, $location, TestingService, ICONS, PERMISSIONS, BLOODABO, BLOODRH, DATEFORMAT, $filter, ngTableParams, $timeout, $routeParams) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.bloodAboOptions = BLOODABO;
     $scope.bloodRhOptions = BLOODRH;
+    $scope.dateFormat = DATEFORMAT;
 
     var data = [{}];
     $scope.data = data;
