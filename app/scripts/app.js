@@ -90,12 +90,6 @@ var app = angular.module('bsis', [
         permission: PERMISSIONS.MERGE_DONORS,
         enabled : UI.DONORS_TAB_ENABLED
       })
-      .when('/addDonation', {
-        templateUrl : 'views/donors.html',
-        controller  : 'AddDonationCtrl',
-        permission: PERMISSIONS.ADD_DONATION,
-        enabled : UI.DONORS_TAB_ENABLED
-      })
       .when('/manageClinic/:id?', {
         templateUrl : 'views/donors.html',
         controller  : 'ViewDonationBatchCtrl',
