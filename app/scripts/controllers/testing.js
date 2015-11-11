@@ -361,7 +361,8 @@ angular.module('bsis')
         displayName: 'DIN',
         field: 'donationIdentificationNumber',
         visible: true,
-        width: '*',
+        width: '**',
+        maxWidth: '120',
       },
       {
         name: 'Date Bled',
@@ -369,20 +370,21 @@ angular.module('bsis')
         field: 'bleedStartTime',
         cellFilter: 'bsisDate',
         visible: true,
-        width: '*',
+        width: '**',
       },
       {
         name: 'Pack Type',
         field: 'packType.packType',
         visible: true,
-        width: '*',
+        width: '**',
+        maxWidth: '100',
       },
       {
         name: 'Venue',
         displayName: 'Venue',
         field: 'venue.name',
         visible: true,
-        width: '*',
+        width: '**',
       },
       {
         name: 'ttistatus',
@@ -390,12 +392,14 @@ angular.module('bsis')
         field: 'ttistatus',
         cellFilter: 'mapTTIStatus',
         visible: true,
+        width: '**',
       },
       {
         name:'bloodAboRh',
         displayName: 'Blood Group Serology',
         cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
         visible: true,
+        width: '**',
       }
     ];
 
@@ -414,7 +418,7 @@ angular.module('bsis')
                 displayName:  test.testNameShort,
                 field: 'testResults.recentTestResults',
                 visible: false,
-                width: '*',
+                width: 80
               }
             );
           });
@@ -427,7 +431,7 @@ angular.module('bsis')
                 displayName:  test.testNameShort,
                 field: 'testResults.recentTestResults',
                 visible: false,
-                width: '*',
+                width: 90
               }
             );
           });
@@ -450,7 +454,7 @@ angular.module('bsis')
                   displayName:  test.testNameShort,
                   field: 'testResults.recentTestResults',
                   visible: false,
-                  width: '*',
+                  width: 80
                 }
               );
             });
@@ -477,7 +481,7 @@ angular.module('bsis')
       exporterPdfPageSize: 'A4',
       exporterPdfDefaultStyle: {fontSize: 5},
       exporterPdfTableHeaderStyle: {fontSize: 6, bold: true},
-      exporterPdfMaxGridWidth: 250,
+      exporterPdfMaxGridWidth: 550,
 
       // Format values for exports
       exporterFieldCallback: function(grid, row, col, value) {
@@ -610,6 +614,16 @@ angular.module('bsis')
 
     $scope.export = function(format){
       TestingService.getTestResults($routeParams.id, function (testResults){
+
+        // load test outcomes for test batch
+        angular.forEach($scope.gridOptions.data, function (item, key) {
+          angular.forEach(testResults.testResults, function(testResult){
+            if (item.id == testResult.donation.id){
+              $scope.gridOptions.data[key].testResults = testResult;
+            }
+          });
+        });
+
         $scope.reportName = $scope.dataExportType.reportName;
         if(format === 'pdf'){
           $scope.gridApi.exporter.pdfExport('all', 'all');

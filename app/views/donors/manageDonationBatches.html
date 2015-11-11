@@ -158,6 +158,10 @@
                     <td data-title="'# of Donations'" style="width:25%;" header-class="text-left" class="text-center" sortable="'numDonations'">
                         {{donationBatch.numDonations}}
                     </td>
+                    <td data-title="'Historical'" style="width:15%;" header-class="text-left" class="text-center" sortable="'backEntry'">
+                      <span ng-show="donationBatch.backEntry"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                      <span ng-show="!donationBatch.backEntry"><i class="fa {{icons.SQUARE}}"></i></span>
+                    </td>
                 </tr>
               </table>
             </div>

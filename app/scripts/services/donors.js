@@ -280,12 +280,8 @@ angular.module('bsis')
       });
     },
 
-    getDonorSummaries: function(donorNumber, response) {
-      Api.DonorSummaries.get({donorNumber: donorNumber}, function(data) {
-        response(data.donor);
-      }, function() {
-        response(false);
-      });
+    getDonorSummaries: function(donorNumber, onSuccess, onError) {
+      Api.DonorSummaries.get({donorNumber: donorNumber}, onSuccess, onError);
     },
 
     getDonorPostDonationCounselling: function(donorId, onSuccess, onError) {
