@@ -117,7 +117,25 @@ angular.module('bsis')
 
     };
 
-    $scope.search = {};
+
+
+    $scope.clearDates = function() {
+      $scope.search.startDate = null;
+      $scope.search.endDate = null;
+    };
+
+    var master = {
+      startDate: null,
+      endDate: null
+    };
+
+    $scope.clearSearch = function() {
+      $location.search({});
+      $scope.searched = false;
+      $scope.search = angular.copy(master);
+    };
+    
+    $scope.search = angular.copy(master);
 
     $scope.getRecentTestBatches = function (){
 
