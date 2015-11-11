@@ -1307,7 +1307,7 @@ angular.module('bsis')
         startDate : moment().subtract(7, 'days').startOf('day').toDate()
       };
 
-      console.log(query);
+    
 
       if ($scope.search.startDate) {
         var startDate = getISOString($scope.search.startDate);
