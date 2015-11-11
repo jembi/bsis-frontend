@@ -1283,14 +1283,6 @@ angular.module('bsis')
 
     $scope.getOpenDonationBatches();
 
-    function getISOString(maybeDate) {
-      return angular.isDate(maybeDate) ? maybeDate.toISOString() : maybeDate;
-    }
-
-    $scope.search = {
-      selectedVenues : []
-    };
-
     $scope.clearDates = function() {
       $scope.search.startDate = null;
       $scope.search.endDate = null;
@@ -1299,6 +1291,20 @@ angular.module('bsis')
     $scope.clearVenues = function() {
       $scope.search.selectedVenues = [];
     };
+
+    var master = {
+      selectedVenues: [],
+      startDate: null,
+      endDate: null
+    };
+
+    $scope.clearSearch = function() {
+      $location.search({});
+      $scope.searched = false;
+      $scope.search = angular.copy(master);
+    };
+
+    $scope.search = angular.copy(master);
 
 
     $scope.getRecentDonationBatches = function (){
@@ -1310,12 +1316,12 @@ angular.module('bsis')
     
 
       if ($scope.search.startDate) {
-        var startDate = getISOString($scope.search.startDate);
+        var startDate =  moment($scope.search.startDate).startOf('day').toDate();
         query.startDate = startDate;
       }
 
       if ($scope.search.endDate) {
-        var endDate = getISOString($scope.search.endDate);
+        var endDate =  moment($scope.search.endDate).endOf('day').toDate();
         query.endDate = endDate;
       }
 
