@@ -117,13 +117,29 @@ angular.module('bsis')
 
     };
 
+    $scope.search = {};
+
     $scope.getRecentTestBatches = function (){
 
       var query = {
-        status: "CLOSED"
+        status: "CLOSED",
+        startDate : moment().subtract(7, 'days').startOf('day').toDate()
       };
 
+      if ($scope.search.startDate) {
+        var startDate = moment($scope.search.startDate).startOf('day').toDate();
+        query.startDate = startDate;
+      }
+
+      if ($scope.search.endDate) {
+        var endDate = moment($scope.search.endDate).endOf('day').toDate();
+        query.endDate = endDate;
+      }
+
+      $scope.searching = true;
+
       TestingService.getRecentTestBatches(query, function(response){
+        $scope.searching = false;
         if (response !== false){
           recentTestBatchData = response.testBatches;
           $scope.recentTestBatchData = recentTestBatchData;
@@ -137,6 +153,8 @@ angular.module('bsis')
         }
         else{
         }
+      }, function(err){
+        $scope.searching = false;
       });
     };
 
