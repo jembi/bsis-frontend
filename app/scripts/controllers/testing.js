@@ -350,6 +350,7 @@ angular.module('bsis')
       });
 
       data = donations;
+      $scope.gridOptions.data = data;
       $scope.data = data;
     };
 
