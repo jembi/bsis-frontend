@@ -31,7 +31,8 @@ var app = angular.module('bsis', [
       // LOGIN PAGE
       .when('/login', {
         templateUrl : 'views/login.html',
-        controller  : 'LoginCtrl'
+        controller  : 'LoginCtrl',
+        permission: !PERMISSIONS.AUTHENTICATED
       })
 
       // FORGOT PASSWORD PAGE
