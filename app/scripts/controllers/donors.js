@@ -1632,33 +1632,35 @@ angular.module('bsis')
     $scope.updateDonationBatch = function(donationBatch, reopen) {
       if (reopen) {
         DonorService.reopenDonationBatch(donationBatch, function(response) {
-          if (donationBatch.permissions) {
-            donationBatch.permissions = response.permissions;
-          }
           donationBatch.isClosed = response.isClosed;
+          $scope.refreshDonationBatch(donationBatch, response);
         }, function(err) {
           console.error(err);
         });
       } else {
         DonorService.updateDonationBatch(donationBatch, function(response) {
-          if (donationBatch.permissions) {
-            donationBatch.permissions = response.permissions;
-          }
-          // update the donations (in the case of the date or venue change)
-          donationBatch.donations = response.donations;
-          data = donationBatch.donations;
-          $scope.gridOptions.data = donationBatch.donations;
-          $scope.data = data;
-          if ($scope.donation) {
-            // update the currently selected donation
-            $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : $scope.donation.donationIdentificationNumber})[0];
-          }
-
+          $scope.refreshDonationBatch(donationBatch, response);
         }, function(err) {
           console.error(err);
         });
       }
     };
+
+    $scope.refreshDonationBatch = function(donationBatch, response) {
+      // refresh the donation batch permissions
+      if (donationBatch.permissions) {
+        donationBatch.permissions = response.permissions;
+      }
+      // update the donations (in the case of the date or venue change)
+      donationBatch.donations = response.donations;
+      data = donationBatch.donations;
+      $scope.gridOptions.data = donationBatch.donations;
+      $scope.data = data;
+      if ($scope.donation) {
+        // update the currently selected donation
+        $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : $scope.donation.donationIdentificationNumber})[0];
+      }
+    }
 
     $scope.closeDonationBatch = function (donationBatch){
       DonorService.closeDonationBatch(donationBatch, function(response) {
