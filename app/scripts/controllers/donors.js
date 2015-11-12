@@ -1660,7 +1660,7 @@ angular.module('bsis')
         // update the currently selected donation
         $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : $scope.donation.donationIdentificationNumber})[0];
       }
-    }
+    };
 
     $scope.closeDonationBatch = function (donationBatch){
       DonorService.closeDonationBatch(donationBatch, function(response) {
