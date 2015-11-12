@@ -77,11 +77,10 @@
                     </button>
                   </em>
                 </div>
-
-                <form editable-form name="editableDeferralForm" onaftersave="updateDonorDeferral(deferral, editableDeferralForm)" style="display:inline;">
+                <form editable-form name="editableDeferralForm" onaftersave="updateDonorDeferral(deferral)" style="display:inline;">
                   <!-- Edit deferral actions -->
                   <div has-permission="{{permissions.EDIT_DEFFERAL}}" ng-hide="confirmDelete || endDeferralForm.$visible" style="display:inline;">
-                    <em><button type="button" class="btn btn-link" ng-click="editableDeferralForm.$show()" ng-hide="editableDeferralForm.$visible">Edit</button></em>  
+                    <em><button type="button" class="btn btn-link" ng-click="editableDeferralForm.$show()" ng-hide="editableDeferralForm.$visible" ng-disabled="!deferral.permissions.canEdit">Edit</button></em>  
 
                     <span ng-show="editableDeferralForm.$visible">
                       <em>
@@ -99,7 +98,7 @@
                 <form editable-form name="endDeferralForm" onaftersave="endDonorDeferral(deferral, comment, endDeferralForm)" style="display:inline;">
                   <!-- End deferral actions -->
                   <div has-permission="{{permissions.EDIT_DEFFERAL}}" ng-hide="editableDeferralForm.$visible || confirmDelete" style="display:inline;">
-                    <em><button type="button" class="btn btn-link" ng-click="endDeferralForm.$show()" ng-hide="endDeferralForm.$visible" ng-disabled="!deferral.permissions.canDelete">End Deferral</button></em>  
+                    <em><button type="button" class="btn btn-link" ng-click="endDeferralForm.$show()" ng-hide="endDeferralForm.$visible" ng-disabled="!deferral.permissions.canEnd">End Deferral</button></em>  
 
                     <span ng-show="endDeferralForm.$visible">
                       <input size="30" type="comment" placeholder="Comment" class="form-control input-sm"  id="comment" name="comment" ng-model="comment" required>
