@@ -100,6 +100,11 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     });
   };
 
+  $scope.onRowClick = function (row) {
+    $location.path('donorCounselling/' + row.entity.donor.id);
+  };
+
+
   var columnDefs = [
     {name: 'Donor #', field: 'donor.donorNumber'},
     {name: 'First Name', field: 'donor.firstName'},
@@ -135,6 +140,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     paginationPageSize: 10,
     paginationPageSizes: [10],
     paginationTemplate: 'views/template/pagination.html',
+    rowTemplate: 'views/template/clickablerow.html',
     columnDefs: columnDefs,
 
     // Format values for exports
