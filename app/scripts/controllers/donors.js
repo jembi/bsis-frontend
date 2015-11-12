@@ -1258,7 +1258,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams, $timeout) {
+  .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, DATEFORMAT, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -1270,7 +1270,7 @@ angular.module('bsis')
     $scope.openDonationBatches = false;
     $scope.recentDonationBatches = false;
     $scope.newDonationBatch = {backEntry: false};
-
+    $scope.dateFormat = DATEFORMAT;
 
     $scope.getOpenDonationBatches = function (){
 
@@ -1303,23 +1303,72 @@ angular.module('bsis')
 
     $scope.getOpenDonationBatches();
 
-    $scope.getRecentDonationBatches = function (){
+    $scope.clearDates = function() {
+      $scope.search.startDate = null;
+      $scope.search.endDate = null;
+    };
 
-      DonorService.getRecentDonationBatches( function(response){
+    $scope.clearVenues = function() {
+      $scope.search.selectedVenues = [];
+    };
+
+    var master = {
+      isClosed:true,
+      selectedVenues: [],
+      startDate: moment().subtract(7, 'days').startOf('day').toDate(),
+      endDate: moment().endOf('day').toDate()
+    };
+
+    $scope.clearSearch = function() {
+      $location.search({});
+      $scope.searched = false;
+      $scope.search = angular.copy(master);
+    };
+
+    $scope.search = angular.copy(master);
+
+
+    $scope.getRecentDonationBatches = function (){
+      var query = angular.copy(master);
+
+      if ($scope.search.startDate) {
+        var startDate =  moment($scope.search.startDate).startOf('day').toDate();
+        query.startDate = startDate;
+      }
+
+      if ($scope.search.endDate) {
+        var endDate =  moment($scope.search.endDate).endOf('day').toDate();
+        query.endDate = endDate;
+      }
+
+      if ($scope.search.selectedVenues.length > 0) {
+        query.venues = $scope.search.selectedVenues;
+      }
+
+      $scope.searching = true;
+
+      DonorService.getRecentDonationBatches(query,  function(response){
+        $scope.searching = false;
         if (response !== false){
           recentDonationBatchData = response.donationBatches;
           $scope.recentDonationBatchData = recentDonationBatchData;
           if (recentDonationBatchData.length > 0){
             $scope.recentDonationBatches = true;
           }
+
+
           else {
             $scope.recentDonationBatches = false;
           }
         }
         else{
         }
+      }, function(err) {
+        $scope.searching = false;
+        console.log(err);
       });
     };
+
 
     $scope.getRecentDonationBatches();
 

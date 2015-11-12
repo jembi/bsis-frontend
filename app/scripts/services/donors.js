@@ -244,11 +244,11 @@ angular.module('bsis')
         response(false);
       });
     },
-    getRecentDonationBatches: function (response) {
-      Api.RecentDonationBatches.get({count:10}, function (donationBatches) {
-        response(donationBatches);
-      }, function (){
-        response(false);
+    getRecentDonationBatches: function (searchObject, onSuccess, onError) {
+      Api.FindDonationBatches.query(searchObject, function (donationBatches) {
+        onSuccess(donationBatches);
+      }, function (err){
+        onError(err.data);
       });
     },
     addDonationBatch: function (donationBatch, onSuccess, onError){
