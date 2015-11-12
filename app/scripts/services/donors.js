@@ -205,23 +205,18 @@ angular.module('bsis')
     deleteDonorDeferral: function(donorDeferralId, onSuccess, onError) {
       Api.Deferrals.delete({id: donorDeferralId}, onSuccess, onError);
     },
-    endDonorDeferral: function(donorDeferralId, comment, response) {
+    endDonorDeferral: function(donorDeferralId, comment, onSuccess, onError) {
       Api.EndDeferral.update({id:donorDeferralId}, comment, function(data) {
-         response(data);
-        }, function (){
-          response(false);
+          onSuccess(data.deferral);
+        }, function(err) {
+          onError(err.data);
         });
     },
-    updateDonorDeferral: function(donorDeferral, response) {
-      var updateDeferral = Api.Deferrals.get({id:donorDeferral.id}, function() {
-        updateDeferral = updateDeferral.deferral;
-        angular.copy(donorDeferral, updateDeferral);
-        Api.Deferrals.update({id:donorDeferral.id}, updateDeferral, function(data) {
-          response(data);
-        }, function (){
-          response(false);
-        }); 
-
+    updateDonorDeferral: function(donorDeferral, onSuccess, onError) {
+      Api.Deferrals.update({id:donorDeferral.id}, donorDeferral, function(data) {
+        onSuccess(data.deferral);
+      }, function(err) {
+        onError(err.data);
       });
     },
     getDonations: function (donorId, response) {

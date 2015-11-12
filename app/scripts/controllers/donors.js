@@ -392,7 +392,7 @@ angular.module('bsis')
     };
 
     $scope.getDeferrals = function (donorId) {
-
+      $scope.confirmDelete = false;
       $scope.deferralView = 'viewDeferrals';
 
       DonorService.getDeferrals(donorId, function(response){
@@ -448,19 +448,19 @@ angular.module('bsis')
           var endDeferralPostData = {};
           endDeferralPostData.comment = comment;
           DonorService.endDonorDeferral(deferral.id, endDeferralPostData, function(response) {
-            if (response !== false) {
-              // edit the end date in the table
-              var updatedDeferral = response.deferral;
-              var deferralsData = $scope.deferralsData.filter(function(d) {
-                if (d.id === updatedDeferral.id) {
-                  d.deferredUntil = updatedDeferral.deferredUntil;
-                  d.deferralReasonText = updatedDeferral.deferralReasonText;
-                  return true;
+            // edit the end date in the table
+            var updatedDeferral = response;
+            angular.forEach($scope.deferralsData, function(d) {
+              if (d.id === updatedDeferral.id) {
+                if (deferral.permissions) {
+                  deferral.permissions = response.permissions;
                 }
-                return true;
-              });
-              $scope.deferralsData = deferralsData;
-            }
+                d.deferredUntil = updatedDeferral.deferredUntil;
+                d.deferralReasonText = updatedDeferral.deferralReasonText;
+              }
+            });
+          }, function(err) {
+            $scope.err = err;
           });
         }
       };
@@ -468,8 +468,10 @@ angular.module('bsis')
       $scope.updateDonorDeferral = function(deferral) {
         DonorService.updateDonorDeferral(deferral, function(response) {
           if (deferral.permissions) {
-            deferral.permissions = response.deferral.permissions;
+            deferral.permissions = response.permissions;
           }
+        }, function(err) {
+          $scope.err = err;
         });
       };
 
@@ -495,7 +497,7 @@ angular.module('bsis')
           });
           $scope.deferralsData = deferralsData;
         }, function(err) {
-          console.error(err);
+          $scope.err = err;
           $scope.confirmDelete = false;
         });
       };
