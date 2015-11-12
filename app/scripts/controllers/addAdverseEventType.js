@@ -28,6 +28,7 @@ angular.module('bsis').controller('AddAdverseEventTypeCtrl', function($scope, $l
       isDeleted: $scope.adverseEventType.isDeleted
     };
 
+    $scope.savingAdverseEventType = true;
     AdverseEventsService.createAdverseEventType(adverseEventType, function() {
       $location.path('/adverseEventTypes');
     }, function(response) {
@@ -36,6 +37,7 @@ angular.module('bsis').controller('AddAdverseEventTypeCtrl', function($scope, $l
       } else {
         console.error(response);
       }
+      $scope.savingAdverseEventType = false;
     });
   };
 });

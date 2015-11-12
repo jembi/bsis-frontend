@@ -36,11 +36,13 @@ angular.module('bsis')
       }
 
       // Update the user details
+      $scope.updatingUser = true;
       UsersService.updateLoggedOnUser($scope.userDetails, function(updatedUser) {
         $scope.masterDetails = updatedUser;
         $scope.resetUserDetails();
         $scope.detailsStyle = 'success';
         $scope.detailsMessage = 'Your details were successfully updated.';
+        $scope.updatingUser = false;
       }, function(response) {
         $scope.detailsStyle = 'danger';
         if (response.data && response.data['user.password']) {
@@ -48,6 +50,7 @@ angular.module('bsis')
         } else {
           $scope.detailsMessage = 'Updating details failed. Please try again.';
         }
+        $scope.updatingUser = false;
       });
     };
 

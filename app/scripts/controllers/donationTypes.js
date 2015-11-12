@@ -122,6 +122,7 @@ angular.module('bsis')
     $scope.updateDonationType = function (donationType, donationTypeForm) {
       if (donationTypeForm.$valid) {
 
+        $scope.savingDonationType = true;
         DonationTypesService.updateDonationType(donationType, function (response, err) {
           if (response !== false){
             $scope.go('/donationTypes');
@@ -132,6 +133,7 @@ angular.module('bsis')
               $scope.serverError.type = err.type;
             }
           }
+          $scope.savingDonationType = false;
         });
       } else {
         $scope.submitted = true;
@@ -143,6 +145,7 @@ angular.module('bsis')
 
       if (donationTypeForm.$valid) {
         donationType.isDeleted = false;
+        $scope.savingDonationType = true;
         DonationTypesService.addDonationType(donationType, function (response, err) {
           if (response !== false) {
             $scope.donationType = {
@@ -159,6 +162,7 @@ angular.module('bsis')
               $scope.serverError.type = err.type;
             }
           }
+          $scope.savingDonationType = false;
         });
       }
       else {
