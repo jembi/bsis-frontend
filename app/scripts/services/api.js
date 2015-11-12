@@ -39,6 +39,15 @@ angular.module('bsis')
         }
       ),
 
+      EndDeferral: $resource(url + '/deferrals/:id/end', null,
+        {
+          update: {
+            method:'PUT',
+            params:{id: '@id'}
+          }
+        }
+      ),
+
       deferralReasons: $resource(url + '/deferralreasons/:id', null,
         {
           update: {method:'PUT'}

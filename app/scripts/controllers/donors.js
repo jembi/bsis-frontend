@@ -443,6 +443,53 @@ angular.module('bsis')
         return def;
       };
 
+      $scope.endDonorDeferral = function(deferral, comment, endDeferralForm) {
+        if (endDeferralForm.$valid) {
+          var endDeferralPostData = {};
+          endDeferralPostData.comment = comment;
+          DonorService.endDonorDeferral(deferral.id, endDeferralPostData, function() {
+            // FIXME: get reloading code to work
+            var deferralsData = $scope.deferralsData;
+            deferralsData = deferralsData.filter(function(deferralId) {
+              if (deferral.id === deferralId) {
+                deferral.deferredUntil = new Date();
+                return false;
+              }
+              return true;
+            });
+            $scope.deferralsData = deferralsData;
+            //$scope.deferralTableParams.reload();
+          }, function(err) {
+            console.error(err);
+          });
+        }
+      };
+
+      $scope.updateDonorDeferral = function(deferral) {
+        $scope.message=deferral;
+        DonorService.updateDonorDeferral(deferral, function() {
+          // no need to do anything i believe
+        }, function(err) {
+          console.error(err);
+        });
+      };
+
+      $scope.deleteDonorDeferral = function(donorDeferralId) {
+        DonorService.deleteDonorDeferral(donorDeferralId, function() {
+          // FIXME
+            /*deferralsData = deferralsData.filter(function(deferralId) {
+              if (deferral.id === deferralId) {
+                deferral.deferredUntil = new Date();
+                return false;
+              }
+              return true;
+            });*/
+            $scope.deferralTableParams.reload();
+        }, function(err) {
+          console.error(err);
+          $scope.confirmDelete = false;
+        });
+      };
     };
 
     $scope.getDonations = function (donorId) {

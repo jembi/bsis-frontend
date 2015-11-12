@@ -202,6 +202,42 @@ angular.module('bsis')
         response(false);
       });
     },
+    deleteDonorDeferral: function(donorDeferralId, onSuccess, onError) {
+      Api.Deferrals.delete({id: donorDeferralId}, onSuccess, onError);
+    },
+    endDonorDeferral: function(donorDeferralId, comment, response) {
+      Api.EndDeferral.update({id:donorDeferralId}, comment, function(data) {
+         response(data.deferral);
+        }, function (){
+          response(false);
+        });
+    },
+    updateDonorDeferral: function(donorDeferral, response) {
+      var updateDeferral = Api.Deferrals.get({id:donorDeferral.id}, function() {
+        updateDeferral = updateDeferral.deferral;
+        angular.copy(donorDeferral, updateDeferral);
+
+        Api.Deferrals.update({id:donorDeferral.id}, updateDeferral, function(data) {
+         response(data.deferral);
+        }, function (){
+          response(false);
+        }); 
+
+      });
+      /*var updateDonorDeferral = {};
+      //updateDonorDeferral.id = donorDeferral.id;
+      //updateDonorDeferral.deferralReasonText = donorDeferral.deferralReasonText;
+      //updateDonorDeferral.deferralReason = donorDeferral.deferralReason;
+      //updateDonorDeferral.deferredDonor = donorDeferral.deferredDonor;
+      //updateDonorDeferral.deferredUntil = donorDeferral.deferredUntil;
+      angular.copy(donorDeferral, updateDonorDeferral);
+      //delete updateDonorDeferral.permissions;
+      Api.Deferrals.update({id:donorDeferral.id}, updateDonorDeferral, function(data) {
+       response(data.deferral);
+      }, function (){
+        response(false);
+      });*/
+    },
     getDonations: function (donorId, response) {
       Api.DonorDonations.get({id:donorId}, function (donations) {
         response(donations);
