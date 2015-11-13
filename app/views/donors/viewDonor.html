@@ -203,19 +203,18 @@
                         </em>
                       </span>
                     </span>
-                    <span e-class="xeditable" e-required editable-text="donor.idNumber" e-id="idNumber" e-name="idNumber">{{donor.idNumber}}</span>
-                    <em>
-                    <span ng-if="donor.idType.id">(</span>
-                    <span e-required e-class="xeditable" e-id="idType" e-name="idType" editable-select="donor.idType.id" e-ng-options="item.id as item.idType for item in idTypes" e-name="idType">
-                      {{donor.idType.idType}}
+                    <span e-model="idType" e-class="xeditable" e-id="idType" e-name="idType" editable-select="donor.idType.id" e-ng-options="item.id as item.idType for item in idTypes" e-name="idType">
+                      <em>{{donor.idType.idType}}</em>
                     </span>
-                    <span ng-if="donor.idType.id">)</span>
+                    <span ng-if="donor.idType.id"> - </span>
+                    <span e-ng-disabled="!donorIdentifierForm.idType.$modelValue > 0" e-class="xeditable"  editable-text="donor.idNumber" e-id="idNumber" e-name="idNumber"
+                    >{{donor.idNumber}}</span>
+                    <span ng-show="donorIdentifierForm.$visible" class="error">{{ errorObject.identifier[0].error }}</span>
+                    <em>
+                    
                     </em>
 
                   </form>
-                </td>
-                <td>
-                  <span ng-show="donorIdentifierForm.$visible" class="error">{{ errorObject.identifier[0].error }}</span>
                 </td>
               </tr>
 
