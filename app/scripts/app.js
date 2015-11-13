@@ -31,8 +31,7 @@ var app = angular.module('bsis', [
       // LOGIN PAGE
       .when('/login', {
         templateUrl : 'views/login.html',
-        controller  : 'LoginCtrl',
-        permission: !PERMISSIONS.AUTHENTICATED
+        controller  : 'LoginCtrl'
       })
 
       // FORGOT PASSWORD PAGE
@@ -455,6 +454,10 @@ var app = angular.module('bsis', [
           $location.path( "/login" );
         }else{
           AuthService.refreshSession();
+
+          if ($location.path() == '/login') {
+            $location.path( "/home" );
+          }
 
           // Check if the user must reset their password
           if (AuthService.getLoggedOnUser().passwordReset) {
