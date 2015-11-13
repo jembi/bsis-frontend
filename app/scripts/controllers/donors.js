@@ -515,11 +515,14 @@ angular.module('bsis')
 
       $scope.deleteDonorDeferral = function(donorDeferralId) {
         DonorService.deleteDonorDeferral(donorDeferralId, function() {
+          // refresh the notice at the top
+          $scope.clearDeferralMessage();
           // remove item from the table once it has been deleted
           var deferralsData = $scope.deferralsData.filter(function(deferral) {
             if (deferral.id === donorDeferralId) {
               return false;
             }
+            $scope.refreshDeferralMessage(deferral);
             return true;
           });
           $scope.deferralsData = deferralsData;
