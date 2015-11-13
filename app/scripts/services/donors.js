@@ -206,7 +206,7 @@ angular.module('bsis')
       Api.Deferrals.delete({id: donorDeferralId}, onSuccess, onError);
     },
     endDonorDeferral: function(donorDeferralId, comment, onSuccess, onError) {
-      Api.EndDeferral.update({id:donorDeferralId}, comment, function(data) {
+      Api.Deferrals.end({id:donorDeferralId}, comment, function(data) {
           onSuccess(data.deferral);
         }, function(err) {
           onError(err.data);
