@@ -189,7 +189,7 @@
                 <td class="icon"><i class="fa {{icons.INFO}}"></i></td>
                 <td class="field">Identifier: </td>
                 <td class="value">
-                  <form editable-form name="donorIdentifierForm" onbeforesave="checkIdentifier($data)" onaftersave="updateDonor(donor)">
+                  <form editable-form name="donorIdentifierForm" onbeforesave="checkIdentifier($data)" onaftersave="updateDonor(donor)" novalidate>
                     <span style="float: right; padding-right: 15px; padding-left: 15px; font-size: 0.9em">
                       <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="donorIdentifierForm.$show()" ng-show="!donorIdentifierForm.$visible">Edit</a></em>
                       <span ng-show="donorIdentifierForm.$visible">
@@ -203,10 +203,10 @@
                         </em>
                       </span>
                     </span>
-                    <span e-class="xeditable"  editable-text="donor.idNumber" e-id="idNumber" e-name="idNumber">{{donor.idNumber}}</span>
+                    <span e-class="xeditable" e-required editable-text="donor.idNumber" e-id="idNumber" e-name="idNumber">{{donor.idNumber}}</span>
                     <em>
                     <span ng-if="donor.idType.id">(</span>
-                    <span e-class="xeditable" e-id="idType" e-name="idType" editable-select="donor.idType.id" e-ng-options="item.id as item.idType for item in idTypes" e-name="idType">
+                    <span e-required e-class="xeditable" e-id="idType" e-name="idType" editable-select="donor.idType.id" e-ng-options="item.id as item.idType for item in idTypes" e-name="idType">
                       {{donor.idType.idType}}
                     </span>
                     <span ng-if="donor.idType.id">)</span>

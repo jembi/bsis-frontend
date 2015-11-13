@@ -228,10 +228,8 @@ angular.module('bsis')
     $scope.formErrors = [];
 
     $scope.checkIdentifier = function (data) {
-     
       if (!data.idNumber || data.idType === undefined) {
-
-        $scope.clearError('identifier ');
+        $scope.clearError('identifier');
         $scope.raiseError('identifier',  'Please enter both the identifier and the ID type');
         $scope.getError('identifier');
         return ' ';
