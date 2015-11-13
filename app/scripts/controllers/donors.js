@@ -486,12 +486,15 @@ angular.module('bsis')
 
       $scope.clearDeferralMessage = function() {
           $scope.currentlyDeferred = false;
-          $scope.deferredUntilDate = new Date();
+          var today = new Date();
+          today.setHours(23, 59, 59, 0);
+          $scope.deferredUntilDate = today;
           $scope.deferredUntil = "No current deferrals";
       };
 
       $scope.refreshDeferralMessage = function(deferral) {
         var deferredUntil = new Date(deferral.deferredUntil);
+        deferredUntil.setHours(0, 0, 0, 0);
         if ($scope.deferredUntilDate.getTime() < deferredUntil.getTime()) {
           $scope.currentlyDeferred = true;
           $scope.deferredUntilDate = deferredUntil;
