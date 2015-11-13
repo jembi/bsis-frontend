@@ -6,7 +6,8 @@
         </alert>
         <p></p>
 
-        <div style="float:left; padding-right:50px;">
+      <div class="row">
+        <div class="col-sm-6">
           <h4>Overview</h4>
             <table class="dash-table">
               <tr>
@@ -52,7 +53,7 @@
               </tr>
             </table>
         </div>
-        <div style="float:left;">
+        <div class="col-sm-6">
           <h4>Demographics</h4>
             <table class="dash-table">
               <tr>
@@ -85,7 +86,18 @@
                 <td class="field">Preferred Address Type: </td>
                 <td class="value">{{mergedDonor.preferredAddressType.preferredAddressType}}</td>
               </tr>
-              <tr ng-if="mergedDonor.address.homeAddressLine1 != null && mergedDonor.address.homeAddressLine1 != ''">
+            </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h4>Addresses</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+            <table class="dash-table">
+            <tr ng-if="mergedDonor.address.homeAddressLine1 != null && mergedDonor.address.homeAddressLine1 != ''">
                 <td class="icon" style="vertical-align: top;"><i class="fa {{icons.MAPMARKER}}"></i></td>
                 <td class="field" style="width:46%; vertical-align: top;">Home: </td>
                 <td class="value" style="width:50%;">
@@ -99,6 +111,10 @@
                   <span ng-if="mergedDonor.address.homeAddressZipcode != null && mergedDonor.address.homeAddressZipcode != ''">{{mergedDonor.address.homeAddressZipcode}}</span>
                 </td>
               </tr>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <table class="dash-table">
               <tr ng-if="mergedDonor.address.postalAddressLine1 != null && mergedDonor.address.postalAddressLine1 != ''">
                 <td class="icon" style="vertical-align: top;"><i class="fa {{icons.MAPMARKER}}"></i></td>
                 <td class="field" style="width:46%; vertical-align: top;">Postal: </td>
@@ -113,6 +129,10 @@
                   <span ng-if="mergedDonor.address.postalAddressZipcode != null && mergedDonor.address.postalAddressZipcode != ''">{{mergedDonor.address.postalAddressZipcode}}</span>
                 </td>
               </tr>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <table class="dash-table">
               <tr ng-if="mergedDonor.address.workAddressLine1 != null && mergedDonor.address.workAddressLine1 != ''">
                 <td class="icon" style="vertical-align: top;"><i class="fa {{icons.MAPMARKER}}"></i></td>
                 <td class="field" style="width:46%; vertical-align: top;">Work: </td>
@@ -129,4 +149,4 @@
                 </tr>
             </table>
         </div>
-        <div style="clear: both;"></div>
+      </div>
