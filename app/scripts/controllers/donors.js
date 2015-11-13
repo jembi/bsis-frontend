@@ -217,6 +217,11 @@ angular.module('bsis')
       });
     };
 
+    $scope.onCancel = function () {
+      $scope.errorObject = {};
+      $scope.formErrors = [];
+    };
+
     $scope.errorObject = {};
 
     $scope.getError = function (errorName) {
