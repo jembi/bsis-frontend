@@ -448,16 +448,19 @@ angular.module('bsis')
           var endDeferralPostData = {};
           endDeferralPostData.comment = comment;
           DonorService.endDonorDeferral(deferral.id, endDeferralPostData, function(response) {
+            // refresh the notice at the top
+            $scope.clearDeferralMessage();
             // edit the end date in the table
             var updatedDeferral = response;
             angular.forEach($scope.deferralsData, function(d) {
               if (d.id === updatedDeferral.id) {
-                if (deferral.permissions) {
-                  deferral.permissions = response.permissions;
+                if (d.permissions) {
+                  d.permissions = updatedDeferral.permissions;
                 }
                 d.deferredUntil = updatedDeferral.deferredUntil;
                 d.deferralReasonText = updatedDeferral.deferralReasonText;
               }
+              $scope.refreshDeferralMessage(d);
             });
           }, function(err) {
             $scope.err = err;
@@ -467,12 +470,33 @@ angular.module('bsis')
 
       $scope.updateDonorDeferral = function(deferral) {
         DonorService.updateDonorDeferral(deferral, function(response) {
+          var updatedDeferral = response;
           if (deferral.permissions) {
-            deferral.permissions = response.permissions;
+            deferral.permissions = updatedDeferral.permissions;
           }
+          // refresh the notice at the top
+          $scope.clearDeferralMessage();
+          angular.forEach($scope.deferralsData, function(d) {
+            $scope.refreshDeferralMessage(d);
+          });
         }, function(err) {
           $scope.err = err;
         });
+      };
+
+      $scope.clearDeferralMessage = function() {
+          $scope.currentlyDeferred = false;
+          $scope.deferredUntilDate = new Date();
+          $scope.deferredUntil = "No current deferrals";
+      };
+
+      $scope.refreshDeferralMessage = function(deferral) {
+        var deferredUntil = new Date(deferral.deferredUntil);
+        if ($scope.deferredUntilDate.getTime() < deferredUntil.getTime()) {
+          $scope.currentlyDeferred = true;
+          $scope.deferredUntilDate = deferredUntil;
+          $scope.deferredUntil = deferral.deferredUntil;
+        }
       };
 
       $scope.updateDonorDeferralReason = function(deferral, deferralReason) {
