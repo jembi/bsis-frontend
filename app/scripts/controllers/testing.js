@@ -132,16 +132,19 @@ angular.module('bsis')
     };
 
     $scope.clearSearch = function() {
-      $location.search({});
+
       $scope.searched = false;
-      $scope.search = angular.copy(master);
+      $scope.search = {
+        status: 'CLOSED',
+        startDate: null,
+        endDate: null
+      };
     };
     
     $scope.search = angular.copy(master);
 
     $scope.getRecentTestBatches = function (){
-
-      var query = angular.copy(master);
+      var query = {};
 
       if ($scope.search.startDate) {
         var startDate = moment($scope.search.startDate).startOf('day').toDate();
