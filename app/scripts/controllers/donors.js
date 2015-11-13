@@ -201,6 +201,45 @@ angular.module('bsis')
       return d.promise;
     };
 
+    $scope.raiseError = function (errorName, errorMessage) {
+      $scope.formErrors.push(
+        {
+          name : errorName,
+          error: errorMessage
+        }
+      );
+    };
+
+    $scope.clearError = function (errorName) {
+      $scope.errorObject[errorName] = [];
+      $scope.formErrors = $scope.formErrors.filter(function( obj ) {
+        return obj.name !== errorName;
+      });
+    };
+
+    $scope.errorObject = {};
+
+    $scope.getError = function (errorName) {
+      $scope.errorObject[errorName] = $scope.formErrors.filter(function( obj ) {
+        return obj.name == errorName;
+      });
+    };
+
+    $scope.formErrors = [];
+
+    $scope.checkIdentifier = function (data) {
+      console.log(data);
+      if (!data.idNumber || data.idType === undefined) {
+        console.log('I am gere');
+        $scope.clearError('identifier ');
+        $scope.raiseError('identifier',  'Please enter both the identifier and the ID type');
+        $scope.getError('identifier');
+        return ' ';
+      } else {
+        $scope.clearError('identifier');
+      }
+    };
+
     $scope.master = DonorService.getDonor();
 
     $scope.cancelForm = function (donor, form) {
