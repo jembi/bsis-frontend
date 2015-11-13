@@ -144,7 +144,9 @@ angular.module('bsis')
     $scope.search = angular.copy(master);
 
     $scope.getRecentTestBatches = function (){
-      var query = {};
+      var query = {
+        status : 'CLOSED'
+      };
 
       if ($scope.search.startDate) {
         var startDate = moment($scope.search.startDate).startOf('day').toDate();
