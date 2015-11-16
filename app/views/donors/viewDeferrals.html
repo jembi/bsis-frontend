@@ -15,20 +15,19 @@
 <div ng-switch="deferralResults">
 <div ng-switch-when="true">
 
-  <table ng-table="deferralTableParams" show-filter="true" class="table">
+  <table ng-table="deferralTableParams"  class="table">
       <tr ng-repeat="deferral in $data"
           ng-click="changeSelection(deferral);"
           ng-mouseenter="this.$selected = true"
           ng-mouseleave="this.$selected = false"
           ng-class="{'active': deferral.$selected}">
-          <td data-title="'Deferred From'" style="width:15%;" header-class="text-left" class="text-center" sortable="'createdDate'"  filter="{ 'createdDate': 'text' }">
+          <td data-title="'Deferred From'" style="width:15%;" header-class="text-left" class="text-center" sortable="'createdDate'"  >
               {{deferral.createdDate | bsisDate}}
           </td>
-          <td data-title="'Deferred Until'" style="width:15%;" header-class="text-left" class="text-center" sortable="'deferredUntil'" filter="{ 'deferredUntil': 'text' }">
+          <td data-title="'Deferred Until'" style="width:15%;" header-class="text-left" class="text-center" sortable="'deferredUntil'" >
               {{deferral.deferredUntil | bsisDate}}
           </td>
-          <td data-title="'Reason'" style="width:22%;" header-class="text-left" sortable="'deferralReason.reason'" filter="{ 'deferralReason.reason': 'select' }" 
-              filter-data="deferralReasonsFilter($column)">
+          <td data-title="'Reason'" style="width:22%;" header-class="text-left" sortable="'deferralReason.reason'" >
               {{deferral.deferralReason.reason}}
           </td>
           <td data-title="'Comment'" header-class="text-left" sortable="'deferralReasonText'">

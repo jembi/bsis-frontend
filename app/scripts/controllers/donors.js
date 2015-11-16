@@ -472,18 +472,6 @@ angular.module('bsis')
         $timeout(function(){ $scope.deferralTableParams.reload(); });
       });
 
-      $scope.deferralReasonsFilter = function(column) {
-        var def = $q.defer();
-        var arr = [];
-        angular.forEach($scope.deferralReasons, function(item){
-          arr.push({
-            'id': item.reason,
-            'title': item.reason
-          });
-        });
-        def.resolve(arr);
-        return def;
-      };
 
     };
 
@@ -531,18 +519,7 @@ angular.module('bsis')
         $timeout(function(){ $scope.donationTableParams.reload(); });
       });
 
-      $scope.packTypeFilter = function(column) {
-        var def = $q.defer();
-        var arr = [];
-        angular.forEach(PACKTYPE.packtypes, function(item){
-          arr.push({
-              'id': item.name,
-              'title': item.name
-          });
-        });
-        def.resolve(arr);
-        return def;
-      };
+
 
     };
 
