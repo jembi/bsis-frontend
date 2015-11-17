@@ -629,6 +629,11 @@ input[disabled] {
   padding: 0px;
 }
 
+.btn-link {
+  padding: 0px 5px;
+  font-size: 0.9em;
+}
+
 .btn-link.text-danger {
   color: #A94442;
 }

@@ -434,7 +434,7 @@ angular.module('bsis')
     };
 
     $scope.getDeferrals = function (donorId) {
-
+      $scope.confirmDelete = false;
       $scope.deferralView = 'viewDeferrals';
 
       DonorService.getDeferrals(donorId, function(response){
@@ -485,6 +485,94 @@ angular.module('bsis')
         return def;
       };
 
+      $scope.endDonorDeferral = function(deferral, comment, endDeferralForm) {
+        if (endDeferralForm.$valid) {
+          var endDeferralPostData = {};
+          endDeferralPostData.comment = comment;
+          DonorService.endDonorDeferral(deferral.id, endDeferralPostData, function(response) {
+            // refresh the notice at the top
+            $scope.clearDeferralMessage();
+            // edit the end date in the table
+            var updatedDeferral = response;
+            angular.forEach($scope.deferralsData, function(d) {
+              if (d.id === updatedDeferral.id) {
+                if (d.permissions) {
+                  d.permissions = updatedDeferral.permissions;
+                }
+                d.deferredUntil = updatedDeferral.deferredUntil;
+                d.deferralReasonText = updatedDeferral.deferralReasonText;
+              }
+              $scope.refreshDeferralMessage(d);
+            });
+          }, function(err) {
+            $scope.err = err;
+          });
+        }
+      };
+
+      $scope.updateDonorDeferral = function(deferral) {
+        DonorService.updateDonorDeferral(deferral, function(response) {
+          var updatedDeferral = response;
+          if (deferral.permissions) {
+            deferral.permissions = updatedDeferral.permissions;
+          }
+          // refresh the notice at the top
+          $scope.clearDeferralMessage();
+          angular.forEach($scope.deferralsData, function(d) {
+            $scope.refreshDeferralMessage(d);
+          });
+        }, function(err) {
+          $scope.err = err;
+        });
+      };
+
+      $scope.clearDeferralMessage = function() {
+          $scope.currentlyDeferred = false;
+          var today = new Date();
+          today.setHours(23, 59, 59, 0);
+          $scope.deferredUntilDate = today;
+          $scope.deferredUntil = "No current deferrals";
+      };
+
+      $scope.refreshDeferralMessage = function(deferral) {
+        var deferredUntil = new Date(deferral.deferredUntil);
+        deferredUntil.setHours(0, 0, 0, 0);
+        if ($scope.deferredUntilDate.getTime() < deferredUntil.getTime()) {
+          $scope.currentlyDeferred = true;
+          $scope.deferredUntilDate = deferredUntil;
+          $scope.deferredUntil = deferral.deferredUntil;
+        }
+      };
+
+      $scope.updateDonorDeferralReason = function(deferral, deferralReason) {
+        // change end date
+        var newEndDate = new Date();
+        if (deferralReason.durationType === "PERMANENT") {
+          newEndDate.setFullYear(2100,0,1);
+        } else {
+          newEndDate.setDate(newEndDate.getDate() + deferralReason.defaultDuration);
+        }
+        deferral.deferredUntil = newEndDate;
+      };
+
+      $scope.deleteDonorDeferral = function(donorDeferralId) {
+        DonorService.deleteDonorDeferral(donorDeferralId, function() {
+          // refresh the notice at the top
+          $scope.clearDeferralMessage();
+          // remove item from the table once it has been deleted
+          var deferralsData = $scope.deferralsData.filter(function(deferral) {
+            if (deferral.id === donorDeferralId) {
+              return false;
+            }
+            $scope.refreshDeferralMessage(deferral);
+            return true;
+          });
+          $scope.deferralsData = deferralsData;
+        }, function(err) {
+          $scope.err = err;
+          $scope.confirmDelete = false;
+        });
+      };
     };
 
     $scope.getDonations = function (donorId) {
