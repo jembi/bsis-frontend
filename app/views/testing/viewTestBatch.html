@@ -5,30 +5,19 @@
 </span>
 
 <span ng-if="testBatch.status!='CLOSED'" class="h4" style="float: right; margin-top: 5px; padding-right: 15px;">
-  <span has-permission="{{permissions.ADD_TTI_OUTCOME}}"> <small><em><a href="" ng-click="recordTestResults(testBatch, 'tti')" >Record TTI Test Results</a></em></small> </span>
-  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> | </span>
-  <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> <small><em><a href="" ng-click="recordTestResults(testBatch, 'bloodGrouping')" >Record Blood Group Serology Results</a></em></small> </span>
-
-  <span ng-if="!pendingBloodTypingTests && !pendingTTITests 
-    && basicBloodTypingComplete && basicTTIComplete
-    && !pendingBloodTypingMatchTests">
-
-    | 
-
-    <small>
-    <span ng-if="testBatchToClose == testBatch.id">
-      <em><a href="" ng-click="closeTestBatch(testBatch)"> Confirm</a></em> | 
-      <em><a href="" ng-click="closeTestBatchCancel()"> Cancel</a></em>
-    </span>
-    <span ng-if="testBatchToClose != testBatch.id">
-      <em><a href="" ng-click="closeTestBatchCheck(testBatch)">Close Batch</a></em>
-    </span>
-    </small>
+  <span has-permission="{{permissions.ADD_TTI_OUTCOME}}">
+    <em><button class="btn btn-link" style="padding:0;" ng-click="recordTestResults(testBatch, 'tti')">Record TTI Test Results</button></em>
   </span>
+  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> | </span>
+  <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}">
+    <em><button class="btn btn-link" style="padding:0;" ng-click="recordTestResults(testBatch, 'bloodGrouping')">Record Blood Group Serology Results</button></em>
+  </span>
+  | <em><button class="btn btn-link" style="padding:0;" ng-disabled="!testBatch.permissions.canRelease" ng-click="releaseTestBatch(testBatch)">Release Batch</button></em>
+  | <em><button class="btn btn-link" style="padding:0;" ng-disabled="!testBatch.permissions.canClose" ng-click="closeTestBatch(testBatch)">Close Batch</button></em>
 </span>
 
 
-<hr/>
+<hr style="clear:right;" />
 
 <span class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
   <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-if="pendingBloodTypingTests || pendingTTITests"> <small><em><a href="" ng-click="recordPendingTestResults(testBatch)" >Record Confirmatory Test Results</a></em></small> </span>
