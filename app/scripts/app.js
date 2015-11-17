@@ -455,6 +455,10 @@ var app = angular.module('bsis', [
         }else{
           AuthService.refreshSession();
 
+          if ($location.path() == '/login') {
+            $location.path( "/home" );
+          }
+
           // Check if the user must reset their password
           if (AuthService.getLoggedOnUser().passwordReset) {
             $location.path('/passwordReset');

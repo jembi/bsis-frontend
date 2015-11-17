@@ -179,14 +179,7 @@ angular.module('bsis')
       RecentDonationBatches: $resource(url + '/donationbatches/recent/:count'),
       RecentTestBatches: $resource(url + '/testbatches/recent/:count'),
 
-      FindTestBatches: $resource(url + '/testbatches/search', {},
-        {
-          query: {
-            method: 'GET',
-            params:{status:'@status', createdBeforeDate:'@createdBeforeDate', createdAfterDate: '@createdAfterDate'}
-          }
-        }
-      ),
+      FindTestBatches: $resource(url + '/testbatches/search'),
 
       FindTestResults: $resource(url + '/testresults/search', {},
         {

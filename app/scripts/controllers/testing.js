@@ -678,18 +678,12 @@ angular.module('bsis')
       });
     };
 
-    $scope.closeTestBatchCheck = function(testBatch){
-      $scope.testBatchToClose = testBatch.id;
-    };
-
-    $scope.closeTestBatchCancel = function(){
-      $scope.testBatchToClose = '';
-    };
-
     $scope.closeTestBatch = function (testBatch){
+
+      // TODO: Confirmation dialog
+
       TestingService.closeTestBatch(testBatch, function(response){
         if (response !== false){
-          $scope.testBatchToClose = '';
           $location.path("/manageTestBatch");
         }
         else{
@@ -697,6 +691,15 @@ angular.module('bsis')
         }
       });
       
+    };
+
+    $scope.releaseTestBatch = function (testBatch){
+
+      // TODO: Confirmation dialog
+
+      TestingService.releaseTestBatch(testBatch, function(response) {
+        $scope.testBatch = response;
+      }, console.error);
     };
 
   })

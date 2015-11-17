@@ -201,6 +201,48 @@ angular.module('bsis')
       return d.promise;
     };
 
+    $scope.raiseError = function (errorName, errorMessage) {
+      $scope.formErrors.push(
+        {
+          name : errorName,
+          error: errorMessage
+        }
+      );
+    };
+
+    $scope.clearError = function (errorName) {
+      $scope.errorObject[errorName] = [];
+      $scope.formErrors = $scope.formErrors.filter(function( obj ) {
+        return obj.name !== errorName;
+      });
+    };
+
+    $scope.onCancel = function () {
+      $scope.errorObject = {};
+      $scope.formErrors = [];
+    };
+
+    $scope.errorObject = {};
+
+    $scope.getError = function (errorName) {
+      $scope.errorObject[errorName] = $scope.formErrors.filter(function( obj ) {
+        return obj.name == errorName;
+      });
+    };
+
+    $scope.formErrors = [];
+
+    $scope.checkIdentifier = function (data) {
+      if (!data.idNumber || data.idType === undefined) {
+        $scope.clearError('identifier');
+        $scope.raiseError('identifier',  'Please enter a valid identifier');
+        $scope.getError('identifier');
+        return ' ';
+      } else {
+        $scope.clearError('identifier');
+      }
+    };
+
     $scope.master = DonorService.getDonor();
 
     $scope.cancelForm = function (donor, form) {
@@ -1625,32 +1667,58 @@ angular.module('bsis')
       $scope.calIcon = 'fa-calendar';
       $scope.init();
 
-      $scope.donationBatchDateOpen = false;
       $scope.donationBatchView = 'viewDonationBatch';
 
     };
 
-    $scope.closeDonationBatchCheck = function(donationBatch){
-      $scope.donationBatchToClose = donationBatch.id;
+    $scope.updateDonationBatch = function(donationBatch, reopen) {
+      if (reopen) {
+        DonorService.reopenDonationBatch(donationBatch, function(response) {
+          donationBatch.isClosed = response.isClosed;
+          $scope.refreshDonationBatch(donationBatch, response);
+        }, function(err) {
+          console.error(err);
+        });
+      } else {
+        DonorService.updateDonationBatch(donationBatch, function(response) {
+          $scope.refreshDonationBatch(donationBatch, response);
+        }, function(err) {
+          console.error(err);
+        });
+      }
     };
 
-    $scope.closeDonationBatchCancel = function(){
-      $scope.donationBatchToClose = '';
+    $scope.refreshDonationBatch = function(donationBatch, response) {
+      // refresh the donation batch permissions
+      if (donationBatch.permissions) {
+        donationBatch.permissions = response.permissions;
+      }
+      // update the donations (in the case of the date or venue change)
+      donationBatch.donations = response.donations;
+      data = donationBatch.donations;
+      $scope.gridOptions.data = donationBatch.donations;
+      $scope.data = data;
+      if ($scope.donation) {
+        // update the currently selected donation
+        $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : $scope.donation.donationIdentificationNumber})[0];
+      }
     };
 
     $scope.closeDonationBatch = function (donationBatch){
-      DonorService.closeDonationBatch(donationBatch, function(response){
-        if (response !== false){
-          $scope.donationBatchToClose = '';
-          $location.path("/manageDonationBatches");
-        }
-        else{
-          // TODO: handle case where response == false
-        }
+      DonorService.closeDonationBatch(donationBatch, function(response) {
+        $location.path("/manageDonationBatches");
+      }, function(err) {
+        console.error(err);
       });
-
     };
 
+    $scope.deleteDonationBatch = function (donationBatchId){
+      DonorService.deleteDonationBatch(donationBatchId, function(response) {
+        $location.path("/manageDonationBatches");
+      }, function(err) {
+        console.error(err);
+      });
+    };
 
 
     $scope.onRowClick = function (row) {

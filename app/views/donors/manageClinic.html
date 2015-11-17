@@ -1,4 +1,4 @@
-<form editable-form name="editableForm" onaftersave="updateDonationBatch()">
+<form editable-form name="editableForm" onaftersave="updateDonationBatch(donationBatch, confirmReopen); confirmReopen = false; confirmEdit = false">
   <span class="h3"> 
     Manage Donation Batch
   </span> 
@@ -8,36 +8,60 @@
   <div class = "h4"> 
     <small><em>Date Created: </em></small> <span ng-show="!editableForm.$visible">{{ (donationBatch.createdDate | bsisDate) || '' }}</span>
     <span ng-show="editableForm.$visible">
-      <dateselect ng-model="donationBatch.tempDate" initDate="donationBatch.date" format="format" opened="donationBatchDateOpen" cal-icon="icons.CALENDAR">
-      </dateselect>
+      <dateselect ng-model="donationBatch.createdDate" initDate="donationBatch.createdDate" format="format" cal-icon="icons.CALENDAR" opened="dateToOpen"></dateselect>
     </span>
     | 
-    <small><em>Venue: </em></small> <span e-class="xeditable venue" editable-select="donationBatch.venue.name" e-ng-options="item.name as item.name for item in venues" e-name="venue"  e-required>{{donationBatch.venue.name}}</span>
+    <small><em>Venue: </em></small> <span e-class="xeditable venue" editable-select="donationBatch.venue" e-ng-options="item as item.name for item in venues track by item.name" e-name="venue"  e-required>{{donationBatch.venue.name}}</span>
     |
     <small><em>Number of Donations: </em></small> {{donationBatch.numDonations}}
-    <span has-permission="{{permissions.EDIT_DONATION_BATCH}}" class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
-      <span has-permission="{{permissions.HIDDEN}}">
-        <small><em><a href="" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a></em>  
-        <span ng-show="!editableForm.$visible"> | 
-        </span>
-        <span ng-show="editableForm.$visible">
-        <em><a href="" ng-click="updateDonationBatch()" ng-disabled="editableForm.$waiting">Save</a></em> | 
-        <em><a href="" ng-click="editableForm.$cancel()" ng-disabled="editableForm.$waiting">Cancel</a></em>
-        </span></small>
-      </span>
 
-      <span ng-show="!editableForm.$visible">
-        <span ng-if="donationBatchToClose == donationBatch.id">
-          <em><a href="" ng-click="closeDonationBatch(donationBatch)"> Confirm</a></em> | 
-          <em><a href="" ng-click="closeDonationBatchCancel()"> Cancel</a></em>
+
+    <span style="float: right; padding-right: 15px;">
+
+      <!-- Delete donor actions -->
+      <div has-permission="{{permissions.VOID_DONATION_BATCH}}" ng-hide="confirmClose || confirmReopen || confirmEdit" style="display:inline;">
+        <em><a href="" type="button" class="btn btn-link" ng-click="confirmDelete = true" ng-hide="confirmDelete" ng-disabled="!donationBatch.permissions.canDelete">Void</a></em>
+        <span ng-show="confirmDelete">
+          <em>
+            <a href="" type="button" class="btn btn-link text-danger" ng-click="deleteDonationBatch(donationBatch.id); confirmDelete = false">Void</a>
+            <a href="" type="button" class="btn btn-link text-muted" ng-click="confirmDelete = false">Cancel</a>
+          </em>
         </span>
-        <span ng-if="donationBatchToClose != donationBatch.id">
-          <em><a ng-if="donationBatch.isClosed!=true" href="" ng-click="closeDonationBatchCheck(donationBatch)">Close Batch</a></em>
+      </div>
+
+      <!-- Edit donor actions -->
+      <div has-permission="{{permissions.EDIT_DONATION_BATCH}}" ng-hide="confirmDelete || confirmClose || confirmReopen" style="display:inline;">
+        <em><a href="" type="button" class="btn btn-link" ng-click="editableForm.$show(); confirmEdit = true" ng-hide="confirmEdit" ng-disabled="!donationBatch.permissions.canEdit">Edit</a></em>
+        <span ng-show="confirmEdit">
+          <em>
+            <button type="submit" class="btn btn-link text-success" ng-disabled="editableForm.$waiting">Save</button>
+            <a href="" type="button" class="btn btn-link text-muted" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel(); confirmEdit = false;">Cancel</a>
+          </em>
         </span>
-      </span>
-      </small>
+      </div>
+
+      <!-- Close batch actions -->
+      <div has-permission="{{permissions.EDIT_DONATION_BATCH}}" ng-hide="donationBatch.isClosed === true || confirmDelete || confirmEdit" style="display:inline;">
+        <em><a href="" type="button" class="btn btn-link" ng-click="confirmClose = true" ng-hide="confirmClose" ng-disabled="!donationBatch.permissions.canClose">Close Batch</a></em>
+        <span ng-show="confirmClose">
+          <em>
+            <a href="" type="submit" class="btn btn-link text-success" ng-click="closeDonationBatch(donationBatch); confirmClose = false">Close</a>
+            <a href="" type="button" class="btn btn-link text-muted" ng-click="confirmClose = false">Cancel</a>
+          </em>
+        </span>
+      </div>
+
+      <!-- Reopen batch actions -->
+      <div has-permission="{{permissions.EDIT_DONATION_BATCH}}" ng-hide="donationBatch.isClosed === false || confirmDelete || confirmEdit" style="display:inline;">
+        <em><a href="" type="button" class="btn btn-link" ng-click="editableForm.$show(); confirmReopen = true" ng-hide="confirmReopen" ng-disabled="!donationBatch.permissions.canReopen">Reopen Batch</a></em>
+        <span ng-show="confirmReopen">
+          <em>
+            <button type="submit" class="btn btn-link text-success" ng-disabled="editableForm.$waiting">Reopen</button>
+            <a href="" type="button" class="btn btn-link text-muted" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel(); confirmReopen = false">Cancel</a>
+          </em>
+        </span>
+      </div>
     </span>
-
 
   </div>
 </form>
