@@ -184,14 +184,13 @@ angular.module('bsis')
         status: 'RELEASED'
       };
 
-      Api.TestBatches.update({id: testBatch.id}, updateTestBatch, onSuccess, onError); 
+      Api.TestBatches.update({id: testBatch.id}, updateTestBatch, onSuccess, onError);
     },
-
-    getRecentTestBatches: function (response) {
-      Api.RecentTestBatches.get({count:10}, function (testBatches) {
-        response(testBatches);
-      }, function (){
-        response(false);
+    getRecentTestBatches: function (options, onSuccess, onError) {
+        Api.FindTestBatches.get(options, function (testBatches) {
+        onSuccess(testBatches);
+      }, function (err){
+          onError(err.data);
       });
     }
   };
