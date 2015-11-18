@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('TestingCtrl', function ($scope, $rootScope, $location, TestingService, ICONS, PERMISSIONS, BLOODABO, BLOODRH, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('TestingCtrl', function ($scope, $rootScope, $location, TestingService, ICONS, PERMISSIONS, BLOODABO, BLOODRH, DATEFORMAT, $filter, ngTableParams, $timeout, $routeParams) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.bloodAboOptions = BLOODABO;
     $scope.bloodRhOptions = BLOODRH;
+    $scope.dateFormat = DATEFORMAT;
 
     var data = [{}];
     $scope.data = data;
@@ -117,9 +118,50 @@ angular.module('bsis')
 
     };
 
-    $scope.getRecentTestBatches = function (){
 
-      TestingService.getRecentTestBatches( function(response){
+
+    $scope.clearDates = function() {
+      $scope.search.startDate = null;
+      $scope.search.endDate = null;
+    };
+
+    var master = {
+      status: 'CLOSED',
+      startDate: moment().subtract(7, 'days').startOf('day').toDate(),
+      endDate: moment().endOf('day').toDate()
+    };
+
+    $scope.clearSearch = function() {
+
+      $scope.searched = false;
+      $scope.search = {
+        status: 'CLOSED',
+        startDate: null,
+        endDate: null
+      };
+    };
+    
+    $scope.search = angular.copy(master);
+
+    $scope.getRecentTestBatches = function (){
+      var query = {
+        status : 'CLOSED'
+      };
+
+      if ($scope.search.startDate) {
+        var startDate = moment($scope.search.startDate).startOf('day').toDate();
+        query.startDate = startDate;
+      }
+
+      if ($scope.search.endDate) {
+        var endDate = moment($scope.search.endDate).endOf('day').toDate();
+        query.endDate = endDate;
+      }
+
+      $scope.searching = true;
+
+      TestingService.getRecentTestBatches(query, function(response){
+        $scope.searching = false;
         if (response !== false){
           recentTestBatchData = response.testBatches;
           $scope.recentTestBatchData = recentTestBatchData;
@@ -133,6 +175,8 @@ angular.module('bsis')
         }
         else{
         }
+      }, function(err){
+        $scope.searching = false;
       });
     };
 

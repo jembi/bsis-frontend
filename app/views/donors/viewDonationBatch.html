@@ -6,34 +6,3 @@
   <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
 </p>
 <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
-
-<!--<table ng-table="donorClinicTableParams" show-filter="true" class="table">-->
-  <!--<tr ng-repeat="donation in $data"-->
-    <!--ng-click="viewDonationSummary(donation.donationIdentificationNumber); changeSelection(donation);"-->
-    <!--ng-mouseenter="this.$selected = true"-->
-    <!--ng-mouseleave="this.$selected = false"-->
-    <!--ng-class="{'active': donation.$selected}">-->
-    <!--<td data-title="'Donor #'" header-class="text-left" class="col-sm-2 text-center" sortable="'donorNumber'"  filter="{ 'donorNumber': 'text' }">-->
-        <!--{{donation.donorNumber}}-->
-    <!--</td>-->
-    <!--<td data-title="'DIN'" header-class="text-left" class="col-sm-2 text-center" sortable="'donationIdentificationNumber'"  filter="{ 'donationIdentificationNumber': 'text' }">-->
-        <!--{{donation.donationIdentificationNumber}}-->
-    <!--</td>-->
-    <!--<td data-title="'Pack Type'" header-class="text-left" class="col-sm-2" sortable="'packType'" filter="{ 'packType.packType': 'select' }"-->
-        <!--filter-data="packTypeFilter($column)">-->
-        <!--{{donation.packType.packType}}-->
-    <!--</td>-->
-    <!--<td data-title="'Donation Type'" header-class="text-left" class="col-sm-2 text-center" sortable="'donationType'" >-->
-        <!--{{donation.donationType.donationType}}-->
-    <!--</td>-->
-    <!--<td class="col-sm-1 text-center">-->
-      <!--<span style="font-size: 0.9em;" ng-hide="confirmDelete">-->
-        <!--<em><button class="btn btn-link btn-sm" style="padding:5px;" ng-click="$event.stopPropagation(); confirmDelete = true" ng-disabled="!donation.permissions.canDelete">Void</button></em>-->
-      <!--</span>-->
-      <!--<span style="font-size: 0.9em;" ng-show="confirmDelete">-->
-        <!--<button class="btn btn-link btn-sm text-danger" style="padding:5px;" ng-click="$event.stopPropagation(); deleteDonation(donation.id);">Void</button>-->
-        <!--<button class="btn btn-link btn-sm text-muted" style="padding:5px;" ng-click="$event.stopPropagation(); confirmDelete = false">Cancel</button>-->
-      <!--</span>-->
-    <!--</td>-->
-  <!--</tr>-->
-<!--</table>-->
