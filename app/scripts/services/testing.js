@@ -175,7 +175,7 @@ angular.module('bsis')
     reopenTestBatch: function (testBatch, onSuccess, onError) {
       var updateTestBatch = {};
       updateTestBatch.id = testBatch.id;
-      updateTestBatch.status = "OPEN";
+      updateTestBatch.status = "RELEASED";
 
       Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
         onSuccess(data);
