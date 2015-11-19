@@ -49,6 +49,7 @@ angular.module('bsis')
     TESTING: 'fa-flask',
     TINT: 'fa-tint',
     USER: 'fa-user',
+    VENUE: 'fa-hospital-o',
     WARNING: 'fa-warning',
     MAPMARKER: 'fa-map-marker'
   })

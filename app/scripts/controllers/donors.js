@@ -201,6 +201,48 @@ angular.module('bsis')
       return d.promise;
     };
 
+    $scope.raiseError = function (errorName, errorMessage) {
+      $scope.formErrors.push(
+        {
+          name : errorName,
+          error: errorMessage
+        }
+      );
+    };
+
+    $scope.clearError = function (errorName) {
+      $scope.errorObject[errorName] = [];
+      $scope.formErrors = $scope.formErrors.filter(function( obj ) {
+        return obj.name !== errorName;
+      });
+    };
+
+    $scope.onCancel = function () {
+      $scope.errorObject = {};
+      $scope.formErrors = [];
+    };
+
+    $scope.errorObject = {};
+
+    $scope.getError = function (errorName) {
+      $scope.errorObject[errorName] = $scope.formErrors.filter(function( obj ) {
+        return obj.name == errorName;
+      });
+    };
+
+    $scope.formErrors = [];
+
+    $scope.checkIdentifier = function (data) {
+      if (!data.idNumber || data.idType === undefined) {
+        $scope.clearError('identifier');
+        $scope.raiseError('identifier',  'Please enter a valid identifier');
+        $scope.getError('identifier');
+        return ' ';
+      } else {
+        $scope.clearError('identifier');
+      }
+    };
+
     $scope.master = DonorService.getDonor();
 
     $scope.cancelForm = function (donor, form) {
@@ -392,7 +434,7 @@ angular.module('bsis')
     };
 
     $scope.getDeferrals = function (donorId) {
-
+      $scope.confirmDelete = false;
       $scope.deferralView = 'viewDeferrals';
 
       DonorService.getDeferrals(donorId, function(response){
@@ -443,6 +485,94 @@ angular.module('bsis')
         return def;
       };
 
+      $scope.endDonorDeferral = function(deferral, comment, endDeferralForm) {
+        if (endDeferralForm.$valid) {
+          var endDeferralPostData = {};
+          endDeferralPostData.comment = comment;
+          DonorService.endDonorDeferral(deferral.id, endDeferralPostData, function(response) {
+            // refresh the notice at the top
+            $scope.clearDeferralMessage();
+            // edit the end date in the table
+            var updatedDeferral = response;
+            angular.forEach($scope.deferralsData, function(d) {
+              if (d.id === updatedDeferral.id) {
+                if (d.permissions) {
+                  d.permissions = updatedDeferral.permissions;
+                }
+                d.deferredUntil = updatedDeferral.deferredUntil;
+                d.deferralReasonText = updatedDeferral.deferralReasonText;
+              }
+              $scope.refreshDeferralMessage(d);
+            });
+          }, function(err) {
+            $scope.err = err;
+          });
+        }
+      };
+
+      $scope.updateDonorDeferral = function(deferral) {
+        DonorService.updateDonorDeferral(deferral, function(response) {
+          var updatedDeferral = response;
+          if (deferral.permissions) {
+            deferral.permissions = updatedDeferral.permissions;
+          }
+          // refresh the notice at the top
+          $scope.clearDeferralMessage();
+          angular.forEach($scope.deferralsData, function(d) {
+            $scope.refreshDeferralMessage(d);
+          });
+        }, function(err) {
+          $scope.err = err;
+        });
+      };
+
+      $scope.clearDeferralMessage = function() {
+          $scope.currentlyDeferred = false;
+          var today = new Date();
+          today.setHours(23, 59, 59, 0);
+          $scope.deferredUntilDate = today;
+          $scope.deferredUntil = "No current deferrals";
+      };
+
+      $scope.refreshDeferralMessage = function(deferral) {
+        var deferredUntil = new Date(deferral.deferredUntil);
+        deferredUntil.setHours(0, 0, 0, 0);
+        if ($scope.deferredUntilDate.getTime() < deferredUntil.getTime()) {
+          $scope.currentlyDeferred = true;
+          $scope.deferredUntilDate = deferredUntil;
+          $scope.deferredUntil = deferral.deferredUntil;
+        }
+      };
+
+      $scope.updateDonorDeferralReason = function(deferral, deferralReason) {
+        // change end date
+        var newEndDate = new Date();
+        if (deferralReason.durationType === "PERMANENT") {
+          newEndDate.setFullYear(2100,0,1);
+        } else {
+          newEndDate.setDate(newEndDate.getDate() + deferralReason.defaultDuration);
+        }
+        deferral.deferredUntil = newEndDate;
+      };
+
+      $scope.deleteDonorDeferral = function(donorDeferralId) {
+        DonorService.deleteDonorDeferral(donorDeferralId, function() {
+          // refresh the notice at the top
+          $scope.clearDeferralMessage();
+          // remove item from the table once it has been deleted
+          var deferralsData = $scope.deferralsData.filter(function(deferral) {
+            if (deferral.id === donorDeferralId) {
+              return false;
+            }
+            $scope.refreshDeferralMessage(deferral);
+            return true;
+          });
+          $scope.deferralsData = deferralsData;
+        }, function(err) {
+          $scope.err = err;
+          $scope.confirmDelete = false;
+        });
+      };
     };
 
     $scope.getDonations = function (donorId) {
@@ -1258,7 +1388,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, ngTableParams, $timeout) {
+  .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, DATEFORMAT, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -1270,7 +1400,7 @@ angular.module('bsis')
     $scope.openDonationBatches = false;
     $scope.recentDonationBatches = false;
     $scope.newDonationBatch = {backEntry: false};
-
+    $scope.dateFormat = DATEFORMAT;
 
     $scope.getOpenDonationBatches = function (){
 
@@ -1303,23 +1433,72 @@ angular.module('bsis')
 
     $scope.getOpenDonationBatches();
 
-    $scope.getRecentDonationBatches = function (){
+    $scope.clearDates = function() {
+      $scope.search.startDate = null;
+      $scope.search.endDate = null;
+    };
 
-      DonorService.getRecentDonationBatches( function(response){
+    $scope.clearVenues = function() {
+      $scope.search.selectedVenues = [];
+    };
+
+    var master = {
+      isClosed:true,
+      selectedVenues: [],
+      startDate: moment().subtract(7, 'days').startOf('day').toDate(),
+      endDate: moment().endOf('day').toDate()
+    };
+
+    $scope.clearSearch = function() {
+      $location.search({});
+      $scope.searched = false;
+      $scope.search = angular.copy(master);
+    };
+
+    $scope.search = angular.copy(master);
+
+
+    $scope.getRecentDonationBatches = function (){
+      var query = angular.copy(master);
+
+      if ($scope.search.startDate) {
+        var startDate =  moment($scope.search.startDate).startOf('day').toDate();
+        query.startDate = startDate;
+      }
+
+      if ($scope.search.endDate) {
+        var endDate =  moment($scope.search.endDate).endOf('day').toDate();
+        query.endDate = endDate;
+      }
+
+      if ($scope.search.selectedVenues.length > 0) {
+        query.venues = $scope.search.selectedVenues;
+      }
+
+      $scope.searching = true;
+
+      DonorService.getRecentDonationBatches(query,  function(response){
+        $scope.searching = false;
         if (response !== false){
           recentDonationBatchData = response.donationBatches;
           $scope.recentDonationBatchData = recentDonationBatchData;
           if (recentDonationBatchData.length > 0){
             $scope.recentDonationBatches = true;
           }
+
+
           else {
             $scope.recentDonationBatches = false;
           }
         }
         else{
         }
+      }, function(err) {
+        $scope.searching = false;
+        console.log(err);
       });
     };
+
 
     $scope.getRecentDonationBatches();
 
@@ -1576,32 +1755,58 @@ angular.module('bsis')
       $scope.calIcon = 'fa-calendar';
       $scope.init();
 
-      $scope.donationBatchDateOpen = false;
       $scope.donationBatchView = 'viewDonationBatch';
 
     };
 
-    $scope.closeDonationBatchCheck = function(donationBatch){
-      $scope.donationBatchToClose = donationBatch.id;
+    $scope.updateDonationBatch = function(donationBatch, reopen) {
+      if (reopen) {
+        DonorService.reopenDonationBatch(donationBatch, function(response) {
+          donationBatch.isClosed = response.isClosed;
+          $scope.refreshDonationBatch(donationBatch, response);
+        }, function(err) {
+          console.error(err);
+        });
+      } else {
+        DonorService.updateDonationBatch(donationBatch, function(response) {
+          $scope.refreshDonationBatch(donationBatch, response);
+        }, function(err) {
+          console.error(err);
+        });
+      }
     };
 
-    $scope.closeDonationBatchCancel = function(){
-      $scope.donationBatchToClose = '';
+    $scope.refreshDonationBatch = function(donationBatch, response) {
+      // refresh the donation batch permissions
+      if (donationBatch.permissions) {
+        donationBatch.permissions = response.permissions;
+      }
+      // update the donations (in the case of the date or venue change)
+      donationBatch.donations = response.donations;
+      data = donationBatch.donations;
+      $scope.gridOptions.data = donationBatch.donations;
+      $scope.data = data;
+      if ($scope.donation) {
+        // update the currently selected donation
+        $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber : $scope.donation.donationIdentificationNumber})[0];
+      }
     };
 
     $scope.closeDonationBatch = function (donationBatch){
-      DonorService.closeDonationBatch(donationBatch, function(response){
-        if (response !== false){
-          $scope.donationBatchToClose = '';
-          $location.path("/manageDonationBatches");
-        }
-        else{
-          // TODO: handle case where response == false
-        }
+      DonorService.closeDonationBatch(donationBatch, function(response) {
+        $location.path("/manageDonationBatches");
+      }, function(err) {
+        console.error(err);
       });
-
     };
 
+    $scope.deleteDonationBatch = function (donationBatchId){
+      DonorService.deleteDonationBatch(donationBatchId, function(response) {
+        $location.path("/manageDonationBatches");
+      }, function(err) {
+        console.error(err);
+      });
+    };
 
 
     $scope.onRowClick = function (row) {
