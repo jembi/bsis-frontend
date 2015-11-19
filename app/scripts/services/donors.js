@@ -202,6 +202,23 @@ angular.module('bsis')
         response(false);
       });
     },
+    deleteDonorDeferral: function(donorDeferralId, onSuccess, onError) {
+      Api.Deferrals.delete({id: donorDeferralId}, onSuccess, onError);
+    },
+    endDonorDeferral: function(donorDeferralId, comment, onSuccess, onError) {
+      Api.Deferrals.end({id:donorDeferralId}, comment, function(data) {
+          onSuccess(data.deferral);
+        }, function(err) {
+          onError(err.data);
+        });
+    },
+    updateDonorDeferral: function(donorDeferral, onSuccess, onError) {
+      Api.Deferrals.update({id:donorDeferral.id}, donorDeferral, function(data) {
+        onSuccess(data.deferral);
+      }, function(err) {
+        onError(err.data);
+      });
+    },
     getDonations: function (donorId, response) {
       Api.DonorDonations.get({id:donorId}, function (donations) {
         response(donations);

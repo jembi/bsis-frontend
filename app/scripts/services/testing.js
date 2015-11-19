@@ -90,7 +90,7 @@ angular.module('bsis')
       });
     },
     getOpenTestBatches: function (response) {
-      Api.FindTestBatches.query({status:'OPEN'}, function (testBatches) {
+      Api.FindTestBatches.get({status: ['OPEN', 'RELEASED']}, function (testBatches) {
         response(testBatches);
         console.log("testBatches: ", testBatches);
       }, function (){
@@ -176,11 +176,21 @@ angular.module('bsis')
 
       });
     },
-    getRecentTestBatches: function (response) {
-      Api.RecentTestBatches.get({count:10}, function (testBatches) {
-        response(testBatches);
-      }, function (){
-        response(false);
+
+    releaseTestBatch: function(testBatch, onSuccess, onError) {
+
+      var updateTestBatch = {
+        id: testBatch.id,
+        status: 'RELEASED'
+      };
+
+      Api.TestBatches.update({id: testBatch.id}, updateTestBatch, onSuccess, onError);
+    },
+    getRecentTestBatches: function (options, onSuccess, onError) {
+        Api.FindTestBatches.get(options, function (testBatches) {
+        onSuccess(testBatches);
+      }, function (err){
+          onError(err.data);
       });
     }
   };
