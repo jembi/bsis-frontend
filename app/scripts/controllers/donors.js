@@ -647,7 +647,7 @@ angular.module('bsis')
 
     };
 
-    $scope.viewDonationDetails = function (din) {
+    $scope.viewDonationSummary = function (din) {
 
       $scope.donation = $filter('filter')($scope.donationsData, {donationIdentificationNumber : din})[0];
 
@@ -659,7 +659,7 @@ angular.module('bsis')
         }
       });
 
-      $scope.donationsView = 'viewDonationDetails';
+      $scope.donationsView = 'viewDonationSummary';
 
     };
 
