@@ -698,10 +698,10 @@ angular.module('bsis')
 
     $scope.addDonationSuccess = '';
 
-    function confirmAddDonation(donationBatch) {
+    function confirmAddDonation(donation, donationBatch) {
 
       // Only show modal if donor is not eligible and batch is back entry
-      if ($scope.isEligible || !donationBatch.backEntry) {
+      if ($scope.isEligible || !donationBatch.backEntry || donation.packType.countAsDonation === false) {
         return $q.resolve(null);
       }
 
@@ -721,11 +721,11 @@ angular.module('bsis')
       return modal.result;
     }
 
-    $scope.addDonation = function (donation, donationBatch, bleedStartTime, bleedEndTime, valid) {
+    $scope.addDonation = function(donation, donationBatch, bleedStartTime, bleedEndTime, valid) {
 
       if (valid) {
 
-        confirmAddDonation(donationBatch).then(function () {
+        confirmAddDonation(donation, donationBatch).then(function() {
           $scope.addDonationSuccess = '';
 
           // set donation center, site & date to those of the donation batch
@@ -755,7 +755,7 @@ angular.module('bsis')
 
             $scope.addingDonation = false;
 
-          }, function (err) {
+          }, function(err) {
             $scope.err = err;
             $scope.addDonationSuccess = false;
             // refresh donor overview after adding donation
@@ -763,7 +763,7 @@ angular.module('bsis')
 
             $scope.addingDonation = false;
           });
-        }, function () {
+        }, function() {
           // Do nothing
         });
       }
@@ -1868,10 +1868,10 @@ angular.module('bsis')
 
     $scope.addDonationSuccess = '';
 
-    function confirmAddDonation() {
+    function confirmAddDonation(donation) {
 
       // Only show modal if donor is not eligible and batch is back entry
-      if ($scope.donorSummary.eligible || $scope.donationBatch.backEntry === false) {
+      if ($scope.donorSummary.eligible || $scope.donationBatch.backEntry === false || donation.packType.countAsDonation === false) {
         return $q.resolve(null);
       }
 
@@ -1891,11 +1891,11 @@ angular.module('bsis')
       return modal.result;
     }
 
-    $scope.addDonation = function (donation, bleedStartTime, bleedEndTime, valid) {
+    $scope.addDonation = function(donation, bleedStartTime, bleedEndTime, valid) {
 
       if (valid) {
 
-        confirmAddDonation().then(function() {
+        confirmAddDonation(donation).then(function() {
           $scope.addDonationSuccess = '';
 
           DonorService.setDonationBatch($scope.donationBatch);
@@ -1919,7 +1919,7 @@ angular.module('bsis')
             $scope.submitted = '';
             $scope.err = {};
             $scope.addingDonation = false;
-          }, function (err) {
+          }, function(err) {
 
             $scope.err = err;
             $scope.addDonationSuccess = false;
