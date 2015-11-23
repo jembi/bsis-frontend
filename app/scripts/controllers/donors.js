@@ -649,23 +649,109 @@ angular.module('bsis')
 
     $scope.viewDonationDetails = function (din) {
 
-      var requests = [];
       $scope.donation = $filter('filter')($scope.donationsData, {donationIdentificationNumber : din})[0];
-      $scope.testResults = {};
 
-      var testResultsRequest = TestingService.getTestResultsByDIN(din, function(response){
-        if (response !== false){
-          $scope.testResults = response.testResults.recentTestResults;
+      DonorService.getDonationsFormFields(function(response) {
+        if (response !== false) {
+          $scope.haemoglobinLevels = response.haemoglobinLevels;
+          $scope.packTypes = response.packTypes;
+          $scope.adverseEventTypes = [null].concat(response.adverseEventTypes);
+        }
+      });
+
+      $scope.donationsView = 'viewDonationDetails';
+
+    };
+
+    $scope.returnToListView = function () {
+
+      $scope.donationsView = 'viewDonations';
+
+    };
+
+    $scope.updateDonation = function (donation){
+
+      DonorService.updateDonation(donation, function(response){
+        if (response === true){
+
+          $scope.addDonationSuccess = true;
+          $scope.donation = {};
+          $location.path("/addDonation");
+
         }
         else{
+          // TODO: handle case where response == false
+          $scope.addDonationSuccess = false;
         }
-        requests.push(testResultsRequest);
       });
+    };
 
-      $q.all(requests).then(function(){
-        $scope.donationsView = 'viewDonationDetails';
+    $scope.validateForm = function (form){
+      if (form.$valid) {
+        return true;
+      } else {
+        return 'This form is not valid';
+      }
+    };
+
+    $scope.deleteDonation = function(donationId) {
+      DonorService.deleteDonation(donationId, function() {
+        data = data.filter(function(donation) {
+          return donation.id !== donationId;
+        });
+        $scope.donorClinicTableParams.reload();
+      }, function(err) {
+        console.error(err);
+        $scope.confirmDelete = false;
       });
+    };
 
+    $scope.close = function () {
+
+    };
+
+    $scope.raiseError = function (errorName, errorMessage) {
+      $scope.formErrors.push(
+        {
+          name : errorName,
+          error: errorMessage
+        }
+      );
+    };
+
+    $scope.clearError = function (errorName) {
+      $scope.errorObject[errorName] = [];
+      $scope.formErrors = $scope.formErrors.filter(function( obj ) {
+        return obj.name !== errorName;
+      });
+    };
+
+    $scope.errorObject = {};
+
+    $scope.getError = function (errorName) {
+      $scope.errorObject[errorName] = $scope.formErrors.filter(function( obj ) {
+        return obj.name == errorName;
+      });
+    };
+
+    $scope.formErrors = [];
+
+    $scope.checkErrors = function (min, max) {
+      if (min || max) {
+        return ' ';
+      }
+    };
+
+    $scope.checkBleedTimes = function(data) {
+
+      if (new Date(data.bleedEndTime) < new Date(data.bleedStartTime)){
+        $scope.clearError('bleedTime');
+        $scope.raiseError('bleedTime',  'Bleed start time should be less than end time');
+        $scope.getError('bleedTime');
+        return ' ';
+      } else {
+        $scope.clearError('bleedTime');
+      }
     };
 
     $scope.deleteDonation = function(donationId) {
@@ -1453,6 +1539,8 @@ angular.module('bsis')
       $location.search({});
       $scope.searched = false;
       $scope.search = angular.copy(master);
+
+      
     };
 
     $scope.search = angular.copy(master);
@@ -1748,7 +1836,7 @@ angular.module('bsis')
       return def;
     };
 
-    $scope.viewDonationBatch = function () {
+    $scope.returnToListView = function () {
 
       $scope.format = DATEFORMAT;
       $scope.initDate = '';
