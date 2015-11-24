@@ -459,7 +459,7 @@ angular.module('bsis')
         total: $scope.deferralsData.length, // length of data
         getData: function ($defer, params) {
           var deferralsData = $scope.deferralsData;
-          
+
           var orderedData = params.sorting() ?
             $filter('orderBy')(deferralsData, params.orderBy()) : deferralsData;
           params.total(orderedData.length); // set total for pagination
