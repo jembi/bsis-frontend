@@ -459,10 +459,9 @@ angular.module('bsis')
         total: $scope.deferralsData.length, // length of data
         getData: function ($defer, params) {
           var deferralsData = $scope.deferralsData;
-          var filteredData = params.filter() ?
-            $filter('filter')(deferralsData, params.filter()) : deferralsData;
+
           var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : deferralsData;
+            $filter('orderBy')(deferralsData, params.orderBy()) : deferralsData;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
@@ -472,18 +471,6 @@ angular.module('bsis')
         $timeout(function(){ $scope.deferralTableParams.reload(); });
       });
 
-      $scope.deferralReasonsFilter = function(column) {
-        var def = $q.defer();
-        var arr = [];
-        angular.forEach($scope.deferralReasons, function(item){
-          arr.push({
-            'id': item.reason,
-            'title': item.reason
-          });
-        });
-        def.resolve(arr);
-        return def;
-      };
 
       $scope.endDonorDeferral = function(deferral, comment, endDeferralForm) {
         if (endDeferralForm.$valid) {
@@ -606,10 +593,9 @@ angular.module('bsis')
         total: $scope.donationsData.length, // length of data
         getData: function ($defer, params) {
           var donationsData = $scope.donationsData;
-          var filteredData = params.filter() ?
-            $filter('filter')(donationsData, params.filter()) : donationsData;
+
           var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : donationsData;
+            $filter('orderBy')(donationsData, params.orderBy()) : donationsData;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
@@ -619,18 +605,7 @@ angular.module('bsis')
         $timeout(function(){ $scope.donationTableParams.reload(); });
       });
 
-      $scope.packTypeFilter = function(column) {
-        var def = $q.defer();
-        var arr = [];
-        angular.forEach(PACKTYPE.packtypes, function(item){
-          arr.push({
-              'id': item.name,
-              'title': item.name
-          });
-        });
-        def.resolve(arr);
-        return def;
-      };
+
 
     };
 
@@ -1732,20 +1707,6 @@ angular.module('bsis')
       else if (format === 'csv'){
         $scope.gridApi.exporter.csvExport('all', 'all');
       }
-    };
-
-
-    $scope.packTypeFilter = function(column) {
-      var def = $q.defer();
-      var arr = [];
-      angular.forEach(PACKTYPE.packtypes, function(item){
-        arr.push({
-            'id': item.name,
-            'title': item.name
-        });
-      });
-      def.resolve(arr);
-      return def;
     };
 
     $scope.viewDonationBatch = function () {
