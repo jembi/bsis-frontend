@@ -16,20 +16,19 @@
 <div ng-switch="donationResults">
 <div ng-switch-when="true">
 
-  <table ng-table="donationTableParams" show-filter="true" class="table">
+  <table ng-table="donationTableParams" class="table">
       <tr ng-repeat="donation in $data"
           ng-click="changeSelection(donation);"
           ng-mouseenter="this.$selected = true"
           ng-mouseleave="this.$selected = false"
           ng-class="{'active': donation.$selected}">
-          <td data-title="'Date'" header-class="text-left" class="col-sm-2 text-center" sortable="'donationDate'"  filter="{ 'donationDate': 'text' }">
+          <td data-title="'Date'" header-class="text-left" class="col-sm-2 text-center" sortable="'donationDate'"  >
               {{donation.donationDate | bsisDate }}
           </td>
-          <td data-title="'Venue'" header-class="text-left" class="col-sm-2" sortable="'venue'" filter="{ 'venue': 'text' }">
+          <td data-title="'Venue'" header-class="text-left" class="col-sm-2" sortable="'venue'" >
               {{donation.venue.name}}
           </td>
-          <td data-title="'Pack Type'" header-class="text-left" class="col-sm-2" sortable="'packType'" filter="{ 'packType': 'select' }"
-              filter-data="packTypeFilter($column)">
+          <td data-title="'Pack Type'" header-class="text-left" class="col-sm-2" sortable="'packType'">
               {{donation.packType.packType}}
           </td>
           <td data-title="'Wt'" header-class="text-left" class="col-sm-1 text-center" sortable="'donorWeight'">
