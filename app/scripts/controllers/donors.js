@@ -1711,20 +1711,6 @@ angular.module('bsis')
       }
     };
 
-
-    $scope.packTypeFilter = function(column) {
-      var def = $q.defer();
-      var arr = [];
-      angular.forEach(PACKTYPE.packtypes, function(item){
-        arr.push({
-            'id': item.name,
-            'title': item.name
-        });
-      });
-      def.resolve(arr);
-      return def;
-    };
-
     $scope.viewDonationBatch = function () {
 
       $scope.format = DATEFORMAT;

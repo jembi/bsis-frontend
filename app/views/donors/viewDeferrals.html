@@ -40,8 +40,7 @@
               </dateselect-end>
             </span>
           </td>
-          <td data-title="'Reason'" header-class="text-left" class="col-sm-3" sortable="'deferralReason.reason'"
-              filter-data="deferralReasonsFilter($column)">
+          <td data-title="'Reason'" header-class="text-left" class="col-sm-3" sortable="'deferralReason.reason'">
             <span ng-show="!editableDeferralForm.$visible">{{deferral.deferralReason.reason}}</span>
             <span ng-show="editableDeferralForm.$visible" e-required>
               <select name="deferralReason" class="form-control input-sm"
