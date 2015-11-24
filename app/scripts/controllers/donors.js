@@ -459,10 +459,9 @@ angular.module('bsis')
         total: $scope.deferralsData.length, // length of data
         getData: function ($defer, params) {
           var deferralsData = $scope.deferralsData;
-          var filteredData = params.filter() ?
-            $filter('filter')(deferralsData, params.filter()) : deferralsData;
+          
           var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : deferralsData;
+            $filter('orderBy')(deferralsData, params.orderBy()) : deferralsData;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
@@ -594,10 +593,9 @@ angular.module('bsis')
         total: $scope.donationsData.length, // length of data
         getData: function ($defer, params) {
           var donationsData = $scope.donationsData;
-          var filteredData = params.filter() ?
-            $filter('filter')(donationsData, params.filter()) : donationsData;
+
           var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : donationsData;
+            $filter('orderBy')(donationsData, params.orderBy()) : donationsData;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
