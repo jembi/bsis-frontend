@@ -44,13 +44,16 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
   });
 
   $scope.removeStatus = function () {
+    $scope.updatingCounselling = true;
     PostDonationCounsellingService.updatePostDonationCounselling({
       id: $scope.postDonationCounselling.id,
       flaggedForCounselling: true
     }, function(){
       $scope.goBack();
+      $scope.updatingCounselling = false;
     }, function(err) {
       console.error(err.data);
+      $scope.updatingCounselling = false;
     });
   };
 
