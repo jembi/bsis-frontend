@@ -329,8 +329,9 @@ angular.module('bsis')
   })
 
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, $modal, Alerting, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
-      GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout,$routeParams) {
+  .controller('ViewDonorCtrl', function ($scope, $location, $modal, Alerting, DonorService, TestingService, ICONS,
+                                         PACKTYPE, MONTH, TITLE, PostDonationCounsellingService, GENDER, DATEFORMAT,
+                                         DONATION, $filter, $q, ngTableParams, $timeout,$routeParams) {
 
 
     DonorService.getDonorById($routeParams.id, function (donor) {
@@ -408,6 +409,17 @@ angular.module('bsis')
         }
         else{
         }
+      });
+    };
+
+    $scope.flagForCounselling = function (donorId) {
+      PostDonationCounsellingService.updatePostDonationCounselling({
+        id: donorId,
+        flaggedForCounselling: true
+      }, function(){
+        $scope.getDonorOverview();
+      }, function(err) {
+        console.log(err.data);
       });
     };
 

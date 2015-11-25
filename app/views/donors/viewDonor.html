@@ -145,7 +145,7 @@
                 <td class="icon"><i class="fa {{icons.FLAG}}"></i></td>
                 <td class="field">Flagged For Counselling: </td>
                 <td ng-if="flaggedForCounselling" class="value red"> Yes <em class="pull-right" style="padding:0 15px;"><small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small></em></td>
-                <td ng-if="!flaggedForCounselling" class="value green">No <em ng-if="currentlyDeferred" class="pull-right" style="padding:0 15px;"><small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small></em></td>
+                <td ng-if="!flaggedForCounselling" class="value green">No <em ng-if="currentlyDeferred" class="pull-right" style="padding:0 15px;"><small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small> | <small><a ng-click="flagForCounselling(donor.id)">Flag for counselling</a></small></em></td>
               </tr>
               </tr>
               <tr><td></td></tr>
