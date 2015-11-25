@@ -365,6 +365,7 @@ angular.module('bsis')
       TestingService.getTestBatchById($routeParams.id, function(response){
           $scope.testBatch = response.testBatch;
           $scope.refreshCurrentTestBatch();
+          $scope.refreshTestBatchAvailableDonations();
       }, function (err){
         console.log(err);
       });
@@ -373,14 +374,22 @@ angular.module('bsis')
     $scope.refreshCurrentTestBatch = function() {
       // get the donation batches and the donations linked to this test batch
       $scope.testBatch.donationBatchIds = [];
-      $scope.testBatchAvailableDonationBatches = [];
       var donations = [];
       angular.forEach($scope.testBatch.donationBatches, function(batch){
         $scope.testBatch.donationBatchIds.push(batch.id);
-        $scope.testBatchAvailableDonationBatches.push(batch);
         angular.forEach(batch.donations, function(donation){
           donations.push(donation);
         });
+      });
+      data = donations;
+      $scope.gridOptions.data = data;
+      $scope.data = data;
+    };
+
+    $scope.refreshTestBatchAvailableDonations = function() {
+      $scope.testBatchAvailableDonationBatches = [];
+      angular.forEach($scope.testBatch.donationBatches, function(batch){
+        $scope.testBatchAvailableDonationBatches.push(batch);
       });
       // get the available donation batches
       TestingService.getTestBatchFormFields(function(response) {
@@ -392,10 +401,6 @@ angular.module('bsis')
           });
         }
       });
-
-      data = donations;
-      $scope.gridOptions.data = data;
-      $scope.data = data;
     };
 
     $scope.getCurrentTestBatch();
