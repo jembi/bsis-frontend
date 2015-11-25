@@ -79,42 +79,42 @@
         <tr ng-show="{{ui.ADDRESS.ADDRESS_LINE_1_ENABLED}}">
           <td class="icon"></td>
           <td class="field">{{ui.ADDRESS.ADDRESS_LINE_1_NAME}}: </td>
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressLine1" e-name="homeAddressLine1">{{donor.address.homeAddressLine1}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressLine1" e-name="homeAddressLine1">{{donor.address.homeAddressLine1 || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.ADDRESS_LINE_2_ENABLED}}">
           <td class="icon"></td>
           <td class="field">{{ui.ADDRESS.ADDRESS_LINE_2_NAME}}</td>
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressLine2" e-name="homeAddressLine2">{{donor.address.homeAddressLine2}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressLine2" e-name="homeAddressLine2">{{donor.address.homeAddressLine2 || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.CITY_ENABLED}}">
           <td class="icon"></td>
           <td class="field">{{ui.ADDRESS.CITY_NAME}}: </td>
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressCity" e-name="homeAddressCity">{{donor.address.homeAddressCity}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressCity" e-name="homeAddressCity">{{donor.address.homeAddressCity || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.DISTRICT_REGION_ENABLED}}">
           <td class="icon"></td>
           <td class="field">{{ui.ADDRESS.DISTRICT_REGION_NAME}}: </td>
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressDistrict" e-name="homeAddressDistrict">{{donor.address.homeAddressDistrict}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressDistrict" e-name="homeAddressDistrict">{{donor.address.homeAddressDistrict} || "&nbsp;"}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.STATE_ENABLED}}">
           <td class="icon"></td>
           <td class="field">{{ui.ADDRESS.STATE_NAME}}: </td>
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressState" e-name="homeAddressState">{{donor.address.homeAddressState}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressState" e-name="homeAddressState">{{donor.address.homeAddressState || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.PROVINCE_ENABLED}}">
           <td class="icon"></td>
           <td class="field">{{ui.ADDRESS.PROVINCE_NAME}}: </td>
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressProvince" e-name="homeAddressProvince">{{donor.address.homeAddressProvince}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressProvince" e-name="homeAddressProvince">{{donor.address.homeAddressProvince || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.COUNTRY_ENABLED}}">
           <td class="icon"></td>
           <td class="field">{{ui.ADDRESS.COUNTRY_NAME}}: </td>
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressCountry" e-name="homeAddressCountry">{{donor.address.homeAddressCountry}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressCountry" e-name="homeAddressCountry">{{donor.address.homeAddressCountry || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.POSTAL_CODE_ENABLED}}">
           <td class="icon"></td>
           <td class="field">{{ui.ADDRESS.POSTAL_CODE_NAME}}:  </td>
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressZipcode" e-name="homeAddressZipcode">{{donor.address.homeAddressZipcode}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressZipcode" e-name="homeAddressZipcode">{{donor.address.homeAddressZipcode || "&nbsp;"}}</span></td>
         </tr>
       </tbody>
     </table> 
@@ -126,25 +126,25 @@
           <td class="value" ><em>Postal  <small ng-show="demographicsForm.$visible"><label class="checkbox checkbox-inline"><input ng-model="postalSameAsHome" name="postalSameAsHome" type="checkbox" ng-click="sameAsHome(demographicsForm, 'Postal')" /> Same as Home</label> </small></em></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.ADDRESS_LINE_1_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressLine1" e-name="postalAddressLine1">{{donor.address.postalAddressLine1}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressLine1" e-name="postalAddressLine1">{{donor.address.postalAddressLine1 || "&nbsp;"}} </span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.ADDRESS_LINE_2_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressLine2" e-name="postalAddressLine2">{{donor.address.postalAddressLine2}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressLine2" e-name="postalAddressLine2">{{donor.address.postalAddressLine2 || "&nbsp;"}} </span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.CITY_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressCity" e-name="postalAddressCity">{{donor.address.postalAddressCity}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressCity" e-name="postalAddressCity">{{donor.address.postalAddressCity || "&nbsp;"}} </span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.DISTRICT_REGION_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressDistrict" e-name="postalAddressDistrict">{{donor.address.postalAddressDistrict}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressDistrict" e-name="postalAddressDistrict">{{donor.address.postalAddressDistrict || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.STATE_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressState" e-name="postalAddressState">{{donor.address.postalAddressState}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressState" e-name="postalAddressState">{{donor.address.postalAddressState || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.PROVINCE_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressProvince" e-name="postalAddressProvince">{{donor.address.postalAddressProvince}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressProvince" e-name="postalAddressProvince">{{donor.address.postalAddressProvince || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.COUNTRY_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressCountry" e-name="postalAddressCountry">{{donor.address.postalAddressCountry}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressCountry" e-name="postalAddressCountry">{{donor.address.postalAddressCountry || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.POSTAL_CODE_ENABLED}}"> 
           <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressZipcode" e-name="postalAddressZipcode">{{donor.address.postalAddressZipcode}}</span></td>
@@ -158,28 +158,28 @@
           <td class="value" ><em>Work  <small ng-show="demographicsForm.$visible"> <label class="checkbox checkbox-inline"><input ng-model="workSameAsHome" name="workSameAsHome"  type="checkbox" ng-click="sameAsHome(demographicsForm, 'Work')" /> Same as Home</label></small></em></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.ADDRESS_LINE_1_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressLine1" e-name="workAddressLine1">{{donor.address.workAddressLine1}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressLine1" e-name="workAddressLine1">{{donor.address.workAddressLine1 || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.ADDRESS_LINE_2_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressLine2" e-name="workAddressLine2">{{donor.address.workAddressLine2}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressLine2" e-name="workAddressLine2">{{donor.address.workAddressLine2 || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.CITY_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressCity" e-name="workAddressCity">{{donor.address.workAddressCity}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressCity" e-name="workAddressCity">{{donor.address.workAddressCity || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.DISTRICT_REGION_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressDistrict" e-name="workAddressDistrict">{{donor.address.workAddressDistrict}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressDistrict" e-name="workAddressDistrict">{{donor.address.workAddressDistrict || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.STATE_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressState" e-name="workAddressState">{{donor.address.workAddressState}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressState" e-name="workAddressState">{{donor.address.workAddressState || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.PROVINCE_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressProvince" e-name="workAddressProvince">{{donor.address.workAddressProvince}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressProvince" e-name="workAddressProvince">{{donor.address.workAddressProvince || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.COUNTRY_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressCountry" e-name="workAddressCountry">{{donor.address.workAddressCountry}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressCountry" e-name="workAddressCountry">{{donor.address.workAddressCountry || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.POSTAL_CODE_ENABLED}}">
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressZipcode" e-name="workAddressZipcode">{{donor.address.workAddressZipcode}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.workAddressZipcode" e-name="workAddressZipcode">{{donor.address.workAddressZipcode || "&nbsp;"}}</span></td>
         </tr>
       </tbody>
     </table> 
