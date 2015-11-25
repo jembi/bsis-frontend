@@ -31,9 +31,11 @@ angular.module('bsis')
     $scope.donorSearch = $routeParams;
     $scope.searchResults = '';
 
-    var currentTime = new Date();
-    $scope.currentYear = currentTime.getFullYear();
-    $scope.minYear = $scope.currentYear - 100;
+    var currentYear = new Date().getFullYear();
+    var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
+    var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
+    $scope.maxYear = currentYear - minAge;
+    $scope.minYear = currentYear - maxAge;
 
     $scope.canAddDonors = false;
 
