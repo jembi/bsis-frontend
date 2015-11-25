@@ -412,16 +412,7 @@ angular.module('bsis')
       });
     };
 
-    $scope.flagForCounselling = function (donorId) {
-      PostDonationCounsellingService.updatePostDonationCounselling({
-        id: donorId,
-        flaggedForCounselling: true
-      }, function(){
-        $scope.getDonorOverview();
-      }, function(err) {
-        console.log(err.data);
-      });
-    };
+
 
     $scope.getDonorOverview();
 

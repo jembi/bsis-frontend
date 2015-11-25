@@ -10,7 +10,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
   $scope.testResults = [];
 
   $scope.goBack = function() {
-    $window.history.back();
+    $window.history.back().back();
   };
 
   $scope.updatePostDonationCounselling = function() {
@@ -42,6 +42,17 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
   }, function(err) {
     console.error(err);
   });
+
+  $scope.removeStatus = function () {
+    PostDonationCounsellingService.updatePostDonationCounselling({
+      id: $scope.postDonationCounselling.id,
+      flaggedForCounselling: true
+    }, function(){
+      $scope.goBack();
+    }, function(err) {
+      console.error(err.data);
+    });
+  };
 
   // Fetch data
   DonorService.getDonorPostDonationCounselling($routeParams.donorId, function(postDonationCounselling) {
