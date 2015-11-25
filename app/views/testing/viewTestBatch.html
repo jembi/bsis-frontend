@@ -52,6 +52,12 @@
   <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'" ng-if="pendingBloodTypingMatchTests"> <small><em><a href="" ng-click="recordPendingBloodGroupMatchTests(testBatch)" >Record Confirmatory Abo/Rh Results</a></em></small> </span>
 </span>
 
+<alert type="danger" close="" ng-show="err.userMessage">
+    {{err.userMessage}}
+    <ul>
+        <li ng-show="err['donationBatchIds']"> {{err["donationBatchIds"]}}</li>
+    </ul>
+</alert>
 <form editable-form name="editableForm" onaftersave="updateTestBatch(testBatch)">
 
   <div class="h4">
@@ -79,7 +85,7 @@
         </ui-select-choices>
       </ui-select>
       <small class="error" 
-        ng-show="(editableForm.testBatch.donationBatchIds.$invalid && (editableForm.testBatch.donationBatchIds.donationBatches.$dirty || submitted))">
+        ng-show="(editableForm.donationBatchIds.$invalid && (editableForm.donationBatchIds.donationBatches.$dirty || submitted))">
         Select one or more donation batches
       </small>
     </span>

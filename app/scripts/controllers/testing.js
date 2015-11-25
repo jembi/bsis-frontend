@@ -707,7 +707,9 @@ angular.module('bsis')
 
       TestingService.closeTestBatch(testBatch, function(response){
         $location.path("/manageTestBatch");
-      }, console.error);
+      }, function(err) {
+        console.error(err);
+      });
     };
 
     $scope.reopenTestBatch = function (testBatch) {
@@ -719,7 +721,10 @@ angular.module('bsis')
           testBatch.permissions = response.permissions;
           testBatch.status = response.status;
         }
-      }, console.error);
+      }, function(err) {
+        $scope.err = err;
+        console.error(err);
+      });
     };
 
     $scope.deleteTestBatch = function (testBatchId) {
@@ -728,7 +733,10 @@ angular.module('bsis')
 
       TestingService.deleteTestBatch(testBatchId, function(response) {
         $location.path("/manageTestBatch");
-      }, console.error);
+      }, function(err) {
+        $scope.err = err;
+        console.error(err);
+      });
     };
 
 
@@ -738,14 +746,21 @@ angular.module('bsis')
 
       TestingService.releaseTestBatch(testBatch, function(response) {
         $scope.testBatch = response;
-      }, console.error);
+      }, function(err) {
+        $scope.err = err;
+        console.error(err);
+      });
     };
 
     $scope.updateTestBatch = function (testBatch) {
       TestingService.updateTestBatch(testBatch, function(response) {
         $scope.testBatch = response;
         $scope.refreshCurrentTestBatch();
-      }, console.error);
+        $scope.err = '';
+      }, function(err) {
+        $scope.err = err;
+        console.error(err);
+      });
     };
 
   })
