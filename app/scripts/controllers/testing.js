@@ -365,6 +365,7 @@ angular.module('bsis')
       TestingService.getTestBatchById($routeParams.id, function(response){
           $scope.testBatch = response.testBatch;
           $scope.refreshCurrentTestBatch();
+          $scope.refreshTestBatchAvailableDonations();
       }, function (err){
         console.log(err);
       });
@@ -373,14 +374,22 @@ angular.module('bsis')
     $scope.refreshCurrentTestBatch = function() {
       // get the donation batches and the donations linked to this test batch
       $scope.testBatch.donationBatchIds = [];
-      $scope.testBatchAvailableDonationBatches = [];
       var donations = [];
       angular.forEach($scope.testBatch.donationBatches, function(batch){
         $scope.testBatch.donationBatchIds.push(batch.id);
-        $scope.testBatchAvailableDonationBatches.push(batch);
         angular.forEach(batch.donations, function(donation){
           donations.push(donation);
         });
+      });
+      data = donations;
+      $scope.gridOptions.data = data;
+      $scope.data = data;
+    };
+
+    $scope.refreshTestBatchAvailableDonations = function() {
+      $scope.testBatchAvailableDonationBatches = [];
+      angular.forEach($scope.testBatch.donationBatches, function(batch){
+        $scope.testBatchAvailableDonationBatches.push(batch);
       });
       // get the available donation batches
       TestingService.getTestBatchFormFields(function(response) {
@@ -392,10 +401,6 @@ angular.module('bsis')
           });
         }
       });
-
-      data = donations;
-      $scope.gridOptions.data = data;
-      $scope.data = data;
     };
 
     $scope.getCurrentTestBatch();
@@ -702,7 +707,9 @@ angular.module('bsis')
 
       TestingService.closeTestBatch(testBatch, function(response){
         $location.path("/manageTestBatch");
-      }, console.error);
+      }, function(err) {
+        console.error(err);
+      });
     };
 
     $scope.reopenTestBatch = function (testBatch) {
@@ -714,7 +721,10 @@ angular.module('bsis')
           testBatch.permissions = response.permissions;
           testBatch.status = response.status;
         }
-      }, console.error);
+      }, function(err) {
+        $scope.err = err;
+        console.error(err);
+      });
     };
 
     $scope.deleteTestBatch = function (testBatchId) {
@@ -723,7 +733,10 @@ angular.module('bsis')
 
       TestingService.deleteTestBatch(testBatchId, function(response) {
         $location.path("/manageTestBatch");
-      }, console.error);
+      }, function(err) {
+        $scope.err = err;
+        console.error(err);
+      });
     };
 
 
@@ -733,14 +746,21 @@ angular.module('bsis')
 
       TestingService.releaseTestBatch(testBatch, function(response) {
         $scope.testBatch = response;
-      }, console.error);
+      }, function(err) {
+        $scope.err = err;
+        console.error(err);
+      });
     };
 
     $scope.updateTestBatch = function (testBatch) {
       TestingService.updateTestBatch(testBatch, function(response) {
         $scope.testBatch = response;
         $scope.refreshCurrentTestBatch();
-      }, console.error);
+        $scope.err = '';
+      }, function(err) {
+        $scope.err = err;
+        console.error(err);
+      });
     };
 
   })
