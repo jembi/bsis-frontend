@@ -1,4 +1,4 @@
-<form editable-form name="editableForm" onaftersave="updateDonor(donor)" onbeforesave="validateForm(editableForm)" oncancel="cancelForm(donor, editableForm)" novalidate >
+<form editable-form name="editableForm" onaftersave="updateDonor(donor)" oncancel="cancelForm(donor, editableForm)" novalidate >
     <alert type="danger" close="" ng-show="err.userMessage">
         {{err.userMessage}}
         <ul>
