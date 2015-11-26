@@ -94,7 +94,7 @@
         <tr ng-show="{{ui.ADDRESS.DISTRICT_REGION_ENABLED}}">
           <td class="icon"></td>
           <td class="field">{{ui.ADDRESS.DISTRICT_REGION_NAME}}: </td>
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressDistrict" e-name="homeAddressDistrict">{{donor.address.homeAddressDistrict} || "&nbsp;"}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.homeAddressDistrict" e-name="homeAddressDistrict">{{donor.address.homeAddressDistrict || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.STATE_ENABLED}}">
           <td class="icon"></td>
@@ -147,7 +147,7 @@
           <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressCountry" e-name="postalAddressCountry">{{donor.address.postalAddressCountry || "&nbsp;"}}</span></td>
         </tr>
         <tr ng-show="{{ui.ADDRESS.POSTAL_CODE_ENABLED}}"> 
-          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressZipcode" e-name="postalAddressZipcode">{{donor.address.postalAddressZipcode}}</span></td>
+          <td class="value"><span e-class="xeditable" editable-text="donor.address.postalAddressZipcode" e-name="postalAddressZipcode">{{donor.address.postalAddressZipcode  || "&nbsp;"}}</span></td>
         </tr>
       </tbody>
     </table> 
