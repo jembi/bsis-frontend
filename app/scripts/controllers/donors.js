@@ -255,14 +255,6 @@ angular.module('bsis')
       });
     };
 
-    $scope.validateForm = function (form){
-      if (form.$valid) {
-        return true;
-      } else {
-        return 'This form is not valid';
-      }
-    };
-
     $scope.postalSameAsHome = false;
     $scope.workSameAsHome = false;
 
