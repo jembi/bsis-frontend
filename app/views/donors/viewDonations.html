@@ -48,7 +48,7 @@
           </td>
           <td data-title="''" class="col-sm-2 text-center">
             <span ng-hide="confirmDelete">
-              <em><button class="btn btn-link btn-sm" ng-click="viewDonationDetails(donation.donationIdentificationNumber)">View</button></em>
+              <em><button class="btn btn-link btn-sm" ng-click="viewDonationSummary(donation.donationIdentificationNumber)">View</button></em>
               <em><button class="btn btn-link btn-sm" ng-click="confirmDelete = true" ng-disabled="!donation.permissions.canDelete">Void</button></em>
             </span>
             <span ng-show="confirmDelete">

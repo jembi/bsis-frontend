@@ -3,7 +3,7 @@
   <span style="float: right; padding-right: 15px; font-size: 0.9em">
     <span ng-show="!donationSummaryForm.$visible">
       <em><a has-permission="{{permissions.EDIT_DONATION}}" href="" ng-click="donationSummaryForm.$show()" >Edit</a></em> |
-      <em><a href="" ng-click="viewDonationBatch()">Done</a></em>
+      <em><a href="" ng-click="returnToListView()">Done</a></em>
     </span>
     <span ng-show="donationSummaryForm.$visible">
       <em>
