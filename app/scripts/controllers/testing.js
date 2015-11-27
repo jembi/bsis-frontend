@@ -180,8 +180,6 @@ angular.module('bsis')
       });
     };
 
-    
-
     $scope.getTestBatchFormFields = function(){
 
       TestingService.getTestBatchFormFields( function(response){
@@ -194,7 +192,6 @@ angular.module('bsis')
       });
 
       $scope.donationBatches = TestingService.getDonationBatches();
-
     };
 
     $scope.getOpenTestBatches();
@@ -338,6 +335,7 @@ angular.module('bsis')
     var data = [{}];
     $scope.data  = data;
 
+    $scope.testBatchAvailableDonationBatches = [];
     $scope.exportOptions = [
       { id: 'allSamples',
         value: 'All Samples',
@@ -366,17 +364,42 @@ angular.module('bsis')
     $scope.getCurrentTestBatch = function () {
       TestingService.getTestBatchById($routeParams.id, function(response){
           $scope.testBatch = response.testBatch;
-          var donations = [];
-          angular.forEach($scope.testBatch.donationBatches, function(batch){
-            angular.forEach(batch.donations, function(donation){
-              donations.push(donation);
-            });
-          });
-          data = donations;
-        $scope.gridOptions.data = data;
-          $scope.data = data;
+          $scope.refreshCurrentTestBatch();
+          $scope.refreshTestBatchAvailableDonations();
       }, function (err){
         console.log(err);
+      });
+    };
+
+    $scope.refreshCurrentTestBatch = function() {
+      // get the donation batches and the donations linked to this test batch
+      $scope.testBatch.donationBatchIds = [];
+      var donations = [];
+      angular.forEach($scope.testBatch.donationBatches, function(batch){
+        $scope.testBatch.donationBatchIds.push(batch.id);
+        angular.forEach(batch.donations, function(donation){
+          donations.push(donation);
+        });
+      });
+      data = donations;
+      $scope.gridOptions.data = data;
+      $scope.data = data;
+    };
+
+    $scope.refreshTestBatchAvailableDonations = function() {
+      $scope.testBatchAvailableDonationBatches = [];
+      angular.forEach($scope.testBatch.donationBatches, function(batch){
+        $scope.testBatchAvailableDonationBatches.push(batch);
+      });
+      // get the available donation batches
+      TestingService.getTestBatchFormFields(function(response) {
+        if (response !== false) {
+          TestingService.setDonationBatches(response.donationBatches);
+          $scope.donationBatches = response.donationBatches;
+          angular.forEach(response.donationBatches, function(batch) {
+            $scope.testBatchAvailableDonationBatches.push(batch);
+          });
+        }
       });
     };
 
@@ -678,28 +701,66 @@ angular.module('bsis')
       });
     };
 
-    $scope.closeTestBatch = function (testBatch){
+    $scope.closeTestBatch = function (testBatch) {
 
       // TODO: Confirmation dialog
 
       TestingService.closeTestBatch(testBatch, function(response){
-        if (response !== false){
-          $location.path("/manageTestBatch");
-        }
-        else{
-          // TODO: handle case where response == false
-        }
+        $location.path("/manageTestBatch");
+      }, function(err) {
+        console.error(err);
       });
-      
     };
 
-    $scope.releaseTestBatch = function (testBatch){
+    $scope.reopenTestBatch = function (testBatch) {
+
+      // TODO: Confirmation dialog
+
+      TestingService.reopenTestBatch(testBatch, function(response){
+        if (testBatch.permissions) {
+          testBatch.permissions = response.permissions;
+          testBatch.status = response.status;
+        }
+      }, function(err) {
+        $scope.err = err;
+        console.error(err);
+      });
+    };
+
+    $scope.deleteTestBatch = function (testBatchId) {
+
+      // TODO: Confirmation dialog
+
+      TestingService.deleteTestBatch(testBatchId, function(response) {
+        $location.path("/manageTestBatch");
+      }, function(err) {
+        $scope.err = err;
+        console.error(err);
+      });
+    };
+
+
+    $scope.releaseTestBatch = function (testBatch)  {
 
       // TODO: Confirmation dialog
 
       TestingService.releaseTestBatch(testBatch, function(response) {
         $scope.testBatch = response;
-      }, console.error);
+      }, function(err) {
+        $scope.err = err;
+        console.error(err);
+      });
+    };
+
+    $scope.updateTestBatch = function (testBatch) {
+      TestingService.updateTestBatch(testBatch, function(response) {
+        $scope.testBatch = response;
+        $scope.refreshCurrentTestBatch();
+        $scope.err = '';
+      }, function(err) {
+        $scope.err = err;
+        console.error(err);
+      });
     };
 
   })
