@@ -86,8 +86,6 @@
           placeholder="Year" 
           ng-model="dob.year" 
           required  
-          min="{{minYear}}"  
-          max="{{maxYear}}" 
           integer 
           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
           ng-class="{'ng-invalid ng-dirty' : (addDonorForm.year.$invalid && submitted) || dobValid === false }"

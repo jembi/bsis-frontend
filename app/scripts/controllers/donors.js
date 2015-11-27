@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout, $q, Alerting, UI) {
+  .controller('DonorsCtrl', function ($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout, $q, Alerting, UI, $modal) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -30,12 +30,6 @@ angular.module('bsis')
 
     $scope.donorSearch = $routeParams;
     $scope.searchResults = '';
-
-    var currentYear = new Date().getFullYear();
-    var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
-    var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
-    $scope.maxYear = currentYear - minAge;
-    $scope.minYear = currentYear - maxAge;
 
     $scope.canAddDonors = false;
 
@@ -153,30 +147,67 @@ angular.module('bsis')
       $location.path("/addDonor");
     };
 
+    var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
+    var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
+    var minBirthDate = moment().subtract(maxAge, 'years');
+    var maxBirthDate = moment().subtract(minAge, 'years');
+
+    function confirmAddDonor(birthDateString) {
+
+      var birthDate = moment(birthDateString, 'YYYY-D-M');
+
+      var message;
+      if (birthDate.isBefore(minBirthDate)) {
+        message = 'This donor is over the maximum age of ' + maxAge + '.';
+      } else if (birthDate.isAfter(maxBirthDate)) {
+        message = 'This donor is below the minimum age of ' + minAge + '.';
+      } else {
+        // Don't show confirmation
+        return Promise.resolve(null);
+      }
+      message += ' Are you sure that you want to countinue?';
+
+      var modal = $modal.open({
+        animation: false,
+        templateUrl: 'views/confirmModal.html',
+        controller: 'ConfirmModalCtrl',
+        resolve: {
+          confirmObject: {
+            title: 'Invalid donor',
+            button: 'Add donor',
+            message: message
+          }
+        }
+      });
+
+      return modal.result;
+    }
+
     $scope.addDonor = function (newDonor, dob, valid) {
 
       if (valid) {
 
-        newDonor.birthDate = dob.year + "-" + dob.month + "-" + dob.dayOfMonth;
+        newDonor.birthDate = dob.year + '-' + dob.month + '-' + dob.dayOfMonth;
 
-        $scope.addingDonor = true;
+        confirmAddDonor(newDonor.birthDate).then(function() {
 
-        DonorService.addDonor(newDonor, function(donor) {
+          $scope.addingDonor = true;
 
-          $scope.format = DATEFORMAT;
-          $scope.initDate = $scope.donor.birthDate;
-          $scope.calIcon = 'fa-calendar';
+          DonorService.addDonor(newDonor, function(donor) {
 
-          $scope.donorBirthDateOpen = false;
-          $scope.submitted = '';
-          $location.path("/viewDonor/" + donor.id).search({});
-        }, function(err) {
-          $scope.errorMessage = err.userMessage;
-          $scope.err = err;
-          if (err["donor.birthDate"]) {
-            $scope.dobValid = false;
-          }
-          $scope.addingDonor = false;
+            $scope.format = DATEFORMAT;
+            $scope.initDate = $scope.donor.birthDate;
+            $scope.donorBirthDateOpen = false;
+            $scope.submitted = '';
+            $location.path('/viewDonor/' + donor.id).search({});
+          }, function(err) {
+            $scope.errorMessage = err.userMessage;
+            $scope.err = err;
+            if (err['donor.birthDate']) {
+              $scope.dobValid = false;
+            }
+            $scope.addingDonor = false;
+          });
         });
       }
       else {
