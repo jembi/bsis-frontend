@@ -555,7 +555,7 @@ angular.module('bsis')
     };
 
     $scope.getDonations = function (donorId) {
-
+      $scope.confirmDelete = false;
       $scope.donationsView = 'viewDonations';
 
       DonorService.getDonations(donorId, function(response){
