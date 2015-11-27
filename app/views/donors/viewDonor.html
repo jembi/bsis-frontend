@@ -1,4 +1,4 @@
-<form editable-form name="editableForm" onaftersave="updateDonor(donor)" onbeforesave="validateForm(editableForm)" oncancel="cancelForm(donor, editableForm)" novalidate >
+<form editable-form name="editableForm" onaftersave="updateDonor(donor)" oncancel="cancelForm(donor, editableForm)" novalidate >
     <alert type="danger" close="" ng-show="err.userMessage">
         {{err.userMessage}}
         <ul>
@@ -273,7 +273,7 @@
 
           <div ng-switch on="donationsView">
             <div ng-switch-when="viewDonations"><div ng-include="'views/donors/viewDonations.html'"></div></div>
-            <div ng-switch-when="viewDonationDetails"><div ng-include="'views/donors/viewDonationDetails.html'"></div></div>
+            <div ng-switch-when="viewDonationSummary"><div ng-include="'views/donors/viewDonationSummary.html'"></div></div>
             <div ng-switch-when="addDonation"><div ng-include="'views/donors/addDonorDonation.html'"></div></div>
             <div ng-switch-default><div ng-include="'views/donors/viewDonations.html'"></div></div>
           </div>

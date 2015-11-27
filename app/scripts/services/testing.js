@@ -161,22 +161,28 @@ angular.module('bsis')
       });
       return deferred.promise;
     },
-    closeTestBatch: function (testBatch, response){
-      var getTestBatch = Api.TestBatches.get({id:testBatch.id}, function() {
+    closeTestBatch: function (testBatch, onSuccess, onError) {
+      var updateTestBatch = {};
+      updateTestBatch.id = testBatch.id;
+      updateTestBatch.status = "CLOSED";
 
-        var updateTestBatch = {};
-        updateTestBatch.id = testBatch.id;
-        updateTestBatch.status = "CLOSED";
-
-        Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
-         response(data);
-        }, function (){
-          response(false);
-        }); 
-
+      Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
+        onSuccess(data);
+      }, function (){
+        onError(false);
       });
     },
+    reopenTestBatch: function (testBatch, onSuccess, onError) {
+      var updateTestBatch = {};
+      updateTestBatch.id = testBatch.id;
+      updateTestBatch.status = "RELEASED";
 
+      Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
+        onSuccess(data);
+      }, function (){
+        onError(false);
+      });
+    },
     releaseTestBatch: function(testBatch, onSuccess, onError) {
 
       var updateTestBatch = {
@@ -185,6 +191,24 @@ angular.module('bsis')
       };
 
       Api.TestBatches.update({id: testBatch.id}, updateTestBatch, onSuccess, onError);
+    },
+    updateTestBatch: function (testBatch, onSuccess, onError) {
+      Api.TestBatches.get({id:testBatch.id}, function(response) {
+
+        var updateTestBatch = response;
+        updateTestBatch.id = testBatch.id;
+        updateTestBatch.createdDate = testBatch.createdDate;
+        updateTestBatch.donationBatchIds = testBatch.donationBatchIds;
+
+        Api.TestBatches.update({id:testBatch.id}, updateTestBatch, function(data) {
+          onSuccess(data);
+        }, function(err) {
+          onError(err.data);
+        });
+      });
+    },
+    deleteTestBatch: function(testBatchId, onSuccess, onError) {
+      Api.TestBatches.delete({id: testBatchId}, onSuccess, onError);
     },
     getRecentTestBatches: function (options, onSuccess, onError) {
         Api.FindTestBatches.get(options, function (testBatches) {
