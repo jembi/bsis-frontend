@@ -10,7 +10,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
   $scope.testResults = [];
 
   $scope.goBack = function() {
-    $window.history.back().back();
+    $window.history.back();
   };
 
   $scope.updatePostDonationCounselling = function() {
