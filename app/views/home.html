@@ -35,9 +35,9 @@
             <p class="p-info">Component Production Laboratory</p>
           </div>
 
-          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_TESTING_INFORMATION}}" ng-show="{{testingTabEnabled}}">
+          <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_TESTING_INFORMATION}}">
           <div class="icon-container">
-            <a href="#testing" class="placeholder">
+            <a href="{{testingTabEnabled == 'true' ? '#testing' : '#home'}}" class="placeholder">
             <div>
               <i class="fa {{icons.TESTING}}"></i>
             </div>
@@ -62,7 +62,7 @@
           </div>
 
 
-       
+
 
           
           <div class="col-lg-3 placeholder" has-permission="{{permissions.VIEW_INVENTORY_INFORMATION}}" ng-show="{{inventoryTabEnabled}}">
