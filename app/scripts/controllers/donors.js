@@ -354,7 +354,7 @@ angular.module('bsis')
   })
 
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, $modal, Alerting, DonorService, TestingService, ICONS, PACKTYPE, MONTH, TITLE,
+  .controller('ViewDonorCtrl', function ($scope, $location, $modal, Alerting, DonorService, TestingService, ConfigurationsService, ICONS, PACKTYPE, MONTH, TITLE,
       GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout,$routeParams) {
 
 
@@ -768,6 +768,41 @@ angular.module('bsis')
 
     $scope.addDonationSuccess = '';
 
+    var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
+    var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
+    var minBirthDate = moment().subtract(maxAge, 'years');
+    var maxBirthDate = moment().subtract(minAge, 'years');
+
+    function checkDonorAge(donor) {
+      var birthDate = moment(donor.birthDate);
+
+      var message;
+      if (birthDate.isBefore(minBirthDate)) {
+        message = 'This donor is over the maximum age of ' + maxAge + '.';
+      } else if (birthDate.isAfter(maxBirthDate)) {
+        message = 'This donor is below the minimum age of ' + minAge + '.';
+      } else {
+        // Don't show confirmation
+        return Promise.resolve(null);
+      }
+      message += ' Are you sure that you want to countinue?';
+
+      var modal = $modal.open({
+        animation: false,
+        templateUrl: 'views/confirmModal.html',
+        controller: 'ConfirmModalCtrl',
+        resolve: {
+          confirmObject: {
+            title: 'Invalid donor',
+            button: 'Add donation',
+            message: message
+          }
+        }
+      });
+
+      return modal.result;
+    }
+
     function confirmAddDonation(donation, donationBatch) {
 
       // Only show modal if donor is not eligible and batch is back entry
@@ -795,7 +830,9 @@ angular.module('bsis')
 
       if (valid) {
 
-        confirmAddDonation(donation, donationBatch).then(function() {
+        checkDonorAge($scope.donor).then(function() {
+          return confirmAddDonation(donation, donationBatch);
+        }).then(function() {
           $scope.addDonationSuccess = '';
 
           // set donation center, site & date to those of the donation batch
