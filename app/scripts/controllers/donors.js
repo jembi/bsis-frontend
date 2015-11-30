@@ -1696,7 +1696,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE,  DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout, $routeParams, $modal) {
+  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ConfigurationsService, ICONS, PACKTYPE,  DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout, $routeParams, $modal) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -1986,11 +1986,48 @@ angular.module('bsis')
       return modal.result;
     }
 
+    var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
+    var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
+    var minBirthDate = moment().subtract(maxAge, 'years');
+    var maxBirthDate = moment().subtract(minAge, 'years');
+
+    function checkDonorAge(donor) {
+      var birthDate = moment(donor.birthDate);
+
+      var message;
+      if (birthDate.isBefore(minBirthDate)) {
+        message = 'This donor is over the maximum age of ' + maxAge + '.';
+      } else if (birthDate.isAfter(maxBirthDate)) {
+        message = 'This donor is below the minimum age of ' + minAge + '.';
+      } else {
+        // Don't show confirmation
+        return Promise.resolve(null);
+      }
+      message += ' Are you sure that you want to countinue?';
+
+      var modal = $modal.open({
+        animation: false,
+        templateUrl: 'views/confirmModal.html',
+        controller: 'ConfirmModalCtrl',
+        resolve: {
+          confirmObject: {
+            title: 'Invalid donor',
+            button: 'Add donation',
+            message: message
+          }
+        }
+      });
+
+      return modal.result;
+    }
+
     $scope.addDonation = function(donation, bleedStartTime, bleedEndTime, valid) {
 
       if (valid) {
 
-        confirmAddDonation(donation).then(function() {
+        checkDonorAge($scope.donorSummary).then(function() {
+          return confirmAddDonation(donation);
+        }).then(function() {
           $scope.addDonationSuccess = '';
 
           DonorService.setDonationBatch($scope.donationBatch);
