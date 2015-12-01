@@ -1041,7 +1041,9 @@ angular.module('bsis')
   })
 
   // Controller for Viewing Duplicate Donors
-  .controller('ManageDonorsDuplicateCtrl', function ($scope, $window, $location, $routeParams, DonorService, $filter, ngTableParams, $timeout) {
+  .controller('ManageDonorsDuplicateCtrl', function ($scope, $window, $location, $routeParams, DonorService, UI, $filter, ngTableParams, $timeout) {
+
+    $scope.ui = UI;
 
     var duplicatesData = [{}];
     $scope.duplicatesData = duplicatesData;
