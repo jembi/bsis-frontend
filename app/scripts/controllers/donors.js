@@ -389,6 +389,7 @@ angular.module('bsis')
         if (response !== false){
           $scope.data = response;
           $scope.flaggedForCounselling = $scope.data.flaggedForCounselling;
+          $scope.onceFlaggedForCounselling = $scope.data.onceFlaggedForCounselling;
           $scope.currentlyDeferred = $scope.data.currentlyDeferred;
           $scope.deferredUntil = $scope.data.deferredUntil;
           $scope.lastDonation = $scope.data.lastDonation;
