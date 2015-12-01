@@ -64,7 +64,7 @@
                   {{sample.ttistatus}}
               </td>
               <td align="center" ng-repeat="test in ttiTestsConfirmatory">
-                <span ng-show="sample.pendingTTITestsIds.indexOf(''+test.id) >= 0">
+                <span ng-show="sample.storedTestResults[test.id] || sample.pendingTTITestsIds.indexOf(''+test.id) >= 0">
                   <div style="width:90px;">
                     <ui-select  ng-init="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id] = sample.recentTestResults[test.id].result"
                                 ng-model="addTestResults[sample.donation.donationIdentificationNumber].testResults[test.id]" ng-disabled="disabled" >
