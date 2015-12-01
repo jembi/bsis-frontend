@@ -8,7 +8,7 @@
   <div class = "h4"> 
     <small><em>Date Created: </em></small> <span ng-show="!editableForm.$visible">{{ (donationBatch.createdDate | bsisDate) || '' }}</span>
     <span ng-show="editableForm.$visible">
-      <dateselect ng-model="donationBatch.createdDate" initDate="donationBatch.createdDate" format="format" cal-icon="icons.CALENDAR" opened="dateToOpen"></dateselect>
+      <dateselect ng-model="donationBatch.createdDate" initDate="donationBatch.createdDate" format="format" cal-icon="icons.CALENDAR" opened="dateToOpen" ng-disabled="!donationBatch.permissions.canEditDate"></dateselect>
     </span>
     | 
     <small><em>Venue: </em></small> <span e-class="xeditable venue" editable-select="donationBatch.venue" e-ng-options="item as item.name for item in venues track by item.name" e-name="venue"  e-required>{{donationBatch.venue.name}}</span>
