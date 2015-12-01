@@ -87,7 +87,7 @@
       <div class="form-group">
         <button type="submit" class="btn btn-primary" style="margin-top:0;" ng-disabled="updatingCounselling">{{updatingCounselling ? "Saving..." : "Save"}}</button>
         <a class="btn btn-primary" style="margin-top:0;" href="" ng-click="goBack()" ng-disabled="updatingCounselling">Cancel</a>
-        <a class="btn btn-primary" ng-show="postDonationCounselling.counsellingStatus" style="margin-top:0;" href="" ng-click="removeStatus()" ng-disabled="updatingCounselling">Remove Status</a>
+        <a class="btn btn-primary" style="margin-top:0;" href="" ng-click="removeStatus()" ng-disabled="!postDonationCounselling.hasCounselling">Remove Status</a>
       </div>
 
     </form>
