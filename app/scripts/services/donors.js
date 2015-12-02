@@ -152,7 +152,7 @@ angular.module('bsis')
         onError(err.data);
       });
     },
-    updateDonation: function (donation, response){
+    updateDonation: function (donation, onSuccess, onError){
 
       var updateDonation = Api.Donations.get({id:donation.id}, function() {
         updateDonation = updateDonation.donation;
@@ -164,9 +164,9 @@ angular.module('bsis')
         }
 
         Api.Donations.update({id:donation.id}, updateDonation, function(data) {
-         response(data.donation);
-        }, function (){
-          response(false);
+          onSuccess(data.donation);
+        }, function (err){
+          onError(err.data);
         });
 
       });
