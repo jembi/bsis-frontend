@@ -43,6 +43,20 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
     console.error(err);
   });
 
+  $scope.removeStatus = function () {
+    $scope.updatingCounselling = true;
+    PostDonationCounsellingService.updatePostDonationCounselling({
+      id: $scope.postDonationCounselling.id,
+      flaggedForCounselling: true
+    }, function(){
+      $scope.goBack();
+      $scope.updatingCounselling = false;
+    }, function(err) {
+      console.error(err.data);
+      $scope.updatingCounselling = false;
+    });
+  };
+
   // Fetch data
   DonorService.getDonorPostDonationCounselling($routeParams.donorId, function(postDonationCounselling) {
     $scope.postDonationCounselling = postDonationCounselling;

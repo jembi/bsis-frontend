@@ -101,7 +101,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.onRowClick = function (row) {
-    $location.path('donorCounselling/' + row.entity.donor.id);
+    $location.path('donorCounselling/' + row.entity.donor.id).search({});
   };
 
 
