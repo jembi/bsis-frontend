@@ -655,6 +655,12 @@ angular.module('bsis')
         if (response !== false) {
           $scope.haemoglobinLevels = response.haemoglobinLevels;
           $scope.packTypes = response.packTypes;
+
+          if (!$scope.donation.permissions.canDonate) {
+            $scope.packTypes =  $scope.packTypes.filter(function(packTypes){
+              return packTypes.countAsDonation === false;
+            });
+          }
           $scope.adverseEventTypes = [null].concat(response.adverseEventTypes);
         }
       });
@@ -1918,6 +1924,12 @@ angular.module('bsis')
         if (response !== false) {
           $scope.haemoglobinLevels = response.haemoglobinLevels;
           $scope.packTypes = response.packTypes;
+
+          if (!donation.permissions.canDonate) {
+            $scope.packTypes =  $scope.packTypes.filter(function(packTypes){
+              return packTypes.countAsDonation === false;
+            });
+          }
           $scope.adverseEventTypes = [null].concat(response.adverseEventTypes);
         }
       });
