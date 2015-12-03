@@ -659,7 +659,8 @@ angular.module('bsis')
           $scope.haemoglobinLevels = response.haemoglobinLevels;
           $scope.packTypes = response.packTypes;
 
-          if (!$scope.donation.permissions.canDonate) {
+          if ($scope.donation.permissions.canDonate === false) {
+            
             $scope.packTypes =  $scope.packTypes.filter(function(packTypes){
               return packTypes.countAsDonation === false;
             });
