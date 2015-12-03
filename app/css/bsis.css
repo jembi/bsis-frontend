@@ -668,3 +668,9 @@ bootstrap.min.css sets .dropdown-menu min-width to 160px by default
   display: inline-block;
   margin-top: 0;
 }
+
+a[disabled] {
+  cursor: default;
+  opacity: 0.65;
+  pointer-events: none;
+}
