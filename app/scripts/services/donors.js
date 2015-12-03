@@ -129,6 +129,8 @@ angular.module('bsis')
         // refresh donation batch after adding donation to it, and add to response
         Api.DonationBatches.get({id:donationBatchObj.id}, function (donationBatch){
           donationBatchObj = donationBatch.donationBatch;
+          // Created date needs to be a JS Date object for the datepicker
+          donationBatch.donationBatch.createdDate = new Date(donationBatch.donationBatch.createdDate);
           onSuccess(donationBatch.donationBatch);
         });
       }, function (err){
