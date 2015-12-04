@@ -767,7 +767,7 @@ angular.module('bsis')
 
     $scope.releaseTestBatch = function(testBatch)  {
 
-      var message = 'All donations without discrepancies will be released. ' +
+      var message = 'All samples without discrepancies will be released. ' +
           'Are you sure that you want to release this test batch?';
 
       showConfirmation('Confirm Release', 'Release', message).then(function() {
