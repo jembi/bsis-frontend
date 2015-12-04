@@ -211,7 +211,9 @@ angular.module('bsis')
       $scope.managePackType = 'addPackType';
       $scope.packType = {
         testSampleProduced: true,
-        countAsDonation: true
+        countAsDonation: true,
+        isDeleted: false
+
       };
     }
     // managing update of existing pack type
