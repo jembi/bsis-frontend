@@ -773,6 +773,7 @@ angular.module('bsis')
       showConfirmation('Confirm Release', 'Release', message).then(function() {
         TestingService.releaseTestBatch(testBatch, function(response) {
           $scope.testBatch = response;
+          $scope.refreshCurrentTestBatch();
         }, function(err) {
           $scope.err = err;
           console.error(err);
