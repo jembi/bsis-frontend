@@ -2075,7 +2075,7 @@ angular.module('bsis')
       DonorService.updateDonation(donation, function(response) {
         $scope.addDonationSuccess = true;
         $scope.donation = {};
-        $location.path("/addDonation");
+        $scope.viewDonationSummary(donation);
       }, function (err) {
           console.error(err);
           $scope.addDonationSuccess = false;
