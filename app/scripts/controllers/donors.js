@@ -1573,7 +1573,7 @@ angular.module('bsis')
 
 
     $scope.getRecentDonationBatches = function (){
-      var query = angular.copy(master);
+      var query = $scope.search;
 
       if ($scope.search.startDate) {
         var startDate =  moment($scope.search.startDate).startOf('day').toDate();
