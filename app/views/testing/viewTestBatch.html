@@ -65,7 +65,12 @@
     <span ng-show="editableForm.$visible" style="display:inline;">
       <dateselect ng-model="testBatch.createdDate" initDate="testBatch.createdDate" format="format" cal-icon="icons.CALENDAR" opened="dateToOpen"></dateselect>
     </span>
-    | <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
+    <span ng-if="testBatch.status !== 'RELEASED'">
+      | <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
+    </span>
+    <span ng-if="testBatch.status === 'RELEASED'">
+      | <small><em>Number of Samples Released: </em></small>{{testBatch.numReleasedSamples}} of {{testBatch.numSamples}}
+    </span>
   </div>
 
   <hr style="margin-bottom:5px;"/>
