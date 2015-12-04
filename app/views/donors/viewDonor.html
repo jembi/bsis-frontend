@@ -29,8 +29,8 @@
         ">
         This cannot be empty
       </small>
-      <span ng-if="donor.title">
-      <span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span>.</span>
+      <span>
+      <span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span><span ng-if="donor.title">.</span></span>
       <span editable-text="donor.callingName" e-name="callingName" e-class="xeditable name">{{donor.callingName}}</span>
       </em></small>
     </span>
