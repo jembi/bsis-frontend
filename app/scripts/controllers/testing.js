@@ -434,7 +434,7 @@ angular.module('bsis')
       {
         name: 'Date Bled',
         displayName: 'Date Bled',
-        field: 'bleedStartTime',
+        field: 'donationDate',
         cellFilter: 'bsisDate',
         visible: true,
         width: '**',
