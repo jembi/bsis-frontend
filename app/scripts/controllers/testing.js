@@ -375,15 +375,20 @@ angular.module('bsis')
       // get the donation batches and the donations linked to this test batch
       $scope.testBatch.donationBatchIds = [];
       var donations = [];
+      var numReleasedSamples = 0;
       angular.forEach($scope.testBatch.donationBatches, function(batch){
         $scope.testBatch.donationBatchIds.push(batch.id);
         angular.forEach(batch.donations, function(donation){
+          if (donation.released) {
+            numReleasedSamples++;
+          }
           donations.push(donation);
         });
       });
       data = donations;
       $scope.gridOptions.data = data;
       $scope.data = data;
+      $scope.testBatch.numReleasedSamples = numReleasedSamples;
     };
 
     $scope.refreshTestBatchAvailableDonations = function() {
