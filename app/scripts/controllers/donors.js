@@ -756,6 +756,8 @@ angular.module('bsis')
     $scope.viewAddDonationForm = function (){
 
       // set initial bleed times
+      $scope.donorDonationError = null;
+      $scope.addDonationSuccess = true;
       $scope.bleedStartTime = new Date();
       $scope.bleedEndTime = new Date();
       $scope.adverseEvent = {
