@@ -756,6 +756,8 @@ angular.module('bsis')
     $scope.viewAddDonationForm = function (){
 
       // set initial bleed times
+      $scope.donorDonationError = null;
+      $scope.addDonationSuccess = true;
       $scope.bleedStartTime = new Date();
       $scope.bleedEndTime = new Date();
       $scope.adverseEvent = {
@@ -866,7 +868,7 @@ angular.module('bsis')
             $scope.addingDonation = false;
 
           }, function(err) {
-            $scope.err = err;
+            $scope.donorDonationError = err;
             $scope.addDonationSuccess = false;
             // refresh donor overview after adding donation
             $scope.getDonorOverview();
@@ -1573,7 +1575,7 @@ angular.module('bsis')
 
 
     $scope.getRecentDonationBatches = function (){
-      var query = angular.copy(master);
+      var query = angular.copy($scope.search);
 
       if ($scope.search.startDate) {
         var startDate =  moment($scope.search.startDate).startOf('day').toDate();

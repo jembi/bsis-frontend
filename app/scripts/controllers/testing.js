@@ -331,7 +331,7 @@ angular.module('bsis')
 
   })
 
-  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, $timeout, $routeParams, $q, $route) {
+  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, $timeout, $routeParams, $q, $route, $modal) {
     var data = [{}];
     $scope.data  = data;
 
@@ -375,15 +375,20 @@ angular.module('bsis')
       // get the donation batches and the donations linked to this test batch
       $scope.testBatch.donationBatchIds = [];
       var donations = [];
+      var numReleasedSamples = 0;
       angular.forEach($scope.testBatch.donationBatches, function(batch){
         $scope.testBatch.donationBatchIds.push(batch.id);
         angular.forEach(batch.donations, function(donation){
+          if (donation.released) {
+            numReleasedSamples++;
+          }
           donations.push(donation);
         });
       });
       data = donations;
       $scope.gridOptions.data = data;
       $scope.data = data;
+      $scope.testBatch.numReleasedSamples = numReleasedSamples;
     };
 
     $scope.refreshTestBatchAvailableDonations = function() {
@@ -434,7 +439,7 @@ angular.module('bsis')
       {
         name: 'Date Bled',
         displayName: 'Date Bled',
-        field: 'bleedStartTime',
+        field: 'donationDate',
         cellFilter: 'bsisDate',
         visible: true,
         width: '**',
@@ -701,54 +706,78 @@ angular.module('bsis')
       });
     };
 
-    $scope.closeTestBatch = function (testBatch) {
+    function showConfirmation(title, button, message) {
 
-      // TODO: Confirmation dialog
-
-      TestingService.closeTestBatch(testBatch, function(response){
-        $location.path("/manageTestBatch");
-      }, function(err) {
-        console.error(err);
-      });
-    };
-
-    $scope.reopenTestBatch = function (testBatch) {
-
-      // TODO: Confirmation dialog
-
-      TestingService.reopenTestBatch(testBatch, function(response){
-        if (testBatch.permissions) {
-          testBatch.permissions = response.permissions;
-          testBatch.status = response.status;
+      var modal = $modal.open({
+        animation: false,
+        templateUrl: 'views/confirmModal.html',
+        controller: 'ConfirmModalCtrl',
+        resolve: {
+          confirmObject: {
+            title: title,
+            button: button,
+            message: message
+          }
         }
-      }, function(err) {
-        $scope.err = err;
-        console.error(err);
+      });
+
+      return modal.result;
+    }
+
+    $scope.closeTestBatch = function(testBatch) {
+
+      showConfirmation('Confirm Close', 'Close', 'Are you sure that you want to close this test batch?').then(function() {
+
+        TestingService.closeTestBatch(testBatch, function() {
+          $location.path('/manageTestBatch');
+        }, function(err) {
+          console.error(err);
+        });
       });
     };
 
-    $scope.deleteTestBatch = function (testBatchId) {
+    $scope.reopenTestBatch = function(testBatch) {
 
-      // TODO: Confirmation dialog
+      showConfirmation('Confirm Reopen', 'Reopen', 'Are you sure that you want to reopen this test batch?').then(function() {
 
-      TestingService.deleteTestBatch(testBatchId, function(response) {
-        $location.path("/manageTestBatch");
-      }, function(err) {
-        $scope.err = err;
-        console.error(err);
+        TestingService.reopenTestBatch(testBatch, function(response) {
+          if (testBatch.permissions) {
+            testBatch.permissions = response.permissions;
+            testBatch.status = response.status;
+          }
+        }, function(err) {
+          $scope.err = err;
+          console.error(err);
+        });
       });
     };
 
+    $scope.deleteTestBatch = function(testBatchId) {
 
-    $scope.releaseTestBatch = function (testBatch)  {
+      showConfirmation('Confirm Void', 'Void', 'Are you sure that you want to void this test batch?').then(function() {
 
-      // TODO: Confirmation dialog
+        TestingService.deleteTestBatch(testBatchId, function() {
+          $location.path('/manageTestBatch');
+        }, function(err) {
+          $scope.err = err;
+          console.error(err);
+        });
+      });
+    };
 
-      TestingService.releaseTestBatch(testBatch, function(response) {
-        $scope.testBatch = response;
-      }, function(err) {
-        $scope.err = err;
-        console.error(err);
+    $scope.releaseTestBatch = function(testBatch)  {
+
+      var message = 'All samples without discrepancies will be released. ' +
+          'Are you sure that you want to release this test batch?';
+
+      showConfirmation('Confirm Release', 'Release', message).then(function() {
+        TestingService.releaseTestBatch(testBatch, function(response) {
+          $scope.testBatch = response;
+          $scope.refreshCurrentTestBatch();
+        }, function(err) {
+          $scope.err = err;
+          console.error(err);
+        });
       });
     };
 
