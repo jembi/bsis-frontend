@@ -3,15 +3,15 @@
 
 <div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false" style="padding-top:10px;">
     <alert type="danger" close="">
-        {{err.userMessage}}
+        {{donorDonationError.userMessage}}
         <ul>
-            <li ng-show="err['donation.donor']"> {{err["donation.donor"]}}</li>
-            <li ng-show="err['donation.donationIdentificationNumber']"> {{err["donation.donationIdentificationNumber"]}}</li>
-            <li ng-show="err['donation.donorWeight']"> {{err["donation.donorWeight"]}}</li>
-            <li ng-show="err['donation.haemoglobinCount']"> {{err["donation.haemoglobinCount"]}}</li>
-            <li ng-show="err['donation.bloodPressureSystolic']"> {{err["donation.bloodPressureSystolic"]}}</li>
-            <li ng-show="err['donation.bloodPressureDiastolic']"> {{err["donation.bloodPressureDiastolic"]}}</li>
-            <li ng-show="err['donation.donorPulse']"> {{err["donation.donorPulse"]}}</li>
+            <li ng-show="donorDonationError['donation.donor']"> {{donorDonationError["donation.donor"]}}</li>
+            <li ng-show="donorDonationError['donation.donationIdentificationNumber']"> {{donorDonationError["donation.donationIdentificationNumber"]}}</li>
+            <li ng-show="donorDonationError['donation.donorWeight']"> {{donorDonationError["donation.donorWeight"]}}</li>
+            <li ng-show="donorDonationError['donation.haemoglobinCount']"> {{donorDonationError["donation.haemoglobinCount"]}}</li>
+            <li ng-show="donorDonationError['donation.bloodPressureSystolic']"> {{donorDonationError["donation.bloodPressureSystolic"]}}</li>
+            <li ng-show="donorDonationError['donation.bloodPressureDiastolic']"> {{donorDonationError["donation.bloodPressureDiastolic"]}}</li>
+            <li ng-show="donorDonationError['donation.donorPulse']"> {{donorDonationError["donation.donorPulse"]}}</li>
         </ul>
     </alert>
 </div>
