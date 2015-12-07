@@ -123,7 +123,7 @@ angular.module('bsis')
     };
 
     $scope.addPackType = function (packType) {
-      packType.isDeleted = false;
+
       packType.canPool = null;
       packType.canSplit = null;
 
