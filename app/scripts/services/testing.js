@@ -127,7 +127,7 @@ angular.module('bsis')
 
       addTestBatch.donationBatchIds = donationBatches;
 
-      addTestBatch.$save(function(data){ 
+      addTestBatch.$save(function(){ 
         response(true);
       }, function (){
         response(false);
@@ -139,7 +139,7 @@ angular.module('bsis')
 
       angular.copy(testResults, saveTestResults);
 
-      saveTestResults.$save(function(data){ 
+      saveTestResults.$save(function(){ 
         response(true);
         deferred.resolve();
       }, function (){
@@ -152,7 +152,7 @@ angular.module('bsis')
       var deferred = $q.defer();
 
       Api.BloodGroupMatchTestResults.get({donationIdentificationNumber:testResults.donationIdentificationNumber,
-        bloodAbo:testResults.bloodAbo, bloodRh:testResults.bloodRh}, function (donor) {
+        bloodAbo:testResults.bloodAbo, bloodRh:testResults.bloodRh}, function () {
         response(true);
         deferred.resolve();
       }, function (){

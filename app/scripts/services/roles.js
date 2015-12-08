@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.factory('RolesService', function ($http, Api, $filter) {
+.factory('RolesService', function ($http, Api) {
 
   var roleObj = {};
   var permissionsObj = {};

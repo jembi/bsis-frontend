@@ -407,10 +407,10 @@ var app = angular.module('bsis', [
     editableOptions.theme = 'bs3';
   })
 
-  .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
+  .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location) {
 
     // on route change, check to see if user has appropriate permissions
-    $rootScope.$on('$routeChangeStart', function(scope, next, current) {
+    $rootScope.$on('$routeChangeStart', function(scope, next) {
 
       // set initial accessDenied value to false
       if (!($rootScope.accessDenied === true && $location.path() == '/home')){
@@ -436,7 +436,7 @@ var app = angular.module('bsis', [
 
   .run( ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
 
-    $rootScope.$on('$locationChangeStart', function(event){
+    $rootScope.$on('$locationChangeStart', function(){
 
       // Retrieve the session from storage
       var consoleSession = AuthService.getSession();
@@ -492,7 +492,7 @@ var app = angular.module('bsis', [
     return {
       restrict: "A",
       link: function (scope, el, attrs) {
-        el.bind('keyup', function(e) {
+        el.bind('keyup', function() {
           if (this.value.length === this.maxLength) {
             var element = document.getElementById(attrs.bsisTabTo);
             if (element)
@@ -542,7 +542,7 @@ var app = angular.module('bsis', [
         initDate: "=",
         calIcon: "="
       },
-      link: function($scope, element, attrs) {
+      link: function($scope, element) {
 
         $scope.calIcon = $scope.calIcon || 'fa-calendar';
 
@@ -733,7 +733,7 @@ var app = angular.module('bsis', [
   .directive('selectOnFocus', function () {
     return {
         restrict: 'A',
-        link: function (scope, element, attrs) {
+        link: function (scope, element) {
             element.on('click', function () {
                 this.select();
             });

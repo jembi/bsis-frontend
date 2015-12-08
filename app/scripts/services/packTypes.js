@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('PackTypesService', function ($http, Api, $filter) {
+  .factory('PackTypesService', function ($http, Api) {
     var packTypeObj = {};
     return {
 

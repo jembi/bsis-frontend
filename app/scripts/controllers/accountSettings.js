@@ -63,7 +63,7 @@ angular.module('bsis')
         confirmPassword: ''
       });
       $scope.resetUserDetails();
-    }, function(err) {
+    }, function() {
       $scope.detailsStyle = 'danger';
       $scope.detailsMessage = 'Loading details failed. Please try refreshing.';
     });

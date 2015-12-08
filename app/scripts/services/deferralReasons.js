@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('DeferralReasonsService', function ($http, Api, $filter, USERCONFIG) {
+  .factory('DeferralReasonsService', function ($http, Api) {
 
     var deferralReasonObj = {};
     return {

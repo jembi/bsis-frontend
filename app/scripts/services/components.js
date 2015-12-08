@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.factory('ComponentService', function ($http, Api, $filter) {
+.factory('ComponentService', function ($http, Api) {
   return {
     getComponentsFormFields: function(response){
       Api.ComponentsFormFields.get({}, function (backingForm) {
@@ -27,19 +27,13 @@ angular.module('bsis')
     },
     getComponentsSummary: function () {
       return $http.get('/getComponentsSummary')
-        .success(function(data, status, headers, config){
-          return data;
-      })
-      .error(function(data){
+      .error(function(){
         console.log("Find Components Summary Unsuccessful");
       });
     },
     getDiscardsSummary: function () {
       return $http.get('/getDiscardsSummary')
-        .success(function(data, status, headers, config){
-          return data;
-      })
-      .error(function(data){
+      .error(function(){
         console.log("Find Discards Summary Unsuccessful");
       });
     },

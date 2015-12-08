@@ -6,7 +6,6 @@ angular.module('bsis')
   var donorObj = {};
   var donationBatchObj = {};
   var donorsObj = {};
-  var mergedDonor = {};
 
   return {
 
@@ -125,7 +124,7 @@ angular.module('bsis')
       angular.copy(donation, addDonation);
 
       // save donation (POST /donations)
-      addDonation.$save(function(data){
+      addDonation.$save(function(){
         // refresh donation batch after adding donation to it, and add to response
         Api.DonationBatches.get({id:donationBatchObj.id}, function (donationBatch){
           donationBatchObj = donationBatch.donationBatch;
@@ -148,7 +147,7 @@ angular.module('bsis')
       }
 
       // save donation (POST /donations)
-      addDonation.$save(function(data){
+      addDonation.$save(function(){
         onSuccess(true);
       }, function (err){
         onError(err.data);
@@ -242,12 +241,9 @@ angular.module('bsis')
         response(false);
       });
     },
-    getDonationBatchDonations: function (donor) {
+    getDonationBatchDonations: function () {
        return $http.get('/getDonationBatch')
-        .success(function(data, status, headers, config){
-          return data;
-      })
-      .error(function(data){
+      .error(function(){
         console.log("Get Donation Batch Unsuccessful");
       });
     },
@@ -277,7 +273,7 @@ angular.module('bsis')
       angular.copy(donationBatch, addDonationBatch);
 
       // save deferral (POST /deferral)
-      addDonationBatch.$save(function(data){
+      addDonationBatch.$save(function(){
         onSuccess(true);
       }, function (err){
         onError(err.data);

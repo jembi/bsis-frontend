@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-.factory('ReportsService', function ($http) {
+.factory('ReportsService', function () {
   return {
 
   };

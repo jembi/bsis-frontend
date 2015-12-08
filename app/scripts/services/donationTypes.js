@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('DonationTypesService', function ($http, Api, $filter, USERCONFIG) {
+  .factory('DonationTypesService', function ($http, Api) {
 
     var donationTypeObj = {};
     return {

@@ -362,7 +362,7 @@ angular.module('bsis')
       DonorService.setDonor(donor);
       $scope.donor = donor;
       $scope.donorPermissions.canDelete = donor.permissions.canDelete;
-    }, function(err){
+    }, function(){
       $location.path('/findDonor');
     });
 
@@ -1056,7 +1056,6 @@ angular.module('bsis')
           data = [];
           var duplicateCount = 0;
           duplicateGroups = response.duplicates;
-          var len = duplicateGroups.length;
           // go through the duplicate groups which are stored as a map of arrays
           for (var groupKey in duplicateGroups) {
             duplicateCount++;
@@ -1153,7 +1152,7 @@ angular.module('bsis')
         if (response !== false) {
           duplicatesData = [];
           var duplicates = response.duplicates;
-          angular.forEach(duplicates, function(donor, index) {
+          angular.forEach(duplicates, function(donor) {
             donor.merge = null;
             duplicatesData.push(donor);
           });
@@ -1262,7 +1261,7 @@ angular.module('bsis')
       });
       // set the duplicate donor numbers
       newMergedDonor.duplicateDonorNumbers = [];
-      angular.forEach(selectedDonorsData, function(donor, i) {
+      angular.forEach(selectedDonorsData, function(donor) {
         newMergedDonor.duplicateDonorNumbers.push(donor.donorNumber);
       });
       return newMergedDonor;
@@ -1342,7 +1341,7 @@ angular.module('bsis')
         donorFields.workNumber = false;
 
         var bloodTypingMismatch = false;
-        angular.forEach(duplicatesData, function(donor, i) {
+        angular.forEach(duplicatesData, function(donor) {
           // if the donor is selected
           if (donor.merge) {
             // check if the donor has got any data and set the flags for the error message and none option to display
@@ -1418,7 +1417,7 @@ angular.module('bsis')
       } else if (newStep == 3) {
         // set the idType and idNumber according to which option was selected
         mergedDonor.notes = "";
-        angular.forEach(selectedDonorsData, function(donor, i) {
+        angular.forEach(selectedDonorsData, function(donor) {
           if (donor.id == mergedDonor.idNumberId) {
             mergedDonor.idType = donor.idType;
             mergedDonor.idNumber = donor.idNumber;
@@ -1439,7 +1438,7 @@ angular.module('bsis')
       } else if (newStep == 5) {
         // set the work, home and postal addresses according to which option was selected
         mergedDonor.address = {};
-        angular.forEach(selectedDonorsData, function(donor, i) {
+        angular.forEach(selectedDonorsData, function(donor) {
           if (donor.address.id == mergedDonor.homeAddress) {
             mergedDonor.address.homeAddressLine1 = donor.address.homeAddressLine1;
             mergedDonor.address.homeAddressLine2 = donor.address.homeAddressLine2;
@@ -1483,7 +1482,7 @@ angular.module('bsis')
       $scope.currentStep = newStep;
     };
 
-    $scope.merge = function (item) {
+    $scope.merge = function () {
       // submit
       DonorService.mergeDonorsDuplicate(groupKey, $scope.copyMergedDonor(mergedDonor), 
         function(mergedDonor) {
@@ -1496,7 +1495,7 @@ angular.module('bsis')
       );
     };
 
-    $scope.cancel = function (item) {
+    $scope.cancel = function () {
       $location.path('/duplicateDonors');
     };
   })
@@ -1671,7 +1670,7 @@ angular.module('bsis')
 
         $scope.addingDonationBatch = true;
 
-        DonorService.addDonationBatch(donationBatch, function(response){
+        DonorService.addDonationBatch(donationBatch, function(){
             $scope.newDonationBatch = {backEntry: false};
             $scope.getOpenDonationBatches();
             // set form back to pristine state
@@ -1895,7 +1894,7 @@ angular.module('bsis')
     };
 
     $scope.closeDonationBatch = function (donationBatch){
-      DonorService.closeDonationBatch(donationBatch, function(response) {
+      DonorService.closeDonationBatch(donationBatch, function() {
         $location.path("/manageDonationBatches");
       }, function(err) {
         console.error(err);
@@ -1903,7 +1902,7 @@ angular.module('bsis')
     };
 
     $scope.deleteDonationBatch = function (donationBatchId){
-      DonorService.deleteDonationBatch(donationBatchId, function(response) {
+      DonorService.deleteDonationBatch(donationBatchId, function() {
         $location.path("/manageDonationBatches");
       }, function(err) {
         console.error(err);

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('DiscardReasonsService', function ($http, Api, $filter, USERCONFIG) {
+  .factory('DiscardReasonsService', function ($http, Api) {
 
     var discardReasonObj = {};
     return {

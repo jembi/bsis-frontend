@@ -175,7 +175,7 @@ angular.module('bsis')
         }
         else{
         }
-      }, function(err){
+      }, function(){
         $scope.searching = false;
       });
     };
@@ -305,14 +305,14 @@ angular.module('bsis')
         $location.path("/manageBloodGroupMatchTesting/" + item.id);
     };
 
-    $scope.recordPendingTestResults = function (item, testCategory) {
+    $scope.recordPendingTestResults = function (item) {
       TestingService.setCurrentTestBatch(item.id);
       $location.path("/managePendingTests/" + item.id);
     };
 
   })
 
-  .controller('TestBatchCtrl', function ($scope, $location, TestingService, $filter, ngTableParams) {
+  .controller('TestBatchCtrl', function ($scope, $location, TestingService) {
 
     $scope.viewTestBatch = function (item) {
       TestingService.setCurrentTestBatch(item.id);
@@ -851,7 +851,7 @@ angular.module('bsis')
 
           $scope.addTestResults = {};
           $scope.addTestMatchResults = {};
-          angular.forEach($scope.data, function(value, key) {
+          angular.forEach($scope.data, function(value) {
             $scope.addTestResults[value.donation.donationIdentificationNumber] = {"donationIdentificationNumber": value.donation.donationIdentificationNumber};
 
             $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {"donationIdentificationNumber": value.donation.donationIdentificationNumber};
@@ -876,7 +876,7 @@ angular.module('bsis')
 
       var requests = [];
 
-      angular.forEach(testResults, function(value, key) {
+      angular.forEach(testResults, function(value) {
         var request = TestingService.saveTestResults(value, function(response){
           if (response === true){
           }
@@ -902,7 +902,7 @@ angular.module('bsis')
 
       var requests = [];
 
-      angular.forEach(testResults, function(value, key) {
+      angular.forEach(testResults, function(value) {
         if(value.confirm){
           var request = TestingService.saveBloodGroupMatchTestResults(value, function(response){
             if (response === true){

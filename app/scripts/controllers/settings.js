@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('SettingsCtrl', function ($scope, $location, ICONS, PERMISSIONS, $filter) {
+  .controller('SettingsCtrl', function ($scope, $location, ICONS, PERMISSIONS) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
