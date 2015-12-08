@@ -65,8 +65,11 @@
     <span ng-show="editableForm.$visible" style="display:inline;">
       <dateselect ng-model="testBatch.createdDate" initDate="testBatch.createdDate" format="format" cal-icon="icons.CALENDAR" opened="dateToOpen"></dateselect>
     </span>
-    <span ng-if="testBatch.status !== 'RELEASED'">
+    <span ng-if="testBatch.status !== 'RELEASED' && !testBatch.permissions.canRelease">
       | <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
+    </span>
+    <span ng-if="testBatch.status !== 'RELEASED' && testBatch.permissions.canRelease">
+      | <small><em>Number of Samples Ready for Release: </em></small>{{testBatch.readyForReleaseCount}} of {{testBatch.numSamples}}
     </span>
     <span ng-if="testBatch.status === 'RELEASED'">
       | <small><em>Number of Samples Released: </em></small>{{testBatch.numReleasedSamples}} of {{testBatch.numSamples}}
@@ -106,7 +109,10 @@
 
 <hr style="margin-top:5px;"/>
 
-<div style="padding-bottom: 5px"></div>
+<div style="padding-bottom: 5px">
+  <alert type="info" ng-if="testBatch.permissions.canRelease">This test batch is ready to be released.</alert>
+  <alert type="info" ng-if="testBatch.permissions.canClose">This test batch is ready to be closed.</alert>
+</div>
 
 <div class="col-sm-12">
   <div class="panel panel-default">
