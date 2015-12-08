@@ -1,4 +1,5 @@
 // Generated on 2014-04-03 using generator-angular 0.8.0
+/* eslint-env node */
 'use strict';
 
 // # Globbing
@@ -33,14 +34,14 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+        tasks: ['newer:eslint:src'],
         options: {
           livereload: true
         }
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
+        tasks: ['newer:eslint:test', 'karma']
       },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
@@ -96,23 +97,19 @@ module.exports = function (grunt) {
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
-    jshint: {
+    eslint: {
       options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        quiet: true
       },
-      all: [
+      src: [
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/{,*/}*.js',
         '!<%= yeoman.app %>/scripts/jquery.min.js',
         '!<%= yeoman.app %>/scripts/bootstrap.min.js'
       ],
-      test: {
-        options: {
-          jshintrc: 'test/.jshintrc'
-        },
-        src: ['test/spec/{,*/}*.js']
-      }
+      test: [
+        'test/spec/{,*/}*.js'
+      ]
     },
 
     // Empties folders to start fresh
@@ -372,7 +369,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'newer:jshint',
+    'newer:eslint',
     'karma'
   ]);
 
@@ -382,7 +379,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
-    'newer:jshint',
+    'newer:eslint',
     'concat',
     'ngAnnotate',
     'copy:dist',
@@ -395,7 +392,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
+    'newer:eslint',
     'test',
     'build'
   ]);
