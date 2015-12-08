@@ -55,13 +55,13 @@ angular.module('bsis')
 
         for (var i=0,  tot=config.length; i < tot; i++) {
           if (config[i].name == 'dateFormat'){
-            app.constant('DATEFORMAT', config[i].value);
+            angular.module('bsis').constant('DATEFORMAT', config[i].value);
           }
           else if (config[i].name == 'dateTimeFormat'){
-            app.constant('DATETIMEFORMAT', config[i].value);
+            angular.module('bsis').constant('DATETIMEFORMAT', config[i].value);
           }
           else if (config[i].name == 'timeFormat'){
-            app.constant('TIMEFORMAT', config[i].value);
+            angular.module('bsis').constant('TIMEFORMAT', config[i].value);
           }
 
           //Home Tabs constants
