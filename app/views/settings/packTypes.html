@@ -30,6 +30,10 @@
                         <span ng-if="pack.countAsDonation == true"><i class="fa {{icons.SQUARECHECK}}"></i></span>
                         <span ng-if="pack.countAsDonation == false"><i class="fa {{icons.SQUARE}}"></i></span>
                     </td>
+                    <td data-title="'Enabled'" header-class="text-left" class="text-center" sortable="'isDeleted'">
+                        <span ng-if="pack.isDeleted == true"><i class="fa {{icons.SQUARE}}"></i></span>
+                        <span ng-if="pack.isDeleted == false"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                    </td>
                 </tr>
             </table>
         </div>
