@@ -673,20 +673,20 @@ angular.module('bsis')
     };
 
     $scope.updateDonation = function (donation){
-
+      var d = $q.defer();
       DonorService.updateDonation(donation, function(response){
-        if (response === true){
-
           $scope.addDonationSuccess = true;
           $scope.donation = {};
-          $location.path("/addDonation");
-
-        }
-        else{
-          // TODO: handle case where response == false
+          $scope.err = null;
+          $scope.viewDonationSummary(response.donationIdentificationNumber);
+          d.resolve();
+        }, function (err) {
+          console.error(err);
+          $scope.err = err;
           $scope.addDonationSuccess = false;
-        }
-      });
+          d.reject('Server Error');
+        });
+      return d.promise;
     };
 
     $scope.validateForm = function (form){
@@ -2074,20 +2074,13 @@ angular.module('bsis')
 
     $scope.updateDonation = function (donation){
 
-      //$scope.addDonationSuccess = '';
-
-      DonorService.updateDonation(donation, function(response){
-        if (response === true){
-
-          $scope.addDonationSuccess = true;
-          $scope.donation = {};
-          $location.path("/addDonation");
-
-        }
-        else{
-          // TODO: handle case where response == false
+      DonorService.updateDonation(donation, function(response) {
+        $scope.addDonationSuccess = true;
+        $scope.donation = {};
+        $scope.viewDonationSummary(donation);
+      }, function (err) {
+          console.error(err);
           $scope.addDonationSuccess = false;
-        }
       });
     };
 
