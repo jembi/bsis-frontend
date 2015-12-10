@@ -62,6 +62,6 @@ angular.module('bsis')
       }, function (){
         response(false);  
       });
-    },
+    }
   };
 });

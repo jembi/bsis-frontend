@@ -350,7 +350,7 @@ angular.module('bsis')
         filterKey: 'MATCH',
         columns: [ 'bloodTypingMatchStatus' ],
         matchType: false
-      },
+      }
     ];
     $scope.dataExportType = $scope.exportOptions[0];
 
@@ -425,7 +425,7 @@ angular.module('bsis')
         field: 'donationIdentificationNumber',
         visible: true,
         width: '**',
-        maxWidth: '120',
+        maxWidth: '120'
       },
       {
         name: 'Date Bled',
@@ -433,21 +433,21 @@ angular.module('bsis')
         field: 'donationDate',
         cellFilter: 'bsisDate',
         visible: true,
-        width: '**',
+        width: '**'
       },
       {
         name: 'Pack Type',
         field: 'packType.packType',
         visible: true,
         width: '**',
-        maxWidth: '100',
+        maxWidth: '100'
       },
       {
         name: 'Venue',
         displayName: 'Venue',
         field: 'venue.name',
         visible: true,
-        width: '**',
+        width: '**'
       },
       {
         name: 'ttistatus',
@@ -455,14 +455,14 @@ angular.module('bsis')
         field: 'ttistatus',
         cellFilter: 'mapTTIStatus',
         visible: true,
-        width: '**',
+        width: '**'
       },
       {
         name:'bloodAboRh',
         displayName: 'Blood Group Serology',
         cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
         visible: true,
-        width: '**',
+        width: '**'
       }
     ];
 

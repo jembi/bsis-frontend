@@ -45,7 +45,7 @@ angular.module('bsis')
 
       });
 
-    },
+    }
 
   };
 });

@@ -702,7 +702,7 @@ var app = angular.module('bsis', [
         restrict: 'EA',
         scope: {
             dob: '@',
-            age: '=',
+            age: '='
         },
         link: function ($scope) {
           function doCalculation() {
