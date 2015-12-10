@@ -28,8 +28,6 @@ angular.module('bsis')
           $scope.discardReasonsCount = $scope.discardReasons.length;
 
         }
-        else {
-        }
       });
     };
 
@@ -107,8 +105,6 @@ angular.module('bsis')
           } else {
             $scope.addDiscardReason(discard, discardForm);
           }
-        } else {
-
         }
       } else {
         $scope.submitted = true;

@@ -81,8 +81,6 @@ angular.module('bsis')
           $scope.data = response;
           $scope.combinations = $scope.data.combinations;
         }
-        else{
-        }
       });
     };
 
@@ -249,8 +247,6 @@ angular.module('bsis')
         if (response !== false){
           $scope.components = response.components;
           $scope.componentsView = 'viewComponents';
-        }
-        else{
         }
       });
       
@@ -441,8 +437,6 @@ angular.module('bsis')
       $scope.selectedComponentType = componentType;
     };
 
-      }
-      else{
       }
     });
 

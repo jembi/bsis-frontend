@@ -112,8 +112,6 @@ angular.module('bsis')
           }
           
         }
-        else{
-        }
       });
 
     };
@@ -173,8 +171,6 @@ angular.module('bsis')
             $scope.recentTestBatches = false;
           }
         }
-        else{
-        }
       }, function(){
         $scope.searching = false;
       });
@@ -186,8 +182,6 @@ angular.module('bsis')
         if (response !== false){
           TestingService.setDonationBatches(response.donationBatches);
           $scope.donationBatches = TestingService.getDonationBatches();
-        }
-        else{
         }
       });
 
@@ -419,8 +413,6 @@ angular.module('bsis')
           $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
           $scope.basicTTIComplete = response.basicTTIComplete;
         }
-        else{
-        }
       });
     };
 
@@ -508,8 +500,6 @@ angular.module('bsis')
           });
 
         }
-        else{
-        }
       });
 
       $q.all(ttiTests).then(function(){
@@ -530,8 +520,6 @@ angular.module('bsis')
               );
             });
 
-          }
-          else{
           }
         });
 
@@ -816,8 +804,6 @@ angular.module('bsis')
           $scope.testBatch = response.testBatch;
 
         }
-        else{
-        }
       });
     };
 
@@ -827,14 +813,10 @@ angular.module('bsis')
           $scope.ttiTestsBasic = response.basicTTITests;
           $scope.ttiTestsConfirmatory = response.confirmatoryTTITests;
         }
-        else{
-        }
       });
       TestingService.getBloodGroupTestingFormFields( function(response){
         if (response !== false){
           $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
-        }
-        else{
         }
       });
     };
@@ -859,8 +841,6 @@ angular.module('bsis')
           });
 
         }
-        else{
-        }
         $scope.searching = false;
       });
     };
@@ -876,17 +856,12 @@ angular.module('bsis')
       var requests = [];
 
       angular.forEach(testResults, function(value) {
-        var request = TestingService.saveTestResults(value, function(response){
-          if (response === true){
-          }
-          else{
-            // TODO: handle case where response == false
-          }
-        });
+        var request = TestingService.saveTestResults(value, angular.noop);
 
         requests.push(request);
       });
 
+      // FIXME: Handle errors
       $q.all(requests).then(function(){
         $location.path("/viewTestBatch/" + $routeParams.id );
       }).finally(function() {
@@ -903,18 +878,13 @@ angular.module('bsis')
 
       angular.forEach(testResults, function(value) {
         if(value.confirm){
-          var request = TestingService.saveBloodGroupMatchTestResults(value, function(response){
-            if (response === true){
-            }
-            else{
-              // TODO: handle case where response == false
-            }
-          });
+          var request = TestingService.saveBloodGroupMatchTestResults(value, angular.noop);
           requests.push(request);
         }
         
       });
 
+      // FIXME: Handle errors
       $q.all(requests).then(function(){
         $location.path("/viewTestBatch/" + $routeParams.id);
       }).finally(function() {

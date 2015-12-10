@@ -28,8 +28,6 @@ angular.module('bsis')
           $scope.configurationsCount = $scope.configurations.length;
 
         }
-        else{
-        }
       });
     };
 
@@ -107,8 +105,6 @@ angular.module('bsis')
           } else {
             $scope.addConfiguration(configuration, configurationForm);
           }
-        } else {
-
         }
       } else {
         $scope.submitted = true;

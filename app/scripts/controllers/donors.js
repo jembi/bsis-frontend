@@ -412,8 +412,6 @@ angular.module('bsis')
         $scope.month = MONTH.options;
         $scope.gender = GENDER.options;
       }
-      else{
-      }
     });
 
     $scope.getDonorOverview = function () {
@@ -432,8 +430,6 @@ angular.module('bsis')
           $scope.donorPermissions.canDelete = response.canDelete;
           $scope.isEligible = response.isEligible;
         }
-        else{
-        }
       });
     };
 
@@ -446,8 +442,6 @@ angular.module('bsis')
         $scope.data = response;
         $scope.deferralReasons = $scope.data.deferralReasons;
       }
-      else{
-      }
     });
 
     $scope.printDonorBarcode = function () {
@@ -455,8 +449,6 @@ angular.module('bsis')
         if (response !== false){
           $scope.labelZPL = response.labelZPL;
           $log.debug("$scope.labelZPL: ", $scope.labelZPL);
-        }
-        else{
         }
       });
     };
@@ -896,8 +888,6 @@ angular.module('bsis')
             $scope.openDonationBatches = false;
           }
         }
-        else{
-        }
       });
     };
 
@@ -911,8 +901,6 @@ angular.module('bsis')
             $scope.donation = $scope.data.addDonationForm;
             $scope.haemoglobinLevels = $scope.data.haemoglobinLevels;
             $scope.adverseEventTypes = response.adverseEventTypes;
-          }
-          else{
           }
         });
     };
@@ -1029,8 +1017,6 @@ angular.module('bsis')
         $scope.title = TITLE.options;
         $scope.month = MONTH.options;
         $scope.gender = GENDER.options;
-      }
-      else{
       }
     });
 
@@ -1432,7 +1418,6 @@ angular.module('bsis')
             }
           }
         });
-      } else if (newStep == 4) {
       } else if (newStep == 5) {
         // set the work, home and postal addresses according to which option was selected
         mergedDonor.address = {};
@@ -1537,8 +1522,6 @@ angular.module('bsis')
             $scope.openDonationBatches = false;
           }
         }
-        else{
-        }
       });
     };
 
@@ -1603,8 +1586,6 @@ angular.module('bsis')
           else {
             $scope.recentDonationBatches = false;
           }
-        }
-        else{
         }
       }, function(err) {
         $scope.searching = false;
@@ -1958,8 +1939,6 @@ angular.module('bsis')
           $scope.donation = $scope.data.addDonationForm;
           $scope.haemoglobinLevels = $scope.data.haemoglobinLevels;
           $scope.adverseEventTypes = response.adverseEventTypes;
-        }
-        else{
         }
       });
     };

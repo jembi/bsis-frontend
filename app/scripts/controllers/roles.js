@@ -25,9 +25,6 @@ angular.module('bsis')
           $scope.data = response;
           $scope.rolesCount = $scope.data.length;
         }
-        else {
-
-        }
       });
 
       $scope.rolesTableParams = new ngTableParams({
@@ -73,9 +70,6 @@ angular.module('bsis')
           $scope.role = role;
           RolesService.setRole(role);
           $location.path("/manageRole/" + role.id);
-        }
-        else {
-
         }
       });
     };
@@ -159,9 +153,6 @@ angular.module('bsis')
       RolesService.getAllPermissions(function (response) {
         if (response !== false) {
           $scope.permissionList = response.permissions;
-        }
-        else {
-
         }
       });
     };

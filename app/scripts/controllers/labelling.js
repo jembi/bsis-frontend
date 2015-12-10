@@ -64,8 +64,6 @@ angular.module('bsis')
           $scope.labelZPL = data.labelZPL;
           $log.debug("$scope.labelZPL: ", $scope.labelZPL);
         }
-        else{
-        }
       });
     };
 
@@ -76,8 +74,6 @@ angular.module('bsis')
           $scope.data = data;
           $scope.labelZPL = data.labelZPL;
           $log.debug("$scope.labelZPL: ", $scope.labelZPL);
-        }
-        else{
         }
       });
     };

@@ -40,9 +40,6 @@ angular.module('bsis')
           $scope.data = data;
           $scope.usersCount = $scope.data.length;
         }
-        else {
-
-        }
       });
 
     };
@@ -65,8 +62,6 @@ angular.module('bsis')
           $scope.getUsers();
           $location.path('/users');
         }
-        else {
-        }
       });
     };
 
@@ -85,9 +80,6 @@ angular.module('bsis')
           $scope.roleList = response;
           UsersService.setRoles(response);
           $location.path("/manageUser/" + item.id);
-        }
-        else {
-
         }
       });
     };

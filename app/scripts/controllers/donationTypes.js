@@ -28,8 +28,6 @@ angular.module('bsis')
           $scope.donationTypesCount = $scope.donationTypes.length;
 
         }
-        else{
-        }
       });
     };
 
@@ -107,8 +105,6 @@ angular.module('bsis')
           } else {
             $scope.addDonationType(donationType, donationTypeForm);
           }
-        } else {
-
         }
       } else {
         $scope.submitted = true;

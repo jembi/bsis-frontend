@@ -34,9 +34,6 @@ angular.module('bsis')
           data = response;
           $scope.data = data;
         }
-        else{
-
-        }
       });
 
     };
@@ -61,8 +58,6 @@ angular.module('bsis')
             $scope.getLocations();
             $scope.err = null;
             $scope.addingLocation = false;
-          }
-          else{
           }
         }, function (err) {
           $scope.err = err;
@@ -89,8 +84,6 @@ angular.module('bsis')
           $scope.locationToRemove = '';
           $scope.getLocations();
         }
-        else{
-        }
       });
     };
 
@@ -100,8 +93,6 @@ angular.module('bsis')
         if (response !== false){
           $scope.locationToRemove = '';
           $scope.getLocations();
-        }
-        else{
         }
       });
     };

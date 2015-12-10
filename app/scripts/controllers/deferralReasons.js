@@ -28,8 +28,6 @@ angular.module('bsis')
           $scope.deferralReasonsCount = $scope.deferralReasons.length;
 
         }
-        else{
-        }
       });
     };
 
@@ -107,8 +105,6 @@ angular.module('bsis')
           } else {
             $scope.addDeferralReason(deferral, deferralForm);
           }
-        } else {
-
         }
       } else {
         $scope.submitted = true;
