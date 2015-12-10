@@ -265,8 +265,8 @@ angular.module('bsis')
 
     $scope.formErrors = [];
 
-    $scope.checkIdentifier = function (data) {
-      if (!data.idNumber || data.idType === undefined) {
+    $scope.checkIdentifier = function(identifierData) {
+      if (!identifierData.idNumber || angular.isUndefined(identifierData.idType)) {
         $scope.clearError('identifier');
         $scope.raiseError('identifier',  'Please enter a valid identifier');
         $scope.getError('identifier');
@@ -1285,9 +1285,9 @@ angular.module('bsis')
       counts: [],
       total: $scope.deferralsData.length,
       getData: function ($defer, params) {
-        var deferralsData = $scope.deferralsData;
-        var filteredData = params.filter() ? $filter('filter')(deferralsData, params.filter()) : deferralsData;
-        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : deferralsData;
+        var allDeferralsData = $scope.deferralsData;
+        var filteredData = params.filter() ? $filter('filter')(allDeferralsData, params.filter()) : allDeferralsData;
+        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : allDeferralsData;
         params.total(orderedData.length);
         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
@@ -1311,18 +1311,18 @@ angular.module('bsis')
       if (newStep == 2) {
         // see which donors have been selected and then move onto the overview page
         selectedDonorsData = [];
-        var donorFields = {};
+        var newDonorFields = {};
         // set up the "None of the above" option and required error message flags
-        donorFields.idNumber = false;
-        donorFields.title = false;
-        donorFields.callingName = false;
-        donorFields.preferredLanguage = false;
-        donorFields.venue = false;
-        donorFields.contactMethodType = false;
-        donorFields.email = false;
-        donorFields.mobileNumber = false;
-        donorFields.homeNumber = false;
-        donorFields.workNumber = false;
+        newDonorFields.idNumber = false;
+        newDonorFields.title = false;
+        newDonorFields.callingName = false;
+        newDonorFields.preferredLanguage = false;
+        newDonorFields.venue = false;
+        newDonorFields.contactMethodType = false;
+        newDonorFields.email = false;
+        newDonorFields.mobileNumber = false;
+        newDonorFields.homeNumber = false;
+        newDonorFields.workNumber = false;
 
         var bloodTypingMismatch = false;
         angular.forEach(duplicatesData, function(donor) {
@@ -1330,33 +1330,33 @@ angular.module('bsis')
           if (donor.merge) {
             // check if the donor has got any data and set the flags for the error message and none option to display
             if (donor.idNumber !== null && donor.idNumber !== '')
-              donorFields.idNumber = true;
+              newDonorFields.idNumber = true;
             if (donor.title !== null && donor.title !== '')
-              donorFields.title = true;
+              newDonorFields.title = true;
             if (donor.callingName !== null && donor.callingName !== '')
-              donorFields.callingName = true;
+              newDonorFields.callingName = true;
             if (donor.preferredLanguage !== null && donor.preferredLanguage !== '')
-              donorFields.preferredLanguage = true;
+              newDonorFields.preferredLanguage = true;
             if (donor.venue !== null && donor.venue !== '')
-              donorFields.venue = true;
+              newDonorFields.venue = true;
             if (donor.contactMethodType !== null && donor.contactMethodType !== '')
-              donorFields.contactMethodType = true;
+              newDonorFields.contactMethodType = true;
             if (donor.contact.email !== null && donor.contact.email !== '')
-              donorFields.email = true;
+              newDonorFields.email = true;
             if (donor.contact.mobileNumber !== null && donor.contact.mobileNumber !== '')
-              donorFields.mobileNumber = true;
+              newDonorFields.mobileNumber = true;
             if (donor.contact.homeNumber !== null && donor.contact.homeNumber !== '')
-              donorFields.homeNumber = true;
+              newDonorFields.homeNumber = true;
             if (donor.contact.workNumber !== null && donor.contact.workNumber !== '')
-              donorFields.workNumber = true;
+              newDonorFields.workNumber = true;
             if (donor.preferredAddressType !== null && donor.preferredAddressType !== '')
-              donorFields.preferredAddressType = true;
+              newDonorFields.preferredAddressType = true;
             if (donor.address.homeAddressLine1 !== null && donor.address.homeAddressLine1 !== '')
-              donorFields.homeAddress = true;
+              newDonorFields.homeAddress = true;
             if (donor.address.workAddressLine1 !== null && donor.address.workAddressLine1 !== '')
-              donorFields.workAddress = true;
+              newDonorFields.workAddress = true;
             if (donor.address.postalAddressLine1 !== null && donor.address.postalAddressLine1 !== '')
-              donorFields.postalAddress = true;
+              newDonorFields.postalAddress = true;
             // check the blood typing of the selected users
             if (mergedDonor.bloodRh) {
               if (donor.bloodRh && mergedDonor.bloodRh != donor.bloodRh) {
@@ -1377,7 +1377,7 @@ angular.module('bsis')
           }
         });
         $scope.selectedDonorsData = selectedDonorsData;
-        $scope.donorFields = donorFields;
+        $scope.donorFields = newDonorFields;
         if (selectedDonorsData === null || selectedDonorsData.length<=1) {
           $scope.message = "Please select at least two donors.";
           $scope.invalid = true;
@@ -1468,8 +1468,8 @@ angular.module('bsis')
     $scope.merge = function () {
       // submit
       DonorService.mergeDonorsDuplicate(groupKey, $scope.copyMergedDonor(mergedDonor), 
-        function(mergedDonor) {
-          $location.path("/viewDonor/" + mergedDonor.id).search({});
+        function(mergedDonorDuplicate) {
+          $location.path("/viewDonor/" + mergedDonorDuplicate.id).search({});
         }, 
         function(err) {
           $scope.hasMessage = true;
@@ -1504,8 +1504,8 @@ angular.module('bsis')
         if (response !== false){
           data = response.donationBatches;
           $scope.data = data;
-          DonorService.getDonationBatchFormFields( function(response){
-            $scope.venues = response.venues;
+          DonorService.getDonationBatchFormFields(function(formFieldsResponse) {
+            $scope.venues = formFieldsResponse.venues;
             angular.forEach(data, function(item) {
               angular.forEach($scope.venues, function(panel, i){
                 if (panel.name == item.venue.name){
@@ -1916,9 +1916,9 @@ angular.module('bsis')
       $scope.$watch('donation.donorNumber', function() {
         if ($scope.donation.donorNumber) {
           $scope.donorSummaryLoading = true;
-          DonorService.getDonorSummaries($scope.donation.donorNumber, function(data) {
-            $scope.donorSummary = data.donor;
-            $scope.donorSummary.eligible = data.eligible;
+          DonorService.getDonorSummaries($scope.donation.donorNumber, function(donorSummaries) {
+            $scope.donorSummary = donorSummaries.donor;
+            $scope.donorSummary.eligible = donorSummaries.eligible;
             $scope.donorSummaryLoading = false;
           });
         }
@@ -2049,7 +2049,7 @@ angular.module('bsis')
 
     $scope.updateDonation = function (donation){
 
-      DonorService.updateDonation(donation, function(response) {
+      DonorService.updateDonation(donation, function() {
         $scope.addDonationSuccess = true;
         $scope.donation = {};
         $scope.viewDonationSummary(donation);
@@ -2115,9 +2115,9 @@ angular.module('bsis')
       }
     };
 
-    $scope.checkBleedTimes = function(data) {
+    $scope.checkBleedTimes = function(bleedTimeData) {
 
-      if (new Date(data.bleedEndTime) < new Date(data.bleedStartTime)){
+      if (new Date(bleedTimeData.bleedEndTime) < new Date(bleedTimeData.bleedStartTime)){
         $scope.clearError('bleedTime');
         $scope.raiseError('bleedTime',  'Bleed start time should be less than end time');
         $scope.getError('bleedTime');

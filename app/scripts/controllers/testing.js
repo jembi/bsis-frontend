@@ -90,8 +90,8 @@ angular.module('bsis')
     };
 
     $scope.setFile = function(element) {
-      $scope.$apply(function($scope) {
-        $scope.file = element.files[0];
+      $scope.$apply(function(scope) {
+        scope.file = element.files[0];
       });
     };
 

@@ -76,9 +76,9 @@ angular.module('bsis')
 
 
     $scope.getComponentCombinations = function() {
-      ComponentService.getComponentCombinations(function(response){
-        if (response !== false){
-          $scope.data = response;
+      ComponentService.getComponentCombinations(function(combinationsResponse){
+        if (combinationsResponse !== false){
+          $scope.data = combinationsResponse;
           $scope.combinations = $scope.data.combinations;
         }
       });
@@ -125,9 +125,9 @@ angular.module('bsis')
       $location.search($scope.componentsSearch);
 
       $scope.searching = true;
-      ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(response){
-        if (response !== false){
-          data = response.components;
+      ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(componentsResponse) {
+        if (componentsResponse !== false){
+          data = componentsResponse.components;
           $scope.data = data;
           $scope.searchResults = true;
           if ($scope.data.length === 0){
@@ -177,9 +177,9 @@ angular.module('bsis')
       $location.search(componentsSearch);
 
       $scope.searching = true;
-      ComponentService.ComponentsSearch(componentsSearch, function(response){
-        if (response !== false){
-          data = response.components;
+      ComponentService.ComponentsSearch(componentsSearch, function(searchResponse) {
+        if (searchResponse !== false){
+          data = searchResponse.components;
           $scope.data = data;
           $scope.searchResults = true;
           $scope.componentsSearchCount = $scope.data.length;
@@ -243,9 +243,9 @@ angular.module('bsis')
 
       $scope.din = din;
 
-      ComponentService.getComponentsByDIN(din, function(response){
-        if (response !== false){
-          $scope.components = response.components;
+      ComponentService.getComponentsByDIN(din, function(componentsResponse) {
+        if (componentsResponse !== false){
+          $scope.components = componentsResponse.components;
           $scope.componentsView = 'viewComponents';
         }
       });
@@ -269,9 +269,9 @@ angular.module('bsis')
       $location.search(discardsSearch);
 
       $scope.searching = true;
-      ComponentService.ComponentsSearch(discardsSearch, function(response){
-        if (response !== false){
-          data = response.components;
+      ComponentService.ComponentsSearch(discardsSearch, function(searchResponse) {
+        if (searchResponse !== false){
+          data = searchResponse.components;
           $scope.data = data;
           $scope.searchResults = true;
           $scope.componentsSearchCount = $scope.data.length;
@@ -333,9 +333,9 @@ angular.module('bsis')
         $scope.recordComponent.componentTypeCombination = $scope.component.componentTypeCombination;
 
         $scope.recordingComponents = true;
-        ComponentService.recordComponents($scope.recordComponent, function(response){
-          if (response !== false){
-            data = response.components;
+        ComponentService.recordComponents($scope.recordComponent, function(recordResponse) {
+          if (recordResponse !== false){
+            data = recordResponse.components;
             $scope.data = data;
             $scope.recordComponent = {};
             recordComponentsForm.$setPristine();
@@ -377,9 +377,9 @@ angular.module('bsis')
           $scope.componentToDiscard.discardReasonText = $scope.discard.discardReasonText;
 
           $scope.discardingComponent = true;
-          ComponentService.discardComponent($scope.componentToDiscard, function(response){
-            if (response !== false){
-              data = response.components;
+          ComponentService.discardComponent($scope.componentToDiscard, function(discardResponse) {
+            if (discardResponse !== false){
+              data = discardResponse.components;
               $scope.data = data;
               $scope.discard = {};
               discardComponentsForm.$setPristine();

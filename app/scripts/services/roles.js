@@ -34,8 +34,6 @@ angular.module('bsis')
 
     updateRole : function (role, response) {
 
-      var roleObj = {};
-
       var updatedRole = angular.copy(role);
 
       role.permissions.forEach( function (item) {

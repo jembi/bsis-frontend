@@ -842,13 +842,13 @@ var DONATION = {DONOR:{}};
       app.constant('SYSTEMCONFIG', response.data);
 
         var url = 'http://' + response.data.apiHost + ':' + response.data.apiPort + '/' + response.data.apiApp;
-        return $http.get(url+'/configurations').then(function(response) {
-          app.constant('USERCONFIG', response.data);
+        return $http.get(url+'/configurations').then(function(configResponse) {
+          app.constant('USERCONFIG', configResponse.data);
 
           app.constant('UI', UI);
           app.constant('DONATION', DONATION);
 
-          var config = response.data.configurations;
+          var config = configResponse.data.configurations;
 
           // initialise date/time format constants
           for (var i=0,  tot=config.length; i < tot; i++) {
