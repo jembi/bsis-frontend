@@ -64,7 +64,6 @@ angular.module('bsis')
       var encodedCredentials = Base64.encode(loginCredentials.username + ':' + loginCredentials.password);
       $http.defaults.headers.common.authorization = 'Basic ' + encodedCredentials;
       Api.User.get({}, function (user) {
-        console.log('Login Successful');
 
         setLoggedOnUser(user);
         Authinterceptor.setCredentials(encodedCredentials);
@@ -73,7 +72,6 @@ angular.module('bsis')
 
         onSuccess(user);
       }, function (error){
-        console.log('Login Unsuccessful');
 
         $rootScope.user = {};
         $rootScope.displayHeader = false;

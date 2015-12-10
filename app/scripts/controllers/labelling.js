@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('LabellingCtrl', function ($scope, $location, LabellingService, ICONS, PERMISSIONS, $routeParams) {
+  .controller('LabellingCtrl', function ($scope, $location, $log, LabellingService, ICONS, PERMISSIONS, $routeParams) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -62,7 +62,7 @@ angular.module('bsis')
           data = response;
           $scope.data = data;
           $scope.labelZPL = data.labelZPL;
-          console.log("$scope.labelZPL: ", $scope.labelZPL);
+          $log.debug("$scope.labelZPL: ", $scope.labelZPL);
         }
         else{
         }
@@ -75,7 +75,7 @@ angular.module('bsis')
           data = response;
           $scope.data = data;
           $scope.labelZPL = data.labelZPL;
-          console.log("$scope.labelZPL: ", $scope.labelZPL);
+          $log.debug("$scope.labelZPL: ", $scope.labelZPL);
         }
         else{
         }

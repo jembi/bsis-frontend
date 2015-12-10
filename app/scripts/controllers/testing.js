@@ -217,7 +217,6 @@ angular.module('bsis')
       }
       else{
         $scope.submitted = true;
-        console.log("FORM NOT VALID");
       }
     };
 
@@ -331,7 +330,7 @@ angular.module('bsis')
 
   })
 
-  .controller('ViewTestBatchCtrl', function ($scope, $location, TestingService, $filter, $timeout, $routeParams, $q, $route, $modal) {
+  .controller('ViewTestBatchCtrl', function ($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, $modal) {
     var data = [{}];
     $scope.data  = data;
 
@@ -367,7 +366,7 @@ angular.module('bsis')
           $scope.refreshCurrentTestBatch();
           $scope.refreshTestBatchAvailableDonations();
       }, function (err){
-        console.log(err);
+        $log.error(err);
       });
     };
 
@@ -731,7 +730,7 @@ angular.module('bsis')
         TestingService.closeTestBatch(testBatch, function() {
           $location.path('/manageTestBatch');
         }, function(err) {
-          console.error(err);
+          $log.error(err);
         });
       });
     };
@@ -747,7 +746,7 @@ angular.module('bsis')
           }
         }, function(err) {
           $scope.err = err;
-          console.error(err);
+          $log.error(err);
         });
       });
     };
@@ -760,7 +759,7 @@ angular.module('bsis')
           $location.path('/manageTestBatch');
         }, function(err) {
           $scope.err = err;
-          console.error(err);
+          $log.error(err);
         });
       });
     };
@@ -779,7 +778,7 @@ angular.module('bsis')
           $scope.refreshCurrentTestBatch();
         }, function(err) {
           $scope.err = err;
-          console.error(err);
+          $log.error(err);
         });
       });
     };
@@ -791,7 +790,7 @@ angular.module('bsis')
         $scope.err = '';
       }, function(err) {
         $scope.err = err;
-        console.error(err);
+        $log.error(err);
       });
     };
 

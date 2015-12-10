@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, Api, LocationsService, DATEFORMAT, $filter) {
+angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, Api, LocationsService, DATEFORMAT, $filter) {
   var master = {
     selectedVenues: [],
     startDate: null,
@@ -95,7 +95,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       $scope.gridOptions.data = response;
       $scope.searching = false;
     }, function(err) {
-      console.error(err);
+      $log.error(err);
       $scope.searching = false;
     });
   };

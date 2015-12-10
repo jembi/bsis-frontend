@@ -33,7 +33,6 @@ angular.module('bsis')
         if (response !== false){
           data = response;
           $scope.data = data;
-          console.log("locations: ",data);
         }
         else{
 
@@ -72,7 +71,6 @@ angular.module('bsis')
       }
       else{
         $scope.submitted = true;
-        console.log("FORM NOT VALID");
       }
     };
 

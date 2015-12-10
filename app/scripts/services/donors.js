@@ -191,7 +191,6 @@ angular.module('bsis')
       // save deferral (POST /deferral)
       addDeferral.$save(function(data){
         response(true);
-        console.log("addDeferral response: ",data.deferral);
       }, function (){
         response(false);
       });
@@ -242,10 +241,7 @@ angular.module('bsis')
       });
     },
     getDonationBatchDonations: function () {
-       return $http.get('/getDonationBatch')
-      .error(function(){
-        console.log("Get Donation Batch Unsuccessful");
-      });
+       return $http.get('/getDonationBatch');
     },
     getDonationBatchFormFields: function(onSuccess, onError){
       Api.DonationBatchFormFields.get({}, onSuccess, function(err) {

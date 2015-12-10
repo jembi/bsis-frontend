@@ -8,7 +8,6 @@ angular.module('bsis')
 
     getUsers: function(response){
       Api.Users.get({}, function (apiResponse) {
-        console.log("user response: ", apiResponse);
         response(apiResponse.users);
       }, function (){
         response(false);
@@ -17,7 +16,6 @@ angular.module('bsis')
 
     getUserById: function(id, onSuccess, onError){
       Api.Users.get({id: id}, function (apiResponse) {
-        console.log("user response: ", apiResponse.user);
         onSuccess(apiResponse.user);
       }, function (err){
         onError(err.data);

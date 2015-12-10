@@ -42,7 +42,6 @@ angular.module('bsis')
       else{
         $scope.loginInvalid = true;
         $scope.loginAlert = "Please supply all fields";
-        console.log("FORM NOT VALID");
       }
 
     };

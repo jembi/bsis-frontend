@@ -354,7 +354,7 @@ angular.module('bsis')
   })
 
   // Controller for Viewing Donors
-  .controller('ViewDonorCtrl', function ($scope, $location, $modal, Alerting, DonorService, TestingService, ConfigurationsService, ICONS, PACKTYPE, MONTH, TITLE,
+  .controller('ViewDonorCtrl', function ($scope, $location, $modal, $log, Alerting, DonorService, TestingService, ConfigurationsService, ICONS, PACKTYPE, MONTH, TITLE,
       GENDER, DATEFORMAT, DONATION, $filter, $q, ngTableParams, $timeout,$routeParams) {
 
 
@@ -454,7 +454,7 @@ angular.module('bsis')
       DonorService.getDonorBarcode($scope.donor.id, function(response){
         if (response !== false){
           $scope.labelZPL = response.labelZPL;
-          console.log("$scope.labelZPL: ", $scope.labelZPL);
+          $log.debug("$scope.labelZPL: ", $scope.labelZPL);
         }
         else{
         }
@@ -681,7 +681,7 @@ angular.module('bsis')
           $scope.viewDonationSummary(response.donationIdentificationNumber);
           d.resolve();
         }, function (err) {
-          console.error(err);
+          $log.error(err);
           $scope.err = err;
           $scope.addDonationSuccess = false;
           d.reject('Server Error');
@@ -748,7 +748,7 @@ angular.module('bsis')
         });
         $scope.getDonorOverview();
       }, function(err) {
-        console.error(err);
+        $log.error(err);
         $scope.confirmDelete = false;
       });
     };
@@ -881,7 +881,6 @@ angular.module('bsis')
       }
       else {
         $scope.submitted = true;
-        console.log("FORM NOT VALID");
       }
     };
 
@@ -950,7 +949,6 @@ angular.module('bsis')
       }
       else{
         $scope.submitted = true;
-        console.log("FORM NOT VALID");
       }
     };
 
@@ -1501,7 +1499,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('DonorClinicCtrl', function ($scope, $location, DonorService, ICONS, PACKTYPE, $q, $filter, DATEFORMAT, ngTableParams, $timeout) {
+  .controller('DonorClinicCtrl', function ($scope, $location, $log, DonorService, ICONS, PACKTYPE, $q, $filter, DATEFORMAT, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -1530,7 +1528,7 @@ angular.module('bsis')
                 }
               });
             });
-          }, console.error);
+          }, $log.error);
 
           if (data.length > 0){
             $scope.openDonationBatches = true;
@@ -1610,7 +1608,7 @@ angular.module('bsis')
         }
       }, function(err) {
         $scope.searching = false;
-        console.log(err);
+        $log.log(err);
       });
     };
 
@@ -1685,7 +1683,6 @@ angular.module('bsis')
       }
       else{
         $scope.submitted = true;
-        console.log("FORM NOT VALID");
       }
     };
 
@@ -1702,7 +1699,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function ($scope, $location, DonorService, ConfigurationsService, ICONS, PACKTYPE,  DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout, $routeParams, $modal) {
+  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, ConfigurationsService, ICONS, PACKTYPE,  DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout, $routeParams, $modal) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -1745,8 +1742,8 @@ angular.module('bsis')
 
         DonorService.getDonationBatchFormFields(function (response) {
           $scope.venues = response.venues;
-        }, console.error);
-      }, console.error);
+        }, $log.error);
+      }, $log.error);
     };
 
     var columnDefs = [
@@ -1866,13 +1863,13 @@ angular.module('bsis')
           donationBatch.isClosed = response.isClosed;
           $scope.refreshDonationBatch(donationBatch, response);
         }, function(err) {
-          console.error(err);
+          $log.error(err);
         });
       } else {
         DonorService.updateDonationBatch(donationBatch, function(response) {
           $scope.refreshDonationBatch(donationBatch, response);
         }, function(err) {
-          console.error(err);
+          $log.error(err);
         });
       }
     };
@@ -1897,7 +1894,7 @@ angular.module('bsis')
       DonorService.closeDonationBatch(donationBatch, function() {
         $location.path("/manageDonationBatches");
       }, function(err) {
-        console.error(err);
+        $log.error(err);
       });
     };
 
@@ -1905,7 +1902,7 @@ angular.module('bsis')
       DonorService.deleteDonationBatch(donationBatchId, function() {
         $location.path("/manageDonationBatches");
       }, function(err) {
-        console.error(err);
+        $log.error(err);
       });
     };
 
@@ -2078,8 +2075,8 @@ angular.module('bsis')
         $scope.donation = {};
         $scope.viewDonationSummary(donation);
       }, function (err) {
-          console.error(err);
-          $scope.addDonationSuccess = false;
+        $log.error(err);
+        $scope.addDonationSuccess = false;
       });
     };
 
@@ -2098,7 +2095,7 @@ angular.module('bsis')
         });
         $scope.donorClinicTableParams.reload();
       }, function(err) {
-        console.error(err);
+        $log.error(err);
         $scope.confirmDelete = false;
       });
     };

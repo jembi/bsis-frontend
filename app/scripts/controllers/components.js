@@ -364,7 +364,6 @@ angular.module('bsis')
         else {
           $scope.componentSelected = false;
         }
-        console.log("FORM NOT VALID");
       }
 
     };
@@ -408,7 +407,6 @@ angular.module('bsis')
         else {
           $scope.componentSelected = false;
         }
-        console.log("FORM NOT VALID");
       }
 
     };

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('PackTypesCtrl', function($scope, $rootScope, $location, PackTypesService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout){
+  .controller('PackTypesCtrl', function($scope, $rootScope, $location, $log, PackTypesService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout){
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -49,7 +49,7 @@ angular.module('bsis')
           $scope.packTypesCount = $scope.data.length;
         }
         else{
-          console.log('failed to get pack types');
+          $log.error('failed to get pack types');
         }
       });
     };
@@ -87,7 +87,7 @@ angular.module('bsis')
 
   })
 
-  .controller('ManagePackTypesCtrl', function ($scope, $location, PackTypesService, ICONS, PERMISSIONS,ComponentTypesService, $routeParams) {
+  .controller('ManagePackTypesCtrl', function ($scope, $location, $log, PackTypesService, ICONS, PERMISSIONS,ComponentTypesService, $routeParams) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/managePackType';
@@ -105,7 +105,7 @@ angular.module('bsis')
         $scope.componentTypes = response;
       }
       else {
-        console.log('failed to get component types');
+        $log.error('failed to get component types');
       }
     });
 

@@ -65,7 +65,6 @@ angular.module('bsis')
     };
 
     $scope.manageDonationType = function (donationType) {
-      console.log(donationType);
       $scope.donationType = donationType;
       DonationTypesService.setDonationType(donationType);
       $location.path("/manageDonationType/" + donationType.id);

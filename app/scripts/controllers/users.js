@@ -119,7 +119,7 @@ angular.module('bsis')
       });
     });
   })
-  .controller('ManageUserCtrl', function ($scope, $rootScope, UsersService, RolesService, ICONS, PERMISSIONS, $location, ngTableParams, $timeout, $routeParams) {
+  .controller('ManageUserCtrl', function ($scope, $rootScope, UsersService, RolesService, ICONS, PERMISSIONS, $location, ngTableParams, $timeout, $routeParams, $log) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageUser';
@@ -133,7 +133,7 @@ angular.module('bsis')
           $scope.user.roles[roleIndex].permissions = [];
         }
       }, function(err){
-        console.log(err);
+        $log.error(err);
       });
     };
 

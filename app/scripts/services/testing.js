@@ -92,7 +92,6 @@ angular.module('bsis')
     getOpenTestBatches: function (response) {
       Api.FindTestBatches.get({status: ['OPEN', 'RELEASED']}, function (testBatches) {
         response(testBatches);
-        console.log("testBatches: ", testBatches);
       }, function (){
         response(false);
       });
@@ -100,7 +99,6 @@ angular.module('bsis')
     getTestResults: function (testBatch, response) {
       Api.FindTestResults.query({testBatch:testBatch}, function (testResults) {
         response(testResults);
-        console.log("testResults: ", testResults);
       }, function (){
         response(false);
       });
@@ -108,7 +106,6 @@ angular.module('bsis')
     getCurrentTestResults: function (response) {
       Api.FindTestResults.query({testBatch:currentTestBatchId}, function (testResults) {
         response(testResults);
-        console.log("testResults: ", testResults);
       }, function (){
         response(false);
       });
@@ -117,7 +114,6 @@ angular.module('bsis')
     getTestResultsById: function(id, onSuccess, onError){
       Api.FindTestResults.query({testBatch:id}, function (testResults) {
         onSuccess(testResults);
-        console.log("testResults: ", testResults);
       }, function (err){
         onError(err);
       });

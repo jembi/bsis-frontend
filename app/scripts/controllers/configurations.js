@@ -74,7 +74,7 @@ angular.module('bsis')
 
   })
 
-  .controller('ManageConfigurationsCtrl', function ($scope, $location, ConfigurationsService, ICONS, PERMISSIONS, DATATYPES, $routeParams){
+  .controller('ManageConfigurationsCtrl', function($scope, $location, $log, ConfigurationsService, ICONS, PERMISSIONS, DATATYPES, $routeParams){
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageConfiguration';
@@ -83,8 +83,8 @@ angular.module('bsis')
       ConfigurationsService.getConfigurationById($routeParams.id, function (configuration) {
         $scope.configuration = configuration;
         $scope.disableConfigurationname = true;
-      }, function (err) {
-        console.log(err);
+      }, function(err) {
+        $log.log(err);
       });
     };
 
