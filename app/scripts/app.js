@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('bsis', [
+var app = angular.module('bsis', [ // eslint-disable-line angular/di
   'ngRoute',
   'ui.bootstrap',
   'ngResource',
