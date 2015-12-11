@@ -417,8 +417,10 @@ var app = angular.module('bsis', [
         $rootScope.accessDenied = false;
       }
 
+      /* eslint-disable angular/no-private-call */
       var permission = next.$$route.permission;
       var enabled = next.$$route.enabled;
+      /* eslint-enable angular/no-private-call */
 
       if (enabled === "false" || enabled === false){
         $rootScope.accessDenied = true;
