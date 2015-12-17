@@ -1141,10 +1141,13 @@ angular.module('bsis')
     var donorFields = {};
     $scope.donorFields = donorFields;
 
-    var selectedDonorsData = [{}];
+    var selectedDonorsData = [{}]; // donors to merge
     $scope.selectedDonorsData = selectedDonorsData;
 
-    var mergedDonor = {};
+    var mergedDonorData = {}; // donor data selected by the user during the wizard
+    $scope.mergedDonorData = mergedDonorData;
+
+    var mergedDonor = {}; // final merged donor to save
     $scope.mergedDonor = mergedDonor;
 
     // 1a: load the duplicates
@@ -1210,7 +1213,7 @@ angular.module('bsis')
 
     // 2: do a preview of the merge and load the donations and the deferrals
     $scope.previewMerge = function() {
-      DonorService.mergePreviewDonorsDuplicate(groupKey, $scope.copyMergedDonor(mergedDonor), 
+      DonorService.mergePreviewDonorsDuplicate(groupKey, $scope.copyMergedDonor(), 
         function(response) {
           // process donations
           donationsData = response.allDonations;
@@ -1242,24 +1245,11 @@ angular.module('bsis')
     $scope.copyMergedDonor = function() {
       // copy the existing mergedDonor
       var newMergedDonor = angular.copy(mergedDonor);
-      $scope.newMergedDonor = newMergedDonor;
       // set the data that isn't selectable
       newMergedDonor.firstName = selectedDonorsData[0].firstName;
       newMergedDonor.lastName = selectedDonorsData[0].lastName;
       newMergedDonor.gender = selectedDonorsData[0].gender;
       newMergedDonor.birthDate = selectedDonorsData[0].birthDate;
-      // clear the temporary selections
-      delete newMergedDonor.idNumberId;
-      delete newMergedDonor.homeAddress;
-      delete newMergedDonor.workAddress;
-      delete newMergedDonor.postalAddress;
-      delete newMergedDonor.noteSelection;
-      // clear the none selections
-      angular.forEach(newMergedDonor, function(attribute, i) {
-        if (attribute == "none") {
-          newMergedDonor[i] = null;
-        }
-      });
       // set the duplicate donor numbers
       newMergedDonor.duplicateDonorNumbers = [];
       angular.forEach(selectedDonorsData, function(donor, i) {
@@ -1317,7 +1307,7 @@ angular.module('bsis')
       $window.history.back();
     };
 
-    $scope.step = function(newStep, mergeDonorForm) {
+    $scope.step = function(currentStep, newStep, mergeDonorForm) {
       $scope.invalid = false;
       $scope.hasMessage = false;
       $scope.message = "";
@@ -1325,7 +1315,7 @@ angular.module('bsis')
         $scope.invalid = true;
         return;
       }
-      if (newStep == 2) {
+      if (currentStep == 1 && newStep == 2) {
         // see which donors have been selected and then move onto the overview page
         selectedDonorsData = [];
         var donorFields = {};
@@ -1415,16 +1405,32 @@ angular.module('bsis')
             return;
           }
         }
-      } else if (newStep == 3) {
-        // set the idType and idNumber according to which option was selected
+      } else if (currentStep == 2 && newStep == 3) {
         mergedDonor.notes = "";
         angular.forEach(selectedDonorsData, function(donor, i) {
-          if (donor.id == mergedDonor.idNumberId) {
+          // set the selected title
+          if (donor.id == mergedDonorData.title) {
+            mergedDonor.title = donor.title;
+          }
+          // set the selected callingName
+          if (donor.id == mergedDonorData.callingName) {
+            mergedDonor.callingName = donor.callingName;
+          }
+          // set the selected preferredLanguage
+          if (donor.id == mergedDonorData.preferredLanguage) {
+            mergedDonor.preferredLanguage = donor.preferredLanguage;
+          }
+          // set the selected venue
+          if (donor.id == mergedDonorData.venue) {
+            mergedDonor.venue = donor.venue;
+          }
+          // set the selected idNumber
+          if (donor.id == mergedDonorData.idNumber) {
             mergedDonor.idType = donor.idType;
             mergedDonor.idNumber = donor.idNumber;
           }
           // set the notes according to what was selected
-          if (mergedDonor.noteSelection && mergedDonor.noteSelection[donor.id]) {
+          if (mergedDonorData.noteSelection && mergedDonorData.noteSelection[donor.id]) {
             if (mergedDonor.notes) {
               if (mergedDonor.notes.length > 0) {
                 mergedDonor.notes = mergedDonor.notes.concat(", ");
@@ -1435,12 +1441,39 @@ angular.module('bsis')
             }
           }
         });
-      } else if (newStep == 4) {
-      } else if (newStep == 5) {
-        // set the work, home and postal addresses according to which option was selected
+      } else if (currentStep == 3 && newStep == 4) {
+        mergedDonor.contact = {};
+        angular.forEach(selectedDonorsData, function(donor, i) {
+          // set the selected contactMethodType
+          if (donor.id == mergedDonorData.contactMethodType) {
+            mergedDonor.contactMethodType = donor.contactMethodType;
+          }
+          // set the selected contact.email
+          if (donor.id == mergedDonorData.email) {
+            mergedDonor.contact.email = donor.contact.email;
+          }
+          // set the selected contact.mobileNumber
+          if (donor.id == mergedDonorData.mobileNumber) {
+            mergedDonor.contact.mobileNumber = donor.contact.mobileNumber;
+          }
+          // set the selected contact.homeNumber
+          if (donor.id == mergedDonorData.homeNumber) {
+            mergedDonor.contact.homeNumber = donor.contact.homeNumber;
+          }
+          // set the selected contact.workNumber
+          if (donor.id == mergedDonorData.workNumber) {
+            mergedDonor.contact.workNumber = donor.contact.workNumber;
+          }
+        });
+      } else if (currentStep == 4 && newStep == 5) {
         mergedDonor.address = {};
         angular.forEach(selectedDonorsData, function(donor, i) {
-          if (donor.address.id == mergedDonor.homeAddress) {
+          // set the selected preferredAddressType
+          if (donor.id == mergedDonorData.preferredAddressType) {
+            mergedDonor.preferredAddressType = donor.preferredAddressType;
+          }
+          // set the work, home and postal addresses according to which option was selected
+          if (donor.id == mergedDonorData.homeAddress) {
             mergedDonor.address.homeAddressLine1 = donor.address.homeAddressLine1;
             mergedDonor.address.homeAddressLine2 = donor.address.homeAddressLine2;
             mergedDonor.address.homeAddressCity = donor.address.homeAddressCity;
@@ -1450,7 +1483,7 @@ angular.module('bsis')
             mergedDonor.address.homeAddressState = donor.address.homeAddressState;
             mergedDonor.address.homeAddressZipcode = donor.address.homeAddressZipcode;
           }
-          if (donor.address.id == mergedDonor.postalAddress) {
+          if (donor.id == mergedDonorData.postalAddress) {
             mergedDonor.address.postalAddressLine1 = donor.address.postalAddressLine1;
             mergedDonor.address.postalAddressLine2 = donor.address.postalAddressLine2;
             mergedDonor.address.postalAddressCity = donor.address.postalAddressCity;
@@ -1460,7 +1493,7 @@ angular.module('bsis')
             mergedDonor.address.postalAddressState = donor.address.postalAddressState;
             mergedDonor.address.postalAddressZipcode = donor.address.postalAddressZipcode;
           }
-          if (donor.address.id == mergedDonor.workAddress) {
+          if (donor.id == mergedDonorData.workAddress) {
             mergedDonor.address.workAddressLine1 = donor.address.workAddressLine1;
             mergedDonor.address.workAddressLine2 = donor.address.workAddressLine2;
             mergedDonor.address.workAddressCity = donor.address.workAddressCity;
@@ -1471,21 +1504,17 @@ angular.module('bsis')
             mergedDonor.address.workAddressZipcode = donor.address.workAddressZipcode;
           }
         });
-        // load data for next step
-        //$scope.viewDonorsDeferrals();
+        // do a preview of the merge and load data for next two steps
         $scope.previewMerge();
-      } else if (newStep == 6) {
-        // load data for next step
-        //$scope.viewDonorsDonations();
-      } else if (newStep == 7) {
-        // FIXME: review & run tests!!
+      } else if (currentStep == 5 && newStep == 6) {
+      } else if (currentStep == 6 && newStep == 7) {
       }
       $scope.currentStep = newStep;
     };
 
     $scope.merge = function (item) {
       // submit
-      DonorService.mergeDonorsDuplicate(groupKey, $scope.copyMergedDonor(mergedDonor), 
+      DonorService.mergeDonorsDuplicate(groupKey, $scope.copyMergedDonor(), 
         function(mergedDonor) {
           $location.path("/viewDonor/" + mergedDonor.id).search({});
         }, 
