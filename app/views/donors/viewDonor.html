@@ -53,11 +53,11 @@
     </span>
 
     <span>
-      <alert type="danger" class="inline" close="" ng-show="!err.userMessage && isEligible !== true">
+      <alert type="danger" class="inline" close="" ng-show="isEligible !== true">
         Do not bleed donor
       </alert>
 
-      <alert type="success" class="inline" close="" ng-show="!err.userMessage && isEligible !== false">
+      <alert type="success" class="inline" close="" ng-show="isEligible !== false">
         Eligible donor
       </alert>
     </span>
