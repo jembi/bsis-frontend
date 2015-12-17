@@ -1,36 +1,36 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('Authinterceptor', function () {
+    .factory('Authinterceptor', function () {
 
-    var credentials = localStorage.getItem('auth');
+        var credentials = localStorage.getItem('auth');
 
-    return {
+        return {
 
-      setCredentials: function(newCredentials) {
-        credentials = newCredentials;
-        localStorage.setItem('auth', credentials);
-      },
+            setCredentials: function (newCredentials) {
+                credentials = newCredentials;
+                localStorage.setItem('auth', credentials);
+            },
 
-      clearCredentials: function() {
-        credentials = null;
-        localStorage.removeItem('auth');
-      },
+            clearCredentials: function () {
+                credentials = null;
+                localStorage.removeItem('auth');
+            },
 
-      getCredentials: function() {
-        return credentials;
-      },
+            getCredentials: function () {
+                return credentials;
+            },
 
-      request: function (config) {
+            request: function (config) {
 
-        if (!credentials) {
-          return config;
-        }
+                if (!credentials) {
+                    return config;
+                }
 
-        config.headers.authorization = 'Basic ' + credentials;
-        return config;
-      }
-    };
-  }).config(function ($httpProvider) {
+                config.headers.authorization = 'Basic ' + credentials;
+                return config;
+            }
+        };
+    }).config(function ($httpProvider) {
     $httpProvider.interceptors.push('Authinterceptor');
-  });
+});
