@@ -431,6 +431,7 @@ angular.module('bsis')
           $scope.flaggedForCounselling = $scope.data.flaggedForCounselling;
           $scope.hasCounselling = $scope.data.hasCounselling;
           $scope.currentlyDeferred = $scope.data.currentlyDeferred;
+          $scope.deferral = $scope.data.deferral;
           $scope.deferredUntil = $scope.data.deferredUntil;
           $scope.lastDonation = $scope.data.lastDonation;
           $scope.dateOfFirstDonation = $scope.data.dateOfFirstDonation;

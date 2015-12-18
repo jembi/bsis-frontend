@@ -139,8 +139,8 @@
                 <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
                 <td class="field">Currently Deferred: </td>
                 <td ng-if="currentlyDeferred" class="value red">
-                  <span ng-if="!compareDates(deferredUntil)"> Deferred until {{deferredUntil | bsisDate}}</span>
-                  <span ng-if="compareDates(deferredUntil)">Permanently deferred</span>
+                  <span ng-if="deferral.deferralReason.durationType === 'TEMPORARY'"> Deferred until {{deferredUntil | bsisDate}}</span>
+                  <span ng-if="deferral.deferralReason.durationType === 'PERMANENT'">Permanently deferred</span>
                 </td>
                 <td ng-if="!currentlyDeferred" class="value green"> No current deferrals</td>
               </tr>
