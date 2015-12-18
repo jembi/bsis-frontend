@@ -399,7 +399,7 @@ angular.module('bsis')
     $scope.pulseMax = DONATION.DONOR.PULSE_MAX;
 
     $scope.compareDates = function (deferredUntil) {
-      var perm = new Date(2100, 0, 1);
+      var perm = new Date(2099, 11, 31);
       var deferred = moment(deferredUntil).toDate();
       if (deferred >= perm){
         return true;
