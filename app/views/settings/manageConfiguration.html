@@ -62,10 +62,15 @@
         <label for="value" class="col-sm-1 control-label">Value</label>
         <div class="col-sm-6">
           <div class="form-inline">
-            <input size="40" id="value" name="value" class="form-control input-sm"
+              <input ng-show="!(configuration.dataType.id == 4)" size="40" id="value" name="value" class="form-control input-sm"
                    ng-model="configuration.value" required
                    ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                    ng-class="{'ng-invalid ng-dirty' :( configurationForm.value.$invalid && submitted) || configurationValueInvalid }">
+              <select ng-show="(configuration.dataType.id == 4)"  name="value" class="form-control input-sm" ng-model="configuration.value" required
+                    ng-class="{'ng-invalid ng-dirty' : configurationForm.dataType.$invalid && submitted}">
+                <option value="true">true</option>
+                <option value="false">false</option>
+            </select>
             <div>
               <small class="error" ng-show="serverError.value">
                 {{serverError.value}}
