@@ -41,27 +41,6 @@
       </div>
 
       <div class="row form-group col-sm-12">
-        <label for="value" class="col-sm-1 control-label">Value</label>
-        <div class="col-sm-6">
-          <div class="form-inline">
-            <input size="40" id="value" name="value" class="form-control input-sm"
-              ng-model="configuration.value" required
-              ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-              ng-class="{'ng-invalid ng-dirty' :( configurationForm.value.$invalid && submitted) || configurationValueInvalid }">
-            <div>
-              <small class="error" ng-show="serverError.value">
-                {{serverError.value}}
-              </small>
-              <small class="error"
-                ng-show="(configurationForm.value.$error.required && (configurationForm.value.$dirty || submitted))">
-                  This cannot be empty
-              </small>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row form-group col-sm-12">
         <label for="dataType" class="col-sm-1 control-label">Data Type</label>
         <div class="col-sm-6">
           <div class="form-inline">
@@ -72,6 +51,27 @@
             <div>
               <small class="error"
                      ng-show="(configurationForm.dataType.$error.required && (configurationForm.dataType.$dirty || submitted))">
+                This cannot be empty
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group col-sm-12">
+        <label for="value" class="col-sm-1 control-label">Value</label>
+        <div class="col-sm-6">
+          <div class="form-inline">
+            <input size="40" id="value" name="value" class="form-control input-sm"
+                   ng-model="configuration.value" required
+                   ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                   ng-class="{'ng-invalid ng-dirty' :( configurationForm.value.$invalid && submitted) || configurationValueInvalid }">
+            <div>
+              <small class="error" ng-show="serverError.value">
+                {{serverError.value}}
+              </small>
+              <small class="error"
+                     ng-show="(configurationForm.value.$error.required && (configurationForm.value.$dirty || submitted))">
                 This cannot be empty
               </small>
             </div>
