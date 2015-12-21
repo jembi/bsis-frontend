@@ -46,10 +46,9 @@
   <hr style="clear:right;" />
 
 <span class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
-  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}"  ng-hide="testBatch.status=='CLOSED'" ng-if="pendingBloodTypingTests || pendingTTITests"> <small><em><a href="" ng-click="recordPendingTestResults(testBatch)" >Record Confirmatory Test Results</a></em></small> </span>
-  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" 
-    ng-if="(pendingBloodTypingTests || pendingTTITests) && pendingBloodTypingMatchTests"> | </span>
-  <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'" ng-if="pendingBloodTypingMatchTests"> <small><em><a href="" ng-click="recordPendingBloodGroupMatchTests(testBatch)" >Record Confirmatory Abo/Rh Results</a></em></small> </span>
+  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}"  ng-hide="testBatch.status=='CLOSED'"> <small><em><a href="" ng-click="recordPendingTestResults(testBatch)" ng-disabled="!basicTTIComplete && !pendingBloodTypingTests && !pendingTTITests">Record Confirmatory Test Results</a></em></small> </span>
+  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> | </span>
+  <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a href="" ng-click="recordPendingBloodGroupMatchTests(testBatch)" ng-disabled="!pendingBloodTypingMatchTests">Record Confirmatory Abo/Rh Results</a></em></small> </span>
 </span>
 
 <alert type="danger" close="" ng-show="err.userMessage">
@@ -66,7 +65,15 @@
     <span ng-show="editableForm.$visible" style="display:inline;">
       <dateselect ng-model="testBatch.createdDate" initDate="testBatch.createdDate" format="format" cal-icon="icons.CALENDAR" opened="dateToOpen"></dateselect>
     </span>
-    | <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
+    <span ng-if="testBatch.status !== 'RELEASED' && !testBatch.permissions.canRelease">
+      | <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
+    </span>
+    <span ng-if="testBatch.status !== 'RELEASED' && testBatch.permissions.canRelease">
+      | <small><em>Number of Samples Ready for Release: </em></small>{{testBatch.readyForReleaseCount}} of {{testBatch.numSamples}}
+    </span>
+    <span ng-if="testBatch.status === 'RELEASED'">
+      | <small><em>Number of Samples Released: </em></small>{{testBatch.numReleasedSamples}} of {{testBatch.numSamples}}
+    </span>
   </div>
 
   <hr style="margin-bottom:5px;"/>
@@ -102,7 +109,10 @@
 
 <hr style="margin-top:5px;"/>
 
-<div style="padding-bottom: 5px"></div>
+<div style="padding-bottom: 5px">
+  <alert type="info" ng-if="testBatch.permissions.canRelease">This test batch is ready to be released.</alert>
+  <alert type="info" ng-if="testBatch.permissions.canClose">This test batch is ready to be closed.</alert>
+</div>
 
 <div class="col-sm-12">
   <div class="panel panel-default">

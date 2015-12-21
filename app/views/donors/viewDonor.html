@@ -29,8 +29,8 @@
         ">
         This cannot be empty
       </small>
-      <span ng-if="donor.title">
-      <span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span>.</span>
+      <span>
+      <span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title" e-name="title" >{{donor.title}}</span><span ng-if="donor.title">.</span></span>
       <span editable-text="donor.callingName" e-name="callingName" e-class="xeditable name">{{donor.callingName}}</span>
       </em></small>
     </span>
@@ -144,8 +144,8 @@
               <tr has-permission="{{permissions.VIEW_POST_DONATION_COUNSELLING_DONORS}}">
                 <td class="icon"><i class="fa {{icons.FLAG}}"></i></td>
                 <td class="field">Flagged For Counselling: </td>
-                <td ng-if="flaggedForCounselling" class="value red"> Yes <em class="pull-right" style="padding:0 15px;"><small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small></em></td>
-                <td ng-if="!flaggedForCounselling" class="value green"> No</td>
+                <td ng-if="flaggedForCounselling" class="value red"> Yes <em class="pull-right" style="padding:0 15px;"><small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small></em> </td>
+                <td ng-if="!flaggedForCounselling" class="value green">No <em ng-if="hasCounselling" class="pull-right" style="padding:0 15px;"><small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small></em></td>
               </tr>
               </tr>
               <tr><td></td></tr>
