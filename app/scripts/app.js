@@ -642,7 +642,9 @@ var app = angular.module('bsis', [
       link: function(scope, element, attrs) {
         // if the permission is not an empty string, determine if element should be displayed
         if(attrs.hasPermission !== ''){
-          var permission = attrs.hasPermission;
+          var str = attrs.hasPermission.split(':');
+          var permission = str[0];
+          var enabled = str[1];
           showOrHide();
         }
 
@@ -655,8 +657,12 @@ var app = angular.module('bsis', [
           }
 
           // remove the element if the user does not have the appropriate permission
-          if(!hasPermission){
-            element.remove();
+          if (enabled === 'true'){
+            if(!hasPermission){
+              element.attr('disabled', true);
+            }
+          } else {
+            element.attr('disabled', true);
           }
         }
       }

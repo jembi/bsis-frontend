@@ -162,7 +162,7 @@ body {
   background:#333
 }
 
-.placeholder a {
+.placeholder a, .placeholder button {
   display:block;
   text-decoration:none;
   text-align: center;
