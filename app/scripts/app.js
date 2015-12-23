@@ -664,6 +664,14 @@ var app = angular.module('bsis', [
           } else {
             element.attr('disabled', true);
           }
+
+          console.log(element.prop('tagName'));
+
+          if (element.prop('tagName') === 'LI') {
+            if(!hasPermission){
+              element.remove();
+            }
+          }
         }
       }
     };
