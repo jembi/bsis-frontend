@@ -13,8 +13,10 @@
         <div class="row placeholders home-page">
           <div class="col-lg-3 placeholder">
             <div class="icon-container">
-              <button has-permission="{{permissions.VIEW_DONOR_INFORMATION}}:{{donorsTabEnabled}}" ng-click="go('donors');" class="placeholder btn btn-link" >
-                <i class="fa {{icons.DONORS}}"></i>
+              <button style="padding: 0" has-permission="{{permissions.VIEW_DONOR_INFORMATION}}:{{donorsTabEnabled}}" ng-click="go('donors');" class="placeholder btn btn-link" >
+                <div>
+                  <i class="fa {{icons.DONORS}}"></i>
+                </div>
               </button>
             </div>
             <h3>DONORS</h3>
@@ -24,7 +26,7 @@
 
           <div class="col-lg-3 placeholder">
             <div class="icon-container">
-              <button has-permission="{{permissions.VIEW_COMPONENT_INFORMATION}}:{{componentsTabEnabled}}" ng-click="go('components');"  class="placeholder btn btn-link">
+              <button style="padding: 0" has-permission="{{permissions.VIEW_COMPONENT_INFORMATION}}:{{componentsTabEnabled}}" ng-click="go('components');"  class="placeholder btn btn-link">
               <div>
                 <i class="fa {{icons.COMPONENTS}}"></i>
               </div>
@@ -37,7 +39,7 @@
 
           <div class="col-lg-3 placeholder">
           <div class="icon-container">
-            <button has-permission="{{permissions.VIEW_TESTING_INFORMATION}}:{{testingTabEnabled}}" ng-click="go('testing');"  class="placeholder btn btn-link">
+            <button style="padding: 0" has-permission="{{permissions.VIEW_TESTING_INFORMATION}}:{{testingTabEnabled}}" ng-click="go('testing');"  class="placeholder btn btn-link">
             <div>
               <i class="fa {{icons.TESTING}}"></i>
             </div>
@@ -50,7 +52,7 @@
 
           <div class="col-lg-3 placeholder">
           <div class="icon-container">
-            <button has-permission="{{permissions.LABEL_COMPONENT}}:{{labellingTabEnabled}}" ng-click="go('labelling');"  class="placeholder btn btn-link" >
+            <button style="padding: 0" has-permission="{{permissions.LABEL_COMPONENT}}:{{labellingTabEnabled}}" ng-click="go('labelling');"  class="placeholder btn btn-link" >
             <div>
               <i class="fa {{icons.LABELLING}}"></i>
             </div>
@@ -67,7 +69,7 @@
           
           <div class="col-lg-3 placeholder">
           <div class="icon-container">
-            <button has-permission="{{permissions.VIEW_INVENTORY_INFORMATION}}:{{inventoryTabEnabled}}" ng-click="go('inventory');" class="placeholder btn btn-link">
+            <button style="padding: 0" has-permission="{{permissions.VIEW_INVENTORY_INFORMATION}}:{{inventoryTabEnabled}}" ng-click="go('inventory');" class="placeholder btn btn-link">
             <div>
               <i class="fa {{icons.INVENTORY}}"></i>
             </div>
@@ -80,7 +82,7 @@
 
           <div class="col-lg-3 placeholder" >
           <div class="icon-container">
-            <button has-permission="{{permissions.VIEW_REPORTING_INFORMATION}}:{{reportsTabEnabled}}" ng-click="go('reports');" class="placeholder btn btn-link">
+            <button style="padding: 0" has-permission="{{permissions.VIEW_REPORTING_INFORMATION}}:{{reportsTabEnabled}}" ng-click="go('reports');" class="placeholder btn btn-link">
             <div>
               <i class="fa {{icons.REPORTS}}"></i>
             </div>
@@ -93,7 +95,7 @@
 
           <div class="col-lg-3 placeholder">
           <div class="icon-container">
-            <button has-permission="{{permissions.VIEW_MOBILE_CLINIC_INFORMATION}}:{{mobileClinicTabEnabled}}" ng-click="go('mobile');" class="placeholder btn btn-link">
+            <button style="padding: 0" has-permission="{{permissions.VIEW_MOBILE_CLINIC_INFORMATION}}:{{mobileClinicTabEnabled}}" ng-click="go('mobile');" class="placeholder btn btn-link">
             <div>
               <i class="fa {{icons.MOBILE}}"></i>
             </div>
@@ -106,7 +108,7 @@
 
           <div class="col-lg-3 placeholder" >
           <div class="icon-container">
-            <button has-permission="{{permissions.VIEW_ADMIN_INFORMATION}}:true" ng-click="go('settings');"  class="placeholder btn btn-link">
+            <button style="padding: 0" has-permission="{{permissions.VIEW_ADMIN_INFORMATION}}:true" ng-click="go('settings');"  class="placeholder btn btn-link">
             <div>
               <i class="fa {{icons.SETTINGS}}"></i>
             </div>
