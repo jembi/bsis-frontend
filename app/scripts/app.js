@@ -662,10 +662,12 @@ var app = angular.module('bsis', [
               element.attr('disabled', true);
             }
           } else {
-            element.attr('disabled', true);
+            if (enabled === 'false'){
+              element.attr('disabled', true);
+            }
           }
 
-          console.log(element.prop('tagName'));
+         
 
           if (element.prop('tagName') === 'LI') {
             if(!hasPermission){
