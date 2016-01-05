@@ -913,7 +913,6 @@ angular.module('bsis')
         updatedTestResults.testResults[aboTestId] = value.bloodAbo;
         updatedTestResults.testResults[rhTestId] = value.bloodRh == "+" ? "POS" : "NEG";
         TestingService.saveTestResults(updatedTestResults, function(response) {
-          alert("response="+response);
           if (response === true) {
             // save confirmation
             if (value.confirm) {
