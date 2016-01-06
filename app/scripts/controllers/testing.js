@@ -912,23 +912,24 @@ angular.module('bsis')
         updatedTestResults.testResults = { };
         updatedTestResults.testResults[aboTestId] = value.bloodAbo;
         updatedTestResults.testResults[rhTestId] = value.bloodRh == "+" ? "POS" : "NEG";
-        TestingService.saveTestResults(updatedTestResults, function(response) {
+        var request1 = TestingService.saveTestResults(updatedTestResults, function(response) {
           if (response === true) {
             // save confirmation
             if (value.confirm) {
-              var request = TestingService.saveBloodGroupMatchTestResults(value, function(response){
+              var request2 = TestingService.saveBloodGroupMatchTestResults(value, function(response){
                 if (response === true){
                 }
                 else{
                   // TODO: handle case where response == false
                 }
               });
-              requests.push(request);
+              requests.push(request2);
             }
           } else {
             // TODO: handle case where response == false
           }
         });
+        requests.push(request1);
       });
 
       $q.all(requests).then(function(){
