@@ -398,15 +398,7 @@ angular.module('bsis')
     $scope.pulseMin = DONATION.DONOR.PULSE_MIN;
     $scope.pulseMax = DONATION.DONOR.PULSE_MAX;
 
-    $scope.compareDates = function (deferredUntil) {
-      var perm = new Date(2099, 11, 31);
-      var deferred = moment(deferredUntil).toDate();
-      if (deferred >= perm){
-        return true;
-      } else {
-        return false;
-      }
-    };
+
 
     DonorService.getDonorFormFields(function(response){
       if (response !== false){
