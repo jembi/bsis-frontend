@@ -655,26 +655,19 @@ var app = angular.module('bsis', [
           if ($rootScope.sessionUserPermissions.indexOf(permission) > -1){
             hasPermission = true;
           }
+          
+           
 
           // remove the element if the user does not have the appropriate permission
-          if (enabled === 'true'){
-            if(!hasPermission){
-              element.attr('disabled', true);
-            }
-          } else {
-            if (enabled === 'false'){
-              element.attr('disabled', true);
-            }
+          if (enabled === 'true') {
+            element.attr('disabled', !hasPermission);
+          } else if (enabled === 'false') {
+            element.attr('disabled', true);
+          } else if (!hasPermission) {
+            element.remove();
           }
-
-         
-
-          if (element.prop('tagName') === 'LI') {
-            if(!hasPermission){
-              element.remove();
-            }
-          }
-        }
+                  
+         }
       }
     };
   }])
