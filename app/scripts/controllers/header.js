@@ -14,7 +14,7 @@ angular.module('bsis')
     {'title': 'HOME',
       'href': '#home',
       'icon': ICONS.HOME,
-      'permission': '',
+      'permission': PERMISSIONS.AUTHENTICATED,
       'sectionEnabled' : 'true'
     },
     {'title': 'DONORS',
