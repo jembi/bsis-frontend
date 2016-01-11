@@ -16,4 +16,11 @@ angular.module('bsis')
       $location.path(path);
     };
 
+    $scope.isIconDisabled = function (item) {
+        if('disabled' == angular.element(document.querySelector(item)).attr('disabled')) {
+            return 'labelDisabled';
+        }
+    };
+
+
   });
