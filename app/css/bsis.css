@@ -675,6 +675,6 @@ a[disabled] {
   pointer-events: none;
 }
 
-div.labelDisabled > h3 {
+.labelDisabled{
   color: #888 !important;
 }
