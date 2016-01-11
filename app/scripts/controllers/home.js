@@ -16,7 +16,7 @@ angular.module('bsis')
       $location.path(path);
     };
 
-    $scope.isIconDisabled = function (item) {
+    $scope.isIconSection = function (item) {
         if('disabled' == angular.element(document.querySelector(item)).attr('disabled')) {
             return 'labelDisabled';
         }
