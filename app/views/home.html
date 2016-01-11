@@ -21,20 +21,20 @@
             </div>
             <h3 class="{{isIconDisabled('#donorsIcon')}}">DONORS</h3>
             <hr class="hr-info">
-            <p class="p-info">Manage Donor Records, Donation Batches and Donor Communications</p>
+            <p class="p-info {{isIconDisabled('#donorsIcon')}}">Manage Donor Records, Donation Batches and Donor Communications</p>
           </div>
 
           <div class="col-lg-3 placeholder">
             <div class="icon-container">
-              <button style="padding: 0" has-permission="{{permissions.VIEW_COMPONENT_INFORMATION}}:{{componentsTabEnabled}}" ng-click="go('components');"  class="placeholder btn btn-link">
+              <button id="componentsIcon" style="padding: 0" has-permission="{{permissions.VIEW_COMPONENT_INFORMATION}}:{{componentsTabEnabled}}" ng-click="go('components');"  class="placeholder btn btn-link">
               <div>
                 <i class="fa {{icons.COMPONENTS}}"></i>
               </div>
               </button>
             </div>
-            <h3>COMPONENTS</h3>
+            <h3 class="{{isIconDisabled('#componentsIcon')}}">COMPONENTS</h3>
             <hr class="hr-info">
-            <p class="p-info">Component Production Laboratory</p>
+            <p class="p-info {{isIconDisabled('#componentsIcon')}}">Component Production Laboratory</p>
           </div>
 
           <div class="col-lg-3 placeholder">
@@ -47,7 +47,7 @@
           </div>
           <h3 class="{{isIconDisabled('#testingIcon')}}">TESTING</h3>
           <hr class="hr-info">
-          <p class="p-info">Manage, Submit and Import Serology and TTI Test Results and Outcomes</p>
+          <p class="p-info {{isIconDisabled('#testingIcon')}}">Manage, Submit and Import Serology and TTI Test Results and Outcomes</p>
           </div>
 
           <div class="col-lg-3 placeholder">
@@ -58,9 +58,9 @@
             </div>
             </button>
           </div>
-          <h3>LABELLING {{isIconDisabled("#labellingIcon")}}</h3>
+          <h3 class="{{isIconDisabled('#labellingIcon')}}">LABELLING</h3>
           <hr class="hr-info">
-          <p class="p-info">Check Components to Print Pack and Discard Labels</p>
+          <p class="p-info {{isIconDisabled('#labellingIcon')}}">Check Components to Print Pack and Discard Labels</p>
           </div>
 
         </div>
@@ -77,7 +77,7 @@
           </div>
           <h3 class="{{isIconDisabled('#inventoryIcon')}}">INVENTORY</h3>
           <hr class="hr-info">
-          <p class="p-info">Manage Blood Bank Inventory, Requests, Transfers and Issues</p>
+          <p class="p-info {{isIconDisabled('#inventoryIcon')}}">Manage Blood Bank Inventory, Requests, Transfers and Issues</p>
           </div>
 
           <div class="col-lg-3 placeholder" >
@@ -90,7 +90,7 @@
           </div>
           <h3 class="{{isIconDisabled('#reportsIcon')}}">REPORTS</h3>
           <hr class="hr-info">
-          <p class="p-info">View Charts and Export Reports</p>
+          <p class="p-info {{isIconDisabled('#reportsIcon')}}">View Charts and Export Reports</p>
           </div>
 
           <div class="col-lg-3 placeholder">
@@ -103,7 +103,7 @@
           </div>
           <h3 class="{{isIconDisabled('#mobileIcon')}}">MOBILE CLINIC</h3>
           <hr class="hr-info">
-          <p class="p-info">Manage Mobile Clinics and Sync Data</p>
+          <p class="p-info {{isIconDisabled('#mobileIcon')}}">Manage Mobile Clinics and Sync Data</p>
           </div>
 
           <div class="col-lg-3 placeholder" >
@@ -116,7 +116,7 @@
           </div>
           <h3 class="{{isIconDisabled('#settingsIcon')}}">SETTINGS</h3>
           <hr class="hr-info">
-          <p class="p-info">Manage Account and System Settings</p>
+          <p class="p-info {{isIconDisabled('#settingsIcon')}}">Manage Account and System Settings</p>
           </div>
 
         </div>
