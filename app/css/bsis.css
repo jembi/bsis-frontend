@@ -1,4 +1,4 @@
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.pagination, .carousel, .panel-title a { cursor: pointer; }
 
 html,
 body {
@@ -162,7 +162,7 @@ body {
   background:#333
 }
 
-.placeholder a {
+.placeholder a, .placeholder button {
   display:block;
   text-decoration:none;
   text-align: center;
@@ -673,4 +673,8 @@ a[disabled] {
   cursor: default;
   opacity: 0.65;
   pointer-events: none;
+}
+
+.labelDisabled{
+  color: #888 !important;
 }

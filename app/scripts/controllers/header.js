@@ -14,7 +14,7 @@ angular.module('bsis')
     {'title': 'HOME',
       'href': '#home',
       'icon': ICONS.HOME,
-      'permission': '',
+      'permission': PERMISSIONS.AUTHENTICATED,
       'sectionEnabled' : 'true'
     },
     {'title': 'DONORS',
@@ -197,7 +197,7 @@ angular.module('bsis')
 
     // else if on mobile clinic page, set menu to MOBILE
     else if (matchesRoutes($location.path(), mobileRoutes)) {
-      $scope.currentSection = 'MOBILE';
+      $scope.currentSection = 'MOBILE CLINIC';
     }
 
     // else if on settings page, set menu to SETTINGS
