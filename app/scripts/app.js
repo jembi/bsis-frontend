@@ -658,12 +658,15 @@ var app = angular.module('bsis', [
           
            
 
-          // disable the element if the user does not have the appropriate permission
+
           if (enabled === 'true') {
+            // disable the element if the user does not have the appropriate permission
             element.attr('disabled', !hasPermission);
           } else if (enabled === 'false') {
+            // disable the element if the section is not enabled
             element.attr('disabled', true);
           } else if (!hasPermission) {
+            //if the user does not have the permissions and enabled is not set, then remove the element.
             element.remove();
           }
                   
