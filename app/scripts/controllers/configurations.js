@@ -117,6 +117,12 @@ angular.module('bsis')
 
     $scope.serverError = {};
 
+    $scope.$watch('configuration.dataType.id', function(newValue) {
+      var indexVal = parseInt(newValue) - 1;
+      if (!isNaN(indexVal)){
+        $scope.datatype = DATATYPES.options[indexVal].datatype;
+      }
+    });
 
     $scope.updateConfiguration = function (configuration, configurationForm) {
       if (configurationForm.$valid) {
