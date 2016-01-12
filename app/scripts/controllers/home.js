@@ -20,9 +20,7 @@ angular.module('bsis')
         if('disabled' == angular.element(document.querySelector(item)).attr('disabled')) {
             //return disabled style
             return 'labelDisabled';
-        } else {
-            //section is enabled do nothing
-        }
+        } 
     };
 
 
