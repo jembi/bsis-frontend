@@ -16,9 +16,12 @@ angular.module('bsis')
       $location.path(path);
     };
 
-    $scope.isSectionDisabled = function (item) {
+    $scope.isSectionEnabled = function (item) {
         if('disabled' == angular.element(document.querySelector(item)).attr('disabled')) {
+            //return disabled style
             return 'labelDisabled';
+        } else {
+            //section is enabled do nothing
         }
     };
 
