@@ -7,37 +7,37 @@
               </td>
               <td data-title="'Identifier'" header-class="text-left" sortable="'idNumber'" class="form-inline">
                 <div class="radio" ng-if="donor.idNumber != null && donor.idNumber != ''">
-                  <input id="idNumber{{donor.donorNumber}}" type="radio" name="idNumber" ng-model="mergedDonor.idNumberId" ng-value="donor.id" required>
+                  <input id="idNumber{{donor.donorNumber}}" type="radio" name="idNumber" ng-model="mergedDonorData.idNumber" ng-value="donor.id" required>
                   <label for="idNumber{{donor.donorNumber}}">{{donor.idType.idType}}: {{donor.idNumber}}</label>
                 </div>
               </td>
               <td data-title="'Title'" header-class="text-left" sortable="'title'" class="form-inline">
                 <div class="radio" ng-if="donor.title != null && donor.title != ''">
-                  <input id="title{{donor.donorNumber}}" type="radio" name="title" ng-model="mergedDonor.title" ng-value="donor.title" required>
+                  <input id="title{{donor.donorNumber}}" type="radio" name="title" ng-model="mergedDonorData.title" ng-value="donor.id" required>
                   <label for="title{{donor.donorNumber}}">{{donor.title}}</label>
                 </div>
               </td>
               <td data-title="'Calling Name'" header-class="text-left" sortable="'callingName'" class="form-inline">
                 <div class="radio" ng-if="donor.callingName != null && donor.callingName != ''">
-                  <input id="callingName{{donor.donorNumber}}" type="radio" name="callingName" ng-model="mergedDonor.callingName" ng-value="donor.callingName" required>
+                  <input id="callingName{{donor.donorNumber}}" type="radio" name="callingName" ng-model="mergedDonorData.callingName" ng-value="donor.id" required>
                   <label for="callingName{{donor.donorNumber}}">{{donor.callingName}}</label>
                 </div>
               </td>
               <td data-title="'PreferredLanguage'" header-class="text-left" sortable="'preferredLanguage'" class="form-inline">
                 <div class="radio" ng-if="donor.preferredLanguage != null && donor.preferredLanguage != ''">
-                  <input id="preferredLanguage{{donor.donorNumber}}" type="radio" name="preferredLanguage" ng-model="mergedDonor.preferredLanguage" ng-value="donor.preferredLanguage" required>
+                  <input id="preferredLanguage{{donor.donorNumber}}" type="radio" name="preferredLanguage" ng-model="mergedDonorData.preferredLanguage" ng-value="donor.id" required>
                   <label for="preferredLanguage{{donor.donorNumber}}">{{donor.preferredLanguage.preferredLanguage}}</label>
                 </div>
               </td>
               <td data-title="'Venue'" header-class="text-left" sortable="'venue'" class="form-inline">
                 <div class="radio">
-                  <input id="venue{{donor.donorNumber}}" type="radio" name="venue" ng-model="mergedDonor.venue" ng-value="donor.venue" required>
+                  <input id="venue{{donor.donorNumber}}" type="radio" name="venue" ng-model="mergedDonorData.venue" ng-value="donor.id" required>
                   <label for="venue{{donor.donorNumber}}">{{donor.venue.name}}</label>
                 </div>
               </td>
               <td data-title="'Comments'" header-class="text-left" sortable="'notes'" class="form-inline">
                 <div class="radio" ng-if="donor.notes != null && donor.notes != ''">
-                  <input id="notes{{donor.donorNumber}}" type="checkbox" name="notes" ng-model="mergedDonor.noteSelection[donor.id]" ng-value="donor.notes" >
+                  <input id="notes{{donor.donorNumber}}" type="checkbox" name="notes" ng-model="mergedDonorData.noteSelection[donor.id]" ng-value="donor.notes" >
                   <label for="notes{{donor.donorNumber}}">{{donor.notes}}</label>
                 </div>
               </td>
@@ -50,7 +50,7 @@
               </td>
               <td data-title="'Identifier'" header-class="text-left" sortable="'idNumber'" class="form-inline">
                 <div class="radio" ng-if="donorFields['idNumber']">
-                  <input id="idNumber" type="radio" name="idNumber" ng-model="mergedDonor.idNumberId" value="none" required>
+                  <input id="idNumber" type="radio" name="idNumber" ng-model="mergedDonorData.idNumber" value="0" required>
                   <label for="idNumber">None of the above</label>
                   <small class="error" ng-show="(mergeDonorForm.idNumber.$invalid && (mergeDonorForm.idNumber.$dirty || invalid))">
                     <br/>Please select one
@@ -59,7 +59,7 @@
               </td>
               <td data-title="'Title'" header-class="text-left" sortable="'title'" class="form-inline">
                 <div class="radio" ng-if="donorFields['title']">
-                  <input id="title" type="radio" name="title" ng-model="mergedDonor.title" value="none" required>
+                  <input id="title" type="radio" name="title" ng-model="mergedDonorData.title" value="0" required>
                   <label for="title">None of the above</label>
                   <small class="error" ng-show="(mergeDonorForm.title.$invalid && (mergeDonorForm.title.$dirty || invalid))">
                     <br/>Please select one
@@ -68,7 +68,7 @@
               </td>
               <td data-title="'Calling Name'" header-class="text-left" sortable="'callingName'" class="form-inline">
                 <div class="radio" ng-if="donorFields['callingName']">
-                  <input id="callingName" type="radio" name="callingName" ng-model="mergedDonor.callingName" value="none" required>
+                  <input id="callingName" type="radio" name="callingName" ng-model="mergedDonorData.callingName" value="0" required>
                   <label for="callingName">None of the above</label>
                   <small class="error" ng-show="(mergeDonorForm.callingName.$invalid && (mergeDonorForm.callingName.$dirty || invalid))">
                     <br/>Please select one
