@@ -902,18 +902,34 @@ angular.module('bsis')
 
       var requests = [];
 
+      var aboTestId = $scope.getBloodTestId("ABO");
+      var rhTestId = $scope.getBloodTestId("Rh");
+
       angular.forEach(testResults, function(value, key) {
-        if(value.confirm){
-          var request = TestingService.saveBloodGroupMatchTestResults(value, function(response){
-            if (response === true){
+        // save updated test results first
+        var updatedTestResults = { };
+        updatedTestResults.donationIdentificationNumber = value.donationIdentificationNumber;
+        updatedTestResults.testResults = { };
+        updatedTestResults.testResults[aboTestId] = value.bloodAbo;
+        updatedTestResults.testResults[rhTestId] = value.bloodRh == "+" ? "POS" : "NEG";
+        var request1 = TestingService.saveTestResults(updatedTestResults, function(response) {
+          if (response === true) {
+            // save confirmation
+            if (value.confirm) {
+              var request2 = TestingService.saveBloodGroupMatchTestResults(value, function(response){
+                if (response === true){
+                }
+                else{
+                  // TODO: handle case where response == false
+                }
+              });
+              requests.push(request2);
             }
-            else{
-              // TODO: handle case where response == false
-            }
-          });
-          requests.push(request);
-        }
-        
+          } else {
+            // TODO: handle case where response == false
+          }
+        });
+        requests.push(request1);
       });
 
       $q.all(requests).then(function(){
@@ -922,6 +938,16 @@ angular.module('bsis')
         $scope.savingTestResults = false;
       });
 
+    };
+
+    $scope.getBloodTestId = function (testNameShort) {
+      var testId = null;
+      angular.forEach($scope.data[0].recentTestResults, function(value, key) {
+        if (value.bloodTest.testNameShort == testNameShort) {
+          testId = key;
+        }
+      });
+      return testId;
     };
 
     $scope.testSamplesTTITableParams = new ngTableParams({
