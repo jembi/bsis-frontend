@@ -610,6 +610,12 @@ div .alert {
   margin-bottom: 10px;
 }
 
+div .alert.inline {
+  display: inline-block;
+  margin-bottom: 0px;
+  margin-left: 10px;
+}
+
 a.btn.btn-link {
   padding: 3px 12px 0px 12px;
 }
