@@ -923,7 +923,7 @@ angular.module('bsis')
                   // TODO: handle case where response == false
                 }
               });
-              requests.push(request2);
+              requests[requests.indexOf(request1)] = request2;
             }
           } else {
             // TODO: handle case where response == false
