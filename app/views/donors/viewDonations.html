@@ -2,64 +2,76 @@
   <em><a has-permission="{{permissions.ADD_DONATION}}" href="" ng-click="viewAddDonationForm()">Add Donation</a></em>
 </span>
 <table class="dash-table">
-  <tbody>
+    <tbody>
     <tr>
-      <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
-      <td class="field">Due To Donate: </td>
-      <td class="value">{{dueToDonate | bsisDate:'longDate'}}</td>
+        <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
+        <td class="field">Due To Donate:</td>
+        <td class="value">{{dueToDonate | bsisDate:'longDate'}}</td>
     </tr>
 
-    <tr><td></td></tr>
-  </tbody>
+    <tr>
+        <td></td>
+    </tr>
+    </tbody>
 </table>
 
 <div ng-switch="donationResults">
-<div ng-switch-when="true">
+    <div ng-switch-when="true">
 
-  <table ng-table="donationTableParams" class="table">
-      <tr ng-repeat="donation in $data"
-          ng-click="changeSelection(donation);"
-          ng-mouseenter="this.$selected = true"
-          ng-mouseleave="this.$selected = false"
-          ng-class="{'active': donation.$selected}">
-          <td data-title="'Date'" header-class="text-left" class="col-sm-2 text-center" sortable="'donationDate'"  >
-              {{donation.donationDate | bsisDate }}
-          </td>
-          <td data-title="'Venue'" header-class="text-left" class="col-sm-2" sortable="'venue'" >
-              {{donation.venue.name}}
-          </td>
-          <td data-title="'Pack Type'" header-class="text-left" class="col-sm-2" sortable="'packType'">
-              {{donation.packType.packType}}
-          </td>
-          <td data-title="'Wt'" header-class="text-left" class="col-sm-1 text-center" sortable="'donorWeight'">
-              {{donation.donorWeight}}
-          </td>
-          <td data-title="'BP'" header-class="text-left" class="col-sm-1 text-center" sortable="'bloodPressureSystolic'">
-              {{donation.bloodPressureSystolic}} {{donation.bloodPressureDiastolic}} 
-          </td>
-          <td data-title="'Hb'" header-class="text-left" class="col-sm-1 text-center" sortable="'haemoglobinCount'">
-            <span ng-show="getBooleanValue('donation.hbNumericValue')">{{donation.haemoglobinCount}} </span>
-            <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
-            <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase}}</span>
-            <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> )</span>
-          </td>
-          <td data-title="'Pulse'" header-class="text-left" class="col-sm-1 text-center" sortable="'donorPulse'">
-              {{donation.donorPulse}} 
-          </td>
-          <td data-title="''" class="col-sm-2 text-center">
+        <table ng-table="donationTableParams" class="table">
+            <tr ng-repeat="donation in $data"
+                ng-click="changeSelection(donation);"
+                ng-mouseenter="this.$selected = true"
+                ng-mouseleave="this.$selected = false"
+                ng-class="{'active': donation.$selected}">
+                <td data-title="'Date'" header-class="text-left" class="col-sm-2 text-center" sortable="'donationDate'">
+                    {{donation.donationDate | bsisDate }}
+                </td>
+                <td data-title="'Venue'" header-class="text-left" class="col-sm-2" sortable="'venue'">
+                    {{donation.venue.name}}
+                </td>
+                <td data-title="'Pack Type'" header-class="text-left" class="col-sm-2" sortable="'packType'">
+                    {{donation.packType.packType}}
+                </td>
+                <td data-title="'Wt'" header-class="text-left" class="col-sm-1 text-center" sortable="'donorWeight'">
+                    {{donation.donorWeight}}
+                </td>
+                <td data-title="'BP'" header-class="text-left" class="col-sm-1 text-center"
+                    sortable="'bloodPressureSystolic'">
+                    {{donation.bloodPressureSystolic}} {{donation.bloodPressureDiastolic}}
+                </td>
+                <td data-title="'Hb'" header-class="text-left" class="col-sm-1 text-center"
+                    sortable="'haemoglobinCount'">
+                    <span ng-show="getBooleanValue('donation.hbNumericValue')">{{donation.haemoglobinCount}} </span>
+                    <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
+                    <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase}}</span>
+                    <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> )</span>
+                </td>
+                <td data-title="'Pulse'" header-class="text-left" class="col-sm-1 text-center" sortable="'donorPulse'">
+                    {{donation.donorPulse}}
+                </td>
+                <td data-title="''" class="col-sm-2 text-center">
             <span ng-hide="confirmDelete">
-              <em><button class="btn btn-link btn-sm" ng-click="viewDonationSummary(donation.donationIdentificationNumber)">View</button></em>
-              <em><button class="btn btn-link btn-sm" ng-click="confirmDelete = true" ng-disabled="!donation.permissions.canDelete">Void</button></em>
+              <em>
+                  <button class="btn btn-link btn-sm"
+                          ng-click="viewDonationSummary(donation.donationIdentificationNumber)">View
+                  </button>
+              </em>
+              <em>
+                  <button class="btn btn-link btn-sm" ng-click="confirmDelete = true"
+                          ng-disabled="!donation.permissions.canDelete">Void
+                  </button>
+              </em>
             </span>
             <span ng-show="confirmDelete">
               <button class="btn btn-link btn-sm text-danger" ng-click="deleteDonation(donation.id)">Void</button>
               <button class="btn btn-link btn-sm text-muted" ng-click="confirmDelete = false">Cancel</button>
             </span>
-          </td>
-      </tr>
-  </table>
-</div>
-<div ng-switch-when="false">
-      <h4 ><em>No Previous Donations</em></h4>
-</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div ng-switch-when="false">
+        <h4><em>No Previous Donations</em></h4>
+    </div>
 </div>

@@ -1,52 +1,62 @@
 <h3 class="page-header">Label Components</h3>
 
-<form class="form-horizontal col-sm-12"  role="form" ng-submit="checkLabellingStatus(search.donationIdentificationNumber)">
-  <div class="form-group">
-    <label for="name" class="col-sm-1 control-label" >DIN</label>
-    <div class="row col-sm-11">
-      <div class="form-inline" style="padding-left:5px;">
-        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="search.donationIdentificationNumber">
-      </div>
+<form class="form-horizontal col-sm-12" role="form"
+      ng-submit="checkLabellingStatus(search.donationIdentificationNumber)">
+    <div class="form-group">
+        <label for="name" class="col-sm-1 control-label">DIN</label>
+        <div class="row col-sm-11">
+            <div class="form-inline" style="padding-left:5px;">
+                <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
+                       class="form-control input-sm" placeholder="" ng-model="search.donationIdentificationNumber">
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="form-group"> 
-    <div class="col-sm-offset-1 col-sm-3">
-      <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}}</button>
-      <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-3">
+            <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
+                "Search"}}
+            </button>
+            <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+        </div>
     </div>
-  </div>
 </form>
 
 <div ng-switch="searchResults" class="col-sm-12">
-<div style="padding-bottom: 10px"></div>
+    <div style="padding-bottom: 10px"></div>
 
-  <div ng-switch-when="true">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <em ng-if="!components || components.length === 0">No components for donation.</em>
-        <div ng-if="components && components.length > 0" ng-repeat="component in components">
-          <div ng-if="component.printPackLabel">
-            {{component.componentIdentificationNumber}} ({{component.componentName}}) - 
-            <em>Component is ready to be labelled.</em> 
-            <button style="margin:0;" class="btn btn-primary" type="button" ng-click="printPackLabel(component.componentId)">Print Pack Label</button></div>
-          <div ng-if="component.discardPackLabel">
-            {{component.componentIdentificationNumber}} ({{component.componentName}}) - 
-            <em>Component has been discarded.</em> 
-            <button style="margin:0;" class="btn btn-primary" type="button" ng-click="printDiscardLabel(component.componentId)">Print Discard Label</button></div>
-          <div ng-if="!component.printPackLabel && !component.discardPackLabel">
-            {{component.componentIdentificationNumber}} ({{component.componentName}}) - 
-            <em>Cannot print pack or discard labels for component.</em>
-          </div>
-          <div style="margin-top:8px;"></div>
+    <div ng-switch-when="true">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <em ng-if="!components || components.length === 0">No components for donation.</em>
+                <div ng-if="components && components.length > 0" ng-repeat="component in components">
+                    <div ng-if="component.printPackLabel">
+                        {{component.componentIdentificationNumber}} ({{component.componentName}}) -
+                        <em>Component is ready to be labelled.</em>
+                        <button style="margin:0;" class="btn btn-primary" type="button"
+                                ng-click="printPackLabel(component.componentId)">Print Pack Label
+                        </button>
+                    </div>
+                    <div ng-if="component.discardPackLabel">
+                        {{component.componentIdentificationNumber}} ({{component.componentName}}) -
+                        <em>Component has been discarded.</em>
+                        <button style="margin:0;" class="btn btn-primary" type="button"
+                                ng-click="printDiscardLabel(component.componentId)">Print Discard Label
+                        </button>
+                    </div>
+                    <div ng-if="!component.printPackLabel && !component.discardPackLabel">
+                        {{component.componentIdentificationNumber}} ({{component.componentName}}) -
+                        <em>Cannot print pack or discard labels for component.</em>
+                    </div>
+                    <div style="margin-top:8px;"></div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div ng-switch-when="false">
-    <div class="panel panel-default">
-      <div class="panel-body">
-          <em>Not found. Please re-enter DIN.</em>
-      </div>
+    <div ng-switch-when="false">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <em>Not found. Please re-enter DIN.</em>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

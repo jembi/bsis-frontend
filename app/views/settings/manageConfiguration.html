@@ -1,90 +1,107 @@
 <h3 class="page-header">Manage Configuration</h3>
 <div class="panel panel-default">
-  <div class="panel-body">
-    <form name="configurationForm" novalidate class="form-horizontal col-sm-12"  configuration="form" ng-submit="saveConfiguration(configuration, configurationForm)">
+    <div class="panel-body">
+        <form name="configurationForm" novalidate class="form-horizontal col-sm-12" configuration="form"
+              ng-submit="saveConfiguration(configuration, configurationForm)">
 
-      <div class="row form-group col-sm-12">
-        <label for="name" class="col-sm-1 control-label">Name</label>
-        <div class="col-sm-4">
-          <div class="form-inline">
-            <input size="30" id="name" name="name" class="form-control input-sm" ng-model="configuration.name" required
+            <div class="row form-group col-sm-12">
+                <label for="name" class="col-sm-1 control-label">Name</label>
+                <div class="col-sm-4">
+                    <div class="form-inline">
+                        <input size="30" id="name" name="name" class="form-control input-sm"
+                               ng-model="configuration.name" required
 
-              ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-              ng-class="{'ng-invalid ng-dirty' : (configurationForm.name.$invalid && submitted) || configurationNameInvalid }">
-            <div>
-              <small class="error" ng-show="serverError.name">
-                {{serverError.name}}
-              </small>
-              <small class="error" ng-show="(configurationForm.name.$error.required && (configurationForm.name.$dirty || submitted))">
-                This cannot be empty
-              </small>
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' : (configurationForm.name.$invalid && submitted) || configurationNameInvalid }">
+                        <div>
+                            <small class="error" ng-show="serverError.name">
+                                {{serverError.name}}
+                            </small>
+                            <small class="error"
+                                   ng-show="(configurationForm.name.$error.required && (configurationForm.name.$dirty || submitted))">
+                                This cannot be empty
+                            </small>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="row form-group col-sm-12">
-        <label for="description" class="col-sm-1 control-label">Description</label>
-        <div class="col-sm-6">
-          <div class="form-inline">
-            <input size="40" id="description" name="description" class="form-control input-sm"
-              ng-model="configuration.description" required
-              ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-              ng-class="{'ng-invalid ng-dirty' : configurationForm.description.$invalid && submitted}">
-            <div>
-              <small class="error"
-                ng-show="(configurationForm.description.$error.required && (configurationForm.description.$dirty || submitted))">
-                  This cannot be empty
-              </small>
+            <div class="row form-group col-sm-12">
+                <label for="description" class="col-sm-1 control-label">Description</label>
+                <div class="col-sm-6">
+                    <div class="form-inline">
+                        <input size="40" id="description" name="description" class="form-control input-sm"
+                               ng-model="configuration.description" required
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' : configurationForm.description.$invalid && submitted}">
+                        <div>
+                            <small class="error"
+                                   ng-show="(configurationForm.description.$error.required && (configurationForm.description.$dirty || submitted))">
+                                This cannot be empty
+                            </small>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="row form-group col-sm-12">
-        <label for="value" class="col-sm-1 control-label">Value</label>
-        <div class="col-sm-6">
-          <div class="form-inline">
-            <input size="40" id="value" name="value" class="form-control input-sm"
-              ng-model="configuration.value" required
-              ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-              ng-class="{'ng-invalid ng-dirty' :( configurationForm.value.$invalid && submitted) || configurationValueInvalid }">
-            <div>
-              <small class="error" ng-show="serverError.value">
-                {{serverError.value}}
-              </small>
-              <small class="error"
-                ng-show="(configurationForm.value.$error.required && (configurationForm.value.$dirty || submitted))">
-                  This cannot be empty
-              </small>
+            <div class="row form-group col-sm-12">
+                <label for="dataType" class="col-sm-1 control-label">Data Type</label>
+                <div class="col-sm-6">
+                    <div class="form-inline">
+                        <select id="dataType" name="dataType" class="form-control input-sm"
+                                ng-model="configuration.dataType.id"
+                                ng-options="item.id as item.datatype for item in dataTypes" required
+                                ng-class="{'ng-invalid ng-dirty' : configurationForm.dataType.$invalid && submitted}">
+                            <option value="" ng-disabled="true">DataType</option>
+                        </select>
+                        <div>
+                            <small class="error"
+                                   ng-show="(configurationForm.dataType.$error.required && (configurationForm.dataType.$dirty || submitted))">
+                                This cannot be empty
+                            </small>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="row form-group col-sm-12">
-        <label for="dataType" class="col-sm-1 control-label">Data Type</label>
-        <div class="col-sm-6">
-          <div class="form-inline">
-            <select id="dataType" name="dataType" class="form-control input-sm" ng-model="configuration.dataType.id" ng-options="item.id as item.datatype for item in dataTypes" required
-                    ng-class="{'ng-invalid ng-dirty' : configurationForm.dataType.$invalid && submitted}">
-              <option value="" ng-disabled="true">DataType</option>
-            </select>
-            <div>
-              <small class="error"
-                     ng-show="(configurationForm.dataType.$error.required && (configurationForm.dataType.$dirty || submitted))">
-                This cannot be empty
-              </small>
+            <div class="row form-group col-sm-12">
+                <label for="value" class="col-sm-1 control-label">Value</label>
+                <div class="col-sm-6">
+                    <div class="form-inline">
+                        <input ng-show="!(datatype == 'boolean')" size="40" id="value" name="value"
+                               class="form-control input-sm"
+                               ng-model="configuration.value" required
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' :( configurationForm.value.$invalid && submitted) || configurationValueInvalid }">
+                        <select ng-show="(datatype == 'boolean')" name="value" class="form-control input-sm"
+                                ng-model="configuration.value" required
+                                ng-class="{'ng-invalid ng-dirty' : configurationForm.dataType.$invalid && submitted}">
+                            <option value="true">true</option>
+                            <option value="false">false</option>
+                        </select>
+                        <div>
+                            <small class="error" ng-show="serverError.value">
+                                {{serverError.value}}
+                            </small>
+                            <small class="error"
+                                   ng-show="(configurationForm.value.$error.required && (configurationForm.value.$dirty || submitted))">
+                                This cannot be empty
+                            </small>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-4">
-          <button class="btn btn-primary" type="submit" style="margin-top: 2px" ng-disabled="savingConfiguration">{{savingConfiguration ? "Saving..." : "Save Configuration"}}</button>
-            <button class="btn btn-primary" type="button" ng-click="cancel(configurationForm)" style="margin-top: 2px" ng-disabled="savingConfiguration">Cancel</button>
-        </div>
-      </div>
-    </form>
-  </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-4">
+                    <button class="btn btn-primary" type="submit" style="margin-top: 2px"
+                            ng-disabled="savingConfiguration">{{savingConfiguration ? "Saving..." : "Save
+                        Configuration"}}
+                    </button>
+                    <button class="btn btn-primary" type="button" ng-click="cancel(configurationForm)"
+                            style="margin-top: 2px" ng-disabled="savingConfiguration">Cancel
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

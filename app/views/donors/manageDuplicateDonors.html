@@ -3,70 +3,82 @@
 <h3 class="page-header">Donor Merging</h3>
 
 <form name="mergeDonorForm" novalidate>
-  <div class="panel panel-default">
-    <div class="panel-body">
+    <div class="panel panel-default">
+        <div class="panel-body">
 
-  <h3 ng-switch-when="1" class="page-header">Select Donors to Merge <span class="h4">(Step 1 of 7)</span> </h3>
-  <h3 ng-switch-when="2" class="page-header">Donor Overview Merge <span class="h4">(Step 2 of 7)</span></h3>
-  <h3 ng-switch-when="3" class="page-header">Donor Contact Merge <span class="h4">(Step 3 of 7)</span></h3>
-  <h3 ng-switch-when="4" class="page-header">Donor Address Merge <span class="h4">(Step 4 of 7)</span></h3>
-  <h3 ng-switch-when="5" class="page-header">Donor Deferrals Review <span class="h4">(Step 5 of 7)</span></h3>
-  <h3 ng-switch-when="6" class="page-header">Donor Donations Review <span class="h4">(Step 6 of 7)</span></h3>
-  <h3 ng-switch-when="7" class="page-header">Final Review <span class="h4">(Step 7 of 7)</span></h3>
+            <h3 ng-switch-when="1" class="page-header">Select Donors to Merge <span class="h4">(Step 1 of 7)</span></h3>
+            <h3 ng-switch-when="2" class="page-header">Donor Overview Merge <span class="h4">(Step 2 of 7)</span></h3>
+            <h3 ng-switch-when="3" class="page-header">Donor Contact Merge <span class="h4">(Step 3 of 7)</span></h3>
+            <h3 ng-switch-when="4" class="page-header">Donor Address Merge <span class="h4">(Step 4 of 7)</span></h3>
+            <h3 ng-switch-when="5" class="page-header">Donor Deferrals Review <span class="h4">(Step 5 of 7)</span></h3>
+            <h3 ng-switch-when="6" class="page-header">Donor Donations Review <span class="h4">(Step 6 of 7)</span></h3>
+            <h3 ng-switch-when="7" class="page-header">Final Review <span class="h4">(Step 7 of 7)</span></h3>
 
-    <div class="h4"> 
-      <small><em>Name: </em></small>
-      <span>{{donor.firstName}}</span> 
-      <span>{{donor.lastName}}</span><small><em>
-      </em></small> 
-      | <small><em>Gender:</em></small> {{donor.gender}} 
-      | <small><em>Age: </em></small>
-      <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
-      <em>(<span>{{ (donor.birthDate | bsisDate) || '' }}</span>)
-      </em>
-    </div>
-  
-  <hr/>
+            <div class="h4">
+                <small><em>Name: </em></small>
+                <span>{{donor.firstName}}</span>
+                <span>{{donor.lastName}}</span>
+                <small><em>
+                </em></small>
+                |
+                <small><em>Gender:</em></small>
+                {{donor.gender}}
+                |
+                <small><em>Age: </em></small>
+                <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
+                <em>(<span>{{ (donor.birthDate | bsisDate) || '' }}</span>)
+                </em>
+            </div>
 
-      <div ng-switch-when="1">
-        <div ng-include="'views/donors/mergeDonorsSelection.html'"></div>
-      </div>
+            <hr/>
 
-      <div ng-switch-when="2">
-        <div ng-include="'views/donors/mergeDonorsOverview.html'"></div>
-      </div>
+            <div ng-switch-when="1">
+                <div ng-include="'views/donors/mergeDonorsSelection.html'"></div>
+            </div>
 
-      <div ng-switch-when="3">
-        <div ng-include="'views/donors/mergeDonorsContact.html'"></div>
-      </div>
+            <div ng-switch-when="2">
+                <div ng-include="'views/donors/mergeDonorsOverview.html'"></div>
+            </div>
 
-      <div ng-switch-when="4">
-        <div ng-include="'views/donors/mergeDonorsAddress.html'"></div>
-      </div>
+            <div ng-switch-when="3">
+                <div ng-include="'views/donors/mergeDonorsContact.html'"></div>
+            </div>
 
-      <div ng-switch-when="5">
-        <div ng-include="'views/donors/mergeDonorsDeferrals.html'"></div>
-      </div>
+            <div ng-switch-when="4">
+                <div ng-include="'views/donors/mergeDonorsAddress.html'"></div>
+            </div>
 
-      <div ng-switch-when="6">
-        <div ng-include="'views/donors/mergeDonorsDonations.html'"></div>
-      </div>
+            <div ng-switch-when="5">
+                <div ng-include="'views/donors/mergeDonorsDeferrals.html'"></div>
+            </div>
 
-      <div ng-switch-when="7">
-        <div ng-include="'views/donors/mergeDonorsReview.html'"></div>
-      </div>
+            <div ng-switch-when="6">
+                <div ng-include="'views/donors/mergeDonorsDonations.html'"></div>
+            </div>
 
-      <div class="form-group"> 
-        <div class="col-sm-4">
-          <button class="btn btn-primary" type="button" ng-click="step(currentStep-1, mergeDonorForm)" ng-disabled="currentStep==1">Back</button>
-          <button class="btn btn-primary" type="button" ng-click="step(currentStep+1, mergeDonorForm)" ng-disabled="currentStep==lastStep">Next</button>
-          <button class="btn btn-primary" type="submit" ng-click="merge()" ng-disabled="currentStep!=lastStep">Finish</button>
-          <button class="btn btn-primary" type="button" ng-click="cancel()">Cancel</button>
+            <div ng-switch-when="7">
+                <div ng-include="'views/donors/mergeDonorsReview.html'"></div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <button class="btn btn-primary" type="button"
+                            ng-click="step(currentStep, currentStep-1, mergeDonorForm)" ng-disabled="currentStep==1">
+                        Back
+                    </button>
+                    <button class="btn btn-primary" type="button"
+                            ng-click="step(currentStep, currentStep+1, mergeDonorForm)"
+                            ng-disabled="currentStep==lastStep">Next
+                    </button>
+                    <button class="btn btn-primary" type="submit" ng-click="merge()"
+                            ng-disabled="currentStep!=lastStep">Finish
+                    </button>
+                    <button class="btn btn-primary" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </div>
+
         </div>
-      </div>
-
     </div>
-  </div>
 </form>
 
 </span>

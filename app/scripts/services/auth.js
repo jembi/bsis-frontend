@@ -1,122 +1,122 @@
 'use strict';
 
 angular.module('bsis')
-    .factory('AuthService', function ($http, $rootScope, AUTH_EVENTS, ROLES, Api, Authinterceptor, Base64) {
+  .factory('AuthService', function($http, $rootScope, AUTH_EVENTS, ROLES, Api, Authinterceptor, Base64) {
 
-        var loggedOnUser = angular.fromJson(localStorage.getItem('loggedOnUser'));
-        var session = angular.fromJson(localStorage.getItem('consoleSession'));
+    var loggedOnUser = angular.fromJson(localStorage.getItem('loggedOnUser'));
+    var session = angular.fromJson(localStorage.getItem('consoleSession'));
 
-        /**
-         * Create a new session from the logged on user's details and persist it to localStorage.
-         */
-        function refreshSession() {
-            var currentTime = new Date().getTime();
-            var expiryTime = new Date(currentTime + (1000 * 60 * 60));
+    /**
+     * Create a new session from the logged on user's details and persist it to localStorage.
+     */
+    function refreshSession() {
+      var currentTime = new Date().getTime();
+      var expiryTime = new Date(currentTime + (1000 * 60 * 60));
 
-            // iterate through the user's roles and associated permissions, and populate the session permissions
-            var permissions = [];
-            for (var roleIndex in loggedOnUser.roles) {
-                var role = loggedOnUser.roles[roleIndex];
-                for (var permissionIndex in role.permissions) {
-                    var permission = role.permissions[permissionIndex];
-                    // if the permission is not already in the session permissions array, add it to the array
-                    if (permissions.indexOf(permission.name) < 0) {
-                        permissions.push(permission.name);
-                    }
-                }
-            }
-
-            var firstName = loggedOnUser.firstName || '';
-            var lastName = loggedOnUser.lastName || '';
-            var fullName = firstName + ' ' + lastName;
-
-            session = {
-                sessionUser: loggedOnUser.username,
-                sessionUserName: fullName,
-                sessionUserPermissions: permissions,
-                expires: expiryTime.getTime()
-            };
-
-            $rootScope.displayHeader = true;
-            $rootScope.sessionUserName = session.sessionUserName;
-            $rootScope.sessionUserPermissions = session.sessionUserPermissions;
-
-            localStorage.setItem('consoleSession', angular.toJson(session));
+      // iterate through the user's roles and associated permissions, and populate the session permissions
+      var permissions = [];
+      for (var roleIndex in loggedOnUser.roles) {
+        var role = loggedOnUser.roles[roleIndex];
+        for (var permissionIndex in role.permissions) {
+          var permission = role.permissions[permissionIndex];
+          // if the permission is not already in the session permissions array, add it to the array
+          if (permissions.indexOf(permission.name) < 0) {
+            permissions.push(permission.name);
+          }
         }
+      }
 
-        function setLoggedOnUser(user) {
-            $rootScope.user = user;
-            loggedOnUser = user;
-            localStorage.setItem('loggedOnUser', angular.toJson(loggedOnUser));
-            refreshSession();
-        }
+      var firstName = loggedOnUser.firstName || '';
+      var lastName = loggedOnUser.lastName || '';
+      var fullName = firstName + ' ' + lastName;
 
-        function clearLoggedOnUser() {
-            loggedOnUser = null;
-            session = null;
-            localStorage.removeItem('loggedOnUser');
-            localStorage.removeItem('consoleSession');
-        }
+      session = {
+        sessionUser: loggedOnUser.username,
+        sessionUserName: fullName,
+        sessionUserPermissions: permissions,
+        expires: expiryTime.getTime()
+      };
 
-        return {
+      $rootScope.displayHeader = true;
+      $rootScope.sessionUserName = session.sessionUserName;
+      $rootScope.sessionUserPermissions = session.sessionUserPermissions;
 
-            login: function (loginCredentials, onSuccess, onError) {
-                var encodedCredentials = Base64.encode(loginCredentials.username + ':' + loginCredentials.password);
-                $http.defaults.headers.common.authorization = 'Basic ' + encodedCredentials;
-                Api.User.get({}, function (user) {
+      localStorage.setItem('consoleSession', angular.toJson(session));
+    }
 
-                    setLoggedOnUser(user);
-                    Authinterceptor.setCredentials(encodedCredentials);
+    function setLoggedOnUser(user) {
+      $rootScope.user = user;
+      loggedOnUser = user;
+      localStorage.setItem('loggedOnUser', angular.toJson(loggedOnUser));
+      refreshSession();
+    }
 
-                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+    function clearLoggedOnUser() {
+      loggedOnUser = null;
+      session = null;
+      localStorage.removeItem('loggedOnUser');
+      localStorage.removeItem('consoleSession');
+    }
 
-                    onSuccess(user);
-                }, function (error) {
+    return {
 
-                    $rootScope.user = {};
-                    $rootScope.displayHeader = false;
-                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+      login: function(loginCredentials, onSuccess, onError) {
+        var encodedCredentials = Base64.encode(loginCredentials.username + ':' + loginCredentials.password);
+        $http.defaults.headers.common.authorization = 'Basic ' + encodedCredentials;
+        Api.User.get({}, function(user) {
 
-                    onError(error.status);
-                });
-            },
+          setLoggedOnUser(user);
+          Authinterceptor.setCredentials(encodedCredentials);
 
-            logout: function () {
-                clearLoggedOnUser();
-                Authinterceptor.clearCredentials();
+          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 
-                $http.defaults.headers.common.authorization = '';
+          onSuccess(user);
+        }, function(error) {
 
-                $rootScope.user = {
-                    id: '',
-                    userId: '',
-                    role: ROLES.guest
-                };
-                $rootScope.displayHeader = false;
-                $rootScope.sessionUserName = '';
-                $rootScope.sessionUserPermissions = '';
-                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-            },
+          $rootScope.user = {};
+          $rootScope.displayHeader = false;
+          $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 
-            getSession: function () {
-                return session;
-            },
+          onError(error.status);
+        });
+      },
 
-            refreshSession: function () {
-                refreshSession();
-            },
+      logout: function() {
+        clearLoggedOnUser();
+        Authinterceptor.clearCredentials();
 
-            getLoggedOnUser: function () {
-                return loggedOnUser;
-            },
+        $http.defaults.headers.common.authorization = '';
 
-            setLoggedOnUser: function (user) {
-                setLoggedOnUser(user);
-            },
-
-            // Only for testing
-            __setLoggedOnUser: function (user) {
-                loggedOnUser = user;
-            }
+        $rootScope.user = {
+          id: '',
+          userId: '',
+          role: ROLES.guest
         };
-    });
+        $rootScope.displayHeader = false;
+        $rootScope.sessionUserName = '';
+        $rootScope.sessionUserPermissions = '';
+        $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+      },
+
+      getSession: function() {
+        return session;
+      },
+
+      refreshSession: function() {
+        refreshSession();
+      },
+
+      getLoggedOnUser: function() {
+        return loggedOnUser;
+      },
+
+      setLoggedOnUser: function(user) {
+        setLoggedOnUser(user);
+      },
+
+      // Only for testing
+      __setLoggedOnUser: function(user) {
+        loggedOnUser = user;
+      }
+    };
+  });

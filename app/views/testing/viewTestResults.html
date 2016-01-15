@@ -1,28 +1,32 @@
 <h3 class="page-header">View Test Results</h3>
 
-<form class="form-horizontal col-sm-12"  role="form" ng-submit="getTestResultsByDIN(testResultsSearch)">
-  <div class="form-group">
-    <label for="name" class="col-sm-1 control-label" >DIN</label>
-    <div class="row col-sm-11">
-      <div class="form-inline" style="padding-left:5px;">
-        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="testResultsSearch.donationIdentificationNumber">
-      </div>
+<form class="form-horizontal col-sm-12" role="form" ng-submit="getTestResultsByDIN(testResultsSearch)">
+    <div class="form-group">
+        <label for="name" class="col-sm-1 control-label">DIN</label>
+        <div class="row col-sm-11">
+            <div class="form-inline" style="padding-left:5px;">
+                <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
+                       class="form-control input-sm" placeholder=""
+                       ng-model="testResultsSearch.donationIdentificationNumber">
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="form-group"> 
-    <div class="col-sm-offset-1 col-sm-3">
-      <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}}</button>
-      <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-3">
+            <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
+                "Search"}}
+            </button>
+            <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+        </div>
     </div>
-  </div>
 </form>
 
 <div ng-switch="searchResults" class="col-sm-12">
-<div style="padding-bottom: 10px"></div>
+    <div style="padding-bottom: 10px"></div>
 
-  <div ng-switch-when="true">
-    <div class="panel panel-default">
-      <div class="panel-body">
+    <div ng-switch-when="true">
+        <div class="panel panel-default">
+            <div class="panel-body">
 
       <span class="h3"> 
         <small><em>DIN:</em></small> {{donation.donationIdentificationNumber}}
@@ -32,46 +36,51 @@
         <small><em>Venue:</em></small> {{donation.venue.name}} |
         <small><em> Date: </em></small> {{donation.donationDate | bsisDate}} |
         <small><em>Blood Group:</em></small> 
-          <span ng-if="donation.bloodGroup !== ''" >{{donation.bloodGroup}}</span>
-          <span ng-if="donation.bloodGroup == ''" >Unknown</span>
+          <span ng-if="donation.bloodGroup !== ''">{{donation.bloodGroup}}</span>
+          <span ng-if="donation.bloodGroup == ''">Unknown</span>
            | 
 
         <small><em>Pack Type:</em></small> {{donation.packType.packType}}
       </span>
 
-      <hr/>
+                <hr/>
       <span class="h4">
         <small><em>TTI Test Status:</em></small> {{donation.ttistatus}}
         <br/>
         <small><em>Blood Group Serology Test Status:</em></small> {{donation.bloodTypingStatus}} 
       </span>
 
-      <hr/>
+                <hr/>
 
-    <div class="form-horizontal col-sm-12">
-      <div class="row">
+                <div class="form-horizontal col-sm-12">
+                    <div class="row">
         <span class="col-sm-6">
         <span class="h4"> 
           TTI Outcomes
         </span>
         <table class="dash-table" style="width:80%;">
-          <thead>
-            <tr><td></td></tr>
+            <thead>
             <tr>
-              <th>Test</th>
-              <th>Outcome</th>
-              <th>Tested On</th>
+                <td></td>
             </tr>
-          </thead>
-          <hr style="margin-top:10px; margin-bottom:5px;"/>
-          <tbody>
-            <tr><td></td></tr>
+            <tr>
+                <th>Test</th>
+                <th>Outcome</th>
+                <th>Tested On</th>
+            </tr>
+            </thead>
+            <hr style="margin-top:10px; margin-bottom:5px;"/>
+            <tbody>
+            <tr>
+                <td></td>
+            </tr>
             <tr ng-repeat="test in testResults">
-              <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.bloodTest.testNameShort}}</td>
-              <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.result}}</td>
-              <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.testedOn | bsisDate}}</td>
+                <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.bloodTest.testNameShort}}
+                </td>
+                <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.result}}</td>
+                <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.testedOn | bsisDate}}</td>
             </tr>
-          </tbody>
+            </tbody>
         </table>
         </span>
         <span class="col-sm-6">
@@ -79,39 +88,47 @@
           Blood Group Serology Outcomes
         </span>
         <table class="dash-table" style="width:80%;">
-          <thead>
-            <tr><td></td></tr>
+            <thead>
             <tr>
-              <th>Test</th>
-              <th>Outcome</th>
-              <th>Tested On</th>
+                <td></td>
             </tr>
-          </thead>
-          <hr style="margin-top:10px; margin-bottom:5px;"/>
-          <tbody>
-            <tr><td></td></tr>
+            <tr>
+                <th>Test</th>
+                <th>Outcome</th>
+                <th>Tested On</th>
+            </tr>
+            </thead>
+            <hr style="margin-top:10px; margin-bottom:5px;"/>
+            <tbody>
+            <tr>
+                <td></td>
+            </tr>
             <tr ng-repeat="test in testResults">
-              <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">{{test.bloodTest.testNameShort}}</td>
-              <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">{{test.result}}</td>
-              <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">{{test.testedOn | bsisDate}}</td>
+                <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">
+                    {{test.bloodTest.testNameShort}}
+                </td>
+                <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">{{test.result}}</td>
+                <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">{{test.testedOn |
+                    bsisDate}}
+                </td>
             </tr>
-          </tbody>
+            </tbody>
         </table>
         </span>
-      </div>
-    </div>
+                    </div>
+                </div>
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div ng-switch-when="false">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <p>
-          <em> Not found. Please re-enter DIN. </em>
-        </p>
-      </div>
+    <div ng-switch-when="false">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    <em> Not found. Please re-enter DIN. </em>
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
 
 </div>
