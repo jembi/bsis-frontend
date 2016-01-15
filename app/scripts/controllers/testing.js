@@ -912,28 +912,20 @@ angular.module('bsis')
         updatedTestResults.testResults = { };
         updatedTestResults.testResults[aboTestId] = value.bloodAbo;
         updatedTestResults.testResults[rhTestId] = value.bloodRh == "+" ? "POS" : "NEG";
-        var request1 = TestingService.saveTestResults(updatedTestResults, function(response) {
-          if (response === true) {
-            // save confirmation
+        var request = TestingService.saveTestResults(updatedTestResults, angular.noop).then(function() {
             if (value.confirm) {
-              var request2 = TestingService.saveBloodGroupMatchTestResults(value, function(response){
-                if (response === true){
-                }
-                else{
-                  // TODO: handle case where response == false
-                }
-              });
-              requests[requests.indexOf(request1)] = request2;
+              // save confirmation last
+              return TestingService.saveBloodGroupMatchTestResults(value, angular.noop);
             }
-          } else {
-            // TODO: handle case where response == false
-          }
         });
-        requests.push(request1);
+        requests.push(request);
       });
 
       $q.all(requests).then(function(){
         $location.path("/viewTestBatch/" + $routeParams.id);
+      }).catch(function(err) {
+        console.log(err);
+        // TODO: handle the case where there have been errors
       }).finally(function() {
         $scope.savingTestResults = false;
       });
