@@ -410,7 +410,8 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   .run(['$rootScope', '$location', 'AuthService', function($rootScope, $location) {
 
     // on route change, check to see if user has appropriate permissions
-    $rootScope.$on('$routeChangeStart', function(scope, next) {
+    var rootScope = $rootScope;
+    rootScope.$on('$routeChangeStart', function(scope, next) {
 
       // set initial accessDenied value to false
       if (!($rootScope.accessDenied === true && $location.path() == '/home')) {
@@ -437,8 +438,8 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   }])
 
   .run(['$rootScope', '$location', 'AuthService', function($rootScope, $location, AuthService) {
-
-    $rootScope.$on('$locationChangeStart', function() {
+    var rootScope = $rootScope;
+    rootScope.$on('$locationChangeStart', function() {
 
       // Retrieve the session from storage
       var consoleSession = AuthService.getSession();
@@ -858,8 +859,10 @@ var DONATION = {DONOR: {}};
       return $http.get(url + '/configurations').then(function(configResponse) {
         app.constant('USERCONFIG', configResponse.data);
 
+        /*eslint-disable */
         app.constant('UI', UI);
         app.constant('DONATION', DONATION);
+        /*eslint-enable */
 
         var config = configResponse.data.configurations;
 

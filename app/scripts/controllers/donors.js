@@ -1276,7 +1276,7 @@ angular.module('bsis')
       $window.history.back();
     };
 
-    $scope.step = function(currentStep, newStep, mergeDonorForm) {
+    $scope.step = function(previousStep, newStep, mergeDonorForm) {
       $scope.invalid = false;
       $scope.hasMessage = false;
       $scope.message = '';
@@ -1284,7 +1284,7 @@ angular.module('bsis')
         $scope.invalid = true;
         return;
       }
-      if (currentStep == 1 && newStep == 2) {
+      if (previousStep == 1 && newStep == 2) {
         // see which donors have been selected and then move onto the overview page
         selectedDonorsData = [];
         donorFields = {};
@@ -1402,7 +1402,7 @@ angular.module('bsis')
             return;
           }
         }
-      } else if (currentStep == 2 && newStep == 3) {
+      } else if (previousStep == 2 && newStep == 3) {
         mergedDonor.notes = '';
         angular.forEach(selectedDonorsData, function(donor) {
           // set the selected title
@@ -1438,7 +1438,7 @@ angular.module('bsis')
             }
           }
         });
-      } else if (currentStep == 3 && newStep == 4) {
+      } else if (previousStep == 3 && newStep == 4) {
         mergedDonor.contact = {};
         angular.forEach(selectedDonorsData, function(donor) {
           // set the selected contactMethodType
@@ -1462,7 +1462,7 @@ angular.module('bsis')
             mergedDonor.contact.workNumber = donor.contact.workNumber;
           }
         });
-      } else if (currentStep == 4 && newStep == 5) {
+      } else if (previousStep == 4 && newStep == 5) {
         mergedDonor.address = {};
         angular.forEach(selectedDonorsData, function(donor) {
           // set the selected preferredAddressType
@@ -1515,7 +1515,7 @@ angular.module('bsis')
         },
         function(err) {
           $scope.hasMessage = true;
-          $scope.message = 'Error merging the duplicate Donors. More information: ' + err.moreInfo + ' ... ' + JSON.stringify(err);
+          $scope.message = 'Error merging the duplicate Donors. More information: ' + err.moreInfo + ' ... ' + angular.toJson(err);
         }
       );
     };
