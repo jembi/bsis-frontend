@@ -676,6 +676,7 @@ angular.module('bsis')
     $scope.updateDonation = function (donation){
       var d = $q.defer();
       DonorService.updateDonation(donation, function(response){
+          $scope.donation.permissions = response.permissions;
           $scope.addDonationSuccess = true;
           $scope.donation = {};
           $scope.err = null;
