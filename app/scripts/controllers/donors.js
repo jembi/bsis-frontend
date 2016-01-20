@@ -1095,7 +1095,7 @@ angular.module('bsis')
       count: 12,          // count per page
       filter: {},
       sorting: {}
-    }, 
+    },
     {
       defaultSort: 'asc',
       counts: [], // hide page counts control
@@ -1174,7 +1174,7 @@ angular.module('bsis')
       count: 100,         // don't paginate (?)
       filter: {},
       sorting: {}
-    }, 
+    },
     {
       defaultSort: 'asc',
       counts: [], // hide page counts control
@@ -1196,7 +1196,7 @@ angular.module('bsis')
       count: 100,         // don't paginate (?)
       filter: {},
       sorting: {}
-    }, 
+    },
     {
       defaultSort: 'asc',
       counts: [], // hide page counts control
@@ -1214,7 +1214,7 @@ angular.module('bsis')
 
     // 2: do a preview of the merge and load the donations and the deferrals
     $scope.previewMerge = function() {
-      DonorService.mergePreviewDonorsDuplicate(groupKey, $scope.copyMergedDonor(), 
+      DonorService.mergePreviewDonorsDuplicate(groupKey, $scope.copyMergedDonor(),
         function(response) {
           // process donations
           donationsData = response.allDonations;
@@ -1235,7 +1235,7 @@ angular.module('bsis')
           mergedDonor.dateOfFirstDonation = response.mergedDonor.dateOfFirstDonation;
           mergedDonor.dueToDonate = response.mergedDonor.dueToDonate;
           mergedDonor.dateOfLastDonation = response.mergedDonor.dateOfLastDonation;
-        }, 
+        },
         function(err) {
           $scope.hasMessage = true;
           $scope.message = "Error merging the duplicate Donors. More information: "+err.moreInfo+" ... "+JSON.stringify(err);
@@ -1265,7 +1265,7 @@ angular.module('bsis')
       count: 6,
       filter: {},
       sorting: {}
-    }, 
+    },
     {
       defaultSort: 'asc',
       counts: [],
@@ -1287,7 +1287,7 @@ angular.module('bsis')
       count: 6,
       filter: {},
       sorting: {}
-    }, 
+    },
     {
       defaultSort: 'asc',
       counts: [],
@@ -1515,10 +1515,10 @@ angular.module('bsis')
 
     $scope.merge = function (item) {
       // submit
-      DonorService.mergeDonorsDuplicate(groupKey, $scope.copyMergedDonor(), 
+      DonorService.mergeDonorsDuplicate(groupKey, $scope.copyMergedDonor(),
         function(mergedDonor) {
           $location.path("/viewDonor/" + mergedDonor.id).search({});
-        }, 
+        },
         function(err) {
           $scope.hasMessage = true;
           $scope.message = "Error merging the duplicate Donors. More information: "+err.moreInfo+" ... "+JSON.stringify(err);
@@ -1598,7 +1598,7 @@ angular.module('bsis')
       $scope.searched = false;
       $scope.search = angular.copy(master);
 
-      
+
     };
 
     $scope.search = angular.copy(master);
@@ -2100,6 +2100,11 @@ angular.module('bsis')
       } else {
         $scope.submitted = true;
       }
+    };
+
+    $scope.viewDonationBatch = function () {
+      $scope.donation = {};
+      $scope.donationBatchView = 'viewDonationBatch';
     };
 
     $scope.updateDonation = function (donation){
