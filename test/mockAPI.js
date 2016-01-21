@@ -5,7 +5,7 @@ var mockAPI = angular.module('mockAPI', [ // eslint-disable-line
   'ngMockE2E',
   'ngResource'
 ]);
-mockAPI.run(function ($httpBackend) { // eslint-disable-line
+mockAPI.run(function ($httpBackend, $http, $resource) { // eslint-disable-line
 
   // login mock
   $httpBackend.whenPOST('/login', {username: 'admin', password: '123'}).respond(

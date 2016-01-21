@@ -245,6 +245,6 @@ angular.module('bsis')
       }
     ]
   })
+  .constant('UI', {})
+  .constant('DONATION', {})
 ;
-
-
