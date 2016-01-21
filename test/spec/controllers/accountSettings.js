@@ -1,12 +1,12 @@
 'use strict';
 /* global readJSON: true */
 
-describe('Controller: AccountSettingsCtrl', function () {
+describe('Controller: AccountSettingsCtrl', function() {
 
   beforeEach(module('bsis'));
 
-  beforeEach(function(){
-    module('bsis', function($provide){
+  beforeEach(function() {
+    module('bsis', function($provide) {
       $provide.constant('SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json'));
       $provide.constant('USERCONFIG', readJSON('test/mockData/userconfig.json'));
     });

@@ -1,12 +1,12 @@
 'use strict';
 /* global readJSON: true */
 
-describe('Controller: ForgotPasswordCtrl', function () {
+describe('Controller: ForgotPasswordCtrl', function() {
 
   beforeEach(module('bsis'));
 
-  beforeEach(function(){
-    module('bsis', function($provide){
+  beforeEach(function() {
+    module('bsis', function($provide) {
       $provide.constant('SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json'));
       $provide.constant('USERCONFIG', readJSON('test/mockData/userconfig.json'));
     });
@@ -55,7 +55,7 @@ describe('Controller: ForgotPasswordCtrl', function () {
       scope.username = 'superuser';
 
       httpBackend.expectPOST(/\/passwordresets$/, {username: 'superuser'})
-          .respond(201);
+        .respond(201);
 
       scope.resetPassword();
       expect(scope.resetting).toBe(true);
@@ -73,7 +73,7 @@ describe('Controller: ForgotPasswordCtrl', function () {
       scope.username = 'nobody';
 
       httpBackend.expectPOST(/\/passwordresets$/, {username: 'nobody'})
-          .respond(404);
+        .respond(404);
 
       scope.resetPassword();
       expect(scope.resetting).toBe(true);

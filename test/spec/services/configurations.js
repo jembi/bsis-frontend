@@ -1,11 +1,11 @@
 'use strict';
 
-describe('Service: Authinterceptor', function () {
+describe('Service: Authinterceptor', function() {
 
   beforeEach(module('bsis'));
 
-  beforeEach(function(){
-    module('bsis', function($provide){
+  beforeEach(function() {
+    module('bsis', function($provide) {
       $provide.constant('USERCONFIG', {
         configurations: [
           {

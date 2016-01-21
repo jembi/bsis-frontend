@@ -20,12 +20,12 @@ describe('Service: Auth', function() {
 
   beforeEach(module('bsis'));
 
-  beforeEach(function(){
-    module('bsis', function($provide){
-      $provide.constant( 'SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json') );
-      $provide.constant( 'USERCONFIG', readJSON('test/mockData/userconfig.json') );
+  beforeEach(function() {
+    module('bsis', function($provide) {
+      $provide.constant('SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json'));
+      $provide.constant('USERCONFIG', readJSON('test/mockData/userconfig.json'));
       /*eslint-disable*/
-      $provide.service('Authinterceptor', function() {
+      $provide.service('Authinterceptor', function () {
         return {
           setCredentials: angular.noop,
           clearCredentials: angular.noop
@@ -48,7 +48,7 @@ describe('Service: Auth', function() {
     beforeEach(inject(function($httpBackend) {
       httpBackend = $httpBackend;
 
-      httpBackend.when('GET', new RegExp('.*/configurations')).respond( readJSON('test/mockData/userconfig.json') );
+      httpBackend.when('GET', new RegExp('.*/configurations')).respond(readJSON('test/mockData/userconfig.json'));
     }));
 
     afterEach(function() {
