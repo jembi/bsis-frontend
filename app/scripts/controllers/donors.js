@@ -219,8 +219,8 @@ angular.module('bsis')
         $scope.err = null;
         d.resolve();
         if ($scope.donorPermissions) {
-          $scope.donorPermissions.canDelete = response.permissions.canDelete;
-        }
+            $scope.donorPermissions.canDelete = response.permissions.canDelete;
+          }
       },
         function(err) {
           $scope.donor = donor;
@@ -657,19 +657,19 @@ angular.module('bsis')
 
     $scope.updateDonation = function(donation) {
       var d = $q.defer();
-      DonorService.updateDonation(donation, function(response){
-          $scope.donation.permissions = response.permissions;
-          $scope.addDonationSuccess = true;
-          $scope.donation = {};
-          $scope.err = null;
-          $scope.viewDonationSummary(response.donationIdentificationNumber);
-          d.resolve();
-        }, function (err) {
-          console.error(err);
-          $scope.err = err;
-          $scope.addDonationSuccess = false;
-          d.reject('Server Error');
-        });
+      DonorService.updateDonation(donation, function(response) {
+        $scope.donation.permissions = response.permissions;
+        $scope.addDonationSuccess = true;
+        $scope.donation = {};
+        $scope.err = null;
+        $scope.viewDonationSummary(response.donationIdentificationNumber);
+        d.resolve();
+      }, function(err) {
+        $log.error(err);
+        $scope.err = err;
+        $scope.addDonationSuccess = false;
+        d.reject('Server Error');
+      });
       return d.promise;
     };
 
@@ -1061,19 +1061,21 @@ angular.module('bsis')
       filter: {},
       sorting: {}
     },
-    {
-      defaultSort: 'asc',
-      counts: [], // hide page counts control
-      total: $scope.data.length, // length of data
-      getData: function ($defer, params) {
-        var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
-        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : data;
-        params.total(orderedData.length); // set total for pagination
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      }
-    });
-    $scope.$watch("data", function () {
-      $timeout(function(){ $scope.duplicateDonorTableParams.reload(); });
+      {
+        defaultSort: 'asc',
+        counts: [], // hide page counts control
+        total: $scope.data.length, // length of data
+        getData: function($defer, params) {
+          var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+          var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : data;
+          params.total(orderedData.length); // set total for pagination
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
+    $scope.$watch('data', function() {
+      $timeout(function() {
+        $scope.duplicateDonorTableParams.reload();
+      });
     });
 
     $scope.viewDuplicates = function(item) {
@@ -1140,19 +1142,21 @@ angular.module('bsis')
       filter: {},
       sorting: {}
     },
-    {
-      defaultSort: 'asc',
-      counts: [], // hide page counts control
-      total: $scope.duplicatesData.length,
-      getData: function ($defer, params) {
-        var filteredData = params.filter() ? $filter('filter')(duplicatesData, params.filter()) : duplicatesData;
-        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : duplicatesData;
-        params.total(orderedData.length);
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      }
-    });
-    $scope.$watch("duplicatesData", function () {
-      $timeout(function(){ $scope.manageDuplicateDonorTableParams.reload(); });
+      {
+        defaultSort: 'asc',
+        counts: [], // hide page counts control
+        total: $scope.duplicatesData.length,
+        getData: function($defer, params) {
+          var filteredData = params.filter() ? $filter('filter')(duplicatesData, params.filter()) : duplicatesData;
+          var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : duplicatesData;
+          params.total(orderedData.length);
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
+    $scope.$watch('duplicatesData', function() {
+      $timeout(function() {
+        $scope.manageDuplicateDonorTableParams.reload();
+      });
     });
 
     // 1b: selected donors to merge
@@ -1162,19 +1166,21 @@ angular.module('bsis')
       filter: {},
       sorting: {}
     },
-    {
-      defaultSort: 'asc',
-      counts: [], // hide page counts control
-      total: $scope.selectedDonorsData.length,
-      getData: function ($defer, params) {
-        var filteredData = params.filter() ? $filter('filter')(selectedDonorsData, params.filter()) : selectedDonorsData;
-        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : selectedDonorsData;
-        params.total(orderedData.length);
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      }
-    });
-    $scope.$watch("selectedDonorsData", function () {
-      $timeout(function(){ $scope.manageSelectedDuplicateDonorTableParams.reload(); });
+      {
+        defaultSort: 'asc',
+        counts: [], // hide page counts control
+        total: $scope.selectedDonorsData.length,
+        getData: function($defer, params) {
+          var filteredData = params.filter() ? $filter('filter')(selectedDonorsData, params.filter()) : selectedDonorsData;
+          var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : selectedDonorsData;
+          params.total(orderedData.length);
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
+    $scope.$watch('selectedDonorsData', function() {
+      $timeout(function() {
+        $scope.manageSelectedDuplicateDonorTableParams.reload();
+      });
     });
 
     // 2: do a preview of the merge and load the donations and the deferrals
@@ -1225,19 +1231,21 @@ angular.module('bsis')
       filter: {},
       sorting: {}
     },
-    {
-      defaultSort: 'asc',
-      counts: [],
-      total: $scope.donationsData.length,
-      getData: function ($defer, params) {
-        var filteredData = params.filter() ? $filter('filter')(donationsData, params.filter()) : donationsData;
-        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : donationsData;
-        params.total(orderedData.length);
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      }
-    });
-    $scope.$watch("donationsData", function () {
-      $timeout(function(){ $scope.manageDuplicateDonorDonationsTableParams.reload(); });
+      {
+        defaultSort: 'asc',
+        counts: [],
+        total: $scope.donationsData.length,
+        getData: function($defer, params) {
+          var filteredData = params.filter() ? $filter('filter')(donationsData, params.filter()) : donationsData;
+          var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : donationsData;
+          params.total(orderedData.length);
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
+    $scope.$watch('donationsData', function() {
+      $timeout(function() {
+        $scope.manageDuplicateDonorDonationsTableParams.reload();
+      });
     });
 
     // Deferrals Table
@@ -1247,20 +1255,22 @@ angular.module('bsis')
       filter: {},
       sorting: {}
     },
-    {
-      defaultSort: 'asc',
-      counts: [],
-      total: $scope.deferralsData.length,
-      getData: function ($defer, params) {
-        var deferralsData = $scope.deferralsData;
-        var filteredData = params.filter() ? $filter('filter')(deferralsData, params.filter()) : deferralsData;
-        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : deferralsData;
-        params.total(orderedData.length);
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      }
-    });
-    $scope.$watch("deferralsData", function () {
-      $timeout(function(){ $scope.manageDuplicateDonorDeferralTableParams.reload(); });
+      {
+        defaultSort: 'asc',
+        counts: [],
+        total: $scope.deferralsData.length,
+        getData: function($defer, params) {
+          var returnedDeferralsData = $scope.deferralsData;
+          var filteredData = params.filter() ? $filter('filter')(deferralsData, params.filter()) : returnedDeferralsData;
+          var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : returnedDeferralsData;
+          params.total(orderedData.length);
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
+    $scope.$watch('deferralsData', function() {
+      $timeout(function() {
+        $scope.manageDuplicateDonorDeferralTableParams.reload();
+      });
     });
 
     $scope.goBack = function() {
@@ -1501,8 +1511,8 @@ angular.module('bsis')
     $scope.merge = function() {
       // submit
       DonorService.mergeDonorsDuplicate(groupKey, $scope.copyMergedDonor(),
-        function(mergedDonor) {
-          $location.path("/viewDonor/" + mergedDonor.id).search({});
+        function(returnedMergedDonor) {
+          $location.path('/viewDonor/' + returnedMergedDonor.id).search({});
         },
         function(err) {
           $scope.hasMessage = true;
@@ -2069,12 +2079,12 @@ angular.module('bsis')
       }
     };
 
-    $scope.viewDonationBatch = function () {
+    $scope.viewDonationBatch = function() {
       $scope.donation = {};
       $scope.donationBatchView = 'viewDonationBatch';
     };
 
-    $scope.updateDonation = function (donation){
+    $scope.updateDonation = function(donation) {
 
       DonorService.updateDonation(donation, function() {
         $scope.addDonationSuccess = true;

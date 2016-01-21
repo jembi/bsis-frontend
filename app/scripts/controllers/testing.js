@@ -870,7 +870,8 @@ angular.module('bsis')
           if (response1 === true) {
             // save confirmation
             if (value.confirm) {
-              var request2 = TestingService.saveBloodGroupMatchTestResults(value, function() {});
+              var request2 = TestingService.saveBloodGroupMatchTestResults(value, function() {
+              });
               requests.push(request2);
             }
           }
