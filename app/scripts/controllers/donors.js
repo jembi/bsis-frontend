@@ -219,8 +219,8 @@ angular.module('bsis')
         $scope.err = null;
         d.resolve();
         if ($scope.donorPermissions) {
-            $scope.donorPermissions.canDelete = response.permissions.canDelete;
-          }
+          $scope.donorPermissions.canDelete = response.permissions.canDelete;
+        }
       },
         function(err) {
           $scope.donor = donor;
