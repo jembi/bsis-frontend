@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('HomeCtrl', function($scope, ICONS, PERMISSIONS, UI, $location, $document) {
+  .controller('HomeCtrl', function($scope, ICONS, PERMISSIONS, UI, $location) {
     $scope.donorsTabEnabled = UI.DONORS_TAB_ENABLED;
     $scope.componentsTabEnabled = UI.COMPONENTS_TAB_ENABLED;
     $scope.testingTabEnabled = UI.TESTING_TAB_ENABLED;
@@ -17,7 +17,9 @@ angular.module('bsis')
     };
 
     $scope.isSectionEnabled = function(item) {
-      if ('disabled' == angular.element($document.querySelector(item)).attr('disabled')) {
+      /*eslint-disable */
+      if ('disabled' == angular.element(document.querySelector(item)).attr('disabled')) {
+      /*eslint-enable */
         //return disabled style
         return 'labelDisabled';
       }
