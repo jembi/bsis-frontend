@@ -17,7 +17,7 @@ angular.module('bsis')
     };
 
     $scope.isSectionEnabled = function(item) {
-      if ('disabled' == angular.element(document.querySelector(item)).attr('disabled')) { //eslint-disable-line 
+      if ('disabled' == angular.element(document.querySelector(item)).attr('disabled')) { //eslint-disable-line angular/document-service
         //return disabled style
         return 'labelDisabled';
       }
