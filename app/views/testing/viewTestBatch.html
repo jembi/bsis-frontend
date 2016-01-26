@@ -46,7 +46,7 @@
   <hr style="clear:right;" />
 
 <span class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
-  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}"  ng-hide="testBatch.status=='CLOSED'"> <small><em><a href="" ng-click="recordPendingTestResults(testBatch)" ng-disabled="!basicTTIComplete && !pendingBloodTypingTests && !pendingTTITests">Record Confirmatory Test Results</a></em></small> </span>
+  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}"  ng-hide="testBatch.status=='CLOSED'"> <small><em><a href="" ng-click="recordPendingTestResults(testBatch)" ng-disabled="!basicTTIComplete && !pendingBloodTypingTests && !pendingTTITests">Record Pending Test Results</a></em></small> </span>
   <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> | </span>
   <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a href="" ng-click="recordPendingBloodGroupMatchTests(testBatch)" ng-disabled="!pendingBloodTypingMatchTests">Record Confirmatory Abo/Rh Results</a></em></small> </span>
 </span>
