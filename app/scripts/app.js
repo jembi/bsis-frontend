@@ -410,9 +410,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   .run(['$rootScope', '$location', 'AuthService', function($rootScope, $location) {
 
     // on route change, check to see if user has appropriate permissions
-    /*eslint-disable angular/on-watch */
-    $rootScope.$on('$routeChangeStart', function(scope, next) {
-      /*eslint-enable angular/on-watch */
+
+    $rootScope.$on('$routeChangeStart', function(scope, next) { //eslint-disable-line angular/on-watch
+
       // set initial accessDenied value to false
       if (!($rootScope.accessDenied === true && $location.path() == '/home')) {
         $rootScope.accessDenied = false;
@@ -438,9 +438,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   }])
 
   .run(['$rootScope', '$location', 'AuthService', function($rootScope, $location, AuthService) {
-    /*eslint-disable angular/on-watch */
-    $rootScope.$on('$locationChangeStart', function() {
-      /*eslint-enable angular/on-watch */
+
+    $rootScope.$on('$locationChangeStart', function() { //eslint-disable-line angular/on-watch
+
 
       // Retrieve the session from storage
       var consoleSession = AuthService.getSession();
