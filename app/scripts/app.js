@@ -410,9 +410,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   .run(['$rootScope', '$location', 'AuthService', function($rootScope, $location) {
 
     // on route change, check to see if user has appropriate permissions
-    var rootScope = $rootScope;
-    rootScope.$on('$routeChangeStart', function(scope, next) {
-
+    /*eslint-disable angular/on-watch */
+    $rootScope.$on('$routeChangeStart', function(scope, next) {
+      /*eslint-enable angular/on-watch */
       // set initial accessDenied value to false
       if (!($rootScope.accessDenied === true && $location.path() == '/home')) {
         $rootScope.accessDenied = false;
@@ -438,8 +438,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   }])
 
   .run(['$rootScope', '$location', 'AuthService', function($rootScope, $location, AuthService) {
-    var rootScope = $rootScope;
-    rootScope.$on('$locationChangeStart', function() {
+    /*eslint-disable angular/on-watch */
+    $rootScope.$on('$locationChangeStart', function() {
+      /*eslint-enable angular/on-watch */
 
       // Retrieve the session from storage
       var consoleSession = AuthService.getSession();
@@ -859,10 +860,10 @@ var DONATION = {DONOR: {}};
       return $http.get(url + '/configurations').then(function(configResponse) {
         app.constant('USERCONFIG', configResponse.data);
 
-        /*eslint-disable */
+        /*eslint-disable angular/module-getter */
         app.constant('UI', UI);
         app.constant('DONATION', DONATION);
-        /*eslint-enable */
+        /*eslint-enable angular/module-getter */
 
         var config = configResponse.data.configurations;
 
