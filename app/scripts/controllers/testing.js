@@ -764,7 +764,7 @@ angular.module('bsis')
 
   })
 
-  .controller('RecordTestResultsCtrl', function($scope, $location, TestingService, TTITESTS, BLOODTYPINGTESTS, TTIOUTCOME, BGSOUTCOME, ABO, RH, $q, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, TTITESTS, BLOODTYPINGTESTS, TTIOUTCOME, BGSOUTCOME, ABO, RH, $q, $filter, ngTableParams, $timeout, $routeParams) {
     var data = [{}];
     $scope.data = data;
     $scope.ttiTests = TTITESTS.options;
@@ -866,22 +866,20 @@ angular.module('bsis')
         updatedTestResults.testResults = {};
         updatedTestResults.testResults[aboTestId] = value.bloodAbo;
         updatedTestResults.testResults[rhTestId] = value.bloodRh == '+' ? 'POS' : 'NEG';
-        var request1 = TestingService.saveTestResults(updatedTestResults, function(response1) {
-          if (response1 === true) {
-            // save confirmation
-            if (value.confirm) {
-              var request2 = TestingService.saveBloodGroupMatchTestResults(value, function() {
-              });
-              requests.push(request2);
-            }
+        var request = TestingService.saveTestResults(updatedTestResults, angular.noop).then(function() {
+          if (value.confirm) {
+              // save confirmation last
+            return TestingService.saveBloodGroupMatchTestResults(value, angular.noop);
           }
         });
-        requests.push(request1);
+        requests.push(request);
       });
 
-      // FIXME: Handle errors
       $q.all(requests).then(function() {
         $location.path('/viewTestBatch/' + $routeParams.id);
+      }).catch(function(err) {
+        $log.error(err);
+        // TODO: handle the case where there have been errors
       }).finally(function() {
         $scope.savingTestResults = false;
       });
