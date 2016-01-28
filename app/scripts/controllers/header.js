@@ -173,50 +173,25 @@ angular.module('bsis')
     }
 
     var setMenuSelection = function() {
-
-      // if on donors page, set menu to DONORS
-      if (matchesRoutes($location.path(), donorRoutes)) {
+      if (matchesRoutes($location.path(), donorRoutes)) { // if on donors page, set menu to DONORS
         $scope.currentSection = 'DONORS';
-      }
-
-      // else if on components page, set menu to COMPONENTS
-      if (matchesRoutes($location.path(), componentsRoutes)) {
+      } else if (matchesRoutes($location.path(), componentsRoutes)) { // else if on components page, set menu to COMPONENTS
         $scope.currentSection = 'COMPONENTS';
-      }
-
-      // else if on testing page, set menu to TESTING
-      if (matchesRoutes($location.path(), testingRoutes)) {
+      } else if (matchesRoutes($location.path(), testingRoutes)) { // else if on testing page, set menu to TESTING
         $scope.currentSection = 'TESTING';
-      }
-
-      // else if on inventory page, set menu to INVENTORY
-      if (matchesRoutes($location.path(), inventoryRoutes)) {
+      } else if (matchesRoutes($location.path(), inventoryRoutes)) { // else if on inventory page, set menu to INVENTORY
         $scope.currentSection = 'INVENTORY';
-      }
-
-      // else if on labelling page, set menu to LABELLING
-      if (matchesRoutes($location.path(), labellingRoutes)) {
+      } else if (matchesRoutes($location.path(), labellingRoutes)) { // else if on labelling page, set menu to LABELLING
         $scope.currentSection = 'LABELLING';
-      }
-
-      // else if on reports page, set menu to REPORTS
-      if (matchesRoutes($location.path(), reportsRoutes)) {
+      } else if (matchesRoutes($location.path(), reportsRoutes)) { // else if on reports page, set menu to REPORTS
         $scope.currentSection = 'REPORTS';
-      }
-
-      // else if on mobile clinic page, set menu to MOBILE
-      if (matchesRoutes($location.path(), mobileRoutes)) {
+      } else if (matchesRoutes($location.path(), mobileRoutes)) { // else if on mobile clinic page, set menu to MOBILE
         $scope.currentSection = 'MOBILE CLINIC';
-      }
-
-      // else if on settings page, set menu to SETTINGS
-      if (matchesRoutes($location.path(), settingsRoutes)) {
+      } else if (matchesRoutes($location.path(), settingsRoutes)) { // else if on settings page, set menu to SETTINGS
         $scope.currentSection = 'SETTINGS';
-      } else {
-        // else set menu to HOME
+      } else { // else set menu to HOME
         $scope.currentSection = 'HOME';
       }
-
     };
 
     //set menu on location change
