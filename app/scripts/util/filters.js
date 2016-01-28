@@ -3,10 +3,10 @@
 angular.module('bsis')
 
   // if component has been processed or discarded, expiry status info is not relevant - display 'N/A' instead
-  .filter('expiryStatus', function () {
-    return function (input) {
-      if (input.status === "DISCARDED" || input.status === "PROCESSED" || input.status === "SPLIT") {
-        return "N/A";
+  .filter('expiryStatus', function() {
+    return function(input) {
+      if (input.status === 'DISCARDED' || input.status === 'PROCESSED' || input.status === 'SPLIT') {
+        return 'N/A';
       }
       return input.expiryStatus;
     };
@@ -18,23 +18,23 @@ angular.module('bsis')
     };
   })
 
-  .filter('bsisDate', function ($filter,DATEFORMAT) {
+  .filter('bsisDate', function($filter, DATEFORMAT) {
     var angularDateFilter = $filter('date');
-    return function (theDate) {
+    return function(theDate) {
       return angularDateFilter(theDate, DATEFORMAT);
     };
   })
 
-  .filter('bsisDateTime', function ($filter,DATETIMEFORMAT) {
+  .filter('bsisDateTime', function($filter, DATETIMEFORMAT) {
     var angularDateFilter = $filter('date');
-    return function (theDate) {
+    return function(theDate) {
       return angularDateFilter(theDate, DATETIMEFORMAT);
     };
   })
 
-  .filter('bsisTime', function ($filter,TIMEFORMAT) {
+  .filter('bsisTime', function($filter, TIMEFORMAT) {
     var angularDateFilter = $filter('date');
-    return function (theDate) {
+    return function(theDate) {
       return angularDateFilter(theDate, TIMEFORMAT);
     };
   })
@@ -58,8 +58,8 @@ angular.module('bsis')
   })
 
   .filter('mapTTIStatus', function() {
-    return function( input ) {
-      switch( input ){
+    return function(input) {
+      switch (input) {
         case 'TTI_SAFE':
           return 'Safe';
 
@@ -73,7 +73,3 @@ angular.module('bsis')
     };
   })
 ;
-
-
-
-

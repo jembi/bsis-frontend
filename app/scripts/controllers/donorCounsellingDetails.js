@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope, $window, $routeParams, DonorService, PostDonationCounsellingService, TestingService) {
+angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope, $window, $routeParams, $log, DonorService, PostDonationCounsellingService, TestingService) {
 
   $scope.postDonationCounselling = {};
   $scope.donation = {};
@@ -31,7 +31,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
       $scope.goBack();
       $scope.updatingCounselling = false;
     }, function(err) {
-      console.error(err);
+      $log.error(err);
       $scope.updatingCounselling = false;
     });
   };
@@ -40,19 +40,19 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
   PostDonationCounsellingService.getPostDonationCounsellingFormFields(function(response) {
     $scope.counsellingStatuses = response.counsellingStatuses;
   }, function(err) {
-    console.error(err);
+    $log.error(err);
   });
 
-  $scope.removeStatus = function () {
+  $scope.removeStatus = function() {
     $scope.updatingCounselling = true;
     PostDonationCounsellingService.updatePostDonationCounselling({
       id: $scope.postDonationCounselling.id,
       flaggedForCounselling: true
-    }, function(){
+    }, function() {
       $scope.goBack();
       $scope.updatingCounselling = false;
     }, function(err) {
-      console.error(err.data);
+      $log.error(err.data);
       $scope.updatingCounselling = false;
     });
   };
@@ -73,6 +73,6 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
       }
     });
   }, function(err) {
-    console.error(err);
+    $log.error(err);
   });
 });

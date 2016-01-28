@@ -2,15 +2,15 @@
 /* global readJSON: true */
 /* jshint expr: true */
 
-describe('Controller: ConfigurationsCtrl', function () {
+describe('Controller: ConfigurationsCtrl', function() {
 
   // load the controller's module
   beforeEach(module('bsis'));
 
 
   // setup system & user config constants
-  beforeEach(function () {
-    module('bsis', function ($provide) {
+  beforeEach(function() {
+    module('bsis', function($provide) {
       $provide.constant('SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json'));
       $provide.constant('USERCONFIG', readJSON('test/mockData/userconfig.json'));
     });
@@ -20,7 +20,7 @@ describe('Controller: ConfigurationsCtrl', function () {
   var scope, createController, httpBackend, location, mockData;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $httpBackend, $location) {
+  beforeEach(inject(function($controller, $rootScope, $httpBackend, $location) {
 
     mockData = readJSON('test/mockData/generalConfigs.json');
     httpBackend = $httpBackend;
@@ -31,7 +31,7 @@ describe('Controller: ConfigurationsCtrl', function () {
       scope = $rootScope.$new();
       location = $location;
 
-      return $controller('ConfigurationsCtrl', { $scope: scope, $location: location });
+      return $controller('ConfigurationsCtrl', {$scope: scope, $location: location});
     };
 
   }));
@@ -41,16 +41,16 @@ describe('Controller: ConfigurationsCtrl', function () {
     httpBackend.verifyNoOutstandingRequest();
   });
 
-  describe('*getConfigurations()', function () {
+  describe('*getConfigurations()', function() {
 
-    it('should attach a list of configurations to the scope', function(){
+    it('should attach a list of configurations to the scope', function() {
       httpBackend.expectGET(new RegExp('.*/configurations'));
       createController();
       httpBackend.flush();
       expect(scope.configurations.length).toBe(6);
     });
 
-    it('should open the manage config page to create a new config', function () {
+    it('should open the manage config page to create a new config', function() {
       httpBackend.expectGET(new RegExp('.*/configurations'));
 
       createController();
@@ -61,7 +61,7 @@ describe('Controller: ConfigurationsCtrl', function () {
 
     });
 
-    it('should open the manage config page to edit an existing config', function () {
+    it('should open the manage config page to edit an existing config', function() {
       httpBackend.expectGET(new RegExp('.*/configurations'));
       createController();
       httpBackend.flush();
@@ -86,8 +86,8 @@ describe('Controller: ManageConfigurationsCtrl', function() {
 
 
   // setup system & user config constants
-  beforeEach(function () {
-    module('bsis', function ($provide) {
+  beforeEach(function() {
+    module('bsis', function($provide) {
       $provide.constant('SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json'));
       $provide.constant('USERCONFIG', readJSON('test/mockData/userconfig.json'));
     });
@@ -98,7 +98,7 @@ describe('Controller: ManageConfigurationsCtrl', function() {
   var scope, createController, httpBackend, location, mockData;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $httpBackend, $location) {
+  beforeEach(inject(function($controller, $rootScope, $httpBackend, $location) {
 
     mockData = readJSON('test/mockData/generalConfigs.json');
     httpBackend = $httpBackend;
@@ -106,12 +106,11 @@ describe('Controller: ManageConfigurationsCtrl', function() {
     httpBackend.when('GET', new RegExp('.*/configurations/1')).respond(mockData[0]);
 
 
-
     createController = function() {
       scope = $rootScope.$new();
       location = $location;
 
-      return $controller('ManageConfigurationsCtrl', { $scope: scope, $location: location });
+      return $controller('ManageConfigurationsCtrl', {$scope: scope, $location: location});
     };
 
   }));
@@ -121,11 +120,11 @@ describe('Controller: ManageConfigurationsCtrl', function() {
     httpBackend.verifyNoOutstandingRequest();
   });
 
-  describe('*saveConfiguration()', function (){
+  describe('*saveConfiguration()', function() {
 
-    it('should route to the appropriate method when the form is submitted', function () {
+    it('should route to the appropriate method when the form is submitted', function() {
       createController();
-     
+
 
       spyOn(scope, 'addConfiguration');
       spyOn(scope, 'updateConfiguration');
@@ -134,13 +133,13 @@ describe('Controller: ManageConfigurationsCtrl', function() {
         name: 'name',
         description: 'description',
         value: 'value',
-        dataType : {
+        dataType: {
           id: 1,
           datatype: 'text'
         }
       };
 
-      var configurationForm = {$valid:true};
+      var configurationForm = {$valid: true};
       scope.saveConfiguration(configuration, configurationForm);
       expect(scope.addConfiguration).toHaveBeenCalledWith(configuration, configurationForm);
 

@@ -1,44 +1,44 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('PackTypesService', function ($http, Api, $filter) {
+  .factory('PackTypesService', function($http, Api) {
     var packTypeObj = {};
     return {
 
-      getPackTypes: function (response) {
-        Api.PackTypes.get({}, function (apiResponse) {
+      getPackTypes: function(response) {
+        Api.PackTypes.get({}, function(apiResponse) {
           response(apiResponse.allPackTypes);
-        }, function () {
+        }, function() {
           response(false);
         });
       },
 
-      getPackTypeById: function (id, onSuccess, onError) {
-       Api.PackTypes.get({id: id}, function (apiResponse) {
+      getPackTypeById: function(id, onSuccess, onError) {
+        Api.PackTypes.get({id: id}, function(apiResponse) {
           onSuccess(apiResponse.packtype);
-        }, function (err) {
+        }, function(err) {
           onError(err.data);
         });
       },
 
-      setPackType: function (packType) {
+      setPackType: function(packType) {
         packTypeObj = packType;
       },
 
-      getPackType: function () {
+      getPackType: function() {
         return packTypeObj;
       },
 
-      addPackType: function (packType, onSuccess, onError) {
+      addPackType: function(packType, onSuccess, onError) {
         var addPackType = new Api.PackTypes();
         angular.copy(packType, addPackType);
-        addPackType.$save(onSuccess, function (err) {
+        addPackType.$save(onSuccess, function(err) {
           onError(err.data);
         });
       },
 
-      updatePackType: function (packType, onSuccess, onError) {
-        Api.PackTypes.update({id: packType.id}, packType, onSuccess, function (err) {
+      updatePackType: function(packType, onSuccess, onError) {
+        Api.PackTypes.update({id: packType.id}, packType, onSuccess, function(err) {
           onError(err.data);
         });
       }

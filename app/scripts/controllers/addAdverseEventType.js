@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('AddAdverseEventTypeCtrl', function($scope, $location, AdverseEventsService) {
+angular.module('bsis').controller('AddAdverseEventTypeCtrl', function($scope, $location, $log, AdverseEventsService) {
 
   $scope.adverseEventType = {
     name: '',
@@ -35,7 +35,7 @@ angular.module('bsis').controller('AddAdverseEventTypeCtrl', function($scope, $l
       if (response.data && response.data.name) {
         form.name.$setValidity('duplicate', false);
       } else {
-        console.error(response);
+        $log.error(response);
       }
       $scope.savingAdverseEventType = false;
     });

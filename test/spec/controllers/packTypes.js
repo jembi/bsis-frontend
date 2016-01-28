@@ -2,15 +2,15 @@
 /* global readJSON: true */
 /* jshint expr: true */
 
-describe('Controller: PackTypesCtrl', function () {
+describe('Controller: PackTypesCtrl', function() {
 
   // load the controller's module
   beforeEach(module('bsis'));
 
 
   // setup system & user packType constants
-  beforeEach(function () {
-    module('bsis', function ($provide) {
+  beforeEach(function() {
+    module('bsis', function($provide) {
       $provide.constant('SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json'));
       $provide.constant('USERCONFIG', readJSON('test/mockData/userconfig.json'));
     });
@@ -20,7 +20,7 @@ describe('Controller: PackTypesCtrl', function () {
   var scope, createController, httpBackend, location, mockData;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $httpBackend, $location) {
+  beforeEach(inject(function($controller, $rootScope, $httpBackend, $location) {
 
     mockData = readJSON('test/mockData/packTypes.json');
     httpBackend = $httpBackend;
@@ -30,7 +30,7 @@ describe('Controller: PackTypesCtrl', function () {
       scope = $rootScope.$new();
       location = $location;
 
-      return $controller('PackTypesCtrl', { $scope: scope, $location: location });
+      return $controller('PackTypesCtrl', {$scope: scope, $location: location});
     };
 
   }));
@@ -40,16 +40,16 @@ describe('Controller: PackTypesCtrl', function () {
     httpBackend.verifyNoOutstandingRequest();
   });
 
-  describe('*getPackTypes()', function () {
+  describe('*getPackTypes()', function() {
 
-    it('should attach a list of packTypes to the scope', function(){
+    it('should attach a list of packTypes to the scope', function() {
       httpBackend.expectGET(new RegExp('.*/packtypes'));
       createController();
       httpBackend.flush();
       expect(scope.packTypes.length).toBe(8);
     });
 
-    it('should open the manage packType page to create a new packType', function () {
+    it('should open the manage packType page to create a new packType', function() {
       httpBackend.expectGET(new RegExp('.*/packtypes'));
       createController();
       httpBackend.flush();
@@ -59,7 +59,7 @@ describe('Controller: PackTypesCtrl', function () {
 
     });
 
-    it('should open the manage packType page to edit an existing packType', function () {
+    it('should open the manage packType page to edit an existing packType', function() {
       httpBackend.expectGET(new RegExp('.*/packtypes'));
       createController();
       httpBackend.flush();
@@ -80,8 +80,8 @@ describe('Controller: ManagePackTypesCtrl', function() {
 
 
   // setup system & user packType constants
-  beforeEach(function () {
-    module('bsis', function ($provide) {
+  beforeEach(function() {
+    module('bsis', function($provide) {
       $provide.constant('SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json'));
       $provide.constant('USERCONFIG', readJSON('test/mockData/userconfig.json'));
     });
@@ -92,7 +92,7 @@ describe('Controller: ManagePackTypesCtrl', function() {
   var scope, createController, httpBackend, location, mockData;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $httpBackend, $location) {
+  beforeEach(inject(function($controller, $rootScope, $httpBackend, $location) {
 
     mockData = readJSON('test/mockData/packTypes.json');
     httpBackend = $httpBackend;
@@ -100,12 +100,11 @@ describe('Controller: ManagePackTypesCtrl', function() {
     httpBackend.when('GET', new RegExp('.*/componenttypes')).respond(mockData);
 
 
-
     createController = function() {
       scope = $rootScope.$new();
       location = $location;
 
-      return $controller('ManagePackTypesCtrl', { $scope: scope, $location: location });
+      return $controller('ManagePackTypesCtrl', {$scope: scope, $location: location});
     };
 
   }));
@@ -115,9 +114,9 @@ describe('Controller: ManagePackTypesCtrl', function() {
     httpBackend.verifyNoOutstandingRequest();
   });
 
-  describe('*savePackType()', function (){
+  describe('*savePackType()', function() {
 
-    it('should route to the appropriate method when the form is submitted', function () {
+    it('should route to the appropriate method when the form is submitted', function() {
       createController();
       httpBackend.flush();
       spyOn(scope, 'addPackType');
@@ -133,7 +132,7 @@ describe('Controller: ManagePackTypesCtrl', function() {
         canSplit: null
       };
 
-      var packTypeForm = {$valid:true};
+      var packTypeForm = {$valid: true};
       scope.savePackType(packType, packTypeForm);
       expect(scope.addPackType).toHaveBeenCalledWith(packType, packTypeForm);
 

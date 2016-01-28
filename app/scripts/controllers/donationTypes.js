@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonationTypesCtrl', function ($scope, $location, DonationTypesService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
+  .controller('DonationTypesCtrl', function($scope, $location, DonationTypesService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -10,40 +10,38 @@ angular.module('bsis')
     $scope.data = data;
     $scope.donationTypes = {};
 
-    $scope.clear = function () {
+    $scope.clear = function() {
 
     };
 
-    $scope.clearForm = function(form){
+    $scope.clearForm = function(form) {
       form.$setPristine();
       $scope.submitted = '';
     };
 
-    $scope.getDonationTypes = function () {
-      DonationTypesService.getDonationTypes(function(response){
-        if (response !== false){
+    $scope.getDonationTypes = function() {
+      DonationTypesService.getDonationTypes(function(response) {
+        if (response !== false) {
           data = response;
           $scope.data = data;
           $scope.donationTypes = data;
           $scope.donationTypesCount = $scope.donationTypes.length;
 
         }
-        else{
-        }
       });
     };
 
     $scope.donationTypesTableParams = new ngTableParams({
-        page: 1,            // show first page
-        count: 6,          // count per page
-        filter: {},
-        sorting: {}
-      },
+      page: 1,            // show first page
+      count: 6,          // count per page
+      filter: {},
+      sorting: {}
+    },
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
         total: data.length, // length of data
-        getData: function ($defer, params) {
+        getData: function($defer, params) {
           var filteredData = params.filter() ?
             $filter('filter')(data, params.filter()) : data;
           var orderedData = params.sorting() ?
@@ -53,45 +51,44 @@ angular.module('bsis')
         }
       });
 
-    $scope.$watch("data", function () {
-      $timeout(function () {
+    $scope.$watch('data', function() {
+      $timeout(function() {
         $scope.donationTypesTableParams.reload();
       });
     });
 
-    $scope.addNewDonationType = function () {
-      DonationTypesService.setDonationType("");
+    $scope.addNewDonationType = function() {
+      DonationTypesService.setDonationType('');
       $location.path('/manageDonationType');
     };
 
-    $scope.manageDonationType = function (donationType) {
-      console.log(donationType);
+    $scope.manageDonationType = function(donationType) {
       $scope.donationType = donationType;
       DonationTypesService.setDonationType(donationType);
-      $location.path("/manageDonationType/" + donationType.id);
+      $location.path('/manageDonationType/' + donationType.id);
     };
 
     $scope.getDonationTypes();
 
   })
 
-  .controller('ManageDonationTypesCtrl', function ($scope, $location, DonationTypesService, ICONS, PERMISSIONS, $routeParams){
+  .controller('ManageDonationTypesCtrl', function($scope, $location, DonationTypesService, ICONS, PERMISSIONS, $routeParams) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageDonationType';
 
-    $scope.getDonationType = function () {
-      DonationTypesService.getDonationTypeById($routeParams.id, function (donationType){
+    $scope.getDonationType = function() {
+      DonationTypesService.getDonationTypeById($routeParams.id, function(donationType) {
         $scope.donationType = donationType;
-      }, function (err){
+      }, function(err) {
         $scope.err = err;
       });
     };
 
 
-    if (!$routeParams.id){
+    if (!$routeParams.id) {
       $scope.donationType = {
-        isDeleted : false
+        isDeleted: false
       };
     } else {
       $scope.getDonationType();
@@ -99,17 +96,15 @@ angular.module('bsis')
     }
 
 
-    $scope.saveDonationType = function (donationType, donationTypeForm) {
+    $scope.saveDonationType = function(donationType, donationTypeForm) {
 
       if (donationTypeForm.$valid) {
-        if (typeof(donationType) != 'undefined') {
-          if (typeof(donationType.id) != 'undefined') {
+        if (angular.isDefined(donationType)) {
+          if (angular.isDefined(donationType.id)) {
             $scope.updateDonationType(donationType, donationTypeForm);
           } else {
             $scope.addDonationType(donationType, donationTypeForm);
           }
-        } else {
-
         }
       } else {
         $scope.submitted = true;
@@ -119,17 +114,17 @@ angular.module('bsis')
     $scope.serverError = {};
 
 
-    $scope.updateDonationType = function (donationType, donationTypeForm) {
+    $scope.updateDonationType = function(donationType, donationTypeForm) {
       if (donationTypeForm.$valid) {
 
         $scope.savingDonationType = true;
-        DonationTypesService.updateDonationType(donationType, function (response, err) {
-          if (response !== false){
+        DonationTypesService.updateDonationType(donationType, function(response, err) {
+          if (response !== false) {
             $scope.go('/donationTypes');
-          } else{
+          } else {
 
-            if(err.type){
-              $scope.typeInvalid = "ng-invalid";
+            if (err.type) {
+              $scope.typeInvalid = 'ng-invalid';
               $scope.serverError.type = err.type;
             }
           }
@@ -141,12 +136,12 @@ angular.module('bsis')
     };
 
 
-    $scope.addDonationType = function (donationType, donationTypeForm) {
+    $scope.addDonationType = function(donationType, donationTypeForm) {
 
       if (donationTypeForm.$valid) {
         donationType.isDeleted = false;
         $scope.savingDonationType = true;
-        DonationTypesService.addDonationType(donationType, function (response, err) {
+        DonationTypesService.addDonationType(donationType, function(response, err) {
           if (response !== false) {
             $scope.donationType = {
               donationType: '',
@@ -155,33 +150,31 @@ angular.module('bsis')
             donationTypeForm.$setPristine();
             $scope.submitted = '';
             $scope.go('/donationTypes');
-          }
-          else {
-            if(err.type){
-              $scope.typeInvalid = "ng-invalid";
+          } else {
+            if (err.type) {
+              $scope.typeInvalid = 'ng-invalid';
               $scope.serverError.type = err.type;
             }
           }
           $scope.savingDonationType = false;
         });
-      }
-      else {
+      } else {
         $scope.submitted = true;
       }
     };
 
-    $scope.clearForm = function (form) {
+    $scope.clearForm = function(form) {
       form.$setPristine();
       $scope.submitted = '';
     };
 
-    $scope.cancel = function (form) {
+    $scope.cancel = function(form) {
       $scope.clearForm(form);
-      $location.path("/donationTypes");
+      $location.path('/donationTypes');
     };
 
 
-    $scope.go = function (path) {
+    $scope.go = function(path) {
       $location.path(path);
     };
   });

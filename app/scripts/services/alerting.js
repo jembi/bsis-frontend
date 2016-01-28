@@ -4,30 +4,30 @@
 /* <alert ng-repeat="alert in alerts.top" type="alert.type" close="closeAlert('top', $index)">{{alert.msg}}</alert> */
 
 angular.module('bsis')
-  .factory('Alerting', function () {
+  .factory('Alerting', function() {
 
     var alerts = {};
     var persistErrors;
 
     return {
-      alertAddMsg: function (persistErrorMessage, alertScope, alertType, alertMsg) {
+      alertAddMsg: function(persistErrorMessage, alertScope, alertType, alertMsg) {
         persistErrors = persistErrorMessage;
         // check if alertScope object exists
-        if ( !alerts[alertScope] ){
+        if (!alerts[alertScope]) {
           alerts[alertScope] = [];
         }
 
         // create alertObject
-        var alertObject = { type: alertType, msg: alertMsg };
+        var alertObject = {type: alertType, msg: alertMsg};
 
         // push alertObject to appropriate alertScope
         alerts[alertScope].push(alertObject);
 
       },
-      alertAddServerMsg: function (errCode) {
+      alertAddServerMsg: function(errCode) {
 
         var alertMsg;
-        switch (errCode){
+        switch (errCode) {
           case 403:
             alertMsg = 'The request has been forbidden by the server. Please contact the server administrator';
             break;
@@ -39,55 +39,57 @@ angular.module('bsis')
         }
 
         // check if server object exists
-        if ( !alerts.server ){
+        if (!alerts.server) {
           alerts.server = [];
         }
 
         // create alertObject
-        var alertObject = { type: 'danger', msg: alertMsg };
+        var alertObject = {type: 'danger', msg: alertMsg};
 
         // push alertObject to appropriate alertScope
         alerts.server.push(alertObject);
 
       },
-      alertReset: function (alertScope) {
+      alertReset: function(alertScope) {
 
-        if( !alertScope ){
+        if (!alertScope) {
           // reset the alerts objects
           alerts = {};
-        }else{
-          if ( alerts ){
+        } else {
+          if (alerts) {
             // reset the alerts objects
             alerts[alertScope] = undefined;
           }
         }
 
       },
-      alertClose: function (alertScope, index) {
+      alertClose: function(alertScope, index) {
         alerts[alertScope].splice(index, 1);
       },
 
-      getAlerts: function () {
+      getAlerts: function() {
         persistErrors = false; //Reset after showing errors
         return alerts;
       },
 
-      setPersistErrors: function (persist) {
+      setPersistErrors: function(persist) {
         persistErrors = persist;
       },
 
-      getPersistErrors: function () {
+      getPersistErrors: function() {
         return persistErrors;
       }
     };
 
   })
-  .run( function($rootScope, $location, Alerting) {
+  .run(function($rootScope, $location, Alerting) {
+
+    var rootScope = $rootScope;
 
     // register listener to watch route changes
-    $rootScope.$on( '$routeChangeStart', function() {
+    rootScope.$on('$routeChangeStart', function() {
       // reset the alert object for each route changed
-      if (!Alerting.getPersistErrors()){
+      if (!Alerting.getPersistErrors()) {
         Alerting.alertReset();
       }
 

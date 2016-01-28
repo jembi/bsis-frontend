@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('Authinterceptor', function () {
+  .factory('Authinterceptor', function() {
 
     var credentials = localStorage.getItem('auth');
 
@@ -21,7 +21,7 @@ angular.module('bsis')
         return credentials;
       },
 
-      request: function (config) {
+      request: function(config) {
 
         if (!credentials) {
           return config;
@@ -31,6 +31,6 @@ angular.module('bsis')
         return config;
       }
     };
-  }).config(function ($httpProvider) {
+  }).config(function($httpProvider) {
     $httpProvider.interceptors.push('Authinterceptor');
   });

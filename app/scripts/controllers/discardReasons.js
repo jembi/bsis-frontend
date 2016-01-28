@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DiscardReasonsCtrl', function ($scope, $location, DiscardReasonsService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
+  .controller('DiscardReasonsCtrl', function($scope, $location, DiscardReasonsService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -10,17 +10,17 @@ angular.module('bsis')
     $scope.data = data;
     $scope.discardReasons = {};
 
-    $scope.clear = function () {
+    $scope.clear = function() {
 
     };
 
-    $scope.clearForm = function (form) {
+    $scope.clearForm = function(form) {
       form.$setPristine();
       $scope.submitted = '';
     };
 
-    $scope.getDiscards = function () {
-      DiscardReasonsService.getDiscards(function (response) {
+    $scope.getDiscards = function() {
+      DiscardReasonsService.getDiscards(function(response) {
         if (response !== false) {
           data = response;
           $scope.data = data;
@@ -28,22 +28,20 @@ angular.module('bsis')
           $scope.discardReasonsCount = $scope.discardReasons.length;
 
         }
-        else {
-        }
       });
     };
 
     $scope.discardsTableParams = new ngTableParams({
-        page: 1,            // show first page
-        count: 6,          // count per page
-        filter: {},
-        sorting: {}
-      },
+      page: 1,            // show first page
+      count: 6,          // count per page
+      filter: {},
+      sorting: {}
+    },
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
         total: data.length, // length of data
-        getData: function ($defer, params) {
+        getData: function($defer, params) {
           var filteredData = params.filter() ?
             $filter('filter')(data, params.filter()) : data;
           var orderedData = params.sorting() ?
@@ -53,43 +51,43 @@ angular.module('bsis')
         }
       });
 
-    $scope.$watch("data", function () {
-      $timeout(function () {
+    $scope.$watch('data', function() {
+      $timeout(function() {
         $scope.discardsTableParams.reload();
       });
     });
 
-    $scope.addNewDiscardReason = function () {
-      DiscardReasonsService.setDiscardReason("");
+    $scope.addNewDiscardReason = function() {
+      DiscardReasonsService.setDiscardReason('');
       $location.path('/manageDiscardReason');
     };
 
-    $scope.manageDiscardReason = function (discard) {
+    $scope.manageDiscardReason = function(discard) {
       $scope.discard = discard;
       DiscardReasonsService.setDiscardReason(discard);
-      $location.path("/manageDiscardReason/" + discard.id);
+      $location.path('/manageDiscardReason/' + discard.id);
     };
 
     $scope.getDiscards();
 
   })
 
-  .controller('ManageDiscardReasonsCtrl', function ($scope, $location, DiscardReasonsService, ICONS, PERMISSIONS, DATATYPES, $routeParams) {
+  .controller('ManageDiscardReasonsCtrl', function($scope, $location, DiscardReasonsService, ICONS, PERMISSIONS, DATATYPES, $routeParams) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageDiscardReason';
 
-    $scope.getDiscardReason = function (){
-      DiscardReasonsService.getDiscardReasonById($routeParams.id, function(discardReason){
+    $scope.getDiscardReason = function() {
+      DiscardReasonsService.getDiscardReasonById($routeParams.id, function(discardReason) {
         $scope.discard = discardReason;
-      }, function (err) {
+      }, function(err) {
         $scope.err = err;
       });
     };
 
     if (!$routeParams.id) {
       $scope.discard = {
-        isDeleted : false
+        isDeleted: false
       };
     } else {
       $scope.getDiscardReason();
@@ -98,17 +96,15 @@ angular.module('bsis')
 
     $scope.dataTypes = DATATYPES.options;
 
-    $scope.saveDiscardReason = function (discard, discardForm) {
+    $scope.saveDiscardReason = function(discard, discardForm) {
 
       if (discardForm.$valid) {
-        if (typeof(discard) != 'undefined') {
-          if (typeof(discard.id) != 'undefined') {
+        if (angular.isDefined(discard)) {
+          if (angular.isDefined(discard.id)) {
             $scope.updateDiscardReason(discard, discardForm);
           } else {
             $scope.addDiscardReason(discard, discardForm);
           }
-        } else {
-
         }
       } else {
         $scope.submitted = true;
@@ -118,17 +114,17 @@ angular.module('bsis')
     $scope.serverError = {};
 
 
-    $scope.updateDiscardReason = function (discard, discardForm) {
+    $scope.updateDiscardReason = function(discard, discardForm) {
       if (discardForm.$valid) {
 
         $scope.savingDiscardReason = true;
-        DiscardReasonsService.updateDiscardReason(discard, function (response, err) {
+        DiscardReasonsService.updateDiscardReason(discard, function(response, err) {
           if (response !== false) {
             $scope.go('/discardReasons');
           } else {
 
             if (err.reason) {
-              $scope.discardReasonInvalid = "ng-invalid";
+              $scope.discardReasonInvalid = 'ng-invalid';
               $scope.serverError.reason = err.reason;
             }
           }
@@ -140,12 +136,12 @@ angular.module('bsis')
     };
 
 
-    $scope.addDiscardReason = function (discard, discardForm) {
+    $scope.addDiscardReason = function(discard, discardForm) {
 
       if (discardForm.$valid) {
         discard.isDeleted = false;
         $scope.savingDiscardReason = true;
-        DiscardReasonsService.addDiscardReason(discard, function (response, err) {
+        DiscardReasonsService.addDiscardReason(discard, function(response, err) {
           if (response !== false) {
             $scope.discard = {
               reason: '',
@@ -154,33 +150,31 @@ angular.module('bsis')
             discardForm.$setPristine();
             $scope.submitted = '';
             $scope.go('/discardReasons');
-          }
-          else {
+          } else {
             if (err.reason) {
-              $scope.discardReasonInvalid = "ng-invalid";
+              $scope.discardReasonInvalid = 'ng-invalid';
               $scope.serverError.reason = err.reason;
             }
           }
           $scope.savingDiscardReason = false;
         });
-      }
-      else {
+      } else {
         $scope.submitted = true;
       }
     };
 
-    $scope.clearForm = function (form) {
+    $scope.clearForm = function(form) {
       form.$setPristine();
       $scope.submitted = '';
     };
 
-    $scope.cancel = function (form) {
+    $scope.cancel = function(form) {
       $scope.clearForm(form);
-      $location.path("/discardReasons");
+      $location.path('/discardReasons');
     };
 
 
-    $scope.go = function (path) {
+    $scope.go = function(path) {
       $location.path(path);
     };
   });

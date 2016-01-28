@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('MobileCtrl', function ($scope, $location, MobileService, ICONS, PERMISSIONS) {
+  .controller('MobileCtrl', function($scope, $location, MobileService, ICONS, PERMISSIONS) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -13,10 +13,8 @@ angular.module('bsis')
         return true;
       } else if ($location.path() === path) {
         return true;
-      } else if ($location.path() === "/mobile" && path === "/mobile") {
-        return true;
       } else {
-        return false;
+        return !!($location.path() === '/mobile' && path === '/mobile');
       }
     };
   });

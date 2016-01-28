@@ -163,13 +163,13 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
       };
     },
 
-    onRegisterApi: function(gridApi) { 
+    onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;
     }
   };
 
   $scope.onSearch = function(form) {
-    
+
     if (form && form.$invalid) {
       return;
     }

@@ -6,7 +6,9 @@
         <div class="panel-body">
 
             <p>
-                <em> {{packTypesCount}} pack type(s) found </em> <span has-permission="{{permissions.MANAGE_PACK_TYPES}}"> | <em> <a href="" ng-click="addNewPackType()" >Add New Pack Type</a></em> </span>
+                <em> {{packTypesCount}} pack type(s) found </em> <span
+                    has-permission="{{permissions.MANAGE_PACK_TYPES}}"> | <em> <a href="" ng-click="addNewPackType()">Add
+                New Pack Type</a></em> </span>
             </p>
 
 
@@ -19,14 +21,16 @@
                     <td data-title="'Pack Type'" header-class="text-left" class="text-center">
                         {{pack.packType}}
                     </td>
-                    <td data-title="'Period between donations'"  header-class="text-left" class="text-center">
+                    <td data-title="'Period between donations'" header-class="text-left" class="text-center">
                         {{pack.periodBetweenDonations}}
                     </td>
-                    <td data-title="'Test Sample Produced'" header-class="text-left" class="text-center" sortable="'testSampleProduced'">
+                    <td data-title="'Test Sample Produced'" header-class="text-left" class="text-center"
+                        sortable="'testSampleProduced'">
                         <span ng-if="pack.testSampleProduced"><i class="fa {{icons.SQUARECHECK}}"></i></span>
                         <span ng-if="!pack.testSampleProduced"><i class="fa {{icons.SQUARE}}"></i></span>
                     </td>
-                    <td data-title="'Components Produced'" header-class="text-left" class="text-center" sortable="'countAsDonation'">
+                    <td data-title="'Components Produced'" header-class="text-left" class="text-center"
+                        sortable="'countAsDonation'">
                         <span ng-if="pack.countAsDonation == true"><i class="fa {{icons.SQUARECHECK}}"></i></span>
                         <span ng-if="pack.countAsDonation == false"><i class="fa {{icons.SQUARE}}"></i></span>
                     </td>

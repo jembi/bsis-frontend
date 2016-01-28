@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ConfigurationsCtrl', function ($scope, $location, ConfigurationsService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
+  .controller('ConfigurationsCtrl', function($scope, $location, ConfigurationsService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -10,25 +10,23 @@ angular.module('bsis')
     $scope.data = data;
     $scope.configurations = {};
 
-    $scope.clear = function () {
+    $scope.clear = function() {
 
     };
 
-    $scope.clearForm = function(form){
+    $scope.clearForm = function(form) {
       form.$setPristine();
       $scope.submitted = '';
     };
 
-    $scope.getConfigurations = function () {
-      ConfigurationsService.getConfigurations(function(response){
-        if (response !== false){
+    $scope.getConfigurations = function() {
+      ConfigurationsService.getConfigurations(function(response) {
+        if (response !== false) {
           data = response;
           $scope.data = data;
           $scope.configurations = data;
           $scope.configurationsCount = $scope.configurations.length;
 
-        }
-        else{
         }
       });
     };
@@ -39,52 +37,52 @@ angular.module('bsis')
       filter: {},
       sorting: {}
     },
-    {
-      defaultSort: 'asc',
-      counts: [], // hide page counts control
-      total: data.length, // length of data
-      getData: function ($defer, params) {
-        var filteredData = params.filter() ?
-          $filter('filter')(data, params.filter()) : data;
-        var orderedData = params.sorting() ?
-          $filter('orderBy')(filteredData, params.orderBy()) : data;
-        params.total(orderedData.length); // set total for pagination
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      }
-    });
+      {
+        defaultSort: 'asc',
+        counts: [], // hide page counts control
+        total: data.length, // length of data
+        getData: function($defer, params) {
+          var filteredData = params.filter() ?
+            $filter('filter')(data, params.filter()) : data;
+          var orderedData = params.sorting() ?
+            $filter('orderBy')(filteredData, params.orderBy()) : data;
+          params.total(orderedData.length); // set total for pagination
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
 
-    $scope.$watch("data", function () {
-      $timeout(function () {
+    $scope.$watch('data', function() {
+      $timeout(function() {
         $scope.configurationsTableParams.reload();
       });
     });
 
-    $scope.addNewConfiguration = function () {
-      ConfigurationsService.setConfiguration("");
+    $scope.addNewConfiguration = function() {
+      ConfigurationsService.setConfiguration('');
       $location.path('/manageConfiguration');
     };
 
-    $scope.manageConfiguration = function (configuration) {
+    $scope.manageConfiguration = function(configuration) {
       $scope.configuration = configuration;
       ConfigurationsService.setConfiguration(configuration);
-      $location.path("/manageConfiguration/" + configuration.id);
+      $location.path('/manageConfiguration/' + configuration.id);
     };
 
     $scope.getConfigurations();
 
   })
 
-  .controller('ManageConfigurationsCtrl', function ($scope, $location, ConfigurationsService, ICONS, PERMISSIONS, DATATYPES, $routeParams){
+  .controller('ManageConfigurationsCtrl', function($scope, $location, $log, ConfigurationsService, ICONS, PERMISSIONS, DATATYPES, $routeParams) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageConfiguration';
 
-    $scope.getConfig = function () {
-      ConfigurationsService.getConfigurationById($routeParams.id, function (configuration) {
+    $scope.getConfig = function() {
+      ConfigurationsService.getConfigurationById($routeParams.id, function(configuration) {
         $scope.configuration = configuration;
         $scope.disableConfigurationname = true;
-      }, function (err) {
-        console.log(err);
+      }, function(err) {
+        $log.log(err);
       });
     };
 
@@ -95,20 +93,17 @@ angular.module('bsis')
     }
 
 
-
     $scope.dataTypes = DATATYPES.options;
 
-    $scope.saveConfiguration = function (configuration, configurationForm) {
+    $scope.saveConfiguration = function(configuration, configurationForm) {
 
       if (configurationForm.$valid) {
-        if (typeof(configuration) != 'undefined') {
-          if (typeof(configuration.id) != 'undefined') {
+        if (angular.isDefined(configuration)) {
+          if (angular.isDefined(configuration.id)) {
             $scope.updateConfiguration(configuration, configurationForm);
           } else {
             $scope.addConfiguration(configuration, configurationForm);
           }
-        } else {
-
         }
       } else {
         $scope.submitted = true;
@@ -119,27 +114,27 @@ angular.module('bsis')
 
     $scope.$watch('configuration.dataType.id', function(newValue) {
       var indexVal = parseInt(newValue) - 1;
-      if (!isNaN(indexVal)){
+      if (!isNaN(indexVal)) {
         $scope.datatype = DATATYPES.options[indexVal].datatype;
       }
     });
 
-    $scope.updateConfiguration = function (configuration, configurationForm) {
+    $scope.updateConfiguration = function(configuration, configurationForm) {
       if (configurationForm.$valid) {
 
         $scope.savingConfiguration = true;
-        ConfigurationsService.updateConfiguration(configuration, function (response, err) {
-          if (response !== false){
+        ConfigurationsService.updateConfiguration(configuration, function(response, err) {
+          if (response !== false) {
             $scope.go('/configurations');
-          } else{
+          } else {
 
-            if(err.value){
-              $scope.configurationValueInvalid = "ng-invalid";
+            if (err.value) {
+              $scope.configurationValueInvalid = 'ng-invalid';
               $scope.serverError.value = err.value;
             }
 
-            if(err.name){
-              $scope.configurationNameInvalid = "ng-invalid";
+            if (err.name) {
+              $scope.configurationNameInvalid = 'ng-invalid';
               $scope.serverError.name = err.name;
             }
           }
@@ -151,10 +146,10 @@ angular.module('bsis')
     };
 
 
-    $scope.addConfiguration = function (configuration, configurationForm) {
+    $scope.addConfiguration = function(configuration, configurationForm) {
 
       if (configurationForm.$valid) {
-        ConfigurationsService.addConfiguration(configuration, function (response, err) {
+        ConfigurationsService.addConfiguration(configuration, function(response, err) {
           if (response !== false) {
             $scope.configuration = {
               name: '',
@@ -163,37 +158,35 @@ angular.module('bsis')
             configurationForm.$setPristine();
             $scope.submitted = '';
             $scope.go('/configurations');
-          }
-          else {
-            if(err.value){
-              $scope.configurationValueInvalid = "ng-invalid";
+          } else {
+            if (err.value) {
+              $scope.configurationValueInvalid = 'ng-invalid';
               $scope.serverError.value = err.value;
             }
 
-            if(err.name){
-              $scope.configurationNameInvalid = "ng-invalid";
+            if (err.name) {
+              $scope.configurationNameInvalid = 'ng-invalid';
               $scope.serverError.name = err.name;
             }
           }
         });
-      }
-      else {
+      } else {
         $scope.submitted = true;
       }
     };
 
-    $scope.clearForm = function (form) {
+    $scope.clearForm = function(form) {
       form.$setPristine();
       $scope.submitted = '';
     };
 
-    $scope.cancel = function (form) {
+    $scope.cancel = function(form) {
       $scope.clearForm(form);
-      $location.path("/configurations");
+      $location.path('/configurations');
     };
 
 
-    $scope.go = function (path) {
+    $scope.go = function(path) {
       $location.path(path);
     };
   });
