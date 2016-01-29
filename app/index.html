@@ -1,12 +1,16 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html  > <!--<![endif]-->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html> <!--<![endif]-->
 
-  <head>
+<head>
 
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,106 +38,106 @@
     <link href="css/pace-minimal.css" rel="stylesheet">
     <!-- endbuild -->
 
-  </head>
+</head>
 
-  <body ng-cloak style="padding-bottom: 0px;">
+<body ng-cloak style="padding-bottom: 0px;">
 
-    <div ng-if="displayHeader">
-      <div ng-include="'views/header.html'"></div>
-    </div>
+<div ng-if="displayHeader">
+    <div ng-include="'views/header.html'"></div>
+</div>
 
-    <div id="wrap">
+<div id="wrap">
 
-      <!-- angular templating -->
-      <!-- this is where content will be injected -->
-      <div ng-view></div>
+    <!-- angular templating -->
+    <!-- this is where content will be injected -->
+    <div ng-view></div>
 
-    </div>
+</div>
 
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-loader/angular-loader.js"></script>
-    <script src="bower_components/angular-messages/angular-messages.js"></script>
-    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-tooltips/dist/angular-tooltips.min.js"></script>
-    <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
-    <script src="bower_components/angular-ui-select/dist/select.js"></script>
-    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-    <script src="bower_components/checklist-model/checklist-model.js"></script>
-    <script src="bower_components/CSV-JS/csv.js"></script>
-    <script src="bower_components/karma-read-json/karma-read-json.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
-    <script src="bower_components/pdfmake/build/pdfmake.js"></script>
-    <script src="bower_components/pdfmake/build/vfs_fonts.js"></script>
-    <script src="bower_components/pace/pace.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-loader/angular-loader.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-mocks/angular-mocks.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-tooltips/dist/angular-tooltips.min.js"></script>
+<script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+<script src="bower_components/angular-ui-select/dist/select.js"></script>
+<script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+<script src="bower_components/checklist-model/checklist-model.js"></script>
+<script src="bower_components/CSV-JS/csv.js"></script>
+<script src="bower_components/karma-read-json/karma-read-json.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/ng-table/dist/ng-table.min.js"></script>
+<script src="bower_components/pdfmake/build/pdfmake.js"></script>
+<script src="bower_components/pdfmake/build/vfs_fonts.js"></script>
+<script src="bower_components/pace/pace.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/services/auth.js"></script>
-    <script src="scripts/services/alerting.js"></script>
-    <script src="scripts/services/authinterceptor.js"></script>
-    <script src="scripts/services/api.js"></script>
-    <script src="scripts/services/donors.js"></script>
-    <script src="scripts/services/components.js"></script>
-    <script src="scripts/services/testing.js"></script>
-    <script src="scripts/services/inventory.js"></script>
-    <script src="scripts/services/labelling.js"></script>
-    <script src="scripts/services/reports.js"></script>
-    <script src="scripts/services/mobile.js"></script>
-    <script src="scripts/services/locations.js"></script>
-    <script src="scripts/services/configurations.js"></script>
-    <script src="scripts/services/users.js"></script>
-    <script src="scripts/services/roles.js"></script>
-    <script src="scripts/services/packTypes.js"></script>
-    <script src="scripts/services/componentTypes.js"></script>
-    <script src="scripts/services/deferralReasons.js"></script>
-    <script src="scripts/services/base64.js"></script>
-    <script src="scripts/services/discardReasons.js"></script>
-    <script src="scripts/services/donationTypes.js"></script>
-    <script src="scripts/services/postDonationCounselling.js"></script>
-    <script src="scripts/services/adverseEvents.js"></script>
-    <script src="scripts/controllers/confirmModal.js"></script>
-    <script src="scripts/controllers/auditLog.js"></script>
-    <script src="scripts/controllers/home.js"></script>
-    <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/controllers/passwordReset.js"></script>
-    <script src="scripts/controllers/forgotPassword.js"></script>
-    <script src="scripts/controllers/donors.js"></script>
-    <script src="scripts/controllers/donorCommunications.js"></script>
-    <script src="scripts/controllers/components.js"></script>
-    <script src="scripts/controllers/testing.js"></script>
-    <script src="scripts/controllers/inventory.js"></script>
-    <script src="scripts/controllers/labelling.js"></script>
-    <script src="scripts/controllers/reports.js"></script>
-    <script src="scripts/controllers/mobile.js"></script>
-    <script src="scripts/controllers/locations.js"></script>
-    <script src="scripts/controllers/configurations.js"></script>
-    <script src="scripts/controllers/accountSettings.js"></script>
-    <script src="scripts/controllers/users.js"></script>
-    <script src="scripts/controllers/roles.js"></script>
-    <script src="scripts/controllers/deferralReasons.js"></script>
-    <script src="scripts/controllers/settings.js"></script>
-    <script src="scripts/controllers/packTypes.js"></script>
-    <script src="scripts/controllers/header.js"></script>
-    <script src="scripts/controllers/discardReasons.js"></script>
-    <script src="scripts/controllers/donationTypes.js"></script>
-    <script src="scripts/controllers/donorCounselling.js"></script>
-    <script src="scripts/controllers/donorCounsellingDetails.js"></script>
-    <script src="scripts/controllers/adverseEventTypes.js"></script>
-    <script src="scripts/controllers/addAdverseEventType.js"></script>
-    <script src="scripts/controllers/editAdverseEventType.js"></script>
-    <script src="scripts/util/constants.js"></script>
-    <script src="scripts/util/permissions.js"></script>
-    <script src="scripts/util/filters.js"></script>
-    <!-- endbuild -->
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/services/auth.js"></script>
+<script src="scripts/services/alerting.js"></script>
+<script src="scripts/services/authinterceptor.js"></script>
+<script src="scripts/services/api.js"></script>
+<script src="scripts/services/donors.js"></script>
+<script src="scripts/services/components.js"></script>
+<script src="scripts/services/testing.js"></script>
+<script src="scripts/services/inventory.js"></script>
+<script src="scripts/services/labelling.js"></script>
+<script src="scripts/services/reports.js"></script>
+<script src="scripts/services/mobile.js"></script>
+<script src="scripts/services/locations.js"></script>
+<script src="scripts/services/configurations.js"></script>
+<script src="scripts/services/users.js"></script>
+<script src="scripts/services/roles.js"></script>
+<script src="scripts/services/packTypes.js"></script>
+<script src="scripts/services/componentTypes.js"></script>
+<script src="scripts/services/deferralReasons.js"></script>
+<script src="scripts/services/base64.js"></script>
+<script src="scripts/services/discardReasons.js"></script>
+<script src="scripts/services/donationTypes.js"></script>
+<script src="scripts/services/postDonationCounselling.js"></script>
+<script src="scripts/services/adverseEvents.js"></script>
+<script src="scripts/controllers/confirmModal.js"></script>
+<script src="scripts/controllers/auditLog.js"></script>
+<script src="scripts/controllers/home.js"></script>
+<script src="scripts/controllers/login.js"></script>
+<script src="scripts/controllers/passwordReset.js"></script>
+<script src="scripts/controllers/forgotPassword.js"></script>
+<script src="scripts/controllers/donors.js"></script>
+<script src="scripts/controllers/donorCommunications.js"></script>
+<script src="scripts/controllers/components.js"></script>
+<script src="scripts/controllers/testing.js"></script>
+<script src="scripts/controllers/inventory.js"></script>
+<script src="scripts/controllers/labelling.js"></script>
+<script src="scripts/controllers/reports.js"></script>
+<script src="scripts/controllers/mobile.js"></script>
+<script src="scripts/controllers/locations.js"></script>
+<script src="scripts/controllers/configurations.js"></script>
+<script src="scripts/controllers/accountSettings.js"></script>
+<script src="scripts/controllers/users.js"></script>
+<script src="scripts/controllers/roles.js"></script>
+<script src="scripts/controllers/deferralReasons.js"></script>
+<script src="scripts/controllers/settings.js"></script>
+<script src="scripts/controllers/packTypes.js"></script>
+<script src="scripts/controllers/header.js"></script>
+<script src="scripts/controllers/discardReasons.js"></script>
+<script src="scripts/controllers/donationTypes.js"></script>
+<script src="scripts/controllers/donorCounselling.js"></script>
+<script src="scripts/controllers/donorCounsellingDetails.js"></script>
+<script src="scripts/controllers/adverseEventTypes.js"></script>
+<script src="scripts/controllers/addAdverseEventType.js"></script>
+<script src="scripts/controllers/editAdverseEventType.js"></script>
+<script src="scripts/util/constants.js"></script>
+<script src="scripts/util/permissions.js"></script>
+<script src="scripts/util/filters.js"></script>
+<!-- endbuild -->
 
-  </body>
+</body>
 </html>

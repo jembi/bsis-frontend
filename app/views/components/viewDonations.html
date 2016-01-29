@@ -1,34 +1,35 @@
 <p>
-  <em> {{componentsSearchCount}} component(s) found </em>
+    <em> {{componentsSearchCount}} component(s) found </em>
 </p>
 <table ng-table="componentsSummaryTableParams" show-filter="false" class="table">
-  <tr ng-repeat="component in $data"
-      ng-click="changeSelection(donation);"
-      ng-mouseenter="this.$selected = true"
-      ng-mouseleave="this.$selected = false"
-      ng-class="{'active': donation.$selected}">
-      <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
-          {{component.donationIdentificationNumber}}
-      </td>
-      <td data-title="'Component Identifier'" header-class="text-left" class="text-center" sortable="'componentIdentificationNumber'">
-          {{component.componentIdentificationNumber}}
-      </td>
-      <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
-          {{component.createdOn | bsisDateTime}}
-      </td>
-      <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
-          {{component.componentType.componentTypeName}}
-      </td>
-      <td data-title="'Status'" header-class="text-left" sortable="'status'">
-          {{component.status}}
-      </td>
-      <td data-title="'Expiry Status'" header-class="text-left" sortable="'expiryStatus'">
-          {{ component | expiryStatus }}
-      </td>
-      <td data-title="''" style="width:10%;" class="text-center">
+    <tr ng-repeat="component in $data"
+        ng-click="changeSelection(donation);"
+        ng-mouseenter="this.$selected = true"
+        ng-mouseleave="this.$selected = false"
+        ng-class="{'active': donation.$selected}">
+        <td data-title="'DIN'" header-class="text-left" class="text-center" sortable="'donationIdentificationNumber'">
+            {{component.donationIdentificationNumber}}
+        </td>
+        <td data-title="'Component Identifier'" header-class="text-left" class="text-center"
+            sortable="'componentIdentificationNumber'">
+            {{component.componentIdentificationNumber}}
+        </td>
+        <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
+            {{component.createdOn | bsisDateTime}}
+        </td>
+        <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
+            {{component.componentType.componentTypeName}}
+        </td>
+        <td data-title="'Status'" header-class="text-left" sortable="'status'">
+            {{component.status}}
+        </td>
+        <td data-title="'Expiry Status'" header-class="text-left" sortable="'expiryStatus'">
+            {{ component | expiryStatus }}
+        </td>
+        <td data-title="''" style="width:10%;" class="text-center">
         <span style="font-size: 0.9em;">
           <em><a ng-click="viewComponents(component.donationIdentificationNumber)">View Summary</a></em>
         </span>
-      </td>
-  </tr>
+        </td>
+    </tr>
 </table>

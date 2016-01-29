@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('AccountSettingsCtrl', function ($scope, UsersService) {
+  .controller('AccountSettingsCtrl', function($scope, UsersService) {
 
     $scope.masterDetails = {
       firstName: '',
@@ -63,7 +63,7 @@ angular.module('bsis')
         confirmPassword: ''
       });
       $scope.resetUserDetails();
-    }, function(err) {
+    }, function() {
       $scope.detailsStyle = 'danger';
       $scope.detailsMessage = 'Loading details failed. Please try refreshing.';
     });

@@ -34,7 +34,7 @@ angular.module('bsis')
     HOME: 'fa-home',
     INFO: 'fa-info',
     INFOCIRCLE: 'fa-info-circle',
-    INVENTORY:  'fa-tint', //'fa-archive',
+    INVENTORY: 'fa-tint', //'fa-archive',
     LABELLING: 'fa-barcode',
     LOGOUT: 'fa-sign-out',
     MALE: 'fa-male',
@@ -61,192 +61,190 @@ angular.module('bsis')
   })
 
   .constant('BLOODGROUP', {
-    options: ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
+    options: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-']
   })
   .constant('BLOODABO', {
-    options: ["A", "B", "AB", "O"]
+    options: ['A', 'B', 'AB', 'O']
   })
   .constant('BLOODRH', {
-    options: ["+", "-"]
+    options: ['+', '-']
   })
   .constant('MONTH', {
-    "options": [
-    {
-      "id": 1,
-      "name": "January"
-    },
-    {
-      "id": 2,
-      "name": "February"
-    },
-    {
-      "id": 3,
-      "name": "March"
-    },
-    {
-      "id": 4,
-      "name": "April"
-    },
-    {
-      "id": 5,
-      "name": "May"
-    },
-    {
-      "id": 6,
-      "name": "June"
-    },
-    {
-      "id": 7,
-      "name": "July"
-    },
-    {
-      "id": 8,
-      "name": "August"
-    },
-    {
-      "id": 9,
-      "name": "September"
-    },
-    {
-      "id": 10,
-      "name": "October"
-    },
-    {
-      "id": 11,
-      "name": "November"
-    },
-    {
-      "id": 12,
-      "name": "December"
-    }
-  ]
+    'options': [
+      {
+        'id': 1,
+        'name': 'January'
+      },
+      {
+        'id': 2,
+        'name': 'February'
+      },
+      {
+        'id': 3,
+        'name': 'March'
+      },
+      {
+        'id': 4,
+        'name': 'April'
+      },
+      {
+        'id': 5,
+        'name': 'May'
+      },
+      {
+        'id': 6,
+        'name': 'June'
+      },
+      {
+        'id': 7,
+        'name': 'July'
+      },
+      {
+        'id': 8,
+        'name': 'August'
+      },
+      {
+        'id': 9,
+        'name': 'September'
+      },
+      {
+        'id': 10,
+        'name': 'October'
+      },
+      {
+        'id': 11,
+        'name': 'November'
+      },
+      {
+        'id': 12,
+        'name': 'December'
+      }
+    ]
   })
   .constant('TITLE', {
-    options: ["Mr","Mrs","Ms","Dr","Prof"]
+    options: ['Mr', 'Mrs', 'Ms', 'Dr', 'Prof']
   })
   .constant('GENDER', {
-    "options": [
-    {
-      "id": "male",
-      "name": "Male"
-    },
-    {
-      "id": "female",
-      "name": "Female"
-    }
-  ]
+    'options': [
+      {
+        'id': 'male',
+        'name': 'Male'
+      },
+      {
+        'id': 'female',
+        'name': 'Female'
+      }
+    ]
   })
   .constant('PACKTYPE', {
-    "packtypes": [
-    {
-      "id": 1,
-      "name": "Single",
-      "isDeleted": false
-    },
-    {
-      "id": 2,
-      "name": "Triple",
-      "isDeleted": false
-    },
-    {
-      "id": 3,
-      "name": "Quad",
-      "isDeleted": false
-    }
-  ]
+    'packtypes': [
+      {
+        'id': 1,
+        'name': 'Single',
+        'isDeleted': false
+      },
+      {
+        'id': 2,
+        'name': 'Triple',
+        'isDeleted': false
+      },
+      {
+        'id': 3,
+        'name': 'Quad',
+        'isDeleted': false
+      }
+    ]
   })
   .constant('COMPONENTTYPE', {
-    "componentTypes": [
-    {
-      "id": 1,
-      "name": "All Components",
-      "isDeleted": false
-    },
-    {
-      "id": 2,
-      "name": "Whole Blood",
-      "isDeleted": false
-    },
-    {
-      "id": 3,
-      "name": "Red Cell Concentrate",
-      "isDeleted": false
-    },
-    {
-      "id": 4,
-      "name": "Fresh Frozen Plasma",
-      "isDeleted": false
-    },
-    {
-      "id": 5,
-      "name": "Buffy Coat",
-      "isDeleted": false
-    }
-  ]
+    'componentTypes': [
+      {
+        'id': 1,
+        'name': 'All Components',
+        'isDeleted': false
+      },
+      {
+        'id': 2,
+        'name': 'Whole Blood',
+        'isDeleted': false
+      },
+      {
+        'id': 3,
+        'name': 'Red Cell Concentrate',
+        'isDeleted': false
+      },
+      {
+        'id': 4,
+        'name': 'Fresh Frozen Plasma',
+        'isDeleted': false
+      },
+      {
+        'id': 5,
+        'name': 'Buffy Coat',
+        'isDeleted': false
+      }
+    ]
   })
   .constant('TTITESTS', {
     options: [
       {
-        "testName": "HIV"
+        'testName': 'HIV'
       },
       {
-        "testName": "HBV"
+        'testName': 'HBV'
       },
       {
-        "testName": "HCV"
+        'testName': 'HCV'
       },
       {
-        "testName": "Syphilis"
+        'testName': 'Syphilis'
       }
     ]
   })
   .constant('BLOODTYPINGTESTS', {
     options: [
       {
-        "testName": "ABO"
+        'testName': 'ABO'
       },
       {
-        "testName": "Rh"
+        'testName': 'Rh'
       },
       {
-        "testName": "Du"
+        'testName': 'Du'
       }
     ]
   })
   .constant('TTIOUTCOME', {
-    options: ["POS","NEG"]
+    options: ['POS', 'NEG']
   })
   .constant('BGSOUTCOME', {
-    options: ["POS","NEG"]
+    options: ['POS', 'NEG']
   })
   .constant('ABO', {
-    options: ["A","B","AB","O"]
+    options: ['A', 'B', 'AB', 'O']
   })
   .constant('RH', {
-    options: ["+","-"]
+    options: ['+', '-']
   })
   .constant('DATATYPES', {
     options: [
       {
         id: 1,
-        datatype: "text"
+        datatype: 'text'
       },
       {
-        "id": 2,
-        "datatype": "integer"
+        'id': 2,
+        'datatype': 'integer'
       },
       {
-        "id": 3,
-        "datatype": "decimal"
+        'id': 3,
+        'datatype': 'decimal'
       },
       {
-        "id": 4,
-        "datatype": "boolean"
+        'id': 4,
+        'datatype': 'boolean'
       }
     ]
   })
-  .constant('UI', UI)
-  .constant('DONATION', DONATION)
+  .constant('UI', {ADDRESS: {}})
+  .constant('DONATION', {DONOR: {}})
 ;
-
-  

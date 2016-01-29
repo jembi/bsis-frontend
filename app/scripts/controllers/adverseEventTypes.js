@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('AdverseEventTypesCtrl', function($scope, $filter, $location, ICONS, AdverseEventsService, ngTableParams) {
+angular.module('bsis').controller('AdverseEventTypesCtrl', function($scope, $filter, $location, $log, ICONS, AdverseEventsService, ngTableParams) {
 
   $scope.icons = ICONS;
 
@@ -9,7 +9,7 @@ angular.module('bsis').controller('AdverseEventTypesCtrl', function($scope, $fil
     count: 6
   }, {
     counts: [],
-    getData: function ($defer, params) {
+    getData: function($defer, params) {
 
       AdverseEventsService.getAdverseEventTypes(function(adverseEventTypes) {
         var orderedData = params.sorting() ?
@@ -17,7 +17,7 @@ angular.module('bsis').controller('AdverseEventTypesCtrl', function($scope, $fil
         params.total(orderedData.length);
         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }, function(err) {
-        console.error(err);
+        $log.error(err);
         $defer.reject(err);
       });
     }

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('InventoryCtrl', function ($scope, $rootScope, $location, InventoryService, ICONS, PERMISSIONS) {
+  .controller('InventoryCtrl', function($scope, $rootScope, $location, InventoryService, ICONS, PERMISSIONS) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -16,15 +16,14 @@ angular.module('bsis')
         return true;
       } else {
         // for first time load of /inventory view, determine the initial view
-        if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_COMPONENT) > -1)){
+        if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_COMPONENT) > -1)) {
           initialView = '/manageInventory';
-        }
-        else if(($rootScope.sessionUserPermissions.indexOf($scope.permissions.ISSUE_COMPONENT) > -1)){
+        } else if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.ISSUE_COMPONENT) > -1)) {
           initialView = '/transferComponents';
         }
 
         // if first time load of /inventory view , and path === initialView, return true
-        if ($location.path() === "/inventory" && path === initialView){
+        if ($location.path() === '/inventory' && path === initialView) {
           $location.path(initialView);
           return true;
         }

@@ -1,65 +1,64 @@
-
 'use strict';
 
 angular.module('bsis')
-  .factory('DonationTypesService', function ($http, Api, $filter, USERCONFIG) {
+  .factory('DonationTypesService', function($http, Api) {
 
     var donationTypeObj = {};
     return {
 
-      getDonationTypes: function(response){
-        Api.DonationTypes.get({}, function (apiResponse) {
+      getDonationTypes: function(response) {
+        Api.DonationTypes.get({}, function(apiResponse) {
           response(apiResponse.allDonationTypes);
-        }, function (){
+        }, function() {
           response(false);
         });
       },
 
-      getDonationTypeById: function (id, response) {
-        var apiResponse = Api.DonationTypes.get({id: id}, function(){
+      getDonationTypeById: function(id, response) {
+        var apiResponse = Api.DonationTypes.get({id: id}, function() {
           response(apiResponse.donationType);
-        }, function (){
+        }, function() {
           response(false);
         });
       },
 
-      setDonationType: function (donationType) {
+      setDonationType: function(donationType) {
         donationTypeObj = donationType;
       },
 
-      getDonationType: function () {
+      getDonationType: function() {
         return donationTypeObj;
       },
 
-      addDonationType: function (donationType,response) {
+      addDonationType: function(donationType, response) {
         var addDonationType = new Api.DonationTypes();
         angular.copy(donationType, addDonationType);
 
-        addDonationType.$save(function(data){
+        addDonationType.$save(function(data) {
           response(data.donationType);
-        }, function (err){
+        }, function(err) {
           response(false, err.data);
         });
 
       },
 
-      updateDonationType: function (donationType, response) {
+      updateDonationType: function(donationType, response) {
         var updatedDonationType = angular.copy(donationType);
-        Api.DonationTypes.update({id:donationType.id}, updatedDonationType, function(data) {
+        Api.DonationTypes.update({id: donationType.id}, updatedDonationType, function(data) {
           donationTypeObj = data.donationType;
           response(donationTypeObj);
-        }, function (err){
+        }, function(err) {
           response(false, err.data);
         });
       },
 
-      removeDonationType: function (donationType, response) {
+      removeDonationType: function(donationType, response) {
         var deleteDonationType = new Api.DonationTypes();
         angular.copy(donationType, deleteDonationType);
 
-        deleteDonationType.$delete({id: donationType.id},function(data){
+        deleteDonationType.$delete({id: donationType.id}, function(data) {
           response(data);
-        }, function (err){
+        }, function(err) {
           response(false, err.data);
         });
       }

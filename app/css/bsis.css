@@ -1,4 +1,6 @@
-.pagination, .carousel, .panel-title a { cursor: pointer; }
+.pagination, .carousel, .panel-title a {
+  cursor: pointer;
+}
 
 html,
 body {
@@ -18,8 +20,9 @@ body {
 /* Set the fixed height of the footer here */
 #push,
 #footer {
-  height:60px;
+  height: 60px;
 }
+
 #footer {
   background-color: #f5f5f5;
 }
@@ -40,32 +43,39 @@ body {
     border-right: 1px solid #eee;
   }
 }
+
 /* Sidebar navigation */
 .nav-sidebar {
   margin-right: -21px; /* 20px padding + 1px border */
   margin-bottom: 20px;
   margin-left: -20px;
 }
+
 .nav-sidebar > li > a {
   padding-right: 20px;
   padding-left: 20px;
 }
+
 .nav-sidebar > .active > a {
   color: #fff;
   background-color: #428bca;
 }
+
 .main {
   padding: 20px 0px 0px 0px;
 }
+
 @media (min-width: 768px) {
   .main {
     padding-right: 10px;
     padding-left: 10px;
   }
 }
+
 .main .page-header {
   margin-top: 0;
 }
+
 /* END duplicate dashboard.css declarations */
 
 /* Lastly, apply responsive CSS fixes as necessary */
@@ -85,14 +95,14 @@ body {
 }
 
 @media (min-width: 1200px) {
-  .home-page{
+  .home-page {
     max-width: 900px;
-    margin:0 auto;
+    margin: 0 auto;
   }
 }
 
 .dropdown-ext {
-  width: 100%; 
+  width: 100%;
 }
 
 .navbar-sub {
@@ -124,11 +134,11 @@ body {
   font-style: normal;
 }
 
-.navbar-inverse .navbar-nav li a{
-  padding:10px;
+.navbar-inverse .navbar-nav li a {
+  padding: 10px;
 }
 
-.placeholders a  {
+.placeholders a {
   color: #f5f5f5;
   text-align: center;
   text-decoration: none;
@@ -144,27 +154,28 @@ body {
   margin: 0em;
 }
 
-
-.menue{display:block;
-  width:100px;
-  height:100px;
-  border-radius:50px;
-  font-size:20px;
-  color:#fff;
-  line-height:100px;
-  text-align:center;
-  text-decoration:none;
-  background:#000;
+.menue {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  font-size: 20px;
+  color: #fff;
+  line-height: 100px;
+  text-align: center;
+  text-decoration: none;
+  background: #000;
 }
-.menue:hover{
-  color:#ccc;
-  text-decoration:none;
-  background:#333
+
+.menue:hover {
+  color: #ccc;
+  text-decoration: none;
+  background: #333
 }
 
 .placeholder a, .placeholder button {
-  display:block;
-  text-decoration:none;
+  display: block;
+  text-decoration: none;
   text-align: center;
   border-radius: 50%;
   height: 11rem;
@@ -188,13 +199,13 @@ body {
   color: #f5f5f5;
 }
 
-.placeholder a:hover { 
+.placeholder a:hover {
   /*background-color: rgba(36,36,36,0.85) !important;*/
-  background: -webkit-linear-gradient(10deg, rgba(36,36,36,0.85), rgba(40,40,40,0.85)); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(10deg, rgba(36,36,36,0.85), rgba(40,40,40,0.85)); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(10deg, rgba(36,36,36,0.85), rgba(40,40,40,0.85)); /* For Firefox 3.6 to 15 */
+  background: -webkit-linear-gradient(10deg, rgba(36, 36, 36, 0.85), rgba(40, 40, 40, 0.85)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(10deg, rgba(36, 36, 36, 0.85), rgba(40, 40, 40, 0.85)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(10deg, rgba(36, 36, 36, 0.85), rgba(40, 40, 40, 0.85)); /* For Firefox 3.6 to 15 */
   /* background: linear-gradient(10deg, rgba(36,36,36,0.85), rgba(40,40,40,0.85)); /* Standard syntax */
-  background: linear-gradient(10deg, rgba(40,30,30,0.85), rgba(40,40,40,0.85)); /* Standard syntax */
+  background: linear-gradient(10deg, rgba(40, 30, 30, 0.85), rgba(40, 40, 40, 0.85)); /* Standard syntax */
 }
 
 .icon-container {
@@ -211,15 +222,15 @@ body {
 }
 
 @font-face {
-    font-family: 'istok_webregular';
-    src: url('../fonts/istokweb-regular-webfont.eot');
-    src: url('../fonts/istokweb-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/istokweb-regular-webfont.woff2') format('woff2'),
-         url('../fonts/istokweb-regular-webfont.woff') format('woff'),
-         url('../fonts/istokweb-regular-webfont.ttf') format('truetype'),
-         url('../fonts/istokweb-regular-webfont.svg#istok_webregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'istok_webregular';
+  src: url('../fonts/istokweb-regular-webfont.eot');
+  src: url('../fonts/istokweb-regular-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/istokweb-regular-webfont.woff2') format('woff2'),
+  url('../fonts/istokweb-regular-webfont.woff') format('woff'),
+  url('../fonts/istokweb-regular-webfont.ttf') format('truetype'),
+  url('../fonts/istokweb-regular-webfont.svg#istok_webregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
 
 }
 
@@ -251,11 +262,14 @@ h1 h2 h3 h4 {
   background-color: #eee;
 }
 
-hr { display: block; height: 1px;
-  border: 0; border-top: 1px solid #ccc;
-  margin: 1em 0; padding: 0; 
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
 }
-
 
 .disabled a {
   font-size: 1.23rem;
@@ -270,30 +284,30 @@ hr { display: block; height: 1px;
   padding-right: 5px;
 }
 
-.navbar-nav .dropdown-toggle{
+.navbar-nav .dropdown-toggle {
   color: #e7e7e7 !important;
 }
 
-.navbar-nav .dropdown-toggle a:hover, a:visited, a:link, a:active{
+.navbar-nav .dropdown-toggle a:hover, a:visited, a:link, a:active {
   text-decoration: none !important;
 }
 
-.nav-sidebar a{
+.nav-sidebar a {
   font-size: 1.3rem;
 }
 
-.nav-sidebar .current a{
+.nav-sidebar .current a {
   background-color: #eee !important;
   color: #242424 !important;
   font-weight: normal !important;
 }
 
-.nav-sidebar li{
+.nav-sidebar li {
   border-bottom: 2px solid #eee;
 
 }
 
-.nav-sidebar span{
+.nav-sidebar span {
   position: relative;
   display: block;
   padding-right: 20px;
@@ -325,8 +339,8 @@ hr { display: block; height: 1px;
   position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   padding: 10px;
   font-size: 16px;
 }
@@ -348,9 +362,10 @@ hr { display: block; height: 1px;
 }
 
 img.main {
-  width:100%;
-  padding:0px;
+  width: 100%;
+  padding: 0px;
 }
+
 /* --> login form css */
 
 /* angular-ui tabs - custom css */
@@ -362,8 +377,9 @@ img.main {
   border-right: 1px solid #eee;
   border-radius: 0;
 }
-.nav-tabs.nav-justified > li.active > a:link, 
-.nav-tabs.nav-justified > li.active > a:visited, 
+
+.nav-tabs.nav-justified > li.active > a:link,
+.nav-tabs.nav-justified > li.active > a:visited,
 .nav-tabs.nav-justified > li.active > a:hover {
   background-color: #eee !important;
   color: #242424 !important;
@@ -377,20 +393,24 @@ img.main {
 .nav-tabs.nav-justified {
   margin-bottom: 15px;
 }
-.nav-tabs.nav-justified li:not(.active){
+
+.nav-tabs.nav-justified li:not(.active) {
   border-right: 1px solid #eee;
   border-left: 1px solid #eee;
 }
+
 .nav-tabs.nav-justified > li > a {
   background-color: #f5f5f5;
   border: none;
   border-radius: 0;
 }
+
 .nav-tabs.nav-justified > li > a:hover {
   background-color: #eee;
   border: none;
   border-radius: 0;
 }
+
 /* --> angular-ui tabs - custom css */
 
 /* general css */
@@ -414,74 +434,92 @@ img.main {
   line-height: 1.5;
   border-radius: 3px;
 }
+
 .ng-table {
   border-radius: 0;
   margin-top: 0px;
   margin-bottom: 0px;
 }
+
 .ng-table thead tr {
   border-bottom: 2px solid #ccc;
 }
+
 .ng-table tbody tr {
   background-color: #fff;
 }
-.ng-table tbody  {
+
+.ng-table tbody {
   cursor: pointer !important;
 }
+
 .ng-table tbody tr:hover {
   background-color: #f5f5f5;
 }
-table.ng-table tr td{
-  padding: 5px; !important;
+
+table.ng-table tr td {
+  padding: 5px;
+!important;
 }
-.ng-table .pagination{
+
+.ng-table .pagination {
   margin: 10px 0;
 }
 
 .dash-table th.center {
-  text-align:center;
+  text-align: center;
 }
+
 .dash-table th {
   padding: 4px;
 }
+
 .dash-table td {
   padding: 4px;
 }
+
 .dash-table td.icon {
   vertical-align: center;
   color: #999;
 }
+
 .dash-table td.field {
   font-style: italic;
   vertical-align: center;
   color: #555;
 }
+
 .dash-table td.center {
-  text-align:center;
+  text-align: center;
 }
+
 .dash-table td.value {
   font-size: 1.1em;
 }
+
 .dash-table td.valuesml {
-  font-size:0.9em;
+  font-size: 0.9em;
 }
-.dash-table td.green{
+
+.dash-table td.green {
   color: #3c763d;
 }
-.dash-table td.red{
+
+.dash-table td.red {
   color: #a94442;
 }
 
-.dash-table-sml{
+.dash-table-sml {
   font-size: 0.85em;
 }
+
 .dash-table-sml > th {
   padding: 2px;
 }
+
 .dash-table-sml > td {
   padding: 2px;
 }
-
 
 .form-group {
   margin-bottom: 5px;
@@ -494,32 +532,34 @@ table.ng-table tr td{
 
 /* css hack to get input-groups to display inline */
 .input-group {
-    display: inline-table !important;
-    vertical-align: middle;
+  display: inline-table !important;
+  vertical-align: middle;
 
-    .input-group-addon,
-    .input-group-btn,
-    .form-control {
-        width: auto !important;
-    }
+.input-group-addon,
+.input-group-btn,
+.form-control {
+  width: auto !important;
+}
+
 }
 
 /* css hack to get cols with equal heights */
-.row.equal [class*="col-"]{
+.row.equal [class*="col-"] {
   margin-bottom: -99999px;
   padding-bottom: 99999px;
 }
-.row.equal{
-  overflow: hidden; 
+
+.row.equal {
+  overflow: hidden;
 }
 
-.form-group .row{
+.form-group .row {
   margin-left: 0px;
   margin-right: 0px;
   padding: 0px;
 }
 
-.row .main-page{
+.row .main-page {
   margin-left: 0px;
   margin-right: 0px;
   padding: 0px;
@@ -530,11 +570,11 @@ table.ng-table tr td{
   margin-right: -15px;
 }
 
-dob { 
-  display: inline; 
+dob {
+  display: inline;
 }
 
-.dob * { 
+.dob * {
   display: inline-block;
 }
 
@@ -547,10 +587,10 @@ label {
 }
 
 small {
-  color: #888 ;
+  color: #888;
 }
 
-.ui-select-bootstrap .ui-select-choices-row.active>a>small{
+.ui-select-bootstrap .ui-select-choices-row.active > a > small {
   color: #fff;
 }
 
@@ -558,21 +598,24 @@ small {
 input.ng-invalid.ng-dirty {
   border: 1px solid #B52E31;
 }
+
 select.ng-invalid.ng-dirty {
   border: 1px solid #B52E31;
 }
+
 .error {
   color: #B52E31;
 }
 
 /* Hide number input spinners */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
+
 input[type=number] {
-  -moz-appearance:textfield;
+  -moz-appearance: textfield;
 }
 
 /* css for xeditable fields */
@@ -581,27 +624,35 @@ input[type=number] {
   height: 1.5em;
   padding: 3px 3px;
 }
-.xeditable.name{
+
+.xeditable.name {
   width: 120px;
 }
+
 .xeditable.title {
   width: 75px;
 }
+
 .xeditable.venue {
   width: 160px;
 }
+
 .xeditable.notes {
   width: 350px;
 }
+
 .xeditable.language {
   width: 140px;
 }
+
 .xeditable.result {
   width: 60px;
 }
+
 .xeditable.w50 {
   width: 50px;
 }
+
 /* --> css for x-editable fields */
 
 div .alert {
@@ -622,8 +673,8 @@ a.btn.btn-link {
 
 /* Use default pointer cursor for disabled input fields */
 input[disabled] {
-    cursor: default;
-    pointer-events: none;
+  cursor: default;
+  pointer-events: none;
 }
 
 /* --> general css */
@@ -657,18 +708,25 @@ bootstrap.min.css sets .dropdown-menu min-width to 160px by default
 - override default to inherit value from containing element
 */
 .ui-select-bootstrap .dropdown-menu {
-  min-width: inherit  !important;
+  min-width: inherit !important;
 }
 
 /* ui-grid custom data export button styling */
 .btn-ui-grid-export {
-  margin-top:0px; 
+  margin-top: 0px;
   padding-top: 2px;
   padding-bottom: 0px;
 }
 
-.ui-grid-row:nth-child(odd):hover .ui-grid-cell-clickable{cursor: pointer; background:#eee}
-.ui-grid-row:nth-child(even):hover .ui-grid-cell-clickable{cursor: pointer; background:#eee}
+.ui-grid-row:nth-child(odd):hover .ui-grid-cell-clickable {
+  cursor: pointer;
+  background: #eee
+}
+
+.ui-grid-row:nth-child(even):hover .ui-grid-cell-clickable {
+  cursor: pointer;
+  background: #eee
+}
 
 .checkbox-inline {
   display: inline-block;
@@ -681,6 +739,6 @@ a[disabled] {
   pointer-events: none;
 }
 
-.labelDisabled{
+.labelDisabled {
   color: #888 !important;
 }

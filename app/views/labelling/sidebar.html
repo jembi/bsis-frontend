@@ -1,16 +1,17 @@
 <div class="col-sm-3 col-md-2 sidebar" style="padding-top:5px;">
-  <ul class="nav nav-sidebar">
-    <li class="disabled">
+    <ul class="nav nav-sidebar">
+        <li class="disabled">
       <span class="icon-sidebar-container">
         <div class="placeholder">
-          <a href="#labelling">
-            <i class="fa {{icons.LABELLING}}"></i>
-          </a>
+            <a href="#labelling">
+                <i class="fa {{icons.LABELLING}}"></i>
+            </a>
         </div>
       </span>
-    </li>
-    <li class="disabled" has-permission="{{permissions.COMPONENT_LABELLING}}"><span>LABELLING</span></li>
-    <li ng-class="{current: isCurrent('/labelComponents')}" has-permission="{{permissions.COMPONENT_LABELLING}}"><a href="#/labelComponents">Label Components</a></li>
-  </ul>
-  <div ng-include="'views/sidebarFooter.html'"></div>
+        </li>
+        <li class="disabled" has-permission="{{permissions.COMPONENT_LABELLING}}"><span>LABELLING</span></li>
+        <li ng-class="{current: isCurrent('/labelComponents')}" has-permission="{{permissions.COMPONENT_LABELLING}}"><a
+                href="#/labelComponents">Label Components</a></li>
+    </ul>
+    <div ng-include="'views/sidebarFooter.html'"></div>
 </div>

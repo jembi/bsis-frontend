@@ -1,45 +1,50 @@
 <h3 class="page-header">Manage Venues</h3>
 
 <div class="col-sm-12">
-  <div style="padding-bottom: 10px"></div>
+    <div style="padding-bottom: 10px"></div>
     <div class="panel panel-default">
-      <div class="panel-body">
+        <div class="panel-body">
 
-        <table ng-table="locationsTableParams" show-filter="false" class="table">
-          <tr ng-repeat="location in $data"
-              ng-click="manageLocation(location); changeSelection(location);"
-              ng-mouseenter="this.$selected = true"
-              ng-mouseleave="this.$selected = false"
-              ng-class="{'active': location.$selected}">
-              <td data-title="'Name'" style="width:30%;" header-class="text-left" sortable="'name'">
-                  {{location.name}}
-              </td>
-              <td data-title="'Mobile Site'" style="width:15%;" header-class="text-left" sortable="'mobileSite'" class="text-center">
-                  <span ng-if="location.isMobileSite=='true'"><i class="fa {{icons.SQUARECHECK}}"></i></span>
-                  <span ng-if="location.isMobileSite=='false'"><i class="fa {{icons.SQUARE}}"></i></span>
-              </td>
-              <td data-title="'Enabled'" style="width:15%;" header-class="text-left" sortable="'isDeleted'" class="text-center">
-                  <span ng-if="location.isDeleted=='false'"><i class="fa {{icons.SQUARECHECK}}"></i></span>
-                  <span ng-if="location.isDeleted=='true'"><i class="fa {{icons.SQUARE}}"></i></span>
-              </td>
-              <td data-title="" style="width:25%;" header-class="text-left" sortable="" class="text-center">
+            <table ng-table="locationsTableParams" show-filter="false" class="table">
+                <tr ng-repeat="location in $data"
+                    ng-click="manageLocation(location); changeSelection(location);"
+                    ng-mouseenter="this.$selected = true"
+                    ng-mouseleave="this.$selected = false"
+                    ng-class="{'active': location.$selected}">
+                    <td data-title="'Name'" style="width:30%;" header-class="text-left" sortable="'name'">
+                        {{location.name}}
+                    </td>
+                    <td data-title="'Mobile Site'" style="width:15%;" header-class="text-left" sortable="'mobileSite'"
+                        class="text-center">
+                        <span ng-if="location.isMobileSite=='true'"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                        <span ng-if="location.isMobileSite=='false'"><i class="fa {{icons.SQUARE}}"></i></span>
+                    </td>
+                    <td data-title="'Enabled'" style="width:15%;" header-class="text-left" sortable="'isDeleted'"
+                        class="text-center">
+                        <span ng-if="location.isDeleted=='false'"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                        <span ng-if="location.isDeleted=='true'"><i class="fa {{icons.SQUARE}}"></i></span>
+                    </td>
+                    <td data-title="" style="width:25%;" header-class="text-left" sortable="" class="text-center">
                 <span style="font-size: 0.9em;">
                   <span ng-if="locationToRemove == location.id">
-                    <em><a ng-if="location.isDeleted == 'false'" ng-click="removeLocation(location)"> Confirm</a> <a ng-if="location.isDeleted == 'true'" ng-click="enableLocation(location)"> Confirm</a> </em> |
+                    <em><a ng-if="location.isDeleted == 'false'" ng-click="removeLocation(location)"> Confirm</a> <a
+                            ng-if="location.isDeleted == 'true'" ng-click="enableLocation(location)"> Confirm</a> </em> |
                     <em><a ng-click="cancelRemoveLocation()"> Cancel</a></em>
                   </span>
                   <span ng-if="locationToRemove != location.id">
-                    <em><a ng-if="location.isDeleted == 'false'" ng-click="removeLocationCheck(location)"> Disable</a></em>
-                    <em><a ng-if="location.isDeleted == 'true'" ng-click="removeLocationCheck(location)"> Enable</a></em>
+                    <em><a ng-if="location.isDeleted == 'false'" ng-click="removeLocationCheck(location)">
+                        Disable</a></em>
+                    <em><a ng-if="location.isDeleted == 'true'" ng-click="removeLocationCheck(location)">
+                        Enable</a></em>
                   </span>
                 </span>
-              </td>
-          </tr>
-        </table>
+                    </td>
+                </tr>
+            </table>
 
-      </div>
+        </div>
     </div>
-  </div>
+</div>
 </div>
 
 <h4>Add Venue</h4>
@@ -50,44 +55,49 @@
         <li ng-show="err['name']"> {{err["name"]}}</li>
     </ul>
 </alert>
-<form name="addLocationForm" novalidate class="form-horizontal col-sm-12" role="form" ng-submit="addLocation(location, addLocationForm)" >
-  <div class="form-group">
-    <label for="name" class="col-sm-1 control-label">Name</label>
-    <div class="row col-sm-11">
-      <div class="form-inline" style="padding-left:5px;">
-        <input size="35"  id="name" name="name" class="form-control input-sm" ng-model="location.name" required ng-minlength=1 ng-maxlength=50
-        ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-        ng-class="{'ng-invalid ng-dirty' : addLocationForm.name.$invalid && submitted}"
-        >
-        <div>
-          <small class="error" 
-            ng-show="
+<form name="addLocationForm" novalidate class="form-horizontal col-sm-12" role="form"
+      ng-submit="addLocation(location, addLocationForm)">
+    <div class="form-group">
+        <label for="name" class="col-sm-1 control-label">Name</label>
+        <div class="row col-sm-11">
+            <div class="form-inline" style="padding-left:5px;">
+                <input size="35" id="name" name="name" class="form-control input-sm" ng-model="location.name" required
+                       ng-minlength=1 ng-maxlength=50
+                       ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                       ng-class="{'ng-invalid ng-dirty' : addLocationForm.name.$invalid && submitted}"
+                >
+                <div>
+                    <small class="error"
+                           ng-show="
               (addLocationForm.name.$error.required && (addLocationForm.name.$dirty || submitted))
             ">
-            This cannot be empty
-          </small>
-            <small class="error" ng-show="(addLocationForm.name.$error.maxlength && (addLocationForm.name.$dirty || submitted))">
-                This field cannot be longer than 50 characters
-            </small>
+                        This cannot be empty
+                    </small>
+                    <small class="error"
+                           ng-show="(addLocationForm.name.$error.maxlength && (addLocationForm.name.$dirty || submitted))">
+                        This field cannot be longer than 50 characters
+                    </small>
+                </div>
+            </div>
         </div>
-      </div>
+        <label for="type" class="col-sm-1 control-label">Mobile Site</label>
+        <div class="row col-sm-11">
+            <div class="form-inline" style="padding-left:5px;">
+                <input type="checkbox" id="mobileSite" name="mobileSite" ng-model="location.isMobileSite"
+                       ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                       ng-class="{'ng-invalid ng-dirty' : !addLocationForm.mobileSite.$viewValue && submitted}">
+                <label style="display: inline-block; cursor: pointer; cursor: hand;" for="mobileSite">&nbsp; </label>
+            </div>
+        </div>
     </div>
-    <label for="type" class="col-sm-1 control-label">Mobile Site</label>
-    <div class="row col-sm-11">
-      <div class="form-inline" style="padding-left:5px;">
-        <input  type="checkbox" id="mobileSite" name="mobileSite" ng-model="location.isMobileSite" 
-          ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-          ng-class="{'ng-invalid ng-dirty' : !addLocationForm.mobileSite.$viewValue && submitted}">
-        <label style="display: inline-block; cursor: pointer; cursor: hand;" for="mobileSite">&nbsp; </label>
-      </div>
-    </div>
-  </div>
 
-  <div class="form-group"> 
-    <div class="col-sm-offset-1 col-sm-4">
-      <button class="btn btn-primary" type="submit" ng-disabled="addingLocation">{{addingLocation ? "Adding..." : "Add Venue"}}</button>
-      <button class="btn btn-primary" type="reset" ng-click="reset(addLocationForm);">Clear</button>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-4">
+            <button class="btn btn-primary" type="submit" ng-disabled="addingLocation">{{addingLocation ? "Adding..." :
+                "Add Venue"}}
+            </button>
+            <button class="btn btn-primary" type="reset" ng-click="reset(addLocationForm);">Clear</button>
+        </div>
     </div>
-  </div>
 
 </form>

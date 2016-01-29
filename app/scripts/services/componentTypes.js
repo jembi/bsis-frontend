@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('ComponentTypesService', function ($http, Api) {
+  .factory('ComponentTypesService', function($http, Api) {
     return {
 
-      getComponentTypes: function (response) {
-        Api.ComponentTypes.get({}, function (apiResponse) {
+      getComponentTypes: function(response) {
+        Api.ComponentTypes.get({}, function(apiResponse) {
           response(apiResponse.componentTypes);
-        }, function () {
+        }, function() {
           response(false);
         });
       }

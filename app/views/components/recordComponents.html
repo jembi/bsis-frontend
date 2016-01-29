@@ -1,111 +1,132 @@
 <h3 class="page-header">Record Components</h3>
 
-<form class="form-horizontal col-sm-12"  role="form" ng-submit="getComponentsByDIN()">
-  <div class="form-group">
-    <label for="name" class="col-sm-1 control-label" >DIN</label>
-    <div class="row col-sm-11">
-      <div class="form-inline" style="padding-left:5px;">
-        <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="componentsSearch.donationIdentificationNumber">
-      </div>
+<form class="form-horizontal col-sm-12" role="form" ng-submit="getComponentsByDIN()">
+    <div class="form-group">
+        <label for="name" class="col-sm-1 control-label">DIN</label>
+        <div class="row col-sm-11">
+            <div class="form-inline" style="padding-left:5px;">
+                <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
+                       class="form-control input-sm" placeholder=""
+                       ng-model="componentsSearch.donationIdentificationNumber">
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="form-group"> 
-    <div class="col-sm-offset-1 col-sm-3">
-      <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}}</button>
-      <button class="btn btn-primary" type="button" ng-click="clearProcessComponentForm(); clear()">Clear</button>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-3">
+            <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
+                "Search"}}
+            </button>
+            <button class="btn btn-primary" type="button" ng-click="clearProcessComponentForm(); clear()">Clear</button>
+        </div>
     </div>
-  </div>
 </form>
 
 <div ng-switch="searchResults" class="col-sm-12">
-<div style="padding-bottom: 10px"></div>
+    <div style="padding-bottom: 10px"></div>
 
-  <div ng-switch-when="true">
-    <div class="panel panel-default">
-      <div class="panel-body">
-      <div ng-if="componentSelected === false" ng-hide="componentSelected !== false" style="padding-top:10px;">
-        <alert type="danger" >Select a component to process</alert>
-      </div>
+    <div ng-switch-when="true">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div ng-if="componentSelected === false" ng-hide="componentSelected !== false"
+                     style="padding-top:10px;">
+                    <alert type="danger">Select a component to process</alert>
+                </div>
 
-        <table ng-table="componentsTableParams" show-filter="false" class="table">
-          <tr ng-repeat="component in $data"
-              ng-click="changeSelection(component);"
-              ng-mouseenter="this.$selected = true"
-              ng-mouseleave="this.$selected = false"
-              ng-class="{'active': component.$selected}">
-              <td data-title="'Component Identifier'" header-class="text-left" class="text-center" sortable="'componentIdentificationNumber'">
-                  {{component.componentIdentificationNumber}}
-              </td>
-              <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
-                  {{component.componentType.componentTypeName}}
-              </td>
-              <td data-title="'Status'" header-class="text-left" sortable="'status'">
-                  {{component.status}}
-              </td>
-              <td data-title="'Created On'" header-class="text-left" class="text-center" sortable="'createdOn'">
-                  {{component.createdOn | bsisDateTime}}
-              </td>
-              <td data-title="'Expiry Status'" header-class="text-left" class="text-center" sortable="'expiryStatus'">
-                  {{ component | expiryStatus }}
-              </td>
-              <td data-title="" header-class="text-left" class="text-left" >
-                <span 
-                  style="font-size: 0.9em;" 
-                  ng-if="component.status != 'DISCARDED' && component.status != 'ISSUED' && component.status != 'USED' && component.status != 'SPLIT' && component.status != 'PROCESSED'" 
+                <table ng-table="componentsTableParams" show-filter="false" class="table">
+                    <tr ng-repeat="component in $data"
+                        ng-click="changeSelection(component);"
+                        ng-mouseenter="this.$selected = true"
+                        ng-mouseleave="this.$selected = false"
+                        ng-class="{'active': component.$selected}">
+                        <td data-title="'Component Identifier'" header-class="text-left" class="text-center"
+                            sortable="'componentIdentificationNumber'">
+                            {{component.componentIdentificationNumber}}
+                        </td>
+                        <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
+                            {{component.componentType.componentTypeName}}
+                        </td>
+                        <td data-title="'Status'" header-class="text-left" sortable="'status'">
+                            {{component.status}}
+                        </td>
+                        <td data-title="'Created On'" header-class="text-left" class="text-center"
+                            sortable="'createdOn'">
+                            {{component.createdOn | bsisDateTime}}
+                        </td>
+                        <td data-title="'Expiry Status'" header-class="text-left" class="text-center"
+                            sortable="'expiryStatus'">
+                            {{ component | expiryStatus }}
+                        </td>
+                        <td data-title="" header-class="text-left" class="text-left">
+                <span
+                        style="font-size: 0.9em;"
+                        ng-if="component.status != 'DISCARDED' && component.status != 'ISSUED' && component.status != 'USED' && component.status != 'SPLIT' && component.status != 'PROCESSED'"
                 >
-                  <input type="checkbox" id="{{component.id}}" value="{{component.id}}" ng-checked="selectedComponents.indexOf(component.id) > -1" ng-click="toggleMutualSelection(component.id, component.componentType)">
+                  <input type="checkbox" id="{{component.id}}" value="{{component.id}}"
+                         ng-checked="selectedComponents.indexOf(component.id) > -1"
+                         ng-click="toggleMutualSelection(component.id, component.componentType)">
                   <em><label style="margin:0px; cursor: pointer; cursor: hand;" for="{{component.id}}"> Select </label></em>
                 </span>
-            </td>
-          </tr>
-        </table>
+                        </td>
+                    </tr>
+                </table>
 
-        <form name="recordComponentsForm" novalidate class="form-horizontal col-sm-12"  role="form" ng-submit="recordComponents(recordComponentsForm)">
-          <div class="form-group">
-            <label for="name" class="col-sm-2 control-label" >Process Component</label>
-            <div class="row col-sm-10">
-              <div class="form-inline" style="padding-left:5px;">
-                <span ng-if="selectedComponents.length <= 0"><label for="name" class="col-sm-5 control-label" style="text-align:left;"><em>Select a component to process</em></label></span>
-                <span ng-if="selectedComponents.length > 0 && selectedComponentType.producedComponentTypeCombinations.length <= 0"><label for="name" class="col-sm-5 control-label" style="text-align:left;"><em>Selected component cannot be processed further</em></label></span>
+                <form name="recordComponentsForm" novalidate class="form-horizontal col-sm-12" role="form"
+                      ng-submit="recordComponents(recordComponentsForm)">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Process Component</label>
+                        <div class="row col-sm-10">
+                            <div class="form-inline" style="padding-left:5px;">
+                                <span ng-if="selectedComponents.length <= 0"><label for="name"
+                                                                                    class="col-sm-5 control-label"
+                                                                                    style="text-align:left;"><em>Select
+                                    a component to process</em></label></span>
+                                <span ng-if="selectedComponents.length > 0 && selectedComponentType.producedComponentTypeCombinations.length <= 0"><label
+                                        for="name" class="col-sm-5 control-label" style="text-align:left;"><em>Selected
+                                    component cannot be processed further</em></label></span>
                 <span ng-if="selectedComponents.length > 0 && selectedComponentType.producedComponentTypeCombinations.length > 0">
-                  <select name="combination" class="form-control input-sm" ng-model="component.componentTypeCombination" ng-options="item as item.combinationName for item in selectedComponentType.producedComponentTypeCombinations"
-                  required ng-class="{'ng-invalid ng-dirty' : recordComponentsForm.combination.$invalid && submitted}">
-                    <option value="" ng-disabled="true">Select:</option>
+                  <select name="combination" class="form-control input-sm" ng-model="component.componentTypeCombination"
+                          ng-options="item as item.combinationName for item in selectedComponentType.producedComponentTypeCombinations"
+                          required
+                          ng-class="{'ng-invalid ng-dirty' : recordComponentsForm.combination.$invalid && submitted}">
+                      <option value="" ng-disabled="true">Select:</option>
                   </select>
                 </span>
-                <div>
-                  <small class="error" 
-                    ng-show="
+                                <div>
+                                    <small class="error"
+                                           ng-show="
                       (recordComponentsForm.combination.$invalid && (recordComponentsForm.combination.$dirty || submitted))
                     ">
-                    This cannot be empty
-                  </small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group"> 
-            <div class="col-sm-offset-2 col-sm-3">
-              <button class="btn btn-primary" type="submit" ng-disabled="recordingComponents">{{recordingComponents ? "Processing..." : "Process Component"}}</button>
-              <button class="btn btn-primary" type="button" 
-                ng-click="clearForm(recordComponentsForm); 
+                                        This cannot be empty
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-3">
+                            <button class="btn btn-primary" type="submit" ng-disabled="recordingComponents">
+                                {{recordingComponents ? "Processing..." : "Process Component"}}
+                            </button>
+                            <button class="btn btn-primary" type="button"
+                                    ng-click="clearForm(recordComponentsForm);
                 clearProcessComponentForm()"
-              >Clear</button>
-            </div>
-          </div>
-        </form>
+                            >Clear
+                            </button>
+                        </div>
+                    </div>
+                </form>
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div ng-switch-when="false">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <p>
-          <em> Not found. Please re-enter DIN. </em>
-        </p>
-      </div>
+    <div ng-switch-when="false">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    <em> Not found. Please re-enter DIN. </em>
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
 
 </div>

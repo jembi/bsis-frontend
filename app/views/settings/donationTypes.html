@@ -5,7 +5,10 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <p>
-                <em> {{donationTypesCount}} donation type(s) found </em> <span has-permission="{{permissions.MANAGE_DONATION_TYPES}}"> | <em> <a href="" ng-click="addNewDonationType()" >Add New Donation Type</a></em> </span>
+                <em> {{donationTypesCount}} donation type(s) found </em> <span
+                    has-permission="{{permissions.MANAGE_DONATION_TYPES}}"> | <em> <a href=""
+                                                                                      ng-click="addNewDonationType()">Add
+                New Donation Type</a></em> </span>
             </p>
             <table ng-table="donationsTableParams" show-filter="false" class="table">
                 <tr ng-repeat="donationType in donationTypes"
@@ -16,7 +19,7 @@
                     <td data-title="'Type'" style="width:30%;" header-class="text-left" sortable="'donationType'">
                         {{donationType.type}}
                     </td>
-                    <td data-title="'Enabled'" style="width:15%;" header-class="text-left"  class="text-center">
+                    <td data-title="'Enabled'" style="width:15%;" header-class="text-left" class="text-center">
                         <span ng-show="!donationType.isDeleted"><i class="fa {{icons.SQUARECHECK}}"></i></span>
                         <span ng-show="donationType.isDeleted"><i class="fa {{icons.SQUARE}}"></i></span>
                     </td>

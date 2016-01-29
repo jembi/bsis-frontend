@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('PackTypesCtrl', function($scope, $rootScope, $location, PackTypesService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout){
+  .controller('PackTypesCtrl', function($scope, $rootScope, $location, $log, PackTypesService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -13,10 +13,8 @@ angular.module('bsis')
         return true;
       } else if ($location.path() === path) {
         return true;
-      } else if ($location.path() === '/settings' && path === '/packTypes') {
-        return true;
       } else {
-        return false;
+        return !!($location.path() === '/settings' && path === '/packTypes');
       }
     };
 
@@ -25,53 +23,52 @@ angular.module('bsis')
     $scope.packTypes = {};
 
 
-    $scope.clear = function () {
+    $scope.clear = function() {
 
     };
 
-    $scope.managePackType  = function (packType){
+    $scope.managePackType = function(packType) {
       $scope.packType = packType;
       PackTypesService.setPackType(packType);
-      $location.path("/managePackType/" + packType.id);
+      $location.path('/managePackType/' + packType.id);
     };
 
-    $scope.clearForm = function(form){
+    $scope.clearForm = function(form) {
       form.$setPristine();
       $scope.submitted = '';
     };
 
-    $scope.getPackTypes = function () {
-      PackTypesService.getPackTypes(function(response){
-        if (response !== false){
+    $scope.getPackTypes = function() {
+      PackTypesService.getPackTypes(function(response) {
+        if (response !== false) {
           data = response;
           $scope.data = data;
           $scope.packTypes = data;
           $scope.packTypesCount = $scope.data.length;
-        }
-        else{
-          console.log('failed to get pack types');
+        } else {
+          $log.error('failed to get pack types');
         }
       });
     };
 
     $scope.getPackTypes();
 
-    $scope.addNewPackType = function () {
-      PackTypesService.setPackType("");
+    $scope.addNewPackType = function() {
+      PackTypesService.setPackType('');
       $location.path('/managePackType');
     };
 
     $scope.packTypesTableParams = new ngTableParams({
-        page: 1,            // show first page
-        count: 6,          // count per page
-        filter: {},
-        sorting: {}
-      },
+      page: 1,            // show first page
+      count: 6,          // count per page
+      filter: {},
+      sorting: {}
+    },
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
         total: data.length, // length of data
-        getData: function ($defer, params) {
+        getData: function($defer, params) {
           var filteredData = params.filter() ?
             $filter('filter')(data, params.filter()) : data;
           var orderedData = params.sorting() ?
@@ -81,38 +78,39 @@ angular.module('bsis')
         }
       });
 
-    $scope.$watch('data', function () {
-      $timeout(function(){ $scope.packTypesTableParams.reload(); });
+    $scope.$watch('data', function() {
+      $timeout(function() {
+        $scope.packTypesTableParams.reload();
+      });
     });
 
   })
 
-  .controller('ManagePackTypesCtrl', function ($scope, $location, PackTypesService, ICONS, PERMISSIONS,ComponentTypesService, $routeParams) {
+  .controller('ManagePackTypesCtrl', function($scope, $location, $log, PackTypesService, ICONS, PERMISSIONS, ComponentTypesService, $routeParams) {
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
     $scope.selection = '/managePackType';
     $scope.packType = PackTypesService.getPackType();
     $scope.serverError = null;
 
-    if ($scope.packType === ''){
+    if ($scope.packType === '') {
       $scope.packType = {
-        countAsDonation : false
+        countAsDonation: false
       };
     }
 
     ComponentTypesService.getComponentTypes(function(response) {
       if (response !== false) {
         $scope.componentTypes = response;
-      }
-      else {
-        console.log('failed to get component types');
+      } else {
+        $log.error('failed to get component types');
       }
     });
 
-    $scope.savePackType = function (packType, packTypeForm){
+    $scope.savePackType = function(packType, packTypeForm) {
 
       if (packTypeForm.$valid) {
-        if (typeof(packType.id) != 'undefined') {
+        if (angular.isDefined(packType.id)) {
           $scope.updatePackType(packType, packTypeForm);
         } else {
           $scope.addPackType(packType, packTypeForm);
@@ -122,17 +120,17 @@ angular.module('bsis')
       }
     };
 
-    $scope.addPackType = function (packType) {
+    $scope.addPackType = function(packType) {
 
       packType.canPool = null;
       packType.canSplit = null;
 
-      if(!packType.countAsDonation) {
+      if (!packType.countAsDonation) {
         delete packType.componentType;
       }
 
       $scope.savingPackType = true;
-      PackTypesService.addPackType(packType, function () {
+      PackTypesService.addPackType(packType, function() {
         $scope.go('/packTypes');
       }, function(err) {
         $scope.serverError = {
@@ -146,13 +144,12 @@ angular.module('bsis')
       });
     };
 
-    $scope.switchCountAsDonation = function (){
-      if(!$scope.packType.countAsDonation) {
+    $scope.switchCountAsDonation = function() {
+      if (!$scope.packType.countAsDonation) {
         $scope.tempComponentType = $scope.packType.componentType;
         $scope.packType.componentType = '';
-      }
-      else {
-        $scope.packType.componentType= $scope.tempComponentType;
+      } else {
+        $scope.packType.componentType = $scope.tempComponentType;
         $scope.tempComponentType = '';
       }
     };
@@ -164,14 +161,14 @@ angular.module('bsis')
       }
     };
 
-    $scope.updatePackType = function (packType) {
+    $scope.updatePackType = function(packType) {
 
-      if(!packType.countAsDonation) {
+      if (!packType.countAsDonation) {
         delete packType.componentType;
       }
 
       $scope.savingPackType = true;
-      PackTypesService.updatePackType(packType, function () {
+      PackTypesService.updatePackType(packType, function() {
         $scope.go('/packTypes');
       }, function(err) {
         $scope.serverError = {
@@ -185,23 +182,23 @@ angular.module('bsis')
       });
     };
 
-    $scope.clear = function () {
+    $scope.clear = function() {
 
     };
 
-    $scope.go = function (path) {
+    $scope.go = function(path) {
       $location.path(path);
     };
 
-    $scope.clearForm = function (form) {
+    $scope.clearForm = function(form) {
       form.$setPristine();
       $scope.submitted = '';
     };
 
-    $scope.getPackType = function () {
-      PackTypesService.getPackTypeById($routeParams.id, function (packType) {
+    $scope.getPackType = function() {
+      PackTypesService.getPackTypeById($routeParams.id, function(packType) {
         $scope.packType = packType;
-      }, function (err){
+      }, function(err) {
         $scope.serverError = err;
       });
     };
@@ -215,11 +212,10 @@ angular.module('bsis')
         isDeleted: false
 
       };
-    }
-    // managing update of existing pack type
-    else {
+    } else {
+      // managing update of existing pack type
       $scope.getPackType();
-      $scope.managePackType = "updatePackType";
+      $scope.managePackType = 'updatePackType';
     }
 
   })

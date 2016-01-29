@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ReportsCtrl', function ($scope, $location, ReportsService, ICONS, PERMISSIONS) {
+  .controller('ReportsCtrl', function($scope, $location, ReportsService, ICONS, PERMISSIONS) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -13,10 +13,8 @@ angular.module('bsis')
         return true;
       } else if ($location.path() === path) {
         return true;
-      } else if ($location.path() === "/reports" && path === "/reports") {
-        return true;
       } else {
-        return false;
+        return !!($location.path() === '/reports' && path === '/reports');
       }
     };
   });

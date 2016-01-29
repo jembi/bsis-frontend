@@ -1120,29 +1120,28 @@
     }
   ],
   "ttiTests": [
-      {
-        "testName": "HIV"
-      },
-      {
-        "testName": "HBV"
-      },
-      {
-        "testName": "HCV"
-      },
-      {
-        "testName": "Syphilis"
-      }
-  ]
-  ,
+    {
+      "testName": "HIV"
+    },
+    {
+      "testName": "HBV"
+    },
+    {
+      "testName": "HCV"
+    },
+    {
+      "testName": "Syphilis"
+    }
+  ],
   "bloodTypingTests": [
-      {
-        "testName": "ABO"
-      },
-      {
-        "testName": "Rh"
-      },
-      {
-        "testName": "Du"
-      }
+    {
+      "testName": "ABO"
+    },
+    {
+      "testName": "Rh"
+    },
+    {
+      "testName": "Du"
+    }
   ]
 }

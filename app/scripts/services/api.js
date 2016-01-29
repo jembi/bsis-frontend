@@ -2,24 +2,24 @@
 
 angular.module('bsis')
 
-  .factory('Api', function ($resource, $http, SYSTEMCONFIG) {
+  .factory('Api', function($resource, $http, SYSTEMCONFIG) {
 
     var url = 'http://' + SYSTEMCONFIG.apiHost + ':' + SYSTEMCONFIG.apiPort + '/' + SYSTEMCONFIG.apiApp;
 
     return {
-      User: $resource(url + '/users/login-user-details' , {}, {
+      User: $resource(url + '/users/login-user-details', {}, {
         get: {
           method: 'GET'
         }
       }),
 
-      Users : $resource(url + '/users/:id', null,
+      Users: $resource(url + '/users/:id', null,
         {
           update: {method: 'PUT'}
         }
       ),
 
-      Roles : $resource(url + '/roles/:id', null,
+      Roles: $resource(url + '/roles/:id', null,
         {
           update: {method: 'PUT'}
         }
@@ -29,42 +29,42 @@ angular.module('bsis')
 
       Donor: $resource(url + '/donors/:id', null,
         {
-          update: {method:'PUT'}
+          update: {method: 'PUT'}
         }
       ),
 
       Deferrals: $resource(url + '/deferrals/:id', null,
         {
-          update: {method:'PUT'},
+          update: {method: 'PUT'},
           end: {
             url: url + '/deferrals/:id/end',
-            method:'PUT',
-            params:{id: '@id'}
+            method: 'PUT',
+            params: {id: '@id'}
           }
         }
       ),
 
       deferralReasons: $resource(url + '/deferralreasons/:id', null,
         {
-          update: {method:'PUT'}
+          update: {method: 'PUT'}
         }
       ),
 
       Donations: $resource(url + '/donations/:id', null,
         {
-          update: {method:'PUT'}
+          update: {method: 'PUT'}
         }
       ),
 
       DonationBatches: $resource(url + '/donationbatches/:id', null,
         {
-          update: {method:'PUT'}
+          update: {method: 'PUT'}
         }
       ),
 
       TestBatches: $resource(url + '/testbatches/:id', null,
         {
-          update: {method:'PUT'}
+          update: {method: 'PUT'}
         }
       ),
 
@@ -86,23 +86,35 @@ angular.module('bsis')
         {
           query: {
             method: 'GET',
-            params:{firstName:'@firstName', lastName:'@lastName', donorNumber: '@donorNumber',
-            donationIdentificationNumber: '@donationIdentificationNumber', usePhraseMatch: '@usePhraseMatch' }
+            params: {
+              firstName: '@firstName',
+              lastName: '@lastName',
+              donorNumber: '@donorNumber',
+              donationIdentificationNumber: '@donationIdentificationNumber',
+              usePhraseMatch: '@usePhraseMatch'
+            }
           }
         }
       ),
 
-      DonorOverview:  $resource(url + '/donors/:id/overview'),
+      DonorOverview: $resource(url + '/donors/:id/overview'),
       DonorDonations: $resource(url + '/donors/:id/donations'),
       DonorDeferrals: $resource(url + '/donors/:id/deferrals'),
-      DonorBarcode:   $resource(url + '/donors/:id/print'),
+      DonorBarcode: $resource(url + '/donors/:id/print'),
 
       DonorCommunicationsSearch: $resource(url + '/donorcommunications/search', {},
         {
           query: {
             method: 'GET',
-            params:{bloodGroups:'@bloodGroups', venues:'@venues', clinicDate: '@clinicDate',
-            lastDonationFromDate: '@lastDonationFromDate', lastDonationToDate: '@lastDonationToDate', anyBloodGroup: '@anyBloodGroup', noBloodGroup: '@noBloodGroup' }
+            params: {
+              bloodGroups: '@bloodGroups',
+              venues: '@venues',
+              clinicDate: '@clinicDate',
+              lastDonationFromDate: '@lastDonationFromDate',
+              lastDonationToDate: '@lastDonationToDate',
+              anyBloodGroup: '@anyBloodGroup',
+              noBloodGroup: '@noBloodGroup'
+            }
           }
         }
       ),
@@ -115,7 +127,7 @@ angular.module('bsis')
         {
           query: {
             method: 'GET',
-            params:{donorNumber:'@donorNumber'}
+            params: {donorNumber: '@donorNumber'}
           }
         }
       ),
@@ -124,7 +136,7 @@ angular.module('bsis')
         {
           query: {
             method: 'POST',
-            params:{donorNumbers:'@donorNumbers'}
+            params: {donorNumbers: '@donorNumbers'}
           }
         }
       ),
@@ -133,7 +145,7 @@ angular.module('bsis')
         {
           query: {
             method: 'POST',
-            params:{donorNumber: '@donorNumber'}
+            params: {donorNumber: '@donorNumber'}
           }
         }
       ),
@@ -142,41 +154,50 @@ angular.module('bsis')
         {
           query: {
             method: 'GET',
-            params:{donationIdentificationNumber:'@donationIdentificationNumber', componentTypes:'@componentTypes', status: '@status',
-            donationDateFrom: '@donationDateFrom', donationDateTo: '@donationDateTo' }
+            params: {
+              donationIdentificationNumber: '@donationIdentificationNumber',
+              componentTypes: '@componentTypes',
+              status: '@status',
+              donationDateFrom: '@donationDateFrom',
+              donationDateTo: '@donationDateTo'
+            }
           }
         }
       ),
 
-      getComponentsByDIN:  $resource(url + '/components/donations/:donationIdentificationNumber', {},
+      getComponentsByDIN: $resource(url + '/components/donations/:donationIdentificationNumber', {},
         {
           query: {
             method: 'GET',
-            params:{donationIdentificationNumber:'@donationIdentificationNumber'}
+            params: {donationIdentificationNumber: '@donationIdentificationNumber'}
           }
         }
       ),
 
-      discardComponents:  $resource(url + '/components/:id/discard', {},
+      discardComponents: $resource(url + '/components/:id/discard', {},
         {
           update: {
             method: 'PUT',
-            params:{id: '@id', discardReasonId: '@discardReasonId', discardReasonText: '@discardReasonText'}
+            params: {
+              id: '@id',
+              discardReasonId: '@discardReasonId',
+              discardReasonText: '@discardReasonText'
+            }
           }
         }
       ),
 
       RecordComponents: $resource(url + '/components/recordcombinations'),
 
-      LabellingStatus:  $resource(url + '/labels/status/:donationIdentificationNumber'),
-      PrintPackLabel:  $resource(url + '/labels/print/packlabel/:componentId'),
+      LabellingStatus: $resource(url + '/labels/status/:donationIdentificationNumber'),
+      PrintPackLabel: $resource(url + '/labels/print/packlabel/:componentId'),
       PrintDiscardLabel: $resource(url + '/labels/print/discardlabel/:componentId'),
 
       FindDonationBatches: $resource(url + '/donationbatches/search', {},
         {
           query: {
             method: 'GET',
-            params:{isClosed:'@isClosed', venues:'@venues'}
+            params: {isClosed: '@isClosed', venues: '@venues'}
           }
         }
       ),
@@ -190,14 +211,14 @@ angular.module('bsis')
         {
           query: {
             method: 'GET',
-            params:{testBatch:'@testBatch'}
+            params: {testBatch: '@testBatch'}
           }
         }
       ),
 
       TestResults: $resource(url + '/testresults/:donationIdentificationNumber', null,
         {
-          update: {method:'PUT'}
+          update: {method: 'PUT'}
         }
       ),
 
@@ -205,7 +226,11 @@ angular.module('bsis')
         {
           query: {
             method: 'POST',
-            params:{donationIdentificationNumber: '@donationIdentificationNumber', bloodAdbo:'@bloodAbo', bloodRh:'@bloodRh'}
+            params: {
+              donationIdentificationNumber: '@donationIdentificationNumber',
+              bloodAdbo: '@bloodAbo',
+              bloodRh: '@bloodRh'
+            }
           }
         }
       ),
@@ -214,7 +239,7 @@ angular.module('bsis')
         {
           query: {
             method: 'GET',
-            params:{testBatch:'@testBatch'}
+            params: {testBatch: '@testBatch'}
           }
         }
       ),
@@ -222,38 +247,38 @@ angular.module('bsis')
       // Admin Configuration API endpoints
       Locations: $resource(url + '/locations/:id', null,
         {
-          update: {method:'PUT'}
+          update: {method: 'PUT'}
         }
       ),
 
       Configurations: $resource(url + '/configurations/:id', null,
         {
-          update: {method:'PUT'}
+          update: {method: 'PUT'}
         }
       ),
 
       PackTypes: $resource(url + '/packtypes/:id', null,
         {
-          update: {method:'PUT'}
+          update: {method: 'PUT'}
         }
       ),
 
       DiscardReasons: $resource(url + '/discardreasons/:id', null,
         {
-          update: {method:'PUT'}
+          update: {method: 'PUT'}
         }
       ),
 
       DonationTypes: $resource(url + '/donationtypes/:id', null,
         {
-          update: {method:'PUT'}
+          update: {method: 'PUT'}
         }
       ),
 
       PasswordResets: $resource(url + '/passwordresets'),
 
       AuditRevisions: $resource(url + '/auditrevisions'),
-      
+
       DonationSummaries: $resource(url + '/donations/summaries'),
 
       DonorPostDonationCounselling: $resource(url + '/donors/:donorId/postdonationcounselling'),
@@ -268,4 +293,4 @@ angular.module('bsis')
       })
 
     };
-});
+  });

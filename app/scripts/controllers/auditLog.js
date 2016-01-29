@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, Api, ngTableParams, DATEFORMAT) {
-  
+
   function unwindRevisions(revisions) {
     var mapped = [];
 
@@ -30,9 +30,9 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, 
       var match = false;
       angular.forEach(grouped, function(group) {
         if (!match &&
-            revision.id === group.id &&
-            revision.entityName === group.entityName &&
-            revision.revisionType === group.revisionType) {
+          revision.id === group.id &&
+          revision.entityName === group.entityName &&
+          revision.revisionType === group.revisionType) {
           match = true;
           group.count += 1;
         }
@@ -117,7 +117,7 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, 
         if (params.sorting()) {
           data = $filter('orderBy')(data, params.orderBy());
         }
-        
+
         // Set total number of rows for pagination
         params.total(data.length);
 

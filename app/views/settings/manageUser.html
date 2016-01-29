@@ -1,170 +1,176 @@
 <h3 class="page-header">Manage User</h3>
 <div class="panel panel-default">
-  <div class="panel-body">
-    <form name="userForm" novalidate class="form-horizontal col-sm-12" role="form"
-          ng-submit="saveUser(user, userForm)">
-        <div class="row form-group col-sm-12">
-          <label for="firstName" class="col-sm-1 control-label">Name</label>
+    <div class="panel-body">
+        <form name="userForm" novalidate class="form-horizontal col-sm-12" role="form"
+              ng-submit="saveUser(user, userForm)">
+            <div class="row form-group col-sm-12">
+                <label for="firstName" class="col-sm-1 control-label">Name</label>
 
-          <div class="row col-sm-6">
-            <div class="form-inline" style="padding-left:15px;">
-              <input size="15"  id="firstName" name="firstName" class="form-control input-sm" placeholder="First" ng-model="user.firstName" required ng-minlength=1 ng-maxlength=30
-                           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                           ng-class="{'ng-invalid ng-dirty' : userForm.firstName.$invalid && submitted}" >
-              <input size="15" id="lastName" name="lastName" class="form-control input-sm" placeholder="Last" ng-model="user.lastName" required ng-minlength=1 ng-maxlength=30 
-                            ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                           ng-class="{'ng-invalid ng-dirty' : userForm.lastName.$invalid && submitted}" >
-            <div>
-              <small class="error" 
-                ng-show="
+                <div class="row col-sm-6">
+                    <div class="form-inline" style="padding-left:15px;">
+                        <input size="15" id="firstName" name="firstName" class="form-control input-sm"
+                               placeholder="First" ng-model="user.firstName" required ng-minlength=1 ng-maxlength=30
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' : userForm.firstName.$invalid && submitted}">
+                        <input size="15" id="lastName" name="lastName" class="form-control input-sm" placeholder="Last"
+                               ng-model="user.lastName" required ng-minlength=1 ng-maxlength=30
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' : userForm.lastName.$invalid && submitted}">
+                        <div>
+                            <small class="error"
+                                   ng-show="
                   (userForm.firstName.$error.required && (userForm.firstName.$dirty || submitted)) ||
                   (userForm.lastName.$error.required && (userForm.lastName.$dirty || submitted))
                 ">
-                This cannot be empty
-              </small>
-            </div>
-            </div>
-          </div>
-        </div>
-       
-        <div class="row form-group col-sm-12">
-          <label for="emailId" class="col-sm-1 control-label">Email</label>
-
-          <div class="col-sm-4">
-            <div class="form-inline">
-              <input size="34" type="email" id="emailId" name="emailId" class="form-control input-sm"
-                     ng-model="user.emailId" ng-required="emailRequired"
-                     ng-model-options="{ updateOn:'default blur', debounce: { default: 1500, blur: 0 } }"
-                     ng-class="{'ng-invalid ng-dirty' : userForm.emailId.$invalid && submitted}">
-
-
-              <div ng-show="(userForm.emailId.$dirty || submitted)"
-                   ng-messages="userForm.emailId.$error">
-                  <small class="error" ng-messages-include="messages.html"></small>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="row form-group col-sm-12">
-
-            <label for="username" class="col-sm-1 control-label">Username</label>
-
-            <div class="col-sm-4">
-              <div class="form-inline">
-                <input size="34" id="username" name="username" class="form-control input-sm"
-                       ng-disabled="disableUsername"
-                       ng-model="user.username" required ng-minlength=1 ng-maxlength=30
-                       ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                       ng-class="{'ng-invalid ng-dirty' : (userForm.username.$invalid && submitted) || usernameInvalid}">
-
-                <div>
-                  <small class="error" ng-show="serverError">
-                      {{serverError}}
-                  </small>
-                  <small class="error"
-                         ng-show="(userForm.username.$error.required && (userForm.username.$dirty || submitted))">
-                      This cannot be empty
-                  </small>
+                                This cannot be empty
+                            </small>
+                        </div>
+                    </div>
                 </div>
-              </div>
-
             </div>
-        </div>
+
+            <div class="row form-group col-sm-12">
+                <label for="emailId" class="col-sm-1 control-label">Email</label>
+
+                <div class="col-sm-4">
+                    <div class="form-inline">
+                        <input size="34" type="email" id="emailId" name="emailId" class="form-control input-sm"
+                               ng-model="user.emailId" ng-required="emailRequired"
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 1500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' : userForm.emailId.$invalid && submitted}">
 
 
-        <div class="row form-group col-sm-12">
-          <label for="password" class="col-sm-1 control-label">Password </label>
+                        <div ng-show="(userForm.emailId.$dirty || submitted)"
+                             ng-messages="userForm.emailId.$error">
+                            <small class="error" ng-messages-include="messages.html"></small>
+                        </div>
 
-          <div class="col-sm-4">
-            <div class="form-inline">                
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group col-sm-12">
+
+                <label for="username" class="col-sm-1 control-label">Username</label>
+
+                <div class="col-sm-4">
+                    <div class="form-inline">
+                        <input size="34" id="username" name="username" class="form-control input-sm"
+                               ng-disabled="disableUsername"
+                               ng-model="user.username" required ng-minlength=1 ng-maxlength=30
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' : (userForm.username.$invalid && submitted) || usernameInvalid}">
+
+                        <div>
+                            <small class="error" ng-show="serverError">
+                                {{serverError}}
+                            </small>
+                            <small class="error"
+                                   ng-show="(userForm.username.$error.required && (userForm.username.$dirty || submitted))">
+                                This cannot be empty
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="row form-group col-sm-12">
+                <label for="password" class="col-sm-1 control-label">Password </label>
+
+                <div class="col-sm-4">
+                    <div class="form-inline">
                 <span ng-if="disableUsername">
-                    <input type="checkbox" id="modifyPassword" name="modifyPassword" ng-model="user.modifyPassword" />
+                    <input type="checkbox" id="modifyPassword" name="modifyPassword" ng-model="user.modifyPassword"/>
                     <label style="cursor: pointer;" for="modifyPassword">Reset Password</label>
-                    <br />
+                    <br/>
                 </span>
-                
-                <input size="34" id="password" name="password" type="password" placeholder="Enter Password"
-                       ng-disabled="!user.modifyPassword"
-                       class="form-control input-sm"
-                       ng-model="user.password" ng-required="passwordRequired"
-                       ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                       ng-class="{'ng-invalid ng-dirty' : userForm.password.$invalid && submitted}">
-                <div>
-                  <small class="error"
-                         ng-show="(userForm.password.$error.required && (userForm.password.$dirty || submitted))">
-                      This cannot be empty
-                  </small>
+
+                        <input size="34" id="password" name="password" type="password" placeholder="Enter Password"
+                               ng-disabled="!user.modifyPassword"
+                               class="form-control input-sm"
+                               ng-model="user.password" ng-required="passwordRequired"
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                               ng-class="{'ng-invalid ng-dirty' : userForm.password.$invalid && submitted}">
+                        <div>
+                            <small class="error"
+                                   ng-show="(userForm.password.$error.required && (userForm.password.$dirty || submitted))">
+                                This cannot be empty
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row form-group col-sm-12">
+
+                <label for="confirmPassword" class="col-sm-1 control-label"></label>
+
+                <div class="col-sm-4">
+                    <div class="form-inline">
+                        <input size="34" type="password" id="confirmPassword" name="confirmPassword"
+                               placeholder="Confirm Password"
+                               ng-disabled="!user.modifyPassword"
+                               ng-class="{'ng-invalid ng-dirty' : userForm.password.$invalid && submitted}"
+                               class="form-control input-sm"
+                               ng-model="user.confirmPassword"
+                               ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
+                               compare-to="user.password"/>
+
+                        <div ng-show="(userForm.confirmPassword.$dirty || submitted)"
+                             ng-messages="userForm.confirmPassword.$error">
+                            <small class="error" ng-messages-include="messages.html"></small>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
-          </div>
-        </div>
-        <div class="row form-group col-sm-12">
-
-          <label for="confirmPassword" class="col-sm-1 control-label"></label>
-
-          <div class="col-sm-4">
-            <div class="form-inline">
-              <input size="34" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password"
-                     ng-disabled="!user.modifyPassword"
-                     ng-class="{'ng-invalid ng-dirty' : userForm.password.$invalid && submitted}"
-                     class="form-control input-sm"
-                     ng-model="user.confirmPassword"
-                     ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
-                     compare-to="user.password"/>
-
-              <div ng-show="(userForm.confirmPassword.$dirty || submitted)"
-                   ng-messages="userForm.confirmPassword.$error">
-                  <small class="error" ng-messages-include="messages.html"></small>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <!--
-        <div class="form-group row">
-            <label for="other" class="col-sm-1 control-label" >Notes:</label>
-            <div id="notes" class="row col-sm-11" style="margin-left: 30px; width: 70%">
-                <div class="row" style="width: 100%">
-                    <small>
-                        <textarea ng-model="user.notes" class="form-control"></textarea>
-                    </small>
+            <!--
+            <div class="form-group row">
+                <label for="other" class="col-sm-1 control-label" >Notes:</label>
+                <div id="notes" class="row col-sm-11" style="margin-left: 30px; width: 70%">
+                    <div class="row" style="width: 100%">
+                        <small>
+                            <textarea ng-model="user.notes" class="form-control"></textarea>
+                        </small>
+                    </div>
                 </div>
             </div>
-        </div>
-        -->
-        <div class="row form-group col-sm-12">
-          <label for="firstName" class="col-sm-1 control-label">Roles</label>
+            -->
+            <div class="row form-group col-sm-12">
+                <label for="firstName" class="col-sm-1 control-label">Roles</label>
 
-          <small class="error" ng-show="roleRequired">
-              Please select at least one role.
-          </small>
-
-
-          <div class="col-sm-7">
-            <div class="form-inline">
-              <div ng-repeat="entity in roleList" class="row pull-left"
-                   style="width: 33%">
-                <small style="color: black;">
-                    <input type="checkbox" id="{{entity.id}}" checklist-model="user.roles"
-                           checklist-value="entity"/>
-                    <label style="display: inline-block; cursor: pointer; cursor: hand; margin: 0px 0px; font-size: 0.8em;" for="{{entity.id}}">{{entity.name | limitTo: 35}}</label></small>
+                <small class="error" ng-show="roleRequired">
+                    Please select at least one role.
                 </small>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="form-group">
-          <div class="col-sm-offset-1 col-sm-4">
-            <button class="btn btn-primary" type="submit" ng-disabled="savingUser">{{savingUser ? "Saving..." : "Save User"}}</button>
-            <button class="btn btn-primary" type="button"
-                    ng-click="clear(); go('/users');" ng-disabled="savingUser">Cancel
-            </button>
-          </div>
-        </div>
-    </form>
-  </div>
+
+                <div class="col-sm-7">
+                    <div class="form-inline">
+                        <div ng-repeat="entity in roleList" class="row pull-left"
+                             style="width: 33%">
+                            <small style="color: black;">
+                                <input type="checkbox" id="{{entity.id}}" checklist-model="user.roles"
+                                       checklist-value="entity"/>
+                                <label style="display: inline-block; cursor: pointer; cursor: hand; margin: 0px 0px; font-size: 0.8em;"
+                                       for="{{entity.id}}">{{entity.name | limitTo: 35}}</label></small>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-4">
+                    <button class="btn btn-primary" type="submit" ng-disabled="savingUser">{{savingUser ? "Saving..." :
+                        "Save User"}}
+                    </button>
+                    <button class="btn btn-primary" type="button"
+                            ng-click="clear(); go('/users');" ng-disabled="savingUser">Cancel
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

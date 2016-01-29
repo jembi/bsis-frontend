@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ConfirmModalCtrl', function ($scope, $modalInstance, confirmObject) {
+  .controller('ConfirmModalCtrl', function($scope, $modalInstance, confirmObject) {
 
     $scope.confirmObject = confirmObject;
 
@@ -9,7 +9,7 @@ angular.module('bsis')
       $modalInstance.close();
     };
 
-    $scope.cancelled = function () {
+    $scope.cancelled = function() {
       $modalInstance.dismiss('cancel');
     };
 
