@@ -458,7 +458,7 @@ angular.module('bsis')
       var ttiTests = TestingService.getTTITestingFormFields(function(response) {
         if (response !== false) {
           $scope.ttiTestsBasic = response.basicTTITests;
-          $scope.ttiTestsConfirmatory = response.confirmatoryTTITests;
+          $scope.ttiTestsPending = response.pendingTTITests;
 
           // add TTI Tests Basic to report column defs
           angular.forEach($scope.ttiTestsBasic, function(test) {
@@ -473,8 +473,8 @@ angular.module('bsis')
             );
           });
 
-          // add TTI Tests Confirmatory to report column defs
-          angular.forEach($scope.ttiTestsConfirmatory, function(test) {
+          // add TTI Tests Repeat to report column defs
+          angular.forEach($scope.ttiTestsRepeat, function(test) {
             columnDefs.push(
               {
                 name: test.testNameShort,
@@ -791,7 +791,7 @@ angular.module('bsis')
       TestingService.getTTITestingFormFields(function(response) {
         if (response !== false) {
           $scope.ttiTestsBasic = response.basicTTITests;
-          $scope.ttiTestsConfirmatory = response.confirmatoryTTITests;
+          $scope.ttiTestsPending = response.pendingTTITests;
         }
       });
       TestingService.getBloodGroupTestingFormFields(function(response) {
