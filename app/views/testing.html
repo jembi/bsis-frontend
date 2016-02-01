@@ -9,7 +9,6 @@
             <div class="row  main-page">
 
                 <div class="col-lg-12">
-
                     <div ng-switch on="selection">
                         <div ng-switch-when="/viewTestResults">
                             <div ng-include="'views/testing/viewTestResults.html'"></div>
@@ -22,6 +21,9 @@
                         </div>
                         <div ng-switch-when="/manageBloodGroupTesting">
                             <div ng-include="'views/testing/manageBloodGroupTesting.html'"></div>
+                        </div>
+                        <div ng-switch-when="/managePendingBloodTypingTests">
+                            <div ng-include="'views/testing/managePendingBloodTypingTests.html'"></div>
                         </div>
                         <div ng-switch-when="/manageBloodGroupMatchTesting">
                             <div ng-include="'views/testing/manageBloodGroupMatchTesting.html'"></div>

@@ -37,6 +37,9 @@ angular.module('bsis')
       } else if ($location.path().indexOf('/managePendingTests') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/managePendingTests';
         return true;
+      } else if ($location.path().indexOf('/managePendingBloodTypingTests') === 0 && path === '/manageTestBatch') {
+        $scope.selection = '/managePendingBloodTypingTests';
+        return true;
       } else if ($location.path().indexOf('/manageBloodGroupTesting') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/manageBloodGroupTesting';
         return true;
@@ -278,9 +281,14 @@ angular.module('bsis')
       }
     };
 
-    $scope.recordPendingBloodGroupMatchTests = function(item) {
+    $scope.recordConfirmatoryBloodGroupMatchTests = function(item) {
       TestingService.setCurrentTestBatch(item.id);
       $location.path('/manageBloodGroupMatchTesting/' + item.id);
+    };
+
+    $scope.recordPendingBloodTypingTests = function(item) {
+      TestingService.setCurrentTestBatch(item.id);
+      $location.path('/managePendingBloodTypingTests/' + item.id);
     };
 
     $scope.recordPendingTestResults = function(item) {
@@ -797,6 +805,7 @@ angular.module('bsis')
       TestingService.getBloodGroupTestingFormFields(function(response) {
         if (response !== false) {
           $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
+          $scope.bloodTypingTestsRepeat = response.repeatBloodTypingTests;
         }
       });
     };
@@ -922,5 +931,30 @@ angular.module('bsis')
       });
     });
 
+    $scope.testSamplesBloodTypingTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 10,          // count per page
+      filter: {},
+      sorting: {}
+    },
+      {
+        defaultSort: 'asc',
+        counts: [], // hide page counts control
+        total: data.length, // length of data
+        getData: function($defer, params) {
+          var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+          var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : data;
+          params.total(orderedData.length); // set total for pagination
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
+
+    $scope.$watch('data', function() {
+      $timeout(function() {
+        $scope.testSamplesBloodTypingTableParams.reload();
+      });
+    });
+
   })
 ;
+
