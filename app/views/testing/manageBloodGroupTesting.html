@@ -22,27 +22,27 @@
                     <thead>
                     <th class="text-left sortable"
                         ng-class="{
-              'sort-asc': testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'asc'),
-              'sort-desc': testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'desc')
-            }"
-                        ng-click="testSamplesTTITableParams.sorting('donationIdentificationNumber', testSamplesTTITableParams.isSortBy('donationIdentificationNumber', 'asc') ? 'desc' : 'asc')">
-                        <div>DIN</div>
+                          'sort-asc': testSamplesTTITableParams.isSortBy('donation.donationIdentificationNumber', 'asc'),
+                          'sort-desc': testSamplesTTITableParams.isSortBy('donation.donationIdentificationNumber', 'desc')
+                        }"
+                        ng-click="testSamplesTTITableParams.sorting('donation.donationIdentificationNumber', testSamplesTTITableParams.isSortBy('donation.donationIdentificationNumber', 'asc') ? 'desc' : 'asc')">
+                        <div>DIN <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> </div>
                     </th>
                     <th class="text-center sortable"
                         ng-class="{
-              'sort-asc': testSamplesTTITableParams.isSortBy('donationDate', 'asc'),
-              'sort-desc': testSamplesTTITableParams.isSortBy('donationDate', 'desc')
-            }"
-                        ng-click="testSamplesTTITableParams.sorting('donationDate', testSamplesTTITableParams.isSortBy('donationDate', 'asc') ? 'desc' : 'asc')">
-                        <div>Donation Date</div>
+                          'sort-asc': testSamplesTTITableParams.isSortBy('donation.donationDate', 'asc'),
+                          'sort-desc': testSamplesTTITableParams.isSortBy('donation.donationDate', 'desc')
+                        }"
+                        ng-click="testSamplesTTITableParams.sorting('donation.donationDate', testSamplesTTITableParams.isSortBy('donation.donationDate', 'asc') ? 'desc' : 'asc')">
+                        <div>Donation Date <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> </div>
                     </th>
                     <th class="text-center sortable" style="width:25%;"
                         ng-class="{
-              'sort-asc': testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'asc'),
-              'sort-desc': testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'desc')
-            }"
-                        ng-click="testSamplesTTITableParams.sorting('bloodTypingStatus', testSamplesTTITableParams.isSortBy('bloodTypingStatus', 'asc') ? 'desc' : 'asc')">
-                        <div>Blood Typing Status</div>
+                          'sort-asc': testSamplesTTITableParams.isSortBy('donation.bloodTypingStatus', 'asc'),
+                          'sort-desc': testSamplesTTITableParams.isSortBy('donation.bloodTypingStatus', 'desc')
+                        }"
+                        ng-click="testSamplesTTITableParams.sorting('donation.bloodTypingStatus', testSamplesTTITableParams.isSortBy('donation.bloodTypingStatus', 'asc') ? 'desc' : 'asc')">
+                        <div>Blood Typing Status <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> </div>
                     </th>
                     <th ng-repeat="column in bloodTypingTestsBasic" ng-show="true"
                         class="text-center" ng-class=""

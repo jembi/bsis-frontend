@@ -19,38 +19,43 @@
         <div class="panel-body">
             <form ng-submit="saveTestResults(addTestResults)">
                 <table ng-table="testSamplesBloodTypingTableParams" show-filter="false" class="table">
-                    <thead>
+                  <thead>
                     <th class="text-left sortable"
                         ng-class="{
-              'sort-asc': testSamplesBloodTypingTableParams.isSortBy('donationIdentificationNumber', 'asc'),
-              'sort-desc': testSamplesBloodTypingTableParams.isSortBy('donationIdentificationNumber', 'desc')
-            }"
-                        ng-click="testSamplesBloodTypingTableParams.sorting('donationIdentificationNumber', testSamplesBloodTypingTableParams.isSortBy('donationIdentificationNumber', 'asc') ? 'desc' : 'asc')">
-                        <div>DIN</div>
+                          'sort-asc': testSamplesBloodTypingTableParams.isSortBy('donation.donationIdentificationNumber', 'asc'),
+                          'sort-desc': testSamplesBloodTypingTableParams.isSortBy('donation.donationIdentificationNumber', 'desc')
+                        }"
+                        ng-click="testSamplesBloodTypingTableParams.sorting('donation.donationIdentificationNumber', testSamplesBloodTypingTableParams.isSortBy('donation.donationIdentificationNumber', 'asc') ? 'desc' : 'asc')">
+                        <div>
+                          DIN <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> 
+                        </div>
                     </th>
                     <th class="text-center sortable"
                         ng-class="{
-              'sort-asc': testSamplesBloodTypingTableParams.isSortBy('donationDate', 'asc'),
-              'sort-desc': testSamplesBloodTypingTableParams.isSortBy('donationDate', 'desc')
-            }"
-                        ng-click="testSamplesBloodTypingTableParams.sorting('donationDate', testSamplesBloodTypingTableParams.isSortBy('donationDate', 'asc') ? 'desc' : 'asc')">
-                        <div>Donation Date</div>
+                          'sort-asc': testSamplesBloodTypingTableParams.isSortBy('donation.donationDate', 'asc'),
+                          'sort-desc': testSamplesBloodTypingTableParams.isSortBy('donation.donationDate', 'desc')
+                        }"
+                        ng-click="testSamplesBloodTypingTableParams.sorting('donation.donationDate', testSamplesBloodTypingTableParams.isSortBy('donation.donationDate', 'asc') ? 'desc' : 'asc')">
+                        <div>
+                          Donation Date <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> 
+                        </div>
                     </th>
                     <th class="text-center sortable"
                         ng-class="{
-              'sort-asc': testSamplesBloodTypingTableParams.isSortBy('bloodTypingStatus', 'asc'),
-              'sort-desc': testSamplesBloodTypingTableParams.isSortBy('bloodTypingStatus', 'desc')
-            }"
-                        ng-click="testSamplesBloodTypingTableParams.sorting('bloodTypingStatus', testSamplesBloodTypingTableParams.isSortBy('bloodTypingStatus', 'asc') ? 'desc' : 'asc')">
-                        <div>Blood Group Serology Status</div>
+                          'sort-asc': testSamplesBloodTypingTableParams.isSortBy('donation.bloodTypingStatus', 'asc'),
+                          'sort-desc': testSamplesBloodTypingTableParams.isSortBy('donation.bloodTypingStatus', 'desc')
+                        }"
+                        ng-click="testSamplesBloodTypingTableParams.sorting('donation.bloodTypingStatus', testSamplesBloodTypingTableParams.isSortBy('donation.bloodTypingStatus', 'asc') ? 'desc' : 'asc')">
+                        <div>
+                          Blood Group Serology Status <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> 
+                        </div>
                     </th>
                     <th ng-repeat="column in bloodTypingTestsRepeat" ng-show="true"
-                        class="text-center" ng-class=""
-                        ng-click="">
+                        class="text-center">
                         <div>{{column.testNameShort}}</div>
                     </th>
-                    </thead>
-                    <tbody>
+                  </thead>
+                  <tbody>
                     <tr ng-repeat="sample in $data"
                         ng-click=""
                         ng-mouseenter="this.$selected = true"
@@ -81,7 +86,7 @@
                 </span>
                         </td>
                     </tr>
-                    </tbody>
+                  </tbody>
                 </table>
 
                 <div class="form-group">
