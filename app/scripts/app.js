@@ -875,9 +875,7 @@ var DONATION = {DONOR: {}};
             app.constant('DATETIMEFORMAT', config[i].value);
           } else if (config[i].name == 'timeFormat') {
             app.constant('TIMEFORMAT', config[i].value);
-          }    //Home Tabs constants
-
-          if (config[i].name == 'ui.donorsTabEnabled') {
+          } else if (config[i].name == 'ui.donorsTabEnabled') {  //Home Tabs constants
             UI.DONORS_TAB_ENABLED = config[i].value;
           } else if (config[i].name == 'ui.componentsTabEnabled') {
             UI.COMPONENTS_TAB_ENABLED = config[i].value;
@@ -891,11 +889,7 @@ var DONATION = {DONOR: {}};
             UI.REPORTS_TAB_ENABLED = config[i].value;
           } else if (config[i].name == 'ui.mobileClinicTabEnabled') {
             UI.MOBILE_CLINIC_TAB_ENABLED = config[i].value;
-          }
-
-          //Address fields constants
-
-          if (config[i].name == 'ui.address.addressLine1.enabled') {
+          } else if (config[i].name == 'ui.address.addressLine1.enabled') { //Address fields constants
             UI.ADDRESS.ADDRESS_LINE_1_ENABLED = config[i].value;
           } else if (config[i].name == 'ui.address.addressLine1.displayName') {
             UI.ADDRESS.ADDRESS_LINE_1_NAME = config[i].value;
@@ -927,11 +921,7 @@ var DONATION = {DONOR: {}};
             UI.ADDRESS.POSTAL_CODE_ENABLED = config[i].value;
           } else if (config[i].name == 'ui.address.postalCode.displayName') {
             UI.ADDRESS.POSTAL_CODE_NAME = config[i].value;
-          }
-
-
-          // Donor form units
-          if (config[i].name == 'donation.bpUnit') {
+          } else if (config[i].name == 'donation.bpUnit') {  // Donor form units
             DONATION.BPUNIT = config[i].value;
           } else if (config[i].name == 'donation.hbUnit') {
             DONATION.HBUNIT = config[i].value;
@@ -939,11 +929,7 @@ var DONATION = {DONOR: {}};
             DONATION.WEIGHTUNIT = config[i].value;
           } else if (config[i].name == 'donation.pulseUnit') {
             DONATION.PULSEUNIT = config[i].value;
-          }
-
-          // donor form constants
-
-          if (config[i].name == 'donation.donor.bpSystolicMin') {
+          } else if (config[i].name == 'donation.donor.bpSystolicMin') { // donor form constants
             DONATION.DONOR.BP_SYSTOLIC_MIN = config[i].value;
           } else if (config[i].name == 'donation.donor.bpSystolicMax') {
             DONATION.DONOR.BP_SYSTOLIC_MAX = config[i].value;
