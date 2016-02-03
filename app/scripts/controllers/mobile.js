@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('MobileCtrl', function($scope, $filter, $location, $routeParams, MobileService, ICONS, PERMISSIONS) {
+  .controller('MobileCtrl', function($scope, $filter, $location, $routeParams, MobileService, ICONS, PERMISSIONS, uiGridConstants) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -43,8 +43,20 @@ angular.module('bsis')
 
     var columnDefs = [
       {field: 'donorNumber'},
-      {field: 'firstName'},
-      {field: 'lastName'},
+      {
+        field: 'firstName',
+        sort: {
+          direction: uiGridConstants.ASC,
+          priority: 1
+        }
+      },
+      {
+        field: 'lastName',
+        sort: {
+          direction: uiGridConstants.ASC,
+          priority: 0
+        }
+      },
       {field: 'gender'},
       {
         name: 'Date of Birth',
@@ -60,6 +72,7 @@ angular.module('bsis')
     ];
 
     $scope.gridOptions = {
+      enableSorting: false,
       data: [],
       paginationPageSize: 10,
       paginationPageSizes: [10],
