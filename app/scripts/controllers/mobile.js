@@ -14,7 +14,7 @@ angular.module('bsis')
       } else if ($location.path() === path) {
         return true;
       } else {
-        return !!($location.path() === '/mobile' && path === '/mobile');
+        return !!($location.path() === '/mobile' && path === '/lookUp');
       }
     };
   });

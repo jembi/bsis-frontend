@@ -132,7 +132,8 @@ angular.module('bsis')
     ];
 
     var mobileRoutes = [
-      '/mobile'
+      '/mobile',
+      '/lookUp'
     ];
 
     var settingsRoutes = [
