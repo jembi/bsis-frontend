@@ -36,7 +36,7 @@ angular.module('bsis')
     };
 
     $scope.search = {
-      venue: angular.isUndefined($routeParams.venue) ? master.venue : +$routeParams.venue,
+      venue: angular.isUndefined($routeParams.venueId) ? master.venue : +$routeParams.venueId,
       clinicDate: angular.isUndefined($routeParams.clinicDate) ? master.clinicDate : new Date($routeParams.clinicDate)
     };
 
@@ -145,7 +145,7 @@ angular.module('bsis')
       $scope.currentSearch = angular.copy($scope.search);
 
       var search = {
-        venueId:  parseInt($scope.currentSearch.venue),
+        venueId: $scope.currentSearch.venue,
         clinicDate: getISOString($scope.currentSearch.clinicDate)
       };
 
