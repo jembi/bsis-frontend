@@ -145,6 +145,10 @@ angular.module('bsis')
       }
     };
 
+    function getISOString(maybeDate) {
+      return angular.isDate(maybeDate) ? maybeDate.toISOString() : maybeDate;
+    }
+
     $scope.onSearch = function(form) {
 
       if (form && form.$invalid) {
@@ -153,11 +157,12 @@ angular.module('bsis')
 
       $scope.currentSearch = angular.copy($scope.search);
 
-      var search = angular.extend({}, $scope.currentSearch, {
+      var search = {
+        venue: $scope.currentSearch.venue,
+        clinicDate: getISOString($scope.currentSearch.clinicDate)
+      };
 
-      });
-
-      $location.search(angular.extend({}, search, {search: true}));
+      $location.search(angular.extend({search: true}, search));
 
       $scope.searching = true;
       MobileService.mobileClinicLookUp(search, function(res) {
