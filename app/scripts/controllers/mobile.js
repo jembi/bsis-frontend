@@ -145,7 +145,7 @@ angular.module('bsis')
       $scope.currentSearch = angular.copy($scope.search);
 
       var search = {
-        venue: $scope.currentSearch.venue,
+        venueId:  parseInt($scope.currentSearch.venue),
         clinicDate: getISOString($scope.currentSearch.clinicDate)
       };
 
