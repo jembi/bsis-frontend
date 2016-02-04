@@ -37,7 +37,7 @@ angular.module('bsis')
     };
 
     $scope.search = {
-      venue: angular.isUndefined($routeParams.venue) ? master.venue : $routeParams.venue,
+      venue: angular.isUndefined($routeParams.venue) ? master.venue : +$routeParams.venue,
       clinicDate: angular.isUndefined($routeParams.clinicDate) ? master.clinicDate : new Date($routeParams.clinicDate)
     };
 
@@ -95,8 +95,15 @@ angular.module('bsis')
       // PDF header
       exporterPdfHeader: function() {
 
+        var venueName;
+        angular.forEach($scope.venues, function(venue) {
+          if (venue.id === $scope.currentSearch.venue) {
+            venueName = venue.name;
+          }
+        });
+
         var columns = [
-          {text: 'Venue: ' + $scope.currentSearch.venue, width: 'auto'}
+          {text: 'Venue: ' + venueName, width: 'auto'}
         ];
 
         // Include Clinic Date
