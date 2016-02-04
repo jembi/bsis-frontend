@@ -5,20 +5,13 @@ angular.module('bsis')
 
     return {
 
-      getMobileClinicLookUpFormFields: function(response) {
-        Api.MobileClinicLookUpFormFields.get({}, function(form) {
-          response(form);
-        }, function() {
-          response(false);
-        });
+      getMobileClinicLookUpFormFields: function(onSuccess, onError) {
+        Api.MobileClinicLookUpFormFields.get({}, onSuccess, onError);
       },
 
       mobileClinicLookUp: function(search, onSuccess, onError) {
-        var donors = Api.MobileClinicLookUp.query({
-          venue: search.venue,
-          clinicDate: search.clinicDate
-        }, function() {
-          onSuccess(donors.donors);
+        Api.MobileClinicLookUp.get(search, function(response) {
+          onSuccess(response.donors);
         }, function(err) {
           onError(err.data);
         });

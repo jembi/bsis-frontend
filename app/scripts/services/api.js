@@ -294,17 +294,7 @@ angular.module('bsis')
 
       MobileClinicLookUpFormFields: $resource(url + '/mobileclinic/form'),
 
-      MobileClinicLookUp: $resource(url + '/mobileclinic/lookup', {},
-        {
-          query: {
-            method: 'GET',
-            params: {
-              venue: '@venue',
-              clinicDate: '@clinicDate'
-            }
-          }
-        }
-      )
+      MobileClinicLookUp: $resource(url + '/mobileclinic/lookup')
 
     };
   });
