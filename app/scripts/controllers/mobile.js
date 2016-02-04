@@ -78,6 +78,7 @@ angular.module('bsis')
       paginationPageSizes: [10],
       paginationTemplate: 'views/template/pagination.html',
       columnDefs: columnDefs,
+      exporterPdfMaxGridWidth: 680,
 
       // Format values for exports
       exporterFieldCallback: function(grid, row, col, value) {
@@ -128,7 +129,7 @@ angular.module('bsis')
         return {
           columns: columns,
           columnGap: 10,
-          margin: [30, 0]
+          margin: [30, 0, 50, 0]
         };
       },
 
