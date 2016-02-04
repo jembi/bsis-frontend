@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('MobileCtrl', function($scope, $filter, $location, $routeParams, MobileService, ICONS, PERMISSIONS, uiGridConstants) {
+  .controller('MobileCtrl', function($scope, $filter, $location, $routeParams, MobileService, ICONS, PERMISSIONS, uiGridExporterConstants) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -18,7 +18,7 @@ angular.module('bsis')
       }
     };
 
-    $scope.venue = '';
+    $scope.venues = [];
     $scope.error = {
       message: null
     };
@@ -26,7 +26,6 @@ angular.module('bsis')
 
     MobileService.getMobileClinicLookUpFormFields(function(res) {
       $scope.venues = res.venues;
-
     }, function(err) {
       $scope.error.message = err.userMessage;
     });
@@ -43,20 +42,8 @@ angular.module('bsis')
 
     var columnDefs = [
       {field: 'donorNumber'},
-      {
-        field: 'firstName',
-        sort: {
-          direction: uiGridConstants.ASC,
-          priority: 1
-        }
-      },
-      {
-        field: 'lastName',
-        sort: {
-          direction: uiGridConstants.ASC,
-          priority: 0
-        }
-      },
+      {field: 'firstName'},
+      {field: 'lastName'},
       {field: 'gender'},
       {
         name: 'Date of Birth',
@@ -188,7 +175,7 @@ angular.module('bsis')
 
     $scope.export = function(format) {
       if (format === 'pdf') {
-        $scope.gridApi.exporter.pdfExport('all', 'all');
+        $scope.gridApi.exporter.pdfExport(uiGridExporterConstants.ALL, uiGridExporterConstants.ALL);
       }
     };
 

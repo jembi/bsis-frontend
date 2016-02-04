@@ -2,6 +2,10 @@
 
 <form name="mobileClinicLookUpForm" class="form-horizontal" style="padding:10px 0;" ng-submit="onSearch(mobileClinicLookUpForm)">
 
+    <div ng-show="error.message">
+        <alert type="danger" close="error.message = null">{{error.message}}</alert>
+    </div>
+
     <div class="clearfix form-group">
         <label class="col-sm-1 control-label">Venue:</label>
         <div class="col-sm-11 ">
@@ -43,7 +47,7 @@
     </div>
 </form>
 
-<div class="panel panel-default" ng-if="currentSearch">
+<div class="panel panel-default" ng-if="currentSearch && !searching">
     <div class="panel-body">
         <p>
             <em>{{gridOptions.data.length}} donor(s) found</em> | <em> Data export: </em>
