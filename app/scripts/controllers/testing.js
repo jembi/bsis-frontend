@@ -407,6 +407,7 @@ angular.module('bsis')
           $scope.pendingBloodTypingMatchTests = response.pendingBloodTypingMatchTests;
           $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
           $scope.basicTTIComplete = response.basicTTIComplete;
+          $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
         }
       });
     };
