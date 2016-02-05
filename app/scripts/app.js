@@ -287,7 +287,16 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         templateUrl: 'views/mobile.html',
         controller: 'MobileCtrl',
         permission: PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION,
-        enabled: UI.MOBILE_CLINIC_TAB_ENABLED
+        enabled: UI.MOBILE_CLINIC_TAB_ENABLED,
+        reloadOnSearch: reloadOnSearch
+      })
+
+      .when('/lookUp', {
+        templateUrl: 'views/mobile.html',
+        controller: 'MobileCtrl',
+        permission: PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION,
+        enabled: UI.MOBILE_CLINIC_TAB_ENABLED,
+        reloadOnSearch: reloadOnSearch
       })
 
       // SETTINGS URLs
