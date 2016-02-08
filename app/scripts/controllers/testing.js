@@ -404,7 +404,6 @@ angular.module('bsis')
           $scope.testBatchOverview = response;
           $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
           $scope.pendingTTITests = response.pendingTTITests;
-          $scope.pendingBloodTypingMatchTests = response.pendingBloodTypingMatchTests;
           $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
           $scope.basicTTIComplete = response.basicTTIComplete;
           $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
