@@ -875,13 +875,11 @@ angular.module('bsis')
         updatedTestResults.testResults = {};
         updatedTestResults.testResults[aboTestId] = value.bloodAbo;
         updatedTestResults.testResults[rhTestId] = value.bloodRh == '+' ? 'POS' : 'NEG';
-        var request = TestingService.saveTestResults(updatedTestResults, angular.noop).then(function() {
-          if (value.confirm) {
-              // save confirmation last
-            return TestingService.saveBloodGroupMatchTestResults(value, angular.noop);
-          }
-        });
-        requests.push(request);
+        if (value.confirm) {
+            // save confirmation last
+          var request = TestingService.saveBloodGroupMatchTestResults(value, angular.noop);
+          requests.push(request);
+        }
       });
 
       $q.all(requests).then(function() {
