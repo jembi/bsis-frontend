@@ -50,7 +50,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "lint": "eslint app/scripts",
+    "lint": "eslint --max-warnings=0 app/scripts",
     "test": "karma start test/karma.conf.js",
     "postinstall": "bower install",
     "prestart": "npm install",
@@ -62,8 +62,5 @@
     "preprotractor": "npm run update-webdriver",
     "protractor": "protractor test/protractor-conf.js",
     "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + cat('app/bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'app/index-async.html');\""
-  },
-  "dependencies": {
-    "eslint-plugin-angular": "^0.14.0"
   }
 }
