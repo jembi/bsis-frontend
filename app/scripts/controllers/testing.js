@@ -482,14 +482,14 @@ angular.module('bsis')
           });
 
           // add TTI Tests Repeat to report column defs
-          angular.forEach($scope.ttiTestsRepeat, function(test) {
+          angular.forEach($scope.ttiTestsPending, function(test) {
             columnDefs.push(
               {
                 name: test.testNameShort,
                 displayName: test.testNameShort,
                 field: 'testResults.recentTestResults',
                 visible: false,
-                width: 90
+                width: 80
               }
             );
           });
@@ -501,6 +501,7 @@ angular.module('bsis')
         TestingService.getBloodGroupTestingFormFields(function(response) {
           if (response !== false) {
             $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
+            $scope.bloodTypingTestsRepeat = response.repeatBloodTypingTests;
 
             // add Blood Typing Tests to report column defs
             angular.forEach($scope.bloodTypingTestsBasic, function(test) {
@@ -510,11 +511,23 @@ angular.module('bsis')
                   displayName: test.testNameShort,
                   field: 'testResults.recentTestResults',
                   visible: false,
-                  width: 80
+                  width: 70
                 }
               );
             });
 
+            // add Blood Typing Tests Repeat to report column defs
+            angular.forEach($scope.bloodTypingTestsRepeat, function(test) {
+              columnDefs.push(
+                {
+                  name: test.testNameShort,
+                  displayName: test.testNameShort,
+                  field: 'testResults.recentTestResults',
+                  visible: false,
+                  width: 70
+                }
+              );
+            });
           }
         });
 
@@ -534,8 +547,8 @@ angular.module('bsis')
 
       exporterPdfOrientation: 'landscape',
       exporterPdfPageSize: 'A4',
-      exporterPdfDefaultStyle: {fontSize: 5},
-      exporterPdfTableHeaderStyle: {fontSize: 6, bold: true},
+      exporterPdfDefaultStyle: {fontSize: 4, margin: [-2, 0, 0, 0] },
+      exporterPdfTableHeaderStyle: {fontSize: 5, bold: true, margin: [-2, 0, 0, 0] },
       exporterPdfMaxGridWidth: 550,
 
       // Format values for exports
