@@ -549,7 +549,7 @@ angular.module('bsis')
       exporterPdfPageSize: 'A4',
       exporterPdfDefaultStyle: {fontSize: 4, margin: [-2, 0, 0, 0] },
       exporterPdfTableHeaderStyle: {fontSize: 5, bold: true, margin: [-2, 0, 0, 0] },
-      exporterPdfMaxGridWidth: 550,
+      exporterPdfMaxGridWidth: 500,
 
       // Format values for exports
       exporterFieldCallback: function(grid, row, col, value) {
@@ -582,11 +582,13 @@ angular.module('bsis')
         var finalArray = [
           {
             text: $scope.reportName,
+            fontSize: 10,
             bold: true,
-            margin: [30, 10, 0, 0]
+            margin: [30, 20, 0, 0] // [left, top, right, bottom]
           },
           {
             text: 'Created On: ' + $filter('bsisDate')($scope.testBatch.createdDate),
+            fontSize: 6,
             margin: [300, -10, 0, 0]
           }
         ];
@@ -607,7 +609,7 @@ angular.module('bsis')
           );
         });
 
-        docDefinition.content = [{text: prefix, margin: [-10, -20, 0, 0]}].concat(docDefinition.content);
+        docDefinition.content = [{text: prefix, margin: [-10, 0, 0, 0], fontSize: 7}].concat(docDefinition.content);
         return docDefinition;
       },
 
@@ -625,7 +627,8 @@ angular.module('bsis')
         return {
           columns: columns,
           columnGap: 10,
-          margin: [30, 0]
+          margin: [30, 0],
+          fontSize: 6
         };
       },
       enableFiltering: false,
