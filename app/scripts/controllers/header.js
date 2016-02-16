@@ -110,6 +110,7 @@ angular.module('bsis')
       '/manageTTITesting/\\d+',
       '/managePendingTests/\\d+',
       '/manageBloodGroupTesting/\\d+',
+      '/managePendingBloodTypingTests/\\d+',
       '/manageBloodGroupMatchTesting/\\d+',
       '/uploadTestResults'
     ];

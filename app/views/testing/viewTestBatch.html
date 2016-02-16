@@ -86,12 +86,12 @@
 <span class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
   <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a href=""
                                                                                                               ng-click="recordPendingTestResults(testBatch)"
-                                                                                                              ng-disabled="!basicTTIComplete && !pendingBloodTypingTests && !pendingTTITests">Record
+                                                                                                              ng-disabled="!basicTTIComplete && !pendingTTITests">Record
       Pending Test Results</a></em></small> </span>
   <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> | </span>
   <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a
-          href="" ng-click="recordPendingBloodGroupMatchTests(testBatch)" ng-disabled="!pendingBloodTypingMatchTests">Record
-      Confirmatory Abo/Rh Results</a></em></small> </span>
+          href="" ng-click="recordPendingBloodTypingTests(testBatch)" ng-disabled="!basicBloodTypingComplete && !pendingBloodTypingTests">Record
+      Pending Abo/Rh Results</a></em></small> </span>
 </span>
 
 <alert type="danger" close="" ng-show="err.userMessage">
@@ -121,6 +121,12 @@
     </div>
 
     <hr style="margin-bottom:5px;"/>
+
+<span class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
+  <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a
+          href="" ng-click="recordConfirmatoryBloodGroupMatchTests(testBatch)" ng-disabled="!pendingBloodTypingConfirmations">Record
+      Confirmatory Abo/Rh Results</a></em></small> </span>
+</span>
 
     <div ng-show="editableForm.$visible && testBatch.permissions.canEditDonationBatches" class="h4">
         <small><em>Donation Batches: </em></small>

@@ -37,6 +37,9 @@ angular.module('bsis')
       } else if ($location.path().indexOf('/managePendingTests') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/managePendingTests';
         return true;
+      } else if ($location.path().indexOf('/managePendingBloodTypingTests') === 0 && path === '/manageTestBatch') {
+        $scope.selection = '/managePendingBloodTypingTests';
+        return true;
       } else if ($location.path().indexOf('/manageBloodGroupTesting') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/manageBloodGroupTesting';
         return true;
@@ -278,9 +281,14 @@ angular.module('bsis')
       }
     };
 
-    $scope.recordPendingBloodGroupMatchTests = function(item) {
+    $scope.recordConfirmatoryBloodGroupMatchTests = function(item) {
       TestingService.setCurrentTestBatch(item.id);
       $location.path('/manageBloodGroupMatchTesting/' + item.id);
+    };
+
+    $scope.recordPendingBloodTypingTests = function(item) {
+      TestingService.setCurrentTestBatch(item.id);
+      $location.path('/managePendingBloodTypingTests/' + item.id);
     };
 
     $scope.recordPendingTestResults = function(item) {
@@ -396,9 +404,9 @@ angular.module('bsis')
           $scope.testBatchOverview = response;
           $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
           $scope.pendingTTITests = response.pendingTTITests;
-          $scope.pendingBloodTypingMatchTests = response.pendingBloodTypingMatchTests;
           $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
           $scope.basicTTIComplete = response.basicTTIComplete;
+          $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
         }
       });
     };
@@ -474,14 +482,14 @@ angular.module('bsis')
           });
 
           // add TTI Tests Repeat to report column defs
-          angular.forEach($scope.ttiTestsRepeat, function(test) {
+          angular.forEach($scope.ttiTestsPending, function(test) {
             columnDefs.push(
               {
                 name: test.testNameShort,
                 displayName: test.testNameShort,
                 field: 'testResults.recentTestResults',
                 visible: false,
-                width: 90
+                width: 80
               }
             );
           });
@@ -493,6 +501,7 @@ angular.module('bsis')
         TestingService.getBloodGroupTestingFormFields(function(response) {
           if (response !== false) {
             $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
+            $scope.bloodTypingTestsRepeat = response.repeatBloodTypingTests;
 
             // add Blood Typing Tests to report column defs
             angular.forEach($scope.bloodTypingTestsBasic, function(test) {
@@ -502,11 +511,23 @@ angular.module('bsis')
                   displayName: test.testNameShort,
                   field: 'testResults.recentTestResults',
                   visible: false,
-                  width: 80
+                  width: 70
                 }
               );
             });
 
+            // add Blood Typing Tests Repeat to report column defs
+            angular.forEach($scope.bloodTypingTestsRepeat, function(test) {
+              columnDefs.push(
+                {
+                  name: test.testNameShort,
+                  displayName: test.testNameShort,
+                  field: 'testResults.recentTestResults',
+                  visible: false,
+                  width: 70
+                }
+              );
+            });
           }
         });
 
@@ -526,9 +547,9 @@ angular.module('bsis')
 
       exporterPdfOrientation: 'landscape',
       exporterPdfPageSize: 'A4',
-      exporterPdfDefaultStyle: {fontSize: 5},
-      exporterPdfTableHeaderStyle: {fontSize: 6, bold: true},
-      exporterPdfMaxGridWidth: 550,
+      exporterPdfDefaultStyle: {fontSize: 4, margin: [-2, 0, 0, 0] },
+      exporterPdfTableHeaderStyle: {fontSize: 5, bold: true, margin: [-2, 0, 0, 0] },
+      exporterPdfMaxGridWidth: 500,
 
       // Format values for exports
       exporterFieldCallback: function(grid, row, col, value) {
@@ -561,11 +582,13 @@ angular.module('bsis')
         var finalArray = [
           {
             text: $scope.reportName,
+            fontSize: 10,
             bold: true,
-            margin: [30, 10, 0, 0]
+            margin: [30, 20, 0, 0] // [left, top, right, bottom]
           },
           {
             text: 'Created On: ' + $filter('bsisDate')($scope.testBatch.createdDate),
+            fontSize: 6,
             margin: [300, -10, 0, 0]
           }
         ];
@@ -586,7 +609,7 @@ angular.module('bsis')
           );
         });
 
-        docDefinition.content = [{text: prefix, margin: [-10, -20, 0, 0]}].concat(docDefinition.content);
+        docDefinition.content = [{text: prefix, margin: [-10, 0, 0, 0], fontSize: 7}].concat(docDefinition.content);
         return docDefinition;
       },
 
@@ -604,7 +627,8 @@ angular.module('bsis')
         return {
           columns: columns,
           columnGap: 10,
-          margin: [30, 0]
+          margin: [30, 0],
+          fontSize: 6
         };
       },
       enableFiltering: false,
@@ -797,6 +821,7 @@ angular.module('bsis')
       TestingService.getBloodGroupTestingFormFields(function(response) {
         if (response !== false) {
           $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
+          $scope.bloodTypingTestsRepeat = response.repeatBloodTypingTests;
         }
       });
     };
@@ -866,13 +891,11 @@ angular.module('bsis')
         updatedTestResults.testResults = {};
         updatedTestResults.testResults[aboTestId] = value.bloodAbo;
         updatedTestResults.testResults[rhTestId] = value.bloodRh == '+' ? 'POS' : 'NEG';
-        var request = TestingService.saveTestResults(updatedTestResults, angular.noop).then(function() {
-          if (value.confirm) {
-              // save confirmation last
-            return TestingService.saveBloodGroupMatchTestResults(value, angular.noop);
-          }
-        });
-        requests.push(request);
+        if (value.confirm) {
+            // save confirmation last
+          var request = TestingService.saveBloodGroupMatchTestResults(value, angular.noop);
+          requests.push(request);
+        }
       });
 
       $q.all(requests).then(function() {
@@ -922,5 +945,30 @@ angular.module('bsis')
       });
     });
 
+    $scope.testSamplesBloodTypingTableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 10,          // count per page
+      filter: {},
+      sorting: {}
+    },
+      {
+        defaultSort: 'asc',
+        counts: [], // hide page counts control
+        total: data.length, // length of data
+        getData: function($defer, params) {
+          var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+          var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : data;
+          params.total(orderedData.length); // set total for pagination
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
+
+    $scope.$watch('data', function() {
+      $timeout(function() {
+        $scope.testSamplesBloodTypingTableParams.reload();
+      });
+    });
+
   })
 ;
+
