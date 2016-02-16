@@ -245,6 +245,7 @@ angular.module('bsis')
       }
     ]
   })
-  .constant('UI', {ADDRESS: {}})
-  .constant('DONATION', {DONOR: {}})
+  .constant('UI', UI) //eslint-disable-line no-undef
+  .constant('DONATION', DONATION) //eslint-disable-line no-undef
+
 ;

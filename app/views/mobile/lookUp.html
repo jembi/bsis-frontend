@@ -1,0 +1,58 @@
+<h3 class="page-header">Mobile Clinic Look Up</h3>
+
+<form name="mobileClinicLookUpForm" class="form-horizontal" style="padding:10px 0;" ng-submit="onSearch(mobileClinicLookUpForm)">
+
+    <div ng-show="error.message">
+        <alert type="danger" close="error.message = null">{{error.message}}</alert>
+    </div>
+
+    <div class="clearfix form-group">
+        <label class="col-sm-1 control-label">Venue:</label>
+        <div class="col-sm-11 ">
+            <div class="form-inline" style="padding-left:5px;">
+                <select name="venue" class="form-control input-sm"
+                        ng-model="search.venue"
+                        ng-options="item.id as item.name disable when (item.disabled || item.isDeleted) for item in venues"
+                        required
+                        ng-class="{'ng-invalid ng-dirty' : mobileClinicLookUpForm.venue.$invalid && submitted}">
+                    <option value="" ng-disabled="true"></option>
+                </select>
+                <div>
+                    <small class="error"
+                           ng-show="(mobileClinicLookUpForm.venue.$invalid && (addDonationBatchForm.venue.$dirty || submitted))">
+                        This cannot be empty
+                    </small>
+                    <small class="error" ng-show="err['search.venue']">
+                        {{err["search.venue"]}}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix form-group">
+        <label class="col-sm-1 control-label">Clinic Date:</label>
+        <div class="form-inline col-sm-11">
+            <div>
+                <dateselect ng-model="search.clinicDate" format="dateFormat" ng-required="true"></dateselect>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-offset-1 ">
+        <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
+            "Search"}}
+        </button>
+        <button class="btn btn-primary" type="reset" ng-click="onClear(mobileClinicLookUpForm)">Clear</button>
+    </div>
+</form>
+
+<div class="panel panel-default" ng-if="currentSearch && !searching">
+    <div class="panel-body">
+        <p>
+            <em>{{gridOptions.data.length}} donor(s) found</em> | <em> Data export: </em>
+            <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')">PDF</button>
+        </p>
+        <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
+    </div>
+</div>

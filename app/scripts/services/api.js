@@ -290,7 +290,11 @@ angular.module('bsis')
 
       AdverseEventTypes: $resource(url + '/adverseevents/types/:id', {id: '@id'}, {
         update: {method: 'PUT'}
-      })
+      }),
+
+      MobileClinicLookUpFormFields: $resource(url + '/mobileclinic/form'),
+
+      MobileClinicLookUp: $resource(url + '/mobileclinic/lookup')
 
     };
   });

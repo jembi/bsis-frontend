@@ -72,4 +72,10 @@ angular.module('bsis')
       }
     };
   })
+
+  .filter('eligibility', function() {
+    return function(input) {
+      return input ? 'Eligible' : 'Not Eligible';
+    };
+  })
 ;
