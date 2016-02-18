@@ -838,8 +838,13 @@ angular.module('bsis')
           $scope.addTestResults = {};
           $scope.addTestMatchResults = {};
           angular.forEach($scope.data, function(value) {
-            $scope.addTestResults[value.donation.donationIdentificationNumber] = {'donationIdentificationNumber': value.donation.donationIdentificationNumber};
-
+            $scope.addTestResults[value.donation.donationIdentificationNumber] = {
+              'donationIdentificationNumber': value.donation.donationIdentificationNumber,
+              'testResults': {}
+            };
+            angular.forEach($scope.ttiTestsBasic, function(test) {
+              $scope.addTestResults[value.donation.donationIdentificationNumber].testResults[test.id] = value.recentTestResults[test.id].result;
+            });
             $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {'donationIdentificationNumber': value.donation.donationIdentificationNumber};
             $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {'bloodAbo': ''};
             $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {'bloodRh': ''};
