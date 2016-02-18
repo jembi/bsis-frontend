@@ -854,15 +854,14 @@ angular.module('bsis')
     $scope.getTests();
     $scope.getCurrentTestResults();
 
-    $scope.saveTestResults = function(testResults) {
+    $scope.saveTestResults = function(testResults, reEntry) {
 
       $scope.savingTestResults = true;
 
       var requests = [];
 
       angular.forEach(testResults, function(value) {
-        var request = TestingService.saveTestResults(value, angular.noop);
-
+        var request = TestingService.saveTestResults(value, reEntry, angular.noop);
         requests.push(request);
       });
 

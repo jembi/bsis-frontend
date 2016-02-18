@@ -129,20 +129,13 @@ angular.module('bsis')
           response(false);
         });
       },
-      saveTestResults: function(testResults, response) {
-        var deferred = $q.defer();
-        var saveTestResults = new Api.TestResults();
-
-        angular.copy(testResults, saveTestResults);
-
-        saveTestResults.$save(function() {
+      saveTestResults: function(testResults, reEntry, response) {
+        var result = Api.TestResults.save({reEntry: reEntry}, testResults, function() {
           response(true);
-          deferred.resolve();
         }, function() {
           response(false);
-          deferred.reject();
         });
-        return deferred.promise;
+        return result.$promise;
       },
       saveBloodGroupMatchTestResults: function(testResults, response) {
         var deferred = $q.defer();
