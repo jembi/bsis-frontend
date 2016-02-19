@@ -46,6 +46,9 @@ angular.module('bsis')
       } else if ($location.path().indexOf('/manageBloodGroupMatchTesting') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/manageBloodGroupMatchTesting';
         return true;
+      } else if ($location.path().indexOf('/reEnterTTI') === 0 && path === '/manageTestBatch') {
+        $scope.selection = '/reEnterTTI';
+        return true;
       } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
         $location.path(path);
         $scope.selection = path;
@@ -407,6 +410,7 @@ angular.module('bsis')
           $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
           $scope.basicTTIComplete = response.basicTTIComplete;
           $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
+          $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
         }
       });
     };
