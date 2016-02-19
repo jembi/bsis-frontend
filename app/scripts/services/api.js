@@ -211,8 +211,7 @@ angular.module('bsis')
         {
           query: {
             method: 'GET',
-            params: {testBatch: '@testBatch',
-                     bloodTestType: '@bloodTestType'}
+            params: {testBatch: '@testBatch'}
           }
         }
       ),

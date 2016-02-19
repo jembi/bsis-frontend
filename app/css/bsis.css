@@ -742,7 +742,3 @@ a[disabled] {
 .labelDisabled {
   color: #888 !important;
 }
-
-.panel-confirm {
-  border-color:red;
-}
