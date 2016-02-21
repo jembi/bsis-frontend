@@ -118,6 +118,13 @@ angular.module('bsis')
           onError(err);
         });
       },
+      getTestOutcomesByBatchIdAndBloodTestType: function(id, bloodTestType, onSuccess, onError) {
+        Api.FindTestResults.query({testBatch: id, bloodTestType: bloodTestType}, function(testResults) {
+          onSuccess(testResults);
+        }, function(err) {
+          onError(err);
+        });
+      },
       addTestBatch: function(donationBatches, response) {
         var addTestBatch = new Api.TestBatches();
 

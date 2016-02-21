@@ -61,11 +61,15 @@
   </span>
 
 <span ng-if="testBatch.status!='CLOSED'" class="h4" style="float: right; margin-top: 5px; ">
+
     <span has-permission="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="confirmDelete || confirmEdit">
       <em>
-          <button class="btn btn-link" style="padding:0;" ng-click="recordTestResults(testBatch, 'tti')">Record TTI Test
-              Outcomes
-          </button>
+          <small>Record TTI Test Outcomes: </small>
+          <button class="btn btn-link" style="padding:0;" ng-click="recordTestResults(testBatch, 'tti')">First Entry</button>
+          <small> | </small>
+      </em>
+      <em>
+          <button class="btn btn-link" style="padding:0;" ng-click="recordTestResults(testBatch, 'ttiReentry')" ng-disabled="!reEntryRequiredTTITests">Re-Entry</button>
       </em>
     </span>
     <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"
