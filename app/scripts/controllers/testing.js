@@ -34,8 +34,10 @@ angular.module('bsis')
       } else if ($location.path().indexOf('/manageTTITesting') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/manageTTITesting';
         return true;
-      } else if ($location.path().indexOf('/reEnterTTI') === 0 && path === '/manageTestBatch') {
-        $scope.selection = '/reEnterTTI';
+      } else if ($location.path().indexOf('/reEnterTestOutcomes') === 0 && path === '/manageTestBatch') {
+        if ($routeParams.bloodTestType === 'BASIC_TTI') {
+          $scope.selection = '/reEnterTTI';
+        }
         return true;
       } else if ($location.path().indexOf('/managePendingTests') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/managePendingTests';
@@ -280,7 +282,7 @@ angular.module('bsis')
       if (testCategory === 'tti') {
         $location.path('/manageTTITesting/' + item.id);
       } else if (testCategory === 'ttiReentry') {
-        $location.path('/reEnterTTI/' + item.id + '/BASIC_TTI');
+        $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'bloodGrouping') {
         $location.path('/manageBloodGroupTesting/' + item.id);
       }
@@ -315,7 +317,7 @@ angular.module('bsis')
       if (testCategory === 'tti') {
         $location.path('/manageTTITesting/' + item.id);
       } else if (testCategory === 'ttiReentry') {
-        $location.path('/reEnterTTI/' + item.id + '/BASIC_TTI');
+        $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'bloodGrouping') {
         $location.path('/manageBloodGroupTesting/' + item.id);
       }
