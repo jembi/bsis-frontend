@@ -27,8 +27,8 @@ angular.module('bsis')
           if (response !== false) {
             $scope.testNames = response.basicTTITests;
           }
-        })
-      };
+        });
+      }
     };
 
     var getAllTestOutcomes = function() {
@@ -38,15 +38,15 @@ angular.module('bsis')
           data = response.testResults;
           $scope.data = data;
           $scope.allTestOutcomes = {};
-            
-          angular.forEach($scope.data, function(donationResults) {              
-            var din = donationResults.donation.donationIdentificationNumber;           
+
+          angular.forEach($scope.data, function(donationResults) {
+            var din = donationResults.donation.donationIdentificationNumber;
             $scope.allTestOutcomes[din] = {'donationIdentificationNumber': din, 'testResults': {}};
-            angular.forEach(donationResults.recentTestResults, function(test) {                        
+            angular.forEach(donationResults.recentTestResults, function(test) {
               if (test.reEntryRequired === false) {
                 $scope.allTestOutcomes[din].testResults[test.bloodTest.id] = test.result;
-              }                            
-            })  
+              }
+            });
           });
         }
         $scope.searching = false;
@@ -76,7 +76,7 @@ angular.module('bsis')
     };
 
     $scope.validateForm = function(testResults, reEntry) {
-        saveTestResults(testResults, reEntry);
+      saveTestResults(testResults, reEntry);
     };
 
     $scope.confirmedCheckbox = false;
