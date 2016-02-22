@@ -4,8 +4,7 @@ angular.module('bsis')
 
   .controller('TestsReEnterCtrl', function($scope, $location, $log, TestingService, $modal, $sce, $q, $filter, ngTableParams, $timeout, $routeParams) {
 
-    var data = [{}];
-    $scope.data = data;
+    $scope.data = [];
 
     $scope.go = function(path) {
       $location.path(path + '/' + $routeParams.id);
@@ -39,8 +38,7 @@ angular.module('bsis')
       $scope.searching = true;
       TestingService.getTestOutcomesByBatchIdAndBloodTestType($routeParams.id, $routeParams.bloodTestType, function(response) {
         if (response !== false) {
-          data = response.testResults;
-          $scope.data = data;
+          $scope.data = response.testResults;
           $scope.reEnteredTestOutcomes = {};
 
           angular.forEach($scope.data, function(donationResults) {
@@ -152,7 +150,7 @@ angular.module('bsis')
     };
 
     $scope.resetPreviousConfirmations = function(din, bloodTestId, firstEntryResult) {
-      // If there was a previous confirmation for that outcome, if the outcome now selected is the same as first entry, 
+      // If there was a previous confirmation for that outcome, if the outcome now selected is the same as first entry,
       // update reEntryConfirmations to false for that outcome
       if ($scope.reEntryConfirmations[din] && $scope.reEntryConfirmations[din][bloodTestId]) {
         if ($scope.reEnteredTestOutcomes[din].testResults[bloodTestId] === firstEntryResult) {
@@ -170,12 +168,9 @@ angular.module('bsis')
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
-        total: data.length, // length of data
+        total: $scope.data.length, // length of data
         getData: function($defer, params) {
-          var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
+          var orderedData = params.sorting() ? $filter('orderBy')($scope.data, params.orderBy()) : $scope.data;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
