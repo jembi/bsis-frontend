@@ -20,6 +20,7 @@ angular.module('bsis')
       });
     };
 
+    // This test names will be the column names. They are specific to each blood test type.
     var getTestNames = function() {
       var bloodTestType = $routeParams.bloodTestType;
       if (bloodTestType === 'BASIC_TTI') {
@@ -29,6 +30,7 @@ angular.module('bsis')
           }
         });
       }
+      // add other blood test types here as they are implemented...
     };
 
     // The array reEnteredTestOutcomes is originally populated with all test outcomes where reEntryRequired is false.
@@ -141,7 +143,7 @@ angular.module('bsis')
 
     $scope.validateSaveTestOutcomesForm = function() {
       calculateConfirmationCounters();
-      
+
       // Only save once all the discrepancies have been confirmed
       if (reEntriesWithDiscrepancies > 0) {
         $scope.showAlert = true;
