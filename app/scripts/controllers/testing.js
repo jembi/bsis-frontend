@@ -37,6 +37,8 @@ angular.module('bsis')
       } else if ($location.path().indexOf('/reEnterTestOutcomes') === 0 && path === '/manageTestBatch') {
         if ($routeParams.bloodTestType === 'BASIC_TTI') {
           $scope.selection = '/reEnterTTI';
+        } else if ($routeParams.bloodTestType === 'BASIC_BLOODTYPING') {
+          $scope.selection = '/reEnterBloodTyping';
         }
         return true;
       } else if ($location.path().indexOf('/managePendingTests') === 0 && path === '/manageTestBatch') {
