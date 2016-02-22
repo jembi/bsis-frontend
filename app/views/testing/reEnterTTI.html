@@ -17,7 +17,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <alert ng-show="showAlert" type="danger">Please resolve all discrepancies between initial and re-rentered outcomes before saving the form.</alert>
-            <form ng-submit="validateForm(allTestOutcomes, true)">
+            <form ng-submit="validateSaveTestOutcomesForm()" novalidate>
                 <table ng-table="testOutcomesTableParams" show-filter="false" class="table">
                     <thead>
                     <th class="text-left sortable"
@@ -66,9 +66,9 @@
                             {{sample.ttistatus}}
                         </td>
                         <td align="center" ng-repeat="test in testNames">
-                            <div ng-class="{'panel panel-confirm' : (allTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] != sample.recentTestResults[test.id].result) && allTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] && !confirmedCheckbox[sample.donation.donationIdentificationNumber][test.id]}" style="width:90px; float: left;">
+                            <div ng-class="{'panel panel-confirm' : (reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] != sample.recentTestResults[test.id].result) && reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] && !reEntryConfirmations[sample.donation.donationIdentificationNumber][test.id]}" style="width:90px; float: left;">
                                 <ui-select
-                                        ng-model="allTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id]"
+                                        ng-model="reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id]"
                                         ng-disabled="!sample.recentTestResults[test.id].reEntryRequired">
                                     <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
                                     <ui-select-choices
@@ -77,9 +77,10 @@
                                     </ui-select-choices>
                                 </ui-select>
                             </div>
-                            <div style="width: 10px; float: left; padding: 5px;" class="check-element animate-show" ng-show="(allTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] != sample.recentTestResults[test.id].result) && allTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id]">
+                            <div style="width: 10px; float: left; padding: 5px;" class="check-element animate-show" ng-show="(reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] != sample.recentTestResults[test.id].result) && reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id]">
                                 <small>
-                                    <input ng-model="confirmedCheckbox[sample.donation.donationIdentificationNumber][test.id]" type="checkbox" id="confirmChange" value="true"  name="confirmChange" />
+                                    <input ng-model="reEntryConfirmations[sample.donation.donationIdentificationNumber][test.id]" type="checkbox" id="confirmChange" value="true"  name="confirmChange" ng-required="(reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] != sample.recentTestResults[test.id].result) && reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id]"
+                                    ng-click=""/>
                                 </small>
                             </div>
                         </td>
@@ -89,11 +90,11 @@
 
                 <div class="form-group">
                     <div class="col-sm-3">
-                        <button class="btn btn-primary" type="submit" ng-disabled="savingTestResults">
-                            {{savingTestResults ? "Saving..." : "Save Test Outcomes"}}
+                        <button class="btn btn-primary" type="submit" ng-disabled="savingTestOutcomes">
+                            {{savingTestOutcomes ? "Saving..." : "Save Test Outcomes"}}
                         </button>
                         <button class="btn btn-primary" type="button" ng-click="go('/viewTestBatch')"
-                                ng-disabled="savingTestResults">Cancel
+                                ng-disabled="savingTestOutcomes">Cancel
                         </button>
                     </div>
                 </div>
