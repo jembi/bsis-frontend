@@ -86,7 +86,7 @@ angular.module('bsis')
               donationWasUpdated = true;
 
               // populate test outcomes to save
-              testOutcomesToSave[din].testResults[testOutcome.bloodTest.id] = testOutcome.result;
+              testOutcomesToSave[din].testResults[testOutcome.bloodTest.id] = $scope.reEnteredTestOutcomes[din].testResults[testOutcome.bloodTest.id];
 
               // case 1: selected same outcome as before
               if (testOutcome.result === $scope.reEnteredTestOutcomes[din].testResults[testOutcome.bloodTest.id]) {
