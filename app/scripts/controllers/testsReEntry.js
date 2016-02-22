@@ -77,18 +77,16 @@ angular.module('bsis')
           // only check outcomes where reEntryRequired = true
           if (testOutcome.reEntryRequired === true) {
             totalReEntries++;
-
-            var confirmed = false;
-            if ($scope.reEntryConfirmations[din] && $scope.reEntryConfirmations[din][testOutcome.bloodTest.id]) {
-              confirmed = $scope.reEntryConfirmations[din][testOutcome.bloodTest.id];
-            }
-            if (testOutcome.result === $scope.reEnteredTestOutcomes[din].testResults[testOutcome.bloodTest.id]) {
-              reEntriesConfirmed++;
-            } else {
-              if (confirmed) {
+            // check that a reEntry outcome has been selected
+            if ($scope.reEnteredTestOutcomes[din].testResults[testOutcome.bloodTest.id]) {
+              // case 1: selected same outcome as before
+              if (testOutcome.result === $scope.reEnteredTestOutcomes[din].testResults[testOutcome.bloodTest.id]) {
                 reEntriesConfirmed++;
-              // if it hasn't been confirmed and the result has been selected (is not undefined) it's a discrepancy
-              } else if ($scope.reEnteredTestOutcomes[din].testResults[testOutcome.bloodTest.id]) {
+              // case 2: selected different outcome as before, and it was confirmed
+              } else if ($scope.reEntryConfirmations[din] && $scope.reEntryConfirmations[din][testOutcome.bloodTest.id]) {
+                reEntriesConfirmed++;
+              // case 3: selected different outcome as before, and it wasn't confirmed (discrepancy)
+              } else {
                 reEntriesWithDiscrepancies++;
               }
             }
@@ -150,6 +148,16 @@ angular.module('bsis')
       } else {
         $scope.showAlert = false;
         confirmSaveTestOutcomes();
+      }
+    };
+
+    $scope.resetPreviousConfirmations = function(din, bloodTestId, firstEntryResult) {
+      // If there was a previous confirmation for that outcome, if the outcome now selected is the same as first entry, 
+      // update reEntryConfirmations to false for that outcome
+      if ($scope.reEntryConfirmations[din] && $scope.reEntryConfirmations[din][bloodTestId]) {
+        if ($scope.reEnteredTestOutcomes[din].testResults[bloodTestId] === firstEntryResult) {
+          $scope.reEntryConfirmations[din][bloodTestId] = false;
+        }
       }
     };
 
