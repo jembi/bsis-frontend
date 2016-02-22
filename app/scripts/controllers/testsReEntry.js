@@ -63,20 +63,29 @@ angular.module('bsis')
     var reEntriesWithDiscrepancies = 0;
     var totalReEntries = 0;
     $scope.reEntryConfirmations = {};
+    var testOutcomesToSave = {};
 
     var calculateConfirmationCounters = function() {
       reEntriesConfirmed = 0;
       reEntriesWithDiscrepancies = 0;
       totalReEntries = 0;
-      angular.forEach($scope.data, function(donationResults) {
-        var din = donationResults.donation.donationIdentificationNumber;
-        angular.forEach(donationResults.recentTestResults, function(testOutcome) {
 
+      angular.forEach($scope.data, function(donationResults) {
+        var donationWasUpdated = false;
+        var din = donationResults.donation.donationIdentificationNumber;
+        testOutcomesToSave[din] = {'donationIdentificationNumber': din, 'testResults': {}};
+
+        angular.forEach(donationResults.recentTestResults, function(testOutcome) {
           // only check outcomes where reEntryRequired = true
           if (testOutcome.reEntryRequired === true) {
             totalReEntries++;
             // check that a reEntry outcome has been selected
             if ($scope.reEnteredTestOutcomes[din].testResults[testOutcome.bloodTest.id]) {
+              donationWasUpdated = true;
+
+              // populate test outcomes to save
+              testOutcomesToSave[din].testResults[testOutcome.bloodTest.id] = testOutcome.result;
+
               // case 1: selected same outcome as before
               if (testOutcome.result === $scope.reEnteredTestOutcomes[din].testResults[testOutcome.bloodTest.id]) {
                 reEntriesConfirmed++;
@@ -90,13 +99,19 @@ angular.module('bsis')
             }
           }
         });
+
+        // if donation was not updated, delete the object from testOutcomesToSave
+        if (!donationWasUpdated) {
+          delete testOutcomesToSave[din];
+        }
+
       });
     };
 
     var saveTestOutcomes = function() {
       $scope.savingTestOutcomes = true;
       var requests = [];
-      angular.forEach($scope.reEnteredTestOutcomes, function(value) {
+      angular.forEach(testOutcomesToSave, function(value) {
         var request = TestingService.saveTestResults(value, true, angular.noop);
         requests.push(request);
       });
@@ -131,7 +146,7 @@ angular.module('bsis')
       });
       modalInstance.result.then(function() {
         // Then save the test outcomes
-        saveTestOutcomes($scope.reEnteredTestOutcomes, true);
+        saveTestOutcomes();
       }, function() {
         // save cancelled - do nothing
       });
