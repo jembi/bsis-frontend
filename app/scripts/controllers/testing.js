@@ -287,6 +287,8 @@ angular.module('bsis')
         $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'bloodGrouping') {
         $location.path('/manageBloodGroupTesting/' + item.id);
+      } else if (testCategory === 'bloodGroupingReentry') {
+        $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_BLOODTYPING');
       }
     };
 
@@ -322,6 +324,8 @@ angular.module('bsis')
         $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'bloodGrouping') {
         $location.path('/manageBloodGroupTesting/' + item.id);
+      } else if (testCategory === 'bloodGroupingReentry') {
+        $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_BLOODTYPING');
       }
     };
 
@@ -419,6 +423,7 @@ angular.module('bsis')
           $scope.basicTTIComplete = response.basicTTIComplete;
           $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
           $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
+          $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
         }
       });
     };
