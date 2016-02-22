@@ -108,7 +108,7 @@ angular.module('bsis')
       '/manageTestBatch',
       '/viewTestBatch/\\d+',
       '/manageTTITesting/\\d+',
-      '/reEnterTTI/\\d+',
+      '/reEnterTestOutcomes/\\d+',
       '/managePendingTests/\\d+',
       '/manageBloodGroupTesting/\\d+',
       '/managePendingBloodTypingTests/\\d+',
