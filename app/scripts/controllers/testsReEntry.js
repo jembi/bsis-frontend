@@ -65,7 +65,7 @@ angular.module('bsis')
     $scope.reEntryConfirmations = {};
     var testOutcomesToSave = {};
 
-    // This method calculates the values used in the confirmation popup and 
+    // This method calculates the values used in the confirmation popup and
     // populates testOutcomesToSave
     var preSaveCalculations = function() {
       reEntriesConfirmed = 0;
