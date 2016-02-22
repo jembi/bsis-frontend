@@ -65,7 +65,9 @@ angular.module('bsis')
     $scope.reEntryConfirmations = {};
     var testOutcomesToSave = {};
 
-    var calculateConfirmationCounters = function() {
+    // This method calculates the values used in the confirmation popup and 
+    // populates testOutcomesToSave
+    var preSaveCalculations = function() {
       reEntriesConfirmed = 0;
       reEntriesWithDiscrepancies = 0;
       totalReEntries = 0;
@@ -153,7 +155,7 @@ angular.module('bsis')
     };
 
     $scope.validateSaveTestOutcomesForm = function() {
-      calculateConfirmationCounters();
+      preSaveCalculations();
 
       // Only save once all the discrepancies have been confirmed
       if (reEntriesWithDiscrepancies > 0) {
