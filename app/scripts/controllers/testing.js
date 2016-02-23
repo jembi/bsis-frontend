@@ -843,7 +843,11 @@ angular.module('bsis')
               'testResults': {}
             };
             angular.forEach($scope.ttiTestsBasic, function(test) {
-              $scope.addTestResults[value.donation.donationIdentificationNumber].testResults[test.id] = value.recentTestResults[test.id].result;
+              if (angular.isUndefined(value.recentTestResults[test.id]) || value.recentTestResults[test.id] === null) {
+                $scope.addTestResults[value.donation.donationIdentificationNumber].testResults[test.id] = '';
+              } else {
+                $scope.addTestResults[value.donation.donationIdentificationNumber].testResults[test.id] = value.recentTestResults[test.id].result;
+              }
             });
             $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {'donationIdentificationNumber': value.donation.donationIdentificationNumber};
             $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {'bloodAbo': ''};
