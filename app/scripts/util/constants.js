@@ -184,47 +184,6 @@ angular.module('bsis')
       }
     ]
   })
-  .constant('TTITESTS', {
-    options: [
-      {
-        'testName': 'HIV'
-      },
-      {
-        'testName': 'HBV'
-      },
-      {
-        'testName': 'HCV'
-      },
-      {
-        'testName': 'Syphilis'
-      }
-    ]
-  })
-  .constant('BLOODTYPINGTESTS', {
-    options: [
-      {
-        'testName': 'ABO'
-      },
-      {
-        'testName': 'Rh'
-      },
-      {
-        'testName': 'Du'
-      }
-    ]
-  })
-  .constant('TTIOUTCOME', {
-    options: ['POS', 'NEG']
-  })
-  .constant('BGSOUTCOME', {
-    options: ['POS', 'NEG']
-  })
-  .constant('ABO', {
-    options: ['A', 'B', 'AB', 'O']
-  })
-  .constant('RH', {
-    options: ['+', '-']
-  })
   .constant('DATATYPES', {
     options: [
       {

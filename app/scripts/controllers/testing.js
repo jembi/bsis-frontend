@@ -575,7 +575,7 @@ angular.module('bsis')
         } else if (col.name === 'ttistatus') {
           return $filter('mapTTIStatus')(value);
         } else if (col.name === 'bloodAboRh') {
-          var bloodSerology = 'N/D';
+          var bloodSerology = '';
           if (row.entity.bloodTypingStatus !== 'NOT_DONE') {
             bloodSerology = row.entity.bloodTypingMatchStatus;
           }
@@ -585,10 +585,10 @@ angular.module('bsis')
         if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue') {
           for (var test in value) {
             if (value[test].bloodTest.testNameShort == col.name) {
-              return value[test].result || 'N/D';
+              return value[test].result || '';
             }
           }
-          return 'N/D';
+          return '';
         }
 
         return value;
@@ -805,15 +805,9 @@ angular.module('bsis')
 
   })
 
-  .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, TTITESTS, BLOODTYPINGTESTS, TTIOUTCOME, BGSOUTCOME, ABO, RH, $q, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, $q, $filter, ngTableParams, $timeout, $routeParams) {
     var data = [{}];
     $scope.data = data;
-    $scope.ttiTests = TTITESTS.options;
-    $scope.bloodTypingTests = BLOODTYPINGTESTS.options;
-    $scope.ttiOutcomes = TTIOUTCOME.options;
-    $scope.bgsOutcomes = BGSOUTCOME.options;
-    $scope.abo = ABO.options;
-    $scope.rh = RH.options;
 
     $scope.go = function(path) {
       $location.path(path + '/' + $routeParams.id);
