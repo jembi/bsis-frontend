@@ -35,11 +35,11 @@ angular.module('bsis')
         $scope.selection = '/manageTTITesting';
         return true;
       } else if ($location.path().indexOf('/reEnterTestOutcomes') === 0 && path === '/manageTestBatch') {
-        if ($routeParams.bloodTestType === 'BASIC_TTI') {
+        if ($routeParams.bloodTestType === 'BASIC_TTI' || $routeParams.bloodTestType === 'CONFIRMATORY_TTI') {
           $scope.selection = '/reEnterTTI';
         } else if ($routeParams.bloodTestType === 'BASIC_BLOODTYPING') {
           $scope.selection = '/reEnterBloodTyping';
-        }
+        } 
         return true;
       } else if ($location.path().indexOf('/managePendingTests') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/managePendingTests';
@@ -302,9 +302,13 @@ angular.module('bsis')
       $location.path('/managePendingBloodTypingTests/' + item.id);
     };
 
-    $scope.recordPendingTestResults = function(item) {
+    $scope.recordPendingTestResults = function(item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
-      $location.path('/managePendingTests/' + item.id);
+      if (testCategory === 'tti') {
+        $location.path('/managePendingTests/' + item.id);
+      } else if (testCategory === 'ttiReentry') {
+        $location.path('/reEnterTestOutcomes/' + item.id + '/CONFIRMATORY_TTI');
+      }
     };
 
   })
