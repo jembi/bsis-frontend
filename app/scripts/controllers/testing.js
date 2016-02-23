@@ -35,7 +35,11 @@ angular.module('bsis')
         $scope.selection = '/manageTTITesting';
         return true;
       } else if ($location.path().indexOf('/reEnterTestOutcomes') === 0 && path === '/manageTestBatch') {
-        $scope.selection = '/reEnterTestOutcomes';
+        if ($routeParams.bloodTestType === 'BASIC_TTI') {
+          $scope.selection = '/reEnterTTI';
+        } else if ($routeParams.bloodTestType === 'BASIC_BLOODTYPING') {
+          $scope.selection = '/reEnterBloodTyping';
+        }
         return true;
       } else if ($location.path().indexOf('/managePendingTests') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/managePendingTests';
@@ -283,6 +287,8 @@ angular.module('bsis')
         $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'bloodGrouping') {
         $location.path('/manageBloodGroupTesting/' + item.id);
+      } else if (testCategory === 'bloodGroupingReentry') {
+        $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_BLOODTYPING');
       }
     };
 
@@ -318,6 +324,8 @@ angular.module('bsis')
         $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'bloodGrouping') {
         $location.path('/manageBloodGroupTesting/' + item.id);
+      } else if (testCategory === 'bloodGroupingReentry') {
+        $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_BLOODTYPING');
       }
     };
 
@@ -415,6 +423,7 @@ angular.module('bsis')
           $scope.basicTTIComplete = response.basicTTIComplete;
           $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
           $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
+          $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
         }
       });
     };

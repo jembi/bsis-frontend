@@ -76,9 +76,12 @@
           ng-hide="confirmDelete || confirmEdit"> | </span>
     <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="confirmDelete || confirmEdit">
       <em>
-          <button class="btn btn-link" style="padding:0;" ng-click="recordTestResults(testBatch, 'bloodGrouping')">
-              Record Blood Group Serology Outcomes
-          </button>
+          <small>Record Blood Group Serology Outcomes: </small>
+          <button class="btn btn-link" style="padding:0;" ng-click="recordTestResults(testBatch, 'bloodGrouping')">First Entry</button>
+          <small> | </small>
+      </em>
+      <em>
+          <button class="btn btn-link" style="padding:0;" ng-click="recordTestResults(testBatch, 'bloodGroupingReentry')" ng-disabled="!reEntryRequiredBloodTypingTests">Re-Entry</button>
       </em>
     </span>
     <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}};{{permissions.VOID_TEST_BATCH}}"

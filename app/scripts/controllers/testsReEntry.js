@@ -28,8 +28,13 @@ angular.module('bsis')
             $scope.testNames = response.basicTTITests;
           }
         });
+      } else if (bloodTestType === 'BASIC_BLOODTYPING') {
+        TestingService.getBloodGroupTestingFormFields(function(response) {
+          if (response !== false) {
+            $scope.testNames = response.basicBloodTypingTests;
+          }
+        });
       }
-      // add other blood test types here as they are implemented...
     };
 
     // The array reEnteredTestOutcomes is originally populated with all test outcomes where reEntryRequired is false.
