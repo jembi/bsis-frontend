@@ -34,6 +34,9 @@ angular.module('bsis')
       } else if ($location.path().indexOf('/manageTTITesting') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/manageTTITesting';
         return true;
+      } else if ($location.path().indexOf('/reEnterTestOutcomes') === 0 && path === '/manageTestBatch') {
+        $scope.selection = '/reEnterTestOutcomes';
+        return true;
       } else if ($location.path().indexOf('/managePendingTests') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/managePendingTests';
         return true;
@@ -276,6 +279,8 @@ angular.module('bsis')
       TestingService.setCurrentTestBatch(item.id);
       if (testCategory === 'tti') {
         $location.path('/manageTTITesting/' + item.id);
+      } else if (testCategory === 'ttiReentry') {
+        $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'bloodGrouping') {
         $location.path('/manageBloodGroupTesting/' + item.id);
       }
@@ -309,6 +314,8 @@ angular.module('bsis')
       TestingService.setCurrentTestBatch(item.id);
       if (testCategory === 'tti') {
         $location.path('/manageTTITesting/' + item.id);
+      } else if (testCategory === 'ttiReentry') {
+        $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'bloodGrouping') {
         $location.path('/manageBloodGroupTesting/' + item.id);
       }
@@ -407,6 +414,7 @@ angular.module('bsis')
           $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
           $scope.basicTTIComplete = response.basicTTIComplete;
           $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
+          $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
         }
       });
     };
@@ -854,15 +862,14 @@ angular.module('bsis')
     $scope.getTests();
     $scope.getCurrentTestResults();
 
-    $scope.saveTestResults = function(testResults) {
+    $scope.saveTestResults = function(testResults, reEntry) {
 
       $scope.savingTestResults = true;
 
       var requests = [];
 
       angular.forEach(testResults, function(value) {
-        var request = TestingService.saveTestResults(value, angular.noop);
-
+        var request = TestingService.saveTestResults(value, reEntry, angular.noop);
         requests.push(request);
       });
 
