@@ -39,7 +39,7 @@ angular.module('bsis')
           $scope.selection = '/reEnterTTI';
         } else if ($routeParams.bloodTestType === 'BASIC_BLOODTYPING') {
           $scope.selection = '/reEnterBloodTyping';
-        } 
+        }
         return true;
       } else if ($location.path().indexOf('/managePendingTests') === 0 && path === '/manageTestBatch') {
         $scope.selection = '/managePendingTests';
@@ -428,6 +428,7 @@ angular.module('bsis')
           $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
           $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
           $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
+          $scope.reEntryRequiredPendingTTITests = response.reEntryRequiredPendingTTITests;
         }
       });
     };
