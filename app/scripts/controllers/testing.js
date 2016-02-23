@@ -843,9 +843,7 @@ angular.module('bsis')
               'testResults': {}
             };
             angular.forEach($scope.ttiTestsBasic, function(test) {
-              if (angular.isUndefined(value.recentTestResults[test.id]) || value.recentTestResults[test.id] === null) {
-                $scope.addTestResults[value.donation.donationIdentificationNumber].testResults[test.id] = '';
-              } else {
+              if (angular.isDefined(value.recentTestResults[test.id])) {
                 $scope.addTestResults[value.donation.donationIdentificationNumber].testResults[test.id] = value.recentTestResults[test.id].result;
               }
             });
