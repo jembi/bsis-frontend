@@ -852,16 +852,16 @@ angular.module('bsis')
           data = response.testResults;
           $scope.data = data;
 
-          $scope.addTestResults = {};
+          $scope.allTestOutcomes = {};
           $scope.addTestMatchResults = {};
           angular.forEach($scope.data, function(value) {
-            $scope.addTestResults[value.donation.donationIdentificationNumber] = {
+            $scope.allTestOutcomes[value.donation.donationIdentificationNumber] = {
               'donationIdentificationNumber': value.donation.donationIdentificationNumber,
               'testResults': {}
             };
             angular.forEach($scope.ttiTestsBasic, function(test) {
               if (angular.isDefined(value.recentTestResults[test.id])) {
-                $scope.addTestResults[value.donation.donationIdentificationNumber].testResults[test.id] = value.recentTestResults[test.id].result;
+                $scope.allTestOutcomes[value.donation.donationIdentificationNumber].testResults[test.id] = value.recentTestResults[test.id].result;
               }
             });
             $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {'donationIdentificationNumber': value.donation.donationIdentificationNumber};
