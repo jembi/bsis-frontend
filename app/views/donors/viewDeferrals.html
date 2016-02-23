@@ -63,6 +63,16 @@
                      ng-model="deferral.deferralReasonText">
             </span>
                 </td>
+                <td data-title="'Venue'" header-class="text-left" class="col-sm-1" sortable="'venue.name'">
+                    <span ng-show="!editableDeferralForm.$visible">{{deferral.venue.name}}</span>
+            <span ng-show="editableDeferralForm.$visible" e-required>
+              <select name="venue" class="form-control input-sm"
+                      ng-model="deferral.venue"
+                      ng-options="item as item.name for item in venues track by item.id"
+                      required>
+              </select>
+            </span>
+                </td>
                 <td data-title="'User'" header-class="text-left" class="col-sm-1" sortable="'createdBy'"
                     filter="{ 'createdBy': 'text' }">
             <span>
