@@ -118,6 +118,13 @@ angular.module('bsis')
           onError(err);
         });
       },
+      getTestOutcomesByBatchIdAndBloodTestType: function(id, bloodTestType, onSuccess, onError) {
+        Api.FindTestResults.query({testBatch: id, bloodTestType: bloodTestType}, function(testResults) {
+          onSuccess(testResults);
+        }, function(err) {
+          onError(err);
+        });
+      },
       addTestBatch: function(donationBatches, response) {
         var addTestBatch = new Api.TestBatches();
 
@@ -129,20 +136,13 @@ angular.module('bsis')
           response(false);
         });
       },
-      saveTestResults: function(testResults, response) {
-        var deferred = $q.defer();
-        var saveTestResults = new Api.TestResults();
-
-        angular.copy(testResults, saveTestResults);
-
-        saveTestResults.$save(function() {
+      saveTestResults: function(testResults, reEntry, response) {
+        var result = Api.TestResults.save({reEntry: reEntry}, testResults, function() {
           response(true);
-          deferred.resolve();
         }, function() {
           response(false);
-          deferred.reject();
         });
-        return deferred.promise;
+        return result.$promise;
       },
       saveBloodGroupMatchTestResults: function(testResults, response) {
         var deferred = $q.defer();
