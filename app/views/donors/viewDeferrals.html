@@ -31,21 +31,22 @@
               {{deferral.createdDate | bsisDate}}
             </span>
                 </td>
-                <td data-title="'End'" header-class="text-left" class="col-sm-1 text-center" sortable="'deferredUntil'">
+                <td data-title="'End'" header-class="text-left" class="col-sm-2 text-center" sortable="'deferredUntil'">
                     <span ng-show="!editableDeferralForm.$visible">{{ (deferral.deferredUntil | bsisDate) || '' }}</span>
-            <span ng-show="editableDeferralForm.$visible" e-required>
-              <dateselect-end name="deferredUntil"
-                              ng-model="deferral.deferredUntil"
-                              initDate="deferral.deferredUntil"
-                              format="format"
-                              opened="dateToOpen"
-                              cal-icon="icons.CALENDAR"
-                              required
-                              ng-disabled="deferral.deferralReason.durationType === 'PERMANENT'">
-              </dateselect-end>
-            </span>
+                    <span ng-show="editableDeferralForm.$visible" e-required>
+                      <dateselect name="deferredUntil"
+                                      ng-model="deferral.deferredUntil"
+                                      initDate="deferral.deferredUntil"
+                                      format="format"
+                                      opened="dateToOpen"
+                                      cal-icon="icons.CALENDAR"
+                                      required
+                                      style="width: 100%"
+                                      ng-disabled="deferral.deferralReason.durationType === 'PERMANENT'">
+                      </dateselect>
+                    </span>
                 </td>
-                <td data-title="'Reason'" header-class="text-left" class="col-sm-3" sortable="'deferralReason.reason'">
+                <td data-title="'Reason'" header-class="text-left" class="col-sm-2" sortable="'deferralReason.reason'">
                     <span ng-show="!editableDeferralForm.$visible">{{deferral.deferralReason.reason}}</span>
             <span ng-show="editableDeferralForm.$visible" e-required>
               <select name="deferralReason" class="form-control input-sm"
@@ -61,6 +62,16 @@
             <span ng-show="editableDeferralForm.$visible">
               <input size="30" type="comment" id="deferralReasonText" class="form-control input-sm"
                      ng-model="deferral.deferralReasonText">
+            </span>
+                </td>
+                <td data-title="'Venue'" header-class="text-left" class="col-sm-1" sortable="'venue.name'">
+                    <span ng-show="!editableDeferralForm.$visible">{{deferral.venue.name}}</span>
+            <span ng-show="editableDeferralForm.$visible" e-required>
+              <select name="venue" class="form-control input-sm"
+                      ng-model="deferral.venue"
+                      ng-options="item as item.name for item in venues track by item.id"
+                      required>
+              </select>
             </span>
                 </td>
                 <td data-title="'User'" header-class="text-left" class="col-sm-1" sortable="'createdBy'"

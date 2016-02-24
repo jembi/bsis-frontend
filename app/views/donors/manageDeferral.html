@@ -29,6 +29,27 @@
         </div>
     </div>
 
+    <!-- Venue-->
+    <div class="form-group">
+        <label for="name" class="col-sm-1 control-label">Venue</label>
+        <div class="row col-sm-11">
+            <div class="form-inline" style="padding-left:5px;">
+                <select name="venue" id="venue" class="form-control input-sm"
+                        ng-model="deferral.venue"
+                        ng-options="item as item.name for item in venues track by item.id"
+                        ng-class="{'ng-invalid ng-dirty' : addDeferralForm.venue.$invalid && submitted}"
+                        required>
+                    <option value="" ng-disabled="true">Select:</option>
+                </select>
+               <div>
+                    <small class="error" ng-show="(addDeferralForm.venue.$invalid && (addDeferralForm.venue.$dirty || submitted))">
+                        This cannot be empty
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- End date -->
     <div class="form-group" ng-class="{'has-error' : addDeferralForm.deferredUntil.$invalid && submitted}">
         <label for="name" class="col-sm-1 control-label" style="color:inherit;">End Date</label>

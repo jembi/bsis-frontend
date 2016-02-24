@@ -91,10 +91,16 @@
 <hr style="clear:right;"/>
 
 <span class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
-  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a href=""
-                                                                                                              ng-click="recordPendingTestResults(testBatch)"
-                                                                                                              ng-disabled="!basicTTIComplete && !pendingTTITests">Record
-      Pending Test Outcomes</a></em></small> </span>
+  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> 
+    <small>
+      <em>Record Pending Test Outcomes:      
+        <a href="" ng-click="recordPendingTestResults(testBatch, 'tti')" ng-disabled="!basicTTIComplete && !pendingTTITests">First Entry </a>|
+      </em> 
+      <em>  
+        <a href="" ng-click="recordPendingTestResults(testBatch, 'ttiReentry')" ng-disabled="!reEntryRequiredPendingTTITests">Re-Entry</a>
+      </em> 
+    </small>
+  </span>
   <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> | </span>
   <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
     <em>
