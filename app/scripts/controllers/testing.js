@@ -35,9 +35,9 @@ angular.module('bsis')
         $scope.selection = '/manageTTITesting';
         return true;
       } else if ($location.path().indexOf('/reEnterTestOutcomes') === 0 && path === '/manageTestBatch') {
-        if ($routeParams.bloodTestType === 'BASIC_TTI') {
+        if ($routeParams.bloodTestType === 'BASIC_TTI' || $routeParams.bloodTestType === 'CONFIRMATORY_TTI') {
           $scope.selection = '/reEnterTTI';
-        } else if ($routeParams.bloodTestType === 'BASIC_BLOODTYPING') {
+        } else if ($routeParams.bloodTestType === 'BASIC_BLOODTYPING' || $routeParams.bloodTestType === 'REPEAT_BLOODTYPING') {
           $scope.selection = '/reEnterBloodTyping';
         }
         return true;
@@ -297,14 +297,22 @@ angular.module('bsis')
       $location.path('/manageBloodGroupMatchTesting/' + item.id + '/BASIC_BLOODTYPING');
     };
 
-    $scope.recordPendingBloodTypingTests = function(item) {
+    $scope.recordPendingBloodTypingTests = function(item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
-      $location.path('/managePendingBloodTypingTests/' + item.id + '/REPEAT_BLOODTYPING');
+      if (testCategory === 'bloodGrouping') {
+        $location.path('/managePendingBloodTypingTests/' + item.id + '/REPEAT_BLOODTYPING');
+      } else if (testCategory === 'bloodGroupingReentry') {
+        $location.path('/reEnterTestOutcomes/' + item.id + '/REPEAT_BLOODTYPING');
+      }
     };
 
-    $scope.recordPendingTestResults = function(item) {
+    $scope.recordPendingTestResults = function(item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
-      $location.path('/managePendingTests/' + item.id + '/CONFIRMATORY_TTI');
+      if (testCategory === 'tti') {
+        $location.path('/managePendingTests/' + item.id + '/CONFIRMATORY_TTI');
+      } else if (testCategory === 'ttiReentry') {
+        $location.path('/reEnterTestOutcomes/' + item.id + '/CONFIRMATORY_TTI');
+      }
     };
 
   })
@@ -424,6 +432,8 @@ angular.module('bsis')
           $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
           $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
           $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
+          $scope.reEntryRequiredPendingBloodTypingTests = response.reEntryRequiredPendingBloodTypingTests;
+          $scope.reEntryRequiredPendingTTITests = response.reEntryRequiredPendingTTITests;
         }
       });
     };
@@ -575,7 +585,7 @@ angular.module('bsis')
         } else if (col.name === 'ttistatus') {
           return $filter('mapTTIStatus')(value);
         } else if (col.name === 'bloodAboRh') {
-          var bloodSerology = 'N/D';
+          var bloodSerology = '';
           if (row.entity.bloodTypingStatus !== 'NOT_DONE') {
             bloodSerology = row.entity.bloodTypingMatchStatus;
           }
@@ -585,10 +595,10 @@ angular.module('bsis')
         if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue') {
           for (var test in value) {
             if (value[test].bloodTest.testNameShort == col.name) {
-              return value[test].result || 'N/D';
+              return value[test].result || '';
             }
           }
-          return 'N/D';
+          return '';
         }
 
         return value;
@@ -805,15 +815,9 @@ angular.module('bsis')
 
   })
 
-  .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, TTITESTS, BLOODTYPINGTESTS, TTIOUTCOME, BGSOUTCOME, ABO, RH, $q, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, $q, $filter, ngTableParams, $timeout, $routeParams) {
     var data = [{}];
     $scope.data = data;
-    $scope.ttiTests = TTITESTS.options;
-    $scope.bloodTypingTests = BLOODTYPINGTESTS.options;
-    $scope.ttiOutcomes = TTIOUTCOME.options;
-    $scope.bgsOutcomes = BGSOUTCOME.options;
-    $scope.abo = ABO.options;
-    $scope.rh = RH.options;
 
     $scope.go = function(path) {
       $location.path(path + '/' + $routeParams.id);
@@ -825,6 +829,8 @@ angular.module('bsis')
           $scope.testBatch = response.testBatch;
 
         }
+      }, function(err) {
+        $log.error(err);
       });
     };
 

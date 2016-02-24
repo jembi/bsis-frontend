@@ -13,6 +13,10 @@
                     sortable="'deferredUntil'">
                     {{deferral.deferredUntil | bsisDate}}
                 </td>
+                <td data-title="'Venue'" header-class="text-left" class="text-center"
+                    sortable="'venue'">
+                    {{deferral.venue.name}}
+                </td>
                 <td data-title="'Reason'" style="width:22%;" header-class="text-left"
                     sortable="'deferralReason.reason'">
                     {{deferral.deferralReason.reason}}

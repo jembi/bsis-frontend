@@ -16,6 +16,8 @@ angular.module('bsis')
           $scope.testBatch = response.testBatch;
 
         }
+      }, function(err) {
+        $log.error(err);
       });
     };
 
@@ -32,6 +34,18 @@ angular.module('bsis')
         TestingService.getBloodGroupTestingFormFields(function(response) {
           if (response !== false) {
             $scope.testNames = response.basicBloodTypingTests;
+          }
+        });
+      } else if (bloodTestType === 'REPEAT_BLOODTYPING') {
+        TestingService.getBloodGroupTestingFormFields(function(response) {
+          if (response !== false) {
+            $scope.testNames = response.repeatBloodTypingTests;
+          }
+        });
+      } else if (bloodTestType === 'CONFIRMATORY_TTI') {
+        TestingService.getTTITestingFormFields(function(response) {
+          if (response !== false) {
+            $scope.testNames = response.pendingTTITests;
           }
         });
       }

@@ -74,6 +74,10 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
     {field: 'firstName'},
     {field: 'lastName'},
     {
+      name: 'Mobile Number',
+      field: 'contact.mobileNumber'
+    },
+    {
       name: 'Date of Last Donation',
       field: 'dateOfLastDonation',
       cellFilter: 'bsisDate'
