@@ -349,7 +349,7 @@ angular.module('bsis')
         id: 'allSamples',
         value: 'All Samples',
         reportName: 'Test Batch Outcomes Summary Report',
-        filterKey: '',
+        filterKeys: [],
         columns: ['ttistatus', 'bloodTypingStatus', 'bloodTypingMatchStatus'],
         matchType: true
       },
@@ -357,7 +357,7 @@ angular.module('bsis')
         id: 'ttiUnsafeSample',
         value: 'TTI Unsafe or Incomplete',
         reportName: 'Test Batch Outcomes Summary Report - TTI Unsafe and Tests Outstanding',
-        filterKey: 'TTI_SAFE',
+        filterKeys: ['TTI_SAFE'],
         columns: ['ttistatus'],
         matchType: false
       },
@@ -365,7 +365,7 @@ angular.module('bsis')
         id: 'testingIncompleteSamples',
         value: 'Blood Typing Issues or Incomplete',
         reportName: 'Test Batch Outcomes Summary Report - Blood Typing Issues and Tests Outstanding',
-        filterKey: 'MATCH',
+        filterKeys: ['MATCH', 'RESOLVED'],
         columns: ['bloodTypingMatchStatus'],
         matchType: false
       }
@@ -684,9 +684,9 @@ angular.module('bsis')
       renderableRows.forEach(function(row) {
         var match = false;
         $scope.dataExportType.columns.forEach(function(field) {
-          if ($scope.dataExportType.filterKey === '') {
+          if ($scope.dataExportType.filterKeys.length === 0) {
             match = true;
-          } else if (row.entity[field] === $scope.dataExportType.filterKey) {
+          } else if ($scope.dataExportType.filterKeys.indexOf(row.entity[field]) !== -1) {
             match = true;
           }
         });
