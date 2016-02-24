@@ -282,11 +282,11 @@ angular.module('bsis')
     $scope.recordTestResults = function(item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
       if (testCategory === 'tti') {
-        $location.path('/manageTTITesting/' + item.id);
+        $location.path('/manageTTITesting/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'ttiReentry') {
         $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'bloodGrouping') {
-        $location.path('/manageBloodGroupTesting/' + item.id);
+        $location.path('/manageBloodGroupTesting/' + item.id + '/BASIC_BLOODTYPING');
       } else if (testCategory === 'bloodGroupingReentry') {
         $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_BLOODTYPING');
       }
@@ -294,13 +294,13 @@ angular.module('bsis')
 
     $scope.recordConfirmatoryBloodGroupMatchTests = function(item) {
       TestingService.setCurrentTestBatch(item.id);
-      $location.path('/manageBloodGroupMatchTesting/' + item.id);
+      $location.path('/manageBloodGroupMatchTesting/' + item.id + '/BASIC_BLOODTYPING');
     };
 
     $scope.recordPendingBloodTypingTests = function(item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
       if (testCategory === 'bloodGrouping') {
-        $location.path('/managePendingBloodTypingTests/' + item.id);
+        $location.path('/managePendingBloodTypingTests/' + item.id + '/REPEAT_BLOODTYPING');
       } else if (testCategory === 'bloodGroupingReentry') {
         $location.path('/reEnterTestOutcomes/' + item.id + '/REPEAT_BLOODTYPING');
       }
@@ -309,7 +309,7 @@ angular.module('bsis')
     $scope.recordPendingTestResults = function(item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
       if (testCategory === 'tti') {
-        $location.path('/managePendingTests/' + item.id);
+        $location.path('/managePendingTests/' + item.id + '/CONFIRMATORY_TTI');
       } else if (testCategory === 'ttiReentry') {
         $location.path('/reEnterTestOutcomes/' + item.id + '/CONFIRMATORY_TTI');
       }
@@ -327,11 +327,11 @@ angular.module('bsis')
     $scope.recordTestResults = function(item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
       if (testCategory === 'tti') {
-        $location.path('/manageTTITesting/' + item.id);
+        $location.path('/manageTTITesting/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'ttiReentry') {
         $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'bloodGrouping') {
-        $location.path('/manageBloodGroupTesting/' + item.id);
+        $location.path('/manageBloodGroupTesting/' + item.id + '/BASIC_BLOODTYPING');
       } else if (testCategory === 'bloodGroupingReentry') {
         $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_BLOODTYPING');
       }
@@ -852,22 +852,22 @@ angular.module('bsis')
     $scope.getCurrentTestResults = function() {
 
       $scope.searching = true;
+      $scope.allTestOutcomes = {};
+      $scope.addTestMatchResults = {};
 
-      TestingService.getTestResultsById($routeParams.id, function(response) {
+      TestingService.getTestOutcomesByBatchIdAndBloodTestType($routeParams.id, $routeParams.bloodTestType, function(response) {
         if (response !== false) {
+
           data = response.testResults;
-          $scope.data = data;
+          $scope.data = response.testResults;
 
-          $scope.addTestResults = {};
-          $scope.addTestMatchResults = {};
-          angular.forEach($scope.data, function(value) {
-            $scope.addTestResults[value.donation.donationIdentificationNumber] = {'donationIdentificationNumber': value.donation.donationIdentificationNumber};
-
-            $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {'donationIdentificationNumber': value.donation.donationIdentificationNumber};
-            $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {'bloodAbo': ''};
-            $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {'bloodRh': ''};
+          angular.forEach($scope.data, function(donationResults) {
+            var din = donationResults.donation.donationIdentificationNumber;
+            $scope.allTestOutcomes[din] = {'donationIdentificationNumber': din, 'testResults': {}};
+            angular.forEach(donationResults.recentTestResults, function(test) {
+              $scope.allTestOutcomes[din].testResults[test.bloodTest.id] = test.result;
+            });
           });
-
         }
         $scope.searching = false;
       });
@@ -941,33 +941,7 @@ angular.module('bsis')
       return testId;
     };
 
-    $scope.testSamplesTTITableParams = new ngTableParams({
-      page: 1,            // show first page
-      count: 10,          // count per page
-      filter: {},
-      sorting: {}
-    },
-      {
-        defaultSort: 'asc',
-        counts: [], // hide page counts control
-        total: data.length, // length of data
-        getData: function($defer, params) {
-          var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
-          params.total(orderedData.length); // set total for pagination
-          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
-      });
-
-    $scope.$watch('data', function() {
-      $timeout(function() {
-        $scope.testSamplesTTITableParams.reload();
-      });
-    });
-
-    $scope.testSamplesBloodTypingTableParams = new ngTableParams({
+    $scope.testOutcomesTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 10,          // count per page
       filter: {},
@@ -987,7 +961,7 @@ angular.module('bsis')
 
     $scope.$watch('data', function() {
       $timeout(function() {
-        $scope.testSamplesBloodTypingTableParams.reload();
+        $scope.testOutcomesTableParams.reload();
       });
     });
 
