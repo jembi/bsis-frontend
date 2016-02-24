@@ -36,6 +36,12 @@ angular.module('bsis')
             $scope.testNames = response.basicBloodTypingTests;
           }
         });
+      } else if (bloodTestType === 'CONFIRMATORY_TTI') {
+        TestingService.getTTITestingFormFields(function(response) {
+          if (response !== false) {
+            $scope.testNames = response.pendingTTITests;
+          }
+        });
       }
     };
 
