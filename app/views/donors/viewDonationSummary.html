@@ -201,7 +201,7 @@
                 <td class="value">
             <span e-name="adverseEventType"
                   editable-select="donation.adverseEvent.type"
-                  e-ng-options="aet as aet.name for aet in adverseEventTypes track by aet.id">
+                  e-ng-options="aet as (aet.name !== undefined ? aet.name : '') for aet in adverseEventTypes track by aet.id">
               {{donation.adverseEvent.type.name}}
             </span>
                 </td>
