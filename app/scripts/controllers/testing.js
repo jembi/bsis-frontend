@@ -37,7 +37,7 @@ angular.module('bsis')
       } else if ($location.path().indexOf('/reEnterTestOutcomes') === 0 && path === '/manageTestBatch') {
         if ($routeParams.bloodTestType === 'BASIC_TTI') {
           $scope.selection = '/reEnterTTI';
-        } else if ($routeParams.bloodTestType === 'BASIC_BLOODTYPING') {
+        } else if ($routeParams.bloodTestType === 'BASIC_BLOODTYPING' || $routeParams.bloodTestType === 'REPEAT_BLOODTYPING') {
           $scope.selection = '/reEnterBloodTyping';
         }
         return true;
@@ -297,9 +297,13 @@ angular.module('bsis')
       $location.path('/manageBloodGroupMatchTesting/' + item.id);
     };
 
-    $scope.recordPendingBloodTypingTests = function(item) {
+    $scope.recordPendingBloodTypingTests = function(item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
-      $location.path('/managePendingBloodTypingTests/' + item.id);
+      if (testCategory === 'bloodGrouping') {
+        $location.path('/managePendingBloodTypingTests/' + item.id);
+      } else if (testCategory === 'bloodGroupingReentry') {
+        $location.path('/reEnterTestOutcomes/' + item.id + 'REPEAT_BLOODTYPING');
+      }
     };
 
     $scope.recordPendingTestResults = function(item) {
