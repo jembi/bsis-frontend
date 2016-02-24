@@ -436,6 +436,7 @@ angular.module('bsis')
       if (response !== false) {
         $scope.data = response;
         $scope.deferralReasons = $scope.data.deferralReasons;
+        $scope.venues = $scope.data.venues;
       }
     });
 
@@ -901,6 +902,7 @@ angular.module('bsis')
     $scope.addDeferral = function(deferral, addDeferralForm) {
 
       if (addDeferralForm.$valid) {
+
         deferral.deferredDonor = $scope.donor.id;
 
         $scope.addingDeferral = true;
