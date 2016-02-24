@@ -36,13 +36,13 @@
     </span>
   </span>
   <span style="margin-left: 20px; margin-top: -15px; float:right">
-    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-hide="confirmDelete || confirmEdit || testBatch.permissions.canReopen || testBatch.permissions.canClose || testBatch.permissions.canReopen">
+    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-if="testBatch.status === 'OPEN'" ng-hide="confirmDelete || confirmEdit">
       <button class="btn btn-primary" ng-disabled="!testBatch.permissions.canRelease" ng-click="releaseTestBatch(testBatch)">Release</button>
     </span>
-    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-hide="confirmDelete || confirmEdit || !testBatch.permissions.canClose">
-      <button class="btn btn-primary" ng-click="closeTestBatch(testBatch)">Close Batch</button>
+    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-if="testBatch.status === 'RELEASED'" ng-hide="confirmDelete || confirmEdit">
+      <button class="btn btn-primary" ng-disabled="!testBatch.permissions.canClose" ng-click="closeTestBatch(testBatch)">Close Batch</button>
     </span>
-    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-hide="confirmDelete || confirmEdit || !testBatch.permissions.canReopen">
+    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-if="testBatch.status === 'CLOSED'"  ng-hide="confirmDelete || confirmEdit">
       <button class="btn btn-primary" ng-click="reopenTestBatch(testBatch)">Reopen Batch</button>
     </span>
   </span>
