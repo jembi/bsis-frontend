@@ -302,7 +302,7 @@ angular.module('bsis')
       if (testCategory === 'bloodGrouping') {
         $location.path('/managePendingBloodTypingTests/' + item.id);
       } else if (testCategory === 'bloodGroupingReentry') {
-        $location.path('/reEnterTestOutcomes/' + item.id + 'REPEAT_BLOODTYPING');
+        $location.path('/reEnterTestOutcomes/' + item.id + '/REPEAT_BLOODTYPING');
       }
     };
 
@@ -428,6 +428,7 @@ angular.module('bsis')
           $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
           $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
           $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
+          $scope.reEntryRequiredPendingBloodTypingTests = response.reEntryRequiredPendingBloodTypingTests;
         }
       });
     };

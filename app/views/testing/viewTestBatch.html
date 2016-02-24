@@ -96,8 +96,17 @@
                                                                                                               ng-disabled="!basicTTIComplete && !pendingTTITests">Record
       Pending Test Outcomes</a></em></small> </span>
   <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> | </span>
-  <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a
-          href="" ng-click="recordPendingBloodTypingTests(testBatch,'bloodGrouping')" ng-disabled="!basicBloodTypingComplete && !pendingBloodTypingTests">Record Pending ABO/Rh Outcomes</a></em></small> </span>
+  <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
+    <em>
+        <small>Record Pending ABO/Rh Outcomes: </small>
+        <button class="btn btn-link" style="padding:0;" ng-click="recordPendingBloodTypingTests(testBatch, 'bloodGrouping')" ng-disabled="!basicBloodTypingComplete && !pendingBloodTypingTests">First Entry</button>
+        <small> | </small>
+    </em>
+    <em>
+        <button class="btn btn-link" style="padding:0;" ng-click="recordPendingBloodTypingTests(testBatch, 'bloodGroupingReentry')" ng-disabled="!reEntryRequiredPendingBloodTypingTests">Re-Entry</button>
+    </em>
+  </span>
+
 </span>
 
 <alert type="danger" close="" ng-show="err.userMessage">
