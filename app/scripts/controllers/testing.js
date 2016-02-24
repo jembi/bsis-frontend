@@ -282,11 +282,11 @@ angular.module('bsis')
     $scope.recordTestResults = function(item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
       if (testCategory === 'tti') {
-        $location.path('/manageTTITesting/' + item.id);
+        $location.path('/manageTTITesting/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'ttiReentry') {
         $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'bloodGrouping') {
-        $location.path('/manageBloodGroupTesting/' + item.id);
+        $location.path('/manageBloodGroupTesting/' + item.id + '/BASIC_BLOODTYPING');
       } else if (testCategory === 'bloodGroupingReentry') {
         $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_BLOODTYPING');
       }
@@ -294,17 +294,17 @@ angular.module('bsis')
 
     $scope.recordConfirmatoryBloodGroupMatchTests = function(item) {
       TestingService.setCurrentTestBatch(item.id);
-      $location.path('/manageBloodGroupMatchTesting/' + item.id);
+      $location.path('/manageBloodGroupMatchTesting/' + item.id + '/BASIC_BLOODTYPING');
     };
 
     $scope.recordPendingBloodTypingTests = function(item) {
       TestingService.setCurrentTestBatch(item.id);
-      $location.path('/managePendingBloodTypingTests/' + item.id);
+      $location.path('/managePendingBloodTypingTests/' + item.id + '/REPEAT_BLOODTYPING');
     };
 
     $scope.recordPendingTestResults = function(item) {
       TestingService.setCurrentTestBatch(item.id);
-      $location.path('/managePendingTests/' + item.id);
+      $location.path('/managePendingTests/' + item.id + '/CONFIRMATORY_TTI');
     };
 
   })
@@ -319,11 +319,11 @@ angular.module('bsis')
     $scope.recordTestResults = function(item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);
       if (testCategory === 'tti') {
-        $location.path('/manageTTITesting/' + item.id);
+        $location.path('/manageTTITesting/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'ttiReentry') {
         $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
       } else if (testCategory === 'bloodGrouping') {
-        $location.path('/manageBloodGroupTesting/' + item.id);
+        $location.path('/manageBloodGroupTesting/' + item.id + '/BASIC_BLOODTYPING');
       } else if (testCategory === 'bloodGroupingReentry') {
         $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_BLOODTYPING');
       }
@@ -846,29 +846,22 @@ angular.module('bsis')
     $scope.getCurrentTestResults = function() {
 
       $scope.searching = true;
+      $scope.allTestOutcomes = {};
+      $scope.addTestMatchResults = {};
 
-      TestingService.getTestResultsById($routeParams.id, function(response) {
+      TestingService.getTestOutcomesByBatchIdAndBloodTestType($routeParams.id, $routeParams.bloodTestType, function(response) {
         if (response !== false) {
+
           data = response.testResults;
-          $scope.data = data;
+          $scope.data = response.testResults;
 
-          $scope.allTestOutcomes = {};
-          $scope.addTestMatchResults = {};
-          angular.forEach($scope.data, function(value) {
-            $scope.allTestOutcomes[value.donation.donationIdentificationNumber] = {
-              'donationIdentificationNumber': value.donation.donationIdentificationNumber,
-              'testResults': {}
-            };
-            angular.forEach($scope.ttiTestsBasic, function(test) {
-              if (angular.isDefined(value.recentTestResults[test.id])) {
-                $scope.allTestOutcomes[value.donation.donationIdentificationNumber].testResults[test.id] = value.recentTestResults[test.id].result;
-              }
+          angular.forEach($scope.data, function(donationResults) {
+            var din = donationResults.donation.donationIdentificationNumber;
+            $scope.allTestOutcomes[din] = {'donationIdentificationNumber': din, 'testResults': {}};
+            angular.forEach(donationResults.recentTestResults, function(test) {
+              $scope.allTestOutcomes[din].testResults[test.bloodTest.id] = test.result;
             });
-            $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {'donationIdentificationNumber': value.donation.donationIdentificationNumber};
-            $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {'bloodAbo': ''};
-            $scope.addTestMatchResults[value.donation.donationIdentificationNumber] = {'bloodRh': ''};
           });
-
         }
         $scope.searching = false;
       });
