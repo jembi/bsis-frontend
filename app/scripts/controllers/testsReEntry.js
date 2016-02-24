@@ -16,6 +16,8 @@ angular.module('bsis')
           $scope.testBatch = response.testBatch;
 
         }
+      }, function(err) {
+        $log.error(err);
       });
     };
 
