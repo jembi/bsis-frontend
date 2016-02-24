@@ -50,7 +50,7 @@
 
 <hr style="clear:right;"/>
 
-<span ng-if="testBatch.status!='CLOSED'" class="h4" style="float: right; margin-top: -10px; margin-bottom: 0px; padding-right: 15px; text-align: right;">
+<span ng-if="testBatch.status!='CLOSED'" ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; margin-top: -10px; margin-bottom: 0px; padding-right: 15px; text-align: right;">
   <span has-permission="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="confirmDelete || confirmEdit">
     <small>
       <em>TTI Test Outcomes:
@@ -127,7 +127,7 @@
 
     <hr style="margin-bottom:5px;"/>
 
-<span class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
+<span ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
   <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a
           href="" ng-click="recordConfirmatoryBloodGroupMatchTests(testBatch)" ng-disabled="!pendingBloodTypingConfirmations">Resolve Ambiguous ABO/Rh Outcomes</a></em></small> </span>
 </span>
