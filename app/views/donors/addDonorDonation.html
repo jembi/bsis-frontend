@@ -308,6 +308,7 @@
                             id="adverseEventType"
                             name="adverseEventType"
                             ng-model="adverseEvent.type"
+                            ng-change="resetAdverseEventComment()"
                             ng-options="adverseEventType as adverseEventType.name for adverseEventType in adverseEventTypes">
                         <option value=""></option>
                     </select>

@@ -816,6 +816,12 @@ angular.module('bsis')
       return modal.result;
     }
 
+    $scope.resetAdverseEventComment = function() {
+      if (!$scope.adverseEvent.type) {
+        $scope.adverseEvent.comment = null;
+      }
+    };
+
     $scope.addDonation = function(donation, donationBatch, bleedStartTime, bleedEndTime, valid) {
 
       if (valid) {
@@ -1946,6 +1952,11 @@ angular.module('bsis')
       $scope.donation = {};
       $scope.donorSummary = {};
       $scope.donorSummaryLoading = false;
+      $scope.adverseEvent = {
+        type: null,
+        comment: ''
+      };
+
 
       $scope.$watch('donation.donorNumber', function() {
         if ($scope.donation.donorNumber) {
@@ -2036,6 +2047,12 @@ angular.module('bsis')
 
       return modal.result;
     }
+
+    $scope.resetAdverseEventComment = function() {
+      if (!$scope.adverseEvent.type) {
+        $scope.adverseEvent.comment = null;
+      }
+    };
 
     $scope.addDonation = function(donation, bleedStartTime, bleedEndTime, valid) {
 
