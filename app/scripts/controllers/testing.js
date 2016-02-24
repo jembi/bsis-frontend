@@ -935,33 +935,7 @@ angular.module('bsis')
       return testId;
     };
 
-    $scope.testSamplesTTITableParams = new ngTableParams({
-      page: 1,            // show first page
-      count: 10,          // count per page
-      filter: {},
-      sorting: {}
-    },
-      {
-        defaultSort: 'asc',
-        counts: [], // hide page counts control
-        total: data.length, // length of data
-        getData: function($defer, params) {
-          var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
-          params.total(orderedData.length); // set total for pagination
-          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
-      });
-
-    $scope.$watch('data', function() {
-      $timeout(function() {
-        $scope.testSamplesTTITableParams.reload();
-      });
-    });
-
-    $scope.testSamplesBloodTypingTableParams = new ngTableParams({
+    $scope.testOutcomesTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 10,          // count per page
       filter: {},
@@ -981,7 +955,7 @@ angular.module('bsis')
 
     $scope.$watch('data', function() {
       $timeout(function() {
-        $scope.testSamplesBloodTypingTableParams.reload();
+        $scope.testOutcomesTableParams.reload();
       });
     });
 
