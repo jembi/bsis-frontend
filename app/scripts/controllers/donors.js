@@ -151,7 +151,7 @@ angular.module('bsis')
 
     function confirmAddDonor(birthDateString) {
 
-      var birthDate = moment(birthDateString, 'YYYY-D-M');
+      var birthDate = moment(birthDateString, 'YYYY-MM-DD');
 
       var message;
       if (birthDate.isBefore(minBirthDate)) {
