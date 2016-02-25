@@ -637,6 +637,7 @@ angular.module('bsis')
     $scope.viewDonationSummary = function(din) {
 
       $scope.donation = $filter('filter')($scope.donationsData, {donationIdentificationNumber: din})[0];
+      $scope.commentFieldDisabled = !$scope.donation.adverseEvent;
 
       DonorService.getDonationsFormFields(function(response) {
         if (response !== false) {
@@ -654,6 +655,10 @@ angular.module('bsis')
 
       $scope.donationsView = 'viewDonations';
 
+    };
+
+    $scope.isCommentFieldDisabled = function(form) {
+      $scope.commentFieldDisabled = !form.adverseEventType.$viewValue;
     };
 
     $scope.updateDonation = function(donation) {
@@ -1932,9 +1937,14 @@ angular.module('bsis')
       $scope.viewDonationSummary(row.entity);
     };
 
+    $scope.isCommentFieldDisabled = function(form) {
+      $scope.commentFieldDisabled = !form.adverseEventType.$viewValue;
+    };
+
     $scope.viewDonationSummary = function(donation) {
       $scope.donation = donation;
       $scope.donationBatchView = 'viewDonationSummary';
+      $scope.commentFieldDisabled = !donation.adverseEvent;
 
       DonorService.getDonationsFormFields(function(response) {
         if (response !== false) {
