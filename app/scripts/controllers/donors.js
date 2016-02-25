@@ -659,8 +659,10 @@ angular.module('bsis')
 
     $scope.updateCommentFieldDisabledState = function(form) {
       $scope.commentFieldDisabled = !form.adverseEventType.$viewValue;
-      form.adverseEventComment.$setViewValue(null);
-      form.adverseEventComment.$render();
+      if (!form.adverseEventType.$viewValue) {
+        form.adverseEventComment.$setViewValue(null);
+        form.adverseEventComment.$render();
+      }
     };
 
     $scope.updateDonation = function(donation) {
@@ -1941,8 +1943,10 @@ angular.module('bsis')
 
     $scope.updateCommentFieldDisabledState = function(form) {
       $scope.commentFieldDisabled = !form.adverseEventType.$viewValue;
-      form.adverseEventComment.$setViewValue(null);
-      form.adverseEventComment.$render();
+      if (!form.adverseEventType.$viewValue) {
+        form.adverseEventComment.$setViewValue(null);
+        form.adverseEventComment.$render();
+      }
     };
 
     $scope.viewDonationSummary = function(donation) {
