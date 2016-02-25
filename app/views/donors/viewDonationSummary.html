@@ -201,7 +201,7 @@
                 <td class="value">
             <span e-name="adverseEventType"
                   editable-select="donation.adverseEvent.type"
-                  e-ng-change="isCommentFieldDisabled(donationSummaryForm)"
+                  e-ng-change="updateCommentFieldDisabledState(donationSummaryForm)"
                   e-ng-options="aet as (aet.name !== undefined ? aet.name : '') for aet in adverseEventTypes track by aet.id">
               {{donation.adverseEvent.type.name}}
             </span>

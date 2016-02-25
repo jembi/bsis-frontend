@@ -657,7 +657,7 @@ angular.module('bsis')
 
     };
 
-    $scope.isCommentFieldDisabled = function(form) {
+    $scope.updateCommentFieldDisabledState = function(form) {
       $scope.commentFieldDisabled = !form.adverseEventType.$viewValue;
     };
 
@@ -1937,7 +1937,7 @@ angular.module('bsis')
       $scope.viewDonationSummary(row.entity);
     };
 
-    $scope.isCommentFieldDisabled = function(form) {
+    $scope.updateCommentFieldDisabledState = function(form) {
       $scope.commentFieldDisabled = !form.adverseEventType.$viewValue;
     };
 
