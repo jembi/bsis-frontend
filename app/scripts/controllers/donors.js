@@ -162,7 +162,7 @@ angular.module('bsis')
         // Don't show confirmation
         return Promise.resolve(null);
       }
-      message += ' Are you sure that you want to countinue?';
+      message += ' Are you sure that you want to continue?';
 
       var modal = $modal.open({
         animation: false,
@@ -775,7 +775,7 @@ angular.module('bsis')
         // Don't show confirmation
         return Promise.resolve(null);
       }
-      message += ' Are you sure that you want to countinue?';
+      message += ' Are you sure that you want to continue?';
 
       var modal = $modal.open({
         animation: false,
@@ -2019,7 +2019,7 @@ angular.module('bsis')
         // Don't show confirmation
         return Promise.resolve(null);
       }
-      message += ' Are you sure that you want to countinue?';
+      message += ' Are you sure that you want to continue?';
 
       var modal = $modal.open({
         animation: false,
