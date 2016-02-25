@@ -214,6 +214,13 @@ angular.module('bsis')
         }, function(err) {
           onError(err.data);
         });
+      },
+      getTestBatchDonations: function(id, bloodTypingMatchStatus, onSuccess, onError) {
+        Api.TestBatchDonations.get({id: id, bloodTypingMatchStatus: bloodTypingMatchStatus}, function(data) {
+          onSuccess(data);
+        }, function(err) {
+          onError(err);
+        });
       }
     };
   });

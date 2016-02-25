@@ -67,6 +67,16 @@ angular.module('bsis')
           update: {method: 'PUT'}
         }
       ),
+      
+      TestBatchDonations: $resource(url + '/testbatches/:id/donations', {},
+        {
+          query: {
+            method: 'GET',
+            params: {id: '@id', 
+                     bloodTypingMatchStatus: '@bloodTypingMatchStatus'}
+          }
+        }
+      ),
 
       DonorFormFields: $resource(url + '/donors/form'),
       DonationsFormFields: $resource(url + '/donations/form'),
