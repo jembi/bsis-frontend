@@ -67,12 +67,12 @@ angular.module('bsis')
           update: {method: 'PUT'}
         }
       ),
-      
+
       TestBatchDonations: $resource(url + '/testbatches/:id/donations', {},
         {
           query: {
             method: 'GET',
-            params: {id: '@id', 
+            params: {id: '@id',
                      bloodTypingMatchStatus: '@bloodTypingMatchStatus'}
           }
         }

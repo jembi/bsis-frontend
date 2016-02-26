@@ -897,8 +897,6 @@ angular.module('bsis')
 
     };
 
-    
-
     $scope.getBloodTestId = function(testNameShort) {
       var testId = null;
       angular.forEach($scope.data[0].recentTestResults, function(value, key) {

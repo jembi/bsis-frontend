@@ -16,23 +16,18 @@ angular.module('bsis')
       $scope.searching = true;
       TestingService.getTestBatchDonations($routeParams.id, 'AMBIGUOUS', function(response) {
         if (response !== false) {
-          $scope.data = response.donations;   
+          $scope.data = response.donations;
           $scope.testBatchCreatedDate = response.testBatchCreatedDate;
           $scope.donationsNumber = response.donationsNumber;
           $scope.matchConfirmations = {};
-          
-          $log.info("$scope.testBatchCreatedDate: " + $scope.testBatchCreatedDate);
 
           angular.forEach($scope.data, function(sample) {
             var din = sample.donationIdentificationNumber;
-            $log.info("din: " + din);
             $scope.matchConfirmations[din] = {};
             $scope.matchConfirmations[din].donationIdentificationNumber = din;
             $scope.matchConfirmations[din].bloodAbo = sample.bloodAbo;
             $scope.matchConfirmations[din].bloodRh = sample.bloodRh;
-            $log.info("matchConfirmations: " + $scope.matchConfirmations[din].bloodRh);
           });
-          
         }
         $scope.searching = false;
       });
