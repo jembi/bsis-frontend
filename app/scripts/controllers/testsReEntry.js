@@ -10,17 +10,6 @@ angular.module('bsis')
       $location.path(path + '/' + $routeParams.id);
     };
 
-    var getCurrentTestBatch = function() {
-      TestingService.getTestBatchById($routeParams.id, function(response) {
-        if (response !== false) {
-          $scope.testBatch = response.testBatch;
-
-        }
-      }, function(err) {
-        $log.error(err);
-      });
-    };
-
     // This test names will be the column names. They are specific to each blood test type.
     var getTestNames = function() {
       var bloodTestType = $routeParams.bloodTestType;
@@ -58,6 +47,8 @@ angular.module('bsis')
       TestingService.getTestOutcomesByBatchIdAndBloodTestType($routeParams.id, $routeParams.bloodTestType, function(response) {
         if (response !== false) {
           $scope.data = response.testResults;
+          $scope.testBatchCreatedDate = response.testBatchCreatedDate;
+          $scope.donationsNumber = response.donationsNumber;
           $scope.reEnteredTestOutcomes = {};
 
           angular.forEach($scope.data, function(donationResults) {
@@ -74,7 +65,6 @@ angular.module('bsis')
       });
     };
 
-    getCurrentTestBatch();
     getTestNames();
     getReEnteredTestOutcomes();
 
