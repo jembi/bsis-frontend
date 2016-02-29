@@ -14,7 +14,7 @@ angular.module('bsis')
       TestingService.getTestBatchDonations($routeParams.id, 'AMBIGUOUS', function(response) {
         $scope.data = response.donations;
         $scope.testBatchCreatedDate = response.testBatchCreatedDate;
-        $scope.donationsNumber = response.donationsNumber;
+        $scope.numberOfDonations = response.numberOfDonations;
         $scope.matchConfirmations = {};
 
         angular.forEach($scope.data, function(sample) {
