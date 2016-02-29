@@ -398,7 +398,7 @@ angular.module('bsis')
       });
       data = donations;
       for (var i = 0; i < data.length; i++) {
-        data[i].bloodTypingStatusBloodTypingMatchStatus = data[i].bloodTypingStatus + ' ' +  data[i].bloodTypingMatchStatus + '(<em>' + data[i].bloodAbo + data[i].bloodRh + '</em>)';
+        data[i].bloodTypingStatusBloodTypingMatchStatus = data[i].bloodTypingStatus + ' ' +  data[i].bloodTypingMatchStatus + '<em>(' + data[i].bloodAbo + data[i].bloodRh + ')</em>';
       }
       $scope.gridOptions.data = data;
       $scope.data = data;
