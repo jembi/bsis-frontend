@@ -398,7 +398,7 @@ angular.module('bsis')
       });
       data = donations;
       for (var i = 0; i < data.length; i++) {
-        data[i].bloodTypingStatusBloodTypingMatchStatus = data[i].bloodTypingStatus + ' ' +  data[i].bloodTypingMatchStatus + '<em>(' + data[i].bloodAbo + data[i].bloodRh + ')</em>';
+        data[i].bloodTypingStatusBloodTypingMatchStatus = data[i].bloodTypingStatus + ' ' +  data[i].bloodTypingMatchStatus + '(' + data[i].bloodAbo + data[i].bloodRh + ')';
       }
       $scope.gridOptions.data = data;
       $scope.data = data;
@@ -486,7 +486,7 @@ angular.module('bsis')
         name: 'bloodTypingStatusBloodTypingMatchStatus',
         displayName: 'Blood Group Serology',
         field: 'bloodTypingStatusBloodTypingMatchStatus',
-        cellTemplate: '<div class="ui-grid-cell-contents" ng-bind-html="row.entity.bloodTypingStatusBloodTypingMatchStatus"></div>',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
         visible: true,
         width: '**'
       }
@@ -596,7 +596,7 @@ angular.module('bsis')
           return bloodSerology;
         }
         // assume that column is a test outcome column, and manage empty values
-        if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue') {
+        if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue' && col.name !== 'TTI Status' && col.name !== 'bloodTypingStatusBloodTypingMatchStatus') {
           for (var test in value) {
             if (value[test].bloodTest.testNameShort == col.name) {
               return value[test].result || '';
