@@ -397,6 +397,9 @@ angular.module('bsis')
         });
       });
       data = donations;
+      for (var i = 0; i < data.length; i++) {
+        data[i].bloodTypingStatusBloodTypingMatchStatus = data[i].bloodTypingStatus + ' ' +  data[i].bloodTypingMatchStatus + '(<em>' + data[i].bloodAbo + data[i].bloodRh + '</em>)';
+      }
       $scope.gridOptions.data = data;
       $scope.data = data;
       $scope.testBatch.numReleasedSamples = numReleasedSamples;
@@ -480,10 +483,10 @@ angular.module('bsis')
         width: '**'
       },
       {
-        name: 'bloodTypingStatus',
+        name: 'bloodTypingStatusBloodTypingMatchStatus',
         displayName: 'Blood Group Serology',
-        field: 'bloodTypingStatus',
-        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
+        field: 'bloodTypingStatusBloodTypingMatchStatus',
+        cellTemplate: '<div class="ui-grid-cell-contents" ng-bind-html="row.entity.bloodTypingStatusBloodTypingMatchStatus"></div>',
         visible: true,
         width: '**'
       }
