@@ -43,25 +43,23 @@ angular.module('bsis')
     // The array reEnteredTestOutcomes is originally populated with all test outcomes where reEntryRequired is false.
     // As the reEntry values are selected from the dropdowns, they are added to this array.
     var getReEnteredTestOutcomes = function() {
-      $scope.searching = true;
       TestingService.getTestOutcomesByBatchIdAndBloodTestType($routeParams.id, $routeParams.bloodTestType, function(response) {
-        if (response !== false) {
-          $scope.data = response.testResults;
-          $scope.testBatchCreatedDate = response.testBatchCreatedDate;
-          $scope.donationsNumber = response.donationsNumber;
-          $scope.reEnteredTestOutcomes = {};
+        $scope.data = response.testResults;
+        $scope.testBatchCreatedDate = response.testBatchCreatedDate;
+        $scope.numberOfDonations = response.numberOfDonations;
+        $scope.reEnteredTestOutcomes = {};
 
-          angular.forEach($scope.data, function(donationResults) {
-            var din = donationResults.donation.donationIdentificationNumber;
-            $scope.reEnteredTestOutcomes[din] = {'donationIdentificationNumber': din, 'testResults': {}};
-            angular.forEach(donationResults.recentTestResults, function(test) {
-              if (test.reEntryRequired === false) {
-                $scope.reEnteredTestOutcomes[din].testResults[test.bloodTest.id] = test.result;
-              }
-            });
+        angular.forEach($scope.data, function(donationResults) {
+          var din = donationResults.donation.donationIdentificationNumber;
+          $scope.reEnteredTestOutcomes[din] = {'donationIdentificationNumber': din, 'testResults': {}};
+          angular.forEach(donationResults.recentTestResults, function(test) {
+            if (test.reEntryRequired === false) {
+              $scope.reEnteredTestOutcomes[din].testResults[test.bloodTest.id] = test.result;
+            }
           });
-        }
-        $scope.searching = false;
+        });
+      }, function(err) {
+        $log.error(err);
       });
     };
 

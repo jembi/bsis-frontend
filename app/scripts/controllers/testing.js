@@ -850,7 +850,7 @@ angular.module('bsis')
           data = response.testResults;
           $scope.data = response.testResults;
           $scope.testBatchCreatedDate = response.testBatchCreatedDate;
-          $scope.donationsNumber = response.donationsNumber;
+          $scope.numberOfDonations = response.numberOfDonations;
 
           angular.forEach($scope.data, function(donationResults) {
             var din = donationResults.donation.donationIdentificationNumber;
