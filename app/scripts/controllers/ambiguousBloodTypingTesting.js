@@ -11,7 +11,6 @@ angular.module('bsis')
     };
 
     var getSamples = function() {
-      $scope.searching = true;
       TestingService.getTestBatchDonations($routeParams.id, 'AMBIGUOUS', function(response) {
         $scope.data = response.donations;
         $scope.testBatchCreatedDate = response.testBatchCreatedDate;
@@ -25,8 +24,6 @@ angular.module('bsis')
           $scope.matchConfirmations[din].bloodAbo = sample.bloodAbo;
           $scope.matchConfirmations[din].bloodRh = sample.bloodRh;
         });
-        
-        $scope.searching = false;
       }, function(err) {
         $log.error(err);
       });
