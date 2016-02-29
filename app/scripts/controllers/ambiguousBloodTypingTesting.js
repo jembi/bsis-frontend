@@ -10,26 +10,25 @@ angular.module('bsis')
       $location.path(path + '/' + $routeParams.id);
     };
 
-    // The array reEnteredTestOutcomes is originally populated with all test outcomes where reEntryRequired is false.
-    // As the reEntry values are selected from the dropdowns, they are added to this array.
     var getSamples = function() {
       $scope.searching = true;
       TestingService.getTestBatchDonations($routeParams.id, 'AMBIGUOUS', function(response) {
-        if (response !== false) {
-          $scope.data = response.donations;
-          $scope.testBatchCreatedDate = response.testBatchCreatedDate;
-          $scope.donationsNumber = response.donationsNumber;
-          $scope.matchConfirmations = {};
+        $scope.data = response.donations;
+        $scope.testBatchCreatedDate = response.testBatchCreatedDate;
+        $scope.donationsNumber = response.donationsNumber;
+        $scope.matchConfirmations = {};
 
-          angular.forEach($scope.data, function(sample) {
-            var din = sample.donationIdentificationNumber;
-            $scope.matchConfirmations[din] = {};
-            $scope.matchConfirmations[din].donationIdentificationNumber = din;
-            $scope.matchConfirmations[din].bloodAbo = sample.bloodAbo;
-            $scope.matchConfirmations[din].bloodRh = sample.bloodRh;
-          });
-        }
+        angular.forEach($scope.data, function(sample) {
+          var din = sample.donationIdentificationNumber;
+          $scope.matchConfirmations[din] = {};
+          $scope.matchConfirmations[din].donationIdentificationNumber = din;
+          $scope.matchConfirmations[din].bloodAbo = sample.bloodAbo;
+          $scope.matchConfirmations[din].bloodRh = sample.bloodRh;
+        });
+        
         $scope.searching = false;
+      }, function(err) {
+        $log.error(err);
       });
     };
 
