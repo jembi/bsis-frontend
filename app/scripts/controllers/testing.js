@@ -480,8 +480,9 @@ angular.module('bsis')
         width: '**'
       },
       {
-        name: 'bloodAboRh',
+        name: 'bloodTypingStatus',
         displayName: 'Blood Group Serology',
+        field: 'bloodTypingStatus',
         cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
         visible: true,
         width: '**'
@@ -967,4 +968,3 @@ angular.module('bsis')
 
   })
 ;
-
