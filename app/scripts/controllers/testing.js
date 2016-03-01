@@ -827,17 +827,6 @@ angular.module('bsis')
       $location.path(path + '/' + $routeParams.id);
     };
 
-    $scope.getCurrentTestBatch = function() {
-      TestingService.getTestBatchById($routeParams.id, function(response) {
-        if (response !== false) {
-          $scope.testBatch = response.testBatch;
-
-        }
-      }, function(err) {
-        $log.error(err);
-      });
-    };
-
     $scope.getTests = function() {
       TestingService.getTTITestingFormFields(function(response) {
         if (response !== false) {
@@ -864,6 +853,8 @@ angular.module('bsis')
 
           data = response.testResults;
           $scope.data = response.testResults;
+          $scope.testBatchCreatedDate = response.testBatchCreatedDate;
+          $scope.numberOfDonations = response.numberOfDonations;
 
           angular.forEach($scope.data, function(donationResults) {
             var din = donationResults.donation.donationIdentificationNumber;
@@ -877,7 +868,6 @@ angular.module('bsis')
       });
     };
 
-    $scope.getCurrentTestBatch();
     $scope.getTests();
     $scope.getCurrentTestResults();
 
