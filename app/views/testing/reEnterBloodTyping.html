@@ -38,10 +38,10 @@
                     </th>
                     <th class="text-center sortable" style="width:25%;"
                         ng-class="{
-                          'sort-asc': testOutcomesTableParams.isSortBy('donation.bloodTypingStatus', 'asc'),
-                          'sort-desc': testOutcomesTableParams.isSortBy('donation.bloodTypingStatus', 'desc')
+                          'sort-asc': testOutcomesTableParams.isSortBy('bloodTypingMatchStatus', 'asc'),
+                          'sort-desc': testOutcomesTableParams.isSortBy('bloodTypingMatchStatus', 'desc')
                         }"
-                        ng-click="testOutcomesTableParams.sorting('donation.bloodTypingStatus', testOutcomesTableParams.isSortBy('donation.bloodTypingStatus', 'asc') ? 'desc' : 'asc')">
+                        ng-click="testOutcomesTableParams.sorting('bloodTypingMatchStatus', testOutcomesTableParams.isSortBy('bloodTypingMatchStatus', 'asc') ? 'desc' : 'asc')">
                         <div>Blood Typing Status <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
                     </th>
                     <th ng-repeat="column in testNames" ng-show="true"

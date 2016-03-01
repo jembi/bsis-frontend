@@ -149,9 +149,7 @@ angular.module('bsis')
     var minBirthDate = moment().subtract(maxAge, 'years');
     var maxBirthDate = moment().subtract(minAge, 'years');
 
-    function confirmAddDonor(birthDateString) {
-
-      var birthDate = moment(birthDateString, 'YYYY-D-M');
+    function confirmAddDonor(birthDate) {
 
       var message;
       if (birthDate.isBefore(minBirthDate)) {
@@ -162,7 +160,7 @@ angular.module('bsis')
         // Don't show confirmation
         return Promise.resolve(null);
       }
-      message += ' Are you sure that you want to countinue?';
+      message += ' Are you sure that you want to continue?';
 
       var modal = $modal.open({
         animation: false,
@@ -185,27 +183,34 @@ angular.module('bsis')
       if (valid) {
 
         newDonor.birthDate = dob.year + '-' + dob.month + '-' + dob.dayOfMonth;
+        var birthDate = moment(newDonor.birthDate, 'YYYY-MM-DD');
 
-        confirmAddDonor(newDonor.birthDate).then(function() {
+        if (!moment(birthDate).isValid()) {
+          $scope.dobValid = false;
+          $scope.addingDonor = false;
+        } else {
 
-          $scope.addingDonor = true;
+          confirmAddDonor(birthDate).then(function() {
 
-          DonorService.addDonor(newDonor, function(donor) {
+            $scope.addingDonor = true;
 
-            $scope.format = DATEFORMAT;
-            $scope.initDate = $scope.donor.birthDate;
-            $scope.donorBirthDateOpen = false;
-            $scope.submitted = '';
-            $location.path('/viewDonor/' + donor.id).search({});
-          }, function(err) {
-            $scope.errorMessage = err.userMessage;
-            $scope.err = err;
-            if (err['donor.birthDate']) {
-              $scope.dobValid = false;
-            }
-            $scope.addingDonor = false;
+            DonorService.addDonor(newDonor, function(donor) {
+
+              $scope.format = DATEFORMAT;
+              $scope.initDate = $scope.donor.birthDate;
+              $scope.donorBirthDateOpen = false;
+              $scope.submitted = '';
+              $location.path('/viewDonor/' + donor.id).search({});
+            }, function(err) {
+              $scope.errorMessage = err.userMessage;
+              $scope.err = err;
+              if (err['donor.birthDate']) {
+                $scope.dobValid = false;
+              }
+              $scope.addingDonor = false;
+            });
           });
-        });
+        }
       } else {
         $scope.submitted = true;
       }
@@ -784,7 +789,7 @@ angular.module('bsis')
         // Don't show confirmation
         return Promise.resolve(null);
       }
-      message += ' Are you sure that you want to countinue?';
+      message += ' Are you sure that you want to continue?';
 
       var modal = $modal.open({
         animation: false,
@@ -2048,7 +2053,7 @@ angular.module('bsis')
         // Don't show confirmation
         return Promise.resolve(null);
       }
-      message += ' Are you sure that you want to countinue?';
+      message += ' Are you sure that you want to continue?';
 
       var modal = $modal.open({
         animation: false,

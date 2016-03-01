@@ -38,10 +38,10 @@
                     </th>
                     <th class="text-center sortable" style="width:25%;"
                         ng-class="{
-                          'sort-asc': testOutcomesTableParams.isSortBy('donation.ttiStatus', 'asc'),
-                          'sort-desc': testOutcomesTableParams.isSortBy('donation.ttiStatus', 'desc')
+                          'sort-asc': testOutcomesTableParams.isSortBy('ttistatus', 'asc'),
+                          'sort-desc': testOutcomesTableParams.isSortBy('ttistatus', 'desc')
                         }"
-                        ng-click="testOutcomesTableParams.sorting('donation.ttiStatus', testOutcomesTableParams.isSortBy('donation.ttiStatus', 'asc') ? 'desc' : 'asc')">
+                        ng-click="testOutcomesTableParams.sorting('ttistatus', testOutcomesTableParams.isSortBy('ttistatus', 'asc') ? 'desc' : 'asc')">
                         <div>TTI Testing Status <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
                     </th>
                     <th ng-repeat="column in ttiTestsBasic" ng-show="true"
