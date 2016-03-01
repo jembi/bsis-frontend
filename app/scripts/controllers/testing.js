@@ -294,7 +294,7 @@ angular.module('bsis')
 
     $scope.recordConfirmatoryBloodGroupMatchTests = function(item) {
       TestingService.setCurrentTestBatch(item.id);
-      $location.path('/manageBloodGroupMatchTesting/' + item.id + '/BASIC_BLOODTYPING');
+      $location.path('/manageBloodGroupMatchTesting/' + item.id);
     };
 
     $scope.recordPendingBloodTypingTests = function(item, testCategory) {
@@ -881,40 +881,6 @@ angular.module('bsis')
       // FIXME: Handle errors
       $q.all(requests).then(function() {
         $location.path('/viewTestBatch/' + $routeParams.id);
-      }).finally(function() {
-        $scope.savingTestResults = false;
-      });
-
-    };
-
-    $scope.saveBloodGroupMatchTestResults = function(testResults) {
-
-      $scope.savingTestResults = true;
-
-      var requests = [];
-
-      var aboTestId = $scope.getBloodTestId('ABO');
-      var rhTestId = $scope.getBloodTestId('Rh');
-
-      angular.forEach(testResults, function(value) {
-        // save updated test results first
-        var updatedTestResults = {};
-        updatedTestResults.donationIdentificationNumber = value.donationIdentificationNumber;
-        updatedTestResults.testResults = {};
-        updatedTestResults.testResults[aboTestId] = value.bloodAbo;
-        updatedTestResults.testResults[rhTestId] = value.bloodRh == '+' ? 'POS' : 'NEG';
-        if (value.confirm) {
-            // save confirmation last
-          var request = TestingService.saveBloodGroupMatchTestResults(value, angular.noop);
-          requests.push(request);
-        }
-      });
-
-      $q.all(requests).then(function() {
-        $location.path('/viewTestBatch/' + $routeParams.id);
-      }).catch(function(err) {
-        $log.error(err);
-        // TODO: handle the case where there have been errors
       }).finally(function() {
         $scope.savingTestResults = false;
       });

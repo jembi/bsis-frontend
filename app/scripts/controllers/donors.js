@@ -637,6 +637,7 @@ angular.module('bsis')
     $scope.viewDonationSummary = function(din) {
 
       $scope.donation = $filter('filter')($scope.donationsData, {donationIdentificationNumber: din})[0];
+      $scope.commentFieldDisabled = !$scope.donation.adverseEvent;
 
       DonorService.getDonationsFormFields(function(response) {
         if (response !== false) {
@@ -654,6 +655,14 @@ angular.module('bsis')
 
       $scope.donationsView = 'viewDonations';
 
+    };
+
+    $scope.updateCommentFieldDisabledState = function(form) {
+      $scope.commentFieldDisabled = !form.adverseEventType.$viewValue;
+      if (!form.adverseEventType.$viewValue) {
+        form.adverseEventComment.$setViewValue(null);
+        form.adverseEventComment.$render();
+      }
     };
 
     $scope.updateDonation = function(donation) {
@@ -815,6 +824,12 @@ angular.module('bsis')
 
       return modal.result;
     }
+
+    $scope.resetAdverseEventComment = function() {
+      if (!$scope.adverseEvent.type) {
+        $scope.adverseEvent.comment = null;
+      }
+    };
 
     $scope.addDonation = function(donation, donationBatch, bleedStartTime, bleedEndTime, valid) {
 
@@ -1926,9 +1941,18 @@ angular.module('bsis')
       $scope.viewDonationSummary(row.entity);
     };
 
+    $scope.updateCommentFieldDisabledState = function(form) {
+      $scope.commentFieldDisabled = !form.adverseEventType.$viewValue;
+      if (!form.adverseEventType.$viewValue) {
+        form.adverseEventComment.$setViewValue(null);
+        form.adverseEventComment.$render();
+      }
+    };
+
     $scope.viewDonationSummary = function(donation) {
       $scope.donation = donation;
       $scope.donationBatchView = 'viewDonationSummary';
+      $scope.commentFieldDisabled = !donation.adverseEvent;
 
       DonorService.getDonationsFormFields(function(response) {
         if (response !== false) {
@@ -1946,6 +1970,11 @@ angular.module('bsis')
       $scope.donation = {};
       $scope.donorSummary = {};
       $scope.donorSummaryLoading = false;
+      $scope.adverseEvent = {
+        type: null,
+        comment: ''
+      };
+
 
       $scope.$watch('donation.donorNumber', function() {
         if ($scope.donation.donorNumber) {
@@ -2036,6 +2065,12 @@ angular.module('bsis')
 
       return modal.result;
     }
+
+    $scope.resetAdverseEventComment = function() {
+      if (!$scope.adverseEvent.type) {
+        $scope.adverseEvent.comment = null;
+      }
+    };
 
     $scope.addDonation = function(donation, bleedStartTime, bleedEndTime, valid) {
 
