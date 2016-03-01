@@ -4,10 +4,10 @@
 
 <div class="h4">
     <small><em>Created On: </em></small>
-    {{testBatch.createdDate | bsisDateTime}}
+    {{ testBatchCreatedDate | bsisDateTime}}
     |
     <small><em>Number of Samples: </em></small>
-    {{testBatch.numSamples}}
+    {{ numberOfDonations }}
 </div>
 
 <hr/>
@@ -17,7 +17,7 @@
 <div class="col-sm-12">
     <div class="panel panel-default">
         <div class="panel-body">
-            <form ng-submit="saveBloodGroupMatchTestResults(addTestMatchResults)">
+            <form ng-submit="saveBloodGroupMatchTestResults(matchConfirmations)">
                 <table ng-table="testOutcomesTableParams" show-filter="false" class="table">
                     <thead>
                     <th class="text-left sortable"
@@ -61,12 +61,11 @@
                         ng-mouseenter="this.$selected = true"
                         ng-mouseleave="this.$selected = false"
                         ng-class="{'active': sample.$selected}">
-                        <td class="text-center"
-                            ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].donationIdentificationNumber = sample.donation.donationIdentificationNumber">
-                            {{sample.donation.donationIdentificationNumber}}
+                        <td class="text-center">
+                            {{sample.donationIdentificationNumber}}
                         </td>
                         <td class="text-center">
-                            {{sample.donation.donationDate | bsisDate}}
+                            {{sample.donationDate | bsisDate}}
                         </td>
                         <td>
                             {{sample.bloodTypingMatchStatus}}
@@ -74,8 +73,7 @@
                         <td>
                             <div style="width:90px;">
                                 <ui-select
-                                        ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo = sample.bloodAbo"
-                                        ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodAbo"
+                                        ng-model="matchConfirmations[sample.donationIdentificationNumber].bloodAbo"
                                         ng-disabled="disabled">
                                     <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
                                     <ui-select-choices
@@ -88,8 +86,7 @@
                         <td>
                             <div style="width:90px;">
                                 <ui-select
-                                        ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh = sample.bloodRh"
-                                        ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].bloodRh"
+                                        ng-model="matchConfirmations[sample.donationIdentificationNumber].bloodRh"
                                         ng-disabled="disabled">
                                     <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
                                     <ui-select-choices
@@ -101,8 +98,8 @@
                         </td>
                         <td align="center">
                             <input type="checkbox"
-                                   ng-init="addTestMatchResults[sample.donation.donationIdentificationNumber].confirm = false"
-                                   ng-model="addTestMatchResults[sample.donation.donationIdentificationNumber].confirm"/>
+                                   ng-init="matchConfirmations[sample.donationIdentificationNumber].confirm = false"
+                                   ng-model="matchConfirmations[sample.donationIdentificationNumber].confirm"/>
                         </td>
                     </tr>
                     </tbody>
