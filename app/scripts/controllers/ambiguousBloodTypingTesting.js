@@ -23,6 +23,8 @@ angular.module('bsis')
           $scope.matchConfirmations[din].donationIdentificationNumber = din;
           $scope.matchConfirmations[din].bloodAbo = sample.bloodAbo;
           $scope.matchConfirmations[din].bloodRh = sample.bloodRh;
+          $scope.matchConfirmations[din].confirm = false;
+          $scope.matchConfirmations[din].indeterminate = false;
         });
       }, function(err) {
         $log.error(err);
