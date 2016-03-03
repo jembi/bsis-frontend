@@ -1,116 +1,100 @@
 <span class="h3 page-header">Manage Test Batch</span>
 
-<span class="h4" style="float: right; margin-top: 5px; padding-right: 15px; display:inline;">
-    <span has-permission="{{permissions.VOID_TEST_BATCH}}" ng-hide="confirmEdit">
+<span class="h4" style="float:right; margin-top: 5px; padding-right: 15px; display:inline;">
+  <span has-permission="{{permissions.VOID_TEST_BATCH}}" ng-hide="confirmEdit">
+    <em>
+        <button class="btn btn-link" style="padding:0;" ng-click="confirmDelete = true" ng-hide="confirmDelete"
+                ng-disabled="!testBatch.permissions.canDelete">Void
+        </button>
+    </em>
+    <span ng-show="confirmDelete">
       <em>
-          <button class="btn btn-link" style="padding:0;" ng-click="confirmDelete = true" ng-hide="confirmDelete"
-                  ng-disabled="!testBatch.permissions.canDelete">Void
+          <button class="btn btn-link text-danger" style="padding:0;"
+                  ng-click="deleteTestBatch(testBatch.id); confirmDelete = false">Void
           </button>
+          <button class="btn btn-link text-muted" style="padding:0;" ng-click="confirmDelete = false">Cancel</button>
       </em>
-      <span ng-show="confirmDelete">
-        <em>
-            <button class="btn btn-link text-danger" style="padding:0;"
-                    ng-click="deleteTestBatch(testBatch.id); confirmDelete = false">Void
-            </button>
-            <button class="btn btn-link text-muted" style="padding:0;" ng-click="confirmDelete = false">Cancel</button>
-        </em>
-      </span>
-    </span>
-    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-hide="confirmDelete">
-      <span ng-hide="confirmEdit">
-      | <em>
-          <button class="btn btn-link" style="padding:0;" ng-click="editableForm.$show(); confirmEdit = true"
-                  ng-disabled="!testBatch.permissions.canEdit">Edit
-          </button>
-      </em>
-      </span>
-      <span ng-show="confirmEdit">
-        <em>
-            <button class="btn btn-link text-muted" style="padding:0;" ng-disabled="editableForm.$waiting"
-                    ng-click="editableForm.$submit(); confirmEdit = false">Save
-            </button>
-            <button class="btn btn-link text-muted" style="padding:0;" ng-disabled="editableForm.$waiting"
-                    ng-click="editableForm.$cancel(); confirmEdit = false">Cancel
-            </button>
-        </em>
-      </span>
-    </span>
-    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-hide="confirmDelete || confirmEdit">
-    | <em>
-        <button class="btn btn-link" style="padding:0;" ng-disabled="!testBatch.permissions.canRelease"
-                ng-click="releaseTestBatch(testBatch)">Release
-        </button>
-    </em>
-    </span>
-    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-if="testBatch.status!='CLOSED'"
-          ng-hide="confirmDelete || confirmEdit">
-    | <em>
-        <button class="btn btn-link" style="padding:0;" ng-disabled="!testBatch.permissions.canClose"
-                ng-click="closeTestBatch(testBatch)">Close Batch
-        </button>
-    </em>
-    </span>
-    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-if="testBatch.status=='CLOSED'"
-          ng-hide="confirmDelete || confirmEdit">
-    | <em>
-        <button class="btn btn-link" style="padding:0;" ng-disabled="!testBatch.permissions.canReopen"
-                ng-click="reopenTestBatch(testBatch)">Reopen Batch
-        </button>
-    </em>
     </span>
   </span>
-
-<span ng-if="testBatch.status!='CLOSED'" class="h4" style="float: right; margin-top: 5px; ">
-
-    <span has-permission="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="confirmDelete || confirmEdit">
+  <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-hide="confirmDelete">
+    <span ng-hide="confirmEdit">
+    | <em>
+        <button class="btn btn-link" style="padding:0;" ng-click="editableForm.$show(); confirmEdit = true"
+                ng-disabled="!testBatch.permissions.canEdit">Edit
+        </button>
+    </em>
+    </span>
+    <span ng-show="confirmEdit">
       <em>
-          <small>Record TTI Test Outcomes: </small>
-          <button class="btn btn-link" style="padding:0;" ng-click="recordTestResults(testBatch, 'tti')">First Entry</button>
-          <small> | </small>
-      </em>
-      <em>
-          <button class="btn btn-link" style="padding:0;" ng-click="recordTestResults(testBatch, 'ttiReentry')" ng-disabled="!reEntryRequiredTTITests">Re-Entry</button>
+          <button class="btn btn-link text-muted" style="padding:0;" ng-disabled="editableForm.$waiting"
+                  ng-click="editableForm.$submit(); confirmEdit = false">Save
+          </button>
+          <button class="btn btn-link text-muted" style="padding:0;" ng-disabled="editableForm.$waiting"
+                  ng-click="editableForm.$cancel(); confirmEdit = false">Cancel
+          </button>
       </em>
     </span>
-    <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"
-          ng-hide="confirmDelete || confirmEdit"> | </span>
-    <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="confirmDelete || confirmEdit">
-      <em>
-          <small>Record Blood Group Serology Outcomes: </small>
-          <button class="btn btn-link" style="padding:0;" ng-click="recordTestResults(testBatch, 'bloodGrouping')">First Entry</button>
-          <small> | </small>
-      </em>
-      <em>
-          <button class="btn btn-link" style="padding:0;" ng-click="recordTestResults(testBatch, 'bloodGroupingReentry')" ng-disabled="!reEntryRequiredBloodTypingTests">Re-Entry</button>
-      </em>
-    </span>
-    <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}};{{permissions.VOID_TEST_BATCH}}"
-          ng-hide="confirmDelete || confirmEdit"> | </span>
   </span>
+  <span style="margin-left: 20px; margin-top: -15px; float:right">
+    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-if="testBatch.status === 'OPEN'" ng-hide="confirmDelete || confirmEdit">
+      <button class="btn btn-primary" ng-disabled="!testBatch.permissions.canRelease" ng-click="releaseTestBatch(testBatch)">Release</button>
+    </span>
+    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-if="testBatch.status === 'RELEASED'" ng-hide="confirmDelete || confirmEdit">
+      <button class="btn btn-primary" ng-disabled="!testBatch.permissions.canClose" ng-click="closeTestBatch(testBatch)">Close Batch</button>
+    </span>
+    <span has-permission="{{permissions.EDIT_TEST_BATCH}}" ng-if="testBatch.status === 'CLOSED'"  ng-hide="confirmDelete || confirmEdit">
+      <button class="btn btn-primary" ng-click="reopenTestBatch(testBatch)">Reopen Batch</button>
+    </span>
+  </span>
+</span>
 
 <hr style="clear:right;"/>
 
-<span class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
+<span ng-if="testBatch.status!='CLOSED'" ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; margin-top: -10px; margin-bottom: 0px; padding-right: 15px; text-align: right;">
+  <span has-permission="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="confirmDelete || confirmEdit">
+    <small>
+      <em>TTI Test Outcomes:
+        <a href="" ng-click="recordTestResults(testBatch, 'tti')">Enter </a>|
+      </em>
+      <em>
+        <a href="" ng-click="recordTestResults(testBatch, 'ttiReentry')" ng-disabled="!reEntryRequiredTTITests">Re-Enter</a>
+      </em>
+    </small>
+  </span>
+  <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"
+        ng-hide="confirmDelete || confirmEdit"> | </span>
+  <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="confirmDelete || confirmEdit">
+    <small>
+      <em>ABO/Rh Outcomes:
+        <a href="" ng-click="recordTestResults(testBatch, 'bloodGrouping')">Enter </a>|
+      </em>
+      <em>
+        <a href="" ng-click="recordTestResults(testBatch, 'bloodGroupingReentry')" ng-disabled="!reEntryRequiredBloodTypingTests">Re-Enter</a>
+      </em>
+    </small>
+  </span>
+  <br/>
   <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> 
     <small>
-      <em>Record Pending Test Outcomes:      
-        <a href="" ng-click="recordPendingTestResults(testBatch, 'tti')" ng-disabled="!basicTTIComplete && !pendingTTITests">First Entry </a>|
+      <em>Pending TTI Test Outcomes:      
+        <a href="" ng-click="recordPendingTestResults(testBatch, 'tti')" ng-disabled="!basicTTIComplete && !pendingTTITests">Enter </a>|
       </em> 
       <em>  
-        <a href="" ng-click="recordPendingTestResults(testBatch, 'ttiReentry')" ng-disabled="!reEntryRequiredPendingTTITests">Re-Entry</a>
+        <a href="" ng-click="recordPendingTestResults(testBatch, 'ttiReentry')" ng-disabled="!reEntryRequiredPendingTTITests">Re-Enter</a>
       </em> 
     </small>
   </span>
+
   <span has-permissions="{{permissions.ADD_TTI_OUTCOME}};{{permissions.ADD_BLOOD_TYPING_OUTCOME}}"> | </span>
   <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
-    <em>
-        <small>Record Pending ABO/Rh Outcomes: </small>
-        <button class="btn btn-link" style="padding:0;" ng-click="recordPendingBloodTypingTests(testBatch, 'bloodGrouping')" ng-disabled="!basicBloodTypingComplete && !pendingBloodTypingTests">First Entry</button>
-        <small> | </small>
-    </em>
-    <em>
-        <button class="btn btn-link" style="padding:0;" ng-click="recordPendingBloodTypingTests(testBatch, 'bloodGroupingReentry')" ng-disabled="!reEntryRequiredPendingBloodTypingTests">Re-Entry</button>
-    </em>
+    <small>
+      <em>Pending ABO/Rh Outcomes:
+        <a href="" ng-click="recordPendingBloodTypingTests(testBatch, 'bloodGrouping')" ng-disabled="!basicBloodTypingComplete && !pendingBloodTypingTests">Enter </a>|
+      </em>
+      <em>
+        <a href="" ng-click="recordPendingBloodTypingTests(testBatch, 'bloodGroupingReentry')" ng-disabled="!reEntryRequiredPendingBloodTypingTests">Re-Enter</a>
+      </em>
+    </small>
   </span>
 
 </span>
@@ -143,7 +127,7 @@
 
     <hr style="margin-bottom:5px;"/>
 
-<span class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
+<span ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
   <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a
           href="" ng-click="recordConfirmatoryBloodGroupMatchTests(testBatch)" ng-disabled="!pendingBloodTypingConfirmations">Resolve Ambiguous ABO/Rh Outcomes</a></em></small> </span>
 </span>
