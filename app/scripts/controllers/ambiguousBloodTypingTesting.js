@@ -25,6 +25,7 @@ angular.module('bsis')
           $scope.matchConfirmations[din].bloodRh = sample.bloodRh;
           $scope.matchConfirmations[din].confirm = false;
           $scope.matchConfirmations[din].indeterminate = false;
+          $scope.matchConfirmations[din].id = sample.id;
         });
       }, function(err) {
         $log.error(err);
@@ -40,9 +41,14 @@ angular.module('bsis')
       var requests = [];
 
       angular.forEach(matchConfirmations, function(matchConfirmation) {
-        if (matchConfirmation.confirm) {
-            // save confirmation last
-          var request = TestingService.saveBloodGroupMatchTestResults(matchConfirmation, angular.noop);
+        // only save if confirm == true or indeterminate == true
+        if (matchConfirmation.confirm || matchConfirmation.indeterminate) {
+          var status = 'RESOLVED';
+          if (matchConfirmation.indeterminate) {
+            status = 'NO_TYPE_DETERMINED';
+          }
+          matchConfirmation.status = status;
+          var request = TestingService.saveBloodTypingResolution(matchConfirmation, angular.noop);
           requests.push(request);
         }
       });
