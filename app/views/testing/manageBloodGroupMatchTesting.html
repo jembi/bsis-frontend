@@ -17,7 +17,7 @@
 <div class="col-sm-12">
     <div class="panel panel-default">
         <div class="panel-body">
-            <form ng-submit="saveBloodGroupMatchTestResults(matchConfirmations)">
+            <form ng-submit="saveBloodTypingResolutions(bloodTypingResolutions)">
                 <table ng-table="testOutcomesTableParams" show-filter="false" class="table">
                     <thead>
                     <th class="text-left sortable"
@@ -76,8 +76,8 @@
                         <td>
                             <div style="width:90px;">
                                 <ui-select
-                                        ng-model="matchConfirmations[sample.donationIdentificationNumber].bloodAbo"
-                                        ng-disabled="matchConfirmations[sample.donationIdentificationNumber].indeterminate === true">
+                                        ng-model="bloodTypingResolutions[sample.donationIdentificationNumber].bloodAbo"
+                                        ng-disabled="bloodTypingResolutions[sample.donationIdentificationNumber].indeterminate === true">
                                     <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
                                     <ui-select-choices
                                             repeat="result in bloodAboOptions.options  | filter: {$: $select.search}">
@@ -89,8 +89,8 @@
                         <td>
                             <div style="width:90px;">
                                 <ui-select
-                                        ng-model="matchConfirmations[sample.donationIdentificationNumber].bloodRh"
-                                        ng-disabled="matchConfirmations[sample.donationIdentificationNumber].indeterminate === true">
+                                        ng-model="bloodTypingResolutions[sample.donationIdentificationNumber].bloodRh"
+                                        ng-disabled="bloodTypingResolutions[sample.donationIdentificationNumber].indeterminate === true">
                                     <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
                                     <ui-select-choices
                                             repeat="result in bloodRhOptions.options  | filter: {$: $select.search}">
@@ -101,13 +101,13 @@
                         </td>
                         <td align="center">
                             <input type="checkbox"
-                                   ng-model="matchConfirmations[sample.donationIdentificationNumber].confirm"
-                                   ng-click="matchConfirmations[sample.donationIdentificationNumber].indeterminate = false"/>
+                                   ng-model="bloodTypingResolutions[sample.donationIdentificationNumber].resolved"
+                                   ng-click="bloodTypingResolutions[sample.donationIdentificationNumber].indeterminate = false"/>
                         </td>
                         <td align="center">
                             <input type="checkbox"
-                                   ng-model="matchConfirmations[sample.donationIdentificationNumber].indeterminate"
-                                   ng-click="matchConfirmations[sample.donationIdentificationNumber].confirm = false"/>
+                                   ng-model="bloodTypingResolutions[sample.donationIdentificationNumber].indeterminate"
+                                   ng-click="bloodTypingResolutions[sample.donationIdentificationNumber].resolved = false"/>
                         </td>
                     </tr>
                     </tbody>
