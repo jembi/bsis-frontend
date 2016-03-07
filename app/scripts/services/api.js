@@ -233,16 +233,9 @@ angular.module('bsis')
         }
       ),
 
-      BloodGroupMatchTestResults: $resource(url + '/testresults/bloodgroupmatches', null,
+      BloodTypingResolution: $resource(url + '/donations/:id/bloodTypingResolution', null,
         {
-          query: {
-            method: 'POST',
-            params: {
-              donationIdentificationNumber: '@donationIdentificationNumber',
-              bloodAdbo: '@bloodAbo',
-              bloodRh: '@bloodRh'
-            }
-          }
+          update: {method: 'PUT', params: {id: '@id'}}
         }
       ),
 

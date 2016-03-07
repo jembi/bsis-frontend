@@ -15,14 +15,17 @@ angular.module('bsis')
         $scope.data = response.donations;
         $scope.testBatchCreatedDate = response.testBatchCreatedDate;
         $scope.numberOfDonations = response.numberOfDonations;
-        $scope.matchConfirmations = {};
+        $scope.bloodTypingResolutions = {};
 
         angular.forEach($scope.data, function(sample) {
           var din = sample.donationIdentificationNumber;
-          $scope.matchConfirmations[din] = {};
-          $scope.matchConfirmations[din].donationIdentificationNumber = din;
-          $scope.matchConfirmations[din].bloodAbo = sample.bloodAbo;
-          $scope.matchConfirmations[din].bloodRh = sample.bloodRh;
+          $scope.bloodTypingResolutions[din] = {};
+          $scope.bloodTypingResolutions[din].donationIdentificationNumber = din;
+          $scope.bloodTypingResolutions[din].bloodAbo = sample.bloodAbo;
+          $scope.bloodTypingResolutions[din].bloodRh = sample.bloodRh;
+          $scope.bloodTypingResolutions[din].resolved = false;
+          $scope.bloodTypingResolutions[din].indeterminate = false;
+          $scope.bloodTypingResolutions[din].id = sample.id;
         });
       }, function(err) {
         $log.error(err);
@@ -31,16 +34,21 @@ angular.module('bsis')
 
     getSamples();
 
-    $scope.saveBloodGroupMatchTestResults = function(matchConfirmations) {
+    $scope.saveBloodTypingResolutions = function(bloodTypingResolutions) {
 
       $scope.savingTestResults = true;
 
       var requests = [];
 
-      angular.forEach(matchConfirmations, function(matchConfirmation) {
-        if (matchConfirmation.confirm) {
-            // save confirmation last
-          var request = TestingService.saveBloodGroupMatchTestResults(matchConfirmation, angular.noop);
+      angular.forEach(bloodTypingResolutions, function(bloodTypingResolution) {
+        // only save if resolved == true or indeterminate == true
+        if (bloodTypingResolution.resolved || bloodTypingResolution.indeterminate) {
+          var status = 'RESOLVED';
+          if (bloodTypingResolution.indeterminate) {
+            status = 'NO_TYPE_DETERMINED';
+          }
+          bloodTypingResolution.status = status;
+          var request = TestingService.saveBloodTypingResolution(bloodTypingResolution, angular.noop);
           requests.push(request);
         }
       });

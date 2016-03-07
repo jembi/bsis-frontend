@@ -144,13 +144,15 @@ angular.module('bsis')
         });
         return result.$promise;
       },
-      saveBloodGroupMatchTestResults: function(testResults, response) {
+      saveBloodTypingResolution: function(resolution, response) {
         var deferred = $q.defer();
 
-        Api.BloodGroupMatchTestResults.get({
-          donationIdentificationNumber: testResults.donationIdentificationNumber,
-          bloodAbo: testResults.bloodAbo, bloodRh: testResults.bloodRh
-        }, function() {
+        var bloodTypingResolutionForm = {};
+        bloodTypingResolutionForm.status = resolution.status;
+        bloodTypingResolutionForm.bloodAbo = resolution.bloodAbo;
+        bloodTypingResolutionForm.bloodRh = resolution.bloodRh;
+
+        Api.BloodTypingResolution.update({id: resolution.id}, bloodTypingResolutionForm, function() {
           response(true);
           deferred.resolve();
         }, function() {
