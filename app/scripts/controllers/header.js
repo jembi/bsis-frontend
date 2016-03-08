@@ -104,7 +104,7 @@ angular.module('bsis')
 
     var testingRoutes = [
       '/testing',
-      '/viewTestResults',
+      '/viewTestSample',
       '/manageTestBatch',
       '/viewTestBatch/\\d+',
       '/manageTTITesting/\\d+',

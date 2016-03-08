@@ -64,7 +64,7 @@ angular.module('bsis')
         if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_TEST_BATCH) > -1)) {
           initialView = '/manageTestBatch';
         } else if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_TEST_OUTCOME) > -1)) {
-          initialView = '/viewTestResults';
+          initialView = '/viewTestSample';
         } else if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.ADD_TEST_OUTCOME) > -1)) {
           initialView = '/uploadTestResults';
         }
