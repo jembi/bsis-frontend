@@ -1,4 +1,4 @@
-<h3 class="page-header">View Test Outcomes</h3>
+<h3 class="page-header">View Test Sample</h3>
 
 <form class="form-horizontal col-sm-12" role="form" ng-submit="getTestResultsByDIN(testResultsSearch)">
     <div class="form-group">
@@ -28,17 +28,17 @@
         <div class="panel panel-default">
             <div class="panel-body">
 
-      <span class="h3"> 
+      <span class="h3">
         <small><em>DIN:</em></small> {{donation.donationIdentificationNumber}}
-      </span> 
+      </span>
       <span class="h4">
-        | 
+        |
         <small><em>Venue:</em></small> {{donation.venue.name}} |
         <small><em> Date: </em></small> {{donation.donationDate | bsisDate}} |
-        <small><em>Blood Group:</em></small> 
+        <small><em>Blood Group:</em></small>
           <span ng-if="donation.bloodGroup !== ''">{{donation.bloodGroup}}</span>
           <span ng-if="donation.bloodGroup == ''">Unknown</span>
-           | 
+           |
 
         <small><em>Pack Type:</em></small> {{donation.packType.packType}}
       </span>
@@ -47,7 +47,7 @@
       <span class="h4">
         <small><em>TTI Test Status:</em></small> {{donation.ttistatus}}
         <br/>
-        <small><em>Blood Group Serology Test Status:</em></small> {{donation.bloodTypingStatus}} 
+        <small><em>Blood Group Serology Test Status:</em></small> {{donation.bloodTypingStatus}}
       </span>
 
                 <hr/>
@@ -55,7 +55,7 @@
                 <div class="form-horizontal col-sm-12">
                     <div class="row">
         <span class="col-sm-6">
-        <span class="h4"> 
+        <span class="h4">
           TTI Outcomes
         </span>
         <table class="dash-table" style="width:80%;">
@@ -84,7 +84,7 @@
         </table>
         </span>
         <span class="col-sm-6">
-        <span class="h4"> 
+        <span class="h4">
           Blood Group Serology Outcomes
         </span>
         <table class="dash-table" style="width:80%;">
