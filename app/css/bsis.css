@@ -199,12 +199,10 @@ body {
   color: #f5f5f5;
 }
 
-.placeholder a:hover {
-  /*background-color: rgba(36,36,36,0.85) !important;*/
+.placeholder a:hover, .placeholder button:hover {
   background: -webkit-linear-gradient(10deg, rgba(36, 36, 36, 0.85), rgba(40, 40, 40, 0.85)); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(10deg, rgba(36, 36, 36, 0.85), rgba(40, 40, 40, 0.85)); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(10deg, rgba(36, 36, 36, 0.85), rgba(40, 40, 40, 0.85)); /* For Firefox 3.6 to 15 */
-  /* background: linear-gradient(10deg, rgba(36,36,36,0.85), rgba(40,40,40,0.85)); /* Standard syntax */
   background: linear-gradient(10deg, rgba(40, 30, 30, 0.85), rgba(40, 40, 40, 0.85)); /* Standard syntax */
 }
 
