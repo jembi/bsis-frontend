@@ -1554,8 +1554,8 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
 
-    var data = [{}];
-    var recentDonationBatchData = [{}];
+    var data = [];
+    var recentDonationBatchData = null;
     $scope.data = data;
     $scope.recentDonationBatchData = recentDonationBatchData;
     $scope.openDonationBatches = false;
@@ -1607,8 +1607,6 @@ angular.module('bsis')
       $location.search({});
       $scope.searched = false;
       $scope.search = angular.copy(master);
-
-
     };
 
     $scope.search = angular.copy(master);
@@ -1646,9 +1644,6 @@ angular.module('bsis')
       });
     };
 
-
-    $scope.getRecentDonationBatches();
-
     $scope.donationBatchTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 6,          // count per page
@@ -1684,7 +1679,6 @@ angular.module('bsis')
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
-        total: recentDonationBatchData.length, // length of data
         getData: function($defer, params) {
           var filteredData = params.filter() ?
             $filter('filter')(recentDonationBatchData, params.filter()) : recentDonationBatchData;
