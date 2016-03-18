@@ -1726,13 +1726,7 @@ angular.module('bsis')
     };
 
     $scope.manageClinic = function(item) {
-
-      $scope.donationBatch = item;
-      DonorService.setDonationBatch($scope.donationBatch);
-      data = $scope.donationBatch.donations;
-      $scope.data = data;
       $location.path('/manageClinic/' + item.id);
-
     };
 
   })
