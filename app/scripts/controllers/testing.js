@@ -19,7 +19,7 @@ angular.module('bsis')
       donationIdentificationNumber: ''
     };
 
-    var recentTestBatchData = [{}];
+    var recentTestBatchData = null;
     $scope.recentTestBatchData = recentTestBatchData;
     $scope.recentTestBatches = false;
 
@@ -186,7 +186,6 @@ angular.module('bsis')
     };
 
     $scope.getOpenTestBatches();
-    $scope.getRecentTestBatches();
     $scope.getTestBatchFormFields();
 
     $scope.addTestBatch = function(donationBatches, valid) {
@@ -242,7 +241,6 @@ angular.module('bsis')
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
-        total: recentTestBatchData.length, // length of data
         getData: function($defer, params) {
           var filteredData = params.filter() ?
             $filter('filter')(recentTestBatchData, params.filter()) : recentTestBatchData;
