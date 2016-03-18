@@ -1615,6 +1615,7 @@ angular.module('bsis')
     $scope.getRecentDonationBatches = function(recentDonationsForm) {
 
       if (recentDonationsForm.$valid) {
+        $scope.submitted = false;
         var query = angular.copy($scope.search);
 
         if ($scope.search.startDate) {
@@ -1645,6 +1646,7 @@ angular.module('bsis')
           $log.log(err);
         });
       } else {
+        recentDonationsForm.selectedVenues.$setDirty(true);
         $scope.submitted = true;
       }
 
