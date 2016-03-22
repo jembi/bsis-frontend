@@ -887,6 +887,35 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
     };
   })
 
+  .directive('uiDateRange', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ctrl) {
+        ctrl.$validators.uiDateRange = function(modelValue) {
+          if (attr.uiDateRange) {
+            // initialise the start and end dates
+            var startDateValue = attr.uiDateStart;
+            var endDateValue = attr.uiDateEnd;
+            if (!startDateValue) {
+              startDateValue = modelValue; // assume modelValue is the start date
+            } else if (!endDateValue) {
+              endDateValue = modelValue; // assume modelValue is the end date
+            }
+            if (startDateValue && endDateValue) {
+              var startDate = moment(startDateValue).startOf('day');
+              var endDate = moment(endDateValue).startOf('day');
+              // check the range
+              var range = attr.uiDateRange.split(',');
+              if (endDate.isAfter(startDate.add(range[0], range[1]))) {
+                return false;
+              }
+            }
+          }
+          return true;
+        };
+      }
+    };
+  })
   ;
 
 var UI = {ADDRESS: {}};

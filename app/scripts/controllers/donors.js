@@ -1599,8 +1599,8 @@ angular.module('bsis')
     var master = {
       isClosed: true,
       selectedVenues: [],
-      startDate: moment().subtract(7, 'days').startOf('day').toDate(),
-      endDate: moment().endOf('day').toDate()
+      startDate: '',
+      endDate: ''
     };
 
     $scope.clearSearch = function(form) {
@@ -1612,9 +1612,7 @@ angular.module('bsis')
 
     $scope.search = angular.copy(master);
 
-
     $scope.getRecentDonationBatches = function(recentDonationsForm) {
-
       if (recentDonationsForm.$valid) {
         var query = angular.copy($scope.search);
 
@@ -1622,12 +1620,10 @@ angular.module('bsis')
           var startDate = moment($scope.search.startDate).startOf('day').toDate();
           query.startDate = startDate;
         }
-
         if ($scope.search.endDate) {
           var endDate = moment($scope.search.endDate).endOf('day').toDate();
           query.endDate = endDate;
         }
-
         if ($scope.search.selectedVenues.length > 0) {
           query.venues = $scope.search.selectedVenues;
         }

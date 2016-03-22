@@ -108,7 +108,6 @@
                 <i class="fa {{icons.ARCHIVE}}"></i> Closed Batches
             </tab-heading>
             <form class="form-horizontal" role="form"  name="recentDonationsForm" style="padding:10px 0;" ng-submit="getRecentDonationBatches(recentDonationsForm)" novalidate>
-
                 <div class="clearfix form-group">
                     <label class="col-sm-2 control-label">Venues:</label>
                     <div class="col-sm-10 ">
@@ -124,14 +123,21 @@
                         </small>
                     </div>
                 </div>
-
                 <div class="clearfix form-group">
                     <label class="col-sm-2 control-label">Batch Date:</label>
                     <div class="form-inline col-sm-10">
                         <div>
-                            <dateselect ng-model="search.startDate" format="dateFormat"></dateselect>
+                            <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-class="{'ng-invalid ng-dirty' : (recentDonationsForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{search.endDate | date:'yyyy-MM-dd HH:mm:ss'}}"></dateselect>
                             <span><em>To:</em></span>
-                            <dateselect-end ng-model="search.endDate" format="dateFormat"></dateselect-end>
+                            <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-class="{'ng-invalid ng-dirty' : (recentDonationsForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}"></dateselect-end>
+                        </div>
+                        <div>
+                            <small class="error" ng-show="(recentDonationsForm.$submitted && (recentDonationsForm.startDate.$error.required || recentDonationsForm.endDate.$error.required))">
+                                Batch date cannot be empty
+                            </small>
+                            <small class="error" ng-show="!(recentDonationsForm.startDate.$error.required || recentDonationsForm.endDate.$error.required) && (recentDonationsForm.startDate.$invalid || recentDonationsForm.endDate.$invalid)">
+                                Select a date range that is less than one month
+                            </small>
                         </div>
                     </div>
                 </div>
