@@ -1603,10 +1603,11 @@ angular.module('bsis')
       endDate: moment().endOf('day').toDate()
     };
 
-    $scope.clearSearch = function() {
+    $scope.clearSearch = function(form) {
       $location.search({});
-      $scope.searched = false;
       $scope.search = angular.copy(master);
+      form.$setPristine();
+      form.$setUntouched();
     };
 
     $scope.search = angular.copy(master);
@@ -1615,7 +1616,6 @@ angular.module('bsis')
     $scope.getRecentDonationBatches = function(recentDonationsForm) {
 
       if (recentDonationsForm.$valid) {
-        $scope.submitted = false;
         var query = angular.copy($scope.search);
 
         if ($scope.search.startDate) {
@@ -1645,9 +1645,6 @@ angular.module('bsis')
           $scope.searching = false;
           $log.log(err);
         });
-      } else {
-        recentDonationsForm.selectedVenues.$setDirty(true);
-        $scope.submitted = true;
       }
 
     };

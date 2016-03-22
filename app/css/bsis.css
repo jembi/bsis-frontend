@@ -597,7 +597,7 @@ input.ng-invalid.ng-dirty {
   border: 1px solid #B52E31;
 }
 
-div.ng-invalid-ui-select-required.ng-dirty  {
+form.ng-submitted div.ng-invalid-ui-select-required  {
   border: 1px solid #B52E31;
 }
 
