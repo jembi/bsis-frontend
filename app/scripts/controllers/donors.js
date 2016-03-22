@@ -1030,45 +1030,13 @@ angular.module('bsis')
 
   // Controller for Viewing Duplicate Donors
   .controller('DonorsDuplicateCtrl', function($scope, $location, DonorService, $filter, ngTableParams, $timeout) {
-
-    var data = [{}];
-    $scope.data = data;
-    var duplicateGroups = [{}];
-    $scope.duplicateGroups = duplicateGroups;
     $scope.hasDuplicates = false;
-
     $scope.findDonorDuplicates = function() {
-      // FIXME: since we only display the summary, the API endpoint doesn't need to return all duplicates
       DonorService.findAllDonorDuplicates(function(response) {
         if (response !== false) {
-          // take the duplicate donor data and convert into a summary array
-          data = [];
-          var duplicateCount = 0;
-          duplicateGroups = response.duplicates;
-          // go through the duplicate groups which are stored as a map of arrays
-          for (var groupKey in duplicateGroups) {
-            duplicateCount++;
-            var duplicates = duplicateGroups[groupKey];
-            if (duplicates) {
-              // create a summary for the 1st donor
-              var donor = duplicates[0];
-              if (donor) {
-                var duplicateSummary = {};
-                duplicateSummary.groupKey = groupKey;
-                duplicateSummary.firstName = donor.firstName;
-                duplicateSummary.lastName = donor.lastName;
-                duplicateSummary.birthDate = donor.birthDate;
-                duplicateSummary.gender = donor.gender;
-                duplicateSummary.count = duplicates.length;
-                data.push(duplicateSummary);
-              }
-            }
-          }
-          $scope.data = data;
-          $scope.duplicateGroups = duplicateGroups;
-          $scope.duplicateDonorCount = duplicateCount;
-          $scope.totalCount = $scope.data.length;
-          if ($scope.totalCount > 0) {
+          $scope.data = response.duplicates;
+          $scope.duplicateDonorCount = response.duplicates.length;
+          if ($scope.duplicateDonorCount > 0) {
             $scope.hasDuplicates = true;
           }
         }
@@ -1086,10 +1054,9 @@ angular.module('bsis')
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
-        total: $scope.data.length, // length of data
+        total: $scope.duplicateDonorCount, // length of data
         getData: function($defer, params) {
-          var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : data;
+          var orderedData = params.sorting() ? $filter('orderBy')($scope.data, params.orderBy()) : $scope.data;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
