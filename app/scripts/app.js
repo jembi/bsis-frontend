@@ -923,7 +923,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
               var startDate = moment(startDateValue).startOf('day');
               var endDate = moment(endDateValue).startOf('day');
               // check that start date is before end date
-              //alert('uiDateRange modelValue='+modelValue+' and startDate='+startDate+' and endDate='+endDate);
               if (startDate.isAfter(endDate)) {
                 return false;
               }
