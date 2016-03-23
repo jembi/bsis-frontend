@@ -904,6 +904,10 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
             if (startDateValue && endDateValue) {
               var startDate = moment(startDateValue).startOf('day');
               var endDate = moment(endDateValue).startOf('day');
+              // check that start date is before end date
+              if (startDate.isAfter(endDate)) {
+                return false;
+              }
               // check the range
               var range = attr.uiDateRange.split(',');
               if (endDate.isAfter(startDate.add(range[0], range[1]))) {
