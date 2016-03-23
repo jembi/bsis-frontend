@@ -127,9 +127,9 @@
                     <label class="col-sm-2 control-label">Batch Date:</label>
                     <div class="form-inline col-sm-10">
                         <div>
-                            <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-class="{'ng-invalid ng-dirty' : (recentDonationsForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{search.endDate | date:'yyyy-MM-dd HH:mm:ss'}}"></dateselect>
+                            <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-class="{'has-error' : (recentDonationsForm.$submitted && recentDonationsForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{search.endDate | date:'yyyy-MM-dd HH:mm:ss'}}"></dateselect>
                             <span><em>To:</em></span>
-                            <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-class="{'ng-invalid ng-dirty' : (recentDonationsForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}"></dateselect-end>
+                            <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (recentDonationsForm.$submitted && recentDonationsForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}"></dateselect-end>
                         </div>
                         <div>
                             <small class="error" ng-show="(recentDonationsForm.$submitted && (recentDonationsForm.startDate.$error.required || recentDonationsForm.endDate.$error.required))">
