@@ -554,7 +554,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   .directive('dateselect', function($compile) {
     return {
       restrict: 'E',
-      require: '^ngModel',
+      require: ['^ngModel'],
       replace: 'true',
       scope: {
         ngModel: '=',
@@ -568,27 +568,46 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         initDate: '=',
         calIcon: '='
       },
-      link: function($scope, element) {
+      link: function(scope, element, attrs, ctrl) {
 
-        $scope.calIcon = $scope.calIcon || 'fa-calendar';
+        scope.calIcon = scope.calIcon || 'fa-calendar';
 
-        $scope.open = function(event) {
+        scope.open = function(event) {
           event.preventDefault();
           event.stopPropagation();
-          $scope.opened = true;
+          scope.opened = true;
         };
 
-        $scope.clear = function() {
-          $scope.ngModel = null;
+        scope.clear = function() {
+          scope.ngModel = null;
         };
 
-        var unwatch = $scope.$watch('ngDisabled', function(newValue, oldValue) {
+        var ngModel = ctrl[0];
+
+        if (!ngModel) {
+          return;
+        }
+
+        scope.$watch(
+          function() {
+            return ngModel.$modelValue;
+          },
+          function(modelValue) {
+            if (modelValue) {
+              var date = moment(modelValue).toDate();
+              ngModel.$setViewValue(date);
+              ngModel.$render();
+            }
+          },
+          true);
+
+        var unwatch = scope.$watch('ngDisabled', function(newValue, oldValue) {
           if (newValue !== oldValue) {
-            $compile(element.contents())($scope);
+            $compile(element.contents())(scope);
           }
         });
 
-        $scope.$on('$destroy', function() {
+        scope.$on('$destroy', function() {
           unwatch();
         });
       },
@@ -628,7 +647,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         };
 
         var ngModel = ctrl[0];
-
         if (!ngModel) {
           return;
         }
@@ -905,6 +923,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
               var startDate = moment(startDateValue).startOf('day');
               var endDate = moment(endDateValue).startOf('day');
               // check that start date is before end date
+              //alert('uiDateRange modelValue='+modelValue+' and startDate='+startDate+' and endDate='+endDate);
               if (startDate.isAfter(endDate)) {
                 return false;
               }
