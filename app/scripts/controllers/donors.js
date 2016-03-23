@@ -1599,8 +1599,8 @@ angular.module('bsis')
     var master = {
       isClosed: true,
       selectedVenues: [],
-      startDate: '',
-      endDate: ''
+      startDate: moment().subtract(7, 'days').startOf('day').toDate(),
+      endDate: moment().endOf('day').toDate()
     };
 
     $scope.clearSearch = function(form) {
