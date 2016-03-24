@@ -1932,7 +1932,11 @@ angular.module('bsis')
 
 
     $scope.onRowClick = function(row) {
-      $scope.viewDonationSummary(row.entity);
+      DonorService.getDonation(row.entity.id, function(response) {
+        $scope.viewDonationSummary(response.donation);
+      }, function(err) {
+        $log.error(err);
+      });
     };
 
     $scope.updateCommentFieldDisabledState = function(form) {

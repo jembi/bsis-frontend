@@ -377,6 +377,10 @@ angular.module('bsis')
         }, function(err) {
           onError(err.data);
         });
+      },
+
+      getDonation: function(donationId, onSuccess, onError) {
+        return Api.Donations.get({id: donationId}, onSuccess, onError);
       }
 
     };
