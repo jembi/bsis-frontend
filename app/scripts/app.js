@@ -554,7 +554,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   .directive('dateselect', function($compile) {
     return {
       restrict: 'E',
-      require: ['^ngModel'],
+      require: '^ngModel',
       replace: 'true',
       scope: {
         ngModel: '=',
@@ -568,46 +568,27 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         initDate: '=',
         calIcon: '='
       },
-      link: function(scope, element, attrs, ctrl) {
+      link: function($scope, element) {
 
-        scope.calIcon = scope.calIcon || 'fa-calendar';
+        $scope.calIcon = $scope.calIcon || 'fa-calendar';
 
-        scope.open = function(event) {
+        $scope.open = function(event) {
           event.preventDefault();
           event.stopPropagation();
-          scope.opened = true;
+          $scope.opened = true;
         };
 
-        scope.clear = function() {
-          scope.ngModel = null;
+        $scope.clear = function() {
+          $scope.ngModel = null;
         };
 
-        var ngModel = ctrl[0];
-
-        if (!ngModel) {
-          return;
-        }
-
-        scope.$watch(
-          function() {
-            return ngModel.$modelValue;
-          },
-          function(modelValue) {
-            if (modelValue) {
-              var date = moment(modelValue).toDate();
-              ngModel.$setViewValue(date);
-              ngModel.$render();
-            }
-          },
-          true);
-
-        var unwatch = scope.$watch('ngDisabled', function(newValue, oldValue) {
+        var unwatch = $scope.$watch('ngDisabled', function(newValue, oldValue) {
           if (newValue !== oldValue) {
-            $compile(element.contents())(scope);
+            $compile(element.contents())($scope);
           }
         });
 
-        scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function() {
           unwatch();
         });
       },
