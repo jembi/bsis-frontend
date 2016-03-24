@@ -935,6 +935,18 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
           }
           return true;
         };
+        scope.$watch(function() {
+          return attr.uiDateStart;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-start changes
+          ctrl.$validate();
+        });
+        scope.$watch(function() {
+          return attr.uiDateEnd;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-end changes
+          ctrl.$validate();
+        });
       }
     };
   })
