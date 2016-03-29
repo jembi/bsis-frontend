@@ -59,7 +59,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="sample in $data"
-                        ng-show="sample.bloodTypingStatus === 'COMPLETE' && sample.bloodTypingMatchStatus === 'AMBIGUOUS'"
+                        ng-show="sample.bloodTypingMatchStatus === 'AMBIGUOUS'"
                         ng-click=""
                         ng-mouseenter="this.$selected = true"
                         ng-mouseleave="this.$selected = false"
