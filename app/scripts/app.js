@@ -628,7 +628,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         };
 
         var ngModel = ctrl[0];
-
         if (!ngModel) {
           return;
         }
@@ -862,6 +861,76 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
     };
   })
 
+  .directive('uiSelectRequired', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ctrl) {
+        ctrl.$validators.uiSelectRequired = function(modelValue, viewValue) {
+          if (attr.uiSelectRequired) {
+            var isRequired = scope.$eval(attr.uiSelectRequired);
+            if (isRequired == false) {
+              return true;
+            }
+          }
+          var determineVal;
+          if (angular.isArray(modelValue)) {
+            determineVal = modelValue;
+          } else if (angular.isArray(viewValue)) {
+            determineVal = viewValue;
+          } else {
+            return false;
+          }
+          return determineVal.length > 0;
+        };
+      }
+    };
+  })
+
+  .directive('uiDateRange', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ctrl) {
+        ctrl.$validators.uiDateRange = function(modelValue) {
+          if (attr.uiDateRange) {
+            // initialise the start and end dates
+            var startDateValue = attr.uiDateStart;
+            var endDateValue = attr.uiDateEnd;
+            if (!startDateValue) {
+              startDateValue = modelValue; // assume modelValue is the start date
+            } else if (!endDateValue) {
+              endDateValue = modelValue; // assume modelValue is the end date
+            }
+            if (startDateValue && endDateValue) {
+              var startDate = moment(startDateValue).startOf('day');
+              var endDate = moment(endDateValue).startOf('day');
+              // check that start date is before end date
+              if (startDate.isAfter(endDate)) {
+                return false;
+              }
+              // check the range
+              var range = attr.uiDateRange.split(',');
+              if (endDate.isAfter(startDate.add(range[0], range[1]))) {
+                return false;
+              }
+            }
+          }
+          return true;
+        };
+        scope.$watch(function() {
+          return attr.uiDateStart;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-start changes
+          ctrl.$validate();
+        });
+        scope.$watch(function() {
+          return attr.uiDateEnd;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-end changes
+          ctrl.$validate();
+        });
+      }
+    };
+  })
   ;
 
 var UI = {ADDRESS: {}};
