@@ -142,6 +142,12 @@ angular.module('bsis')
     };
 
     $scope.search = angular.copy(master);
+    
+    $scope.$watch('search.startDate', function() {
+      $timeout(function() {
+        $scope.maxDate =  moment($scope.search.startDate).add(31, 'days').toDate();
+      });
+    });
 
     $scope.getRecentTestBatches = function() {
       var query = {
