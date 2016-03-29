@@ -115,14 +115,22 @@
             <tab-heading>
                 <i class="fa {{icons.ARCHIVE}}"></i> Closed Batches
             </tab-heading>
-            <form class="form-horizontal" style="padding:10px 0;" ng-submit="getRecentTestBatches()">
+            <form name="recentTestBatchesForm"  class="form-horizontal" style="padding:10px 0;" ng-submit="getRecentTestBatches(recentTestBatchesForm)">
                 <div class="clearfix form-group">
                     <label class="col-sm-2 control-label">Period:</label>
                     <div class="form-inline col-sm-10">
                         <div>
-                            <dateselect ng-model="search.startDate" format="dateFormat"></dateselect>
+                            <dateselect name="startDate"  ng-model="search.startDate" format="dateFormat"  ng-class="{'has-error' : (recentTestBatchesForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{search.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
                             <span><em>To:</em></span>
-                            <dateselect-end ng-model="search.endDate" format="dateFormat" max-date="maxDate"></dateselect-end>
+                            <dateselect-end name="endDate"  ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (recentTestBatchesForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>
+                        </div>
+                        <div>
+                            <small class="error" ng-show="(recentTestBatchesForm.startDate.$error.required || recentTestBatchesForm.endDate.$error.required)">
+                                Select a valid date
+                            </small>
+                            <small class="error" ng-show="(recentTestBatchesForm.startDate.$error.uiDateRange || recentTestBatchesForm.endDate.$error.uiDateRange)">
+                                Select a date range that is less than one month
+                            </small>
                         </div>
                     </div>
                 </div>
