@@ -70,7 +70,8 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         templateUrl: 'views/donors.html',
         controller: 'DonorsCtrl',
         permission: PERMISSIONS.VIEW_DONOR,
-        enabled: UI.DONORS_TAB_ENABLED
+        enabled: UI.DONORS_TAB_ENABLED,
+        reloadOnSearch: reloadOnSearch
       })
       .when('/addDonor', {
         templateUrl: 'views/donors.html',
