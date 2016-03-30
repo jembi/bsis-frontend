@@ -79,7 +79,7 @@
                 <em><a href="#/manageDonationBatches">Add Donation Batch</a></em>
               </span>
               </span>
-                    </span>
+               
                 </p>
 
                 <table ng-table="tableParams" show-filter="false" class="table">
@@ -110,7 +110,7 @@
                             {{ (donor.birthDate | bsisDate) || '' }}
                         </td>
                         <td data-title="'Venue'" header-class="text-left" sortable="'panel'">
-                            {{donor.venue.name}}
+                            {{donor.venueName}}
                         </td>
                     </tr>
                 </table>
