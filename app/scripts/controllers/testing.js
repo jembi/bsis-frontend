@@ -19,7 +19,7 @@ angular.module('bsis')
       donationIdentificationNumber: ''
     };
 
-    var recentTestBatchData = [{}];
+    var recentTestBatchData = null;
     $scope.recentTestBatchData = recentTestBatchData;
     $scope.recentTestBatches = false;
 
@@ -143,34 +143,36 @@ angular.module('bsis')
 
     $scope.search = angular.copy(master);
 
-    $scope.getRecentTestBatches = function() {
-      var query = {
-        status: 'CLOSED'
-      };
+    $scope.getRecentTestBatches = function(recentTestBatchesForm) {
+      if (recentTestBatchesForm.$valid) {
+        var query = {
+          status: 'CLOSED'
+        };
 
-      if ($scope.search.startDate) {
-        var startDate = moment($scope.search.startDate).startOf('day').toDate();
-        query.startDate = startDate;
-      }
-
-      if ($scope.search.endDate) {
-        var endDate = moment($scope.search.endDate).endOf('day').toDate();
-        query.endDate = endDate;
-      }
-
-      $scope.searching = true;
-
-      TestingService.getRecentTestBatches(query, function(response) {
-        $scope.searching = false;
-        if (response !== false) {
-          recentTestBatchData = response.testBatches;
-          $scope.recentTestBatchData = recentTestBatchData;
-
-          $scope.recentTestBatches = recentTestBatchData.length > 0;
+        if ($scope.search.startDate) {
+          var startDate = moment($scope.search.startDate).startOf('day').toDate();
+          query.startDate = startDate;
         }
-      }, function() {
-        $scope.searching = false;
-      });
+
+        if ($scope.search.endDate) {
+          var endDate = moment($scope.search.endDate).endOf('day').toDate();
+          query.endDate = endDate;
+        }
+
+        $scope.searching = true;
+
+        TestingService.getRecentTestBatches(query, function(response) {
+          $scope.searching = false;
+          if (response !== false) {
+            recentTestBatchData = response.testBatches;
+            $scope.recentTestBatchData = recentTestBatchData;
+
+            $scope.recentTestBatches = recentTestBatchData.length > 0;
+          }
+        }, function() {
+          $scope.searching = false;
+        });
+      }
     };
 
     $scope.getTestBatchFormFields = function() {
@@ -186,7 +188,6 @@ angular.module('bsis')
     };
 
     $scope.getOpenTestBatches();
-    $scope.getRecentTestBatches();
     $scope.getTestBatchFormFields();
 
     $scope.addTestBatch = function(donationBatches, valid) {
@@ -242,7 +243,6 @@ angular.module('bsis')
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
-        total: recentTestBatchData.length, // length of data
         getData: function($defer, params) {
           var filteredData = params.filter() ?
             $filter('filter')(recentTestBatchData, params.filter()) : recentTestBatchData;
