@@ -1,13 +1,13 @@
 <h3 class="page-header">Find Donor</h3>
-<form class="form-horizontal col-sm-12" role="form" ng-submit="findDonor()">
+<form class="form-horizontal col-sm-12" role="form "name="findDonorForm" novalidate ng-submit="findDonor(findDonorForm)">
     <div class="form-group">
         <label for="name" class="col-sm-1 control-label">Name</label>
         <div class="row col-sm-11">
             <div class="form-inline" style="padding-left:5px;">
                 <input size="15" type="firstName" id="firstName" class="form-control input-sm" placeholder="First"
-                       autofocus="true" ng-model="donorSearch.firstName" capitalize-first-letter>
+                       autofocus="true" ng-model="donorSearch.firstName" ng-required="!isDonorSearchValid()" capitalize-first-letter>
                 <input size="15" type="lastName " id="lastName" class="form-control input-sm" placeholder="Last"
-                       ng-model="donorSearch.lastName" capitalize-first-letter>
+                       ng-model="donorSearch.lastName" ng-required="!isDonorSearchValid()" capitalize-first-letter>
                 <input type="checkbox" id="usePhraseMatch" ng-model="donorSearch.usePhraseMatch"> <label
                     style="display: inline-block; cursor: pointer; cursor: hand;" for="usePhraseMatch"> Include Similar
                 Results </label>
@@ -38,7 +38,7 @@
         <div class="row col-sm-11">
             <div class="form-inline" style="padding-left:5px;">
                 <input size="15" type="donorNumber" id="donorNumber" class="form-control input-sm" placeholder=""
-                       ng-model="donorSearch.donorNumber">
+                       ng-model="donorSearch.donorNumber" ng-required="!isDonorSearchValid()">
             </div>
         </div>
     </div>
@@ -47,16 +47,22 @@
         <div class="row col-sm-11">
             <div class="form-inline" style="padding-left:5px;">
                 <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
-                       class="form-control input-sm" placeholder="" ng-model="donorSearch.donationIdentificationNumber">
+                class="form-control input-sm" placeholder="" ng-model="donorSearch.donationIdentificationNumber"
+                ng-required="!isDonorSearchValid()">
             </div>
         </div>
+    </div>
+    <div class="col-sm-offset-1">
+        <small class="error" ng-show="findDonorForm.$submitted && !isDonorSearchValid()">
+            All search fields cannot be empty
+        </small>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-1 col-sm-3">
             <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
                 "Search"}}
             </button>
-            <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+            <button class="btn btn-primary" type="reset" ng-click="clear(findDonorForm)">Clear</button>
         </div>
     </div>
 </form>
