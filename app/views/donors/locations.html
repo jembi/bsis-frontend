@@ -16,25 +16,25 @@
                     </td>
                     <td data-title="'Mobile Site'" style="width:15%;" header-class="text-left" sortable="'mobileSite'"
                         class="text-center">
-                        <span ng-if="location.isMobileSite=='true'"><i class="fa {{icons.SQUARECHECK}}"></i></span>
-                        <span ng-if="location.isMobileSite=='false'"><i class="fa {{icons.SQUARE}}"></i></span>
+                        <span ng-if="location.isMobileSite"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                        <span ng-if="!location.isMobileSite"><i class="fa {{icons.SQUARE}}"></i></span>
                     </td>
                     <td data-title="'Enabled'" style="width:15%;" header-class="text-left" sortable="'isDeleted'"
                         class="text-center">
-                        <span ng-if="location.isDeleted=='false'"><i class="fa {{icons.SQUARECHECK}}"></i></span>
-                        <span ng-if="location.isDeleted=='true'"><i class="fa {{icons.SQUARE}}"></i></span>
+                        <span ng-if="!location.isDeleted"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                        <span ng-if="location.isDeleted"><i class="fa {{icons.SQUARE}}"></i></span>
                     </td>
                     <td data-title="" style="width:25%;" header-class="text-left" sortable="" class="text-center">
                 <span style="font-size: 0.9em;">
-                  <span ng-if="locationToRemove == location.id">
-                    <em><a ng-if="location.isDeleted == 'false'" ng-click="removeLocation(location)"> Confirm</a> <a
-                            ng-if="location.isDeleted == 'true'" ng-click="enableLocation(location)"> Confirm</a> </em> |
+                  <span ng-if="locationToRemove === location.id">
+                    <em><a ng-if="!location.isDeleted" ng-click="removeLocation(location)"> Confirm</a> <a
+                            ng-if="location.isDeleted" ng-click="enableLocation(location)"> Confirm</a> </em> |
                     <em><a ng-click="cancelRemoveLocation()"> Cancel</a></em>
                   </span>
                   <span ng-if="locationToRemove != location.id">
-                    <em><a ng-if="location.isDeleted == 'false'" ng-click="removeLocationCheck(location)">
+                    <em><a ng-if="!location.isDeleted" ng-click="removeLocationCheck(location)">
                         Disable</a></em>
-                    <em><a ng-if="location.isDeleted == 'true'" ng-click="removeLocationCheck(location)">
+                    <em><a ng-if="location.isDeleted" ng-click="removeLocationCheck(location)">
                         Enable</a></em>
                   </span>
                 </span>
