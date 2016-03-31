@@ -158,160 +158,240 @@
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    <table class="dash-table">
-                        <tbody>
-                        <tr>
-                            <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
-                            <td class="field">Due To Donate:</td>
-                            <td class="value">{{dueToDonate | bsisDate:'longDate'}}</td>
-                        </tr>
-                        <tr>
-                            <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
-                            <td class="field">Currently Deferred:</td>
-                            <td ng-if="currentlyDeferred" class="value red">
-                                <span ng-if="lastDeferral.deferralReason.durationType === 'TEMPORARY'"> Deferred until {{deferredUntil | bsisDate}}</span>
-                                <span ng-if="lastDeferral.deferralReason.durationType === 'PERMANENT'">Permanently deferred</span>
-                            </td>
-                            <td ng-if="!currentlyDeferred" class="value green"> No current deferrals</td>
-                        </tr>
-                        <tr has-permission="{{permissions.VIEW_POST_DONATION_COUNSELLING_DONORS}}">
-                            <td class="icon"><i class="fa {{icons.FLAG}}"></i></td>
-                            <td class="field">Flagged For Counselling:</td>
-                            <td ng-if="flaggedForCounselling" class="value red"> Yes <em class="pull-right"
-                                                                                         style="padding:0 15px;">
-                                <small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small>
-                            </em></td>
-                            <td ng-if="!flaggedForCounselling" class="value green">No <em ng-if="hasCounselling"
-                                                                                          class="pull-right"
-                                                                                          style="padding:0 15px;">
-                                <small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small>
-                            </em></td>
-                        </tr>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="icon"><i class="fa {{icons.PLUS}}"></i></td>
-                            <td class="field">Total Donations:</td>
-                            <td class="value">{{totalDonations}}</td>
-                        </tr>
-                        <tr>
-                            <td class="icon"><i class="fa {{icons.EXCLAMATION}}"></i></td>
-                            <td class="field">Total Adverse Events:</td>
-                            <td class="value"
-                                ng-class="{'text-success': totalAdverseEvents < 1, 'text-danger': totalAdverseEvents > 0}">
-                                {{totalAdverseEvents}}
-                            </td>
-                        </tr>
-                        <tr ng-show="totalDonations > 0">
-                            <td class="icon"><i class="fa {{icons.CIRCLEO}}"></i></td>
-                            <td class="field">Date of First Donation:</td>
-                            <td class="value">{{dateOfFirstDonation | date:'longDate'}}</td>
-                        </tr>
-                        <tr ng-show="totalDonations > 0">
-                            <td class="icon"><i class="fa {{icons.CIRCLE}}"></i></td>
-                            <td class="field">Previous Donation:</td>
-                            <td class="value">
-                                <em>Date</em>: {{ (lastDonation.donationDate | bsisDateTime) || '' }}<br/>
-                                <em>Venue</em>: {{lastDonation.venue.name}} <br/>
-                                <em>Donation Type</em>: {{lastDonation.donationType.donationType}} |
-                                <em>Pack Type</em>: {{lastDonation.packType.packType}}<br/>
-                                <em>Wt</em>: {{lastDonation.donorWeight}} {{weightUnit}} |
-                                <em>BP</em>:
-                                {{lastDonation.bloodPressureSystolic}}/{{lastDonation.bloodPressureDiastolic}}
-                                {{bpUnit}}|
-                  <span>
-                    <em>Hb</em>:
-                      <span ng-show="getBooleanValue('donation.hbNumericValue')">{{lastDonation.haemoglobinCount}}</span>
-                      <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">(</span>
-                      <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span>
-                      <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">)</span> |
-                  </span>
-                                <em>P</em>: {{lastDonation.donorPulse}} {{pulseUnit}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <td class="icon"><i class="fa {{icons.INFO}}"></i></td>
-                            <td class="field">Identifier:</td>
-                            <td class="value">
-                                <form editable-form name="donorIdentifierForm" onbeforesave="checkIdentifier($data)"
-                                      onaftersave="updateDonor(donor)" oncancel="onCancel()" novalidate>
-                    <span style="float: right; padding-right: 15px; padding-left: 15px; font-size: 0.9em">
-                      <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="donorIdentifierForm.$show()"
-                             ng-show="!donorIdentifierForm.$visible">Edit</a></em>
-                      <span ng-show="donorIdentifierForm.$visible">
-                        <em>
-                            <button type="submit" class="btn"
-                                    style="background:none!important; border:none;  cursor: pointer;"
-                                    ng-disabled="donorIdentifierForm.$waiting">
-                                Save
-                            </button>
-                            <button type="button" class="btn"
-                                    style="background:none!important; border:none;  cursor: pointer;"
-                                    ng-disabled="donorIdentifierForm.$waiting" ng-click="donorIdentifierForm.$cancel()">
-                                Cancel
-                            </button>
-                        </em>
+                    <div class="col-sm-5" style="height:100%; border-right: 2px solid #f5f5f5; ">
+                        <table class="dash-table">
+                            <tbody>
+                            <tr>
+                                <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
+                                <td class="field">Due To Donate:</td>
+                                <td class="value">{{dueToDonate | bsisDate:'longDate'}}</td>
+                            </tr>
+                            <tr>
+                                <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
+                                <td class="field">Currently Deferred:</td>
+                                <td ng-if="currentlyDeferred" class="value red">
+                                    <span ng-if="lastDeferral.deferralReason.durationType === 'TEMPORARY'"> Deferred until {{deferredUntil | bsisDate}}</span>
+                                    <span ng-if="lastDeferral.deferralReason.durationType === 'PERMANENT'">Permanently deferred</span>
+                                </td>
+                                <td ng-if="!currentlyDeferred" class="value green"> No current deferrals</td>
+                            </tr>
+                            <tr has-permission="{{permissions.VIEW_POST_DONATION_COUNSELLING_DONORS}}">
+                                <td class="icon"><i class="fa {{icons.FLAG}}"></i></td>
+                                <td class="field">Flagged For Counselling:</td>
+                                <td ng-if="flaggedForCounselling" class="value red"> Yes <em class="pull-right"
+                                                                                             style="padding:0 15px;">
+                                    <small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small>
+                                </em></td>
+                                <td ng-if="!flaggedForCounselling" class="value green">No <em ng-if="hasCounselling"
+                                                                                              class="pull-right"
+                                                                                              style="padding:0 15px;">
+                                    <small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small>
+                                </em></td>
+                            </tr>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="icon"><i class="fa {{icons.PLUS}}"></i></td>
+                                <td class="field">Total Donations:</td>
+                                <td class="value">{{totalDonations}}</td>
+                            </tr>
+                            <tr>
+                                <td class="icon"><i class="fa {{icons.EXCLAMATION}}"></i></td>
+                                <td class="field">Total Adverse Events:</td>
+                                <td class="value"
+                                    ng-class="{'text-success': totalAdverseEvents < 1, 'text-danger': totalAdverseEvents > 0}">
+                                    {{totalAdverseEvents}}
+                                </td>
+                            </tr>
+                            <tr ng-show="totalDonations > 0">
+                                <td class="icon"><i class="fa {{icons.CIRCLEO}}"></i></td>
+                                <td class="field">Date of First Donation:</td>
+                                <td class="value">{{dateOfFirstDonation | date:'longDate'}}</td>
+                            </tr>
+                            <tr ng-show="totalDonations > 0">
+                                <td class="icon"><i class="fa {{icons.CIRCLE}}"></i></td>
+                                <td class="field">Previous Donation:</td>
+                                <td class="value">
+                                    <em>Date</em>: {{ (lastDonation.donationDate | bsisDateTime) || '' }}<br/>
+                                    <em>Venue</em>: {{lastDonation.venue.name}} <br/>
+                                    <em>Donation Type</em>: {{lastDonation.donationType.donationType}} |
+                                    <em>Pack Type</em>: {{lastDonation.packType.packType}}<br/>
+                                    <em>Wt</em>: {{lastDonation.donorWeight}} {{weightUnit}} |
+                                    <em>BP</em>:
+                                    {{lastDonation.bloodPressureSystolic}}/{{lastDonation.bloodPressureDiastolic}}
+                                    {{bpUnit}}|
+                      <span>
+                        <em>Hb</em>:
+                          <span ng-show="getBooleanValue('donation.hbNumericValue')">{{lastDonation.haemoglobinCount}}</span>
+                          <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">(</span>
+                          <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span>
+                          <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">)</span> |
                       </span>
-                    </span>
-                    <span e-model="idType" e-class="xeditable" e-id="idType" e-name="idType"
-                          editable-select="donor.idType.id" e-ng-options="item.id as item.idType for item in idTypes"
-                          e-name="idType">
-                      <em>{{donor.idType.idType}}</em>
-                    </span>
-                                    <span ng-if="donor.idType.id"> - </span>
-                    <span e-ng-disabled="!donorIdentifierForm.idType.$modelValue > 0" e-class="xeditable"
-                          editable-text="donor.idNumber" e-id="idNumber" e-name="idNumber"
-                    >{{donor.idNumber}}</span>
-                                    <span ng-show="donorIdentifierForm.$visible" class="error">{{ errorObject.identifier[0].error }}</span>
-                                    <em>
+                                    <em>P</em>: {{lastDonation.donorPulse}} {{pulseUnit}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
 
-                                    </em>
+                            <tr>
+                                <td class="icon"><i class="fa {{icons.INFO}}"></i></td>
+                                <td class="field">Identifier:</td>
+                                <td class="value">
+                                    <form editable-form name="donorIdentifierForm" onbeforesave="checkIdentifier($data)"
+                                          onaftersave="updateDonor(donor)" oncancel="onCancel()" novalidate>
+                        <span style="float: right; padding-right: 15px; padding-left: 15px; font-size: 0.9em">
+                          <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="donorIdentifierForm.$show()"
+                                 ng-show="!donorIdentifierForm.$visible">Edit</a></em>
+                          <span ng-show="donorIdentifierForm.$visible">
+                            <em>
+                                <button type="submit" class="btn"
+                                        style="background:none!important; border:none;  cursor: pointer;"
+                                        ng-disabled="donorIdentifierForm.$waiting">
+                                    Save
+                                </button>
+                                <button type="button" class="btn"
+                                        style="background:none!important; border:none;  cursor: pointer;"
+                                        ng-disabled="donorIdentifierForm.$waiting" ng-click="donorIdentifierForm.$cancel()">
+                                    Cancel
+                                </button>
+                            </em>
+                          </span>
+                        </span>
+                        <span e-model="idType" e-class="xeditable" e-id="idType" e-name="idType"
+                              editable-select="donor.idType.id" e-ng-options="item.id as item.idType for item in idTypes"
+                              e-name="idType">
+                          <em>{{donor.idType.idType}}</em>
+                        </span>
+                                        <span ng-if="donor.idType.id"> - </span>
+                        <span e-ng-disabled="!donorIdentifierForm.idType.$modelValue > 0" e-class="xeditable"
+                              editable-text="donor.idNumber" e-id="idNumber" e-name="idNumber"
+                        >{{donor.idNumber}}</span>
+                                        <span ng-show="donorIdentifierForm.$visible" class="error">{{ errorObject.identifier[0].error }}</span>
+                                        <em>
 
-                                </form>
-                            </td>
-                        </tr>
+                                        </em>
 
-                        <tr>
-                            <td></td>
-                        </tr>
+                                    </form>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                            </tr>
 
 
-                        <tr>
-                            <td class="icon"><i class="fa {{icons.COMMENT}}"></i></td>
-                            <td class="field">Comments:</td>
-                            <td class="value">
-                                <form editable-form name="donorNotesForm" onaftersave="updateDonor(donor)">
-                    <span style="float: right; padding-right: 15px; padding-left: 15px; font-size: 0.9em">
-                      <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="donorNotesForm.$show()"
-                             ng-show="!donorNotesForm.$visible">Edit</a></em>
-                      <span ng-show="donorNotesForm.$visible">
-                        <em>
-                            <button type="submit" class="btn"
-                                    style="background:none!important; border:none;  cursor: pointer;"
-                                    ng-disabled="donorNotesForm.$waiting">
-                                Save
-                            </button>
-                            <button type="button" class="btn"
-                                    style="background:none!important; border:none;  cursor: pointer;"
-                                    ng-disabled="donorNotesForm.$waiting" ng-click="donorNotesForm.$cancel()">
-                                Cancel
-                            </button>
-                        </em>
-                      </span>
-                    </span>
-                                    <p style="white-space:pre-wrap; width:40ex" e-class="xeditable notes"
-                                          editable-textarea="donor.notes" e-escape="true" e-rows="4" e-name="notes">{{donor.notes}}</p>
-                                </form>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                            <tr>
+                                <td class="icon"><i class="fa {{icons.COMMENT}}"></i></td>
+                                <td class="field">Comments:</td>
+                                <td class="value">
+                                    <form editable-form name="donorNotesForm" onaftersave="updateDonor(donor)">
+                        <span style="float: right; padding-right: 15px; padding-left: 15px; font-size: 0.9em">
+                          <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="donorNotesForm.$show()"
+                                 ng-show="!donorNotesForm.$visible">Edit</a></em>
+                          <span ng-show="donorNotesForm.$visible">
+                            <em>
+                                <button type="submit" class="btn"
+                                        style="background:none!important; border:none;  cursor: pointer;"
+                                        ng-disabled="donorNotesForm.$waiting">
+                                    Save
+                                </button>
+                                <button type="button" class="btn"
+                                        style="background:none!important; border:none;  cursor: pointer;"
+                                        ng-disabled="donorNotesForm.$waiting" ng-click="donorNotesForm.$cancel()">
+                                    Cancel
+                                </button>
+                            </em>
+                          </span>
+                        </span>
+                                        <p style="white-space:pre-wrap; width:40ex" e-class="xeditable notes"
+                                              editable-textarea="donor.notes" e-escape="true" e-rows="4" e-name="notes">{{donor.notes}}</p>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-sm-7" style="height:100%;">
+
+
+    <span>
+      <small><em>TTI Test Status:</em></small> {{donation.ttistatus}}
+      <br/>
+      <small><em>Blood Group Serology Test Status:</em></small> {{donation.bloodTypingStatus}} - {{donation.bloodTypingMatchStatus}}
+    </span>
+
+                        <hr style="margin-top:0px;"/>
+
+                        <div class="form-horizontal col-sm-12">
+                            <div class="row">
+      <span class="col-sm-6">
+        <span class="h5">
+          TTI Outcomes
+        </span>
+        <table class="dash-table">
+            <thead>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Test</th>
+                <th>Outcome</th>
+                <th>Tested On</th>
+            </tr>
+            </thead>
+            <hr style="margin-top:10px; margin-bottom:5px;"/>
+            <tbody>
+            <tr>
+                <td></td>
+            </tr>
+            <tr ng-repeat="test in testResults">
+                <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.bloodTest.testNameShort}}
+                </td>
+                <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.result}}</td>
+                <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.testedOn | bsisDate}}</td>
+            </tr>
+            </tbody>
+        </table>
+      </span>
+      <span class="col-sm-6">
+        <span class="h5">
+          Blood Group Serology Outcomes
+        </span>
+        <table class="dash-table">
+            <thead>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Test</th>
+                <th>Outcome</th>
+                <th>Tested On</th>
+            </tr>
+            </thead>
+            <hr style="margin-top:10px; margin-bottom:5px;"/>
+            <tbody>
+            <tr>
+                <td></td>
+            </tr>
+            <tr ng-repeat="test in testResults">
+                <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">
+                    {{test.bloodTest.testNameShort}}
+                </td>
+                <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">{{test.result}}</td>
+                <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">{{test.testedOn |
+                    bsisDate}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+      </span>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>

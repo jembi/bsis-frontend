@@ -430,6 +430,12 @@ angular.module('bsis')
           $scope.totalAdverseEvents = response.totalAdverseEvents;
           $scope.donorPermissions.canDelete = response.canDelete;
           $scope.isEligible = response.isEligible;
+
+          TestingService.getTestResultsByDIN($scope.lastDonation.donationIdentificationNumber, function(testingResponse) {
+            if (testingResponse !== false) {
+              $scope.testResults = testingResponse.testResults.recentTestResults;
+            }
+          });
         }
       });
     };
