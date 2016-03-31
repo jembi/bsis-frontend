@@ -188,6 +188,21 @@
                                     <small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small>
                                 </em></td>
                             </tr>
+
+                            <tr has-permission="{{permissions.VIEW_POST_DONATION_COUNSELLING_DONORS}}">
+                                <td class="icon"><i class="fa {{icons.FLAG}}"></i></td>
+                                <td class="field">Test Outcomes: </td>
+                                <td ng-if="showTestResults" class="value"> <em class="pull-right"
+                                                                                             style="padding:0 15px;">
+
+                                    <small><a ng-click="toggleShowResults(false)">Hide</a></small>
+                                </em></td>
+                                <td ng-if="!showTestResults" class="value"><em class="pull-right"
+                                                                                              style="padding:0 15px;">
+                                    <small><a ng-click="toggleShowResults(true)">View</a></small>
+                                </em>
+                                </td>
+                            </tr>
                             </tr>
                             <tr>
                                 <td></td>
@@ -315,7 +330,7 @@
                         </table>
                     </div>
 
-                    <div class="col-sm-7" style="height:100%;">
+                    <div ng-show="showTestResults" class="col-sm-7" style="height:100%;">
 
 
     <span>

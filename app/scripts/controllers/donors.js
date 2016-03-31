@@ -414,6 +414,8 @@ angular.module('bsis')
       }
     });
 
+    $scope.showTestResults = false;
+
     $scope.getDonorOverview = function() {
       DonorService.getDonorOverview($routeParams.id, function(response) {
         if (response !== false) {
@@ -431,6 +433,7 @@ angular.module('bsis')
           $scope.donorPermissions.canDelete = response.canDelete;
           $scope.isEligible = response.isEligible;
 
+
           TestingService.getTestResultsByDIN($scope.lastDonation.donationIdentificationNumber, function(testingResponse) {
             if (testingResponse !== false) {
               $scope.testResults = testingResponse.testResults.recentTestResults;
@@ -438,6 +441,10 @@ angular.module('bsis')
           });
         }
       });
+    };
+
+    $scope.toggleShowResults = function(show) {
+      $scope.showTestResults = show;
     };
 
 
