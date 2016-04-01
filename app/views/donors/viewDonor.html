@@ -174,21 +174,8 @@
                                 </em>
                                 </td>
                             </tr>
-                            <tr has-permission="{{permissions.VIEW_POST_DONATION_COUNSELLING_DONORS}}">
-                                <td class="icon"><i class="fa {{icons.FLAG}}"></i></td>
-                                <td class="field">Test Outcomes:</td>
-                                <td ng-if="showTestResults" class="value"><em class="pull-right"
-                                                                              style="padding:0 15px;">
-                                    <small><a style="cursor: pointer;" ng-click="toggleShowResults(false)">Hide</a></small>
-                                </em>
-                                </td>
-                                <td ng-if="!showTestResults" class="value"><em class="pull-right"
-                                                                               style="padding:0 15px;">
-                                    <small><a style="cursor: pointer;" ng-click="toggleShowResults(true)">View</a></small>
-                                </em>
-                                </td>
-                            </tr>
-                            </tr>
+
+
                             <tr>
                                 <td></td>
                             </tr>
@@ -314,6 +301,19 @@
                             </tbody>
                         </table>
                     </div>
+                    <table class="pull-right">
+                        <tr has-permission="{{permissions.VIEW_POST_DONATION_COUNSELLING_DONORS}}">
+                            <td ng-if="showTestResults" class="value"><em class="pull-right" style="padding:0 15px;">
+                                <a style="cursor: pointer;" ng-click="toggleShowResults(false)">Hide test outcomes</a>
+                            </em>
+                            </td>
+                            <td ng-if="!showTestResults" class="value"><em class="pull-right" style="padding:0 15px;">
+                                <a style="cursor: pointer;" ng-click="toggleShowResults(true)">Show test outcomes</a>
+                            </em>
+                            </td>
+                        </tr>
+                    </table>
+
                     <div ng-show="showTestResults" class="col-sm-7" style="height:100%;">
                         <span>
                         <small><em>TTI Test Status:</em></small> {{lastDonation.ttistatus}}
