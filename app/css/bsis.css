@@ -605,6 +605,10 @@ select.ng-invalid.ng-dirty {
   border: 1px solid #B52E31;
 }
 
+form.ng-submitted input.ng-invalid {
+  border: 1px solid #B52E31;
+}
+
 .error {
   color: #B52E31;
 }

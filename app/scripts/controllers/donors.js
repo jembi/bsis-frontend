@@ -37,7 +37,16 @@ angular.module('bsis')
       Alerting.alertClose(alertScope, index);
     };
 
-    $scope.findDonor = function() {
+    // Check that at least one search field is entered
+    $scope.isDonorSearchValid = function() {
+      var search = $scope.donorSearch;
+      return search.firstName || search.lastName || search.donorNumber || search.donationIdentificationNumber;
+    };
+
+    $scope.findDonor = function(form) {
+      if (form && !form.$valid) {
+        return;
+      }
       $scope.donorSearch.search = true;
       Alerting.setPersistErrors(false);
       $location.search($scope.donorSearch);
@@ -108,7 +117,10 @@ angular.module('bsis')
       }
     };
 
-    $scope.clear = function() {
+    $scope.clear = function(form) {
+      if (form) {
+        form.$setPristine();
+      }
       $location.search({});
       $scope.donorSearch = {};
       $scope.searchResults = '';
