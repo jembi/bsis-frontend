@@ -179,12 +179,12 @@
                                 <td class="field">Test Outcomes:</td>
                                 <td ng-if="showTestResults" class="value"><em class="pull-right"
                                                                               style="padding:0 15px;">
-                                    <small><a ng-click="toggleShowResults(false)">Hide</a></small>
+                                    <small><a style="cursor: pointer;" ng-click="toggleShowResults(false)">Hide</a></small>
                                 </em>
                                 </td>
                                 <td ng-if="!showTestResults" class="value"><em class="pull-right"
                                                                                style="padding:0 15px;">
-                                    <small><a ng-click="toggleShowResults(true)">View</a></small>
+                                    <small><a style="cursor: pointer;" ng-click="toggleShowResults(true)">View</a></small>
                                 </em>
                                 </td>
                             </tr>
@@ -316,9 +316,9 @@
                     </div>
                     <div ng-show="showTestResults" class="col-sm-7" style="height:100%;">
                         <span>
-                        <small><em>TTI Test Status:</em></small> {{donation.ttistatus}}
+                        <small><em>TTI Test Status:</em></small> {{lastDonation.ttistatus}}
                         <br/>
-                        <small><em>Blood Group Serology Test Status:</em></small> {{donation.bloodTypingStatus}} - {{donation.bloodTypingMatchStatus}}
+                        <small><em>Blood Group Serology Test Status:</em></small> {{lastDonation.bloodTypingStatus}} - {{lastDonation.bloodTypingMatchStatus}}
                         </span>
                                     <hr style="margin-top:0px;"/>
                                     <div class="form-horizontal col-sm-12">
