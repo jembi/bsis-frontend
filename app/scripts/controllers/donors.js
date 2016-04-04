@@ -1940,6 +1940,10 @@ angular.module('bsis')
 
     $scope.showTestResults = false;
 
+    $scope.toggleShowResults = function(show) {
+      $scope.showTestResults = show;
+    };
+
     $scope.viewDonationSummary = function(donation) {
       $scope.donation = donation;
       $scope.donationBatchView = 'viewDonationSummary';
