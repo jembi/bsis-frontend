@@ -475,7 +475,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
   }])
 
-  .run(['$rootScope', '$location', 'AuthService', function($rootScope, $location, AuthService) {
+  .run(['$rootScope', '$location', 'AuthService', 'PERMISSIONS', function($rootScope, $location, AuthService, PERMISSIONS) {
 
     $rootScope.$on('$locationChangeStart', function() { //eslint-disable-line angular/on-watch
 
@@ -514,19 +514,18 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         }
       }
 
-      /*
-       //console.log("in locationChangeStart: ");
-       //if (!AuthService.isAuthorized($location.path)) {
-       if (!$rootScope.isLoggedIn){
-       //console.log("Attempt to access unauthorized route");
-       // event.preventDefault();
-       if($rootScope.isLoggedIn) {
-       $location.path( "/home" );
-       } else {
-       $location.path( "/" );
-       }
-       }
-       */
+      if ($location.path() === '/testing') {
+        // Initial routing for testing page
+        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_BATCH) !== -1)) {
+          $location.path('/manageTestBatch');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_OUTCOME) !== -1)) {
+          $location.path('/viewTestSample');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_TEST_OUTCOME) !== -1)) {
+          $location.path('/uploadTestResults');
+        } else {
+          $location.path('/home');
+        }
+      }
     });
   }])
 
