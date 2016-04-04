@@ -505,7 +505,7 @@ angular.module('bsis')
               {
                 name: test.testNameShort,
                 displayName: test.testNameShort,
-                field: 'testResults.recentTestResults',
+                field: 'testResults',
                 visible: false,
                 width: 80
               }
@@ -518,7 +518,7 @@ angular.module('bsis')
               {
                 name: test.testNameShort,
                 displayName: test.testNameShort,
-                field: 'testResults.recentTestResults',
+                field: 'testResults',
                 visible: false,
                 width: 80
               }
@@ -540,7 +540,7 @@ angular.module('bsis')
                 {
                   name: test.testNameShort,
                   displayName: test.testNameShort,
-                  field: 'testResults.recentTestResults',
+                  field: 'testResults',
                   visible: false,
                   width: 70
                 }
@@ -553,7 +553,7 @@ angular.module('bsis')
                 {
                   name: test.testNameShort,
                   displayName: test.testNameShort,
-                  field: 'testResults.recentTestResults',
+                  field: 'testResults',
                   visible: false,
                   width: 70
                 }
@@ -598,8 +598,8 @@ angular.module('bsis')
         // assume that column is a test outcome column, and manage empty values
         if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue' && col.name !== 'TTI Status' && col.name !== 'bloodTypingStatusBloodTypingMatchStatus') {
           for (var test in value) {
-            if (value[test].bloodTest.testNameShort == col.name) {
-              return value[test].result || '';
+            if (test === col.name) {
+              return value[test] || '';
             }
           }
           return '';
@@ -708,13 +708,12 @@ angular.module('bsis')
 
 
     $scope.export = function(format) {
-      TestingService.getTestResults($routeParams.id, function(testResults) {
-
+      TestingService.getTestResultsReport($routeParams.id, function(testResults) {
         // load test outcomes for test batch
         angular.forEach($scope.gridOptions.data, function(item, key) {
-          angular.forEach(testResults.testResults, function(testResult) {
-            if (item.id == testResult.donation.id) {
-              $scope.gridOptions.data[key].testResults = testResult;
+          angular.forEach(testResults.testResults, function(donation) {
+            if (item.donationIdentificationNumber === donation.donationIdentificationNumber) {
+              $scope.gridOptions.data[key].testResults = donation.bloodTestOutcomes;
             }
           });
         });
@@ -725,6 +724,8 @@ angular.module('bsis')
         } else if (format === 'csv') {
           $scope.gridApi.exporter.csvExport('all', 'all');
         }
+      }, function(err) {
+        $log.error(err);
       });
     };
 
