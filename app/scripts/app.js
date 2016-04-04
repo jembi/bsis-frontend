@@ -178,7 +178,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       })
       .when('/viewTestSample', {
         templateUrl: 'views/testing/viewTestSample.html',
-        controller: 'TestingCtrl',
+        controller: 'ViewTestSampleCtrl',
         permission: PERMISSIONS.VIEW_TEST_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch

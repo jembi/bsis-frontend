@@ -14,10 +14,6 @@ angular.module('bsis')
     $scope.openTestBatches = false;
     $scope.selectedDonationBatches = {};
     $scope.selectedDonationBatches.ids = [];
-    $scope.searchResults = '';
-    $scope.testResultsSearch = {
-      donationIdentificationNumber: ''
-    };
 
     var recentTestBatchData = null;
     $scope.recentTestBatchData = recentTestBatchData;
@@ -33,8 +29,6 @@ angular.module('bsis')
     $scope.clear = function() {
       $location.search({});
       $scope.selectedDonationBatches = {};
-      $scope.searchResults = '';
-      $scope.testResultsSearch = {};
       $scope.file = {};
     };
 
@@ -205,26 +199,6 @@ angular.module('bsis')
         $scope.recentTestBatchesTableParams.reload();
       });
     });
-
-    $scope.getTestResultsByDIN = function(testResultsSearch) {
-      testResultsSearch.search = true;
-      $location.search(testResultsSearch);
-      $scope.searching = true;
-      TestingService.getTestResultsByDIN(testResultsSearch.donationIdentificationNumber, function(response) {
-        if (response !== false) {
-          $scope.donation = response.donation;
-          $scope.testResults = response.testResults.recentTestResults;
-          $scope.searchResults = true;
-        } else {
-          $scope.searchResults = false;
-        }
-        $scope.searching = false;
-      });
-    };
-
-    if ($routeParams.search) {
-      $scope.getTestResultsByDIN($routeParams);
-    }
 
     $scope.recordTestResults = function(item, testCategory) {
       TestingService.setCurrentTestBatch(item.id);

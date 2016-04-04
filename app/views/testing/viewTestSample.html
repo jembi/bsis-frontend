@@ -2,14 +2,15 @@
 <div class="col-sm-9 col-md-10 main">
   <h3 class="page-header">View Test Sample</h3>
 
-  <form class="form-horizontal col-sm-12" role="form" ng-submit="getTestResultsByDIN(testResultsSearch)">
+  <form class="form-horizontal col-sm-12" role="form" name="viewTestSampleForm" ng-submit="findTestSample()">
       <div class="form-group">
           <label for="name" class="col-sm-1 control-label">DIN</label>
           <div class="row col-sm-11">
               <div class="form-inline" style="padding-left:5px;">
                   <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
                          class="form-control input-sm" placeholder=""
-                         ng-model="testResultsSearch.donationIdentificationNumber">
+                         ng-model="search.donationIdentificationNumber"
+                         required>
               </div>
           </div>
       </div>
@@ -18,12 +19,12 @@
               <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
                   "Search"}}
               </button>
-              <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+              <button class="btn btn-primary" type="reset" ng-click="clear()">Clear</button>
           </div>
       </div>
   </form>
 
-  <div ng-switch="searchResults" class="col-sm-12">
+  <div ng-show="viewTestSampleForm.$submitted" ng-switch="donation != null" class="col-sm-12">
       <div style="padding-bottom: 10px"></div>
 
       <div ng-switch-when="true">
@@ -63,9 +64,6 @@
           <table class="dash-table" style="width:80%;">
               <thead>
               <tr>
-                  <td></td>
-              </tr>
-              <tr>
                   <th>Test</th>
                   <th>Outcome</th>
                   <th>Tested On</th>
@@ -73,9 +71,6 @@
               </thead>
               <hr style="margin-top:10px; margin-bottom:5px;"/>
               <tbody>
-              <tr>
-                  <td></td>
-              </tr>
               <tr ng-repeat="test in testResults">
                   <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.bloodTest.testNameShort}}
                   </td>
@@ -92,9 +87,6 @@
           <table class="dash-table" style="width:80%;">
               <thead>
               <tr>
-                  <td></td>
-              </tr>
-              <tr>
                   <th>Test</th>
                   <th>Outcome</th>
                   <th>Tested On</th>
@@ -102,9 +94,6 @@
               </thead>
               <hr style="margin-top:10px; margin-bottom:5px;"/>
               <tbody>
-              <tr>
-                  <td></td>
-              </tr>
               <tr ng-repeat="test in testResults">
                   <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">
                       {{test.bloodTest.testNameShort}}
