@@ -4,7 +4,8 @@
         <div class="col-sm-6" style="height:100%; border-right: 2px solid #f5f5f5; ">
          <span style="float: right; padding-right: 15px; font-size: 0.9em">
          <span ng-show="!donationSummaryForm.$visible">
-         <em><a has-permission="{{permissions.EDIT_DONATION}}" href="" ng-click="donationSummaryForm.$show()">Edit</a></em> |
+         <em has-permission="{{permissions.EDIT_DONATION}}"><a has-permission="{{permissions.EDIT_DONATION}}" href="" ng-click="donationSummaryForm.$show()">Edit</a></em>
+         <span> | </span>
          <em><a href="" ng-click="returnToListView()">Done</a></em>
          </span>
          <span ng-show="donationSummaryForm.$visible">
