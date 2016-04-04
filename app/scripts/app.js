@@ -192,7 +192,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/viewTestBatch/:id?', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/viewTestBatch.html',
         controller: 'ViewTestBatchCtrl',
         permission: PERMISSIONS.VIEW_TEST_BATCH,
         enabled: UI.TESTING_TAB_ENABLED
