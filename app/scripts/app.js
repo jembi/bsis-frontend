@@ -216,13 +216,13 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       .when('/reEnterTestOutcomes/:id/BASIC_BLOODTYPING', {
         templateUrl: 'views/testing/reEnterBloodTyping.html',
         controller: 'TestsReEnterCtrl',
-        permission: PERMISSIONS.ADD_TTI_OUTCOME,
+        permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/reEnterTestOutcomes/:id/REPEAT_BLOODTYPING', {
         templateUrl: 'views/testing/reEnterBloodTyping.html',
         controller: 'TestsReEnterCtrl',
-        permission: PERMISSIONS.ADD_TTI_OUTCOME,
+        permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/managePendingTests/:id/:bloodTestType', {
