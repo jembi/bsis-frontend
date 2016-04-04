@@ -23,6 +23,7 @@
     ">
       This cannot be empty
   </small>
+  <span editable-text="donor.middleName" e-name="middleName" e-class="xeditable name">{{donor.middleName}}</span>
   <span editable-text="donor.lastName" e-name="lastName" e-class="xeditable name"
         e-required>{{donor.lastName}}</span><small><em>
       <small class="error h4"
@@ -32,38 +33,38 @@
     ">
           This cannot be empty
       </small>
-  <span>
-  <span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title"
-        e-name="title">{{donor.title}}</span><span ng-if="donor.title">.</span></span>
-  <span editable-text="donor.callingName" e-name="callingName"
-        e-class="xeditable name">{{donor.callingName}}</span>
-  </em></small>
-  </span>
+      <span>
+      <span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title"
+            e-name="title">{{donor.title}}</span><span ng-if="donor.title">.</span></span>
+        <span editable-text="donor.callingName" e-name="callingName"
+              e-class="xeditable name">{{donor.callingName}}</span>
+    </em></small>
+    </span>
 
-  <span editable-select="donor.gender" e-class="xeditable title"
-        e-ng-options="item.id as item.name for item in gender" e-name="gender">
-  <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;">
-  <span ng-switch-when="male" class="fa-stack fa-1x">
-  <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-  <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
-  </span>
-  <span ng-switch-when="female" class="fa-stack fa-1x">
-  <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-  <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
-  </span>
-  </span>
-  </span>
-  <span class="h3" ng-if="donor.bloodGroup !== ''" style="vertical-align: 0.3em; padding-left:5px;">
-  <span class="fa-stack fa-1x">
-  <i class="fa fa-circle fa-stack-2x fa-fw"></i>
-  <i class="fa fa-stack-1x fa-inverse">{{donor.bloodGroup}}</i>
-  </span>
-  </span>
+    <span editable-select="donor.gender" e-class="xeditable title"
+          e-ng-options="item.id as item.name for item in gender" e-name="gender">
+      <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;">
+        <span ng-switch-when="male" class="fa-stack fa-1x">
+          <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+          <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
+        </span>
+        <span ng-switch-when="female" class="fa-stack fa-1x">
+          <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+          <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
+        </span>
+      </span>
+    </span>
+    <span class="h3" ng-if="donor.bloodGroup !== ''" style="vertical-align: 0.3em; padding-left:5px;">
+      <span class="fa-stack fa-1x">
+        <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+        <i class="fa fa-stack-1x fa-inverse">{{donor.bloodGroup}}</i>
+      </span>
+    </span>
 
-  <span>
-    <alert type="danger" class="inline" close="" ng-show="isEligible !== true">
-        Do not bleed donor
-    </alert>
+    <span>
+      <alert type="danger" class="inline" close="" ng-show="isEligible !== true">
+          Do not bleed donor
+      </alert>
 
     <alert type="success" class="inline" close="" ng-show="isEligible !== false">
         Eligible donor
