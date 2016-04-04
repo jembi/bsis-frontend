@@ -172,21 +172,19 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // TESTING URLs
       .when('/testing', {
-        templateUrl: 'views/testing.html',
-        controller: 'TestBatchCtrl',
+        redirectTo: '/manageTestBatch',
         permission: PERMISSIONS.VIEW_TESTING_INFORMATION,
         enabled: UI.TESTING_TAB_ENABLED
-
       })
       .when('/viewTestSample', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/viewTestSample.html',
         controller: 'TestingCtrl',
         permission: PERMISSIONS.VIEW_TEST_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
       })
       .when('/manageTestBatch', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/manageTestBatch.html',
         controller: 'TestBatchCtrl',
         permission: PERMISSIONS.VIEW_TEST_BATCH,
         enabled: UI.TESTING_TAB_ENABLED
@@ -198,43 +196,61 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/manageTTITesting/:id/:bloodTestType', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/manageTTITesting.html',
         controller: 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/reEnterTestOutcomes/:id/:bloodTestType', {
-        templateUrl: 'views/testing.html',
+      .when('/reEnterTestOutcomes/:id/BASIC_TTI', {
+        templateUrl: 'views/testing/reEnterTTI.html',
+        controller: 'TestsReEnterCtrl',
+        permission: PERMISSIONS.ADD_TTI_OUTCOME,
+        enabled: UI.TESTING_TAB_ENABLED
+      })
+      .when('/reEnterTestOutcomes/:id/CONFIRMATORY_TTI', {
+        templateUrl: 'views/testing/reEnterTTI.html',
+        controller: 'TestsReEnterCtrl',
+        permission: PERMISSIONS.ADD_TTI_OUTCOME,
+        enabled: UI.TESTING_TAB_ENABLED
+      })
+      .when('/reEnterTestOutcomes/:id/BASIC_BLOODTYPING', {
+        templateUrl: 'views/testing/reEnterBloodTyping.html',
+        controller: 'TestsReEnterCtrl',
+        permission: PERMISSIONS.ADD_TTI_OUTCOME,
+        enabled: UI.TESTING_TAB_ENABLED
+      })
+      .when('/reEnterTestOutcomes/:id/REPEAT_BLOODTYPING', {
+        templateUrl: 'views/testing/reEnterBloodTyping.html',
         controller: 'TestsReEnterCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/managePendingTests/:id/:bloodTestType', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/managePendingTests.html',
         controller: 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/manageBloodGroupTesting/:id/:bloodTestType', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/manageBloodGroupTesting.html',
         controller: 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/manageBloodGroupMatchTesting/:id', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/manageBloodGroupMatchTesting.html',
         controller: 'AmbiguousBloodTypingTestingCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/managePendingBloodTypingTests/:id/:bloodTestType', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/managePendingBloodTypingTests.html',
         controller: 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/uploadTestResults', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/uploadTestResults.html',
         controller: 'TestingCtrl',
         permission: PERMISSIONS.ADD_TEST_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
