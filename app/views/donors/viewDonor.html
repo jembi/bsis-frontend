@@ -12,6 +12,7 @@
             <li ng-show="err['address.homeAddressZipcode']"> {{err["address.postalAddressZipcode"]}}</li>
         </ul>
     </alert>
+
   <span class="h2">
   <span editable-text="donor.firstName" e-name="firstName" e-class="xeditable name"
         e-required>{{donor.firstName}}</span>
@@ -38,6 +39,7 @@
         e-class="xeditable name">{{donor.callingName}}</span>
   </em></small>
   </span>
+
   <span editable-select="donor.gender" e-class="xeditable title"
         e-ng-options="item.id as item.name for item in gender" e-name="gender">
   <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;">
@@ -57,15 +59,19 @@
   <i class="fa fa-stack-1x fa-inverse">{{donor.bloodGroup}}</i>
   </span>
   </span>
+
   <span>
     <alert type="danger" class="inline" close="" ng-show="isEligible !== true">
         Do not bleed donor
     </alert>
+
     <alert type="success" class="inline" close="" ng-show="isEligible !== false">
         Eligible donor
     </alert>
   </span>
+
   <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
+
     <!-- Delete donor actions -->
     <div has-permission="{{permissions.VOID_DONOR}}" ng-hide="editableForm.$visible" style="display:inline;">
         <em>
@@ -74,6 +80,8 @@
             </button>
         </em>
     </div>
+
+
       <!-- Edit donor actions -->
     <div has-permission="{{permissions.EDIT_DONOR}}" style="display:inline;">
         <em>
@@ -81,6 +89,7 @@
                     ng-show="!editableForm.$visible">Edit Donor
             </button>
         </em>
+
       <span ng-show="editableForm.$visible">
       <em>
           <button type="submit" class="btn btn-link text-success" ng-disabled="editableForm.$waiting">
@@ -94,19 +103,18 @@
       </span>
     </div>
   </span>
+
     <hr style="clear:right;"/>
+
     <div class="h4">
         <small><em>Age: </em></small>
         <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
-        <em>
-            (<span ng-show="!editableForm.$visible">{{ (donor.birthDate | bsisDate) || '' }}</span>
+        <em>(<span ng-show="!editableForm.$visible">{{ (donor.birthDate | bsisDate) || '' }}</span>
       <span ng-show="editableForm.$visible">
         <dateselect ng-model="donor.birthDate" initDate="donor.birthDate" format="format" opened="donorBirthDateOpen"
                     cal-icon="icons.CALENDAR">
         </dateselect>
-      </span>
-            )
-        </em>
+        </span>) </em>
         |
         <small><em>Donor Number: </em></small>
         {{donor.donorNumber}}
@@ -123,6 +131,7 @@
           e-name="preferredLanguage">
     {{donor.preferredLanguage.preferredLanguage}}
     </span>
+
     <span ng-show="!editableForm.$visible" style="float: right; padding-right: 15px;">
     <small>
         <em>
@@ -131,18 +140,24 @@
     </small>
     </span>
     </div>
+
 </form>
+
 <hr/>
+
 <div style="padding-bottom: 5px"></div>
+
 <div class="col-sm-12">
+
     <tabset justified="true">
         <tab active="tabs.overview">
             <tab-heading>
                 <i class="fa {{icons.INFOCIRCLE}}"></i> Overview
             </tab-heading>
+
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="col-sm-5" style="height:100%; border-right: 2px solid #f5f5f5; ">
+
                         <table class="dash-table">
                             <tbody>
                             <tr>
@@ -165,17 +180,14 @@
                                 <td ng-if="flaggedForCounselling" class="value red"> Yes <em class="pull-right"
                                                                                              style="padding:0 15px;">
                                     <small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small>
-                                </em>
-                                </td>
+                            </em></td>
                                 <td ng-if="!flaggedForCounselling" class="value green">No <em ng-if="hasCounselling"
                                                                                               class="pull-right"
                                                                                               style="padding:0 15px;">
                                     <small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small>
-                                </em>
-                                </td>
+                            </em></td>
                             </tr>
-
-
+                        </tr>
                             <tr>
                                 <td></td>
                             </tr>
@@ -213,8 +225,7 @@
                                     <em>Hb</em>:
                                     <span ng-show="getBooleanValue('donation.hbNumericValue')">{{lastDonation.haemoglobinCount}}</span>
                                     <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">(</span>
-                                    <span ng-show="getBooleanValue('donation.hbQualitativeValue')"
-                                          style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span>
+                      <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span>
                                     <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">)</span> |
                                     </span>
                                     <em>P</em>: {{lastDonation.donorPulse}} {{pulseUnit}}
@@ -223,6 +234,7 @@
                             <tr>
                                 <td></td>
                             </tr>
+
                             <tr>
                                 <td class="icon"><i class="fa {{icons.INFO}}"></i></td>
                                 <td class="field">Identifier:</td>
@@ -230,8 +242,7 @@
                                     <form editable-form name="donorIdentifierForm" onbeforesave="checkIdentifier($data)"
                                           onaftersave="updateDonor(donor)" oncancel="onCancel()" novalidate>
                                       <span style="float: right; padding-right: 15px; padding-left: 15px; font-size: 0.9em">
-                                          <em><a has-permission="{{permissions.EDIT_DONOR}}" href=""
-                                                 ng-click="donorIdentifierForm.$show()"
+                      <em><a has-permission="{{permissions.EDIT_DONOR}}" href="" ng-click="donorIdentifierForm.$show()"
                                                  ng-show="!donorIdentifierForm.$visible">Edit</a></em>
                                             <span ng-show="donorIdentifierForm.$visible">
                                               <em>
@@ -242,16 +253,14 @@
                                                   </button>
                                                   <button type="button" class="btn"
                                                           style="background:none!important; border:none;  cursor: pointer;"
-                                                          ng-disabled="donorIdentifierForm.$waiting"
-                                                          ng-click="donorIdentifierForm.$cancel()">
+                                    ng-disabled="donorIdentifierForm.$waiting" ng-click="donorIdentifierForm.$cancel()">
                                                       Cancel
                                                   </button>
                                               </em>
                                             </span>
                                         </span>
                                         <span e-model="idType" e-class="xeditable" e-id="idType" e-name="idType"
-                                                editable-select="donor.idType.id"
-                                                e-ng-options="item.id as item.idType for item in idTypes"
+                          editable-select="donor.idType.id" e-ng-options="item.id as item.idType for item in idTypes"
                                                 e-name="idType">
                                           <em>{{donor.idType.idType}}</em>
                                           </span>
@@ -261,13 +270,18 @@
                                           >{{donor.idNumber}}</span>
                                         <span ng-show="donorIdentifierForm.$visible" class="error">{{ errorObject.identifier[0].error }}</span>
                                         <em>
+
                                         </em>
+
                                     </form>
                                 </td>
                             </tr>
+
                             <tr>
                                 <td></td>
                             </tr>
+
+
                             <tr>
                                 <td class="icon"><i class="fa {{icons.COMMENT}}"></i></td>
                                 <td class="field">Comments:</td>
@@ -292,128 +306,38 @@
                                           </span>
                                           </span>
                                         <p style="white-space:pre-wrap; width:40ex" e-class="xeditable notes"
-                                           editable-textarea="donor.notes" e-escape="true" e-rows="4" e-name="notes">
-                                            {{donor.notes}}
-                                        </p>
+                                          editable-textarea="donor.notes" e-escape="true" e-rows="4" e-name="notes">{{donor.notes}}</p>
                                     </form>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <table class="pull-right">
-                        <tr has-permission="{{permissions.VIEW_POST_DONATION_COUNSELLING_DONORS}}">
-                            <td ng-if="showTestResults" class="value"><em class="pull-right" style="padding:0 15px;">
-                                <a style="cursor: pointer;" ng-click="toggleShowResults(false)">Hide test outcomes</a>
-                            </em>
-                            </td>
-                            <td ng-if="!showTestResults" class="value"><em class="pull-right" style="padding:0 15px;">
-                                <a style="cursor: pointer;" ng-click="toggleShowResults(true)">Show test outcomes</a>
-                            </em>
-                            </td>
-                        </tr>
-                    </table>
 
-                    <div ng-show="showTestResults" class="col-sm-7" style="height:100%;">
-                        <span>
-                        <small><em>TTI Test Status:</em></small> {{lastDonation.ttistatus}}
-                        <br/>
-                        <small><em>Blood Group Serology Test Status:</em></small> {{lastDonation.bloodTypingStatus}} - {{lastDonation.bloodTypingMatchStatus}}
-                        </span>
-                                    <hr style="margin-top:0px;"/>
-                                    <div class="form-horizontal col-sm-12">
-                                        <div class="row">
-                            <span class="col-sm-6">
-                              <span class="h5">
-                              TTI Outcomes
-                              </span>
-                              <table class="dash-table">
-                                  <thead>
-                                  <tr>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <th>Test</th>
-                                      <th>Outcome</th>
-                                      <th>Tested On</th>
-                                  </tr>
-                                  </thead>
-                                  <hr style="margin-top:10px; margin-bottom:5px;"/>
-                                  <tbody>
-                                  <tr>
-                                      <td></td>
-                                  </tr>
-                                  <tr ng-repeat="test in testResults">
-                                      <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">
-                                          {{test.bloodTest.testNameShort}}
-                                      </td>
-                                      <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">
-                                          {{test.result}}
-                                      </td>
-                                      <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.testedOn
-                                          | bsisDate}}
-                                      </td>
-                                  </tr>
-                                  </tbody>
-                              </table>
-                            </span>
-                            <span class="col-sm-6">
-                              <span class="h5">
-                              Blood Group Serology Outcomes
-                              </span>
-                              <table class="dash-table">
-                                  <thead>
-                                  <tr>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <th>Test</th>
-                                      <th>Outcome</th>
-                                      <th>Tested On</th>
-                                  </tr>
-                                  </thead>
-                                  <hr style="margin-top:10px; margin-bottom:5px;"/>
-                                  <tbody>
-                                  <tr>
-                                      <td></td>
-                                  </tr>
-                                  <tr ng-repeat="test in testResults">
-                                      <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">
-                                          {{test.bloodTest.testNameShort}}
-                                      </td>
-                                      <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">
-                                          {{test.result}}
-                                      </td>
-                                      <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">
-                                          {{test.testedOn |
-                                          bsisDate}}
-                                      </td>
-                                  </tr>
-                                  </tbody>
-                              </table>
-                            </span>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
+
         </tab>
         <tab active="tabs.demographics">
             <tab-heading>
                 <i class="fa {{icons.BARS}}"></i> Demographics
             </tab-heading>
+
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div ng-include="'views/donors/viewDonorDemographics.html'"></div>
                 </div>
             </div>
+
         </tab>
+
         <tab active="tabs.donations" select="getDonations(donor.id)" has-permission="{{permissions.VIEW_DONATION}}">
             <tab-heading>
                 <i class="fa {{icons.ARCHIVE}}"></i> Donations
             </tab-heading>
+
             <div class="panel panel-default">
                 <div class="panel-body">
+
                     <div ng-switch on="donationsView">
                         <div ng-switch-when="viewDonations">
                             <div ng-include="'views/donors/viewDonations.html'"></div>
@@ -428,15 +352,18 @@
                             <div ng-include="'views/donors/viewDonations.html'"></div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </tab>
+
         <tab active="tabs.deferrals" select="getDeferrals(donor.id)" has-permission="{{permissions.VIEW_DEFERRAL}}">
             <tab-heading>
                 <i class="fa {{icons.WARNING}}"></i> Deferrals
             </tab-heading>
             <div class="panel panel-default">
                 <div class="panel-body">
+
                     <div ng-switch on="deferralView">
                         <div ng-switch-when="viewDeferrals">
                             <div ng-include="'views/donors/viewDeferrals.html'"></div>
@@ -448,8 +375,11 @@
                             <div ng-include="'views/donors/viewDeferrals.html'"></div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
         </tab>
     </tabset>
+
 </div>
