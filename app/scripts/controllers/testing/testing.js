@@ -11,9 +11,6 @@ angular.module('bsis')
 
     var data = [{}];
     $scope.data = data;
-    $scope.openTestBatches = false;
-    $scope.selectedDonationBatches = {};
-    $scope.selectedDonationBatches.ids = [];
 
     var recentTestBatchData = null;
     $scope.recentTestBatchData = recentTestBatchData;
@@ -32,54 +29,16 @@ angular.module('bsis')
       $scope.file = {};
     };
 
-    $scope.clearForm = function(form) {
-      $location.search({});
-      form.$setPristine();
-      $scope.submitted = '';
-    };
-
     $scope.setFile = function(element) {
       $scope.$apply(function(scope) {
         scope.file = element.files[0];
       });
     };
 
-    $scope.getOpenTestBatches = function() {
-
-      TestingService.getOpenTestBatches(function(response) {
-        if (response !== false) {
-          data = response.testBatches;
-          $scope.data = data;
-          if ($scope.testBatchTableParams.data.length >= 0) {
-            $scope.testBatchTableParams.reload();
-          }
-          $scope.openTestBatches = data.length > 0;
-
-        }
-      });
-
-    };
-
-
-    $scope.clearDates = function() {
-      $scope.search.startDate = null;
-      $scope.search.endDate = null;
-    };
-
     var master = {
       status: 'CLOSED',
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: moment().endOf('day').toDate()
-    };
-
-    $scope.clearSearch = function() {
-
-      $scope.searched = false;
-      $scope.search = {
-        status: 'CLOSED',
-        startDate: null,
-        endDate: null
-      };
     };
 
     $scope.search = angular.copy(master);
@@ -115,65 +74,6 @@ angular.module('bsis')
         });
       }
     };
-
-    $scope.getTestBatchFormFields = function() {
-
-      TestingService.getTestBatchFormFields(function(response) {
-        if (response !== false) {
-          TestingService.setDonationBatches(response.donationBatches);
-          $scope.donationBatches = TestingService.getDonationBatches();
-        }
-      });
-
-      $scope.donationBatches = TestingService.getDonationBatches();
-    };
-
-    $scope.getOpenTestBatches();
-    $scope.getTestBatchFormFields();
-
-    $scope.addTestBatch = function(donationBatches, valid) {
-      if (valid) {
-
-        $scope.addingTestBatch = true;
-        TestingService.addTestBatch(donationBatches, function(response) {
-          if (response === true) {
-            $scope.selectedDonationBatches = {};
-            $scope.getOpenTestBatches();
-            $scope.getTestBatchFormFields();
-            $scope.submitted = '';
-          }
-          $scope.addingTestBatch = false;
-        });
-      } else {
-        $scope.submitted = true;
-      }
-    };
-
-    $scope.testBatchTableParams = new ngTableParams({
-      page: 1,            // show first page
-      count: 4,          // count per page
-      filter: {},
-      sorting: {}
-    },
-      {
-        defaultSort: 'asc',
-        counts: [], // hide page counts control
-        total: data.length, // length of data
-        getData: function($defer, params) {
-          var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
-          params.total(orderedData.length); // set total for pagination
-          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
-      });
-
-    $scope.$watch('data', function() {
-      $timeout(function() {
-        $scope.testBatchTableParams.reload();
-      });
-    });
 
     $scope.recentTestBatchesTableParams = new ngTableParams({
       page: 1,            // show first page
@@ -237,29 +137,6 @@ angular.module('bsis')
     };
 
   })
-
-  .controller('TestBatchCtrl', function($scope, $location, TestingService) {
-
-    $scope.viewTestBatch = function(item) {
-      TestingService.setCurrentTestBatch(item.id);
-      $location.path('/viewTestBatch/' + item.id);
-    };
-
-    $scope.recordTestResults = function(item, testCategory) {
-      TestingService.setCurrentTestBatch(item.id);
-      if (testCategory === 'tti') {
-        $location.path('/manageTTITesting/' + item.id + '/BASIC_TTI');
-      } else if (testCategory === 'ttiReentry') {
-        $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
-      } else if (testCategory === 'bloodGrouping') {
-        $location.path('/manageBloodGroupTesting/' + item.id + '/BASIC_BLOODTYPING');
-      } else if (testCategory === 'bloodGroupingReentry') {
-        $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_BLOODTYPING');
-      }
-    };
-
-  })
-
 
   .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, $q, $filter, ngTableParams, $timeout, $routeParams) {
     var data = [{}];

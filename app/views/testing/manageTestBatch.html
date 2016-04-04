@@ -81,9 +81,7 @@
                                                       </ui-select>
                                                       <div>
                                                           <small class="error"
-                                                                 ng-show="
-                                (addTestBatchForm.donationBatches.$invalid && (addTestBatchForm.donationBatches.$dirty || submitted))
-                              ">
+                                                                 ng-show="(addTestBatchForm.donationBatches.$invalid && (addTestBatchForm.donationBatches.$dirty || submitted))">
                                                               Select one or more donation batches
                                                           </small>
                                                       </div>
@@ -98,7 +96,7 @@
                                                       "Add Test Batch"}}
                                                   </button>
                                                   <button class="btn btn-primary" type="button"
-                                                          ng-click="clearForm(addTestBatchForm); clear()">Clear
+                                                          ng-click="clearAddTestBatchForm(addTestBatchForm);">Clear
                                                   </button>
                                               </div>
                                           </div>
@@ -140,7 +138,7 @@
                       <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
                           "Search"}}
                       </button>
-                      <button class="btn btn-primary" type="reset" ng-click="clearSearch()">Clear</button>
+                      <button class="btn btn-primary" type="reset" ng-click="clearClosedBatchesSearch()">Clear</button>
                   </div>
               </form>
               <div ng-switch="recentTestBatches" class="col-sm-12">
