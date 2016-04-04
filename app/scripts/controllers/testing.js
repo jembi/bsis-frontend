@@ -399,6 +399,7 @@ angular.module('bsis')
       data = donations;
       for (var i = 0; i < data.length; i++) {
         data[i].bloodTypingStatusBloodTypingMatchStatus = data[i].bloodTypingStatus + ' ' +  data[i].bloodTypingMatchStatus + '(' + data[i].bloodAbo + data[i].bloodRh + ')';
+        data[i].previousDonationAboRhOutcome = '';
       }
       $scope.gridOptions.data = data;
       $scope.data = data;
@@ -489,6 +490,13 @@ angular.module('bsis')
         cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
         visible: true,
         width: '**'
+      },
+      {
+        name: 'previousDonationAboRhOutcome',
+        displayName: 'Previous ABO/Rh',
+        field: 'previousDonationAboRhOutcome',
+        visible: false,
+        width: '100'
       }
     ];
 
@@ -594,9 +602,15 @@ angular.module('bsis')
             bloodSerology = row.entity.bloodTypingMatchStatus;
           }
           return bloodSerology;
+        } else if (col.name === 'previousDonationAboRhOutcome') {
+          if (row.entity.previousDonationAboRhOutcome === null) {
+            return '';
+          } else {
+            return row.entity.previousDonationAboRhOutcome;
+          }
         }
         // assume that column is a test outcome column, and manage empty values
-        if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue' && col.name !== 'TTI Status' && col.name !== 'bloodTypingStatusBloodTypingMatchStatus') {
+        if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue' && col.name !== 'TTI Status' && col.name !== 'bloodTypingStatusBloodTypingMatchStatus' && col.name !== 'previousDonationAboRhOutcome') {
           for (var test in value) {
             if (test === col.name) {
               return value[test] || '';
@@ -709,11 +723,12 @@ angular.module('bsis')
 
     $scope.export = function(format) {
       TestingService.getTestResultsReport($routeParams.id, function(testResults) {
-        // load test outcomes for test batch
+        // load test outcomes and previous ABO/Rh for each donation in the test batch
         angular.forEach($scope.gridOptions.data, function(item, key) {
           angular.forEach(testResults.testResults, function(donation) {
             if (item.donationIdentificationNumber === donation.donationIdentificationNumber) {
               $scope.gridOptions.data[key].testResults = donation.bloodTestOutcomes;
+              $scope.gridOptions.data[key].previousDonationAboRhOutcome = donation.previousDonationAboRhOutcome;
             }
           });
         });
