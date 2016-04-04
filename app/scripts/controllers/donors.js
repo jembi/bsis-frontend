@@ -651,6 +651,8 @@ angular.module('bsis')
 
     };
 
+    $scope.showTestResults = false;
+
     $scope.viewDonationSummary = function(din) {
 
       $scope.donation = $filter('filter')($scope.donationsData, {donationIdentificationNumber: din})[0];
@@ -664,8 +666,18 @@ angular.module('bsis')
         }
       });
 
+      TestingService.getTestResultsByDIN($scope.donation.donationIdentificationNumber, function(testingResponse) {
+        if (testingResponse !== false) {
+          $scope.testResults = testingResponse.testResults.recentTestResults;
+        }
+      });
+
       $scope.donationsView = 'viewDonationSummary';
 
+    };
+
+    $scope.toggleShowResults = function(show) {
+      $scope.showTestResults = show;
     };
 
     $scope.returnToListView = function() {
@@ -1704,7 +1716,7 @@ angular.module('bsis')
   })
 
   // Controller for Managing the Donor Clinic
-  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, ConfigurationsService, ICONS, PACKTYPE, DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout, $routeParams, $modal) {
+  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, ConfigurationsService, ICONS, PACKTYPE, DATEFORMAT, DONATION, $q, $filter, ngTableParams, $timeout, $routeParams, $modal, TestingService) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -1926,6 +1938,12 @@ angular.module('bsis')
       }
     };
 
+    $scope.showTestResults = false;
+
+    $scope.toggleShowResults = function(show) {
+      $scope.showTestResults = show;
+    };
+
     $scope.viewDonationSummary = function(donation) {
       $scope.donation = donation;
       $scope.donationBatchView = 'viewDonationSummary';
@@ -1938,6 +1956,13 @@ angular.module('bsis')
           $scope.adverseEventTypes = [null].concat(response.adverseEventTypes);
         }
       });
+
+      TestingService.getTestResultsByDIN($scope.donation.donationIdentificationNumber, function(testingResponse) {
+        if (testingResponse !== false) {
+          $scope.testResults = testingResponse.testResults.recentTestResults;
+        }
+      });
+
     };
 
     $scope.viewAddDonationForm = function() {
