@@ -116,7 +116,7 @@
                            e-name="haemoglobinCount"
                            onbeforesave="checkErrors(donationSummaryForm.haemoglobinCount.$error.min,
                         donationSummaryForm.haemoglobinCount.$error.max)">{{donation.haemoglobinCount}}</span>
-                        <span> {{hbUnit}}</span>
+                    <span ng-show="getBooleanValue('donation.hbNumericValue')"> {{hbUnit}}</span>
                         <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
                      <span ng-show="getBooleanValue('donation.hbQualitativeValue')"
                            editable-select="donation.haemoglobinLevel" e-name="haemoglobinLevel"
