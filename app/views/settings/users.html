@@ -12,7 +12,6 @@
 
             <table ng-table="usersTableParams" show-filter="false" class="table">
                 <tr ng-repeat="user in $data"
-                    ng-click="changeSelection(user);"
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': user.$selected}">

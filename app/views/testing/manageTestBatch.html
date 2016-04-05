@@ -20,7 +20,7 @@
 
                               <table ng-table="testBatchTableParams" show-filter="false" class="table">
                                   <tr ng-repeat="testBatch in $data"
-                                      ng-click="viewTestBatch(testBatch); changeSelection(testBatch);"
+                                      ng-click="viewTestBatch(testBatch);"
                                       ng-mouseenter="this.$selected = true"
                                       ng-mouseleave="this.$selected = false"
                                       ng-class="{'active': testBatch.$selected}">
@@ -149,7 +149,7 @@
 
                               <table ng-table="closedTestBatchesTableParams" show-filter="false" class="table">
                                   <tr ng-repeat="testBatch in $data"
-                                      ng-click="viewTestBatch(testBatch); changeSelection(testBatch);"
+                                      ng-click="viewTestBatch(testBatch);"
                                       ng-mouseenter="this.$selected = true"
                                       ng-mouseleave="this.$selected = false"
                                       ng-class="{'active': testBatch.$selected}">

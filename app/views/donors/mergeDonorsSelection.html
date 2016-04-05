@@ -5,7 +5,7 @@
 </alert>
 <table ng-table="manageDuplicateDonorTableParams" show-filter="false" class="table">
     <tr ng-repeat="donor in $data"
-        ng-click="viewDonor(donor); changeSelection(donor);"
+        ng-click="viewDonor(donor);"
         ng-mouseenter="this.$selected = true"
         ng-mouseleave="this.$selected = false"
         ng-class="{'active': donor.$selected}">
@@ -41,12 +41,12 @@
             ng-click="$event.stopPropagation()">
             <div class="radio" style="display:inline-block;">
                 <input id="mergeYes{{donor.donorNumber}}" type="radio" name="merge{{donor.donorNumber}}" ng-value="true"
-                       value="true" ng-model="donor.merge" ng-click="changeSelection(donor.merge);" required>
+                       value="true" ng-model="donor.merge" required>
                 <label for="mergeYes{{donor.donorNumber}}">Yes</label>
             </div>
             <div class="radio" style="display:inline-block;">
                 <input id="mergeNo{{donor.donorNumber}}" type="radio" name="merge{{donor.donorNumber}}" ng-value="false"
-                       value="false" ng-model="donor.merge" ng-click="changeSelection(donor.merge);" required>
+                       value="false" ng-model="donor.merge" required>
                 <label for="mergeNo{{donor.donorNumber}}">No</label>
             </div>
             <small class="error"

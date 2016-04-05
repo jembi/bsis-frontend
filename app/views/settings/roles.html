@@ -12,7 +12,7 @@
 
             <table ng-table="rolesTableParams" show-filter="false" class="table">
                 <tr ng-repeat="role in $data"
-                    ng-click="changeSelection(role); manageRole(role);"
+                    ng-click="manageRole(role);"
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': role.$selected}"
