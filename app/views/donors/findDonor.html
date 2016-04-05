@@ -80,7 +80,7 @@
                     <em> {{data.length}} donor(s) found </em>
             <span has-permission="{{permissions.ADD_DONOR}}">
               <span> | </span>
-              <em ng-show="canAddDonors"><a href="" ng-click="addNewDonor(donorSearch)">Add New Donor</a></em>
+              <em ng-show="canAddDonors"><a ng-href="#/addDonor?firstName={{donorSearch.firstName}}&lastName={{donorSearch.lastName}}" >Add New Donor</a></em>
               <span ng-hide="canAddDonors">
                 <em>Donor Registration Blocked - No Open Donation Batches</em>
                 <span> | </span>
