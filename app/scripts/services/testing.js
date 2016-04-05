@@ -96,11 +96,11 @@ angular.module('bsis')
           response(false);
         });
       },
-      getTestResults: function(testBatch, response) {
-        Api.FindTestResults.query({testBatch: testBatch}, function(testResults) {
-          response(testResults);
-        }, function() {
-          response(false);
+      getTestResultsReport: function(testBatch, onSuccess, onError) {
+        Api.TestResultsReport.query({testBatch: testBatch}, function(testResults) {
+          onSuccess(testResults);
+        }, function(err) {
+          onError(err);
         });
       },
       getCurrentTestResults: function(response) {
