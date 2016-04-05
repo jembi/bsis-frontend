@@ -1,5 +1,8 @@
 angular.module('bsis')
-  .controller('TestBatchCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, DATEFORMAT) {
+  .controller('TestBatchCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, DATEFORMAT, ICONS, PERMISSIONS) {
+
+    $scope.icons = ICONS;
+    $scope.permissions = PERMISSIONS;
 
     // Open batches functions
 
