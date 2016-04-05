@@ -14,9 +14,6 @@
                 href="#/manageTestBatch">Manage Test Batches</a></li>
         <li ng-class="{current: isCurrent('/viewTestSample')}" has-permission="{{permissions.VIEW_TEST_OUTCOME}}"><a
                 href="#/viewTestSample">View Test Sample</a></li>
-        <li class="disabled" has-permission="{{permissions.ADD_TEST_OUTCOME}}"><span>DATA IMPORT</span></li>
-        <li ng-class="{current: isCurrent('/uploadTestResults')}" has-permission="{{permissions.ADD_TEST_OUTCOME}}"><a
-                href="#/uploadTestResults">Upload Test Data</a></li>
     </ul>
     <div ng-include="'views/sidebarFooter.html'"></div>
 </div>

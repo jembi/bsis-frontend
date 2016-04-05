@@ -33,8 +33,6 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, $rootSc
         initialView = '/manageTestBatch';
       } else if ($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_TEST_OUTCOME) > -1) {
         initialView = '/viewTestSample';
-      } else if ($rootScope.sessionUserPermissions.indexOf($scope.permissions.ADD_TEST_OUTCOME) > -1) {
-        initialView = '/uploadTestResults';
       }
 
       // if first time load of /testing view , and path === initialView, return true

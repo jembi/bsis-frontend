@@ -237,12 +237,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/uploadTestResults', {
-        templateUrl: 'views/testing/uploadTestResults.html',
-        controller: 'TestingCtrl',
-        permission: PERMISSIONS.ADD_TEST_OUTCOME,
-        enabled: UI.TESTING_TAB_ENABLED
-      })
 
       // INVENTORY URLs
       .when('/inventory', {
@@ -508,8 +502,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
           $location.path('/manageTestBatch');
         } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_OUTCOME) !== -1)) {
           $location.path('/viewTestSample');
-        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_TEST_OUTCOME) !== -1)) {
-          $location.path('/uploadTestResults');
         } else {
           $location.path('/home');
         }

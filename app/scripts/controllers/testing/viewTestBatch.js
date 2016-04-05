@@ -239,8 +239,6 @@ angular.module('bsis')
 
     };
 
-    $scope.getTests();
-
     $scope.gridOptions = {
       data: [],
       paginationPageSize: 10,
@@ -386,6 +384,7 @@ angular.module('bsis')
 
 
     $scope.export = function(format) {
+      $scope.getTests();
       TestingService.getTestResultsReport($routeParams.id, function(testResults) {
         // load test outcomes and previous ABO/Rh for each donation in the test batch
         angular.forEach($scope.gridOptions.data, function(item, key) {
