@@ -30,43 +30,6 @@ angular.module('bsis')
         scope.file = element.files[0];
       });
     };
-
-    $scope.recordTestResults = function(item, testCategory) {
-      TestingService.setCurrentTestBatch(item.id);
-      if (testCategory === 'tti') {
-        $location.path('/manageTTITesting/' + item.id + '/BASIC_TTI');
-      } else if (testCategory === 'ttiReentry') {
-        $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_TTI');
-      } else if (testCategory === 'bloodGrouping') {
-        $location.path('/manageBloodGroupTesting/' + item.id + '/BASIC_BLOODTYPING');
-      } else if (testCategory === 'bloodGroupingReentry') {
-        $location.path('/reEnterTestOutcomes/' + item.id + '/BASIC_BLOODTYPING');
-      }
-    };
-
-    $scope.recordConfirmatoryBloodGroupMatchTests = function(item) {
-      TestingService.setCurrentTestBatch(item.id);
-      $location.path('/manageBloodGroupMatchTesting/' + item.id);
-    };
-
-    $scope.recordPendingBloodTypingTests = function(item, testCategory) {
-      TestingService.setCurrentTestBatch(item.id);
-      if (testCategory === 'bloodGrouping') {
-        $location.path('/managePendingBloodTypingTests/' + item.id + '/REPEAT_BLOODTYPING');
-      } else if (testCategory === 'bloodGroupingReentry') {
-        $location.path('/reEnterTestOutcomes/' + item.id + '/REPEAT_BLOODTYPING');
-      }
-    };
-
-    $scope.recordPendingTestResults = function(item, testCategory) {
-      TestingService.setCurrentTestBatch(item.id);
-      if (testCategory === 'tti') {
-        $location.path('/managePendingTests/' + item.id + '/CONFIRMATORY_TTI');
-      } else if (testCategory === 'ttiReentry') {
-        $location.path('/reEnterTestOutcomes/' + item.id + '/CONFIRMATORY_TTI');
-      }
-    };
-
   })
 
   .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, $q, $filter, ngTableParams, $timeout, $routeParams) {

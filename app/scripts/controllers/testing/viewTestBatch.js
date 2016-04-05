@@ -40,6 +40,7 @@ angular.module('bsis')
         $scope.testBatch = response.testBatch;
         $scope.refreshCurrentTestBatch();
         $scope.refreshTestBatchAvailableDonations();
+        TestingService.setCurrentTestBatch($scope.testBatch.id);
       }, function(err) {
         $log.error(err);
       });
