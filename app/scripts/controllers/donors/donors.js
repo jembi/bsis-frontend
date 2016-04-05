@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('bsis')
-  
 
   // Controller for Viewing Donors
   .controller('ViewDonorCtrl', function($scope, $location, $modal, $log, Alerting, DonorService, TestingService, ConfigurationsService, ICONS, PACKTYPE, MONTH, TITLE,

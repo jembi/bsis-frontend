@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  
+
 .controller('FindDonorsCtrl', function($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, ICONS, PERMISSIONS, DATEFORMAT, $filter, ngTableParams, $timeout, $q, Alerting, UI, $modal) {
 
   $scope.icons = ICONS;
@@ -232,19 +232,19 @@ angular.module('bsis')
   $scope.updateDonor = function(donor) {
     var d = $q.defer();
     DonorService.updateDonor(donor, function(response) {
-        $scope.donor = response;
-        //Reset Error Message
-        $scope.err = null;
-        d.resolve();
-        if ($scope.donorPermissions) {
-          $scope.donorPermissions.canDelete = response.permissions.canDelete;
-        }
-      },
-      function(err) {
-        $scope.donor = donor;
-        $scope.err = err;
-        d.reject('Server Error');
-      });
+      $scope.donor = response;
+      //Reset Error Message
+      $scope.err = null;
+      d.resolve();
+      if ($scope.donorPermissions) {
+        $scope.donorPermissions.canDelete = response.permissions.canDelete;
+      }
+    },
+    function(err) {
+      $scope.donor = donor;
+      $scope.err = err;
+      d.reject('Server Error');
+    });
     return d.promise;
   };
 
