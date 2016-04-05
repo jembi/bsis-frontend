@@ -7,7 +7,7 @@
 
             <table ng-table="locationsTableParams" show-filter="false" class="table">
                 <tr ng-repeat="location in $data"
-                    ng-click="manageLocation(location); changeSelection(location);"
+                    ng-click="manageLocation(location);"
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': location.$selected}">

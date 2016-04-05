@@ -34,7 +34,6 @@
 
                 <table ng-table="componentsTableParams" show-filter="false" class="table">
                     <tr ng-repeat="component in $data"
-                        ng-click="changeSelection(component);"
                         ng-mouseenter="this.$selected = true"
                         ng-mouseleave="this.$selected = false"
                         ng-class="{'active': component.$selected}">

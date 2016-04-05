@@ -172,71 +172,69 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // TESTING URLs
       .when('/testing', {
-        templateUrl: 'views/testing.html',
-        controller: 'TestBatchCtrl',
+        redirectTo: '/manageTestBatch',
         permission: PERMISSIONS.VIEW_TESTING_INFORMATION,
         enabled: UI.TESTING_TAB_ENABLED
-
       })
       .when('/viewTestSample', {
-        templateUrl: 'views/testing.html',
-        controller: 'TestingCtrl',
+        templateUrl: 'views/testing/viewTestSample.html',
+        controller: 'ViewTestSampleCtrl',
         permission: PERMISSIONS.VIEW_TEST_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
       })
       .when('/manageTestBatch', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/manageTestBatch.html',
         controller: 'TestBatchCtrl',
         permission: PERMISSIONS.VIEW_TEST_BATCH,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/viewTestBatch/:id?', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/viewTestBatch.html',
         controller: 'ViewTestBatchCtrl',
         permission: PERMISSIONS.VIEW_TEST_BATCH,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/manageTTITesting/:id/:bloodTestType', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/manageTTITesting.html',
         controller: 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/reEnterTestOutcomes/:id/:bloodTestType', {
-        templateUrl: 'views/testing.html',
+      .when('/reEnterTTI/:id/:bloodTestType', {
+        templateUrl: 'views/testing/reEnterTTI.html',
         controller: 'TestsReEnterCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
+      .when('/reEnterBloodTyping/:id/:bloodTestType', {
+        templateUrl: 'views/testing/reEnterBloodTyping.html',
+        controller: 'TestsReEnterCtrl',
+        permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
+        enabled: UI.TESTING_TAB_ENABLED
+      })
       .when('/managePendingTests/:id/:bloodTestType', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/managePendingTests.html',
         controller: 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/manageBloodGroupTesting/:id/:bloodTestType', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/manageBloodGroupTesting.html',
         controller: 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/manageBloodGroupMatchTesting/:id', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/manageBloodGroupMatchTesting.html',
         controller: 'AmbiguousBloodTypingTestingCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/managePendingBloodTypingTests/:id/:bloodTestType', {
-        templateUrl: 'views/testing.html',
+        templateUrl: 'views/testing/managePendingBloodTypingTests.html',
         controller: 'RecordTestResultsCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
-        enabled: UI.TESTING_TAB_ENABLED
-      })
-      .when('/uploadTestResults', {
-        templateUrl: 'views/testing.html',
-        controller: 'TestingCtrl',
-        permission: PERMISSIONS.ADD_TEST_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
 
@@ -459,7 +457,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
   }])
 
-  .run(['$rootScope', '$location', 'AuthService', function($rootScope, $location, AuthService) {
+  .run(['$rootScope', '$location', 'AuthService', 'PERMISSIONS', function($rootScope, $location, AuthService, PERMISSIONS) {
 
     $rootScope.$on('$locationChangeStart', function() { //eslint-disable-line angular/on-watch
 
@@ -498,19 +496,16 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         }
       }
 
-      /*
-       //console.log("in locationChangeStart: ");
-       //if (!AuthService.isAuthorized($location.path)) {
-       if (!$rootScope.isLoggedIn){
-       //console.log("Attempt to access unauthorized route");
-       // event.preventDefault();
-       if($rootScope.isLoggedIn) {
-       $location.path( "/home" );
-       } else {
-       $location.path( "/" );
-       }
-       }
-       */
+      if ($location.path() === '/testing') {
+        // Initial routing for testing page
+        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_BATCH) !== -1)) {
+          $location.path('/manageTestBatch');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_OUTCOME) !== -1)) {
+          $location.path('/viewTestSample');
+        } else {
+          $location.path('/home');
+        }
+      }
     });
   }])
 

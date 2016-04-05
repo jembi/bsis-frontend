@@ -20,7 +20,6 @@
 
         <table ng-table="donationTableParams" class="table">
             <tr ng-repeat="donation in $data"
-                ng-click="changeSelection(donation);"
                 ng-mouseenter="this.$selected = true"
                 ng-mouseleave="this.$selected = false"
                 ng-class="{'active': donation.$selected}">
