@@ -73,61 +73,61 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         reloadOnSearch: reloadOnSearch
       })
       .when('/addDonor', {
-        templateUrl: 'views/donors.html',
+        templateUrl: 'views/donors/addDonor.html',
         controller: 'AddDonorCtrl',
         permission: PERMISSIONS.ADD_DONOR,
         enabled: UI.DONORS_TAB_ENABLED
       })
       .when('/duplicateDonors', {
-        templateUrl: 'views/donors.html',
+        templateUrl: 'views/donors/duplicateDonors.html',
         controller: 'DonorsDuplicateCtrl',
         permission: PERMISSIONS.VIEW_DUPLICATE_DONORS,
         enabled: UI.DONORS_TAB_ENABLED
       })
       .when('/manageDuplicateDonors', {
-        templateUrl: 'views/donors.html',
+        templateUrl: 'views/donors/manageDuplicateDonors.html',
         controller: 'ManageDonorsDuplicateCtrl',
         permission: PERMISSIONS.MERGE_DONORS,
         enabled: UI.DONORS_TAB_ENABLED
       })
       .when('/manageClinic/:id?', {
-        templateUrl: 'views/donors.html',
+        templateUrl: 'views/donors/manageClinic.html',
         controller: 'ViewDonationBatchCtrl',
         permission: PERMISSIONS.VIEW_DONATION_BATCH,
         enabled: UI.DONORS_TAB_ENABLED
       })
       .when('/locations', {
-        templateUrl: 'views/donors.html',
+        templateUrl: 'views/donors/locations.html',
         controller: 'LocationsCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
       .when('/exportDonorList', {
-        templateUrl: 'views/donors.html',
+        templateUrl: 'views/donors/donorCommunications.html',
         controller: 'DonorCommunicationsCtrl',
         permission: PERMISSIONS.EXPORT_CLINIC_DATA,
         enabled: UI.DONORS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
       })
       .when('/viewDonor/:id?', {
-        templateUrl: 'views/donors.html',
+        templateUrl: 'views/donors/viewDonor.html',
         controller: 'ViewDonorCtrl',
         permission: PERMISSIONS.VIEW_DONOR,
         enabled: UI.DONORS_TAB_ENABLED
       })
       .when('/manageDonationBatches', {
-        templateUrl: 'views/donors.html',
+        templateUrl: 'views/donors/manageDonationBatches.html',
         controller: 'DonorClinicCtrl',
         permission: PERMISSIONS.VIEW_DONATION_BATCH,
         enabled: UI.DONORS_TAB_ENABLED
       })
       .when('/donorCounselling', {
-        templateUrl: 'views/donors.html',
+        templateUrl: 'views/donors/donorCounselling.html',
         controller: 'DonorCounsellingCtrl',
         permission: PERMISSIONS.VIEW_POST_DONATION_COUNSELLING_DONORS,
         reloadOnSearch: reloadOnSearch
       })
       .when('/donorCounselling/:donorId', {
-        templateUrl: 'views/donors.html',
+        templateUrl: 'views/donors/donorCounsellingDetails.html',
         controller: 'DonorCounsellingDetailsCtrl',
         permission: PERMISSIONS.VIEW_POST_DONATION_COUNSELLING
       })
