@@ -14,7 +14,7 @@
 
                 <table ng-table="duplicateDonorTableParams" show-filter="false" class="table">
                     <tr ng-repeat="duplicate in $data"
-                        ng-click="viewDuplicates(duplicate); changeSelection(duplicate);"
+                        ng-click="viewDuplicates(duplicate);"
                         ng-mouseenter="this.$selected = true"
                         ng-mouseleave="this.$selected = false"
                         ng-class="{'active': duplicate.$selected}">

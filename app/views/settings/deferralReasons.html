@@ -12,7 +12,7 @@
             </p>
             <table ng-table="deferralsTableParams" show-filter="false" class="table">
                 <tr ng-repeat="deferral in $data"
-                    ng-click="changeSelection(deferral); manageDeferralReason(deferral);"
+                    ng-click="manageDeferralReason(deferral);"
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': deferral.$selected}">

@@ -22,7 +22,6 @@
 
         <table ng-table="deferralTableParams" class="table">
             <tr ng-repeat="deferral in $data"
-                ng-click="changeSelection(deferral);"
                 ng-mouseenter="this.$selected = true"
                 ng-mouseleave="this.$selected = false"
                 ng-class="{'active': deferral.$selected}">

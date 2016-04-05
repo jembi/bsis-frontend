@@ -12,7 +12,7 @@
             </p>
             <table ng-table="configurationsTableParams" show-filter="false" class="table">
                 <tr ng-repeat="configuration in $data"
-                    ng-click="changeSelection(configuration); manageConfiguration(configuration);"
+                    ng-click="manageConfiguration(configuration);"
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': configuration.$selected}">

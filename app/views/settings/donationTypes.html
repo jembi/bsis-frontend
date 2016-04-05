@@ -12,7 +12,7 @@
             </p>
             <table ng-table="donationsTableParams" show-filter="false" class="table">
                 <tr ng-repeat="donationType in donationTypes"
-                    ng-click="changeSelection(donationType); manageDonationType(donationType);"
+                    ng-click="manageDonationType(donationType);"
                     ng-mouseenter="this.$selected = true"
                     ng-mouseleave="this.$selected = false"
                     ng-class="{'active': donationType.$selected}">
