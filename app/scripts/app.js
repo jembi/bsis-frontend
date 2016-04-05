@@ -61,14 +61,13 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // DONORS URLs
       .when('/donors', {
-        templateUrl: 'views/donors.html',
-        controller: 'DonorsCtrl',
+        redirectTo: '/findDonor',
         permission: PERMISSIONS.VIEW_DONOR_INFORMATION,
         enabled: UI.DONORS_TAB_ENABLED
       })
       .when('/findDonor', {
-        templateUrl: 'views/donors.html',
-        controller: 'DonorsCtrl',
+        templateUrl: 'views/donors/findDonor.html',
+        controller: 'FindDonorsCtrl',
         permission: PERMISSIONS.VIEW_DONOR,
         enabled: UI.DONORS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
