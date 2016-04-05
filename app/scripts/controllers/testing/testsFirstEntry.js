@@ -1,36 +1,6 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('TestingCtrl', function($scope, $rootScope, $location, TestingService, ICONS, PERMISSIONS, BLOODABO, BLOODRH, DATEFORMAT, $filter, ngTableParams, $timeout, $routeParams) {
-
-    $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
-    $scope.bloodAboOptions = BLOODABO;
-    $scope.bloodRhOptions = BLOODRH;
-    $scope.dateFormat = DATEFORMAT;
-
-    var data = [{}];
-    $scope.data = data;
-
-    $scope.ttiTests = [];
-    $scope.bloodTypingStatus = [];
-
-    $scope.go = function(path) {
-      $location.path(path + '/' + $routeParams.id);
-    };
-
-    $scope.clear = function() {
-      $location.search({});
-      $scope.selectedDonationBatches = {};
-      $scope.file = {};
-    };
-
-    $scope.setFile = function(element) {
-      $scope.$apply(function(scope) {
-        scope.file = element.files[0];
-      });
-    };
-  })
 
   .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, $q, $filter, ngTableParams, $timeout, $routeParams) {
     var data = [{}];
@@ -40,26 +10,40 @@ angular.module('bsis')
       $location.path(path + '/' + $routeParams.id);
     };
 
-    $scope.getTests = function() {
-      TestingService.getTTITestingFormFields(function(response) {
-        if (response !== false) {
-          $scope.ttiTestsBasic = response.basicTTITests;
-          $scope.ttiTestsPending = response.pendingTTITests;
-        }
-      });
-      TestingService.getBloodGroupTestingFormFields(function(response) {
-        if (response !== false) {
-          $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
-          $scope.bloodTypingTestsRepeat = response.repeatBloodTypingTests;
-        }
-      });
+    // This test names will be the column names. They are specific to each blood test type.
+    var getTestNames = function() {
+      var bloodTestType = $routeParams.bloodTestType;
+      if (bloodTestType === 'BASIC_TTI') {
+        TestingService.getTTITestingFormFields(function(response) {
+          if (response !== false) {
+            $scope.testNames = response.basicTTITests;
+          }
+        });
+      } else if (bloodTestType === 'BASIC_BLOODTYPING') {
+        TestingService.getBloodGroupTestingFormFields(function(response) {
+          if (response !== false) {
+            $scope.testNames = response.basicBloodTypingTests;
+          }
+        });
+      } else if (bloodTestType === 'REPEAT_BLOODTYPING') {
+        TestingService.getBloodGroupTestingFormFields(function(response) {
+          if (response !== false) {
+            $scope.testNames = response.repeatBloodTypingTests;
+          }
+        });
+      } else if (bloodTestType === 'CONFIRMATORY_TTI') {
+        TestingService.getTTITestingFormFields(function(response) {
+          if (response !== false) {
+            $scope.testNames = response.pendingTTITests;
+          }
+        });
+      }
     };
 
-    $scope.getCurrentTestResults = function() {
+    var getTestOutcomes = function() {
 
       $scope.searching = true;
       $scope.allTestOutcomes = {};
-      $scope.addTestMatchResults = {};
 
       TestingService.getTestOutcomesByBatchIdAndBloodTestType($routeParams.id, $routeParams.bloodTestType, function(response) {
         if (response !== false) {
@@ -81,15 +65,12 @@ angular.module('bsis')
       });
     };
 
-    $scope.getTests();
-    $scope.getCurrentTestResults();
+    getTestNames();
+    getTestOutcomes();
 
     $scope.saveTestResults = function(testResults, reEntry) {
-
       $scope.savingTestResults = true;
-
       var requests = [];
-
       angular.forEach(testResults, function(value) {
         var request = TestingService.saveTestResults(value, reEntry, angular.noop);
         requests.push(request);
@@ -104,20 +85,9 @@ angular.module('bsis')
 
     };
 
-    $scope.getBloodTestId = function(testNameShort) {
-      var testId = null;
-      angular.forEach($scope.data[0].recentTestResults, function(value, key) {
-        if (value.bloodTest.testNameShort == testNameShort) {
-          testId = key;
-        }
-      });
-      return testId;
-    };
-
     $scope.testOutcomesTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 10,          // count per page
-      filter: {},
       sorting: {}
     },
       {
@@ -125,8 +95,7 @@ angular.module('bsis')
         counts: [], // hide page counts control
         total: data.length, // length of data
         getData: function($defer, params) {
-          var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : data;
+          var orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
