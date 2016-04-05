@@ -24,9 +24,6 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, $rootSc
           return true;
         }
       }
-    } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
-      $location.path(path);
-      return true;
     } else if ($location.path() === path) {
       return true;
     } else {
