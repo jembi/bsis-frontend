@@ -23,6 +23,11 @@
                        ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                        ng-class="{'ng-invalid ng-dirty' : addDonorForm.firstName.$invalid && submitted}"
                 >
+                <input size="15" id="middleName" name="middleName" class="form-control input-sm" placeholder="Middle"
+                       ng-model="donor.middleName" ng-maxlength=20 alpha-name
+                       ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
+                       ng-class="{'ng-invalid ng-dirty' : addDonorForm.middleName.$invalid && submitted}"
+                >
                 <input size="15" id="lastName" name="lastName" class="form-control input-sm" placeholder="Last"
                        ng-model="donor.lastName" required ng-minlength=1 ng-maxlength=20 alpha-name
                        ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
@@ -37,7 +42,7 @@
                     <small class="error"
                            ng-show="
               (addDonorForm.firstName.$error.required && (addDonorForm.firstName.$dirty || submitted)) ||
-              (addDonorForm.lastName.$error.required  && (addDonorForm.lastName.$dirty  || submitted)) 
+              (addDonorForm.lastName.$error.required  && (addDonorForm.lastName.$dirty  || submitted))
             ">
                         This cannot be empty
                     </small>

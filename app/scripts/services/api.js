@@ -227,6 +227,15 @@ angular.module('bsis')
         }
       ),
 
+      TestResultsReport: $resource(url + '/testresults/report', {},
+        {
+          query: {
+            method: 'GET',
+            params: {testBatch: '@testBatch'}
+          }
+        }
+      ),
+
       TestResults: $resource(url + '/testresults/:donationIdentificationNumber', null,
         {
           update: {method: 'PUT'}
