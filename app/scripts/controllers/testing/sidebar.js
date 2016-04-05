@@ -3,23 +3,27 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, $rootSc
   $scope.icons = ICONS;
   $scope.permissions = PERMISSIONS;
 
+  var manageTestBatchRoutes = [
+    '/manageTestBatch',
+    '/viewTestBatch',
+    '/manageTTITesting',
+    '/reEnterTTI',
+    '/reEnterBloodTyping',
+    '/managePendingTests',
+    '/managePendingBloodTypingTests',
+    '/manageBloodGroupTesting',
+    '/manageBloodGroupMatchTesting'
+  ];
+
   $scope.isCurrent = function(path) {
-    if ($location.path().indexOf('/viewTestBatch') === 0 && path === '/manageTestBatch') {
-      return true;
-    } else if ($location.path().indexOf('/manageTTITesting') === 0 && path === '/manageTestBatch') {
-      return true;
-    } else if ($location.path().indexOf('/reEnterTTI') === 0 && path === '/manageTestBatch') {
-      return true;
-    } else if ($location.path().indexOf('/reEnterBloodTyping') === 0 && path === '/manageTestBatch') {
-      return true;
-    } else if ($location.path().indexOf('/managePendingTests') === 0 && path === '/manageTestBatch') {
-      return true;
-    } else if ($location.path().indexOf('/managePendingBloodTypingTests') === 0 && path === '/manageTestBatch') {
-      return true;
-    } else if ($location.path().indexOf('/manageBloodGroupTesting') === 0 && path === '/manageTestBatch') {
-      return true;
-    } else if ($location.path().indexOf('/manageBloodGroupMatchTesting') === 0 && path === '/manageTestBatch') {
-      return true;
+
+    if (path === '/manageTestBatch') {
+      // Check if any of the manage test batch routes are active
+      for (var i = 0; i < manageTestBatchRoutes.length; i++) {
+        if ($location.path().indexOf(manageTestBatchRoutes[i]) === 0) {
+          return true;
+        }
+      }
     } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
       $location.path(path);
       return true;
@@ -28,11 +32,11 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, $rootSc
     } else {
       var initialView = '';
       // for first time load of /testing view, determine the initial view
-      if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_TEST_BATCH) > -1)) {
+      if ($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_TEST_BATCH) > -1) {
         initialView = '/manageTestBatch';
-      } else if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_TEST_OUTCOME) > -1)) {
+      } else if ($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_TEST_OUTCOME) > -1) {
         initialView = '/viewTestSample';
-      } else if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.ADD_TEST_OUTCOME) > -1)) {
+      } else if ($rootScope.sessionUserPermissions.indexOf($scope.permissions.ADD_TEST_OUTCOME) > -1) {
         initialView = '/uploadTestResults';
       }
 
