@@ -46,7 +46,7 @@
                           ng-click="testOutcomesTableParams.sorting('bloodTypingMatchStatus', testOutcomesTableParams.isSortBy('bloodTypingMatchStatus', 'asc') ? 'desc' : 'asc')">
                           <div>Blood Typing Status <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> </div>
                       </th>
-                      <th ng-repeat="column in bloodTypingTestsBasic" ng-show="true"
+                      <th ng-repeat="column in testNames" ng-show="true"
                           class="text-center" ng-class=""
                           ng-click="">
                           <div>{{column.testNameShort}}</div>
@@ -67,7 +67,7 @@
                           <td>
                               <span ng-if="sample.bloodTypingStatus!= 'NOT_DONE'">{{sample.bloodTypingStatus}} - </span>{{sample.bloodTypingMatchStatus}}
                           </td>
-                          <td align="center" ng-repeat="test in bloodTypingTestsBasic">
+                          <td align="center" ng-repeat="test in testNames">
                               <div style="width:90px;">
                                   <ui-select
                                           ng-model="allTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id]"
