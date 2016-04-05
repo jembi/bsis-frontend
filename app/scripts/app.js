@@ -201,25 +201,13 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/reEnterTestOutcomes/:id/BASIC_TTI', {
+      .when('/reEnterTTI/:id/:bloodTestType', {
         templateUrl: 'views/testing/reEnterTTI.html',
         controller: 'TestsReEnterCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/reEnterTestOutcomes/:id/CONFIRMATORY_TTI', {
-        templateUrl: 'views/testing/reEnterTTI.html',
-        controller: 'TestsReEnterCtrl',
-        permission: PERMISSIONS.ADD_TTI_OUTCOME,
-        enabled: UI.TESTING_TAB_ENABLED
-      })
-      .when('/reEnterTestOutcomes/:id/BASIC_BLOODTYPING', {
-        templateUrl: 'views/testing/reEnterBloodTyping.html',
-        controller: 'TestsReEnterCtrl',
-        permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
-        enabled: UI.TESTING_TAB_ENABLED
-      })
-      .when('/reEnterTestOutcomes/:id/REPEAT_BLOODTYPING', {
+      .when('/reEnterBloodTyping/:id/:bloodTestType', {
         templateUrl: 'views/testing/reEnterBloodTyping.html',
         controller: 'TestsReEnterCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,

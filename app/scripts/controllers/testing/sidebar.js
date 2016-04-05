@@ -8,7 +8,9 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, $rootSc
       return true;
     } else if ($location.path().indexOf('/manageTTITesting') === 0 && path === '/manageTestBatch') {
       return true;
-    } else if ($location.path().indexOf('/reEnterTestOutcomes') === 0 && path === '/manageTestBatch') {
+    } else if ($location.path().indexOf('/reEnterTTI') === 0 && path === '/manageTestBatch') {
+      return true;
+    } else if ($location.path().indexOf('/reEnterBloodTyping') === 0 && path === '/manageTestBatch') {
       return true;
     } else if ($location.path().indexOf('/managePendingTests') === 0 && path === '/manageTestBatch') {
       return true;
