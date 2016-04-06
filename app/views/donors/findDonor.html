@@ -93,6 +93,7 @@
                 <table ng-table="tableParams" show-filter="false" class="table">
                     <tr ng-repeat="donor in $data"
                         ng-click="viewDonor(donor);"
+                        role="button"
                         ng-mouseenter="this.$selected = true"
                         ng-mouseleave="this.$selected = false"
                         ng-class="{'active': donor.$selected}">

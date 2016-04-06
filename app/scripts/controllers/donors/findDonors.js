@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-.controller('FindDonorsCtrl', function($scope, $location, $routeParams, ngTableParams, $filter, $timeout, DonorService, Alerting) {
+.controller('FindDonorsCtrl', function($scope, $location, $routeParams, ngTableParams, $filter, $timeout, DonorService, DATEFORMAT, Alerting) {
 
   $scope.donorSearch = $routeParams;
 
@@ -34,6 +34,20 @@ angular.module('bsis')
       $scope.searchResults = false;
       $scope.searching = false;
     });
+  };
+
+  $scope.viewDonor = function(item) {
+
+    $scope.donor = item;
+    DonorService.setDonor(item);
+
+    $scope.format = DATEFORMAT;
+    $scope.initDate = item.birthDate;
+    $scope.calIcon = 'fa-calendar';
+
+    $scope.donorBirthDateOpen = false;
+
+    $location.path('/viewDonor/' + item.id).search({});
   };
 
   if ($routeParams.search) {

@@ -57,19 +57,7 @@ angular.module('bsis')
       $scope.submitted = '';
     };
 
-    $scope.viewDonor = function(item) {
-
-      $scope.donor = item;
-      DonorService.setDonor(item);
-
-      $scope.format = DATEFORMAT;
-      $scope.initDate = item.birthDate;
-      $scope.calIcon = 'fa-calendar';
-
-      $scope.donorBirthDateOpen = false;
-
-      $location.path('/viewDonor/' + item.id).search({});
-    };
+    
 
     $scope.addNewDonor = function(donor) {
       DonorService.setDonor(donor);
