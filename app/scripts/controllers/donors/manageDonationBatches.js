@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorClinicCtrl', function($scope, $location, $log, DonorService, ICONS, PACKTYPE, $q, $filter, DATEFORMAT, ngTableParams, $timeout) {
+angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, $location, $log, DonorService, ICONS, PACKTYPE, $q, $filter, DATEFORMAT, ngTableParams, $timeout) {
 
   var data = [];
   var recentDonationBatchData = null;
