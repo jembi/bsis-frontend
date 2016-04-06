@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('DonorsCtrl', function($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, DATEFORMAT, $filter, ngTableParams, $timeout, $q, Alerting, UI, $modal) {
+  .controller('DonorsCtrl', function($scope, $rootScope, $location, $routeParams, ConfigurationsService, DonorService, DATEFORMAT, $filter, ngTableParams, $timeout, $q, Alerting, UI) {
 
     $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
     $scope.alerts = Alerting.getAlerts();
@@ -55,83 +55,6 @@ angular.module('bsis')
       form.$setPristine();
       $location.search({});
       $scope.submitted = '';
-    };
-
-    $scope.addNewDonor = function(donor) {
-      DonorService.setDonor(donor);
-      $location.path('/addDonor');
-    };
-
-    var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
-    var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
-    var minBirthDate = moment().subtract(maxAge, 'years');
-    var maxBirthDate = moment().subtract(minAge, 'years');
-
-    function confirmAddDonor(birthDate) {
-
-      var message;
-      if (birthDate.isBefore(minBirthDate)) {
-        message = 'This donor is over the maximum age of ' + maxAge + '.';
-      } else if (birthDate.isAfter(maxBirthDate)) {
-        message = 'This donor is below the minimum age of ' + minAge + '.';
-      } else {
-        // Don't show confirmation
-        return Promise.resolve(null);
-      }
-      message += ' Are you sure that you want to continue?';
-
-      var modal = $modal.open({
-        animation: false,
-        templateUrl: 'views/confirmModal.html',
-        controller: 'ConfirmModalCtrl',
-        resolve: {
-          confirmObject: {
-            title: 'Invalid donor',
-            button: 'Add donor',
-            message: message
-          }
-        }
-      });
-
-      return modal.result;
-    }
-
-    $scope.addDonor = function(newDonor, dob, valid) {
-
-      if (valid) {
-
-        newDonor.birthDate = dob.year + '-' + dob.month + '-' + dob.dayOfMonth;
-        var birthDate = moment(newDonor.birthDate, 'YYYY-MM-DD');
-
-        if (!moment(birthDate).isValid()) {
-          $scope.dobValid = false;
-          $scope.addingDonor = false;
-        } else {
-
-          confirmAddDonor(birthDate).then(function() {
-
-            $scope.addingDonor = true;
-
-            DonorService.addDonor(newDonor, function(donor) {
-
-              $scope.format = DATEFORMAT;
-              $scope.initDate = $scope.donor.birthDate;
-              $scope.donorBirthDateOpen = false;
-              $scope.submitted = '';
-              $location.path('/viewDonor/' + donor.id).search({});
-            }, function(err) {
-              $scope.errorMessage = err.userMessage;
-              $scope.err = err;
-              if (err['donor.birthDate']) {
-                $scope.dobValid = false;
-              }
-              $scope.addingDonor = false;
-            });
-          });
-        }
-      } else {
-        $scope.submitted = true;
-      }
     };
 
     $scope.updateDonor = function(donor) {
@@ -926,33 +849,6 @@ angular.module('bsis')
           .search({failed: true}); // If I do not set a parameter the route does not change, this needs to happen to refresh the donor.
       });
     };
-
-
-  })
-
-  // Controller for Adding Donors
-  .controller('AddDonorCtrl', function($scope, $location, DonorService, MONTH, TITLE, GENDER) {
-
-    DonorService.getDonorFormFields(function(response) {
-      if (response !== false) {
-        $scope.data = response;
-        $scope.addressTypes = $scope.data.addressTypes;
-        $scope.languages = $scope.data.languages;
-        $scope.venues = $scope.data.venues;
-        $scope.donor = $scope.data.addDonorForm;
-        $scope.searchDonor = DonorService.getDonor();
-        $scope.donor.firstName = $scope.searchDonor.firstName;
-        $scope.donor.lastName = $scope.searchDonor.lastName;
-
-        // clear $scope.searchDonor fields after assigning them to $scope.donor
-        $scope.searchDonor.firstName = '';
-        $scope.searchDonor.lastName = '';
-
-        $scope.title = TITLE.options;
-        $scope.month = MONTH.options;
-        $scope.gender = GENDER.options;
-      }
-    });
 
 
   })
