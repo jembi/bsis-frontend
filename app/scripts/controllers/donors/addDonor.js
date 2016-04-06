@@ -8,26 +8,24 @@ angular.module('bsis')
     var minBirthDate = moment().subtract(maxAge, 'years');
     var maxBirthDate = moment().subtract(minAge, 'years');
 
-    DonorService.getDonorFormFields(function(response) {
-      if (response !== false) {
-        $scope.data = response;
-        $scope.addressTypes = $scope.data.addressTypes;
-        $scope.languages = $scope.data.languages;
-        $scope.venues = $scope.data.venues;
-        $scope.donor = $scope.data.addDonorForm;
-        $scope.searchDonor = DonorService.getDonor();
-        $scope.donor.firstName = $routeParams.firstName;
-        $scope.donor.lastName = $routeParams.lastName;
+    function initialiseDonorForm() {
+      DonorService.getDonorFormFields(function(response) {
+        if (response !== false) {
+          $scope.data = response;
+          $scope.addressTypes = $scope.data.addressTypes;
+          $scope.languages = $scope.data.languages;
+          $scope.venues = $scope.data.venues;
+          $scope.donor = $scope.data.addDonorForm;
+          $scope.searchDonor = DonorService.getDonor();
+          $scope.donor.firstName = $routeParams.firstName;
+          $scope.donor.lastName = $routeParams.lastName;
 
-        // clear $scope.searchDonor fields after assigning them to $scope.donor
-        $scope.searchDonor.firstName = '';
-        $scope.searchDonor.lastName = '';
-
-        $scope.title = TITLE.options;
-        $scope.month = MONTH.options;
-        $scope.gender = GENDER.options;
-      }
-    });
+          $scope.title = TITLE.options;
+          $scope.month = MONTH.options;
+          $scope.gender = GENDER.options;
+        }
+      });
+    }
 
     function confirmAddDonor(birthDate) {
 
@@ -95,5 +93,7 @@ angular.module('bsis')
         $scope.submitted = true;
       }
     };
+
+    initialiseDonorForm();
 
   });
