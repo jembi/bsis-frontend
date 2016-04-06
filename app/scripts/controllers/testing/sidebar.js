@@ -2,6 +2,7 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, $rootSc
 
   $scope.icons = ICONS;
   $scope.permissions = PERMISSIONS;
+  $scope.currentPath = '';
 
   var manageTestBatchRoutes = [
     '/manageTestBatch',
@@ -15,33 +16,28 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, $rootSc
     '/manageBloodGroupMatchTesting'
   ];
 
-  $scope.isCurrent = function(path) {
+  var viewTestSampleRoutes = [
+    '/viewTestSample'
+  ];
 
-    if (path === '/manageTestBatch') {
-      // Check if any of the manage test batch routes are active
-      for (var i = 0; i < manageTestBatchRoutes.length; i++) {
-        if ($location.path().indexOf(manageTestBatchRoutes[i]) === 0) {
-          return true;
-        }
-      }
-    } else if ($location.path() === path) {
-      return true;
-    } else {
-      var initialView = '';
-      // for first time load of /testing view, determine the initial view
-      if ($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_TEST_BATCH) > -1) {
-        initialView = '/manageTestBatch';
-      } else if ($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_TEST_OUTCOME) > -1) {
-        initialView = '/viewTestSample';
-      }
-
-      // if first time load of /testing view , and path === initialView, return true
-      if ($location.path() === '/testing' && path === initialView) {
-        $location.path(initialView);
+  var findValidRoute = function(routesArray) {
+    for (var i = 0; i < routesArray.length; i++) {
+      if ($location.path().indexOf(routesArray[i]) === 0) {
         return true;
       }
-
-      return false;
     }
   };
+
+  var setCurrentPath = function() {
+    var currentPath = '';
+    if (findValidRoute(manageTestBatchRoutes)) {
+      currentPath = '/manageTestBatch';
+    } else if (findValidRoute(viewTestSampleRoutes)) {
+      currentPath = '/viewTestSample';
+    }
+    $scope.currentPath = currentPath;
+  };
+
+  setCurrentPath();
+
 });
