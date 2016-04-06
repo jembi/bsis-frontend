@@ -2,6 +2,7 @@ angular.module('bsis').controller('DonorsSidebarCtrl', function($scope, $rootSco
 
   $scope.icons = ICONS;
   $scope.permissions = PERMISSIONS;
+  $scope.currentPath = '';
 
   var manageDonorsRoutes = [
     '/viewDonor',
@@ -38,23 +39,6 @@ angular.module('bsis').controller('DonorsSidebarCtrl', function($scope, $rootSco
     }
   };
 
-  var getInitialPath = function() {
-    var initialPath = '';
-    if ($location.path() === '/donors') {
-      // for first time load of /donors view, determine the initial path
-      if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_DONOR) > -1)) {
-        initialPath = '/findDonor';
-      } else if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_DONATION_BATCH) > -1)) {
-        initialPath = '/manageDonationBatches';
-      } else if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.EXPORT_CLINIC_DATA) > -1)) {
-        initialPath = '/exportDonorList';
-      }
-    }
-    return initialPath;
-  };
-
-  $scope.currentPath = '';
-
   var setCurrentPath = function() {
     var currentPath = '';
     if (findValidRoute(manageDonorsRoutes)) {
@@ -69,9 +53,6 @@ angular.module('bsis').controller('DonorsSidebarCtrl', function($scope, $rootSco
       currentPath = '/donorCounselling';
     } else if (findValidRoute(exportDonorsRoutes)) {
       currentPath = '/exportDonorList';
-    } else {
-
-      currentPath = getInitialPath();
     }
     $scope.currentPath = currentPath;
   };

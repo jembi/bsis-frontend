@@ -505,6 +505,19 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
           $location.path('/home');
         }
       }
+
+      if ($location.path() === '/donors') {
+        // Initial routing for donors page
+        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_DONOR) > -1)) {
+          $location.path('/findDonor');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_DONATION_BATCH) > -1)) {
+          $location.path('/manageDonationBatches');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.EXPORT_CLINIC_DATA) > -1)) {
+          $location.path('/exportDonorList');
+        } else {
+          $location.path('/home');
+        }
+      }
     });
   }])
 
