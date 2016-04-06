@@ -33,7 +33,7 @@ module.exports = function(grunt) {
         tasks: ['bowerInstall']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['<%= yeoman.app %>/scripts/**/*.js'],
         tasks: ['newer:eslint:src'],
         options: {
           livereload: true
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
     eslint: {
       src: [
         'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/{,*/}*.js',
+        '<%= yeoman.app %>/scripts/**/*.js',
         '!<%= yeoman.app %>/scripts/jquery.min.js',
         '!<%= yeoman.app %>/scripts/bootstrap.min.js'
       ],
