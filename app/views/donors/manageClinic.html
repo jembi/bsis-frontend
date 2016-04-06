@@ -44,7 +44,7 @@
         <!-- Edit donor actions -->
       <div has-permission="{{permissions.EDIT_DONATION_BATCH}}" ng-hide="confirmDelete || confirmClose || confirmReopen"
            style="display:inline;">
-          <em><a href="" type="button" class="btn btn-link" ng-click="editableForm.$show(); confirmEdit = true"
+          <em><a href="" type="button" class="btn btn-link" ng-click="editableForm.$setPristine(); editableForm.$show(); confirmEdit = true"
                  ng-hide="confirmEdit" ng-disabled="!donationBatch.permissions.canEdit">Edit</a></em>
         <span ng-show="confirmEdit">
           <em>
