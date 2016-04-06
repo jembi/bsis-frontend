@@ -35,7 +35,7 @@ angular.module('bsis')
     $scope.closeAlert = function(alertScope, index) {
       Alerting.alertClose(alertScope, index);
     };
-    
+
 
     $scope.clear = function(form) {
       if (form) {
@@ -56,8 +56,6 @@ angular.module('bsis')
       $location.search({});
       $scope.submitted = '';
     };
-
-    
 
     $scope.addNewDonor = function(donor) {
       DonorService.setDonor(donor);
