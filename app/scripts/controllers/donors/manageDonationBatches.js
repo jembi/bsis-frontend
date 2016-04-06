@@ -169,6 +169,10 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
     $location.path('/manageClinic/' + item.id);
   };
 
+  $scope.selectTab = function() {
+    $scope.$applyAsync();
+  };
+
   // Execute methods
   getOpenDonationBatches();
 
