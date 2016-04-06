@@ -116,7 +116,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       })
       .when('/manageDonationBatches', {
         templateUrl: 'views/donors/manageDonationBatches.html',
-        controller: 'DonorClinicCtrl',
+        controller: 'ManageDonationBatchesCtrl',
         permission: PERMISSIONS.VIEW_DONATION_BATCH,
         enabled: UI.DONORS_TAB_ENABLED
       })
