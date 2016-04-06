@@ -1,43 +1,25 @@
-angular.module('bsis').controller('TestingSidebarCtrl', function($scope, $rootScope, $location, $routeParams, ICONS, PERMISSIONS) {
+angular.module('bsis').controller('TestingSidebarCtrl', function($scope, RoutingService, ICONS, PERMISSIONS) {
+
+  var routes = [
+    {
+      path: '/manageTestBatch',
+      subpaths: [
+        '/viewTestBatch',
+        '/manageTTITesting',
+        '/reEnterTTI',
+        '/reEnterBloodTyping',
+        '/managePendingTests',
+        '/managePendingBloodTypingTests',
+        '/manageBloodGroupTesting',
+        '/manageBloodGroupMatchTesting'
+      ]
+    }, {
+      path: '/viewTestSample',
+      subpaths: []
+    }
+  ];
 
   $scope.icons = ICONS;
   $scope.permissions = PERMISSIONS;
-  $scope.currentPath = '';
-
-  var manageTestBatchRoutes = [
-    '/manageTestBatch',
-    '/viewTestBatch',
-    '/manageTTITesting',
-    '/reEnterTTI',
-    '/reEnterBloodTyping',
-    '/managePendingTests',
-    '/managePendingBloodTypingTests',
-    '/manageBloodGroupTesting',
-    '/manageBloodGroupMatchTesting'
-  ];
-
-  var viewTestSampleRoutes = [
-    '/viewTestSample'
-  ];
-
-  var findValidRoute = function(routesArray) {
-    for (var i = 0; i < routesArray.length; i++) {
-      if ($location.path().indexOf(routesArray[i]) === 0) {
-        return true;
-      }
-    }
-  };
-
-  var setCurrentPath = function() {
-    var currentPath = '';
-    if (findValidRoute(manageTestBatchRoutes)) {
-      currentPath = '/manageTestBatch';
-    } else if (findValidRoute(viewTestSampleRoutes)) {
-      currentPath = '/viewTestSample';
-    }
-    $scope.currentPath = currentPath;
-  };
-
-  setCurrentPath();
-
+  $scope.currentPath = RoutingService.getCurrentPath(routes);
 });
