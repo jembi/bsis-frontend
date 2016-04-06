@@ -3,48 +3,79 @@ angular.module('bsis').controller('DonorsSidebarCtrl', function($scope, $rootSco
   $scope.icons = ICONS;
   $scope.permissions = PERMISSIONS;
 
-  $scope.isCurrent = function(path) {
-    var initialView = '';
-    if ($location.path().indexOf('/viewDonor') === 0 && path === '/findDonor') {
-      $scope.selection = '/viewDonor';
-      return true;
-    } else if ($location.path() === '/addDonor' && path === '/findDonor') {
-      $scope.selection = $location.path();
-      return true;
-    } else if ($location.path().indexOf('/manageClinic') === 0 && path === '/manageDonationBatches') {
-      $scope.selection = '/manageClinic';
-      return true;
-    } else if ($location.path().indexOf('/locations') === 0 && path === initialView) {
-      $scope.selection = '/locations';
-      return true;
-    } else if ($location.path().indexOf('/donorCounselling') === 0 && path.indexOf('/donorCounselling') === 0) {
-      var currentPath = $location.path();
-      $scope.selection = currentPath === '/donorCounselling' ? currentPath : '/donorCounsellingDetails';
-      return true;
-    } else if (path.length > 1 && $location.path().substr(0, path.length) === path) {
-      $location.path(path);
-      $scope.selection = path;
-      return true;
-    } else if ($location.path() === path) {
-      return true;
-    } else {
-      // for first time load of /donors view, determine the initial view
-      if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_DONOR) > -1)) {
-        initialView = '/findDonor';
-      } else if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_DONATION_BATCH) > -1)) {
-        initialView = '/manageDonationBatches';
-      } else if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.EXPORT_CLINIC_DATA) > -1)) {
-        initialView = '/exportDonorList';
-      }
+  var manageDonorsRoutes = [
+    '/viewDonor',
+    '/addDonor',
+    '/findDonor'
+  ];
 
-      // if first time load of /donors view , and path === initialView, return true
-      if ($location.path() === '/donors' && path === initialView) {
-        $location.path(initialView);
+  var duplicateDonorsRoutes = [
+    '/manageDuplicateDonors',
+    '/duplicateDonors'
+  ];
+
+  var manageDonationBatchesRoutes = [
+    '/manageDonationBatches'
+  ];
+
+  var manageVenuesRoutes = [
+    '/locations'
+  ];
+
+  var donorCounsellingRoutes = [
+    '/donorCounselling'
+  ];
+
+  var exportDonorsRoutes = [
+    '/exportDonorList'
+  ];
+
+  var findValidRoute = function(routesArray) {
+    for (var i = 0; i < routesArray.length; i++) {
+      if ($location.path().indexOf(routesArray[i]) === 0) {
         return true;
       }
-
-      return false;
     }
   };
+
+  var getInitialPath = function() {
+    var initialPath = '';
+    if ($location.path() === '/donors') {
+      // for first time load of /donors view, determine the initial path
+      if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_DONOR) > -1)) {
+        initialPath = '/findDonor';
+      } else if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.VIEW_DONATION_BATCH) > -1)) {
+        initialPath = '/manageDonationBatches';
+      } else if (($rootScope.sessionUserPermissions.indexOf($scope.permissions.EXPORT_CLINIC_DATA) > -1)) {
+        initialPath = '/exportDonorList';
+      }
+    }
+    return initialPath;
+  };
+
+  $scope.currentPath = '';
+
+  var setCurrentPath = function() {
+    var currentPath = '';
+    if (findValidRoute(manageDonorsRoutes)) {
+      currentPath = '/findDonor';
+    } else if (findValidRoute(duplicateDonorsRoutes)) {
+      currentPath = '/duplicateDonors';
+    } else if (findValidRoute(manageDonationBatchesRoutes)) {
+      currentPath = '/manageDonationBatches';
+    } else if (findValidRoute(manageVenuesRoutes)) {
+      currentPath = '/locations';
+    } else if (findValidRoute(donorCounsellingRoutes)) {
+      currentPath = '/donorCounselling';
+    } else if (findValidRoute(exportDonorsRoutes)) {
+      currentPath = '/exportDonorList';
+    } else {
+
+      currentPath = getInitialPath();
+    }
+    $scope.currentPath = currentPath;
+  };
+
+  setCurrentPath();
 
 });
