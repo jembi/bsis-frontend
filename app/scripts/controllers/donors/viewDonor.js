@@ -412,6 +412,36 @@ angular.module('bsis')
       return d.promise;
     };
 
+    $scope.updateDonor = function(donor) {
+      var d = $q.defer();
+      DonorService.updateDonor(donor, function(response) {
+        $scope.donor = response;
+          //Reset Error Message
+        $scope.err = null;
+        d.resolve();
+        if ($scope.donorPermissions) {
+          $scope.donorPermissions.canDelete = response.permissions.canDelete;
+        }
+      },
+        function(err) {
+          $scope.donor = donor;
+          $scope.err = err;
+          d.reject('Server Error');
+        });
+      return d.promise;
+    };
+
+    $scope.checkIdentifier = function(identifierData) {
+      if (!identifierData.idNumber || angular.isUndefined(identifierData.idType)) {
+        $scope.clearError('identifier');
+        $scope.raiseError('identifier', 'Please enter a valid identifier');
+        $scope.getError('identifier');
+        return ' ';
+      } else {
+        $scope.clearError('identifier');
+      }
+    };
+
     $scope.validateForm = function(form) {
       if (form.$valid) {
         return true;
