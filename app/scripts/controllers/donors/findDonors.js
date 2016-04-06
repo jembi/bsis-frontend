@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-.controller('FindDonorsCtrl', function($scope, $location, $routeParams, ngTableParams, $filter, DonorService, Alerting) {
+.controller('FindDonorsCtrl', function($scope, $location, $routeParams, ngTableParams, $filter, $timeout, DonorService, Alerting) {
 
   $scope.donorSearch = $routeParams;
 
@@ -39,6 +39,32 @@ angular.module('bsis')
   if ($routeParams.search) {
     $scope.findDonor();
   }
+
+  $scope.$watch('data', function() {
+    $timeout(function() {
+      $scope.tableParams.reload();
+    });
+  });
+
+  $scope.clear = function(form) {
+    if (form) {
+      form.$setPristine();
+    }
+    $location.search({});
+    $scope.donorSearch = {};
+    $scope.searchResults = '';
+    $scope.donation = {};
+    $scope.deferral = {};
+    $scope.newDonationBatch = {backEntry: false};
+    $scope.donorListSearchResults = '';
+    $scope.donorList = {};
+  };
+
+  $scope.clearForm = function(form) {
+    form.$setPristine();
+    $location.search({});
+    $scope.submitted = '';
+  };
 
   $scope.tableParams = new ngTableParams({
     page: 1,            // show first page

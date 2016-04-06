@@ -35,42 +35,7 @@ angular.module('bsis')
     $scope.closeAlert = function(alertScope, index) {
       Alerting.alertClose(alertScope, index);
     };
-
-    // Check that at least one search field is entered
-    $scope.isDonorSearchValid = function() {
-      var search = $scope.donorSearch;
-      return search.firstName || search.lastName || search.donorNumber || search.donationIdentificationNumber;
-    };
-
-    $scope.findDonor = function(form) {
-      if (form && !form.$valid) {
-        return;
-      }
-      $scope.donorSearch.search = true;
-      Alerting.setPersistErrors(false);
-      $location.search($scope.donorSearch);
-      $scope.searching = true;
-      DonorService.findDonor($scope.donorSearch, function(response) {
-        data = response.donors;
-        $scope.searchResults = true;
-        $scope.data = response.donors;
-        $scope.canAddDonors = response.canAddDonors;
-        $scope.searching = false;
-      }, function() {
-        $scope.searchResults = false;
-        $scope.searching = false;
-      });
-    };
-
-    if ($routeParams.search) {
-      $scope.findDonor();
-    }
-
-    $scope.$watch('data', function() {
-      $timeout(function() {
-        $scope.tableParams.reload();
-      });
-    });
+    
 
     $scope.clear = function(form) {
       if (form) {
