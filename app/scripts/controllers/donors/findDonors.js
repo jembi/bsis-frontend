@@ -64,20 +64,7 @@ angular.module('bsis')
     if (form) {
       form.$setPristine();
     }
-    $location.search({});
     $scope.donorSearch = {};
-    $scope.searchResults = '';
-    $scope.donation = {};
-    $scope.deferral = {};
-    $scope.newDonationBatch = {backEntry: false};
-    $scope.donorListSearchResults = '';
-    $scope.donorList = {};
-  };
-
-  $scope.clearForm = function(form) {
-    form.$setPristine();
-    $location.search({});
-    $scope.submitted = '';
   };
 
   $scope.tableParams = new ngTableParams({
