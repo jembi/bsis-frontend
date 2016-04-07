@@ -1,7 +1,8 @@
 <div role="contentinfo" ui-grid-pager ng-show="grid.options.enablePaginationControls">
     <div role="navigation" class="ui-grid-pager-container">
-        <pagination previous-text="&lsaquo;" next-text="&rsaquo;" total-items="grid.options.totalItems"
+        <pagination previous-text="&lsaquo;&lsaquo;" next-text="&rsaquo;&rsaquo;" total-items="grid.options.totalItems"
                     items-per-page="grid.options.paginationPageSize"
-                    ng-model="grid.options.paginationCurrentPage"></pagination>
+                    ng-model="grid.options.paginationCurrentPage" 
+                    max-size="7" force-ellipses="true" rotate="false"></pagination>
     </div>
 </div>
