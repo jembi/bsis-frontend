@@ -2,8 +2,10 @@
 
 angular.module('bsis')
 
-  .controller('AmbiguousBloodTypingTestingCtrl', function($scope, $location, $log, TestingService, $q, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('AmbiguousBloodTypingTestingCtrl', function($scope, $location, $log, TestingService, $q, $filter, ngTableParams, $timeout, $routeParams, BLOODABO, BLOODRH) {
 
+    $scope.bloodAboOptions = BLOODABO;
+    $scope.bloodRhOptions = BLOODRH;
     $scope.data = [];
 
     $scope.go = function(path) {

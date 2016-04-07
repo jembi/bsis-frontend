@@ -1,3 +1,5 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/donors/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
 <h3 class="page-header">Find Donor</h3>
 <form class="form-horizontal col-sm-12" role="form "name="findDonorForm" novalidate ng-submit="findDonor(findDonorForm)">
     <div class="form-group">
@@ -78,7 +80,7 @@
                     <em> {{data.length}} donor(s) found </em>
             <span has-permission="{{permissions.ADD_DONOR}}">
               <span> | </span>
-              <em ng-show="canAddDonors"><a href="" ng-click="addNewDonor(donorSearch)">Add New Donor</a></em>
+              <em ng-show="canAddDonors"><a ng-href="#/addDonor?firstName={{donorSearch.firstName}}&lastName={{donorSearch.lastName}}" >Add New Donor</a></em>
               <span ng-hide="canAddDonors">
                 <em>Donor Registration Blocked - No Open Donation Batches</em>
                 <span> | </span>
@@ -91,6 +93,7 @@
                 <table ng-table="tableParams" show-filter="false" class="table">
                     <tr ng-repeat="donor in $data"
                         ng-click="viewDonor(donor);"
+                        role="button"
                         ng-mouseenter="this.$selected = true"
                         ng-mouseleave="this.$selected = false"
                         ng-class="{'active': donor.$selected}">
@@ -127,11 +130,12 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <p>
-                    <em> No donors found </em> | <em> <a href="" ng-click="addNewDonor(donorSearch)">Add New
+                    <em> No donors found </em> | <em> <a ng-href="#/addDonor?firstName={{donorSearch.firstName}}&lastName={{donorSearch.lastName}}">Add New
                     Donor</a></em>
                 </p>
             </div>
         </div>
     </div>
 
+  </div>
 </div>

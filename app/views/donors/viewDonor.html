@@ -1,3 +1,5 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/donors/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
 <form editable-form name="editableForm" onaftersave="updateDonor(donor)" oncancel="cancelForm(donor, editableForm)"
       novalidate>
     <alert type="danger" close="" ng-show="err.userMessage">
@@ -187,11 +189,7 @@
                                                                                               style="padding:0 15px;">
                                     <small><a ng-href="#/donorCounselling/{{donor.id}}">View</a></small>
                             </em></td>
-                            </tr>
-                        </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
+                            </tr>                    
                             <tr>
                                 <td class="icon"><i class="fa {{icons.PLUS}}"></i></td>
                                 <td class="field">Total Donations:</td>
@@ -233,10 +231,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td></td>
-                            </tr>
-
-                            <tr>
                                 <td class="icon"><i class="fa {{icons.INFO}}"></i></td>
                                 <td class="field">Identifier:</td>
                                 <td class="value">
@@ -270,19 +264,9 @@
                                                 editable-text="donor.idNumber" e-id="idNumber" e-name="idNumber"
                                           >{{donor.idNumber}}</span>
                                         <span ng-show="donorIdentifierForm.$visible" class="error">{{ errorObject.identifier[0].error }}</span>
-                                        <em>
-
-                                        </em>
-
                                     </form>
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td></td>
-                            </tr>
-
-
                             <tr>
                                 <td class="icon"><i class="fa {{icons.COMMENT}}"></i></td>
                                 <td class="field">Comments:</td>
@@ -316,6 +300,7 @@
 
                     </div>
                 </div>
+  
 
         </tab>
         <tab active="tabs.demographics">
@@ -383,4 +368,5 @@
         </tab>
     </tabset>
 
+</div>
 </div>

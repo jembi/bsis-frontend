@@ -1,3 +1,5 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/donors/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
 <form editable-form name="editableForm"
       onaftersave="updateDonationBatch(donationBatch, confirmReopen); confirmReopen = false; confirmEdit = false">
   <span class="h3"> 
@@ -42,7 +44,7 @@
         <!-- Edit donor actions -->
       <div has-permission="{{permissions.EDIT_DONATION_BATCH}}" ng-hide="confirmDelete || confirmClose || confirmReopen"
            style="display:inline;">
-          <em><a href="" type="button" class="btn btn-link" ng-click="editableForm.$show(); confirmEdit = true"
+          <em><a href="" type="button" class="btn btn-link" ng-click="editableForm.$setPristine(); editableForm.$show(); confirmEdit = true"
                  ng-hide="confirmEdit" ng-disabled="!donationBatch.permissions.canEdit">Edit</a></em>
         <span ng-show="confirmEdit">
           <em>
@@ -110,4 +112,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
