@@ -29,10 +29,9 @@ npm install --global bower grunt-cli
 if [ -d "/opt/bsis-frontend/.git" ]; then
   # Checkout the latest version
   cd /opt/bsis-frontend
-  git fetch
-  git checkout ${1:-master}
-  git merge --ff-only origin/${1:-master}
-else 
+  git fetch origin ${1:-master}
+  git checkout FETCH_HEAD
+else
   if ! ssh-add -l; then
     # Fall back to http
     BSIS_REPOSITORY=https://github.com/jembi/bsis-frontend.git
