@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('TestsReEnterCtrl', function($scope, $location, $log, TestingService, $modal, $sce, $q, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('TestsReEnterCtrl', function($scope, $location, $log, TestingService, $uibModal, $sce, $q, $filter, ngTableParams, $timeout, $routeParams) {
 
     $scope.data = [];
 
@@ -143,7 +143,7 @@ angular.module('bsis')
         button: 'Save',
         message: messageText
       };
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         animation: false,
         templateUrl: 'views/confirmModal.html',
         controller: 'ConfirmModalCtrl',

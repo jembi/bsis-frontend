@@ -18,7 +18,7 @@
   <div class="col-sm-12">
       <div class="panel panel-default">
           <div class="panel-body">
-              <alert ng-show="showAlert" type="danger">Please resolve all discrepancies between initial and re-rentered outcomes before saving the form.</alert>
+              <uib-alert ng-show="showAlert" type="danger">Please resolve all discrepancies between initial and re-rentered outcomes before saving the form.</uib-alert>
               <form ng-submit="validateSaveTestOutcomesForm()" novalidate>
                   <table ng-table="testOutcomesTableParams" show-filter="false" class="table">
                       <thead>

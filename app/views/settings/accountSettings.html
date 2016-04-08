@@ -9,12 +9,12 @@
                   ng-submit="updateUserDetails();" style="padding-bottom:20px;">
 
                 <div style="padding-bottom:10px;" ng-show="detailsMessage">
-                    <alert type="danger" ng-if="detailsStyle === 'danger'" close="$parent.detailsMessage = ''">
+                    <uib-alert type="danger" ng-if="detailsStyle === 'danger'" close="$parent.detailsMessage = ''">
                         {{detailsMessage}}
-                    </alert>
-                    <alert type="success" ng-if="detailsStyle === 'success'" close="$parent.detailsMessage = ''">
+                    </uib-alert>
+                    <uib-alert type="success" ng-if="detailsStyle === 'success'" close="$parent.detailsMessage = ''">
                         {{detailsMessage}}
-                    </alert>
+                    </uib-alert>
                 </div>
 
                 <div class="form-group">

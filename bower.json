@@ -24,7 +24,7 @@
     "moment": "2.10.3",
     "ng-table": "0.5.5",
     "pdfmake": "~0.1.18",
-    "pace": "~1.0.2"
+    "pace": "0.7.6"
   },
   "resolutions": {
     "angular": "1.4.x"

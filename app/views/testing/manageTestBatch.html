@@ -6,11 +6,11 @@
 
   <div class="col-sm-12">
 
-      <tabset justified="true">
-          <tab>
-              <tab-heading>
+      <uib-tabset justified="true">
+          <uib-tab>
+              <uib-tab-heading>
                   <i class="fa {{icons.BARS}}"></i> Open Batches
-              </tab-heading>
+              </uib-tab-heading>
               <div ng-switch="openTestBatches" class="col-sm-12">
                   <div style="padding-bottom: 10px"></div>
                   <div class="panel panel-default">
@@ -109,12 +109,12 @@
                   </div>
               </div>
 
-          </tab>
+          </uib-tab>
 
-          <tab>
-              <tab-heading>
+          <uib-tab>
+              <uib-tab-heading>
                   <i class="fa {{icons.ARCHIVE}}"></i> Closed Batches
-              </tab-heading>
+              </uib-tab-heading>
               <form name="closedTestBatchesForm"  class="form-horizontal" style="padding:10px 0;" ng-submit="getClosedTestBatches(closedTestBatchesForm)">
                   <div class="clearfix form-group">
                       <label class="col-sm-2 control-label">Period:</label>
@@ -185,8 +185,8 @@
                       </div>
                   </div>
               </div>
-          </tab>
+          </uib-tab>
 
 
-      </tabset>
+      </uib-tabset>
 </div>

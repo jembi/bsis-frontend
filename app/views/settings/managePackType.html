@@ -4,7 +4,7 @@
         <div class="panel-body">
 
             <div ng-show="serverError">
-                <alert type="danger" close="serverError = null">
+                <uib-alert type="danger" close="serverError = null">
                     {{serverError.userMessage}}
                     <ul>
                         <li ng-show="serverError.fieldErrors['type.packType']">
@@ -14,7 +14,7 @@
                             {{serverError.fieldErrors['type.countAsDonation']}}
                         </li>
                     </ul>
-                </alert>
+                </uib-alert>
             </div>
 
             <form name="packTypeForm" novalidate class="form-horizontal col-sm-12" role="form"

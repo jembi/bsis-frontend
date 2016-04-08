@@ -3,7 +3,7 @@
 
 <div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false"
      style="padding-top:10px;">
-    <alert type="danger" close="">
+    <uib-alert type="danger" close="">
         {{donorDonationError.userMessage}}
         <ul>
             <li ng-show="donorDonationError['donation.donor']"> {{donorDonationError["donation.donor"]}}</li>
@@ -23,7 +23,7 @@
             </li>
             <li ng-show="donorDonationError['donation.donorPulse']"> {{donorDonationError["donation.donorPulse"]}}</li>
         </ul>
-    </alert>
+    </uib-alert>
 </div>
 
 <form name="addDonationForm" novalidate class="form-horizontal col-sm-12" role="form"
