@@ -17,7 +17,7 @@
     "angular-tooltips": "~0.1.13",
     "angular-ui-grid": "~3.1.1",
     "angular-ui-select": "0.12.1",
-    "angular-xeditable": "0.1.9",
+    "angular-xeditable": "0.1.11",
     "checklist-model": "~0.2.4",
     "CSV-JS": "csv-js#~1.1.1",
     "karma-read-json": "~1.1.0",
