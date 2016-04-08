@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {
     "angular": "1.4.6",
-    "angular-bootstrap": "0.13.4",
+    "angular-bootstrap": "0.14.3",
     "angular-loader": "1.2.x",
     "angular-messages": "1.4.x",
     "angular-mocks": "1.4.x",

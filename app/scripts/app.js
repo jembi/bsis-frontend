@@ -416,10 +416,10 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       });
   })
 
-  .config(function(datepickerConfig) {
-    datepickerConfig.formatYear = 'yy';
-    datepickerConfig.showWeeks = false;
-    datepickerConfig.startingDay = 1;
+  .config(function(uibDatepickerConfig) {
+    uibDatepickerConfig.formatYear = 'yy';
+    uibDatepickerConfig.showWeeks = false;
+    uibDatepickerConfig.startingDay = 1;
   })
 
   .run(function(editableOptions) {
