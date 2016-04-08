@@ -10,7 +10,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   'ngSanitize',
   'checklist-model',
   'ngMessages',
-  '720kb.tooltips',
   'ui.grid',
   'ui.grid.exporter',
   'ui.grid.pagination'
@@ -571,10 +570,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         dateOptions: '=',
         minDate: '=',
         maxDate: '=',
-        opened: '=',
         format: '=',
-        initDate: '=',
-        calIcon: '='
+        initDate: '='
+
       },
       link: function($scope, element) {
 
@@ -616,10 +614,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         dateOptions: '=',
         minDate: '=',
         maxDate: '=',
-        opened: '=',
         format: '=',
-        initDate: '=',
-        calIcon: '='
+        initDate: '='
+
       },
       link: function(scope, element, attrs, ctrl) {
 
