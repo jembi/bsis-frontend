@@ -51,7 +51,7 @@
                     </small>
                 </div>
                 <div id="permissions" class="row col-sm-11" style="margin-left: 20px; width: 85%;">
-                  <div ng-repeat="entity in permissionList" class="row pull-left" style="width: 175px;" tooltip="{{entity.name}}">
+                  <div ng-repeat="entity in permissionList" class="row pull-left" style="width: 175px;" uib-tooltip="{{entity.name}}">
                         <input id="{{entity.id}}" type="checkbox" checklist-model="role.permissions"
                                checklist-value="entity"/>
                         <small style="color: black;"><label

@@ -13,11 +13,11 @@
                     <a href="#home" style="padding:0 0;"><img class="navbar-brand" src="images/bsis_logo_min_white.png"
                                                               style="height:50px; padding: 5px;"/></a>
                 </li>
-                <li class="dropdown" dropdown on-toggle="toggled(open)" ng-hide="isPasswordReset()">
-                    <a href class="dropdown-toggle" dropdown-toggle
+                <li class="dropdown" uib-dropdown on-toggle="toggled(open)" ng-hide="isPasswordReset()">
+                    <a href class="dropdown-toggle" uib-dropdown-toggle
                        style=" padding: 17px 5px 0 5px; font-size: 1.7rem;">
                         {{currentSection}} <b class="caret"></b></a>
-                    <ul class="dropdown-menu dropdown-ext">
+                    <ul class="uib-dropdown-menu dropdown-ext">
                         <li ng-repeat="section in sectionList">
                             <a has-permission="{{section.permission}}:{{section.sectionEnabled}}"
                                ng-show='section.title != currentSection' href="{{section.href}}">{{section.title}}<i
@@ -31,12 +31,12 @@
             </ul>
         </div>
 
-        <div class="dropdown nav navbar-nav navbar-right" dropdown on-toggle="toggled(open)">
-            <a href class="dropdown-toggle nav navbar-nav navbar-right" dropdown-toggle
+        <div class="dropdown nav navbar-nav navbar-right" uib-dropdown on-toggle="toggled(open)">
+            <a href class="dropdown-toggle nav navbar-nav navbar-right" uib-dropdown-toggle
                style="padding: 13px 5px 0 8px;">
                 <i class="fa {{icons.USER}}"></i> {{sessionUserName}}<b class="caret"></b>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="uib-dropdown-menu">
                 <li>
                     <a href="#settings"> Account Settings <i class="fa {{icons.ACCOUNT}}"
                                                              style="float: right; padding: 0px 0px;"></i></a>
