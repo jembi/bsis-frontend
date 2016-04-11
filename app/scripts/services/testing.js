@@ -96,9 +96,9 @@ angular.module('bsis')
           response(false);
         });
       },
-      getTestResultsReport: function(testBatch, onSuccess, onError) {
-        Api.TestResultsReport.query({testBatch: testBatch}, function(testResults) {
-          onSuccess(testResults);
+      getTestBatchOutcomesReport: function(testBatch, onSuccess, onError) {
+        Api.TestResultsReport.query({testBatch: testBatch}, function(testBatchOutcomesReport) {
+          onSuccess(testBatchOutcomesReport);
         }, function(err) {
           onError(err);
         });

@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, $modal, PERMISSIONS) {
+  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, $modal, PERMISSIONS, uiGridConstants) {
 
     $scope.permissions = PERMISSIONS;
 
@@ -167,83 +167,6 @@ angular.module('bsis')
       }
     ];
 
-    $scope.getTests = function() {
-
-      var ttiTests = TestingService.getTTITestingFormFields(function(response) {
-        if (response !== false) {
-          $scope.ttiTestsBasic = response.basicTTITests;
-          $scope.ttiTestsPending = response.pendingTTITests;
-
-          // add TTI Tests Basic to report column defs
-          angular.forEach($scope.ttiTestsBasic, function(test) {
-            columnDefs.push(
-              {
-                name: test.testNameShort,
-                displayName: test.testNameShort,
-                field: 'testResults',
-                visible: false,
-                width: 80
-              }
-            );
-          });
-
-          // add TTI Tests Repeat to report column defs
-          angular.forEach($scope.ttiTestsPending, function(test) {
-            columnDefs.push(
-              {
-                name: test.testNameShort,
-                displayName: test.testNameShort,
-                field: 'testResults',
-                visible: false,
-                width: 80
-              }
-            );
-          });
-
-        }
-      });
-
-      $q.all(ttiTests).then(function() {
-        TestingService.getBloodGroupTestingFormFields(function(response) {
-          if (response !== false) {
-            $scope.bloodTypingTestsBasic = response.basicBloodTypingTests;
-            $scope.bloodTypingTestsRepeat = response.repeatBloodTypingTests;
-
-            // add Blood Typing Tests to report column defs
-            angular.forEach($scope.bloodTypingTestsBasic, function(test) {
-              columnDefs.push(
-                {
-                  name: test.testNameShort,
-                  displayName: test.testNameShort,
-                  field: 'testResults',
-                  visible: false,
-                  width: 70
-                }
-              );
-            });
-
-            // add Blood Typing Tests Repeat to report column defs
-            angular.forEach($scope.bloodTypingTestsRepeat, function(test) {
-              columnDefs.push(
-                {
-                  name: test.testNameShort,
-                  displayName: test.testNameShort,
-                  field: 'testResults',
-                  visible: false,
-                  width: 70
-                }
-              );
-            });
-          }
-        });
-
-      }).finally(function() {
-      });
-
-    };
-
-    $scope.getTests();
-
     $scope.gridOptions = {
       data: [],
       paginationPageSize: 10,
@@ -387,18 +310,35 @@ angular.module('bsis')
       return renderableRows;
     };
 
-
     $scope.export = function(format) {
-      TestingService.getTestResultsReport($routeParams.id, function(testResults) {
+
+      TestingService.getTestBatchOutcomesReport($routeParams.id, function(testBatchOutcomesReport) {
+
         // load test outcomes and previous ABO/Rh for each donation in the test batch
         angular.forEach($scope.gridOptions.data, function(item, key) {
-          angular.forEach(testResults.testResults, function(donation) {
-            if (item.donationIdentificationNumber === donation.donationIdentificationNumber) {
-              $scope.gridOptions.data[key].testResults = donation.bloodTestOutcomes;
-              $scope.gridOptions.data[key].previousDonationAboRhOutcome = donation.previousDonationAboRhOutcome;
+          angular.forEach(testBatchOutcomesReport.donationTestOutcomesReports, function(donationTestOutcomesReport) {
+            if (item.donationIdentificationNumber === donationTestOutcomesReport.donationIdentificationNumber) {
+              $scope.gridOptions.data[key].testResults = donationTestOutcomesReport.bloodTestOutcomes;
+              $scope.gridOptions.data[key].previousDonationAboRhOutcome = donationTestOutcomesReport.previousDonationAboRhOutcome;
             }
           });
         });
+
+        // add testNames to columnDefs
+        angular.forEach(testBatchOutcomesReport.testNames, function(testName) {
+          columnDefs.push(
+            {
+              name: testName,
+              displayName: testName,
+              field: 'testResults',
+              visible: false,
+              width: 75
+            }
+          );
+        });
+
+        // notify grid-ui that the column defs have changed
+        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
 
         $scope.reportName = $scope.dataExportType.reportName;
         if (format === 'pdf') {
