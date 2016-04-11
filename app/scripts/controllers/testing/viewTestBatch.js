@@ -126,14 +126,15 @@ angular.module('bsis')
         field: 'donationDate',
         cellFilter: 'bsisDate',
         visible: true,
-        width: '**'
+        width: '**',
+        maxWidth: '150'
       },
       {
         name: 'Pack Type',
         field: 'packType.packType',
         visible: true,
         width: '**',
-        maxWidth: '100'
+        maxWidth: '120'
       },
       {
         name: 'Venue',
@@ -148,7 +149,8 @@ angular.module('bsis')
         field: 'ttistatus',
         cellFilter: 'mapTTIStatus',
         visible: true,
-        width: '**'
+        width: '**',
+        maxWidth: '120'
       },
       {
         name: 'bloodTypingStatusBloodTypingMatchStatus',
@@ -332,7 +334,7 @@ angular.module('bsis')
               displayName: testName,
               field: 'testResults',
               visible: false,
-              width: 75
+              width: 72
             }
           );
         });
