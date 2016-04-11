@@ -312,9 +312,65 @@ angular.module('bsis')
       return renderableRows;
     };
 
+    function addTestNamesToColumnDefs(testBatchOutcomesReport) {
+
+      angular.forEach(testBatchOutcomesReport.basicTtiTestNames, function(testName) {
+        columnDefs.push(
+          {
+            name: testName,
+            displayName: testName,
+            field: 'testResults',
+            visible: false,
+            width: '80'
+          }
+        );
+      });
+
+      angular.forEach(testBatchOutcomesReport.repeatTtiTestNames, function(testName) {
+        columnDefs.push(
+          {
+            name: testName,
+            displayName: testName,
+            field: 'testResults',
+            visible: false,
+            width: '80'
+          }
+        );
+      });
+
+      angular.forEach(testBatchOutcomesReport.basicBloodTypingTestNames, function(testName) {
+        columnDefs.push(
+          {
+            name: testName,
+            displayName: testName,
+            field: 'testResults',
+            visible: false,
+            width: '65'
+          }
+        );
+      });
+
+      angular.forEach(testBatchOutcomesReport.repeatBloodTypingTestNames, function(testName) {
+        columnDefs.push(
+          {
+            name: testName,
+            displayName: testName,
+            field: 'testResults',
+            visible: false,
+            width: '70'
+          }
+        );
+      });
+
+      // notify grid-ui that the column defs have changed
+      $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+    }
+
     $scope.export = function(format) {
 
       TestingService.getTestBatchOutcomesReport($routeParams.id, function(testBatchOutcomesReport) {
+
+        addTestNamesToColumnDefs(testBatchOutcomesReport);
 
         // load test outcomes and previous ABO/Rh for each donation in the test batch
         angular.forEach($scope.gridOptions.data, function(item, key) {
@@ -325,22 +381,6 @@ angular.module('bsis')
             }
           });
         });
-
-        // add testNames to columnDefs
-        angular.forEach(testBatchOutcomesReport.testNames, function(testName) {
-          columnDefs.push(
-            {
-              name: testName,
-              displayName: testName,
-              field: 'testResults',
-              visible: false,
-              width: 72
-            }
-          );
-        });
-
-        // notify grid-ui that the column defs have changed
-        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
 
         $scope.reportName = $scope.dataExportType.reportName;
         if (format === 'pdf') {
