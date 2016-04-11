@@ -2,6 +2,7 @@
 
 var app = angular.module('bsis', [ // eslint-disable-line angular/di
   'ngRoute',
+  'angular-loading-bar',
   'ui.bootstrap',
   'ngResource',
   'ngTable',
