@@ -421,6 +421,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
     uibDatepickerConfig.showWeeks = false;
     uibDatepickerConfig.startingDay = 1;
   })
+  .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+  }])
 
   .run(function(editableOptions) {
     editableOptions.theme = 'bs3';
