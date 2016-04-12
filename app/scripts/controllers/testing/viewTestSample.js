@@ -1,4 +1,4 @@
-angular.module('bsis').controller('ViewTestSampleCtrl', function($scope, $location, $routeParams, $timeout, TestingService) {
+angular.module('bsis').controller('ViewTestSampleCtrl', function($scope, $location, $routeParams, $timeout, TestingService, $log) {
 
   // Initial values
   $scope.searching = false;
@@ -13,7 +13,7 @@ angular.module('bsis').controller('ViewTestSampleCtrl', function($scope, $locati
     $location.search(angular.extend({search: true}, $scope.search));
     $scope.searching = true;
     TestingService.getTestResultsByDIN($scope.search.donationIdentificationNumber, function(response) {
-      if (response !== false) {
+      if (response !== false && response.testResults) {
         $scope.donation = response.donation;
         $scope.testResults = response.testResults.recentTestResults;
       }
