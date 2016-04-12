@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, $modal, PERMISSIONS, uiGridConstants) {
+  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, $uibModal, PERMISSIONS, uiGridConstants) {
 
     $scope.permissions = PERMISSIONS;
 
@@ -395,7 +395,7 @@ angular.module('bsis')
 
     function showConfirmation(title, button, message) {
 
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         animation: false,
         templateUrl: 'views/confirmModal.html',
         controller: 'ConfirmModalCtrl',

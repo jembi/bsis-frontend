@@ -6,15 +6,14 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "1.4.6",
-    "angular-bootstrap": "0.13.4",
+    "angular": "1.4.8",
+    "angular-bootstrap": "0.14.3",
     "angular-loader": "1.2.x",
     "angular-messages": "1.4.x",
     "angular-mocks": "1.4.x",
     "angular-resource": "1.4.x",
     "angular-route": "1.2.x",
     "angular-sanitize": "1.4.2",
-    "angular-tooltips": "~0.1.13",
     "angular-ui-grid": "~3.1.1",
     "angular-ui-select": "0.12.1",
     "angular-xeditable": "0.1.11",
@@ -24,7 +23,7 @@
     "moment": "2.10.3",
     "ng-table": "0.5.5",
     "pdfmake": "~0.1.18",
-    "pace": "~1.0.2"
+    "angular-loading-bar": "^0.9.0"
   },
   "resolutions": {
     "angular": "1.4.x"

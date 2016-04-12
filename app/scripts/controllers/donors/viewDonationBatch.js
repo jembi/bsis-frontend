@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, TestingService, ConfigurationsService, $q, $filter, $routeParams, $modal, ICONS, PERMISSIONS, PACKTYPE, DATEFORMAT, DONATION) {
+  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, TestingService, ConfigurationsService, $q, $filter, $routeParams, $uibModal, ICONS, PERMISSIONS, PACKTYPE, DATEFORMAT, DONATION) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -254,11 +254,7 @@ angular.module('bsis')
       $scope.donation = {};
       $scope.donorSummary = {};
       $scope.donorSummaryLoading = false;
-      $scope.adverseEvent = {
-        type: null,
-        comment: ''
-      };
-
+      $scope.adverseEvent = null;
 
       $scope.$watch('donation.donorNumber', function() {
         if ($scope.donation.donorNumber) {
@@ -303,7 +299,7 @@ angular.module('bsis')
         return $q.resolve(null);
       }
 
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         animation: false,
         templateUrl: 'views/confirmModal.html',
         controller: 'ConfirmModalCtrl',
@@ -333,7 +329,7 @@ angular.module('bsis')
       }
       message += ' Are you sure that you want to continue?';
 
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         animation: false,
         templateUrl: 'views/confirmModal.html',
         controller: 'ConfirmModalCtrl',

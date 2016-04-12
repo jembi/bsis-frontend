@@ -2,6 +2,7 @@
 
 var app = angular.module('bsis', [ // eslint-disable-line angular/di
   'ngRoute',
+  'angular-loading-bar',
   'ui.bootstrap',
   'ngResource',
   'ngTable',
@@ -10,7 +11,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   'ngSanitize',
   'checklist-model',
   'ngMessages',
-  '720kb.tooltips',
   'ui.grid',
   'ui.grid.exporter',
   'ui.grid.pagination'
@@ -311,102 +311,101 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // SETTINGS URLs
       .when('/settings', {
-        templateUrl: 'views/settings.html',
-        controller: 'SettingsCtrl',
+        redirectTo: '/accountSettings',
         permission: PERMISSIONS.AUTHENTICATED
       })
       .when('/configurations', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/configurations.html',
         controller: 'ConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_GENERAL_CONFIGS
       })
       .when('/manageConfiguration/:id?', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/manageConfiguration.html',
         controller: 'ManageConfigurationsCtrl',
         permission: PERMISSIONS.MANAGE_GENERAL_CONFIGS
       })
       .when('/accountSettings', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/accountSettings.html',
         controller: 'AccountSettingsCtrl',
         permission: PERMISSIONS.AUTHENTICATED
       })
       .when('/users', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/users.html',
         controller: 'UsersCtrl',
         permission: PERMISSIONS.MANAGE_USERS
       })
       .when('/manageUser/:id?', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/manageUser.html',
         controller: 'ManageUserCtrl',
         permission: PERMISSIONS.MANAGE_USERS
       })
       .when('/roles', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/roles.html',
         controller: 'RolesCtrl',
         permission: PERMISSIONS.MANAGE_ROLES
       })
       .when('/manageRole/:id?', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/manageRole.html',
         controller: 'ManageRolesCtrl',
         permission: PERMISSIONS.MANAGE_ROLES
       })
       .when('/packTypes', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/packTypes.html',
         controller: 'PackTypesCtrl',
         permission: PERMISSIONS.MANAGE_PACK_TYPES
       })
       .when('/managePackType/:id?', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/managePackType.html',
         controller: 'ManagePackTypesCtrl',
         permission: PERMISSIONS.MANAGE_PACK_TYPES
       })
       .when('/deferralReasons', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/deferralReasons.html',
         controller: 'DeferralReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DEFERRAL_REASONS
       })
       .when('/manageDeferralReason/:id?', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/manageDeferralReason.html',
         controller: 'ManageDeferralReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DEFERRAL_REASONS
       })
       .when('/discardReasons', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/discardReasons.html',
         controller: 'DiscardReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DISCARD_REASONS
       })
       .when('/manageDiscardReason/:id?', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/manageDiscardReason.html',
         controller: 'ManageDiscardReasonsCtrl',
         permission: PERMISSIONS.MANAGE_DISCARD_REASONS
       })
       .when('/donationTypes', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/donationTypes.html',
         controller: 'DonationTypesCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_TYPES
       })
       .when('/manageDonationType/:id?', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/manageDonationType.html',
         controller: 'ManageDonationTypesCtrl',
         permission: PERMISSIONS.MANAGE_DONATION_TYPES
       })
       .when('/auditLog', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/auditLog.html',
         controller: 'AuditLogCtrl',
         permission: PERMISSIONS.VIEW_AUDIT_LOG
       })
       .when('/adverseEventTypes', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/adverseEventTypes.html',
         controller: 'AdverseEventTypesCtrl',
         permission: PERMISSIONS.VIEW_ADVERSE_EVENT_TYPES
       })
       .when('/addAdverseEventType', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/addAdverseEventType.html',
         controller: 'AddAdverseEventTypeCtrl',
         permission: PERMISSIONS.ADD_ADVERSE_EVENT_TYPES
       })
       .when('/editAdverseEventType/:id?', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/settings/editAdverseEventType.html',
         controller: 'EditAdverseEventTypeCtrl',
         permission: PERMISSIONS.EDIT_ADVERSE_EVENT_TYPES
       })
@@ -416,11 +415,14 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       });
   })
 
-  .config(function(datepickerConfig) {
-    datepickerConfig.formatYear = 'yy';
-    datepickerConfig.showWeeks = false;
-    datepickerConfig.startingDay = 1;
+  .config(function(uibDatepickerConfig) {
+    uibDatepickerConfig.formatYear = 'yy';
+    uibDatepickerConfig.showWeeks = false;
+    uibDatepickerConfig.startingDay = 1;
   })
+  .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+  }])
 
   .run(function(editableOptions) {
     editableOptions.theme = 'bs3';
@@ -571,10 +573,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         dateOptions: '=',
         minDate: '=',
         maxDate: '=',
-        opened: '=',
         format: '=',
-        initDate: '=',
-        calIcon: '='
+        initDate: '='
+
       },
       link: function($scope, element) {
 
@@ -616,10 +617,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         dateOptions: '=',
         minDate: '=',
         maxDate: '=',
-        opened: '=',
         format: '=',
-        initDate: '=',
-        calIcon: '='
+        initDate: '='
+
       },
       link: function(scope, element, attrs, ctrl) {
 

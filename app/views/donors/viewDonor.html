@@ -2,7 +2,7 @@
 <div class="col-sm-9 col-md-10 main">
 <form editable-form name="editableForm" onaftersave="updateDonor(donor)" oncancel="cancelForm(donor, editableForm)"
       novalidate>
-    <alert type="danger" close="" ng-show="err.userMessage">
+    <uib-alert type="danger" close="" ng-show="err.userMessage">
         {{err.userMessage}}
         <ul>
             <li ng-show="err['donor.birthDate']"> {{err["donor.birthDate"]}}</li>
@@ -13,7 +13,7 @@
             <li ng-show="err['address.homeAddressZipcode']"> {{err["address.workAddressZipcode"]}}</li>
             <li ng-show="err['address.homeAddressZipcode']"> {{err["address.postalAddressZipcode"]}}</li>
         </ul>
-    </alert>
+    </uib-alert>
 
   <span class="h2">
   <span editable-text="donor.firstName" e-name="firstName" e-class="xeditable name"
@@ -64,13 +64,13 @@
     </span>
 
     <span>
-      <alert type="danger" class="inline" close="" ng-show="isEligible !== true">
+      <uib-alert type="danger" class="inline" close="" ng-show="isEligible !== true">
           Do not bleed donor
-      </alert>
+      </uib-alert>
 
-    <alert type="success" class="inline" close="" ng-show="isEligible !== false">
+    <uib-alert type="success" class="inline" close="" ng-show="isEligible !== false">
         Eligible donor
-    </alert>
+    </uib-alert>
   </span>
 
   <span class="h4" style="float: right; margin-top: 20px; padding-right: 15px;">
@@ -152,11 +152,11 @@
 
 <div class="col-sm-12">
 
-    <tabset justified="true">
-        <tab active="tabs.overview">
-            <tab-heading>
+    <uib-tabset justified="true">
+        <uib-tab active="tabs.overview">
+            <uib-tab-heading>
                 <i class="fa {{icons.INFOCIRCLE}}"></i> Overview
-            </tab-heading>
+            </uib-tab-heading>
 
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -302,11 +302,11 @@
                 </div>
   
 
-        </tab>
-        <tab active="tabs.demographics">
-            <tab-heading>
+        </uib-tab>
+        <uib-tab active="tabs.demographics">
+            <uib-tab-heading>
                 <i class="fa {{icons.BARS}}"></i> Demographics
-            </tab-heading>
+            </uib-tab-heading>
 
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -314,12 +314,12 @@
                 </div>
             </div>
 
-        </tab>
+        </uib-tab>
 
-        <tab active="tabs.donations" select="getDonations(donor.id)" has-permission="{{permissions.VIEW_DONATION}}">
-            <tab-heading>
+        <uib-tab active="tabs.donations" select="getDonations(donor.id)" has-permission="{{permissions.VIEW_DONATION}}">
+            <uib-tab-heading>
                 <i class="fa {{icons.ARCHIVE}}"></i> Donations
-            </tab-heading>
+            </uib-tab-heading>
 
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -341,12 +341,12 @@
 
                 </div>
             </div>
-        </tab>
+        </uib-tab>
 
-        <tab active="tabs.deferrals" select="getDeferrals(donor.id)" has-permission="{{permissions.VIEW_DEFERRAL}}">
-            <tab-heading>
+        <uib-tab active="tabs.deferrals" select="getDeferrals(donor.id)" has-permission="{{permissions.VIEW_DEFERRAL}}">
+            <uib-tab-heading>
                 <i class="fa {{icons.WARNING}}"></i> Deferrals
-            </tab-heading>
+            </uib-tab-heading>
             <div class="panel panel-default">
                 <div class="panel-body">
 
@@ -365,8 +365,8 @@
                 </div>
             </div>
 
-        </tab>
-    </tabset>
+        </uib-tab>
+    </uib-tabset>
 
 </div>
 </div>

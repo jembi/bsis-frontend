@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('AddDonorCtrl', function($scope, $location, $routeParams, $modal, ConfigurationsService, DonorService, DATEFORMAT, MONTH, TITLE, GENDER) {
+  .controller('AddDonorCtrl', function($scope, $location, $routeParams, $uibModal, ConfigurationsService, DonorService, DATEFORMAT, MONTH, TITLE, GENDER) {
 
     var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
     var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
@@ -40,7 +40,7 @@ angular.module('bsis')
       }
       message += ' Are you sure that you want to continue?';
 
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         animation: false,
         templateUrl: 'views/confirmModal.html',
         controller: 'ConfirmModalCtrl',
