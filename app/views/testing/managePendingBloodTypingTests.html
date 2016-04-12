@@ -92,8 +92,10 @@
 
                   <div class="form-group">
                       <div class="col-sm-3">
-                          <button class="btn btn-primary" type="submit">Save Test Outcomes</button>
-                          <button class="btn btn-primary" type="button" ng-click="go('/viewTestBatch')">Cancel</button>
+                          <button class="btn btn-primary" type="submit" ng-disabled="savingTestResults">
+                              {{savingTestResults ? "Saving..." : "Save Test Outcomes"}}
+                          </button>
+                          <button class="btn btn-primary" type="button" ng-click="go('/viewTestBatch')" ng-disabled="savingTestResults">Cancel</button>
                       </div>
                   </div>
 
