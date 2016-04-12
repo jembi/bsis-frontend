@@ -254,11 +254,7 @@ angular.module('bsis')
       $scope.donation = {};
       $scope.donorSummary = {};
       $scope.donorSummaryLoading = false;
-      $scope.adverseEvent = {
-        type: null,
-        comment: ''
-      };
-
+      $scope.adverseEvent = null;
 
       $scope.$watch('donation.donorNumber', function() {
         if ($scope.donation.donorNumber) {
