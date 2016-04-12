@@ -3,7 +3,7 @@
 
 <div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false"
      style="padding-top:10px;">
-    <alert type="danger" close="">
+    <uib-alert type="danger" close="">
         {{donorDonationError.userMessage}}
         <ul>
             <li ng-show="donorDonationError['donation.donor']"> {{donorDonationError["donation.donor"]}}</li>
@@ -23,7 +23,7 @@
             </li>
             <li ng-show="donorDonationError['donation.donorPulse']"> {{donorDonationError["donation.donorPulse"]}}</li>
         </ul>
-    </alert>
+    </uib-alert>
 </div>
 
 <form name="addDonationForm" novalidate class="form-horizontal col-sm-12" role="form"
@@ -143,8 +143,8 @@
             <label for="name" class="col-sm-2 control-label" style="padding-top:30px;">Start</label>
             <div class="row col-sm-10">
                 <div style="padding-left:5px;">
-                    <timepicker ng-model="bleedStartTime" name="bleedStartTime" hour-step="hstep"
-                                minute-step="mstep"></timepicker>
+                    <uib-timepicker ng-model="bleedStartTime" name="bleedStartTime" hour-step="hstep"
+                                minute-step="mstep"></uib-timepicker>
                 </div>
             </div>
         </div>
@@ -153,8 +153,8 @@
             <label for="name" class="col-sm-2 control-label" style="padding-top:30px;">End</label>
             <div class="row col-sm-10">
                 <div style="padding-left:5px;">
-                    <timepicker ng-model="bleedEndTime" name="bleedEndTime" hour-step="hstep"
-                                minute-step="mstep"></timepicker>
+                    <uib-timepicker ng-model="bleedEndTime" name="bleedEndTime" hour-step="hstep"
+                                minute-step="mstep"></uib-timepicker>
                 </div>
             </div>
         </div>

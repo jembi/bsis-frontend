@@ -1,8 +1,8 @@
 <p><em> {{duplicateCount}} possible duplicate donors identified. </em></p>
 <p>Please select the correct donor information below:</p>
-<alert type="danger" close="" ng-show="hasMessage">
+<uib-alert type="danger" close="" ng-show="hasMessage">
     <span ng-bind-html="message"></span>
-</alert>
+</uib-alert>
 <table ng-table="manageDuplicateDonorTableParams" show-filter="false" class="table">
     <tr ng-repeat="donor in $data"
         ng-click="viewDonor(donor);"

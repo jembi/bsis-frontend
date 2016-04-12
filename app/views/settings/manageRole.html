@@ -45,24 +45,23 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="permissions" class="col-sm-1 control-label">Permissions</label>
-                    <div class="row col-sm-11" style="margin-left: 20px; width: 85%;">
-                        <small class="error" ng-show="permissionsRequired">
-                            Please select at least one permission.
-                        </small>
-                    </div>
-                    <div id="permissions" class="row col-sm-11" style="margin-left: 20px; width: 85%;">
-                        <div ng-repeat="entity in permissionList" class="row  pull-left" style="width: 175px;" tooltips=""
-                             tooltip-title="{{entity.name}}">
-                            <input id="{{entity.id}}" type="checkbox" checklist-model="role.permissions"
-                                   checklist-value="entity"/>
-                            <small style="color: black;"><label
-                                    style="display: inline-block; cursor: pointer; cursor: hand; margin: 0px 0px; font-size: 0.8em;"
-                                    for="{{entity.id}}">{{entity.name | limitTo: 22}}</label></small>
-                        </div>
+            <div class="form-group">
+                <label for="permissions" class="col-sm-1 control-label">Permissions</label>
+                <div class="row col-sm-11" style="margin-left: 20px; width: 85%;">
+                    <small class="error" ng-show="permissionsRequired">
+                        Please select at least one permission.
+                    </small>
+                </div>
+                <div id="permissions" class="row col-sm-11" style="margin-left: 20px; width: 85%;">
+                  <div ng-repeat="entity in permissionList" class="row pull-left" style="width: 175px;" uib-tooltip="{{entity.name}}">
+                        <input id="{{entity.id}}" type="checkbox" checklist-model="role.permissions"
+                               checklist-value="entity"/>
+                        <small style="color: black;"><label
+                                style="display: inline-block; cursor: pointer; cursor: hand; margin: 0px 0px; font-size: 0.8em;"
+                                for="{{entity.id}}">{{entity.name | limitTo: 22}}</label></small>
                     </div>
                 </div>
+            </div>
 
                 <div class="form-group">
                     <div class="col-sm-offset-1 col-sm-4">
