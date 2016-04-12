@@ -5,11 +5,11 @@
 <hr/>
 <div class="col-sm-12">
 
-    <tabset justified="true">
-        <tab>
-            <tab-heading>
+    <uib-tabset justified="true">
+        <uib-tab>
+            <uib-tab-heading>
                 <i class="fa {{icons.BARS}}"></i> Open Batches
-            </tab-heading>
+            </uib-tab-heading>
             <div ng-switch="openDonationBatches" class="col-sm-12">
                 <div style="padding-bottom: 10px"></div>
                 <div class="panel panel-default">
@@ -103,12 +103,12 @@
                     </div>
                 </div>
             </div>
-        </tab>
+        </uib-tab>
 
-        <tab select="selectTab();">
-            <tab-heading>
+        <uib-tab select="selectTab();">
+            <uib-tab-heading>
                 <i class="fa {{icons.ARCHIVE}}"></i> Closed Batches
-            </tab-heading>
+            </uib-tab-heading>
             <form class="form-horizontal" role="form"  name="recentDonationsForm" style="padding:10px 0;" ng-submit="getRecentDonationBatches(recentDonationsForm)" novalidate>
                 <div class="clearfix form-group">
                     <label class="col-sm-2 control-label">Venues:</label>
@@ -201,9 +201,9 @@
                     </div>
                 </div>
             </div>
-        </tab>
+        </uib-tab>
 
-    </tabset>
+    </uib-tabset>
   </div>
 </div>
 

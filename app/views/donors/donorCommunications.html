@@ -6,7 +6,7 @@
       novalidate>
 
     <div ng-show="error.message">
-        <alert type="danger" close="error.message = null">{{error.message}}</alert>
+        <uib-alert type="danger" close="error.message = null">{{error.message}}</uib-alert>
     </div>
 
     <div class="form-group" ng-class="{'has-error': donorCommunicationsForm.$submitted && search.venues.length === 0}">

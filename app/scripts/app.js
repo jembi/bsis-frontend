@@ -2,6 +2,7 @@
 
 var app = angular.module('bsis', [ // eslint-disable-line angular/di
   'ngRoute',
+  'angular-loading-bar',
   'ui.bootstrap',
   'ngResource',
   'ngTable',
@@ -10,7 +11,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   'ngSanitize',
   'checklist-model',
   'ngMessages',
-  '720kb.tooltips',
   'ui.grid',
   'ui.grid.exporter',
   'ui.grid.pagination'
@@ -415,11 +415,14 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       });
   })
 
-  .config(function(datepickerConfig) {
-    datepickerConfig.formatYear = 'yy';
-    datepickerConfig.showWeeks = false;
-    datepickerConfig.startingDay = 1;
+  .config(function(uibDatepickerConfig) {
+    uibDatepickerConfig.formatYear = 'yy';
+    uibDatepickerConfig.showWeeks = false;
+    uibDatepickerConfig.startingDay = 1;
   })
+  .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+  }])
 
   .run(function(editableOptions) {
     editableOptions.theme = 'bs3';
@@ -570,10 +573,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         dateOptions: '=',
         minDate: '=',
         maxDate: '=',
-        opened: '=',
         format: '=',
-        initDate: '=',
-        calIcon: '='
+        initDate: '='
+
       },
       link: function($scope, element) {
 
@@ -615,10 +617,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         dateOptions: '=',
         minDate: '=',
         maxDate: '=',
-        opened: '=',
         format: '=',
-        initDate: '=',
-        calIcon: '='
+        initDate: '='
+
       },
       link: function(scope, element, attrs, ctrl) {
 

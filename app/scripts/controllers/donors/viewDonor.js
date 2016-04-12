@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('ViewDonorCtrl', function($scope, $location, $modal, $log, Alerting, DonorService, TestingService, ConfigurationsService, ICONS, PERMISSIONS, PACKTYPE, MONTH, TITLE,
+  .controller('ViewDonorCtrl', function($scope, $location, $uibModal, $log, Alerting, DonorService, TestingService, ConfigurationsService, ICONS, PERMISSIONS, PACKTYPE, MONTH, TITLE,
                                          GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams) {
 
     //Initialize scope variables
@@ -151,7 +151,7 @@ angular.module('bsis')
         message: 'Are you sure you wish to delete the donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '"?'
       };
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         animation: false,
         templateUrl: 'views/confirmModal.html',
         controller: 'ConfirmModalCtrl',
@@ -360,7 +360,7 @@ angular.module('bsis')
         return $q.resolve(null);
       }
 
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         animation: false,
         templateUrl: 'views/confirmModal.html',
         controller: 'ConfirmModalCtrl',
@@ -401,7 +401,7 @@ angular.module('bsis')
       }
       message += ' Are you sure that you want to continue?';
 
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         animation: false,
         templateUrl: 'views/confirmModal.html',
         controller: 'ConfirmModalCtrl',
