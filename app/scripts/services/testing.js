@@ -53,21 +53,6 @@ angular.module('bsis')
       setCurrentTestBatch: function(testBatchId) {
         currentTestBatchId = testBatchId;
       },
-      getTestBatchOverview: function(id, response) {
-        Api.TestBatchOverview.get({id: id}, function(testBatch) {
-          response(testBatch);
-        }, function() {
-          response(false);
-        });
-      },
-      getCurrentTestBatchOverview: function(response) {
-        Api.TestBatchOverview.get({testBatch: currentTestBatchId}, function(testBatch) {
-          response(testBatch);
-        }, function() {
-          response(false);
-        });
-      },
-
       getTestBatchOverviewById: function(testBatchId, onSuccess, onError) {
         Api.TestBatchOverview.get({testBatch: testBatchId}, function(testBatch) {
           onSuccess(testBatch);
@@ -92,21 +77,6 @@ angular.module('bsis')
       getTestBatchOutcomesReport: function(testBatch, onSuccess, onError) {
         Api.TestResultsReport.query({testBatch: testBatch}, function(testBatchOutcomesReport) {
           onSuccess(testBatchOutcomesReport);
-        }, function(err) {
-          onError(err);
-        });
-      },
-      getCurrentTestResults: function(response) {
-        Api.FindTestResults.query({testBatch: currentTestBatchId}, function(testResults) {
-          response(testResults);
-        }, function() {
-          response(false);
-        });
-      },
-
-      getTestResultsById: function(id, onSuccess, onError) {
-        Api.FindTestResults.query({testBatch: id}, function(testResults) {
-          onSuccess(testResults);
         }, function(err) {
           onError(err);
         });
