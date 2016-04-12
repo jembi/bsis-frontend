@@ -1,4 +1,4 @@
-angular.module('bsis').controller('ViewTestSampleCtrl', function($scope, $location, $routeParams, $timeout, TestingService, $log) {
+angular.module('bsis').controller('ViewTestSampleCtrl', function($scope, $location, $routeParams, $timeout, TestingService) {
 
   // Initial values
   $scope.searching = false;
