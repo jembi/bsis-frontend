@@ -212,8 +212,6 @@ angular.module('bsis')
         }
       ),
 
-      RecentTestBatches: $resource(url + '/testbatches/recent/:count'),
-
       FindTestBatches: $resource(url + '/testbatches/search'),
 
       FindTestResults: $resource(url + '/testresults/search', {},
