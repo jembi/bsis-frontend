@@ -28,6 +28,8 @@ angular.module('bsis')
     var minBirthDate = moment().subtract(maxAge, 'years');
     var maxBirthDate = moment().subtract(minAge, 'years');
 
+    $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
+
     var data = [{}];
     $scope.data = data;
 
