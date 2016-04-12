@@ -4,7 +4,6 @@ angular.module('bsis')
   .factory('TestingService', function($http, Api, $q) {
 
     var currentTestBatchId = '';
-    var donationBatchesObj = [];
 
     return {
       getTestBatchFormFields: function(response) {
@@ -75,12 +74,6 @@ angular.module('bsis')
         }, function() {
           onError(false);
         });
-      },
-      getDonationBatches: function() {
-        return donationBatchesObj;
-      },
-      setDonationBatches: function(donationBatch) {
-        donationBatchesObj = donationBatch;
       },
       getTestResultsByDIN: function(donationIdentificationNumber, response) {
         Api.TestResults.get({donationIdentificationNumber: donationIdentificationNumber}, function(overview) {
