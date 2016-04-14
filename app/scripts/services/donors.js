@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('DonorService', function($http, Api, $document) {
+  .factory('DonorService', function($http, Api) {
 
     var donorObj = {};
     var donationBatchObj = {};
@@ -236,7 +236,7 @@ angular.module('bsis')
         Api.DonorBarcode.get({id: donorId}, function(label) {
           response(label);
 
-          var hiddenElement = $document.createElement('a');
+          var hiddenElement = document.createElement('a');
           hiddenElement.href = 'data:attachment/zpl,' + encodeURI(label.labelZPL);
           hiddenElement.target = '_blank';
           hiddenElement.download = 'barcode.bc';
