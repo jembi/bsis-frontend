@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('LabellingService', function($http, Api, $document) {
+  .factory('LabellingService', function($http, Api) {
     return {
       checkLabellingStatus: function(donationIdentificationNumber, response) {
         var status = Api.LabellingStatus.get({donationIdentificationNumber: donationIdentificationNumber}, function() {
@@ -14,7 +14,7 @@ angular.module('bsis')
         var label = Api.PrintPackLabel.get({componentId: componentId}, function() {
           response(label);
 
-          var hiddenElement = $document.createElement('a');
+          var hiddenElement = document.createElement('a');
           hiddenElement.href = 'data:attachment/zpl,' + encodeURI(label.labelZPL);
           hiddenElement.target = '_blank';
           hiddenElement.download = 'label.zpl';
@@ -28,7 +28,7 @@ angular.module('bsis')
         var label = Api.PrintDiscardLabel.get({componentId: componentId}, function() {
           response(label);
 
-          var hiddenElement = $document.createElement('a');
+          var hiddenElement = document.createElement('a');
           hiddenElement.href = 'data:attachment/zpl,' + encodeURI(label.labelZPL);
           hiddenElement.target = '_blank';
           hiddenElement.download = 'label.zpl';
