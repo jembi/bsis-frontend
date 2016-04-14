@@ -523,13 +523,13 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
     });
   }])
 
-  .directive('bsisTabTo', [function($document) {
+  .directive('bsisTabTo', [function() {
     return {
       restrict: 'A',
       link: function(scope, el, attrs) {
         el.bind('keyup', function() {
           if (this.value.length === this.maxLength) {
-            var element = $document.getElementById(attrs.bsisTabTo);
+            var element = document.getElementById(attrs.bsisTabTo);
             if (element) {
               element.focus();
             }
