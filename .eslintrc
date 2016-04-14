@@ -44,7 +44,7 @@
         "restrict": "AE"
       }
     ],
-    "angular/document-service": 2,
+    "angular/document-service": 0,
     "angular/empty-controller": 0,
     "angular/file-name": 0,
     "angular/filter-name": 0,
