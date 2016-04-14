@@ -29,7 +29,7 @@
       <span ng-show="confirmEdit">
         <em>
             <button class="btn btn-link text-muted" style="padding:0;" ng-disabled="editableForm.$waiting"
-                    ng-click="editableForm.$submit(); confirmEdit = false">Save
+                    ng-click="editableForm.$submit();">Save
             </button>
             <button class="btn btn-link text-muted" style="padding:0;" ng-disabled="editableForm.$waiting"
                     ng-click="editableForm.$cancel(); confirmEdit = false">Cancel
@@ -107,7 +107,7 @@
           <li ng-show="err['donationBatchIds']"> {{err["donationBatchIds"]}}</li>
       </ul>
   </uib-alert>
-  <form editable-form name="editableForm" onaftersave="updateTestBatch(testBatch)">
+  <form editable-form name="editableForm" onbeforesave="validateForm(editableForm)" onaftersave="updateTestBatch(testBatch)">
 
       <div class="h4">
           <small><em>Created On: </em></small>
@@ -134,27 +134,26 @@
             ng-href="#/manageBloodGroupMatchTesting/{{testBatch.id}}" ng-disabled="!pendingBloodTypingConfirmations">Resolve Ambiguous ABO/Rh Outcomes</a></em></small> </span>
   </span>
 
-      <div ng-show="editableForm.$visible && testBatch.permissions.canEditDonationBatches" class="h4">
+      <div ng-show="editableForm.$visible && testBatch.permissions.canEditDonationBatches">
           <small><em>Donation Batches: </em></small>
-      <span style="display:inline;">
-        <ui-select name="donationBatches" required="true" multiple="true" ng-model="testBatch.donationBatchIds"
-                   theme="bootstrap" style="width: 700px;">
-            <ui-select-match placeholder="Select:">{{$item.venue.name}} ({{$item.createdDate | bsisDate}})
-            </ui-select-match>
-            <ui-select-choices
-                    repeat="donationBatch.id as donationBatch in testBatchAvailableDonationBatches | filter:$select.search">
-                <div ng-bind-html="donationBatch.venue.name"></div>
-                <small>
-                    {{donationBatch.createdDate | bsisDate}} |
-                    {{donationBatch.numDonations}} donations
-                </small>
-            </ui-select-choices>
-        </ui-select>
-        <small class="error"
-               ng-show="(editableForm.donationBatchIds.$invalid && (editableForm.donationBatchIds.donationBatches.$dirty || submitted))">
-            Select one or more donation batches
-        </small>
-      </span>
+        <div class="form-group" >
+            <ui-select name="donationBatches" multiple ng-model="testBatch.donationBatchIds" ui-select-required
+                       style="width: 700px;">
+                <ui-select-match placeholder="Select:">{{$item.venue.name}} ({{$item.createdDate | bsisDate}})
+                </ui-select-match>
+                <ui-select-choices
+                        repeat="donationBatch.id as donationBatch in testBatchAvailableDonationBatches | filter:$select.search">
+                    <div ng-bind-html="donationBatch.venue.name"></div>
+                    <small>
+                        {{donationBatch.createdDate | bsisDate}} |
+                        {{donationBatch.numDonations}} donations
+                    </small>
+                </ui-select-choices>
+            </ui-select>
+            <small class="error" ng-show="editableForm.$error.uiSelectRequired">
+                Select one or more donation batches
+            </small>
+        </div>
       </div>
 
     <span ng-show="!editableForm.$visible || !testBatch.permissions.canEditDonationBatches">

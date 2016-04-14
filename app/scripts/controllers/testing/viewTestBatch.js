@@ -482,4 +482,11 @@ angular.module('bsis')
       });
     };
 
+    $scope.validateForm = function(form) {
+      if (form.donationBatches.$invalid) {
+        return 'invalid';
+      } else {
+        $scope.confirmEdit = false;
+      }
+    };
   });
