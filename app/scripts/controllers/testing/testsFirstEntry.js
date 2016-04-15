@@ -71,10 +71,14 @@ angular.module('bsis')
     $scope.saveTestResults = function(testResults, reEntry) {
       $scope.savingTestResults = true;
       var requests = [];
+
+      var testResultsArray = [];
       angular.forEach(testResults, function(value) {
-        var request = TestingService.saveTestResults(value, reEntry, angular.noop);
-        requests.push(request);
+        testResultsArray.push(value);
       });
+
+      var request = TestingService.saveTestResults(testResultsArray, reEntry, angular.noop);
+      requests.push(request);
 
       // FIXME: Handle errors
       $q.all(requests).then(function() {
