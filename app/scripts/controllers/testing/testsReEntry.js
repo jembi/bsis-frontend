@@ -119,11 +119,17 @@ angular.module('bsis')
 
     var saveTestOutcomes = function() {
       $scope.savingTestOutcomes = true;
+      var testResultsArray = {};
+      testResultsArray.testOutcomesForDonations = [];
+
       var requests = [];
+
       angular.forEach(testOutcomesToSave, function(value) {
-        var request = TestingService.saveTestResults(value, true, angular.noop);
-        requests.push(request);
+        testResultsArray.testOutcomesForDonations.push(value);
       });
+
+      var request = TestingService.saveTestResults(testResultsArray, true, angular.noop);
+      requests.push(request);
 
       // FIXME: Handle errors
       $q.all(requests).then(function() {
