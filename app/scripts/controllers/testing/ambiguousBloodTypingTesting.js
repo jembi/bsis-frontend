@@ -52,7 +52,7 @@ angular.module('bsis')
           }
           bloodTypingResolution.status = status;
           var bloodTypingResolutionForm = {};
-          
+
           bloodTypingResolutionForm.status = bloodTypingResolution.status;
           bloodTypingResolutionForm.bloodAbo = bloodTypingResolution.bloodAbo;
           bloodTypingResolutionForm.bloodRh = bloodTypingResolution.bloodRh;
