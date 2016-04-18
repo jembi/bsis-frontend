@@ -70,11 +70,14 @@ angular.module('bsis')
 
     $scope.saveTestResults = function(testResults, reEntry) {
       $scope.savingTestResults = true;
+
+      var testResultsArray = {};
+      testResultsArray.testOutcomesForDonations = [];
+
       var requests = [];
 
-      var testResultsArray = [];
       angular.forEach(testResults, function(value) {
-        testResultsArray.push(value);
+        testResultsArray.testOutcomesForDonations.push(value);
       });
 
       var request = TestingService.saveTestResults(testResultsArray, reEntry, angular.noop);
