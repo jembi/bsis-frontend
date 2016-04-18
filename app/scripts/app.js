@@ -141,7 +141,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       })
       .when('/recordComponents', {
         templateUrl: 'views/components/recordComponents.html',
-        controller: 'ComponentsCtrl',
+        controller: 'RecordComponentsCtrl',
         permission: PERMISSIONS.ADD_COMPONENT,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
