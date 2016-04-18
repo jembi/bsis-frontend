@@ -134,35 +134,34 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // COMPONENTS URLs
       .when('/components', {
-        templateUrl: 'views/components.html',
-        controller: 'ComponentsCtrl',
+        redirectTo: '/recordComponents',
         permission: PERMISSIONS.VIEW_COMPONENT_INFORMATION,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
       })
       .when('/recordComponents', {
-        templateUrl: 'views/components.html',
+        templateUrl: 'views/components/recordComponents.html',
         controller: 'ComponentsCtrl',
         permission: PERMISSIONS.ADD_COMPONENT,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
       })
       .when('/findComponents', {
-        templateUrl: 'views/components.html',
+        templateUrl: 'views/components/findComponents.html',
         controller: 'ComponentsCtrl',
         permission: PERMISSIONS.VIEW_COMPONENT,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
       })
       .when('/discardComponents', {
-        templateUrl: 'views/components.html',
+        templateUrl: 'views/components/discardComponents.html',
         controller: 'ComponentsCtrl',
         permission: PERMISSIONS.DISCARD_COMPONENT,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
       })
       .when('/findDiscards', {
-        templateUrl: 'views/components.html',
+        templateUrl: 'views/components/findDiscards.html',
         controller: 'ComponentsCtrl',
         permission: PERMISSIONS.VIEW_DISCARDS,
         enabled: UI.COMPONENTS_TAB_ENABLED,
@@ -518,6 +517,19 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
           $location.path('/exportDonorList');
         } else {
           $location.path('/home');
+        }
+      }
+
+      if ($location.path() === '/components') {
+        // Initial routing for components page
+        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT) > -1)) {
+          $location.path('/recordComponents');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1)) {
+          $location.path('/findComponents');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.DISCARD_COMPONENT) > -1)) {
+          $location.path('/discardComponents');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_DISCARDS) > -1)) {
+          $location.path('/findDiscards');
         }
       }
     });
