@@ -39,7 +39,8 @@ angular.module('bsis')
     $scope.saveBloodTypingResolutions = function(bloodTypingResolutions) {
 
       $scope.savingTestResults = true;
-
+      var bloodTypingResolutionsArray = {};
+      bloodTypingResolutionsArray.bloodTypingResolutions = [];
       var requests = [];
 
       angular.forEach(bloodTypingResolutions, function(bloodTypingResolution) {
@@ -50,10 +51,20 @@ angular.module('bsis')
             status = 'NO_TYPE_DETERMINED';
           }
           bloodTypingResolution.status = status;
-          var request = TestingService.saveBloodTypingResolution(bloodTypingResolution, angular.noop);
-          requests.push(request);
+          var bloodTypingResolutionForm = {};
+          
+          bloodTypingResolutionForm.status = bloodTypingResolution.status;
+          bloodTypingResolutionForm.bloodAbo = bloodTypingResolution.bloodAbo;
+          bloodTypingResolutionForm.bloodRh = bloodTypingResolution.bloodRh;
+          bloodTypingResolutionForm.donationId = bloodTypingResolution.id;
+
+
+          bloodTypingResolutionsArray.bloodTypingResolutions.push(bloodTypingResolutionForm);
         }
       });
+
+      var request = TestingService.saveBloodTypingResolutions(bloodTypingResolutionsArray, angular.noop);
+      requests.push(request);
 
       $q.all(requests).then(function() {
         $location.path('/viewTestBatch/' + $routeParams.id);
@@ -91,5 +102,3 @@ angular.module('bsis')
 
   })
 ;
-
-

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('TestingService', function($http, Api, $q) {
+  .factory('TestingService', function($http, Api) {
 
     var currentTestBatchId = '';
     var donationBatchesObj = [];
@@ -144,22 +144,12 @@ angular.module('bsis')
         });
         return result.$promise;
       },
-      saveBloodTypingResolution: function(resolution, response) {
-        var deferred = $q.defer();
-
-        var bloodTypingResolutionForm = {};
-        bloodTypingResolutionForm.status = resolution.status;
-        bloodTypingResolutionForm.bloodAbo = resolution.bloodAbo;
-        bloodTypingResolutionForm.bloodRh = resolution.bloodRh;
-
-        Api.BloodTypingResolution.update({id: resolution.id}, bloodTypingResolutionForm, function() {
+      saveBloodTypingResolutions: function(resolutions, response) {
+        return Api.BloodTypingResolutions.save({}, resolutions, function() {
           response(true);
-          deferred.resolve();
         }, function() {
           response(false);
-          deferred.reject();
         });
-        return deferred.promise;
       },
       closeTestBatch: function(testBatch, onSuccess, onError) {
         var updateTestBatch = {};

@@ -242,11 +242,7 @@ angular.module('bsis')
         }
       ),
 
-      BloodTypingResolution: $resource(url + '/donations/:id/bloodTypingResolution', null,
-        {
-          update: {method: 'PUT', params: {id: '@id'}}
-        }
-      ),
+      BloodTypingResolutions: $resource(url + '/donations/bloodTypingResolutions'),
 
       TestBatchOverview: $resource(url + '/testresults/overview', {},
         {
