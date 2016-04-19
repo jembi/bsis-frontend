@@ -148,7 +148,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       })
       .when('/findComponents', {
         templateUrl: 'views/components/findComponents.html',
-        controller: 'ComponentsCtrl',
+        controller: 'FindComponentsCtrl',
         permission: PERMISSIONS.VIEW_COMPONENT,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
