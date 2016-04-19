@@ -155,7 +155,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       })
       .when('/discardComponents', {
         templateUrl: 'views/components/discardComponents.html',
-        controller: 'ComponentsCtrl',
+        controller: 'DiscardComponentsCtrl',
         permission: PERMISSIONS.DISCARD_COMPONENT,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
