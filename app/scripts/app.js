@@ -162,7 +162,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       })
       .when('/findDiscards', {
         templateUrl: 'views/components/findDiscards.html',
-        controller: 'ComponentsCtrl',
+        controller: 'FindDiscardsCtrl',
         permission: PERMISSIONS.VIEW_DISCARDS,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
