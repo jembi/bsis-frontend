@@ -1,5 +1,5 @@
 angular.module('bsis')
-  .controller('DiscardComponentsCtrl', function($scope, $rootScope, $location, ComponentService, ICONS, PERMISSIONS, COMPONENTTYPE, DATEFORMAT, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout, $routeParams) {
 
     $scope.componentsSearch = $routeParams;
 
