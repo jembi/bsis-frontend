@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/jembi/bsis-frontend.png)](http://travis-ci.org/jembi/bsis-frontend)
+
 # BSIS Frontend
 
 This application provides the new client-side code and frontend to the [Blood Safety Information System (BSIS)](http://www.github.com/jembi/bsis).
