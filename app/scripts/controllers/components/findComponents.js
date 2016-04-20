@@ -49,7 +49,7 @@ angular.module('bsis')
 
     $scope.findComponents = function(search) {
       $scope.componentsView = 'viewDonations';
-      search.findsearch = true;
+      search.findComponentsSearch = true;
       $location.search(search);
 
       $scope.searching = true;
@@ -58,7 +58,7 @@ angular.module('bsis')
           data = searchResponse.components;
           $scope.data = data;
           $scope.searchResults = true;
-          $scope.searchCount = $scope.data.length;
+          $scope.componentsSearchCount = $scope.data.length;
           $scope.searching = false;
         } else {
           $scope.searchResults = false;
@@ -88,7 +88,7 @@ angular.module('bsis')
     };
 
     function initialiseRouteParams() {
-      if ($routeParams.findsearch) {
+      if ($routeParams.findComponentsSearch) {
         if ($routeParams.donationIdentificationNumber) {
           $scope.search.donationIdentificationNumber = $routeParams.donationIdentificationNumber;
         }
