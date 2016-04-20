@@ -8,25 +8,60 @@ angular.module('bsis')
 
     var columnDefs = [
       {
-        name: 'Donation Type',
-        field: 'cohorts'
-      },
-      {
-        name: 'Gender',
-        displayName: 'Gender',
-        field: 'gender'
-      },
-      {
-        name: 'Blood Type',
-        field: 'bloodType'
-      },
-      {
         name: 'Venue',
         field: 'venue.name'
       },
       {
-        name: 'Number of Donations',
-        field: 'value'
+        name: 'Gender',
+        field: 'cohorts'
+      },
+      {
+        name: 'Donation Type',
+        field: 'donationType'
+      },
+      {
+        name: 'A+',
+        field: 'aPlus',
+        width: 70
+      },
+      {
+        name: 'A-',
+        field: 'aMinus',
+        width: 70
+      },
+      {
+        name: 'B+',
+        field: 'bPlus',
+        width: 70
+      },
+      {
+        name: 'B-',
+        field: 'bMinus',
+        width: 70
+      },
+      {
+        name: 'AB+',
+        field: 'abPlus',
+        width: 70
+      },
+      {
+        name: 'AB-',
+        field: 'abMinus',
+        width: 70
+      },
+      {
+        name: 'O+',
+        field: 'oPlus',
+        width: 70
+      },
+      {
+        name: 'O-',
+        field: 'oMinus',
+        width: 70
+      },
+      {
+        name: 'No blood type',
+        field: 'empty'
       }
     ];
 
@@ -80,11 +115,34 @@ angular.module('bsis')
         $scope.gridOptions.data = report.dataValues;
         angular.forEach($scope.gridOptions.data, function(item) {
           var cohorts = item.cohorts;
-          item.cohorts = cohorts[0].option;
-          item.gender = cohorts[1].option;
-          item.bloodType = cohorts[2].option;
+          var donationType = cohorts[0].option;
+          var gender = cohorts[1].option;
+          var bloodType = cohorts[2].option;
+          item.cohorts = gender;
+          item.donationType = donationType;
+
+          if (bloodType === 'A+') {
+            item.aPlus = item.value;
+          } else if (bloodType === 'A-') {
+            item.aMinus = item.value;
+          } else if (bloodType === 'B+') {
+            item.bPlus = item.value;
+          } else if (bloodType === 'B-') {
+            item.bMinus = item.value;
+          } else if (bloodType === 'AB+') {
+            item.abPlus = item.value;
+          } else if (bloodType === 'AB-') {
+            item.abMinus = item.value;
+          } else if (bloodType === 'O+') {
+            item.oPlus = item.value;
+          } else if (bloodType === 'O-') {
+            item.oMinus = item.value;
+          } else if (bloodType === 'nullnull') {
+            item.empty = item.value;
+          }
         });
       }, $log.error);
+
     }
 
     $scope.export = function(format) {
