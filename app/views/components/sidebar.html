@@ -1,4 +1,4 @@
-<div class="col-sm-3 col-md-2 sidebar" style="padding-top:5px;">
+<div class="col-sm-3 col-md-2 sidebar" style="padding-top:5px;" ng-controller="ComponentsSidebarCtrl">
     <ul class="nav nav-sidebar">
         <li class="disabled">
       <span class="icon-sidebar-container">
@@ -10,14 +10,14 @@
       </span>
         </li>
         <li class="disabled" has-permission="{{permissions.VIEW_COMPONENT}}"><span>MANAGE COMPONENTS</span></li>
-        <li ng-class="{current: isCurrent('/recordComponents')}" has-permission="{{permissions.ADD_COMPONENT}}"><a
+        <li ng-class="{current: currentPath === '/recordComponents'}" has-permission="{{permissions.ADD_COMPONENT}}"><a
                 href="#/recordComponents">Record Components</a></li>
-        <li ng-class="{current: isCurrent('/findComponents')}" has-permission="{{permissions.VIEW_COMPONENT}}"><a
+        <li ng-class="{current: currentPath === '/findComponents'}" has-permission="{{permissions.VIEW_COMPONENT}}"><a
                 href="#/findComponents">Find Components</a></li>
         <li class="disabled" has-permission="{{permissions.VIEW_DISCARDS}}"><span>MANAGE DISCARDS</span></li>
-        <li ng-class="{current: isCurrent('/discardComponents')}" has-permission="{{permissions.DISCARD_COMPONENT}}"><a
+        <li ng-class="{current: currentPath === '/discardComponents'}" has-permission="{{permissions.DISCARD_COMPONENT}}"><a
                 href="#/discardComponents">Discard Components</a></li>
-        <li ng-class="{current: isCurrent('/findDiscards')}" has-permission="{{permissions.VIEW_DISCARDS}}"><a
+        <li ng-class="{current: currentPath === '/findDiscards'}" has-permission="{{permissions.VIEW_DISCARDS}}"><a
                 href="#/findDiscards">Find Discards</a></li>
     </ul>
     <div ng-include="'views/sidebarFooter.html'"></div>
