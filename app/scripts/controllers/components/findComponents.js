@@ -1,12 +1,11 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindComponentsCtrl', function($scope, $rootScope, $location, ComponentService, ICONS, COMPONENTTYPE, DATEFORMAT, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('FindComponentsCtrl', function($scope, $location, ComponentService, ICONS, DATEFORMAT, $filter, ngTableParams, $timeout, $routeParams) {
 
     $scope.icons = ICONS;
 
     $scope.format = DATEFORMAT;
-    $scope.calIcon = 'fa-calendar';
     $scope.startDateOpen = false;
     $scope.endDateOpen = false;
 
@@ -15,7 +14,7 @@ angular.module('bsis')
     $scope.component = {};
 
     $scope.searchResults = '';
-    $scope.componentsSearch = {
+    $scope.search = {
       donationIdentificationNumber: '',
       startDate: '',
       endDate: '',
@@ -48,18 +47,18 @@ angular.module('bsis')
       });
     });
 
-    $scope.findComponents = function(componentsSearch) {
+    $scope.findComponents = function(search) {
       $scope.componentsView = 'viewDonations';
-      componentsSearch.findComponentsSearch = true;
-      $location.search(componentsSearch);
+      search.findsearch = true;
+      $location.search(search);
 
       $scope.searching = true;
-      ComponentService.ComponentsSearch(componentsSearch, function(searchResponse) {
+      ComponentService.ComponentsSearch(search, function(searchResponse) {
         if (searchResponse !== false) {
           data = searchResponse.components;
           $scope.data = data;
           $scope.searchResults = true;
-          $scope.componentsSearchCount = $scope.data.length;
+          $scope.searchCount = $scope.data.length;
           $scope.searching = false;
         } else {
           $scope.searchResults = false;
@@ -69,7 +68,7 @@ angular.module('bsis')
     };
 
     $scope.clear = function() {
-      $scope.componentsSearch = {};
+      $scope.search = {};
       $scope.searchResults = '';
       $location.search({});
     };
@@ -89,17 +88,17 @@ angular.module('bsis')
     };
 
     function initialiseRouteParams() {
-      if ($routeParams.findComponentsSearch) {
+      if ($routeParams.findsearch) {
         if ($routeParams.donationIdentificationNumber) {
-          $scope.componentsSearch.donationIdentificationNumber = $routeParams.donationIdentificationNumber;
+          $scope.search.donationIdentificationNumber = $routeParams.donationIdentificationNumber;
         }
         if ($routeParams.donationDateFrom) {
           var donationDateFrom = new Date($routeParams.donationDateFrom);
-          $scope.componentsSearch.donationDateFrom = donationDateFrom;
+          $scope.search.donationDateFrom = donationDateFrom;
         }
         if ($routeParams.donationDateTo) {
           var donationDateTo = new Date($routeParams.donationDateTo);
-          $scope.componentsSearch.donationDateTo = donationDateTo;
+          $scope.search.donationDateTo = donationDateTo;
         }
         if ($routeParams.componentTypes) {
           var componentTypes = $routeParams.componentTypes;
@@ -107,10 +106,10 @@ angular.module('bsis')
             componentTypes = [componentTypes];
           }
           angular.forEach(componentTypes, function(selectedComponentType) {
-            $scope.componentsSearch.componentTypes.push(parseInt(selectedComponentType));
+            $scope.search.componentTypes.push(parseInt(selectedComponentType));
           });
         }
-        $scope.findComponents($scope.componentsSearch);
+        $scope.findComponents($scope.search);
       }
     }
 

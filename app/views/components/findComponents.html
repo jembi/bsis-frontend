@@ -2,14 +2,14 @@
 <div class="col-sm-9 col-md-10 main">
     <h3 class="page-header">Find Components</h3>
 
-    <form class="form-horizontal col-sm-12" role="form" ng-submit="findComponents(componentsSearch)">
+    <form class="form-horizontal col-sm-12" role="form" ng-submit="findComponents(search)">
         <div class="form-group">
             <label for="donationIdentificationNumber" class="col-sm-1 control-label">DIN</label>
             <div class="row col-sm-11">
                 <div class="form-inline" style="padding-left:5px;">
                     <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
                            class="form-control input-sm" placeholder=""
-                           ng-model="componentsSearch.donationIdentificationNumber">
+                           ng-model="search.donationIdentificationNumber">
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
             <label for="componentTypes" class="col-sm-1 control-label">Type</label>
             <div class="row col-sm-11">
                 <div class="form-inline" style="padding-left:5px;">
-                    <ui-select multiple ng-model="componentsSearch.componentTypes" theme="bootstrap" ng-disabled="disabled"
+                    <ui-select multiple ng-model="search.componentTypes" theme="bootstrap" ng-disabled="disabled"
                                style="width: 550px;">
                         <ui-select-match placeholder="Select:">{{$item.componentTypeName}}</ui-select-match>
                         <ui-select-choices
@@ -32,13 +32,13 @@
             <label for="donationDate" class="col-sm-1 control-label">Period</label>
             <div class="row col-sm-11">
                 <div class="form-inline" style="padding-left:5px;">
-                    <dateselect ng-model="componentsSearch.donationDateFrom" ng-required="false" format="format"
+                    <dateselect ng-model="search.donationDateFrom" ng-required="false" format="format"
                                 opened="startDateOpen" cal-icon="icons.CALENDAR">
                     </dateselect>
             <span>
             <em> To: </em>
             </span>
-                    <dateselect-end ng-model="componentsSearch.donationDateTo" format="format" opened="endDateOpen"
+                    <dateselect-end ng-model="search.donationDateTo" format="format" opened="endDateOpen"
                                     cal-icon="icons.CALENDAR">
                     </dateselect-end>
                 </div>
