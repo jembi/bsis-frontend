@@ -30,6 +30,10 @@ angular.module('bsis')
       $scope.selectedComponents = [];
     };
 
+    $scope.isComponentSearchValid = function() {
+      return $scope.componentsSearch && $scope.componentsSearch.hasOwnProperty('donationIdentificationNumber');
+    };
+
     $scope.recordComponents = function(recordComponentsForm) {
 
       if (recordComponentsForm.$valid && $scope.selectedComponents.length > 0) {
@@ -63,7 +67,10 @@ angular.module('bsis')
 
     };
 
-    $scope.getComponentsByDIN = function() {
+    $scope.getComponentsByDIN = function(findComponentsForm) {
+      if (findComponentsForm && !findComponentsForm.$valid) {
+        return;
+      }
       $scope.componentsSearch.search = true;
       $location.search($scope.componentsSearch);
       $scope.searching = true;
