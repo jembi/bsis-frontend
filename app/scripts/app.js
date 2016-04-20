@@ -286,10 +286,16 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // REPORTS URLs
       .when('/reports', {
-        templateUrl: 'views/reports.html',
-        controller: 'ReportsCtrl',
+        redirectTo: '/donationsReport',
         permission: PERMISSIONS.VIEW_REPORTING_INFORMATION,
         enabled: UI.REPORTS_TAB_ENABLED
+      })
+      .when('/donationsReport', {
+        templateUrl: 'views/reports/donationsReport.html',
+        controller: 'DonationsReportCtrl',
+        permission: PERMISSIONS.VIEW_REPORTING_INFORMATION,
+        enabled: UI.REPORTS_TAB_ENABLED,
+        reloadOnSearch: reloadOnSearch
       })
 
       // MOBILE URLs
