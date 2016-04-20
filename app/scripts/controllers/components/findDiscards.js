@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindDiscardsCtrl', function($scope, $rootScope, $location, ComponentService, DATEFORMAT, ngTableParams, $timeout, $routeParams, $filter) {
+  .controller('FindDiscardsCtrl', function($scope, $location, ComponentService, DATEFORMAT, ngTableParams, $timeout, $routeParams, $filter) {
 
     // Initialize variables
 
@@ -14,6 +14,7 @@ angular.module('bsis')
     $scope.endDateOpen = false;
     $scope.componentTypes = [];
     $scope.discardsSearch = {};
+    $scope.discardsSearch.componentTypes = [];
 
     // Find discards methods (findDiscards.html)
 
