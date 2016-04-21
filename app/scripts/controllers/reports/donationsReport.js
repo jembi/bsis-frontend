@@ -1,10 +1,77 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonationsReportCtrl', function($scope, $location, $log, $filter, $routeParams, ICONS, PERMISSIONS, ReportsService) {
+  .controller('DonationsReportCtrl', function($scope, $log, $filter, ReportsService, DATEFORMAT) {
 
-    $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
+    var master = {
+      startDate: moment().subtract(7, 'days').startOf('day').toDate(),
+      endDate: moment().endOf('day').toDate()
+    };
+
+    $scope.dateFormat = DATEFORMAT;
+    $scope.search = angular.copy(master);
+
+    $scope.clearSearch = function(form) {
+      $scope.search = angular.copy(master);
+      form.$setPristine();
+      form.$setUntouched();
+      $scope.gridOptions.data = [];
+    };
+
+    $scope.getReport = function(selectPeriodForm) {
+      if (selectPeriodForm.$valid) {
+        var period = {};
+
+        if ($scope.search.startDate) {
+          var startDate = moment($scope.search.startDate).startOf('day').toDate();
+          period.startDate = startDate;
+        }
+        if ($scope.search.endDate) {
+          var endDate = moment($scope.search.endDate).endOf('day').toDate();
+          period.endDate = endDate;
+        }
+
+        $scope.searching = true;
+        ReportsService.generateDonationsReport(period, function(report) {
+          $scope.searching = false;
+          $scope.gridOptions.data = report.dataValues;
+          angular.forEach($scope.gridOptions.data, function(item) {
+            var cohorts = item.cohorts;
+            var donationType = cohorts[0].option;
+            var gender = cohorts[1].option;
+            var bloodType = cohorts[2].option;
+            item.cohorts = gender;
+            item.donationType = donationType;
+
+            if (bloodType === 'A+') {
+              item.aPlus = item.value;
+            } else if (bloodType === 'A-') {
+              item.aMinus = item.value;
+            } else if (bloodType === 'B+') {
+              item.bPlus = item.value;
+            } else if (bloodType === 'B-') {
+              item.bMinus = item.value;
+            } else if (bloodType === 'AB+') {
+              item.abPlus = item.value;
+            } else if (bloodType === 'AB-') {
+              item.abMinus = item.value;
+            } else if (bloodType === 'O+') {
+              item.oPlus = item.value;
+            } else if (bloodType === 'O-') {
+              item.oMinus = item.value;
+            } else if (bloodType === 'nullnull') {
+              item.empty = item.value;
+            }
+          });
+          $scope.submitted = true;
+        }, function(err) {
+          $scope.searching = false;
+          $log.log(err);
+        });
+      }
+    };
+
+    // Grid ui variables and functions
 
     var columnDefs = [
       {
@@ -103,48 +170,6 @@ angular.module('bsis')
       }
     };
 
-    function search() {
-
-      var startDate = '2016-02-03T21:59:59.999Z';
-      var endDate = '2016-04-03T21:59:59.999Z';
-      var period = {};
-      period.startDate = startDate;
-      period.endDate = endDate;
-
-      ReportsService.generateDonationsReport(period, function(report) {
-        $scope.gridOptions.data = report.dataValues;
-        angular.forEach($scope.gridOptions.data, function(item) {
-          var cohorts = item.cohorts;
-          var donationType = cohorts[0].option;
-          var gender = cohorts[1].option;
-          var bloodType = cohorts[2].option;
-          item.cohorts = gender;
-          item.donationType = donationType;
-
-          if (bloodType === 'A+') {
-            item.aPlus = item.value;
-          } else if (bloodType === 'A-') {
-            item.aMinus = item.value;
-          } else if (bloodType === 'B+') {
-            item.bPlus = item.value;
-          } else if (bloodType === 'B-') {
-            item.bMinus = item.value;
-          } else if (bloodType === 'AB+') {
-            item.abPlus = item.value;
-          } else if (bloodType === 'AB-') {
-            item.abMinus = item.value;
-          } else if (bloodType === 'O+') {
-            item.oPlus = item.value;
-          } else if (bloodType === 'O-') {
-            item.oMinus = item.value;
-          } else if (bloodType === 'nullnull') {
-            item.empty = item.value;
-          }
-        });
-      }, $log.error);
-
-    }
-
     $scope.export = function(format) {
       if (format === 'pdf') {
         $scope.gridApi.exporter.pdfExport('all', 'all');
@@ -153,5 +178,4 @@ angular.module('bsis')
       }
     };
 
-    search();
   });
