@@ -16,6 +16,7 @@ angular.module('bsis')
       form.$setPristine();
       form.$setUntouched();
       $scope.gridOptions.data = [];
+      $scope.submitted = false;
     };
 
     $scope.getReport = function(selectPeriodForm) {
@@ -30,39 +31,59 @@ angular.module('bsis')
           var endDate = moment($scope.search.endDate).endOf('day').toDate();
           period.endDate = endDate;
         }
-
         $scope.searching = true;
+
         ReportsService.generateDonationsReport(period, function(report) {
           $scope.searching = false;
           $scope.gridOptions.data = report.dataValues;
+
+          var previousVenue = '';
+          var previousGender = '';
+          var mergedItem = {};
+          var mergedData = [];
+          var mergedKey = 0;
+
           angular.forEach($scope.gridOptions.data, function(item) {
+
             var cohorts = item.cohorts;
-            var donationType = cohorts[0].option;
             var gender = cohorts[1].option;
             var bloodType = cohorts[2].option;
             item.cohorts = gender;
-            item.donationType = donationType;
+
+            // Merge same venue and gender row (this expects the data is ordered by venue and gender)
+            if (item.venue.name === previousVenue && gender === previousGender) {
+              mergedItem = mergedData[mergedKey];
+            } else {
+              previousVenue = item.venue.name;
+              previousGender = gender;
+              mergedItem = item;
+              mergedKey = mergedKey + 1;
+            }
 
             if (bloodType === 'A+') {
-              item.aPlus = item.value;
+              mergedItem.aPlus = item.value;
             } else if (bloodType === 'A-') {
-              item.aMinus = item.value;
+              mergedItem.aMinus = item.value;
             } else if (bloodType === 'B+') {
-              item.bPlus = item.value;
+              mergedItem.bPlus = item.value;
             } else if (bloodType === 'B-') {
-              item.bMinus = item.value;
+              mergedItem.bMinus = item.value;
             } else if (bloodType === 'AB+') {
-              item.abPlus = item.value;
+              mergedItem.abPlus = item.value;
             } else if (bloodType === 'AB-') {
-              item.abMinus = item.value;
+              mergedItem.abMinus = item.value;
             } else if (bloodType === 'O+') {
-              item.oPlus = item.value;
+              mergedItem.oPlus = item.value;
             } else if (bloodType === 'O-') {
-              item.oMinus = item.value;
+              mergedItem.oMinus = item.value;
             } else if (bloodType === 'nullnull') {
-              item.empty = item.value;
+              mergedItem.empty = item.value;
             }
+
+            mergedData[mergedKey] = mergedItem;
           });
+          $scope.gridOptions.data = mergedData;
+
           $scope.submitted = true;
         }, function(err) {
           $scope.searching = false;
@@ -81,10 +102,6 @@ angular.module('bsis')
       {
         name: 'Gender',
         field: 'cohorts'
-      },
-      {
-        name: 'Donation Type',
-        field: 'donationType'
       },
       {
         name: 'A +',
@@ -127,7 +144,7 @@ angular.module('bsis')
         width: 55
       },
       {
-        name: 'No blood type',
+        name: 'NTD',
         field: 'empty'
       }
     ];
@@ -150,9 +167,9 @@ angular.module('bsis')
 
         return [
           {
-            text: 'Abo Rh Groups Report (' + $filter('bsisDate')($scope.search.startDate) + ' - ' + $filter('bsisDate')($scope.search.endDate) + ')',
+            text: 'Abo Rh Blood Grouping Report - Date Period: ' + $filter('bsisDate')($scope.search.startDate) + ' to ' + $filter('bsisDate')($scope.search.endDate),
             bold: true,
-            margin: [30, 10, 30, 0]
+            margin: [300, 10, 30, 0]
           }
         ];
       },
