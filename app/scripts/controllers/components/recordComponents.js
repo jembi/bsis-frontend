@@ -30,10 +30,6 @@ angular.module('bsis')
       $scope.selectedComponents = [];
     };
 
-    $scope.isComponentSearchValid = function() {
-      return $scope.componentsSearch && $scope.componentsSearch.hasOwnProperty('donationIdentificationNumber');
-    };
-
     $scope.recordComponents = function(recordComponentsForm) {
 
       if (recordComponentsForm.$valid && $scope.selectedComponents.length > 0) {
