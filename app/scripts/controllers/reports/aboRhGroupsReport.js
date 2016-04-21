@@ -138,7 +138,7 @@ angular.module('bsis')
       paginationPageSizes: [10],
       paginationTemplate: 'views/template/pagination.html',
       columnDefs: columnDefs,
-      
+
       exporterPdfOrientation: 'landscape',
       exporterPdfPageSize: 'A4',
       exporterPdfDefaultStyle: {fontSize: 8, margin: [-2, 0, 0, 0] },
