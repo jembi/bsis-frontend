@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonationsReportCtrl', function($scope, $log, $filter, ReportsService, DATEFORMAT) {
+  .controller('AboRhGroupsReportCtrl', function($scope, $log, $filter, ReportsService, DATEFORMAT) {
 
     var master = {
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
@@ -144,7 +144,7 @@ angular.module('bsis')
 
         return [
           {
-            text: 'Donations report',
+            text: 'Abo Rh Groups Report',
             bold: true,
             margin: [30, 10, 30, 0]
           }
@@ -154,7 +154,7 @@ angular.module('bsis')
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
         var columns = [
-          {text: 'Total donations: ' + $scope.gridOptions.data.length, width: 'auto'},
+          {text: 'Total records: ' + $scope.gridOptions.data.length, width: 'auto'},
           {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
           {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
         ];

@@ -5,8 +5,8 @@ angular.module('bsis')
 
     var routes = [
       {
-        path: '/reports',
-        subpaths: ['/donationsReport']
+        path: '/aboRhGroupsReport',
+        subpaths: []
       }
     ];
 
