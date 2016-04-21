@@ -87,44 +87,44 @@ angular.module('bsis')
         field: 'donationType'
       },
       {
-        name: 'A+',
+        name: 'A +',
         field: 'aPlus',
-        width: 70
+        width: 55
       },
       {
-        name: 'A-',
+        name: 'A -',
         field: 'aMinus',
-        width: 70
+        width: 55
       },
       {
-        name: 'B+',
+        name: 'B +',
         field: 'bPlus',
-        width: 70
+        width: 55
       },
       {
-        name: 'B-',
+        name: 'B -',
         field: 'bMinus',
-        width: 70
+        width: 55
       },
       {
-        name: 'AB+',
+        name: 'AB +',
         field: 'abPlus',
-        width: 70
+        width: 65
       },
       {
-        name: 'AB-',
+        name: 'AB -',
         field: 'abMinus',
-        width: 70
+        width: 65
       },
       {
-        name: 'O+',
+        name: 'O +',
         field: 'oPlus',
-        width: 70
+        width: 55
       },
       {
-        name: 'O-',
+        name: 'O -',
         field: 'oMinus',
-        width: 70
+        width: 55
       },
       {
         name: 'No blood type',
@@ -138,13 +138,19 @@ angular.module('bsis')
       paginationPageSizes: [10],
       paginationTemplate: 'views/template/pagination.html',
       columnDefs: columnDefs,
+      
+      exporterPdfOrientation: 'landscape',
+      exporterPdfPageSize: 'A4',
+      exporterPdfDefaultStyle: {fontSize: 8, margin: [-2, 0, 0, 0] },
+      exporterPdfTableHeaderStyle: {fontSize: 8, bold: true, margin: [-2, 0, 0, 0] },
+      exporterPdfMaxGridWidth: 650,
 
       // PDF header
       exporterPdfHeader: function() {
 
         return [
           {
-            text: 'Abo Rh Groups Report',
+            text: 'Abo Rh Groups Report (' + $filter('bsisDate')($scope.search.startDate) + ' - ' + $filter('bsisDate')($scope.search.endDate) + ')',
             bold: true,
             margin: [30, 10, 30, 0]
           }
