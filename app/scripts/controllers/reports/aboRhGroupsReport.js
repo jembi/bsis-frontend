@@ -4,7 +4,7 @@ angular.module('bsis')
   .controller('AboRhGroupsReportCtrl', function($scope, $log, $filter, ReportsService, DATEFORMAT) {
 
     // Initialize variables
-  
+
     var master = {
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: moment().endOf('day').toDate()
@@ -12,7 +12,7 @@ angular.module('bsis')
 
     $scope.dateFormat = DATEFORMAT;
     $scope.search = angular.copy(master);
-  
+
     // Report methods
 
     $scope.clearSearch = function(form) {
@@ -23,32 +23,44 @@ angular.module('bsis')
       $scope.submitted = false;
     };
 
-    $scope.getReport = function(selectPeriodForm) {
-      if (selectPeriodForm.$valid) {
-        var period = {};
+    function createZeroValuesRow(row, venue, gender) {
 
-        if ($scope.search.startDate) {
-          var startDate = moment($scope.search.startDate).startOf('day').toDate();
-          period.startDate = startDate;
-        }
-        if ($scope.search.endDate) {
-          var endDate = moment($scope.search.endDate).endOf('day').toDate();
-          period.endDate = endDate;
-        }
-        $scope.searching = true;
+      var zeroValuesRow = angular.copy(row);
 
-        ReportsService.generateDonationsReport(period, function(report) {
-          $scope.searching = false;
-          
-          mergeData(report.dataValues);
-          $scope.submitted = true;
-        }, function(err) {
-          $scope.searching = false;
-          $log.log(err);
-        });
-      }
-    };
-                                               
+      zeroValuesRow.venue.name = venue;
+      zeroValuesRow.cohorts = gender;
+      zeroValuesRow.aPlus = 0;
+      zeroValuesRow.aMinus = 0;
+      zeroValuesRow.bPlus = 0;
+      zeroValuesRow.bMinus = 0;
+      zeroValuesRow.abPlus = 0;
+      zeroValuesRow.abMinus = 0;
+      zeroValuesRow.oPlus = 0;
+      zeroValuesRow.oMinus = 0;
+      zeroValuesRow.empty = 0;
+      return zeroValuesRow;
+
+    }
+
+    function createAllGendersRow(femaleRow, maleRow) {
+
+      var allGendersRow = angular.copy(femaleRow);
+
+      allGendersRow.venue.name = '';
+      allGendersRow.cohorts = 'All';
+      allGendersRow.aplus = femaleRow.aplus + maleRow.aplus;
+      allGendersRow.aMinus = femaleRow.aMinus + maleRow.aMinus;
+      allGendersRow.bPlus = femaleRow.bPlus + maleRow.bPlus;
+      allGendersRow.bMinus = femaleRow.bMinus + maleRow.bMinus;
+      allGendersRow.abPlus = femaleRow.abPlus + maleRow.abPlus;
+      allGendersRow.abMinus = femaleRow.abMinus + maleRow.abMinus;
+      allGendersRow.oPlus = femaleRow.oPlus + maleRow.oPlus;
+      allGendersRow.oMinus = femaleRow.oMinus + maleRow.oMinus;
+      allGendersRow.empty = femaleRow.empty + maleRow.empty;
+      return allGendersRow;
+
+    }
+
     function mergeData(dataValues) {
       $scope.gridOptions.data = dataValues;
 
@@ -68,64 +80,63 @@ angular.module('bsis')
         var gender = cohorts[1].option;
         var bloodType = cohorts[2].option;
         row.cohorts = gender;
-        
+
         // New venue ()
         if (row.venue.name !== previousVenue) {
-          
+
           if (previousVenue != '') {
-                
+
             // Add gender row if missing for previous venue
-            
+
             if (!foundMale[previousVenue]) {
               // add row male at mergedKey + 1
               zeroValuesRow = createZeroValuesRow(mergedRow, previousVenue, 'male');
               mergedKey = mergedKey + 1;
               mergedData[mergedKey] = zeroValuesRow;
-            } else if (!foundFemale[previousVenue]) {            
+            } else if (!foundFemale[previousVenue]) {
               // add row female at mergedKey and move mergedRow to mergedKey +1
               zeroValuesRow = createZeroValuesRow(mergedRow, previousVenue, 'female');
               mergedData[mergedKey] = zeroValuesRow;
               mergedKey = mergedKey + 1;
               mergedData[mergedKey] = mergedRow;
             }
-            
+
             // Add all genders row for previous venue
             mergedKey = mergedKey + 1;
-            allGendersRow = createAllGendersRow(mergedData[mergedKey-1], mergedData[mergedKey-2]);
-            mergedData[mergedKey] = allGendersRow; 
-            
-          }  
+            allGendersRow = createAllGendersRow(mergedData[mergedKey - 1], mergedData[mergedKey - 2]);
+            mergedData[mergedKey] = allGendersRow;
+
+          }
 
           // Update values for new venue
-          
+
           previousVenue = row.venue.name;
           previousGender = gender;
           mergedRow = createZeroValuesRow(row, previousVenue, gender);
-          mergedKey = mergedKey + 1; 
-          
-          
+          mergedKey = mergedKey + 1;
+
         // Same venue new gender, update values
-          
+
         } else if (gender != previousGender) {
           previousGender = gender;
           mergedRow = createZeroValuesRow(row, previousVenue, gender);
-          mergedKey = mergedKey + 1; 
-          
-        // Else, use existing row and merge contents with this new row.  
-          
+          mergedKey = mergedKey + 1;
+
+        // Else, use existing row and merge contents with this new row.
+
         } else {
           // do nothing
         }
-        
+
         // Populate found gender arrays
-        
+
         if (gender === 'female') {
           foundFemale[row.venue.name] = true;
-        } 
+        }
         if (gender === 'male') {
           foundMale[row.venue.name] = true;
         }
-        
+
         // Populate blood type numbers
 
         if (bloodType === 'A+') {
@@ -149,52 +160,38 @@ angular.module('bsis')
         }
 
         // Add row to mergedData
-        
+
         mergedData[mergedKey] = mergedRow;
-        
+
       });
-      $scope.gridOptions.data = mergedData;  
+      $scope.gridOptions.data = mergedData;
     }
-  
-    function createZeroValuesRow(row, venue, gender) {
-      
-      var zeroValuesRow = angular.copy(row);
-      
-      zeroValuesRow.venue.name = venue;
-      zeroValuesRow.cohorts = gender;
-      zeroValuesRow.aPlus = 0;
-      zeroValuesRow.aMinus = 0;
-      zeroValuesRow.bPlus = 0;
-      zeroValuesRow.bMinus = 0;
-      zeroValuesRow.abPlus = 0;
-      zeroValuesRow.abMinus = 0;
-      zeroValuesRow.oPlus = 0;
-      zeroValuesRow.oMinus = 0;
-      zeroValuesRow.empty = 0;
-      return zeroValuesRow;
-      
-    } 
-  
-    function createAllGendersRow(femaleRow, maleRow) {
-      
-      var allGendersRow = angular.copy(femaleRow);
-      
-      allGendersRow.venue.name = '';
-      
-      allGendersRow.cohorts = 'All';
-      allGendersRow.aplus = femaleRow.aplus + maleRow.aplus;
-      allGendersRow.aMinus = femaleRow.aMinus + maleRow.aMinus;
-      allGendersRow.bPlus = femaleRow.bPlus + maleRow.bPlus;
-      allGendersRow.bMinus = femaleRow.bMinus + maleRow.bMinus;
-      allGendersRow.abPlus = femaleRow.abPlus + maleRow.abPlus;
-      allGendersRow.abMinus = femaleRow.abMinus + maleRow.abMinus;
-      allGendersRow.oPlus = femaleRow.oPlus + maleRow.oPlus;
-      allGendersRow.oMinus = femaleRow.oMinus + maleRow.oMinus;
-      allGendersRow.empty = femaleRow.empty + maleRow.empty;
-      return allGendersRow;
-      
-    } 
-                                              
+
+    $scope.getReport = function(selectPeriodForm) {
+      if (selectPeriodForm.$valid) {
+        var period = {};
+
+        if ($scope.search.startDate) {
+          var startDate = moment($scope.search.startDate).startOf('day').toDate();
+          period.startDate = startDate;
+        }
+        if ($scope.search.endDate) {
+          var endDate = moment($scope.search.endDate).endOf('day').toDate();
+          period.endDate = endDate;
+        }
+        $scope.searching = true;
+
+        ReportsService.generateDonationsReport(period, function(report) {
+          $scope.searching = false;
+
+          mergeData(report.dataValues);
+          $scope.submitted = true;
+        }, function(err) {
+          $scope.searching = false;
+          $log.log(err);
+        });
+      }
+    };
 
     // Grid ui variables and methods
 
