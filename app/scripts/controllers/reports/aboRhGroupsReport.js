@@ -97,7 +97,7 @@ angular.module('bsis')
         var bloodType = cohorts[2].option;
         row.cohorts = gender;
 
-        // New venue ()
+        // New venue
         if (row.venue.name !== previousVenue) {
 
           if (previousVenue != '') {
@@ -120,6 +120,10 @@ angular.module('bsis')
             // Add all genders row for previous venue
             mergedKey = mergedKey + 1;
             allGendersRow = createAllGendersRow(mergedData[mergedKey - 1], mergedData[mergedKey - 2]);
+
+            // Remove venue name from female row
+            mergedData[mergedKey - 1].venue.name = '';
+
             mergedData[mergedKey] = allGendersRow;
 
           }
