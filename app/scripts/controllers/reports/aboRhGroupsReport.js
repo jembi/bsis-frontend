@@ -23,6 +23,16 @@ angular.module('bsis')
       $scope.submitted = false;
     };
 
+    function createEmptyRow() {
+
+      var emptyRow = {};
+      emptyRow.cohorts = [{}, {option:''}, {option:''}];
+      emptyRow.venue = {};
+      emptyRow.venue.name = '';
+      return emptyRow;
+
+    }
+
     function createZeroValuesRow(row, venue, gender) {
 
       var zeroValuesRow = angular.copy(row);
@@ -38,6 +48,7 @@ angular.module('bsis')
       zeroValuesRow.oPlus = 0;
       zeroValuesRow.oMinus = 0;
       zeroValuesRow.empty = 0;
+      zeroValuesRow.total = 0;
       return zeroValuesRow;
 
     }
@@ -57,13 +68,18 @@ angular.module('bsis')
       allGendersRow.oPlus = femaleRow.oPlus + maleRow.oPlus;
       allGendersRow.oMinus = femaleRow.oMinus + maleRow.oMinus;
       allGendersRow.empty = femaleRow.empty + maleRow.empty;
+      allGendersRow.total = femaleRow.total + maleRow.total;
       return allGendersRow;
 
     }
 
     function mergeData(dataValues) {
-      $scope.gridOptions.data = dataValues;
 
+      // Add one final empty row to force processing the last row
+      var finalRow = createEmptyRow();
+      dataValues[dataValues.length + 1] = finalRow;
+
+      $scope.gridOptions.data = dataValues;
       var previousVenue = '';
       var previousGender = '';
       var mergedRow = {};
@@ -159,11 +175,18 @@ angular.module('bsis')
           mergedRow.empty = row.value;
         }
 
+        mergedRow.total = mergedRow.aPlus + mergedRow.aMinus + mergedRow.bPlus + mergedRow.bMinus + mergedRow.abPlus + mergedRow.abMinus +
+          mergedRow.oPlus + mergedRow.oMinus + mergedRow.empty;
+
         // Add row to mergedData
 
         mergedData[mergedKey] = mergedRow;
 
       });
+
+      // Remove last row
+      mergedData.pop();
+
       $scope.gridOptions.data = mergedData;
     }
 
@@ -246,8 +269,14 @@ angular.module('bsis')
       },
       {
         name: 'NTD',
-        field: 'empty'
+        field: 'empty',
+        width: 65
+      },
+      {
+        name: 'Total',
+        field: 'total'
       }
+
     ];
 
     $scope.gridOptions = {
