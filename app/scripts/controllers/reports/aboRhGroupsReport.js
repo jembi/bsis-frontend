@@ -3,6 +3,8 @@
 angular.module('bsis')
   .controller('AboRhGroupsReportCtrl', function($scope, $log, $filter, ReportsService, DATEFORMAT) {
 
+    // Initialize variables
+  
     var master = {
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: moment().endOf('day').toDate()
@@ -10,6 +12,8 @@ angular.module('bsis')
 
     $scope.dateFormat = DATEFORMAT;
     $scope.search = angular.copy(master);
+  
+    // Report methods
 
     $scope.clearSearch = function(form) {
       $scope.search = angular.copy(master);
@@ -35,55 +39,8 @@ angular.module('bsis')
 
         ReportsService.generateDonationsReport(period, function(report) {
           $scope.searching = false;
-          $scope.gridOptions.data = report.dataValues;
-
-          var previousVenue = '';
-          var previousGender = '';
-          var mergedItem = {};
-          var mergedData = [];
-          var mergedKey = 0;
-
-          angular.forEach($scope.gridOptions.data, function(item) {
-
-            var cohorts = item.cohorts;
-            var gender = cohorts[1].option;
-            var bloodType = cohorts[2].option;
-            item.cohorts = gender;
-
-            // Merge same venue and gender row (this expects the data is ordered by venue and gender)
-            if (item.venue.name === previousVenue && gender === previousGender) {
-              mergedItem = mergedData[mergedKey];
-            } else {
-              previousVenue = item.venue.name;
-              previousGender = gender;
-              mergedItem = item;
-              mergedKey = mergedKey + 1;
-            }
-
-            if (bloodType === 'A+') {
-              mergedItem.aPlus = item.value;
-            } else if (bloodType === 'A-') {
-              mergedItem.aMinus = item.value;
-            } else if (bloodType === 'B+') {
-              mergedItem.bPlus = item.value;
-            } else if (bloodType === 'B-') {
-              mergedItem.bMinus = item.value;
-            } else if (bloodType === 'AB+') {
-              mergedItem.abPlus = item.value;
-            } else if (bloodType === 'AB-') {
-              mergedItem.abMinus = item.value;
-            } else if (bloodType === 'O+') {
-              mergedItem.oPlus = item.value;
-            } else if (bloodType === 'O-') {
-              mergedItem.oMinus = item.value;
-            } else if (bloodType === 'nullnull') {
-              mergedItem.empty = item.value;
-            }
-
-            mergedData[mergedKey] = mergedItem;
-          });
-          $scope.gridOptions.data = mergedData;
-
+          
+          mergeData(report.dataValues);
           $scope.submitted = true;
         }, function(err) {
           $scope.searching = false;
@@ -91,8 +48,155 @@ angular.module('bsis')
         });
       }
     };
+                                               
+    function mergeData(dataValues) {
+      $scope.gridOptions.data = dataValues;
 
-    // Grid ui variables and functions
+      var previousVenue = '';
+      var previousGender = '';
+      var mergedRow = {};
+      var mergedData = [];
+      var mergedKey = 0;
+      var zeroValuesRow = {};
+      var foundFemale = [];
+      var foundMale = [];
+      var allGendersRow = {};
+
+      angular.forEach($scope.gridOptions.data, function(row) {
+
+        var cohorts = row.cohorts;
+        var gender = cohorts[1].option;
+        var bloodType = cohorts[2].option;
+        row.cohorts = gender;
+        
+        // New venue ()
+        if (row.venue.name !== previousVenue) {
+          
+          if (previousVenue != '') {
+                
+            // Add gender row if missing for previous venue
+            
+            if (!foundMale[previousVenue]) {
+              // add row male at mergedKey + 1
+              zeroValuesRow = createZeroValuesRow(mergedRow, previousVenue, 'male');
+              mergedKey = mergedKey + 1;
+              mergedData[mergedKey] = zeroValuesRow;
+            } else if (!foundFemale[previousVenue]) {            
+              // add row female at mergedKey and move mergedRow to mergedKey +1
+              zeroValuesRow = createZeroValuesRow(mergedRow, previousVenue, 'female');
+              mergedData[mergedKey] = zeroValuesRow;
+              mergedKey = mergedKey + 1;
+              mergedData[mergedKey] = mergedRow;
+            }
+            
+            // Add all genders row for previous venue
+            mergedKey = mergedKey + 1;
+            allGendersRow = createAllGendersRow(mergedData[mergedKey-1], mergedData[mergedKey-2]);
+            mergedData[mergedKey] = allGendersRow; 
+            
+          }  
+
+          // Update values for new venue
+          
+          previousVenue = row.venue.name;
+          previousGender = gender;
+          mergedRow = createZeroValuesRow(row, previousVenue, gender);
+          mergedKey = mergedKey + 1; 
+          
+          
+        // Same venue new gender, update values
+          
+        } else if (gender != previousGender) {
+          previousGender = gender;
+          mergedRow = createZeroValuesRow(row, previousVenue, gender);
+          mergedKey = mergedKey + 1; 
+          
+        // Else, use existing row and merge contents with this new row.  
+          
+        } else {
+          // do nothing
+        }
+        
+        // Populate found gender arrays
+        
+        if (gender === 'female') {
+          foundFemale[row.venue.name] = true;
+        } 
+        if (gender === 'male') {
+          foundMale[row.venue.name] = true;
+        }
+        
+        // Populate blood type numbers
+
+        if (bloodType === 'A+') {
+          mergedRow.aPlus = row.value;
+        } else if (bloodType === 'A-') {
+          mergedRow.aMinus = row.value;
+        } else if (bloodType === 'B+') {
+          mergedRow.bPlus = row.value;
+        } else if (bloodType === 'B-') {
+          mergedRow.bMinus = row.value;
+        } else if (bloodType === 'AB+') {
+          mergedRow.abPlus = row.value;
+        } else if (bloodType === 'AB-') {
+          mergedRow.abMinus = row.value;
+        } else if (bloodType === 'O+') {
+          mergedRow.oPlus = row.value;
+        } else if (bloodType === 'O-') {
+          mergedRow.oMinus = row.value;
+        } else if (bloodType === 'nullnull') {
+          mergedRow.empty = row.value;
+        }
+
+        // Add row to mergedData
+        
+        mergedData[mergedKey] = mergedRow;
+        
+      });
+      $scope.gridOptions.data = mergedData;  
+    }
+  
+    function createZeroValuesRow(row, venue, gender) {
+      
+      var zeroValuesRow = angular.copy(row);
+      
+      zeroValuesRow.venue.name = venue;
+      zeroValuesRow.cohorts = gender;
+      zeroValuesRow.aPlus = 0;
+      zeroValuesRow.aMinus = 0;
+      zeroValuesRow.bPlus = 0;
+      zeroValuesRow.bMinus = 0;
+      zeroValuesRow.abPlus = 0;
+      zeroValuesRow.abMinus = 0;
+      zeroValuesRow.oPlus = 0;
+      zeroValuesRow.oMinus = 0;
+      zeroValuesRow.empty = 0;
+      return zeroValuesRow;
+      
+    } 
+  
+    function createAllGendersRow(femaleRow, maleRow) {
+      
+      var allGendersRow = angular.copy(femaleRow);
+      
+      allGendersRow.venue.name = '';
+      
+      allGendersRow.cohorts = 'All';
+      allGendersRow.aplus = femaleRow.aplus + maleRow.aplus;
+      allGendersRow.aMinus = femaleRow.aMinus + maleRow.aMinus;
+      allGendersRow.bPlus = femaleRow.bPlus + maleRow.bPlus;
+      allGendersRow.bMinus = femaleRow.bMinus + maleRow.bMinus;
+      allGendersRow.abPlus = femaleRow.abPlus + maleRow.abPlus;
+      allGendersRow.abMinus = femaleRow.abMinus + maleRow.abMinus;
+      allGendersRow.oPlus = femaleRow.oPlus + maleRow.oPlus;
+      allGendersRow.oMinus = femaleRow.oMinus + maleRow.oMinus;
+      allGendersRow.empty = femaleRow.empty + maleRow.empty;
+      return allGendersRow;
+      
+    } 
+                                              
+
+    // Grid ui variables and methods
 
     var columnDefs = [
       {
