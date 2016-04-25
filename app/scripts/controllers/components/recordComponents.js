@@ -63,7 +63,10 @@ angular.module('bsis')
 
     };
 
-    $scope.getComponentsByDIN = function() {
+    $scope.getComponentsByDIN = function(findComponentsForm) {
+      if (findComponentsForm && !findComponentsForm.$valid) {
+        return;
+      }
       $scope.componentsSearch.search = true;
       $location.search($scope.componentsSearch);
       $scope.searching = true;
