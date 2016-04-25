@@ -200,11 +200,13 @@ angular.module('bsis')
       },
       {
         name: 'AB+',
+        displayName: 'AB+',
         field: 'abPlus',
         width: 65
       },
       {
         name: 'AB-',
+        displayName: 'AB-',
         field: 'abMinus',
         width: 65
       },
@@ -220,6 +222,7 @@ angular.module('bsis')
       },
       {
         name: 'NTD',
+        displayName: 'NTD',
         field: 'empty',
         width: 65
       },
