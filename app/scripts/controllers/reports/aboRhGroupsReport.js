@@ -46,7 +46,7 @@ angular.module('bsis')
       var allGendersRow = angular.copy(femaleRow);
       allGendersRow.venue.name = '';
       allGendersRow.cohorts = 'All';
-      allGendersRow.aplus = femaleRow.aplus + maleRow.aplus;
+      allGendersRow.aPlus = femaleRow.aPlus + maleRow.aPlus;
       allGendersRow.aMinus = femaleRow.aMinus + maleRow.aMinus;
       allGendersRow.bPlus = femaleRow.bPlus + maleRow.bPlus;
       allGendersRow.bMinus = femaleRow.bMinus + maleRow.bMinus;
