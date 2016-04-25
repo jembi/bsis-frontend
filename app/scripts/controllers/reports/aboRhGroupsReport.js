@@ -58,50 +58,50 @@ angular.module('bsis')
       allGendersRow.total = femaleRow.total + maleRow.total;
       return allGendersRow;
     }
-  
+
     function mergeRows(newRow, existingRow, bloodType) {
       var mergedRow = angular.copy(existingRow);
       if (bloodType === 'A+') {
-          mergedRow.aPlus = newRow.value;
-        } else if (bloodType === 'A-') {
-          mergedRow.aMinus = newRow.value;
-        } else if (bloodType === 'B+') {
-          mergedRow.bPlus = newRow.value;
-        } else if (bloodType === 'B-') {
-          mergedRow.bMinus = newRow.value;
-        } else if (bloodType === 'AB+') {
-          mergedRow.abPlus = newRow.value;
-        } else if (bloodType === 'AB-') {
-          mergedRow.abMinus = newRow.value;
-        } else if (bloodType === 'O+') {
-          mergedRow.oPlus = newRow.value;
-        } else if (bloodType === 'O-') {
-          mergedRow.oMinus = newRow.value;
-        } else if (bloodType === 'nullnull') {
-          mergedRow.empty = newRow.value;
-        }
-        mergedRow.total = mergedRow.aPlus + mergedRow.aMinus + mergedRow.bPlus + mergedRow.bMinus + mergedRow.abPlus + mergedRow.abMinus +
-          mergedRow.oPlus + mergedRow.oMinus + mergedRow.empty;     
+        mergedRow.aPlus = newRow.value;
+      } else if (bloodType === 'A-') {
+        mergedRow.aMinus = newRow.value;
+      } else if (bloodType === 'B+') {
+        mergedRow.bPlus = newRow.value;
+      } else if (bloodType === 'B-') {
+        mergedRow.bMinus = newRow.value;
+      } else if (bloodType === 'AB+') {
+        mergedRow.abPlus = newRow.value;
+      } else if (bloodType === 'AB-') {
+        mergedRow.abMinus = newRow.value;
+      } else if (bloodType === 'O+') {
+        mergedRow.oPlus = newRow.value;
+      } else if (bloodType === 'O-') {
+        mergedRow.oMinus = newRow.value;
+      } else if (bloodType === 'nullnull') {
+        mergedRow.empty = newRow.value;
+      }
+      mergedRow.total = mergedRow.aPlus + mergedRow.aMinus + mergedRow.bPlus + mergedRow.bMinus + mergedRow.abPlus + mergedRow.abMinus +
+        mergedRow.oPlus + mergedRow.oMinus + mergedRow.empty;
       return mergedRow;
-    }   
-  
+    }
+
     function addFemaleMaleAllRows(mergedFemaleRow, mergedMaleRow) {
       mergedData[mergedKey] = mergedFemaleRow;
       mergedKey = mergedKey + 1;
       mergedData[mergedKey] = mergedMaleRow;
       mergedKey = mergedKey + 1;
       mergedData[mergedKey] = createAllGendersRow(mergedFemaleRow, mergedMaleRow);
-      mergedKey = mergedKey + 1;  
+      mergedKey = mergedKey + 1;
     }
 
     function mergeData(dataValues) {
 
       var previousVenue = '';
       var mergedFemaleRow = {};
-      var mergedMaleRow = {};    
+      var mergedMaleRow = {};
       mergedKey = 0;
       mergedData = [];
-            
+
       angular.forEach(dataValues, function(newRow) {
 
         var cohorts = newRow.cohorts;
@@ -114,15 +114,15 @@ angular.module('bsis')
 
           if (previousVenue != '') {
             // Add female, male and all rows for previous venue
-            addFemaleMaleAllRows(mergedFemaleRow, mergedMaleRow);       
+            addFemaleMaleAllRows(mergedFemaleRow, mergedMaleRow);
           }
 
           // Initialize values for the new venue
           previousVenue = newRow.venue.name;
           mergedFemaleRow = createZeroValuesRow(newRow, previousVenue, 'female');
           mergedMaleRow = createZeroValuesRow(newRow, '', 'male');
-        } 
-        
+        }
+
         // Merge gender row with new row
         if (gender === 'female') {
           mergedFemaleRow = mergeRows(newRow, mergedFemaleRow, bloodType);
@@ -132,7 +132,7 @@ angular.module('bsis')
         }
 
       });
-      
+
       // Run this one last time for the last row
       addFemaleMaleAllRows(mergedFemaleRow, mergedMaleRow);
 
