@@ -81,7 +81,6 @@ angular.module('bsis')
       // get the available donation batches
       TestingService.getTestBatchFormFields(function(response) {
         if (response !== false) {
-          TestingService.setDonationBatches(response.donationBatches);
           $scope.donationBatches = response.donationBatches;
           angular.forEach(response.donationBatches, function(batch) {
             $scope.testBatchAvailableDonationBatches.push(batch);
