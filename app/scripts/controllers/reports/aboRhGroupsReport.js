@@ -195,29 +195,32 @@ angular.module('bsis')
     }
 
     $scope.getReport = function(selectPeriodForm) {
-      if (selectPeriodForm.$valid) {
-        var period = {};
 
-        if ($scope.search.startDate) {
-          var startDate = moment($scope.search.startDate).startOf('day').toDate();
-          period.startDate = startDate;
-        }
-        if ($scope.search.endDate) {
-          var endDate = moment($scope.search.endDate).endOf('day').toDate();
-          period.endDate = endDate;
-        }
-        $scope.searching = true;
-
-        ReportsService.generateDonationsReport(period, function(report) {
-          $scope.searching = false;
-
-          mergeData(report.dataValues);
-          $scope.submitted = true;
-        }, function(err) {
-          $scope.searching = false;
-          $log.log(err);
-        });
+      if (!selectPeriodForm.$valid) {
+        return;
       }
+
+      var period = {};
+
+      if ($scope.search.startDate) {
+        var startDate = moment($scope.search.startDate).startOf('day').toDate();
+        period.startDate = startDate;
+      }
+      if ($scope.search.endDate) {
+        var endDate = moment($scope.search.endDate).endOf('day').toDate();
+        period.endDate = endDate;
+      }
+      $scope.searching = true;
+
+      ReportsService.generateDonationsReport(period, function(report) {
+        $scope.searching = false;
+
+        mergeData(report.dataValues);
+        $scope.submitted = true;
+      }, function(err) {
+        $scope.searching = false;
+        $log.log(err);
+      });
     };
 
     // Grid ui variables and methods
@@ -232,42 +235,42 @@ angular.module('bsis')
         field: 'cohorts'
       },
       {
-        name: 'A +',
+        name: 'A+',
         field: 'aPlus',
         width: 55
       },
       {
-        name: 'A -',
+        name: 'A-',
         field: 'aMinus',
         width: 55
       },
       {
-        name: 'B +',
+        name: 'B+',
         field: 'bPlus',
         width: 55
       },
       {
-        name: 'B -',
+        name: 'B-',
         field: 'bMinus',
         width: 55
       },
       {
-        name: 'AB +',
+        name: 'AB+',
         field: 'abPlus',
         width: 65
       },
       {
-        name: 'AB -',
+        name: 'AB-',
         field: 'abMinus',
         width: 65
       },
       {
-        name: 'O +',
+        name: 'O+',
         field: 'oPlus',
         width: 55
       },
       {
-        name: 'O -',
+        name: 'O-',
         field: 'oMinus',
         width: 55
       },
@@ -294,14 +297,14 @@ angular.module('bsis')
       exporterPdfPageSize: 'A4',
       exporterPdfDefaultStyle: {fontSize: 8, margin: [-2, 0, 0, 0] },
       exporterPdfTableHeaderStyle: {fontSize: 8, bold: true, margin: [-2, 0, 0, 0] },
-      exporterPdfMaxGridWidth: 650,
+      exporterPdfMaxGridWidth: 550,
 
       // PDF header
       exporterPdfHeader: function() {
 
         return [
           {
-            text: 'Abo Rh Blood Grouping Report - Date Period: ' + $filter('bsisDate')($scope.search.startDate) + ' to ' + $filter('bsisDate')($scope.search.endDate),
+            text: 'ABO Rh Blood Grouping Report - Date Period: ' + $filter('bsisDate')($scope.search.startDate) + ' to ' + $filter('bsisDate')($scope.search.endDate),
             bold: true,
             margin: [300, 10, 30, 0]
           }
