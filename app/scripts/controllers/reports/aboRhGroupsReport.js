@@ -158,8 +158,9 @@ angular.module('bsis')
 
       ReportsService.generateDonationsReport(period, function(report) {
         $scope.searching = false;
-
-        mergeData(report.dataValues);
+        if (report.dataValues.length > 0) {
+          mergeData(report.dataValues);
+        }
         $scope.submitted = true;
       }, function(err) {
         $scope.searching = false;
@@ -170,68 +171,35 @@ angular.module('bsis')
     // Grid ui variables and methods
 
     var columnDefs = [
-      {
-        name: 'Venue',
-        field: 'venue.name'
-      },
-      {
-        name: 'Gender',
-        field: 'cohorts'
-      },
-      {
-        name: 'A+',
-        field: 'aPlus',
-        width: 55
-      },
-      {
-        name: 'A-',
-        field: 'aMinus',
-        width: 55
-      },
-      {
-        name: 'B+',
-        field: 'bPlus',
-        width: 55
-      },
-      {
-        name: 'B-',
-        field: 'bMinus',
-        width: 55
-      },
-      {
-        name: 'AB+',
-        displayName: 'AB+',
-        field: 'abPlus',
-        width: 65
-      },
-      {
-        name: 'AB-',
-        displayName: 'AB-',
-        field: 'abMinus',
-        width: 65
-      },
-      {
-        name: 'O+',
-        field: 'oPlus',
-        width: 55
-      },
-      {
-        name: 'O-',
-        field: 'oMinus',
-        width: 55
-      },
-      {
-        name: 'NTD',
-        displayName: 'NTD',
-        field: 'empty',
-        width: 65
-      },
-      {
-        name: 'Total',
-        field: 'total'
-      }
-
+      { name: 'Venue', field: 'venue.name' },
+      { name: 'Gender', field: 'cohorts'},
+      { name: 'A+', field: 'aPlus', width: 55 },
+      { name: 'A-', field: 'aMinus', width: 55 },
+      { name: 'B+', field: 'bPlus', width: 55 },
+      { name: 'B-', field: 'bMinus', width: 55 },
+      { name: 'AB+', displayName: 'AB+', field: 'abPlus', width: 65 },
+      { name: 'AB-', displayName: 'AB-', field: 'abMinus', width: 65 },
+      { name: 'O+', field: 'oPlus', width: 55 },
+      { name: 'O-', field: 'oMinus', width: 55 },
+      { name: 'NTD', displayName: 'NTD', field: 'empty', width: 65 },
+      { name: 'Total', field: 'total' }
     ];
+
+    function updatePdfDocDefinition(docDefinition) {
+       // Fill with grey 'All' rows
+      docDefinition.styles.greyBoldCell = { fillColor: 'lightgrey', fontSize: 8, bold: true };
+      angular.forEach(docDefinition.content[0].table.body, function(row) {
+        if (row[1] === 'All') {
+          var index = 0;
+          angular.forEach(row, function() {
+            row[index] = { text: '' + row[index], style: 'greyBoldCell'};
+            index = index + 1;
+          });
+        }
+      });
+
+      return docDefinition;
+    }
 
     $scope.gridOptions = {
       data: [],
@@ -245,6 +213,10 @@ angular.module('bsis')
       exporterPdfDefaultStyle: {fontSize: 8, margin: [-2, 0, 0, 0] },
       exporterPdfTableHeaderStyle: {fontSize: 8, bold: true, margin: [-2, 0, 0, 0] },
       exporterPdfMaxGridWidth: 550,
+
+      exporterPdfCustomFormatter: function(docDefinition) {
+        return updatePdfDocDefinition(docDefinition);
+      },
 
       // PDF header
       exporterPdfHeader: function() {
