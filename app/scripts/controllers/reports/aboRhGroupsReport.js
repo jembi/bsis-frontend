@@ -186,14 +186,12 @@ angular.module('bsis')
     ];
 
     function updatePdfDocDefinition(docDefinition) {
-       // Fill with grey 'All' rows
+      // Fill with grey 'All' rows
       docDefinition.styles.greyBoldCell = { fillColor: 'lightgrey', fontSize: 8, bold: true };
       angular.forEach(docDefinition.content[0].table.body, function(row) {
         if (row[1] === 'All') {
-          var index = 0;
-          angular.forEach(row, function() {
-            row[index] = { text: '' + row[index], style: 'greyBoldCell'};
-            index = index + 1;
+          angular.forEach(row, function(cell, index) {
+            row[index] = { text: '' + cell, style: 'greyBoldCell'};
           });
         }
       });
