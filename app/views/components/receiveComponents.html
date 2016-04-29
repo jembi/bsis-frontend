@@ -1,0 +1,140 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/components/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
+    <h3 class="page-header">Receive Components</h3>
+    <uib-tabset justified="true">
+        <uib-tab active="tabs.addDelivery">
+            <uib-tab-heading>
+                <i class="fa {{icons.INFOCIRCLE}}"></i> Add Delivery Form
+            </uib-tab-heading>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>Add Delivery Form</h4>
+                    <form class="form-horizontal col-sm-12" role="form" name="addDonorForm" novalidate ng-submit="addDonor(donor, dob, addDonorForm.$valid)">
+                        <div class="form-group">
+                            <label for="donationBatch" class="col-sm-2 control-label">Donation batch</label>
+                            <div class="row col-sm-6">
+                                <div class="form-inline" style="padding-left:5px;">
+                                    <select id="donationBatch" name="donationBatch" class="form-control" ng-model="dob.month">
+                                        <option>test</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="deliveryTime" class="col-sm-2 control-label" style="padding-top:30px;">Delivery Time</label>
+                            <div class="row col-sm-6">
+                                <div style="padding-left:5px;">
+                                    <uib-timepicker id="deliveryTime" ng-model="deliveryTime" name="deliveryTime" hour-step="hstep"
+                                                    minute-step="mstep"></uib-timepicker>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="temperature" class="col-sm-2 control-label">Blood Transport box</label>
+                            <div class="row col-sm-10">
+                                <div class="form-inline" style="padding-left:5px;">
+                                    <em>Temperature: </em>
+                                    <input type="number" id="temperature" name="temperature" ng-model="temperature" class="form-control input-sm" style="width: 50px;" /> <em>C</em>
+                                    <button class="btn btn-primary" ng-click="addBox(temperature);" type="button">Add box</button>
+                                </div>
+                                <div>
+                                    <ul id="boxesList">
+                                        <li ng-repeat="box in boxesList track by $index"> Box #{{$index + 1}} - {{box.temperature}} C </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-11">
+                                <button class="btn btn-primary" type="submit" ng-disabled="addingDonation">{{addingDonation ? "Saving..." :
+                                    "Save"}}
+                                </button>
+                                <button class="btn btn-primary" type="button" ng-disabled="addingDonation"
+                                        ng-click="clearForm(addDonationForm); getDonations(donor.id)"/>
+                                Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab active="tabs.viewDelivery">
+            <uib-tab-heading>
+                <i class="fa {{icons.INFOCIRCLE}}"></i> View Delivery Form
+            </uib-tab-heading>
+            <form class="form-horizontal col-sm-12" role="form" ng-submit="findComponents(search)">
+                <div class="form-group">
+                    <label for="donationDate" class="col-sm-1 control-label">Period</label>
+                    <div class="row col-sm-11">
+                        <div class="form-inline" style="padding-left:5px;">
+                            <dateselect ng-model="search.donationDateFrom" ng-required="false" format="format"
+                                        opened="startDateOpen" cal-icon="icons.CALENDAR">
+                            </dateselect>
+                            <span>
+                            <em> To: </em>
+                            </span>
+                            <dateselect-end ng-model="search.donationDateTo" format="format" opened="endDateOpen"
+                                            cal-icon="icons.CALENDAR">
+                            </dateselect-end>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
+                            "Search"}}
+                        </button>
+                        <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
+                    </div>
+                </div>
+            </form>
+
+            <div ng-switch="searchResults" class="col-sm-12">
+                <div style="padding-bottom: 10px"></div>
+                <div ng-switch-when="true">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <table ng-table="deliveryFormsTableParams" show-filter="false" class="table">
+                                <tr ng-repeat="deliveryForm in $data">
+                                    <td data-title="'Date'" header-class="text-left" class="text-center" sortable="'date'">
+                                        {{deliveryForm.date  | bsisDate}}
+                                    </td>
+                                    <td data-title="'Venue'" header-class="text-left" class="text-center" sortable="'venue.name'">
+                                        {{deliveryForm.venue.name}}
+                                    </td>
+                                    <td data-title="'Num Donations'" header-class="text-left" class="text-center"
+                                        sortable="'numDonations'">
+                                        {{deliveryForm.numDonations}}
+                                    </td>
+                                    <td data-title="'Donation Batch Status'" header-class="text-left" class="text-center"
+                                        sortable="'donationBatchStatus'">
+                                        {{deliveryForm.donationBatchStatus}}
+                                    </td>
+                                    <td data-title="'Delivery Time'" style="width:22%;" header-class="text-left"  class="text-center"
+                                        sortable="'deliveryTime'">
+                                        {{deliveryForm.deliveryTime | date: "HH:mm:ss"}}
+                                    </td>
+                                    <td data-title="'Num Boxes'" header-class="text-left" sortable="'numBoxes'"  class="text-center">
+                                        {{deliveryForm.numBoxes}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div ng-switch-when="false">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>
+                                <em> No components found. </em>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+</div>

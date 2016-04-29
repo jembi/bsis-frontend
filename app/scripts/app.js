@@ -167,6 +167,13 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
       })
+      .when('/receiveComponents', {
+        templateUrl: 'views/components/receiveComponents.html',
+        controller: 'ReceiveComponentsCtrl',
+        permission: PERMISSIONS.VIEW_DISCARDS,
+        enabled: UI.COMPONENTS_TAB_ENABLED,
+        reloadOnSearch: reloadOnSearch
+      })
 
       // TESTING URLs
       .when('/testing', {
