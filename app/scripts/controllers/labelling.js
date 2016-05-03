@@ -28,7 +28,7 @@ angular.module('bsis')
 
     $scope.checkLabellingStatus = function(form) {
 
-      if (form.$invalid) {
+      if (form && form.$invalid) {
         return;
       }
 
