@@ -26,7 +26,12 @@ angular.module('bsis')
       }
     };
 
-    $scope.checkLabellingStatus = function() {
+    $scope.checkLabellingStatus = function(form) {
+
+      if (form.$invalid) {
+        return;
+      }
+
       $location.search(angular.extend({search: true}, $scope.search));
       $scope.searching = true;
       LabellingService.checkLabellingStatus($scope.search, function(response) {
