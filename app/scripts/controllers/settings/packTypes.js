@@ -99,12 +99,10 @@ angular.module('bsis')
       };
     }
 
-    ComponentTypesService.getComponentTypes(function(response) {
-      if (response !== false) {
-        $scope.componentTypes = response;
-      } else {
-        $log.error('failed to get component types');
-      }
+    ComponentTypesService.getComponentTypes({}, function(componentTypes) {
+      $scope.componentTypes = componentTypes;
+    }, function(err) {
+      $log.error(err);
     });
 
     $scope.savePackType = function(packType, packTypeForm) {

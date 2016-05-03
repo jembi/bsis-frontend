@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('LabellingCtrl', function($scope, $location, $log, LabellingService, ICONS, PERMISSIONS, $routeParams) {
+  .controller('LabellingCtrl', function($scope, $location, $log, LabellingService, ComponentTypesService, ICONS, PERMISSIONS, $routeParams) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -9,9 +9,10 @@ angular.module('bsis')
     //$scope.data = data;
     $scope.searchResults = '';
     $scope.search = {
-      'donationIdentificationNumber': ''
+      donationIdentificationNumber: angular.isDefined($routeParams.donationIdentificationNumber) ? $routeParams.donationIdentificationNumber : null,
+      componentType: angular.isDefined($routeParams.componentType) ? +$routeParams.componentType : null
     };
-    $scope.packDIN = '';
+    $scope.componentTypes = [];
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
@@ -25,15 +26,10 @@ angular.module('bsis')
       }
     };
 
-    $scope.checkLabellingStatus = function(donationIdentificationNumber) {
-      $location.search(
-        {
-          search: true,
-          donationIdentificationNumber: donationIdentificationNumber
-        }
-      );
+    $scope.checkLabellingStatus = function() {
+      $location.search(angular.extend({search: true}, $scope.search));
       $scope.searching = true;
-      LabellingService.checkLabellingStatus(donationIdentificationNumber, function(response) {
+      LabellingService.checkLabellingStatus($scope.search, function(response) {
         if (response !== false) {
           data = response;
           //$scope.data = data;
@@ -41,7 +37,6 @@ angular.module('bsis')
           //$scope.printPackLabelBoolean = data.printPackLabel;
           //$scope.printDiscardLabelBoolean = data.printDiscardLabel;
           $scope.searchResults = true;
-          $scope.packDIN = donationIdentificationNumber;
         } else {
           $scope.searchResults = false;
         }
@@ -50,7 +45,7 @@ angular.module('bsis')
     };
 
     if ($routeParams.search) {
-      $scope.checkLabellingStatus($routeParams.donationIdentificationNumber);
+      $scope.checkLabellingStatus();
     }
 
     $scope.printPackLabel = function(componentId) {
@@ -75,11 +70,24 @@ angular.module('bsis')
       });
     };
 
-    $scope.clear = function() {
+    $scope.clear = function(form) {
+      if (form) {
+        form.$setUntouched();
+        form.$setPristine();
+      }
       $location.search({});
-      $scope.packDIN = '';
       $scope.search = {};
       $scope.searchResults = '';
     };
+
+    function fetchFormFields() {
+      ComponentTypesService.getComponentTypes({includeDeleted: false}, function(componentTypes) {
+        $scope.componentTypes = componentTypes;
+      }, function(err) {
+        $log.error(err);
+      });
+    }
+
+    fetchFormFields();
 
   });
