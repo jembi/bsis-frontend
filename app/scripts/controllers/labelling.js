@@ -80,6 +80,11 @@ angular.module('bsis')
       $scope.searchResults = '';
     };
 
+    $scope.onTextClick = function($event) {
+      // Select the target's text on click
+      $event.target.select();
+    };
+
     function fetchFormFields() {
       ComponentTypesService.getComponentTypes({includeDeleted: false}, function(componentTypes) {
         $scope.componentTypes = componentTypes;
