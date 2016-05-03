@@ -300,7 +300,8 @@ angular.module('bsis')
 
       MobileClinicLookUpFormFields: $resource(url + '/mobileclinic/form'),
 
-      MobileClinicLookUp: $resource(url + '/mobileclinic/lookup')
+      MobileClinicLookUp: $resource(url + '/mobileclinic/lookup'),
 
+      DonationsReport: $resource(url + '/reports/collecteddonations/generate')
     };
   });
