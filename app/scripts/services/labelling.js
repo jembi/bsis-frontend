@@ -3,8 +3,8 @@
 angular.module('bsis')
   .factory('LabellingService', function($http, Api) {
     return {
-      checkLabellingStatus: function(donationIdentificationNumber, response) {
-        var status = Api.LabellingStatus.get({donationIdentificationNumber: donationIdentificationNumber}, function() {
+      checkLabellingStatus: function(query, response) {
+        var status = Api.LabellingStatus.get(query, function() {
           response(status);
         }, function() {
           response(false);
