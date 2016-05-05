@@ -134,8 +134,15 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // COMPONENTS URLs
       .when('/components', {
-        redirectTo: '/recordComponents',
+        redirectTo: '/receiveComponents',
         permission: PERMISSIONS.VIEW_COMPONENT_INFORMATION,
+        enabled: UI.COMPONENTS_TAB_ENABLED,
+        reloadOnSearch: reloadOnSearch
+      })
+      .when('/receiveComponents', {
+        templateUrl: 'views/components/receiveComponents.html',
+        controller: 'ReceiveComponentsCtrl',
+        permission: PERMISSIONS.ADD_COMPONENT_BATCH,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
       })
@@ -164,13 +171,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         templateUrl: 'views/components/findDiscards.html',
         controller: 'FindDiscardsCtrl',
         permission: PERMISSIONS.VIEW_DISCARDS,
-        enabled: UI.COMPONENTS_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
-      })
-      .when('/receiveComponents', {
-        templateUrl: 'views/components/receiveComponents.html',
-        controller: 'ReceiveComponentsCtrl',
-        permission: PERMISSIONS.ADD_COMPONENT_BATCH,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
       })
@@ -541,7 +541,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       if ($location.path() === '/components') {
         // Initial routing for components page
-        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT) > -1)) {
+        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT_BATCH) > -1)) {
+          $location.path('/receiveComponents');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT) > -1)) {
           $location.path('/recordComponents');
         } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1)) {
           $location.path('/findComponents');
@@ -549,6 +551,8 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
           $location.path('/discardComponents');
         } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_DISCARDS) > -1)) {
           $location.path('/findDiscards');
+        } else {
+          $location.path('/home');
         }
       }
     });
