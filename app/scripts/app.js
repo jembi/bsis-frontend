@@ -170,9 +170,15 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       .when('/receiveComponents', {
         templateUrl: 'views/components/receiveComponents.html',
         controller: 'ReceiveComponentsCtrl',
-        permission: PERMISSIONS.VIEW_DISCARDS,
+        permission: PERMISSIONS.ADD_COMPONENT_BATCH,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
+      })
+      .when('/viewComponentBatch/:id', {
+        templateUrl: 'views/components/viewComponentBatch.html',
+        controller: 'ViewComponentBatchCtrl',
+        permission: PERMISSIONS.VIEW_COMPONENT_BATCH,
+        enabled: UI.COMPONENTS_TAB_ENABLED
       })
 
       // TESTING URLs

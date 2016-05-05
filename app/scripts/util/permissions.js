@@ -46,6 +46,12 @@ angular.module('bsis')
     EDIT_COMPONENT: 'Edit Component',
     VOID_COMPONENT: 'Void Component',
 
+    // Component Batch Permissions
+    ADD_COMPONENT_BATCH: 'Add Component Batch',
+    VIEW_COMPONENT_BATCH: 'View Component Batch',
+    EDIT_COMPONENT_BATCH: 'Edit Component Batch',
+    VOID_COMPONENT_BATCH: 'Void Component Batch',
+
     //Request Permissions
     ADD_REQUEST: 'Add Request',
     EDIT_REQUEST: 'Edit Request',

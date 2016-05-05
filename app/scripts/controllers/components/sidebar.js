@@ -15,6 +15,9 @@ angular.module('bsis').controller('ComponentsSidebarCtrl', function($scope, Rout
     }, {
       path: '/findDiscards',
       subpaths: []
+    }, {
+      path: '/receiveComponents',
+      subpaths: ['/viewComponentBatch']
     }
   ];
 

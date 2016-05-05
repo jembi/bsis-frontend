@@ -1,0 +1,34 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/components/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
+  <h3 class="page-header">View Component Batch</h3>
+
+  <hr />
+
+  <section>
+    <h4>Donation Batch Info</h4>
+    <span class="text-muted">Date Created:</span> {{componentBatch.donationBatch.createdDate | bsisDate}}
+    <span class="text-muted">Venue:</span> {{componentBatch.donationBatch.venue.name}}
+    <span class="text-muted">Number of Donations:</span> {{componentBatch.donationBatch.numDonations}}
+    <span class="text-muted">Status:</span> {{componentBatch.donationBatch.isClosed ? 'Closed' : 'Open'}}
+  </section>
+
+  <hr />
+
+  <section>
+    <span class="text-muted">Time of First Donation:</span> {{componentBatch.collectionDate | bsisTime}}
+    <span class="text-muted">Time of Delivery:</span> {{componentBatch.deliveryDate | bsisTime}}
+    <span class="text-muted">Number of Blood Transport Boxes:</span> {{componentBatch.bloodTransportBoxes.length}}
+  </section>
+
+  <hr />
+
+  <section>
+    <div ng-repeat="box in componentBatch.bloodTransportBoxes">
+      <span class="text-muted">Blood Transport Box Temperature:</span> {{box.temperature}}C
+    </div>
+  </section>
+
+  <hr />
+
+  <div class="grid" ui-grid="gridOptions"></div>
+</div>
