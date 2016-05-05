@@ -9,39 +9,75 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h4>Add Delivery Form</h4>
-                    <form class="form-horizontal col-sm-12" role="form" name="addDonorForm" novalidate ng-submit="addDonor(donor, dob, addDonorForm.$valid)">
+                    <form name="addComponentBatchForm" class="form-horizontal col-sm-12" novalidate ng-submit="addComponentBatch(addComponentBatchForm)">
+                      
                         <div class="form-group">
-                            <label for="donationBatch" class="col-sm-2 control-label">Donation batch</label>
+                            <label for="donationBatch" class="col-sm-2 control-label">Donation batch: </label>
                             <div class="row col-sm-6">
                                 <div class="form-inline" style="padding-left:5px;">
-                                    <select id="donationBatch" name="donationBatch" class="form-control" ng-model="dob.month">
-                                        <option>test</option>
+                                    <select name="donationBatches" class="form-control" ng-model="componentBatch.donationBatch.id" required>
+                                      <option value="" disabled>Select:</option>
+                                      <option ng-repeat="donationBatch in donationBatches" value="{{donationBatch.id}}">
+                                        <small>
+                                            {{donationBatch.venue.name}} |
+                                            {{donationBatch.createdDate | bsisDate}} |
+                                            {{donationBatch.numDonations}} donations
+                                        </small>
+                                      </option>
                                     </select>
+                                    <div>
+                                        <small class="error"
+                                               ng-show="(addComponentBatchForm.donationBatches.$invalid && submitted)">
+                                            Select a donation batch
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="deliveryTime" class="col-sm-2 control-label" style="padding-top:30px;">Delivery Time</label>
+                          <label class="col-sm-2 control-label">Processing site: </label>
+                          <div class="row col-sm-6">
+                            <div class="form-inline" style="padding-left:5px;">
+                              <select name="processingSite" class="form-control" ng-model="componentBatch.location.id" required ng-options="processingSite.id as processingSite.name for processingSite in processingSites">
+                                <option value="" disabled>Select:</option>
+                              </select>
+                              <div>
+                                  <small class="error"
+                                         ng-show="(addComponentBatchForm.processingSite.$invalid && submitted)">
+                                      Select a processing site
+                                  </small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                        <div class="form-group">
+                            <label for="deliveryTime" class="col-sm-2 control-label" style="padding-top:30px;">Delivery Time:</label>
                             <div class="row col-sm-6">
                                 <div style="padding-left:5px;">
-                                    <uib-timepicker id="deliveryTime" ng-model="deliveryTime" name="deliveryTime" hour-step="hstep"
-                                                    minute-step="mstep"></uib-timepicker>
+                                    <uib-timepicker id="deliveryTime" ng-model="componentBatch.deliveryDate" name="deliveryTime" hour-step="1" minute-step="1"></uib-timepicker>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="temperature" class="col-sm-2 control-label">Blood Transport box</label>
+                            <label for="temperature" class="col-sm-2 control-label">Blood Transport box:</label>
                             <div class="row col-sm-10">
                                 <div class="form-inline" style="padding-left:5px;">
                                     <em>Temperature: </em>
-                                    <input type="number" id="temperature" name="temperature" ng-model="temperature" class="form-control input-sm" style="width: 50px;" /> <em>C</em>
-                                    <button class="btn btn-primary" ng-click="addBox(temperature);" type="button">Add box</button>
+                                    <input type="number" id="temperature" name="temperature" ng- ng-model="temperature" class="form-control input-sm" style="width: 50px;" /> <em>C</em>
+                                    <button class="btn btn-primary" ng-click="addBox(temperature);" type="button" >Add box</button>
+                                    <div>
+                                        <small class="error"
+                                               ng-show="(componentBatch.bloodTransportBoxes.length == 0 && submitted)">
+                                            Add a blood transport box
+                                        </small>
+                                    </div>
                                 </div>
                                 <div>
                                     <ul id="boxesList">
-                                        <li ng-repeat="box in boxesList track by $index"> Box #{{$index + 1}} - {{box.temperature}} C </li>
+                                        <li ng-repeat="box in componentBatch.bloodTransportBoxes track by $index"> Box #{{$index + 1}} - {{box.temperature}} C </li>
                                     </ul>
                                 </div>
                             </div>
@@ -49,12 +85,8 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-1 col-sm-11">
-                                <button class="btn btn-primary" type="submit" ng-disabled="addingDonation">{{addingDonation ? "Saving..." :
-                                    "Save"}}
-                                </button>
-                                <button class="btn btn-primary" type="button" ng-disabled="addingDonation"
-                                        ng-click="clearForm(addDonationForm); getDonations(donor.id)"/>
-                                Cancel</button>
+                                <button class="btn btn-primary" type="submit" ng-disabled="adding">{{adding ? "Saving..." : "Save"}}</button>
+                                <button class="btn btn-primary" type="button" ng-disabled="adding" ng-click="clearForm(addComponentBatchForm)">Cancel</button>
                             </div>
                         </div>
                     </form>
