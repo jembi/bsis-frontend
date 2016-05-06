@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('AddComponentBatchCtrl', function($scope, $timeout, $filter, ngTableParams, ComponentBatchService, $location) {
+angular.module('bsis').controller('AddComponentBatchCtrl', function($scope, $location, ComponentBatchService) {
 
   // Add componentBatch variables and methods
 
