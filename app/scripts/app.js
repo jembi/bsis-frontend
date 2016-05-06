@@ -134,17 +134,24 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // COMPONENTS URLs
       .when('/components', {
-        redirectTo: '/receiveComponents',
+        redirectTo: '/addComponentBatch',
         permission: PERMISSIONS.VIEW_COMPONENT_INFORMATION,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
       })
-      .when('/receiveComponents', {
-        templateUrl: 'views/components/receiveComponents.html',
-        controller: 'ReceiveComponentsCtrl',
+      .when('/addComponentBatch', {
+        templateUrl: 'views/components/addComponentBatch.html',
+        controller: 'AddComponentBatchCtrl',
         permission: PERMISSIONS.ADD_COMPONENT_BATCH,
         enabled: UI.COMPONENTS_TAB_ENABLED,
         reloadOnSearch: reloadOnSearch
+      })
+      .when('/viewComponentBatches', {
+        templateUrl: 'views/components/viewComponentBatches.html',
+        controller: 'ViewComponentBatchesCtrl',
+        permission: PERMISSIONS.VIEW_COMPONENT_BATCH,
+        enabled: UI.COMPONENTS_TAB_ENABLED,
+        reloadOnSearch: false
       })
       .when('/recordComponents', {
         templateUrl: 'views/components/recordComponents.html',
@@ -542,7 +549,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       if ($location.path() === '/components') {
         // Initial routing for components page
         if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT_BATCH) > -1)) {
-          $location.path('/receiveComponents');
+          $location.path('/addComponentBatch');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT_BATCH) > -1)) {
+          $location.path('/viewComponentBatches');
         } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT) > -1)) {
           $location.path('/recordComponents');
         } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1)) {

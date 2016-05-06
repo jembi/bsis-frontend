@@ -17,7 +17,11 @@ angular.module('bsis').controller('ComponentsSidebarCtrl', function($scope, Rout
       subpaths: []
     }, {
       path: '/receiveComponents',
-      subpaths: ['/viewComponentBatch']
+      subpaths: [
+        '/addComponentBatch',
+        '/viewComponentBatch',
+        '/viewComponentBatches'
+      ]
     }
   ];
 

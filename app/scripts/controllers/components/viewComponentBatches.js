@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ReceiveComponentsCtrl', function($scope, $timeout, $filter, ngTableParams, ComponentBatchService, $location) {
+  .controller('ViewComponentBatchesCtrl', function($scope, $timeout, $filter, ngTableParams, ComponentBatchService, $location) {
 
     $scope.tabs = [{addDelivery: true}, {viewDelivery: false}];
 
