@@ -31,7 +31,7 @@
                 </option>
               </select>
               <div>
-                <small class="error" ng-show="(addComponentBatchForm.donationBatches.$invalid && submitted)">
+                <small class="error" ng-show="(addComponentBatchForm.donationBatches.$invalid && addComponentBatchForm.$submitted)">
                   Select a donation batch
                 </small>
               </div>
@@ -47,7 +47,7 @@
                 <option value="" disabled>Select:</option>
               </select>
               <div>
-                <small class="error" ng-show="(addComponentBatchForm.processingSite.$invalid && submitted)">
+                <small class="error" ng-show="(addComponentBatchForm.processingSite.$invalid && addComponentBatchForm.$submitted)">
                   Select a processing site
                 </small>
               </div>
@@ -69,11 +69,16 @@
           <div class="row col-sm-10">
             <div class="form-inline" style="padding-left:5px;">
               <em>Temperature: </em>
-              <input type="number" id="temperature" name="temperature" ng- ng-model="temperature" class="form-control input-sm" style="width: 50px;" /> <em>C</em>
+              <input type=number name="temperature" ng-model="temperature" class="form-control" ng-class="{'ng-invalid ng-dirty' : emptyTempratureSubmitted}" style="width: 50px;"/> <em>&deg;C</em>
               <button class="btn btn-primary" ng-click="addBox(temperature);" type="button" >Add box</button>
               <div>
-                <small class="error" ng-show="(componentBatch.bloodTransportBoxes.length == 0 && submitted)">
+                <small class="error" ng-show="(componentBatch.bloodTransportBoxes.length == 0 && addComponentBatchForm.$submitted)">
                   Add a blood transport box
+                </small>
+              </div>
+              <div>
+                <small class="error" ng-show="emptyTempratureSubmitted">
+                  Enter a temperature
                 </small>
               </div>
             </div>
@@ -88,7 +93,7 @@
         <div class="form-group">
           <div class="col-sm-offset-1 col-sm-11">
             <button class="btn btn-primary" type="submit" ng-disabled="adding">{{adding ? "Saving..." : "Save"}}</button>
-            <button class="btn btn-primary" type="button" ng-disabled="adding" ng-click="clearForm(addComponentBatchForm)">Cancel</button>
+            <button class="btn btn-primary" type="button" ng-disabled="adding" ng-click="clearForm(addComponentBatchForm)">Clear</button>
           </div>
         </div>
       </form>

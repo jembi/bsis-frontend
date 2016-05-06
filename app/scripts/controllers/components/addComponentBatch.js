@@ -10,8 +10,7 @@ angular.module('bsis').controller('AddComponentBatchCtrl', function($scope, $loc
     $scope.componentBatch.bloodTransportBoxes = [];
     $scope.componentBatch.deliveryDate = new Date();
     $scope.temperature = '';
-    $scope.submitted = false;
-
+    $scope.emptyTempratureSubmitted = false;
   }
 
   function getComponentBatchFormFields() {
@@ -26,9 +25,15 @@ angular.module('bsis').controller('AddComponentBatchCtrl', function($scope, $loc
   }
 
   $scope.addBox = function(temperature) {
-    $scope.componentBatch.bloodTransportBoxes.push(
-      {temperature: temperature}
-    );
+    if (temperature) {
+      $scope.componentBatch.bloodTransportBoxes.push(
+        {temperature: temperature}
+      );
+      $scope.emptyTempratureSubmitted = false;
+      $scope.temperature = '';
+    } else {
+      $scope.emptyTempratureSubmitted = true;
+    }
   };
 
   $scope.clearForm = function(addComponentBatchForm) {
@@ -38,21 +43,16 @@ angular.module('bsis').controller('AddComponentBatchCtrl', function($scope, $loc
   };
 
   $scope.addComponentBatch = function(addComponentBatchForm) {
-    if (addComponentBatchForm.$valid) {
+    if (addComponentBatchForm.$valid && $scope.componentBatch.bloodTransportBoxes.length > 0) {
       $scope.adding = true;
       ComponentBatchService.addComponentBatch($scope.componentBatch, function() {
-        $scope.submitted = false;
         $scope.clearForm(addComponentBatchForm);
-        $scope.tabs.addDelivery = false;
-        $scope.tabs.viewDelivery = true;
+        $location.path('/viewComponentBatches');
       }, function() {
-        $scope.submitted = true;
+
       });
-    } else {
-      $scope.submitted = true;
     }
     $scope.adding = false;
-
   };
 
   getComponentBatchFormFields();
