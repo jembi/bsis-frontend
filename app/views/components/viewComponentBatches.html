@@ -33,48 +33,18 @@
       </div>
     </div>
   </form>
+  
+  <div class="col-sm-12">
+      <div class="panel panel-default">
+          <div class="panel-body">
+              <p>
+                  <em>{{gridOptions.data.length}} sample(s) found</em> | <em> Data export: </em>
 
-  <div ng-switch="searchResults" class="col-sm-12">
-    <div style="padding-bottom: 10px"></div>
-    <div ng-switch-when="true">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <table ng-table="deliveryFormsTableParams" show-filter="false" class="table">
-            <tr ng-repeat="deliveryForm in $data">
-              <td data-title="'Date'" header-class="text-left" class="text-center" sortable="'date'">
-                {{deliveryForm.date  | bsisDate}}
-              </td>
-              <td data-title="'Venue'" header-class="text-left" class="text-center" sortable="'venue.name'">
-                {{deliveryForm.venue.name}}
-              </td>
-              <td data-title="'Num Donations'" header-class="text-left" class="text-center"
-                sortable="'numDonations'">
-                {{deliveryForm.numDonations}}
-              </td>
-              <td data-title="'Donation Batch Status'" header-class="text-left" class="text-center"
-                sortable="'donationBatchStatus'">
-                {{deliveryForm.donationBatchStatus}}
-              </td>
-              <td data-title="'Delivery Time'" style="width:22%;" header-class="text-left"  class="text-center"
-                sortable="'deliveryTime'">
-                {{deliveryForm.deliveryTime | date: "HH:mm:ss"}}
-              </td>
-              <td data-title="'Num Boxes'" header-class="text-left" sortable="'numBoxes'"  class="text-center">
-                {{deliveryForm.numBoxes}}
-              </td>
-            </tr>
-          </table>
-        </div>
+                  <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')">PDF</button>
+                  <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
+              </p>
+              <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
+          </div>
       </div>
-    </div>
-    <div ng-switch-when="false">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <p>
-            <em> No components found. </em>
-          </p>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
