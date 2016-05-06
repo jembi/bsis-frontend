@@ -67,18 +67,18 @@
         <div class="form-group">
           <label for="temperature" class="col-sm-2 control-label">Blood Transport box:</label>
           <div class="row col-sm-10">
-            <div class="form-inline" style="padding-left:5px;">
+            <div class="form-inline" style="padding-left:5px;" ng-class="{'has-error': emptyTemperatureSubmitted && addComponentBatchForm.temperature.$invalid}">
               <em>Temperature: </em>
-              <input type=number name="temperature" ng-model="temperature" class="form-control" ng-class="{'ng-invalid ng-dirty' : emptyTempratureSubmitted}" style="width: 50px;"/> <em>&deg;C</em>
+              <input type="number" name="temperature" ng-model="temperature" class="form-control" style="width: 50px;" ng-required="componentBatch.bloodTransportBoxes.length === 0"/> <em>&deg;C</em>
               <button class="btn btn-primary" ng-click="addBox(temperature);" type="button" >Add box</button>
               <div>
-                <small class="error" ng-show="(componentBatch.bloodTransportBoxes.length == 0 && addComponentBatchForm.$submitted)">
+                <small class="error" ng-show="(componentBatch.bloodTransportBoxes.length === 0 && addComponentBatchForm.$submitted)">
                   Add a blood transport box
                 </small>
               </div>
               <div>
-                <small class="error" ng-show="emptyTempratureSubmitted">
-                  Enter a temperature
+                <small class="error" ng-show="emptyTemperatureSubmitted && addComponentBatchForm.temperature.$invalid">
+                  Enter a valid temperature
                 </small>
               </div>
             </div>
