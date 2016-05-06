@@ -21,7 +21,7 @@ angular.module('bsis').controller('AddComponentBatchCtrl', function($scope, $loc
         $scope.componentBatch = response.addComponentBatchForm;
         initFields();
       }
-    });
+    }, function() {});
   }
 
   $scope.addBox = function(temperature) {
@@ -48,9 +48,7 @@ angular.module('bsis').controller('AddComponentBatchCtrl', function($scope, $loc
       ComponentBatchService.addComponentBatch($scope.componentBatch, function() {
         $scope.clearForm(addComponentBatchForm);
         $location.path('/viewComponentBatches');
-      }, function() {
-
-      });
+      }, function() {});
     }
     $scope.adding = false;
   };

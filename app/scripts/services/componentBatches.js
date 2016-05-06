@@ -3,11 +3,11 @@
 angular.module('bsis')
   .factory('ComponentBatchService', function($http, Api) {
     return {
-      getComponentBatchesFormFields: function(response) {
-        Api.ComponentBatchesFormFields.get({}, function(backingForm) {
-          response(backingForm);
-        }, function() {
-          response(false);
+      getComponentBatchesFormFields: function(onSuccess, onError) {
+        Api.ComponentBatchesFormFields.get({}, function(response) {
+          onSuccess(response);
+        }, function(err) {
+          onError(err.data);
         });
       },
       addComponentBatch: function(componentBatch, onSuccess, onError) {
