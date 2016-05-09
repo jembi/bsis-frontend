@@ -45,9 +45,9 @@ angular.module('bsis').controller('AddComponentBatchCtrl', function($scope, $loc
   $scope.addComponentBatch = function(addComponentBatchForm) {
     if (addComponentBatchForm.$valid && $scope.componentBatch.bloodTransportBoxes.length > 0) {
       $scope.adding = true;
-      ComponentBatchService.addComponentBatch($scope.componentBatch, function() {
+      ComponentBatchService.addComponentBatch($scope.componentBatch, function(response) {
         $scope.clearForm(addComponentBatchForm);
-        $location.path('/viewComponentBatches');
+        $location.path('/viewComponentBatch/' + response.id);
       }, function() {});
     }
     $scope.adding = false;

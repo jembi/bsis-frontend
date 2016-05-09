@@ -23,7 +23,7 @@ angular.module('bsis')
         });
       },
       findComponentBatches: function(period, onSuccess, onError) {
-        Api.ComponentBatchesSearch.get({startCollectionDate: period.startCollectionDate, endCollectionDate: period.endCollectionDate}, function(response) {
+        Api.ComponentBatchesSearch.get({startDate: period.startDate, endDate: period.endDate}, function(response) {
           onSuccess(response);
         }, function(err) {
           onError(err.data);

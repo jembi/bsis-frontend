@@ -1,13 +1,29 @@
 'use strict';
 
-angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $filter, $location, ComponentBatchService) {
+angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $filter, $location, ComponentBatchService, $log) {
 
-  function getComponentBatches() {
-    $scope.period = {startCollectionDate: '', endCollectionDate: new Date()};
+  var master = {
+    startDate: moment().subtract(7, 'days').startOf('day').toDate(),
+    endDate: moment().endOf('day').toDate()
+  };
+
+  $scope.findComponentBatches = function() {
+    $scope.searching = true;
+    $scope.submitted = true;
     ComponentBatchService.findComponentBatches($scope.period, function(response) {
       $scope.gridOptions.data = response.componentBatches;
-    }, function() {});
-  }
+      $scope.searching = false;
+    }, function(err) {
+      $scope.searching = false;
+      $log.log(err);
+    });
+  };
+
+  $scope.init = function() {
+    $scope.period = angular.copy(master);
+    $scope.gridOptions.data = [];
+    $scope.submitted = false;
+  };
 
   var columnDefs = [
     {
@@ -117,5 +133,6 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     }
   };
 
-  getComponentBatches();
+  $scope.init();
+
 });
