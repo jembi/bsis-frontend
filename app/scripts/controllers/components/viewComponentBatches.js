@@ -1,47 +1,12 @@
 'use strict';
 
-angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $filter, $location) {
-
-  // View componentBatch variables and methods
-
-  var data = [
-    {
-      id: 1,
-      collectionDate: new Date(),
-      location: {
-        name: 'Maseru'
-      },
-      donationBatchStatus: 'CLOSED',
-      numComponents: 12,
-      numBoxes: 3,
-      deliveryDate: new Date()
-    },
-    {
-      id: 2,
-      collectionDate: new Date(),
-      location: {
-        name: 'Maseru'
-      },
-      donationBatchStatus: 'CLOSED',
-      numComponents: 12,
-      numBoxes: 3,
-      deliveryDate: new Date()
-    },
-    {
-      id: 3,
-      collectionDate: new Date(),
-      location: {
-        name: 'Maseru'
-      },
-      donationBatchStatus: 'CLOSED',
-      numComponents: 12,
-      numBoxes: 3,
-      deliveryDate: new Date()
-    }
-  ];
+angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $filter, $location, ComponentBatchService) {
 
   function getComponentBatches() {
-    $scope.gridOptions.data = data;
+    $scope.period = {startCollectionDate: '', endCollectionDate: new Date()};
+    ComponentBatchService.findComponentBatches($scope.period, function(response) {
+      $scope.gridOptions.data = response.componentBatches;
+    }, function() {});
   }
 
   var columnDefs = [
@@ -60,13 +25,13 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     },
     {
       name: 'Num Components',
-      field: 'numComponents',
+      field: 'numberOfComponents',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Donation Batch Status',
-      field: 'donationBatchStatus',
+      field: 'donationBatch.isClosed',
       width: '**',
       maxWidth: '200'
     },
@@ -79,7 +44,7 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     },
     {
       name: 'Num Boxes',
-      field: 'numBoxes',
+      field: 'numberOfBoxes',
       width: '**',
       maxWidth: '200'
     }
@@ -123,7 +88,6 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
 
     exporterPdfTableStyle: {margin: [-10, 10, 0, 0]},
 
-
     // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
@@ -138,7 +102,6 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
         fontSize: 6
       };
     },
-    enableFiltering: false,
 
     onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;

@@ -84,6 +84,18 @@ angular.module('bsis')
         }
       ),
 
+      ComponentBatchesSearch: $resource(url + '/componentbatches/search', {},
+        {
+          query: {
+            method: 'GET',
+            params: {
+              startCollectionDate: '@startCollectionDate',
+              endCollectionDate: '@endCollectionDate'
+            }
+          }
+        }
+      ),
+
       DonorFormFields: $resource(url + '/donors/form'),
       DonationsFormFields: $resource(url + '/donations/form'),
       DeferralsFormFields: $resource(url + '/deferrals/form'),
