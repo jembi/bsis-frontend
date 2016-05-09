@@ -47,7 +47,7 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     },
     {
       name: 'Donation Batch Status',
-      field: 'donationBatch.isClosed',
+      field: 'donationBatch.status',
       width: '**',
       maxWidth: '200'
     },
@@ -86,10 +86,7 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     exporterFieldCallback: function(grid, row, col, value) {
       if (col.field === 'collectionDate' || col.field === 'deliveryDate') {
         return $filter('bsisDate')(value);
-      } else if (col.field === 'donationBatch.isClosed') {
-        return col.value === true ? 'OPEN' : 'CLOSED';
       }
-
       return value;
     },
 
