@@ -31,13 +31,13 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
       field: 'collectionDate',
       cellFilter: 'bsisDate',
       width: '**',
-      maxWidth: '200'
+      maxWidth: '250'
     },
     {
       name: 'Processing Site',
       field: 'location.name',
       width: '**',
-      maxWidth: '200'
+      maxWidth: '350'
     },
     {
       name: 'Num Components',
@@ -56,13 +56,12 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
       field: 'deliveryDate',
       cellFilter: 'bsisDate',
       width: '**',
-      maxWidth: '200'
+      maxWidth: '250'
     },
     {
       name: 'Num Boxes',
       field: 'numberOfBoxes',
-      width: '**',
-      maxWidth: '200'
+      width: '**'
     }
   ];
 
@@ -83,6 +82,16 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     exporterPdfDefaultStyle: {fontSize: 4, margin: [-2, 0, 0, 0] },
     exporterPdfTableHeaderStyle: {fontSize: 5, bold: true, margin: [-2, 0, 0, 0] },
     exporterPdfMaxGridWidth: 400,
+
+    exporterFieldCallback: function(grid, row, col, value) {
+      if (col.field === 'collectionDate' || col.field === 'deliveryDate') {
+        return $filter('bsisDate')(value);
+      } else if (col.field === 'donationBatch.isClosed') {
+        return col.value === true ? 'OPEN' : 'CLOSED';
+      }
+
+      return value;
+    },
 
     // PDF header
     exporterPdfHeader: function() {
