@@ -13,6 +13,10 @@
 
   <hr />
 
+  <span class="h4" style="float:right; margin-top: -15px; padding-right: 15px; display:inline;">
+    <button class="btn btn-primary" ng-click="printDeliveryNote()">Print Delivery Note</button>
+  </span>
+
   <section>
     <h4>Donation Batch Info</h4>
     <span class="text-muted">Date Created:</span> {{componentBatch.donationBatch.createdDate | bsisDate}}
@@ -41,7 +45,7 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
-      <div class="grid" ui-grid="gridOptions"></div>
+      <div class="grid" ui-grid="gridOptions" ui-grid-exporter></div>
     </div>
   </div>
 </div>
