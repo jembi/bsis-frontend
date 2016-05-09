@@ -66,13 +66,6 @@ angular.module('bsis')
         }, function() {
           response(false);
         });
-      },
-      getComponentBatch: function(id, onSuccess, onFailure) {
-        Api.ComponentBatches.get({id: id}, function(response) {
-          onSuccess(response);
-        }, function(err) {
-          onFailure(err);
-        });
       }
     };
   });

@@ -22,6 +22,13 @@ angular.module('bsis')
           onError(err.data);
         });
       },
+      getComponentBatch: function(id, onSuccess, onFailure) {
+        Api.ComponentBatches.get({id: id}, function(response) {
+          onSuccess(response);
+        }, function(err) {
+          onFailure(err);
+        });
+      },
       findComponentBatches: function(period, onSuccess, onError) {
         Api.ComponentBatchesSearch.get({startDate: period.startDate, endDate: period.endDate}, function(response) {
           onSuccess(response);
