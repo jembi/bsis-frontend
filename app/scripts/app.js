@@ -17,8 +17,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 ])
   .config(function($routeProvider, PERMISSIONS, UI) {
 
-    var reloadOnSearch = false;
-
     $routeProvider
 
     // DEFAULT VIEW - DISPLAY HOME PAGE IF USER AUTHENTICATED
@@ -70,7 +68,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'FindDonorsCtrl',
         permission: PERMISSIONS.VIEW_DONOR,
         enabled: UI.DONORS_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
       })
       .when('/addDonor', {
         templateUrl: 'views/donors/addDonor.html',
@@ -106,7 +104,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'DonorCommunicationsCtrl',
         permission: PERMISSIONS.EXPORT_CLINIC_DATA,
         enabled: UI.DONORS_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
       })
       .when('/viewDonor/:id?', {
         templateUrl: 'views/donors/viewDonor.html',
@@ -124,7 +122,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         templateUrl: 'views/donors/donorCounselling.html',
         controller: 'DonorCounsellingCtrl',
         permission: PERMISSIONS.VIEW_POST_DONATION_COUNSELLING_DONORS,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
       })
       .when('/donorCounselling/:donorId', {
         templateUrl: 'views/donors/donorCounsellingDetails.html',
@@ -134,38 +132,57 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // COMPONENTS URLs
       .when('/components', {
-        redirectTo: '/recordComponents',
+        redirectTo: '/addComponentBatch',
         permission: PERMISSIONS.VIEW_COMPONENT_INFORMATION,
+        enabled: UI.COMPONENTS_TAB_ENABLED
+      })
+      .when('/addComponentBatch', {
+        templateUrl: 'views/components/addComponentBatch.html',
+        controller: 'AddComponentBatchCtrl',
+        permission: PERMISSIONS.ADD_COMPONENT_BATCH,
         enabled: UI.COMPONENTS_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
+      })
+      .when('/viewComponentBatches', {
+        templateUrl: 'views/components/viewComponentBatches.html',
+        controller: 'ViewComponentBatchesCtrl',
+        permission: PERMISSIONS.VIEW_COMPONENT_BATCH,
+        enabled: UI.COMPONENTS_TAB_ENABLED,
+        reloadOnSearch: false
       })
       .when('/recordComponents', {
         templateUrl: 'views/components/recordComponents.html',
         controller: 'RecordComponentsCtrl',
         permission: PERMISSIONS.ADD_COMPONENT,
         enabled: UI.COMPONENTS_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
       })
       .when('/findComponents', {
         templateUrl: 'views/components/findComponents.html',
         controller: 'FindComponentsCtrl',
         permission: PERMISSIONS.VIEW_COMPONENT,
         enabled: UI.COMPONENTS_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
       })
       .when('/discardComponents', {
         templateUrl: 'views/components/discardComponents.html',
         controller: 'DiscardComponentsCtrl',
         permission: PERMISSIONS.DISCARD_COMPONENT,
         enabled: UI.COMPONENTS_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
       })
       .when('/findDiscards', {
         templateUrl: 'views/components/findDiscards.html',
         controller: 'FindDiscardsCtrl',
         permission: PERMISSIONS.VIEW_DISCARDS,
         enabled: UI.COMPONENTS_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
+      })
+      .when('/viewComponentBatch/:id', {
+        templateUrl: 'views/components/viewComponentBatch.html',
+        controller: 'ViewComponentBatchCtrl',
+        permission: PERMISSIONS.VIEW_COMPONENT_BATCH,
+        enabled: UI.COMPONENTS_TAB_ENABLED
       })
 
       // TESTING URLs
@@ -179,7 +196,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'ViewTestSampleCtrl',
         permission: PERMISSIONS.VIEW_TEST_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
       })
       .when('/manageTestBatch', {
         templateUrl: 'views/testing/manageTestBatch.html',
@@ -274,7 +291,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'LabellingCtrl',
         permission: PERMISSIONS.COMPONENT_LABELLING,
         enabled: UI.LABELLING_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
       })
       .when('/labelComponents', {
         templateUrl: 'views/labelling.html',
@@ -294,7 +311,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'AboRhGroupsReportCtrl',
         permission: PERMISSIONS.VIEW_REPORTING_INFORMATION,
         enabled: UI.REPORTS_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
       })
 
       // MOBILE URLs
@@ -303,7 +320,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'MobileCtrl',
         permission: PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION,
         enabled: UI.MOBILE_CLINIC_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
       })
 
       .when('/lookUp', {
@@ -311,7 +328,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'MobileCtrl',
         permission: PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION,
         enabled: UI.MOBILE_CLINIC_TAB_ENABLED,
-        reloadOnSearch: reloadOnSearch
+        reloadOnSearch: false
       })
 
       // SETTINGS URLs
@@ -528,7 +545,11 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       if ($location.path() === '/components') {
         // Initial routing for components page
-        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT) > -1)) {
+        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT_BATCH) > -1)) {
+          $location.path('/addComponentBatch');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT_BATCH) > -1)) {
+          $location.path('/viewComponentBatches');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT) > -1)) {
           $location.path('/recordComponents');
         } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1)) {
           $location.path('/findComponents');
@@ -536,6 +557,8 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
           $location.path('/discardComponents');
         } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_DISCARDS) > -1)) {
           $location.path('/findDiscards');
+        } else {
+          $location.path('/home');
         }
       }
     });

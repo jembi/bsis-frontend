@@ -78,6 +78,24 @@ angular.module('bsis')
         }
       ),
 
+      ComponentBatches: $resource(url + '/componentbatches/:id', null,
+        {
+          update: {method: 'PUT'}
+        }
+      ),
+
+      ComponentBatchesSearch: $resource(url + '/componentbatches/search', {},
+        {
+          query: {
+            method: 'GET',
+            params: {
+              startCollectionDate: '@startCollectionDate',
+              endCollectionDate: '@endCollectionDate'
+            }
+          }
+        }
+      ),
+
       DonorFormFields: $resource(url + '/donors/form'),
       DonationsFormFields: $resource(url + '/donations/form'),
       DeferralsFormFields: $resource(url + '/deferrals/form'),
@@ -89,6 +107,7 @@ angular.module('bsis')
       TestBatchFormFields: $resource(url + '/testbatches/form'),
       TTITestingFormFields: $resource(url + '/ttitests/form'),
       BloodGroupTestingFormFields: $resource(url + '/bloodgroupingtests/form'),
+      ComponentBatchesFormFields: $resource(url + '/componentbatches/form'),
 
       Donors: $resource(url + '/donors/:id', {id: '@id'}),
 

@@ -1,0 +1,53 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/components/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
+  <h3 class="page-header">Receive Components</h3>
+
+  <ul class="nav nav-tabs nav-justified">
+    <li>
+      <a href="#/addComponentBatch">Add Delivery Form</a>
+    </li>
+    <li class="active">
+      <a href="#/viewComponentBatches">View Delivery Forms</a>
+    </li>
+  </ul>
+
+  <form class="form-horizontal col-sm-12" name="findComponentBatchesForm" ng-submit="findComponentBatches()">
+    <div class="clearfix form-group">
+      <label class="col-sm-2 control-label">Period:</label>
+      <div class="form-inline col-sm-10">
+        <div>
+          <dateselect name="startDate" ng-model="period.startDate" format="dateFormat" ng-class="{'has-error' : (findComponentBatchesForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{period.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
+          <span><em>To:</em></span>
+          <dateselect-end name="endDate" ng-model="period.endDate" format="dateFormat" ng-class="{'has-error' : (findComponentBatchesForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{period.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>  
+        </div>
+        <div>
+          <small class="error" ng-show="(findComponentBatchesForm.startDate.$error.required || findComponentBatchesForm.endDate.$error.required)">
+            Select a valid date
+          </small>
+          <small class="error" ng-show="(findComponentBatchesForm.startDate.$error.uiDateRange || findComponentBatchesForm.endDate.$error.uiDateRange)">
+            Select a date range that is less than one month
+          </small>
+        </div>
+        <div>
+          <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}}
+          </button>
+          <button class="btn btn-primary" type="button" ng-click="init()">Clear</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  
+  <div class="col-sm-12">
+      <div class="panel panel-default" ng-if="submitted">
+          <div class="panel-body">
+              <p>
+                  <em>{{gridOptions.data.length}} sample(s) found</em> | <em> Data export: </em>
+
+                  <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')">PDF</button>
+                  <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
+              </p>
+              <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
+          </div>
+      </div>
+  </div>
+</div>
