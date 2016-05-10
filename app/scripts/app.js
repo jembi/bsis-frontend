@@ -255,32 +255,32 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // INVENTORY URLs
       .when('/inventory', {
-        templateUrl: 'views/inventory.html',
-        controller: 'InventoryCtrl',
+        templateUrl: 'views/inventory/manageInventory.html',
+        controller: 'ManageInventoryCtrl',
         permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
       .when('/manageInventory', {
-        templateUrl: 'views/inventory.html',
-        controller: 'InventoryCtrl',
+        templateUrl: 'views/inventory/manageInventory.html',
+        controller: 'ManageInventoryCtrl',
         permission: PERMISSIONS.VIEW_COMPONENT,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
       .when('/transferComponents', {
-        templateUrl: 'views/inventory.html',
-        controller: 'InventoryCtrl',
+        templateUrl: 'views/inventory/transferComponents.html',
+        controller: 'TransferComponentsCtrl',
         permission: PERMISSIONS.ISSUE_COMPONENT,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
       .when('/issueComponents', {
-        templateUrl: 'views/inventory.html',
-        controller: 'InventoryCtrl',
+        templateUrl: 'views/inventory/issueComponents.html',
+        controller: 'IssueComponentsCtrl',
         permission: PERMISSIONS.ISSUE_COMPONENT,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
       .when('/componentUsage', {
-        templateUrl: 'views/inventory.html',
-        controller: 'InventoryCtrl',
+        templateUrl: 'views/inventory/componentUsage.html',
+        controller: 'ComponentUsageCtrl',
         permission: PERMISSIONS.VIEW_COMPONENT,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
@@ -559,6 +559,14 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
           $location.path('/findDiscards');
         } else {
           $location.path('/home');
+        }
+      }
+
+      if ($location.path() === '/inventory') {
+        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ISSUE_COMPONENT) > -1)) {
+          $location.path('/transferComponents');
+        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1)) {
+          $location.path('/manageInventory');
         }
       }
     });
