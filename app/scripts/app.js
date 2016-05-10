@@ -255,10 +255,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // INVENTORY URLs
       .when('/inventory', {
-        templateUrl: 'views/inventory/manageInventory.html',
-        controller: 'ManageInventoryCtrl',
+        redirectTo: '/manageInventory',
         permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION,
-        enabled: UI.INVENTORY_TAB_ENABLED
+        enabled: UI.COMPONENTS_TAB_ENABLED
       })
       .when('/manageInventory', {
         templateUrl: 'views/inventory/manageInventory.html',
