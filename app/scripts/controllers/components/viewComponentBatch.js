@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $routeParams, $filter, $log, ComponentService) {
+angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $routeParams, $filter, $log, ComponentBatchService) {
 
   $scope.gridOptions = {
     columnDefs: [
@@ -120,7 +120,7 @@ angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $ro
   };
 
   function fetchComponentBatchById(componentBatchId) {
-    ComponentService.getComponentBatch(componentBatchId, function(response) {
+    ComponentBatchService.getComponentBatch(componentBatchId, function(response) {
       $scope.componentBatch = response;
       $scope.gridOptions.data = $scope.componentBatch.components;
     }, function(err) {
