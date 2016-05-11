@@ -321,6 +321,8 @@ angular.module('bsis')
 
       MobileClinicLookUp: $resource(url + '/mobileclinic/lookup'),
 
-      DonationsReport: $resource(url + '/reports/collecteddonations/generate')
+      DonationsReport: $resource(url + '/reports/collecteddonations/generate'),
+
+      StockLevelsReport: $resource(url + '/reports/inventories/generate')
     };
   });
