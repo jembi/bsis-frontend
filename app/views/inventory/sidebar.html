@@ -9,16 +9,15 @@
         </div>
       </span>
         </li>
-        <li class="disabled" has-permission="{{permissions.VIEW_COMPONENT}}"><span>MANAGE BLOOD BANK</span></li>
-        <li ng-class="{current: currentPath === '/manageInventory'}" has-permission="{{permissions.VIEW_COMPONENT}}"><a
-                href="#/manageInventory">Manage Inventory</a></li>
-        <li class="disabled" has-permission="{{permissions.ISSUE_COMPONENT}}"><span>MANAGE COMPONENTS</span></li>
-        <li ng-class="{current: currentPath === '/transferComponents'}" has-permission="{{permissions.ISSUE_COMPONENT}}"><a
-                href="#/transferComponents">Transfer Components</a></li>
-        <li ng-class="{current: currentPath === '/issueComponents'}" has-permission="{{permissions.ISSUE_COMPONENT}}"><a
-                href="#/issueComponents">Issue Components</a></li>
-        <li ng-class="{current: currentPath === '/componentUsage'}" has-permission="{{permissions.VIEW_COMPONENT}}"><a
-                href="#/componentUsage">Component Usage</a></li>
+        <li class="disabled" has-permission="{{permissions.VIEW_COMPONENT}}"><span>MANAGE INVENTORY</span></li>
+        <li ng-class="{current: currentPath === '/findInventory'}" has-permission="{{permissions.VIEW_COMPONENT}}"><a
+                href="#/findInventory">Find Inventory</a></li>
+        <li ng-class="{current: currentPath === '/viewStockLevels'}" has-permission="{{permissions.VIEW_COMPONENT}}"><a
+                href="#/viewStockLevels">View Stock Levels</a></li>
+        <li ng-class="{current: currentPath === '/manageOrders'}" has-permission="{{permissions.ISSUE_COMPONENT}}"><a
+                href="#/manageOrders">Manage Orders</a></li>
+        <li ng-class="{current: currentPath === '/manageReturns'}" has-permission="{{permissions.ISSUE_COMPONENT}}"><a
+                href="#/manageReturns">Manage Returns</a></li>
     </ul>
     <div ng-include="'views/sidebarFooter.html'"></div>
 </div>
