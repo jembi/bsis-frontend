@@ -2,6 +2,54 @@
 <div class="col-sm-9 col-md-10 main">
   <h3 class="page-header">View Stock Levels</h3>
 
-  <form class="form-horizontal" role="form" method="get" action="">
+  <hr />
+
+  <form name="searchForm" class="form-horizontal col-sm-12" style="padding:10px 0;" ng-submit="viewStockLevels(searchForm)" novalidate>
+
+    <div class="clearfix form-group" ng-class="{'has-error': searchForm.allVenues.$invalid}">
+        <label class="col-sm-2 control-label">Distribution Center:</label>
+        <div class="form-inline row col-sm-10">
+          <ui-select multiple ng-model="search.distributionCenters" theme="bootstrap" ng-disabled="disabled" style="width: 350px;" ng-change="updateAllVenues()">
+              <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
+              <ui-select-choices repeat="distributionCenter.id as distributionCenter in distributionCenters | filter:$select.search">
+                  {{distributionCenter.name}}
+              </ui-select-choices>
+          </ui-select>
+          <input type="checkbox" name="allVenues" ng-model="search.allVenues" ng-click="clearDistributionCenters()" ng-required="search.distributionCenters.length === 0" />
+          <label>All Venues</label>
+          <ng-messages for="searchForm.allVenues.$error" role="alert" ng-show="searchForm.allVenues.$dirty">
+              <ng-messages-include src="messages.html"></ng-messages-include>
+          </ng-messages>
+        </div>
+        <div class="row col-sm-10">
+          
+        </div>
+    </div>
+
+    <div class="col-sm-offset-2">
+      <input type="radio" name="inventoryStatus" ng-model="search.inventoryStatus" value="IN_STOCK" required />
+      <label>In Stock</label>
+      <input type="radio" name="inventoryStatus" ng-model="search.inventoryStatus" value="NOT_LABELLED" required />
+      <label>Not Labelled</label>
+    </div>
+
+    <div class="col-sm-offset-2">
+      <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
+          "View Stock Levels"}}
+      </button>
+      <button class="btn btn-primary" type="button" ng-click="clearSearch(searchForm)">Clear</button>
+    </div>
+
   </form>
+
+  <div class="panel panel-default col-sm-12" ng-if="searched">
+    <div class="panel-body">
+      <p>Data Export: 
+        <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')">PDF</button>
+        <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
+      </p>
+      <div class="grid" ui-grid="gridOptions" ui-grid-exporter></div>
+    </div>
+  </div>
+
 </div>
