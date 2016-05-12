@@ -9,20 +9,17 @@
     <div class="clearfix form-group" ng-class="{'has-error': searchForm.allVenues.$invalid}">
         <label class="col-sm-2 control-label">Distribution Center:</label>
         <div class="form-inline row col-sm-10">
-          <ui-select multiple ng-model="search.distributionCenters" theme="bootstrap" ng-disabled="disabled" style="width: 350px;" ng-change="updateAllVenues()">
-              <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
-              <ui-select-choices repeat="distributionCenter.id as distributionCenter in distributionCenters | filter:$select.search">
-                  {{distributionCenter.name}}
-              </ui-select-choices>
-          </ui-select>
-          <input type="checkbox" name="allVenues" ng-model="search.allVenues" ng-click="clearDistributionCenters()" ng-required="search.distributionCenters.length === 0" />
+          <select name="distributionCenter" class="form-control" ng-model="search.distributionCenter" ng-change="updateAllVenues()" style="min-width: 350px;">
+            <option value="" disabled>Select:</option>
+            <option ng-repeat="distributionCenter in distributionCenters" value="{{distributionCenter.id}}">
+              {{distributionCenter.name}}
+            </option>
+          </select>
+          <input type="checkbox" name="allVenues" ng-model="search.allVenues" ng-click="clearDistributionCenter()" ng-required="!search.distributionCenter" />
           <label>All Venues</label>
           <ng-messages for="searchForm.allVenues.$error" role="alert" ng-show="searchForm.allVenues.$dirty">
               <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
-        </div>
-        <div class="row col-sm-10">
-          
         </div>
     </div>
 
