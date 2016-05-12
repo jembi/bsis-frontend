@@ -84,7 +84,6 @@ angular.module('bsis')
 
     function exportPDFFooter(gridOptions, currentPage, pageCount) {
       var columns = [
-        {text: 'Total venues: ' + gridOptions.data.length / 3, width: 'auto'},
         {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
         {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
       ];
