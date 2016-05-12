@@ -4,7 +4,6 @@ angular.module('bsis')
   .controller('ViewStockLevelsCtrl', function($scope, $location, $filter) {
 
     var master = {
-      distributionCenters: [],
       inventoryStatus: 'IN_STOCK',
       allVenues: true
     };
@@ -45,29 +44,25 @@ angular.module('bsis')
 
     function exportPDFCustomFormatter(docDefinition) {
       var prefix = [];
-      if ($scope.searchedParams.distributionCenters.length === 0) {
+      if (!$scope.searchedParams.distributionCenter) {
         prefix.push(
           {
-            text: 'Distribution Centers: ',
+            text: 'All Venues',
             fontSize: 8,
             bold: true
-          }, {
-            text: 'All venues'
           }
         );
       } else {
-        var selectedDistributionCenters = $scope.distributionCenters.filter(function(center) {
-          return $scope.searchedParams.distributionCenters.indexOf(center.id) >= 0;
+        var selectedDistributionCenter = $scope.distributionCenters.filter(function(center) {
+          return $scope.searchedParams.distributionCenter === center.id.toString();
         });
         prefix.push(
           {
-            text: 'Distribution Centers: ',
+            text: 'Distribution Center: ',
             fontSize: 8,
             bold: true
           }, {
-            text: selectedDistributionCenters.map(function(obj) {
-              return obj.name;
-            }).join(', ')
+            text: selectedDistributionCenter[0].name
           }
         );
       }
@@ -139,15 +134,15 @@ angular.module('bsis')
       $location.search({});
     };
 
-    $scope.clearDistributionCenters = function() {
-      $scope.search.distributionCenters = [];
+    $scope.clearDistributionCenter = function() {
+      $scope.search.distributionCenter = null;
     };
 
     $scope.updateAllVenues = function() {
-      if ($scope.search.distributionCenters.length === 0) {
-        $scope.search.allVenues = true;
-      } else {
+      if ($scope.search.distributionCenter) {
         $scope.search.allVenues = false;
+      } else {
+        $scope.search.allVenues = true;
       }
     };
 
@@ -158,6 +153,7 @@ angular.module('bsis')
       $scope.searched = false;
       $scope.searching = true;
       $scope.searchedParams = angular.copy($scope.search);
+
       var inStockData = [
         {
           componentType: 'Whole Blood Single Pack - CPDA',
