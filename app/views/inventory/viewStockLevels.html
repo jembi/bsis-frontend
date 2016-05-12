@@ -6,18 +6,18 @@
 
   <form name="searchForm" class="form-horizontal col-sm-12" style="padding:10px 0;" ng-submit="viewStockLevels(searchForm)" novalidate>
 
-    <div class="clearfix form-group" ng-class="{'has-error': searchForm.allVenues.$invalid}">
+    <div class="clearfix form-group" ng-class="{'has-error': searchForm.allSites.$invalid}">
         <label class="col-sm-2 control-label">Distribution Center:</label>
         <div class="form-inline row col-sm-10">
-          <select name="distributionCenter" class="form-control" ng-model="search.distributionCenter" ng-change="updateAllVenues()" style="min-width: 350px;">
+          <select name="distributionCenter" class="form-control" ng-model="search.distributionCenter" ng-change="updateAllSites()" style="min-width: 350px;">
             <option value="" disabled>Select:</option>
             <option ng-repeat="distributionCenter in distributionCenters" value="{{distributionCenter.id}}">
               {{distributionCenter.name}}
             </option>
           </select>
-          <input type="checkbox" name="allVenues" ng-model="search.allVenues" ng-click="clearDistributionCenter()" ng-required="!search.distributionCenter" />
+          <input type="checkbox" name="allSites" ng-model="search.allSites" ng-click="clearDistributionCenter()" ng-required="!search.distributionCenter" />
           <label>All Venues</label>
-          <ng-messages for="searchForm.allVenues.$error" role="alert" ng-show="searchForm.allVenues.$dirty">
+          <ng-messages for="searchForm.allSites.$error" role="alert" ng-show="searchForm.allSites.$dirty">
               <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
         </div>
