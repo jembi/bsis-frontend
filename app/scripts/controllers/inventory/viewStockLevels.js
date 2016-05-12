@@ -5,7 +5,7 @@ angular.module('bsis')
 
     var master = {
       inventoryStatus: 'IN_STOCK',
-      allVenues: true
+      allSites: true
     };
 
     var inStockColumnDefs = [
@@ -47,7 +47,7 @@ angular.module('bsis')
       if (!$scope.searchedParams.distributionCenter) {
         prefix.push(
           {
-            text: 'All Venues',
+            text: 'All Sites',
             fontSize: 8,
             bold: true
           }
@@ -138,11 +138,11 @@ angular.module('bsis')
       $scope.search.distributionCenter = null;
     };
 
-    $scope.updateAllVenues = function() {
+    $scope.updateAllSites = function() {
       if ($scope.search.distributionCenter) {
-        $scope.search.allVenues = false;
+        $scope.search.allSites = false;
       } else {
-        $scope.search.allVenues = true;
+        $scope.search.allSites = true;
       }
     };
 
