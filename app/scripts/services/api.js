@@ -269,12 +269,13 @@ angular.module('bsis')
         }
       ),
 
-      // Admin Configuration API endpoints
       Locations: $resource(url + '/locations/:id', null,
         {
           update: {method: 'PUT'}
         }
       ),
+
+      LocationByType: $resource(url + '/locations/type/:locationType'),
 
       Configurations: $resource(url + '/configurations/:id', null,
         {

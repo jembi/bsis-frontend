@@ -19,6 +19,14 @@ angular.module('bsis')
         }, onError);
       },
 
+      getDistributionCenters: function(onSuccess, onError) {
+        Api.LocationByType.get({locationType: 'DISTRIBUTION_SITE'}, function(response) {
+          onSuccess(response.locations);
+        }, function(err) {
+          onError(err.data);
+        });
+      },
+
       addLocation: function(location, onSuccess, onError) {
 
         var addLocation = new Api.Locations();
