@@ -240,7 +240,7 @@ angular.module('bsis')
         $scope.submitted = true;
       }, function(err) {
         $scope.searching = false;
-        $log.log(err);
+        $log.error(err);
       });
     };
 
@@ -250,7 +250,7 @@ angular.module('bsis')
       LocationsService.getDistributionCenters(function(locations) {
         $scope.distributionCenters = locations;
       }, function(err) {
-        $log.log(err);
+        $log.error(err);
       });
     }
 
