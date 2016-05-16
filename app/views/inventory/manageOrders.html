@@ -33,7 +33,7 @@
         <div class="form-group">
           <label class="col-sm-2" for="transferTo">Transfer to Distribution Center:</label>
           <div class="col-sm-10">
-            <select class="form-control" style="display:inline-block;width:auto;" name="transferTo" ng-model="orderForm.transferTo" ng-options="item.id as item.name for item in distributionSites track by item.id" ng-disabled="orderForm.issueTo" ng-required="!orderForm.issueTo">
+            <select class="form-control" style="display:inline-block;width:auto;" name="transferTo" ng-model="orderForm.transferTo" ng-options="item.id as item.name disable when item.id === orderForm.dispatchedFrom for item in distributionSites track by item.id" ng-disabled="orderForm.issueTo" ng-required="!orderForm.issueTo">
               <option value="" selected></option>
             </select>
             <span>OR</span>
