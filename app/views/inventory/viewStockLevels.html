@@ -15,8 +15,10 @@
               {{distributionCenter.name}}
             </option>
           </select>
-          <input type="checkbox" name="allSites" ng-model="search.allSites" ng-click="clearDistributionCenter()" ng-required="!search.distributionCenter" />
-          <label>All Venues</label>
+          <label>
+            <input type="checkbox" name="allSites" ng-model="search.allSites" ng-click="clearDistributionCenter()" ng-required="!search.distributionCenter" />
+            All Venues
+          </label>
           <ng-messages for="searchForm.allSites.$error" role="alert" ng-show="searchForm.allSites.$dirty">
               <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
@@ -24,10 +26,14 @@
     </div>
 
     <div class="col-sm-offset-2">
-      <input type="radio" name="inventoryStatus" ng-model="search.inventoryStatus" value="IN_STOCK" required />
-      <label>In Stock</label>
-      <input type="radio" name="inventoryStatus" ng-model="search.inventoryStatus" value="NOT_LABELLED" required />
-      <label>Not Labelled</label>
+      <label>
+        <input type="radio" name="inventoryStatus" ng-model="search.inventoryStatus" value="IN_STOCK" required />
+        In Stock
+      </label>
+      <label>
+        <input type="radio" name="inventoryStatus" ng-model="search.inventoryStatus" value="NOT_LABELLED" required />
+        Not Labelled
+      </label>
     </div>
 
     <div class="col-sm-offset-2">
