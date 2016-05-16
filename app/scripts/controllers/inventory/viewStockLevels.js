@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ViewStockLevelsCtrl', function($scope, $location, $filter) {
+  .controller('ViewStockLevelsCtrl', function($scope, $location, $filter, $log, ReportsService) {
 
     $scope.distributionCenters = null;
 
@@ -124,6 +124,74 @@ angular.module('bsis')
       }
     };
 
+    function createZeroValuesRow(newRow, componentType) {
+      return {
+        componentType: componentType,
+        aPlus: 0,
+        aMinus: 0,
+        bPlus: 0,
+        bMinus: 0,
+        abPlus: 0,
+        abMinus: 0,
+        oPlus: 0,
+        oMinus: 0,
+        empty: 0,
+        total: 0
+      };
+    }
+
+    function mergeRows(newRow, mergedRow) {
+
+      var cohorts = newRow.cohorts;
+      var bloodType = cohorts[1].option;
+      if (bloodType === 'A+') {
+        mergedRow.aPlus = newRow.value;
+      } else if (bloodType === 'A-') {
+        mergedRow.aMinus = newRow.value;
+      } else if (bloodType === 'B+') {
+        mergedRow.bPlus = newRow.value;
+      } else if (bloodType === 'B-') {
+        mergedRow.bMinus = newRow.value;
+      } else if (bloodType === 'AB+') {
+        mergedRow.abPlus = newRow.value;
+      } else if (bloodType === 'AB-') {
+        mergedRow.abMinus = newRow.value;
+      } else if (bloodType === 'O+') {
+        mergedRow.oPlus = newRow.value;
+      } else if (bloodType === 'O-') {
+        mergedRow.oMinus = newRow.value;
+      } else if (bloodType === 'nullnull') {
+        mergedRow.empty = newRow.value;
+      }
+
+      mergedRow.total = mergedRow.total + newRow.value;
+
+      return mergedRow;
+    }
+
+    function mergeData(dataValues) {
+
+      var previousComponentType = '';
+      var mergedData = [];
+      var mergedRow = {};
+
+      angular.forEach(dataValues, function(newRow) {
+
+        var cohorts = newRow.cohorts;
+        var componentType = cohorts[0].option;
+
+        if (componentType !== previousComponentType) {
+          mergedRow = createZeroValuesRow(newRow, componentType);
+          mergedData.push(mergedRow);
+          previousComponentType = componentType;
+        }
+
+        mergedRow = mergeRows(newRow, mergedRow);
+      });
+
+      return mergedData;
+    }
+
     $scope.export = function(format) {
       if (format === 'pdf') {
         $scope.gridApi.exporter.pdfExport('all', 'all');
@@ -160,171 +228,20 @@ angular.module('bsis')
       $scope.searching = true;
       searchedParams = angular.copy($scope.search);
 
-      var inStockData = [
-        {
-          componentType: 'Whole Blood Single Pack - CPDA',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
-        }, {
-          componentType: 'Whole Blood Double Pack - CPDA',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
-        }, {
-          componentType: 'Whole Blood Triple Pack - CPDA',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
-        }, {
-          componentType: 'Whole Blood Quad Pack - CPDA',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
-        }, {
-          componentType: 'Apheresis',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
-        }, {
-          componentType: 'Whole Blood - CPDA',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
-        }, {
-          componentType: 'Whole Blood Poor Platelets - CPDA',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
-        }, {
-          componentType: 'Packed Red Cells - CPDA',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
-        }, {
-          componentType: 'Packed Red Cells - SAGM',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
-        }, {
-          componentType: 'Fresh Frozen Plasma - Whole Blood',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
-        }, {
-          componentType: 'Frozen Plasma - Whole Blood',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
-        }, {
-          componentType: 'Platelets Concentrate - Whole Blood',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
-        }, {
-          componentType: 'Platelets Concentrate - Whole Blood - 24H',
-          aPlus: 2,
-          aMinus: 0,
-          bPlus: 0,
-          bMinus: 0,
-          abPlus: 0,
-          abMinus: 1,
-          oPlus: 0,
-          oMinus: 0,
-          empty: 1,
-          total: 4
+      ReportsService.generateStockLevelsReport(searchedParams.distributionCenter, searchedParams.inventoryStatus, function(report) {
+        if (report.dataValues.length > 0) {
+          $scope.gridOptions.data = mergeData(report.dataValues);
+        } else {
+          $scope.gridOptions.data = [];
         }
-      ];
-
-      $scope.gridOptions.data = inStockData;
-      $scope.gridOptions.columnDefs = isInStockSearch() ? inStockColumnDefs : notLabelledColumnDefs;
-
-      $scope.searched = true;
-      $scope.searching = false;
+        $scope.gridOptions.columnDefs = isInStockSearch() ? inStockColumnDefs : notLabelledColumnDefs;
+        $scope.searched = true;
+        $scope.searching = false;
+        $scope.submitted = true;
+      }, function(err) {
+        $scope.searching = false;
+        $log.log(err);
+      });
     };
 
     function initialiseForm() {
