@@ -5,6 +5,10 @@ angular.module('bsis')
 
     $scope.distributionCenters = null;
 
+    var searchedParams = {};
+    $scope.searched = false;
+    $scope.searching = false;
+
     var master = {
       inventoryStatus: 'IN_STOCK',
       allSites: true
@@ -38,7 +42,7 @@ angular.module('bsis')
     ];
 
     function isInStockSearch() {
-      if ($scope.searchedParams && $scope.searchedParams.inventoryStatus === 'IN_STOCK') {
+      if (searchedParams && searchedParams.inventoryStatus === 'IN_STOCK') {
         return true;
       }
       return false;
@@ -46,7 +50,7 @@ angular.module('bsis')
 
     function exportPDFCustomFormatter(docDefinition) {
       var prefix = [];
-      if (!$scope.searchedParams.distributionCenter) {
+      if (!searchedParams.distributionCenter) {
         prefix.push(
           {
             text: 'All Sites',
@@ -56,7 +60,7 @@ angular.module('bsis')
         );
       } else {
         var selectedDistributionCenter = $scope.distributionCenters.filter(function(center) {
-          return $scope.searchedParams.distributionCenter === center.id.toString();
+          return searchedParams.distributionCenter === center.id.toString();
         });
         prefix.push(
           {
@@ -151,9 +155,10 @@ angular.module('bsis')
       if (searchForm.$invalid) {
         return;
       }
+
       $scope.searched = false;
       $scope.searching = true;
-      $scope.searchedParams = angular.copy($scope.search);
+      searchedParams = angular.copy($scope.search);
 
       var inStockData = [
         {
