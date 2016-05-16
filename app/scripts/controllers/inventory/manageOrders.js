@@ -4,7 +4,7 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, Ord
 
   $scope.orderForm = {
     orderDate: new Date(),
-    dispatchFrom: null,
+    dispatchedFrom: null,
     transferTo: null,
     issueTo: null
   };
@@ -22,7 +22,7 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, Ord
 
   $scope.clearForm = function() {
     $scope.orderForm.orderDate = new Date();
-    $scope.orderForm.dispatchFrom = null;
+    $scope.orderForm.dispatchedFrom = null;
     $scope.orderForm.transferTo = null;
     $scope.orderForm.issueTo = null;
     $scope.addOrderForm.$setPristine();
