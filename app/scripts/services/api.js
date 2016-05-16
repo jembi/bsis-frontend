@@ -323,6 +323,8 @@ angular.module('bsis')
 
       DonationsReport: $resource(url + '/reports/collecteddonations/generate'),
 
-      StockLevelsReport: $resource(url + '/reports/stockLevels/generate')
+      StockLevelsReport: $resource(url + '/reports/stockLevels/generate'),
+
+      OrderFormsForm: $resource(url + '/orderForms/form')
     };
   });
