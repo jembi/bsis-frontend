@@ -56,8 +56,8 @@
         </div>
 
         <div class="col-sm-offset-2">
-          <input class="btn btn-primary" type="submit" value="Add Order" />
-          <input class="btn btn-primary" type="button" value="Clear" ng-click="clearForm();" />
+          <button class="btn btn-primary" type="submit" ng-disabled="addingOrderForm">{{addingOrderForm ? 'Adding...' : 'Add Order'}}</button>
+          <button class="btn btn-primary" type="button" ng-disabled="addingOrderForm" ng-click="clearForm();">Clear</button>
         </div>
       </form>
     </div>

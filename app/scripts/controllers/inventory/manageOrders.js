@@ -10,14 +10,43 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, Ord
   };
   $scope.distributionSites = [];
   $scope.usageSites = [];
+  $scope.addingOrderForm = false;
 
   $scope.addOrder = function() {
     if ($scope.addOrderForm.$invalid) {
       // Don't submit if invalid
       return;
     }
-    // TODO: Set type and location from transferTo or issueTo depending on which one is filled in
-    console.log($scope.orderForm); // eslint-disable-line
+    $scope.addingOrderForm = true;
+
+    var orderType = null;
+    var dispatchedToId = null;
+
+    if ($scope.orderForm.transferTo != null) {
+      orderType = 'TRANSFER';
+      dispatchedToId = $scope.orderForm.transferTo;
+    } else if ($scope.orderForm.issueTo != null) {
+      orderType = 'ISSUE';
+      dispatchedToId = $scope.orderForm.issueTo;
+    }
+
+    var orderForm = {
+      status: 'CREATED',
+      orderDate: $scope.orderForm.orderDate,
+      type: orderType,
+      dispatchedFrom: {
+        id: $scope.orderForm.dispatchedFrom
+      },
+      dispatchedTo: {
+        id: dispatchedToId
+      }
+    };
+
+    OrderFormsService.addOrderForm({}, orderForm, function(res) {
+      // TODO: Redirect to the order form page using the new order form's id
+      console.log(res.orderForm.id); // eslint-disable-line
+      $scope.addingOrderForm = false;
+    }, $log.error);
   };
 
   $scope.clearForm = function() {
