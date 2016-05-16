@@ -3,6 +3,8 @@
 angular.module('bsis')
   .controller('ViewStockLevelsCtrl', function($scope, $location, $filter) {
 
+    $scope.distributionCenters = null;
+
     var master = {
       inventoryStatus: 'IN_STOCK',
       allSites: true
