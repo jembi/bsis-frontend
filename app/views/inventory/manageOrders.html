@@ -21,7 +21,7 @@
         <div class="form-group">
           <label class="col-sm-2" for="dispatchedFrom">Dispatch From:</label>
           <div class="col-sm-10">
-            <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="orderForm.dispatchedFrom" ng-options="item.id as item.name for item in distributionSites track by item.id" required>
+            <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="orderForm.dispatchedFrom" ng-options="item.id as item.name for item in dispatchFromSites track by item.id" required>
               <option value="" disabled selected>Select:</option>
             </select>
             <ng-messages for="addOrderForm.dispatchedFrom.$error" role="alert" ng-show="addOrderForm.$submitted">
@@ -31,25 +31,27 @@
         </div>
 
         <div class="form-group">
-          <label class="col-sm-2" for="transferTo">Transfer to Distribution Center:</label>
+          <label class="col-sm-2">Dispatch Type:</label>
           <div class="col-sm-10">
-            <select class="form-control" style="display:inline-block;width:auto;" name="transferTo" ng-model="orderForm.transferTo" ng-options="item.id as item.name disable when item.id === orderForm.dispatchedFrom for item in distributionSites track by item.id" ng-disabled="orderForm.issueTo" ng-required="!orderForm.issueTo">
-              <option value="" selected></option>
-            </select>
-            <span>OR</span>
-            <ng-messages for="addOrderForm.transferTo.$error" role="alert" ng-show="addOrderForm.$submitted">
-              <ng-messages-include src="messages.html"></ng-messages-include>
-            </ng-messages>
+            <label class="radio-inline">
+              <input type="radio" name="transferType" ng-model="orderForm.type" value="TRANSFER" required> Transfer
+            </label>
+            <label class="radio-inline">
+              <input type="radio" ng-model="orderForm.type" value="ISSUE" required> Issue
+            </label>
+            <small class="error" style="display:block;" ng-show="addOrderForm.$submitted && !orderForm.type">
+              Please select a dispatch type
+            </small>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="col-sm-2" for="issueTo">Issue to Authorised Facility:</label>
+          <label class="col-sm-2" for="dispatchedTo">Dispatch To:</label>
           <div class="col-sm-10">
-            <select class="form-control" style="width:auto;" name="issueTo" ng-model="orderForm.issueTo" ng-options="item.id as item.name for item in usageSites track by item.id" ng-disabled="orderForm.transferTo" ng-required="!orderForm.transferTo">
+            <select class="form-control" style="width:auto;" name="dispatchedTo" ng-model="orderForm.dispatchedTo" ng-options="item.id as item.name for item in dispatchToSites track by item.id" ng-disabled="!orderForm.type" required>
               <option value="" selected></option>
             </select>
-            <ng-messages for="addOrderForm.issueTo.$error" role="alert" ng-show="addOrderForm.$submitted">
+            <ng-messages for="addOrderForm.dispatchedTo.$error" role="alert" ng-show="addOrderForm.$submitted">
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
           </div>

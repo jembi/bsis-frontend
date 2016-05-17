@@ -2,15 +2,42 @@
 
 angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, OrderFormsService) {
 
+  var distributionSites = [];
+  var usageSites = [];
+
+  // Set the "dispatch to" sites based on dispatch type
+  function updateDispatchToSites() {
+    if ($scope.orderForm.type === 'TRANSFER') {
+      $scope.dispatchToSites = distributionSites.filter(function(site) {
+        // Filter the selected distribution site from the options
+        return site.id !== $scope.orderForm.dispatchedFrom;
+      });
+    } else if ($scope.orderForm.type === 'ISSUE') {
+      $scope.dispatchToSites = usageSites;
+    } else {
+      $scope.dispatchToSites = [];
+    }
+  }
+
+  function initialise() {
+    OrderFormsService.getOrderFormsForm(function(res) {
+      $scope.dispatchFromSites = distributionSites = res.distributionSites;
+      usageSites = res.usageSites;
+      updateDispatchToSites();
+    }, $log.error);
+  }
+
   $scope.orderForm = {
     orderDate: new Date(),
+    type: null,
     dispatchedFrom: null,
-    transferTo: null,
-    issueTo: null
+    dispatchedTo: null
   };
-  $scope.distributionSites = [];
-  $scope.usageSites = [];
   $scope.addingOrderForm = false;
+  // The available sites to be dispatched from
+  $scope.dispatchFromSites = [];
+  // The available sites to be dispatched to
+  $scope.dispatchToSites = [];
 
   $scope.addOrder = function() {
     if ($scope.addOrderForm.$invalid) {
@@ -19,26 +46,15 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, Ord
     }
     $scope.addingOrderForm = true;
 
-    var orderType = null;
-    var dispatchedToId = null;
-
-    if ($scope.orderForm.transferTo != null) {
-      orderType = 'TRANSFER';
-      dispatchedToId = $scope.orderForm.transferTo;
-    } else if ($scope.orderForm.issueTo != null) {
-      orderType = 'ISSUE';
-      dispatchedToId = $scope.orderForm.issueTo;
-    }
-
     var orderForm = {
       status: 'CREATED',
       orderDate: $scope.orderForm.orderDate,
-      type: orderType,
+      type: $scope.orderForm.type,
       dispatchedFrom: {
         id: $scope.orderForm.dispatchedFrom
       },
       dispatchedTo: {
-        id: dispatchedToId
+        id: $scope.orderForm.dispatchedTo
       }
     };
 
@@ -51,18 +67,20 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, Ord
 
   $scope.clearForm = function() {
     $scope.orderForm.orderDate = new Date();
+    $scope.orderForm.type = null;
     $scope.orderForm.dispatchedFrom = null;
-    $scope.orderForm.transferTo = null;
-    $scope.orderForm.issueTo = null;
+    $scope.orderForm.dispatchedTo = null;
     $scope.addOrderForm.$setPristine();
   };
 
-  function initialise() {
-    OrderFormsService.getOrderFormsForm(function(res) {
-      $scope.distributionSites = res.distributionSites;
-      $scope.usageSites = res.usageSites;
-    }, $log.error);
-  }
+  $scope.$watch('orderForm.type', function() {
+    // Update to set available options based on type
+    updateDispatchToSites();
+  });
+  $scope.$watch('orderForm.dispatchedFrom', function() {
+    // Update to ensure that the correct site is filtered
+    updateDispatchToSites();
+  });
 
   initialise();
 });
