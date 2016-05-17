@@ -117,10 +117,10 @@ angular.module('bsis')
 
     var inventoryRoutes = [
       '/inventory',
-      '/manageInventory',
-      '/transferComponents',
-      '/issueComponents',
-      '/componentUsage'
+      '/findInventory',
+      '/viewStockLevels',
+      '/manageOrders',
+      '/manageReturns'
     ];
 
     var labellingRoutes = [
