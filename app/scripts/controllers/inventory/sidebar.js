@@ -11,7 +11,7 @@ angular.module('bsis').controller('InventorySidebarCtrl', function($scope, Routi
       subpaths: []
     }, {
       path: '/manageOrders',
-      subpaths: []
+      subpaths: ['/fulfilOrder']
     }, {
       path: '/manageReturns',
       subpaths: []

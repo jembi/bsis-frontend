@@ -1,0 +1,75 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/inventory/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
+  <h3 class="page-header">Fulfil Order Form</h3>
+  
+  <section>
+    <span class="text-muted">Order Date:</span> {{orderForm.orderDate | bsisDate}}
+    <span class="text-muted">Dispatched From:</span> {{orderForm.dispatchedFrom.name}}
+    <span class="text-muted">Dispatched To:</span> {{orderForm.dispatchedTo.name}}
+    <span class="text-muted">Order Type:</span> {{orderForm.type}}
+  </section>
+
+  <hr />
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+      <h4>Units Ordered</h4>
+      <form class="form-horizontal" name="addOrderItemForm" role="form" style="padding:0 15px;" ng-submit="addOrderItem(addOrderItemForm);" novalidate>
+
+        <div class="form-group">
+          <label class="col-sm-2" for="componentType">Component Type:</label>
+          <div class="col-sm-10">
+            <select class="form-control" style="width:auto;" name="componentType" ng-model="orderItem.componentType" ng-options="item.id as item.componentTypeName for item in componentTypes track by item.id" required>
+              <option value="" disabled selected>Select:</option>
+            </select>
+            <ng-messages for="addOrderItemForm.componentType.$error" role="alert" ng-show="addOrderItemForm.$submitted">
+              <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2" for="bloodGroup">Blood Group:</label>
+          <div class="col-sm-10">
+            <select class="form-control" style="width:auto;" name="bloodGroup" ng-model="orderItem.bloodGroup" ng-options="item for item in bloodGroups" required>
+              <option value="" disabled selected>Select:</option>
+            </select>
+            <ng-messages for="addOrderItemForm.bloodGroup.$error" role="alert" ng-show="addOrderItemForm.$submitted">
+              <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2" for="numberOfUnits">Units:</label>
+          <div class="col-sm-10">   
+            <input type=number class="form-control" style="width: 50px" name="numberOfUnits" ng-model="orderItem.numberOfItems"  required>
+            <ng-messages for="addOrderItemForm.numberOfUnits.$error" role="alert" ng-show="addOrderItemForm.$submitted">
+              <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
+            <button class="btn btn-primary" type="submit" ng-disabled="addingOrderForm">Add to Order</button>
+            <button class="btn btn-primary" type="button" ng-disabled="addingOrderForm" ng-click="clearAddOrderItemForm(addOrderItemForm);">Clear</button>
+          </div>
+        </div>
+
+      </form>
+      
+      <br />
+      
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
+        </div>
+      </div>
+      
+      <form class="form-horizontal" name="updateOrderForm" role="form" style="padding:0 15px;" ng-submit="updateOrder();" novalidate>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <button class="btn btn-primary" type="submit" ng-disabled="addingOrderForm">{{savingForm ? 'Saving...' : 'Save Order'}}</button>
+            <button class="btn btn-primary" type="button" ng-disabled="addingOrderForm" ng-click="cancel();">Cancel</button>
+          </div>
+        </div>
+      </form>  
+  </div>
+</div>
