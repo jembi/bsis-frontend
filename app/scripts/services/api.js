@@ -269,13 +269,12 @@ angular.module('bsis')
         }
       ),
 
+      // Admin Configuration API endpoints
       Locations: $resource(url + '/locations/:id', null,
         {
           update: {method: 'PUT'}
         }
       ),
-
-      LocationByType: $resource(url + '/locations/type/:locationType'),
 
       Configurations: $resource(url + '/configurations/:id', null,
         {
@@ -322,8 +321,6 @@ angular.module('bsis')
 
       MobileClinicLookUp: $resource(url + '/mobileclinic/lookup'),
 
-      DonationsReport: $resource(url + '/reports/collecteddonations/generate'),
-
-      StockLevelsReport: $resource(url + '/reports/stockLevels/generate')
+      DonationsReport: $resource(url + '/reports/collecteddonations/generate')
     };
   });
