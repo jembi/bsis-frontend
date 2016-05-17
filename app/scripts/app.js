@@ -520,9 +520,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       if ($location.path() === '/testing') {
         // Initial routing for testing page
-        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_BATCH) !== -1)) {
+        if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_BATCH) !== -1) {
           $location.path('/manageTestBatch');
-        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_OUTCOME) !== -1)) {
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_OUTCOME) !== -1) {
           $location.path('/viewTestSample');
         } else {
           $location.path('/home');
@@ -531,11 +531,11 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       if ($location.path() === '/donors') {
         // Initial routing for donors page
-        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_DONOR) > -1)) {
+        if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_DONOR) > -1) {
           $location.path('/findDonor');
-        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_DONATION_BATCH) > -1)) {
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_DONATION_BATCH) > -1) {
           $location.path('/manageDonationBatches');
-        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.EXPORT_CLINIC_DATA) > -1)) {
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.EXPORT_CLINIC_DATA) > -1) {
           $location.path('/exportDonorList');
         } else {
           $location.path('/home');
@@ -544,17 +544,17 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       if ($location.path() === '/components') {
         // Initial routing for components page
-        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT_BATCH) > -1)) {
+        if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT_BATCH) > -1) {
           $location.path('/addComponentBatch');
-        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT_BATCH) > -1)) {
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT_BATCH) > -1) {
           $location.path('/viewComponentBatches');
-        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT) > -1)) {
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ADD_COMPONENT) > -1) {
           $location.path('/recordComponents');
-        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1)) {
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1) {
           $location.path('/findComponents');
-        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.DISCARD_COMPONENT) > -1)) {
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.DISCARD_COMPONENT) > -1) {
           $location.path('/discardComponents');
-        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_DISCARDS) > -1)) {
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_DISCARDS) > -1) {
           $location.path('/findDiscards');
         } else {
           $location.path('/home');
@@ -562,10 +562,10 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       }
 
       if ($location.path() === '/inventory') {
-        if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ISSUE_COMPONENT) > -1)) {
-          $location.path('/viewStockLevels');
-        } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1)) {
+        if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1) {
           $location.path('/findInventory');
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ISSUE_COMPONENT) > -1) {
+          $location.path('/viewStockLevels');
         }
       }
     });
