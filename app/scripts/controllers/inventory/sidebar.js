@@ -4,16 +4,16 @@ angular.module('bsis').controller('InventorySidebarCtrl', function($scope, Routi
 
   var routes = [
     {
-      path: '/manageInventory',
+      path: '/findInventory',
       subpaths: []
     }, {
-      path: '/transferComponents',
+      path: '/viewStockLevels',
       subpaths: []
     }, {
-      path: '/issueComponents',
+      path: '/manageOrders',
       subpaths: []
     }, {
-      path: '/componentUsage',
+      path: '/manageReturns',
       subpaths: []
     }
   ];
