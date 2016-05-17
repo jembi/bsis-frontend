@@ -255,32 +255,32 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // INVENTORY URLs
       .when('/inventory', {
-        redirectTo: '/manageInventory',
+        redirectTo: '/findInventory',
         permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
-      .when('/manageInventory', {
-        templateUrl: 'views/inventory/manageInventory.html',
-        controller: 'ManageInventoryCtrl',
+      .when('/findInventory', {
+        templateUrl: 'views/inventory/findInventory.html',
+        controller: 'FindInventoryCtrl',
         permission: PERMISSIONS.VIEW_COMPONENT,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
-      .when('/transferComponents', {
-        templateUrl: 'views/inventory/transferComponents.html',
-        controller: 'TransferComponentsCtrl',
+      .when('/viewStockLevels', {
+        templateUrl: 'views/inventory/viewStockLevels.html',
+        controller: 'ViewStockLevelsCtrl',
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION,
+        enabled: UI.INVENTORY_TAB_ENABLED
+      })
+      .when('/manageOrders', {
+        templateUrl: 'views/inventory/manageOrders.html',
+        controller: 'ManageOrdersCtrl',
         permission: PERMISSIONS.ISSUE_COMPONENT,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
-      .when('/issueComponents', {
-        templateUrl: 'views/inventory/issueComponents.html',
-        controller: 'IssueComponentsCtrl',
+      .when('/manageReturns', {
+        templateUrl: 'views/inventory/manageReturns.html',
+        controller: 'ManageReturnsCtrl',
         permission: PERMISSIONS.ISSUE_COMPONENT,
-        enabled: UI.INVENTORY_TAB_ENABLED
-      })
-      .when('/componentUsage', {
-        templateUrl: 'views/inventory/componentUsage.html',
-        controller: 'ComponentUsageCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENT,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
 
@@ -563,9 +563,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       if ($location.path() === '/inventory') {
         if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ISSUE_COMPONENT) > -1)) {
-          $location.path('/transferComponents');
+          $location.path('/viewStockLevels');
         } else if (($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1)) {
-          $location.path('/manageInventory');
+          $location.path('/findInventory');
         }
       }
     });
