@@ -38,6 +38,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     $scope.savingForm = true;
     OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
       $scope.orderForm = res.orderForm;
+      $scope.gridOptions.data = $scope.orderForm.items;
       $scope.savingForm = false;
     }, function(err) {
       $log.error(err);
