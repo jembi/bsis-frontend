@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FulfilOrderCtrl', function($scope, ComponentService, $log, BLOODGROUP, $location, $routeParams) {
+angular.module('bsis').controller('FulfilOrderCtrl', function($scope, ComponentService, OrderFormsService, $log, BLOODGROUP, $location, $routeParams) {
 
   var orderItems = [];
   var orderItemMaster = {
@@ -19,17 +19,12 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, ComponentS
 
     $scope.orderItem = angular.copy(orderItemMaster);
     $scope.bloodGroups = BLOODGROUP.options;
+    $scope.orderForm = null;
 
-    var orderFormId = $routeParams.id;
-    $log.info('orderFormId: ' + orderFormId);
-    $scope.orderForm = {
-      // replace with orderForm from API, find by orderFormId
-      orderDate: new Date(),
-      type: 'TRANSFER',
-      dispatchedFrom: {name: 'Central Service'},
-      dispatchedTo: {name: 'Clinic ABC'},
-      items: []
-    };
+    // Fetch the order form by its id
+    OrderFormsService.getOrderForm({id: $routeParams.id}, function(res) {
+      $scope.orderForm = res.orderForm;
+    }, $log.error);
   }
 
   $scope.addOrderItem = function(form) {

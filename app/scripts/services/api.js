@@ -328,6 +328,6 @@ angular.module('bsis')
 
       OrderFormsForm: $resource(url + '/orderForms/form'),
 
-      OrderForms: $resource(url + '/orderForms')
+      OrderForms: $resource(url + '/orderForms/:id')
     };
   });

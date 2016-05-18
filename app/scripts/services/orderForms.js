@@ -4,6 +4,7 @@ angular.module('bsis').factory('OrderFormsService', function(Api) {
 
   return {
     getOrderFormsForm: Api.OrderFormsForm.get,
-    addOrderForm: Api.OrderForms.save
+    addOrderForm: Api.OrderForms.save,
+    getOrderForm: Api.OrderForms.get
   };
 });
