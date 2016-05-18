@@ -3,9 +3,9 @@
 angular.module('bsis').controller('FulfilOrderCtrl', function($scope, ComponentService, OrderFormsService, $log, BLOODGROUP, $location, $routeParams) {
 
   var orderItemMaster = {
-    componentType: '',
-    bloodGroup: '',
-    numberOfItems: ''
+    componentType: null,
+    bloodGroup: null,
+    numberOfItems: null
   };
 
   function init() {
