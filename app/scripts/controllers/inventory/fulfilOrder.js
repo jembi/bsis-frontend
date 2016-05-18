@@ -5,7 +5,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
   var orderItemMaster = {
     componentType: null,
     bloodGroup: null,
-    numberOfItems: null
+    numberOfUnits: null
   };
 
   function init() {
@@ -69,19 +69,19 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     },
     {
       name: 'Units Ordered',
-      field: 'numberOfItems',
+      field: 'numberOfUnits',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Units Supplied',
-      field: 'numberOfItems',
+      field: 'numberOfUnits',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Gap',
-      field: 'numberOfItems',
+      field: 'numberOfUnits',
       width: '**'
     }
   ];
