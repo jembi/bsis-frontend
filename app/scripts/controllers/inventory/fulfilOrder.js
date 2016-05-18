@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FulfilOrderCtrl', function($scope, ComponentService, OrderFormsService, $log, BLOODGROUP, $location, $routeParams) {
+angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, OrderFormsService, BLOODGROUP) {
 
   var orderItemMaster = {
     componentType: null,
@@ -9,21 +9,20 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, ComponentS
   };
 
   function init() {
-    // get the components from the /orderitems/form endpoint when it's available
-    ComponentService.getComponentsFormFields(function(response) {
-      if (response !== false) {
-        $scope.componentTypes = response.componentTypes;
-      }
-    });
-
     $scope.orderItem = angular.copy(orderItemMaster);
     $scope.bloodGroups = BLOODGROUP.options;
     $scope.orderForm = null;
+    $scope.componentTypes = [];
 
     // Fetch the order form by its id
     OrderFormsService.getOrderForm({id: $routeParams.id}, function(res) {
       $scope.orderForm = res.orderForm;
       $scope.gridOptions.data = $scope.orderForm.items;
+    }, $log.error);
+
+    // Fetch order form item form fields
+    OrderFormsService.getOrderFormItemForm(function(res) {
+      $scope.componentTypes = res.componentTypes;
     }, $log.error);
   }
 
