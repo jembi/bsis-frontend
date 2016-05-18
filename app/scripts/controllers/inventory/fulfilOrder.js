@@ -2,7 +2,6 @@
 
 angular.module('bsis').controller('FulfilOrderCtrl', function($scope, ComponentService, OrderFormsService, $log, BLOODGROUP, $location, $routeParams) {
 
-  var orderItems = [];
   var orderItemMaster = {
     componentType: '',
     bloodGroup: '',
@@ -24,26 +23,30 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, ComponentS
     // Fetch the order form by its id
     OrderFormsService.getOrderForm({id: $routeParams.id}, function(res) {
       $scope.orderForm = res.orderForm;
+      $scope.gridOptions.data = $scope.orderForm.items;
     }, $log.error);
   }
 
   $scope.addOrderItem = function(form) {
     if (form.$valid) {
-      orderItems.push($scope.orderItem);
-      $scope.gridOptions.data = orderItems;
+      $scope.orderForm.items.push($scope.orderItem);
+      $scope.orderItem = angular.copy(orderItemMaster);
+      form.$setPristine();
     }
   };
 
   $scope.updateOrder = function() {
     $scope.savingForm = true;
-    // use PUT endpoint when ready
-    $log.info('Update orderForm');
-    $scope.orderForm.items = orderItems;
-    $scope.savingForm = false;
+    OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
+      $scope.orderForm = res.orderForm;
+      $scope.savingForm = false;
+    }, function(err) {
+      $log.error(err);
+      $scope.savingForm = false;
+    });
   };
 
   $scope.clearAddOrderItemForm = function(form) {
-    $scope.gridOptions.data = [];
     $scope.orderItem = angular.copy(orderItemMaster);
     form.$setPristine();
   };
@@ -55,7 +58,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, ComponentS
   var columnDefs = [
     {
       name: 'Component Type',
-      field: 'componentType',
+      field: 'componentType.componentTypeName',
       width: '**',
       maxWidth: '250'
     },

@@ -20,7 +20,7 @@
         <div class="form-group">
           <label class="col-sm-2" for="componentType">Component Type:</label>
           <div class="col-sm-10">
-            <select class="form-control" style="width:auto;" name="componentType" ng-model="orderItem.componentType" ng-options="item.id as item.componentTypeName for item in componentTypes track by item.id" required>
+            <select class="form-control" style="width:auto;" name="componentType" ng-model="orderItem.componentType" ng-options="item as item.componentTypeName for item in componentTypes track by item.id" required>
               <option value="" disabled selected>Select:</option>
             </select>
             <ng-messages for="addOrderItemForm.componentType.$error" role="alert" ng-show="addOrderItemForm.$submitted">
@@ -48,8 +48,8 @@
             <ng-messages for="addOrderItemForm.numberOfUnits.$error" role="alert" ng-show="addOrderItemForm.$submitted">
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
-            <button class="btn btn-primary" type="submit" ng-disabled="addingOrderForm">Add to Order</button>
-            <button class="btn btn-primary" type="button" ng-disabled="addingOrderForm" ng-click="clearAddOrderItemForm(addOrderItemForm);">Clear</button>
+            <button class="btn btn-primary" type="submit">Add to Order</button>
+            <button class="btn btn-primary" type="button" ng-click="clearAddOrderItemForm(addOrderItemForm);">Clear</button>
           </div>
         </div>
 
@@ -66,8 +66,8 @@
       <form class="form-horizontal" name="updateOrderForm" role="form" style="padding:0 15px;" ng-submit="updateOrder();" novalidate>
         <div class="form-group">
           <div class="col-sm-12">
-            <button class="btn btn-primary" type="submit" ng-disabled="addingOrderForm">{{savingForm ? 'Saving...' : 'Save Order'}}</button>
-            <button class="btn btn-primary" type="button" ng-disabled="addingOrderForm" ng-click="cancel();">Cancel</button>
+            <button class="btn btn-primary" type="submit" ng-disabled="savingForm">{{savingForm ? 'Saving...' : 'Save Order'}}</button>
+            <button class="btn btn-primary" type="button" ng-disabled="savingForm" ng-click="cancel();">Cancel</button>
           </div>
         </div>
       </form>  

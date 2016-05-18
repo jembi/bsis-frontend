@@ -328,6 +328,8 @@ angular.module('bsis')
 
       OrderFormsForm: $resource(url + '/orderForms/form'),
 
-      OrderForms: $resource(url + '/orderForms/:id')
+      OrderForms: $resource(url + '/orderForms/:id', {id: '@id'}, {
+        update: {method: 'PUT'}
+      })
     };
   });
