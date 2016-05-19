@@ -99,7 +99,10 @@ angular.module('bsis')
       '/findComponents',
       '/recordComponents',
       '/findDiscards',
-      '/discardComponents'
+      '/discardComponents',
+      '/addComponentBatch',
+      '/viewComponentBatch/\\d+',
+      '/viewComponentBatches'
     ];
 
     var testingRoutes = [

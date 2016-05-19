@@ -25,7 +25,7 @@ angular.module('bsis').controller('AddComponentBatchCtrl', function($scope, $loc
   }
 
   $scope.addBox = function(temperature) {
-    if ($scope.addComponentBatchForm.temperature.$valid) {
+    if ($scope.addComponentBatchForm.temperature.$valid && temperature != null) {
       $scope.componentBatch.bloodTransportBoxes.push(
         {temperature: temperature}
       );

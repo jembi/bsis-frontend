@@ -67,24 +67,24 @@
         <div class="form-group">
           <label for="temperature" class="col-sm-2 control-label">Blood Transport box:</label>
           <div class="row col-sm-10">
-            <div class="form-inline" style="padding-left:5px;" ng-class="{'has-error': emptyTemperatureSubmitted && addComponentBatchForm.temperature.$invalid}">
+            <div class="form-inline" style="padding-left:5px;" ng-class="{'has-error': emptyTemperatureSubmitted}">
               <em>Temperature: </em>
               <input type="number" name="temperature" ng-model="temperature" class="form-control" style="width: 50px;" ng-required="componentBatch.bloodTransportBoxes.length === 0"/> <em>&deg;C</em>
-              <button class="btn btn-primary" ng-click="addBox(temperature);" type="button" >Add box</button>
+              <button class="btn btn-primary" ng-click="addBox(temperature);" type="button" style="margin-top:0;">Add box</button>
               <div>
                 <small class="error" ng-show="(componentBatch.bloodTransportBoxes.length === 0 && addComponentBatchForm.$submitted)">
                   Add a blood transport box
                 </small>
               </div>
               <div>
-                <small class="error" ng-show="emptyTemperatureSubmitted && addComponentBatchForm.temperature.$invalid">
+                <small class="error" ng-show="emptyTemperatureSubmitted">
                   Enter a valid temperature
                 </small>
               </div>
             </div>
             <div>
               <ul id="boxesList">
-                <li ng-repeat="box in componentBatch.bloodTransportBoxes track by $index"> Box #{{$index + 1}} - {{box.temperature}} C </li>
+                <li ng-repeat="box in componentBatch.bloodTransportBoxes track by $index"> Box #{{$index + 1}} - {{box.temperature}}<em>&deg;C</em> </li>
               </ul>
             </div>
           </div>
