@@ -277,6 +277,12 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.ISSUE_COMPONENT,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
+      .when('/fulfilOrder/:id', {
+        templateUrl: 'views/inventory/fulfilOrder.html',
+        controller: 'FulfilOrderCtrl',
+        permission: PERMISSIONS.ISSUE_COMPONENT,
+        enabled: UI.INVENTORY_TAB_ENABLED
+      })
       .when('/manageReturns', {
         templateUrl: 'views/inventory/manageReturns.html',
         controller: 'ManageReturnsCtrl',

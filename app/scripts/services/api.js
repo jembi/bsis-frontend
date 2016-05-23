@@ -326,8 +326,12 @@ angular.module('bsis')
 
       StockLevelsReport: $resource(url + '/reports/stockLevels/generate'),
 
-      OrderFormsForm: $resource(url + '/orderForms/form'),
+      OrderFormForm: $resource(url + '/orderForms/form'),
 
-      OrderForms: $resource(url + '/orderForms')
+      OrderForms: $resource(url + '/orderForms/:id', {id: '@id'}, {
+        update: {method: 'PUT'}
+      }),
+
+      OrderFormItemForm: $resource(url + '/orderForms/items/form')
     };
   });
