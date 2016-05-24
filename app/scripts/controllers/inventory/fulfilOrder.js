@@ -23,7 +23,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     };
   }
 
-  function addAllItemsToTable(orderForm) {
+  function populateGrid(orderForm) {
     $scope.gridOptions.data = [];
     var componentsToMatch = angular.copy(orderForm.components);
     angular.forEach(orderForm.items, function(item) {
@@ -54,7 +54,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     // Fetch the order form by its id
     OrderFormsService.getOrderForm({id: $routeParams.id}, function(res) {
       $scope.orderForm = res.orderForm;
-      addAllItemsToTable($scope.orderForm);
+      populateGrid($scope.orderForm);
     }, $log.error);
 
     // Fetch order form item form fields
@@ -94,7 +94,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
         if (!componentAlreadyAdded) {
           // add new component to the list, update the table and reset the form
           $scope.orderForm.components.push(component);
-          addAllItemsToTable($scope.orderForm);
+          populateGrid($scope.orderForm);
           $scope.component = angular.copy(componentMaster);
           form.$setPristine();
         }
@@ -107,7 +107,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     $scope.savingForm = true;
     OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
       $scope.orderForm = res.orderForm;
-      addAllItemsToTable($scope.orderForm);
+      populateGrid($scope.orderForm);
       $scope.savingForm = false;
     }, function(err) {
       $log.error(err);
