@@ -92,7 +92,11 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
   $scope.addComponent = function(form) {
     if (form.$valid) {
       $scope.addingComponent = true;
-      ComponentService.findComponent($scope.component.din, $scope.component.componentCode, function(component) {
+      var searchParams = {
+        donationIdentificationNumber: $scope.component.din,
+        componentCode: $scope.component.componentCode
+      };
+      ComponentService.findComponent(searchParams, function(component) {
         // check if component has already been added
         var componentAlreadyAdded = $scope.orderForm.components.some(function(e) {
           return e.id == component.id;
