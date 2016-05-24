@@ -30,7 +30,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       var row = convertItem(item);
       var unmatchedComponents = [];
       angular.forEach(componentsToMatch, function(component) {
-        var bloodGroup = component.donation.bloodAbo + component.donation.bloodRh;
+        var bloodGroup = component.bloodAbo + component.bloodRh;
         if (component.componentType.id === item.componentType.id && bloodGroup === item.bloodGroup) {
           row.numberSupplied = row.numberSupplied + 1;
           row.gap = row.gap - 1;
@@ -83,10 +83,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
           componentTypeName: '1001',
           componentTypeCode: 'Whole Blood - CPDA'
         },
-        donation: {
-          bloodAbo: 'A',
-          bloodRh: '+'
-        }
+        bloodAbo: 'A',
+        bloodRh: '+'
       };
       if (component) {
         // check if component has already been added
