@@ -89,9 +89,6 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
   $scope.gridOptions = {
     data: [],
-    paginationPageSize: 10,
-    paginationPageSizes: [10],
-    paginationTemplate: 'views/template/pagination.html',
     columnDefs: columnDefs,
 
     onRegisterApi: function(gridApi) {
