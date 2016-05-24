@@ -203,17 +203,7 @@ angular.module('bsis')
         }
       ),
 
-      FindComponent: $resource(url + '/components', {},
-        {
-          query: {
-            method: 'GET',
-            params: {
-              donationIdentificationNumber: '@donationIdentificationNumber',
-              componentCode: '@componentCode'
-            }
-          }
-        }
-      ),
+      Components: $resource(url + '/components'),
 
       discardComponents: $resource(url + '/components/:id/discard', {},
         {

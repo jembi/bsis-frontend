@@ -25,7 +25,7 @@ angular.module('bsis')
         });
       },
       findComponent: function(componentSearch, onSuccess, onError) {
-        Api.FindComponent.get(componentSearch, function(response) {
+        Api.Components.get(componentSearch, function(response) {
           onSuccess(response.component);
         }, function(err) {
           onError(err.data);
