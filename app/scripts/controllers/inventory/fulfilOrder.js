@@ -75,31 +75,25 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
   $scope.addComponent = function(form) {
     if (form.$valid) {
       $scope.addingComponent = true;
-      // retrieve component from server
-      var component = {
-        id: 36,
-        componentType: {
-          id: 1,
-          componentTypeName: '1001',
-          componentTypeCode: 'Whole Blood - CPDA'
-        },
-        bloodAbo: 'A',
-        bloodRh: '+'
-      };
-      if (component) {
-        // check if component has already been added
-        var componentAlreadyAdded = $scope.orderForm.components.some(function(e) {
-          return e.id == component.id;
-        });
-        if (!componentAlreadyAdded) {
-          // add new component to the list, update the table and reset the form
-          $scope.orderForm.components.push(component);
-          populateGrid($scope.orderForm);
-          $scope.component = angular.copy(componentMaster);
-          form.$setPristine();
+      ComponentService.findComponent($scope.component.din, $scope.component.componentCode, function(component) {
+        if (component) {
+          // check if component has already been added
+          var componentAlreadyAdded = $scope.orderForm.components.some(function(e) {
+            return e.id == component.id;
+          });
+          if (!componentAlreadyAdded) {
+            // add new component to the list, update the table and reset the form
+            $scope.orderForm.components.push(component);
+            populateGrid($scope.orderForm);
+            $scope.component = angular.copy(componentMaster);
+            form.$setPristine();
+          }
         }
-      }
-      $scope.addingComponent = false;
+        $scope.addingComponent = false;
+      }, function(err) {
+        $log.error(err);
+        $scope.addingComponent = false;
+      });
     }
   };
 

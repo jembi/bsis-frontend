@@ -24,6 +24,17 @@ angular.module('bsis')
           response(false);
         });
       },
+      findComponent: function(donationIdentificationNumber, componentCode, onSuccess, onError) {
+        var query = {
+          donationIdentificationNumber: donationIdentificationNumber,
+          componentCode: componentCode
+        };
+        Api.FindComponent.get(query, function(response) {
+          onSuccess(response.component);
+        }, function(err) {
+          onError(err.data);
+        });
+      },
       getComponentsSummary: function() {
         return $http.get('/getComponentsSummary');
       },
