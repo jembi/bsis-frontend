@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, OrderFormsService, ComponentService, BLOODGROUP) {
+angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, ComponentService, BLOODGROUP) {
 
   var orderItemMaster = {
     componentType: null,
@@ -72,6 +72,23 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     }
   };
 
+  function showErrorMessage(errorMessage) {
+    $uibModal.open({
+      animation: false,
+      templateUrl: 'views/errorModal.html',
+      controller: 'ErrorModalCtrl',
+      resolve: {
+        errorObject: function() {
+          return {
+            title: 'Invalid Component',
+            button: 'OK',
+            errorMessage: errorMessage
+          };
+        }
+      }
+    });
+  }
+
   $scope.addComponent = function(form) {
     if (form.$valid) {
       $scope.addingComponent = true;
@@ -87,11 +104,16 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
             populateGrid($scope.orderForm);
             $scope.component = angular.copy(componentMaster);
             form.$setPristine();
+          } else {
+            showErrorMessage('Component ' + $scope.component.din + ' ' + $scope.component.componentCode + ' has already been added to this Order Form.');
           }
         }
         $scope.addingComponent = false;
       }, function(err) {
         $log.error(err);
+        if (err.errorCode === 'NOT_FOUND') {
+          showErrorMessage('No Component with DIN ' + $scope.component.din + ' and ComponentCode ' + $scope.component.componentCode + ' found.');
+        }
         $scope.addingComponent = false;
       });
     }
