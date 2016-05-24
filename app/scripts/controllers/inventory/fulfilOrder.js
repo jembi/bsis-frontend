@@ -25,8 +25,20 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
   function addAllItemsToTable(orderForm) {
     $scope.gridOptions.data = [];
+    var componentsToMatch = angular.copy(orderForm.components);
     angular.forEach(orderForm.items, function(item) {
       var row = convertItem(item);
+      var unmatchedComponents = [];
+      angular.forEach(componentsToMatch, function(component) {
+        var bloodGroup = component.donation.bloodAbo + component.donation.bloodRh;
+        if (component.componentType.id === item.componentType.id && bloodGroup === item.bloodGroup) {
+          row.numberSupplied = row.numberSupplied + 1;
+          row.gap = row.gap - 1;
+        } else {
+          unmatchedComponents.push(component);
+        }
+      });
+      componentsToMatch = unmatchedComponents; // ensure we don't match the component more than once
       $scope.gridOptions.data.push(row);
     });
   }
@@ -84,6 +96,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
         if (!componentAlreadyAdded) {
           // add new component to the list, update the table and reset the form
           $scope.orderForm.components.push(component);
+          addAllItemsToTable($scope.orderForm);
           $scope.component = angular.copy(componentMaster);
           form.$setPristine();
         }
