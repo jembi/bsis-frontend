@@ -93,20 +93,18 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     if (form.$valid) {
       $scope.addingComponent = true;
       ComponentService.findComponent($scope.component.din, $scope.component.componentCode, function(component) {
-        if (component) {
-          // check if component has already been added
-          var componentAlreadyAdded = $scope.orderForm.components.some(function(e) {
-            return e.id == component.id;
-          });
-          if (!componentAlreadyAdded) {
-            // add new component to the list, update the table and reset the form
-            $scope.orderForm.components.push(component);
-            populateGrid($scope.orderForm);
-            $scope.component = angular.copy(componentMaster);
-            form.$setPristine();
-          } else {
-            showErrorMessage('Component ' + $scope.component.din + ' ' + $scope.component.componentCode + ' has already been added to this Order Form.');
-          }
+        // check if component has already been added
+        var componentAlreadyAdded = $scope.orderForm.components.some(function(e) {
+          return e.id == component.id;
+        });
+        if (!componentAlreadyAdded) {
+          // add new component to the list, update the table and reset the form
+          $scope.orderForm.components.push(component);
+          populateGrid($scope.orderForm);
+          $scope.component = angular.copy(componentMaster);
+          form.$setPristine();
+        } else {
+          showErrorMessage('Component ' + $scope.component.din + ' ' + $scope.component.componentCode + ' has already been added to this Order Form.');
         }
         $scope.addingComponent = false;
       }, function(err) {
