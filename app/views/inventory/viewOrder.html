@@ -8,6 +8,11 @@
         <button class="btn btn-link" style="padding:0;" ng-click="edit()">Edit</button>
       </em>
     </span>
+    <span style="margin-left: 20px; margin-top: -15px; float:right">
+      <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.status === 'DISPATCHED'">
+        <button class="btn btn-primary" ng-click="exportDispatchNote()">Print Dispatch Note</button>
+      </span>
+    </span>
   </span>
 
   <hr style="clear:right;"/>
@@ -26,7 +31,7 @@
   </div>
 
   <div class="panel panel-default">
-    <div id="unitsSuppliedGrid" class="grid" ui-grid="unitsSuppliedGridOptions"></div>
+    <div id="unitsSuppliedGrid" class="grid" ui-grid="unitsSuppliedGridOptions" ui-grid-exporter></div>
   </div>
 
 </div>
