@@ -100,21 +100,21 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       };
       ComponentService.findComponent(searchParams, function(component) {
         // check if component in stock
-        if (component.inventoryStatus != 'IN_STOCK') {
+        if (component.inventoryStatus !== 'IN_STOCK') {
           showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
             ') is not currently in stock.');
         // check if the component is in the correct location
-        } else if (component.location.id != $scope.orderForm.dispatchedFrom.id) {
+        } else if (component.location.id !== $scope.orderForm.dispatchedFrom.id) {
           showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
             ') is not currently in stock at ' + $scope.orderForm.dispatchedFrom.name + '.');
         // check if the component is available
-        } else if (component.status != 'AVAILABLE') {
+        } else if (component.status !== 'AVAILABLE') {
           showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
             ') is not suitable for dispatch.');
         } else {
           // check if component has already been added
           var componentAlreadyAdded = $scope.orderForm.components.some(function(e) {
-            return e.id == component.id;
+            return e.id === component.id;
           });
           if (componentAlreadyAdded) {
             showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
