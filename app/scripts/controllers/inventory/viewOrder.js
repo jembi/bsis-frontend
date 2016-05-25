@@ -2,6 +2,8 @@
 
 angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService) {
 
+  $scope.displayConfirmDispatch = false;
+
   var unitsOrderedColumnDefs = [
     {
       name: 'Component Type',
@@ -192,6 +194,22 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
 
   $scope.exportDispatchNote = function() {
     $scope.unitsSuppliedGridApi.exporter.pdfExport('all', 'all');
+  };
+
+  $scope.confirmDispatch = function(condition) {
+    $scope.displayConfirmDispatch = condition;
+  };
+
+  $scope.dispatch = function() {
+    $scope.orderForm.status = 'DISPATCHED';
+    OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
+      $scope.orderForm = res.orderForm;
+      populateUnitsOrderedGrid($scope.orderForm);
+      populateUnitsSuppliedGrid($scope.orderForm);
+      $scope.displayConfirmDispatch = false;
+    }, function(err) {
+      $log.error(err);
+    });
   };
 
   $scope.edit = function() {
