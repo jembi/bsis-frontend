@@ -81,7 +81,9 @@ angular.module('bsis')
       page: 1,            // show first page
       count: 10,          // count per page
       filter: {},
-      sorting: {}
+      sorting: {
+        'donation.donationIdentificationNumber': 'asc'
+      }
     },
       {
         defaultSort: 'asc',
