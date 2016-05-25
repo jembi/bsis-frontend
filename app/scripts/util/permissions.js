@@ -91,6 +91,12 @@ angular.module('bsis')
     DISCARD_COMPONENT: 'Discard Component',
     VIEW_DISCARDS: 'View Discards',
 
+    // Order
+    ADD_ORDER_FORM: 'Add Order Form',
+    VIEW_ORDER_FORM: 'View Order Form',
+    EDIT_ORDER_FORM: 'Edit Order Form',
+    VOID_ORDER_FORM: 'Void Order Form',
+
     // Reporting Permissions
     DONATIONS_REPORTING: 'Reporting - Donations',
     REQUESTS_REPORTING: 'Reporting - Requests',
