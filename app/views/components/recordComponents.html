@@ -44,9 +44,9 @@
                         ng-mouseenter="this.$selected = true"
                         ng-mouseleave="this.$selected = false"
                         ng-class="{'active': component.$selected}">
-                        <td data-title="'Component Identifier'" header-class="text-left" class="text-center"
-                            sortable="'componentIdentificationNumber'">
-                            {{component.componentIdentificationNumber}}
+                        <td data-title="'Component Code'" header-class="text-left" class="text-center"
+                            sortable="'componentCode'">
+                            {{component.componentCode}}
                         </td>
                         <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
                             {{component.componentType.componentTypeName}}

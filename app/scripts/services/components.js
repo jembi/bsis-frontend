@@ -24,6 +24,13 @@ angular.module('bsis')
           response(false);
         });
       },
+      findComponent: function(componentSearch, onSuccess, onError) {
+        Api.Components.get(componentSearch, function(response) {
+          onSuccess(response.component);
+        }, function(err) {
+          onError(err.data);
+        });
+      },
       getComponentsSummary: function() {
         return $http.get('/getComponentsSummary');
       },

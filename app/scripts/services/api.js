@@ -203,6 +203,8 @@ angular.module('bsis')
         }
       ),
 
+      Components: $resource(url + '/components'),
+
       discardComponents: $resource(url + '/components/:id/discard', {},
         {
           update: {

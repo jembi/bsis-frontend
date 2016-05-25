@@ -62,9 +62,43 @@
       
       <div class="col-sm-12">
         <div class="panel panel-default">
-          <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
+          <div class="grid" ui-grid="gridOptions" ui-grid-exporter></div>
         </div>
       </div>
+
+
+      <h4>Units Supplied</h4>
+      <form class="form-inline" name="addComponentForm" role="form" style="padding:0 15px;" ng-submit="addComponent(addComponentForm);" novalidate>
+
+        <div class="form-group">
+          <label for="componentType" style="vertical-align: top">DIN:</label>
+          <div style="display: inline-block">
+            <input type=number class="form-control" name="din" ng-model="component.din" required>
+            <ng-messages for="addComponentForm.din.$error" role="alert" ng-show="addComponentForm.$submitted">
+              <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="componentType" style="vertical-align: top">Component Code:</label>
+          <div style="display: inline-block">
+            <input class="form-control" name="componentCode" ng-model="component.componentCode" required>
+            <ng-messages for="addComponentForm.din.$error" role="alert" ng-show="addComponentForm.$submitted">
+              <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
+          </div>
+        </div>
+        
+        <div class="form-group" style="vertical-align: top" >
+          <button class="btn btn-primary" type="submit" ng-disabled="addingComponent" style="margin-top: 0px">Add Pack</button>
+          <button class="btn btn-primary" type="button" ng-disabled="addingComponent" style="margin-top: 0px" ng-click="clearAddComponent(addComponentForm);">Clear</button>
+        </div>
+
+      </form>
+      
+      <br />
+
       
       <form class="form-horizontal" name="updateOrderForm" role="form" style="padding:0 15px;" ng-submit="updateOrder();" novalidate>
         <div class="form-group">
