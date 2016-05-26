@@ -103,26 +103,25 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     {
       name: 'Order Date',
       field: 'orderDate',
-      cellFilter: 'bsisDateTime',
-      width: '**'
+      cellFilter: 'bsisDate',
+      width: '**',
+      maxWidth: '200'
+    },
+    {
+      name: 'Dispatch Type',
+      field: 'type',
+      width: '**',
+      maxWidth: '200'
     },
     {
       name: 'Dispatched From',
       field: 'dispatchedFrom.name',
-      width: '**',
-      maxWidth: '300'
+      width: '**'
     },
     {
       name: 'Dispatched To',
       field: 'dispatchedTo.name',
-      width: '**',
-      maxWidth: '300'
-    },
-    {
-      name: 'Order Type',
-      field: 'type',
-      width: '**',
-      maxWidth: '300'
+      width: '**'
     }
   ];
 
