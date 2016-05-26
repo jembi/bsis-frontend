@@ -324,6 +324,13 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         enabled: UI.REPORTS_TAB_ENABLED,
         reloadOnSearch: false
       })
+      .when('/ttiPrevalenceReport', {
+        templateUrl: 'views/reports/ttiPrevalenceReport.html',
+        controller: 'TTIPrevalenceReportCtrl',
+        permission: PERMISSIONS.VIEW_REPORTING_INFORMATION,
+        enabled: UI.REPORTS_TAB_ENABLED,
+        reloadOnSearch: false
+      })
 
       // MOBILE URLs
       .when('/mobile', {

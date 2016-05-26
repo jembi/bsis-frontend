@@ -326,6 +326,8 @@ angular.module('bsis')
 
       DonationsReport: $resource(url + '/reports/collecteddonations/generate'),
 
+      TTIPrevalenceReport: $resource(url + '/reports/ttiprevalence/generate'),
+
       StockLevelsReport: $resource(url + '/reports/stockLevels/generate'),
 
       OrderFormForm: $resource(url + '/orderForms/form'),
