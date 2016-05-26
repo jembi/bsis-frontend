@@ -334,6 +334,20 @@ angular.module('bsis')
         update: {method: 'PUT'}
       }),
 
-      OrderFormItemForm: $resource(url + '/orderForms/items/form')
+      OrderFormItemForm: $resource(url + '/orderForms/items/form'),
+      OrderFormsSearch: $resource(url + '/orderForms/search', {},
+        {
+          query: {
+            method: 'GET',
+            params: {
+              orderDateFrom: '@orderDateFrom',
+              orderDateTo: '@orderDateTo',
+              dispatchedFromId: '@dispatchedFromId',
+              dispatchedToId: '@dispatchedToId',
+              status: '@status'
+            }
+          }
+        }
+      )
     };
   });
