@@ -1,0 +1,92 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/inventory/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
+  <h3 class="page-header">Manage Orders</h3>
+
+  <ul class="nav nav-tabs nav-justified">
+    <li>
+      <a href="#/manageOrders">Add Order</a>
+    </li>
+    <li class="active">
+      <a href="#/viewOrders">View Orders</a>
+    </li>
+  </ul>
+
+  <div class="panel-default">
+    <div class="panel-body">
+
+      <h4>View Orders</h4>
+
+      <form class="form-horizontal col-sm-12" name="findOrderForm" ng-submit="findOrders(findOrderForm)" novalidate>
+        
+        <div class="clearfix form-group">
+          <label class="col-sm-2 control-label">Period:</label>
+          <div class="form-inline col-sm-10">
+            <div>
+              <dateselect name="startDate" ng-model="searchParams.period.startDate" format="dateFormat" ng-class="{'has-error' : (findOrderForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{searchParams.period.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
+              <span><em>To:</em></span>
+              <dateselect-end name="endDate" ng-model="searchParams.period.endDate" format="dateFormat" ng-class="{'has-error' : (findOrderForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{searchParams.period.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>  
+            </div>
+            <div>
+              <small class="error" ng-show="(findOrderForm.startDate.$error.required || findOrderForm.endDate.$error.required)">
+                Select a valid date
+              </small>
+              <small class="error" ng-show="(findOrderForm.startDate.$error.uiDateRange || findOrderForm.endDate.$error.uiDateRange)">
+                Select a date range that is less than one month
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Dispatch From:</label>
+          <div class="col-sm-10">
+            <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="searchParams.dispatchedFrom" ng-options="item.id as item.name for item in dispatchFromSites track by item.id">
+              <option value="" disabled selected>Select:</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="dispatchedFrom">Dispatch Type:</label>
+          <div class="col-sm-10">
+            <label class="radio-inline">
+              <input type="radio" name="transferType" ng-model="searchParams.type" value="TRANSFER"> Transfer
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="transferType" ng-model="searchParams.type" value="ISSUE"> Issue
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="dispatchedTo">Dispatch To:</label>
+          <div class="col-sm-10">
+            <select class="form-control" style="width:auto;" name="dispatchedTo" ng-model="searchParams.dispatchedTo" ng-options="item.id as item.name for item in dispatchToSites track by item.id" ng-disabled="!searchParams.type">
+              <option value="" selected></option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}}
+            </button>
+            <button class="btn btn-primary" type="button" ng-click="init()">Clear</button>
+          </div>
+        </div>
+
+      </form>
+      
+      <div class="col-sm-12">
+          <div class="panel panel-default" ng-if="submitted">
+              <div class="panel-body">
+                  <div class="grid" ui-grid="gridOptions" ui-grid-pagination></div>
+              </div>
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
