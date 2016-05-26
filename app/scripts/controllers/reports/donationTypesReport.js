@@ -51,6 +51,20 @@ angular.module('bsis')
       return allGendersRow;
     }
 
+    function createPercentageRow(allGendersRow) {
+      var percentageRow = angular.copy(allGendersRow);
+      var total = allGendersRow.total;
+      percentageRow.venue.name = '';
+      percentageRow.cohorts = '%';
+      percentageRow.voluntary = allGendersRow.voluntary / total * 100;
+      percentageRow.family = allGendersRow.family / total * 100;
+      percentageRow.autologous = allGendersRow.autologous / total * 100;
+      percentageRow.other = allGendersRow.other / total * 100;
+      percentageRow.empty = allGendersRow.empty / total * 100;
+      percentageRow.total = allGendersRow.total / total * 100;
+      return percentageRow;
+    }
+
     function mergeRows(newRow, existingRow, donationType) {
       var mergedRow = angular.copy(existingRow);
       if (donationType === 'Voluntary') {
@@ -74,6 +88,8 @@ angular.module('bsis')
       mergedData[mergedKey] = mergedMaleRow;
       mergedKey = mergedKey + 1;
       mergedData[mergedKey] = createAllGendersRow(mergedFemaleRow, mergedMaleRow);
+      mergedKey = mergedKey + 1;
+      mergedData[mergedKey] = createPercentageRow(mergedData[mergedKey - 1]);
       mergedKey = mergedKey + 1;
     }
 
@@ -156,11 +172,11 @@ angular.module('bsis')
     var columnDefs = [
       { name: 'Venue', field: 'venue.name' },
       { name: 'Gender', field: 'cohorts'},
-      { name: 'Voluntary', field: 'voluntary', width: 100 },
-      { name: 'Family', field: 'family', width: 100 },
-      { name: 'Autologous', field: 'autologous', width: 100 },
-      { name: 'Other', field: 'other', width: 100 },
-      { name: 'Total', field: 'total' }
+      { name: 'Voluntary', field: 'voluntary', cellFilter: 'number: 0', width: 100 },
+      { name: 'Family', field: 'family', cellFilter: 'number: 0', width: 100 },
+      { name: 'Autologous', field: 'autologous', cellFilter: 'number: 0', width: 100 },
+      { name: 'Other', field: 'other', cellFilter: 'number: 0', width: 100 },
+      { name: 'Total', field: 'total', cellFilter: 'number: 0' }
     ];
 
     function updatePdfDocDefinition(docDefinition) {
@@ -209,7 +225,7 @@ angular.module('bsis')
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
         var columns = [
-          {text: 'Total venues: ' + $scope.gridOptions.data.length / 3, width: 'auto'},
+          {text: 'Total venues: ' + $scope.gridOptions.data.length / 4, width: 'auto'},
           {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
           {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
         ];
