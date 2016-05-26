@@ -180,12 +180,22 @@ angular.module('bsis')
     ];
 
     function updatePdfDocDefinition(docDefinition) {
-      // Fill with grey 'All' rows
+      // Fill with grey and display in bold '%' rows
       docDefinition.styles.greyBoldCell = { fillColor: 'lightgrey', fontSize: 8, bold: true };
+      angular.forEach(docDefinition.content[0].table.body, function(row) {
+        if (row[1] === '%') {
+          angular.forEach(row, function(cell, index) {
+            row[index] = { text: '' + cell, style: 'greyBoldCell'};
+          });
+        }
+      });
+
+      // Display in bold 'All' rows
+      docDefinition.styles.boldCell = { fontSize: 8, bold: true };
       angular.forEach(docDefinition.content[0].table.body, function(row) {
         if (row[1] === 'All') {
           angular.forEach(row, function(cell, index) {
-            row[index] = { text: '' + cell, style: 'greyBoldCell'};
+            row[index] = { text: '' + cell, style: 'boldCell'};
           });
         }
       });
