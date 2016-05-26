@@ -3,13 +3,11 @@
 angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, $log, OrderFormsService) {
 
   var master = {
-    period: {
-      startDate: moment().subtract(7, 'days').startOf('day').toDate(),
-      endDate: moment().endOf('day').toDate()
-    },
+    orderDateFrom: moment().subtract(7, 'days').startOf('day').toDate(),
+    orderDateTo: moment().endOf('day').toDate(),
     type: null,
-    dispatchedFrom: null,
-    dispatchedTo: null
+    dispatchedFromId: null,
+    dispatchedToId: null
   };
 
   var columnDefs = [
@@ -98,20 +96,12 @@ angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, 
     }
     $scope.searching = true;
     $scope.submitted = true;
-    $scope.gridOptions.data.push({
-      id: 1,
-      orderDate: new Date(),
-      dispatchedFrom: {
-        id: 1,
-        name: 'Test site'
-      },
-      dispatchedTo: {
-        id: 2,
-        name: 'Another test site'
-      },
-      type: 'ISSUED',
-      status: 'DISPATCHED'
-    });
+
+    // Find orders
+    OrderFormsService.findOrderForms($scope.searchParams, function(res) {
+      $scope.gridOptions.data = res.orderForms;
+    }, $log.error);
+
     $scope.searching = false;
   };
 

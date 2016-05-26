@@ -22,9 +22,9 @@
           <label class="col-sm-2 control-label">Period:</label>
           <div class="form-inline col-sm-10">
             <div>
-              <dateselect name="startDate" ng-model="searchParams.period.startDate" format="dateFormat" ng-class="{'has-error' : (findOrderForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{searchParams.period.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
+              <dateselect name="startDate" ng-model="searchParams.orderDateFrom" format="dateFormat" ng-class="{'has-error' : (findOrderForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{searchParams.orderDateTo | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
               <span><em>To:</em></span>
-              <dateselect-end name="endDate" ng-model="searchParams.period.endDate" format="dateFormat" ng-class="{'has-error' : (findOrderForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{searchParams.period.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>  
+              <dateselect-end name="endDate" ng-model="searchParams.orderDateTo" format="dateFormat" ng-class="{'has-error' : (findOrderForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{searchParams.orderDateFrom |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>  
             </div>
             <div>
               <small class="error" ng-show="(findOrderForm.startDate.$error.required || findOrderForm.endDate.$error.required)">
@@ -40,7 +40,7 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">Dispatched From:</label>
           <div class="col-sm-10">
-            <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="searchParams.dispatchedFrom" ng-options="item.id as item.name for item in dispatchFromSites track by item.id">
+            <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="searchParams.dispatchedFromId" ng-options="item.id as item.name for item in dispatchFromSites track by item.id">
               <option value="" disabled selected>Select:</option>
             </select>
           </div>
@@ -61,7 +61,7 @@
         <div class="form-group">
           <label class="col-sm-2 control-label" for="dispatchedTo">Dispatched To:</label>
           <div class="col-sm-10">
-            <select class="form-control" style="width:auto;" name="dispatchedTo" ng-model="searchParams.dispatchedTo" ng-options="item.id as item.name for item in dispatchToSites track by item.id" ng-disabled="!searchParams.type">
+            <select class="form-control" style="width:auto;" name="dispatchedTo" ng-model="searchParams.dispatchedToId" ng-options="item.id as item.name for item in dispatchToSites track by item.id" ng-disabled="!searchParams.type">
               <option value="" selected></option>
             </select>
           </div>

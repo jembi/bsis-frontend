@@ -15,8 +15,8 @@ angular.module('bsis').factory('OrderFormsService', function(Api) {
         dispatchedFromId: params.dispatchedFromId,
         dispatchedToId: params.dispatchedToId,
         status: params.status},
-      function(report) {
-        onSuccess(report);
+      function(res) {
+        onSuccess(res);
       }, function(err) {
         onError(err.data);
       });
