@@ -156,6 +156,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       $scope.orderForm = res.orderForm;
       populateGrid($scope.orderForm);
       $scope.savingForm = false;
+      $location.path('/viewOrder/' + $routeParams.id);
     }, function(err) {
       $log.error(err);
       $scope.savingForm = false;
@@ -173,21 +174,20 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
   };
 
   $scope.cancel = function() {
-    $location.path('/manageOrders');
+    $location.path('/viewOrder/' + $routeParams.id);
   };
 
   var columnDefs = [
     {
       name: 'Component Type',
       field: 'componentTypeName',
-      width: '**',
-      maxWidth: '250'
+      width: '**'
     },
     {
       name: 'Blood Group',
       field: 'bloodGroup',
       width: '**',
-      maxWidth: '350'
+      maxWidth: '200'
     },
     {
       name: 'Units Ordered',
@@ -204,7 +204,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     {
       name: 'Gap',
       field: 'gap',
-      width: '**'
+      width: '**',
+      maxWidth: '200'
     }
   ];
 
