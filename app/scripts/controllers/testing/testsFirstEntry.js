@@ -95,7 +95,9 @@ angular.module('bsis')
     $scope.testOutcomesTableParams = new ngTableParams({
       page: 1,            // show first page
       count: 10,          // count per page
-      sorting: {}
+      sorting: {
+        'donation.donationIdentificationNumber': 'asc'
+      }
     },
       {
         defaultSort: 'asc',

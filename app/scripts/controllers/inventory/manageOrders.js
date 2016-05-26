@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, OrderFormsService) {
+angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService) {
 
   var distributionSites = [];
   var usageSites = [];
@@ -59,9 +59,8 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, Ord
     };
 
     OrderFormsService.addOrderForm({}, orderForm, function(res) {
-      // TODO: Redirect to the order form page using the new order form's id
-      console.log(res.orderForm.id); // eslint-disable-line
       $scope.addingOrderForm = false;
+      $location.path('/fulfilOrder/' + res.orderForm.id);
     }, $log.error);
   };
 

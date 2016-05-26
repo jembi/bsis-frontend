@@ -117,7 +117,10 @@ angular.module('bsis')
         field: 'donationIdentificationNumber',
         visible: true,
         width: '**',
-        maxWidth: '120'
+        maxWidth: '120',
+        sort: {
+          direction: 'asc'
+        }
       },
       {
         name: 'Date Bled',
