@@ -11,7 +11,7 @@
     </li>
   </ul>
 
-  <div class="panel-default">
+  <div class="panel panel-default">
     <div class="panel-body">
 
       <h4>View Orders</h4>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-          <label class="col-sm-2 control-label">Dispatch From:</label>
+          <label class="col-sm-2 control-label">Dispatched From:</label>
           <div class="col-sm-10">
             <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="searchParams.dispatchedFrom" ng-options="item.id as item.name for item in dispatchFromSites track by item.id">
               <option value="" disabled selected>Select:</option>
@@ -59,7 +59,7 @@
         </div>
 
         <div class="form-group">
-          <label class="col-sm-2 control-label" for="dispatchedTo">Dispatch To:</label>
+          <label class="col-sm-2 control-label" for="dispatchedTo">Dispatched To:</label>
           <div class="col-sm-10">
             <select class="form-control" style="width:auto;" name="dispatchedTo" ng-model="searchParams.dispatchedTo" ng-options="item.id as item.name for item in dispatchToSites track by item.id" ng-disabled="!searchParams.type">
               <option value="" selected></option>
@@ -80,9 +80,7 @@
       
       <div class="col-sm-12">
           <div class="panel panel-default" ng-if="submitted">
-              <div class="panel-body">
-                  <div class="grid" ui-grid="gridOptions" ui-grid-pagination></div>
-              </div>
+              <div class="grid" ui-grid="gridOptions" ui-grid-pagination></div> 
           </div>
       </div>
 
