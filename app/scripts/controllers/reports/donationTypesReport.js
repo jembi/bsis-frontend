@@ -220,6 +220,17 @@ angular.module('bsis')
         return updatePdfDocDefinition(docDefinition);
       },
 
+      exporterFieldCallback: function(grid, row, col, input) {
+        // Round off decimal values in the PDF export
+        // Required for % values - ui-grid columnDefs.cellFilter doesn't take effect in PDF export
+        if (col.name == 'Voluntary' || col.name == 'Family' ||
+          col.name == 'Autologous' || col.name == 'Other') {
+          return Math.round(input);
+        } else {
+          return input;
+        }
+      },
+
       // PDF header
       exporterPdfHeader: function() {
 
