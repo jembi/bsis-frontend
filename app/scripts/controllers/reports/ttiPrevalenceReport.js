@@ -29,10 +29,14 @@ angular.module('bsis')
       var zeroValuesRow = angular.copy(row);
       zeroValuesRow.venue.name = venue;
       zeroValuesRow.cohorts = gender;
-      zeroValuesRow.hiv = 0;
-      zeroValuesRow.hbv = 0;
-      zeroValuesRow.hcv = 0;
-      zeroValuesRow.syphilis = 0;
+      zeroValuesRow.hivpos = 0;
+      zeroValuesRow.hivneg = 0;
+      zeroValuesRow.hbvpos = 0;
+      zeroValuesRow.hbvneg = 0;
+      zeroValuesRow.hcvpos = 0;
+      zeroValuesRow.hcvneg = 0;
+      zeroValuesRow.syphilispos = 0;
+      zeroValuesRow.syphilisneg = 0;
       zeroValuesRow.empty = 0;
       zeroValuesRow.total = 0;
       return zeroValuesRow;
@@ -42,29 +46,52 @@ angular.module('bsis')
       var allGendersRow = angular.copy(femaleRow);
       allGendersRow.venue.name = '';
       allGendersRow.cohorts = 'All';
-      allGendersRow.hiv = femaleRow.hiv + maleRow.hiv;
-      allGendersRow.hbv = femaleRow.hbv + maleRow.hbv;
-      allGendersRow.hcv = femaleRow.hcv + maleRow.hcv;
-      allGendersRow.syphilis = femaleRow.syphilis + maleRow.syphilis;
+      allGendersRow.hivpos = femaleRow.hivpos + maleRow.hivpos;
+      allGendersRow.hivneg = femaleRow.hivneg + maleRow.hivneg;
+      allGendersRow.hbvpos = femaleRow.hbvpos + maleRow.hbvpos;
+      allGendersRow.hbvneg = femaleRow.hbvneg + maleRow.hbvneg;
+      allGendersRow.hcvpos = femaleRow.hcvpos + maleRow.hcvpos;
+      allGendersRow.hcvneg = femaleRow.hcvneg + maleRow.hcvneg;
+      allGendersRow.syphilispos = femaleRow.syphilispos + maleRow.syphilispos;
+      allGendersRow.syphilisneg = femaleRow.syphilisneg + maleRow.syphilisneg;
       allGendersRow.empty = femaleRow.empty + maleRow.empty;
       allGendersRow.total = femaleRow.total + maleRow.total;
       return allGendersRow;
     }
 
-    function mergeRows(newRow, existingRow, bloodTest) {
+    function mergeRows(newRow, existingRow, bloodTest, result) {
       var mergedRow = angular.copy(existingRow);
       if (bloodTest === 'HIV') {
-        mergedRow.hiv = newRow.value;
+        if (result === 'POS') {
+          mergedRow.hivpos = newRow.value;
+        } else if (result === 'NEG') {
+          mergedRow.hivneg = newRow.value;
+        }
       } else if (bloodTest === 'HBV') {
-        mergedRow.hbv = newRow.value;
+        if (result === 'POS') {
+          mergedRow.hbvpos = newRow.value;
+        } else if (result === 'NEG') {
+          mergedRow.hbvneg = newRow.value;
+        }
       } else if (bloodTest === 'HCV') {
-        mergedRow.hcv = newRow.value;
+        if (result === 'POS') {
+          mergedRow.hcvpos = newRow.value;
+        } else if (result === 'NEG') {
+          mergedRow.hcvneg = newRow.value;
+        }
       } else if (bloodTest === 'Syphilis') {
-        mergedRow.syphilis = newRow.value;
-      } else if (bloodTest === 'null') {
+        if (result === 'POS') {
+          mergedRow.syphilispos = newRow.value;
+        } else if (result === 'NEG') {
+          mergedRow.syphilisneg = newRow.value;
+        }
+      } else if (bloodTest === 'null' || result === 'null') {
         mergedRow.empty = newRow.value;
       }
-      mergedRow.total = mergedRow.hiv + mergedRow.hbv + mergedRow.hcv + mergedRow.syphilis + mergedRow.empty;
+      mergedRow.total = mergedRow.hivpos + mergedRow.hivneg +
+        mergedRow.hbvpos + mergedRow.hbvneg +
+        mergedRow.hcvpos + mergedRow.hcvneg +
+        mergedRow.syphilispos +  mergedRow.syphilisneg;
       return mergedRow;
     }
 
@@ -89,7 +116,8 @@ angular.module('bsis')
 
         var cohorts = newRow.cohorts;
         var bloodTest = cohorts[0].option;
-        var gender = cohorts[1].option;
+        var result = cohorts[1].option;
+        var gender = cohorts[2].option;
         newRow.cohorts = gender;
 
         // New venue
@@ -108,10 +136,10 @@ angular.module('bsis')
 
         // Merge gender row with new row
         if (gender === 'female') {
-          mergedFemaleRow = mergeRows(newRow, mergedFemaleRow, bloodTest);
+          mergedFemaleRow = mergeRows(newRow, mergedFemaleRow, bloodTest, result);
         }
         if (gender === 'male') {
-          mergedMaleRow = mergeRows(newRow, mergedMaleRow, bloodTest);
+          mergedMaleRow = mergeRows(newRow, mergedMaleRow, bloodTest, result);
         }
 
       });
@@ -156,10 +184,14 @@ angular.module('bsis')
     var columnDefs = [
       { name: 'Venue', field: 'venue.name' },
       { name: 'Gender', field: 'cohorts'},
-      { name: 'HIV', displayName: 'HIV', field: 'hiv', width: 80 },
-      { name: 'HBV', displayName: 'HBV', field: 'hbv', width: 80 },
-      { name: 'HCV', displayName: 'HCV', field: 'hcv', width: 80 },
-      { name: 'Syphilis', displayName: 'Syphilis', field: 'syphilis', width: 80 },
+      { name: 'HIVPOS', displayName: 'HIV +', field: 'hivpos', width: 60 },
+      { name: 'HIVNEG', displayName: 'HIV -', field: 'hivneg', width: 60 },
+      { name: 'HBVPOS', displayName: 'HBV +', field: 'hbvpos', width: 60 },
+      { name: 'HBVNEG', displayName: 'HBV -', field: 'hbvneg', width: 60 },
+      { name: 'HCVPOS', displayName: 'HCV +', field: 'hcvpos', width: 60 },
+      { name: 'HCVNEG', displayName: 'HCV -', field: 'hcvneg', width: 60 },
+      { name: 'SyphilisPOS', displayName: 'Syphilis +', field: 'syphilispos', width: 60 },
+      { name: 'SyphilisNEG', displayName: 'Syphilis -', field: 'syphilisneg', width: 60 },
       { name: 'Total', field: 'total' }
     ];
 
