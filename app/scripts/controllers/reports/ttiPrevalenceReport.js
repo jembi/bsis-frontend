@@ -262,6 +262,20 @@ angular.module('bsis')
         return updatePdfDocDefinition(docDefinition);
       },
 
+      exporterFieldCallback: function(grid, row, col, input) {
+        // Round off decimal values in the PDF export
+        // Required for % values - ui-grid columnDefs.cellFilter doesn't take effect in PDF export
+        if (col.name == 'HIVPOS' || col.name == 'HIVNEG' ||
+          col.name == 'HBVPOS' || col.name == 'HBVNEG' ||
+          col.name == 'HCVPOS' || col.name == 'HCVNEG' ||
+          col.name == 'SyphilisPOS' || col.name == 'SyphilisNEG' ||
+          col.name == 'TotalPOS' || col.name == 'TotalNEG') {
+          return Math.round(input);
+        } else {
+          return input;
+        }
+      },
+
       // PDF header
       exporterPdfHeader: function() {
 
