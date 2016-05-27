@@ -23,10 +23,6 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
 
     // Get current order forms
     var params = {
-      orderDateFrom: null,
-      orderDateTo: null,
-      dispatchedFromId: null,
-      dispatchedToId: null,
       status: 'CREATED'
     };
     OrderFormsService.findOrderForms(params, function(res) {
