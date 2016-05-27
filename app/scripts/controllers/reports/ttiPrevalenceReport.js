@@ -38,7 +38,8 @@ angular.module('bsis')
       zeroValuesRow.syphilispos = 0;
       zeroValuesRow.syphilisneg = 0;
       zeroValuesRow.empty = 0;
-      zeroValuesRow.total = 0;
+      zeroValuesRow.totalpos = 0;
+      zeroValuesRow.totalneg = 0;
       return zeroValuesRow;
     }
 
@@ -55,8 +56,30 @@ angular.module('bsis')
       allGendersRow.syphilispos = femaleRow.syphilispos + maleRow.syphilispos;
       allGendersRow.syphilisneg = femaleRow.syphilisneg + maleRow.syphilisneg;
       allGendersRow.empty = femaleRow.empty + maleRow.empty;
-      allGendersRow.total = femaleRow.total + maleRow.total;
+      allGendersRow.totalpos = femaleRow.totalpos + maleRow.totalpos;
+      allGendersRow.totalneg = femaleRow.totalneg + maleRow.totalneg;
       return allGendersRow;
+    }
+
+    function createPercentageRow(allGendersRow) {
+      var percentageRow = angular.copy(allGendersRow);
+      // Total calculated as sum of all POS and NEG outcomes
+      // This should rather be the total number of donations
+      var total = allGendersRow.totalpos + allGendersRow.totalneg;
+      percentageRow.venue.name = '';
+      percentageRow.cohorts = '%';
+      percentageRow.hivpos = allGendersRow.hivpos / total * 100;
+      percentageRow.hivneg = allGendersRow.hivneg / total * 100;
+      percentageRow.hbvpos = allGendersRow.hbvpos / total * 100;
+      percentageRow.hbvneg = allGendersRow.hbvneg / total * 100;
+      percentageRow.hcvpos = allGendersRow.hcvpos / total * 100;
+      percentageRow.hcvneg = allGendersRow.hcvneg / total * 100;
+      percentageRow.syphilispos = allGendersRow.syphilispos / total * 100;
+      percentageRow.syphilisneg = allGendersRow.syphilisneg / total * 100;
+      percentageRow.empty = allGendersRow.empty / total * 100;
+      percentageRow.totalpos = allGendersRow.totalpos / total * 100;
+      percentageRow.totalneg = allGendersRow.totalneg / total * 100;
+      return percentageRow;
     }
 
     function mergeRows(newRow, existingRow, bloodTest, result) {
@@ -88,10 +111,10 @@ angular.module('bsis')
       } else if (bloodTest === 'null' || result === 'null') {
         mergedRow.empty = newRow.value;
       }
-      mergedRow.total = mergedRow.hivpos + mergedRow.hivneg +
-        mergedRow.hbvpos + mergedRow.hbvneg +
-        mergedRow.hcvpos + mergedRow.hcvneg +
-        mergedRow.syphilispos +  mergedRow.syphilisneg;
+      mergedRow.totalpos = mergedRow.hivpos + mergedRow.hbvpos +
+        mergedRow.hcvpos + mergedRow.syphilispos;
+      mergedRow.totalneg = mergedRow.hivneg + mergedRow.hbvneg +
+        mergedRow.hcvneg + mergedRow.syphilisneg;
       return mergedRow;
     }
 
@@ -101,6 +124,8 @@ angular.module('bsis')
       mergedData[mergedKey] = mergedMaleRow;
       mergedKey = mergedKey + 1;
       mergedData[mergedKey] = createAllGendersRow(mergedFemaleRow, mergedMaleRow);
+      mergedKey = mergedKey + 1;
+      mergedData[mergedKey] = createPercentageRow(mergedData[mergedKey - 1]);
       mergedKey = mergedKey + 1;
     }
 
@@ -183,16 +208,17 @@ angular.module('bsis')
 
     var columnDefs = [
       { name: 'Venue', field: 'venue.name' },
-      { name: 'Gender', field: 'cohorts'},
-      { name: 'HIVPOS', displayName: 'HIV +', field: 'hivpos', width: 60 },
-      { name: 'HIVNEG', displayName: 'HIV -', field: 'hivneg', width: 60 },
-      { name: 'HBVPOS', displayName: 'HBV +', field: 'hbvpos', width: 60 },
-      { name: 'HBVNEG', displayName: 'HBV -', field: 'hbvneg', width: 60 },
-      { name: 'HCVPOS', displayName: 'HCV +', field: 'hcvpos', width: 60 },
-      { name: 'HCVNEG', displayName: 'HCV -', field: 'hcvneg', width: 60 },
-      { name: 'SyphilisPOS', displayName: 'Syphilis +', field: 'syphilispos', width: 60 },
-      { name: 'SyphilisNEG', displayName: 'Syphilis -', field: 'syphilisneg', width: 60 },
-      { name: 'Total', field: 'total' }
+      { name: 'Gender', field: 'cohorts', width: 80 },
+      { name: 'HIVPOS', displayName: 'HIV +', field: 'hivpos', width: 70 },
+      { name: 'HIVNEG', displayName: 'HIV -', field: 'hivneg', width: 70 },
+      { name: 'HBVPOS', displayName: 'HBV +', field: 'hbvpos', width: 70 },
+      { name: 'HBVNEG', displayName: 'HBV -', field: 'hbvneg', width: 70 },
+      { name: 'HCVPOS', displayName: 'HCV +', field: 'hcvpos', width: 70 },
+      { name: 'HCVNEG', displayName: 'HCV -', field: 'hcvneg', width: 70 },
+      { name: 'SyphilisPOS', displayName: 'Syphilis +', field: 'syphilispos', width: 80 },
+      { name: 'SyphilisNEG', displayName: 'Syphilis -', field: 'syphilisneg', width: 80 },
+      { name: 'TotalPOS', displayName: 'Total +', field: 'totalpos', width: 80  },
+      { name: 'TotalNEG', displayName: 'Total -', field: 'totalneg', width: 80  }
     ];
 
     function updatePdfDocDefinition(docDefinition) {
@@ -241,7 +267,7 @@ angular.module('bsis')
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
         var columns = [
-          {text: 'Total venues: ' + $scope.gridOptions.data.length / 3, width: 'auto'},
+          {text: 'Total venues: ' + $scope.gridOptions.data.length / 4, width: 'auto'},
           {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
           {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
         ];
