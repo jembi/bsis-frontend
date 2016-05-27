@@ -328,26 +328,20 @@ angular.module('bsis')
 
       StockLevelsReport: $resource(url + '/reports/stockLevels/generate'),
 
-      OrderFormForm: $resource(url + '/orderForms/form'),
-
       OrderForms: $resource(url + '/orderForms/:id', {id: '@id'}, {
-        update: {method: 'PUT'}
-      }),
-
-      OrderFormItemForm: $resource(url + '/orderForms/items/form'),
-      OrderFormsSearch: $resource(url + '/orderForms/search', {},
-        {
-          query: {
-            method: 'GET',
-            params: {
-              orderDateFrom: '@orderDateFrom',
-              orderDateTo: '@orderDateTo',
-              dispatchedFromId: '@dispatchedFromId',
-              dispatchedToId: '@dispatchedToId',
-              status: '@status'
-            }
-          }
+        update: {method: 'PUT'},
+        search: {
+          method: 'GET',
+          url: url + '/orderForms/search'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/orderForms/form'
+        },
+        getItemsForm: {
+          method: 'GET',
+          url: url + '/orderForms/items/form'
         }
-      )
+      })
     };
   });

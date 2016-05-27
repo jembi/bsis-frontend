@@ -3,23 +3,11 @@
 angular.module('bsis').factory('OrderFormsService', function(Api) {
 
   return {
-    getOrderFormsForm: Api.OrderFormForm.get,
+    getOrderFormsForm: Api.OrderForms.getForm,
     addOrderForm: Api.OrderForms.save,
-    getOrderForm: Api.OrderForms.get,
+    getOrderForm: Api.OrderForms.getForm,
     updateOrderForm: Api.OrderForms.update,
-    getOrderFormItemForm: Api.OrderFormItemForm.get,
-    findOrderForms: function(params, onSuccess, onError) {
-      Api.OrderFormsSearch.query({
-        orderDateFrom: params.orderDateFrom,
-        orderDateTo: params.orderDateTo,
-        dispatchedFromId: params.dispatchedFromId,
-        dispatchedToId: params.dispatchedToId,
-        status: params.status},
-      function(res) {
-        onSuccess(res);
-      }, function(err) {
-        onError(err.data);
-      });
-    }
+    getOrderFormItemForm: Api.OrderForms.getItemsForm,
+    findOrderForms: Api.OrderForms.search
   };
 });
