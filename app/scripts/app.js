@@ -582,7 +582,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       if ($location.path() === '/inventory') {
         if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1) {
           $location.path('/findInventory');
-        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ISSUE_COMPONENT) > -1) {
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_INVENTORY_INFORMATION) > -1) {
           $location.path('/viewStockLevels');
         }
       }
