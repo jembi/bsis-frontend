@@ -289,6 +289,12 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.VIEW_ORDER_FORM,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
+      .when('/viewOrders', {
+        templateUrl: 'views/inventory/viewOrders.html',
+        controller: 'ViewOrdersCtrl',
+        permission: PERMISSIONS.VIEW_ORDER_FORM,
+        enabled: UI.INVENTORY_TAB_ENABLED
+      })
       .when('/manageReturns', {
         templateUrl: 'views/inventory/manageReturns.html',
         controller: 'ManageReturnsCtrl',
