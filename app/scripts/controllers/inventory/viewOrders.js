@@ -53,12 +53,11 @@ angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, 
 
   $scope.gridOptions = {
     data: [],
-    columnDefs: columnDefs,
-
-    minRowsToShow: 7,
-    paginationPageSize: 7,
-    paginationPageSizes: [10],
+    paginationPageSize: 6,
+    paginationPageSizes: [6],
     paginationTemplate: 'views/template/pagination.html',
+    minRowsToShow: 6,
+    columnDefs: columnDefs,
     rowTemplate: 'views/template/clickablerow.html',
 
     onRegisterApi: function(gridApi) {

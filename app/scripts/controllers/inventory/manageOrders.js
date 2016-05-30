@@ -123,8 +123,12 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
 
   $scope.gridOptions = {
     data: [],
-    columnDefs: columnDefs,
+    paginationPageSize: 6,
+    paginationPageSizes: [6],
+    paginationTemplate: 'views/template/pagination.html',
     rowTemplate: 'views/template/clickablerow.html',
+    columnDefs: columnDefs,
+    minRowsToShow: 6,
 
     onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;

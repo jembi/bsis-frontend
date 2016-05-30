@@ -103,6 +103,10 @@ angular.module('bsis')
     $scope.gridOptions = {
       data: [],
       columnDefs: [],
+      paginationPageSize: 10,
+      paginationPageSizes: [10],
+      paginationTemplate: 'views/template/pagination.html',
+      minRowsToShow: 10,
 
       exporterPdfOrientation: 'portrait',
       exporterPdfPageSize: 'A4',
