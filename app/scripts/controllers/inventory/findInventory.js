@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindInventoryCtrl', function($scope, $filter, $log) {
+  .controller('FindInventoryCtrl', function($scope, $filter, $log, InventoriesService) {
 
     var master = {
       donationIdentificationNumber: null,
       allSites: true,
-      distributionCenter: null,
-      expireDate: null
+      locationId: null,
+      dueToExpireBy: null
     };
 
     var columnDefs = [
@@ -126,29 +126,10 @@ angular.module('bsis')
       $scope.searchParams = angular.copy(master);
       $scope.submitted = false;
       $scope.searching = false;
-      // FIXME: load distributionCenters and componentTypes
-      $scope.distributionCenters = [
-        {
-          id: 1,
-          name: 'distributionCenter #1'
-        },
-        {
-          id: 2,
-          name: 'distributionCenter #2'
-        }
-      ];
-      $scope.componentTypes = [
-        {
-          id: 1,
-          componentTypeName: 'Whole Blood Single Pack - CPDA',
-          componentTypeCode: '0011'
-        },
-        {
-          id: 2,
-          componentTypeName: 'Whole Blood Double Pack - CPDA',
-          componentTypeCode: '0012'
-        }
-      ];
+      InventoriesService.getSearchForm(function(res) {
+        $scope.distributionCenters = res.distributionSites;
+        $scope.componentTypes = res.componentTypes;
+      }, $log.error);
     }
 
     $scope.findInventory = function(searchForm) {
@@ -157,68 +138,22 @@ angular.module('bsis')
       }
       $scope.submitted = true;
       $scope.searching = true;
-      $log.debug($scope.searchParams);
-      // FIXME: call search endpoint
-      $scope.gridOptions.data = [
-        {
-          donationIdentificationNumber: '1234567',
-          componentCode: '0011-02',
-          createdOn: new Date(),
-          componentType: {
-            id: 1,
-            componentTypeName: 'Whole Blood Single Pack - CPDA',
-            componentTypeCode: '0011'
-          },
-          expiryStatus: '3 days to expire',
-          location: {
-            id: 123,
-            name: 'everythng happens here'
-          }
-        },
-        {
-          donationIdentificationNumber: '1234565',
-          componentCode: '0011-01',
-          createdOn: new Date(),
-          componentType: {
-            id: 1,
-            componentTypeName: 'Whole Blood Single Pack - CPDA',
-            componentTypeCode: '0011'
-          },
-          expiryStatus: '3 days to expire',
-          location: {
-            id: 123,
-            name: 'everythng happens here'
-          }
-        },
-        {
-          donationIdentificationNumber: '1234567',
-          componentCode: '0011-01',
-          createdOn: new Date(),
-          componentType: {
-            id: 1,
-            componentTypeName: 'Whole Blood Single Pack - CPDA',
-            componentTypeCode: '0011'
-          },
-          expiryStatus: '3 days to expire',
-          location: {
-            id: 123,
-            name: 'everythng happens here'
-          }
-        }
-      ];
+      InventoriesService.search($scope.searchParams, function(res) {
+        $scope.gridOptions.data = res.inventories;
+      }, $log.error);
       $scope.searching = false;
     };
 
     $scope.updateAllSites = function() {
-      if ($scope.searchParams.distributionCenter) {
+      if ($scope.searchParams.locationId) {
         $scope.searchParams.allSites = false;
       } else {
         $scope.searchParams.allSites = true;
       }
     };
 
-    $scope.clearDistributionCenter = function() {
-      $scope.searchParams.distributionCenter = null;
+    $scope.clearLocationId = function() {
+      $scope.searchParams.locationId = null;
     };
 
     $scope.clearSearch = function(searchForm) {
