@@ -2,6 +2,82 @@
 <div class="col-sm-9 col-md-10 main">
   <h3 class="page-header">Find Inventory</h3>
 
-  <form class="form-horizontal" role="form" method="get" action="">
+  <form class="form-horizontal col-sm-12" name="searchForm" ng-submit="findInventory(searchForm)" novalidate>
+
+    <div class="clearfix form-group">
+      <label class="col-sm-2 control-label">DIN</label>
+      <div class="form-inline col-sm-10">
+        <div style="display: inline-block; vertical-align: top;">
+          <input type="number" class="form-control" name="donationIdentificationNumber" ng-model="searchParams.donationIdentificationNumber" ng-required="searchParams.componentCode">
+          <ng-messages for="searchForm.donationIdentificationNumber.$error" role="alert" ng-show="searchForm.$submitted">
+            <ng-messages-include src="messages.html"></ng-messages-include>
+          </ng-messages>
+        </div>
+        <label class="control-label">Component Code</label>
+        <div style="display: inline-block; vertical-align: top;">
+          <input class="form-control" name="componentCode" ng-model="searchParams.componentCode" ng-required="searchParams.donationIdentificationNumber" size="8">
+          <ng-messages for="searchForm.componentCode.$error" role="alert" ng-show="searchForm.$submitted">
+            <ng-messages-include src="messages.html"></ng-messages-include>
+          </ng-messages>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': searchForm.allSites.$invalid}">
+      <label class="col-sm-2 control-label">Distribution Center</label>
+      <div class="form-inline col-sm-10">
+        <select name="distributionCenter" class="form-control" ng-model="searchParams.distributionCenter" ng-change="updateAllSites()" style="min-width: 350px;">
+          <option value="" disabled></option>
+          <option ng-repeat="distributionCenter in distributionCenters" value="{{distributionCenter.id}}">
+            {{distributionCenter.name}}
+          </option>
+        </select>
+        <label>
+          <input type="checkbox" name="allSites" ng-model="searchParams.allSites" ng-click="clearDistributionCenter()" />
+          All Sites
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Component Type</label>
+      <div class="form-inline col-sm-10">
+        <select name="componentType" class="form-control" ng-model="searchParams.componentType" style="min-width: 350px;">
+          <option value="" disabled></option>
+          <option ng-repeat="componentType in componentTypes" value="{{componentType.id}}">
+            {{componentType.componentTypeName}}
+          </option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Due to Expire By</label>
+      <div class="col-sm-10">
+        <dateselect name="expireDate" ng-model="searchParams.expireDate" format="dateFormat"></dateselect>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label"></label>
+      <div class="col-sm-10">
+        <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}}
+        </button>
+        <button class="btn btn-primary" type="button" ng-click="clearSearch(searchForm)">Clear</button>
+      </div>
+    </div>
+
   </form>
+  
+
+  <div class="panel panel-default col-sm-12" ng-if="submitted">
+    <div class="panel-body">
+      <p>Data Export: 
+        <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')">PDF</button>
+        <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
+      </p>
+      <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
+    </div>
+  </div>
+
 </div>
