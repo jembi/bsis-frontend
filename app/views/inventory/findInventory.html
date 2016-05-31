@@ -43,7 +43,7 @@
       <label class="col-sm-2 control-label">Component Type</label>
       <div class="form-inline col-sm-10">
         <select name="componentType" class="form-control" ng-model="searchParams.componentTypeId" style="min-width: 350px;">
-          <option value="" disabled></option>
+          <option value=""></option>
           <option ng-repeat="componentType in componentTypes" value="{{componentType.id}}">
             {{componentType.componentTypeName}}
           </option>
