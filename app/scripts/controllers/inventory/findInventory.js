@@ -59,13 +59,10 @@ angular.module('bsis')
     ];
 
     function initialSort(a, b) {
-      var aComponentTypeCode = a.componentCode.substr(1, 4);
-      var bComponentTypeCode = b.componentCode.substr(1, 4);
-
       // 1: sort by componentType code
-      if (aComponentTypeCode < bComponentTypeCode) {
+      if (a.componentType.componentTypeCode < b.componentType.componentTypeCode) {
         return -1;
-      } else if (aComponentTypeCode > bComponentTypeCode) {
+      } else if (a.componentType.componentTypeCode > b.componentType.componentTypeCode) {
         return 1;
       } else {
         // 2: sort by DIN
