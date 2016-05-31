@@ -50,6 +50,22 @@
         </select>
       </div>
     </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Blood Groups</label>
+        <div class="form-inline col-sm-10" ng-if="bloodGroups.length > 0">
+            <ui-select multiple ng-model="searchParams.bloodGroups" style="height: 34px; min-width: 350px;" on-select="updateAnyBloodGroup();">
+                <ui-select-match placeholder="Select:">{{$item}}</ui-select-match>
+                <ui-select-choices repeat="bloodGroup in bloodGroups | filter:$select.search">
+                    {{bloodGroup}}
+                </ui-select-choices>
+            </ui-select>
+            <label>
+                <input type="checkbox" name="anyBloodGroup" ng-model="searchParams.anyBloodGroup" ng-click="clearBloodGroups()" />
+                Any Blood Group
+            </label>
+        </div>
+    </div>
     
     <div class="form-group">
       <label class="col-sm-2 control-label">Due to Expire By</label>

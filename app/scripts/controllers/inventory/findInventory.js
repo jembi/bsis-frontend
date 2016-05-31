@@ -1,13 +1,15 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindInventoryCtrl', function($scope, $filter, $log, InventoriesService) {
+  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService) {
 
     var master = {
       donationIdentificationNumber: null,
       allSites: true,
       locationId: null,
-      dueToExpireBy: null
+      dueToExpireBy: null,
+      bloodGroups: [],
+      anyBloodGroup: true
     };
 
     var columnDefs = [
@@ -39,6 +41,12 @@ angular.module('bsis')
         width: '**'
       },
       {
+        name: 'Blood Group',
+        field: 'bloodGroup',
+        width: '**',
+        maxWidth: '150'
+      },
+      {
         name: 'Expiry Status',
         field: 'expiryStatus',
         width: '**',
@@ -54,6 +62,7 @@ angular.module('bsis')
 
     $scope.distributionCenters = [];
     $scope.componentTypes = [];
+    $scope.bloodGroups = BLOODGROUP.options;
 
     $scope.searchParams = {};
     $scope.submitted = false;
@@ -61,9 +70,10 @@ angular.module('bsis')
 
     $scope.gridOptions = {
       data: [],
-      paginationPageSize: 10,
+      paginationPageSize: 8,
       paginationPageSizes: [10],
       paginationTemplate: 'views/template/pagination.html',
+      minRowsToShow: 8,
       columnDefs: columnDefs,
 
       exporterPdfOrientation: 'portrait',
@@ -158,6 +168,16 @@ angular.module('bsis')
 
     $scope.clearLocationId = function() {
       $scope.searchParams.locationId = null;
+    };
+
+    $scope.updateAnyBloodGroup = function() {
+      $scope.searchParams.anyBloodGroup = false;
+    };
+
+    $scope.clearBloodGroups = function() {
+      if ($scope.searchParams.anyBloodGroup) {
+        $scope.searchParams.bloodGroups = [];
+      }
     };
 
     $scope.clearSearch = function(searchForm) {
