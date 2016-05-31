@@ -140,11 +140,12 @@ angular.module('bsis')
       $scope.searching = true;
       InventoriesService.search($scope.searchParams, function(res) {
         $scope.gridOptions.data = res.inventories;
-      }, function() {
+        $scope.searching = false;
+      }, function(err) {
         $scope.gridOptions.data = [];
-        $log.error;
+        $log.error(err);
+        $scope.searching = false;
       });
-      $scope.searching = false;
     };
 
     $scope.updateAllSites = function() {
