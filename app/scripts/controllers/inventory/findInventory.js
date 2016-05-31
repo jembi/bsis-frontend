@@ -17,14 +17,14 @@ angular.module('bsis')
         field: 'donationIdentificationNumber',
         width: '**',
         maxWidth: '150',
-        sort: { direction: 'asc', priority: 0 }
+        sort: { direction: 'asc', priority: 1 }
       },
       {
         name: 'Component Code',
         field: 'componentCode',
         width: '**',
         maxWidth: '150',
-        sort: { direction: 'asc' }
+        sort: { direction: 'asc', priority: 0 }
       },
       {
         name: 'Created On',
