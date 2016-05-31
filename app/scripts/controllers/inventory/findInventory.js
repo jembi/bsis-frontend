@@ -18,15 +18,13 @@ angular.module('bsis')
         displayName: 'DIN',
         field: 'donationIdentificationNumber',
         width: '**',
-        maxWidth: '150',
-        sort: { direction: 'asc', priority: 1 }
+        maxWidth: '150'
       },
       {
         name: 'Component Code',
         field: 'componentCode',
         width: '**',
-        maxWidth: '150',
-        sort: { direction: 'asc', priority: 0 }
+        maxWidth: '150'
       },
       {
         name: 'Created On',
@@ -59,6 +57,34 @@ angular.module('bsis')
         maxWidth: '350'
       }
     ];
+
+    function initialSort(a, b) {
+      var aComponentTypeCode = a.componentCode.substr(1, 4);
+      var bComponentTypeCode = b.componentCode.substr(1, 4);
+
+      // 1: sort by componentType code
+      if (aComponentTypeCode < bComponentTypeCode) {
+        return -1;
+      } else if (aComponentTypeCode > bComponentTypeCode) {
+        return 1;
+      } else {
+        // 2: sort by DIN
+        if (a.donationIdentificationNumber < b.donationIdentificationNumber) {
+          return -1;
+        } else if (a.donationIdentificationNumber > b.donationIdentificationNumber) {
+          return 1;
+        } else {
+          // 3: sort by componentCode
+          if (a.componentCode < b.componentCode) {
+            return -1;
+          } else if (a.componentCode > b.componentCode) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+      }
+    }
 
     $scope.distributionCenters = [];
     $scope.componentTypes = [];
@@ -126,7 +152,7 @@ angular.module('bsis')
 
     $scope.export = function(format) {
       if (format === 'pdf') {
-        $scope.gridApi.exporter.pdfExport('visible', 'all');
+        $scope.gridApi.exporter.pdfExport('all', 'all');
       } else if (format === 'csv') {
         $scope.gridApi.exporter.csvExport('all', 'all');
       }
@@ -149,7 +175,7 @@ angular.module('bsis')
       $scope.submitted = true;
       $scope.searching = true;
       InventoriesService.search($scope.searchParams, function(res) {
-        $scope.gridOptions.data = res.inventories;
+        $scope.gridOptions.data = res.inventories.sort(initialSort);
         $scope.searching = false;
       }, function(err) {
         $scope.gridOptions.data = [];
