@@ -90,9 +90,16 @@ angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $locatio
     };
     $log.debug(returnForm);
 
-    // FIXME: do create and then redirect to next Return page
-
-    $scope.addingReturnForm = false;
+    // Create the ReturnForm
+    ReturnFormsService.addReturnForm({}, returnForm, function(response) {
+      $scope.addingReturnForm = false;
+      // FIXME: redirect to next page where you can add return form components
+      $log.info('Successfully created the ReturnForm ' + response.returnForm.id);
+      $scope.clearForm();
+    }, function(err) {
+      $log.error(err);
+      $scope.addingReturnForm = false;
+    });
   };
 
   initialise();
