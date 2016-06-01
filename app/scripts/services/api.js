@@ -344,6 +344,13 @@ angular.module('bsis')
         }
       }),
 
+      ReturnForms: $resource(url + '/returnforms/:id', {id: '@id'}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/returnforms/form'
+        }
+      }),
+
       Inventories: $resource(url + '/inventories/', {}, {
         search: {
           method: 'GET',

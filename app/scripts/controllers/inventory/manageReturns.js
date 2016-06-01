@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $location, $log) {
+angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $location, $log, ReturnFormsService) {
 
   var columnDefs = [
     {
@@ -52,27 +52,11 @@ angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $locatio
     // FIXME: Get current return forms
     $scope.gridOptions.data = [];
 
-    // FIXME: Get form elements
-    $scope.distributionSites = [
-      {
-        id: 1,
-        name: 'Distribution site #1'
-      },
-      {
-        id: 2,
-        name: 'Distribution site #2'
-      }
-    ];
-    $scope.usageSites = [
-      {
-        id: 3,
-        name: 'Usage site #1'
-      },
-      {
-        id: 4,
-        name: 'Usage site #2'
-      }
-    ];
+    // Get form elements
+    ReturnFormsService.getReturnFormsForm(function(response) {
+      $scope.distributionSites = response.distributionSites;
+      $scope.usageSites = response.usageSites;
+    }, $log.error);
   }
 
   $scope.onRowClick = function(row) {
