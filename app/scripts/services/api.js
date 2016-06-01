@@ -342,6 +342,17 @@ angular.module('bsis')
           method: 'GET',
           url: url + '/orderForms/items/form'
         }
+      }),
+
+      Inventories: $resource(url + '/inventories/', {}, {
+        search: {
+          method: 'GET',
+          url: url + '/inventories/search'
+        },
+        getSearchForm: {
+          method: 'GET',
+          url: url + '/inventories/search/form'
+        }
       })
     };
   });

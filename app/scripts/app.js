@@ -262,7 +262,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       .when('/findInventory', {
         templateUrl: 'views/inventory/findInventory.html',
         controller: 'FindInventoryCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENT,
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
       .when('/viewStockLevels', {
@@ -580,7 +580,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       }
 
       if ($location.path() === '/inventory') {
-        if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1) {
+        if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_INVENTORY_INFORMATION) > -1) {
           $location.path('/findInventory');
         } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_INVENTORY_INFORMATION) > -1) {
           $location.path('/viewStockLevels');
