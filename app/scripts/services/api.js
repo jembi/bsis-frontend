@@ -277,8 +277,6 @@ angular.module('bsis')
         }
       ),
 
-      LocationByType: $resource(url + '/locations/type/:locationType'),
-
       Configurations: $resource(url + '/configurations/:id', null,
         {
           update: {method: 'PUT'}
