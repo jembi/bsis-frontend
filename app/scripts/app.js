@@ -262,7 +262,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       .when('/findInventory', {
         templateUrl: 'views/inventory/findInventory.html',
         controller: 'FindInventoryCtrl',
-        permission: PERMISSIONS.VIEW_COMPONENT,
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
       .when('/viewStockLevels', {
@@ -286,6 +286,12 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       .when('/viewOrder/:id', {
         templateUrl: 'views/inventory/viewOrder.html',
         controller: 'ViewOrderCtrl',
+        permission: PERMISSIONS.VIEW_ORDER_FORM,
+        enabled: UI.INVENTORY_TAB_ENABLED
+      })
+      .when('/viewOrders', {
+        templateUrl: 'views/inventory/viewOrders.html',
+        controller: 'ViewOrdersCtrl',
         permission: PERMISSIONS.VIEW_ORDER_FORM,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
@@ -581,9 +587,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       }
 
       if ($location.path() === '/inventory') {
-        if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_COMPONENT) > -1) {
+        if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_INVENTORY_INFORMATION) > -1) {
           $location.path('/findInventory');
-        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.ISSUE_COMPONENT) > -1) {
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_INVENTORY_INFORMATION) > -1) {
           $location.path('/viewStockLevels');
         }
       }

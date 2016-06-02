@@ -124,7 +124,8 @@ angular.module('bsis')
       '/viewStockLevels',
       '/manageOrders',
       '/manageReturns',
-      '/viewOrder/\\d+'
+      '/viewOrder/\\d+',
+      '/viewOrders'
     ];
 
     var labellingRoutes = [

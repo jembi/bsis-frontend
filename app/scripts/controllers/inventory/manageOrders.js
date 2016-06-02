@@ -20,6 +20,16 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
   }
 
   function initialise() {
+
+    // Get current order forms
+    var params = {
+      status: 'CREATED'
+    };
+    OrderFormsService.findOrderForms(params, function(res) {
+      $scope.gridOptions.data = res.orderForms;
+    }, $log.error);
+
+    // Get form elements
     OrderFormsService.getOrderFormsForm(function(res) {
       $scope.dispatchFromSites = distributionSites = res.distributionSites;
       usageSites = res.usageSites;
@@ -80,6 +90,50 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     // Update to ensure that the correct site is filtered
     updateDispatchToSites();
   });
+
+  $scope.onRowClick = function(row) {
+    $location.path('/viewOrder/' + row.entity.id);
+  };
+
+  var columnDefs = [
+    {
+      name: 'Order Date',
+      field: 'orderDate',
+      cellFilter: 'bsisDate',
+      width: '**',
+      maxWidth: '200'
+    },
+    {
+      name: 'Dispatch Type',
+      field: 'type',
+      width: '**',
+      maxWidth: '200'
+    },
+    {
+      name: 'Dispatched From',
+      field: 'dispatchedFrom.name',
+      width: '**'
+    },
+    {
+      name: 'Dispatched To',
+      field: 'dispatchedTo.name',
+      width: '**'
+    }
+  ];
+
+  $scope.gridOptions = {
+    data: [],
+    paginationPageSize: 6,
+    paginationPageSizes: [6],
+    paginationTemplate: 'views/template/pagination.html',
+    rowTemplate: 'views/template/clickablerow.html',
+    columnDefs: columnDefs,
+    minRowsToShow: 6,
+
+    onRegisterApi: function(gridApi) {
+      $scope.gridApi = gridApi;
+    }
+  };
 
   initialise();
 });

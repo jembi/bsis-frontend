@@ -3,9 +3,23 @@
   <span class="h3 page-header">Manage Order</span>
 
   <span class="h4" style="float:right; margin-top: 5px; padding-right: 15px; display:inline;">
-    <span has-permission="{{permissions.EDIT_ORDER_FORM}}" ng-if="orderForm.status === 'CREATED'">
+    <span has-permission="{{permissions.EDIT_ORDER_FORM}}" ng-if="orderForm.status === 'CREATED'" ng-hide="displayConfirmDispatch">
       <em>
-        <button class="btn btn-link" style="padding:0;" ng-click="edit()">Edit</button>
+        <button class="btn btn-link" ng-click="edit()">Edit</button>
+      </em>
+    </span>
+    <span style="margin-left: 20px; margin-top: -15px; float:right" ng-hide="displayConfirmDispatch">
+      <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.status === 'CREATED'">
+        <button class="btn btn-primary" ng-click="confirmDispatch(true)">Dispatch Order</button>
+      </span>
+      <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.status === 'DISPATCHED'">
+        <button class="btn btn-primary" ng-click="exportDispatchNote()">Print Dispatch Note</button>
+      </span>
+    </span>
+    <span ng-show="displayConfirmDispatch">
+      <em>
+        <button class="btn btn-link text-muted" ng-click="dispatch()">Dispatch Order</button>
+        <button class="btn btn-link text-muted" ng-click="confirmDispatch(false)">Cancel</button>
       </em>
     </span>
   </span>
@@ -26,14 +40,14 @@
 
       <h4>Units Ordered</h4>
 
-      <div class="panel panel-default">
-        <div id="unitsOrderedGrid" class="grid" ui-grid="unitsOrderedGridOptions"></div>
+      <div class="col-sm-12">
+        <div id="unitsOrderedGrid" class="grid" ui-grid="unitsOrderedGridOptions" ui-grid-pagination></div>
       </div>
 
       <h4>Units Supplied</h4>
 
-      <div class="panel panel-default">
-        <div id="unitsSuppliedGrid" class="grid" ui-grid="unitsSuppliedGridOptions"></div>
+      <div class="col-sm-12">
+        <div id="unitsSuppliedGrid" class="grid" ui-grid="unitsSuppliedGridOptions" ui-grid-exporter ui-grid-pagination></div>
       </div>
 
     </div>
