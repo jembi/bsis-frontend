@@ -326,7 +326,16 @@ angular.module('bsis')
 
       DonationsReport: $resource(url + '/reports/collecteddonations/generate'),
 
-      StockLevelsReport: $resource(url + '/reports/stockLevels/generate'),
+      StockLevelsReport: $resource(url + '/reports/stockLevels', {}, {
+        generate: {
+          method: 'GET',
+          url: url + '/reports/stockLevels/generate'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/stockLevels/form'
+        }
+      }),
 
       OrderForms: $resource(url + '/orderForms/:id', {id: '@id'}, {
         update: {method: 'PUT'},

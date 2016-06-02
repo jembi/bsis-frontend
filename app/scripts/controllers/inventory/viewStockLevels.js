@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ViewStockLevelsCtrl', function($scope, $location, $filter, $log, LocationsService, ReportsService) {
+  .controller('ViewStockLevelsCtrl', function($scope, $location, $filter, $log, ReportsService) {
 
     $scope.distributionCenters = null;
 
@@ -251,11 +251,9 @@ angular.module('bsis')
     function initialiseForm() {
       $scope.search = angular.copy(master);
       $scope.searched = false;
-      LocationsService.getDistributionCenters(function(locations) {
-        $scope.distributionCenters = locations;
-      }, function(err) {
-        $log.error(err);
-      });
+      ReportsService.getStockLevelsReportForm(function(response) {
+        $scope.distributionCenters = response.distributionSites;
+      }, $log.error);
     }
 
     initialiseForm();
