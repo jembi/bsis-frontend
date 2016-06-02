@@ -168,15 +168,14 @@ angular.module('bsis')
     };
 
     // Grid ui variables and methods
-
     var columnDefs = [
-      { name: 'Venue', field: 'venue.name' },
-      { name: 'Gender', field: 'cohorts'},
-      { name: 'Voluntary', field: 'voluntary', cellFilter: 'number: 0', width: 100 },
-      { name: 'Family', field: 'family', cellFilter: 'number: 0', width: 100 },
-      { name: 'Autologous', field: 'autologous', cellFilter: 'number: 0', width: 100 },
-      { name: 'Other', field: 'other', cellFilter: 'number: 0', width: 100 },
-      { name: 'Total', field: 'total', cellFilter: 'number: 0' }
+      { name: 'Venue', field: 'venue.name', width: '**', minWidth: '250' },
+      { name: 'Gender', field: 'cohorts', width: '**', maxWidth: '150' },
+      { name: 'Voluntary', field: 'voluntary', cellFilter: 'number: 0', width: '**', maxWidth: '125' },
+      { name: 'Family', field: 'family', cellFilter: 'number: 0', width: '**', maxWidth: '125' },
+      { name: 'Autologous', field: 'autologous', cellFilter: 'number: 0', width: '**', maxWidth: '125' },
+      { name: 'Other', field: 'other', cellFilter: 'number: 0', width: '**', maxWidth: '125' },
+      { name: 'Total', field: 'total', cellFilter: 'number: 0', width: '**', maxWidth: '125' }
     ];
 
     function updatePdfDocDefinition(docDefinition) {
@@ -210,15 +209,11 @@ angular.module('bsis')
       paginationTemplate: 'views/template/pagination.html',
       columnDefs: columnDefs,
 
-      exporterPdfOrientation: 'landscape',
+      exporterPdfOrientation: 'portrait',
       exporterPdfPageSize: 'A4',
       exporterPdfDefaultStyle: {fontSize: 8, margin: [-2, 0, 0, 0] },
       exporterPdfTableHeaderStyle: {fontSize: 8, bold: true, margin: [-2, 0, 0, 0] },
-      exporterPdfMaxGridWidth: 550,
-
-      exporterPdfCustomFormatter: function(docDefinition) {
-        return updatePdfDocDefinition(docDefinition);
-      },
+      exporterPdfMaxGridWidth: 450,
 
       exporterFieldCallback: function(grid, row, col, input) {
         // Round off decimal values in the PDF export
@@ -233,14 +228,36 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-
         return [
           {
-            text: 'Donations Collected By Type Report - Date Period: ' + $filter('bsisDate')($scope.search.startDate) + ' to ' + $filter('bsisDate')($scope.search.endDate),
+            text: 'Donations Collected By Type Report',
+            fontSize: 11,
             bold: true,
-            margin: [300, 10, 30, 0]
+            margin: [200, 10, 30, 0]
           }
         ];
+      },
+
+      // PDF: add search parameters under the header
+      exporterPdfCustomFormatter: function(docDefinition) {
+        var prefix = [];
+        prefix.push(
+          {
+            text: 'Date Period: ',
+            bold: true
+          }, {
+            text: $filter('bsisDate')($scope.search.startDate)
+          }, {
+            text: ' to ',
+            bold: true
+          }, {
+            text: $filter('bsisDate')($scope.search.endDate)
+          }
+        );
+
+        docDefinition = updatePdfDocDefinition(docDefinition);
+        docDefinition.content = [{text: prefix, margin: [0, 0, 0, 0], fontSize: 8}].concat(docDefinition.content);
+        return docDefinition;
       },
 
       // PDF footer
