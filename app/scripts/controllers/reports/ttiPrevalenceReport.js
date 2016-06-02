@@ -68,17 +68,17 @@ angular.module('bsis')
       var total = allGendersRow.totalpos + allGendersRow.totalneg;
       percentageRow.venue.name = '';
       percentageRow.cohorts = '%';
-      percentageRow.hivpos = allGendersRow.hivpos / total * 100;
-      percentageRow.hivneg = allGendersRow.hivneg / total * 100;
-      percentageRow.hbvpos = allGendersRow.hbvpos / total * 100;
-      percentageRow.hbvneg = allGendersRow.hbvneg / total * 100;
-      percentageRow.hcvpos = allGendersRow.hcvpos / total * 100;
-      percentageRow.hcvneg = allGendersRow.hcvneg / total * 100;
-      percentageRow.syphilispos = allGendersRow.syphilispos / total * 100;
-      percentageRow.syphilisneg = allGendersRow.syphilisneg / total * 100;
-      percentageRow.empty = allGendersRow.empty / total * 100;
-      percentageRow.totalpos = allGendersRow.totalpos / total * 100;
-      percentageRow.totalneg = allGendersRow.totalneg / total * 100;
+      percentageRow.hivpos = $filter('number')(allGendersRow.hivpos / total * 100, 0);
+      percentageRow.hivneg = $filter('number')(allGendersRow.hivneg / total * 100, 0);
+      percentageRow.hbvpos = $filter('number')(allGendersRow.hbvpos / total * 100, 0);
+      percentageRow.hbvneg = $filter('number')(allGendersRow.hbvneg / total * 100, 0);
+      percentageRow.hcvpos = $filter('number')(allGendersRow.hcvpos / total * 100, 0);
+      percentageRow.hcvneg = $filter('number')(allGendersRow.hcvneg / total * 100, 0);
+      percentageRow.syphilispos = $filter('number')(allGendersRow.syphilispos / total * 100, 0);
+      percentageRow.syphilisneg = $filter('number')(allGendersRow.syphilisneg / total * 100, 0);
+      percentageRow.empty = $filter('number')(allGendersRow.empty / total * 100, 0);
+      percentageRow.totalpos = $filter('number')(allGendersRow.totalpos / total * 100, 0);
+      percentageRow.totalneg = $filter('number')(allGendersRow.totalneg / total * 100, 0);
       return percentageRow;
     }
 
