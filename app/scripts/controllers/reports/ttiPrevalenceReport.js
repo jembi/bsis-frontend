@@ -247,15 +247,16 @@ angular.module('bsis')
 
     $scope.gridOptions = {
       data: [],
-      paginationPageSize: 10,
+      paginationPageSize: 8,
       paginationPageSizes: [10],
       paginationTemplate: 'views/template/pagination.html',
       columnDefs: columnDefs,
+      minRowsToShow: 8,
 
       exporterPdfOrientation: 'landscape',
       exporterPdfPageSize: 'A4',
-      exporterPdfDefaultStyle: {fontSize: 8, margin: [-2, 0, 0, 0] },
-      exporterPdfTableHeaderStyle: {fontSize: 8, bold: true, margin: [-2, 0, 0, 0] },
+      exporterPdfDefaultStyle: {fontSize: 9, margin: [-2, 0, 0, 0] },
+      exporterPdfTableHeaderStyle: {fontSize: 9, bold: true, margin: [-2, 0, 0, 0] },
       exporterPdfMaxGridWidth: 550,
 
       exporterFieldCallback: function(grid, row, col, input) {
@@ -302,7 +303,7 @@ angular.module('bsis')
         );
 
         docDefinition = updatePdfDocDefinition(docDefinition);
-        docDefinition.content = [{text: prefix, margin: [0, 0, 0, 0], fontSize: 8}].concat(docDefinition.content);
+        docDefinition.content = [{text: prefix, margin: [0, 0, 0, 0], fontSize: 9}].concat(docDefinition.content);
         return docDefinition;
       },
 
