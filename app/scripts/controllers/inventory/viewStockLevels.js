@@ -232,16 +232,11 @@ angular.module('bsis')
       $scope.searching = true;
       searchedParams = angular.copy($scope.search);
 
-      ReportsService.generateStockLevelsReport(searchedParams.distributionCenter, searchedParams.inventoryStatus, function(report) {
-        if (report.dataValues.length > 0) {
-          $scope.gridOptions.data = mergeData(report.dataValues);
-        } else {
-          $scope.gridOptions.data = [];
-        }
+      ReportsService.generateStockLevelsReport({ location: searchedParams.distributionCenter, inventoryStatus: searchedParams.inventoryStatus}, function(report) {
+        $scope.gridOptions.data = mergeData(report.dataValues);
         $scope.gridOptions.columnDefs = isInStockSearch() ? inStockColumnDefs : notLabelledColumnDefs;
         $scope.searched = true;
         $scope.searching = false;
-        $scope.submitted = true;
       }, function(err) {
         $scope.searching = false;
         $log.error(err);

@@ -10,13 +10,7 @@ angular.module('bsis')
           onError(err.data);
         });
       },
-      generateStockLevelsReport: function(location, inventoryStatus, onSuccess, onError) {
-        Api.StockLevelsReport.generate({location: location, inventoryStatus: inventoryStatus}, function(report) {
-          onSuccess(report);
-        }, function(err) {
-          onError(err.data);
-        });
-      },
+      generateStockLevelsReport: Api.StockLevelsReport.generate,
       getStockLevelsReportForm: Api.StockLevelsReport.getForm
     };
   });
