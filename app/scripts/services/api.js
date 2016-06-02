@@ -335,19 +335,26 @@ angular.module('bsis')
         }
       }),
 
-      OrderForms: $resource(url + '/orderForms/:id', {id: '@id'}, {
+      OrderForms: $resource(url + '/orderforms/:id', {id: '@id'}, {
         update: {method: 'PUT'},
         search: {
           method: 'GET',
-          url: url + '/orderForms/search'
+          url: url + '/orderforms/search'
         },
         getForm: {
           method: 'GET',
-          url: url + '/orderForms/form'
+          url: url + '/orderforms/form'
         },
         getItemsForm: {
           method: 'GET',
-          url: url + '/orderForms/items/form'
+          url: url + '/orderforms/items/form'
+        }
+      }),
+
+      ReturnForms: $resource(url + '/returnforms/:id', {id: '@id'}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/returnforms/form'
         }
       }),
 
