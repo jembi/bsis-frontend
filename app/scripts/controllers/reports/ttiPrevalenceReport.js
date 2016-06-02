@@ -207,18 +207,18 @@ angular.module('bsis')
     // Grid ui variables and methods
 
     var columnDefs = [
-      { name: 'Venue', field: 'venue.name' },
-      { name: 'Gender', field: 'cohorts', width: 80 },
-      { name: 'HIVPOS', displayName: 'HIV +', field: 'hivpos', width: 70 },
-      { name: 'HIVNEG', displayName: 'HIV -', field: 'hivneg', width: 70 },
-      { name: 'HBVPOS', displayName: 'HBV +', field: 'hbvpos', width: 70 },
-      { name: 'HBVNEG', displayName: 'HBV -', field: 'hbvneg', width: 70 },
-      { name: 'HCVPOS', displayName: 'HCV +', field: 'hcvpos', width: 70 },
-      { name: 'HCVNEG', displayName: 'HCV -', field: 'hcvneg', width: 70 },
-      { name: 'SyphilisPOS', displayName: 'Syphilis +', field: 'syphilispos', width: 80 },
-      { name: 'SyphilisNEG', displayName: 'Syphilis -', field: 'syphilisneg', width: 80 },
-      { name: 'TotalPOS', displayName: 'Total +', field: 'totalpos', width: 80  },
-      { name: 'TotalNEG', displayName: 'Total -', field: 'totalneg', width: 80  }
+      { name: 'Venue', field: 'venue.name', width: '**', minWidth: '200' },
+      { name: 'Gender', field: 'cohorts', width:'**', maxWidth: '150' },
+      { name: 'HIVPOS', displayName: 'HIV +', field: 'hivpos', width: '**', maxWidth: '70' },
+      { name: 'HIVNEG', displayName: 'HIV -', field: 'hivneg', width: '**', maxWidth: '70' },
+      { name: 'HBVPOS', displayName: 'HBV +', field: 'hbvpos', width: '**', maxWidth: '70' },
+      { name: 'HBVNEG', displayName: 'HBV -', field: 'hbvneg', width: '**', maxWidth: '70' },
+      { name: 'HCVPOS', displayName: 'HCV +', field: 'hcvpos', width: '**', maxWidth: '70' },
+      { name: 'HCVNEG', displayName: 'HCV -', field: 'hcvneg', width: '**', maxWidth: '70' },
+      { name: 'SyphilisPOS', displayName: 'Syphilis +', field: 'syphilispos', width: '**', maxWidth: '90' },
+      { name: 'SyphilisNEG', displayName: 'Syphilis -', field: 'syphilisneg', width: '**', maxWidth: '90' },
+      { name: 'TotalPOS', displayName: 'Total +', field: 'totalpos', width: '**', maxWidth: '80'  },
+      { name: 'TotalNEG', displayName: 'Total -', field: 'totalneg', width: '**', maxWidth: '80'  }
     ];
 
     function updatePdfDocDefinition(docDefinition) {
@@ -258,10 +258,6 @@ angular.module('bsis')
       exporterPdfTableHeaderStyle: {fontSize: 8, bold: true, margin: [-2, 0, 0, 0] },
       exporterPdfMaxGridWidth: 550,
 
-      exporterPdfCustomFormatter: function(docDefinition) {
-        return updatePdfDocDefinition(docDefinition);
-      },
-
       exporterFieldCallback: function(grid, row, col, input) {
         // Round off decimal values in the PDF export
         // Required for % values - ui-grid columnDefs.cellFilter doesn't take effect in PDF export
@@ -278,14 +274,36 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-
         return [
           {
-            text: 'TTI Prevalence Report - Date Period: ' + $filter('bsisDate')($scope.search.startDate) + ' to ' + $filter('bsisDate')($scope.search.endDate),
+            text: 'TTI Prevalence Report',
+            fontSize: 11,
             bold: true,
             margin: [300, 10, 30, 0]
           }
         ];
+      },
+
+      // PDF: add search parameters under the header
+      exporterPdfCustomFormatter: function(docDefinition) {
+        var prefix = [];
+        prefix.push(
+          {
+            text: 'Date Period: ',
+            bold: true
+          }, {
+            text: $filter('bsisDate')($scope.search.startDate)
+          }, {
+            text: ' to ',
+            bold: true
+          }, {
+            text: $filter('bsisDate')($scope.search.endDate)
+          }
+        );
+
+        docDefinition = updatePdfDocDefinition(docDefinition);
+        docDefinition.content = [{text: prefix, margin: [0, 0, 0, 0], fontSize: 8}].concat(docDefinition.content);
+        return docDefinition;
       },
 
       // PDF footer
