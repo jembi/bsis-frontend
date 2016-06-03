@@ -56,12 +56,12 @@ angular.module('bsis')
       var total = allGendersRow.total;
       percentageRow.venue.name = '';
       percentageRow.cohorts = '%';
-      percentageRow.voluntary = allGendersRow.voluntary / total * 100;
-      percentageRow.family = allGendersRow.family / total * 100;
-      percentageRow.autologous = allGendersRow.autologous / total * 100;
-      percentageRow.other = allGendersRow.other / total * 100;
-      percentageRow.empty = allGendersRow.empty / total * 100;
-      percentageRow.total = allGendersRow.total / total * 100;
+      percentageRow.voluntary = $filter('number')(allGendersRow.voluntary / total * 100, 2);
+      percentageRow.family = $filter('number')(allGendersRow.family / total * 100, 2);
+      percentageRow.autologous = $filter('number')(allGendersRow.autologous / total * 100, 2);
+      percentageRow.other = $filter('number')(allGendersRow.other / total * 100, 2);
+      percentageRow.empty = $filter('number')(allGendersRow.empty / total * 100, 2);
+      percentageRow.total = $filter('number')(allGendersRow.total / total * 100, 2);
       return percentageRow;
     }
 
@@ -179,12 +179,12 @@ angular.module('bsis')
     ];
 
     function updatePdfDocDefinition(docDefinition) {
-      // Fill with grey and display in bold '%' rows
+      // Fill with grey, display in bold and dispaly 2 decimal places for '%' rows
       docDefinition.styles.greyBoldCell = { fillColor: 'lightgrey', fontSize: 8, bold: true };
       angular.forEach(docDefinition.content[0].table.body, function(row) {
         if (row[1] === '%') {
           angular.forEach(row, function(cell, index) {
-            row[index] = { text: '' + cell, style: 'greyBoldCell'};
+            row[index] = { text: '' + $filter('number')(cell, 2), style: 'greyBoldCell'};
           });
         }
       });
@@ -214,17 +214,6 @@ angular.module('bsis')
       exporterPdfDefaultStyle: {fontSize: 8, margin: [-2, 0, 0, 0] },
       exporterPdfTableHeaderStyle: {fontSize: 8, bold: true, margin: [-2, 0, 0, 0] },
       exporterPdfMaxGridWidth: 450,
-
-      exporterFieldCallback: function(grid, row, col, input) {
-        // Round off decimal values in the PDF export
-        // Required for % values - ui-grid columnDefs.cellFilter doesn't take effect in PDF export
-        if (col.name == 'Voluntary' || col.name == 'Family' ||
-          col.name == 'Autologous' || col.name == 'Other') {
-          return Math.round(input);
-        } else {
-          return input;
-        }
-      },
 
       // PDF header
       exporterPdfHeader: function() {
