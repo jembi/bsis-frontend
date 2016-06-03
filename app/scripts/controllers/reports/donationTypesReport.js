@@ -171,11 +171,11 @@ angular.module('bsis')
     var columnDefs = [
       { name: 'Venue', field: 'venue.name', width: '**', minWidth: '250' },
       { name: 'Gender', field: 'cohorts', width: '**', maxWidth: '150' },
-      { name: 'Voluntary', field: 'voluntary', cellFilter: 'number: 0', width: '**', maxWidth: '125' },
-      { name: 'Family', field: 'family', cellFilter: 'number: 0', width: '**', maxWidth: '125' },
-      { name: 'Autologous', field: 'autologous', cellFilter: 'number: 0', width: '**', maxWidth: '125' },
-      { name: 'Other', field: 'other', cellFilter: 'number: 0', width: '**', maxWidth: '125' },
-      { name: 'Total', field: 'total', cellFilter: 'number: 0', width: '**', maxWidth: '125' }
+      { name: 'Voluntary', field: 'voluntary', width: '**', maxWidth: '125' },
+      { name: 'Family', field: 'family', width: '**', maxWidth: '125' },
+      { name: 'Autologous', field: 'autologous', width: '**', maxWidth: '125' },
+      { name: 'Other', field: 'other', width: '**', maxWidth: '125' },
+      { name: 'Total', field: 'total', width: '**', maxWidth: '125' }
     ];
 
     function updatePdfDocDefinition(docDefinition) {
@@ -205,7 +205,6 @@ angular.module('bsis')
     $scope.gridOptions = {
       data: [],
       paginationPageSize: 10,
-      paginationPageSizes: [10],
       paginationTemplate: 'views/template/pagination.html',
       columnDefs: columnDefs,
 
