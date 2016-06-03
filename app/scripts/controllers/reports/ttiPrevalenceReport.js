@@ -68,17 +68,17 @@ angular.module('bsis')
       var total = allGendersRow.totalpos + allGendersRow.totalneg;
       percentageRow.venue.name = '';
       percentageRow.cohorts = '%';
-      percentageRow.hivpos = $filter('number')(allGendersRow.hivpos / total * 100, 0);
-      percentageRow.hivneg = $filter('number')(allGendersRow.hivneg / total * 100, 0);
-      percentageRow.hbvpos = $filter('number')(allGendersRow.hbvpos / total * 100, 0);
-      percentageRow.hbvneg = $filter('number')(allGendersRow.hbvneg / total * 100, 0);
-      percentageRow.hcvpos = $filter('number')(allGendersRow.hcvpos / total * 100, 0);
-      percentageRow.hcvneg = $filter('number')(allGendersRow.hcvneg / total * 100, 0);
-      percentageRow.syphilispos = $filter('number')(allGendersRow.syphilispos / total * 100, 0);
-      percentageRow.syphilisneg = $filter('number')(allGendersRow.syphilisneg / total * 100, 0);
-      percentageRow.empty = $filter('number')(allGendersRow.empty / total * 100, 0);
-      percentageRow.totalpos = $filter('number')(allGendersRow.totalpos / total * 100, 0);
-      percentageRow.totalneg = $filter('number')(allGendersRow.totalneg / total * 100, 0);
+      percentageRow.hivpos = $filter('number')(allGendersRow.hivpos / total * 100, 2);
+      percentageRow.hivneg = $filter('number')(allGendersRow.hivneg / total * 100, 2);
+      percentageRow.hbvpos = $filter('number')(allGendersRow.hbvpos / total * 100, 2);
+      percentageRow.hbvneg = $filter('number')(allGendersRow.hbvneg / total * 100, 2);
+      percentageRow.hcvpos = $filter('number')(allGendersRow.hcvpos / total * 100, 2);
+      percentageRow.hcvneg = $filter('number')(allGendersRow.hcvneg / total * 100, 2);
+      percentageRow.syphilispos = $filter('number')(allGendersRow.syphilispos / total * 100, 2);
+      percentageRow.syphilisneg = $filter('number')(allGendersRow.syphilisneg / total * 100, 2);
+      percentageRow.empty = $filter('number')(allGendersRow.empty / total * 100, 2);
+      percentageRow.totalpos = $filter('number')(allGendersRow.totalpos / total * 100, 2);
+      percentageRow.totalneg = $filter('number')(allGendersRow.totalneg / total * 100, 2);
       return percentageRow;
     }
 
@@ -266,7 +266,7 @@ angular.module('bsis')
           col.name == 'HCVPOS' || col.name == 'HCVNEG' ||
           col.name == 'SyphilisPOS' || col.name == 'SyphilisNEG' ||
           col.name == 'TotalPOS' || col.name == 'TotalNEG') {
-          return Math.round(input);
+          return $filter('number')(input, 2);
         } else {
           return input;
         }
