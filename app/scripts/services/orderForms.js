@@ -3,10 +3,11 @@
 angular.module('bsis').factory('OrderFormsService', function(Api) {
 
   return {
-    getOrderFormsForm: Api.OrderFormForm.get,
+    getOrderFormsForm: Api.OrderForms.getForm,
     addOrderForm: Api.OrderForms.save,
     getOrderForm: Api.OrderForms.get,
     updateOrderForm: Api.OrderForms.update,
-    getOrderFormItemForm: Api.OrderFormItemForm.get
+    getOrderFormItemForm: Api.OrderForms.getItemsForm,
+    findOrderForms: Api.OrderForms.search
   };
 });

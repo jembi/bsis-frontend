@@ -61,7 +61,10 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
   $scope.unitsOrderedGridOptions = {
     data: [],
     columnDefs: unitsOrderedColumnDefs,
-    minRowsToShow: 7,
+    paginationPageSize: 4,
+    paginationPageSizes: [4],
+    paginationTemplate: 'views/template/pagination.html',
+    minRowsToShow: 4,
 
     onRegisterApi: function(gridApi) {
       $scope.unitsOrderedGridApi = gridApi;
@@ -71,7 +74,10 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
   $scope.unitsSuppliedGridOptions = {
     data: [],
     columnDefs: unitsSuppliedColumnDefs,
-    minRowsToShow: 7,
+    paginationPageSize: 4,
+    paginationPageSizes: [4],
+    paginationTemplate: 'views/template/pagination.html',
+    minRowsToShow: 4,
 
     exporterPdfOrientation: 'portrait',
     exporterPdfPageSize: 'A4',
