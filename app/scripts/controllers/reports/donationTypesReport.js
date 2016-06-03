@@ -11,6 +11,7 @@ angular.module('bsis')
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: moment().endOf('day').toDate()
     };
+    var cellsFontSize = 8.8;
 
     $scope.dateFormat = DATEFORMAT;
     $scope.search = angular.copy(master);
@@ -180,7 +181,7 @@ angular.module('bsis')
 
     function updatePdfDocDefinition(docDefinition) {
       // Fill with grey and display in bold '%' rows
-      docDefinition.styles.greyBoldCell = { fillColor: 'lightgrey', fontSize: 8, bold: true };
+      docDefinition.styles.greyBoldCell = { fillColor: 'lightgrey', fontSize: cellsFontSize, bold: true };
       angular.forEach(docDefinition.content[0].table.body, function(row) {
         if (row[1] === '%') {
           angular.forEach(row, function(cell, index) {
@@ -190,7 +191,7 @@ angular.module('bsis')
       });
 
       // Display in bold 'All' rows
-      docDefinition.styles.boldCell = { fontSize: 8, bold: true };
+      docDefinition.styles.boldCell = { fontSize: cellsFontSize, bold: true };
       angular.forEach(docDefinition.content[0].table.body, function(row) {
         if (row[1] === 'All') {
           angular.forEach(row, function(cell, index) {
@@ -211,8 +212,8 @@ angular.module('bsis')
 
       exporterPdfOrientation: 'portrait',
       exporterPdfPageSize: 'A4',
-      exporterPdfDefaultStyle: {fontSize: 8, margin: [-2, 0, 0, 0] },
-      exporterPdfTableHeaderStyle: {fontSize: 8, bold: true, margin: [-2, 0, 0, 0] },
+      exporterPdfDefaultStyle: {fontSize: cellsFontSize, margin: [-2, 0, 0, 0] },
+      exporterPdfTableHeaderStyle: {fontSize: 9, bold: true, margin: [-2, 0, 0, 0] },
       exporterPdfMaxGridWidth: 450,
 
       // PDF header
@@ -245,7 +246,7 @@ angular.module('bsis')
         );
 
         docDefinition = updatePdfDocDefinition(docDefinition);
-        docDefinition.content = [{text: prefix, margin: [0, 0, 0, 0], fontSize: 8}].concat(docDefinition.content);
+        docDefinition.content = [{text: prefix, margin: [0, -6, 0, 0], fontSize: 9}].concat(docDefinition.content);
         return docDefinition;
       },
 
