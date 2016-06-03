@@ -179,12 +179,12 @@ angular.module('bsis')
     ];
 
     function updatePdfDocDefinition(docDefinition) {
-      // Fill with grey, display in bold and dispaly 2 decimal places for '%' rows
+      // Fill with grey and display in bold '%' rows
       docDefinition.styles.greyBoldCell = { fillColor: 'lightgrey', fontSize: 8, bold: true };
       angular.forEach(docDefinition.content[0].table.body, function(row) {
         if (row[1] === '%') {
           angular.forEach(row, function(cell, index) {
-            row[index] = { text: '' + $filter('number')(cell, 2), style: 'greyBoldCell'};
+            row[index] = { text: '' + cell, style: 'greyBoldCell'};
           });
         }
       });
