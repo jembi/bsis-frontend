@@ -208,15 +208,15 @@ angular.module('bsis')
 
     var columnDefs = [
       { name: 'Venue', field: 'venue.name', width: '**', minWidth: '200' },
-      { name: 'Gender', field: 'cohorts', width:'**', maxWidth: '150' },
+      { name: 'Gender', field: 'cohorts', width:'**', maxWidth: '130' },
       { name: 'HIVPOS', displayName: 'HIV +', field: 'hivpos', width: '**', maxWidth: '70' },
       { name: 'HIVNEG', displayName: 'HIV -', field: 'hivneg', width: '**', maxWidth: '70' },
       { name: 'HBVPOS', displayName: 'HBV +', field: 'hbvpos', width: '**', maxWidth: '70' },
       { name: 'HBVNEG', displayName: 'HBV -', field: 'hbvneg', width: '**', maxWidth: '70' },
       { name: 'HCVPOS', displayName: 'HCV +', field: 'hcvpos', width: '**', maxWidth: '70' },
       { name: 'HCVNEG', displayName: 'HCV -', field: 'hcvneg', width: '**', maxWidth: '70' },
-      { name: 'SyphilisPOS', displayName: 'Syphilis +', field: 'syphilispos', width: '**', maxWidth: '90' },
-      { name: 'SyphilisNEG', displayName: 'Syphilis -', field: 'syphilisneg', width: '**', maxWidth: '90' },
+      { name: 'SyphilisPOS', displayName: 'Syphilis +', field: 'syphilispos', width: '**', maxWidth: '100' },
+      { name: 'SyphilisNEG', displayName: 'Syphilis -', field: 'syphilisneg', width: '**', maxWidth: '100' },
       { name: 'TotalPOS', displayName: 'Total +', field: 'totalpos', width: '**', maxWidth: '80'  },
       { name: 'TotalNEG', displayName: 'Total -', field: 'totalneg', width: '**', maxWidth: '80'  }
     ];
@@ -248,7 +248,6 @@ angular.module('bsis')
     $scope.gridOptions = {
       data: [],
       paginationPageSize: 8,
-      paginationPageSizes: [10],
       paginationTemplate: 'views/template/pagination.html',
       columnDefs: columnDefs,
       minRowsToShow: 8,
