@@ -705,6 +705,7 @@ angular.module('bsis')
     $scope.addDeferral = function(deferral, addDeferralForm) {
       if (addDeferralForm.$valid) {
         deferral.deferredDonor = $scope.donor.id;
+        deferral.deferralDate = (new Date()).toISOString();
         $scope.addingDeferral = true;
         DonorService.addDeferral(deferral, function(response) {
           if (response === true) {
