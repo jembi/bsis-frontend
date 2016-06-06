@@ -7,6 +7,10 @@ angular.module('bsis')
       {
         path: '/aboRhGroupsReport',
         subpaths: []
+      },
+      {
+        path: '/ttiPrevalenceReport',
+        subpaths: []
       }
     ];
 
