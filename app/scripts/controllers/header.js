@@ -136,7 +136,8 @@ angular.module('bsis')
     var reportsRoutes = [
       '/reports',
       '/aboRhGroupsReport',
-      '/donationTypesReport'
+      '/donationTypesReport',
+      '/ttiPrevalenceReport'
     ];
 
     var mobileRoutes = [

@@ -10,6 +10,13 @@ angular.module('bsis')
           onError(err.data);
         });
       },
+      generateTTIPrevalenceReport: function(period, onSuccess, onError) {
+        Api.TTIPrevalenceReport.get({startDate: period.startDate, endDate: period.endDate}, function(report) {
+          onSuccess(report);
+        }, function(err) {
+          onError(err.data);
+        });
+      },
       generateStockLevelsReport: Api.StockLevelsReport.generate,
       getStockLevelsReportForm: Api.StockLevelsReport.getForm
     };

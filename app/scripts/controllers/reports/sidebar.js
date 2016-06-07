@@ -11,6 +11,10 @@ angular.module('bsis')
       {
         path: '/donationTypesReport',
         subpaths: []
+      },
+      {
+        path: '/ttiPrevalenceReport',
+        subpaths: []
       }
     ];
 
