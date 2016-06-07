@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('TTIPrevalenceReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
+  .controller('DonationTypesReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
 
     // Initialize variables
 
@@ -29,17 +29,12 @@ angular.module('bsis')
       var zeroValuesRow = angular.copy(row);
       zeroValuesRow.venue.name = venue;
       zeroValuesRow.cohorts = gender;
-      zeroValuesRow.hivpos = 0;
-      zeroValuesRow.hivneg = 0;
-      zeroValuesRow.hbvpos = 0;
-      zeroValuesRow.hbvneg = 0;
-      zeroValuesRow.hcvpos = 0;
-      zeroValuesRow.hcvneg = 0;
-      zeroValuesRow.syphilispos = 0;
-      zeroValuesRow.syphilisneg = 0;
+      zeroValuesRow.voluntary = 0;
+      zeroValuesRow.family = 0;
+      zeroValuesRow.autologous = 0;
+      zeroValuesRow.other = 0;
       zeroValuesRow.empty = 0;
-      zeroValuesRow.totalpos = 0;
-      zeroValuesRow.totalneg = 0;
+      zeroValuesRow.total = 0;
       return zeroValuesRow;
     }
 
@@ -47,74 +42,43 @@ angular.module('bsis')
       var allGendersRow = angular.copy(femaleRow);
       allGendersRow.venue.name = '';
       allGendersRow.cohorts = 'All';
-      allGendersRow.hivpos = femaleRow.hivpos + maleRow.hivpos;
-      allGendersRow.hivneg = femaleRow.hivneg + maleRow.hivneg;
-      allGendersRow.hbvpos = femaleRow.hbvpos + maleRow.hbvpos;
-      allGendersRow.hbvneg = femaleRow.hbvneg + maleRow.hbvneg;
-      allGendersRow.hcvpos = femaleRow.hcvpos + maleRow.hcvpos;
-      allGendersRow.hcvneg = femaleRow.hcvneg + maleRow.hcvneg;
-      allGendersRow.syphilispos = femaleRow.syphilispos + maleRow.syphilispos;
-      allGendersRow.syphilisneg = femaleRow.syphilisneg + maleRow.syphilisneg;
+      allGendersRow.voluntary = femaleRow.voluntary + maleRow.voluntary;
+      allGendersRow.family = femaleRow.family + maleRow.family;
+      allGendersRow.autologous = femaleRow.autologous + maleRow.autologous;
+      allGendersRow.other = femaleRow.other + maleRow.other;
       allGendersRow.empty = femaleRow.empty + maleRow.empty;
-      allGendersRow.totalpos = femaleRow.totalpos + maleRow.totalpos;
-      allGendersRow.totalneg = femaleRow.totalneg + maleRow.totalneg;
+      allGendersRow.total = femaleRow.total + maleRow.total;
       return allGendersRow;
     }
 
     function createPercentageRow(allGendersRow) {
       var percentageRow = angular.copy(allGendersRow);
-      // Total calculated as sum of all POS and NEG outcomes
-      // This should rather be the total number of donations
-      var total = allGendersRow.totalpos + allGendersRow.totalneg;
+      var total = allGendersRow.total;
       percentageRow.venue.name = '';
       percentageRow.cohorts = '%';
-      percentageRow.hivpos = $filter('number')(allGendersRow.hivpos / total * 100, 2);
-      percentageRow.hivneg = $filter('number')(allGendersRow.hivneg / total * 100, 2);
-      percentageRow.hbvpos = $filter('number')(allGendersRow.hbvpos / total * 100, 2);
-      percentageRow.hbvneg = $filter('number')(allGendersRow.hbvneg / total * 100, 2);
-      percentageRow.hcvpos = $filter('number')(allGendersRow.hcvpos / total * 100, 2);
-      percentageRow.hcvneg = $filter('number')(allGendersRow.hcvneg / total * 100, 2);
-      percentageRow.syphilispos = $filter('number')(allGendersRow.syphilispos / total * 100, 2);
-      percentageRow.syphilisneg = $filter('number')(allGendersRow.syphilisneg / total * 100, 2);
+      percentageRow.voluntary = $filter('number')(allGendersRow.voluntary / total * 100, 2);
+      percentageRow.family = $filter('number')(allGendersRow.family / total * 100, 2);
+      percentageRow.autologous = $filter('number')(allGendersRow.autologous / total * 100, 2);
+      percentageRow.other = $filter('number')(allGendersRow.other / total * 100, 2);
       percentageRow.empty = $filter('number')(allGendersRow.empty / total * 100, 2);
-      percentageRow.totalpos = $filter('number')(allGendersRow.totalpos / total * 100, 2);
-      percentageRow.totalneg = $filter('number')(allGendersRow.totalneg / total * 100, 2);
+      percentageRow.total = $filter('number')(allGendersRow.total / total * 100, 2);
       return percentageRow;
     }
 
-    function mergeRows(newRow, existingRow, bloodTest, result) {
+    function mergeRows(newRow, existingRow, donationType) {
       var mergedRow = angular.copy(existingRow);
-      if (bloodTest === 'HIV') {
-        if (result === 'POS') {
-          mergedRow.hivpos = newRow.value;
-        } else if (result === 'NEG') {
-          mergedRow.hivneg = newRow.value;
-        }
-      } else if (bloodTest === 'HBV') {
-        if (result === 'POS') {
-          mergedRow.hbvpos = newRow.value;
-        } else if (result === 'NEG') {
-          mergedRow.hbvneg = newRow.value;
-        }
-      } else if (bloodTest === 'HCV') {
-        if (result === 'POS') {
-          mergedRow.hcvpos = newRow.value;
-        } else if (result === 'NEG') {
-          mergedRow.hcvneg = newRow.value;
-        }
-      } else if (bloodTest === 'Syphilis') {
-        if (result === 'POS') {
-          mergedRow.syphilispos = newRow.value;
-        } else if (result === 'NEG') {
-          mergedRow.syphilisneg = newRow.value;
-        }
-      } else if (bloodTest === 'null' || result === 'null') {
+      if (donationType === 'Voluntary') {
+        mergedRow.voluntary = newRow.value;
+      } else if (donationType === 'Family') {
+        mergedRow.family = newRow.value;
+      } else if (donationType === 'Autologous') {
+        mergedRow.autologous = newRow.value;
+      } else if (donationType === 'Other') {
+        mergedRow.other = newRow.value;
+      } else if (donationType === 'null') {
         mergedRow.empty = newRow.value;
       }
-      mergedRow.totalpos = mergedRow.hivpos + mergedRow.hbvpos +
-        mergedRow.hcvpos + mergedRow.syphilispos;
-      mergedRow.totalneg = mergedRow.hivneg + mergedRow.hbvneg +
-        mergedRow.hcvneg + mergedRow.syphilisneg;
+      mergedRow.total = mergedRow.voluntary + mergedRow.family + mergedRow.autologous + mergedRow.other + mergedRow.empty;
       return mergedRow;
     }
 
@@ -140,9 +104,8 @@ angular.module('bsis')
       angular.forEach(dataValues, function(newRow) {
 
         var cohorts = newRow.cohorts;
-        var bloodTest = cohorts[0].option;
-        var result = cohorts[1].option;
-        var gender = cohorts[2].option;
+        var gender = cohorts[1].option;
+        var donationType = cohorts[0].option;
         newRow.cohorts = gender;
 
         // New venue
@@ -161,10 +124,10 @@ angular.module('bsis')
 
         // Merge gender row with new row
         if (gender === 'female') {
-          mergedFemaleRow = mergeRows(newRow, mergedFemaleRow, bloodTest, result);
+          mergedFemaleRow = mergeRows(newRow, mergedFemaleRow, donationType);
         }
         if (gender === 'male') {
-          mergedMaleRow = mergeRows(newRow, mergedMaleRow, bloodTest, result);
+          mergedMaleRow = mergeRows(newRow, mergedMaleRow, donationType);
         }
 
       });
@@ -192,7 +155,7 @@ angular.module('bsis')
       }
       $scope.searching = true;
 
-      ReportsService.generateTTIPrevalenceReport(period, function(report) {
+      ReportsService.generateDonationsReport(period, function(report) {
         $scope.searching = false;
         if (report.dataValues.length > 0) {
           mergeData(report.dataValues);
@@ -205,20 +168,14 @@ angular.module('bsis')
     };
 
     // Grid ui variables and methods
-
     var columnDefs = [
-      { name: 'Venue', field: 'venue.name', width: '**', minWidth: '200' },
-      { name: 'Gender', field: 'cohorts', width:'**', maxWidth: '130' },
-      { name: 'HIVPOS', displayName: 'HIV +', field: 'hivpos', width: '**', maxWidth: '70' },
-      { name: 'HIVNEG', displayName: 'HIV -', field: 'hivneg', width: '**', maxWidth: '70' },
-      { name: 'HBVPOS', displayName: 'HBV +', field: 'hbvpos', width: '**', maxWidth: '70' },
-      { name: 'HBVNEG', displayName: 'HBV -', field: 'hbvneg', width: '**', maxWidth: '70' },
-      { name: 'HCVPOS', displayName: 'HCV +', field: 'hcvpos', width: '**', maxWidth: '70' },
-      { name: 'HCVNEG', displayName: 'HCV -', field: 'hcvneg', width: '**', maxWidth: '70' },
-      { name: 'SyphilisPOS', displayName: 'Syphilis +', field: 'syphilispos', width: '**', maxWidth: '100' },
-      { name: 'SyphilisNEG', displayName: 'Syphilis -', field: 'syphilisneg', width: '**', maxWidth: '100' },
-      { name: 'TotalPOS', displayName: 'Total +', field: 'totalpos', width: '**', maxWidth: '80'  },
-      { name: 'TotalNEG', displayName: 'Total -', field: 'totalneg', width: '**', maxWidth: '80'  }
+      { name: 'Venue', field: 'venue.name', width: '**', minWidth: '250' },
+      { name: 'Gender', field: 'cohorts', width: '**', maxWidth: '150' },
+      { name: 'Voluntary', field: 'voluntary', width: '**', maxWidth: '125' },
+      { name: 'Family', field: 'family', width: '**', maxWidth: '125' },
+      { name: 'Autologous', field: 'autologous', width: '**', maxWidth: '125' },
+      { name: 'Other', field: 'other', width: '**', maxWidth: '125' },
+      { name: 'Total', field: 'total', width: '**', maxWidth: '125' }
     ];
 
     function updatePdfDocDefinition(docDefinition) {
@@ -242,7 +199,7 @@ angular.module('bsis')
         }
       });
 
-      return ReportsLayoutService.paginatePdf(32, docDefinition);
+      return ReportsLayoutService.paginatePdf(48, docDefinition);
     }
 
     $scope.gridOptions = {
@@ -252,15 +209,15 @@ angular.module('bsis')
       columnDefs: columnDefs,
       minRowsToShow: 8,
 
-      exporterPdfOrientation: 'landscape',
+      exporterPdfOrientation: 'portrait',
       exporterPdfPageSize: 'A4',
       exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
       exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
-      exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
+      exporterPdfMaxGridWidth: ReportsLayoutService.pdfPortraitMaxGridWidth,
 
       // PDF header
       exporterPdfHeader: function() {
-        return ReportsLayoutService.generatePdfPageHeader('TTI Prevalence Report',
+        return ReportsLayoutService.generatePdfPageHeader('Donations Collected By Type Report',
           ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
       },
 

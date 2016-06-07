@@ -136,6 +136,7 @@ angular.module('bsis')
     var reportsRoutes = [
       '/reports',
       '/aboRhGroupsReport',
+      '/donationTypesReport',
       '/ttiPrevalenceReport'
     ];
 
