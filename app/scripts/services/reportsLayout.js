@@ -5,6 +5,10 @@ angular.module('bsis').factory('ReportsLayoutService', function($filter) {
     generatePdfPageHeader: function(headerText) {
       return {text: headerText, fontSize: 11, bold: true, marginTop: 10, alignment: 'center'};
     },
+    generateTwoLinesPdfPageHeader: function(headerTextLine1, headerTextLine2) {
+      return [{text: headerTextLine1, fontSize: 11, bold: true, marginTop: 10, alignment: 'center'},
+        {text: headerTextLine2, fontSize: 9, style: {alignment: 'center'}}];
+    },
     generatePdfPageFooter: function(recordsName, totalRecords, currentPage, pageCount) {
       var columns = [
         {text: 'Total ' + recordsName + ': ' + totalRecords, width: 'auto'},

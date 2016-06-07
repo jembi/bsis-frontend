@@ -217,27 +217,13 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        return ReportsLayoutService.generatePdfPortraitPageHeader('Donations Collected By Type Report');
+        return ReportsLayoutService.generateTwoLinesPdfPageHeader('Donations Collected By Type Report',
+          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
       },
 
       // PDF: add search parameters under the header
       exporterPdfCustomFormatter: function(docDefinition) {
-        var prefix = [];
-        prefix.push(
-          {
-            text: 'Date Period: ',
-            bold: true
-          }, {
-            text: $filter('bsisDate')($scope.search.startDate)
-          }, {
-            text: ' to ',
-            bold: true
-          }, {
-            text: $filter('bsisDate')($scope.search.endDate)
-          }
-        );
         docDefinition = updatePdfDocDefinition(docDefinition);
-        docDefinition.content = [{text: prefix, margin: [0, 0, 0, 0], fontSize: 8}].concat(docDefinition.content);
         return docDefinition;
       },
 
