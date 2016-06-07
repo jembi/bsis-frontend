@@ -217,7 +217,7 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        return ReportsLayoutService.generateTwoLinesPdfPageHeader('Donations Collected By Type Report',
+        return ReportsLayoutService.generatePdfPageHeader('Donations Collected By Type Report',
           ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
       },
 

@@ -218,7 +218,7 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        return ReportsLayoutService.generateTwoLinesPdfPageHeader('ABO Rh Blood Grouping Report',
+        return ReportsLayoutService.generatePdfPageHeader('ABO Rh Blood Grouping Report',
           ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
       },
 
