@@ -199,6 +199,23 @@ angular.module('bsis')
         }
       });
 
+      // split the table into one per page with breaks
+      var rowsPerPage = 48;
+      var header = docDefinition.content[0].table.body.splice(0, 1);
+      var table = docDefinition.content[0].table.body;
+      var contentTemplate = docDefinition.content[0];
+      docDefinition.content = [];
+      do {
+        var newRows = (table.length > rowsPerPage) ? rowsPerPage : table.length;
+        var newTable = angular.copy(header).concat(table.splice(0, newRows));
+        var newContent = angular.copy(contentTemplate);
+        newContent.table.body = newTable;
+        if (table.length > 0) {
+          newContent.pageBreak = 'after';
+        }
+        docDefinition.content.push(newContent);
+      } while (table.length > 0);
+
       return docDefinition;
     }
 
@@ -243,7 +260,6 @@ angular.module('bsis')
             text: $filter('bsisDate')($scope.search.endDate)
           }
         );
-
         docDefinition = updatePdfDocDefinition(docDefinition);
         docDefinition.content = [{text: prefix, margin: [0, 0, 0, 0], fontSize: 8}].concat(docDefinition.content);
         return docDefinition;
