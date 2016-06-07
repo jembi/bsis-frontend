@@ -25,9 +25,9 @@
                 ng-mouseenter="this.$selected = true"
                 ng-mouseleave="this.$selected = false"
                 ng-class="{'active': deferral.$selected}">
-                <td data-title="'Created'" header-class="text-left" class="col-sm-1 text-center" sortable="'createdDate'">
+                <td data-title="'Created'" header-class="text-left" class="col-sm-1 text-center" sortable="'deferralDate'">
             <span>
-              {{deferral.createdDate | bsisDate}}
+              {{deferral.deferralDate | bsisDate}}
             </span>
                 </td>
                 <td data-title="'End'" header-class="text-left" class="col-sm-2 text-center" sortable="'deferredUntil'">
