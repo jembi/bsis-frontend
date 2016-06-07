@@ -210,7 +210,7 @@ angular.module('bsis')
       exporterPdfPageSize: 'A4',
       exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
       exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
-      exporterPdfMaxGridWidth: 550,
+      exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
 
       exporterPdfCustomFormatter: function(docDefinition) {
         return updatePdfDocDefinition(docDefinition);

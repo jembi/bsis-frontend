@@ -26,6 +26,8 @@ angular.module('bsis').factory('ReportsLayoutService', function($filter) {
     pdfTableBodyBoldStyle: {fontSize: 8, bold: true},
     pdfTableBodyGreyBoldStyle: {fillColor: 'lightgrey', fontSize: 8, bold: true},
     pdfDefaultStyle: {fontSize: 8, margin: [-2, 0, 0, 0]},
+    pdfPortraitMaxGridWidth: 450,
+    pdfLandscapeMaxGridWidth: 650,
 
     paginatePdf: function(rowsPerPage, docDefinition) {
       // split the table into pages with breaks
