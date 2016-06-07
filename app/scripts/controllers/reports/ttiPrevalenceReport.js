@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('TTIPrevalenceReportCtrl', function($scope, $log, $filter, ReportsService, DATEFORMAT) {
+  .controller('TTIPrevalenceReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
 
     // Initialize variables
 
@@ -223,7 +223,7 @@ angular.module('bsis')
 
     function updatePdfDocDefinition(docDefinition) {
       // Fill with grey and display in bold '%' rows
-      docDefinition.styles.greyBoldCell = { fillColor: 'lightgrey', fontSize: 8, bold: true };
+      docDefinition.styles.greyBoldCell = ReportsLayoutService.pdfTableBodyGreyBoldStyle;
       angular.forEach(docDefinition.content[0].table.body, function(row) {
         if (row[1] === '%') {
           angular.forEach(row, function(cell, index) {
@@ -233,7 +233,7 @@ angular.module('bsis')
       });
 
       // Display in bold 'All' rows
-      docDefinition.styles.boldCell = { fontSize: 8, bold: true };
+      docDefinition.styles.boldCell = ReportsLayoutService.pdfTableBodyBoldStyle;
       angular.forEach(docDefinition.content[0].table.body, function(row) {
         if (row[1] === 'All') {
           angular.forEach(row, function(cell, index) {
@@ -242,7 +242,7 @@ angular.module('bsis')
         }
       });
 
-      return docDefinition;
+      return ReportsLayoutService.paginatePdf(32, docDefinition);
     }
 
     $scope.gridOptions = {
@@ -254,56 +254,25 @@ angular.module('bsis')
 
       exporterPdfOrientation: 'landscape',
       exporterPdfPageSize: 'A4',
-      exporterPdfDefaultStyle: {fontSize: 9, margin: [-2, 0, 0, 0] },
-      exporterPdfTableHeaderStyle: {fontSize: 9, bold: true, margin: [-2, 0, 0, 0] },
-      exporterPdfMaxGridWidth: 550,
+      exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
+      exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
+      exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
 
       // PDF header
       exporterPdfHeader: function() {
-        return [
-          {
-            text: 'TTI Prevalence Report',
-            fontSize: 11,
-            bold: true,
-            margin: [300, 10, 30, 0]
-          }
-        ];
+        return ReportsLayoutService.generatePdfPageHeader('TTI Prevalence Report',
+          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
       },
 
       // PDF: add search parameters under the header
       exporterPdfCustomFormatter: function(docDefinition) {
-        var prefix = [];
-        prefix.push(
-          {
-            text: 'Date Period: ',
-            bold: true
-          }, {
-            text: $filter('bsisDate')($scope.search.startDate)
-          }, {
-            text: ' to ',
-            bold: true
-          }, {
-            text: $filter('bsisDate')($scope.search.endDate)
-          }
-        );
-
         docDefinition = updatePdfDocDefinition(docDefinition);
-        docDefinition.content = [{text: prefix, margin: [0, 0, 0, 0], fontSize: 9}].concat(docDefinition.content);
         return docDefinition;
       },
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        var columns = [
-          {text: 'Total venues: ' + $scope.gridOptions.data.length / 4, width: 'auto'},
-          {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-          {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
-        ];
-        return {
-          columns: columns,
-          columnGap: 10,
-          margin: [30, 0]
-        };
+        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.gridOptions.data.length / 4, currentPage, pageCount);
       },
 
       onRegisterApi: function(gridApi) {
