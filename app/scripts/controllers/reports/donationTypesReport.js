@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonationTypesReportCtrl', function($scope, $log, $filter, ReportsService, DATEFORMAT) {
+  .controller('DonationTypesReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
 
     // Initialize variables
 
@@ -180,7 +180,7 @@ angular.module('bsis')
 
     function updatePdfDocDefinition(docDefinition) {
       // Fill with grey and display in bold '%' rows
-      docDefinition.styles.greyBoldCell = { fillColor: 'lightgrey', fontSize: 8, bold: true };
+      docDefinition.styles.greyBoldCell = ReportsLayoutService.pdfTableBodyGreyBoldStyle;
       angular.forEach(docDefinition.content[0].table.body, function(row) {
         if (row[1] === '%') {
           angular.forEach(row, function(cell, index) {
@@ -190,7 +190,7 @@ angular.module('bsis')
       });
 
       // Display in bold 'All' rows
-      docDefinition.styles.boldCell = { fontSize: 8, bold: true };
+      docDefinition.styles.boldCell = ReportsLayoutService.pdfTableBodyBoldStyle;
       angular.forEach(docDefinition.content[0].table.body, function(row) {
         if (row[1] === 'All') {
           angular.forEach(row, function(cell, index) {
@@ -199,24 +199,7 @@ angular.module('bsis')
         }
       });
 
-      // split the table into one per page with breaks
-      var rowsPerPage = 48;
-      var header = docDefinition.content[0].table.body.splice(0, 1);
-      var table = docDefinition.content[0].table.body;
-      var contentTemplate = docDefinition.content[0];
-      docDefinition.content = [];
-      do {
-        var newRows = (table.length > rowsPerPage) ? rowsPerPage : table.length;
-        var newTable = angular.copy(header).concat(table.splice(0, newRows));
-        var newContent = angular.copy(contentTemplate);
-        newContent.table.body = newTable;
-        if (table.length > 0) {
-          newContent.pageBreak = 'after';
-        }
-        docDefinition.content.push(newContent);
-      } while (table.length > 0);
-
-      return docDefinition;
+      return ReportsLayoutService.paginatePdf(48, docDefinition);
     }
 
     $scope.gridOptions = {
@@ -228,20 +211,13 @@ angular.module('bsis')
 
       exporterPdfOrientation: 'portrait',
       exporterPdfPageSize: 'A4',
-      exporterPdfDefaultStyle: {fontSize: 8, margin: [-2, 0, 0, 0] },
-      exporterPdfTableHeaderStyle: {fontSize: 8, bold: true, margin: [-2, 0, 0, 0] },
+      exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
+      exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
       exporterPdfMaxGridWidth: 450,
 
       // PDF header
       exporterPdfHeader: function() {
-        return [
-          {
-            text: 'Donations Collected By Type Report',
-            fontSize: 11,
-            bold: true,
-            margin: [200, 10, 30, 0]
-          }
-        ];
+        return ReportsLayoutService.generatePdfPortraitPageHeader('Donations Collected By Type Report');
       },
 
       // PDF: add search parameters under the header
@@ -267,16 +243,7 @@ angular.module('bsis')
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        var columns = [
-          {text: 'Total venues: ' + $scope.gridOptions.data.length / 4, width: 'auto'},
-          {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-          {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
-        ];
-        return {
-          columns: columns,
-          columnGap: 10,
-          margin: [30, 0]
-        };
+        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.gridOptions.data.length / 4, currentPage, pageCount);
       },
 
       onRegisterApi: function(gridApi) {
