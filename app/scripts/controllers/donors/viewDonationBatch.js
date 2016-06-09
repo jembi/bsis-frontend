@@ -55,7 +55,7 @@ angular.module('bsis')
       },
       {
         name: 'Donation Type',
-        field: 'donationType.donationType'
+        field: 'donationType.type'
       }
     ];
 
