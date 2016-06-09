@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, $q, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams) {
     var data = [{}];
     $scope.data = data;
 
@@ -74,22 +74,16 @@ angular.module('bsis')
       var testResultsArray = {};
       testResultsArray.testOutcomesForDonations = [];
 
-      var requests = [];
-
       angular.forEach(testResults, function(value) {
         testResultsArray.testOutcomesForDonations.push(value);
       });
 
-      var request = TestingService.saveTestResults(testResultsArray, reEntry, angular.noop);
-      requests.push(request);
-
-      // FIXME: Handle errors
-      $q.all(requests).then(function() {
+      TestingService.saveTestResults({reEntry: reEntry}, testResultsArray, function() {
         $location.path('/viewTestBatch/' + $routeParams.id);
-      }).finally(function() {
+      }, function(err) {
+        $log.error(err);
         $scope.savingTestResults = false;
       });
-
     };
 
     $scope.testOutcomesTableParams = new ngTableParams({
