@@ -148,7 +148,7 @@
                 <div class="form-inline" style="padding-left:5px;">
                     <select name="donationType" id="donationType" class="form-control input-sm"
                             ng-model="donation.donationType"
-                            ng-options="item as item.donationType for item in donationTypes" required
+                            ng-options="item as item.type for item in donationTypes" required
                             ng-class="{'ng-invalid ng-dirty' : addDonationForm.donationType.$invalid && submitted}"
                     >
                         <option value=""></option>
