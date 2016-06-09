@@ -107,13 +107,9 @@ angular.module('bsis')
         });
         return result.$promise;
       },
-      saveBloodTypingResolutions: function(resolutions, response) {
-        return Api.BloodTypingResolutions.save({}, resolutions, function() {
-          response(true);
-        }, function() {
-          response(false);
-        });
-      },
+
+      saveBloodTypingResolutions: Api.Donations.bloodTypingResolutions,
+
       closeTestBatch: function(testBatch, onSuccess, onError) {
         var updateTestBatch = {};
         updateTestBatch.id = testBatch.id;

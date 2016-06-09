@@ -50,11 +50,15 @@ angular.module('bsis')
         }
       ),
 
-      Donations: $resource(url + '/donations/:id', null,
-        {
-          update: {method: 'PUT'}
+      Donations: $resource(url + '/donations/:id', {id: '@id'}, {
+        update: {
+          method: 'PUT'
+        },
+        bloodTypingResolutions: {
+          method: 'POST',
+          url: url + '/donations/bloodTypingResolutions'
         }
-      ),
+      }),
 
       DonationBatches: $resource(url + '/donationbatches/:id', null,
         {
@@ -259,8 +263,6 @@ angular.module('bsis')
           update: {method: 'PUT'}
         }
       ),
-
-      BloodTypingResolutions: $resource(url + '/donations/bloodTypingResolutions'),
 
       TestBatchOverview: $resource(url + '/testresults/overview', {},
         {
