@@ -2,9 +2,6 @@
 
 angular.module('bsis')
   .factory('TestingService', function($http, Api) {
-
-    var currentTestBatchId = '';
-
     return {
       getTestBatchFormFields: function(response) {
         Api.TestBatchFormFields.get({}, function(backingForm) {
@@ -34,22 +31,12 @@ angular.module('bsis')
           response(false);
         });
       },
-      getCurrentTestBatch: function(response) {
-        Api.TestBatches.get({id: currentTestBatchId}, function(testBatch) {
-          response(testBatch);
-        }, function() {
-          response(false);
-        });
-      },
       getTestBatchById: function(id, onSuccess, onError) {
         Api.TestBatches.get({id: id}, function(testBatch) {
           onSuccess(testBatch);
         }, function(err) {
           onError(err.data);
         });
-      },
-      setCurrentTestBatch: function(testBatchId) {
-        currentTestBatchId = testBatchId;
       },
       getOpenTestBatches: function(response) {
         Api.FindTestBatches.get({status: ['OPEN', 'RELEASED']}, function(testBatches) {

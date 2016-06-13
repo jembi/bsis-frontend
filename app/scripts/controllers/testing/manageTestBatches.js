@@ -20,7 +20,6 @@ angular.module('bsis')
     };
 
     $scope.viewTestBatch = function(item) {
-      TestingService.setCurrentTestBatch(item.id);
       $location.path('/viewTestBatch/' + item.id);
     };
 
