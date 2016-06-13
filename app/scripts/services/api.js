@@ -50,11 +50,15 @@ angular.module('bsis')
         }
       ),
 
-      Donations: $resource(url + '/donations/:id', null,
-        {
-          update: {method: 'PUT'}
+      Donations: $resource(url + '/donations/:id', {id: '@id'}, {
+        update: {
+          method: 'PUT'
+        },
+        bloodTypingResolutions: {
+          method: 'POST',
+          url: url + '/donations/bloodTypingResolutions'
         }
-      ),
+      }),
 
       DonationBatches: $resource(url + '/donationbatches/:id', null,
         {
@@ -235,41 +239,24 @@ angular.module('bsis')
 
       FindTestBatches: $resource(url + '/testbatches/search'),
 
-      FindTestResults: $resource(url + '/testresults/search', {},
-        {
-          query: {
-            method: 'GET',
-            params: {testBatch: '@testBatch',
-                     bloodTestType: '@bloodTestType'}
-          }
+      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', {donationIdentificationNumber: '@donationIdentificationNumber'}, {
+        search: {
+          method: 'GET',
+          url: url + '/testresults/search'
+        },
+        overview: {
+          method: 'GET',
+          url: url + '/testresults/overview'
+        },
+        report: {
+          method: 'GET',
+          url: url + '/testresults/report'
+        },
+        saveResults: {
+          method: 'POST',
+          url: url + '/testresults'
         }
-      ),
-
-      TestResultsReport: $resource(url + '/testresults/report', {},
-        {
-          query: {
-            method: 'GET',
-            params: {testBatch: '@testBatch'}
-          }
-        }
-      ),
-
-      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', null,
-        {
-          update: {method: 'PUT'}
-        }
-      ),
-
-      BloodTypingResolutions: $resource(url + '/donations/bloodTypingResolutions'),
-
-      TestBatchOverview: $resource(url + '/testresults/overview', {},
-        {
-          query: {
-            method: 'GET',
-            params: {testBatch: '@testBatch'}
-          }
-        }
-      ),
+      }),
 
       Locations: $resource(url + '/locations/:id', null,
         {

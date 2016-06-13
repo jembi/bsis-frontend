@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('AmbiguousBloodTypingTestingCtrl', function($scope, $location, $log, TestingService, $q, $filter, ngTableParams, $timeout, $routeParams, BLOODABO, BLOODRH) {
+  .controller('AmbiguousBloodTypingTestingCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams, BLOODABO, BLOODRH) {
 
     $scope.bloodAboOptions = BLOODABO;
     $scope.bloodRhOptions = BLOODRH;
@@ -41,7 +41,6 @@ angular.module('bsis')
       $scope.savingTestResults = true;
       var bloodTypingResolutionsArray = {};
       bloodTypingResolutionsArray.bloodTypingResolutions = [];
-      var requests = [];
 
       angular.forEach(bloodTypingResolutions, function(bloodTypingResolution) {
         // only save if resolved == true or indeterminate == true
@@ -63,18 +62,12 @@ angular.module('bsis')
         }
       });
 
-      var request = TestingService.saveBloodTypingResolutions(bloodTypingResolutionsArray, angular.noop);
-      requests.push(request);
-
-      $q.all(requests).then(function() {
+      TestingService.saveBloodTypingResolutions(bloodTypingResolutionsArray, function() {
         $location.path('/viewTestBatch/' + $routeParams.id);
-      }).catch(function(err) {
+      }, function(err) {
         $log.error(err);
-        // TODO: handle the case where there have been errors
-      }).finally(function() {
         $scope.savingTestResults = false;
       });
-
     };
 
     $scope.testOutcomesTableParams = new ngTableParams({

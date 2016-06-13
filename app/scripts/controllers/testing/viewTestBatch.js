@@ -43,7 +43,6 @@ angular.module('bsis')
         $scope.testBatch = response.testBatch;
         $scope.refreshCurrentTestBatch();
         $scope.refreshTestBatchAvailableDonations();
-        TestingService.setCurrentTestBatch($scope.testBatch.id);
       }, function(err) {
         $log.error(err);
       });
@@ -92,19 +91,19 @@ angular.module('bsis')
     $scope.getCurrentTestBatch();
 
     $scope.getCurrentTestBatchOverview = function() {
-      TestingService.getTestBatchOverviewById($routeParams.id, function(response) {
-        if (response !== false) {
-          $scope.testBatchOverview = response;
-          $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
-          $scope.pendingTTITests = response.pendingTTITests;
-          $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
-          $scope.basicTTIComplete = response.basicTTIComplete;
-          $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
-          $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
-          $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
-          $scope.reEntryRequiredPendingBloodTypingTests = response.reEntryRequiredPendingBloodTypingTests;
-          $scope.reEntryRequiredPendingTTITests = response.reEntryRequiredPendingTTITests;
-        }
+      TestingService.getTestBatchOverviewById({testBatch: $routeParams.id}, function(response) {
+        $scope.testBatchOverview = response;
+        $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
+        $scope.pendingTTITests = response.pendingTTITests;
+        $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
+        $scope.basicTTIComplete = response.basicTTIComplete;
+        $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
+        $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
+        $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
+        $scope.reEntryRequiredPendingBloodTypingTests = response.reEntryRequiredPendingBloodTypingTests;
+        $scope.reEntryRequiredPendingTTITests = response.reEntryRequiredPendingTTITests;
+      }, function(err) {
+        $log.error(err);
       });
     };
 
@@ -370,7 +369,7 @@ angular.module('bsis')
 
     $scope.export = function(format) {
 
-      TestingService.getTestBatchOutcomesReport($routeParams.id, function(testBatchOutcomesReport) {
+      TestingService.getTestBatchOutcomesReport({testBatch: $routeParams.id}, function(testBatchOutcomesReport) {
 
         addTestNamesToColumnDefs(testBatchOutcomesReport);
 

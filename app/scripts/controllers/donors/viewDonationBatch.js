@@ -222,10 +222,10 @@ angular.module('bsis')
         }
       });
 
-      TestingService.getTestResultsByDIN($scope.donation.donationIdentificationNumber, function(testingResponse) {
-        if (testingResponse !== false) {
-          $scope.testResults = testingResponse.testResults.recentTestResults;
-        }
+      TestingService.getTestResultsByDIN({donationIdentificationNumber: $scope.donation.donationIdentificationNumber}, function(testingResponse) {
+        $scope.testResults = testingResponse.testResults.recentTestResults;
+      }, function(err) {
+        $log.error(err);
       });
     }
 
