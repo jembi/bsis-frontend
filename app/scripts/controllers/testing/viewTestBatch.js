@@ -92,7 +92,7 @@ angular.module('bsis')
     $scope.getCurrentTestBatch();
 
     $scope.getCurrentTestBatchOverview = function() {
-      TestingService.getTestBatchOverviewById($routeParams.id, function(response) {
+      TestingService.getTestBatchOverviewById({testBatch: $routeParams.id}, function(response) {
         if (response !== false) {
           $scope.testBatchOverview = response;
           $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
@@ -105,6 +105,8 @@ angular.module('bsis')
           $scope.reEntryRequiredPendingBloodTypingTests = response.reEntryRequiredPendingBloodTypingTests;
           $scope.reEntryRequiredPendingTTITests = response.reEntryRequiredPendingTTITests;
         }
+      }, function(err) {
+        $log.error(err);
       });
     };
 
@@ -370,7 +372,7 @@ angular.module('bsis')
 
     $scope.export = function(format) {
 
-      TestingService.getTestBatchOutcomesReport($routeParams.id, function(testBatchOutcomesReport) {
+      TestingService.getTestBatchOutcomesReport({testBatch: $routeParams.id}, function(testBatchOutcomesReport) {
 
         addTestNamesToColumnDefs(testBatchOutcomesReport);
 

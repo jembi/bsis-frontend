@@ -68,10 +68,10 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
       $scope.postDonationCounselling.counsellingDate = new Date();
     }
 
-    TestingService.getTestResultsByDIN(postDonationCounselling.donation.donationIdentificationNumber, function(response) {
-      if (response !== false) {
-        $scope.testResults = response.testResults.recentTestResults;
-      }
+    TestingService.getTestResultsByDIN({donationIdentificationNumber: postDonationCounselling.donation.donationIdentificationNumber}, function(response) {
+      $scope.testResults = response.testResults.recentTestResults;
+    }, function(err) {
+      $log.error(err);
     });
   }, function(err) {
     $log.error(err);

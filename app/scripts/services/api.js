@@ -239,39 +239,37 @@ angular.module('bsis')
 
       FindTestBatches: $resource(url + '/testbatches/search'),
 
-      FindTestResults: $resource(url + '/testresults/search', {},
-        {
-          query: {
-            method: 'GET',
-            params: {testBatch: '@testBatch',
-                     bloodTestType: '@bloodTestType'}
+      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', {donationIdentificationNumber: '@donationIdentificationNumber'}, {
+        find: {
+          method: 'GET',
+          url: url + '/testresults/search',
+          params: {
+            testBatch: '@testBatch',
+            bloodTestType: '@bloodTestType'
+          }
+        },
+        overview: {
+          method: 'GET',
+          url: url + '/testresults/overview',
+          params: {
+            testBatch: '@testBatch'
+          }
+        },
+        report: {
+          method: 'GET',
+          url: url + '/testresults/report',
+          params: {
+            testBatch: '@testBatch'
+          }
+        },
+        saveResults: {
+          method: 'POST',
+          url: url + '/testresults',
+          params: {
+            reEntry: '@reEntry'
           }
         }
-      ),
-
-      TestResultsReport: $resource(url + '/testresults/report', {},
-        {
-          query: {
-            method: 'GET',
-            params: {testBatch: '@testBatch'}
-          }
-        }
-      ),
-
-      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', null,
-        {
-          update: {method: 'PUT'}
-        }
-      ),
-
-      TestBatchOverview: $resource(url + '/testresults/overview', {},
-        {
-          query: {
-            method: 'GET',
-            params: {testBatch: '@testBatch'}
-          }
-        }
-      ),
+      }),
 
       Locations: $resource(url + '/locations/:id', null,
         {

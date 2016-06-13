@@ -41,7 +41,6 @@ angular.module('bsis')
           response(false);
         });
       },
-
       getTestBatchById: function(id, onSuccess, onError) {
         Api.TestBatches.get({id: id}, function(testBatch) {
           onSuccess(testBatch);
@@ -49,43 +48,14 @@ angular.module('bsis')
           onError(err.data);
         });
       },
-
       setCurrentTestBatch: function(testBatchId) {
         currentTestBatchId = testBatchId;
-      },
-      getTestBatchOverviewById: function(testBatchId, onSuccess, onError) {
-        Api.TestBatchOverview.get({testBatch: testBatchId}, function(testBatch) {
-          onSuccess(testBatch);
-        }, function() {
-          onError(false);
-        });
-      },
-      getTestResultsByDIN: function(donationIdentificationNumber, response) {
-        Api.TestResults.get({donationIdentificationNumber: donationIdentificationNumber}, function(overview) {
-          response(overview);
-        }, function() {
-          response(false);
-        });
       },
       getOpenTestBatches: function(response) {
         Api.FindTestBatches.get({status: ['OPEN', 'RELEASED']}, function(testBatches) {
           response(testBatches);
         }, function() {
           response(false);
-        });
-      },
-      getTestBatchOutcomesReport: function(testBatch, onSuccess, onError) {
-        Api.TestResultsReport.query({testBatch: testBatch}, function(testBatchOutcomesReport) {
-          onSuccess(testBatchOutcomesReport);
-        }, function(err) {
-          onError(err);
-        });
-      },
-      getTestOutcomesByBatchIdAndBloodTestType: function(id, bloodTestType, onSuccess, onError) {
-        Api.FindTestResults.query({testBatch: id, bloodTestType: bloodTestType}, function(testResults) {
-          onSuccess(testResults);
-        }, function(err) {
-          onError(err);
         });
       },
       addTestBatch: function(donationBatches, response) {
@@ -99,17 +69,6 @@ angular.module('bsis')
           response(false);
         });
       },
-      saveTestResults: function(testResults, reEntry, response) {
-        var result = Api.TestResults.save({reEntry: reEntry}, testResults, function() {
-          response(true);
-        }, function() {
-          response(false);
-        });
-        return result.$promise;
-      },
-
-      saveBloodTypingResolutions: Api.Donations.bloodTypingResolutions,
-
       closeTestBatch: function(testBatch, onSuccess, onError) {
         var updateTestBatch = {};
         updateTestBatch.id = testBatch.id;
@@ -172,6 +131,12 @@ angular.module('bsis')
         }, function(err) {
           onError(err);
         });
-      }
+      },
+      getTestResultsByDIN: Api.TestResults.get,
+      getTestBatchOverviewById: Api.TestResults.overview,
+      getTestBatchOutcomesReport: Api.TestResults.report,
+      getTestOutcomesByBatchIdAndBloodTestType: Api.TestResults.find,
+      saveTestResults: Api.TestResults.saveResults,
+      saveBloodTypingResolutions: Api.Donations.bloodTypingResolutions
     };
   });

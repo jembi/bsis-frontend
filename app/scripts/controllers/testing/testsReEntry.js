@@ -43,7 +43,7 @@ angular.module('bsis')
     // The array reEnteredTestOutcomes is originally populated with all test outcomes where reEntryRequired is false.
     // As the reEntry values are selected from the dropdowns, they are added to this array.
     var getReEnteredTestOutcomes = function() {
-      TestingService.getTestOutcomesByBatchIdAndBloodTestType($routeParams.id, $routeParams.bloodTestType, function(response) {
+      TestingService.getTestOutcomesByBatchIdAndBloodTestType({testBatch: $routeParams.id, bloodTestType: $routeParams.bloodTestType}, function(response) {
         $scope.data = response.testResults;
         $scope.testBatchCreatedDate = response.testBatchCreatedDate;
         $scope.numberOfDonations = response.numberOfDonations;
