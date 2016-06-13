@@ -123,6 +123,7 @@ angular.module('bsis')
       '/findInventory',
       '/viewStockLevels',
       '/manageOrders',
+      '/fulfilOrder/\\d+',
       '/viewOrder/\\d+',
       '/viewOrders',
       '/manageReturns',
