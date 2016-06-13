@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageReturnCtrl', function($scope, $location, $uibModal, $log, $routeParams, ReturnFormsService, ComponentService) {
+angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location, $uibModal, $log, $routeParams, ReturnFormsService, ComponentService) {
 
   var componentMaster = {
     din: null,

@@ -93,7 +93,7 @@ angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $locatio
     // Create the ReturnForm
     ReturnFormsService.addReturnForm({}, returnForm, function(response) {
       $scope.addingReturnForm = false;
-      $location.path('/manageReturn/' + response.returnForm.id);
+      $location.path('/recordReturn/' + response.returnForm.id);
       $scope.clearForm();
     }, function(err) {
       $log.error(err);
