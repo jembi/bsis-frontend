@@ -240,34 +240,21 @@ angular.module('bsis')
       FindTestBatches: $resource(url + '/testbatches/search'),
 
       TestResults: $resource(url + '/testresults/:donationIdentificationNumber', {donationIdentificationNumber: '@donationIdentificationNumber'}, {
-        find: {
+        search: {
           method: 'GET',
-          url: url + '/testresults/search',
-          params: {
-            testBatch: '@testBatch',
-            bloodTestType: '@bloodTestType'
-          }
+          url: url + '/testresults/search'
         },
         overview: {
           method: 'GET',
-          url: url + '/testresults/overview',
-          params: {
-            testBatch: '@testBatch'
-          }
+          url: url + '/testresults/overview'
         },
         report: {
           method: 'GET',
-          url: url + '/testresults/report',
-          params: {
-            testBatch: '@testBatch'
-          }
+          url: url + '/testresults/report'
         },
         saveResults: {
           method: 'POST',
-          url: url + '/testresults',
-          params: {
-            reEntry: '@reEntry'
-          }
+          url: url + '/testresults'
         }
       }),
 

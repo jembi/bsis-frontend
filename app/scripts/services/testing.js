@@ -115,7 +115,7 @@ angular.module('bsis')
       getTestResultsByDIN: Api.TestResults.get,
       getTestBatchOverviewById: Api.TestResults.overview,
       getTestBatchOutcomesReport: Api.TestResults.report,
-      getTestOutcomesByBatchIdAndBloodTestType: Api.TestResults.find,
+      getTestOutcomesByBatchIdAndBloodTestType: Api.TestResults.search,
       saveTestResults: Api.TestResults.saveResults,
       saveBloodTypingResolutions: Api.Donations.bloodTypingResolutions
     };
