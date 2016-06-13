@@ -3,13 +3,13 @@
   <span class="h3 page-header">Manage Order</span>
 
   <span class="h4" style="float:right; margin-top: 5px; padding-right: 15px; display:inline;">
-    <span has-permission="{{permissions.EDIT_ORDER_FORM}}" ng-if="orderForm.status === 'CREATED'" ng-hide="displayConfirmDispatch">
+    <span has-permission="{{permissions.EDIT_ORDER_FORM}}" ng-if="orderForm.permissions.canEdit" ng-hide="displayConfirmDispatch">
       <em>
         <button class="btn btn-link" ng-click="edit()">Edit</button>
       </em>
     </span>
     <span style="margin-left: 20px; margin-top: -15px; float:right" ng-hide="displayConfirmDispatch">
-      <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.status === 'CREATED'">
+      <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.permissions.canDispatch">
         <button class="btn btn-primary" ng-click="confirmDispatch(true)">Dispatch Order</button>
       </span>
       <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.status === 'DISPATCHED'">
