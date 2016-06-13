@@ -24,13 +24,6 @@ angular.module('bsis')
           response(false);
         });
       },
-      getTestBatch: function(id, response) {
-        Api.TestBatches.get({id: id}, function(testBatch) {
-          response(testBatch);
-        }, function() {
-          response(false);
-        });
-      },
       getTestBatchById: function(id, onSuccess, onError) {
         Api.TestBatches.get({id: id}, function(testBatch) {
           onSuccess(testBatch);
