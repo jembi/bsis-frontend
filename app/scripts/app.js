@@ -301,6 +301,12 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.ISSUE_COMPONENT,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
+      .when('/manageReturn/:id', {
+        templateUrl: 'views/inventory/manageReturn.html',
+        controller: 'ManageReturnCtrl',
+        permission: PERMISSIONS.ISSUE_COMPONENT,
+        enabled: UI.INVENTORY_TAB_ENABLED
+      })
 
       // LABELLING URLs
       .when('/labelling', {
