@@ -70,6 +70,13 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     exporterPdfTableHeaderStyle: {fontSize: 5, bold: true, margin: [-2, 0, 0, 0] },
     exporterPdfMaxGridWidth: 400,
 
+    exporterFieldCallback: function(grid, row, col, value) {
+      if (col.field === 'createdOn') {
+        return $filter('bsisDate')(value);
+      }
+      return value;
+    },
+
     // PDF header
     exporterPdfHeader: function() {
       var finalArray = [
