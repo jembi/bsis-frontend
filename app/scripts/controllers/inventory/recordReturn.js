@@ -133,18 +133,25 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       componentCode: $scope.component.componentCode
     };
     ComponentService.findComponent(searchParams, function(component) {
-      // check if component has already been added
-      var componentAlreadyAdded = $scope.returnForm.components.some(function(e) {
-        return e.id === component.id;
-      });
-      if (componentAlreadyAdded) {
+      if (component.status !== 'ISSUED') {
+        // check if component status is ISSUED
         showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-          ') has already been added to this Return Form.');
+            ') has not been issued.');
       } else {
-        $scope.returnForm.components.push(component);
-        populateGrid($scope.returnForm);
-        $scope.component = angular.copy(componentMaster); // reset the form
-        $scope.addComponentForm.$setPristine();
+        // check if component has already been added
+        var componentAlreadyAdded = $scope.returnForm.components.some(function(e) {
+          return e.id === component.id;
+        });
+        if (componentAlreadyAdded) {
+          showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
+            ') has already been added to this Return Form.');
+        } else {
+          // add component to Return Form and reset the form
+          $scope.returnForm.components.push(component);
+          populateGrid($scope.returnForm);
+          $scope.component = angular.copy(componentMaster);
+          $scope.addComponentForm.$setPristine();
+        }
       }
       $scope.addingComponent = false;
     }, function(err) {
