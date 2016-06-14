@@ -43,7 +43,7 @@
           <label class="col-sm-2 control-label">Returned From:</label>
           <div class="col-sm-10">
             <select class="form-control" style="width:auto;" name="returnedFrom" ng-model="searchParams.returnedFromId" ng-options="item.id as item.name for item in returnFromSites track by item.id">
-              <option value="" disabled selected>Select:</option>
+              <option value="" selected></option>
             </select>
           </div>
         </div>
@@ -52,7 +52,7 @@
           <label class="col-sm-2 control-label" for="returnedTo">Returned To:</label>
           <div class="col-sm-10">
             <select class="form-control" style="width:auto;" name="returnedTo" ng-model="searchParams.returnedToId" ng-options="item.id as item.name for item in returnToSites track by item.id">
-              <option value="" disabled selected>Select:</option>
+              <option value="" selected></option>
             </select>
           </div>
         </div>

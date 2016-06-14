@@ -43,10 +43,9 @@ angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location,
 
   $scope.gridOptions = {
     data: [],
-    paginationPageSize: 6,
-    paginationPageSizes: [6],
+    paginationPageSize: 7,
     paginationTemplate: 'views/template/pagination.html',
-    minRowsToShow: 6,
+    minRowsToShow: 7,
     columnDefs: columnDefs,
     rowTemplate: 'views/template/clickablerow.html',
 
@@ -65,9 +64,11 @@ angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location,
     // Find returns
     ReturnFormsService.findReturnForms($scope.searchParams, function(res) {
       $scope.gridOptions.data = res.returnForms;
-    }, $log.error);
-
-    $scope.searching = false;
+      $scope.searching = false;
+    }, function(err) {
+      $scope.searching = false;
+      $log.error(err);
+    });
   };
 
   $scope.onRowClick = function(row) {

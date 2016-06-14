@@ -99,9 +99,11 @@ angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, 
     // Find orders
     OrderFormsService.findOrderForms($scope.searchParams, function(res) {
       $scope.gridOptions.data = res.orderForms;
-    }, $log.error);
-
-    $scope.searching = false;
+      $scope.searching = false;
+    }, function(err) {
+      $scope.searching = false;
+      $log.error(err);
+    });
   };
 
   $scope.onRowClick = function(row) {
