@@ -64,6 +64,67 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     columnDefs: columnDefs,
     minRowsToShow: 10,
 
+    exporterPdfOrientation: 'portrait',
+    exporterPdfPageSize: 'A4',
+    exporterPdfDefaultStyle: {fontSize: 4, margin: [-2, 0, 0, 0] },
+    exporterPdfTableHeaderStyle: {fontSize: 5, bold: true, margin: [-2, 0, 0, 0] },
+    exporterPdfMaxGridWidth: 400,
+
+    // PDF header
+    exporterPdfHeader: function() {
+      var finalArray = [
+        {
+          text: 'Return Note',
+          fontSize: 10,
+          bold: true,
+          margin: [30, 20, 0, 0] // [left, top, right, bottom]
+        }
+      ];
+      return finalArray;
+    },
+
+    exporterPdfTableStyle: {margin: [-10, 10, 0, 0]},
+
+    exporterPdfCustomFormatter: function(docDefinition) {
+      var prefix = [];
+      prefix.push(
+        {
+          text: 'Return Date: ',
+          bold: true
+        }, {
+          text: $filter('bsisDate')($scope.returnForm.returnDate)
+        }, {
+          text: ' Return From: ',
+          bold: true
+        }, {
+          text: $scope.returnForm.returnedFrom.name
+        }, {
+          text: ' Returned To: ',
+          bold: true
+        }, {
+          text: $scope.returnForm.returnedTo.name
+        }
+      );
+
+      docDefinition.content = [{text: prefix, margin: [-10, 0, 0, 0], fontSize: 7}].concat(docDefinition.content);
+      return docDefinition;
+    },
+
+    // PDF footer
+    exporterPdfFooter: function(currentPage, pageCount) {
+      var columns = [
+        {text: 'Number of components: ' + $scope.gridOptions.data.length, width: 'auto'},
+        {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
+        {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+      ];
+      return {
+        columns: columns,
+        columnGap: 10,
+        margin: [30, 0],
+        fontSize: 6
+      };
+    },
+
     onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;
     }
@@ -97,7 +158,7 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
   }
 
   $scope.exportReturnNote = function() {
-    $log.info('Not implemented yet');
+    $scope.gridApi.exporter.pdfExport('all', 'all');
   };
 
   $scope.discardStock = function() {
