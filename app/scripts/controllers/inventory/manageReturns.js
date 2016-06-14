@@ -57,6 +57,11 @@ angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $locatio
       $scope.distributionSites = response.distributionSites;
       $scope.usageSites = response.usageSites;
     }, $log.error);
+
+    // Get the current return forms
+    ReturnFormsService.findReturnForms({status: 'CREATED'}, function(response) {
+      $scope.gridOptions.data = response.returnForms;
+    }, $log.error);
   }
 
   $scope.onRowClick = function(row) {
