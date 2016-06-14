@@ -170,7 +170,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       $scope.returnForm = response.returnForm;
       populateGrid($scope.returnForm);
       $scope.savingForm = false;
-      //$location.path('/viewReturn/' + $routeParams.id);
+      $location.path('/viewReturn/' + $routeParams.id);
     }, function(err) {
       $log.error(err);
       $scope.savingForm = false;
@@ -183,7 +183,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
   };
 
   $scope.cancel = function() {
-    //$location.path('/viewReturn/' + $routeParams.id);
+    $location.path('/viewReturn/' + $routeParams.id);
   };
 
   init();
