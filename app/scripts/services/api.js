@@ -341,6 +341,9 @@ angular.module('bsis')
       }),
 
       ReturnForms: $resource(url + '/returnforms/:id', {id: '@id'}, {
+        update: {
+          method: 'PUT'
+        },
         getForm: {
           method: 'GET',
           url: url + '/returnforms/form'
