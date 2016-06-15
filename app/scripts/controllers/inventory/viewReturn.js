@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, $log, $filter, $routeParams, ReturnFormsService) {
+angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, $log, $filter, $routeParams, $uibModal, ReturnFormsService) {
 
   $scope.displayConfirmReturn = false;
 
@@ -137,6 +137,19 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     }
   };
 
+  function showDiscardModal() {
+    $uibModal.open({
+      animation: false,
+      templateUrl: 'views/inventory/discardComponentsModal.html',
+      controller: 'DiscardComponentsModalCtrl',
+      resolve: {
+        returnFormId: function() {
+          return $routeParams.id;
+        }
+      }
+    });
+  }
+
   function convertItem(component) {
     return {
       donationIdentificationNumber: component.donationIdentificationNumber,
@@ -169,7 +182,7 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
   };
 
   $scope.discardStock = function() {
-    $log.info('Not implemented yet');
+    showDiscardModal();
   };
 
   $scope.confirmReturn = function(condition) {

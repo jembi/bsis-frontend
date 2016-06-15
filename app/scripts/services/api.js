@@ -210,6 +210,10 @@ angular.module('bsis')
         getComponentForm: {
           method: 'GET',
           url: url + '/components/form'
+        },
+        getDiscardForm: {
+          method: 'GET',
+          url: url + '/components/discard/form'
         }
       }),
 

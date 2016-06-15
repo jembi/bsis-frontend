@@ -44,6 +44,9 @@ angular.module('bsis')
           response(false);
         });
       },
+
+      getDiscardForm: Api.Components.getDiscardForm,
+
       discardComponent: function(component, response) {
         Api.Components.discard({
           id: component.componentId,
