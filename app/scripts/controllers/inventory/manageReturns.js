@@ -88,7 +88,6 @@ angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $locatio
         id: $scope.returnForm.returnedTo
       }
     };
-    $log.debug(returnForm);
 
     // Create the ReturnForm
     ReturnFormsService.addReturnForm({}, returnForm, function(response) {
