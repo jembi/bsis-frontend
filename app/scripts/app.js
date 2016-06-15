@@ -313,6 +313,12 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.ISSUE_COMPONENT,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
+      .when('/viewReturns', {
+        templateUrl: 'views/inventory/viewReturns.html',
+        controller: 'ViewReturnsCtrl',
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION,
+        enabled: UI.INVENTORY_TAB_ENABLED
+      })
 
       // LABELLING URLs
       .when('/labelling', {

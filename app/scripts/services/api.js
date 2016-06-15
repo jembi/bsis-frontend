@@ -344,6 +344,10 @@ angular.module('bsis')
         update: {
           method: 'PUT'
         },
+        search: {
+          method: 'GET',
+          url: url + '/returnforms/search'
+        },
         getForm: {
           method: 'GET',
           url: url + '/returnforms/form'
