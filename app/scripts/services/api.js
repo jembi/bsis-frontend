@@ -214,11 +214,7 @@ angular.module('bsis')
         getDiscardForm: {
           method: 'GET',
           url: url + '/components/discard/form'
-        },
-        bulkDiscard: {
-          method: 'PUT',
-          url: url + '/components/discard'
-        },
+        }
       }),
 
       LabellingStatus: $resource(url + '/labels/status/:donationIdentificationNumber'),
