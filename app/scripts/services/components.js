@@ -57,6 +57,8 @@ angular.module('bsis')
         }, function() {
           response(false);
         });
-      }
+      },
+
+      bulkDiscard: Api.Components.bulkDiscard
     };
   });

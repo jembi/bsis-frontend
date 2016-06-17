@@ -1,15 +1,16 @@
 'use strict';
 
-angular.module('bsis').controller('DiscardComponentsModalCtrl', function($scope, $uibModalInstance, $log, returnFormId, ComponentService) {
+angular.module('bsis').controller('DiscardComponentsModalCtrl', function($scope, $location, $uibModalInstance, $log, componentIds, returnFormId, ComponentService) {
 
-  $scope.returnFormId = returnFormId;
   $scope.discard = {};
   $scope.discardReasons = [];
   $scope.discardingComponent = false;
+  var bulkDiscardForm = {};
 
   function init() {
     ComponentService.getDiscardForm(function(response) {
       $scope.discardReasons = response.discardReasons;
+      bulkDiscardForm = response.discardComponentsForm;
     }, $log.error);
   }
 
@@ -22,9 +23,21 @@ angular.module('bsis').controller('DiscardComponentsModalCtrl', function($scope,
       return;
     }
     $scope.discardingComponent = true;
-    // FIXME: do the discard
-    $log.info('Not yet implemented');
-    $scope.discardingComponent = false;
+
+    // Populate bulkDiscardForm
+    bulkDiscardForm.componentIds = componentIds;
+    bulkDiscardForm.discardReason = $scope.discard.discardReason;
+    bulkDiscardForm.discardReasonText = $scope.discard.discardReasonText;
+
+    ComponentService.bulkDiscard({}, bulkDiscardForm, function(response) {
+      $scope.discardingComponent = false; 
+      console.info(response.success);
+    }, function(err) {
+      $log.error(err);
+      $scope.discardingComponent = false;
+    });
+
+    $uibModalInstance.close();
   };
 
   init();
