@@ -1,20 +1,22 @@
 'use strict';
 
-angular.module('bsis').controller('DiscardComponentsModalCtrl', function($scope, $uibModalInstance, $log, returnFormId, ComponentService) {
+angular.module('bsis').controller('DiscardComponentsModalCtrl', function($scope, $uibModalInstance, $log, componentIds, returnFormId, ComponentService) {
 
-  $scope.returnFormId = returnFormId;
   $scope.discard = {};
   $scope.discardReasons = [];
   $scope.discardingComponent = false;
+  var bulkDiscardForm = {};
 
   function init() {
     ComponentService.getDiscardForm(function(response) {
       $scope.discardReasons = response.discardReasons;
+      bulkDiscardForm = response.discardComponentsForm;
     }, $log.error);
   }
 
   $scope.close = function() {
-    $uibModalInstance.close();
+    // Fixme: when there are errors in the form, the modal is dismissed but the viewReturn page doesn't load properly
+    $uibModalInstance.dismiss();
   };
 
   $scope.discardComponents = function() {
@@ -22,9 +24,20 @@ angular.module('bsis').controller('DiscardComponentsModalCtrl', function($scope,
       return;
     }
     $scope.discardingComponent = true;
-    // FIXME: do the discard
-    $log.info('Not yet implemented');
-    $scope.discardingComponent = false;
+
+    // Populate bulkDiscardForm
+    bulkDiscardForm.componentIds = componentIds;
+    bulkDiscardForm.discardReason = $scope.discard.discardReason;
+    bulkDiscardForm.discardReasonText = $scope.discard.discardReasonText;
+
+    ComponentService.bulkDiscard({}, bulkDiscardForm, function() {
+      $scope.discardingComponent = false;
+    }, function(err) {
+      $log.error(err);
+      $scope.discardingComponent = false;
+    });
+
+    $uibModalInstance.close();
   };
 
   init();

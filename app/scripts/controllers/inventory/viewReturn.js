@@ -137,19 +137,6 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     }
   };
 
-  function showDiscardModal() {
-    $uibModal.open({
-      animation: false,
-      templateUrl: 'views/inventory/discardComponentsModal.html',
-      controller: 'DiscardComponentsModalCtrl',
-      resolve: {
-        returnFormId: function() {
-          return $routeParams.id;
-        }
-      }
-    });
-  }
-
   function convertItem(component) {
     return {
       donationIdentificationNumber: component.donationIdentificationNumber,
@@ -175,6 +162,37 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
       $scope.returnForm = res.returnForm;
       populateGrid($scope.returnForm);
     }, $log.error);
+  }
+
+  function showDiscardModal() {
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'views/inventory/discardComponentsModal.html',
+      controller: 'DiscardComponentsModalCtrl',
+      resolve: {
+        returnFormId: function() {
+          return $routeParams.id;
+        },
+        componentIds: function() {
+          var componentIds = [];
+          angular.forEach($scope.returnForm.components, function(component) {
+            componentIds.push(component.id);
+          });
+          return componentIds;
+        }
+      }
+    });
+
+    modalInstance.result.then(function() {
+      // Refresh data if components were discarded
+
+      // Fixme: when the first init() is called, the components statuses are still AVAILABLE,
+      // the second time they are fetched the statuses get updated to DISCARDED
+      init();
+      init();
+    }, function() {
+      // Ignore if modal was dismissed
+    });
   }
 
   $scope.exportReturnNote = function() {

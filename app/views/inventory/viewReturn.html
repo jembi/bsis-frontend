@@ -12,7 +12,7 @@
       <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="returnForm.permissions.canReturn">
         <button class="btn btn-primary" ng-click="confirmReturn(true)">Return to Stock</button>
       </span>
-      <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="returnForm.status === 'RETURNED'">
+      <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="returnForm.permissions.canDiscard">
         <button class="btn btn-primary" ng-click="discardStock()">Discard Stock</button>
       </span>
       <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="returnForm.status === 'RETURNED'">
