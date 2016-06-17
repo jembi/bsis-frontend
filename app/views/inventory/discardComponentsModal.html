@@ -6,7 +6,7 @@
     <div class="form-group">
       <label>Discard reason</label>
       <select name="discardReason" class="form-control input-sm" ng-model="discard.discardReason"
-              ng-options="item.id as item.statusChangeReason for item in discardReasons"
+              ng-options="item.id as item.reason for item in discardReasons"
               ng-required="true">
         <option value="" ng-disabled="true">Select:</option>
       </select>
