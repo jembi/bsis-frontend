@@ -17,13 +17,13 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
 
     $location.search(angular.extend({search: true}, $scope.search));
     $scope.searching = true;
+    $scope.searchResults = false;
     LabellingService.getComponents($scope.search, function(response) {
-      if (response !== false) {
-        $scope.components = response.components;
-        $scope.searchResults = true;
-      } else {
-        $scope.searchResults = false;
-      }
+      $scope.components = response.components;
+      $scope.searchResults = true;
+      $scope.searching = false;
+    }, function(err) {
+      $log.error(err);
       $scope.searching = false;
     });
   };
@@ -34,20 +34,16 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
 
   $scope.printPackLabel = function(componentId) {
     LabellingService.printPackLabel(componentId, function(response) {
-      if (response !== false) {
-        $scope.labelZPL = response.labelZPL;
-        $log.debug('$scope.labelZPL: ', $scope.labelZPL);
-      }
-    });
+      $scope.labelZPL = response.labelZPL;
+      $log.debug('$scope.labelZPL: ', $scope.labelZPL);
+    }, $log.error);
   };
 
   $scope.printDiscardLabel = function(componentId) {
     LabellingService.printDiscardLabel(componentId, function(response) {
-      if (response !== false) {
-        $scope.labelZPL = response.labelZPL;
-        $log.debug('$scope.labelZPL: ', $scope.labelZPL);
-      }
-    });
+      $scope.labelZPL = response.labelZPL;
+      $log.debug('$scope.labelZPL: ', $scope.labelZPL);
+    }, $log.error);
   };
 
   $scope.clear = function(form) {
