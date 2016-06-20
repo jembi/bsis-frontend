@@ -225,6 +225,10 @@ angular.module('bsis')
       RecordComponents: $resource(url + '/components/recordcombinations'),
 
       Labelling: $resource(url + '/labels/', {}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/labels/form'
+        },
         getComponents: {
           method: 'GET',
           url: url + '/labels/components',
