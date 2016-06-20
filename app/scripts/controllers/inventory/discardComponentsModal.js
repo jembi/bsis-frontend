@@ -14,8 +14,10 @@ angular.module('bsis').controller('DiscardComponentsModalCtrl', function($scope,
     }, $log.error);
   }
 
-  $scope.close = function() {
-    // Fixme: when there are errors in the form, the modal is dismissed but the viewReturn page doesn't load properly
+  $scope.close = function(discardComponentsForm) {
+    // The form is set to valid because the modal doesn't handle the form errors correctly, and the page crashes if there's form errors.
+    // We suspect it's a version issue. In the meantime we implemented this solution.
+    discardComponentsForm.discardReason.$setValidity('required', true);
     $uibModalInstance.dismiss();
   };
 
