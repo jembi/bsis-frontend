@@ -9,7 +9,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   };
   $scope.componentTypes = [];
 
-  $scope.checkLabellingStatus = function(form) {
+  $scope.getComponents = function(form) {
 
     if (form && form.$invalid) {
       return;
@@ -17,7 +17,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
 
     $location.search(angular.extend({search: true}, $scope.search));
     $scope.searching = true;
-    LabellingService.checkLabellingStatus($scope.search, function(response) {
+    LabellingService.getComponents($scope.search, function(response) {
       if (response !== false) {
         $scope.components = response.components;
         $scope.searchResults = true;
@@ -29,7 +29,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   };
 
   if ($routeParams.search) {
-    $scope.checkLabellingStatus();
+    $scope.getComponents();
   }
 
   $scope.printPackLabel = function(componentId) {

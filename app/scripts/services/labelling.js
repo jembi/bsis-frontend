@@ -3,15 +3,15 @@
 angular.module('bsis')
   .factory('LabellingService', function($http, Api) {
     return {
-      checkLabellingStatus: function(query, response) {
-        var status = Api.LabellingStatus.get(query, function() {
-          response(status);
+      getComponents: function(query, response) {
+        var components = Api.Labelling.getComponents(query, function() {
+          response(components);
         }, function() {
           response(false);
         });
       },
       printPackLabel: function(componentId, response) {
-        var label = Api.PrintPackLabel.get({componentId: componentId}, function() {
+        var label = Api.Labelling.printPackLabel({componentId: componentId}, function() {
           response(label);
 
           var hiddenElement = document.createElement('a');
@@ -25,7 +25,7 @@ angular.module('bsis')
         });
       },
       printDiscardLabel: function(componentId, response) {
-        var label = Api.PrintDiscardLabel.get({componentId: componentId}, function() {
+        var label = Api.Labelling.printDiscardLabel({componentId: componentId}, function() {
           response(label);
 
           var hiddenElement = document.createElement('a');
