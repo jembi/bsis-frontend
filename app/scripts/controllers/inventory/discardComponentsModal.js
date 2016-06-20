@@ -14,10 +14,10 @@ angular.module('bsis').controller('DiscardComponentsModalCtrl', function($scope,
     }, $log.error);
   }
 
-  $scope.close = function(discardComponentsForm) {
+  $scope.close = function() {
     // The form is set to valid because the modal doesn't handle the form errors correctly, and the page crashes if there's form errors.
     // We suspect it's a version issue. In the meantime we implemented this solution.
-    discardComponentsForm.discardReason.$setValidity('required', true);
+    $scope.discardComponentsForm.discardReason.$setValidity('required', true);
     $uibModalInstance.dismiss();
   };
 
