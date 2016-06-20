@@ -3,28 +3,13 @@
 angular.module('bsis')
   .controller('LabellingCtrl', function($scope, $location, $log, LabellingService, ComponentTypesService, ICONS, PERMISSIONS, $routeParams) {
 
-    $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
-    var data = [{}];
-    //$scope.data = data;
-    $scope.searchResults = '';
+    var data = [];
+    $scope.searchResults = false;
     $scope.search = {
       donationIdentificationNumber: angular.isDefined($routeParams.donationIdentificationNumber) ? $routeParams.donationIdentificationNumber : null,
       componentType: angular.isDefined($routeParams.componentType) ? +$routeParams.componentType : null
     };
     $scope.componentTypes = [];
-
-    $scope.isCurrent = function(path) {
-      if (path.length > 1 && $location.path().substr(0, path.length) === path) {
-        $location.path(path);
-        $scope.selection = path;
-        return true;
-      } else if ($location.path() === path) {
-        return true;
-      } else {
-        return !!($location.path() === '/labelling' && path === '/labelComponents');
-      }
-    };
 
     $scope.checkLabellingStatus = function(form) {
 
@@ -37,10 +22,7 @@ angular.module('bsis')
       LabellingService.checkLabellingStatus($scope.search, function(response) {
         if (response !== false) {
           data = response;
-          //$scope.data = data;
           $scope.components = data.components;
-          //$scope.printPackLabelBoolean = data.printPackLabel;
-          //$scope.printDiscardLabelBoolean = data.printDiscardLabel;
           $scope.searchResults = true;
         } else {
           $scope.searchResults = false;
@@ -82,7 +64,7 @@ angular.module('bsis')
       }
       $location.search({});
       $scope.search = {};
-      $scope.searchResults = '';
+      $scope.searchResults = false;
     };
 
     $scope.onTextClick = function($event) {

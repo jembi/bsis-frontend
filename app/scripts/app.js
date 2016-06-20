@@ -322,17 +322,16 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // LABELLING URLs
       .when('/labelling', {
-        templateUrl: 'views/labelling.html',
+        redirectTo: '/labelComponents',
+        permission: PERMISSIONS.COMPONENT_LABELLING,
+        enabled: UI.LABELLING_TAB_ENABLED
+      })
+      .when('/labelComponents', {
+        templateUrl: 'views/labelling/labelComponents.html',
         controller: 'LabellingCtrl',
         permission: PERMISSIONS.COMPONENT_LABELLING,
         enabled: UI.LABELLING_TAB_ENABLED,
         reloadOnSearch: false
-      })
-      .when('/labelComponents', {
-        templateUrl: 'views/labelling.html',
-        controller: 'LabellingCtrl',
-        permission: PERMISSIONS.COMPONENT_LABELLING,
-        enabled: UI.LABELLING_TAB_ENABLED
       })
 
       // REPORTS URLs
