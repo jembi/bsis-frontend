@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, LabellingService, ComponentTypesService, ICONS, PERMISSIONS, $routeParams) {
+angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, $routeParams, LabellingService, ComponentTypesService) {
 
   $scope.searchResults = null;
   $scope.search = {
