@@ -3,7 +3,7 @@
 angular.module('bsis')
   .factory('LabellingService', function($http, Api) {
     return {
-      getForm: Api.Labelling.getForm,
+      getComponentForm: Api.Labelling.getComponentForm,
       getComponents: function(query, response) {
         var components = Api.Labelling.getComponents(query, function() {
           response(components);

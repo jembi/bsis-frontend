@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, $routeParams, LabellingService, ComponentTypesService) {
+angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, $routeParams, LabellingService) {
 
   $scope.searchResults = null;
   $scope.search = {
@@ -66,11 +66,9 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   };
 
   function fetchFormFields() {
-    ComponentTypesService.getComponentTypes({includeDeleted: false}, function(componentTypes) {
-      $scope.componentTypes = componentTypes;
-    }, function(err) {
-      $log.error(err);
-    });
+    LabellingService.getComponentForm({}, function(response) {
+      $scope.componentTypes = response.componentTypes;
+    }, $log.error);
   }
 
   fetchFormFields();
