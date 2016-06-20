@@ -328,7 +328,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       })
       .when('/labelComponents', {
         templateUrl: 'views/labelling/labelComponents.html',
-        controller: 'LabellingCtrl',
+        controller: 'LabelComponentsCtrl',
         permission: PERMISSIONS.COMPONENT_LABELLING,
         enabled: UI.LABELLING_TAB_ENABLED,
         reloadOnSearch: false
