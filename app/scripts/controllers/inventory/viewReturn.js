@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, $log, $filter, $routeParams, ReturnFormsService) {
+angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, $log, $filter, $routeParams, $uibModal, ReturnFormsService) {
 
   $scope.displayConfirmReturn = false;
 
@@ -164,12 +164,39 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     }, $log.error);
   }
 
+  function showDiscardModal() {
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'views/inventory/discardComponentsModal.html',
+      controller: 'DiscardComponentsModalCtrl',
+      resolve: {
+        returnFormId: function() {
+          return $routeParams.id;
+        },
+        componentIds: function() {
+          var componentIds = [];
+          angular.forEach($scope.returnForm.components, function(component) {
+            componentIds.push(component.id);
+          });
+          return componentIds;
+        }
+      }
+    });
+
+    modalInstance.result.then(function() {
+      // Refresh data if components were discarded
+      init();
+    }, function() {
+      // Ignore if modal was dismissed
+    });
+  }
+
   $scope.exportReturnNote = function() {
     $scope.gridApi.exporter.pdfExport('all', 'all');
   };
 
   $scope.discardStock = function() {
-    $log.info('Not implemented yet');
+    showDiscardModal();
   };
 
   $scope.confirmReturn = function(condition) {

@@ -104,8 +104,6 @@ angular.module('bsis')
       DonationsFormFields: $resource(url + '/donations/form'),
       DeferralsFormFields: $resource(url + '/deferrals/form'),
       DonorCommunicationsFormFields: $resource(url + '/donorcommunications/form'),
-      ComponentsFormFields: $resource(url + '/components/form'),
-      ComponentCombinations: $resource(url + '/components/combinations'),
       ComponentTypes: $resource(url + '/componenttypes'),
       DonationBatchFormFields: $resource(url + '/donationbatches/form'),
       TestBatchFormFields: $resource(url + '/testbatches/form'),
@@ -183,46 +181,45 @@ angular.module('bsis')
         }
       ),
 
-      ComponentsSearch: $resource(url + '/components/search', {},
-        {
-          query: {
-            method: 'GET',
-            params: {
-              donationIdentificationNumber: '@donationIdentificationNumber',
-              componentTypes: '@componentTypes',
-              status: '@status',
-              donationDateFrom: '@donationDateFrom',
-              donationDateTo: '@donationDateTo'
-            }
+      Components: $resource(url + '/components/:id', {id: '@id'}, {
+        find: {
+          method: 'GET',
+          url: url + '/components'
+        },
+        findByDIN: {
+          method: 'GET',
+          url: url + '/components/donations/:donationIdentificationNumber'
+        },
+        search: {
+          method: 'GET',
+          url: url + '/components/search'
+        },
+        discard: {
+          method: 'PUT',
+          url: url + '/components/:id/discard',
+          params: {
+            id: '@id',
+            discardReasonId: '@discardReasonId',
+            discardReasonText: '@discardReasonText'
           }
+        },
+        record: {
+          method: 'POST',
+          url: url + '/components/recordcombinations'
+        },
+        getComponentForm: {
+          method: 'GET',
+          url: url + '/components/form'
+        },
+        getDiscardForm: {
+          method: 'GET',
+          url: url + '/components/discard/form'
+        },
+        bulkDiscard: {
+          method: 'PUT',
+          url: url + '/components/discard'
         }
-      ),
-
-      getComponentsByDIN: $resource(url + '/components/donations/:donationIdentificationNumber', {},
-        {
-          query: {
-            method: 'GET',
-            params: {donationIdentificationNumber: '@donationIdentificationNumber'}
-          }
-        }
-      ),
-
-      Components: $resource(url + '/components'),
-
-      discardComponents: $resource(url + '/components/:id/discard', {},
-        {
-          update: {
-            method: 'PUT',
-            params: {
-              id: '@id',
-              discardReasonId: '@discardReasonId',
-              discardReasonText: '@discardReasonText'
-            }
-          }
-        }
-      ),
-
-      RecordComponents: $resource(url + '/components/recordcombinations'),
+      }),
 
       LabellingStatus: $resource(url + '/labels/status/:donationIdentificationNumber'),
       PrintPackLabel: $resource(url + '/labels/print/packlabel/:componentId'),

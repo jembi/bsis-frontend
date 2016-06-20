@@ -4,41 +4,28 @@ angular.module('bsis')
   .factory('ComponentService', function($http, Api) {
     return {
       getComponentsFormFields: function(response) {
-        Api.ComponentsFormFields.get({}, function(backingForm) {
-          response(backingForm);
-        }, function() {
-          response(false);
-        });
-      },
-      getComponentCombinations: function(response) {
-        Api.ComponentCombinations.get({}, function(backingForm) {
+        Api.Components.getComponentForm({}, function(backingForm) {
           response(backingForm);
         }, function() {
           response(false);
         });
       },
       getComponentsByDIN: function(donationIdentificationNumber, response) {
-        var apiResponse = Api.getComponentsByDIN.query({donationIdentificationNumber: donationIdentificationNumber}, function() {
+        var apiResponse = Api.Components.findByDIN({donationIdentificationNumber: donationIdentificationNumber}, function() {
           response(apiResponse);
         }, function() {
           response(false);
         });
       },
       findComponent: function(componentSearch, onSuccess, onError) {
-        Api.Components.get(componentSearch, function(response) {
+        Api.Components.find(componentSearch, function(response) {
           onSuccess(response.component);
         }, function(err) {
           onError(err.data);
         });
       },
-      getComponentsSummary: function() {
-        return $http.get('/getComponentsSummary');
-      },
-      getDiscardsSummary: function() {
-        return $http.get('/getDiscardsSummary');
-      },
       ComponentsSearch: function(componentsSearch, response) {
-        var components = Api.ComponentsSearch.query({
+        var components = Api.Components.search({
           donationIdentificationNumber: componentsSearch.donationIdentificationNumber,
           componentTypes: componentsSearch.componentTypes,
           status: componentsSearch.status,
@@ -51,20 +38,17 @@ angular.module('bsis')
         });
       },
       recordComponents: function(component, response) {
-
-        var addComponent = new Api.RecordComponents();
-
-        angular.copy(component, addComponent);
-
-        addComponent.$save(function(data) {
+        Api.Components.record(component, function(data) {
           response(data);
         }, function() {
           response(false);
         });
-
       },
+
+      getDiscardForm: Api.Components.getDiscardForm,
+
       discardComponent: function(component, response) {
-        Api.discardComponents.update({
+        Api.Components.discard({
           id: component.componentId,
           discardReasonId: component.discardReason,
           discardReasonText: component.discardReasonText
@@ -73,6 +57,8 @@ angular.module('bsis')
         }, function() {
           response(false);
         });
-      }
+      },
+
+      bulkDiscard: Api.Components.bulkDiscard
     };
   });
