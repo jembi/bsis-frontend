@@ -185,10 +185,6 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
 
     modalInstance.result.then(function() {
       // Refresh data if components were discarded
-
-      // Fixme: when the first init() is called, the components statuses are still AVAILABLE,
-      // the second time they are fetched the statuses get updated to DISCARDED
-      init();
       init();
     }, function() {
       // Ignore if modal was dismissed

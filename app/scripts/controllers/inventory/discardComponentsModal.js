@@ -32,12 +32,11 @@ angular.module('bsis').controller('DiscardComponentsModalCtrl', function($scope,
 
     ComponentService.bulkDiscard({}, bulkDiscardForm, function() {
       $scope.discardingComponent = false;
+      $uibModalInstance.close();
     }, function(err) {
       $log.error(err);
       $scope.discardingComponent = false;
     });
-
-    $uibModalInstance.close();
   };
 
   init();
