@@ -221,9 +221,25 @@ angular.module('bsis')
         }
       }),
 
-      LabellingStatus: $resource(url + '/labels/status/:donationIdentificationNumber'),
-      PrintPackLabel: $resource(url + '/labels/print/packlabel/:componentId'),
-      PrintDiscardLabel: $resource(url + '/labels/print/discardlabel/:componentId'),
+      Labelling: $resource(url + '/labels/', {}, {
+        getComponentForm: {
+          method: 'GET',
+          url: url + '/labels/components/form'
+        },
+        getComponents: {
+          method: 'GET',
+          url: url + '/labels/components',
+          params: {componentType: '@componentType', donationIdentificationNumber: '@donationIdentificationNumber'}
+        },
+        printPackLabel: {
+          method: 'GET',
+          url: url + '/labels/print/packlabel/:componentId'
+        },
+        printDiscardLabel: {
+          method: 'GET',
+          url: url + '/labels/print/discardlabel/:componentId'
+        }
+      }),
 
       FindDonationBatches: $resource(url + '/donationbatches/search', {},
         {
