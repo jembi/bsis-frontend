@@ -13,8 +13,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   'ngMessages',
   'ui.grid',
   'ui.grid.exporter',
-  'ui.grid.pagination',
-  'ui.grid.selection'
+  'ui.grid.pagination'
 ])
   .config(function($routeProvider, PERMISSIONS, UI) {
 
