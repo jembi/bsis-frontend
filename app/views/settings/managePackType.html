@@ -4,7 +4,6 @@
         <h3 class="page-header">Manage Pack Type</h3>
         <div class="panel panel-default">
             <div class="panel-body">
-
                 <div ng-show="serverError">
                     <uib-alert type="danger" close="serverError = null">
                         {{serverError.userMessage}}
@@ -114,6 +113,41 @@
                                         ">
                                             Invalid input
                                         </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group col-sm-12">
+                            <label for="minWeight" class="col-sm-2 control-label">Minimum Weight</label>
+                            <div class="col-sm-8">
+                                <div class="form-inline">
+                                    <input size="3" style="width:4em;" type="number" id="minWeight" name="minWeight" class="form-control input-sm"
+                                           ng-model="packType.minWeight" ng-required="packType.countAsDonation" ng-minlength=1 ng-maxlength=3 />
+                                    <div>
+                                        <small class="error" ng-show="packTypeForm.minWeight.$invalid">Invalid input</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group col-sm-12">
+                            <label for="maxWeight" class="col-sm-2 control-label">Maximum Weight</label>
+                            <div class="col-sm-8">
+                                <div class="form-inline">
+                                    <input size="3" style="width:4em;" type="number" id="maxWeight" name="maxWeight" class="form-control input-sm"
+                                           ng-model="packType.maxWeight" ng-required="packType.countAsDonation" ng-minlength=1 ng-maxlength=3 />
+                                    <div>
+                                        <small class="error" ng-show="packTypeForm.maxWeight.$invalid">Invalid input</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group col-sm-12">
+                            <label for="lowVolumeWeight" class="col-sm-2 control-label">Low Volume Weight</label>
+                            <div class="col-sm-8">
+                                <div class="form-inline">
+                                    <input size="3" style="width:4em;" type="number" id="lowVolumeWeight" name="lowVolumeWeight" class="form-control input-sm" ng-required="packType.countAsDonation" ng-model="packType.lowVolumeWeight" ng-minlength=1 ng-maxlength=3 />
+                                    <div>
+                                        <small class="error" ng-show="packTypeForm.lowVolumeWeight.$invalid">Invalid input</small>
                                     </div>
                                 </div>
                             </div>
