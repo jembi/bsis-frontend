@@ -108,7 +108,7 @@ angular.module('bsis')
       },
       {
         name: 'Expiry Status',
-        field: 'deliveryDate',
+        field: 'expiryStatus',
         width: '**'
       }
     ];
@@ -118,6 +118,9 @@ angular.module('bsis')
       columnDefs: columnDefs,
       multiSelect: false,
       enableRowSelection: true,
+      paginationTemplate: 'views/template/pagination.html',
+      paginationPageSize: 6,
+      minRowsToShow: 5,
 
       onRegisterApi: function(gridApi) {
         $scope.gridApi = gridApi;
