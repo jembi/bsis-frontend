@@ -192,7 +192,7 @@ angular.module('bsis')
       {
         name: 'Weight',
         field: 'weight',
-        width: '**'
+        width: '120'
       }
     ];
 
