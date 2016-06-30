@@ -20,10 +20,16 @@ angular.module('bsis')
     };
 
     $scope.clearComponentTypeCombination = function() {
+      if ($scope.component) {
+        $scope.component.componentTypeCombination = null;
+      }
       forms.recordComponentsForm.$setPristine();
     };
 
     $scope.clearWeight = function() {
+      if ($scope.component) {
+        $scope.component.weight = null;
+      }
       forms.recordWeightForm.$setPristine();
     };
 
@@ -207,7 +213,7 @@ angular.module('bsis')
           if (selectedRows.length === 0) {
             $scope.component = null;
           } else {
-            $scope.component = selectedRows[0];
+            $scope.component = angular.copy(selectedRows[0]);
           }
         });
       }
