@@ -129,6 +129,11 @@ angular.module('bsis')
         name: 'Expiry Status',
         field: 'expiryStatus',
         width: '**'
+      },
+      {
+        name: 'Weight',
+        field: 'weight',
+        width: '**'
       }
     ];
 
