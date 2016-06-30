@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RecordComponentsCtrl', function($scope, $rootScope, $location, $log, $timeout, $q, $uibModal, ComponentService) {
+  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $uibModal, $routeParams, ComponentService) {
 
     $scope.component = null;
     $scope.componentsSearch = {
-      donationIdentificationNumber: ''
+      donationIdentificationNumber: $routeParams.donationIdentificationNumber || ''
     };
     $scope.recordingWeight = false;
     var forms = $scope.forms = {};
@@ -142,7 +142,7 @@ angular.module('bsis')
     };
 
     $scope.getComponentsByDIN = function() {
-      if (forms.findComponentsForm.$invalid) {
+      if (forms.findComponentsForm && forms.findComponentsForm.$invalid) {
         return;
       }
       $scope.componentsSearch.search = true;
@@ -218,4 +218,12 @@ angular.module('bsis')
         });
       }
     };
+
+    function init() {
+      if ($routeParams.search) {
+        $scope.getComponentsByDIN();
+      }
+    }
+
+    init();
   });
