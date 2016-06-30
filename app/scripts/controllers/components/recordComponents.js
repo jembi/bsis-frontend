@@ -59,6 +59,53 @@ angular.module('bsis')
 
     };
 
+    function showConfirmation(confirmationFields) {
+      var modalInstance = $uibModal.open({
+        animation: false,
+        templateUrl: 'views/confirmModal.html',
+        controller: 'ConfirmModalCtrl',
+        resolve: {
+          confirmObject: function() {
+            return confirmationFields;
+          }
+        }
+      });
+      return modalInstance.result;
+    }
+
+    function showComponentWeightConfirmation(component) {
+
+      // Show confirmation if it is above max weight
+      if (component.weight > component.packType.maxWeight) {
+        return showConfirmation({
+          title: 'Overweight Pack',
+          button: 'Continue',
+          message: 'The pack weight (' + component.weight + 'g) is above the maximum acceptable range (' + component.packType.maxWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
+        });
+      }
+
+      // Show confirmation if it is below min weight
+      if (component.weight < component.packType.minWeight) {
+        return showConfirmation({
+          title: 'Underweight Pack',
+          button: 'Continue',
+          message: 'The pack weight (' + component.weight + 'g) is below the minimum acceptable range (' + component.packType.minWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
+        });
+      }
+
+      // Show confirmation if it is below low volume weight
+      if (component.weight <= component.packType.lowVolumeWeight) {
+        return showConfirmation({
+          title: 'Low Pack Weight',
+          button: 'Continue',
+          message: 'The pack weight (' + component.weight + 'g) is low (below ' + component.packType.lowVolumeWeight + 'g). It is recommended that all components from this donation are discarded, with the exception of Packed Red Cells. Do you want to continue?'
+        });
+      }
+
+      // Weight is within valid range
+      return $q.resolve();
+    }
+
     $scope.recordWeightForSelectedComponent = function() {
 
       if (forms.recordWeightForm.$invalid) {
@@ -66,23 +113,30 @@ angular.module('bsis')
       }
 
       $scope.recordingWeight = true;
-      ComponentService.update({}, $scope.component, function(res) {
-        $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
-          // Replace the component in the grid with the updated component
-          if (component.id === res.component.id) {
-            return res.component;
-          } else {
-            return component;
-          }
-        });
 
-        // Make sure that the row remains selected
-        $timeout(function() {
-          $scope.gridApi.selection.selectRow(res.component);
+      showComponentWeightConfirmation($scope.component).then(function() {
+
+        ComponentService.update({}, $scope.component, function(res) {
+          $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
+            // Replace the component in the grid with the updated component
+            if (component.id === res.component.id) {
+              return res.component;
+            } else {
+              return component;
+            }
+          });
+
+          // Make sure that the row remains selected
+          $timeout(function() {
+            $scope.gridApi.selection.selectRow(res.component);
+            $scope.recordingWeight = false;
+          });
+        }, function(err) {
+          $log.error(err);
           $scope.recordingWeight = false;
         });
-      }, function(err) {
-        $log.error(err);
+      }).catch(function() {
+        // Confirmation was rejected
         $scope.recordingWeight = false;
       });
     };
