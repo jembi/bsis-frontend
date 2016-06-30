@@ -76,7 +76,7 @@ angular.module('bsis')
     function showComponentWeightConfirmation(component) {
 
       // Show confirmation if it is above max weight
-      if (component.weight > component.packType.maxWeight) {
+      if (component.packType.maxWeight != null && component.weight > component.packType.maxWeight) {
         return showConfirmation({
           title: 'Overweight Pack',
           button: 'Continue',
@@ -85,7 +85,7 @@ angular.module('bsis')
       }
 
       // Show confirmation if it is below min weight
-      if (component.weight < component.packType.minWeight) {
+      if (component.packType.minWeight != null && component.weight < component.packType.minWeight) {
         return showConfirmation({
           title: 'Underweight Pack',
           button: 'Continue',
@@ -94,7 +94,7 @@ angular.module('bsis')
       }
 
       // Show confirmation if it is below low volume weight
-      if (component.weight <= component.packType.lowVolumeWeight) {
+      if (component.packType.lowVolumeWeight != null && component.weight <= component.packType.lowVolumeWeight) {
         return showConfirmation({
           title: 'Low Pack Weight',
           button: 'Continue',
