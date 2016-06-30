@@ -202,7 +202,7 @@ angular.module('bsis')
       multiSelect: false,
       enableRowSelection: true,
       paginationTemplate: 'views/template/pagination.html',
-      paginationPageSize: 6,
+      paginationPageSize: 5,
       minRowsToShow: 5,
 
       onRegisterApi: function(gridApi) {
