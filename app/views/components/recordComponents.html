@@ -1,104 +1,96 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/components/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-<h3 class="page-header">Record Components</h3>
+  <h3 class="page-header">Record Components</h3>
 
-<form class="form-horizontal col-sm-12" name="findComponentsForm" role="form" novalidate ng-submit="getComponentsByDIN(findComponentsForm)">
+  <form class="form-horizontal col-sm-12" name="forms.findComponentsForm" role="form" novalidate ng-submit="getComponentsByDIN()">
     <div class="form-group">
-        <label for="name" class="col-sm-1 control-label">DIN</label>
-        <div class="row col-sm-11">
-            <div class="form-inline" style="padding-left:5px;">
-                <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
-                       class="form-control input-sm" placeholder=""
-                       ng-model="componentsSearch.donationIdentificationNumber" ng-required="true" />
-            </div>
+      <label for="name" class="col-sm-1 control-label">DIN</label>
+      <div class="row col-sm-11">
+        <div class="form-inline" style="padding-left:5px;">
+          <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" ng-model="componentsSearch.donationIdentificationNumber" required />
         </div>
+      </div>
     </div>
     <div class="col-sm-offset-1">
-        <small class="error" ng-show="(findComponentsForm.$submitted && findComponentsForm.$invalid)">
-            DIN cannot be empty
-        </small>
+      <small class="error" ng-show="(forms.findComponentsForm.$submitted && forms.findComponentsForm.$invalid)">
+        DIN cannot be empty
+      </small>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-3">
-            <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
-                "Search"}}
+      <div class="col-sm-offset-1 col-sm-3">
+        <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}} </button>
+        <button class="btn btn-primary" type="button" ng-click="clear();">Clear</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="panel panel-default" style="clear:left;margin-top:10px;" ng-if="gridOptions.data">
+    <div class="panel-body">
+
+      <!-- Components grid -->
+      <div class="grid" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination style="height:{{(gridOptions.minRowsToShow*gridOptions.rowHeight)+gridOptions.headerRowHeight+gridOptions.gridFooterHeight}}px;margin-bottom:10px;"></div>
+
+      <div ng-if="!component" style="clear:left;">
+        <strong>
+          <em>Select a component to process</em>
+        </strong>
+      </div>
+
+      <div ng-if="component && !component.permissions.canRecordWeight && !component.permissions.canProcess" style="clear:left;">
+        <strong>
+          <em>Selected component cannot be processed further</em>
+        </strong>
+      </div>
+
+      <!-- Record weight form -->
+      <form role="form" name="forms.recordWeightForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canRecordWeight" ng-submit="recordWeightForSelectedComponent()" novalidate>
+        <div class="form-group">
+          <label for="componentWeight" class="col-sm-2 control-label">Component Weight</label>
+          <div class="col-sm-10" style="padding-left:5px;">
+            <input name="componentWeight" class="form-control input-sm" style="width:auto;" type="number" ng-min="1" ng-max="999" ng-model="component.weight" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-3 col-sm-offset-2">
+            <button type="submit" class="btn btn-primary" ng-disabled="recordingWeight">{{recordingWeight ? "Saving..." : "Save"}}</button>
+            <button type="reset" class="btn btn-primary" ng-disabled="recordingWeight" ng-click="clearWeight();">Clear</button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Process component form -->
+      <form name="forms.recordComponentsForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canProcess" ng-submit="recordComponents()" novalidate>
+        <div class="form-group">
+          <label for="name" class="col-sm-2 control-label">Process Component</label>
+          <div class="row col-sm-10">
+            <div class="form-inline" style="padding-left:5px;">
+              <span ng-if="component && component.componentType.producedComponentTypeCombinations.length > 0">
+                <select name="combination" class="form-control input-sm" ng-model="component.componentTypeCombination"
+                                                                         ng-options="item as item.combinationName for item in component.componentType.producedComponentTypeCombinations"
+                                                                         required>
+                  <option value="" ng-disabled="true">Select:</option>
+                </select>
+              </span>
+              <div>
+                <small class="error" ng-show="(forms.recordComponentsForm.combination.$invalid && (forms.recordComponentsForm.combination.$dirty || submitted))">
+                  This cannot be empty
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-3">
+            <button class="btn btn-primary" type="submit" ng-disabled="recordingComponents">
+              {{recordingComponents ? "Processing..." : "Process Component"}}
             </button>
-            <button class="btn btn-primary" type="button" ng-click="clearProcessComponentForm(); clearForm(findComponentsForm); clear();">Clear</button>
+            <button class="btn btn-primary" type="button" ng-click="clearComponentTypeCombination();">Clear</button>
+          </div>
         </div>
-    </div>
-</form>
+      </form>
 
-<div ng-switch="searchResults" class="col-sm-12">
-    <div style="padding-bottom: 10px"></div>
-
-    <div ng-switch-when="true">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div ng-if="componentSelected === false" ng-hide="componentSelected !== false"
-                     style="padding-top:10px;">
-                    <uib-alert type="danger">Select a component to process</uib-alert>
-                </div>
-                <div class="panel-body">
-                  <div class="grid" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination></div>
-                </div>
-                <form name="recordComponentsForm" novalidate class="form-horizontal col-sm-12" role="form"
-                      ng-submit="recordComponents(recordComponentsForm)">
-                    <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">Process Component</label>
-                        <div class="row col-sm-10">
-                            <div class="form-inline" style="padding-left:5px;">
-                                <span ng-if="selectedComponents.length <= 0"><label for="name"
-                                                                                    class="col-sm-5 control-label"
-                                                                                    style="text-align:left;"><em>Select
-                                    a component to process</em></label></span>
-                                <span ng-if="selectedComponents.length > 0 && selectedComponentType.producedComponentTypeCombinations.length <= 0"><label
-                                        for="name" class="col-sm-5 control-label" style="text-align:left;"><em>Selected
-                                    component cannot be processed further</em></label></span>
-                <span ng-if="selectedComponents.length > 0 && selectedComponentType.producedComponentTypeCombinations.length > 0">
-                  <select name="combination" class="form-control input-sm" ng-model="component.componentTypeCombination"
-                          ng-options="item as item.combinationName for item in selectedComponentType.producedComponentTypeCombinations"
-                          required
-                          ng-class="{'ng-invalid ng-dirty' : recordComponentsForm.combination.$invalid && submitted}">
-                      <option value="" ng-disabled="true">Select:</option>
-                  </select>
-                </span>
-                                <div>
-                                    <small class="error"
-                                           ng-show="
-                      (recordComponentsForm.combination.$invalid && (recordComponentsForm.combination.$dirty || submitted))
-                    ">
-                                        This cannot be empty
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-3">
-                            <button class="btn btn-primary" type="submit" ng-disabled="recordingComponents">
-                                {{recordingComponents ? "Processing..." : "Process Component"}}
-                            </button>
-                            <button class="btn btn-primary" type="button"
-                                    ng-click="clearForm(recordComponentsForm);
-                clearProcessComponentForm()"
-                            >Clear
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        </div>
     </div>
-    <div ng-switch-when="false">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <p>
-                    <em> Not found. Please re-enter DIN. </em>
-                </p>
-            </div>
-        </div>
-    </div>
+  </div>
 
 </div>
 </div>

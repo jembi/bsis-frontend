@@ -218,6 +218,9 @@ angular.module('bsis')
         bulkDiscard: {
           method: 'PUT',
           url: url + '/components/discard'
+        },
+        update: {
+          method: 'PUT'
         }
       }),
 

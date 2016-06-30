@@ -1,68 +1,89 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RecordComponentsCtrl', function($scope, $rootScope, $location, ComponentService) {
+  .controller('RecordComponentsCtrl', function($scope, $rootScope, $location, $log, $timeout, ComponentService) {
 
-    $scope.searchResults = '';
-    $scope.selectedComponents = [];
-    $scope.component = {};
+    $scope.component = null;
+    $scope.componentsSearch = {
+      donationIdentificationNumber: ''
+    };
+    $scope.recordingWeight = false;
+    var forms = $scope.forms = {};
 
     $scope.clear = function() {
-      $scope.componentsSearch = {};
-      $scope.searchResults = '';
-      $scope.selectedComponentTypes = {};
-      $scope.componentSelected = '';
+      $scope.componentsSearch.donationIdentificationNumber = '';
       $location.search({});
+      $scope.gridOptions.data = null;
+      angular.forEach(forms, function(form) {
+        form.$setPristine();
+      });
     };
 
-    $scope.clearForm = function(form) {
-      form.$setPristine();
-      $location.search({});
-      $scope.submitted = '';
+    $scope.clearComponentTypeCombination = function() {
+      if ($scope.component) {
+        $scope.component.componentTypeCombination = null;
+      }
+      forms.recordComponentsForm.$setPristine();
     };
 
-    $scope.clearProcessComponentForm = function() {
-      $location.search({});
-      $scope.component = {};
-      $scope.componentSelected = '';
-      $scope.submitted = '';
-      $scope.selectedComponents = [];
+    $scope.clearWeight = function() {
+      if ($scope.component) {
+        $scope.component.weight = null;
+      }
+      forms.recordWeightForm.$setPristine();
     };
 
-    $scope.recordComponents = function(recordComponentsForm) {
+    $scope.recordComponents = function() {
 
-      if (recordComponentsForm.$valid && $scope.selectedComponents.length > 0) {
-
-        $scope.recordComponent = {};
-        $scope.recordComponent.parentComponentId = $scope.selectedComponents[0];
-        $scope.recordComponent.componentTypeCombination = $scope.component.componentTypeCombination;
-
-        $scope.recordingComponents = true;
-        ComponentService.recordComponents($scope.recordComponent, function(recordResponse) {
-          if (recordResponse !== false) {
-            $scope.gridOptions.data = recordResponse.components;
-            $scope.recordComponent = {};
-            recordComponentsForm.$setPristine();
-            $scope.submitted = '';
-            $scope.componentSelected = '';
-            $scope.component = {};
-            $scope.selectedComponents = [];
-            $scope.selectedComponentType = {};
-            $scope.recordingComponents = false;
-          } else {
-            // TODO: handle case where response == false
-            $scope.recordingComponents = false;
-          }
-        });
-      } else {
-        $scope.submitted = true;
-        $scope.componentSelected = $scope.selectedComponents.length > 0;
+      if (forms.recordComponentsForm.$invalid) {
+        return;
       }
 
+      var componentToRecord = {
+        parentComponentId: $scope.component.id,
+        componentTypeCombination: $scope.component.componentTypeCombination
+      };
+
+      $scope.recordingComponents = true;
+      ComponentService.recordComponents(componentToRecord, function(recordResponse) {
+        if (recordResponse !== false) {
+          $scope.gridOptions.data = recordResponse.components;
+          forms.recordComponentsForm.$setPristine();
+          $scope.component = null;
+          $scope.recordingComponents = false;
+        } else {
+          // TODO: handle case where response == false
+          $scope.recordingComponents = false;
+        }
+      });
+
     };
 
-    $scope.getComponentsByDIN = function(findComponentsForm) {
-      if (findComponentsForm && !findComponentsForm.$valid) {
+    $scope.recordWeightForSelectedComponent = function() {
+      $scope.recordingWeight = true;
+      ComponentService.update({}, $scope.component, function(res) {
+        $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
+          // Replace the component in the grid with the updated component
+          if (component.id === res.component.id) {
+            return res.component;
+          } else {
+            return component;
+          }
+        });
+
+        // Make sure that the row remains selected
+        $timeout(function() {
+          $scope.gridApi.selection.selectRow(res.component);
+          $scope.recordingWeight = false;
+        });
+      }, function(err) {
+        $log.error(err);
+        $scope.recordingWeight = false;
+      });
+    };
+
+    $scope.getComponentsByDIN = function() {
+      if (forms.findComponentsForm.$invalid) {
         return;
       }
       $scope.componentsSearch.search = true;
@@ -71,10 +92,8 @@ angular.module('bsis')
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(componentsResponse) {
         if (componentsResponse !== false) {
           $scope.gridOptions.data = componentsResponse.components;
-          $scope.searchResults = $scope.gridOptions.data.length !== 0;
           $scope.searching = false;
         } else {
-          $scope.searchResults = false;
           $scope.searching = false;
         }
       });
@@ -114,7 +133,7 @@ angular.module('bsis')
     ];
 
     $scope.gridOptions = {
-      data: [],
+      data: null,
       columnDefs: columnDefs,
       multiSelect: false,
       enableRowSelection: true,
@@ -124,11 +143,14 @@ angular.module('bsis')
 
       onRegisterApi: function(gridApi) {
         $scope.gridApi = gridApi;
-        gridApi.selection.on.rowSelectionChanged($scope, function(row) {
-          $scope.component = row.entity;
-          $scope.selectedComponents = [];
-          $scope.selectedComponents.push(row.entity.id);
-          $scope.selectedComponentType = row.entity.componentType;
+        gridApi.selection.on.rowSelectionChanged($scope, function() {
+          var selectedRows = gridApi.selection.getSelectedRows();
+          // Clear the component if no row is selected
+          if (selectedRows.length === 0) {
+            $scope.component = null;
+          } else {
+            $scope.component = selectedRows[0];
+          }
         });
       }
     };
