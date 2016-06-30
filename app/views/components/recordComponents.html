@@ -48,6 +48,9 @@
           <label for="componentWeight" class="col-sm-2 control-label">Component Weight</label>
           <div class="col-sm-10" style="padding-left:5px;">
             <input name="componentWeight" class="form-control input-sm" style="width:auto;" type="number" ng-min="1" ng-max="999" ng-model="component.weight" required />
+            <ng-messages for="forms.recordWeightForm.componentWeight.$error" ng-show="forms.recordWeightForm.$submitted">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
           </div>
         </div>
         <div class="form-group">

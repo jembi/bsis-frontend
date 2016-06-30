@@ -60,6 +60,11 @@ angular.module('bsis')
     };
 
     $scope.recordWeightForSelectedComponent = function() {
+
+      if (forms.recordWeightForm.$invalid) {
+        return;
+      }
+
       $scope.recordingWeight = true;
       ComponentService.update({}, $scope.component, function(res) {
         $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
