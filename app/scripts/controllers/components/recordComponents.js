@@ -151,6 +151,7 @@ angular.module('bsis')
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(componentsResponse) {
         if (componentsResponse !== false) {
           $scope.gridOptions.data = componentsResponse.components;
+          $scope.component = null;
           $scope.searching = false;
         } else {
           $scope.searching = false;
