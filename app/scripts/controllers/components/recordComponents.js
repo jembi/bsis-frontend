@@ -8,6 +8,7 @@ angular.module('bsis')
       donationIdentificationNumber: $routeParams.donationIdentificationNumber || ''
     };
     $scope.recordingWeight = false;
+    $scope.unprocessing = false;
     var forms = $scope.forms = {};
 
     $scope.clear = function() {
@@ -158,6 +159,28 @@ angular.module('bsis')
       }).catch(function() {
         // Confirmation was rejected
         $scope.recordingWeight = false;
+      });
+    };
+
+    $scope.unprocessSelectedComponent = function() {
+      var unprocessConfirmation = {
+        title: 'Unprocess Component',
+        button: 'Continue',
+        message: 'Unprocessing this component will cause all components that were produced from it to be deleted. Do you want to continue?'
+      };
+
+      $scope.unprocessing = true;
+      showConfirmation(unprocessConfirmation).then(function() {
+        ComponentService.unprocess({}, $scope.component, function() {
+          $scope.getComponentsByDIN();
+          $scope.unprocessing = false;
+        }, function(err) {
+          $log.error(err);
+          $scope.unprocessing = false;
+        });
+      }).catch(function() {
+        // Confirmation was rejected
+        $scope.unprocessing = false;
       });
     };
 
