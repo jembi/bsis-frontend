@@ -15,7 +15,9 @@ angular.module('bsis')
       $location.search({});
       $scope.gridOptions.data = null;
       angular.forEach(forms, function(form) {
-        form.$setPristine();
+        if (form) {
+          form.$setPristine();
+        }
       });
     };
 
@@ -23,14 +25,18 @@ angular.module('bsis')
       if ($scope.component) {
         $scope.component.componentTypeCombination = null;
       }
-      forms.recordComponentsForm.$setPristine();
+      if (forms.recordComponentsForm) {
+        forms.recordComponentsForm.$setPristine();
+      }
     };
 
     $scope.clearWeight = function() {
       if ($scope.component) {
         $scope.component.weight = null;
       }
-      forms.recordWeightForm.$setPristine();
+      if (forms.recordWeightForm) {
+        forms.recordWeightForm.$setPristine();
+      }
     };
 
     $scope.recordComponents = function() {
