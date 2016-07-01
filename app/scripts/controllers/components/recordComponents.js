@@ -109,6 +109,20 @@ angular.module('bsis')
       }
 
       // Weight is within valid range
+
+      // Show confirmation if previous weight was not within valid range
+      var previousComponent = $scope.gridApi.selection.getSelectedRows()[0];
+      if (component.packType.maxWeight != null && component.packType.minWeight != null) {
+        if (previousComponent.weight > component.packType.maxWeight || previousComponent.weight < component.packType.minWeight) {
+          return showConfirmation({
+            title: 'Pack Weight Update',
+            button: 'Continue',
+            message: 'The pack weight has changed from an underweight or overweight value to one within the acceptable range. Components from this donation will no longer be flagged as unsafe as a result of the pack weight. Do you want to continue?'
+          });
+        }
+      }
+
+      // Continue with recording weight
       return $q.resolve();
     }
 
