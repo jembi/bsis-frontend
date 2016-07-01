@@ -111,8 +111,8 @@ angular.module('bsis')
       // Weight is within valid range
 
       // Show confirmation if previous weight was not within valid range
-      var previousComponent = $scope.gridApi.selection.getSelectedRows()[0];
       if (component.packType.maxWeight != null && component.packType.minWeight != null) {
+        var previousComponent = $scope.gridApi.selection.getSelectedRows()[0];
         if (previousComponent.weight > component.packType.maxWeight || previousComponent.weight < component.packType.minWeight) {
           return showConfirmation({
             title: 'Pack Weight Update',
