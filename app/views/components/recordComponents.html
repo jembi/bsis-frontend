@@ -40,6 +40,11 @@
         <strong>
           <em>Selected component cannot be processed further</em>
         </strong>
+        <div>
+          <button class="btn btn-primary" ng-click="unprocessSelectedComponent();" ng-disabled="unprocessing" ng-if="component.permissions.canUnprocess">
+            {{unprocessing ? "Unprocessing..." : "Unprocess components"}}
+          </button>
+        </div>
       </div>
 
       <!-- Record weight form -->

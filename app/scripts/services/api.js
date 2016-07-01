@@ -221,6 +221,10 @@ angular.module('bsis')
         },
         update: {
           method: 'PUT'
+        },
+        unprocess: {
+          method: 'PUT',
+          url: url + '/components/:id/unprocess'
         }
       }),
 
