@@ -1,70 +1,168 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RecordComponentsCtrl', function($scope, $rootScope, $location, ComponentService, DATEFORMAT, $filter, ngTableParams, $timeout) {
+  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $uibModal, $routeParams, ComponentService) {
 
-    var data = [{}];
-    $scope.searchResults = '';
-    $scope.selectedComponents = [];
-    $scope.component = {};
+    $scope.component = null;
+    $scope.componentsSearch = {
+      donationIdentificationNumber: $routeParams.donationIdentificationNumber || ''
+    };
+    $scope.recordingWeight = false;
+    var forms = $scope.forms = {};
 
     $scope.clear = function() {
-      $scope.componentsSearch = {};
-      $scope.searchResults = '';
-      $scope.selectedComponentTypes = {};
-      $scope.componentSelected = '';
+      $scope.componentsSearch.donationIdentificationNumber = '';
       $location.search({});
+      $scope.gridOptions.data = null;
+      angular.forEach(forms, function(form) {
+        if (form) {
+          form.$setPristine();
+        }
+      });
     };
 
-    $scope.clearForm = function(form) {
-      form.$setPristine();
-      $location.search({});
-      $scope.submitted = '';
+    $scope.clearComponentTypeCombination = function() {
+      if ($scope.component) {
+        $scope.component.componentTypeCombination = null;
+      }
+      if (forms.recordComponentsForm) {
+        forms.recordComponentsForm.$setPristine();
+      }
     };
 
-    $scope.clearProcessComponentForm = function() {
-      $location.search({});
-      $scope.component = {};
-      $scope.componentSelected = '';
-      $scope.submitted = '';
-      $scope.selectedComponents = [];
+    $scope.clearWeight = function() {
+      if ($scope.component) {
+        $scope.component.weight = null;
+      }
+      if (forms.recordWeightForm) {
+        forms.recordWeightForm.$setPristine();
+      }
     };
 
-    $scope.recordComponents = function(recordComponentsForm) {
+    $scope.recordComponents = function() {
 
-      if (recordComponentsForm.$valid && $scope.selectedComponents.length > 0) {
-
-        $scope.recordComponent = {};
-        $scope.recordComponent.parentComponentId = $scope.selectedComponents[0];
-        $scope.recordComponent.componentTypeCombination = $scope.component.componentTypeCombination;
-
-        $scope.recordingComponents = true;
-        ComponentService.recordComponents($scope.recordComponent, function(recordResponse) {
-          if (recordResponse !== false) {
-            data = recordResponse.components;
-            $scope.data = data;
-            $scope.recordComponent = {};
-            recordComponentsForm.$setPristine();
-            $scope.submitted = '';
-            $scope.componentSelected = '';
-            $scope.component = {};
-            $scope.selectedComponents = [];
-            $scope.selectedComponentType = {};
-            $scope.recordingComponents = false;
-          } else {
-            // TODO: handle case where response == false
-            $scope.recordingComponents = false;
-          }
-        });
-      } else {
-        $scope.submitted = true;
-        $scope.componentSelected = $scope.selectedComponents.length > 0;
+      if (forms.recordComponentsForm.$invalid) {
+        return;
       }
 
+      var componentToRecord = {
+        parentComponentId: $scope.component.id,
+        componentTypeCombination: $scope.component.componentTypeCombination
+      };
+
+      $scope.recordingComponents = true;
+      ComponentService.recordComponents(componentToRecord, function(recordResponse) {
+        if (recordResponse !== false) {
+          $scope.gridOptions.data = recordResponse.components;
+          forms.recordComponentsForm.$setPristine();
+          $scope.component = null;
+          $scope.recordingComponents = false;
+        } else {
+          // TODO: handle case where response == false
+          $scope.recordingComponents = false;
+        }
+      });
+
     };
 
-    $scope.getComponentsByDIN = function(findComponentsForm) {
-      if (findComponentsForm && !findComponentsForm.$valid) {
+    function showConfirmation(confirmationFields) {
+      var modalInstance = $uibModal.open({
+        animation: false,
+        templateUrl: 'views/confirmModal.html',
+        controller: 'ConfirmModalCtrl',
+        resolve: {
+          confirmObject: function() {
+            return confirmationFields;
+          }
+        }
+      });
+      return modalInstance.result;
+    }
+
+    function showComponentWeightConfirmation(component) {
+
+      // Show confirmation if it is above max weight
+      if (component.packType.maxWeight != null && component.weight > component.packType.maxWeight) {
+        return showConfirmation({
+          title: 'Overweight Pack',
+          button: 'Continue',
+          message: 'The pack weight (' + component.weight + 'g) is above the maximum acceptable range (' + component.packType.maxWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
+        });
+      }
+
+      // Show confirmation if it is below min weight
+      if (component.packType.minWeight != null && component.weight < component.packType.minWeight) {
+        return showConfirmation({
+          title: 'Underweight Pack',
+          button: 'Continue',
+          message: 'The pack weight (' + component.weight + 'g) is below the minimum acceptable range (' + component.packType.minWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
+        });
+      }
+
+      // Show confirmation if it is below low volume weight
+      if (component.packType.lowVolumeWeight != null && component.weight <= component.packType.lowVolumeWeight) {
+        return showConfirmation({
+          title: 'Low Pack Weight',
+          button: 'Continue',
+          message: 'The pack weight (' + component.weight + 'g) is low (below ' + component.packType.lowVolumeWeight + 'g). It is recommended that all components from this donation are discarded, with the exception of Packed Red Cells. Do you want to continue?'
+        });
+      }
+
+      // Weight is within valid range
+
+      // Show confirmation if previous weight was not within valid range
+      if (component.packType.maxWeight != null && component.packType.minWeight != null) {
+        var previousComponent = $scope.gridApi.selection.getSelectedRows()[0];
+        if (previousComponent.weight > component.packType.maxWeight || previousComponent.weight < component.packType.minWeight) {
+          return showConfirmation({
+            title: 'Pack Weight Update',
+            button: 'Continue',
+            message: 'The pack weight has changed from an underweight or overweight value to one within the acceptable range. Components from this donation will no longer be flagged as unsafe as a result of the pack weight. Do you want to continue?'
+          });
+        }
+      }
+
+      // Continue with recording weight
+      return $q.resolve();
+    }
+
+    $scope.recordWeightForSelectedComponent = function() {
+
+      if (forms.recordWeightForm.$invalid) {
+        return;
+      }
+
+      $scope.recordingWeight = true;
+
+      showComponentWeightConfirmation($scope.component).then(function() {
+
+        ComponentService.update({}, $scope.component, function(res) {
+          $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
+            // Replace the component in the grid with the updated component
+            if (component.id === res.component.id) {
+              return res.component;
+            } else {
+              return component;
+            }
+          });
+
+          // Make sure that the row remains selected
+          $timeout(function() {
+            $scope.gridApi.selection.selectRow(res.component);
+            $scope.recordingWeight = false;
+          });
+        }, function(err) {
+          $log.error(err);
+          $scope.recordingWeight = false;
+        });
+      }).catch(function() {
+        // Confirmation was rejected
+        $scope.recordingWeight = false;
+      });
+    };
+
+    $scope.getComponentsByDIN = function() {
+      if (forms.findComponentsForm && forms.findComponentsForm.$invalid) {
         return;
       }
       $scope.componentsSearch.search = true;
@@ -72,56 +170,81 @@ angular.module('bsis')
       $scope.searching = true;
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(componentsResponse) {
         if (componentsResponse !== false) {
-          data = componentsResponse.components;
-          $scope.data = data;
-          $scope.searchResults = $scope.data.length !== 0;
+          $scope.gridOptions.data = componentsResponse.components;
+          $scope.component = null;
           $scope.searching = false;
         } else {
-          $scope.searchResults = false;
           $scope.searching = false;
         }
       });
     };
 
-    $scope.componentsTableParams = new ngTableParams({
-      page: 1,            // show first page
-      count: 6,          // count per page
-      filter: {},
-      sorting: {}
-    },
+    var columnDefs = [
       {
-        defaultSort: 'asc',
-        counts: [], // hide page counts control
-        total: data.length, // length of data
-        getData: function($defer, params) {
-          var filteredData = params.filter() ?
-            $filter('filter')(data, params.filter()) : data;
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(filteredData, params.orderBy()) : data;
-          params.total(orderedData.length); // set total for pagination
-          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
-      });
-
-    $scope.$watch('data', function() {
-      $timeout(function() {
-        $scope.componentsTableParams.reload();
-      });
-    });
-
-    // toggle selection util method to toggle checkboxes
-    // - this is for mutual selection (radio button behaviour, rather than multiple checkbox selection)
-    $scope.toggleMutualSelection = function toggleSelection(componentId, componentType) {
-      var idx = $scope.selectedComponents.indexOf(componentId);
-      // is currently selected
-      if (idx > -1) {
-        $scope.selectedComponents.splice(idx, 1);
-      } else {
-        // set selectedComponents to an empty array
-        $scope.selectedComponents = [];
-        $scope.selectedComponents.push(componentId);
+        name: 'Component Code',
+        field: 'componentCode',
+        width: '**',
+        maxWidth: '250'
+      },
+      {
+        name: 'Component Type',
+        field: 'componentType.componentTypeName',
+        width: '**',
+        maxWidth: '350'
+      },
+      {
+        name: 'Status',
+        field: 'status',
+        width: '**',
+        maxWidth: '200'
+      },
+      {
+        name: 'Created On',
+        field: 'createdOn',
+        cellFilter: 'bsisDate',
+        width: '**',
+        maxWidth: '200'
+      },
+      {
+        name: 'Expiry Status',
+        field: 'expiryStatus',
+        width: '**'
+      },
+      {
+        name: 'Weight',
+        field: 'weight',
+        width: '120'
       }
-      $scope.selectedComponentType = componentType;
+    ];
+
+    $scope.gridOptions = {
+      data: null,
+      columnDefs: columnDefs,
+      multiSelect: false,
+      enableRowSelection: true,
+      paginationTemplate: 'views/template/pagination.html',
+      paginationPageSize: 5,
+      minRowsToShow: 5,
+
+      onRegisterApi: function(gridApi) {
+        $scope.gridApi = gridApi;
+        gridApi.selection.on.rowSelectionChanged($scope, function() {
+          var selectedRows = gridApi.selection.getSelectedRows();
+          // Clear the component if no row is selected
+          if (selectedRows.length === 0) {
+            $scope.component = null;
+          } else {
+            $scope.component = angular.copy(selectedRows[0]);
+          }
+        });
+      }
     };
 
+    function init() {
+      if ($routeParams.search) {
+        $scope.getComponentsByDIN();
+      }
+    }
+
+    init();
   });
