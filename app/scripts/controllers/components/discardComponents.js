@@ -12,9 +12,11 @@ angular.module('bsis')
     $scope.discard = {};
 
     function clearSelectedAction() {
-      $scope.gridApi.selection.clearSelectedRows();
-      $scope.selectedAction = null;
-      $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+      if ($scope.gridApi) {
+        $scope.gridApi.selection.clearSelectedRows();
+        $scope.selectedAction = null;
+        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+      }
     }
 
     $scope.clearFindComponentsForm = function() {
@@ -117,6 +119,7 @@ angular.module('bsis')
       if (forms.findComponentsForm && forms.findComponentsForm.$invalid) {
         return;
       }
+      clearSelectedAction();
       $scope.componentsSearch.search = true;
       $location.search($scope.componentsSearch);
       $scope.searching = true;
