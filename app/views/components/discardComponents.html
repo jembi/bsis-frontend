@@ -55,10 +55,12 @@
             <select name="discardReason" class="form-control input-sm" ng-model="discard.discardReason" ng-options="item as item.reason for item in discardReasons"  required >
                 <option value="" ng-disabled="true">Select:</option>
             </select>
-            <input size="35" class="form-control input-sm" placeholder="Comments" ng-model="discard.discardReasonText">
-            <ng-messages for="forms.discardComponentsForm.discardReason.$error" ng-show="forms.discardComponentsForm.$submitted">
+            <input size="35" class="form-control input-sm" placeholder="Comments" ng-model="discard.discardReasonText">  
+            <div class="col-sm-offset-2">
+              <ng-messages for="forms.discardComponentsForm.discardReason.$error" ng-show="forms.discardComponentsForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
-            </ng-messages>
+              </ng-messages>
+            </div>
           </div>
         </div>
         <div class="form-group">
