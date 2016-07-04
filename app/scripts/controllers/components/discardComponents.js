@@ -82,36 +82,38 @@ angular.module('bsis')
         name: 'Component Code',
         field: 'componentCode',
         width: '**',
-        maxWidth: '250'
+        maxWidth: '150'
       },
       {
         name: 'Component Type',
         field: 'componentType.componentTypeName',
         width: '**',
-        maxWidth: '350'
+        minWidth: '250'
       },
       {
         name: 'Status',
         field: 'status',
         width: '**',
-        maxWidth: '200'
+        maxWidth: '150'
       },
       {
         name: 'Created On',
         field: 'createdOn',
         cellFilter: 'bsisDate',
         width: '**',
-        maxWidth: '200'
+        maxWidth: '150'
       },
       {
         name: 'Expiry Status',
         field: 'expiryStatus',
-        width: '**'
+        width: '**',
+        maxWidth: '250'
       },
       {
         name: 'Weight',
         field: 'weight',
-        width: '120'
+        width: '**',
+        maxWidth: '120'
       }
     ];
 
