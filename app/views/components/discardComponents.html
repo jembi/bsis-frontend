@@ -1,126 +1,75 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/components/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-<h3 class="page-header">Discard Components</h3>
+  <h3 class="page-header">Discard Components</h3>
 
-<form class="form-horizontal col-sm-12" role="form" ng-submit="getComponentsByDIN()">
+  <form class="form-horizontal col-sm-12" name="forms.findComponentsForm" role="form" novalidate ng-submit="getComponentsByDIN();">
     <div class="form-group">
-        <label for="name" class="col-sm-1 control-label">DIN</label>
-        <div class="row col-sm-11">
-            <div class="form-inline" style="padding-left:5px;">
-                <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
-                       class="form-control input-sm" placeholder=""
-                       ng-model="componentsSearch.donationIdentificationNumber">
-            </div>
+      <label for="name" class="col-sm-1 control-label">DIN</label>
+      <div class="row col-sm-11">
+        <div class="form-inline" style="padding-left:5px;">
+          <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" ng-model="componentsSearch.donationIdentificationNumber" required />
         </div>
+      </div>
+    </div>
+    <div class="col-sm-offset-1">
+      <small class="error" ng-show="(forms.findComponentsForm.$submitted && forms.findComponentsForm.$invalid)">
+        DIN cannot be empty
+      </small>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-3">
-            <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
-                "Search"}}
-            </button>
-            <button class="btn btn-primary" type="button" ng-click="clearDiscardComponentForm(); clear()">Clear</button>
-        </div>
+      <div class="col-sm-offset-1 col-sm-3">
+        <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}} </button>
+        <button class="btn btn-primary" type="button" ng-click="clearFindComponentsForm();">Clear</button>
+      </div>
     </div>
-</form>
+  </form>
 
-<div ng-switch="searchResults" class="col-sm-12">
-    <div style="padding-bottom: 10px"></div>
+  <div class="panel panel-default" style="clear:left;margin-top:10px;" ng-if="gridOptions.data">
+    <div class="panel-body">
 
-    <div ng-switch-when="true">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div ng-if="componentSelected === false" ng-hide="componentSelected !== false"
-                     style="padding-top:10px;">
-                    <uib-alert type="danger">Select one or more components to discard</uib-alert>
-                </div>
+      <!-- Components grid -->
+      <div class="grid" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination style="height:{{(gridOptions.minRowsToShow*gridOptions.rowHeight)+gridOptions.headerRowHeight+gridOptions.gridFooterHeight}}px;margin-bottom:10px;"></div>
 
-                <table ng-table="componentsTableParams" show-filter="false" class="table">
-                    <tr ng-repeat="component in $data"
-                        ng-mouseenter="this.$selected = true"
-                        ng-mouseleave="this.$selected = false"
-                        ng-class="{'active': component.$selected}">
-                        <td data-title="'Component Code'" header-class="text-left" class="text-center"
-                            sortable="'componentCode'">
-                            {{component.componentCode}}
-                        </td>
-                        <td data-title="'Component Type'" header-class="text-left" sortable="'componentType'">
-                            {{component.componentType.componentTypeName}}
-                        </td>
-                        <td data-title="'Status'" header-class="text-left" sortable="'status'">
-                            {{component.status}}
-                        </td>
-                        <td data-title="'Created On'" header-class="text-left" class="text-center"
-                            sortable="'createdOn'">
-                            {{component.createdOn | bsisDateTime}}
-                        </td>
-                        <td data-title="'Expiry Status'" header-class="text-left" class="text-center"
-                            sortable="'expiryStatus'">
-                            {{ component | expiryStatus }}
-                        </td>
-                        <td data-title="" header-class="text-left" class="text-left">
-                  <span
-                          style="font-size: 0.9em;"
-                          ng-if="component.status != 'DISCARDED' && component.status != 'ISSUED' && component.status != 'USED' && component.status != 'SPLIT' && component.status != 'PROCESSED'"
-                  >
-                    <input type="checkbox" id="{{component.id}}" value="{{component.id}}"
-                           ng-checked="selectedComponents.indexOf(component.id) > -1"
-                           ng-click="toggleSelection(component.id)">
-                    <em><label style="margin:0px; cursor: pointer; cursor: hand;" for="{{component.id}}">
-                        Discard </label></em>
-                  </span>
-                        </td>
-                    </tr>
-                </table>
-                <form name="discardComponentsForm" novalidate class="form-horizontal col-sm-12" role="form"
-                      ng-submit="discardComponents(discardComponentsForm)">
-                    <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">Discard Reason</label>
-                        <div class="row col-sm-10">
-                            <div class="form-inline" style="padding-left:5px;">
-                                <select name="discardReason" class="form-control input-sm"
-                                        ng-model="discard.discardReason"
-                                        ng-options="item.id as item.reason for item in discardReasons"
-                                        required
-                                        ng-class="{'ng-invalid ng-dirty' : discardComponentsForm.discardReason.$invalid && submitted}">
-                                    <option value="" ng-disabled="true">Select:</option>
-                                </select>
-                                <input size="35" class="form-control input-sm" placeholder="Comments"
-                                       ng-model="discard.discardReasonText">
-                                <div>
-                                    <small class="error"
-                                           ng-show="
-                      (discardComponentsForm.discardReason.$invalid && (discardComponentsForm.discardReason.$dirty || submitted))
-                    ">
-                                        This cannot be empty
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-3">
-                            <button class="btn btn-primary" type="submit" ng-disabled="discardingComponent">
-                                {{discardingComponent ? "Discarding..." : "Discard Components"}}
-                            </button>
-                            <button class="btn btn-primary" type="button"
-                                    ng-click="clearForm(discardComponentsForm); clearDiscardComponentForm()">Clear
-                            </button>
-                        </div>
-                    </div>
-                </form>
+      <div ng-if="selectedAction === null" style="clear:left;">
+        <strong>
+          <em>Select components to discard or undiscard</em>
+        </strong>
+      </div>
 
-            </div>
+      <div ng-if="selectedAction === 'NONE'" style="clear:left;">
+        <strong>
+          <em>Selected component cannot be discarded or undiscarded</em>
+        </strong>
+      </div>
+      <div ng-if="selectedAction === 'UNDISCARD'" style="clear:left;">
+        <strong>
+          <em>Undiscard is not implemented yet</em>
+        </strong>
+      </div>
+
+      <!-- Discard component form -->
+      <form role="form" name="forms.discardComponentsForm" class="form-horizontal col-sm-12" ng-if="selectedAction === 'DISCARD'" ng-submit="discardComponents()" novalidate>
+        <div class="form-group">
+          <label for="discardReason" class="col-sm-2 control-label">Discard Reason</label>
+          <div class="form-inline" style="padding-left:5px;">
+            <select name="discardReason" class="form-control input-sm" ng-model="discard.discardReason" ng-options="item.id as item.reason for item in discardReasons"  required >
+                <option value="" ng-disabled="true">Select:</option>
+            </select>
+            <input size="35" class="form-control input-sm" placeholder="Comments" ng-model="discard.discardReasonText">
+            <ng-messages for="forms.discardComponentsForm.discardReason.$error" ng-show="forms.discardComponentsForm.$submitted">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
+          </div>
         </div>
-    </div>
-    <div ng-switch-when="false">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <p>
-                    <em> Not found. Please re-enter DIN. </em>
-                </p>
-            </div>
+        <div class="form-group">
+          <div class="col-sm-3 col-sm-offset-2">
+            <button type="submit" class="btn btn-primary" ng-disabled="discardingComponent">{{discardingComponent ? "Discarding..." : "Discard"}}</button>
+            <button type="reset" class="btn btn-primary" ng-disabled="discardingComponent">Clear</button>
+          </div>
         </div>
+      </form>
     </div>
+  </div>
 
 </div>
 </div>
