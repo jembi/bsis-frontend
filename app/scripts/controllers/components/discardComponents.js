@@ -1,5 +1,5 @@
 angular.module('bsis')
-  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout, $routeParams, uiGridConstants, $log) {
+  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout, $routeParams, uiGridConstants, $log, $uibModal) {
 
     var selectedComponents = [];
     var forms = $scope.forms = {};
@@ -21,43 +21,84 @@ angular.module('bsis')
       $scope.discard = {};
     };
 
+    function showConfirmation(confirmationFields) {
+      var modalInstance = $uibModal.open({
+        animation: false,
+        templateUrl: 'views/confirmModal.html',
+        controller: 'ConfirmModalCtrl',
+        resolve: {
+          confirmObject: function() {
+            return confirmationFields;
+          }
+        }
+      });
+      return modalInstance.result;
+    }
+
     $scope.discardComponents = function() {
 
       if (forms.discardComponentsForm.$invalid) {
         return;
       }
 
-      // Create a list of component ids to discard
-      $scope.discard.componentIds = [];
-      angular.forEach(selectedComponents, function(component) {
-        $scope.discard.componentIds.push(component.id);
-      });
-      $scope.discardingComponent = true;
+      var discardConfirmation = {
+        title: 'Discard Components',
+        button: 'Continue',
+        message: 'Are you sure you want to discard these components?'
+      };
 
-      // Discard components
-      ComponentService.bulkDiscard({}, $scope.discard, function() {
-        $scope.gridApi.selection.clearSelectedRows();
-        $scope.discardingComponent = false;
-        $scope.discard = {};
-        $scope.gridOptions.data = $scope.getComponentsByDIN();
-      }, function(err) {
-        $log.error(err);
+      showConfirmation(discardConfirmation).then(function() {
+
+        // Create a list of component ids to discard
+        $scope.discard.componentIds = [];
+        angular.forEach(selectedComponents, function(component) {
+          $scope.discard.componentIds.push(component.id);
+        });
+        $scope.discardingComponent = true;
+
+        // Discard components
+        ComponentService.bulkDiscard({}, $scope.discard, function() {
+          $scope.gridApi.selection.clearSelectedRows();
+          $scope.discardingComponent = false;
+          $scope.discard = {};
+          $scope.gridOptions.data = $scope.getComponentsByDIN();
+        }, function(err) {
+          $log.error(err);
+          $scope.discardingComponent = false;
+        });
+
+      }).catch(function() {
+        // Confirmation was rejected
         $scope.discardingComponent = false;
       });
     };
 
     $scope.undiscardComponents = function() {
 
-      // Create a list of component ids to undiscard
-      var componentIds = [];
-      angular.forEach(selectedComponents, function(component) {
-        componentIds.push(component.id);
-      });
-      $scope.undiscarding = true;
+      var undiscardConfirmation = {
+        title: 'Undiscard Components',
+        button: 'Continue',
+        message: 'Are you sure you want to undiscard these components?'
+      };
 
-      // Undiscard components
-      $log.info('Not implemented yet');
-      $scope.undiscarding = false;
+      showConfirmation(undiscardConfirmation).then(function() {
+
+        // Create a list of component ids to undiscard
+        var componentIds = [];
+        angular.forEach(selectedComponents, function(component) {
+          componentIds.push(component.id);
+        });
+        $scope.undiscarding = true;
+
+        // Undiscard components
+        $log.info('Not implemented yet');
+        $scope.gridApi.selection.clearSelectedRows();
+        $scope.undiscarding = false;
+
+      }).catch(function() {
+        // Confirmation was rejected
+        $scope.undiscarding = false;
+      });
     };
 
     $scope.getComponentsByDIN = function() {
