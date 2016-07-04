@@ -1,5 +1,5 @@
 angular.module('bsis')
-  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout, $routeParams, uiGridConstants) {
+  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout, $routeParams, uiGridConstants, $log) {
 
     var selectedComponents = [];
     var forms = $scope.forms = {};
@@ -26,21 +26,22 @@ angular.module('bsis')
         return;
       }
 
-      // TODO: use bulk discard endpoint here
+      // Create a list of component ids to discard
+      $scope.discard.componentIds = [];
       angular.forEach(selectedComponents, function(component) {
-        $scope.discard.componentId = component.id;
-        $scope.discardingComponent = true;
-        ComponentService.discardComponent($scope.discard, function(discardResponse) {
-          if (discardResponse !== false) {
-            $scope.gridOptions.data = discardResponse.components;
-            $scope.gridApi.selection.clearSelectedRows();
-            $scope.discardingComponent = false;
-            $scope.discard = {};
-          } else {
-            // TODO: handle case where response == false
-            $scope.discardingComponent = false;
-          }
-        });
+        $scope.discard.componentIds.push(component.id);
+      });
+      $scope.discardingComponent = true;
+
+      // Discard components
+      ComponentService.bulkDiscard({}, $scope.discard, function() {
+        $scope.gridApi.selection.clearSelectedRows();
+        $scope.discardingComponent = false;
+        $scope.discard = {};
+        $scope.gridOptions.data = $scope.getComponentsByDIN();
+      }, function(err) {
+        $log.error(err);
+        $scope.discardingComponent = false;
       });
     };
 
