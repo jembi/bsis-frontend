@@ -6,9 +6,9 @@
 
   <section class="clearfix" ng-hide="editingOrderDetails">
     <span class="text-muted">Order Date:</span> {{orderForm.orderDate | bsisDate}}
+    <span class="text-muted">Order Type:</span> {{orderForm.type}}
     <span class="text-muted">Dispatched From:</span> {{orderForm.dispatchedFrom.name}}
     <span class="text-muted">Dispatched To:</span> {{orderForm.dispatchedTo.name}}
-    <span class="text-muted">Order Type:</span> {{orderForm.type}}
     <button class="btn btn-primary pull-right" style="margin-top:0;" ng-click="editOrderDetails()">Edit</button>
   </section>
 
@@ -22,27 +22,6 @@
           <button class="btn btn-default" ng-click="selectDate($event)"><i class="fa fa-calendar"></i></button>
         </span>
       </div>
-      <ng-messages for="forms.orderDetailsForm.orderDate.$error" role="alert" ng-show="forms.orderDetailsForm.$submitted">
-        <ng-messages-include src="messages.html"></ng-messages-include>
-      </ng-messages>
-    </div>
-
-    <div class="form-group">
-      <span class="text-muted" for="dispatchedFrom">Dispatched From:</span>
-      <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="orderDetailsForm.dispatchedFrom" ng-options="item as item.name for item in dispatchFromSites track by item.id" required>
-        <option value="" disabled selected>Select:</option>
-      </select>
-      <ng-messages for="forms.orderDetailsForm.dispatchedFrom.$error" role="alert" ng-show="forms.orderDetailsForm.$submitted">
-        <ng-messages-include src="messages.html"></ng-messages-include>
-      </ng-messages>
-    </div>
-
-    <div class="form-group">
-      <span class="text-muted" for="dispatchedTo">Dispatched To:</span>
-      <select class="form-control" style="width:auto;" name="dispatchedTo" ng-model="orderDetailsForm.dispatchedTo" ng-options="item as item.name for item in dispatchToSites track by item.id" ng-disabled="!orderDetailsForm.type" required></select>
-      <ng-messages for="forms.orderDetailsForm.dispatchedTo.$error" role="alert" ng-show="forms.orderDetailsForm.$submitted">
-        <ng-messages-include src="messages.html"></ng-messages-include>
-      </ng-messages>
     </div>
 
     <div class="form-group">
@@ -56,6 +35,16 @@
       <small class="error" style="display:block;" ng-show="forms.orderDetailsForm.$submitted && !orderDetailsForm.type">
         Please select a dispatch type
       </small>
+    </div>
+
+    <div class="form-group" style="margin-left:5px;">
+      <span class="text-muted" for="dispatchedFrom">Dispatched From:</span>
+      <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="orderDetailsForm.dispatchedFrom" ng-options="item as item.name for item in dispatchFromSites track by item.id" required></select>
+    </div>
+
+    <div class="form-group">
+      <span class="text-muted" for="dispatchedTo">Dispatched To:</span>
+      <select class="form-control" style="width:auto;" name="dispatchedTo" ng-model="orderDetailsForm.dispatchedTo" ng-options="item as item.name for item in dispatchToSites track by item.id" ng-disabled="!orderDetailsForm.type" required></select>
     </div>
 
     <button class="btn btn-primary" style="margin-top:0;" type="submit" ng-disabled="savingOrderDetails">{{savingOrderDetails ? 'Saving...' : 'Save'}}</button>
