@@ -57,7 +57,7 @@ angular.module('bsis')
         $scope.discardingComponent = true;
 
         // Discard components
-        ComponentService.bulkDiscard({}, $scope.discard, function() {
+        ComponentService.discard({}, $scope.discard, function() {
           $scope.gridApi.selection.clearSelectedRows();
           $scope.discardingComponent = false;
           $scope.discard = {};

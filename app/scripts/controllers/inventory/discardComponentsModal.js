@@ -5,12 +5,12 @@ angular.module('bsis').controller('DiscardComponentsModalCtrl', function($scope,
   $scope.discard = {};
   $scope.discardReasons = [];
   $scope.discardingComponent = false;
-  var bulkDiscardForm = {};
+  var discardForm = {};
 
   function init() {
     ComponentService.getDiscardForm(function(response) {
       $scope.discardReasons = response.discardReasons;
-      bulkDiscardForm = response.discardComponentsForm;
+      discardForm = response.discardComponentsForm;
     }, $log.error);
   }
 
@@ -27,12 +27,12 @@ angular.module('bsis').controller('DiscardComponentsModalCtrl', function($scope,
     }
     $scope.discardingComponent = true;
 
-    // Populate bulkDiscardForm
-    bulkDiscardForm.componentIds = componentIds;
-    bulkDiscardForm.discardReason = $scope.discard.discardReason;
-    bulkDiscardForm.discardReasonText = $scope.discard.discardReasonText;
+    // Populate discardForm
+    discardForm.componentIds = componentIds;
+    discardForm.discardReason = $scope.discard.discardReason;
+    discardForm.discardReasonText = $scope.discard.discardReasonText;
 
-    ComponentService.bulkDiscard({}, bulkDiscardForm, function() {
+    ComponentService.discard({}, discardForm, function() {
       $scope.discardingComponent = false;
       $uibModalInstance.close();
     }, function(err) {

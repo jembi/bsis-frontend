@@ -206,7 +206,7 @@ angular.module('bsis')
           method: 'GET',
           url: url + '/components/discard/form'
         },
-        bulkDiscard: {
+        discard: {
           method: 'PUT',
           url: url + '/components/discard'
         },
