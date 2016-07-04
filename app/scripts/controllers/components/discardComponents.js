@@ -8,6 +8,7 @@ angular.module('bsis')
       donationIdentificationNumber: $routeParams.donationIdentificationNumber || ''
     };
     $scope.discardingComponent = false;
+    $scope.undiscarding = false;
     $scope.discard = {};
 
     $scope.clearFindComponentsForm = function() {
@@ -43,6 +44,20 @@ angular.module('bsis')
         $log.error(err);
         $scope.discardingComponent = false;
       });
+    };
+
+    $scope.undiscardComponents = function() {
+
+      // Create a list of component ids to undiscard
+      var componentIds = [];
+      angular.forEach(selectedComponents, function(component) {
+        componentIds.push(component.id);
+      });
+      $scope.undiscarding = true;
+
+      // Undiscard components
+      $log.info('Not implemented yet');
+      $scope.undiscarding = false;
     };
 
     $scope.getComponentsByDIN = function() {

@@ -42,9 +42,9 @@
         </strong>
       </div>
       <div ng-if="selectedAction === 'UNDISCARD'" style="clear:left;">
-        <strong>
-          <em>Undiscard is not implemented yet</em>
-        </strong>
+        <button class="btn btn-primary" ng-click="undiscardComponents();" >
+            {{undiscarding ? "Undiscarding..." : "Undiscard components"}}
+          </button>
       </div>
 
       <!-- Discard component form -->
