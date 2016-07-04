@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, ComponentService, BLOODGROUP) {
+angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, ComponentService, BLOODGROUP, DATEFORMAT) {
 
   var orderItemMaster = {
     componentType: null,
@@ -12,6 +12,27 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     din: null,
     componentCode: null
   };
+
+  var distributionSites = [];
+  var usageSites = [];
+
+  // Set the "dispatch to" sites based on dispatch type
+  function updateDispatchToSites() {
+    if ($scope.orderDetailsForm == null) {
+      // Order form is not loaded yet
+      return;
+    }
+    if ($scope.orderDetailsForm.type === 'TRANSFER') {
+      $scope.dispatchToSites = distributionSites.filter(function(site) {
+        // Filter the selected distribution site from the options
+        return site.id !== $scope.orderDetailsForm.dispatchedFrom;
+      });
+    } else if ($scope.orderDetailsForm.type === 'ISSUE') {
+      $scope.dispatchToSites = usageSites;
+    } else {
+      $scope.dispatchToSites = [];
+    }
+  }
 
   function convertItem(item) {
     return {
@@ -63,7 +84,80 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     OrderFormsService.getOrderFormItemForm(function(res) {
       $scope.componentTypes = res.componentTypes;
     }, $log.error);
+
+    // Get form elements
+    OrderFormsService.getOrderFormsForm(function(res) {
+      $scope.dispatchFromSites = distributionSites = res.distributionSites;
+      usageSites = res.usageSites;
+      updateDispatchToSites();
+    }, $log.error);
   }
+
+  $scope.format = DATEFORMAT;
+
+  $scope.forms = {
+    orderDetailsForm: null
+  };
+
+  // The available sites to be dispatched from
+  $scope.dispatchFromSites = [];
+  // The available sites to be dispatched to
+  $scope.dispatchToSites = [];
+  // Copy of the order form used for updating the details
+  $scope.orderDetailsForm = null;
+  // State variables
+  $scope.editingOrderDetails = false;
+  $scope.selectingDate = false;
+  $scope.savingOrderDetails = false;
+
+  $scope.$watch('orderDetailsForm.type', function() {
+    // Update to set available options based on type
+    updateDispatchToSites();
+  });
+  $scope.$watch('orderDetailsForm.dispatchedFrom', function() {
+    // Update to ensure that the correct site is filtered
+    updateDispatchToSites();
+  });
+
+  // Start editing the order details
+  $scope.editOrderDetails = function() {
+    $scope.orderDetailsForm = angular.copy($scope.orderForm);
+    $scope.orderDetailsForm.orderDate = moment($scope.orderDetailsForm.orderDate).toDate();
+    $scope.editingOrderDetails = true;
+  };
+
+  // Select a new order date in the popup
+  $scope.selectDate = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    $scope.selectingDate = true;
+  };
+
+  // Save the updated order details
+  $scope.saveOrderDetails = function() {
+    if ($scope.forms.orderDetailsForm.$invalid) {
+      return;
+    }
+
+    $scope.savingOrderDetails = true;
+    OrderFormsService.updateOrderForm({}, $scope.orderDetailsForm, function(res) {
+      $scope.orderForm = res.orderForm;
+      populateGrid($scope.orderForm);
+      $scope.savingOrderDetails = false;
+      $scope.editingOrderDetails = false;
+    }, function(err) {
+      $log.error(err);
+      $scope.savingOrderDetails = false;
+    });
+  };
+
+  // Clear the order details form
+  $scope.clearDetailsForm = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    $scope.orderDetailsForm = null;
+    $scope.editingOrderDetails = false;
+  };
 
   $scope.addOrderItem = function(form) {
     if (form.$valid) {
