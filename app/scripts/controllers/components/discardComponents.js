@@ -98,16 +98,22 @@ angular.module('bsis')
       showConfirmation(undiscardConfirmation).then(function() {
 
         // Create a list of component ids to undiscard
-        var componentIds = [];
+        var undiscard = {};
+        undiscard.componentIds = [];
         angular.forEach(selectedComponents, function(component) {
-          componentIds.push(component.id);
+          undiscard.componentIds.push(component.id);
         });
         $scope.undiscarding = true;
 
         // Undiscard components
-        $log.info('Not implemented yet');
-        clearSelectedAction();
-        $scope.undiscarding = false;
+        ComponentService.undiscard({}, undiscard, function() {
+          clearSelectedAction();
+          $scope.undiscarding = false;
+          $scope.gridOptions.data = $scope.getComponentsByDIN();
+        }, function(err) {
+          $log.error(err);
+          $scope.undiscarding = false;
+        });
 
       }).catch(function() {
         // Confirmation was rejected
@@ -223,6 +229,7 @@ angular.module('bsis')
               $scope.selectedAction = 'NONE';
             }
           }
+
           // Notify the row selection so that isRowSelectable is called
           $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
         });

@@ -216,6 +216,10 @@ angular.module('bsis')
         unprocess: {
           method: 'PUT',
           url: url + '/components/:id/unprocess'
+        },
+        undiscard: {
+          method: 'PUT',
+          url: url + '/components/undiscard'
         }
       }),
 
