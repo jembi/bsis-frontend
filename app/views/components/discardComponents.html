@@ -66,7 +66,7 @@
         <div class="form-group">
           <div class="col-sm-3 col-sm-offset-2">
             <button type="submit" class="btn btn-primary" ng-disabled="discardingComponent">{{discardingComponent ? "Discarding..." : "Discard"}}</button>
-            <button type="reset" class="btn btn-primary" ng-disabled="discardingComponent">Clear</button>
+            <button type="reset" class="btn btn-primary" ng-disabled="discardingComponent" ng-click="clearDiscardComponentsForm();">Clear</button>
           </div>
         </div>
       </form>

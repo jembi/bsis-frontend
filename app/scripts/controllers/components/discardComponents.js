@@ -11,13 +11,25 @@ angular.module('bsis')
     $scope.undiscarding = false;
     $scope.discard = {};
 
+    function clearSelectedAction() {
+      $scope.gridApi.selection.clearSelectedRows();
+      $scope.selectedAction = null;
+      $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+    }
+
     $scope.clearFindComponentsForm = function() {
       $scope.componentsSearch.donationIdentificationNumber = '';
       selectedComponents = [];
+      clearSelectedAction();
       $scope.gridOptions.data = null;
-      $scope.selectedAction = null;
       $location.search({});
       forms.findComponentsForm.$setPristine();
+      $scope.discard = {};
+    };
+
+    $scope.clearDiscardComponentsForm = function() {
+      $location.search({});
+      forms.discardComponentsForm.$setPristine();
       $scope.discard = {};
     };
 
@@ -58,7 +70,7 @@ angular.module('bsis')
 
         // Discard components
         ComponentService.discard({}, $scope.discard, function() {
-          $scope.gridApi.selection.clearSelectedRows();
+          clearSelectedAction();
           $scope.discardingComponent = false;
           $scope.discard = {};
           $scope.gridOptions.data = $scope.getComponentsByDIN();
@@ -92,7 +104,7 @@ angular.module('bsis')
 
         // Undiscard components
         $log.info('Not implemented yet');
-        $scope.gridApi.selection.clearSelectedRows();
+        clearSelectedAction();
         $scope.undiscarding = false;
 
       }).catch(function() {
