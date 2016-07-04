@@ -147,6 +147,9 @@ angular.module('bsis')
             }
           });
 
+          // Clear validation on the record components form
+          forms.recordComponentsForm.$setPristine();
+
           // Make sure that the row remains selected
           $timeout(function() {
             $scope.gridApi.selection.selectRow(res.component);
