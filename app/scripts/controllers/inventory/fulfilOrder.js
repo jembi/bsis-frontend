@@ -187,6 +187,32 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     });
   }
 
+  $scope.removeComponent = function(form, event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (form.$invalid) {
+      // Bail if form is invalid
+      return;
+    }
+
+    // Filter matching component
+    var components = $scope.components.filter(function(component) {
+      return component.donationIdentificationNumber !== $scope.component.din
+        || component.componentType.componentTypeCode !== $scope.component.componentCode;
+    });
+
+    if (components.length === $scope.components.length) {
+      showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
+              ') was not found in this Order Form.');
+    } else {
+      $scope.components = components;
+      $scope.component = angular.copy(componentMaster);
+      populateGrid($scope.components, $scope.orderItems);
+      form.$setPristine();
+    }
+  };
+
   $scope.addComponent = function(form) {
     if (form.$valid) {
       $scope.addingComponent = true;
@@ -248,11 +274,9 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
   $scope.updateOrder = function() {
     $scope.savingForm = true;
-    var updatedOrderForm = angular.merge({}, $scope.orderForm, {
-      components: $scope.components,
-      items: $scope.orderItems
-    });
-    OrderFormsService.updateOrderForm({}, updatedOrderForm, function(res) {
+    $scope.orderForm.components = $scope.components;
+    $scope.orderForm.items = $scope.orderItems;
+    OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
       $scope.orderForm = res.orderForm;
       $scope.components = angular.copy(res.orderForm.components);
       $scope.orderItems = angular.copy(res.orderForm.items);
