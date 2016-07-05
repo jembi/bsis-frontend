@@ -100,9 +100,13 @@
       <br />
       
       <div class="col-sm-12">
-          <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
+          <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination ui-grid-selection></div>
       </div>
-
+      <div class="col-sm-12" ng-show="areItemsToDelete">
+          <button class="btn btn-primary" type="button" style="margin-top: 0px" ng-click="deleteRow()">Delete Selected Rows</button>
+          <br />
+          <br />
+      </div>
 
       <h4>Units Supplied</h4>
       <form class="form-inline" name="addComponentForm" role="form" style="padding:0 15px;" ng-submit="addComponent(addComponentForm);" novalidate>

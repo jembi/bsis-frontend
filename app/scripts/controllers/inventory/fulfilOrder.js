@@ -15,6 +15,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
   var distributionSites = [];
   var usageSites = [];
+  var selectedItemsToDelete = null;
 
   // Set the "dispatch to" sites based on dispatch type
   function updateDispatchToSites() {
@@ -40,7 +41,9 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       bloodGroup: item.bloodGroup,
       numberOfUnits: item.numberOfUnits,
       numberSupplied: 0,
-      gap: item.numberOfUnits
+      gap: item.numberOfUnits,
+      itemId: item.id,
+      componentIds: []
     };
   }
 
@@ -55,6 +58,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
           // can't over supply and component matches
           row.numberSupplied = row.numberSupplied + 1;
           row.gap = row.gap - 1;
+          // save list of component ids for that item
+          row.componentIds.push(component.id);
         } else {
           unmatchedComponents.push(component);
         }
@@ -271,6 +276,34 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     }
   };
 
+  $scope.deleteRow = function() {
+
+    angular.forEach(selectedItemsToDelete, function(itemToDelete) {
+
+      // Delete components
+      angular.forEach(itemToDelete.componentIds, function(componentId) {
+        angular.forEach($scope.components, function(component) {
+          if (componentId === component.id) {
+            var index = $scope.components.indexOf(component);
+            $scope.components.splice(index, 1);
+          }
+        });
+      });
+
+      // Delete items
+      angular.forEach($scope.orderItems, function(item) {
+        if (itemToDelete.itemId === item.id) {
+          var index = $scope.orderItems.indexOf(item);
+          $scope.orderItems.splice(index, 1);
+        }
+      });
+    });
+
+    $scope.orderForm.items = $scope.orderItems;
+    $scope.orderForm.components = $scope.components;
+    populateGrid($scope.components, $scope.orderItems);
+  };
+
   $scope.updateOrder = function() {
     $scope.savingForm = true;
     $scope.orderForm.components = $scope.components;
@@ -331,6 +364,14 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       field: 'gap',
       width: '**',
       maxWidth: '200'
+    },
+    {
+      field: 'itemId',
+      visible: false
+    },
+    {
+      field: 'componentIds',
+      visible: false
     }
   ];
 
@@ -344,6 +385,10 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
     onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;
+      gridApi.selection.on.rowSelectionChanged($scope, function() {
+        selectedItemsToDelete = gridApi.selection.getSelectedRows();
+        $scope.areItemsToDelete = selectedItemsToDelete ? selectedItemsToDelete.length > 0 : false;
+      });
     }
   };
 
