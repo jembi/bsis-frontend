@@ -141,7 +141,7 @@
         <div class="form-group">
           <div class="col-sm-12">
             <button class="btn btn-primary" type="submit" ng-disabled="savingForm">{{savingForm ? 'Saving...' : 'Save Order'}}</button>
-            <button class="btn btn-primary" type="button" ng-disabled="!areItemsToDelete" ng-click="deleteRow()">Delete Selected Rows</button>
+            <button class="btn btn-primary" type="button" ng-disabled="!areRowsToDelete" ng-click="deleteRows()">Delete Selected Rows</button>
             <button class="btn btn-primary" type="button" ng-disabled="savingForm" ng-click="cancel();">Cancel</button>
           </div>
         </div>
