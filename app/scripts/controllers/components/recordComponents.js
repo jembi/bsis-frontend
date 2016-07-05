@@ -114,7 +114,8 @@ angular.module('bsis')
       // Show confirmation if previous weight was not within valid range
       if (component.packType.maxWeight != null && component.packType.minWeight != null) {
         var previousComponent = $scope.gridApi.selection.getSelectedRows()[0];
-        if (previousComponent.weight > component.packType.maxWeight || previousComponent.weight < component.packType.minWeight) {
+        if (previousComponent.weight != null && (previousComponent.weight > component.packType.maxWeight
+              || previousComponent.weight < component.packType.minWeight)) {
           return showConfirmation({
             title: 'Pack Weight Update',
             button: 'Continue',
@@ -146,6 +147,11 @@ angular.module('bsis')
               return component;
             }
           });
+
+          // Clear validation on the record components form
+          if (forms.recordComponentsForm) {
+            forms.recordComponentsForm.$setPristine();
+          }
 
           // Make sure that the row remains selected
           $timeout(function() {
@@ -207,36 +213,38 @@ angular.module('bsis')
         name: 'Component Code',
         field: 'componentCode',
         width: '**',
-        maxWidth: '250'
+        maxWidth: '150'
       },
       {
         name: 'Component Type',
         field: 'componentType.componentTypeName',
         width: '**',
-        maxWidth: '350'
+        minWidth: '250'
       },
       {
         name: 'Status',
         field: 'status',
         width: '**',
-        maxWidth: '200'
+        maxWidth: '150'
       },
       {
         name: 'Created On',
         field: 'createdOn',
         cellFilter: 'bsisDate',
         width: '**',
-        maxWidth: '200'
+        maxWidth: '150'
       },
       {
         name: 'Expiry Status',
         field: 'expiryStatus',
-        width: '**'
+        width: '**',
+        maxWidth: '250'
       },
       {
         name: 'Weight',
         field: 'weight',
-        width: '120'
+        width: '**',
+        maxWidth: '120'
       }
     ];
 
