@@ -107,9 +107,8 @@ angular.module('bsis')
 
         // Undiscard components
         ComponentService.undiscard({}, undiscard, function() {
-          clearSelectedAction();
           $scope.undiscarding = false;
-          $scope.gridOptions.data = $scope.getComponentsByDIN();
+          $scope.getComponentsByDIN();
         }, function(err) {
           $log.error(err);
           $scope.undiscarding = false;
