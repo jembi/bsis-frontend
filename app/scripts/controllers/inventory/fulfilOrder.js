@@ -76,7 +76,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
     // Fetch the order form by its id
     OrderFormsService.getOrderForm({id: $routeParams.id}, function(res) {
-      $scope.orderForm = res.orderForm;
+      $scope.originalOrderForm = angular.copy(res.orderForm);
+      $scope.orderForm = angular.copy(res.orderForm);
       populateGrid($scope.orderForm);
     }, $log.error);
 
@@ -121,7 +122,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
   // Start editing the order details
   $scope.editOrderDetails = function() {
-    $scope.orderDetailsForm = angular.copy($scope.orderForm);
+    $scope.orderDetailsForm = angular.copy($scope.originalOrderForm);
     $scope.orderDetailsForm.orderDate = moment($scope.orderDetailsForm.orderDate).toDate();
     $scope.editingOrderDetails = true;
   };
