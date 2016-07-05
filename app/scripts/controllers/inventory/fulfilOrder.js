@@ -187,9 +187,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     });
   }
 
-  $scope.removeComponent = function(form, event) {
-    event.preventDefault();
-    event.stopPropagation();
+  $scope.removeComponent = function(form) {
+    form.$setSubmitted();
 
     if (form.$invalid) {
       // Bail if form is invalid
