@@ -127,6 +127,41 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     updateDispatchToSites();
   });
 
+  function showConfirmation(confirmationFields) {
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'views/confirmModal.html',
+      controller: 'ConfirmModalCtrl',
+      resolve: {
+        confirmObject: function() {
+          return confirmationFields;
+        }
+      }
+    });
+    return modalInstance.result;
+  }
+
+  $scope.deleteOrder = function() {
+    var unprocessConfirmation = {
+      title: 'Void Order',
+      button: 'Void',
+      message: 'Are you sure that you want to delete this Order?'
+    };
+
+    $scope.deleting = true;
+    showConfirmation(unprocessConfirmation).then(function() {
+      OrderFormsService.deleteOrderForm({id: $routeParams.id}, function() {
+        $location.path('/manageOrders');
+      }, function(err) {
+        $log.error(err);
+        $scope.deleting = false;
+      });
+    }).catch(function() {
+      // Confirmation was rejected
+      $scope.deleting = false;
+    });
+  };
+
   // Start editing the order details
   $scope.editOrderDetails = function() {
     $scope.orderDetailsForm = angular.copy($scope.orderForm);
