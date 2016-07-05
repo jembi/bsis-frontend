@@ -44,13 +44,12 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     };
   }
 
-  function populateGrid(orderForm) {
+  function populateGrid(components, items) {
     $scope.gridOptions.data = [];
-    var componentsToMatch = angular.copy(orderForm.components);
-    angular.forEach(orderForm.items, function(item) {
+    angular.forEach(items, function(item) {
       var row = convertItem(item);
       var unmatchedComponents = [];
-      angular.forEach(componentsToMatch, function(component) {
+      angular.forEach(components, function(component) {
         var bloodGroup = component.bloodAbo + component.bloodRh;
         if (row.gap > 0 && component.componentType.id === item.componentType.id && bloodGroup === item.bloodGroup) {
           // can't over supply and component matches
@@ -60,10 +59,10 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
           unmatchedComponents.push(component);
         }
       });
-      componentsToMatch = unmatchedComponents; // ensure we don't match the component more than once
+      components = unmatchedComponents; // ensure we don't match the component more than once
       $scope.gridOptions.data.push(row);
     });
-    return componentsToMatch;
+    return components;
   }
 
   function init() {
@@ -73,12 +72,15 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     $scope.bloodGroups = BLOODGROUP.options;
     $scope.orderForm = null;
     $scope.componentTypes = [];
+    $scope.components = [];
+    $scope.orderItems = [];
 
     // Fetch the order form by its id
     OrderFormsService.getOrderForm({id: $routeParams.id}, function(res) {
-      $scope.originalOrderForm = angular.copy(res.orderForm);
-      $scope.orderForm = angular.copy(res.orderForm);
-      populateGrid($scope.orderForm);
+      $scope.orderForm = res.orderForm;
+      $scope.components = angular.copy(res.orderForm.components);
+      $scope.orderItems = angular.copy(res.orderForm.items);
+      populateGrid($scope.components, $scope.orderItems);
     }, $log.error);
 
     // Fetch order form item form fields
@@ -122,7 +124,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
   // Start editing the order details
   $scope.editOrderDetails = function() {
-    $scope.orderDetailsForm = angular.copy($scope.originalOrderForm);
+    $scope.orderDetailsForm = angular.copy($scope.orderForm);
     $scope.orderDetailsForm.orderDate = moment($scope.orderDetailsForm.orderDate).toDate();
     $scope.editingOrderDetails = true;
   };
@@ -143,7 +145,6 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     $scope.savingOrderDetails = true;
     OrderFormsService.updateOrderForm({}, $scope.orderDetailsForm, function(res) {
       $scope.orderForm = res.orderForm;
-      populateGrid($scope.orderForm);
       $scope.savingOrderDetails = false;
       $scope.editingOrderDetails = false;
     }, function(err) {
@@ -162,7 +163,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
   $scope.addOrderItem = function(form) {
     if (form.$valid) {
-      $scope.orderForm.items.push($scope.orderItem);
+      $scope.orderItems.push($scope.orderItem);
       $scope.gridOptions.data.push(convertItem($scope.orderItem));
       $scope.orderItem = angular.copy(orderItemMaster);
       form.$setPristine();
@@ -208,7 +209,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
             ') is not suitable for dispatch.');
         } else {
           // check if component has already been added
-          var componentAlreadyAdded = $scope.orderForm.components.some(function(e) {
+          var componentAlreadyAdded = $scope.components.some(function(e) {
             return e.id === component.id;
           });
           if (componentAlreadyAdded) {
@@ -217,16 +218,16 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
           } else {
             // update the table
             var oldData = angular.copy($scope.gridOptions.data);
-            var oldComponents = angular.copy($scope.orderForm.components);
-            $scope.orderForm.components.push(component);
-            var componentsLeft = populateGrid($scope.orderForm);
+            var oldComponents = angular.copy($scope.components);
+            $scope.components.push(component);
+            var componentsLeft = populateGrid($scope.components, $scope.orderItems);
             // check if the component was matched
             if (!componentsLeft || componentsLeft.length > 0) {
               showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
                 ') does not match what was ordered.');
               // reset the data in the table
               $scope.gridOptions.data = oldData;
-              $scope.orderForm.components = oldComponents;
+              $scope.components = oldComponents;
             } else {
               // was added successfully, so save in orderForm and reset the form
               $scope.component = angular.copy(componentMaster);
@@ -247,9 +248,15 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
   $scope.updateOrder = function() {
     $scope.savingForm = true;
-    OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
+    var updatedOrderForm = angular.merge({}, $scope.orderForm, {
+      components: $scope.components,
+      items: $scope.orderItems
+    });
+    OrderFormsService.updateOrderForm({}, updatedOrderForm, function(res) {
       $scope.orderForm = res.orderForm;
-      populateGrid($scope.orderForm);
+      $scope.components = angular.copy(res.orderForm.components);
+      $scope.orderItems = angular.copy(res.orderForm.items);
+      populateGrid($scope.components, $scope.orderItems);
       $scope.savingForm = false;
       $location.path('/viewOrder/' + $routeParams.id);
     }, function(err) {

@@ -36,7 +36,7 @@
 
     <div class="form-group" style="margin-left:5px;">
       <span class="text-muted" for="dispatchedFrom">Dispatched From:</span>
-      <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="orderDetailsForm.dispatchedFrom" ng-options="item as item.name for item in dispatchFromSites track by item.id" ng-disabled="orderForm.components.length > 0" required></select>
+      <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="orderDetailsForm.dispatchedFrom" ng-options="item as item.name for item in dispatchFromSites track by item.id" ng-disabled="components.length > 0" required></select>
     </div>
 
     <div class="form-group">
