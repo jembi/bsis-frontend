@@ -256,6 +256,7 @@ angular.module('bsis')
       paginationTemplate: 'views/template/pagination.html',
       paginationPageSize: 5,
       minRowsToShow: 5,
+      enableSelectAll: false,
 
       onRegisterApi: function(gridApi) {
         $scope.gridApi = gridApi;

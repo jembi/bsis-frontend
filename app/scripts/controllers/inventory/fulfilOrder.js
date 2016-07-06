@@ -379,6 +379,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     paginationTemplate: 'views/template/pagination.html',
     columnDefs: columnDefs,
     minRowsToShow: 7,
+    enableSelectAll: false,
 
     onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;
