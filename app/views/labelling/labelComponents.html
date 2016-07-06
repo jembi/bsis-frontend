@@ -45,21 +45,21 @@
               <div class="panel-body">
                   <em ng-if="!components || components.length === 0">No components for donation.</em>
                   <div ng-if="components && components.length > 0" ng-repeat="component in components">
-                      <div ng-if="component.printPackLabel">
+                      <div ng-if="component.permissions.canPrintPackLabel">
                           {{component.componentCode}} ({{component.componentName}}) -
                           <em>Component is ready to be labelled.</em>
                           <button style="margin:0;" class="btn btn-primary" type="button"
-                                  ng-click="printPackLabel(component.componentId)">Print Pack Label
+                                  ng-click="printPackLabel(component.id)">Print Pack Label
                           </button>
                       </div>
                       <div ng-if="component.discardPackLabel">
                           {{component.componentCode}} ({{component.componentName}}) -
                           <em>Component has been discarded.</em>
                           <button style="margin:0;" class="btn btn-primary" type="button"
-                                  ng-click="printDiscardLabel(component.componentId)">Print Discard Label
+                                  ng-click="printDiscardLabel(component.id)">Print Discard Label
                           </button>
                       </div>
-                      <div ng-if="!component.printPackLabel && !component.discardPackLabel">
+                      <div ng-if="!component.permissions.canPrintPackLabel && !component.permissions.canPrintDiscardLabel">
                           {{component.componentCode}} ({{component.componentName}}) -
                           <em>Cannot print pack or discard labels for component.</em>
                       </div>
