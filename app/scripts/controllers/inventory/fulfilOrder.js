@@ -276,29 +276,51 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     }
   };
 
+  function showConfirmation(confirmationFields) {
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'views/confirmModal.html',
+      controller: 'ConfirmModalCtrl',
+      resolve: {
+        confirmObject: function() {
+          return confirmationFields;
+        }
+      }
+    });
+    return modalInstance.result;
+  }
+
   $scope.deleteRows = function() {
 
-    angular.forEach(selectedRowsToDelete, function(rowToDelete) {
+    var deletingConfirmation = {
+      title: 'Delete Rows',
+      button: 'Continue',
+      message: 'Are you sure you want to delete the selected rows?'
+    };
 
-      // Delete components
-      angular.forEach(rowToDelete.componentIds, function(componentId) {
-        $scope.components = $scope.components.filter(function(component) {
-          // Delete components with the same component id
-          return componentId !== component.id;
+    showConfirmation(deletingConfirmation).then(function() {
+      angular.forEach(selectedRowsToDelete, function(rowToDelete) {
+
+        // Delete components
+        angular.forEach(rowToDelete.componentIds, function(componentId) {
+          $scope.components = $scope.components.filter(function(component) {
+            // Delete components with the same component id
+            return componentId !== component.id;
+          });
+        });
+
+        // Delete items
+        $scope.orderItems = $scope.orderItems.filter(function(item) {
+          // Item id might be null, so delete items with the same componentTypeName, blood group and number of units
+          return !(rowToDelete.componentTypeName === item.componentType.componentTypeName &&
+            rowToDelete.bloodGroup === item.bloodGroup &&
+            rowToDelete.numberOfUnits === item.numberOfUnits);
         });
       });
 
-      // Delete items
-      $scope.orderItems = $scope.orderItems.filter(function(item) {
-        // Item id might be null, so delete items with the same componentTypeName, blood group and number of units
-        return !(rowToDelete.componentTypeName === item.componentType.componentTypeName &&
-          rowToDelete.bloodGroup === item.bloodGroup &&
-          rowToDelete.numberOfUnits === item.numberOfUnits);
-      });
+      $scope.areRowsToDelete = false;
+      populateGrid($scope.components, $scope.orderItems);
     });
-
-    $scope.areRowsToDelete = false;
-    populateGrid($scope.components, $scope.orderItems);
   };
 
   $scope.updateOrder = function() {
