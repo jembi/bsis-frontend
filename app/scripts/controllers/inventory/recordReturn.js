@@ -72,9 +72,9 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     };
   }
 
-  function populateGrid(returnForm) {
+  function populateGrid(components) {
     $scope.gridOptions.data = [];
-    angular.forEach(returnForm.components, function(component) {
+    angular.forEach(components, function(component) {
       $scope.gridOptions.data.push(convertItem(component));
     });
   }
@@ -85,7 +85,8 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     // Fetch the return form by its id
     ReturnFormsService.getReturnForm({id: $routeParams.id}, function(response) {
       $scope.returnForm = response.returnForm;
-      populateGrid($scope.returnForm);
+      $scope.components = angular.copy($scope.returnForm.components);
+      populateGrid($scope.components);
     }, $log.error);
   }
 
@@ -184,7 +185,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
             ') has not been issued.');
       } else {
         // check if component has already been added
-        var componentAlreadyAdded = $scope.returnForm.components.some(function(e) {
+        var componentAlreadyAdded = $scope.components.some(function(e) {
           return e.id === component.id;
         });
         if (componentAlreadyAdded) {
@@ -192,8 +193,8 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
             ') has already been added to this Return Form.');
         } else {
           // add component to Return Form and reset the form
-          $scope.returnForm.components.push(component);
-          populateGrid($scope.returnForm);
+          $scope.components.push(component);
+          populateGrid($scope.components);
           $scope.component = angular.copy(componentMaster);
           $scope.addComponentForm.$setPristine();
         }
@@ -211,9 +212,11 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
 
   $scope.updateReturn = function() {
     $scope.savingForm = true;
+    $scope.returnForm.components = angular.copy($scope.components);
     ReturnFormsService.updateReturnForm({}, $scope.returnForm, function(response) {
       $scope.returnForm = response.returnForm;
-      populateGrid($scope.returnForm);
+      $scope.components = angular.copy(response.returnForm.components);
+      populateGrid($scope.components);
       $scope.savingForm = false;
       $location.path('/viewReturn/' + $routeParams.id);
     }, function(err) {
