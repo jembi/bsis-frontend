@@ -15,7 +15,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
   var distributionSites = [];
   var usageSites = [];
-  var selectedItemsToDelete = null;
+  var selectedRowsToDelete = null;
 
   // Set the "dispatch to" sites based on dispatch type
   function updateDispatchToSites() {
@@ -311,32 +311,51 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     }
   };
 
-  $scope.deleteRow = function() {
+  function showConfirmation(confirmationFields) {
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'views/confirmModal.html',
+      controller: 'ConfirmModalCtrl',
+      resolve: {
+        confirmObject: function() {
+          return confirmationFields;
+        }
+      }
+    });
+    return modalInstance.result;
+  }
 
-    angular.forEach(selectedItemsToDelete, function(itemToDelete) {
+  $scope.deleteRows = function() {
 
-      // Delete components
-      angular.forEach(itemToDelete.componentIds, function(componentId) {
-        angular.forEach($scope.components, function(component) {
-          if (componentId === component.id) {
-            var index = $scope.components.indexOf(component);
-            $scope.components.splice(index, 1);
-          }
+    var deletingConfirmation = {
+      title: 'Delete Rows',
+      button: 'Continue',
+      message: 'Are you sure you want to delete the selected rows?'
+    };
+
+    showConfirmation(deletingConfirmation).then(function() {
+      angular.forEach(selectedRowsToDelete, function(rowToDelete) {
+
+        // Delete components
+        angular.forEach(rowToDelete.componentIds, function(componentId) {
+          $scope.components = $scope.components.filter(function(component) {
+            // Delete components with the same component id
+            return componentId !== component.id;
+          });
+        });
+
+        // Delete items
+        $scope.orderItems = $scope.orderItems.filter(function(item) {
+          // Item id might be null, so delete items with the same componentTypeName, blood group and number of units
+          return !(rowToDelete.componentTypeName === item.componentType.componentTypeName &&
+            rowToDelete.bloodGroup === item.bloodGroup &&
+            rowToDelete.numberOfUnits === item.numberOfUnits);
         });
       });
 
-      // Delete items
-      angular.forEach($scope.orderItems, function(item) {
-        if (itemToDelete.itemId === item.id) {
-          var index = $scope.orderItems.indexOf(item);
-          $scope.orderItems.splice(index, 1);
-        }
-      });
+      $scope.areRowsToDelete = false;
+      populateGrid($scope.components, $scope.orderItems);
     });
-
-    $scope.orderForm.items = $scope.orderItems;
-    $scope.orderForm.components = $scope.components;
-    populateGrid($scope.components, $scope.orderItems);
   };
 
   $scope.updateOrder = function() {
@@ -417,12 +436,13 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     paginationTemplate: 'views/template/pagination.html',
     columnDefs: columnDefs,
     minRowsToShow: 7,
+    enableSelectAll: false,
 
     onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function() {
-        selectedItemsToDelete = gridApi.selection.getSelectedRows();
-        $scope.areItemsToDelete = selectedItemsToDelete ? selectedItemsToDelete.length > 0 : false;
+        selectedRowsToDelete = gridApi.selection.getSelectedRows();
+        $scope.areRowsToDelete = selectedRowsToDelete ? selectedRowsToDelete.length > 0 : false;
       });
     }
   };

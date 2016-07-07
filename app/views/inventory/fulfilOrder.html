@@ -105,11 +105,6 @@
       <div class="col-sm-12">
           <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination ui-grid-selection></div>
       </div>
-      <div class="col-sm-12" ng-show="areItemsToDelete">
-          <button class="btn btn-primary" type="button" style="margin-top: 0px" ng-click="deleteRow()">Delete Selected Rows</button>
-          <br />
-          <br />
-      </div>
 
       <h4>Units Supplied</h4>
       <form class="form-inline" name="addComponentForm" role="form" style="padding:0 15px;" ng-submit="addComponent(addComponentForm);" novalidate>
@@ -149,6 +144,7 @@
         <div class="form-group">
           <div class="col-sm-12">
             <button class="btn btn-primary" type="submit" ng-disabled="savingForm">{{savingForm ? 'Saving...' : 'Save Order'}}</button>
+            <button class="btn btn-primary" type="button" ng-disabled="!areRowsToDelete" ng-click="deleteRows()">Delete Selected Rows</button>
             <button class="btn btn-primary" type="button" ng-disabled="savingForm" ng-click="cancel();">Cancel</button>
           </div>
         </div>
