@@ -85,6 +85,8 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     // Fetch the return form by its id
     ReturnFormsService.getReturnForm({id: $routeParams.id}, function(response) {
       $scope.returnForm = response.returnForm;
+      $scope.returnedFromSites = response.usageSites;
+      $scope.returnedToSites = response.distributionSites;
       populateGrid($scope.returnForm);
     }, $log.error);
   }
@@ -121,6 +123,51 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
   $scope.returnForm = null;
   $scope.component = null;
   $scope.addingComponent = false;
+  $scope.returnedFromSites = [];
+  $scope.returnedToSites = [];
+
+  // Start editing the return details
+  $scope.editReturnDetails = function() {
+    $scope.returnDetailsForm = angular.copy($scope.returnForm);
+    $scope.returnDetailsForm.returnDate = moment($scope.returnDetailsForm.returnDate).toDate();
+    ReturnFormsService.getReturnFormsForm({}, function(response) {
+      $scope.returnedFromSites = response.usageSites;
+      $scope.returnedToSites = response.distributionSites;
+      $scope.editingReturnDetails = true;
+    }, $log.error);
+  };
+
+  // Select a new return date in the popup
+  $scope.selectDate = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    $scope.selectingDate = true;
+  };
+
+  // Save the updated return details
+  $scope.saveReturnDetails = function() {
+    if ($scope.returnDetailsForm.$invalid) {
+      return;
+    }
+
+    $scope.savingReturnDetails = true;
+    ReturnFormsService.updateReturnForm({}, $scope.returnDetailsForm, function(response) {
+      $scope.returnForm = response.returnForm;
+      $scope.savingReturnDetails = false;
+      $scope.editingReturnDetails = false;
+    }, function(err) {
+      $log.error(err);
+      $scope.savingReturnDetails = false;
+    });
+  };
+
+  // Clear the return details form
+  $scope.clearDetailsForm = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    $scope.returnDetailsForm = null;
+    $scope.editingReturnDetails = false;
+  };
 
   $scope.addComponent = function() {
     if ($scope.addComponentForm.$invalid) {

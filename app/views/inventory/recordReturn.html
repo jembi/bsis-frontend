@@ -4,11 +4,37 @@
 
   <hr />
   
-  <section>
+  <section class="clearfix" ng-hide="editingReturnDetails">
     <span class="text-muted">Return Date:</span> {{returnForm.returnDate | bsisDate}}
     <span class="text-muted">Returned From:</span> {{returnForm.returnedFrom.name}}
     <span class="text-muted">Returned To:</span> {{returnForm.returnedTo.name}}
+    <button class="btn btn-primary pull-right" style="margin-top:0;" ng-click="editReturnDetails()">Edit</button>
   </section>
+
+  <form class="form-inline" name="forms.returnDetailsForm" role="form" ng-show="editingReturnDetails" ng-submit="saveReturnDetails();" novalidate>
+    <div class="form-group">
+      <span class="text-muted">Return Date:</span>
+      <div class="input-group" style="width:150px;">
+        <input type="text" class="form-control" name="returnDate" ng-model='returnDetailsForm.returnDate' uib-datepicker-popup="{{format}}" is-open="selectingDate" required>
+        <span class="input-group-btn">
+          <button class="btn btn-default" ng-click="selectDate($event)"><i class="fa fa-calendar"></i></button>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group" style="margin-left:5px;">
+      <span class="text-muted" for="dispatchedFrom">Returned From:</span>
+      <select class="form-control" style="width:auto;" name="returnedFrom" ng-model="returnDetailsForm.returnedFrom" ng-options="item as item.name for item in returnedFromSites track by item.id" ng-disabled="returnForm.components.length > 0" required></select>
+    </div>
+
+    <div class="form-group">
+      <span class="text-muted" for="dispatchedTo">Returned To:</span>
+      <select class="form-control" style="width:auto;" name="returnedTo" ng-model="returnDetailsForm.returnedTo" ng-options="item as item.name for item in returnedToSites track by item.id" required></select>
+    </div>
+
+    <button class="btn btn-primary" style="margin-top:0;" type="submit" ng-disabled="savingReturnDetails">{{savingReturnDetails ? 'Saving...' : 'Save'}}</button>
+    <button class="btn btn-primary" style="margin-top:0;" type="reset" ng-disabled="savingReturnDetails" ng-click="clearDetailsForm($event);">Cancel</button>
+  </form>
 
   <hr />
 
