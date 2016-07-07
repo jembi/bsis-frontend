@@ -85,8 +85,6 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     // Fetch the return form by its id
     ReturnFormsService.getReturnForm({id: $routeParams.id}, function(response) {
       $scope.returnForm = response.returnForm;
-      $scope.returnedFromSites = response.usageSites;
-      $scope.returnedToSites = response.distributionSites;
       populateGrid($scope.returnForm);
     }, $log.error);
   }
