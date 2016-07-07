@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService) {
-
-  $scope.displayConfirmDispatch = false;
+angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService, $uibModal) {
 
   var unitsOrderedColumnDefs = [
     {
@@ -202,19 +200,36 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     $scope.unitsSuppliedGridApi.exporter.pdfExport('all', 'all');
   };
 
-  $scope.confirmDispatch = function(condition) {
-    $scope.displayConfirmDispatch = condition;
-  };
+  function showConfirmation(confirmationFields) {
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'views/confirmModal.html',
+      controller: 'ConfirmModalCtrl',
+      resolve: {
+        confirmObject: function() {
+          return confirmationFields;
+        }
+      }
+    });
+    return modalInstance.result;
+  }
 
   $scope.dispatch = function() {
-    $scope.orderForm.status = 'DISPATCHED';
-    OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
-      $scope.orderForm = res.orderForm;
-      populateUnitsOrderedGrid($scope.orderForm);
-      populateUnitsSuppliedGrid($scope.orderForm);
-      $scope.displayConfirmDispatch = false;
-    }, function(err) {
-      $log.error(err);
+    var dispatchConfirmation = {
+      title: 'Dispatch Order',
+      button: 'Dispatch Order',
+      message: 'Are you sure you want to dispatch the order?'
+    };
+
+    showConfirmation(dispatchConfirmation).then(function() {
+      $scope.orderForm.status = 'DISPATCHED';
+      OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
+        $scope.orderForm = res.orderForm;
+        populateUnitsOrderedGrid($scope.orderForm);
+        populateUnitsSuppliedGrid($scope.orderForm);
+      }, function(err) {
+        $log.error(err);
+      });
     });
   };
 
