@@ -3,13 +3,50 @@
   <h3 class="page-header">Fulfil Order Form</h3>
 
   <hr />
-  
-  <section>
+
+  <section class="clearfix" ng-hide="editingOrderDetails">
     <span class="text-muted">Order Date:</span> {{orderForm.orderDate | bsisDate}}
+    <span class="text-muted">Order Type:</span> {{orderForm.type}}
     <span class="text-muted">Dispatched From:</span> {{orderForm.dispatchedFrom.name}}
     <span class="text-muted">Dispatched To:</span> {{orderForm.dispatchedTo.name}}
-    <span class="text-muted">Order Type:</span> {{orderForm.type}}
+    <button class="btn btn-primary pull-right" style="margin-top:0;" ng-click="editOrderDetails()">Edit</button>
   </section>
+
+  <form class="form-inline" name="forms.orderDetailsForm" role="form" ng-show="editingOrderDetails" ng-submit="saveOrderDetails();" novalidate>
+
+    <div class="form-group">
+      <span class="text-muted">Order Date:</span>
+      <div class="input-group" style="width:150px;">
+        <input type="text" class="form-control" name="orderDate" ng-model='orderDetailsForm.orderDate' uib-datepicker-popup="{{format}}" is-open="selectingDate" required>
+        <span class="input-group-btn">
+          <button class="btn btn-default" ng-click="selectDate($event)"><i class="fa fa-calendar"></i></button>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <span class="text-muted">Order Type:</span>
+      <label class="radio-inline" style="margin-top:0;">
+        <input type="radio" name="transferType" ng-model="orderDetailsForm.type" value="TRANSFER" required> Transfer
+      </label>
+      <label class="radio-inline">
+        <input type="radio" ng-model="orderDetailsForm.type" value="ISSUE" required> Issue
+      </label>
+    </div>
+
+    <div class="form-group" style="margin-left:5px;">
+      <span class="text-muted" for="dispatchedFrom">Dispatched From:</span>
+      <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="orderDetailsForm.dispatchedFrom" ng-options="item as item.name for item in dispatchFromSites track by item.id" ng-disabled="components.length > 0" required></select>
+    </div>
+
+    <div class="form-group">
+      <span class="text-muted" for="dispatchedTo">Dispatched To:</span>
+      <select class="form-control" style="width:auto;" name="dispatchedTo" ng-model="orderDetailsForm.dispatchedTo" ng-options="item as item.name for item in dispatchToSites track by item.id" ng-disabled="!orderDetailsForm.type" required></select>
+    </div>
+
+    <button class="btn btn-primary" style="margin-top:0;" type="submit" ng-disabled="savingOrderDetails">{{savingOrderDetails ? 'Saving...' : 'Save'}}</button>
+    <button class="btn btn-primary" style="margin-top:0;" type="reset" ng-disabled="savingOrderDetails" ng-click="clearDetailsForm($event);">Cancel</button>
+  </form>
 
   <hr />
 
@@ -73,7 +110,7 @@
         <div class="form-group">
           <label for="componentType" style="vertical-align: top">DIN:</label>
           <div style="display: inline-block">
-            <input type=number class="form-control" name="din" ng-model="component.din" required>
+            <input class="form-control" name="din" ng-model="component.din" required>
             <ng-messages for="addComponentForm.din.$error" role="alert" ng-show="addComponentForm.$submitted">
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>

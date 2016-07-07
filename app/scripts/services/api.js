@@ -194,15 +194,6 @@ angular.module('bsis')
           method: 'GET',
           url: url + '/components/search'
         },
-        discard: {
-          method: 'PUT',
-          url: url + '/components/:id/discard',
-          params: {
-            id: '@id',
-            discardReasonId: '@discardReasonId',
-            discardReasonText: '@discardReasonText'
-          }
-        },
         record: {
           method: 'POST',
           url: url + '/components/recordcombinations'
@@ -215,9 +206,20 @@ angular.module('bsis')
           method: 'GET',
           url: url + '/components/discard/form'
         },
-        bulkDiscard: {
+        discard: {
           method: 'PUT',
           url: url + '/components/discard'
+        },
+        update: {
+          method: 'PUT'
+        },
+        unprocess: {
+          method: 'PUT',
+          url: url + '/components/:id/unprocess'
+        },
+        undiscard: {
+          method: 'PUT',
+          url: url + '/components/undiscard'
         }
       }),
 
