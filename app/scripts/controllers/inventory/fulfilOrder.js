@@ -311,20 +311,6 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     }
   };
 
-  function showConfirmation(confirmationFields) {
-    var modalInstance = $uibModal.open({
-      animation: false,
-      templateUrl: 'views/confirmModal.html',
-      controller: 'ConfirmModalCtrl',
-      resolve: {
-        confirmObject: function() {
-          return confirmationFields;
-        }
-      }
-    });
-    return modalInstance.result;
-  }
-
   $scope.deleteRows = function() {
 
     var deletingConfirmation = {
