@@ -15,6 +15,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
   var distributionSites = [];
   var usageSites = [];
+  var selectedRowsToDelete = null;
 
   // Set the "dispatch to" sites based on dispatch type
   function updateDispatchToSites() {
@@ -40,7 +41,9 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       bloodGroup: item.bloodGroup,
       numberOfUnits: item.numberOfUnits,
       numberSupplied: 0,
-      gap: item.numberOfUnits
+      gap: item.numberOfUnits,
+      itemId: item.id,
+      componentIds: []
     };
   }
 
@@ -55,6 +58,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
           // can't over supply and component matches
           row.numberSupplied = row.numberSupplied + 1;
           row.gap = row.gap - 1;
+          // save list of component ids for that item
+          row.componentIds.push(component.id);
         } else {
           unmatchedComponents.push(component);
         }
@@ -122,6 +127,41 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     updateDispatchToSites();
   });
 
+  function showConfirmation(confirmationFields) {
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'views/confirmModal.html',
+      controller: 'ConfirmModalCtrl',
+      resolve: {
+        confirmObject: function() {
+          return confirmationFields;
+        }
+      }
+    });
+    return modalInstance.result;
+  }
+
+  $scope.deleteOrder = function() {
+    var unprocessConfirmation = {
+      title: 'Void Order',
+      button: 'Void',
+      message: 'Are you sure that you want to delete this Order?'
+    };
+
+    $scope.deleting = true;
+    showConfirmation(unprocessConfirmation).then(function() {
+      OrderFormsService.deleteOrderForm({id: $routeParams.id}, function() {
+        $location.path('/manageOrders');
+      }, function(err) {
+        $log.error(err);
+        $scope.deleting = false;
+      });
+    }).catch(function() {
+      // Confirmation was rejected
+      $scope.deleting = false;
+    });
+  };
+
   // Start editing the order details
   $scope.editOrderDetails = function() {
     $scope.orderDetailsForm = angular.copy($scope.orderForm);
@@ -187,6 +227,31 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     });
   }
 
+  $scope.removeComponent = function(form) {
+    form.$setSubmitted();
+
+    if (form.$invalid) {
+      // Bail if form is invalid
+      return;
+    }
+
+    // Filter matching component
+    var components = $scope.components.filter(function(component) {
+      return component.donationIdentificationNumber !== $scope.component.din
+        || component.componentType.componentTypeCode !== $scope.component.componentCode;
+    });
+
+    if (components.length === $scope.components.length) {
+      showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
+              ') was not found in this Order Form.');
+    } else {
+      $scope.components = components;
+      $scope.component = angular.copy(componentMaster);
+      populateGrid($scope.components, $scope.orderItems);
+      form.$setPristine();
+    }
+  };
+
   $scope.addComponent = function(form) {
     if (form.$valid) {
       $scope.addingComponent = true;
@@ -246,13 +311,44 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     }
   };
 
+  $scope.deleteRows = function() {
+
+    var deletingConfirmation = {
+      title: 'Delete Rows',
+      button: 'Continue',
+      message: 'Are you sure you want to delete the selected rows?'
+    };
+
+    showConfirmation(deletingConfirmation).then(function() {
+      angular.forEach(selectedRowsToDelete, function(rowToDelete) {
+
+        // Delete components
+        angular.forEach(rowToDelete.componentIds, function(componentId) {
+          $scope.components = $scope.components.filter(function(component) {
+            // Delete components with the same component id
+            return componentId !== component.id;
+          });
+        });
+
+        // Delete items
+        $scope.orderItems = $scope.orderItems.filter(function(item) {
+          // Item id might be null, so delete items with the same componentTypeName, blood group and number of units
+          return !(rowToDelete.componentTypeName === item.componentType.componentTypeName &&
+            rowToDelete.bloodGroup === item.bloodGroup &&
+            rowToDelete.numberOfUnits === item.numberOfUnits);
+        });
+      });
+
+      $scope.areRowsToDelete = false;
+      populateGrid($scope.components, $scope.orderItems);
+    });
+  };
+
   $scope.updateOrder = function() {
     $scope.savingForm = true;
-    var updatedOrderForm = angular.merge({}, $scope.orderForm, {
-      components: $scope.components,
-      items: $scope.orderItems
-    });
-    OrderFormsService.updateOrderForm({}, updatedOrderForm, function(res) {
+    $scope.orderForm.components = $scope.components;
+    $scope.orderForm.items = $scope.orderItems;
+    OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
       $scope.orderForm = res.orderForm;
       $scope.components = angular.copy(res.orderForm.components);
       $scope.orderItems = angular.copy(res.orderForm.items);
@@ -308,6 +404,14 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       field: 'gap',
       width: '**',
       maxWidth: '200'
+    },
+    {
+      field: 'itemId',
+      visible: false
+    },
+    {
+      field: 'componentIds',
+      visible: false
     }
   ];
 
@@ -318,9 +422,14 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     paginationTemplate: 'views/template/pagination.html',
     columnDefs: columnDefs,
     minRowsToShow: 7,
+    enableSelectAll: false,
 
     onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;
+      gridApi.selection.on.rowSelectionChanged($scope, function() {
+        selectedRowsToDelete = gridApi.selection.getSelectedRows();
+        $scope.areRowsToDelete = selectedRowsToDelete ? selectedRowsToDelete.length > 0 : false;
+      });
     }
   };
 

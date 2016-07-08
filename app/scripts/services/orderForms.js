@@ -7,6 +7,7 @@ angular.module('bsis').factory('OrderFormsService', function(Api) {
     addOrderForm: Api.OrderForms.save,
     getOrderForm: Api.OrderForms.get,
     updateOrderForm: Api.OrderForms.update,
+    deleteOrderForm: Api.OrderForms.delete,
     getOrderFormItemForm: Api.OrderForms.getItemsForm,
     findOrderForms: Api.OrderForms.search
   };
