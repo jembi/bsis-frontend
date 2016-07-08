@@ -206,8 +206,12 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
 
     ModalsService.showConfirmation(deleteConfirmation).then(function() {
       $scope.deleting = true;
-      // TODO: DELETE
-      $location.path('/manageReturns');
+      ReturnFormsService.deleteReturnForm({id: $scope.returnForm.id}, function() {
+        $location.path('/manageReturns');
+      }, function(err) {
+        $log.error(err);
+        $scope.deleting = false;
+      });
     }).catch(function() {
       // Confirmation was rejected
       $scope.deleting = false;
