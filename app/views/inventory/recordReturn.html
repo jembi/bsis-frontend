@@ -8,7 +8,10 @@
     <span class="text-muted">Return Date:</span> {{returnForm.returnDate | bsisDate}}
     <span class="text-muted">Returned From:</span> {{returnForm.returnedFrom.name}}
     <span class="text-muted">Returned To:</span> {{returnForm.returnedTo.name}}
-    <button class="btn btn-primary pull-right" style="margin-top:0;" ng-click="editReturnDetails()">Edit</button>
+    <span class="pull-right">
+      <button class="btn btn-primary" style="margin-top:0;" ng-click="editReturnDetails()">Edit</button>
+      <button class="btn btn-primary" style="margin-top:0;" ng-click="deleteReturn()" ng-disabled="!returnForm.permissions.canDelete">Void</button>
+    </span>
   </section>
 
   <form class="form-inline" name="forms.returnDetailsForm" role="form" ng-show="editingReturnDetails" ng-submit="saveReturnDetails();" novalidate>

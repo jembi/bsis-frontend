@@ -168,6 +168,34 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     $scope.editingReturnDetails = false;
   };
 
+  function showConfirmation(confirmationFields) {
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'views/confirmModal.html',
+      controller: 'ConfirmModalCtrl',
+      resolve: {
+        confirmObject: function() {
+          return confirmationFields;
+        }
+      }
+    });
+    return modalInstance.result;
+  }
+
+  $scope.deleteReturn = function() {
+    var deleteConfirmation = {
+      title: 'Void Return',
+      button: 'Void',
+      message: 'Are you sure that you want to delete this Return?'
+    };
+
+    showConfirmation(deleteConfirmation).then(function() {
+      $location.path('/manageReturns');
+    }).catch(function() {
+      // Confirmation was rejected
+    });
+  };
+
   $scope.removeComponent = function(form) {
     form.$setSubmitted();
 
