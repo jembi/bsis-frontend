@@ -168,6 +168,31 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     $scope.editingReturnDetails = false;
   };
 
+  $scope.removeComponent = function(form) {
+    form.$setSubmitted();
+
+    if (form.$invalid) {
+      // Bail if form is invalid
+      return;
+    }
+
+    // Filter matching component
+    var components = $scope.components.filter(function(component) {
+      return component.donationIdentificationNumber !== $scope.component.din
+        || component.componentCode !== $scope.component.componentCode;
+    });
+
+    if (components.length === $scope.components.length) {
+      showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
+              ') was not found in this Return Form.');
+    } else {
+      $scope.components = components;
+      $scope.component = angular.copy(componentMaster);
+      populateGrid($scope.components);
+      form.$setPristine();
+    }
+  };
+
   $scope.addComponent = function() {
     if ($scope.addComponentForm.$invalid) {
       return;
