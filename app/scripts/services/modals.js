@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('ModalsService', function($http, Api, $uibModal) {
+  .factory('ModalsService', function($uibModal) {
     return {
       showConfirmation: function(confirmationFields) {
         var modalInstance = $uibModal.open({
