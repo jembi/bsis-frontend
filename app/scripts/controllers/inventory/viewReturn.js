@@ -197,7 +197,7 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     showDiscardModal();
   };
 
-  $scope.delete = function() {
+  $scope.deleteReturn = function() {
     var deleteConfirmation = {
       title: 'Void Return',
       button: 'Void',

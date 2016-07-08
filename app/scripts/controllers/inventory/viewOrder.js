@@ -200,7 +200,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     $scope.unitsSuppliedGridApi.exporter.pdfExport('all', 'all');
   };
 
-  $scope.delete = function() {
+  $scope.deleteOrder = function() {
     var unprocessConfirmation = {
       title: 'Void Order',
       button: 'Void',
