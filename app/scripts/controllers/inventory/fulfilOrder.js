@@ -238,7 +238,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     // Filter matching component
     var components = $scope.components.filter(function(component) {
       return component.donationIdentificationNumber !== $scope.component.din
-        || component.componentType.componentTypeCode !== $scope.component.componentCode;
+        || component.componentCode !== $scope.component.componentCode;
     });
 
     if (components.length === $scope.components.length) {
