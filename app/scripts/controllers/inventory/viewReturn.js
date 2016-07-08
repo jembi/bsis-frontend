@@ -2,8 +2,6 @@
 
 angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, $log, $filter, $routeParams, $uibModal, ReturnFormsService) {
 
-  $scope.displayConfirmReturn = false;
-
   var columnDefs = [
     {
       name: 'donationIdentificationNumber',
@@ -199,18 +197,35 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     showDiscardModal();
   };
 
-  $scope.confirmReturn = function(condition) {
-    $scope.displayConfirmReturn = condition;
-  };
+  function showConfirmation(confirmationFields) {
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'views/confirmModal.html',
+      controller: 'ConfirmModalCtrl',
+      resolve: {
+        confirmObject: function() {
+          return confirmationFields;
+        }
+      }
+    });
+    return modalInstance.result;
+  }
 
   $scope.return = function() {
-    $scope.returnForm.status = 'RETURNED';
-    ReturnFormsService.updateReturnForm({}, $scope.returnForm, function(res) {
-      $scope.returnForm = res.returnForm;
-      populateGrid($scope.returnForm);
-      $scope.displayConfirmReturn = false;
-    }, function(err) {
-      $log.error(err);
+    var returnConfirmation = {
+      title: 'Return To Stock',
+      button: 'Return To Stock',
+      message: 'Are you sure you want to return all units into inventory?'
+    };
+
+    showConfirmation(returnConfirmation).then(function() {
+      $scope.returnForm.status = 'RETURNED';
+      ReturnFormsService.updateReturnForm({}, $scope.returnForm, function(res) {
+        $scope.returnForm = res.returnForm;
+        populateGrid($scope.returnForm);
+      }, function(err) {
+        $log.error(err);
+      });
     });
   };
 
