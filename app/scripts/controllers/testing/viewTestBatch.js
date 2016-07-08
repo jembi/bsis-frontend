@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, $uibModal, PERMISSIONS, uiGridConstants) {
+  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, PERMISSIONS, uiGridConstants, ModalsService) {
 
     $scope.permissions = PERMISSIONS;
 
@@ -394,27 +394,15 @@ angular.module('bsis')
       });
     };
 
-    function showConfirmation(title, button, message) {
-
-      var modal = $uibModal.open({
-        animation: false,
-        templateUrl: 'views/confirmModal.html',
-        controller: 'ConfirmModalCtrl',
-        resolve: {
-          confirmObject: {
-            title: title,
-            button: button,
-            message: message
-          }
-        }
-      });
-
-      return modal.result;
-    }
-
     $scope.closeTestBatch = function(testBatch) {
 
-      showConfirmation('Confirm Close', 'Close', 'Are you sure that you want to close this test batch?').then(function() {
+      var confirmation = {
+        title: 'Confirm Close',
+        button: 'Close',
+        message: 'Are you sure that you want to close this test batch?'
+      };
+
+      ModalsService.showConfirmation(confirmation).then(function() {
 
         TestingService.closeTestBatch(testBatch, function() {
           $location.path('/manageTestBatch');
@@ -426,7 +414,13 @@ angular.module('bsis')
 
     $scope.reopenTestBatch = function(testBatch) {
 
-      showConfirmation('Confirm Reopen', 'Reopen', 'Are you sure that you want to reopen this test batch?').then(function() {
+      var confirmation = {
+        title: 'Confirm Reopen',
+        button: 'Reopen',
+        message: 'Are you sure that you want to reopen this test batch?'
+      };
+
+      ModalsService.showConfirmation(confirmation).then(function() {
 
         TestingService.reopenTestBatch(testBatch, function(response) {
           if (testBatch.permissions) {
@@ -442,7 +436,13 @@ angular.module('bsis')
 
     $scope.deleteTestBatch = function(testBatchId) {
 
-      showConfirmation('Confirm Void', 'Void', 'Are you sure that you want to void this test batch?').then(function() {
+      var confirmation = {
+        title: 'Confirm Void',
+        button: 'Void',
+        message: 'Are you sure that you want to void this test batch?'
+      };
+
+      ModalsService.showConfirmation(confirmation).then(function() {
 
         TestingService.deleteTestBatch(testBatchId, function() {
           $location.path('/manageTestBatch');
@@ -461,7 +461,13 @@ angular.module('bsis')
       }
       message += '. Are you sure that you want to release this test batch?';
 
-      showConfirmation('Confirm Release', 'Release', message).then(function() {
+      var confirmation = {
+        title: 'Confirm Release',
+        button: 'Release',
+        message: message
+      };
+
+      ModalsService.showConfirmation(confirmation).then(function() {
         TestingService.releaseTestBatch(testBatch, function(response) {
           $scope.testBatch = response;
           $scope.refreshCurrentTestBatch();

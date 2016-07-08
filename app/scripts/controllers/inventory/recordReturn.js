@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location, $uibModal, $log, $routeParams, ReturnFormsService, ComponentService) {
+angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location, $uibModal, $log, $routeParams, ReturnFormsService, ComponentService, ModalsService) {
 
   var componentMaster = {
     din: null,
@@ -168,20 +168,6 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     $scope.editingReturnDetails = false;
   };
 
-  function showConfirmation(confirmationFields) {
-    var modalInstance = $uibModal.open({
-      animation: false,
-      templateUrl: 'views/confirmModal.html',
-      controller: 'ConfirmModalCtrl',
-      resolve: {
-        confirmObject: function() {
-          return confirmationFields;
-        }
-      }
-    });
-    return modalInstance.result;
-  }
-
   $scope.deleteReturn = function() {
     var deleteConfirmation = {
       title: 'Void Return',
@@ -189,7 +175,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       message: 'Are you sure that you want to delete this Return?'
     };
 
-    showConfirmation(deleteConfirmation).then(function() {
+    ModalsService.showConfirmation(deleteConfirmation).then(function() {
       $location.path('/manageReturns');
     }).catch(function() {
       // Confirmation was rejected

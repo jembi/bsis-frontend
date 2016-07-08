@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, ComponentService, BLOODGROUP, DATEFORMAT) {
+angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, ComponentService, BLOODGROUP, DATEFORMAT, ModalsService) {
 
   var orderItemMaster = {
     componentType: null,
@@ -127,20 +127,6 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     updateDispatchToSites();
   });
 
-  function showConfirmation(confirmationFields) {
-    var modalInstance = $uibModal.open({
-      animation: false,
-      templateUrl: 'views/confirmModal.html',
-      controller: 'ConfirmModalCtrl',
-      resolve: {
-        confirmObject: function() {
-          return confirmationFields;
-        }
-      }
-    });
-    return modalInstance.result;
-  }
-
   $scope.deleteOrder = function() {
     var unprocessConfirmation = {
       title: 'Void Order',
@@ -149,7 +135,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     };
 
     $scope.deleting = true;
-    showConfirmation(unprocessConfirmation).then(function() {
+    ModalsService.showConfirmation(unprocessConfirmation).then(function() {
       OrderFormsService.deleteOrderForm({id: $routeParams.id}, function() {
         $location.path('/manageOrders');
       }, function(err) {
@@ -319,7 +305,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       message: 'Are you sure you want to delete the selected rows?'
     };
 
-    showConfirmation(deletingConfirmation).then(function() {
+    ModalsService.showConfirmation(deletingConfirmation).then(function() {
       angular.forEach(selectedRowsToDelete, function(rowToDelete) {
 
         // Delete components

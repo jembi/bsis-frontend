@@ -1,5 +1,5 @@
 angular.module('bsis')
-  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout, $routeParams, uiGridConstants, $log, $uibModal) {
+  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout, $routeParams, uiGridConstants, $log, ModalsService) {
 
     var selectedComponents = [];
     var forms = $scope.forms = {};
@@ -35,20 +35,6 @@ angular.module('bsis')
       $scope.discard = {};
     };
 
-    function showConfirmation(confirmationFields) {
-      var modalInstance = $uibModal.open({
-        animation: false,
-        templateUrl: 'views/confirmModal.html',
-        controller: 'ConfirmModalCtrl',
-        resolve: {
-          confirmObject: function() {
-            return confirmationFields;
-          }
-        }
-      });
-      return modalInstance.result;
-    }
-
     $scope.discardComponents = function() {
 
       if (forms.discardComponentsForm.$invalid) {
@@ -61,7 +47,7 @@ angular.module('bsis')
         message: 'Are you sure you want to discard these components?'
       };
 
-      showConfirmation(discardConfirmation).then(function() {
+      ModalsService.showConfirmation(discardConfirmation).then(function() {
 
         // Create a list of component ids to discard
         $scope.discard.componentIds = [];
@@ -95,7 +81,7 @@ angular.module('bsis')
         message: 'Are you sure you want to undiscard these components?'
       };
 
-      showConfirmation(undiscardConfirmation).then(function() {
+      ModalsService.showConfirmation(undiscardConfirmation).then(function() {
 
         // Create a list of component ids to undiscard
         var undiscard = {};
