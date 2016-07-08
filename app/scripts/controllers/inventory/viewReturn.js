@@ -197,6 +197,23 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     showDiscardModal();
   };
 
+  $scope.delete = function() {
+    var deleteConfirmation = {
+      title: 'Void Return',
+      button: 'Void',
+      message: 'Are you sure that you want to delete this Return?'
+    };
+
+    ModalsService.showConfirmation(deleteConfirmation).then(function() {
+      $scope.deleting = true;
+      // TODO: DELETE
+      $location.path('/manageReturns');
+    }).catch(function() {
+      // Confirmation was rejected
+      $scope.deleting = false;
+    });
+  };
+
   $scope.return = function() {
     var returnConfirmation = {
       title: 'Return To Stock',

@@ -200,6 +200,27 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     $scope.unitsSuppliedGridApi.exporter.pdfExport('all', 'all');
   };
 
+  $scope.delete = function() {
+    var unprocessConfirmation = {
+      title: 'Void Order',
+      button: 'Void',
+      message: 'Are you sure that you want to delete this Order?'
+    };
+
+    ModalsService.showConfirmation(unprocessConfirmation).then(function() {
+      $scope.deleting = true;
+      OrderFormsService.deleteOrderForm({id: $routeParams.id}, function() {
+        $location.path('/manageOrders');
+      }, function(err) {
+        $log.error(err);
+        $scope.deleting = false;
+      });
+    }).catch(function() {
+      // Confirmation was rejected
+      $scope.deleting = false;
+    });
+  };
+
   $scope.dispatch = function() {
     var dispatchConfirmation = {
       title: 'Dispatch Order',
