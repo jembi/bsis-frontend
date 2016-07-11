@@ -9,6 +9,9 @@
       </em>
     </span>
     <span style="margin-left: 20px; margin-top: -15px; float:right">
+      <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.permissions.canDelete">
+        <button class="btn btn-primary" ng-click="deleteOrder()" ng-disabled="deleting">{{deleting ? 'Voiding...' : 'Void'}}</button>
+      </span>
       <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.permissions.canDispatch">
         <button class="btn btn-primary" ng-click="dispatch()">Dispatch Order</button>
       </span>

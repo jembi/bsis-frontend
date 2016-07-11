@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService, $uibModal) {
+angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService, ModalsService) {
 
   var unitsOrderedColumnDefs = [
     {
@@ -200,19 +200,26 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     $scope.unitsSuppliedGridApi.exporter.pdfExport('all', 'all');
   };
 
-  function showConfirmation(confirmationFields) {
-    var modalInstance = $uibModal.open({
-      animation: false,
-      templateUrl: 'views/confirmModal.html',
-      controller: 'ConfirmModalCtrl',
-      resolve: {
-        confirmObject: function() {
-          return confirmationFields;
-        }
-      }
+  $scope.deleteOrder = function() {
+    var unprocessConfirmation = {
+      title: 'Void Order',
+      button: 'Void',
+      message: 'Are you sure that you want to delete this Order?'
+    };
+
+    ModalsService.showConfirmation(unprocessConfirmation).then(function() {
+      $scope.deleting = true;
+      OrderFormsService.deleteOrderForm({id: $routeParams.id}, function() {
+        $location.path('/manageOrders');
+      }, function(err) {
+        $log.error(err);
+        $scope.deleting = false;
+      });
+    }).catch(function() {
+      // Confirmation was rejected
+      $scope.deleting = false;
     });
-    return modalInstance.result;
-  }
+  };
 
   $scope.dispatch = function() {
     var dispatchConfirmation = {
@@ -221,7 +228,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
       message: 'Are you sure you want to dispatch the order?'
     };
 
-    showConfirmation(dispatchConfirmation).then(function() {
+    ModalsService.showConfirmation(dispatchConfirmation).then(function() {
       $scope.orderForm.status = 'DISPATCHED';
       OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
         $scope.orderForm = res.orderForm;

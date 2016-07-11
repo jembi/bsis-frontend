@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, ComponentService, BLOODGROUP, DATEFORMAT) {
+angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, ComponentService, BLOODGROUP, DATEFORMAT, ModalsService) {
 
   var orderItemMaster = {
     componentType: null,
@@ -126,41 +126,6 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     // Update to ensure that the correct site is filtered
     updateDispatchToSites();
   });
-
-  function showConfirmation(confirmationFields) {
-    var modalInstance = $uibModal.open({
-      animation: false,
-      templateUrl: 'views/confirmModal.html',
-      controller: 'ConfirmModalCtrl',
-      resolve: {
-        confirmObject: function() {
-          return confirmationFields;
-        }
-      }
-    });
-    return modalInstance.result;
-  }
-
-  $scope.deleteOrder = function() {
-    var unprocessConfirmation = {
-      title: 'Void Order',
-      button: 'Void',
-      message: 'Are you sure that you want to delete this Order?'
-    };
-
-    $scope.deleting = true;
-    showConfirmation(unprocessConfirmation).then(function() {
-      OrderFormsService.deleteOrderForm({id: $routeParams.id}, function() {
-        $location.path('/manageOrders');
-      }, function(err) {
-        $log.error(err);
-        $scope.deleting = false;
-      });
-    }).catch(function() {
-      // Confirmation was rejected
-      $scope.deleting = false;
-    });
-  };
 
   // Start editing the order details
   $scope.editOrderDetails = function() {
@@ -319,7 +284,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       message: 'Are you sure you want to delete the selected rows?'
     };
 
-    showConfirmation(deletingConfirmation).then(function() {
+    ModalsService.showConfirmation(deletingConfirmation).then(function() {
       angular.forEach(selectedRowsToDelete, function(rowToDelete) {
 
         // Delete components

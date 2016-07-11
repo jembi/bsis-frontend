@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $uibModal, $routeParams, ComponentService) {
+  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ModalsService) {
 
     $scope.component = null;
     $scope.componentsSearch = {
@@ -66,25 +66,11 @@ angular.module('bsis')
 
     };
 
-    function showConfirmation(confirmationFields) {
-      var modalInstance = $uibModal.open({
-        animation: false,
-        templateUrl: 'views/confirmModal.html',
-        controller: 'ConfirmModalCtrl',
-        resolve: {
-          confirmObject: function() {
-            return confirmationFields;
-          }
-        }
-      });
-      return modalInstance.result;
-    }
-
     function showComponentWeightConfirmation(component) {
 
       // Show confirmation if it is above max weight
       if (component.packType.maxWeight != null && component.weight > component.packType.maxWeight) {
-        return showConfirmation({
+        return ModalsService.showConfirmation({
           title: 'Overweight Pack',
           button: 'Continue',
           message: 'The pack weight (' + component.weight + 'g) is above the maximum acceptable range (' + component.packType.maxWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
@@ -93,7 +79,7 @@ angular.module('bsis')
 
       // Show confirmation if it is below min weight
       if (component.packType.minWeight != null && component.weight < component.packType.minWeight) {
-        return showConfirmation({
+        return ModalsService.showConfirmation({
           title: 'Underweight Pack',
           button: 'Continue',
           message: 'The pack weight (' + component.weight + 'g) is below the minimum acceptable range (' + component.packType.minWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
@@ -102,7 +88,7 @@ angular.module('bsis')
 
       // Show confirmation if it is below low volume weight
       if (component.packType.lowVolumeWeight != null && component.weight <= component.packType.lowVolumeWeight) {
-        return showConfirmation({
+        return ModalsService.showConfirmation({
           title: 'Low Pack Weight',
           button: 'Continue',
           message: 'The pack weight (' + component.weight + 'g) is low (below ' + component.packType.lowVolumeWeight + 'g). It is recommended that all components from this donation are discarded, with the exception of Packed Red Cells. Do you want to continue?'
@@ -116,7 +102,7 @@ angular.module('bsis')
         var previousComponent = $scope.gridApi.selection.getSelectedRows()[0];
         if (previousComponent.weight != null && (previousComponent.weight > component.packType.maxWeight
               || previousComponent.weight < component.packType.minWeight)) {
-          return showConfirmation({
+          return ModalsService.showConfirmation({
             title: 'Pack Weight Update',
             button: 'Continue',
             message: 'The pack weight has changed from an underweight or overweight value to one within the acceptable range. Components from this donation will no longer be flagged as unsafe as a result of the pack weight. Do you want to continue?'
@@ -176,7 +162,7 @@ angular.module('bsis')
       };
 
       $scope.unprocessing = true;
-      showConfirmation(unprocessConfirmation).then(function() {
+      ModalsService.showConfirmation(unprocessConfirmation).then(function() {
         ComponentService.unprocess({}, $scope.component, function() {
           $scope.getComponentsByDIN();
           $scope.unprocessing = false;

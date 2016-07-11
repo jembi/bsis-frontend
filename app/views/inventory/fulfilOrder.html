@@ -9,10 +9,7 @@
     <span class="text-muted">Order Type:</span> {{orderForm.type}}
     <span class="text-muted">Dispatched From:</span> {{orderForm.dispatchedFrom.name}}
     <span class="text-muted">Dispatched To:</span> {{orderForm.dispatchedTo.name}}
-    <span class="pull-right">
-      <button class="btn btn-primary" style="margin-top:0;" ng-click="editOrderDetails()">Edit</button>
-      <button class="btn btn-primary" style="margin-top:0" ng-click="deleteOrder()" ng-disabled="!orderForm.permissions.canDelete">Void</button>
-    </span>
+    <button class="btn btn-primary pull-right" style="margin-top:0;" ng-click="editOrderDetails()">Edit</button>
   </section>
 
   <form class="form-inline" name="forms.orderDetailsForm" role="form" ng-show="editingOrderDetails" ng-submit="saveOrderDetails();" novalidate>

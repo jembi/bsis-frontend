@@ -7,6 +7,7 @@ angular.module('bsis').factory('ReturnFormsService', function(Api) {
     addReturnForm: Api.ReturnForms.save,
     getReturnForm: Api.ReturnForms.get,
     updateReturnForm: Api.ReturnForms.update,
-    findReturnForms: Api.ReturnForms.search
+    findReturnForms: Api.ReturnForms.search,
+    deleteReturnForm: Api.ReturnForms.delete
   };
 });
