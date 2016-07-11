@@ -66,6 +66,9 @@ angular.module('bsis')
         case 'TTI_UNSAFE':
           return 'Unsafe';
 
+        case 'INDETERMINATE':
+          return 'Indeterminate';
+
         default:
           return 'Not Done';
 
