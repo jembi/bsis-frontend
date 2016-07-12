@@ -67,13 +67,9 @@ angular.module('bsis')
     return function(input) {
       input = input || '';
       input = input.replace(/_/g, ' ');
-      var output = '';
-      angular.forEach(input.split(' '), function(word) {
-        output = output + word.replace(/\w\S*/g, function(txt) {
-          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        }) + ' ';
+      return input.replace(/\w\S*/g, function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       });
-      return output;
     };
   })
 ;

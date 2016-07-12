@@ -153,7 +153,7 @@ angular.module('bsis')
         name: 'bloodTypingStatusBloodTypingMatchStatus',
         displayName: 'Blood Group Serology',
         field: 'bloodTypingStatusBloodTypingMatchStatus',
-        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"] | titleCase }} - {{row.entity["bloodTypingMatchStatus"] | titleCase }} <em>({{row.entity["bloodRh"] == "" ? "" : row.entity["bloodAbo"]}}{{row.entity["bloodAbo"] == "" ? "" : row.entity["bloodRh"]}})</em></div>',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"] | titleCase }} - {{row.entity["bloodTypingMatchStatus"] | titleCase }} <em>({{row.entity["bloodRh"] === "" ? "" : row.entity["bloodAbo"]}}{{row.entity["bloodAbo"] === "" ? "" : row.entity["bloodRh"]}})</em></div>',
         visible: true,
         width: '**'
       },
@@ -200,7 +200,7 @@ angular.module('bsis')
           }
         } else if (col.name === 'bloodTypingStatusBloodTypingMatchStatus') {
           value = row.entity.bloodTypingStatus + ' - ' +  row.entity.bloodTypingMatchStatus;
-          var bloodGroup = (row.entity.bloodRh == '' ? '' : row.entity.bloodAbo) + (row.entity.bloodAbo == '' ? '' : row.entity.bloodRh);
+          var bloodGroup = (row.entity.bloodRh === '' ? '' : row.entity.bloodAbo) + (row.entity.bloodAbo === '' ? '' : row.entity.bloodRh);
           return $filter('titleCase')(value) + ' (' + bloodGroup + ')';
         }
         // assume that column is a test outcome column, and manage empty values
