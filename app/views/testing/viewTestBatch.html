@@ -110,21 +110,24 @@
   <form editable-form name="editableForm" onbeforesave="validateForm(editableForm)" onaftersave="updateTestBatch(testBatch)">
 
       <div class="h4">
-          <small><em>Created On: </em></small>
-          <span ng-show="!editableForm.$visible">{{ (testBatch.createdDate | bsisDate) || '' }}</span>
-      <span ng-show="editableForm.$visible" style="display:inline;">
-        <dateselect ng-model="testBatch.createdDate" initDate="testBatch.createdDate" format="format"
-                    opened="dateToOpen"></dateselect>
-      </span>
-      <span ng-if="testBatch.status !== 'RELEASED' && !testBatch.permissions.canRelease">
-        | <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
-      </span>
-      <span ng-if="testBatch.status !== 'RELEASED' && testBatch.permissions.canRelease">
-        | <small><em>Number of Samples Ready for Release: </em></small>{{testBatch.readyForReleaseCount}} of {{testBatch.numSamples}}
-      </span>
-      <span ng-if="testBatch.status === 'RELEASED'">
-        | <small><em>Number of Samples Released: </em></small>{{testBatch.numReleasedSamples}} of {{testBatch.numSamples}}
-      </span>
+        <small><em>Created On: </em></small>
+        <span ng-show="!editableForm.$visible">{{ (testBatch.createdDate | bsisDate) || '' }}</span>
+        <span ng-show="editableForm.$visible" style="display:inline;">
+          <dateselect ng-model="testBatch.createdDate" initDate="testBatch.createdDate" format="format" opened="dateToOpen"></dateselect>
+        </span> 
+        | <small><em>Location: </em></small><span style="display:inline;">{{testBatch.location.name}}</span>
+      </div>
+
+      <div class="h4">
+        <span ng-if="testBatch.status !== 'RELEASED' && !testBatch.permissions.canRelease">
+          <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
+        </span>
+        <span ng-if="testBatch.status !== 'RELEASED' && testBatch.permissions.canRelease">
+          <small><em>Number of Samples Ready for Release: </em></small>{{testBatch.readyForReleaseCount}} of {{testBatch.numSamples}}
+        </span>
+        <span ng-if="testBatch.status === 'RELEASED'">
+          <small><em>Number of Samples Released: </em></small>{{testBatch.numReleasedSamples}} of {{testBatch.numSamples}}
+        </span>
       </div>
 
       <hr style="margin-bottom:5px;"/>
