@@ -63,10 +63,6 @@ angular.module('bsis')
         });
       });
       data = donations;
-      for (var i = 0; i < data.length; i++) {
-        data[i].bloodTypingStatusBloodTypingMatchStatus = data[i].bloodTypingStatus + ' ' +  data[i].bloodTypingMatchStatus + '(' + data[i].bloodAbo + data[i].bloodRh + ')';
-        data[i].previousDonationAboRhOutcome = '';
-      }
       $scope.gridOptions.data = data;
       $scope.data = data;
       $scope.testBatch.numReleasedSamples = numReleasedSamples;
@@ -148,7 +144,7 @@ angular.module('bsis')
         name: 'ttistatus',
         displayName: 'TTI Status',
         field: 'ttistatus',
-        cellFilter: 'mapTTIStatus',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["ttistatus"].replace("TTI_", "") | titleCase }}</div>',
         visible: true,
         width: '**',
         maxWidth: '120'
@@ -157,7 +153,7 @@ angular.module('bsis')
         name: 'bloodTypingStatusBloodTypingMatchStatus',
         displayName: 'Blood Group Serology',
         field: 'bloodTypingStatusBloodTypingMatchStatus',
-        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"] | titleCase }} - {{row.entity["bloodTypingMatchStatus"] | titleCase }} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
         visible: true,
         width: '**'
       },
@@ -188,7 +184,8 @@ angular.module('bsis')
         if (col.name === 'Date Bled') {
           return $filter('bsisDate')(value);
         } else if (col.name === 'ttistatus') {
-          return $filter('mapTTIStatus')(value);
+          value = value.replace('TTI_', '');
+          return $filter('titleCase')(value);
         } else if (col.name === 'bloodAboRh') {
           var bloodSerology = '';
           if (row.entity.bloodTypingStatus !== 'NOT_DONE') {
@@ -201,6 +198,9 @@ angular.module('bsis')
           } else {
             return row.entity.previousDonationAboRhOutcome;
           }
+        } else if (col.name === 'bloodTypingStatusBloodTypingMatchStatus') {
+          value = row.entity.bloodTypingStatus + ' - ' +  row.entity.bloodTypingMatchStatus;
+          return $filter('titleCase')(value) + ' (' + row.entity.bloodAbo + row.entity.bloodRh + ')';
         }
         // assume that column is a test outcome column, and manage empty values
         if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue' && col.name !== 'TTI Status' && col.name !== 'bloodTypingStatusBloodTypingMatchStatus' && col.name !== 'previousDonationAboRhOutcome') {
