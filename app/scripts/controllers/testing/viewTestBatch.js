@@ -131,7 +131,7 @@ angular.module('bsis')
         field: 'packType.packType',
         visible: true,
         width: '**',
-        maxWidth: '120'
+        maxWidth: '100'
       },
       {
         name: 'Venue',
@@ -147,7 +147,7 @@ angular.module('bsis')
         cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["ttistatus"].replace("TTI_", "") | titleCase }}</div>',
         visible: true,
         width: '**',
-        maxWidth: '120'
+        maxWidth: '150'
       },
       {
         name: 'bloodTypingStatusBloodTypingMatchStatus',
