@@ -63,7 +63,7 @@
       </span>
     </span>
 
-    <span>
+    <span ng-if="isEligible !== undefined">
       <uib-alert type="danger" class="inline" close="" ng-show="isEligible !== true">
           Do not bleed donor
       </uib-alert>
