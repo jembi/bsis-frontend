@@ -628,7 +628,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         } else {
           $location.path('/home');
         }
-      }      
+      }
 
     });
   }])
