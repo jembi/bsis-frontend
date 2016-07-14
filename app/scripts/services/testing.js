@@ -81,18 +81,10 @@ angular.module('bsis')
         Api.TestBatches.update({id: testBatch.id}, updateTestBatch, onSuccess, onError);
       },
       updateTestBatch: function(testBatch, onSuccess, onError) {
-        Api.TestBatches.get({id: testBatch.id}, function(response) {
-
-          var updateTestBatch = response;
-          updateTestBatch.id = testBatch.id;
-          updateTestBatch.createdDate = testBatch.createdDate;
-          updateTestBatch.donationBatchIds = testBatch.donationBatchIds;
-
-          Api.TestBatches.update({id: testBatch.id}, updateTestBatch, function(data) {
-            onSuccess(data);
-          }, function(err) {
-            onError(err.data);
-          });
+        Api.TestBatches.update({}, testBatch, function(data) {
+          onSuccess(data);
+        }, function(err) {
+          onError(err.data);
         });
       },
       deleteTestBatch: function(testBatchId, onSuccess, onError) {

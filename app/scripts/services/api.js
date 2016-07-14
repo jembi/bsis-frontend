@@ -66,7 +66,7 @@ angular.module('bsis')
         }
       ),
 
-      TestBatches: $resource(url + '/testbatches/:id', null,
+      TestBatches: $resource(url + '/testbatches/:id', {id: '@id'},
         {
           update: {method: 'PUT'}
         }
