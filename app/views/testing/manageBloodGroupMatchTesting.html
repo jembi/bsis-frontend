@@ -56,7 +56,7 @@
                           <div>Resolve</div>
                       </th>
                       <th class="text-center sortable">
-                          <div>Indeterminate</div>
+                          <div>No Type Determined</div>
                       </th>
                       </thead>
                       <tbody>
@@ -79,7 +79,7 @@
                               <div style="width:90px;">
                                   <ui-select
                                           ng-model="bloodTypingResolutions[sample.donationIdentificationNumber].bloodAbo"
-                                          ng-disabled="bloodTypingResolutions[sample.donationIdentificationNumber].indeterminate === true">
+                                          ng-disabled="bloodTypingResolutions[sample.donationIdentificationNumber].noTypeDetermined === true">
                                       <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
                                       <ui-select-choices
                                               repeat="result in bloodAboOptions.options  | filter: {$: $select.search}">
@@ -92,7 +92,7 @@
                               <div style="width:90px;">
                                   <ui-select
                                           ng-model="bloodTypingResolutions[sample.donationIdentificationNumber].bloodRh"
-                                          ng-disabled="bloodTypingResolutions[sample.donationIdentificationNumber].indeterminate === true">
+                                          ng-disabled="bloodTypingResolutions[sample.donationIdentificationNumber].noTypeDetermined === true">
                                       <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
                                       <ui-select-choices
                                               repeat="result in bloodRhOptions.options  | filter: {$: $select.search}">
@@ -104,11 +104,11 @@
                           <td align="center">
                               <input type="checkbox"
                                      ng-model="bloodTypingResolutions[sample.donationIdentificationNumber].resolved"
-                                     ng-click="bloodTypingResolutions[sample.donationIdentificationNumber].indeterminate = false"/>
+                                     ng-click="bloodTypingResolutions[sample.donationIdentificationNumber].noTypeDetermined = false"/>
                           </td>
                           <td align="center">
                               <input type="checkbox"
-                                     ng-model="bloodTypingResolutions[sample.donationIdentificationNumber].indeterminate"
+                                     ng-model="bloodTypingResolutions[sample.donationIdentificationNumber].noTypeDetermined"
                                      ng-click="bloodTypingResolutions[sample.donationIdentificationNumber].resolved = false"/>
                           </td>
                       </tr>

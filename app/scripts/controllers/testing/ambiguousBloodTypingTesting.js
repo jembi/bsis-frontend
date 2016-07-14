@@ -26,7 +26,7 @@ angular.module('bsis')
           $scope.bloodTypingResolutions[din].bloodAbo = sample.bloodAbo;
           $scope.bloodTypingResolutions[din].bloodRh = sample.bloodRh;
           $scope.bloodTypingResolutions[din].resolved = false;
-          $scope.bloodTypingResolutions[din].indeterminate = false;
+          $scope.bloodTypingResolutions[din].noTypeDetermined = false;
           $scope.bloodTypingResolutions[din].id = sample.id;
         });
       }, function(err) {
@@ -43,10 +43,10 @@ angular.module('bsis')
       bloodTypingResolutionsArray.bloodTypingResolutions = [];
 
       angular.forEach(bloodTypingResolutions, function(bloodTypingResolution) {
-        // only save if resolved == true or indeterminate == true
-        if (bloodTypingResolution.resolved || bloodTypingResolution.indeterminate) {
+        // only save if resolved == true or noTypeDetermined == true
+        if (bloodTypingResolution.resolved || bloodTypingResolution.noTypeDetermined) {
           var status = 'RESOLVED';
-          if (bloodTypingResolution.indeterminate) {
+          if (bloodTypingResolution.noTypeDetermined) {
             status = 'NO_TYPE_DETERMINED';
           }
           bloodTypingResolution.status = status;
