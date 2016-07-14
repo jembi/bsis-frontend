@@ -50,35 +50,26 @@ angular.module('bsis')
         });
       },
       closeTestBatch: function(testBatch, onSuccess, onError) {
-        var updateTestBatch = {};
-        updateTestBatch.id = testBatch.id;
-        updateTestBatch.status = 'CLOSED';
+        testBatch.status = 'CLOSED';
 
-        Api.TestBatches.update({id: testBatch.id}, updateTestBatch, function(data) {
+        Api.TestBatches.update({}, testBatch, function(data) {
           onSuccess(data);
         }, function() {
           onError(false);
         });
       },
       reopenTestBatch: function(testBatch, onSuccess, onError) {
-        var updateTestBatch = {};
-        updateTestBatch.id = testBatch.id;
-        updateTestBatch.status = 'RELEASED';
+        testBatch.status = 'RELEASED';
 
-        Api.TestBatches.update({id: testBatch.id}, updateTestBatch, function(data) {
+        Api.TestBatches.update({}, testBatch, function(data) {
           onSuccess(data);
         }, function() {
           onError(false);
         });
       },
       releaseTestBatch: function(testBatch, onSuccess, onError) {
-
-        var updateTestBatch = {
-          id: testBatch.id,
-          status: 'RELEASED'
-        };
-
-        Api.TestBatches.update({id: testBatch.id}, updateTestBatch, onSuccess, onError);
+        testBatch.status = 'RELEASED';
+        Api.TestBatches.update({}, testBatch, onSuccess, onError);
       },
       updateTestBatch: function(testBatch, onSuccess, onError) {
         Api.TestBatches.update({}, testBatch, function(data) {
