@@ -344,21 +344,21 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       .when('/aboRhGroupsReport', {
         templateUrl: 'views/reports/aboRhGroupsReport.html',
         controller: 'AboRhGroupsReportCtrl',
-        permission: PERMISSIONS.VIEW_REPORTING_INFORMATION,
+        permission: PERMISSIONS.DONATIONS_REPORTING,
         enabled: UI.REPORTS_TAB_ENABLED,
         reloadOnSearch: false
       })
       .when('/donationTypesReport', {
         templateUrl: 'views/reports/donationTypesReport.html',
         controller: 'DonationTypesReportCtrl',
-        permission: PERMISSIONS.VIEW_REPORTING_INFORMATION,
+        permission: PERMISSIONS.DONATIONS_REPORTING,
         enabled: UI.REPORTS_TAB_ENABLED,
         reloadOnSearch: false
       })
       .when('/ttiPrevalenceReport', {
         templateUrl: 'views/reports/ttiPrevalenceReport.html',
         controller: 'TTIPrevalenceReportCtrl',
-        permission: PERMISSIONS.VIEW_REPORTING_INFORMATION,
+        permission: PERMISSIONS.TTI_REPORTING,
         enabled: UI.REPORTS_TAB_ENABLED,
         reloadOnSearch: false
       })
@@ -618,6 +618,18 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
           $location.path('/viewStockLevels');
         }
       }
+
+      if ($location.path() === '/reports') {
+        // Initial routing for reports page
+        if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.DONATIONS_REPORTING) > -1) {
+          $location.path('/aboRhGroupsReport');
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.TTI_REPORTING) > -1) {
+          $location.path('/ttiPrevalenceReport');
+        } else {
+          $location.path('/home');
+        }
+      }      
+
     });
   }])
 
