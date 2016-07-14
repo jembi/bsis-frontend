@@ -71,7 +71,7 @@ angular.module('bsis')
         'title': 'SETTINGS',
         'href': '#settings',
         'icon': ICONS.SETTINGS,
-        'permission': PERMISSIONS.VIEW_ADMIN_INFORMATION,
+        'permission': PERMISSIONS.AUTHENTICATED,
         'sectionEnabled': 'true'
       }
     ];
