@@ -38,16 +38,8 @@ angular.module('bsis')
           response(false);
         });
       },
-      addTestBatch: function(donationBatches, response) {
-        var addTestBatch = new Api.TestBatches();
-
-        addTestBatch.donationBatchIds = donationBatches;
-
-        addTestBatch.$save(function() {
-          response(true);
-        }, function() {
-          response(false);
-        });
+      addTestBatch: function(testBatch, onSuccess, onError) {
+        Api.TestBatches.save({}, testBatch, onSuccess, onError);
       },
       closeTestBatch: function(testBatch, onSuccess, onError) {
         testBatch.status = 'CLOSED';
