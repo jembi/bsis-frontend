@@ -57,28 +57,19 @@ angular.module('bsis')
     };
   })
 
-  .filter('mapTTIStatus', function() {
-    return function(input) {
-      switch (input) {
-        case 'TTI_SAFE':
-          return 'Safe';
-
-        case 'TTI_UNSAFE':
-          return 'Unsafe';
-
-        case 'INDETERMINATE':
-          return 'Indeterminate';
-
-        default:
-          return 'Not Done';
-
-      }
-    };
-  })
-
   .filter('eligibility', function() {
     return function(input) {
       return input ? 'Eligible' : 'Not Eligible';
+    };
+  })
+
+  .filter('titleCase', function() {
+    return function(input) {
+      input = input || '';
+      input = input.replace(/_/g, ' ');
+      return input.replace(/\w\S*/g, function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      });
     };
   })
 ;
