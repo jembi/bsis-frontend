@@ -42,10 +42,9 @@ angular.module('bsis')
           }, function(err) {
             onError(err.data);
           });
-
         });
-
-      }
+      },
+      search: Api.Locations.search
 
     };
   });
