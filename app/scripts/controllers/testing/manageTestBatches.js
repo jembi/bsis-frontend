@@ -62,6 +62,7 @@ angular.module('bsis')
           $scope.getUnassignedDonationBatches();
           $scope.submitted = '';
           $scope.addingTestBatch = false;
+          addTestBatchForm.$setPristine();
         }, function(err) {
           $log.error(err);
           $scope.addingTestBatch = false;
