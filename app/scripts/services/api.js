@@ -275,6 +275,10 @@ angular.module('bsis')
 
       Locations: $resource(url + '/locations/:id', null, {
         update: {method: 'PUT'},
+        getSearchForm: {
+          method: 'GET',
+          url: url + '/locations/search/form'
+        },
         search: {
           method: 'GET',
           url: url + '/locations/search'

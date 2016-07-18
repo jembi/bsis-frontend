@@ -44,6 +44,8 @@ angular.module('bsis')
           });
         });
       },
+
+      getSearchForm: Api.Locations.getSearchForm,
       search: Api.Locations.search
 
     };
