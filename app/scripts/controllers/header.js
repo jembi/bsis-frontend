@@ -78,7 +78,6 @@ angular.module('bsis')
 
     var donorRoutes = [
       '/donors',
-      '/locations',
       '/findDonor',
       '/duplicateDonors',
       '/manageDuplicateDonors',
@@ -152,6 +151,7 @@ angular.module('bsis')
     var settingsRoutes = [
       '/settings',
       '/accountSettings',
+      '/locations',
       '/deferralReasons',
       '/manageDeferralReason/\\d+',
       '/discardReasons',
