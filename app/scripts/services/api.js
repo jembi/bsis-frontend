@@ -278,7 +278,7 @@ angular.module('bsis')
         search: {
           method: 'GET',
           url: url + '/locations/search'
-        } 
+        }
       }),
 
       Configurations: $resource(url + '/configurations/:id', null,
