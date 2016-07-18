@@ -78,7 +78,6 @@ angular.module('bsis')
 
     var donorRoutes = [
       '/donors',
-      '/locations',
       '/findDonor',
       '/duplicateDonors',
       '/manageDuplicateDonors',
