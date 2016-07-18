@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, Api, LocationsService, DATEFORMAT, $filter) {
+angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, Api, PostDonationCounsellingService, DATEFORMAT, $filter) {
   var master = {
     selectedVenues: [],
     startDate: null,
@@ -8,19 +8,6 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.search = angular.copy(master);
-  LocationsService.getVenues(function(allVenues) {
-    $scope.venues = allVenues;
-    if ($routeParams.venue) {
-      var venues = $routeParams.venue;
-      if (!angular.isArray(venues)) {
-        $scope.search.selectedVenues = [venues];
-      } else {
-        angular.forEach(venues, function(value) {
-          $scope.search.selectedVenues.push(parseInt(value));
-        });
-      }
-    }
-  });
 
   $scope.dateFormat = DATEFORMAT;
   $scope.donations = [];
@@ -209,10 +196,6 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     }
   };
 
-  if ($routeParams.search) {
-    $scope.refresh();
-  }
-
   $scope.export = function(format) {
     if (format === 'pdf') {
       $scope.gridApi.exporter.pdfExport('all', 'all');
@@ -220,4 +203,28 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       $scope.gridApi.exporter.csvExport('all', 'all');
     }
   };
+
+  function init() {
+    PostDonationCounsellingService.getPostDonationCounsellingSearchForm(function(form) {
+      $scope.venues = form.venues;
+
+      // Select venues from route params
+      if ($routeParams.venue) {
+        var venues = angular.isArray($routeParams.venue) ? $routeParams.venue : [$routeParams.venue];
+        $scope.search.selectedVenues = venues.map(function(venueId) {
+          // Cast id to number
+          return +venueId;
+        });
+      }
+
+      // If the search parameter is present then refresh
+      if ($routeParams.search) {
+        $scope.refresh();
+      }
+    }, function(err) {
+      $log.error(err);
+    });
+  }
+
+  init();
 });

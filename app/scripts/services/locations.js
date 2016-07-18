@@ -3,14 +3,6 @@
 angular.module('bsis')
   .factory('LocationsService', function(Api) {
     return {
-      getVenues: function(onSuccess, onError) {
-        Api.Locations.get({}, function(response) {
-          onSuccess(response.allLocations.filter(function(loc) {
-            return loc.isVenue;
-          }));
-        }, onError);
-      },
-
       addLocation: function(location, onSuccess, onError) {
 
         var addLocation = new Api.Locations();
