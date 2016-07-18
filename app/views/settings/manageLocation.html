@@ -1,0 +1,88 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
+  <h3 class="page-header">Manage Location</h3>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form name="locationForm" novalidate class="form-horizontal col-sm-12" donationType="form"
+          ng-submit="saveLocation()">
+
+        <!-- Set name -->
+        <div class="row form-group col-sm-12">
+          <label for="name" class="col-sm-1 control-label">Name</label>
+          <div class="col-sm-4">
+            <div class="form-inline">
+              <input size="30" id="name" name="name" class="form-control input-sm" ng-model="location.name" required>
+              <div>
+                <small class="error" ng-show="locationForm.name.$error.duplicate && locationForm.$submitted">
+                  Location name already exists
+                </small>
+                <small class="error" ng-show="locationForm.name.$error.required && locationForm.$submitted">
+                  This cannot be empty
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Set location type booleans -->
+        <div class="row form-group col-sm-12">
+          <label class="col-sm-1 control-label">Location Type</label>
+          <div class="col-sm-6">
+            <div class="form-inline">
+              <small style="color: black;">
+                <input type="checkbox" id="isVenue" name="isVenue" ng-model="location.isVenue" ng-required="!validateLocationType()"/>
+                <label for="isVenue">Donor Clinic</label>
+              </small>
+              <small style="color: black;">
+                <input type="checkbox" id="isMobile" name="isMobile" ng-model="location.isMobileSite" ng-required="!validateLocationType()"/>
+                <label for="isMobile">Mobile Clinic</label>
+              </small>
+              <small style="color: black;">
+                <input type="checkbox" id="isProcessingSite" name="isProcessingSite" ng-model="location.isProcessingSite" ng-required="!validateLocationType()"/>
+                <label for="isProcessingSite">Components</label>
+              </small>
+              <small style="color: black;">
+                <input type="checkbox" id="isTestingSite" name="isTestingSite" ng-model="location.isTestingSite" ng-required="!validateLocationType()"/>
+                <label for="isTestingSite">Testing</label>
+              </small>
+              <small style="color: black;">
+                <input type="checkbox" id="isDistributionSite" name="isDistributionSite" ng-model="location.isDistributionSite" ng-required="!validateLocationType()"/>
+                <label for="isDistributionSite">Inventory</label>
+              </small>
+              <small style="color: black;">
+                <input type="checkbox" id="isUsageSite" name="isUsageSite" ng-model="location.isUsageSite" ng-required="!validateLocationType()"/>
+                <label for="isUsageSite">Hospital / Clinic</label>
+              </small>
+            </div>  
+            <div>
+              <small class="error" ng-show="!validateLocationType() && locationForm.$submitted">
+                Please choose at least one location type
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Set isDeleted -->
+        <div class="row form-group col-sm-12">
+          <label for="isDeleted" class="col-sm-1 control-label">Enabled</label>
+          <div class="col-sm-4">
+            <div class="checkbox">
+              <input type="checkbox" id="isDeleted" name="isDeleted" ng-model="location.isDeleted"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-1 col-sm-4">
+            <button class="btn btn-primary" type="submit" style="margin-top: 2px"
+                ng-disabled="savingLocation">{{savingLocation ? "Saving..." : "Save Location"}}
+            </button>
+            <button class="btn btn-primary" type="button" ng-click="cancel()"
+                style="margin-top: 2px" ng-disabled="savingLocation">Cancel
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

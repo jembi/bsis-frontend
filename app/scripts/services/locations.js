@@ -19,18 +19,7 @@ angular.module('bsis')
         }, onError);
       },
 
-      addLocation: function(location, onSuccess, onError) {
-
-        var addLocation = new Api.Locations();
-        angular.copy(location, addLocation);
-
-        addLocation.$save(function(data) {
-          onSuccess(data);
-        }, function(err) {
-          onError(err.data);
-        });
-
-      },
+      addLocation: Api.Locations.save,
       updateLocation: function(location, onSuccess, onError) {
 
         var updateLocation = Api.Locations.get({id: location.id}, function() {
@@ -44,8 +33,8 @@ angular.module('bsis')
           });
 
         });
-
-      }
-
+      },
+      search: Api.Locations.search,
+      getLocationById: Api.Locations.get
     };
   });
