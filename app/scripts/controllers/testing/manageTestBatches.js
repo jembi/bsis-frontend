@@ -1,5 +1,5 @@
 angular.module('bsis')
-  .controller('TestBatchCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, DATEFORMAT, ICONS, PERMISSIONS) {
+  .controller('TestBatchCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS, PERMISSIONS) {
 
     $scope.icons = ICONS;
     $scope.permissions = PERMISSIONS;
@@ -8,14 +8,17 @@ angular.module('bsis')
 
     var data = [{}];
     $scope.openTestBatches = false;
-    $scope.selectedDonationBatches = {};
-    $scope.selectedDonationBatches.ids = [];
+    var testBatchMaster = {
+      donationBatchIds: [],
+      location: null
+    };
+    $scope.testBatch = angular.copy(testBatchMaster);
 
     $scope.clearAddTestBatchForm = function(form) {
       $location.search({});
       form.$setPristine();
       $scope.submitted = '';
-      $scope.selectedDonationBatches = {};
+      $scope.testBatch = angular.copy(testBatchMaster);
       $scope.searchResults = '';
     };
 
@@ -41,6 +44,7 @@ angular.module('bsis')
       TestingService.getTestBatchFormFields(function(response) {
         if (response !== false) {
           $scope.donationBatches = response.donationBatches;
+          $scope.testingSites = response.testingSites;
         }
       });
     };
@@ -48,17 +52,19 @@ angular.module('bsis')
     $scope.getOpenTestBatches();
     $scope.getUnassignedDonationBatches();
 
-    $scope.addTestBatch = function(donationBatches, valid) {
-      if (valid) {
+    $scope.addTestBatch = function(addTestBatchForm) {
+      if (addTestBatchForm.$valid) {
 
         $scope.addingTestBatch = true;
-        TestingService.addTestBatch(donationBatches, function(response) {
-          if (response === true) {
-            $scope.selectedDonationBatches = {};
-            $scope.getOpenTestBatches();
-            $scope.getUnassignedDonationBatches();
-            $scope.submitted = '';
-          }
+        TestingService.addTestBatch($scope.testBatch, function() {
+          $scope.testBatch = angular.copy(testBatchMaster);
+          $scope.getOpenTestBatches();
+          $scope.getUnassignedDonationBatches();
+          $scope.submitted = '';
+          $scope.addingTestBatch = false;
+          addTestBatchForm.$setPristine();
+        }, function(err) {
+          $log.error(err);
           $scope.addingTestBatch = false;
         });
       } else {
