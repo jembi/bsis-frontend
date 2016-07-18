@@ -480,12 +480,16 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'EditAdverseEventTypeCtrl',
         permission: PERMISSIONS.EDIT_ADVERSE_EVENT_TYPES
       })
+      .when('/locations', {
+        templateUrl: 'views/settings/locations.html',
+        controller: 'LocationsCtrl',
+        permission: PERMISSIONS.MANAGE_LOCATIONS
+      })
       .when('/manageLocation/:id?', {
         templateUrl: 'views/settings/manageLocation.html',
         controller: 'ManageLocationCtrl',
-        permission: PERMISSIONS.MANAGE_DONATION_SITES
+        permission: PERMISSIONS.MANAGE_LOCATIONS
       })
-
       .otherwise({
         redirectTo: '/home'
       });

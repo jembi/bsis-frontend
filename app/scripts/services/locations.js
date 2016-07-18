@@ -18,10 +18,10 @@ angular.module('bsis')
           }));
         }, onError);
       },
-
       addLocation: Api.Locations.save,
       updateLocation: Api.Locations.update,
-      search: Api.Locations.search,
-      getLocationById: Api.Locations.get
+      getLocationById: Api.Locations.get,
+      getSearchForm: Api.Locations.getSearchForm,
+      search: Api.Locations.search
     };
   });

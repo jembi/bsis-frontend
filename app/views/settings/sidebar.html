@@ -14,6 +14,8 @@
                 href="#/accountSettings">Account Settings</a></li>
         <li ng-class="{current:  currentPath === '/configurations'}" has-permission="{{permissions.MANAGE_GENERAL_CONFIGS}}">
             <a href="#/configurations">General Configurations</a></li>
+        <li ng-class="{current:  currentPath === '/locations'}" has-permission="{{permissions.MANAGE_LOCATIONS}}">
+            <a href="#/locations">Locations</a></li>
         <li ng-class="{current:  currentPath === '/adverseEventTypes'}"
             has-permission="{{permissions.VIEW_ADVERSE_EVENT_TYPES}}"><a href="#/adverseEventTypes">Manage Adverse Event
             Types</a></li>
