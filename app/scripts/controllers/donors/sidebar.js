@@ -18,9 +18,6 @@ angular.module('bsis').controller('DonorsSidebarCtrl', function($scope, RoutingS
         '/manageClinic'
       ]
     }, {
-      path: '/locations',
-      subpaths: []
-    }, {
       path: '/donorCounselling',
       subpaths: []
     }, {

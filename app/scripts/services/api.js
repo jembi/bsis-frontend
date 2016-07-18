@@ -312,7 +312,11 @@ angular.module('bsis')
       DonorPostDonationCounselling: $resource(url + '/donors/:donorId/postdonationcounselling'),
 
       PostDonationCounselling: $resource(url + '/postdonationcounsellings/:id', {id: '@id'}, {
-        update: {method: 'PUT'}
+        update: {method: 'PUT'},
+        searchForm: {
+          method: 'GET',
+          url: url + '/postdonationcounsellings/searchForm'
+        }
       }),
       PostDonationCounsellingFormFields: $resource(url + '/postdonationcounsellings/form'),
 
