@@ -53,6 +53,10 @@ angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, Routin
       path: '/auditLog',
       subpaths: [
       ]
+    }, {
+      path: '/locations',
+      subpaths: [
+      ]
     }
   ];
 

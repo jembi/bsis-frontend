@@ -26,10 +26,11 @@ angular.module('bsis')
           }, function(err) {
             onError(err.data);
           });
-
         });
+      },
 
-      }
+      getSearchForm: Api.Locations.getSearchForm,
+      search: Api.Locations.search
 
     };
   });
