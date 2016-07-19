@@ -76,8 +76,7 @@ angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $
   }
 
   $scope.onRowClick = function(row) {
-    //$location.path('/viewLocation/' + row.entity.id);
-    $log.info('Not implemented yet ' + row.entity.id);
+    $location.path('/manageLocation/' + row.entity.id);
   };
 
   $scope.clear = function() {

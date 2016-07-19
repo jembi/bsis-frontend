@@ -481,7 +481,11 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.MANAGE_LOCATIONS,
         reloadOnSearch: false
       })
-
+      .when('/manageLocation/:id?', {
+        templateUrl: 'views/settings/manageLocation.html',
+        controller: 'ManageLocationCtrl',
+        permission: PERMISSIONS.MANAGE_LOCATIONS
+      })
       .otherwise({
         redirectTo: '/home'
       });
