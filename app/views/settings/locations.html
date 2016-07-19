@@ -22,11 +22,11 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Location Type</label>
       <div class="col-sm-10">
-        <select class="form-control" style="width:auto;" name="locationType" ng-model="locationSearch.locationType" ng-options="item as (item | titleCase) for item in locationType" ng-required="locationSearch.name.length < 1">
+        <select class="form-control" style="width:auto;" name="locationType" ng-model="locationSearch.locationType" ng-options="item as (item | titleCase) for item in locationType" ng-required="!locationSearch.name || locationSearch.name.length < 1">
           <option value="" selected></option>
         </select>
         <ng-messages for="findLocationForm.locationType.$error" role="alert" ng-show="findLocationForm.$submitted">
-          <small class="error">All search fields cannot be empty</small>
+          <small class="error" ng-message="required">All search fields cannot be empty</small>
         </ng-messages>
       </div>
     </div>
