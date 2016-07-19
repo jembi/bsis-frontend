@@ -77,6 +77,7 @@ angular.module('bsis')
       TestingService.getTestBatchFormFields(function(response) {
         if (response !== false) {
           $scope.donationBatches = response.donationBatches;
+          $scope.locations = response.testingSites;
           angular.forEach(response.donationBatches, function(batch) {
             $scope.testBatchAvailableDonationBatches.push(batch);
           });

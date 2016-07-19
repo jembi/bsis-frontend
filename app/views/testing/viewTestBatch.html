@@ -52,7 +52,7 @@
 
   <hr style="clear:right;"/>
 
-  <span ng-if="testBatch.status!='CLOSED'" ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; margin-top: -10px; margin-bottom: 0px; padding-right: 15px; text-align: right;">
+  <span ng-if="testBatch.status!='CLOSED'" ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; vertical-align: center; margin-top: 0px; margin-bottom: 0px; padding-right: 15px; text-align: right;">
     <span has-permission="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="confirmDelete || confirmEdit">
       <small>
         <em>TTI Test Outcomes:
@@ -110,21 +110,28 @@
   <form editable-form name="editableForm" onbeforesave="validateForm(editableForm)" onaftersave="updateTestBatch(testBatch)">
 
       <div class="h4">
-          <small><em>Created On: </em></small>
-          <span ng-show="!editableForm.$visible">{{ (testBatch.createdDate | bsisDate) || '' }}</span>
-      <span ng-show="editableForm.$visible" style="display:inline;">
-        <dateselect ng-model="testBatch.createdDate" initDate="testBatch.createdDate" format="format"
-                    opened="dateToOpen"></dateselect>
-      </span>
-      <span ng-if="testBatch.status !== 'RELEASED' && !testBatch.permissions.canRelease">
-        | <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
-      </span>
-      <span ng-if="testBatch.status !== 'RELEASED' && testBatch.permissions.canRelease">
-        | <small><em>Number of Samples Ready for Release: </em></small>{{testBatch.readyForReleaseCount}} of {{testBatch.numSamples}}
-      </span>
-      <span ng-if="testBatch.status === 'RELEASED'">
-        | <small><em>Number of Samples Released: </em></small>{{testBatch.numReleasedSamples}} of {{testBatch.numSamples}}
-      </span>
+        <small><em>Created On: </em></small>
+        <span ng-show="!editableForm.$visible">{{ (testBatch.createdDate | bsisDate) || '' }}</span>
+        <span ng-show="editableForm.$visible" style="display:inline;">
+          <dateselect ng-model="testBatch.createdDate" initDate="testBatch.createdDate" format="format" opened="dateToOpen"></dateselect>
+        </span> |
+        <small><em>Location: </em></small>
+        <span ng-show="!editableForm.$visible" style="display:inline;">{{testBatch.location.name}}</span>
+        <span ng-show="editableForm.$visible" style="display:inline;">
+          <select class="form-control" style="display:inline; width:auto;" name="location" ng-model="testBatch.location" ng-options="item as item.name for item in locations track by item.id" required></select>
+        </span>
+      </div>
+
+      <div class="h4">
+        <span ng-if="testBatch.status !== 'RELEASED' && !testBatch.permissions.canRelease">
+          <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
+        </span>
+        <span ng-if="testBatch.status !== 'RELEASED' && testBatch.permissions.canRelease">
+          <small><em>Number of Samples Ready for Release: </em></small>{{testBatch.readyForReleaseCount}} of {{testBatch.numSamples}}
+        </span>
+        <span ng-if="testBatch.status === 'RELEASED'">
+          <small><em>Number of Samples Released: </em></small>{{testBatch.numReleasedSamples}} of {{testBatch.numSamples}}
+        </span>
       </div>
 
       <hr style="margin-bottom:5px;"/>

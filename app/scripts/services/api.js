@@ -66,7 +66,7 @@ angular.module('bsis')
         }
       ),
 
-      TestBatches: $resource(url + '/testbatches/:id', null,
+      TestBatches: $resource(url + '/testbatches/:id', {id: '@id'},
         {
           update: {method: 'PUT'}
         }
@@ -318,7 +318,11 @@ angular.module('bsis')
       DonorPostDonationCounselling: $resource(url + '/donors/:donorId/postdonationcounselling'),
 
       PostDonationCounselling: $resource(url + '/postdonationcounsellings/:id', {id: '@id'}, {
-        update: {method: 'PUT'}
+        update: {method: 'PUT'},
+        searchForm: {
+          method: 'GET',
+          url: url + '/postdonationcounsellings/searchForm'
+        }
       }),
       PostDonationCounsellingFormFields: $resource(url + '/postdonationcounsellings/form'),
 

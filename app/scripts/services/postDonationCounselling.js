@@ -10,6 +10,10 @@ angular.module('bsis').factory('PostDonationCounsellingService', function(Api) {
 
     getPostDonationCounsellingFormFields: function(onSuccess, onError) {
       Api.PostDonationCounsellingFormFields.get(onSuccess, onError);
+    },
+
+    getPostDonationCounsellingSearchForm: function(onSuccess, onError) {
+      Api.PostDonationCounselling.searchForm(onSuccess, onError);
     }
   };
 });

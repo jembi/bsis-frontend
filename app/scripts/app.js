@@ -95,11 +95,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.VIEW_DONATION_BATCH,
         enabled: UI.DONORS_TAB_ENABLED
       })
-      .when('/locations', {
-        templateUrl: 'views/donors/locations.html',
-        controller: 'LocationsCtrl',
-        permission: PERMISSIONS.MANAGE_DONATION_SITES
-      })
       .when('/exportDonorList', {
         templateUrl: 'views/donors/donorCommunications.html',
         controller: 'DonorCommunicationsCtrl',
@@ -483,7 +478,8 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       .when('/locations', {
         templateUrl: 'views/settings/locations.html',
         controller: 'LocationsCtrl',
-        permission: PERMISSIONS.MANAGE_LOCATIONS
+        permission: PERMISSIONS.MANAGE_LOCATIONS,
+        reloadOnSearch: false
       })
       .when('/manageLocation/:id?', {
         templateUrl: 'views/settings/manageLocation.html',
