@@ -483,7 +483,8 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       .when('/locations', {
         templateUrl: 'views/settings/locations.html',
         controller: 'LocationsCtrl',
-        permission: PERMISSIONS.MANAGE_LOCATIONS
+        permission: PERMISSIONS.MANAGE_LOCATIONS,
+        reloadOnSearch: false
       })
 
       .otherwise({
