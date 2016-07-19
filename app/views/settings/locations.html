@@ -7,14 +7,14 @@
     </div>
 
   <form class="form-horizontal col-sm-12" name="findLocationForm" ng-submit="findLocations()" novalidate>
-
     <div class="form-group">
         <label class="col-sm-2 control-label" for="name">Name</label>
         <div class="col-sm-10">
             <div class="form-inline">
-                <input type="name" id="name" class="form-control input-sm" size="40" autofocus="true" ng-model="locationSearch.name">
-                <input type="checkbox" id="usePhraseMatch" ng-model="locationSearch.includeSimilarResults">
-                  <label style="display: inline-block; cursor: pointer; cursor: hand;" for="includeSimilarResults"> Include Similar Results</label>
+              <input type="name" id="name" class="form-control input-sm" size="40" autofocus="true" ng-model="locationSearch.name" ng-required="!locationSearch.locationType || locationSearch.locationType.length < 1"/>
+              <input type="checkbox" id="includeSimilarResults" ng-model="locationSearch.includeSimilarResults"> <label
+                  style="display: inline-block; cursor: pointer; cursor: hand;" for="includeSimilarResults"> Include Similar Results </label>
+              </input>
             </div>
         </div>
     </div>
@@ -22,9 +22,12 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Location Type</label>
       <div class="col-sm-10">
-        <select class="form-control" style="width:auto;" name="type" ng-model="locationSearch.locationType" ng-options="item as (item | titleCase) for item in locationType">
+        <select class="form-control" style="width:auto;" name="locationType" ng-model="locationSearch.locationType" ng-options="item as (item | titleCase) for item in locationType" ng-required="locationSearch.name.length < 1">
           <option value="" selected></option>
         </select>
+        <ng-messages for="findLocationForm.locationType.$error" role="alert" ng-show="findLocationForm.$submitted">
+          <small class="error">All search fields cannot be empty</small>
+        </ng-messages>
       </div>
     </div>
 
@@ -33,17 +36,17 @@
       <div class="col-sm-10">
         <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}}
         </button>
-        <button class="btn btn-primary" type="button" ng-click="init()">Clear</button>
+        <button class="btn btn-primary" type="button" ng-click="clear()">Clear</button>
       </div>
     </div>
 
   </form>
   
   <div class="col-sm-12">
-    <div class="panel panel-default" ng-if="submitted">
+    <div class="panel panel-default" ng-if="searched">
       <div class="panel-body">
         <p>
-          <em>{{gridOptions.data.length}} Locations(s) found</em>
+          <em>{{gridOptions.data.length}} Location(s) found</em>
         </p>
         <div class="grid" ui-grid="gridOptions" ui-grid-pagination></div> 
       <div>

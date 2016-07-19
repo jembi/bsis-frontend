@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $log, ICONS, LocationsService) {
+angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $routeParams, $log, ICONS, LocationsService) {
 
   var master = {
     name: '',
@@ -26,10 +26,11 @@ angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $
   ];
 
   $scope.icons = ICONS;
+  $scope.findLocationForm = {};
   $scope.locationSearch = {};
   $scope.locationType = [];
   $scope.searching = false;
-  $scope.submitted = false;
+  $scope.searched = false;
 
   $scope.gridOptions = {
     data: [],
@@ -44,30 +45,60 @@ angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $
     }
   };
 
+  function init() {
+    $scope.searched = false;
+    $scope.searching = false;
+
+    // inspect the parameters in the URL + copy for the search
+    $scope.locationSearch = angular.copy(master);
+    if ($routeParams.name) {
+      $scope.locationSearch.name = $routeParams.name;
+    }
+    if ($routeParams.includeSimilarResults) {
+      if ($routeParams.includeSimilarResults === 'false') {
+        $scope.locationSearch.includeSimilarResults = false;
+      } else {
+        $scope.locationSearch.includeSimilarResults = true;
+      }
+    }
+    if ($routeParams.locationType) {
+      $scope.locationSearch.locationType = $routeParams.locationType;
+    }
+    if ($scope.locationSearch.name || $scope.locationSearch.locationType) {
+      // if search paramaters have been defined, find the requested locations
+      $scope.findLocations();
+    }
+
+    // initialise the form: locationType
+    LocationsService.getSearchForm(function(response) {
+      $scope.locationType = response.locationType;
+    }, $log.error);
+  }
+
   $scope.onRowClick = function(row) {
     //$location.path('/viewLocation/' + row.entity.id);
     $log.info('Not implemented yet ' + row.entity.id);
   };
 
-  $scope.init = function() {
-    $scope.gridOptions.data = [];
+  $scope.clear = function() {
+    $location.search({});
     $scope.locationSearch = angular.copy(master);
-    $scope.submitted = false;
+    $scope.searched = false;
     $scope.searching = false;
-    LocationsService.getSearchForm(function(response) {
-      $scope.locationType = response.locationType;
-    }, $log.error);
+    $scope.gridOptions.data = [];
+    $scope.findLocationForm.$setPristine();
   };
 
   $scope.findLocations = function() {
     if ($scope.findLocationForm.$invalid) {
       return;
     }
-    $scope.submitted = false;
+    $scope.searched = false;
     $scope.searching = true;
+    $location.search($scope.locationSearch);
     LocationsService.search($scope.locationSearch, function(response) {
       $scope.gridOptions.data = response.locations;
-      $scope.submitted = true;
+      $scope.searched = true;
       $scope.searching = false;
     }, function(error) {
       $log.error(error);
@@ -75,6 +106,6 @@ angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $
     });
   };
 
-  $scope.init();
+  init();
 
 });
