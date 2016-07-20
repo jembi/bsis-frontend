@@ -2,7 +2,7 @@
 
 angular.module('bsis').controller('ManageLocationCtrl', function($scope, $location, $log, LocationsService, $timeout, $routeParams) {
 
-  $scope.location = {};
+  $scope.location = {isDeleted: false};
   $scope.locationForm = {};
 
   $scope.$watch('location.name', function() {

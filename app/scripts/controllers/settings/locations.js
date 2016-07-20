@@ -4,7 +4,7 @@ angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $
 
   var master = {
     name: '',
-    includeSimilarResults: false,
+    includeSimilarResults: true,
     locationType: null
   };
 
