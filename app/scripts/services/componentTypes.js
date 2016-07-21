@@ -3,6 +3,8 @@
 angular.module('bsis')
   .factory('ComponentTypesService', function(Api) {
     return {
-      getComponentTypes: Api.ComponentTypes.getAll
+      getComponentTypes: Api.ComponentTypes.getAll,
+      getComponentTypeById: Api.ComponentTypes.get,
+      updateComponentType: Api.ComponentTypes.update
     };
   });

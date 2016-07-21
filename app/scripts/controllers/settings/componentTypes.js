@@ -66,8 +66,7 @@ angular.module('bsis').controller('ComponentTypesCtrl', function($scope, $locati
   }
 
   $scope.onRowClick = function(row) {
-    //$location.path('/manageComponentType/' + row.entity.id);
-    $log.info('Not implemented yet for ' + row.entity.id);
+    $location.path('/manageComponentType/' + row.entity.id);
   };
 
   init();

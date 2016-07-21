@@ -491,6 +491,11 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'ComponentTypesCtrl',
         permission: PERMISSIONS.MANAGE_COMPONENT_TYPES
       })
+      .when('/manageComponentType/:id', {
+        templateUrl: 'views/settings/manageComponentType.html',
+        controller: 'ManageComponentTypeCtrl',
+        permission: PERMISSIONS.MANAGE_COMPONENT_TYPES
+      })
       .otherwise({
         redirectTo: '/home'
       });

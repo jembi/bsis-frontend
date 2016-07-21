@@ -106,10 +106,11 @@ angular.module('bsis')
       DonorCommunicationsFormFields: $resource(url + '/donorcommunications/form'),
 
       ComponentTypes: $resource(url + '/componenttypes/:id', {id: '@id'}, {
-        getAll : {
+        getAll: {
           method: 'GET',
           url: url + '/componenttypes'
-        }
+        },
+        update: {method: 'PUT'}
       }),
 
       DonationBatchFormFields: $resource(url + '/donationbatches/form'),
