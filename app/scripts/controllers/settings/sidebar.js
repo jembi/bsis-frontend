@@ -58,6 +58,9 @@ angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, Routin
       subpaths: [
         '/manageLocation'
       ]
+    }, {
+      path: '/componentTypes',
+      subpaths: []
     }
   ];
 

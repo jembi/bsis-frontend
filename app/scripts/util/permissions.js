@@ -126,6 +126,7 @@ angular.module('bsis')
     MANAGE_TIPS: 'Manage Tips',
     MANAGE_REQUESTS: 'Manage Requests',
     MANAGE_GENERAL_CONFIGS: 'Manage General Configs',
+    MANAGE_COMPONENT_TYPES: 'Manage Component Types',
 
     //Page Control Permissions
     VIEW_DONOR_INFORMATION: 'View Donor Information',

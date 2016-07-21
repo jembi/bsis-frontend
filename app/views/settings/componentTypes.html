@@ -1,0 +1,16 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
+  <h3 class="page-header">Manage ComponentTypes</h3>
+
+  <div class="col-sm-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>
+          <em>{{gridOptions.data.length}} Component Type(s) found</em>
+        </p>
+        <div class="grid" ui-grid="gridOptions" ui-grid-pagination></div> 
+      <div>
+    </div>
+  </div>
+
+</div>

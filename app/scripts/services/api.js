@@ -104,7 +104,14 @@ angular.module('bsis')
       DonationsFormFields: $resource(url + '/donations/form'),
       DeferralsFormFields: $resource(url + '/deferrals/form'),
       DonorCommunicationsFormFields: $resource(url + '/donorcommunications/form'),
-      ComponentTypes: $resource(url + '/componenttypes'),
+
+      ComponentTypes: $resource(url + '/componenttypes/:id', {id: '@id'}, {
+        getAll : {
+          method: 'GET',
+          url: url + '/componenttypes'
+        }
+      }),
+
       DonationBatchFormFields: $resource(url + '/donationbatches/form'),
       TestBatchFormFields: $resource(url + '/testbatches/form'),
       TTITestingFormFields: $resource(url + '/ttitests/form'),
