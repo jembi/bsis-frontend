@@ -152,8 +152,11 @@
             <label for="" class="col-sm-2 control-label">Start</label>
             <div class="row col-sm-10">
                 <div style="padding-left:5px;">
-                    <uib-timepicker ng-model="bleedStartTime" name="bleedStartTime" show-spinners="false" ></uib-timepicker>
-                </div>
+                    <uib-timepicker ng-model="bleedStartTime" name="bleedStartTime" show-spinners="false"></uib-timepicker>
+                    <small class="error" ng-show="addDonationForm.bleedStartTime.$error.time">
+                        This cannot be empty
+                    </small>
+                </div>     
             </div>
         </div>
 
@@ -161,24 +164,16 @@
             <label for="" class="col-sm-2 control-label">End</label>
             <div class="row col-sm-10">
                 <div style="padding-left:5px;">
-                    <uib-timepicker ng-model="bleedEndTime" name="bleedEndTime" show-spinners="false" ></uib-timepicker>
-                </div>
+                    <uib-timepicker ng-model="bleedEndTime" name="bleedEndTime" show-spinners="false" ng-required="submitted"></uib-timepicker>
+                    <small class="error" ng-show="addDonationForm.bleedEndTime.$error.time">
+                        This cannot be empty
+                    </small>
+                    <small class="error" ng-show="(bleedEndTime < bleedStartTime) && !addDonationForm.bleedStartTime.$error.time && !addDonationForm.bleedEndTime.$error.time">
+                        End time should be after Start time
+                    </small>
+                </div> 
             </div>
         </div>
-
-        <div>
-            <small class="error" ng-show="addDonationForm.bleedStartTime.$error.time || addDonationForm.bleedEndTime.$error.time">
-                Invalid input
-            </small>
-        </div>
-
-        <div>
-            <small class="error" ng-show="(bleedEndTime < bleedStartTime) && !addDonationForm.bleedStartTime.$error.time && !addDonationForm.bleedEndTime.$error.time">
-                End time should be after Start time
-            </small>
-        </div>
-
-
     </div>
     <div class="col-md-4">
 
