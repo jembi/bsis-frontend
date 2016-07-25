@@ -45,7 +45,8 @@
                                  <span editable-bstime="donation.bleedStartTime"
                                        e-mousewheel="donation.permissions.canUpdateDonationFields"
                                        e-minute-step="5" e-name="bleedStartTime" e-id="bleedStartTime"
-                                       e-show-spinners="donation.permissions.canUpdateDonationFields">
+                                       e-show-spinners="donation.permissions.canUpdateDonationFields"
+                                       e-show-spinners="false">
                                  {{donation.bleedStartTime | bsisTime }}
                                  </span>
                                         <small class="error" ng-show="donationSummaryForm.bleedStartTime.$error.max">
@@ -57,7 +58,8 @@
                                  <span editable-bstime="donation.bleedEndTime" e-name="bleedEndTime"
                                        e-mousewheel="donation.permissions.canUpdateDonationFields"
                                        e-minute-step="5"
-                                       e-show-spinners="donation.permissions.canUpdateDonationFields">
+                                       e-show-spinners="donation.permissions.canUpdateDonationFields"
+                                       e-show-spinners="false">
                                  {{donation.bleedEndTime | bsisTime }}
                                  </span>
                                     </td>
