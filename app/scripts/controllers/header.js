@@ -153,6 +153,8 @@ angular.module('bsis')
       '/accountSettings',
       '/locations',
       '/manageLocation',
+      '/componentTypes',
+      '/manageComponentType/\\d',
       '/deferralReasons',
       '/manageDeferralReason/\\d+',
       '/discardReasons',
