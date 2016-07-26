@@ -15,7 +15,7 @@
                  Save
              </button>
              <button type="button" class="btn" style="background:none!important; border:none;  cursor: pointer;"
-                     ng-disabled="donationSummaryForm.$waiting" ng-click="donationSummaryForm.$cancel()">
+                     ng-disabled="donationSummaryForm.$waiting" ng-click="cancelEditDonation(donationSummaryForm)">
                  Cancel
              </button>
          </em>
@@ -42,29 +42,38 @@
                             <table>
                                 <tr>
                                     <td>
-                                 <span editable-bstime="donation.bleedStartTime"
-                                       e-mousewheel="donation.permissions.canUpdateDonationFields"
-                                       e-minute-step="5" e-name="bleedStartTime" e-id="bleedStartTime"
-                                       e-show-spinners="false">
-                                 {{donation.bleedStartTime | bsisTime }}
-                                 </span>
-                                        <small class="error" ng-show="donationSummaryForm.bleedStartTime.$error.max">
-                                            Please enter a value below {{donationSummaryForm.bleedEndTime}}
-                                        </small>
+                                        <span editable-bstime="donation.bleedStartTime"
+                                            e-mousewheel="donation.permissions.canUpdateDonationFields"
+                                            e-minute-step="5" e-name="bleedStartTime" e-id="bleedStartTime"
+                                            e-show-spinners="false">
+                                            {{donation.bleedStartTime | bsisTime }}
+                                        </span>
                                     </td>
                                     <td> to</td>
                                     <td>
-                                 <span editable-bstime="donation.bleedEndTime" e-name="bleedEndTime"
-                                       e-mousewheel="donation.permissions.canUpdateDonationFields"
-                                       e-minute-step="5"
-                                       e-show-spinners="false">
-                                 {{donation.bleedEndTime | bsisTime }}
-                                 </span>
+                                        <span editable-bstime="donation.bleedEndTime" e-name="bleedEndTime"
+                                            e-mousewheel="donation.permissions.canUpdateDonationFields"
+                                            e-minute-step="5"
+                                            e-show-spinners="false">
+                                            {{donation.bleedEndTime | bsisTime }}
+                                        </span>
                                     </td>
-                                    <td>
-                                        <small ng-show="donationSummaryForm.$visible" class="error">{{
-                                            errorObject.bleedTime[0].error }}
+                                </tr>
+                                <tr>
+                                    <td>      
+                                        <small ng-show="donationSummaryForm.$visible" class="error">
+                                            {{errorObject.emptyBleedStartTime[0].error }}
+                                        </small> 
+                                        <small ng-show="donationSummaryForm.$visible" class="error">
+                                            {{errorObject.endTimeBeforeStartTime[0].error }}
                                         </small>
+                                    </td>
+                                    <td>   </td>
+                                    <td>                               
+                                        <small ng-show="donationSummaryForm.$visible" class="error">
+                                            {{errorObject.emptyBleedEndTime[0].error }}
+                                        </small>
+                                    </td>  
                                     </td>
                                 </tr>
                             </table>
