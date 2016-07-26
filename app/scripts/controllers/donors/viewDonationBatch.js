@@ -467,7 +467,7 @@ angular.module('bsis')
 
       if (bleedTimeData.bleedEndTime === null) {
         $scope.clearError('emptyBleedEndTime');
-        $scope.raiseError('emptyBleedEndTime', 'This cannot be empty');
+        $scope.raiseError('emptyBleedEndTime', 'Enter a valid time');
         $scope.getError('emptyBleedEndTime');
       } else {
         $scope.clearError('emptyBleedEndTime');
@@ -475,7 +475,7 @@ angular.module('bsis')
 
       if (bleedTimeData.bleedStartTime === null) {
         $scope.clearError('emptyBleedStartTime');
-        $scope.raiseError('emptyBleedStartTime', 'This cannot be empty');
+        $scope.raiseError('emptyBleedStartTime', 'Enter a valid time');
         $scope.getError('emptyBleedStartTime');
       } else {
         $scope.clearError('emptyBleedStartTime');

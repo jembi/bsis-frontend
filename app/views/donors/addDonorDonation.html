@@ -126,7 +126,7 @@
                 <div style="padding-left:5px;">
                     <uib-timepicker ng-model="bleedStartTime" name="bleedStartTime" show-spinners="false"></uib-timepicker>
                     <small class="error" ng-show="addDonationForm.bleedStartTime.$error.time">
-                        This cannot be empty
+                        Enter a valid time
                     </small>
                 </div>
             </div>
@@ -138,7 +138,7 @@
                 <div style="padding-left:5px;">
                     <uib-timepicker ng-model="bleedEndTime" name="bleedEndTime" show-spinners="false"></uib-timepicker>
                     <small class="error" ng-show="addDonationForm.bleedEndTime.$error.time">
-                        This cannot be empty
+                        Enter a valid time
                     </small>
                     <small class="error" ng-show="(bleedEndTime < bleedStartTime) && !addDonationForm.bleedStartTime.$error.time && !addDonationForm.bleedEndTime.$error.time">
                         End time should be after Start time
