@@ -9,7 +9,8 @@
                 <div class="form-inline" style="padding-left:5px;">
                     <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
                            class="form-control input-sm" placeholder=""
-                           ng-model="search.donationIdentificationNumber">
+                           ng-model="search.donationIdentificationNumber"
+                           ng-blur="updateDinSearch()">
                 </div>
             </div>
         </div>
@@ -17,8 +18,7 @@
             <label for="componentTypes" class="col-sm-1 control-label">Type</label>
             <div class="row col-sm-11">
                 <div class="form-inline" style="padding-left:5px;">
-                    <ui-select multiple ng-model="search.componentTypes" theme="bootstrap" ng-disabled="disabled"
-                               style="width: 550px;">
+                    <ui-select multiple ng-model="search.componentTypes" theme="bootstrap" style="width: 550px; height: 31px;" ng-disabled="dinSearch">
                         <ui-select-match placeholder="Select:">{{$item.componentTypeName}}</ui-select-match>
                         <ui-select-choices
                                 repeat="componentType.id as componentType in componentTypes | filter:$select.search">
@@ -33,10 +33,10 @@
             <label for="donationDate" class="col-sm-1 control-label">Period</label>
             <div class="row col-sm-11">
                 <div class="form-inline" style="padding-left:5px;">
-                    <dateselect name="donationDateFrom" ng-model="search.donationDateFrom" format="format" opened="startDateOpen" cal-icon="icons.CALENDAR" ng-required="search.donationIdentificationNumber.length === 0" ui-date-range="1,months" ui-date-end="{{search.donationDateTo | date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findComponentForm.donationDateFrom.$invalid)}" ng-model-options="{ allowInvalid: true }">
+                    <dateselect name="donationDateFrom" ng-model="search.donationDateFrom" format="format" opened="startDateOpen" cal-icon="icons.CALENDAR" ng-required="!dinSearch" ng-disabled="dinSearch" ui-date-range="1,months" ui-date-end="{{search.donationDateTo | date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findComponentForm.donationDateFrom.$invalid)}" ng-model-options="{ allowInvalid: true }">
                     </dateselect>
                     <span><em> To: </em></span>
-                    <dateselect-end name="donationDateTo" ng-model="search.donationDateTo" format="format" opened="endDateOpen" cal-icon="icons.CALENDAR" ng-required="search.donationIdentificationNumber.length === 0" ui-date-range="1,months" ui-date-start="{{search.donationDateFrom |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findComponentForm.donationDateTo.$invalid)}" ng-model-options="{ allowInvalid: true }">
+                    <dateselect-end name="donationDateTo" ng-model="search.donationDateTo" format="format" opened="endDateOpen" cal-icon="icons.CALENDAR" ng-required="!dinSearch" ng-disabled="dinSearch" ui-date-range="1,months" ui-date-start="{{search.donationDateFrom |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findComponentForm.donationDateTo.$invalid)}" ng-model-options="{ allowInvalid: true }">
                     </dateselect-end>
                 </div>
                 <div>

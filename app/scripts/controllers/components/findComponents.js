@@ -23,6 +23,7 @@ angular.module('bsis')
     };
     $scope.searchResults = '';
     $scope.search = angular.copy(searchMaster);
+    $scope.dinSearch = false;
 
     $scope.componentsSummaryTableParams = new ngTableParams({
       page: 1,            // show first page
@@ -76,9 +77,24 @@ angular.module('bsis')
 
     $scope.clear = function() {
       $scope.search = angular.copy(searchMaster);
+      $scope.dinSearch = false;
       $scope.searchResults = '';
       $scope.findComponentForm.$setPristine();
       $location.search({});
+    };
+
+    $scope.updateDinSearch = function() {
+      var din = $scope.search.donationIdentificationNumber;
+      if (din && din.length > 0) {
+        $scope.dinSearch = true;
+        $scope.search.componentTypes = [];
+        $scope.search.donationDateFrom = null;
+        $scope.search.donationDateTo = null;
+      } else {
+        $scope.dinSearch = false;
+        $scope.search.donationDateFrom = moment().subtract(7, 'days').startOf('day').toDate();
+        $scope.search.donationDateTo = moment().endOf('day').toDate();
+      }
     };
 
     $scope.setcomponentsView = function(view) {
@@ -117,6 +133,7 @@ angular.module('bsis')
             $scope.search.componentTypes.push(parseInt(selectedComponentType));
           });
         }
+        $scope.updateDinSearch();
         $scope.findComponents($scope.search);
       }
     }
