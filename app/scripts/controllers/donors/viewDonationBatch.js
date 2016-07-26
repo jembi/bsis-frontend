@@ -481,7 +481,7 @@ angular.module('bsis')
         $scope.clearError('emptyBleedStartTime');
       }
 
-      if (new Date(bleedTimeData.bleedEndTime) < new Date(bleedTimeData.bleedStartTime)) {
+      if (new Date(bleedTimeData.bleedEndTime) < new Date(bleedTimeData.bleedStartTime) && $scope.formErrors.length === 0) {
         $scope.clearError('endTimeBeforeStartTime');
         $scope.raiseError('endTimeBeforeStartTime', 'End time should be after Start time');
         $scope.getError('endTimeBeforeStartTime');
