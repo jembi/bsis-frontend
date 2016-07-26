@@ -13,13 +13,16 @@ angular.module('bsis')
     $scope.data = data;
     $scope.component = {};
 
-    $scope.searchResults = '';
-    $scope.search = {
+    var searchMaster = {
       donationIdentificationNumber: '',
       startDate: '',
       endDate: '',
-      componentTypes: []
+      componentTypes: [],
+      donationDateFrom: moment().subtract(7, 'days').startOf('day').toDate(),
+      donationDateTo: moment().endOf('day').toDate()
     };
+    $scope.searchResults = '';
+    $scope.search = angular.copy(searchMaster);
 
     $scope.componentsSummaryTableParams = new ngTableParams({
       page: 1,            // show first page
@@ -48,6 +51,10 @@ angular.module('bsis')
     });
 
     $scope.findComponents = function(search) {
+      if (!$scope.findComponentForm.$valid) {
+        return;
+      }
+
       $scope.componentsView = 'viewDonations';
       search.findComponentsSearch = true;
       $location.search(search);
@@ -68,8 +75,9 @@ angular.module('bsis')
     };
 
     $scope.clear = function() {
-      $scope.search = {};
+      $scope.search = angular.copy(searchMaster);
       $scope.searchResults = '';
+      $scope.findComponentForm.$setPristine();
       $location.search({});
     };
 
