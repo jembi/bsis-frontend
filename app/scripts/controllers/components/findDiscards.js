@@ -45,7 +45,7 @@ angular.module('bsis')
     };
 
     $scope.findDiscards = function(discardsSearch) {
-      if (!$scope.findDiscardedComponentForm.$valid) {
+      if (!$scope.findDiscardedComponentsForm.$valid) {
         return;
       }
 
