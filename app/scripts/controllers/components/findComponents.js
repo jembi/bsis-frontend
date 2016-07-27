@@ -15,8 +15,6 @@ angular.module('bsis')
 
     var searchMaster = {
       donationIdentificationNumber: '',
-      startDate: '',
-      endDate: '',
       componentTypes: [],
       donationDateFrom: moment().subtract(7, 'days').startOf('day').toDate(),
       donationDateTo: moment().endOf('day').toDate()
