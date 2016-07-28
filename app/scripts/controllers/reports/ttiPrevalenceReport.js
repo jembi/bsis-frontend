@@ -35,6 +35,7 @@ angular.module('bsis')
       zeroValuesRow.syphilispos = 0;
       zeroValuesRow.empty = 0;
       zeroValuesRow.totalpos = 0;
+      zeroValuesRow.total = 0;
       return zeroValuesRow;
     }
 
@@ -48,6 +49,7 @@ angular.module('bsis')
       allGendersRow.syphilispos = femaleRow.syphilispos + maleRow.syphilispos;
       allGendersRow.empty = femaleRow.empty + maleRow.empty;
       allGendersRow.totalpos = femaleRow.totalpos + maleRow.totalpos;
+      allGendersRow.total = femaleRow.total + maleRow.total;
       return allGendersRow;
     }
 
@@ -72,8 +74,13 @@ angular.module('bsis')
       } else if (bloodTest === 'null' || result === 'null') {
         mergedRow.empty = newRow.value;
       }
-      mergedRow.totalpos = mergedRow.hivpos + mergedRow.hbvpos +
-        mergedRow.hcvpos + mergedRow.syphilispos;
+
+      if (newRow.id === 'totalUnitsTested') {
+        mergedRow.total = newRow.value;
+      } else if (newRow.id ===  'totalUnsafeUnitsTested') {
+        mergedRow.totalpos = newRow.value;
+      }
+
       return mergedRow;
     }
 
@@ -97,9 +104,17 @@ angular.module('bsis')
       angular.forEach(dataValues, function(newRow) {
 
         var cohorts = newRow.cohorts;
-        var bloodTest = cohorts[0].option;
-        var result = cohorts[1].option;
-        var gender = cohorts[2].option;
+        var bloodTest = null;
+        var result = null;
+        var gender = null;
+        if (newRow.id === null) {
+          bloodTest = cohorts[0].option;
+          result = cohorts[1].option;
+          gender = cohorts[2].option;
+        } else {
+          gender = cohorts[0].option;
+        }
+
         newRow.cohorts = gender;
 
         // New venue
@@ -170,7 +185,8 @@ angular.module('bsis')
       { name: 'HBVPOS', displayName: 'HBV +', field: 'hbvpos', width: '**', maxWidth: '70' },
       { name: 'HCVPOS', displayName: 'HCV +', field: 'hcvpos', width: '**', maxWidth: '70' },
       { name: 'SyphilisPOS', displayName: 'Syphilis +', field: 'syphilispos', width: '**', maxWidth: '100' },
-      { name: 'TotalPOS', displayName: 'Total +', field: 'totalpos', width: '**', maxWidth: '80'  }
+      { name: 'TotalUnsafeUnitsTested', displayName: 'Total Units +', field: 'totalpos', width: '**', maxWidth: '80'  },
+      { name: 'TotalUnitsTested', displayName: 'Total Units', field: 'total', width: '**', maxWidth: '80'  }
     ];
 
     function updatePdfDocDefinition(docDefinition) {
