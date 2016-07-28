@@ -51,22 +51,6 @@ angular.module('bsis')
       return allGendersRow;
     }
 
-    function createPercentageRow(allGendersRow) {
-      var percentageRow = angular.copy(allGendersRow);
-      // Total calculated as sum of all POS and NEG outcomes
-      // This should rather be the total number of donations
-      var total = allGendersRow.totalpos;
-      percentageRow.venue.name = '';
-      percentageRow.cohorts = '%';
-      percentageRow.hivpos = $filter('number')(allGendersRow.hivpos / total * 100, 2);
-      percentageRow.hbvpos = $filter('number')(allGendersRow.hbvpos / total * 100, 2);
-      percentageRow.hcvpos = $filter('number')(allGendersRow.hcvpos / total * 100, 2);
-      percentageRow.syphilispos = $filter('number')(allGendersRow.syphilispos / total * 100, 2);
-      percentageRow.empty = $filter('number')(allGendersRow.empty / total * 100, 2);
-      percentageRow.totalpos = $filter('number')(allGendersRow.totalpos / total * 100, 2);
-      return percentageRow;
-    }
-
     function mergeRows(newRow, existingRow, bloodTest, result) {
       var mergedRow = angular.copy(existingRow);
       if (bloodTest === 'HIV') {
@@ -99,8 +83,6 @@ angular.module('bsis')
       mergedData[mergedKey] = mergedMaleRow;
       mergedKey = mergedKey + 1;
       mergedData[mergedKey] = createAllGendersRow(mergedFemaleRow, mergedMaleRow);
-      mergedKey = mergedKey + 1;
-      mergedData[mergedKey] = createPercentageRow(mergedData[mergedKey - 1]);
       mergedKey = mergedKey + 1;
     }
 
@@ -192,35 +174,25 @@ angular.module('bsis')
     ];
 
     function updatePdfDocDefinition(docDefinition) {
-      // Fill with grey and display in bold '%' rows
+      // Display in bold 'All' rows
       docDefinition.styles.greyBoldCell = ReportsLayoutService.pdfTableBodyGreyBoldStyle;
       angular.forEach(docDefinition.content[0].table.body, function(row) {
-        if (row[1] === '%') {
+        if (row[1] === 'All') {
           angular.forEach(row, function(cell, index) {
             row[index] = { text: '' + cell, style: 'greyBoldCell'};
           });
         }
       });
 
-      // Display in bold 'All' rows
-      docDefinition.styles.boldCell = ReportsLayoutService.pdfTableBodyBoldStyle;
-      angular.forEach(docDefinition.content[0].table.body, function(row) {
-        if (row[1] === 'All') {
-          angular.forEach(row, function(cell, index) {
-            row[index] = { text: '' + cell, style: 'boldCell'};
-          });
-        }
-      });
-
-      return ReportsLayoutService.paginatePdf(32, docDefinition);
+      return ReportsLayoutService.paginatePdf(30, docDefinition);
     }
 
     $scope.gridOptions = {
       data: [],
-      paginationPageSize: 8,
+      paginationPageSize: 9,
       paginationTemplate: 'views/template/pagination.html',
       columnDefs: columnDefs,
-      minRowsToShow: 8,
+      minRowsToShow: 9,
 
       exporterPdfOrientation: 'landscape',
       exporterPdfPageSize: 'A4',
@@ -242,7 +214,7 @@ angular.module('bsis')
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.gridOptions.data.length / 4, currentPage, pageCount);
+        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.gridOptions.data.length / 3, currentPage, pageCount);
       },
 
       onRegisterApi: function(gridApi) {
