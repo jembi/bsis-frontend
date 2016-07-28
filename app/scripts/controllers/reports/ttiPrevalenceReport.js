@@ -30,16 +30,11 @@ angular.module('bsis')
       zeroValuesRow.venue.name = venue;
       zeroValuesRow.cohorts = gender;
       zeroValuesRow.hivpos = 0;
-      zeroValuesRow.hivneg = 0;
       zeroValuesRow.hbvpos = 0;
-      zeroValuesRow.hbvneg = 0;
       zeroValuesRow.hcvpos = 0;
-      zeroValuesRow.hcvneg = 0;
       zeroValuesRow.syphilispos = 0;
-      zeroValuesRow.syphilisneg = 0;
       zeroValuesRow.empty = 0;
       zeroValuesRow.totalpos = 0;
-      zeroValuesRow.totalneg = 0;
       return zeroValuesRow;
     }
 
@@ -48,16 +43,11 @@ angular.module('bsis')
       allGendersRow.venue.name = '';
       allGendersRow.cohorts = 'All';
       allGendersRow.hivpos = femaleRow.hivpos + maleRow.hivpos;
-      allGendersRow.hivneg = femaleRow.hivneg + maleRow.hivneg;
       allGendersRow.hbvpos = femaleRow.hbvpos + maleRow.hbvpos;
-      allGendersRow.hbvneg = femaleRow.hbvneg + maleRow.hbvneg;
       allGendersRow.hcvpos = femaleRow.hcvpos + maleRow.hcvpos;
-      allGendersRow.hcvneg = femaleRow.hcvneg + maleRow.hcvneg;
       allGendersRow.syphilispos = femaleRow.syphilispos + maleRow.syphilispos;
-      allGendersRow.syphilisneg = femaleRow.syphilisneg + maleRow.syphilisneg;
       allGendersRow.empty = femaleRow.empty + maleRow.empty;
       allGendersRow.totalpos = femaleRow.totalpos + maleRow.totalpos;
-      allGendersRow.totalneg = femaleRow.totalneg + maleRow.totalneg;
       return allGendersRow;
     }
 
@@ -65,20 +55,15 @@ angular.module('bsis')
       var percentageRow = angular.copy(allGendersRow);
       // Total calculated as sum of all POS and NEG outcomes
       // This should rather be the total number of donations
-      var total = allGendersRow.totalpos + allGendersRow.totalneg;
+      var total = allGendersRow.totalpos;
       percentageRow.venue.name = '';
       percentageRow.cohorts = '%';
       percentageRow.hivpos = $filter('number')(allGendersRow.hivpos / total * 100, 2);
-      percentageRow.hivneg = $filter('number')(allGendersRow.hivneg / total * 100, 2);
       percentageRow.hbvpos = $filter('number')(allGendersRow.hbvpos / total * 100, 2);
-      percentageRow.hbvneg = $filter('number')(allGendersRow.hbvneg / total * 100, 2);
       percentageRow.hcvpos = $filter('number')(allGendersRow.hcvpos / total * 100, 2);
-      percentageRow.hcvneg = $filter('number')(allGendersRow.hcvneg / total * 100, 2);
       percentageRow.syphilispos = $filter('number')(allGendersRow.syphilispos / total * 100, 2);
-      percentageRow.syphilisneg = $filter('number')(allGendersRow.syphilisneg / total * 100, 2);
       percentageRow.empty = $filter('number')(allGendersRow.empty / total * 100, 2);
       percentageRow.totalpos = $filter('number')(allGendersRow.totalpos / total * 100, 2);
-      percentageRow.totalneg = $filter('number')(allGendersRow.totalneg / total * 100, 2);
       return percentageRow;
     }
 
@@ -87,34 +72,24 @@ angular.module('bsis')
       if (bloodTest === 'HIV') {
         if (result === 'POS') {
           mergedRow.hivpos = newRow.value;
-        } else if (result === 'NEG') {
-          mergedRow.hivneg = newRow.value;
         }
       } else if (bloodTest === 'HBV') {
         if (result === 'POS') {
           mergedRow.hbvpos = newRow.value;
-        } else if (result === 'NEG') {
-          mergedRow.hbvneg = newRow.value;
         }
       } else if (bloodTest === 'HCV') {
         if (result === 'POS') {
           mergedRow.hcvpos = newRow.value;
-        } else if (result === 'NEG') {
-          mergedRow.hcvneg = newRow.value;
         }
       } else if (bloodTest === 'Syphilis') {
         if (result === 'POS') {
           mergedRow.syphilispos = newRow.value;
-        } else if (result === 'NEG') {
-          mergedRow.syphilisneg = newRow.value;
         }
       } else if (bloodTest === 'null' || result === 'null') {
         mergedRow.empty = newRow.value;
       }
       mergedRow.totalpos = mergedRow.hivpos + mergedRow.hbvpos +
         mergedRow.hcvpos + mergedRow.syphilispos;
-      mergedRow.totalneg = mergedRow.hivneg + mergedRow.hbvneg +
-        mergedRow.hcvneg + mergedRow.syphilisneg;
       return mergedRow;
     }
 
@@ -210,15 +185,10 @@ angular.module('bsis')
       { name: 'Venue', field: 'venue.name', width: '**', minWidth: '200' },
       { name: 'Gender', field: 'cohorts', width:'**', maxWidth: '130' },
       { name: 'HIVPOS', displayName: 'HIV +', field: 'hivpos', width: '**', maxWidth: '70' },
-      { name: 'HIVNEG', displayName: 'HIV -', field: 'hivneg', width: '**', maxWidth: '70' },
       { name: 'HBVPOS', displayName: 'HBV +', field: 'hbvpos', width: '**', maxWidth: '70' },
-      { name: 'HBVNEG', displayName: 'HBV -', field: 'hbvneg', width: '**', maxWidth: '70' },
       { name: 'HCVPOS', displayName: 'HCV +', field: 'hcvpos', width: '**', maxWidth: '70' },
-      { name: 'HCVNEG', displayName: 'HCV -', field: 'hcvneg', width: '**', maxWidth: '70' },
       { name: 'SyphilisPOS', displayName: 'Syphilis +', field: 'syphilispos', width: '**', maxWidth: '100' },
-      { name: 'SyphilisNEG', displayName: 'Syphilis -', field: 'syphilisneg', width: '**', maxWidth: '100' },
-      { name: 'TotalPOS', displayName: 'Total +', field: 'totalpos', width: '**', maxWidth: '80'  },
-      { name: 'TotalNEG', displayName: 'Total -', field: 'totalneg', width: '**', maxWidth: '80'  }
+      { name: 'TotalPOS', displayName: 'Total +', field: 'totalpos', width: '**', maxWidth: '80'  }
     ];
 
     function updatePdfDocDefinition(docDefinition) {
