@@ -13,7 +13,8 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   'ngMessages',
   'ui.grid',
   'ui.grid.exporter',
-  'ui.grid.pagination'
+  'ui.grid.pagination',
+  'ui.grid.selection'
 ])
   .config(function($routeProvider, PERMISSIONS, UI) {
 
@@ -93,11 +94,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'ViewDonationBatchCtrl',
         permission: PERMISSIONS.VIEW_DONATION_BATCH,
         enabled: UI.DONORS_TAB_ENABLED
-      })
-      .when('/locations', {
-        templateUrl: 'views/donors/locations.html',
-        controller: 'LocationsCtrl',
-        permission: PERMISSIONS.MANAGE_DONATION_SITES
       })
       .when('/exportDonorList', {
         templateUrl: 'views/donors/donorCommunications.html',
@@ -301,20 +297,37 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.ISSUE_COMPONENT,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
+      .when('/recordReturn/:id', {
+        templateUrl: 'views/inventory/recordReturn.html',
+        controller: 'RecordReturnCtrl',
+        permission: PERMISSIONS.ISSUE_COMPONENT,
+        enabled: UI.INVENTORY_TAB_ENABLED
+      })
+      .when('/viewReturn/:id', {
+        templateUrl: 'views/inventory/viewReturn.html',
+        controller: 'ViewReturnCtrl',
+        permission: PERMISSIONS.ISSUE_COMPONENT,
+        enabled: UI.INVENTORY_TAB_ENABLED
+      })
+      .when('/viewReturns', {
+        templateUrl: 'views/inventory/viewReturns.html',
+        controller: 'ViewReturnsCtrl',
+        permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION,
+        enabled: UI.INVENTORY_TAB_ENABLED
+      })
 
       // LABELLING URLs
       .when('/labelling', {
-        templateUrl: 'views/labelling.html',
-        controller: 'LabellingCtrl',
+        redirectTo: '/labelComponents',
+        permission: PERMISSIONS.COMPONENT_LABELLING,
+        enabled: UI.LABELLING_TAB_ENABLED
+      })
+      .when('/labelComponents', {
+        templateUrl: 'views/labelling/labelComponents.html',
+        controller: 'LabelComponentsCtrl',
         permission: PERMISSIONS.COMPONENT_LABELLING,
         enabled: UI.LABELLING_TAB_ENABLED,
         reloadOnSearch: false
-      })
-      .when('/labelComponents', {
-        templateUrl: 'views/labelling.html',
-        controller: 'LabellingCtrl',
-        permission: PERMISSIONS.COMPONENT_LABELLING,
-        enabled: UI.LABELLING_TAB_ENABLED
       })
 
       // REPORTS URLs
@@ -326,21 +339,21 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       .when('/aboRhGroupsReport', {
         templateUrl: 'views/reports/aboRhGroupsReport.html',
         controller: 'AboRhGroupsReportCtrl',
-        permission: PERMISSIONS.VIEW_REPORTING_INFORMATION,
+        permission: PERMISSIONS.DONATIONS_REPORTING,
         enabled: UI.REPORTS_TAB_ENABLED,
         reloadOnSearch: false
       })
       .when('/donationTypesReport', {
         templateUrl: 'views/reports/donationTypesReport.html',
         controller: 'DonationTypesReportCtrl',
-        permission: PERMISSIONS.VIEW_REPORTING_INFORMATION,
+        permission: PERMISSIONS.DONATIONS_REPORTING,
         enabled: UI.REPORTS_TAB_ENABLED,
         reloadOnSearch: false
       })
       .when('/ttiPrevalenceReport', {
         templateUrl: 'views/reports/ttiPrevalenceReport.html',
         controller: 'TTIPrevalenceReportCtrl',
-        permission: PERMISSIONS.VIEW_REPORTING_INFORMATION,
+        permission: PERMISSIONS.TTI_REPORTING,
         enabled: UI.REPORTS_TAB_ENABLED,
         reloadOnSearch: false
       })
@@ -462,7 +475,27 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'EditAdverseEventTypeCtrl',
         permission: PERMISSIONS.EDIT_ADVERSE_EVENT_TYPES
       })
-
+      .when('/locations', {
+        templateUrl: 'views/settings/locations.html',
+        controller: 'LocationsCtrl',
+        permission: PERMISSIONS.MANAGE_LOCATIONS,
+        reloadOnSearch: false
+      })
+      .when('/manageLocation/:id?', {
+        templateUrl: 'views/settings/manageLocation.html',
+        controller: 'ManageLocationCtrl',
+        permission: PERMISSIONS.MANAGE_LOCATIONS
+      })
+      .when('/componentTypes', {
+        templateUrl: 'views/settings/componentTypes.html',
+        controller: 'ComponentTypesCtrl',
+        permission: PERMISSIONS.MANAGE_COMPONENT_TYPES
+      })
+      .when('/manageComponentType/:id', {
+        templateUrl: 'views/settings/manageComponentType.html',
+        controller: 'ManageComponentTypeCtrl',
+        permission: PERMISSIONS.MANAGE_COMPONENT_TYPES
+      })
       .otherwise({
         redirectTo: '/home'
       });
@@ -600,6 +633,18 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
           $location.path('/viewStockLevels');
         }
       }
+
+      if ($location.path() === '/reports') {
+        // Initial routing for reports page
+        if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.DONATIONS_REPORTING) > -1) {
+          $location.path('/aboRhGroupsReport');
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.TTI_REPORTING) > -1) {
+          $location.path('/ttiPrevalenceReport');
+        } else {
+          $location.path('/home');
+        }
+      }
+
     });
   }])
 

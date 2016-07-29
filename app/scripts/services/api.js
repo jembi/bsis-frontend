@@ -50,11 +50,15 @@ angular.module('bsis')
         }
       ),
 
-      Donations: $resource(url + '/donations/:id', null,
-        {
-          update: {method: 'PUT'}
+      Donations: $resource(url + '/donations/:id', {id: '@id'}, {
+        update: {
+          method: 'PUT'
+        },
+        bloodTypingResolutions: {
+          method: 'POST',
+          url: url + '/donations/bloodTypingResolutions'
         }
-      ),
+      }),
 
       DonationBatches: $resource(url + '/donationbatches/:id', null,
         {
@@ -62,7 +66,7 @@ angular.module('bsis')
         }
       ),
 
-      TestBatches: $resource(url + '/testbatches/:id', null,
+      TestBatches: $resource(url + '/testbatches/:id', {id: '@id'},
         {
           update: {method: 'PUT'}
         }
@@ -100,9 +104,15 @@ angular.module('bsis')
       DonationsFormFields: $resource(url + '/donations/form'),
       DeferralsFormFields: $resource(url + '/deferrals/form'),
       DonorCommunicationsFormFields: $resource(url + '/donorcommunications/form'),
-      ComponentsFormFields: $resource(url + '/components/form'),
-      ComponentCombinations: $resource(url + '/components/combinations'),
-      ComponentTypes: $resource(url + '/componenttypes'),
+
+      ComponentTypes: $resource(url + '/componenttypes/:id', {id: '@id'}, {
+        getAll: {
+          method: 'GET',
+          url: url + '/componenttypes'
+        },
+        update: {method: 'PUT'}
+      }),
+
       DonationBatchFormFields: $resource(url + '/donationbatches/form'),
       TestBatchFormFields: $resource(url + '/testbatches/form'),
       TTITestingFormFields: $resource(url + '/ttitests/form'),
@@ -179,50 +189,67 @@ angular.module('bsis')
         }
       ),
 
-      ComponentsSearch: $resource(url + '/components/search', {},
-        {
-          query: {
-            method: 'GET',
-            params: {
-              donationIdentificationNumber: '@donationIdentificationNumber',
-              componentTypes: '@componentTypes',
-              status: '@status',
-              donationDateFrom: '@donationDateFrom',
-              donationDateTo: '@donationDateTo'
-            }
-          }
+      Components: $resource(url + '/components/:id', {id: '@id'}, {
+        find: {
+          method: 'GET',
+          url: url + '/components'
+        },
+        findByDIN: {
+          method: 'GET',
+          url: url + '/components/donations/:donationIdentificationNumber'
+        },
+        search: {
+          method: 'GET',
+          url: url + '/components/search'
+        },
+        record: {
+          method: 'POST',
+          url: url + '/components/recordcombinations'
+        },
+        getComponentForm: {
+          method: 'GET',
+          url: url + '/components/form'
+        },
+        getDiscardForm: {
+          method: 'GET',
+          url: url + '/components/discard/form'
+        },
+        discard: {
+          method: 'PUT',
+          url: url + '/components/discard'
+        },
+        update: {
+          method: 'PUT'
+        },
+        unprocess: {
+          method: 'PUT',
+          url: url + '/components/:id/unprocess'
+        },
+        undiscard: {
+          method: 'PUT',
+          url: url + '/components/undiscard'
         }
-      ),
+      }),
 
-      getComponentsByDIN: $resource(url + '/components/donations/:donationIdentificationNumber', {},
-        {
-          query: {
-            method: 'GET',
-            params: {donationIdentificationNumber: '@donationIdentificationNumber'}
-          }
+      Labelling: $resource(url + '/labels/', {}, {
+        getComponentForm: {
+          method: 'GET',
+          url: url + '/labels/components/form'
+        },
+        getComponents: {
+          method: 'GET',
+          url: url + '/labels/components',
+          params: {componentType: '@componentType', donationIdentificationNumber: '@donationIdentificationNumber'}
+        },
+        printPackLabel: {
+          method: 'GET',
+          url: url + '/labels/print/packlabel/:componentId'
+        },
+        printDiscardLabel: {
+          method: 'GET',
+          url: url + '/labels/print/discardlabel/:componentId'
         }
-      ),
-
-      Components: $resource(url + '/components'),
-
-      discardComponents: $resource(url + '/components/:id/discard', {},
-        {
-          update: {
-            method: 'PUT',
-            params: {
-              id: '@id',
-              discardReasonId: '@discardReasonId',
-              discardReasonText: '@discardReasonText'
-            }
-          }
-        }
-      ),
-
-      RecordComponents: $resource(url + '/components/recordcombinations'),
-
-      LabellingStatus: $resource(url + '/labels/status/:donationIdentificationNumber'),
-      PrintPackLabel: $resource(url + '/labels/print/packlabel/:componentId'),
-      PrintDiscardLabel: $resource(url + '/labels/print/discardlabel/:componentId'),
+      }),
 
       FindDonationBatches: $resource(url + '/donationbatches/search', {},
         {
@@ -235,47 +262,36 @@ angular.module('bsis')
 
       FindTestBatches: $resource(url + '/testbatches/search'),
 
-      FindTestResults: $resource(url + '/testresults/search', {},
-        {
-          query: {
-            method: 'GET',
-            params: {testBatch: '@testBatch',
-                     bloodTestType: '@bloodTestType'}
-          }
+      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', {donationIdentificationNumber: '@donationIdentificationNumber'}, {
+        search: {
+          method: 'GET',
+          url: url + '/testresults/search'
+        },
+        overview: {
+          method: 'GET',
+          url: url + '/testresults/overview'
+        },
+        report: {
+          method: 'GET',
+          url: url + '/testresults/report'
+        },
+        saveResults: {
+          method: 'POST',
+          url: url + '/testresults'
         }
-      ),
+      }),
 
-      TestResultsReport: $resource(url + '/testresults/report', {},
-        {
-          query: {
-            method: 'GET',
-            params: {testBatch: '@testBatch'}
-          }
+      Locations: $resource(url + '/locations/:id', {id: '@id'}, {
+        update: {method: 'PUT'},
+        getSearchForm: {
+          method: 'GET',
+          url: url + '/locations/search/form'
+        },
+        search: {
+          method: 'GET',
+          url: url + '/locations/search'
         }
-      ),
-
-      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', null,
-        {
-          update: {method: 'PUT'}
-        }
-      ),
-
-      BloodTypingResolutions: $resource(url + '/donations/bloodTypingResolutions'),
-
-      TestBatchOverview: $resource(url + '/testresults/overview', {},
-        {
-          query: {
-            method: 'GET',
-            params: {testBatch: '@testBatch'}
-          }
-        }
-      ),
-
-      Locations: $resource(url + '/locations/:id', null,
-        {
-          update: {method: 'PUT'}
-        }
-      ),
+      }),
 
       Configurations: $resource(url + '/configurations/:id', null,
         {
@@ -310,7 +326,11 @@ angular.module('bsis')
       DonorPostDonationCounselling: $resource(url + '/donors/:donorId/postdonationcounselling'),
 
       PostDonationCounselling: $resource(url + '/postdonationcounsellings/:id', {id: '@id'}, {
-        update: {method: 'PUT'}
+        update: {method: 'PUT'},
+        searchForm: {
+          method: 'GET',
+          url: url + '/postdonationcounsellings/searchForm'
+        }
       }),
       PostDonationCounsellingFormFields: $resource(url + '/postdonationcounsellings/form'),
 
@@ -354,6 +374,13 @@ angular.module('bsis')
       }),
 
       ReturnForms: $resource(url + '/returnforms/:id', {id: '@id'}, {
+        update: {
+          method: 'PUT'
+        },
+        search: {
+          method: 'GET',
+          url: url + '/returnforms/search'
+        },
         getForm: {
           method: 'GET',
           url: url + '/returnforms/form'

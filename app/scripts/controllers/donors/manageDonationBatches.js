@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, $location, $log, DonorService, ICONS, PACKTYPE, $q, $filter, DATEFORMAT, ngTableParams, $timeout) {
+angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, $location, $log, DonorService, ICONS, PACKTYPE, $q, $filter, DATEFORMAT, ngTableParams, $timeout, PERMISSIONS) {
 
   var data = [];
   var recentDonationBatchData = null;
@@ -11,6 +11,7 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
     endDate: moment().endOf('day').toDate()
   };
   $scope.data = data;
+  $scope.permissions = PERMISSIONS;
   $scope.recentDonationBatchData = recentDonationBatchData;
   $scope.openDonationBatches = false;
   $scope.recentDonationBatches = false;

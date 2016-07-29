@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('TestsReEnterCtrl', function($scope, $location, $log, TestingService, $uibModal, $sce, $q, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('TestsReEnterCtrl', function($scope, $location, $log, TestingService, $uibModal, $sce, $filter, ngTableParams, $timeout, $routeParams) {
 
     $scope.data = [];
 
@@ -43,7 +43,7 @@ angular.module('bsis')
     // The array reEnteredTestOutcomes is originally populated with all test outcomes where reEntryRequired is false.
     // As the reEntry values are selected from the dropdowns, they are added to this array.
     var getReEnteredTestOutcomes = function() {
-      TestingService.getTestOutcomesByBatchIdAndBloodTestType($routeParams.id, $routeParams.bloodTestType, function(response) {
+      TestingService.getTestOutcomesByBatchIdAndBloodTestType({testBatch: $routeParams.id, bloodTestType: $routeParams.bloodTestType}, function(response) {
         $scope.data = response.testResults;
         $scope.testBatchCreatedDate = response.testBatchCreatedDate;
         $scope.numberOfDonations = response.numberOfDonations;
@@ -122,22 +122,16 @@ angular.module('bsis')
       var testResultsArray = {};
       testResultsArray.testOutcomesForDonations = [];
 
-      var requests = [];
-
       angular.forEach(testOutcomesToSave, function(value) {
         testResultsArray.testOutcomesForDonations.push(value);
       });
 
-      var request = TestingService.saveTestResults(testResultsArray, true, angular.noop);
-      requests.push(request);
-
-      // FIXME: Handle errors
-      $q.all(requests).then(function() {
+      TestingService.saveTestResults({reEntry: true}, testResultsArray, function() {
         $location.path('/viewTestBatch/' + $routeParams.id);
-      }).finally(function() {
+      }, function(err) {
+        $log.error(err);
         $scope.savingTestOutcomes = false;
       });
-
     };
 
     var confirmSaveTestOutcomes = function() {

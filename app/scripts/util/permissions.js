@@ -107,7 +107,7 @@ angular.module('bsis')
     // Admin and Super-User Permissions
     MANAGE_USERS: 'Manage Users',
     MANAGE_ROLES: 'Manage Roles',
-    MANAGE_DONATION_SITES: 'Manage Donation Sites',
+    MANAGE_LOCATIONS: 'Manage Locations',
     MANAGE_DONATION_TYPES: 'Manage Donation Types',
     MANAGE_DONATION_CATEGORIES: 'Manage Donation Categories',
     MANAGE_COMPONENT_COMBINATIONS: 'Manage Component Combinations',
@@ -126,6 +126,7 @@ angular.module('bsis')
     MANAGE_TIPS: 'Manage Tips',
     MANAGE_REQUESTS: 'Manage Requests',
     MANAGE_GENERAL_CONFIGS: 'Manage General Configs',
+    MANAGE_COMPONENT_TYPES: 'Manage Component Types',
 
     //Page Control Permissions
     VIEW_DONOR_INFORMATION: 'View Donor Information',

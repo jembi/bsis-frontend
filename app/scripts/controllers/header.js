@@ -71,14 +71,13 @@ angular.module('bsis')
         'title': 'SETTINGS',
         'href': '#settings',
         'icon': ICONS.SETTINGS,
-        'permission': PERMISSIONS.VIEW_ADMIN_INFORMATION,
+        'permission': PERMISSIONS.AUTHENTICATED,
         'sectionEnabled': 'true'
       }
     ];
 
     var donorRoutes = [
       '/donors',
-      '/locations',
       '/findDonor',
       '/duplicateDonors',
       '/manageDuplicateDonors',
@@ -123,9 +122,13 @@ angular.module('bsis')
       '/findInventory',
       '/viewStockLevels',
       '/manageOrders',
-      '/manageReturns',
+      '/fulfilOrder/\\d+',
       '/viewOrder/\\d+',
-      '/viewOrders'
+      '/viewOrders',
+      '/manageReturns',
+      '/recordReturn/\\d+',
+      '/viewReturn/\\d+',
+      '/viewReturns'
     ];
 
     var labellingRoutes = [
@@ -148,6 +151,10 @@ angular.module('bsis')
     var settingsRoutes = [
       '/settings',
       '/accountSettings',
+      '/locations',
+      '/manageLocation',
+      '/componentTypes',
+      '/manageComponentType/\\d',
       '/deferralReasons',
       '/manageDeferralReason/\\d+',
       '/discardReasons',

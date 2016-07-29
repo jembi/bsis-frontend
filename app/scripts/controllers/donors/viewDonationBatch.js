@@ -55,7 +55,7 @@ angular.module('bsis')
       },
       {
         name: 'Donation Type',
-        field: 'donationType.donationType'
+        field: 'donationType.type'
       }
     ];
 
@@ -222,10 +222,10 @@ angular.module('bsis')
         }
       });
 
-      TestingService.getTestResultsByDIN($scope.donation.donationIdentificationNumber, function(testingResponse) {
-        if (testingResponse !== false) {
-          $scope.testResults = testingResponse.testResults.recentTestResults;
-        }
+      TestingService.getTestResultsByDIN({donationIdentificationNumber: $scope.donation.donationIdentificationNumber}, function(testingResponse) {
+        $scope.testResults = testingResponse.testResults.recentTestResults;
+      }, function(err) {
+        $log.error(err);
       });
     }
 
@@ -457,14 +457,40 @@ angular.module('bsis')
       }
     };
 
+    $scope.cancelEditDonation = function(form) {
+      $scope.formErrors = [];
+      $scope.errorObject = [];
+      form.$cancel();
+    };
+
     $scope.checkBleedTimes = function(bleedTimeData) {
-      if (new Date(bleedTimeData.bleedEndTime) < new Date(bleedTimeData.bleedStartTime)) {
-        $scope.clearError('bleedTime');
-        $scope.raiseError('bleedTime', 'Bleed start time should be less than end time');
-        $scope.getError('bleedTime');
-        return ' ';
+
+      if (bleedTimeData.bleedEndTime === null) {
+        $scope.clearError('emptyBleedEndTime');
+        $scope.raiseError('emptyBleedEndTime', 'Enter a valid time');
+        $scope.getError('emptyBleedEndTime');
       } else {
-        $scope.clearError('bleedTime');
+        $scope.clearError('emptyBleedEndTime');
+      }
+
+      if (bleedTimeData.bleedStartTime === null) {
+        $scope.clearError('emptyBleedStartTime');
+        $scope.raiseError('emptyBleedStartTime', 'Enter a valid time');
+        $scope.getError('emptyBleedStartTime');
+      } else {
+        $scope.clearError('emptyBleedStartTime');
+      }
+
+      if (new Date(bleedTimeData.bleedEndTime) < new Date(bleedTimeData.bleedStartTime) && $scope.formErrors.length === 0) {
+        $scope.clearError('endTimeBeforeStartTime');
+        $scope.raiseError('endTimeBeforeStartTime', 'End time should be after Start time');
+        $scope.getError('endTimeBeforeStartTime');
+      } else {
+        $scope.clearError('endTimeBeforeStartTime');
+      }
+
+      if ($scope.formErrors.length > 0) {
+        return ' ';
       }
     };
 

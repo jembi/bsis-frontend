@@ -18,7 +18,12 @@ angular.module('bsis').controller('InventorySidebarCtrl', function($scope, Routi
       ]
     }, {
       path: '/manageReturns',
-      subpaths: []
+      subpaths: [
+        '/recordReturn',
+        '/viewOrder',
+        '/viewReturn',
+        '/viewReturns'
+      ]
     }
   ];
 

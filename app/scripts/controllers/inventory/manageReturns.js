@@ -57,6 +57,11 @@ angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $locatio
       $scope.distributionSites = response.distributionSites;
       $scope.usageSites = response.usageSites;
     }, $log.error);
+
+    // Get the current return forms
+    ReturnFormsService.findReturnForms({status: 'CREATED'}, function(response) {
+      $scope.gridOptions.data = response.returnForms;
+    }, $log.error);
   }
 
   $scope.onRowClick = function(row) {
@@ -88,13 +93,11 @@ angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $locatio
         id: $scope.returnForm.returnedTo
       }
     };
-    $log.debug(returnForm);
 
     // Create the ReturnForm
     ReturnFormsService.addReturnForm({}, returnForm, function(response) {
       $scope.addingReturnForm = false;
-      // FIXME: redirect to next page where you can add return form components
-      $log.info('Successfully created the ReturnForm ' + response.returnForm.id);
+      $location.path('/recordReturn/' + response.returnForm.id);
       $scope.clearForm();
     }, function(err) {
       $log.error(err);

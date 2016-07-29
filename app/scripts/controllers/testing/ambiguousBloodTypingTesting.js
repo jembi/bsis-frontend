@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('AmbiguousBloodTypingTestingCtrl', function($scope, $location, $log, TestingService, $q, $filter, ngTableParams, $timeout, $routeParams, BLOODABO, BLOODRH) {
+  .controller('AmbiguousBloodTypingTestingCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams, BLOODABO, BLOODRH) {
 
     $scope.bloodAboOptions = BLOODABO;
     $scope.bloodRhOptions = BLOODRH;
@@ -26,7 +26,7 @@ angular.module('bsis')
           $scope.bloodTypingResolutions[din].bloodAbo = sample.bloodAbo;
           $scope.bloodTypingResolutions[din].bloodRh = sample.bloodRh;
           $scope.bloodTypingResolutions[din].resolved = false;
-          $scope.bloodTypingResolutions[din].indeterminate = false;
+          $scope.bloodTypingResolutions[din].noTypeDetermined = false;
           $scope.bloodTypingResolutions[din].id = sample.id;
         });
       }, function(err) {
@@ -41,13 +41,12 @@ angular.module('bsis')
       $scope.savingTestResults = true;
       var bloodTypingResolutionsArray = {};
       bloodTypingResolutionsArray.bloodTypingResolutions = [];
-      var requests = [];
 
       angular.forEach(bloodTypingResolutions, function(bloodTypingResolution) {
-        // only save if resolved == true or indeterminate == true
-        if (bloodTypingResolution.resolved || bloodTypingResolution.indeterminate) {
+        // only save if resolved == true or noTypeDetermined == true
+        if (bloodTypingResolution.resolved || bloodTypingResolution.noTypeDetermined) {
           var status = 'RESOLVED';
-          if (bloodTypingResolution.indeterminate) {
+          if (bloodTypingResolution.noTypeDetermined) {
             status = 'NO_TYPE_DETERMINED';
           }
           bloodTypingResolution.status = status;
@@ -63,18 +62,12 @@ angular.module('bsis')
         }
       });
 
-      var request = TestingService.saveBloodTypingResolutions(bloodTypingResolutionsArray, angular.noop);
-      requests.push(request);
-
-      $q.all(requests).then(function() {
+      TestingService.saveBloodTypingResolutions(bloodTypingResolutionsArray, function() {
         $location.path('/viewTestBatch/' + $routeParams.id);
-      }).catch(function(err) {
+      }, function(err) {
         $log.error(err);
-        // TODO: handle the case where there have been errors
-      }).finally(function() {
         $scope.savingTestResults = false;
       });
-
     };
 
     $scope.testOutcomesTableParams = new ngTableParams({

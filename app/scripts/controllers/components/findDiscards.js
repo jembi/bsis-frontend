@@ -6,26 +6,49 @@ angular.module('bsis')
     // Initialize variables
 
     var data = [{}];
-    $scope.discardsSearch = {};
-
+    var searchMaster = {
+      donationIdentificationNumber: '',
+      componentTypes: [],
+      donationDateFrom: moment().subtract(7, 'days').startOf('day').toDate(),
+      donationDateTo: moment().endOf('day').toDate()
+    };
+    $scope.dinSearch = false;
     $scope.searchResults = '';
     $scope.format = DATEFORMAT;
     $scope.startDateOpen = false;
     $scope.endDateOpen = false;
     $scope.componentTypes = [];
-    $scope.discardsSearch = {};
-    $scope.discardsSearch.componentTypes = [];
+    $scope.discardsSearch = angular.copy(searchMaster);
 
     // Find discards methods (findDiscards.html)
 
     $scope.clear = function() {
-      $scope.discardsSearch = {};
+      $scope.discardsSearch = angular.copy(searchMaster);
       $scope.searchResults = '';
+      $scope.dinSearch = false;
       $scope.status = [];
       $location.search({});
     };
 
+    $scope.updateDinSearch = function() {
+      var din = $scope.discardsSearch.donationIdentificationNumber;
+      if (din && din.length > 0) {
+        $scope.dinSearch = true;
+        $scope.discardsSearch.componentTypes = [];
+        $scope.discardsSearch.donationDateFrom = null;
+        $scope.discardsSearch.donationDateTo = null;
+      } else {
+        $scope.dinSearch = false;
+        $scope.discardsSearch.donationDateFrom = moment().subtract(7, 'days').startOf('day').toDate();
+        $scope.discardsSearch.donationDateTo = moment().endOf('day').toDate();
+      }
+    };
+
     $scope.findDiscards = function(discardsSearch) {
+      if (!$scope.findDiscardedComponentsForm.$valid) {
+        return;
+      }
+
       $scope.componentsView = 'viewDonations';
 
       discardsSearch.search = true;
@@ -74,6 +97,7 @@ angular.module('bsis')
           });
         }
 
+        $scope.updateDinSearch();
         $scope.findDiscards($scope.discardsSearch);
       }
     }

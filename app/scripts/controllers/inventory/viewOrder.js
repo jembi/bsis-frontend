@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService) {
-
-  $scope.displayConfirmDispatch = false;
+angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService, ModalsService) {
 
   var unitsOrderedColumnDefs = [
     {
@@ -202,19 +200,43 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     $scope.unitsSuppliedGridApi.exporter.pdfExport('all', 'all');
   };
 
-  $scope.confirmDispatch = function(condition) {
-    $scope.displayConfirmDispatch = condition;
+  $scope.deleteOrder = function() {
+    var unprocessConfirmation = {
+      title: 'Void Order',
+      button: 'Void',
+      message: 'Are you sure that you want to delete this Order?'
+    };
+
+    ModalsService.showConfirmation(unprocessConfirmation).then(function() {
+      $scope.deleting = true;
+      OrderFormsService.deleteOrderForm({id: $routeParams.id}, function() {
+        $location.path('/manageOrders');
+      }, function(err) {
+        $log.error(err);
+        $scope.deleting = false;
+      });
+    }).catch(function() {
+      // Confirmation was rejected
+      $scope.deleting = false;
+    });
   };
 
   $scope.dispatch = function() {
-    $scope.orderForm.status = 'DISPATCHED';
-    OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
-      $scope.orderForm = res.orderForm;
-      populateUnitsOrderedGrid($scope.orderForm);
-      populateUnitsSuppliedGrid($scope.orderForm);
-      $scope.displayConfirmDispatch = false;
-    }, function(err) {
-      $log.error(err);
+    var dispatchConfirmation = {
+      title: 'Dispatch Order',
+      button: 'Dispatch Order',
+      message: 'Are you sure you want to dispatch the order?'
+    };
+
+    ModalsService.showConfirmation(dispatchConfirmation).then(function() {
+      $scope.orderForm.status = 'DISPATCHED';
+      OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
+        $scope.orderForm = res.orderForm;
+        populateUnitsOrderedGrid($scope.orderForm);
+        populateUnitsSuppliedGrid($scope.orderForm);
+      }, function(err) {
+        $log.error(err);
+      });
     });
   };
 

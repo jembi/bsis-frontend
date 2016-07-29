@@ -63,7 +63,7 @@
       </span>
     </span>
 
-    <span>
+    <span ng-if="isEligible !== undefined">
       <uib-alert type="danger" class="inline" close="" ng-show="isEligible !== true">
           Do not bleed donor
       </uib-alert>
@@ -214,7 +214,7 @@
                                 <td class="value">
                                     <em>Date</em>: {{ (lastDonation.donationDate | bsisDateTime) || '' }}<br/>
                                     <em>Venue</em>: {{lastDonation.venue.name}} <br/>
-                                    <em>Donation Type</em>: {{lastDonation.donationType.donationType}} |
+                                    <em>Donation Type</em>: {{lastDonation.donationType.type}} |
                                     <em>Pack Type</em>: {{lastDonation.packType.packType}}<br/>
                                     <em>Wt</em>: {{lastDonation.donorWeight}} {{weightUnit}} |
                                     <em>BP</em>:

@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, $uibModal, PERMISSIONS, uiGridConstants) {
+  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, PERMISSIONS, uiGridConstants, ModalsService) {
 
     $scope.permissions = PERMISSIONS;
 
@@ -43,7 +43,6 @@ angular.module('bsis')
         $scope.testBatch = response.testBatch;
         $scope.refreshCurrentTestBatch();
         $scope.refreshTestBatchAvailableDonations();
-        TestingService.setCurrentTestBatch($scope.testBatch.id);
       }, function(err) {
         $log.error(err);
       });
@@ -64,10 +63,6 @@ angular.module('bsis')
         });
       });
       data = donations;
-      for (var i = 0; i < data.length; i++) {
-        data[i].bloodTypingStatusBloodTypingMatchStatus = data[i].bloodTypingStatus + ' ' +  data[i].bloodTypingMatchStatus + '(' + data[i].bloodAbo + data[i].bloodRh + ')';
-        data[i].previousDonationAboRhOutcome = '';
-      }
       $scope.gridOptions.data = data;
       $scope.data = data;
       $scope.testBatch.numReleasedSamples = numReleasedSamples;
@@ -82,6 +77,7 @@ angular.module('bsis')
       TestingService.getTestBatchFormFields(function(response) {
         if (response !== false) {
           $scope.donationBatches = response.donationBatches;
+          $scope.locations = response.testingSites;
           angular.forEach(response.donationBatches, function(batch) {
             $scope.testBatchAvailableDonationBatches.push(batch);
           });
@@ -92,19 +88,19 @@ angular.module('bsis')
     $scope.getCurrentTestBatch();
 
     $scope.getCurrentTestBatchOverview = function() {
-      TestingService.getTestBatchOverviewById($routeParams.id, function(response) {
-        if (response !== false) {
-          $scope.testBatchOverview = response;
-          $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
-          $scope.pendingTTITests = response.pendingTTITests;
-          $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
-          $scope.basicTTIComplete = response.basicTTIComplete;
-          $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
-          $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
-          $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
-          $scope.reEntryRequiredPendingBloodTypingTests = response.reEntryRequiredPendingBloodTypingTests;
-          $scope.reEntryRequiredPendingTTITests = response.reEntryRequiredPendingTTITests;
-        }
+      TestingService.getTestBatchOverviewById({testBatch: $routeParams.id}, function(response) {
+        $scope.testBatchOverview = response;
+        $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
+        $scope.pendingTTITests = response.pendingTTITests;
+        $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
+        $scope.basicTTIComplete = response.basicTTIComplete;
+        $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
+        $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
+        $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
+        $scope.reEntryRequiredPendingBloodTypingTests = response.reEntryRequiredPendingBloodTypingTests;
+        $scope.reEntryRequiredPendingTTITests = response.reEntryRequiredPendingTTITests;
+      }, function(err) {
+        $log.error(err);
       });
     };
 
@@ -136,7 +132,7 @@ angular.module('bsis')
         field: 'packType.packType',
         visible: true,
         width: '**',
-        maxWidth: '120'
+        maxWidth: '100'
       },
       {
         name: 'Venue',
@@ -149,16 +145,16 @@ angular.module('bsis')
         name: 'ttistatus',
         displayName: 'TTI Status',
         field: 'ttistatus',
-        cellFilter: 'mapTTIStatus',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["ttistatus"].replace("TTI_", "") | titleCase }}</div>',
         visible: true,
         width: '**',
-        maxWidth: '120'
+        maxWidth: '150'
       },
       {
         name: 'bloodTypingStatusBloodTypingMatchStatus',
         displayName: 'Blood Group Serology',
         field: 'bloodTypingStatusBloodTypingMatchStatus',
-        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"]}} - {{row.entity["bloodTypingMatchStatus"]}} <em>({{row.entity["bloodAbo"]}}{{row.entity["bloodRh"]}})</em></div>',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"] | titleCase }} - {{row.entity["bloodTypingMatchStatus"] | titleCase }} <em>({{row.entity["bloodRh"] === "" ? "" : row.entity["bloodAbo"]}}{{row.entity["bloodAbo"] === "" ? "" : row.entity["bloodRh"]}})</em></div>',
         visible: true,
         width: '**'
       },
@@ -189,7 +185,8 @@ angular.module('bsis')
         if (col.name === 'Date Bled') {
           return $filter('bsisDate')(value);
         } else if (col.name === 'ttistatus') {
-          return $filter('mapTTIStatus')(value);
+          value = value.replace('TTI_', '');
+          return $filter('titleCase')(value);
         } else if (col.name === 'bloodAboRh') {
           var bloodSerology = '';
           if (row.entity.bloodTypingStatus !== 'NOT_DONE') {
@@ -202,6 +199,10 @@ angular.module('bsis')
           } else {
             return row.entity.previousDonationAboRhOutcome;
           }
+        } else if (col.name === 'bloodTypingStatusBloodTypingMatchStatus') {
+          value = row.entity.bloodTypingStatus + ' - ' +  row.entity.bloodTypingMatchStatus;
+          var bloodGroup = (row.entity.bloodRh === '' ? '' : row.entity.bloodAbo) + (row.entity.bloodAbo === '' ? '' : row.entity.bloodRh);
+          return $filter('titleCase')(value) + ' (' + bloodGroup + ')';
         }
         // assume that column is a test outcome column, and manage empty values
         if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue' && col.name !== 'TTI Status' && col.name !== 'bloodTypingStatusBloodTypingMatchStatus' && col.name !== 'previousDonationAboRhOutcome') {
@@ -370,7 +371,7 @@ angular.module('bsis')
 
     $scope.export = function(format) {
 
-      TestingService.getTestBatchOutcomesReport($routeParams.id, function(testBatchOutcomesReport) {
+      TestingService.getTestBatchOutcomesReport({testBatch: $routeParams.id}, function(testBatchOutcomesReport) {
 
         addTestNamesToColumnDefs(testBatchOutcomesReport);
 
@@ -395,27 +396,15 @@ angular.module('bsis')
       });
     };
 
-    function showConfirmation(title, button, message) {
-
-      var modal = $uibModal.open({
-        animation: false,
-        templateUrl: 'views/confirmModal.html',
-        controller: 'ConfirmModalCtrl',
-        resolve: {
-          confirmObject: {
-            title: title,
-            button: button,
-            message: message
-          }
-        }
-      });
-
-      return modal.result;
-    }
-
     $scope.closeTestBatch = function(testBatch) {
 
-      showConfirmation('Confirm Close', 'Close', 'Are you sure that you want to close this test batch?').then(function() {
+      var confirmation = {
+        title: 'Confirm Close',
+        button: 'Close',
+        message: 'Are you sure that you want to close this test batch?'
+      };
+
+      ModalsService.showConfirmation(confirmation).then(function() {
 
         TestingService.closeTestBatch(testBatch, function() {
           $location.path('/manageTestBatch');
@@ -427,7 +416,13 @@ angular.module('bsis')
 
     $scope.reopenTestBatch = function(testBatch) {
 
-      showConfirmation('Confirm Reopen', 'Reopen', 'Are you sure that you want to reopen this test batch?').then(function() {
+      var confirmation = {
+        title: 'Confirm Reopen',
+        button: 'Reopen',
+        message: 'Are you sure that you want to reopen this test batch?'
+      };
+
+      ModalsService.showConfirmation(confirmation).then(function() {
 
         TestingService.reopenTestBatch(testBatch, function(response) {
           if (testBatch.permissions) {
@@ -443,7 +438,13 @@ angular.module('bsis')
 
     $scope.deleteTestBatch = function(testBatchId) {
 
-      showConfirmation('Confirm Void', 'Void', 'Are you sure that you want to void this test batch?').then(function() {
+      var confirmation = {
+        title: 'Confirm Void',
+        button: 'Void',
+        message: 'Are you sure that you want to void this test batch?'
+      };
+
+      ModalsService.showConfirmation(confirmation).then(function() {
 
         TestingService.deleteTestBatch(testBatchId, function() {
           $location.path('/manageTestBatch');
@@ -462,7 +463,13 @@ angular.module('bsis')
       }
       message += '. Are you sure that you want to release this test batch?';
 
-      showConfirmation('Confirm Release', 'Release', message).then(function() {
+      var confirmation = {
+        title: 'Confirm Release',
+        button: 'Release',
+        message: message
+      };
+
+      ModalsService.showConfirmation(confirmation).then(function() {
         TestingService.releaseTestBatch(testBatch, function(response) {
           $scope.testBatch = response;
           $scope.refreshCurrentTestBatch();

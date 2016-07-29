@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, $q, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams) {
     var data = [{}];
     $scope.data = data;
 
@@ -42,26 +42,23 @@ angular.module('bsis')
 
     var getTestOutcomes = function() {
 
-      $scope.searching = true;
       $scope.allTestOutcomes = {};
 
-      TestingService.getTestOutcomesByBatchIdAndBloodTestType($routeParams.id, $routeParams.bloodTestType, function(response) {
-        if (response !== false) {
+      TestingService.getTestOutcomesByBatchIdAndBloodTestType({testBatch: $routeParams.id, bloodTestType: $routeParams.bloodTestType}, function(response) {
+        data = response.testResults;
+        $scope.data = response.testResults;
+        $scope.testBatchCreatedDate = response.testBatchCreatedDate;
+        $scope.numberOfDonations = response.numberOfDonations;
 
-          data = response.testResults;
-          $scope.data = response.testResults;
-          $scope.testBatchCreatedDate = response.testBatchCreatedDate;
-          $scope.numberOfDonations = response.numberOfDonations;
-
-          angular.forEach($scope.data, function(donationResults) {
-            var din = donationResults.donation.donationIdentificationNumber;
-            $scope.allTestOutcomes[din] = {'donationIdentificationNumber': din, 'testResults': {}};
-            angular.forEach(donationResults.recentTestResults, function(test) {
-              $scope.allTestOutcomes[din].testResults[test.bloodTest.id] = test.result;
-            });
+        angular.forEach($scope.data, function(donationResults) {
+          var din = donationResults.donation.donationIdentificationNumber;
+          $scope.allTestOutcomes[din] = {'donationIdentificationNumber': din, 'testResults': {}};
+          angular.forEach(donationResults.recentTestResults, function(test) {
+            $scope.allTestOutcomes[din].testResults[test.bloodTest.id] = test.result;
           });
-        }
-        $scope.searching = false;
+        });
+      }, function(err) {
+        $log.error(err);
       });
     };
 
@@ -74,22 +71,16 @@ angular.module('bsis')
       var testResultsArray = {};
       testResultsArray.testOutcomesForDonations = [];
 
-      var requests = [];
-
       angular.forEach(testResults, function(value) {
         testResultsArray.testOutcomesForDonations.push(value);
       });
 
-      var request = TestingService.saveTestResults(testResultsArray, reEntry, angular.noop);
-      requests.push(request);
-
-      // FIXME: Handle errors
-      $q.all(requests).then(function() {
+      TestingService.saveTestResults({reEntry: reEntry}, testResultsArray, function() {
         $location.path('/viewTestBatch/' + $routeParams.id);
-      }).finally(function() {
+      }, function(err) {
+        $log.error(err);
         $scope.savingTestResults = false;
       });
-
     };
 
     $scope.testOutcomesTableParams = new ngTableParams({
