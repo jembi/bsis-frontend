@@ -95,56 +95,21 @@ angular.module('bsis')
     }
 
     function calculatePercentages() {
-      var femaleRow = null;
-      var maleRow = null;
-      var allGendersRow = null;
       angular.forEach(mergedData, function(row) {
-        if (femaleRow === null) {
-          femaleRow = row;
-          if (femaleRow.total !== 0) {
-            femaleRow.ttirate = femaleRow.totalpos / femaleRow.total * 100;
-            femaleRow.hivrate = femaleRow.hivpos / femaleRow.total * 100;
-            femaleRow.hbvrate = femaleRow.hbvpos / femaleRow.total * 100;
-            femaleRow.hcvrate = femaleRow.hcvpos / femaleRow.total * 100;
-            femaleRow.syphrate = femaleRow.syphpos / femaleRow.total * 100;
-          }
-        } else if (maleRow === null) {
-          maleRow = row;
-          if (maleRow.total !== 0) {
-            maleRow.ttirate = maleRow.totalpos / maleRow.total * 100;
-            maleRow.hivrate = maleRow.hivpos / maleRow.total * 100;
-            maleRow.hbvrate = maleRow.hbvpos / maleRow.total * 100;
-            maleRow.hcvrate = maleRow.hcvpos / maleRow.total * 100;
-            maleRow.syphrate = maleRow.syphpos / maleRow.total * 100;
-          }
-        } else {
-          allGendersRow = row;
-          allGendersRow.ttirate = allGendersRow.totalpos / allGendersRow.total * 100;
-          allGendersRow.hivrate = allGendersRow.hivpos / allGendersRow.total * 100;
-          allGendersRow.hbvrate = allGendersRow.hbvpos / allGendersRow.total * 100;
-          allGendersRow.hcvrate = allGendersRow.hcvpos / allGendersRow.total * 100;
-          allGendersRow.syphrate = allGendersRow.syphpos / allGendersRow.total * 100;
-
-          // Format with 2 spaces
-          femaleRow.ttirate = $filter('number')(femaleRow.ttirate, 2);
-          femaleRow.hivrate = $filter('number')(femaleRow.hivrate, 2);
-          femaleRow.hbvrate = $filter('number')(femaleRow.hbvrate, 2);
-          femaleRow.hcvrate = $filter('number')(femaleRow.hcvrate, 2);
-          femaleRow.syphrate = $filter('number')(femaleRow.syphrate, 2);
-          maleRow.ttirate = $filter('number')(maleRow.ttirate, 2);
-          maleRow.hivrate = $filter('number')(maleRow.hivrate, 2);
-          maleRow.hbvrate = $filter('number')(maleRow.hbvrate, 2);
-          maleRow.hcvrate = $filter('number')(maleRow.hcvrate, 2);
-          maleRow.syphrate = $filter('number')(maleRow.syphrate, 2);
-          allGendersRow.ttirate = $filter('number')(allGendersRow.ttirate, 2);
-          allGendersRow.hivrate = $filter('number')(allGendersRow.hivrate, 2);
-          allGendersRow.hbvrate = $filter('number')(allGendersRow.hbvrate, 2);
-          allGendersRow.hcvrate = $filter('number')(allGendersRow.hcvrate, 2);
-          allGendersRow.syphrate = $filter('number')(allGendersRow.syphrate, 2);
-
-          femaleRow = null;
-          maleRow = null;
+        if (row.total !== 0) {
+          row.ttirate = row.totalpos / row.total * 100;
+          row.hivrate = row.hivpos / row.total * 100;
+          row.hbvrate = row.hbvpos / row.total * 100;
+          row.hcvrate = row.hcvpos / row.total * 100;
+          row.syphrate = row.syphpos / row.total * 100;
         }
+
+        // Format with 2 spaces
+        row.ttirate = $filter('number')(row.ttirate, 2);
+        row.hivrate = $filter('number')(row.hivrate, 2);
+        row.hbvrate = $filter('number')(row.hbvrate, 2);
+        row.hcvrate = $filter('number')(row.hcvrate, 2);
+        row.syphrate = $filter('number')(row.syphrate, 2);
       });
     }
 
