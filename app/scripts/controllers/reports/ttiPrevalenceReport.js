@@ -32,10 +32,14 @@ angular.module('bsis')
       zeroValuesRow.hivpos = 0;
       zeroValuesRow.hbvpos = 0;
       zeroValuesRow.hcvpos = 0;
-      zeroValuesRow.syphilispos = 0;
-      zeroValuesRow.empty = 0;
+      zeroValuesRow.syphpos = 0;
       zeroValuesRow.totalpos = 0;
       zeroValuesRow.total = 0;
+      zeroValuesRow.ttirate = 0;
+      zeroValuesRow.hivrate = 0;
+      zeroValuesRow.hbvrate = 0;
+      zeroValuesRow.hcvrate = 0;
+      zeroValuesRow.syphrate = 0;
       return zeroValuesRow;
     }
 
@@ -46,8 +50,7 @@ angular.module('bsis')
       allGendersRow.hivpos = femaleRow.hivpos + maleRow.hivpos;
       allGendersRow.hbvpos = femaleRow.hbvpos + maleRow.hbvpos;
       allGendersRow.hcvpos = femaleRow.hcvpos + maleRow.hcvpos;
-      allGendersRow.syphilispos = femaleRow.syphilispos + maleRow.syphilispos;
-      allGendersRow.empty = femaleRow.empty + maleRow.empty;
+      allGendersRow.syphpos = femaleRow.syphpos + maleRow.syphpos;
       allGendersRow.totalpos = femaleRow.totalpos + maleRow.totalpos;
       allGendersRow.total = femaleRow.total + maleRow.total;
       return allGendersRow;
@@ -69,10 +72,8 @@ angular.module('bsis')
         }
       } else if (bloodTest === 'Syphilis') {
         if (result === 'POS') {
-          mergedRow.syphilispos = newRow.value;
+          mergedRow.syphpos = newRow.value;
         }
-      } else if (bloodTest === 'null' || result === 'null') {
-        mergedRow.empty = newRow.value;
       }
 
       if (newRow.id === 'totalUnitsTested') {
@@ -91,6 +92,60 @@ angular.module('bsis')
       mergedKey = mergedKey + 1;
       mergedData[mergedKey] = createAllGendersRow(mergedFemaleRow, mergedMaleRow);
       mergedKey = mergedKey + 1;
+    }
+
+    function calculatePercentages() {
+      var femaleRow = null;
+      var maleRow = null;
+      var allGendersRow = null;
+      angular.forEach(mergedData, function(row) {
+        if (femaleRow === null) {
+          femaleRow = row;
+          if (femaleRow.total !== 0) {
+            femaleRow.ttirate = femaleRow.totalpos / femaleRow.total * 100;
+            femaleRow.hivrate = femaleRow.hivpos / femaleRow.total * 100;
+            femaleRow.hbvrate = femaleRow.hbvpos / femaleRow.total * 100;
+            femaleRow.hcvrate = femaleRow.hcvpos / femaleRow.total * 100;
+            femaleRow.syphrate = femaleRow.syphpos / femaleRow.total * 100;
+          }
+        } else if (maleRow === null) {
+          maleRow = row;
+          if (maleRow.total !== 0) {
+            maleRow.ttirate = maleRow.totalpos / maleRow.total * 100;
+            maleRow.hivrate = maleRow.hivpos / maleRow.total * 100;
+            maleRow.hbvrate = maleRow.hbvpos / maleRow.total * 100;
+            maleRow.hcvrate = maleRow.hcvpos / maleRow.total * 100;
+            maleRow.syphrate = maleRow.syphpos / maleRow.total * 100;
+          }
+        } else {
+          allGendersRow = row;
+          allGendersRow.ttirate = allGendersRow.totalpos / allGendersRow.total * 100;
+          allGendersRow.hivrate = allGendersRow.hivpos / allGendersRow.total * 100;
+          allGendersRow.hbvrate = allGendersRow.hbvpos / allGendersRow.total * 100;
+          allGendersRow.hcvrate = allGendersRow.hcvpos / allGendersRow.total * 100;
+          allGendersRow.syphrate = allGendersRow.syphpos / allGendersRow.total * 100;
+
+          // Format with 2 spaces
+          femaleRow.ttirate = $filter('number')(femaleRow.ttirate, 2);
+          femaleRow.hivrate = $filter('number')(femaleRow.hivrate, 2);
+          femaleRow.hbvrate = $filter('number')(femaleRow.hbvrate, 2);
+          femaleRow.hcvrate = $filter('number')(femaleRow.hcvrate, 2);
+          femaleRow.syphrate = $filter('number')(femaleRow.syphrate, 2);
+          maleRow.ttirate = $filter('number')(maleRow.ttirate, 2);
+          maleRow.hivrate = $filter('number')(maleRow.hivrate, 2);
+          maleRow.hbvrate = $filter('number')(maleRow.hbvrate, 2);
+          maleRow.hcvrate = $filter('number')(maleRow.hcvrate, 2);
+          maleRow.syphrate = $filter('number')(maleRow.syphrate, 2);
+          allGendersRow.ttirate = $filter('number')(allGendersRow.ttirate, 2);
+          allGendersRow.hivrate = $filter('number')(allGendersRow.hivrate, 2);
+          allGendersRow.hbvrate = $filter('number')(allGendersRow.hbvrate, 2);
+          allGendersRow.hcvrate = $filter('number')(allGendersRow.hcvrate, 2);
+          allGendersRow.syphrate = $filter('number')(allGendersRow.syphrate, 2);
+
+          femaleRow = null;
+          maleRow = null;
+        }
+      });
     }
 
     function mergeData(dataValues) {
@@ -144,6 +199,9 @@ angular.module('bsis')
       // Run this one last time for the last row
       addFemaleMaleAllRows(mergedFemaleRow, mergedMaleRow);
 
+      // Calculate percentages
+      calculatePercentages();
+
       $scope.gridOptions.data = mergedData;
     }
 
@@ -184,13 +242,18 @@ angular.module('bsis')
       { name: 'HIVPOS', displayName: 'HIV +', field: 'hivpos', width: '**', maxWidth: '70' },
       { name: 'HBVPOS', displayName: 'HBV +', field: 'hbvpos', width: '**', maxWidth: '70' },
       { name: 'HCVPOS', displayName: 'HCV +', field: 'hcvpos', width: '**', maxWidth: '70' },
-      { name: 'SyphilisPOS', displayName: 'Syphilis +', field: 'syphilispos', width: '**', maxWidth: '100' },
-      { name: 'TotalUnsafeUnitsTested', displayName: 'Total Units +', field: 'totalpos', width: '**', maxWidth: '80'  },
-      { name: 'TotalUnitsTested', displayName: 'Total Units', field: 'total', width: '**', maxWidth: '80'  }
+      { name: 'SyphilisPOS', displayName: 'Syphilis +', field: 'syphpos', width: '**', maxWidth: '100' },
+      { name: 'TotalUnsafeUnitsTested', displayName: 'Total +', field: 'totalpos', width: '**', maxWidth: '80'  },
+      { name: 'TotalUnitsTested', displayName: 'Total', field: 'total', width: '**', maxWidth: '80'  },
+      { name: 'TTIRate', displayName: 'TTI %', field: 'ttirate', width: '**', maxWidth: '80'  },
+      { name: 'HIVRate', displayName: 'HIV %', field: 'hivrate', width: '**', maxWidth: '80'  },
+      { name: 'HBVRate', displayName: 'HBV %', field: 'hbvrate', width: '**', maxWidth: '80'  },
+      { name: 'HCVRate', displayName: 'HCV %', field: 'hcvrate', width: '**', maxWidth: '80'  },
+      { name: 'SyphRate', displayName: 'Syph %', field: 'syphrate', width: '**', maxWidth: '80'  }
     ];
 
     function updatePdfDocDefinition(docDefinition) {
-      // Display in bold 'All' rows
+      // Display in grey and bold 'All' rows
       docDefinition.styles.greyBoldCell = ReportsLayoutService.pdfTableBodyGreyBoldStyle;
       angular.forEach(docDefinition.content[0].table.body, function(row) {
         if (row[1] === 'All') {
@@ -215,6 +278,14 @@ angular.module('bsis')
       exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
       exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
       exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
+
+      // Add % to rate column values
+      exporterFieldCallback: function(grid, row, col, value) {
+        if (col.field.indexOf('rate') !== -1) {
+          return value + '%';
+        }
+        return value;
+      },
 
       // PDF header
       exporterPdfHeader: function() {
