@@ -440,4 +440,8 @@ angular.module('bsis')
     $scope.cancel = function() {
       $location.path('/duplicateDonors');
     };
+
+    $scope.viewDonor = function(donor) {
+      $location.path('/viewDonor/' + donor.id).search({});
+    };
   });
