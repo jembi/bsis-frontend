@@ -22,8 +22,9 @@
                 <td data-title="'TTI Test Status'" header-class="text-left" sortable="'ttiStatus'">
                     {{donation.ttistatus}}
                 </td>
-                <td data-title="'ABO/Rh'" header-class="text-left" class="text-center" sortable="'bloodAbo'">
-                    {{donation.bloodAbo}}{{donation.bloodRh}}
+                <td data-title="'Blood Group Serology'" header-class="text-left" class="text-center" sortable="'bloodAbo'">
+                    {{donation.bloodTypingStatus | titleCase}} - {{donation.bloodTypingMatchStatus | titleCase}}
+                    <em ng-show="donation.bloodAbo !== '' && donation.bloodRh !== ''"> ({{donation.bloodAbo + donation.bloodRh}})
                 </td>
                 <td data-title="'Wt (kg)'" header-class="text-left" class="text-center" sortable="'donorWeight'">
                     {{donation.donorWeight}}
