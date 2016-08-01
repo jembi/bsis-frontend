@@ -213,12 +213,13 @@ angular.module('bsis')
       $scope.donation = donation;
       $scope.donationBatchView = 'viewDonationSummary';
       $scope.commentFieldDisabled = !donation.adverseEvent;
-      $scope.donation.SampleRealead = '';
-      if (donation.released == false) {
-        $scope.donation.SampleRealead = 'No';
+      $scope.donation.sampleReleased = '';
+      if ($scope.donation.released) {
+        $scope.donation.sampleReleased = 'YES';
       } else {
-        $scope.donation.SampleRealead = 'Yes';
+        $scope.donation.sampleReleased = 'NO';
       }
+
       DonorService.getDonationsFormFields(function(response) {
         if (response !== false) {
           $scope.haemoglobinLevels = response.haemoglobinLevels;
