@@ -10,9 +10,9 @@
                     <label for="name" class="col-sm-1 control-label">Name</label>
                     <div class="col-sm-4">
                         <div class="form-inline">
-                            <input size="30" id="name" name="name" class="form-control input-sm" ng-model="role.name"
+                            <input size="50" id="name" name="name" class="form-control input-sm" ng-model="role.name"
                                    required
-                                   ng-minlength=1 ng-maxlength=30
+                                   ng-minlength=1 ng-maxlength=50
                                    ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                                    ng-class="{'ng-invalid ng-dirty' : (roleForm.name.$invalid && submitted) || nameInvalid }">
                             <div>
@@ -31,8 +31,8 @@
                     <label for="description" class="col-sm-1 control-label">Description</label>
                     <div class="col-sm-6">
                         <div class="form-inline">
-                            <input size="40" id="description" name="description" class="form-control input-sm"
-                                   ng-model="role.description" required ng-minlength=1 ng-maxlength=30
+                            <input size="50" id="description" name="description" class="form-control input-sm"
+                                   ng-model="role.description" required ng-minlength=1 ng-maxlength=100
                                    ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                                    ng-class="{'ng-invalid ng-dirty' : roleForm.description.$invalid && submitted}">
                             <div>
