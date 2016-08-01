@@ -218,9 +218,6 @@ angular.module('bsis')
           method: 'PUT',
           url: url + '/components/discard'
         },
-        update: {
-          method: 'PUT'
-        },
         unprocess: {
           method: 'PUT',
           url: url + '/components/:id/unprocess'
@@ -228,6 +225,13 @@ angular.module('bsis')
         undiscard: {
           method: 'PUT',
           url: url + '/components/undiscard'
+        },
+        updateWeight: {
+          method: 'PUT',
+          url: url + '/components/:id/weight',
+          params: {
+            id: '@id'
+          }
         }
       }),
 

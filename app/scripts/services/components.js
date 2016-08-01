@@ -47,8 +47,8 @@ angular.module('bsis')
 
       getDiscardForm: Api.Components.getDiscardForm,
       discard: Api.Components.discard,
-      update: Api.Components.update,
       unprocess: Api.Components.unprocess,
-      undiscard: Api.Components.undiscard
+      undiscard: Api.Components.undiscard,
+      updateWeight: Api.Components.updateWeight
     };
   });
