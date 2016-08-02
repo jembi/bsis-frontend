@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ManageDonorsDuplicateCtrl', function($scope, $window, $location, $routeParams, DonorService, $filter, ngTableParams, $timeout, ICONS) {
+  .controller('ManageDonorsDuplicateCtrl', function($scope, $window, $location, $routeParams, DonorService, $filter, ngTableParams, $timeout, ICONS, UI) {
     $scope.icons = ICONS;
+    $scope.ui = UI;
 
     var duplicatesData = [{}];
     $scope.duplicatesData = duplicatesData;
@@ -439,5 +440,9 @@ angular.module('bsis')
 
     $scope.cancel = function() {
       $location.path('/duplicateDonors');
+    };
+
+    $scope.viewDonor = function(donor) {
+      $location.path('/viewDonor/' + donor.id).search({});
     };
   });
