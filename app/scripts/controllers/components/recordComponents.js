@@ -124,7 +124,7 @@ angular.module('bsis')
 
       showComponentWeightConfirmation($scope.component).then(function() {
 
-        ComponentService.update({}, $scope.component, function(res) {
+        ComponentService.updateWeight({}, $scope.component, function(res) {
           $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
             // Replace the component in the grid with the updated component
             if (component.id === res.component.id) {
