@@ -3,7 +3,7 @@
 angular.module('bsis')
 
   .controller('ViewDonorCtrl', function($scope, $location, $uibModal, $log, Alerting, DonorService, TestingService, ConfigurationsService, ICONS, PERMISSIONS, PACKTYPE, MONTH, TITLE,
-                                         GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams) {
+                                         GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams, ModalsService) {
 
     //Initialize scope variables
     $scope.icons = ICONS;
@@ -523,7 +523,7 @@ angular.module('bsis')
     }
 
     $scope.getDeferrals = function(donorId) {
-      $scope.confirmDelete = false;
+      $scope.deletingDeferral = false;
       $scope.deferralView = 'viewDeferrals';
 
       DonorService.getDeferrals(donorId, function(response) {
@@ -632,22 +632,42 @@ angular.module('bsis')
         deferral.deferredUntil = newEndDate;
       };
 
-      $scope.deleteDonorDeferral = function(donorDeferralId) {
-        DonorService.deleteDonorDeferral(donorDeferralId, function() {
-          // refresh the notice at the top
-          $scope.clearDeferralMessage();
-          // remove item from the table once it has been deleted
-          var deferralsData = $scope.deferralsData.filter(function(deferral) {
-            if (deferral.id === donorDeferralId) {
-              return false;
-            }
-            $scope.refreshDeferralMessage(deferral);
-            return true;
+      $scope.deleteDonorDeferral = function(donorDeferral) {
+        var message = '';
+        if (donorDeferral.deferralReason.durationType === 'PERMANENT') {
+          message = 'Are you sure you want to void this permanent deferral? The donor may be eligible to donate as a result of this action.';
+        } else {
+          message = 'Are you sure you want to void this deferral?';
+        }
+
+        var confirmationModalConfig = {
+          title: 'Void Deferral',
+          button: 'Void Deferral',
+          message: message
+        };
+
+        ModalsService.showConfirmation(confirmationModalConfig).then(function() {
+          $scope.deletingDeferral = true;
+          DonorService.deleteDonorDeferral(donorDeferral.id, function() {
+            // refresh the notice at the top
+            $scope.clearDeferralMessage();
+            // remove item from the table once it has been deleted
+            var deferralsData = $scope.deferralsData.filter(function(deferral) {
+              if (deferral.id === donorDeferral.id) {
+                return false;
+              }
+              $scope.refreshDeferralMessage(deferral);
+              return true;
+            });
+            $scope.deferralsData = deferralsData;
+            $scope.deletingDeferral = false;
+          }, function(err) {
+            $scope.err = err;
+            $scope.deletingDeferral = false;
           });
-          $scope.deferralsData = deferralsData;
-        }, function(err) {
-          $scope.err = err;
-          $scope.confirmDelete = false;
+        }).catch(function() {
+          // Confirmation was rejected
+          $scope.deletingDeferral = false;
         });
       };
     };

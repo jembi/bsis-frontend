@@ -86,7 +86,7 @@
                       style="display:inline;">
                     <!-- Edit deferral actions -->
                     <div has-permission="{{permissions.EDIT_DEFFERAL}}"
-                         ng-hide="confirmDelete || endDeferralForm.$visible" style="display:inline;">
+                         ng-hide="deletingDeferral || endDeferralForm.$visible" style="display:inline;">
                         <em>
                             <button type="button" class="btn btn-link" ng-click="editableDeferralForm.$show()"
                                     ng-hide="editableDeferralForm.$visible" ng-disabled="!deferral.permissions.canEdit">
@@ -113,7 +113,7 @@
                       onaftersave="endDonorDeferral(deferral, comment, endDeferralForm)" style="display:inline;">
                     <!-- End deferral actions -->
                     <div has-permission="{{permissions.EDIT_DEFFERAL}}"
-                         ng-hide="editableDeferralForm.$visible || confirmDelete" style="display:inline;">
+                         ng-hide="editableDeferralForm.$visible || deletingDeferral" style="display:inline;">
                         <em>
                             <button type="button" class="btn btn-link" ng-click="endDeferralForm.$show()"
                                     ng-hide="endDeferralForm.$visible" ng-disabled="!deferral.permissions.canEnd">End
@@ -142,16 +142,8 @@
                 <div has-permission="{{permissions.VOID_DEFERRAL}}"
                      ng-hide="editableDeferralForm.$visible || endDeferralForm.$visible" style="display:inline;">
                     <em>
-                        <button type="button" class="btn btn-link" ng-click="confirmDelete = true"
-                                ng-hide="confirmDelete" ng-disabled="!deferral.permissions.canDelete">Void
-                        </button>
-                        <button type="button" class="btn btn-link text-danger" ng-show="confirmDelete"
-                                ng-click="deleteDonorDeferral(deferral.id); confirmDelete = false">
-                            Void
-                        </button>
-                        <button type="button" class="btn btn-link text-muted" ng-show="confirmDelete"
-                                ng-click="confirmDelete = false">
-                            Cancel
+                        <button type="button" class="btn btn-link" ng-click="deleteDonorDeferral(deferral);" ng-disabled="deletingDeferral">
+                            {{deletingDeferral ? 'Voiding...' : 'Void'}}
                         </button>
                     </em>
                 </div>
