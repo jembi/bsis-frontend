@@ -86,10 +86,7 @@
                 <tr>
                     <td class="field">Pack Type:</td>
                     <td class="value">
-                        <fieldset ng-disabled="!donation.permissions.canUpdateDonationFields">
-                        <span editable-select="donation.packType" e-name="packType"
-                              e-ng-options="pt as pt.packType disable when (pt.countAsDonation && (donation.permissions.canDonate === false && donation.permissions.isBackEntry === false)) for pt in packTypes track by pt.id">{{donation.packType.packType}}</span>
-                        </fieldset>
+                        <span>{{donation.packType.packType}}</span>
                     </td>
                 </tr>
                 <tr>
