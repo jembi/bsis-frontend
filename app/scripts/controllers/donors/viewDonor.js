@@ -260,12 +260,6 @@ angular.module('bsis')
 
       $scope.donation = $filter('filter')($scope.donationsData, {donationIdentificationNumber: din})[0];
       $scope.commentFieldDisabled = !$scope.donation.adverseEvent;
-      $scope.donation.sampleReleased = '';
-      if ($scope.donation.released) {
-        $scope.donation.sampleReleased = 'YES';
-      } else {
-        $scope.donation.sampleReleased = 'NO';
-      }
 
       DonorService.getDonationsFormFields(function(response) {
         if (response !== false) {
