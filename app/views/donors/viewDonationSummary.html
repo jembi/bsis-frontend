@@ -247,7 +247,7 @@
         </table>
         <div ng-show="showTestResults" class="col-sm-6" style="height:100%;">
          <span>
-         <small><em>Sample Released:</em></small> {{donation.sampleReleased}}
+         <small><em>Sample Released:</em></small> {{donation.released ? 'YES' : 'NO'}}
          <br/>
          <small><em>TTI Test Status:</em></small> {{donation.ttistatus}}
          <br/>

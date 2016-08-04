@@ -213,12 +213,6 @@ angular.module('bsis')
       $scope.donation = donation;
       $scope.donationBatchView = 'viewDonationSummary';
       $scope.commentFieldDisabled = !donation.adverseEvent;
-      $scope.donation.sampleReleased = '';
-      if ($scope.donation.released) {
-        $scope.donation.sampleReleased = 'YES';
-      } else {
-        $scope.donation.sampleReleased = 'NO';
-      }
 
       DonorService.getDonationsFormFields(function(response) {
         if (response !== false) {
