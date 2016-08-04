@@ -30,7 +30,7 @@ module.exports = function(config) {
 
     frameworks: ['jasmine'],
 
-    browsers: ['PhantomJS2'],
+    browsers: ['PhantomJS'],
 
     singleRun: true,
 
