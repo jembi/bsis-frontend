@@ -55,8 +55,15 @@ angular.module('bsis')
           angular.forEach(donationResults.recentTestResults, function(test) {
             if (test.reEntryRequired === false) {
               $scope.reEnteredTestOutcomes[din].testResults[test.bloodTest.id] = test.result;
+            } else {
+              donationResults.editableRow = true;
             }
           });
+        });
+
+        // Filter rows that are not editable from $scope.data
+        $scope.data = $scope.data.filter(function(row) {
+          return (row.editableRow === true);
         });
       }, function(err) {
         $log.error(err);

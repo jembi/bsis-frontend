@@ -72,10 +72,10 @@
                           <td class="text-center">
                               {{sample.donationDate | bsisDate}}
                           </td>
-                          <td>
+                          <td class="text-center">
                               {{sample.bloodTypingMatchStatus}}
                           </td>
-                          <td>
+                          <td align="center">
                               <div style="width:90px;">
                                   <ui-select
                                           ng-model="bloodTypingResolutions[sample.donationIdentificationNumber].bloodAbo"
@@ -88,7 +88,7 @@
                                   </ui-select>
                               </div>
                           </td>
-                          <td>
+                          <td align="center">
                               <div style="width:90px;">
                                   <ui-select
                                           ng-model="bloodTypingResolutions[sample.donationIdentificationNumber].bloodRh"

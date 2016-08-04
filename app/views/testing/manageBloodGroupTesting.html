@@ -64,7 +64,7 @@
                           <td class="text-center">
                               {{sample.donation.donationDate | bsisDate}}
                           </td>
-                          <td>
+                          <td class="text-center">
                               <span ng-if="sample.bloodTypingStatus!= 'NOT_DONE'">{{sample.bloodTypingStatus}} - </span>{{sample.bloodTypingMatchStatus}}
                           </td>
                           <td align="center" ng-repeat="test in testNames">

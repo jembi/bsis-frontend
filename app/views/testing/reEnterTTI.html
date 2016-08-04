@@ -68,7 +68,8 @@
                               {{sample.ttistatus}}
                           </td>
                           <td align="center" ng-repeat="test in testNames">
-                              <div ng-class="{'panel panel-confirm' : (reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] != sample.recentTestResults[test.id].result) && reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] && !reEntryConfirmations[sample.donation.donationIdentificationNumber][test.id]}" style="width:90px; float: left;">
+                            <span ng-show="sample.recentTestResults[test.id] != null" style="display: flex; justify-content: center;">
+                              <div ng-class="{'panel panel-confirm' : (reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] != sample.recentTestResults[test.id].result) && reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] && !reEntryConfirmations[sample.donation.donationIdentificationNumber][test.id]}" style="width:90px;">
                                   <ui-select
                                           ng-model="reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id]"
                                           ng-disabled="!sample.recentTestResults[test.id].reEntryRequired"
@@ -80,12 +81,13 @@
                                       </ui-select-choices>
                                   </ui-select>
                               </div>
-                              <div style="width: 10px; float: left; padding: 5px;" class="check-element animate-show" ng-show="(reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] != sample.recentTestResults[test.id].result) && reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id]">
+                              <div style="width: 10px; padding: 5px;" class="check-element animate-show" ng-show="(reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] != sample.recentTestResults[test.id].result) && reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id]">
                                   <small>
                                       <input ng-model="reEntryConfirmations[sample.donation.donationIdentificationNumber][test.id]" type="checkbox" id="confirmChange" value="true"  name="confirmChange" ng-required="(reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id] != sample.recentTestResults[test.id].result) && reEnteredTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id]"
                                       ng-click=""/>
                                   </small>
                               </div>
+                            </span>
                           </td>
                       </tr>
                       </tbody>
