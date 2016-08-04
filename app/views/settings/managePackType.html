@@ -30,13 +30,9 @@
                                            ng-minlength=1 ng-maxlength=30
                                            ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                                            ng-class="{'ng-invalid ng-dirty' : packTypeForm.packType.$invalid && submitted}"/>
-
-                                    <div>
-                                        <small class="error"
-                                               ng-show="(packTypeForm.packType.$error.required && (packType.packType.$dirty || submitted))">
-                                            This cannot be empty
-                                        </small>
-                                    </div>
+                                    <ng-messages for="packTypeForm.packType.$error" role="alert" ng-show="packTypeForm.$submitted">
+                                        <ng-messages-include src="messages.html"></ng-messages-include>
+                                    </ng-messages>
                                 </div>
                             </div>
                         </div>
@@ -78,12 +74,9 @@
                                             ng-class="{'ng-invalid ng-dirty' : packTypeForm.componentType.$invalid && submitted}">
                                         <option value="" ng-disabled="true">Select:</option>
                                     </select>
-                                    <div>
-                                        <small class="error"
-                                               ng-show="(packTypeForm.componentType.$error.required && (packTypeForm.componentType.$dirty || submitted))">
-                                            This cannot be empty
-                                        </small>
-                                    </div>
+                                    <ng-messages for="packTypeForm.countAsDonation.$error" role="alert" ng-show="packTypeForm.$submitted">
+                                        <ng-messages-include src="messages.html"></ng-messages-include>
+                                    </ng-messages>
                                 </div>
                             </div>
                         </div>
@@ -99,21 +92,9 @@
                                            ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                                            ng-class="{'ng-invalid ng-dirty' : packTypeForm.periodBetweenDonations.$invalid && submitted}"
                                     /> <em>days</em>
-
-                                    <div>
-                                        <small class="error"
-                                               ng-show="(packTypeForm.periodBetweenDonations.$error.required && (packTypeForm.periodBetweenDonations.$dirty || submitted))">
-                                            This cannot be empty
-                                        </small>
-                                    </div>
-                                    <div>
-                                        <small class="error"
-                                               ng-show="
-                                          (!packTypeForm.periodBetweenDonations.$error.required && packTypeForm.periodBetweenDonations.$invalid && (packTypeForm.periodBetweenDonations.$dirty || submitted))
-                                        ">
-                                            Invalid input
-                                        </small>
-                                    </div>
+                                    <ng-messages for="packTypeForm.periodBetweenDonations.$error" role="alert" ng-show="packTypeForm.$submitted">
+                                        <ng-messages-include src="messages.html"></ng-messages-include>
+                                    </ng-messages>
                                 </div>
                             </div>
                         </div>
@@ -123,9 +104,9 @@
                                 <div class="form-inline">
                                     <input size="3" style="width:4em;" type="number" id="minWeight" name="minWeight" class="form-control input-sm"
                                            ng-model="packType.minWeight" ng-required="packType.countAsDonation" ng-minlength=1 ng-maxlength=3 />
-                                    <div>
-                                        <small class="error" ng-show="packTypeForm.minWeight.$invalid">Invalid input</small>
-                                    </div>
+                                    <ng-messages for="packTypeForm.minWeight.$error" role="alert" ng-show="packTypeForm.$submitted">
+                                        <ng-messages-include src="messages.html"></ng-messages-include>
+                                    </ng-messages>
                                 </div>
                             </div>
                         </div>
@@ -135,9 +116,9 @@
                                 <div class="form-inline">
                                     <input size="3" style="width:4em;" type="number" id="maxWeight" name="maxWeight" class="form-control input-sm"
                                            ng-model="packType.maxWeight" ng-required="packType.countAsDonation" ng-minlength=1 ng-maxlength=3 />
-                                    <div>
-                                        <small class="error" ng-show="packTypeForm.maxWeight.$invalid">Invalid input</small>
-                                    </div>
+                                    <ng-messages for="packTypeForm.maxWeight.$error" role="alert" ng-show="packTypeForm.$submitted">
+                                        <ng-messages-include src="messages.html"></ng-messages-include>
+                                    </ng-messages>
                                 </div>
                             </div>
                         </div>
@@ -146,9 +127,9 @@
                             <div class="col-sm-8">
                                 <div class="form-inline">
                                     <input size="3" style="width:4em;" type="number" id="lowVolumeWeight" name="lowVolumeWeight" class="form-control input-sm" ng-required="packType.countAsDonation" ng-model="packType.lowVolumeWeight" ng-minlength=1 ng-maxlength=3 />
-                                    <div>
-                                        <small class="error" ng-show="packTypeForm.lowVolumeWeight.$invalid">Invalid input</small>
-                                    </div>
+                                    <ng-messages for="packTypeForm.lowVolumeWeight.$error" role="alert" ng-show="packTypeForm.$submitted">
+                                        <ng-messages-include src="messages.html"></ng-messages-include>
+                                    </ng-messages>
                                 </div>
                             </div>
                         </div>

@@ -99,8 +99,8 @@ angular.module('bsis')
       };
     }
 
-    ComponentTypesService.getComponentTypes({}, function(componentTypes) {
-      $scope.componentTypes = componentTypes;
+    ComponentTypesService.getComponentTypes({}, function(response) {
+      $scope.componentTypes = response.componentTypes;
     }, function(err) {
       $log.error(err);
     });
