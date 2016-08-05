@@ -8,6 +8,9 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
   };
 
   $scope.findComponentBatches = function() {
+    if ($scope.findComponentBatchesForm.$invalid) {
+      return;
+    }
     $scope.searching = true;
     $scope.submitted = true;
     ComponentBatchService.findComponentBatches($scope.period, function(response) {
