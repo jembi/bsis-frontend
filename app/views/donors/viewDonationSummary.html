@@ -72,7 +72,6 @@
                                         <small ng-show="donationSummaryForm.$visible" class="error">
                                             {{errorObject.emptyBleedEndTime[0].error }}
                                         </small>
-                                    </td>  
                                     </td>
                                 </tr>
                             </table>
@@ -259,20 +258,13 @@
                   </span>
                   <table class="dash-table">
                       <thead>
-                      <tr>
-                          <td></td>
-                      </tr>
-                      <tr>
+                      <tr style="border-bottom: 1px solid #ccc;">
                           <th>Test</th>
                           <th>Outcome</th>
                           <th>Tested On</th>
                       </tr>
                       </thead>
-                      <hr style="margin-top:10px; margin-bottom:5px;"/>
                       <tbody>
-                      <tr>
-                          <td></td>
-                      </tr>
                       <tr ng-repeat="test in testResults">
                           <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">
                               {{test.bloodTest.testNameShort}}
@@ -294,20 +286,13 @@
                   </span>
                   <table class="dash-table">
                       <thead>
-                      <tr>
-                          <td></td>
-                      </tr>
-                      <tr>
+                      <tr style="border-bottom: 1px solid #ccc;">
                           <th>Test</th>
                           <th>Outcome</th>
                           <th>Tested On</th>
                       </tr>
                       </thead>
-                      <hr style="margin-top:10px; margin-bottom:5px;"/>
                       <tbody>
-                      <tr>
-                          <td></td>
-                      </tr>
                       <tr ng-repeat="test in testResults">
                           <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">
                               {{test.bloodTest.testNameShort}}
