@@ -76,6 +76,12 @@ angular.module('bsis').factory('ReportsLayoutService', function($filter) {
       });
 
       return docDefinition;
+    },
+    addPercentages: function(col, value) {
+      if (col.field.indexOf('rate') !== -1) {
+        return value + '%';
+      }
+      return value;
     }
 
   };

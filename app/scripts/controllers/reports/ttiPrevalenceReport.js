@@ -230,11 +230,9 @@ angular.module('bsis')
       exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
       exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
 
-      // Add % to rate column values
+      // Reformat column data
       exporterFieldCallback: function(grid, row, col, value) {
-        if (col.field.indexOf('rate') !== -1) {
-          return value + '%';
-        }
+        value = ReportsLayoutService.addPercentages(col, value);
         return value;
       },
 

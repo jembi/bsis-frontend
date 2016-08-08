@@ -38,7 +38,7 @@ angular.module('bsis')
       zeroValuesRow.ordered = 0;
       zeroValuesRow.issued = 0;
       zeroValuesRow.gap = 0;
-      zeroValuesRow.percentage = $filter('number')(0, 2);
+      zeroValuesRow.rate = $filter('number')(0, 2);
       return zeroValuesRow;
     }
 
@@ -51,7 +51,7 @@ angular.module('bsis')
         allComponentTypesRow.ordered = allComponentTypesRow.ordered + row.ordered;
         allComponentTypesRow.issued = allComponentTypesRow.issued + row.issued;
         allComponentTypesRow.gap = allComponentTypesRow.gap + row.gap;
-        allComponentTypesRow.percentage = $filter('number')(allComponentTypesRow.issued / allComponentTypesRow.ordered * 100, 2);
+        allComponentTypesRow.rate = $filter('number')(allComponentTypesRow.issued / allComponentTypesRow.ordered * 100, 2);
       });
       return allComponentTypesRow;
     }
@@ -70,14 +70,14 @@ angular.module('bsis')
         var componentType = $filter('filter')(newRow.cohorts, { category: 'Component Type'})[0].option;
         var rowData = $filter('filter')(mergedData, { cohorts: componentType})[0];
 
-        // add new ordered/issued values and calculate gap & percentage
+        // add new ordered/issued values and calculate gap & rate
         if (newRow.id === 'unitsOrdered') {
           rowData.ordered = rowData.ordered + newRow.value;
         } else if (newRow.id === 'unitsIssued') {
           rowData.issued = rowData.issued + newRow.value;
         }
         rowData.gap = rowData.ordered - rowData.issued;
-        rowData.percentage = $filter('number')(rowData.issued / rowData.ordered * 100, 2);
+        rowData.rate = $filter('number')(rowData.issued / rowData.ordered * 100, 2);
       });
 
       // add the Total Blood Units row
@@ -185,12 +185,7 @@ angular.module('bsis')
       { displayName: 'Ordered', field: 'ordered', width: 100 },
       { displayName: 'Issued', field: 'issued', width: 100 },
       { displayName: 'Gap', field: 'gap', width: 100 },
-      {
-        displayName: '% Issued vs Ordered',
-        field: 'percentage',
-        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["percentage"]}}%</em></div>',
-        width: 150
-      }
+      { displayName: '% Issued vs Ordered', field: 'rate', width: 150 }
     ];
 
     $scope.gridOptions = {
@@ -213,10 +208,9 @@ angular.module('bsis')
         return docDefinition;
       },
 
+      // Reformat column data
       exporterFieldCallback: function(grid, row, col, value) {
-        if (col.field === 'percentage') {
-          return value + '%';
-        }
+        value = ReportsLayoutService.addPercentages(col, value);
         return value;
       },
 
