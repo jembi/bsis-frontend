@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('HeaderCtrl', function($scope, $location, AuthService, ICONS, PERMISSIONS, UI) {
+  .controller('HeaderCtrl', function($scope, $location, AuthService, ConfigurationsService, ICONS, PERMISSIONS, UI) {
 
     $scope.icons = ICONS;
+
+    $scope.warningMessage = ConfigurationsService.getStringValue('ui.header.warningMessage');
 
     $scope.isPasswordReset = function() {
       var loggedOnUser = AuthService.getLoggedOnUser();

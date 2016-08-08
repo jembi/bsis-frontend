@@ -69,13 +69,13 @@
                     <label for="value" class="col-sm-1 control-label">Value</label>
                     <div class="col-sm-6">
                         <div class="form-inline">
-                            <input ng-show="!(datatype == 'boolean')" size="40" id="value" name="value"
+                            <input ng-show="datatype !== 'boolean'" size="40" id="value" name="value"
                                    class="form-control input-sm"
-                                   ng-model="configuration.value" required
+                                   ng-model="configuration.value" ng-required="datatype !== 'text'"
                                    ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                                    ng-class="{'ng-invalid ng-dirty' :( configurationForm.value.$invalid && submitted) || configurationValueInvalid }">
                             <select ng-show="(datatype == 'boolean')" name="value" class="form-control input-sm"
-                                    ng-model="configuration.value" required
+                                    ng-model="configuration.value" ng-required="datatype === 'boolean'"
                                     ng-class="{'ng-invalid ng-dirty' : configurationForm.dataType.$invalid && submitted}">
                                 <option value="true">true</option>
                                 <option value="false">false</option>

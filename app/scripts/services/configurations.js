@@ -164,6 +164,23 @@ angular.module('bsis')
         }
 
         return 0;
+      },
+
+      getStringValue: function(name) {
+
+        var configs = USERCONFIG.configurations;
+
+        if (!configs) {
+          return null;
+        }
+
+        for (var i = 0; i < configs.length; i++) {
+          if (configs[i].name === name) {
+            return configs[i].value;
+          }
+        }
+
+        return null;
       }
 
     };

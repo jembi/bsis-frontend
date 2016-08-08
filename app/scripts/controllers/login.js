@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('LoginCtrl', function($scope, $location, AuthService) {
+  .controller('LoginCtrl', function($scope, $location, AuthService, ConfigurationsService) {
     $scope.credentials = {
       username: '',
       password: ''
     };
+
+    $scope.warningMessage = ConfigurationsService.getStringValue('ui.header.warningMessage');
 
     if ($location.path() === '/logout') {
       AuthService.logout();
