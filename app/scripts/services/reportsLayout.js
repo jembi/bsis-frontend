@@ -10,11 +10,14 @@ angular.module('bsis').factory('ReportsLayoutService', function($filter) {
       return header;
     },
     generatePdfPageFooter: function(recordsName, totalRecords, currentPage, pageCount) {
-      var columns = [
-        {text: 'Total ' + recordsName + ': ' + totalRecords, width: 'auto'},
-        {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-        {text: 'Page ' + currentPage + ' of ' + pageCount, alignment: 'right'}
-      ];
+      var columns = [];
+      if (recordsName) {
+        columns.push({text: 'Total ' + recordsName + ': ' + totalRecords, width: 'auto'});
+      }
+      columns.push({text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'});
+      if (currentPage) {
+        columns.push({text: 'Page ' + currentPage + ' of ' + pageCount, alignment: 'right'});
+      }
       return {
         columns: columns,
         columnGap: 10,

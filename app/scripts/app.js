@@ -357,6 +357,13 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         enabled: UI.REPORTS_TAB_ENABLED,
         reloadOnSearch: false
       })
+      .when('/bloodUnitsIssuedReport', {
+        templateUrl: 'views/reports/bloodUnitsIssuedReport.html',
+        controller: 'BloodUnitsIssuedReportCtrl',
+        permission: PERMISSIONS.COMPONENTS_ISSUED_REPORTING,
+        enabled: UI.REPORTS_TAB_ENABLED,
+        reloadOnSearch: false
+      })
 
       // MOBILE URLs
       .when('/mobile', {
