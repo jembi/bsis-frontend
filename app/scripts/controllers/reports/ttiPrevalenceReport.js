@@ -217,20 +217,6 @@ angular.module('bsis')
       { name: 'SyphRate', displayName: 'Syph %', field: 'syphrate', width: '**', maxWidth: '80'  }
     ];
 
-    function updatePdfDocDefinition(docDefinition) {
-      // Display in grey and bold 'All' rows
-      docDefinition.styles.greyBoldCell = ReportsLayoutService.pdfTableBodyGreyBoldStyle;
-      angular.forEach(docDefinition.content[0].table.body, function(row) {
-        if (row[1] === 'All') {
-          angular.forEach(row, function(cell, index) {
-            row[index] = { text: '' + cell, style: 'greyBoldCell'};
-          });
-        }
-      });
-
-      return ReportsLayoutService.paginatePdf(30, docDefinition);
-    }
-
     $scope.gridOptions = {
       data: [],
       paginationPageSize: 9,
@@ -258,9 +244,10 @@ angular.module('bsis')
           ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
       },
 
-      // PDF: add search parameters under the header
+      // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        docDefinition = updatePdfDocDefinition(docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
+        docDefinition = ReportsLayoutService.paginatePdf(30, docDefinition);
         return docDefinition;
       },
 

@@ -50,7 +50,34 @@ angular.module('bsis').factory('ReportsLayoutService', function($filter) {
       } while (table.length > 0);
 
       return docDefinition;
+    },
+    highlightTotalRows: function(columnText, columnTextIndex, docDefinition) {
+      // set the cell style of each column in the row containing all/total data
+      docDefinition.styles.greyBoldCell = this.pdfTableBodyGreyBoldStyle;
+      angular.forEach(docDefinition.content[0].table.body, function(row) {
+        if (row[columnTextIndex] === columnText) {
+          angular.forEach(row, function(cell, index) {
+            row[index] = { text: '' + cell, style: 'greyBoldCell'};
+          });
+        }
+      });
+
+      return docDefinition;
+    },
+    highlightPercentageRows: function(columnText, columnTextIndex, docDefinition) {
+      // set the cell style of each column in the row containing percentage data
+      docDefinition.styles.boldCell = this.pdfTableBodyBoldStyle;
+      angular.forEach(docDefinition.content[0].table.body, function(row) {
+        if (row[columnTextIndex] === columnText) {
+          angular.forEach(row, function(cell, index) {
+            row[index] = { text: '' + cell, style: 'boldCell'};
+          });
+        }
+      });
+
+      return docDefinition;
     }
+
   };
 
 });

@@ -178,30 +178,6 @@ angular.module('bsis')
       { name: 'Total', field: 'total', width: '**', maxWidth: '125' }
     ];
 
-    function updatePdfDocDefinition(docDefinition) {
-      // Fill with grey and display in bold '%' rows
-      docDefinition.styles.greyBoldCell = ReportsLayoutService.pdfTableBodyGreyBoldStyle;
-      angular.forEach(docDefinition.content[0].table.body, function(row) {
-        if (row[1] === '%') {
-          angular.forEach(row, function(cell, index) {
-            row[index] = { text: '' + cell, style: 'greyBoldCell'};
-          });
-        }
-      });
-
-      // Display in bold 'All' rows
-      docDefinition.styles.boldCell = ReportsLayoutService.pdfTableBodyBoldStyle;
-      angular.forEach(docDefinition.content[0].table.body, function(row) {
-        if (row[1] === 'All') {
-          angular.forEach(row, function(cell, index) {
-            row[index] = { text: '' + cell, style: 'boldCell'};
-          });
-        }
-      });
-
-      return ReportsLayoutService.paginatePdf(48, docDefinition);
-    }
-
     $scope.gridOptions = {
       data: [],
       paginationPageSize: 8,
@@ -221,9 +197,11 @@ angular.module('bsis')
           ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
       },
 
-      // PDF: add search parameters under the header
+      // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        docDefinition = updatePdfDocDefinition(docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
+        docDefinition = ReportsLayoutService.highlightPercentageRows('%', 1, docDefinition);
+        docDefinition = ReportsLayoutService.paginatePdf(48, docDefinition);
         return docDefinition;
       },
 

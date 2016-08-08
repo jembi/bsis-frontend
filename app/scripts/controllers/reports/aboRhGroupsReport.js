@@ -185,20 +185,6 @@ angular.module('bsis')
       { name: 'Total', field: 'total' }
     ];
 
-    function updatePdfDocDefinition(docDefinition) {
-      // Fill with grey 'All' rows
-      docDefinition.styles.greyBoldCell = ReportsLayoutService.pdfTableBodyGreyBoldStyle;
-      angular.forEach(docDefinition.content[0].table.body, function(row) {
-        if (row[1] === 'All') {
-          angular.forEach(row, function(cell, index) {
-            row[index] = { text: '' + cell, style: 'greyBoldCell'};
-          });
-        }
-      });
-
-      return ReportsLayoutService.paginatePdf(33, docDefinition);
-    }
-
     $scope.gridOptions = {
       data: [],
       paginationPageSize: 9,
@@ -212,8 +198,11 @@ angular.module('bsis')
       exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
       exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
 
+      // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        return updatePdfDocDefinition(docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
+        docDefinition = ReportsLayoutService.paginatePdf(33, docDefinition);
+        return docDefinition;
       },
 
       // PDF header

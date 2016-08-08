@@ -193,20 +193,6 @@ angular.module('bsis')
       }
     ];
 
-    function updatePdfDocDefinition(docDefinition) {
-      // Fill with grey 'Total Blood Units' rows
-      docDefinition.styles.greyBoldCell = ReportsLayoutService.pdfTableBodyGreyBoldStyle;
-      angular.forEach(docDefinition.content[0].table.body, function(row) {
-        if (row[0] === 'Total Blood Units') {
-          angular.forEach(row, function(cell, index) {
-            row[index] = { text: '' + cell, style: 'greyBoldCell'};
-          });
-        }
-      });
-
-      return ReportsLayoutService.paginatePdf(33, docDefinition);
-    }
-
     $scope.gridOptions = {
       data: [],
       paginationPageSize: componentTypes.length + 1,
@@ -220,8 +206,11 @@ angular.module('bsis')
       exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
       exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
 
+      // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        return updatePdfDocDefinition(docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows('Total Blood Units', 0, docDefinition);
+        docDefinition = ReportsLayoutService.paginatePdf(33, docDefinition);
+        return docDefinition;
       },
 
       exporterFieldCallback: function(grid, row, col, value) {
