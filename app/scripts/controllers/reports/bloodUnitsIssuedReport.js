@@ -72,9 +72,9 @@ angular.module('bsis')
 
         // add new ordered/issued values and calculate gap & percentage
         if (newRow.id === 'unitsOrdered') {
-          rowData.ordered = newRow.value;
+          rowData.ordered = rowData.ordered + newRow.value;
         } else if (newRow.id === 'unitsIssued') {
-          rowData.issued = newRow.value;
+          rowData.issued = rowData.issued + newRow.value;
         }
         rowData.gap = rowData.ordered - rowData.issued;
         rowData.percentage = $filter('number')(rowData.issued / rowData.ordered * 100, 2);
