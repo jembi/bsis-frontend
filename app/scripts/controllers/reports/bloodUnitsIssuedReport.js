@@ -9,25 +9,15 @@ angular.module('bsis')
       endDate: moment().endOf('day').toDate()
     };
 
-    var componentTypes = [
-      'Whole Blood - CPDA',
-      'Whole Blood Poor Platelets - CPDA',
-      'Packed Red Cells - CPDA',
-      'Packed Red Cells - SAGM',
-      'Fresh Frozen Plasma - Whole Blood',
-      'Frozen Plasma - Whole Blood',
-      'Platelets Concentrate - Whole Blood',
-      'Platelets Concentrate - Whole Blood - 24H',
-      'Packed Red Cells - Paediatric - CPDA',
-      'Fresh Frozen Plasma - Apheresis',
-      'Platelets Concentrate - Apheresis'
-    ];
+    var componentTypes = [];
 
     $scope.dateFormat = DATEFORMAT;
     $scope.search = angular.copy(master);
 
     function initialise() {
-      // FIXME: fetch componentTypes from form endpoint
+      ReportsService.getBloodUnitsIssuedReportForm(function(response) {
+        componentTypes = response.componentTypes;
+      }, $log.error);
     }
 
     // Report methods
@@ -62,7 +52,7 @@ angular.module('bsis')
 
       // initialise the componentTypes rows
       angular.forEach(componentTypes, function(componentType) {
-        mergedData.push(createZeroValuesRow(componentType));
+        mergedData.push(createZeroValuesRow(componentType.componentTypeName));
       });
 
       // merge data from report
@@ -109,74 +99,18 @@ angular.module('bsis')
         var endDate = moment($scope.search.endDate).endOf('day').toDate();
         period.endDate = endDate;
       }
-      $scope.searching = true;
 
-      $log.debug('Not implemented yet (using dummy data)');
-      var reportData = {
-        'startDate': '2016-07-08T21:59:59.999Z',
-        'endDate': '2016-08-08T21:59:59.999Z',
-        'dataValues': [
-          {
-            'id': 'unitsIssued',
-            'startDate': '2016-07-08T21:59:59.999Z',
-            'endDate': '2016-08-08T21:59:59.999Z',
-            'value': 5,
-            'venue': {},
-            'cohorts': [
-              {
-                'category': 'Component Type',
-                'option': 'Whole Blood - CPDA',
-                'comparator': 'EQUALS'
-              }
-            ]
-          },
-          {
-            'id': 'unitsOrdered',
-            'startDate': '2016-07-08T21:59:59.999Z',
-            'endDate': '2016-08-08T21:59:59.999Z',
-            'value': 8,
-            'venue': {},
-            'cohorts': [
-              {
-                'category': 'Component Type',
-                'option': 'Whole Blood - CPDA',
-                'comparator': 'EQUALS'
-              }
-            ]
-          },
-          {
-            'id': 'unitsIssued',
-            'startDate': '2016-07-08T21:59:59.999Z',
-            'endDate': '2016-08-08T21:59:59.999Z',
-            'value': 7,
-            'venue': {},
-            'cohorts': [
-              {
-                'category': 'Component Type',
-                'option': 'Whole Blood Poor Platelets - CPDA',
-                'comparator': 'EQUALS'
-              }
-            ]
-          },
-          {
-            'id': 'unitsOrdered',
-            'startDate': '2016-07-08T21:59:59.999Z',
-            'endDate': '2016-08-08T21:59:59.999Z',
-            'value': 10,
-            'venue': {},
-            'cohorts': [
-              {
-                'category': 'Component Type',
-                'option': 'Whole Blood Poor Platelets - CPDA',
-                'comparator': 'EQUALS'
-              }
-            ]
-          }
-        ]
-      };
-      $scope.searching = false;
-      mergeData(reportData.dataValues);
-      $scope.submitted = true;
+      $scope.searching = true;
+      ReportsService.generateBloodUnitsIssuedReport(period, function(report) {
+        $scope.searching = false;
+        if (report.dataValues.length > 0) {
+          mergeData(report.dataValues);
+        }
+        $scope.submitted = true;
+      }, function(err) {
+        $scope.searching = false;
+        $log.error(err);
+      });
     };
 
     // Grid ui variables and methods
@@ -190,10 +124,10 @@ angular.module('bsis')
 
     $scope.gridOptions = {
       data: [],
-      paginationPageSize: componentTypes.length + 1,
+      paginationPageSize: 12,
       paginationTemplate: 'views/template/pagination.html',
       columnDefs: columnDefs,
-      minRowsToShow: componentTypes.length + 1,
+      minRowsToShow: 12,
 
       exporterPdfOrientation: 'landscape',
       exporterPdfPageSize: 'A4',
