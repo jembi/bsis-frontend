@@ -18,6 +18,8 @@ angular.module('bsis')
         });
       },
       generateStockLevelsReport: Api.StockLevelsReport.generate,
-      getStockLevelsReportForm: Api.StockLevelsReport.getForm
+      getStockLevelsReportForm: Api.StockLevelsReport.getForm,
+      getBloodUnitsIssuedReportForm: Api.BloodUnitsIssuedReport.getForm,
+      generateBloodUnitsIssuedReport: Api.BloodUnitsIssuedReport.generate
     };
   });

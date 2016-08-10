@@ -361,6 +361,17 @@ angular.module('bsis')
         }
       }),
 
+      BloodUnitsIssuedReport: $resource(url + '/reports/unitsissued', {}, {
+        generate: {
+          method: 'GET',
+          url: url + '/reports/unitsissued/generate'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/unitsissued/form'
+        }
+      }),
+
       OrderForms: $resource(url + '/orderforms/:id', {id: '@id'}, {
         update: {method: 'PUT'},
         search: {
