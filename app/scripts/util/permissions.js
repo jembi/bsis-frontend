@@ -123,7 +123,6 @@ angular.module('bsis')
     MANAGE_FORMS: 'Manage Forms',
     MANAGE_BACKUP_DATA: 'Manage Backup Data',
     MANAGE_BLOOD_TESTS: 'Manage Blood Tests',
-    MANAGE_TIPS: 'Manage Tips',
     MANAGE_REQUESTS: 'Manage Requests',
     MANAGE_GENERAL_CONFIGS: 'Manage General Configs',
     MANAGE_COMPONENT_TYPES: 'Manage Component Types',
