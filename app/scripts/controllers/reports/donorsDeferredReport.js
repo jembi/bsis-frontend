@@ -164,16 +164,16 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
   $scope.gridOptions = {
     data: [],
-    paginationPageSize: 8,
+    paginationPageSize: 9,
     paginationTemplate: 'views/template/pagination.html',
     columnDefs: columnDefs,
-    minRowsToShow: 8,
+    minRowsToShow: 9,
 
-    exporterPdfOrientation: 'portrait',
+    exporterPdfOrientation: 'landscape',
     exporterPdfPageSize: 'A4',
     exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
     exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
-    exporterPdfMaxGridWidth: ReportsLayoutService.pdfPortraitMaxGridWidth,
+    exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
 
     // PDF header
     exporterPdfHeader: function() {
@@ -184,7 +184,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     // Change formatting of PDF
     exporterPdfCustomFormatter: function(docDefinition) {
       docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
-      docDefinition = ReportsLayoutService.paginatePdf(48, docDefinition);
+      docDefinition = ReportsLayoutService.paginatePdf(33, docDefinition);
       return docDefinition;
     },
 
