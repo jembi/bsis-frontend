@@ -6,8 +6,8 @@ angular.module('bsis')
     // Initialize variables
 
     var mergedData = [];
+    var numericMergedData = [];
     var mergedKey = {};
-    var summaryData = [];
     var master = {
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: moment().endOf('day').toDate()
@@ -108,13 +108,13 @@ angular.module('bsis')
     }
 
     function calculateSummary() {
-      summaryData = [
+      var summaryData = [
         ['All venues', 'female', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         ['', 'male', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         ['', 'All', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       ];
       var summaryRow = null;
-      angular.forEach(mergedData, function(row) {
+      angular.forEach(numericMergedData, function(row) {
         if (row.cohorts === 'female') {
           summaryRow = summaryData[0];
         }
@@ -143,6 +143,8 @@ angular.module('bsis')
           row[12] = row[5] / row[7] * 100;
         }
       });
+
+      return ReportsLayoutService.formatPercentageValuesAndConvertToText(summaryData, [8, 9, 10, 11, 12]);
     }
 
     function mergeData(dataValues) {
@@ -199,12 +201,11 @@ angular.module('bsis')
       // Calculate percentages
       calculatePercentages();
 
-      // Calculate summary
-      calculateSummary();
+      // Make a copy of the mergedData before applying formatting to be used to create the summary
+      numericMergedData = angular.copy(mergedData);
 
       // Format percentage values and convert all values to text
       mergedData = ReportsLayoutService.formatPercentageValuesAndConvertToText(mergedData, ['ttirate', 'hivrate', 'hbvrate', 'hcvrate', 'syphrate']);
-      summaryData = ReportsLayoutService.formatPercentageValuesAndConvertToText(summaryData, [8, 9, 10, 11, 12]);
 
       $scope.gridOptions.data = mergedData;
     }
@@ -277,7 +278,7 @@ angular.module('bsis')
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        docDefinition = ReportsLayoutService.addSummaryContent(summaryData, docDefinition);
+        docDefinition = ReportsLayoutService.addSummaryContent(calculateSummary(), docDefinition);
         docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(30, docDefinition);
         return docDefinition;
