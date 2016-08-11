@@ -22,7 +22,7 @@
       </div>
 
       <div class="col-sm-offset-2 ">
-          <button class="btn btn-primary" type="submit" ng-disabled="searching">
+          <button class="btn btn-primary" type="submit" ng-disabled="searching || deferralReasons.length === 0">
               {{searching ? "Searching..." : "Search"}}
           </button>
           <button class="btn btn-primary" type="button" ng-click="clearSearch(selectPeriodForm)">Clear</button>

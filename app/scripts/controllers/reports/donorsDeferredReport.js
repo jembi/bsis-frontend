@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
+angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT, uiGridConstants) {
 
   // Initialize variables
 
@@ -9,27 +9,13 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     endDate: moment().endOf('day').toDate()
   };
 
-  $scope.dateFormat = DATEFORMAT;
-  $scope.search = angular.copy(master);
+  $scope.deferralReasons = [];
 
-  // Report methods
-
-  $scope.clearSearch = function(form) {
-    $scope.search = angular.copy(master);
-    form.$setPristine();
-    form.$setUntouched();
-    $scope.gridOptions.data = [];
-    $scope.submitted = false;
-  };
-
-  var deferralReasons = [
-    'Test Outcomes',
-    'High risk behaviour',
-    'Low weight',
-    'Low haemoglobin',
-    'Other reasons',
-    'Other medical conditions',
-    'Travel history'
+  // UI grid initial columns
+  var columnDefs = [
+    {name: 'Venue', field: 'venue', width: '**', minWidth: '250'},
+    {name: 'Gender', field: 'gender', width: '**', maxWidth: '150'},
+    {name: 'Total', field: 'total', width: '**', maxWidth: '125'}
   ];
 
   function createZeroValuesRow(venue, gender) {
@@ -40,7 +26,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     };
 
     // Initialise columns
-    angular.forEach(deferralReasons, function(column) {
+    angular.forEach($scope.deferralReasons, function(column) {
       row[column] = 0;
     });
 
@@ -55,7 +41,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     };
 
     // Sum columns
-    angular.forEach(deferralReasons, function(column) {
+    angular.forEach($scope.deferralReasons, function(column) {
       row[column] = femaleRow[column] + maleRow[column];
     });
 
@@ -64,7 +50,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
   function addTotalColumn(row) {
     var total = 0;
-    angular.forEach(deferralReasons, function(column) {
+    angular.forEach($scope.deferralReasons, function(column) {
       total += row[column];
     });
     row.total = total;
@@ -118,8 +104,40 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     rows.push(addTotalColumn(mergedMaleRow));
     rows.push(createAllGendersRow(mergedFemaleRow, mergedMaleRow));
 
+    // Update the data
     $scope.gridOptions.data = rows;
   }
+
+  function init() {
+    ReportsService.getDonorsDeferredReportForm(function(res) {
+      // Add deferral reason columns
+      angular.forEach(res.deferralReasons, function(column) {
+        $scope.deferralReasons.push(column.reason);
+        columnDefs.splice(2, 0, {name: column.reason, field: column.reason, width: '**', maxWidth: '125'});
+      });
+
+      // Notify the grid of the changes if it has been initialised
+      if ($scope.gridApi) {
+        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+      }
+
+      // Ensure that the deferral reasons are updated on the scope
+      $scope.$apply();
+    }, function(err) {
+      $log.error(err);
+    });
+  }
+
+  $scope.dateFormat = DATEFORMAT;
+  $scope.search = angular.copy(master);
+
+  $scope.clearSearch = function(form) {
+    $scope.search = angular.copy(master);
+    form.$setPristine();
+    form.$setUntouched();
+    $scope.gridOptions.data = [];
+    $scope.submitted = false;
+  };
 
   $scope.getReport = function(selectPeriodForm) {
 
@@ -149,18 +167,6 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
       $log.log(err);
     });
   };
-
-  // Grid ui variables and methods
-  var columnDefs = [
-    {name: 'Venue', field: 'venue', width: '**', minWidth: '250'},
-    {name: 'Gender', field: 'gender', width: '**', maxWidth: '150'}
-  ];
-  // Add deferral reason columns
-  angular.forEach(deferralReasons, function(column) {
-    columnDefs.push({name: column, field: column, width: '**', maxWidth: '125'});
-  });
-  // Add total column
-  columnDefs.push({name: 'Total', field: 'total', width: '**', maxWidth: '125'});
 
   $scope.gridOptions = {
     data: [],
@@ -205,5 +211,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
       $scope.gridApi.exporter.csvExport('all', 'all');
     }
   };
+
+  init();
 
 });

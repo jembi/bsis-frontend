@@ -376,6 +376,10 @@ angular.module('bsis')
         generate: {
           method: 'GET',
           url: url + '/reports/donorsdeferred/generate'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/donorsdeferred/form'
         }
       }),
 
