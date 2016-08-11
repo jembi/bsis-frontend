@@ -13,9 +13,9 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
   // UI grid initial columns
   var columnDefs = [
-    {name: 'Venue', field: 'venue', width: '**', minWidth: '250'},
-    {name: 'Gender', field: 'gender', width: '**', maxWidth: '150'},
-    {name: 'Total', field: 'total', width: '**', maxWidth: '125'}
+    {displayName: 'Venue', field: 'venue', width: '**', minWidth: '250'},
+    {displayName: 'Gender', field: 'gender', width: '**', maxWidth: '150'},
+    {displayName: 'Total', field: 'total', width: '**', maxWidth: '125'}
   ];
 
   function createZeroValuesRow(venue, gender) {
@@ -113,7 +113,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
       // Add deferral reason columns
       angular.forEach(res.deferralReasons, function(column) {
         $scope.deferralReasons.push(column.reason);
-        columnDefs.splice(2, 0, {name: column.reason, field: column.reason, width: '**', maxWidth: '125'});
+        columnDefs.splice(2, 0, {displayName: column.reason, field: column.reason, width: '**', maxWidth: '125'});
       });
 
       // Notify the grid of the changes if it has been initialised
