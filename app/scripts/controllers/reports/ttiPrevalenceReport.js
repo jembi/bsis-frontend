@@ -7,6 +7,7 @@ angular.module('bsis')
 
     var mergedData = [];
     var mergedKey = {};
+    var summaryData = [];
     var master = {
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: moment().endOf('day').toDate()
@@ -27,7 +28,7 @@ angular.module('bsis')
 
     function createZeroValuesRow(row, venue, gender) {
       var zeroValuesRow = angular.copy(row);
-      zeroValuesRow.venue.name = venue;
+      zeroValuesRow.venue = venue;
       zeroValuesRow.cohorts = gender;
       zeroValuesRow.hivpos = 0;
       zeroValuesRow.hbvpos = 0;
@@ -45,7 +46,7 @@ angular.module('bsis')
 
     function createAllGendersRow(femaleRow, maleRow) {
       var allGendersRow = angular.copy(femaleRow);
-      allGendersRow.venue.name = '';
+      allGendersRow.venue = '';
       allGendersRow.cohorts = 'All';
       allGendersRow.hivpos = femaleRow.hivpos + maleRow.hivpos;
       allGendersRow.hbvpos = femaleRow.hbvpos + maleRow.hbvpos;
@@ -103,13 +104,44 @@ angular.module('bsis')
           row.hcvrate = row.hcvpos / row.total * 100;
           row.syphrate = row.syphpos / row.total * 100;
         }
+      });
+    }
 
-        // Format with 2 spaces
-        row.ttirate = $filter('number')(row.ttirate, 2);
-        row.hivrate = $filter('number')(row.hivrate, 2);
-        row.hbvrate = $filter('number')(row.hbvrate, 2);
-        row.hcvrate = $filter('number')(row.hcvrate, 2);
-        row.syphrate = $filter('number')(row.syphrate, 2);
+    function calculateSummary() {
+      summaryData = [
+        ['All venues', 'female', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ['', 'male', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ['', 'All', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      ];
+      var summaryRow = null;
+      angular.forEach(mergedData, function(row) {
+        if (row.cohorts === 'female') {
+          summaryRow = summaryData[0];
+        }
+        if (row.cohorts === 'male') {
+          summaryRow = summaryData[1];
+        }
+        if (row.cohorts === 'All') {
+          summaryRow = summaryData[2];
+        }
+
+        summaryRow[2] = summaryRow[2] + row.hivpos;
+        summaryRow[3] = summaryRow[3] + row.hbvpos;
+        summaryRow[4] = summaryRow[4] + row.hcvpos;
+        summaryRow[5] = summaryRow[5] + row.syphpos;
+        summaryRow[6] = summaryRow[6] + row.totalpos;
+        summaryRow[7] = summaryRow[7] + row.total;
+      });
+
+      // Calculate percentages
+      angular.forEach(summaryData, function(row) {
+        if (row[7] !== 0) {
+          row[8] = row[6] / row[7] * 100;
+          row[9] = row[2] / row[7] * 100;
+          row[10] = row[3] / row[7] * 100;
+          row[11] = row[4] / row[7] * 100;
+          row[12] = row[5] / row[7] * 100;
+        }
       });
     }
 
@@ -167,6 +199,13 @@ angular.module('bsis')
       // Calculate percentages
       calculatePercentages();
 
+      // Calculate summary
+      calculateSummary();
+
+      // Format percentage values and convert all values to text
+      mergedData = ReportsLayoutService.formatPercentageValuesAndConvertToText(mergedData, ['ttirate', 'hivrate', 'hbvrate', 'hcvrate', 'syphrate']);
+      summaryData = ReportsLayoutService.formatPercentageValuesAndConvertToText(summaryData, [8, 9, 10, 11, 12]);
+
       $scope.gridOptions.data = mergedData;
     }
 
@@ -202,7 +241,7 @@ angular.module('bsis')
     // Grid ui variables and methods
 
     var columnDefs = [
-      { name: 'Venue', field: 'venue.name', width: '**', minWidth: '200' },
+      { name: 'Venue', field: 'venue', width: '**', minWidth: '200' },
       { name: 'Gender', field: 'cohorts', width:'**', maxWidth: '130' },
       { name: 'HIVPOS', displayName: 'HIV +', field: 'hivpos', width: '**', maxWidth: '70' },
       { name: 'HBVPOS', displayName: 'HBV +', field: 'hbvpos', width: '**', maxWidth: '70' },
@@ -230,12 +269,6 @@ angular.module('bsis')
       exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
       exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
 
-      // Reformat column data
-      exporterFieldCallback: function(grid, row, col, value) {
-        value = ReportsLayoutService.addPercentages(col, value);
-        return value;
-      },
-
       // PDF header
       exporterPdfHeader: function() {
         return ReportsLayoutService.generatePdfPageHeader('TTI Prevalence Report',
@@ -244,6 +277,7 @@ angular.module('bsis')
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
+        docDefinition = ReportsLayoutService.addSummaryContent(summaryData, docDefinition);
         docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(30, docDefinition);
         return docDefinition;
