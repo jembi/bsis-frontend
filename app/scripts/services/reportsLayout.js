@@ -121,7 +121,7 @@ angular.module('bsis').factory('ReportsLayoutService', function($filter) {
     formatPercentageRowsAndConvertAllValuesToText: function(data, percentageRowIdentifier, columnIndex) {
       angular.forEach(data, function(row) {
         angular.forEach(row, function(value, index) {
-          if (row[columnIndex] === percentageRowIdentifier) {
+          if (row[columnIndex] === percentageRowIdentifier && row[index] !== '') {
             row[index] = $filter('number')(value, 2) + '%';
           } else {
             row[index] = '' + value;
