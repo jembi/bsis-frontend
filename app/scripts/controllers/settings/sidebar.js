@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, RoutingService, ICONS, PERMISSIONS) {
+angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, RoutingService, ICONS) {
 
   var routes = [
     {
@@ -67,6 +67,5 @@ angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, Routin
   ];
 
   $scope.icons = ICONS;
-  $scope.permissions = PERMISSIONS;
   $scope.currentPath = RoutingService.getCurrentPath(routes);
 });

@@ -2,9 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, PERMISSIONS, uiGridConstants, ModalsService) {
-
-    $scope.permissions = PERMISSIONS;
+  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, uiGridConstants, ModalsService) {
 
     var data = [{}];
     $scope.data = data;

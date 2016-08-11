@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('UsersCtrl', function($scope, $location, UsersService, RolesService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('UsersCtrl', function($scope, $location, UsersService, RolesService, ICONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
@@ -109,9 +108,8 @@ angular.module('bsis')
       });
     });
   })
-  .controller('ManageUserCtrl', function($scope, $rootScope, UsersService, RolesService, ICONS, PERMISSIONS, $location, ngTableParams, $timeout, $routeParams, $log) {
+  .controller('ManageUserCtrl', function($scope, $rootScope, UsersService, RolesService, ICONS, $location, ngTableParams, $timeout, $routeParams, $log) {
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageUser';
 
     $scope.getUser = function() {

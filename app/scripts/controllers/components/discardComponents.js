@@ -1,5 +1,5 @@
 angular.module('bsis')
-  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout, $routeParams, uiGridConstants, $log, ModalsService) {
+  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, $filter, ngTableParams, $timeout, $routeParams, uiGridConstants, $log, ModalsService) {
 
     var selectedComponents = [];
     var forms = $scope.forms = {};

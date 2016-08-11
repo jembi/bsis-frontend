@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonationTypesCtrl', function($scope, $location, DonationTypesService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
+  .controller('DonationTypesCtrl', function($scope, $location, DonationTypesService, ngTableParams, $timeout, $filter, ICONS) {
 
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
 
     var data = [{}];
     $scope.data = data;
@@ -72,9 +71,8 @@ angular.module('bsis')
 
   })
 
-  .controller('ManageDonationTypesCtrl', function($scope, $location, DonationTypesService, ICONS, PERMISSIONS, $routeParams) {
+  .controller('ManageDonationTypesCtrl', function($scope, $location, DonationTypesService, ICONS, $routeParams) {
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageDonationType';
 
     $scope.getDonationType = function() {

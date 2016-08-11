@@ -157,4 +157,8 @@ angular.module('bsis')
     VOID_ADVERSE_EVENT_TYPES: 'Void Adverse Event Types'
 
   })
-;
+
+  .run(function($rootScope, PERMISSIONS) {
+    // add constant to rootScope so it is always available in the views and controllers
+    $rootScope.permissions = PERMISSIONS;
+  });

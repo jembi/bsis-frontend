@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RolesCtrl', function($scope, $location, RolesService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('RolesCtrl', function($scope, $location, RolesService, ICONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
     $scope.data = {};
     var data = [];
     $scope.roles = {};
@@ -78,9 +77,8 @@ angular.module('bsis')
 
   })
 
-  .controller('ManageRolesCtrl', function($scope, $location, RolesService, ICONS, PERMISSIONS, $routeParams) {
+  .controller('ManageRolesCtrl', function($scope, $location, RolesService, ICONS, $routeParams) {
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
 
     $scope.saveRole = function(role, roleForm) {
       $scope.permissionsRequired = false;
