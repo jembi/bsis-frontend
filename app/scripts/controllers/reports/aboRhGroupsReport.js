@@ -171,9 +171,6 @@ angular.module('bsis')
       // Run this one last time for the last row
       addFemaleMaleAllRows(mergedFemaleRow, mergedMaleRow);
 
-      // Calculate summary
-      calculateSummary();
-
       $scope.gridOptions.data = mergedData;
     }
 
@@ -238,6 +235,7 @@ angular.module('bsis')
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
+        calculateSummary();
         docDefinition = ReportsLayoutService.addSummaryContent(summaryData, docDefinition);
         docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(33, docDefinition);
