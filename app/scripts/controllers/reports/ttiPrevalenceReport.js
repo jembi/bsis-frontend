@@ -144,7 +144,7 @@ angular.module('bsis')
         }
       });
 
-      return ReportsLayoutService.formatPercentageValuesAndConvertToText(summaryData, [8, 9, 10, 11, 12]);
+      return ReportsLayoutService.formatPercentageColumnsAndConvertAllValuesToText(summaryData, [8, 9, 10, 11, 12]);
     }
 
     function mergeData(dataValues) {
@@ -205,7 +205,7 @@ angular.module('bsis')
       numericMergedData = angular.copy(mergedData);
 
       // Format percentage values and convert all values to text
-      mergedData = ReportsLayoutService.formatPercentageValuesAndConvertToText(mergedData, ['ttirate', 'hivrate', 'hbvrate', 'hcvrate', 'syphrate']);
+      mergedData = ReportsLayoutService.formatPercentageColumnsAndConvertAllValuesToText(mergedData, ['ttirate', 'hivrate', 'hbvrate', 'hcvrate', 'syphrate']);
 
       $scope.gridOptions.data = mergedData;
     }

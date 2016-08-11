@@ -126,7 +126,7 @@ angular.module('bsis')
       });
 
       // Convert all summary values to text
-      summaryData = ReportsLayoutService.formatPercentageValuesAndConvertToText(summaryData, []);
+      summaryData = ReportsLayoutService.convertAllValuesToText(summaryData);
     }
 
     function mergeData(dataValues) {

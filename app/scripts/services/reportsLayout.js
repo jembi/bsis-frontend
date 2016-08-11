@@ -106,7 +106,7 @@ angular.module('bsis').factory('ReportsLayoutService', function($filter) {
       docDefinition.content.push(summaryContent);
       return docDefinition;
     },
-    formatPercentageValuesAndConvertToText: function(data, percentageColumnIndexes) {
+    formatPercentageColumnsAndConvertAllValuesToText: function(data, percentageColumnIndexes) {
       angular.forEach(data, function(row) {
         angular.forEach(row, function(value, index) {
           if (percentageColumnIndexes.indexOf(index) !== -1) {
@@ -114,6 +114,26 @@ angular.module('bsis').factory('ReportsLayoutService', function($filter) {
           } else {
             row[index] = '' + value;
           }
+        });
+      });
+      return data;
+    },
+    formatPercentageRowsAndConvertAllValuesToText: function(data, percentageRowIdentifier, columnIndex) {
+      angular.forEach(data, function(row) {
+        angular.forEach(row, function(value, index) {
+          if (row[columnIndex] === percentageRowIdentifier) {
+            row[index] = $filter('number')(value, 2) + '%';
+          } else {
+            row[index] = '' + value;
+          }
+        });
+      });
+      return data;
+    },
+    convertAllValuesToText: function(data) {
+      angular.forEach(data, function(row) {
+        angular.forEach(row, function(value, index) {
+          row[index] = '' + value;
         });
       });
       return data;
