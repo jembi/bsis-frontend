@@ -120,9 +120,6 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
       if ($scope.gridApi) {
         $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
       }
-
-      // Ensure that the deferral reasons are updated on the scope
-      $scope.$apply();
     }, function(err) {
       $log.error(err);
     });
