@@ -20,6 +20,7 @@ angular.module('bsis')
       generateStockLevelsReport: Api.StockLevelsReport.generate,
       getStockLevelsReportForm: Api.StockLevelsReport.getForm,
       getBloodUnitsIssuedReportForm: Api.BloodUnitsIssuedReport.getForm,
-      generateBloodUnitsIssuedReport: Api.BloodUnitsIssuedReport.generate
+      generateBloodUnitsIssuedReport: Api.BloodUnitsIssuedReport.generate,
+      generateDonorsDeferredReport: Api.DonorsDeferredReport.generate
     };
   });
