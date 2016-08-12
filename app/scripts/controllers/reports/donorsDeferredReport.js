@@ -21,14 +21,16 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
   function createZeroValuesRow(venue, gender) {
     var row = {
       venue: venue,
-      gender: gender,
-      total: 0
+      gender: gender
     };
 
     // Initialise columns
     angular.forEach($scope.deferralReasons, function(column) {
       row[column] = 0;
     });
+
+    // Must come after deferral reasons to maintain the column order
+    row.total = 0;
 
     return row;
   }
@@ -48,21 +50,23 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     return row;
   }
 
-  function addTotalColumn(row) {
-    var total = 0;
-    angular.forEach($scope.deferralReasons, function(column) {
-      total += row[column];
-    });
-    row.total = total;
-    return row;
+  function textValues(obj) {
+    var result = [];
+    for (var key in obj) {
+      result.push('' + obj[key]);
+    }
+    return result;
   }
 
   function mergeData(dataValues) {
 
-    var previousVenue = null;
-    var mergedFemaleRow = {};
-    var mergedMaleRow = {};
     var rows = [];
+    var previousVenue = null;
+    var mergedFemaleRow = null;
+    var mergedMaleRow = null;
+    var femaleSummaryRow = createZeroValuesRow('All Venues', 'female');
+    var maleSummaryRow = createZeroValuesRow('', 'male');
+    var allSummaryRow = createZeroValuesRow('', 'All');
 
     angular.forEach(dataValues, function(dataValue) {
 
@@ -74,8 +78,8 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
         if (previousVenue !== null) {
           // Add female, male and all rows for previous venue
-          rows.push(addTotalColumn(mergedFemaleRow));
-          rows.push(addTotalColumn(mergedMaleRow));
+          rows.push(mergedFemaleRow);
+          rows.push(mergedMaleRow);
           rows.push(createAllGendersRow(mergedFemaleRow, mergedMaleRow));
         }
 
@@ -87,25 +91,40 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
         previousVenue = dataValue.venue.name;
       }
 
-      // Create a row containing the value
-      var row = {};
-      row[deferralReason] = dataValue.value;
-
-      // Merge gender row with new row
       if (gender === 'female') {
-        mergedFemaleRow = angular.merge(mergedFemaleRow, row);
+        // Add the value to the current 'female' row
+        mergedFemaleRow[deferralReason] = dataValue.value;
+        mergedFemaleRow.total += dataValue.value;
+        // Add the value to the 'female' summary row
+        femaleSummaryRow[deferralReason] += dataValue.value;
+        femaleSummaryRow.total += dataValue.value;
       } else if (gender === 'male') {
-        mergedMaleRow = angular.merge(mergedMaleRow, row);
+        // Add the value to the current 'male' row
+        mergedMaleRow[deferralReason] = dataValue.value;
+        mergedMaleRow.total += dataValue.value;
+        // Add the value to the 'male' summary row
+        maleSummaryRow[deferralReason] += dataValue.value;
+        maleSummaryRow.total += dataValue.value;
       }
+      // Add the value to the 'All' summary row
+      allSummaryRow[deferralReason] += dataValue.value;
+      allSummaryRow.total += dataValue.value;
     });
 
     // Add female, male and all rows for previous venue
-    rows.push(addTotalColumn(mergedFemaleRow));
-    rows.push(addTotalColumn(mergedMaleRow));
+    rows.push(mergedFemaleRow);
+    rows.push(mergedMaleRow);
     rows.push(createAllGendersRow(mergedFemaleRow, mergedMaleRow));
 
     // Update the data
     $scope.gridOptions.data = rows;
+
+    // Add the summary data to the grid for use in the export
+    $scope.gridOptions.summaryData = [
+      textValues(femaleSummaryRow),
+      textValues(maleSummaryRow),
+      textValues(allSummaryRow)
+    ];
   }
 
   function init() {
@@ -113,7 +132,8 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
       // Add deferral reason columns
       angular.forEach(res.deferralReasons, function(column) {
         $scope.deferralReasons.push(column.reason);
-        columnDefs.splice(2, 0, {displayName: column.reason, field: column.reason, width: '**', maxWidth: '125'});
+        // Add new column before the total column
+        columnDefs.splice(-1, 0, {displayName: column.reason, field: column.reason, width: '**', maxWidth: '125'});
       });
 
       // Notify the grid of the changes if it has been initialised
@@ -186,6 +206,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
     // Change formatting of PDF
     exporterPdfCustomFormatter: function(docDefinition) {
+      docDefinition = ReportsLayoutService.addSummaryContent($scope.gridOptions.summaryData, docDefinition);
       docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
       docDefinition = ReportsLayoutService.paginatePdf(33, docDefinition);
       return docDefinition;
