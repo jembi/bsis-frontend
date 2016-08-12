@@ -82,12 +82,14 @@ angular.module('bsis').factory('ReportsLayoutService', function($filter) {
     highlightPercentageRows: function(columnText, columnTextIndex, docDefinition) {
       // set the cell style of each column in the row containing percentage data
       docDefinition.styles.boldCell = this.pdfTableBodyBoldStyle;
-      angular.forEach(docDefinition.content[0].table.body, function(row) {
-        if (row[columnTextIndex] === columnText) {
-          angular.forEach(row, function(cell, index) {
-            row[index] = { text: '' + cell, style: 'boldCell'};
-          });
-        }
+      angular.forEach(docDefinition.content, function(content) {
+        angular.forEach(content.table.body, function(row) {
+          if (row[columnTextIndex] === columnText) {
+            angular.forEach(row, function(cell, index) {
+              row[index] = { text: '' + cell, style: 'boldCell'};
+            });
+          }
+        });
       });
 
       return docDefinition;
