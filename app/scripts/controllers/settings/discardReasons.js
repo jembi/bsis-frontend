@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DiscardReasonsCtrl', function($scope, $location, DiscardReasonsService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
+  .controller('DiscardReasonsCtrl', function($scope, $location, DiscardReasonsService, ngTableParams, $timeout, $filter, ICONS) {
 
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
 
     var data = [{}];
     $scope.data = data;
@@ -72,9 +71,8 @@ angular.module('bsis')
 
   })
 
-  .controller('ManageDiscardReasonsCtrl', function($scope, $location, DiscardReasonsService, ICONS, PERMISSIONS, DATATYPES, $routeParams) {
+  .controller('ManageDiscardReasonsCtrl', function($scope, $location, DiscardReasonsService, ICONS, DATATYPES, $routeParams) {
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageDiscardReason';
 
     $scope.getDiscardReason = function() {

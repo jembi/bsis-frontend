@@ -1,4 +1,4 @@
-angular.module('bsis').controller('TestingSidebarCtrl', function($scope, RoutingService, ICONS, PERMISSIONS) {
+angular.module('bsis').controller('TestingSidebarCtrl', function($scope, RoutingService, ICONS) {
 
   var routes = [
     {
@@ -20,6 +20,5 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, Routing
   ];
 
   $scope.icons = ICONS;
-  $scope.permissions = PERMISSIONS;
   $scope.currentPath = RoutingService.getCurrentPath(routes);
 });

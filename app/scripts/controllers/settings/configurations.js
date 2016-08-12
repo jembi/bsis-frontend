@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ConfigurationsCtrl', function($scope, $location, ConfigurationsService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
+  .controller('ConfigurationsCtrl', function($scope, $location, ConfigurationsService, ngTableParams, $timeout, $filter, ICONS) {
 
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
 
     var data = [{}];
     $scope.data = data;
@@ -72,9 +71,8 @@ angular.module('bsis')
 
   })
 
-  .controller('ManageConfigurationsCtrl', function($scope, $location, $log, ConfigurationsService, ICONS, PERMISSIONS, DATATYPES, $routeParams) {
+  .controller('ManageConfigurationsCtrl', function($scope, $location, $log, ConfigurationsService, ICONS, DATATYPES, $routeParams) {
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageConfiguration';
 
     $scope.getConfig = function() {

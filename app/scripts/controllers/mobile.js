@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('MobileCtrl', function($scope, $filter, $location, $routeParams, MobileService, ICONS, PERMISSIONS, uiGridExporterConstants) {
+  .controller('MobileCtrl', function($scope, $filter, $location, $routeParams, MobileService, ICONS, uiGridExporterConstants) {
 
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
