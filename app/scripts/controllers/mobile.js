@@ -152,10 +152,10 @@ angular.module('bsis')
 
       $scope.searching = true;
       MobileService.mobileClinicLookUp(search, function(res) {
-        $scope.gridOptions.data = res;
+        $scope.gridOptions.data = res.donors;
         $scope.searching = false;
       }, function(err) {
-        $scope.error.message = err.userMessage;
+        $scope.error.message = err.data.userMessage;
         $scope.searching = false;
       });
     };
