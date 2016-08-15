@@ -12,6 +12,8 @@
         <li class="disabled"><span>MOBILE CLINIC</span></li>
         <li ng-class="{current: currentPath === '/lookUp'}"  has-permission="{{permissions.VIEW_DONOR_INFORMATION}}"><a
                 href="#/lookUp">Look Up</a></li>
+        <li ng-class="{current: currentPath === '/mobileDonorCounselling'}"  has-permission="{{permissions.VIEW_DONOR_INFORMATION}}"><a
+                href="#/mobileDonorCounselling">Donor Counselling</a></li>
     </ul>
     <div ng-include="'views/sidebarFooter.html'"></div>
 </div>

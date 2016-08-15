@@ -6,6 +6,9 @@ angular.module('bsis').controller('MobileSidebarCtrl', function($scope, RoutingS
     {
       path: '/lookUp',
       subpaths: []
+    }, {
+      path: '/mobileDonorCounselling',
+      subpaths: []
     }
   ];
 
