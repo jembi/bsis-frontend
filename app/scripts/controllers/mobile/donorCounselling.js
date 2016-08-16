@@ -14,7 +14,7 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
     {displayName: 'ABO', field: 'bloodAbo'},
     {displayName: 'Rh', field: 'bloodRh'}
   ];
-  var search = {
+  var masterSearch = {
     venueId: null,
     startDate: moment().subtract(30, 'days').toDate(),
     endDate: moment().toDate()
@@ -80,7 +80,7 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
   // Initialise scope variables
   $scope.venues = [];
   $scope.searching = false;
-  $scope.search = angular.copy(search);
+  $scope.search = angular.copy(masterSearch);
   $scope.dateFormat = DATEFORMAT;
 
   $scope.gridOptions = {
@@ -206,7 +206,7 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
   $scope.clearSearch = function() {
     currentSearch = null;
     $scope.gridOptions.data = null;
-    $scope.search = angular.copy(search);
+    $scope.search = angular.copy(masterSearch);
     $scope.donorCounsellingForm.$setPristine();
     $location.search({});
   };
