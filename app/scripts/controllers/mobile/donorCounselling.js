@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope, $log, $filter, $location, $routeParams, MobileService, uiGridConstants, uiGridExporterConstants, DATEFORMAT) {
+angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope, $log, $filter, $location, $routeParams, $timeout, MobileService, uiGridConstants, uiGridExporterConstants, DATEFORMAT) {
 
   // Initialise controller variables
   var columnDefs = [
@@ -41,6 +41,19 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
       // Notify grid of column changes if it has been initialised
       if ($scope.gridApi) {
         $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+      }
+
+      // Refresh the previous search if there is one
+      if ($routeParams.search) {
+        $scope.search = {
+          venueId: +$routeParams.venueId,
+          startDate: new Date($routeParams.startDate),
+          endDate: new Date($routeParams.endDate)
+        };
+        // Allow the form to update before doing the search
+        $timeout(function() {
+          $scope.getDonorOutcomes();
+        });
       }
     }, function(err) {
       $log.error(err);
@@ -208,13 +221,4 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
 
   // Execute initialisation logic
   init();
-
-  if ($routeParams.search) {
-    $scope.search = {
-      venueId: +$routeParams.venueId,
-      startDate: new Date($routeParams.startDate),
-      endDate: new Date($routeParams.endDate)
-    };
-    $scope.getDonorOutcomes();
-  }
 });
