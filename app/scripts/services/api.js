@@ -342,9 +342,24 @@ angular.module('bsis')
         update: {method: 'PUT'}
       }),
 
-      MobileClinicLookUpFormFields: $resource(url + '/mobileclinic/form'),
-
-      MobileClinicLookUp: $resource(url + '/mobileclinic/lookup'),
+      MobileClinicDonors: $resource(url + '/mobileclinic', {}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/mobileclinic/form'
+        },
+        search: {
+          method: 'GET',
+          url: url + '/mobileclinic/search'
+        },
+        getDonorOutcomesForm: {
+          method: 'GET',
+          url: url + '/mobileclinic/donoroutcomes/form'
+        },
+        getDonorOutcomes: {
+          method: 'GET',
+          url: url + '/mobileclinic/donoroutcomes'
+        }
+      }),
 
       DonationsReport: $resource(url + '/reports/collecteddonations/generate'),
 
