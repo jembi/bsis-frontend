@@ -40,7 +40,9 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       $scope.labelZPL = response.labelZPL;
       $log.debug('$scope.labelZPL: ', $scope.labelZPL);
     }, function(err) {
-      $scope.serverErrorMessage = 'This component cannot be labelled - please check the status of the donor and donation';
+      if (err.errorCode === 'CONFLICT') {
+        $scope.serverErrorMessage = 'This component cannot be labelled - please check the status of the donor and donation';
+      }
       $log.error(err);
     });
   };
