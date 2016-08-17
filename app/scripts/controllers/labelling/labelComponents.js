@@ -2,6 +2,7 @@
 
 angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, $routeParams, LabellingService) {
 
+  $scope.serverErrorMessage = null;
   $scope.searchResults = null;
   $scope.search = {
     donationIdentificationNumber: angular.isDefined($routeParams.donationIdentificationNumber) ? $routeParams.donationIdentificationNumber : null,
@@ -15,6 +16,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       return;
     }
 
+    $scope.serverErrorMessage = null;
     $location.search(angular.extend({search: true}, $scope.search));
     $scope.searching = true;
     $scope.searchResults = false;
@@ -33,17 +35,23 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   }
 
   $scope.printPackLabel = function(componentId) {
+    $scope.serverErrorMessage = null;
     LabellingService.printPackLabel(componentId, function(response) {
       $scope.labelZPL = response.labelZPL;
       $log.debug('$scope.labelZPL: ', $scope.labelZPL);
-    }, $log.error);
+    }, function(err) {
+      $scope.serverErrorMessage = 'This component cannot be labelled - please check the status of the donor and donation';
+      $log.error(err);
+    });
   };
 
   $scope.printDiscardLabel = function(componentId) {
     LabellingService.printDiscardLabel(componentId, function(response) {
       $scope.labelZPL = response.labelZPL;
       $log.debug('$scope.labelZPL: ', $scope.labelZPL);
-    }, $log.error);
+    }, function(err) {
+      $log.error(err);
+    });
   };
 
   $scope.clear = function(form) {
@@ -54,6 +62,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $location.search({});
     $scope.search = {};
     $scope.searchResults = null;
+    $scope.serverErrorMessage = null;
   };
 
   $scope.onTextClick = function($event) {
