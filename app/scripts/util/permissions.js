@@ -158,10 +158,10 @@ angular.module('bsis')
     VOID_ADVERSE_EVENT_TYPES: 'Void Adverse Event Types',
 
     // Location Division Permissions
-    ADD_LOCATION_DIVISIONS: 'Add Location Divisions',
-    EDIT_LOCATION_DIVISIONS: 'Edit Location Divisions',
-    VIEW_LOCATION_DIVISIONS: 'View Location Divisions',
-    VOID_LOCATION_DIVISIONS: 'Void Location Divisions'
+    ADD_DIVISIONS: 'Add Divisions',
+    EDIT_DIVISIONS: 'Edit Divisions',
+    VIEW_DIVISIONS: 'View Divisions',
+    VOID_DIVISIONS: 'Void Divisions'
   })
 
   .run(function($rootScope, PERMISSIONS) {
