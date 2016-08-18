@@ -155,8 +155,13 @@ angular.module('bsis')
     ADD_ADVERSE_EVENT_TYPES: 'Add Adverse Event Types',
     EDIT_ADVERSE_EVENT_TYPES: 'Edit Adverse Event Types',
     VIEW_ADVERSE_EVENT_TYPES: 'View Adverse Event Types',
-    VOID_ADVERSE_EVENT_TYPES: 'Void Adverse Event Types'
+    VOID_ADVERSE_EVENT_TYPES: 'Void Adverse Event Types',
 
+    // Location Division Permissions
+    ADD_LOCATION_DIVISIONS: 'Add Location Divisions',
+    EDIT_LOCATION_DIVISIONS: 'Edit Location Divisions',
+    VIEW_LOCATION_DIVISIONS: 'View Location Divisions',
+    VOID_LOCATION_DIVISIONS: 'Void Location Divisions'
   })
 
   .run(function($rootScope, PERMISSIONS) {
