@@ -6,6 +6,9 @@ node_js:
 branches:
   only:
     - master
+    - develop
+    - /^release\/
+    - /^support\/
 notifications:
   email:
     on_success: change
