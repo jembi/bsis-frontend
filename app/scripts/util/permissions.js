@@ -157,7 +157,7 @@ angular.module('bsis')
     VIEW_ADVERSE_EVENT_TYPES: 'View Adverse Event Types',
     VOID_ADVERSE_EVENT_TYPES: 'Void Adverse Event Types',
 
-    // Location Division Permissions
+    // Division Permissions
     ADD_DIVISIONS: 'Add Divisions',
     EDIT_DIVISIONS: 'Edit Divisions',
     VIEW_DIVISIONS: 'View Divisions',
