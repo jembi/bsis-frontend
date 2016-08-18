@@ -367,7 +367,10 @@ angular.module('bsis')
           donation.donationBatchNumber = $scope.donationBatch.batchNumber;
           donation.bleedStartTime = bleedStartTime;
           donation.bleedEndTime = bleedEndTime;
-          donation.adverseEvent = $scope.adverseEvent;
+
+          if ($scope.adverseEvent.type) {
+            donation.adverseEvent = $scope.adverseEvent;
+          }
 
           $scope.addingDonation = true;
 
