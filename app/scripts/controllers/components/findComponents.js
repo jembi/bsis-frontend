@@ -56,6 +56,7 @@ angular.module('bsis')
 
       $scope.componentsView = 'viewDonations';
       search.findComponentsSearch = true;
+      $scope.componentsSummaryTableParams.page(1);
       $location.search(search);
 
       $scope.searching = true;
