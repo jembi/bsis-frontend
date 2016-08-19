@@ -72,4 +72,10 @@ angular.module('bsis')
       });
     };
   })
+
+  .filter('divisionLevel', function(ConfigurationsService) {
+    return function(input) {
+      return ConfigurationsService.getStringValue('ui.division.level' + input + '.displayName') || 'Unknown level';
+    };
+  })
 ;
