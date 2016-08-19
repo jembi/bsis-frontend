@@ -78,6 +78,7 @@ angular.module('bsis')
       $scope.dinSearch = false;
       $scope.searchResults = '';
       $scope.findComponentForm.$setPristine();
+      $scope.componentsSummaryTableParams.page(1);
       $location.search({});
     };
 
