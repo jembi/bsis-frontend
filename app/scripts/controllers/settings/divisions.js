@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DivisionsCtrl', function($scope, $location, $routeParams, $filter, $timeout) {
+angular.module('bsis').controller('DivisionsCtrl', function($scope, $location, $routeParams, $filter, $log, DivisionsService) {
 
   var masterSearch = {
     name: null,
@@ -62,33 +62,14 @@ angular.module('bsis').controller('DivisionsCtrl', function($scope, $location, $
     $scope.searching = true;
     $location.search(angular.extend({search: true}, $scope.search));
 
-    // TODO: Call api
-    $timeout(function() {
 
-      $scope.gridOptions.data = [
-        {
-          id: 1,
-          name: 'Province ABC',
-          level: 1,
-          parentDivision: null
-        }, {
-          id: 2,
-          name: 'Province XYZ',
-          level: 1,
-          parentDivision: null
-        }, {
-          id: 3,
-          name: 'District HIJ',
-          level: 2,
-          parentDivision: {
-            id: 1,
-            name: 'Province ABC'
-          }
-        }
-      ];
-
+    DivisionsService.findDivisions($scope.search, function(res) {
+      $scope.gridOptions.data = res.divisions;
       $scope.searching = false;
-    }, 1000);
+    }, function(err) {
+      $log.error(err);
+      $scope.searching = false;
+    });
   };
 
   $scope.clearSearch = function() {
