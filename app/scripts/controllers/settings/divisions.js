@@ -37,7 +37,7 @@ angular.module('bsis').controller('DivisionsCtrl', function($scope, $location, $
     columnDefs: [
       {displayName: 'Name', field: 'name'},
       {displayName: 'Division Level', field: 'level', cellFilter: 'divisionLevel'},
-      {displayName: 'Parent Division', field: 'parentDivision.name'}
+      {displayName: 'Parent Division', field: 'parent.name'}
     ],
     paginationPageSize: 7,
     paginationTemplate: 'views/template/pagination.html',
