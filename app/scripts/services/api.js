@@ -57,6 +57,10 @@ angular.module('bsis')
         bloodTypingResolutions: {
           method: 'POST',
           url: url + '/donations/bloodTypingResolutions'
+        },
+        getEditForm: {
+          method: 'GET',
+          url: url + '/donations/:id/form'
         }
       }),
 

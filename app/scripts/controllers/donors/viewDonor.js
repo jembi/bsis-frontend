@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('ViewDonorCtrl', function($scope, $location, $uibModal, $log, Alerting, DonorService, TestingService, ConfigurationsService, ICONS, PACKTYPE, MONTH, TITLE,
+  .controller('ViewDonorCtrl', function($scope, $location, $uibModal, $log, Alerting, DonorService, DonationsService, TestingService, ConfigurationsService, ICONS, PACKTYPE, MONTH, TITLE,
                                          GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams, ModalsService) {
 
     //Initialize scope variables
@@ -308,6 +308,17 @@ angular.module('bsis')
         d.reject('Server Error');
       });
       return d.promise;
+    };
+
+    $scope.editDonation = function(form) {
+      DonationsService.getEditForm({id: $scope.donation.id}, function(res) {
+        $scope.packTypes = res.packTypes;
+        $scope.adverseEventTypes = res.adverseEventTypes;
+        $scope.testBatchStatus = res.testBatchStatus;
+        form.$show();
+      }, function(err) {
+        $log.error(err);
+      });
     };
 
     $scope.cancelEditDonation = function(form) {

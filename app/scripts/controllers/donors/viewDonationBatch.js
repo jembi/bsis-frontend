@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, TestingService, ConfigurationsService, $q, $filter, $routeParams, $uibModal, ICONS, PACKTYPE, DATEFORMAT, DONATION) {
+  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, DonationsService, TestingService, ConfigurationsService, $q, $filter, $routeParams, $uibModal, ICONS, PACKTYPE, DATEFORMAT, DONATION) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -460,6 +460,17 @@ angular.module('bsis')
       if (min || max) {
         return ' ';
       }
+    };
+
+    $scope.editDonation = function(form) {
+      DonationsService.getEditForm({id: $scope.donation.id}, function(res) {
+        $scope.packTypes = res.packTypes;
+        $scope.adverseEventTypes = res.adverseEventTypes;
+        $scope.testBatchStatus = res.testBatchStatus;
+        form.$show();
+      }, function(err) {
+        $log.error(err);
+      });
     };
 
     $scope.cancelEditDonation = function(form) {

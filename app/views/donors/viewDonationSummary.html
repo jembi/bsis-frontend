@@ -4,7 +4,7 @@
         <div class="col-sm-6" style="height:100%; border-right: 2px solid #f5f5f5; ">
          <span style="float: right; padding-right: 15px; font-size: 0.9em">
          <span ng-show="!donationSummaryForm.$visible">
-         <em><a has-permission="{{permissions.EDIT_DONATION}}" href="" ng-click="donationSummaryForm.$show()">Edit</a></em>
+         <em><a has-permission="{{permissions.EDIT_DONATION}}" href="" ng-click="editDonation(donationSummaryForm)">Edit</a></em>
          <span has-permission="{{permissions.EDIT_DONATION}}"> | </span>
          <em><a href="" ng-click="returnToListView()">Done</a></em>
          </span>
@@ -87,7 +87,7 @@
                     <td class="value">
                         <fieldset ng-disabled="!donation.permissions.canEditPackType">
                         <span editable-select="donation.packType" e-name="packType"
-                              e-ng-options="pt as pt.packType disable when (pt.countAsDonation && (donation.permissions.canDonate === false && donation.permissions.isBackEntry === false)) for pt in packTypes track by pt.id">{{donation.packType.packType}}</span>
+                              e-ng-options="pt as pt.packType disable when (testBatchStatus === 'RELEASED' && !donation.packType.testSampleProduced && pt.testSampleProduced) for pt in packTypes track by pt.id">{{donation.packType.packType}}</span>
                         </fieldset>
                     </td>
                 </tr>
