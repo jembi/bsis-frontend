@@ -48,6 +48,10 @@ angular.module('bsis')
     $scope.formErrors = [];
     $scope.errorObject = {};
 
+    // The donation's previous pack type
+    // Used to check if pack type has changed when updating a donation
+    var previousPackType = null;
+
     //Donor Overview and Demographics Section
 
     function initializeDonor() {
@@ -93,6 +97,31 @@ angular.module('bsis')
           $scope.donorPermissions.canDelete = response.canDelete;
           $scope.isEligible = response.isEligible;
         }
+      });
+    }
+
+    function showConfirmation(confirmObject) {
+      var modalInstance = $uibModal.open({
+        animation: false,
+        templateUrl: 'views/confirmModal.html',
+        controller: 'ConfirmModalCtrl',
+        resolve: {
+          confirmObject: confirmObject
+        }
+      });
+
+      return modalInstance.result;
+    }
+
+    function confirmPackTypeChange(donation) {
+      if (previousPackType.id === donation.packType.id) {
+        return $q.resolve();
+      }
+
+      return showConfirmation({
+        title: 'Pack Type Update',
+        button: 'Continue',
+        message: 'The pack type has been updated - this will affect the initial components created with this donation. Do you want to continue?'
       });
     }
 
@@ -144,24 +173,11 @@ angular.module('bsis')
     $scope.confirmDelete = function(donor) {
       Alerting.alertReset();
 
-      var deleteObject = {
+      showConfirmation({
         title: 'Delete Donor',
         button: 'Delete',
         message: 'Are you sure you wish to delete the donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '"?'
-      };
-
-      var modalInstance = $uibModal.open({
-        animation: false,
-        templateUrl: 'views/confirmModal.html',
-        controller: 'ConfirmModalCtrl',
-        resolve: {
-          confirmObject: function() {
-            return deleteObject;
-          }
-        }
-      });
-
-      modalInstance.result.then(function() {
+      }).then(function() {
         // Delete confirmed - delete the donor
         $scope.deleteDonor(donor);
       }, function() {
@@ -207,6 +223,7 @@ angular.module('bsis')
           $scope.packTypes = $scope.data.packTypes;
           $scope.donationTypes = $scope.data.donationTypes;
           $scope.donation = $scope.data.addDonationForm;
+          previousPackType = angular.copy($scope.donation.packType);
           $scope.haemoglobinLevels = $scope.data.haemoglobinLevels;
           $scope.adverseEventTypes = response.adverseEventTypes;
         }
@@ -258,6 +275,7 @@ angular.module('bsis')
     $scope.viewDonationSummary = function(din) {
 
       $scope.donation = $filter('filter')($scope.donationsData, {donationIdentificationNumber: din})[0];
+      previousPackType = angular.copy($scope.donation.packType);
       $scope.commentFieldDisabled = !$scope.donation.adverseEvent;
 
       DonorService.getDonationsFormFields(function(response) {
@@ -293,21 +311,24 @@ angular.module('bsis')
     };
 
     $scope.updateDonation = function(donation) {
-      var d = $q.defer();
-      DonorService.updateDonation(donation, function(response) {
-        $scope.donation.permissions = response.permissions;
-        $scope.addDonationSuccess = true;
-        $scope.donation = {};
-        $scope.err = null;
-        $scope.viewDonationSummary(response.donationIdentificationNumber);
-        d.resolve();
-      }, function(err) {
-        $log.error(err);
-        $scope.err = err;
-        $scope.addDonationSuccess = false;
-        d.reject('Server Error');
+      return confirmPackTypeChange(donation).then(function() {
+        var d = $q.defer();
+        DonorService.updateDonation(donation, function(response) {
+          $scope.donation.permissions = response.permissions;
+          $scope.addDonationSuccess = true;
+          $scope.donation = {};
+          previousPackType = null;
+          $scope.err = null;
+          $scope.viewDonationSummary(response.donationIdentificationNumber);
+          d.resolve();
+        }, function(err) {
+          $log.error(err);
+          $scope.err = err;
+          $scope.addDonationSuccess = false;
+          d.reject('Server Error');
+        });
+        return d.promise;
       });
-      return d.promise;
     };
 
     $scope.editDonation = function(form) {
@@ -482,6 +503,7 @@ angular.module('bsis')
 
             $scope.addDonationSuccess = true;
             $scope.donation = {};
+            previousPackType = null;
             $scope.getDonations($scope.donor.id);
             $scope.donationsView = 'viewDonations';
             $scope.submitted = '';
