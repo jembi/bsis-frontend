@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('ViewDonorCtrl', function($scope, $location, $uibModal, $log, Alerting, DonorService, DonationsService, TestingService, ConfigurationsService, ICONS, PACKTYPE, MONTH, TITLE,
+  .controller('ViewDonorCtrl', function($scope, $location, $log, Alerting, DonorService, DonationsService, TestingService, ConfigurationsService, ICONS, PACKTYPE, MONTH, TITLE,
                                          GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams, ModalsService) {
 
     //Initialize scope variables
@@ -100,25 +100,12 @@ angular.module('bsis')
       });
     }
 
-    function showConfirmation(confirmObject) {
-      var modalInstance = $uibModal.open({
-        animation: false,
-        templateUrl: 'views/confirmModal.html',
-        controller: 'ConfirmModalCtrl',
-        resolve: {
-          confirmObject: confirmObject
-        }
-      });
-
-      return modalInstance.result;
-    }
-
     function confirmPackTypeChange(donation) {
       if (previousPackType.id === donation.packType.id) {
         return $q.resolve();
       }
 
-      return showConfirmation({
+      return ModalsService.showConfirmation({
         title: 'Pack Type Update',
         button: 'Continue',
         message: 'The pack type has been updated - this will affect the initial components created with this donation. Do you want to continue?'
@@ -173,7 +160,7 @@ angular.module('bsis')
     $scope.confirmDelete = function(donor) {
       Alerting.alertReset();
 
-      showConfirmation({
+      return ModalsService.showConfirmation({
         title: 'Delete Donor',
         button: 'Delete',
         message: 'Are you sure you wish to delete the donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '"?'
@@ -417,20 +404,11 @@ angular.module('bsis')
         return $q.resolve(null);
       }
 
-      var modal = $uibModal.open({
-        animation: false,
-        templateUrl: 'views/confirmModal.html',
-        controller: 'ConfirmModalCtrl',
-        resolve: {
-          confirmObject: {
-            title: 'Ineligible Donor',
-            button: 'Continue',
-            message: 'This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?'
-          }
-        }
+      return ModalsService.showConfirmation({
+        title: 'Ineligible Donor',
+        button: 'Continue',
+        message: 'This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?'
       });
-
-      return modal.result;
     }
 
     $scope.resetAdverseEventComment = function() {
@@ -454,24 +432,15 @@ angular.module('bsis')
         message = 'This donor is below the minimum age of ' + minAge + '.';
       } else {
         // Don't show confirmation
-        return Promise.resolve(null);
+        return $q.resolve(null);
       }
       message += ' Are you sure that you want to continue?';
 
-      var modal = $uibModal.open({
-        animation: false,
-        templateUrl: 'views/confirmModal.html',
-        controller: 'ConfirmModalCtrl',
-        resolve: {
-          confirmObject: {
-            title: 'Invalid donor',
-            button: 'Add donation',
-            message: message
-          }
-        }
+      return ModalsService.showConfirmation({
+        title: 'Invalid donor',
+        button: 'Add donation',
+        message: message
       });
-
-      return modal.result;
     }
 
     $scope.addDonation = function(donation, donationBatch, bleedStartTime, bleedEndTime, valid) {
