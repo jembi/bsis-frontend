@@ -21,6 +21,13 @@ angular.module('bsis').controller('DivisionsCtrl', function($scope, $location, $
     }
   }
 
+  function resetUIGridPage() {
+    if ($scope.gridApi != null && $scope.gridApi.pagination.getPage() > 1) {
+      $scope.gridApi.pagination.seek(1);
+    }
+  }
+
+
   // Initialise scope variables
   $scope.search = angular.copy(masterSearch);
   $scope.searching = false;
@@ -59,9 +66,10 @@ angular.module('bsis').controller('DivisionsCtrl', function($scope, $location, $
       return;
     }
 
+    resetUIGridPage();
+
     $scope.searching = true;
     $location.search(angular.extend({search: true}, $scope.search));
-
 
     DivisionsService.findDivisions($scope.search, function(res) {
       $scope.gridOptions.data = res.divisions;
