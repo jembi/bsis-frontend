@@ -22,7 +22,7 @@ angular.module('bsis').controller('DivisionsCtrl', function($scope, $location, $
   }
 
   function resetUIGridPage() {
-    if ($scope.gridApi != null && $scope.gridApi.pagination.getPage() > 1) {
+    if ($scope.gridApi != null) {
       $scope.gridApi.pagination.seek(1);
     }
   }
