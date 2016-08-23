@@ -437,6 +437,13 @@ angular.module('bsis')
           method: 'GET',
           url: url + '/inventories/search/form'
         }
+      }),
+
+      Divisions: $resource(url + '/divisions/:id', {}, {
+        search: {
+          method: 'GET',
+          url: url + '/divisions/search'
+        }
       })
     };
   });

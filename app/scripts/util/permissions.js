@@ -155,8 +155,13 @@ angular.module('bsis')
     ADD_ADVERSE_EVENT_TYPES: 'Add Adverse Event Types',
     EDIT_ADVERSE_EVENT_TYPES: 'Edit Adverse Event Types',
     VIEW_ADVERSE_EVENT_TYPES: 'View Adverse Event Types',
-    VOID_ADVERSE_EVENT_TYPES: 'Void Adverse Event Types'
+    VOID_ADVERSE_EVENT_TYPES: 'Void Adverse Event Types',
 
+    // Division Permissions
+    ADD_DIVISIONS: 'Add Divisions',
+    EDIT_DIVISIONS: 'Edit Divisions',
+    VIEW_DIVISIONS: 'View Divisions',
+    VOID_DIVISIONS: 'Void Divisions'
   })
 
   .run(function($rootScope, PERMISSIONS) {

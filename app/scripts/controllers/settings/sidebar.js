@@ -63,6 +63,9 @@ angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, Routin
       subpaths: [
         '/manageComponentType'
       ]
+    }, {
+      path: '/divisions',
+      subpaths: []
     }
   ];
 

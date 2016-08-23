@@ -515,6 +515,12 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'ManageComponentTypeCtrl',
         permission: PERMISSIONS.MANAGE_COMPONENT_TYPES
       })
+      .when('/divisions', {
+        templateUrl: 'views/settings/divisions.html',
+        controller: 'DivisionsCtrl',
+        permission: PERMISSIONS.VIEW_DIVISIONS,
+        reloadOnSearch: false
+      })
       .otherwise({
         redirectTo: '/home'
       });

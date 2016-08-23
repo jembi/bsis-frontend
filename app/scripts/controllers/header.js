@@ -178,7 +178,8 @@ angular.module('bsis')
       '/auditLog',
       '/adverseEventTypes',
       '/addAdverseEventType',
-      '/editAdverseEventType/\\d+'
+      '/editAdverseEventType/\\d+',
+      '/divisions'
     ];
 
     /**
