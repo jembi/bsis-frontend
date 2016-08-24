@@ -38,12 +38,12 @@
                 <tr>
                     <td class="field">Bleed Time:</td>
                     <td class="value bleed-times">
-                        <fieldset ng-disabled="!donation.permissions.canUpdateDonationFields">
+                        <fieldset ng-disabled="!donation.permissions.canEditBleedTimes">
                             <table>
                                 <tr>
                                     <td>
                                         <span editable-bstime="donation.bleedStartTime"
-                                            e-mousewheel="donation.permissions.canUpdateDonationFields"
+                                            e-mousewheel="donation.permissions.canEditBleedTimes"
                                             e-name="bleedStartTime" e-id="bleedStartTime"
                                             e-show-spinners="false">
                                             {{donation.bleedStartTime | bsisTime }}
@@ -52,7 +52,7 @@
                                     <td> to</td>
                                     <td>
                                         <span editable-bstime="donation.bleedEndTime" e-name="bleedEndTime"
-                                            e-mousewheel="donation.permissions.canUpdateDonationFields"
+                                            e-mousewheel="donation.permissions.canEditBleedTimes"
                                             e-show-spinners="false">
                                             {{donation.bleedEndTime | bsisTime }}
                                         </span>
