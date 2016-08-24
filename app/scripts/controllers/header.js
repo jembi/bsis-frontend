@@ -179,7 +179,9 @@ angular.module('bsis')
       '/adverseEventTypes',
       '/addAdverseEventType',
       '/editAdverseEventType/\\d+',
-      '/divisions'
+      '/divisions',
+      '/manageDivision',
+      '/manageDivision/\\d+'
     ];
 
     /**

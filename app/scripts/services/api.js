@@ -439,10 +439,13 @@ angular.module('bsis')
         }
       }),
 
-      Divisions: $resource(url + '/divisions/:id', {}, {
+      Divisions: $resource(url + '/divisions/:id', {id: '@id'}, {
         search: {
           method: 'GET',
           url: url + '/divisions/search'
+        },
+        update: {
+          method: 'PUT'
         }
       })
     };
