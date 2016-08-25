@@ -12,9 +12,12 @@ angular.module('bsis').controller('ManageDivisionCtrl', function($scope, $routeP
     }
   }
 
-  function onSaveSuccess() {
+  function onSaveSuccess(res) {
     // Redirect back to divisions page
-    $location.path('/divisions');
+    $location.path('/divisions').search({
+      search: true,
+      name: res.division.name
+    });
     $scope.saving = false;
   }
 

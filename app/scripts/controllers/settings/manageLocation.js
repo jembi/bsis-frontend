@@ -22,8 +22,11 @@ angular.module('bsis').controller('ManageLocationCtrl', function($scope, $locati
 
     $scope.savingLocation = true;
     if ($routeParams.id) {
-      LocationsService.updateLocation($scope.location, function() {
-        $location.path('/locations');
+      LocationsService.updateLocation($scope.location, function(res) {
+        $location.path('/locations').search({
+          search: true,
+          name: res.location.name
+        });
       }, function(response) {
         if (response.data && response.data.name) {
           $scope.locationForm.name.$setValidity('duplicate', false);
@@ -31,8 +34,11 @@ angular.module('bsis').controller('ManageLocationCtrl', function($scope, $locati
         $scope.savingLocation = false;
       });
     } else {
-      LocationsService.addLocation($scope.location, function() {
-        $location.path('/locations');
+      LocationsService.addLocation($scope.location, function(res) {
+        $location.path('/locations').search({
+          search: true,
+          name: res.name
+        });
       }, function(response) {
         if (response.data && response.data.name) {
           $scope.locationForm.name.$setValidity('duplicate', false);
