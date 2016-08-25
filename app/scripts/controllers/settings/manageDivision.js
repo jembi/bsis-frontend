@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageDivisionCtrl', function($scope, $routeParams, $log, $location, DivisionsService) {
+angular.module('bsis').controller('ManageDivisionCtrl', function($scope, $routeParams, $log, $location, $timeout, DivisionsService) {
 
   function init() {
     if ($routeParams.id) {
@@ -40,6 +40,12 @@ angular.module('bsis').controller('ManageDivisionCtrl', function($scope, $routeP
   };
 
   $scope.saving = false;
+
+  $scope.$watch('division.name', function() {
+    $timeout(function() {
+      $scope.divisionForm.name.$setValidity('duplicate', true);
+    });
+  });
 
   $scope.$watch('division.level', function(level) {
 
