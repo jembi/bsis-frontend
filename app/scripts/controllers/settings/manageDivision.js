@@ -24,9 +24,12 @@ angular.module('bsis').controller('ManageDivisionCtrl', function($scope, $routeP
   function onSaveError(err) {
     var data = err.data || {};
     var fieldErrors = data.fieldErrors || {};
-    if (fieldErrors.name && fieldErrors.name.code === 'duplicate') {
-      $scope.divisionForm.name.$setValidity('duplicate', false);
-    }
+    // Check errors on name field for duplicate error
+    angular.forEach(fieldErrors.name || [], function(fieldError) {
+      if (fieldError.code === 'duplicate') {
+        $scope.divisionForm.name.$setValidity('duplicate', false);
+      }
+    });
     $log.error(err);
     $scope.saving = false;
   }
