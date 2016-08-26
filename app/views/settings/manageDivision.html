@@ -18,7 +18,8 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="level">Level</label>
           <div class="col-sm-10">
-            <select class="form-control" name="level" style="width:auto;" required ng-model="division.level" ng-options="level as (level | divisionLevel) for level in levels"></select>
+            <select class="form-control" name="level" style="width:auto;" required ng-model="division.level" ng-options="level as (level | divisionLevel) for level in levels" ng-disabled="division.permissions && !division.permissions.canEditLevel"></select>
+            <small ng-hide="!division.permissions || division.permissions.canEditLevel">Parent division levels cannot be changed</small>
             <ng-messages for="divisionForm.level.$error" ng-show="divisionForm.$submitted">
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
