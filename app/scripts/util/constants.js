@@ -201,6 +201,10 @@ angular.module('bsis')
       {
         'id': 4,
         'datatype': 'boolean'
+      },
+      {
+        'id': 5,
+        'datatype': 'password'
       }
     ]
   })
