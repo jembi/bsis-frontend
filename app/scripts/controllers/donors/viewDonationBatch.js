@@ -227,11 +227,15 @@ angular.module('bsis')
         }
       });
 
-      TestingService.getTestResultsByDIN({donationIdentificationNumber: $scope.donation.donationIdentificationNumber}, function(testingResponse) {
-        $scope.testResults = testingResponse.testResults.recentTestResults;
-      }, function(err) {
-        $log.error(err);
-      });
+      if ($scope.donation.packType.testSampleProduced === true) {
+        TestingService.getTestResultsByDIN({donationIdentificationNumber: $scope.donation.donationIdentificationNumber}, function(testingResponse) {
+          $scope.testResults = testingResponse.testResults.recentTestResults;
+        }, function(err) {
+          $log.error(err);
+        });
+      } else {
+        $scope.testResults = null;
+      }
     }
 
     $scope.onRowClick = function(row) {
