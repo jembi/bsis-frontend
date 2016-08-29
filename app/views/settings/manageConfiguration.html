@@ -69,7 +69,7 @@
                     <label for="value" class="col-sm-1 control-label">Value</label>
                     <div class="col-sm-6">
                         <div class="form-inline">
-                            <input ng-show="datatype !== 'boolean'" size="40" id="value" name="value"
+                            <input ng-show="((datatype !== 'boolean') && (datatype !== 'password'))" size="40" id="value" name="value"
                                    class="form-control input-sm"
                                    ng-model="configuration.value" ng-required="datatype !== 'text'"
                                    ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
@@ -80,6 +80,10 @@
                                 <option value="true">true</option>
                                 <option value="false">false</option>
                             </select>
+                            <input ng-show="(datatype == 'password')" type="password"  name="value"      
+                                   ng-required="datatype === 'password'"
+                                   ng-model="configuration.value"   
+                                   ng-class="{'ng-invalid ng-dirty' : configurationForm.dataType.$invalid && submitted}">
                             <div>
                                 <small class="error" ng-show="serverError.value">
                                     {{serverError.value}}
