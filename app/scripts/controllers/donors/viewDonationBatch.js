@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, TestingService, ConfigurationsService, $q, $filter, $routeParams, $uibModal, ICONS, PACKTYPE, DATEFORMAT, DONATION) {
+  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, $q, $filter, $routeParams, ICONS, PACKTYPE, DATEFORMAT, DONATION) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -26,6 +26,10 @@ angular.module('bsis')
     var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
     var minBirthDate = moment().subtract(maxAge, 'years');
     var maxBirthDate = moment().subtract(minAge, 'years');
+
+    // The donation's previous pack type
+    // Used to check if pack type has changed when updating a donation
+    var previousPackType = null;
 
     $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
 
@@ -189,6 +193,7 @@ angular.module('bsis')
       if ($scope.donation) {
         // update the currently selected donation
         $scope.donation = $filter('filter')($scope.data, {donationIdentificationNumber: $scope.donation.donationIdentificationNumber})[0];
+        previousPackType = angular.copy($scope.donation.packType);
       }
     };
 
@@ -210,6 +215,7 @@ angular.module('bsis')
 
     function viewDonationSummary(donation) {
       $scope.donation = donation;
+      previousPackType = angular.copy(donation.packType);
       $scope.donationBatchView = 'viewDonationSummary';
       $scope.commentFieldDisabled = !donation.adverseEvent;
 
@@ -221,11 +227,15 @@ angular.module('bsis')
         }
       });
 
-      TestingService.getTestResultsByDIN({donationIdentificationNumber: $scope.donation.donationIdentificationNumber}, function(testingResponse) {
-        $scope.testResults = testingResponse.testResults.recentTestResults;
-      }, function(err) {
-        $log.error(err);
-      });
+      if ($scope.donation.packType.testSampleProduced === true) {
+        TestingService.getTestResultsByDIN({donationIdentificationNumber: $scope.donation.donationIdentificationNumber}, function(testingResponse) {
+          $scope.testResults = testingResponse.testResults.recentTestResults;
+        }, function(err) {
+          $log.error(err);
+        });
+      } else {
+        $scope.testResults = null;
+      }
     }
 
     $scope.onRowClick = function(row) {
@@ -253,6 +263,7 @@ angular.module('bsis')
       $scope.err = {};
       $scope.addDonationSuccess = null;
       $scope.donation = {};
+      previousPackType = angular.copy($scope.donation.packType);
       $scope.donorSummary = {};
       $scope.donorSummaryLoading = false;
       $scope.adverseEvent = {
@@ -284,6 +295,7 @@ angular.module('bsis')
           $scope.packTypes = $scope.data.packTypes;
           $scope.donationTypes = $scope.data.donationTypes;
           $scope.donation = $scope.data.addDonationForm;
+          previousPackType = angular.copy($scope.donation.packType);
           $scope.haemoglobinLevels = $scope.data.haemoglobinLevels;
           $scope.adverseEventTypes = response.adverseEventTypes;
         }
@@ -303,20 +315,11 @@ angular.module('bsis')
         return $q.resolve(null);
       }
 
-      var modal = $uibModal.open({
-        animation: false,
-        templateUrl: 'views/confirmModal.html',
-        controller: 'ConfirmModalCtrl',
-        resolve: {
-          confirmObject: {
-            title: 'Ineligible Donor',
-            button: 'Continue',
-            message: 'This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?'
-          }
-        }
+      return ModalsService.showConfirmation({
+        title: 'Ineligible Donor',
+        button: 'Continue',
+        message: 'This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?'
       });
-
-      return modal.result;
     }
 
     function checkDonorAge(donor) {
@@ -333,20 +336,23 @@ angular.module('bsis')
       }
       message += ' Are you sure that you want to continue?';
 
-      var modal = $uibModal.open({
-        animation: false,
-        templateUrl: 'views/confirmModal.html',
-        controller: 'ConfirmModalCtrl',
-        resolve: {
-          confirmObject: {
-            title: 'Invalid donor',
-            button: 'Add donation',
-            message: message
-          }
-        }
+      return ModalsService.showConfirmation({
+        title: 'Invalid donor',
+        button: 'Add donation',
+        message: message
       });
+    }
 
-      return modal.result;
+    function confirmPackTypeChange(donation) {
+      if (previousPackType.id === donation.packType.id) {
+        return $q.resolve();
+      }
+
+      return ModalsService.showConfirmation({
+        title: 'Pack Type Update',
+        button: 'Continue',
+        message: 'The pack type has been updated - this will affect the initial components created with this donation. Do you want to continue?'
+      });
     }
 
     $scope.addDonation = function(donation, bleedStartTime, bleedEndTime, valid) {
@@ -376,6 +382,7 @@ angular.module('bsis')
           DonorService.addDonationToBatch(donation, function(response) {
             $scope.addDonationSuccess = true;
             $scope.donation = {};
+            previousPackType = null;
             $scope.donationBatchView = 'viewDonationBatch';
 
             $scope.donationBatch = response;
@@ -399,18 +406,22 @@ angular.module('bsis')
 
     $scope.viewDonationBatch = function() {
       $scope.donation = {};
+      previousPackType = null;
       $scope.donationBatchView = 'viewDonationBatch';
     };
 
     $scope.updateDonation = function(donation) {
 
-      DonorService.updateDonation(donation, function() {
-        $scope.addDonationSuccess = true;
-        $scope.donation = {};
-        viewDonationSummary(donation);
-      }, function(err) {
-        $log.error(err);
-        $scope.addDonationSuccess = false;
+      return confirmPackTypeChange(donation).then(function() {
+        DonorService.updateDonation(donation, function() {
+          $scope.addDonationSuccess = true;
+          $scope.donation = {};
+          previousPackType = null;
+          viewDonationSummary(donation);
+        }, function(err) {
+          $log.error(err);
+          $scope.addDonationSuccess = false;
+        });
       });
     };
 
@@ -460,6 +471,17 @@ angular.module('bsis')
       if (min || max) {
         return ' ';
       }
+    };
+
+    $scope.editDonation = function(form) {
+      DonationsService.getEditForm({id: $scope.donation.id}, function(res) {
+        $scope.packTypes = res.packTypes;
+        $scope.adverseEventTypes = res.adverseEventTypes;
+        $scope.testBatchStatus = res.testBatchStatus;
+        form.$show();
+      }, function(err) {
+        $log.error(err);
+      });
     };
 
     $scope.cancelEditDonation = function(form) {
