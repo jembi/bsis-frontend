@@ -29,7 +29,7 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="parent">Parent</label>
           <div class="col-sm-10">
-            <select class="form-control" name="parent" style="width:auto;" ng-model="division.parent" ng-disabled="division.level === 1" ng-required="division.level === 2 || division.level === 3" ng-options="p as p.name disable when p.id === division.id for p in parentDivisions track by p.id"></select>
+            <select class="form-control" name="parent" style="width:auto;" ng-model="division.parent" ng-disabled="division.level === 1" ng-required="division.level === 2 || division.level === 3" ng-options="p as p.name for p in parentDivisions track by p.id"></select>
             <ng-messages for="divisionForm.parent.$error" ng-show="divisionForm.$submitted">
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
