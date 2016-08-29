@@ -2,6 +2,9 @@
 
 angular.module('bsis').factory('DivisionsService', function(Api) {
   return {
-    findDivisions: Api.Divisions.search
+    getDivision: Api.Divisions.get,
+    findDivisions: Api.Divisions.search,
+    updateDivision: Api.Divisions.update,
+    createDivision: Api.Divisions.save
   };
 });

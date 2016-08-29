@@ -521,6 +521,16 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.VIEW_DIVISIONS,
         reloadOnSearch: false
       })
+      .when('/manageDivision', {
+        templateUrl: 'views/settings/manageDivision.html',
+        controller: 'ManageDivisionCtrl',
+        permission: PERMISSIONS.ADD_DIVISIONS
+      })
+      .when('/manageDivision/:id', {
+        templateUrl: 'views/settings/manageDivision.html',
+        controller: 'ManageDivisionCtrl',
+        permission: PERMISSIONS.EDIT_DIVISIONS
+      })
       .otherwise({
         redirectTo: '/home'
       });
