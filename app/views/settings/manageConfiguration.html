@@ -74,13 +74,13 @@
                                    ng-model="configuration.value" ng-required="datatype !== 'text'"
                                    ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                                    ng-class="{'ng-invalid ng-dirty' :( configurationForm.value.$invalid && submitted) || configurationValueInvalid }">
-                            <select ng-show="(datatype == 'boolean')" name="value" class="form-control input-sm"
+                            <select ng-show="(datatype === 'boolean')" name="value" class="form-control input-sm"
                                     ng-model="configuration.value" ng-required="datatype === 'boolean'"
                                     ng-class="{'ng-invalid ng-dirty' : configurationForm.dataType.$invalid && submitted}">
                                 <option value="true">true</option>
                                 <option value="false">false</option>
                             </select>
-                            <input ng-show="(datatype == 'password')" type="password"  name="value"      
+                            <input ng-show="(datatype === 'password')" type="password" name="value" size="40" class="form-control input-sm"      
                                    ng-required="datatype === 'password'"
                                    ng-model="configuration.value"   
                                    ng-class="{'ng-invalid ng-dirty' : configurationForm.dataType.$invalid && submitted}">
