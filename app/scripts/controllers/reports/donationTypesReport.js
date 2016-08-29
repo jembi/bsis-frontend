@@ -235,13 +235,13 @@ angular.module('bsis')
         docDefinition = ReportsLayoutService.addSummaryContent(calculateSummary(), docDefinition);
         docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
         docDefinition = ReportsLayoutService.highlightPercentageRows('%', 1, docDefinition);
-        docDefinition = ReportsLayoutService.paginatePdf(48, docDefinition);
+        docDefinition = ReportsLayoutService.paginatePdf(44, docDefinition);
         return docDefinition;
       },
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.gridOptions.data.length / 4, currentPage, pageCount);
+        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.gridOptions.data.length / 4, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {
