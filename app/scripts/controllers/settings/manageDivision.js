@@ -54,14 +54,14 @@ angular.module('bsis').controller('ManageDivisionCtrl', function($scope, $routeP
 
   $scope.$watch('division.level', function(level) {
 
-    if (level !== 2 && level !== 3) {      
+    if (level !== 2 && level !== 3) {
       // This division has no parent
       $scope.parentDivisions = null;
       return;
     }
 
     DivisionsService.findDivisions({level: level - 1}, function(res) {
-      if(res.divisions != null) {
+      if (res.divisions != null) {
         $scope.parentDivisions = res.divisions.filter(function(parent) {
           return parent.id !== $scope.division.id;
         });
