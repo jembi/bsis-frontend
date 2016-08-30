@@ -156,7 +156,7 @@ angular.module('bsis')
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter(null, null, currentPage, pageCount);
+        return ReportsLayoutService.generatePdfPageFooter(null, null, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {
