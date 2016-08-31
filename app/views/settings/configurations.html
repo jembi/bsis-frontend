@@ -28,7 +28,8 @@
                             {{configuration.dataType.datatype}}
                         </td>
                         <td data-title="'Value'" header-class="text-left" sortable="''">
-                            {{configuration.value}}
+                            {{configuration.value.substr(0,40)}}
+                            <span ng-show="configuration.value.length > 40">...</span>
                         </td>
                     </tr>
                 </table>
