@@ -7,8 +7,8 @@ branches:
   only:
     - master
     - develop
-    - /^release\/
-    - /^support\/
+    - /^release\//
+    - /^support\//
 notifications:
   email:
     on_success: change
