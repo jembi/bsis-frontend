@@ -56,7 +56,7 @@ angular.module('bsis').controller('DivisionsCtrl', function($scope, $location, $
   };
 
   $scope.onRowClick = function(row) {
-    $location.path('/manageDivision/' + row.entity.id).search({});
+    $location.path('/manageDivision/' + row.entity.id);
   };
 
   $scope.findDivisions = function() {
