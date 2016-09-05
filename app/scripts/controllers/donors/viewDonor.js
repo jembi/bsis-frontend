@@ -688,6 +688,10 @@ angular.module('bsis')
 
     $scope.updateDonor = function(donor) {
       var d = $q.defer();
+
+      // Remove timezone from birth date
+      donor.birthDate = moment(donor.birthDate).format('YYYY-MM-DD');
+
       DonorService.updateDonor(donor, function(response) {
         $scope.donor = response;
           //Reset Error Message
