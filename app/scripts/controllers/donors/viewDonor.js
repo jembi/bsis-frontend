@@ -690,7 +690,7 @@ angular.module('bsis')
       var d = $q.defer();
 
       // Remove timezone from birth date
-      donor.birthDate = donor.birthDate.getUTCFullYear() + '-' + (donor.birthDate.getUTCMonth() + 1) + '-' + donor.birthDate.getUTCDate();
+      donor.birthDate = moment(donor.birthDate).format('YYYY-MM-DD');
 
       DonorService.updateDonor(donor, function(response) {
         $scope.donor = response;
