@@ -60,8 +60,8 @@ angular.module('bsis')
 
       if (valid) {
 
-        newDonor.birthDate = dob.year + '-' + dob.month + '-' + dob.dayOfMonth;
-        var birthDate = moment(newDonor.birthDate, 'YYYY-MM-DD');
+        var birthDate = moment(dob.year + '-' + dob.month + '-' + dob.dayOfMonth, 'YYYY-M-D');
+        newDonor.birthDate = birthDate.format('YYYY-MM-DD');
 
         if (!moment(birthDate).isValid()) {
           $scope.dobValid = false;
