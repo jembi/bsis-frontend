@@ -27,8 +27,9 @@
                         <td data-title="'DataType'" header-class="text-left" sortable="''">
                             {{configuration.dataType.datatype}}
                         </td>
-                        <td data-title="'Value'" header-class="text-left" sortable="''">
-                            {{configuration.value}}
+                        <td data-title="'Value'" header-class="text-left" sortable="''" ng-switch on="configuration.dataType.datatype">
+                            <span ng-switch-when="password">*****</span>
+                            <span ng-switch-default>{{configuration.value}}</span>
                         </td>
                     </tr>
                 </table>
