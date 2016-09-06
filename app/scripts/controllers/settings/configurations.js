@@ -110,10 +110,14 @@ angular.module('bsis')
 
     $scope.serverError = {};
 
-    $scope.$watch('configuration.dataType.id', function(newValue) {
+    $scope.$watch('configuration.dataType.id', function(newValue, oldValue) {
       var indexVal = parseInt(newValue) - 1;
       if (!isNaN(indexVal)) {
         $scope.datatype = DATATYPES.options[indexVal].datatype;
+        if (oldValue != null) {
+          // Reset the config value
+          $scope.configuration.value = null;
+        }
       }
     });
 
