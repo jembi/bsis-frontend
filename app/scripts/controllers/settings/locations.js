@@ -22,7 +22,13 @@ angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $
         '<span ng-show="row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARE}}"></i></span></div>',
       width: '**',
       maxWidth: '200'
+    },
+    {
+      name: 'ThirdLevelDivision',
+      field: 'divisionLevel3',
+      width: '**'
     }
+
   ];
 
   $scope.icons = ICONS;
