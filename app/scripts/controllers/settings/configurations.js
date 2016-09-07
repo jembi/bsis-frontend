@@ -117,6 +117,7 @@ angular.module('bsis')
         if (oldValue != null) {
           // Reset the config value
           $scope.configuration.value = null;
+          $scope.configurationForm.value.$setPristine();
         }
       }
     });
