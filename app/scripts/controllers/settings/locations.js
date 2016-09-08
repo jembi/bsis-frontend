@@ -25,7 +25,7 @@ angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $
     },
     {
       name: 'ThirdLevelDivision',
-      field: 'divisionLevel3',
+      field: 'divisionLevel3.name',
       width: '**'
     }
 
