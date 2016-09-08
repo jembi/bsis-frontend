@@ -86,9 +86,10 @@
                                 <option value="true">true</option>
                                 <option value="false">false</option>
                             </select>
-                            <input ng-if="(datatype === 'password')" type="password" name="value" size="40" class="form-control input-sm" 
-                                   ng-required="datatype === 'password'"
-                                   ng-model="configuration.value"   
+                            <input ng-if="datatype === 'password'" type="password" name="value" size="40" class="form-control input-sm" 
+                                   ng-model="password.value"
+                                   ng-focus="clearPassword()"
+                                   ng-blur="setPassword()"
                                    ng-class="{'ng-invalid ng-dirty' : configurationForm.dataType.$invalid && submitted}" />
                             <div>
                                 <small class="error" ng-show="serverError.value">

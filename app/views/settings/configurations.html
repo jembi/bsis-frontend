@@ -27,9 +27,12 @@
                         <td data-title="'DataType'" header-class="text-left" sortable="''">
                             {{configuration.dataType.datatype}}
                         </td>
-                        <td data-title="'Value'" header-class="text-left" sortable="''">
-                            {{configuration.value.substr(0,40)}}
-                            <span ng-show="configuration.value.length > 40">...</span>
+                        <td data-title="'Value'" header-class="text-left" sortable="''" ng-switch on="configuration.dataType.datatype">
+                            <span ng-switch-when="password">•••••</span>
+                            <span ng-switch-default>
+                                {{configuration.value.substr(0,40)}}
+                                <span ng-show="configuration.value.length > 40">...</span>
+                            </span>
                         </td>
                     </tr>
                 </table>
