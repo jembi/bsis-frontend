@@ -115,11 +115,11 @@ angular.module('bsis')
 
     // Grid ui variables and methods
     var columnDefs = [
-      { displayName: 'Component Type', field: 'cohorts'},
+      { displayName: 'Component Type', field: 'cohorts', width: '**'},
       { displayName: 'Ordered', field: 'ordered', width: 100 },
       { displayName: 'Issued', field: 'issued', width: 100 },
       { displayName: 'Gap', field: 'gap', width: 100 },
-      { displayName: '% Issued vs Ordered', field: 'rate', width: 150 }
+      { displayName: '% Issued vs Ordered', field: 'rate', width: 250 }
     ];
 
     $scope.gridOptions = {
@@ -129,11 +129,11 @@ angular.module('bsis')
       columnDefs: columnDefs,
       minRowsToShow: 12,
 
-      exporterPdfOrientation: 'landscape',
+      exporterPdfOrientation: 'portrait',
       exporterPdfPageSize: 'A4',
       exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
       exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
-      exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
+      exporterPdfMaxGridWidth: ReportsLayoutService.pdfPortraitMaxGridWidth,
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
@@ -151,7 +151,8 @@ angular.module('bsis')
       // PDF header
       exporterPdfHeader: function() {
         return ReportsLayoutService.generatePdfPageHeader('Blood Units Issued Summary Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
+          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
+          $scope.gridOptions.exporterPdfOrientation);
       },
 
       // PDF footer
