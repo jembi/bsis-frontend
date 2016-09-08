@@ -77,7 +77,7 @@ angular.module('bsis')
 
     var passwordMask = '•••••';
     $scope.password = {};
-    $scope.password.value = passwordMask;
+    $scope.password.value = '';
 
     $scope.getConfig = function() {
       ConfigurationsService.getConfigurationById($routeParams.id, function(configuration) {
@@ -92,6 +92,7 @@ angular.module('bsis')
       $scope.configuration = {};
     } else {
       $scope.getConfig();
+      $scope.password.value = passwordMask;
     }
 
     $scope.clearPassword = function() {
