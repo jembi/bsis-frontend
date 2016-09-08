@@ -2,15 +2,26 @@
 
 angular.module('bsis').factory('ReportsLayoutService', function(LogosService, $filter) {
   return {
-    generatePdfPageHeader: function(headerTextLine1, headerTextLine2) {
+    generatePdfPageHeader: function(headerTextLine1, headerTextLine2, orientation) {
+      var image2LeftMargin = 450;
+      if (orientation === 'landscape') {
+        image2LeftMargin = 690;
+      }
       var header = [{
-        image: LogosService.getHeaderLogo,
+        image: LogosService.getHeaderLogo1,
         height: 54,
         width: 105,
-        margin: [30, 10, 30, 0]
-      }, {
-        text: headerTextLine1, fontSize: 11, bold: true, alignment: 'center', margin: [30, -30, 30, 0]
+        margin: [30, 10, 0, 0] // [left, top, right, bottom]
       }];
+      if (LogosService.getHeaderLogo2) {
+        header.push({
+          image: LogosService.getHeaderLogo2,
+          height: 54,
+          width: 105,
+          margin: [image2LeftMargin, -54, 0, 0]
+        });
+      }
+      header.push({text: headerTextLine1, fontSize: 11, bold: true, alignment: 'center', margin: [30, -30, 30, 0]});
       if (headerTextLine2) {
         header.push({text: headerTextLine2, fontSize: 9, alignment: 'center'});
       }
