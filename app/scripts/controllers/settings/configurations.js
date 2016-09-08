@@ -75,9 +75,9 @@ angular.module('bsis')
     $scope.icons = ICONS;
     $scope.selection = '/manageConfiguration';
 
-    var passwordMask = '•••••';
-    $scope.password = {};
-    $scope.password.value = '';
+    $scope.password = {
+      value: ''
+    };
 
     $scope.getConfig = function() {
       ConfigurationsService.getConfigurationById($routeParams.id, function(configuration) {
@@ -92,16 +92,15 @@ angular.module('bsis')
       $scope.configuration = {};
     } else {
       $scope.getConfig();
-      $scope.password.value = passwordMask;
+      $scope.password.value = '•••••';
     }
 
     $scope.clearPassword = function() {
-      $scope.password.value = '';
+      $scope.password.value = $scope.configuration.value;
     };
 
     $scope.setPassword = function() {
       $scope.configuration.value = $scope.password.value;
-      $scope.password.value = passwordMask;
     };
 
     $scope.dataTypes = DATATYPES.options;
