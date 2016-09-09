@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $routeParams, $log, ICONS, LocationsService) {
+angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $routeParams, $log, ICONS, LocationsService, ConfigurationsService) {
 
   var master = {
     name: '',
@@ -22,7 +22,13 @@ angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $
         '<span ng-show="row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARE}}"></i></span></div>',
       width: '**',
       maxWidth: '200'
+    },
+    {
+      displayName: ConfigurationsService.getStringValue('ui.division.level3.displayName'),
+      field: 'divisionLevel3.name',
+      width: '**'
     }
+
   ];
 
   $scope.icons = ICONS;
@@ -76,7 +82,7 @@ angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $
   }
 
   $scope.onRowClick = function(row) {
-    $location.path('/manageLocation/' + row.entity.id);
+    $location.search({}).path('/manageLocation/' + row.entity.id);
   };
 
   $scope.clear = function() {

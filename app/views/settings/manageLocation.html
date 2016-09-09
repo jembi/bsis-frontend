@@ -61,6 +61,46 @@
           </div>
         </div>
 
+        <!-- Set divisionLevel1 -->
+        <div class="row form-group col-sm-12">
+          <label for="divisionLevel1" class="col-sm-2 control-label">{{1 | divisionLevel}}</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="divisionLevel1" style="width:auto;" ng-model="location.divisionLevel1" required 
+            ng-options="d as d.name for d in level1Divisions track by d.id"></select>
+            <small class="error" ng-show="locationForm.divisionLevel1.$error.required && locationForm.$submitted">
+              This cannot be empty
+            </small>
+          </div>
+        </div>
+
+        <!-- Set divisionLevel2 -->
+        <div class="row form-group col-sm-12">
+          <label for="divisionLevel2" class="col-sm-2 control-label">{{2 | divisionLevel}}</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="divisionLevel2" style="width:auto;" ng-model="location.divisionLevel2" 
+            ng-required="locationForm.$submitted"
+            ng-options="d as d.name for d in level2Divisions track by d.id" 
+            ng-disabled="location.divisionLevel1 === null || level2Divisions.length === 0"></select>
+            <small class="error" ng-show="locationForm.divisionLevel2.$error.required && locationForm.$submitted">
+              This cannot be empty
+            </small>
+          </div>
+        </div>
+
+        <!-- Set divisionLevel3 -->
+        <div class="row form-group col-sm-12">
+          <label for="divisionLevel3" class="col-sm-2 control-label">{{3 | divisionLevel}}</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="divisionLevel3" style="width:auto;" ng-model="location.divisionLevel3"
+            ng-required="locationForm.$submitted" 
+            ng-options="d as d.name for d in level3Divisions track by d.id" 
+            ng-disabled="location.divisionLevel2 === null || level3Divisions.length === 0"></select>
+            <small class="error" ng-show="locationForm.divisionLevel3.$error.required && locationForm.$submitted">
+              This cannot be empty
+            </small>
+          </div>
+        </div>
+
         <!-- Set isDeleted -->
         <div class="row form-group col-sm-12">
           <label for="isDeleted" class="col-sm-2 control-label">Enabled</label>

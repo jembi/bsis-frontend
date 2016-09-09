@@ -298,6 +298,10 @@ angular.module('bsis')
         search: {
           method: 'GET',
           url: url + '/locations/search'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/locations/form'
         }
       }),
 

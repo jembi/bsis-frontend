@@ -7,6 +7,7 @@ angular.module('bsis')
       updateLocation: Api.Locations.update,
       getLocationById: Api.Locations.get,
       getSearchForm: Api.Locations.getSearchForm,
-      search: Api.Locations.search
+      search: Api.Locations.search,
+      getForm: Api.Locations.getForm
     };
   });
