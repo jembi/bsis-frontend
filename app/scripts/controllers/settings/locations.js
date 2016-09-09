@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $routeParams, $log, ICONS, LocationsService) {
+angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $routeParams, $log, ICONS, LocationsService, ConfigurationsService) {
 
   var master = {
     name: '',
@@ -24,7 +24,7 @@ angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $
       maxWidth: '200'
     },
     {
-      name: 'ThirdLevelDivision',
+      displayName: ConfigurationsService.getStringValue('ui.division.level3.displayName'),
       field: 'divisionLevel3.name',
       width: '**'
     }
