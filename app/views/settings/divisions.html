@@ -1,23 +1,20 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
-<div class="col-sm-9 col-md-10 main">
-  <div class="pull-right" style="padding-right: 25px;" has-permission="{{permissions.ADD_DIVISIONS}}">
-    <a href="#/manageDivision">Add New Division</a>
-  </div>
-
+<div class="col-sm-9 col-md-10 main">  
   <h3 class="page-header">Manage Divisions</h3>
 
-  <form class="form-horizontal col-sm-12" name="searchForm" ng-submit="findDivisions()" novalidate>
+    <div class="pull-right" style="padding-right: 25px;" has-permission="{{permissions.ADD_DIVISIONS}}">
+      <a href="#/manageDivision">Add New Division</a>
+    </div>
 
+  <form class="form-horizontal col-sm-12" name="searchForm" ng-submit="findDivisions()" novalidate>
     <div class="form-group">
       <label class="col-sm-2 control-label" for="name">Name</label>
       <div class="col-sm-10">
         <div class="form-inline">
           <input type="text" name="name" class="form-control input-sm" size="40" autofocus="true" ng-model="search.name" required />
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" name="includeSimilarResults" ng-model="search.includeSimilarResults"> Include Similar Results
-            </label>
-          </div>
+          <input type="checkbox" id="includeSimilarResults" ng-model="search.includeSimilarResults"> <label 
+            style="display: inline-block; cursor: pointer; cursor: hand;" for="includeSimilarResults"> Include Similar Results </label>
+          </input>
           <ng-messages for="searchForm.name.$error" ng-show="searchForm.$submitted">
             <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
