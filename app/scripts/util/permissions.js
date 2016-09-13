@@ -161,7 +161,10 @@ angular.module('bsis')
     ADD_DIVISIONS: 'Add Divisions',
     EDIT_DIVISIONS: 'Edit Divisions',
     VIEW_DIVISIONS: 'View Divisions',
-    VOID_DIVISIONS: 'Void Divisions'
+    VOID_DIVISIONS: 'Void Divisions',
+
+    // Data Export
+    DATA_EXPORT: 'Data Export'
   })
 
   .run(function($rootScope, PERMISSIONS) {
