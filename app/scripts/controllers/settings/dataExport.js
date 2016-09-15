@@ -1,11 +1,10 @@
 'use strict';
 
-angular.module('bsis').controller('DataExportCtrl', function($scope, $log, DataExportService) {
+angular.module('bsis').controller('DataExportCtrl', function($scope, $log, ModalsService, DataExportService) {
 
   $scope.downloading = false;
 
-  $scope.download = function() {
-    $scope.downloading = true;
+  function downloadFile() {
     DataExportService.getDataExport(function(response) {
       var fileName = 'dataexport' + moment(new Date()).format('YYYYMMDDHHmm') + '.zip';
 
@@ -27,5 +26,24 @@ angular.module('bsis').controller('DataExportCtrl', function($scope, $log, DataE
       }
       $scope.downloading = false;
     });
+  }
+
+
+  $scope.download = function() {
+    var unprocessConfirmation = {
+      title: 'Data Export',
+      button: 'Export Data',
+      message: 'Are you sure that you want to export all data? This export may take some time and can affect the performance of the system.' +
+      'It is recommended that this process is only run after standard operating hours, to minimise impact on other activities.'
+    };
+
+    ModalsService.showConfirmation(unprocessConfirmation).then(function() {
+      $scope.downloading = true;
+      downloadFile();
+    }).catch(function() {
+      // Confirmation was rejected
+      $scope.downloading = false;
+    });
   };
+
 });
