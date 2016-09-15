@@ -44,6 +44,15 @@
         </div>
 
         <div class="row form-group col-sm-12">
+          <label for="isDeleted" class="col-sm-2 control-label">Contains Plasma</label>
+          <div class="col-sm-4">
+            <div class="checkbox">
+              <input type="checkbox" id="containsPlasma" name="containsPlasma" ng-model="componentType.containsPlasma" ng-true-value="true" ng-false-value="false"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group col-sm-12">
           <label for="name" class="col-sm-2 control-label">Expires After</label>
           <div class="col-sm-4">
             <div class="form-inline">
