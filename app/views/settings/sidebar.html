@@ -38,6 +38,8 @@
             <a href="#/componentTypes">Manage Component Types</a></li>
         <li ng-class="{current: currentPath === '/auditLog'}" has-permission="{{permissions.VIEW_AUDIT_LOG}}"><a
                 href="#/auditLog">View Audit Log</a></li>
+        <li ng-class="{current: currentPath === '/dataExport'}" has-permission="{{permissions.DATA_EXPORT}}"><a
+                href="#/dataExport">Data Export</a></li>
     </ul>
     <div ng-include="'views/sidebarFooter.html'"></div>
 </div>

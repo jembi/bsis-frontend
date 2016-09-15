@@ -68,6 +68,9 @@ angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, Routin
       subpaths: [
         '/manageDivision'
       ]
+    }, {
+      path: '/dataExport',
+      subpaths: []
     }
   ];
 

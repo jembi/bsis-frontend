@@ -181,7 +181,8 @@ angular.module('bsis')
       '/editAdverseEventType/\\d+',
       '/divisions',
       '/manageDivision',
-      '/manageDivision/\\d+'
+      '/manageDivision/\\d+',
+      '/dataExport'
     ];
 
     /**
