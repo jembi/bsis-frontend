@@ -33,7 +33,7 @@ angular.module('bsis').controller('DataExportCtrl', function($scope, $log, Modal
     var unprocessConfirmation = {
       title: 'Data Export',
       button: 'Export Data',
-      message: 'Are you sure that you want to export all data? This export may take some time and can affect the performance of the system.' +
+      message: 'Are you sure that you want to export all data? This export may take some time and can affect the performance of the system. ' +
       'It is recommended that this process is only run after standard operating hours, to minimise impact on other activities.'
     };
 
