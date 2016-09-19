@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, $q, $filter, $routeParams, ICONS, PACKTYPE, DATEFORMAT, DONATION) {
+  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService,AuthService, $rootScope, $q, $filter, $routeParams, ICONS, PACKTYPE, DATEFORMAT, DONATION, PERMISSIONS) {
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
@@ -227,7 +227,7 @@ angular.module('bsis')
         }
       });
 
-      if ($scope.donation.packType.testSampleProduced === true) {
+      if ($scope.donation.packType.testSampleProduced === true && AuthService.hasPermission(PERMISSIONS.VIEW_TEST_OUTCOME)) {
         TestingService.getTestResultsByDIN({donationIdentificationNumber: $scope.donation.donationIdentificationNumber}, function(testingResponse) {
           $scope.testResults = testingResponse.testResults.recentTestResults;
         }, function(err) {

@@ -109,7 +109,14 @@ angular.module('bsis')
       getLoggedOnUser: function() {
         return loggedOnUser;
       },
-
+      hasPermission: function(permission) {
+        if (loggedOnUser != null && session != null) {
+          if (session.sessionUserPermissions.indexOf(permission) != -1) {
+            return true;
+          }
+        }
+        return false;
+      },
       setLoggedOnUser: function(user) {
         setLoggedOnUser(user);
       },

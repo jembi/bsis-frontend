@@ -3,7 +3,7 @@
 angular.module('bsis')
 
   .controller('ViewDonorCtrl', function($scope, $location, $log, Alerting, DonorService, DonationsService, TestingService, ConfigurationsService, ICONS, PACKTYPE, MONTH, TITLE,
-                                         GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams, ModalsService) {
+                                         GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams, ModalsService, AuthService, PERMISSIONS) {
 
     //Initialize scope variables
     $scope.icons = ICONS;
@@ -272,8 +272,7 @@ angular.module('bsis')
           $scope.adverseEventTypes = [null].concat(response.adverseEventTypes);
         }
       });
-
-      if ($scope.donation.packType.testSampleProduced === true) {
+      if ($scope.donation.packType.testSampleProduced === true && AuthService.hasPermission(PERMISSIONS.VIEW_TEST_OUTCOME)) {
         TestingService.getTestResultsByDIN({donationIdentificationNumber: $scope.donation.donationIdentificationNumber}, function(testingResponse) {
           $scope.testResults = testingResponse.testResults.recentTestResults;
         }, function(err) {
