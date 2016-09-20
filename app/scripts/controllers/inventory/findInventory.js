@@ -50,9 +50,9 @@ angular.module('bsis')
         width: '**',
         maxWidth: '200',
         sortingAlgorithm: function(a, b, rowA, rowB) {
-          if (rowA.entity.expiresOn < rowB.entity.expiresOn) {
-            return -1;
-          } else if (rowA.entity.expiresOn > rowB.entity.expiresOn) {
+          if (rowB.entity.expiresOn === null || rowA.entity.expiresOn < rowB.entity.expiresOn) {
+            return -1; // if rowB has a null expiresOn it never expires (so is larger than rowA)
+          } else if (rowA.entity.expiresOn === null || rowA.entity.expiresOn > rowB.entity.expiresOn) {
             return 1;
           } else {
             return 0; // equal
