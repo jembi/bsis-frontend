@@ -14,6 +14,8 @@
                 href="#/lookUp">Look Up</a></li>
         <li ng-class="{current: currentPath === '/mobileDonorCounselling'}"  has-permission="{{permissions.VIEW_DONOR_INFORMATION}}"><a
                 href="#/mobileDonorCounselling">Donor Counselling</a></li>
+        <li ng-class="{current: currentPath === '/mobileClinicExport'}"  has-permission="{{permissions.VIEW_MOBILE_CLINIC_EXPORT}}"><a
+                href="#/mobileClinicExport">Mobile Clinic Export</a></li>
     </ul>
     <div ng-include="'views/sidebarFooter.html'"></div>
 </div>

@@ -151,7 +151,8 @@ angular.module('bsis')
     var mobileRoutes = [
       '/mobile',
       '/lookUp',
-      '/mobileDonorCounselling'
+      '/mobileDonorCounselling',
+      '/mobileClinicExport'
     ];
 
     var settingsRoutes = [
