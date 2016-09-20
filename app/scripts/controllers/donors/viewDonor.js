@@ -2,8 +2,8 @@
 
 angular.module('bsis')
 
-  .controller('ViewDonorCtrl', function($scope, $location, $log, Alerting, DonorService, DonationsService, TestingService, ConfigurationsService, ICONS, PACKTYPE, MONTH, TITLE,
-                                         GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams, ModalsService, AuthService, PERMISSIONS) {
+  .controller('ViewDonorCtrl', function($scope, $location, $log, Alerting, DonorService, DonationsService, TestingService, ConfigurationsService,ModalsService, AuthService, ICONS, PACKTYPE, MONTH, TITLE,
+                                         GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams, PERMISSIONS) {
 
     //Initialize scope variables
     $scope.icons = ICONS;

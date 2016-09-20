@@ -110,7 +110,7 @@ angular.module('bsis')
         return loggedOnUser;
       },
       hasPermission: function(permission) {
-        if (loggedOnUser != null && session != null) {
+        if (session != null) {
           if (session.sessionUserPermissions.indexOf(permission) != -1) {
             return true;
           }
