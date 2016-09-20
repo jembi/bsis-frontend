@@ -48,7 +48,16 @@ angular.module('bsis')
         name: 'Expiry Status',
         field: 'expiryStatus',
         width: '**',
-        maxWidth: '200'
+        maxWidth: '200',
+        sortingAlgorithm: function(a, b, rowA, rowB) {
+          if (rowA.entity.expiresOn < rowB.entity.expiresOn) {
+            return -1;
+          } else if (rowA.entity.expiresOn > rowB.entity.expiresOn) {
+            return 1;
+          } else {
+            return 0; // equal
+          }
+        }
       },
       {
         name: 'Location',
