@@ -25,7 +25,8 @@ angular.module('bsis')
         field: 'donorNumber',
         name: 'donorNumber',
         displayName: 'Donor Number',
-        width: '**'
+        width: '**',
+        maxWidth: '125'
       },
       {
         field: 'firstName',
@@ -44,24 +45,27 @@ angular.module('bsis')
         name: 'gender',
         displayName: 'Gender',
         width: '**',
-        maxWidth: '125'
+        maxWidth: '80'
       },
       {
         field: 'birthDate',
         name: 'birthDate',
         displayName: 'Date of Birth',
-        cellFilter: 'bsisDate'
+        cellFilter: 'bsisDate',
+        maxWidth: '150'
       },
       {
         field: 'bloodType',
         name: 'bloodType',
-        displayName: 'Blood Type'
+        displayName: 'Blood Type',
+        maxWidth: '100'
       },
       {
         field: 'eligibility',
         name: 'eligibility',
         displayName: 'Eligibility',
-        cellFilter: 'eligibility'
+        cellFilter: 'eligibility',
+        maxWidth: '150'
       }
     ];
 
