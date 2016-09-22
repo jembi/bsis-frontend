@@ -25,6 +25,12 @@ angular.module('bsis')
     };
   })
 
+  .filter('isoString', function() {
+    return function(maybeDate) {
+      return angular.isDate(maybeDate) ? maybeDate.toISOString() : maybeDate;
+    };
+  })
+
   .filter('bsisDateTime', function($filter, DATETIMEFORMAT) {
     var angularDateFilter = $filter('date');
     return function(theDate) {
