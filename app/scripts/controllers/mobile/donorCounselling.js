@@ -169,8 +169,8 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
     $location.search({
       search: true,
       venueId: currentSearch.venueId,
-      startDate: currentSearch.startDate.toISOString(),
-      endDate: currentSearch.endDate.toISOString()
+      startDate: $filter('isoString')(currentSearch.startDate),
+      endDate: $filter('isoString')(currentSearch.endDate)
     });
 
     MobileService.getDonorOutcomes($scope.search, function(res) {

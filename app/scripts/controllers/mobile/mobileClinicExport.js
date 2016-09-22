@@ -92,10 +92,6 @@ angular.module('bsis')
       }
     };
 
-    function getISOString(maybeDate) {
-      return angular.isDate(maybeDate) ? maybeDate.toISOString() : maybeDate;
-    }
-
     $scope.exportMobileClinics = function() {
       if ($scope.mobileClinicExportForm && $scope.mobileClinicExportForm.$invalid) {
         return;
@@ -105,7 +101,7 @@ angular.module('bsis')
 
       var search = {
         venueId: $scope.search.venues[0],
-        clinicDate: getISOString($scope.search.clinicDate)
+        clinicDate: $filter('isoString')($scope.search.clinicDate)
       };
 
       $scope.searching = true;
