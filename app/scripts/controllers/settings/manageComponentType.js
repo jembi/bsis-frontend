@@ -11,6 +11,22 @@ angular.module('bsis').controller('ManageComponentTypeCtrl', function($scope, $l
     });
   });
 
+  $scope.$watch('componentType.componentTypeName', function() {
+    $timeout(function() {
+      $scope.componentTypeForm.componentTypeName.$setValidity('duplicate', true);
+    });
+  });
+
+  function onSaveError(err) {
+    if (err.data && err.data.componentTypeCode) {
+      $scope.componentTypeForm.componentTypeCode.$setValidity('duplicate', false);
+    }
+    if (err.data && err.data.componentTypeName) {
+      $scope.componentTypeForm.componentTypeName.$setValidity('duplicate', false);
+    }
+    $scope.savingComponentType = false;
+  }
+
   $scope.cancel = function() {
     $location.path('/componentTypes');
   };
@@ -21,13 +37,11 @@ angular.module('bsis').controller('ManageComponentTypeCtrl', function($scope, $l
     }
 
     $scope.savingComponentType = true;
+
     ComponentTypesService.updateComponentType($scope.componentType, function() {
       $location.path('/componentTypes');
     }, function(response) {
-      if (response.data && response.data.componentTypeCode) {
-        $scope.componentTypeForm.componentTypeCode.$setValidity('duplicate', false);
-      }
-      $scope.savingComponentType = false;
+      onSaveError(response);
     });
   };
 

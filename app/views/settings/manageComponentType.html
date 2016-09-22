@@ -10,9 +10,14 @@
           <div class="col-sm-4">
             <div class="form-inline">
               <input size="40" id="componentTypeName" name="componentTypeName" class="form-control input-sm" ng-model="componentType.componentTypeName" required>
-                <ng-messages for="componentTypeForm.componentTypeName.$error" role="alert" ng-show="componentTypeForm.$submitted">
-                  <ng-messages-include src="messages.html"></ng-messages-include>
-                </ng-messages>
+              <div>
+                <small class="error" ng-show="componentTypeForm.componentTypeName.$error.duplicate && componentTypeForm.$submitted">
+                  Component Type with name already exists
+                </small>
+                <small class="error" ng-show="componentTypeForm.componentTypeName.$error.required && componentTypeForm.$submitted">
+                  This cannot be empty
+                </small>
+              </div>
             </div>
           </div>
         </div>
