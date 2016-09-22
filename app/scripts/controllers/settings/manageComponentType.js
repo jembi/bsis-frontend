@@ -38,17 +38,27 @@ angular.module('bsis').controller('ManageComponentTypeCtrl', function($scope, $l
 
     $scope.savingComponentType = true;
 
-    ComponentTypesService.updateComponentType($scope.componentType, function() {
-      $location.path('/componentTypes');
-    }, function(response) {
-      onSaveError(response);
-    });
+    if ($routeParams.id) {
+      ComponentTypesService.updateComponentType($scope.componentType, function() {
+        $location.path('/componentTypes');
+      }, function(response) {
+        onSaveError(response);
+      });
+    } else {
+      ComponentTypesService.createComponentType($scope.componentType, function() {
+        $location.path('/componentTypes');
+      }, function(response) {
+        onSaveError(response);
+      });
+    }
   };
 
   function init() {
-    ComponentTypesService.getComponentTypeById({id: $routeParams.id}, function(response) {
-      $scope.componentType = response.componentType;
-    }, $log.error);
+    if ($routeParams.id) {
+      ComponentTypesService.getComponentTypeById({id: $routeParams.id}, function(response) {
+        $scope.componentType = response.componentType;
+      }, $log.error);
+    }
   }
 
   init();
