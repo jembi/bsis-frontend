@@ -69,6 +69,12 @@ angular.module('bsis')
       }
     ];
 
+    function resetUIGridPage() {
+      if ($scope.gridApi != null) {
+        $scope.gridApi.pagination.seek(1);
+      }
+    }
+
     $scope.gridOptions = {
       data: [],
       enableSorting: false,
@@ -97,57 +103,29 @@ angular.module('bsis')
         return;
       }
 
+      resetUIGridPage();
+
       $location.search(angular.extend({search: true}, $scope.search));
 
       var search = {
-        venueId: $scope.search.venues[0],
+        venueIds: $scope.search.venues,
         clinicDate: $filter('isoString')($scope.search.clinicDate)
       };
 
       $scope.searching = true;
-
-      $log.debug('Not implemented yet. Request parameters: ' + angular.toJson(search));
-      $scope.gridOptions.data = [
-        {
-          'eligibility':true,
-          'birthDate':'1977-10-20',
-          'firstName':'Susy',
-          'lastName':'Donor',
-          'gender':'female',
-          'donorNumber':'020601',
-          'bloodType':'A+',
-          'venue': {
-            'name': 'station'
-          }
-        }, {
-          'eligibility':true,
-          'birthDate':'2011-02-03',
-          'firstName':'Isabella',
-          'lastName':'Donor',
-          'gender':'female',
-          'donorNumber':'020600',
-          'bloodType':'O+',
-          'venue': {
-            'name': 'station'
-          }
-        }, {
-          'eligibility':false,
-          'birthDate':'1988-01-20',
-          'firstName':'Bob',
-          'lastName':'Donor',
-          'gender':'male',
-          'donorNumber':'020591',
-          'bloodType':'A-',
-          'venue': {
-            'name': 'school'
-          }
-        }
-      ];
-      $scope.searching = false;
-      $scope.submitted = true;
+      MobileService.mobileClinicExport(search, function(res) {
+        $scope.gridOptions.data = res.donors;
+        $scope.searching = false;
+        $scope.submitted=true;
+      }, function(err) {
+        $scope.error.message = err.data.userMessage;
+        $scope.searching = false;
+      });
     };
 
     $scope.clear = function() {
+      $scope.gridOptions.data = null;
+      $scope.gridOptions.enableSorting = false;
       $scope.error = {};
       $scope.search = angular.copy(master);
       $scope.searching = false;
