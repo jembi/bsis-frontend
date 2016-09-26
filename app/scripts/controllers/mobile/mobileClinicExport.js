@@ -69,12 +69,6 @@ angular.module('bsis')
       }
     ];
 
-    function resetUIGridPage() {
-      if ($scope.gridApi != null) {
-        $scope.gridApi.pagination.seek(1);
-      }
-    }
-
     $scope.gridOptions = {
       data: [],
       enableSorting: false,
@@ -103,8 +97,6 @@ angular.module('bsis')
         return;
       }
 
-      resetUIGridPage();
-
       $location.search(angular.extend({search: true}, $scope.search));
 
       var search = {
@@ -116,7 +108,7 @@ angular.module('bsis')
       MobileService.mobileClinicExport(search, function(res) {
         $scope.gridOptions.data = res.donors;
         $scope.searching = false;
-        $scope.submitted=true;
+        $scope.submitted = true;
       }, function(err) {
         $scope.error.message = err.data.userMessage;
         $scope.searching = false;
