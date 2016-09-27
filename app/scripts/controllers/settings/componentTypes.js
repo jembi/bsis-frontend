@@ -33,7 +33,7 @@ angular.module('bsis').controller('ComponentTypesCtrl', function($scope, $locati
         '<span ng-show="row.entity.containsPlasma"><i class="fa {{grid.appScope.icons.SQUARECHECK}}"></i></span>' +
         '<span ng-show="!row.entity.containsPlasma"><i class="fa {{grid.appScope.icons.SQUARE}}"></i></span></div>',
       width: '**',
-      maxWidth: '125'
+      maxWidth: '150'
     },
     {
       name: 'ExpiresAfter',
