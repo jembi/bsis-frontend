@@ -26,6 +26,15 @@ To start up a development instance of the webapp, run `grunt serve` (or `npm sta
 
 The code was scaffolded using [angular-seed](https://github.com/angular/angular-seed), as well as [generator angular](https://github.com/yeoman/generator-angular) to add grunt support.
 
+### Coding Conventions
+
+We use [ESLint](http://eslint.org/) to check that our code adheres to Javascript best practises and coding style guidelines. Please configure lint to run before you commit. To do that, edit the following file in your local bsis-frontend Git respository: `.git/hooks/pre-commit`
+
+```
+#!/bin/bash
+npm run lint
+```
+
 ### Git Commit Messages
 
 Use the supplied Git commit message template to ensure that commit messages conform to the project standards. The first line of
