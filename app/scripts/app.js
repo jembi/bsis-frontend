@@ -510,7 +510,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'ComponentTypesCtrl',
         permission: PERMISSIONS.MANAGE_COMPONENT_TYPES
       })
-      .when('/manageComponentType/:id', {
+      .when('/manageComponentType/:id?', {
         templateUrl: 'views/settings/manageComponentType.html',
         controller: 'ManageComponentTypeCtrl',
         permission: PERMISSIONS.MANAGE_COMPONENT_TYPES
@@ -530,6 +530,11 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         templateUrl: 'views/settings/manageDivision.html',
         controller: 'ManageDivisionCtrl',
         permission: PERMISSIONS.EDIT_DIVISIONS
+      })
+      .when('/dataExport', {
+        templateUrl: 'views/settings/dataExport.html',
+        controller: 'DataExportCtrl',
+        permission: PERMISSIONS.DATA_EXPORT
       })
       .otherwise({
         redirectTo: '/home'

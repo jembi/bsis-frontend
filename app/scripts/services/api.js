@@ -455,6 +455,13 @@ angular.module('bsis')
         update: {
           method: 'PUT'
         }
-      })
+      }),
+
+      DataExport: {
+        download: function() {
+          // using $http here because $resource cannot process arraybuffers easily
+          return $http.get(url + '/dataexport', {responseType: 'arraybuffer'});
+        }
+      }
     };
   });

@@ -9,10 +9,13 @@
           <label for="componentTypeName" class="col-sm-2 control-label">Name</label>
           <div class="col-sm-4">
             <div class="form-inline">
-              <input size="40" id="componentTypeName" name="componentTypeName" class="form-control input-sm" ng-model="componentType.componentTypeName" required>
-                <ng-messages for="componentTypeForm.componentTypeName.$error" role="alert" ng-show="componentTypeForm.$submitted">
+              <input size="40" id="componentTypeName" name="componentTypeName" class="form-control input-sm" 
+                ng-model= "componentType.componentTypeName" required ng-maxlength=50>
+              <div>
+                <ng-messages for="componentTypeForm.componentTypeName.$error" ng-show="componentTypeForm.$submitted">
                   <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
+              </div>
             </div>
           </div>
         </div>
@@ -21,14 +24,12 @@
           <label for="componentTypeCode" class="col-sm-2 control-label">Component Code</label>
           <div class="col-sm-4">
             <div class="form-inline">
-              <input size="10" id="componentTypeCode" name="componentTypeCode" class="form-control input-sm" ng-model="componentType.componentTypeCode" required>
+              <input size="10" id="componentTypeCode" name="componentTypeCode" class="form-control input-sm" 
+                ng-model= "componentType.componentTypeCode" required ng-maxlength=30>
               <div>
-                <small class="error" ng-show="componentTypeForm.componentTypeCode.$error.duplicate && componentTypeForm.$submitted">
-                  Component Type with code already exists
-                </small>
-                <small class="error" ng-show="componentTypeForm.componentTypeCode.$error.required && componentTypeForm.$submitted">
-                  This cannot be empty
-                </small>
+                <ng-messages for="componentTypeForm.componentTypeCode.$error" ng-show="componentTypeForm.$submitted">
+                  <ng-messages-include src="messages.html"></ng-messages-include>
+                </ng-messages>
               </div>
             </div>
           </div>
@@ -113,7 +114,7 @@
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
             <button class="btn btn-primary" type="submit" style="margin-top: 2px"
-                ng-disabled="savingComponentType">{{savingComponentType ? "Saving..." : "Save ComponentType"}}
+                ng-disabled="savingComponentType">{{savingComponentType ? "Saving..." : "Save Component Type"}}
             </button>
             <button class="btn btn-primary" type="button" ng-click="cancel()"
                 style="margin-top: 2px" ng-disabled="savingComponentType">Cancel

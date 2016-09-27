@@ -5,6 +5,7 @@ angular.module('bsis')
     return {
       getComponentTypes: Api.ComponentTypes.getAll,
       getComponentTypeById: Api.ComponentTypes.get,
-      updateComponentType: Api.ComponentTypes.update
+      updateComponentType: Api.ComponentTypes.update,
+      createComponentType: Api.ComponentTypes.save
     };
   });
