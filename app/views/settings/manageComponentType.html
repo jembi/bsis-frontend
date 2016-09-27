@@ -6,7 +6,7 @@
       <form name="componentTypeForm" novalidate class="form-horizontal col-sm-12" ng-submit="saveComponentType()">
 
         <div class="row form-group col-sm-12">
-          <label for="name" class="col-sm-2 control-label">Name</label>
+          <label for="componentTypeName" class="col-sm-2 control-label">Name</label>
           <div class="col-sm-4">
             <div class="form-inline">
               <input size="40" id="componentTypeName" name="componentTypeName" class="form-control input-sm" 
@@ -21,7 +21,7 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="name" class="col-sm-2 control-label">Component Code</label>
+          <label for="componentTypeCode" class="col-sm-2 control-label">Component Code</label>
           <div class="col-sm-4">
             <div class="form-inline">
               <input size="10" id="componentTypeCode" name="componentTypeCode" class="form-control input-sm" 
@@ -36,7 +36,7 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="isDeleted" class="col-sm-2 control-label">Can be Issued</label>
+          <label for="canBeIssued" class="col-sm-2 control-label">Can be Issued</label>
           <div class="col-sm-4">
             <div class="checkbox">
               <input type="checkbox" id="canBeIssued" name="canBeIssued" ng-model="componentType.canBeIssued" ng-true-value="true" ng-false-value="false"/>
@@ -45,7 +45,16 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="name" class="col-sm-2 control-label">Expires After</label>
+          <label for="containsPlasma" class="col-sm-2 control-label">Contains Plasma</label>
+          <div class="col-sm-4">
+            <div class="checkbox">
+              <input type="checkbox" id="containsPlasma" name="containsPlasma" ng-model="componentType.containsPlasma" ng-true-value="true" ng-false-value="false"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group col-sm-12">
+          <label for="expiresAfter" class="col-sm-2 control-label">Expires After</label>
           <div class="col-sm-4">
             <div class="form-inline">
               <input type="number" id="expiresAfter" name="expiresAfter" class="form-control input-sm" style="width:50px;" ng-model="componentType.expiresAfter" required> days
@@ -57,7 +66,7 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="name" class="col-sm-2 control-label">Storage Info</label>
+          <label for="storageInfo" class="col-sm-2 control-label">Storage Info</label>
           <div class="col-sm-4">
             <div class="form-inline">
               <input size="40" id="storageInfo" name="storageInfo" class="form-control input-sm" ng-model="componentType.storageInfo">
@@ -69,7 +78,7 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="name" class="col-sm-2 control-label">Transport Info</label>
+          <label for="transportInfo" class="col-sm-2 control-label">Transport Info</label>
           <div class="col-sm-4">
             <div class="form-inline">
               <input size="40" id="transportInfo" name="transportInfo" class="form-control input-sm" ng-model="componentType.transportInfo">
@@ -81,7 +90,7 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="name" class="col-sm-2 control-label">Preparation Info</label>
+          <label for="preparationInfo" class="col-sm-2 control-label">Preparation Info</label>
           <div class="col-sm-4">
             <div class="form-inline">
               <input size="40" id="preparationInfo" name="preparationInfo" class="form-control input-sm" ng-model="componentType.preparationInfo">
