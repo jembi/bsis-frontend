@@ -156,12 +156,14 @@ angular.module('bsis')
     EDIT_ADVERSE_EVENT_TYPES: 'Edit Adverse Event Types',
     VIEW_ADVERSE_EVENT_TYPES: 'View Adverse Event Types',
     VOID_ADVERSE_EVENT_TYPES: 'Void Adverse Event Types',
+    MANAGE_ADVERSE_EVENTS: 'Manage Adverse Events',
 
     // Division Permissions
     ADD_DIVISIONS: 'Add Divisions',
     EDIT_DIVISIONS: 'Edit Divisions',
     VIEW_DIVISIONS: 'View Divisions',
     VOID_DIVISIONS: 'Void Divisions',
+    MANAGE_DIVISIONS: 'Manage Divisions',
 
     // Data Export
     DATA_EXPORT: 'Data Export'
