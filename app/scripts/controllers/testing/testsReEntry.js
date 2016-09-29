@@ -14,6 +14,7 @@ angular.module('bsis')
     var getTestNames = function() {
       var bloodTestType = $routeParams.bloodTestType;
       if (bloodTestType === 'BASIC_TTI') {
+        $scope.showTTIStatus = true;
         TestingService.getTTITestingFormFields(function(response) {
           if (response !== false) {
             $scope.testNames = response.basicTTITests;
@@ -32,6 +33,7 @@ angular.module('bsis')
           }
         });
       } else if (bloodTestType === 'CONFIRMATORY_TTI') {
+        $scope.showTTIStatus = false;
         TestingService.getTTITestingFormFields(function(response) {
           if (response !== false) {
             $scope.testNames = response.pendingTTITests;
