@@ -2,7 +2,12 @@
 
 angular.module('bsis').controller('ManageComponentTypeCtrl', function($scope, $location, $log, $timeout, $routeParams, ComponentTypesService) {
 
-  $scope.componentType = {isDeleted: false};
+  $scope.componentType = {
+    isDeleted: false,
+    canBeIssued: false,
+    containsPlasma: false
+  };
+
   $scope.componentTypeForm = {};
 
   $scope.$watch('componentType.componentTypeCode', function() {
