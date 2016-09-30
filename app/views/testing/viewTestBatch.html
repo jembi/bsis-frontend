@@ -79,10 +79,10 @@
     <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> 
       <small>
         <em>Pending TTI Test Outcomes:      
-          <a ng-href="#/managePendingTests/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!basicTTIComplete && !pendingTTITests">Enter </a>|
+          <a ng-href="#/managePendingTests/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!basicTTIComplete && !pendingTTITests">Enter </a>|
         </em> 
         <em>  
-          <a ng-href="#/reEnterTTI/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!reEntryRequiredPendingTTITests">Re-Enter</a>
+          <a ng-href="#/reEnterTTI/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!reEntryRequiredPendingTTITests">Re-Enter</a>
         </em> 
       </small>
     </span>
