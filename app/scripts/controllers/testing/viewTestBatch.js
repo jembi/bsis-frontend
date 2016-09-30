@@ -88,15 +88,15 @@ angular.module('bsis')
     $scope.getCurrentTestBatchOverview = function() {
       TestingService.getTestBatchOverviewById({testBatch: $routeParams.id}, function(response) {
         $scope.testBatchOverview = response;
-        $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
-        $scope.pendingTTITests = response.pendingTTITests;
+        $scope.pendingRepeatBloodTypingTests = response.pendingRepeatBloodTypingTests;
+        $scope.pendingRepeatTTITests = response.pendingRepeatTTITests;
         $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
         $scope.basicTTIComplete = response.basicTTIComplete;
         $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
         $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
         $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
-        $scope.reEntryRequiredPendingBloodTypingTests = response.reEntryRequiredPendingBloodTypingTests;
-        $scope.reEntryRequiredPendingTTITests = response.reEntryRequiredPendingTTITests;
+        $scope.reEntryRequiredRepeatBloodTypingTests = response.reEntryRequiredRepeatBloodTypingTests;
+        $scope.reEntryRequiredRepeatTTITests = response.reEntryRequiredRepeatTTITests;
       }, function(err) {
         $log.error(err);
       });
