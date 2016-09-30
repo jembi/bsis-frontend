@@ -17,7 +17,7 @@ angular.module('bsis')
         $scope.showTTIStatus = true;
         TestingService.getTTITestingFormFields(function(response) {
           if (response !== false) {
-            $scope.testNames = response.basicTTITests;
+            $scope.testNames = response.basicTTITestNames;
           }
         });
       } else if (bloodTestType === 'BASIC_BLOODTYPING') {
@@ -36,7 +36,7 @@ angular.module('bsis')
         $scope.showTTIStatus = false;
         TestingService.getTTITestingFormFields(function(response) {
           if (response !== false) {
-            $scope.testNames = response.pendingTTITests;
+            $scope.testNames = response.repeatTTITestNames;
           }
         });
       }
