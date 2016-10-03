@@ -90,6 +90,7 @@ angular.module('bsis')
         $scope.testBatchOverview = response;
         $scope.pendingRepeatBloodTypingTests = response.pendingRepeatBloodTypingTests;
         $scope.pendingRepeatTTITests = response.pendingRepeatTTITests;
+        $scope.pendingConfirmatoryTTITests = response.pendingConfirmatoryTTITests;
         $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
         $scope.basicTTIComplete = response.basicTTIComplete;
         $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
@@ -97,6 +98,7 @@ angular.module('bsis')
         $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
         $scope.reEntryRequiredRepeatBloodTypingTests = response.reEntryRequiredRepeatBloodTypingTests;
         $scope.reEntryRequiredRepeatTTITests = response.reEntryRequiredRepeatTTITests;
+        $scope.reEntryRequiredConfirmatoryTTITests = response.reEntryRequiredConfirmatoryTTITests;
       }, function(err) {
         $log.error(err);
       });
