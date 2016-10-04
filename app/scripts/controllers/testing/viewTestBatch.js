@@ -341,6 +341,18 @@ angular.module('bsis')
         );
       });
 
+      angular.forEach(testBatchOutcomesReport.confirmatoryTtiTestNames, function(testName) {
+        columnDefs.push(
+          {
+            name: testName,
+            displayName: testName,
+            field: 'testResults',
+            visible: false,
+            width: '80'
+          }
+        );
+      });
+
       angular.forEach(testBatchOutcomesReport.basicBloodTypingTestNames, function(testName) {
         columnDefs.push(
           {
