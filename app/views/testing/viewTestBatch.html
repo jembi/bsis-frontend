@@ -52,22 +52,11 @@
 
   <hr style="clear:right;"/>
 
-  <span ng-if="testBatch.status!='CLOSED'" ng-hide="confirmDelete || confirmEdit" style="vertical-align: center; margin-top: 0px; margin-bottom: 0px; text-align: left;">
-    <table show-filter="false">
+  <span ng-if="testBatch.status!='CLOSED'" ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; vertical-align: center; margin-top: 0px; margin-bottom: 0px; padding-right: 15px; text-align: right;">
+
+    <table>
       <tr>
-        <td>
-          <div class="h4">
-            <small><em>Created On: </em></small>
-            <span ng-show="!editableForm.$visible">{{ (testBatch.createdDate | bsisDate) || '' }}</span>
-            <span ng-show="editableForm.$visible" style="display:inline;">
-            <dateselect ng-model="testBatch.createdDate" initDate="testBatch.createdDate" format="format" opened="dateToOpen"></dateselect> 
-            </span>
-          </div> 
-        </td>
-        <td></td>
-        <td style="width: 9%"></td>
-        <td></td>
-        <td style="text-align: right">
+        <td style="text-align:right;padding-right:10px;">
           <span has-permission="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="confirmDelete || confirmEdit">
             <small>
               <em>TTI Test Outcomes:
@@ -79,8 +68,7 @@
             </small>
           </span>
         </td>
-        <td style="width: 1%"></td>
-        <td style="text-align: right">
+        <td style="text-align:right;">
           <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="confirmDelete || confirmEdit">
             <small>
               <em>ABO/Rh Outcomes:
@@ -93,80 +81,50 @@
           </span>
         </td>
       </tr>
+
       <tr>
-        <td style="width: 40%">
-          <div class="h4">
-            <small><em>Location: </em></small>
-            <span ng-show="!editableForm.$visible" style="display:inline;">{{testBatch.location.name}}</span>
-            <span ng-show="editableForm.$visible" style="display:inline;">
-              <select class="form-control" style="display:inline; width:auto;" name="location" ng-model="testBatch.location" ng-options="item as item.name for item in locations track by item.id" required></select>
-            </span>          
-          </div>  
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>     
-        <td style="text-align: right">
-          <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> 
+        <td style="text-align:right;padding-right:10px;">
+          <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
             <small>
-              <em>Repeat TTI Test Outcomes:      
+              <em>Repeat TTI Test Outcomes:
                 <a ng-href="#/managePendingTests/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!basicTTIComplete && !pendingRepeatTTITests">Enter </a>|
-              </em> 
-              <em>  
+              </em>
+              <em>
                 <a ng-href="#/reEnterTTI/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!reEntryRequiredRepeatTTITests">Re-Enter</a>
-              </em> 
+              </em>
             </small>
           </span>
         </td>
-        <td style="width: 1%"></td>
-        <td style="text-align: right">
+        <td style="text-align:right;">
           <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
-              <small>
-                <em>Repeat ABO/Rh Outcomes:
-                  <a ng-href="#/managePendingBloodTypingTests/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!basicBloodTypingComplete && !pendingRepeatBloodTypingTests">Enter </a>|
-                </em>
-                <em>
-                  <a ng-href="#/reEnterBloodTyping/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!reEntryRequiredRepeatBloodTypingTests">Re-Enter</a>
-                </em>
-              </small>
-            </span>
-        </td>      
-      </tr>
-      <tr>
-        <td>
-          <div class="h4">
-            <span ng-if="testBatch.status !== 'RELEASED' && !testBatch.permissions.canRelease">
-              <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
-            </span>
-            <span ng-if="testBatch.status !== 'RELEASED' && testBatch.permissions.canRelease">
-              <small><em>Number of Samples Ready for Release: </em></small>{{testBatch.readyForReleaseCount}} of {{testBatch.numSamples}}
-            </span>
-            <span ng-if="testBatch.status === 'RELEASED'">
-              <small><em>Number of Samples Released: </em></small>{{testBatch.numReleasedSamples}} of {{testBatch.numSamples}}
-            </span>
-          </div>
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td style="text-align: right">
-          <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> 
             <small>
-              <em>Confirmatory TTI Test Outcomes:      
-                <a ng-href="#/managePendingTests/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!basicTTIComplete && !pendingConfirmatoryTTITests">Enter </a>|
-              </em> 
-              <em>  
-                <a ng-href="#/reEnterTTI/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!reEntryRequiredConfirmatoryTTITests">Re-Enter</a>
-              </em> 
+              <em>Repeat ABO/Rh Outcomes:
+                <a ng-href="#/managePendingBloodTypingTests/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!basicBloodTypingComplete && !pendingRepeatBloodTypingTests">Enter </a>|
+              </em>
+              <em>
+                <a ng-href="#/reEnterBloodTyping/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!reEntryRequiredRepeatBloodTypingTests">Re-Enter</a>
+              </em>
             </small>
           </span>
         </td>
-        <td></td>   
       </tr>
-      </table>
 
-      <hr style="margin-bottom:5px;"/>
-
+      <tr>
+        <td style="text-align:right;padding-right:10px;">
+          <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
+            <small>
+              <em>Confirmatory TTI Test Outcomes:
+                <a ng-href="#/managePendingTests/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!basicTTIComplete && !pendingConfirmatoryTTITests">Enter </a>|
+              </em>
+              <em>
+                <a ng-href="#/reEnterTTI/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!reEntryRequiredConfirmatoryTTITests">Re-Enter</a>
+              </em>
+            </small>
+          </span>
+        </td>
+        <td></td>
+      </tr>
+    </table>
   </span>
 
   <uib-alert type="danger" close="" ng-show="err.userMessage">
@@ -176,6 +134,33 @@
       </ul>
   </uib-alert>
   <form editable-form name="editableForm" onbeforesave="validateForm(editableForm)" onaftersave="updateTestBatch(testBatch)">
+
+      <div class="h4">
+        <small><em>Created On: </em></small>
+        <span ng-show="!editableForm.$visible">{{ (testBatch.createdDate | bsisDate) || '' }}</span>
+        <span ng-show="editableForm.$visible" style="display:inline;">
+          <dateselect ng-model="testBatch.createdDate" initDate="testBatch.createdDate" format="format" opened="dateToOpen"></dateselect>
+        </span> |
+        <small><em>Location: </em></small>
+        <span ng-show="!editableForm.$visible" style="display:inline;">{{testBatch.location.name}}</span>
+        <span ng-show="editableForm.$visible" style="display:inline;">
+          <select class="form-control" style="display:inline; width:auto;" name="location" ng-model="testBatch.location" ng-options="item as item.name for item in locations track by item.id" required></select>
+        </span>
+      </div>
+
+      <div class="h4">
+        <span ng-if="testBatch.status !== 'RELEASED' && !testBatch.permissions.canRelease">
+          <small><em>Number of Samples: </em></small>{{testBatch.numSamples}}
+        </span>
+        <span ng-if="testBatch.status !== 'RELEASED' && testBatch.permissions.canRelease">
+          <small><em>Number of Samples Ready for Release: </em></small>{{testBatch.readyForReleaseCount}} of {{testBatch.numSamples}}
+        </span>
+        <span ng-if="testBatch.status === 'RELEASED'">
+          <small><em>Number of Samples Released: </em></small>{{testBatch.numReleasedSamples}} of {{testBatch.numSamples}}
+        </span>
+      </div>
+
+      <hr style="margin-bottom:5px;"/>
 
   <span ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
     <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a
@@ -205,7 +190,8 @@
       </div>
 
     <span ng-show="!editableForm.$visible || !testBatch.permissions.canEditDonationBatches">
-      <span class="h4" ng-repeat="donationBatch in testBatch.donationBatches">
+      <span class="h4" style="font-size: 0.95em; margin-top:0px; margin-bottom:0px;"
+            ng-repeat="donationBatch in testBatch.donationBatches">
         <small><em>Venue: </em></small>{{donationBatch.venue.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate | bsisDate}} | <small>
           <em>Number of Donations: </em></small> {{donationBatch.numDonations}}
         <br/>
