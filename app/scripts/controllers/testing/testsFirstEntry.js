@@ -43,8 +43,8 @@ angular.module('bsis')
     var getTestOutcomes = function() {
 
       $scope.allTestOutcomes = {};
-
-      TestingService.getTestOutcomesByBatchIdAndBloodTestType({testBatch: $routeParams.id, bloodTestType: $routeParams.bloodTestType}, function(response) {
+      var bloodTestType = $routeParams.bloodTestType;
+      TestingService.getTestOutcomesByBatchIdAndBloodTestType({testBatch: $routeParams.id, bloodTestType: bloodTestType}, function(response) {
         data = response.testResults;
         $scope.data = response.testResults;
         $scope.testBatchCreatedDate = response.testBatchCreatedDate;
@@ -52,10 +52,25 @@ angular.module('bsis')
 
         angular.forEach($scope.data, function(donationResults) {
           var din = donationResults.donation.donationIdentificationNumber;
+          var pendingTests = {};
           $scope.allTestOutcomes[din] = {'donationIdentificationNumber': din, 'testResults': {}};
+          if (bloodTestType === 'REPEAT_TTI') {
+            pendingTests = donationResults.pendingRepeatTTITestsIds;
+          } else if (bloodTestType === 'CONFIRMATORY_TTI') {
+            pendingTests = donationResults.pendingConfirmatoryTTITestsIds;
+          }
           angular.forEach(donationResults.recentTestResults, function(test) {
-            $scope.allTestOutcomes[din].testResults[test.bloodTest.id] = test.result;
+            if (pendingTests.length === 0) {
+              $scope.allTestOutcomes[din].testResults[test.bloodTest.id] = test.result;
+            } else {
+              donationResults.editableRow = true;
+            }
           });
+        });
+
+        // Filter rows that are not editable from $scope.data
+        $scope.data = $scope.data.filter(function(row) {
+          return (row.editableRow === true);
         });
       }, function(err) {
         $log.error(err);
