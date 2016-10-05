@@ -489,17 +489,17 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       .when('/adverseEventTypes', {
         templateUrl: 'views/settings/adverseEventTypes.html',
         controller: 'AdverseEventTypesCtrl',
-        permission: PERMISSIONS.VIEW_ADVERSE_EVENT_TYPES
+        permission: PERMISSIONS.MANAGE_ADVERSE_EVENTS
       })
       .when('/addAdverseEventType', {
         templateUrl: 'views/settings/addAdverseEventType.html',
         controller: 'AddAdverseEventTypeCtrl',
-        permission: PERMISSIONS.ADD_ADVERSE_EVENT_TYPES
+        permission: PERMISSIONS.MANAGE_ADVERSE_EVENTS
       })
       .when('/editAdverseEventType/:id?', {
         templateUrl: 'views/settings/editAdverseEventType.html',
         controller: 'EditAdverseEventTypeCtrl',
-        permission: PERMISSIONS.EDIT_ADVERSE_EVENT_TYPES
+        permission: PERMISSIONS.MANAGE_ADVERSE_EVENTS
       })
       .when('/locations', {
         templateUrl: 'views/settings/locations.html',
@@ -517,7 +517,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'ComponentTypesCtrl',
         permission: PERMISSIONS.MANAGE_COMPONENT_TYPES
       })
-      .when('/manageComponentType/:id', {
+      .when('/manageComponentType/:id?', {
         templateUrl: 'views/settings/manageComponentType.html',
         controller: 'ManageComponentTypeCtrl',
         permission: PERMISSIONS.MANAGE_COMPONENT_TYPES
@@ -525,18 +525,18 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       .when('/divisions', {
         templateUrl: 'views/settings/divisions.html',
         controller: 'DivisionsCtrl',
-        permission: PERMISSIONS.VIEW_DIVISIONS,
+        permission: PERMISSIONS.MANAGE_DIVISIONS,
         reloadOnSearch: false
       })
       .when('/manageDivision', {
         templateUrl: 'views/settings/manageDivision.html',
         controller: 'ManageDivisionCtrl',
-        permission: PERMISSIONS.ADD_DIVISIONS
+        permission: PERMISSIONS.MANAGE_DIVISIONS
       })
       .when('/manageDivision/:id', {
         templateUrl: 'views/settings/manageDivision.html',
         controller: 'ManageDivisionCtrl',
-        permission: PERMISSIONS.EDIT_DIVISIONS
+        permission: PERMISSIONS.MANAGE_DIVISIONS
       })
       .when('/dataExport', {
         templateUrl: 'views/settings/dataExport.html',

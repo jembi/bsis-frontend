@@ -23,6 +23,16 @@ angular.module('bsis').controller('ComponentTypesCtrl', function($scope, $locati
         '<span ng-show="row.entity.canBeIssued"><i class="fa {{grid.appScope.icons.SQUARECHECK}}"></i></span>' +
         '<span ng-show="!row.entity.canBeIssued"><i class="fa {{grid.appScope.icons.SQUARE}}"></i></span></div>',
       width: '**',
+      maxWidth: '125'
+    },
+    {
+      name: 'ContainsPlasma',
+      displayName: 'Contains Plasma',
+      field: 'containsPlasma',
+      cellTemplate: '<div class="ui-grid-cell-contents">' +
+        '<span ng-show="row.entity.containsPlasma"><i class="fa {{grid.appScope.icons.SQUARECHECK}}"></i></span>' +
+        '<span ng-show="!row.entity.containsPlasma"><i class="fa {{grid.appScope.icons.SQUARE}}"></i></span></div>',
+      width: '**',
       maxWidth: '150'
     },
     {
