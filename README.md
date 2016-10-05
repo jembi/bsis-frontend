@@ -37,9 +37,7 @@ npm run lint
 
 ### Git Commit Messages
 
-Use the supplied Git commit message template to ensure that commit messages conform to the project standards. The first line of
-the commit message should contain a JIRA ticket reference and a short description of the commit (50 characters max). The following
-lines (72 characters max) should describe why the changes is being made, what the problem was and contain external references.
+Use the supplied Git commit message template to ensure that commit messages conform to the project standards. The first line of the commit message should contain a JIRA ticket reference and a short description of the commit (50 characters max). The following lines (72 characters max) should describe why the change is being made, what the problem was, and may contain external references if necessary.
 
 In your BSIS Git repository folder, run the following command:
 
@@ -47,8 +45,7 @@ In your BSIS Git repository folder, run the following command:
 git config commit.template .git.template
 ```
 
-This will set the git commit template for the local git repository only. If you'd like to set the template for all your Git 
-repositories, then run the following command:
+This will set the git commit template for the local git repository only. If you'd like to set the template for all your Git repositories, then run the following command:
 
 ```
 git config --global commit.template .git.template
