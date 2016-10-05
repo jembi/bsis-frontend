@@ -19,7 +19,7 @@ angular.module('bsis').controller('DataExportCtrl', function($scope, $log, Modal
 
     }, function(err) {
       $log.error(err);
-      if (err && err.userMessage) {
+      if (err.userMessage) {
         $scope.error = {
           message: err.userMessage
         };
