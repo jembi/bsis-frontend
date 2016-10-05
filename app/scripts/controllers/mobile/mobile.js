@@ -117,10 +117,6 @@ angular.module('bsis')
       }
     };
 
-    function getISOString(maybeDate) {
-      return angular.isDate(maybeDate) ? maybeDate.toISOString() : maybeDate;
-    }
-
     $scope.onSearch = function(form) {
 
       if (form && form.$invalid) {
@@ -131,7 +127,7 @@ angular.module('bsis')
 
       var search = {
         venueId: $scope.currentSearch.venue,
-        clinicDate: getISOString($scope.currentSearch.clinicDate)
+        clinicDate: $filter('isoString')($scope.currentSearch.clinicDate)
       };
 
       $location.search(angular.extend({search: true}, search));

@@ -1,0 +1,60 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/mobile/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
+    <h3 class="page-header">Mobile Clinic Export</h3>
+
+    <form name="mobileClinicExportForm" class="form-horizontal" ng-submit="exportMobileClinics()" novalidate>
+
+        <div ng-show="error.message">
+            <uib-alert type="danger" close="error.message = null">{{error.message}}</uib-alert>
+        </div>
+
+        <div class="clearfix form-group">
+            <label class="col-sm-2 control-label">Venue:</label>
+            <div class="form-inline col-sm-10">
+                <ui-select multiple ng-model="search.venues" style="width:500px;min-height:34px;" ng-if="venues.length > 0">
+                    <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
+                    <ui-select-choices repeat="venue.id as venue in venues | filter:$select.search">
+                        {{venue.name}}
+                    </ui-select-choices>
+                </ui-select>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-checked="search.venues.length === 0" ng-click="clearVenues()"> All Venues
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix form-group">
+            <label class="col-sm-2 control-label">Clinic Date:</label>
+            <div class="form-inline col-sm-10">
+                <dateselect name="clinicDate" ng-model="search.clinicDate" format="dateFormat" ng-required="true"></dateselect>
+                    <ng-messages for="mobileClinicExportForm.clinicDate.$error" role="alert" ng-show="mobileClinicExportForm.$submitted">
+                        <ng-messages-include src="messages.html"></ng-messages-include>
+                    </ng-messages>
+            </div>
+        </div>
+
+        <p>This export may take some time if run for all venues and can affect the performance of the system. It is recommended 
+        that this export is only run after standard operating hours, to minimise impact on other activities.</p>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2">
+            <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}}</button>
+            <button class="btn btn-primary" type="reset" ng-click="clear()">Clear</button>
+          </div>
+        </div>
+    </form>
+
+    <div class="col-sm-12">
+        <div class="panel panel-default" ng-if="submitted">
+            <div class="panel-body">
+                <p>
+                    <em>{{gridOptions.data.length}} donor(s) found</em> | <em> Data export: </em>
+                    <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
+                </p>
+                <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
+            </div>
+        </div>
+    </div>
+</div>
