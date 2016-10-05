@@ -74,6 +74,7 @@ angular.module('bsis')
 
       var previousVenue = '';
       var rowsForVenue = [];
+      var summaryRows = initRowsForVenue('All Processing Sites');
       mergedData = [];
 
       angular.forEach(dataValues, function(newRow) {
@@ -95,7 +96,7 @@ angular.module('bsis')
           rowsForVenue = initRowsForVenue(previousVenue);
         }
 
-        // Populate component type and total rows
+        // Populate component type and total rows for each venue and for summary
         angular.forEach(componentTypes, function(ct, index) {
           if (componentType === ct.componentTypeName) {
             // Populate component type rows
@@ -104,12 +105,21 @@ angular.module('bsis')
             // Populate total row
             rowsForVenue[$scope.componentTypesNumber + 1][bloodType] += newRow.value;
             rowsForVenue[$scope.componentTypesNumber + 1]['total'] += newRow.value;
+            // Populate component type summary rows
+            summaryRows[index][bloodType] += newRow.value;
+            summaryRows[index]['total'] += newRow.value;
+            // Populate total summary row
+            summaryRows[$scope.componentTypesNumber + 1][bloodType] += newRow.value;
+            summaryRows[$scope.componentTypesNumber + 1]['total'] += newRow.value;
           }
         });
       });
 
       // Run one last time for the last venue
       pushRowsToGrid(rowsForVenue);
+
+      // Add summary
+      pushRowsToGrid(summaryRows);
 
       $scope.gridOptions.data = mergedData;
     }
@@ -212,7 +222,7 @@ angular.module('bsis')
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.gridOptions.data.length / 3, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.gridOptions.data.length / ($scope.componentTypesNumber + 1) - 1, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {
