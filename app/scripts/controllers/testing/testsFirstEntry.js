@@ -3,8 +3,7 @@
 angular.module('bsis')
 
   .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams) {
-    var data = [{}];
-    $scope.data = data;
+    $scope.data = [{}];
 
     $scope.go = function(path) {
       $location.path(path + '/' + $routeParams.id);
@@ -51,7 +50,6 @@ angular.module('bsis')
       $scope.allTestOutcomes = {};
       var bloodTestType = $routeParams.bloodTestType;
       TestingService.getTestOutcomesByBatchIdAndBloodTestType({testBatch: $routeParams.id, bloodTestType: bloodTestType}, function(response) {
-        data = response.testResults;
         $scope.data = response.testResults;
         $scope.testBatchCreatedDate = response.testBatchCreatedDate;
         $scope.numberOfDonations = response.numberOfDonations;
@@ -65,12 +63,12 @@ angular.module('bsis')
           } else if (bloodTestType === 'CONFIRMATORY_TTI') {
             pendingTests = donationResults.pendingConfirmatoryTTITestsIds;
           }
+          if (pendingTests.length !== 0) {
+            donationResults.editableRow = true;
+          }
           angular.forEach(donationResults.recentTestResults, function(test) {
-            if (pendingTests.length === 0) {
-              $scope.allTestOutcomes[din].testResults[test.bloodTest.id] = test.result;
-            } else {
-              donationResults.editableRow = true;
-            }
+            $scope.allTestOutcomes[din].testResults[test.bloodTest.id] = test.result;
+            donationResults.editableRow = true;
           });
         });
 
@@ -114,9 +112,9 @@ angular.module('bsis')
       {
         defaultSort: 'asc',
         counts: [], // hide page counts control
-        total: data.length, // length of data
+        total: $scope.data.length, // length of data
         getData: function($defer, params) {
-          var orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
+          var orderedData = params.sorting() ? $filter('orderBy')($scope.data, params.orderBy()) : $scope.data;
           params.total(orderedData.length); // set total for pagination
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
