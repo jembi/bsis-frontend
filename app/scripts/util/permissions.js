@@ -102,7 +102,6 @@ angular.module('bsis')
     REQUESTS_REPORTING: 'Reporting - Requests',
     TTI_REPORTING: 'Reporting - TTI Testing',
     COMPONENTS_ISSUED_REPORTING: 'Reporting - Components',
-    COMPONENTS_DISCARDED_REPORTING: 'Reporting - Discards',
     DONORS_REPORTING: 'Reporting - Donors',
 
     // Admin and Super-User Permissions
