@@ -30,7 +30,7 @@
                           ng-click="testOutcomesTableParams.sorting('donation.donationIdentificationNumber', testOutcomesTableParams.isSortBy('donation.donationIdentificationNumber', 'asc') ? 'desc' : 'asc')">
                           <div>DIN <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
                       </th>
-                      <th class="text-center sortable"
+                      <th class="text-center sortable" style="width:10%;"
                           ng-class="{
                             'sort-asc': testOutcomesTableParams.isSortBy('donation.donationDate', 'asc'),
                             'sort-desc': testOutcomesTableParams.isSortBy('donation.donationDate', 'desc')
@@ -38,7 +38,7 @@
                           ng-click="testOutcomesTableParams.sorting('donation.donationDate', testOutcomesTableParams.isSortBy('donation.donationDate', 'asc') ? 'desc' : 'asc')">
                           <div>Donation Date <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
                       </th>
-                      <th class="text-center sortable" style="width:25%;"
+                      <th class="text-center sortable" style="width:12%;" ng-show="showTTIStatus"
                           ng-class="{
                             'sort-asc': testOutcomesTableParams.isSortBy('ttistatus', 'asc'),
                             'sort-desc': testOutcomesTableParams.isSortBy('ttistatus', 'desc')
@@ -64,7 +64,7 @@
                           <td class="text-center">
                               {{sample.donation.donationDate | bsisDate}}
                           </td>
-                          <td class="text-center">
+                          <td class="text-center" ng-show="showTTIStatus">
                               {{sample.ttistatus}}
                           </td>
                           <td align="center" ng-repeat="test in testNames">

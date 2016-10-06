@@ -12,29 +12,38 @@ angular.module('bsis')
 
     // This test names will be the column names. They are specific to each blood test type.
     var getTestNames = function() {
-      var bloodTestType = $routeParams.bloodTestType;
-      if (bloodTestType === 'BASIC_TTI') {
+      $scope.bloodTestType = $routeParams.bloodTestType;
+      if ($scope.bloodTestType === 'BASIC_TTI') {
+        $scope.showTTIStatus = true;
         TestingService.getTTITestingFormFields(function(response) {
           if (response !== false) {
-            $scope.testNames = response.basicTTITests;
+            $scope.testNames = response.basicTTITestNames;
           }
         });
-      } else if (bloodTestType === 'BASIC_BLOODTYPING') {
+      } else if ($scope.bloodTestType === 'BASIC_BLOODTYPING') {
         TestingService.getBloodGroupTestingFormFields(function(response) {
           if (response !== false) {
             $scope.testNames = response.basicBloodTypingTests;
           }
         });
-      } else if (bloodTestType === 'REPEAT_BLOODTYPING') {
+      } else if ($scope.bloodTestType === 'REPEAT_BLOODTYPING') {
         TestingService.getBloodGroupTestingFormFields(function(response) {
           if (response !== false) {
             $scope.testNames = response.repeatBloodTypingTests;
           }
         });
-      } else if (bloodTestType === 'CONFIRMATORY_TTI') {
+      } else if ($scope.bloodTestType === 'REPEAT_TTI') {
+        $scope.showTTIStatus = false;
         TestingService.getTTITestingFormFields(function(response) {
           if (response !== false) {
-            $scope.testNames = response.pendingTTITests;
+            $scope.testNames = response.repeatTTITestNames;
+          }
+        });
+      } else if ($scope.bloodTestType === 'CONFIRMATORY_TTI') {
+        $scope.showTTIStatus = false;
+        TestingService.getTTITestingFormFields(function(response) {
+          if (response !== false) {
+            $scope.testNames = response.confirmatoryTTITestNames;
           }
         });
       }
