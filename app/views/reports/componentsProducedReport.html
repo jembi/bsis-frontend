@@ -9,9 +9,13 @@
       <label class="col-sm-2 control-label">Processing site:</label>
       <div class="form-inline col-sm-10">
         <div>
-          <select name="processingSite" class="form-control" ng-model="search.processingSite.id"  ng-options="processingSite.id as processingSite.name for processingSite in processingSites">
+          <select name="processingSite" class="form-control" ng-model="search.processingSiteId" ng-change="updateAllSites()" ng-options="processingSite.id as processingSite.name for processingSite in processingSites">
             <option value="" disabled>Select:</option>
           </select>
+          <label>
+            <input type="checkbox" name="allSites" ng-model="search.allSites" ng-click="clearProcessingSiteId()" />
+            All
+          </label>
           <div>
             <small class="error" ng-show="(searchForm.processingSite.$invalid && searchForm.$submitted)">
               Select a processing site

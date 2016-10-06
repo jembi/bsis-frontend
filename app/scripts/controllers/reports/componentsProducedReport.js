@@ -8,7 +8,9 @@ angular.module('bsis')
     var mergedData = [];
     var master = {
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
-      endDate: moment().endOf('day').toDate()
+      endDate: moment().endOf('day').toDate(),
+      allSites: true,
+      processingSiteId: null
     };
     var componentTypes = [];
     $scope.search = angular.copy(master);
@@ -21,6 +23,18 @@ angular.module('bsis')
       form.$setUntouched();
       $scope.gridOptions.data = [];
       $scope.submitted = false;
+    };
+
+    $scope.clearProcessingSiteId = function() {
+      $scope.search.processingSiteId = null;
+    };
+
+    $scope.updateAllSites = function() {
+      if ($scope.search.processingSiteId) {
+        $scope.search.allSites = false;
+      } else {
+        $scope.search.allSites = true;
+      }
     };
 
     function initRowsForVenue(venue) {
