@@ -229,9 +229,11 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        return ReportsLayoutService.generatePdfPageHeader('Components Produced Summary Report',
+        var processingSitesNumberLine = 'Number of processing sites: ' + ($scope.gridOptions.data.length / ($scope.componentTypesNumber + 1) - 1);
+        return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
+          'Components Produced Summary Report',
           ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
-          $scope.gridOptions.exporterPdfOrientation);
+          processingSitesNumberLine);
       },
 
       // PDF footer
