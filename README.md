@@ -26,6 +26,31 @@ To start up a development instance of the webapp, run `grunt serve` (or `npm sta
 
 The code was scaffolded using [angular-seed](https://github.com/angular/angular-seed), as well as [generator angular](https://github.com/yeoman/generator-angular) to add grunt support.
 
+### Coding Conventions
+
+We use [ESLint](http://eslint.org/) to check that our code adheres to Javascript best practises and coding style guidelines. Please configure lint to run before you commit. To do that, edit the following file in your local bsis-frontend Git respository: `.git/hooks/pre-commit`
+
+```
+#!/bin/bash
+npm run lint
+```
+
+### Git Commit Messages
+
+Use the supplied Git commit message template to ensure that commit messages conform to the project standards. The first line of the commit message should contain a JIRA ticket reference and a short description of the commit (50 characters max). The following lines (72 characters max) should describe why the change is being made, what the problem was, and may contain external references if necessary.
+
+In your BSIS Git repository folder, run the following command:
+
+```
+git config commit.template .git.template
+```
+
+This will set the git commit template for the local git repository only. If you'd like to set the template for all your Git repositories, then run the following command:
+
+```
+git config --global commit.template .git.template
+```
+
 ## Production Guide
 
 To make use of the application in production, run `grunt build`, which compiles the code into the `dist` folder. The contents of this folder can be copied to the default root folder (e.g. `/var/www/html`) of a web server, such as Apache, and run in production. 
