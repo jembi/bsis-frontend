@@ -144,7 +144,7 @@ angular.module('bsis')
           if (response !== false) {
             closedTestBatchData = response.testBatches;
             $scope.closedTestBatchData = closedTestBatchData;
-
+            $scope.closedTestBatchesTableParams.$params.page = 1;
             $scope.closedTestBatches = closedTestBatchData.length > 0;
           }
         }, function() {
