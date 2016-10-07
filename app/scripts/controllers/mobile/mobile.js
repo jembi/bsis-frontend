@@ -135,6 +135,7 @@ angular.module('bsis')
       $scope.searching = true;
       MobileService.mobileClinicLookUp(search, function(res) {
         $scope.gridOptions.data = res.donors;
+        $scope.gridOptions.paginationCurrentPage = 1;
         $scope.searching = false;
       }, function(err) {
         $scope.error.message = err.data.userMessage;

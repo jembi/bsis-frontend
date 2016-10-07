@@ -52,8 +52,6 @@ angular.module('bsis')
       TestingService.getTestOutcomesByBatchIdAndBloodTestType({testBatch: $routeParams.id, bloodTestType: bloodTestType}, function(response) {
         $scope.data = response.testResults;
         $scope.testBatchCreatedDate = response.testBatchCreatedDate;
-        $scope.numberOfDonations = response.numberOfDonations;
-
         angular.forEach($scope.data, function(donationResults) {
           var din = donationResults.donation.donationIdentificationNumber;
           var pendingTests = {};
@@ -76,6 +74,9 @@ angular.module('bsis')
         $scope.data = $scope.data.filter(function(row) {
           return (row.editableRow === true);
         });
+
+        //record number of donations after filtering has been done
+        $scope.numberOfDonations = $scope.data.length;
       }, function(err) {
         $log.error(err);
       });

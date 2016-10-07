@@ -106,6 +106,7 @@ angular.module('bsis')
 
       $scope.searching = true;
       MobileService.mobileClinicExport(search, function(res) {
+        $scope.gridOptions.paginationCurrentPage = 1;
         $scope.gridOptions.data = res.donors;
         $scope.searching = false;
         $scope.submitted = true;

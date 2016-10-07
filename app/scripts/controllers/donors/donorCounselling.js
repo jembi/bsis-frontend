@@ -77,6 +77,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       $scope.donations = response;
       $scope.gridOptions.data = response;
       $scope.searching = false;
+      $scope.gridOptions.paginationCurrentPage = 1;
     }, function(err) {
       $log.error(err);
       $scope.searching = false;

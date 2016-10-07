@@ -91,8 +91,6 @@ angular.module('bsis')
         $scope.pendingRepeatBloodTypingTests = response.pendingRepeatBloodTypingTests;
         $scope.pendingRepeatTTITests = response.pendingRepeatTTITests;
         $scope.pendingConfirmatoryTTITests = response.pendingConfirmatoryTTITests;
-        $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
-        $scope.basicTTIComplete = response.basicTTIComplete;
         $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
         $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
         $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;

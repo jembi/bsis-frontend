@@ -65,6 +65,7 @@ angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location,
     ReturnFormsService.findReturnForms($scope.searchParams, function(res) {
       $scope.gridOptions.data = res.returnForms;
       $scope.searching = false;
+      $scope.gridOptions.paginationCurrentPage = 1;
     }, function(err) {
       $scope.searching = false;
       $log.error(err);
