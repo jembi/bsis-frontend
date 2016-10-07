@@ -132,6 +132,7 @@ angular.module('bsis')
     VIEW_DONOR_INFORMATION: 'View Donor Information',
     VIEW_DONATION_INFORMATION: 'View Donation Information',
     VIEW_MOBILE_CLINIC_INFORMATION: 'View Mobile Clinic Information',
+    VIEW_MOBILE_CLINIC_EXPORT: 'View Mobile Clinic Export',
     VIEW_COMPONENT_INFORMATION: 'View Component Information',
     VIEW_TESTING_INFORMATION: 'View Testing Information',
     VIEW_BLOOD_BANK_INFORMATION: 'View Blood Bank Information',
@@ -152,16 +153,10 @@ angular.module('bsis')
     VOID_POST_DONATION_COUNSELLING: 'Void Post Donation Counselling',
 
     // Adverse Events Permissions
-    ADD_ADVERSE_EVENT_TYPES: 'Add Adverse Event Types',
-    EDIT_ADVERSE_EVENT_TYPES: 'Edit Adverse Event Types',
-    VIEW_ADVERSE_EVENT_TYPES: 'View Adverse Event Types',
-    VOID_ADVERSE_EVENT_TYPES: 'Void Adverse Event Types',
+    MANAGE_ADVERSE_EVENTS: 'Manage Adverse Events',
 
     // Division Permissions
-    ADD_DIVISIONS: 'Add Divisions',
-    EDIT_DIVISIONS: 'Edit Divisions',
-    VIEW_DIVISIONS: 'View Divisions',
-    VOID_DIVISIONS: 'Void Divisions',
+    MANAGE_DIVISIONS: 'Manage Divisions',
 
     // Data Export
     DATA_EXPORT: 'Data Export'

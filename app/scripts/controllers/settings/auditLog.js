@@ -95,9 +95,8 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, 
       var endDate = $scope.dateRange.endDate;
 
       var query = {
-        startDate: $scope.dateRange.startDate.toISOString(),
-        // Check whether endDate is a date - sometimes it's a string
-        endDate: angular.isDate(endDate) ? endDate.toISOString() : endDate
+        startDate: $filter('isoString')($scope.dateRange.startDate),
+        endDate: $filter('isoString')(endDate)
       };
 
       var filter = angular.copy(params.filter() || {});
