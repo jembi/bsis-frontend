@@ -105,6 +105,7 @@ angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $
       $scope.gridOptions.data = response.locations;
       $scope.searched = true;
       $scope.searching = false;
+      $scope.gridOptions.paginationCurrentPage = 1;
     }, function(error) {
       $log.error(error);
       $scope.searching = false;
