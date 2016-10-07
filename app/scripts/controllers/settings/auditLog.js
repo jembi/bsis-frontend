@@ -55,8 +55,8 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, 
 
   var unwatch = $scope.$watch('dateRange', function() {
     if ($scope.dateRange.startDate && $scope.dateRange.endDate) {
-      $scope.tableParams.reload();
       $scope.tableParams.$params.page = 1;
+      $scope.tableParams.reload();
     }
   }, true);
 
