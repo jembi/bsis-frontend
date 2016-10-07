@@ -142,8 +142,8 @@ angular.module('bsis')
       $scope.searching = true;
       MobileService.mobileClinicLookUp(search, function(res) {
         $scope.gridOptions.data = res.donors;
-        $scope.numberEligibleDonor = $scope.calculateNumberEligibleDonors($scope.gridOptions.data);
-        $scope.percentageEligibleDonor = $scope.calculatePercentageEligibleDonors($scope.gridOptions.data);
+        $scope.numberEligibleDonor = calculateNumberEligibleDonors($scope.gridOptions.data);
+        $scope.percentageEligibleDonor = calculatePercentageEligibleDonors($scope.numberEligibleDonor, $scope.gridOptions.data.length);
         $scope.searching = false;
       }, function(err) {
         $scope.error.message = err.data.userMessage;
@@ -163,11 +163,11 @@ angular.module('bsis')
       $scope.onSearch();
     }
 
-    $scope.calculateNumberEligibleDonors = function(data) {
+    var calculateNumberEligibleDonors = function(data) {
       var eligibleDonorCount = 0;
 
-      data.forEach(function(item) {
-        if (item.eligibility) {
+      data.forEach(function(donor) {
+        if (donor.eligibility) {
           eligibleDonorCount++;
         }
       });
@@ -175,9 +175,9 @@ angular.module('bsis')
       return eligibleDonorCount;
     };
 
-    $scope.calculatePercentageEligibleDonors = function(data) {
-      if (data.length > 0) {
-        return Math.round($scope.calculateNumberEligibleDonors(data) / data.length * 100);
+    var calculatePercentageEligibleDonors = function(numberEligibleDonors, totalNumberDonors) {
+      if (totalNumberDonors > 0) {
+        return Math.round(numberEligibleDonors / totalNumberDonors * 100);
       } else {
         return 0;
       }
