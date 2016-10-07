@@ -84,6 +84,13 @@ angular.module('bsis')
           columns.push({text: 'Clinic Date: ' + clinicDate, width: 'auto'});
         }
 
+        // Include Number and Percentage Eligible Donors
+        columns.push({text: 'Eligible Donors: ' +
+           $scope.numberEligibleDonor + ' out of ' +
+           $scope.gridOptions.data.length +
+            ' (' + $scope.percentageEligibleDonor + '%)',
+          width: 'auto'});
+
         return [
           {
             text: 'Mobile Clinic Look Up',
@@ -135,6 +142,8 @@ angular.module('bsis')
       $scope.searching = true;
       MobileService.mobileClinicLookUp(search, function(res) {
         $scope.gridOptions.data = res.donors;
+        $scope.numberEligibleDonor = $scope.calculateNumberEligibleDonors($scope.gridOptions.data);
+        $scope.percentageEligibleDonor = $scope.calculatePercentageEligibleDonors($scope.gridOptions.data);
         $scope.searching = false;
       }, function(err) {
         $scope.error.message = err.data.userMessage;
@@ -153,6 +162,26 @@ angular.module('bsis')
     if ($routeParams.search) {
       $scope.onSearch();
     }
+
+    $scope.calculateNumberEligibleDonors = function(data) {
+      var eligibleDonorCount = 0;
+
+      data.forEach(function(item) {
+        if (item.eligibility) {
+          eligibleDonorCount++;
+        }
+      });
+
+      return eligibleDonorCount;
+    };
+
+    $scope.calculatePercentageEligibleDonors = function(data) {
+      if (data.length > 0) {
+        return Math.round($scope.calculateNumberEligibleDonors(data) / data.length * 100);
+      } else {
+        return 0;
+      }
+    };
 
     $scope.export = function(format) {
       if (format === 'pdf') {
