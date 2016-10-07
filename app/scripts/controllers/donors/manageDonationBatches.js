@@ -80,7 +80,7 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
       DonorService.getRecentDonationBatches(query, function(response) {
         $scope.searching = false;
         if (response !== false) {
-          $scope.donationBatchTableParams.$params.page = 1;
+          $scope.recentDonationBatchesTableParams.$params.page = 1;
           recentDonationBatchData = response.donationBatches;
           $scope.recentDonationBatchData = recentDonationBatchData;
           $scope.recentDonationBatches = recentDonationBatchData.length > 0;
