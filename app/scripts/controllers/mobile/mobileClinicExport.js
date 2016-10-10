@@ -11,8 +11,7 @@ angular.module('bsis')
 
     var master = {
       venues: [],
-      clinicDate: null,
-      allVenues: true
+      clinicDate: null
     };
 
     var columnDefs = [
@@ -129,11 +128,6 @@ angular.module('bsis')
 
     $scope.clearVenues = function() {
       $scope.search.venues = [];
-      $scope.search.allVenues = !$scope.search.allVenues;
-    };
-
-    $scope.setAllVenues = function() {
-      $scope.search.allVenues = $scope.search.venues.length === 0;
     };
 
     $scope.export = function(format) {
@@ -159,8 +153,6 @@ angular.module('bsis')
         } else {
           $scope.search.venues = master.venues;
         }
-
-        $scope.setAllVenues();
 
       }, function(err) {
         $log.error(err);

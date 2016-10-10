@@ -11,7 +11,7 @@
         <div class="clearfix form-group">
             <label class="col-sm-2 control-label">Venue:</label>
             <div class="form-inline col-sm-10">
-                <ui-select name="venues" multiple ng-model="search.venues" style="width:500px;min-height:34px;" ng-if="venues.length > 0" ng-change="setAllVenues();" ui-select-required="search.allVenues === false">
+                <ui-select multiple ng-model="search.venues" style="width:500px;min-height:34px;" ng-if="venues.length > 0">
                     <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
                     <ui-select-choices repeat="venue.id as venue in venues | filter:$select.search">
                         {{venue.name}}
@@ -22,9 +22,6 @@
                         <input type="checkbox" ng-checked="search.venues.length === 0" ng-click="clearVenues()"> All Venues
                     </label>
                 </div>
-                <ng-messages for="mobileClinicExportForm.venues.$error" role="alert" ng-show="mobileClinicExportForm.$submitted">
-                    <ng-messages-include src="messages.html"></ng-messages-include>
-                </ng-messages>
             </div>
         </div>
 
