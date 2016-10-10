@@ -13,6 +13,8 @@ angular.module('bsis')
       processingSiteId: null
     };
     var discardReasons = [];
+    var summaryRows = [];
+    var summaryComponentTypeMap = {};
     $scope.search = angular.copy(master);
 
     // Report methods
@@ -39,6 +41,7 @@ angular.module('bsis')
 
     function initRow(componentType) {
       var row = {};
+      row.venue = '';
       row.componentType = componentType;
       angular.forEach(discardReasons, function(discardReason) {
         row[discardReason.reason] = 0;
@@ -58,20 +61,62 @@ angular.module('bsis')
       });
     }
 
-    function mergeData(dataValues) {
+    function populateRows(rows, newRow, componentTypeIndex) {
+      var cohorts = newRow.cohorts;
+      var componentType = cohorts[0].option;
+      var discardReason = cohorts[1].option;
 
+      if (!rows[componentTypeIndex]) {
+        // Initialize component type row for new venue
+        rows[componentTypeIndex] = initRow(componentType);
+      }
+
+      // Show processing site name on frist component type row only
+      if (componentTypeIndex === 1) {
+        rows[componentTypeIndex].venue = newRow.venue.name;
+      }
+
+      // Populate component type row
+      rows[componentTypeIndex][discardReason] = newRow.value;
+      rows[componentTypeIndex].total += newRow.value;
+      // Populate total row
+      rows[0][discardReason] += newRow.value;
+      rows[0].total += newRow.value;
+
+      return rows;
+    }
+
+    function convertSummary(rows) {
+      // Move Total row to end for summary
+      var totalRow = angular.copy(summaryRows[0]);
+      summaryRows.splice(0, 1);
+      summaryRows.push(totalRow);
+
+      // Convert row objects to indexed arrays
+      var newSummary = [];
+      angular.forEach(rows, function(obj) {
+        var result = [];
+        for (var key in obj) {
+          result.push('' + obj[key]);
+        }
+        newSummary.push(result);
+      });
+      return newSummary;
+    }
+
+    function mergeData(dataValues) {
       var previousVenue = '';
       var rowsForVenue = [];
       var componentTypeIndex = 0;
+      var componentTypeSummaryIndex = 0;
+
       mergedData = [];
       $scope.venuesNumber = 0;
 
-      angular.forEach(dataValues, function(newRow) {
-        var cohorts = newRow.cohorts;
-        var componentType = cohorts[0].option;
-        var discardReason = cohorts[1].option;
-        newRow.cohorts = componentType;
+      // Initialize total row for summary
+      summaryRows[0] = initRow('Total');
 
+      angular.forEach(dataValues, function(newRow) {
         // New venue
         if (newRow.venue.name !== previousVenue) {
           $scope.venuesNumber += 1;
@@ -88,22 +133,18 @@ angular.module('bsis')
         }
 
         componentTypeIndex += 1;
-        if (!rowsForVenue[componentTypeIndex]) {
-          // Initialize component type row for new venue
-          rowsForVenue[componentTypeIndex] = initRow(componentType);
+
+        // Generate summary index for each component type
+        var componentType = newRow.cohorts[0].option;
+        if (!summaryComponentTypeMap[componentType]) {
+          componentTypeSummaryIndex += 1;
+          summaryComponentTypeMap[componentType] = componentTypeSummaryIndex;
         }
 
-        // Show processing site name on frist component type row only
-        if (componentTypeIndex === 1) {
-          rowsForVenue[componentTypeIndex].venue = previousVenue;
-        }
-
-        // Populate component type row
-        rowsForVenue[componentTypeIndex][discardReason] = newRow.value;
-        rowsForVenue[componentTypeIndex].total += newRow.value;
-        // Populate total row
-        rowsForVenue[0][discardReason] += newRow.value;
-        rowsForVenue[0].total += newRow.value;
+        populateRows(rowsForVenue, newRow, componentTypeIndex);
+        // Update venue for summary
+        newRow.venue.name = 'All processing sites';
+        populateRows(summaryRows, newRow, componentTypeSummaryIndex);
       });
 
       // Run one last time for the last venue
@@ -270,8 +311,9 @@ angular.module('bsis')
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
+        docDefinition = ReportsLayoutService.addSummaryContent(convertSummary(summaryRows), docDefinition);
         docDefinition = ReportsLayoutService.highlightTotalRows('Total', 1, docDefinition);
-        docDefinition = ReportsLayoutService.paginatePdf(19, docDefinition);
+        docDefinition = ReportsLayoutService.paginatePdf(26, docDefinition);
         return docDefinition;
       },
 
