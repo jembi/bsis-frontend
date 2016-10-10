@@ -22,6 +22,8 @@ angular.module('bsis')
       getBloodUnitsIssuedReportForm: Api.BloodUnitsIssuedReport.getForm,
       generateBloodUnitsIssuedReport: Api.BloodUnitsIssuedReport.generate,
       generateDonorsDeferredReport: Api.DonorsDeferredReport.generate,
-      getDonorsDeferredReportForm: Api.DonorsDeferredReport.getForm
+      getDonorsDeferredReportForm: Api.DonorsDeferredReport.getForm,
+      generateUnitsDiscardedReport: Api.UnitsDiscardedReport.generate,
+      getUnitsDiscardedReportForm: Api.UnitsDiscardedReport.getForm
     };
   });
