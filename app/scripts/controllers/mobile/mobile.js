@@ -164,6 +164,7 @@ angular.module('bsis')
         $scope.gridOptions.data = res.donors;
         $scope.numberEligibleDonor = calculateNumberEligibleDonors($scope.gridOptions.data);
         $scope.percentageEligibleDonor = calculatePercentageEligibleDonors($scope.numberEligibleDonor, $scope.gridOptions.data.length);
+        $scope.gridOptions.paginationCurrentPage = 1;
         $scope.searching = false;
       }, function(err) {
         $scope.error.message = err.data.userMessage;

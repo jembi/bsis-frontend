@@ -190,6 +190,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
 
     $scope.searching = true;
     DonorService.findDonorListDonors(search, function(res) {
+      $scope.gridOptions.paginationCurrentPage = 1;
       $scope.gridOptions.data = res;
       $scope.searching = false;
     }, function(err) {

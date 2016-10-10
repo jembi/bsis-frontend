@@ -197,6 +197,7 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
 
       $scope.gridOptions.data = rows;
       $scope.searching = false;
+      $scope.gridOptions.paginationCurrentPage = 1;
     }, function(err) {
       $log.error(err);
       $scope.searching = false;

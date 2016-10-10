@@ -66,6 +66,7 @@ angular.module('bsis')
           $scope.searchResults = true;
           $scope.componentsSearchCount = $scope.data.length;
           $scope.searching = false;
+          $scope.componentsSummaryTableParams.$params.page = 1;
         } else {
           $scope.searchResults = false;
           $scope.searching = false;
