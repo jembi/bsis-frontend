@@ -50,7 +50,7 @@
     <div class="panel panel-default" ng-if="currentSearch && !searching">
         <div class="panel-body">
             <p>
-                <em>{{gridOptions.data.length}} donor(s) found</em> | <em> Data export: </em>
+                <em>{{gridOptions.data.length}} donor(s) found</em> | Eligible Donors: {{numberEligibleDonor}} out of {{gridOptions.data.length}} ({{percentageEligibleDonor}}%) | <em> Data export: </em>
                 <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')">PDF</button>
             </p>
             <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
