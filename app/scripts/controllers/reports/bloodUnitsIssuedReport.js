@@ -151,9 +151,9 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        return ReportsLayoutService.generatePdfPageHeader('Blood Units Issued Summary Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
-          $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
+          'Blood Units Issued Summary Report',
+          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
       },
 
       // PDF footer
