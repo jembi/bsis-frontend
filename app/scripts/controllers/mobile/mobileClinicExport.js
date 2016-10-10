@@ -11,6 +11,7 @@ angular.module('bsis')
 
     var master = {
       venues: [],
+      allVenues: true,
       clinicDate: null
     };
 
@@ -127,9 +128,18 @@ angular.module('bsis')
       $scope.mobileClinicExportForm.$setPristine();
     };
 
+    $scope.toggleAllVenues = function() {
+      if ($scope.search.venues && $scope.search.venues.length !== 0) {
+        $scope.search.allVenues = false;
+      } else {
+        $scope.search.allVenues = true;
+      }
+    };
+
     $scope.clearVenues = function() {
       $scope.search.venues = [];
     };
+
 
     $scope.export = function(format) {
       if (format === 'csv') {
@@ -154,6 +164,8 @@ angular.module('bsis')
         } else {
           $scope.search.venues = master.venues;
         }
+
+        $scope.toggleAllVenues();
 
       }, function(err) {
         $log.error(err);
