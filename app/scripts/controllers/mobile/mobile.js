@@ -124,6 +124,26 @@ angular.module('bsis')
       }
     };
 
+    var calculateNumberEligibleDonors = function(data) {
+      var eligibleDonorCount = 0;
+
+      data.forEach(function(donor) {
+        if (donor.eligibility) {
+          eligibleDonorCount++;
+        }
+      });
+
+      return eligibleDonorCount;
+    };
+
+    var calculatePercentageEligibleDonors = function(numberEligibleDonors, totalNumberDonors) {
+      if (totalNumberDonors > 0) {
+        return Math.round(numberEligibleDonors / totalNumberDonors * 100);
+      } else {
+        return 0;
+      }
+    };
+
     $scope.onSearch = function(form) {
 
       if (form && form.$invalid) {
@@ -162,26 +182,6 @@ angular.module('bsis')
     if ($routeParams.search) {
       $scope.onSearch();
     }
-
-    var calculateNumberEligibleDonors = function(data) {
-      var eligibleDonorCount = 0;
-
-      data.forEach(function(donor) {
-        if (donor.eligibility) {
-          eligibleDonorCount++;
-        }
-      });
-
-      return eligibleDonorCount;
-    };
-
-    var calculatePercentageEligibleDonors = function(numberEligibleDonors, totalNumberDonors) {
-      if (totalNumberDonors > 0) {
-        return Math.round(numberEligibleDonors / totalNumberDonors * 100);
-      } else {
-        return 0;
-      }
-    };
 
     $scope.export = function(format) {
       if (format === 'pdf') {
