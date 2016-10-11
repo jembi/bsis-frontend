@@ -10,7 +10,7 @@ angular.module('bsis')
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: moment().endOf('day').toDate(),
       allSites: true,
-      processingSiteId: null
+      processingSite: null
     };
     var discardReasons = [];
     var summaryRows = [];
@@ -27,12 +27,12 @@ angular.module('bsis')
       $scope.submitted = false;
     };
 
-    $scope.clearProcessingSiteId = function() {
-      $scope.search.processingSiteId = null;
+    $scope.clearProcessingSite = function() {
+      $scope.search.processingSite = null;
     };
 
     $scope.updateAllSites = function() {
-      if ($scope.search.processingSiteId) {
+      if ($scope.search.processingSite) {
         $scope.search.allSites = false;
       } else {
         $scope.search.allSites = true;
