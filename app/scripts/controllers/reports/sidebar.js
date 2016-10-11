@@ -27,6 +27,10 @@ angular.module('bsis')
       {
         path: '/unitsDiscardedReport',
         subpaths: []
+      },
+      {
+        path: '/componentsProducedReport',
+        subpaths: []
       }
     ];
 
