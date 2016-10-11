@@ -181,6 +181,7 @@ angular.module('bsis')
       $scope.submitted = true;
       $scope.searching = true;
       InventoriesService.search($scope.searchParams, function(res) {
+        $scope.gridOptions.paginationCurrentPage = 1;
         $scope.gridOptions.data = res.inventories.sort(initialSort);
         $scope.searching = false;
       }, function(err) {

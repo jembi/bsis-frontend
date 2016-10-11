@@ -100,6 +100,7 @@ angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, 
     OrderFormsService.findOrderForms($scope.searchParams, function(res) {
       $scope.gridOptions.data = res.orderForms;
       $scope.searching = false;
+      $scope.gridOptions.paginationCurrentPage = 1;
     }, function(err) {
       $scope.searching = false;
       $log.error(err);

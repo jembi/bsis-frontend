@@ -195,6 +195,7 @@ angular.module('bsis')
         $scope.searching = false;
         if (report.dataValues.length > 0) {
           mergeData(report.dataValues);
+          $scope.gridOptions.paginationCurrentPage = 1;
         }
         $scope.submitted = true;
       }, function(err) {

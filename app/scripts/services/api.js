@@ -359,6 +359,10 @@ angular.module('bsis')
           method: 'GET',
           url: url + '/mobileclinic/search'
         },
+        export: {
+          method: 'GET',
+          url: url + '/mobileclinic/export'
+        },
         getDonorOutcomesForm: {
           method: 'GET',
           url: url + '/mobileclinic/donoroutcomes/form'
