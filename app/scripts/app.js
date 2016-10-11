@@ -378,6 +378,13 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         enabled: UI.REPORTS_TAB_ENABLED,
         reloadOnSearch: false
       })
+      .when('/componentsProducedReport', {
+        templateUrl: 'views/reports/componentsProducedReport.html',
+        controller: 'ComponentsProducedReportCtrl',
+        permission: PERMISSIONS.COMPONENTS_REPORTING,
+        enabled: UI.REPORTS_TAB_ENABLED,
+        reloadOnSearch: false
+      })
 
       // MOBILE URLs
       .when('/mobile', {

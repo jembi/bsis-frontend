@@ -22,6 +22,8 @@
                 href="#/donorsDeferredReport">Donors Deferred Summary Report</a></li>
         <li ng-class="{current: currentPath === '/unitsDiscardedReport'}" has-permission="{{permissions.COMPONENTS_REPORTING}}"><a
                 href="#/unitsDiscardedReport">Discards Summary Report</a></li>
+        <li ng-class="{current: currentPath === '/componentsProducedReport'}" has-permission="{{permissions.COMPONENTS_REPORTING}}"><a
+                href="#/componentsProducedReport">Components Produced Report</a></li>
     </ul>
     <div ng-include="'views/sidebarFooter.html'"></div>
 </div>
