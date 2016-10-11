@@ -476,7 +476,7 @@ angular.module('bsis')
     $scope.editDonation = function(form) {
       DonationsService.getEditForm({id: $scope.donation.id}, function(res) {
         $scope.packTypes = res.packTypes;
-        $scope.adverseEventTypes = res.adverseEventTypes;
+        $scope.adverseEventTypes = [null].concat(res.adverseEventTypes);
         $scope.testBatchStatus = res.testBatchStatus;
         form.$show();
       }, function(err) {

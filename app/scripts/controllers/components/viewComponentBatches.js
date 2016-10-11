@@ -15,6 +15,7 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     $scope.submitted = true;
     ComponentBatchService.findComponentBatches($scope.period, function(response) {
       $scope.gridOptions.data = response.componentBatches;
+      $scope.gridOptions.paginationCurrentPage = 1;
       $scope.searching = false;
     }, function(err) {
       $scope.searching = false;

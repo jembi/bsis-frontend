@@ -131,6 +131,7 @@ angular.module('bsis')
     VIEW_DONOR_INFORMATION: 'View Donor Information',
     VIEW_DONATION_INFORMATION: 'View Donation Information',
     VIEW_MOBILE_CLINIC_INFORMATION: 'View Mobile Clinic Information',
+    VIEW_MOBILE_CLINIC_EXPORT: 'View Mobile Clinic Export',
     VIEW_COMPONENT_INFORMATION: 'View Component Information',
     VIEW_TESTING_INFORMATION: 'View Testing Information',
     VIEW_BLOOD_BANK_INFORMATION: 'View Blood Bank Information',

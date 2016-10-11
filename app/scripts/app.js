@@ -400,6 +400,13 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         enabled: UI.MOBILE_CLINIC_TAB_ENABLED,
         reloadOnSearch: false
       })
+      .when('/mobileClinicExport', {
+        templateUrl: 'views/mobile/mobileClinicExport.html',
+        controller: 'MobileClinicExportCtrl',
+        permission: PERMISSIONS.VIEW_MOBILE_CLINIC_EXPORT,
+        enabled: UI.MOBILE_CLINIC_TAB_ENABLED,
+        reloadOnSearch: false
+      })
 
       // SETTINGS URLs
       .when('/settings', {

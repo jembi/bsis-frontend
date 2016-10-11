@@ -88,15 +88,15 @@ angular.module('bsis')
     $scope.getCurrentTestBatchOverview = function() {
       TestingService.getTestBatchOverviewById({testBatch: $routeParams.id}, function(response) {
         $scope.testBatchOverview = response;
-        $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
-        $scope.pendingTTITests = response.pendingTTITests;
-        $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
-        $scope.basicTTIComplete = response.basicTTIComplete;
+        $scope.pendingRepeatBloodTypingTests = response.pendingRepeatBloodTypingTests;
+        $scope.pendingRepeatTTITests = response.pendingRepeatTTITests;
+        $scope.pendingConfirmatoryTTITests = response.pendingConfirmatoryTTITests;
         $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
         $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
         $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
-        $scope.reEntryRequiredPendingBloodTypingTests = response.reEntryRequiredPendingBloodTypingTests;
-        $scope.reEntryRequiredPendingTTITests = response.reEntryRequiredPendingTTITests;
+        $scope.reEntryRequiredRepeatBloodTypingTests = response.reEntryRequiredRepeatBloodTypingTests;
+        $scope.reEntryRequiredRepeatTTITests = response.reEntryRequiredRepeatTTITests;
+        $scope.reEntryRequiredConfirmatoryTTITests = response.reEntryRequiredConfirmatoryTTITests;
       }, function(err) {
         $log.error(err);
       });
@@ -328,6 +328,18 @@ angular.module('bsis')
       });
 
       angular.forEach(testBatchOutcomesReport.repeatTtiTestNames, function(testName) {
+        columnDefs.push(
+          {
+            name: testName,
+            displayName: testName,
+            field: 'testResults',
+            visible: false,
+            width: '80'
+          }
+        );
+      });
+
+      angular.forEach(testBatchOutcomesReport.confirmatoryTtiTestNames, function(testName) {
         columnDefs.push(
           {
             name: testName,
