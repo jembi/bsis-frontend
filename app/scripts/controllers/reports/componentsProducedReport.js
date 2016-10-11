@@ -10,7 +10,7 @@ angular.module('bsis')
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: moment().endOf('day').toDate(),
       allSites: true,
-      processingSiteId: null
+      processingSite: null
     };
     var componentTypes = [];
     $scope.search = angular.copy(master);
@@ -25,12 +25,12 @@ angular.module('bsis')
       $scope.submitted = false;
     };
 
-    $scope.clearProcessingSiteId = function() {
-      $scope.search.processingSiteId = null;
+    $scope.clearProcessingSite = function() {
+      $scope.search.processingSite = null;
     };
 
     $scope.updateAllSites = function() {
-      if ($scope.search.processingSiteId) {
+      if ($scope.search.processingSite) {
         $scope.search.allSites = false;
       } else {
         $scope.search.allSites = true;
@@ -138,57 +138,25 @@ angular.module('bsis')
       $scope.gridOptions.data = mergedData;
     }
 
-    function mockReport() {
-      var report = {'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'dataValues': [
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Platelets Concentrate - Apheresis', 'comparator':'EQUALS'}, {'category':'Blood Type', 'option':'A+', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Fresh Frozen Plasma - Apheresis', 'comparator':'EQUALS'}, {'category':'Blood Type', 'option':'A+', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - Paediatric - CPDA', 'comparator':'EQUALS'}, {'category':'Blood Type', 'option':'A+', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - Paediatric - CPDA', 'comparator':'EQUALS'}, {'category':'Blood Type', 'option':'A-', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Platelets Concentrate - Apheresis', 'comparator':'EQUALS'}, {'category':'Blood Type', 'option':'A+', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Fresh Frozen Plasma - Apheresis', 'comparator':'EQUALS'}, {'category':'Blood Type', 'option':'A+', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - Paediatric - CPDA', 'comparator':'EQUALS'}, {'category':'Blood Type', 'option':'A+', 'comparator':'EQUALS'}]}
-
-      ]};
-
-      return report;
-
-    }
-
     $scope.getReport = function(searchForm) {
-
       if (!searchForm.$valid) {
         return;
       }
-
-      var period = {};
-      if ($scope.search.startDate) {
-        var startDate = moment($scope.search.startDate).startOf('day').toDate();
-        period.startDate = startDate;
-      }
-      if ($scope.search.endDate) {
-        var endDate = moment($scope.search.endDate).endOf('day').toDate();
-        period.endDate = endDate;
-      }
       $scope.searching = true;
-      $scope.submitted = true;
-      var report = mockReport();
-      mergeData(report.dataValues);
-      $scope.searching = false;
-
+      ReportsService.generateComponentProductionReport($scope.search, function(report) {
+        $scope.searching = false;
+        if (report.dataValues.length > 0) {
+          mergeData(report.dataValues);
+          $scope.gridOptions.paginationCurrentPage = 1;
+        } else {
+          $scope.gridOptions.data = [];
+          $scope.venuesNumber = 0;
+        }
+        $scope.submitted = true;
+      }, function(err) {
+        $scope.searching = false;
+        $log.log(err);
+      });
     };
 
     // Grid ui variables and methods
@@ -255,9 +223,14 @@ angular.module('bsis')
     };
 
     function init() {
-      $scope.processingSites = [{'id':1, 'name':'Leribe'}, {'id':2, 'name':'Maseru'}];
-      componentTypes = [{'id':6, 'componentTypeName':'Whole Blood - CPDA', 'componentTypeCode':'1001', 'description':''}, {'id':7, 'componentTypeName':'Whole Blood Poor Platelets - CPDA', 'componentTypeCode':'1005', 'description':''}, {'id':8, 'componentTypeName':'Packed Red Cells - CPDA', 'componentTypeCode':'2001', 'description':''}, {'id':9, 'componentTypeName':'Packed Red Cells - SAGM', 'componentTypeCode':'2011', 'description':''}, {'id':10, 'componentTypeName':'Fresh Frozen Plasma - Whole Blood', 'componentTypeCode':'3001', 'description':''}, {'id':11, 'componentTypeName':'Frozen Plasma - Whole Blood', 'componentTypeCode':'3002', 'description':''}, {'id':12, 'componentTypeName':'Platelets Concentrate - Whole Blood', 'componentTypeCode':'4001', 'description':''}, {'id':13, 'componentTypeName':'Platelets Concentrate - Whole Blood - 24H', 'componentTypeCode':'4011', 'description':''}, {'id':14, 'componentTypeName':'Packed Red Cells - Paediatric - CPDA', 'componentTypeCode':'2101', 'description':''}, {'id':15, 'componentTypeName':'Fresh Frozen Plasma - Apheresis', 'componentTypeCode':'3011', 'description':''}, {'id':16, 'componentTypeName':'Platelets Concentrate - Apheresis', 'componentTypeCode':'4021', 'description':''}];
-      $scope.componentTypesNumber = componentTypes.length;
+      ReportsService.getComponentProductionReportForm(function(res) {
+        $scope.processingSites = res.processingSites;
+        $scope.componentTypes = res.componentTypes;
+        $scope.componentTypesNumber = componentTypes.length;
+      }, function(err) {
+        $log.error(err);
+      });
+
     }
 
     init();
