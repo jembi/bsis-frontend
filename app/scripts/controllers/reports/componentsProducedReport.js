@@ -75,7 +75,7 @@ angular.module('bsis')
       totalsRow['O-'] = 0;
       totalsRow.nullnull = 0;
       totalsRow.total = 0;
-      rowsForVenue[$scope.componentTypesNumber + 1] = totalsRow;
+      rowsForVenue[componentTypes.length + 1] = totalsRow;
 
       return rowsForVenue;
     }
@@ -92,6 +92,7 @@ angular.module('bsis')
       var rowsForVenue = [];
       var summaryRows = initRowsForVenue('All Processing Sites');
       mergedData = [];
+      $scope.sitesNumber = 0;
 
       angular.forEach(dataValues, function(newRow) {
 
@@ -102,6 +103,7 @@ angular.module('bsis')
 
         // New venue
         if (newRow.venue.name !== previousVenue) {
+          $scope.sitesNumber += 1;
 
           if (previousVenue != '') {
             pushRowsToGrid(rowsForVenue);
@@ -119,14 +121,14 @@ angular.module('bsis')
             rowsForVenue[index][bloodType] = newRow.value;
             rowsForVenue[index].total += newRow.value;
             // Populate total row
-            rowsForVenue[$scope.componentTypesNumber + 1][bloodType] += newRow.value;
-            rowsForVenue[$scope.componentTypesNumber + 1].total += newRow.value;
+            rowsForVenue[componentTypes.length + 1][bloodType] += newRow.value;
+            rowsForVenue[componentTypes.length + 1].total += newRow.value;
             // Populate component type summary rows
             summaryRows[index][bloodType] += newRow.value;
             summaryRows[index].total += newRow.value;
             // Populate total summary row
-            summaryRows[$scope.componentTypesNumber + 1][bloodType] += newRow.value;
-            summaryRows[$scope.componentTypesNumber + 1].total += newRow.value;
+            summaryRows[componentTypes.length + 1][bloodType] += newRow.value;
+            summaryRows[componentTypes.length + 1].total += newRow.value;
           }
         });
       });
@@ -152,7 +154,7 @@ angular.module('bsis')
           $scope.gridOptions.paginationCurrentPage = 1;
         } else {
           $scope.gridOptions.data = [];
-          $scope.venuesNumber = 0;
+          $scope.sitesNumber = 0;
         }
         $scope.submitted = true;
       }, function(err) {
@@ -200,7 +202,7 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        var processingSitesNumberLine = 'Number of processing sites: ' + ($scope.gridOptions.data.length / ($scope.componentTypesNumber + 1) - 1);
+        var processingSitesNumberLine = 'Number of processing sites: ' + $scope.sitesNumber;
         return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
           'Components Produced Summary Report',
           ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
@@ -209,7 +211,7 @@ angular.module('bsis')
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.gridOptions.data.length / ($scope.componentTypesNumber + 1) - 1, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageFooter('sites', $scope.sitesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {
@@ -229,7 +231,6 @@ angular.module('bsis')
       ReportsService.getComponentProductionReportForm(function(res) {
         $scope.processingSites = res.processingSites;
         componentTypes = res.componentTypes;
-        $scope.componentTypesNumber = componentTypes.length;
       }, function(err) {
         $log.error(err);
       });
