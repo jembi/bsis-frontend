@@ -187,6 +187,7 @@ angular.module('bsis')
       $scope.submitted = true;
       var report = mockReport();
       mergeData(report.dataValues);
+      $scope.gridOptions.paginationCurrentPage = 1;
       $scope.searching = false;
 
     };
