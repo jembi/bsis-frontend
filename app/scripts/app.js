@@ -360,7 +360,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       .when('/bloodUnitsIssuedReport', {
         templateUrl: 'views/reports/bloodUnitsIssuedReport.html',
         controller: 'BloodUnitsIssuedReportCtrl',
-        permission: PERMISSIONS.COMPONENTS_ISSUED_REPORTING,
+        permission: PERMISSIONS.COMPONENTS_REPORTING,
         enabled: UI.REPORTS_TAB_ENABLED,
         reloadOnSearch: false
       })
@@ -368,6 +368,13 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         templateUrl: 'views/reports/donorsDeferredReport.html',
         controller: 'DonorsDeferredReportCtrl',
         permission: PERMISSIONS.DONORS_REPORTING,
+        enabled: UI.REPORTS_TAB_ENABLED,
+        reloadOnSearch: false
+      })
+      .when('/componentsProducedReport', {
+        templateUrl: 'views/reports/componentsProducedReport.html',
+        controller: 'ComponentsProducedReportCtrl',
+        permission: PERMISSIONS.COMPONENTS_REPORTING,
         enabled: UI.REPORTS_TAB_ENABLED,
         reloadOnSearch: false
       })
@@ -1071,23 +1078,23 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       require: 'ngModel',
       link: function(scope, element, attr, ctrl) {
         ctrl.$validators.uiDateRange = function(modelValue) {
-          if (attr.uiDateRange) {
-            // initialise the start and end dates
-            var startDateValue = attr.uiDateStart;
-            var endDateValue = attr.uiDateEnd;
-            if (!startDateValue) {
-              startDateValue = modelValue; // assume modelValue is the start date
-            } else if (!endDateValue) {
-              endDateValue = modelValue; // assume modelValue is the end date
+          // initialise the start and end dates
+          var startDateValue = attr.uiDateStart;
+          var endDateValue = attr.uiDateEnd;
+          if (!startDateValue) {
+            startDateValue = modelValue; // assume modelValue is the start date
+          } else if (!endDateValue) {
+            endDateValue = modelValue; // assume modelValue is the end date
+          }
+          if (startDateValue && endDateValue) {
+            var startDate = moment(startDateValue).startOf('day');
+            var endDate = moment(endDateValue).startOf('day');
+            // check that start date is before end date
+            if (startDate.isAfter(endDate)) {
+              return false;
             }
-            if (startDateValue && endDateValue) {
-              var startDate = moment(startDateValue).startOf('day');
-              var endDate = moment(endDateValue).startOf('day');
-              // check that start date is before end date
-              if (startDate.isAfter(endDate)) {
-                return false;
-              }
-              // check the range
+            // check the range, if empty only previous check will be evaluated
+            if (attr.uiDateRange) {
               var range = attr.uiDateRange.split(',');
               if (endDate.isAfter(startDate.add(range[0], range[1]))) {
                 return false;

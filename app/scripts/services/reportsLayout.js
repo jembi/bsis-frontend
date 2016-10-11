@@ -2,7 +2,7 @@
 
 angular.module('bsis').factory('ReportsLayoutService', function(LogosService, $filter) {
   return {
-    generatePdfPageHeader: function(headerTextLine1, headerTextLine2, orientation) {
+    generatePdfPageHeader: function(orientation, headerTextLine1, headerTextLine2, headerTextLine3) {
       var image2LeftMargin = 450;
       if (orientation === 'landscape') {
         image2LeftMargin = 690;
@@ -21,9 +21,12 @@ angular.module('bsis').factory('ReportsLayoutService', function(LogosService, $f
           margin: [image2LeftMargin, -54, 0, 0]
         });
       }
-      header.push({text: headerTextLine1, fontSize: 11, bold: true, alignment: 'center', margin: [30, -30, 30, 0]});
+      header.push({text: headerTextLine1, fontSize: 11, bold: true, alignment: 'center', margin: [30, -35, 30, 0]});
       if (headerTextLine2) {
         header.push({text: headerTextLine2, fontSize: 9, alignment: 'center'});
+      }
+      if (headerTextLine3) {
+        header.push({text: headerTextLine3, fontSize: 9, alignment: 'center'});
       }
       return header;
     },
