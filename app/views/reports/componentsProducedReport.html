@@ -9,17 +9,17 @@
       <label class="col-sm-2 control-label">Processing site:</label>
       <div class="form-inline col-sm-10">
         <div>
-          <select name="processingSite" class="form-control" ng-model="search.processingSite" ng-change="updateAllSites()" ng-options="processingSite.id as processingSite.name for processingSite in processingSites">
-            <option value="" disabled>Select:</option>
+          <select name="processingSite" class="form-control" ng-model="search.processingSite" ng-change="updateAllSites()" ng-options="processingSite.id as processingSite.name for processingSite in processingSites" ng-required="!search.allSites">
+            <option value="" disabled></option>
           </select>
           <label>
             <input type="checkbox" name="allSites" ng-model="search.allSites" ng-click="clearProcessingSite()" />
             All
           </label>
           <div>
-            <small class="error" ng-show="(searchForm.processingSite.$invalid && searchForm.$submitted)">
-              Select a processing site
-            </small>
+            <ng-messages for="searchForm.processingSite.$error" role="alert" ng-show="searchForm.processingSite.$invalid && searchForm.$submitted">
+              <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
           </div>
         </div>
       </div>

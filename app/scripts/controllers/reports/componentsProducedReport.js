@@ -32,8 +32,6 @@ angular.module('bsis')
     $scope.updateAllSites = function() {
       if ($scope.search.processingSite) {
         $scope.search.allSites = false;
-      } else {
-        $scope.search.allSites = true;
       }
     };
 
