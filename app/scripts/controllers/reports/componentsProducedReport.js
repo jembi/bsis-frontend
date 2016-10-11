@@ -225,7 +225,7 @@ angular.module('bsis')
     function init() {
       ReportsService.getComponentProductionReportForm(function(res) {
         $scope.processingSites = res.processingSites;
-        $scope.componentTypes = res.componentTypes;
+        componentTypes = res.componentTypes;
         $scope.componentTypesNumber = componentTypes.length;
       }, function(err) {
         $log.error(err);
