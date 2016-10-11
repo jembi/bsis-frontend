@@ -410,6 +410,17 @@ angular.module('bsis')
         }
       }),
 
+      UnitsDiscardedReport: $resource(url + '/reports/discardedunits', {}, {
+        generate: {
+          method: 'GET',
+          url: url + '/reports/discardedunits/generate'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/discardedunits/form'
+        }
+      }),
+
       ComponentProductionReport: $resource(url + '/reports/componentsprocessed', {}, {
         generate: {
           method: 'GET',

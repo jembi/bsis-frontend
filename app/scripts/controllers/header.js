@@ -146,6 +146,7 @@ angular.module('bsis')
       '/ttiPrevalenceReport',
       '/bloodUnitsIssuedReport',
       '/donorsDeferredReport',
+      '/unitsDiscardedReport',
       '/componentsProducedReport'
     ];
 
