@@ -177,8 +177,8 @@ angular.module('bsis')
     // Grid ui variables and methods
 
     var columnDefs = [
-      { name: 'Site', field: 'venue' },
-      { name: 'Component Type', field: 'componentType'},
+      { name: 'Site', field: 'venue', width: '**', minWidth: 150 },
+      { name: 'Component Type', field: 'componentType', width: '**', minWidth: 150 },
       { name: 'Total', field: 'total', width: 55 }
     ];
 
@@ -236,7 +236,7 @@ angular.module('bsis')
         discardReasons = response.discardReasons;
         angular.forEach(discardReasons, function(discardReason) {
           // Add new column before the total column
-          columnDefs.splice(-1, 0, {displayName: discardReason.reason, field: discardReason.reason, width: '**', maxWidth: '125'});
+          columnDefs.splice(-1, 0, {displayName: discardReason.reason, field: discardReason.reason, width: '**', minWidth: 80, maxWidth: 100});
         });
       }, $log.error);
     }
