@@ -47,7 +47,7 @@ angular.module('bsis')
       var cohorts = newRow.cohorts;
       var adverseEventType = cohorts[0].option;
 
-      row.venue = newRow.venue.name;
+      row.venue = newRow.location.name;
       row[adverseEventType] = newRow.value;
       row.total += newRow.value;
 
@@ -69,11 +69,11 @@ angular.module('bsis')
       $scope.venuesNumber = 0;
 
       angular.forEach(dataValues, function(newRow) {
-        var rowForVenue = rowsForVenue[newRow.venue.name];
+        var rowForVenue = rowsForVenue[newRow.location.name];
         if (!rowForVenue) { // new venue
           $scope.venuesNumber += 1;
           rowForVenue = initRow();
-          rowsForVenue[newRow.venue.name] = rowForVenue;
+          rowsForVenue[newRow.location.name] = rowForVenue;
         }
         populateRow(rowForVenue, rowForTotal, newRow);
       });
