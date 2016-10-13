@@ -14,7 +14,6 @@ angular.module('bsis')
     };
     var discardReasons = [];
     var summaryRows = [];
-    var summaryComponentTypeMap = {};
     $scope.search = angular.copy(master);
 
     // Report methods
@@ -84,22 +83,22 @@ angular.module('bsis')
       return rows;
     }
 
-    function convertSummary(rows) {
+    function convertSummaryRows() {
       // Move Total row to end for summary
       var totalRow = angular.copy(summaryRows[0]);
       summaryRows.splice(0, 1);
       summaryRows.push(totalRow);
 
       // Convert row objects to indexed arrays
-      var newSummary = [];
-      angular.forEach(rows, function(obj) {
+      var newSummaryRows = [];
+      angular.forEach(summaryRows, function(obj) {
         var result = [];
         for (var key in obj) {
           result.push('' + obj[key]);
         }
-        newSummary.push(result);
+        newSummaryRows.push(result);
       });
-      return newSummary;
+      summaryRows = newSummaryRows;
     }
 
     function mergeData(dataValues) {
@@ -107,6 +106,7 @@ angular.module('bsis')
       var rowsForVenue = [];
       var componentTypeIndex = 0;
       var componentTypeSummaryIndex = 0;
+      var summaryComponentTypeMap = {};
 
       mergedData = [];
       $scope.venuesNumber = 0;
@@ -148,6 +148,8 @@ angular.module('bsis')
       // Run one last time for the last venue
       pushRowsToGrid(rowsForVenue);
 
+      convertSummaryRows();
+
       $scope.gridOptions.data = mergedData;
     }
 
@@ -157,6 +159,7 @@ angular.module('bsis')
         return;
       }
 
+      summaryRows = [];
       $scope.searching = true;
       ReportsService.generateUnitsDiscardedReport($scope.search, function(report) {
         $scope.searching = false;
@@ -197,7 +200,7 @@ angular.module('bsis')
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        docDefinition = ReportsLayoutService.addSummaryContent(convertSummary(summaryRows), docDefinition);
+        docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
         docDefinition = ReportsLayoutService.highlightTotalRows('Total', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(26, docDefinition);
         return docDefinition;
