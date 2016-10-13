@@ -80,9 +80,11 @@ angular.module('bsis')
 
       pushRowsToGrid(rowsForVenue);
 
-      // add total row to table
-      rowForTotal.venue = 'Total All Venues';
-      mergedData.push(rowForTotal);
+      if ($scope.venuesNumber > 1) {
+        // add total row to table
+        rowForTotal.venue = 'Total All Venues';
+        mergedData.push(rowForTotal);
+      }
 
       $scope.gridOptions.data = mergedData;
     }
