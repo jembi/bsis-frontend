@@ -188,6 +188,26 @@ angular.module('bsis').factory('ReportsLayoutService', function(LogosService, $f
         });
       });
       return data;
+    },
+    hyphenateLongWords: function(text, maxWordLength) {
+      var newText = '';
+      angular.forEach(text.split(' '), function(word) {
+        // break word into chunks
+        var hyphenWord = '';
+        var chunkRegExp = new RegExp('.{1,' + maxWordLength + '}', 'g');
+        angular.forEach(word.match(chunkRegExp), function(chunk) {
+          if (hyphenWord.length > 0) {
+            hyphenWord += '-';
+          }
+          hyphenWord += chunk;
+        });
+        // add hyphened word to display name
+        if (newText.length > 0) {
+          newText += ' ';
+        }
+        newText += hyphenWord;
+      });
+      return newText;
     }
 
   };
