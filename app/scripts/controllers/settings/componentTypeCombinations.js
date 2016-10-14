@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ComponentTypeCombinationsCtrl', function($scope, $location, $routeParams, $log, ICONS) {
+angular.module('bsis').controller('ComponentTypeCombinationsCtrl', function($scope, $location, $routeParams, $log, ICONS, ComponentTypeCombinationsService) {
 
   var columnDefs = [
     {
@@ -35,34 +35,9 @@ angular.module('bsis').controller('ComponentTypeCombinationsCtrl', function($sco
   };
 
   function init() {
-    $log.debug('Not implemented yet. Request parameters: ');
-    $scope.gridOptions.data = [
-      {
-        'id': 1,
-        'combinationName': 'Whole Blood',
-        'isDeleted': false
-      },
-      {
-        'id': 2,
-        'combinationName': 'PRC-CPDA-FFP',
-        'isDeleted': false
-      },
-      {
-        'id': 3,
-        'combinationName': 'PRC-CPDA-FP',
-        'isDeleted': false
-      },
-      {
-        'id': 4,
-        'combinationName': 'WB Poor Platelets-PC-24H',
-        'isDeleted': false
-      },
-      {
-        'id': 5,
-        'combinationName': 'PRC-SAGM-FFP-PC',
-        'isDeleted': false
-      }
-    ];
+    ComponentTypeCombinationsService.getComponentTypeCombinations(function(response) {
+      $scope.gridOptions.data = response.componentTypeCombinations;
+    }, $log.error);
   }
 
   init();

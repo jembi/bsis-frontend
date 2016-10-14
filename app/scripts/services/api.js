@@ -488,6 +488,13 @@ angular.module('bsis')
           // using $http here because $resource cannot process arraybuffers easily
           return $http.get(url + '/dataexport', {responseType: 'arraybuffer'});
         }
-      }
+      },
+
+      ComponentTypeCombinations: $resource(url + '/componenttypecombinations/', {}, {
+        search: {
+          method: 'GET',
+          url: url + '/componenttypecombinations/search'
+        }
+      })
     };
   });
