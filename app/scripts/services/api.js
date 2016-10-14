@@ -421,6 +421,17 @@ angular.module('bsis')
         }
       }),
 
+      ComponentProductionReport: $resource(url + '/reports/componentsprocessed', {}, {
+        generate: {
+          method: 'GET',
+          url: url + '/reports/componentsprocessed/generate'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/componentsprocessed/form'
+        }
+      }),
+
       OrderForms: $resource(url + '/orderforms/:id', {id: '@id'}, {
         update: {method: 'PUT'},
         search: {

@@ -10,11 +10,10 @@ angular.module('bsis')
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: moment().endOf('day').toDate(),
       allSites: true,
-      processingSiteId: null
+      processingSite: null
     };
     var discardReasons = [];
     var summaryRows = [];
-    var summaryComponentTypeMap = {};
     $scope.search = angular.copy(master);
 
     // Report methods
@@ -27,15 +26,13 @@ angular.module('bsis')
       $scope.submitted = false;
     };
 
-    $scope.clearProcessingSiteId = function() {
-      $scope.search.processingSiteId = null;
+    $scope.clearProcessingSite = function() {
+      $scope.search.processingSite = null;
     };
 
     $scope.updateAllSites = function() {
-      if ($scope.search.processingSiteId) {
+      if ($scope.search.processingSite) {
         $scope.search.allSites = false;
-      } else {
-        $scope.search.allSites = true;
       }
     };
 
@@ -86,22 +83,22 @@ angular.module('bsis')
       return rows;
     }
 
-    function convertSummary(rows) {
+    function convertSummaryRows() {
       // Move Total row to end for summary
       var totalRow = angular.copy(summaryRows[0]);
       summaryRows.splice(0, 1);
       summaryRows.push(totalRow);
 
       // Convert row objects to indexed arrays
-      var newSummary = [];
-      angular.forEach(rows, function(obj) {
+      var newSummaryRows = [];
+      angular.forEach(summaryRows, function(obj) {
         var result = [];
         for (var key in obj) {
           result.push('' + obj[key]);
         }
-        newSummary.push(result);
+        newSummaryRows.push(result);
       });
-      return newSummary;
+      summaryRows = newSummaryRows;
     }
 
     function mergeData(dataValues) {
@@ -109,6 +106,7 @@ angular.module('bsis')
       var rowsForVenue = [];
       var componentTypeIndex = 0;
       var componentTypeSummaryIndex = 0;
+      var summaryComponentTypeMap = {};
 
       mergedData = [];
       $scope.venuesNumber = 0;
@@ -150,118 +148,9 @@ angular.module('bsis')
       // Run one last time for the last venue
       pushRowsToGrid(rowsForVenue);
 
+      convertSummaryRows();
+
       $scope.gridOptions.data = mergedData;
-    }
-
-    function mockReport() {
-      var report = {'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'dataValues': [
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Platelets Concentrate - Apheresis', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Fresh Frozen Plasma - Apheresis', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Storage Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - Paediatric - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - Paediatric - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - SAGM', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Fresh Frozen Plasma - Whole Blood', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Frozen Plasma - Whole Blood', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Whole Blood Quad Pack - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Whole Blood Triple Pack - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Whole Blood Double Pack - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':2, 'name':'Leribe', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Whole Blood Single Pack - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Platelets Concentrate - Apheresis', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Storage Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Fresh Frozen Plasma - Apheresis', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - Paediatric - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - SAGM', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Fresh Frozen Plasma - Whole Blood', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Frozen Plasma - Whole Blood', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Whole Blood Quad Pack - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Whole Blood Triple Pack - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Whole Blood Double Pack - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Maseru', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Whole Blood Single Pack - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Other', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Platelets Concentrate - Apheresis', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Storage Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Other', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Fresh Frozen Plasma - Apheresis', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Other', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - Paediatric - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Other', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Other', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Packed Red Cells - SAGM', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Other', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Fresh Frozen Plasma - Whole Blood', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Other', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Frozen Plasma - Whole Blood', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Other', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Whole Blood Quad Pack - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Other', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Whole Blood Triple Pack - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Other', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Whole Blood Double Pack - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]},
-
-        {'id':null, 'startDate':'2016-09-26T22:00:00.000Z', 'endDate':'2016-10-04T21:59:59.999Z', 'value':1, 'venue':{'id':3, 'name':'Other', 'isUsageSite':false, 'isMobileSite':false, 'isVenue':true, 'isProcessingSite':true, 'isDistributionSite':false, 'isTestingSite':false, 'isDeleted':false, 'divisionLevel1':null, 'divisionLevel2':null, 'divisionLevel3':null, 'notes':''},
-        'cohorts':[{'category':'Component Type', 'option':'Whole Blood Single Pack - CPDA', 'comparator':'EQUALS'}, {'category':'Discard Reason', 'option':'Processing Problems', 'comparator':'EQUALS'}]}
-
-      ]};
-
-      return report;
-
     }
 
     $scope.getReport = function(searchForm) {
@@ -270,29 +159,29 @@ angular.module('bsis')
         return;
       }
 
-      var period = {};
-      if ($scope.search.startDate) {
-        var startDate = moment($scope.search.startDate).startOf('day').toDate();
-        period.startDate = startDate;
-      }
-      if ($scope.search.endDate) {
-        var endDate = moment($scope.search.endDate).endOf('day').toDate();
-        period.endDate = endDate;
-      }
+      summaryRows = [];
       $scope.searching = true;
-      $scope.submitted = true;
-      var report = mockReport();
-      mergeData(report.dataValues);
-      $scope.gridOptions.paginationCurrentPage = 1;
-      $scope.searching = false;
-
+      ReportsService.generateUnitsDiscardedReport($scope.search, function(report) {
+        $scope.searching = false;
+        if (report.dataValues.length > 0) {
+          mergeData(report.dataValues);
+          $scope.gridOptions.paginationCurrentPage = 1;
+        } else {
+          $scope.gridOptions.data = [];
+          $scope.venuesNumber = 0;
+        }
+        $scope.submitted = true;
+      }, function(err) {
+        $scope.searching = false;
+        $log.log(err);
+      });
     };
 
     // Grid ui variables and methods
 
     var columnDefs = [
-      { name: 'Site', field: 'venue' },
-      { name: 'Component Type', field: 'componentType'},
+      { name: 'Site', field: 'venue', width: '**', minWidth: 150 },
+      { name: 'Component Type', field: 'componentType', width: '**', minWidth: 150 },
       { name: 'Total', field: 'total', width: 55 }
     ];
 
@@ -311,7 +200,7 @@ angular.module('bsis')
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        docDefinition = ReportsLayoutService.addSummaryContent(convertSummary(summaryRows), docDefinition);
+        docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
         docDefinition = ReportsLayoutService.highlightTotalRows('Total', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(26, docDefinition);
         return docDefinition;
@@ -350,7 +239,7 @@ angular.module('bsis')
         discardReasons = response.discardReasons;
         angular.forEach(discardReasons, function(discardReason) {
           // Add new column before the total column
-          columnDefs.splice(-1, 0, {displayName: discardReason.reason, field: discardReason.reason, width: '**', maxWidth: '125'});
+          columnDefs.splice(-1, 0, {displayName: discardReason.reason, field: discardReason.reason, width: '**', minWidth: 80, maxWidth: 100});
         });
       }, $log.error);
     }
