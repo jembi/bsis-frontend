@@ -100,7 +100,7 @@ angular.module('bsis')
         newRow.cohorts = componentType;
 
         // New venue
-        if (newRow.venue.name !== previousVenue) {
+        if (newRow.location.name !== previousVenue) {
           $scope.sitesNumber += 1;
 
           if (previousVenue != '') {
@@ -108,7 +108,7 @@ angular.module('bsis')
           }
 
           // Initialize rows for the new venue
-          previousVenue = newRow.venue.name;
+          previousVenue = newRow.location.name;
           rowsForVenue = initRowsForVenue(previousVenue);
         }
 

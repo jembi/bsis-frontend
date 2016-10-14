@@ -145,7 +145,7 @@ angular.module('bsis')
         newRow.cohorts = gender;
 
         // New venue
-        if (newRow.venue.name !== previousVenue) {
+        if (newRow.location.name !== previousVenue) {
 
           if (previousVenue != '') {
             // Add female, male and all rows for previous venue
@@ -153,7 +153,7 @@ angular.module('bsis')
           }
 
           // Initialize values for the new venue
-          previousVenue = newRow.venue.name;
+          previousVenue = newRow.location.name;
           mergedFemaleRow = createZeroValuesRow(newRow, previousVenue, 'female');
           mergedMaleRow = createZeroValuesRow(newRow, '', 'male');
         }

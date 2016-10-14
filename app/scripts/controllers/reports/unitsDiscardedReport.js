@@ -70,7 +70,7 @@ angular.module('bsis')
 
       // Show processing site name on frist component type row only
       if (componentTypeIndex === 1) {
-        rows[componentTypeIndex].venue = newRow.venue.name;
+        rows[componentTypeIndex].venue = newRow.location.name;
       }
 
       // Populate component type row
@@ -116,7 +116,7 @@ angular.module('bsis')
 
       angular.forEach(dataValues, function(newRow) {
         // New venue
-        if (newRow.venue.name !== previousVenue) {
+        if (newRow.location.name !== previousVenue) {
           $scope.venuesNumber += 1;
 
           if (previousVenue != '') {
@@ -124,7 +124,7 @@ angular.module('bsis')
           }
 
           // Initialize total row for new venue
-          previousVenue = newRow.venue.name;
+          previousVenue = newRow.location.name;
           rowsForVenue = [];
           rowsForVenue[0] = initRow('Total');
           componentTypeIndex = 0;
@@ -141,7 +141,7 @@ angular.module('bsis')
 
         populateRows(rowsForVenue, newRow, componentTypeIndex);
         // Update venue for summary
-        newRow.venue.name = 'All processing sites';
+        newRow.location.name = 'All processing sites';
         populateRows(summaryRows, newRow, componentTypeSummaryIndex);
       });
 

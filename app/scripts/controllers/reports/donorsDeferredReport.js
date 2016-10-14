@@ -74,7 +74,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
       var deferralReason = dataValue.cohorts[1].option;
 
       // New venue
-      if (dataValue.venue.name !== previousVenue) {
+      if (dataValue.location.name !== previousVenue) {
 
         if (previousVenue !== null) {
           // Add female, male and all rows for previous venue
@@ -84,11 +84,11 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
         }
 
         // Initialize values for the new venue
-        mergedFemaleRow = createZeroValuesRow(dataValue.venue.name, 'female');
+        mergedFemaleRow = createZeroValuesRow(dataValue.location.name, 'female');
         mergedMaleRow = createZeroValuesRow('', 'male');
 
         // Store the previous venue name
-        previousVenue = dataValue.venue.name;
+        previousVenue = dataValue.location.name;
       }
 
       if (gender === 'female') {
