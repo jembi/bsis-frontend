@@ -694,6 +694,8 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
           $location.path('/aboRhGroupsReport');
         } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.TTI_REPORTING) > -1) {
           $location.path('/ttiPrevalenceReport');
+        } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.COMPONENTS_REPORTING) > -1) {
+          $location.path('/bloodUnitsIssuedReport');
         } else {
           $location.path('/home');
         }
