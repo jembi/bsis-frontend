@@ -65,9 +65,7 @@ angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, Routin
       ]
     }, {
       path: '/componentTypeCombinations',
-      subpaths: [
-        '/manageComponentTypeCombinations'
-      ]
+      subpaths: []
     }, {
       path: '/divisions',
       subpaths: [

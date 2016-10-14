@@ -163,6 +163,7 @@ angular.module('bsis')
       '/locations',
       '/manageLocation/?\\d*',
       '/componentTypes',
+      '/componentTypeCombinations',
       '/manageComponentType/?\\d*',
       '/deferralReasons',
       '/manageDeferralReason/?\\d*',
