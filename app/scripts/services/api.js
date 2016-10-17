@@ -112,7 +112,7 @@ angular.module('bsis')
       ComponentTypes: $resource(url + '/componenttypes/:id', {id: '@id'}, {
         getAll: {
           method: 'GET',
-          url: url + '/componenttypes'
+          url: url + '/componenttypes/search'
         },
         update: {method: 'PUT'}
       }),
