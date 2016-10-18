@@ -186,7 +186,8 @@ angular.module('bsis')
       '/divisions',
       '/manageDivision',
       '/manageDivision/?\\d*',
-      '/dataExport'
+      '/dataExport',
+      '/componentTypeCombinations'
     ];
 
     /**

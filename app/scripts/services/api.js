@@ -112,7 +112,7 @@ angular.module('bsis')
       ComponentTypes: $resource(url + '/componenttypes/:id', {id: '@id'}, {
         getAll: {
           method: 'GET',
-          url: url + '/componenttypes'
+          url: url + '/componenttypes/search'
         },
         update: {method: 'PUT'}
       }),
@@ -499,6 +499,13 @@ angular.module('bsis')
           // using $http here because $resource cannot process arraybuffers easily
           return $http.get(url + '/dataexport', {responseType: 'arraybuffer'});
         }
-      }
+      },
+
+      ComponentTypeCombinations: $resource(url + '/componenttypecombinations/', {}, {
+        search: {
+          method: 'GET',
+          url: url + '/componenttypecombinations/search'
+        }
+      })
     };
   });
