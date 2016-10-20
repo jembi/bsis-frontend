@@ -548,6 +548,11 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'ManageComponentCombinationCtrl',
         permission: PERMISSIONS.MANAGE_COMPONENT_COMBINATIONS
       })
+      .when('/componentTypeCombinations', {
+        templateUrl: 'views/settings/componentTypeCombinations.html',
+        controller: 'ComponentTypeCombinationsCtrl',
+        permission: PERMISSIONS.MANAGE_COMPONENT_COMBINATIONS
+      })
       .when('/divisions', {
         templateUrl: 'views/settings/divisions.html',
         controller: 'DivisionsCtrl',

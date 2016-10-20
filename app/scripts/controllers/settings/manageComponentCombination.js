@@ -93,7 +93,7 @@ angular.module('bsis').controller('ManageComponentCombinationCtrl', function($sc
   }
 
   $scope.cancel = function() {
-    $location.path('/componentCombinations');
+    $location.path('/componentTypeCombinations');
   };
 
   $scope.addSourceComponent = function() {
