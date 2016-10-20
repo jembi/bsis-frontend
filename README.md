@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/jembi/bsis-frontend.png)](http://travis-ci.org/jembi/bsis-frontend)
+[![Build Status](https://travis-ci.com/jembi/bsis-frontend.svg?token=FCDs4JFMycqVrLvQpU5A&branch=develop)](https://travis-ci.com/jembi/bsis-frontend)
 
 # BSIS Frontend
 
