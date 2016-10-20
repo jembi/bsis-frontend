@@ -501,21 +501,10 @@ angular.module('bsis')
         }
       },
 
-      ComponentTypeCombinations: $resource(url + '/componenttypecombinations/:id', {id: '@id'}, {
+      ComponentTypeCombinations: $resource(url + '/componenttypecombinations/', {}, {
         search: {
           method: 'GET',
           url: url + '/componenttypecombinations/search'
-        },
-        update: {
-          method: 'PUT'
-        },
-        getForm: {
-          method: 'GET',
-          url: url + '/componenttypecombinations/form'
-        },
-        addCombinations: {
-          method: 'POST',
-          url: url + '/componenttypecombinations'
         }
       })
     };
