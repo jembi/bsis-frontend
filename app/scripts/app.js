@@ -545,7 +545,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       })
       .when('/manageComponentTypeCombination/:id?', {
         templateUrl: 'views/settings/manageComponentTypeCombination.html',
-        controller: 'ManageComponentCombinationCtrl',
+        controller: 'ManageComponentTypeCombinationCtrl',
         permission: PERMISSIONS.MANAGE_COMPONENT_COMBINATIONS
       })
       .when('/componentTypeCombinations', {

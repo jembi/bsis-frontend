@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageComponentCombinationCtrl', function($scope, $location, $log, $timeout, $routeParams, ComponentCombinationsService) {
+angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function($scope, $location, $log, $timeout, $routeParams, ComponentCombinationsService) {
   $scope.sourceComponentTypes = [];
   $scope.producedComponentTypes = [];
 
