@@ -205,6 +205,9 @@
   <div style="padding-bottom: 5px">
       <uib-alert type="info" ng-if="testBatch.permissions.canRelease">This test batch is ready to be released.</uib-alert>
       <uib-alert type="info" ng-if="testBatch.permissions.canClose">This test batch is ready to be closed.</uib-alert>
+      <uib-alert type="info" ng-if="pendingRepeatTTITests || pendingConfirmatoryTTITests">Pending: TTI repeat and/or confirmatory test outcomes.</uib-alert>
+      <uib-alert type="info" ng-if="pendingRepeatBloodTypingTests">Pending: blood group serology repeat test outcomes.</uib-alert>
+      <uib-alert type="info" ng-if="pendingBloodTypingConfirmations">Pending: ambiguous blood group serology test outcomes.</uib-alert>
   </div>
 
   <div class="col-sm-12">
