@@ -605,23 +605,6 @@ angular.module('bsis')
         }
       };
 
-      $scope.updateDonorDeferral = function(deferral) {
-        DonorService.updateDonorDeferral(deferral, function(response) {
-          var updatedDeferral = response;
-          if (deferral.permissions) {
-            deferral.permissions = updatedDeferral.permissions;
-          }
-          // refresh the notices at the top
-          clearDeferralMessage();
-          getDonorOverview();
-          angular.forEach($scope.deferralsData, function(d) {
-            refreshDeferralMessage(d);
-          });
-        }, function(err) {
-          $scope.err = err;
-        });
-      };
-
       $scope.updateDonorDeferralReason = function(deferral, deferralReason) {
         // change end date
         var newEndDate = new Date();
@@ -672,15 +655,6 @@ angular.module('bsis')
           $scope.deletingDeferral = false;
         });
       };
-    };
-
-    $scope.manageDeferral = function() {
-      $scope.format = DATEFORMAT;
-      $scope.initDate = new Date();
-      $scope.calIcon = 'fa-calendar';
-      $scope.dateFromOpen = false;
-      $scope.dateToOpen = false;
-      $scope.deferralView = 'manageDeferral';
     };
 
     // End of Deferrals section
@@ -762,27 +736,78 @@ angular.module('bsis')
         moment().add(deferralReason.defaultDuration, 'days').toDate();
     };
 
-    $scope.addDeferral = function(deferral, addDeferralForm) {
-      if (addDeferralForm.$valid) {
-        deferral.deferredDonor = $scope.donor;
-        deferral.deferralDate = (new Date()).toISOString();
-        $scope.addingDeferral = true;
-        DonorService.addDeferral(deferral, function(response) {
-          if (response === true) {
-            $scope.deferral = {};
-            $scope.getDeferrals($scope.donor.id);
-            getDonorOverview();
-            $scope.submitted = '';
-            $scope.deferral = {};
-            // set form back to pristine state
-            addDeferralForm.$setPristine();
-          }
-          $scope.addingDeferral = false;
+    // Manage deferral section
+
+    $scope.manageDeferral = function(deferral) {
+      $scope.format = DATEFORMAT;
+      $scope.calIcon = 'fa-calendar';
+      $scope.dateToOpen = true;
+      $scope.deferralView = 'manageDeferral';
+      $scope.deferral = {};
+      $scope.submitted = '';
+
+      if (deferral) {
+        // This is an update
+        // convert deferredUntil to a Date object
+        deferral.deferredUntil = new Date(deferral.deferredUntil);
+        $scope.deferral = deferral;
+      }
+    };
+
+    var updateDeferral = function(deferral, saveDeferralForm) {
+      DonorService.updateDonorDeferral(deferral, function(response) {
+        var updatedDeferral = response;
+        if (deferral.permissions) {
+          deferral.permissions = updatedDeferral.permissions;
+        }
+        // refresh the notices at the top
+        clearDeferralMessage();
+        angular.forEach($scope.deferralsData, function(d) {
+          refreshDeferralMessage(d);
         });
+        $scope.getDeferrals($scope.donor.id);
+        getDonorOverview();
+        $scope.submitted = '';
+        $scope.deferral = {};
+        // set form back to pristine state
+        saveDeferralForm.$setPristine();
+        $scope.savingDeferral = false;
+      }, function(err) {
+        $scope.err = err;
+        $scope.savingDeferral = false;
+      });
+    };
+
+    var addDeferral = function(deferral, saveDeferralForm) {
+      deferral.deferredDonor = $scope.donor;
+      deferral.deferralDate = (new Date()).toISOString();
+      DonorService.addDeferral(deferral, function(response) {
+        if (response === true) {
+          $scope.getDeferrals($scope.donor.id);
+          getDonorOverview();
+          $scope.submitted = '';
+          $scope.deferral = {};
+          // set form back to pristine state
+          saveDeferralForm.$setPristine();
+        }
+        $scope.savingDeferral = false;
+      });
+    };
+
+    $scope.saveDeferral = function(deferral, saveDeferralForm) {
+      if (saveDeferralForm.$valid) {
+        $scope.savingDeferral = true;
+        if (deferral.id) {
+          updateDeferral(deferral, saveDeferralForm);
+        } else {
+          addDeferral(deferral, saveDeferralForm);
+        }
       } else {
         $scope.submitted = true;
       }
     };
+
+    // Inits
 
     initializeDonor();
     initializeDonorFormFields();
