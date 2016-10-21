@@ -1,11 +1,10 @@
 'use strict';
 
-angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function($scope, $location, $log, $timeout, $routeParams, ComponentCombinationsService) {
-  $scope.sourceComponentTypes = [];
-  $scope.producedComponentTypes = [];
-
+angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function($scope, $location, $log, $timeout) {
   $scope.componentTypeCombination = {
     combinationName: '',
+    sourceComponentTypes: [],
+    componentTypes: [],
     isDeleted: false
   };
 
@@ -15,6 +14,8 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     selectedProducedComponentIndex: null,
     selectedProducedComponentList: []
   };
+
+  $scope.componentCombinationForm = {};
 
   var mockComponentTypes = function() {
     return [
@@ -77,52 +78,53 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     ];
   };
 
-  $scope.componentCombinationForm = {};
-
   $scope.$watch('sourceComponentTypes.combinationName', function() {
     $timeout(function() {
       $scope.componentCombinationForm.componentCombinationName.$setValidity('duplicate', true);
     });
   });
 
-  function onSaveError(err) {
-    if (err.data && err.data.combinationName) {
-      $scope.componentCombinationForm.combinationName.$setValidity('duplicate', false);
-    }
-    $scope.savingComponentCombination = false;
-  }
+  // Disabled to pass 'npm run lint' (to be enabled in hook up task)
+  // function onSaveError(err) {
+  //   if (err.data && err.data.combinationName) {
+  //     $scope.componentCombinationForm.combinationName.$setValidity('duplicate', false);
+  //   }
+  //   $scope.savingComponentCombination = false;
+  // }
 
   $scope.cancel = function() {
     $location.path('/componentTypeCombinations');
   };
 
   $scope.addSourceComponent = function() {
-    $scope.sourceComponentTypes.push(
+    $scope.componentTypeCombination.sourceComponentTypes.push(
       $scope.sourceComponentTypesDropDown[$scope.userSelection.selectedSourceComponentIndex]
     );
-    $scope.sourceComponentTypesDropDown.splice($scope.userSelection.selectedSourceComponentIndex, 1);
+    $scope.sourceComponentTypesDropDown[$scope.userSelection.selectedSourceComponentIndex].disabled = true;
+    $scope.userSelection.selectedSourceComponentIndex = null;
   };
 
   $scope.addUnit = function() {
-    $scope.producedComponentTypes.push(
+    $scope.componentTypeCombination.componentTypes.push(
       $scope.producedComponentTypesDropDown[$scope.userSelection.selectedProducedComponentIndex]
     );
-    $scope.producedComponentTypesDropDown.splice($scope.userSelection.selectedProducedComponentIndex, 1);
+    $scope.producedComponentTypesDropDown[$scope.userSelection.selectedProducedComponentIndex].disabled = true;
+    $scope.userSelection.selectedProducedComponentIndex = null;
   };
 
   $scope.removeSourceComponent = function() {
-    var toRemove = $scope.sourceComponentTypes.filter(function(componentType) {
+    var toRemove = $scope.componentTypeCombination.sourceComponentTypes.filter(function(componentType) {
       return $scope.userSelection.selectedSourceComponentList.indexOf(String(componentType.id)) > -1;
     });
 
     toRemove.forEach(function(componentType) {
       // Remove the component type from the list of source components
-      $scope.sourceComponentTypes.splice(
-        $scope.sourceComponentTypes.indexOf(componentType),
+      $scope.componentTypeCombination.sourceComponentTypes.splice(
+        $scope.componentTypeCombination.sourceComponentTypes.indexOf(componentType),
         1);
 
-      // Add the removed component type to the list of selectable source components
-      $scope.sourceComponentTypesDropDown.push(componentType);
+      // Re-enable the component in the list of selectable source components
+      componentType.disabled = false;
     });
 
     // Reset selection
@@ -130,18 +132,18 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
   };
 
   $scope.removeProducedComponent = function() {
-    var toRemove = $scope.producedComponentTypes.filter(function(componentType) {
+    var toRemove = $scope.componentTypeCombination.componentTypes.filter(function(componentType) {
       return $scope.userSelection.selectedProducedComponentList.indexOf(String(componentType.id)) > -1;
     });
 
     toRemove.forEach(function(componentType) {
       // Remove the component type from the list of produced components
-      $scope.producedComponentTypes.splice(
-        $scope.producedComponentTypes.indexOf(componentType),
+      $scope.componentTypeCombination.componentTypes.splice(
+        $scope.componentTypeCombination.componentTypes.indexOf(componentType),
         1);
 
-      // Add the removed component type to the list of selectable produced components
-      $scope.producedComponentTypesDropDown.push(componentType);
+      // Re-enable the component in the list of selectable produced components
+      componentType.disabled = false;
     });
 
     // Reset selection
@@ -153,21 +155,7 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
       return;
     }
 
-    $scope.savingComponentCombination = true;
-
-    if ($routeParams.id) {
-      ComponentCombinationsService.updateComponentCombination($scope.componentTypeCombination, function() {
-        $location.path('/componentCombinations');
-      }, function(response) {
-        onSaveError(response);
-      });
-    } else {
-      ComponentCombinationsService.createComponentCombination($scope.componentTypeCombination, function() {
-        $location.path('/componentCombinations');
-      }, function(response) {
-        onSaveError(response);
-      });
-    }
+    $log.debug('Todo - save component combination');
   };
 
   function init() {
