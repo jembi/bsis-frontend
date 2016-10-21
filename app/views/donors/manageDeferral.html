@@ -51,7 +51,7 @@
     </div>
 
     <!-- End date -->
-    <div class="form-group" ng-class="{'has-error' : saveDeferralForm.deferredUntil.$invalid && submitted}">
+    <div class="form-group" ng-class="{'has-error' : (saveDeferralForm.deferredUntil.$invalid || invalidDeferredUntilDate) && submitted}">
         <label for="name" class="col-sm-1 control-label" style="color:inherit;">End Date</label>
         <div class="row col-sm-11">
             <div class="form-inline" style="padding-left:5px;">
@@ -64,6 +64,11 @@
                 <div>
                     <small class="error" ng-show="saveDeferralForm.deferredUntil.$invalid && submitted">
                         This cannot be empty
+                    </small>
+                </div>
+                <div>
+                    <small class="error" ng-show="invalidDeferredUntilDate && submitted">
+                        End date can't be before deferral date
                     </small>
                 </div>
             </div>

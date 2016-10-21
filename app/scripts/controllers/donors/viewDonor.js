@@ -47,6 +47,7 @@ angular.module('bsis')
 
     $scope.formErrors = [];
     $scope.errorObject = {};
+    $scope.invalidDeferredUntilDate = false;
 
     // The donation's previous pack type
     // Used to check if pack type has changed when updating a donation
@@ -780,7 +781,6 @@ angular.module('bsis')
 
     var addDeferral = function(deferral, saveDeferralForm) {
       deferral.deferredDonor = $scope.donor;
-      deferral.deferralDate = (new Date()).toISOString();
       DonorService.addDeferral(deferral, function(response) {
         if (response === true) {
           $scope.getDeferrals($scope.donor.id);
@@ -795,8 +795,18 @@ angular.module('bsis')
     };
 
     $scope.saveDeferral = function(deferral, saveDeferralForm) {
-      if (saveDeferralForm.$valid) {
-        $scope.savingDeferral = true;
+      // Validate deferredUntil date
+      $scope.invalidDeferredUntilDate = false;
+      if (!deferral.deferralDate) {
+        deferral.deferralDate = new Date();
+      }
+
+      if (new Date(deferral.deferredUntil) < new Date(deferral.deferralDate)) {
+        $scope.invalidDeferredUntilDate = true;
+      }
+
+      if (saveDeferralForm.$valid && !$scope.invalidDeferredUntilDate) {
+        $scope.addingDeferral = true;
         if (deferral.id) {
           updateDeferral(deferral, saveDeferralForm);
         } else {
