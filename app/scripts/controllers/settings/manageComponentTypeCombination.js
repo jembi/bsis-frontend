@@ -92,6 +92,22 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
   //   $scope.savingComponentCombination = false;
   // }
 
+  var validateComponentLists = function() {
+    // Validate source component list
+    if ($scope.componentTypeCombination.sourceComponentTypes.length == 0) {
+      $scope.componentCombinationForm.sourceComponentList.$setValidity('required', false);
+    } else {
+      $scope.componentCombinationForm.sourceComponentList.$setValidity('required', true);
+    }
+
+    // Validate produced component list
+    if ($scope.componentTypeCombination.componentTypes.length == 0) {
+      $scope.componentCombinationForm.producedComponentList.$setValidity('required', false);
+    } else {
+      $scope.componentCombinationForm.producedComponentList.$setValidity('required', true);
+    }
+  };
+
   $scope.cancel = function() {
     $location.path('/componentTypeCombinations');
   };
@@ -102,6 +118,7 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     );
     $scope.sourceComponentTypesDropDown[$scope.userSelection.selectedSourceComponentIndex].disabled = true;
     $scope.userSelection.selectedSourceComponentIndex = null;
+    validateComponentLists();
   };
 
   $scope.addUnit = function() {
@@ -110,6 +127,7 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     );
     $scope.producedComponentTypesDropDown[$scope.userSelection.selectedProducedComponentIndex].disabled = true;
     $scope.userSelection.selectedProducedComponentIndex = null;
+    validateComponentLists();
   };
 
   $scope.removeSourceComponent = function() {
@@ -129,6 +147,7 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
 
     // Reset selection
     $scope.userSelection.selectedSourceComponentList = [];
+    validateComponentLists();
   };
 
   $scope.removeProducedComponent = function() {
@@ -148,9 +167,12 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
 
     // Reset selection
     $scope.userSelection.selectedProducedComponentList = [];
+    validateComponentLists();
   };
 
   $scope.saveComponentCombination = function() {
+    validateComponentLists();
+
     if ($scope.componentCombinationForm.$invalid) {
       return;
     }
@@ -164,6 +186,5 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
   }
 
   init();
-
 
 });
