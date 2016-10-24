@@ -1,8 +1,8 @@
-<h4> Add Deferral </h4>
+<h4> Manage Deferral </h4>
 <hr style="margin-top:8px;"/>
 
-<form name="addDeferralForm" novalidate class="form-horizontal col-sm-12" role="form"
-      ng-submit="addDeferral(deferral, addDeferralForm)">
+<form name="saveDeferralForm" novalidate class="form-horizontal col-sm-12" role="form"
+      ng-submit="saveDeferral(deferral, saveDeferralForm)">
 
     <!-- Reason and comment -->
     <div class="form-group">
@@ -10,8 +10,8 @@
         <div class="row col-sm-11">
             <div class="form-inline" style="padding-left:5px;">
                 <select name="deferralReason" class="form-control input-sm" ng-model="deferral.deferralReason"
-                        ng-options="item as item.reason for item in deferralReasons" required
-                        ng-class="{'ng-invalid ng-dirty' : addDeferralForm.deferralReason.$invalid && submitted}"
+                        ng-options="item as item.reason for item in deferralReasons track by item.id" required
+                        ng-class="{'ng-invalid ng-dirty' : saveDeferralForm.deferralReason.$invalid && submitted}"
                         ng-change="populateEndDate(deferral)">
                     <option value="" ng-disabled="true">Select:</option>
                 </select>
@@ -20,7 +20,7 @@
                 <div>
                     <small class="error"
                            ng-show="
-              (addDeferralForm.deferralReason.$invalid && (addDeferralForm.deferralReason.$dirty || submitted))
+              (saveDeferralForm.deferralReason.$invalid && (saveDeferralForm.deferralReason.$dirty || submitted))
             ">
                         This cannot be empty
                     </small>
@@ -37,12 +37,12 @@
                 <select name="venue" id="venue" class="form-control input-sm"
                         ng-model="deferral.venue"
                         ng-options="item as item.name for item in venues track by item.id"
-                        ng-class="{'ng-invalid ng-dirty' : addDeferralForm.venue.$invalid && submitted}"
+                        ng-class="{'ng-invalid ng-dirty' : saveDeferralForm.venue.$invalid && submitted}"
                         required>
                     <option value="" ng-disabled="true">Select:</option>
                 </select>
-               <div>
-                    <small class="error" ng-show="(addDeferralForm.venue.$invalid && (addDeferralForm.venue.$dirty || submitted))">
+                <div>
+                    <small class="error" ng-show="(saveDeferralForm.venue.$invalid && (saveDeferralForm.venue.$dirty || submitted))">
                         This cannot be empty
                     </small>
                 </div>
@@ -51,23 +51,24 @@
     </div>
 
     <!-- End date -->
-    <div class="form-group" ng-class="{'has-error' : addDeferralForm.deferredUntil.$invalid && submitted}">
+    <div class="form-group" ng-class="{'has-error' : (saveDeferralForm.deferredUntil.$invalid || invalidDeferredUntilDate) && submitted}">
         <label for="name" class="col-sm-1 control-label" style="color:inherit;">End Date</label>
         <div class="row col-sm-11">
             <div class="form-inline" style="padding-left:5px;">
-                <dateselect-end name="deferredUntil"
-                                ng-model="deferral.deferredUntil"
-                                format="format"
-                                opened="dateToOpen"
-                                required
-                                ng-disabled="deferral.deferralReason.durationType === 'PERMANENT'">
-                </dateselect-end>
+                <dateselect name="deferredUntil"
+                            ng-model="deferral.deferredUntil"
+                            format="format"
+                            required
+                            ng-disabled="deferral.deferralReason.durationType === 'PERMANENT'">
+                </dateselect>
                 <div>
-                    <small class="error"
-                           ng-show="
-              (addDeferralForm.deferredUntil.$invalid && (addDeferralForm.deferredUntil.$dirty || submitted))
-            ">
+                    <small class="error" ng-show="saveDeferralForm.deferredUntil.$invalid && submitted">
                         This cannot be empty
+                    </small>
+                </div>
+                <div>
+                    <small class="error" ng-show="invalidDeferredUntilDate && submitted">
+                        End date can't be before deferral date
                     </small>
                 </div>
             </div>
@@ -75,11 +76,11 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-1 col-sm-3">
-            <button class="btn btn-primary" type="submit" ng-disabled="addingDeferral">{{addingDeferral ? "Adding..." :
-                "Add Deferral"}}
+            <button class="btn btn-primary" type="submit" ng-disabled="savingDeferral">{{savingDeferral ? "Saving..." :
+                "Save Deferral"}}
             </button>
-            <button class="btn btn-primary" type="button" ng-disabled="addingDeferral"
-                    ng-click="clearForm(addDeferralForm); clear(); getDeferrals(donor.id)">Cancel
+            <button class="btn btn-primary" type="button" ng-disabled="savingDeferral"
+                    ng-click="clearForm(saveDeferralForm); clear(); getDeferrals(donor.id)">Cancel
             </button>
         </div>
     </div>

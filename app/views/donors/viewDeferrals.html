@@ -31,19 +31,7 @@
             </span>
                 </td>
                 <td data-title="'End'" header-class="text-left" class="col-sm-2 text-center" sortable="'deferredUntil'">
-                    <span ng-show="!editableDeferralForm.$visible">{{ (deferral.deferredUntil | bsisDate) || '' }}</span>
-                    <span ng-show="editableDeferralForm.$visible" e-required>
-                      <dateselect name="deferredUntil"
-                                      ng-model="deferral.deferredUntil"
-                                      initDate="deferral.deferredUntil"
-                                      format="format"
-                                      opened="dateToOpen"
-                                      cal-icon="icons.CALENDAR"
-                                      required
-                                      style="width: 100%"
-                                      ng-disabled="deferral.deferralReason.durationType === 'PERMANENT'">
-                      </dateselect>
-                    </span>
+                    <span>{{ (deferral.deferredUntil | bsisDate) || '' }}</span>
                 </td>
                 <td data-title="'Reason'" header-class="text-left" class="col-sm-2" sortable="'deferralReason.reason'">
                     <span ng-show="!editableDeferralForm.$visible">{{deferral.deferralReason.reason}}</span>
@@ -57,21 +45,10 @@
             </span>
                 </td>
                 <td data-title="'Comment'" header-class="text-left" class="col-sm-3" sortable="'deferralReasonText'">
-                    <span ng-show="!editableDeferralForm.$visible">{{deferral.deferralReasonText}}</span>
-            <span ng-show="editableDeferralForm.$visible">
-              <input size="30" type="comment" id="deferralReasonText" class="form-control input-sm"
-                     ng-model="deferral.deferralReasonText">
-            </span>
+                    <span>{{deferral.deferralReasonText}}</span>
                 </td>
                 <td data-title="'Venue'" header-class="text-left" class="col-sm-1" sortable="'venue.name'">
-                    <span ng-show="!editableDeferralForm.$visible">{{deferral.venue.name}}</span>
-            <span ng-show="editableDeferralForm.$visible" e-required>
-              <select name="venue" class="form-control input-sm"
-                      ng-model="deferral.venue"
-                      ng-options="item as item.name for item in venues track by item.id"
-                      required>
-              </select>
-            </span>
+                    <span>{{deferral.venue.name}}</span>
                 </td>
                 <td data-title="'User'" header-class="text-left" class="col-sm-1" sortable="'createdBy'"
                     filter="{ 'createdBy': 'text' }">
@@ -82,41 +59,17 @@
                 <td data-title="''" class="col-sm-2 text-center">
               <span style="float: right;">
 
-                <form editable-form name="editableDeferralForm" onaftersave="updateDonorDeferral(deferral)"
-                      style="display:inline;">
-                    <!-- Edit deferral actions -->
-                    <div has-permission="{{permissions.EDIT_DEFFERAL}}"
-                         ng-hide="deletingDeferral || endDeferralForm.$visible" style="display:inline;">
-                        <em>
-                            <button type="button" class="btn btn-link" ng-click="editableDeferralForm.$show()"
-                                    ng-hide="editableDeferralForm.$visible" ng-disabled="!deferral.permissions.canEdit">
-                                Edit
-                            </button>
-                        </em>
-
-                    <span ng-show="editableDeferralForm.$visible">
-                      <em>
-                          <button type="submit" class="btn btn-link text-success"
-                                  ng-disabled="editableDeferralForm.$waiting">
-                              Save
-                          </button>
-                          <button type="button" class="btn btn-link text-muted"
-                                  ng-disabled="editableDeferralForm.$waiting" ng-click="editableDeferralForm.$cancel()">
-                              Cancel
-                          </button>
-                      </em>
-                    </span>
-                    </div>
-                </form>
+                <!-- Edit deferral actions -->
+                <div has-permission="{{permissions.EDIT_DEFFERAL}}" ng-hide="deletingDeferral" style="display:inline;">
+                    <em><a href="" ng-click="manageDeferral(deferral)">Edit</a></em>
+                </div>
 
                 <form editable-form name="endDeferralForm"
                       onaftersave="endDonorDeferral(deferral, comment, endDeferralForm)" style="display:inline;">
                     <!-- End deferral actions -->
-                    <div has-permission="{{permissions.EDIT_DEFFERAL}}"
-                         ng-hide="editableDeferralForm.$visible || deletingDeferral" style="display:inline;">
+                    <div has-permission="{{permissions.EDIT_DEFFERAL}}" ng-hide="deletingDeferral" style="display:inline;">
                         <em>
-                            <button type="button" class="btn btn-link" ng-click="endDeferralForm.$show()"
-                                    ng-hide="endDeferralForm.$visible" ng-disabled="!deferral.permissions.canEnd">End
+                            <button type="button" class="btn btn-link" ng-click="endDeferralForm.$show()" ng-disabled="!deferral.permissions.canEnd">End
                                 Deferral
                             </button>
                         </em>
