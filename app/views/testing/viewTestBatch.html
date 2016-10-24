@@ -87,7 +87,7 @@
           <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
             <small>
               <em>Repeat TTI Test Outcomes:
-                <a ng-href="#/managePendingTests/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!hasPendingRepeatTTITests">Enter </a>|
+                <a ng-href="#/managePendingTests/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!hasRepeatTTITests">Enter </a>|
               </em>
               <em>
                 <a ng-href="#/reEnterTTI/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!hasReEntryRequiredRepeatTTITests">Re-Enter</a>
@@ -99,7 +99,7 @@
           <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
             <small>
               <em>Repeat ABO/Rh Outcomes:
-                <a ng-href="#/managePendingBloodTypingTests/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!hasPendingRepeatBloodTypingTests">Enter </a>|
+                <a ng-href="#/managePendingBloodTypingTests/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!hasRepeatBloodTypingTests">Enter </a>|
               </em>
               <em>
                 <a ng-href="#/reEnterBloodTyping/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!hasReEntryRequiredRepeatBloodTypingTests">Re-Enter</a>
@@ -114,7 +114,7 @@
           <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
             <small>
               <em>Confirmatory TTI Test Outcomes:
-                <a ng-href="#/managePendingTests/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!hasPendingConfirmatoryTTITests">Enter </a>|
+                <a ng-href="#/managePendingTests/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!hasConfirmatoryTTITests">Enter </a>|
               </em>
               <em>
                 <a ng-href="#/reEnterTTI/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!hasReEntryRequiredConfirmatoryTTITests">Re-Enter</a>
