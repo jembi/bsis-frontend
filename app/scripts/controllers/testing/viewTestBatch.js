@@ -88,15 +88,18 @@ angular.module('bsis')
     $scope.getCurrentTestBatchOverview = function() {
       TestingService.getTestBatchOverviewById({testBatch: $routeParams.id}, function(response) {
         $scope.testBatchOverview = response;
-        $scope.pendingRepeatBloodTypingTests = response.pendingRepeatBloodTypingTests;
-        $scope.pendingRepeatTTITests = response.pendingRepeatTTITests;
-        $scope.pendingConfirmatoryTTITests = response.pendingConfirmatoryTTITests;
-        $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
-        $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
-        $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
-        $scope.reEntryRequiredRepeatBloodTypingTests = response.reEntryRequiredRepeatBloodTypingTests;
-        $scope.reEntryRequiredRepeatTTITests = response.reEntryRequiredRepeatTTITests;
-        $scope.reEntryRequiredConfirmatoryTTITests = response.reEntryRequiredConfirmatoryTTITests;
+        $scope.hasPendingRepeatBloodTypingTests = response.hasPendingRepeatBloodTypingTests;
+        $scope.hasPendingRepeatTTITests = response.hasPendingRepeatTTITests;
+        $scope.hasPendingConfirmatoryTTITests = response.hasPendingConfirmatoryTTITests;
+        $scope.hasPendingBloodTypingConfirmations = response.hasPendingBloodTypingConfirmations;
+        $scope.hasRepeatBloodTypingTests = response.hasRepeatBloodTypingTests;
+        $scope.hasConfirmatoryTTITests = response.hasConfirmatoryTTITests;
+        $scope.hasRepeatTTITests = response.hasRepeatTTITests;
+        $scope.hasReEntryRequiredTTITests = response.hasReEntryRequiredTTITests;
+        $scope.hasReEntryRequiredBloodTypingTests = response.hasReEntryRequiredBloodTypingTests;
+        $scope.hasReEntryRequiredRepeatBloodTypingTests = response.hasReEntryRequiredRepeatBloodTypingTests;
+        $scope.hasReEntryRequiredRepeatTTITests = response.hasReEntryRequiredRepeatTTITests;
+        $scope.hasReEntryRequiredConfirmatoryTTITests = response.hasReEntryRequiredConfirmatoryTTITests;
       }, function(err) {
         $log.error(err);
       });

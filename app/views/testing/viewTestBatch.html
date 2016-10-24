@@ -63,7 +63,7 @@
                 <a ng-href="#/manageTTITesting/{{testBatch.id}}/BASIC_TTI">Enter </a>|
               </em>
               <em>
-                <a ng-href="#/reEnterTTI/{{testBatch.id}}/BASIC_TTI" ng-disabled="!reEntryRequiredTTITests">Re-Enter</a>
+                <a ng-href="#/reEnterTTI/{{testBatch.id}}/BASIC_TTI" ng-disabled="!hasReEntryRequiredTTITests">Re-Enter</a>
               </em>
             </small>
           </span>
@@ -75,7 +75,7 @@
                 <a ng-href="#/manageBloodGroupTesting/{{testBatch.id}}/BASIC_BLOODTYPING">Enter </a>|
               </em>
               <em>
-                <a ng-href="#/reEnterBloodTyping/{{testBatch.id}}/BASIC_BLOODTYPING" ng-disabled="!reEntryRequiredBloodTypingTests">Re-Enter</a>
+                <a ng-href="#/reEnterBloodTyping/{{testBatch.id}}/BASIC_BLOODTYPING" ng-disabled="!hasReEntryRequiredBloodTypingTests">Re-Enter</a>
               </em>
             </small>
           </span>
@@ -87,10 +87,10 @@
           <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
             <small>
               <em>Repeat TTI Test Outcomes:
-                <a ng-href="#/managePendingTests/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!pendingRepeatTTITests">Enter </a>|
+                <a ng-href="#/managePendingTests/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!hasRepeatTTITests">Enter </a>|
               </em>
               <em>
-                <a ng-href="#/reEnterTTI/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!reEntryRequiredRepeatTTITests">Re-Enter</a>
+                <a ng-href="#/reEnterTTI/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!hasReEntryRequiredRepeatTTITests">Re-Enter</a>
               </em>
             </small>
           </span>
@@ -99,10 +99,10 @@
           <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
             <small>
               <em>Repeat ABO/Rh Outcomes:
-                <a ng-href="#/managePendingBloodTypingTests/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!pendingRepeatBloodTypingTests">Enter </a>|
+                <a ng-href="#/managePendingBloodTypingTests/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!hasRepeatBloodTypingTests">Enter </a>|
               </em>
               <em>
-                <a ng-href="#/reEnterBloodTyping/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!reEntryRequiredRepeatBloodTypingTests">Re-Enter</a>
+                <a ng-href="#/reEnterBloodTyping/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!hasReEntryRequiredRepeatBloodTypingTests">Re-Enter</a>
               </em>
             </small>
           </span>
@@ -114,10 +114,10 @@
           <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
             <small>
               <em>Confirmatory TTI Test Outcomes:
-                <a ng-href="#/managePendingTests/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!pendingConfirmatoryTTITests">Enter </a>|
+                <a ng-href="#/managePendingTests/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!hasConfirmatoryTTITests">Enter </a>|
               </em>
               <em>
-                <a ng-href="#/reEnterTTI/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!reEntryRequiredConfirmatoryTTITests">Re-Enter</a>
+                <a ng-href="#/reEnterTTI/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!hasReEntryRequiredConfirmatoryTTITests">Re-Enter</a>
               </em>
             </small>
           </span>
@@ -164,7 +164,7 @@
 
   <span ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
     <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a
-            ng-href="#/manageBloodGroupMatchTesting/{{testBatch.id}}" ng-disabled="!pendingBloodTypingConfirmations">Resolve Ambiguous ABO/Rh Outcomes</a></em></small> </span>
+            ng-href="#/manageBloodGroupMatchTesting/{{testBatch.id}}" ng-disabled="!hasPendingBloodTypingConfirmations">Resolve Ambiguous ABO/Rh Outcomes</a></em></small> </span>
   </span>
 
       <div ng-show="editableForm.$visible && testBatch.permissions.canEditDonationBatches">
@@ -205,6 +205,9 @@
   <div style="padding-bottom: 5px">
       <uib-alert type="info" ng-if="testBatch.permissions.canRelease">This test batch is ready to be released.</uib-alert>
       <uib-alert type="info" ng-if="testBatch.permissions.canClose">This test batch is ready to be closed.</uib-alert>
+      <uib-alert type="info" ng-if="hasPendingRepeatTTITests || hasPendingConfirmatoryTTITests">Pending: TTI repeat and/or confirmatory test outcomes.</uib-alert>
+      <uib-alert type="info" ng-if="hasPendingRepeatBloodTypingTests">Pending: blood group serology repeat test outcomes.</uib-alert>
+      <uib-alert type="info" ng-if="hasPendingBloodTypingConfirmations">Pending: ambiguous blood group serology test outcomes.</uib-alert>
   </div>
 
   <div class="col-sm-12">
