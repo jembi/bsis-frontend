@@ -17,7 +17,7 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
 
   $scope.componentCombinationForm = {};
 
-  $scope.$watch('sourceComponentTypes.combinationName', function() {
+  $scope.$watch('componentTypeCombination.combinationName', function() {
     $timeout(function() {
       $scope.componentCombinationForm.componentCombinationName.$setValidity('duplicate', true);
     });
