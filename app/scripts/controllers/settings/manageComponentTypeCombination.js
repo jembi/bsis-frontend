@@ -29,6 +29,21 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     }
     $scope.savingComponentCombination = false;
   }
+  var validateComponentLists = function() {
+    // Validate source component list
+    if ($scope.componentTypeCombination.sourceComponentTypes.length == 0) {
+      $scope.componentCombinationForm.sourceComponentList.$setValidity('required', false);
+    } else {
+      $scope.componentCombinationForm.sourceComponentList.$setValidity('required', true);
+    }
+
+    // Validate produced component list
+    if ($scope.componentTypeCombination.componentTypes.length == 0) {
+      $scope.componentCombinationForm.producedComponentList.$setValidity('required', false);
+    } else {
+      $scope.componentCombinationForm.producedComponentList.$setValidity('required', true);
+    }
+  };
 
   $scope.cancel = function() {
     $location.path('/componentTypeCombinations');
