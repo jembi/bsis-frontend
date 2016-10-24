@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function($scope, $location, $routeParams, $log, $timeout, ComponentTypeCombinationsService) {
+angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function($scope, $location, $log, $timeout, ComponentTypeCombinationsService) {
   $scope.componentTypeCombination = {
     combinationName: '',
     sourceComponentTypes: [],
@@ -114,6 +114,7 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
       return;
     }
     $scope.savingComponentCombination = true;
+    // Remove disabled element out of source and produced componentType lists as it is not part of the request
     angular.forEach($scope.componentTypeCombination.sourceComponentTypes, function(sourceType) {
       delete sourceType.disabled;
     });
@@ -123,6 +124,7 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     ComponentTypeCombinationsService.createComponentTypeCombinations($scope.componentTypeCombination, function() {
       $location.path('/componentTypeCombinations');
     }, function(response) {
+      $scope.savingComponentCombination = false;
       onSaveError(response);
     });
   };
