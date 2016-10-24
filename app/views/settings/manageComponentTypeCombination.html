@@ -45,7 +45,7 @@
           <div class="col-sm-10">
             <div class="form-inline">
               <select class="form-control" style="width:auto;min-width:350px;" name="sourceComponentList"
-                ng-model="userSelection.selectedSourceComponentList" required multiple>
+                ng-model="userSelection.selectedSourceComponentList" multiple>
                 <option ng-repeat="componentType in componentTypeCombination.sourceComponentTypes" value="{{componentType.id}}">
                   {{componentType.componentTypeName}}
                 </option>
@@ -88,7 +88,7 @@
           <div class="col-sm-10">
             <div class="form-inline">
               <select class="form-control" style="width:auto;min-width:350px;" name="producedComponentList"
-                ng-model="userSelection.selectedProducedComponentList" required multiple>
+                ng-model="userSelection.selectedProducedComponentList" multiple>
                 <option ng-repeat="componentType in componentTypeCombination.componentTypes" value="{{componentType.id}}">
                   {{componentType.componentTypeName}}
                 </option>
