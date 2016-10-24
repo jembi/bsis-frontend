@@ -25,7 +25,7 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
 
   function onSaveError(err) {
     if (err.data && err.data.combinationName) {
-      $scope.componentCombinationForm.combinationName.$setValidity('duplicate', false);
+      $scope.componentCombinationForm.componentCombinationName.$setValidity('duplicate', false);
     }
     $scope.savingComponentCombination = false;
   }
