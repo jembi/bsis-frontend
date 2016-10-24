@@ -505,6 +505,13 @@ angular.module('bsis')
         search: {
           method: 'GET',
           url: url + '/componenttypecombinations/search'
+        },
+        update: {
+          method: 'PUT'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/componenttypecombinations/form'
         }
       })
     };

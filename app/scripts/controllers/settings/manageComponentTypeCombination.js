@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function($scope, $location, $log, $timeout) {
+angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function($scope, $location, $routeParams, $log, $timeout, ComponentTypeCombinationsService) {
   $scope.componentTypeCombination = {
     combinationName: '',
     sourceComponentTypes: [],
@@ -17,80 +17,18 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
 
   $scope.componentCombinationForm = {};
 
-  var mockComponentTypes = function() {
-    return [
-      {
-        id: 6,
-        componentTypeName: 'Whole Blood - CPDA',
-        componentTypeCode: '1001',
-        description: ''
-      }, {
-        id: 7,
-        componentTypeName: 'Whole Blood Poor Platelets - CPDA',
-        componentTypeCode: '1005',
-        description: ''
-      }, {
-        id: 8,
-        componentTypeName: 'Packed Red Cells - CPDA',
-        componentTypeCode: '2001',
-        description: ''
-      }, {
-        id: 9,
-        componentTypeName: 'Packed Red Cells - SAGM',
-        componentTypeCode: '2011',
-        description: ''
-      }, {
-        id: 10,
-        componentTypeName: 'Fresh Frozen Plasma - Whole Blood',
-        componentTypeCode: '3001',
-        description: ''
-      }, {
-        id: 11,
-        componentTypeName: 'Frozen Plasma - Whole Blood',
-        componentTypeCode: '3002',
-        description: ''
-      }, {
-        id: 12,
-        componentTypeName: 'Platelets Concentrate - Whole Blood',
-        componentTypeCode: '4001',
-        description: ''
-      }, {
-        id: 13,
-        componentTypeName: 'Platelets Concentrate - Whole Blood - 24H',
-        componentTypeCode: '4011',
-        description: ''
-      }, {
-        id: 14,
-        componentTypeName: 'Packed Red Cells - Paediatric - CPDA',
-        componentTypeCode: '2101',
-        description: ''
-      }, {
-        id: 15,
-        componentTypeName: 'Fresh Frozen Plasma - Apheresis',
-        componentTypeCode: '3011',
-        description: ''
-      }, {
-        id: 16,
-        componentTypeName: 'Platelets Concentrate - Apheresis',
-        componentTypeCode: '4021',
-        description: ''
-      }
-    ];
-  };
-
   $scope.$watch('sourceComponentTypes.combinationName', function() {
     $timeout(function() {
       $scope.componentCombinationForm.componentCombinationName.$setValidity('duplicate', true);
     });
   });
 
-  // Disabled to pass 'npm run lint' (to be enabled in hook up task)
-  // function onSaveError(err) {
-  //   if (err.data && err.data.combinationName) {
-  //     $scope.componentCombinationForm.combinationName.$setValidity('duplicate', false);
-  //   }
-  //   $scope.savingComponentCombination = false;
-  // }
+  function onSaveError(err) {
+    if (err.data && err.data.combinationName) {
+      $scope.componentCombinationForm.combinationName.$setValidity('duplicate', false);
+    }
+    $scope.savingComponentCombination = false;
+  }
 
   $scope.cancel = function() {
     $location.path('/componentTypeCombinations');
@@ -154,16 +92,26 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     if ($scope.componentCombinationForm.$invalid) {
       return;
     }
-
-    $log.debug('Todo - save component combination');
+    $scope.savingComponentCombination = true;
+    angular.forEach($scope.componentTypeCombination.sourceComponentTypes, function(sourceType) {
+      delete sourceType.disabled;
+    });
+    angular.forEach($scope.componentTypeCombination.componentTypes, function(producedType) {
+      delete producedType.disabled;
+    });
+    ComponentTypeCombinationsService.createComponentTypeCombinations($scope.componentTypeCombination, function() {
+      $location.path('/componentTypeCombinations');
+    }, function(response) {
+      onSaveError(response);
+    });
   };
 
   function init() {
-    $scope.sourceComponentTypesDropDown = mockComponentTypes();
-    $scope.producedComponentTypesDropDown = mockComponentTypes();
+    ComponentTypeCombinationsService.getComponentTypeCombinationsForm(function(response) {
+      $scope.sourceComponentTypesDropDown = response.sourceComponentTypes;
+      $scope.producedComponentTypesDropDown = response.producedComponentTypes;
+    }, $log.error);
   }
 
   init();
-
-
 });
