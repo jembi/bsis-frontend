@@ -84,24 +84,16 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     });
   });
 
-  // Disabled to pass 'npm run lint' (to be enabled in hook up task)
-  // function onSaveError(err) {
-  //   if (err.data && err.data.combinationName) {
-  //     $scope.componentCombinationForm.combinationName.$setValidity('duplicate', false);
-  //   }
-  //   $scope.savingComponentCombination = false;
-  // }
-
   var validateComponentLists = function() {
     // Validate source component list
-    if ($scope.componentTypeCombination.sourceComponentTypes.length == 0) {
+    if ($scope.componentTypeCombination.sourceComponentTypes.length === 0) {
       $scope.componentCombinationForm.sourceComponentList.$setValidity('required', false);
     } else {
       $scope.componentCombinationForm.sourceComponentList.$setValidity('required', true);
     }
 
     // Validate produced component list
-    if ($scope.componentTypeCombination.componentTypes.length == 0) {
+    if ($scope.componentTypeCombination.componentTypes.length === 0) {
       $scope.componentCombinationForm.producedComponentList.$setValidity('required', false);
     } else {
       $scope.componentCombinationForm.producedComponentList.$setValidity('required', true);
