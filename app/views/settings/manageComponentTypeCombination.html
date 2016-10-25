@@ -46,7 +46,7 @@
             <div class="form-inline">
               <select class="form-control" style="width:auto;min-width:350px;" name="sourceComponentList"
                 ng-model="userSelection.selectedSourceComponentList" multiple>
-                <option ng-repeat="componentType in componentTypeCombination.sourceComponentTypes" value="{{componentType.id}}">
+                <option ng-repeat="componentType in componentTypeCombination.sourceComponentTypes" value="{{$index}}">
                   {{componentType.componentTypeName}}
                 </option>
               </select>
@@ -70,8 +70,7 @@
               <select class="form-control" style="width:auto;min-width:350px;" name="producedComponentOption" ng-model="userSelection.selectedProducedComponentIndex">
                   <option value=""></option>
                   <option ng-repeat="componentType in producedComponentTypesDropDown"
-                        value="{{producedComponentTypesDropDown.indexOf(componentType)}}"
-                        ng-disabled="componentType.disabled">
+                        value="{{producedComponentTypesDropDown.indexOf(componentType)}}">
                         {{componentType.componentTypeName}}
                 </option>
               </select>
@@ -89,7 +88,7 @@
             <div class="form-inline">
               <select class="form-control" style="width:auto;min-width:350px;" name="producedComponentList"
                 ng-model="userSelection.selectedProducedComponentList" multiple>
-                <option ng-repeat="componentType in componentTypeCombination.componentTypes" value="{{componentType.id}}">
+                <option ng-repeat="componentType in componentTypeCombination.componentTypes track by $index" value="{{$index}}">
                   {{componentType.componentTypeName}}
                 </option>
               </select>

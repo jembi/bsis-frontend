@@ -62,14 +62,15 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     $scope.componentTypeCombination.componentTypes.push(
       $scope.producedComponentTypesDropDown[$scope.userSelection.selectedProducedComponentIndex]
     );
-    $scope.producedComponentTypesDropDown[$scope.userSelection.selectedProducedComponentIndex].disabled = true;
     $scope.userSelection.selectedProducedComponentIndex = null;
     validateComponentLists();
   };
 
   $scope.removeSourceComponent = function() {
-    var toRemove = $scope.componentTypeCombination.sourceComponentTypes.filter(function(componentType) {
-      return $scope.userSelection.selectedSourceComponentList.indexOf(String(componentType.id)) > -1;
+    $scope.userSelection.selectedSourceComponentList.reverse();
+
+    var toRemove = $scope.componentTypeCombination.sourceComponentTypes.filter(function(componentType, index) {
+      return $scope.userSelection.selectedSourceComponentList.indexOf(String(index)) > -1;
     });
 
     toRemove.forEach(function(componentType) {
@@ -88,21 +89,12 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
   };
 
   $scope.removeProducedComponent = function() {
-    var toRemove = $scope.componentTypeCombination.componentTypes.filter(function(componentType) {
-      return $scope.userSelection.selectedProducedComponentList.indexOf(String(componentType.id)) > -1;
+    $scope.userSelection.selectedProducedComponentList.reverse();
+
+    $scope.userSelection.selectedProducedComponentList.forEach(function(indexToRemove) {
+      $scope.componentTypeCombination.componentTypes.splice(indexToRemove, 1);
     });
 
-    toRemove.forEach(function(componentType) {
-      // Remove the component type from the list of produced components
-      $scope.componentTypeCombination.componentTypes.splice(
-        $scope.componentTypeCombination.componentTypes.indexOf(componentType),
-        1);
-
-      // Re-enable the component in the list of selectable produced components
-      componentType.disabled = false;
-    });
-
-    // Reset selection
     $scope.userSelection.selectedProducedComponentList = [];
     validateComponentLists();
   };
