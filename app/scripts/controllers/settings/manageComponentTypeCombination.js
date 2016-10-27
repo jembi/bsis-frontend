@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function($scope, $location, $log, $timeout, ComponentTypeCombinationsService) {
+angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function($scope, $location, $log, $timeout, $routeParams, ComponentTypeCombinationsService) {
   $scope.componentTypeCombination = {
     combinationName: '',
     sourceComponentTypes: [],
@@ -113,12 +113,22 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     angular.forEach($scope.componentTypeCombination.componentTypes, function(producedType) {
       delete producedType.disabled;
     });
-    ComponentTypeCombinationsService.createComponentTypeCombinations($scope.componentTypeCombination, function() {
-      $location.path('/componentTypeCombinations');
-    }, function(response) {
-      $scope.savingComponentCombination = false;
-      onSaveError(response);
-    });
+
+    if ($routeParams.id) {
+      ComponentTypeCombinationsService.updateComponentTypeCombinations($scope.componentTypeCombination, function() {
+        $location.path('/componentTypeCombinations');
+      }, function(response) {
+        $scope.savingComponentCombination = false;
+        onSaveError(response);
+      });
+    } else {
+      ComponentTypeCombinationsService.createComponentTypeCombinations($scope.componentTypeCombination, function() {
+        $location.path('/componentTypeCombinations');
+      }, function(response) {
+        $scope.savingComponentCombination = false;
+        onSaveError(response);
+      });
+    }
   };
 
   function init() {
@@ -126,6 +136,12 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
       $scope.sourceComponentTypesDropDown = response.sourceComponentTypes;
       $scope.producedComponentTypesDropDown = response.producedComponentTypes;
     }, $log.error);
+
+    if ($routeParams.id) {
+      ComponentTypeCombinationsService.getComponentTypeCombinationById({id: $routeParams.id}, function(response) {
+        $scope.componentTypeCombination = response.componentTypeCombination;
+      }, $log.error);
+    }
   }
 
   init();
