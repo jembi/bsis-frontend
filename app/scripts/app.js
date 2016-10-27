@@ -569,6 +569,11 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'ManageDivisionCtrl',
         permission: PERMISSIONS.MANAGE_DIVISIONS
       })
+      .when('/bloodTests', {
+        templateUrl: 'views/settings/bloodTests.html',
+        controller: 'BloodTestsCtrl',
+        permission: PERMISSIONS.MANAGE_BLOOD_TESTS
+      })
       .when('/dataExport', {
         templateUrl: 'views/settings/dataExport.html',
         controller: 'DataExportCtrl',

@@ -74,6 +74,9 @@ angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, Routin
         '/manageDivision'
       ]
     }, {
+      path: '/bloodTests',
+      subpaths: []
+    }, {
       path: '/dataExport',
       subpaths: []
     }
