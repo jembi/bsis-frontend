@@ -68,7 +68,7 @@ angular.module('bsis')
         rows[componentTypeIndex] = initRow(componentType);
       }
 
-      // Show processing site name on frist component type row only
+      // Show processing site name on first component type row only
       if (componentTypeIndex === 1) {
         rows[componentTypeIndex].venue = newRow.location.name;
       }
@@ -103,6 +103,7 @@ angular.module('bsis')
 
     function mergeData(dataValues) {
       var previousVenue = '';
+      var previousComponentType = '';
       var rowsForVenue = [];
       var componentTypeIndex = 0;
       var componentTypeSummaryIndex = 0;
@@ -130,7 +131,10 @@ angular.module('bsis')
           componentTypeIndex = 0;
         }
 
-        componentTypeIndex += 1;
+        if (previousComponentType !== newRow.cohorts[0].option) {
+          componentTypeIndex += 1;
+          previousComponentType = newRow.cohorts[0].option;
+        }
 
         // Generate summary index for each component type
         var componentType = newRow.cohorts[0].option;
