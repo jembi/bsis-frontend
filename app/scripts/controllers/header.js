@@ -188,7 +188,8 @@ angular.module('bsis')
       '/manageDivision',
       '/manageDivision/?\\d*',
       '/dataExport',
-      '/componentTypeCombinations'
+      '/componentTypeCombinations',
+      '/bloodTests'
     ];
 
     /**

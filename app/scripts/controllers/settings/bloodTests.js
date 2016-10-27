@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('BloodTestsCtrl', function($scope, $location, $routeParams, $log, ICONS) {
+angular.module('bsis').controller('BloodTestsCtrl', function($scope) {
 
   var columnDefs = [
     {
@@ -42,7 +42,6 @@ angular.module('bsis').controller('BloodTestsCtrl', function($scope, $location, 
     }
   ];
 
-  $scope.icons = ICONS;
 
   $scope.gridOptions = {
     data: [],
