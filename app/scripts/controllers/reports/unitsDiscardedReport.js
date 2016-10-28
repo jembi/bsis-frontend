@@ -74,7 +74,7 @@ angular.module('bsis')
       }
 
       // Populate component type row
-      rows[componentTypeIndex][discardReason] = newRow.value;
+      rows[componentTypeIndex][discardReason] += newRow.value;
       rows[componentTypeIndex].total += newRow.value;
       // Populate total row
       rows[0][discardReason] += newRow.value;
@@ -146,7 +146,7 @@ angular.module('bsis')
         populateRows(rowsForVenue, newRow, componentTypeIndex);
         // Update venue for summary
         newRow.location.name = 'All processing sites';
-        populateRows(summaryRows, newRow, componentTypeSummaryIndex);
+        populateRows(summaryRows, newRow, summaryComponentTypeMap[componentType]);
       });
 
       // Run one last time for the last venue
