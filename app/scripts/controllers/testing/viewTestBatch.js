@@ -146,7 +146,7 @@ angular.module('bsis')
         name: 'Released',
         displayName: 'Released',
         field: 'released',
-        cellTemplate: '<div class="ui-grid-cell-contents">{{released ? "Y" : "N"}}</div>',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["released"] ? "Y" : "N"}}</div>',
         visible: true,
         width: '**'
       },
