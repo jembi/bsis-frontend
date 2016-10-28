@@ -188,6 +188,7 @@ angular.module('bsis')
       exporterPdfDefaultStyle: {fontSize: 4, margin: [-2, 0, 0, 0] },
       exporterPdfTableHeaderStyle: {fontSize: 5, bold: true, margin: [-2, 0, 0, 0] },
       exporterPdfMaxGridWidth: 500,
+      exporterSuppressColumns: ['Venue'],
       // Format values for exports
       exporterFieldCallback: function(grid, row, col, value) {
         if (col.name === 'Date Bled') {
@@ -328,8 +329,6 @@ angular.module('bsis')
     };
 
     function addTestNamesToColumnDefs(testBatchOutcomesReport) {
-      //remove unwanted column TODO there might be better solution
-      columnDefs.splice(3, 1);
       angular.forEach(testBatchOutcomesReport.basicTtiTestNames, function(testName) {
         columnDefs.push(
           {
