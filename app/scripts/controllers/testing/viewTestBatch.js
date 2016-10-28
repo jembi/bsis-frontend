@@ -145,7 +145,8 @@ angular.module('bsis')
       {
         name: 'Released',
         displayName: 'Released',
-        field: 'releaseStatus',
+        field: 'released',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{released ? "Y" : "N"}}</div>',
         visible: true,
         width: '**'
       },
@@ -210,6 +211,10 @@ angular.module('bsis')
           value = row.entity.bloodTypingStatus + ' - ' +  row.entity.bloodTypingMatchStatus;
           var bloodGroup = (row.entity.bloodRh === '' ? '' : row.entity.bloodAbo) + (row.entity.bloodAbo === '' ? '' : row.entity.bloodRh);
           return $filter('titleCase')(value) + ' (' + bloodGroup + ')';
+        }
+        //modify value of value of released column
+        if (col.name === 'Released') {
+          return value === true ? 'Y' : 'N';
         }
         // assume that column is a test outcome column, and manage empty values
         if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue' && col.name !== 'Released' && col.name !== 'TTI Status' && col.name !== 'bloodTypingStatusBloodTypingMatchStatus' && col.name !== 'previousDonationAboRhOutcome') {
