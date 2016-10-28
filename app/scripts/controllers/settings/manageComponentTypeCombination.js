@@ -29,6 +29,7 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     }
     $scope.savingComponentCombination = false;
   }
+
   var validateComponentLists = function() {
     // Validate source component list
     if ($scope.componentTypeCombination.sourceComponentTypes.length == 0) {
@@ -131,18 +132,44 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     }
   };
 
-  function init() {
+  function initComponentTypes() {
+    if ($routeParams.id) {
+      // Wait until source dropDowns are assigned
+      var listener = $scope.$watch('sourceComponentTypesDropDown', function() {
+        $timeout(function() {
+          ComponentTypeCombinationsService.getComponentTypeCombinationById({id: $routeParams.id}, function(response) {
+            $scope.componentTypeCombination = response.componentTypeCombination;
+
+            // Clear sourceComponentTypes so that they can be referenced from the drop down objects
+            var existingSourceComponentTypes = angular.copy($scope.componentTypeCombination.sourceComponentTypes);
+            $scope.componentTypeCombination.sourceComponentTypes = [];
+
+            // Mark existing sourceComponentTypes as disabled and add the dropDown objects to the combination array
+            angular.forEach($scope.sourceComponentTypesDropDown, function(dropDownType, index) {
+              angular.forEach(existingSourceComponentTypes, function(type) {
+                if (type.id === dropDownType.id) {
+                  $scope.componentTypeCombination.sourceComponentTypes.push(
+                    $scope.sourceComponentTypesDropDown[index]
+                  );
+                  $scope.sourceComponentTypesDropDown[index].disabled = true;
+                }
+              });
+            });
+          }, $log.error);
+        });
+        // Unbind the watch so that it's run only once
+        listener();
+      });
+    }
+  }
+
+  function initForm() {
     ComponentTypeCombinationsService.getComponentTypeCombinationsForm(function(response) {
       $scope.sourceComponentTypesDropDown = response.sourceComponentTypes;
       $scope.producedComponentTypesDropDown = response.producedComponentTypes;
     }, $log.error);
-
-    if ($routeParams.id) {
-      ComponentTypeCombinationsService.getComponentTypeCombinationById({id: $routeParams.id}, function(response) {
-        $scope.componentTypeCombination = response.componentTypeCombination;
-      }, $log.error);
-    }
   }
 
-  init();
+  initForm();
+  initComponentTypes();
 });
