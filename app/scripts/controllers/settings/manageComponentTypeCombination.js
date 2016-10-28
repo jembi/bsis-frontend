@@ -132,44 +132,40 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     }
   };
 
-  function initComponentTypes() {
-    if ($routeParams.id) {
-      // Wait until source dropDowns are assigned
-      var listener = $scope.$watch('sourceComponentTypesDropDown', function() {
-        $timeout(function() {
-          ComponentTypeCombinationsService.getComponentTypeCombinationById({id: $routeParams.id}, function(response) {
-            $scope.componentTypeCombination = response.componentTypeCombination;
+  function initSourceComponentTypes() {
+    ComponentTypeCombinationsService.getComponentTypeCombinationById({id: $routeParams.id}, function(response) {
+      $scope.componentTypeCombination = response.componentTypeCombination;
 
-            // Clear sourceComponentTypes so that they can be referenced from the drop down objects
-            var existingSourceComponentTypes = angular.copy($scope.componentTypeCombination.sourceComponentTypes);
-            $scope.componentTypeCombination.sourceComponentTypes = [];
+      // Clear sourceComponentTypes so that they can be referenced from the drop down objects
+      var existingSourceComponentTypes = angular.copy($scope.componentTypeCombination.sourceComponentTypes);
+      $scope.componentTypeCombination.sourceComponentTypes = [];
 
-            // Mark existing sourceComponentTypes as disabled and add the dropDown objects to the combination array
-            angular.forEach($scope.sourceComponentTypesDropDown, function(dropDownType, index) {
-              angular.forEach(existingSourceComponentTypes, function(type) {
-                if (type.id === dropDownType.id) {
-                  $scope.componentTypeCombination.sourceComponentTypes.push(
-                    $scope.sourceComponentTypesDropDown[index]
-                  );
-                  $scope.sourceComponentTypesDropDown[index].disabled = true;
-                }
-              });
-            });
-          }, $log.error);
+      // Mark existing sourceComponentTypes as disabled and add the dropDown objects to the combination array
+      // This needs to be done because there can't be sourceComponentType duplicates
+      angular.forEach($scope.sourceComponentTypesDropDown, function(dropDownType, index) {
+        angular.forEach(existingSourceComponentTypes, function(type) {
+          if (type.id === dropDownType.id) {
+            $scope.componentTypeCombination.sourceComponentTypes.push(
+              $scope.sourceComponentTypesDropDown[index]
+            );
+            $scope.sourceComponentTypesDropDown[index].disabled = true;
+          }
         });
-        // Unbind the watch so that it's run only once
-        listener();
       });
-    }
+    }, $log.error);
   }
 
   function initForm() {
     ComponentTypeCombinationsService.getComponentTypeCombinationsForm(function(response) {
       $scope.sourceComponentTypesDropDown = response.sourceComponentTypes;
       $scope.producedComponentTypesDropDown = response.producedComponentTypes;
+
+      if ($routeParams.id) {
+        initSourceComponentTypes();
+      }
     }, $log.error);
   }
 
   initForm();
-  initComponentTypes();
+
 });
