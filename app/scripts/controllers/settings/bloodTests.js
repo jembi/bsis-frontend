@@ -1,25 +1,25 @@
 'use strict';
 
-angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, BloodTestsService) {
+angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, ICONS, BloodTestsService) {
 
   var columnDefs = [
     {
       name: 'Name',
       field: 'testNameShort',
-      width: '150'
+      width: '**'
     },
     {
       name: 'Category',
-      field: 'category',
+      field: 'bloodTestCategory',
       width: '**',
-      maxWidth: '150'
+      maxWidth: '200'
     },
     {
       name: 'BloodTestType',
       displayName: 'Blood Test Type',
       field: 'bloodTestType',
       width: '**',
-      maxWidth: '150'
+      maxWidth: '200'
     },
     {
       name: 'IsActive',
@@ -42,6 +42,7 @@ angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, Blood
     }
   ];
 
+  $scope.icons = ICONS;
 
   $scope.gridOptions = {
     data: [],
