@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function($scope, $location, $log, $timeout, ComponentTypeCombinationsService) {
+angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function($scope, $location, $log, $timeout, $routeParams, ComponentTypeCombinationsService) {
   $scope.componentTypeCombination = {
     combinationName: '',
     sourceComponentTypes: [],
@@ -29,6 +29,7 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     }
     $scope.savingComponentCombination = false;
   }
+
   var validateComponentLists = function() {
     // Validate source component list
     if ($scope.componentTypeCombination.sourceComponentTypes.length == 0) {
@@ -113,20 +114,58 @@ angular.module('bsis').controller('ManageComponentTypeCombinationCtrl', function
     angular.forEach($scope.componentTypeCombination.componentTypes, function(producedType) {
       delete producedType.disabled;
     });
-    ComponentTypeCombinationsService.createComponentTypeCombinations($scope.componentTypeCombination, function() {
-      $location.path('/componentTypeCombinations');
-    }, function(response) {
-      $scope.savingComponentCombination = false;
-      onSaveError(response);
-    });
+
+    if ($routeParams.id) {
+      ComponentTypeCombinationsService.updateComponentTypeCombinations($scope.componentTypeCombination, function() {
+        $location.path('/componentTypeCombinations');
+      }, function(response) {
+        $scope.savingComponentCombination = false;
+        onSaveError(response);
+      });
+    } else {
+      ComponentTypeCombinationsService.createComponentTypeCombinations($scope.componentTypeCombination, function() {
+        $location.path('/componentTypeCombinations');
+      }, function(response) {
+        $scope.savingComponentCombination = false;
+        onSaveError(response);
+      });
+    }
   };
 
-  function init() {
-    ComponentTypeCombinationsService.getComponentTypeCombinationsForm(function(response) {
-      $scope.sourceComponentTypesDropDown = response.sourceComponentTypes;
-      $scope.producedComponentTypesDropDown = response.producedComponentTypes;
+  function initSourceComponentTypes() {
+    ComponentTypeCombinationsService.getComponentTypeCombinationById({id: $routeParams.id}, function(response) {
+      $scope.componentTypeCombination = response.componentTypeCombination;
+
+      // Clear sourceComponentTypes so that they can be referenced from the drop down objects
+      var existingSourceComponentTypes = angular.copy($scope.componentTypeCombination.sourceComponentTypes);
+      $scope.componentTypeCombination.sourceComponentTypes = [];
+
+      // Mark existing sourceComponentTypes as disabled and add the dropDown objects to the combination array
+      // This needs to be done because there can't be sourceComponentType duplicates
+      angular.forEach($scope.sourceComponentTypesDropDown, function(dropDownType, index) {
+        angular.forEach(existingSourceComponentTypes, function(type) {
+          if (type.id === dropDownType.id) {
+            $scope.componentTypeCombination.sourceComponentTypes.push(
+              $scope.sourceComponentTypesDropDown[index]
+            );
+            $scope.sourceComponentTypesDropDown[index].disabled = true;
+          }
+        });
+      });
     }, $log.error);
   }
 
-  init();
+  function initForm() {
+    ComponentTypeCombinationsService.getComponentTypeCombinationsForm(function(response) {
+      $scope.sourceComponentTypesDropDown = response.sourceComponentTypes;
+      $scope.producedComponentTypesDropDown = response.producedComponentTypes;
+
+      if ($routeParams.id) {
+        initSourceComponentTypes();
+      }
+    }, $log.error);
+  }
+
+  initForm();
+
 });

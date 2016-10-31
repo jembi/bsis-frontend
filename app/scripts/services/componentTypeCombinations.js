@@ -5,6 +5,7 @@ angular.module('bsis').factory('ComponentTypeCombinationsService', function(Api)
     getComponentTypeCombinations: Api.ComponentTypeCombinations.search,
     updateComponentTypeCombinations: Api.ComponentTypeCombinations.update,
     getComponentTypeCombinationsForm: Api.ComponentTypeCombinations.getForm,
-    createComponentTypeCombinations: Api.ComponentTypeCombinations.save
+    createComponentTypeCombinations: Api.ComponentTypeCombinations.save,
+    getComponentTypeCombinationById: Api.ComponentTypeCombinations.get
   };
 });
