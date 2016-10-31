@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('BloodTestsCtrl', function($scope) {
+angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, BloodTestsService) {
 
   var columnDefs = [
     {
@@ -57,7 +57,9 @@ angular.module('bsis').controller('BloodTestsCtrl', function($scope) {
   };
 
   function init() {
-   // To be initialised in the Hook up task
+    BloodTestsService.getBloodTests(function(response) {
+      $scope.gridOptions.data = response.bloodTests;
+    }, $log.error);
   }
 
   init();

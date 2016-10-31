@@ -513,6 +513,13 @@ angular.module('bsis')
           method: 'GET',
           url: url + '/componenttypecombinations/form'
         }
+      }),
+
+      BloodTests: $resource(url + '/bloodtests/', {}, {
+        search: {
+          method: 'GET',
+          url: url + '/bloodtests/search'
+        }
       })
     };
   });
