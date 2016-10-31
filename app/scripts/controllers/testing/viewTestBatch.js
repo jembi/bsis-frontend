@@ -143,6 +143,14 @@ angular.module('bsis')
         width: '**'
       },
       {
+        name: 'Released',
+        displayName: 'Released',
+        field: 'released',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["released"] ? "Y" : "N"}}</div>',
+        visible: true,
+        width: '**'
+      },
+      {
         name: 'ttistatus',
         displayName: 'TTI Status',
         field: 'ttistatus',
@@ -180,7 +188,7 @@ angular.module('bsis')
       exporterPdfDefaultStyle: {fontSize: 4, margin: [-2, 0, 0, 0] },
       exporterPdfTableHeaderStyle: {fontSize: 5, bold: true, margin: [-2, 0, 0, 0] },
       exporterPdfMaxGridWidth: 500,
-
+      exporterSuppressColumns: ['Venue'],
       // Format values for exports
       exporterFieldCallback: function(grid, row, col, value) {
         if (col.name === 'Date Bled') {
@@ -205,8 +213,12 @@ angular.module('bsis')
           var bloodGroup = (row.entity.bloodRh === '' ? '' : row.entity.bloodAbo) + (row.entity.bloodAbo === '' ? '' : row.entity.bloodRh);
           return $filter('titleCase')(value) + ' (' + bloodGroup + ')';
         }
+        //modify value of value of released column
+        if (col.name === 'Released') {
+          return value === true ? 'Y' : 'N';
+        }
         // assume that column is a test outcome column, and manage empty values
-        if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue' && col.name !== 'TTI Status' && col.name !== 'bloodTypingStatusBloodTypingMatchStatus' && col.name !== 'previousDonationAboRhOutcome') {
+        if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue' && col.name !== 'Released' && col.name !== 'TTI Status' && col.name !== 'bloodTypingStatusBloodTypingMatchStatus' && col.name !== 'previousDonationAboRhOutcome') {
           for (var test in value) {
             if (test === col.name) {
               return value[test] || '';
@@ -317,7 +329,6 @@ angular.module('bsis')
     };
 
     function addTestNamesToColumnDefs(testBatchOutcomesReport) {
-
       angular.forEach(testBatchOutcomesReport.basicTtiTestNames, function(testName) {
         columnDefs.push(
           {
