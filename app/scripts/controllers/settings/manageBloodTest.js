@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('bsis').controller('ManageBloodTestCtrl', function($scope, $location, $log, $timeout) {
+angular.module('bsis').controller('ManageBloodTestCtrl', function($scope, $location, $log, $timeout, BloodTestsService) {
 
-  var types = {};
-
+  var types = [];
+  $scope.types = [];
   $scope.notSelectedResults = [];
 
   $scope.bloodTest = {
@@ -11,7 +11,7 @@ angular.module('bsis').controller('ManageBloodTestCtrl', function($scope, $locat
     isActive: true,
     testName: '',
     testNameShort: '',
-    bloodTestCategory: '',
+    category: '',
     bloodTestType: '',
     flagComponentsForDiscard: false,
     flagComponentsContainingPlasmaForDiscard: false,
@@ -24,13 +24,15 @@ angular.module('bsis').controller('ManageBloodTestCtrl', function($scope, $locat
     $location.path('/bloodTests');
   };
 
-  $scope.$watch('bloodTest.bloodTestCategory', function() {
+  $scope.$watch('bloodTest.category', function() {
     $timeout(function() {
-      if ($scope.bloodTest.bloodTestCategory === 'TTI') {
-        $scope.types = types.TTI;
-      } else if ($scope.bloodTest.bloodTestCategory === 'BLOOD_TYPING') {
-        $scope.types = types.BLOOD_TYPING;
-      }
+      $scope.types = types[$scope.bloodTest.category];
+    });
+  });
+
+  $scope.$watch('bloodTest.testName', function() {
+    $timeout(function() {
+      $scope.bloodTestForm.testName.$setValidity('duplicate', true);
     });
   });
 
@@ -144,15 +146,23 @@ angular.module('bsis').controller('ManageBloodTestCtrl', function($scope, $locat
     }
 
     $scope.savingBloodTest = true;
-    $log.info('Not yet implemented');
-    $location.path('/bloodTests');
+    BloodTestsService.createBloodTest($scope.bloodTest, function() {
+      $location.path('/bloodTests');
+    }, function(err) {
+      if (err.data && err.data.testName) {
+        $scope.bloodTestForm.testName.$setValidity('duplicate', false);
+      }
+      $scope.savingBloodTest = false;
+    });
   };
 
   function init() {
-    $scope.categories = ['TTI', 'BLOOD_TYPING'];
-    $scope.types = [];
-    types.TTI = ['BASIC_TTI', 'REPEAT_TTI', 'CONFIRMATORY_TTI'];
-    types.BLOOD_TYPING = ['BASIC_BLOODTYPING', 'REPEAT_BLOODTYPING'];
+    BloodTestsService.getBloodTestsForm(function(response) {
+      $scope.categories = response.categories;
+      $scope.categories.forEach(function(category) {
+        types[category] = response.types[category];
+      });
+    }, $log.error);
   }
 
   init();
