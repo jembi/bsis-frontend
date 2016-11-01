@@ -148,7 +148,8 @@ angular.module('bsis')
         field: 'released',
         cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["released"] ? "Y" : "N"}}</div>',
         visible: true,
-        width: '**'
+        width: '**',
+        maxWidth: '100'
       },
       {
         name: 'ttistatus',
