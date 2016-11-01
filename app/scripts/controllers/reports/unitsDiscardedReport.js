@@ -129,6 +129,7 @@ angular.module('bsis')
           rowsForVenue = [];
           rowsForVenue[0] = initRow('Total');
           componentTypeIndex = 0;
+          previousComponentType = '';
         }
 
         if (previousComponentType !== newRow.cohorts[0].option) {
