@@ -40,6 +40,8 @@
             <a href="#/componentTypeCombinations">Manage Component Combinations</a></li>
        <li ng-class="{current:  currentPath === '/bloodTests'}" has-permission="{{permissions.MANAGE_BLOOD_TESTS}}">
             <a href="#/bloodTests">Manage Blood Tests</a></li>
+        <li ng-class="{current:  currentPath === '/bloodTestingRules'}" has-permission="{{permissions.MANAGE_BLOOD_TESTING_RULES}}">
+            <a href="#/bloodTestingRules">Manage Blood Testing Rules</a></li>
         <li ng-class="{current: currentPath === '/auditLog'}" has-permission="{{permissions.VIEW_AUDIT_LOG}}"><a
                 href="#/auditLog">View Audit Log</a></li>
         <li ng-class="{current: currentPath === '/dataExport'}" has-permission="{{permissions.DATA_EXPORT}}"><a
