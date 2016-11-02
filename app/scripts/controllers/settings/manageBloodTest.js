@@ -103,6 +103,10 @@ angular.module('bsis').controller('ManageBloodTestCtrl', function($scope, $locat
       if ($scope.bloodTest.negativeResults.indexOf(removedValidOutcome) !== -1 || $scope.bloodTest.positiveResults.indexOf(removedValidOutcome) !== -1) {
         $scope.bloodTestForm.removedValidOutcomes.$setValidity('cantremove', false);
         canRemove = false;
+        // Only display error message for 3 seconds
+        $timeout(function() {
+          $scope.bloodTestForm.removedValidOutcomes.$setValidity('cantremove', true);
+        }, 3000);
       }
     });
 
