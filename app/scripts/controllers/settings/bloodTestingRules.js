@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, ICONS) {
+angular.module('bsis').controller('BloodTestingRulesCtrl', function($scope, $log, ICONS) {
 
   var columnDefs = [
     {
