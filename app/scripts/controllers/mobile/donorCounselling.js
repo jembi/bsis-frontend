@@ -63,8 +63,8 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
   function codeBloodTestResults(testResults) {
     var codedResults = {};
     angular.forEach(testResults, function(testResult) {
-      var positiveResults = testResult.bloodTest.positiveResults.split(',');
-      var negativeResults = testResult.bloodTest.negativeResults.split(',');
+      var positiveResults = testResult.bloodTest.positiveResults;
+      var negativeResults = testResult.bloodTest.negativeResults;
 
       if (positiveResults.indexOf(testResult.result) !== -1) {
         codedResults[testResult.bloodTest.testNameShort] = 2;
