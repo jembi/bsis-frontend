@@ -5,6 +5,11 @@ angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, ICONS
   var columnDefs = [
     {
       name: 'Name',
+      field: 'testName',
+      width: '**'
+    },
+    {
+      name: 'Short Name',
       field: 'testNameShort',
       width: '**'
     },

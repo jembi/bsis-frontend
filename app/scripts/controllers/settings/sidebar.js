@@ -75,7 +75,9 @@ angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, Routin
       ]
     }, {
       path: '/bloodTests',
-      subpaths: []
+      subpaths: [
+        '/manageBloodTest'
+      ]
     }, {
       path: '/bloodTestingRules',
       subpaths: []
