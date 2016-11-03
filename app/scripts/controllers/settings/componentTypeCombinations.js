@@ -34,6 +34,10 @@ angular.module('bsis').controller('ComponentTypeCombinationsCtrl', function($sco
     }
   };
 
+  $scope.onRowClick = function(row) {
+    $location.path('/manageComponentTypeCombination/' + row.entity.id);
+  };
+
   function init() {
     ComponentTypeCombinationsService.getComponentTypeCombinations(function(response) {
       $scope.gridOptions.data = response.componentTypeCombinations;

@@ -68,13 +68,13 @@ angular.module('bsis')
         rows[componentTypeIndex] = initRow(componentType);
       }
 
-      // Show processing site name on frist component type row only
+      // Show processing site name on first component type row only
       if (componentTypeIndex === 1) {
         rows[componentTypeIndex].venue = newRow.location.name;
       }
 
       // Populate component type row
-      rows[componentTypeIndex][discardReason] = newRow.value;
+      rows[componentTypeIndex][discardReason] += newRow.value;
       rows[componentTypeIndex].total += newRow.value;
       // Populate total row
       rows[0][discardReason] += newRow.value;
@@ -103,6 +103,7 @@ angular.module('bsis')
 
     function mergeData(dataValues) {
       var previousVenue = '';
+      var previousComponentType = '';
       var rowsForVenue = [];
       var componentTypeIndex = 0;
       var componentTypeSummaryIndex = 0;
@@ -128,9 +129,13 @@ angular.module('bsis')
           rowsForVenue = [];
           rowsForVenue[0] = initRow('Total');
           componentTypeIndex = 0;
+          previousComponentType = '';
         }
 
-        componentTypeIndex += 1;
+        if (previousComponentType !== newRow.cohorts[0].option) {
+          componentTypeIndex += 1;
+          previousComponentType = newRow.cohorts[0].option;
+        }
 
         // Generate summary index for each component type
         var componentType = newRow.cohorts[0].option;
@@ -142,7 +147,7 @@ angular.module('bsis')
         populateRows(rowsForVenue, newRow, componentTypeIndex);
         // Update venue for summary
         newRow.location.name = 'All processing sites';
-        populateRows(summaryRows, newRow, componentTypeSummaryIndex);
+        populateRows(summaryRows, newRow, summaryComponentTypeMap[componentType]);
       });
 
       // Run one last time for the last venue
