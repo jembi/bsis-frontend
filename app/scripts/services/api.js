@@ -515,7 +515,7 @@ angular.module('bsis')
         }
       }),
 
-      BloodTests: $resource(url + '/bloodtests/', {}, {
+      BloodTests: $resource(url + '/bloodtests/:id', {id: '@id'}, {
         search: {
           method: 'GET',
           url: url + '/bloodtests/search'
@@ -523,6 +523,9 @@ angular.module('bsis')
         getForm: {
           method: 'GET',
           url: url + '/bloodtests/form'
+        },
+        update: {
+          method: 'PUT'
         }
       })
     };
