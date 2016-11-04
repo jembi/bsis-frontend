@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('BloodTestingRulesCtrl', function($scope, $log, ICONS) {
+angular.module('bsis').controller('BloodTestingRulesCtrl', function($scope, $log, ICONS, BloodTestingRulesService) {
 
   var columnDefs = [
     {
@@ -58,18 +58,10 @@ angular.module('bsis').controller('BloodTestingRulesCtrl', function($scope, $log
     }
   };
 
-  function getMockedRules() {
-    return [
-      {'id':1, 'testNameShort':'ABO', 'category':'Blood Typing', 'donationFieldChanged':'Blood ABO', 'pattern':'O', 'newInformation':'O', 'isDeleted':false},
-      {'id':2, 'testNameShort':'ABO', 'category':'Blood Typing', 'donationFieldChanged':'Blood ABO', 'pattern':'AB', 'newInformation':'AB', 'isDeleted':false},
-      {'id':3, 'testNameShort':'ABO', 'category':'Blood Typing', 'donationFieldChanged':'Blood ABO', 'pattern':'B', 'newInformation':'B', 'isDeleted':true},
-      {'id':4, 'testNameShort':'Rh', 'category':'Blood Typing', 'donationFieldChanged':'Blood Rh', 'pattern':'POS', 'newInformation':'+', 'isDeleted':false},
-      {'id':5, 'testNameShort':'Rh', 'category':'Blood Typing', 'donationFieldChanged':'Blood Rh', 'pattern':'NEG', 'newInformation':'-', 'isDeleted':false}
-    ];
-  }
-
   function init() {
-    $scope.gridOptions.data = getMockedRules();
+    BloodTestingRulesService.getBloodTestingRules(function(response) {
+      $scope.gridOptions.data = response.bloodTestingRules;
+    }, $log.error);
   }
 
   init();
