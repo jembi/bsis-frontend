@@ -56,7 +56,7 @@ angular.module('bsis').controller('ManageBloodTestCtrl', function($scope, $locat
     var success = addOutcome($scope.validOutcome, $scope.bloodTestForm.validOutcome, $scope.bloodTest.validResults);
     // Add to notSelectedResults
     if (success) {
-      $scope.bloodTestForm.validOutcome.$setValidity('required', true);
+      $scope.bloodTestForm.removedValidOutcomes.$setValidity('required', true);
       $scope.notSelectedResults.push($scope.validOutcome);
     }
     $scope.validOutcome = null;
@@ -142,7 +142,7 @@ angular.module('bsis').controller('ManageBloodTestCtrl', function($scope, $locat
 
   $scope.saveBloodTest = function() {
     if ($scope.bloodTest.validResults.length === 0) {
-      $scope.bloodTestForm.validOutcome.$setValidity('required', false);
+      $scope.bloodTestForm.removedValidOutcomes.$setValidity('required', false);
     }
 
     if ($scope.bloodTestForm.$invalid) {
