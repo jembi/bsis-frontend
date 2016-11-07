@@ -574,7 +574,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'BloodTestsCtrl',
         permission: PERMISSIONS.MANAGE_BLOOD_TESTS
       })
-      .when('/manageBloodTest', {
+      .when('/manageBloodTest/:id?', {
         templateUrl: 'views/settings/manageBloodTest.html',
         controller: 'ManageBloodTestCtrl',
         permission: PERMISSIONS.MANAGE_BLOOD_TESTS

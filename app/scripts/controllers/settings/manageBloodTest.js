@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageBloodTestCtrl', function($scope, $location, $log, $timeout, BloodTestsService) {
+angular.module('bsis').controller('ManageBloodTestCtrl', function($scope, $location, $log, $timeout, $routeParams, BloodTestsService) {
 
   var types = [];
   $scope.types = [];
@@ -150,15 +150,38 @@ angular.module('bsis').controller('ManageBloodTestCtrl', function($scope, $locat
     }
 
     $scope.savingBloodTest = true;
-    BloodTestsService.createBloodTest($scope.bloodTest, function() {
-      $location.path('/bloodTests');
-    }, function(err) {
-      if (err.data && err.data.testName) {
-        $scope.bloodTestForm.testName.$setValidity('duplicate', false);
-      }
-      $scope.savingBloodTest = false;
-    });
+    if ($routeParams.id) {
+      BloodTestsService.updateBloodTest($scope.bloodTest, function() {
+        $location.path('/bloodTests');
+      }, function(err) {
+        if (err.data && err.data.testName) {
+          $scope.bloodTestForm.testName.$setValidity('duplicate', false);
+        }
+        $scope.savingBloodTest = false;
+      });
+    } else {
+      BloodTestsService.createBloodTest($scope.bloodTest, function() {
+        $location.path('/bloodTests');
+      }, function(err) {
+        if (err.data && err.data.testName) {
+          $scope.bloodTestForm.testName.$setValidity('duplicate', false);
+        }
+        $scope.savingBloodTest = false;
+      });
+    }
   };
+
+  function initExistingBloodTest() {
+    BloodTestsService.getBloodTestById({id: $routeParams.id}, function(response) {
+      $scope.bloodTest = response.bloodTest;
+
+      // Populate notSelectedResults with the valid results that are not in positive or negative results
+      $scope.notSelectedResults = angular.copy($scope.bloodTest.validResults);
+      removeOutcomes($scope.bloodTest.positiveResults, $scope.notSelectedResults);
+      removeOutcomes($scope.bloodTest.negativeResults, $scope.notSelectedResults);
+
+    });
+  }
 
   function init() {
     BloodTestsService.getBloodTestsForm(function(response) {
@@ -166,6 +189,10 @@ angular.module('bsis').controller('ManageBloodTestCtrl', function($scope, $locat
       $scope.categories.forEach(function(category) {
         types[category] = response.types[category];
       });
+
+      if ($routeParams.id) {
+        initExistingBloodTest();
+      }
     }, $log.error);
   }
 
