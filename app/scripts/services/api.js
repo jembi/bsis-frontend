@@ -524,6 +524,13 @@ angular.module('bsis')
           method: 'GET',
           url: url + '/bloodtests/form'
         }
+      }),
+
+      BloodTestingRules: $resource(url + '/bloodtestingrules/', {}, {
+        search: {
+          method: 'GET',
+          url: url + '/bloodtestingrules/search'
+        }
       })
     };
   });
