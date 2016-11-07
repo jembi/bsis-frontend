@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService) {
+  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService, UtilsService) {
 
     var master = {
       donationIdentificationNumber: null,
@@ -50,13 +50,7 @@ angular.module('bsis')
         width: '**',
         maxWidth: '200',
         sortingAlgorithm: function(a, b, rowA, rowB) {
-          if (rowB.entity.expiresOn === null || rowA.entity.expiresOn < rowB.entity.expiresOn) {
-            return -1; // if rowB has a null expiresOn it never expires (so is larger than rowA)
-          } else if (rowA.entity.expiresOn === null || rowA.entity.expiresOn > rowB.entity.expiresOn) {
-            return 1;
-          } else {
-            return 0; // equal
-          }
+          return UtilsService.dateSort(rowA.entity.expiresOn, rowB.entity.expiresOn);
         }
       },
       {
