@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, $log, $filter, $routeParams, $uibModal, ReturnFormsService, ModalsService) {
+angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, $log, $filter, $routeParams, $uibModal, ReturnFormsService, ModalsService, UtilsService) {
 
   var columnDefs = [
     {
@@ -51,7 +51,10 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
       field: 'expiryStatus',
       displayName: 'Expiry Status',
       width: '**',
-      maxWidth: '150'
+      maxWidth: '150',
+      sortingAlgorithm: function(a, b, rowA, rowB) {
+        return UtilsService.dateSort(rowA.entity.expiresOn, rowB.entity.expiresOn);
+      }
     }
   ];
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ModalsService) {
+  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ModalsService, UtilsService) {
 
     $scope.component = null;
     $scope.componentsSearch = {
@@ -224,7 +224,10 @@ angular.module('bsis')
         name: 'Expiry Status',
         field: 'expiryStatus',
         width: '**',
-        maxWidth: '250'
+        maxWidth: '250',
+        sortingAlgorithm: function(a, b, rowA, rowB) {
+          return UtilsService.dateSort(rowA.entity.expiresOn, rowB.entity.expiresOn);
+        }
       },
       {
         name: 'Weight',
