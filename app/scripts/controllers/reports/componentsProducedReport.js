@@ -54,7 +54,7 @@ angular.module('bsis')
         row['AB-'] = 0;
         row['O+'] = 0;
         row['O-'] = 0;
-        row.nullnull = 0;
+        row.empty = 0;
         row.total = 0;
 
         rowsForVenue[index] = row;
@@ -71,7 +71,7 @@ angular.module('bsis')
       totalsRow['AB-'] = 0;
       totalsRow['O+'] = 0;
       totalsRow['O-'] = 0;
-      totalsRow.nullnull = 0;
+      totalsRow.empty = 0;
       totalsRow.total = 0;
       rowsForVenue[componentTypes.length + 1] = totalsRow;
 
@@ -97,6 +97,9 @@ angular.module('bsis')
         var cohorts = newRow.cohorts;
         var componentType = cohorts[0].option;
         var bloodType = cohorts[1].option;
+        if (bloodType == 'nullnull' || bloodType === '') {
+          bloodType = 'empty';
+        }
         newRow.cohorts = componentType;
 
         // New venue
@@ -174,7 +177,7 @@ angular.module('bsis')
       { name: 'AB-', displayName: 'AB-', field: 'AB-', width: 65 },
       { name: 'O+', field: 'O+', width: 55 },
       { name: 'O-', field: 'O-', width: 55 },
-      { name: 'NTD', displayName: 'NTD', field: 'nullnull', width: 55 },
+      { name: 'NTD', displayName: 'NTD', field: 'empty', width: 55 },
       { name: 'Total', field: 'total', width: 55 }
     ];
 
