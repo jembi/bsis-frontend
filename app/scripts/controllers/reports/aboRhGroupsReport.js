@@ -240,7 +240,7 @@ angular.module('bsis')
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        if ($scope.venuesNumber > 0) {
+        if ($scope.venuesNumber > 1) {
           calculateSummary();
           docDefinition = ReportsLayoutService.addSummaryContent(summaryData, docDefinition);
         }
