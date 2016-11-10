@@ -212,7 +212,9 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
     // Change formatting of PDF
     exporterPdfCustomFormatter: function(docDefinition) {
-      docDefinition = ReportsLayoutService.addSummaryContent($scope.gridOptions.summaryData, docDefinition);
+      if ($scope.venuesNumber > 1) {
+        docDefinition = ReportsLayoutService.addSummaryContent($scope.gridOptions.summaryData, docDefinition);
+      }
       docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
       docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
       return docDefinition;

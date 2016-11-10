@@ -13,6 +13,7 @@ angular.module('bsis')
       processingSite: null
     };
     var componentTypes = [];
+    var summaryRows = [];
     $scope.search = angular.copy(master);
 
     // Report methods
@@ -84,12 +85,26 @@ angular.module('bsis')
       });
     }
 
+    function convertSummaryRows() {
+      // Convert row objects to indexed arrays
+      var newSummaryRows = [];
+      angular.forEach(summaryRows, function(obj) {
+        var result = [];
+        for (var key in obj) {
+          result.push('' + obj[key]);
+        }
+        newSummaryRows.push(result);
+      });
+      summaryRows = newSummaryRows;
+    }
+
     function mergeData(dataValues) {
 
       var previousVenue = '';
       var rowsForVenue = [];
-      var summaryRows = initRowsForVenue('All Processing Sites');
+
       mergedData = [];
+      summaryRows = initRowsForVenue('All Processing Sites');
       $scope.sitesNumber = 0;
 
       angular.forEach(dataValues, function(newRow) {
@@ -137,8 +152,7 @@ angular.module('bsis')
       // Run one last time for the last venue
       pushRowsToGrid(rowsForVenue);
 
-      // Add summary
-      pushRowsToGrid(summaryRows);
+      convertSummaryRows();
 
       $scope.gridOptions.data = mergedData;
     }
@@ -196,6 +210,9 @@ angular.module('bsis')
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
+        if ($scope.sitesNumber > 1) {
+          docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
+        }
         docDefinition = ReportsLayoutService.highlightTotalRows('Total', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(12, docDefinition);
         return docDefinition;
