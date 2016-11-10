@@ -175,6 +175,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     }
     $scope.searching = true;
     $scope.venuesNumber = 0;
+    $scope.gridOptions.data = [];
 
     ReportsService.generateDonorsDeferredReport(period, function(report) {
       $scope.searching = false;
