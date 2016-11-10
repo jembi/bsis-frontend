@@ -153,14 +153,9 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        var noDataForRangeLine = '';
-        if ($scope.gridOptions.data.length === 0) {
-          noDataForRangeLine = 'No data for date range selected';
-        }
         var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
           'Blood Units Issued Summary Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
-          noDataForRangeLine);
+          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
         return header;
       },
 
