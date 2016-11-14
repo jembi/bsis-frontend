@@ -112,7 +112,7 @@ angular.module('bsis')
         var cohorts = newRow.cohorts;
         var componentType = cohorts[0].option;
         var bloodType = cohorts[1].option;
-        if (bloodType == 'nullnull' || bloodType === '') {
+        if (bloodType == 'nullnull' || !bloodType) {
           bloodType = 'empty';
         }
         newRow.cohorts = componentType;

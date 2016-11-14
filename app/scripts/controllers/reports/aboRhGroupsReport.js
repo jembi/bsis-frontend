@@ -78,7 +78,7 @@ angular.module('bsis')
         mergedRow.oPlus = newRow.value;
       } else if (bloodType === 'O-') {
         mergedRow.oMinus = newRow.value;
-      } else if (bloodType === 'nullnull' || bloodType === '') {
+      } else if (bloodType === 'nullnull' || !bloodType) {
         mergedRow.empty = newRow.value;
       }
       mergedRow.total = mergedRow.aPlus + mergedRow.aMinus + mergedRow.bPlus + mergedRow.bMinus + mergedRow.abPlus + mergedRow.abMinus +
