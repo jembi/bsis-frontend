@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ModalsService, UtilsService) {
+  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ModalsService, UtilsService, $uibModal) {
 
     $scope.component = null;
     $scope.componentsSearch = {
@@ -40,7 +40,7 @@ angular.module('bsis')
       }
     };
 
-    $scope.recordComponents = function() {
+    var recordComponents = function() {
 
       if (forms.recordComponentsForm.$invalid) {
         return;
@@ -258,6 +258,37 @@ angular.module('bsis')
             $scope.component = angular.copy(selectedRows[0]);
           }
         });
+      }
+    };
+
+    $scope.confirmProcessLabledComponent = function() {
+      $log.debug('inventoryStatus ' + $scope.component.inventoryStatus);
+      if ($scope.component.inventoryStatus === 'IN_STOCK') {
+        var messageText = '';
+        messageText += 'The selected component has already been labelled. Do you want to continue?';
+        var saveObject = {
+          title: 'Process labelled component',
+          button: 'Continue',
+          message: messageText
+        };
+        var modalInstance = $uibModal.open({
+          animation: false,
+          templateUrl: 'views/confirmModal.html',
+          controller: 'ConfirmModalCtrl',
+          resolve: {
+            confirmObject: function() {
+              return saveObject;
+            }
+          }
+        });
+        modalInstance.result.then(function() {
+          // Then record components
+          recordComponents();
+        }, function() {
+          // record cancelled - do nothing
+        });
+      } else {
+        recordComponents();
       }
     };
 
