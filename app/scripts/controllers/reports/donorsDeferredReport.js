@@ -10,6 +10,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
   };
 
   $scope.deferralReasons = [];
+  $scope.venuesNumber = 0;
 
   // UI grid initial columns
   var columnDefs = [
@@ -75,6 +76,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
       // New venue
       if (dataValue.location.name !== previousVenue) {
+        $scope.venuesNumber += 1;
 
         if (previousVenue !== null) {
           // Add female, male and all rows for previous venue
@@ -172,6 +174,8 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
       period.endDate = endDate;
     }
     $scope.searching = true;
+    $scope.venuesNumber = 0;
+    $scope.gridOptions.data = [];
 
     ReportsService.generateDonorsDeferredReport(period, function(report) {
       $scope.searching = false;
@@ -208,7 +212,9 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
     // Change formatting of PDF
     exporterPdfCustomFormatter: function(docDefinition) {
-      docDefinition = ReportsLayoutService.addSummaryContent($scope.gridOptions.summaryData, docDefinition);
+      if ($scope.venuesNumber > 1) {
+        docDefinition = ReportsLayoutService.addSummaryContent($scope.gridOptions.summaryData, docDefinition);
+      }
       docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
       docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
       return docDefinition;
@@ -216,7 +222,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
     // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
-      return ReportsLayoutService.generatePdfPageFooter('venues', $scope.gridOptions.data.length / 3, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+      return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
     },
 
     onRegisterApi: function(gridApi) {
