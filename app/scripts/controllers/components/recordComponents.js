@@ -262,7 +262,6 @@ angular.module('bsis')
     };
 
     $scope.confirmProcessLabledComponent = function() {
-      $log.debug('inventoryStatus ' + $scope.component.inventoryStatus);
       if ($scope.component.inventoryStatus === 'IN_STOCK') {
         var messageText = '';
         messageText += 'The selected component has already been labelled. Do you want to continue?';
