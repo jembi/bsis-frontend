@@ -72,38 +72,49 @@
         </div>
 
         <!-- Pending Tests -->
-
         <div class="row form-group col-sm-12">
-          <label for="pendingTestsIds" class="col-sm-2 control-label">Pending Tests</label>
+          <label for="pendingTestOption" class="col-sm-2 control-label">Pending Tests</label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <select class="form-control" style="width:auto;min-width:350px;" name="pendingTestsIds" ng-model="pendingTestsIds" ng-options="p as p for p in notSelectedPendingTests">
+              <select class="form-control" style="width:auto;" name="pendingTestOption" ng-model="userSelection.selectedPendingBloodTestIndex">
+                <option value=""></option>
+                <option ng-repeat="pendingTest in pendingBloodTestsDropDown"
+                        value="{{pendingBloodTestsDropDown.indexOf(pendingTest)}}"
+                        ng-disabled="pendingTest.disabled">
+                        {{pendingTest.testName}}
+                </option>
               </select>
-              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="addPendingTests()">
-                  Add Blood Test
-              </button>
-              <div>
-                <ng-messages for="bloodTestForm.pendingTestsIds.$error">
-                  <ng-messages-include src="messages.html"></ng-messages-include>
-                </ng-messages>
-              </div>
-            </div>
-          </div>
-        </div> 
-
-        <div class="row form-group col-sm-12">
-          <label class="col-sm-2 control-label"></label>
-          <div class="col-sm-10">
-            <div class="form-inline">
-              <select class="form-control" style="width:auto;min-width:350px;" name="removePendingTests" ng-model="removePendingTests" ng-options="t as t for t in bloodTest.pendingTestsIds" multiple>
-              </select>
-              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="removePendingTests()" ng-disabled="!removePendingTests || removePendingTests.length===0">
-                Remove Outcome
+              <button class="btn btn-primary" type="button" style="margin-top: 2px" 
+                      ng-click="addPendingTest()" ng-disabled="userSelection.selectedPendingBloodTestIndex===null">
+                Add Blood Test
               </button>
             </div>
           </div>
         </div>
 
+        <div class="row form-group col-sm-12">
+          <label class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <div class="form-inline">
+              <select class="form-control" style="width:auto;min-width:350px;" name="pendingTestList"
+                ng-model="userSelection.selectedPendingBloodTestList" multiple>
+                <option ng-repeat="pendingTest in bloodTestingRule.pendingTestsIds" value="{{$index}}">
+                  {{pendingTest.testName}}
+                </option>
+              </select>
+              <button class="btn btn-primary" type="button" style="margin-top: 2px"
+                ng-click="removePendingTest()" ng-disabled="userSelection.selectedPendingBloodTestList.length===0">
+                Remove Blood Test
+              </button>
+              <div>
+                <ng-messages for="bloodTestingRuleForm.pendingTestList.$error" ng-show="bloodTestingRuleForm.$submitted">
+                  <ng-messages-include src="messages.html"></ng-messages-include>
+                </ng-messages>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         <!-- Flags -->
         
         <div class="row form-group col-sm-12">
