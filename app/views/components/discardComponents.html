@@ -30,16 +30,22 @@
       <!-- Components grid -->
       <div class="grid" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination style="height:{{(gridOptions.minRowsToShow*gridOptions.rowHeight)+gridOptions.headerRowHeight+gridOptions.gridFooterHeight}}px;margin-bottom:10px;"></div>
 
-      <div ng-if="selectedAction === null" style="clear:left;">
+       <div ng-if="selectedAction === null" style="clear:left;">
         <strong>
           <em>Select components to discard or undiscard</em>
         </strong>
       </div>
-
       <div ng-if="selectedAction === 'NONE'" style="clear:left;">
-        <strong>
-          <em>Selected component cannot be discarded or undiscarded</em>
-        </strong>
+        <div ng-if="componentsReceived">
+          <strong>
+            <em>Selected component cannot be discarded or undiscarded</em>
+          </strong>
+        </div>
+        <div ng-if="!componentsReceived">
+          <strong>
+            <em>This component have not been received</em>
+          </strong>
+        </div>
       </div>
       <div ng-if="selectedAction === 'UNDISCARD'" style="clear:left;">
         <button class="btn btn-primary" ng-click="undiscardComponents();" >
@@ -48,7 +54,7 @@
       </div>
 
       <!-- Discard component form -->
-      <form role="form" name="forms.discardComponentsForm" class="form-horizontal col-sm-12" ng-if="selectedAction === 'DISCARD'" ng-submit="discardComponents()" novalidate>
+      <form role="form" name="forms.discardComponentsForm" class="form-horizontal col-sm-12" ng-if="selectedAction === 'DISCARD' && componentsReceived" ng-submit="discardComponents()" novalidate>
         <div class="form-group">
           <label for="discardReason" class="col-sm-2 control-label">Discard Reason</label>
           <div class="form-inline" style="padding-left:5px;">
