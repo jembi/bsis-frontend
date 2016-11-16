@@ -122,7 +122,13 @@ angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $ro
   function fetchComponentBatchById(componentBatchId) {
     ComponentBatchService.getComponentBatch(componentBatchId, function(response) {
       $scope.componentBatch = response;
-      $scope.gridOptions.data = $scope.componentBatch.components;
+      $scope.components = null;
+      angular.forEach($scope.componentBatch.components, function(component) {
+        if (!component.isInitialComponent) {
+          $scope.components = $scope.componentBatch.components.splice(component, 1);
+        }
+      });
+      $scope.gridOptions.data = $scope.components;
     }, function(err) {
       $log.error(err);
     });
