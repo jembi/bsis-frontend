@@ -214,7 +214,8 @@ angular.module('bsis')
           docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
         }
         docDefinition = ReportsLayoutService.highlightTotalRows('Total', 1, docDefinition);
-        docDefinition = ReportsLayoutService.paginatePdf(12, docDefinition);
+        var rowsPerPage = Math.min(componentTypes.length + 1, 27);
+        docDefinition = ReportsLayoutService.paginatePdf(rowsPerPage, docDefinition);
         return docDefinition;
       },
 
