@@ -537,6 +537,9 @@ angular.module('bsis')
         getForm: {
           method: 'GET',
           url: url + '/bloodtestingrules/form'
+        },
+        save: {
+          method: 'POST'
         }
       })
     };

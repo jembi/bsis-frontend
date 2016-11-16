@@ -10,11 +10,11 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
   $scope.pendingBloodTestsDropDown = [];
 
   $scope.bloodTestingRule = {
-    bloodTest: '',
+    bloodTest: {id:''},
     pattern: '',
     donationFieldChanged: '',
     newInformation: '',
-    pendingTestsIds: [],
+    pendingTests: [],
     isDeleted: false
   };
 
@@ -30,8 +30,8 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
   };
 
   $scope.updateDonationAndTestOutcomeDropDowns = function() {
-    if ($scope.bloodTestingRule.bloodTest.length) {
-      BloodTestsService.getBloodTestById({id: $scope.bloodTestingRule.bloodTest}, function(response) {
+    if ($scope.bloodTestingRule.bloodTest.id.length) {
+      BloodTestsService.getBloodTestById({id: $scope.bloodTestingRule.bloodTest.id}, function(response) {
         $scope.donationFields = donationFields[response.bloodTest.category];
         $scope.testOutcomes = response.bloodTest.validResults;
       });
@@ -43,7 +43,7 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
   };
 
   var validatePendingTestsList = function() {
-    if ($scope.bloodTestingRule.pendingTestsIds.length == 0) {
+    if ($scope.bloodTestingRule.pendingTests.length == 0) {
       $scope.bloodTestingRule.pendingTestList.$setValidity('required', false);
     } else {
       $scope.bloodTestingRuleForm.pendingTestList.$setValidity('required', true);
@@ -51,7 +51,7 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
   };
 
   $scope.addPendingTest = function() {
-    $scope.bloodTestingRule.pendingTestsIds.push(
+    $scope.bloodTestingRule.pendingTests.push(
       $scope.pendingBloodTestsDropDown[$scope.userSelection.selectedPendingBloodTestIndex]
     );
     $scope.pendingBloodTestsDropDown[$scope.userSelection.selectedPendingBloodTestIndex].disabled = true;
@@ -62,13 +62,13 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
   $scope.removePendingTest = function() {
     $scope.userSelection.selectedPendingBloodTestList.reverse();
 
-    var toRemove = $scope.bloodTestingRule.pendingTestsIds.filter(function(pendingTest, index) {
+    var toRemove = $scope.bloodTestingRule.pendingTests.filter(function(pendingTest, index) {
       return $scope.userSelection.selectedPendingBloodTestList.indexOf(String(index)) > -1;
     });
 
     toRemove.forEach(function(pendingTest) {
-      $scope.bloodTestingRule.pendingTestsIds.splice(
-        $scope.bloodTestingRule.pendingTestsIds.indexOf(pendingTest),
+      $scope.bloodTestingRule.pendingTests.splice(
+        $scope.bloodTestingRule.pendingTests.indexOf(pendingTest),
         1);
 
       pendingTest.disabled = false;
@@ -80,7 +80,22 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
   };
 
   $scope.saveBloodTestingRule = function() {
-    $log.debug('Save method not yet implemented');
+    if ($scope.bloodTestingRuleForm.$invalid) {
+      return;
+    }
+
+    $scope.savingBloodTestingRule = true;
+
+    // Remove disabled element out of pendingTests as it is not part of the request
+    angular.forEach($scope.bloodTestingRule.pendingTests, function(pendingTest) {
+      delete pendingTest.disabled;
+    });
+
+    BloodTestingRulesService.createBloodTestingRule($scope.bloodTestingRule, function() {
+      $location.path('/bloodTestingRules');
+    }, function() {
+      $scope.savingBloodTestingRule = false;
+    });
   };
 
   function initExistingBloodTestingRule() {
