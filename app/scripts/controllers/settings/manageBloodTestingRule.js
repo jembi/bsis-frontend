@@ -29,22 +29,18 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
     $location.path('/bloodTestingRules');
   };
 
-  $scope.$watch('bloodTestingRule.bloodTest', function() {
+  $scope.updateDonationAndTestOutcomeDropDowns = function() {
     if ($scope.bloodTestingRule.bloodTest.length) {
-      $timeout(function() {
-        BloodTestsService.getBloodTestById({id: $scope.bloodTestingRule.bloodTest}, function(response) {
-          $scope.donationFields = donationFields[response.bloodTest.category];
-          $scope.testOutcomes = response.bloodTest.validResults;
-        });
+      BloodTestsService.getBloodTestById({id: $scope.bloodTestingRule.bloodTest}, function(response) {
+        $scope.donationFields = donationFields[response.bloodTest.category];
+        $scope.testOutcomes = response.bloodTest.validResults;
       });
     }
-  });
+  };
 
-  $scope.$watch('bloodTestingRule.donationFieldChanged', function() {
-    $timeout(function() {
-      $scope.donationFieldValues = donationFieldValues[$scope.bloodTestingRule.donationFieldChanged];
-    });
-  });
+  $scope.updateDonationFieldValuesDropdown = function() {
+    $scope.donationFieldValues = donationFieldValues[$scope.bloodTestingRule.donationFieldChanged];
+  };
 
   var validatePendingTestsList = function() {
     if ($scope.bloodTestingRule.pendingTestsIds.length == 0) {
@@ -84,12 +80,7 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
   };
 
   $scope.saveBloodTestingRule = function() {
-    $scope.savingBloodTestingRule = true;
-    if ($routeParams.id) {
-      //hook up service to update
-    } else {
-      //hook up service to create new record
-    }
+    $log.debug('Save method not yet implemented');
   };
 
   function initExistingBloodTestingRule() {

@@ -7,10 +7,10 @@
 
         
         <div class="row form-group col-sm-12">
-          <label for="bloodTest" class="col-sm-2 control-label">BLood Test</label>
+          <label for="bloodTest" class="col-sm-2 control-label">Blood Test</label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <select class="form-control" style="width:auto;" name="bloodTest" ng-model="bloodTestingRule.bloodTest">
+              <select class="form-control" style="width:auto;min-width:200px;" name="bloodTest" ng-model="bloodTestingRule.bloodTest" ng-change="updateDonationAndTestOutcomeDropDowns()">
                 <option value=""></option>
                 <option ng-repeat="bloodTest in bloodTests"
                         value="{{bloodTest.id}}">
@@ -30,7 +30,9 @@
           <label for="donationFieldChanged" class="col-sm-2 control-label">Donation Field Affected</label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <select class="form-control" style="width:auto;" name="donationFieldChanged" ng-model="bloodTestingRule.donationFieldChanged" ng-options="d for d in donationFields" required>
+              <select class="form-control" style="width:auto;min-width:200px;" name="donationFieldChanged" ng-model="bloodTestingRule.donationFieldChanged" 
+              ng-change="updateDonationFieldValuesDropdown()"
+               ng-options="d for d in donationFields" required>
               </select>
               <div>
                 <ng-messages for="bloodTestingRuleForm.donationFieldChanged.$error" ng-show="bloodTestingRuleForm.$submitted">
@@ -45,7 +47,7 @@
           <label for="pattern" class="col-sm-2 control-label">Test Outcome</label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <select class="form-control" style="width:auto;" name="pattern" ng-model="bloodTestingRule.pattern" ng-options="p as p for p in testOutcomes" required>
+              <select class="form-control" style="width:auto;min-width:200px;" name="pattern" ng-model="bloodTestingRule.pattern" ng-options="p as p for p in testOutcomes" required>
               </select>
               <div>
                 <ng-messages for="bloodTestingRuleForm.pattern.$error" ng-show="bloodTestingRuleForm.$submitted">
@@ -60,7 +62,7 @@
           <label for="newInformation" class="col-sm-2 control-label">Donation Field Value</label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <select class="form-control" style="width:auto;" name="newInformation" ng-model="bloodTestingRule.newInformation" ng-options="n as n for n in donationFieldValues" required>
+              <select class="form-control" style="width:auto;min-width:200px;" name="newInformation" ng-model="bloodTestingRule.newInformation" ng-options="n as n for n in donationFieldValues">
               </select>
               <div>
                 <ng-messages for="bloodTestingRuleForm.newInformation.$error" ng-show="bloodTestingRuleForm.$submitted">
@@ -76,7 +78,7 @@
           <label for="pendingTestOption" class="col-sm-2 control-label">Pending Tests</label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <select class="form-control" style="width:auto;" name="pendingTestOption" ng-model="userSelection.selectedPendingBloodTestIndex">
+              <select class="form-control" style="width:auto;min-width:200px;" name="pendingTestOption" ng-model="userSelection.selectedPendingBloodTestIndex">
                 <option value=""></option>
                 <option ng-repeat="pendingTest in pendingBloodTestsDropDown"
                         value="{{pendingBloodTestsDropDown.indexOf(pendingTest)}}"
@@ -96,7 +98,7 @@
           <label class="col-sm-2 control-label"></label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <select class="form-control" style="width:auto;min-width:350px;" name="pendingTestList"
+              <select class="form-control" style="width:auto;min-width:200px;" name="pendingTestList"
                 ng-model="userSelection.selectedPendingBloodTestList" multiple>
                 <option ng-repeat="pendingTest in bloodTestingRule.pendingTestsIds" value="{{$index}}">
                   {{pendingTest.testName}}
@@ -121,7 +123,7 @@
           <div class="col-sm-2"></div>
           <label for="isDeleted" class="col-sm-10">
             <div class="checkbox">
-              <input type="checkbox" id="isDeleted" name="isDeleted" ng-model="bloodTest.isDeleted" ng-true-value="false" ng-false-value="true"/><b>Enabled</b>
+              <input type="checkbox" id="isDeleted" name="isDeleted" ng-model="bloodTestingRule.isDeleted" ng-true-value="false" ng-false-value="true"/><b>Enabled</b>
             </div>
           </label>
         </div>
