@@ -10,7 +10,7 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
   $scope.pendingBloodTestsDropDown = [];
 
   $scope.bloodTestingRule = {
-    bloodTest: {id:''},
+    bloodTest: {},
     pattern: '',
     donationFieldChanged: '',
     newInformation: '',
@@ -93,8 +93,9 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
 
     BloodTestingRulesService.createBloodTestingRule($scope.bloodTestingRule, function() {
       $location.path('/bloodTestingRules');
-    }, function() {
+    }, function(err) {
       $scope.savingBloodTestingRule = false;
+      $log.error(err);
     });
   };
 
