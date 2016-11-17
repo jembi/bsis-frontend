@@ -11,11 +11,14 @@
             <div>
                 <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-class="{'has-error' : (selectPeriodForm.startDate.$invalid)}" ng-required="true" ui-date-end="{{search.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
                 <span><em>To:</em></span>
-                <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (selectPeriodForm.endDate.$invalid)}" ng-required="true" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>
+                <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (selectPeriodForm.endDate.$invalid)}" ng-required="true" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ui-date-range min-date="search.startDate"></dateselect-end>
             </div>
             <div>
                 <small class="error" ng-show="(selectPeriodForm.startDate.$error.required || selectPeriodForm.endDate.$error.required)">
-                    Select a valid date
+                    Select a valid date 
+                </small>
+                <small class="error" ng-show="(selectPeriodForm.endDate.$error.uiDateRange)">
+                    Select a valid date range, the start date must precede the end date
                 </small>
             </div>
         </div>
