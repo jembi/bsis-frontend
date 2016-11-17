@@ -106,8 +106,6 @@ angular.module('bsis')
         if (report.dataValues.length > 0) {
           mergeData(report.dataValues);
           $scope.gridOptions.paginationCurrentPage = 1;
-        } else {
-          $scope.gridOptions.data = [];
         }
         $scope.submitted = true;
       }, function(err) {
@@ -153,10 +151,9 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
+        return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
           'Blood Units Issued Summary Report',
           ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
-        return header;
       },
 
       // PDF footer

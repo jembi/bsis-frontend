@@ -67,7 +67,7 @@
       </form>
 
       <!-- Process component form -->
-      <form name="forms.recordComponentsForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canProcess" ng-submit="confirmProcessLabledComponent()" novalidate>
+      <form name="forms.recordComponentsForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canProcess" ng-submit="recordComponents()" novalidate>
         <div class="form-group">
           <label for="name" class="col-sm-2 control-label">Process Component</label>
           <div class="row col-sm-10">

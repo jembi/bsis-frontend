@@ -38,7 +38,7 @@
           <label for="category" class="col-sm-2 control-label">Category</label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <select class="form-control" style="width:auto;" name="category" ng-model="bloodTest.category" ng-options="c as c for c in categories" required>
+              <select class="form-control" style="width:auto;min-width:350px;" name="category" ng-model="bloodTest.category" ng-options="c as c for c in categories" required>
               </select>
               <div>
                 <ng-messages for="bloodTestForm.category.$error" ng-show="bloodTestForm.$submitted">
@@ -53,7 +53,7 @@
           <label for="bloodTestType" class="col-sm-2 control-label">Blood Test Type</label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <select class="form-control" style="width:auto;" name="bloodTestType" ng-model="bloodTest.bloodTestType" ng-options="t as t for t in types" required>
+              <select class="form-control" style="width:auto;min-width:350px;" name="bloodTestType" ng-model="bloodTest.bloodTestType" ng-options="t as t for t in types" required ng-disabled="!bloodTest.category">
               </select>
               <div>
                 <ng-messages for="bloodTestForm.bloodTestType.$error" ng-show="bloodTestForm.$submitted">

@@ -82,12 +82,6 @@ angular.module('bsis').factory('ReportsLayoutService', function(LogosService, $f
       // set page margins
       docDefinition.pageMargins = [30, 70, 30, 75];
 
-      // display no data message if the table only contains the header
-      if (docDefinition.content[0].table.body.length === 1) {
-        docDefinition.content.splice(0, 0, {text: 'No data for date range selected', fontSize: 9, alignment: 'center'});
-        return docDefinition;
-      }
-
       // get summary content if present
       var summaryContent = angular.copy(docDefinition.content[1]);
 

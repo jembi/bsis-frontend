@@ -59,7 +59,7 @@
                               {{sample.donation.donationDate | bsisDate}}
                           </td>
                           <td align="center" ng-repeat="test in testNames">
-                  <span ng-show="bloodTestType === 'REPEAT_TTI' && (sample.recentTestResults[test.id] || sample.pendingRepeatTTITestsIds.indexOf(''+test.id) >= 0)">
+                  <span ng-show="bloodTestType === 'REPEAT_TTI' && (sample.recentTestResults[test.id] || sample.pendingRepeatTTITestsIds.indexOf(test.id) >= 0)">
                     <div style="width:90px;">
                         <ui-select
                                 ng-model="allTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id]"
@@ -71,7 +71,7 @@
                         </ui-select>
                     </div>
                   </span>
-                  <span ng-show="bloodTestType === 'CONFIRMATORY_TTI' && (sample.recentTestResults[test.id] || sample.pendingConfirmatoryTTITestsIds.indexOf(''+test.id) >= 0)">
+                  <span ng-show="bloodTestType === 'CONFIRMATORY_TTI' && (sample.recentTestResults[test.id] || sample.pendingConfirmatoryTTITestsIds.indexOf(test.id) >= 0)">
                     <div style="width:90px;">
                         <ui-select
                                 ng-model="allTestOutcomes[sample.donation.donationIdentificationNumber].testResults[test.id]"

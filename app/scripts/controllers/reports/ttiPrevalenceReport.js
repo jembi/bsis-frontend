@@ -173,7 +173,6 @@ angular.module('bsis')
 
         // New venue
         if (newRow.location.name !== previousVenue) {
-          $scope.venuesNumber += 1;
 
           if (previousVenue != '') {
             // Add female, male and all rows for previous venue
@@ -230,12 +229,9 @@ angular.module('bsis')
 
       ReportsService.generateTTIPrevalenceReport(period, function(report) {
         $scope.searching = false;
-        $scope.venuesNumber = 0;
         if (report.dataValues.length > 0) {
           mergeData(report.dataValues);
           $scope.gridOptions.paginationCurrentPage = 1;
-        } else {
-          $scope.gridOptions.data = [];
         }
         $scope.submitted = true;
       }, function(err) {
@@ -277,17 +273,14 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
+        return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
           'TTI Prevalence Report',
           ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
-        return header;
       },
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        if ($scope.venuesNumber > 1) {
-          docDefinition = ReportsLayoutService.addSummaryContent(calculateSummary(), docDefinition);
-        }
+        docDefinition = ReportsLayoutService.addSummaryContent(calculateSummary(), docDefinition);
         docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
         return docDefinition;
@@ -295,7 +288,7 @@ angular.module('bsis')
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.gridOptions.data.length / 3, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {

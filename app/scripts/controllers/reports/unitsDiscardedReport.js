@@ -205,9 +205,7 @@ angular.module('bsis')
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        if ($scope.venuesNumber > 1) {
-          docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
-        }
+        docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
         docDefinition = ReportsLayoutService.highlightTotalRows('Total', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(26, docDefinition);
         return docDefinition;
