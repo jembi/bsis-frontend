@@ -55,7 +55,8 @@
                               {{serverErrorMessage}}
                           </span>
                       </div>
-                      <div ng-if="component.permissions.canPrintDiscardLabel">
+                      <div ng-if="component.permissions.canPrintDiscardLabel && 
+                      component.hasComponentBatch">
                           {{component.componentCode}} ({{component.componentName}}) -
                           <em>Component can be discarded.</em>
                           <button style="margin:0;" class="btn btn-primary" type="button"
