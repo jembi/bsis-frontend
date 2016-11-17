@@ -64,7 +64,7 @@
                       </div>
                       <div ng-if="!component.hasComponentBatch">
                           {{component.componentCode}} ({{component.componentName}}) -
-                          <em>Component needs to be received first.</em>
+                          <em>Component cannot be labelled until component batch received.</em>
                       </div>
                       <div ng-if="!component.permissions.canPrintPackLabel && !component.permissions.canPrintDiscardLabel && 
                       component.hasComponentBatch">
