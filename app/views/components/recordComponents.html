@@ -36,7 +36,13 @@
         </strong>
       </div>
 
-      <div ng-if="component && !component.hasComponentBatch && !component.permissions.canRecordWeight && !component.permissions.canProcess" style="clear:left;">
+      <div ng-if="component && !component.hasComponentBatch" style="clear:left;">
+        <strong>
+          <em>Selected component needs to be received first</em>
+        </strong>
+      </div>
+
+      <div ng-if="component && !component.permissions.canRecordWeight && !component.permissions.canProcess && component.hasComponentBatch" style="clear:left;">
         <strong>
           <em>Selected component cannot be processed further</em>
         </strong>
