@@ -114,6 +114,7 @@ angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $ro
   };
 
   $scope.componentBatch = null;
+  $scope.components = [];
 
   $scope.printDeliveryNote = function() {
     $scope.gridApi.exporter.pdfExport('all', 'all');
@@ -122,7 +123,6 @@ angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $ro
   function fetchComponentBatchById(componentBatchId) {
     ComponentBatchService.getComponentBatch(componentBatchId, function(response) {
       $scope.componentBatch = response;
-      $scope.components = [];
       angular.forEach($scope.componentBatch.components, function(component) {
         if (component.isInitialComponent) {
           $scope.components.push(component);
