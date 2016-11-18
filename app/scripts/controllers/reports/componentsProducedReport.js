@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ComponentsProducedReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService) {
+  .controller('ComponentsProducedReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
 
     // Initialize variables
 
@@ -14,6 +14,7 @@ angular.module('bsis')
     };
     var componentTypes = [];
     $scope.search = angular.copy(master);
+    $scope.dateFormat = DATEFORMAT;
 
     // Report methods
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('UnitsDiscardedReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService) {
+  .controller('UnitsDiscardedReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
 
     // Initialize variables
 
@@ -15,6 +15,7 @@ angular.module('bsis')
     var discardReasons = [];
     var summaryRows = [];
     $scope.search = angular.copy(master);
+    $scope.dateFormat = DATEFORMAT;
 
     // Report methods
 

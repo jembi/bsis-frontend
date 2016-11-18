@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsAdverseEventsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService) {
+  .controller('DonorsAdverseEventsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
 
     var mergedData = [];
     var master = {
@@ -12,6 +12,7 @@ angular.module('bsis')
     };
     var adverseEventTypes = [];
     $scope.search = angular.copy(master);
+    $scope.dateFormat = DATEFORMAT;
 
     $scope.clearSearch = function(form) {
       $scope.search = angular.copy(master);
