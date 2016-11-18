@@ -70,12 +70,12 @@
           <label for="validOutcomes" class="col-sm-2 control-label">Valid Outcomes</label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <input id="validOutcome" name="validOutcome" ng-model="validOutcome" class="form-control input-sm" style="width:auto;min-width:350px;" ng-maxlength=50>
+              <input id="validOutcome" name="validOutcome" ng-model="validOutcome" ng-maxlength=10 class="form-control input-sm" style="width:auto;min-width:350px;">
               <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="addValidOutcome()">
                   Add Outcome
               </button>
               <div>
-                <ng-messages for="bloodTestForm.validOutcome.$error">
+                <ng-messages for="bloodTestForm.validOutcome.$error" ng-show="addOutcomeClicked">
                   <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
               </div>
