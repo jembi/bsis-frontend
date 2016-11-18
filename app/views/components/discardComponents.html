@@ -30,16 +30,22 @@
       <!-- Components grid -->
       <div class="grid" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination style="height:{{(gridOptions.minRowsToShow*gridOptions.rowHeight)+gridOptions.headerRowHeight+gridOptions.gridFooterHeight}}px;margin-bottom:10px;"></div>
 
-      <div ng-if="selectedAction === null" style="clear:left;">
+       <div ng-if="selectedAction === null" style="clear:left;">
         <strong>
           <em>Select components to discard or undiscard</em>
         </strong>
       </div>
-
       <div ng-if="selectedAction === 'NONE'" style="clear:left;">
-        <strong>
-          <em>Selected component cannot be discarded or undiscarded</em>
-        </strong>
+        <div ng-if="componentsReceived">
+          <strong>
+            <em>Selected component cannot be discarded or undiscarded</em>
+          </strong>
+        </div>
+        <div ng-if="!componentsReceived">
+          <strong>
+            <em>Selected Component cannot be discarded until component batch received</em>
+          </strong>
+        </div>
       </div>
       <div ng-if="selectedAction === 'UNDISCARD'" style="clear:left;">
         <button class="btn btn-primary" ng-click="undiscardComponents();" >
