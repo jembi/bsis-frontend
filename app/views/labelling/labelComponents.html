@@ -63,12 +63,8 @@
                                   ng-click="printDiscardLabel(component.id)">Print Discard Label
                           </button>
                       </div>
-                      <div ng-if="!component.hasComponentBatch">
-                          {{component.componentCode}} ({{component.componentName}}) -
-                          <em>Component cannot be labelled until component batch received.</em>
-                      </div>
-                      <div ng-if="!component.permissions.canPrintPackLabel && !component.permissions.canPrintDiscardLabel && 
-                      component.hasComponentBatch">
+                      <div ng-if="(!component.permissions.canPrintPackLabel && !component.permissions.canPrintDiscardLabel) || 
+                      !component.hasComponentBatch">
                           {{component.componentCode}} ({{component.componentName}}) -
                           <em>Cannot print pack or discard labels for component.</em>
                       </div>
