@@ -67,15 +67,28 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
 
     $scope.savingBloodTestingRule = true;
 
-    BloodTestingRulesService.createBloodTestingRule($scope.bloodTestingRule, function() {
+    var save = $routeParams.id ? BloodTestingRulesService.updateBloodTestingRule : BloodTestingRulesService.createBloodTestingRule;
+    delete $scope.bloodTestingRule.testNameShort;
+
+    save($scope.bloodTestingRule, function() {
       $location.path('/bloodTestingRules');
-    }, function() {
+    }, function(err) {
       $scope.savingBloodTestingRule = false;
+      $log.error(err);
     });
   };
 
   function initExistingBloodTestingRule() {
-    // empty hook up BloodTestingRuleService to get current BloodTestingRule
+    BloodTestingRulesService.getBloodTestingRuleById({id: $routeParams.id}, function(response) {
+      $scope.bloodTestingRule = response.bloodTestingRule;
+      $scope.bloodTestingRule.pendingTests = $scope.pendingBloodTests.filter(function(test) {
+        return $scope.bloodTestingRule.pendingTests.some(function(pending) {
+          return test.id === pending.id;
+        });
+      });
+      $scope.updateDonationFieldValuesDropdown();
+      $scope.updateDonationAndTestOutcomeDropDowns();
+    });
   }
 
   function init() {

@@ -529,7 +529,7 @@ angular.module('bsis')
         }
       }),
 
-      BloodTestingRules: $resource(url + '/bloodtestingrules/', {}, {
+      BloodTestingRules: $resource(url + '/bloodtestingrules/:id', {id: '@id'}, {
         search: {
           method: 'GET',
           url: url + '/bloodtestingrules/search'
@@ -540,6 +540,9 @@ angular.module('bsis')
         },
         save: {
           method: 'POST'
+        },
+        update: {
+          method: 'PUT'
         }
       })
     };
