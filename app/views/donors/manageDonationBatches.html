@@ -53,14 +53,11 @@
                             <form name="addDonationBatchForm" novalidate class="form-horizontal col-sm-12" role="form"
                                   ng-submit="addDonationBatch(newDonationBatch, addDonationBatchForm)">
                                 <div class="form-group">
-                                    <label for="name" class="col-sm-1 control-label">Venue</label>
                                     <div class="row col-sm-11">
-                                        <div class="form-inline" style="padding-left:5px;">
+                                        <div class="form-inline">
+                                            <label for="name" class="col-sm-2 control-label">Venue</label>
                                             <select name="venue" class="form-control input-sm"
-                                                    ng-model="newDonationBatch.venue"
-                                                    ng-options="item.id as item.name disable when (item.disabled || item.isDeleted) for item in venues"
-                                                    required
-                                                    ng-class="{'ng-invalid ng-dirty' : addDonationBatchForm.venue.$invalid && submitted}">
+                                                    ng-model="newDonationBatch.venue" required="true" ng-options="item.id as item.name disable when (item.disabled || item.isDeleted) for item in venues" ng-class="{'ng-invalid ng-dirty' : addDonationBatchForm.venue.$invalid && submitted}">
                                                 <option value="" ng-disabled="true"></option>
                                             </select>
                                             <div>
@@ -74,19 +71,30 @@
                                                     {{err["donationBatch.venue"]}}
                                                 </small>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                        
 
-                                <div class="form-group">
-                                    <div class="col-sm-offset-1 col-sm-11">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" ng-model="newDonationBatch.backEntry"> Historical
-                                                Data Entry
-                                            </label>
+                                            <label class="col-sm-2 control-label">Historical
+                                                        Data Entry:</label>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" ng-click="updateDonationBatchDate()" ng-model="newDonationBatch.backEntry"> 
+                                                </label>
+                                            </div>
+
+                                            <div>
+                                                <label class="col-sm-2 control-label">Donation Batch Date:</label>
+                                                <div>
+                                                    <dateselect name="donationBatchDate" ng-model="newDonationBatch.donationBatchDate" format="dateFormat" ng-class="{'has-error' : (addDonationBatchForm.donationBatchDate.$invalid)}" ng-required="newDonationBatch.backEntry" max-date="maxDonationBatchDate" ng-model-options="{ allowInvalid: true }" ng-disabled="!newDonationBatch.backEntry"></dateselect>
+                                                    <span><em>To:</em></span>
+                                                </div>
+                                                <div>
+                                                    <small class="error" ng-show="(newDonationBatch.donationBatchDate > maxDonationBatchDate)">
+                                                        Donation date must be today or before
+                                                    </small>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </div>        
                                 </div>
 
                                 <div class="form-group">

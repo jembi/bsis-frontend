@@ -14,7 +14,11 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
   $scope.recentDonationBatchData = recentDonationBatchData;
   $scope.openDonationBatches = false;
   $scope.recentDonationBatches = false;
-  $scope.newDonationBatch = {backEntry: false};
+  $scope.newDonationBatch = {
+    backEntry: false,
+    donationBatchDate: moment().endOf('day').toDate()
+  };
+  $scope.maxDonationBatchDate = moment().endOf('day').toDate();
   $scope.dateFormat = DATEFORMAT;
   $scope.icons = ICONS;
   $scope.packTypes = PACKTYPE.packtypes;
@@ -35,11 +39,18 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
             });
           });
         }, $log.error);
-
         $scope.openDonationBatches = data.length > 0;
       }
     });
   }
+
+  $scope.updateDonationBatchDate = function() {
+    if ($scope.newDonationBatch.backEntry) {
+      $scope.newDonationBatch.donationBatchdate = null;
+    } else {
+      $scope.newDonationBatch.donationBatchdate = moment().endOf('day').toDate();
+    }
+  };
 
   $scope.clearDates = function() {
     $scope.search.startDate = null;
