@@ -23,7 +23,7 @@
                                     ng-class="{'active': donationBatch.$selected}">
                                     <td data-title="'Created'" style="width:15%;" header-class="text-left"
                                         sortable="'date'">
-                                        {{donationBatch.createdDate | bsisDate}}
+                                        {{donationBatch.donationBatchDate | bsisDate}}
                                     </td>
                                     <td data-title="'Venue'" style="width:25%;" header-class="text-left"
                                         sortable="'center'">
@@ -77,7 +77,7 @@
                                                         Data Entry:</label>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" ng-click="updateDonationBatchDate()" ng-model="newDonationBatch.backEntry"> 
+                                                    <input type="checkbox" ng-change="updateDonationBatchDate()" ng-model="newDonationBatch.backEntry"> 
                                                 </label>
                                             </div>
 
@@ -85,12 +85,6 @@
                                                 <label class="col-sm-2 control-label">Donation Batch Date:</label>
                                                 <div>
                                                     <dateselect name="donationBatchDate" ng-model="newDonationBatch.donationBatchDate" format="dateFormat" ng-class="{'has-error' : (addDonationBatchForm.donationBatchDate.$invalid)}" ng-required="newDonationBatch.backEntry" max-date="maxDonationBatchDate" ng-model-options="{ allowInvalid: true }" ng-disabled="!newDonationBatch.backEntry"></dateselect>
-                                                    <span><em>To:</em></span>
-                                                </div>
-                                                <div>
-                                                    <small class="error" ng-show="(newDonationBatch.donationBatchDate > maxDonationBatchDate)">
-                                                        Donation date must be today or before
-                                                    </small>
                                                 </div>
                                             </div>
                                         </div>

@@ -46,9 +46,9 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
 
   $scope.updateDonationBatchDate = function() {
     if ($scope.newDonationBatch.backEntry) {
-      $scope.newDonationBatch.donationBatchdate = null;
+      $scope.newDonationBatch.donationBatchDate = null;
     } else {
-      $scope.newDonationBatch.donationBatchdate = moment().endOf('day').toDate();
+      $scope.newDonationBatch.donationBatchDate = $scope.maxDonationBatchDate;
     }
   };
 
