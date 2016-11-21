@@ -7,10 +7,9 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
   $scope.donationFields = [];
   $scope.testOutcomes = [];
   $scope.donationFieldValues = [];
-  $scope.pendingBloodTestsDropDown = [];
 
   $scope.bloodTestingRule = {
-    bloodTest: {id:''},
+    bloodTest: null,
     pattern: '',
     donationFieldChanged: '',
     newInformation: '',
@@ -19,8 +18,8 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
   };
 
   $scope.userSelection = {
-    selectedPendingBloodTestIndex: null,
-    selectedPendingBloodTestList: []
+    bloodTestToAdd: null,
+    bloodTestsToRemove: []
   };
 
   $scope.bloodTestingRuleForm = {};
@@ -30,10 +29,13 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
   };
 
   $scope.updateDonationAndTestOutcomeDropDowns = function() {
-    if ($scope.bloodTestingRule.bloodTest.id.length) {
+    if ($scope.bloodTestingRule.bloodTest) {
       BloodTestsService.getBloodTestById({id: $scope.bloodTestingRule.bloodTest.id}, function(response) {
         $scope.donationFields = donationFields[response.bloodTest.category];
         $scope.testOutcomes = response.bloodTest.validResults;
+        $scope.bloodTestingRule.pendingTests = $scope.bloodTestingRule.pendingTests.filter(function(test) {
+          return test.category === response.bloodTest.category;
+        });
       });
     }
   };
@@ -42,41 +44,20 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
     $scope.donationFieldValues = donationFieldValues[$scope.bloodTestingRule.donationFieldChanged];
   };
 
-  var validatePendingTestsList = function() {
-    if ($scope.bloodTestingRule.pendingTests.length == 0) {
-      $scope.bloodTestingRule.pendingTestList.$setValidity('required', false);
-    } else {
-      $scope.bloodTestingRuleForm.pendingTestList.$setValidity('required', true);
-    }
-  };
-
   $scope.addPendingTest = function() {
-    $scope.bloodTestingRule.pendingTests.push(
-      $scope.pendingBloodTestsDropDown[$scope.userSelection.selectedPendingBloodTestIndex]
-    );
-    $scope.pendingBloodTestsDropDown[$scope.userSelection.selectedPendingBloodTestIndex].disabled = true;
-    $scope.userSelection.selectedPendingBloodTestIndex = null;
-    validatePendingTestsList();
+    $scope.bloodTestingRule.pendingTests.push($scope.userSelection.bloodTestToAdd);
+    $scope.userSelection.bloodTestToAdd = null;
   };
 
-  $scope.removePendingTest = function() {
-    $scope.userSelection.selectedPendingBloodTestList.reverse();
+  $scope.isPendingTest = function(test) {
+    return $scope.bloodTestingRule.pendingTests.indexOf(test) !== -1;
+  };
 
-    var toRemove = $scope.bloodTestingRule.pendingTests.filter(function(pendingTest, index) {
-      return $scope.userSelection.selectedPendingBloodTestList.indexOf(String(index)) > -1;
+  $scope.removePendingTests = function() {
+    $scope.bloodTestingRule.pendingTests = $scope.bloodTestingRule.pendingTests.filter(function(test) {
+      return $scope.userSelection.bloodTestsToRemove.indexOf(test) === -1;
     });
-
-    toRemove.forEach(function(pendingTest) {
-      $scope.bloodTestingRule.pendingTests.splice(
-        $scope.bloodTestingRule.pendingTests.indexOf(pendingTest),
-        1);
-
-      pendingTest.disabled = false;
-    });
-
-    // Reset selection
-    $scope.userSelection.selectedPendingBloodTestList = [];
-    validatePendingTestsList();
+    $scope.userSelection.bloodTestsToRemove = [];
   };
 
   $scope.saveBloodTestingRule = function() {
@@ -85,11 +66,6 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
     }
 
     $scope.savingBloodTestingRule = true;
-
-    // Remove disabled element out of pendingTests as it is not part of the request
-    angular.forEach($scope.bloodTestingRule.pendingTests, function(pendingTest) {
-      delete pendingTest.disabled;
-    });
 
     BloodTestingRulesService.createBloodTestingRule($scope.bloodTestingRule, function() {
       $location.path('/bloodTestingRules');
@@ -105,7 +81,9 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
   function init() {
     BloodTestingRulesService.getBloodTestingRuleForm(function(response) {
       $scope.bloodTests = response.bloodTests;
-      $scope.pendingBloodTestsDropDown = response.bloodTests;
+      $scope.pendingBloodTests = response.bloodTests.filter(function(test) {
+        return test.bloodTestType !== 'BASIC_TTI' && test.bloodTestType !== 'BASIC_BLOODTYPING';
+      });
       $scope.bloodTests.forEach(function(bloodTest) {
         donationFields[bloodTest.category] = response.donationFields[bloodTest.category];
       });
