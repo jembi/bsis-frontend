@@ -61,6 +61,16 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
     $scope.search.selectedVenues = [];
   };
 
+  $scope.clearDonationBatchForm = function(form) {
+    $scope.newDonationBatch = {
+      backEntry: false,
+      donationBatchDate: moment().toDate()
+    };
+    form.$setPristine();
+    form.$setUntouched();
+    $scope.submitted = false;
+  };
+
   $scope.clearSearch = function(form) {
     $location.search({});
     $scope.search = angular.copy(master);
