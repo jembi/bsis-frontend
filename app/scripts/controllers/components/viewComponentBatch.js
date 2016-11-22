@@ -41,7 +41,7 @@ angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $ro
           text: 'Date Created: ',
           bold: true
         }, {
-          text: $filter('bsisDate')($scope.componentBatch.donationBatch.createdDate)
+          text: $filter('bsisDate')($scope.componentBatch.donationBatch.donationBatchDate)
         }, {
           text: ' Venue: ',
           bold: true

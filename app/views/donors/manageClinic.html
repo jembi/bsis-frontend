@@ -10,9 +10,9 @@
 
     <div class="h4">
         <small><em>Date Created: </em></small>
-        <span ng-show="!editableForm.$visible">{{ (donationBatch.createdDate | bsisDate) || '' }}</span>
+        <span ng-show="!editableForm.$visible">{{ (donationBatch.donationBatchDate | bsisDate) || '' }}</span>
     <span ng-show="editableForm.$visible">
-      <dateselect ng-model="donationBatch.createdDate" initDate="donationBatch.createdDate" format="format"
+      <dateselect ng-model="donationBatch.donationBatchDate" initDate="donationBatch.donationBatchDate" format="format"
                   cal-icon="icons.CALENDAR" opened="dateToOpen"
                   ng-disabled="!donationBatch.permissions.canEditDate"></dateselect>
     </span>

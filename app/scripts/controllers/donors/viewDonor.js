@@ -459,7 +459,7 @@ angular.module('bsis')
 
           // set donation center, site & date to those of the donation batch
           donation.venue = donationBatch.venue;
-          donation.donationDate = donationBatch.createdDate;
+          donation.donationDate = donationBatch.donationBatchDate;
           donation.donationBatchNumber = donationBatch.batchNumber;
 
           donation.donorNumber = $scope.donor.donorNumber;

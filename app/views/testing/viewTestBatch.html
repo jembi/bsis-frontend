@@ -178,7 +178,7 @@
                         repeat="donationBatch.id as donationBatch in testBatchAvailableDonationBatches | filter:$select.search">
                     <div ng-bind-html="donationBatch.venue.name"></div>
                     <small>
-                        {{donationBatch.createdDate | bsisDate}} |
+                        {{donationBatch.donationBatchDate | bsisDate}} |
                         {{donationBatch.numDonations}} donations
                     </small>
                 </ui-select-choices>
@@ -192,7 +192,7 @@
     <span ng-show="!editableForm.$visible || !testBatch.permissions.canEditDonationBatches">
       <span class="h4" style="font-size: 0.95em; margin-top:0px; margin-bottom:0px;"
             ng-repeat="donationBatch in testBatch.donationBatches">
-        <small><em>Venue: </em></small>{{donationBatch.venue.name}} | <small><em>Date: </em></small> {{donationBatch.createdDate | bsisDate}} | <small>
+        <small><em>Venue: </em></small>{{donationBatch.venue.name}} | <small><em>Date: </em></small> {{donationBatch.donationBatchDate | bsisDate}} | <small>
           <em>Number of Donations: </em></small> {{donationBatch.numDonations}}
         <br/>
       </span>

@@ -14,7 +14,11 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
   $scope.recentDonationBatchData = recentDonationBatchData;
   $scope.openDonationBatches = false;
   $scope.recentDonationBatches = false;
-  $scope.newDonationBatch = {backEntry: false};
+  $scope.newDonationBatch = {
+    backEntry: false,
+    donationBatchDate: moment().toDate()
+  };
+  $scope.maxDonationBatchDate = moment().endOf('day').toDate();
   $scope.dateFormat = DATEFORMAT;
   $scope.icons = ICONS;
   $scope.packTypes = PACKTYPE.packtypes;
@@ -35,11 +39,18 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
             });
           });
         }, $log.error);
-
         $scope.openDonationBatches = data.length > 0;
       }
     });
   }
+
+  $scope.updateDonationBatchDate = function() {
+    if ($scope.newDonationBatch.backEntry) {
+      $scope.newDonationBatch.donationBatchDate = null;
+    } else {
+      $scope.newDonationBatch.donationBatchDate = moment().toDate();
+    }
+  };
 
   $scope.clearDates = function() {
     $scope.search.startDate = null;
@@ -48,6 +59,15 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
 
   $scope.clearVenues = function() {
     $scope.search.selectedVenues = [];
+  };
+
+  $scope.clearDonationBatchForm = function(form) {
+    $scope.newDonationBatch = {
+      backEntry: false,
+      donationBatchDate: moment().toDate()
+    };
+    form.$setPristine();
+    form.$setUntouched();
   };
 
   $scope.clearSearch = function(form) {
@@ -150,19 +170,15 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
       $scope.addingDonationBatch = true;
 
       DonorService.addDonationBatch(donationBatch, function() {
-        $scope.newDonationBatch = {backEntry: false};
         getOpenDonationBatches();
         // set form back to pristine state
-        donationBatchForm.$setPristine();
-        $scope.submitted = '';
+        $scope.clearDonationBatchForm(donationBatchForm);
         $scope.addingDonationBatch = false;
 
       }, function(err) {
         $scope.err = err;
         $scope.addingDonationBatch = false;
       });
-    } else {
-      $scope.submitted = true;
     }
   };
 
