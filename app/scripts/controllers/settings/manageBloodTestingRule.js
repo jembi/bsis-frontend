@@ -3,7 +3,7 @@
 angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope, $location, $log, $timeout, $routeParams, BloodTestingRulesService, BloodTestsService) {
 
   var donationFieldValues = [];
-  var donationFields = [];
+  var donationFieldsMap = [];
   var master = {
     bloodTest: null,
     pattern: '',
@@ -35,7 +35,7 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
     if ($scope.bloodTestingRule.bloodTest) {
       BloodTestsService.getBloodTestById({id: $scope.bloodTestingRule.bloodTest.id}, function(response) {
         $scope.bloodTestingRule.bloodTest = response.bloodTest;
-        $scope.donationFields = donationFields[response.bloodTest.category];
+        $scope.donationFields = donationFieldsMap[response.bloodTest.category];
         $scope.testOutcomes = response.bloodTest.validResults;
         $scope.bloodTestingRule.pendingTests = $scope.bloodTestingRule.pendingTests.filter(function(test) {
           return test.category === response.bloodTest.category;
@@ -111,7 +111,7 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
       $scope.pendingBloodTests = response.bloodTests.filter(function(test) {
         return test.bloodTestType !== 'BASIC_TTI' && test.bloodTestType !== 'BASIC_BLOODTYPING';
       });
-      donationFields = response.donationFields;
+      donationFieldsMap = response.donationFields;
       donationFieldValues = response.newInformation;
       if ($routeParams.id) {
         initExistingBloodTestingRule();
