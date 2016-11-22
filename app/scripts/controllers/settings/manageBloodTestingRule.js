@@ -4,11 +4,7 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
 
   var donationFieldValues = [];
   var donationFields = [];
-  $scope.donationFields = [];
-  $scope.testOutcomes = [];
-  $scope.donationFieldValues = [];
-
-  $scope.bloodTestingRule = {
+  var master = {
     bloodTest: null,
     pattern: '',
     donationFieldChanged: '',
@@ -17,20 +13,28 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
     isDeleted: false
   };
 
+  $scope.donationFields = [];
+  $scope.testOutcomes = [];
+  $scope.donationFieldValues = [];
   $scope.userSelection = {
     bloodTestToAdd: null,
     bloodTestsToRemove: []
   };
-
   $scope.bloodTestingRuleForm = {};
 
   $scope.cancel = function() {
     $location.path('/bloodTestingRules');
   };
 
-  $scope.updateDonationAndTestOutcomeDropDowns = function() {
+  function clear() {
+    $scope.bloodTestingRule = angular.copy(master);
+    $scope.bloodTestingRuleForm.$setPristine();
+  }
+
+  function getBloodTestAndUpdateDropdowns() {
     if ($scope.bloodTestingRule.bloodTest) {
       BloodTestsService.getBloodTestById({id: $scope.bloodTestingRule.bloodTest.id}, function(response) {
+        $scope.bloodTestingRule.bloodTest = response.bloodTest;
         $scope.donationFields = donationFields[response.bloodTest.category];
         $scope.testOutcomes = response.bloodTest.validResults;
         $scope.bloodTestingRule.pendingTests = $scope.bloodTestingRule.pendingTests.filter(function(test) {
@@ -38,6 +42,14 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
         });
       });
     }
+  }
+
+  $scope.updateDonationAndTestOutcomeDropDowns = function() {
+    var selectedBloodTest = $scope.bloodTestingRule.bloodTest;
+    clear();
+    $scope.bloodTestingRule.id = $routeParams.id;
+    $scope.bloodTestingRule.bloodTest = selectedBloodTest;
+    getBloodTestAndUpdateDropdowns();
   };
 
   $scope.updateDonationFieldValuesDropdown = function() {
@@ -87,11 +99,12 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
         });
       });
       $scope.updateDonationFieldValuesDropdown();
-      $scope.updateDonationAndTestOutcomeDropDowns();
+      getBloodTestAndUpdateDropdowns();
     });
   }
 
   function init() {
+    $scope.bloodTestingRule = angular.copy(master);
     BloodTestingRulesService.getBloodTestingRuleForm(function(response) {
       $scope.bloodTests = response.bloodTests;
       $scope.pendingBloodTests = response.bloodTests.filter(function(test) {
