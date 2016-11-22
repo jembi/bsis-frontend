@@ -111,9 +111,7 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
       $scope.pendingBloodTests = response.bloodTests.filter(function(test) {
         return test.bloodTestType !== 'BASIC_TTI' && test.bloodTestType !== 'BASIC_BLOODTYPING';
       });
-      $scope.bloodTests.forEach(function(bloodTest) {
-        donationFields[bloodTest.category] = response.donationFields[bloodTest.category];
-      });
+      donationFields = response.donationFields;
       donationFieldValues = response.newInformation;
       if ($routeParams.id) {
         initExistingBloodTestingRule();
