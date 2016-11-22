@@ -254,7 +254,7 @@ angular.module('bsis')
         var prefix = [];
         angular.forEach($scope.testBatch.donationBatches, function(val) {
           var venue = val.venue.name;
-          var dateCreated = $filter('bsisDate')(val.createdDate);
+          var dateCreated = $filter('bsisDate')(val.donationBatchDate);
           var numDonations = val.numDonations;
           prefix.push(
             {
