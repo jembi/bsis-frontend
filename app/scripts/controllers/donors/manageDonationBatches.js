@@ -16,7 +16,7 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
   $scope.recentDonationBatches = false;
   $scope.newDonationBatch = {
     backEntry: false,
-    donationBatchDate: moment().endOf('day').toDate()
+    donationBatchDate: moment().toDate()
   };
   $scope.maxDonationBatchDate = moment().endOf('day').toDate();
   $scope.dateFormat = DATEFORMAT;
@@ -48,7 +48,7 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
     if ($scope.newDonationBatch.backEntry) {
       $scope.newDonationBatch.donationBatchDate = null;
     } else {
-      $scope.newDonationBatch.donationBatchDate = $scope.maxDonationBatchDate;
+      $scope.newDonationBatch.donationBatchDate = moment().toDate();
     }
   };
 

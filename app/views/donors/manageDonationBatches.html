@@ -55,11 +55,13 @@
                                 <div class="form-group">
                                     <div class="row col-sm-11">
                                         <div class="form-inline">
-                                            <label for="name" class="col-sm-2 control-label">Venue</label>
-                                            <select name="venue" class="form-control input-sm"
+                                            <div>
+                                                <label for="name" class="col-sm-2 control-label">Venue</label>
+                                                <select name="venue" class="form-control input-sm"
                                                     ng-model="newDonationBatch.venue" required="true" ng-options="item.id as item.name disable when (item.disabled || item.isDeleted) for item in venues" ng-class="{'ng-invalid ng-dirty' : addDonationBatchForm.venue.$invalid && submitted}">
-                                                <option value="" ng-disabled="true"></option>
-                                            </select>
+                                                    <option value="" ng-disabled="true"></option>
+                                                </select>
+                                            </div> <br/>   
                                             <div>
                                                 <small class="error"
                                                        ng-show="
@@ -71,21 +73,24 @@
                                                     {{err["donationBatch.venue"]}}
                                                 </small>
                                             </div>
-                                        
-
-                                            <label class="col-sm-2 control-label">Historical
-                                                        Data Entry:</label>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" ng-change="updateDonationBatchDate()" ng-model="newDonationBatch.backEntry"> 
-                                                </label>
-                                            </div>
 
                                             <div>
-                                                <label class="col-sm-2 control-label">Donation Batch Date:</label>
-                                                <div>
-                                                    <dateselect name="donationBatchDate" ng-model="newDonationBatch.donationBatchDate" format="dateFormat" ng-class="{'has-error' : (addDonationBatchForm.donationBatchDate.$invalid)}" ng-required="newDonationBatch.backEntry" max-date="maxDonationBatchDate" ng-model-options="{ allowInvalid: true }" ng-disabled="!newDonationBatch.backEntry"></dateselect>
-                                                </div>
+                                                <label class="col-sm-2 control-label">Date:</label>
+                                                <dateselect name="donationBatchDate" ng-model="newDonationBatch.donationBatchDate" format="dateFormat" ng-class="{'has-error' : (addDonationBatchForm.donationBatchDate.$invalid)}" ng-required="newDonationBatch.backEntry" max-date="maxDonationBatchDate" ng-model-options="{ allowInvalid: true }" ng-disabled="!newDonationBatch.backEntry"></dateselect>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" id="backEntry" name="backEntry"  ng-change="updateDonationBatchDate()" ng-model="newDonationBatch.backEntry" ng-true-value="false" ng-false-value="true"/><b> Historical
+                                                        Data Entry </b>
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <small class="error" ng-show="(addDonationBatchForm.donationBatchDate.$error.required)">
+                                                    Date is required
+                                                </small>
+                                            </div>
+                                            <div>    
+                                                <small class="error" ng-show="(addDonationBatchForm.donationBatchDate.$invalid)">
+                                                    Date must be today or before
+                                                </small>
                                             </div>
                                         </div>
                                     </div>        
