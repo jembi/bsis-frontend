@@ -10,12 +10,8 @@
           <label for="bloodTest" class="col-sm-2 control-label">Blood Test</label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <select class="form-control" style="width:auto;min-width:200px;" name="bloodTest" ng-model="bloodTestingRule.bloodTest.id" ng-change="updateDonationAndTestOutcomeDropDowns()" required>
+              <select class="form-control" style="width:auto;min-width:200px;" name="bloodTest" ng-model="bloodTestingRule.bloodTest" ng-change="updateDonationAndTestOutcomeDropDowns()" ng-options="test as test.testName for test in bloodTests track by test.id" required>
                 <option value="" disabled selected></option>
-                <option ng-repeat="bloodTest in bloodTests"
-                        value="{{bloodTest.id}}">
-                        {{bloodTest.testName}}
-                </option>
               </select>
               <div>
                 <ng-messages for="bloodTestingRuleForm.bloodTest.$error" ng-show="bloodTestingRuleForm.$submitted">
@@ -79,16 +75,11 @@
           <label for="pendingTestOption" class="col-sm-2 control-label">Pending Tests</label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <select class="form-control" style="width:auto;min-width:200px;" name="pendingTestOption" ng-model="userSelection.selectedPendingBloodTestIndex" ng-disabled="!bloodTestingRule.bloodTest.id">
+              <select class="form-control" style="width:auto;min-width:200px;" name="pendingTestOption" ng-model="userSelection.bloodTestToAdd" ng-disabled="!bloodTestingRule.bloodTest" ng-options="test as test.testName disable when isValidPendingTest(test) for test in pendingBloodTests | filter: {category: bloodTestingRule.bloodTest.category}">
                 <option value=""></option>
-                <option ng-repeat="pendingTest in pendingBloodTestsDropDown"
-                        value="{{pendingBloodTestsDropDown.indexOf(pendingTest)}}"
-                        ng-disabled="pendingTest.disabled || pendingTest.id == bloodTestingRule.bloodTest.id">
-                        {{pendingTest.testName}}
-                </option>
               </select>
               <button class="btn btn-primary" type="button" style="margin-top: 2px" 
-                      ng-click="addPendingTest()" ng-disabled="userSelection.selectedPendingBloodTestIndex===null">
+                      ng-click="addPendingTest()" ng-disabled="!userSelection.bloodTestToAdd">
                 Add Blood Test
               </button>
             </div>
@@ -100,13 +91,10 @@
           <div class="col-sm-10">
             <div class="form-inline">
               <select class="form-control" style="width:auto;min-width:200px;" name="pendingTestList"
-                ng-model="userSelection.selectedPendingBloodTestList" multiple>
-                <option ng-repeat="pendingTest in bloodTestingRule.pendingTests" value="{{$index}}">
-                  {{pendingTest.testName}}
-                </option>
+                ng-model="userSelection.bloodTestsToRemove" ng-options="test as test.testName for test in bloodTestingRule.pendingTests" multiple>
               </select>
               <button class="btn btn-primary" type="button" style="margin-top: 2px"
-                ng-click="removePendingTest()" ng-disabled="userSelection.selectedPendingBloodTestList.length===0">
+                ng-click="removePendingTests()" ng-disabled="userSelection.bloodTestsToRemove.length===0">
                 Remove Blood Test
               </button>
               <div>

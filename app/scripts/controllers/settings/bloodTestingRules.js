@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('BloodTestingRulesCtrl', function($scope, $log, ICONS, BloodTestingRulesService) {
+angular.module('bsis').controller('BloodTestingRulesCtrl', function($scope, $location, $log, ICONS, BloodTestingRulesService) {
 
   var columnDefs = [
     {
@@ -56,6 +56,10 @@ angular.module('bsis').controller('BloodTestingRulesCtrl', function($scope, $log
     onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;
     }
+  };
+
+  $scope.onRowClick = function(row) {
+    $location.path('/manageBloodTestingRule/' + row.entity.id);
   };
 
   function init() {

@@ -3,14 +3,9 @@
 angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope, $location, $log, $timeout, $routeParams, BloodTestingRulesService, BloodTestsService) {
 
   var donationFieldValues = [];
-  var donationFields = [];
-  $scope.donationFields = [];
-  $scope.testOutcomes = [];
-  $scope.donationFieldValues = [];
-  $scope.pendingBloodTestsDropDown = [];
-
-  $scope.bloodTestingRule = {
-    bloodTest: {id:''},
+  var donationFieldsMap = [];
+  var master = {
+    bloodTest: null,
     pattern: '',
     donationFieldChanged: '',
     newInformation: '',
@@ -18,65 +13,64 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
     isDeleted: false
   };
 
+  $scope.donationFields = [];
+  $scope.testOutcomes = [];
+  $scope.donationFieldValues = [];
   $scope.userSelection = {
-    selectedPendingBloodTestIndex: null,
-    selectedPendingBloodTestList: []
+    bloodTestToAdd: null,
+    bloodTestsToRemove: []
   };
-
   $scope.bloodTestingRuleForm = {};
 
   $scope.cancel = function() {
     $location.path('/bloodTestingRules');
   };
 
-  $scope.updateDonationAndTestOutcomeDropDowns = function() {
-    if ($scope.bloodTestingRule.bloodTest.id.length) {
+  function clear() {
+    $scope.bloodTestingRule = angular.copy(master);
+    $scope.bloodTestingRuleForm.$setPristine();
+  }
+
+  function getBloodTestAndUpdateDropdowns() {
+    if ($scope.bloodTestingRule.bloodTest) {
       BloodTestsService.getBloodTestById({id: $scope.bloodTestingRule.bloodTest.id}, function(response) {
-        $scope.donationFields = donationFields[response.bloodTest.category];
+        $scope.bloodTestingRule.bloodTest = response.bloodTest;
+        $scope.donationFields = donationFieldsMap[response.bloodTest.category];
         $scope.testOutcomes = response.bloodTest.validResults;
+        $scope.bloodTestingRule.pendingTests = $scope.bloodTestingRule.pendingTests.filter(function(test) {
+          return test.category === response.bloodTest.category;
+        });
       });
     }
+  }
+
+  $scope.updateDonationAndTestOutcomeDropDowns = function() {
+    var selectedBloodTest = $scope.bloodTestingRule.bloodTest;
+    clear();
+    $scope.bloodTestingRule.id = $routeParams.id;
+    $scope.bloodTestingRule.bloodTest = selectedBloodTest;
+    getBloodTestAndUpdateDropdowns();
   };
 
   $scope.updateDonationFieldValuesDropdown = function() {
     $scope.donationFieldValues = donationFieldValues[$scope.bloodTestingRule.donationFieldChanged];
   };
 
-  var validatePendingTestsList = function() {
-    if ($scope.bloodTestingRule.pendingTests.length == 0) {
-      $scope.bloodTestingRule.pendingTestList.$setValidity('required', false);
-    } else {
-      $scope.bloodTestingRuleForm.pendingTestList.$setValidity('required', true);
-    }
-  };
-
   $scope.addPendingTest = function() {
-    $scope.bloodTestingRule.pendingTests.push(
-      $scope.pendingBloodTestsDropDown[$scope.userSelection.selectedPendingBloodTestIndex]
-    );
-    $scope.pendingBloodTestsDropDown[$scope.userSelection.selectedPendingBloodTestIndex].disabled = true;
-    $scope.userSelection.selectedPendingBloodTestIndex = null;
-    validatePendingTestsList();
+    $scope.bloodTestingRule.pendingTests.push($scope.userSelection.bloodTestToAdd);
+    $scope.userSelection.bloodTestToAdd = null;
   };
 
-  $scope.removePendingTest = function() {
-    $scope.userSelection.selectedPendingBloodTestList.reverse();
+  $scope.isValidPendingTest = function(test) {
+    return $scope.bloodTestingRule.pendingTests.indexOf(test) !== -1 ||
+      $scope.bloodTestingRule.bloodTest && test.id === $scope.bloodTestingRule.bloodTest.id;
+  };
 
-    var toRemove = $scope.bloodTestingRule.pendingTests.filter(function(pendingTest, index) {
-      return $scope.userSelection.selectedPendingBloodTestList.indexOf(String(index)) > -1;
+  $scope.removePendingTests = function() {
+    $scope.bloodTestingRule.pendingTests = $scope.bloodTestingRule.pendingTests.filter(function(test) {
+      return $scope.userSelection.bloodTestsToRemove.indexOf(test) === -1;
     });
-
-    toRemove.forEach(function(pendingTest) {
-      $scope.bloodTestingRule.pendingTests.splice(
-        $scope.bloodTestingRule.pendingTests.indexOf(pendingTest),
-        1);
-
-      pendingTest.disabled = false;
-    });
-
-    // Reset selection
-    $scope.userSelection.selectedPendingBloodTestList = [];
-    validatePendingTestsList();
+    $scope.userSelection.bloodTestsToRemove = [];
   };
 
   $scope.saveBloodTestingRule = function() {
@@ -86,29 +80,38 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
 
     $scope.savingBloodTestingRule = true;
 
-    // Remove disabled element out of pendingTests as it is not part of the request
-    angular.forEach($scope.bloodTestingRule.pendingTests, function(pendingTest) {
-      delete pendingTest.disabled;
-    });
+    var save = $routeParams.id ? BloodTestingRulesService.updateBloodTestingRule : BloodTestingRulesService.createBloodTestingRule;
+    delete $scope.bloodTestingRule.testNameShort;
 
-    BloodTestingRulesService.createBloodTestingRule($scope.bloodTestingRule, function() {
+    save($scope.bloodTestingRule, function() {
       $location.path('/bloodTestingRules');
-    }, function() {
+    }, function(err) {
       $scope.savingBloodTestingRule = false;
+      $log.error(err);
     });
   };
 
   function initExistingBloodTestingRule() {
-    // empty hook up BloodTestingRuleService to get current BloodTestingRule
+    BloodTestingRulesService.getBloodTestingRuleById({id: $routeParams.id}, function(response) {
+      $scope.bloodTestingRule = response.bloodTestingRule;
+      $scope.bloodTestingRule.pendingTests = $scope.pendingBloodTests.filter(function(test) {
+        return $scope.bloodTestingRule.pendingTests.some(function(pending) {
+          return test.id === pending.id;
+        });
+      });
+      $scope.updateDonationFieldValuesDropdown();
+      getBloodTestAndUpdateDropdowns();
+    });
   }
 
   function init() {
+    $scope.bloodTestingRule = angular.copy(master);
     BloodTestingRulesService.getBloodTestingRuleForm(function(response) {
       $scope.bloodTests = response.bloodTests;
-      $scope.pendingBloodTestsDropDown = response.bloodTests;
-      $scope.bloodTests.forEach(function(bloodTest) {
-        donationFields[bloodTest.category] = response.donationFields[bloodTest.category];
+      $scope.pendingBloodTests = response.bloodTests.filter(function(test) {
+        return test.bloodTestType !== 'BASIC_TTI' && test.bloodTestType !== 'BASIC_BLOODTYPING';
       });
+      donationFieldsMap = response.donationFields;
       donationFieldValues = response.newInformation;
       if ($routeParams.id) {
         initExistingBloodTestingRule();
