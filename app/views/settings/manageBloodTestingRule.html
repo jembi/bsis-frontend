@@ -75,7 +75,7 @@
           <label for="pendingTestOption" class="col-sm-2 control-label">Pending Tests</label>
           <div class="col-sm-10">
             <div class="form-inline">
-              <select class="form-control" style="width:auto;min-width:200px;" name="pendingTestOption" ng-model="userSelection.bloodTestToAdd" ng-disabled="!bloodTestingRule.bloodTest" ng-options="test as test.testName disable when isPendingTest(test) for test in pendingBloodTests | filter: {category: bloodTestingRule.bloodTest.category}">
+              <select class="form-control" style="width:auto;min-width:200px;" name="pendingTestOption" ng-model="userSelection.bloodTestToAdd" ng-disabled="!bloodTestingRule.bloodTest" ng-options="test as test.testName disable when isValidPendingTest(test) for test in pendingBloodTests | filter: {category: bloodTestingRule.bloodTest.category}">
                 <option value=""></option>
               </select>
               <button class="btn btn-primary" type="button" style="margin-top: 2px" 

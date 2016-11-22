@@ -61,7 +61,7 @@ angular.module('bsis').controller('ManageBloodTestingRuleCtrl', function($scope,
     $scope.userSelection.bloodTestToAdd = null;
   };
 
-  $scope.isPendingTest = function(test) {
+  $scope.isValidPendingTest = function(test) {
     return $scope.bloodTestingRule.pendingTests.indexOf(test) !== -1 ||
       $scope.bloodTestingRule.bloodTest && test.id === $scope.bloodTestingRule.bloodTest.id;
   };
