@@ -79,7 +79,7 @@
                                                                   repeat="donationBatch.id as donationBatch in donationBatches | filter:$select.search">
                                                               <div ng-bind-html="donationBatch.venue.name"></div>
                                                               <small>
-                                                                  {{donationBatch.createdDate | bsisDate}} |
+                                                                  {{donationBatch.donationBatchDate | bsisDate}} |
                                                                   {{donationBatch.numDonations}} donations
                                                               </small>
                                                           </ui-select-choices>

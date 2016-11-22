@@ -82,7 +82,7 @@ angular.module('bsis')
       exporterPdfHeader: function() {
 
         var venue = $scope.donationBatch.venue.name;
-        var dateCreated = $filter('bsisDate')($scope.donationBatch.createdDate);
+        var dateCreated = $filter('bsisDate')($scope.donationBatch.donationBatchDate);
         var lastUpdated = $filter('bsisDate')($scope.donationBatch.lastUpdated);
         var status;
         if ($scope.donationBatch.isClosed) {
@@ -368,7 +368,7 @@ angular.module('bsis')
 
           // set donation center, site & date to those of the donation batch
           donation.venue = $scope.donationBatch.venue;
-          donation.donationDate = $scope.donationBatch.createdDate;
+          donation.donationDate = $scope.donationBatch.donationBatchDate;
           donation.donationBatchNumber = $scope.donationBatch.batchNumber;
           donation.bleedStartTime = bleedStartTime;
           donation.bleedEndTime = bleedEndTime;

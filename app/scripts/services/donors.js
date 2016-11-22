@@ -135,7 +135,7 @@ angular.module('bsis')
           Api.DonationBatches.get({id: donationBatchObj.id}, function(donationBatch) {
             donationBatchObj = donationBatch.donationBatch;
             // Created date needs to be a JS Date object for the datepicker
-            donationBatch.donationBatch.createdDate = new Date(donationBatch.donationBatch.createdDate);
+            donationBatch.donationBatch.donationBatchDate = new Date(donationBatch.donationBatch.donationBatchDate);
             onSuccess(donationBatch.donationBatch);
           });
         }, function(err) {
@@ -299,7 +299,7 @@ angular.module('bsis')
         Api.DonationBatches.get({id: donationBatch.id}, function(response) {
           var updateDonationBatch = response.donationBatch;
 
-          updateDonationBatch.createdDate = donationBatch.createdDate;
+          updateDonationBatch.donationBatchDate = donationBatch.donationBatchDate;
           updateDonationBatch.venue = donationBatch.venue.id;
           updateDonationBatch.isClosed = false;
 
@@ -314,7 +314,7 @@ angular.module('bsis')
         Api.DonationBatches.get({id: donationBatch.id}, function(response) {
           var updateDonationBatch = response.donationBatch;
 
-          updateDonationBatch.createdDate = donationBatch.createdDate;
+          updateDonationBatch.donationBatchDate = donationBatch.donationBatchDate;
           updateDonationBatch.venue = donationBatch.venue.id;
 
           Api.DonationBatches.update({id: donationBatch.id}, updateDonationBatch, function(data) {
