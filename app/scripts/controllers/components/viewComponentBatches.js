@@ -44,8 +44,8 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
       maxWidth: '350'
     },
     {
-      name: 'Num Components',
-      field: 'numberOfComponents',
+      name: 'Num Initial Components',
+      field: 'numberOfInitialComponents',
       width: '**',
       maxWidth: '200'
     },
