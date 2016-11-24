@@ -73,7 +73,7 @@
                                                                  ng-model="testBatch.donationBatchIds" theme="bootstrap"
                                                                  ng-disabled="disabled" style="width: 700px;">
                                                           <ui-select-match placeholder="Select:">{{$item.venue.name}}
-                                                              ({{$item.createdDate | bsisDate}})
+                                                              ({{$item.donationBatchDate | bsisDate}})
                                                           </ui-select-match>
                                                           <ui-select-choices
                                                                   repeat="donationBatch.id as donationBatch in donationBatches | filter:$select.search">
