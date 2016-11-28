@@ -1,6 +1,5 @@
 <span class="h4">Add Donation</span>
 <hr style="margin-top:8px;"/>
-
 <div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false"
      style="padding-top:10px;">
     <uib-alert type="danger" close="">
@@ -25,15 +24,11 @@
         </ul>
     </uib-alert>
 </div>
-
 <form name="addDonationForm" novalidate class="form-horizontal col-sm-12" role="form"
       ng-submit="addDonation(donation, donationBatch, bleedStartTime, bleedEndTime, addDonationForm.$valid)">
-
     <div class="col-md-4">
-
         <p><em>Donation Information</em></p>
         <hr style="margin-top:8px;"/>
-
         <div class="form-group">
             <label for="name" class="col-sm-3 control-label">Batch</label>
             <div class="row col-sm-9">
@@ -54,30 +49,34 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             <label for="name" class="col-sm-3 control-label">DIN</label>
             <div class="row col-sm-9">
                 <div class="form-inline" style="padding-left:5px;">
                     <input name="din" size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
                            class="form-control input-sm" placeholder="" ng-model="donation.donationIdentificationNumber"
+                           ng-maxlength="dinMaxLength"
                            required
                            ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
-                           ng-class="{'ng-invalid ng-dirty' : (addDonationForm.din.$invalid && submitted)}">
+                           ng-class="{'ng-invalid ng-dirty' : (addDonationForm.din.$invalid && submitted)}">                    
                     <div>
                         <small class="error" ng-show="(addDonationForm.din.$error.required && (addDonationForm.din.$dirty || submitted))">
                             This cannot be empty
                         </small>
                     </div>
                     <div>
-                        <small class="error" ng-show="(!addDonationForm.din.$error.required && addDonationForm.din.$invalid && (addDonationForm.din.$dirty || submitted))">
+                        <small class="error" ng-show="(addDonationForm.din.$error.maxlength && !addDonationForm.din.$error.required && (addDonationForm.din.$dirty || submitted))">
+                            DIN should not be more than {{dinMaxLength}} characters
+                        </small>
+                    </div>
+                    <div>
+                        <small class="error" ng-show="(!addDonationForm.din.$error.required && addDonationForm.din.$invalid && !addDonationForm.din.$error.maxlength && (addDonationForm.din.$dirty || submitted))">
                             Invalid input
                         </small>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             <label for="name" class="col-sm-3 control-label">Pack</label>
             <div class="row col-sm-9">
@@ -95,7 +94,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             <label for="name" class="col-sm-3 control-label">Donation</label>
             <div class="row col-sm-9">
@@ -113,13 +111,10 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="col-md-4">
-
         <p><em>Bleed Times</em></p>
         <hr style="margin-top:8px;"/>
-
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Start</label>
             <div class="row col-sm-10">
@@ -131,7 +126,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">End</label>
             <div class="row col-sm-10">
@@ -148,10 +142,8 @@
         </div>
     </div>
     <div class="col-md-4">
-
         <p><em>Donor Assessment</em></p>
         <hr style="margin-top:8px;"/>
-
         <div class="form-group">
             <label for="donorWeight" class="col-sm-4 control-label">Weight</label>
             <div class="row col-sm-8">
@@ -173,7 +165,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             <label for="haemoglobinCount" class="col-sm-4 control-label">Hb</label>
             <div class="row col-sm-8">
@@ -201,7 +192,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             <label for="bloodPressureSystolic" class="col-sm-4 control-label">BP</label>
             <div class="row col-sm-8">
@@ -235,7 +225,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             <label for="donorPulse" class="col-sm-4 control-label">Pulse</label>
             <div class="row col-sm-8">
@@ -257,7 +246,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             <label for="adverseEventType" class="col-sm-4 control-label">Adverse Event</label>
             <div class="row col-sm-8">
@@ -273,7 +261,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             <label for="adverseEventType" class="col-sm-4 control-label"></label>
             <div class="row col-sm-8">
@@ -288,9 +275,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
     <div class="form-group">
         <div class="col-sm-offset-1 col-sm-11">
             <button class="btn btn-primary" type="submit" ng-disabled="addingDonation">
@@ -301,6 +286,4 @@
             </button>
         </div>
     </div>
-
-
 </form>
