@@ -82,21 +82,27 @@
         </div>
 
         <div class="form-group">
-            <label for="donationIdentificationNumber" class="col-sm-3 control-label">DIN</label>
+            <label for="name" class="col-sm-3 control-label">DIN</label>
             <div class="row col-sm-9">
                 <div class="form-inline" style="padding-left:5px;">
                     <input name="din" size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
                            class="form-control input-sm" placeholder="" ng-model="donation.donationIdentificationNumber"
+                           ng-maxlength="dinLength"
                            required
                            ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
-                           ng-class="{'ng-invalid ng-dirty' : (addDonationForm.din.$invalid && submitted)}" >
+                           ng-class="{'ng-invalid ng-dirty' : (addDonationForm.din.$invalid && submitted)}">                    
                     <div>
                         <small class="error" ng-show="(addDonationForm.din.$error.required && (addDonationForm.din.$dirty || submitted))">
                             This cannot be empty
                         </small>
                     </div>
                     <div>
-                        <small class="error" ng-show="(!addDonationForm.din.$error.required && addDonationForm.din.$invalid && (addDonationForm.din.$dirty || submitted))">
+                        <small class="error" ng-show="(addDonationForm.din.$error.maxlength && !addDonationForm.din.$error.required && (addDonationForm.din.$dirty || submitted))">
+                            DIN should not be more than {{dinLength}} digits
+                        </small>
+                    </div>
+                    <div>
+                        <small class="error" ng-show="(!addDonationForm.din.$error.required && addDonationForm.din.$invalid && !addDonationForm.din.$error.maxlength && (addDonationForm.din.$dirty || submitted))">
                             Invalid input
                         </small>
                     </div>
