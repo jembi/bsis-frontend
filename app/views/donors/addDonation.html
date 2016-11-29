@@ -98,8 +98,8 @@
                         </small>
                     </div>
                     <div>
-                        <small class="error" ng-show="((addDonationForm.din.$error.maxlength || addDonationForm.din.$error.minlength) && !addDonationForm.din.$error.required && (addDonationForm.din.$dirty || submitted))">
-                            DIN should be {{dinLength}} charactors long
+                        <small class="error" ng-show="((addDonationForm.din.$error.maxlength || addDonationForm.din.$error.minlength) && (addDonationForm.din.$dirty || submitted))">
+                            DIN should be {{dinLength}} characters
                         </small>
                     </div>
                     <div>
