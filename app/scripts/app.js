@@ -1273,7 +1273,7 @@ var DONATION = {DONOR: {}};
           } else if (config[i].name == 'donation.donor.pulseMax') {
             DONATION.DONOR.PULSE_MAX = config[i].value;
           } else if (config[i].name == 'donation.dinLength') {
-            DONATION.DIN_MAX_LENGTH = config[i].value;
+            DONATION.DIN_LENGTH = config[i].value;
           }
         }
 

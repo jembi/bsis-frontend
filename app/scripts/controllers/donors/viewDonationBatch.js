@@ -21,7 +21,7 @@ angular.module('bsis')
     $scope.bpDiastolicMax = DONATION.DONOR.BP_DIASTOLIC_MAX;
     $scope.pulseMin = DONATION.DONOR.PULSE_MIN;
     $scope.pulseMax = DONATION.DONOR.PULSE_MAX;
-    $scope.dinLength = DONATION.DIN_MAX_LENGTH;
+    $scope.dinLength = DONATION.DIN_LENGTH;
 
     var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
     var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
