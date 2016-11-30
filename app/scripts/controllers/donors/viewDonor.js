@@ -1,12 +1,16 @@
 'use strict';
+
 angular.module('bsis')
+
   .controller('ViewDonorCtrl', function($scope, $location, $log, Alerting, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, ICONS, PACKTYPE, MONTH, TITLE,
                                          GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams, PERMISSIONS) {
+
     //Initialize scope variables
     $scope.icons = ICONS;
     $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
     $scope.alerts = Alerting.getAlerts();
     $scope.ui = UI;
+
     $scope.alerts = Alerting.getAlerts();
     $scope.data = {};
     $scope.age = '';
@@ -15,16 +19,19 @@ angular.module('bsis')
     $scope.donorPermissions = {
       canDelete: false
     };
+
     $scope.hstep = 1;
     $scope.mstep = 5;
     $scope.options = {
       hstep: [1, 2, 3],
       mstep: [1, 5, 10, 15, 25, 30]
     };
+
     $scope.bpUnit = DONATION.BPUNIT;
     $scope.hbUnit = DONATION.HBUNIT;
     $scope.weightUnit = DONATION.WEIGHTUNIT;
     $scope.pulseUnit = DONATION.PULSEUNIT;
+
     $scope.weightMin = DONATION.DONOR.WEIGHT_MIN;
     $scope.weightMax = DONATION.DONOR.WEIGHT_MAX;
     $scope.hbMin = DONATION.DONOR.HB_MIN;
@@ -35,16 +42,19 @@ angular.module('bsis')
     $scope.bpDiastolicMax = DONATION.DONOR.BP_DIASTOLIC_MAX;
     $scope.pulseMin = DONATION.DONOR.PULSE_MIN;
     $scope.pulseMax = DONATION.DONOR.PULSE_MAX;
-    $scope.dinMaxLength = DONATION.DIN_MAX_LENGTH;
     $scope.postalSameAsHome = false;
     $scope.workSameAsHome = false;
+
     $scope.formErrors = [];
     $scope.errorObject = {};
     $scope.invalidDeferredUntilDate = false;
+
     // The donation's previous pack type
     // Used to check if pack type has changed when updating a donation
     var previousPackType = null;
+
     //Donor Overview and Demographics Section
+
     function initializeDonor() {
       DonorService.getDonorById($routeParams.id, function(donor) {
         DonorService.setDonor(donor);
@@ -54,6 +64,7 @@ angular.module('bsis')
         $location.path('/findDonor');
       });
     }
+
     function initializeDonorFormFields() {
       DonorService.getDonorFormFields(function(response) {
         if (response !== false) {
@@ -69,6 +80,7 @@ angular.module('bsis')
         }
       });
     }
+
     function getDonorOverview() {
       DonorService.getDonorOverview($routeParams.id, function(response) {
         if (response !== false) {
@@ -88,16 +100,19 @@ angular.module('bsis')
         }
       });
     }
+
     function confirmPackTypeChange(donation) {
       if (previousPackType.id === donation.packType.id) {
         return $q.resolve();
       }
+
       return ModalsService.showConfirmation({
         title: 'Pack Type Update',
         button: 'Continue',
         message: 'The pack type has been updated - this will affect the initial components created with this donation. Do you want to continue?'
       });
     }
+
     $scope.sameAsHome = function(form, addressType) {
       if (addressType == 'Postal') {
         form.postalAddressLine1.$setViewValue((form.postalSameAsHome.$viewValue === false) ? '' : form.homeAddressLine1.$modelValue);
@@ -117,6 +132,7 @@ angular.module('bsis')
         form.postalAddressZipcode.$setViewValue((form.postalSameAsHome.$viewValue === false) ? null : form.homeAddressZipcode.$modelValue);
         form.postalAddressZipcode.$render();
       }
+
       if (addressType == 'Work') {
         form.workAddressLine1.$setViewValue((form.workSameAsHome.$viewValue === false) ? '' : form.homeAddressLine1.$modelValue);
         form.workAddressLine1.$render();
@@ -136,12 +152,15 @@ angular.module('bsis')
         form.workAddressZipcode.$render();
       }
     };
+
     /**
      *  Delete Donor Logic
      *
      */
+
     $scope.confirmDelete = function(donor) {
       Alerting.alertReset();
+
       return ModalsService.showConfirmation({
         title: 'Delete Donor',
         button: 'Delete',
@@ -152,7 +171,9 @@ angular.module('bsis')
       }, function() {
         // delete cancelled - do nothing
       });
+
     };
+
     function deleteCallback(err, donor) {
       if (err) {
         Alerting.alertAddMsg(true, 'top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
@@ -160,6 +181,7 @@ angular.module('bsis')
         Alerting.alertAddMsg(true, 'top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" has been deleted successfully');
       }
     }
+
     $scope.deleteDonor = function(donor) {
       DonorService.deleteDonor(donor.id, function() {
         deleteCallback(false, donor);
@@ -170,7 +192,9 @@ angular.module('bsis')
           .search({failed: true}); // If I do not set a parameter the route does not change, this needs to happen to refresh the donor.
       });
     };
+
     //Donations Section
+
     function getOpenDonationBatches() {
       DonorService.getOpenDonationBatches(function(response) {
         if (response !== false) {
@@ -179,6 +203,7 @@ angular.module('bsis')
         }
       });
     }
+
     function getDonationsFormFields() {
       DonorService.getDonationsFormFields(function(response) {
         if (response !== false) {
@@ -192,9 +217,11 @@ angular.module('bsis')
         }
       });
     }
+
     $scope.getDonations = function(donorId) {
       $scope.confirmDelete = false;
       $scope.donationsView = 'viewDonations';
+
       DonorService.getDonations(donorId, function(response) {
         if (response !== false) {
           $scope.donationsData = response.allDonations;
@@ -203,6 +230,7 @@ angular.module('bsis')
           $scope.donationResults = false;
         }
       });
+
       $scope.donationTableParams = new ngTableParams({
         page: 1,            // show first page
         count: 6,          // count per page
@@ -215,23 +243,29 @@ angular.module('bsis')
           total: $scope.donationsData.length, // length of data
           getData: function($defer, params) {
             var donationsData = $scope.donationsData;
+
             var orderedData = params.sorting() ?
               $filter('orderBy')(donationsData, params.orderBy()) : donationsData;
             params.total(orderedData.length); // set total for pagination
             $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
           }
         });
+
       $scope.$watch('donationsData', function() {
         $timeout(function() {
           $scope.donationTableParams.reload();
         });
       });
     };
+
     $scope.showTestResults = false;
+
     $scope.viewDonationSummary = function(din) {
+
       $scope.donation = $filter('filter')($scope.donationsData, {donationIdentificationNumber: din})[0];
       previousPackType = angular.copy($scope.donation.packType);
       $scope.commentFieldDisabled = !$scope.donation.adverseEvent;
+
       DonorService.getDonationsFormFields(function(response) {
         if (response !== false) {
           $scope.haemoglobinLevels = response.haemoglobinLevels;
@@ -248,14 +282,18 @@ angular.module('bsis')
       } else {
         $scope.testResults = null;
       }
+
       $scope.donationsView = 'viewDonationSummary';
     };
+
     $scope.toggleShowResults = function(show) {
       $scope.showTestResults = show;
     };
+
     $scope.returnToListView = function() {
       $scope.donationsView = 'viewDonations';
     };
+
     $scope.updateCommentFieldDisabledState = function(form) {
       $scope.commentFieldDisabled = !form.adverseEventType.$viewValue;
       if (!form.adverseEventType.$viewValue) {
@@ -263,6 +301,7 @@ angular.module('bsis')
         form.adverseEventComment.$render();
       }
     };
+
     $scope.updateDonation = function(donation) {
       return confirmPackTypeChange(donation).then(function() {
         var d = $q.defer();
@@ -283,6 +322,7 @@ angular.module('bsis')
         return d.promise;
       });
     };
+
     $scope.editDonation = function(form) {
       DonationsService.getEditForm({id: $scope.donation.id}, function(res) {
         $scope.packTypes = res.packTypes;
@@ -293,12 +333,15 @@ angular.module('bsis')
         $log.error(err);
       });
     };
+
     $scope.cancelEditDonation = function(form) {
       $scope.formErrors = [];
       $scope.errorObject = [];
       form.$cancel();
     };
+
     $scope.checkBleedTimes = function(bleedTimeData) {
+
       if (bleedTimeData.bleedEndTime === null) {
         $scope.clearError('emptyBleedEndTime');
         $scope.raiseError('emptyBleedEndTime', 'Enter a valid time');
@@ -306,6 +349,7 @@ angular.module('bsis')
       } else {
         $scope.clearError('emptyBleedEndTime');
       }
+
       if (bleedTimeData.bleedStartTime === null) {
         $scope.clearError('emptyBleedStartTime');
         $scope.raiseError('emptyBleedStartTime', 'Enter a valid time');
@@ -313,6 +357,7 @@ angular.module('bsis')
       } else {
         $scope.clearError('emptyBleedStartTime');
       }
+
       if (new Date(bleedTimeData.bleedEndTime) < new Date(bleedTimeData.bleedStartTime) && $scope.formErrors.length === 0) {
         $scope.clearError('endTimeBeforeStartTime');
         $scope.raiseError('endTimeBeforeStartTime', 'End time should be after Start time');
@@ -320,10 +365,12 @@ angular.module('bsis')
       } else {
         $scope.clearError('endTimeBeforeStartTime');
       }
+
       if ($scope.formErrors.length > 0) {
         return ' ';
       }
     };
+
     $scope.deleteDonation = function(donationId) {
       DonorService.deleteDonation(donationId, function() {
         $scope.donationsData = $scope.donationsData.filter(function(donation) {
@@ -335,6 +382,7 @@ angular.module('bsis')
         $scope.confirmDelete = false;
       });
     };
+
     $scope.viewAddDonationForm = function() {
       // set initial bleed times
       $scope.donorDonationError = null;
@@ -345,33 +393,43 @@ angular.module('bsis')
         type: null,
         comment: ''
       };
+
       $scope.donationsView = 'addDonation';
+
       getDonationsFormFields();
       getOpenDonationBatches();
     };
+
     $scope.addDonationSuccess = '';
+
     function confirmAddDonation(donation, donationBatch) {
+
       // Only show modal if donor is not eligible and batch is back entry
       if ($scope.isEligible || !donationBatch.backEntry || donation.packType.countAsDonation === false) {
         return $q.resolve(null);
       }
+
       return ModalsService.showConfirmation({
         title: 'Ineligible Donor',
         button: 'Continue',
         message: 'This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?'
       });
     }
+
     $scope.resetAdverseEventComment = function() {
       if (!$scope.adverseEvent.type) {
         $scope.adverseEvent.comment = null;
       }
     };
+
     var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
     var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
     var minBirthDate = moment().subtract(maxAge, 'years');
     var maxBirthDate = moment().subtract(minAge, 'years');
+
     function checkDonorAge(donor) {
       var birthDate = moment(donor.birthDate);
+
       var message;
       if (birthDate.isBefore(minBirthDate)) {
         message = 'This donor is over the maximum age of ' + maxAge + '.';
@@ -382,30 +440,41 @@ angular.module('bsis')
         return $q.resolve(null);
       }
       message += ' Are you sure that you want to continue?';
+
       return ModalsService.showConfirmation({
         title: 'Invalid donor',
         button: 'Add donation',
         message: message
       });
     }
+
     $scope.addDonation = function(donation, donationBatch, bleedStartTime, bleedEndTime, valid) {
+
       if (valid) {
+
         checkDonorAge($scope.donor).then(function() {
           return confirmAddDonation(donation, donationBatch);
         }).then(function() {
           $scope.addDonationSuccess = '';
+
           // set donation center, site & date to those of the donation batch
           donation.venue = donationBatch.venue;
           donation.donationDate = donationBatch.donationBatchDate;
           donation.donationBatchNumber = donationBatch.batchNumber;
+
           donation.donorNumber = $scope.donor.donorNumber;
+
           donation.bleedStartTime = bleedStartTime;
           donation.bleedEndTime = bleedEndTime;
+
           if ($scope.adverseEvent.type) {
             donation.adverseEvent = $scope.adverseEvent;
           }
+
           $scope.addingDonation = true;
+
           DonorService.addDonation(donation, function() {
+
             $scope.addDonationSuccess = true;
             $scope.donation = {};
             previousPackType = null;
@@ -413,12 +482,15 @@ angular.module('bsis')
             $scope.donationsView = 'viewDonations';
             $scope.submitted = '';
             getDonorOverview();
+
             $scope.addingDonation = false;
+
           }, function(err) {
             $scope.donorDonationError = err;
             $scope.addDonationSuccess = false;
             // refresh donor overview after adding donation
             getDonorOverview();
+
             $scope.addingDonation = false;
           });
         }, function() {
@@ -428,6 +500,7 @@ angular.module('bsis')
         $scope.submitted = true;
       }
     };
+
     $scope.printDonorBarcode = function() {
       DonorService.getDonorBarcode($scope.donor.id, function(response) {
         if (response !== false) {
@@ -436,7 +509,9 @@ angular.module('bsis')
         }
       });
     };
+
     // Deferrals Section
+
     function getDeferralsFormFields() {
       DonorService.getDeferralsFormFields(function(response) {
         if (response !== false) {
@@ -446,6 +521,7 @@ angular.module('bsis')
         }
       });
     }
+
     function clearDeferralMessage() {
       $scope.currentlyDeferred = false;
       var today = new Date();
@@ -453,6 +529,7 @@ angular.module('bsis')
       $scope.deferredUntilDate = today;
       $scope.deferredUntil = 'No current deferrals';
     }
+
     function refreshDeferralMessage(deferral) {
       var deferredUntil = new Date(deferral.deferredUntil);
       deferredUntil.setHours(0, 0, 0, 0);
@@ -462,9 +539,11 @@ angular.module('bsis')
         $scope.deferredUntil = deferral.deferredUntil;
       }
     }
+
     $scope.getDeferrals = function(donorId) {
       $scope.deletingDeferral = false;
       $scope.deferralView = 'viewDeferrals';
+
       DonorService.getDeferrals(donorId, function(response) {
         if (response !== false) {
           $scope.deferralsData = response.allDonorDeferrals;
@@ -473,6 +552,7 @@ angular.module('bsis')
           $scope.deferralResults = false;
         }
       });
+
       $scope.deferralTableParams = new ngTableParams({
         page: 1,            // show first page
         count: 6,          // count per page
@@ -485,6 +565,7 @@ angular.module('bsis')
           total: $scope.deferralsData.length, // length of data
           getData: function($defer, params) {
             var deferralsData = $scope.deferralsData;
+
             var orderedData = params.sorting() ?
               $filter('orderBy')(deferralsData, params.orderBy()) : deferralsData;
             params.total(orderedData.length); // set total for pagination
@@ -492,11 +573,13 @@ angular.module('bsis')
           }
         }
       );
+
       $scope.$watch('deferralsData', function() {
         $timeout(function() {
           $scope.deferralTableParams.reload();
         });
       });
+
       $scope.endDonorDeferral = function(deferral, comment, endDeferralForm) {
         if (endDeferralForm.$valid) {
           var endDeferralPostData = {};
@@ -522,6 +605,7 @@ angular.module('bsis')
           });
         }
       };
+
       $scope.updateDonorDeferralReason = function(deferral, deferralReason) {
         // change end date
         var newEndDate = new Date();
@@ -532,6 +616,7 @@ angular.module('bsis')
         }
         deferral.deferredUntil = newEndDate;
       };
+
       $scope.deleteDonorDeferral = function(donorDeferral) {
         var message = '';
         if (donorDeferral.deferralReason.durationType === 'PERMANENT') {
@@ -539,11 +624,13 @@ angular.module('bsis')
         } else {
           message = 'Are you sure you want to void this deferral?';
         }
+
         var confirmationModalConfig = {
           title: 'Void Deferral',
           button: 'Void Deferral',
           message: message
         };
+
         ModalsService.showConfirmation(confirmationModalConfig).then(function() {
           $scope.deletingDeferral = true;
           DonorService.deleteDonorDeferral(donorDeferral.id, function() {
@@ -570,11 +657,15 @@ angular.module('bsis')
         });
       };
     };
+
     // End of Deferrals section
+
     $scope.updateDonor = function(donor) {
       var d = $q.defer();
+
       // Remove timezone from birth date
       donor.birthDate = moment(donor.birthDate).format('YYYY-MM-DD');
+
       DonorService.updateDonor(donor, function(response) {
         $scope.donor = response;
           //Reset Error Message
@@ -591,6 +682,7 @@ angular.module('bsis')
         });
       return d.promise;
     };
+
     $scope.checkIdentifier = function(identifierData) {
       if (!identifierData.idNumber || angular.isUndefined(identifierData.idType)) {
         $scope.clearError('identifier');
@@ -601,6 +693,7 @@ angular.module('bsis')
         $scope.clearError('identifier');
       }
     };
+
     $scope.validateForm = function(form) {
       if (form.$valid) {
         return true;
@@ -608,6 +701,7 @@ angular.module('bsis')
         return 'This form is not valid';
       }
     };
+
     $scope.raiseError = function(errorName, errorMessage) {
       $scope.formErrors.push(
         {
@@ -616,29 +710,35 @@ angular.module('bsis')
         }
       );
     };
+
     $scope.clearError = function(errorName) {
       $scope.errorObject[errorName] = [];
       $scope.formErrors = $scope.formErrors.filter(function(obj) {
         return obj.name !== errorName;
       });
     };
+
     $scope.getError = function(errorName) {
       $scope.errorObject[errorName] = $scope.formErrors.filter(function(obj) {
         return obj.name == errorName;
       });
     };
+
     $scope.checkErrors = function(min, max) {
       if (min || max) {
         return ' ';
       }
     };
+
     $scope.populateEndDate = function(deferral) {
       var deferralReason = deferral.deferralReason;
       deferral.deferredUntil = deferralReason.durationType === 'PERMANENT' ?
         moment('2100-01-01').toDate() :
         moment().add(deferralReason.defaultDuration, 'days').toDate();
     };
+
     // Manage deferral section
+
     $scope.manageDeferral = function(deferral) {
       $scope.format = DATEFORMAT;
       $scope.calIcon = 'fa-calendar';
@@ -646,6 +746,7 @@ angular.module('bsis')
       $scope.deferralView = 'manageDeferral';
       $scope.deferral = {};
       $scope.submitted = '';
+
       if (deferral) {
         // This is an update
         // convert deferredUntil to a Date object
@@ -653,6 +754,7 @@ angular.module('bsis')
         $scope.deferral = deferral;
       }
     };
+
     var updateDeferral = function(deferral, saveDeferralForm) {
       DonorService.updateDonorDeferral(deferral, function(response) {
         var updatedDeferral = response;
@@ -676,6 +778,7 @@ angular.module('bsis')
         $scope.savingDeferral = false;
       });
     };
+
     var addDeferral = function(deferral, saveDeferralForm) {
       deferral.deferredDonor = $scope.donor;
       DonorService.addDeferral(deferral, function(response) {
@@ -690,15 +793,18 @@ angular.module('bsis')
         $scope.savingDeferral = false;
       });
     };
+
     $scope.saveDeferral = function(deferral, saveDeferralForm) {
       // Validate deferredUntil date
       $scope.invalidDeferredUntilDate = false;
       if (!deferral.deferralDate) {
         deferral.deferralDate = new Date();
       }
+
       if (new Date(deferral.deferredUntil) < new Date(deferral.deferralDate)) {
         $scope.invalidDeferredUntilDate = true;
       }
+
       if (saveDeferralForm.$valid && !$scope.invalidDeferredUntilDate) {
         $scope.addingDeferral = true;
         if (deferral.id) {
@@ -710,9 +816,12 @@ angular.module('bsis')
         $scope.submitted = true;
       }
     };
+
     // Inits
+
     initializeDonor();
     initializeDonorFormFields();
     getDeferralsFormFields();
     getDonorOverview();
+
   });
