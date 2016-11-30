@@ -60,7 +60,8 @@
             <div class="row col-sm-9">
                 <div class="form-inline" style="padding-left:5px;">
                     <input name="din" size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
-                           class="form-control input-sm" placeholder="" ng-model="donation.donationIdentificationNumber"
+                           class="form-control input-sm" placeholder="" ng-model="donation.donationIdentificationNumber" ng-maxlength="dinLength"
+                           ng-minlength="dinLength"
                            required
                            ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                            ng-class="{'ng-invalid ng-dirty' : (addDonationForm.din.$invalid && submitted)}">
@@ -70,7 +71,12 @@
                         </small>
                     </div>
                     <div>
-                        <small class="error" ng-show="(!addDonationForm.din.$error.required && addDonationForm.din.$invalid && (addDonationForm.din.$dirty || submitted))">
+                        <small class="error" ng-show="((addDonationForm.din.$error.maxlength || addDonationForm.din.$error.minlength) && (addDonationForm.din.$dirty || submitted))">
+                            DIN should be {{dinLength}} characters
+                        </small>
+                    </div>
+                    <div>
+                        <small class="error" ng-show="(addDonationForm.din.$invalid && (!addDonationForm.din.$error.maxlength && !addDonationForm.din.$error.minlength) && (addDonationForm.din.$dirty || submitted))">
                             Invalid input
                         </small>
                     </div>

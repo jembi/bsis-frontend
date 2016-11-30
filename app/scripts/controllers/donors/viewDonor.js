@@ -44,6 +44,7 @@ angular.module('bsis')
     $scope.pulseMax = DONATION.DONOR.PULSE_MAX;
     $scope.postalSameAsHome = false;
     $scope.workSameAsHome = false;
+    $scope.dinLength = DONATION.DIN_LENGTH;
 
     $scope.formErrors = [];
     $scope.errorObject = {};
