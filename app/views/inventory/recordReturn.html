@@ -47,7 +47,7 @@
         <div class="form-group">
           <label for="componentType" style="vertical-align: top">DIN:</label>
           <div style="display: inline-block">
-            <input class="form-control" name="din" ng-model="component.din" required>
+            <input class="form-control" name="din" ng-model="component.din" required din-length>
             <ng-messages for="addComponentForm.din.$error" role="alert" ng-show="addComponentForm.$submitted">
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
