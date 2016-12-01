@@ -1281,7 +1281,7 @@ var DONATION = {DONOR: {}};
   function initializeConfig() {
 
     var internalConfigPath = 'config/config.json';
-    var externalConfigPath = '../bsis.json';
+    var externalConfigPath = 'bsis.json';
 
     var initInjector = angular.injector(['ng']);
     var $http = initInjector.get('$http');
