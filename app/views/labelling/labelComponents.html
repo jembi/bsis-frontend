@@ -52,11 +52,14 @@
                                   ng-click="printPackLabel(component.id)">Print Pack Label
                           </button>
                           <br/>
-                          <h4 class="page-header">Label Verification</h4>
-                           <form class="form-horizontal col-sm-12" role="form" name="labellingVerificationForm">                            
+                          <br/>
+                          <span class="control-label">Label Verification</span>
+                          <br/>
+                          <br/>
+                           <form class="col-sm-12" role="form" name="labellingVerificationForm">
                             <input type="hidden" name="componentId" id="componentId" value="component.id">
                             <div class="row form-group col-sm-12">
-                              <label for="testName" class="col-sm-2 control-label">DIN</label>
+                              <label for="labelDin" class="col-sm-2 control-label">DIN</label>
                               <div class="col-sm-10">
                                 <div class="form-inline">
                                   <input id="labelDin" name="labelDin" class="form-control input-sm" style="width:auto;min-width:250px;"
@@ -69,7 +72,6 @@
                                 </div>
                               </div>
                             </div>
-
                             <div class="row form-group col-sm-12">
                               <label for="packDin" class="col-sm-2 control-label">Pack Label DIN</label>
                               <div class="col-sm-10">
@@ -85,14 +87,13 @@
                               </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-offset-1 col-sm-3">
+                                <div class="col-sm-offset-2 col-sm-3">
                                     <button class="btn btn-primary" type="submit" ng-disabled="verifying">{{searching ? "Verifying..." :
                                         "Verify Pack Label"}}
                                     </button>
                                 </div>
                             </div>
                         </form>
-
 
                           <span ng-if="serverErrorMessage" class="error">
                               {{serverErrorMessage}}
