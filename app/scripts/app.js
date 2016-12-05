@@ -1171,9 +1171,7 @@ var DONATION = {DONOR: {}};
 // initialize system & user config before app starts
 (function() {
 
-  function initializeConfig() {
-    var initInjector = angular.injector(['ng']);
-    var $http = initInjector.get('$http');
+  function setVersions(url) {
     var versionInfo = {
       backend: {
         version : '',
@@ -1185,134 +1183,158 @@ var DONATION = {DONOR: {}};
       }
     };
 
-    return $http.get('config/config.json').then(function(response) {
-      app.constant('SYSTEMCONFIG', response.data);
-      var url = 'http://' + response.data.apiHost + ':' + response.data.apiPort + '/' + response.data.apiApp;
+    var initInjector = angular.injector(['ng']);
+    var $http = initInjector.get('$http');
 
-      $http.get('..//..//..//version.json').then(function(versionResponse) {
-        versionInfo.frontend.version = versionResponse.data.version;
-        versionInfo.frontend.buildNumber = versionResponse.data.buildNumber;
-      }, function() {
-        versionInfo.frontend.version = 'N/A';
-        versionInfo.frontend.buildNumber = 'N/A';
-      });
-
-      $http.get(url + '/version').then(function(versionResponse) {
-        versionInfo.backend.version = versionResponse.data.version.version;
-        versionInfo.backend.buildNumber = versionResponse.data.version.buildNumber;
-      }, function() {
-        versionInfo.backend.version = 'N/A';
-        versionInfo.backend.buildNumber = 'N/A';
-      });
-
-      /*eslint-disable angular/module-getter */
-      app.constant('VERSION', versionInfo);
-      /*eslint-enable angular/module-getter */
-
-      return $http.get(url + '/configurations').then(function(configResponse) {
-        app.constant('USERCONFIG', configResponse.data);
-
-        /*eslint-disable angular/module-getter */
-        app.constant('UI', UI);
-        app.constant('DONATION', DONATION);
-        /*eslint-enable angular/module-getter */
-
-        var config = configResponse.data.configurations;
-
-        // initialise date/time format constants
-        for (var i = 0, tot = config.length; i < tot; i++) {
-          if (config[i].name == 'dateFormat') {
-            app.constant('DATEFORMAT', config[i].value);
-          } else if (config[i].name == 'dateTimeFormat') {
-            app.constant('DATETIMEFORMAT', config[i].value);
-          } else if (config[i].name == 'timeFormat') {
-            app.constant('TIMEFORMAT', config[i].value);
-          } else if (config[i].name == 'ui.donorsTabEnabled') {  //Home Tabs constants
-            UI.DONORS_TAB_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.componentsTabEnabled') {
-            UI.COMPONENTS_TAB_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.testingTabEnabled') {
-            UI.TESTING_TAB_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.labellingTabEnabled') {
-            UI.LABELLING_TAB_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.inventoryTabEnabled') {
-            UI.INVENTORY_TAB_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.reportsTabEnabled') {
-            UI.REPORTS_TAB_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.mobileClinicTabEnabled') {
-            UI.MOBILE_CLINIC_TAB_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.address.addressLine1.enabled') { //Address fields constants
-            UI.ADDRESS.ADDRESS_LINE_1_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.address.addressLine1.displayName') {
-            UI.ADDRESS.ADDRESS_LINE_1_NAME = config[i].value;
-          } else if (config[i].name == 'ui.address.addressLine2.enabled') {
-            UI.ADDRESS.ADDRESS_LINE_2_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.address.addressLine2.displayName') {
-            UI.ADDRESS.ADDRESS_LINE_2_NAME = config[i].value;
-          } else if (config[i].name == 'ui.address.cityTownVillage.enabled') {
-            UI.ADDRESS.CITY_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.address.cityTownVillage.displayName') {
-            UI.ADDRESS.CITY_NAME = config[i].value;
-          } else if (config[i].name == 'ui.address.province.enabled') {
-            UI.ADDRESS.PROVINCE_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.address.province.displayName') {
-            UI.ADDRESS.PROVINCE_NAME = config[i].value;
-          } else if (config[i].name == 'ui.address.state.enabled') {
-            UI.ADDRESS.STATE_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.address.state.displayName') {
-            UI.ADDRESS.STATE_NAME = config[i].value;
-          } else if (config[i].name == 'ui.address.districtRegion.enabled') {
-            UI.ADDRESS.DISTRICT_REGION_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.address.districtRegion.displayName') {
-            UI.ADDRESS.DISTRICT_REGION_NAME = config[i].value;
-          } else if (config[i].name == 'ui.address.country.enabled') {
-            UI.ADDRESS.COUNTRY_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.address.country.displayName') {
-            UI.ADDRESS.COUNTRY_NAME = config[i].value;
-          } else if (config[i].name == 'ui.address.postalCode.enabled') {
-            UI.ADDRESS.POSTAL_CODE_ENABLED = config[i].value;
-          } else if (config[i].name == 'ui.address.postalCode.displayName') {
-            UI.ADDRESS.POSTAL_CODE_NAME = config[i].value;
-          } else if (config[i].name == 'donation.bpUnit') {  // Donor form units
-            DONATION.BPUNIT = config[i].value;
-          } else if (config[i].name == 'donation.hbUnit') {
-            DONATION.HBUNIT = config[i].value;
-          } else if (config[i].name == 'donation.weightUnit') {
-            DONATION.WEIGHTUNIT = config[i].value;
-          } else if (config[i].name == 'donation.pulseUnit') {
-            DONATION.PULSEUNIT = config[i].value;
-          } else if (config[i].name == 'donation.donor.bpSystolicMin') { // donor form constants
-            DONATION.DONOR.BP_SYSTOLIC_MIN = config[i].value;
-          } else if (config[i].name == 'donation.donor.bpSystolicMax') {
-            DONATION.DONOR.BP_SYSTOLIC_MAX = config[i].value;
-          } else if (config[i].name == 'donation.donor.bpDiastolicMin') {
-            DONATION.DONOR.BP_DIASTOLIC_MIN = config[i].value;
-          } else if (config[i].name == 'donation.donor.bpDiastolicMax') {
-            DONATION.DONOR.BP_DIASTOLIC_MAX = config[i].value;
-          } else if (config[i].name == 'donation.donor.hbMin') {
-            DONATION.DONOR.HB_MIN = config[i].value;
-          } else if (config[i].name == 'donation.donor.hbMax') {
-            DONATION.DONOR.HB_MAX = config[i].value;
-          } else if (config[i].name == 'donation.donor.weightMin') {
-            DONATION.DONOR.WEIGHT_MIN = config[i].value;
-          } else if (config[i].name == 'donation.donor.weightMax') {
-            DONATION.DONOR.WEIGHT_MAX = config[i].value;
-          } else if (config[i].name == 'donation.donor.pulseMin') {
-            DONATION.DONOR.PULSE_MIN = config[i].value;
-          } else if (config[i].name == 'donation.donor.pulseMax') {
-            DONATION.DONOR.PULSE_MAX = config[i].value;
-          }
-        }
-
-      }, function() {
-        // Handle error case
-        app.constant('CONFIGAPI', 'No Config Loaded');
-      });
+    $http.get('..//..//..//version.json').then(function(versionResponse) {
+      versionInfo.frontend.version = versionResponse.data.version;
+      versionInfo.frontend.buildNumber = versionResponse.data.buildNumber;
     }, function() {
-      // Handle error case
-      app.constant('SYSTEMCONFIG', 'No Config Loaded');
+      versionInfo.frontend.version = 'N/A';
+      versionInfo.frontend.buildNumber = 'N/A';
     });
 
+    $http.get(url + '/version').then(function(versionResponse) {
+      versionInfo.backend.version = versionResponse.data.version.version;
+      versionInfo.backend.buildNumber = versionResponse.data.version.buildNumber;
+    }, function() {
+      versionInfo.backend.version = 'N/A';
+      versionInfo.backend.buildNumber = 'N/A';
+    });
+
+    /*eslint-disable angular/module-getter */
+    app.constant('VERSION', versionInfo);
+    /*eslint-enable angular/module-getter */
+  }
+
+  function setConfigConstants(response) {
+    app.constant('SYSTEMCONFIG', response.data);
+    var initInjector = angular.injector(['ng']);
+    var $http = initInjector.get('$http');
+    var url = 'http://' + response.data.apiHost + ':' + response.data.apiPort + '/' + response.data.apiApp;
+
+    setVersions(url);
+
+    return $http.get(url + '/configurations').then(function(configResponse) {
+      app.constant('USERCONFIG', configResponse.data);
+
+      /*eslint-disable angular/module-getter */
+      app.constant('UI', UI);
+      app.constant('DONATION', DONATION);
+      /*eslint-enable angular/module-getter */
+
+      var config = configResponse.data.configurations;
+
+      // initialise date/time format constants
+      for (var i = 0, tot = config.length; i < tot; i++) {
+        if (config[i].name == 'dateFormat') {
+          app.constant('DATEFORMAT', config[i].value);
+        } else if (config[i].name == 'dateTimeFormat') {
+          app.constant('DATETIMEFORMAT', config[i].value);
+        } else if (config[i].name == 'timeFormat') {
+          app.constant('TIMEFORMAT', config[i].value);
+        } else if (config[i].name == 'ui.donorsTabEnabled') {  //Home Tabs constants
+          UI.DONORS_TAB_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.componentsTabEnabled') {
+          UI.COMPONENTS_TAB_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.testingTabEnabled') {
+          UI.TESTING_TAB_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.labellingTabEnabled') {
+          UI.LABELLING_TAB_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.inventoryTabEnabled') {
+          UI.INVENTORY_TAB_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.reportsTabEnabled') {
+          UI.REPORTS_TAB_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.mobileClinicTabEnabled') {
+          UI.MOBILE_CLINIC_TAB_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.address.addressLine1.enabled') { //Address fields constants
+          UI.ADDRESS.ADDRESS_LINE_1_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.address.addressLine1.displayName') {
+          UI.ADDRESS.ADDRESS_LINE_1_NAME = config[i].value;
+        } else if (config[i].name == 'ui.address.addressLine2.enabled') {
+          UI.ADDRESS.ADDRESS_LINE_2_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.address.addressLine2.displayName') {
+          UI.ADDRESS.ADDRESS_LINE_2_NAME = config[i].value;
+        } else if (config[i].name == 'ui.address.cityTownVillage.enabled') {
+          UI.ADDRESS.CITY_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.address.cityTownVillage.displayName') {
+          UI.ADDRESS.CITY_NAME = config[i].value;
+        } else if (config[i].name == 'ui.address.province.enabled') {
+          UI.ADDRESS.PROVINCE_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.address.province.displayName') {
+          UI.ADDRESS.PROVINCE_NAME = config[i].value;
+        } else if (config[i].name == 'ui.address.state.enabled') {
+          UI.ADDRESS.STATE_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.address.state.displayName') {
+          UI.ADDRESS.STATE_NAME = config[i].value;
+        } else if (config[i].name == 'ui.address.districtRegion.enabled') {
+          UI.ADDRESS.DISTRICT_REGION_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.address.districtRegion.displayName') {
+          UI.ADDRESS.DISTRICT_REGION_NAME = config[i].value;
+        } else if (config[i].name == 'ui.address.country.enabled') {
+          UI.ADDRESS.COUNTRY_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.address.country.displayName') {
+          UI.ADDRESS.COUNTRY_NAME = config[i].value;
+        } else if (config[i].name == 'ui.address.postalCode.enabled') {
+          UI.ADDRESS.POSTAL_CODE_ENABLED = config[i].value;
+        } else if (config[i].name == 'ui.address.postalCode.displayName') {
+          UI.ADDRESS.POSTAL_CODE_NAME = config[i].value;
+        } else if (config[i].name == 'donation.bpUnit') {  // Donor form units
+          DONATION.BPUNIT = config[i].value;
+        } else if (config[i].name == 'donation.hbUnit') {
+          DONATION.HBUNIT = config[i].value;
+        } else if (config[i].name == 'donation.weightUnit') {
+          DONATION.WEIGHTUNIT = config[i].value;
+        } else if (config[i].name == 'donation.pulseUnit') {
+          DONATION.PULSEUNIT = config[i].value;
+        } else if (config[i].name == 'donation.donor.bpSystolicMin') { // donor form constants
+          DONATION.DONOR.BP_SYSTOLIC_MIN = config[i].value;
+        } else if (config[i].name == 'donation.donor.bpSystolicMax') {
+          DONATION.DONOR.BP_SYSTOLIC_MAX = config[i].value;
+        } else if (config[i].name == 'donation.donor.bpDiastolicMin') {
+          DONATION.DONOR.BP_DIASTOLIC_MIN = config[i].value;
+        } else if (config[i].name == 'donation.donor.bpDiastolicMax') {
+          DONATION.DONOR.BP_DIASTOLIC_MAX = config[i].value;
+        } else if (config[i].name == 'donation.donor.hbMin') {
+          DONATION.DONOR.HB_MIN = config[i].value;
+        } else if (config[i].name == 'donation.donor.hbMax') {
+          DONATION.DONOR.HB_MAX = config[i].value;
+        } else if (config[i].name == 'donation.donor.weightMin') {
+          DONATION.DONOR.WEIGHT_MIN = config[i].value;
+        } else if (config[i].name == 'donation.donor.weightMax') {
+          DONATION.DONOR.WEIGHT_MAX = config[i].value;
+        } else if (config[i].name == 'donation.donor.pulseMin') {
+          DONATION.DONOR.PULSE_MIN = config[i].value;
+        } else if (config[i].name == 'donation.donor.pulseMax') {
+          DONATION.DONOR.PULSE_MAX = config[i].value;
+        }
+      }
+    }, function() {
+      // Handle error case
+      app.constant('CONFIGAPI', 'No Config Loaded');
+    });
+  }
+
+  function initializeConfig() {
+
+    var internalConfigPath = 'config/bsis.json';
+    var externalConfigPath = 'bsis.json';
+
+    var initInjector = angular.injector(['ng']);
+    var $http = initInjector.get('$http');
+
+    return $http.get(externalConfigPath).then(function(response) {
+      // get api config from external file
+      return setConfigConstants(response);
+    }, function() {
+      // external file not found, get api config from internal file
+      return $http.get(internalConfigPath).then(function(response) {
+        return setConfigConstants(response);
+      }, function() {
+        // Handle error case
+        app.constant('SYSTEMCONFIG', 'No Config Loaded');
+      });
+    });
   }
 
   function bootstrapApplication() {
