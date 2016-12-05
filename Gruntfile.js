@@ -370,6 +370,7 @@ module.exports = function(grunt) {
   grunt.registerTask('getGitDescribe', function() {
     grunt.event.once('git-describe', function(rev) {
       grunt.option('gitDescribe', rev.toString());
+      grunt.option('buildNumber', rev.object);
     });
     grunt.task.run('git-describe');
   });
@@ -380,6 +381,7 @@ module.exports = function(grunt) {
     grunt.file.write('./app/version.json', JSON.stringify({
       version: grunt.config('pkg.version'),
       gitDescribe: grunt.option('gitDescribe'),
+      buildNumber: grunt.option('buildNumber'),
       date: grunt.template.today()
     }));
   });
