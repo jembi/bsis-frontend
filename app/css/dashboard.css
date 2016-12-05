@@ -43,11 +43,14 @@ body {
   .sidebar-footer {
     position: fixed;
     z-index: 1001;
-    bottom: 0px;
-    width: inherit;
+    bottom: 0;
+    left: 0;
     font-size: 0.8em;
     text-align: left;
+  }
+  .sidebar-footer p {
     background-color: #F5F5F6;
+    margin:0;
   }
 }
 
