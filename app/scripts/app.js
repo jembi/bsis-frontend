@@ -1171,7 +1171,7 @@ var DONATION = {DONOR: {}};
 // initialize system & user config before app starts
 (function() {
 
-  function setVersions(url) {
+  function getVersions(url) {
     var versionInfo = {
       backend: {
         version : '',
@@ -1186,34 +1186,33 @@ var DONATION = {DONOR: {}};
     var initInjector = angular.injector(['ng']);
     var $http = initInjector.get('$http');
 
-    $http.get('..//..//..//version.json').then(function(versionResponse) {
-      versionInfo.frontend.version = versionResponse.data.version;
-      versionInfo.frontend.buildNumber = versionResponse.data.buildNumber;
-    }, function() {
-      versionInfo.frontend.version = 'N/A';
-      versionInfo.frontend.buildNumber = 'N/A';
-    });
+    return $http.get(url + '/version').then(function(backendVersionResponse) {
+      versionInfo.backend.version = backendVersionResponse.data.version.version;
+      versionInfo.backend.buildNumber = backendVersionResponse.data.version.buildNumber;
 
-    $http.get(url + '/version').then(function(versionResponse) {
-      versionInfo.backend.version = versionResponse.data.version.version;
-      versionInfo.backend.buildNumber = versionResponse.data.version.buildNumber;
+      return $http.get('..//..//..//version.json').then(function(frontendVersionResponse) {
+        versionInfo.frontend.version = frontendVersionResponse.data.version;
+        versionInfo.frontend.buildNumber = frontendVersionResponse.data.buildNumber;
+
+        /*eslint-disable angular/module-getter */
+        app.constant('VERSION', versionInfo);
+        /*eslint-enable angular/module-getter */
+
+      }, function() {
+        versionInfo.frontend.version = 'N/A';
+        versionInfo.frontend.buildNumber = 'N/A';
+      });
     }, function() {
       versionInfo.backend.version = 'N/A';
       versionInfo.backend.buildNumber = 'N/A';
     });
-
-    /*eslint-disable angular/module-getter */
-    app.constant('VERSION', versionInfo);
-    /*eslint-enable angular/module-getter */
   }
 
-  function setConfigConstants(response) {
+  function getConfigConstantsAndVersions(response) {
     app.constant('SYSTEMCONFIG', response.data);
     var initInjector = angular.injector(['ng']);
     var $http = initInjector.get('$http');
     var url = 'http://' + response.data.apiHost + ':' + response.data.apiPort + '/' + response.data.apiApp;
-
-    setVersions(url);
 
     return $http.get(url + '/configurations').then(function(configResponse) {
       app.constant('USERCONFIG', configResponse.data);
@@ -1309,6 +1308,9 @@ var DONATION = {DONOR: {}};
           DONATION.DONOR.PULSE_MAX = config[i].value;
         }
       }
+
+      // Once the config is fetched, get the versions
+      return getVersions(url);
     }, function() {
       // Handle error case
       app.constant('CONFIGAPI', 'No Config Loaded');
@@ -1325,11 +1327,11 @@ var DONATION = {DONOR: {}};
 
     return $http.get(externalConfigPath).then(function(response) {
       // get api config from external file
-      return setConfigConstants(response);
+      return getConfigConstantsAndVersions(response);
     }, function() {
       // external file not found, get api config from internal file
       return $http.get(internalConfigPath).then(function(response) {
-        return setConfigConstants(response);
+        return getConfigConstantsAndVersions(response);
       }, function() {
         // Handle error case
         app.constant('SYSTEMCONFIG', 'No Config Loaded');
