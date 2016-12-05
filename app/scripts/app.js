@@ -1174,12 +1174,41 @@ var DONATION = {DONOR: {}};
   function initializeConfig() {
     var initInjector = angular.injector(['ng']);
     var $http = initInjector.get('$http');
-
+    var versionInfo = {
+      backend: {
+        version : '',
+        buildNumber : ''
+      },
+      frontend: {
+        version : '',
+        buildNumber : ''
+      }
+    };
 
     return $http.get('config/config.json').then(function(response) {
       app.constant('SYSTEMCONFIG', response.data);
-
       var url = 'http://' + response.data.apiHost + ':' + response.data.apiPort + '/' + response.data.apiApp;
+
+      $http.get('..//..//..//version.json').then(function(versionResponse) {
+        versionInfo.frontend.version = versionResponse.data.version;
+        versionInfo.frontend.buildNumber = versionResponse.data.buildNumber;
+      }, function() {
+        versionInfo.frontend.version = 'N/A';
+        versionInfo.frontend.buildNumber = 'N/A';
+      });
+
+      $http.get(url + '/version').then(function(versionResponse) {
+        versionInfo.backend.version = versionResponse.data.version.version;
+        versionInfo.backend.buildNumber = versionResponse.data.version.buildNumber;
+      }, function() {
+        versionInfo.backend.version = 'N/A';
+        versionInfo.backend.buildNumber = 'N/A';
+      });
+
+      /*eslint-disable angular/module-getter */
+      app.constant('VERSION', versionInfo);
+      /*eslint-enable angular/module-getter */
+
       return $http.get(url + '/configurations').then(function(configResponse) {
         app.constant('USERCONFIG', configResponse.data);
 
@@ -1279,7 +1308,6 @@ var DONATION = {DONOR: {}};
         // Handle error case
         app.constant('CONFIGAPI', 'No Config Loaded');
       });
-
     }, function() {
       // Handle error case
       app.constant('SYSTEMCONFIG', 'No Config Loaded');
