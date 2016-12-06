@@ -13,7 +13,7 @@ branches:
 
 after_success:
  - cd dist
- - zip -r bsis-frontend.zip *
+ - zip -r bsis-frontend.zip * >/dev/null
 
 deploy:
   provider: releases
