@@ -9,6 +9,19 @@ branches:
     - develop
     - /^release\//
     - /^support\//
+
+after-success:
+ - cd dist
+ - zip -r bsis-frontend.zip *
+
+deploy:
+  provider: releases
+  api_key: "47a92f9761a055720a1b35ec021db098d6a2e2d1"
+  file: "dist/bsis-frontend.zip"
+  skip_cleanup: true
+  on:
+    tags: true
+
 notifications:
   email:
     on_success: change
