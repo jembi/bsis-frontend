@@ -1,14 +1,22 @@
 'use strict';
 
-angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, $routeParams, LabellingService) {
+angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, $routeParams, LabellingService, DONATION) {
 
   $scope.serverErrorMessage = null;
   $scope.searchResults = null;
+  $scope.dinLength = DONATION.DIN_LENGTH;
   $scope.search = {
     donationIdentificationNumber: angular.isDefined($routeParams.donationIdentificationNumber) ? $routeParams.donationIdentificationNumber : null,
     componentType: angular.isDefined($routeParams.componentType) ? +$routeParams.componentType : null
   };
   $scope.componentTypes = [];
+  $scope.labelVerified = true;
+  $scope.sameDinScanned = false;
+  $scope.verificationParams = {
+    componentId: null,
+    prePrintedDIN: null,
+    packLabelDIN: null
+  };
 
   $scope.getComponents = function(form) {
 
@@ -33,6 +41,25 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   if ($routeParams.search) {
     $scope.getComponents();
   }
+
+  $scope.verifyPackLabel = function(componentId, labellingVerificationForm) {
+    if (labellingVerificationForm.$invalid) {
+      return;
+    } else if (labellingVerificationForm.packDin === labellingVerificationForm.labelDin) {
+      $scope.sameDinScanned = true;
+      $scope.verifying = false;
+      return;
+    }
+    $scope.submitted = true;
+    $scope.verifying = true;
+    $scope.verificationParams.componentId = componentId;
+    LabellingService.verifyPackLabel($scope.verificationParams, function(res) {
+      $scope.labelVerified = res.labelVerified;
+    }, function(err) {
+      $log.error(err);
+      $scope.verifying = false;
+    });
+  };
 
   $scope.printPackLabel = function(componentId) {
     $scope.serverErrorMessage = null;
