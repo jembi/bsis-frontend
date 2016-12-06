@@ -1174,37 +1174,38 @@ var DONATION = {DONOR: {}};
   function getVersions(url) {
     var versionInfo = {
       backend: {
-        version : '',
-        buildNumber : ''
+        version : 'unknown',
+        buildNumber : 'unknown'
       },
       frontend: {
-        version : '',
-        buildNumber : ''
+        version : 'unknown',
+        buildNumber : 'unknown'
       }
     };
 
+    /*eslint-disable angular/module-getter */
+    app.constant('VERSION', versionInfo);
+    /*eslint-enable angular/module-getter */
+
     var initInjector = angular.injector(['ng']);
     var $http = initInjector.get('$http');
+    var $log = initInjector.get('$log');
 
     return $http.get(url + '/version').then(function(backendVersionResponse) {
-      versionInfo.backend.version = backendVersionResponse.data.version.version;
-      versionInfo.backend.buildNumber = backendVersionResponse.data.version.buildNumber;
-
+      // load backend versions
+      if (backendVersionResponse.data.version) {
+        versionInfo.backend.version = backendVersionResponse.data.version.version;
+        versionInfo.backend.buildNumber = backendVersionResponse.data.version.buildNumber;
+      }
+      // load frontend versions
       return $http.get('version.json').then(function(frontendVersionResponse) {
         versionInfo.frontend.version = frontendVersionResponse.data.version;
         versionInfo.frontend.buildNumber = frontendVersionResponse.data.buildNumber;
-
-        /*eslint-disable angular/module-getter */
-        app.constant('VERSION', versionInfo);
-        /*eslint-enable angular/module-getter */
-
-      }, function() {
-        versionInfo.frontend.version = 'N/A';
-        versionInfo.frontend.buildNumber = 'N/A';
+      }, function(err) {
+        $log.error(err);
       });
-    }, function() {
-      versionInfo.backend.version = 'N/A';
-      versionInfo.backend.buildNumber = 'N/A';
+    }, function(err) {
+      $log.error(err);
     });
   }
 
