@@ -378,7 +378,7 @@ module.exports = function(grunt) {
   /* eslint-disable angular/json-functions, angular/di */
   grunt.registerTask('createVersionFile', 'Create version.json file with the package.version and gitDescribe value', function() {
     grunt.task.requires('git-describe');
-    grunt.file.write('./app/version.json', JSON.stringify({
+    grunt.file.write('./dist/version.json', JSON.stringify({
       version: grunt.config('pkg.version'),
       gitDescribe: grunt.option('gitDescribe'),
       buildNumber: grunt.option('buildNumber'),

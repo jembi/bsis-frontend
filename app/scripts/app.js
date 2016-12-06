@@ -1190,7 +1190,7 @@ var DONATION = {DONOR: {}};
       versionInfo.backend.version = backendVersionResponse.data.version.version;
       versionInfo.backend.buildNumber = backendVersionResponse.data.version.buildNumber;
 
-      return $http.get('..//..//..//version.json').then(function(frontendVersionResponse) {
+      return $http.get('version.json').then(function(frontendVersionResponse) {
         versionInfo.frontend.version = frontendVersionResponse.data.version;
         versionInfo.frontend.buildNumber = frontendVersionResponse.data.buildNumber;
 
