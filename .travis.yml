@@ -10,7 +10,7 @@ branches:
     - /^release\//
     - /^support\//
 
-after-success:
+after_success:
  - cd dist
  - zip -r bsis-frontend.zip *
 
