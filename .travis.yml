@@ -5,7 +5,9 @@ node_js:
   - 6
 
 after_success:
- - npm run build
+ - npm install grunt
+ - npm install grunt-cli
+ - grunt build
  - cd dist
  - zip -r bsis-frontend.zip * >/dev/null
 
