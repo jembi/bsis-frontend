@@ -58,7 +58,7 @@
                               <label for="prePrintedDIN" class="col-sm-2 control-label">DIN</label>
                               <div class="col-sm-10">
                                 <div class="form-inline">
-                                  <input id="prePrintedDIN" name="verificationParams.prePrintedDIN" class="form-control input-sm" style="width:auto;"
+                                  <input id="prePrintedDIN" name="prePrintedDIN" ng-model="verificationParams.prePrintedDIN" class="form-control input-sm" style="width:auto;"
                                     required din-length>
                                   <div>
                                     <ng-messages for="labellingVerificationForm.prePrintedDIN.$error" ng-show="labellingVerificationForm.$submitted">
@@ -72,7 +72,7 @@
                               <label for="packLabelDIN" class="col-sm-2 control-label">Pack Label DIN</label>
                               <div class="col-sm-10">
                                 <div class="form-inline">
-                                  <input id="packLabelDIN" name="verificationParams.packLabelDIN" class="form-control input-sm" style="width:auto;"
+                                  <input id="packLabelDIN" name="packLabelDIN" ng-model="verificationParams.packLabelDIN" class="form-control input-sm" style="width:auto;"
                                     required >
                                   <div>
                                     <ng-messages for="labellingVerificationForm.packLabelDIN.$error" ng-show="labellingVerificationForm.$submitted">

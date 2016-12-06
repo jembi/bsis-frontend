@@ -259,7 +259,8 @@ angular.module('bsis')
         },
         verifyPackLabel: {
           method: 'GET',
-          url: url + '/labels/verify/packlabel'
+          url: url + '/labels/verify/packlabel',
+          params: {componentId: '@componentId', prePrintedDIN: '@prePrintedDIN', packLabelDIN: '@packLabelDIN'}
         }
       }),
 
