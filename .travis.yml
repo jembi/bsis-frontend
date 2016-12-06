@@ -10,14 +10,11 @@ after_success:
  - grunt build
  - cd dist
  - zip -r bsis-frontend.zip * >/dev/null
- - ls -l
- - cd ..
- - ls -l
 
 deploy:
   provider: releases
   api_key: "47a92f9761a055720a1b35ec021db098d6a2e2d1"
-  file: "dist/bsis-frontend.zip"
+  file: "$TRAVIS_BUILD_DIR/dist/bsis-frontend.zip"
   skip_cleanup: true
   on:
     tags: true
