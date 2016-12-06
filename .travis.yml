@@ -5,8 +5,7 @@ node_js:
   - 6
 
 after_success:
- - pwd
- - ls -l
+ - npm run build
  - cd dist
  - zip -r bsis-frontend.zip * >/dev/null
 

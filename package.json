@@ -50,6 +50,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "build": "grunt build",
     "lint": "eslint --max-warnings=0 app/scripts",
     "test": "karma start test/karma.conf.js",
     "postinstall": "bower install",
