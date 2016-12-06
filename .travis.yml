@@ -10,6 +10,9 @@ after_success:
  - grunt build
  - cd dist
  - zip -r bsis-frontend.zip * >/dev/null
+ - ls -l
+ - cd ..
+ - ls -l
 
 deploy:
   provider: releases
