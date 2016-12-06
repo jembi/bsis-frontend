@@ -9,6 +9,7 @@ branches:
     - develop
     - /^release\//
     - /^support\//
+    - dev/2116-bsis-distributables-included-on-github-pages
 
 after_success:
  - cd dist
