@@ -5,6 +5,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   $scope.serverErrorMessage = null;
   $scope.searchResults = null;
   $scope.dinLength = DONATION.DIN_LENGTH;
+  $scope.packLabelDINLength = $scope.dinLength + 2;
   $scope.search = {
     donationIdentificationNumber: angular.isDefined($routeParams.donationIdentificationNumber) ? $routeParams.donationIdentificationNumber : null,
     componentType: angular.isDefined($routeParams.componentType) ? +$routeParams.componentType : null
