@@ -35,6 +35,7 @@
     "grunt-rev": "~0.1.0",
     "grunt-svgmin": "~0.2.0",
     "grunt-usemin": "~2.0.0",
+    "grunt-cli": "~0.1.13",
     "http-server": "^0.6.1",
     "jasmine-core": "^2.3.4",
     "karma": "^0.12.36",
@@ -50,6 +51,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "build": "grunt build",
     "lint": "eslint --max-warnings=0 app/scripts",
     "test": "karma start test/karma.conf.js",
     "postinstall": "bower install",
