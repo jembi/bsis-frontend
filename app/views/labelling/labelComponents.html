@@ -53,7 +53,7 @@
                           </button>
                           <br/>
                           <h4 class="page-header">Label Verification</h4>
-                           <form class="form-horizontal col-sm-12" role="form" name="labellingVerificationForm" ng-submit="verifyPackLabel(component.id, labellingVerificationForm)">
+                           <form class="form-horizontal col-sm-12" role="form" name="labellingVerificationForm" ng-submit="verifyPackLabel(component.id, labellingVerificationForm)" novalidate>
                             <div class="row form-group col-sm-12">
                               <label for="prePrintedDIN" class="col-sm-2 control-label">DIN</label>
                               <div class="col-sm-10">
@@ -98,10 +98,10 @@
                                   </button>
                                 </div>
                             </div>
-                            <div ng-if="((verificationParams.prePrintedDIN === verificationParams.packLabelDIN) || sameDinScanned)">
+                            <div ng-if="sameDinScanned && labellingVerificationForm.$submitted && !verifying" style="clear:left;">
                             <em>The same barcode has been scanned twice: please re-scan.</em>
                             </div>
-                            <div ng-if="!labelVerified">
+                            <div ng-if="!labelVerified && labellingVerificationForm.$submitted && !sameDinScanned" style="clear:left;">
                             <em>DINs do not match</em>
                             </div>
                         </form>

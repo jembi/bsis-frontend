@@ -11,8 +11,6 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     componentType: angular.isDefined($routeParams.componentType) ? +$routeParams.componentType : null
   };
   $scope.componentTypes = [];
-  $scope.labelVerified = true;
-  $scope.sameDinScanned = false;
   $scope.verificationParams = {
     componentId: null,
     prePrintedDIN: null,
@@ -44,6 +42,8 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   }
 
   $scope.verifyPackLabel = function(componentId, labellingVerificationForm) {
+    $scope.sameDinScanned = false;
+    $scope.labelVerified = false;
     if (labellingVerificationForm.$invalid) {
       return;
     }

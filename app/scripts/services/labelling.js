@@ -7,7 +7,7 @@ angular.module('bsis')
       getComponents: Api.Labelling.getComponents,
       verifyPackLabel: function(verificationParams, onSuccess, onError) {
         Api.Labelling.verifyPackLabel(verificationParams, function(res) {
-          onSuccess(res.labelVerified);
+          onSuccess(res);
         }, function(err) {
           onError(err.data);
         });
