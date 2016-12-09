@@ -16,6 +16,9 @@ module.exports = function(grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  // enables grunt-git-describe
+  grunt.loadNpmTasks('grunt-git-describe');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -263,8 +266,8 @@ module.exports = function(grunt) {
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'fonts/*',
-            'config/*'
-
+            'config/*',
+            'version.json'
           ]
         }, {
           expand: true,
@@ -335,6 +338,15 @@ module.exports = function(grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    pkg: grunt.file.readJSON('package.json'),
+
+    'git-describe': {
+      options: {
+        template: '{%=tag%}-{%=since%}-{%=object%}'
+      },
+      me: {}
     }
   });
 
@@ -350,9 +362,32 @@ module.exports = function(grunt) {
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
+      'version',
       'watch'
     ]);
   });
+
+  grunt.registerTask('getGitDescribe', function() {
+    grunt.event.once('git-describe', function(rev) {
+      grunt.option('gitDescribe', rev.toString());
+      grunt.option('buildNumber', rev.object);
+    });
+    grunt.task.run('git-describe');
+  });
+
+  /* eslint-disable angular/json-functions, angular/di */
+  grunt.registerTask('createVersionFile', 'Create version.json file with the package.version and gitDescribe value', function() {
+    grunt.task.requires('git-describe');
+    grunt.file.write('./app/version.json', JSON.stringify({
+      version: grunt.config('pkg.version'),
+      gitDescribe: grunt.option('gitDescribe'),
+      buildNumber: grunt.option('buildNumber'),
+      date: grunt.template.today()
+    }));
+  });
+  /* eslint-enable angular/json-functions, angular/di */
+
+  grunt.registerTask('version', ['getGitDescribe', 'createVersionFile']);
 
   grunt.registerTask('server', function(target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
@@ -370,6 +405,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'version',
     'bowerInstall',
     'useminPrepare',
     'concurrent:dist',

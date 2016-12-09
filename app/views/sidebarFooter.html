@@ -1,3 +1,9 @@
-<div style="position: fixed; bottom: 5px; width:100%; font-size: 0.8em; text-align: left;" ng-controller="FooterCtrl">
-    <p>© 2014 - {{copyrightEndyear}} <a href="http://www.jembi.org">Jembi Health Systems</a></p>
+<div class="sidebar-footer col-sm-3 col-md-2" ng-controller="FooterCtrl">
+    <p>© 2014 - {{copyrightEndyear}}
+      <a href="http://www.jembi.org">Jembi Health Systems</a>
+      <small>
+        <br />Version: {{backendVersion}} / {{frontEndVersion}}
+        <br />Build: {{backendBuildNumber}} / {{frontEndBuildNumber}}
+      </small>
+    </p>
 </div>
