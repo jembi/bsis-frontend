@@ -12,3 +12,4 @@ npm-debug.log
 .idea
 bsis-frontend.sublime-project
 bsis-frontend.sublime-workspace
+app/version.json

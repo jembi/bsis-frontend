@@ -1,14 +1,22 @@
 language: node_js
 node_js:
-  - 4
-  - 5
   - 6
-branches:
-  only:
-    - master
-    - develop
-    - /^release\//
-    - /^support\//
+
+before_script: npm run build
+
+after_success:
+ - cd dist
+ - zip -r bsis-frontend.zip * >/dev/null
+
+deploy:
+  provider: releases
+  api_key: 
+    secure: "j2dBVAXcFKNOUrsj5VxPJfGUOZBhBspsG1vJnQFtBFyYFoMwkQwtc5Nu2/gtjBXUUCq66rBdv0vLfQZINDgxkxT0PXdjvloCmJkatvkegknzDl7+QGwdGzHhtKEOJ0zCohC2NCohoUtlv8rXyMFOvDePKLK8p9rPlNtWXUcLQwc4slfPQg9ZIcmOy7PSMoq11k1MNZS5LArin9vVuXhLUm+H2h/Mm+Pc/gAQkNOrFjhuyWe8/C96uicLZ6HvkFj9dfsOot3FzLH/utCzi4Fzu/gXKo9vvocWjUw34TjTCrwzJ6nzUZX97smi2k+8YNR/68J2fIAeyvfXJMlyzQl8pFJmz668DqpvXMOVWASDtisKZOYa/H4fadrgKpzuwX4Wt6KRgOUOGShGfuU0E9lwd+X8BzrC7yjuDCTiaeRnHmZrQkCkERJCETcgBUEeUr++CvY5FOrnSNkMs+lzCjArTqn2rN8N12XQON1JXmq0xT8IMfe79wdrbOBeYa9XpPZLL5uuiQ4P/iNdWMefvbHEuDePSV42aHxjTePrTlmwdZW6okim8Xtz8EQIFaGdvq7LY/R2G36vITmidpzqFbP0pW+tckwxPnQumJYUQyd5ozg4EBGUaVYNxyft5m1Hg77VxOymbjKcnprjid8z/fecEViMUOimTuO/zY93aW6OTKI="
+  file: "$TRAVIS_BUILD_DIR/dist/bsis-frontend.zip"
+  skip_cleanup: true
+  on:
+    tags: true
+
 notifications:
   email:
     on_success: change
