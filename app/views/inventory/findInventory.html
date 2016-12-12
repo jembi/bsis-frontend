@@ -8,7 +8,7 @@
       <label class="col-sm-2 control-label">DIN</label>
       <div class="form-inline col-sm-10">
         <div style="display: inline-block; vertical-align: top;">
-          <input class="form-control" name="donationIdentificationNumber" ng-model="searchParams.donationIdentificationNumber" ng-required="searchParams.componentCode" din-length>
+          <input class="form-control" name="donationIdentificationNumber" ng-model="searchParams.donationIdentificationNumber" ng-required="searchParams.componentCode">
           <ng-messages for="searchForm.donationIdentificationNumber.$error" role="alert" ng-show="searchForm.$submitted">
             <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>

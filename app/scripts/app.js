@@ -1054,25 +1054,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
     };
   }])
 
-  .directive('dinLength', ['DONATION', function(DONATION) {
-    var DIN_LENGTH = DONATION.DIN_LENGTH;
-    return {
-      require: 'ngModel',
-      link: function($scope, elm, attrs, modelCtrl) {
-        var truncate = function(modelValue) {
-          if (!modelValue || !DIN_LENGTH || modelValue.length <= DIN_LENGTH) {
-            return modelValue;
-          }
-          var truncatedValue = modelValue.substr(0, DIN_LENGTH);
-          modelCtrl.$setViewValue(truncatedValue);
-          modelCtrl.$render();
-          return truncatedValue;
-        };
-        modelCtrl.$parsers.push(truncate);
-      }
-    };
-  }])
-
   .directive('alphaName', ['REGEX', function(REGEX) {
     var ALPHA_REGEXP = REGEX.NAME;
     return {
