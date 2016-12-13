@@ -230,9 +230,9 @@ angular.module('bsis')
           method: 'PUT',
           url: url + '/components/undiscard'
         },
-        preProcess: {
+        updateWeight: {
           method: 'PUT',
-          url: url + '/components/:id/preprocess',
+          url: url + '/components/:id/weight',
           params: {
             id: '@id'
           }
