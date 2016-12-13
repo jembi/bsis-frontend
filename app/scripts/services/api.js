@@ -256,6 +256,11 @@ angular.module('bsis')
         printDiscardLabel: {
           method: 'GET',
           url: url + '/labels/print/discardlabel/:componentId'
+        },
+        verifyPackLabel: {
+          method: 'GET',
+          url: url + '/labels/verify/packlabel',
+          params: {componentId: '@componentId', prePrintedDIN: '@prePrintedDIN', packLabelDIN: '@packLabelDIN'}
         }
       }),
 

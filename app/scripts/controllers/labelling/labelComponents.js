@@ -9,6 +9,11 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     componentType: angular.isDefined($routeParams.componentType) ? +$routeParams.componentType : null
   };
   $scope.componentTypes = [];
+  $scope.verificationParams = {
+    componentId: null,
+    prePrintedDIN: null,
+    packLabelDIN: null
+  };
 
   $scope.getComponents = function(form) {
 
@@ -33,6 +38,29 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   if ($routeParams.search) {
     $scope.getComponents();
   }
+
+  $scope.verifyPackLabel = function(componentId, labellingVerificationForm) {
+    $scope.sameDinScanned = false;
+    $scope.labelVerified = false;
+    if (labellingVerificationForm.$invalid) {
+      return;
+    }
+    if ($scope.verificationParams.prePrintedDIN === $scope.verificationParams.packLabelDIN) {
+      $scope.sameDinScanned = true;
+      $scope.verifying = false;
+      return;
+    }
+    $scope.submitted = true;
+    $scope.verifying = true;
+    $scope.verificationParams.componentId = componentId;
+    LabellingService.verifyPackLabel($scope.verificationParams, function(res) {
+      $scope.labelVerified = res.labelVerified;
+      $scope.verifying = false;
+    }, function(err) {
+      $log.error(err);
+      $scope.verifying = false;
+    });
+  };
 
   $scope.printPackLabel = function(componentId) {
     $scope.serverErrorMessage = null;
