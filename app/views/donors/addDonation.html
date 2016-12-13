@@ -91,7 +91,7 @@
                            ng-minlength="dinLength"
                            required
                            ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
-                           ng-class="{'ng-invalid ng-dirty' : (addDonationForm.din.$invalid && submitted)}">                    
+                           ng-class="{'ng-invalid ng-dirty' : (addDonationForm.din.$invalid && submitted)}" >
                     <div>
                         <small class="error" ng-show="(addDonationForm.din.$error.required && (addDonationForm.din.$dirty || submitted))">
                             This cannot be empty
