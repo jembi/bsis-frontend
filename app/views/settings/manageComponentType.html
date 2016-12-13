@@ -54,6 +54,44 @@
         </div>
 
         <div class="row form-group col-sm-12">
+          <label for="maxBleedTime" class="col-sm-2 control-label">Max bleed time</label>
+          <div class="col-sm-4">
+            <div class="form-inline">
+              <input type="number" name="maxBleedTime" class="form-control input-sm" ng-model="componentType.maxBleedTime" style="max-width: 35px;" required ng-max="60" ng-min="0">              
+              <div>
+                <small class="error" ng-show="(componentTypeForm.maxBleedTime.$error.required  && componentTypeForm.$submitted)">
+                  This cannot be empty
+                </small>
+              </div>
+              <div>
+                <small class="error" ng-show="(componentTypeForm.maxBleedTime.$error.max || componentTypeForm.maxBleedTime.$error.min) || submitted">
+                  Max bleed time should be between 0 and 60 mins
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group col-sm-12">
+          <label for="maxTimeSinceDonation" class="col-sm-2 control-label">Max time since donation</label>
+          <div class="col-sm-4">
+            <div class="form-inline">
+              <input type="number" name="maxTimeSinceDonation" class="form-control input-sm" ng-model="componentType.maxTimeSinceDonation" style="max-width: 35px;" required ng-max="60" ng-min="0">
+              <div>
+                <small class="error" ng-show="(componentTypeForm.maxTimeSinceDonation.$error.max || componentTypeForm.maxTimeSinceDonation.$error.min) || submitted">
+                  Max bleed time should be between 0 and 30 hours
+                </small>
+              </div>
+              <div>
+                <small class="error" ng-show="(componentTypeForm.maxTimeSinceDonation.$error.required  && componentTypeForm.$submitted)">
+                  This cannot be empty
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group col-sm-12">
           <label for="expiresAfter" class="col-sm-2 control-label">Expires After</label>
           <div class="col-sm-4">
             <div class="form-inline">
