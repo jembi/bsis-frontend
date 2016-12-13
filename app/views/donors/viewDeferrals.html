@@ -61,7 +61,7 @@
 
                 <!-- Edit deferral actions -->
                 <div has-permission="{{permissions.EDIT_DEFFERAL}}" ng-hide="deletingDeferral" style="display:inline;">
-                    <em><a href="" ng-click="manageDeferral(deferral)">Edit</a></em>
+                    <em><a href="" ng-disabled="!deferral.permissions.canEdit" ng-click="manageDeferral(deferral)">Edit</a></em>
                 </div>
 
                 <form editable-form name="endDeferralForm"
