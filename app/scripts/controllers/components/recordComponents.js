@@ -9,7 +9,7 @@ angular.module('bsis')
     };
     $scope.preProcessing = false;
     $scope.unprocessing = false;
-    $scope.sameTimeEnterd = false;
+    $scope.sameTimeEntered = false;
     var forms = $scope.forms = {};
 
     $scope.clear = function() {
@@ -123,7 +123,7 @@ angular.module('bsis')
 
       $scope.preProcessing = true;
       if ($scope.component.bleedStartTime === $scope.component.bleedEndTime) {
-        $scope.sameTimeEnterd = true;
+        $scope.sameTimeEntered = true;
         $scope.preProcessing = false;
         return;
       }

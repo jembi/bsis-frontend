@@ -84,7 +84,7 @@
                 <small class="error" ng-show="(bleedEndTime < bleedStartTime) && !forms.preProcessForm.bleedStartTime.$error.time && !forms.preProcessForm.bleedEndTime.$error.time">
                     End time should be after Start time
                 </small>
-                <small class="error" ng-show="sameTimeEnterd && preProcessing && !forms.preProcessForm.bleedStartTime.$error.time && !forms.preProcessForm.bleedEndTime.$error.time">
+                <small class="error" ng-show="sameTimeEntered && !preProcessing && !forms.preProcessForm.bleedStartTime.$error.time && !forms.preProcessForm.bleedEndTime.$error.time">
                     Start and end bleed times are the same: please re-enter
                 </small>
             </div> 
