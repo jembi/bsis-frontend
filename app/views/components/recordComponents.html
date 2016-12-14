@@ -53,21 +53,47 @@
         </div>
       </div>
 
-      <!-- Record weight form -->
-      <form role="form" name="forms.recordWeightForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canRecordWeight" ng-submit="recordWeightForSelectedComponent()" novalidate>
+      <!-- Component pre process form -->
+      <form role="form" name="forms.preProcessForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canRecordWeight" ng-submit="preProcessSelectedComponent()" novalidate>
         <div class="form-group">
           <label for="componentWeight" class="col-sm-2 control-label">Component Weight</label>
           <div class="col-sm-10" style="padding-left:5px;">
             <input name="componentWeight" class="form-control input-sm" style="width:auto;" type="number" ng-min="1" ng-max="999" ng-model="component.weight" required />
-            <ng-messages for="forms.recordWeightForm.componentWeight.$error" ng-show="forms.recordWeightForm.$submitted">
+            <ng-messages for="forms.preProcessForm.componentWeight.$error" ng-show="forms.preProcessForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
           </div>
         </div>
         <div class="form-group">
+          <label for="" class="col-sm-2 control-label">Bleed start time</label>
+          <div class="row col-sm-10">
+            <div style="padding-left:5px;">
+                <uib-timepicker ng-model="component.bleedStartTime" name="bleedStartTime" show-spinners="false"></uib-timepicker>
+                <small class="error" ng-show="forms.preProcessForm.bleedStartTime.$error.time">
+                    Enter a valid time
+                </small>
+            </div>     
+          </div>
+          <label for="" class="col-sm-2 control-label">End</label>
+          <div class="row col-sm-10">
+            <div style="padding-left:5px;">
+                <uib-timepicker ng-model="component.bleedEndTime" name="bleedEndTime" show-spinners="false" ng-required="submitted"></uib-timepicker>
+                <small class="error" ng-show="forms.preProcessForm.bleedEndTime.$error.time">
+                    Enter a valid time
+                </small>
+                <small class="error" ng-show="(bleedEndTime < bleedStartTime) && !forms.preProcessForm.bleedStartTime.$error.time && !forms.preProcessForm.bleedEndTime.$error.time">
+                    End time should be after Start time
+                </small>
+                <small class="error" ng-show="sameTimeEnterd && preProcessing && !forms.preProcessForm.bleedStartTime.$error.time && !forms.preProcessForm.bleedEndTime.$error.time">
+                    Start and end bleed times are the same: please re-enter
+                </small>
+            </div> 
+          </div>
+        </div>
+        <div class="form-group">
           <div class="col-sm-3 col-sm-offset-2">
-            <button type="submit" class="btn btn-primary" ng-disabled="recordingWeight">{{recordingWeight ? "Saving..." : "Save"}}</button>
-            <button type="reset" class="btn btn-primary" ng-disabled="recordingWeight" ng-click="clearWeight();">Clear</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="preProcessing">{{preProcessing ? "Saving..." : "Save"}}</button>
+            <button type="reset" class="btn btn-primary" ng-disabled="preProcessing" ng-click="clearWeight();">Clear</button>
           </div>
         </div>
       </form>

@@ -7,8 +7,9 @@ angular.module('bsis')
     $scope.componentsSearch = {
       donationIdentificationNumber: $routeParams.donationIdentificationNumber || ''
     };
-    $scope.recordingWeight = false;
+    $scope.preProcessing = false;
     $scope.unprocessing = false;
+    $scope.sameTimeEnterd = false;
     var forms = $scope.forms = {};
 
     $scope.clear = function() {
@@ -35,8 +36,8 @@ angular.module('bsis')
       if ($scope.component) {
         $scope.component.weight = null;
       }
-      if (forms.recordWeightForm) {
-        forms.recordWeightForm.$setPristine();
+      if (forms.preProcessForm) {
+        forms.preProcessForm.$setPristine();
       }
     };
 
@@ -114,13 +115,18 @@ angular.module('bsis')
       return $q.resolve();
     }
 
-    $scope.recordWeightForSelectedComponent = function() {
+    $scope.preProcessSelectedComponent = function() {
 
-      if (forms.recordWeightForm.$invalid) {
+      if (forms.preProcessForm.$invalid) {
         return;
       }
 
-      $scope.recordingWeight = true;
+      $scope.preProcessing = true;
+      if ($scope.component.bleedStartTime === $scope.component.bleedEndTime) {
+        $scope.sameTimeEnterd = true;
+        $scope.preProcessing = false;
+        return;
+      }
 
       showComponentWeightConfirmation($scope.component).then(function() {
 
@@ -142,15 +148,15 @@ angular.module('bsis')
           // Make sure that the row remains selected
           $timeout(function() {
             $scope.gridApi.selection.selectRow(res.component);
-            $scope.recordingWeight = false;
+            $scope.preProcessing = false;
           });
         }, function(err) {
           $log.error(err);
-          $scope.recordingWeight = false;
+          $scope.preProcessing = false;
         });
       }).catch(function() {
         // Confirmation was rejected
-        $scope.recordingWeight = false;
+        $scope.preProcessing = false;
       });
     };
 
