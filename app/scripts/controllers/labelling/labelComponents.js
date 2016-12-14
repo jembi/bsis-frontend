@@ -99,6 +99,12 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.serverErrorMessage = null;
   };
 
+  $scope.clearLabelVerificationForm = function() {
+    $scope.searchResults = null;
+    $scope.verificationParams.prePrintedDIN = null;
+    $scope.verificationParams.packLabelDIN = null;
+  };
+
   $scope.onTextClick = function($event) {
     // Select the target's text on click
     $event.target.select();

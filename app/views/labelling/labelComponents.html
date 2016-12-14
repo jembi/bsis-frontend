@@ -6,7 +6,7 @@
       <div class="form-group">
         <label for="componentType" class="col-sm-1 control-label">Type</label>
         <div class="col-sm-11">
-          <select name="componentType" class="form-control" ng-model="search.componentType" ng-options="type.id as type.componentTypeName for type in componentTypes" required style="width:auto;">
+          <select name="componentType" ng-change="clearLabelVerificationForm()" class="form-control" ng-model="search.componentType" ng-options="type.id as type.componentTypeName for type in componentTypes" required style="width:auto;">
             <option value="" disabled></option>
           </select>
         </div>
@@ -19,7 +19,7 @@
       <div class="form-group">
           <label for="name" class="col-sm-1 control-label">DIN</label>
           <div class="col-sm-11">
-            <input size="15" type="donationIdentificationNumber" name="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="search.donationIdentificationNumber" style="width:auto;" required ng-click="onTextClick($event)">
+            <input size="15" ng-change="clearLabelVerificationForm()" type="donationIdentificationNumber" name="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="search.donationIdentificationNumber" style="width:auto;" required ng-click="onTextClick($event)">
           </div>
           <div class="col-sm-offset-1" style="padding-left:15px;">
               <ng-messages for="labellingForm.donationIdentificationNumber.$error" role="alert" ng-show="labellingForm.$submitted">
