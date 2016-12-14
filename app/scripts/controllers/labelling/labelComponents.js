@@ -75,6 +75,10 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     });
   };
 
+  $scope.setFormUnsubmitted = function(form) {
+    form.$submitted = false;
+  };
+
   $scope.printDiscardLabel = function(componentId) {
     LabellingService.printDiscardLabel(componentId, function(response) {
       $scope.labelZPL = response.labelZPL;
