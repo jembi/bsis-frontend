@@ -96,6 +96,9 @@
                             <div ng-if="!labelVerified && labellingVerificationForm.$submitted && !sameDinScanned && !labellingVerificationForm.$invalid && !verifying" style="clear:left;">
                             <em>DINs do not match</em>
                             </div>
+                            <div ng-if="labelVerified && labellingVerificationForm.$submitted && !sameDinScanned && !labellingVerificationForm.$invalid && !verifying" style="clear:left;">
+                            <em style="color:green">Label verified</em>
+                            </div>
                         </form>
 
                           <span ng-if="serverErrorMessage" class="error">
