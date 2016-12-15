@@ -6,7 +6,7 @@
       <div class="form-group">
         <label for="componentType" class="col-sm-1 control-label">Type</label>
         <div class="col-sm-11">
-          <select name="componentType" ng-change="clearLabelVerificationForm()" class="form-control" ng-model="search.componentType" ng-options="type.id as type.componentTypeName for type in componentTypes" required style="width:auto;">
+          <select name="componentType" class="form-control" ng-model="search.componentType" ng-options="type.id as type.componentTypeName for type in componentTypes" required style="width:auto;">
             <option value="" disabled></option>
           </select>
         </div>
@@ -19,7 +19,7 @@
       <div class="form-group">
           <label for="name" class="col-sm-1 control-label">DIN</label>
           <div class="col-sm-11">
-            <input size="15" ng-change="clearLabelVerificationForm()" type="donationIdentificationNumber" name="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="search.donationIdentificationNumber" style="width:auto;" required ng-click="onTextClick($event)">
+            <input size="15" type="donationIdentificationNumber" name="donationIdentificationNumber" class="form-control input-sm" placeholder="" ng-model="search.donationIdentificationNumber" style="width:auto;" required ng-click="onTextClick($event)">
           </div>
           <div class="col-sm-offset-1" style="padding-left:15px;">
               <ng-messages for="labellingForm.donationIdentificationNumber.$error" role="alert" ng-show="labellingForm.$submitted">
@@ -48,7 +48,7 @@
                       <div ng-if="component.permissions.canPrintPackLabel && component.hasComponentBatch">
                           {{component.componentCode}} ({{component.componentName}}) -
                           <span ng-switch on="component.verificationStatus">
-                            <span ng-switch-when="verified"><em>Component has been labelled and verified</em></span>
+                            <span ng-switch-when="verified"><em>Component has been labelled and verified.</em></span>
                             <span ng-switch-default>
                               <em>Component is ready to be labelled.</em>
                               <button style="margin:0;" class="btn btn-primary" type="button"
@@ -116,8 +116,8 @@
                       </div>
 
                       <div ng-if="!verifying && labellingVerificationForm.$submitted && !labellingVerificationForm.$invalid" ng-switch on="verificationStatus">
-                        <div ng-switch-when="notVerified"><em>DINs do not match</em></div>
-                        <div ng-switch-when="sameDinScanned"><em>The same barcode has been scanned twice: please re-scan</em></div>
+                        <div ng-switch-when="notVerified"><em>DINs do not match.</em></div>
+                        <div ng-switch-when="sameDinScanned"><em>The same barcode has been scanned twice: please re-scan.</em></div>
                       </div>
 
                     </form>

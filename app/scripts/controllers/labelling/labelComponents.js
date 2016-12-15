@@ -32,6 +32,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       $scope.components = response.components;
       $scope.searchResults = true;
       $scope.searching = false;
+      $scope.clearLabelVerificationForm();
     }, function(err) {
       $log.error(err);
       $scope.searching = false;
@@ -55,8 +56,8 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       $scope.verificationParams.componentId = component.id;
       LabellingService.verifyPackLabel($scope.verificationParams, function(response) {
         if (response.labelVerified) {
-          $scope.verifyComponent = null;
           component.verificationStatus = 'verified';
+          $scope.clearLabelVerificationForm(labellingVerificationForm);
         } else {
           $scope.verificationStatus = 'notVerified';
         }
@@ -103,11 +104,13 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.clearLabelVerificationForm();
   };
 
-  $scope.clearLabelVerificationForm = function() {
-    $scope.searchResults = null;
-    $scope.verificationParams.prePrintedDIN = null;
-    $scope.verificationParams.packLabelDIN = null;
+  $scope.clearLabelVerificationForm = function(form) {
     $scope.verifyComponent = null;
+    $scope.verificationParams = {};
+    if (form) {
+      form.$setPristine();
+      form.$setUntouched();
+    }
   };
 
   $scope.onTextClick = function($event) {
