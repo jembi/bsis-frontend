@@ -53,6 +53,7 @@
                           </button>
                           <br/>
                           <br/>
+
                           <h4 class="page-header">Label Verification</h4>
                           <br/>
                           <form class="form-horizontal col-sm-12" role="form" name="labellingVerificationForm" ng-submit="verifyPackLabel(component.id, labellingVerificationForm)" novalidate>
@@ -60,7 +61,7 @@
                               <label for="prePrintedDIN" class="col-sm-2 control-label">DIN</label>
                               <div class="col-sm-10">
                                 <div class="form-inline">
-                                  <input id="prePrintedDIN" ng-change="setFormUnsubmitted(labellingVerificationForm)" name="prePrintedDIN" ng-model="verificationParams.prePrintedDIN" class="form-control input-sm" style="width:auto;"
+                                  <input id="prePrintedDIN" name="prePrintedDIN" ng-model="verificationParams.prePrintedDIN" class="form-control input-sm" style="width:auto;"
                                     required>
                                   <div>
                                     <ng-messages for="labellingVerificationForm.prePrintedDIN.$error" ng-show="labellingVerificationForm.$submitted">
@@ -74,7 +75,7 @@
                               <label for="packLabelDIN" class="col-sm-2 control-label">Pack Label DIN</label>
                               <div class="col-sm-10">
                                 <div class="form-inline">
-                                  <input id="packLabelDIN" ng-change="setFormUnsubmitted(labellingVerificationForm)" name="packLabelDIN" ng-model="verificationParams.packLabelDIN" class="form-control input-sm" style="width:auto;"
+                                  <input id="packLabelDIN" name="packLabelDIN" ng-model="verificationParams.packLabelDIN" class="form-control input-sm" style="width:auto;"
                                     required>
                                   <div>
                                     <ng-messages for="labellingVerificationForm.packLabelDIN.$error" ng-show="labellingVerificationForm.$submitted">
@@ -90,15 +91,13 @@
                                   </button>
                                 </div>
                             </div>
-                            <div ng-if="sameDinScanned && labellingVerificationForm.$submitted && !verifying" style="clear:left;">
-                            <em>The same barcode has been scanned twice: please re-scan.</em>
+
+                            <div ng-if="!verifying && labellingVerificationForm.$submitted && !labellingVerificationForm.$invalid" ng-switch on="verificationStatus">
+                              <div ng-switch-when="verified"><em>Label verified</em></div>
+                              <div ng-switch-when="notVerified"><em>DINs do not match</em></div>
+                              <div ng-switch-when="sameDinScanned"><em>The same barcode has been scanned twice: please re-scan.</em></div>
                             </div>
-                            <div ng-if="!labelVerified && labellingVerificationForm.$submitted && !sameDinScanned && !labellingVerificationForm.$invalid && !verifying" style="clear:left;">
-                            <em>DINs do not match</em>
-                            </div>
-                            <div ng-if="labelVerified && labellingVerificationForm.$submitted && !sameDinScanned && !labellingVerificationForm.$invalid && !verifying" style="clear:left;">
-                            <em style="color:green">Label verified</em>
-                            </div>
+
                         </form>
 
                           <span ng-if="serverErrorMessage" class="error">

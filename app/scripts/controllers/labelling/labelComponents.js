@@ -14,6 +14,8 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     prePrintedDIN: null,
     packLabelDIN: null
   };
+  $scope.verifying = false;
+  $scope.verificationStatus = '';
 
   $scope.getComponents = function(form) {
 
@@ -40,26 +42,28 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   }
 
   $scope.verifyPackLabel = function(componentId, labellingVerificationForm) {
-    $scope.sameDinScanned = false;
-    $scope.labelVerified = false;
-    if (labellingVerificationForm.$invalid) {
-      return;
-    }
-    if ($scope.verificationParams.prePrintedDIN === $scope.verificationParams.packLabelDIN) {
-      $scope.sameDinScanned = true;
-      $scope.verifying = false;
-      return;
-    }
-    $scope.submitted = true;
     $scope.verifying = true;
-    $scope.verificationParams.componentId = componentId;
-    LabellingService.verifyPackLabel($scope.verificationParams, function(res) {
-      $scope.labelVerified = res.labelVerified;
+    try {
+      if (labellingVerificationForm.$invalid) {
+        return;
+      }
+      if ($scope.verificationParams.prePrintedDIN === $scope.verificationParams.packLabelDIN) {
+        $scope.verificationStatus = 'sameDinScanned';
+        return;
+      }
+      $scope.verificationParams.componentId = componentId;
+      LabellingService.verifyPackLabel($scope.verificationParams, function(response) {
+        if (response.labelVerified) {
+          $scope.verificationStatus = 'verified';
+        } else {
+          $scope.verificationStatus = 'notVerified';
+        }
+      }, function(err) {
+        $log.error(err);
+      });
+    } finally {
       $scope.verifying = false;
-    }, function(err) {
-      $log.error(err);
-      $scope.verifying = false;
-    });
+    }
   };
 
   $scope.printPackLabel = function(componentId) {
@@ -73,10 +77,6 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       }
       $log.error(err);
     });
-  };
-
-  $scope.setFormUnsubmitted = function(form) {
-    form.$submitted = false;
   };
 
   $scope.printDiscardLabel = function(componentId) {
