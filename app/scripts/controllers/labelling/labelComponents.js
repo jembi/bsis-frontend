@@ -14,6 +14,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     prePrintedDIN: null,
     packLabelDIN: null
   };
+  $scope.verifyComponent = null;
   $scope.verifying = false;
   $scope.verificationStatus = '';
 
@@ -41,7 +42,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.getComponents();
   }
 
-  $scope.verifyPackLabel = function(componentId, labellingVerificationForm) {
+  $scope.verifyPackLabel = function(component, labellingVerificationForm) {
     $scope.verifying = true;
     try {
       if (labellingVerificationForm.$invalid) {
@@ -51,10 +52,11 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
         $scope.verificationStatus = 'sameDinScanned';
         return;
       }
-      $scope.verificationParams.componentId = componentId;
+      $scope.verificationParams.componentId = component.id;
       LabellingService.verifyPackLabel($scope.verificationParams, function(response) {
         if (response.labelVerified) {
-          $scope.verificationStatus = 'verified';
+          $scope.verifyComponent = null;
+          component.verificationStatus = 'verified';
         } else {
           $scope.verificationStatus = 'notVerified';
         }
@@ -66,11 +68,12 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     }
   };
 
-  $scope.printPackLabel = function(componentId) {
+  $scope.printPackLabel = function(component) {
     $scope.serverErrorMessage = null;
-    LabellingService.printPackLabel(componentId, function(response) {
+    LabellingService.printPackLabel(component.id, function(response) {
       $scope.labelZPL = response.labelZPL;
       $log.debug('$scope.labelZPL: ', $scope.labelZPL);
+      $scope.verifyComponent = component;
     }, function(err) {
       if (err.errorCode === 'CONFLICT') {
         $scope.serverErrorMessage = 'This component cannot be labelled - please check the status of the donor and donation';
@@ -97,12 +100,14 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.search = {};
     $scope.searchResults = null;
     $scope.serverErrorMessage = null;
+    $scope.clearLabelVerificationForm();
   };
 
   $scope.clearLabelVerificationForm = function() {
     $scope.searchResults = null;
     $scope.verificationParams.prePrintedDIN = null;
     $scope.verificationParams.packLabelDIN = null;
+    $scope.verifyComponent = null;
   };
 
   $scope.onTextClick = function($event) {
