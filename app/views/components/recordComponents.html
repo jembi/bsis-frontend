@@ -93,6 +93,31 @@
             </div>
           </div>
         </div>
+        <div class="clearfix form-group">
+        <label class="col-sm-2 control-label">Processing Date & Time:</label>
+        <div class="row col-sm-10">
+          <div class="time form-inline" style="padding-left:5px; width:250px;">
+            <dateselect style="width:200px" name="processedOnDate" ng-model="component.processedOn" format="dateFormat" ng-class="{'has-error' : (recordComponentsForm.processedOnDate.$invalid)}" ng-required="true" maxdate="0" ng-model-options="{ allowInvalid: true }" ></dateselect> 
+            <small class="error" ng-show="(recordComponentsForm.processedOnDate.$error.required || recordComponentsForm.processedOnDate.$error.required)">
+              Select a valid date
+            </small>
+            <small class="error" ng-show="(recordComponentsForm.processedOnDate.$error.maxdate)">
+              Date is in the future: please re-enter
+            </small>
+          </div>
+          <div class="time form-group">
+            <label for="" class="col-sm-1 control-label">Time:</label>
+            <div class="row col-sm-2">
+                <div style="padding-left:5px;" >
+                    <uib-timepicker ng-model="component.processedOn" name="processedOnTime" show-spinners="false" ng-required="submitted"></uib-timepicker>
+                    <small class="error" ng-show="recordComponentsForm.processedOnTime.$error.time">
+                        Enter a valid time
+                    </small>
+                </div> 
+            </div>
+          </div>
+        </div>
+      </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-3">
             <button class="btn btn-primary" type="submit" ng-disabled="recordingComponents">

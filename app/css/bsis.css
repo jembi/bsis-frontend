@@ -752,3 +752,8 @@ a[disabled] {
 .panel-confirm {
   border-color:red;
 }
+
+.time {
+    width: 50%;  
+    float: left;
+}
