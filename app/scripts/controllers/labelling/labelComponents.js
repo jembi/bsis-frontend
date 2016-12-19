@@ -45,28 +45,28 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
 
   $scope.verifyPackLabel = function(component, labellingVerificationForm) {
     $scope.verifying = true;
-    try {
-      if (labellingVerificationForm.$invalid) {
-        return;
-      }
-      if ($scope.verificationParams.prePrintedDIN === $scope.verificationParams.packLabelDIN) {
-        $scope.verificationStatus = 'sameDinScanned';
-        return;
-      }
-      $scope.verificationParams.componentId = component.id;
-      LabellingService.verifyPackLabel($scope.verificationParams, function(response) {
-        if (response.labelVerified) {
-          component.verificationStatus = 'verified';
-          $scope.clearLabelVerificationForm(labellingVerificationForm);
-        } else {
-          $scope.verificationStatus = 'notVerified';
-        }
-      }, function(err) {
-        $log.error(err);
-      });
-    } finally {
+    if (labellingVerificationForm.$invalid) {
       $scope.verifying = false;
+      return;
     }
+    if ($scope.verificationParams.prePrintedDIN === $scope.verificationParams.packLabelDIN) {
+      $scope.verificationStatus = 'sameDinScanned';
+      $scope.verifying = false;
+      return;
+    }
+    $scope.verificationParams.componentId = component.id;
+    LabellingService.verifyPackLabel($scope.verificationParams, function(response) {
+      if (response.labelVerified) {
+        component.verificationStatus = 'verified';
+        $scope.clearLabelVerificationForm(labellingVerificationForm);
+      } else {
+        $scope.verificationStatus = 'notVerified';
+      }
+      $scope.verifying = false;
+    }, function(err) {
+      $log.error(err);
+      $scope.verifying = false;
+    });
   };
 
   $scope.printPackLabel = function(component) {
