@@ -32,8 +32,7 @@ angular.module('bsis')
       }
     };
 
-    $scope.clearPreProcessForm = function(event) {
-      event.preventDefault();
+    $scope.clearPreProcessForm = function() {
       if ($scope.component) {
         $scope.component = angular.copy(originalComponent);
       }
