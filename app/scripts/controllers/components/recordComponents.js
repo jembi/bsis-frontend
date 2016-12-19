@@ -9,6 +9,7 @@ angular.module('bsis')
     };
     $scope.preProcessing = false;
     $scope.unprocessing = false;
+    var originalComponent = null;
     var forms = $scope.forms = {};
 
     $scope.clear = function() {
@@ -31,9 +32,10 @@ angular.module('bsis')
       }
     };
 
-    $scope.clearWeight = function() {
+    $scope.clearPreProcessForm = function(event) {
+      event.preventDefault();
       if ($scope.component) {
-        $scope.component.weight = null;
+        $scope.component = angular.copy(originalComponent);
       }
       if (forms.preProcessForm) {
         forms.preProcessForm.$setPristine();
@@ -270,6 +272,7 @@ angular.module('bsis')
             $scope.component = null;
           } else {
             $scope.component = angular.copy(selectedRows[0]);
+            originalComponent = angular.copy(selectedRows[0]);
           }
         });
       }
