@@ -78,15 +78,15 @@
             <div class="time form-group">
               <label for="" class="col-sm-2 control-label">End</label>
               <div class="row col-sm-10" style="padding-left:5px;">
-                  <uib-timepicker ng-model="component.bleedEndTime" name="bleedEndTime" show-spinners="false" ng-required="submitted"></uib-timepicker>
+                  <uib-timepicker ng-model="component.bleedEndTime" name="bleedEndTime" show-spinners="false" ng-required="submitted" ng-class="{'has-error' : (forms.preProcessForm.bleedEndTime.$error.invalidTimeRange || forms.preProcessForm.bleedEndTime.$error.sameTimeEntered)}"></uib-timepicker>
                   <div>
                     <small class="error" ng-show="forms.preProcessForm.bleedEndTime.$error.time">
                         Enter a valid time
                     </small>
-                    <small class="error" ng-show="forms.preProcessForm.bleedEndTime.$error.invalidTimeRange && forms.preProcessForm.$submitted && !forms.preProcessForm.bleedStartTime.$error.time && !forms.preProcessForm.bleedEndTime.$error.time">
+                    <small class="error" ng-show="forms.preProcessForm.bleedEndTime.$error.invalidTimeRange && !forms.preProcessForm.bleedStartTime.$error.time && !forms.preProcessForm.bleedEndTime.$error.time">
                         End time should be after Start time
                     </small>
-                    <small class="error" ng-show="forms.preProcessForm.bleedEndTime.$error.sameTimeEntered && forms.preProcessForm.$submitted && !forms.preProcessForm.bleedStartTime.$error.time && !forms.preProcessForm.bleedEndTime.$error.time">
+                    <small class="error" ng-show="forms.preProcessForm.bleedEndTime.$error.sameTimeEntered && !forms.preProcessForm.bleedStartTime.$error.time && !forms.preProcessForm.bleedEndTime.$error.time">
                         Start and end bleed times are the same: please re-enter
                     </small>
                   </div>

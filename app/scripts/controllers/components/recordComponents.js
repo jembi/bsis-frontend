@@ -37,6 +37,8 @@ angular.module('bsis')
         $scope.component = angular.copy(originalComponent);
       }
       if (forms.preProcessForm) {
+        $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
+        $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', true);
         forms.preProcessForm.$setPristine();
       }
     };
