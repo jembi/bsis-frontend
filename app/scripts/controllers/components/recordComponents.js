@@ -118,22 +118,22 @@ angular.module('bsis')
 
     $scope.preProcessSelectedComponent = function() {
 
-      if (forms.preProcessForm.$invalid) {
-        return;
-      }
-
       var startTime = new Date($scope.component.bleedStartTime);
       var endTime = new Date($scope.component.bleedEndTime);
 
-      $scope.sameTimeEntered = false;
+      $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
       if ((startTime - endTime) === 0) {
-        $scope.sameTimeEntered = true;
+        $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', false);
         return;
       }
 
-      $scope.invalidTimeRange = false;
+      $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', true);
       if (startTime > endTime) {
-        $scope.invalidTimeRange = true;
+        $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', false);
+        return;
+      }
+
+      if (forms.preProcessForm.$invalid) {
         return;
       }
 
