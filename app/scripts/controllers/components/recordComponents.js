@@ -9,7 +9,6 @@ angular.module('bsis')
     };
     $scope.preProcessing = false;
     $scope.unprocessing = false;
-    $scope.sameTimeEntered = false;
     var forms = $scope.forms = {};
 
     $scope.clear = function() {
@@ -121,13 +120,22 @@ angular.module('bsis')
         return;
       }
 
-      $scope.preProcessing = true;
-      if ($scope.component.bleedStartTime === $scope.component.bleedEndTime) {
+      var startTime = new Date($scope.component.bleedStartTime);
+      var endTime = new Date($scope.component.bleedEndTime);
+
+      $scope.sameTimeEntered = false;
+      if ((startTime - endTime) === 0) {
         $scope.sameTimeEntered = true;
-        $scope.preProcessing = false;
         return;
       }
 
+      $scope.invalidTimeRange = false;
+      if (startTime > endTime) {
+        $scope.invalidTimeRange = true;
+        return;
+      }
+
+      $scope.preProcessing = true;
       showComponentWeightConfirmation($scope.component).then(function() {
 
         ComponentService.preProcess({}, $scope.component, function(res) {
