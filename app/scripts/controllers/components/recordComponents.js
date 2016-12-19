@@ -121,15 +121,15 @@ angular.module('bsis')
       var startTime = new Date($scope.component.bleedStartTime);
       var endTime = new Date($scope.component.bleedEndTime);
 
-      $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
-      if ((startTime - endTime) === 0) {
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', false);
-        return;
-      }
-
       $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', true);
       if (startTime > endTime) {
         $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', false);
+        return;
+      }
+
+      $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
+      if ((endTime - startTime) < 60000) {
+        $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', false);
         return;
       }
 
