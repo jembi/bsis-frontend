@@ -14,6 +14,9 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     prePrintedDIN: null,
     packLabelDIN: null
   };
+  $scope.verifyComponent = null;
+  $scope.verifying = false;
+  $scope.verificationStatus = '';
 
   $scope.getComponents = function(form) {
 
@@ -29,6 +32,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       $scope.components = response.components;
       $scope.searchResults = true;
       $scope.searching = false;
+      $scope.clearLabelVerificationForm();
     }, function(err) {
       $log.error(err);
       $scope.searching = false;
@@ -39,22 +43,25 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.getComponents();
   }
 
-  $scope.verifyPackLabel = function(componentId, labellingVerificationForm) {
-    $scope.sameDinScanned = false;
-    $scope.labelVerified = false;
+  $scope.verifyPackLabel = function(component, labellingVerificationForm) {
+    $scope.verifying = true;
     if (labellingVerificationForm.$invalid) {
-      return;
-    }
-    if ($scope.verificationParams.prePrintedDIN === $scope.verificationParams.packLabelDIN) {
-      $scope.sameDinScanned = true;
       $scope.verifying = false;
       return;
     }
-    $scope.submitted = true;
-    $scope.verifying = true;
-    $scope.verificationParams.componentId = componentId;
-    LabellingService.verifyPackLabel($scope.verificationParams, function(res) {
-      $scope.labelVerified = res.labelVerified;
+    if ($scope.verificationParams.prePrintedDIN === $scope.verificationParams.packLabelDIN) {
+      $scope.verificationStatus = 'sameDinScanned';
+      $scope.verifying = false;
+      return;
+    }
+    $scope.verificationParams.componentId = component.id;
+    LabellingService.verifyPackLabel($scope.verificationParams, function(response) {
+      if (response.labelVerified) {
+        component.verificationStatus = 'verified';
+        $scope.clearLabelVerificationForm(labellingVerificationForm);
+      } else {
+        $scope.verificationStatus = 'notVerified';
+      }
       $scope.verifying = false;
     }, function(err) {
       $log.error(err);
@@ -62,11 +69,12 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     });
   };
 
-  $scope.printPackLabel = function(componentId) {
+  $scope.printPackLabel = function(component) {
     $scope.serverErrorMessage = null;
-    LabellingService.printPackLabel(componentId, function(response) {
+    LabellingService.printPackLabel(component.id, function(response) {
       $scope.labelZPL = response.labelZPL;
       $log.debug('$scope.labelZPL: ', $scope.labelZPL);
+      $scope.verifyComponent = component;
     }, function(err) {
       if (err.errorCode === 'CONFLICT') {
         $scope.serverErrorMessage = 'This component cannot be labelled - please check the status of the donor and donation';
@@ -93,6 +101,16 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.search = {};
     $scope.searchResults = null;
     $scope.serverErrorMessage = null;
+    $scope.clearLabelVerificationForm();
+  };
+
+  $scope.clearLabelVerificationForm = function(form) {
+    $scope.verifyComponent = null;
+    $scope.verificationParams = {};
+    if (form) {
+      form.$setPristine();
+      form.$setUntouched();
+    }
   };
 
   $scope.onTextClick = function($event) {
