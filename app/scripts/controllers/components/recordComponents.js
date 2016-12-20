@@ -7,10 +7,10 @@ angular.module('bsis')
     $scope.componentsSearch = {
       donationIdentificationNumber: $routeParams.donationIdentificationNumber || ''
     };
-    $scope.preProcessing = false;
+    $scope.recordingWeight = false;
     $scope.unprocessing = false;
-    $scope.sameTimeEntered = false;
     $scope.dateFormat = DATEFORMAT;
+    $scope.maxProcessedOnDate = moment().endOf('day').toDate();
     var forms = $scope.forms = {};
 
     $scope.clear = function() {
@@ -24,10 +24,10 @@ angular.module('bsis')
       });
     };
 
-    $scope.clearComponentTypeCombination = function() {
+    $scope.clearRecordComponentForm = function() {
       if ($scope.component) {
         $scope.component.componentTypeCombination = null;
-        $scope.component.processedOn = new Date();
+        $scope.component.processedOn = moment().toDate();
       }
       if (forms.recordComponentsForm) {
         forms.recordComponentsForm.$setPristine();
@@ -38,8 +38,8 @@ angular.module('bsis')
       if ($scope.component) {
         $scope.component.weight = null;
       }
-      if (forms.preProcessForm) {
-        forms.preProcessForm.$setPristine();
+      if (forms.recordWeightForm) {
+        forms.recordWeightForm.$setPristine();
       }
     };
 
@@ -118,22 +118,17 @@ angular.module('bsis')
       return $q.resolve();
     }
 
-    $scope.preProcessSelectedComponent = function() {
+    $scope.recordWeightForSelectedComponent = function() {
 
-      if (forms.preProcessForm.$invalid) {
+      if (forms.recordWeightForm.$invalid) {
         return;
       }
 
-      $scope.preProcessing = true;
-      if ($scope.component.bleedStartTime === $scope.component.bleedEndTime) {
-        $scope.sameTimeEntered = true;
-        $scope.preProcessing = false;
-        return;
-      }
+      $scope.recordingWeight = true;
 
       showComponentWeightConfirmation($scope.component).then(function() {
 
-        ComponentService.preProcess({}, $scope.component, function(res) {
+        ComponentService.updateWeight({}, $scope.component, function(res) {
           $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
             // Replace the component in the grid with the updated component
             if (component.id === res.component.id) {
@@ -151,15 +146,15 @@ angular.module('bsis')
           // Make sure that the row remains selected
           $timeout(function() {
             $scope.gridApi.selection.selectRow(res.component);
-            $scope.preProcessing = false;
+            $scope.recordingWeight = false;
           });
         }, function(err) {
           $log.error(err);
-          $scope.preProcessing = false;
+          $scope.recordingWeight = false;
         });
       }).catch(function() {
         // Confirmation was rejected
-        $scope.preProcessing = false;
+        $scope.recordingWeight = false;
       });
     };
 
