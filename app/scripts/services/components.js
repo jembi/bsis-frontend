@@ -49,6 +49,6 @@ angular.module('bsis')
       discard: Api.Components.discard,
       unprocess: Api.Components.unprocess,
       undiscard: Api.Components.undiscard,
-      updateWeight: Api.Components.updateWeight
+      preProcess: Api.Components.preProcess
     };
   });

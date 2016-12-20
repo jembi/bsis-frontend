@@ -7,8 +7,9 @@ angular.module('bsis')
     $scope.componentsSearch = {
       donationIdentificationNumber: $routeParams.donationIdentificationNumber || ''
     };
-    $scope.recordingWeight = false;
+    $scope.preProcessing = false;
     $scope.unprocessing = false;
+    var originalComponent = null;
     var forms = $scope.forms = {};
 
     $scope.clear = function() {
@@ -31,12 +32,14 @@ angular.module('bsis')
       }
     };
 
-    $scope.clearWeight = function() {
+    $scope.clearPreProcessForm = function() {
       if ($scope.component) {
-        $scope.component.weight = null;
+        $scope.component = angular.copy(originalComponent);
       }
-      if (forms.recordWeightForm) {
-        forms.recordWeightForm.$setPristine();
+      if (forms.preProcessForm) {
+        $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
+        $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', true);
+        forms.preProcessForm.$setPristine();
       }
     };
 
@@ -114,17 +117,31 @@ angular.module('bsis')
       return $q.resolve();
     }
 
-    $scope.recordWeightForSelectedComponent = function() {
+    $scope.preProcessSelectedComponent = function() {
 
-      if (forms.recordWeightForm.$invalid) {
+      var startTime = new Date($scope.component.bleedStartTime);
+      var endTime = new Date($scope.component.bleedEndTime);
+
+      $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', true);
+      if (startTime > endTime) {
+        $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', false);
         return;
       }
 
-      $scope.recordingWeight = true;
+      $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
+      if ((moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) < 1) {
+        $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', false);
+        return;
+      }
 
+      if (forms.preProcessForm.$invalid) {
+        return;
+      }
+
+      $scope.preProcessing = true;
       showComponentWeightConfirmation($scope.component).then(function() {
 
-        ComponentService.updateWeight({}, $scope.component, function(res) {
+        ComponentService.preProcess({}, $scope.component, function(res) {
           $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
             // Replace the component in the grid with the updated component
             if (component.id === res.component.id) {
@@ -142,15 +159,15 @@ angular.module('bsis')
           // Make sure that the row remains selected
           $timeout(function() {
             $scope.gridApi.selection.selectRow(res.component);
-            $scope.recordingWeight = false;
+            $scope.preProcessing = false;
           });
         }, function(err) {
           $log.error(err);
-          $scope.recordingWeight = false;
+          $scope.preProcessing = false;
         });
       }).catch(function() {
         // Confirmation was rejected
-        $scope.recordingWeight = false;
+        $scope.preProcessing = false;
       });
     };
 
@@ -256,6 +273,7 @@ angular.module('bsis')
             $scope.component = null;
           } else {
             $scope.component = angular.copy(selectedRows[0]);
+            originalComponent = angular.copy(selectedRows[0]);
           }
         });
       }
