@@ -78,7 +78,7 @@
             <div class="time form-group">
               <label for="" class="col-sm-2 control-label">End</label>
               <div class="row col-sm-10" style="padding-left:5px;">
-                  <uib-timepicker ng-model="component.bleedEndTime" name="bleedEndTime" show-spinners="false" ng-required="submitted" ng-class="{'has-error' : (forms.preProcessForm.bleedEndTime.$error.invalidTimeRange || forms.preProcessForm.bleedEndTime.$error.sameTimeEntered)}"></uib-timepicker>
+                  <uib-timepicker ng-model="component.bleedEndTime" name="bleedEndTime" show-spinners="false" ng-required="submitted" ng-class="{'has-error' : (forms.preProcessForm.bleedEndTime.$invalid)}"></uib-timepicker>
                   <div>
                     <ng-messages for="forms.preProcessForm.bleedEndTime.$error" ng-show="forms.preProcessForm.$submitted">
                       <ng-messages-include src="messages.html"></ng-messages-include>
