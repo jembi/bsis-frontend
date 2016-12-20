@@ -129,7 +129,7 @@ angular.module('bsis')
       }
 
       $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
-      if ((endTime - startTime) < 60000) {
+      if ((moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) < 1) {
         $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', false);
         return;
       }
