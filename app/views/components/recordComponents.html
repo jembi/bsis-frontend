@@ -5,8 +5,8 @@
   <form class="form-horizontal col-sm-12" name="forms.findComponentsForm" role="form" novalidate ng-submit="getComponentsByDIN();clearPreProcessForm();clearComponentTypeCombination();">
     <div class="form-group">
       <label for="name" class="col-sm-1 control-label">DIN</label>
-      <div class="row col-sm-11">
-        <div class="form-inline" style="padding-left:5px;">
+      <div class="col-sm-11">
+        <div class="form-inline">
           <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" ng-model="componentsSearch.donationIdentificationNumber" required />
         </div>
       </div>
@@ -57,7 +57,7 @@
       <form role="form" name="forms.preProcessForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canRecordWeight" ng-submit="preProcessSelectedComponent()" novalidate>
         <div class="form-group">
           <label for="componentWeight" class="col-sm-2 control-label">Component Weight</label>
-          <div class="col-sm-10" style="padding-left:5px;">
+          <div class="col-sm-10">
             <input name="componentWeight" class="form-control input-sm" style="width:auto;" type="number" ng-min="1" ng-max="999" ng-model="component.weight" required />
             <ng-messages for="forms.preProcessForm.componentWeight.$error" ng-show="forms.preProcessForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
@@ -66,8 +66,8 @@
         </div>
         <div class="form-group">
           <label for="bleedStartTime" class="col-sm-2 control-label">Bleed times: Start</label>
-          <div class="row col-sm-10">
-            <div class="time" style="padding-left:5px; width:150px;">
+          <div class="col-sm-10">
+            <div class="time" style="width:150px;">
                 <uib-timepicker ng-model="component.bleedStartTime" name="bleedStartTime" show-spinners="false"></uib-timepicker>
                 <div>
                   <ng-messages for="forms.preProcessForm.bleedStartTime.$error" ng-show="forms.preProcessForm.$submitted">
@@ -77,7 +77,7 @@
             </div>
             <div class="time form-group">
               <label for="bleedEndTime" class="col-sm-2 control-label">End</label>
-              <div class="row col-sm-10" style="padding-left:5px;">
+              <div class="col-sm-10">
                   <uib-timepicker ng-model="component.bleedEndTime" name="bleedEndTime" show-spinners="false" ng-required="submitted" ng-class="{'has-error' : (forms.preProcessForm.bleedEndTime.$invalid)}"></uib-timepicker>
                   <div>
                     <ng-messages for="forms.preProcessForm.bleedEndTime.$error" ng-show="forms.preProcessForm.$submitted">
@@ -101,8 +101,8 @@
         <br/>
         <div class="form-group">
           <label for="combination" class="col-sm-2 control-label">Process Component</label>
-          <div class="row col-sm-10">
-            <div class="form-inline" style="padding-left:5px;">
+          <div class="col-sm-10">
+            <div class="form-inline">
               <span ng-if="component && component.componentType.producedComponentTypeCombinations.length > 0">
                 <select name="combination" class="form-control input-sm" ng-model="component.componentTypeCombination"
                                                                          ng-options="item as item.combinationName for item in component.componentType.producedComponentTypeCombinations"
@@ -118,8 +118,8 @@
         </div>
         <div class="clearfix form-group">
         <label for="processedOnDate" class="col-sm-2 control-label">Processing Date</label>
-        <div class="row col-sm-10">
-          <div class="time form-inline" style="padding-left:5px; width:210;">
+        <div class="col-sm-10">
+          <div class="time form-inline" style="width:210;">
             <dateselect style="width:210px" name="processedOnDate" ng-model="component.processedOn" format="dateFormat" ng-class="{'has-error' : (forms.recordComponentsForm.processedOnDate.$invalid)}" ng-required="true" max-date="maxProcessedOnDate" ng-model-options="{ allowInvalid: false }" ></dateselect>
             <ng-messages for="forms.recordComponentsForm.processedOnDate.$error" role="alert" ng-show="forms.recordComponentsForm.$submitted">
               <ng-messages-include src="messages.html"></ng-messages-include>
@@ -127,8 +127,8 @@
           </div>
           <div class="time form-group">
             <label for="processedOnTime" class="col-sm-1 control-label">Time</label>
-            <div class="row col-sm-2">
-                <div style="padding-left:5px;" >
+            <div class="col-sm-2">
+                <div>
                   <uib-timepicker ng-model="component.processedOn" name="processedOnTime" show-spinners="false" ng-required="submitted"></uib-timepicker>
                   <ng-messages for="forms.recordComponentsForm.processedOnTime.$error" ng-show="forms.recordComponentsForm.$submitted">
                     <ng-messages-include src="messages.html"></ng-messages-include>
