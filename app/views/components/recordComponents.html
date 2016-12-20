@@ -2,7 +2,7 @@
 <div class="col-sm-9 col-md-10 main">
   <h3 class="page-header">Record Components</h3>
 
-  <form class="form-horizontal col-sm-12" name="forms.findComponentsForm" role="form" novalidate ng-submit="getComponentsByDIN();clearWeight();clearComponentTypeCombination();">
+  <form class="form-horizontal col-sm-12" name="forms.findComponentsForm" role="form" novalidate ng-submit="getComponentsByDIN();clearPreProcessForm();clearComponentTypeCombination();">
     <div class="form-group">
       <label for="name" class="col-sm-1 control-label">DIN</label>
       <div class="row col-sm-11">
@@ -19,7 +19,7 @@
     <div class="form-group">
       <div class="col-sm-offset-1 col-sm-3">
         <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}} </button>
-        <button class="btn btn-primary" type="button" ng-click="clear();clearWeight();clearComponentTypeCombination();">Clear</button>
+        <button class="btn btn-primary" type="button" ng-click="clear();clearPreProcessForm();clearComponentTypeCombination();">Clear</button>
       </div>
     </div>
   </form>
@@ -53,21 +53,45 @@
         </div>
       </div>
 
-      <!-- Record weight form -->
-      <form role="form" name="forms.recordWeightForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canRecordWeight" ng-submit="recordWeightForSelectedComponent()" novalidate>
+      <!-- Component pre process form -->
+      <form role="form" name="forms.preProcessForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canRecordWeight" ng-submit="preProcessSelectedComponent()" novalidate>
         <div class="form-group">
           <label for="componentWeight" class="col-sm-2 control-label">Component Weight</label>
           <div class="col-sm-10" style="padding-left:5px;">
             <input name="componentWeight" class="form-control input-sm" style="width:auto;" type="number" ng-min="1" ng-max="999" ng-model="component.weight" required />
-            <ng-messages for="forms.recordWeightForm.componentWeight.$error" ng-show="forms.recordWeightForm.$submitted">
+            <ng-messages for="forms.preProcessForm.componentWeight.$error" ng-show="forms.preProcessForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
           </div>
         </div>
         <div class="form-group">
+          <label for="" class="col-sm-2 control-label">Bleed times: Start</label>
+          <div class="row col-sm-10">
+            <div class="time" style="padding-left:5px; width:150px;">
+                <uib-timepicker ng-model="component.bleedStartTime" name="bleedStartTime" show-spinners="false"></uib-timepicker>
+                <div>
+                  <ng-messages for="forms.preProcessForm.bleedStartTime.$error" ng-show="forms.preProcessForm.$submitted">
+                    <ng-messages-include src="messages.html"></ng-messages-include>
+                  </ng-messages>
+                </div>
+            </div>
+            <div class="time form-group">
+              <label for="" class="col-sm-2 control-label">End</label>
+              <div class="row col-sm-10" style="padding-left:5px;">
+                  <uib-timepicker ng-model="component.bleedEndTime" name="bleedEndTime" show-spinners="false" ng-required="submitted" ng-class="{'has-error' : (forms.preProcessForm.bleedEndTime.$invalid)}"></uib-timepicker>
+                  <div>
+                    <ng-messages for="forms.preProcessForm.bleedEndTime.$error" ng-show="forms.preProcessForm.$submitted">
+                      <ng-messages-include src="messages.html"></ng-messages-include>
+                    </ng-messages>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
           <div class="col-sm-3 col-sm-offset-2">
-            <button type="submit" class="btn btn-primary" ng-disabled="recordingWeight">{{recordingWeight ? "Saving..." : "Save"}}</button>
-            <button type="reset" class="btn btn-primary" ng-disabled="recordingWeight" ng-click="clearWeight();">Clear</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="preProcessing">{{preProcessing ? "Saving..." : "Save"}}</button>
+            <button type="button" class="btn btn-primary" ng-disabled="preProcessing" ng-click="clearPreProcessForm();">Clear</button>
           </div>
         </div>
       </form>
