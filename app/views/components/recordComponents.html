@@ -110,14 +110,9 @@
                   <option value="" ng-disabled="true">Select:</option>
                 </select>
               </span>
-              <div>
-              <ng-messages for="forms.recordComponentsForm.combination.$error" role="alert" ng-show="(forms.recordComponentsForm.$submitted)">
+              <ng-messages for="forms.recordComponentsForm.combination.$error" role="alert" ng-show="forms.recordComponentsForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
-                <small class="error" ng-show="(forms.recordComponentsForm.combination.$invalid && (forms.recordComponentsForm.combination.$dirty || submitted))">
-                  This cannot be empty
-                </small>
-              </div>
             </div>
           </div>
         </div>
