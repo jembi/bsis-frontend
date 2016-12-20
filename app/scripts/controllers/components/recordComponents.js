@@ -33,6 +33,7 @@ angular.module('bsis')
       }
       if (forms.recordComponentsForm) {
         forms.recordComponentsForm.$setPristine();
+        forms.recordComponentsForm.processedOnDate.$setValidity('dateInFuture', true);
       }
     };
 
