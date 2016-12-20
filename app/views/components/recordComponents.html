@@ -111,7 +111,7 @@
                 </select>
               </span>
               <div>
-              <ng-messages for="forms.recordComponentsForm.processedOnDate.$error" role="alert" ng-show="(forms.recordComponentsForm.$submitted)">
+              <ng-messages for="forms.recordComponentsForm.combination.$error" role="alert" ng-show="(forms.recordComponentsForm.$submitted)">
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
                 <small class="error" ng-show="(forms.recordComponentsForm.combination.$invalid && (forms.recordComponentsForm.combination.$dirty || submitted))">
@@ -126,14 +126,9 @@
         <div class="row col-sm-10">
           <div class="time form-inline" style="padding-left:5px; width:210;">
             <dateselect style="width:210px" name="processedOnDate" ng-model="component.processedOn" format="dateFormat" ng-class="{'has-error' : (recordComponentsForm.processedOnDate.$invalid)}" ng-required="true" max-date="maxProcessedOnDate" ng-model-options="{ allowInvalid: false }" ></dateselect>
-            <ng-messages for="recordComponentsForm.processedOnDate.$error" role="alert" ng-show="(recordComponentsForm.$submitted)">
+            <ng-messages for="forms.recordComponentsForm.processedOnDate.$error" role="alert" ng-show="(forms.recordComponentsForm.$submitted)">
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
-            <div> 
-              <small class="error" ng-show="component.processedOn > maxProcessedOnDate">
-                Cannot be a future date
-              </small>
-            </div>  
           </div>
           <div class="time form-group">
             <label for="" class="col-sm-1 control-label">Time </label>
