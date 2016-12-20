@@ -70,9 +70,9 @@
             <div class="time" style="padding-left:5px; width:150px;">
                 <uib-timepicker ng-model="component.bleedStartTime" name="bleedStartTime" show-spinners="false"></uib-timepicker>
                 <div>
-                  <small class="error" ng-show="forms.preProcessForm.bleedStartTime.$error.time">
-                      Enter a valid time
-                  </small>
+                  <ng-messages for="forms.preProcessForm.bleedStartTime.$error" ng-show="forms.preProcessForm.$submitted">
+                    <ng-messages-include src="messages.html"></ng-messages-include>
+                  </ng-messages>
                 </div>
             </div>
             <div class="time form-group">
@@ -80,15 +80,9 @@
               <div class="row col-sm-10" style="padding-left:5px;">
                   <uib-timepicker ng-model="component.bleedEndTime" name="bleedEndTime" show-spinners="false" ng-required="submitted" ng-class="{'has-error' : (forms.preProcessForm.bleedEndTime.$error.invalidTimeRange || forms.preProcessForm.bleedEndTime.$error.sameTimeEntered)}"></uib-timepicker>
                   <div>
-                    <small class="error" ng-show="forms.preProcessForm.bleedEndTime.$error.time">
-                        Enter a valid time
-                    </small>
-                    <small class="error" ng-show="forms.preProcessForm.bleedEndTime.$error.invalidTimeRange && !forms.preProcessForm.bleedStartTime.$error.time && !forms.preProcessForm.bleedEndTime.$error.time">
-                        End time should be after Start time
-                    </small>
-                    <small class="error" ng-show="forms.preProcessForm.bleedEndTime.$error.sameTimeEntered && !forms.preProcessForm.bleedStartTime.$error.time && !forms.preProcessForm.bleedEndTime.$error.time">
-                        Start and end bleed times are the same: please re-enter
-                    </small>
+                    <ng-messages for="forms.preProcessForm.bleedEndTime.$error" ng-show="forms.preProcessForm.$submitted">
+                      <ng-messages-include src="messages.html"></ng-messages-include>
+                    </ng-messages>
                   </div>
               </div>
             </div>
