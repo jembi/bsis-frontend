@@ -30,6 +30,8 @@ angular.module('bsis')
       if ($scope.component) {
         $scope.component.componentTypeCombination = null;
         $scope.component.processedOn = moment().toDate();
+        $scope.forms.recordComponentsForm.processedOnDate.$setValidity('dateInFuture', true);
+        $scope.forms.recordComponentsForm.processedOnTime.$setValidity('time', true);
       }
       if (forms.recordComponentsForm) {
         forms.recordComponentsForm.$setPristine();
@@ -58,6 +60,12 @@ angular.module('bsis')
       $scope.forms.recordComponentsForm.processedOnDate.$setValidity('dateInFuture', true);
       if (componentToRecord.processedOn > $scope.maxProcessedOnDate) {
         $scope.forms.recordComponentsForm.processedOnDate.$setValidity('dateInFuture', false);
+        return;
+      }
+
+      $scope.forms.recordComponentsForm.processedOnTime.$setValidity('time', true);
+      if (componentToRecord.processedOn > moment().toDate()) {
+        $scope.forms.recordComponentsForm.processedOnTime.$setValidity('time', false);
         return;
       }
 
