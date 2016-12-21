@@ -100,23 +100,6 @@
       <form name="forms.recordComponentsForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canProcess" ng-submit="confirmProcessLabledComponent()" novalidate>
         <br/>
         <div class="form-group">
-          <label for="combination" class="col-sm-2 control-label">Process Component</label>
-          <div class="col-sm-10">
-            <div class="form-inline">
-              <span ng-if="component && component.componentType.producedComponentTypeCombinations.length > 0">
-                <select name="combination" class="form-control input-sm" ng-model="component.componentTypeCombination"
-                                                                         ng-options="item as item.combinationName for item in component.componentType.producedComponentTypeCombinations"
-                                                                         required>
-                  <option value="" ng-disabled="true">Select:</option>
-                </select>
-              </span>
-              <ng-messages for="forms.recordComponentsForm.combination.$error" role="alert" ng-show="forms.recordComponentsForm.$submitted">
-                <ng-messages-include src="messages.html"></ng-messages-include>
-              </ng-messages>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
           <label for="processedOnDate" class="col-sm-2 control-label">Processing Date</label>
           <div class="col-sm-10">
             <div class="time form-inline"  style="width:150px;">
@@ -135,6 +118,23 @@
                     </ng-messages>
                   </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="combination" class="col-sm-2 control-label">Process Component</label>
+          <div class="col-sm-10">
+            <div class="form-inline">
+              <span ng-if="component && component.componentType.producedComponentTypeCombinations.length > 0">
+                <select name="combination" class="form-control input-sm" ng-model="component.componentTypeCombination"
+                                                                         ng-options="item as item.combinationName for item in component.componentType.producedComponentTypeCombinations"
+                                                                         required>
+                  <option value="" ng-disabled="true">Select:</option>
+                </select>
+              </span>
+              <ng-messages for="forms.recordComponentsForm.combination.$error" role="alert" ng-show="forms.recordComponentsForm.$submitted">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
             </div>
           </div>
         </div>
