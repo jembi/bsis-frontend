@@ -11,6 +11,7 @@ angular.module('bsis')
     $scope.unprocessing = false;
     $scope.dateFormat = DATEFORMAT;
     $scope.maxProcessedOnDate = moment().endOf('day').toDate();
+    $scope.processedOn = null;
 
     var originalComponent = null;
     var forms = $scope.forms = {};
@@ -29,7 +30,10 @@ angular.module('bsis')
     $scope.clearRecordComponentForm = function() {
       if ($scope.component) {
         $scope.component.componentTypeCombination = null;
-        $scope.component.processedOn = moment().toDate();
+        $scope.processedOn = {
+          date: moment().toDate(),
+          time: moment().toDate()
+        };
         $scope.forms.recordComponentsForm.processedOnDate.$setValidity('dateInFuture', true);
         $scope.forms.recordComponentsForm.processedOnTime.$setValidity('time', true);
       }
@@ -54,7 +58,7 @@ angular.module('bsis')
       var componentToRecord = {
         parentComponentId: $scope.component.id,
         componentTypeCombination: $scope.component.componentTypeCombination,
-        processedOn: $scope.component.processedOn
+        processedOn: moment($scope.processedOn.date).hour($scope.processedOn.time.getHours()).minutes($scope.processedOn.time.getMinutes())
       };
 
       $scope.forms.recordComponentsForm.processedOnDate.$setValidity('dateInFuture', true);
@@ -293,7 +297,10 @@ angular.module('bsis')
           } else {
             $scope.component = angular.copy(selectedRows[0]);
             originalComponent = angular.copy(selectedRows[0]);
-            $scope.component.processedOn = moment().toDate();
+            $scope.processedOn = {
+              date: moment().toDate(),
+              time: moment().toDate()
+            };
           }
         });
       }
