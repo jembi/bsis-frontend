@@ -1169,11 +1169,21 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
     return {
       require: 'ngModel',
       link: function(scope, element, attr, ngModel) {
-        var startTime = new Date(attr.timeIsAfter);
         ngModel.$validators.invalidTimeRange = function(modelValue) {
+          var startTime = new Date(attr.timeIsAfter);
           var endTime = new Date(modelValue);
           return startTime <= endTime;
         };
+        // Watch and unwatch attr
+        var unwatch = scope.$watch(function() {
+          return attr.timeIsAfter;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-start changes
+          ngModel.$validate();
+        });
+        scope.$on('$destroy', function() {
+          unwatch();
+        });
       }
     };
   })
@@ -1182,11 +1192,21 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
     return {
       require: 'ngModel',
       link: function(scope, element, attr, ngModel) {
-        var startTime = new Date(attr.timeNotSameAs);
         ngModel.$validators.sameTimeEntered = function(modelValue) {
+          var startTime = new Date(attr.timeNotSameAs);
           var endTime = new Date(modelValue);
           return (moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) > 1;
         };
+        // Watch and unwatch attr
+        var unwatch = scope.$watch(function() {
+          return attr.timeNotSameAs;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-start changes
+          ngModel.$validate();
+        });
+        scope.$on('$destroy', function() {
+          unwatch();
+        });
       }
     };
   })
