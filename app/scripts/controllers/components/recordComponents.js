@@ -34,8 +34,6 @@ angular.module('bsis')
           date: moment().toDate(),
           time: moment().toDate()
         };
-        $scope.forms.recordComponentsForm.processedOnDate.$setValidity('dateInFuture', true);
-        $scope.forms.recordComponentsForm.processedOnTime.$setValidity('time', true);
       }
       if (forms.recordComponentsForm) {
         forms.recordComponentsForm.$setPristine();
