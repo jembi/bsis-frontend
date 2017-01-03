@@ -1164,6 +1164,32 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       }
     };
   })
+
+  .directive('timeIsAfter', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModel) {
+        var startTime = new Date(attr.timeIsAfter);
+        ngModel.$validators.invalidTimeRange = function(modelValue) {
+          var endTime = new Date(modelValue);
+          return startTime <= endTime;
+        };
+      }
+    };
+  })
+
+  .directive('timeNotSameAs', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModel) {
+        var startTime = new Date(attr.timeNotSameAs);
+        ngModel.$validators.sameTimeEntered = function(modelValue) {
+          var endTime = new Date(modelValue);
+          return (moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) > 1;
+        };
+      }
+    };
+  })
   ;
 
 var UI = {ADDRESS: {}};

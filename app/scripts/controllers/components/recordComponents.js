@@ -48,8 +48,6 @@ angular.module('bsis')
         $scope.component = angular.copy(originalComponent);
       }
       if (forms.preProcessForm) {
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', true);
         forms.preProcessForm.$setPristine();
       }
     };
@@ -135,21 +133,6 @@ angular.module('bsis')
     }
 
     $scope.preProcessSelectedComponent = function() {
-
-      var startTime = new Date($scope.component.bleedStartTime);
-      var endTime = new Date($scope.component.bleedEndTime);
-
-      $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', true);
-      if (startTime > endTime) {
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', false);
-        return;
-      }
-
-      $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
-      if ((moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) < 1) {
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', false);
-        return;
-      }
 
       if (forms.preProcessForm.$invalid) {
         return;
