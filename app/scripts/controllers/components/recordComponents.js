@@ -77,7 +77,7 @@ angular.module('bsis')
 
     };
 
-    function showComponentWeightConfirmation(component) {
+    function showPreProcessingConfirmation(component) {
 
       // Show confirmation if it is above max weight
       if (component.packType.maxWeight != null && component.weight > component.packType.maxWeight) {
@@ -121,6 +121,16 @@ angular.module('bsis')
         }
       }
 
+      // Show confirmation if bleed times gap is greater or equals to maxBleedTime
+      var bleedTimesGap = moment.duration(moment(component.bleedEndTime).diff(moment(component.bleedStartTime))).asMinutes();
+      if (component.packType.componentType.maxBleedTime != null && bleedTimesGap >= component.packType.componentType.maxBleedTime) {
+        return ModalsService.showConfirmation({
+          title: 'Bleed time exceeded',
+          button: 'Continue',
+          message: 'Platelets from this donation will be flagged as unsafe. Do you want to continue?'
+        });
+      }
+
       // Continue with recording weight
       return $q.resolve();
     }
@@ -132,7 +142,7 @@ angular.module('bsis')
       }
 
       $scope.preProcessing = true;
-      showComponentWeightConfirmation($scope.component).then(function() {
+      showPreProcessingConfirmation($scope.component).then(function() {
 
         ComponentService.preProcess({}, $scope.component, function(res) {
           $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
