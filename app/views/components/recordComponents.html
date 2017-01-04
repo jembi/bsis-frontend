@@ -42,7 +42,7 @@
         </strong>
       </div>
 
-      <div ng-if="component && !component.permissions.canRecordWeight && !component.permissions.canProcess && component.hasComponentBatch" style="clear:left;">
+      <div ng-if="component && !component.permissions.canPreProcess && !component.permissions.canProcess && component.hasComponentBatch" style="clear:left;">
         <strong>
           <em>Selected component cannot be processed further</em>
         </strong>
@@ -54,7 +54,7 @@
       </div>
 
       <!-- Component pre process form -->
-      <form role="form" name="forms.preProcessForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canRecordWeight" ng-submit="preProcessSelectedComponent()" novalidate>
+      <form role="form" name="forms.preProcessForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canPreProcess" ng-submit="preProcessSelectedComponent()" novalidate>
         <div class="form-group">
           <label for="componentWeight" class="col-sm-2 control-label">Component Weight</label>
           <div class="col-sm-10">

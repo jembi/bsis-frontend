@@ -172,7 +172,7 @@
         <div class="form-group" >
             <ui-select name="donationBatches" multiple ng-model="testBatch.donationBatchIds" ui-select-required
                        style="width: 700px;">
-                <ui-select-match placeholder="Select:">{{$item.venue.name}} ({{$item.createdDate | bsisDate}})
+                <ui-select-match placeholder="Select:">{{$item.venue.name}} ({{$item.donationBatchDate | bsisDate}})
                 </ui-select-match>
                 <ui-select-choices
                         repeat="donationBatch.id as donationBatch in testBatchAvailableDonationBatches | filter:$select.search">
