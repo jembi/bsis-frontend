@@ -51,21 +51,16 @@ angular.module('bsis')
     };
 
     var recordComponents = function() {
+
+      if (forms.recordComponentsForm.$invalid) {
+        return;
+      }
+
       var componentToRecord = {
         parentComponentId: $scope.component.id,
         componentTypeCombination: $scope.component.componentTypeCombination,
         processedOn: moment($scope.processedOn.date).hour($scope.processedOn.time.getHours()).minutes($scope.processedOn.time.getMinutes())
       };
-
-      $scope.forms.recordComponentsForm.processedOnDate.$setValidity('dateInFuture', true);
-      if (componentToRecord.processedOn > moment().toDate()) {
-        $scope.forms.recordComponentsForm.processedOnDate.$setValidity('dateInFuture', false);
-        return;
-      }
-
-      if (forms.recordComponentsForm.$invalid) {
-        return;
-      }
 
       $scope.recordingComponents = true;
       ComponentService.recordComponents(componentToRecord, function(recordResponse) {

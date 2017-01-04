@@ -1210,6 +1210,37 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       }
     };
   })
+
+  .directive('dateTimeNotInFuture', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModel) {
+        ngModel.$validators.dateInFuture = function(modelValue) {
+          if (modelValue) {
+            var timeAttr = attr.dateTimeNotInFuture;
+            // If time is a different model value, get it as an attribute. If not, use time from modelValue
+            var date = angular.copy(new Date(modelValue));
+            var time = angular.copy(new Date(timeAttr));
+            if (!timeAttr) {
+              time = date;
+            }
+            var dateTime = moment(date).hour(time.getHours()).minutes(time.getMinutes());
+            return dateTime <= moment().toDate();
+          }
+        };
+        // Watch and unwatch attr
+        var unwatch = scope.$watch(function() {
+          return attr.dateTimeNotInFuture;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-start changes
+          ngModel.$validate();
+        });
+        scope.$on('$destroy', function() {
+          unwatch();
+        });
+      }
+    };
+  })
   ;
 
 var UI = {ADDRESS: {}};
