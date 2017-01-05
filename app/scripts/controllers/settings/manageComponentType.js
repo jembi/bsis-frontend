@@ -8,6 +8,9 @@ angular.module('bsis').controller('ManageComponentTypeCtrl', function($scope, $l
     containsPlasma: false
   };
 
+  $scope.minGravity = 0.001;
+  $scope.maxGravity = 2;
+
   $scope.componentTypeForm = {};
 
   $scope.$watch('componentType.componentTypeCode', function() {
