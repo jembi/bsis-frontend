@@ -12,6 +12,7 @@ angular.module('bsis')
     $scope.dateFormat = DATEFORMAT;
     $scope.maxProcessedOnDate = moment().endOf('day').toDate();
     $scope.processedOn = null;
+    var producedComponentTypesByCombinationId = null;
 
     var originalComponent = null;
     var forms = $scope.forms = {};
@@ -50,6 +51,72 @@ angular.module('bsis')
       }
     };
 
+    function getBleedTimesConfirmationMessage(parentComponent) {
+      // Add to confirmation message if bleed times gap is greater or equals to maxBleedTime
+      var confirmationMessage = '';
+      angular.forEach(producedComponentTypesByCombinationId[parentComponent.componentTypeCombination.id], function(componentType) {
+        var bleedTimesGap = moment.duration(moment(parentComponent.bleedEndTime).diff(moment(parentComponent.bleedStartTime))).asMinutes();
+        if (componentType.maxBleedTime != null && bleedTimesGap >= componentType.maxBleedTime) {
+          // Ignore duplicates
+          if (confirmationMessage.indexOf(componentType.componentTypeName) === -1) {
+            confirmationMessage += ' \'' + componentType.componentTypeName + '\',';
+          }
+        }
+      });
+
+      if (confirmationMessage.length > 0) {
+        confirmationMessage += ' from this donation will be flagged as unsafe. Do you want to continue?';
+      }
+
+      return confirmationMessage;
+    }
+
+    function getTimeSinceDonationConfirmationMessage(parentComponent, processedOn) {
+      // Add to confirmation message if time since donation is greater or equals to maxTimeSinceDonation
+      var confirmationMessage = '';
+      angular.forEach(producedComponentTypesByCombinationId[parentComponent.componentTypeCombination.id], function(componentType) {
+        var timeSinceDonation = moment.duration(moment(processedOn).diff(moment(parentComponent.createdOn))).asHours();
+        if (componentType.maxTimeSinceDonation != null && timeSinceDonation >= componentType.maxTimeSinceDonation) {
+          // Ignore duplicates
+          if (confirmationMessage.indexOf(componentType.componentTypeName) === -1) {
+            confirmationMessage += ' \'' + componentType.componentTypeName + '\',';
+          }
+        }
+      });
+
+      if (confirmationMessage.length > 0) {
+        confirmationMessage += ' from this donation will be flagged as unsafe. Do you want to continue?';
+      }
+
+      return confirmationMessage;
+    }
+
+    function showComponentMaxTimesConfirmation(parentComponent, processedOn) {
+
+      // If bleedTimesConfirmationMessage is not empty, display popup
+      var bleedTimesConfirmationMessage = getBleedTimesConfirmationMessage(parentComponent);
+      if (bleedTimesConfirmationMessage.length > 0) {
+        return ModalsService.showConfirmation({
+          title: 'Bleed time exceeded',
+          button: 'Continue',
+          message: bleedTimesConfirmationMessage
+        });
+      }
+
+      // If timeSinceDonationConfirmationMessage is not empty, display popup
+      var timeSinceDonationConfirmationMessage = getTimeSinceDonationConfirmationMessage(parentComponent, processedOn);
+      if (timeSinceDonationConfirmationMessage.length > 0) {
+        return ModalsService.showConfirmation({
+          title: 'Time since donation exceeded',
+          button: 'Continue',
+          message: timeSinceDonationConfirmationMessage
+        });
+      }
+
+      // Continue with processing
+      return $q.resolve();
+    }
+
     var recordComponents = function() {
 
       if (forms.recordComponentsForm.$invalid) {
@@ -63,18 +130,22 @@ angular.module('bsis')
       };
 
       $scope.recordingComponents = true;
-      ComponentService.recordComponents(componentToRecord, function(recordResponse) {
-        if (recordResponse !== false) {
-          $scope.gridOptions.data = recordResponse.components;
-          forms.recordComponentsForm.$setPristine();
-          $scope.component = null;
-          $scope.recordingComponents = false;
-        } else {
-          // TODO: handle case where response == false
-          $scope.recordingComponents = false;
-        }
+      showComponentMaxTimesConfirmation($scope.component, componentToRecord.processedOn).then(function() {
+        ComponentService.recordComponents(componentToRecord, function(recordResponse) {
+          if (recordResponse !== false) {
+            $scope.gridOptions.data = recordResponse.components;
+            forms.recordComponentsForm.$setPristine();
+            $scope.component = null;
+            $scope.recordingComponents = false;
+          } else {
+            // TODO: handle case where response == false
+            $scope.recordingComponents = false;
+          }
+        });
+      }).catch(function() {
+        // Confirmation was rejected
+        $scope.recordingComponents = false;
       });
-
     };
 
     function showComponentWeightConfirmation(component) {
@@ -310,6 +381,11 @@ angular.module('bsis')
       if ($routeParams.search) {
         $scope.getComponentsByDIN();
       }
+      ComponentService.getComponentsFormFields(function(response) {
+        if (response !== false) {
+          producedComponentTypesByCombinationId = response.producedComponentTypesByCombinationId;
+        }
+      });
     }
 
     init();
