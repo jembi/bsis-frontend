@@ -85,17 +85,10 @@
           <label for="gravity" class="col-sm-2 control-label">Specific Gravity</label>
           <div class="col-sm-4">
             <div class="form-inline">
-              <input type="number" name="gravity" class="form-control input-sm" style="width:60px;" ng-model="componentType.gravity" ng-max="{{maxGravity}}" ng-min="{{minGravity}}" max-decimal-digits="3"> 
-                <div>
-                  <small class="error" ng-show="(componentTypeForm.gravity.$error.max || componentTypeForm.gravity.$error.min) || submitted">
-                    Must be between {{minGravity}} and {{maxGravity}}
-                  </small>
-                </div>
-                <div>
-                  <small class="error" ng-show="(componentTypeForm.gravity.$error.maxDecimalDigits) || submitted">
-                    Maximun 3 decimal digits allowed
-                  </small>
-                </div>
+              <input type="number" name="gravity" class="form-control input-sm" style="width:60px;" ng-model="componentType.gravity" ng-max="2" ng-min="0.001" max-decimal-digits="3" /> (0.001 to 2) with max 3 decimal digits (i.e. 1.004)
+              <ng-messages for="componentTypeForm.gravity.$error" role="alert">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
             </div>
           </div>
         </div>
