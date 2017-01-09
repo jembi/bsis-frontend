@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ModalsService, UtilsService, $uibModal) {
+  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ModalsService, UtilsService, $uibModal, DATEFORMAT) {
 
     $scope.component = null;
     $scope.componentsSearch = {
@@ -9,6 +9,10 @@ angular.module('bsis')
     };
     $scope.preProcessing = false;
     $scope.unprocessing = false;
+    $scope.dateFormat = DATEFORMAT;
+    $scope.maxProcessedOnDate = moment().endOf('day').toDate();
+    $scope.processedOn = null;
+
     var originalComponent = null;
     var forms = $scope.forms = {};
 
@@ -23,12 +27,17 @@ angular.module('bsis')
       });
     };
 
-    $scope.clearComponentTypeCombination = function() {
+    $scope.clearRecordComponentForm = function() {
       if ($scope.component) {
         $scope.component.componentTypeCombination = null;
+        $scope.processedOn = {
+          date: moment().toDate(),
+          time: moment().toDate()
+        };
       }
       if (forms.recordComponentsForm) {
         forms.recordComponentsForm.$setPristine();
+        forms.recordComponentsForm.processedOnDate.$setValidity('dateInFuture', true);
       }
     };
 
@@ -37,8 +46,6 @@ angular.module('bsis')
         $scope.component = angular.copy(originalComponent);
       }
       if (forms.preProcessForm) {
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', true);
         forms.preProcessForm.$setPristine();
       }
     };
@@ -51,7 +58,8 @@ angular.module('bsis')
 
       var componentToRecord = {
         parentComponentId: $scope.component.id,
-        componentTypeCombination: $scope.component.componentTypeCombination
+        componentTypeCombination: $scope.component.componentTypeCombination,
+        processedOn: moment($scope.processedOn.date).hour($scope.processedOn.time.getHours()).minutes($scope.processedOn.time.getMinutes())
       };
 
       $scope.recordingComponents = true;
@@ -118,21 +126,6 @@ angular.module('bsis')
     }
 
     $scope.preProcessSelectedComponent = function() {
-
-      var startTime = new Date($scope.component.bleedStartTime);
-      var endTime = new Date($scope.component.bleedEndTime);
-
-      $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', true);
-      if (startTime > endTime) {
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', false);
-        return;
-      }
-
-      $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
-      if ((moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) < 1) {
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', false);
-        return;
-      }
 
       if (forms.preProcessForm.$invalid) {
         return;
@@ -274,6 +267,10 @@ angular.module('bsis')
           } else {
             $scope.component = angular.copy(selectedRows[0]);
             originalComponent = angular.copy(selectedRows[0]);
+            $scope.processedOn = {
+              date: moment().toDate(),
+              time: moment().toDate()
+            };
           }
         });
       }
