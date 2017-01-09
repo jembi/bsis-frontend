@@ -1195,7 +1195,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         ngModel.$validators.sameTimeEntered = function(modelValue) {
           var startTime = new Date(attr.timeNotSameAs);
           var endTime = new Date(modelValue);
-          return (moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) > 1;
+          return (moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) >= 1;
         };
         // Watch and unwatch attr
         var unwatch = scope.$watch(function() {
