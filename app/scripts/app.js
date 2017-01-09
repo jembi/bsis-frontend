@@ -1195,7 +1195,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         ngModel.$validators.sameTimeEntered = function(modelValue) {
           var startTime = new Date(attr.timeNotSameAs);
           var endTime = new Date(modelValue);
-          return (moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) > 1;
+          return (moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) >= 1;
         };
         // Watch and unwatch attr
         var unwatch = scope.$watch(function() {
@@ -1241,7 +1241,32 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       }
     };
   })
-  ;
+
+  .directive('maxDecimalDigits', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModel) {
+        ngModel.$validators.maxDecimalDigits = function(modelValue) {
+          if (!modelValue) {
+            return true;
+          }
+          var maxDecimalDigits = attr.maxDecimalDigits;
+          var actualDecimalDigits = (modelValue.toString().split('.')[1] || []).length;
+          return (actualDecimalDigits <= maxDecimalDigits);
+        };
+        // Watch and unwatch attr
+        var unwatch = scope.$watch(function() {
+          return attr.maxDecimalDigits;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-start changes
+          ngModel.$validate();
+        });
+        scope.$on('$destroy', function() {
+          unwatch();
+        });
+      }
+    };
+  });
 
 var UI = {ADDRESS: {}};
 var DONATION = {DONOR: {}};
