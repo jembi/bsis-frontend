@@ -94,7 +94,7 @@ angular.module('bsis')
         return ModalsService.showConfirmation({
           title: 'Low Pack Weight',
           button: 'Continue',
-          message: 'The pack weight (' + component.weight + 'g) is low (below ' + component.packType.minWeight + 'g). It is recommended that all components from this donation are discarded, with the exception of Packed Red Cells. Do you want to continue?'
+          message: 'The pack weight (' + component.weight + 'g) is low (below ' + component.packType.minWeight + 'g). All components from this donation containing plasma will be flagged as Unsafe. Do you want to continue?'
         });
       }
 
