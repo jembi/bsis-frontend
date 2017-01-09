@@ -57,7 +57,7 @@
           <label for="maxBleedTime" class="col-sm-2 control-label">Max bleed time</label>
           <div class="col-sm-4">
             <div class="form-inline">
-              <input type="number" name="maxBleedTime" class="form-control input-sm" ng-model="componentType.maxBleedTime" style="max-width: 35px;" ng-max="60" ng-min="0">
+              <input type="number" name="maxBleedTime" class="form-control input-sm" ng-model="componentType.maxBleedTime" style="max-width: 35px;" ng-max="60" ng-min="0"> minutes
               <div>
                 <small class="error" ng-show="(componentTypeForm.maxBleedTime.$error.max || componentTypeForm.maxBleedTime.$error.min) || submitted">
                   Max bleed time should be between 0 and 60 mins
@@ -71,7 +71,7 @@
           <label for="maxTimeSinceDonation" class="col-sm-2 control-label">Max time since donation</label>
           <div class="col-sm-4">
             <div class="form-inline">
-              <input type="number" name="maxTimeSinceDonation" class="form-control input-sm" ng-model="componentType.maxTimeSinceDonation" style="max-width: 35px;" ng-max="60" ng-min="0">
+              <input type="number" name="maxTimeSinceDonation" class="form-control input-sm" ng-model="componentType.maxTimeSinceDonation" style="max-width: 35px;" ng-max="30" ng-min="0"> hours
               <div>
                 <small class="error" ng-show="(componentTypeForm.maxTimeSinceDonation.$error.max || componentTypeForm.maxTimeSinceDonation.$error.min) || submitted">
                   Max time since donation should be between 0 and 30 hours
