@@ -96,6 +96,26 @@
         </div>
       </form>
 
+      <!-- Child component weight form -->
+      <form role="form" name="forms.childComponentWeightForm" ng-if="component.permissions.canRecordChildComponentWeight" class="form-horizontal col-sm-12" ng-submit="recordChildWerght()" novalidate>
+        <div class="form-group">
+          </br>
+          {{component.componentCode}} ({{component.componentType.componentTypeName}})
+          </br>
+          </br>
+          <label for="componentWeight" class="col-sm-2 control-label">Component Weight</label>
+          <div class="row form-inline col-sm-10">
+            <input name="componentWeight" class="form-control" style="width:auto;" type="number" ng-min="1" ng-max="999" ng-model="component.weight" required /> &nbsp; &nbsp; &nbsp; 
+            <button type="submit" class="btn btn-primary" ng-disabled="savingChildWeight">{{savingChildWeight ? "Saving..." : "Save"}}
+            </button>
+            <button type="button" class="btn btn-primary" ng-disabled="savingChildWeight" ng-click="clearChildComponentWeightForm();">Clear</button>
+            <ng-messages for="forms.childComponentWeightForm.componentWeight.$error" ng-show="forms.childComponentWeightForm.$submitted">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
+          </div>
+        </div>
+      </form>
+
       <!-- Process component form -->
       <form name="forms.recordComponentsForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canProcess" ng-submit="confirmProcessLabledComponent()" novalidate>
         <br/>
