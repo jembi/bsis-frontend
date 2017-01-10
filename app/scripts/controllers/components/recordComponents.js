@@ -7,6 +7,7 @@ angular.module('bsis')
     $scope.componentsSearch = {
       donationIdentificationNumber: $routeParams.donationIdentificationNumber || ''
     };
+    $scope.savingChildWeight = false;
     $scope.preProcessing = false;
     $scope.unprocessing = false;
     $scope.dateFormat = DATEFORMAT;
@@ -48,6 +49,15 @@ angular.module('bsis')
       }
       if (forms.preProcessForm) {
         forms.preProcessForm.$setPristine();
+      }
+    };
+
+    $scope.clearChildComponentWeightForm = function() {
+      if ($scope.component) {
+        $scope.component = angular.copy(originalComponent);
+      }
+      if (forms.childComponentWeightForm) {
+        forms.childComponentWeightForm.$setPristine();
       }
     };
 
@@ -233,6 +243,16 @@ angular.module('bsis')
         // Confirmation was rejected
         $scope.preProcessing = false;
       });
+    };
+
+    $scope.recordChildWerght = function() {
+
+      if (forms.childComponentWeightForm.$invalid) {
+        return;
+      }
+
+      $scope.savingChildWeight = true;
+      // FIXME: Add code to save weight here
     };
 
     $scope.unprocessSelectedComponent = function() {
