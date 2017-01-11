@@ -51,41 +51,49 @@ angular.module('bsis')
       }
     };
 
-    function getBleedTimesConfirmationMessage(parentComponent) {
-      // Add to confirmation message if bleed times gap is greater or equals to maxBleedTime
+    function getConfirmationMessage(parentComponent, processedOn) {
       var confirmationMessage = '';
-      angular.forEach(producedComponentTypesByCombinationId[parentComponent.componentTypeCombination.id], function(componentType) {
-        var bleedTimesGap = moment.duration(moment(parentComponent.bleedEndTime).diff(moment(parentComponent.bleedStartTime))).asMinutes();
-        if (componentType.maxBleedTime != null && bleedTimesGap >= componentType.maxBleedTime) {
-          // Ignore duplicates
-          if (confirmationMessage.indexOf(componentType.componentTypeName) === -1) {
-            confirmationMessage += ' \'' + componentType.componentTypeName + '\',';
-          }
-        }
-      });
-
-      if (confirmationMessage.length > 0) {
-        confirmationMessage += ' from this donation will be flagged as unsafe. Do you want to continue?';
-      }
-
-      return confirmationMessage;
-    }
-
-    function getTimeSinceDonationConfirmationMessage(parentComponent, processedOn) {
       // Add to confirmation message if time since donation is greater or equals to maxTimeSinceDonation
-      var confirmationMessage = '';
+      var timeSinceDonationconfirmationMessage = '';
+      var separator = '';
       angular.forEach(producedComponentTypesByCombinationId[parentComponent.componentTypeCombination.id], function(componentType) {
         var timeSinceDonation = moment.duration(moment(processedOn).diff(moment(parentComponent.createdOn))).asHours();
         if (componentType.maxTimeSinceDonation != null && timeSinceDonation >= componentType.maxTimeSinceDonation) {
           // Ignore duplicates
-          if (confirmationMessage.indexOf(componentType.componentTypeName) === -1) {
-            confirmationMessage += ' \'' + componentType.componentTypeName + '\',';
+          if (timeSinceDonationconfirmationMessage.indexOf(componentType.componentTypeName) === -1) {
+            timeSinceDonationconfirmationMessage += separator + componentType.componentTypeName;
           }
+          separator = ', ';
         }
       });
 
-      if (confirmationMessage.length > 0) {
-        confirmationMessage += ' from this donation will be flagged as unsafe. Do you want to continue?';
+      if (timeSinceDonationconfirmationMessage.length > 0) {
+        // Replace last comma with a dot
+
+        confirmationMessage = 'Time since donation exceeded, the following components will be flagged as unsafe: ' + timeSinceDonationconfirmationMessage + '.';
+      }
+
+      // Add to confirmation message if bleed times gap is greater or equals to maxBleedTime
+      var bleedTimesConfirmationMessage = '';
+      separator = '';
+      angular.forEach(producedComponentTypesByCombinationId[parentComponent.componentTypeCombination.id], function(componentType) {
+        var bleedTimesGap = moment.duration(moment(parentComponent.bleedEndTime).diff(moment(parentComponent.bleedStartTime))).asMinutes();
+        if (componentType.maxBleedTime != null && bleedTimesGap >= componentType.maxBleedTime) {
+          // Ignore duplicates
+          if (bleedTimesConfirmationMessage.indexOf(componentType.componentTypeName) === -1) {
+            bleedTimesConfirmationMessage += separator + componentType.componentTypeName;
+          }
+          separator = ', ';
+        }
+      });
+
+      if (bleedTimesConfirmationMessage.length > 0) {
+        // Add two new lines if the maxTimeSinceDonation was also exceeded
+        var conditionalNewLines = '';
+        if (confirmationMessage.length > 0) {
+          conditionalNewLines = '</br></br>';
+        }
+        confirmationMessage += conditionalNewLines + 'Bleed time exceeded, the following components will be flagged as unsafe: ' + bleedTimesConfirmationMessage + '.';
       }
 
       return confirmationMessage;
@@ -93,23 +101,13 @@ angular.module('bsis')
 
     function showComponentMaxTimesConfirmation(parentComponent, processedOn) {
 
-      // If bleedTimesConfirmationMessage is not empty, display popup
-      var bleedTimesConfirmationMessage = getBleedTimesConfirmationMessage(parentComponent);
-      if (bleedTimesConfirmationMessage.length > 0) {
-        return ModalsService.showConfirmation({
-          title: 'Bleed time exceeded',
-          button: 'Continue',
-          message: bleedTimesConfirmationMessage
-        });
-      }
+      var confirmationMessage = getConfirmationMessage(parentComponent, processedOn);
 
-      // If timeSinceDonationConfirmationMessage is not empty, display popup
-      var timeSinceDonationConfirmationMessage = getTimeSinceDonationConfirmationMessage(parentComponent, processedOn);
-      if (timeSinceDonationConfirmationMessage.length > 0) {
+      if (confirmationMessage.length > 0) {
         return ModalsService.showConfirmation({
-          title: 'Time since donation exceeded',
+          title: 'Time since Donation or Bleed Time exceeded',
           button: 'Continue',
-          message: timeSinceDonationConfirmationMessage
+          message: confirmationMessage
         });
       }
 
