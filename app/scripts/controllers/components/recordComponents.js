@@ -57,7 +57,7 @@ angular.module('bsis')
       var timeSinceDonationconfirmationMessage = '';
       var separator = '';
       angular.forEach(producedComponentTypesByCombinationId[parentComponent.componentTypeCombination.id], function(componentType) {
-        var timeSinceDonation = moment.duration(moment(processedOn).diff(moment(parentComponent.createdOn))).asHours();
+        var timeSinceDonation = moment.duration(moment(processedOn).diff(moment(parentComponent.donationDateTime))).asHours();
         if (componentType.maxTimeSinceDonation != null && timeSinceDonation >= componentType.maxTimeSinceDonation) {
           // Ignore duplicates
           if (timeSinceDonationconfirmationMessage.indexOf(componentType.componentTypeName) === -1) {
