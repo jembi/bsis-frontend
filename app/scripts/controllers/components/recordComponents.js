@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ModalsService, UtilsService, $uibModal, DATEFORMAT) {
+  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ComponentValidationService, ModalsService, UtilsService, $uibModal, DATEFORMAT) {
 
     $scope.component = null;
     $scope.componentsSearch = {
@@ -17,6 +17,7 @@ angular.module('bsis')
 
     var originalComponent = null;
     var forms = $scope.forms = {};
+    var componentList = null;
 
     $scope.clear = function() {
       $scope.componentsSearch.donationIdentificationNumber = '';
@@ -252,7 +253,37 @@ angular.module('bsis')
       }
 
       $scope.savingChildWeight = true;
-      // FIXME: Add code to save weight here
+      ComponentValidationService.showChildComponentWeightConfirmation(componentList[0], $scope.component).then(function() {
+
+        var weightParams = {weight: $scope.component.weight, id: $scope.component.id};
+        ComponentService.recordChildWeight({}, weightParams, function(res) {
+          $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
+            // Replace the component in the grid with the updated component
+            if (component.id === res.component.id) {
+              return res.component;
+            } else {
+              return component;
+            }
+          });
+
+          // Clear validation on the record components form
+          if (forms.childComponentWeightForm) {
+            forms.childComponentWeightForm.$setPristine();
+          }
+
+          // Make sure that the row remains selected
+          $timeout(function() {
+            $scope.gridApi.selection.selectRow(res.component);
+            $scope.savingChildWeight = false;
+          });
+        }, function(err) {
+          $log.error(err);
+          $scope.savingChildWeight = false;
+        });
+      }).catch(function() {
+        // Confirmation was rejected
+        $scope.savingChildWeight = false;
+      });
     };
 
     $scope.unprocessSelectedComponent = function() {
@@ -287,6 +318,7 @@ angular.module('bsis')
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(componentsResponse) {
         if (componentsResponse !== false) {
           $scope.gridOptions.data = componentsResponse.components;
+          componentList = componentsResponse.components;
           $scope.component = null;
           $scope.searching = false;
         } else {

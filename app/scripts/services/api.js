@@ -236,6 +236,13 @@ angular.module('bsis')
           params: {
             id: '@id'
           }
+        },
+        recordChildWeight: {
+          method: 'PUT',
+          url: url + '/components/:id/recordchildweight',
+          params: {
+            id: '@id'
+          }
         }
       }),
 
