@@ -117,7 +117,7 @@
               <label for="processedOnTime" class="col-sm-2 control-label">Time</label>
               <div class="col-sm-5">
                   <div>
-                    <uib-timepicker ng-model="processedOn.time" name="processedOnTime" show-spinners="false" ng-required="submitted" ng-class="{'has-error' : (forms.recordComponentsForm.processedOnTime.$invalid && forms.recordComponentsForm.$submitted)}" date-time-not-in-future="{{processedOn.time | date:'yyyy-MM-dd HH:mm:ss'}}"></uib-timepicker>
+                    <uib-timepicker ng-model="processedOn.time" name="processedOnTime" show-spinners="false" ng-required="submitted" ng-class="{'has-error' : ((forms.recordComponentsForm.processedOnTime.$invalid || forms.recordComponentsForm.processedOnDate.$invalid) && forms.recordComponentsForm.$submitted)}" date-time-not-in-future="{{processedOn.time | date:'yyyy-MM-dd HH:mm:ss'}}" ng-change="updateTimeOnProcessedOnDate()"></uib-timepicker>
                     <ng-messages for="forms.recordComponentsForm.processedOnTime.$error" ng-show="forms.recordComponentsForm.$submitted">
                       <ng-messages-include src="messages.html"></ng-messages-include>
                     </ng-messages>

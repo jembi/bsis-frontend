@@ -77,6 +77,12 @@ angular.module('bsis')
 
     };
 
+    $scope.updateTimeOnProcessedOnDate = function() {
+      if (angular.isDefined($scope.processedOn.time)) {
+        $scope.processedOn.date = moment($scope.processedOn.date).hour($scope.processedOn.time.getHours()).minutes($scope.processedOn.time.getMinutes()).toDate();
+      }
+    };
+
     function showComponentWeightConfirmation(component) {
 
       // Show confirmation if it is above max weight
