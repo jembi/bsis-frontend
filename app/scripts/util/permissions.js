@@ -101,8 +101,8 @@ angular.module('bsis')
     DONATIONS_REPORTING: 'Reporting - Donations',
     REQUESTS_REPORTING: 'Reporting - Requests',
     TTI_REPORTING: 'Reporting - TTI Testing',
-    COMPONENTS_ISSUED_REPORTING: 'Reporting - Components',
-    COMPONENTS_DISCARDED_REPORTING: 'Reporting - Discards',
+    COMPONENTS_REPORTING: 'Reporting - Components',
+    DONORS_REPORTING: 'Reporting - Donors',
 
     // Admin and Super-User Permissions
     MANAGE_USERS: 'Manage Users',
@@ -112,7 +112,7 @@ angular.module('bsis')
     MANAGE_DONATION_CATEGORIES: 'Manage Donation Categories',
     MANAGE_COMPONENT_COMBINATIONS: 'Manage Component Combinations',
     MANAGE_CROSS_MATCH_TYPES: 'Manage Cross Match Types',
-    MANAGE_BLOOD_TYPING_RULES: 'Manage Blood Typing Rules',
+    MANAGE_BLOOD_TESTING_RULES: 'Manage Blood Testing Rules',
     MANAGE_PACK_TYPES: 'Manage Pack Types',
     MANAGE_DISCARD_REASONS: 'Manage Discard Reasons',
     MANAGE_DEFERRAL_REASONS: 'Manage Deferral Reasons',
@@ -123,7 +123,6 @@ angular.module('bsis')
     MANAGE_FORMS: 'Manage Forms',
     MANAGE_BACKUP_DATA: 'Manage Backup Data',
     MANAGE_BLOOD_TESTS: 'Manage Blood Tests',
-    MANAGE_TIPS: 'Manage Tips',
     MANAGE_REQUESTS: 'Manage Requests',
     MANAGE_GENERAL_CONFIGS: 'Manage General Configs',
     MANAGE_COMPONENT_TYPES: 'Manage Component Types',
@@ -132,6 +131,7 @@ angular.module('bsis')
     VIEW_DONOR_INFORMATION: 'View Donor Information',
     VIEW_DONATION_INFORMATION: 'View Donation Information',
     VIEW_MOBILE_CLINIC_INFORMATION: 'View Mobile Clinic Information',
+    VIEW_MOBILE_CLINIC_EXPORT: 'View Mobile Clinic Export',
     VIEW_COMPONENT_INFORMATION: 'View Component Information',
     VIEW_TESTING_INFORMATION: 'View Testing Information',
     VIEW_BLOOD_BANK_INFORMATION: 'View Blood Bank Information',
@@ -152,10 +152,16 @@ angular.module('bsis')
     VOID_POST_DONATION_COUNSELLING: 'Void Post Donation Counselling',
 
     // Adverse Events Permissions
-    ADD_ADVERSE_EVENT_TYPES: 'Add Adverse Event Types',
-    EDIT_ADVERSE_EVENT_TYPES: 'Edit Adverse Event Types',
-    VIEW_ADVERSE_EVENT_TYPES: 'View Adverse Event Types',
-    VOID_ADVERSE_EVENT_TYPES: 'Void Adverse Event Types'
+    MANAGE_ADVERSE_EVENTS: 'Manage Adverse Events',
 
+    // Division Permissions
+    MANAGE_DIVISIONS: 'Manage Divisions',
+
+    // Data Export
+    DATA_EXPORT: 'Data Export'
   })
-;
+
+  .run(function($rootScope, PERMISSIONS) {
+    // add constant to rootScope so it is always available in the views and controllers
+    $rootScope.permissions = PERMISSIONS;
+  });

@@ -15,6 +15,7 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     $scope.submitted = true;
     ComponentBatchService.findComponentBatches($scope.period, function(response) {
       $scope.gridOptions.data = response.componentBatches;
+      $scope.gridOptions.paginationCurrentPage = 1;
       $scope.searching = false;
     }, function(err) {
       $scope.searching = false;
@@ -43,8 +44,8 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
       maxWidth: '350'
     },
     {
-      name: 'Num Components',
-      field: 'numberOfComponents',
+      name: 'Num Initial Components',
+      field: 'numberOfInitialComponents',
       width: '**',
       maxWidth: '200'
     },

@@ -36,7 +36,13 @@
         </strong>
       </div>
 
-      <div ng-if="component && !component.permissions.canRecordWeight && !component.permissions.canProcess" style="clear:left;">
+      <div ng-if="component && !component.hasComponentBatch" style="clear:left;">
+        <strong>
+          <em>Selected Component cannot be processed until component batch received</em>
+        </strong>
+      </div>
+
+      <div ng-if="component && !component.permissions.canRecordWeight && !component.permissions.canProcess && component.hasComponentBatch" style="clear:left;">
         <strong>
           <em>Selected component cannot be processed further</em>
         </strong>
@@ -67,7 +73,7 @@
       </form>
 
       <!-- Process component form -->
-      <form name="forms.recordComponentsForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canProcess" ng-submit="recordComponents()" novalidate>
+      <form name="forms.recordComponentsForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canProcess" ng-submit="confirmProcessLabledComponent()" novalidate>
         <div class="form-group">
           <label for="name" class="col-sm-2 control-label">Process Component</label>
           <div class="row col-sm-10">

@@ -30,6 +30,7 @@ angular.module('bsis')
       $scope.data = response.donors;
       $scope.canAddDonors = response.canAddDonors;
       $scope.searching = false;
+      $scope.tableParams.$params.page = 1;
     }, function() {
       $scope.searchResults = false;
       $scope.searching = false;

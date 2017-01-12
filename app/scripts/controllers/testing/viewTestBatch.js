@@ -2,9 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, PERMISSIONS, uiGridConstants, ModalsService) {
-
-    $scope.permissions = PERMISSIONS;
+  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, uiGridConstants, ModalsService) {
 
     var data = [{}];
     $scope.data = data;
@@ -90,15 +88,18 @@ angular.module('bsis')
     $scope.getCurrentTestBatchOverview = function() {
       TestingService.getTestBatchOverviewById({testBatch: $routeParams.id}, function(response) {
         $scope.testBatchOverview = response;
-        $scope.pendingBloodTypingTests = response.pendingBloodTypingTests;
-        $scope.pendingTTITests = response.pendingTTITests;
-        $scope.basicBloodTypingComplete = response.basicBloodTypingComplete;
-        $scope.basicTTIComplete = response.basicTTIComplete;
-        $scope.pendingBloodTypingConfirmations = response.pendingBloodTypingConfirmations;
-        $scope.reEntryRequiredTTITests = response.reEntryRequiredTTITests;
-        $scope.reEntryRequiredBloodTypingTests = response.reEntryRequiredBloodTypingTests;
-        $scope.reEntryRequiredPendingBloodTypingTests = response.reEntryRequiredPendingBloodTypingTests;
-        $scope.reEntryRequiredPendingTTITests = response.reEntryRequiredPendingTTITests;
+        $scope.hasPendingRepeatBloodTypingTests = response.hasPendingRepeatBloodTypingTests;
+        $scope.hasPendingRepeatTTITests = response.hasPendingRepeatTTITests;
+        $scope.hasPendingConfirmatoryTTITests = response.hasPendingConfirmatoryTTITests;
+        $scope.hasPendingBloodTypingConfirmations = response.hasPendingBloodTypingConfirmations;
+        $scope.hasRepeatBloodTypingTests = response.hasRepeatBloodTypingTests;
+        $scope.hasConfirmatoryTTITests = response.hasConfirmatoryTTITests;
+        $scope.hasRepeatTTITests = response.hasRepeatTTITests;
+        $scope.hasReEntryRequiredTTITests = response.hasReEntryRequiredTTITests;
+        $scope.hasReEntryRequiredBloodTypingTests = response.hasReEntryRequiredBloodTypingTests;
+        $scope.hasReEntryRequiredRepeatBloodTypingTests = response.hasReEntryRequiredRepeatBloodTypingTests;
+        $scope.hasReEntryRequiredRepeatTTITests = response.hasReEntryRequiredRepeatTTITests;
+        $scope.hasReEntryRequiredConfirmatoryTTITests = response.hasReEntryRequiredConfirmatoryTTITests;
       }, function(err) {
         $log.error(err);
       });
@@ -142,6 +143,15 @@ angular.module('bsis')
         width: '**'
       },
       {
+        name: 'Released',
+        displayName: 'Released',
+        field: 'released',
+        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["released"] ? "Y" : "N"}}</div>',
+        visible: true,
+        width: '**',
+        maxWidth: '100'
+      },
+      {
         name: 'ttistatus',
         displayName: 'TTI Status',
         field: 'ttistatus',
@@ -179,7 +189,7 @@ angular.module('bsis')
       exporterPdfDefaultStyle: {fontSize: 4, margin: [-2, 0, 0, 0] },
       exporterPdfTableHeaderStyle: {fontSize: 5, bold: true, margin: [-2, 0, 0, 0] },
       exporterPdfMaxGridWidth: 500,
-
+      exporterSuppressColumns: ['Venue'],
       // Format values for exports
       exporterFieldCallback: function(grid, row, col, value) {
         if (col.name === 'Date Bled') {
@@ -204,8 +214,12 @@ angular.module('bsis')
           var bloodGroup = (row.entity.bloodRh === '' ? '' : row.entity.bloodAbo) + (row.entity.bloodAbo === '' ? '' : row.entity.bloodRh);
           return $filter('titleCase')(value) + ' (' + bloodGroup + ')';
         }
+        //modify value of value of released column
+        if (col.name === 'Released') {
+          return value === true ? 'Y' : 'N';
+        }
         // assume that column is a test outcome column, and manage empty values
-        if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue' && col.name !== 'TTI Status' && col.name !== 'bloodTypingStatusBloodTypingMatchStatus' && col.name !== 'previousDonationAboRhOutcome') {
+        if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue' && col.name !== 'Released' && col.name !== 'TTI Status' && col.name !== 'bloodTypingStatusBloodTypingMatchStatus' && col.name !== 'previousDonationAboRhOutcome') {
           for (var test in value) {
             if (test === col.name) {
               return value[test] || '';
@@ -240,7 +254,7 @@ angular.module('bsis')
         var prefix = [];
         angular.forEach($scope.testBatch.donationBatches, function(val) {
           var venue = val.venue.name;
-          var dateCreated = $filter('bsisDate')(val.createdDate);
+          var dateCreated = $filter('bsisDate')(val.donationBatchDate);
           var numDonations = val.numDonations;
           prefix.push(
             {
@@ -316,7 +330,6 @@ angular.module('bsis')
     };
 
     function addTestNamesToColumnDefs(testBatchOutcomesReport) {
-
       angular.forEach(testBatchOutcomesReport.basicTtiTestNames, function(testName) {
         columnDefs.push(
           {
@@ -330,6 +343,18 @@ angular.module('bsis')
       });
 
       angular.forEach(testBatchOutcomesReport.repeatTtiTestNames, function(testName) {
+        columnDefs.push(
+          {
+            name: testName,
+            displayName: testName,
+            field: 'testResults',
+            visible: false,
+            width: '80'
+          }
+        );
+      });
+
+      angular.forEach(testBatchOutcomesReport.confirmatoryTtiTestNames, function(testName) {
         columnDefs.push(
           {
             name: testName,

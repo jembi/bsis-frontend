@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('InventorySidebarCtrl', function($scope, RoutingService, ICONS, PERMISSIONS) {
+angular.module('bsis').controller('InventorySidebarCtrl', function($scope, RoutingService, ICONS) {
 
   var routes = [
     {
@@ -28,6 +28,5 @@ angular.module('bsis').controller('InventorySidebarCtrl', function($scope, Routi
   ];
 
   $scope.icons = ICONS;
-  $scope.permissions = PERMISSIONS;
   $scope.currentPath = RoutingService.getCurrentPath(routes);
 });

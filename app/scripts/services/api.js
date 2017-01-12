@@ -57,6 +57,10 @@ angular.module('bsis')
         bloodTypingResolutions: {
           method: 'POST',
           url: url + '/donations/bloodTypingResolutions'
+        },
+        getEditForm: {
+          method: 'GET',
+          url: url + '/donations/:id/form'
         }
       }),
 
@@ -108,7 +112,7 @@ angular.module('bsis')
       ComponentTypes: $resource(url + '/componenttypes/:id', {id: '@id'}, {
         getAll: {
           method: 'GET',
-          url: url + '/componenttypes'
+          url: url + '/componenttypes/search'
         },
         update: {method: 'PUT'}
       }),
@@ -294,6 +298,10 @@ angular.module('bsis')
         search: {
           method: 'GET',
           url: url + '/locations/search'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/locations/form'
         }
       }),
 
@@ -342,9 +350,28 @@ angular.module('bsis')
         update: {method: 'PUT'}
       }),
 
-      MobileClinicLookUpFormFields: $resource(url + '/mobileclinic/form'),
-
-      MobileClinicLookUp: $resource(url + '/mobileclinic/lookup'),
+      MobileClinicDonors: $resource(url + '/mobileclinic', {}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/mobileclinic/form'
+        },
+        search: {
+          method: 'GET',
+          url: url + '/mobileclinic/search'
+        },
+        export: {
+          method: 'GET',
+          url: url + '/mobileclinic/export'
+        },
+        getDonorOutcomesForm: {
+          method: 'GET',
+          url: url + '/mobileclinic/donoroutcomes/form'
+        },
+        getDonorOutcomes: {
+          method: 'GET',
+          url: url + '/mobileclinic/donoroutcomes'
+        }
+      }),
 
       DonationsReport: $resource(url + '/reports/collecteddonations/generate'),
 
@@ -358,6 +385,61 @@ angular.module('bsis')
         getForm: {
           method: 'GET',
           url: url + '/reports/stockLevels/form'
+        }
+      }),
+
+      BloodUnitsIssuedReport: $resource(url + '/reports/unitsissued', {}, {
+        generate: {
+          method: 'GET',
+          url: url + '/reports/unitsissued/generate'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/unitsissued/form'
+        }
+      }),
+
+      DonorsDeferredReport: $resource(url + '/reports/donorsdeferred', {}, {
+        generate: {
+          method: 'GET',
+          url: url + '/reports/donorsdeferred/generate'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/donorsdeferred/form'
+        }
+      }),
+
+      UnitsDiscardedReport: $resource(url + '/reports/discardedunits', {}, {
+        generate: {
+          method: 'GET',
+          url: url + '/reports/discardedunits/generate'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/discardedunits/form'
+        }
+      }),
+
+      ComponentProductionReport: $resource(url + '/reports/componentsprocessed', {}, {
+        generate: {
+          method: 'GET',
+          url: url + '/reports/componentsprocessed/generate'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/componentsprocessed/form'
+        }
+      }),
+
+      DonorsAdverseEventsReport: $resource(url + '/reports/donorsadverseevents', {}, {
+        generate: {
+          method: 'GET',
+          url: url + '/reports/donorsadverseevents/generate'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/donorsadverseevents/form'
         }
       }),
 
@@ -399,6 +481,68 @@ angular.module('bsis')
         getSearchForm: {
           method: 'GET',
           url: url + '/inventories/search/form'
+        }
+      }),
+
+      Divisions: $resource(url + '/divisions/:id', {id: '@id'}, {
+        search: {
+          method: 'GET',
+          url: url + '/divisions/search'
+        },
+        update: {
+          method: 'PUT'
+        }
+      }),
+
+      DataExport: {
+        download: function() {
+          // using $http here because $resource cannot process arraybuffers easily
+          return $http.get(url + '/dataexport', {responseType: 'arraybuffer'});
+        }
+      },
+
+      ComponentTypeCombinations: $resource(url + '/componenttypecombinations/:id', {id: '@id'}, {
+        search: {
+          method: 'GET',
+          url: url + '/componenttypecombinations/search'
+        },
+        update: {
+          method: 'PUT'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/componenttypecombinations/form'
+        }
+      }),
+
+      BloodTests: $resource(url + '/bloodtests/:id', {id: '@id'}, {
+        search: {
+          method: 'GET',
+          url: url + '/bloodtests/search'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/bloodtests/form'
+        },
+        update: {
+          method: 'PUT'
+        }
+      }),
+
+      BloodTestingRules: $resource(url + '/bloodtestingrules/:id', {id: '@id'}, {
+        search: {
+          method: 'GET',
+          url: url + '/bloodtestingrules/search'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/bloodtestingrules/form'
+        },
+        save: {
+          method: 'POST'
+        },
+        update: {
+          method: 'PUT'
         }
       })
     };

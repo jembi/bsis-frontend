@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('HeaderCtrl', function($scope, $location, AuthService, ICONS, PERMISSIONS, UI) {
+  .controller('HeaderCtrl', function($scope, $location, AuthService, ConfigurationsService, ICONS, PERMISSIONS, UI) {
 
     $scope.icons = ICONS;
+
+    $scope.warningMessage = ConfigurationsService.getStringValue('ui.header.warningMessage');
 
     $scope.isPasswordReset = function() {
       var loggedOnUser = AuthService.getLoggedOnUser();
@@ -141,39 +143,56 @@ angular.module('bsis')
       '/reports',
       '/aboRhGroupsReport',
       '/donationTypesReport',
-      '/ttiPrevalenceReport'
+      '/ttiPrevalenceReport',
+      '/bloodUnitsIssuedReport',
+      '/donorsDeferredReport',
+      '/unitsDiscardedReport',
+      '/componentsProducedReport',
+      '/donorsAdverseEventsReport'
     ];
 
     var mobileRoutes = [
       '/mobile',
-      '/lookUp'
+      '/lookUp',
+      '/mobileDonorCounselling',
+      '/mobileClinicExport'
     ];
 
     var settingsRoutes = [
       '/settings',
       '/accountSettings',
       '/locations',
-      '/manageLocation',
+      '/manageLocation/?\\d*',
       '/componentTypes',
-      '/manageComponentType/\\d',
+      '/manageComponentType/?\\d*',
+      '/manageComponentTypeCombination/?\\d*',
       '/deferralReasons',
-      '/manageDeferralReason/\\d+',
+      '/manageDeferralReason/?\\d*',
       '/discardReasons',
-      '/manageDiscardReason/\\d+',
+      '/manageDiscardReason/?\\d*',
       '/configurations',
-      '/manageConfiguration/\\d+',
+      '/manageConfiguration/?\\d*',
       '/users',
-      '/manageUser/\\d+',
+      '/manageUser/?\\d*',
       '/roles',
-      '/manageRole/\\d+',
+      '/manageRole/?\\d*',
       '/donationTypes',
-      '/manageDonationType/\\d+',
+      '/manageDonationType/?\\d*',
       '/packTypes',
-      '/managePackType/\\d+',
+      '/managePackType/?\\d*',
       '/auditLog',
       '/adverseEventTypes',
       '/addAdverseEventType',
-      '/editAdverseEventType/\\d+'
+      '/editAdverseEventType/?\\d*',
+      '/divisions',
+      '/manageDivision',
+      '/manageDivision/?\\d*',
+      '/dataExport',
+      '/componentTypeCombinations',
+      '/bloodTests',
+      '/manageBloodTest/?\\d*',
+      '/bloodTestingRules',
+      '/manageBloodTestingRule/?\\d*'
     ];
 
     /**

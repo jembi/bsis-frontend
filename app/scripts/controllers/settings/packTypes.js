@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('PackTypesCtrl', function($scope, $rootScope, $location, $log, PackTypesService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout) {
+  .controller('PackTypesCtrl', function($scope, $rootScope, $location, $log, PackTypesService, ICONS, $filter, ngTableParams, $timeout) {
 
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
 
     $scope.isCurrent = function(path) {
       if (path.length > 1 && $location.path().substr(0, path.length) === path) {
@@ -86,9 +85,8 @@ angular.module('bsis')
 
   })
 
-  .controller('ManagePackTypesCtrl', function($scope, $location, $log, PackTypesService, ICONS, PERMISSIONS, ComponentTypesService, $routeParams) {
+  .controller('ManagePackTypesCtrl', function($scope, $location, $log, PackTypesService, ICONS, ComponentTypesService, $routeParams) {
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
     $scope.selection = '/managePackType';
     $scope.packType = PackTypesService.getPackType();
     $scope.serverError = null;

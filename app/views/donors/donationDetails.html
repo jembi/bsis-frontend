@@ -105,10 +105,10 @@
                 <td></td>
             </tr>
             <tr ng-repeat="test in testResults">
-                <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.bloodTest.testNameShort}}
+                <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.bloodTest.testNameShort}}
                 </td>
-                <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.result}}</td>
-                <td ng-if="test.bloodTest.bloodTestCategory == 'TTI'" class="value">{{test.testedOn | bsisDate}}</td>
+                <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.result}}</td>
+                <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.testedOn | bsisDate}}</td>
             </tr>
             </tbody>
         </table>
@@ -134,11 +134,11 @@
                 <td></td>
             </tr>
             <tr ng-repeat="test in testResults">
-                <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">
+                <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">
                     {{test.bloodTest.testNameShort}}
                 </td>
-                <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">{{test.result}}</td>
-                <td ng-if="test.bloodTest.bloodTestCategory == 'BLOODTYPING'" class="value">{{test.testedOn |
+                <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.result}}</td>
+                <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.testedOn |
                     bsisDate}}
                 </td>
             </tr>

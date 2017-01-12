@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ReportsSidebarCtrl', function($scope, RoutingService, ICONS, PERMISSIONS) {
+  .controller('ReportsSidebarCtrl', function($scope, RoutingService, ICONS) {
 
     var routes = [
       {
@@ -15,10 +15,29 @@ angular.module('bsis')
       {
         path: '/ttiPrevalenceReport',
         subpaths: []
+      },
+      {
+        path: '/bloodUnitsIssuedReport',
+        subpaths: []
+      },
+      {
+        path: '/donorsDeferredReport',
+        subpaths: []
+      },
+      {
+        path: '/unitsDiscardedReport',
+        subpaths: []
+      },
+      {
+        path: '/componentsProducedReport',
+        subpaths: []
+      },
+      {
+        path: '/donorsAdverseEventsReport',
+        subpaths: []
       }
     ];
 
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
     $scope.currentPath = RoutingService.getCurrentPath(routes);
   });

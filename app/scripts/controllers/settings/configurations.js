@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ConfigurationsCtrl', function($scope, $location, ConfigurationsService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
+  .controller('ConfigurationsCtrl', function($scope, $location, ConfigurationsService, ngTableParams, $timeout, $filter, ICONS) {
 
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
 
     var data = [{}];
     $scope.data = data;
@@ -72,10 +71,13 @@ angular.module('bsis')
 
   })
 
-  .controller('ManageConfigurationsCtrl', function($scope, $location, $log, ConfigurationsService, ICONS, PERMISSIONS, DATATYPES, $routeParams) {
+  .controller('ManageConfigurationsCtrl', function($scope, $location, $log, ConfigurationsService, ICONS, DATATYPES, $routeParams) {
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageConfiguration';
+
+    $scope.password = {
+      value: ''
+    };
 
     $scope.getConfig = function() {
       ConfigurationsService.getConfigurationById($routeParams.id, function(configuration) {
@@ -90,8 +92,16 @@ angular.module('bsis')
       $scope.configuration = {};
     } else {
       $scope.getConfig();
+      $scope.password.value = '•••••';
     }
 
+    $scope.clearPassword = function() {
+      $scope.password.value = $scope.configuration.value;
+    };
+
+    $scope.setPassword = function() {
+      $scope.configuration.value = $scope.password.value;
+    };
 
     $scope.dataTypes = DATATYPES.options;
 
@@ -112,10 +122,15 @@ angular.module('bsis')
 
     $scope.serverError = {};
 
-    $scope.$watch('configuration.dataType.id', function(newValue) {
+    $scope.$watch('configuration.dataType.id', function(newValue, oldValue) {
       var indexVal = parseInt(newValue) - 1;
       if (!isNaN(indexVal)) {
         $scope.datatype = DATATYPES.options[indexVal].datatype;
+        if (oldValue != null) {
+          // Reset the config value
+          $scope.configuration.value = null;
+          $scope.configurationForm.value.$setPristine();
+        }
       }
     });
 

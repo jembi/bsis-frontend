@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, Api, PostDonationCounsellingService, DATEFORMAT, $filter) {
+angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, $filter, Api, PostDonationCounsellingService, DATEFORMAT) {
   var master = {
     selectedVenues: [],
     startDate: null,
@@ -41,10 +41,6 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $location.path('/donorCounselling/' + donation.donor.id);
   };
 
-  function getISOString(maybeDate) {
-    return angular.isDate(maybeDate) ? maybeDate.toISOString() : maybeDate;
-  }
-
   $scope.refresh = function() {
 
     var queryParams = {
@@ -56,13 +52,13 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     };
 
     if ($scope.search.startDate) {
-      var startDate = getISOString($scope.search.startDate);
+      var startDate = $filter('isoString')($scope.search.startDate);
       query.startDate = startDate;
       queryParams.startDate = startDate;
     }
 
     if ($scope.search.endDate) {
-      var endDate = getISOString($scope.search.endDate);
+      var endDate = $filter('isoString')($scope.search.endDate);
       query.endDate = endDate;
       queryParams.endDate = endDate;
     }
@@ -81,6 +77,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       $scope.donations = response;
       $scope.gridOptions.data = response;
       $scope.searching = false;
+      $scope.gridOptions.paginationCurrentPage = 1;
     }, function(err) {
       $log.error(err);
       $scope.searching = false;

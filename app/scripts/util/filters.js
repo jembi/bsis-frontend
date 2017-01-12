@@ -2,16 +2,6 @@
 
 angular.module('bsis')
 
-  // if component has been processed or discarded, expiry status info is not relevant - display 'N/A' instead
-  .filter('expiryStatus', function() {
-    return function(input) {
-      if (input.status === 'DISCARDED' || input.status === 'PROCESSED' || input.status === 'SPLIT') {
-        return 'N/A';
-      }
-      return input.expiryStatus;
-    };
-  })
-
   .filter('slice', function() {
     return function(arr, start, end) {
       return arr.slice(start, end);
@@ -22,6 +12,12 @@ angular.module('bsis')
     var angularDateFilter = $filter('date');
     return function(theDate) {
       return angularDateFilter(theDate, DATEFORMAT);
+    };
+  })
+
+  .filter('isoString', function() {
+    return function(maybeDate) {
+      return angular.isDate(maybeDate) ? maybeDate.toISOString() : maybeDate;
     };
   })
 
@@ -70,6 +66,12 @@ angular.module('bsis')
       return input.replace(/\w\S*/g, function(txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       });
+    };
+  })
+
+  .filter('divisionLevel', function(ConfigurationsService) {
+    return function(input) {
+      return ConfigurationsService.getStringValue('ui.division.level' + input + '.displayName') || 'Unknown level';
     };
   })
 ;

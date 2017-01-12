@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DeferralReasonsCtrl', function($scope, $location, DeferralReasonsService, ngTableParams, $timeout, $filter, ICONS, PERMISSIONS) {
+  .controller('DeferralReasonsCtrl', function($scope, $location, DeferralReasonsService, ngTableParams, $timeout, $filter, ICONS) {
 
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
 
     var data = [{}];
     $scope.data = data;
@@ -72,9 +71,8 @@ angular.module('bsis')
 
   })
 
-  .controller('ManageDeferralReasonsCtrl', function($scope, $location, DeferralReasonsService, ICONS, PERMISSIONS, DATATYPES, $routeParams) {
+  .controller('ManageDeferralReasonsCtrl', function($scope, $location, DeferralReasonsService, ICONS, DATATYPES, $routeParams) {
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
     $scope.selection = '/manageDeferralReason';
 
     $scope.getDeferralReason = function() {

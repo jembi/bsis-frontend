@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService) {
+  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService, UtilsService) {
 
     var master = {
       donationIdentificationNumber: null,
@@ -48,7 +48,10 @@ angular.module('bsis')
         name: 'Expiry Status',
         field: 'expiryStatus',
         width: '**',
-        maxWidth: '200'
+        maxWidth: '200',
+        sortingAlgorithm: function(a, b, rowA, rowB) {
+          return UtilsService.dateSort(rowA.entity.expiresOn, rowB.entity.expiresOn);
+        }
       },
       {
         name: 'Location',
@@ -172,6 +175,7 @@ angular.module('bsis')
       $scope.submitted = true;
       $scope.searching = true;
       InventoriesService.search($scope.searchParams, function(res) {
+        $scope.gridOptions.paginationCurrentPage = 1;
         $scope.gridOptions.data = res.inventories.sort(initialSort);
         $scope.searching = false;
       }, function(err) {

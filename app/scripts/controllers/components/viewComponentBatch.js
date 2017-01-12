@@ -41,7 +41,7 @@ angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $ro
           text: 'Date Created: ',
           bold: true
         }, {
-          text: $filter('bsisDate')($scope.componentBatch.donationBatch.createdDate)
+          text: $filter('bsisDate')($scope.componentBatch.donationBatch.donationBatchDate)
         }, {
           text: ' Venue: ',
           bold: true
@@ -114,6 +114,7 @@ angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $ro
   };
 
   $scope.componentBatch = null;
+  $scope.components = [];
 
   $scope.printDeliveryNote = function() {
     $scope.gridApi.exporter.pdfExport('all', 'all');
@@ -122,7 +123,12 @@ angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $ro
   function fetchComponentBatchById(componentBatchId) {
     ComponentBatchService.getComponentBatch(componentBatchId, function(response) {
       $scope.componentBatch = response;
-      $scope.gridOptions.data = $scope.componentBatch.components;
+      angular.forEach($scope.componentBatch.components, function(component) {
+        if (component.isInitialComponent) {
+          $scope.components.push(component);
+        }
+      });
+      $scope.gridOptions.data = $scope.components;
     }, function(err) {
       $log.error(err);
     });

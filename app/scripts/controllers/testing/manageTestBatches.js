@@ -1,8 +1,7 @@
 angular.module('bsis')
-  .controller('TestBatchCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS, PERMISSIONS) {
+  .controller('TestBatchCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS) {
 
     $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
 
     // Open batches functions
 
@@ -145,7 +144,7 @@ angular.module('bsis')
           if (response !== false) {
             closedTestBatchData = response.testBatches;
             $scope.closedTestBatchData = closedTestBatchData;
-
+            $scope.closedTestBatchesTableParams.$params.page = 1;
             $scope.closedTestBatches = closedTestBatchData.length > 0;
           }
         }, function() {

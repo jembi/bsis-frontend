@@ -16,8 +16,10 @@
             <a href="#/configurations">General Configurations</a></li>
         <li ng-class="{current:  currentPath === '/locations'}" has-permission="{{permissions.MANAGE_LOCATIONS}}">
             <a href="#/locations">Manage Locations</a></li>
+        <li ng-class="{current:  currentPath === '/divisions'}" has-permission="{{permissions.MANAGE_DIVISIONS}}">
+            <a href="#/divisions">Manage Divisions</a></li>
         <li ng-class="{current:  currentPath === '/adverseEventTypes'}"
-            has-permission="{{permissions.VIEW_ADVERSE_EVENT_TYPES}}"><a href="#/adverseEventTypes">Manage Adverse Event
+            has-permission="{{permissions.MANAGE_ADVERSE_EVENTS}}"><a href="#/adverseEventTypes">Manage Adverse Event
             Types</a></li>
         <li ng-class="{current: currentPath === '/users'}" has-permission="{{permissions.MANAGE_USERS}}"><a href="#/users">Manage
             Users</a></li>
@@ -34,8 +36,16 @@
                 href="#/packTypes">Manage Pack Types</a></li>
         <li ng-class="{current:  currentPath === '/componentTypes'}" has-permission="{{permissions.MANAGE_COMPONENT_TYPES}}">
             <a href="#/componentTypes">Manage Component Types</a></li>
+        <li ng-class="{current:  currentPath === '/componentTypeCombinations'}" has-permission="{{permissions.MANAGE_COMPONENT_COMBINATIONS}}">
+            <a href="#/componentTypeCombinations">Manage Component Combinations</a></li>
+       <li ng-class="{current:  currentPath === '/bloodTests'}" has-permission="{{permissions.MANAGE_BLOOD_TESTS}}">
+            <a href="#/bloodTests">Manage Blood Tests</a></li>
+        <li ng-class="{current:  currentPath === '/bloodTestingRules'}" has-permission="{{permissions.MANAGE_BLOOD_TESTING_RULES}}">
+            <a href="#/bloodTestingRules">Manage Blood Testing Rules</a></li>
         <li ng-class="{current: currentPath === '/auditLog'}" has-permission="{{permissions.VIEW_AUDIT_LOG}}"><a
                 href="#/auditLog">View Audit Log</a></li>
+        <li ng-class="{current: currentPath === '/dataExport'}" has-permission="{{permissions.DATA_EXPORT}}"><a
+                href="#/dataExport">Data Export</a></li>
     </ul>
     <div ng-include="'views/sidebarFooter.html'"></div>
 </div>

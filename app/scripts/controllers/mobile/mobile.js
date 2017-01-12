@@ -1,22 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('MobileCtrl', function($scope, $filter, $location, $routeParams, MobileService, ICONS, PERMISSIONS, uiGridExporterConstants) {
-
-    $scope.icons = ICONS;
-    $scope.permissions = PERMISSIONS;
-
-    $scope.isCurrent = function(path) {
-      if (path.length > 1 && $location.path().substr(0, path.length) === path) {
-        $location.path(path);
-        $scope.selection = path;
-        return true;
-      } else if ($location.path() === path) {
-        return true;
-      } else {
-        return !!($location.path() === '/mobile' && path === '/lookUp');
-      }
-    };
+  .controller('MobileCtrl', function($scope, $filter, $location, $routeParams, MobileService, uiGridExporterConstants) {
 
     $scope.venues = [];
     $scope.error = {
@@ -99,6 +84,13 @@ angular.module('bsis')
           columns.push({text: 'Clinic Date: ' + clinicDate, width: 'auto'});
         }
 
+        // Include Number and Percentage Eligible Donors
+        columns.push({text: 'Eligible Donors: ' +
+           $scope.numberEligibleDonor + ' out of ' +
+           $scope.gridOptions.data.length +
+            ' (' + $scope.percentageEligibleDonor + '%)',
+          width: 'auto'});
+
         return [
           {
             text: 'Mobile Clinic Look Up',
@@ -132,9 +124,25 @@ angular.module('bsis')
       }
     };
 
-    function getISOString(maybeDate) {
-      return angular.isDate(maybeDate) ? maybeDate.toISOString() : maybeDate;
-    }
+    var calculateNumberEligibleDonors = function(data) {
+      var eligibleDonorCount = 0;
+
+      data.forEach(function(donor) {
+        if (donor.eligibility) {
+          eligibleDonorCount++;
+        }
+      });
+
+      return eligibleDonorCount;
+    };
+
+    var calculatePercentageEligibleDonors = function(numberEligibleDonors, totalNumberDonors) {
+      if (totalNumberDonors > 0) {
+        return Math.round(numberEligibleDonors / totalNumberDonors * 100);
+      } else {
+        return 0;
+      }
+    };
 
     $scope.onSearch = function(form) {
 
@@ -146,17 +154,20 @@ angular.module('bsis')
 
       var search = {
         venueId: $scope.currentSearch.venue,
-        clinicDate: getISOString($scope.currentSearch.clinicDate)
+        clinicDate: $filter('isoString')($scope.currentSearch.clinicDate)
       };
 
       $location.search(angular.extend({search: true}, search));
 
       $scope.searching = true;
       MobileService.mobileClinicLookUp(search, function(res) {
-        $scope.gridOptions.data = res;
+        $scope.gridOptions.data = res.donors;
+        $scope.numberEligibleDonor = calculateNumberEligibleDonors($scope.gridOptions.data);
+        $scope.percentageEligibleDonor = calculatePercentageEligibleDonors($scope.numberEligibleDonor, $scope.gridOptions.data.length);
+        $scope.gridOptions.paginationCurrentPage = 1;
         $scope.searching = false;
       }, function(err) {
-        $scope.error.message = err.userMessage;
+        $scope.error.message = err.data.userMessage;
         $scope.searching = false;
       });
     };

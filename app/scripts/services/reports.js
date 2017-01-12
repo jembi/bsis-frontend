@@ -18,6 +18,16 @@ angular.module('bsis')
         });
       },
       generateStockLevelsReport: Api.StockLevelsReport.generate,
-      getStockLevelsReportForm: Api.StockLevelsReport.getForm
+      getStockLevelsReportForm: Api.StockLevelsReport.getForm,
+      getBloodUnitsIssuedReportForm: Api.BloodUnitsIssuedReport.getForm,
+      generateBloodUnitsIssuedReport: Api.BloodUnitsIssuedReport.generate,
+      generateDonorsDeferredReport: Api.DonorsDeferredReport.generate,
+      getDonorsDeferredReportForm: Api.DonorsDeferredReport.getForm,
+      generateUnitsDiscardedReport: Api.UnitsDiscardedReport.generate,
+      getUnitsDiscardedReportForm: Api.UnitsDiscardedReport.getForm,
+      generateComponentProductionReport: Api.ComponentProductionReport.generate,
+      getComponentProductionReportForm: Api.ComponentProductionReport.getForm,
+      generateDonorsAdverseEventsReport: Api.DonorsAdverseEventsReport.generate,
+      getDonorsAdverseEventsReportForm: Api.DonorsAdverseEventsReport.getForm
     };
   });

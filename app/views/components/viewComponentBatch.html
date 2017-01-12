@@ -19,7 +19,7 @@
 
   <section>
     <h4>Donation Batch Info</h4>
-    <span class="text-muted">Date Created:</span> {{componentBatch.donationBatch.createdDate | bsisDate}}
+    <span class="text-muted">Date Created:</span> {{componentBatch.donationBatch.donationBatchDate | bsisDate}}
     <span class="text-muted">Venue:</span> {{componentBatch.donationBatch.venue.name}}
     <span class="text-muted">Number of Donations:</span> {{componentBatch.donationBatch.numDonations}}
     <span class="text-muted">Status:</span> {{componentBatch.donationBatch.isClosed ? 'CLOSED' : 'OPEN'}}

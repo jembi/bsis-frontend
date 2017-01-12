@@ -164,7 +164,7 @@ angular.module('bsis')
         mergedRow.oPlus = newRow.value;
       } else if (bloodType === 'O-') {
         mergedRow.oMinus = newRow.value;
-      } else if (bloodType === 'nullnull') {
+      } else if (bloodType === 'nullnull' || !bloodType) {
         mergedRow.empty = newRow.value;
       }
 
@@ -237,6 +237,7 @@ angular.module('bsis')
         $scope.gridOptions.columnDefs = isInStockSearch() ? inStockColumnDefs : notLabelledColumnDefs;
         $scope.searched = true;
         $scope.searching = false;
+        $scope.gridOptions.paginationCurrentPage = 1;
       }, function(err) {
         $scope.searching = false;
         $log.error(err);

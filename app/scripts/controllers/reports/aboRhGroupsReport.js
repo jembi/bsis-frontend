@@ -7,6 +7,7 @@ angular.module('bsis')
 
     var mergedData = [];
     var mergedKey = {};
+    var summaryData = [];
     var master = {
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: moment().endOf('day').toDate()
@@ -27,7 +28,7 @@ angular.module('bsis')
 
     function createZeroValuesRow(row, venue, gender) {
       var zeroValuesRow = angular.copy(row);
-      zeroValuesRow.venue.name = venue;
+      zeroValuesRow.venue = venue;
       zeroValuesRow.cohorts = gender;
       zeroValuesRow.aPlus = 0;
       zeroValuesRow.aMinus = 0;
@@ -44,7 +45,7 @@ angular.module('bsis')
 
     function createAllGendersRow(femaleRow, maleRow) {
       var allGendersRow = angular.copy(femaleRow);
-      allGendersRow.venue.name = '';
+      allGendersRow.venue = '';
       allGendersRow.cohorts = 'All';
       allGendersRow.aPlus = femaleRow.aPlus + maleRow.aPlus;
       allGendersRow.aMinus = femaleRow.aMinus + maleRow.aMinus;
@@ -77,7 +78,7 @@ angular.module('bsis')
         mergedRow.oPlus = newRow.value;
       } else if (bloodType === 'O-') {
         mergedRow.oMinus = newRow.value;
-      } else if (bloodType === 'nullnull') {
+      } else if (bloodType === 'nullnull' || !bloodType) {
         mergedRow.empty = newRow.value;
       }
       mergedRow.total = mergedRow.aPlus + mergedRow.aMinus + mergedRow.bPlus + mergedRow.bMinus + mergedRow.abPlus + mergedRow.abMinus +
@@ -92,6 +93,40 @@ angular.module('bsis')
       mergedKey = mergedKey + 1;
       mergedData[mergedKey] = createAllGendersRow(mergedFemaleRow, mergedMaleRow);
       mergedKey = mergedKey + 1;
+    }
+
+    function calculateSummary() {
+      summaryData = [
+        ['All venues', 'female', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ['', 'male', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ['', 'All', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      ];
+      var summaryRow = null;
+      angular.forEach(mergedData, function(row) {
+        if (row.cohorts === 'female') {
+          summaryRow = summaryData[0];
+        }
+        if (row.cohorts === 'male') {
+          summaryRow = summaryData[1];
+        }
+        if (row.cohorts === 'All') {
+          summaryRow = summaryData[2];
+        }
+
+        summaryRow[2] = summaryRow[2] + row.aPlus;
+        summaryRow[3] = summaryRow[3] + row.aMinus;
+        summaryRow[4] = summaryRow[4] + row.bPlus;
+        summaryRow[5] = summaryRow[5] + row.bMinus;
+        summaryRow[6] = summaryRow[6] + row.abPlus;
+        summaryRow[7] = summaryRow[7] + row.abMinus;
+        summaryRow[8] = summaryRow[8] + row.oPlus;
+        summaryRow[9] = summaryRow[9] + row.oMinus;
+        summaryRow[10] = summaryRow[10] + row.empty;
+        summaryRow[11] = summaryRow[11] + row.total;
+      });
+
+      // Convert all summary values to text
+      summaryData = ReportsLayoutService.convertAllValuesToText(summaryData);
     }
 
     function mergeData(dataValues) {
@@ -110,7 +145,8 @@ angular.module('bsis')
         newRow.cohorts = gender;
 
         // New venue
-        if (newRow.venue.name !== previousVenue) {
+        if (newRow.location.name !== previousVenue) {
+          $scope.venuesNumber += 1;
 
           if (previousVenue != '') {
             // Add female, male and all rows for previous venue
@@ -118,7 +154,7 @@ angular.module('bsis')
           }
 
           // Initialize values for the new venue
-          previousVenue = newRow.venue.name;
+          previousVenue = newRow.location.name;
           mergedFemaleRow = createZeroValuesRow(newRow, previousVenue, 'female');
           mergedMaleRow = createZeroValuesRow(newRow, '', 'male');
         }
@@ -158,8 +194,12 @@ angular.module('bsis')
 
       ReportsService.generateDonationsReport(period, function(report) {
         $scope.searching = false;
+        $scope.venuesNumber = 0;
         if (report.dataValues.length > 0) {
           mergeData(report.dataValues);
+          $scope.gridOptions.paginationCurrentPage = 1;
+        } else {
+          $scope.gridOptions.data = [];
         }
         $scope.submitted = true;
       }, function(err) {
@@ -171,7 +211,7 @@ angular.module('bsis')
     // Grid ui variables and methods
 
     var columnDefs = [
-      { name: 'Venue', field: 'venue.name' },
+      { name: 'Venue', field: 'venue' },
       { name: 'Gender', field: 'cohorts'},
       { name: 'A+', field: 'aPlus', width: 55 },
       { name: 'A-', field: 'aMinus', width: 55 },
@@ -184,20 +224,6 @@ angular.module('bsis')
       { name: 'NTD', displayName: 'NTD', field: 'empty', width: 65 },
       { name: 'Total', field: 'total' }
     ];
-
-    function updatePdfDocDefinition(docDefinition) {
-      // Fill with grey 'All' rows
-      docDefinition.styles.greyBoldCell = ReportsLayoutService.pdfTableBodyGreyBoldStyle;
-      angular.forEach(docDefinition.content[0].table.body, function(row) {
-        if (row[1] === 'All') {
-          angular.forEach(row, function(cell, index) {
-            row[index] = { text: '' + cell, style: 'greyBoldCell'};
-          });
-        }
-      });
-
-      return ReportsLayoutService.paginatePdf(33, docDefinition);
-    }
 
     $scope.gridOptions = {
       data: [],
@@ -212,19 +238,28 @@ angular.module('bsis')
       exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
       exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
 
+      // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        return updatePdfDocDefinition(docDefinition);
+        if ($scope.venuesNumber > 1) {
+          calculateSummary();
+          docDefinition = ReportsLayoutService.addSummaryContent(summaryData, docDefinition);
+        }
+        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
+        docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
+        return docDefinition;
       },
 
       // PDF header
       exporterPdfHeader: function() {
-        return ReportsLayoutService.generatePdfPageHeader('ABO Rh Blood Grouping Report',
+        var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
+          'ABO Rh Blood Grouping Report',
           ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
+        return header;
       },
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.gridOptions.data.length / 3, currentPage, pageCount);
+        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {

@@ -1,9 +1,10 @@
 angular.module('bsis')
-  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, PERMISSIONS, $filter, ngTableParams, $timeout, $routeParams, uiGridConstants, $log, ModalsService) {
+  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, $filter, ngTableParams, $timeout, $routeParams, uiGridConstants, $log, ModalsService) {
 
     var selectedComponents = [];
     var forms = $scope.forms = {};
     $scope.selectedAction = null;
+    $scope.componentsReceived = true;
     $scope.componentsSearch = {
       donationIdentificationNumber: $routeParams.donationIdentificationNumber || ''
     };
@@ -203,6 +204,7 @@ angular.module('bsis')
           // If no row is selected selectedAction = null
           if (selectedComponents.length === 0) {
             $scope.selectedAction = null;
+            $scope.componentsReceived = true;
           } else if (selectedComponents.length === 1) {
             // When the first row is selected, assign value selectedAction
             var firstSelectedComponent = angular.copy(selectedComponents[0]);
@@ -211,6 +213,10 @@ angular.module('bsis')
             } else if (firstSelectedComponent.permissions.canUndiscard) {
               $scope.selectedAction = 'UNDISCARD';
             } else {
+              $scope.selectedAction = 'NONE';
+            }
+            if (!firstSelectedComponent.hasComponentBatch) {
+              $scope.componentsReceived = false;
               $scope.selectedAction = 'NONE';
             }
           }

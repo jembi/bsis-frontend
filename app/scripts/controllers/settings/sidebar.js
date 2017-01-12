@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, RoutingService, ICONS, PERMISSIONS) {
+angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, RoutingService, ICONS) {
 
   var routes = [
     {
@@ -59,14 +59,36 @@ angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, Routin
         '/manageLocation'
       ]
     }, {
+      path: '/componentTypeCombinations',
+      subpaths: [
+        '/manageComponentTypeCombination'
+      ]
+    }, {
       path: '/componentTypes',
       subpaths: [
         '/manageComponentType'
       ]
+    }, {
+      path: '/divisions',
+      subpaths: [
+        '/manageDivision'
+      ]
+    }, {
+      path: '/bloodTestingRules',
+      subpaths: [
+        '/manageBloodTestingRule'
+      ]
+    }, {
+      path: '/bloodTests',
+      subpaths: [
+        '/manageBloodTest'
+      ]
+    }, {
+      path: '/dataExport',
+      subpaths: []
     }
   ];
 
   $scope.icons = ICONS;
-  $scope.permissions = PERMISSIONS;
   $scope.currentPath = RoutingService.getCurrentPath(routes);
 });
