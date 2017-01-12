@@ -226,15 +226,15 @@ angular.module('bsis')
       {
         name: 'Created On',
         field: 'createdOn',
-        cellFilter: 'bsisDate',
+        cellFilter: 'bsisDateTime',
         width: '**',
-        maxWidth: '150'
+        maxWidth: '160'
       },
       {
         name: 'Expiry Status',
         field: 'expiryStatus',
         width: '**',
-        maxWidth: '250',
+        maxWidth: '200',
         sortingAlgorithm: function(a, b, rowA, rowB) {
           return UtilsService.dateSort(rowA.entity.expiresOn, rowB.entity.expiresOn);
         }
