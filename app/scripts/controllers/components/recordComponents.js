@@ -246,7 +246,7 @@ angular.module('bsis')
       });
     };
 
-    $scope.recordChildWerght = function() {
+    $scope.recordChildWeight = function() {
 
       if (forms.childComponentWeightForm.$invalid) {
         return;
