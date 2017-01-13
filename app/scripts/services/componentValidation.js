@@ -12,6 +12,7 @@ angular.module('bsis')
           message: 'Component weight exceeds weight of parent component - please re-enter'
         });
       }
+
       // Continue with recording weight
       return $q.resolve();
     }
