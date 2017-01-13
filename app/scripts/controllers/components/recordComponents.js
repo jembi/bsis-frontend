@@ -51,49 +51,47 @@ angular.module('bsis')
       }
     };
 
-    function getConfirmationMessage(parentComponent, processedOn) {
+    function getMaxTimesConfirmationMessage(parentComponent, processedOn) {
       var confirmationMessage = '';
       // Add to confirmation message if time since donation is greater or equals to maxTimeSinceDonation
-      var timeSinceDonationconfirmationMessage = '';
+      var componentTypesExceedingMaxTimeSinceDonation = '';
       var separator = '';
+      var timeSinceDonation = moment.duration(moment(processedOn).diff(moment(parentComponent.donationDateTime))).asHours();
       angular.forEach(producedComponentTypesByCombinationId[parentComponent.componentTypeCombination.id], function(componentType) {
-        var timeSinceDonation = moment.duration(moment(processedOn).diff(moment(parentComponent.donationDateTime))).asHours();
         if (componentType.maxTimeSinceDonation != null && timeSinceDonation >= componentType.maxTimeSinceDonation) {
           // Ignore duplicates
-          if (timeSinceDonationconfirmationMessage.indexOf(componentType.componentTypeName) === -1) {
-            timeSinceDonationconfirmationMessage += separator + componentType.componentTypeName;
+          if (componentTypesExceedingMaxTimeSinceDonation.indexOf(componentType.componentTypeName) === -1) {
+            componentTypesExceedingMaxTimeSinceDonation += separator + componentType.componentTypeName;
           }
           separator = ', ';
         }
       });
 
-      if (timeSinceDonationconfirmationMessage.length > 0) {
-        // Replace last comma with a dot
-
-        confirmationMessage = 'Time since donation exceeded, the following components will be flagged as unsafe: ' + timeSinceDonationconfirmationMessage + '.';
+      if (componentTypesExceedingMaxTimeSinceDonation.length > 0) {
+        confirmationMessage = 'Time since donation exceeded, the following components will be flagged as unsafe: ' + componentTypesExceedingMaxTimeSinceDonation + '.';
       }
 
       // Add to confirmation message if bleed times gap is greater or equals to maxBleedTime
-      var bleedTimesConfirmationMessage = '';
+      var componentTypesExceedingMaxBleedTime = '';
       separator = '';
+      var bleedTimesGap = moment.duration(moment(parentComponent.bleedEndTime).diff(moment(parentComponent.bleedStartTime))).asMinutes();
       angular.forEach(producedComponentTypesByCombinationId[parentComponent.componentTypeCombination.id], function(componentType) {
-        var bleedTimesGap = moment.duration(moment(parentComponent.bleedEndTime).diff(moment(parentComponent.bleedStartTime))).asMinutes();
         if (componentType.maxBleedTime != null && bleedTimesGap >= componentType.maxBleedTime) {
           // Ignore duplicates
-          if (bleedTimesConfirmationMessage.indexOf(componentType.componentTypeName) === -1) {
-            bleedTimesConfirmationMessage += separator + componentType.componentTypeName;
+          if (componentTypesExceedingMaxBleedTime.indexOf(componentType.componentTypeName) === -1) {
+            componentTypesExceedingMaxBleedTime += separator + componentType.componentTypeName;
           }
           separator = ', ';
         }
       });
 
-      if (bleedTimesConfirmationMessage.length > 0) {
+      if (componentTypesExceedingMaxBleedTime.length > 0) {
         // Add two new lines if the maxTimeSinceDonation was also exceeded
         var conditionalNewLines = '';
         if (confirmationMessage.length > 0) {
           conditionalNewLines = '</br></br>';
         }
-        confirmationMessage += conditionalNewLines + 'Bleed time exceeded, the following components will be flagged as unsafe: ' + bleedTimesConfirmationMessage + '.';
+        confirmationMessage += conditionalNewLines + 'Bleed time exceeded, the following components will be flagged as unsafe: ' + componentTypesExceedingMaxBleedTime + '.';
       }
 
       return confirmationMessage;
@@ -101,7 +99,7 @@ angular.module('bsis')
 
     function showComponentMaxTimesConfirmation(parentComponent, processedOn) {
 
-      var confirmationMessage = getConfirmationMessage(parentComponent, processedOn);
+      var confirmationMessage = getMaxTimesConfirmationMessage(parentComponent, processedOn);
 
       if (confirmationMessage.length > 0) {
         return ModalsService.showConfirmation({
