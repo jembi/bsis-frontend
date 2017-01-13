@@ -14,6 +14,8 @@ angular.module('bsis')
 
     var deferralsData = [{}];
     $scope.deferralsData = deferralsData;
+    $scope.lastDeferral = null;
+    $scope.durationType = null;
 
     var groupKey = '1';
     if ($routeParams.groupKey) {
@@ -112,6 +114,8 @@ angular.module('bsis')
           deferralsData = response.allDeferrals;
           $scope.deferralResults = deferralsData.length !== 0;
           $scope.deferralsData = deferralsData;
+          $scope.lastDeferral = deferralsData[deferralsData.length - 1];
+          $scope.durationType = $scope.lastDeferral.deferralReason.durationType;
           // update mergedDonor
           $scope.updatedMergedDonor = response.mergedDonor;
           mergedDonor.dateOfFirstDonation = response.mergedDonor.dateOfFirstDonation;

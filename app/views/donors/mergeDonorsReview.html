@@ -33,10 +33,15 @@
                 <td class="field">Venue:</td>
                 <td class="value">{{mergedDonor.venue.name}}</td>
             </tr>
-            <tr ng-if="mergedDonor.dueToDonate != null">
+            <tr>
                 <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
                 <td class="field">Due To Donate:</td>
-                <td class="value">{{mergedDonor.dueToDonate | bsisDate:'longDate'}}</td>
+                <td class="value">{{durationType}}
+                    <span ng-if="lastDeferral === null || durationType === 'TEMPORARY'">
+                    {{mergedDonor.dueToDonate | bsisDate:'longDate'}}</span>
+                    <span ng-if="durationType === 'PERMANENT'">Not applicable</span>
+                </td>
+
             </tr>
             <tr ng-if="mergedDonor.dateOfFirstDonation != null">
                 <td class="icon"><i class="fa {{icons.CIRCLEO}}"></i></td>
