@@ -14,8 +14,6 @@ angular.module('bsis')
 
     var deferralsData = [{}];
     $scope.deferralsData = deferralsData;
-    $scope.lastDeferral = null;
-    $scope.durationType = null;
 
     var groupKey = '1';
     if ($routeParams.groupKey) {

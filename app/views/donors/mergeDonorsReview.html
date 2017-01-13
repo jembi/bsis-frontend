@@ -36,7 +36,7 @@
             <tr>
                 <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
                 <td class="field">Due To Donate:</td>
-                <td class="value">{{durationType}}
+                <td class="value">
                     <span ng-if="lastDeferral === null || durationType === 'TEMPORARY'">
                     {{mergedDonor.dueToDonate | bsisDate:'longDate'}}</span>
                     <span ng-if="durationType === 'PERMANENT'">Not applicable</span>
