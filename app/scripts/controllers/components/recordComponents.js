@@ -52,7 +52,7 @@ angular.module('bsis')
 
     var recordComponents = function() {
 
-      if (forms.recordComponentsForm.$invalid) {
+      if (!forms.recordComponentsForm.$valid) {
         return;
       }
 
