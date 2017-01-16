@@ -13,6 +13,7 @@ angular.module('bsis')
     $scope.dateFormat = DATEFORMAT;
     $scope.maxProcessedOnDate = moment().endOf('day').toDate();
     $scope.processedOn = null;
+    $scope.parentComponentRef = null;
     var producedComponentTypesByCombinationId = null;
 
     var originalComponent = null;
@@ -319,6 +320,7 @@ angular.module('bsis')
         if (componentsResponse !== false) {
           $scope.gridOptions.data = componentsResponse.components;
           componentList = componentsResponse.components;
+          $scope.parentComponentRef = componentList[0];
           $scope.component = null;
           $scope.searching = false;
         } else {
