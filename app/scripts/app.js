@@ -1241,7 +1241,30 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       }
     };
   })
-
+  .directive('dateTimeAfter', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModel) {
+        ngModel.$validators.dateTimeAfter = function(modelValue) {
+          if (modelValue) {
+            var dateTimeAttr = angular.copy(new Date(attr.dateTimeAfter));
+            var dateTimeModel = angular.copy(new Date(modelValue));
+            return dateTimeModel > dateTimeAttr;
+          }
+        };
+        // Watch and unwatch attr
+        var unwatch = scope.$watch(function() {
+          return attr.dateAfter;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-start changes
+          ngModel.$validate();
+        });
+        scope.$on('$destroy', function() {
+          unwatch();
+        });
+      }
+    };
+  })
   .directive('maxDecimalDigits', function() {
     return {
       require: 'ngModel',

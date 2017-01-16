@@ -52,7 +52,7 @@ angular.module('bsis')
 
     var recordComponents = function() {
 
-      if (forms.recordComponentsForm.$invalid) {
+      if (!forms.recordComponentsForm.$valid) {
         return;
       }
 
@@ -75,6 +75,12 @@ angular.module('bsis')
         }
       });
 
+    };
+
+    $scope.updateTimeOnProcessedOnDate = function() {
+      if (angular.isDefined($scope.processedOn.time)) {
+        $scope.processedOn.date = moment($scope.processedOn.date).hour($scope.processedOn.time.getHours()).minutes($scope.processedOn.time.getMinutes()).toDate();
+      }
     };
 
     function showComponentWeightConfirmation(component) {
@@ -226,15 +232,15 @@ angular.module('bsis')
       {
         name: 'Created On',
         field: 'createdOn',
-        cellFilter: 'bsisDate',
+        cellFilter: 'bsisDateTime',
         width: '**',
-        maxWidth: '150'
+        maxWidth: '160'
       },
       {
         name: 'Expiry Status',
         field: 'expiryStatus',
         width: '**',
-        maxWidth: '250',
+        maxWidth: '200',
         sortingAlgorithm: function(a, b, rowA, rowB) {
           return UtilsService.dateSort(rowA.entity.expiresOn, rowB.entity.expiresOn);
         }
