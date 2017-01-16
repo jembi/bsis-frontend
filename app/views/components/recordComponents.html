@@ -108,16 +108,17 @@
           <label for="processedOnDate" class="col-sm-2 control-label">Processing Date</label>
           <div class="col-sm-10">
             <div class="time form-inline"  style="width:150px;">
-              <dateselect style="width:100%;" name="processedOnDate" ng-model="processedOn.date" format="dateFormat" ng-class="{'has-error' : (forms.recordComponentsForm.processedOnDate.$invalid && forms.recordComponentsForm.$submitted)}" ng-required="true" max-date="maxProcessedOnDate" ng-model-options="{ allowInvalid: false }" date-time-not-in-future="{{processedOn.time | date:'yyyy-MM-dd HH:mm:ss'}}"></dateselect>
+              <dateselect style="width:100%;" name="processedOnDate" ng-model="processedOn.date" format="dateFormat" ng-class="{'has-error' : (forms.recordComponentsForm.processedOnDate.$invalid && forms.recordComponentsForm.$submitted)}" ng-required="true" date-time-after="{{component.createdOn}}" ng-model-options="{ allowInvalid: true }" min-date="component.createdOn" max-date="maxProcessedOnDate" date-time-not-in-future="{{processedOn.time | date:'yyyy-MM-dd HH:mm:ss'}}"></dateselect>
               <ng-messages for="forms.recordComponentsForm.processedOnDate.$error" role="alert" ng-show="forms.recordComponentsForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
+                <small class="error" ng-message="dateTimeAfter">Date is before collection date: please re-enter</small>
               </ng-messages>
             </div>
             <div class="time form-group">
               <label for="processedOnTime" class="col-sm-2 control-label">Time</label>
               <div class="col-sm-5">
                   <div>
-                    <uib-timepicker ng-model="processedOn.time" name="processedOnTime" show-spinners="false" ng-required="submitted"></uib-timepicker>
+                    <uib-timepicker ng-model="processedOn.time" name="processedOnTime" show-spinners="false" ng-required="submitted" ng-class="{'has-error' : ((forms.recordComponentsForm.processedOnTime.$invalid || forms.recordComponentsForm.processedOnDate.$invalid) && forms.recordComponentsForm.$submitted)}" ng-change="updateTimeOnProcessedOnDate()"></uib-timepicker>
                     <ng-messages for="forms.recordComponentsForm.processedOnTime.$error" ng-show="forms.recordComponentsForm.$submitted">
                       <ng-messages-include src="messages.html"></ng-messages-include>
                     </ng-messages>
