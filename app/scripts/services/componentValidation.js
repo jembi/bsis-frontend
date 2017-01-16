@@ -9,7 +9,7 @@ angular.module('bsis')
         return ModalsService.showConfirmation({
           title: 'Overweight Child Packs',
           button: 'Continue',
-          message: 'Child components weight exceeds weight of parent component'
+          message: 'Combined weight of components exceeds weight of parent component. Do you want to continue?'
         });
       }
 
