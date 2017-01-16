@@ -1164,7 +1164,132 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       }
     };
   })
-  ;
+
+  .directive('timeIsAfter', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModel) {
+        ngModel.$validators.invalidTimeRange = function(modelValue) {
+          var startTime = new Date(attr.timeIsAfter);
+          var endTime = new Date(modelValue);
+          return startTime <= endTime;
+        };
+        // Watch and unwatch attr
+        var unwatch = scope.$watch(function() {
+          return attr.timeIsAfter;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-start changes
+          ngModel.$validate();
+        });
+        scope.$on('$destroy', function() {
+          unwatch();
+        });
+      }
+    };
+  })
+
+  .directive('timeNotSameAs', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModel) {
+        ngModel.$validators.sameTimeEntered = function(modelValue) {
+          var startTime = new Date(attr.timeNotSameAs);
+          var endTime = new Date(modelValue);
+          return (moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) >= 1;
+        };
+        // Watch and unwatch attr
+        var unwatch = scope.$watch(function() {
+          return attr.timeNotSameAs;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-start changes
+          ngModel.$validate();
+        });
+        scope.$on('$destroy', function() {
+          unwatch();
+        });
+      }
+    };
+  })
+
+  .directive('dateTimeNotInFuture', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModel) {
+        ngModel.$validators.dateInFuture = function(modelValue) {
+          if (modelValue) {
+            var timeAttr = attr.dateTimeNotInFuture;
+            // If time is a different model value, get it as an attribute. If not, use time from modelValue
+            var date = angular.copy(new Date(modelValue));
+            var time = angular.copy(new Date(timeAttr));
+            if (!timeAttr) {
+              time = date;
+            }
+            var dateTime = moment(date).hour(time.getHours()).minutes(time.getMinutes());
+            return dateTime <= moment().toDate();
+          }
+        };
+        // Watch and unwatch attr
+        var unwatch = scope.$watch(function() {
+          return attr.dateTimeNotInFuture;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-start changes
+          ngModel.$validate();
+        });
+        scope.$on('$destroy', function() {
+          unwatch();
+        });
+      }
+    };
+  })
+  .directive('dateTimeAfter', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModel) {
+        ngModel.$validators.dateTimeAfter = function(modelValue) {
+          if (modelValue) {
+            var dateTimeAttr = angular.copy(new Date(attr.dateTimeAfter));
+            var dateTimeModel = angular.copy(new Date(modelValue));
+            return dateTimeModel > dateTimeAttr;
+          }
+        };
+        // Watch and unwatch attr
+        var unwatch = scope.$watch(function() {
+          return attr.dateAfter;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-start changes
+          ngModel.$validate();
+        });
+        scope.$on('$destroy', function() {
+          unwatch();
+        });
+      }
+    };
+  })
+  .directive('maxDecimalDigits', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModel) {
+        ngModel.$validators.maxDecimalDigits = function(modelValue) {
+          if (!modelValue) {
+            return true;
+          }
+          var maxDecimalDigits = attr.maxDecimalDigits;
+          var actualDecimalDigits = (modelValue.toString().split('.')[1] || []).length;
+          return (actualDecimalDigits <= maxDecimalDigits);
+        };
+        // Watch and unwatch attr
+        var unwatch = scope.$watch(function() {
+          return attr.maxDecimalDigits;
+        }, function() {
+          // force the controller to re-validate if the attribute ui-date-start changes
+          ngModel.$validate();
+        });
+        scope.$on('$destroy', function() {
+          unwatch();
+        });
+      }
+    };
+  });
 
 var UI = {ADDRESS: {}};
 var DONATION = {DONOR: {}};

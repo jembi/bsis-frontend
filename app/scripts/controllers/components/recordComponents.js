@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ModalsService, UtilsService, $uibModal) {
+  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ModalsService, UtilsService, $uibModal, DATEFORMAT) {
 
     $scope.component = null;
     $scope.componentsSearch = {
@@ -9,6 +9,11 @@ angular.module('bsis')
     };
     $scope.preProcessing = false;
     $scope.unprocessing = false;
+    $scope.dateFormat = DATEFORMAT;
+    $scope.maxProcessedOnDate = moment().endOf('day').toDate();
+    $scope.processedOn = null;
+    var producedComponentTypesByCombinationId = null;
+
     var originalComponent = null;
     var forms = $scope.forms = {};
 
@@ -23,12 +28,17 @@ angular.module('bsis')
       });
     };
 
-    $scope.clearComponentTypeCombination = function() {
+    $scope.clearRecordComponentForm = function() {
       if ($scope.component) {
         $scope.component.componentTypeCombination = null;
+        $scope.processedOn = {
+          date: moment().toDate(),
+          time: moment().toDate()
+        };
       }
       if (forms.recordComponentsForm) {
         forms.recordComponentsForm.$setPristine();
+        forms.recordComponentsForm.processedOnDate.$setValidity('dateInFuture', true);
       }
     };
 
@@ -37,36 +47,107 @@ angular.module('bsis')
         $scope.component = angular.copy(originalComponent);
       }
       if (forms.preProcessForm) {
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', true);
         forms.preProcessForm.$setPristine();
       }
     };
 
+    function getMaxTimesConfirmationMessage(parentComponent, processedOn) {
+      var confirmationMessage = '';
+      // Add to confirmation message if time since donation is greater or equals to maxTimeSinceDonation
+      var componentTypesExceedingMaxTimeSinceDonation = '';
+      var separator = '';
+      var timeSinceDonation = moment.duration(moment(processedOn).diff(moment(parentComponent.donationDateTime))).asHours();
+      angular.forEach(producedComponentTypesByCombinationId[parentComponent.componentTypeCombination.id], function(componentType) {
+        if (componentType.maxTimeSinceDonation != null && timeSinceDonation >= componentType.maxTimeSinceDonation) {
+          // Ignore duplicates
+          if (componentTypesExceedingMaxTimeSinceDonation.indexOf(componentType.componentTypeName) === -1) {
+            componentTypesExceedingMaxTimeSinceDonation += separator + componentType.componentTypeName;
+          }
+          separator = ', ';
+        }
+      });
+
+      if (componentTypesExceedingMaxTimeSinceDonation.length > 0) {
+        confirmationMessage = 'Time since donation exceeded, the following components will be flagged as unsafe: ' + componentTypesExceedingMaxTimeSinceDonation + '.';
+      }
+
+      // Add to confirmation message if bleed times gap is greater or equals to maxBleedTime
+      var componentTypesExceedingMaxBleedTime = '';
+      separator = '';
+      var bleedTimesGap = moment.duration(moment(parentComponent.bleedEndTime).diff(moment(parentComponent.bleedStartTime))).asMinutes();
+      angular.forEach(producedComponentTypesByCombinationId[parentComponent.componentTypeCombination.id], function(componentType) {
+        if (componentType.maxBleedTime != null && bleedTimesGap >= componentType.maxBleedTime) {
+          // Ignore duplicates
+          if (componentTypesExceedingMaxBleedTime.indexOf(componentType.componentTypeName) === -1) {
+            componentTypesExceedingMaxBleedTime += separator + componentType.componentTypeName;
+          }
+          separator = ', ';
+        }
+      });
+
+      if (componentTypesExceedingMaxBleedTime.length > 0) {
+        // Add two new lines if the maxTimeSinceDonation was also exceeded
+        var conditionalNewLines = '';
+        if (confirmationMessage.length > 0) {
+          conditionalNewLines = '</br></br>';
+        }
+        confirmationMessage += conditionalNewLines + 'Bleed time exceeded, the following components will be flagged as unsafe: ' + componentTypesExceedingMaxBleedTime + '.';
+      }
+
+      return confirmationMessage;
+    }
+
+    function showComponentMaxTimesConfirmation(parentComponent, processedOn) {
+
+      var confirmationMessage = getMaxTimesConfirmationMessage(parentComponent, processedOn);
+
+      if (confirmationMessage.length > 0) {
+        return ModalsService.showConfirmation({
+          title: 'Time since Donation or Bleed Time exceeded',
+          button: 'Continue',
+          message: confirmationMessage
+        });
+      }
+
+      // Continue with processing
+      return $q.resolve();
+    }
+
     var recordComponents = function() {
 
-      if (forms.recordComponentsForm.$invalid) {
+      if (!forms.recordComponentsForm.$valid) {
         return;
       }
 
       var componentToRecord = {
         parentComponentId: $scope.component.id,
-        componentTypeCombination: $scope.component.componentTypeCombination
+        componentTypeCombination: $scope.component.componentTypeCombination,
+        processedOn: moment($scope.processedOn.date).hour($scope.processedOn.time.getHours()).minutes($scope.processedOn.time.getMinutes())
       };
 
       $scope.recordingComponents = true;
-      ComponentService.recordComponents(componentToRecord, function(recordResponse) {
-        if (recordResponse !== false) {
-          $scope.gridOptions.data = recordResponse.components;
-          forms.recordComponentsForm.$setPristine();
-          $scope.component = null;
-          $scope.recordingComponents = false;
-        } else {
-          // TODO: handle case where response == false
-          $scope.recordingComponents = false;
-        }
+      showComponentMaxTimesConfirmation($scope.component, componentToRecord.processedOn).then(function() {
+        ComponentService.recordComponents(componentToRecord, function(recordResponse) {
+          if (recordResponse !== false) {
+            $scope.gridOptions.data = recordResponse.components;
+            forms.recordComponentsForm.$setPristine();
+            $scope.component = null;
+            $scope.recordingComponents = false;
+          } else {
+            // TODO: handle case where response == false
+            $scope.recordingComponents = false;
+          }
+        });
+      }).catch(function() {
+        // Confirmation was rejected
+        $scope.recordingComponents = false;
       });
+    };
 
+    $scope.updateTimeOnProcessedOnDate = function() {
+      if (angular.isDefined($scope.processedOn.time)) {
+        $scope.processedOn.date = moment($scope.processedOn.date).hour($scope.processedOn.time.getHours()).minutes($scope.processedOn.time.getMinutes()).toDate();
+      }
     };
 
     function showComponentWeightConfirmation(component) {
@@ -127,21 +208,6 @@ angular.module('bsis')
     }
 
     $scope.preProcessSelectedComponent = function() {
-
-      var startTime = new Date($scope.component.bleedStartTime);
-      var endTime = new Date($scope.component.bleedEndTime);
-
-      $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', true);
-      if (startTime > endTime) {
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('invalidTimeRange', false);
-        return;
-      }
-
-      $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', true);
-      if ((moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) < 1) {
-        $scope.forms.preProcessForm.bleedEndTime.$setValidity('sameTimeEntered', false);
-        return;
-      }
 
       if (forms.preProcessForm.$invalid) {
         return;
@@ -242,15 +308,15 @@ angular.module('bsis')
       {
         name: 'Created On',
         field: 'createdOn',
-        cellFilter: 'bsisDate',
+        cellFilter: 'bsisDateTime',
         width: '**',
-        maxWidth: '150'
+        maxWidth: '160'
       },
       {
         name: 'Expiry Status',
         field: 'expiryStatus',
         width: '**',
-        maxWidth: '250',
+        maxWidth: '200',
         sortingAlgorithm: function(a, b, rowA, rowB) {
           return UtilsService.dateSort(rowA.entity.expiresOn, rowB.entity.expiresOn);
         }
@@ -283,6 +349,10 @@ angular.module('bsis')
           } else {
             $scope.component = angular.copy(selectedRows[0]);
             originalComponent = angular.copy(selectedRows[0]);
+            $scope.processedOn = {
+              date: moment().toDate(),
+              time: moment().toDate()
+            };
           }
         });
       }
@@ -322,6 +392,11 @@ angular.module('bsis')
       if ($routeParams.search) {
         $scope.getComponentsByDIN();
       }
+      ComponentService.getComponentsFormFields(function(response) {
+        if (response !== false) {
+          producedComponentTypesByCombinationId = response.producedComponentTypesByCombinationId;
+        }
+      });
     }
 
     init();
