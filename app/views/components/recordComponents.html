@@ -103,7 +103,7 @@
           <label for="processedOnDate" class="col-sm-2 control-label">Processing Date</label>
           <div class="col-sm-10">
             <div class="time form-inline"  style="width:150px;">
-              <dateselect style="width:100%;" name="processedOnDate" ng-model="processedOn.date" format="dateFormat" ng-class="{'has-error' : (forms.recordComponentsForm.processedOnDate.$invalid && forms.recordComponentsForm.$submitted)}" ng-required="true" date-time-after="{{component.createdOn}}" ng-model-options="{ allowInvalid: false }" min-date="component.createdOn" max-date="maxProcessedOnDate" date-time-not-in-future="{{processedOn.time | date:'yyyy-MM-dd HH:mm:ss'}}"></dateselect>
+              <dateselect style="width:100%;" name="processedOnDate" ng-model="processedOn.date" format="dateFormat" ng-class="{'has-error' : (forms.recordComponentsForm.processedOnDate.$invalid && forms.recordComponentsForm.$submitted)}" ng-required="true" date-time-after="{{component.createdOn}}" ng-model-options="{ allowInvalid: true }" min-date="component.createdOn" max-date="maxProcessedOnDate" date-time-not-in-future="{{processedOn.time | date:'yyyy-MM-dd HH:mm:ss'}}"></dateselect>
               <ng-messages for="forms.recordComponentsForm.processedOnDate.$error" role="alert" ng-show="forms.recordComponentsForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
                 <small class="error" ng-message="dateTimeAfter">Processing date cannot be before created on</small>
