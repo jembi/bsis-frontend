@@ -3,13 +3,13 @@
 angular.module('bsis')
 	.factory('ComponentValidationService', function(ModalsService, $q) {
   return {
-    showChildComponentWeightConfirmation: function(parent, child) {
-      // Show confirmation if child weight is greater than parent weight
-      if (child.weight > parent.weight) {
+    showChildComponentWeightConfirmation: function(parent, totalChildrenWeight) {
+      // Show confirmation if total child weight is greater than parent weight
+      if (totalChildrenWeight > parent.weight) {
         return ModalsService.showConfirmation({
-          title: 'Overweight Pack',
+          title: 'Overweight Child Packs',
           button: 'Continue',
-          message: 'Component weight exceeds weight of parent component - please re-enter'
+          message: 'Child components weight exceeds weight of parent component'
         });
       }
 

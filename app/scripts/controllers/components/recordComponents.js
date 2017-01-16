@@ -247,6 +247,17 @@ angular.module('bsis')
       });
     };
 
+    function calculateChildrenTotalWeight(currentChild) {
+      var totalWeight = 0;
+      for (var i = 0;i < componentList.length;i++) {
+        // do not include current child as weight might have changed
+        if (i >= 1 && componentList[i].id !== currentChild.id) {
+          totalWeight += componentList[i].weight;
+        }
+      }
+      return currentChild.weight + totalWeight;
+    }
+
     $scope.recordChildWeight = function() {
 
       if (forms.childComponentWeightForm.$invalid) {
@@ -254,7 +265,7 @@ angular.module('bsis')
       }
 
       $scope.savingChildWeight = true;
-      ComponentValidationService.showChildComponentWeightConfirmation(componentList[0], $scope.component).then(function() {
+      ComponentValidationService.showChildComponentWeightConfirmation(componentList[0], calculateChildrenTotalWeight($scope.component)).then(function() {
 
         var weightParams = {weight: $scope.component.weight, id: $scope.component.id};
         ComponentService.recordChildWeight({}, weightParams, function(res) {
