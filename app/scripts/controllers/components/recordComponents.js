@@ -13,7 +13,6 @@ angular.module('bsis')
     $scope.dateFormat = DATEFORMAT;
     $scope.maxProcessedOnDate = moment().endOf('day').toDate();
     $scope.processedOn = null;
-    $scope.parentComponentRef = null;
     var producedComponentTypesByCombinationId = null;
 
     var originalComponent = null;
@@ -343,13 +342,23 @@ angular.module('bsis')
         if (componentsResponse !== false) {
           $scope.gridOptions.data = componentsResponse.components;
           componentList = componentsResponse.components;
-          $scope.parentComponentRef = componentList[0];
           $scope.component = null;
           $scope.searching = false;
         } else {
           $scope.searching = false;
         }
       });
+    };
+
+    $scope.getParentComponentWeight = function(selectedComponent) {
+      var weight = null;
+      angular.forEach($scope.gridOptions.data, function(component) {
+        if (component.id === selectedComponent.parentComponentId) {
+          weight = component.weight;
+          return;
+        }
+      });
+      return weight;
     };
 
     var columnDefs = [
