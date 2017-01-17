@@ -112,6 +112,11 @@ angular.module('bsis')
           deferralsData = response.allDeferrals;
           $scope.deferralResults = deferralsData.length !== 0;
           $scope.deferralsData = deferralsData;
+          var deferrals = deferralsData.slice();
+
+          deferrals.sort(function(a, b) {
+            return (new Date(a.deferralDate) - new Date(b.deferralDate));
+          });
           $scope.lastDeferral = deferralsData[deferralsData.length - 1];
           $scope.durationType = $scope.lastDeferral.deferralReason.durationType;
           // update mergedDonor
