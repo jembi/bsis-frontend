@@ -6,7 +6,10 @@
     <tr>
         <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
         <td class="field">Due To Donate:</td>
-        <td class="value">{{dueToDonate | bsisDate:'longDate'}}</td>
+        <td class="value">
+          <span ng-if="lastDeferral === null || lastDeferral.deferralReason.durationType === 'TEMPORARY'">{{dueToDonate | bsisDate:'longDate'}}</span>
+          <span ng-if="lastDeferral.deferralReason.durationType === 'PERMANENT'">Not applicable</span>
+        </td>
     </tr>
 
     <tr>
