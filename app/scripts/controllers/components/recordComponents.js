@@ -253,7 +253,8 @@ angular.module('bsis')
       var totalWeight = 0;
       for (var i = 0;i < componentList.length;i++) {
         // do not include current child as weight might have changed
-        if (i >= 1 && componentList[i].id !== currentChild.id) {
+        if (componentList[i].id !== currentChild.id
+          && componentList[i].parentComponentId == currentChild.parentComponentId) {
           // ensure calculation is done on components with weight set
           if (componentList[i].weight !== null) {
             totalWeight += componentList[i].weight;
