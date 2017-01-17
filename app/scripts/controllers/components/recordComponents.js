@@ -170,22 +170,21 @@ angular.module('bsis')
         });
       }
 
-      // Show confirmation if it is below min weight when lowVolumeWeight is null
-      if (component.packType.lowVolumeWeight == null && component.weight < component.packType.minWeight) {
-        return ModalsService.showConfirmation({
-          title: 'Underweight Pack',
-          button: 'Continue',
-          message: 'The pack weight (' + component.weight + 'g) is below the minimum acceptable range (' + component.packType.minWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
-        });
-      }
-
-      // Show confirmation if it is below min weight
       if (component.packType.minWeight != null && component.weight < component.packType.minWeight) {
-        return ModalsService.showConfirmation({
-          title: 'Low Pack Weight',
-          button: 'Continue',
-          message: 'The pack weight (' + component.weight + 'g) is low (below ' + component.packType.minWeight + 'g). All components from this donation containing plasma will be flagged as Unsafe. Do you want to continue?'
-        });
+        // Show confirmation if it is below min weight when lowVolumeWeight is null
+        if (component.packType.lowVolumeWeight == null) {
+          return ModalsService.showConfirmation({
+            title: 'Underweight Pack',
+            button: 'Continue',
+            message: 'The pack weight (' + component.weight + 'g) is below the minimum acceptable range (' + component.packType.minWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
+          });
+        } else {
+          return ModalsService.showConfirmation({
+            title: 'Low Pack Weight',
+            button: 'Continue',
+            message: 'The pack weight (' + component.weight + 'g) is low (below ' + component.packType.minWeight + 'g). All components from this donation containing plasma will be flagged as Unsafe. Do you want to continue?'
+          });
+        }
       }
 
       // Weight is within valid range
