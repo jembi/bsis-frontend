@@ -254,7 +254,10 @@ angular.module('bsis')
       for (var i = 0;i < componentList.length;i++) {
         // do not include current child as weight might have changed
         if (i >= 1 && componentList[i].id !== currentChild.id) {
-          totalWeight += componentList[i].weight;
+          // ensure calculation is done on components with weight set
+          if (componentList[i].weight !== null) {
+            totalWeight += componentList[i].weight;
+          }
         }
       }
       return currentChild.weight + totalWeight;
@@ -267,36 +270,42 @@ angular.module('bsis')
       }
 
       $scope.savingChildWeight = true;
-      ComponentValidationService.showChildComponentWeightConfirmation(componentList[0], calculateChildrenTotalWeight($scope.component)).then(function() {
+      //Refresh componentsList so that calculateChildrenTotalWeight(..) uses the correct weights
+      ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(componentsResponse) {
+        if (componentsResponse !== false) {
+          componentList = componentsResponse.components;
+          ComponentValidationService.showChildComponentWeightConfirmation(componentList[0], calculateChildrenTotalWeight($scope.component)).then(function() {
 
-        var weightParams = {weight: $scope.component.weight, id: $scope.component.id};
-        ComponentService.recordChildWeight({}, weightParams, function(res) {
-          $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
-            // Replace the component in the grid with the updated component
-            if (component.id === res.component.id) {
-              return res.component;
-            } else {
-              return component;
-            }
-          });
+            var weightParams = {weight: $scope.component.weight, id: $scope.component.id};
+            ComponentService.recordChildWeight({}, weightParams, function(res) {
+              $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
+                // Replace the component in the grid with the updated component
+                if (component.id === res.component.id) {
+                  return res.component;
+                } else {
+                  return component;
+                }
+              });
 
-          // Clear validation on the record components form
-          if (forms.childComponentWeightForm) {
-            forms.childComponentWeightForm.$setPristine();
-          }
+              // Clear validation on the record components form
+              if (forms.childComponentWeightForm) {
+                forms.childComponentWeightForm.$setPristine();
+              }
 
-          // Make sure that the row remains selected
-          $timeout(function() {
-            $scope.gridApi.selection.selectRow(res.component);
+              // Make sure that the row remains selected
+              $timeout(function() {
+                $scope.gridApi.selection.selectRow(res.component);
+                $scope.savingChildWeight = false;
+              });
+            }, function(err) {
+              $log.error(err);
+              $scope.savingChildWeight = false;
+            });
+          }).catch(function() {
+            // Confirmation was rejected
             $scope.savingChildWeight = false;
           });
-        }, function(err) {
-          $log.error(err);
-          $scope.savingChildWeight = false;
-        });
-      }).catch(function() {
-        // Confirmation was rejected
-        $scope.savingChildWeight = false;
+        }
       });
     };
 
