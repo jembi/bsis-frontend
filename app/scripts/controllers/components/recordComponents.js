@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ModalsService, UtilsService, $uibModal, DATEFORMAT) {
+  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ComponentValidationService, ModalsService, UtilsService, $uibModal, DATEFORMAT) {
 
     $scope.component = null;
     $scope.componentsSearch = {
       donationIdentificationNumber: $routeParams.donationIdentificationNumber || ''
     };
+    $scope.savingChildWeight = false;
     $scope.preProcessing = false;
     $scope.unprocessing = false;
     $scope.dateFormat = DATEFORMAT;
@@ -16,6 +17,7 @@ angular.module('bsis')
 
     var originalComponent = null;
     var forms = $scope.forms = {};
+    var componentList = null;
 
     $scope.clear = function() {
       $scope.componentsSearch.donationIdentificationNumber = '';
@@ -48,6 +50,15 @@ angular.module('bsis')
       }
       if (forms.preProcessForm) {
         forms.preProcessForm.$setPristine();
+      }
+    };
+
+    $scope.clearChildComponentWeightForm = function() {
+      if ($scope.component) {
+        $scope.component = angular.copy(originalComponent);
+      }
+      if (forms.childComponentWeightForm) {
+        forms.childComponentWeightForm.$setPristine();
       }
     };
 
@@ -237,6 +248,79 @@ angular.module('bsis')
       });
     };
 
+    function calculateChildrenTotalWeight(currentChild) {
+      var totalWeight = 0;
+      for (var i = 0;i < componentList.length;i++) {
+        // do not include current child as weight might have changed
+        if (componentList[i].id !== currentChild.id
+          && componentList[i].parentComponentId === currentChild.parentComponentId) {
+          // ensure calculation is done on components with weight set
+          if (componentList[i].weight !== null) {
+            totalWeight += componentList[i].weight;
+          }
+        }
+      }
+      return currentChild.weight + totalWeight;
+    }
+
+    function getParentComponent(selectedComponent) {
+      var parentComponent = null;
+      angular.forEach($scope.gridOptions.data, function(component) {
+        if (component.id === selectedComponent.parentComponentId) {
+          parentComponent = component;
+          return;
+        }
+      });
+      return parentComponent;
+    }
+
+    $scope.recordChildWeight = function() {
+
+      if (forms.childComponentWeightForm.$invalid) {
+        return;
+      }
+
+      $scope.savingChildWeight = true;
+      //Refresh componentsList so that calculateChildrenTotalWeight(..) uses the correct weights
+      ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(componentsResponse) {
+        if (componentsResponse !== false) {
+          componentList = componentsResponse.components;
+          var parentComponent = getParentComponent($scope.component);
+          var totalChildrenWeight = calculateChildrenTotalWeight($scope.component);
+          ComponentValidationService.showChildComponentWeightConfirmation(parentComponent, totalChildrenWeight).then(function() {
+            var weightParams = {weight: $scope.component.weight, id: $scope.component.id};
+            ComponentService.recordChildWeight({}, weightParams, function(res) {
+              $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
+                // Replace the component in the grid with the updated component
+                if (component.id === res.component.id) {
+                  return res.component;
+                } else {
+                  return component;
+                }
+              });
+
+              // Clear validation on the record components form
+              if (forms.childComponentWeightForm) {
+                forms.childComponentWeightForm.$setPristine();
+              }
+
+              // Make sure that the row remains selected
+              $timeout(function() {
+                $scope.gridApi.selection.selectRow(res.component);
+                $scope.savingChildWeight = false;
+              });
+            }, function(err) {
+              $log.error(err);
+              $scope.savingChildWeight = false;
+            });
+          }).catch(function() {
+            // Confirmation was rejected
+            $scope.savingChildWeight = false;
+          });
+        }
+      });
+    };
+
     $scope.unprocessSelectedComponent = function() {
       var unprocessConfirmation = {
         title: 'Unprocess Component',
@@ -269,12 +353,21 @@ angular.module('bsis')
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(componentsResponse) {
         if (componentsResponse !== false) {
           $scope.gridOptions.data = componentsResponse.components;
+          componentList = componentsResponse.components;
           $scope.component = null;
           $scope.searching = false;
         } else {
           $scope.searching = false;
         }
       });
+    };
+
+    $scope.getParentComponentWeight = function(selectedComponent) {
+      var parentComponent = getParentComponent(selectedComponent);
+      if (parentComponent != null) {
+        return parentComponent.weight;
+      }
+      return null;
     };
 
     var columnDefs = [

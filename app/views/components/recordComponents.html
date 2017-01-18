@@ -30,29 +30,6 @@
       <!-- Components grid -->
       <div class="grid" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination style="height:{{(gridOptions.minRowsToShow*gridOptions.rowHeight)+gridOptions.headerRowHeight+gridOptions.gridFooterHeight}}px;margin-bottom:10px;"></div>
 
-      <div ng-if="!component" style="clear:left;">
-        <strong>
-          <em>Select a component to process</em>
-        </strong>
-      </div>
-
-      <div ng-if="component && !component.hasComponentBatch" style="clear:left;">
-        <strong>
-          <em>Selected Component cannot be processed until component batch received</em>
-        </strong>
-      </div>
-
-      <div ng-if="component && !component.permissions.canPreProcess && !component.permissions.canProcess && component.hasComponentBatch" style="clear:left;">
-        <strong>
-          <em>Selected component cannot be processed further</em>
-        </strong>
-        <div>
-          <button class="btn btn-primary" ng-click="unprocessSelectedComponent();" ng-disabled="unprocessing" ng-if="component.permissions.canUnprocess">
-            {{unprocessing ? "Unprocessing..." : "Unprocess components"}}
-          </button>
-        </div>
-      </div>
-
       <!-- Component pre process form -->
       <form role="form" name="forms.preProcessForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canPreProcess" ng-submit="preProcessSelectedComponent()" novalidate>
         <div class="form-group">
@@ -94,6 +71,28 @@
             <button type="button" class="btn btn-primary" ng-disabled="preProcessing" ng-click="clearPreProcessForm();">Clear</button>
           </div>
         </div>
+      </form>
+
+      <!-- Child component weight form -->
+      <form role="form" name="forms.childComponentWeightForm" ng-if="component.permissions.canRecordChildComponentWeight" class="form-horizontal col-sm-12" ng-submit="recordChildWeight()" novalidate>
+        <div class="form-group">
+          <label for="componentWeight" class="col-sm-2 control-label">Component Weight</label>
+          <div class="col-sm-10">
+            <input name="componentWeight" class="form-control" style="width:auto;" type="number" ng-min="1" ng-max="{{getParentComponentWeight(component)}}" ng-model="component.weight" required />
+            <ng-messages for="forms.childComponentWeightForm.componentWeight.$error" role="alert" ng-show="forms.childComponentWeightForm.$submitted">
+              <small class="error" ng-message="max">Component weight exceeds weight of parent component</small>
+              <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-3 col-sm-offset-2">
+            <button type="submit" class="btn btn-primary" ng-disabled="savingChildWeight">{{savingChildWeight ? "Saving..." : "Save"}}
+            </button>
+            <button type="button" class="btn btn-primary" ng-disabled="savingChildWeight" ng-click="clearChildComponentWeightForm();">Clear</button>
+          </div>
+        </div>        
+        </br>
       </form>
 
       <!-- Process component form -->
@@ -148,6 +147,29 @@
           </div>
         </div>
       </form>
+
+      <div ng-if="!component" style="clear:left;">
+        <strong>
+          <em>Select a component to process</em>
+        </strong>
+      </div>
+
+      <div ng-if="component && !component.hasComponentBatch" style="clear:left;">
+        <strong>
+          <em>Selected Component cannot be processed until component batch received</em>
+        </strong>
+      </div>
+
+      <div ng-if="component && !component.permissions.canPreProcess && !component.permissions.canProcess && component.hasComponentBatch" style="clear:left;">
+        <strong>
+          <em>Selected component cannot be processed further</em>
+        </strong>
+        <div>
+          <button class="btn btn-primary" ng-click="unprocessSelectedComponent();" ng-disabled="unprocessing" ng-if="component.permissions.canUnprocess">
+            {{unprocessing ? "Unprocessing..." : "Unprocess components"}}
+          </button>
+        </div>
+      </div>
 
     </div>
   </div>
