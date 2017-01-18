@@ -253,7 +253,7 @@ angular.module('bsis')
       for (var i = 0;i < componentList.length;i++) {
         // do not include current child as weight might have changed
         if (componentList[i].id !== currentChild.id
-          && componentList[i].parentComponentId == currentChild.parentComponentId) {
+          && componentList[i].parentComponentId === currentChild.parentComponentId) {
           // ensure calculation is done on components with weight set
           if (componentList[i].weight !== null) {
             totalWeight += componentList[i].weight;
@@ -261,6 +261,17 @@ angular.module('bsis')
         }
       }
       return currentChild.weight + totalWeight;
+    }
+
+    function getParentComponent(selectedComponent) {
+      var parentComponent = null;
+      angular.forEach($scope.gridOptions.data, function(component) {
+        if (component.id === selectedComponent.parentComponentId) {
+          parentComponent = component;
+          return;
+        }
+      });
+      return parentComponent;
     }
 
     $scope.recordChildWeight = function() {
@@ -274,8 +285,9 @@ angular.module('bsis')
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(componentsResponse) {
         if (componentsResponse !== false) {
           componentList = componentsResponse.components;
-          ComponentValidationService.showChildComponentWeightConfirmation(componentList[0], calculateChildrenTotalWeight($scope.component)).then(function() {
-
+          var parentComponent = getParentComponent($scope.component);
+          var totalChildrenWeight = calculateChildrenTotalWeight($scope.component);
+          ComponentValidationService.showChildComponentWeightConfirmation(parentComponent, totalChildrenWeight).then(function() {
             var weightParams = {weight: $scope.component.weight, id: $scope.component.id};
             ComponentService.recordChildWeight({}, weightParams, function(res) {
               $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
@@ -351,14 +363,11 @@ angular.module('bsis')
     };
 
     $scope.getParentComponentWeight = function(selectedComponent) {
-      var weight = null;
-      angular.forEach($scope.gridOptions.data, function(component) {
-        if (component.id === selectedComponent.parentComponentId) {
-          weight = component.weight;
-          return;
-        }
-      });
-      return weight;
+      var parentComponent = getParentComponent(selectedComponent);
+      if (parentComponent != null) {
+        return parentComponent.weight;
+      }
+      return null;
     };
 
     var columnDefs = [
