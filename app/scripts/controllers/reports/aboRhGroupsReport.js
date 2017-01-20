@@ -62,23 +62,23 @@ angular.module('bsis')
     function mergeRows(newRow, existingRow, bloodType) {
       var mergedRow = angular.copy(existingRow);
       if (bloodType === 'A+') {
-        mergedRow.aPlus = newRow.value;
+        mergedRow.aPlus += newRow.value;
       } else if (bloodType === 'A-') {
-        mergedRow.aMinus = newRow.value;
+        mergedRow.aMinus += newRow.value;
       } else if (bloodType === 'B+') {
-        mergedRow.bPlus = newRow.value;
+        mergedRow.bPlus += newRow.value;
       } else if (bloodType === 'B-') {
-        mergedRow.bMinus = newRow.value;
+        mergedRow.bMinus += newRow.value;
       } else if (bloodType === 'AB+') {
-        mergedRow.abPlus = newRow.value;
+        mergedRow.abPlus += newRow.value;
       } else if (bloodType === 'AB-') {
-        mergedRow.abMinus = newRow.value;
+        mergedRow.abMinus += newRow.value;
       } else if (bloodType === 'O+') {
-        mergedRow.oPlus = newRow.value;
+        mergedRow.oPlus += newRow.value;
       } else if (bloodType === 'O-') {
-        mergedRow.oMinus = newRow.value;
+        mergedRow.oMinus += newRow.value;
       } else if (bloodType === 'nullnull') {
-        mergedRow.empty = newRow.value;
+        mergedRow.empty += newRow.value;
       }
       mergedRow.total = mergedRow.aPlus + mergedRow.aMinus + mergedRow.bPlus + mergedRow.bMinus + mergedRow.abPlus + mergedRow.abMinus +
         mergedRow.oPlus + mergedRow.oMinus + mergedRow.empty;
