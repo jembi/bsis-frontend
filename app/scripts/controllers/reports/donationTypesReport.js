@@ -68,15 +68,15 @@ angular.module('bsis')
     function mergeRows(newRow, existingRow, donationType) {
       var mergedRow = angular.copy(existingRow);
       if (donationType === 'Voluntary') {
-        mergedRow.voluntary = newRow.value;
+        mergedRow.voluntary += newRow.value;
       } else if (donationType === 'Family') {
-        mergedRow.family = newRow.value;
+        mergedRow.family += newRow.value;
       } else if (donationType === 'Autologous') {
-        mergedRow.autologous = newRow.value;
+        mergedRow.autologous += newRow.value;
       } else if (donationType === 'Other') {
-        mergedRow.other = newRow.value;
+        mergedRow.other += newRow.value;
       } else if (donationType === 'null') {
-        mergedRow.empty = newRow.value;
+        mergedRow.empty += newRow.value;
       }
       mergedRow.total = mergedRow.voluntary + mergedRow.family + mergedRow.autologous + mergedRow.other + mergedRow.empty;
       return mergedRow;
