@@ -61,19 +61,19 @@ angular.module('bsis')
       var mergedRow = angular.copy(existingRow);
       if (bloodTest === 'HIV') {
         if (result === 'POS') {
-          mergedRow.hivpos = newRow.value;
+          mergedRow.hivpos += newRow.value;
         }
       } else if (bloodTest === 'HBV') {
         if (result === 'POS') {
-          mergedRow.hbvpos = newRow.value;
+          mergedRow.hbvpos += newRow.value;
         }
       } else if (bloodTest === 'HCV') {
         if (result === 'POS') {
-          mergedRow.hcvpos = newRow.value;
+          mergedRow.hcvpos += newRow.value;
         }
       } else if (bloodTest === 'Syphilis') {
         if (result === 'POS') {
-          mergedRow.syphpos = newRow.value;
+          mergedRow.syphpos += newRow.value;
         }
       }
 
