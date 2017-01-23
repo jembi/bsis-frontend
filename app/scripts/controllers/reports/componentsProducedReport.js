@@ -135,7 +135,7 @@ angular.module('bsis')
         angular.forEach(componentTypes, function(ct, index) {
           if (componentType === ct.componentTypeName) {
             // Populate component type rows
-            rowsForVenue[index][bloodType] = newRow.value;
+            rowsForVenue[index][bloodType] += newRow.value;
             rowsForVenue[index].total += newRow.value;
             // Populate total row
             rowsForVenue[componentTypes.length + 1][bloodType] += newRow.value;
