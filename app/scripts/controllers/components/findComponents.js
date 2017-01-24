@@ -16,6 +16,7 @@ angular.module('bsis')
     var searchMaster = {
       donationIdentificationNumber: '',
       componentTypes: [],
+      locations: [],
       donationDateFrom: moment().subtract(7, 'days').startOf('day').toDate(),
       donationDateTo: moment().endOf('day').toDate()
     };
@@ -87,6 +88,7 @@ angular.module('bsis')
       if (din && din.length > 0) {
         $scope.dinSearch = true;
         $scope.search.componentTypes = [];
+        $scope.search.locations = [];
         $scope.search.donationDateFrom = null;
         $scope.search.donationDateTo = null;
       } else {
@@ -132,6 +134,15 @@ angular.module('bsis')
             $scope.search.componentTypes.push(parseInt(selectedComponentType));
           });
         }
+        if ($routeParams.locations) {
+          var locations = $routeParams.locations;
+          if (!angular.isArray(locations)) {
+            locations = [locations];
+          }
+          angular.forEach(locations, function(selectedLocation) {
+            $scope.search.locations.push(parseInt(selectedLocation));
+          });
+        }
         $scope.updateDinSearch();
         $scope.findComponents($scope.search);
       }
@@ -141,6 +152,7 @@ angular.module('bsis')
       ComponentService.getComponentsFormFields(function(response) {
         if (response !== false) {
           $scope.componentTypes = response.componentTypes;
+          $scope.locations = response.locations;
           initialiseRouteParams();
         }
       });
