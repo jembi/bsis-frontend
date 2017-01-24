@@ -215,7 +215,7 @@
                                 <td class="icon"><i class="fa {{icons.CIRCLE}}"></i></td>
                                 <td class="field">Previous Donation:</td>
                                 <td class="value">
-                                    <em>Date</em>: {{ (lastDonation.donationDate | bsisDateTime) || '' }}<br/>
+                                    <em>Date</em>: {{ (lastDonation.donationDate | bsisDate) || '' }}<br/>
                                     <em>Venue</em>: {{lastDonation.venue.name}} <br/>
                                     <em>Donation Type</em>: {{lastDonation.donationType.type}} |
                                     <em>Pack Type</em>: {{lastDonation.packType.packType}}<br/>
