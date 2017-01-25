@@ -25,6 +25,9 @@
         <td data-title="'Expiry Status'" header-class="text-left" sortable="'expiresOn'">
             {{ component.expiryStatus }}
         </td>
+        <td data-title="'Location'" header-class="text-left" sortable="'location'">
+            {{ component.location.name }}
+        </td>
         <td data-title="''" style="width:10%;" class="text-center">
         <span style="font-size: 0.9em;">
           <em><a ng-click="viewComponents(component.donationIdentificationNumber)">View Summary</a></em>
