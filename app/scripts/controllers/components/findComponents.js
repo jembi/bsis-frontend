@@ -141,6 +141,8 @@ angular.module('bsis')
       ComponentService.getComponentsFormFields(function(response) {
         if (response !== false) {
           $scope.componentTypes = response.componentTypes;
+          $scope.componentStatuses = response.componentStatuses;
+          $scope.componentStatus = {'status': ''};
           initialiseRouteParams();
         }
       });
