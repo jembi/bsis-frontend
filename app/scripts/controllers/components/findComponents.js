@@ -91,6 +91,7 @@ angular.module('bsis')
         $scope.search.locations = [];
         $scope.search.donationDateFrom = null;
         $scope.search.donationDateTo = null;
+        $scope.search.allSites = true;
       } else {
         $scope.dinSearch = false;
         $scope.search.donationDateFrom = moment().subtract(7, 'days').startOf('day').toDate();
@@ -100,6 +101,16 @@ angular.module('bsis')
 
     $scope.setcomponentsView = function(view) {
       $scope.componentsView = view;
+    };
+
+    $scope.clearLocations = function() {
+      $scope.search.locations = null;
+    };
+
+    $scope.updateAllSites = function() {
+      if ($scope.search.locations) {
+        $scope.search.allSites = false;
+      }
     };
 
     $scope.viewComponents = function(din) {
