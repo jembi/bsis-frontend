@@ -28,6 +28,7 @@ angular.module('bsis')
         var components = Api.Components.search({
           donationIdentificationNumber: componentsSearch.donationIdentificationNumber,
           componentTypes: componentsSearch.componentTypes,
+          locationId: componentsSearch.locationId,
           status: componentsSearch.status,
           donationDateFrom: componentsSearch.donationDateFrom,
           donationDateTo: componentsSearch.donationDateTo

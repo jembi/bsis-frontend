@@ -16,7 +16,7 @@ angular.module('bsis')
     var searchMaster = {
       donationIdentificationNumber: '',
       componentTypes: [],
-      locations: [],
+      locationId: null,
       donationDateFrom: moment().subtract(7, 'days').startOf('day').toDate(),
       donationDateTo: moment().endOf('day').toDate()
     };
@@ -88,7 +88,7 @@ angular.module('bsis')
       if (din && din.length > 0) {
         $scope.dinSearch = true;
         $scope.search.componentTypes = [];
-        $scope.search.locations = [];
+        $scope.search.locationId = null;
         $scope.search.donationDateFrom = null;
         $scope.search.donationDateTo = null;
         $scope.search.allSites = true;
@@ -138,6 +138,7 @@ angular.module('bsis')
         }
         if ($routeParams.componentTypes) {
           var componentTypes = $routeParams.componentTypes;
+
           if (!angular.isArray(componentTypes)) {
             componentTypes = [componentTypes];
           }
@@ -145,14 +146,9 @@ angular.module('bsis')
             $scope.search.componentTypes.push(parseInt(selectedComponentType));
           });
         }
-        if ($routeParams.locations) {
-          var locations = $routeParams.locations;
-          if (!angular.isArray(locations)) {
-            locations = [locations];
-          }
-          angular.forEach(locations, function(selectedLocation) {
-            $scope.search.locations.push(parseInt(selectedLocation));
-          });
+        if ($routeParams.locationId) {
+          var locationId = $routeParams.location;
+          $scope.search.locationId = locationId;
         }
         $scope.updateDinSearch();
         $scope.findComponents($scope.search);
