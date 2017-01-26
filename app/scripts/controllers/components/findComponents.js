@@ -147,7 +147,7 @@ angular.module('bsis')
           });
         }
         if ($routeParams.locationId) {
-          var locationId = $routeParams.location;
+          var locationId = $routeParams.locationId;
           $scope.search.locationId = locationId;
         }
         $scope.updateDinSearch();
