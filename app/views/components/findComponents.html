@@ -44,13 +44,18 @@
         </div>
 
         <div class="form-group">
-                         <label for="componentTypes" class="col-sm-1 control-label">Status</label>
+            <label for="statuses" class="col-sm-1 control-label">Status</label>
             <div class="row col-sm-11">
                 <div class="form-inline" style="padding-left:5px;">
-                    <select name="componentStatuses" class="form-control" ng-model="componentStatus.status" theme="bootstrap"
-                    required ng-options="componentStatus for componentStatus in componentStatuses" >
-                    <option value="" disabled>Select:</option>
+                    <select name="status" class="form-control" ng-change="updateAllStatuses" ng-model="search.status" ng-options="
+                    status for status in componentStatuses">
+                    <option value="" >Select:</option>
                     </select>
+                    <label>
+                    <input type="checkbox" name="allStatuses" ng-model="search.allStatuses" ng-click="clearComponentStatuses()" />
+                    All statuses
+                    </label>
+             </div>      
            </div>
         </div>
 

@@ -17,6 +17,7 @@ angular.module('bsis')
       donationIdentificationNumber: '',
       componentTypes: [],
       locationId: null,
+      status: null,
       donationDateFrom: moment().subtract(7, 'days').startOf('day').toDate(),
       donationDateTo: moment().endOf('day').toDate()
     };
@@ -89,9 +90,11 @@ angular.module('bsis')
         $scope.dinSearch = true;
         $scope.search.componentTypes = [];
         $scope.search.locationId = null;
+        $scope.search.status = null;
         $scope.search.donationDateFrom = null;
         $scope.search.donationDateTo = null;
         $scope.search.allSites = true;
+        $scope.search.allStatuses = true;
       } else {
         $scope.dinSearch = false;
         $scope.search.donationDateFrom = moment().subtract(7, 'days').startOf('day').toDate();
@@ -107,9 +110,19 @@ angular.module('bsis')
       $scope.search.locationId = null;
     };
 
+    $scope.clearComponentStatuses = function() {
+      $scope.search.status = null;
+    };
+
     $scope.updateAllSites = function() {
       if ($scope.search.locationId) {
         $scope.search.allSites = false;
+      }
+    };
+
+    $scope.updateAllStatuses = function() {
+      if ($scope.search.status) {
+        $scope.search.allStatuses = false;
       }
     };
 
@@ -138,7 +151,6 @@ angular.module('bsis')
         }
         if ($routeParams.componentTypes) {
           var componentTypes = $routeParams.componentTypes;
-
           if (!angular.isArray(componentTypes)) {
             componentTypes = [componentTypes];
           }
@@ -150,6 +162,10 @@ angular.module('bsis')
           var locationId = $routeParams.locationId;
           $scope.search.locationId = locationId;
         }
+        if ($routeParams.status) {
+          var status = $routeParams.status;
+          $scope.search.status = status;
+        }
         $scope.updateDinSearch();
         $scope.findComponents($scope.search);
       }
@@ -159,9 +175,8 @@ angular.module('bsis')
       ComponentService.getComponentsFormFields(function(response) {
         if (response !== false) {
           $scope.componentTypes = response.componentTypes;
-          $scope.componentStatuses = response.componentStatuses;
-          $scope.componentStatus = {'status': ''};
           $scope.locations = response.locations;
+          $scope.componentStatuses = response.componentStatuses;
           initialiseRouteParams();
         }
       });
