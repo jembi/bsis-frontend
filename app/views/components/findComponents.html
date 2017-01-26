@@ -18,7 +18,7 @@
             <label for="location" class="col-sm-1 control-label">Location</label>
             <div class="row col-sm-11">
                 <div class="form-inline" style="padding-left:5px;">
-                    <select name="locationId" class="form-control" ng-model="search.locationId" ng-options="location.id as location.name for location in locations">
+                    <select name="locationId" class="form-control" ng-change="updateAllSites()"  ng-model="search.locationId" ng-options="location.id as location.name for location in locations">
                         <option value="" disabled>Locations</option>
                     </select>
                     <label>

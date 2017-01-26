@@ -104,11 +104,11 @@ angular.module('bsis')
     };
 
     $scope.clearLocations = function() {
-      $scope.search.locations = null;
+      $scope.search.locationId = null;
     };
 
     $scope.updateAllSites = function() {
-      if ($scope.search.locations) {
+      if ($scope.search.locationId) {
         $scope.search.allSites = false;
       }
     };
