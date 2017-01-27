@@ -26,7 +26,7 @@
               All Sites
             </label>
             <div>
-                <ng-messages for="findComponentForm.locationId.$error" role="alert" ng-show="findComponentForm.locationId..$invalid && findComponentForm.$submitted">
+                <ng-messages for="findComponentForm.locationId.$error" role="alert" ng-show="findComponentForm.locationId.$invalid && findComponentForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
             </div>
           </div>
@@ -47,20 +47,18 @@
 
         <div class="form-group">
             <label for="statuses" class="col-sm-1 control-label">Status</label>
-            <div class="row col-sm-11">
-                <div class="form-inline" style="padding-left:5px;">
-                    <select name="status" class="form-control" ng-change="updateAllStatuses()" ng-model="search.status" ng-options="status for status in componentStatuses" ng-disabled="dinSearch" ng-required="!search.allStatuses" >
-                    <option value="" ></option>
-                    </select>
-                    <label>
-                    <input type="checkbox" name="allStatuses" ng-model="search.allStatuses" ng-click="clearComponentStatuses()" />
-                    All statuses
-                    </label>
-                    <div>
-                        <ng-messages for="findComponentForm.status.$error" role="alert" ng-show="findComponentForm.status.$invalid">
-                        <ng-messages-include src="messages.html"></ng-messages-include>
-                    </div>
-             </div>      
+            <div class="form-inline col-sm-11">
+                <select name="status" class="form-control" ng-change="updateAllStatuses()" ng-model="search.status" ng-options="status for status in componentStatuses" ng-disabled="dinSearch" style="min-width: 350px;" ng-required="!search.allStatuses" >
+                <option value="" ></option>
+                </select>
+                <label>
+                <input type="checkbox" name="allStatuses" ng-model="search.allStatuses" ng-click="clearComponentStatuses()" />
+                All statuses
+                </label>
+                <div>
+                    <ng-messages for="findComponentForm.status.$error" role="alert" ng-show="findComponentForm.status.$invalid">
+                    <ng-messages-include src="messages.html"></ng-messages-include>
+                </div>
            </div>
         </div>
 
