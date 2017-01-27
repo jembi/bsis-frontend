@@ -18,6 +18,7 @@ angular.module('bsis')
       componentTypes: [],
       locationId: null,
       status: null,
+      allSites: true,
       allStatuses: true,
       donationDateFrom: moment().subtract(7, 'days').startOf('day').toDate(),
       donationDateTo: moment().endOf('day').toDate()
@@ -25,7 +26,6 @@ angular.module('bsis')
     $scope.searchResults = '';
     $scope.search = angular.copy(searchMaster);
     $scope.dinSearch = false;
-    $scope.search.allSites = true;
 
     $scope.componentsSummaryTableParams = new ngTableParams({
       page: 1,            // show first page
