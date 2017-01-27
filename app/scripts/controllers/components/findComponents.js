@@ -25,6 +25,7 @@ angular.module('bsis')
     $scope.searchResults = '';
     $scope.search = angular.copy(searchMaster);
     $scope.dinSearch = false;
+    $scope.search.allSites = true;
 
     $scope.componentsSummaryTableParams = new ngTableParams({
       page: 1,            // show first page
