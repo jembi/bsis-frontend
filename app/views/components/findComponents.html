@@ -35,7 +35,7 @@
         <div class="form-group">
             <label for="componentTypes" class="col-sm-1 control-label">Type</label>
             <div class="form-inline col-sm-11">                
-                <ui-select multiple ng-model="search.componentTypes" theme="bootstrap" style="height: 34px; min-width: 350px;" ng-disabled="dinSearch">
+                <ui-select multiple ng-model="search.componentTypes" theme="bootstrap" style="min-height: 34px; width: 450px;" ng-disabled="dinSearch">
                     <ui-select-match placeholder="Select:">{{$item.componentTypeName}}</ui-select-match>
                     <ui-select-choices
                             repeat="componentType.id as componentType in componentTypes | filter:$select.search">
