@@ -26,7 +26,7 @@
               All Sites
             </label>
             <div>
-                <ng-messages for="findComponentForm.locationId.$error" role="alert" ng-show="findComponentForm.locationId.$invalid && findComponentForm.$submitted">
+                <ng-messages for="findComponentForm.locationId.$error" role="alert" ng-show="findComponentForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
             </div>
           </div>
@@ -56,7 +56,7 @@
                 All statuses
                 </label>
                 <div>
-                    <ng-messages for="findComponentForm.status.$error" role="alert" ng-show="findComponentForm.status.$invalid">
+                    <ng-messages for="findComponentForm.status.$error" role="alert" ng-show="findComponentForm.$submitted">
                     <ng-messages-include src="messages.html"></ng-messages-include>
                 </div>
            </div>
