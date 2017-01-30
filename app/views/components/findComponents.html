@@ -19,7 +19,7 @@
           <label for="locationId" class="col-sm-1 control-label">Location</label>
           <div class="form-inline col-sm-11">            
             <select name="locationId" class="form-control" ng-change="updateAllSites()"  ng-disabled="dinSearch" ng-model="search.locationId" ng-options="location.id as location.name for location in locations" style="min-width: 350px;" ng-required="!search.allSites">
-                <option value=""></option>
+                <option value="" disabled></option>
             </select>
             <label>
               <input type="checkbox" name="allSites" ng-model="search.allSites" ng-click="clearLocations()" />
@@ -49,7 +49,7 @@
             <label for="statuses" class="col-sm-1 control-label">Status</label>
             <div class="form-inline col-sm-11">
                 <select name="status" class="form-control" ng-change="updateAllStatuses()" ng-model="search.status" ng-options="status for status in componentStatuses" ng-disabled="dinSearch" style="min-width: 350px;" ng-required="!search.allStatuses" >
-                <option value="" ></option>
+                <option value="" disabled></option>
                 </select>
                 <label>
                 <input type="checkbox" name="allStatuses" ng-model="search.allStatuses" ng-click="clearComponentStatuses()" />
