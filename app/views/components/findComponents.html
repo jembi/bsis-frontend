@@ -22,7 +22,7 @@
                 <option value="" disabled></option>
             </select>
             <label>
-              <input type="checkbox" name="allSites" ng-model="search.allSites" ng-click="clearLocations()" />
+              <input type="checkbox" name="allSites" ng-model="search.allSites" ng-click="clearLocations()" ng-disabled="dinSearch" />
               All Sites
             </label>
             <div>
@@ -52,7 +52,7 @@
                 <option value="" disabled></option>
                 </select>
                 <label>
-                <input type="checkbox" name="allStatuses" ng-model="search.allStatuses" ng-click="clearComponentStatuses()" />
+                <input type="checkbox" name="allStatuses" ng-model="search.allStatuses" ng-click="clearComponentStatuses()" ng-disabled="dinSearch" />
                 All statuses
                 </label>
                 <div>
