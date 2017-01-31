@@ -16,6 +16,10 @@ angular.module('bsis')
     var searchMaster = {
       donationIdentificationNumber: '',
       componentTypes: [],
+      locationId: null,
+      status: null,
+      allSites: true,
+      allStatuses: true,
       donationDateFrom: moment().subtract(7, 'days').startOf('day').toDate(),
       donationDateTo: moment().endOf('day').toDate()
     };
@@ -87,8 +91,12 @@ angular.module('bsis')
       if (din && din.length > 0) {
         $scope.dinSearch = true;
         $scope.search.componentTypes = [];
+        $scope.search.locationId = null;
+        $scope.search.status = null;
         $scope.search.donationDateFrom = null;
         $scope.search.donationDateTo = null;
+        $scope.search.allSites = true;
+        $scope.search.allStatuses = true;
       } else {
         $scope.dinSearch = false;
         $scope.search.donationDateFrom = moment().subtract(7, 'days').startOf('day').toDate();
@@ -98,6 +106,26 @@ angular.module('bsis')
 
     $scope.setcomponentsView = function(view) {
       $scope.componentsView = view;
+    };
+
+    $scope.clearLocations = function() {
+      $scope.search.locationId = null;
+    };
+
+    $scope.clearComponentStatuses = function() {
+      $scope.search.status = null;
+    };
+
+    $scope.updateAllSites = function() {
+      if ($scope.search.locationId) {
+        $scope.search.allSites = false;
+      }
+    };
+
+    $scope.updateAllStatuses = function() {
+      if ($scope.search.status) {
+        $scope.search.allStatuses = false;
+      }
     };
 
     $scope.viewComponents = function(din) {
@@ -132,6 +160,14 @@ angular.module('bsis')
             $scope.search.componentTypes.push(parseInt(selectedComponentType));
           });
         }
+        if ($routeParams.locationId) {
+          var locationId = $routeParams.locationId;
+          $scope.search.locationId = locationId;
+        }
+        if ($routeParams.status) {
+          var status = $routeParams.status;
+          $scope.search.status = status;
+        }
         $scope.updateDinSearch();
         $scope.findComponents($scope.search);
       }
@@ -141,6 +177,8 @@ angular.module('bsis')
       ComponentService.getComponentsFormFields(function(response) {
         if (response !== false) {
           $scope.componentTypes = response.componentTypes;
+          $scope.locations = response.locations;
+          $scope.componentStatuses = response.componentStatuses;
           initialiseRouteParams();
         }
       });
