@@ -3,6 +3,7 @@
 angular.module('bsis')
   .factory('LabellingService', function($http, Api) {
     return {
+      search: Api.Labelling.search,
       getComponentForm: Api.Labelling.getComponentForm,
       getComponents: Api.Labelling.getComponents,
       verifyPackLabel: function(verificationParams, onSuccess, onError) {

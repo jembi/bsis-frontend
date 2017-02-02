@@ -247,6 +247,10 @@ angular.module('bsis')
       }),
 
       Labelling: $resource(url + '/labels/', {}, {
+        search: {
+          method: 'GET',
+          url: url + '/labels/components/search'
+        },
         getComponentForm: {
           method: 'GET',
           url: url + '/labels/components/form'
