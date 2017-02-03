@@ -257,8 +257,8 @@ angular.module('bsis')
         },
         getComponents: {
           method: 'GET',
-          url: url + '/labels/components',
-          params: {componentType: '@componentType', donationIdentificationNumber: '@donationIdentificationNumber'}
+          url: url + '/labels/donations/:donationIdentificationNumber/components',
+          params: {componentType: '@componentType'}
         },
         printPackLabel: {
           method: 'GET',
