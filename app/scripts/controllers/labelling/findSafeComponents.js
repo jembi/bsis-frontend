@@ -7,7 +7,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     donationIdentificationNumber: null,
     componentCode: null,
     locationId: null,
-    distributionSites: [],
+    locations: [],
     bloodGroups: [],
     componentTypes: [],
     allSites: true,
@@ -72,8 +72,8 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
       maxWidth: '350'
     }
   ];
-
-  function initialSort(a, b) {
+  // To be used in the hook up task
+  /*function initialSort(a, b) {
       // 1: sort by componentType code
     if (a.componentType.componentTypeCode < b.componentType.componentTypeCode) {
       return -1;
@@ -96,13 +96,13 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
         }
       }
     }
-  }
+  }*/
 
   $scope.searchParams = {};
   $scope.submitted = false;
   $scope.searching = false;
   $scope.componentTypes = [];
-  $scope.distributionSites = [];
+  $scope.locations = [];
   $scope.gridOptions = {
     data: [],
     paginationPageSize: 8,
@@ -167,15 +167,38 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     }
   };
 
+  // This is only mock ups, initialisation will be done in the hook up task
+  var bloodGroups = ['O+', 'O-', 'A+', 'A-', 'AB-', 'AB+', 'B+', 'B-'];
+  var locations = [{'id':2, 'name':'Cape town', 'isDeleted':false},
+                           {'id':1, 'name':'Muizenburg', 'isDeleted':false},
+                           {'id':3, 'name':'Paarl', 'isDeleted':false},
+                           {'id':4, 'name':'Worcester', 'isDeleted':false}];
+  var componentTypes = [{'id':1, 'componentTypeName':'Whole Blood Single Pack - CPDA', 'componentTypeCode':'0011', 'description': '', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
+                        {'id':2, 'componentTypeName':'Whole Blood Double Pack - CPDA', 'componentTypeCode':'0012', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
+                        {'id':3, 'componentTypeName':'Whole Blood Triple Pack - CPDA', 'componentTypeCode':'0013', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
+                        {'id':4, 'componentTypeName':'Whole Blood Quad Pack - CPDA', 'componentTypeCode':'0014', 'description':'',  'maxBleedTime':null, 'maxTimeSinceDonation':null},
+                        {'id':5, 'componentTypeName':'Apheresis', 'componentTypeCode':'0021', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
+                        {'id':6, 'componentTypeName':'Whole Blood - CPDA', 'componentTypeCode':'1001', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
+                        {'id':7, 'componentTypeName':'Whole Blood Poor Platelets - CPDA', 'componentTypeCode':'1005', 'description':'', 'maxBleedTime':12, 'maxTimeSinceDonation':24},
+                        {'id':8, 'componentTypeName':'Packed Red Cells - CPDA', 'componentTypeCode':'2001', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
+                        {'id':10, 'componentTypeName':'Fresh Frozen Plasma - Whole Blood', 'componentTypeCode':'3001', 'description':'', 'maxBleedTime':15, 'maxTimeSinceDonation':24},
+                        {'id':11, 'componentTypeName':'Frozen Plasma - Whole Blood', 'componentTypeCode':'3002', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
+                        {'id':12, 'componentTypeName':'Platelets Concentrate - Whole Blood', 'componentTypeCode':'4001', 'description':'', 'maxBleedTime':12, 'maxTimeSinceDonation':24},
+                        {'id':13, 'componentTypeName':'Platelets Concentrate - Whole Blood - 24H', 'componentTypeCode':'4011', 'description':'', 'maxBleedTime':12, 'maxTimeSinceDonation':24},
+                        {'id':16, 'componentTypeName':'Platelets Concentrate - Apheresis', 'componentTypeCode':'4021', 'description':'', 'maxBleedTime':12, 'maxTimeSinceDonation':24}];
+  var mockResponse = {
+    bloodGroups: bloodGroups,
+    locations: locations,
+    componentTypes: componentTypes
+  };
+
   function initialiseForm() {
     $scope.searchParams = angular.copy(searchMaster);
     $scope.submitted = false;
     $scope.searching = false;
-    LabellingService.getComponentForm({}, function(response) {
-      $scope.componentTypes = response.componentTypes;
-      $scope.distributionSites = response.distributionSites;
-      $scope.bloodGroups = response.bloodGroups;
-    }, $log.error);
+    $scope.bloodGroups = mockResponse.bloodGroups;
+    $scope.locations = mockResponse.locations;
+    $scope.componentTypes = mockResponse.componentTypes;
   }
 
   $scope.findSafeComponents = function(findSafeComponentsForm) {
@@ -184,15 +207,13 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     }
     $scope.submitted = true;
     $scope.searching = true;
-    LabellingService.search($scope.searchParams, function(response) {
-      $scope.gridOptions.paginationCurrentPage = 1;
-      $scope.gridOptions.data = response.components.sort(initialSort);
-      $scope.searching = false;
-    }, function(err) {
-      $scope.gridOptions.data = [];
-      $log.error(err);
-      $scope.searching = false;
-    });
+    $scope.gridOptions.paginationCurrentPage = 1;
+   // $scope.gridOptions.data = mockResponse.sort(initialSort);
+    $scope.searching = false;
+  }, function(err) {
+    $scope.gridOptions.data = [];
+    $log.error(err);
+    $scope.searching = false;
   };
 
   $scope.updateDinSearch = function() {
@@ -203,6 +224,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
       $scope.searchParams.componentTypes = [];
       $scope.searchParams.bloodGroups = [];
       $scope.searchParams.locationId = null;
+      $scope.searchParams.inventoryStatus = null;
       $scope.searchParams.dateFrom = null;
       $scope.searchParams.dateTo = null;
       $scope.searchParams.allSites = true;
