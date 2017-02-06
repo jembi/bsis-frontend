@@ -4,7 +4,8 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   var master = {
     selectedVenues: [],
     startDate: null,
-    endDate: null
+    endDate: null,
+    allVenues: true
   };
 
   $scope.search = angular.copy(master);
@@ -27,6 +28,12 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $scope.searched = false;
     $scope.search = angular.copy(master);
   };
+
+  $scope.updateAllVenues = function() {
+      if ($scope.search.locationId) {
+        $scope.search.allVenues = false;
+      }
+    };
 
   $scope.clearDates = function() {
     $scope.search.startDate = null;
