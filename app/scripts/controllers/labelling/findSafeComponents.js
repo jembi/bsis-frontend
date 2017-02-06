@@ -1,8 +1,6 @@
 'use strict';
 
 angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $log, $filter, LabellingService, UtilsService) {
-  var data = [{}];
-  $scope.data = data;
   var searchMaster = {
     donationIdentificationNumber: null,
     componentCode: null,
@@ -104,7 +102,6 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
   $scope.componentTypes = [];
   $scope.locations = [];
   $scope.gridOptions = {
-    data: [],
     paginationPageSize: 8,
     paginationPageSizes: [10],
     paginationTemplate: 'views/template/pagination.html',
@@ -142,7 +139,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
       // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
-          {text: 'Number of components: ' + $scope.gridOptions.data.length, width: 'auto'},
+         // {text: 'Number of components: ' + $scope.gridOptions.data.length, width: 'auto'},
           {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
           {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
       ];
