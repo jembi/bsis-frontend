@@ -104,22 +104,29 @@
                               <ng-messages for="labellingVerificationForm.packLabelDIN.$error" ng-show="labellingVerificationForm.$submitted">
                                 <ng-messages-include src="messages.html"></ng-messages-include>
                               </ng-messages>
+                              <div class="error" ng-if="!verifying && labellingVerificationForm.$submitted && !labellingVerificationForm.$invalid" ng-switch on="verificationStatus">
+                                <div ng-switch-when="notVerified">
+                                  <em>DINs do not match.</em>
+                                </div>
+                                <div ng-switch-when="sameDinScanned">
+                                  <em>
+                                    The same barcode has been scanned twice: please re-scan.
+                                  </em>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="form-group">
-                          <div class="col-sm-3 col-sm-offset-2"> &nbsp
-                            <button class="btn btn-primary" type="submit" ng-disabled="verifying">{{verifying ? "Verifying..." : "Verify Pack Label"}}
+                        <div class="col-sm-offset-2 col-sm-12">
+                            <button class="btn btn-primary" style="margin-left: 6px;" type="submit" ng-disabled="verifying">{{verifying ? "Verifying..." : "Verify Pack Label"}}
                             </button>
-                          </div>
+                            <button class="btn btn-primary" ng-show="rescanning" type="button" ng-click="rescanPackLabel(labellingVerificationForm)">
+                              Re-scan Pack Label
+                            </button>
+                        </div>
                       </div>
-
-                      <div ng-if="!verifying && labellingVerificationForm.$submitted && !labellingVerificationForm.$invalid" ng-switch on="verificationStatus">
-                        <div ng-switch-when="notVerified"><em>DINs do not match.</em></div>
-                        <div ng-switch-when="sameDinScanned"><em>The same barcode has been scanned twice: please re-scan.</em></div>
-                      </div>
-
                     </form>
                   </div>
               </div>
