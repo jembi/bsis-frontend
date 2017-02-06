@@ -9,6 +9,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     bloodGroups: [],
     componentTypes: [],
     allSites: true,
+    allComponentTypes: true,
     anyBloodGroup: true,
     inventoryStatus: null,
     dateFrom: moment().subtract(28, 'days').startOf('day').toDate(),
