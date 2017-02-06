@@ -9,7 +9,6 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     bloodGroups: [],
     componentTypes: [],
     allSites: true,
-    allComponentTypes: true,
     anyBloodGroup: true,
     inventoryStatus: null,
     dateFrom: moment().subtract(28, 'days').startOf('day').toDate(),
@@ -103,6 +102,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
   $scope.componentTypes = [];
   $scope.locations = [];
   $scope.gridOptions = {
+    data: [],
     paginationPageSize: 8,
     paginationPageSizes: [10],
     paginationTemplate: 'views/template/pagination.html',
@@ -140,7 +140,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
       // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
-         // {text: 'Number of components: ' + $scope.gridOptions.data.length, width: 'auto'},
+          {text: 'Number of components: ' + $scope.gridOptions.data.length, width: 'auto'},
           {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
           {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
       ];
