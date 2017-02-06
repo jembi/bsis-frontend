@@ -15,7 +15,7 @@
         </div>
         <label class="control-label">Component Code</label>
         <div style="display: inline-block; vertical-align: top;">
-          <input class="form-control" name="componentCode" ng-model="searchParams.componentCode" ng-required="searchParams.donationIdentificationNumber" size="8">
+          <input class="form-control" name="componentCode" ng-model="searchParams.componentCode" size="8">
           <ng-messages for="findSafeComponentsForm.componentCode.$error" role="alert" ng-show="findSafeComponentsForm.$submitted">
             <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="form-group" ng-class="{'has-error': findSafeComponentsForm.allSites.$invalid}">
+    <div class="form-group">
       <label class="col-sm-2 control-label">Site</label>
       <div class="form-inline col-sm-10">
         <select name="processingSite" class="form-control" ng-model="searchParams.locationId" ng-change="updateAllSites()" style="min-width: 350px;">
