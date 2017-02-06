@@ -188,8 +188,6 @@ angular.module('bsis')
     $scope.updateAllSites = function() {
       if ($scope.searchParams.locationId) {
         $scope.searchParams.allSites = false;
-      } else {
-        $scope.searchParams.allSites = true;
       }
     };
 

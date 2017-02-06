@@ -26,7 +26,7 @@
     <div class="form-group" ng-class="{'has-error': searchForm.allSites.$invalid}">
       <label class="col-sm-2 control-label">Distribution Center</label>
       <div class="form-inline col-sm-10">
-        <select name="distributionCenter" class="form-control" ng-model="searchParams.locationId" ng-change="updateAllSites()" style="min-width: 350px;">
+        <select name="distributionCenter" class="form-control" ng-model="searchParams.locationId" ng-change="updateAllSites()" style="min-width: 350px;" ng-required="!searchParams.allSites">
           <option value="" disabled></option>
           <option ng-repeat="distributionCenter in distributionCenters" value="{{distributionCenter.id}}">
             {{distributionCenter.name}}
@@ -36,6 +36,10 @@
           <input type="checkbox" name="allSites" ng-model="searchParams.allSites" ng-click="clearLocationId()" />
           All Sites
         </label>
+      <div>
+        <ng-messages for="searchForm.distributionCenter.$error" role="alert" ng-show="searchForm.$submitted">
+        <ng-messages-include src="messages.html"></ng-messages-include>
+      </div>
       </div>
     </div>
 
