@@ -1,13 +1,12 @@
 'use strict';
 
-angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $log, $filter, DATEFORMAT, LabellingService, UtilsService) {
+angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $log, $filter, LabellingService, UtilsService, BLOODGROUP, DATEFORMAT) {
   var searchMaster = {
     donationIdentificationNumber: null,
     componentCode: null,
     locationId: null,
-    locations: [],
     bloodGroups: [],
-    componentTypes: [],
+    componentTypeId: null,
     allSites: true,
     allComponentTypes: true,
     anyBloodGroup: true,
@@ -16,13 +15,15 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     endDate: moment().endOf('day').toDate()
   };
 
+  $scope.search = angular.copy(searchMaster);
+
   var columnDefs = [
     {
       name: 'DIN',
       displayName: 'DIN',
       field: 'donationIdentificationNumber',
       width: '**',
-      maxWidth: '150'
+      maxWidth: '100'
     },
     {
       name: 'Component Code',
@@ -35,7 +36,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
       field: 'createdOn',
       cellFilter: 'bsisDate',
       width: '**',
-      maxWidth: '150'
+      maxWidth: '130'
     },
     {
       name: 'Component Type',
@@ -43,14 +44,14 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
       width: '**'
     },
     {
-      name: 'Blood Group',
-      field: 'bloodGroup',
+      name: 'Component Status',
+      field: 'status',
       width: '**',
       maxWidth: '150'
     },
     {
-      name: 'Inventory status',
-      field: 'status',
+      name: 'Inventory Status',
+      field: 'inventoryStatus',
       width: '150',
       maxWidth: '150'
 
@@ -65,37 +66,12 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
       }
     },
     {
-      name: 'Location',
+      name: 'Site',
       field: 'location.name',
       width: '**',
       maxWidth: '350'
     }
   ];
-  // To be used in the hook up task
-  /*function initialSort(a, b) {
-      // 1: sort by componentType code
-    if (a.componentType.componentTypeCode < b.componentType.componentTypeCode) {
-      return -1;
-    } else if (a.componentType.componentTypeCode > b.componentType.componentTypeCode) {
-      return 1;
-    } else {
-      // 2: sort by DIN
-      if (a.donationIdentificationNumber < b.donationIdentificationNumber) {
-        return -1;
-      } else if (a.donationIdentificationNumber > b.donationIdentificationNumber) {
-        return 1;
-      } else {
-        // 3: sort by componentCode
-        if (a.componentCode < b.componentCode) {
-          return -1;
-        } else if (a.componentCode > b.componentCode) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }
-    }
-  }*/
 
   $scope.dateFormat = DATEFORMAT;
   $scope.searchParams = {};
@@ -168,49 +144,36 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     }
   };
 
-  // This is only mock ups, initialisation will be done in the hook up task
-  var bloodGroups = ['O+', 'O-', 'A+', 'A-', 'AB-', 'AB+', 'B+', 'B-'];
-  var locations = [{'id':2, 'name':'Cape town', 'isDeleted':false},
-                           {'id':1, 'name':'Muizenburg', 'isDeleted':false},
-                           {'id':3, 'name':'Paarl', 'isDeleted':false},
-                           {'id':4, 'name':'Worcester', 'isDeleted':false}];
-  var componentTypes = [{'id':1, 'componentTypeName':'Whole Blood Single Pack - CPDA', 'componentTypeCode':'0011', 'description': '', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
-                        {'id':2, 'componentTypeName':'Whole Blood Double Pack - CPDA', 'componentTypeCode':'0012', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
-                        {'id':3, 'componentTypeName':'Whole Blood Triple Pack - CPDA', 'componentTypeCode':'0013', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
-                        {'id':4, 'componentTypeName':'Whole Blood Quad Pack - CPDA', 'componentTypeCode':'0014', 'description':'',  'maxBleedTime':null, 'maxTimeSinceDonation':null},
-                        {'id':5, 'componentTypeName':'Apheresis', 'componentTypeCode':'0021', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
-                        {'id':6, 'componentTypeName':'Whole Blood - CPDA', 'componentTypeCode':'1001', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
-                        {'id':7, 'componentTypeName':'Whole Blood Poor Platelets - CPDA', 'componentTypeCode':'1005', 'description':'', 'maxBleedTime':12, 'maxTimeSinceDonation':24},
-                        {'id':8, 'componentTypeName':'Packed Red Cells - CPDA', 'componentTypeCode':'2001', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
-                        {'id':10, 'componentTypeName':'Fresh Frozen Plasma - Whole Blood', 'componentTypeCode':'3001', 'description':'', 'maxBleedTime':15, 'maxTimeSinceDonation':24},
-                        {'id':11, 'componentTypeName':'Frozen Plasma - Whole Blood', 'componentTypeCode':'3002', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
-                        {'id':12, 'componentTypeName':'Platelets Concentrate - Whole Blood', 'componentTypeCode':'4001', 'description':'', 'maxBleedTime':12, 'maxTimeSinceDonation':24},
-                        {'id':13, 'componentTypeName':'Platelets Concentrate - Whole Blood - 24H', 'componentTypeCode':'4011', 'description':'', 'maxBleedTime':12, 'maxTimeSinceDonation':24},
-                        {'id':16, 'componentTypeName':'Platelets Concentrate - Apheresis', 'componentTypeCode':'4021', 'description':'', 'maxBleedTime':12, 'maxTimeSinceDonation':24}];
-  var mockResponse = {
-    bloodGroups: bloodGroups,
-    locations: locations,
-    componentTypes: componentTypes
-  };
-
   function initialiseForm() {
     $scope.searchParams = angular.copy(searchMaster);
     $scope.submitted = false;
     $scope.searching = false;
-    $scope.bloodGroups = mockResponse.bloodGroups;
-    $scope.processingSites = mockResponse.locations;
-    $scope.componentTypes = mockResponse.componentTypes;
+    LabellingService.getComponentForm(function(response) {
+      if (response !== false) {
+        $scope.locations = response.locations;
+        $scope.componentTypes = response.componentTypes;
+        $scope.bloodGroups = BLOODGROUP.options;
+      }
+    });
   }
 
-  $scope.findSafeComponents = function(findSafeComponentsForm) {
-    if (findSafeComponentsForm.$invalid) {
+  $scope.findSafeComponents = function(search) {
+    if ($scope.findSafeComponentsForm.$invalid) {
       return;
     }
+
     $scope.submitted = true;
     $scope.searching = true;
     $scope.gridOptions.paginationCurrentPage = 1;
-   // $scope.gridOptions.data = mockResponse.sort(initialSort);
-    $scope.searching = false;
+
+    if (search.componentCode === '') {
+      search.componentCode = null;
+    }
+
+    LabellingService.getSafeComponents(search, function(searchResponse) {
+      $scope.gridOptions.data = searchResponse.components;
+      $scope.searching = false;
+    });
   }, function(err) {
     $scope.gridOptions.data = [];
     $log.error(err);
@@ -221,10 +184,17 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     var din = $scope.searchParams.donationIdentificationNumber;
     if (din && din.length > 0) {
       $scope.dinSearch = true;
-      $scope.searchParams = angular.copy(searchMaster);
-      $scope.searchParams.donationIdentificationNumber = din;
+      $scope.searchParams.componentTypeId = null;
+      $scope.searchParams.locationId = null;
+      $scope.searchParams.bloodGroups = [],
+      $scope.searchParams.startDate = null;
+      $scope.searchParams.endDate = null;
+      $scope.searchParams.inventoryStatus = null;
     } else {
       $scope.dinSearch = false;
+      $scope.searchParams.startDate = moment().subtract(28, 'days').startOf('day').toDate();
+      $scope.searchParams.endDate = moment().endOf('day').toDate();
+      $scope.searchParams.inventoryStatus = 'NOT_IN_STOCK';
     }
   };
 

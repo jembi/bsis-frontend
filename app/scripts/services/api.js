@@ -260,6 +260,10 @@ angular.module('bsis')
           url: url + '/labels/donations/:donationIdentificationNumber/components',
           params: {componentType: '@componentType'}
         },
+        getSafeComponents: {
+          method: 'GET',
+          url: url + '/labels/components'
+        },
         printPackLabel: {
           method: 'GET',
           url: url + '/labels/print/packlabel/:componentId'

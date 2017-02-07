@@ -2,7 +2,7 @@
 <div class="col-sm-9 col-md-10 main">
   <h3 class="page-header">Find Safe Components to Label</h3>
 
-  <form class="form-horizontal col-sm-12" name="findSafeComponentsForm" ng-submit="findSafeComponents(findSafeComponentsForm)" novalidate>
+  <form class="form-horizontal col-sm-12" name="findSafeComponentsForm" ng-submit="findSafeComponents(searchParams)" novalidate>
 
     <div class="clearfix form-group">
       <label class="col-sm-2 control-label">DIN</label>
@@ -28,8 +28,8 @@
       <div class="form-inline col-sm-10">
         <select name="processingSite" class="form-control" ng-model="searchParams.locationId" ng-change="updateAllSites()" ng-required="!searchParams.allSites" ng-disabled="dinSearch" style="min-width: 350px;">
           <option value="" disabled></option>
-          <option ng-repeat="processingSite in processingSites" value="{{processingSite.id}}">
-            {{processingSite.name}}
+          <option ng-repeat="location in locations" value="{{location.id}}">
+            {{location.name}}
           </option>
         </select>
         <label>
@@ -89,9 +89,9 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Period</label>
       <div class="col-sm-10">
-          <dateselect name="startDate" ng-model="searchParams.startDate" format="dateFormat" ng-class="{'has-error' : (findSafeComponentsForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{searchParams.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ng-disabled="dinSearch"></dateselect>
+          <dateselect name="startDate" ng-model="searchParams.startDate" format="dateFormat" ng-class="{'has-error' : (findSafeComponentsForm.startDate.$invalid)}" ng-required="!dinSearch" ui-date-range="1,months" ui-date-end="{{searchParams.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ng-disabled="dinSearch"></dateselect>
           <span><em>To </em></span>
-          <dateselect-end name="endDate" ng-model="searchParams.endDate" format="dateFormat" ng-class="{'has-error' : (findSafeComponentsForm.endDate.$invalid)}" ng-required="true" ui-date-start="{{searchParams.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" min-date="searchParams.startDate" ng-disabled="dinSearch"></dateselect-end>
+          <dateselect-end name="endDate" ng-model="searchParams.endDate" format="dateFormat" ng-class="{'has-error' : (findSafeComponentsForm.endDate.$invalid)}" ng-required="!dinSearch" ui-date-start="{{searchParams.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" min-date="searchParams.startDate" ng-disabled="dinSearch"></dateselect-end>
           <div>
             <ng-messages for="findSafeComponentsForm.startDate.$error" role="alert" ng-show="findSafeComponentsForm.$submitted">
               <small class="error" ng-message="required">Select a valid date</small>
@@ -111,11 +111,11 @@
       <label class="col-sm-2 control-label"></label>
       <div class="col-sm-10">
         <label>
-          <input type="radio" name="inventoryStatus" ng-model="searchParams.inventoryStatus" value="NOT_IN_STOCK" required ng-disabled="dinSearch" />
+          <input type="radio" name="inventoryStatus" ng-model="searchParams.inventoryStatus" value="NOT_IN_STOCK" ng-required="!dinSearch" ng-disabled="dinSearch" />
           Not in Stock
         </label>
         <label>
-          <input type="radio" name="inventoryStatus" ng-model="searchParams.inventoryStatus" value="IN_STOCK" required ng-disabled="dinSearch"/>
+          <input type="radio" name="inventoryStatus" ng-model="searchParams.inventoryStatus" value="IN_STOCK" ng-required="!dinSearch" ng-disabled="dinSearch"/>
           In Stock
         </label>
         <div>
