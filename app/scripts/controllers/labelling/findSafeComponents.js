@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $log, $filter, LabellingService, UtilsService) {
+angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $log, $filter, DATEFORMAT, LabellingService, UtilsService) {
   var searchMaster = {
     donationIdentificationNumber: null,
     componentCode: null,
@@ -97,6 +97,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     }
   }*/
 
+  $scope.dateFormat = DATEFORMAT;
   $scope.searchParams = {};
   $scope.submitted = false;
   $scope.searching = false;
