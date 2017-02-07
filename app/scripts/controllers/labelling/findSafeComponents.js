@@ -198,7 +198,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     $scope.submitted = false;
     $scope.searching = false;
     $scope.bloodGroups = mockResponse.bloodGroups;
-    $scope.processingSites = mockResponse.locations;
+    $scope.locations = mockResponse.locations;
     $scope.componentTypes = mockResponse.componentTypes;
   }
 
