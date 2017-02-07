@@ -101,6 +101,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
   $scope.searchParams = {};
   $scope.submitted = false;
   $scope.searching = false;
+  $scope.dinSearch = false;
   $scope.componentTypes = [];
   $scope.locations = [];
   $scope.gridOptions = {
@@ -217,22 +218,13 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
   };
 
   $scope.updateDinSearch = function() {
-    var din = $scope.search.donationIdentificationNumber;
+    var din = $scope.searchParams.donationIdentificationNumber;
     if (din && din.length > 0) {
       $scope.dinSearch = true;
-      $scope.searchParams.componentCode = null;
-      $scope.searchParams.componentTypes = [];
-      $scope.searchParams.bloodGroups = [];
-      $scope.searchParams.locationId = null;
-      $scope.searchParams.inventoryStatus = null;
-      $scope.searchParams.startDate = null;
-      $scope.searchParams.endDate = null;
-      $scope.searchParams.allSites = true;
-      $scope.searchParams.allComponentTypes = true;
+      $scope.searchParams = angular.copy(searchMaster);
+      $scope.searchParams.donationIdentificationNumber = din;
     } else {
       $scope.dinSearch = false;
-      $scope.search.startDate = moment().subtract(28, 'days').startOf('day').toDate();
-      $scope.search.endDate = moment().endOf('day').toDate();
     }
   };
 
@@ -273,6 +265,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     $scope.searchParams = angular.copy(searchMaster);
     $scope.submitted = false;
     $scope.searching = false;
+    $scope.dinSearch = false;
     searchForm.$setPristine();
   };
   initialiseForm();
