@@ -10,6 +10,9 @@ angular.module('bsis')
   $scope.data = data;
   $scope.canAddDonors = false;
 
+  // Show Similar Results checked by default
+  $scope.donorSearch.usePhraseMatch  = true;
+
   // Check that at least one search field is entered
   $scope.isDonorSearchValid = function() {
     var search = $scope.donorSearch;
@@ -66,6 +69,7 @@ angular.module('bsis')
       form.$setPristine();
     }
     $scope.donorSearch = {};
+    $scope.donorSearch.usePhraseMatch  = true;    // Return to default
   };
 
   $scope.tableParams = new ngTableParams({
