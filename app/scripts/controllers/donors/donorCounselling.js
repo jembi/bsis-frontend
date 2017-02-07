@@ -49,6 +49,9 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.refresh = function() {
+    if (!$scope.findDonorFlagedForCouncellingForm.$valid) {
+      return
+    }
 
     var queryParams = {
       search: true
