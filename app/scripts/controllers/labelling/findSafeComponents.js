@@ -70,6 +70,13 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
       field: 'location.name',
       width: '**',
       maxWidth: '350'
+    },
+    {
+      name: 'Blood Group',
+      field: 'bloodGroup',
+      cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.bloodAbo}}{{row.entity.bloodRh}}</div>',
+      width: '**',
+      maxWidth: '150'
     }
   ];
 
@@ -97,6 +104,8 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     exporterFieldCallback: function(grid, row, col, value) {
       if (col.field === 'createdOn') {
         return $filter('bsisDate')(value);
+      } else if (col.field === 'bloodGroup') {
+        return row.entity.bloodAbo + row.entity.bloodRh;
       }
       return value;
     },
