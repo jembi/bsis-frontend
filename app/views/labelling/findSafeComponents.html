@@ -26,7 +26,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Site</label>
       <div class="form-inline col-sm-10">
-        <select name="processingSite" class="form-control" ng-model="searchParams.locationId" ng-change="updateAllSites()" ng-required="!searchParams.allSites" ng-disabled="dinSearch" style="min-width: 350px;">
+        <select name="location" class="form-control" ng-model="searchParams.locationId" ng-change="updateAllSites()" ng-required="!searchParams.allSites" ng-disabled="dinSearch" style="min-width: 350px;">
           <option value="" disabled></option>
           <option ng-repeat="location in locations" value="{{location.id}}">
             {{location.name}}
@@ -37,7 +37,7 @@
           All Sites
         </label>
         <div>
-          <ng-messages for="findSafeComponentsForm.processingSite.$error" role="alert" ng-show="findSafeComponentsForm.$submitted">
+          <ng-messages for="findSafeComponentsForm.location.$error" role="alert" ng-show="findSafeComponentsForm.$submitted">
             <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
         </div>
@@ -95,12 +95,11 @@
           <div>
             <ng-messages for="findSafeComponentsForm.startDate.$error" role="alert" ng-show="findSafeComponentsForm.$submitted">
               <small class="error" ng-message="required">Select a valid date</small>
-              <small class="error" ng-message="uiDateRange">Select a date range that is less than one month</small>
+              <small class="error" ng-message="datesOutOfRange">Select a date range that is less than one month</small>
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
             <ng-messages for="findSafeComponentsForm.endDate.$error" role="alert" ng-show="findSafeComponentsForm.$submitted && !findSafeComponentsForm.startDate.$invalid">
               <small class="error" ng-message="required">Select a valid date</small>
-              <small class="error" ng-message="uiDateRange">Select a date range that is less than one month</small>
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
           </div>

@@ -1130,7 +1130,29 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
     return {
       require: 'ngModel',
       link: function(scope, element, attr, ctrl) {
-        ctrl.$validators.uiDateRange = function(modelValue) {
+        ctrl.$validators.datesOutOfRange = function(modelValue) {
+          // initialise the start and end dates
+          var startDateValue = attr.uiDateStart;
+          var endDateValue = attr.uiDateEnd;
+          if (!startDateValue) {
+            startDateValue = modelValue; // assume modelValue is the start date
+          } else if (!endDateValue) {
+            endDateValue = modelValue; // assume modelValue is the end date
+          }
+          if (startDateValue && endDateValue) {
+            var startDate = moment(startDateValue).startOf('day');
+            var endDate = moment(endDateValue).startOf('day');
+            // check the range, if empty only previous check will be evaluated
+            if (attr.uiDateRange) {
+              var range = attr.uiDateRange.split(',');
+              if (endDate.isAfter(startDate.add(range[0], range[1]))) {
+                return false;
+              }
+            }
+          }
+          return true;
+        };
+        ctrl.$validators.invalidDateRange = function(modelValue) {
           // initialise the start and end dates
           var startDateValue = attr.uiDateStart;
           var endDateValue = attr.uiDateEnd;
@@ -1145,13 +1167,6 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
             // check that start date is before end date
             if (startDate.isAfter(endDate)) {
               return false;
-            }
-            // check the range, if empty only previous check will be evaluated
-            if (attr.uiDateRange) {
-              var range = attr.uiDateRange.split(',');
-              if (endDate.isAfter(startDate.add(range[0], range[1]))) {
-                return false;
-              }
             }
           }
           return true;
