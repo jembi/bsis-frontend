@@ -47,7 +47,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   $scope.verifyPackLabel = function(component, labellingVerificationForm) {
     $scope.verifying = true;
     if (labellingVerificationForm.$invalid) {
-      $scope.rescanning = true;
+      $scope.verifying = false;
       return;
     }
     if ($scope.verificationParams.prePrintedDIN === $scope.verificationParams.packLabelDIN) {
@@ -62,8 +62,8 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
         $scope.clearLabelVerificationForm(labellingVerificationForm);
       } else {
         $scope.verificationStatus = 'notVerified';
+        $scope.rescanning = true;
       }
-      $scope.verifying = false;
     }, function(err) {
       $log.error(err);
       $scope.verifying = false;
