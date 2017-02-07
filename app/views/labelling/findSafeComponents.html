@@ -95,12 +95,11 @@
           <div>
             <ng-messages for="findSafeComponentsForm.startDate.$error" role="alert" ng-show="findSafeComponentsForm.$submitted">
               <small class="error" ng-message="required">Select a valid date</small>
-              <small class="error" ng-message="uiDateRange">Select a date range that is less than one month</small>
+              <small class="error" ng-message="datesOutOfRange">Select a date range that is less than one month</small>
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
             <ng-messages for="findSafeComponentsForm.endDate.$error" role="alert" ng-show="findSafeComponentsForm.$submitted && !findSafeComponentsForm.startDate.$invalid">
               <small class="error" ng-message="required">Select a valid date</small>
-              <small class="error" ng-message="uiDateRange">Select a date range that is less than one month</small>
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
           </div>

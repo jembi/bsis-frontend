@@ -142,12 +142,15 @@
                               <dateselect-end name="endDate"  ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (closedTestBatchesForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>
                           </div>
                           <div>
-                              <small class="error" ng-show="(closedTestBatchesForm.startDate.$error.required || closedTestBatchesForm.endDate.$error.required)">
-                                  Select a valid date
-                              </small>
-                              <small class="error" ng-show="(closedTestBatchesForm.startDate.$error.uiDateRange || closedTestBatchesForm.endDate.$error.uiDateRange)">
-                                  Select a date range that is less than one month
-                              </small>
+                            <ng-messages for="closedTestBatchesForm.startDate.$error" role="alert" ng-show="closedTestBatchesForm.$submitted">
+                              <small class="error" ng-message="required">Select a valid date</small>
+                              <small class="error" ng-message="datesOutOfRange">Select a date range that is less than one month</small>
+                              <ng-messages-include src="messages.html"></ng-messages-include>
+                            </ng-messages>
+                            <ng-messages for="closedTestBatchesForm.endDate.$error" role="alert" ng-show="closedTestBatchesForm.$submitted && !closedTestBatchesForm.startDate.$invalid">
+                              <small class="error" ng-message="required">Select a valid date</small>
+                              <ng-messages-include src="messages.html"></ng-messages-include>
+                            </ng-messages>
                           </div>
                       </div>
                   </div>
