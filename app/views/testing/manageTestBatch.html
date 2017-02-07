@@ -158,7 +158,7 @@
                       <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
                           "Search"}}
                       </button>
-                      <button class="btn btn-primary" type="reset" ng-click="clearClosedBatchesSearch()">Clear</button>
+                      <button class="btn btn-primary" type="button" ng-click="clearClosedBatchesSearch(closedTestBatchesForm)">Clear</button>
                   </div>
               </form>
               <div ng-switch="closedTestBatches" class="col-sm-12">
