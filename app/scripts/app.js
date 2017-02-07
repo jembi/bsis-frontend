@@ -1289,7 +1289,25 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         });
       }
     };
-  });
+  })
+  // A directive to use whenever there is a need to focus on a particular field
+  .directive('focusMe', ['$timeout', '$parse', function($timeout, $parse) {
+    return {
+      link: function(scope, element, attrs) {
+        var model = $parse(attrs.focusMe);
+        scope.$watch(model, function(value) {
+          if (value === true) {
+            $timeout(function() {
+              element[0].focus();
+            });
+          }
+        });
+        element.bind('blur', function() {
+          scope.$apply(model.assign(scope, false));
+        });
+      }
+    };
+  }]);
 
 var UI = {ADDRESS: {}};
 var DONATION = {DONOR: {}};

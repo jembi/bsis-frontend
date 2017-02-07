@@ -18,6 +18,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   $scope.verifying = false;
   $scope.rescanning = false;
   $scope.verificationStatus = '';
+  $scope.isFocused = false;
 
   $scope.getComponents = function(form) {
 
@@ -106,24 +107,20 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   };
 
   $scope.clearLabelVerificationForm = function(form) {
-    $scope.verifyComponent = null;
     $scope.verificationParams = {};
+    $scope.verificationParams.prePrintedDIN = null;
+    $scope.verificationParams.packLabelDIN = null;
     if (form) {
-      form.$setPristine();
       form.$setUntouched();
+      form.$setPristine();
     }
   };
 
   $scope.rescanPackLabel = function(form) {
-    $scope.verificationStatus = '';
+    $scope.clearLabelVerificationForm(form);
     $scope.verifying = false;
     $scope.rescanning = false;
-    $scope.verificationParams.prePrintedDIN = null;
-    $scope.verificationParams.packLabelDIN = null;
-    if (form) {
-      form.$setPristine();
-      form.$setUntouched();
-    }
+    $scope.isFocused = true;
   };
 
   $scope.onTextClick = function($event) {
