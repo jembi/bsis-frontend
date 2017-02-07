@@ -200,9 +200,7 @@ angular.module('bsis')
     };
 
     $scope.clearBloodGroups = function() {
-      if ($scope.searchParams.anyBloodGroup) {
-        $scope.searchParams.bloodGroups = [];
-      }
+      $scope.searchParams.bloodGroups = [];
     };
 
     $scope.clearSearch = function(searchForm) {
