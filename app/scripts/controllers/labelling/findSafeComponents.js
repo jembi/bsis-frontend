@@ -11,9 +11,9 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     allSites: true,
     allComponentTypes: true,
     anyBloodGroup: true,
-    inventoryStatus: null,
-    dateFrom: moment().subtract(28, 'days').startOf('day').toDate(),
-    dateTo: moment().endOf('day').toDate()
+    inventoryStatus: 'NOT_IN_STOCK',
+    startDate: moment().subtract(28, 'days').startOf('day').toDate(),
+    endDate: moment().endOf('day').toDate()
   };
 
   var columnDefs = [
@@ -196,7 +196,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     $scope.submitted = false;
     $scope.searching = false;
     $scope.bloodGroups = mockResponse.bloodGroups;
-    $scope.locations = mockResponse.locations;
+    $scope.processingSites = mockResponse.locations;
     $scope.componentTypes = mockResponse.componentTypes;
   }
 
@@ -224,21 +224,20 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
       $scope.searchParams.bloodGroups = [];
       $scope.searchParams.locationId = null;
       $scope.searchParams.inventoryStatus = null;
-      $scope.searchParams.dateFrom = null;
-      $scope.searchParams.dateTo = null;
+      $scope.searchParams.startDate = null;
+      $scope.searchParams.endDate = null;
       $scope.searchParams.allSites = true;
+      $scope.searchParams.allComponentTypes = true;
     } else {
       $scope.dinSearch = false;
-      $scope.search.dateFrom = moment().subtract(28, 'days').startOf('day').toDate();
-      $scope.search.dateTo = moment().endOf('day').toDate();
+      $scope.search.startDate = moment().subtract(28, 'days').startOf('day').toDate();
+      $scope.search.endDate = moment().endOf('day').toDate();
     }
   };
 
   $scope.updateAllSites = function() {
     if ($scope.searchParams.locationId) {
       $scope.searchParams.allSites = false;
-    } else {
-      $scope.searchParams.allSites = true;
     }
   };
 
@@ -246,14 +245,26 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     $scope.searchParams.locationId = null;
   };
 
+  $scope.updateAllComponentTypes = function() {
+    if ($scope.searchParams.componentTypeId) {
+      $scope.searchParams.allComponentTypes = false;
+    }
+  };
+
+  $scope.clearComponentTypeId = function() {
+    $scope.searchParams.componentTypeId = null;
+  };
+
   $scope.updateAnyBloodGroup = function() {
-    $scope.searchParams.anyBloodGroup = false;
+    if ($scope.searchParams.bloodGroups && $scope.searchParams.bloodGroups.length !== 0) {
+      $scope.searchParams.anyBloodGroup = false;
+    } else {
+      $scope.searchParams.anyBloodGroup = true;
+    }
   };
 
   $scope.clearBloodGroups = function() {
-    if ($scope.searchParams.anyBloodGroup) {
-      $scope.searchParams.bloodGroups = [];
-    }
+    $scope.searchParams.bloodGroups = [];
   };
 
   $scope.clearSearch = function(searchForm) {
