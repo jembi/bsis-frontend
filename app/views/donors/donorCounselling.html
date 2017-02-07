@@ -7,7 +7,7 @@
     <div class="clearfix form-group">
         <label class="col-sm-2 control-label">Venues:</label>
         <div class="col-sm-10 ">
-            <ui-select multiple ng-model="search.selectedVenues" name="selectedVenues" style="max-width:500px;min-height:34px;" ng-change="updateAllVenues()" ui-select-required="!search.allVenues">
+            <ui-select multiple ng-model="search.selectedVenues" name="selectedVenues" style="max-width:500px;min-height:34px;" on-select="updateAllVenues();" ui-select-required="!search.allVenues">
                 <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
                 <ui-select-choices repeat="venue.id as venue in venues | filter:$select.search">
                     {{venue.name}}
@@ -47,7 +47,7 @@
         <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
             "Search"}}
         </button>
-        <button class="btn btn-primary" type="reset" ng-click="clearSearch()">Clear</button>
+        <button class="btn btn-primary" type="button" ng-click="clearSearch(findDonorFlagedForCouncellingForm)">Clear</button>
     </div>
 </form>
 

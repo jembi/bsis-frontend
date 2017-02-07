@@ -30,10 +30,8 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.updateAllVenues = function() {
-      if ($scope.search.locationId) {
-        $scope.search.allVenues = false;
-      }
-    };
+    $scope.search.allVenues = false;
+  };
 
   $scope.clearDates = function() {
     $scope.search.startDate = null;
@@ -50,7 +48,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
   $scope.refresh = function() {
     if (!$scope.findDonorFlagedForCouncellingForm.$valid) {
-      return
+      return;
     }
 
     var queryParams = {
@@ -76,6 +74,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     if ($scope.search.selectedVenues.length > 0) {
       query.venue = $scope.search.selectedVenues;
       queryParams.venue = $scope.search.selectedVenues;
+      $scope.search.allVenues = false;
     }
 
     $location.search(queryParams);
