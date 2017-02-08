@@ -102,15 +102,9 @@
                             <div>
                               <ng-messages for="labellingVerificationForm.packLabelDIN.$error" ng-show="labellingVerificationForm.$submitted">
                                 <ng-messages-include src="messages.html"></ng-messages-include>
-                                <span ng-switch on="verificationStatus">
-                                  <small class="error" ng-switch-when="notVerified">
-                                    DINs do not match.
-                                  </small>
-                                  <small class="error" ng-switch-when="sameDinScanned">
-                                    The same barcode has been scanned twice: please re-scan.
-                                  </small>
-                                </span>
-                              </ng-messages>                              
+                                <small class="error" ng-message="notVerified">DINs do not match.</small>
+                                <small class="error" ng-message="sameDinScanned">The same barcode has been scanned twice: please re-scan.</small>
+                              </ng-messages>                             
                             </div>
                           </div>
                         </div>

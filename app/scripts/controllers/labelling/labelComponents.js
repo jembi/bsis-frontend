@@ -17,7 +17,6 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   $scope.verifyComponent = null;
   $scope.verifying = false;
   $scope.rescanning = false;
-  $scope.verificationStatus = '';
 
   $scope.getComponents = function(form) {
 
@@ -51,7 +50,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       return;
     }
     if ($scope.verificationParams.prePrintedDIN === $scope.verificationParams.packLabelDIN) {
-      $scope.verificationStatus = 'sameDinScanned';
+      labellingVerificationForm.packLabelDIN.$setValidity('sameDinScanned', false);
       $scope.rescanning = true;
       return;
     }
@@ -63,7 +62,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
         $scope.verifying = false;
         $scope.verifyComponent = null;
       } else {
-        $scope.verificationStatus = 'notVerified';
+        labellingVerificationForm.packLabelDIN.$setValidity('notVerified', false);
         $scope.rescanning = true;
       }
     }, function(err) {
@@ -121,6 +120,8 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.clearLabelVerificationForm(form);
     $scope.verifying = false;
     $scope.rescanning = false;
+    form.packLabelDIN.$setValidity('sameDinScanned', null);
+    form.packLabelDIN.$setValidity('notVerified', null);
     document.getElementById('prePrintedDIN').focus();
   };
 
