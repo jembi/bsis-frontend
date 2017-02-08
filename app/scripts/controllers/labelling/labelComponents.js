@@ -18,7 +18,6 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   $scope.verifying = false;
   $scope.rescanning = false;
   $scope.verificationStatus = '';
-  $scope.isFocused = false;
 
   $scope.getComponents = function(form) {
 
@@ -120,7 +119,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.clearLabelVerificationForm(form);
     $scope.verifying = false;
     $scope.rescanning = false;
-    $scope.isFocused = true;
+    document.getElementById('prePrintedDIN').focus();
   };
 
   $scope.onTextClick = function($event) {
