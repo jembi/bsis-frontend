@@ -182,19 +182,15 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
 
   $scope.updateDinSearch = function() {
     var din = $scope.searchParams.donationIdentificationNumber;
+    $scope.searchParams = angular.copy(searchMaster);
     if (din && din.length > 0) {
       $scope.dinSearch = true;
-      $scope.searchParams.componentTypeId = null;
-      $scope.searchParams.locationId = null;
-      $scope.searchParams.bloodGroups = [],
+      $scope.searchParams.donationIdentificationNumber = din;
       $scope.searchParams.startDate = null;
       $scope.searchParams.endDate = null;
       $scope.searchParams.inventoryStatus = null;
     } else {
       $scope.dinSearch = false;
-      $scope.searchParams.startDate = moment().subtract(28, 'days').startOf('day').toDate();
-      $scope.searchParams.endDate = moment().endOf('day').toDate();
-      $scope.searchParams.inventoryStatus = 'NOT_IN_STOCK';
     }
   };
 
