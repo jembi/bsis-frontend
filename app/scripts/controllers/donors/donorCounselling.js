@@ -4,7 +4,8 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   var master = {
     selectedVenues: [],
     startDate: null,
-    endDate: null
+    endDate: null,
+    allVenues: true
   };
 
   $scope.search = angular.copy(master);
@@ -28,6 +29,10 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $scope.search = angular.copy(master);
   };
 
+  $scope.updateAllVenues = function() {
+    $scope.search.allVenues = false;
+  };
+
   $scope.clearDates = function() {
     $scope.search.startDate = null;
     $scope.search.endDate = null;
@@ -42,6 +47,9 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.refresh = function() {
+    if (!$scope.findDonorFlagedForCouncellingForm.$valid) {
+      return;
+    }
 
     var queryParams = {
       search: true
@@ -66,6 +74,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     if ($scope.search.selectedVenues.length > 0) {
       query.venue = $scope.search.selectedVenues;
       queryParams.venue = $scope.search.selectedVenues;
+      $scope.search.allVenues = false;
     }
 
     $location.search(queryParams);

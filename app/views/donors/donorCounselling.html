@@ -2,13 +2,12 @@
 <div class="col-sm-9 col-md-10 main">
 <h3 class="page-header">Donors Flagged for Counselling</h3>
 
-<form class="form-horizontal" style="padding:10px 0;" ng-submit="refresh()">
+<form class="form-horizontal" name="findDonorFlagedForCouncellingForm" style="padding:10px 0;" ng-submit="refresh()">
 
     <div class="clearfix form-group">
         <label class="col-sm-2 control-label">Venues:</label>
         <div class="col-sm-10 ">
-            <ui-select multiple ng-model="search.selectedVenues" style="max-width:500px;min-height:34px;"
-                       ng-if="venues.length > 0">
+            <ui-select multiple ng-model="search.selectedVenues" name="selectedVenues" style="max-width:500px;min-height:34px;" on-select="updateAllVenues();" ui-select-required="!search.allVenues">
                 <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
                 <ui-select-choices repeat="venue.id as venue in venues | filter:$select.search">
                     {{venue.name}}
@@ -16,9 +15,13 @@
             </ui-select>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-checked="search.selectedVenues.length === 0" ng-click="clearVenues()"> Any
+                    <input type="checkbox" name="allVenues" ng-model="search.allVenues" ng-click="clearVenues()"> Any
                     Venue
                 </label>
+            </div>
+            <div>
+                <ng-messages for="findDonorFlagedForCouncellingForm.selectedVenues.$error" role="alert" ng-show="findDonorFlagedForCouncellingForm.$submitted">
+                <ng-messages-include src="messages.html"></ng-messages-include>
             </div>
         </div>
     </div>
@@ -44,7 +47,7 @@
         <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
             "Search"}}
         </button>
-        <button class="btn btn-primary" type="reset" ng-click="clearSearch()">Clear</button>
+        <button class="btn btn-primary" type="button" ng-click="clearSearch(findDonorFlagedForCouncellingForm)">Clear</button>
     </div>
 </form>
 
