@@ -60,6 +60,8 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       if (response.labelVerified) {
         component.verificationStatus = 'verified';
         $scope.clearLabelVerificationForm(labellingVerificationForm);
+        $scope.verifying = false;
+        $scope.verifyComponent = null;
       } else {
         $scope.verificationStatus = 'notVerified';
         $scope.rescanning = true;
