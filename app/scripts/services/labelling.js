@@ -8,7 +8,7 @@ angular.module('bsis')
       getComponents: Api.Labelling.getComponents,
       getSafeComponents: function(componentsSearch, response) {
         var components = Api.Labelling.getSafeComponents({
-          din: componentsSearch.donationIdentificationNumber,
+          donationIdentificationNumber: componentsSearch.donationIdentificationNumber,
           componentCode: componentsSearch.componentCode,
           componentTypeId: componentsSearch.componentTypeId,
           locationId: componentsSearch.locationId,
