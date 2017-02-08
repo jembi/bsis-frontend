@@ -41,7 +41,7 @@
                 <label for="venue{{donor.donorNumber}}">{{donor.venue.name}}</label>
             </div>
         </td>
-        <td data-title="'Comments'" header-class="text-left" sortable="'notes'" class="form-inline">
+        <td data-title="'Donor Notes'" header-class="text-left" sortable="'notes'" class="form-inline">
             <div class="radio" ng-if="donor.notes != null && donor.notes != ''">
                 <input id="notes{{donor.donorNumber}}" type="checkbox" name="notes"
                        ng-model="mergedDonorData.noteSelection[donor.id]" ng-value="donor.notes">
@@ -104,7 +104,7 @@
                 </small>
             </div>
         </td>
-        <td data-title="'Comments'" header-class="text-left" sortable="'notes'">
+        <td data-title="'Donor Notes'" header-class="text-left" sortable="'notes'">
         </td>
     </tr>
     </tfoot>
