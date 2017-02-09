@@ -52,6 +52,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     }
     if ($scope.verificationParams.prePrintedDIN === $scope.verificationParams.packLabelDIN) {
       labellingVerificationForm.packLabelDIN.$setValidity('sameDinScanned', false);
+      $scope.verifying = false;
       $scope.rescanning = true;
       return;
     }
