@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location, $uibModal, $log, $routeParams, ReturnFormsService, ComponentService, UtilsService) {
+angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location, $uibModal, $log, $routeParams, ReturnFormsService, ComponentService, UtilsService, DATEFORMAT) {
+
+  $scope.dateFormat = DATEFORMAT;
 
   var componentMaster = {
     din: null,
