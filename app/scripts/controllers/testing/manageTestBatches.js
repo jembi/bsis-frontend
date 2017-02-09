@@ -112,13 +112,11 @@ angular.module('bsis')
 
     $scope.search = angular.copy(master);
 
-    $scope.clearClosedBatchesSearch = function() {
+    $scope.clearClosedBatchesSearch = function(closedTestBatchesForm) {
       $scope.searched = false;
-      $scope.search = {
-        status: 'CLOSED',
-        startDate: null,
-        endDate: null
-      };
+      $location.search({});
+      $scope.search = angular.copy(master);
+      closedTestBatchesForm.$setPristine();
     };
 
     $scope.getClosedTestBatches = function(closedTestBatchesForm) {

@@ -139,12 +139,15 @@
                             <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (recentDonationsForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>
                         </div>
                         <div>
-                            <small class="error" ng-show="(recentDonationsForm.startDate.$error.required || recentDonationsForm.endDate.$error.required)">
-                                Select a valid date
-                            </small>
-                            <small class="error" ng-show="(recentDonationsForm.startDate.$error.uiDateRange || recentDonationsForm.endDate.$error.uiDateRange)">
-                                Select a date range that is less than one month
-                            </small>
+                          <ng-messages for="recentDonationsForm.startDate.$error" role="alert" ng-show="recentDonationsForm.$submitted">
+                            <small class="error" ng-message="required">Select a valid date</small>
+                            <small class="error" ng-message="datesOutOfRange">Select a date range that is less than one month</small>
+                            <ng-messages-include src="messages.html"></ng-messages-include>
+                          </ng-messages>
+                          <ng-messages for="recentDonationsForm.endDate.$error" role="alert" ng-show="recentDonationsForm.$submitted && !recentDonationsForm.startDate.$invalid">
+                            <small class="error" ng-message="required">Select a valid date</small>
+                            <ng-messages-include src="messages.html"></ng-messages-include>
+                          </ng-messages>
                         </div>
                     </div>
                 </div>
@@ -153,7 +156,7 @@
                     <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
                         "Search"}}
                     </button>
-                    <button class="btn btn-primary" type="reset" ng-click="clearSearch(recentDonationsForm)">Clear</button>
+                    <button class="btn btn-primary" type="button" ng-click="clearSearch(recentDonationsForm)">Clear</button>
                 </div>
             </form>
 
