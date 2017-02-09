@@ -24,6 +24,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       return;
     }
 
+    $scope.verifyComponent = null;
     $scope.serverErrorMessage = null;
     $location.search(angular.extend({search: true}, $scope.search));
     $scope.searching = true;
@@ -104,6 +105,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.search = {};
     $scope.searchResults = null;
     $scope.serverErrorMessage = null;
+    $scope.verifyComponent = null;
     $scope.clearLabelVerificationForm();
   };
 
@@ -111,6 +113,8 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.verificationParams = {};
     $scope.verificationParams.prePrintedDIN = null;
     $scope.verificationParams.packLabelDIN = null;
+    $scope.rescanning = false;
+    $scope.verifying = false;
     if (form) {
       form.$setUntouched();
       form.$setPristine();
