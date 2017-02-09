@@ -64,6 +64,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       } else {
         labellingVerificationForm.packLabelDIN.$setValidity('notVerified', false);
         $scope.rescanning = true;
+        $scope.verifying = false;
       }
     }, function(err) {
       $log.error(err);
