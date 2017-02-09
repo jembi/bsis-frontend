@@ -52,6 +52,10 @@
                 <input type="checkbox" name="isUsageSite" ng-model="location.isUsageSite" ng-required="!validateLocationType()"/>
                 Hospital / Clinic
               </label>
+              <label>
+                <input type="checkbox" name="isReferralSite" ng-model="location.isReferralSite" ng-required="!validateLocationType()"/>
+                Referral Site
+              </label>
             </div>
             <div>
               <small class="error" ng-show="!validateLocationType() && locationForm.$submitted">
