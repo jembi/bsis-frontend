@@ -12,7 +12,7 @@
         <small><em>Date Created: </em></small>
         <span ng-show="!editableForm.$visible">{{ (donationBatch.donationBatchDate | bsisDate) || '' }}</span>
     <span ng-show="editableForm.$visible">
-      <dateselect ng-model="donationBatch.donationBatchDate" initDate="donationBatch.donationBatchDate" format="format"
+      <dateselect ng-model="donationBatch.donationBatchDate" initDate="donationBatch.donationBatchDate" format="dateFormat"
                   cal-icon="icons.CALENDAR" opened="dateToOpen"
                   ng-disabled="!donationBatch.permissions.canEditDate"></dateselect>
     </span>

@@ -2,7 +2,9 @@
 </div>
 <div class="col-sm-9 col-md-10 main">
   <h3 class="page-header">Record Return</h3>
+
   <hr />
+
   <section class="clearfix" ng-hide="editingReturnDetails">
     <span class="text-muted">Return Date:</span> {{returnForm.returnDate | bsisDate}}
     <span class="text-muted">Returned From:</span> {{returnForm.returnedFrom.name}}
@@ -30,7 +32,9 @@
       <button class="btn btn-primary" type="reset" ng-disabled="savingReturnDetails" ng-click="clearDetailsForm($event);">Cancel</button>
     </div>
   </form>
+
   <hr />
+
   <div class="panel panel-default">
       <div class="panel-body">
         <div class="row">
