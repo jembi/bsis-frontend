@@ -4,6 +4,10 @@ angular.module('bsis').controller('LabellingSidebarCtrl', function($scope, Routi
 
   var routes = [
     {
+      path: '/findSafeComponents',
+      subpaths: []
+    },
+    {
       path: '/labelComponents',
       subpaths: []
     }
