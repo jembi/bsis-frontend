@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, $routeParams, LabellingService) {
+angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, $routeParams, $timeout, LabellingService) {
 
   $scope.serverErrorMessage = null;
   $scope.searchResults = null;
@@ -128,7 +128,9 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.rescanning = false;
     form.packLabelDIN.$setValidity('sameDinScanned', null);
     form.packLabelDIN.$setValidity('notVerified', null);
-    document.getElementById('prePrintedDIN').focus();
+    $timeout(function() {
+      document.getElementById('prePrintedDIN').focus();
+    }, 0);
   };
 
   $scope.onTextClick = function($event) {
