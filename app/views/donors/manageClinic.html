@@ -13,8 +13,8 @@
         <span ng-show="!editableForm.$visible">{{ (donationBatch.donationBatchDate | bsisDate) || '' }}</span>
     <span ng-show="editableForm.$visible">
       <dateselect name="donationBatchDate" ng-model="donationBatch.donationBatchDate" initDate="donationBatch.donationBatchDate" format="format"
-                  ng-disabled="!donationBatch.permissions.canEditDate" date-time-not-in-future 
-                  ng-class="{'has-error' : editableForm.donationBatchDate.$invalid}" max-date="today">
+                  ng-disabled="!donationBatch.permissions.canEditDate" required date-time-not-in-future
+                  ng-class="{'has-error' : editableForm.donationBatchDate.$invalid || editableForm.donationBatchDate.$error.required}" max-date="today">
       </dateselect>
     </span>
         |
@@ -88,9 +88,10 @@
 
     </div>
     <div>
-      <ng-messages for="editableForm.donationBatchDate.$error" role="alert" ng-show="editableForm.donationBatchDate.$error.dateInFuture">
+      <ng-messages for="editableForm.donationBatchDate.$error" role="alert" ng-show="editableForm.donationBatchDate.$error.dateInFuture || editableForm.donationBatchDate.$error.required">
         <ng-messages-include src="messages.html"></ng-messages-include>
       </ng-messages>
+
     </div>
 </form>
 
