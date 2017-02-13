@@ -41,7 +41,8 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
       counsellingStatus: $scope.postDonationCounselling.counsellingStatus.id,
       counsellingDate: $scope.postDonationCounselling.counsellingDate,
       notes: $scope.postDonationCounselling.notes,
-      referred: $scope.postDonationCounselling.referred
+      referred: $scope.postDonationCounselling.referred,
+      referralSite: $scope.referralSite.referred
     };
 
     $scope.updatingCounselling = true;
