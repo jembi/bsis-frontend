@@ -8,6 +8,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
   $scope.donor = {};
 
   $scope.counsellingStatuses = [];
+  $scope.referralSites = [];
   $scope.testResults = [];
 
   $scope.goBack = function() {
@@ -27,6 +28,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
     } else {
       $scope.referredEnabled = false;
       $scope.postDonationCounselling.referred = null;
+      $scope.postDonationCounselling.referralSite = null;
     }
   };
 
@@ -58,6 +60,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
   // Fetch form fields
   PostDonationCounsellingService.getPostDonationCounsellingFormFields(function(response) {
     $scope.counsellingStatuses = response.counsellingStatuses;
+    $scope.referralSites = response.referralSites;
   }, function(err) {
     $log.error(err);
   });
