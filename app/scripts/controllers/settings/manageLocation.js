@@ -92,7 +92,7 @@ angular.module('bsis').controller('ManageLocationCtrl', function($scope, $locati
   };
 
   $scope.validateLocationType = function() {
-    return $scope.location.isVenue || $scope.location.isUsageSite || $scope.location.isProcessingSite || $scope.location.isDistributionSite || $scope.location.isTestingSite;
+    return $scope.location.isVenue || $scope.location.isUsageSite || $scope.location.isProcessingSite || $scope.location.isDistributionSite || $scope.location.isTestingSite || $scope.location.isReferralSite;
   };
 
   function init() {
