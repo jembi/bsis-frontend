@@ -55,9 +55,9 @@
     <div class="panel-body">
         <form name="postDonationCounsellingForm" ng-submit="updatePostDonationCounselling()"
               novalidate>
-
-            <div class="row form-inline">
-              <div class="col-sm-4">
+          <div class="col-sm-12">
+            <div class="row form-inline form-multiline">
+              <div class="form-group">
                 <label for="counsellingDate" style="width: 120px">Counselling Date:</label>
                 <dateselect name="counsellingDate"
                             format="dateFormat"
@@ -70,7 +70,7 @@
                     <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
               </div>
-              <div class="col-sm-4">
+              <div class="form-group">
                 <label for="counsellingStatus">Counselling Status:</label>
                 <select class="form-control"
                         name="counsellingStatus"
@@ -85,7 +85,7 @@
                     <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
               </div>
-              <div class="col-sm-4">
+              <div class="form-group">
                 <label for="referred">Referred</label>
                 <input type="checkbox" id="referred" ng-click="updateReferralSites()" ng-model="postDonationCounselling.referred" ng-disabled="!referredEnabled">
                 <label for="referralSite">To:</label>
@@ -97,14 +97,11 @@
                       <ng-messages-include src="messages.html"></ng-messages-include>
                   </div>
               </div>
-            </div><br/>
-
-            <div class="row form-inline">
-              <div class="col-sm-8">
+              <div class="form-group">
                   <label for="counsellingNotes" style="width: 120px">Counselling Notes:</label>
                   <input name="counsellingNotes" type="text" class="form-control" style="width: 600px;" ng-model="postDonationCounselling.notes"/>
               </div>
-              <div class="col-sm-4">
+              <div class="form-group">
                   <button type="submit" class="btn btn-primary" style="margin-top:0;" ng-disabled="updatingCounselling">
                       {{updatingCounselling ? "Saving..." : "Save"}}
                   </button>
@@ -115,6 +112,7 @@
                       Status</a>
               </div>
             </div>
+          </div>
         </form>
     </div>
 </div>
