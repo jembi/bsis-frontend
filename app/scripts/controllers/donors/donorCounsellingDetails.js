@@ -16,6 +16,10 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
     $window.history.back();
   };
 
+  $scope.updateReferralSites = function() {
+    $scope.postDonationCounselling.referralSite = null;
+  };
+
   $scope.updateReferredEnabled = function() {
 
     // If couselling status is "Received Counselling" (id=1) enable the referred checkbox,
