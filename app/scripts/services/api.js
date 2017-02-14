@@ -353,7 +353,7 @@ angular.module('bsis')
 
       AuditRevisions: $resource(url + '/auditrevisions'),
 
-      DonationSummaries: $resource(url + '/postdonationcounsellings/search'),
+      DonationSummaries: $resource(url + '/postdonationcounsellings'),
 
       DonorPostDonationCounselling: $resource(url + '/donors/:donorId/postdonationcounselling'),
 
