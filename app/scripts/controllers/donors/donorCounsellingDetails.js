@@ -1,17 +1,23 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope, $window, $routeParams, $log, DonorService, PostDonationCounsellingService, TestingService, ICONS) {
+angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope, $window, $routeParams, $log, DonorService, PostDonationCounsellingService, TestingService, ICONS, DATEFORMAT) {
 
   $scope.icons = ICONS;
+  $scope.dateFormat = DATEFORMAT;
   $scope.postDonationCounselling = {};
   $scope.donation = {};
   $scope.donor = {};
 
   $scope.counsellingStatuses = [];
+  $scope.referralSites = [];
   $scope.testResults = [];
 
   $scope.goBack = function() {
     $window.history.back();
+  };
+
+  $scope.updateReferralSites = function() {
+    $scope.postDonationCounselling.referralSite = null;
   };
 
   $scope.updateReferredEnabled = function() {
@@ -27,6 +33,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
     } else {
       $scope.referredEnabled = false;
       $scope.postDonationCounselling.referred = null;
+      $scope.postDonationCounselling.referralSite = null;
     }
   };
 
@@ -41,7 +48,8 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
       counsellingStatus: $scope.postDonationCounselling.counsellingStatus.id,
       counsellingDate: $scope.postDonationCounselling.counsellingDate,
       notes: $scope.postDonationCounselling.notes,
-      referred: $scope.postDonationCounselling.referred
+      referred: $scope.postDonationCounselling.referred,
+      referralSite: $scope.postDonationCounselling.referralSite
     };
 
     $scope.updatingCounselling = true;
@@ -57,6 +65,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
   // Fetch form fields
   PostDonationCounsellingService.getPostDonationCounsellingFormFields(function(response) {
     $scope.counsellingStatuses = response.counsellingStatuses;
+    $scope.referralSites = response.referralSites;
   }, function(err) {
     $log.error(err);
   });
@@ -85,7 +94,9 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
       $scope.referredEnabled = true;
     }
 
-    if (!$scope.postDonationCounselling.counsellingDate) {
+    if (postDonationCounselling.counsellingDate) {
+      $scope.postDonationCounselling.counsellingDate = new Date(postDonationCounselling.counsellingDate);
+    } else {
       $scope.postDonationCounselling.counsellingDate = new Date();
     }
 
