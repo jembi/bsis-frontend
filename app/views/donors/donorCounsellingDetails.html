@@ -84,37 +84,37 @@
                              ng-show="postDonationCounsellingForm.$submitted || postDonationCounsellingForm.counsellingStatus.$dirty">
                     <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
-            </div>
-            <div class="col-sm-4">
-              <label for="referred">Referred</label>
-              <input type="checkbox" id="referred" ng-click="updateReferralSites()" ng-model="postDonationCounselling.referred" ng-disabled="!referredEnabled">
-              <label for="referralSite">To:</label>
-                <select name="referralSite" class="form-control" ng-disabled="!postDonationCounselling.referred" ng-model="postDonationCounselling.referralSite" ng-options="referralSite as referralSite.name for referralSite in referralSites" style="min-width: 150px;" ng-required="postDonationCounselling.referred">
-                    <option value="" disabled></option>
-                </select>
-                <div>
-                    <ng-messages for="postDonationCounsellingForm.referralSite.$error" role="alert" ng-show="postDonationCounsellingForm.$submitted">
-                    <ng-messages-include src="messages.html"></ng-messages-include>
-                </div>
-            </div>
-          </div><br/>
+              </div>
+              <div class="col-sm-4">
+                <label for="referred">Referred</label>
+                <input type="checkbox" id="referred" ng-click="updateReferralSites()" ng-model="postDonationCounselling.referred" ng-disabled="!referredEnabled">
+                <label for="referralSite">To:</label>
+                  <select name="referralSite" class="form-control" ng-disabled="!postDonationCounselling.referred" ng-model="postDonationCounselling.referralSite" ng-options="referralSite as referralSite.name for referralSite in referralSites" style="min-width: 150px;" ng-required="postDonationCounselling.referred">
+                      <option value="" disabled></option>
+                  </select>
+                  <div>
+                      <ng-messages for="postDonationCounsellingForm.referralSite.$error" role="alert" ng-show="postDonationCounsellingForm.$submitted">
+                      <ng-messages-include src="messages.html"></ng-messages-include>
+                  </div>
+              </div>
+            </div><br/>
 
-          <div class="row form-inline">
-            <div class="col-sm-8">
-                <label for="counsellingNotes" style="width: 120px">Counselling Notes:</label>
-                <input name="counsellingNotes" type="text" class="form-control" style="width: 600px;" ng-model="postDonationCounselling.notes"/>
+            <div class="row form-inline">
+              <div class="col-sm-8">
+                  <label for="counsellingNotes" style="width: 120px">Counselling Notes:</label>
+                  <input name="counsellingNotes" type="text" class="form-control" style="width: 600px;" ng-model="postDonationCounselling.notes"/>
+              </div>
+              <div class="col-sm-4">
+                  <button type="submit" class="btn btn-primary" style="margin-top:0;" ng-disabled="updatingCounselling">
+                      {{updatingCounselling ? "Saving..." : "Save"}}
+                  </button>
+                  <a class="btn btn-primary" style="margin-top:0;" href="" ng-click="goBack()"
+                     ng-disabled="updatingCounselling">Cancel</a>
+                  <a class="btn btn-primary" style="margin-top:0;" href="" ng-click="removeStatus()"
+                     ng-disabled="!postDonationCounselling.permissions.canRemoveStatus || updatingCounselling">Remove
+                      Status</a>
+              </div>
             </div>
-            <div class="col-sm-4">
-                <button type="submit" class="btn btn-primary" style="margin-top:0;" ng-disabled="updatingCounselling">
-                    {{updatingCounselling ? "Saving..." : "Save"}}
-                </button>
-                <a class="btn btn-primary" style="margin-top:0;" href="" ng-click="goBack()"
-                   ng-disabled="updatingCounselling">Cancel</a>
-                <a class="btn btn-primary" style="margin-top:0;" href="" ng-click="removeStatus()"
-                   ng-disabled="!postDonationCounselling.permissions.canRemoveStatus || updatingCounselling">Remove
-                    Status</a>
-            </div>
-          </div>
         </form>
     </div>
 </div>
