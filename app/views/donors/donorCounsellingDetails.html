@@ -89,7 +89,7 @@
                 <label for="referred">Referred</label>
                 <input type="checkbox" id="referred" ng-click="updateReferralSites()" ng-model="postDonationCounselling.referred" ng-disabled="!referredEnabled">
                 <label for="referralSite">To:</label>
-                  <select name="referralSite" class="form-control" ng-disabled="!postDonationCounselling.referred" ng-model="postDonationCounselling.referralSite" ng-options="referralSite as referralSite.name for referralSite in referralSites" style="min-width: 150px;" ng-required="postDonationCounselling.referred">
+                  <select name="referralSite" class="form-control" ng-disabled="!postDonationCounselling.referred" ng-model="postDonationCounselling.referralSite" ng-options="referralSite as referralSite.name for referralSite in referralSites track by referralSite.id" style="min-width: 150px;" ng-required="postDonationCounselling.referred">
                       <option value="" disabled></option>
                   </select>
                   <div>
