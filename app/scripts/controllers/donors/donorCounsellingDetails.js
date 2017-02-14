@@ -90,9 +90,12 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
       $scope.referredEnabled = true;
     }
 
-    if (!$scope.postDonationCounselling.counsellingDate) {
+    if (postDonationCounselling.counsellingDate) {
+      $scope.postDonationCounselling.counsellingDate = new Date(postDonationCounselling.counsellingDate);
+    } else {
       $scope.postDonationCounselling.counsellingDate = new Date();
     }
+
 
     TestingService.getTestResultsByDIN({donationIdentificationNumber: postDonationCounselling.donation.donationIdentificationNumber}, function(response) {
       $scope.testResults = response.testResults.recentTestResults;
