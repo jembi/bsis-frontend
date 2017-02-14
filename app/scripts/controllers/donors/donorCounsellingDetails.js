@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope, $window, $routeParams, $log, DonorService, PostDonationCounsellingService, TestingService, ICONS) {
+angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope, $window, $routeParams, $log, DonorService, PostDonationCounsellingService, TestingService, ICONS, DATEFORMAT) {
 
   $scope.icons = ICONS;
+  $scope.dateFormat = DATEFORMAT;
   $scope.postDonationCounselling = {};
   $scope.donation = {};
   $scope.donor = {};
