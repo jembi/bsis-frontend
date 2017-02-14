@@ -5,7 +5,8 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     selectedVenues: [],
     startDate: null,
     endDate: null,
-    allVenues: true
+    allVenues: true,
+    counsellingStatuses: []
   };
 
   $scope.search = angular.copy(master);
@@ -213,6 +214,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   function init() {
     PostDonationCounsellingService.getPostDonationCounsellingSearchForm(function(form) {
       $scope.venues = form.venues;
+      $scope.counsellingStatuses = form.counsellingStatuses;
 
       // Select venues from route params
       if ($routeParams.venue) {
@@ -221,6 +223,10 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
           // Cast id to number
           return +venueId;
         });
+      }
+      if ($routeParams.counsellingStatuses) {
+        var counsellingStatuses = $routeParams.counsellingStatuses;
+        $scope.search.counsellingStatuses = counsellingStatuses;
       }
 
       // If the search parameter is present then refresh
