@@ -92,7 +92,7 @@
             <div class="form-group">
               <label for="referralSite" class="col-sm-1 control-label">To:</label>
               <div class="form-inline col-sm-11">
-                <select name="referralSite" class="form-control" ng-disabled="!referredEnabled" ng-model="postDonationCounsellingForm.referralSite" ng-options="referralSite.id as referralSite.name for referralSite in referralSites" style="min-width: 150px;" ng-required="referred">
+                <select name="referralSite" class="form-control" ng-disabled="!postDonationCounselling.referred" ng-model="postDonationCounsellingForm.referralSite" ng-options="referralSite as referralSite.name for referralSite in referralSites" style="min-width: 150px;" ng-required="postDonationCounselling.referred">
                     <option value="" disabled></option>
                 </select>
                 <div>
@@ -102,7 +102,7 @@
               </div>
             </div>
             <div class="form-group">
-                <label>Counselling Notes:&nbsp</label>
+                <label>Counselling Notes:</label>
                 <input type="text" class="form-control" ng-model="postDonationCounselling.notes"/>
             </div>
             <div class="form-group">
