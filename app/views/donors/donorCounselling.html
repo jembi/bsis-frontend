@@ -2,7 +2,7 @@
 <div class="col-sm-9 col-md-10 main">
 <h3 class="page-header">Donors Flagged for Counselling</h3>
 
-<form class="form-horizontal" name="findDonorFlagedForCouncellingForm" style="padding:10px 0;" ng-submit="refresh()">
+<form class="form-horizontal" name="findDonorFlagedForCouncellingForm" style="padding:10px 0;" ng-submit="refresh()" novalidate>
 
     <div class="clearfix form-group">
         <label class="col-sm-2 control-label">Venues:</label>
@@ -26,20 +26,6 @@
         </div>
     </div>
 
-    <div class="clearfix form-group" 
-         ng-class="{'has-error': findDonorFlagedForCouncellingForm.$submitted && findDonorFlagedForCouncellingForm.counsellingStatus.$invalid}">
-        <label class="col-sm-2 control-label">Counselling status:</label>
-        <div class="form-inline col-sm-10">
-            <select name="counsellingStatus" class="form-control" ng-model="search.counsellingStatuses" ng-options="status.id as status.label for status in counsellingStatuses">
-            <option value="" disabled></option>
-            </select>
-            <ng-messages for="findDonorFlagedForCouncellingForm.counsellingStatus.$error" role="alert" 
-            ng-show="findDonorFlagedForCouncellingForm.$submitted">
-            <ng-messages-include src="messages.html"></ng-messages-include>
-            </ng-messages>
-        </div>
-    </div>
-
     <div class="clearfix form-group">
         <label class="col-sm-2 control-label">Donation Period:</label>
         <div class="form-inline col-sm-10">
@@ -56,7 +42,23 @@
             </div>
         </div>
     </div>
-    
+
+    <div class="clearfix form-group">
+        <label class="col-sm-2 control-label" for="flaggedForCounselling">Flagged for Counselling:</label>
+        <div class="form-inline col-sm-10">
+            <input type="checkbox" id="flaggedForCounselling" ng-model="search.flaggedForCounselling">
+            <select name="counsellingStatus" class="form-control" ng-model="search.counsellingStatuses" ng-options="status.id as status.label for status in counsellingStatuses">
+                <option value="" disabled></option>
+            </select>
+            <div class="checkbox">
+                <label>
+                    Referred: 
+                    <input type="checkbox" ng-model="search.referred">
+                </label>
+            </div>
+        </div>
+    </div>
+
     <div class="col-sm-offset-2 ">
         <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
             "Search"}}
