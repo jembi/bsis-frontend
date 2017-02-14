@@ -53,31 +53,31 @@
 <!-- Counselling form -->
 <div class="panel panel-default">
     <div class="panel-body">
-        <form class="form-inline" name="postDonationCounsellingForm" ng-submit="updatePostDonationCounselling()"
+        <form name="postDonationCounsellingForm" ng-submit="updatePostDonationCounselling()"
               novalidate>
-            <div class="form-group" style="display:inline;"
-                 ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingDate.$invalid}">
-                <label>Counselling Date:</label>
-                <dateselect class="counselling-date"
-                            name="counsellingDate"
+
+            <div class="row form-inline">
+              <div class="col-sm-4">
+                <label style="width: 120px">Counselling Date:</label>
+                <dateselect name="counsellingDate"
                             format="dateFormat"
                             ng-model="postDonationCounselling.counsellingDate"
-                            required>
+                            required ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingDate.$invalid}">
                 </dateselect>
                 <ng-messages role="alert"
                              for="postDonationCounsellingForm.counsellingDate.$error"
                              ng-show="postDonationCounsellingForm.$submitted || postDonationCounsellingForm.counsellingDate.$dirty">
                     <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
-            </div>  
-            <div class="form-group"
-                 ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingStatus.$invalid}">
+              </div>
+              <div class="col-sm-4">
                 <label>Counselling Status:</label>
                 <select class="form-control"
                         name="counsellingStatus"
                         ng-model="postDonationCounselling.counsellingStatus"
                         ng-options="counsellingStatus.label for counsellingStatus in counsellingStatuses track by counsellingStatus.id"
-                        required ng-change="updateReferredEnabled()">
+                        required ng-change="updateReferredEnabled()"
+                        ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingStatus.$invalid}">
                 </select>
                 <ng-messages role="alert"
                              for="postDonationCounsellingForm.counsellingStatus.$error"
@@ -85,13 +85,10 @@
                     <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
             </div>
-            <div class="form-group">
-                <input type="checkbox" id="referred" ng-model="postDonationCounselling.referred" ng-disabled="!referredEnabled">
-                <label for="referred">Referred</label>
-            </div>
-            <div class="form-group">
-              <label for="referralSite" class="col-sm-1 control-label">To:</label>
-              <div class="form-inline col-sm-11">
+            <div class="col-sm-4">
+              <label for="referred">Referred</label>
+              <input type="checkbox" id="referred" ng-model="postDonationCounselling.referred" ng-disabled="!referredEnabled">       
+              <label>To:</label>
                 <select name="referralSite" class="form-control" ng-disabled="!postDonationCounselling.referred" ng-model="postDonationCounsellingForm.referralSite" ng-options="referralSite as referralSite.name for referralSite in referralSites" style="min-width: 150px;" ng-required="postDonationCounselling.referred">
                     <option value="" disabled></option>
                 </select>
@@ -99,13 +96,15 @@
                     <ng-messages for="postDonationCounsellingForm.referralSite.$error" role="alert" ng-show="postDonationCounsellingForm.$submitted">
                     <ng-messages-include src="messages.html"></ng-messages-include>
                 </div>
-              </div>
             </div>
-            <div class="form-group">
-                <label>Counselling Notes:</label>
-                <input type="text" class="form-control" ng-model="postDonationCounselling.notes"/>
+          </div><br/>
+
+          <div class="row form-inline">
+            <div class="col-sm-8">
+                <label style="width: 120px">Counselling Notes:</label>
+                <input type="text" class="form-control" style="width: 600px;" ng-model="postDonationCounselling.notes"/>
             </div>
-            <div class="form-group">
+            <div class="col-sm-4">
                 <button type="submit" class="btn btn-primary" style="margin-top:0;" ng-disabled="updatingCounselling">
                     {{updatingCounselling ? "Saving..." : "Save"}}
                 </button>
@@ -115,7 +114,7 @@
                    ng-disabled="!postDonationCounselling.permissions.canRemoveStatus || updatingCounselling">Remove
                     Status</a>
             </div>
-
+          </div>
         </form>
     </div>
 </div>
