@@ -58,7 +58,7 @@
 
             <div class="row form-inline">
               <div class="col-sm-4">
-                <label style="width: 120px">Counselling Date:</label>
+                <label for="counsellingDate" style="width: 120px">Counselling Date:</label>
                 <dateselect name="counsellingDate"
                             format="dateFormat"
                             ng-model="postDonationCounselling.counsellingDate"
@@ -71,7 +71,7 @@
                 </ng-messages>
               </div>
               <div class="col-sm-4">
-                <label>Counselling Status:</label>
+                <label for="counsellingStatus">Counselling Status:</label>
                 <select class="form-control"
                         name="counsellingStatus"
                         ng-model="postDonationCounselling.counsellingStatus"
@@ -88,7 +88,7 @@
             <div class="col-sm-4">
               <label for="referred">Referred</label>
               <input type="checkbox" id="referred" ng-click="updateReferralSites()" ng-model="postDonationCounselling.referred" ng-disabled="!referredEnabled">
-              <label>To:</label>
+              <label for="referralSite">To:</label>
                 <select name="referralSite" class="form-control" ng-disabled="!postDonationCounselling.referred" ng-model="postDonationCounselling.referralSite" ng-options="referralSite as referralSite.name for referralSite in referralSites" style="min-width: 150px;" ng-required="postDonationCounselling.referred">
                     <option value="" disabled></option>
                 </select>
@@ -101,8 +101,8 @@
 
           <div class="row form-inline">
             <div class="col-sm-8">
-                <label style="width: 120px">Counselling Notes:</label>
-                <input type="text" class="form-control" style="width: 600px;" ng-model="postDonationCounselling.notes"/>
+                <label for="counsellingNotes" style="width: 120px">Counselling Notes:</label>
+                <input name="counsellingNotes" type="text" class="form-control" style="width: 600px;" ng-model="postDonationCounselling.notes"/>
             </div>
             <div class="col-sm-4">
                 <button type="submit" class="btn btn-primary" style="margin-top:0;" ng-disabled="updatingCounselling">
