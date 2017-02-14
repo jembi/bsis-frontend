@@ -100,7 +100,6 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
       $scope.postDonationCounselling.counsellingDate = new Date();
     }
 
-
     TestingService.getTestResultsByDIN({donationIdentificationNumber: postDonationCounselling.donation.donationIdentificationNumber}, function(response) {
       $scope.testResults = response.testResults.recentTestResults;
     }, function(err) {
