@@ -98,6 +98,16 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $location.path('donorCounselling/' + row.entity.donor.id).search({});
   };
 
+  $scope.updateReferred = function() {
+    if ($scope.search.counsellingStatuses !== 1) {
+      $scope.search.referred = false;
+    }
+  };
+
+  $scope.clearCounsellingDropDownAndReferredCheckbox = function() {
+    $scope.search.counsellingStatuses = null;
+    $scope.search.referred = false;
+  };
 
   var columnDefs = [
     {name: 'Donor #', field: 'donor.donorNumber'},
