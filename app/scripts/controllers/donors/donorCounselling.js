@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, $filter, Api, PostDonationCounsellingService, DATEFORMAT) {
+angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, $filter, PostDonationCounsellingService, DATEFORMAT) {
   var master = {
     selectedVenues: [],
     startDate: null,
@@ -82,10 +82,10 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
     $scope.searching = true;
 
-    Api.DonationSummaries.query(query, function(response) {
+    PostDonationCounsellingService.search(query, function(response) {
       $scope.searched = true;
-      $scope.donations = response;
-      $scope.gridOptions.data = response;
+      $scope.donations = response.cousellings;
+      $scope.gridOptions.data = response.cousellings;
       $scope.searching = false;
       $scope.gridOptions.paginationCurrentPage = 1;
     }, function(err) {
@@ -212,7 +212,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   function init() {
-    PostDonationCounsellingService.getPostDonationCounsellingSearchForm(function(form) {
+    PostDonationCounsellingService.getSearchForm(function(form) {
       $scope.venues = form.venues;
       $scope.counsellingStatuses = form.counsellingStatuses;
 
