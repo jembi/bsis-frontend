@@ -102,14 +102,16 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.updateReferred = function() {
-    if ($scope.search.counsellingStatuses !== 1) {
+    if ($scope.search.counsellingStatus !== 1) {
+      $scope.search.referred = null;
+    } else {
       $scope.search.referred = false;
     }
   };
 
-  $scope.clearCounsellingStatusesAndReferred = function() {
-    $scope.search.counsellingStatuses = null;
-    $scope.search.referred = false;
+  $scope.clearCounsellingStatusAndReferred = function() {
+    $scope.search.counsellingStatus = null;
+    $scope.search.referred = null;
   };
 
   var columnDefs = [
