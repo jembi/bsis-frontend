@@ -47,13 +47,13 @@
         <label class="col-sm-2 control-label" for="flaggedForCounselling">Flagged for Counselling:</label>
         <div class="form-inline col-sm-10">
             <input type="checkbox" id="flaggedForCounselling" ng-model="search.flaggedForCounselling" ng-click="clearCounsellingStatusAndReferred()">
-            <select name="counsellingStatus" class="form-control" ng-model="search.counsellingStatus" ng-options="status.id as status.label for status in counsellingStatuses" ng-disabled="search.flaggedForCounselling" ng-change="updateReferred()">
+            <select name="counsellingStatus" class="form-control" ng-model="search.counsellingStatus" ng-options="status as (status | titleCase) for status in counsellingStatuses" ng-disabled="search.flaggedForCounselling" ng-change="updateReferred()">
                 <option value=""></option>
             </select>
             <div class="checkbox">
                 <label>
                     Referred: 
-                    <input type="checkbox" ng-model="search.referred" ng-disabled="search.flaggedForCounselling || search.counsellingStatus !== 1">
+                    <input type="checkbox" ng-model="search.referred" ng-disabled="search.flaggedForCounselling || search.counsellingStatus !== 'RECEIVED_COUNSELLING'">
                 </label>
             </div>
         </div>

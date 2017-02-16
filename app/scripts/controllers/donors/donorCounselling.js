@@ -103,7 +103,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.updateReferred = function() {
-    if ($scope.search.counsellingStatus !== 1) {
+    if ($scope.search.counsellingStatus !== 'RECEIVED_COUNSELLING') {
       $scope.search.referred = null;
     } else {
       $scope.search.referred = false;
@@ -256,9 +256,9 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
           return +venueId;
         });
       }
-      if ($routeParams.counsellingStatuses) {
-        var counsellingStatuses = $routeParams.counsellingStatuses;
-        $scope.search.counsellingStatuses = counsellingStatuses;
+      if ($routeParams.counsellingStatus) {
+        var counsellingStatus = $routeParams.counsellingStatus;
+        $scope.search.counsellingStatus = counsellingStatus;
       }
 
       // If the search parameter is present then refresh

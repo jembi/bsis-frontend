@@ -22,10 +22,10 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
 
   $scope.updateReferredEnabled = function() {
 
-    // If couselling status is "Received Counselling" (id=1) enable the referred checkbox,
+    // If couselling status is "Received Counselling" enable the referred checkbox,
     // and if referred was null, initialize it to false.
     // Else, set referredEnabled to false, and referred to null.
-    if ($scope.postDonationCounselling.counsellingStatus.id === 1) {
+    if ($scope.postDonationCounselling.counsellingStatus === 'RECEIVED_COUNSELLING') {
       $scope.referredEnabled = true;
       if ($scope.postDonationCounselling.referred === null) {
         $scope.postDonationCounselling.referred = false;
@@ -45,7 +45,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
 
     var update = {
       id: $scope.postDonationCounselling.id,
-      counsellingStatus: $scope.postDonationCounselling.counsellingStatus.id,
+      counsellingStatus: $scope.postDonationCounselling.counsellingStatus,
       counsellingDate: $scope.postDonationCounselling.counsellingDate,
       notes: $scope.postDonationCounselling.notes,
       referred: $scope.postDonationCounselling.referred,
@@ -90,7 +90,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
     $scope.donation = postDonationCounselling.donation;
     $scope.donor = postDonationCounselling.donor;
 
-    if ($scope.postDonationCounselling.counsellingStatus !== null && $scope.postDonationCounselling.counsellingStatus.id === 1) {
+    if ($scope.postDonationCounselling.counsellingStatus !== null && $scope.postDonationCounselling.counsellingStatus === 'RECEIVED_COUNSELLING') {
       $scope.referredEnabled = true;
     }
 
