@@ -12,7 +12,7 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
         // Filter the selected distribution site from the options
         return site.id !== $scope.orderForm.dispatchedFrom;
       });
-    } else if ($scope.orderForm.type === 'ISSUE') {
+    } else if ($scope.orderForm.type === 'ISSUE' || $scope.orderForm.type === 'PATIENT_REQUEST') {
       $scope.dispatchToSites = usageSites;
     } else {
       $scope.dispatchToSites = [];

@@ -56,6 +56,9 @@
             <label class="radio-inline">
               <input type="radio" ng-model="orderForm.type" value="ISSUE" required> Issue
             </label>
+            <label class="radio-inline">
+              <input type="radio" ng-model="orderForm.type" value="PATIENT_REQUEST" required> Patient Request
+            </label>
             <small class="error" style="display:block;" ng-show="addOrderForm.$submitted && !orderForm.type">
               Please select a dispatch type
             </small>
