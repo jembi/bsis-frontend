@@ -78,8 +78,13 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     }
 
     query.flaggedForCounselling = $scope.search.flaggedForCounselling;
+    queryParams.flaggedForCounselling = $scope.search.flaggedForCounselling;
+
     query.counsellingStatus = $scope.search.counsellingStatus;
+    queryParams.counsellingStatus = $scope.search.counsellingStatus;
+
     query.referred = $scope.search.referred;
+    queryParams.referred = $scope.search.referred;
 
     $location.search(queryParams);
 
@@ -243,28 +248,52 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     }
   };
 
+  function initialiseRouteParams() {
+    // Select venues from route params
+    if ($routeParams.venue) {
+      var venues = angular.isArray($routeParams.venue) ? $routeParams.venue : [$routeParams.venue];
+      $scope.search.selectedVenues = venues.map(function(venueId) {
+      // Cast id to number
+      return +venueId;
+      });
+    }
+
+    if ($routeParams.startDate) {
+      var startDate = new Date($routeParams.startDate);
+      $scope.search.startDate = startDate;
+    }
+
+    if ($routeParams.endDate) {
+      var endDate = new Date($routeParams.endDate);
+      $scope.search.endDate = endDate;
+    }
+
+    if ($routeParams.counsellingStatus) {
+      var counsellingStatus = $routeParams.counsellingStatus;
+      $scope.search.counsellingStatus = counsellingStatus;
+    }
+
+    if ($routeParams.flaggedForCounselling) {
+      var flaggedForCounselling = $routeParams.flaggedForCounselling;
+      $scope.search.flaggedForCounselling =  angular.lowercase(flaggedForCounselling) === true;
+    }
+
+    if ($routeParams.referred) {
+      var referred = $routeParams.referred;
+      $scope.search.referred = angular.lowercase(referred) === true;
+    }
+
+    // If the search parameter is present then refresh
+    if ($routeParams.search) {
+      $scope.refresh();
+    }
+  }
+
   function init() {
     PostDonationCounsellingService.getSearchForm(function(form) {
       $scope.venues = form.venues;
       $scope.counsellingStatuses = form.counsellingStatuses;
-
-      // Select venues from route params
-      if ($routeParams.venue) {
-        var venues = angular.isArray($routeParams.venue) ? $routeParams.venue : [$routeParams.venue];
-        $scope.search.selectedVenues = venues.map(function(venueId) {
-          // Cast id to number
-          return +venueId;
-        });
-      }
-      if ($routeParams.counsellingStatus) {
-        var counsellingStatus = $routeParams.counsellingStatus;
-        $scope.search.counsellingStatus = counsellingStatus;
-      }
-
-      // If the search parameter is present then refresh
-      if ($routeParams.search) {
-        $scope.refresh();
-      }
+      initialiseRouteParams();
     }, function(err) {
       $log.error(err);
     });
