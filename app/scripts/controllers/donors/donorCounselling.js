@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, $filter, Api, PostDonationCounsellingService, DATEFORMAT) {
+angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, $filter, PostDonationCounsellingService, DATEFORMAT) {
   var master = {
     selectedVenues: [],
     startDate: null,
     endDate: null,
     allVenues: true,
-    counsellingStatuses: []
+    counsellingStatuses: [],
+    flaggedForCounselling: false
   };
 
   $scope.search = angular.copy(master);
@@ -44,7 +45,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.viewDonorCounselling = function(donation) {
-    $location.path('/donorCounselling/' + donation.donor.id);
+    $location.path('/donorCounselling/' + donation.donorId);
   };
 
   $scope.refresh = function() {
@@ -56,9 +57,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       search: true
     };
 
-    var query = {
-      flaggedForCounselling: true
-    };
+    var query = {};
 
     if ($scope.search.startDate) {
       var startDate = $filter('isoString')($scope.search.startDate);
@@ -78,14 +77,18 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       $scope.search.allVenues = false;
     }
 
+    query.flaggedForCounselling = $scope.search.flaggedForCounselling;
+    query.counsellingStatus = $scope.search.counsellingStatus;
+    query.referred = $scope.search.referred;
+
     $location.search(queryParams);
 
     $scope.searching = true;
 
-    Api.DonationSummaries.query(query, function(response) {
+    PostDonationCounsellingService.search(query, function(response) {
       $scope.searched = true;
-      $scope.donations = response;
-      $scope.gridOptions.data = response;
+      $scope.donations = response.counsellings;
+      $scope.gridOptions.data = response.counsellings;
       $scope.searching = false;
       $scope.gridOptions.paginationCurrentPage = 1;
     }, function(err) {
@@ -95,7 +98,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.onRowClick = function(row) {
-    $location.path('donorCounselling/' + row.entity.donor.id).search({});
+    $location.path('donorCounselling/' + row.entity.donorId).search({});
   };
 
   $scope.updateReferred = function() {
@@ -110,19 +113,19 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   var columnDefs = [
-    {name: 'Donor #', field: 'donor.donorNumber'},
-    {name: 'First Name', field: 'donor.firstName'},
-    {name: 'Last Name', field: 'donor.lastName'},
-    {name: 'Gender', field: 'donor.gender'},
+    {name: 'Donor #', field: 'donorNumber'},
+    {name: 'First Name', field: 'firstName'},
+    {name: 'Last Name', field: 'lastName'},
+    {name: 'Gender', field: 'gender'},
 
     {
       name: 'Date of Birth',
-      field: 'donor.birthDate',
+      field: 'birthDate',
       cellFilter: 'bsisDate'
     },
     {
       name: 'Blood Group',
-      field: 'donor.bloodGroup'
+      field: 'bloodGroup'
     },
     {
       name: 'DIN',
@@ -137,6 +140,19 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     {
       name: 'Venue',
       field: 'venue.name'
+    },
+    {
+      name: 'Referred',
+      field: 'referred'
+    },
+    {
+      name: 'Counselled',
+      field: 'counselled'
+    },
+    {
+      name: 'Date',
+      field: 'counsellingDate',
+      cellFilter: 'bsisDate'
     }
   ];
 
@@ -150,13 +166,13 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
     // Format values for exports
     exporterFieldCallback: function(grid, row, col, value) {
-      if (col.name === 'Date of Donation' || col.name === 'Date of Birth') {
+      if (col.name.indexOf('Date') !== -1) {
         return $filter('bsisDate')(value);
       }
       return value;
     },
 
-    exporterPdfMaxGridWidth: 700,
+    exporterPdfMaxGridWidth: 650,
 
     // PDF header
     exporterPdfHeader: function() {
@@ -222,7 +238,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   function init() {
-    PostDonationCounsellingService.getPostDonationCounsellingSearchForm(function(form) {
+    PostDonationCounsellingService.getSearchForm(function(form) {
       $scope.venues = form.venues;
       $scope.counsellingStatuses = form.counsellingStatuses;
 

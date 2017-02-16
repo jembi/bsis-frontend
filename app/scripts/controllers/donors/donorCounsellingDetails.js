@@ -53,7 +53,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
     };
 
     $scope.updatingCounselling = true;
-    PostDonationCounsellingService.updatePostDonationCounselling(update, function() {
+    PostDonationCounsellingService.update(update, function() {
       $scope.goBack();
       $scope.updatingCounselling = false;
     }, function(err) {
@@ -63,7 +63,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
   };
 
   // Fetch form fields
-  PostDonationCounsellingService.getPostDonationCounsellingFormFields(function(response) {
+  PostDonationCounsellingService.getForm(function(response) {
     $scope.counsellingStatuses = response.counsellingStatuses;
     $scope.referralSites = response.referralSites;
   }, function(err) {
@@ -72,7 +72,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
 
   $scope.removeStatus = function() {
     $scope.updatingCounselling = true;
-    PostDonationCounsellingService.updatePostDonationCounselling({
+    PostDonationCounsellingService.update({
       id: $scope.postDonationCounselling.id,
       flaggedForCounselling: true
     }, function() {

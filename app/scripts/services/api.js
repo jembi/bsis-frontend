@@ -353,18 +353,19 @@ angular.module('bsis')
 
       AuditRevisions: $resource(url + '/auditrevisions'),
 
-      DonationSummaries: $resource(url + '/postdonationcounsellings'),
-
       DonorPostDonationCounselling: $resource(url + '/donors/:donorId/postdonationcounselling'),
 
-      PostDonationCounselling: $resource(url + '/postdonationcounsellings/:id', {id: '@id'}, {
-        update: {method: 'PUT'},
-        searchForm: {
+      PostDonationCounsellings: $resource(url + '/postdonationcounsellings/:id', {id: '@id'}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/postdonationcounsellings/form'
+        },
+        getSearchForm: {
           method: 'GET',
           url: url + '/postdonationcounsellings/searchForm'
-        }
+        },
+        update: {method: 'PUT'}
       }),
-      PostDonationCounsellingFormFields: $resource(url + '/postdonationcounsellings/form'),
 
       AdverseEventTypes: $resource(url + '/adverseevents/types/:id', {id: '@id'}, {
         update: {method: 'PUT'}
