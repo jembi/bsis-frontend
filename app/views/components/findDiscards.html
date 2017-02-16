@@ -39,8 +39,15 @@
                 </dateselect-end>
             </div>
             <div>
-                <small class="error" ng-show="(findDiscardedComponentsForm.donationDateFrom.$error.required || findDiscardedComponentsForm.donationDateTo.$error.required)">Select a valid date</small>
-                <small class="error" ng-show="(findDiscardedComponentsForm.donationDateTo.$error.uiDateRange || findDiscardedComponentsForm.donationDateFrom.$error.uiDateRange)">Select a date range that is less than one month</small>
+              <ng-messages for="findDiscardedComponentsForm.donationDateFrom.$error" role="alert" ng-show="findDiscardedComponentsForm.$submitted">
+                <small class="error" ng-message="required">Select a valid date</small>
+                <small class="error" ng-message="datesOutOfRange">Select a date range that is less than one month</small>
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
+              <ng-messages for="findDiscardedComponentsForm.donationDateTo.$error" role="alert" ng-show="findDiscardedComponentsForm.$submitted && !findDiscardedComponentsForm.donationDateFrom.$invalid">
+                <small class="error" ng-message="required">Select a valid date</small>
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
             </div>
         </div>
     </div>

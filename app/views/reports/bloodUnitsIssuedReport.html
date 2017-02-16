@@ -14,12 +14,14 @@
                 <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (selectPeriodForm.endDate.$invalid)}" ng-required="true" ui-date-start="{{search.startDate |  date: 'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ui-date-range min-date="search.startDate"></dateselect-end>
             </div>
             <div>
-                <small class="error" ng-show="(selectPeriodForm.startDate.$error.required || selectPeriodForm.endDate.$error.required)">
-                    Select a valid date
-                </small>
-                <small class="error" ng-show="(selectPeriodForm.endDate.$error.uiDateRange)">
-                    Start date must be before the end date
-                </small>
+              <ng-messages for="selectPeriodForm.startDate.$error" role="alert" ng-show="selectPeriodForm.$submitted">
+                <small class="error" ng-message="required">Select a valid date</small>
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
+              <ng-messages for="selectPeriodForm.endDate.$error" role="alert" ng-show="selectPeriodForm.$submitted && !selectPeriodForm.startDate.$invalid">
+                <small class="error" ng-message="required">Select a valid date</small>
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
             </div>
         </div>
       </div>

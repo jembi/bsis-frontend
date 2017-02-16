@@ -43,6 +43,7 @@ angular.module('bsis')
     $scope.addDonationSuccess = '';
 
     $scope.showTestResults = false;
+    $scope.today = new Date();
 
     var columnDefs = [
       {
@@ -163,6 +164,19 @@ angular.module('bsis')
 
       $scope.donationBatchView = 'viewDonationBatch';
 
+    };
+
+    $scope.validateDonationBatchEditableForm = function(editableForm) {
+      if (editableForm.donationBatchDate.$error.dateInFuture || editableForm.donationBatchDate.$error.required) {
+        return 'invalid';
+      } else {
+        $scope.confirmEdit = false;
+        return true;
+      }
+    };
+
+    $scope.cancelDonationBatchEditing = function() {
+      init();
     };
 
     $scope.updateDonationBatch = function(donationBatch, reopen) {

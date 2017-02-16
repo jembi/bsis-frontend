@@ -1,6 +1,6 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/donors/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-<form editable-form name="editableForm"
+<form editable-form name="editableForm" onbeforesave="validateDonationBatchEditableForm(editableForm);"
       onaftersave="updateDonationBatch(donationBatch, confirmReopen); confirmReopen = false; confirmEdit = false">
   <span class="h3"> 
     Manage Donation Batch
@@ -11,11 +11,10 @@
     <div class="h4">
         <small><em>Date Created: </em></small>
         <span ng-show="!editableForm.$visible">{{ (donationBatch.donationBatchDate | bsisDate) || '' }}</span>
-    <span ng-show="editableForm.$visible">
-      <dateselect ng-model="donationBatch.donationBatchDate" initDate="donationBatch.donationBatchDate" format="dateFormat"
-                  cal-icon="icons.CALENDAR" opened="dateToOpen"
-                  ng-disabled="!donationBatch.permissions.canEditDate"></dateselect>
-    </span>
+        <span ng-show="editableForm.$visible">
+          <dateselect name="donationBatchDate" ng-model="donationBatch.donationBatchDate" initDate="donationBatch.donationBatchDate" format="dateFormat" cal-icon="icons.CALENDAR" ng-disabled="!donationBatch.permissions.canEditDate" required date-time-not-in-future ng-class="{'has-error' : editableForm.donationBatchDate.$invalid || editableForm.donationBatchDate.$error.required}" max-date="today">
+          </dateselect>
+        </span>
         |
         <small><em>Venue: </em></small>
         <span e-class="xeditable venue" editable-select="donationBatch.venue"
@@ -50,7 +49,7 @@
           <em>
               <button type="submit" class="btn btn-link text-success" ng-disabled="editableForm.$waiting">Save</button>
               <a href="" type="button" class="btn btn-link text-muted" ng-disabled="editableForm.$waiting"
-                 ng-click="editableForm.$cancel(); confirmEdit = false;">Cancel</a>
+                 ng-click="cancelDonationBatchEditing(); editableForm.$cancel(); confirmEdit = false;">Cancel</a>
           </em>
         </span>
       </div>
@@ -84,6 +83,12 @@
         </span>
       </div>
     </span>
+
+    </div>
+    <div>
+      <ng-messages for="editableForm.donationBatchDate.$error" role="alert" ng-show="editableForm.donationBatchDate.$error.dateInFuture || editableForm.donationBatchDate.$error.required">
+        <ng-messages-include src="messages.html"></ng-messages-include>
+      </ng-messages>
 
     </div>
 </form>

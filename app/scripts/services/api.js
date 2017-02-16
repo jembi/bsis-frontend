@@ -247,14 +247,22 @@ angular.module('bsis')
       }),
 
       Labelling: $resource(url + '/labels/', {}, {
+        search: {
+          method: 'GET',
+          url: url + '/labels/components/search'
+        },
         getComponentForm: {
           method: 'GET',
           url: url + '/labels/components/form'
         },
         getComponents: {
           method: 'GET',
-          url: url + '/labels/components',
-          params: {componentType: '@componentType', donationIdentificationNumber: '@donationIdentificationNumber'}
+          url: url + '/labels/donations/:donationIdentificationNumber/components',
+          params: {componentType: '@componentType'}
+        },
+        getSafeComponents: {
+          method: 'GET',
+          url: url + '/labels/components'
         },
         printPackLabel: {
           method: 'GET',

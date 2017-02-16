@@ -190,8 +190,6 @@ angular.module('bsis')
     $scope.updateAllSites = function() {
       if ($scope.searchParams.locationId) {
         $scope.searchParams.allSites = false;
-      } else {
-        $scope.searchParams.allSites = true;
       }
     };
 
@@ -204,9 +202,7 @@ angular.module('bsis')
     };
 
     $scope.clearBloodGroups = function() {
-      if ($scope.searchParams.anyBloodGroup) {
-        $scope.searchParams.bloodGroups = [];
-      }
+      $scope.searchParams.bloodGroups = [];
     };
 
     $scope.clearSearch = function(searchForm) {
