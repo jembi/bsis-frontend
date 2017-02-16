@@ -1,8 +1,8 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/donors/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-<h3 class="page-header">Donors Flagged for Counselling</h3>
+<h3 class="page-header">Donor Counselling</h3>
 
-<form class="form-horizontal" name="findDonorFlagedForCouncellingForm" style="padding:10px 0;" ng-submit="refresh()" novalidate>
+<form class="form-horizontal" name="findDonorCounsellingForm" style="padding:10px 0;" ng-submit="refresh()" novalidate>
 
     <div class="clearfix form-group">
         <label class="col-sm-2 control-label">Venues:</label>
@@ -20,7 +20,7 @@
                 </label>
             </div>
             <div>
-                <ng-messages for="findDonorFlagedForCouncellingForm.selectedVenues.$error" role="alert" ng-show="findDonorFlagedForCouncellingForm.$submitted">
+                <ng-messages for="findDonorCounsellingForm.selectedVenues.$error" role="alert" ng-show="findDonorCounsellingForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
             </div>
         </div>
@@ -63,7 +63,7 @@
         <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
             "Search"}}
         </button>
-        <button class="btn btn-primary" type="button" ng-click="clearSearch(findDonorFlagedForCouncellingForm)">Clear</button>
+        <button class="btn btn-primary" type="button" ng-click="clearSearch(findDonorCounsellingForm)">Clear</button>
     </div>
 </form>
 
