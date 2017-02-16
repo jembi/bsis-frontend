@@ -49,7 +49,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.refresh = function() {
-    if (!$scope.findDonorFlagedForCouncellingForm.$valid) {
+    if (!$scope.findDonorCounsellingForm.$valid) {
       return;
     }
 
