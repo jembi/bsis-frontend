@@ -107,7 +107,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     }
   };
 
-  $scope.clearCounsellingDropDownAndReferredCheckbox = function() {
+  $scope.clearCounsellingStatusesAndReferred = function() {
     $scope.search.counsellingStatuses = null;
     $scope.search.referred = false;
   };
