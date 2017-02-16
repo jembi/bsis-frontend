@@ -84,6 +84,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $location.search(queryParams);
 
     $scope.searching = true;
+    $scope.gridOptions.data = [];
 
     PostDonationCounsellingService.search(query, function(response) {
       $scope.searched = true;
