@@ -166,6 +166,8 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     paginationTemplate: 'views/template/pagination.html',
     rowTemplate: 'views/template/clickablerow.html',
     columnDefs: columnDefs,
+    exporterPdfDefaultStyle: {fontSize: 9},
+    exporterPdfTableHeaderStyle: {fontSize: 10, bold: true},
 
     // Format values for exports
     exporterFieldCallback: function(grid, row, col, value) {
@@ -189,21 +191,22 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       });
 
       var columns = [
-        {text: 'Venue(s): ' + (venues.join(',') || 'Any'), width: 'auto'}
+        {text: 'Venue(s): ' + (venues.join(',') || 'Any'), width: 'auto', fontSize: 10}
       ];
 
       // Include last donation date range
       if ($scope.search.startDate && $scope.search.endDate) {
         var fromDate = $filter('bsisDate')($scope.search.startDate);
         var toDate = $filter('bsisDate')($scope.search.endDate);
-        columns.push({text: 'Donation Period: ' + fromDate + ' to ' + toDate, width: 'auto'});
+        columns.push({text: 'Donation Period: ' + fromDate + ' to ' + toDate, width: 'auto', fontSize: 10});
       }
 
       return [
         {
           text: 'List of donors for post donation counselling',
           bold: true,
-          margin: [30, 10, 30, 0]
+          margin: [30, 10, 30, 0],
+          fontSize: 12
         },
         {
           columns: columns,
