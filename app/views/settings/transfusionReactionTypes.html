@@ -1,0 +1,27 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
+    <h3 class="page-header">Manage Transfusion Reaction Types</h3>
+
+    <div class="col-sm-12">
+        <div style="padding-bottom:10px;"></div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    <em>{{transfusionReactionTypesCount}} transfusion reaction type(s) found</em>
+                </p>
+
+                <table class="table" style="text-align:center;" ng-table="tableParams" show-filter="false">
+                    <tr ng-repeat="transfusionReactionType in $data">
+                        <td data-title="'Name'" sortable="'name'">{{transfusionReactionType.name}}</td>
+                        <td data-title="'Description'" sortable="'description'">{{transfusionReactionType.description}}</td>
+                        <td data-title="'Enabled'">
+                            <span ng-show="!transfusionReactionType.isDeleted"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                            <span ng-show="transfusionReactionType.isDeleted"><i class="fa {{icons.SQUARE}}"></i></span>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
