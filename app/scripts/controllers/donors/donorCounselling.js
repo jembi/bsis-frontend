@@ -1,11 +1,13 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, $filter, Api, PostDonationCounsellingService, DATEFORMAT) {
+angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, $filter, PostDonationCounsellingService, DATEFORMAT) {
   var master = {
     selectedVenues: [],
     startDate: null,
     endDate: null,
-    allVenues: true
+    allVenues: true,
+    counsellingStatuses: [],
+    flaggedForCounselling: false
   };
 
   $scope.search = angular.copy(master);
@@ -43,11 +45,11 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.viewDonorCounselling = function(donation) {
-    $location.path('/donorCounselling/' + donation.donor.id);
+    $location.path('/donorCounselling/' + donation.donorId);
   };
 
   $scope.refresh = function() {
-    if (!$scope.findDonorFlagedForCouncellingForm.$valid) {
+    if (!$scope.findDonorCounsellingForm.$valid) {
       return;
     }
 
@@ -55,9 +57,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       search: true
     };
 
-    var query = {
-      flaggedForCounselling: true
-    };
+    var query = {};
 
     if ($scope.search.startDate) {
       var startDate = $filter('isoString')($scope.search.startDate);
@@ -77,14 +77,24 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       $scope.search.allVenues = false;
     }
 
+    query.flaggedForCounselling = $scope.search.flaggedForCounselling;
+    queryParams.flaggedForCounselling = $scope.search.flaggedForCounselling;
+
+    query.counsellingStatus = $scope.search.counsellingStatus;
+    queryParams.counsellingStatus = $scope.search.counsellingStatus;
+
+    query.referred = $scope.search.referred;
+    queryParams.referred = $scope.search.referred;
+
     $location.search(queryParams);
 
     $scope.searching = true;
+    $scope.gridOptions.data = [];
 
-    Api.DonationSummaries.query(query, function(response) {
+    PostDonationCounsellingService.search(query, function(response) {
       $scope.searched = true;
-      $scope.donations = response;
-      $scope.gridOptions.data = response;
+      $scope.donations = response.counsellings;
+      $scope.gridOptions.data = response.counsellings;
       $scope.searching = false;
       $scope.gridOptions.paginationCurrentPage = 1;
     }, function(err) {
@@ -94,24 +104,36 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.onRowClick = function(row) {
-    $location.path('donorCounselling/' + row.entity.donor.id).search({});
+    $location.path('donorCounselling/' + row.entity.donorId).search({});
   };
 
+  $scope.updateReferred = function() {
+    if ($scope.search.counsellingStatus !== 'RECEIVED_COUNSELLING') {
+      $scope.search.referred = null;
+    } else {
+      $scope.search.referred = false;
+    }
+  };
+
+  $scope.clearCounsellingStatusAndReferred = function() {
+    $scope.search.counsellingStatus = null;
+    $scope.search.referred = null;
+  };
 
   var columnDefs = [
-    {name: 'Donor #', field: 'donor.donorNumber'},
-    {name: 'First Name', field: 'donor.firstName'},
-    {name: 'Last Name', field: 'donor.lastName'},
-    {name: 'Gender', field: 'donor.gender'},
+    {name: 'Donor #', field: 'donorNumber'},
+    {name: 'First Name', field: 'firstName'},
+    {name: 'Last Name', field: 'lastName'},
+    {name: 'Gender', field: 'gender'},
 
     {
       name: 'Date of Birth',
-      field: 'donor.birthDate',
+      field: 'birthDate',
       cellFilter: 'bsisDate'
     },
     {
       name: 'Blood Group',
-      field: 'donor.bloodGroup'
+      field: 'bloodGroup'
     },
     {
       name: 'DIN',
@@ -126,6 +148,19 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     {
       name: 'Venue',
       field: 'venue.name'
+    },
+    {
+      name: 'Referred',
+      field: 'referred'
+    },
+    {
+      name: 'Counselled',
+      field: 'counselled'
+    },
+    {
+      name: 'Date',
+      field: 'counsellingDate',
+      cellFilter: 'bsisDate'
     }
   ];
 
@@ -136,16 +171,18 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     paginationTemplate: 'views/template/pagination.html',
     rowTemplate: 'views/template/clickablerow.html',
     columnDefs: columnDefs,
+    exporterPdfDefaultStyle: {fontSize: 9},
+    exporterPdfTableHeaderStyle: {fontSize: 10, bold: true},
 
     // Format values for exports
     exporterFieldCallback: function(grid, row, col, value) {
-      if (col.name === 'Date of Donation' || col.name === 'Date of Birth') {
+      if (col.name.indexOf('Date') !== -1) {
         return $filter('bsisDate')(value);
       }
       return value;
     },
 
-    exporterPdfMaxGridWidth: 700,
+    exporterPdfMaxGridWidth: 650,
 
     // PDF header
     exporterPdfHeader: function() {
@@ -159,21 +196,22 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       });
 
       var columns = [
-        {text: 'Venue(s): ' + (venues.join(',') || 'Any'), width: 'auto'}
+        {text: 'Venue(s): ' + (venues.join(',') || 'Any'), width: 'auto', fontSize: 10}
       ];
 
       // Include last donation date range
       if ($scope.search.startDate && $scope.search.endDate) {
         var fromDate = $filter('bsisDate')($scope.search.startDate);
         var toDate = $filter('bsisDate')($scope.search.endDate);
-        columns.push({text: 'Donation Period: ' + fromDate + ' to ' + toDate, width: 'auto'});
+        columns.push({text: 'Donation Period: ' + fromDate + ' to ' + toDate, width: 'auto', fontSize: 10});
       }
 
       return [
         {
           text: 'List of donors for post donation counselling',
           bold: true,
-          margin: [30, 10, 30, 0]
+          margin: [30, 10, 30, 0],
+          fontSize: 12
         },
         {
           columns: columns,
@@ -210,23 +248,52 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     }
   };
 
+  function initialiseRouteParams() {
+    // Select venues from route params
+    if ($routeParams.venue) {
+      var venues = angular.isArray($routeParams.venue) ? $routeParams.venue : [$routeParams.venue];
+      $scope.search.selectedVenues = venues.map(function(venueId) {
+      // Cast id to number
+      return +venueId;
+      });
+    }
+
+    if ($routeParams.startDate) {
+      var startDate = new Date($routeParams.startDate);
+      $scope.search.startDate = startDate;
+    }
+
+    if ($routeParams.endDate) {
+      var endDate = new Date($routeParams.endDate);
+      $scope.search.endDate = endDate;
+    }
+
+    if ($routeParams.counsellingStatus) {
+      var counsellingStatus = $routeParams.counsellingStatus;
+      $scope.search.counsellingStatus = counsellingStatus;
+    }
+
+    if ($routeParams.flaggedForCounselling) {
+      var flaggedForCounselling = $routeParams.flaggedForCounselling;
+      $scope.search.flaggedForCounselling =  angular.lowercase(flaggedForCounselling) === true;
+    }
+
+    if ($routeParams.referred) {
+      var referred = $routeParams.referred;
+      $scope.search.referred = angular.lowercase(referred) === true;
+    }
+
+    // If the search parameter is present then refresh
+    if ($routeParams.search) {
+      $scope.refresh();
+    }
+  }
+
   function init() {
-    PostDonationCounsellingService.getPostDonationCounsellingSearchForm(function(form) {
+    PostDonationCounsellingService.getSearchForm(function(form) {
       $scope.venues = form.venues;
-
-      // Select venues from route params
-      if ($routeParams.venue) {
-        var venues = angular.isArray($routeParams.venue) ? $routeParams.venue : [$routeParams.venue];
-        $scope.search.selectedVenues = venues.map(function(venueId) {
-          // Cast id to number
-          return +venueId;
-        });
-      }
-
-      // If the search parameter is present then refresh
-      if ($routeParams.search) {
-        $scope.refresh();
-      }
+      $scope.counsellingStatuses = form.counsellingStatuses;
+      initialiseRouteParams();
     }, function(err) {
       $log.error(err);
     });

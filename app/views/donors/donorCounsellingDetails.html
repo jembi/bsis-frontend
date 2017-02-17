@@ -75,7 +75,7 @@
                 <select class="form-control"
                         name="counsellingStatus"
                         ng-model="postDonationCounselling.counsellingStatus"
-                        ng-options="counsellingStatus.label for counsellingStatus in counsellingStatuses track by counsellingStatus.id"
+                        ng-options="status as (status | titleCase) for status in counsellingStatuses"
                         required ng-change="updateReferredEnabled()"
                         ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingStatus.$invalid}">
                 </select>
