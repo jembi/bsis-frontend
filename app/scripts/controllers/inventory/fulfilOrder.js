@@ -28,7 +28,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
         // Filter the selected distribution site from the options
         return site.id !== $scope.orderDetailsForm.dispatchedFrom;
       });
-    } else if ($scope.orderDetailsForm.type === 'ISSUE') {
+    } else if ($scope.orderDetailsForm.type === 'ISSUE' || $scope.orderDetailsForm.type === 'PATIENT_REQUEST') {
       $scope.dispatchToSites = usageSites;
     } else {
       $scope.dispatchToSites = [];
