@@ -36,13 +36,15 @@
             </div>
             <div>
                 <ng-messages for="findDonorCounsellingForm.startDate.$error" role="alert" ng-show="findDonorCounsellingForm.$submitted">
-                <small class="error" ng-message="required">Select a valid date</small>
-                <ng-messages-include src="messages.html"></ng-messages-include>
+                    <small class="error" ng-message="required">Select a valid date</small>
+                    <ng-messages-include src="messages.html"></ng-messages-include>
+                </ng-messages>
             </div>
             <div>
                 <ng-messages for="findDonorCounsellingForm.endDate.$error" role="alert" ng-show="findDonorCounsellingForm.$submitted && !findDonorCounsellingForm.startDate.$invalid">
-                <small class="error" ng-message="required">Select a valid date</small>
-                <ng-messages-include src="messages.html"></ng-messages-include>
+                    <small class="error" ng-message="required">Select a valid date</small>
+                    <ng-messages-include src="messages.html"></ng-messages-include>
+                </ng-messages>
             </div>
             <div class="checkbox">
                 <label>
