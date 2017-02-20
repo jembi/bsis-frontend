@@ -1,9 +1,11 @@
 'use strict';
 
-angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService, GENDER, BLOODGROUP) {
+angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService, GENDER, BLOODGROUP, DATEFORMAT) {
 
   var distributionSites = [];
   var usageSites = [];
+
+  $scope.dateFormat = DATEFORMAT;
 
   // Set the "dispatch to" sites based on dispatch type
   function updateDispatchToSites() {

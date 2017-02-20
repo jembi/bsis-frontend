@@ -28,7 +28,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label" for="orderDate">Order Date:</label>
             <div class="col-sm-9">
-              <dateselect name="orderDate" ng-model="orderForm.orderDate" ng-required="true"></dateselect>
+              <dateselect name="orderDate" ng-model="orderForm.orderDate" ng-required="true" format="dateFormat"></dateselect>
               <ng-messages for="addOrderForm.orderDate.$error" role="alert" ng-show="addOrderForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
@@ -109,7 +109,7 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label">Date of birth:</label>
                 <div class="col-sm-8">
-                  <dateselect name="dateOfBirth" ng-model="orderForm.dateOfBirth"></dateselect>
+                  <dateselect name="dateOfBirth" ng-model="orderForm.dateOfBirth" format="dateFormat"></dateselect>
                 </div>
               </div>
 
