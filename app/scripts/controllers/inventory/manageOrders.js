@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService) {
+angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService, GENDER, BLOODGROUP) {
 
   var distributionSites = [];
   var usageSites = [];
@@ -16,6 +16,18 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
       $scope.dispatchToSites = usageSites;
     } else {
       $scope.dispatchToSites = [];
+    }
+  }
+
+  function extractBloodAbo(bloodGroup) {
+    if (bloodGroup) {
+      return bloodGroup.substring(0, bloodGroup.length - 1);
+    }
+  }
+
+  function extractBloodRh(bloodGroup) {
+    if (bloodGroup) {
+      return bloodGroup.slice(-1);
     }
   }
 
@@ -35,6 +47,10 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
       usageSites = res.usageSites;
       updateDispatchToSites();
     }, $log.error);
+
+    // Initialise the gender and blood group lists
+    $scope.genders = GENDER.options;
+    $scope.bloodGroups = BLOODGROUP.options;
   }
 
   $scope.orderForm = {
@@ -56,6 +72,22 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     }
     $scope.addingOrderForm = true;
 
+    var patient = null;
+
+    if ($scope.orderForm.type === 'PATIENT_REQUEST') {
+      patient = {
+        name1: $scope.orderForm.name1,
+        name2: $scope.orderForm.name2,
+        dateOfBirth: $scope.orderForm.dateOfBirth,
+        gender: $scope.orderForm.gender,
+        patientNumber: $scope.orderForm.patientNumber,
+        hospitalBloodBankNumber: $scope.orderForm.hospitalBloodBankNumber,
+        hospitalWardNumber: $scope.orderForm.hospitalWardNumber,
+        bloodAbo: extractBloodAbo($scope.orderForm.bloodGroup),
+        bloodRh: extractBloodRh($scope.orderForm.bloodGroup)
+      };
+    }
+
     var orderForm = {
       status: 'CREATED',
       orderDate: $scope.orderForm.orderDate,
@@ -65,7 +97,8 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
       },
       dispatchedTo: {
         id: $scope.orderForm.dispatchedTo
-      }
+      },
+      patient: patient
     };
 
     OrderFormsService.addOrderForm({}, orderForm, function(res) {
