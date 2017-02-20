@@ -254,7 +254,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       var venues = angular.isArray($routeParams.venue) ? $routeParams.venue : [$routeParams.venue];
       $scope.search.selectedVenues = venues.map(function(venueId) {
       // Cast id to number
-      return +venueId;
+        return +venueId;
       });
     }
 
