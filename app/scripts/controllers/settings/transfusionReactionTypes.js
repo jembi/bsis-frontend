@@ -1,41 +1,56 @@
 'use strict';
 
-angular.module('bsis').controller('TransfusionReactionTypesCtrl', function($scope, $filter, $location, $log, $timeout, ICONS, TransfusionReactionTypesService, ngTableParams) {
+angular.module('bsis').controller('TransfusionReactionTypesCtrl', function($scope, $filter, $location, $log, $timeout, ICONS, TransfusionReactionTypesService) {
 
   $scope.icons = ICONS;
-  var data = [{}];
-  $scope.data = data;
   $scope.transfusionReactionTypes = {};
+
+  var columnDefs = [
+    {
+      name: 'Name',
+      field: 'name',
+      width: '**',
+      maxWidth: '300'
+    },
+    {
+      name: 'Description',
+      displayName: 'Description',
+      field: 'description',
+      width: '**'
+    },
+    {
+      name: 'Enabled',
+      field: 'isDeleted',
+      cellTemplate: '<div class="ui-grid-cell-contents">' +
+        '<span ng-show="!row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARECHECK}}"></i></span>' +
+        '<span ng-show="row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARE}}"></i></span></div>',
+      width: '**',
+      maxWidth: '100'
+    }
+  ];
 
   $scope.getTransfusionReactionTypes = function() {
     TransfusionReactionTypesService.getTransfusionReactionTypes(function(response) {
       if (response !== false) {
-        data = response;
-        $scope.data = data;
-        $scope.transfusionReactionTypes = data;
+        $scope.gridOptions.data = response;
+        $scope.transfusionReactionTypes = response;
         $scope.transfusionReactionTypesCount = $scope.transfusionReactionTypes.length;
       }
     });
   };
 
-  $scope.tableParams = new ngTableParams({
-    page: 1,
-    count: 6
-  }, {
-    counts: [],
-    getData: function($defer, params) {
-      var filteredData = params.filter() ? $filter('filter')(data, params.filter()) : data;
-      var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : data;
-      params.total(orderedData.length); // set total for pagination
-      $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-    }
-  });
+  $scope.gridOptions = {
+    data: [],
+    paginationPageSize: 10,
+    paginationTemplate: 'views/template/pagination.html',
+    minRowsToShow: 10,
+    columnDefs: columnDefs,
+    rowTemplate: 'views/template/clickablerow.html',
 
-  $scope.$watch('data', function() {
-    $timeout(function() {
-      $scope.tableParams.reload();
-    });
-  });
+    onRegisterApi: function(gridApi) {
+      $scope.gridApi = gridApi;
+    }
+  };
 
   $scope.getTransfusionReactionTypes();
 });
