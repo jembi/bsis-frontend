@@ -21,18 +21,6 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     }
   }
 
-  function extractBloodAbo(bloodGroup) {
-    if (bloodGroup) {
-      return bloodGroup.substring(0, bloodGroup.length - 1);
-    }
-  }
-
-  function extractBloodRh(bloodGroup) {
-    if (bloodGroup) {
-      return bloodGroup.slice(-1);
-    }
-  }
-
   function initialise() {
 
     // Get current order forms
@@ -85,8 +73,7 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
         patientNumber: $scope.orderForm.patientNumber,
         hospitalBloodBankNumber: $scope.orderForm.hospitalBloodBankNumber,
         hospitalWardNumber: $scope.orderForm.hospitalWardNumber,
-        bloodAbo: extractBloodAbo($scope.orderForm.bloodGroup),
-        bloodRh: extractBloodRh($scope.orderForm.bloodGroup)
+        bloodGroup: $scope.orderForm.bloodGroup
       };
     }
 
