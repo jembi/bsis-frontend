@@ -89,14 +89,14 @@
             <div class="row">
               <label class="col-sm-2 control-label" for="name1">Name:</label>
               <div class="col-sm-5" >
-                <input name="name1" type="text" class="form-control" ng-model="orderForm.name1" required/>
+                <input name="name1" type="text" class="form-control" ng-model="orderForm.name1" ng-maxlength=20 required/>
                 <ng-messages for="addOrderForm.name1.$error" role="alert" ng-show="addOrderForm.$submitted" >
                   <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
               </div>
 
               <div class="col-sm-5">
-                <input name = "name2" type="text" class="form-control" ng-model="orderForm.name2" required/>
+                <input name = "name2" type="text" class="form-control" ng-model="orderForm.name2" ng-maxlength=20 required/>
                 <ng-messages for="addOrderForm.name2.$error" role="alert" ng-show="addOrderForm.$submitted">
                   <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
