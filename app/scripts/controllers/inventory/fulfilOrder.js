@@ -137,6 +137,9 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
   $scope.editOrderDetails = function() {
     $scope.orderDetailsForm = angular.copy($scope.orderForm);
     $scope.orderDetailsForm.orderDate = moment($scope.orderDetailsForm.orderDate).toDate();
+    if ($scope.orderDetailsForm.patient !== null && $scope.orderDetailsForm.patient.dateOfBirth !== null) {
+      $scope.orderDetailsForm.patient.dateOfBirth = moment($scope.orderDetailsForm.patient.dateOfBirth).toDate();
+    }
     $scope.editingOrderDetails = true;
   };
 
