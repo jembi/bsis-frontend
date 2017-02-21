@@ -89,14 +89,14 @@
             <div class="row">
               <label class="col-sm-2 control-label" for="name1">Name:</label>
               <div class="col-sm-5" >
-                <input name="name1" type="text" class="form-control" ng-model="orderForm.name1" ng-maxlength=20 required/>
+                <input name="name1" type="text" class="form-control" ng-model="orderForm.patient.name1" ng-maxlength=20 required/>
                 <ng-messages for="addOrderForm.name1.$error" role="alert" ng-show="addOrderForm.$submitted" >
                   <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
               </div>
 
               <div class="col-sm-5">
-                <input name = "name2" type="text" class="form-control" ng-model="orderForm.name2" ng-maxlength=20 required/>
+                <input name = "name2" type="text" class="form-control" ng-model="orderForm.patient.name2" ng-maxlength=20 required/>
                 <ng-messages for="addOrderForm.name2.$error" role="alert" ng-show="addOrderForm.$submitted">
                   <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
@@ -109,21 +109,21 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label">Date of birth:</label>
                 <div class="col-sm-8">
-                  <dateselect name="dateOfBirth" ng-model="orderForm.dateOfBirth" format="dateFormat"></dateselect>
+                  <dateselect name="dateOfBirth" ng-model="orderForm.patient.dateOfBirth" format="dateFormat"></dateselect>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-4 control-label">Patient No:</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" ng-model="orderForm.patientNumber"/>
+                  <input type="text" class="form-control" ng-model="orderForm.patient.patientNumber"/>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-4 control-label">Blood Bank No:</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" ng-model="orderForm.hospitalBloodBankNumber"/>
+                  <input type="text" class="form-control" ng-model="orderForm.patient.hospitalBloodBankNumber"/>
                 </div>
               </div>
             </div>
@@ -134,7 +134,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">Gender:</label>
               <div class="col-sm-8">
-                <select name="gender" class="form-control input-sm" ng-options="item.id as item.name for item in genders" ng-model="orderForm.gender">
+                <select name="gender" class="form-control input-sm" ng-options="item.id as item.name for item in genders" ng-model="orderForm.patient.gender">
                   <option value=""></option>
                 </select>
               </div>
@@ -143,7 +143,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">Blood Group:</label>
               <div class="col-sm-8">
-                 <select name="bloodGroup" class="form-control" ng-options="item for item in bloodGroups" ng-model="orderForm.bloodGroup">
+                 <select name="bloodGroup" class="form-control" ng-options="item for item in bloodGroups" ng-model="orderForm.patient.bloodGroup">
                    <option value=""></option>
                  </select>
               </div>
@@ -152,7 +152,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">Hospital Ward No:</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" ng-model="orderForm.hospitalWardNumber"/>
+                <input type="text" class="form-control" ng-model="orderForm.patient.hospitalWardNumber"/>
               </div>
             </div>
 

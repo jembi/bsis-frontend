@@ -47,7 +47,8 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     orderDate: new Date(),
     type: null,
     dispatchedFrom: null,
-    dispatchedTo: null
+    dispatchedTo: null,
+    patient: null
   };
   $scope.addingOrderForm = false;
   // The available sites to be dispatched from
@@ -62,19 +63,8 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     }
     $scope.addingOrderForm = true;
 
-    var patient = null;
-
-    if ($scope.orderForm.type === 'PATIENT_REQUEST') {
-      patient = {
-        name1: $scope.orderForm.name1,
-        name2: $scope.orderForm.name2,
-        dateOfBirth: $scope.orderForm.dateOfBirth,
-        gender: $scope.orderForm.gender,
-        patientNumber: $scope.orderForm.patientNumber,
-        hospitalBloodBankNumber: $scope.orderForm.hospitalBloodBankNumber,
-        hospitalWardNumber: $scope.orderForm.hospitalWardNumber,
-        bloodGroup: $scope.orderForm.bloodGroup
-      };
+    if ($scope.orderForm.type !== 'PATIENT_REQUEST') {
+      $scope.orderForm.patient = null;
     }
 
     var orderForm = {
@@ -87,7 +77,7 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
       dispatchedTo: {
         id: $scope.orderForm.dispatchedTo
       },
-      patient: patient
+      patient: $scope.orderForm.patient
     };
 
     OrderFormsService.addOrderForm({}, orderForm, function(res) {
