@@ -515,6 +515,13 @@ angular.module('bsis')
         }
       }),
 
+      TransfusionReactionTypes: $resource(url + '/transfusionreactiontypes/', {}, {
+        search: {
+          method: 'GET',
+          url: url + '/transfusionreactiontypes/search'
+        }
+      }),
+
       DataExport: {
         download: function() {
           // using $http here because $resource cannot process arraybuffers easily

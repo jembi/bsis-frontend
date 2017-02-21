@@ -32,10 +32,10 @@
         <label for="name" class="col-sm-1 control-label">Period</label>
         <div class="row col-sm-11">
             <div class="form-inline" style="padding-left:5px;">
-                <dateselect name="donationDateFrom" ng-model="discardsSearch.donationDateFrom" format="format" opened="startDateOpen" cal-icon="icons.CALENDAR" ng-required="!dinSearch" ng-disabled="dinSearch" ui-date-range="1,months" ui-date-end="{{discardsSearch.donationDateTo | date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findDiscardedComponentsForm.donationDateFrom.$invalid)}" ng-model-options="{ allowInvalid: true }">
+                <dateselect name="donationDateFrom" ng-model="discardsSearch.donationDateFrom" format="dateFormat" opened="startDateOpen" cal-icon="icons.CALENDAR" ng-required="!dinSearch" ng-disabled="dinSearch" ui-date-range="1,months" ui-date-end="{{discardsSearch.donationDateTo | date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findDiscardedComponentsForm.donationDateFrom.$invalid)}" ng-model-options="{ allowInvalid: true }">
                 </dateselect>
                 <span><em> To: </em></span>
-                <dateselect-end name="donationDateTo" ng-model="discardsSearch.donationDateTo" format="format" opened="endDateOpen" cal-icon="icons.CALENDAR" ng-required="!dinSearch" ng-disabled="dinSearch" ui-date-range="1,months" ui-date-start="{{discardsSearch.donationDateFrom |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findDiscardedComponentsForm.donationDateTo.$invalid)}" ng-model-options="{ allowInvalid: true }">
+                <dateselect-end name="donationDateTo" ng-model="discardsSearch.donationDateTo" format="dateFormat" opened="endDateOpen" cal-icon="icons.CALENDAR" ng-required="!dinSearch" ng-disabled="dinSearch" ui-date-range="1,months" ui-date-start="{{discardsSearch.donationDateFrom |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findDiscardedComponentsForm.donationDateTo.$invalid)}" ng-model-options="{ allowInvalid: true }">
                 </dateselect-end>
             </div>
             <div>

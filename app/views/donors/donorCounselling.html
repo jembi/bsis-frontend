@@ -30,13 +30,25 @@
         <label class="col-sm-2 control-label">Donation Period:</label>
         <div class="form-inline col-sm-10">
             <div>
-                <dateselect ng-model="search.startDate" format="dateFormat"></dateselect>
+                <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-required="!search.anyDate" ng-click="updateAnyDate()"></dateselect>
                 <span><em>To:</em></span>
-                <dateselect-end ng-model="search.endDate" format="dateFormat"></dateselect-end>
+                <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-required="!search.anyDate" ng-click="updateAnyDate()"></dateselect-end>
+            </div>
+            <div>
+                <ng-messages for="findDonorCounsellingForm.startDate.$error" role="alert" ng-show="findDonorCounsellingForm.$submitted">
+                    <small class="error" ng-message="required">Select a valid date</small>
+                    <ng-messages-include src="messages.html"></ng-messages-include>
+                </ng-messages>
+            </div>
+            <div>
+                <ng-messages for="findDonorCounsellingForm.endDate.$error" role="alert" ng-show="findDonorCounsellingForm.$submitted && !findDonorCounsellingForm.startDate.$invalid">
+                    <small class="error" ng-message="required">Select a valid date</small>
+                    <ng-messages-include src="messages.html"></ng-messages-include>
+                </ng-messages>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-checked="!search.startDate && !search.endDate" ng-click="clearDates()">
+                    <input type="checkbox" ng-model="search.anyDate" ng-click="clearDates()">
                     Any Date
                 </label>
             </div>

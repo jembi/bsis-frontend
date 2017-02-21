@@ -5,6 +5,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     selectedVenues: [],
     startDate: null,
     endDate: null,
+    anyDate: true,
     allVenues: true,
     counsellingStatuses: [],
     flaggedForCounselling: false
@@ -38,6 +39,12 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   $scope.clearDates = function() {
     $scope.search.startDate = null;
     $scope.search.endDate = null;
+  };
+
+  $scope.updateAnyDate = function() {
+    if ($scope.search.startDate || $scope.search.endDate) {
+      $scope.search.anyDate = false;
+    }
   };
 
   $scope.clearVenues = function() {
@@ -253,8 +260,8 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     if ($routeParams.venue) {
       var venues = angular.isArray($routeParams.venue) ? $routeParams.venue : [$routeParams.venue];
       $scope.search.selectedVenues = venues.map(function(venueId) {
-      // Cast id to number
-      return +venueId;
+        // Cast id to number
+        return +venueId;
       });
     }
 
