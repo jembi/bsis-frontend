@@ -341,6 +341,14 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     $location.path('/viewOrder/' + $routeParams.id);
   };
 
+
+  $scope.isFieldEmpty = function(field) {
+    if (field) {
+      return field.length === 0;
+    }
+    return true;
+  };
+
   var columnDefs = [
     {
       name: 'Component Type',

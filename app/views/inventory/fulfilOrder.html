@@ -9,6 +9,24 @@
     <span class="text-muted">Order Type:</span> {{orderForm.type}}
     <span class="text-muted">Dispatched From:</span> {{orderForm.dispatchedFrom.name}}
     <span class="text-muted">Dispatched To:</span> {{orderForm.dispatchedTo.name}}
+    <span ng-hide="orderForm.type !== 'PATIENT_REQUEST">
+      <span class="text-muted">Ward No:</span>
+      <span ng-hide="!isFieldEmpty(orderForm.patient.hospitalWardNumber)"> Not Specified</span>
+      <span ng-hide="isFieldEmpty(orderForm.patient.hospitalWardNumber)"> {{orderForm.patient.hospitalWardNumber}}</span><br/>
+      <span class="text-muted">Patient No:</span>
+      <span ng-hide="!isFieldEmpty(orderForm.patient.patientNumber)"> Not Specified</span>
+      <span ng-hide="isFieldEmpty(orderForm.patient.patientNumber)"> {{orderForm.patient.patientNumber}}</span>
+      <span class="text-muted">Patient Name:</span> {{orderForm.patient.name1}} {{orderForm.patient.name2}}
+      <span class="text-muted">Blood Group:</span>
+      <span ng-hide="!isFieldEmpty(orderForm.patient.bloodAbo)"> Not Specified</span>
+      <span ng-hide="isFieldEmpty(orderForm.patient.bloodAbo)"> {{orderForm.patient.bloodAbo}}{{orderForm.patient.bloodRh}}</span>
+      <span class="text-muted">Gender:</span>
+      <span ng-hide="!isFieldEmpty(orderForm.patient.gender)"> Not Specified</span>
+      <span ng-hide="isFieldEmpty(orderForm.patient.gender)"> {{orderForm.patient.gender}}</span>
+      <span class="text-muted">Date of Birth:</span>
+      <span ng-hide="!isFieldEmpty(orderForm.patient.dateOfBirth)"> Not Specified</span>
+      <span ng-hide="isFieldEmpty(orderForm.patient.dateOfBirth)"> {{orderForm.patient.dateOfBirth}}</span>
+    </span>
     <button class="btn btn-primary pull-right" style="margin-top:0;" ng-click="editOrderDetails()">Edit</button>
   </section>
 
