@@ -8,7 +8,7 @@
       <label class="col-sm-2 control-label">DIN</label>
       <div class="form-inline col-sm-10">
         <div style="display: inline-block; vertical-align: top;">
-         <input class="form-control" name="donationIdentificationNumber" ng-model="searchParams.donationIdentificationNumber" ng-required="searchParams.componentCode" ng-blur="updateDinSearch()">
+          <input class="form-control" name="donationIdentificationNumber" ng-model="searchParams.donationIdentificationNumber" ng-required="searchParams.componentCode" ng-blur="updateDinSearch()">
           <ng-messages for="findSafeComponentsForm.donationIdentificationNumber.$error" role="alert" ng-show="findSafeComponentsForm.$submitted">
             <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
@@ -95,6 +95,7 @@
           <div>
             <ng-messages for="findSafeComponentsForm.startDate.$error" role="alert" ng-show="findSafeComponentsForm.$submitted">
               <small class="error" ng-message="required">Select a valid date</small>
+              <small class="error" ng-message="datesOutOfRange">Select a date range that is less than one month</small>
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
             <ng-messages for="findSafeComponentsForm.endDate.$error" role="alert" ng-show="findSafeComponentsForm.$submitted && !findSafeComponentsForm.startDate.$invalid">
