@@ -33,9 +33,9 @@
     <button class="btn btn-primary pull-right" style="margin-top:0;" ng-click="editOrderDetails()">Edit</button>
   </section>
 
-  <form class="form-inline" name="forms.orderDetailsForm" role="form" ng-show="editingOrderDetails" ng-submit="saveOrderDetails();" novalidate>
+  <form name="forms.orderDetailsForm" role="form" ng-show="editingOrderDetails" ng-submit="saveOrderDetails();" novalidate>
 
-    <div class="row" style="margin-left:0px;">
+    <div class="row form-inline form-multiline" style="margin-left:0px;"">
       <div class="form-group">
         <span class="text-muted">Order Date:</span>
         <div class="input-group" style="width:150px;">
@@ -69,10 +69,7 @@
         <select class="form-control" style="width:auto;" name="dispatchedTo" ng-model="orderDetailsForm.dispatchedTo" ng-options="item as item.name for item in dispatchToSites track by item.id" ng-disabled="!orderDetailsForm.type" required></select>
       </div>
 
-    </div>
-
-    <span ng-if="orderDetailsForm.type === 'PATIENT_REQUEST'"><br/>
-      <div class="row" style="margin-left:0px;">
+      <span ng-if="orderDetailsForm.type === 'PATIENT_REQUEST'">
         <div class="form-group">
           <span class="text-muted" for="hospitalBloodBankNumber">Blood Bank No:</span>
           <input name="hospitalBloodBankNumber" type="text" class="form-control" ng-model="orderDetailsForm.patient.hospitalBloodBankNumber"/>
@@ -85,8 +82,6 @@
           <span class="text-muted" for="patientNumber">Patient No:</span>
           <input name="patientNumber" type="text" class="form-control" ng-model="orderDetailsForm.patient.patientNumber"/>
         </div>
-      </div><br/>
-      <div class="row" style="margin-left:0px;">
         <div class="form-group">
           <span class="text-muted" for="name">Patient Name:</span>
           <div class="form-group">
@@ -118,11 +113,13 @@
           <span class="text-muted" for="dateOfBirth">Date of Birth:</span>
           <dateselect name="dateOfBirth" ng-model="orderDetailsForm.patient.dateOfBirth" format="format"></dateselect>
         </div>
+      </span>
+      <div class="form-group">
+        <button class="btn btn-primary" style="margin-top:0;" type="submit" ng-disabled="savingOrderDetails">{{savingOrderDetails ? 'Saving...' : 'Save'}}</button>
+        <button class="btn btn-primary" style="margin-top:0;" type="reset" ng-disabled="savingOrderDetails" ng-click="clearDetailsForm($event);">Cancel</button>
       </div>
-    </span>
-    <br/>
-    <button class="btn btn-primary" style="margin-top:0;" type="submit" ng-disabled="savingOrderDetails">{{savingOrderDetails ? 'Saving...' : 'Save'}}</button>
-    <button class="btn btn-primary" style="margin-top:0;" type="reset" ng-disabled="savingOrderDetails" ng-click="clearDetailsForm($event);">Cancel</button>
+    </div>
+
   </form>
 
   <hr />
