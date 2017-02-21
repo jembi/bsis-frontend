@@ -51,6 +51,7 @@
             <div class="form-inline col-sm-11">
                 <select name="status" class="form-control" ng-change="updateAllStatuses()" ng-model="search.status" ng-options="status for status in componentStatuses" ng-disabled="dinSearch" style="min-width: 350px;" ng-required="!search.allStatuses" >
                 <option value="" disabled></option>
+                {{componentStatuses}}
                 </select>
                 <label>
                 <input type="checkbox" name="allStatuses" ng-model="search.allStatuses" ng-click="clearComponentStatuses()" ng-disabled="dinSearch" />

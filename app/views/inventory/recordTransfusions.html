@@ -1,0 +1,172 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/inventory/sidebar.html'"></div>
+<div class="col-sm-9 col-md-10 main">
+<h3 class="page-header">Record Transfusions</h3>
+
+<form class="form-horizontal col-sm-12" name="recordTransfusionsForm" novalidate>
+
+    <div class="clearfix form-group">
+      <label class="col-sm-2 control-label">DIN</label>
+         <div class="form-inline col-sm-10">
+         <div style="display: inline-block; vertical-align: top;">
+           <input class="form-control" name="donationIdentificationNumber" ng-model="formParams.donationIdentificationNumber">
+         </div>
+         <label class="control-label">Component Code</label>
+         <div style="display: inline-block; vertical-align: top;">
+         <input class="form-control" name="componentCode" size="8" ng-model="formParams.componentCode">
+      </div>
+     </div>
+    </div>
+
+    <div class="form-group">
+     <label class="col-sm-2 control-label">Component Type</label>
+       <div class="form-inline col-sm-10">
+         <select name="componentType" ng-model="formParams.componentId" class="form-control" style="min-width: 350px;">
+           <option value=""></option>
+           <option ng-repeat="componentType in componentTypes" value="{{componentType.id}}">
+           {{componentType.componentTypeName}}
+           </option>
+         </select>
+       </div>
+    </div>
+
+
+     <div class="form-group">
+       <label class="col-sm-2 control-label">Recieved From</label>
+       <div class="form-inline col-sm-10">
+         <select name="usageSiteId" ng-model="formParams.usageSiteId" class="form-control" ng-options="usageSite.id as usageSite.name for usageSite in locations" style="min-width: 350px;">
+           <option value="" disabled></option>
+           </option>
+         </select>
+         <div>
+           <ng-messages for="recordTransfusionsForm.usageSiteId.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
+           <ng-messages-include src="messages.html"></ng-messages-include>
+           </ng-messages>
+         </div>
+       </div>
+     </div>
+
+     <div class="form-group">
+       <label class="col-sm-2 control-label">Transfusion Outcomes</label>
+       <div class="form-inline col-sm-10">
+          <select name="transfusionOutcomes" ng-model="formParams.transfusionOutCome" class="form-control" ng-options="outcome for outcome in transfusionOutcomes" style="min-width: 350px;">
+            <option value="" disabled></option>
+          </select>     
+       </div>
+     </div>
+
+     <div class="form-group">
+       <label class="col-sm-2 control-label">Transfusion Reaction Type</label>
+       <div class="form-inline col-sm-10">
+         <select name="transfusionReactionType" ng-model="formParams.transfusionReactionType" ng-options="reactionType.id as reactionType.type for reactionType in transfusionReactionTypes" class="form-control" style="min-width: 350px;">
+           <option value=""></option>
+           </option>
+         </select>
+       </div>
+     </div>
+
+     <div class="form-group">
+        <label class="col-sm-2 control-label">Transfusion Notes</label>
+        <div class="form-inline col-sm-10">
+     	  <input type="comment" id="transfusionNotes" ng-model="formParams.transfusionNotes" class="form-control input-sm" placeholder="Notes">
+        </div>
+     </div>
+
+     <div class="form-group">
+       <label for="transfusionDate" class="col-sm-2 control-label">Date Transfused</label>
+       <div class="col-sm-10">
+         <dateselect name="transfusionDate" ng-model="formParams.transfusionDate" format="format" cal-icon="icons.CALENDAR"   ng-class="{'has-error' : (recordTransfusionsForm.transfusionDate.$invalid)}" ng-model-options="{ allowInvalid: true }">
+         </dateselect>
+       <div>
+         <ng-messages for="recordTransfusionsForm.transfusionDate.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
+           <small class="error" ng-message="required">Select a valid date</small>
+         <ng-messages-include src="messages.html"></ng-messages-include>
+         </ng-messages>
+        </div>
+       </div>
+     </div>
+
+     <div class="clearfix form-group">
+       <label class="col-sm-2 control-label">Patient Name</label>
+       <div class="form-inline col-sm-10">
+         <div style="display: inline-block; vertical-align: top;">
+           <input class="form-control" name="patientName1" ng-model="formParams.patientName1">
+         </div>
+         <label class="control-label"></label>
+         <div style="display: inline-block; vertical-align: top;">
+           <input class="form-control" name="patientName2" ng-model="formParams.patientName2">
+         </div>
+          <div>
+           <ng-messages for="(recordTransfusionsForm.patientName1.$error || recordTransfusionsForm.patientName2.$error)" role="alert" ng-show="recordTransfusionsForm.$submitted">
+           <ng-messages-include src="messages.html"></ng-messages-include>
+           </ng-messages>
+         </div>
+        </div>
+    </div>
+
+    <div class="clearfix form-group">
+      <label class="col-sm-2 control-label">Patient No</label>
+      <div class="form-inline col-sm-10">
+        <input class="form-control" name="patientNo" ng-model="formParams.patientNo">
+      </div>
+    </div>
+
+    <div class="clearfix form-group">
+      <label class="col-sm-2 control-label">Blood Bank</label>
+      <div class="form-inline col-sm-10">
+        <input class="form-control" name="bloodBank" ng-model="formParams.bloodBank" size="8">
+      </div>
+    </div>
+
+    <div class="clearfix form-group">
+      <label class="col-sm-2 control-label">Ward No</label>
+      <div class="form-inline col-sm-10">
+        <input class="form-control" name="wardNo" ng-model="formParams.wardNo" size="8">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="dateOfBirth" class="col-sm-2 control-label">Date of Birth</label>
+      <div class="col-sm-10">
+        <dateselect name="dateOfBirth" ng-model="formParams.dateOfBirth" format="format" cal-icon="icons.CALENDAR" ng-class="{'has-error' : (recordTransfusionsForm.transfusionDate.$invalid)}" ng-model-options="{ allowInvalid: true }">
+        </dateselect>
+      <div>
+        <ng-messages for="recordTransfusionsForm.dateOfBirth.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
+        <small class="error" ng-message="dateInFuture">Select a valid date</small>
+          <ng-messages-include src="messages.html"></ng-messages-include>
+          </ng-messages>
+       </div>
+     </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Gender</label>
+      <div class="form-inline col-sm-10" size="8">
+        <select name="gender" class="form-control input-sm" ng-model="formParams.gender" ng-options="gender for gender in gender">
+          <option value="" ng-disabled="true"></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Blood Group</label>
+      <div class="form-inline col-sm-10" size="8">
+        <select name="bloodGroup" class="form-control input-sm" ng-model="formParams.bloodGroup" ng-options="bloodGroup for bloodGroup in bloodGroup">
+          <option value="" ng-disabled="true"></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label"></label>
+      <div class="col-sm-10">
+        <button class="btn btn-primary" type="submit" ng-disabled="searching">{{addingTransfusionForm ? "Adding..." : "Add Transfusion"}}
+        </button>
+        <button class="btn btn-primary" type="button" ng-click="clear(recordTransfusionsForm)">Clear</button>
+      </div>
+    </div>
+</form>
+
+
+
+
+

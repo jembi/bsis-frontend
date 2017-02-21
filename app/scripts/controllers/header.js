@@ -131,7 +131,8 @@ angular.module('bsis')
       '/manageReturns',
       '/recordReturn/\\d+',
       '/viewReturn/\\d+',
-      '/viewReturns'
+      '/viewReturns',
+      '/recordTransfusions'
     ];
 
     var labellingRoutes = [

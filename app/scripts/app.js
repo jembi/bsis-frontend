@@ -315,6 +315,12 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
+      .when('/recordTransfusions', {
+        templateUrl: 'views/inventory/recordTransfusions.html',
+        controller: 'RecordTransfusionsCtrl',
+        permission: PERMISSIONS.ADD_TRANSFUSION_DATA,
+        enabled: UI.INVENTORY_TAB_ENABLED
+      })
 
       // LABELLING URLs
       .when('/labelling', {
