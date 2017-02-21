@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('MobileCtrl', function($scope, $filter, $location, $routeParams, MobileService, uiGridExporterConstants) {
+  .controller('MobileCtrl', function($scope, $filter, $location, $routeParams, MobileService, uiGridExporterConstants, DATEFORMAT) {
 
+    $scope.dateFormat = DATEFORMAT;
     $scope.venues = [];
     $scope.error = {
       message: null

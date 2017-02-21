@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService) {
+angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService, DATEFORMAT) {
+
+  $scope.dateFormat = DATEFORMAT;
 
   var distributionSites = [];
   var usageSites = [];

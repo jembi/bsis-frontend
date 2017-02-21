@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, $log, OrderFormsService) {
+angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, $log, OrderFormsService, DATEFORMAT) {
+
+  $scope.dateFormat = DATEFORMAT;
 
   var master = {
     orderDateFrom: moment().subtract(7, 'days').startOf('day').toDate(),

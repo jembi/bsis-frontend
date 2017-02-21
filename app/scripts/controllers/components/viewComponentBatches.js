@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $filter, $location, ComponentBatchService, $log) {
+angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $filter, $location, ComponentBatchService, $log, DATEFORMAT) {
+
+  $scope.dateFormat = DATEFORMAT;
 
   var master = {
     startDate: moment().subtract(7, 'days').startOf('day').toDate(),

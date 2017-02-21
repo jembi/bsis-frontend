@@ -3,6 +3,8 @@
 angular.module('bsis')
   .controller('FindDiscardsCtrl', function($scope, $location, ComponentService, DATEFORMAT, ngTableParams, $timeout, $routeParams, $filter) {
 
+    $scope.dateFormat = DATEFORMAT;
+
     // Initialize variables
 
     var data = [{}];

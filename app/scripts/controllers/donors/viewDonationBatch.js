@@ -5,6 +5,7 @@ angular.module('bsis')
 
     $scope.icons = ICONS;
     $scope.packTypes = PACKTYPE.packtypes;
+    $scope.dateFormat = DATEFORMAT;
 
     $scope.bpUnit = DONATION.BPUNIT;
     $scope.hbUnit = DONATION.HBUNIT;

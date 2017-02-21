@@ -10,6 +10,7 @@ angular.module('bsis')
     $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
     $scope.alerts = Alerting.getAlerts();
     $scope.ui = UI;
+    $scope.dateFormat = DATEFORMAT;
 
     $scope.alerts = Alerting.getAlerts();
     $scope.data = {};
