@@ -9,7 +9,7 @@
     <span class="text-muted">Order Type:</span> {{orderForm.type}}
     <span class="text-muted">Dispatched From:</span> {{orderForm.dispatchedFrom.name}}
     <span class="text-muted">Dispatched To:</span> {{orderForm.dispatchedTo.name}}
-    <span ng-hide="orderForm.type !== 'PATIENT_REQUEST">
+    <span ng-hide="orderForm.type !== 'PATIENT_REQUEST'">
       <span class="text-muted">Ward No:</span>
       <span ng-hide="!isFieldEmpty(orderForm.patient.hospitalWardNumber)"> Not Specified</span>
       <span ng-hide="isFieldEmpty(orderForm.patient.hospitalWardNumber)"> {{orderForm.patient.hospitalWardNumber}}</span><br/>
@@ -25,7 +25,7 @@
       <span ng-hide="isFieldEmpty(orderForm.patient.gender)"> {{orderForm.patient.gender}}</span>
       <span class="text-muted">Date of Birth:</span>
       <span ng-hide="!isFieldEmpty(orderForm.patient.dateOfBirth)"> Not Specified</span>
-      <span ng-hide="isFieldEmpty(orderForm.patient.dateOfBirth)"> {{orderForm.patient.dateOfBirth}}</span>
+      <span ng-hide="isFieldEmpty(orderForm.patient.dateOfBirth)"> {{orderForm.patient.dateOfBirth | bsisDate}}</span>
     </span>
     <button class="btn btn-primary pull-right" style="margin-top:0;" ng-click="editOrderDetails()">Edit</button>
   </section>
@@ -64,6 +64,44 @@
       <span class="text-muted" for="dispatchedTo">Dispatched To:</span>
       <select class="form-control" style="width:auto;" name="dispatchedTo" ng-model="orderDetailsForm.dispatchedTo" ng-options="item as item.name for item in dispatchToSites track by item.id" ng-disabled="!orderDetailsForm.type" required></select>
     </div>
+
+    <span ng-if="orderDetailsForm.type === 'PATIENT_REQUEST'">
+      <div class="form-group">
+        <span class="text-muted" for="hospitalWardNumber">Ward No:</span>
+        <input name="hospitalWardNumber" type="text" class="form-control" ng-model="orderDetailsForm.patient.hospitalWardNumber"/>
+      </div>
+      <div class="form-group">
+        <span class="text-muted" for="patientNumber">Patient No:</span>
+        <input name="patientNumber" type="text" class="form-control" ng-model="orderDetailsForm.patient.patientNumber"/>
+      </div>
+      <div class="form-group">
+        <span class="text-muted" for="name">Patient Name:</span>
+        <input name="name1" type="text" class="form-control" ng-model="orderDetailsForm.patient.name1" required/>
+        <ng-messages for="orderDetailsForm.patient.name1.$error" role="alert" ng-show="orderDetailsForm.$submitted" >
+          <ng-messages-include src="messages.html"></ng-messages-include>
+        </ng-messages>
+        <input name = "name2" type="text" class="form-control" ng-model="orderDetailsForm.patient.name2" required/>
+        <ng-messages for="orderDetailsForm.patient.name2.$error" role="alert" ng-show="orderDetailsForm.$submitted">
+          <ng-messages-include src="messages.html"></ng-messages-include>
+        </ng-messages>
+      </div>
+      <div class="form-group">
+        <span class="text-muted" for="bloodGroup">Blood Group:</span>
+        <select name="bloodGroup" class="form-control" ng-options="item for item in bloodGroups" ng-model="orderDetailsForm.patient.bloodGroup">
+          <option value=""></option>
+        </select>
+      </div>
+      <div class="form-group">
+        <span class="text-muted" for="gender">Gender:</span>
+        <select name="gender" class="form-control input-sm" ng-options="item.id as item.name for item in genders" ng-model="orderDetailsForm.patient.gender">
+          <option value=""></option>
+        </select>
+      </div>
+      <div class="form-group">
+        <span class="text-muted" for="dateOfBirth">Date of Birth:</span>
+        <dateselect name="dateOfBirth" ng-model="orderDetailsForm.patient.dateOfBirth" format="format"></dateselect>
+      </div>
+    </span>
 
     <button class="btn btn-primary" style="margin-top:0;" type="submit" ng-disabled="savingOrderDetails">{{savingOrderDetails ? 'Saving...' : 'Save'}}</button>
     <button class="btn btn-primary" style="margin-top:0;" type="reset" ng-disabled="savingOrderDetails" ng-click="clearDetailsForm($event);">Cancel</button>

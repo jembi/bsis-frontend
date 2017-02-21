@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, ComponentService, BLOODGROUP, DATEFORMAT, ModalsService) {
+angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, ComponentService, BLOODGROUP, GENDER, DATEFORMAT, ModalsService) {
 
   var orderItemMaster = {
     componentType: null,
@@ -17,20 +17,25 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
   var usageSites = [];
   var selectedRowsToDelete = null;
 
-  // Set the "dispatch to" sites based on dispatch type
-  function updateDispatchToSites() {
+  // Set the "dispatch to" sites and patient based on dispatch type
+  function updateDispatchType() {
     if ($scope.orderDetailsForm == null) {
       // Order form is not loaded yet
       return;
     }
     if ($scope.orderDetailsForm.type === 'TRANSFER') {
+      $scope.orderDetailsForm.patient = null;
       $scope.dispatchToSites = distributionSites.filter(function(site) {
         // Filter the selected distribution site from the options
         return site.id !== $scope.orderDetailsForm.dispatchedFrom;
       });
-    } else if ($scope.orderDetailsForm.type === 'ISSUE' || $scope.orderDetailsForm.type === 'PATIENT_REQUEST') {
+    } else if ($scope.orderDetailsForm.type === 'ISSUE') {
+      $scope.dispatchToSites = usageSites;
+      $scope.orderDetailsForm.patient = null;
+    } else if ($scope.orderDetailsForm.type === 'PATIENT_REQUEST') {
       $scope.dispatchToSites = usageSites;
     } else {
+      $scope.orderDetailsForm.patient = null;
       $scope.dispatchToSites = [];
     }
   }
@@ -75,6 +80,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     $scope.component = angular.copy(componentMaster);
     $scope.addingComponent = false;
     $scope.bloodGroups = BLOODGROUP.options;
+    $scope.genders = GENDER.options;
     $scope.orderForm = null;
     $scope.componentTypes = [];
     $scope.components = [];
@@ -97,7 +103,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     OrderFormsService.getOrderFormsForm(function(res) {
       $scope.dispatchFromSites = distributionSites = res.distributionSites;
       usageSites = res.usageSites;
-      updateDispatchToSites();
+      updateDispatchType();
     }, $log.error);
   }
 
@@ -120,11 +126,11 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
 
   $scope.$watch('orderDetailsForm.type', function() {
     // Update to set available options based on type
-    updateDispatchToSites();
+    updateDispatchType();
   });
   $scope.$watch('orderDetailsForm.dispatchedFrom', function() {
     // Update to ensure that the correct site is filtered
-    updateDispatchToSites();
+    updateDispatchType();
   });
 
   // Start editing the order details
