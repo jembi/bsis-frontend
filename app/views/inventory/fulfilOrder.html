@@ -21,8 +21,8 @@
       <span ng-hide="isFieldEmpty(orderForm.patient.patientNumber)"> {{orderForm.patient.patientNumber}}</span>
       <span class="text-muted">Patient Name:</span> {{orderForm.patient.name1}} {{orderForm.patient.name2}}<br/>
       <span class="text-muted">Blood Group:</span>
-      <span ng-hide="!isFieldEmpty(orderForm.patient.bloodAbo)"> Not Specified</span>
-      <span ng-hide="isFieldEmpty(orderForm.patient.bloodAbo)"> {{orderForm.patient.bloodAbo}}{{orderForm.patient.bloodRh}}</span>
+      <span ng-hide="!isFieldEmpty(orderForm.patient.bloodGroup)"> Not Specified</span>
+      <span ng-hide="isFieldEmpty(orderForm.patient.bloodGroup)"> {{orderForm.patient.bloodGroup}}</span>
       <span class="text-muted">Gender:</span>
       <span ng-hide="!isFieldEmpty(orderForm.patient.gender)"> Not Specified</span>
       <span ng-hide="isFieldEmpty(orderForm.patient.gender)"> {{orderForm.patient.gender}}</span>
