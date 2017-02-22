@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService, ModalsService) {
+angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService, ModalsService, DATEFORMAT) {
+
+  $scope.dateFormat = DATEFORMAT;
 
   var unitsOrderedColumnDefs = [
     {

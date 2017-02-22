@@ -114,7 +114,7 @@
         <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
         <em>(<span ng-show="!editableForm.$visible">{{ (donor.birthDate | bsisDate) || '' }}</span>
       <span ng-show="editableForm.$visible">
-        <dateselect ng-model="donor.birthDate" initDate="donor.birthDate" format="format" opened="donorBirthDateOpen"
+        <dateselect ng-model="donor.birthDate" initDate="donor.birthDate" format="dateFormat" opened="donorBirthDateOpen"
                     cal-icon="icons.CALENDAR">
         </dateselect>
         </span>) </em>

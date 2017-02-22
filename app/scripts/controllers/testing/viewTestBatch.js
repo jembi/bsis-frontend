@@ -2,10 +2,12 @@
 
 angular.module('bsis')
 
-  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, uiGridConstants, ModalsService) {
+  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, uiGridConstants, ModalsService, DATEFORMAT) {
 
     var data = [{}];
     $scope.data = data;
+
+    $scope.dateFormat = DATEFORMAT;
 
     $scope.testBatchAvailableDonationBatches = [];
     $scope.exportOptions = [

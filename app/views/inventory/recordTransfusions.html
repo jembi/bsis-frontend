@@ -159,17 +159,16 @@
         <button class="btn btn-primary" type="button" ng-click="clear(recordTransfusionsForm)">Clear</button>
       </div>
     </div>
-
-    <!-- This method is used to just show the fields that are populated. This should be removed in the hook up task -->
+</form>
+<!-- This method is used to just show the fields that are populated. This should be removed in the hook up task -->
     <div class="panel panel-default col-sm-12" ng-if="submitted">
-    	<h3 class="page-header">Fields populated</h3>
-    	<ul>
+      <h3 class="page-header">Fields populated</h3>
+      <ul>
           <li ng-repeat="record in transfusionRecord">
           {{record}}
           </li>
         </ul>
     </div>
-</form>
 
 
 

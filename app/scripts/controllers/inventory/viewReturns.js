@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location, $log, ReturnFormsService) {
+angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location, $log, ReturnFormsService, DATEFORMAT) {
+
+  $scope.dateFormat = DATEFORMAT;
 
   var master = {
     returnDateFrom: moment().subtract(7, 'days').startOf('day').toDate(),

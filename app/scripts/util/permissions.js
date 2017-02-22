@@ -130,6 +130,7 @@ angular.module('bsis')
     MANAGE_REQUESTS: 'Manage Requests',
     MANAGE_GENERAL_CONFIGS: 'Manage General Configs',
     MANAGE_COMPONENT_TYPES: 'Manage Component Types',
+    MANAGE_TRANSFUSION_REACTION_TYPES: 'Manage Transfusion Reaction Types',
 
     //Page Control Permissions
     VIEW_DONOR_INFORMATION: 'View Donor Information',

@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService, UtilsService) {
+  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService, UtilsService, DATEFORMAT) {
+
+    $scope.dateFormat = DATEFORMAT;
 
     var master = {
       donationIdentificationNumber: null,

@@ -40,7 +40,6 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     $scope.genders = genders;
     $scope.transfusionReactionTypes = transfusionReactionTypes;
     $scope.bloodGroups = bloodGroups;
-
   }
 
   $scope.recordTransfusion = function recordTransfusion() {

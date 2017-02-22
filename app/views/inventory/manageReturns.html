@@ -28,7 +28,7 @@
         <div class="form-group">
           <label class="col-sm-2 control-label" for="returnDate">Return Date:</label>
           <div class="col-sm-10">
-            <dateselect name="returnDate" ng-model="returnForm.returnDate" ng-required="true"></dateselect>
+            <dateselect name="returnDate" ng-model="returnForm.returnDate" format="dateFormat" ng-required="true"></dateselect>
             <ng-messages for="addReturnForm.returnDate.$error" role="alert" ng-show="addReturnForm.$submitted">
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>

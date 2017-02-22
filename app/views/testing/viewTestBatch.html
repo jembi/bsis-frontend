@@ -139,7 +139,7 @@
         <small><em>Created On: </em></small>
         <span ng-show="!editableForm.$visible">{{ (testBatch.createdDate | bsisDate) || '' }}</span>
         <span ng-show="editableForm.$visible" style="display:inline;">
-          <dateselect ng-model="testBatch.createdDate" initDate="testBatch.createdDate" format="format" opened="dateToOpen"></dateselect>
+          <dateselect ng-model="testBatch.createdDate" initDate="testBatch.createdDate" format="dateFormat" opened="dateToOpen"></dateselect>
         </span> |
         <small><em>Location: </em></small>
         <span ng-show="!editableForm.$visible" style="display:inline;">{{testBatch.location.name}}</span>
