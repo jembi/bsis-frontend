@@ -17,6 +17,8 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, DAT
   var gender = ['male', 'female'];
   var bloodGroup = ['A+', 'A-', 'B+', 'B-', 'O-', 'O+', 'AB'];
 
+  $scope.today = moment().endOf('day').toDate();
+
   $scope.formParams = {
     donationIdentificationNumber: null,
     componentCode: null,
@@ -48,7 +50,24 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, DAT
     $scope.gender = gender;
     $scope.transfusionReactionTypes = transfusionReactionTypes;
     $scope.bloodGroup = bloodGroup;
+  }
 
+  $scope.clearTransfusionReactionType = function() {
+    $scope.formParams.transfusionReactionType = null;
+  }
+
+  $scope.setComponentType = function(componentCode) {
+    if (componentCode) {
+      var filteredComponentTypes = componentTypes.filter(function(componentType) {
+        return componentType.componentTypeCode === componentCode;
+      });
+
+      if (filteredComponentTypes.length > 0) {
+        $scope.formParams.componentId = filteredComponentTypes[0].id+"";
+      } else {
+        $scope.formParams.componentId = null;
+      }
+    }
   }
 
   $scope.clear = function() {
