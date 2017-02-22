@@ -193,7 +193,8 @@ angular.module('bsis')
       '/bloodTests',
       '/manageBloodTest/?\\d*',
       '/bloodTestingRules',
-      '/manageBloodTestingRule/?\\d*'
+      '/manageBloodTestingRule/?\\d*',
+      '/transfusionReactionTypes'
     ];
 
     /**

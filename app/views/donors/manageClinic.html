@@ -11,12 +11,10 @@
     <div class="h4">
         <small><em>Date Created: </em></small>
         <span ng-show="!editableForm.$visible">{{ (donationBatch.donationBatchDate | bsisDate) || '' }}</span>
-    <span ng-show="editableForm.$visible">
-      <dateselect name="donationBatchDate" ng-model="donationBatch.donationBatchDate" initDate="donationBatch.donationBatchDate" format="format"
-                  ng-disabled="!donationBatch.permissions.canEditDate" required date-time-not-in-future
-                  ng-class="{'has-error' : editableForm.donationBatchDate.$invalid || editableForm.donationBatchDate.$error.required}" max-date="today">
-      </dateselect>
-    </span>
+        <span ng-show="editableForm.$visible">
+          <dateselect name="donationBatchDate" ng-model="donationBatch.donationBatchDate" initDate="donationBatch.donationBatchDate" format="dateFormat" cal-icon="icons.CALENDAR" ng-disabled="!donationBatch.permissions.canEditDate" required date-time-not-in-future ng-class="{'has-error' : editableForm.donationBatchDate.$invalid || editableForm.donationBatchDate.$error.required}" max-date="today">
+          </dateselect>
+        </span>
         |
         <small><em>Venue: </em></small>
         <span e-class="xeditable venue" editable-select="donationBatch.venue"
