@@ -24,7 +24,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     donationIdentificationNumber: null,
     componentCode: null,
     componentType: {id: null},
-    patient: null,
+    patient: {dateOfBirth: null},
     transfusionOutcome: null,
     transfusionReactionType: null,
     notes: null,
