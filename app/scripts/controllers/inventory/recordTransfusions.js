@@ -63,7 +63,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, DAT
       });
 
       if (filteredComponentTypes.length > 0) {
-        $scope.formParams.componentId = filteredComponentTypes[0].id+"";
+        $scope.formParams.componentId = filteredComponentTypes[0].id;
       } else {
         $scope.formParams.componentId = null;
       }
