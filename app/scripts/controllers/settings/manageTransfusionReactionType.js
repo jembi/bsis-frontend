@@ -12,7 +12,7 @@ angular.module('bsis').controller('ManageTransfusionReactionTypeCtrl', function(
     $location.path('/transfusionReactionTypes');
   };
 
-  $scope.$watch('transfusionReactionTypes.name', function() {
+  $scope.$watch('transfusionReactionType.name', function() {
     $timeout(function() {
       $scope.transfusionReactionTypesForm.name.$setValidity('duplicate', true);
     });
@@ -34,19 +34,4 @@ angular.module('bsis').controller('ManageTransfusionReactionTypeCtrl', function(
       $scope.savingTransfusionReactionType = false;
     });
   };
-
-  function initExistingTransfusionReactionType() {
-    TransfusionReactionTypesService.getTransfusionReactionTypeById({id: $routeParams.id}, function(response) {
-      $scope.transfusionReactionType = response.transfusionReactionType;
-    });
-  }
-
-  function init() {
-    if ($routeParams.id) {
-      initExistingTransfusionReactionType();
-    }
-  }
-
-  init();
-
 });
