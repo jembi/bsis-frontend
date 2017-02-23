@@ -39,10 +39,11 @@
       <div class="form-group">
         <span class="text-muted">Order Date:</span>
         <div class="input-group" style="width:150px;">
-          <input type="text" class="form-control" name="orderDate" ng-model='orderDetailsForm.orderDate' uib-datepicker-popup="{{format}}" is-open="selectingDate" required>
-          <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="selectDate($event)"><i class="fa fa-calendar"></i></button>
-          </span>
+          <dateselect name="orderDate" ng-model="orderDetailsForm.orderDate" format="format" ng-required="true"></dateselect>
+          <ng-messages for="forms.orderDetailsForm.orderDate.$error" role="alert" ng-show="forms.orderDetailsForm.$submitted">
+            <small class="error" ng-message="required">Select a valid date</small>
+            <ng-messages-include src="messages.html"></ng-messages-include>
+          </ng-messages>
         </div>
       </div>
 
