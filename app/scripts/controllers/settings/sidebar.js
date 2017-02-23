@@ -84,7 +84,10 @@ angular.module('bsis').controller('SettingsSidebarCtrl', function($scope, Routin
         '/manageBloodTest'
       ]
     }, {
-      path: '/transfusionReactionTypes'
+      path: '/transfusionReactionTypes',
+      subpaths: [
+        '/manageTransfusionReactionType'
+      ]
     }, {
       path: '/dataExport',
       subpaths: []

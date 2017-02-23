@@ -25,25 +25,14 @@ angular.module('bsis').controller('ManageTransfusionReactionTypeCtrl', function(
     }
 
     $scope.savingTransfusionReactionType = true;
-    if ($routeParams.id) {
-      TransfusionReactionTypesService.updateTransfusionReactionType($scope.transfusionReactionType, function() {
-        $location.path('/transfusionReactionTypes');
-      }, function(err) {
-        if (err.data && err.data.name) {
-          $scope.transfusionReactionTypeForm.name.$setValidity('duplicate', false);
-        }
-        $scope.savingTransfusionReactionType = false;
-      });
-    } else {
-      TransfusionReactionTypesService.createTransfusionReactionType($scope.transfusionReactionType, function() {
-        $location.path('/transfusionReactionTypes');
-      }, function(err) {
-        if (err.data && err.data.name) {
-          $scope.transfusionReactionTypeForm.name.$setValidity('duplicate', false);
-        }
-        $scope.savingTransfusionReactionType = false;
-      });
-    }
+    TransfusionReactionTypesService.createTransfusionReactionType($scope.transfusionReactionType, function() {
+      $location.path('/transfusionReactionTypes');
+    }, function(err) {
+      if (err.data && err.data.name) {
+        $scope.transfusionReactionTypeForm.name.$setValidity('duplicate', false);
+      }
+      $scope.savingTransfusionReactionType = false;
+    });
   };
 
   function initExistingTransfusionReactionType() {
@@ -53,11 +42,9 @@ angular.module('bsis').controller('ManageTransfusionReactionTypeCtrl', function(
   }
 
   function init() {
-    TransfusionReactionTypesService.getTransfusionReactionTypesForm(function() {
-      if ($routeParams.id) {
-        initExistingTransfusionReactionType();
-      }
-    }, $log.error);
+    if ($routeParams.id) {
+      initExistingTransfusionReactionType();
+    }
   }
 
   init();
