@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService, DATEFORMAT) {
-
-  $scope.dateFormat = DATEFORMAT;
+angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService, GENDER, BLOODGROUP, DATEFORMAT) {
 
   var distributionSites = [];
   var usageSites = [];
+
+  $scope.dateFormat = DATEFORMAT;
 
   // Set the "dispatch to" sites based on dispatch type
   function updateDispatchToSites() {
@@ -37,13 +37,18 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
       usageSites = res.usageSites;
       updateDispatchToSites();
     }, $log.error);
+
+    // Initialise the gender and blood group lists
+    $scope.genders = GENDER.options;
+    $scope.bloodGroups = BLOODGROUP.options;
   }
 
   $scope.orderForm = {
     orderDate: new Date(),
     type: null,
     dispatchedFrom: null,
-    dispatchedTo: null
+    dispatchedTo: null,
+    patient: null
   };
   $scope.addingOrderForm = false;
   // The available sites to be dispatched from
@@ -58,6 +63,10 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     }
     $scope.addingOrderForm = true;
 
+    if ($scope.orderForm.type !== 'PATIENT_REQUEST') {
+      $scope.orderForm.patient = null;
+    }
+
     var orderForm = {
       status: 'CREATED',
       orderDate: $scope.orderForm.orderDate,
@@ -67,7 +76,8 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
       },
       dispatchedTo: {
         id: $scope.orderForm.dispatchedTo
-      }
+      },
+      patient: $scope.orderForm.patient
     };
 
     OrderFormsService.addOrderForm({}, orderForm, function(res) {
