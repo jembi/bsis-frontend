@@ -9,6 +9,13 @@ angular.module('bsis').factory('TransfusionReactionTypesService', function(Api) 
       }, function() {
         response(false);
       });
+    },
+    createTransfusionReactionType: function(transfusionReactionType, response) {
+      createTransfusionReactionType: Api.TransfusionReactionTypes.save(transfusionReactionType, function(data) {
+        response(data);
+      }, function() {
+        response(false);
+      });
     }
   };
 });
