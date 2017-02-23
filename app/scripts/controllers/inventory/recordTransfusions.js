@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $log, DATEFORMAT, ICONS) {
+angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $log, DATEFORMAT) {
 
   // Set up mock data
   var componentTypes = [{'id':1, 'componentTypeName':'Whole Blood Single Pack - CPDA', 'componentTypeCode':'0011', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
@@ -30,8 +30,6 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     notes: null,
     receivedFrom: null,
     bloodGroup: null,
-    format: DATEFORMAT,
-    ICONS: ICONS,
     startDateOpen: false,
     dateTransfused: $scope.today
   };
@@ -71,6 +69,10 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     $scope.submitted = true;
     $scope.addingTransfusionForm = true;
     $scope.transfusionRecord = $scope.transfusion;
+
+    $log.debug('Not implemented yet');
+    $log.debug('Form parameters: ' + angular.toJson($scope.transfusion));
+    $scope.addingTransfusionForm = false;
   };
 
   $scope.clear = function() {
