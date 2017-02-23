@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, DATEFORMAT, ICONS) {
+angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $log, DATEFORMAT, ICONS) {
 
   // Set up mock data
   var componentTypes = [{'id':1, 'componentTypeName':'Whole Blood Single Pack - CPDA', 'componentTypeCode':'0011', 'description':'', 'maxBleedTime':null, 'maxTimeSinceDonation':null},
@@ -14,32 +14,26 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, DAT
 
   var transfusionOutcomes = ['TRANSFUSED_UNEVENTFULLY', 'TRANSFUSION_REACTION_OCCURRED', 'NOT_TRANSFUSED'];
   var transfusionReactionTypes = [{'id':1, 'type': 'Reacted'}, {'id':2, 'type': 'Not Reacted'}];
-  var gender = ['male', 'female'];
-  var bloodGroup = ['A+', 'A-', 'B+', 'B-', 'O-', 'O+', 'AB'];
+  var genders = ['male', 'female'];
+  var bloodGroups = ['A+', 'A-', 'B+', 'B-', 'O-', 'O+', 'AB'];
 
-  $scope.today = moment().endOf('day').toDate();
+  $scope.today = moment().startOf('day').toDate();
 
-  $scope.formParams = {
+  $scope.submitted = false;
+  $scope.transfusion = {
     donationIdentificationNumber: null,
     componentCode: null,
-    componentId: null,
+    componentType: {id: null},
+    patient: null,
     transfusionOutcome: null,
     transfusionReactionType: null,
-    transfusionNotes: '',
-    usageSiteId: null,
-    reactionTypeId: null,
-    gender: null,
-    patientName1: '',
-    patientName2: '',
-    patientNo: '',
-    bloodBank: '',
-    wardNo: '',
+    notes: null,
+    receivedFrom: null,
     bloodGroup: null,
     format: DATEFORMAT,
     ICONS: ICONS,
     startDateOpen: false,
-    dateOfBirth: null,
-    transfusionDate: moment().startOf('day').toDate()
+    dateTransfused: $scope.today
   };
 
   function initializeRecordTransfusionForm() {
@@ -47,14 +41,14 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, DAT
     $scope.componentTypes = componentTypes;
     $scope.locations = locations;
     $scope.transfusionOutcomes = transfusionOutcomes;
-    $scope.gender = gender;
+    $scope.genders = genders;
     $scope.transfusionReactionTypes = transfusionReactionTypes;
-    $scope.bloodGroup = bloodGroup;
+    $scope.bloodGroups = bloodGroups;
   }
 
   $scope.clearTransfusionReactionType = function() {
-    $scope.formParams.transfusionReactionType = null;
-  }
+    $scope.transfusion.transfusionReactionType = null;
+  };
 
   $scope.setComponentType = function(componentCode) {
     if (componentCode) {
@@ -63,15 +57,26 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, DAT
       });
 
       if (filteredComponentTypes.length > 0) {
-        $scope.formParams.componentId = filteredComponentTypes[0].id;
+        $scope.transfusion.componentType.id = filteredComponentTypes[0].id;
       } else {
-        $scope.formParams.componentId = null;
+        $scope.transfusion.componentType.id = null;
       }
     }
-  }
+  };
+
+  $scope.recordTransfusion = function recordTransfusion() {
+    if ($scope.recordTransfusionsForm.$invalid) {
+      return;
+    }
+    $scope.submitted = true;
+    $scope.addingTransfusionForm = true;
+    $scope.transfusionRecord = $scope.transfusion;
+  };
 
   $scope.clear = function() {
-    $scope.formParams  = {},
+    $scope.transfusion  = {};
+    $scope.addingTransfusionForm = false;
+    $scope.submitted = false;
     $scope.recordTransfusionsForm.$setPristine();
   };
   initializeRecordTransfusionForm();
