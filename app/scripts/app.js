@@ -601,6 +601,11 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         controller: 'TransfusionReactionTypesCtrl',
         permission: PERMISSIONS.MANAGE_TRANSFUSION_REACTION_TYPES
       })
+      .when('/manageTransfusionReactionType/:id?', {
+        templateUrl: 'views/settings/manageTransfusionReactionType.html',
+        controller: 'TransfusionReactionTypesCtrl',
+        permission: PERMISSIONS.MANAGE_TRANSFUSION_REACTION_TYPES
+      })
       .when('/dataExport', {
         templateUrl: 'views/settings/dataExport.html',
         controller: 'DataExportCtrl',
