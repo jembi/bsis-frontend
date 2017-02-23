@@ -12,7 +12,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, DAT
                     {'id':3, name:'Parakoane hospital'},
                     {'id':3, name:'TygerValley hospital'}];
 
-  var transfusionOutcomes = ['Transfused Uneventfully', 'Transfusion Reaction Occurred', 'Not Transfused'];
+  var transfusionOutcomes = ['TRANSFUSED_UNEVENTFULLY', 'TRANSFUSION_REACTION_OCCURRED', 'NOT_TRANSFUSED'];
   var transfusionReactionTypes = [{'id':1, 'type': 'Reacted'}, {'id':2, 'type': 'Not Reacted'}];
   var gender = ['male', 'female'];
   var bloodGroup = ['A+', 'A-', 'B+', 'B-', 'O-', 'O+', 'AB'];
