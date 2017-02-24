@@ -85,7 +85,10 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     OrderFormsService.addOrderForm({}, orderForm, function(res) {
       $scope.addingOrderForm = false;
       $location.path('/fulfilOrder/' + res.orderForm.id);
-    }, $log.error);
+    }, function(err) {
+      $log.error(err);
+      $scope.addingOrderForm = false;
+    });
   };
 
   $scope.clearForm = function() {
