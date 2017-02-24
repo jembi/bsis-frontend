@@ -69,11 +69,11 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
       transfusionRecord.transfusionReactionType = null;
     }
 
-    TransfusionService.createTransfusion(transfusionRecord, function(res) { 
+    TransfusionService.createTransfusion(transfusionRecord, function() {
       $scope.clear();
-      $scope.addingTransfusionForm = false; 
-    }, function(response) { 
-        $scope.addingTransfusionForm = false; 
+      $scope.addingTransfusionForm = false;
+    }, function() {
+      $scope.addingTransfusionForm = false;
     });
   };
 
