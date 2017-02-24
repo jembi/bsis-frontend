@@ -526,6 +526,9 @@ angular.module('bsis')
         getForm: {
           method: 'GET',
           url: url + '/transfusions/form'
+        }, 
+        save: { 
+          method: 'POST' 
         }
       }),
 

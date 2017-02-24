@@ -3,6 +3,7 @@
 angular.module('bsis').factory('TransfusionService', function(Api) {
 
   return {
-    getTransfusionForm: Api.Transfusion.getForm
+    getTransfusionForm: Api.Transfusion.getForm,
+    createTransfusion: Api.Transfusion.save
   };
 });

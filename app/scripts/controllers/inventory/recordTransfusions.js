@@ -10,19 +10,20 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
   $scope.genders = null;
   $scope.bloodGroups = null;
   $scope.today = moment().startOf('day').toDate();
-  $scope.transfusion = {
+
+  $scope.masterDetails = {
     donationIdentificationNumber: null,
     componentCode: null,
     componentType: {id: null},
     patient: {dateOfBirth: null},
     transfusionOutcome: null,
-    transfusionReactionType: null,
+    transfusionReactionType: {id: null},
     notes: null,
-    receivedFrom: null,
-    bloodGroup: null,
-    startDateOpen: false,
+    receivedFrom: {id: null},
     dateTransfused: $scope.today
   };
+
+  $scope.transfusion = angular.copy($scope.masterDetails);
 
   function initializeRecordTransfusionForm() {
     TransfusionService.getTransfusionForm(function(response) {
@@ -39,7 +40,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
   }
 
   $scope.clearTransfusionReactionType = function() {
-    $scope.transfusion.transfusionReactionType = null;
+    $scope.transfusion.transfusionReactionType.id = null;
   };
 
   $scope.setComponentType = function(componentCode) {
@@ -62,15 +63,22 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     }
     $scope.submitted = true;
     $scope.addingTransfusionForm = true;
-    $scope.transfusionRecord = $scope.transfusion;
+    var transfusionRecord = angular.copy($scope.transfusion);
 
-    $log.debug('Not implemented yet');
-    $log.debug('Form parameters: ' + angular.toJson($scope.transfusion));
-    $scope.addingTransfusionForm = false;
+    if (transfusionRecord.transfusionReactionType.id === null) {
+      transfusionRecord.transfusionReactionType = null;
+    }
+
+    TransfusionService.createTransfusion(transfusionRecord, function(res) { 
+      $scope.clear();
+      $scope.addingTransfusionForm = false; 
+    }, function(response) { 
+        $scope.addingTransfusionForm = false; 
+    });
   };
 
   $scope.clear = function() {
-    $scope.transfusion  = {};
+    $scope.transfusion = angular.copy($scope.masterDetails);
     $scope.addingTransfusionForm = false;
     $scope.submitted = false;
     $scope.recordTransfusionsForm.$setPristine();
