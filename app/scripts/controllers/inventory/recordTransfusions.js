@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $log, TransfusionService, DATEFORMAT) {
+angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $log, TransfusionService, BLOODGROUP, GENDER, DATEFORMAT) {
 
   $scope.submitted = false;
   $scope.componentTypes = null;
@@ -31,9 +31,9 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
         $scope.componentTypes = response.componentTypes;
         $scope.locations = response.usageSites;
         $scope.transfusionOutcomes = response.transfusionOutcomes;
-        $scope.genders = response.genders;
+        $scope.genders = GENDER.options;
         $scope.transfusionReactionTypes = response.transfusionReactionTypes;
-        $scope.bloodGroups = response.bloodGroups;
+        $scope.bloodGroups = BLOODGROUP.options;
       }
     });
   }
@@ -44,7 +44,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
 
   $scope.setComponentType = function(componentCode) {
     if (componentCode) {
-      var filteredComponentTypes = componentTypes.filter(function(componentType) {
+      var filteredComponentTypes = $scope.componentTypes.filter(function(componentType) {
         return componentType.componentTypeCode === componentCode;
       });
 
