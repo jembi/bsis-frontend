@@ -91,6 +91,7 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     $scope.orderForm.type = null;
     $scope.orderForm.dispatchedFrom = null;
     $scope.orderForm.dispatchedTo = null;
+    $scope.orderForm.patient = null;
     $scope.addOrderForm.$setPristine();
   };
 
