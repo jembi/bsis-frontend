@@ -109,7 +109,12 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label">Date of birth:</label>
                 <div class="col-sm-8">
-                  <dateselect name="dateOfBirth" ng-model="orderForm.patient.dateOfBirth" format="dateFormat"></dateselect>
+                  <dateselect name="dateOfBirth" ng-model="orderForm.patient.dateOfBirth" format="dateFormat" max-date="maxDateOfBirth"></dateselect>
+                  <div>
+                    <small class="error" ng-show="orderForm.patient.dateOfBirth > maxDateOfBirth">
+                      Date must be today or before
+                    </small>
+                  </div>
                 </div>
               </div>
 

@@ -7,6 +7,8 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
 
   $scope.dateFormat = DATEFORMAT;
 
+  $scope.maxDateOfBirth = moment().endOf('day').toDate();
+
   // Set the "dispatch to" sites based on dispatch type
   function updateDispatchToSites() {
     if ($scope.orderForm.type === 'TRANSFER') {
