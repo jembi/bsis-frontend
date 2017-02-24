@@ -28,6 +28,14 @@
     <span class="text-muted">Dispatched From:</span> {{orderForm.dispatchedFrom.name}}
     <span class="text-muted">Dispatched To:</span> {{orderForm.dispatchedTo.name}}
     <span class="text-muted">Order Type:</span> {{orderForm.type}}
+    <div ng-show="orderFormHasPatient">
+      <span class="text-muted">Ward No:</span> {{orderForm.patient.hospitalWardNumber}}
+      <span class="text-muted">Patient No:</span> {{orderForm.patient.patientNumber}}
+      <span class="text-muted">Patient Name:</span> {{orderForm.patient.name1}} {{orderForm.patient.name2}}
+      <span class="text-muted">Blood Group:</span> {{orderForm.patient.bloodGroup}}
+      <span class="text-muted">Gender:</span> {{orderForm.patient.gender}}
+      <span class="text-muted">DOB:</span> {{orderForm.patient.dateOfBirth | bsisDate}}
+    </div>
   </section>
 
   <hr />

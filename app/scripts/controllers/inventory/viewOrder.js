@@ -193,6 +193,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     // Fetch the order form by its id
     OrderFormsService.getOrderForm({id: $routeParams.id}, function(res) {
       $scope.orderForm = res.orderForm;
+      $scope.orderFormHasPatient = res.orderForm.patient !== null ? true : false;
       populateUnitsOrderedGrid($scope.orderForm);
       populateUnitsSuppliedGrid($scope.orderForm);
     }, $log.error);
