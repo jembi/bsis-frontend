@@ -8,14 +8,20 @@
       <label class="col-sm-2 control-label">DIN</label>
       <div class="form-inline col-sm-10">
         <div style="display: inline-block; vertical-align: top;">
-          <input class="form-control" name="donationIdentificationNumber" ng-model="transfusion.donationIdentificationNumber" required>
+          <input class="form-control" name="donationIdentificationNumber" ng-model="transfusion.donationIdentificationNumber" required ng-change="clearDonationIdentificationNumberErrorMessage()">
           <ng-messages for="recordTransfusionsForm.donationIdentificationNumber.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
+            <div>
+              <small class="error" ng-show="donationIdentificationNumberBackEndErrorMessage">{{donationIdentificationNumberBackEndErrorMessage}}</small>
+            </div>
             <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
         </div>
         <label class="control-label">Component Code</label>
         <div style="display: inline-block; vertical-align: top;">
           <input class="form-control" name="componentCode" size="8" ng-model="transfusion.componentCode" ng-disabled = "transfusion.componentType.id && !transfusion.componentCode" ng-required="!transfusion.componentCode && !transfusion.componentType.id" ng-change="setComponentType(transfusion.componentCode)">
+          <div style="max-width:300px">
+            <small class="error" ng-show="componentCodeBackEndErrorMessage">{{componentCodeBackEndErrorMessage}}</small>
+          </div>
         </div>
       </div>
     </div>
@@ -23,13 +29,14 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Component Type</label>
       <div class="form-inline col-sm-10">
-        <select name="componentType" ng-model="transfusion.componentType.id" class="form-control" style="min-width: 350px;" ng-disabled = "transfusion.componentCode" ng-required="!transfusion.componentCode && !transfusion.componentType.id" ng-options="componentType.id as componentType.componentTypeName for componentType in componentTypes">
+        <select name="componentType" ng-model="transfusion.componentType.id" class="form-control" style="min-width: 350px;" ng-disabled = "transfusion.componentCode" ng-required="!transfusion.componentCode && !transfusion.componentType.id" ng-change="clearComponentCodeAndTypeErrorMessage()" ng-options="componentType.id as componentType.componentTypeName for componentType in componentTypes">
           <option value=""></option>
         </select>
         <div>
           <small class="error" ng-show="!transfusion.componentCode && !transfusion.componentType.id && recordTransfusionsForm.$submitted">
             Both component type and code cannot be empty
           </small>
+          <small class="error" ng-show="componentTypeBackEndErrorMessage">{{componentTypeBackEndErrorMessage}}</small>
         </div>
       </div>
     </div>
@@ -79,11 +86,12 @@
     <div class="form-group">
       <label for="dateTransfused" class="col-sm-2 control-label">Date Transfused</label>
       <div class="col-sm-10">
-        <dateselect name="dateTransfused" ng-model="transfusion.dateTransfused" format="format" max-date="today" date-time-not-in-future ng-class="{'has-error' : (recordTransfusionsForm.dateTransfused.$invalid)}">
+        <dateselect name="dateTransfused" ng-model="transfusion.dateTransfused" format="format" max-date="today" date-time-not-in-future ng-class="{'has-error' : (recordTransfusionsForm.dateTransfused.$invalid)}" ng-change="clearTransfusedDateErrorMessage()">
         </dateselect>
         <div>
           <ng-messages for="recordTransfusionsForm.dateTransfused.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
             <small class="error" ng-show="recordTransfusionsForm.dateTransfused.$modelValue === undefined">Invalid date</small>
+            <small class="error" ng-show="transfusedDateBackEndErrorMessage">{{transfusedDateBackEndErrorMessage}}</small>
             <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
         </div>
@@ -133,7 +141,7 @@
     <div class="form-group">
       <label for="dateOfBirth" class="col-sm-2 control-label">Date of Birth</label>
       <div class="col-sm-10">
-        <dateselect name="dateOfBirth" ng-model="transfusion.patient.dateOfBirth" format="format" max-date="today" date-time-not-in-future ng-class="{'has-error' : (recordTransfusionsForm.dateOfBirth.$invalid)}">
+        <dateselect name="dateOfBirth" ng-model="transfusion.patient.dateOfBirth" format="format" max-date="today" ng-class="{'has-error' : (recordTransfusionsForm.dateOfBirth.$invalid)}">
         </dateselect>
       <div>
         <ng-messages for="recordTransfusionsForm.dateOfBirth.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">

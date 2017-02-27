@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $log, TransfusionService, BLOODGROUP, GENDER, DATEFORMAT) {
+angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $log, $timeout, TransfusionService, BLOODGROUP, GENDER, DATEFORMAT) {
 
   $scope.submitted = false;
   $scope.componentTypes = null;
@@ -39,8 +39,67 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     });
   }
 
+  $scope.$watch('transfusion.donationIdentificationNumber', function() {
+    $timeout(function() {
+      $scope.recordTransfusionsForm.donationIdentificationNumber.$setValidity('invalid', true);
+    });
+  });
+
+  $scope.$watch('transfusion.componentCode', function() {
+    $timeout(function() {
+      $scope.recordTransfusionsForm.componentCode.$setValidity('invalid', true);
+    });
+  });
+
+  $scope.$watch('transfusion.componentType.id', function() {
+    $timeout(function() {
+      $scope.recordTransfusionsForm.componentType.$setValidity('invalid', true);
+    });
+  });
+
+  $scope.$watch('transfusion.dateTransfused', function() {
+    $timeout(function() {
+      $scope.recordTransfusionsForm.dateTransfused.$setValidity('invalid', true);
+    });
+  });
+
+  function onSaveError(err) {
+    if (err.data && err.data.donationIdentificationNumber) {
+      $scope.recordTransfusionsForm.donationIdentificationNumber.$setValidity('invalid', false);
+      $scope.donationIdentificationNumberBackEndErrorMessage = err.data.donationIdentificationNumber;
+    }
+
+    if (err.data && err.data.componentCode) {
+      $scope.recordTransfusionsForm.componentCode.$setValidity('invalid', false);
+      $scope.componentCodeBackEndErrorMessage = err.data.componentCode;
+    }
+
+    if (err.data && err.data.componentType) {
+      $scope.recordTransfusionsForm.componentType.$setValidity('invalid', false);
+      $scope.componentTypeBackEndErrorMessage = err.data.componentType;
+    }
+
+    if (err.data && err.data.dateTransfused) {
+      $scope.recordTransfusionsForm.dateTransfused.$setValidity('invalid', false);
+      $scope.transfusedDateBackEndErrorMessage = err.data.dateTransfused;
+    }
+  }
+
   $scope.clearTransfusionReactionType = function() {
     $scope.transfusion.transfusionReactionType.id = null;
+  };
+
+  $scope.clearDonationIdentificationNumberErrorMessage = function() {
+    $scope.donationIdentificationNumberBackEndErrorMessage = null;
+  };
+
+  $scope.clearComponentCodeAndTypeErrorMessage = function() {
+    $scope.componentCodeBackEndErrorMessage = null;
+    $scope.componentTypeBackEndErrorMessage = null;
+  };
+
+  $scope.clearTransfusedDateErrorMessage = function() {
+    $scope.transfusedDateBackEndErrorMessage = null;
   };
 
   $scope.setComponentType = function(componentCode) {
@@ -55,6 +114,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
         $scope.transfusion.componentType.id = null;
       }
     }
+    $scope.clearComponentCodeAndTypeErrorMessage();
   };
 
   $scope.recordTransfusion = function recordTransfusion() {
@@ -72,7 +132,8 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     TransfusionService.createTransfusion(transfusionRecord, function() {
       $scope.clear();
       $scope.addingTransfusionForm = false;
-    }, function() {
+    }, function(response) {
+      onSaveError(response);
       $scope.addingTransfusionForm = false;
     });
   };
