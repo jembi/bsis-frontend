@@ -14,7 +14,7 @@ angular.module('bsis').controller('ManageTransfusionReactionTypeCtrl', function(
 
   $scope.$watch('transfusionReactionType.name', function() {
     $timeout(function() {
-      $scope.transfusionReactionTypesForm.name.$setValidity('duplicate', true);
+      $scope.transfusionReactionTypeForm.name.$setValidity('duplicate', true);
     });
   });
 
