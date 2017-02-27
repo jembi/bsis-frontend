@@ -110,7 +110,7 @@
                 <div class="col-sm-8">
                   <dateselect name="dateOfBirth" ng-model="orderForm.patient.dateOfBirth" format="dateFormat" date-time-not-in-future ng-model-options="{ allowInvalid: true }" ng-class="{'has-error' : addOrderForm.dateOfBirth.$invalid}" max-date="maxDateOfBirth" ></dateselect>
                   <div>
-                    <ng-messages for="addOrderForm.dateOfBirth.$error" role="alert" ng-show="addOrderForm.dateOfBirth.$invalid ||  addOrderForm.submitted">
+                    <ng-messages for="addOrderForm.dateOfBirth.$error" role="alert" ng-show="addOrderForm.dateOfBirth.$invalid && addOrderForm.$submitted">
                       <ng-messages-include src="messages.html"></ng-messages-include>
                     </ng-messages>
                   </div>
