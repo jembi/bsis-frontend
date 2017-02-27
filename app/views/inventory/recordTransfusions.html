@@ -79,7 +79,7 @@
     <div class="form-group">
       <label for="dateTransfused" class="col-sm-2 control-label">Date Transfused</label>
       <div class="col-sm-10">
-        <dateselect name="dateTransfused" ng-model="transfusion.dateTransfused" format="format" max-date="today" date-time-not-in-future >
+        <dateselect name="dateTransfused" ng-model="transfusion.dateTransfused" format="format" max-date="today" date-time-not-in-future ng-class="{'has-error' : (recordTransfusionsForm.dateTransfused.$invalid)}">
         </dateselect>
         <div>
           <ng-messages for="recordTransfusionsForm.dateTransfused.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
@@ -133,7 +133,7 @@
     <div class="form-group">
       <label for="dateOfBirth" class="col-sm-2 control-label">Date of Birth</label>
       <div class="col-sm-10">
-        <dateselect name="dateOfBirth" ng-model="transfusion.patient.dateOfBirth" format="format">
+        <dateselect name="dateOfBirth" ng-model="transfusion.patient.dateOfBirth" format="format" max-date="today" date-time-not-in-future ng-class="{'has-error' : (recordTransfusionsForm.dateOfBirth.$invalid)}">
         </dateselect>
       <div>
         <ng-messages for="recordTransfusionsForm.dateOfBirth.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
