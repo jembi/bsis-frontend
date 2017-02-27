@@ -112,7 +112,12 @@
         </div>
         <div class="form-group">
           <span class="text-muted" for="dateOfBirth">Date of Birth:</span>
-          <dateselect name="dateOfBirth" ng-model="orderDetailsForm.patient.dateOfBirth" format="format"></dateselect>
+          <dateselect name="dateOfBirth" ng-model="orderDetailsForm.patient.dateOfBirth" format="format" date-time-not-in-future ng-model-options="{ allowInvalid: true }" ng-class="{'has-error' : forms.orderDetailsForm.dateOfBirth.$invalid}" max-date="maxDateOfBirth" ></dateselect>
+          <div>
+            <ng-messages for="forms.orderDetailsForm.dateOfBirth.$error" role="alert" ng-show="forms.orderDetailsForm.dateOfBirth.$invalid && forms.orderDetailsForm.$submitted">
+              <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
+          </div>
         </div>
       </span>
       <div class="form-group">
