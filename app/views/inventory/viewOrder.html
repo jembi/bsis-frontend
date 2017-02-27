@@ -27,7 +27,7 @@
     <span class="text-muted">Order Date:</span> {{orderForm.orderDate | bsisDate}}
     <span class="text-muted">Dispatched From:</span> {{orderForm.dispatchedFrom.name}}
     <span class="text-muted">Dispatched To:</span> {{orderForm.dispatchedTo.name}}
-    <span class="text-muted">Order Type:</span> {{orderForm.type}}
+    <span class="text-muted">Order Type:</span> {{orderForm.type |  titleCase}}
     <div ng-show="orderFormHasPatient">
       <span class="text-muted">Ward No:</span> {{orderForm.patient.hospitalWardNumber}}
       <span class="text-muted">Patient No:</span> {{orderForm.patient.patientNumber}}
