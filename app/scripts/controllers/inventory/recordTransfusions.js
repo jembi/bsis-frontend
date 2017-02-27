@@ -9,7 +9,6 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
   $scope.transfusionReactionTypes = null;
   $scope.genders = null;
   $scope.bloodGroups = null;
-  $scope.today = moment().startOf('day').toDate();
 
   $scope.masterDetails = {
     donationIdentificationNumber: null,
@@ -20,7 +19,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     transfusionReactionType: {id: null},
     notes: null,
     receivedFrom: {id: null},
-    dateTransfused: $scope.today
+    dateTransfused: moment().startOf('day').toDate()
   };
 
   $scope.transfusion = angular.copy($scope.masterDetails);
