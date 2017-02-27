@@ -37,7 +37,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Received From</label>
       <div class="form-inline col-sm-10">
-        <select name="usageSiteId" ng-model="transfusion.receivedFrom" class="form-control" ng-options="usageSite.id as usageSite.name for usageSite in locations" style="min-width: 350px;" required>
+        <select name="usageSite" ng-model="transfusion.receivedFrom.id" class="form-control" ng-options="usageSite.id as usageSite.name for usageSite in locations" style="min-width: 350px;" required>
           <option value="" disabled></option>
         </select>
         <ng-messages for="recordTransfusionsForm.usageSiteId.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
@@ -49,7 +49,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Transfusion Outcomes</label>
       <div class="form-inline col-sm-10">
-        <select name="transfusionOutcomes" ng-model="transfusion.transfusionOutCome" class="form-control" ng-options="outcome as (outcome | titleCase) for outcome in transfusionOutcomes" style="min-width: 350px;" ng-change="clearTransfusionReactionType()" required>
+        <select name="transfusionOutcomes" ng-model="transfusion.transfusionOutcome" class="form-control" ng-options="outcome as (outcome | titleCase) for outcome in transfusionOutcomes" style="min-width: 350px;" ng-change="clearTransfusionReactionType()" required>
           <option value="" disabled></option>
         </select> 
         <ng-messages for="recordTransfusionsForm.transfusionOutcomes.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
@@ -60,7 +60,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Transfusion Reaction Type</label>
       <div class="form-inline col-sm-10">
-        <select name="transfusionReactionType" ng-model="transfusion.transfusionReactionType" ng-options="reactionType.id as reactionType.name for reactionType in transfusionReactionTypes" class="form-control" style="min-width: 350px;" ng-disabled="transfusion.transfusionOutCome !== 'TRANSFUSION_REACTION_OCCURRED'" ng-required="transfusion.transfusionOutCome === 'TRANSFUSION_REACTION_OCCURRED'">
+        <select name="transfusionReactionType" ng-model="transfusion.transfusionReactionType.id" ng-options="reactionType.id as reactionType.name for reactionType in transfusionReactionTypes" class="form-control" style="min-width: 350px;" ng-disabled="transfusion.transfusionOutcome !== 'TRANSFUSION_REACTION_OCCURRED'" ng-required="transfusion.transfusionOutcome === 'TRANSFUSION_REACTION_OCCURRED'">
           <option value="" disabled></option>
         </select>
         <ng-messages for="recordTransfusionsForm.transfusionReactionType.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
@@ -119,7 +119,7 @@
     <div class="clearfix form-group">
       <label class="col-sm-2 control-label">Blood Bank</label>
       <div class="form-inline col-sm-10">
-        <input class="form-control" name="hospitalBloodBankNumber" ng-model="transfusion.patient.hospitalWardNumber">
+        <input class="form-control" name="hospitalBloodBankNumber" ng-model="transfusion.patient.hospitalBloodBankNumber">
       </div>
     </div>
 
