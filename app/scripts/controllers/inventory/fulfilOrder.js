@@ -17,6 +17,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
   var usageSites = [];
   var selectedRowsToDelete = null;
 
+  $scope.maxDateOfBirth = moment().endOf('day').toDate();
+
   // Set the "dispatch to" sites and patient based on dispatch type
   function updateDispatchType() {
     if ($scope.orderDetailsForm == null) {
