@@ -46,7 +46,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
   $scope.setComponentType = function(componentCode) {
     if (componentCode) {
       var filteredComponentTypes = $scope.componentTypes.filter(function(componentType) {
-        return componentType.componentTypeCode === componentCode;
+        return componentCode.indexOf(componentType.componentTypeCode) !== -1;
       });
 
       if (filteredComponentTypes.length > 0) {
