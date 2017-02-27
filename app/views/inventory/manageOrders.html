@@ -103,17 +103,16 @@
               </div>
             </div>
           </div>
-
           <div class="col-sm-6">
             <div class="row">
               <div class="form-group">
                 <label class="col-sm-4 control-label">Date of birth:</label>
                 <div class="col-sm-8">
-                  <dateselect name="dateOfBirth" ng-model="orderForm.patient.dateOfBirth" format="dateFormat" max-date="maxDateOfBirth"></dateselect>
+                  <dateselect name="dateOfBirth" ng-model="orderForm.patient.dateOfBirth" format="dateFormat" date-time-not-in-future ng-model-options="{ allowInvalid: true }" ng-class="{'has-error' : addOrderForm.dateOfBirth.$invalid}" max-date="maxDateOfBirth" ></dateselect>
                   <div>
-                    <small class="error" ng-show="orderForm.patient.dateOfBirth > maxDateOfBirth">
-                      Date must be today or before
-                    </small>
+                    <ng-messages for="addOrderForm.dateOfBirth.$error" role="alert" ng-show="addOrderForm.dateOfBirth.$invalid ||  addOrderForm.submitted">
+                      <ng-messages-include src="messages.html"></ng-messages-include>
+                    </ng-messages>
                   </div>
                 </div>
               </div>
