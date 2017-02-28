@@ -26,7 +26,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Component Type</label>
       <div class="form-inline col-sm-10">
-        <select name="componentType" ng-model="transfusion.componentType.id" class="form-control" style="min-width: 350px;" ng-disabled = "transfusion.componentCode" ng-required="true" ng-options="componentType.id as componentType.componentTypeName for componentType in componentTypes">
+        <select name="componentType" ng-model="transfusion.componentType.id" class="form-control" style="min-width: 350px;" ng-disabled = "transfusion.componentCode" ng-required="!transfusion.componentCode && !transfusion.componentType.id" ng-options="componentType.id as componentType.componentTypeName for componentType in componentTypes">
           <option value=""></option>
         </select>
         <ng-messages for="recordTransfusionsForm.componentType.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
