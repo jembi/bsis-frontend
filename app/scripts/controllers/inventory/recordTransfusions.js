@@ -60,6 +60,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
   $scope.$watch('transfusion.dateTransfused', function() {
     $timeout(function() {
       $scope.recordTransfusionsForm.dateTransfused.$setValidity('invalid', true);
+      $scope.clearTransfusedDateErrorMessage();
     });
   });
 
