@@ -519,6 +519,10 @@ angular.module('bsis')
         search: {
           method: 'GET',
           url: url + '/transfusionreactiontypes/search'
+        },
+        add: {
+          method: 'POST',
+          url: url + '/transfusionreactiontypes'
         }
       }),
 
