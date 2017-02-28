@@ -295,6 +295,13 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     });
   };
 
+  $scope.isFieldEmpty = function(field) {
+    if (field) {
+      return field.length === 0;
+    }
+    return true;
+  };
+
   $scope.edit = function() {
     $location.path('/fulfilOrder/' + $routeParams.id);
   };
