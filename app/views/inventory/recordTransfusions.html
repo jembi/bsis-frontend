@@ -41,7 +41,7 @@
         <select name="usageSite" ng-model="transfusion.receivedFrom.id" class="form-control" ng-options="usageSite.id as usageSite.name for usageSite in locations" style="min-width: 350px;" required>
           <option value="" disabled></option>
         </select>
-        <ng-messages for="recordTransfusionsForm.usageSiteId.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
+        <ng-messages for="recordTransfusionsForm.usageSite.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
           <ng-messages-include src="messages.html"></ng-messages-include>
         </ng-messages>
       </div>
