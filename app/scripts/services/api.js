@@ -526,6 +526,16 @@ angular.module('bsis')
         }
       }),
 
+      Transfusion: $resource(url + '/transfusions/', {}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/transfusions/form'
+        },
+        save: {
+          method: 'POST'
+        }
+      }),
+
       DataExport: {
         download: function() {
           // using $http here because $resource cannot process arraybuffers easily

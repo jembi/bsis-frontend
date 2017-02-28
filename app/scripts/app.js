@@ -315,6 +315,12 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.VIEW_INVENTORY_INFORMATION,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
+      .when('/recordTransfusions', {
+        templateUrl: 'views/inventory/recordTransfusions.html',
+        controller: 'RecordTransfusionsCtrl',
+        permission: PERMISSIONS.ADD_TRANSFUSION_DATA,
+        enabled: UI.INVENTORY_TAB_ENABLED
+      })
 
       // LABELLING URLs
       .when('/labelling', {
@@ -1141,6 +1147,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       require: 'ngModel',
       link: function(scope, element, attr, ctrl) {
         ctrl.$validators.datesOutOfRange = function(modelValue) {
+          if (!modelValue) {
+            return true;
+          }
           // initialise the start and end dates
           var startDateValue = attr.uiDateStart;
           var endDateValue = attr.uiDateEnd;
@@ -1163,6 +1172,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
           return true;
         };
         ctrl.$validators.invalidDateRange = function(modelValue) {
+          if (!modelValue) {
+            return true;
+          }
           // initialise the start and end dates
           var startDateValue = attr.uiDateStart;
           var endDateValue = attr.uiDateEnd;
@@ -1202,6 +1214,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       require: 'ngModel',
       link: function(scope, element, attr, ngModel) {
         ngModel.$validators.invalidTimeRange = function(modelValue) {
+          if (!modelValue) {
+            return true;
+          }
           var startTime = new Date(attr.timeIsAfter);
           var endTime = new Date(modelValue);
           return startTime <= endTime;
@@ -1225,6 +1240,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       require: 'ngModel',
       link: function(scope, element, attr, ngModel) {
         ngModel.$validators.sameTimeEntered = function(modelValue) {
+          if (!modelValue) {
+            return true;
+          }
           var startTime = new Date(attr.timeNotSameAs);
           var endTime = new Date(modelValue);
           return (moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()) >= 1;
@@ -1248,17 +1266,18 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       require: 'ngModel',
       link: function(scope, element, attr, ngModel) {
         ngModel.$validators.dateInFuture = function(modelValue) {
-          if (modelValue) {
-            var timeAttr = attr.dateTimeNotInFuture;
-            // If time is a different model value, get it as an attribute. If not, use time from modelValue
-            var date = angular.copy(new Date(modelValue));
-            var time = angular.copy(new Date(timeAttr));
-            if (!timeAttr) {
-              time = date;
-            }
-            var dateTime = moment(date).hour(time.getHours()).minutes(time.getMinutes());
-            return dateTime <= moment().toDate();
+          if (!modelValue) {
+            return true;
           }
+          var timeAttr = attr.dateTimeNotInFuture;
+          // If time is a different model value, get it as an attribute. If not, use time from modelValue
+          var date = angular.copy(new Date(modelValue));
+          var time = angular.copy(new Date(timeAttr));
+          if (!timeAttr) {
+            time = date;
+          }
+          var dateTime = moment(date).hour(time.getHours()).minutes(time.getMinutes());
+          return dateTime <= moment().toDate();
         };
         // Watch and unwatch attr
         var unwatch = scope.$watch(function() {
@@ -1278,11 +1297,12 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       require: 'ngModel',
       link: function(scope, element, attr, ngModel) {
         ngModel.$validators.dateTimeAfter = function(modelValue) {
-          if (modelValue) {
-            var dateTimeAttr = angular.copy(new Date(attr.dateTimeAfter));
-            var dateTimeModel = angular.copy(new Date(modelValue));
-            return dateTimeModel > dateTimeAttr;
+          if (!modelValue) {
+            return true;
           }
+          var dateTimeAttr = angular.copy(new Date(attr.dateTimeAfter));
+          var dateTimeModel = angular.copy(new Date(modelValue));
+          return dateTimeModel > dateTimeAttr;
         };
         // Watch and unwatch attr
         var unwatch = scope.$watch(function() {

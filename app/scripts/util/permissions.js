@@ -86,6 +86,10 @@ angular.module('bsis')
 
     // Inventory Permissions
     LABEL_COMPONENT: 'Label Component',
+    ADD_TRANSFUSION_DATA: 'Add Transfusion Data',
+    EDIT_TRANSFUSION_DATA: 'Edit Transfusion Data',
+    VIEW_TRANSFUSION_DATA: 'View Transfusion Data',
+    VOID_TRANSFUSION_DATA: 'Void Transfusion Data',
 
     // Discard Permissions
     DISCARD_COMPONENT: 'Discard Component',
