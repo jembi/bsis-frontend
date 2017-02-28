@@ -102,28 +102,41 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
 
     exporterPdfCustomFormatter: function(docDefinition) {
       var prefix = [];
+      prefix.push(
+        {
+          text: 'Order Date: ',
+          bold: true
+        }, {
+          text: $filter('bsisDate')($scope.orderForm.orderDate)
+        }, {
+          text: ' Dispatch From: ',
+          bold: true
+        }, {
+          text: $scope.orderForm.dispatchedFrom.name
+        }, {
+          text: ' Dispatched To: ',
+          bold: true
+        }, {
+          text: $scope.orderForm.dispatchedTo.name
+        }, {
+          text: ' Order Type: ',
+          bold: true
+        }, {
+          text: $filter('titleCase')($scope.orderForm.type) + '\n'
+        }
+      );
       if ($scope.orderForm.type === 'PATIENT_REQUEST') {
         prefix.push(
           {
-            text: 'Order Date: ',
+            text: ' Blood Bank No: ',
             bold: true
           }, {
-            text: $filter('bsisDate')($scope.orderForm.orderDate)
+            text: $scope.orderForm.patient.hospitalBloodBankNumber
           }, {
-            text: ' Dispatch From: ',
+            text: ' Ward No: ',
             bold: true
           }, {
-            text: $scope.orderForm.dispatchedFrom.name
-          }, {
-            text: ' Dispatched To: ',
-            bold: true
-          }, {
-            text: $scope.orderForm.dispatchedTo.name
-          }, {
-            text: ' Order Type: ',
-            bold: true
-          }, {
-            text: $scope.orderForm.type + '\n'
+            text: $scope.orderForm.patient.hospitalWardNumber
           }, {
             text: ' Patient Number: ',
             bold: true
@@ -133,50 +146,25 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
             text: ' Patient Name: ',
             bold: true
           }, {
-            text: $scope.orderForm.patient.name1 + ' ' + $scope.orderForm.patient.name2
+            text: $scope.orderForm.patient.name1 + ' ' + $scope.orderForm.patient.name2 + '\n'
           }, {
             text: ' Blood Group: ',
             bold: true
           }, {
             text: $scope.orderForm.patient.bloodGroup
           }, {
-            text: ' Blood Bank No: ',
+            text: ' Gender: ',
             bold: true
           }, {
-            text: $scope.orderForm.patient.hospitalBloodBankNumber
+            text: $scope.orderForm.patient.gender
           }, {
-            text: ' Ward No: ',
+            text: ' Date of Birth: ',
             bold: true
           }, {
-            text: $scope.orderForm.patient.hospitalBloodBankNumber + '\n'
-          }
-        );
-      } else {
-        prefix.push(
-          {
-            text: 'Order Date: ',
-            bold: true
-          }, {
-            text: $filter('bsisDate')($scope.orderForm.orderDate)
-          }, {
-            text: ' Dispatch From: ',
-            bold: true
-          }, {
-            text: $scope.orderForm.dispatchedFrom.name
-          }, {
-            text: ' Dispatched To: ',
-            bold: true
-          }, {
-            text: $scope.orderForm.dispatchedTo.name
-          }, {
-            text: ' Order Type: ',
-            bold: true
-          }, {
-            text: $scope.orderForm.type + '\n'
+            text: $filter('bsisDate')($scope.orderForm.patient.dateOfBirth)
           }
         );
       }
-
 
       docDefinition.content = [{text: prefix, margin: [-10, 0, 0, 0], fontSize: 7}].concat(docDefinition.content);
       return docDefinition;
