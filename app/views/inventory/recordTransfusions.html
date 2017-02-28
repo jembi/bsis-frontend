@@ -50,7 +50,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Transfusion Outcomes</label>
       <div class="form-inline col-sm-10">
-        <select name="transfusionOutcomes" ng-model="transfusion.transfusionOutcome" class="form-control" ng-options="outcome as (outcome | titleCase) for outcome in transfusionOutcomes" style="min-width: 350px;" required>
+        <select name="transfusionOutcomes" ng-model="transfusion.transfusionOutcome" class="form-control" ng-options="outcome as (outcome | titleCase) for outcome in transfusionOutcomes" style="min-width: 350px;" required ng-change="updateReactionType(transfusion.transfusionOutcome)">
           <option value="" disabled></option>
         </select> 
         <ng-messages for="recordTransfusionsForm.transfusionOutcomes.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">

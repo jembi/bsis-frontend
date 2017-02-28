@@ -122,6 +122,12 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     }
   };
 
+  $scope.updateReactionType = function(transactionOutcome) {
+    if (transactionOutcome && transactionOutcome !== 'TRANSACTION_REACTION_OCCURED') {
+      $scope.transfusion.transfusionReactionType = null;
+    }
+  };
+
   $scope.recordTransfusion = function recordTransfusion() {
     if ($scope.recordTransfusionsForm.$invalid) {
       return;
