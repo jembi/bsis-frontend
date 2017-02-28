@@ -75,7 +75,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     if (err.data && err.data.componentCode) {
       if (err.data.fieldErrors.componentCode[0].code === 'errors.invalid.componentStatus') {
         $scope.recordTransfusionsForm.componentCode.$setValidity('invalidComponentCode', false);
-      } else {
+      } else if (err.data.fieldErrors.componentCode[0].code === 'errors.invalid') {
         $scope.recordTransfusionsForm.componentCode.$setValidity('invalid', false);
       }
     }
@@ -85,9 +85,9 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
         $scope.recordTransfusionsForm.componentType.$setValidity('noComponents', false);
       } else if (err.data.fieldErrors.componentType[0].code === 'errors.invalid.multipleComponents') {
         $scope.recordTransfusionsForm.componentType.$setValidity('multipleComponents', false);
-      } else if (err.data.fieldErrors.componentType[0].code === 'errors.invalid.componentStatus') {
+      } else if (err.data.fieldErrors.componentType[0].code === 'errors.invalid.componentStatus' && !$scope.transfusion.componentCode) {
         $scope.recordTransfusionsForm.componentType.$setValidity('invalidComponentStatus', false);
-      } else {
+      } else if (err.data.fieldErrors.componentType[0].code === 'errors.invalid') {
         $scope.recordTransfusionsForm.componentType.$setValidity('invalid', false);
       }
     }
