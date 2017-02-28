@@ -122,9 +122,49 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
           text: ' Order Type: ',
           bold: true
         }, {
-          text: $scope.orderForm.type + '\n'
+          text: $filter('titleCase')($scope.orderForm.type) + '\n'
         }
       );
+      if ($scope.orderForm.type === 'PATIENT_REQUEST') {
+        prefix.push(
+          {
+            text: ' Blood Bank No: ',
+            bold: true
+          }, {
+            text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalBloodBankNumber) ? 'Not Specified' : $scope.orderForm.patient.hospitalBloodBankNumber
+          }, {
+            text: ' Ward No: ',
+            bold: true
+          }, {
+            text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalWardNumber) ? 'Not Specified' : $scope.orderForm.patient.hospitalWardNumber
+          }, {
+            text: ' Patient Number: ',
+            bold: true
+          }, {
+            text: $scope.isFieldEmpty($scope.orderForm.patient.patientNumber) ? 'Not Specified' : $scope.orderForm.patient.patientNumber
+          }, {
+            text: ' Patient Name: ',
+            bold: true
+          }, {
+            text: $scope.orderForm.patient.name1 + ' ' + $scope.orderForm.patient.name2 + '\n'
+          }, {
+            text: ' Blood Group: ',
+            bold: true
+          }, {
+            text: $scope.isFieldEmpty($scope.orderForm.patient.bloodGroup) ? 'Not Specified' : $scope.orderForm.patient.bloodGroup
+          }, {
+            text: ' Gender: ',
+            bold: true
+          }, {
+            text: $scope.isFieldEmpty($scope.orderForm.patient.gender) ? 'Not Specified' : $scope.orderForm.patient.gender
+          }, {
+            text: ' Date of Birth: ',
+            bold: true
+          }, {
+            text: $scope.isFieldEmpty($scope.orderForm.patient.dateOfBirth) ? 'Not Specified' : $filter('bsisDate')($scope.orderForm.patient.dateOfBirth)
+          }
+        );
+      }
 
       docDefinition.content = [{text: prefix, margin: [-10, 0, 0, 0], fontSize: 7}].concat(docDefinition.content);
       return docDefinition;
@@ -193,6 +233,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     // Fetch the order form by its id
     OrderFormsService.getOrderForm({id: $routeParams.id}, function(res) {
       $scope.orderForm = res.orderForm;
+      $scope.orderFormHasPatient = res.orderForm.patient !== null ? true : false;
       populateUnitsOrderedGrid($scope.orderForm);
       populateUnitsSuppliedGrid($scope.orderForm);
     }, $log.error);
@@ -240,6 +281,13 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
         $log.error(err);
       });
     });
+  };
+
+  $scope.isFieldEmpty = function(field) {
+    if (field) {
+      return field.length === 0;
+    }
+    return true;
   };
 
   $scope.edit = function() {
