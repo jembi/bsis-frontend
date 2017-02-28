@@ -143,6 +143,11 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     $scope.addingTransfusionForm = false;
     $scope.submitted = false;
     $scope.recordTransfusionsForm.$setPristine();
+
+    $scope.donationIdentificationNumberBackEndErrorMessage = null;
+    $scope.componentCodeBackEndErrorMessage = null;
+    $scope.componentTypeBackEndErrorMessage = null;
+    $scope.transfusedDateBackEndErrorMessage = null;
   };
   initializeRecordTransfusionForm();
 });
