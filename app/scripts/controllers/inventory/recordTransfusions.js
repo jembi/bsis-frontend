@@ -67,6 +67,15 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     });
   });
 
+  function getCodeByComponentTypeId(componentTypeId) {
+    if (componentTypeId) {
+      var filteredComponentTypes = $scope.componentTypes.filter(function(componentType) {
+        return componentTypeId === componentType.id;
+      });
+      return filteredComponentTypes[0].componentTypeCode;
+    }
+  }
+
   function onSaveError(err) {
     if (err.data && err.data.donationIdentificationNumber) {
       $scope.recordTransfusionsForm.donationIdentificationNumber.$setValidity('invalid', false);
@@ -84,6 +93,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
       if (err.data.fieldErrors.componentType[0].code === 'errors.invalid.noComponents') {
         $scope.recordTransfusionsForm.componentType.$setValidity('noComponents', false);
       } else if (err.data.fieldErrors.componentType[0].code === 'errors.invalid.multipleComponents') {
+        $scope.transfusion.componentCode = getCodeByComponentTypeId($scope.transfusion.componentType.id);
         $scope.recordTransfusionsForm.componentType.$setValidity('multipleComponents', false);
       } else if (err.data.fieldErrors.componentType[0].code === 'errors.invalid.componentStatus' && !$scope.transfusion.componentCode) {
         $scope.recordTransfusionsForm.componentType.$setValidity('invalidComponentStatus', false);
@@ -105,6 +115,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
 
       if (filteredComponentTypes.length > 0) {
         $scope.transfusion.componentType.id = filteredComponentTypes[0].id;
+        $scope.recordTransfusionsForm.componentType.$setValidity('multipleComponents', true);
       } else {
         $scope.transfusion.componentType.id = null;
       }
