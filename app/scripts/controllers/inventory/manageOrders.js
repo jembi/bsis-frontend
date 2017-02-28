@@ -7,6 +7,8 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
 
   $scope.dateFormat = DATEFORMAT;
 
+  $scope.maxDateOfBirth = moment().endOf('day').toDate();
+
   // Set the "dispatch to" sites based on dispatch type
   function updateDispatchToSites() {
     if ($scope.orderForm.type === 'TRANSFER') {
@@ -83,7 +85,10 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     OrderFormsService.addOrderForm({}, orderForm, function(res) {
       $scope.addingOrderForm = false;
       $location.path('/fulfilOrder/' + res.orderForm.id);
-    }, $log.error);
+    }, function(err) {
+      $log.error(err);
+      $scope.addingOrderForm = false;
+    });
   };
 
   $scope.clearForm = function() {
@@ -91,6 +96,7 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     $scope.orderForm.type = null;
     $scope.orderForm.dispatchedFrom = null;
     $scope.orderForm.dispatchedTo = null;
+    $scope.orderForm.patient = null;
     $scope.addOrderForm.$setPristine();
   };
 
