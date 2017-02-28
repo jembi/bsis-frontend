@@ -131,17 +131,17 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
             text: ' Blood Bank No: ',
             bold: true
           }, {
-            text: $scope.orderForm.patient.hospitalBloodBankNumber
+            text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalBloodBankNumber) ? 'Not Specified' : $scope.orderForm.patient.hospitalBloodBankNumber
           }, {
             text: ' Ward No: ',
             bold: true
           }, {
-            text: $scope.orderForm.patient.hospitalWardNumber
+            text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalWardNumber) ? 'Not Specified' : $scope.orderForm.patient.hospitalWardNumber
           }, {
             text: ' Patient Number: ',
             bold: true
           }, {
-            text: $scope.orderForm.patient.patientNumber
+            text: $scope.isFieldEmpty($scope.orderForm.patient.patientNumber) ? 'Not Specified' : $scope.orderForm.patient.patientNumber
           }, {
             text: ' Patient Name: ',
             bold: true
@@ -151,17 +151,17 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
             text: ' Blood Group: ',
             bold: true
           }, {
-            text: $scope.orderForm.patient.bloodGroup
+            text: $scope.isFieldEmpty($scope.orderForm.patient.bloodGroup) ? 'Not Specified' : $scope.orderForm.patient.bloodGroup
           }, {
             text: ' Gender: ',
             bold: true
           }, {
-            text: $scope.orderForm.patient.gender
+            text: $scope.isFieldEmpty($scope.orderForm.patient.gender) ? 'Not Specified' : $scope.orderForm.patient.gender
           }, {
             text: ' Date of Birth: ',
             bold: true
           }, {
-            text: $filter('bsisDate')($scope.orderForm.patient.dateOfBirth)
+            text: $scope.isFieldEmpty($scope.orderForm.patient.dateOfBirth) ? 'Not Specified' : $filter('bsisDate')($scope.orderForm.patient.dateOfBirth)
           }
         );
       }
