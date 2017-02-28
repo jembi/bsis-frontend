@@ -136,10 +136,6 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     $scope.addingTransfusionForm = true;
     var transfusionRecord = angular.copy($scope.transfusion);
 
-    if (transfusionRecord.transfusionReactionType.id === null) {
-      transfusionRecord.transfusionReactionType = null;
-    }
-
     TransfusionService.createTransfusion(transfusionRecord, function() {
       $scope.clear();
       $scope.addingTransfusionForm = false;
