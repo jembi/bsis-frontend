@@ -48,60 +48,54 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
   $scope.$watch('transfusion.componentCode', function() {
     $timeout(function() {
       $scope.recordTransfusionsForm.componentCode.$setValidity('invalid', true);
+      $scope.recordTransfusionsForm.componentCode.$setValidity('invalidComponentCode', true);
     });
   });
 
   $scope.$watch('transfusion.componentType.id', function() {
     $timeout(function() {
       $scope.recordTransfusionsForm.componentType.$setValidity('invalid', true);
+      $scope.recordTransfusionsForm.componentType.$setValidity('noComponents', true);
+      $scope.recordTransfusionsForm.componentType.$setValidity('multipleComponents', true);
+      $scope.recordTransfusionsForm.componentType.$setValidity('invalidComponentStatus', true);
     });
   });
 
   $scope.$watch('transfusion.dateTransfused', function() {
     $timeout(function() {
       $scope.recordTransfusionsForm.dateTransfused.$setValidity('invalid', true);
-      $scope.clearTransfusedDateErrorMessage();
     });
   });
 
   function onSaveError(err) {
     if (err.data && err.data.donationIdentificationNumber) {
       $scope.recordTransfusionsForm.donationIdentificationNumber.$setValidity('invalid', false);
-      $scope.donationIdentificationNumberBackEndErrorMessage = err.data.donationIdentificationNumber;
     }
 
     if (err.data && err.data.componentCode) {
-      $scope.recordTransfusionsForm.componentCode.$setValidity('invalid', false);
-      $scope.componentCodeBackEndErrorMessage = err.data.componentCode;
+      if (err.data.fieldErrors.componentCode[0].code === 'errors.invalid.componentStatus') {
+        $scope.recordTransfusionsForm.componentCode.$setValidity('invalidComponentCode', false);
+      } else {
+        $scope.recordTransfusionsForm.componentCode.$setValidity('invalid', false);
+      }
     }
 
     if (err.data && err.data.componentType) {
-      $scope.recordTransfusionsForm.componentType.$setValidity('invalid', false);
-      $scope.componentTypeBackEndErrorMessage = err.data.componentType;
+      if (err.data.fieldErrors.componentType[0].code === 'errors.invalid.noComponents') {
+        $scope.recordTransfusionsForm.componentType.$setValidity('noComponents', false);
+      } else if (err.data.fieldErrors.componentType[0].code === 'errors.invalid.multipleComponents') {
+        $scope.recordTransfusionsForm.componentType.$setValidity('multipleComponents', false);
+      } else if (err.data.fieldErrors.componentType[0].code === 'errors.invalid.componentStatus') {
+        $scope.recordTransfusionsForm.componentType.$setValidity('invalidComponentStatus', false);
+      } else {
+        $scope.recordTransfusionsForm.componentType.$setValidity('invalid', false);
+      }
     }
 
     if (err.data && err.data.dateTransfused) {
       $scope.recordTransfusionsForm.dateTransfused.$setValidity('invalid', false);
-      $scope.transfusedDateBackEndErrorMessage = err.data.dateTransfused;
     }
   }
-
-  $scope.clearTransfusionReactionType = function() {
-    $scope.transfusion.transfusionReactionType.id = null;
-  };
-
-  $scope.clearDonationIdentificationNumberErrorMessage = function() {
-    $scope.donationIdentificationNumberBackEndErrorMessage = null;
-  };
-
-  $scope.clearComponentCodeAndTypeErrorMessage = function() {
-    $scope.componentCodeBackEndErrorMessage = null;
-    $scope.componentTypeBackEndErrorMessage = null;
-  };
-
-  $scope.clearTransfusedDateErrorMessage = function() {
-    $scope.transfusedDateBackEndErrorMessage = null;
-  };
 
   $scope.setComponentType = function(componentCode) {
     if (componentCode) {
@@ -115,7 +109,6 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
         $scope.transfusion.componentType.id = null;
       }
     }
-    $scope.clearComponentCodeAndTypeErrorMessage();
   };
 
   $scope.recordTransfusion = function recordTransfusion() {
@@ -144,11 +137,6 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     $scope.addingTransfusionForm = false;
     $scope.submitted = false;
     $scope.recordTransfusionsForm.$setPristine();
-
-    $scope.donationIdentificationNumberBackEndErrorMessage = null;
-    $scope.componentCodeBackEndErrorMessage = null;
-    $scope.componentTypeBackEndErrorMessage = null;
-    $scope.transfusedDateBackEndErrorMessage = null;
   };
   initializeRecordTransfusionForm();
 });
