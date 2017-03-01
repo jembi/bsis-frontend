@@ -64,6 +64,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
   $scope.$watch('transfusion.dateTransfused', function() {
     $timeout(function() {
       $scope.recordTransfusionsForm.dateTransfused.$setValidity('invalid', true);
+      $scope.recordTransfusionsForm.dateTransfused.$setValidity('dateTransfusedAfterComponentCreated', true);
     });
   });
 
@@ -103,7 +104,11 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     }
 
     if (err.data && err.data.dateTransfused) {
-      $scope.recordTransfusionsForm.dateTransfused.$setValidity('invalid', false);
+      if (err.data.fieldErrors.dateTransfused[0].code === 'errors.invalid.dateTransfusedAfterComponentCreated') {
+        $scope.recordTransfusionsForm.dateTransfused.$setValidity('dateTransfusedAfterComponentCreated', false);
+      } else if (err.data.fieldErrors.dateTransfused[0].code === 'errors.invalid') {
+        $scope.recordTransfusionsForm.dateTransfused.$setValidity('invalid', false);
+      }
     }
   }
 
