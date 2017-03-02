@@ -523,6 +523,9 @@ angular.module('bsis')
         add: {
           method: 'POST',
           url: url + '/transfusionreactiontypes'
+        },
+        update: {
+          method: 'PUT'
         }
       }),
 
