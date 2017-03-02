@@ -33,7 +33,7 @@ angular.module('bsis').controller('ManageTransfusionReactionTypeCtrl', function(
       TransfusionReactionTypesService.createTransfusionReactionType($scope.transfusionReactionType, function() {
         $location.path('/transfusionReactionTypes');
       }, function(err) {
-        if (err && err.name) {
+        if (err.data && err.data.name) {
           $scope.transfusionReactionTypeForm.name.$setValidity('duplicate', false);
         }
         $scope.savingTransfusionReactionType = false;
