@@ -126,6 +126,37 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
     columnDefs.push({ displayName: 'Total Unknown', field: 'totalUnknown', width: 55 });
   }
 
+  function initRow(reactionTypes) {
+    var row = {};
+    row.usageSite = '';
+    row.totalTransfusedUneventfully = 0;
+    row.totalNotTransfused = 0;
+    angular.forEach(reactionTypes, function(reactionType) {
+      row[reactionType.name] = 0;
+    });
+    row.totalReactions = 0;
+    row.totalUnknown = 0;
+    return row;
+  }
+
+  function populateRow(row, dataValue) {
+    var reactionType = $filter('filter')(dataValue.cohorts, { category: 'Transfusion Reaction Type'})[0].option;
+    var outcome = $filter('filter')(dataValue.cohorts, { category: 'Transfusion Outcome'})[0].option;
+
+    row.usageSite = dataValue.location.name;
+
+    if (outcome === 'TRANSFUSED_UNEVENTFULLY') {
+      row.totalTransfusedUneventfully += dataValue.value;
+    } else if (outcome === 'NOT_TRANSFUSED') {
+      row.totalNotTransfused += dataValue.value;
+    } else if (outcome === 'UNKNOWN') {
+      row.totalUnknown += dataValue.value;
+    } else if (outcome === 'TRANSFUSION_REACTION_OCCURRED') {
+      row[reactionType] += dataValue.value;
+      row.totalReactions += dataValue.value;
+    }
+  }
+
   $scope.getReport = function(searchForm) {
 
     if (!searchForm.$valid) {
@@ -137,13 +168,13 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
 
     $scope.submitted = true;
 
-    var data = TransfusionsReportingService.generateDataRows(mockDataValues, mockTransfusionReactionTypes);
+    var data = TransfusionsReportingService.generateDataRows(mockDataValues, mockTransfusionReactionTypes, initRow, populateRow);
     $scope.gridOptions.data = data[0];
     $scope.usageSitesNumber = data[1];
 
     // Add summary row
     if ($scope.usageSitesNumber > 1) {
-      $scope.gridOptions.data.push(TransfusionsReportingService.generateSummaryRow(mockDataValues, mockTransfusionReactionTypes));
+      $scope.gridOptions.data.push(TransfusionsReportingService.generateSummaryRow(mockDataValues, mockTransfusionReactionTypes, initRow, populateRow));
     }
 
   };
