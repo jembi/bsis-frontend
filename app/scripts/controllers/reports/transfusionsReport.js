@@ -92,7 +92,7 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
     }
 
     $scope.searching = false;
-    $log.debug(JSON.stringify($scope.search));
+    $log.debug(angular.toJson($scope.search));
 
     $scope.submitted = true;
 
