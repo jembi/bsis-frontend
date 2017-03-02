@@ -39,6 +39,10 @@ angular.module('bsis').controller('TransfusionReactionTypesCtrl', function($scop
     });
   };
 
+  $scope.onRowClick = function(row) {
+    $location.path('/manageTransfusionReactionType/' + row.entity.id);
+  };
+
   $scope.gridOptions = {
     data: [],
     paginationPageSize: 10,
