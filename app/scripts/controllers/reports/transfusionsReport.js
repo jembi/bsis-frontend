@@ -58,7 +58,40 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
     exporterPdfPageSize: 'A4',
     exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
     exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
-    exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth
+    exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
+
+    // PDF header
+    exporterPdfHeader: function() {
+      var sitesNumberLine = 'Usage Sites: ' + $scope.usageSitesNumber;
+      return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
+        'Transfusion Summary Report',
+        ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
+        sitesNumberLine);
+    },
+
+    // Change formatting of PDF
+    exporterPdfCustomFormatter: function(docDefinition) {
+      docDefinition = ReportsLayoutService.highlightTotalRows('All Sites', 0, docDefinition);
+      docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
+      return docDefinition;
+    },
+
+    // PDF footer
+    exporterPdfFooter: function(currentPage, pageCount) {
+      return ReportsLayoutService.generatePdfPageFooter('sites', $scope.usageSitesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+    },
+
+    onRegisterApi: function(gridApi) {
+      $scope.gridApi = gridApi;
+    }
+  };
+
+  $scope.export = function(format) {
+    if (format === 'pdf') {
+      $scope.gridApi.exporter.pdfExport('all', 'all');
+    } else if (format === 'csv') {
+      $scope.gridApi.exporter.csvExport('all', 'all');
+    }
   };
 
   // Report methods
