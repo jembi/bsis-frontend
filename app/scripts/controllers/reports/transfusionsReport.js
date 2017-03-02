@@ -109,6 +109,11 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
     $scope.gridOptions.data = data[0];
     $scope.usageSitesNumber = data[1];
 
+    // Add summary row
+    if ($scope.usageSitesNumber > 1) {
+      $scope.gridOptions.data.push(TransfusionsReportingService.generateSummaryRow(mockDataValues, mockTransfusionReactionTypes));
+    }
+
   };
 
   function init() {
