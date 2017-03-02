@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').factory('TransfusionsReportingService', function() {
+angular.module('bsis').factory('TransfusionsReportingService', function($filter) {
 
   function initRow(reactionTypes) {
     var row = {};
@@ -16,9 +16,8 @@ angular.module('bsis').factory('TransfusionsReportingService', function() {
   }
 
   function populateRow(row, dataValue) {
-    var cohorts = dataValue.cohorts;
-    var reactionType = cohorts[0].option;
-    var outcome = cohorts[1].option;
+    var reactionType = $filter('filter')(dataValue.cohorts, { category: 'Transfusion Reaction Type'})[0].option;
+    var outcome = $filter('filter')(dataValue.cohorts, { category: 'Transfusion Outcome'})[0].option;
 
     row.usageSite = dataValue.location.name;
 
@@ -35,15 +34,16 @@ angular.module('bsis').factory('TransfusionsReportingService', function() {
   }
 
   return {
+    // The response's first element is generated rows, and the second element is the number of usage sites
     generateDataRows: function(dataValues, reactionTypes) {
-      // The response's first element is generated rows, and the second element is the number of usage sites
       var response = [];
-      var rowsForUsageSite = {};
       var generatedRows = [];
       var usageSitesNumber = 0;
+      var rowsForUsageSite = {};
+      var rowForUsageSite = null;
 
       angular.forEach(dataValues, function(dataValue) {
-        var rowForUsageSite = rowsForUsageSite[dataValue.location.name];
+        rowForUsageSite = rowsForUsageSite[dataValue.location.name];
         if (!rowForUsageSite) { // new usageSite
           usageSitesNumber += 1;
           rowForUsageSite = initRow(reactionTypes);
