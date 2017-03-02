@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
+angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, TransfusionsReportingService, DATEFORMAT) {
 
   // Initialize mocks
   var mockUsageSites = [
@@ -26,6 +26,14 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
     {id: 15, name: 'TA-GVHD'},
     {id: 16, name: 'Other'}
   ];
+
+  var mockDataValues = [
+    {'value':3, 'location':{'name':'Maseru'}, 'cohorts':[{'option':'TT-Parasitical'}, {'option':'TRANSFUSION_REACTION_OCCURRED'}]},
+    {'value':6, 'location':{'name':'Maseru'}, 'cohorts':[{'option':'TT-HIV'}, {'option':'TRANSFUSION_REACTION_OCCURRED'}]},
+    {'value':3, 'location':{'name':'Maseru'}, 'cohorts':[{'option':'null'}, {'option':'TRANSFUSED_UNEVENTFULLY'}]},
+    {'value':1, 'location':{'name':'Mohales Hoek'}, 'cohorts':[{'option':'TT-Parasitical'}, {'option':'TRANSFUSION_REACTION_OCCURRED'}]},
+    {'value':10, 'location':{'name':'Mohales Hoek'}, 'cohorts':[{'option':'null'}, {'option':'NOT_TRANSFUSED'}]}];
+
 
   // Initialize variables
   var master = {
@@ -97,6 +105,9 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
     $scope.submitted = true;
 
     populateColumnNames();
+    var data = TransfusionsReportingService.generateDataRows(mockDataValues, mockTransfusionReactionTypes);
+    $scope.gridOptions.data = data[0];
+    $scope.usageSitesNumber = data[1];
 
   };
 
