@@ -28,11 +28,11 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
   ];
 
   var mockDataValues = [
-    {'value':3, 'location':{'name':'Maseru'}, 'cohorts':[{'option':'TT-Parasitical'}, {'option':'TRANSFUSION_REACTION_OCCURRED'}]},
-    {'value':6, 'location':{'name':'Maseru'}, 'cohorts':[{'option':'TT-HIV'}, {'option':'TRANSFUSION_REACTION_OCCURRED'}]},
-    {'value':3, 'location':{'name':'Maseru'}, 'cohorts':[{'option':'null'}, {'option':'TRANSFUSED_UNEVENTFULLY'}]},
-    {'value':1, 'location':{'name':'Mohales Hoek'}, 'cohorts':[{'option':'TT-Parasitical'}, {'option':'TRANSFUSION_REACTION_OCCURRED'}]},
-    {'value':10, 'location':{'name':'Mohales Hoek'}, 'cohorts':[{'option':'null'}, {'option':'NOT_TRANSFUSED'}]}];
+    {'value':3, 'location':{'name':'Maseru'}, 'cohorts':[{'category': 'Transfusion Reaction Type', 'option':'TT-Parasitical'}, {'category': 'Transfusion Outcome', 'option':'TRANSFUSION_REACTION_OCCURRED'}]},
+    {'value':6, 'location':{'name':'Maseru'}, 'cohorts':[{'category': 'Transfusion Reaction Type', 'option':'TT-HIV'}, {'category': 'Transfusion Outcome', 'option':'TRANSFUSION_REACTION_OCCURRED'}]},
+    {'value':3, 'location':{'name':'Maseru'}, 'cohorts':[{'category': 'Transfusion Reaction Type', 'option':'null'}, {'category': 'Transfusion Outcome', 'option':'TRANSFUSED_UNEVENTFULLY'}]},
+    {'value':1, 'location':{'name':'Mohales Hoek'}, 'cohorts':[{'category': 'Transfusion Reaction Type', 'option':'TT-Parasitical'}, {'category': 'Transfusion Outcome', 'option':'TRANSFUSION_REACTION_OCCURRED'}]},
+    {'value':10, 'location':{'name':'Mohales Hoek'}, 'cohorts':[{'category': 'Transfusion Reaction Type', 'option':'null'}, {'category': 'Transfusion Outcome', 'option':'NOT_TRANSFUSED'}]}];
 
 
   // Initialize variables
