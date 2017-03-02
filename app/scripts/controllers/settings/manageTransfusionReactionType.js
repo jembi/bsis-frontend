@@ -37,14 +37,12 @@ angular.module('bsis').controller('ManageTransfusionReactionTypeCtrl', function(
       TransfusionReactionTypesService.updateTransfusionReactionType($scope.transfusionReactionType, function() {
         $location.path('/transfusionReactionTypes');
       }, function(response) {
-        $scope.savingTransfusionReactionType = false;
         onSaveError(response);
       });
     } else {
       TransfusionReactionTypesService.createTransfusionReactionType($scope.transfusionReactionType, function() {
         $location.path('/transfusionReactionTypes');
       }, function(response) {
-        $scope.savingTransfusionReactionType = false;
         onSaveError(response);
       });
     }
