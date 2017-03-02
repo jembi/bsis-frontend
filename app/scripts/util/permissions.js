@@ -107,6 +107,7 @@ angular.module('bsis')
     TTI_REPORTING: 'Reporting - TTI Testing',
     COMPONENTS_REPORTING: 'Reporting - Components',
     DONORS_REPORTING: 'Reporting - Donors',
+    TRANSFUSIONS_REPORTING: 'Reporting - Transfusions',
 
     // Admin and Super-User Permissions
     MANAGE_USERS: 'Manage Users',
