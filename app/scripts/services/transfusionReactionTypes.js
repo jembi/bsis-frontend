@@ -3,6 +3,8 @@
 angular.module('bsis').factory('TransfusionReactionTypesService', function(Api) {
 
   return {
+    getTransfusionReactionTypeById: Api.TransfusionReactionTypes.get,
+
     getTransfusionReactionTypes: function(response) {
       Api.TransfusionReactionTypes.get({}, function(apiResponse) {
         response(apiResponse.transfusionReactionTypes);
