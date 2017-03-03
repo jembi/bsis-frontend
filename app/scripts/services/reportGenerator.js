@@ -35,7 +35,6 @@ angular.module('bsis').factory('ReportGeneratorService', function() {
       angular.forEach(dataValues, function(dataValue) {
         populateRow(summaryRow, dataValue);
       });
-      summaryRow.location = 'All Sites';
       return summaryRow;
     }
   };
