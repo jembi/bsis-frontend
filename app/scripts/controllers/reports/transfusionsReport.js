@@ -168,7 +168,7 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
 
     $scope.submitted = true;
 
-    var data = ReportGeneratorService.generateDataRows(mockDataValues, mockTransfusionReactionTypes, initRow, populateRow);
+    var data = ReportGeneratorService.generateDataRowsGroupingByLocation(mockDataValues, mockTransfusionReactionTypes, initRow, populateRow);
     $scope.gridOptions.data = data[0];
     $scope.usageSitesNumber = data[1];
 

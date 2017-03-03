@@ -4,7 +4,7 @@ angular.module('bsis').factory('ReportGeneratorService', function() {
 
   return {
     // The response's first element is generated rows, and the second element is the number of usage sites
-    generateDataRows: function(dataValues, reactionTypes, initRow, populateRow) {
+    generateDataRowsGroupingByLocation: function(dataValues, reactionTypes, initRow, populateRow) {
       var response = [];
       var generatedRows = [];
       var locationsNumber = 0;
