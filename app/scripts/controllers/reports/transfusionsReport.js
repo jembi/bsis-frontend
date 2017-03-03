@@ -77,7 +77,7 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
 
   $scope.updateAllSites = function() {
     if ($scope.search.usageSite) {
-      $scope.search.allSites = false;
+      $scope.allSites = false;
     }
   };
 
