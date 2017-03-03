@@ -9,11 +9,11 @@
       <label class="col-sm-2 control-label">Usage Site:</label>
       <div class="form-inline col-sm-10">
         <div>
-          <select name="usageSite" class="form-control" ng-model="search.usageSite" ng-change="updateAllSites()" ng-options="usageSite.id as usageSite.name for usageSite in usageSites" ng-required="!search.allSites">
+          <select name="usageSite" class="form-control" ng-model="search.usageSite" ng-change="updateAllSites()" ng-options="usageSite.id as usageSite.name for usageSite in usageSites" ng-required="!allSites">
             <option value="" disabled></option>
           </select>
           <label>
-            <input type="checkbox" name="allSites" ng-model="search.allSites" ng-click="clearUsageSite()" />
+            <input type="checkbox" name="allSites" ng-model="allSites" ng-click="clearUsageSite()" />
             All
           </label>
           <div>

@@ -4,16 +4,14 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
 
   // Initialize variables
   var transfusionReactionTypes = [];
+  var columnDefs = [];
   var master = {
     startDate: moment().subtract(7, 'days').startOf('day').toDate(),
-    endDate: moment().endOf('day').toDate(),
-    allSites: true,
-    usageSite: null
+    endDate: moment().endOf('day').toDate()
   };
   $scope.search = angular.copy(master);
   $scope.dateFormat = DATEFORMAT;
-
-  var columnDefs = [];
+  $scope.allSites = true;
 
   $scope.gridOptions = {
     data: [],
@@ -70,6 +68,7 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
     form.$setUntouched();
     $scope.gridOptions.data = [];
     $scope.submitted = false;
+    $scope.allSites = true;
   };
 
   $scope.clearUsageSite = function() {
