@@ -31,12 +31,14 @@ angular.module('bsis').controller('TransfusionReactionTypesCtrl', function($scop
 
   $scope.getTransfusionReactionTypes = function() {
     TransfusionReactionTypesService.getTransfusionReactionTypes(function(response) {
-      if (response !== false) {
-        $scope.gridOptions.data = response;
-        $scope.transfusionReactionTypes = response;
-        $scope.transfusionReactionTypesCount = $scope.transfusionReactionTypes.length;
-      }
-    });
+      $scope.gridOptions.data = response.transfusionReactionTypes;
+      $scope.transfusionReactionTypes = response.transfusionReactionTypes;
+      $scope.transfusionReactionTypesCount = $scope.transfusionReactionTypes.length;
+    }, $log.error);
+  };
+
+  $scope.onRowClick = function(row) {
+    $location.path('/manageTransfusionReactionType/' + row.entity.id);
   };
 
   $scope.gridOptions = {

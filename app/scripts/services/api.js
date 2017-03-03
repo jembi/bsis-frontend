@@ -515,7 +515,7 @@ angular.module('bsis')
         }
       }),
 
-      TransfusionReactionTypes: $resource(url + '/transfusionreactiontypes/', {}, {
+      TransfusionReactionTypes: $resource(url + '/transfusionreactiontypes/:id', {id: '@id'}, {
         search: {
           method: 'GET',
           url: url + '/transfusionreactiontypes/search'
@@ -523,6 +523,9 @@ angular.module('bsis')
         add: {
           method: 'POST',
           url: url + '/transfusionreactiontypes'
+        },
+        update: {
+          method: 'PUT'
         }
       }),
 
