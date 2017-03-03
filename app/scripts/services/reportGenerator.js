@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').factory('TransfusionsReportingService', function() {
+angular.module('bsis').factory('ReportGeneratorService', function() {
 
   return {
     // The response's first element is generated rows, and the second element is the number of usage sites

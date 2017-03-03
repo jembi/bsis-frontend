@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, TransfusionsReportingService, DATEFORMAT) {
+angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, ReportGeneratorService, DATEFORMAT) {
 
   // Initialize mocks
   var mockUsageSites = [
@@ -168,13 +168,13 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
 
     $scope.submitted = true;
 
-    var data = TransfusionsReportingService.generateDataRows(mockDataValues, mockTransfusionReactionTypes, initRow, populateRow);
+    var data = ReportGeneratorService.generateDataRows(mockDataValues, mockTransfusionReactionTypes, initRow, populateRow);
     $scope.gridOptions.data = data[0];
     $scope.usageSitesNumber = data[1];
 
     // Add summary row
     if ($scope.usageSitesNumber > 1) {
-      $scope.gridOptions.data.push(TransfusionsReportingService.generateSummaryRow(mockDataValues, mockTransfusionReactionTypes, initRow, populateRow));
+      $scope.gridOptions.data.push(ReportGeneratorService.generateSummaryRow(mockDataValues, mockTransfusionReactionTypes, initRow, populateRow));
     }
 
   };
