@@ -3,10 +3,7 @@
 angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, ReportGeneratorService, DATEFORMAT) {
 
   // Initialize variables
-  var usageSites = [];
   var transfusionReactionTypes = [];
-
-  // Initialize variables
   var master = {
     startDate: moment().subtract(7, 'days').startOf('day').toDate(),
     endDate: moment().endOf('day').toDate(),
@@ -29,7 +26,7 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
     exporterPdfPageSize: 'A4',
     exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
     exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
-    exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
+    exporterPdfMaxGridWidth: 600,
 
     // PDF header
     exporterPdfHeader: function() {
@@ -86,15 +83,27 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
   };
 
   function populateColumnNames() {
-    columnDefs.push({ displayName: 'Usage Site', field: 'usageSite', width: '**', minWidth: 150 });
-    columnDefs.push({ displayName: 'Total Transfused Uneventfully', field: 'totalTransfusedUneventfully', width: 55 });
-    columnDefs.push({ displayName: 'Total Not Transfused', field: 'totalNotTransfused', width: 55 });
-    angular.forEach(transfusionReactionTypes, function(adverseEventType) {
-      var displayName = ReportsLayoutService.hyphenateLongWords(adverseEventType.name, 11);
-      columnDefs.push({displayName: displayName, field: adverseEventType.name, width: '**', minWidth: 80, maxWidth: 100});
+
+    var columnChars = transfusionReactionTypes.length > 12 ? 6 : transfusionReactionTypes.length > 8 ? 8 : 12;
+
+    columnDefs.push({ displayName: 'Usage Site', field: 'usageSite', width: '**', minWidth: 150, maxWidth: 250 });
+
+    var totalTransfusedUneventfully = ReportsLayoutService.hyphenateLongWords('Total Transfused Uneventfully', columnChars);
+    columnDefs.push({ displayName: totalTransfusedUneventfully, field: 'totalTransfusedUneventfully'});
+
+    var totalNotTransfused = ReportsLayoutService.hyphenateLongWords('Total Not Transfused', columnChars);
+    columnDefs.push({ displayName: totalNotTransfused, field: 'totalNotTransfused'});
+
+    angular.forEach(transfusionReactionTypes, function(transfusionReactionType) {
+      var reactionType = ReportsLayoutService.hyphenateLongWords(transfusionReactionType.name, columnChars);
+      columnDefs.push({displayName: reactionType, field: transfusionReactionType.name});
     });
-    columnDefs.push({ displayName: 'Total Reactions', field: 'totalReactions', width: 55 });
-    columnDefs.push({ displayName: 'Total Unknown', field: 'totalUnknown', width: 55 });
+
+    var totalReactions = ReportsLayoutService.hyphenateLongWords('Total Reactions', columnChars);
+    columnDefs.push({ displayName: totalReactions, field: 'totalReactions'});
+
+    var totalUnknown = ReportsLayoutService.hyphenateLongWords('Total Unknown', columnChars);
+    columnDefs.push({ displayName: totalUnknown, field: 'totalUnknown'});
   }
 
   function initRow(reactionTypes) {
@@ -165,7 +174,6 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
       $scope.usageSites = response.usageSites;
       transfusionReactionTypes = response.transfusionReactionTypes;
       populateColumnNames();
-      $scope.usageSites = usageSites;
       $scope.usageSitesNumber = 0;
     }, $log.error);
   }
