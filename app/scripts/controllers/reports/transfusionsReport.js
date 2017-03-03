@@ -2,30 +2,9 @@
 
 angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, ReportGeneratorService, DATEFORMAT) {
 
-  // Initialize mocks
-  var mockUsageSites = [
-    {id: 1, name: 'Leribe'},
-    {id: 2, name: 'Maseru'}
-  ];
-
-  var mockTransfusionReactionTypes = [
-    {id: 1, name: 'ABO incompatibility'},
-    {id: 2, name: 'Allo-antibody'},
-    {id: 3, name: 'NI Haemolysis'},
-    {id: 4, name: 'Anaphylaxis'},
-    {id: 5, name: 'TACO'},
-    {id: 6, name: 'TRALI'},
-    {id: 7, name: 'TTBI'},
-    {id: 8, name: 'TT-HBV'},
-    {id: 9, name: 'TT-HCV'},
-    {id: 10, name: 'TT-HIV'},
-    {id: 11, name: 'TT-Other'},
-    {id: 12, name: 'TT-Malaria'},
-    {id: 13, name: 'TT-Parasitical'},
-    {id: 14, name: 'PTP'},
-    {id: 15, name: 'TA-GVHD'},
-    {id: 16, name: 'Other'}
-  ];
+  // Initialize variables
+  var usageSites = [];
+  var transfusionReactionTypes = [];
 
   var mockDataValues = [
     {'value':3, 'location':{'name':'Maseru'}, 'cohorts':[{'category': 'Transfusion Reaction Type', 'option':'TT-Parasitical'}, {'category': 'Transfusion Outcome', 'option':'TRANSFUSION_REACTION_OCCURRED'}]},
@@ -118,7 +97,7 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
     columnDefs.push({ displayName: 'Usage Site', field: 'usageSite', width: '**', minWidth: 150 });
     columnDefs.push({ displayName: 'Total Transfused Uneventfully', field: 'totalTransfusedUneventfully', width: 55 });
     columnDefs.push({ displayName: 'Total Not Transfused', field: 'totalNotTransfused', width: 55 });
-    angular.forEach(mockTransfusionReactionTypes, function(adverseEventType) {
+    angular.forEach(transfusionReactionTypes, function(adverseEventType) {
       var displayName = ReportsLayoutService.hyphenateLongWords(adverseEventType.name, 11);
       columnDefs.push({displayName: displayName, field: adverseEventType.name, width: '**', minWidth: 80, maxWidth: 100});
     });
@@ -168,13 +147,13 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
 
     $scope.submitted = true;
 
-    var data = ReportGeneratorService.generateDataRowsGroupingByLocation(mockDataValues, mockTransfusionReactionTypes, initRow, populateRow);
+    var data = ReportGeneratorService.generateDataRowsGroupingByLocation(mockDataValues, transfusionReactionTypes, initRow, populateRow);
     $scope.gridOptions.data = data[0];
     $scope.usageSitesNumber = data[1];
 
     // Add summary row
     if ($scope.usageSitesNumber > 1) {
-      var summaryRow = ReportGeneratorService.generateSummaryRow(mockDataValues, mockTransfusionReactionTypes, initRow, populateRow);
+      var summaryRow = ReportGeneratorService.generateSummaryRow(mockDataValues, transfusionReactionTypes, initRow, populateRow);
       summaryRow.usageSite = 'All Sites';
       $scope.gridOptions.data.push(summaryRow);
     }
@@ -182,9 +161,13 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
   };
 
   function init() {
-    populateColumnNames();
-    $scope.usageSites = mockUsageSites;
-    $scope.usageSitesNumber = 0;
+    ReportsService.getTransfusionsReportForm(function(response) {
+      $scope.usageSites = response.usageSites;
+      transfusionReactionTypes = response.transfusionReactionTypes;
+      populateColumnNames();
+      $scope.usageSites = usageSites;
+      $scope.usageSitesNumber = 0;
+    }, $log.error);
   }
 
   init();

@@ -28,6 +28,8 @@ angular.module('bsis')
       generateComponentProductionReport: Api.ComponentProductionReport.generate,
       getComponentProductionReportForm: Api.ComponentProductionReport.getForm,
       generateDonorsAdverseEventsReport: Api.DonorsAdverseEventsReport.generate,
-      getDonorsAdverseEventsReportForm: Api.DonorsAdverseEventsReport.getForm
+      getDonorsAdverseEventsReportForm: Api.DonorsAdverseEventsReport.getForm,
+      generateTransfusionsReport: Api.TransfusionsReport.generate,
+      getTransfusionsReportForm: Api.TransfusionsReport.getForm
     };
   });
