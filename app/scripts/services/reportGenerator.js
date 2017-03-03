@@ -7,26 +7,26 @@ angular.module('bsis').factory('ReportGeneratorService', function() {
     generateDataRows: function(dataValues, reactionTypes, initRow, populateRow) {
       var response = [];
       var generatedRows = [];
-      var usageSitesNumber = 0;
-      var rowsForUsageSite = {};
-      var rowForUsageSite = null;
+      var locationsNumber = 0;
+      var rowsForLocation = {};
+      var rowForLocation = null;
 
       angular.forEach(dataValues, function(dataValue) {
-        rowForUsageSite = rowsForUsageSite[dataValue.location.name];
-        if (!rowForUsageSite) { // new usageSite
-          usageSitesNumber += 1;
-          rowForUsageSite = initRow(reactionTypes);
-          rowsForUsageSite[dataValue.location.name] = rowForUsageSite;
+        rowForLocation = rowsForLocation[dataValue.location.name];
+        if (!rowForLocation) { // new location
+          locationsNumber += 1;
+          rowForLocation = initRow(reactionTypes);
+          rowsForLocation[dataValue.location.name] = rowForLocation;
         }
-        populateRow(rowForUsageSite, dataValue);
+        populateRow(rowForLocation, dataValue);
       });
 
-      angular.forEach(rowsForUsageSite, function(row) {
+      angular.forEach(rowsForLocation, function(row) {
         generatedRows.push(row);
       });
 
       response.push(generatedRows);
-      response.push(usageSitesNumber);
+      response.push(locationsNumber);
       return response;
     },
 
@@ -35,7 +35,7 @@ angular.module('bsis').factory('ReportGeneratorService', function() {
       angular.forEach(dataValues, function(dataValue) {
         populateRow(summaryRow, dataValue);
       });
-      summaryRow.usageSite = 'All Sites';
+      summaryRow.location = 'All Sites';
       return summaryRow;
     }
   };
