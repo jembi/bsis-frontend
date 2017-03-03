@@ -9,7 +9,7 @@
       <label class="col-sm-2 control-label">Usage Site:</label>
       <div class="form-inline col-sm-10">
         <div>
-          <select name="usageSite" class="form-control" ng-model="search.usageSite" ng-change="updateAllSites()" ng-options="usageSite.id as usageSite.name for usageSite in usageSites" ng-required="!allSites">
+          <select name="usageSite" class="form-control" ng-model="search.transfusionSiteId" ng-change="updateAllSites()" ng-options="usageSite.id as usageSite.name for usageSite in usageSites" ng-required="!allSites">
             <option value="" disabled></option>
           </select>
           <label>
