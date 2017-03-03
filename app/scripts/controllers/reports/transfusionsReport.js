@@ -6,14 +6,6 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
   var usageSites = [];
   var transfusionReactionTypes = [];
 
-  var mockDataValues = [
-    {'value':3, 'location':{'name':'Maseru'}, 'cohorts':[{'category': 'Transfusion Reaction Type', 'option':'TT-Parasitical'}, {'category': 'Transfusion Outcome', 'option':'TRANSFUSION_REACTION_OCCURRED'}]},
-    {'value':6, 'location':{'name':'Maseru'}, 'cohorts':[{'category': 'Transfusion Reaction Type', 'option':'TT-HIV'}, {'category': 'Transfusion Outcome', 'option':'TRANSFUSION_REACTION_OCCURRED'}]},
-    {'value':3, 'location':{'name':'Maseru'}, 'cohorts':[{'category': 'Transfusion Reaction Type', 'option':'null'}, {'category': 'Transfusion Outcome', 'option':'TRANSFUSED_UNEVENTFULLY'}]},
-    {'value':1, 'location':{'name':'Mohales Hoek'}, 'cohorts':[{'category': 'Transfusion Reaction Type', 'option':'TT-Parasitical'}, {'category': 'Transfusion Outcome', 'option':'TRANSFUSION_REACTION_OCCURRED'}]},
-    {'value':10, 'location':{'name':'Mohales Hoek'}, 'cohorts':[{'category': 'Transfusion Reaction Type', 'option':'null'}, {'category': 'Transfusion Outcome', 'option':'NOT_TRANSFUSED'}]}];
-
-
   // Initialize variables
   var master = {
     startDate: moment().subtract(7, 'days').startOf('day').toDate(),
@@ -142,22 +134,30 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
       return;
     }
 
-    $scope.searching = false;
-    $log.debug(angular.toJson($scope.search));
+    $scope.searching = true;
+    ReportsService.generateTransfusionsReport($scope.search, function(report) {
+      $scope.searching = false;
+      if (report.dataValues.length > 0) {
+        var data = ReportGeneratorService.generateDataRowsGroupingByLocation(report.dataValues, transfusionReactionTypes, initRow, populateRow);
+        $scope.gridOptions.data = data[0];
+        $scope.usageSitesNumber = data[1];
 
-    $scope.submitted = true;
-
-    var data = ReportGeneratorService.generateDataRowsGroupingByLocation(mockDataValues, transfusionReactionTypes, initRow, populateRow);
-    $scope.gridOptions.data = data[0];
-    $scope.usageSitesNumber = data[1];
-
-    // Add summary row
-    if ($scope.usageSitesNumber > 1) {
-      var summaryRow = ReportGeneratorService.generateSummaryRow(mockDataValues, transfusionReactionTypes, initRow, populateRow);
-      summaryRow.usageSite = 'All Sites';
-      $scope.gridOptions.data.push(summaryRow);
-    }
-
+        // Add summary row
+        if ($scope.usageSitesNumber > 1) {
+          var summaryRow = ReportGeneratorService.generateSummaryRow(report.dataValues, transfusionReactionTypes, initRow, populateRow);
+          summaryRow.usageSite = 'All Sites';
+          $scope.gridOptions.data.push(summaryRow);
+        }
+        $scope.gridOptions.paginationCurrentPage = 1;
+      } else {
+        $scope.gridOptions.data = [];
+        $scope.usageSitesNumber = 0;
+      }
+      $scope.submitted = true;
+    }, function(err) {
+      $scope.searching = false;
+      $log.log(err);
+    });
   };
 
   function init() {
