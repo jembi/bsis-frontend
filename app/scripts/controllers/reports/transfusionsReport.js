@@ -30,7 +30,7 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
     exporterPdfHeader: function() {
       var sitesNumberLine = 'Usage Sites: ' + $scope.usageSitesNumber;
       return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-        'Transfusion Summary Report',
+        'Transfusions Summary Report',
         ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
         sitesNumberLine);
     },
