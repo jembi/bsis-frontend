@@ -72,7 +72,7 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
   };
 
   $scope.clearUsageSite = function() {
-    $scope.search.usageSite = null;
+    $scope.search.transfusionSiteId = null;
   };
 
   $scope.updateAllSites = function() {
