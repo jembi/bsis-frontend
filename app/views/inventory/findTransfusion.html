@@ -1,0 +1,113 @@
+<div class="col-sm-3 col-md-2" ng-include="'views/inventory/sidebar.html'">where is sidebar</div>
+<div class="col-sm-9 col-md-10 main">
+  <h3 class="page-header">Find Transfusions</h3>
+
+  <form class="form-horizontal col-sm-12" name="searchForm" ng-submit="findTransfusion(searchForm)" novalidate>
+
+    <div class="clearfix form-group">
+      <label class="col-sm-2 control-label">DIN</label>
+      <div class="form-inline col-sm-10">
+        <div style="display: inline-block; vertical-align: top;">
+          <input class="form-control" name="donationIdentificationNumber" ng-model="searchParams.donationIdentificationNumber" ng-required="searchParams.componentCode">
+          <ng-messages for="searchForm.donationIdentificationNumber.$error" role="alert" ng-show="searchForm.$submitted">
+            <ng-messages-include src="messages.html"></ng-messages-include>
+          </ng-messages>
+        </div>
+        <label class="control-label">Component Code</label>
+        <div style="display: inline-block; vertical-align: top;">
+          <input class="form-control" name="componentCode" ng-model="searchParams.componentCode" ng-required="searchParams.donationIdentificationNumber" size="8">
+          <ng-messages for="searchForm.componentCode.$error" role="alert" ng-show="searchForm.$submitted">
+            <ng-messages-include src="messages.html"></ng-messages-include>
+          </ng-messages>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Component Type</label>
+      <div class="form-inline col-sm-10">
+        <select name="componentType" class="form-control" ng-model="searchParams.componentTypeId" style="min-width: 350px;">
+          <option value=""></option>
+          <option ng-repeat="componentType in componentTypes" value="{{componentType.id}}">
+            {{componentType.componentTypeName}}
+          </option>
+        </select>
+        <div>
+        <ng-messages for="searchForm.componentType.$error" role="alert" ng-show="searchForm.$submitted">
+        <ng-messages-include src="messages.html"></ng-messages-include>
+      </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Transfusion Site</label>
+      <div class="form-inline col-sm-10">
+        <select name="receivedFrom" class="form-control" ng-model="searchParams.receivedFromId" style="min-width: 350px;">
+          <option value="" disabled></option>
+          <option ng-repeat="transfusionSite in transfusionSites" value="{{transfusionSite.id}}">
+            {{transfusionSite.name}}
+          </option>
+        </select>
+      <div>
+        <ng-messages for="searchForm.receivedFrom.$error" role="alert" ng-show="searchForm.$submitted">
+        <ng-messages-include src="messages.html"></ng-messages-include>
+      </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Transfusion Outcomes</label>
+      <div class="form-inline col-sm-10">
+        <select name="transfusionOutcome" ng-model="searchParams.transfusionOutcome" class="form-control" ng-options="outcome as (outcome | titleCase) for outcome in transfusionOutcomes" style="min-width: 350px;">
+          <option value="" disabled></option>
+        </select> 
+        <ng-messages for="searchParams.transfusionOutcome.$error" role="alert" ng-show="searchParams.$submitted">
+          <ng-messages-include src="messages.html"></ng-messages-include>
+        </ng-messages>    
+      </div>
+    </div>
+
+    <div class="clearfix form-group">
+        <label class="col-sm-2 control-label">Period:</label>
+        <div class="form-inline col-sm-10">
+            <div>
+                <dateselect name="startDate" ng-model="searchParams.startDate" format="dateFormat" ng-class="{'has-error' : (selectPeriodForm.startDate.$invalid)}" ng-required="true" ui-date-end="{{searchParams.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
+                <span><em>To:</em></span>
+                <dateselect-end name="endDate" ng-model="searchParams.endDate" format="dateFormat" ng-class="{'has-error' : (searchParams.endDate.$invalid)}" ng-required="true" ui-date-start="{{searchParams.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ui-date-range min-date="search.startDate"></dateselect-end>
+            </div>
+            <div>
+              <ng-messages for="searchParams.startDate.$error" role="alert" ng-show="searchParams.$submitted">
+                <small class="error" ng-message="required">Select a valid date</small>
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
+              <ng-messages for="searchParams.endDate.$error" role="alert" ng-show="searchParams.$submitted && !searchParams.startDate.$invalid">
+                <small class="error" ng-message="required">Select a valid date</small>
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
+            </div>
+        </div>
+      </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label"></label>
+      <div class="col-sm-10">
+        <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}}
+        </button>
+        <button class="btn btn-primary" type="button" ng-click="clearSearch(searchForm)">Clear</button>
+      </div>
+    </div>
+
+  </form>
+  
+
+  <div class="panel panel-default col-sm-12" ng-if="submitted">
+    <div class="panel-body">
+      <p>Data Export: 
+        <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')">PDF</button>
+        <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
+      </p>
+      <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
+    </div>
+  </div>
+
+</div>
