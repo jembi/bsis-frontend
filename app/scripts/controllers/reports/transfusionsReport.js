@@ -119,11 +119,8 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
   }
 
   function populateRow(row, dataValue) {
-    var reactionType = $filter('filter')(dataValue.cohorts, { category: 'Transfusion Reaction Type'})[0].option;
-    var outcome = $filter('filter')(dataValue.cohorts, { category: 'Transfusion Outcome'})[0].option;
-
     row.usageSite = dataValue.location.name;
-
+    var outcome = ReportGeneratorService.getCohort(dataValue, 'Transfusion Outcome').option;
     if (outcome === 'TRANSFUSED_UNEVENTFULLY') {
       row.totalTransfusedUneventfully += dataValue.value;
     } else if (outcome === 'NOT_TRANSFUSED') {
@@ -131,6 +128,7 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
     } else if (outcome === 'UNKNOWN') {
       row.totalUnknown += dataValue.value;
     } else if (outcome === 'TRANSFUSION_REACTION_OCCURRED') {
+      var reactionType = ReportGeneratorService.getCohort(dataValue, 'Transfusion Reaction Type').option;
       row[reactionType] += dataValue.value;
       row.totalReactions += dataValue.value;
     }
