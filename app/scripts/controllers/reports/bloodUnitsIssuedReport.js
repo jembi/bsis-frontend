@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('BloodUnitsIssuedReportCtrl', function($scope, $log, $filter, DATEFORMAT, ReportsService, ReportsLayoutService) {
+  .controller('BloodUnitsIssuedReportCtrl', function($scope, $log, $filter, DATEFORMAT, ReportsService, ReportGeneratorService, ReportsLayoutService) {
 
     // Initialize variables
     var master = {
@@ -10,6 +10,7 @@ angular.module('bsis')
     };
 
     var componentTypes = [];
+    var mergedData = [];
 
     $scope.dateFormat = DATEFORMAT;
     $scope.search = angular.copy(master);
@@ -22,13 +23,17 @@ angular.module('bsis')
 
     // Report methods
 
-    function createZeroValuesRow(componentType) {
+    function createZeroValuesRow(componentType, distributionSite) {
       var zeroValuesRow = {};
+      zeroValuesRow.cohorts = distributionSite;
       zeroValuesRow.cohorts = componentType;
       zeroValuesRow.ordered = 0;
       zeroValuesRow.issued = 0;
-      zeroValuesRow.gap = 0;
-      zeroValuesRow.rate = $filter('number')(0, 2);
+      zeroValuesRow.requested = 0;
+      zeroValuesRow.orderedGap = 0;
+      zeroValuesRow.requestedGap = 0;
+      zeroValuesRow.orderedRate = $filter('number')(0, 2);
+      zeroValuesRow.requestedRate = $filter('number')(0, 2);
       return zeroValuesRow;
     }
 
@@ -40,34 +45,43 @@ angular.module('bsis')
         }
         allComponentTypesRow.ordered = allComponentTypesRow.ordered + row.ordered;
         allComponentTypesRow.issued = allComponentTypesRow.issued + row.issued;
-        allComponentTypesRow.gap = allComponentTypesRow.gap + row.gap;
-        allComponentTypesRow.rate = $filter('number')(allComponentTypesRow.issued / allComponentTypesRow.ordered * 100, 2);
+        allComponentTypesRow.requested = allComponentTypesRow.requested + row.requested;
+        allComponentTypesRow.oderedGap = allComponentTypesRow.oderedGap + row.oderedGap;
+        allComponentTypesRow.orderedRate = $filter('number')(allComponentTypesRow.issued / allComponentTypesRow.ordered * 100, 2);
+        allComponentTypesRow.requestedGap = allComponentTypesRow.requestedGap + row.requestedGap;
+        allComponentTypesRow.requestedRate = $filter('number')(allComponentTypesRow.issued / allComponentTypesRow.requested * 100, 2);
       });
       return allComponentTypesRow;
     }
 
-    function mergeData(dataValues) {
-
-      var mergedData = [];
-
+    function initRow(types) {
       // initialise the componentTypes rows
-      angular.forEach(componentTypes, function(componentType) {
+      angular.forEach(types, function(componentType) {
         mergedData.push(createZeroValuesRow(componentType.componentTypeName));
       });
+    }
+
+    function mergeData(dataValues) {
 
       // merge data from report
       angular.forEach(dataValues, function(newRow) {
-        var componentType = $filter('filter')(newRow.cohorts, { category: 'Component Type'})[0].option;
+        var componentType = ReportGeneratorService.getCohort(newRow, 'Component Type').option;
+        var distributionSite = ReportGeneratorService.getCohort(newRow, 'Distribution scope').option;
         var rowData = $filter('filter')(mergedData, { cohorts: componentType})[0];
+        rowData = $filter('filter')(mergedData, { cohorts: distributionSite})[0];
 
-        // add new ordered/issued values and calculate gap & rate
+        // add new ordered/issued/requested values and calculate gaps & rates
         if (newRow.id === 'unitsOrdered') {
           rowData.ordered = rowData.ordered + newRow.value;
         } else if (newRow.id === 'unitsIssued') {
           rowData.issued = rowData.issued + newRow.value;
+        } else if (newRow.id === 'unitsRequested') {
+          rowData.requested = rowData.requested + newRow.value;
         }
-        rowData.gap = rowData.ordered - rowData.issued;
-        rowData.rate = $filter('number')(rowData.issued / rowData.ordered * 100, 2);
+        rowData.orderedGap = rowData.ordered - rowData.issued;
+        rowData.orderedRate = $filter('number')(rowData.issued / rowData.ordered * 100, 2);
+        rowData.requestedGap = rowData.requested - rowData.issued;
+        rowData.requestedRate = $filter('number')(rowData.issued / rowData.requested * 100, 2);
       });
 
       // add the Total Blood Units row
@@ -104,7 +118,8 @@ angular.module('bsis')
       ReportsService.generateBloodUnitsIssuedReport(period, function(report) {
         $scope.searching = false;
         if (report.dataValues.length > 0) {
-          mergeData(report.dataValues);
+          var data = ReportGeneratorService.generateDataRowsGroupingByLocation(report.dataValues, componentTypes, initRow, mergeData);
+          $scope.gridOptions.data = data[0];
           $scope.gridOptions.paginationCurrentPage = 1;
         } else {
           $scope.gridOptions.data = [];
@@ -118,11 +133,16 @@ angular.module('bsis')
 
     // Grid ui variables and methods
     var columnDefs = [
+      { displayName: 'Distribution Site', field: 'cohorts', width: '**'},
       { displayName: 'Component Type', field: 'cohorts', width: '**'},
       { displayName: 'Ordered', field: 'ordered', width: 100 },
       { displayName: 'Issued', field: 'issued', width: 100 },
-      { displayName: 'Gap', field: 'gap', width: 100 },
-      { displayName: '% Issued vs Ordered', field: 'rate', width: 250 }
+      { displayName: 'Gap', field: 'orderedGap', width: 100 },
+      { displayName: '% Issued vs Ordered', field: 'rate', width: 250 },
+      { displayName: 'Patient Requests', field: 'requested', width: 100 },
+      { displayName: 'Issued', field: 'issued', width: 100 },
+      { displayName: 'Gap', field: 'requestedGap', width: 100 },
+      { displayName: '% Issued vs Requests', field: 'requestedRate', width: 250 }
     ];
 
     $scope.gridOptions = {
@@ -132,7 +152,7 @@ angular.module('bsis')
       columnDefs: columnDefs,
       minRowsToShow: 12,
 
-      exporterPdfOrientation: 'portrait',
+      exporterPdfOrientation: 'landscape',
       exporterPdfPageSize: 'A4',
       exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
       exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
