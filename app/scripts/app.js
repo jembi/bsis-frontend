@@ -405,6 +405,13 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         enabled: UI.REPORTS_TAB_ENABLED,
         reloadOnSearch: false
       })
+      .when('/transfusionsReport', {
+        templateUrl: 'views/reports/transfusionsReport.html',
+        controller: 'TransfusionsReportCtrl',
+        permission: PERMISSIONS.TRANSFUSIONS_REPORTING,
+        enabled: UI.REPORTS_TAB_ENABLED,
+        reloadOnSearch: false
+      })
 
       // MOBILE URLs
       .when('/mobile', {

@@ -150,7 +150,8 @@ angular.module('bsis')
       '/donorsDeferredReport',
       '/unitsDiscardedReport',
       '/componentsProducedReport',
-      '/donorsAdverseEventsReport'
+      '/donorsAdverseEventsReport',
+      '/transfusionsReport'
     ];
 
     var mobileRoutes = [
