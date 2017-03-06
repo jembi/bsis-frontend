@@ -1,8 +1,13 @@
 'use strict';
 
-angular.module('bsis').factory('ReportGeneratorService', function() {
+angular.module('bsis').factory('ReportGeneratorService', function($filter) {
 
   return {
+    // returns the data value's cohort
+    getCohort: function(dataValue, category) {
+      return $filter('filter')(dataValue.cohorts, { category: category})[0];
+    },
+
     // The response's first element is generated rows, and the second element is the number of usage sites
     generateDataRowsGroupingByLocation: function(dataValues, reactionTypes, initRow, populateRow) {
       var response = [];
