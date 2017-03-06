@@ -464,6 +464,17 @@ angular.module('bsis')
         }
       }),
 
+      TransfusionsReport: $resource(url + '/reports/transfusionsummary', {}, {
+        generate: {
+          method: 'GET',
+          url: url + '/reports/transfusionsummary/generate'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/transfusionsummary/form'
+        }
+      }),
+
       OrderForms: $resource(url + '/orderforms/:id', {id: '@id'}, {
         update: {method: 'PUT'},
         search: {
@@ -515,7 +526,7 @@ angular.module('bsis')
         }
       }),
 
-      TransfusionReactionTypes: $resource(url + '/transfusionreactiontypes/', {}, {
+      TransfusionReactionTypes: $resource(url + '/transfusionreactiontypes/:id', {id: '@id'}, {
         search: {
           method: 'GET',
           url: url + '/transfusionreactiontypes/search'
@@ -523,6 +534,9 @@ angular.module('bsis')
         add: {
           method: 'POST',
           url: url + '/transfusionreactiontypes'
+        },
+        update: {
+          method: 'PUT'
         }
       }),
 
