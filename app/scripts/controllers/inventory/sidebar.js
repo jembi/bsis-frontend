@@ -27,6 +27,9 @@ angular.module('bsis').controller('InventorySidebarCtrl', function($scope, Routi
     }, {
       path: '/recordTransfusions',
       subpaths: []
+    }, {
+      path: '/findTransfusion',
+      subpaths: []
     }
   ];
 

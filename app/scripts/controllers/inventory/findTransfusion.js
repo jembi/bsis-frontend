@@ -12,6 +12,19 @@ angular.module('bsis')
     $scope.submitted = false;
     $scope.searching = false;
 
+    $scope.clearFields = function() {
+      $scope.searchParams.receivedFromId = null;
+      $scope.searchParams.transfusionOutcome = null;
+
+      if ($scope.searchParams.donationIdentificationNumber) {
+        $scope.searchParams.startDate = null;
+        $scope.searchParams.endDate = null;
+      } else {
+        $scope.searchParams.startDate = moment().subtract(7, 'days').startOf('day').toDate();
+        $scope.searchParams.endDate = moment().endOf('day').toDate();
+      }
+    };
+
     var master = {
       donationIdentificationNumber: null,
       componentCode: null,
@@ -141,6 +154,22 @@ angular.module('bsis')
         $log.error(err);
         $scope.searching = false;
       });
+    };
+
+    $scope.setComponentType = function(componentCode) {
+      if (componentCode) {
+        var filteredComponentTypes = $scope.componentTypes.filter(function(componentType) {
+          return componentCode.indexOf(componentType.componentTypeCode) !== -1;
+        });
+
+        if (filteredComponentTypes.length > 0) {
+          $scope.searchParams.componentTypeId = filteredComponentTypes[0].id;
+        } else {
+          $scope.searchParams.componentTypeId = null;
+        }
+      } else {
+        $scope.searchParams.componentTypeId = null;
+      }
     };
 
     $scope.export = function(format) {
