@@ -86,7 +86,7 @@ angular.module('bsis')
       exporterPdfHeader: function() {
         var finalArray = [
           {
-            text: 'Transfusions',
+            text: 'Component Transfusion Information',
             fontSize: 10,
             bold: true,
             margin: [30, 20, 0, 0] // [left, top, right, bottom]
@@ -95,10 +95,32 @@ angular.module('bsis')
         return finalArray;
       },
 
+      exporterPdfCustomFormatter: function(docDefinition) {
+        var componentType = $filter('filter')($scope.componentTypes, function(ct) {
+          return ct.id == $scope.searchParams.componentTypeId;
+        });
+        var transfusionSite = $filter('filter')($scope.transfusionSites, function(usageSite) {
+          return usageSite.id == $scope.searchParams.receivedFromId;
+        });
+        var transfusionOutcome = $scope.searchParams.transfusionOutcome;
+        var searchParams = [{
+          text: [
+            {text: 'Component Type: ', bold: true},
+            (componentType && componentType[0] ? componentType[0].componentTypeName : 'All') + '          ',
+            {text: 'Transfusion Site: ', bold: true},
+            (transfusionSite && transfusionSite[0] ? transfusionSite[0].name : 'All') + '          ',
+            {text: 'Transfusion Outcome: ', bold: true},
+            (transfusionOutcome ? transfusionOutcome : 'All')
+          ], margin: [-10, 0, 0, 0], fontSize: 7
+        }];
+        docDefinition.content = searchParams.concat(docDefinition.content);
+        return docDefinition;
+      },
+
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
         var columns = [
-          {text: 'Number of components: ' + $scope.gridOptions.data.length, width: 'auto'},
+          {text: 'Total Units: ' + $scope.gridOptions.data.length, width: 'auto'},
           {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
           {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
         ];
