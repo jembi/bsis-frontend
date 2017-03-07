@@ -18,7 +18,7 @@ angular.module('bsis')
     function initialise() {
       ReportsService.getBloodUnitsIssuedReportForm(function(response) {
         componentTypes = response.componentTypes;
-        $scope.distributionsSiteNumber = 0;
+        $scope.distributionSitesNumber = 0;
       }, $log.error);
     }
 
