@@ -9,85 +9,52 @@ angular.module('bsis')
       endDate: moment().endOf('day').toDate()
     };
 
-    var componentTypes = [];
-    var mergedData = [];
-
     $scope.dateFormat = DATEFORMAT;
     $scope.search = angular.copy(master);
 
-    function initialise() {
-      ReportsService.getBloodUnitsIssuedReportForm(function(response) {
-        componentTypes = response.componentTypes;
-      }, $log.error);
-    }
-
     // Report methods
 
-    function createZeroValuesRow(componentType, distributionSite) {
-      var zeroValuesRow = {};
-      zeroValuesRow.cohorts = distributionSite;
-      zeroValuesRow.cohorts = componentType;
-      zeroValuesRow.ordered = 0;
-      zeroValuesRow.issued = 0;
-      zeroValuesRow.requested = 0;
-      zeroValuesRow.orderedGap = 0;
-      zeroValuesRow.requestedGap = 0;
-      zeroValuesRow.orderedRate = $filter('number')(0, 2);
-      zeroValuesRow.requestedRate = $filter('number')(0, 2);
-      return zeroValuesRow;
+    function initRow(dataValue, newLocation) {
+      var row = {};
+      var distributionSite = '';
+      if (newLocation) {
+        distributionSite = dataValue.location.name;
+      }
+      row.distributionSite = distributionSite;
+      row.componentType = '';
+      row.ordered = 0;
+      row.issued = 0;
+      row.issuedAndRequested = 0;
+      row.requested = 0;
+      row.orderedGap = 0;
+      row.requestedGap = 0;
+      row.orderedRate = $filter('number')(0, 2);
+      row.requestedRate = $filter('number')(0, 2);
+      return row;
     }
 
-    function createAllComponentTypesRow(componentTypesRows) {
-      var allComponentTypesRow = null;
-      angular.forEach(componentTypesRows, function(row) {
-        if (allComponentTypesRow == null) {
-          allComponentTypesRow = createZeroValuesRow('Total Blood Units');
+    function populateRow(row, dataValue) {
+      var componentType = ReportGeneratorService.getCohort(dataValue, 'Component Type').option;
+      var orderType = ReportGeneratorService.getCohort(dataValue, 'Order Type').option;
+
+      row.componentType = componentType;
+
+      if (dataValue.id === 'unitsOrdered') {
+        row.ordered = row.ordered + dataValue.value;
+      } else if (dataValue.id === 'unitsIssued') {
+        row.issuedAndRequested = row.issuedAndRequested + dataValue.value;
+
+        if (orderType === 'PATIENT_REQUEST') {
+          row.requested = row.requested + dataValue.value;
+        } else {
+          row.issued = row.issued + dataValue.value;
         }
-        allComponentTypesRow.ordered = allComponentTypesRow.ordered + row.ordered;
-        allComponentTypesRow.issued = allComponentTypesRow.issued + row.issued;
-        allComponentTypesRow.requested = allComponentTypesRow.requested + row.requested;
-        allComponentTypesRow.oderedGap = allComponentTypesRow.oderedGap + row.oderedGap;
-        allComponentTypesRow.orderedRate = $filter('number')(allComponentTypesRow.issued / allComponentTypesRow.ordered * 100, 2);
-        allComponentTypesRow.requestedGap = allComponentTypesRow.requestedGap + row.requestedGap;
-        allComponentTypesRow.requestedRate = $filter('number')(allComponentTypesRow.issued / allComponentTypesRow.requested * 100, 2);
-      });
-      return allComponentTypesRow;
-    }
+      }
 
-    function initRow(types) {
-      // initialise the componentTypes rows
-      angular.forEach(types, function(componentType) {
-        mergedData.push(createZeroValuesRow(componentType.componentTypeName));
-      });
-    }
-
-    function mergeData(dataValues) {
-
-      // merge data from report
-      angular.forEach(dataValues, function(newRow) {
-        var componentType = ReportGeneratorService.getCohort(newRow, 'Component Type').option;
-        var distributionSite = ReportGeneratorService.getCohort(newRow, 'Distribution scope').option;
-        var rowData = $filter('filter')(mergedData, { cohorts: componentType})[0];
-        rowData = $filter('filter')(mergedData, { cohorts: distributionSite})[0];
-
-        // add new ordered/issued/requested values and calculate gaps & rates
-        if (newRow.id === 'unitsOrdered') {
-          rowData.ordered = rowData.ordered + newRow.value;
-        } else if (newRow.id === 'unitsIssued') {
-          rowData.issued = rowData.issued + newRow.value;
-        } else if (newRow.id === 'unitsRequested') {
-          rowData.requested = rowData.requested + newRow.value;
-        }
-        rowData.orderedGap = rowData.ordered - rowData.issued;
-        rowData.orderedRate = $filter('number')(rowData.issued / rowData.ordered * 100, 2);
-        rowData.requestedGap = rowData.requested - rowData.issued;
-        rowData.requestedRate = $filter('number')(rowData.issued / rowData.requested * 100, 2);
-      });
-
-      // add the Total Blood Units row
-      mergedData.push(createAllComponentTypesRow(mergedData));
-
-      $scope.gridOptions.data = mergedData;
+      row.orderedGap = row.ordered - row.issuedAndRequested;
+      row.orderedRate = $filter('number')(row.issuedAndRequested / row.ordered * 100, 2);
+      row.requestedGap = row.requested - row.issued;
+      row.requestedRate = $filter('number')(row.requested / row.issuedAndRequested * 100, 2);
     }
 
     $scope.clearSearch = function(form) {
@@ -118,11 +85,13 @@ angular.module('bsis')
       ReportsService.generateBloodUnitsIssuedReport(period, function(report) {
         $scope.searching = false;
         if (report.dataValues.length > 0) {
-          var data = ReportGeneratorService.generateDataRowsGroupingByLocation(report.dataValues, componentTypes, initRow, mergeData);
+          var data = ReportGeneratorService.generateDataRowsGroupingByLocationAndCohort(report.dataValues, 'Component Type', initRow, populateRow);
           $scope.gridOptions.data = data[0];
+          $scope.sitesNumber = data[1];
           $scope.gridOptions.paginationCurrentPage = 1;
         } else {
           $scope.gridOptions.data = [];
+          $scope.sitesNumber = 0;
         }
         $scope.submitted = true;
       }, function(err) {
@@ -133,16 +102,16 @@ angular.module('bsis')
 
     // Grid ui variables and methods
     var columnDefs = [
-      { displayName: 'Distribution Site', field: 'cohorts', width: '**'},
-      { displayName: 'Component Type', field: 'cohorts', width: '**'},
+      { displayName: 'Distribution Site', field: 'distributionSite', width: '**', minWidth: 200},
+      { displayName: 'Component Type', field: 'componentType', width: '**', minWidth: 200},
       { displayName: 'Ordered', field: 'ordered', width: 100 },
-      { displayName: 'Issued', field: 'issued', width: 100 },
+      { displayName: 'Issued', field: 'issuedAndRequested', width: 100 },
       { displayName: 'Gap', field: 'orderedGap', width: 100 },
-      { displayName: '% Issued vs Ordered', field: 'rate', width: 250 },
+      { displayName: '% Issued vs Ordered', field: 'orderedRate', width: 100 },
       { displayName: 'Patient Requests', field: 'requested', width: 100 },
       { displayName: 'Issued', field: 'issued', width: 100 },
       { displayName: 'Gap', field: 'requestedGap', width: 100 },
-      { displayName: '% Issued vs Requests', field: 'requestedRate', width: 250 }
+      { displayName: '% Issued vs Requests', field: 'requestedRate', width: 100 }
     ];
 
     $scope.gridOptions = {
@@ -156,7 +125,7 @@ angular.module('bsis')
       exporterPdfPageSize: 'A4',
       exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
       exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
-      exporterPdfMaxGridWidth: ReportsLayoutService.pdfPortraitMaxGridWidth,
+      exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
@@ -173,15 +142,17 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
+        var sitesNumberLine = 'Distribution Sites: ' + $scope.sitesNumber;
         var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
           'Blood Units Issued Summary Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
+          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
+          sitesNumberLine);
         return header;
       },
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter(null, null, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageFooter('sites', $scope.sitesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {
@@ -196,7 +167,5 @@ angular.module('bsis')
         $scope.gridApi.exporter.csvExport('all', 'all');
       }
     };
-
-    initialise();
 
   });
