@@ -189,8 +189,6 @@ angular.module('bsis')
         } else {
           $scope.searchParams.componentTypeId = null;
         }
-      } else {
-        $scope.searchParams.componentTypeId = null;
       }
     };
 

@@ -8,14 +8,17 @@
       <label class="col-sm-2 control-label">DIN</label>
       <div class="form-inline col-sm-10">
         <div style="display: inline-block; vertical-align: top;">
-          <input class="form-control" name="donationIdentificationNumber" ng-model="searchParams.donationIdentificationNumber" ng-change="clearFields()">
+          <input class="form-control" name="donationIdentificationNumber" ng-model="searchParams.donationIdentificationNumber" ng-change="clearFields()" ng-required="searchParams.componentCode">
           <ng-messages for="searchForm.donationIdentificationNumber.$error" role="alert" ng-show="searchForm.$submitted">
             <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
         </div>
         <label class="control-label">Component Code</label>
         <div style="display: inline-block; vertical-align: top;">
-          <input class="form-control" name="componentCode" ng-model="searchParams.componentCode" size="8" ng-change="setComponentType(searchParams.componentCode)">
+          <input class="form-control" name="componentCode" ng-model="searchParams.componentCode" size="8" ng-change="setComponentType(searchParams.componentCode)" ng-required="searchParams.donationIdentificationNumber">
+          <ng-messages for="searchForm.componentCode.$error" role="alert" ng-show="searchForm.$submitted">
+            <ng-messages-include src="messages.html"></ng-messages-include>
+          </ng-messages>
         </div>
       </div>
     </div>
