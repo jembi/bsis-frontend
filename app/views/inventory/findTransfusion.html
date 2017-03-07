@@ -54,15 +54,18 @@
         <label class="col-sm-2 control-label">Period:</label>
         <div class="form-inline col-sm-10">
             <div>
-                <dateselect name="startDate" ng-model="searchParams.startDate" format="dateFormat" ng-class="{'has-error' : (selectPeriodForm.startDate.$invalid)}" ng-required="!searchParams.donationIdentificationNumber" ui-date-end="{{searchParams.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ng-disabled="searchParams.donationIdentificationNumber"></dateselect>
+                <dateselect name="startDate" ng-model="searchParams.startDate" format="dateFormat" ng-class="{'has-error' : (searchForm.startDate.$invalid)}" ng-required="!searchParams.donationIdentificationNumber" ui-date-range="1,months" ui-date-end="{{searchParams.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ng-disabled="searchParams.donationIdentificationNumber"></dateselect>
                 <span><em>To:</em></span>
-                <dateselect-end name="endDate" ng-model="searchParams.endDate" format="dateFormat" ng-class="{'has-error' : (searchParams.endDate.$invalid)}" ng-required="!searchParams.donationIdentificationNumber" ui-date-start="{{searchParams.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ui-date-range min-date="search.startDate" ng-disabled="searchParams.donationIdentificationNumber"></dateselect-end>
+                <dateselect-end name="endDate" ng-model="searchParams.endDate" format="dateFormat" ng-class="{'has-error' : (searchForm.endDate.$invalid)}" ng-required="!searchParams.donationIdentificationNumber" ui-date-range="1,months" ui-date-start="{{searchParams.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" min-date="search.startDate" ng-disabled="searchParams.donationIdentificationNumber"></dateselect-end>
             </div>
             <div>
               <ng-messages for="searchForm.startDate.$error" role="alert" ng-show="searchForm.$submitted">
+                <small class="error" ng-message="required">This is required</small>
+                <small class="error" ng-message="datesOutOfRange">Select a date range that is less than one month</small>
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
               <ng-messages for="searchForm.endDate.$error" role="alert" ng-show="searchForm.$submitted && !searchForm.startDate.$invalid">
+                <small class="error" ng-message="required">This is required</small>
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
             </div>
