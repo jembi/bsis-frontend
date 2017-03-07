@@ -18,8 +18,8 @@ angular.module('bsis')
       componentTypeId: null,
       receivedFromId: null,
       transfusionOutcome: null,
-      startDate: null,
-      endDate: null
+      startDate: moment().subtract(7, 'days').startOf('day').toDate(),
+      endDate: moment().endOf('day').toDate()
     };
 
     var columnDefs = [
@@ -51,6 +51,11 @@ angular.module('bsis')
       {
         name: 'Outcome',
         field: 'transfusionOutcome',
+        width: '**'
+      },
+      {
+        name: 'Transfusion Site',
+        field: 'receivedFrom.name',
         width: '**'
       }
     ];

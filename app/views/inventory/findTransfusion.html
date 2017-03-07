@@ -43,7 +43,7 @@
       <label class="col-sm-2 control-label">Transfusion Site</label>
       <div class="form-inline col-sm-10">
         <select name="receivedFrom" class="form-control" ng-model="searchParams.receivedFromId" style="min-width: 350px;">
-          <option value="" disabled></option>
+          <option value=""></option>
           <option ng-repeat="transfusionSite in transfusionSites" value="{{transfusionSite.id}}">
             {{transfusionSite.name}}
           </option>
@@ -59,7 +59,7 @@
       <label class="col-sm-2 control-label">Transfusion Outcomes</label>
       <div class="form-inline col-sm-10">
         <select name="transfusionOutcome" ng-model="searchParams.transfusionOutcome" class="form-control" ng-options="outcome as (outcome | titleCase) for outcome in transfusionOutcomes" style="min-width: 350px;">
-          <option value="" disabled></option>
+          <option value=""></option>
         </select> 
         <ng-messages for="searchParams.transfusionOutcome.$error" role="alert" ng-show="searchParams.$submitted">
           <ng-messages-include src="messages.html"></ng-messages-include>
