@@ -547,6 +547,10 @@ angular.module('bsis')
         },
         save: {
           method: 'POST'
+        },
+        getSearchForm: {
+          method: 'GET',
+          url: url + '/transfusions/search/form'
         }
       }),
 

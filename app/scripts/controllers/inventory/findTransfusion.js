@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindTransfusionCtrl', function($scope, $filter, $log, DATEFORMAT) {
+  .controller('FindTransfusionCtrl', function($scope, $filter, $log, TransfusionService, DATEFORMAT) {
 
     $scope.dateFormat = DATEFORMAT;
     $scope.transfusionOutcomes = [];
@@ -71,8 +71,11 @@ angular.module('bsis')
       $scope.searchParams = angular.copy(master);
       $scope.submitted = false;
       $scope.searching = false;
-      // initialize form models here
-      $log.debug('Form initialised');
+      TransfusionService.getSearchForm(function(response) {
+        $scope.componentTypes = response.componentTypes;
+        $scope.transfusionSites = response.usageSites;
+        $scope.transfusionOutcomes = response.transfusionOutcomes;
+      }, $log.error);
     }
 
     $scope.findTransfusion = function(searchForm) {
