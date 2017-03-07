@@ -97,10 +97,10 @@ angular.module('bsis')
 
       exporterPdfCustomFormatter: function(docDefinition) {
         var componentType = $filter('filter')($scope.componentTypes, function(ct) {
-          return ct.id == $scope.searchParams.componentTypeId;
+          return ct.id === parseInt($scope.searchParams.componentTypeId);
         });
         var transfusionSite = $filter('filter')($scope.transfusionSites, function(usageSite) {
-          return usageSite.id == $scope.searchParams.receivedFromId;
+          return usageSite.id === parseInt($scope.searchParams.receivedFromId);
         });
         var transfusionOutcome = $scope.searchParams.transfusionOutcome;
         var searchParams = [{
