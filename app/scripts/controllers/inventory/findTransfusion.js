@@ -38,7 +38,7 @@ angular.module('bsis')
       },
       {
         name: 'Component Type',
-        field: 'componentType.componentTypeName',
+        field: 'componentType',
         width: '**'
       },
       {
@@ -84,8 +84,15 @@ angular.module('bsis')
       }
       $scope.submitted = true;
       $scope.searching = true;
-      // hook up post endpoint
-      $log.debug('Form initialised');
+      $scope.gridOptions.data = [];
+      TransfusionService.search($scope.searchParams, function(response) {
+        $scope.gridOptions.paginationCurrentPage = 1;
+        $scope.gridOptions.data = response.transfusions;
+        $scope.searching = false;
+      }, function(err) {
+        $log.error(err);
+        $scope.searching = false;
+      });
     };
 
     $scope.clearSearch = function(searchForm) {

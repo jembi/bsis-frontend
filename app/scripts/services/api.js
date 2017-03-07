@@ -551,6 +551,10 @@ angular.module('bsis')
         getSearchForm: {
           method: 'GET',
           url: url + '/transfusions/search/form'
+        },
+        search: {
+          method: 'GET',
+          url: url + '/transfusions/search'
         }
       }),
 
