@@ -35,11 +35,8 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Transfusion Site</label>
       <div class="form-inline col-sm-10">
-        <select name="receivedFrom" class="form-control" ng-model="searchParams.receivedFromId" style="min-width: 350px;" ng-disabled="searchParams.donationIdentificationNumber">
+        <select name="receivedFrom" class="form-control" ng-model="searchParams.receivedFromId" style="min-width: 350px;" ng-disabled="searchParams.donationIdentificationNumber" ng-options="transfusionSite.id as transfusionSite.name for transfusionSite in transfusionSites">
           <option value=""></option>
-          <option ng-repeat="transfusionSite in transfusionSites" value="{{transfusionSite.id}}">
-            {{transfusionSite.name}}
-          </option>
         </select>
       </div>
     </div>
