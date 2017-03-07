@@ -62,6 +62,49 @@ angular.module('bsis')
       paginationTemplate: 'views/template/pagination.html',
       minRowsToShow: 8,
       columnDefs: columnDefs,
+
+      exporterPdfOrientation: 'portrait',
+      exporterPdfPageSize: 'A4',
+      exporterPdfDefaultStyle: {fontSize: 4, margin: [-2, 0, 0, 0] },
+      exporterPdfTableStyle: {margin: [-10, 10, 0, 0]},
+      exporterPdfTableHeaderStyle: {fontSize: 5, bold: true, margin: [-2, 0, 0, 0] },
+      exporterPdfMaxGridWidth: 400,
+
+      exporterFieldCallback: function(grid, row, col, value) {
+        if (col.field === 'dateTransfused') {
+          return $filter('bsisDate')(value);
+        }
+        return value;
+      },
+
+      // PDF header
+      exporterPdfHeader: function() {
+        var finalArray = [
+          {
+            text: 'Transfusions',
+            fontSize: 10,
+            bold: true,
+            margin: [30, 20, 0, 0] // [left, top, right, bottom]
+          }
+        ];
+        return finalArray;
+      },
+
+      // PDF footer
+      exporterPdfFooter: function(currentPage, pageCount) {
+        var columns = [
+          {text: 'Number of components: ' + $scope.gridOptions.data.length, width: 'auto'},
+          {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
+          {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+        ];
+        return {
+          columns: columns,
+          columnGap: 10,
+          margin: [30, 0],
+          fontSize: 6
+        };
+      },
+
       onRegisterApi: function(gridApi) {
         $scope.gridApi = gridApi;
       }
@@ -93,6 +136,14 @@ angular.module('bsis')
         $log.error(err);
         $scope.searching = false;
       });
+    };
+
+    $scope.export = function(format) {
+      if (format === 'pdf') {
+        $scope.gridApi.exporter.pdfExport('all', 'all');
+      } else if (format === 'csv') {
+        $scope.gridApi.exporter.csvExport('all', 'all');
+      }
     };
 
     $scope.clearSearch = function(searchForm) {
