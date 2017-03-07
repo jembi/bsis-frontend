@@ -18,6 +18,7 @@ angular.module('bsis')
     function initialise() {
       ReportsService.getBloodUnitsIssuedReportForm(function(response) {
         componentTypes = response.componentTypes;
+        $scope.distributionsSiteNumber = 0;
       }, $log.error);
     }
 
@@ -120,9 +121,18 @@ angular.module('bsis')
         if (report.dataValues.length > 0) {
           var data = ReportGeneratorService.generateDataRowsGroupingByLocation(report.dataValues, componentTypes, initRow, mergeData);
           $scope.gridOptions.data = data[0];
+          $scope.distributionSitesNumber = data[1];
+
+          // Add summary row
+          if ($scope.distributionSitesNumber > 1) {
+            var summaryRow = ReportGeneratorService.generateSummaryRow(report.dataValues, componentTypes, initRow, mergeData);
+            summaryRow.distributionSite = 'All Sites';
+            $scope.gridOptions.data.push(summaryRow);
+          }
           $scope.gridOptions.paginationCurrentPage = 1;
         } else {
           $scope.gridOptions.data = [];
+          $scope.distributionSitesNumber = 0;
         }
         $scope.submitted = true;
       }, function(err) {
@@ -173,15 +183,16 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
+        var distributionSitesNumberLine = 'Distribution Sites: ' + $scope.distributionsSitesNumber;
         var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
           'Blood Units Issued Summary Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
+          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)], distributionSitesNumberLine);
         return header;
       },
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter(null, null, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageFooter('sites', $scope.distributionSitesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {
