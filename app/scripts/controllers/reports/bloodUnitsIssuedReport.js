@@ -57,6 +57,28 @@ angular.module('bsis')
       row.requestedRate = $filter('number')(row.requested / row.issuedAndRequested * 100, 2);
     }
 
+    function addSubtotalsRow(rows) {
+      var subtotalsRow = {};
+      subtotalsRow.distributionSite = '';
+      subtotalsRow.componentType = 'All';
+      subtotalsRow.ordered = 0;
+      subtotalsRow.issued = 0;
+      subtotalsRow.issuedAndRequested = 0;
+      subtotalsRow.requested = 0;
+      angular.forEach(rows, function(row, key) {
+        subtotalsRow.ordered += rows[key].ordered;
+        subtotalsRow.issued += rows[key].issued;
+        subtotalsRow.issuedAndRequested += rows[key].issuedAndRequested;
+        subtotalsRow.requested += rows[key].requested;
+      });
+
+      subtotalsRow.orderedGap = subtotalsRow.ordered - subtotalsRow.issuedAndRequested;
+      subtotalsRow.orderedRate = $filter('number')(subtotalsRow.issuedAndRequested / subtotalsRow.ordered * 100, 2);
+      subtotalsRow.requestedGap = subtotalsRow.requested - subtotalsRow.issued;
+      subtotalsRow.requestedRate = $filter('number')(subtotalsRow.requested / subtotalsRow.issuedAndRequested * 100, 2);
+      return subtotalsRow;
+    }
+
     $scope.clearSearch = function(form) {
       $scope.search = angular.copy(master);
       form.$setPristine();
@@ -85,7 +107,7 @@ angular.module('bsis')
       ReportsService.generateBloodUnitsIssuedReport(period, function(report) {
         $scope.searching = false;
         if (report.dataValues.length > 0) {
-          var data = ReportGeneratorService.generateDataRowsGroupingByLocationAndCohort(report.dataValues, 'Component Type', initRow, populateRow);
+          var data = ReportGeneratorService.generateDataRowsGroupingByLocationAndCohort(report.dataValues, 'Component Type', initRow, populateRow, addSubtotalsRow);
           $scope.gridOptions.data = data[0];
           $scope.sitesNumber = data[1];
           $scope.gridOptions.paginationCurrentPage = 1;

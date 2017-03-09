@@ -49,8 +49,9 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
     // param: cohortCategory: the category of the cohort we are grouping by
     // param: initRow: a function that initialises and returns a single table row object
     // param: populateRow: a function that, given row and data value objects, updates the row with the counts from the data value
+    // param: addSubtotalsRow: a function that, if present, calculates the subtotal for a group of rows, else, no row is added
     // returns: A response object with the first element containing the generated rows, and the second element, the number of locations counted
-    generateDataRowsGroupingByLocationAndCohort: function(dataValues, cohortCategory, initRow, populateRow) {
+    generateDataRowsGroupingByLocationAndCohort: function(dataValues, cohortCategory, initRow, populateRow, addSubtotalsRow) {
       var response = [];
       var generatedRows = [];
       var locationsNumber = 0;
@@ -89,6 +90,10 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
         angular.forEach(rows, function(row) {
           generatedRows.push(row);
         });
+
+        if (addSubtotalsRow) {
+          generatedRows.push(addSubtotalsRow(rows));
+        }
       });
 
       response.push(generatedRows);
