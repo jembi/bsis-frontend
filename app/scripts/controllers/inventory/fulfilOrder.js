@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, ComponentService, BLOODGROUP, GENDER, DATEFORMAT, ModalsService) {
+angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, InventoriesService, BLOODGROUP, GENDER, DATEFORMAT, ModalsService) {
 
   var orderItemMaster = {
     componentType: null,
@@ -236,7 +236,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
         donationIdentificationNumber: $scope.component.din,
         componentCode: $scope.component.componentCode
       };
-      ComponentService.findComponent(searchParams, function(component) {
+      InventoriesService.getInventoryByCodeAndDIN(searchParams, function(component) {
         // check if component in stock
         if (component.inventoryStatus !== 'IN_STOCK') {
           showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
