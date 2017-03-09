@@ -42,16 +42,19 @@ angular.module('bsis')
       if (dataValue.id === 'unitsOrdered') {
         row.ordered = row.ordered + dataValue.value;
       } else if (dataValue.id === 'unitsIssued') {
-        row.issued = row.issued + dataValue.value;
+        row.issuedAndRequested = row.issuedAndRequested + dataValue.value;
+
         if (orderType === 'PATIENT_REQUEST') {
           row.requested = row.requested + dataValue.value;
-          row.issuedAndRequested = row.issuedAndRequested + dataValue.value;
+        } else {
+          row.issued = row.issued + dataValue.value;
         }
       }
-      row.orderedGap = row.ordered - row.issued;
-      row.orderedRate = $filter('number')(row.issued / row.ordered * 100, 2);
-      row.requestedGap = row.requested - row.issuedAndRequested;
-      row.requestedRate = $filter('number')(row.issuedAndRequested / row.requested * 100, 2);
+
+      row.orderedGap = row.ordered - row.issuedAndRequested;
+      row.orderedRate = $filter('number')(row.issuedAndRequested / row.ordered * 100, 2);
+      row.requestedGap = row.requested - row.issued;
+      row.requestedRate = $filter('number')(row.requested / row.issuedAndRequested * 100, 2);
     }
 
     $scope.clearSearch = function(form) {
@@ -102,11 +105,11 @@ angular.module('bsis')
       { displayName: 'Distribution Site', field: 'distributionSite', width: '**', minWidth: 200},
       { displayName: 'Component Type', field: 'componentType', width: '**', minWidth: 200},
       { displayName: 'Ordered', field: 'ordered', width: 100 },
-      { displayName: 'Issued', field: 'issued', width: 100 },
+      { displayName: 'Issued', field: 'issuedAndRequested', width: 100 },
       { displayName: 'Gap', field: 'orderedGap', width: 100 },
       { displayName: '% Issued vs Ordered', field: 'orderedRate', width: 100 },
       { displayName: 'Patient Requests', field: 'requested', width: 100 },
-      { displayName: 'Issued', field: 'issuedAndRequested', width: 100 },
+      { displayName: 'Issued', field: 'issued', width: 100 },
       { displayName: 'Gap', field: 'requestedGap', width: 100 },
       { displayName: '% Issued vs Requests', field: 'requestedRate', width: 100 }
     ];
