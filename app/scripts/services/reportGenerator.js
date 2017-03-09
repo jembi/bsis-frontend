@@ -82,23 +82,18 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
         if (cohort) {
           var cohortValue = cohort.option;
           var newLocation = false;
-          var cohortRow = null;
 
           // Check if there's rows for that location
           var rowsByCohort = rowsByLocation[dataValue.location.name];
           if (!rowsByCohort) { // new location
             locationsNumber += 1;
             rowsByCohort = {};
-            newLocation = true;
-            cohortRow = initRow(dataValue, newLocation);
-            rowsByCohort[cohortValue] = cohortRow;
             rowsByLocation[dataValue.location.name] = rowsByCohort;
+            newLocation = true;
           }
 
-          newLocation = false;
-
           // Check if there's a row for that location and cohort
-          cohortRow = rowsByCohort[cohortValue];
+          var cohortRow = rowsByCohort[cohortValue];
           if (!cohortRow) { // new cohortRow
             cohortRow = initRow(dataValue, newLocation);
             rowsByCohort[cohortValue] = cohortRow;
