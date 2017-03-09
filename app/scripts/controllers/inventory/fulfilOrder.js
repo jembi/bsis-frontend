@@ -257,6 +257,10 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
           if (componentAlreadyAdded) {
             showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
               ') has already been added to this Order Form.');
+          // check if the component has already been added to another oder form
+          } else if (component.orderform !== null) {
+            showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
+              ') has already been assigned to another Order form.');
           } else {
             // update the table
             var oldData = angular.copy($scope.gridOptions.data);
