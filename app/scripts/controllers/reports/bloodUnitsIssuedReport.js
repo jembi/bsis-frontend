@@ -23,14 +23,14 @@ angular.module('bsis')
       }
       row.distributionSite = distributionSite;
       row.componentType = '';
-      row.ordered = 0;
-      row.issuedAndRequested = 0;
-      row.orderedGap = 0;
-      row.orderedRate = $filter('number')(0, 2);
-      row.requested = 0;
-      row.issued = 0;
-      row.requestedGap = 0;
-      row.requestedRate = $filter('number')(0, 2);
+      row.bulkOrder = 0;
+      row.bulkIssue = 0;
+      row.bulkGap = 0;
+      row.bulkRate = $filter('number')(0, 2);
+      row.patientOrder = 0;
+      row.patientIssue = 0;
+      row.patientGap = 0;
+      row.patientRate = $filter('number')(0, 2);
       return row;
     }
 
@@ -41,37 +41,39 @@ angular.module('bsis')
       row.componentType = componentType;
 
       if (dataValue.id === 'unitsOrdered') {
-        row.ordered = row.ordered + dataValue.value;
-      } else if (dataValue.id === 'unitsIssued') {
-        row.issuedAndRequested = row.issuedAndRequested + dataValue.value;
-
         if (orderType === 'PATIENT_REQUEST') {
-          row.requested = row.requested + dataValue.value;
+          row.patientOrder = row.patientOrder + dataValue.value;
         } else {
-          row.issued = row.issued + dataValue.value;
+          row.bulkOrder = row.bulkOrder + dataValue.value;
+        }
+      } else if (dataValue.id === 'unitsIssued') {
+        if (orderType === 'PATIENT_REQUEST') {
+          row.patientIssue = row.patientIssue + dataValue.value;
+        } else {
+          row.bulkIssue = row.bulkIssue + dataValue.value;
         }
       }
 
-      row.orderedGap = row.ordered - row.issuedAndRequested;
-      row.orderedRate = $filter('number')(row.issuedAndRequested / row.ordered * 100, 2);
-      row.requestedGap = row.requested - row.issued;
-      row.requestedRate = $filter('number')(row.requested / row.issuedAndRequested * 100, 2);
+      row.bulkGap = row.bulkOrder - row.bulkIssue;
+      row.bulkRate = $filter('number')(row.bulkIssue / row.bulkOrder * 100, 2);
+      row.patientGap = row.patientOrder - row.patientIssue;
+      row.patientRate = $filter('number')(row.patientIssue / row.patientOrder * 100, 2);
     }
 
     function addSubtotalsRow(rows) {
       var subtotalsRow = initRow();
       subtotalsRow.componentType = 'Total Blood Units';
       angular.forEach(rows, function(row, key) {
-        subtotalsRow.ordered += rows[key].ordered;
-        subtotalsRow.issued += rows[key].issued;
-        subtotalsRow.issuedAndRequested += rows[key].issuedAndRequested;
-        subtotalsRow.requested += rows[key].requested;
+        subtotalsRow.bulkOrder += rows[key].bulkOrder;
+        subtotalsRow.bulkIssue += rows[key].bulkIssue;
+        subtotalsRow.patientOrder += rows[key].patientOrder;
+        subtotalsRow.patientIssue += rows[key].patientIssue;
       });
 
-      subtotalsRow.orderedGap = subtotalsRow.ordered - subtotalsRow.issuedAndRequested;
-      subtotalsRow.orderedRate = $filter('number')(subtotalsRow.issuedAndRequested / subtotalsRow.ordered * 100, 2);
-      subtotalsRow.requestedGap = subtotalsRow.requested - subtotalsRow.issued;
-      subtotalsRow.requestedRate = $filter('number')(subtotalsRow.requested / subtotalsRow.issuedAndRequested * 100, 2);
+      subtotalsRow.bulkGap = subtotalsRow.bulkOrder - subtotalsRow.bulkIssue;
+      subtotalsRow.bulkRate = $filter('number')(subtotalsRow.bulkIssue / subtotalsRow.bulkOrder * 100, 2);
+      subtotalsRow.patientGap = subtotalsRow.patientOrder - subtotalsRow.patientIssue;
+      subtotalsRow.patientRate = $filter('number')(subtotalsRow.patientIssue / subtotalsRow.patientOrder * 100, 2);
       return subtotalsRow;
     }
 
@@ -124,14 +126,14 @@ angular.module('bsis')
     var columnDefs = [
       { displayName: 'Distribution Site', field: 'distributionSite', width: '**', minWidth: 200},
       { displayName: 'Component Type', field: 'componentType', width: '**', minWidth: 200},
-      { displayName: 'Ordered', field: 'ordered', width: 100 },
-      { displayName: 'Issued', field: 'issuedAndRequested', width: 100 },
-      { displayName: 'Gap', field: 'orderedGap', width: 100 },
-      { displayName: '% Issued vs Ordered', field: 'orderedRate', width: 100 },
-      { displayName: 'Patient Requests', field: 'requested', width: 100 },
-      { displayName: 'Issued', field: 'issued', width: 100 },
-      { displayName: 'Gap', field: 'requestedGap', width: 100 },
-      { displayName: '% Issued vs Requests', field: 'requestedRate', width: 100 }
+      { displayName: 'Ordered', field: 'bulkOrder', width: 100 },
+      { displayName: 'Issued', field: 'bulkIssue', width: 100 },
+      { displayName: 'Gap', field: 'bulkGap', width: 100 },
+      { displayName: '% Issued vs Ordered', field: 'bulkRate', width: 100 },
+      { displayName: 'Patient Requests', field: 'patientOrder', width: 100 },
+      { displayName: 'Issued', field: 'patientIssue', width: 100 },
+      { displayName: 'Gap', field: 'patientGap', width: 100 },
+      { displayName: '% Issued vs Requests', field: 'patientRate', width: 100 }
     ];
 
     $scope.gridOptions = {
