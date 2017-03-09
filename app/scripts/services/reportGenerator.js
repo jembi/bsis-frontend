@@ -37,20 +37,20 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
     // returns: A response object with the first element containing the generated rows, and the second element, the number of locations counted
     generateDataRowsGroupingByLocation: function(dataValues, dynamicData, initRow, populateRow) {
       var locationsNumber = 0;
-      var rowsForLocation = {};
+      var rowsByLocation = {};
 
       angular.forEach(dataValues, function(dataValue) {
-        var rowForLocation = rowsForLocation[dataValue.location.name];
-        if (!rowForLocation) { // new location
+        var locationRow = rowsByLocation[dataValue.location.name];
+        if (!locationRow) { // new location
           locationsNumber += 1;
-          rowForLocation = initRow(dynamicData);
-          rowsForLocation[dataValue.location.name] = rowForLocation;
+          locationRow = initRow(dynamicData);
+          rowsByLocation[dataValue.location.name] = locationRow;
         }
-        populateRow(rowForLocation, dataValue);
+        populateRow(locationRow, dataValue);
       });
 
       var generatedRows = [];
-      angular.forEach(rowsForLocation, function(row) {
+      angular.forEach(rowsByLocation, function(row) {
         generatedRows.push(row);
       });
 
@@ -69,40 +69,40 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
     // returns: A response object with the first element containing the generated rows, and the second element, the number of locations counted
     generateDataRowsGroupingByLocationAndCohort: function(dataValues, cohortCategory, initRow, populateRow, addSubtotalsRow) {
       var locationsNumber = 0;
-      var rowsForLocation = {};
+      var rowsByLocation = {};
 
       angular.forEach(dataValues, function(dataValue) {
         var cohort = getCohort(dataValue, cohortCategory);
         if (cohort) {
           var cohortValue = cohort.option;
           var newLocation = false;
-          var rowForCohort = null;
+          var cohortRow = null;
 
           // Check if there's rows for that location
-          var rowsForCohort = rowsForLocation[dataValue.location.name];
-          if (!rowsForCohort) { // new location
+          var rowsByCohort = rowsByLocation[dataValue.location.name];
+          if (!rowsByCohort) { // new location
             locationsNumber += 1;
-            rowsForCohort = {};
+            rowsByCohort = {};
             newLocation = true;
-            rowForCohort = initRow(dataValue, newLocation);
-            rowsForCohort[cohortValue] = rowForCohort;
-            rowsForLocation[dataValue.location.name] = rowsForCohort;
+            cohortRow = initRow(dataValue, newLocation);
+            rowsByCohort[cohortValue] = cohortRow;
+            rowsByLocation[dataValue.location.name] = rowsByCohort;
           }
 
           newLocation = false;
 
           // Check if there's a row for that location and cohort
-          rowForCohort = rowsForCohort[cohortValue];
-          if (!rowForCohort) { // new rowForCohort
-            rowForCohort = initRow(dataValue, newLocation);
-            rowsForCohort[cohortValue] = rowForCohort;
+          cohortRow = rowsByCohort[cohortValue];
+          if (!cohortRow) { // new cohortRow
+            cohortRow = initRow(dataValue, newLocation);
+            rowsByCohort[cohortValue] = cohortRow;
           }
-          populateRow(rowForCohort, dataValue);
+          populateRow(cohortRow, dataValue);
         }
       });
 
       var generatedRows = [];
-      angular.forEach(rowsForLocation, function(rows) {
+      angular.forEach(rowsByLocation, function(rows) {
         angular.forEach(rows, function(row) {
           generatedRows.push(row);
         });
@@ -126,23 +126,23 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
     // param: addTotalsRow: a function that, if present, calculates the totals row, else, no row is added
     // returns: the generated rows, grouped by cohort, according to the cohort category entered
     generateDataRowsGroupingByCohort: function(dataValues, cohortCategory, initRow, populateRow, addTotalsRow) {
-      var rowsForCohort = {};
+      var rowsByCohort = {};
 
       angular.forEach(dataValues, function(dataValue) {
         var cohort = getCohort(dataValue, cohortCategory);
         if (cohort) {
           var cohortValue = cohort.option;
-          var rowForCohort = rowsForCohort[cohortValue];
-          if (!rowForCohort) { // new rowForCohort
-            rowForCohort = initRow();
-            rowsForCohort[cohortValue] = rowForCohort;
+          var cohortRow = rowsByCohort[cohortValue];
+          if (!cohortRow) { // new cohortRow
+            cohortRow = initRow();
+            rowsByCohort[cohortValue] = cohortRow;
           }
-          populateRow(rowForCohort, dataValue);
+          populateRow(cohortRow, dataValue);
         }
       });
 
       var generatedRows = [];
-      angular.forEach(rowsForCohort, function(row) {
+      angular.forEach(rowsByCohort, function(row) {
         generatedRows.push(row);
       });
 
