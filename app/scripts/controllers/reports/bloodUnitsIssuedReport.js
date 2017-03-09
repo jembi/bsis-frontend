@@ -11,6 +11,7 @@ angular.module('bsis')
 
     $scope.dateFormat = DATEFORMAT;
     $scope.search = angular.copy(master);
+    var dataValues = null;
 
     // Report methods
 
@@ -107,13 +108,15 @@ angular.module('bsis')
       ReportsService.generateBloodUnitsIssuedReport(period, function(report) {
         $scope.searching = false;
         if (report.dataValues.length > 0) {
-          var data = ReportGeneratorService.generateDataRowsGroupingByLocationAndCohort(report.dataValues, 'Component Type', initRow, populateRow, addSubtotalsRow);
+          dataValues = report.dataValues;
+          var data = ReportGeneratorService.generateDataRowsGroupingByLocationAndCohort(dataValues, 'Component Type', initRow, populateRow, addSubtotalsRow);
           $scope.gridOptions.data = data[0];
           $scope.sitesNumber = data[1];
           $scope.gridOptions.paginationCurrentPage = 1;
         } else {
           $scope.gridOptions.data = [];
           $scope.sitesNumber = 0;
+          dataValues = null;
         }
         $scope.submitted = true;
       }, function(err) {
@@ -151,7 +154,12 @@ angular.module('bsis')
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        docDefinition = ReportsLayoutService.highlightTotalRows('Total Blood Units', 0, docDefinition);
+        if ($scope.sitesNumber > 1) {
+          var summaryRowObjects = ReportGeneratorService.generateDataRowsGroupingByCohort(dataValues, 'Component Type', initRow, populateRow, addSubtotalsRow);
+          var summaryRowArrays = ReportGeneratorService.convertRowObjectsToArrays(summaryRowObjects);
+          docDefinition = ReportsLayoutService.addSummaryContent(summaryRowArrays, docDefinition);
+        }
+        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(33, docDefinition);
         return docDefinition;
       },
