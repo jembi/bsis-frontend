@@ -7,6 +7,24 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
   }
 
   return {
+
+    // converts row objects to arrays
+    // Example:
+    // rowObject = row.location, row.componentType, row.gap
+    // rowArray = [location, componentType, gap]
+    convertRowObjectsToArrays: function(rowObjects) {
+      var rowArrays = [];
+      var rowArray = [];
+      angular.forEach(rowObjects, function(rowObject) {
+        rowArray = [];
+        angular.forEach(rowObject, function(column, key) {
+          rowArray.push('' + rowObject[key]);
+        });
+        rowArrays.push(rowArray);
+      });
+      return rowArrays;
+    },
+
     // returns the data value's cohort
     getCohort: function(dataValue, category) {
       return getCohort(dataValue, category);
@@ -49,7 +67,7 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
     // param: cohortCategory: the category of the cohort we are grouping by
     // param: initRow: a function that initialises and returns a single table row object
     // param: populateRow: a function that, given row and data value objects, updates the row with the counts from the data value
-    // param: addSubtotalsRow: a function that, if present, calculates the subtotal for a group of rows, else, no row is added
+    // param: addSubtotalsRow: a function that, if present, calculates the subtotal row per location, else, no row is added
     // returns: A response object with the first element containing the generated rows, and the second element, the number of locations counted
     generateDataRowsGroupingByLocationAndCohort: function(dataValues, cohortCategory, initRow, populateRow, addSubtotalsRow) {
       var response = [];
@@ -58,32 +76,36 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
       var rowsForLocation = {};
       var rowsForCohort = {};
       var rowForCohort = null;
+      var cohort = null;
       var cohortValue = null;
       var newLocation = false;
 
       angular.forEach(dataValues, function(dataValue) {
-        cohortValue = getCohort(dataValue, cohortCategory).option;
+        cohort = getCohort(dataValue, cohortCategory);
+        if (cohort) {
+          cohortValue = cohort.option;
 
-        // Check if there's rows for that location
-        rowsForCohort = rowsForLocation[dataValue.location.name];
-        if (!rowsForCohort) { // new location
-          locationsNumber += 1;
-          rowsForCohort = {};
-          newLocation = true;
-          rowForCohort = initRow(dataValue, newLocation);
-          rowsForCohort[cohortValue] = rowForCohort;
-          rowsForLocation[dataValue.location.name] = rowsForCohort;
+          // Check if there's rows for that location
+          rowsForCohort = rowsForLocation[dataValue.location.name];
+          if (!rowsForCohort) { // new location
+            locationsNumber += 1;
+            rowsForCohort = {};
+            newLocation = true;
+            rowForCohort = initRow(dataValue, newLocation);
+            rowsForCohort[cohortValue] = rowForCohort;
+            rowsForLocation[dataValue.location.name] = rowsForCohort;
+          }
+
+          newLocation = false;
+
+          // Check if there's a row for that location and cohort
+          rowForCohort = rowsForCohort[cohortValue];
+          if (!rowForCohort) { // new rowForCohort
+            rowForCohort = initRow(dataValue, newLocation);
+            rowsForCohort[cohortValue] = rowForCohort;
+          }
+          populateRow(rowForCohort, dataValue);
         }
-
-        newLocation = false;
-
-        // Check if there's a row for that location and cohort
-        rowForCohort = rowsForCohort[cohortValue];
-        if (!rowForCohort) { // new rowForCohort
-          rowForCohort = initRow(dataValue, newLocation);
-          rowsForCohort[cohortValue] = rowForCohort;
-        }
-        populateRow(rowForCohort, dataValue);
       });
 
       angular.forEach(rowsForLocation, function(rows) {
@@ -101,7 +123,45 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
       return response;
     },
 
-    // generate the summary rows for the report/table
+    // generate the rows of the report/table grouping them by location, can be used for a report or a summary if necessary
+    // param: dataValues: an array of the data values provided by the report
+    // param: cohortCategory: the cohortCategory to group the rows by
+    // param: initRow: a function that initialises and returns a single table row object
+    // param: populateRow: a function that, given row and data value objects, updates the row with the counts from the data value
+    // param: addTotalsRow: a function that, if present, calculates the totals row, else, no row is added
+    // returns: the generated rows, grouped by cohort, according to the cohort category entered
+    generateDataRowsGroupingByCohort: function(dataValues, cohortCategory, initRow, populateRow, addTotalsRow) {
+      var generatedRows = [];
+      var rowsForCohort = {};
+      var rowForCohort = null;
+      var cohort = null;
+      var cohortValue = null;
+
+      angular.forEach(dataValues, function(dataValue) {
+        cohort = getCohort(dataValue, cohortCategory);
+        if (cohort) {
+          cohortValue = cohort.option;
+          rowForCohort = rowsForCohort[cohortValue];
+          if (!rowForCohort) { // new rowForCohort
+            rowForCohort = initRow();
+            rowsForCohort[cohortValue] = rowForCohort;
+          }
+          populateRow(rowForCohort, dataValue);
+        }
+      });
+
+      angular.forEach(rowsForCohort, function(row) {
+        generatedRows.push(row);
+      });
+
+      if (addTotalsRow) {
+        generatedRows.push(addTotalsRow(generatedRows));
+      }
+
+      return generatedRows;
+    },
+
+    // generate a summary row for the report/table
     // param: dataValues: an array of the data values provided by the report
     // param: dynamicData: an array of dynamic data, which can be configured by the user and is used to init and populate data rows (can be null)
     // param: initRow: a function that initialises and returns a single table row object
