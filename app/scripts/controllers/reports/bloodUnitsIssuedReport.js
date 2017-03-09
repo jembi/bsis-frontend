@@ -24,12 +24,12 @@ angular.module('bsis')
       row.distributionSite = distributionSite;
       row.componentType = '';
       row.ordered = 0;
-      row.issued = 0;
       row.issuedAndRequested = 0;
-      row.requested = 0;
       row.orderedGap = 0;
-      row.requestedGap = 0;
       row.orderedRate = $filter('number')(0, 2);
+      row.requested = 0;
+      row.issued = 0;
+      row.requestedGap = 0;
       row.requestedRate = $filter('number')(0, 2);
       return row;
     }
@@ -59,13 +59,8 @@ angular.module('bsis')
     }
 
     function addSubtotalsRow(rows) {
-      var subtotalsRow = {};
-      subtotalsRow.distributionSite = '';
+      var subtotalsRow = initRow();
       subtotalsRow.componentType = 'All';
-      subtotalsRow.ordered = 0;
-      subtotalsRow.issued = 0;
-      subtotalsRow.issuedAndRequested = 0;
-      subtotalsRow.requested = 0;
       angular.forEach(rows, function(row, key) {
         subtotalsRow.ordered += rows[key].ordered;
         subtotalsRow.issued += rows[key].issued;
