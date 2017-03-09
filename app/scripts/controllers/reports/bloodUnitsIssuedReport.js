@@ -60,7 +60,7 @@ angular.module('bsis')
 
     function addSubtotalsRow(rows) {
       var subtotalsRow = initRow();
-      subtotalsRow.componentType = 'All';
+      subtotalsRow.componentType = 'Total Blood Units';
       angular.forEach(rows, function(row, key) {
         subtotalsRow.ordered += rows[key].ordered;
         subtotalsRow.issued += rows[key].issued;
@@ -151,10 +151,11 @@ angular.module('bsis')
       exporterPdfCustomFormatter: function(docDefinition) {
         if ($scope.sitesNumber > 1) {
           var summaryRowObjects = ReportGeneratorService.generateDataRowsGroupingByCohort(dataValues, 'Component Type', initRow, populateRow, addSubtotalsRow);
+          summaryRowObjects[0].distributionSite = 'All Sites';
           var summaryRowArrays = ReportGeneratorService.convertRowObjectsToArrays(summaryRowObjects);
           docDefinition = ReportsLayoutService.addSummaryContent(summaryRowArrays, docDefinition);
         }
-        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows('Total Blood Units', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(33, docDefinition);
         return docDefinition;
       },
