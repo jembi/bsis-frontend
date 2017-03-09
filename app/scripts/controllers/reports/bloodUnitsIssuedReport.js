@@ -152,10 +152,9 @@ angular.module('bsis')
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
         if ($scope.sitesNumber > 1) {
-          var summaryRowObjects = ReportGeneratorService.generateDataRowsGroupingByCohort(dataValues, 'Component Type', initRow, populateRow, addSubtotalsRow);
-          summaryRowObjects[0].distributionSite = 'All Sites';
-          var summaryRowArrays = ReportGeneratorService.convertRowObjectsToArrays(summaryRowObjects);
-          docDefinition = ReportsLayoutService.addSummaryContent(summaryRowArrays, docDefinition);
+          var summaryRows = ReportGeneratorService.generateSummaryRowsGroupingByCohort(dataValues, 'Component Type', initRow, populateRow, addSubtotalsRow);
+          summaryRows[0][0] = 'All Sites';
+          docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
         }
         docDefinition = ReportsLayoutService.highlightTotalRows('Total Blood Units', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(33, docDefinition);

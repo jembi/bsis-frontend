@@ -6,23 +6,29 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
     return $filter('filter')(dataValue.cohorts, { category: category})[0];
   }
 
-  return {
-
-    // converts row objects to arrays
-    // Example:
-    // rowObject = row.location, row.componentType, row.gap
-    // rowArray = [location, componentType, gap]
-    convertRowObjectsToArrays: function(rowObjects) {
-      var rowArrays = [];
-      angular.forEach(rowObjects, function(rowObject) {
-        var rowArray = [];
-        angular.forEach(rowObject, function(column, key) {
-          rowArray.push('' + rowObject[key]);
-        });
-        rowArrays.push(rowArray);
+  // converts row objects to arrays
+  //
+  // This is used when using a list of row objects in the pdf.
+  // Ui grid does this conversion automatically when generating the pdf,
+  // but to calculate a summary and show it in the pdf without showing it in the grid,
+  // we need to do the conversion manually.
+  //
+  // Example:
+  // rowObject = row.location, row.componentType, row.gap
+  // rowArray = [location, componentType, gap]
+  function convertSummaryRowObjectsToArrays(rowObjects) {
+    var rowArrays = [];
+    angular.forEach(rowObjects, function(rowObject) {
+      var rowArray = [];
+      angular.forEach(rowObject, function(column, key) {
+        rowArray.push('' + rowObject[key]);
       });
-      return rowArrays;
-    },
+      rowArrays.push(rowArray);
+    });
+    return rowArrays;
+  }
+
+  return {
 
     // returns the data value's cohort
     getCohort: function(dataValue, category) {
@@ -118,14 +124,14 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
       return response;
     },
 
-    // generate the rows of the report/table grouping them by location, can be used for a report or a summary if necessary
+    // generate the summary rows grouping by cohort
     // param: dataValues: an array of the data values provided by the report
     // param: cohortCategory: the cohortCategory to group the rows by
     // param: initRow: a function that initialises and returns a single table row object
     // param: populateRow: a function that, given row and data value objects, updates the row with the counts from the data value
     // param: addTotalsRow: a function that, if present, calculates the totals row, else, no row is added
     // returns: the generated rows, grouped by cohort, according to the cohort category entered
-    generateDataRowsGroupingByCohort: function(dataValues, cohortCategory, initRow, populateRow, addTotalsRow) {
+    generateSummaryRowsGroupingByCohort: function(dataValues, cohortCategory, initRow, populateRow, addTotalsRow) {
       var rowsByCohort = {};
 
       angular.forEach(dataValues, function(dataValue) {
@@ -150,7 +156,7 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
         generatedRows.push(addTotalsRow(generatedRows));
       }
 
-      return generatedRows;
+      return convertSummaryRowObjectsToArrays(generatedRows);
     },
 
     // generate a summary row for the report/table
