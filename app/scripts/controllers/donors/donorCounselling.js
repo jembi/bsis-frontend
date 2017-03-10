@@ -93,7 +93,6 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     queryParams.counsellingStatus = $scope.search.counsellingStatus;
 
     if ($scope.search.flaggedForCounselling == false && $scope.search.counsellingStatus !== 'RECEIVED_COUNSELLING') {
-
       query.referred = null;
       queryParams.referred = null;
       query.notReferred = null;
