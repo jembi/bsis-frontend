@@ -236,7 +236,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
         donationIdentificationNumber: $scope.component.din,
         componentCode: $scope.component.componentCode
       };
-      InventoriesService.getInventoryByCodeAndDIN(searchParams, function(component) {
+      InventoriesService.getInventoryComponentByCodeAndDIN(searchParams, function(component) {
         // check if component in stock
         if (component.inventoryStatus !== 'IN_STOCK') {
           showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
@@ -246,7 +246,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
           showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
             ') is not currently in stock at ' + $scope.orderForm.dispatchedFrom.name + '.');
         // check if the component is available
-        } else if (component.status !== 'AVAILABLE') {
+        } else if (component.componentStatus !== 'AVAILABLE') {
           showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
             ') is not suitable for dispatch.');
         } else {

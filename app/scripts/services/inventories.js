@@ -4,6 +4,6 @@ angular.module('bsis').factory('InventoriesService', function(Api) {
   return {
     search: Api.Inventories.search,
     getSearchForm: Api.Inventories.getSearchForm,
-    getInventoryByCodeAndDIN: Api.Inventories.getInventory
+    getInventoryComponentByCodeAndDIN: Api.Inventories.getInventory
   };
 });
