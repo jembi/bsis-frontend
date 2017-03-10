@@ -258,9 +258,9 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
             showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
               ') has already been added to this Order Form.');
           // check if the component has already been added to another oder form
-          } else if (angular.isDefined(component.orderform)) {
+          } else if (angular.isDefined(component.orderForm)) {
             showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-              ') has already been assigned to another Order form.');
+              ') has already been assigned to another Order Form.');
           } else {
             // update the table
             var oldData = angular.copy($scope.gridOptions.data);
