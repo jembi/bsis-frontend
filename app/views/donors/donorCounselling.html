@@ -76,11 +76,11 @@
     </div>
 
     <div class="clearfix form-group">
-        <div class="col-sm-2 control-label" for="referred"></div>
+        <div class="col-sm-2 control-label" for="referred" ></div>
         <div class="form-inline col-sm-10">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="referred" ng-model="search.referred" ng-disabled="search.flaggedForCounselling"> Include Donors That Have Been Referred
+                    <input type="checkbox" name="referred" ng-model="search.referred" ng-disabled="search.flaggedForCounselling || search.counsellingStatus !== 'RECEIVED_COUNSELLING'"> Include Donors That Have Been Referred
                 </label>
             </div>
         </div>
@@ -92,7 +92,7 @@
             <div class="checkbox">
                 <label>
                     <input type="checkbox" name="notReferred" ng-model="search.notReferred" 
-                    ng-disabled="search.flaggedForCounselling"> Include Donors That Have Not Been Referred
+                    ng-disabled="search.flaggedForCounselling || search.counsellingStatus !== 'RECEIVED_COUNSELLING'"> Include Donors That Have Not Been Referred
                 </label>
             </div>
         </div>
