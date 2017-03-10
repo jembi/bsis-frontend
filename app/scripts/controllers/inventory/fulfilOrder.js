@@ -60,7 +60,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       var row = convertItem(item);
       var unmatchedComponents = [];
       angular.forEach(components, function(component) {
-        var bloodGroup = component.bloodAbo + component.bloodRh;
+        var bloodGroup = component.bloodGroup;
         if (row.gap > 0 && component.componentType.id === item.componentType.id && bloodGroup === item.bloodGroup) {
           // can't over supply and component matches
           row.numberSupplied = row.numberSupplied + 1;
