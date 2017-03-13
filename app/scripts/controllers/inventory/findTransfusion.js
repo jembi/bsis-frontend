@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindTransfusionCtrl', function($scope, $filter, $log, TransfusionService, DATEFORMAT) {
+  .controller('FindTransfusionCtrl', function($scope, $location, $filter, $log, TransfusionService, DATEFORMAT) {
 
     $scope.dateFormat = DATEFORMAT;
     $scope.transfusionOutcomes = [];
@@ -80,6 +80,7 @@ angular.module('bsis')
       paginationTemplate: 'views/template/pagination.html',
       minRowsToShow: 8,
       columnDefs: columnDefs,
+      rowTemplate: 'views/template/clickablerow.html',
 
       exporterPdfOrientation: 'portrait',
       exporterPdfPageSize: 'A4',
@@ -148,6 +149,10 @@ angular.module('bsis')
       onRegisterApi: function(gridApi) {
         $scope.gridApi = gridApi;
       }
+    };
+
+    $scope.onRowClick = function(row) {
+      $location.path('/recordTransfusions/' + row.entity.id);
     };
 
     function initialiseForm() {

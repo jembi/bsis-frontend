@@ -35,6 +35,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
         $scope.genders = GENDER.options;
         $scope.transfusionReactionTypes = response.transfusionReactionTypes;
         $scope.bloodGroups = BLOODGROUP.options;
+
       }
     });
   }
