@@ -92,7 +92,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     query.counsellingStatus = $scope.search.counsellingStatus;
     queryParams.counsellingStatus = $scope.search.counsellingStatus;
 
-    if ($scope.search.flaggedForCounselling == false || $scope.search.counsellingStatus !== 'RECEIVED_COUNSELLING') {
+    if ($scope.search.flaggedForCounselling == false && $scope.search.counsellingStatus !== 'RECEIVED_COUNSELLING') {
       query.referred = null;
       queryParams.referred = null;
       query.notReferred = null;
@@ -124,16 +124,6 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $location.path('donorCounselling/' + row.entity.donorId).search({});
   };
 
-  function updateReferredAndNotReferred() {
-    if ($scope.search.counsellingStatus !== 'RECEIVED_COUNSELLING') {
-      $scope.search.referred = null;
-      $scope.search.notReferred = null;
-    } else {
-      $scope.search.referred = false;
-      $scope.search.notReferred = false;
-    }
-  }
-
   $scope.clearCounsellingStatusReferredAndNotReferred = function() {
     $scope.search.counsellingStatus = null;
     $scope.search.referred = null;
@@ -141,8 +131,10 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   $scope.updateReferredAndNotReferredState = function() {
-    updateReferredAndNotReferred();
-    if ($scope.search.flaggedForCounselling == false && $scope.search.counsellingStatus != null &&  ($scope.search.referred === null &&  $scope.search.notReferred === null)) {
+    if ($scope.search.counsellingStatus !== 'RECEIVED_COUNSELLING') {
+      $scope.search.referred = null;
+      $scope.search.notReferred = null;
+    } else {
       $scope.search.referred = false;
       $scope.search.notReferred = false;
     }
