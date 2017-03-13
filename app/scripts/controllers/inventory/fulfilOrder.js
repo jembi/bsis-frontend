@@ -296,7 +296,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
         $scope.addingComponent = false;
       }, function(err) {
         $log.error(err);
-        if (err.errorCode === 'NOT_FOUND') {
+        if (err.data.errorCode === 'NOT_FOUND') {
           showErrorMessage('Component with DIN ' + $scope.component.din + ' and ComponentCode ' + $scope.component.componentCode + ' not found.');
         }
         $scope.addingComponent = false;
