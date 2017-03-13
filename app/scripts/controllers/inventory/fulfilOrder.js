@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, ComponentService, BLOODGROUP, GENDER, DATEFORMAT, ModalsService) {
+angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, InventoriesService, BLOODGROUP, GENDER, DATEFORMAT, ModalsService) {
 
   var orderItemMaster = {
     componentType: null,
@@ -60,7 +60,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       var row = convertItem(item);
       var unmatchedComponents = [];
       angular.forEach(components, function(component) {
-        var bloodGroup = component.bloodAbo + component.bloodRh;
+        var bloodGroup = component.bloodGroup;
         if (row.gap > 0 && component.componentType.id === item.componentType.id && bloodGroup === item.bloodGroup) {
           // can't over supply and component matches
           row.numberSupplied = row.numberSupplied + 1;
@@ -236,17 +236,21 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
         donationIdentificationNumber: $scope.component.din,
         componentCode: $scope.component.componentCode
       };
-      ComponentService.findComponent(searchParams, function(component) {
+      InventoriesService.getInventoryComponentByCodeAndDIN(searchParams, function(component) {
+        var validComponent = true;
         // check if component in stock
         if (component.inventoryStatus !== 'IN_STOCK') {
+          validComponent = false;
           showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
             ') is not currently in stock.');
         // check if the component is in the correct location
         } else if (component.location.id !== $scope.orderForm.dispatchedFrom.id) {
+          validComponent = false;
           showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
             ') is not currently in stock at ' + $scope.orderForm.dispatchedFrom.name + '.');
         // check if the component is available
-        } else if (component.status !== 'AVAILABLE') {
+        } else if (component.componentStatus !== 'AVAILABLE') {
+          validComponent = false;
           showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
             ') is not suitable for dispatch.');
         } else {
@@ -255,32 +259,44 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
             return e.id === component.id;
           });
           if (componentAlreadyAdded) {
+            validComponent = false;
             showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
               ') has already been added to this Order Form.');
           } else {
-            // update the table
-            var oldData = angular.copy($scope.gridOptions.data);
-            var oldComponents = angular.copy($scope.components);
-            $scope.components.push(component);
-            var componentsLeft = populateGrid($scope.components, $scope.orderItems);
-            // check if the component was matched
-            if (!componentsLeft || componentsLeft.length > 0) {
+            // check if the component has already been added to another oder form
+            var componentInAnotherOrderForm = component.orderForms.some(function(orderForm) {
+              return orderForm.id !== $scope.orderForm.id && orderForm.status != 'DISPATCHED';
+            });
+            if (componentInAnotherOrderForm) {
+              validComponent = false;
               showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-                ') does not match what was ordered.');
-              // reset the data in the table
-              $scope.gridOptions.data = oldData;
-              $scope.components = oldComponents;
-            } else {
-              // was added successfully, so save in orderForm and reset the form
-              $scope.component = angular.copy(componentMaster);
-              form.$setPristine();
+                ') has already been assigned to another Order Form.');
             }
+          }
+        }
+        if (validComponent) {
+          // update the table
+          var oldData = angular.copy($scope.gridOptions.data);
+          var oldComponents = angular.copy($scope.components);
+          $scope.components.push(component);
+          var componentsLeft = populateGrid($scope.components, $scope.orderItems);
+          // check if the component was matched
+          if (!componentsLeft || componentsLeft.length > 0) {
+            showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
+              ') does not match what was ordered.');
+            // reset the data in the table
+            $scope.gridOptions.data = oldData;
+            $scope.components = oldComponents;
+          } else {
+            // was added successfully, so save in orderForm and reset the form
+            $scope.component = angular.copy(componentMaster);
+            form.$setPristine();
           }
         }
         $scope.addingComponent = false;
       }, function(err) {
         $log.error(err);
-        if (err.errorCode === 'NOT_FOUND') {
+        if (err.data.errorCode === 'NOT_FOUND') {
           showErrorMessage('Component with DIN ' + $scope.component.din + ' and ComponentCode ' + $scope.component.componentCode + ' not found.');
         }
         $scope.addingComponent = false;

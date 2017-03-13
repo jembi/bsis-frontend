@@ -513,6 +513,10 @@ angular.module('bsis')
         getSearchForm: {
           method: 'GET',
           url: url + '/inventories/search/form'
+        },
+        getInventory: {
+          method: 'GET',
+          url: url + '/inventories'
         }
       }),
 

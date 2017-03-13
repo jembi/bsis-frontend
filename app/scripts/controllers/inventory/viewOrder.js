@@ -203,7 +203,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
       };
       var unmatchedComponents = [];
       angular.forEach(componentsToMatch, function(component) {
-        var bloodGroup = component.bloodAbo + component.bloodRh;
+        var bloodGroup = component.bloodGroup;
         if (row.gap > 0 && component.componentType.id === item.componentType.id && bloodGroup === item.bloodGroup) {
           // can't over supply and component matches
           row.numberSupplied = row.numberSupplied + 1;
@@ -223,7 +223,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
       var row = {
         donationIdentificationNumber: component.donationIdentificationNumber,
         componentTypeName: component.componentType.componentTypeName,
-        bloodGroup: component.bloodAbo + component.bloodRh
+        bloodGroup: component.bloodGroup
       };
       $scope.unitsSuppliedGridOptions.data.push(row);
     });
