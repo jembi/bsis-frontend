@@ -8,6 +8,8 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     anyDate: true,
     allVenues: true,
     counsellingStatuses: [],
+    referred: true,
+    notReferred: true,
     flaggedForCounselling: false
   };
 
@@ -90,9 +92,17 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     query.counsellingStatus = $scope.search.counsellingStatus;
     queryParams.counsellingStatus = $scope.search.counsellingStatus;
 
-    query.referred = $scope.search.referred;
-    queryParams.referred = $scope.search.referred;
-
+    if ($scope.search.flaggedForCounselling == false && $scope.search.counsellingStatus !== 'RECEIVED_COUNSELLING') {
+      query.referred = null;
+      queryParams.referred = null;
+      query.notReferred = null;
+      queryParams.notReferred = null;
+    } else {
+      query.referred = $scope.search.referred;
+      queryParams.referred = $scope.search.referred;
+      query.notReferred = $scope.search.notReferred;
+      queryParams.notReferred = $scope.search.notReferred;
+    }
     $location.search(queryParams);
 
     $scope.searching = true;
@@ -114,17 +124,20 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     $location.path('donorCounselling/' + row.entity.donorId).search({});
   };
 
-  $scope.updateReferred = function() {
-    if ($scope.search.counsellingStatus !== 'RECEIVED_COUNSELLING') {
-      $scope.search.referred = null;
-    } else {
-      $scope.search.referred = false;
-    }
-  };
-
-  $scope.clearCounsellingStatusAndReferred = function() {
+  $scope.clearCounsellingStatusReferredAndNotReferred = function() {
     $scope.search.counsellingStatus = null;
     $scope.search.referred = null;
+    $scope.search.notReferred = null;
+  };
+
+  $scope.updateReferredAndNotReferredState = function() {
+    if ($scope.search.counsellingStatus !== 'RECEIVED_COUNSELLING') {
+      $scope.search.referred = null;
+      $scope.search.notReferred = null;
+    } else {
+      $scope.search.referred = false;
+      $scope.search.notReferred = false;
+    }
   };
 
   var columnDefs = [
@@ -288,6 +301,11 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     if ($routeParams.referred) {
       var referred = $routeParams.referred;
       $scope.search.referred = angular.lowercase(referred) === true;
+    }
+
+    if ($routeParams.notReferred) {
+      var notReferred = $routeParams.notReferred;
+      $scope.search.notReferred = angular.lowercase(notReferred) === true;
     }
 
     // If the search parameter is present then refresh
