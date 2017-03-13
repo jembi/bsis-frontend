@@ -92,7 +92,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     query.counsellingStatus = $scope.search.counsellingStatus;
     queryParams.counsellingStatus = $scope.search.counsellingStatus;
 
-    if ($scope.search.flaggedForCounselling == false && $scope.search.counsellingStatus !== 'RECEIVED_COUNSELLING') {
+    if ($scope.search.flaggedForCounselling == false || $scope.search.counsellingStatus !== 'RECEIVED_COUNSELLING') {
       query.referred = null;
       queryParams.referred = null;
       query.notReferred = null;
@@ -122,7 +122,6 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
   $scope.onRowClick = function(row) {
     $location.path('donorCounselling/' + row.entity.donorId).search({});
-    $scope.search.referred = null;
   };
 
   function updateReferredAndNotReferred() {
