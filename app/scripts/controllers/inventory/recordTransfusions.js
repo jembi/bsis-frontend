@@ -146,29 +146,32 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
       return;
     }
     $scope.submitted = true;
-    $scope.addingTransfusionForm = true;
+    $scope.savingTransfusionForm = true;
     var transfusionRecord = angular.copy($scope.transfusion);
 
     if ($routeParams.id) {
       TransfusionService.update(transfusionRecord, function() {
+        $scope.clear();
+        $scope.savingTransfusionForm = false;
         $location.path('/findTransfusion');
       }, function(response) {
         onSaveError(response);
+        $scope.savingTransfusionForm = false;
       });
     } else {
       TransfusionService.createTransfusion(transfusionRecord, function() {
         $scope.clear();
-        $scope.addingTransfusionForm = false;
+        $scope.savingTransfusionForm = false;
       }, function(response) {
         onSaveError(response);
-        $scope.addingTransfusionForm = false;
+        $scope.savingTransfusionForm = false;
       });
     }
   };
 
   $scope.clear = function() {
     $scope.transfusion = angular.copy($scope.masterDetails);
-    $scope.addingTransfusionForm = false;
+    $scope.savingTransfusionForm = false;
     $scope.submitted = false;
     $scope.recordTransfusionsForm.$setPristine();
   };
