@@ -21,6 +21,7 @@ angular.module('bsis')
     $scope.bpDiastolicMax = DONATION.DONOR.BP_DIASTOLIC_MAX;
     $scope.pulseMin = DONATION.DONOR.PULSE_MIN;
     $scope.pulseMax = DONATION.DONOR.PULSE_MAX;
+    $scope.dinLength = DONATION.DIN_LENGTH;
 
     var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
     var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
@@ -41,6 +42,7 @@ angular.module('bsis')
     $scope.addDonationSuccess = '';
 
     $scope.showTestResults = false;
+    $scope.today = new Date();
 
     var columnDefs = [
       {
@@ -161,6 +163,19 @@ angular.module('bsis')
 
       $scope.donationBatchView = 'viewDonationBatch';
 
+    };
+
+    $scope.validateDonationBatchEditableForm = function(editableForm) {
+      if (editableForm.donationBatchDate.$error.dateInFuture || editableForm.donationBatchDate.$error.required) {
+        return 'invalid';
+      } else {
+        $scope.confirmEdit = false;
+        return true;
+      }
+    };
+
+    $scope.cancelDonationBatchEditing = function() {
+      init();
     };
 
     $scope.updateDonationBatch = function(donationBatch, reopen) {

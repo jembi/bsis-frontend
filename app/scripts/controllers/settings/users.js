@@ -170,9 +170,10 @@ angular.module('bsis')
           if (response !== false) {
             $scope.go('/users');
           } else {
-            if (err['user.username']) {
+            var fieldName = 'username';
+            if (err[fieldName]) {
               $scope.usernameInvalid = 'ng-invalid';
-              $scope.serverError = err['user.username'];
+              $scope.serverError = err[fieldName];
             }
           }
           $scope.savingUser = false;
@@ -197,9 +198,10 @@ angular.module('bsis')
             $scope.submitted = '';
             $scope.go('/users');
           } else {
-            if (err['user.username']) {
+            var fieldName = 'username';
+            if (err[fieldName]) {
               $scope.usernameInvalid = 'ng-invalid';
-              $scope.serverError = err['user.username'];
+              $scope.serverError = err[fieldName];
             }
           }
           $scope.savingUser = false;

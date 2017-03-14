@@ -136,6 +136,7 @@ angular.module('bsis')
 
     var labellingRoutes = [
       '/labelling',
+      '/findSafeComponents',
       '/labelComponents'
     ];
 

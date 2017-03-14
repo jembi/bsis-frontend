@@ -230,9 +230,16 @@ angular.module('bsis')
           method: 'PUT',
           url: url + '/components/undiscard'
         },
-        updateWeight: {
+        preProcess: {
           method: 'PUT',
-          url: url + '/components/:id/weight',
+          url: url + '/components/:id/preprocess',
+          params: {
+            id: '@id'
+          }
+        },
+        recordChildWeight: {
+          method: 'PUT',
+          url: url + '/components/:id/recordchildweight',
           params: {
             id: '@id'
           }
@@ -240,14 +247,22 @@ angular.module('bsis')
       }),
 
       Labelling: $resource(url + '/labels/', {}, {
+        search: {
+          method: 'GET',
+          url: url + '/labels/components/search'
+        },
         getComponentForm: {
           method: 'GET',
           url: url + '/labels/components/form'
         },
         getComponents: {
           method: 'GET',
-          url: url + '/labels/components',
-          params: {componentType: '@componentType', donationIdentificationNumber: '@donationIdentificationNumber'}
+          url: url + '/labels/donations/:donationIdentificationNumber/components',
+          params: {componentType: '@componentType'}
+        },
+        getSafeComponents: {
+          method: 'GET',
+          url: url + '/labels/components'
         },
         printPackLabel: {
           method: 'GET',
@@ -256,6 +271,11 @@ angular.module('bsis')
         printDiscardLabel: {
           method: 'GET',
           url: url + '/labels/print/discardlabel/:componentId'
+        },
+        verifyPackLabel: {
+          method: 'GET',
+          url: url + '/labels/verify/packlabel',
+          params: {componentId: '@componentId', prePrintedDIN: '@prePrintedDIN', packLabelDIN: '@packLabelDIN'}
         }
       }),
 

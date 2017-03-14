@@ -1,15 +1,23 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ModalsService, UtilsService, $uibModal) {
+  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ComponentValidationService, ModalsService, UtilsService, $uibModal, DATEFORMAT) {
 
     $scope.component = null;
     $scope.componentsSearch = {
       donationIdentificationNumber: $routeParams.donationIdentificationNumber || ''
     };
-    $scope.recordingWeight = false;
+    $scope.savingChildWeight = false;
+    $scope.preProcessing = false;
     $scope.unprocessing = false;
+    $scope.dateFormat = DATEFORMAT;
+    $scope.maxProcessedOnDate = moment().endOf('day').toDate();
+    $scope.processedOn = null;
+    var producedComponentTypesByCombinationId = null;
+
+    var originalComponent = null;
     var forms = $scope.forms = {};
+    var componentList = null;
 
     $scope.clear = function() {
       $scope.componentsSearch.donationIdentificationNumber = '';
@@ -22,48 +30,135 @@ angular.module('bsis')
       });
     };
 
-    $scope.clearComponentTypeCombination = function() {
+    $scope.clearRecordComponentForm = function() {
       if ($scope.component) {
         $scope.component.componentTypeCombination = null;
+        $scope.processedOn = {
+          date: moment().toDate(),
+          time: moment().toDate()
+        };
       }
       if (forms.recordComponentsForm) {
         forms.recordComponentsForm.$setPristine();
+        forms.recordComponentsForm.processedOnDate.$setValidity('dateInFuture', true);
       }
     };
 
-    $scope.clearWeight = function() {
+    $scope.clearPreProcessForm = function() {
       if ($scope.component) {
-        $scope.component.weight = null;
+        $scope.component = angular.copy(originalComponent);
       }
-      if (forms.recordWeightForm) {
-        forms.recordWeightForm.$setPristine();
+      if (forms.preProcessForm) {
+        forms.preProcessForm.$setPristine();
       }
     };
+
+    $scope.clearChildComponentWeightForm = function() {
+      if ($scope.component) {
+        $scope.component = angular.copy(originalComponent);
+      }
+      if (forms.childComponentWeightForm) {
+        forms.childComponentWeightForm.$setPristine();
+      }
+    };
+
+    function getMaxTimesConfirmationMessage(parentComponent, processedOn) {
+      var confirmationMessage = '';
+      // Add to confirmation message if time since donation is greater or equals to maxTimeSinceDonation
+      var componentTypesExceedingMaxTimeSinceDonation = '';
+      var separator = '';
+      var timeSinceDonation = moment.duration(moment(processedOn).diff(moment(parentComponent.donationDateTime))).asHours();
+      angular.forEach(producedComponentTypesByCombinationId[parentComponent.componentTypeCombination.id], function(componentType) {
+        if (componentType.maxTimeSinceDonation != null && timeSinceDonation >= componentType.maxTimeSinceDonation) {
+          // Ignore duplicates
+          if (componentTypesExceedingMaxTimeSinceDonation.indexOf(componentType.componentTypeName) === -1) {
+            componentTypesExceedingMaxTimeSinceDonation += separator + componentType.componentTypeName;
+          }
+          separator = ', ';
+        }
+      });
+
+      if (componentTypesExceedingMaxTimeSinceDonation.length > 0) {
+        confirmationMessage = 'Time since donation exceeded, the following components will be flagged as unsafe: ' + componentTypesExceedingMaxTimeSinceDonation + '.';
+      }
+
+      // Add to confirmation message if bleed times gap is greater or equals to maxBleedTime
+      var componentTypesExceedingMaxBleedTime = '';
+      separator = '';
+      var bleedTimesGap = moment.duration(moment(parentComponent.bleedEndTime).diff(moment(parentComponent.bleedStartTime))).asMinutes();
+      angular.forEach(producedComponentTypesByCombinationId[parentComponent.componentTypeCombination.id], function(componentType) {
+        if (componentType.maxBleedTime != null && bleedTimesGap >= componentType.maxBleedTime) {
+          // Ignore duplicates
+          if (componentTypesExceedingMaxBleedTime.indexOf(componentType.componentTypeName) === -1) {
+            componentTypesExceedingMaxBleedTime += separator + componentType.componentTypeName;
+          }
+          separator = ', ';
+        }
+      });
+
+      if (componentTypesExceedingMaxBleedTime.length > 0) {
+        // Add two new lines if the maxTimeSinceDonation was also exceeded
+        var conditionalNewLines = '';
+        if (confirmationMessage.length > 0) {
+          conditionalNewLines = '</br></br>';
+        }
+        confirmationMessage += conditionalNewLines + 'Bleed time exceeded, the following components will be flagged as unsafe: ' + componentTypesExceedingMaxBleedTime + '.';
+      }
+
+      return confirmationMessage;
+    }
+
+    function showComponentMaxTimesConfirmation(parentComponent, processedOn) {
+
+      var confirmationMessage = getMaxTimesConfirmationMessage(parentComponent, processedOn);
+
+      if (confirmationMessage.length > 0) {
+        return ModalsService.showConfirmation({
+          title: 'Time since Donation or Bleed Time exceeded',
+          button: 'Continue',
+          message: confirmationMessage
+        });
+      }
+
+      // Continue with processing
+      return $q.resolve();
+    }
 
     var recordComponents = function() {
 
-      if (forms.recordComponentsForm.$invalid) {
+      if (!forms.recordComponentsForm.$valid) {
         return;
       }
 
       var componentToRecord = {
         parentComponentId: $scope.component.id,
-        componentTypeCombination: $scope.component.componentTypeCombination
+        componentTypeCombination: $scope.component.componentTypeCombination,
+        processedOn: moment($scope.processedOn.date).hour($scope.processedOn.time.getHours()).minutes($scope.processedOn.time.getMinutes())
       };
 
       $scope.recordingComponents = true;
-      ComponentService.recordComponents(componentToRecord, function(recordResponse) {
-        if (recordResponse !== false) {
-          $scope.gridOptions.data = recordResponse.components;
-          forms.recordComponentsForm.$setPristine();
-          $scope.component = null;
-          $scope.recordingComponents = false;
-        } else {
-          // TODO: handle case where response == false
-          $scope.recordingComponents = false;
-        }
+      showComponentMaxTimesConfirmation($scope.component, componentToRecord.processedOn).then(function() {
+        ComponentService.recordComponents(componentToRecord, function(recordResponse) {
+          if (recordResponse !== false) {
+            $scope.gridOptions.data = recordResponse.components;
+            forms.recordComponentsForm.$setPristine();
+            $scope.component = null;
+            $scope.recordingComponents = false;
+          } else {
+            // TODO: handle case where response == false
+            $scope.recordingComponents = false;
+          }
+        });
+      }).catch(function() {
+        // Confirmation was rejected
+        $scope.recordingComponents = false;
       });
+    };
 
+    $scope.updateTimeOnProcessedOnDate = function() {
+      if (angular.isDefined($scope.processedOn.time)) {
+        $scope.processedOn.date = moment($scope.processedOn.date).hour($scope.processedOn.time.getHours()).minutes($scope.processedOn.time.getMinutes()).toDate();
+      }
     };
 
     function showComponentWeightConfirmation(component) {
@@ -77,22 +172,30 @@ angular.module('bsis')
         });
       }
 
-      // Show confirmation if it is below min weight
-      if (component.packType.minWeight != null && component.weight < component.packType.minWeight) {
-        return ModalsService.showConfirmation({
-          title: 'Underweight Pack',
-          button: 'Continue',
-          message: 'The pack weight (' + component.weight + 'g) is below the minimum acceptable range (' + component.packType.minWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
-        });
-      }
-
       // Show confirmation if it is below low volume weight
       if (component.packType.lowVolumeWeight != null && component.weight <= component.packType.lowVolumeWeight) {
         return ModalsService.showConfirmation({
-          title: 'Low Pack Weight',
+          title: 'Underweight Pack',
           button: 'Continue',
-          message: 'The pack weight (' + component.weight + 'g) is low (below ' + component.packType.lowVolumeWeight + 'g). It is recommended that all components from this donation are discarded, with the exception of Packed Red Cells. Do you want to continue?'
+          message: 'The pack weight (' + component.weight + 'g) is below the minimum acceptable range (' + component.packType.lowVolumeWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
         });
+      }
+
+      if (component.packType.minWeight != null && component.weight < component.packType.minWeight) {
+        // Show confirmation if it is below min weight when lowVolumeWeight is null
+        if (component.packType.lowVolumeWeight == null) {
+          return ModalsService.showConfirmation({
+            title: 'Underweight Pack',
+            button: 'Continue',
+            message: 'The pack weight (' + component.weight + 'g) is below the minimum acceptable range (' + component.packType.minWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
+          });
+        } else {
+          return ModalsService.showConfirmation({
+            title: 'Low Pack Weight',
+            button: 'Continue',
+            message: 'The pack weight (' + component.weight + 'g) is low (below ' + component.packType.minWeight + 'g). All components from this donation containing plasma will be flagged as Unsafe. Do you want to continue?'
+          });
+        }
       }
 
       // Weight is within valid range
@@ -114,17 +217,16 @@ angular.module('bsis')
       return $q.resolve();
     }
 
-    $scope.recordWeightForSelectedComponent = function() {
+    $scope.preProcessSelectedComponent = function() {
 
-      if (forms.recordWeightForm.$invalid) {
+      if (forms.preProcessForm.$invalid) {
         return;
       }
 
-      $scope.recordingWeight = true;
-
+      $scope.preProcessing = true;
       showComponentWeightConfirmation($scope.component).then(function() {
 
-        ComponentService.updateWeight({}, $scope.component, function(res) {
+        ComponentService.preProcess({}, $scope.component, function(res) {
           $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
             // Replace the component in the grid with the updated component
             if (component.id === res.component.id) {
@@ -142,15 +244,88 @@ angular.module('bsis')
           // Make sure that the row remains selected
           $timeout(function() {
             $scope.gridApi.selection.selectRow(res.component);
-            $scope.recordingWeight = false;
+            $scope.preProcessing = false;
           });
         }, function(err) {
           $log.error(err);
-          $scope.recordingWeight = false;
+          $scope.preProcessing = false;
         });
       }).catch(function() {
         // Confirmation was rejected
-        $scope.recordingWeight = false;
+        $scope.preProcessing = false;
+      });
+    };
+
+    function calculateChildrenTotalWeight(currentChild) {
+      var totalWeight = 0;
+      for (var i = 0;i < componentList.length;i++) {
+        // do not include current child as weight might have changed
+        if (componentList[i].id !== currentChild.id
+          && componentList[i].parentComponentId === currentChild.parentComponentId) {
+          // ensure calculation is done on components with weight set
+          if (componentList[i].weight !== null) {
+            totalWeight += componentList[i].weight;
+          }
+        }
+      }
+      return currentChild.weight + totalWeight;
+    }
+
+    function getParentComponent(selectedComponent) {
+      var parentComponent = null;
+      angular.forEach($scope.gridOptions.data, function(component) {
+        if (component.id === selectedComponent.parentComponentId) {
+          parentComponent = component;
+          return;
+        }
+      });
+      return parentComponent;
+    }
+
+    $scope.recordChildWeight = function() {
+
+      if (forms.childComponentWeightForm.$invalid) {
+        return;
+      }
+
+      $scope.savingChildWeight = true;
+      //Refresh componentsList so that calculateChildrenTotalWeight(..) uses the correct weights
+      ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(componentsResponse) {
+        if (componentsResponse !== false) {
+          componentList = componentsResponse.components;
+          var parentComponent = getParentComponent($scope.component);
+          var totalChildrenWeight = calculateChildrenTotalWeight($scope.component);
+          ComponentValidationService.showChildComponentWeightConfirmation(parentComponent, totalChildrenWeight).then(function() {
+            var weightParams = {weight: $scope.component.weight, id: $scope.component.id};
+            ComponentService.recordChildWeight({}, weightParams, function(res) {
+              $scope.gridOptions.data = $scope.gridOptions.data.map(function(component) {
+                // Replace the component in the grid with the updated component
+                if (component.id === res.component.id) {
+                  return res.component;
+                } else {
+                  return component;
+                }
+              });
+
+              // Clear validation on the record components form
+              if (forms.childComponentWeightForm) {
+                forms.childComponentWeightForm.$setPristine();
+              }
+
+              // Make sure that the row remains selected
+              $timeout(function() {
+                $scope.gridApi.selection.selectRow(res.component);
+                $scope.savingChildWeight = false;
+              });
+            }, function(err) {
+              $log.error(err);
+              $scope.savingChildWeight = false;
+            });
+          }).catch(function() {
+            // Confirmation was rejected
+            $scope.savingChildWeight = false;
+          });
+        }
       });
     };
 
@@ -186,12 +361,21 @@ angular.module('bsis')
       ComponentService.getComponentsByDIN($scope.componentsSearch.donationIdentificationNumber, function(componentsResponse) {
         if (componentsResponse !== false) {
           $scope.gridOptions.data = componentsResponse.components;
+          componentList = componentsResponse.components;
           $scope.component = null;
           $scope.searching = false;
         } else {
           $scope.searching = false;
         }
       });
+    };
+
+    $scope.getParentComponentWeight = function(selectedComponent) {
+      var parentComponent = getParentComponent(selectedComponent);
+      if (parentComponent != null) {
+        return parentComponent.weight;
+      }
+      return null;
     };
 
     var columnDefs = [
@@ -216,15 +400,15 @@ angular.module('bsis')
       {
         name: 'Created On',
         field: 'createdOn',
-        cellFilter: 'bsisDate',
+        cellFilter: 'bsisDateTime',
         width: '**',
-        maxWidth: '150'
+        maxWidth: '160'
       },
       {
         name: 'Expiry Status',
         field: 'expiryStatus',
         width: '**',
-        maxWidth: '250',
+        maxWidth: '200',
         sortingAlgorithm: function(a, b, rowA, rowB) {
           return UtilsService.dateSort(rowA.entity.expiresOn, rowB.entity.expiresOn);
         }
@@ -256,6 +440,11 @@ angular.module('bsis')
             $scope.component = null;
           } else {
             $scope.component = angular.copy(selectedRows[0]);
+            originalComponent = angular.copy(selectedRows[0]);
+            $scope.processedOn = {
+              date: moment().toDate(),
+              time: moment().toDate()
+            };
           }
         });
       }
@@ -295,6 +484,11 @@ angular.module('bsis')
       if ($routeParams.search) {
         $scope.getComponentsByDIN();
       }
+      ComponentService.getComponentsFormFields(function(response) {
+        if (response !== false) {
+          producedComponentTypesByCombinationId = response.producedComponentTypesByCombinationId;
+        }
+      });
     }
 
     init();

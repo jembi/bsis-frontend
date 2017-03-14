@@ -49,7 +49,7 @@ angular.module('bsis')
       var adverseEventType = cohorts[0].option;
 
       row.venue = newRow.location.name;
-      row[adverseEventType] = newRow.value;
+      row[adverseEventType] += newRow.value;
       row.total += newRow.value;
 
       rowForTotal[adverseEventType] += newRow.value;

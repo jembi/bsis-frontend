@@ -28,6 +28,7 @@ angular.module('bsis')
         var components = Api.Components.search({
           donationIdentificationNumber: componentsSearch.donationIdentificationNumber,
           componentTypes: componentsSearch.componentTypes,
+          locationId: componentsSearch.locationId,
           status: componentsSearch.status,
           donationDateFrom: componentsSearch.donationDateFrom,
           donationDateTo: componentsSearch.donationDateTo
@@ -49,6 +50,7 @@ angular.module('bsis')
       discard: Api.Components.discard,
       unprocess: Api.Components.unprocess,
       undiscard: Api.Components.undiscard,
-      updateWeight: Api.Components.updateWeight
+      preProcess: Api.Components.preProcess,
+      recordChildWeight: Api.Components.recordChildWeight
     };
   });

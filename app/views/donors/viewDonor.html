@@ -166,7 +166,10 @@
                             <tr>
                                 <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
                                 <td class="field">Due To Donate:</td>
-                                <td class="value">{{dueToDonate | bsisDate:'longDate'}}</td>
+                                <td class="value">
+                                  <span ng-if="lastDeferral === null || lastDeferral.deferralReason.durationType === 'TEMPORARY'">{{dueToDonate | bsisDate:'longDate'}}</span>
+                                  <span ng-if="lastDeferral.deferralReason.durationType === 'PERMANENT'">Not applicable</span>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
@@ -212,7 +215,7 @@
                                 <td class="icon"><i class="fa {{icons.CIRCLE}}"></i></td>
                                 <td class="field">Previous Donation:</td>
                                 <td class="value">
-                                    <em>Date</em>: {{ (lastDonation.donationDate | bsisDateTime) || '' }}<br/>
+                                    <em>Date</em>: {{ (lastDonation.donationDate | bsisDate) || '' }}<br/>
                                     <em>Venue</em>: {{lastDonation.venue.name}} <br/>
                                     <em>Donation Type</em>: {{lastDonation.donationType.type}} |
                                     <em>Pack Type</em>: {{lastDonation.packType.packType}}<br/>
@@ -269,7 +272,7 @@
                             </tr>
                             <tr>
                                 <td class="icon"><i class="fa {{icons.COMMENT}}"></i></td>
-                                <td class="field">Comments:</td>
+                                <td class="field">Donor Notes:</td>
                                 <td class="value">
                                     <form editable-form name="donorNotesForm" onaftersave="updateDonor(donor)">
                                           <span style="float: right; padding-right: 15px; padding-left: 15px; font-size: 0.9em">

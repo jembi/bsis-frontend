@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, $routeParams, LabellingService) {
+angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, $routeParams, $timeout, LabellingService) {
 
   $scope.serverErrorMessage = null;
   $scope.searchResults = null;
@@ -9,6 +9,14 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     componentType: angular.isDefined($routeParams.componentType) ? +$routeParams.componentType : null
   };
   $scope.componentTypes = [];
+  $scope.verificationParams = {
+    componentId: null,
+    prePrintedDIN: null,
+    packLabelDIN: null
+  };
+  $scope.verifyComponent = null;
+  $scope.verifying = false;
+  $scope.rescanning = false;
 
   $scope.getComponents = function(form) {
 
@@ -16,6 +24,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       return;
     }
 
+    $scope.verifyComponent = null;
     $scope.serverErrorMessage = null;
     $location.search(angular.extend({search: true}, $scope.search));
     $scope.searching = true;
@@ -24,6 +33,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       $scope.components = response.components;
       $scope.searchResults = true;
       $scope.searching = false;
+      $scope.clearLabelVerificationForm();
     }, function(err) {
       $log.error(err);
       $scope.searching = false;
@@ -34,11 +44,42 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.getComponents();
   }
 
-  $scope.printPackLabel = function(componentId) {
+  $scope.verifyPackLabel = function(component, labellingVerificationForm) {
+    $scope.verifying = true;
+    if (labellingVerificationForm.$invalid) {
+      $scope.verifying = false;
+      return;
+    }
+    if ($scope.verificationParams.prePrintedDIN === $scope.verificationParams.packLabelDIN) {
+      labellingVerificationForm.packLabelDIN.$setValidity('sameDinScanned', false);
+      $scope.verifying = false;
+      $scope.rescanning = true;
+      return;
+    }
+    $scope.verificationParams.componentId = component.id;
+    LabellingService.verifyPackLabel($scope.verificationParams, function(response) {
+      if (response.labelVerified) {
+        component.verificationStatus = 'verified';
+        $scope.clearLabelVerificationForm(labellingVerificationForm);
+        $scope.verifying = false;
+        $scope.verifyComponent = null;
+      } else {
+        labellingVerificationForm.packLabelDIN.$setValidity('notVerified', false);
+        $scope.rescanning = true;
+        $scope.verifying = false;
+      }
+    }, function(err) {
+      $log.error(err);
+      $scope.verifying = false;
+    });
+  };
+
+  $scope.printPackLabel = function(component) {
     $scope.serverErrorMessage = null;
-    LabellingService.printPackLabel(componentId, function(response) {
+    LabellingService.printPackLabel(component.id, function(response) {
       $scope.labelZPL = response.labelZPL;
       $log.debug('$scope.labelZPL: ', $scope.labelZPL);
+      $scope.verifyComponent = component;
     }, function(err) {
       if (err.errorCode === 'CONFLICT') {
         $scope.serverErrorMessage = 'This component cannot be labelled - please check the status of the donor and donation';
@@ -65,6 +106,31 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
     $scope.search = {};
     $scope.searchResults = null;
     $scope.serverErrorMessage = null;
+    $scope.verifyComponent = null;
+    $scope.clearLabelVerificationForm();
+  };
+
+  $scope.clearLabelVerificationForm = function(form) {
+    $scope.verificationParams = {};
+    $scope.verificationParams.prePrintedDIN = null;
+    $scope.verificationParams.packLabelDIN = null;
+    $scope.rescanning = false;
+    $scope.verifying = false;
+    if (form) {
+      form.$setUntouched();
+      form.$setPristine();
+    }
+  };
+
+  $scope.rescanPackLabel = function(form) {
+    $scope.clearLabelVerificationForm(form);
+    $scope.verifying = false;
+    $scope.rescanning = false;
+    form.packLabelDIN.$setValidity('sameDinScanned', null);
+    form.packLabelDIN.$setValidity('notVerified', null);
+    $timeout(function() {
+      document.getElementById('prePrintedDIN').focus();
+    }, 0);
   };
 
   $scope.onTextClick = function($event) {

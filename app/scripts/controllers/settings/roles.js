@@ -109,7 +109,8 @@ angular.module('bsis')
             $scope.go('/roles');
           } else {
             $scope.nameInvalid = 'ng-invalid';
-            $scope.serverError = err['role.name'];
+            var name = 'name';
+            $scope.serverError = err[name];
           }
           $scope.savingRole = false;
         });
@@ -138,7 +139,8 @@ angular.module('bsis')
           $location.path('/roles');
         } else {
           $scope.nameInvalid = 'ng-invalid';
-          $scope.serverError = err['role.name'];
+          var name = 'name';
+          $scope.serverError = err[name];
         }
         $scope.savingRole = false;
       });
