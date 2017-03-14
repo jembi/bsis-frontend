@@ -39,6 +39,8 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
             $scope.transfusion = res.transfusion;
             $scope.transfusion.componentCode = res.transfusion.component.componentCode;
             $scope.transfusion.componentType = res.transfusion.component.componentType;
+            $scope.transfusion.dateTransfused = new Date(res.transfusion.dateTransfused);
+            $scope.transfusion.patient.dateOfBirth = new Date(res.transfusion.patient.dateOfBirth);
           }, $log.error);
         } else {
           $scope.transfusion = angular.copy($scope.masterDetails);
