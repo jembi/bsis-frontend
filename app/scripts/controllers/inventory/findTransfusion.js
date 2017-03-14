@@ -153,18 +153,13 @@ angular.module('bsis')
     };
 
     $scope.onRowClick = function(row) {
-      $location.path('/recordTransfusions/' + row.entity.id);
+      $location.search({}).path('/recordTransfusions/' + row.entity.id);
     };
 
     function initialise() {
       $scope.searchParams = angular.copy(master);
       $scope.submitted = false;
       $scope.searching = false;
-      TransfusionService.getSearchForm(function(response) {
-        $scope.componentTypes = response.componentTypes;
-        $scope.transfusionSites = response.usageSites;
-        $scope.transfusionOutcomes = response.transfusionOutcomes;
-      }, $log.error);
       TransfusionService.getSearchForm(function(response) {
         $scope.componentTypes = response.componentTypes;
         $scope.transfusionSites = response.usageSites;
@@ -221,6 +216,7 @@ angular.module('bsis')
       $scope.searchParams = angular.copy(master);
       $scope.submitted = false;
       $scope.searching = false;
+      $location.search({});
       searchForm.$setPristine();
     };
     initialise();
