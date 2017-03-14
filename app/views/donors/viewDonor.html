@@ -63,7 +63,7 @@
       </span>
     </span>
 
-    <span ng-if="isEligible !== undefined">
+    <span ng-if="donorInitialized !== undefined">
       <uib-alert type="danger" class="inline" close="" ng-show="isEligible !== true">
           Do not bleed donor
       </uib-alert>
@@ -158,7 +158,8 @@
                 <i class="fa {{icons.INFOCIRCLE}}"></i> Overview
             </uib-tab-heading>
 
-            <div class="panel panel-default">
+            <!-- Display this panel when the donor is initialized to avoid "flash" field value changes-->
+            <div class="panel panel-default" ng-if="donorInitialized !== undefined">
                 <div class="panel-body">
 
                         <table class="dash-table">
