@@ -127,6 +127,9 @@ angular.module('bsis')
           mergedDonor.dateOfFirstDonation = response.mergedDonor.dateOfFirstDonation;
           mergedDonor.dueToDonate = response.mergedDonor.dueToDonate;
           mergedDonor.dateOfLastDonation = response.mergedDonor.dateOfLastDonation;
+
+          $scope.showCallingName = response.mergedDonor.callingName != null && response.mergedDonor.callingName != '' && response.mergedDonor.callingName != 'none';
+          $scope.showTitle = response.mergedDonor.title != null && response.mergedDonor.title != '' && response.mergedDonor.title != 'none';
         },
         function(err) {
           $scope.hasMessage = true;

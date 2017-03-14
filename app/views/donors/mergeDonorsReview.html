@@ -13,9 +13,8 @@
             <tr>
                 <td class="icon"><i class="fa {{icons.DONORS}}"></i></td>
                 <td class="field">Name:</td>
-                <td class="value">{{donor.lastName}} {{donor.firstName}}<span
-                        ng-if="mergedDonor.title != null && mergedDonor.title != '' && mergedDonor.title != 'none'"> {{mergedDonor.title}}</span>.<span
-                        ng-if="mergedDonor.callingName != null && mergedDonor.callingName != '' && mergedDonor.callingName != 'none'"> {{mergedDonor.callingName}}</span>
+                <td class="value">{{donor.firstName}} {{donor.middleName}} {{donor.lastName}}<span ng-if="showCallingName || showTitle">&nbsp;(<span ng-if="showTitle">{{mergedDonor.title}}.</span><span ng-if="showCallingName && showTitle">&nbsp;{{mergedDonor.callingName}}</span><span ng-if="showCallingName && !showTitle">{{mergedDonor.callingName}}</span>)
+                </span>
                 </td>
             </tr>
             <tr ng-if="mergedDonor.bloodAbo != null && mergedDonor.bloodAbo != ''">
