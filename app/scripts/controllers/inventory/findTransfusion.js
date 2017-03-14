@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindTransfusionCtrl', function($scope, $filter, $log, TransfusionService, DATEFORMAT) {
+  .controller('FindTransfusionCtrl', function($scope, $location, $filter, $log, TransfusionService, DATEFORMAT, $routeParams) {
 
     $scope.dateFormat = DATEFORMAT;
     $scope.transfusionOutcomes = [];
@@ -11,6 +11,7 @@ angular.module('bsis')
     $scope.searchParams = {};
     $scope.submitted = false;
     $scope.searching = false;
+    $scope.searchForm = {};
 
     $scope.clearFields = function() {
       $scope.searchParams.receivedFromId = null;
@@ -80,6 +81,7 @@ angular.module('bsis')
       paginationTemplate: 'views/template/pagination.html',
       minRowsToShow: 8,
       columnDefs: columnDefs,
+      rowTemplate: 'views/template/clickablerow.html',
 
       exporterPdfOrientation: 'portrait',
       exporterPdfPageSize: 'A4',
@@ -150,7 +152,11 @@ angular.module('bsis')
       }
     };
 
-    function initialiseForm() {
+    $scope.onRowClick = function(row) {
+      $location.search({}).path('/recordTransfusions/' + row.entity.id);
+    };
+
+    function initialise() {
       $scope.searchParams = angular.copy(master);
       $scope.submitted = false;
       $scope.searching = false;
@@ -159,6 +165,11 @@ angular.module('bsis')
         $scope.transfusionSites = response.usageSites;
         $scope.transfusionOutcomes = response.transfusionOutcomes;
       }, $log.error);
+      if ($routeParams.din) {
+        $scope.searchParams.donationIdentificationNumber = $routeParams.din;
+        $scope.searchParams.componentCode = $routeParams.componentCode;
+        $scope.findTransfusion($scope.searchForm);
+      }
     }
 
     $scope.findTransfusion = function(searchForm) {
@@ -205,8 +216,8 @@ angular.module('bsis')
       $scope.searchParams = angular.copy(master);
       $scope.submitted = false;
       $scope.searching = false;
+      $location.search({});
       searchForm.$setPristine();
     };
-
-    initialiseForm();
+    initialise();
   });

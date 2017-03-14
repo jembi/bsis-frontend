@@ -544,7 +544,7 @@ angular.module('bsis')
         }
       }),
 
-      Transfusion: $resource(url + '/transfusions/', {}, {
+      Transfusion: $resource(url + '/transfusions/:id', {id: '@id'}, {
         getForm: {
           method: 'GET',
           url: url + '/transfusions/form'
@@ -559,6 +559,9 @@ angular.module('bsis')
         search: {
           method: 'GET',
           url: url + '/transfusions/search'
+        },
+        update: {
+          method: 'PUT'
         }
       }),
 

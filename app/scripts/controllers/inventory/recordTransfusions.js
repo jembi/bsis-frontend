@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $log, $timeout, TransfusionService, BLOODGROUP, GENDER, DATEFORMAT) {
+angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $location, $log, $timeout, $routeParams, TransfusionService, BLOODGROUP, GENDER, DATEFORMAT) {
 
   $scope.submitted = false;
   $scope.componentTypes = null;
@@ -23,8 +23,6 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     dateTransfused: $scope.today
   };
 
-  $scope.transfusion = angular.copy($scope.masterDetails);
-
   function initializeRecordTransfusionForm() {
     TransfusionService.getTransfusionForm(function(response) {
       if (response !== false) {
@@ -35,6 +33,18 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
         $scope.genders = GENDER.options;
         $scope.transfusionReactionTypes = response.transfusionReactionTypes;
         $scope.bloodGroups = BLOODGROUP.options;
+
+        if ($routeParams.id) {
+          TransfusionService.getTransfusionById({id: $routeParams.id}, function(res) {
+            $scope.transfusion = res.transfusion;
+            $scope.transfusion.componentCode = res.transfusion.component.componentCode;
+            $scope.transfusion.componentType = res.transfusion.component.componentType;
+            $scope.transfusion.dateTransfused = new Date(res.transfusion.dateTransfused);
+            $scope.transfusion.patient.dateOfBirth = new Date(res.transfusion.patient.dateOfBirth);
+          }, $log.error);
+        } else {
+          $scope.transfusion = angular.copy($scope.masterDetails);
+        }
       }
     });
   }
@@ -138,21 +148,31 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
       return;
     }
     $scope.submitted = true;
-    $scope.addingTransfusionForm = true;
+    $scope.savingTransfusionForm = true;
     var transfusionRecord = angular.copy($scope.transfusion);
 
-    TransfusionService.createTransfusion(transfusionRecord, function() {
-      $scope.clear();
-      $scope.addingTransfusionForm = false;
-    }, function(response) {
-      onSaveError(response);
-      $scope.addingTransfusionForm = false;
-    });
+    if ($routeParams.id) {
+      TransfusionService.update(transfusionRecord, function() {
+        $scope.savingTransfusionForm = false;
+        $location.search({din: transfusionRecord.donationIdentificationNumber, componentCode: transfusionRecord.componentCode}).path('/findTransfusion');
+      }, function(response) {
+        onSaveError(response);
+        $scope.savingTransfusionForm = false;
+      });
+    } else {
+      TransfusionService.createTransfusion(transfusionRecord, function() {
+        $scope.savingTransfusionForm = false;
+        $location.search({din: transfusionRecord.donationIdentificationNumber, componentCode: transfusionRecord.componentCode}).path('/findTransfusion');
+      }, function(response) {
+        onSaveError(response);
+        $scope.savingTransfusionForm = false;
+      });
+    }
   };
 
   $scope.clear = function() {
     $scope.transfusion = angular.copy($scope.masterDetails);
-    $scope.addingTransfusionForm = false;
+    $scope.savingTransfusionForm = false;
     $scope.submitted = false;
     $scope.recordTransfusionsForm.$setPristine();
   };
