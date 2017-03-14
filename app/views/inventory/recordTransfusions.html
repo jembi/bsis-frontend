@@ -8,7 +8,7 @@
       <label class="col-sm-2 control-label">DIN</label>
       <div class="form-inline col-sm-10">
         <div style="display: inline-block; vertical-align: top;">
-          <input class="form-control" name="donationIdentificationNumber" ng-model="transfusion.donationIdentificationNumber" required>
+          <input class="form-control" name="donationIdentificationNumber" ng-model="transfusion.donationIdentificationNumber" ng-disabled = "transfusion.id" required>
           <ng-messages for="recordTransfusionsForm.donationIdentificationNumber.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
             <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
