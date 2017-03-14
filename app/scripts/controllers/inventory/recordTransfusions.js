@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $log, $timeout, TransfusionService, BLOODGROUP, GENDER, DATEFORMAT) {
+angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $log, $timeout, $routeParams, TransfusionService, BLOODGROUP, GENDER, DATEFORMAT) {
 
   $scope.submitted = false;
   $scope.componentTypes = null;
@@ -23,8 +23,6 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     dateTransfused: $scope.today
   };
 
-  $scope.transfusion = angular.copy($scope.masterDetails);
-
   function initializeRecordTransfusionForm() {
     TransfusionService.getTransfusionForm(function(response) {
       if (response !== false) {
@@ -35,6 +33,13 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
         $scope.genders = GENDER.options;
         $scope.transfusionReactionTypes = response.transfusionReactionTypes;
         $scope.bloodGroups = BLOODGROUP.options;
+
+        if ($routeParams.id) {
+          TransfusionService.getForm({id: $routeParams.id}, function(res) {
+            $scope.transfusion = angular.copy($scope.masterDetails);
+            $scope.transfusion = res.transfusion;
+          }, $log.error);
+        }
       }
     });
   }
