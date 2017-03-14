@@ -92,7 +92,7 @@
       <ng-messages for="editableForm.donationBatchDate.$error" role="alert" ng-show="editableForm.donationBatchDate.$error.dateInFuture || editableForm.donationBatchDate.$error.required">
         <ng-messages-include src="messages.html"></ng-messages-include>
       </ng-messages>
-      <ng-messages for="editableForm.donationBatchDateTime.$error" role="alert" ng-show="editableForm.donationBatchDateTime.$error.required">
+      <ng-messages for="editableForm.donationBatchDateTime.$error" role="alert" ng-show="editableForm.donationBatchDateTime.$invalid">
         <ng-messages-include src="messages.html"></ng-messages-include>
       </ng-messages>
 
