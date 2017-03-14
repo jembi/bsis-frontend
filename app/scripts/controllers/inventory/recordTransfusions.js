@@ -38,6 +38,8 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
           TransfusionService.getForm({id: $routeParams.id}, function(res) {
             $scope.transfusion = angular.copy($scope.masterDetails);
             $scope.transfusion = res.transfusion;
+            $scope.transfusion.componentCode = res.transfusion.component.componentCode;
+            $scope.transfusion.componentType = res.transfusion.component.componentType;
           }, $log.error);
         }
       }
