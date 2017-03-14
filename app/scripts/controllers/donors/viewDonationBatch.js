@@ -43,7 +43,7 @@ angular.module('bsis')
     $scope.addDonationSuccess = '';
 
     $scope.showTestResults = false;
-    $scope.today = new Date();
+    $scope.today = moment().endOf('day').toDate();
 
     var columnDefs = [
       {
@@ -144,6 +144,7 @@ angular.module('bsis')
         DonorService.getDonationBatchFormFields(function(response) {
           $scope.venues = response.venues;
         }, $log.error);
+        $scope.donationBatch.donationBatchDate.time = $scope.donationBatch.donationBatchDate;
       }, $log.error);
     }
 
@@ -167,7 +168,7 @@ angular.module('bsis')
     };
 
     $scope.validateDonationBatchEditableForm = function(editableForm) {
-      if (editableForm.donationBatchDate.$error.dateInFuture || editableForm.donationBatchDate.$error.required) {
+      if (editableForm.donationBatchDate.$error.dateInFuture || editableForm.donationBatchDate.$error.required || editableForm.donationBatchDateTime.$error.required) {
         return 'invalid';
       } else {
         $scope.confirmEdit = false;
@@ -193,6 +194,12 @@ angular.module('bsis')
         }, function(err) {
           $log.error(err);
         });
+      }
+    };
+
+    $scope.updateTimeOnDonationBatchDate = function() {
+      if (angular.isDefined($scope.donationBatch.donationBatchDate.time)) {
+        $scope.donationBatch.donationBatchDate = moment($scope.donationBatch.donationBatchDate).hour($scope.donationBatch.donationBatchDate.time.getHours()).minutes($scope.donationBatch.donationBatchDate.time.getMinutes()).toDate();
       }
     };
 
