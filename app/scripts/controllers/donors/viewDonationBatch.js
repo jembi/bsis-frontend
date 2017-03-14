@@ -171,7 +171,7 @@ angular.module('bsis')
     };
 
     $scope.validateDonationBatchEditableForm = function(editableForm) {
-      if (editableForm.donationBatchDate.$error.dateInFuture || editableForm.donationBatchDate.$error.required || editableForm.donationBatchDateTime.$error.required) {
+      if (editableForm.donationBatchDate.$error.dateInFuture || editableForm.donationBatchDate.$error.required || editableForm.donationBatchDateTime.$invalid) {
         return 'invalid';
       } else {
         $scope.confirmEdit = false;
