@@ -321,7 +321,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.ADD_TRANSFUSION_DATA,
         enabled: UI.INVENTORY_TAB_ENABLED
       })
-      .when('/findTransfusion', {
+      .when('/findTransfusion/:din?/:componentCode?', {
         templateUrl: 'views/inventory/findTransfusion.html',
         controller: 'FindTransfusionCtrl',
         permission: PERMISSIONS.VIEW_TRANSFUSION_DATA,

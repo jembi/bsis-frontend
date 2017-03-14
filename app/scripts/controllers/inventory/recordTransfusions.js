@@ -153,7 +153,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
       TransfusionService.update(transfusionRecord, function() {
         $scope.clear();
         $scope.savingTransfusionForm = false;
-        $location.path('/findTransfusion');
+        $location.path('/findTransfusion/' + transfusionRecord.donationIdentificationNumber + '/' + transfusionRecord.componentCode);
       }, function(response) {
         onSaveError(response);
         $scope.savingTransfusionForm = false;
@@ -162,6 +162,7 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
       TransfusionService.createTransfusion(transfusionRecord, function() {
         $scope.clear();
         $scope.savingTransfusionForm = false;
+        $location.path('/findTransfusion/' + transfusionRecord.donationIdentificationNumber + '/' + transfusionRecord.componentCode);
       }, function(response) {
         onSaveError(response);
         $scope.savingTransfusionForm = false;
