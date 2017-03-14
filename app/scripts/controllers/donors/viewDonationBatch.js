@@ -43,7 +43,7 @@ angular.module('bsis')
     $scope.addDonationSuccess = '';
 
     $scope.showTestResults = false;
-    $scope.today = moment().endOf('day').toDate();
+    $scope.today = new Date();
 
     var columnDefs = [
       {
@@ -192,7 +192,7 @@ angular.module('bsis')
           $log.error(err);
         });
       } else {
-        donationBatch.donationBatchDate = moment($scope.donationBatchDate.date).hour($scope.donationBatchDate.time.getHours()).minutes($scope.donationBatchDate.time.getMinutes()).toDate();
+        donationBatch.donationBatchDate = $scope.donationBatchDate.date;
         DonorService.updateDonationBatch(donationBatch, function(response) {
           $scope.refreshDonationBatch(donationBatch, response);
         }, function(err) {
@@ -202,8 +202,8 @@ angular.module('bsis')
     };
 
     $scope.updateTimeOnDonationBatchDate = function() {
-      if (angular.isDefined($scope.donationBatch.donationBatchDate.time)) {
-        $scope.donationBatch.donationBatchDate = moment($scope.donationBatchDate.date).hour($scope.donationBatchDate.time.getHours()).minutes($scope.donationBatchDate.time.getMinutes()).toDate();
+      if ($scope.donationBatchDate.time) {
+        $scope.donationBatchDate.date = moment($scope.donationBatchDate.date).hour($scope.donationBatchDate.time.getHours()).minutes($scope.donationBatchDate.time.getMinutes()).toDate();
       }
     };
 
