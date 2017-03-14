@@ -15,7 +15,7 @@
         </div>
         <label class="control-label">Component Code</label>
         <div style="display: inline-block; vertical-align: top;">
-          <input class="form-control" name="componentCode" size="8" ng-model="transfusion.componentCode" ng-disabled = "transfusion.componentType.id && !transfusion.componentCode" ng-required="!transfusion.componentCode && !transfusion.componentType.id" ng-change="setComponentType(transfusion.componentCode)">
+          <input class="form-control" name="componentCode" size="8" ng-model="transfusion.componentCode" ng-disabled = "(transfusion.componentType.id && !transfusion.componentCode) || transfusion.id" ng-required="!transfusion.componentCode && !transfusion.componentType.id" ng-change="setComponentType(transfusion.componentCode)">
           <ng-messages for="recordTransfusionsForm.componentCode.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
             <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
@@ -26,7 +26,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Component Type</label>
       <div class="form-inline col-sm-10">
-        <select name="componentType" ng-model="transfusion.componentType.id" class="form-control" style="min-width: 350px;" ng-disabled = "transfusion.componentCode" ng-required="!transfusion.componentCode && !transfusion.componentType.id" ng-options="componentType.id as componentType.componentTypeName for componentType in componentTypes">
+        <select name="componentType" ng-model="transfusion.componentType.id" class="form-control" style="min-width: 350px;" ng-disabled = "transfusion.componentCode || transfusion.id" ng-required="!transfusion.componentCode && !transfusion.componentType.id" ng-options="componentType.id as componentType.componentTypeName for componentType in componentTypes">
           <option value=""></option>
         </select>
         <ng-messages for="recordTransfusionsForm.componentType.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
@@ -36,7 +36,7 @@
     </div>
 
     <div class="form-group">
-      <label class="col-sm-2 control-label">Received From</label>
+      <label class="col-sm-2 control-label">Transfusion Site</label>
       <div class="form-inline col-sm-10">
         <select name="usageSite" ng-model="transfusion.receivedFrom.id" class="form-control" ng-options="usageSite.id as usageSite.name for usageSite in locations" style="min-width: 350px;" required>
           <option value="" disabled></option>
@@ -167,7 +167,7 @@
       <label class="col-sm-2 control-label"></label>
       <div class="col-sm-10">
         <button class="btn btn-primary" type="submit" ng-disabled="searching">
-          {{addingTransfusionForm ? "Adding..." : "Add Transfusion"}}
+          {{addingTransfusionForm ? "Saving..." : "Save Transfusion"}}
         </button>
         <button class="btn btn-primary" type="button" ng-click="clear(recordTransfusionsForm)">Clear</button>
       </div>

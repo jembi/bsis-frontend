@@ -555,6 +555,9 @@ angular.module('bsis')
         search: {
           method: 'GET',
           url: url + '/transfusions/search'
+        },
+        update: {
+          method: 'PUT'
         }
       }),
 

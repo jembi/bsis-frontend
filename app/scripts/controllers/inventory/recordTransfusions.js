@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $log, $timeout, $routeParams, TransfusionService, BLOODGROUP, GENDER, DATEFORMAT) {
+angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $location, $log, $timeout, $routeParams, TransfusionService, BLOODGROUP, GENDER, DATEFORMAT) {
 
   $scope.submitted = false;
   $scope.componentTypes = null;
@@ -146,13 +146,21 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     $scope.addingTransfusionForm = true;
     var transfusionRecord = angular.copy($scope.transfusion);
 
-    TransfusionService.createTransfusion(transfusionRecord, function() {
-      $scope.clear();
-      $scope.addingTransfusionForm = false;
-    }, function(response) {
-      onSaveError(response);
-      $scope.addingTransfusionForm = false;
-    });
+    if ($routeParams.id) {
+      TransfusionService.update(transfusionRecord, function() {
+        $location.path('/findTransfusion');
+      }, function(response) {
+        onSaveError(response);
+      });
+    } else {
+      TransfusionService.createTransfusion(transfusionRecord, function() {
+        $scope.clear();
+        $scope.addingTransfusionForm = false;
+      }, function(response) {
+        onSaveError(response);
+        $scope.addingTransfusionForm = false;
+      });
+    }
   };
 
   $scope.clear = function() {
