@@ -99,6 +99,7 @@ angular.module('bsis')
           $scope.totalAdverseEvents = response.totalAdverseEvents;
           $scope.donorPermissions.canDelete = response.canDelete;
           $scope.isEligible = response.isEligible;
+          $scope.donorInitialized = true;
         }
       });
     }
