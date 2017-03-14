@@ -13,7 +13,7 @@
             <tr>
                 <td class="icon"><i class="fa {{icons.DONORS}}"></i></td>
                 <td class="field">Name:</td>
-                <td class="value">{{donor.firstName}} {{donor.middleName}} {{donor.lastName}}<span ng-if="showCallingName || showTitle">&nbsp;(<span ng-if="showTitle">{{mergedDonor.title}}.</span><span ng-if="showCallingName && showTitle">&nbsp;{{mergedDonor.callingName}}</span><span ng-if="showCallingName && !showTitle">{{mergedDonor.callingName}}</span>)
+                <td class="value">{{donor.firstName}} {{donor.middleName}} {{donor.lastName}}<span ng-if="mergedDonor.callingName || mergedDonor.title">&nbsp;(<span ng-if="mergedDonor.title">{{mergedDonor.title}}.</span><span ng-if="mergedDonor.callingName && mergedDonor.title">&nbsp;{{mergedDonor.callingName}}</span><span ng-if="mergedDonor.callingName && !mergedDonor.title">{{mergedDonor.callingName}}</span>)
                 </span>
                 </td>
             </tr>
