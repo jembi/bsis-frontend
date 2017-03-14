@@ -144,7 +144,10 @@ angular.module('bsis')
         DonorService.getDonationBatchFormFields(function(response) {
           $scope.venues = response.venues;
         }, $log.error);
-        $scope.donationBatch.donationBatchDate.time = $scope.donationBatch.donationBatchDate;
+        $scope.donationBatchDate = {
+          date: new Date($scope.donationBatch.donationBatchDate),
+          time: new Date($scope.donationBatch.donationBatchDate)
+        };
       }, $log.error);
     }
 
@@ -189,6 +192,7 @@ angular.module('bsis')
           $log.error(err);
         });
       } else {
+        donationBatch.donationBatchDate = moment($scope.donationBatchDate.date).hour($scope.donationBatchDate.time.getHours()).minutes($scope.donationBatchDate.time.getMinutes()).toDate();
         DonorService.updateDonationBatch(donationBatch, function(response) {
           $scope.refreshDonationBatch(donationBatch, response);
         }, function(err) {
@@ -199,7 +203,7 @@ angular.module('bsis')
 
     $scope.updateTimeOnDonationBatchDate = function() {
       if (angular.isDefined($scope.donationBatch.donationBatchDate.time)) {
-        $scope.donationBatch.donationBatchDate = moment($scope.donationBatch.donationBatchDate).hour($scope.donationBatch.donationBatchDate.time.getHours()).minutes($scope.donationBatch.donationBatchDate.time.getMinutes()).toDate();
+        $scope.donationBatch.donationBatchDate = moment($scope.donationBatchDate.date).hour($scope.donationBatchDate.time.getHours()).minutes($scope.donationBatchDate.time.getMinutes()).toDate();
       }
     };
 
