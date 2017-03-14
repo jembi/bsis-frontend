@@ -35,12 +35,13 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
         $scope.bloodGroups = BLOODGROUP.options;
 
         if ($routeParams.id) {
-          TransfusionService.getForm({id: $routeParams.id}, function(res) {
-            $scope.transfusion = angular.copy($scope.masterDetails);
+          TransfusionService.getTransfusionById({id: $routeParams.id}, function(res) {
             $scope.transfusion = res.transfusion;
             $scope.transfusion.componentCode = res.transfusion.component.componentCode;
             $scope.transfusion.componentType = res.transfusion.component.componentType;
           }, $log.error);
+        } else {
+          $scope.transfusion = angular.copy($scope.masterDetails);
         }
       }
     });

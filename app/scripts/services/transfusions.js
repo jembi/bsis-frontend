@@ -7,7 +7,7 @@ angular.module('bsis').factory('TransfusionService', function(Api) {
     createTransfusion: Api.Transfusion.save,
     getSearchForm: Api.Transfusion.getSearchForm,
     search: Api.Transfusion.search,
-    getForm: Api.Transfusion.get,
+    getTransfusionById: Api.Transfusion.get,
     update: Api.Transfusion.update
   };
 });
