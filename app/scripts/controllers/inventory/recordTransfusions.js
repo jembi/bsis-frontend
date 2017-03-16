@@ -170,6 +170,15 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     }
   };
 
+  $scope.voidTransfusion = function() {
+    TransfusionService.voidTransfusion({id: $routeParams.id}, function() {
+      $location.search({din: $scope.transfusion.donationIdentificationNumber, componentCode: $scope.transfusion.componentCode}).path('/findTransfusion');
+    }, function(response) {
+      $log.error('Error when voiding transfusion: ');
+      $log.error(response);
+    });
+  };
+
   $scope.clear = function() {
     $scope.transfusion = angular.copy($scope.masterDetails);
     $scope.savingTransfusionForm = false;

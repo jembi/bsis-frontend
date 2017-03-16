@@ -2,6 +2,14 @@
 <div class="col-sm-9 col-md-10 main">
   <h3 class="page-header">Record Transfusions</h3>
 
+  <span class="h4" style="float:right; margin-top: 5px; padding-right: 15px; display:inline;">
+    <span style="margin-left: 20px; margin-top: -15px; float:right">
+      <span has-permission="{{permissions.VOID_TRANSFUSION_DATA}}" ng-if="transfusion.id !== undefined">
+        <button class="btn btn-primary" ng-click="voidTransfusion()">Void</button>
+      </span>
+    </span>
+  </span>
+
   <form class="form-horizontal col-sm-12" name="recordTransfusionsForm" ng-submit="recordTransfusion()" novalidate>
 
     <div class="clearfix form-group">

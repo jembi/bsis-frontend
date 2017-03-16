@@ -8,6 +8,7 @@ angular.module('bsis').factory('TransfusionService', function(Api) {
     getSearchForm: Api.Transfusion.getSearchForm,
     search: Api.Transfusion.search,
     getTransfusionById: Api.Transfusion.get,
-    update: Api.Transfusion.update
+    update: Api.Transfusion.update,
+    voidTransfusion: Api.Transfusion.delete
   };
 });
