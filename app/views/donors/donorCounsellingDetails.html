@@ -62,7 +62,9 @@
                 <dateselect name="counsellingDate"
                             format="dateFormat"
                             ng-model="postDonationCounselling.counsellingDate"
-                            required ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingDate.$invalid}">
+                            required ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingDate.$invalid}"
+                            date-time-not-in-future
+                            max-date="today">
                 </dateselect>
                 <ng-messages role="alert"
                              for="postDonationCounsellingForm.counsellingDate.$error"
