@@ -174,13 +174,13 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
     var voidTransfusionConfirmation = {
       title: 'Void Tranfusion',
       button: 'Void',
-      message: 'Are you sure that you want to delete this Tranfusion?'
+      message: 'Are you sure that you want to void this Tranfusion?'
     };
 
     ModalsService.showConfirmation(voidTransfusionConfirmation).then(function() {
       $scope.deleting = true;
       TransfusionService.voidTransfusion({id: $routeParams.id}, function() {
-        $location.search({din: $scope.transfusion.donationIdentificationNumber, componentCode: $scope.transfusion.componentCode}).path('/findTransfusion');
+        $location.path('/findTransfusion');
       }, function(response) {
         $log.error('Error when voiding transfusion: ');
         $log.error(response);
