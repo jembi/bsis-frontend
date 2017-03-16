@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $location, $log, $timeout, $routeParams, TransfusionService, BLOODGROUP, GENDER, DATEFORMAT) {
+angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $location, $log, $timeout, $routeParams, TransfusionService, BLOODGROUP, GENDER, ModalsService, DATEFORMAT) {
 
   $scope.submitted = false;
   $scope.componentTypes = null;
@@ -171,14 +171,26 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
   };
 
   $scope.voidTransfusion = function() {
-    TransfusionService.voidTransfusion({id: $routeParams.id}, function() {
-      $location.search({din: $scope.transfusion.donationIdentificationNumber, componentCode: $scope.transfusion.componentCode}).path('/findTransfusion');
-    }, function(response) {
-      $log.error('Error when voiding transfusion: ');
-      $log.error(response);
+    var voidTransfusionConfirmation = {
+      title: 'Void Tranfusion',
+      button: 'Void',
+      message: 'Are you sure that you want to delete this Tranfusion?'
+    };
+
+    ModalsService.showConfirmation(voidTransfusionConfirmation).then(function() {
+      $scope.deleting = true;
+      TransfusionService.voidTransfusion({id: $routeParams.id}, function() {
+        $location.search({din: $scope.transfusion.donationIdentificationNumber, componentCode: $scope.transfusion.componentCode}).path('/findTransfusion');
+      }, function(response) {
+        $log.error('Error when voiding transfusion: ');
+        $log.error(response);
+        $scope.deleting = false;
+      });
+    }).catch(function() {
+      // Confirmation was rejected
+      $scope.deleting = false;
     });
   };
-
   $scope.clear = function() {
     $scope.transfusion = angular.copy($scope.masterDetails);
     $scope.savingTransfusionForm = false;
