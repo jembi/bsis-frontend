@@ -17,6 +17,7 @@ angular.module('bsis')
           onError(err.data);
         });
       },
+      getDonationsReportForm: Api.DonationsReport.getForm,
       generateStockLevelsReport: Api.StockLevelsReport.generate,
       getStockLevelsReportForm: Api.StockLevelsReport.getForm,
       getBloodUnitsIssuedReportForm: Api.BloodUnitsIssuedReport.getForm,

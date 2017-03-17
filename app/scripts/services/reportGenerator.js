@@ -71,9 +71,10 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
     // param: cohortCategory: the category of the cohort we are grouping by
     // param: initRow: a function that initialises and returns a single table row object
     // param: populateRow: a function that, given row and data value objects, updates the row with the counts from the data value
-    // param: addSubtotalsRow: a function that, if present, calculates the subtotal row per location, else, no row is added
+    // param: addSubtotalsRow1: a function that, if present, calculates the first subtotal row per location, else, no row is added
+    // param: addSubtotalsRow2: a function that, if present, calculates the second subtotal row per location, else, no row is added
     // returns: A response object with the first element containing the generated rows, and the second element, the number of locations counted
-    generateDataRowsGroupingByLocationAndCohort: function(dataValues, cohortCategory, initRow, populateRow, addSubtotalsRow) {
+    generateDataRowsGroupingByLocationAndCohort: function(dataValues, cohortCategory, initRow, populateRow, addSubtotalsRow1, addSubtotalsRow2) {
       var locationsNumber = 0;
       var rowsByLocation = {};
 
@@ -108,8 +109,12 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
           generatedRows.push(row);
         });
 
-        if (addSubtotalsRow) {
-          generatedRows.push(addSubtotalsRow(rows));
+        if (addSubtotalsRow1) {
+          generatedRows.push(addSubtotalsRow1(rows));
+        }
+
+        if (addSubtotalsRow2) {
+          generatedRows.push(addSubtotalsRow2(rows));
         }
       });
 
@@ -124,9 +129,10 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
     // param: cohortCategory: the cohortCategory to group the rows by
     // param: initRow: a function that initialises and returns a single table row object
     // param: populateRow: a function that, given row and data value objects, updates the row with the counts from the data value
-    // param: addTotalsRow: a function that, if present, calculates the totals row, else, no row is added
+    // param: addTotalsRow1: a function that, if present, calculates the first totals row, else, no row is added
+    // param: addTotalsRow2: a function that, if present, calculates the second totals row, else, no row is added
     // returns: the generated rows, grouped by cohort, according to the cohort category entered
-    generateSummaryRowsGroupingByCohort: function(dataValues, cohortCategory, initRow, populateRow, addTotalsRow) {
+    generateSummaryRowsGroupingByCohort: function(dataValues, cohortCategory, initRow, populateRow, addTotalsRow1, addTotalsRow2) {
       var rowsByCohort = {};
 
       angular.forEach(dataValues, function(dataValue) {
@@ -147,8 +153,12 @@ angular.module('bsis').factory('ReportGeneratorService', function($filter) {
         generatedRows.push(row);
       });
 
-      if (addTotalsRow) {
-        generatedRows.push(addTotalsRow(generatedRows));
+      if (addTotalsRow1) {
+        generatedRows.push(addTotalsRow1(generatedRows));
+      }
+
+      if (addTotalsRow2) {
+        generatedRows.push(addTotalsRow2(generatedRows));
       }
 
       return convertSummaryRowObjectsToArrays(generatedRows);
