@@ -11,6 +11,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
   $scope.counsellingStatuses = [];
   $scope.referralSites = [];
   $scope.testResults = [];
+  $scope.today = moment().startOf('day').toDate();
 
   $scope.goBack = function() {
     $window.history.back();
@@ -38,8 +39,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
   };
 
   $scope.updatePostDonationCounselling = function() {
-
-    if (!$scope.postDonationCounselling.counsellingDate || !$scope.postDonationCounselling.counsellingStatus) {
+    if (!$scope.postDonationCounselling.counsellingDate || !$scope.postDonationCounselling.counsellingStatus || $scope.postDonationCounsellingForm.$invalid) {
       return;
     }
 
