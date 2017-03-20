@@ -20,12 +20,12 @@ angular.module('bsis')
     // Report methods
     function initRow(dataValue, newLocation) {
       var row = {};
-      var distributionSite = '';
+      var venue = '';
       if (newLocation) {
-        distributionSite = dataValue.location.name;
+        venue = dataValue.location.name;
       }
 
-      row.venue = distributionSite;
+      row.venue = venue;
       row.gender = '';
 
       angular.forEach(donationTypes, function(donationType) {
