@@ -164,6 +164,7 @@ angular.module('bsis')
       exporterPdfCustomFormatter: function(docDefinition) {
         if ($scope.venuesNumber > 1) {
           var summaryRows = ReportGeneratorService.generateSummaryRowsGroupingByCohort(dataValues, 'Gender', initRow, populateRow, addSubtotalsRow, addPercentageRow);
+          summaryRows[0][0] = 'All venues';
           docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
         }
         docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
