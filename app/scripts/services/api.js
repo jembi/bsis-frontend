@@ -401,7 +401,12 @@ angular.module('bsis')
         }
       }),
 
-      TTIPrevalenceReport: $resource(url + '/reports/ttiprevalence/generate'),
+      TTIPrevalenceReport: $resource(url + '/reports/ttiprevalence/generate', {}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/ttiprevalence/form'
+        }
+      }),
 
       StockLevelsReport: $resource(url + '/reports/stockLevels', {}, {
         generate: {
