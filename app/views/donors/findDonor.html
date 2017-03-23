@@ -7,10 +7,10 @@
         <div class="row col-sm-11">
             <div class="form-inline" style="padding-left:5px;">
                 <input size="15" type="firstName" id="firstName" class="form-control input-sm" placeholder="First"
-                       autofocus="true" ng-model="donorSearch.firstName" ng-required="!isDonorSearchValid()" capitalize-first-letter>
+                       autofocus="true" ng-model="donorSearch.firstName" ng-required="!isDonorSearchValid()" ng-disabled="donorSearch.donorNumber||donorSearch.donationIdentificationNumber" capitalize-first-letter>
                 <input size="15" type="lastName " id="lastName" class="form-control input-sm" placeholder="Last"
-                       ng-model="donorSearch.lastName" ng-required="!isDonorSearchValid()" capitalize-first-letter>
-                <input type="checkbox" id="usePhraseMatch" ng-model="donorSearch.usePhraseMatch"> <label
+                       ng-model="donorSearch.lastName" ng-required="!isDonorSearchValid()" ng-disabled="donorSearch.donorNumber||donorSearch.donationIdentificationNumber" capitalize-first-letter>
+                <input type="checkbox" id="usePhraseMatch" ng-model="donorSearch.usePhraseMatch" ng-disabled="donorSearch.donorNumber||donorSearch.donationIdentificationNumber"> <label
                     style="display: inline-block; cursor: pointer; cursor: hand;" for="usePhraseMatch"> Include Similar
                 Results </label>
             </div>
@@ -40,7 +40,7 @@
         <div class="row col-sm-11">
             <div class="form-inline" style="padding-left:5px;">
                 <input size="15" type="donorNumber" id="donorNumber" class="form-control input-sm" placeholder=""
-                       ng-model="donorSearch.donorNumber" ng-required="!isDonorSearchValid()">
+                       ng-model="donorSearch.donorNumber" ng-required="!isDonorSearchValid()" ng-disabled="donorSearch.lastName||donorSearch.firstName||donorSearch.donationIdentificationNumber">
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
             <div class="form-inline" style="padding-left:5px;">
                 <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
                 class="form-control input-sm" placeholder="" ng-model="donorSearch.donationIdentificationNumber"
-                ng-required="!isDonorSearchValid()">
+                ng-required="!isDonorSearchValid()" ng-disabled="donorSearch.lastName||donorSearch.firstName||donorSearch.donorNumber">
             </div>
         </div>
     </div>
