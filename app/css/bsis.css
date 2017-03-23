@@ -764,6 +764,6 @@ a[disabled] {
 }
 
 .ui-grid-header-cell-label {
-    display:inline-block;
-    white-space:initial;
+  display:inline-block;
+  white-space:initial;
 }
