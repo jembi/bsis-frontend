@@ -10,7 +10,6 @@ angular.module('bsis')
     };
 
     var ttiBloodTests = null;
-    var displayName = null;
     var dataValues = null;
 
     $scope.dateFormat = DATEFORMAT;
@@ -39,38 +38,27 @@ angular.module('bsis')
     function initColumns() {
       var columns = [
         { name: 'Venue', field: 'venue', width: '**', minWidth: '200' },
-        { name: 'Gender', field: 'cohorts', width:'**', maxWidth: '130' }
+        { name: 'Genders', field: 'cohorts', width:'**', maxWidth: '130' }
       ];
 
       angular.forEach(ttiBloodTests, function(ttiBloodTest) {
-        if (ttiBloodTest.testName === 'HIV') {
-          displayName = 'HIV +';
-        }
-        if (ttiBloodTest.testName === 'HBV') {
-          displayName = 'HBV +';
-        }
-        if (ttiBloodTest.testName === 'HCV') {
-          displayName = 'HCV +';
-        }
-        if (ttiBloodTest.testName === 'Syphilis') {
-          displayName = 'Syphilis +';
-        }
         columns.push({
-          name: ttiBloodTest.testName,
-          displayName: displayName,
-          field: ttiBloodTest.testName,
+          name: ttiBloodTest.testName + '+',
+          displayName: ttiBloodTest.testName + '+',
+          field: ttiBloodTest.testName + '+',
           width: '**',
           maxWidth: '80'
         });
       });
-      columns.push({ name: 'TotalUnsafeUnitsTested', displayName: 'Total +', field: 'totalpos', width: '**', maxWidth: '80'  },
-                   { name: 'TotalUnitsTested', displayName: 'Total', field: 'total', width: '**', maxWidth: '80'  },
-                   { name: 'TTIRate', displayName: 'TTI %', field: 'ttirate', width: '**', maxWidth: '80'  },
-                   { name: 'HIVRate', displayName: 'HIV %', field: 'hivrate', width: '**', maxWidth: '80'  },
-                   { name: 'HBVRate', displayName: 'HBV %', field: 'hbvrate', width: '**', maxWidth: '80'  },
-                   { name: 'HCVRate', displayName: 'HCV %', field: 'hcvrate', width: '**', maxWidth: '80'  },
-                   { name: 'SyphRate', displayName: 'Syph %', field: 'syphrate', width: '**', maxWidth: '80' });
-
+      angular.forEach(ttiBloodTests, function(ttiBloodTest) {
+        columns.push({
+          name: ttiBloodTest.testName + 'rate',
+          displayName: ttiBloodTest.testName  + '%',
+          field: ttiBloodTest.testName + 'rate',
+          width: '**',
+          maxWidth: '80'
+        });
+      });
       return columns;
     }
 
@@ -87,11 +75,9 @@ angular.module('bsis')
           row.total += dataValue.value;
         }
       } else if (dataValue.id === 'totalUnitsTested') {
-        row.gender = gender;
         row.total = dataValue.value;
 
       } else if (dataValue.id === 'totalUnsafeUnitsTested') {
-        row.gender = gender;
         row.total = dataValue.value;
       }
     }
