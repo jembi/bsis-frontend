@@ -762,3 +762,8 @@ a[disabled] {
   width: 50%;  
   float: left;
 }
+
+.ui-grid-header-cell-label {
+    display:inline-block;
+    white-space:initial;
+}
