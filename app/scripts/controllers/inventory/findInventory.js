@@ -205,6 +205,15 @@ angular.module('bsis')
       $scope.searchParams.bloodGroups = [];
     };
 
+    $scope.clearFields = function() {
+      $scope.searchParams.locationId = null;
+      $scope.searchParams.allSites = true,
+      $scope.searchParams.componentTypeId = null;
+      $scope.searchParams.bloodGroups = [];
+      $scope.searchParams.anyBloodGroup = true;
+      $scope.searchParams.dueToExpireBy = null;
+    };
+
     $scope.clearSearch = function(searchForm) {
       $scope.gridOptions.data = [];
       $scope.searchParams = angular.copy(master);
