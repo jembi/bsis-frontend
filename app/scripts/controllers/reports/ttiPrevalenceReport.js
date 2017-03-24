@@ -29,7 +29,12 @@ angular.module('bsis')
       angular.forEach(ttiBloodTests, function(ttiBloodTest) {
         row[ttiBloodTest.testName] = 0;
       });
+      row.totalPos = 0;
       row.total = 0;
+      row.ttiRate = '0%';
+      angular.forEach(ttiBloodTests, function(ttiBloodTest) {
+        row[ttiBloodTest.testName + 'Rate'] = '0%';
+      });
 
       return row;
     }
@@ -37,75 +42,76 @@ angular.module('bsis')
     // Grid ui variables and methods
     function initColumns() {
       var columns = [
-        { name: 'Venue', field: 'venue', width: '**', minWidth: '200' },
-        { name: 'Genders', field: 'cohorts', width:'**', maxWidth: '130' }
+        {name: 'Venue', displayName: 'Venue', field: 'venue', width: '**', minWidth: '200'},
+        {name: 'Gender', displayName: 'Gender', field: 'gender', width:'**', maxWidth: '130'}
       ];
 
       angular.forEach(ttiBloodTests, function(ttiBloodTest) {
-        columns.push({
-          name: ttiBloodTest.testName + '+',
-          displayName: ttiBloodTest.testName + '+',
-          field: ttiBloodTest.testName + '+',
-          width: '**',
-          maxWidth: '80'
-        });
+        columns.push(
+          {name: ttiBloodTest.testName, displayName: ttiBloodTest.testName + ' +', field: ttiBloodTest.testName, width: '**', maxWidth: '80'}
+        );
       });
+
+      columns = columns.concat([
+        {name: 'TotalPos', displayName: 'Total +', field: 'totalPos', width: '**', maxWidth: '80'},
+        {name: 'Total', displayName: 'Total', field: 'total', width: '**', maxWidth: '80'},
+        {name: 'TTIRate', displayName: 'TTI %', field: 'ttiRate', width: '**', maxWidth: '80'}
+      ]);
+
       angular.forEach(ttiBloodTests, function(ttiBloodTest) {
-        columns.push({
-          name: ttiBloodTest.testName + 'rate',
-          displayName: ttiBloodTest.testName  + '%',
-          field: ttiBloodTest.testName + 'rate',
-          width: '**',
-          maxWidth: '80'
-        });
+        columns.push(
+          {name: ttiBloodTest.testName  + 'Rate', displayName: ttiBloodTest.testName  + ' %', field: ttiBloodTest.testName + 'Rate', width: '**', maxWidth: '80'}
+        );
       });
       return columns;
     }
 
+    function getPercentage(num1, num2) {
+      return $filter('number')(num1 / num2 * 100, 2) + '%';
+    }
+
     function populateRow(row, dataValue) {
       var gender = ReportGeneratorService.getCohort(dataValue, 'Gender').option;
+      row.gender = gender;
 
-      if (dataValue.id === null) {
+      if (dataValue.id === 'totalUnitsTested') {
+        row.total = dataValue.value;
+
+      } else if (dataValue.id === 'totalUnsafeUnitsTested') {
+        row.totalPos = dataValue.value;
+        row.ttiRate = getPercentage(row.totalPos, row.total);
+
+      } else {
         var ttiBloodTest = ReportGeneratorService.getCohort(dataValue, 'Blood Test').option;
         var result = ReportGeneratorService.getCohort(dataValue, 'Blood Test Result').option;
 
         if (result === 'POS') {
           row.gender = gender;
           row[ttiBloodTest] += dataValue.value;
-          row.total += dataValue.value;
-        }
-      } else if (dataValue.id === 'totalUnitsTested') {
-        row.total = dataValue.value;
 
-      } else if (dataValue.id === 'totalUnsafeUnitsTested') {
-        row.total = dataValue.value;
+          row[ttiBloodTest + 'Rate'] = getPercentage(row[ttiBloodTest], row.total);
+        }
       }
     }
 
-    function addSubtotalsRow(rows) {
-      var subtotalsRow = initRow();
-      subtotalsRow.gender = 'All';
-      angular.forEach(rows, function(row, key) {
+    function addAllGendersRow(rows) {
+      var allGendersRow = initRow();
+      allGendersRow.gender = 'All';
+      angular.forEach(rows, function(row) {
+        allGendersRow.total += row.total;
+        allGendersRow.totalPos += row.total;
         angular.forEach(ttiBloodTests, function(ttiBloodTest) {
-          subtotalsRow[ttiBloodTest.testName] += rows[key][ttiBloodTest.testName];
+          allGendersRow[ttiBloodTest.testName] += row[ttiBloodTest.testName];
         });
-        subtotalsRow.total += rows[key].total;
       });
 
-      return subtotalsRow;
-    }
-
-    function addPercentageRow(rows) {
-      var subtotalsRow = angular.copy(addSubtotalsRow(rows));
-      subtotalsRow.gender = '%';
-
+      // Calculate percentages
+      allGendersRow.ttiRate = getPercentage(allGendersRow.totalPos, allGendersRow.total);
       angular.forEach(ttiBloodTests, function(ttiBloodTest) {
-        subtotalsRow[ttiBloodTest.testName] = $filter('number')(subtotalsRow[ttiBloodTest.testName] / subtotalsRow.total * 100, 2) + '%';
+        allGendersRow[ttiBloodTest.testName + 'Rate'] = getPercentage(allGendersRow[ttiBloodTest.testName], allGendersRow.total);
       });
 
-      subtotalsRow.total = $filter('number')(subtotalsRow.total / subtotalsRow.total * 100, 2) + '%';
-
-      return subtotalsRow;
+      return allGendersRow;
     }
 
     $scope.clearSearch = function(form) {
@@ -138,7 +144,7 @@ angular.module('bsis')
         $scope.venuesNumber = 0;
         if (report.dataValues.length > 0) {
           dataValues = report.dataValues;
-          var data = ReportGeneratorService.generateDataRowsGroupingByLocationAndCohort(dataValues, 'Gender', initRow, populateRow, addSubtotalsRow, addPercentageRow);
+          var data = ReportGeneratorService.generateDataRowsGroupingByLocationAndCohort(dataValues, 'Gender', initRow, populateRow, addAllGendersRow);
           $scope.gridOptions.data = data[0];
           $scope.venuesNumber = data[1];
           $scope.gridOptions.paginationCurrentPage = 1;
@@ -152,13 +158,10 @@ angular.module('bsis')
       });
     };
 
-    var columnDefs = [];
-
     $scope.gridOptions = {
       data: [],
       paginationPageSize: 9,
       paginationTemplate: 'views/template/pagination.html',
-      columnDefs: columnDefs,
       minRowsToShow: 9,
 
       exporterPdfOrientation: 'landscape',
@@ -178,7 +181,7 @@ angular.module('bsis')
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
         if ($scope.venuesNumber > 1) {
-          var summaryRows = ReportGeneratorService.generateSummaryRowsGroupingByCohort(dataValues, 'Gender', initRow, populateRow, addSubtotalsRow, addPercentageRow);
+          var summaryRows = ReportGeneratorService.generateSummaryRowsGroupingByCohort(dataValues, 'Gender', initRow, populateRow, addAllGendersRow);
           summaryRows[0][0] = 'All venues';
           docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
         }
@@ -209,7 +212,7 @@ angular.module('bsis')
     function init() {
       ReportsService.getTTIPrevalenceReportForm(function(response) {
         ttiBloodTests = response.ttiBloodTests;
-        columnDefs = initColumns();
+        $scope.gridOptions.columnDefs = initColumns();
       }, $log.error);
     }
 
