@@ -86,9 +86,7 @@ angular.module('bsis')
         var result = ReportGeneratorService.getCohort(dataValue, 'Blood Test Result').option;
 
         if (result === 'POS') {
-          row.gender = gender;
           row[ttiBloodTest] += dataValue.value;
-
           row[ttiBloodTest + 'Rate'] = getPercentage(row[ttiBloodTest], row.total);
         }
       }
@@ -99,7 +97,7 @@ angular.module('bsis')
       allGendersRow.gender = 'All';
       angular.forEach(rows, function(row) {
         allGendersRow.total += row.total;
-        allGendersRow.totalPos += row.total;
+        allGendersRow.totalPos += row.totalPos;
         angular.forEach(ttiBloodTests, function(ttiBloodTest) {
           allGendersRow[ttiBloodTest.testName] += row[ttiBloodTest.testName];
         });
