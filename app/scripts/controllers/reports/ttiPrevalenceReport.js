@@ -75,10 +75,10 @@ angular.module('bsis')
       row.gender = gender;
 
       if (dataValue.id === 'totalUnitsTested') {
-        row.total = dataValue.value;
+        row.total += dataValue.value;
 
       } else if (dataValue.id === 'totalUnsafeUnitsTested') {
-        row.totalPos = dataValue.value;
+        row.totalPos += dataValue.value;
         row.ttiRate = getPercentage(row.totalPos, row.total);
 
       } else {
