@@ -134,6 +134,8 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
       } else {
         $scope.transfusion.componentType.id = null;
       }
+    } else {
+      $scope.transfusion.componentCode = null;
     }
   };
 
@@ -160,9 +162,10 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
         $scope.savingTransfusionForm = false;
       });
     } else {
-      TransfusionService.createTransfusion(transfusionRecord, function() {
+      TransfusionService.createTransfusion(transfusionRecord, function(res) {
         $scope.savingTransfusionForm = false;
-        $location.search({din: transfusionRecord.donationIdentificationNumber, componentCode: transfusionRecord.componentCode}).path('/findTransfusion');
+        var transfusionItem = res.transfusion;
+        $location.search({din: transfusionItem.donationIdentificationNumber, componentCode: transfusionItem.component.componentCode}).path('/findTransfusion');
       }, function(response) {
         onSaveError(response);
         $scope.savingTransfusionForm = false;
