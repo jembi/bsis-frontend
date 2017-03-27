@@ -134,6 +134,8 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
       } else {
         $scope.transfusion.componentType.id = null;
       }
+    } else {
+      $scope.transfusion.componentCode = null;
     }
   };
 
