@@ -17,6 +17,7 @@ angular.module('bsis')
           onError(err.data);
         });
       },
+      getDonationsReportForm: Api.DonationsReport.getForm,
       generateStockLevelsReport: Api.StockLevelsReport.generate,
       getStockLevelsReportForm: Api.StockLevelsReport.getForm,
       getBloodUnitsIssuedReportForm: Api.BloodUnitsIssuedReport.getForm,
@@ -30,6 +31,7 @@ angular.module('bsis')
       generateDonorsAdverseEventsReport: Api.DonorsAdverseEventsReport.generate,
       getDonorsAdverseEventsReportForm: Api.DonorsAdverseEventsReport.getForm,
       generateTransfusionsReport: Api.TransfusionsReport.generate,
-      getTransfusionsReportForm: Api.TransfusionsReport.getForm
+      getTransfusionsReportForm: Api.TransfusionsReport.getForm,
+      getTTIPrevalenceReportForm: Api.TTIPrevalenceReport.getForm
     };
   });

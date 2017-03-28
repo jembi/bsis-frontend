@@ -394,9 +394,19 @@ angular.module('bsis')
         }
       }),
 
-      DonationsReport: $resource(url + '/reports/collecteddonations/generate'),
+      DonationsReport: $resource(url + '/reports/collecteddonations/generate', {}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/collecteddonations/form'
+        }
+      }),
 
-      TTIPrevalenceReport: $resource(url + '/reports/ttiprevalence/generate'),
+      TTIPrevalenceReport: $resource(url + '/reports/ttiprevalence/generate', {}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/ttiprevalence/form'
+        }
+      }),
 
       StockLevelsReport: $resource(url + '/reports/stockLevels', {}, {
         generate: {
