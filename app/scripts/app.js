@@ -651,7 +651,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
     // Set the language of BSIS
   .run(function (gettextCatalog) {
-    gettextCatalog.setCurrentLanguage('fr');
+    //gettextCatalog.setCurrentLanguage('fr');
     gettextCatalog.debug = true;
   })
 

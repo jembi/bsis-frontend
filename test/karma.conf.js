@@ -19,6 +19,7 @@ module.exports = function(config) {
       'app/bower_components/angular-tooltips/dist/angular-tooltips.min.js',
       'app/bower_components/angular-ui-grid/ui-grid.js',
       'app/bower_components/angular-loading-bar/build/loading-bar.min.js',
+      'app/bower_components/angular-gettext/dist/angular-gettext.min.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/spec/**/*.js',

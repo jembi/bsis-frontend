@@ -20,12 +20,12 @@ msgstr ""
 msgid "Add Return"
 msgstr ""
 
-#: app/views/inventory/findInventory.html:37
+#: app/views/inventory/findInventory.html:40
 #: app/views/inventory/viewStockLevels.html:18
 msgid "All Sites"
 msgstr ""
 
-#: app/views/inventory/findInventory.html:69
+#: app/views/inventory/findInventory.html:73
 msgid "Any Blood Group"
 msgstr ""
 
@@ -50,11 +50,11 @@ msgstr ""
 msgid "Blood Group"
 msgstr ""
 
-#: app/views/inventory/findInventory.html:59
+#: app/views/inventory/findInventory.html:62
 msgid "Blood Groups"
 msgstr ""
 
-#: app/views/inventory/findInventory.html:101
+#: app/views/inventory/findInventory.html:105
 #: app/views/inventory/findTransfusion.html:91
 #: app/views/inventory/viewStockLevels.html:50
 msgid "CSV"
@@ -66,7 +66,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: app/views/inventory/findInventory.html:90
+#: app/views/inventory/findInventory.html:94
 #: app/views/inventory/manageOrders.html:85
 #: app/views/inventory/manageReturns.html:64
 #: app/views/inventory/recordReturn.html:69
@@ -77,14 +77,14 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: app/views/inventory/findInventory.html:16
+#: app/views/inventory/findInventory.html:17
 #: app/views/inventory/findTransfusion.html:16
 #: app/views/inventory/recordReturn.html:58
 #: app/views/inventory/recordTransfusions.html:24
 msgid "Component Code"
 msgstr ""
 
-#: app/views/inventory/findInventory.html:47
+#: app/views/inventory/findInventory.html:50
 #: app/views/inventory/findTransfusion.html:27
 #: app/views/inventory/recordTransfusions.html:35
 msgid "Component Type"
@@ -105,7 +105,7 @@ msgstr ""
 msgid "DIN"
 msgstr ""
 
-#: app/views/inventory/findInventory.html:99
+#: app/views/inventory/findInventory.html:103
 #: app/views/inventory/findTransfusion.html:89
 #: app/views/inventory/viewStockLevels.html:48
 msgid "Data Export"
@@ -164,12 +164,12 @@ msgstr ""
 msgid "Dispatched To"
 msgstr ""
 
-#: app/views/inventory/findInventory.html:27
+#: app/views/inventory/findInventory.html:29
 #: app/views/inventory/viewStockLevels.html:8
 msgid "Distribution Center"
 msgstr ""
 
-#: app/views/inventory/findInventory.html:79
+#: app/views/inventory/findInventory.html:83
 msgid "Due to Expire By"
 msgstr ""
 
@@ -234,6 +234,7 @@ msgstr ""
 msgid "Invalid number of decimal digits"
 msgstr ""
 
+#: app/views/inventory/manageOrders.html:59
 #: app/views/inventory/viewOrders.html:63
 msgid "Issue"
 msgstr ""
@@ -308,7 +309,7 @@ msgstr ""
 msgid "Order Type"
 msgstr ""
 
-#: app/views/inventory/findInventory.html:100
+#: app/views/inventory/findInventory.html:104
 #: app/views/inventory/findTransfusion.html:90
 #: app/views/inventory/viewStockLevels.html:49
 msgid "PDF"
@@ -331,6 +332,7 @@ msgstr ""
 msgid "Patient No"
 msgstr ""
 
+#: app/views/inventory/manageOrders.html:63
 #: app/views/inventory/viewOrders.html:67
 msgid "Patient Request"
 msgstr ""
@@ -589,7 +591,7 @@ msgid ""
 "          \"View Stock Levels\"}}"
 msgstr ""
 
-#: app/views/inventory/findInventory.html:88
+#: app/views/inventory/findInventory.html:92
 #: app/views/inventory/findTransfusion.html:78
 #: app/views/inventory/viewReturns.html:66
 msgid "{{searching ? \"Searching...\" : \"Search\"}}"
