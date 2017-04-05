@@ -317,6 +317,11 @@ hr {
   cursor: default;
 }
 
+/* Removes padding from i18n transalation spans */
+.nav-sidebar span.ng-scope {
+    padding: 0;
+}
+
 /* login form css */
 .form-signin {
   max-width: 330px;

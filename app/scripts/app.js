@@ -14,7 +14,8 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   'ui.grid',
   'ui.grid.exporter',
   'ui.grid.pagination',
-  'ui.grid.selection'
+  'ui.grid.selection',
+  'gettext'
 ])
   .config(function($routeProvider, PERMISSIONS, UI) {
 
@@ -646,6 +647,12 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
   .run(function(editableOptions) {
     editableOptions.theme = 'bs3';
+  })
+
+    // Set the language of BSIS
+  .run(function (gettextCatalog) {
+    gettextCatalog.setCurrentLanguage('fr');
+    gettextCatalog.debug = true;
   })
 
   .run(['$rootScope', '$location', 'AuthService', function($rootScope, $location) {

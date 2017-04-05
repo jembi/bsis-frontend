@@ -1,0 +1,596 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: app/views/inventory/manageOrders.html:27
+#: app/views/inventory/manageOrders.html:9
+#: app/views/inventory/viewOrders.html:9
+msgid "Add Order"
+msgstr ""
+
+#: app/views/inventory/recordReturn.html:67
+msgid "Add Pack"
+msgstr ""
+
+#: app/views/inventory/manageReturns.html:25
+#: app/views/inventory/manageReturns.html:9
+#: app/views/inventory/viewReturns.html:9
+msgid "Add Return"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:37
+#: app/views/inventory/viewStockLevels.html:18
+msgid "All Sites"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:69
+msgid "Any Blood Group"
+msgstr ""
+
+#: app/views/inventory/discardComponentsModal.html:6
+msgid "Are you sure you want to discard all units in this return?"
+msgstr ""
+
+#: app/views/inventory/recordTransfusions.html:129
+msgid "Blood Bank"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:13
+#: app/views/inventory/manageOrders.html:131
+#: app/views/inventory/viewOrder.html:32
+msgid "Blood Bank No"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:23
+#: app/views/inventory/manageOrders.html:151
+#: app/views/inventory/recordTransfusions.html:166
+#: app/views/inventory/viewOrder.html:42
+msgid "Blood Group"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:59
+msgid "Blood Groups"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:101
+#: app/views/inventory/findTransfusion.html:91
+#: app/views/inventory/viewStockLevels.html:50
+msgid "CSV"
+msgstr ""
+
+#: app/views/inventory/discardComponentsModal.html:26
+#: app/views/inventory/recordReturn.html:32
+#: app/views/inventory/recordReturn.html:82
+msgid "Cancel"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:90
+#: app/views/inventory/manageOrders.html:85
+#: app/views/inventory/manageReturns.html:64
+#: app/views/inventory/recordReturn.html:69
+#: app/views/inventory/recordTransfusions.html:180
+#: app/views/inventory/viewOrders.html:86
+#: app/views/inventory/viewReturns.html:68
+#: app/views/inventory/viewStockLevels.html:41
+msgid "Clear"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:16
+#: app/views/inventory/findTransfusion.html:16
+#: app/views/inventory/recordReturn.html:58
+#: app/views/inventory/recordTransfusions.html:24
+msgid "Component Code"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:47
+#: app/views/inventory/findTransfusion.html:27
+#: app/views/inventory/recordTransfusions.html:35
+msgid "Component Type"
+msgstr ""
+
+#: app/views/inventory/manageOrders.html:18
+msgid "Current Orders"
+msgstr ""
+
+#: app/views/inventory/manageReturns.html:18
+msgid "Current Returns"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:8
+#: app/views/inventory/findTransfusion.html:8
+#: app/views/inventory/recordReturn.html:49
+#: app/views/inventory/recordTransfusions.html:16
+msgid "DIN"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:99
+#: app/views/inventory/findTransfusion.html:89
+#: app/views/inventory/viewStockLevels.html:48
+msgid "Data Export"
+msgstr ""
+
+#: app/views/inventory/recordTransfusions.html:89
+msgid "Date Transfused"
+msgstr ""
+
+#: app/messages.html:23
+msgid "Date must be after component was created"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:29
+#: app/views/inventory/manageOrders.html:112
+#: app/views/inventory/recordTransfusions.html:143
+#: app/views/inventory/viewOrder.html:48
+msgid "Date of Birth"
+msgstr ""
+
+#: app/messages.html:15
+msgid "Date or time is in the future: please re-enter"
+msgstr ""
+
+#: app/views/inventory/discardComponentsModal.html:2
+msgid "Discard Components"
+msgstr ""
+
+#: app/views/inventory/discardComponentsModal.html:8
+msgid "Discard Reason"
+msgstr ""
+
+#: app/views/inventory/viewReturn.html:19
+msgid "Discard Stock"
+msgstr ""
+
+#: app/views/inventory/viewOrder.html:16
+msgid "Dispatch Order"
+msgstr ""
+
+#: app/views/inventory/manageOrders.html:51
+#: app/views/inventory/viewOrders.html:55
+msgid "Dispatch Type"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:10
+#: app/views/inventory/manageOrders.html:39
+#: app/views/inventory/viewOrder.html:28
+#: app/views/inventory/viewOrders.html:46
+msgid "Dispatched From"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:11
+#: app/views/inventory/manageOrders.html:72
+#: app/views/inventory/viewOrder.html:29
+msgid "Dispatched To"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:27
+#: app/views/inventory/viewStockLevels.html:8
+msgid "Distribution Center"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:79
+msgid "Due to Expire By"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:33
+#: app/views/inventory/recordReturn.html:12
+#: app/views/inventory/viewOrder.html:8
+#: app/views/inventory/viewReturn.html:8
+msgid "Edit"
+msgstr ""
+
+#: app/messages.html:13
+msgid "End time should be after Start time"
+msgstr ""
+
+#: app/messages.html:12
+msgid "Enter a valid time"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:3
+#: app/views/inventory/sidebar.html:13
+msgid "Find Inventory"
+msgstr ""
+
+#: app/views/inventory/findTransfusion.html:3
+#: app/views/inventory/sidebar.html:23
+msgid "Find Transfusions"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:3
+msgid "Fulfil Order Form"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:26
+#: app/views/inventory/manageOrders.html:142
+#: app/views/inventory/recordTransfusions.html:157
+#: app/views/inventory/viewOrder.html:45
+msgid "Gender"
+msgstr ""
+
+#: app/views/inventory/manageOrders.html:160
+msgid "Hospital Ward No"
+msgstr ""
+
+#: app/views/inventory/viewStockLevels.html:29
+msgid "In Stock"
+msgstr ""
+
+#: app/messages.html:18
+msgid "Invalid"
+msgstr ""
+
+#: app/views/inventory/recordTransfusions.html:149
+#: app/views/inventory/recordTransfusions.html:95
+msgid "Invalid date"
+msgstr ""
+
+#: app/messages.html:6
+msgid "Invalid email address"
+msgstr ""
+
+#: app/messages.html:16
+msgid "Invalid number of decimal digits"
+msgstr ""
+
+#: app/views/inventory/viewOrders.html:63
+msgid "Issue"
+msgstr ""
+
+#: app/views/inventory/sidebar.html:12
+msgid "MANAGE INVENTORY"
+msgstr ""
+
+#: app/views/inventory/viewOrder.html:3
+msgid "Manage Order"
+msgstr ""
+
+#: app/views/inventory/manageOrders.html:3
+#: app/views/inventory/sidebar.html:17
+#: app/views/inventory/viewOrders.html:3
+msgid "Manage Orders"
+msgstr ""
+
+#: app/views/inventory/viewReturn.html:3
+msgid "Manage Return"
+msgstr ""
+
+#: app/views/inventory/manageReturns.html:3
+#: app/views/inventory/sidebar.html:19
+#: app/views/inventory/viewReturns.html:3
+msgid "Manage Returns"
+msgstr ""
+
+#: app/messages.html:22
+msgid "More than one component returned for given component Type. Please enter a component code"
+msgstr ""
+
+#: app/messages.html:7
+msgid "Must match the previous entry"
+msgstr ""
+
+#: app/views/inventory/manageOrders.html:93
+msgid "Name"
+msgstr ""
+
+#: app/messages.html:21
+msgid "No components with the specified component type exist for the specified Donation"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:14
+#: app/views/inventory/fulfilOrder.html:17
+#: app/views/inventory/fulfilOrder.html:20
+#: app/views/inventory/fulfilOrder.html:24
+#: app/views/inventory/fulfilOrder.html:27
+#: app/views/inventory/fulfilOrder.html:30
+#: app/views/inventory/viewOrder.html:33
+#: app/views/inventory/viewOrder.html:36
+#: app/views/inventory/viewOrder.html:39
+#: app/views/inventory/viewOrder.html:43
+#: app/views/inventory/viewOrder.html:46
+#: app/views/inventory/viewOrder.html:49
+msgid "Not Specified"
+msgstr ""
+
+#: app/views/inventory/viewStockLevels.html:33
+msgid "Not in Stock"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:8
+#: app/views/inventory/manageOrders.html:29
+#: app/views/inventory/viewOrder.html:27
+msgid "Order Date"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:9
+#: app/views/inventory/viewOrder.html:30
+msgid "Order Type"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:100
+#: app/views/inventory/findTransfusion.html:90
+#: app/views/inventory/viewStockLevels.html:49
+msgid "PDF"
+msgstr ""
+
+#: app/views/inventory/manageOrders.html:89
+msgid "Patient Details"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:22
+#: app/views/inventory/recordTransfusions.html:103
+#: app/views/inventory/viewOrder.html:41
+msgid "Patient Name"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:19
+#: app/views/inventory/manageOrders.html:124
+#: app/views/inventory/recordTransfusions.html:122
+#: app/views/inventory/viewOrder.html:38
+msgid "Patient No"
+msgstr ""
+
+#: app/views/inventory/viewOrders.html:67
+msgid "Patient Request"
+msgstr ""
+
+#: app/views/inventory/findTransfusion.html:54
+#: app/views/inventory/viewOrders.html:24
+#: app/views/inventory/viewReturns.html:24
+msgid "Period"
+msgstr ""
+
+#: app/views/inventory/manageOrders.html:65
+msgid "Please select a dispatch type"
+msgstr ""
+
+#: app/views/inventory/viewOrder.html:19
+msgid "Print Dispatch Note"
+msgstr ""
+
+#: app/views/inventory/viewReturn.html:22
+msgid "Print Return Note"
+msgstr ""
+
+#: app/views/inventory/recordReturn.html:4
+msgid "Record Return"
+msgstr ""
+
+#: app/views/inventory/recordTransfusions.html:3
+#: app/views/inventory/sidebar.html:21
+msgid "Record Transfusions"
+msgstr ""
+
+#: app/views/inventory/recordReturn.html:68
+msgid "Remove Pack"
+msgstr ""
+
+#: app/views/inventory/manageReturns.html:29
+#: app/views/inventory/recordReturn.html:17
+#: app/views/inventory/recordReturn.html:9
+#: app/views/inventory/viewReturn.html:30
+msgid "Return Date"
+msgstr ""
+
+#: app/views/inventory/viewReturn.html:16
+msgid "Return to Stock"
+msgstr ""
+
+#: app/views/inventory/manageReturns.html:39
+#: app/views/inventory/recordReturn.html:10
+#: app/views/inventory/recordReturn.html:21
+#: app/views/inventory/viewReturn.html:31
+#: app/views/inventory/viewReturns.html:46
+msgid "Returned From"
+msgstr ""
+
+#: app/views/inventory/manageReturns.html:51
+#: app/views/inventory/recordReturn.html:11
+#: app/views/inventory/recordReturn.html:26
+#: app/views/inventory/viewReturn.html:32
+#: app/views/inventory/viewReturns.html:55
+msgid "Returned To"
+msgstr ""
+
+#: app/views/inventory/discardComponentsModal.html:12
+#: app/views/inventory/manageOrders.html:42
+#: app/views/inventory/manageReturns.html:42
+#: app/views/inventory/manageReturns.html:54
+msgid "Select"
+msgstr ""
+
+#: app/views/inventory/findTransfusion.html:64
+#: app/views/inventory/viewOrders.html:34
+#: app/views/inventory/viewReturns.html:34
+msgid "Select a date range that is less than one month"
+msgstr ""
+
+#: app/views/inventory/viewOrders.html:33
+#: app/views/inventory/viewOrders.html:38
+#: app/views/inventory/viewReturns.html:33
+#: app/views/inventory/viewReturns.html:38
+msgid "Select a valid date"
+msgstr ""
+
+#: app/messages.html:3
+msgid "Select one or more"
+msgstr ""
+
+#: app/messages.html:14
+msgid "Start and end times are the same: please re-enter"
+msgstr ""
+
+#: app/messages.html:17
+msgid "Start date must be before the end date"
+msgstr ""
+
+#: app/messages.html:19
+msgid "There is no component in ISSUED state for specified din and component code"
+msgstr ""
+
+#: app/messages.html:20
+msgid "There is no component in ISSUED state for specified din and component type"
+msgstr ""
+
+#: app/messages.html:2
+msgid "This cannot be empty"
+msgstr ""
+
+#: app/views/inventory/findTransfusion.html:63
+#: app/views/inventory/findTransfusion.html:68
+msgid "This is required"
+msgstr ""
+
+#: app/messages.html:11
+msgid "This must be a number"
+msgstr ""
+
+#: app/messages.html:10
+msgid "This must be unique"
+msgstr ""
+
+#: app/views/inventory/viewOrders.html:28
+msgid "To"
+msgstr ""
+
+#: app/messages.html:9
+msgid "Too large"
+msgstr ""
+
+#: app/messages.html:5
+msgid "Too long"
+msgstr ""
+
+#: app/messages.html:4
+msgid "Too short"
+msgstr ""
+
+#: app/messages.html:8
+msgid "Too small"
+msgstr ""
+
+#: app/views/inventory/manageOrders.html:55
+#: app/views/inventory/viewOrders.html:59
+msgid "Transfer"
+msgstr ""
+
+#: app/views/inventory/recordTransfusions.html:82
+msgid "Transfusion Notes"
+msgstr ""
+
+#: app/views/inventory/findTransfusion.html:45
+#: app/views/inventory/recordTransfusions.html:59
+msgid "Transfusion Outcomes"
+msgstr ""
+
+#: app/views/inventory/recordTransfusions.html:70
+msgid "Transfusion Reaction Type"
+msgstr ""
+
+#: app/views/inventory/findTransfusion.html:36
+#: app/views/inventory/recordTransfusions.html:47
+msgid "Transfusion Site"
+msgstr ""
+
+#: app/views/inventory/viewOrder.html:59
+msgid "Units Ordered"
+msgstr ""
+
+#: app/views/inventory/recordReturn.html:42
+#: app/views/inventory/viewReturn.html:40
+msgid "Units Returned"
+msgstr ""
+
+#: app/views/inventory/viewOrder.html:65
+msgid "Units Supplied"
+msgstr ""
+
+#: app/views/inventory/manageOrders.html:12
+#: app/views/inventory/viewOrders.html:12
+#: app/views/inventory/viewOrders.html:19
+msgid "View Orders"
+msgstr ""
+
+#: app/views/inventory/manageReturns.html:12
+#: app/views/inventory/viewReturns.html:12
+#: app/views/inventory/viewReturns.html:19
+msgid "View Returns"
+msgstr ""
+
+#: app/views/inventory/sidebar.html:15
+#: app/views/inventory/viewStockLevels.html:3
+msgid "View Stock Levels"
+msgstr ""
+
+#: app/views/inventory/recordTransfusions.html:8
+msgid "Void"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:16
+#: app/views/inventory/recordTransfusions.html:136
+#: app/views/inventory/viewOrder.html:35
+msgid "Ward No"
+msgstr ""
+
+#: app/views/inventory/manageOrders.html:84
+msgid "{{addingOrderForm ? 'Adding...' : 'Add Order'}}"
+msgstr ""
+
+#: app/views/inventory/manageReturns.html:63
+msgid "{{addingReturnForm ? 'Adding...' : 'Add Return'}}"
+msgstr ""
+
+#: app/views/inventory/discardComponentsModal.html:25
+msgid "{{discardingComponent ? \"Discarding...\" : \"Discard Components\"}}"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:25
+#: app/views/inventory/viewOrder.html:44
+msgid "{{orderForm.patient.bloodGroup}}"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:31
+#: app/views/inventory/viewOrder.html:50
+msgid "{{orderForm.patient.dateOfBirth | bsisDate}}"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:28
+#: app/views/inventory/viewOrder.html:47
+msgid "{{orderForm.patient.gender}}"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:15
+#: app/views/inventory/viewOrder.html:34
+msgid "{{orderForm.patient.hospitalBloodBankNumber}}"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:18
+#: app/views/inventory/viewOrder.html:37
+msgid "{{orderForm.patient.hospitalWardNumber}}"
+msgstr ""
+
+#: app/views/inventory/fulfilOrder.html:21
+#: app/views/inventory/viewOrder.html:40
+msgid "{{orderForm.patient.patientNumber}}"
+msgstr ""
+
+#: app/views/inventory/recordReturn.html:81
+msgid "{{savingForm ? 'Saving...' : 'Save Return'}}"
+msgstr ""
+
+#: app/views/inventory/recordReturn.html:31
+msgid "{{savingReturnDetails ? 'Saving...' : 'Save'}}"
+msgstr ""
+
+#: app/views/inventory/viewStockLevels.html:38
+msgid ""
+"{{searching ? \"Searching...\" :\n"
+"          \"View Stock Levels\"}}"
+msgstr ""
+
+#: app/views/inventory/findInventory.html:88
+#: app/views/inventory/findTransfusion.html:78
+#: app/views/inventory/viewReturns.html:66
+msgid "{{searching ? \"Searching...\" : \"Search\"}}"
+msgstr ""

@@ -18,6 +18,7 @@ module.exports = function(grunt) {
 
   // enables grunt-git-describe
   grunt.loadNpmTasks('grunt-git-describe');
+  grunt.loadNpmTasks('grunt-angular-gettext');
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -332,6 +333,25 @@ module.exports = function(grunt) {
     //   dist: {}
     // },
 
+    nggettext_extract: {
+      pot: {
+        files: {
+          'po/template.pot': [
+            'app/views/*/*.html',
+            'app/*.html'
+          ]
+        }
+      }
+    },
+
+    nggettext_compile: {
+      all: {
+        files: {
+          'app/scripts/translations.js': ['po/*.po']
+        }
+      }
+    },
+
     // Test settings
     karma: {
       unit: {
@@ -393,6 +413,10 @@ module.exports = function(grunt) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve:' + target]);
   });
+
+  // Translation tasks
+  grunt.registerTask('extract', ['nggettext_extract']);
+  grunt.registerTask('compile', ['nggettext_compile']);
 
   grunt.registerTask('test', [
     'clean:server',
