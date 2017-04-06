@@ -43,6 +43,14 @@ module.exports = function(grunt) {
           livereload: true
         }
       },
+      html: {
+        files: ['app/views/**/*.html', 'app/*.html'],
+        tasks: ['extract']
+      },
+      po: {
+        files: ['po/*.po'],
+        tasks: ['compile']
+      },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:eslint:test', 'karma']
