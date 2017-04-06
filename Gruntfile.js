@@ -437,6 +437,8 @@ module.exports = function(grunt) {
     'newer:eslint',
     'concat',
     'ngAnnotate',
+    'extract',
+    'compile',
     'copy:dist',
     'cdnify',
     //'cssmin',
