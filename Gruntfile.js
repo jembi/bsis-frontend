@@ -44,7 +44,7 @@ module.exports = function(grunt) {
         }
       },
       html: {
-        files: ['app/views/**/*.html', 'app/*.html'],
+        files: ['<%= yeoman.app %>/views/**/*.html', 'app/*.html'],
         tasks: ['extract']
       },
       po: {
@@ -356,7 +356,7 @@ module.exports = function(grunt) {
     nggettext_compile: {
       all: {
         files: {
-          'app/scripts/translations.js': ['po/*.po']
+          '<%= yeoman.app %>/scripts/translations.js': ['po/*.po']
         }
       }
     },
