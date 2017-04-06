@@ -13,3 +13,4 @@ npm-debug.log
 bsis-frontend.sublime-project
 bsis-frontend.sublime-workspace
 app/version.json
+app/scripts/translations.js
