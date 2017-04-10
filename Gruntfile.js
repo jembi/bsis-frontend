@@ -399,8 +399,8 @@ module.exports = function(grunt) {
   });
 
   // Translation tasks
-  grunt.registerTask('extract', ['nggettextExtract']);
-  grunt.registerTask('compile', ['nggettextCompile']);
+  grunt.registerTask('nggettextExtract', ['nggettextExtract']);
+  grunt.registerTask('nggettextCompile', ['nggettextCompile']);
 
   grunt.registerTask('test', [
     'clean:server',
@@ -421,7 +421,7 @@ module.exports = function(grunt) {
     'newer:eslint',
     'concat',
     'ngAnnotate',
-    'extract',
+    'nggettextExtract',
     'nggettextCompile',
     'copy:dist',
     'cdnify',
