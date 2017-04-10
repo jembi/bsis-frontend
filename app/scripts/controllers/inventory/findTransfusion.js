@@ -36,27 +36,37 @@ angular.module('bsis')
       endDate: moment().endOf('day').toDate()
     };
 
+    var dinTitle = gettextCatalog.getString('DIN');
+    var componentCodeTitle = gettextCatalog.getString('Component Code');
+    var componentTypeTitle = gettextCatalog.getString('Component Type');
+    var transfusedOnTitle = gettextCatalog.getString('Transfused On');
+    var outcomeTitle = gettextCatalog.getString('Outcome');
+    var transfusionSiteTitle = gettextCatalog.getString('Transfusion Site');
+
     var columnDefs = [
       {
         name: 'DIN',
-        displayName: 'DIN',
+        displayName: dinTitle,
         field: 'donationIdentificationNumber',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Component Code',
+        displayName: componentCodeTitle,
         field: 'componentCode',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Component Type',
+        displayName: componentTypeTitle,
         field: 'componentType',
         width: '**'
       },
       {
         name: 'Transfused On',
+        displayName: transfusedOnTitle,
         field: 'dateTransfused',
         cellFilter: 'bsisDate',
         width: '**',
@@ -64,11 +74,13 @@ angular.module('bsis')
       },
       {
         name: 'Outcome',
+        displayName: outcomeTitle,
         field: 'transfusionOutcome',
         width: '**'
       },
       {
         name: 'Transfusion Site',
+        displayName: transfusionSiteTitle,
         field: 'receivedFrom.name',
         width: '**'
       }
