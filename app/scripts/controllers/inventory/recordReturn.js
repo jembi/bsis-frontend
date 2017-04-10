@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location, $uibModal, $log, $routeParams, ReturnFormsService, ComponentService, UtilsService, DATEFORMAT) {
+angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location, $uibModal, $log, $routeParams, ReturnFormsService, ComponentService, UtilsService, DATEFORMAT, gettextCatalog) {
 
   $scope.dateFormat = DATEFORMAT;
 
@@ -8,6 +8,13 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     din: null,
     componentCode: null
   };
+
+  var componentCodeTitle = gettextCatalog.getString('Component Code');
+  var componentTypeTitle = gettextCatalog.getString('Component Type');
+  var bloodGroupTitle = gettextCatalog.getString('Blood Group');
+  var statusTitle = gettextCatalog.getString('Status');
+  var createdOnTitle = gettextCatalog.getString('Create On');
+  var expiryStatusTitle = gettextCatalog.getString('Expiry Status');
 
   var columnDefs = [
     {
@@ -19,6 +26,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     },
     {
       name: 'componentCode',
+      displayName: componentCodeTitle,
       field: 'componentCode',
       displayName: 'Component Code',
       width: '**',
@@ -26,6 +34,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     },
     {
       name: 'componentTypeName',
+      displayName: componentTypeTitle,
       field: 'componentTypeName',
       displayName: 'Component Type',
       width: '**',
@@ -33,6 +42,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     },
     {
       name: 'bloodGroup',
+      displayName: bloodGroupTitle,
       field: 'bloodGroup',
       displayName: 'Blood Group',
       width: '**',
@@ -40,6 +50,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     },
     {
       name: 'status',
+      displayName: statusTitle,
       field: 'status',
       displayName: 'Status',
       width: '**',
@@ -47,6 +58,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     },
     {
       name: 'createdOn',
+      displayName: createdOnTitle,
       field: 'createdOn',
       displayName: 'Created On',
       cellFilter: 'bsisDate',
@@ -55,6 +67,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     },
     {
       name: 'expiryStatus',
+      displayName: expiryStatusTitle,
       field: 'expiryStatus',
       displayName: 'Expiry Status',
       width: '**',
