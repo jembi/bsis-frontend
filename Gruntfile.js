@@ -338,7 +338,8 @@ module.exports = function(grunt) {
         files: {
           'po/template.pot': [
             'app/views/*/*.html',
-            'app/*.html'
+            'app/*.html',
+            'app/scripts/controllers/*/*.js'
           ]
         }
       }
