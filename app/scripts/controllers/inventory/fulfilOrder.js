@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, InventoriesService, BLOODGROUP, GENDER, DATEFORMAT, ModalsService) {
+angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, InventoriesService, BLOODGROUP, GENDER, DATEFORMAT, ModalsService, gettextCatalog) {
 
   var orderItemMaster = {
     componentType: null,
