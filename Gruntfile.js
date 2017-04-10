@@ -38,18 +38,18 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/**/*.js'],
-        tasks: ['newer:eslint:src', 'extract'],
+        tasks: ['newer:eslint:src', 'nggettext_extract'],
         options: {
           livereload: true
         }
       },
       html: {
         files: ['<%= yeoman.app %>/views/**/*.html', 'app/*.html'],
-        tasks: ['extract']
+        tasks: ['nggettext_extract']
       },
       po: {
         files: ['po/*.po'],
-        tasks: ['compile']
+        tasks: ['nggettext_compile']
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
@@ -448,7 +448,7 @@ module.exports = function(grunt) {
     'concat',
     'ngAnnotate',
     'extract',
-    'compile',
+    'nggettext_compile',
     'copy:dist',
     'cdnify',
     //'cssmin',
