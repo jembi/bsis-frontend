@@ -38,7 +38,7 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/**/*.js'],
-        tasks: ['newer:eslint:src'],
+        tasks: ['newer:eslint:src', 'extract'],
         options: {
           livereload: true
         }
