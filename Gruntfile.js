@@ -38,18 +38,18 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/**/*.js'],
-        tasks: ['newer:eslint:src', 'nggettext_extract'],
+        tasks: ['newer:eslint:src', 'nggettextExtract'],
         options: {
           livereload: true
         }
       },
       html: {
         files: ['<%= yeoman.app %>/views/**/*.html', 'app/*.html'],
-        tasks: ['nggettext_extract']
+        tasks: ['nggettextExtract']
       },
       po: {
         files: ['po/*.po'],
-        tasks: ['nggettext_compile']
+        tasks: ['nggettextCompile']
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
@@ -316,33 +316,7 @@ module.exports = function(grunt) {
       ]
     },
 
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
-    //         '<%= yeoman.app %>/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
-
-    nggettext_extract: {
+    nggettextExtract: {
       pot: {
         files: {
           'po/template.pot': [
@@ -354,7 +328,7 @@ module.exports = function(grunt) {
       }
     },
 
-    nggettext_compile: {
+    nggettextCompile: {
       all: {
         files: {
           '<%= yeoman.app %>/scripts/translations.js': ['po/*.po']
@@ -425,8 +399,8 @@ module.exports = function(grunt) {
   });
 
   // Translation tasks
-  grunt.registerTask('extract', ['nggettext_extract']);
-  grunt.registerTask('compile', ['nggettext_compile']);
+  grunt.registerTask('extract', ['nggettextExtract']);
+  grunt.registerTask('compile', ['nggettextCompile']);
 
   grunt.registerTask('test', [
     'clean:server',
@@ -448,10 +422,9 @@ module.exports = function(grunt) {
     'concat',
     'ngAnnotate',
     'extract',
-    'nggettext_compile',
+    'nggettextCompile',
     'copy:dist',
     'cdnify',
-    //'cssmin',
     'uglify',
     'rev',
     'usemin',
