@@ -1,47 +1,55 @@
 'use strict';
 
-angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, $log, $filter, $routeParams, $uibModal, ReturnFormsService, ModalsService, UtilsService) {
+angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, $log, $filter, $routeParams, $uibModal, ReturnFormsService, ModalsService, UtilsService, gettextCatalog) {
+
+  var dinTitle = gettextCatalog.getString('DIN');
+  var componentCodeTitle = gettextCatalog.getString('Component Code');
+  var componentTypeTitle = gettextCatalog.getString('Component Type');
+  var bloodGroupTitle = gettextCatalog.getString('Blood Group');
+  var statusTitle = gettextCatalog.getString('Status');
+  var createdOnTitle = gettextCatalog.getString('Create On');
+  var expiryStatusTitle = gettextCatalog.getString('Expiry Status');
 
   var columnDefs = [
     {
       name: 'donationIdentificationNumber',
       field: 'donationIdentificationNumber',
-      displayName: 'DIN',
+      displayName: dinTitle,
       width: '**',
       maxWidth: '100'
     },
     {
       name: 'componentCode',
       field: 'componentCode',
-      displayName: 'Component Code',
+      displayName: componentCodeTitle,
       width: '**',
       maxWidth: '150'
     },
     {
       name: 'componentTypeName',
       field: 'componentTypeName',
-      displayName: 'Component Type',
+      displayName: componentTypeTitle,
       width: '**',
       minWidth: '200'
     },
     {
       name: 'bloodGroup',
       field: 'bloodGroup',
-      displayName: 'Blood Group',
+      displayName: bloodGroupTitle,
       width: '**',
       maxWidth: '125'
     },
     {
       name: 'status',
       field: 'status',
-      displayName: 'Status',
+      displayName: statusTitle,
       width: '**',
       maxWidth: '150'
     },
     {
       name: 'createdOn',
       field: 'createdOn',
-      displayName: 'Created On',
+      displayName: createdOnTitle,
       cellFilter: 'bsisDate',
       width: '**',
       maxWidth: '100'
@@ -49,7 +57,7 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     {
       name: 'expiryStatus',
       field: 'expiryStatus',
-      displayName: 'Expiry Status',
+      displayName: expiryStatusTitle,
       width: '**',
       maxWidth: '150',
       sortingAlgorithm: function(a, b, rowA, rowB) {

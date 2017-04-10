@@ -9,6 +9,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     componentCode: null
   };
 
+  var dinTitle = gettextCatalog.getString('DIN');
   var componentCodeTitle = gettextCatalog.getString('Component Code');
   var componentTypeTitle = gettextCatalog.getString('Component Type');
   var bloodGroupTitle = gettextCatalog.getString('Blood Group');
@@ -20,7 +21,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     {
       name: 'donationIdentificationNumber',
       field: 'donationIdentificationNumber',
-      displayName: 'DIN',
+      displayName: dinTitle,
       width: '**',
       maxWidth: '100'
     },
@@ -28,7 +29,6 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       name: 'componentCode',
       displayName: componentCodeTitle,
       field: 'componentCode',
-      displayName: 'Component Code',
       width: '**',
       maxWidth: '150'
     },
@@ -36,7 +36,6 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       name: 'componentTypeName',
       displayName: componentTypeTitle,
       field: 'componentTypeName',
-      displayName: 'Component Type',
       width: '**',
       minWidth: '200'
     },
@@ -44,7 +43,6 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       name: 'bloodGroup',
       displayName: bloodGroupTitle,
       field: 'bloodGroup',
-      displayName: 'Blood Group',
       width: '**',
       maxWidth: '125'
     },
@@ -52,7 +50,6 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       name: 'status',
       displayName: statusTitle,
       field: 'status',
-      displayName: 'Status',
       width: '**',
       maxWidth: '150'
     },
@@ -60,7 +57,6 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       name: 'createdOn',
       displayName: createdOnTitle,
       field: 'createdOn',
-      displayName: 'Created On',
       cellFilter: 'bsisDate',
       width: '**',
       maxWidth: '100'
@@ -69,7 +65,6 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       name: 'expiryStatus',
       displayName: expiryStatusTitle,
       field: 'expiryStatus',
-      displayName: 'Expiry Status',
       width: '**',
       maxWidth: '150',
       sortingAlgorithm: function(a, b, rowA, rowB) {
