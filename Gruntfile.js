@@ -43,6 +43,14 @@ module.exports = function(grunt) {
           livereload: true
         }
       },
+      html: {
+        files: ['<%= yeoman.app %>/views/**/*.html', 'app/*.html'],
+        tasks: ['extract']
+      },
+      po: {
+        files: ['po/*.po'],
+        tasks: ['compile']
+      },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:eslint:test', 'karma']
@@ -106,7 +114,8 @@ module.exports = function(grunt) {
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/**/*.js',
         '!<%= yeoman.app %>/scripts/jquery.min.js',
-        '!<%= yeoman.app %>/scripts/bootstrap.min.js'
+        '!<%= yeoman.app %>/scripts/bootstrap.min.js',
+        '!<%= yeoman.app %>/scripts/translations.js'
       ],
       test: [
         'test/spec/{,*/}*.js'
@@ -348,7 +357,7 @@ module.exports = function(grunt) {
     nggettext_compile: {
       all: {
         files: {
-          'app/scripts/translations.js': ['po/*.po']
+          '<%= yeoman.app %>/scripts/translations.js': ['po/*.po']
         }
       }
     },
@@ -438,6 +447,8 @@ module.exports = function(grunt) {
     'newer:eslint',
     'concat',
     'ngAnnotate',
+    'extract',
+    'compile',
     'copy:dist',
     'cdnify',
     //'cssmin',

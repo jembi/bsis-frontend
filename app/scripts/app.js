@@ -650,9 +650,11 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   })
 
     // Set the language of BSIS
-  .run(function (gettextCatalog) {
-    //gettextCatalog.setCurrentLanguage('fr');
-    gettextCatalog.debug = true;
+  .run(function(gettextCatalog, SYSTEMCONFIG) {
+    gettextCatalog.setCurrentLanguage(SYSTEMCONFIG.language);
+    if (SYSTEMCONFIG.languageDebug) {
+      gettextCatalog.debug = SYSTEMCONFIG.languageDebug;
+    }
   })
 
   .run(['$rootScope', '$location', 'AuthService', function($rootScope, $location) {
