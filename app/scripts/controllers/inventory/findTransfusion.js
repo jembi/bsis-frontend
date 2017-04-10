@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindTransfusionCtrl', function($scope, $location, $filter, $log, TransfusionService, DATEFORMAT, $routeParams) {
+  .controller('FindTransfusionCtrl', function($scope, $location, $filter, $log, TransfusionService, DATEFORMAT, $routeParams, gettextCatalog) {
 
     $scope.dateFormat = DATEFORMAT;
     $scope.transfusionOutcomes = [];
