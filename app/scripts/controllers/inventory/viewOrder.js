@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ViewOrderCtrl', function ($scope, $location, $log, $filter, $routeParams, OrderFormsService, ModalsService, DATEFORMAT, gettextCatalog) {
+angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService, ModalsService, DATEFORMAT, gettextCatalog) {
 
   $scope.dateFormat = DATEFORMAT;
 
@@ -66,7 +66,6 @@ angular.module('bsis').controller('ViewOrderCtrl', function ($scope, $location, 
     {
       name: 'bloodGroup',
       displayName: bloodGroupTitle,
-      displayName: 'Blood Group',
       field: 'bloodGroup',
       width: '**',
       maxWidth: '200'
@@ -81,7 +80,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function ($scope, $location, 
     paginationTemplate: 'views/template/pagination.html',
     minRowsToShow: 4,
 
-    onRegisterApi: function (gridApi) {
+    onRegisterApi: function(gridApi) {
       $scope.unitsOrderedGridApi = gridApi;
     }
   };
@@ -101,7 +100,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function ($scope, $location, 
     exporterPdfMaxGridWidth: 400,
 
     // PDF header
-    exporterPdfHeader: function () {
+    exporterPdfHeader: function() {
       var finalArray = [
         {
           text: 'Dispatch Note',
@@ -115,7 +114,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function ($scope, $location, 
 
     exporterPdfTableStyle: { margin: [-10, 10, 0, 0] },
 
-    exporterPdfCustomFormatter: function (docDefinition) {
+    exporterPdfCustomFormatter: function(docDefinition) {
       var prefix = [];
       prefix.push(
         {
@@ -186,7 +185,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function ($scope, $location, 
     },
 
     // PDF footer
-    exporterPdfFooter: function (currentPage, pageCount) {
+    exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
         { text: 'Number of components: ' + $scope.unitsSuppliedGridOptions.data.length, width: 'auto' },
         { text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto' },
@@ -200,7 +199,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function ($scope, $location, 
       };
     },
 
-    onRegisterApi: function (gridApi) {
+    onRegisterApi: function(gridApi) {
       $scope.unitsSuppliedGridApi = gridApi;
     }
   };
@@ -208,7 +207,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function ($scope, $location, 
   function populateUnitsOrderedGrid(orderForm) {
     $scope.unitsOrderedGridOptions.data = [];
     var componentsToMatch = angular.copy(orderForm.components);
-    angular.forEach(orderForm.items, function (item) {
+    angular.forEach(orderForm.items, function(item) {
       var row = {
         componentTypeName: item.componentType.componentTypeName,
         bloodGroup: item.bloodGroup,
@@ -217,7 +216,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function ($scope, $location, 
         gap: item.numberOfUnits
       };
       var unmatchedComponents = [];
-      angular.forEach(componentsToMatch, function (component) {
+      angular.forEach(componentsToMatch, function(component) {
         var bloodGroup = component.bloodGroup;
         if (row.gap > 0 && component.componentType.id === item.componentType.id && bloodGroup === item.bloodGroup) {
           // can't over supply and component matches
@@ -234,7 +233,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function ($scope, $location, 
 
   function populateUnitsSuppliedGrid(orderForm) {
     $scope.unitsSuppliedGridOptions.data = [];
-    angular.forEach(orderForm.components, function (component) {
+    angular.forEach(orderForm.components, function(component) {
       var row = {
         donationIdentificationNumber: component.donationIdentificationNumber,
         componentTypeName: component.componentType.componentTypeName,
@@ -246,7 +245,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function ($scope, $location, 
 
   function init() {
     // Fetch the order form by its id
-    OrderFormsService.getOrderForm({ id: $routeParams.id }, function (res) {
+    OrderFormsService.getOrderForm({ id: $routeParams.id }, function(res) {
       $scope.orderForm = res.orderForm;
       $scope.orderFormHasPatient = res.orderForm.patient !== null ? true : false;
       populateUnitsOrderedGrid($scope.orderForm);
@@ -254,58 +253,58 @@ angular.module('bsis').controller('ViewOrderCtrl', function ($scope, $location, 
     }, $log.error);
   }
 
-  $scope.exportDispatchNote = function () {
+  $scope.exportDispatchNote = function() {
     $scope.unitsSuppliedGridApi.exporter.pdfExport('all', 'all');
   };
 
-  $scope.deleteOrder = function () {
+  $scope.deleteOrder = function() {
     var unprocessConfirmation = {
       title: 'Void Order',
       button: 'Void',
       message: 'Are you sure that you want to delete this Order?'
     };
 
-    ModalsService.showConfirmation(unprocessConfirmation).then(function () {
+    ModalsService.showConfirmation(unprocessConfirmation).then(function() {
       $scope.deleting = true;
-      OrderFormsService.deleteOrderForm({ id: $routeParams.id }, function () {
+      OrderFormsService.deleteOrderForm({ id: $routeParams.id }, function() {
         $location.path('/manageOrders');
-      }, function (err) {
+      }, function(err) {
         $log.error(err);
         $scope.deleting = false;
       });
-    }).catch(function () {
+    }).catch(function() {
       // Confirmation was rejected
       $scope.deleting = false;
     });
   };
 
-  $scope.dispatch = function () {
+  $scope.dispatch = function() {
     var dispatchConfirmation = {
       title: 'Dispatch Order',
       button: 'Dispatch Order',
       message: 'Are you sure you want to dispatch the order?'
     };
 
-    ModalsService.showConfirmation(dispatchConfirmation).then(function () {
+    ModalsService.showConfirmation(dispatchConfirmation).then(function() {
       $scope.orderForm.status = 'DISPATCHED';
-      OrderFormsService.updateOrderForm({}, $scope.orderForm, function (res) {
+      OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
         $scope.orderForm = res.orderForm;
         populateUnitsOrderedGrid($scope.orderForm);
         populateUnitsSuppliedGrid($scope.orderForm);
-      }, function (err) {
+      }, function(err) {
         $log.error(err);
       });
     });
   };
 
-  $scope.isFieldEmpty = function (field) {
+  $scope.isFieldEmpty = function(field) {
     if (field) {
       return field.length === 0;
     }
     return true;
   };
 
-  $scope.edit = function () {
+  $scope.edit = function() {
     $location.path('/fulfilOrder/' + $routeParams.id);
   };
 
