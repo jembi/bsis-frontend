@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService, UtilsService, DATEFORMAT) {
+  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService, UtilsService, DATEFORMAT, gettextCatalog) {
 
     $scope.dateFormat = DATEFORMAT;
 
@@ -14,22 +14,32 @@ angular.module('bsis')
       anyBloodGroup: true
     };
 
+    var dinTitle = gettextCatalog.getString('DIN');
+    var componentCodeTitle = gettextCatalog.getString('Component Code');
+    var createdOnTitle = gettextCatalog.getString('Created On');
+    var componentTypeTitle = gettextCatalog.getString('Component Type');
+    var bloodGroupTitle = gettextCatalog.getString('Blood Group');
+    var expiryStatusTitle = gettextCatalog.getString('Expiry Status');
+    var locationTitle = gettextCatalog.getString('Location');
+
     var columnDefs = [
       {
         name: 'DIN',
-        displayName: 'DIN',
+        displayName: dinTitle,
         field: 'donationIdentificationNumber',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Component Code',
+        displayName: componentCodeTitle,
         field: 'componentCode',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Created On',
+        displayName: createdOnTitle,
         field: 'createdOn',
         cellFilter: 'bsisDate',
         width: '**',
@@ -37,17 +47,20 @@ angular.module('bsis')
       },
       {
         name: 'Component Type',
+        displayName: componentTypeTitle,
         field: 'componentType.componentTypeName',
         width: '**'
       },
       {
         name: 'Blood Group',
+        displayName: bloodGroupTitle,
         field: 'bloodGroup',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Expiry Status',
+        displayName: expiryStatusTitle,
         field: 'expiryStatus',
         width: '**',
         maxWidth: '200',
@@ -57,6 +70,7 @@ angular.module('bsis')
       },
       {
         name: 'Location',
+        displayName: locationTitle,
         field: 'location.name',
         width: '**',
         maxWidth: '350'
