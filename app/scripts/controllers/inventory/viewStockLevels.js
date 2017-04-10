@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ViewStockLevelsCtrl', function($scope, $location, $filter, $log, ReportsService) {
+  .controller('ViewStockLevelsCtrl', function($scope, $location, $filter, $log, ReportsService, gettext, gettextCatalog) {
 
     $scope.distributionCenters = null;
 
@@ -14,8 +14,11 @@ angular.module('bsis')
       allSites: true
     };
 
+    var componentTypeTitle = gettextCatalog.getString('Component Type');
+    var totalTitle = gettextCatalog.getString('Total');
+
     var inStockColumnDefs = [
-      { name: 'Component Type', field: 'componentType', width: '**' },
+      { name: 'Component Type', displayName:componentTypeTitle, field: 'componentType', width: '**' },
       { name: 'A+', displayName: 'A+', field: 'aPlus', width: 55 },
       { name: 'A-', displayName: 'A-', field: 'aMinus', width: 55 },
       { name: 'B+', displayName: 'B+', field: 'bPlus', width: 55 },
@@ -24,11 +27,11 @@ angular.module('bsis')
       { name: 'AB-', displayName: 'AB-', field: 'abMinus', width: 65 },
       { name: 'O+', displayName: 'O+', field: 'oPlus', width: 55 },
       { name: 'O-', displayName: 'O-', field: 'oMinus', width: 55 },
-      { name: 'Total', displayName: 'Total', field: 'total', width: 95 }
+      { name: 'Total', displayName: totalTitle, field: 'total', width: 95 }
     ];
 
     var notLabelledColumnDefs = [
-      { name: 'Component Type', field: 'componentType', width: '**' },
+      { name: 'Component Type', displayName:componentTypeTitle, field: 'componentType', width: '**' },
       { name: 'A+', displayName: 'A+', field: 'aPlus', width: 55 },
       { name: 'A-', displayName: 'A-', field: 'aMinus', width: 55 },
       { name: 'B+', displayName: 'B+', field: 'bPlus', width: 55 },
@@ -38,7 +41,7 @@ angular.module('bsis')
       { name: 'O+', displayName: 'O+', field: 'oPlus', width: 55 },
       { name: 'O-', displayName: 'O-', field: 'oMinus', width: 55 },
       { name: 'NTD', displayName: 'NTD', field: 'empty', width: 65 },
-      { name: 'Total', displayName: 'Total', field: 'total', width: 95 }
+      { name: 'Total', displayName: totalTitle, field: 'total', width: 95 }
     ];
 
     function isInStockSearch() {

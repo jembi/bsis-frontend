@@ -20,7 +20,7 @@ msgstr "Ajouter une commande"
 
 #: app/views/inventory/recordReturn.html:67
 msgid "Add Pack"
-msgstr "Ajouter un paquet"
+msgstr "Ajouter un poche"
 
 #: app/views/inventory/manageReturns.html:25
 #: app/views/inventory/manageReturns.html:9
@@ -47,13 +47,13 @@ msgid "Blood Bank"
 msgstr "Banque du sang"
 
 #: app/views/inventory/fulfilOrder.html:13
-#: app/views/inventory/manageOrders.html:131
+#: app/views/inventory/manageOrders.html:134
 #: app/views/inventory/viewOrder.html:32
 msgid "Blood Bank No"
 msgstr "N ° de banque de sang"
 
 #: app/views/inventory/fulfilOrder.html:23
-#: app/views/inventory/manageOrders.html:151
+#: app/views/inventory/manageOrders.html:154
 #: app/views/inventory/recordTransfusions.html:166
 #: app/views/inventory/viewOrder.html:42
 msgid "Blood Group"
@@ -76,7 +76,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #: app/views/inventory/findInventory.html:94
-#: app/views/inventory/manageOrders.html:85
+#: app/views/inventory/manageOrders.html:87
 #: app/views/inventory/manageReturns.html:64
 #: app/views/inventory/recordReturn.html:69
 #: app/views/inventory/recordTransfusions.html:180
@@ -86,6 +86,7 @@ msgstr "Annuler"
 msgid "Clear"
 msgstr "Clair"
 
+#: app/scripts/controllers/inventory/findInventory.js:18
 #: app/views/inventory/findInventory.html:17
 #: app/views/inventory/findTransfusion.html:16
 #: app/views/inventory/recordReturn.html:58
@@ -93,6 +94,7 @@ msgstr "Clair"
 msgid "Component Code"
 msgstr "Code de composant"
 
+#: app/scripts/controllers/inventory/viewStockLevels.js:17
 #: app/views/inventory/findInventory.html:50
 #: app/views/inventory/findTransfusion.html:27
 #: app/views/inventory/recordTransfusions.html:35
@@ -107,6 +109,7 @@ msgstr "Commandes en cours"
 msgid "Current Returns"
 msgstr "Rendements actuels"
 
+#: app/scripts/controllers/inventory/findInventory.js:17
 #: app/views/inventory/findInventory.html:8
 #: app/views/inventory/findTransfusion.html:8
 #: app/views/inventory/recordReturn.html:49
@@ -129,7 +132,7 @@ msgid "Date must be after component was created"
 msgstr "La date doit être après la création du composant"
 
 #: app/views/inventory/fulfilOrder.html:29
-#: app/views/inventory/manageOrders.html:112
+#: app/views/inventory/manageOrders.html:114
 #: app/views/inventory/recordTransfusions.html:143
 #: app/views/inventory/viewOrder.html:48
 msgid "Date of Birth"
@@ -155,7 +158,7 @@ msgstr "Jeter le stock"
 msgid "Dispatch Order"
 msgstr "Ordre de distribution"
 
-#: app/views/inventory/manageOrders.html:51
+#: app/views/inventory/manageOrders.html:52
 #: app/views/inventory/viewOrders.html:55
 msgid "Dispatch Type"
 msgstr "Type de livraison"
@@ -167,7 +170,7 @@ msgid "Dispatched From"
 msgstr "Expédié de"
 
 #: app/views/inventory/fulfilOrder.html:11
-#: app/views/inventory/manageOrders.html:72
+#: app/views/inventory/manageOrders.html:73
 #: app/views/inventory/viewOrder.html:29
 msgid "Dispatched To"
 msgstr "Distribué à"
@@ -209,13 +212,13 @@ msgid "Fulfil Order Form"
 msgstr "Formulaire de commande remplissant"
 
 #: app/views/inventory/fulfilOrder.html:26
-#: app/views/inventory/manageOrders.html:142
+#: app/views/inventory/manageOrders.html:145
 #: app/views/inventory/recordTransfusions.html:157
 #: app/views/inventory/viewOrder.html:45
 msgid "Gender"
 msgstr "Le genre"
 
-#: app/views/inventory/manageOrders.html:160
+#: app/views/inventory/manageOrders.html:163
 msgid "Hospital Ward No"
 msgstr "Hôpital Ward Non"
 
@@ -240,7 +243,8 @@ msgstr "Adresse e-mail invalide"
 msgid "Invalid number of decimal digits"
 msgstr "Nombre de chiffres décimaux invalides"
 
-#: app/views/inventory/manageOrders.html:59
+#: app/views/inventory/fulfilOrder.html:56
+#: app/views/inventory/manageOrders.html:60
 #: app/views/inventory/viewOrders.html:63
 msgid "Issue"
 msgstr "Problème"
@@ -279,7 +283,7 @@ msgstr ""
 msgid "Must match the previous entry"
 msgstr "Doit correspondre à l'entrée précédente"
 
-#: app/views/inventory/manageOrders.html:93
+#: app/views/inventory/manageOrders.html:95
 msgid "Name"
 msgstr "Prénom"
 
@@ -323,7 +327,7 @@ msgstr "Type de commande"
 msgid "PDF"
 msgstr "PDF"
 
-#: app/views/inventory/manageOrders.html:89
+#: app/views/inventory/manageOrders.html:91
 msgid "Patient Details"
 msgstr "Détails du patient"
 
@@ -334,13 +338,14 @@ msgid "Patient Name"
 msgstr "Nom du patient"
 
 #: app/views/inventory/fulfilOrder.html:19
-#: app/views/inventory/manageOrders.html:124
+#: app/views/inventory/manageOrders.html:127
 #: app/views/inventory/recordTransfusions.html:122
 #: app/views/inventory/viewOrder.html:38
 msgid "Patient No"
 msgstr "N ° de patient"
 
-#: app/views/inventory/manageOrders.html:63
+#: app/views/inventory/fulfilOrder.html:59
+#: app/views/inventory/manageOrders.html:64
 #: app/views/inventory/viewOrders.html:67
 msgid "Patient Request"
 msgstr "Demande de patient"
@@ -351,7 +356,7 @@ msgstr "Demande de patient"
 msgid "Period"
 msgstr "Période"
 
-#: app/views/inventory/manageOrders.html:65
+#: app/views/inventory/manageOrders.html:66
 msgid "Please select a dispatch type"
 msgstr "Sélectionnez un type d'expédition"
 
@@ -404,7 +409,7 @@ msgid "Returned To"
 msgstr "Renvoyé à"
 
 #: app/views/inventory/discardComponentsModal.html:12
-#: app/views/inventory/manageOrders.html:42
+#: app/views/inventory/manageOrders.html:43
 #: app/views/inventory/manageReturns.html:42
 #: app/views/inventory/manageReturns.html:54
 msgid "Select"
@@ -486,7 +491,12 @@ msgstr "Trop court"
 msgid "Too small"
 msgstr "Trop petit"
 
-#: app/views/inventory/manageOrders.html:55
+#: app/scripts/controllers/inventory/viewStockLevels.js:18
+msgid "Total"
+msgstr "Le total"
+
+#: app/views/inventory/fulfilOrder.html:53
+#: app/views/inventory/manageOrders.html:56
 #: app/views/inventory/viewOrders.html:59
 msgid "Transfer"
 msgstr "Transfert"
@@ -549,9 +559,9 @@ msgstr "Vide"
 msgid "Ward No"
 msgstr "Ward No"
 
-#: app/views/inventory/manageOrders.html:84
+#: app/views/inventory/manageOrders.html:86
 msgid "{{addingOrderForm ? 'Adding...' : 'Add Order'}}"
-msgstr ""
+msgstr "{{addingOrderForm ? 'Additionner...' : 'Ajouter régler'}}"
 
 #: app/views/inventory/manageReturns.html:63
 msgid "{{addingReturnForm ? 'Adding...' : 'Add Return'}}"
