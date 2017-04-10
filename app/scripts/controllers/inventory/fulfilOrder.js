@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, InventoriesService, BLOODGROUP, GENDER, DATEFORMAT, ModalsService, gettextCatalog) {
+angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location, $log, $routeParams, $uibModal, OrderFormsService, InventoriesService, BLOODGROUP, GENDER, DATEFORMAT, ModalsService, gettextCatalog) {
 
   var orderItemMaster = {
     componentType: null,
@@ -27,7 +27,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
     }
     if ($scope.orderDetailsForm.type === 'TRANSFER') {
       $scope.orderDetailsForm.patient = null;
-      $scope.dispatchToSites = distributionSites.filter(function (site) {
+      $scope.dispatchToSites = distributionSites.filter(function(site) {
         // Filter the selected distribution site from the options
         return site.id !== $scope.orderDetailsForm.dispatchedFrom;
       });
@@ -56,10 +56,10 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
 
   function populateGrid(components, items) {
     $scope.gridOptions.data = [];
-    angular.forEach(items, function (item) {
+    angular.forEach(items, function(item) {
       var row = convertItem(item);
       var unmatchedComponents = [];
-      angular.forEach(components, function (component) {
+      angular.forEach(components, function(component) {
         var bloodGroup = component.bloodGroup;
         if (row.gap > 0 && component.componentType.id === item.componentType.id && bloodGroup === item.bloodGroup) {
           // can't over supply and component matches
@@ -89,7 +89,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
     $scope.orderItems = [];
 
     // Fetch the order form by its id
-    OrderFormsService.getOrderForm({ id: $routeParams.id }, function (res) {
+    OrderFormsService.getOrderForm({ id: $routeParams.id }, function(res) {
       $scope.orderForm = res.orderForm;
       $scope.components = angular.copy(res.orderForm.components);
       $scope.orderItems = angular.copy(res.orderForm.items);
@@ -97,12 +97,12 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
     }, $log.error);
 
     // Fetch order form item form fields
-    OrderFormsService.getOrderFormItemForm(function (res) {
+    OrderFormsService.getOrderFormItemForm(function(res) {
       $scope.componentTypes = res.componentTypes;
     }, $log.error);
 
     // Get form elements
-    OrderFormsService.getOrderFormsForm(function (res) {
+    OrderFormsService.getOrderFormsForm(function(res) {
       $scope.dispatchFromSites = distributionSites = res.distributionSites;
       usageSites = res.usageSites;
       updateDispatchType();
@@ -126,17 +126,17 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
   $scope.selectingDate = false;
   $scope.savingOrderDetails = false;
 
-  $scope.$watch('orderDetailsForm.type', function () {
+  $scope.$watch('orderDetailsForm.type', function() {
     // Update to set available options based on type
     updateDispatchType();
   });
-  $scope.$watch('orderDetailsForm.dispatchedFrom', function () {
+  $scope.$watch('orderDetailsForm.dispatchedFrom', function() {
     // Update to ensure that the correct site is filtered
     updateDispatchType();
   });
 
   // Start editing the order details
-  $scope.editOrderDetails = function () {
+  $scope.editOrderDetails = function() {
     $scope.orderDetailsForm = angular.copy($scope.orderForm);
     $scope.orderDetailsForm.orderDate = moment($scope.orderDetailsForm.orderDate).toDate();
     if ($scope.orderDetailsForm.patient !== null && $scope.orderDetailsForm.patient.dateOfBirth !== null) {
@@ -146,38 +146,38 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
   };
 
   // Select a new order date in the popup
-  $scope.selectDate = function (event) {
+  $scope.selectDate = function(event) {
     event.preventDefault();
     event.stopPropagation();
     $scope.selectingDate = true;
   };
 
   // Save the updated order details
-  $scope.saveOrderDetails = function () {
+  $scope.saveOrderDetails = function() {
     if ($scope.forms.orderDetailsForm.$invalid) {
       return;
     }
 
     $scope.savingOrderDetails = true;
-    OrderFormsService.updateOrderForm({}, $scope.orderDetailsForm, function (res) {
+    OrderFormsService.updateOrderForm({}, $scope.orderDetailsForm, function(res) {
       $scope.orderForm = res.orderForm;
       $scope.savingOrderDetails = false;
       $scope.editingOrderDetails = false;
-    }, function (err) {
+    }, function(err) {
       $log.error(err);
       $scope.savingOrderDetails = false;
     });
   };
 
   // Clear the order details form
-  $scope.clearDetailsForm = function (event) {
+  $scope.clearDetailsForm = function(event) {
     event.preventDefault();
     event.stopPropagation();
     $scope.orderDetailsForm = null;
     $scope.editingOrderDetails = false;
   };
 
-  $scope.addOrderItem = function (form) {
+  $scope.addOrderItem = function(form) {
     if (form.$valid) {
       $scope.orderItems.push($scope.orderItem);
       $scope.gridOptions.data.push(convertItem($scope.orderItem));
@@ -192,7 +192,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
       templateUrl: 'views/errorModal.html',
       controller: 'ErrorModalCtrl',
       resolve: {
-        errorObject: function () {
+        errorObject: function() {
           return {
             title: 'Invalid Component',
             button: 'OK',
@@ -203,7 +203,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
     });
   }
 
-  $scope.removeComponent = function (form) {
+  $scope.removeComponent = function(form) {
     form.$setSubmitted();
 
     if (form.$invalid) {
@@ -212,7 +212,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
     }
 
     // Filter matching component
-    var components = $scope.components.filter(function (component) {
+    var components = $scope.components.filter(function(component) {
       return (component.donationIdentificationNumber !== $scope.component.din
         && component.donationIdentificationNumber + component.donationFlagCharacters !== $scope.component.din)
         || component.componentCode !== $scope.component.componentCode;
@@ -229,14 +229,14 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
     }
   };
 
-  $scope.addComponent = function (form) {
+  $scope.addComponent = function(form) {
     if (form.$valid) {
       $scope.addingComponent = true;
       var searchParams = {
         donationIdentificationNumber: $scope.component.din,
         componentCode: $scope.component.componentCode
       };
-      InventoriesService.getInventoryComponentByCodeAndDIN(searchParams, function (component) {
+      InventoriesService.getInventoryComponentByCodeAndDIN(searchParams, function(component) {
         var validComponent = true;
         // check if component in stock
         if (component.inventoryStatus !== 'IN_STOCK') {
@@ -255,7 +255,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
             ') is not suitable for dispatch.');
         } else {
           // check if component has already been added
-          var componentAlreadyAdded = $scope.components.some(function (e) {
+          var componentAlreadyAdded = $scope.components.some(function(e) {
             return e.id === component.id;
           });
           if (componentAlreadyAdded) {
@@ -264,7 +264,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
               ') has already been added to this Order Form.');
           } else {
             // check if the component has already been added to another oder form
-            var componentInAnotherOrderForm = component.orderForms.some(function (orderForm) {
+            var componentInAnotherOrderForm = component.orderForms.some(function(orderForm) {
               return orderForm.id !== $scope.orderForm.id && orderForm.status != 'DISPATCHED';
             });
             if (componentInAnotherOrderForm) {
@@ -294,7 +294,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
           }
         }
         $scope.addingComponent = false;
-      }, function (err) {
+      }, function(err) {
         $log.error(err);
         if (err.data.errorCode === 'NOT_FOUND') {
           showErrorMessage('Component with DIN ' + $scope.component.din + ' and ComponentCode ' + $scope.component.componentCode + ' not found.');
@@ -304,7 +304,7 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
     }
   };
 
-  $scope.deleteRows = function () {
+  $scope.deleteRows = function() {
 
     var deletingConfirmation = {
       title: 'Delete Rows',
@@ -312,19 +312,19 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
       message: 'Are you sure you want to delete the selected rows?'
     };
 
-    ModalsService.showConfirmation(deletingConfirmation).then(function () {
-      angular.forEach(selectedRowsToDelete, function (rowToDelete) {
+    ModalsService.showConfirmation(deletingConfirmation).then(function() {
+      angular.forEach(selectedRowsToDelete, function(rowToDelete) {
 
         // Delete components
-        angular.forEach(rowToDelete.componentIds, function (componentId) {
-          $scope.components = $scope.components.filter(function (component) {
+        angular.forEach(rowToDelete.componentIds, function(componentId) {
+          $scope.components = $scope.components.filter(function(component) {
             // Delete components with the same component id
             return componentId !== component.id;
           });
         });
 
         // Delete items
-        $scope.orderItems = $scope.orderItems.filter(function (item) {
+        $scope.orderItems = $scope.orderItems.filter(function(item) {
           // Item id might be null, so delete items with the same componentTypeName, blood group and number of units
           return !(rowToDelete.componentTypeName === item.componentType.componentTypeName &&
             rowToDelete.bloodGroup === item.bloodGroup &&
@@ -337,39 +337,39 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
     });
   };
 
-  $scope.updateOrder = function () {
+  $scope.updateOrder = function() {
     $scope.savingForm = true;
     $scope.orderForm.components = $scope.components;
     $scope.orderForm.items = $scope.orderItems;
-    OrderFormsService.updateOrderForm({}, $scope.orderForm, function (res) {
+    OrderFormsService.updateOrderForm({}, $scope.orderForm, function(res) {
       $scope.orderForm = res.orderForm;
       $scope.components = angular.copy(res.orderForm.components);
       $scope.orderItems = angular.copy(res.orderForm.items);
       populateGrid($scope.components, $scope.orderItems);
       $scope.savingForm = false;
       $location.path('/viewOrder/' + $routeParams.id);
-    }, function (err) {
+    }, function(err) {
       $log.error(err);
       $scope.savingForm = false;
     });
   };
 
-  $scope.clearAddOrderItemForm = function (form) {
+  $scope.clearAddOrderItemForm = function(form) {
     $scope.orderItem = angular.copy(orderItemMaster);
     form.$setPristine();
   };
 
-  $scope.clearAddComponent = function (form) {
+  $scope.clearAddComponent = function(form) {
     $scope.component = angular.copy(componentMaster);
     form.$setPristine();
   };
 
-  $scope.cancel = function () {
+  $scope.cancel = function() {
     $location.path('/viewOrder/' + $routeParams.id);
   };
 
 
-  $scope.isFieldEmpty = function (field) {
+  $scope.isFieldEmpty = function(field) {
     if (field) {
       return field.length === 0;
     }
@@ -436,9 +436,9 @@ angular.module('bsis').controller('FulfilOrderCtrl', function ($scope, $location
     minRowsToShow: 7,
     enableSelectAll: false,
 
-    onRegisterApi: function (gridApi) {
+    onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope, function () {
+      gridApi.selection.on.rowSelectionChanged($scope, function() {
         selectedRowsToDelete = gridApi.selection.getSelectedRows();
         $scope.areRowsToDelete = selectedRowsToDelete ? selectedRowsToDelete.length > 0 : false;
       });
