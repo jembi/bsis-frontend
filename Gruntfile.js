@@ -316,7 +316,7 @@ module.exports = function(grunt) {
       ]
     },
 
-    nggettextExtract: {
+    nggettext_extract: {
       pot: {
         files: {
           'po/template.pot': [
@@ -328,7 +328,7 @@ module.exports = function(grunt) {
       }
     },
 
-    nggettextCompile: {
+    nggettext_compile: {
       all: {
         files: {
           '<%= yeoman.app %>/scripts/translations.js': ['po/*.po']
@@ -367,6 +367,7 @@ module.exports = function(grunt) {
       'autoprefixer',
       'connect:livereload',
       'version',
+      'nggettextCompile',
       'watch'
     ]);
   });
@@ -399,8 +400,8 @@ module.exports = function(grunt) {
   });
 
   // Translation tasks
-  grunt.registerTask('nggettextExtract', ['nggettextExtract']);
-  grunt.registerTask('nggettextCompile', ['nggettextCompile']);
+  grunt.registerTask('nggettextExtract', ['nggettext_extract']);
+  grunt.registerTask('nggettextCompile', ['nggettext_compile']);
 
   grunt.registerTask('test', [
     'clean:server',
