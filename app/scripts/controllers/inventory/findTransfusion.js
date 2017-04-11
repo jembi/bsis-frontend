@@ -115,7 +115,7 @@ angular.module('bsis')
           return ct.id === parseInt($scope.searchParams.componentTypeId);
         });
         var transfusionSite = $filter('filter')($scope.transfusionSites, function(usageSite) {
-          return usageSite.id === parseInt($scope.searchParams.receivedFromId);
+          return usageSite.id === $scope.searchParams.receivedFromId;
         });
         var transfusionOutcome = $scope.searchParams.transfusionOutcome;
         var searchParams = [{
