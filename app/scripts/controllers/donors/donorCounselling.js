@@ -273,8 +273,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     if ($routeParams.venue) {
       var venues = angular.isArray($routeParams.venue) ? $routeParams.venue : [$routeParams.venue];
       $scope.search.selectedVenues = venues.map(function(venueId) {
-        // Cast id to number
-        return +venueId;
+        return venueId;
       });
     }
 
@@ -298,11 +297,13 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       $scope.search.flaggedForCounselling =  angular.lowercase(flaggedForCounselling) === true;
     }
 
+    $scope.search.referred = null;
     if ($routeParams.referred) {
       var referred = $routeParams.referred;
       $scope.search.referred = angular.lowercase(referred) === true;
     }
 
+    $scope.search.notReferred = null;
     if ($routeParams.notReferred) {
       var notReferred = $routeParams.notReferred;
       $scope.search.notReferred = angular.lowercase(notReferred) === true;
