@@ -46,7 +46,7 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
       // Refresh the previous search if there is one
       if ($routeParams.search) {
         $scope.search = {
-          venueId: +$routeParams.venueId,
+          venueId: $routeParams.venueId,
           startDate: new Date($routeParams.startDate),
           endDate: new Date($routeParams.endDate)
         };

@@ -22,7 +22,7 @@ angular.module('bsis')
     };
 
     $scope.search = {
-      venue: angular.isUndefined($routeParams.venueId) ? master.venue : +$routeParams.venueId,
+      venue: angular.isUndefined($routeParams.venueId) ? master.venue : $routeParams.venueId,
       clinicDate: angular.isUndefined($routeParams.clinicDate) ? master.clinicDate : new Date($routeParams.clinicDate)
     };
 

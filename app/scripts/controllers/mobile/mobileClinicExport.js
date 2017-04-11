@@ -160,8 +160,7 @@ angular.module('bsis')
         if ($routeParams.venues) {
           var venues = angular.isArray($routeParams.venues) ? $routeParams.venues : [$routeParams.venues];
           $scope.search.venues = venues.map(function(venueId) {
-            // Cast id to number
-            return +venueId;
+            return venueId;
           });
         } else {
           $scope.search.venues = master.venues;
