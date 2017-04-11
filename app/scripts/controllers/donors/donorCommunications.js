@@ -59,7 +59,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
 
   $scope.search = {
     venues: (toArray($routeParams.venues) || master.venues).map(function(venueId) {
-      return {id: +venueId};
+      return {id: venueId};
     }),
     bloodGroups: toArray($routeParams.bloodGroups) || master.bloodGroups,
     anyBloodGroup: angular.isUndefined($routeParams.anyBloodGroup) ? master.anyBloodGroup : $routeParams.anyBloodGroup === true,
