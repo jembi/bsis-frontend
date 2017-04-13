@@ -60,12 +60,12 @@
             </div>
             <div>
               <ng-messages for="searchForm.startDate.$error" role="alert" ng-show="searchForm.$submitted">
-                <small class="error" ng-message="required" translate>This is required</small>
-                <small class="error" ng-message="datesOutOfRange" translate>Select a date range that is less than one month</small>
+                <small class="error" ng-message="required"><span translate>This is required</span></small>
+                <small class="error" ng-message="datesOutOfRange"><span translate>Select a date range that is less than one month</span></small>
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
               <ng-messages for="searchForm.endDate.$error" role="alert" ng-show="searchForm.$submitted && !searchForm.startDate.$invalid">
-                <small class="error" ng-message="required" translate>This is required</small>
+                <small class="error" ng-message="required"><span translate>This is required</span></small>
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
             </div>
@@ -75,9 +75,9 @@
     <div class="form-group">
       <label class="col-sm-2 control-label"></label>
       <div class="col-sm-10">
-        <button class="btn btn-primary" type="submit" ng-disabled="searching" translate>{{searching ? "Searching..." : "Search"}}
+        <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search" | translate}}
         </button>
-        <button class="btn btn-primary" type="button" ng-click="clearSearch(searchForm)">Clear</button>
+        <button class="btn btn-primary" type="button" ng-click="clearSearch(searchForm)" translate>Clear</button>
       </div>
     </div>
 

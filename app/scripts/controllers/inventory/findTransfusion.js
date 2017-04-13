@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindTransfusionCtrl', function($scope, $location, $filter, $log, TransfusionService, DATEFORMAT, $routeParams, gettextCatalog) {
+  .controller('FindTransfusionCtrl', function($scope, $location, $filter, $log, $routeParams, TransfusionService, gettextCatalog, DATEFORMAT) {
 
     $scope.dateFormat = DATEFORMAT;
     $scope.transfusionOutcomes = [];
@@ -36,37 +36,30 @@ angular.module('bsis')
       endDate: moment().endOf('day').toDate()
     };
 
-    var dinTitle = gettextCatalog.getString('DIN');
-    var componentCodeTitle = gettextCatalog.getString('Component Code');
-    var componentTypeTitle = gettextCatalog.getString('Component Type');
-    var transfusedOnTitle = gettextCatalog.getString('Transfused On');
-    var outcomeTitle = gettextCatalog.getString('Outcome');
-    var transfusionSiteTitle = gettextCatalog.getString('Transfusion Site');
-
     var columnDefs = [
       {
         name: 'DIN',
-        displayName: dinTitle,
+        displayName: gettextCatalog.getString('DIN'),
         field: 'donationIdentificationNumber',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Component Code',
-        displayName: componentCodeTitle,
+        displayName: gettextCatalog.getString('Component Code'),
         field: 'componentCode',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Component Type',
-        displayName: componentTypeTitle,
+        displayName: gettextCatalog.getString('Component Type'),
         field: 'componentType',
         width: '**'
       },
       {
         name: 'Transfused On',
-        displayName: transfusedOnTitle,
+        displayName: gettextCatalog.getString('Transfused On'),
         field: 'dateTransfused',
         cellFilter: 'bsisDate',
         width: '**',
@@ -74,13 +67,14 @@ angular.module('bsis')
       },
       {
         name: 'Outcome',
-        displayName: outcomeTitle,
+        displayName: gettextCatalog.getString('Outcome'),
         field: 'transfusionOutcome',
+        cellFilter: 'titleCase | translate',
         width: '**'
       },
       {
         name: 'Transfusion Site',
-        displayName: transfusionSiteTitle,
+        displayName: gettextCatalog.getString('Transfusion Site'),
         field: 'receivedFrom.name',
         width: '**'
       }
@@ -105,6 +99,8 @@ angular.module('bsis')
       exporterFieldCallback: function(grid, row, col, value) {
         if (col.field === 'dateTransfused') {
           return $filter('bsisDate')(value);
+        } if (col.field === 'transfusionOutcome') {
+          return gettextCatalog.getString($filter('titleCase')(value));
         }
         return value;
       },
@@ -113,7 +109,7 @@ angular.module('bsis')
       exporterPdfHeader: function() {
         var finalArray = [
           {
-            text: 'Component Transfusion Information',
+            text: gettextCatalog.getString('Component Transfusion Information'),
             fontSize: 10,
             bold: true,
             margin: [30, 20, 0, 0] // [left, top, right, bottom]
@@ -130,14 +126,15 @@ angular.module('bsis')
           return usageSite.id === parseInt($scope.searchParams.receivedFromId);
         });
         var transfusionOutcome = $scope.searchParams.transfusionOutcome;
+        var allText = gettextCatalog.getString('All');
         var searchParams = [{
           text: [
-            {text: 'Component Type: ', bold: true},
-            (componentType && componentType[0] ? componentType[0].componentTypeName : 'All') + '          ',
-            {text: 'Transfusion Site: ', bold: true},
-            (transfusionSite && transfusionSite[0] ? transfusionSite[0].name : 'All') + '          ',
-            {text: 'Transfusion Outcome: ', bold: true},
-            (transfusionOutcome ? transfusionOutcome : 'All')
+            {text: gettextCatalog.getString('Component Type') + ': ', bold: true},
+            (componentType && componentType[0] ? componentType[0].componentTypeName : allText) + '          ',
+            {text: gettextCatalog.getString('Transfusion Site') + ': ', bold: true},
+            (transfusionSite && transfusionSite[0] ? transfusionSite[0].name : allText) + '          ',
+            {text: gettextCatalog.getString('Transfusion Outcome') + ': ', bold: true},
+            (transfusionOutcome ? transfusionOutcome : allText)
           ], margin: [-10, 0, 0, 0], fontSize: 7
         }];
         docDefinition.content = searchParams.concat(docDefinition.content);
@@ -147,9 +144,9 @@ angular.module('bsis')
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
         var columns = [
-          {text: 'Total Units: ' + $scope.gridOptions.data.length, width: 'auto'},
-          {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-          {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+          {text: gettextCatalog.getString('Total Units: {{total}}', {total: $scope.gridOptions.data.length}), width: 'auto'},
+          {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+          {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
         ];
         return {
           columns: columns,
