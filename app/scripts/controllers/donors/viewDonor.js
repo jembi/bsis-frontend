@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('ViewDonorCtrl', function($scope, $location, $log, Alerting, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, ICONS, PACKTYPE, MONTH, TITLE,
+  .controller('ViewDonorCtrl', function($scope, $location, $log, Alerting, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, ICONS, MONTH, TITLE,
                                          GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams, PERMISSIONS) {
 
     //Initialize scope variables
