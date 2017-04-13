@@ -12,13 +12,11 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
 
   var unitsOrderedColumnDefs = [
     {
-      name: 'Component Type',
       displayName: componentTypeTitle,
       field: 'componentTypeName',
       width: '**'
     },
     {
-      name: 'Blood Group',
       displayName: bloodGroupTitle,
       field: 'bloodGroup',
       width: '**',
@@ -136,7 +134,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
           text: ' Order Type: ',
           bold: true
         }, {
-          text: $filter('titleCase')($scope.orderForm.type) + '\n'
+          text: $filter('translate')($filter('titleCase')($scope.orderForm.type)) + '\n'
         }
       );
       if ($scope.orderForm.type === 'PATIENT_REQUEST') {
