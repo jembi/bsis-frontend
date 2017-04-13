@@ -305,7 +305,7 @@ hr {
 
 }
 
-.nav-sidebar span {
+.nav-sidebar span.sidebar-heading {
   position: relative;
   display: block;
   padding-right: 20px;
