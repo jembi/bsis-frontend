@@ -14,32 +14,24 @@ angular.module('bsis')
       anyBloodGroup: true
     };
 
-    var dinTitle = gettextCatalog.getString('DIN');
-    var componentCodeTitle = gettextCatalog.getString('Component Code');
-    var createdOnTitle = gettextCatalog.getString('Created On');
-    var componentTypeTitle = gettextCatalog.getString('Component Type');
-    var bloodGroupTitle = gettextCatalog.getString('Blood Group');
-    var expiryStatusTitle = gettextCatalog.getString('Expiry Status');
-    var locationTitle = gettextCatalog.getString('Location');
-
     var columnDefs = [
       {
         name: 'DIN',
-        displayName: dinTitle,
+        displayName: gettextCatalog.getString('DIN'),
         field: 'donationIdentificationNumber',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Component Code',
-        displayName: componentCodeTitle,
+        displayName: gettextCatalog.getString('Component Code'),
         field: 'componentCode',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Created On',
-        displayName: createdOnTitle,
+        displayName: gettextCatalog.getString('Created On'),
         field: 'createdOn',
         cellFilter: 'bsisDate',
         width: '**',
@@ -47,20 +39,20 @@ angular.module('bsis')
       },
       {
         name: 'Component Type',
-        displayName: componentTypeTitle,
+        displayName: gettextCatalog.getString('Component Type'),
         field: 'componentType.componentTypeName',
         width: '**'
       },
       {
         name: 'Blood Group',
-        displayName: bloodGroupTitle,
+        displayName: gettextCatalog.getString('Blood Group'),
         field: 'bloodGroup',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Expiry Status',
-        displayName: expiryStatusTitle,
+        displayName: gettextCatalog.getString('Expiry Status'),
         field: 'expiryStatus',
         width: '**',
         maxWidth: '200',
@@ -70,7 +62,7 @@ angular.module('bsis')
       },
       {
         name: 'Location',
-        displayName: locationTitle,
+        displayName: gettextCatalog.getString('Location'),
         field: 'location.name',
         width: '**',
         maxWidth: '350'
@@ -135,7 +127,7 @@ angular.module('bsis')
       exporterPdfHeader: function() {
         var finalArray = [
           {
-            text: 'Inventory',
+            text: gettextCatalog.getString('Inventory'),
             fontSize: 10,
             bold: true,
             margin: [30, 20, 0, 0] // [left, top, right, bottom]
@@ -149,9 +141,9 @@ angular.module('bsis')
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
         var columns = [
-          {text: 'Number of components: ' + $scope.gridOptions.data.length, width: 'auto'},
-          {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-          {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+          {text: gettextCatalog.getString('Number of components: {{componentNumber}}', {componentNumber: $scope.gridOptions.data.length}), width: 'auto'},
+          {text: gettextCatalog.getString('Date generated: {{bsisDateTime}}', {bsisDateTime: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+          {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
         ];
         return {
           columns: columns,
