@@ -194,8 +194,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       resolve: {
         errorObject: function() {
           return {
-            title: 'Invalid Component',
-            button: 'OK',
+            title: gettextCatalog.getString('Invalid Component'),
+            button: gettextCatalog.getString('OK'),
             errorMessage: errorMessage
           };
         }
@@ -219,8 +219,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     });
 
     if (components.length === $scope.components.length) {
-      showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-        ') was not found in this Order Form.');
+      showErrorMessage(gettextCatalog.getString('Component {{DIN}} ({{componentCode}}) was not found in this Order Form.',
+                {DIN: $scope.component.din, componentCode: $scope.component.componentCode}));
     } else {
       $scope.components = components;
       $scope.component = angular.copy(componentMaster);
@@ -241,18 +241,18 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
         // check if component in stock
         if (component.inventoryStatus !== 'IN_STOCK') {
           validComponent = false;
-          showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-            ') is not currently in stock.');
+          showErrorMessage(gettextCatalog.getString('Component {{DIN}} ({{componentCode}}) is not currently in stock.',
+                {DIN: $scope.component.din, componentCode: $scope.component.componentCode}));
           // check if the component is in the correct location
         } else if (component.location.id !== $scope.orderForm.dispatchedFrom.id) {
           validComponent = false;
-          showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-            ') is not currently in stock at ' + $scope.orderForm.dispatchedFrom.name + '.');
+          showErrorMessage(gettextCatalog.getString('Component {{DIN}} ({{componentCode}}) is not currently in stock at {{location}}.',
+                {DIN: $scope.component.din, componentCode: $scope.component.componentCode, location: $scope.orderForm.dispatchedFrom.name}));
           // check if the component is available
         } else if (component.componentStatus !== 'AVAILABLE') {
           validComponent = false;
-          showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-            ') is not suitable for dispatch.');
+          showErrorMessage(gettextCatalog.getString('Component {{DIN}} ({{componentCode}}) is not suitable for dispatch.',
+                {DIN: $scope.component.din, componentCode: $scope.component.componentCode}));
         } else {
           // check if component has already been added
           var componentAlreadyAdded = $scope.components.some(function(e) {
@@ -260,8 +260,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
           });
           if (componentAlreadyAdded) {
             validComponent = false;
-            showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-              ') has already been added to this Order Form.');
+            showErrorMessage(gettextCatalog.getString('Component {{DIN}} ({{componentCode}}) has already been added to this Order Form.',
+                {DIN: $scope.component.din, componentCode: $scope.component.componentCode}));
           } else {
             // check if the component has already been added to another oder form
             var componentInAnotherOrderForm = component.orderForms.some(function(orderForm) {
@@ -269,8 +269,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
             });
             if (componentInAnotherOrderForm) {
               validComponent = false;
-              showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-                ') has already been assigned to another Order Form.');
+              showErrorMessage(gettextCatalog.getString('Component {{DIN}} ({{componentCode}}) has already been assigned to another Order Form.',
+                {DIN: $scope.component.din, componentCode: $scope.component.componentCode}));
             }
           }
         }
@@ -282,8 +282,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
           var componentsLeft = populateGrid($scope.components, $scope.orderItems);
           // check if the component was matched
           if (!componentsLeft || componentsLeft.length > 0) {
-            showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-              ') does not match what was ordered.');
+            showErrorMessage(gettextCatalog.getString('Component {{DIN}} ({{componentCode}}) does not match what was ordered.',
+              {DIN: $scope.component.din, componentCode: $scope.component.componentCode}));
             // reset the data in the table
             $scope.gridOptions.data = oldData;
             $scope.components = oldComponents;
@@ -297,7 +297,8 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
       }, function(err) {
         $log.error(err);
         if (err.data.errorCode === 'NOT_FOUND') {
-          showErrorMessage('Component with DIN ' + $scope.component.din + ' and ComponentCode ' + $scope.component.componentCode + ' not found.');
+          showErrorMessage(gettextCatalog.getString('Component with DIN {{DIN}} and ComponentCode {{componentCode}} not found.',
+            {DIN: $scope.component.din, componentCode: $scope.component.componentCode}));
         }
         $scope.addingComponent = false;
       });
@@ -307,9 +308,9 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
   $scope.deleteRows = function() {
 
     var deletingConfirmation = {
-      title: 'Delete Rows',
-      button: 'Continue',
-      message: 'Are you sure you want to delete the selected rows?'
+      title: gettextCatalog.getString('Delete Rows'),
+      button: gettextCatalog.getString('Continue'),
+      message: gettextCatalog.getString('Are you sure you want to delete the selected rows?')
     };
 
     ModalsService.showConfirmation(deletingConfirmation).then(function() {
@@ -376,43 +377,32 @@ angular.module('bsis').controller('FulfilOrderCtrl', function($scope, $location,
     return true;
   };
 
-  var componentTypeTitle = gettextCatalog.getString('Component Type');
-  var bloodGroupTitle = gettextCatalog.getString('Blood Group');
-  var unitsOrderedTitle = gettextCatalog.getString('Units Ordered');
-  var unitsSuppliedTitle = gettextCatalog.getString('Units Supplied');
-  var gapTitle = gettextCatalog.getString('Gap');
-
   var columnDefs = [
     {
-      name: 'Component Type',
-      displayName: componentTypeTitle,
+      displayName: gettextCatalog.getString('Component Type'),
       field: 'componentTypeName',
       width: '**'
     },
     {
-      name: 'Blood Group',
-      displayName: bloodGroupTitle,
+      displayName: gettextCatalog.getString('Blood Group'),
       field: 'bloodGroup',
       width: '**',
       maxWidth: '200'
     },
     {
-      name: 'Units Ordered',
-      displayName: unitsOrderedTitle,
+      displayName: gettextCatalog.getString('Units Ordered'),
       field: 'numberOfUnits',
       width: '**',
       maxWidth: '200'
     },
     {
-      name: 'Units Supplied',
-      displayName: unitsSuppliedTitle,
+      displayName: gettextCatalog.getString('Units Supplied'),
       field: 'numberSupplied',
       width: '**',
       maxWidth: '200'
     },
     {
-      name: 'Gap',
-      displayName: gapTitle,
+      displayName: gettextCatalog.getString('Gap'),
       field: 'gap',
       width: '**',
       maxWidth: '200'

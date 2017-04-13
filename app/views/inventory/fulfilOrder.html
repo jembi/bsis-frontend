@@ -6,7 +6,7 @@
 
   <section class="clearfix" ng-hide="editingOrderDetails">
     <span class="text-muted" translate>Order Date</span> {{orderForm.orderDate | bsisDate}}
-    <span class="text-muted" translate>Order Type</span> {{orderForm.type}}
+    <span class="text-muted">Order Type</span> {{orderForm.type | titleCase | translate}}
     <span class="text-muted" translate>Dispatched From</span> {{orderForm.dispatchedFrom.name}}
     <span class="text-muted" translate>Dispatched To</span> {{orderForm.dispatchedTo.name}}
     <span ng-hide="orderForm.type !== 'PATIENT_REQUEST'"><br/>
@@ -25,7 +25,7 @@
     <span ng-hide="isFieldEmpty(orderForm.patient.bloodGroup)" translate> {{orderForm.patient.bloodGroup}}</span>
     <span class="text-muted" translate>Gender</span>
     <span ng-hide="!isFieldEmpty(orderForm.patient.gender)" translate> Not Specified</span>
-    <span ng-hide="isFieldEmpty(orderForm.patient.gender)" translate> {{orderForm.patient.gender}}</span>
+    <span ng-hide="isFieldEmpty(orderForm.patient.gender)"> {{orderForm.patient.gender | translate}}</span>
     <span class="text-muted" translate>Date of Birth</span>
     <span ng-hide="!isFieldEmpty(orderForm.patient.dateOfBirth)" translate> Not Specified</span>
     <span ng-hide="isFieldEmpty(orderForm.patient.dateOfBirth)" translate> {{orderForm.patient.dateOfBirth | bsisDate}}</span>
@@ -110,7 +110,7 @@
     </div>
     <div class="form-group">
       <span class="text-muted" for="gender">Gender</span>
-      <select name="gender" class="form-control input-sm" ng-options="item.id as item.name for item in genders" ng-model="orderDetailsForm.patient.gender">
+      <select name="gender" class="form-control input-sm" ng-options="item.id as (item.name | translate) for item in genders" ng-model="orderDetailsForm.patient.gender">
             <option value=""></option>
           </select>
     </div>
@@ -126,8 +126,8 @@
     </div>
     </span>
     <div class="form-group">
-      <button class="btn btn-primary" style="margin-top:0;" type="submit" ng-disabled="savingOrderDetails">{{savingOrderDetails ? 'Saving...' : 'Save'}}</button>
-      <button class="btn btn-primary" style="margin-top:0;" type="reset" ng-disabled="savingOrderDetails" ng-click="clearDetailsForm($event);">Cancel</button>
+      <button class="btn btn-primary" style="margin-top:0;" type="submit" ng-disabled="savingOrderDetails">{{savingOrderDetails ? 'Saving...' : 'Save' | translate}}</button>
+      <button class="btn btn-primary" style="margin-top:0;" type="reset" ng-disabled="savingOrderDetails" ng-click="clearDetailsForm($event);" translate>Cancel</button>
     </div>
 </div>
 
@@ -138,16 +138,16 @@
 <div class="panel panel-default">
   <div class="panel-body">
 
-    <h4>Units Ordered</h4>
+    <h4 translate>Units Ordered</h4>
     <form class="form-inline" name="addOrderItemForm" role="form" style="padding:0 15px;" ng-submit="addOrderItem(addOrderItemForm);"
       novalidate>
 
       <div class="form-group">
-        <label for="componentType" style="vertical-align: top">Component Type</label>
+        <label for="componentType" style="vertical-align: top" translate>Component Type</label>
         <div style="display: inline-block">
           <select class="form-control" style="width:auto;" name="componentType" ng-model="orderItem.componentType" ng-options="item as item.componentTypeName for item in componentTypes track by item.id"
             required>
-              <option value="" disabled selected>Select</option>
+              <option value="" disabled selected translate>Select</option>
             </select>
           <ng-messages for="addOrderItemForm.componentType.$error" role="alert" ng-show="addOrderItemForm.$submitted">
             <ng-messages-include src="messages.html"></ng-messages-include>
@@ -156,11 +156,11 @@
       </div>
 
       <div class="form-group">
-        <label for="bloodGroup" style="vertical-align: top">Blood Group</label>
+        <label for="bloodGroup" style="vertical-align: top" translate>Blood Group</label>
         <div style="display: inline-block">
           <select class="form-control" style="width: 200px;" name="bloodGroup" ng-model="orderItem.bloodGroup" ng-options="item for item in bloodGroups"
             required>
-              <option value="" disabled selected>Select</option>
+              <option value="" disabled selected translate>Select</option>
             </select>
           <ng-messages for="addOrderItemForm.bloodGroup.$error" role="alert" ng-show="addOrderItemForm.$submitted">
             <ng-messages-include src="messages.html"></ng-messages-include>
@@ -169,7 +169,7 @@
       </div>
 
       <div class="form-group">
-        <label for="numberOfUnits" style="vertical-align: top">Units</label>
+        <label for="numberOfUnits" style="vertical-align: top" translate>Units</label>
         <div style="display: inline-block">
           <input type=number class="form-control" name="numberOfUnits" ng-model="orderItem.numberOfUnits" required min="0">
           <ng-messages for="addOrderItemForm.numberOfUnits.$error" role="alert" ng-show="addOrderItemForm.$submitted">
@@ -179,8 +179,8 @@
       </div>
 
       <div class="form-group" style="vertical-align: top">
-        <button class="btn btn-primary" type="submit" ng-disabled="addingOrderForm" style="margin-top: 0px">Add to Order</button>
-        <button class="btn btn-primary" type="button" ng-disabled="addingOrderForm" style="margin-top: 0px" ng-click="clearAddOrderItemForm(addOrderItemForm);">Clear</button>
+        <button class="btn btn-primary" type="submit" ng-disabled="addingOrderForm" style="margin-top: 0px" translate>Add to Order</button>
+        <button class="btn btn-primary" type="button" ng-disabled="addingOrderForm" style="margin-top: 0px" ng-click="clearAddOrderItemForm(addOrderItemForm);" translate>Clear</button>
       </div>
 
     </form>
@@ -191,12 +191,12 @@
       <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination ui-grid-selection></div>
     </div>
 
-    <h4>Units Supplied</h4>
+    <h4 translate>Units Supplied</h4>
     <form class="form-inline" name="addComponentForm" role="form" style="padding:0 15px;" ng-submit="addComponent(addComponentForm);"
       novalidate>
 
       <div class="form-group">
-        <label for="componentType" style="vertical-align: top">DIN</label>
+        <label for="componentType" style="vertical-align: top" translate>DIN</label>
         <div style="display: inline-block">
           <input class="form-control" name="din" ng-model="component.din" required>
           <ng-messages for="addComponentForm.din.$error" role="alert" ng-show="addComponentForm.$submitted">
@@ -206,7 +206,7 @@
       </div>
 
       <div class="form-group">
-        <label for="componentType" style="vertical-align: top">Component Code</label>
+        <label for="componentType" style="vertical-align: top" translate>Component Code</label>
         <div style="display: inline-block">
           <input class="form-control" name="componentCode" ng-model="component.componentCode" required>
           <ng-messages for="addComponentForm.din.$error" role="alert" ng-show="addComponentForm.$submitted">
@@ -216,9 +216,9 @@
       </div>
 
       <div class="form-group" style="vertical-align: top">
-        <button class="btn btn-primary" type="submit" ng-disabled="addingComponent" style="margin-top: 0px">Add Pack</button>
-        <button class="btn btn-primary" type="button" ng-disabled="addingComponent" style="margin-top: 0px" ng-click="removeComponent(addComponentForm);">Remove Pack</button>
-        <button class="btn btn-primary" type="button" ng-disabled="addingComponent" style="margin-top: 0px" ng-click="clearAddComponent(addComponentForm);">Clear</button>
+        <button class="btn btn-primary" type="submit" ng-disabled="addingComponent" style="margin-top: 0px" translate>Add Pack</button>
+        <button class="btn btn-primary" type="button" ng-disabled="addingComponent" style="margin-top: 0px" ng-click="removeComponent(addComponentForm);" translate>Remove Pack</button>
+        <button class="btn btn-primary" type="button" ng-disabled="addingComponent" style="margin-top: 0px" ng-click="clearAddComponent(addComponentForm);" translate>Clear</button>
       </div>
 
     </form>
@@ -229,9 +229,9 @@
     <form class="form-horizontal" name="updateOrderForm" role="form" style="padding:0 15px;" ng-submit="updateOrder();" novalidate>
       <div class="form-group">
         <div class="col-sm-12">
-          <button class="btn btn-primary" type="submit" ng-disabled="savingForm">{{savingForm ? 'Saving...' : 'Save Order'}}</button>
-          <button class="btn btn-primary" type="button" ng-disabled="!areRowsToDelete" ng-click="deleteRows()">Delete Selected Rows</button>
-          <button class="btn btn-primary" type="button" ng-disabled="savingForm" ng-click="cancel();">Cancel</button>
+          <button class="btn btn-primary" type="submit" ng-disabled="savingForm">{{savingForm ? 'Saving...' : 'Save Order' | translate}}</button>
+          <button class="btn btn-primary" type="button" ng-disabled="!areRowsToDelete" ng-click="deleteRows()" translate>Delete Selected Rows</button>
+          <button class="btn btn-primary" type="button" ng-disabled="savingForm" ng-click="cancel();" translate>Cancel</button>
         </div>
       </div>
     </form>
