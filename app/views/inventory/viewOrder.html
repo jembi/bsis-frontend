@@ -10,7 +10,7 @@
     </span>
     <span style="margin-left: 20px; margin-top: -15px; float:right">
       <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.permissions.canDelete">
-        <button class="btn btn-primary" ng-click="deleteOrder()" ng-disabled="deleting">{{deleting ? 'Voiding...' : 'Void'}}</button>
+        <button class="btn btn-primary" ng-click="deleteOrder()" ng-disabled="deleting">{{deleting ? 'Voiding...' : 'Void' | translate}}</button>
       </span>
       <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.permissions.canDispatch">
         <button class="btn btn-primary" ng-click="dispatch()" translate>Dispatch Order</button>
@@ -27,7 +27,7 @@
     <span class="text-muted" translate>Order Date</span> {{orderForm.orderDate | bsisDate}}
     <span class="text-muted" translate>Dispatched From</span> {{orderForm.dispatchedFrom.name}}
     <span class="text-muted" translate>Dispatched To</span> {{orderForm.dispatchedTo.name}}
-    <span class="text-muted" translate>Order Type</span> {{orderForm.type |  titleCase}}
+    <span class="text-muted" translate>Order Type</span> {{orderForm.type |  titleCase | translate}}
     <div ng-show="orderFormHasPatient">
       <span class="text-muted" translate>Blood Bank No</span>
       <span ng-hide="!isFieldEmpty(orderForm.patient.hospitalBloodBankNumber)" translate> Not Specified</span>
@@ -44,7 +44,7 @@
       <span ng-hide="isFieldEmpty(orderForm.patient.bloodGroup)" translate> {{orderForm.patient.bloodGroup}}</span>
       <span class="text-muted" translate>Gender</span>
       <span ng-hide="!isFieldEmpty(orderForm.patient.gender)" translate> Not Specified</span>
-      <span ng-hide="isFieldEmpty(orderForm.patient.gender)" translate> {{orderForm.patient.gender}}</span>
+      <span ng-hide="isFieldEmpty(orderForm.patient.gender)"> {{orderForm.patient.gender | translate}}</span>
       <span class="text-muted" translate>Date of Birth</span>
       <span ng-hide="!isFieldEmpty(orderForm.patient.dateOfBirth)" translate> Not Specified</span>
       <span ng-hide="isFieldEmpty(orderForm.patient.dateOfBirth)" translate> {{orderForm.patient.dateOfBirth | bsisDate}}</span>

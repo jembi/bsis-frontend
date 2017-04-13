@@ -4,68 +4,53 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
 
   $scope.dateFormat = DATEFORMAT;
 
-  var componentTypeTitle = gettextCatalog.getString('Component Type');
-  var bloodGroupTitle = gettextCatalog.getString('Blood Group');
-  var unitsOrderedTitle = gettextCatalog.getString('Units Ordered');
-  var unitsSuppliedTitle = gettextCatalog.getString('Units Supplied');
-  var gapTitle = gettextCatalog.getString('Gap');
-
   var unitsOrderedColumnDefs = [
     {
-      name: 'Component Type',
-      displayName: componentTypeTitle,
+      displayName: gettextCatalog.getString('Component Type'),
       field: 'componentTypeName',
       width: '**'
     },
     {
-      name: 'Blood Group',
-      displayName: bloodGroupTitle,
+      displayName: gettextCatalog.getString('Blood Group'),
       field: 'bloodGroup',
       width: '**',
       maxWidth: '200'
     },
     {
-      name: 'Units Ordered',
-      displayName: unitsOrderedTitle,
+      displayName: gettextCatalog.getString('Units Ordered'),
       field: 'numberOfUnits',
       width: '**',
       maxWidth: '200'
     },
     {
-      name: 'Units Supplied',
-      displayName: unitsSuppliedTitle,
+      displayName: gettextCatalog.getString('Units Supplied'),
       field: 'numberSupplied',
       width: '**',
       maxWidth: '200'
     },
     {
-      name: 'Gap',
-      displayName: gapTitle,
+      displayName: gettextCatalog.getString('Gap'),
       field: 'gap',
       width: '**',
       maxWidth: '200'
     }
   ];
 
-  var dinTitle = gettextCatalog.getString('DIN');
 
   var unitsSuppliedColumnDefs = [
     {
-      name: 'donationIdentificationNumber',
-      displayName: dinTitle,
+      displayName: gettextCatalog.getString('DIN'),
       field: 'donationIdentificationNumber',
       width: '**',
       maxWidth: '200'
     },
     {
-      name: 'Component Type',
-      displayName: componentTypeTitle,
+      displayName: gettextCatalog.getString('Component Type'),
       field: 'componentTypeName',
       width: '**'
     },
     {
-      name: 'bloodGroup',
-      displayName: bloodGroupTitle,
+      displayName: gettextCatalog.getString('Blood Group'),
       field: 'bloodGroup',
       width: '**',
       maxWidth: '200'
@@ -103,7 +88,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     exporterPdfHeader: function() {
       var finalArray = [
         {
-          text: 'Dispatch Note',
+          text: gettextCatalog.getString('Dispatch Note'),
           fontSize: 10,
           bold: true,
           margin: [30, 20, 0, 0] // [left, top, right, bottom]
@@ -118,64 +103,65 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
       var prefix = [];
       prefix.push(
         {
-          text: 'Order Date: ',
+          text: gettextCatalog.getString('Order Date') + ': ',
           bold: true
         }, {
           text: $filter('bsisDate')($scope.orderForm.orderDate)
         }, {
-          text: ' Dispatch From: ',
+          text: ' ' + gettextCatalog.getString('Dispatch From') + ': ',
           bold: true
         }, {
           text: $scope.orderForm.dispatchedFrom.name
         }, {
-          text: ' Dispatched To: ',
+          text: ' ' + gettextCatalog.getString('Dispatched To') + ': ',
           bold: true
         }, {
           text: $scope.orderForm.dispatchedTo.name
         }, {
-          text: ' Order Type: ',
+          text: ' ' + gettextCatalog.getString('Order Type') + ': ',
           bold: true
         }, {
-          text: $filter('titleCase')($scope.orderForm.type) + '\n'
+          text: gettextCatalog.getString($filter('titleCase')($scope.orderForm.type)) + '\n'
         }
       );
+      var notSpecifiedText = gettextCatalog.getString('Not Specified');
       if ($scope.orderForm.type === 'PATIENT_REQUEST') {
         prefix.push(
           {
-            text: ' Blood Bank No: ',
+            text: ' ' + gettextCatalog.getString('Blood Bank No') + ': ',
             bold: true
           }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalBloodBankNumber) ? 'Not Specified' : $scope.orderForm.patient.hospitalBloodBankNumber
+            text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalBloodBankNumber) ? notSpecifiedText : $scope.orderForm.patient.hospitalBloodBankNumber
           }, {
-            text: ' Ward No: ',
+            text: ' ' + gettextCatalog.getString('Ward No') + ': ',
             bold: true
           }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalWardNumber) ? 'Not Specified' : $scope.orderForm.patient.hospitalWardNumber
+            text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalWardNumber) ? notSpecifiedText : $scope.orderForm.patient.hospitalWardNumber
           }, {
-            text: ' Patient Number: ',
+            text: ' ' + gettextCatalog.getString('Patient Number') + ': ',
             bold: true
           }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.patientNumber) ? 'Not Specified' : $scope.orderForm.patient.patientNumber
+            text: $scope.isFieldEmpty($scope.orderForm.patient.patientNumber) ? notSpecifiedText : $scope.orderForm.patient.patientNumber
           }, {
-            text: ' Patient Name: ',
+            text: ' ' + gettextCatalog.getString('Patient Name') + ': ',
             bold: true
           }, {
             text: $scope.orderForm.patient.name1 + ' ' + $scope.orderForm.patient.name2 + '\n'
           }, {
-            text: ' Blood Group: ',
+            text: ' ' + gettextCatalog.getString('Blood Group') + ': ',
             bold: true
           }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.bloodGroup) ? 'Not Specified' : $scope.orderForm.patient.bloodGroup
+            text: $scope.isFieldEmpty($scope.orderForm.patient.bloodGroup) ? notSpecifiedText : $scope.orderForm.patient.bloodGroup
           }, {
-            text: ' Gender: ',
+            text: ' ' + gettextCatalog.getString('Gender') + ': ',
             bold: true
           }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.gender) ? 'Not Specified' : $scope.orderForm.patient.gender
+            text: $scope.isFieldEmpty($scope.orderForm.patient.gender) ? notSpecifiedText : gettextCatalog.getString($scope.orderForm.patient.gender)
           }, {
-            text: ' Date of Birth: ',
+            text: ' ' + gettextCatalog.getString('Date of Birth') + ': ',
             bold: true
           }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.dateOfBirth) ? 'Not Specified' : $filter('bsisDate')($scope.orderForm.patient.dateOfBirth)
+            text: $scope.isFieldEmpty($scope.orderForm.patient.dateOfBirth) ? notSpecifiedText : $filter('bsisDate')($scope.orderForm.patient.dateOfBirth)
           }
         );
       }
@@ -187,9 +173,9 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
-        { text: 'Number of components: ' + $scope.unitsSuppliedGridOptions.data.length, width: 'auto' },
-        { text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto' },
-        { text: 'Page ' + currentPage + ' of ' + pageCount, style: { alignment: 'right' } }
+        { text: gettextCatalog.getString('Number of components') + ': ' + $scope.unitsSuppliedGridOptions.data.length, width: 'auto' },
+        { text: gettextCatalog.getString('Date generated: {{date}}', { date: $filter('bsisDateTime')(new Date())}), width: 'auto' },
+        { text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: { alignment: 'right' } }
       ];
       return {
         columns: columns,
@@ -259,9 +245,9 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
 
   $scope.deleteOrder = function() {
     var unprocessConfirmation = {
-      title: 'Void Order',
-      button: 'Void',
-      message: 'Are you sure that you want to delete this Order?'
+      title: gettextCatalog.getString('Void Order'),
+      button: gettextCatalog.getString('Void'),
+      message: gettextCatalog.getString('Are you sure that you want to delete this Order?')
     };
 
     ModalsService.showConfirmation(unprocessConfirmation).then(function() {
@@ -280,9 +266,9 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
 
   $scope.dispatch = function() {
     var dispatchConfirmation = {
-      title: 'Dispatch Order',
-      button: 'Dispatch Order',
-      message: 'Are you sure you want to dispatch the order?'
+      title: gettextCatalog.getString('Dispatch Order'),
+      button: gettextCatalog.getString('Dispatch Order'),
+      message: gettextCatalog.getString('Are you sure you want to dispatch the order?')
     };
 
     ModalsService.showConfirmation(dispatchConfirmation).then(function() {
