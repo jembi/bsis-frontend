@@ -113,36 +113,28 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     $location.path('/viewOrder/' + row.entity.id);
   };
 
-  var orderDateTitle = gettextCatalog.getString('Order Date');
-  var dispatchTypeTitle = gettextCatalog.getString('Dispatch Type');
-  var dispatchFromTitle = gettextCatalog.getString('Dispatch From');
-  var dispatchToTitle = gettextCatalog.getString('Dispatched To');
-
   var columnDefs = [
     {
-      name: 'Order Date',
-      displayName: orderDateTitle,
+      displayName: gettextCatalog.getString('Order Date'),
       field: 'orderDate',
       cellFilter: 'bsisDate',
       width: '**',
       maxWidth: '200'
     },
     {
-      name: 'Dispatch Type',
-      displayName: dispatchTypeTitle,
+      displayName: gettextCatalog.getString('Dispatch Type'),
       field: 'type',
+      cellFilter: 'titleCase | translate',
       width: '**',
       maxWidth: '200'
     },
     {
-      name: 'Dispatched From',
-      displayName: dispatchFromTitle,
+      displayName: gettextCatalog.getString('Dispatch From'),
       field: 'dispatchedFrom.name',
       width: '**'
     },
     {
-      name: 'Dispatched To',
-      displayName: dispatchToTitle,
+      displayName: gettextCatalog.getString('Dispatched To'),
       field: 'dispatchedTo.name',
       width: '**'
     }

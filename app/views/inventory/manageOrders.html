@@ -83,7 +83,7 @@
           </div>
 
           <div class="col-sm-offset-2">
-            <button class="btn btn-primary" type="submit" ng-disabled="addingOrderForm" translate>{{addingOrderForm ? 'Adding...' : 'Add Order'}}</button>
+            <button class="btn btn-primary" type="submit" ng-disabled="addingOrderForm">{{addingOrderForm ? 'Adding...' : 'Add' | translate}}</button>
             <button class="btn btn-primary" type="button" ng-disabled="addingOrderForm" ng-click="clearForm();" translate>Clear</button>
           </div>
         </div>
@@ -144,7 +144,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label" translate>Gender</label>
               <div class="col-sm-8">
-                <select name="gender" class="form-control input-sm" ng-options="item.id as item.name for item in genders" ng-model="orderForm.patient.gender">
+                <select name="gender" class="form-control input-sm" ng-options="item.id as (item.name | translate) for item in genders" ng-model="orderForm.patient.gender">
                   <option value=""></option>
                 </select>
               </div>
