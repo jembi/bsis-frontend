@@ -320,6 +320,7 @@ module.exports = function(grunt) {
       pot: {
         files: {
           'po/template.pot': [
+            '<%= yeoman.app %>/views/translations.html',
             '<%= yeoman.app %>/views/*/*.html',
             '<%= yeoman.app %>/*.html',
             '<%= yeoman.app %>/scripts/controllers/*/*.js'
