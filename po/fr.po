@@ -12,12 +12,17 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: app/views/inventory/manageReturns.html:64 app/views/translations.html:13
+msgid "Add"
+msgstr "Ajouter"
+
 #: app/views/inventory/manageOrders.html:27
 #: app/views/inventory/manageOrders.html:9
 #: app/views/inventory/viewOrders.html:9
 msgid "Add Order"
 msgstr "Ajouter une commande"
 
+#: app/views/inventory/fulfilOrder.html:219
 #: app/views/inventory/recordReturn.html:67
 msgid "Add Pack"
 msgstr "Ajouter une poche"
@@ -27,6 +32,18 @@ msgstr "Ajouter une poche"
 #: app/views/inventory/viewReturns.html:9
 msgid "Add Return"
 msgstr "Ajouter un retour"
+
+#: app/views/inventory/fulfilOrder.html:182
+msgid "Add to Order"
+msgstr "Ajouter à la commande"
+
+#: app/views/inventory/manageReturns.html:63 app/views/translations.html:14
+msgid "Adding..."
+msgstr "Ajout en cours ..."
+
+#: app/scripts/controllers/inventory/findTransfusion.js:129
+msgid "All"
+msgstr "Tous"
 
 #: app/views/inventory/findInventory.html:40
 #: app/views/inventory/viewStockLevels.html:18
@@ -41,6 +58,18 @@ msgstr "Tout groupe sanguin"
 msgid "Are you sure that you want to delete this Order?"
 msgstr "Êtes-vous sûr(e) de vouloir supprimer la commande en cours?"
 
+#: app/scripts/controllers/inventory/viewReturn.js:207
+msgid "Are you sure that you want to delete this Return?"
+msgstr "Êtes-vous sûr(e) de vouloir supprimer le retour?"
+
+#: app/scripts/controllers/inventory/recordTransfusions.js:180
+msgid "Are you sure that you want to void this Tranfusion?"
+msgstr "Êtes-vous sûr(e) de vouloir supprimer cette transfusion?"
+
+#: app/scripts/controllers/inventory/fulfilOrder.js:313
+msgid "Are you sure you want to delete the selected rows?"
+msgstr "Êtes-vous sûr(e) de vouloir supprimer la ligne sélectionnée?"
+
 #: app/views/inventory/discardComponentsModal.html:6
 msgid "Are you sure you want to discard all units in this return?"
 msgstr ""
@@ -49,6 +78,15 @@ msgstr ""
 #: app/scripts/controllers/inventory/viewOrder.js:271
 msgid "Are you sure you want to dispatch the order?"
 msgstr "Êtes-vous sûr(e) de vouloir expédier la commande?"
+
+#: app/scripts/controllers/inventory/viewReturn.js:228
+msgid "Are you sure you want to return all units into inventory?"
+msgstr ""
+"Êtes-vous sûr(e) de vouloir retourner toutes les unités à l'inventaire?"
+
+#: app/views/translations.html:29
+msgid "Available"
+msgstr "Disponible"
 
 #: app/views/inventory/recordTransfusions.html:129
 msgid "Blood Bank"
@@ -62,12 +100,13 @@ msgid "Blood Bank No"
 msgstr "N ° de banque de sang"
 
 #: app/scripts/controllers/inventory/findInventory.js:48
-#: app/scripts/controllers/inventory/fulfilOrder.js:380
-#: app/scripts/controllers/inventory/recordReturn.js:15
+#: app/scripts/controllers/inventory/fulfilOrder.js:387
+#: app/scripts/controllers/inventory/recordReturn.js:36
 #: app/scripts/controllers/inventory/viewOrder.js:14
 #: app/scripts/controllers/inventory/viewOrder.js:151
 #: app/scripts/controllers/inventory/viewOrder.js:53
-#: app/scripts/controllers/inventory/viewReturn.js:8
+#: app/scripts/controllers/inventory/viewReturn.js:30
+#: app/views/inventory/fulfilOrder.html:159
 #: app/views/inventory/fulfilOrder.html:23
 #: app/views/inventory/manageOrders.html:154
 #: app/views/inventory/recordTransfusions.html:166
@@ -86,14 +125,19 @@ msgid "CSV"
 msgstr "CSV"
 
 #: app/views/inventory/discardComponentsModal.html:26
+#: app/views/inventory/fulfilOrder.html:130
+#: app/views/inventory/fulfilOrder.html:234
 #: app/views/inventory/recordReturn.html:32
 #: app/views/inventory/recordReturn.html:82
 msgid "Cancel"
 msgstr "Annuler"
 
 #: app/views/inventory/findInventory.html:94
+#: app/views/inventory/findTransfusion.html:80
+#: app/views/inventory/fulfilOrder.html:183
+#: app/views/inventory/fulfilOrder.html:221
 #: app/views/inventory/manageOrders.html:87
-#: app/views/inventory/manageReturns.html:64
+#: app/views/inventory/manageReturns.html:65
 #: app/views/inventory/recordReturn.html:69
 #: app/views/inventory/recordTransfusions.html:180
 #: app/views/inventory/viewOrders.html:86
@@ -103,34 +147,125 @@ msgid "Clear"
 msgstr "Effacer"
 
 #: app/scripts/controllers/inventory/findInventory.js:27
-#: app/scripts/controllers/inventory/findTransfusion.js:40
-#: app/scripts/controllers/inventory/recordReturn.js:13
-#: app/scripts/controllers/inventory/viewReturn.js:6
+#: app/scripts/controllers/inventory/findTransfusion.js:49
+#: app/scripts/controllers/inventory/recordReturn.js:22
+#: app/scripts/controllers/inventory/viewReturn.js:16
 #: app/views/inventory/findInventory.html:17
 #: app/views/inventory/findTransfusion.html:16
+#: app/views/inventory/fulfilOrder.html:209
 #: app/views/inventory/recordReturn.html:58
 #: app/views/inventory/recordTransfusions.html:24
 msgid "Component Code"
 msgstr "Code de composant"
 
+#: app/scripts/controllers/inventory/findTransfusion.js:112
+msgid "Component Transfusion Information"
+msgstr "Information sur le composant transfusé"
+
 #: app/scripts/controllers/inventory/findInventory.js:42
-#: app/scripts/controllers/inventory/findTransfusion.js:41
-#: app/scripts/controllers/inventory/fulfilOrder.js:379
-#: app/scripts/controllers/inventory/recordReturn.js:14
+#: app/scripts/controllers/inventory/findTransfusion.js:132
+#: app/scripts/controllers/inventory/findTransfusion.js:56
+#: app/scripts/controllers/inventory/fulfilOrder.js:382
+#: app/scripts/controllers/inventory/recordReturn.js:29
 #: app/scripts/controllers/inventory/viewOrder.js:48
 #: app/scripts/controllers/inventory/viewOrder.js:9
-#: app/scripts/controllers/inventory/viewReturn.js:7
+#: app/scripts/controllers/inventory/viewReturn.js:23
 #: app/scripts/controllers/inventory/viewStockLevels.js:17
 #: app/views/inventory/findInventory.html:50
 #: app/views/inventory/findTransfusion.html:27
+#: app/views/inventory/fulfilOrder.html:146
 #: app/views/inventory/recordTransfusions.html:35
 msgid "Component Type"
 msgstr "Type de composant"
 
-#: app/scripts/controllers/inventory/recordReturn.js:17
-#: app/scripts/controllers/inventory/viewReturn.js:10
+#: app/scripts/controllers/inventory/fulfilOrder.js:300
+msgid ""
+"Component with DIN {{DIN}} and ComponentCode {{componentCode}} not found."
+msgstr ""
+"Composant avec DIN {{DIN}} et code de composant {{componentCode}} non trouvé."
+
+#: app/scripts/controllers/inventory/recordReturn.js:233
+msgid ""
+"Component with DIN {{din}} and ComponentCode {{componentCode}} not found."
+msgstr ""
+"Aucun composant avec DIN {{din}} and code de composant {{componentCode}} "
+"trouvé."
+
+#: app/scripts/controllers/inventory/fulfilOrder.js:285
+msgid "Component {{DIN}} ({{componentCode}}) does not match what was ordered."
+msgstr ""
+"Le composant {{DIN}} ({{componentCode}}) ne correspond pas à celui commandé."
+
+#: app/scripts/controllers/inventory/fulfilOrder.js:263
+msgid ""
+"Component {{DIN}} ({{componentCode}}) has already been added to this Order "
+"Form."
+msgstr ""
+"Le composant {{DIN}} ({{componentCode}}) a deja été ajouté à ce formulaire."
+
+#: app/scripts/controllers/inventory/fulfilOrder.js:272
+msgid ""
+"Component {{DIN}} ({{componentCode}}) has already been assigned to another "
+"Order Form."
+msgstr ""
+"Le composant {{DIN}} ({{componentCode}}) a déjà été ajouté à un autre "
+"formulaire."
+
+#: app/scripts/controllers/inventory/fulfilOrder.js:249
+msgid ""
+"Component {{DIN}} ({{componentCode}}) is not currently in stock at "
+"{{location}}."
+msgstr ""
+"Le composant {{DIN}} ({{componentCode}}) n'est actuellement pas en stock à "
+"{{location}}."
+
+#: app/scripts/controllers/inventory/fulfilOrder.js:244
+msgid "Component {{DIN}} ({{componentCode}}) is not currently in stock."
+msgstr ""
+"Le composant {{DIN}} ({{componentCode}}) n'est pas présentement pas en stock."
+
+#: app/scripts/controllers/inventory/fulfilOrder.js:254
+msgid "Component {{DIN}} ({{componentCode}}) is not suitable for dispatch."
+msgstr ""
+"Le composant {{DIN}} ({{componentCode}}) n'est pas approprié à l'expedition."
+
+#: app/scripts/controllers/inventory/fulfilOrder.js:222
+msgid "Component {{DIN}} ({{componentCode}}) was not found in this Order Form."
+msgstr ""
+"Le composant {{DIN}} ({{componentCode}}) n'a pas été trouvé dans ce "
+"formulaire de commande."
+
+#: app/scripts/controllers/inventory/recordReturn.js:221
+msgid ""
+"Component {{din}} ({{componentCode}}) has already been added to this Return "
+"Form."
+msgstr ""
+"Composant {{din}} ({{componentCode}}) a déjà été ajouté au formulaire de "
+"retour."
+
+#: app/scripts/controllers/inventory/recordReturn.js:214
+msgid "Component {{din}} ({{componentCode}}) has not been issued."
+msgstr "Le composant {{din}} ({{componentCode}}) n'a pas été émi."
+
+#: app/scripts/controllers/inventory/recordReturn.js:192
+msgid ""
+"Component {{din}} ({{componentCode}}) was not found in this Return Form."
+msgstr ""
+"Le composant {{din}} ({{componentCode}}) n'a pas été trouvé dans le "
+"formulaire de retour."
+
+#: app/scripts/controllers/inventory/fulfilOrder.js:312
+msgid "Continue"
+msgstr "Continuer"
+
+#: app/scripts/controllers/inventory/recordReturn.js:50
+#: app/scripts/controllers/inventory/viewReturn.js:44
 msgid "Create On"
 msgstr "Date de création"
+
+#: app/views/translations.html:21
+msgid "Created"
+msgstr "Créé"
 
 #: app/scripts/controllers/inventory/findInventory.js:34
 msgid "Created On"
@@ -145,12 +280,13 @@ msgid "Current Returns"
 msgstr "Rendements actuels"
 
 #: app/scripts/controllers/inventory/findInventory.js:20
-#: app/scripts/controllers/inventory/findTransfusion.js:39
-#: app/scripts/controllers/inventory/recordReturn.js:12
+#: app/scripts/controllers/inventory/findTransfusion.js:42
+#: app/scripts/controllers/inventory/recordReturn.js:16
 #: app/scripts/controllers/inventory/viewOrder.js:42
-#: app/scripts/controllers/inventory/viewReturn.js:5
+#: app/scripts/controllers/inventory/viewReturn.js:9
 #: app/views/inventory/findInventory.html:8
 #: app/views/inventory/findTransfusion.html:8
+#: app/views/inventory/fulfilOrder.html:199
 #: app/views/inventory/recordReturn.html:49
 #: app/views/inventory/recordTransfusions.html:16
 msgid "DIN"
@@ -167,9 +303,11 @@ msgid "Date Transfused"
 msgstr "Date de transfusion"
 
 #: app/scripts/controllers/inventory/findInventory.js:145
+#: app/scripts/controllers/inventory/viewReturn.js:125
 msgid "Date generated: {{bsisDateTime}}"
 msgstr "Généré le: {{bsisDateTime}}"
 
+#: app/scripts/controllers/inventory/findTransfusion.js:148
 #: app/scripts/controllers/inventory/viewOrder.js:177
 msgid "Date generated: {{date}}"
 msgstr "Généré le: {{date}}"
@@ -190,6 +328,14 @@ msgstr "Date de naissance"
 msgid "Date or time is in the future: please re-enter"
 msgstr "La date ou l'heure est à l'avenir: veuillez ré-entrer"
 
+#: app/scripts/controllers/inventory/fulfilOrder.js:311
+msgid "Delete Rows"
+msgstr "Supprimer les lignes"
+
+#: app/views/inventory/fulfilOrder.html:233
+msgid "Delete Selected Rows"
+msgstr "Supprimer les lignes sélectionnées"
+
 #: app/views/inventory/discardComponentsModal.html:2
 msgid "Discard Components"
 msgstr "Déposer des composants"
@@ -201,6 +347,10 @@ msgstr "La raison de déposer"
 #: app/views/inventory/viewReturn.html:19
 msgid "Discard Stock"
 msgstr "Déposer le stock"
+
+#: app/views/translations.html:34
+msgid "Discarded"
+msgstr "Ecarté"
 
 #: app/scripts/controllers/inventory/manageOrders.js:132
 #: app/scripts/controllers/inventory/viewOrder.js:111
@@ -224,6 +374,10 @@ msgstr "Ordre de distribution"
 #: app/views/inventory/viewOrders.html:55
 msgid "Dispatch Type"
 msgstr "Type de livraison"
+
+#: app/views/translations.html:22
+msgid "Dispatched"
+msgstr "Expédié"
 
 #: app/views/inventory/fulfilOrder.html:10
 #: app/views/inventory/manageOrders.html:39
@@ -263,11 +417,19 @@ msgstr "L'heure de fin devrait être après l'heure de début"
 msgid "Enter a valid time"
 msgstr "Entrez un moment valide"
 
+#: app/views/translations.html:30
+msgid "Expired"
+msgstr "Expiré"
+
 #: app/scripts/controllers/inventory/findInventory.js:55
-#: app/scripts/controllers/inventory/recordReturn.js:18
-#: app/scripts/controllers/inventory/viewReturn.js:11
+#: app/scripts/controllers/inventory/recordReturn.js:58
+#: app/scripts/controllers/inventory/viewReturn.js:52
 msgid "Expiry Status"
 msgstr "Statut d'expiration"
+
+#: app/views/translations.html:4
+msgid "Female"
+msgstr "Femme"
 
 #: app/views/inventory/findInventory.html:3 app/views/inventory/sidebar.html:13
 msgid "Find Inventory"
@@ -282,7 +444,7 @@ msgstr "Trouver des transfusions"
 msgid "Fulfil Order Form"
 msgstr "Formulaire de commande remplissant"
 
-#: app/scripts/controllers/inventory/fulfilOrder.js:383
+#: app/scripts/controllers/inventory/fulfilOrder.js:405
 #: app/scripts/controllers/inventory/viewOrder.js:32
 msgid "Gap"
 msgstr "Écart"
@@ -307,6 +469,11 @@ msgstr "En stock"
 msgid "Invalid"
 msgstr "Invalide"
 
+#: app/scripts/controllers/inventory/fulfilOrder.js:197
+#: app/scripts/controllers/inventory/recordReturn.js:106
+msgid "Invalid Component"
+msgstr "Composant invalide"
+
 #: app/views/inventory/recordTransfusions.html:149
 #: app/views/inventory/recordTransfusions.html:95
 msgid "Invalid date"
@@ -326,9 +493,13 @@ msgstr "Inventaire"
 
 #: app/views/inventory/fulfilOrder.html:56
 #: app/views/inventory/manageOrders.html:60
-#: app/views/inventory/viewOrders.html:63
+#: app/views/inventory/viewOrders.html:63 app/views/translations.html:25
 msgid "Issue"
 msgstr "Problème"
+
+#: app/views/translations.html:31
+msgid "Issued"
+msgstr "Envoyé"
 
 #: app/scripts/controllers/inventory/findInventory.js:65
 msgid "Location"
@@ -337,6 +508,10 @@ msgstr "Emplacement"
 #: app/views/inventory/sidebar.html:12
 msgid "MANAGE INVENTORY"
 msgstr "GESTION DE L'INVENTAIRE"
+
+#: app/views/translations.html:2
+msgid "Male"
+msgstr "Homme"
 
 #: app/views/inventory/viewOrder.html:3
 msgid "Manage Order"
@@ -393,17 +568,24 @@ msgstr ""
 msgid "Not Specified"
 msgstr "Non précisé"
 
+#: app/views/translations.html:18
+msgid "Not Transfused"
+msgstr "Pas transfusé"
+
 #: app/views/inventory/viewStockLevels.html:33
 msgid "Not in Stock"
 msgstr "En rupture"
 
-#: app/scripts/controllers/inventory/viewOrder.js:176
-msgid "Number of components"
-msgstr "Nombre de composants"
-
 #: app/scripts/controllers/inventory/findInventory.js:144
+#: app/scripts/controllers/inventory/viewOrder.js:176
+#: app/scripts/controllers/inventory/viewReturn.js:124
 msgid "Number of components: {{componentNumber}}"
 msgstr "Nombre de composants: {{componentNumber}}"
+
+#: app/scripts/controllers/inventory/fulfilOrder.js:198
+#: app/scripts/controllers/inventory/recordReturn.js:107
+msgid "OK"
+msgstr "OK"
 
 #: app/scripts/controllers/inventory/manageOrders.js:118
 #: app/scripts/controllers/inventory/viewOrder.js:106
@@ -419,11 +601,11 @@ msgid "Order Status"
 msgstr "Status de la commande"
 
 #: app/scripts/controllers/inventory/viewOrder.js:121
-#: app/views/inventory/fulfilOrder.html:9 app/views/inventory/viewOrder.html:30
+#: app/views/inventory/viewOrder.html:30
 msgid "Order Type"
 msgstr "Type de commande"
 
-#: app/scripts/controllers/inventory/findTransfusion.js:43
+#: app/scripts/controllers/inventory/findTransfusion.js:70
 msgid "Outcome"
 msgstr "Résultat"
 
@@ -434,7 +616,9 @@ msgid "PDF"
 msgstr "PDF"
 
 #: app/scripts/controllers/inventory/findInventory.js:146
+#: app/scripts/controllers/inventory/findTransfusion.js:149
 #: app/scripts/controllers/inventory/viewOrder.js:178
+#: app/scripts/controllers/inventory/viewReturn.js:126
 msgid "Page {{currentPage}} of {{pageCount}}"
 msgstr "Page {{currentPage}} sur {{pageCount}}"
 
@@ -462,7 +646,7 @@ msgstr "Numéro de patient"
 
 #: app/views/inventory/fulfilOrder.html:59
 #: app/views/inventory/manageOrders.html:64
-#: app/views/inventory/viewOrders.html:67
+#: app/views/inventory/viewOrders.html:67 app/views/translations.html:26
 msgid "Patient Request"
 msgstr "Demande de patient"
 
@@ -484,21 +668,30 @@ msgstr "Note de livraison d'impression"
 msgid "Print Return Note"
 msgstr "Imprimer la note de retour"
 
+#: app/views/translations.html:35
+msgid "Processed"
+msgstr "Traiité"
+
+#: app/views/translations.html:28
+msgid "Quarantined"
+msgstr "Mis en quarantaine"
+
 #: app/views/inventory/recordReturn.html:4
 msgid "Record Return"
-msgstr "Retour record"
+msgstr "Enregistrer un retour"
 
 #: app/views/inventory/recordTransfusions.html:3
 #: app/views/inventory/sidebar.html:21
 msgid "Record Transfusions"
 msgstr "Transfusions enregistrées"
 
+#: app/views/inventory/fulfilOrder.html:220
 #: app/views/inventory/recordReturn.html:68
 msgid "Remove Pack"
 msgstr "Supprimer le paquet"
 
-#: app/scripts/controllers/inventory/manageReturns.js:7
-#: app/scripts/controllers/inventory/viewReturns.js:14
+#: app/scripts/controllers/inventory/manageReturns.js:10
+#: app/scripts/controllers/inventory/viewReturns.js:17
 #: app/views/inventory/manageReturns.html:29
 #: app/views/inventory/recordReturn.html:17
 #: app/views/inventory/recordReturn.html:9
@@ -506,16 +699,33 @@ msgstr "Supprimer le paquet"
 msgid "Return Date"
 msgstr "Date de retour"
 
-#: app/scripts/controllers/inventory/viewReturns.js:15
+#: app/scripts/controllers/inventory/viewReturn.js:100
+msgid "Return Date:"
+msgstr "Date de retour:"
+
+#: app/scripts/controllers/inventory/viewReturn.js:105
+msgid "Return From:"
+msgstr "Retourné de:"
+
+#: app/scripts/controllers/inventory/viewReturn.js:85
+msgid "Return Note"
+msgstr "Note de retour:"
+
+#: app/scripts/controllers/inventory/viewReturns.js:25
 msgid "Return Status"
 msgstr "Statut du retour"
+
+#: app/scripts/controllers/inventory/viewReturn.js:226
+#: app/scripts/controllers/inventory/viewReturn.js:227
+msgid "Return To Stock"
+msgstr "Retourner au stock"
 
 #: app/views/inventory/viewReturn.html:16
 msgid "Return to Stock"
 msgstr "Retourner à Stock"
 
-#: app/scripts/controllers/inventory/manageReturns.js:8
-#: app/scripts/controllers/inventory/viewReturns.js:16
+#: app/scripts/controllers/inventory/manageReturns.js:19
+#: app/scripts/controllers/inventory/viewReturns.js:32
 #: app/views/inventory/manageReturns.html:39
 #: app/views/inventory/recordReturn.html:10
 #: app/views/inventory/recordReturn.html:21
@@ -524,8 +734,8 @@ msgstr "Retourner à Stock"
 msgid "Returned From"
 msgstr "Retour de"
 
-#: app/scripts/controllers/inventory/manageReturns.js:9
-#: app/scripts/controllers/inventory/viewReturns.js:17
+#: app/scripts/controllers/inventory/manageReturns.js:25
+#: app/scripts/controllers/inventory/viewReturns.js:38
 #: app/views/inventory/manageReturns.html:51
 #: app/views/inventory/recordReturn.html:11
 #: app/views/inventory/recordReturn.html:26
@@ -534,7 +744,30 @@ msgstr "Retour de"
 msgid "Returned To"
 msgstr "Renvoyé à"
 
+#: app/scripts/controllers/inventory/viewReturn.js:110
+msgid "Returned To:"
+msgstr "Retourné à:"
+
+#: app/views/translations.html:11
+msgid "Save"
+msgstr "Enregistrer"
+
+#: app/views/translations.html:12
+msgid "Saving..."
+msgstr "Enregistrement en cours..."
+
+#: app/views/inventory/viewReturns.html:67 app/views/translations.html:7
+msgid "Search"
+msgstr "Rechercher"
+
+#: app/views/inventory/viewReturns.html:66 app/views/translations.html:8
+msgid "Searching..."
+msgstr "Recherche en cours..."
+
 #: app/views/inventory/discardComponentsModal.html:12
+#: app/views/inventory/findInventory.html:66
+#: app/views/inventory/fulfilOrder.html:150
+#: app/views/inventory/fulfilOrder.html:163
 #: app/views/inventory/manageOrders.html:43
 #: app/views/inventory/manageReturns.html:42
 #: app/views/inventory/manageReturns.html:54
@@ -558,10 +791,6 @@ msgstr "Sélectionnez une date valide"
 msgid "Select one or more"
 msgstr "Sélectionnez un ou plusieurs"
 
-#: app/views/inventory/findInventory.html:66
-msgid "Select:"
-msgstr "Sélectionner:"
-
 #: app/messages.html:14
 msgid "Start and end times are the same: please re-enter"
 msgstr "Les heures de début et de fin sont identiques: re-entrer"
@@ -570,8 +799,8 @@ msgstr "Les heures de début et de fin sont identiques: re-entrer"
 msgid "Start date must be before the end date"
 msgstr "La date de début doit être avant la date de fin"
 
-#: app/scripts/controllers/inventory/recordReturn.js:16
-#: app/scripts/controllers/inventory/viewReturn.js:9
+#: app/scripts/controllers/inventory/recordReturn.js:43
+#: app/scripts/controllers/inventory/viewReturn.js:37
 msgid "Status"
 msgstr "Statut"
 
@@ -607,6 +836,7 @@ msgid "This must be unique"
 msgstr "Cela doit être unique"
 
 #: app/views/inventory/viewOrders.html:28
+#: app/views/inventory/viewReturns.html:28
 msgid "To"
 msgstr "À"
 
@@ -630,37 +860,63 @@ msgstr "Trop petit"
 msgid "Total"
 msgstr "Le total"
 
+#: app/scripts/controllers/inventory/findTransfusion.js:147
+msgid "Total Units: {{total}}"
+msgstr "Total des unités: {{total}}"
+
 #: app/views/inventory/fulfilOrder.html:53
 #: app/views/inventory/manageOrders.html:56
-#: app/views/inventory/viewOrders.html:59
+#: app/views/inventory/viewOrders.html:59 app/views/translations.html:24
 msgid "Transfer"
 msgstr "Transfert"
 
-#: app/scripts/controllers/inventory/findTransfusion.js:42
+#: app/views/translations.html:32
+msgid "Transfused"
+msgstr "Transfusé"
+
+#: app/scripts/controllers/inventory/findTransfusion.js:62
 msgid "Transfused On"
 msgstr "Transfused On"
+
+#: app/views/translations.html:16
+msgid "Transfused Uneventfully"
+msgstr "Transfusé sans problème"
 
 #: app/views/inventory/recordTransfusions.html:82
 msgid "Transfusion Notes"
 msgstr "Notes de transfusion"
+
+#: app/scripts/controllers/inventory/findTransfusion.js:136
+msgid "Transfusion Outcome"
+msgstr "Resultat de la transfusion"
 
 #: app/views/inventory/findTransfusion.html:45
 #: app/views/inventory/recordTransfusions.html:59
 msgid "Transfusion Outcomes"
 msgstr "Résultats de transfusion"
 
+#: app/views/translations.html:17
+msgid "Transfusion Reaction Occurred"
+msgstr "Réaction de transfusion s'est produite"
+
 #: app/views/inventory/recordTransfusions.html:70
 msgid "Transfusion Reaction Type"
 msgstr "Type de réaction de transfusion"
 
-#: app/scripts/controllers/inventory/findTransfusion.js:44
+#: app/scripts/controllers/inventory/findTransfusion.js:134
+#: app/scripts/controllers/inventory/findTransfusion.js:77
 #: app/views/inventory/findTransfusion.html:36
 #: app/views/inventory/recordTransfusions.html:47
 msgid "Transfusion Site"
 msgstr "Site de transfusion"
 
-#: app/scripts/controllers/inventory/fulfilOrder.js:381
+#: app/views/inventory/fulfilOrder.html:172
+msgid "Units"
+msgstr "Unités"
+
+#: app/scripts/controllers/inventory/fulfilOrder.js:393
 #: app/scripts/controllers/inventory/viewOrder.js:20
+#: app/views/inventory/fulfilOrder.html:141
 #: app/views/inventory/viewOrder.html:59
 msgid "Units Ordered"
 msgstr "Unités commandées"
@@ -670,11 +926,20 @@ msgstr "Unités commandées"
 msgid "Units Returned"
 msgstr "Unités renvoyées"
 
-#: app/scripts/controllers/inventory/fulfilOrder.js:382
+#: app/scripts/controllers/inventory/fulfilOrder.js:399
 #: app/scripts/controllers/inventory/viewOrder.js:26
+#: app/views/inventory/fulfilOrder.html:194
 #: app/views/inventory/viewOrder.html:65
 msgid "Units Supplied"
 msgstr "Unités fournies"
+
+#: app/views/translations.html:19
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: app/views/translations.html:33
+msgid "Unsafe"
+msgstr "Peu sûr"
 
 #: app/views/inventory/manageOrders.html:12
 #: app/views/inventory/viewOrders.html:12
@@ -693,14 +958,28 @@ msgstr "Afficher les retours"
 msgid "View Stock Levels"
 msgstr "Afficher les niveaux de stock"
 
+#: app/scripts/controllers/inventory/recordTransfusions.js:179
 #: app/scripts/controllers/inventory/viewOrder.js:249
-#: app/views/inventory/recordTransfusions.html:8
+#: app/scripts/controllers/inventory/viewReturn.js:206
+#: app/views/inventory/recordTransfusions.html:8 app/views/translations.html:9
 msgid "Void"
 msgstr "Supprimer"
 
 #: app/scripts/controllers/inventory/viewOrder.js:248
 msgid "Void Order"
 msgstr "Supprimer la commande"
+
+#: app/scripts/controllers/inventory/viewReturn.js:205
+msgid "Void Return"
+msgstr "Supprimer un retour"
+
+#: app/scripts/controllers/inventory/recordTransfusions.js:178
+msgid "Void Tranfusion"
+msgstr "Supprimer une transfusion"
+
+#: app/views/translations.html:10
+msgid "Voiding..."
+msgstr "Suppression..."
 
 #: app/scripts/controllers/inventory/viewOrder.js:136
 #: app/views/inventory/fulfilOrder.html:16
@@ -709,50 +988,29 @@ msgstr "Supprimer la commande"
 msgid "Ward No"
 msgstr "Ward No"
 
-#: app/views/inventory/manageReturns.html:63
-msgid "{{addingReturnForm ? 'Adding...' : 'Add Return'}}"
-msgstr "{{addingReturnForm ? 'Ajouter...' : 'Ajouter un retour'}}"
+#: app/views/translations.html:5
+msgid "female"
+msgstr "femme"
+
+#: app/views/translations.html:3
+msgid "male"
+msgstr "homme"
 
 #: app/views/inventory/discardComponentsModal.html:25
 msgid "{{discardingComponent ? \"Discarding...\" : \"Discard Components\"}}"
 msgstr "{{discardingComponent ? \"Déposer...\" : \"Déposer des composants\"}}"
 
-#: app/views/inventory/fulfilOrder.html:25
-#: app/views/inventory/viewOrder.html:44
-msgid "{{orderForm.patient.bloodGroup}}"
-msgstr "{{orderForm.patient.bloodGroup}}"
-
-#: app/views/inventory/fulfilOrder.html:31
-#: app/views/inventory/viewOrder.html:50
-msgid "{{orderForm.patient.dateOfBirth | bsisDate}}"
-msgstr "{{orderForm.patient.dateOfBirth | bsisDate}}"
-
-#: app/views/inventory/fulfilOrder.html:28
-msgid "{{orderForm.patient.gender}}"
-msgstr "{{orderForm.patient.gender}}"
-
-#: app/views/inventory/fulfilOrder.html:15
-#: app/views/inventory/viewOrder.html:34
-msgid "{{orderForm.patient.hospitalBloodBankNumber}}"
-msgstr "{{orderForm.patient.hospitalBloodBankNumber}}"
-
-#: app/views/inventory/fulfilOrder.html:18
-#: app/views/inventory/viewOrder.html:37
-msgid "{{orderForm.patient.hospitalWardNumber}}"
-msgstr "{{orderForm.patient.hospitalWardNumber}}"
-
-#: app/views/inventory/fulfilOrder.html:21
-#: app/views/inventory/viewOrder.html:40
-msgid "{{orderForm.patient.patientNumber}}"
-msgstr "{{orderForm.patient.patientNumber}}"
-
 #: app/views/inventory/recordReturn.html:81
-msgid "{{savingForm ? 'Saving...' : 'Save Return'}}"
-msgstr "{{savingForm ? 'La sauvegarde...' : 'Enregistrer le retour'}}"
+msgid "{{savingForm ? 'Saving...' : 'Save Return' | translate}}"
+msgstr ""
+"{{savingForm ? 'Enregistrement en cours...' : 'Enregistrer un retour' | "
+"translate}}"
 
 #: app/views/inventory/recordReturn.html:31
-msgid "{{savingReturnDetails ? 'Saving...' : 'Save'}}"
-msgstr "{{savingReturnDetails ? 'La sauvegarde...' : 'Sauvegarder'}}"
+msgid "{{savingReturnDetails ? 'Saving...' : 'Save' | translate}}"
+msgstr ""
+"{{savingReturnDetails ? 'Enregistrement en cours...' : 'Enregistrer' | "
+"translate}}"
 
 #: app/views/inventory/viewStockLevels.html:38
 msgid ""
@@ -763,11 +1021,53 @@ msgstr ""
 "          \"Voir les niveaux de stock\"}}"
 
 #: app/views/inventory/findInventory.html:92
-#: app/views/inventory/findTransfusion.html:78
-#: app/views/inventory/viewOrders.html:84
-#: app/views/inventory/viewReturns.html:66
 msgid "{{searching ? \"Searching...\" : \"Search\"}}"
 msgstr "{{searching? \"Recherche ...\": \"Rechercher\"}}"
+
+#~ msgid "Number of components"
+#~ msgstr "Nombre de composants"
+
+#~ msgid "Select:"
+#~ msgstr "Sélectionner:"
+
+#~ msgid "{{orderForm.patient.bloodGroup}}"
+#~ msgstr "{{orderForm.patient.bloodGroup}}"
+
+#~ msgid "{{orderForm.patient.dateOfBirth | bsisDate}}"
+#~ msgstr "{{orderForm.patient.dateOfBirth | bsisDate}}"
+
+#~ msgid "{{orderForm.patient.gender}}"
+#~ msgstr "{{orderForm.patient.gender}}"
+
+#~ msgid "{{orderForm.patient.hospitalBloodBankNumber}}"
+#~ msgstr "{{orderForm.patient.hospitalBloodBankNumber}}"
+
+#~ msgid "{{orderForm.patient.hospitalWardNumber}}"
+#~ msgstr "{{orderForm.patient.hospitalWardNumber}}"
+
+#~ msgid "{{orderForm.patient.patientNumber}}"
+#~ msgstr "{{orderForm.patient.patientNumber}}"
+
+#~ msgid "Searching"
+#~ msgstr "Recherche en cours"
+
+#~ msgid "{{searching ? \"Searching...\" : \"Search\" | translate }}"
+#~ msgstr ""
+#~ "{{searching ? \"Recherche en cours...\" : \"Rechercher\" | translate }}"
+
+#~ msgid "{{addingReturnForm ? 'Adding...' : 'Add Return' | translate}}"
+#~ msgstr ""
+#~ "{{addingReturnForm ? 'Ajout en cours...' : 'Ajouter un retour' | "
+#~ "translate}}"
+
+#~ msgid "{{addingReturnForm ? 'Adding...' : 'Add Return'}}"
+#~ msgstr "{{addingReturnForm ? 'Ajouter...' : 'Ajouter un retour'}}"
+
+#~ msgid "{{savingForm ? 'Saving...' : 'Save Return'}}"
+#~ msgstr "{{savingForm ? 'La sauvegarde...' : 'Enregistrer le retour'}}"
+
+#~ msgid "{{savingReturnDetails ? 'Saving...' : 'Save'}}"
+#~ msgstr "{{savingReturnDetails ? 'La sauvegarde...' : 'Sauvegarder'}}"
 
 #~ msgid "Number of components:"
 #~ msgstr "Nombre de composants:"

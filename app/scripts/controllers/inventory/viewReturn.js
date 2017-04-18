@@ -2,54 +2,46 @@
 
 angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, $log, $filter, $routeParams, $uibModal, ReturnFormsService, ModalsService, UtilsService, gettextCatalog) {
 
-  var dinTitle = gettextCatalog.getString('DIN');
-  var componentCodeTitle = gettextCatalog.getString('Component Code');
-  var componentTypeTitle = gettextCatalog.getString('Component Type');
-  var bloodGroupTitle = gettextCatalog.getString('Blood Group');
-  var statusTitle = gettextCatalog.getString('Status');
-  var createdOnTitle = gettextCatalog.getString('Create On');
-  var expiryStatusTitle = gettextCatalog.getString('Expiry Status');
-
   var columnDefs = [
     {
       name: 'donationIdentificationNumber',
       field: 'donationIdentificationNumber',
-      displayName: dinTitle,
+      displayName: gettextCatalog.getString('DIN'),
       width: '**',
       maxWidth: '100'
     },
     {
       name: 'componentCode',
       field: 'componentCode',
-      displayName: componentCodeTitle,
+      displayName: gettextCatalog.getString('Component Code'),
       width: '**',
       maxWidth: '150'
     },
     {
       name: 'componentTypeName',
       field: 'componentTypeName',
-      displayName: componentTypeTitle,
+      displayName: gettextCatalog.getString('Component Type'),
       width: '**',
       minWidth: '200'
     },
     {
       name: 'bloodGroup',
       field: 'bloodGroup',
-      displayName: bloodGroupTitle,
+      displayName: gettextCatalog.getString('Blood Group'),
       width: '**',
       maxWidth: '125'
     },
     {
       name: 'status',
       field: 'status',
-      displayName: statusTitle,
+      displayName: gettextCatalog.getString('Status'),
       width: '**',
       maxWidth: '150'
     },
     {
       name: 'createdOn',
       field: 'createdOn',
-      displayName: createdOnTitle,
+      displayName: gettextCatalog.getString('Create On'),
       cellFilter: 'bsisDate',
       width: '**',
       maxWidth: '100'
@@ -57,7 +49,7 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     {
       name: 'expiryStatus',
       field: 'expiryStatus',
-      displayName: expiryStatusTitle,
+      displayName: gettextCatalog.getString('Expiry Status'),
       width: '**',
       maxWidth: '150',
       sortingAlgorithm: function(a, b, rowA, rowB) {
@@ -90,7 +82,7 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     exporterPdfHeader: function() {
       var finalArray = [
         {
-          text: 'Return Note',
+          text: gettextCatalog.getString('Return Note'),
           fontSize: 10,
           bold: true,
           margin: [30, 20, 0, 0] // [left, top, right, bottom]
@@ -105,17 +97,17 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
       var prefix = [];
       prefix.push(
         {
-          text: 'Return Date: ',
+          text: gettextCatalog.getString('Return Date:') + ' ',
           bold: true
         }, {
           text: $filter('bsisDate')($scope.returnForm.returnDate)
         }, {
-          text: ' Return From: ',
+          text: ' ' + gettextCatalog.getString('Return From:') + ' ',
           bold: true
         }, {
           text: $scope.returnForm.returnedFrom.name
         }, {
-          text: ' Returned To: ',
+          text: ' ' + gettextCatalog.getString('Returned To:') + ' ',
           bold: true
         }, {
           text: $scope.returnForm.returnedTo.name
@@ -129,9 +121,9 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
-        {text: 'Number of components: ' + $scope.gridOptions.data.length, width: 'auto'},
-        {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-        {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+        {text: gettextCatalog.getString('Number of components: {{componentNumber}}', {componentNumber: $scope.gridOptions.data.length}), width: 'auto'},
+        {text: gettextCatalog.getString('Date generated: {{bsisDateTime}}', {bsisDateTime: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+        {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
       ];
       return {
         columns: columns,
@@ -210,9 +202,9 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
 
   $scope.deleteReturn = function() {
     var deleteConfirmation = {
-      title: 'Void Return',
-      button: 'Void',
-      message: 'Are you sure that you want to delete this Return?'
+      title: gettextCatalog.getString('Void Return'),
+      button: gettextCatalog.getString('Void'),
+      message: gettextCatalog.getString('Are you sure that you want to delete this Return?')
     };
 
     ModalsService.showConfirmation(deleteConfirmation).then(function() {
@@ -231,9 +223,9 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
 
   $scope.return = function() {
     var returnConfirmation = {
-      title: 'Return To Stock',
-      button: 'Return To Stock',
-      message: 'Are you sure you want to return all units into inventory?'
+      title: gettextCatalog.getString('Return To Stock'),
+      button: gettextCatalog.getString('Return To Stock'),
+      message: gettextCatalog.getString('Are you sure you want to return all units into inventory?')
     };
 
     ModalsService.showConfirmation(returnConfirmation).then(function() {
