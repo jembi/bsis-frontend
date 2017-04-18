@@ -12,7 +12,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/views/inventory/manageReturns.html:64 app/views/translations.html:13
+#: app/views/translations.html:13
 msgid "Add"
 msgstr "Ajouter"
 
@@ -37,7 +37,7 @@ msgstr "Ajouter un retour"
 msgid "Add to Order"
 msgstr "Ajouter à la commande"
 
-#: app/views/inventory/manageReturns.html:63 app/views/translations.html:14
+#: app/views/translations.html:14
 msgid "Adding..."
 msgstr "Ajout en cours ..."
 
@@ -137,11 +137,11 @@ msgstr "Annuler"
 #: app/views/inventory/fulfilOrder.html:183
 #: app/views/inventory/fulfilOrder.html:221
 #: app/views/inventory/manageOrders.html:87
-#: app/views/inventory/manageReturns.html:65
+#: app/views/inventory/manageReturns.html:64
 #: app/views/inventory/recordReturn.html:69
 #: app/views/inventory/recordTransfusions.html:180
 #: app/views/inventory/viewOrders.html:86
-#: app/views/inventory/viewReturns.html:68
+#: app/views/inventory/viewReturns.html:67
 #: app/views/inventory/viewStockLevels.html:41
 msgid "Clear"
 msgstr "Effacer"
@@ -756,11 +756,11 @@ msgstr "Enregistrer"
 msgid "Saving..."
 msgstr "Enregistrement en cours..."
 
-#: app/views/inventory/viewReturns.html:67 app/views/translations.html:7
+#: app/views/translations.html:7
 msgid "Search"
 msgstr "Rechercher"
 
-#: app/views/inventory/viewReturns.html:66 app/views/translations.html:8
+#: app/views/translations.html:8
 msgid "Searching..."
 msgstr "Recherche en cours..."
 
@@ -996,21 +996,25 @@ msgstr "femme"
 msgid "male"
 msgstr "homme"
 
+#: app/views/inventory/manageReturns.html:63
+msgid "{{addingReturnForm ? 'Adding...' : 'Add'}}"
+msgstr ""
+
+#: app/views/inventory/viewReturn.html:13
+msgid "{{deleting ? 'Voiding...' : 'Void'}}"
+msgstr ""
+
 #: app/views/inventory/discardComponentsModal.html:25
 msgid "{{discardingComponent ? \"Discarding...\" : \"Discard Components\"}}"
 msgstr "{{discardingComponent ? \"Déposer...\" : \"Déposer des composants\"}}"
 
 #: app/views/inventory/recordReturn.html:81
-msgid "{{savingForm ? 'Saving...' : 'Save Return' | translate}}"
+msgid "{{savingForm ? 'Saving...' : 'Save'}}"
 msgstr ""
-"{{savingForm ? 'Enregistrement en cours...' : 'Enregistrer un retour' | "
-"translate}}"
 
 #: app/views/inventory/recordReturn.html:31
-msgid "{{savingReturnDetails ? 'Saving...' : 'Save' | translate}}"
-msgstr ""
-"{{savingReturnDetails ? 'Enregistrement en cours...' : 'Enregistrer' | "
-"translate}}"
+msgid "{{savingReturnDetails ? 'Saving...' : 'Save'}}"
+msgstr "{{savingReturnDetails ? 'La sauvegarde...' : 'Sauvegarder'}}"
 
 #: app/views/inventory/viewStockLevels.html:38
 msgid ""
@@ -1021,8 +1025,19 @@ msgstr ""
 "          \"Voir les niveaux de stock\"}}"
 
 #: app/views/inventory/findInventory.html:92
+#: app/views/inventory/viewReturns.html:66
 msgid "{{searching ? \"Searching...\" : \"Search\"}}"
 msgstr "{{searching? \"Recherche ...\": \"Rechercher\"}}"
+
+#~ msgid "{{savingForm ? 'Saving...' : 'Save Return' | translate}}"
+#~ msgstr ""
+#~ "{{savingForm ? 'Enregistrement en cours...' : 'Enregistrer un retour' | "
+#~ "translate}}"
+
+#~ msgid "{{savingReturnDetails ? 'Saving...' : 'Save' | translate}}"
+#~ msgstr ""
+#~ "{{savingReturnDetails ? 'Enregistrement en cours...' : 'Enregistrer' | "
+#~ "translate}}"
 
 #~ msgid "Number of components"
 #~ msgstr "Nombre de composants"
@@ -1065,9 +1080,6 @@ msgstr "{{searching? \"Recherche ...\": \"Rechercher\"}}"
 
 #~ msgid "{{savingForm ? 'Saving...' : 'Save Return'}}"
 #~ msgstr "{{savingForm ? 'La sauvegarde...' : 'Enregistrer le retour'}}"
-
-#~ msgid "{{savingReturnDetails ? 'Saving...' : 'Save'}}"
-#~ msgstr "{{savingReturnDetails ? 'La sauvegarde...' : 'Sauvegarder'}}"
 
 #~ msgid "Number of components:"
 #~ msgstr "Nombre de composants:"

@@ -60,8 +60,7 @@
         </div>
 
         <div class="col-sm-offset-2">
-          <button class="btn btn-primary" type="submit" ng-disabled="addingReturnForm" ng-show="addingReturnForm" translate>Adding...</button>
-          <button class="btn btn-primary" type="submit" ng-disabled="addingReturnForm" ng-show="!addingReturnForm" translate>Add</button>
+          <button class="btn btn-primary" type="submit" ng-disabled="addingReturnForm">{{addingReturnForm ? 'Adding...' : 'Add' | translate}}</button>
           <button class="btn btn-primary" type="button" ng-disabled="addingReturnForm" ng-click="clearForm();" translate>Clear</button>
         </div>
       </form>
