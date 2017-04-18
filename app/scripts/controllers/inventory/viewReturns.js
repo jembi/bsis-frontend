@@ -24,6 +24,7 @@ angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location,
       name: 'Return Status',
       displayName: gettextCatalog.getString('Return Status'),
       field: 'status',
+      cellFilter: 'translate',
       width: '**',
       maxWidth: '200'
     },

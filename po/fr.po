@@ -12,6 +12,10 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: app/views/translations.html:41
+msgid "AVAILABLE"
+msgstr "Disponible"
+
 #: app/views/translations.html:13
 msgid "Add"
 msgstr "Ajouter"
@@ -117,6 +121,10 @@ msgstr "Groupe sanguin"
 #: app/views/inventory/findInventory.html:62
 msgid "Blood Groups"
 msgstr "Groupes sanguins"
+
+#: app/views/translations.html:37
+msgid "CREATED"
+msgstr "Créé"
 
 #: app/views/inventory/findInventory.html:105
 #: app/views/inventory/findTransfusion.html:91
@@ -292,6 +300,10 @@ msgstr "Rendements actuels"
 msgid "DIN"
 msgstr "DIN"
 
+#: app/views/translations.html:46
+msgid "DISCARDED"
+msgstr "Ecarté"
+
 #: app/views/inventory/findInventory.html:103
 #: app/views/inventory/findTransfusion.html:89
 #: app/views/inventory/viewStockLevels.html:48
@@ -403,6 +415,10 @@ msgstr "Centre de distribution"
 msgid "Due to Expire By"
 msgstr "En raison d'expirer par"
 
+#: app/views/translations.html:42
+msgid "EXPIRED"
+msgstr "Expiré"
+
 #: app/views/inventory/fulfilOrder.html:33
 #: app/views/inventory/recordReturn.html:12
 #: app/views/inventory/viewOrder.html:8 app/views/inventory/viewReturn.html:8
@@ -460,6 +476,10 @@ msgstr "Le genre"
 #: app/views/inventory/manageOrders.html:163
 msgid "Hospital Ward No"
 msgstr "Hôpital Ward Non"
+
+#: app/views/translations.html:43
+msgid "ISSUED"
+msgstr "Envoyé"
 
 #: app/views/inventory/viewStockLevels.html:29
 msgid "In Stock"
@@ -615,6 +635,10 @@ msgstr "Résultat"
 msgid "PDF"
 msgstr "PDF"
 
+#: app/views/translations.html:47
+msgid "PROCESSED"
+msgstr "Traité"
+
 #: app/scripts/controllers/inventory/findInventory.js:146
 #: app/scripts/controllers/inventory/findTransfusion.js:149
 #: app/scripts/controllers/inventory/viewOrder.js:178
@@ -672,9 +696,17 @@ msgstr "Imprimer la note de retour"
 msgid "Processed"
 msgstr "Traiité"
 
+#: app/views/translations.html:40
+msgid "QUARANTINED"
+msgstr "Mis en quarantaine"
+
 #: app/views/translations.html:28
 msgid "Quarantined"
 msgstr "Mis en quarantaine"
+
+#: app/views/translations.html:38
+msgid "RETURNED"
+msgstr "Retourné"
 
 #: app/views/inventory/recordReturn.html:4
 msgid "Record Return"
@@ -804,6 +836,10 @@ msgstr "La date de début doit être avant la date de fin"
 msgid "Status"
 msgstr "Statut"
 
+#: app/views/translations.html:44
+msgid "TRANSFUSED"
+msgstr "Transfusé"
+
 #: app/messages.html:19
 msgid ""
 "There is no component in ISSUED state for specified din and component code"
@@ -910,6 +946,10 @@ msgstr "Type de réaction de transfusion"
 msgid "Transfusion Site"
 msgstr "Site de transfusion"
 
+#: app/views/translations.html:45
+msgid "UNSAFE"
+msgstr "Peu sûr"
+
 #: app/views/inventory/fulfilOrder.html:172
 msgid "Units"
 msgstr "Unités"
@@ -996,25 +1036,9 @@ msgstr "femme"
 msgid "male"
 msgstr "homme"
 
-#: app/views/inventory/manageReturns.html:63
-msgid "{{addingReturnForm ? 'Adding...' : 'Add'}}"
-msgstr ""
-
-#: app/views/inventory/viewReturn.html:13
-msgid "{{deleting ? 'Voiding...' : 'Void'}}"
-msgstr ""
-
 #: app/views/inventory/discardComponentsModal.html:25
 msgid "{{discardingComponent ? \"Discarding...\" : \"Discard Components\"}}"
 msgstr "{{discardingComponent ? \"Déposer...\" : \"Déposer des composants\"}}"
-
-#: app/views/inventory/recordReturn.html:81
-msgid "{{savingForm ? 'Saving...' : 'Save'}}"
-msgstr ""
-
-#: app/views/inventory/recordReturn.html:31
-msgid "{{savingReturnDetails ? 'Saving...' : 'Save'}}"
-msgstr "{{savingReturnDetails ? 'La sauvegarde...' : 'Sauvegarder'}}"
 
 #: app/views/inventory/viewStockLevels.html:38
 msgid ""
@@ -1024,10 +1048,11 @@ msgstr ""
 "{{searching? \"Recherche ...\":\n"
 "          \"Voir les niveaux de stock\"}}"
 
-#: app/views/inventory/findInventory.html:92
-#: app/views/inventory/viewReturns.html:66
-msgid "{{searching ? \"Searching...\" : \"Search\"}}"
-msgstr "{{searching? \"Recherche ...\": \"Rechercher\"}}"
+#~ msgid "{{savingReturnDetails ? 'Saving...' : 'Save'}}"
+#~ msgstr "{{savingReturnDetails ? 'La sauvegarde...' : 'Sauvegarder'}}"
+
+#~ msgid "{{searching ? \"Searching...\" : \"Search\"}}"
+#~ msgstr "{{searching? \"Recherche ...\": \"Rechercher\"}}"
 
 #~ msgid "{{savingForm ? 'Saving...' : 'Save Return' | translate}}"
 #~ msgstr ""
