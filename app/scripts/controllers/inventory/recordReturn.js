@@ -48,7 +48,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     },
     {
       name: 'createdOn',
-      displayName: gettextCatalog.getString('Create On'),
+      displayName: gettextCatalog.getString('Created On'),
       field: 'createdOn',
       cellFilter: 'bsisDate',
       width: '**',
