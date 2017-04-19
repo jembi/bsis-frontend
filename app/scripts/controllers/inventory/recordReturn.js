@@ -42,6 +42,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       name: 'status',
       displayName: gettextCatalog.getString('Status'),
       field: 'status',
+      cellFilter: 'titleCase | translate',
       width: '**',
       maxWidth: '150'
     },
