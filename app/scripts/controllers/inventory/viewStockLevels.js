@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ViewStockLevelsCtrl', function($scope, $location, $filter, $log, ReportsService, gettext, gettextCatalog) {
+  .controller('ViewStockLevelsCtrl', function($scope, $location, $filter, $log, ReportsService, gettextCatalog) {
 
     $scope.distributionCenters = null;
 
