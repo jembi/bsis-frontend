@@ -56,7 +56,7 @@ angular.module('bsis')
       if (!searchedParams.distributionCenter) {
         prefix.push(
           {
-            text: 'All Sites',
+            text: gettextCatalog.getString('All Sites'),
             fontSize: 8,
             bold: true
           }
@@ -67,7 +67,7 @@ angular.module('bsis')
         });
         prefix.push(
           {
-            text: 'Distribution Center: ',
+            text: gettextCatalog.getString('Distribution Center') + ': ',
             fontSize: 8,
             bold: true
           }, {
@@ -83,7 +83,7 @@ angular.module('bsis')
     function exportPDFHeader() {
       return [
         {
-          text: 'Stock Levels: ' + (isInStockSearch() ? 'In Stock' : 'Not Labelled'),
+          text: gettextCatalog.getString('Stock Levels') + ': ' + (isInStockSearch() ? gettextCatalog.getString('In Stock') : gettextCatalog.getString('Not Labelled')),
           fontSize: 10,
           bold: true,
           margin: [30, 20, 0, 0]
@@ -93,8 +93,8 @@ angular.module('bsis')
 
     function exportPDFFooter(gridOptions, currentPage, pageCount) {
       var columns = [
-        {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-        {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+        {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+        {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
       ];
       return {
         columns: columns,
