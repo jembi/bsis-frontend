@@ -136,25 +136,6 @@ angular.module('bsis')
       }
     ]
   })
-  .constant('PACKTYPE', {
-    'packtypes': [
-      {
-        'id': 1,
-        'name': 'Single',
-        'isDeleted': false
-      },
-      {
-        'id': 2,
-        'name': 'Triple',
-        'isDeleted': false
-      },
-      {
-        'id': 3,
-        'name': 'Quad',
-        'isDeleted': false
-      }
-    ]
-  })
   .constant('DATATYPES', {
     options: [
       {

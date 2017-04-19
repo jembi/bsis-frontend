@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, $q, $filter, $routeParams, ICONS, PACKTYPE, DATEFORMAT, DONATION, PERMISSIONS) {
+  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, $q, $filter, $routeParams, ICONS, DATEFORMAT, DONATION, PERMISSIONS) {
 
     $scope.icons = ICONS;
-    $scope.packTypes = PACKTYPE.packtypes;
     $scope.dateFormat = DATEFORMAT;
 
     $scope.bpUnit = DONATION.BPUNIT;
