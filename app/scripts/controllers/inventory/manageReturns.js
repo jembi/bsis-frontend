@@ -4,14 +4,10 @@ angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $locatio
 
   $scope.dateFormat = DATEFORMAT;
 
-  var returnDateTitle = gettextCatalog.getString('Return Date');
-  var returnedFromTitle = gettextCatalog.getString('Returned From');
-  var returnedToTitle = gettextCatalog.getString('Returned To');
-
   var columnDefs = [
     {
       name: 'Return Date',
-      displayName: returnDateTitle,
+      displayName: gettextCatalog.getString('Return Date'),
       field: 'returnDate',
       cellFilter: 'bsisDate',
       width: '**',
@@ -20,13 +16,13 @@ angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $locatio
     },
     {
       name: 'Returned From',
-      displayName: returnedFromTitle,
+      displayName: gettextCatalog.getString('Returned From'),
       field: 'returnedFrom.name',
       width: '**'
     },
     {
       name: 'Returned To',
-      displayName: returnedToTitle,
+      displayName: gettextCatalog.getString('Returned To'),
       field: 'returnedTo.name',
       width: '**'
     }

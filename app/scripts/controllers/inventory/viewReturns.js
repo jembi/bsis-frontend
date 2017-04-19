@@ -11,15 +11,10 @@ angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location,
     returnedToId: null
   };
 
-  var returnDateTitle = gettextCatalog.getString('Return Date');
-  var returnStatusTitle = gettextCatalog.getString('Return Status');
-  var returnedFromTitle = gettextCatalog.getString('Returned From');
-  var returnedTOTitle = gettextCatalog.getString('Returned To');
-
   var columnDefs = [
     {
       name: 'Return Date',
-      displayName: returnDateTitle,
+      displayName: gettextCatalog.getString('Return Date'),
       field: 'returnDate',
       cellFilter: 'bsisDate',
       width: '**',
@@ -27,20 +22,21 @@ angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location,
     },
     {
       name: 'Return Status',
-      displayName: returnStatusTitle,
+      displayName: gettextCatalog.getString('Return Status'),
       field: 'status',
+      cellFilter: 'translate',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Returned From',
-      displayName: returnedFromTitle,
+      displayName: gettextCatalog.getString('Returned From'),
       field: 'returnedFrom.name',
       width: '**'
     },
     {
       name: 'Returned To',
-      displayName: returnedTOTitle,
+      displayName: gettextCatalog.getString('Returned To'),
       field: 'returnedTo.name',
       width: '**'
     }

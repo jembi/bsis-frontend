@@ -28,7 +28,7 @@
         required></select>
     </div>
     <div class="col-sm-3 text-right pad-t-10">
-      <button class="btn btn-primary" type="submit" ng-disabled="savingReturnDetails" translate>{{savingReturnDetails ? 'Saving...' : 'Save'}}</button>
+      <button class="btn btn-primary" type="submit" ng-disabled="savingReturnDetails">{{savingReturnDetails ? 'Saving...' : 'Save' | translate}}</button>
       <button class="btn btn-primary" type="reset" ng-disabled="savingReturnDetails" ng-click="clearDetailsForm($event);" translate>Cancel</button>
     </div>
   </form>
@@ -78,7 +78,7 @@
             <form class="form-horizontal" name="updateReturnForm" role="form" ng-submit="updateReturn();" novalidate>
               <div class="form-group">
                 <div class="col-sm-12">
-                  <button class="btn btn-primary" type="submit" ng-disabled="savingForm" translate>{{savingForm ? 'Saving...' : 'Save Return'}}</button>
+                  <button class="btn btn-primary" type="submit" ng-disabled="savingForm">{{savingForm ? 'Saving...' : 'Save' | translate}}</button>
                   <button class="btn btn-primary" type="button" ng-disabled="savingForm" ng-click="cancel();" translate>Cancel</button>
                 </div>
               </div>

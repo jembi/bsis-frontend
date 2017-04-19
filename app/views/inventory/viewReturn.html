@@ -10,7 +10,7 @@
     </span>
     <span style="margin-left: 20px; margin-top: -15px; float:right">
       <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="returnForm.permissions.canDelete">
-        <button class="btn btn-primary" ng-click="deleteReturn()" ng-disabled="deleting">{{deleting ? 'Voiding...' : 'Void'}}</button>
+        <button class="btn btn-primary" ng-click="deleteReturn()" ng-disabled="deleting">{{deleting ? 'Voiding...' : 'Void' | translate}}</button>
       </span>
       <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="returnForm.permissions.canReturn">
         <button class="btn btn-primary" ng-click="return()" translate>Return to Stock</button>

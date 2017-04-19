@@ -89,7 +89,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label"></label>
       <div class="col-sm-10">
-        <button class="btn btn-primary" type="submit" ng-disabled="searching" translate>{{searching ? "Searching..." : "Search"}}
+        <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search" | translate}}
         </button>
         <button class="btn btn-primary" type="button" ng-click="clearSearch(searchForm)" translate>Clear</button>
       </div>

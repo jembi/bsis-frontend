@@ -9,53 +9,45 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     componentCode: null
   };
 
-  var dinTitle = gettextCatalog.getString('DIN');
-  var componentCodeTitle = gettextCatalog.getString('Component Code');
-  var componentTypeTitle = gettextCatalog.getString('Component Type');
-  var bloodGroupTitle = gettextCatalog.getString('Blood Group');
-  var statusTitle = gettextCatalog.getString('Status');
-  var createdOnTitle = gettextCatalog.getString('Create On');
-  var expiryStatusTitle = gettextCatalog.getString('Expiry Status');
-
   var columnDefs = [
     {
       name: 'donationIdentificationNumber',
       field: 'donationIdentificationNumber',
-      displayName: dinTitle,
+      displayName: gettextCatalog.getString('DIN'),
       width: '**',
       maxWidth: '100'
     },
     {
       name: 'componentCode',
-      displayName: componentCodeTitle,
+      displayName: gettextCatalog.getString('Component Code'),
       field: 'componentCode',
       width: '**',
       maxWidth: '150'
     },
     {
       name: 'componentTypeName',
-      displayName: componentTypeTitle,
+      displayName: gettextCatalog.getString('Component Type'),
       field: 'componentTypeName',
       width: '**',
       minWidth: '200'
     },
     {
       name: 'bloodGroup',
-      displayName: bloodGroupTitle,
+      displayName: gettextCatalog.getString('Blood Group'),
       field: 'bloodGroup',
       width: '**',
       maxWidth: '125'
     },
     {
       name: 'status',
-      displayName: statusTitle,
+      displayName: gettextCatalog.getString('Status'),
       field: 'status',
       width: '**',
       maxWidth: '150'
     },
     {
       name: 'createdOn',
-      displayName: createdOnTitle,
+      displayName: gettextCatalog.getString('Create On'),
       field: 'createdOn',
       cellFilter: 'bsisDate',
       width: '**',
@@ -63,7 +55,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     },
     {
       name: 'expiryStatus',
-      displayName: expiryStatusTitle,
+      displayName: gettextCatalog.getString('Expiry Status'),
       field: 'expiryStatus',
       width: '**',
       maxWidth: '150',
@@ -111,8 +103,8 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       resolve: {
         errorObject: function() {
           return {
-            title: 'Invalid Component',
-            button: 'OK',
+            title: gettextCatalog.getString('Invalid Component'),
+            button: gettextCatalog.getString('OK'),
             errorMessage: errorMessage
           };
         }
@@ -197,8 +189,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     });
 
     if (components.length === $scope.components.length) {
-      showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-              ') was not found in this Return Form.');
+      showErrorMessage(gettextCatalog.getString('Component {{din}} ({{componentCode}}) was not found in this Return Form.', {din: $scope.component.din, componentCode: $scope.component.componentCode}));
     } else {
       $scope.components = components;
       $scope.component = angular.copy(componentMaster);
@@ -220,16 +211,14 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     ComponentService.findComponent(searchParams, function(component) {
       if (component.status !== 'ISSUED') {
         // check if component status is ISSUED
-        showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-            ') has not been issued.');
+        showErrorMessage(gettextCatalog.getString('Component {{din}} ({{componentCode}}) has not been issued.', {din: $scope.component.din, componentCode: $scope.component.componentCode}));
       } else {
         // check if component has already been added
         var componentAlreadyAdded = $scope.components.some(function(e) {
           return e.id === component.id;
         });
         if (componentAlreadyAdded) {
-          showErrorMessage('Component ' + $scope.component.din + ' (' + $scope.component.componentCode +
-            ') has already been added to this Return Form.');
+          showErrorMessage(gettextCatalog.getString('Component {{din}} ({{componentCode}}) has already been added to this Return Form.', {din: $scope.component.din, componentCode: $scope.component.componentCode}));
         } else {
           // add component to Return Form and reset the form
           $scope.components.push(component);
@@ -241,7 +230,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       $scope.addingComponent = false;
     }, function(err) {
       if (err.errorCode === 'NOT_FOUND') {
-        showErrorMessage('Component with DIN ' + $scope.component.din + ' and ComponentCode ' + $scope.component.componentCode + ' not found.');
+        showErrorMessage(gettextCatalog.getString('Component with DIN {{din}} and ComponentCode {{componentCode}} not found.', {din: $scope.component.din, componentCode: $scope.component.componentCode}));
       } else {
         $log.error(err);
       }
