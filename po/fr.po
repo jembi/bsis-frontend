@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: app/views/translations.html:13
@@ -94,6 +94,7 @@ msgstr "Banque du Sang"
 
 #: app/scripts/controllers/inventory/viewOrder.js:131
 #: app/views/inventory/fulfilOrder.html:13
+#: app/views/inventory/fulfilOrder.html:77
 #: app/views/inventory/manageOrders.html:134
 #: app/views/inventory/viewOrder.html:32
 msgid "Blood Bank No"
@@ -106,6 +107,7 @@ msgstr "N ° de Banque de Sang"
 #: app/scripts/controllers/inventory/viewOrder.js:151
 #: app/scripts/controllers/inventory/viewOrder.js:53
 #: app/scripts/controllers/inventory/viewReturn.js:30
+#: app/views/inventory/fulfilOrder.html:106
 #: app/views/inventory/fulfilOrder.html:159
 #: app/views/inventory/fulfilOrder.html:23
 #: app/views/inventory/manageOrders.html:154
@@ -259,7 +261,6 @@ msgstr ""
 msgid "Continue"
 msgstr "Continuer"
 
-#: app/scripts/controllers/inventory/recordReturn.js:51
 #: app/scripts/controllers/inventory/viewReturn.js:45
 msgid "Create On"
 msgstr "Date de création"
@@ -269,6 +270,7 @@ msgid "Created"
 msgstr "Créé"
 
 #: app/scripts/controllers/inventory/findInventory.js:34
+#: app/scripts/controllers/inventory/recordReturn.js:51
 msgid "Created On"
 msgstr "Date de création"
 
@@ -316,6 +318,7 @@ msgid "Date must be after component was created"
 msgstr "La date doit être après la création du composant"
 
 #: app/scripts/controllers/inventory/viewOrder.js:161
+#: app/views/inventory/fulfilOrder.html:118
 #: app/views/inventory/fulfilOrder.html:29
 #: app/views/inventory/manageOrders.html:114
 #: app/views/inventory/recordTransfusions.html:143
@@ -380,8 +383,10 @@ msgid "Dispatched"
 msgstr "Expédié"
 
 #: app/views/inventory/fulfilOrder.html:10
+#: app/views/inventory/fulfilOrder.html:64
 #: app/views/inventory/manageOrders.html:39
-#: app/views/inventory/viewOrder.html:28 app/views/inventory/viewOrders.html:46
+#: app/views/inventory/viewOrder.html:28
+#: app/views/inventory/viewOrders.html:46
 msgid "Dispatched From"
 msgstr "Expédié de"
 
@@ -389,8 +394,10 @@ msgstr "Expédié de"
 #: app/scripts/controllers/inventory/viewOrder.js:116
 #: app/scripts/controllers/inventory/viewOrders.js:19
 #: app/views/inventory/fulfilOrder.html:11
+#: app/views/inventory/fulfilOrder.html:70
 #: app/views/inventory/manageOrders.html:73
-#: app/views/inventory/viewOrder.html:29 app/views/inventory/viewOrders.html:73
+#: app/views/inventory/viewOrder.html:29
+#: app/views/inventory/viewOrders.html:73
 msgid "Dispatched To"
 msgstr "Distribué à"
 
@@ -432,7 +439,8 @@ msgstr "Statut d'Expiration"
 msgid "Female"
 msgstr "Femme"
 
-#: app/views/inventory/findInventory.html:3 app/views/inventory/sidebar.html:13
+#: app/views/inventory/findInventory.html:3
+#: app/views/inventory/sidebar.html:13
 msgid "Find Inventory"
 msgstr "Trouver un Inventaire"
 
@@ -451,6 +459,7 @@ msgid "Gap"
 msgstr "Écart"
 
 #: app/scripts/controllers/inventory/viewOrder.js:156
+#: app/views/inventory/fulfilOrder.html:112
 #: app/views/inventory/fulfilOrder.html:26
 #: app/views/inventory/manageOrders.html:145
 #: app/views/inventory/recordTransfusions.html:157
@@ -528,8 +537,8 @@ msgstr "Gestion de Commandes"
 msgid "Manage Return"
 msgstr "Gestion de Retour"
 
-#: app/views/inventory/manageReturns.html:3 app/views/inventory/sidebar.html:19
-#: app/views/inventory/viewReturns.html:3
+#: app/views/inventory/manageReturns.html:3
+#: app/views/inventory/sidebar.html:19 app/views/inventory/viewReturns.html:3
 msgid "Manage Returns"
 msgstr "Gestion de Retours"
 
@@ -582,6 +591,10 @@ msgstr "Non Transfusé"
 msgid "Not in Stock"
 msgstr "Pas en Stock"
 
+#: app/views/inventory/recordTransfusions.html:84
+msgid "Notes"
+msgstr "Notes"
+
 #: app/scripts/controllers/inventory/findInventory.js:144
 #: app/scripts/controllers/inventory/viewOrder.js:176
 #: app/scripts/controllers/inventory/viewReturn.js:125
@@ -596,6 +609,7 @@ msgstr "OK"
 #: app/scripts/controllers/inventory/manageOrders.js:118
 #: app/scripts/controllers/inventory/viewOrder.js:106
 #: app/scripts/controllers/inventory/viewOrders.js:15
+#: app/views/inventory/fulfilOrder.html:40
 #: app/views/inventory/fulfilOrder.html:8
 #: app/views/inventory/manageOrders.html:29
 #: app/views/inventory/viewOrder.html:27
@@ -607,6 +621,7 @@ msgid "Order Status"
 msgstr "Status de la Commande"
 
 #: app/scripts/controllers/inventory/viewOrder.js:121
+#: app/views/inventory/fulfilOrder.html:51
 #: app/views/inventory/viewOrder.html:30
 msgid "Order Type"
 msgstr "Type de Commande"
@@ -635,12 +650,14 @@ msgstr "Informations sur Patient"
 
 #: app/scripts/controllers/inventory/viewOrder.js:146
 #: app/views/inventory/fulfilOrder.html:22
+#: app/views/inventory/fulfilOrder.html:91
 #: app/views/inventory/recordTransfusions.html:103
 #: app/views/inventory/viewOrder.html:41
 msgid "Patient Name"
 msgstr "Nom du Patient"
 
 #: app/views/inventory/fulfilOrder.html:19
+#: app/views/inventory/fulfilOrder.html:87
 #: app/views/inventory/manageOrders.html:127
 #: app/views/inventory/recordTransfusions.html:122
 #: app/views/inventory/viewOrder.html:38
@@ -998,6 +1015,7 @@ msgstr "Suppression en cours..."
 
 #: app/scripts/controllers/inventory/viewOrder.js:136
 #: app/views/inventory/fulfilOrder.html:16
+#: app/views/inventory/fulfilOrder.html:82
 #: app/views/inventory/recordTransfusions.html:136
 #: app/views/inventory/viewOrder.html:35
 msgid "Ward No"
