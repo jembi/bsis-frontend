@@ -41,7 +41,7 @@
         <div class="input-group" style="width:150px;">
           <dateselect name="orderDate" ng-model="orderDetailsForm.orderDate" format="format" ng-required="true"></dateselect>
           <ng-messages for="forms.orderDetailsForm.orderDate.$error" role="alert" ng-show="forms.orderDetailsForm.$submitted">
-            <small class="error" ng-message="required">Select a valid date</small>
+            <small class="error" ng-message="required"><span translate>Select a valid date</span></small>
             <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
         </div>
