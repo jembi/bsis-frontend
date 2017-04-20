@@ -1,22 +1,22 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/inventory/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-  <span class="h3 page-header">Manage Order</span>
+  <span class="h3 page-header" translate>Manage Order</span>
 
   <span class="h4" style="float:right; margin-top: 5px; padding-right: 15px; display:inline;">
     <span has-permission="{{permissions.EDIT_ORDER_FORM}}" ng-if="orderForm.permissions.canEdit">
       <em>
-        <button class="btn btn-link" ng-click="edit()">Edit</button>
+        <button class="btn btn-link" ng-click="edit()" translate>Edit</button>
       </em>
     </span>
     <span style="margin-left: 20px; margin-top: -15px; float:right">
       <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.permissions.canDelete">
-        <button class="btn btn-primary" ng-click="deleteOrder()" ng-disabled="deleting">{{deleting ? 'Voiding...' : 'Void'}}</button>
+        <button class="btn btn-primary" ng-click="deleteOrder()" ng-disabled="deleting">{{deleting ? 'Voiding...' : 'Void' | translate}}</button>
       </span>
       <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.permissions.canDispatch">
-        <button class="btn btn-primary" ng-click="dispatch()">Dispatch Order</button>
+        <button class="btn btn-primary" ng-click="dispatch()" translate>Dispatch Order</button>
       </span>
       <span has-permission="{{permissions.ISSUE_COMPONENT}}" ng-if="orderForm.status === 'DISPATCHED'">
-        <button class="btn btn-primary" ng-click="exportDispatchNote()">Print Dispatch Note</button>
+        <button class="btn btn-primary" ng-click="exportDispatchNote()" translate>Print Dispatch Note</button>
       </span>
     </span>
   </span>
@@ -24,29 +24,29 @@
   <hr style="clear:right;"/>
   
   <section>
-    <span class="text-muted">Order Date:</span> {{orderForm.orderDate | bsisDate}}
-    <span class="text-muted">Dispatched From:</span> {{orderForm.dispatchedFrom.name}}
-    <span class="text-muted">Dispatched To:</span> {{orderForm.dispatchedTo.name}}
-    <span class="text-muted">Order Type:</span> {{orderForm.type |  titleCase}}
+    <span class="text-muted" translate>Order Date</span> {{orderForm.orderDate | bsisDate}}
+    <span class="text-muted" translate>Dispatched From</span> {{orderForm.dispatchedFrom.name}}
+    <span class="text-muted" translate>Dispatched To</span> {{orderForm.dispatchedTo.name}}
+    <span class="text-muted" translate>Order Type</span> {{orderForm.type |  titleCase | translate}}
     <div ng-show="orderFormHasPatient">
-      <span class="text-muted">Blood Bank No:</span>
-      <span ng-hide="!isFieldEmpty(orderForm.patient.hospitalBloodBankNumber)"> Not Specified</span>
+      <span class="text-muted" translate>Blood Bank No</span>
+      <span ng-hide="!isFieldEmpty(orderForm.patient.hospitalBloodBankNumber)" translate> Not Specified</span>
       <span ng-hide="isFieldEmpty(orderForm.patient.hospitalBloodBankNumber)"> {{orderForm.patient.hospitalBloodBankNumber}}</span>
-      <span class="text-muted">Ward No:</span>
-      <span ng-hide="!isFieldEmpty(orderForm.patient.hospitalWardNumber)"> Not Specified</span>
+      <span class="text-muted" translate>Ward No</span>
+      <span ng-hide="!isFieldEmpty(orderForm.patient.hospitalWardNumber)" translate> Not Specified</span>
       <span ng-hide="isFieldEmpty(orderForm.patient.hospitalWardNumber)"> {{orderForm.patient.hospitalWardNumber}}</span>
-      <span class="text-muted">Patient No:</span>
-      <span ng-hide="!isFieldEmpty(orderForm.patient.patientNumber)"> Not Specified</span>
+      <span class="text-muted" translate>Patient No</span>
+      <span ng-hide="!isFieldEmpty(orderForm.patient.patientNumber)" translate> Not Specified</span>
       <span ng-hide="isFieldEmpty(orderForm.patient.patientNumber)"> {{orderForm.patient.patientNumber}}</span>
-      <span class="text-muted">Patient Name:</span> {{orderForm.patient.name1}} {{orderForm.patient.name2}}<br/>
-      <span class="text-muted">Blood Group:</span>
-      <span ng-hide="!isFieldEmpty(orderForm.patient.bloodGroup)"> Not Specified</span>
+      <span class="text-muted" translate>Patient Name</span> {{orderForm.patient.name1}} {{orderForm.patient.name2}}<br/>
+      <span class="text-muted" translate>Blood Group</span>
+      <span ng-hide="!isFieldEmpty(orderForm.patient.bloodGroup)" translate> Not Specified</span>
       <span ng-hide="isFieldEmpty(orderForm.patient.bloodGroup)"> {{orderForm.patient.bloodGroup}}</span>
-      <span class="text-muted">Gender:</span>
-      <span ng-hide="!isFieldEmpty(orderForm.patient.gender)"> Not Specified</span>
-      <span ng-hide="isFieldEmpty(orderForm.patient.gender)"> {{orderForm.patient.gender}}</span>
-      <span class="text-muted">Date of Birth:</span>
-      <span ng-hide="!isFieldEmpty(orderForm.patient.dateOfBirth)"> Not Specified</span>
+      <span class="text-muted" translate>Gender</span>
+      <span ng-hide="!isFieldEmpty(orderForm.patient.gender)" translate> Not Specified</span>
+      <span ng-hide="isFieldEmpty(orderForm.patient.gender)"> {{orderForm.patient.gender | translate}}</span>
+      <span class="text-muted" translate>Date of Birth</span>
+      <span ng-hide="!isFieldEmpty(orderForm.patient.dateOfBirth)" translate> Not Specified</span>
       <span ng-hide="isFieldEmpty(orderForm.patient.dateOfBirth)"> {{orderForm.patient.dateOfBirth | bsisDate}}</span>
     </div>
   </section>
@@ -56,13 +56,13 @@
   <div class="panel panel-default">
     <div class="panel-body">
 
-      <h4>Units Ordered</h4>
+      <h4 translate>Units Ordered</h4>
 
       <div class="col-sm-12">
         <div id="unitsOrderedGrid" class="grid" ui-grid="unitsOrderedGridOptions" ui-grid-pagination></div>
       </div>
 
-      <h4>Units Supplied</h4>
+      <h4 translate>Units Supplied</h4>
 
       <div class="col-sm-12">
         <div id="unitsSuppliedGrid" class="grid" ui-grid="unitsSuppliedGridOptions" ui-grid-exporter ui-grid-pagination></div>

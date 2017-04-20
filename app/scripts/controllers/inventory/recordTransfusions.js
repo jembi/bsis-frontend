@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $location, $log, $timeout, $routeParams, TransfusionService, BLOODGROUP, GENDER, ModalsService, DATEFORMAT) {
+angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $location, $log, $timeout, $routeParams, TransfusionService, ModalsService, gettextCatalog, BLOODGROUP, GENDER, DATEFORMAT) {
 
   $scope.submitted = false;
   $scope.componentTypes = null;
@@ -175,9 +175,9 @@ angular.module('bsis').controller('RecordTransfusionsCtrl', function($scope, $lo
 
   $scope.voidTransfusion = function() {
     var voidTransfusionConfirmation = {
-      title: 'Void Tranfusion',
-      button: 'Void',
-      message: 'Are you sure that you want to void this Tranfusion?'
+      title: gettextCatalog.getString('Void Tranfusion'),
+      button: gettextCatalog.getString('Void'),
+      message: gettextCatalog.getString('Are you sure that you want to void this Tranfusion?')
     };
 
     ModalsService.showConfirmation(voidTransfusionConfirmation).then(function() {

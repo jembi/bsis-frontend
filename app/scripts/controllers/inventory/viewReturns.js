@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location, $log, ReturnFormsService, DATEFORMAT) {
+angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location, $log, ReturnFormsService, DATEFORMAT, gettextCatalog) {
 
   $scope.dateFormat = DATEFORMAT;
 
@@ -14,6 +14,7 @@ angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location,
   var columnDefs = [
     {
       name: 'Return Date',
+      displayName: gettextCatalog.getString('Return Date'),
       field: 'returnDate',
       cellFilter: 'bsisDate',
       width: '**',
@@ -21,17 +22,21 @@ angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location,
     },
     {
       name: 'Return Status',
+      displayName: gettextCatalog.getString('Return Status'),
       field: 'status',
+      cellFilter: 'titleCase | translate',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Returned From',
+      displayName: gettextCatalog.getString('Returned From'),
       field: 'returnedFrom.name',
       width: '**'
     },
     {
       name: 'Returned To',
+      displayName: gettextCatalog.getString('Returned To'),
       field: 'returnedTo.name',
       width: '**'
     }

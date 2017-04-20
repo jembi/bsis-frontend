@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, $log, OrderFormsService, DATEFORMAT) {
+angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, $log, OrderFormsService, DATEFORMAT, gettextCatalog) {
 
   $scope.dateFormat = DATEFORMAT;
 
@@ -12,9 +12,16 @@ angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, 
     dispatchedToId: null
   };
 
+  var orderDateTitle = gettextCatalog.getString('Order Date');
+  var orderStatusTitle = gettextCatalog.getString('Order Status');
+  var dispatchTypeTitle = gettextCatalog.getString('Dispatch Type');
+  var dispatchFromTitle = gettextCatalog.getString('Dispatch From');
+  var dispatchToTitle = gettextCatalog.getString('Dispatched To');
+
   var columnDefs = [
     {
       name: 'Order Date',
+      displayName: orderDateTitle,
       field: 'orderDate',
       cellFilter: 'bsisDate',
       width: '**',
@@ -22,23 +29,27 @@ angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, 
     },
     {
       name: 'Order Status',
+      displayName: orderStatusTitle,
       field: 'status',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Dispatch Type',
+      displayName: dispatchTypeTitle,
       field: 'type',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Dispatched From',
+      displayName: dispatchFromTitle,
       field: 'dispatchedFrom.name',
       width: '**'
     },
     {
       name: 'Dispatched To',
+      displayName: dispatchToTitle,
       field: 'dispatchedTo.name',
       width: '**'
     }
