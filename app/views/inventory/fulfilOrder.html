@@ -6,7 +6,7 @@
 
   <section class="clearfix" ng-hide="editingOrderDetails">
     <span class="text-muted" translate>Order Date</span> {{orderForm.orderDate | bsisDate}}
-    <span class="text-muted">Order Type</span> {{orderForm.type | titleCase | translate}}
+    <span class="text-muted" translate>Order Type</span> {{orderForm.type | titleCase | translate}}
     <span class="text-muted" translate>Dispatched From</span> {{orderForm.dispatchedFrom.name}}
     <span class="text-muted" translate>Dispatched To</span> {{orderForm.dispatchedTo.name}}
     <span ng-hide="orderForm.type !== 'PATIENT_REQUEST'"><br/>
