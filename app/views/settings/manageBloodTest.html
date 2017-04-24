@@ -172,6 +172,20 @@
           </div>
         </div>
 
+        <div class="row form-group col-sm-12">
+          <label for="rankInCategory" class="col-sm-2 control-label">Rank in Category</label>
+          <div class="col-sm-10">
+            <div class="form-inline">
+              <input class="form-control input-sm" style="width:auto;min-width:350px;" type="number" name="rankInCategory" ng-model="bloodTest.rankInCategory" ng-min="1">
+            </div>
+            <div>
+              <ng-messages for="bloodTestForm.rankInCategory.$error">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
+            </div>
+          </div>
+        </div>
+
         <!-- Flags -->
 
         <div class="row form-group col-sm-12">
