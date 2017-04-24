@@ -6,7 +6,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
   $scope.searchResults = null;
   $scope.search = {
     donationIdentificationNumber: angular.isDefined($routeParams.donationIdentificationNumber) ? $routeParams.donationIdentificationNumber : null,
-    componentType: angular.isDefined($routeParams.componentType) ? +$routeParams.componentType : null
+    componentType: angular.isDefined($routeParams.componentType) ? $routeParams.componentType : null
   };
   $scope.componentTypes = [];
   $scope.verificationParams = {
