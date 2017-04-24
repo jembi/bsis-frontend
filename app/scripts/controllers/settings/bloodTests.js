@@ -24,7 +24,7 @@ angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, ICONS
       displayName: 'Rank in Category',
       field: 'rankInCategory',
       width: '**',
-      maxWidth: '200'
+      maxWidth: '140'
     },
     {
       name: 'BloodTestType',
