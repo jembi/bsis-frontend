@@ -55,7 +55,7 @@
         <div class="form-inline col-sm-10">
             <div>
                 <dateselect name="startDate" ng-model="searchParams.startDate" format="dateFormat" ng-class="{'has-error' : (searchForm.startDate.$invalid)}" ng-required="!searchParams.donationIdentificationNumber" ui-date-range="1,months" ui-date-end="{{searchParams.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ng-disabled="searchParams.donationIdentificationNumber"></dateselect>
-                <span><em>To</em></span>
+                <span><em translate>To</em></span>
                 <dateselect-end name="endDate" ng-model="searchParams.endDate" format="dateFormat" ng-class="{'has-error' : (searchForm.endDate.$invalid)}" ng-required="!searchParams.donationIdentificationNumber" ui-date-range="1,months" ui-date-start="{{searchParams.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" min-date="search.startDate" ng-disabled="searchParams.donationIdentificationNumber"></dateselect-end>
             </div>
             <div>
