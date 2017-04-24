@@ -41,8 +41,10 @@ angular.module('bsis')
         $scope.discardsSearch.donationDateTo = null;
       } else {
         $scope.dinSearch = false;
-        $scope.discardsSearch.donationDateFrom = moment().subtract(7, 'days').startOf('day').toDate();
-        $scope.discardsSearch.donationDateTo = moment().endOf('day').toDate();
+        if ($scope.discardsSearch.donationDateFrom == null || $scope.discardsSearch.donationDateTo == null) {
+          $scope.discardsSearch.donationDateFrom = moment().subtract(7, 'days').startOf('day').toDate();
+          $scope.discardsSearch.donationDateTo = moment().endOf('day').toDate();
+        }
       }
     };
 
