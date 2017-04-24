@@ -93,7 +93,11 @@ angular.module('bsis')
           $scope.discardsSearch.donationDateTo = donationDateTo;
         }
         if ($routeParams.componentTypes) {
-          $scope.discardsSearch.componentTypes = $routeParams.componentTypes;
+          var componentTypes = $routeParams.componentTypes;
+          if (!angular.isArray(componentTypes)) {
+            componentTypes = [componentTypes];
+          }
+          $scope.discardsSearch.componentTypes = componentTypes;
         }
 
         $scope.updateDinSearch();
