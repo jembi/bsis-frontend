@@ -20,6 +20,13 @@ angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, ICONS
       maxWidth: '200'
     },
     {
+      name: 'Rank in Category',
+      displayName: 'Rank in Category',
+      field: 'rankInCategory',
+      width: '**',
+      maxWidth: '200'
+    },
+    {
       name: 'BloodTestType',
       displayName: 'Blood Test Type',
       field: 'bloodTestType',
