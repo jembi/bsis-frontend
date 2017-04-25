@@ -42,7 +42,7 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     {
       name: 'createdOn',
       field: 'createdOn',
-      displayName: gettextCatalog.getString('Create On'),
+      displayName: gettextCatalog.getString('Created On'),
       cellFilter: 'bsisDate',
       width: '**',
       maxWidth: '100'
@@ -98,17 +98,17 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
       var prefix = [];
       prefix.push(
         {
-          text: gettextCatalog.getString('Return Date:') + ' ',
+          text: gettextCatalog.getString('Return Date') + ': ',
           bold: true
         }, {
           text: $filter('bsisDate')($scope.returnForm.returnDate)
         }, {
-          text: ' ' + gettextCatalog.getString('Return From:') + ' ',
+          text: ' ' + gettextCatalog.getString('Returned From') + ': ',
           bold: true
         }, {
           text: $scope.returnForm.returnedFrom.name
         }, {
-          text: ' ' + gettextCatalog.getString('Returned To:') + ' ',
+          text: ' ' + gettextCatalog.getString('Returned To') + ': ',
           bold: true
         }, {
           text: $scope.returnForm.returnedTo.name
@@ -224,8 +224,8 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
 
   $scope.return = function() {
     var returnConfirmation = {
-      title: gettextCatalog.getString('Return To Stock'),
-      button: gettextCatalog.getString('Return To Stock'),
+      title: gettextCatalog.getString('Return to Stock'),
+      button: gettextCatalog.getString('Return to Stock'),
       message: gettextCatalog.getString('Are you sure you want to return all units into inventory?')
     };
 

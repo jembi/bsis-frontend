@@ -261,16 +261,13 @@ msgstr ""
 msgid "Continue"
 msgstr "Continuer"
 
-#: app/scripts/controllers/inventory/viewReturn.js:45
-msgid "Create On"
-msgstr "Date de création"
-
 #: app/views/translations.html:23 app/views/translations.html:39
 msgid "Created"
 msgstr "Créé"
 
 #: app/scripts/controllers/inventory/findInventory.js:34
 #: app/scripts/controllers/inventory/recordReturn.js:51
+#: app/scripts/controllers/inventory/viewReturn.js:45
 msgid "Created On"
 msgstr "Date de création"
 
@@ -724,6 +721,7 @@ msgid "Remove Pack"
 msgstr "Supprimer une Poche de Sang"
 
 #: app/scripts/controllers/inventory/manageReturns.js:10
+#: app/scripts/controllers/inventory/viewReturn.js:101
 #: app/scripts/controllers/inventory/viewReturns.js:17
 #: app/views/inventory/manageReturns.html:29
 #: app/views/inventory/recordReturn.html:17
@@ -731,14 +729,6 @@ msgstr "Supprimer une Poche de Sang"
 #: app/views/inventory/viewReturn.html:30
 msgid "Return Date"
 msgstr "Date de Retour"
-
-#: app/scripts/controllers/inventory/viewReturn.js:101
-msgid "Return Date:"
-msgstr "Date de Retour:"
-
-#: app/scripts/controllers/inventory/viewReturn.js:106
-msgid "Return From:"
-msgstr "Retourné de:"
 
 #: app/scripts/controllers/inventory/viewReturn.js:86
 msgid "Return Note"
@@ -750,9 +740,6 @@ msgstr "Statut du Retour"
 
 #: app/scripts/controllers/inventory/viewReturn.js:227
 #: app/scripts/controllers/inventory/viewReturn.js:228
-msgid "Return To Stock"
-msgstr "Retourner au Stock"
-
 #: app/views/inventory/viewReturn.html:16
 msgid "Return to Stock"
 msgstr "Retourner au Stock"
@@ -762,6 +749,7 @@ msgid "Returned"
 msgstr "Retourné"
 
 #: app/scripts/controllers/inventory/manageReturns.js:19
+#: app/scripts/controllers/inventory/viewReturn.js:106
 #: app/scripts/controllers/inventory/viewReturns.js:33
 #: app/views/inventory/manageReturns.html:39
 #: app/views/inventory/recordReturn.html:10
@@ -772,6 +760,7 @@ msgid "Returned From"
 msgstr "Retourné de"
 
 #: app/scripts/controllers/inventory/manageReturns.js:25
+#: app/scripts/controllers/inventory/viewReturn.js:111
 #: app/scripts/controllers/inventory/viewReturns.js:39
 #: app/views/inventory/manageReturns.html:51
 #: app/views/inventory/recordReturn.html:11
@@ -780,10 +769,6 @@ msgstr "Retourné de"
 #: app/views/inventory/viewReturns.html:55
 msgid "Returned To"
 msgstr "Retourné à"
-
-#: app/scripts/controllers/inventory/viewReturn.js:111
-msgid "Returned To:"
-msgstr "Retourné à:"
 
 #: app/views/translations.html:11
 msgid "Save"
@@ -929,13 +914,10 @@ msgid "Transfusion Notes"
 msgstr "Notes de Transfusion"
 
 #: app/scripts/controllers/inventory/findTransfusion.js:136
-msgid "Transfusion Outcome"
-msgstr "Resultat de la Transfusion"
-
 #: app/views/inventory/findTransfusion.html:45
 #: app/views/inventory/recordTransfusions.html:59
-msgid "Transfusion Outcomes"
-msgstr "Résultats des Transfusions"
+msgid "Transfusion Outcome"
+msgstr "Resultat de la Transfusion"
 
 #: app/views/translations.html:19
 msgid "Transfusion Reaction Occurred"
@@ -1038,6 +1020,25 @@ msgstr "femme"
 #: app/views/translations.html:3
 msgid "male"
 msgstr "homme"
+
+#, fuzzy
+#~ msgid "Return From"
+#~ msgstr "Retourné de:"
+
+#~ msgid "Create On"
+#~ msgstr "Date de création"
+
+#~ msgid "Return Date:"
+#~ msgstr "Date de Retour:"
+
+#~ msgid "Return To Stock"
+#~ msgstr "Retourner au Stock"
+
+#~ msgid "Returned To:"
+#~ msgstr "Retourné à:"
+
+#~ msgid "Transfusion Outcomes"
+#~ msgstr "Résultats des Transfusions"
 
 #~ msgid "{{discardingComponent ? \"Discarding...\" : \"Discard Components\"}}"
 #~ msgstr ""
