@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('ViewTestBatchCtrl', function($scope, $location, $log, TestingService, $filter, $timeout, $routeParams, $q, $route, uiGridConstants, ModalsService, DATEFORMAT) {
+  .controller('ViewTestBatchCtrl', function($scope, $location, $log, $filter, $timeout, $routeParams, $q, $route, uiGridConstants, gettextCatalog, TestingService, ModalsService, DATEFORMAT) {
 
     var data = [{}];
     $scope.data = data;
@@ -13,24 +13,24 @@ angular.module('bsis')
     $scope.exportOptions = [
       {
         id: 'allSamples',
-        value: 'All Samples',
-        reportName: 'Test Batch Outcomes Summary Report',
+        value: gettextCatalog.getString('All Samples'),
+        reportName: gettextCatalog.getString('Test Batch Outcomes Summary Report'),
         filterKeys: [],
         columns: ['ttistatus', 'bloodTypingStatus', 'bloodTypingMatchStatus'],
         matchType: true
       },
       {
         id: 'ttiUnsafeSample',
-        value: 'TTI Unsafe or Incomplete',
-        reportName: 'Test Batch Outcomes Summary Report - TTI Unsafe and Tests Outstanding',
+        value: gettextCatalog.getString('TTI Unsafe or Incomplete'),
+        reportName: gettextCatalog.getString('Test Batch Outcomes Summary Report - TTI Unsafe and Tests Outstanding'),
         filterKeys: ['TTI_SAFE'],
         columns: ['ttistatus'],
         matchType: false
       },
       {
         id: 'testingIncompleteSamples',
-        value: 'Blood Typing Issues or Incomplete',
-        reportName: 'Test Batch Outcomes Summary Report - Blood Typing Issues and Tests Outstanding',
+        value: gettextCatalog.getString('Blood Typing Issues or Incomplete'),
+        reportName: gettextCatalog.getString('Test Batch Outcomes Summary Report - Blood Typing Issues and Tests Outstanding'),
         filterKeys: ['MATCH', 'RESOLVED'],
         columns: ['bloodTypingMatchStatus'],
         matchType: false
@@ -112,7 +112,7 @@ angular.module('bsis')
     var columnDefs = [
       {
         name: 'DIN',
-        displayName: 'DIN',
+        displayName: gettextCatalog.getString('DIN'),
         field: 'donationIdentificationNumber',
         visible: true,
         width: '**',
@@ -123,7 +123,7 @@ angular.module('bsis')
       },
       {
         name: 'Date Bled',
-        displayName: 'Date Bled',
+        displayName: gettextCatalog.getString('Date Bled'),
         field: 'donationDate',
         cellFilter: 'bsisDate',
         visible: true,
@@ -132,6 +132,7 @@ angular.module('bsis')
       },
       {
         name: 'Pack Type',
+        displayName: gettextCatalog.getString('Pack Type'),
         field: 'packType.packType',
         visible: true,
         width: '**',
@@ -139,40 +140,48 @@ angular.module('bsis')
       },
       {
         name: 'Venue',
-        displayName: 'Venue',
+        displayName: gettextCatalog.getString('Venue'),
         field: 'venue.name',
         visible: true,
         width: '**'
       },
       {
         name: 'Released',
-        displayName: 'Released',
+        displayName: gettextCatalog.getString('Released'),
         field: 'released',
-        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["released"] ? "Y" : "N"}}</div>',
+        cellTemplate: '<div class="ui-grid-cell-contents">' +
+          '{{row.entity["released"] ? "' + gettextCatalog.getString('Y') + '" : "' + gettextCatalog.getString('N') + '"}}' +
+          '</div>',
         visible: true,
         width: '**',
         maxWidth: '100'
       },
       {
         name: 'ttistatus',
-        displayName: 'TTI Status',
+        displayName: gettextCatalog.getString('TTI Status'),
         field: 'ttistatus',
-        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["ttistatus"].replace("TTI_", "") | titleCase }}</div>',
+        cellTemplate: '<div class="ui-grid-cell-contents">' +
+          '{{row.entity["ttistatus"].replace("TTI_", "") | titleCase | translate}}' +
+          '</div>',
         visible: true,
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'bloodTypingStatusBloodTypingMatchStatus',
-        displayName: 'Blood Group Serology',
+        displayName: gettextCatalog.getString('Blood Group Serology'),
         field: 'bloodTypingStatusBloodTypingMatchStatus',
-        cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity["bloodTypingStatus"] | titleCase }} - {{row.entity["bloodTypingMatchStatus"] | titleCase }} <em>({{row.entity["bloodRh"] === "" ? "" : row.entity["bloodAbo"]}}{{row.entity["bloodAbo"] === "" ? "" : row.entity["bloodRh"]}})</em></div>',
+        cellTemplate: '<div class="ui-grid-cell-contents">' +
+          '{{row.entity["bloodTypingStatus"] | titleCase | translate }} - ' +
+          '{{row.entity["bloodTypingMatchStatus"] | titleCase | translate }} ' +
+          '<em>({{row.entity["bloodRh"] === "" ? "" : row.entity["bloodAbo"]}}{{row.entity["bloodAbo"] === "" ? "" : row.entity["bloodRh"]}})</em>' +
+          '</div>',
         visible: true,
         width: '**'
       },
       {
         name: 'previousDonationAboRhOutcome',
-        displayName: 'Previous ABO/Rh',
+        displayName: gettextCatalog.getString('Previous ABO/Rh'),
         field: 'previousDonationAboRhOutcome',
         visible: false,
         width: '100'
@@ -198,11 +207,11 @@ angular.module('bsis')
           return $filter('bsisDate')(value);
         } else if (col.name === 'ttistatus') {
           value = value.replace('TTI_', '');
-          return $filter('titleCase')(value);
+          return gettextCatalog.getString($filter('titleCase')(value));
         } else if (col.name === 'bloodAboRh') {
           var bloodSerology = '';
           if (row.entity.bloodTypingStatus !== 'NOT_DONE') {
-            bloodSerology = row.entity.bloodTypingMatchStatus;
+            bloodSerology = gettextCatalog.getString($filter('titleCase')(row.entity.bloodTypingMatchStatus));
           }
           return bloodSerology;
         } else if (col.name === 'previousDonationAboRhOutcome') {
@@ -212,13 +221,14 @@ angular.module('bsis')
             return row.entity.previousDonationAboRhOutcome;
           }
         } else if (col.name === 'bloodTypingStatusBloodTypingMatchStatus') {
-          value = row.entity.bloodTypingStatus + ' - ' +  row.entity.bloodTypingMatchStatus;
           var bloodGroup = (row.entity.bloodRh === '' ? '' : row.entity.bloodAbo) + (row.entity.bloodAbo === '' ? '' : row.entity.bloodRh);
-          return $filter('titleCase')(value) + ' (' + bloodGroup + ')';
+          return gettextCatalog.getString($filter('titleCase')(row.entity.bloodTypingStatus)) + ' - ' +
+            gettextCatalog.getString($filter('titleCase')(row.entity.bloodTypingMatchStatus)) +
+            ' (' + bloodGroup + ')';
         }
         //modify value of value of released column
         if (col.name === 'Released') {
-          return value === true ? 'Y' : 'N';
+          return value === true ? gettextCatalog.getString('Y') : gettextCatalog.getString('N');
         }
         // assume that column is a test outcome column, and manage empty values
         if (col.name !== 'DIN' && col.name !== 'Pack Type' && col.name !== 'Venue' && col.name !== 'Released' && col.name !== 'TTI Status' && col.name !== 'bloodTypingStatusBloodTypingMatchStatus' && col.name !== 'previousDonationAboRhOutcome') {
@@ -241,11 +251,6 @@ angular.module('bsis')
             fontSize: 10,
             bold: true,
             margin: [30, 20, 0, 0] // [left, top, right, bottom]
-          },
-          {
-            text: 'Created On: ' + $filter('bsisDate')($scope.testBatch.createdDate),
-            fontSize: 6,
-            margin: [300, -10, 0, 0]
           }
         ];
         return finalArray;
@@ -260,7 +265,9 @@ angular.module('bsis')
           var numDonations = val.numDonations;
           prefix.push(
             {
-              text: 'Venue: ' + venue + ', Date Created: ' + dateCreated + ', Number of Donations: ' + numDonations + '\n'
+              text: gettextCatalog.getString('Venue') + ': ' + venue + ', ' +
+                gettextCatalog.getString('Date Created') + ': ' + dateCreated + ', ' +
+                gettextCatalog.getString('Number of Donations') + ': ' + numDonations + '\n'
             }
           );
         });
@@ -276,9 +283,9 @@ angular.module('bsis')
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
         var columns = [
-          {text: 'Number of Samples: ' + $scope.gridOptions.data.length, width: 'auto'},
-          {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-          {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+          {text: gettextCatalog.getString('Number of Samples: {{sampleNumber}}', {sampleNumber: $scope.gridOptions.data.length}), width: 'auto'},
+          {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+          {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
         ];
         return {
           columns: columns,
@@ -426,9 +433,9 @@ angular.module('bsis')
     $scope.closeTestBatch = function(testBatch) {
 
       var confirmation = {
-        title: 'Confirm Close',
-        button: 'Close',
-        message: 'Are you sure that you want to close this test batch?'
+        title: gettextCatalog.getString('Confirm Close'),
+        button: gettextCatalog.getString('Close'),
+        message: gettextCatalog.getString('Are you sure that you want to close this test batch?')
       };
 
       ModalsService.showConfirmation(confirmation).then(function() {
@@ -444,9 +451,9 @@ angular.module('bsis')
     $scope.reopenTestBatch = function(testBatch) {
 
       var confirmation = {
-        title: 'Confirm Reopen',
-        button: 'Reopen',
-        message: 'Are you sure that you want to reopen this test batch?'
+        title: gettextCatalog.getString('Confirm Reopen'),
+        button: gettextCatalog.getString('Reopen'),
+        message: gettextCatalog.getString('Are you sure that you want to reopen this test batch?')
       };
 
       ModalsService.showConfirmation(confirmation).then(function() {
@@ -466,9 +473,9 @@ angular.module('bsis')
     $scope.deleteTestBatch = function(testBatchId) {
 
       var confirmation = {
-        title: 'Confirm Void',
-        button: 'Void',
-        message: 'Are you sure that you want to void this test batch?'
+        title: gettextCatalog.getString('Confirm Void'),
+        button: gettextCatalog.getString('Void'),
+        message: gettextCatalog.getString('Are you sure that you want to void this test batch?')
       };
 
       ModalsService.showConfirmation(confirmation).then(function() {
@@ -483,16 +490,21 @@ angular.module('bsis')
     };
 
     $scope.releaseTestBatch = function(testBatch) {
-
-      var message = testBatch.readyForReleaseCount + ' of ' + testBatch.numSamples + ' samples will be released';
+      var message;
       if (testBatch.readyForReleaseCount < testBatch.numSamples) {
-        message += ', the remaining samples require discrepancies to be resolved';
+        message = gettextCatalog.getString('{count} of {total} samples will be released, ' +
+          'the remaining samples require discrepancies to be resolved. Are you sure that ' +
+          'you want to release this test batch?',
+          {count: testBatch.readyForReleaseCount, total: testBatch.numSamples});
+      } else {
+        message = gettextCatalog.getString('{count} of {total} samples will be released. ' +
+          'Are you sure that you want to release this test batch?',
+          {count: testBatch.readyForReleaseCount, total: testBatch.numSamples});
       }
-      message += '. Are you sure that you want to release this test batch?';
 
       var confirmation = {
-        title: 'Confirm Release',
-        button: 'Release',
+        title: gettextCatalog.getString('Confirm Release'),
+        button: gettextCatalog.getString('Release'),
         message: message
       };
 
