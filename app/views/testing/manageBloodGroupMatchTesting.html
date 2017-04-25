@@ -5,10 +5,10 @@
   <hr/>
 
   <div class="h4">
-      <small><em translate>Created On</em></small>
+      <small><em><span translate>Created On</span>: </em></small>
       {{ testBatchCreatedDate | bsisDateTime}}
       |
-      <small><em translate>Number of Samples</em></small>
+      <small><em><span translate>Number of Samples</span>: </em></small>
       {{ numberOfDonations }}
   </div>
 
@@ -28,7 +28,7 @@
                             'sort-desc': testOutcomesTableParams.isSortBy('donation.donationIdentificationNumber', 'desc')
                           }"
                           ng-click="testOutcomesTableParams.sorting('donation.donationIdentificationNumber', testOutcomesTableParams.isSortBy('donation.donationIdentificationNumber', 'asc') ? 'desc' : 'asc')">
-                          <div translate>DIN <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
+                          <div><span translate>DIN</span> <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
                       </th>
                       <th class="text-center sortable"
                           ng-class="{
@@ -36,7 +36,7 @@
                             'sort-desc': testOutcomesTableParams.isSortBy('donation.donationDate', 'desc')
                           }"
                           ng-click="testOutcomesTableParams.sorting('donation.donationDate', testOutcomesTableParams.isSortBy('donation.donationDate', 'asc') ? 'desc' : 'asc')">
-                          <div translate>Donation Date <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
+                          <div><span translate>Donation Date</span> <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
                       </th>
                       <th class="text-center sortable" style="width:25%;"
                           ng-class="{
@@ -44,7 +44,7 @@
                             'sort-desc': testOutcomesTableParams.isSortBy('donation.bloodTypingStatus', 'desc')
                           }"
                           ng-click="testOutcomesTableParams.sorting('donation.bloodTypingStatus', testOutcomesTableParams.isSortBy('donation.bloodTypingStatus', 'asc') ? 'desc' : 'asc')">
-                          <div translate>Blood Typing Status <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
+                          <div><span translate>Blood Typing Status</span> <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
                       </th>
                       <th class="text-center sortable">
                           <div translate>Blood ABO</div>

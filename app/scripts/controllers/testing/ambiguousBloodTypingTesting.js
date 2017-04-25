@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('AmbiguousBloodTypingTestingCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams, BLOODABO, BLOODRH, gettextCatalog) {
+  .controller('AmbiguousBloodTypingTestingCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams, BLOODABO, BLOODRH) {
 
     $scope.bloodAboOptions = BLOODABO;
     $scope.bloodRhOptions = BLOODRH;
@@ -13,7 +13,7 @@ angular.module('bsis')
     };
 
     var getSamples = function() {
-      TestingService.getTestBatchDonations($routeParams.id, gettextCatalog.getString('AMBIGUOUS'), function(response) {
+      TestingService.getTestBatchDonations($routeParams.id, 'AMBIGUOUS', function(response) {
         $scope.data = response.donations;
         $scope.testBatchCreatedDate = response.testBatchCreatedDate;
         $scope.numberOfDonations = $scope.data.length;
@@ -45,9 +45,9 @@ angular.module('bsis')
       angular.forEach(bloodTypingResolutions, function(bloodTypingResolution) {
         // only save if resolved == true or noTypeDetermined == true
         if (bloodTypingResolution.resolved || bloodTypingResolution.noTypeDetermined) {
-          var status = gettextCatalog.getString('RESOLVED');
+          var status = 'RESOLVED';
           if (bloodTypingResolution.noTypeDetermined) {
-            status = gettextCatalog.getString('NO_TYPE_DETERMINED');
+            status = 'NO_TYPE_DETERMINED';
           }
           bloodTypingResolution.status = status;
           var bloodTypingResolutionForm = {};
