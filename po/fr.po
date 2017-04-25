@@ -84,7 +84,7 @@ msgid "Are you sure you want to return all units into inventory?"
 msgstr ""
 "Êtes-vous sûr(e) de vouloir retourner toutes les unités à l'inventaire?"
 
-#: app/views/translations.html:29
+#: app/views/translations.html:31
 msgid "Available"
 msgstr "Disponible"
 
@@ -122,7 +122,7 @@ msgstr "Groupes Sanguins"
 
 #: app/views/inventory/findInventory.html:105
 #: app/views/inventory/findTransfusion.html:91
-#: app/views/inventory/viewStockLevels.html:50
+#: app/views/inventory/viewStockLevels.html:49
 msgid "CSV"
 msgstr "CSV"
 
@@ -144,7 +144,7 @@ msgstr "Annuler"
 #: app/views/inventory/recordTransfusions.html:180
 #: app/views/inventory/viewOrders.html:86
 #: app/views/inventory/viewReturns.html:67
-#: app/views/inventory/viewStockLevels.html:41
+#: app/views/inventory/viewStockLevels.html:40
 msgid "Clear"
 msgstr "Effacer"
 
@@ -265,7 +265,7 @@ msgstr "Continuer"
 msgid "Create On"
 msgstr "Date de création"
 
-#: app/views/translations.html:21 app/views/translations.html:37
+#: app/views/translations.html:23 app/views/translations.html:39
 msgid "Created"
 msgstr "Créé"
 
@@ -297,7 +297,7 @@ msgstr "DIN"
 
 #: app/views/inventory/findInventory.html:103
 #: app/views/inventory/findTransfusion.html:89
-#: app/views/inventory/viewStockLevels.html:48
+#: app/views/inventory/viewStockLevels.html:47
 msgid "Data Export"
 msgstr "Exportation de Données"
 
@@ -338,6 +338,11 @@ msgstr "Supprimer les Lignes"
 msgid "Delete Selected Rows"
 msgstr "Supprimer les Lignes Sélectionnées"
 
+#: app/views/translations.html:16
+#, fuzzy
+msgid "Discard"
+msgstr "Rejeté"
+
 # There might be a better technical translation for this
 #: app/views/inventory/discardComponentsModal.html:2
 msgid "Discard Components"
@@ -351,9 +356,13 @@ msgstr "Raison de rejet"
 msgid "Discard Stock"
 msgstr "Rejeter le Stock"
 
-#: app/views/translations.html:34
+#: app/views/translations.html:36
 msgid "Discarded"
 msgstr "Rejeté"
+
+#: app/views/translations.html:15
+msgid "Discarding..."
+msgstr "Rejet en cours..."
 
 #: app/scripts/controllers/inventory/manageOrders.js:132
 #: app/scripts/controllers/inventory/viewOrder.js:111
@@ -378,7 +387,7 @@ msgstr "Ordre d'Expédition"
 msgid "Dispatch Type"
 msgstr "Type d'Expédition"
 
-#: app/views/translations.html:22
+#: app/views/translations.html:24
 msgid "Dispatched"
 msgstr "Expédié"
 
@@ -425,7 +434,7 @@ msgstr "L'heure de fin devrait être après l'heure de début"
 msgid "Enter a valid time"
 msgstr "Prière entrer une heure valide"
 
-#: app/views/translations.html:30
+#: app/views/translations.html:32
 msgid "Expired"
 msgstr "Expiré"
 
@@ -504,11 +513,11 @@ msgstr "Inventaire"
 
 #: app/views/inventory/fulfilOrder.html:56
 #: app/views/inventory/manageOrders.html:60
-#: app/views/inventory/viewOrders.html:63 app/views/translations.html:25
+#: app/views/inventory/viewOrders.html:63 app/views/translations.html:27
 msgid "Issue"
 msgstr "Envoi"
 
-#: app/views/translations.html:31
+#: app/views/translations.html:33
 msgid "Issued"
 msgstr "Envoyé"
 
@@ -583,7 +592,7 @@ msgstr "Non Étiqueté"
 msgid "Not Specified"
 msgstr "Non Spécifié"
 
-#: app/views/translations.html:18
+#: app/views/translations.html:20
 msgid "Not Transfused"
 msgstr "Non Transfusé"
 
@@ -632,7 +641,7 @@ msgstr "Résultat"
 
 #: app/views/inventory/findInventory.html:104
 #: app/views/inventory/findTransfusion.html:90
-#: app/views/inventory/viewStockLevels.html:49
+#: app/views/inventory/viewStockLevels.html:48
 msgid "PDF"
 msgstr "PDF"
 
@@ -670,7 +679,7 @@ msgstr "Numéro de patient"
 
 #: app/views/inventory/fulfilOrder.html:59
 #: app/views/inventory/manageOrders.html:64
-#: app/views/inventory/viewOrders.html:67 app/views/translations.html:26
+#: app/views/inventory/viewOrders.html:67 app/views/translations.html:28
 msgid "Patient Request"
 msgstr "Demande de patient"
 
@@ -692,11 +701,11 @@ msgstr "Imprimer la Note d'Expédition"
 msgid "Print Return Note"
 msgstr "Imprimer la Note de Retour"
 
-#: app/views/translations.html:35
+#: app/views/translations.html:37
 msgid "Processed"
 msgstr "Traiité"
 
-#: app/views/translations.html:28
+#: app/views/translations.html:30
 msgid "Quarantined"
 msgstr "Mis en Quarantaine"
 
@@ -748,7 +757,7 @@ msgstr "Retourner au Stock"
 msgid "Return to Stock"
 msgstr "Retourner au Stock"
 
-#: app/views/translations.html:38
+#: app/views/translations.html:40
 msgid "Returned"
 msgstr "Retourné"
 
@@ -867,6 +876,7 @@ msgstr "Ce champ doit être un nombre"
 msgid "This must be unique"
 msgstr "Ce champ doit être unique"
 
+#: app/views/inventory/findTransfusion.html:58
 #: app/views/inventory/viewOrders.html:28
 #: app/views/inventory/viewReturns.html:28
 msgid "To"
@@ -898,11 +908,11 @@ msgstr "Total des Unités: {{total}}"
 
 #: app/views/inventory/fulfilOrder.html:53
 #: app/views/inventory/manageOrders.html:56
-#: app/views/inventory/viewOrders.html:59 app/views/translations.html:24
+#: app/views/inventory/viewOrders.html:59 app/views/translations.html:26
 msgid "Transfer"
 msgstr "Transfert"
 
-#: app/views/translations.html:32
+#: app/views/translations.html:34
 msgid "Transfused"
 msgstr "Transfusé"
 
@@ -910,7 +920,7 @@ msgstr "Transfusé"
 msgid "Transfused On"
 msgstr "Transfusé le"
 
-#: app/views/translations.html:16
+#: app/views/translations.html:18
 msgid "Transfused Uneventfully"
 msgstr "Transfusé sans Problème"
 
@@ -927,7 +937,7 @@ msgstr "Resultat de la Transfusion"
 msgid "Transfusion Outcomes"
 msgstr "Résultats des Transfusions"
 
-#: app/views/translations.html:17
+#: app/views/translations.html:19
 msgid "Transfusion Reaction Occurred"
 msgstr "Une Réaction s'est Produite lors de la Transfusion"
 
@@ -965,11 +975,11 @@ msgstr "Unités Rétournées"
 msgid "Units Supplied"
 msgstr "Unités Fournies"
 
-#: app/views/translations.html:19
+#: app/views/translations.html:21
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: app/views/translations.html:33
+#: app/views/translations.html:35
 msgid "Unsafe"
 msgstr "Peu sûr"
 
@@ -1029,18 +1039,17 @@ msgstr "femme"
 msgid "male"
 msgstr "homme"
 
-#: app/views/inventory/discardComponentsModal.html:25
-msgid "{{discardingComponent ? \"Discarding...\" : \"Discard Components\"}}"
-msgstr ""
-"{{discardingComponent ? \"Rejet en cours...\" : \"Rejeter les Composants\"}}"
+#~ msgid "{{discardingComponent ? \"Discarding...\" : \"Discard Components\"}}"
+#~ msgstr ""
+#~ "{{discardingComponent ? \"Rejet en cours...\" : \"Rejeter les Composants"
+#~ "\"}}"
 
-#: app/views/inventory/viewStockLevels.html:38
-msgid ""
-"{{searching ? \"Searching...\" :\n"
-"          \"View Stock Levels\"}}"
-msgstr ""
-"{{searching? \"Recherche en cours...\":\n"
-"          \"Voir les Niveaux de Stocks\"}}"
+#~ msgid ""
+#~ "{{searching ? \"Searching...\" :\n"
+#~ "          \"View Stock Levels\"}}"
+#~ msgstr ""
+#~ "{{searching? \"Recherche en cours...\":\n"
+#~ "          \"Voir les Niveaux de Stocks\"}}"
 
 #~ msgid "AVAILABLE"
 #~ msgstr "Disponible"
