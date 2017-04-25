@@ -713,10 +713,6 @@ msgstr "[FR] MANAGE TESTING"
 msgid "Male"
 msgstr "Homme"
 
-#: app/views/testing/manageTestBatch.html:3
-msgid "Manage"
-msgstr "[FR] Manage"
-
 #: app/views/inventory/viewOrder.html:3
 msgid "Manage Order"
 msgstr "Gestion de Commande"
@@ -739,7 +735,7 @@ msgstr "Gestion de Retours"
 msgid "Manage Test Batch"
 msgstr "[FR] Manage Test Batch"
 
-#: app/views/testing/sidebar.html:13
+#: app/views/testing/manageTestBatch.html:3 app/views/testing/sidebar.html:13
 msgid "Manage Test Batches"
 msgstr "[FR] Manage Test Batches"
 
@@ -1032,6 +1028,16 @@ msgstr "[FR] Re-Enter Blood Typing Test Outcomes"
 msgid "Re-Enter TTI Test Outcomes"
 msgstr "[FR] Re-Enter TTI Test Outcomes"
 
+#: app/scripts/controllers/testing/testsReEntry.js:159
+msgid ""
+"Re-entry completed for {{reEntriesConfirmed}} of {{totalReEntries}} "
+"outcomes. <br/>Re-entry required for {{reEntriesNotConfirmed}} of "
+"{{totalReEntries}} outcomes."
+msgstr ""
+"[FR] Re-entry completed for {{reEntriesConfirmed}} of {{totalReEntries}} "
+"outcomes. <br/>Re-entry required for {{reEntriesNotConfirmed}} of "
+"{{totalReEntries}} outcomes."
+
 #: app/views/testing/manageBloodGroupTesting.html:3
 msgid "Record Blood Group Serology Outcomes"
 msgstr "[FR] Record Blood Group Serology Outcomes"
@@ -1156,12 +1162,12 @@ msgstr "Retourné à"
 msgid "Safe"
 msgstr "[FR] Safe"
 
-#: app/scripts/controllers/testing/testsReEntry.js:161
+#: app/scripts/controllers/testing/testsReEntry.js:158
 #: app/views/testing/viewTestBatch.html:31 app/views/translations.html:11
 msgid "Save"
 msgstr "Enregistrer"
 
-#: app/scripts/controllers/testing/testsReEntry.js:160
+#: app/scripts/controllers/testing/testsReEntry.js:157
 msgid "Save test outcomes"
 msgstr "[FR] Save test outcomes"
 
@@ -1545,6 +1551,9 @@ msgstr ""
 #: app/views/testing/viewTestBatch.html:212
 msgid "{{count}} sample(s) found"
 msgstr "[FR] {{count}} sample(s) found"
+
+#~ msgid "Manage"
+#~ msgstr "[FR] Manage"
 
 #~ msgid "Dagmar"
 #~ msgstr "Dagmari"
