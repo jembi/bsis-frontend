@@ -12,6 +12,10 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: app/views/testing/viewTestBatch.html:73
+msgid "ABO/Rh Outcomes"
+msgstr "[FR] ABO/Rh Outcomes"
+
 #: app/views/translations.html:13
 msgid "Add"
 msgstr "Ajouter"
@@ -45,15 +49,27 @@ msgstr "Ajout en cours ..."
 msgid "All"
 msgstr "Tous"
 
+#: app/scripts/controllers/testing/viewTestBatch.js:16
+msgid "All Samples"
+msgstr "[FR] All Samples"
+
 #: app/scripts/controllers/inventory/viewStockLevels.js:59
 #: app/views/inventory/findInventory.html:40
 #: app/views/inventory/viewStockLevels.html:18
 msgid "All Sites"
 msgstr "Tous les Sites"
 
+#: app/views/translations.html:44
+msgid "Ambiguous"
+msgstr "[FR] Ambiguous"
+
 #: app/views/inventory/findInventory.html:73
 msgid "Any Blood Group"
 msgstr "N'importe quel Groupe Sanguin"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:438
+msgid "Are you sure that you want to close this test batch?"
+msgstr "[FR] Are you sure that you want to close this test batch?"
 
 #: app/scripts/controllers/inventory/viewOrder.js:250
 msgid "Are you sure that you want to delete this Order?"
@@ -63,9 +79,17 @@ msgstr "Êtes-vous sûr(e) de vouloir supprimer la Commande en cours?"
 msgid "Are you sure that you want to delete this Return?"
 msgstr "Êtes-vous sûr(e) de vouloir supprimer ce Retour?"
 
+#: app/scripts/controllers/testing/viewTestBatch.js:456
+msgid "Are you sure that you want to reopen this test batch?"
+msgstr "[FR] Are you sure that you want to reopen this test batch?"
+
 #: app/scripts/controllers/inventory/recordTransfusions.js:180
 msgid "Are you sure that you want to void this Tranfusion?"
 msgstr "Êtes-vous sûr(e) de vouloir supprimer cette Transfusion?"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:478
+msgid "Are you sure that you want to void this test batch?"
+msgstr "[FR] Are you sure that you want to void this test batch?"
 
 #: app/scripts/controllers/inventory/fulfilOrder.js:313
 msgid "Are you sure you want to delete the selected rows?"
@@ -87,6 +111,10 @@ msgstr ""
 #: app/views/translations.html:31
 msgid "Available"
 msgstr "Disponible"
+
+#: app/views/testing/manageBloodGroupMatchTesting.html:50
+msgid "Blood ABO"
+msgstr "[FR] Blood ABO"
 
 #: app/views/inventory/recordTransfusions.html:129
 msgid "Blood Bank"
@@ -113,16 +141,48 @@ msgstr "N ° de Banque de Sang"
 #: app/views/inventory/manageOrders.html:154
 #: app/views/inventory/recordTransfusions.html:166
 #: app/views/inventory/viewOrder.html:42
+#: app/views/testing/viewTestSample.html:41
 msgid "Blood Group"
 msgstr "Groupe Sanguin"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:172
+msgid "Blood Group Serology"
+msgstr "[FR] Blood Group Serology"
+
+#: app/views/testing/viewTestSample.html:79
+msgid "Blood Group Serology Outcomes"
+msgstr "[FR] Blood Group Serology Outcomes"
+
+#: app/views/testing/managePendingBloodTypingTests.html:52
+msgid "Blood Group Serology Status"
+msgstr "[FR] Blood Group Serology Status"
+
+#: app/views/testing/viewTestSample.html:51
+msgid "Blood Group Serology Test Status"
+msgstr "[FR] Blood Group Serology Test Status"
 
 #: app/views/inventory/findInventory.html:62
 msgid "Blood Groups"
 msgstr "Groupes Sanguins"
 
+#: app/views/testing/manageBloodGroupMatchTesting.html:53
+msgid "Blood Rh"
+msgstr "[FR] Blood Rh"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:32
+msgid "Blood Typing Issues or Incomplete"
+msgstr "[FR] Blood Typing Issues or Incomplete"
+
+#: app/views/testing/manageBloodGroupMatchTesting.html:47
+#: app/views/testing/manageBloodGroupTesting.html:47
+#: app/views/testing/reEnterBloodTyping.html:47
+msgid "Blood Typing Status"
+msgstr "[FR] Blood Typing Status"
+
 #: app/views/inventory/findInventory.html:105
 #: app/views/inventory/findTransfusion.html:91
 #: app/views/inventory/viewStockLevels.html:49
+#: app/views/testing/viewTestBatch.html:220
 msgid "CSV"
 msgstr "CSV"
 
@@ -131,6 +191,15 @@ msgstr "CSV"
 #: app/views/inventory/fulfilOrder.html:234
 #: app/views/inventory/recordReturn.html:32
 #: app/views/inventory/recordReturn.html:82
+#: app/views/testing/manageBloodGroupMatchTesting.html:123
+#: app/views/testing/manageBloodGroupTesting.html:92
+#: app/views/testing/managePendingBloodTypingTests.html:98
+#: app/views/testing/managePendingTests.html:96
+#: app/views/testing/manageTTITesting.html:92
+#: app/views/testing/reEnterBloodTyping.html:101
+#: app/views/testing/reEnterTTI.html:101
+#: app/views/testing/viewTestBatch.html:17
+#: app/views/testing/viewTestBatch.html:34
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -145,8 +214,28 @@ msgstr "Annuler"
 #: app/views/inventory/viewOrders.html:86
 #: app/views/inventory/viewReturns.html:67
 #: app/views/inventory/viewStockLevels.html:40
+#: app/views/testing/manageTestBatch.html:115
+#: app/views/testing/manageTestBatch.html:159
+#: app/views/testing/viewTestSample.html:21
 msgid "Clear"
 msgstr "Effacer"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:437
+#: app/views/testing/viewTestBatch.html:45
+msgid "Close"
+msgstr "[FR] Close"
+
+#: app/views/testing/manageTestBatch.html:178 app/views/translations.html:61
+msgid "Closed"
+msgstr "[FR] Closed"
+
+#: app/views/testing/manageTestBatch.html:132
+msgid "Closed Batches"
+msgstr "[FR] Closed Batches"
+
+#: app/views/translations.html:52
+msgid "Complete"
+msgstr "[FR] Complete"
 
 #: app/scripts/controllers/inventory/findInventory.js:27
 #: app/scripts/controllers/inventory/findTransfusion.js:49
@@ -257,6 +346,26 @@ msgstr ""
 "Le composant {{din}} ({{componentCode}}) n'a pas été trouvé dans ce "
 "formulaire de retour."
 
+#: app/scripts/controllers/testing/viewTestBatch.js:436
+msgid "Confirm Close"
+msgstr "[FR] Confirm Close"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:506
+msgid "Confirm Release"
+msgstr "[FR] Confirm Release"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:454
+msgid "Confirm Reopen"
+msgstr "[FR] Confirm Reopen"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:476
+msgid "Confirm Void"
+msgstr "[FR] Confirm Void"
+
+#: app/views/testing/viewTestBatch.html:111
+msgid "Confirmatory TTI Test Outcomes"
+msgstr "[FR] Confirmatory TTI Test Outcomes"
+
 #: app/scripts/controllers/inventory/fulfilOrder.js:312
 msgid "Continue"
 msgstr "Continuer"
@@ -268,6 +377,16 @@ msgstr "Créé"
 #: app/scripts/controllers/inventory/findInventory.js:34
 #: app/scripts/controllers/inventory/recordReturn.js:51
 #: app/scripts/controllers/inventory/viewReturn.js:45
+#: app/views/testing/manageBloodGroupMatchTesting.html:8
+#: app/views/testing/manageBloodGroupTesting.html:8
+#: app/views/testing/managePendingBloodTypingTests.html:8
+#: app/views/testing/managePendingTests.html:10
+#: app/views/testing/manageTTITesting.html:8
+#: app/views/testing/manageTestBatch.html:174
+#: app/views/testing/manageTestBatch.html:27
+#: app/views/testing/reEnterBloodTyping.html:8
+#: app/views/testing/reEnterTTI.html:8
+#: app/views/testing/viewTestBatch.html:127
 msgid "Created On"
 msgstr "Date de création"
 
@@ -284,19 +403,43 @@ msgstr "Retours en cours"
 #: app/scripts/controllers/inventory/recordReturn.js:16
 #: app/scripts/controllers/inventory/viewOrder.js:42
 #: app/scripts/controllers/inventory/viewReturn.js:9
+#: app/scripts/controllers/testing/viewTestBatch.js:115
 #: app/views/inventory/findInventory.html:8
 #: app/views/inventory/findTransfusion.html:8
 #: app/views/inventory/fulfilOrder.html:199
 #: app/views/inventory/recordReturn.html:49
 #: app/views/inventory/recordTransfusions.html:16
+#: app/views/testing/manageBloodGroupMatchTesting.html:31
+#: app/views/testing/manageBloodGroupTesting.html:31
+#: app/views/testing/managePendingBloodTypingTests.html:32
+#: app/views/testing/managePendingTests.html:33
+#: app/views/testing/manageTTITesting.html:31
+#: app/views/testing/reEnterBloodTyping.html:31
+#: app/views/testing/reEnterTTI.html:31
+#: app/views/testing/viewTestSample.html:33
+#: app/views/testing/viewTestSample.html:7
 msgid "DIN"
 msgstr "DIN"
 
 #: app/views/inventory/findInventory.html:103
 #: app/views/inventory/findTransfusion.html:89
 #: app/views/inventory/viewStockLevels.html:47
+#: app/views/testing/viewTestBatch.html:218
 msgid "Data Export"
 msgstr "Exportation de Données"
+
+#: app/views/testing/viewTestBatch.html:189
+#: app/views/testing/viewTestSample.html:39
+msgid "Date"
+msgstr "[FR] Date"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:126
+msgid "Date Bled"
+msgstr "[FR] Date Bled"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:269
+msgid "Date Created"
+msgstr "Créé"
 
 #: app/views/inventory/recordTransfusions.html:89
 msgid "Date Transfused"
@@ -307,6 +450,7 @@ msgstr "Date de Transfusion"
 #: app/scripts/controllers/inventory/viewOrder.js:177
 #: app/scripts/controllers/inventory/viewReturn.js:126
 #: app/scripts/controllers/inventory/viewStockLevels.js:96
+#: app/scripts/controllers/testing/viewTestBatch.js:287
 msgid "Date generated: {{date}}"
 msgstr "Généré le: {{date}}"
 
@@ -336,7 +480,6 @@ msgid "Delete Selected Rows"
 msgstr "Supprimer les Lignes Sélectionnées"
 
 #: app/views/translations.html:16
-#, fuzzy
 msgid "Discard"
 msgstr "Rejeté"
 
@@ -413,6 +556,21 @@ msgstr "Distribué à"
 msgid "Distribution Center"
 msgstr "Centre de Distribution"
 
+#: app/views/testing/manageTestBatch.html:68
+#: app/views/testing/viewTestBatch.html:162
+msgid "Donation Batches"
+msgstr "[FR] Donation Batches"
+
+#: app/views/testing/manageBloodGroupMatchTesting.html:39
+#: app/views/testing/manageBloodGroupTesting.html:39
+#: app/views/testing/managePendingBloodTypingTests.html:42
+#: app/views/testing/managePendingTests.html:41
+#: app/views/testing/manageTTITesting.html:39
+#: app/views/testing/reEnterBloodTyping.html:39
+#: app/views/testing/reEnterTTI.html:39
+msgid "Donation Date"
+msgstr "[FR] Donation Date"
+
 #: app/views/inventory/findInventory.html:83
 msgid "Due to Expire By"
 msgstr "Date d'Expiration"
@@ -420,12 +578,21 @@ msgstr "Date d'Expiration"
 #: app/views/inventory/fulfilOrder.html:33
 #: app/views/inventory/recordReturn.html:12
 #: app/views/inventory/viewOrder.html:8 app/views/inventory/viewReturn.html:8
+#: app/views/testing/viewTestBatch.html:24
 msgid "Edit"
 msgstr "Modifier"
 
 #: app/messages.html:13
 msgid "End time should be after Start time"
 msgstr "L'heure de fin devrait être après l'heure de début"
+
+#: app/views/testing/viewTestBatch.html:112
+#: app/views/testing/viewTestBatch.html:63
+#: app/views/testing/viewTestBatch.html:74
+#: app/views/testing/viewTestBatch.html:87
+#: app/views/testing/viewTestBatch.html:98
+msgid "Enter"
+msgstr "[FR] Enter"
 
 #: app/messages.html:12
 msgid "Enter a valid time"
@@ -444,6 +611,10 @@ msgstr "Statut d'Expiration"
 #: app/views/translations.html:4
 msgid "Female"
 msgstr "Femme"
+
+#: app/views/testing/viewTestBatch.html:212
+msgid "Filter data"
+msgstr "[FR] Filter data"
 
 #: app/views/inventory/findInventory.html:3
 #: app/views/inventory/sidebar.html:13
@@ -482,6 +653,10 @@ msgstr "Numéro de Pavillon à l'Hôpital"
 msgid "In Stock"
 msgstr "En Stock"
 
+#: app/views/translations.html:48 app/views/translations.html:57
+msgid "Indeterminate"
+msgstr "[FR] Indeterminate"
+
 #: app/messages.html:18
 msgid "Invalid"
 msgstr "Invalide"
@@ -519,6 +694,10 @@ msgid "Issued"
 msgstr "Envoyé"
 
 #: app/scripts/controllers/inventory/findInventory.js:65
+#: app/views/testing/manageTestBatch.html:190
+#: app/views/testing/manageTestBatch.html:39
+#: app/views/testing/manageTestBatch.html:98
+#: app/views/testing/viewTestBatch.html:133
 msgid "Location"
 msgstr "Emplacement"
 
@@ -526,9 +705,17 @@ msgstr "Emplacement"
 msgid "MANAGE INVENTORY"
 msgstr "GESTION D'INVENTAIRE"
 
+#: app/views/testing/sidebar.html:12
+msgid "MANAGE TESTING"
+msgstr "[FR] MANAGE TESTING"
+
 #: app/views/translations.html:2
 msgid "Male"
 msgstr "Homme"
+
+#: app/views/testing/manageTestBatch.html:3
+msgid "Manage"
+msgstr "[FR] Manage"
 
 #: app/views/inventory/viewOrder.html:3
 msgid "Manage Order"
@@ -548,6 +735,18 @@ msgstr "Gestion de Retour"
 msgid "Manage Returns"
 msgstr "Gestion de Retours"
 
+#: app/views/testing/viewTestBatch.html:3
+msgid "Manage Test Batch"
+msgstr "[FR] Manage Test Batch"
+
+#: app/views/testing/sidebar.html:13
+msgid "Manage Test Batches"
+msgstr "[FR] Manage Test Batches"
+
+#: app/views/translations.html:45
+msgid "Match"
+msgstr "[FR] Match"
+
 #: app/messages.html:22
 msgid ""
 "More than one component returned for given component Type. Please enter a "
@@ -560,9 +759,31 @@ msgstr ""
 msgid "Must match the previous entry"
 msgstr "Doit correspondre à l'entrée précédente"
 
+#: app/scripts/controllers/testing/viewTestBatch.js:153
+#: app/scripts/controllers/testing/viewTestBatch.js:231
+msgid "N"
+msgstr "[FR] N"
+
 #: app/views/inventory/manageOrders.html:95
 msgid "Name"
 msgstr "Nom"
+
+#: app/views/testing/manageTestBatch.html:57
+msgid "New Test Batch"
+msgstr "[FR] New Test Batch"
+
+#: app/views/translations.html:43
+msgid "No Match"
+msgstr "[FR] No Match"
+
+#: app/views/testing/manageBloodGroupMatchTesting.html:59
+#: app/views/translations.html:47
+msgid "No Type Determined"
+msgstr "[FR] No Type Determined"
+
+#: app/views/testing/manageTestBatch.html:204
+msgid "No closed test batches."
+msgstr "[FR] No closed test batches."
 
 #: app/messages.html:21
 msgid ""
@@ -571,6 +792,15 @@ msgid ""
 msgstr ""
 "Aucun composant avec le type de composant sélectionné n'existe pour le don "
 "sélectionné"
+
+#: app/views/testing/manageTestBatch.html:51
+msgid "No open test batches."
+msgstr "[FR] No open test batches."
+
+#: app/views/translations.html:42 app/views/translations.html:50
+#: app/views/translations.html:54
+msgid "Not Done"
+msgstr "[FR] Not Done"
 
 #: app/scripts/controllers/inventory/viewStockLevels.js:86
 msgid "Not Labelled"
@@ -593,6 +823,10 @@ msgstr "Non Spécifié"
 msgid "Not Transfused"
 msgstr "Non Transfusé"
 
+#: app/views/testing/viewTestSample.html:109
+msgid "Not found. Please re-enter DIN."
+msgstr "[FR] Not found. Please re-enter DIN."
+
 #: app/views/inventory/viewStockLevels.html:33
 msgid "Not in Stock"
 msgstr "Pas en Stock"
@@ -600,6 +834,34 @@ msgstr "Pas en Stock"
 #: app/views/inventory/recordTransfusions.html:84
 msgid "Notes"
 msgstr "Notes"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:270
+#: app/views/testing/viewTestBatch.html:191
+msgid "Number of Donations"
+msgstr "[FR] Number of Donations"
+
+#: app/views/testing/manageBloodGroupMatchTesting.html:11
+#: app/views/testing/manageBloodGroupTesting.html:11
+#: app/views/testing/managePendingBloodTypingTests.html:11
+#: app/views/testing/managePendingTests.html:13
+#: app/views/testing/manageTTITesting.html:11
+#: app/views/testing/reEnterBloodTyping.html:11
+#: app/views/testing/reEnterTTI.html:11
+#: app/views/testing/viewTestBatch.html:142
+msgid "Number of Samples"
+msgstr "[FR] Number of Samples"
+
+#: app/views/testing/viewTestBatch.html:145
+msgid "Number of Samples Ready for Release"
+msgstr "[FR] Number of Samples Ready for Release"
+
+#: app/views/testing/viewTestBatch.html:149
+msgid "Number of Samples Released"
+msgstr "[FR] Number of Samples Released"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:286
+msgid "Number of Samples: {{sampleNumber}}"
+msgstr "[FR] Number of Samples: {{sampleNumber}}"
 
 #: app/scripts/controllers/inventory/findInventory.js:144
 #: app/scripts/controllers/inventory/viewOrder.js:176
@@ -611,6 +873,14 @@ msgstr "Nombre de composants: {{componentNumber}}"
 #: app/scripts/controllers/inventory/recordReturn.js:108
 msgid "OK"
 msgstr "OK"
+
+#: app/views/translations.html:59
+msgid "Open"
+msgstr "[FR] Open"
+
+#: app/views/testing/manageTestBatch.html:12
+msgid "Open Batches"
+msgstr "[FR] Open Batches"
 
 #: app/scripts/controllers/inventory/manageOrders.js:118
 #: app/scripts/controllers/inventory/viewOrder.js:106
@@ -628,25 +898,35 @@ msgstr "Status de la Commande"
 
 #: app/scripts/controllers/inventory/viewOrder.js:121
 #: app/views/inventory/fulfilOrder.html:51
+#: app/views/inventory/fulfilOrder.html:9
 #: app/views/inventory/viewOrder.html:30
 msgid "Order Type"
 msgstr "Type de Commande"
 
 #: app/scripts/controllers/inventory/findTransfusion.js:70
+#: app/views/testing/viewTestSample.html:64
+#: app/views/testing/viewTestSample.html:84
 msgid "Outcome"
 msgstr "Résultat"
 
 #: app/views/inventory/findInventory.html:104
 #: app/views/inventory/findTransfusion.html:90
 #: app/views/inventory/viewStockLevels.html:48
+#: app/views/testing/viewTestBatch.html:219
 msgid "PDF"
 msgstr "PDF"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:135
+#: app/views/testing/viewTestSample.html:45
+msgid "Pack Type"
+msgstr "[FR] Pack Type"
 
 #: app/scripts/controllers/inventory/findInventory.js:146
 #: app/scripts/controllers/inventory/findTransfusion.js:149
 #: app/scripts/controllers/inventory/viewOrder.js:178
 #: app/scripts/controllers/inventory/viewReturn.js:127
 #: app/scripts/controllers/inventory/viewStockLevels.js:97
+#: app/scripts/controllers/testing/viewTestBatch.js:288
 msgid "Page {{currentPage}} of {{pageCount}}"
 msgstr "Page {{currentPage}} sur {{pageCount}}"
 
@@ -680,15 +960,45 @@ msgstr "Numéro de patient"
 msgid "Patient Request"
 msgstr "Demande de patient"
 
+#: app/views/translations.html:51
+msgid "Pending Tests"
+msgstr "[FR] Pending Tests"
+
+#: app/views/testing/viewTestBatch.html:203
+msgid "Pending: TTI repeat and/or confirmatory test outcomes."
+msgstr "[FR] Pending: TTI repeat and/or confirmatory test outcomes."
+
+#: app/views/testing/viewTestBatch.html:205
+msgid "Pending: ambiguous blood group serology test outcomes."
+msgstr "[FR] Pending: ambiguous blood group serology test outcomes."
+
+#: app/views/testing/viewTestBatch.html:204
+msgid "Pending: blood group serology repeat test outcomes."
+msgstr "[FR] Pending: blood group serology repeat test outcomes."
+
 #: app/views/inventory/findTransfusion.html:54
 #: app/views/inventory/viewOrders.html:24
 #: app/views/inventory/viewReturns.html:24
+#: app/views/testing/manageTestBatch.html:136
 msgid "Period"
 msgstr "Période"
+
+#: app/views/testing/reEnterBloodTyping.html:21
+#: app/views/testing/reEnterTTI.html:21
+msgid ""
+"Please resolve all discrepancies between initial and re-rentered outcomes "
+"before saving the form."
+msgstr ""
+"[FR] Please resolve all discrepancies between initial and re-rentered "
+"outcomes before saving the form."
 
 #: app/views/inventory/manageOrders.html:66
 msgid "Please select a dispatch type"
 msgstr "Sélectionnez un type d'expédition"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:184
+msgid "Previous ABO/Rh"
+msgstr "[FR] Previous ABO/Rh"
 
 #: app/views/inventory/viewOrder.html:19
 msgid "Print Dispatch Note"
@@ -706,19 +1016,91 @@ msgstr "Traiité"
 msgid "Quarantined"
 msgstr "Mis en Quarantaine"
 
+#: app/views/testing/viewTestBatch.html:100
+#: app/views/testing/viewTestBatch.html:114
+#: app/views/testing/viewTestBatch.html:65
+#: app/views/testing/viewTestBatch.html:75
+#: app/views/testing/viewTestBatch.html:89
+msgid "Re-Enter"
+msgstr "[FR] Re-Enter"
+
+#: app/views/testing/reEnterBloodTyping.html:3
+msgid "Re-Enter Blood Typing Test Outcomes"
+msgstr "[FR] Re-Enter Blood Typing Test Outcomes"
+
+#: app/views/testing/reEnterTTI.html:3
+msgid "Re-Enter TTI Test Outcomes"
+msgstr "[FR] Re-Enter TTI Test Outcomes"
+
+#: app/views/testing/manageBloodGroupTesting.html:3
+msgid "Record Blood Group Serology Outcomes"
+msgstr "[FR] Record Blood Group Serology Outcomes"
+
+#: app/views/testing/managePendingTests.html:5
+msgid "Record Confirmatory TTI Test Outcomes"
+msgstr "[FR] Record Confirmatory TTI Test Outcomes"
+
+#: app/views/testing/managePendingBloodTypingTests.html:3
+msgid "Record Repeat ABO/Rh Outcomes"
+msgstr "[FR] Record Repeat ABO/Rh Outcomes"
+
+#: app/views/testing/managePendingTests.html:4
+msgid "Record Repeat TTI Test Outcomes"
+msgstr "[FR] Record Repeat TTI Test Outcomes"
+
 #: app/views/inventory/recordReturn.html:4
 msgid "Record Return"
 msgstr "Enregistrer un Retour"
+
+#: app/views/testing/manageTTITesting.html:3
+msgid "Record TTI Test Outcomes"
+msgstr "[FR] Record TTI Test Outcomes"
 
 #: app/views/inventory/recordTransfusions.html:3
 #: app/views/inventory/sidebar.html:21
 msgid "Record Transfusions"
 msgstr "Enregistrer des Transfusions"
 
+#: app/scripts/controllers/testing/viewTestBatch.js:507
+#: app/views/testing/viewTestBatch.html:42
+msgid "Release"
+msgstr "[FR] Release"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:150
+#: app/views/translations.html:60
+msgid "Released"
+msgstr "[FR] Released"
+
 #: app/views/inventory/fulfilOrder.html:220
 #: app/views/inventory/recordReturn.html:68
 msgid "Remove Pack"
 msgstr "Supprimer une Poche de Sang"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:455
+#: app/views/testing/viewTestBatch.html:48
+msgid "Reopen"
+msgstr "[FR] Reopen"
+
+#: app/views/testing/viewTestBatch.html:97
+msgid "Repeat ABO/Rh Outcomes"
+msgstr "[FR] Repeat ABO/Rh Outcomes"
+
+#: app/views/testing/viewTestBatch.html:86
+msgid "Repeat TTI Test Outcomes"
+msgstr "[FR] Repeat TTI Test Outcomes"
+
+#: app/views/testing/manageBloodGroupMatchTesting.html:56
+msgid "Resolve"
+msgstr "[FR] Resolve"
+
+#: app/views/testing/manageBloodGroupMatchTesting.html:3
+#: app/views/testing/viewTestBatch.html:157
+msgid "Resolve Ambiguous ABO/Rh Outcomes"
+msgstr "[FR] Resolve Ambiguous ABO/Rh Outcomes"
+
+#: app/views/translations.html:46
+msgid "Resolved"
+msgstr "[FR] Resolved"
 
 #: app/scripts/controllers/inventory/manageReturns.js:10
 #: app/scripts/controllers/inventory/viewReturn.js:101
@@ -770,9 +1152,18 @@ msgstr "Retourné de"
 msgid "Returned To"
 msgstr "Retourné à"
 
-#: app/views/translations.html:11
+#: app/views/translations.html:55
+msgid "Safe"
+msgstr "[FR] Safe"
+
+#: app/scripts/controllers/testing/testsReEntry.js:161
+#: app/views/testing/viewTestBatch.html:31 app/views/translations.html:11
 msgid "Save"
 msgstr "Enregistrer"
+
+#: app/scripts/controllers/testing/testsReEntry.js:160
+msgid "Save test outcomes"
+msgstr "[FR] Save test outcomes"
 
 #: app/views/translations.html:12
 msgid "Saving..."
@@ -793,25 +1184,36 @@ msgstr "Recherche en cours..."
 #: app/views/inventory/manageOrders.html:43
 #: app/views/inventory/manageReturns.html:42
 #: app/views/inventory/manageReturns.html:54
+#: app/views/testing/manageTestBatch.html:101
+#: app/views/testing/manageTestBatch.html:75
 msgid "Select"
 msgstr "Sélectionner"
 
 #: app/views/inventory/findTransfusion.html:64
 #: app/views/inventory/viewOrders.html:34
 #: app/views/inventory/viewReturns.html:34
+#: app/views/testing/manageTestBatch.html:146
 msgid "Select a date range that is less than one month"
 msgstr "Sélectionnez une plage de dates inférieure à un mois"
 
+#: app/views/inventory/fulfilOrder.html:44
 #: app/views/inventory/viewOrders.html:33
 #: app/views/inventory/viewOrders.html:38
 #: app/views/inventory/viewReturns.html:33
 #: app/views/inventory/viewReturns.html:38
+#: app/views/testing/manageTestBatch.html:145
+#: app/views/testing/manageTestBatch.html:150
 msgid "Select a valid date"
 msgstr "Sélectionner une date valide"
 
 #: app/messages.html:3
 msgid "Select one or more"
 msgstr "Sélectionner un ou plusieurs"
+
+#: app/views/testing/manageTestBatch.html:90
+#: app/views/testing/viewTestBatch.html:179
+msgid "Select one or more donation batches"
+msgstr "[FR] Select one or more donation batches"
 
 #: app/messages.html:14
 msgid "Start and end times are the same: please re-enter"
@@ -823,12 +1225,75 @@ msgstr "La date de début doit preceder la date de fin"
 
 #: app/scripts/controllers/inventory/recordReturn.js:43
 #: app/scripts/controllers/inventory/viewReturn.js:38
+#: app/views/testing/manageTestBatch.html:186
+#: app/views/testing/manageTestBatch.html:35
 msgid "Status"
 msgstr "Statut"
 
 #: app/scripts/controllers/inventory/viewStockLevels.js:86
 msgid "Stock Levels"
 msgstr "Niveaux de Stocks"
+
+#: app/views/testing/viewTestSample.html:59
+msgid "TTI Outcomes"
+msgstr "[FR] TTI Outcomes"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:161
+msgid "TTI Status"
+msgstr "[FR] TTI Status"
+
+#: app/views/testing/viewTestBatch.html:62
+msgid "TTI Test Outcomes"
+msgstr "[FR] TTI Test Outcomes"
+
+#: app/views/testing/viewTestSample.html:49
+msgid "TTI Test Status"
+msgstr "[FR] TTI Test Status"
+
+#: app/views/testing/manageTTITesting.html:47
+#: app/views/testing/reEnterTTI.html:47
+msgid "TTI Testing Status"
+msgstr "[FR] TTI Testing Status"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:24
+msgid "TTI Unsafe or Incomplete"
+msgstr "[FR] TTI Unsafe or Incomplete"
+
+#: app/views/testing/viewTestSample.html:63
+#: app/views/testing/viewTestSample.html:83
+msgid "Test"
+msgstr "[FR] Test"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:17
+msgid "Test Batch Outcomes Summary Report"
+msgstr "[FR] Test Batch Outcomes Summary Report"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:33
+msgid ""
+"Test Batch Outcomes Summary Report - Blood Typing Issues and Tests "
+"Outstanding"
+msgstr ""
+"[FR] Test Batch Outcomes Summary Report - Blood Typing Issues and Tests "
+"Outstanding"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:25
+msgid "Test Batch Outcomes Summary Report - TTI Unsafe and Tests Outstanding"
+msgstr ""
+"[FR] Test Batch Outcomes Summary Report - TTI Unsafe and Tests Outstanding"
+
+#: app/views/testing/manageTestBatch.html:182
+#: app/views/testing/manageTestBatch.html:31
+msgid "Test Samples"
+msgstr "[FR] Test Samples"
+
+#: app/views/testing/viewTestSample.html:65
+#: app/views/testing/viewTestSample.html:85
+msgid "Tested On"
+msgstr "[FR] Tested On"
+
+#: app/views/testing/manageTestBatch.html:61
+msgid "There are no donation batches to test."
+msgstr "[FR] There are no donation batches to test."
 
 #: app/messages.html:19
 msgid ""
@@ -861,9 +1326,18 @@ msgstr "Ce champ doit être un nombre"
 msgid "This must be unique"
 msgstr "Ce champ doit être unique"
 
+#: app/views/testing/viewTestBatch.html:202
+msgid "This test batch is ready to be closed."
+msgstr "[FR] This test batch is ready to be closed."
+
+#: app/views/testing/viewTestBatch.html:201
+msgid "This test batch is ready to be released."
+msgstr "[FR] This test batch is ready to be released."
+
 #: app/views/inventory/findTransfusion.html:58
 #: app/views/inventory/viewOrders.html:28
 #: app/views/inventory/viewReturns.html:28
+#: app/views/testing/manageTestBatch.html:140
 msgid "To"
 msgstr "à"
 
@@ -957,13 +1431,20 @@ msgstr "Unités Rétournées"
 msgid "Units Supplied"
 msgstr "Unités Fournies"
 
-#: app/views/translations.html:21
+#: app/views/testing/viewTestSample.html:43 app/views/translations.html:21
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: app/views/translations.html:35
+#: app/views/translations.html:35 app/views/translations.html:56
 msgid "Unsafe"
 msgstr "Peu sûr"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:143
+#: app/scripts/controllers/testing/viewTestBatch.js:268
+#: app/views/testing/viewTestBatch.html:187
+#: app/views/testing/viewTestSample.html:37
+msgid "Venue"
+msgstr "[FR] Venue"
 
 #: app/views/inventory/manageOrders.html:12
 #: app/views/inventory/viewOrders.html:12
@@ -982,10 +1463,17 @@ msgstr "Afficher les Retours"
 msgid "View Stock Levels"
 msgstr "Afficher les Niveaux de Stocks"
 
+#: app/views/testing/sidebar.html:15 app/views/testing/viewTestSample.html:3
+msgid "View Test Sample"
+msgstr "[FR] View Test Sample"
+
 #: app/scripts/controllers/inventory/recordTransfusions.js:179
 #: app/scripts/controllers/inventory/viewOrder.js:249
 #: app/scripts/controllers/inventory/viewReturn.js:207
-#: app/views/inventory/recordTransfusions.html:8 app/views/translations.html:9
+#: app/scripts/controllers/testing/viewTestBatch.js:477
+#: app/views/inventory/recordTransfusions.html:8
+#: app/views/testing/viewTestBatch.html:14
+#: app/views/testing/viewTestBatch.html:8 app/views/translations.html:9
 msgid "Void"
 msgstr "Supprimer"
 
@@ -1013,6 +1501,16 @@ msgstr "Suppression en cours..."
 msgid "Ward No"
 msgstr "Numéro de Pavillon"
 
+#: app/scripts/controllers/testing/viewTestBatch.js:153
+#: app/scripts/controllers/testing/viewTestBatch.js:231
+msgid "Y"
+msgstr "[FR] Y"
+
+#: app/views/testing/manageTestBatch.html:83
+#: app/views/testing/viewTestBatch.html:174
+msgid "donations"
+msgstr "[FR] donations"
+
 #: app/views/translations.html:5
 msgid "female"
 msgstr "femme"
@@ -1020,6 +1518,44 @@ msgstr "femme"
 #: app/views/translations.html:3
 msgid "male"
 msgstr "homme"
+
+#: app/views/testing/viewTestBatch.html:146
+#: app/views/testing/viewTestBatch.html:150
+msgid "{{count}} of {{total}}"
+msgstr "[FR] {{count}} of {{total}}"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:495
+msgid ""
+"{{count}} of {{total}} samples will be released, the remaining samples "
+"require discrepancies to be resolved. Are you sure that you want to release "
+"this test batch?"
+msgstr ""
+"[FR] {{count}} of {{total}} samples will be released, the remaining samples "
+"require discrepancies to be resolved. Are you sure that you want to release "
+"this test batch?"
+
+#: app/scripts/controllers/testing/viewTestBatch.js:500
+msgid ""
+"{{count}} of {{total}} samples will be released. Are you sure that you want "
+"to release this test batch?"
+msgstr ""
+"[FR] {{count}} of {{total}} samples will be released. Are you sure that you "
+"want to release this test batch?"
+
+#: app/views/testing/viewTestBatch.html:212
+msgid "{{count}} sample(s) found"
+msgstr "[FR] {{count}} sample(s) found"
+
+#~ msgid "Dagmar"
+#~ msgstr "Dagmari"
+
+#, fuzzy
+#~ msgid "Number"
+#~ msgstr "Numéro de patient"
+
+#, fuzzy
+#~ msgid "Created On:"
+#~ msgstr "Date de création"
 
 #, fuzzy
 #~ msgid "Return From"
@@ -1100,9 +1636,6 @@ msgstr "homme"
 #~ msgstr ""
 #~ "{{savingReturnDetails ? 'Enregistrement en cours...' : 'Enregistrer' | "
 #~ "translate}}"
-
-#~ msgid "Number of components"
-#~ msgstr "Nombre de composants"
 
 #~ msgid "Select:"
 #~ msgstr "Sélectionner:"
