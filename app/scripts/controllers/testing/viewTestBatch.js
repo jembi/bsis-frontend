@@ -492,12 +492,12 @@ angular.module('bsis')
     $scope.releaseTestBatch = function(testBatch) {
       var message;
       if (testBatch.readyForReleaseCount < testBatch.numSamples) {
-        message = gettextCatalog.getString('{count} of {total} samples will be released, ' +
+        message = gettextCatalog.getString('{{count}} of {{total}} samples will be released, ' +
           'the remaining samples require discrepancies to be resolved. Are you sure that ' +
           'you want to release this test batch?',
           {count: testBatch.readyForReleaseCount, total: testBatch.numSamples});
       } else {
-        message = gettextCatalog.getString('{count} of {total} samples will be released. ' +
+        message = gettextCatalog.getString('{{count}} of {{total}} samples will be released. ' +
           'Are you sure that you want to release this test batch?',
           {count: testBatch.readyForReleaseCount, total: testBatch.numSamples});
       }
