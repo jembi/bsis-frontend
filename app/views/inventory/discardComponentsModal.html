@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="modal-footer">
-      <button class="btn btn-primary" type="submit" ng-disabled="discardingComponent" translate>{{discardingComponent ? "Discarding..." : "Discard Components"}}</button>
+      <button class="btn btn-primary" type="submit" ng-disabled="discardingComponent">{{discardingComponent ? "Discarding..." : "Discard" | translate}}</button>
       <button class="btn btn-primary" type="button" ng-disabled="discardingComponent" ng-click="close()" translate>Cancel</button>
   </div>
 </form>
