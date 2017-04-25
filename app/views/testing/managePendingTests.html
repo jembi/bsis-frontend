@@ -7,10 +7,10 @@
   <hr/>
 
   <div class="h4">
-      <small><em translate>Created On:</em> </small>
+      <small><em><span translate>Created On</span>:</em> </small>
       {{ testBatchCreatedDate | bsisDateTime}}
       |
-      <small><em translate>Number of Samples:</em> </small>
+      <small><em><span translate>Number of Samples</span>:</em> </small>
       {{ numberOfDonations }}
   </div>
 
@@ -90,8 +90,8 @@
 
                   <div class="form-group">
                       <div class="col-sm-3">
-                          <button class="btn btn-primary" type="submit" ng-disabled="savingTestResults" translate>
-                              {{savingTestResults ? "Saving..." : "Save Test Outcomes"}}
+                          <button class="btn btn-primary" type="submit" ng-disabled="savingTestResults">
+                              {{savingTestResults ? "Saving..." : "Save" | translate}}
                           </button>
                           <button class="btn btn-primary" type="button" ng-click="go('/viewTestBatch')" ng-disabled="savingTestResults" translate>Cancel</button>
                       </div>

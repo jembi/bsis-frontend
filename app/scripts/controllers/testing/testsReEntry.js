@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('TestsReEnterCtrl', function($scope, $location, $log, TestingService, $uibModal, $sce, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('TestsReEnterCtrl', function($scope, $location, $log, TestingService, $uibModal, $sce, $filter, ngTableParams, $timeout, $routeParams, gettextCatalog) {
 
     $scope.data = [];
 
@@ -154,12 +154,13 @@ angular.module('bsis')
 
     var confirmSaveTestOutcomes = function() {
       var messageText = '';
-      messageText += 'Re-entry completed for ' + reEntriesConfirmed  + ' of ' + totalReEntries + ' outcomes.<br /> ';
-      messageText += 'Re-entry required for ' + (totalReEntries - reEntriesConfirmed) + ' of ' + totalReEntries + ' outcomes. <br /> ';
+      messageText += 'Re-entry completed for {{reEntriesConfirmed}} of {{totalReEntries}} outcomes.<br/>';
+      messageText += 'Re-entry required for {{reEntriesNotConfirmed}} of {{totalReEntries}} outcomes.<br/>';
       var saveObject = {
-        title: 'Save test outcomes',
-        button: 'Save',
-        message: messageText
+        title: gettextCatalog.getString('Save test outcomes'),
+        button: gettextCatalog.getString('Save'),
+        message: gettextCatalog.getString(messageText, {reEntriesConfirmed: reEntriesConfirmed,
+          totalReEntries: totalReEntries, reEntriesNotConfirmed: (totalReEntries - reEntriesConfirmed)})
       };
       var modalInstance = $uibModal.open({
         animation: false,
