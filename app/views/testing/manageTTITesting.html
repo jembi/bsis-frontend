@@ -5,7 +5,7 @@
   <hr/>
 
   <div class="h4">
-      <small><em><span translate>Created On:</span>:</em></small>
+      <small><em><span translate>Created On</span>:</em></small>
       {{ testBatchCreatedDate | bsisDateTime}}
       |
       <small><em><span translate>Number of Samples</span>:</em></small>                  
@@ -44,7 +44,7 @@
                             'sort-desc': testOutcomesTableParams.isSortBy('ttistatus', 'desc')
                           }"
                           ng-click="testOutcomesTableParams.sorting('ttistatus', testOutcomesTableParams.isSortBy('ttistatus', 'asc') ? 'desc' : 'asc')">
-                          <div><span translate>TTI Testing Status </span><span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
+                          <div><span translate>TTI Testing Status</span><span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
                       </th>
                       <th ng-repeat="column in testNames" ng-show="true"
                           class="text-center" ng-class=""
@@ -65,7 +65,7 @@
                               {{sample.donation.donationDate | bsisDate}}
                           </td>
                           <td class="text-center">
-                              {{sample.ttistatus}}
+                              {{sample.ttistatus.replace("TTI_", "") | titleCase | translate }}
                           </td>
                           <td align="center" ng-repeat="test in testNames">
                               <div style="width:90px;">
