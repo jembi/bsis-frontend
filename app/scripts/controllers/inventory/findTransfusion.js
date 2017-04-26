@@ -120,7 +120,7 @@ angular.module('bsis')
 
       exporterPdfCustomFormatter: function(docDefinition) {
         var componentType = $filter('filter')($scope.componentTypes, function(ct) {
-          return ct.id === parseInt($scope.searchParams.componentTypeId);
+          return ct.id === $scope.searchParams.componentTypeId;
         });
         var transfusionSite = $filter('filter')($scope.transfusionSites, function(usageSite) {
           return usageSite.id === $scope.searchParams.receivedFromId;
