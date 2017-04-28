@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: app/views/testing/viewTestBatch.html:73
@@ -385,8 +385,7 @@ msgstr "Créé"
 #: app/views/testing/manageTestBatch.html:174
 #: app/views/testing/manageTestBatch.html:27
 #: app/views/testing/reEnterBloodTyping.html:8
-#: app/views/testing/reEnterTTI.html:8
-#: app/views/testing/viewTestBatch.html:127
+#: app/views/testing/reEnterTTI.html:8 app/views/testing/viewTestBatch.html:127
 msgid "Created On"
 msgstr "Date de création"
 
@@ -534,8 +533,7 @@ msgstr "Expédié"
 #: app/views/inventory/fulfilOrder.html:10
 #: app/views/inventory/fulfilOrder.html:64
 #: app/views/inventory/manageOrders.html:39
-#: app/views/inventory/viewOrder.html:28
-#: app/views/inventory/viewOrders.html:46
+#: app/views/inventory/viewOrder.html:28 app/views/inventory/viewOrders.html:46
 msgid "Dispatched From"
 msgstr "Expédié de"
 
@@ -545,8 +543,7 @@ msgstr "Expédié de"
 #: app/views/inventory/fulfilOrder.html:11
 #: app/views/inventory/fulfilOrder.html:70
 #: app/views/inventory/manageOrders.html:73
-#: app/views/inventory/viewOrder.html:29
-#: app/views/inventory/viewOrders.html:73
+#: app/views/inventory/viewOrder.html:29 app/views/inventory/viewOrders.html:73
 msgid "Dispatched To"
 msgstr "Distribué à"
 
@@ -616,8 +613,7 @@ msgstr "Femme"
 msgid "Filter data"
 msgstr "[FR] Filter data"
 
-#: app/views/inventory/findInventory.html:3
-#: app/views/inventory/sidebar.html:13
+#: app/views/inventory/findInventory.html:3 app/views/inventory/sidebar.html:13
 msgid "Find Inventory"
 msgstr "Trouver un Inventaire"
 
@@ -726,8 +722,8 @@ msgstr "Gestion de Commandes"
 msgid "Manage Return"
 msgstr "Gestion de Retour"
 
-#: app/views/inventory/manageReturns.html:3
-#: app/views/inventory/sidebar.html:19 app/views/inventory/viewReturns.html:3
+#: app/views/inventory/manageReturns.html:3 app/views/inventory/sidebar.html:19
+#: app/views/inventory/viewReturns.html:3
 msgid "Manage Returns"
 msgstr "Gestion de Retours"
 
@@ -894,8 +890,7 @@ msgstr "Status de la Commande"
 
 #: app/scripts/controllers/inventory/viewOrder.js:121
 #: app/views/inventory/fulfilOrder.html:51
-#: app/views/inventory/fulfilOrder.html:9
-#: app/views/inventory/viewOrder.html:30
+#: app/views/inventory/fulfilOrder.html:9 app/views/inventory/viewOrder.html:30
 msgid "Order Type"
 msgstr "Type de Commande"
 
@@ -1030,13 +1025,18 @@ msgstr "[FR] Re-Enter TTI Test Outcomes"
 
 #: app/scripts/controllers/testing/testsReEntry.js:159
 msgid ""
-"Re-entry completed for {{reEntriesConfirmed}} of {{totalReEntries}} "
-"outcomes. <br/>Re-entry required for {{reEntriesNotConfirmed}} of "
-"{{totalReEntries}} outcomes."
+"Re-entry completed for {{reEntriesConfirmed}} of {{totalReEntries}} outcomes."
 msgstr ""
 "[FR] Re-entry completed for {{reEntriesConfirmed}} of {{totalReEntries}} "
-"outcomes. <br/>Re-entry required for {{reEntriesNotConfirmed}} of "
-"{{totalReEntries}} outcomes."
+"outcomes."
+
+#: app/scripts/controllers/testing/testsReEntry.js:160
+msgid ""
+"Re-entry required for {{reEntriesNotConfirmed}} of {{totalReEntries}} "
+"outcomes."
+msgstr ""
+"[FR] Re-entry required for {{reEntriesNotConfirmed}} of {{totalReEntries}} "
+"outcomes."
 
 #: app/views/testing/manageBloodGroupTesting.html:3
 msgid "Record Blood Group Serology Outcomes"
@@ -1551,6 +1551,15 @@ msgstr ""
 #: app/views/testing/viewTestBatch.html:212
 msgid "{{count}} sample(s) found"
 msgstr "[FR] {{count}} sample(s) found"
+
+#~ msgid ""
+#~ "Re-entry completed for {{reEntriesConfirmed}} of {{totalReEntries}} "
+#~ "outcomes. <br/>Re-entry required for {{reEntriesNotConfirmed}} of "
+#~ "{{totalReEntries}} outcomes."
+#~ msgstr ""
+#~ "[FR] Re-entry completed for {{reEntriesConfirmed}} of {{totalReEntries}} "
+#~ "outcomes. <br/>Re-entry required for {{reEntriesNotConfirmed}} of "
+#~ "{{totalReEntries}} outcomes."
 
 #~ msgid "Manage"
 #~ msgstr "[FR] Manage"

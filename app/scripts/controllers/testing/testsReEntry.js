@@ -156,9 +156,10 @@ angular.module('bsis')
       var saveObject = {
         title: gettextCatalog.getString('Save test outcomes'),
         button: gettextCatalog.getString('Save'),
-        message: gettextCatalog.getString('Re-entry completed for {{reEntriesConfirmed}} of {{totalReEntries}} outcomes. <br/>' +
-          'Re-entry required for {{reEntriesNotConfirmed}} of {{totalReEntries}} outcomes.', {reEntriesConfirmed: reEntriesConfirmed,
-          totalReEntries: totalReEntries, reEntriesNotConfirmed: (totalReEntries - reEntriesConfirmed)})
+        message: gettextCatalog.getString('Re-entry completed for {{reEntriesConfirmed}} of {{totalReEntries}} outcomes.', {reEntriesConfirmed: reEntriesConfirmed,
+          totalReEntries: totalReEntries}) + ' <br/>' + gettextCatalog.getString(
+          'Re-entry required for {{reEntriesNotConfirmed}} of {{totalReEntries}} outcomes.', {
+            totalReEntries: totalReEntries, reEntriesNotConfirmed: (totalReEntries - reEntriesConfirmed)})
       };
       var modalInstance = $uibModal.open({
         animation: false,
