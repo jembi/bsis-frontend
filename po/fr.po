@@ -9,12 +9,20 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: app/views/translations.html:13
 msgid "Add"
 msgstr "Ajouter"
+
+#: app/views/donors/findDonor.html:86
+msgid "Add Donation Batch"
+msgstr "[FR] Add Donation Batch"
+
+#: app/views/donors/findDonor.html:132 app/views/donors/findDonor.html:82
+msgid "Add New Donor"
+msgstr "[FR] Add New Donor"
 
 #: app/views/inventory/manageOrders.html:27
 #: app/views/inventory/manageOrders.html:9
@@ -41,6 +49,10 @@ msgstr "Ajouter à la Commande"
 msgid "Adding..."
 msgstr "Ajout en cours ..."
 
+#: app/views/donors/findDonor.html:112
+msgid "Age"
+msgstr "[FR] Age"
+
 #: app/scripts/controllers/inventory/findTransfusion.js:129
 msgid "All"
 msgstr "Tous"
@@ -50,6 +62,10 @@ msgstr "Tous"
 #: app/views/inventory/viewStockLevels.html:18
 msgid "All Sites"
 msgstr "Tous les Sites"
+
+#: app/views/donors/findDonor.html:57
+msgid "All search fields cannot be empty"
+msgstr "[FR] All search fields cannot be empty"
 
 #: app/views/inventory/findInventory.html:73
 msgid "Any Blood Group"
@@ -134,7 +150,7 @@ msgstr "CSV"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: app/views/inventory/findInventory.html:94
+#: app/views/donors/findDonor.html:66 app/views/inventory/findInventory.html:94
 #: app/views/inventory/findTransfusion.html:80
 #: app/views/inventory/fulfilOrder.html:183
 #: app/views/inventory/fulfilOrder.html:221
@@ -279,12 +295,16 @@ msgstr "Commandes en cours"
 msgid "Current Returns"
 msgstr "Retours en cours"
 
+#: app/views/donors/findDonor.html:22
+msgid "DD"
+msgstr "[FR] DD"
+
 #: app/scripts/controllers/inventory/findInventory.js:20
 #: app/scripts/controllers/inventory/findTransfusion.js:42
 #: app/scripts/controllers/inventory/recordReturn.js:16
 #: app/scripts/controllers/inventory/viewOrder.js:42
 #: app/scripts/controllers/inventory/viewReturn.js:9
-#: app/views/inventory/findInventory.html:8
+#: app/views/donors/findDonor.html:47 app/views/inventory/findInventory.html:8
 #: app/views/inventory/findTransfusion.html:8
 #: app/views/inventory/fulfilOrder.html:199
 #: app/views/inventory/recordReturn.html:49
@@ -315,6 +335,7 @@ msgid "Date must be after component was created"
 msgstr "La date doit être après la création du composant"
 
 #: app/scripts/controllers/inventory/viewOrder.js:161
+#: app/views/donors/findDonor.html:116 app/views/donors/findDonor.html:19
 #: app/views/inventory/fulfilOrder.html:118
 #: app/views/inventory/fulfilOrder.html:29
 #: app/views/inventory/manageOrders.html:114
@@ -391,8 +412,7 @@ msgstr "Expédié"
 #: app/views/inventory/fulfilOrder.html:10
 #: app/views/inventory/fulfilOrder.html:64
 #: app/views/inventory/manageOrders.html:39
-#: app/views/inventory/viewOrder.html:28
-#: app/views/inventory/viewOrders.html:46
+#: app/views/inventory/viewOrder.html:28 app/views/inventory/viewOrders.html:46
 msgid "Dispatched From"
 msgstr "Expédié de"
 
@@ -402,8 +422,7 @@ msgstr "Expédié de"
 #: app/views/inventory/fulfilOrder.html:11
 #: app/views/inventory/fulfilOrder.html:70
 #: app/views/inventory/manageOrders.html:73
-#: app/views/inventory/viewOrder.html:29
-#: app/views/inventory/viewOrders.html:73
+#: app/views/inventory/viewOrder.html:29 app/views/inventory/viewOrders.html:73
 msgid "Dispatched To"
 msgstr "Distribué à"
 
@@ -412,6 +431,18 @@ msgstr "Distribué à"
 #: app/views/inventory/viewStockLevels.html:8
 msgid "Distribution Center"
 msgstr "Centre de Distribution"
+
+#: app/views/donors/findDonor.html:38
+msgid "Donor"
+msgstr "[FR] Donor"
+
+#: app/views/donors/findDonor.html:99
+msgid "Donor Number"
+msgstr "[FR] Donor Number"
+
+#: app/views/donors/findDonor.html:84
+msgid "Donor Registration Blocked - No Open Donation Batches"
+msgstr "[FR] Donor Registration Blocked - No Open Donation Batches"
 
 #: app/views/inventory/findInventory.html:83
 msgid "Due to Expire By"
@@ -445,8 +476,11 @@ msgstr "Statut d'Expiration"
 msgid "Female"
 msgstr "Femme"
 
-#: app/views/inventory/findInventory.html:3
-#: app/views/inventory/sidebar.html:13
+#: app/views/donors/findDonor.html:3
+msgid "Find Donor"
+msgstr "[FR] Find Donor"
+
+#: app/views/inventory/findInventory.html:3 app/views/inventory/sidebar.html:13
 msgid "Find Inventory"
 msgstr "Trouver un Inventaire"
 
@@ -454,6 +488,14 @@ msgstr "Trouver un Inventaire"
 #: app/views/inventory/sidebar.html:23
 msgid "Find Transfusions"
 msgstr "Trouver des Transfusions"
+
+#: app/views/donors/findDonor.html:9
+msgid "First"
+msgstr "[FR] First"
+
+#: app/views/donors/findDonor.html:103
+msgid "First Name"
+msgstr "[FR] First Name"
 
 #: app/views/inventory/fulfilOrder.html:3
 msgid "Fulfil Order Form"
@@ -465,6 +507,7 @@ msgid "Gap"
 msgstr "Écart"
 
 #: app/scripts/controllers/inventory/viewOrder.js:156
+#: app/views/donors/findDonor.html:109 app/views/donors/findDonor.html:31
 #: app/views/inventory/fulfilOrder.html:112
 #: app/views/inventory/fulfilOrder.html:26
 #: app/views/inventory/manageOrders.html:145
@@ -481,6 +524,10 @@ msgstr "Numéro de Pavillon à l'Hôpital"
 #: app/views/inventory/viewStockLevels.html:29
 msgid "In Stock"
 msgstr "En Stock"
+
+#: app/views/donors/findDonor.html:13
+msgid "Include Similar Results"
+msgstr "[FR] Include Similar Results"
 
 #: app/messages.html:18
 msgid "Invalid"
@@ -518,6 +565,14 @@ msgstr "Envoi"
 msgid "Issued"
 msgstr "Envoyé"
 
+#: app/views/donors/findDonor.html:11
+msgid "Last"
+msgstr "[FR] Last"
+
+#: app/views/donors/findDonor.html:106
+msgid "Last Name"
+msgstr "[FR] Last Name"
+
 #: app/scripts/controllers/inventory/findInventory.js:65
 msgid "Location"
 msgstr "Emplacement"
@@ -525,6 +580,10 @@ msgstr "Emplacement"
 #: app/views/inventory/sidebar.html:12
 msgid "MANAGE INVENTORY"
 msgstr "GESTION D'INVENTAIRE"
+
+#: app/views/donors/findDonor.html:24
+msgid "MM"
+msgstr "[MM] MM"
 
 #: app/views/translations.html:2
 msgid "Male"
@@ -543,8 +602,8 @@ msgstr "Gestion de Commandes"
 msgid "Manage Return"
 msgstr "Gestion de Retour"
 
-#: app/views/inventory/manageReturns.html:3
-#: app/views/inventory/sidebar.html:19 app/views/inventory/viewReturns.html:3
+#: app/views/inventory/manageReturns.html:3 app/views/inventory/sidebar.html:19
+#: app/views/inventory/viewReturns.html:3
 msgid "Manage Returns"
 msgstr "Gestion de Retours"
 
@@ -560,7 +619,7 @@ msgstr ""
 msgid "Must match the previous entry"
 msgstr "Doit correspondre à l'entrée précédente"
 
-#: app/views/inventory/manageOrders.html:95
+#: app/views/donors/findDonor.html:6 app/views/inventory/manageOrders.html:95
 msgid "Name"
 msgstr "Nom"
 
@@ -571,6 +630,10 @@ msgid ""
 msgstr ""
 "Aucun composant avec le type de composant sélectionné n'existe pour le don "
 "sélectionné"
+
+#: app/views/donors/findDonor.html:132
+msgid "No donors found"
+msgstr "[FR] No donors found"
 
 #: app/scripts/controllers/inventory/viewStockLevels.js:86
 msgid "Not Labelled"
@@ -628,7 +691,7 @@ msgstr "Status de la Commande"
 
 #: app/scripts/controllers/inventory/viewOrder.js:121
 #: app/views/inventory/fulfilOrder.html:51
-#: app/views/inventory/viewOrder.html:30
+#: app/views/inventory/fulfilOrder.html:9 app/views/inventory/viewOrder.html:30
 msgid "Order Type"
 msgstr "Type de Commande"
 
@@ -802,6 +865,7 @@ msgstr "Sélectionner"
 msgid "Select a date range that is less than one month"
 msgstr "Sélectionnez une plage de dates inférieure à un mois"
 
+#: app/views/inventory/fulfilOrder.html:44
 #: app/views/inventory/viewOrders.html:33
 #: app/views/inventory/viewOrders.html:38
 #: app/views/inventory/viewReturns.html:33
@@ -965,6 +1029,10 @@ msgstr "Inconnu"
 msgid "Unsafe"
 msgstr "Peu sûr"
 
+#: app/views/donors/findDonor.html:120
+msgid "Venue"
+msgstr "[FR] Venue"
+
 #: app/views/inventory/manageOrders.html:12
 #: app/views/inventory/viewOrders.html:12
 #: app/views/inventory/viewOrders.html:19
@@ -1012,6 +1080,14 @@ msgstr "Suppression en cours..."
 #: app/views/inventory/viewOrder.html:35
 msgid "Ward No"
 msgstr "Numéro de Pavillon"
+
+#: app/views/donors/findDonor.html:26
+msgid "YYYY"
+msgstr "[FR] YYYY"
+
+#: app/views/donors/findDonor.html:79
+msgid "donor(s) found"
+msgstr "[FR] donor(s) found"
 
 #: app/views/translations.html:5
 msgid "female"
