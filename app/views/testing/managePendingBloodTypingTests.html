@@ -1,14 +1,14 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/testing/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-  <span class="h3 page-header">Record Repeat ABO/Rh Outcomes</span>
+  <span class="h3 page-header" translate>Record Repeat ABO/Rh Outcomes</span>
 
   <hr/>
 
   <div class="h4">
-      <small><em>Created On: </em></small>
+      <small><em><span translate>Created On</span>:</em></small>
       {{ testBatchCreatedDate | bsisDateTime}}
       |
-      <small><em>Number of Samples: </em></small>
+      <small><em><span translate>Number of Samples</span>:</em></small>
       {{ numberOfDonations }}
   </div>
 
@@ -29,7 +29,7 @@
                           }"
                           ng-click="testOutcomesTableParams.sorting('donation.donationIdentificationNumber', testOutcomesTableParams.isSortBy('donation.donationIdentificationNumber', 'asc') ? 'desc' : 'asc')">
                           <div>
-                            DIN <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> 
+                            <span translate>DIN</span><span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> 
                           </div>
                       </th>
                       <th class="text-center sortable"
@@ -39,7 +39,7 @@
                           }"
                           ng-click="testOutcomesTableParams.sorting('donation.donationDate', testOutcomesTableParams.isSortBy('donation.donationDate', 'asc') ? 'desc' : 'asc')">
                           <div>
-                            Donation Date <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> 
+                            <span translate>Donation Date</span><span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> 
                           </div>
                       </th>
                       <th class="text-center sortable"
@@ -49,7 +49,7 @@
                           }"
                           ng-click="testOutcomesTableParams.sorting('bloodTypingMatchStatus', testOutcomesTableParams.isSortBy('bloodTypingMatchStatus', 'asc') ? 'desc' : 'asc')">
                           <div>
-                            Blood Group Serology Status <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> 
+                            <span translate>Blood Group Serology Status</span> <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span> 
                           </div>
                       </th>
                       <th ng-repeat="column in testNames" ng-show="true"
@@ -70,7 +70,7 @@
                               {{sample.donation.donationDate | bsisDate}}
                           </td>
                           <td class="text-center">
-                              {{sample.bloodTypingStatus}} - {{sample.bloodTypingMatchStatus}}
+                              {{sample.bloodTypingStatus | titleCase | translate}} - {{sample.bloodTypingMatchStatus | titleCase | translate}}
                           </td>
                           <td align="center" ng-repeat="test in testNames">
                   <span ng-show="sample.recentTestResults[test.id] || sample.pendingBloodTypingTestsIds.indexOf(test.id) >= 0">
@@ -93,9 +93,9 @@
                   <div class="form-group">
                       <div class="col-sm-3">
                           <button class="btn btn-primary" type="submit" ng-disabled="savingTestResults">
-                              {{savingTestResults ? "Saving..." : "Save Test Outcomes"}}
+                              {{savingTestResults ? "Saving..." : "Save" | translate}}
                           </button>
-                          <button class="btn btn-primary" type="button" ng-click="go('/viewTestBatch')" ng-disabled="savingTestResults">Cancel</button>
+                          <button class="btn btn-primary" type="button" ng-click="go('/viewTestBatch')" ng-disabled="savingTestResults" translate>Cancel</button>
                       </div>
                   </div>
 
