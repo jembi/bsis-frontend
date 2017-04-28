@@ -70,7 +70,7 @@
                               {{sample.donation.donationDate | bsisDate}}
                           </td>
                           <td class="text-center">
-                              {{sample.bloodTypingStatus}} - {{sample.bloodTypingMatchStatus}}
+                              {{sample.bloodTypingStatus | titleCase | translate}} - {{sample.bloodTypingMatchStatus | titleCase | translate}}
                           </td>
                           <td align="center" ng-repeat="test in testNames">
                   <span ng-show="sample.recentTestResults[test.id] || sample.pendingBloodTypingTestsIds.indexOf(test.id) >= 0">
