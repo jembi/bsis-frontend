@@ -2,16 +2,11 @@
 <div class="col-sm-9 col-md-10 main">
 <form editable-form name="editableForm" onaftersave="updateDonor(donor)" oncancel="cancelForm(donor, editableForm)"
       novalidate>
-    <uib-alert type="danger" close="" ng-show="err.userMessage">
-        {{err.userMessage}}
+    <uib-alert type="danger" close="">
+        <span translate>Please provide valid inputs</span>
         <ul>
-            <li ng-show="err['donor.birthDate']"> {{err["donor.birthDate"]}}</li>
-            <li ng-show="err['contact.mobileNumber']"> {{err["contact.mobileNumber"]}}</li>
-            <li ng-show="err['contact.workNumber']"> {{err["contact.workNumber"]}}</li>
-            <li ng-show="err['contact.homeNumber']"> {{err["contact.homeNumber"]}}</li>
-            <li ng-show="err['address.homeAddressZipcode']"> {{err["address.homeAddressZipcode"]}}</li>
-            <li ng-show="err['address.homeAddressZipcode']"> {{err["address.workAddressZipcode"]}}</li>
-            <li ng-show="err['address.homeAddressZipcode']"> {{err["address.postalAddressZipcode"]}}</li>
+            <li ng-show="err['fieldErrors']['donor.birthDate'][0].code === 'date.futureDate'">
+            <span translate>Cannot be a future date</span></li>
         </ul>
     </uib-alert>
 
@@ -79,8 +74,7 @@
     <div has-permission="{{permissions.VOID_DONOR}}" ng-hide="editableForm.$visible" style="display:inline;">
         <em>
             <button type="button" class="btn btn-link" ng-click="confirmDelete(donor)"
-                    ng-disabled="!donorPermissions.canDelete" translate>Void donor
-            </button>
+                    ng-disabled="!donorPermissions.canDelete" translate>Void</button>
         </em>
     </div>
 
@@ -89,19 +83,14 @@
     <div has-permission="{{permissions.EDIT_DONOR}}" style="display:inline;">
         <em>
             <button type="button" class="btn btn-link" ng-click="editableForm.$show()"
-                    ng-show="!editableForm.$visible" translate>Edit Donor
-            </button>
+                    ng-show="!editableForm.$visible" translate>Edit</button>
         </em>
 
       <span ng-show="editableForm.$visible">
       <em>
-          <button type="submit" class="btn btn-link text-success" ng-disabled="editableForm.$waiting" translate>
-              Save
-          </button>
+          <button type="submit" class="btn btn-link text-success" ng-disabled="editableForm.$waiting" translate>Save</button>
           <button type="button" class="btn btn-link text-muted" ng-disabled="editableForm.$waiting"
-                  ng-click="editableForm.$cancel()" translate>
-              Cancel
-          </button>
+                  ng-click="editableForm.$cancel()" translate>Cancel</button>
       </em>
       </span>
     </div>
@@ -176,7 +165,7 @@
                                 <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
                                 <td class="field"><span translate>Currently Deferred</span>:</td>
                                 <td ng-if="currentlyDeferred" class="value red">
-                                    <span ng-if="lastDeferral.deferralReason.durationType === 'TEMPORARY'" translate> Deferred until {{deferredUntil | bsisDate}}</span>
+                                    <span ng-if="lastDeferral.deferralReason.durationType === 'TEMPORARY'" translate translate-params-date="deferredUntil | bsisDate">Deferred until {{date}}</span>
                                     <span ng-if="lastDeferral.deferralReason.durationType === 'PERMANENT'" translate>Permanently deferred</span>
                                 </td>
                                 <td ng-if="!currentlyDeferred" class="value green"><span translate>No current deferrals</span></td>
@@ -247,14 +236,10 @@
                                               <em>
                                                   <button type="submit" class="btn"
                                                           style="background:none!important; border:none;  cursor: pointer;"
-                                                          ng-disabled="donorIdentifierForm.$waiting" translate>
-                                                      Save
-                                                  </button>
+                                                          ng-disabled="donorIdentifierForm.$waiting" translate>Save</button>
                                                   <button type="button" class="btn"
                                                           style="background:none!important; border:none;  cursor: pointer;"
-                                    ng-disabled="donorIdentifierForm.$waiting" ng-click="donorIdentifierForm.$cancel()" translate>
-                                                      Cancel
-                                                  </button>
+                                                          ng-disabled="donorIdentifierForm.$waiting" ng-click="donorIdentifierForm.$cancel()" translate>Cancel</button>
                                               </em>
                                             </span>
                                         </span>
@@ -283,14 +268,10 @@
                                           <em>
                                               <button type="submit" class="btn"
                                                       style="background:none!important; border:none;  cursor: pointer;"
-                                                      ng-disabled="donorNotesForm.$waiting" translate>
-                                                  Save
-                                              </button>
+                                                      ng-disabled="donorNotesForm.$waiting" translate>Save</button>
                                               <button type="button" class="btn"
                                                       style="background:none!important; border:none;  cursor: pointer;"
-                                                      ng-disabled="donorNotesForm.$waiting" ng-click="donorNotesForm.$cancel()" translate>
-                                                  Cancel
-                                              </button>
+                                                      ng-disabled="donorNotesForm.$waiting" ng-click="donorNotesForm.$cancel()" translate>Cancel</button>
                                           </em>
                                           </span>
                                           </span>
@@ -309,7 +290,7 @@
         </uib-tab>
         <uib-tab active="tabs.demographics">
             <uib-tab-heading>
-                <i class="fa {{icons.BARS}}"></i><span translate>Demographics</span>
+                <i class="fa {{icons.BARS}}"></i>&nbsp<span translate>Demographics</span>
             </uib-tab-heading>
 
             <div class="panel panel-default">
@@ -322,7 +303,7 @@
 
         <uib-tab active="tabs.donations" select="getDonations(donor.id)" has-permission="{{permissions.VIEW_DONATION}}">
             <uib-tab-heading>
-                <i class="fa {{icons.ARCHIVE}}"></i><span translate>Donations</span> 
+                <i class="fa {{icons.ARCHIVE}}"></i>&nbsp<span translate>Donations</span> 
             </uib-tab-heading>
 
             <div class="panel panel-default">
@@ -349,7 +330,7 @@
 
         <uib-tab active="tabs.deferrals" select="getDeferrals(donor.id)" has-permission="{{permissions.VIEW_DEFERRAL}}">
             <uib-tab-heading>
-                <i class="fa {{icons.WARNING}}"></i><span translate>Deferrals</span>
+                <i class="fa {{icons.WARNING}}"></i>&nbsp<span translate>Deferrals</span>
             </uib-tab-heading>
             <div class="panel panel-default">
                 <div class="panel-body">

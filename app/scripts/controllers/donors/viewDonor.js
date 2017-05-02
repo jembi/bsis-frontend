@@ -2,8 +2,9 @@
 
 angular.module('bsis')
 
-  .controller('ViewDonorCtrl', function($scope, $location, $log, Alerting, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, ICONS, MONTH, TITLE,
-                                         GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams, PERMISSIONS) {
+  .controller('ViewDonorCtrl', function($scope, $location, $log, $filter, $q, ngTableParams, $timeout, $routeParams,
+                                         Alerting, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, gettextCatalog,
+                                         ICONS, MONTH, TITLE, GENDER, DATEFORMAT, UI, DONATION, PERMISSIONS) {
 
     //Initialize scope variables
     $scope.icons = ICONS;
@@ -413,9 +414,9 @@ angular.module('bsis')
       }
 
       return ModalsService.showConfirmation({
-        title: 'Ineligible Donor',
-        button: 'Continue',
-        message: 'This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?'
+        title: gettextCatalog.getString('Ineligible Donor'),
+        button: gettextCatalog.getString('Continue'),
+        message: gettextCatalog.getString('This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?')
       });
     }
 
