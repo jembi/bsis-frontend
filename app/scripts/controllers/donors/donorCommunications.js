@@ -71,31 +71,31 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
 
   var columnDefs = [
     {
-      name: gettextCatalog.getString('Donor Number'),
+      displayName: gettextCatalog.getString('Donor Number'),
       field: 'donorNumber'
     },
     {
-      name: gettextCatalog.getString('First Name'),
+      displayName: gettextCatalog.getString('First Name'),
       field: 'firstName'
     },
     {
-      name: gettextCatalog.getString('Last Name'),
+      displayName: gettextCatalog.getString('Last Name'),
       field: 'lastName'},
     {
-      name: gettextCatalog.getString('Mobile Number'),
+      displayName: gettextCatalog.getString('Mobile Number'),
       field: 'contact.mobileNumber'
     },
     {
-      name: gettextCatalog.getString('Date of Last Donation'),
+      displayName: gettextCatalog.getString('Date of Last Donation'),
       field: 'dateOfLastDonation',
       cellFilter: 'bsisDate'
     },
     {
-      name: gettextCatalog.getString('Blood Group'),
+      displayName: gettextCatalog.getString('Blood Group'),
       field: 'bloodGroup'
     },
     {
-      name: gettextCatalog.getString('Venue'),
+      displayName: gettextCatalog.getString('Venue'),
       field: 'venue.name'
     }
   ];
