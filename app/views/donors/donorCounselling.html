@@ -37,13 +37,13 @@
             </div>
             <div>
                 <ng-messages for="findDonorCounsellingForm.startDate.$error" role="alert" ng-show="findDonorCounsellingForm.$submitted">
-                    <small class="error" ng-message="required" translate>Select a valid date</small>
+                    <small class="error" ng-message="required"><span translate>Select a valid date</span></small>
                     <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
             </div>
             <div>
                 <ng-messages for="findDonorCounsellingForm.endDate.$error" role="alert" ng-show="findDonorCounsellingForm.$submitted && !findDonorCounsellingForm.startDate.$invalid">
-                    <small class="error" ng-message="required" translate>Select a valid date</small>
+                    <small class="error" ng-message="required"><span translate>Select a valid date</span></small>
                     <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
             </div>
