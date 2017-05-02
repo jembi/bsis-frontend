@@ -2,7 +2,11 @@
 
 describe('Service: Utils', function() {
 
-  beforeEach(module('bsis'));
+  beforeEach(function() {
+    module('bsis', function($provide) {
+      $provide.constant('SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json'));
+    });
+  });
 
   describe('dateSort()', function() {
     it('should return -1 when date1 is before date2', inject(function(UtilsService) {
