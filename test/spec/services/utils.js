@@ -1,4 +1,5 @@
 'use strict';
+/* global readJSON: true */
 
 describe('Service: Utils', function() {
 
