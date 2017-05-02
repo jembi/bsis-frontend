@@ -6,6 +6,7 @@ describe('Service: Authinterceptor', function() {
 
   beforeEach(function() {
     module('bsis', function($provide) {
+      $provide.constant('SYSTEMCONFIG', readJSON('test/mockData/systemconfig.json'));
       $provide.constant('USERCONFIG', {
         configurations: [
           {
