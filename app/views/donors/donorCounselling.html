@@ -1,11 +1,11 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/donors/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-<h3 class="page-header">Donor Counselling</h3>
+<h3 class="page-header" translate>Donor Counselling</h3>
 
 <form class="form-horizontal" name="findDonorCounsellingForm" style="padding:10px 0;" ng-submit="refresh()" novalidate>
 
     <div class="clearfix form-group">
-        <label class="col-sm-2 control-label">Venues:</label>
+        <label class="col-sm-2 control-label" translate>Venues</label>
         <div class="col-sm-10">
             <ui-select multiple ng-model="search.selectedVenues" name="selectedVenues" style="max-width:500px;min-height:34px;" on-select="updateAllVenues();" ui-select-required="!search.allVenues">
                 <ui-select-match placeholder="Select:">{{$item.name}}</ui-select-match>
@@ -15,8 +15,9 @@
             </ui-select>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="allVenues" ng-model="search.allVenues" ng-click="clearVenues()"> Any
-                    Venue
+                    <input type="checkbox" name="allVenues" ng-model="search.allVenues" ng-click="clearVenues()"> 
+                    <span translate>Any Venue</span>
+                    
                 </label>
             </div>
             <div>
@@ -27,7 +28,7 @@
     </div>
 
     <div class="clearfix form-group">
-        <label class="col-sm-2 control-label">Donation Period:</label>
+        <label class="col-sm-2 control-label" translate>Donation Period</label>
         <div class="form-inline col-sm-10">
             <div>
                 <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-required="!search.anyDate" ng-click="updateAnyDate()"></dateselect>
@@ -36,27 +37,27 @@
             </div>
             <div>
                 <ng-messages for="findDonorCounsellingForm.startDate.$error" role="alert" ng-show="findDonorCounsellingForm.$submitted">
-                    <small class="error" ng-message="required">Select a valid date</small>
+                    <small class="error" ng-message="required" translate>Select a valid date</small>
                     <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
             </div>
             <div>
                 <ng-messages for="findDonorCounsellingForm.endDate.$error" role="alert" ng-show="findDonorCounsellingForm.$submitted && !findDonorCounsellingForm.startDate.$invalid">
-                    <small class="error" ng-message="required">Select a valid date</small>
+                    <small class="error" ng-message="required" translate>Select a valid date</small>
                     <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
             </div>
             <div class="checkbox">
                 <label>
                     <input type="checkbox" ng-model="search.anyDate" ng-click="clearDates()">
-                    Any Date
+                    <span translate>Any Date</span>
                 </label>
             </div>
         </div>
     </div>
 
     <div class="clearfix form-group">
-        <label class="col-sm-2 control-label" for="flaggedForCounselling">Flagged for Counselling:</label>
+        <label class="col-sm-2 control-label" for="flaggedForCounselling" translate>Flagged for Counselling</label>
         <div class="form-inline col-sm-10">
             <div class="checkbox">
                 <input type="checkbox" id="flaggedForCounselling" ng-model="search.flaggedForCounselling" 
@@ -66,7 +67,7 @@
     </div>
 
     <div class="clearfix form-group">
-        <label class="col-sm-2 control-label" for="counsellingStatus">Counselling Status:</label>
+        <label class="col-sm-2 control-label" for="counsellingStatus" translate>Counselling Status</label>
         <div class="form-inline col-sm-10">
              <select name="counsellingStatus" class="form-control" ng-model="search.counsellingStatus" ng-options="status as (status | titleCase) for status in counsellingStatuses" ng-disabled="search.flaggedForCounselling" 
              ng-change="updateReferredAndNotReferredState()">
@@ -80,7 +81,8 @@
         <div class="form-inline col-sm-10">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="referred" ng-model="search.referred" ng-disabled="search.flaggedForCounselling || search.counsellingStatus !== 'RECEIVED_COUNSELLING'"> Include Donors That Have Been Referred
+                    <input type="checkbox" name="referred" ng-model="search.referred" ng-disabled="search.flaggedForCounselling || search.counsellingStatus !== 'RECEIVED_COUNSELLING'">
+                    <span translate>Include Donors That Have Been Referred</span> 
                 </label>
             </div>
         </div>
@@ -92,7 +94,8 @@
             <div class="checkbox">
                 <label>
                     <input type="checkbox" name="notReferred" ng-model="search.notReferred" 
-                    ng-disabled="search.flaggedForCounselling || search.counsellingStatus !== 'RECEIVED_COUNSELLING'"> Include Donors That Have Not Been Referred
+                    ng-disabled="search.flaggedForCounselling || search.counsellingStatus !== 'RECEIVED_COUNSELLING'"> 
+                    <span translate>Include Donors That Have Not Been Referred</span>
                 </label>
             </div>
         </div>
@@ -100,18 +103,18 @@
 
     <div class="col-sm-offset-2 ">
         <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." :
-            "Search"}}
+            "Search" | translate}}
         </button>
-        <button class="btn btn-primary" type="button" ng-click="clearSearch(findDonorCounsellingForm)">Clear</button>
+        <button class="btn btn-primary" type="button" ng-click="clearSearch(findDonorCounsellingForm)" translate>Clear</button>
     </div>
 </form>
 
 <div class="panel panel-default" ng-if="searched">
     <div class="panel-body">
         <p>
-            <em>{{gridOptions.data.length}} donor(s) found</em> | <em> Data export: </em>
-            <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')">PDF</button>
-            <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
+            <em>{{gridOptions.data.length}}<span translate>donor(s) found</span></em> | <em><span translate>Data export</span>: </em>
+            <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')" translate>PDF</button>
+            <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')" translate>CSV</button>
         </p>
         <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
     </div>
