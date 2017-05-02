@@ -340,7 +340,6 @@ msgid "Delete Selected Rows"
 msgstr "Supprimer les Lignes Sélectionnées"
 
 #: app/views/translations.html:16
-#, fuzzy
 msgid "Discard"
 msgstr "Rejeté"
 
