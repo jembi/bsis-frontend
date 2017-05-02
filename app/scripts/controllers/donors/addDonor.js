@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('AddDonorCtrl', function($scope, $location, $routeParams, $uibModal, ConfigurationsService, DonorService, DATEFORMAT, MONTH, TITLE, GENDER) {
+  .controller('AddDonorCtrl', function($scope, $location, $routeParams, $uibModal, ConfigurationsService, DonorService, DATEFORMAT, MONTH, TITLE, GENDER, gettextCatalog) {
 
     var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
     var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
@@ -31,14 +31,14 @@ angular.module('bsis')
 
       var message;
       if (birthDate.isBefore(minBirthDate)) {
-        message = 'This donor is over the maximum age of ' + maxAge + '.';
+        message = gettextCatalog.getString('This donor is over the maximum age of ') + maxAge + '.';
       } else if (birthDate.isAfter(maxBirthDate)) {
-        message = 'This donor is below the minimum age of ' + minAge + '.';
+        message = gettextCatalog.getString('This donor is below the minimum age of ') + minAge + '.';
       } else {
         // Don't show confirmation
         return Promise.resolve(null);
       }
-      message += ' Are you sure that you want to continue?';
+      message += gettextCatalog.getString(' Are you sure that you want to continue?');
 
       var modal = $uibModal.open({
         animation: false,
@@ -46,8 +46,8 @@ angular.module('bsis')
         controller: 'ConfirmModalCtrl',
         resolve: {
           confirmObject: {
-            title: 'Invalid donor',
-            button: 'Add donor',
+            title: gettextCatalog.getString('Invalid donor'),
+            button: gettextCatalog.getString('Add'),
             message: message
           }
         }

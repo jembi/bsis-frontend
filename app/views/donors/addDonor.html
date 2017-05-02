@@ -6,9 +6,9 @@
       ng-submit="addDonor(donor, dob, addDonorForm.$valid)">
 
     <uib-alert type="danger" close="" ng-show="err.userMessage">
-        {{err.userMessage}}
+        <span translate>Please provide valid inputs</span>
         <ul>
-            <li ng-show="err['donor.birthDate']"> {{err["donor.birthDate"]}}</li>
+            <li ng-show="err['donor.birthDate'][0].code === 'date.futureDate'"> {{err["donor.birthDate"]}}</li>
         </ul>
     </uib-alert>
 
@@ -84,7 +84,7 @@
                         ng-class="{'ng-invalid ng-dirty' : (addDonorForm.dayOfMonth.$invalid && submitted) || dobValid === false}"
                 >
                 <select name="month" class="form-control input-sm" ng-model="dob.month"
-                        ng-options="item.id as item.name for item in month" required
+                        ng-options="item.id as (item.name | titleCase | translate) for item in month" required
                         ng-class="{'ng-invalid ng-dirty' : (addDonorForm.month.$invalid && submitted) || dobValid === false}"
                 >
                     <option value="" ng-disabled="true" translate>Month</option>
@@ -135,7 +135,7 @@
         <div class="row col-sm-11">
             <div class="form-inline" style="padding-left:5px;">
                 <select name="gender" class="form-control input-sm" ng-model="donor.gender"
-                        ng-options="item.id as item.name for item in gender" required
+                        ng-options="item.id as (item.name | titleCase | translate)  for item in gender" required
                         ng-class="{'ng-invalid ng-dirty' : addDonorForm.gender.$invalid && submitted}">
                     <option value="" ng-disabled="true"></option>
                 </select>
