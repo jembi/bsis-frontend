@@ -111,9 +111,9 @@ angular.module('bsis')
       }
 
       return ModalsService.showConfirmation({
-        title: 'Pack Type Update',
-        button: 'Continue',
-        message: 'The pack type has been updated - this will affect the initial components created with this donation. Do you want to continue?'
+        title: gettextCatalog.getString('Pack Type Update'),
+        button: gettextCatalog.getString('Continue'),
+        message: gettextCatalog.getString('The pack type has been updated - this will affect the initial components created with this donation. Do you want to continue?')
       });
     }
 
@@ -166,9 +166,9 @@ angular.module('bsis')
       Alerting.alertReset();
 
       return ModalsService.showConfirmation({
-        title: 'Delete Donor',
-        button: 'Delete',
-        message: 'Are you sure you wish to delete the donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '"?'
+        title: gettextCatalog.getString('Delete Donor'),
+        button: gettextCatalog.getString('Delete'),
+        message: gettextCatalog.getString('Are you sure you wish to delete the donor "') + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '"?'
       }).then(function() {
         // Delete confirmed - delete the donor
         $scope.deleteDonor(donor);
@@ -180,9 +180,9 @@ angular.module('bsis')
 
     function deleteCallback(err, donor) {
       if (err) {
-        Alerting.alertAddMsg(true, 'top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
+        Alerting.alertAddMsg(true, 'top', 'danger', gettextCatalog.getString('An error has occurred while deleting the donor "') + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
       } else {
-        Alerting.alertAddMsg(true, 'top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" has been deleted successfully');
+        Alerting.alertAddMsg(true, 'top', 'success', gettextCatalog.getString('Donor "') + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + gettextCatalog.getString('" has been deleted successfully'));
       }
     }
 
@@ -348,7 +348,7 @@ angular.module('bsis')
 
       if (bleedTimeData.bleedEndTime === null) {
         $scope.clearError('emptyBleedEndTime');
-        $scope.raiseError('emptyBleedEndTime', 'Enter a valid time');
+        $scope.raiseError('emptyBleedEndTime', gettextCatalog.getString('Enter a valid time'));
         $scope.getError('emptyBleedEndTime');
       } else {
         $scope.clearError('emptyBleedEndTime');
@@ -356,7 +356,7 @@ angular.module('bsis')
 
       if (bleedTimeData.bleedStartTime === null) {
         $scope.clearError('emptyBleedStartTime');
-        $scope.raiseError('emptyBleedStartTime', 'Enter a valid time');
+        $scope.raiseError('emptyBleedStartTime', gettextCatalog.getString('Enter a valid time'));
         $scope.getError('emptyBleedStartTime');
       } else {
         $scope.clearError('emptyBleedStartTime');
@@ -364,7 +364,7 @@ angular.module('bsis')
 
       if (new Date(bleedTimeData.bleedEndTime) < new Date(bleedTimeData.bleedStartTime) && $scope.formErrors.length === 0) {
         $scope.clearError('endTimeBeforeStartTime');
-        $scope.raiseError('endTimeBeforeStartTime', 'End time should be after Start time');
+        $scope.raiseError('endTimeBeforeStartTime', gettextCatalog.getString('End time should be after Start time'));
         $scope.getError('endTimeBeforeStartTime');
       } else {
         $scope.clearError('endTimeBeforeStartTime');
@@ -510,7 +510,7 @@ angular.module('bsis')
       var today = new Date();
       today.setHours(23, 59, 59, 0);
       $scope.deferredUntilDate = today;
-      $scope.deferredUntil = 'No current deferrals';
+      $scope.deferredUntil = gettextCatalog.getString('No current deferrals');
     }
 
     function refreshDeferralMessage(deferral) {
@@ -609,9 +609,9 @@ angular.module('bsis')
         }
 
         var confirmationModalConfig = {
-          title: 'Void Deferral',
-          button: 'Void Deferral',
-          message: message
+          title: gettextCatalog.getString('Void Deferral'),
+          button: gettextCatalog.getString('Void'),
+          message: gettextCatalog.getString(message)
         };
 
         ModalsService.showConfirmation(confirmationModalConfig).then(function() {
@@ -669,7 +669,7 @@ angular.module('bsis')
     $scope.checkIdentifier = function(identifierData) {
       if (!identifierData.idNumber || angular.isUndefined(identifierData.idType)) {
         $scope.clearError('identifier');
-        $scope.raiseError('identifier', 'Please enter a valid identifier');
+        $scope.raiseError('identifier', gettextCatalog.getString('Please enter a valid identifier'));
         $scope.getError('identifier');
         return ' ';
       } else {
@@ -681,7 +681,7 @@ angular.module('bsis')
       if (form.$valid) {
         return true;
       } else {
-        return 'This form is not valid';
+        return gettextCatalog.getString('This form is not valid');
       }
     };
 
