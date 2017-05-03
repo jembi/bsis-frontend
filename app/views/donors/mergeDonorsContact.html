@@ -47,7 +47,7 @@
     <tfoot>
     <tr>
         <!-- row for the "None of the Above" radio buttons and error messages -->
-        <td data-title="'Donor Number' | translate" header-class="text-left" class="text-center" sortable="'donorNumber'">
+        <td>
         </td>
         <td data-title="'Preferred Contact Type' | translate" header-class="text-left" sortable="'contactMethodType'"
             class="form-inline">
@@ -61,7 +61,7 @@
                 </small>
             </div>
         </td>
-        <td data-title="'Email' | translate" header-class="text-left" sortable="'email'" class="form-inline">
+        <td>
             <div class="radio" ng-if="donorFields['email']">
                 <input id="email" type="radio" name="email" ng-model="mergedDonorData.email" value="0" required>
                 <label for="email" translate>None of the above</label>
@@ -71,7 +71,7 @@
                 </small>
             </div>
         </td>
-        <td data-title="'Mobile' | translate" header-class="text-left" sortable="'mobileNumber'" class="form-inline">
+        <td>
             <div class="radio" ng-if="donorFields['mobileNumber']">
                 <input id="mobileNumber" type="radio" name="mobileNumber" ng-model="mergedDonorData.mobileNumber"
                        value="0" required>
@@ -82,7 +82,7 @@
                 </small>
             </div>
         </td>
-        <td data-title="'Home' | translate" header-class="text-left" sortable="'homeNumber'" class="form-inline">
+        <td>
             <div class="radio" ng-if="donorFields['homeNumber']">
                 <input id="homeNumber" type="radio" name="homeNumber" ng-model="mergedDonorData.homeNumber" value="0"
                        required>
@@ -93,7 +93,7 @@
                 </small>
             </div>
         </td>
-        <td data-title="'Work' | translate" header-class="text-left" sortable="'workNumber'" class="form-inline">
+        <td>
             <div class="radio" ng-if="donorFields['workNumber']">
                 <input id="workNumber" type="radio" name="workNumber" ng-model="mergedDonorData.workNumber" value="0"
                        required>
