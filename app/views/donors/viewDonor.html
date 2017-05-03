@@ -31,8 +31,8 @@
           This cannot be empty
       </small>
       <span>
-      <span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as item for item in title"
-            e-name="title">{{donor.title | translate}}</span><span ng-if="donor.title">.</span></span>
+       <span editable-select="donor.title" e-class="xeditable title" e-ng-options="item as (item | translate) for item in title"
+            e-name="title">{{donor.title ? (donor.title | translate) : ''}}</span><span ng-if="donor.title">.</span></span>
         <span editable-text="donor.callingName" e-name="callingName"
               e-class="xeditable name">{{donor.callingName}}</span>
     </em></small>
@@ -209,18 +209,18 @@
                                     <em><span translate>Venue</span></em>: {{lastDonation.venue.name}} <br/>
                                     <em><span translate>Donation Type</span></em>: {{lastDonation.donationType.type}} |
                                     <em><span translate>Pack Type</span></em>: {{lastDonation.packType.packType}}<br/>
-                                    <em><span translate>Wt</span></em>: {{lastDonation.donorWeight}} {{weightUnit}} |
-                                    <em><span translate>BP</span></em>:
+                                    <em><span translate translate-comment="Weight, abbreviation">Wt</span></em>: {{lastDonation.donorWeight}} {{weightUnit}} |
+                                    <em><span translate translate-comment="Blood Pressure, abbreviation">BP</span></em>:
                                     {{lastDonation.bloodPressureSystolic}}/{{lastDonation.bloodPressureDiastolic}}
                                     {{bpUnit}}|
                                     <span>
-                                    <em><span translate>Hb</span></em>:
+                                    <em><span translate translate-comment="Haemoglobin, abbreviation">Hb</span></em>:
                                     <span ng-show="getBooleanValue('donation.hbNumericValue')">{{lastDonation.haemoglobinCount}}</span>
                                     <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">(</span>
                       <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span>
                                     <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">)</span> |
                                     </span>
-                                    <em><span translate>P</span></em>: {{lastDonation.donorPulse}} {{pulseUnit}}
+                                    <em><span translate translate-comment="Pulse, abbreviation">P</span></em>: {{lastDonation.donorPulse}} {{pulseUnit}}
                                 </td>
                             </tr>
                             <tr>
