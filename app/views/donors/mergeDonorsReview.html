@@ -105,7 +105,7 @@
         <table class="dash-table">
             <tr ng-if="mergedDonor.address.homeAddressLine1 != null && mergedDonor.address.homeAddressLine1 != ''">
                 <td class="icon" style="vertical-align: top;"><i class="fa {{icons.MAPMARKER}}"></i></td>
-                <td class="field" style="width:46%; vertical-align: top;">Home:</td>
+                <td class="field" style="width:46%; vertical-align: top;"><span translate>Home</span>:</td>
                 <td class="value" style="width:50%;">
                     <span ng-if="mergedDonor.address.homeAddressLine1 != null && mergedDonor.address.homeAddressLine1 != ''">{{mergedDonor.address.homeAddressLine1}} <br/></span>
                     <span ng-if="mergedDonor.address.homeAddressLine2 != null && mergedDonor.address.homeAddressLine2 != ''">{{mergedDonor.address.homeAddressLine2}} <br/></span>
@@ -141,7 +141,7 @@
         <table class="dash-table">
             <tr ng-if="mergedDonor.address.workAddressLine1 != null && mergedDonor.address.workAddressLine1 != ''">
                 <td class="icon" style="vertical-align: top;"><i class="fa {{icons.MAPMARKER}}"></i></td>
-                <td class="field" style="width:46%; vertical-align: top;">Work:</td>
+                <td class="field" style="width:46%; vertical-align: top;"><span translate>Work</span>:</td>
                 <td class="value" style="width:50%;">
                     <span ng-if="mergedDonor.address.workAddressLine1 != null && mergedDonor.address.workAddressLine1 != ''">{{mergedDonor.address.workAddressLine1}} <br/></span>
                     <span ng-if="mergedDonor.address.workAddressLine2 != null && mergedDonor.address.workAddressLine2 != ''">{{mergedDonor.address.workAddressLine2}} <br/></span>
