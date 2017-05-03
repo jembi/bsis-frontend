@@ -8,88 +8,88 @@
 
 <div class="row">
     <div class="col-sm-6">
-        <h4>Overview</h4>
+        <h4 translate>Overview</h4>
         <table class="dash-table">
             <tr>
                 <td class="icon"><i class="fa {{icons.DONORS}}"></i></td>
-                <td class="field">Name:</td>
-                <td class="value">{{donor.firstName}} {{donor.middleName}} {{donor.lastName}}<span ng-if="mergedDonor.callingName || mergedDonor.title">&nbsp;(<span ng-if="mergedDonor.title">{{mergedDonor.title}}.</span><span ng-if="mergedDonor.callingName && mergedDonor.title">&nbsp;{{mergedDonor.callingName}}</span><span ng-if="mergedDonor.callingName && !mergedDonor.title">{{mergedDonor.callingName}}</span>)
+                <td class="field"><span translate>Name</span>:</td>
+                <td class="value">{{donor.firstName}} {{donor.middleName}} {{donor.lastName}}<span ng-if="mergedDonor.callingName || mergedDonor.title">&nbsp;(<span ng-if="mergedDonor.title">{{mergedDonor.title | translate}}.</span><span ng-if="mergedDonor.callingName && mergedDonor.title">&nbsp;{{mergedDonor.callingName}}</span><span ng-if="mergedDonor.callingName && !mergedDonor.title">{{mergedDonor.callingName}}</span>)
                 </span>
                 </td>
             </tr>
             <tr ng-if="mergedDonor.bloodAbo != null && mergedDonor.bloodAbo != ''">
                 <td class="icon"></td>
-                <td class="field">Blood Group:</td>
+                <td class="field"><span translate>Blood Group</span>:</td>
                 <td class="value">{{mergedDonor.bloodAbo}}{{mergedDonor.bloodRh}}</td>
             </tr>
             <tr ng-if="mergedDonor.preferredLanguage != null">
                 <td class="icon"></td>
-                <td class="field">Preferred Language:</td>
+                <td class="field"><span translate>Preferred Language</span>:</td>
                 <td class="value">{{mergedDonor.preferredLanguage.preferredLanguage}}</td>
             </tr>
             <tr>
                 <td class="icon"><i class="fa {{icons.VENUE}}"></i></td>
-                <td class="field">Venue:</td>
+                <td class="field"><span translate>Venue</span>:</td>
                 <td class="value">{{mergedDonor.venue.name}}</td>
             </tr>
             <tr>
                 <td class="icon"><i class="fa {{icons.CALENDAR}}"></i></td>
-                <td class="field">Due To Donate:</td>
+                <td class="field"><span translate>Due To Donate</span>:</td>
                 <td class="value">
                     <span ng-if="lastDeferral === null || durationType === 'TEMPORARY'">
                     {{mergedDonor.dueToDonate | bsisDate:'longDate'}}</span>
-                    <span ng-if="durationType === 'PERMANENT'">Not applicable</span>
+                    <span ng-if="durationType === 'PERMANENT'" translate>Not applicable</span>
                 </td>
 
             </tr>
             <tr ng-if="mergedDonor.dateOfFirstDonation != null">
                 <td class="icon"><i class="fa {{icons.CIRCLEO}}"></i></td>
-                <td class="field">Date of First Donation:</td>
+                <td class="field"><span translate>Date of First Donation</span>:</td>
                 <td class="value">{{mergedDonor.dateOfFirstDonation | bsisDate:'longDate'}}</td>
             </tr>
             <tr ng-if="mergedDonor.idNumber != null && mergedDonor.idNumber != ''">
                 <td class="icon"><i class="fa {{icons.INFO}}"></i></td>
-                <td class="field">Identifier:</td>
+                <td class="field"><span translate>Identifier</span>:</td>
                 <td class="value">{{mergedDonor.idType.idType}} {{mergedDonor.idNumber}}</td>
             </tr>
             <tr ng-if="mergedDonor.notes != null && mergedDonor.notes != ''">
                 <td class="icon"><i class="fa {{icons.COMMENT}}"></i></td>
-                <td class="field">Donor Notes:</td>
+                <td class="field"><span translate>Donor Notes</span>:</td>
                 <td class="value">{{mergedDonor.notes}}</td>
             </tr>
         </table>
     </div>
     <div class="col-sm-6">
-        <h4>Demographics</h4>
+        <h4 translate>Demographics</h4>
         <table class="dash-table">
             <tr>
                 <td class="icon"><i class="fa {{icons.PHONE}}"></i></td>
-                <td class="field" style="width:46%;">Preferred Contact Type:</td>
+                <td class="field" style="width:46%;"><span translate>Preferred Contact Type</span>:</td>
                 <td class="value" style="width:50%">{{mergedDonor.contactMethodType.contactMethodType}}</td>
             </tr>
             <tr ng-if="mergedDonor.contact.email != null && mergedDonor.contact.email != ''">
                 <td class="icon"></td>
-                <td class="field">Email:</td>
+                <td class="field"><span translate>Email</span>:</td>
                 <td class="value">{{mergedDonor.contact.email}}</td>
             </tr>
             <tr ng-if="mergedDonor.contact.mobileNumber != null && mergedDonor.contact.mobileNumber != ''">
                 <td class="icon"></td>
-                <td class="field">Mobile:</td>
+                <td class="field"><span translate>Mobile</span>:</td>
                 <td class="value">{{mergedDonor.contact.mobileNumber}}</td>
             </tr>
             <tr ng-if="mergedDonor.contact.homeNumber != null && mergedDonor.contact.homeNumber != ''">
                 <td class="icon"></td>
-                <td class="field">Home:</td>
+                <td class="field"><span translate>Home</span>:</td>
                 <td class="value">{{mergedDonor.contact.homeNumber}}</td>
             </tr>
             <tr ng-if="mergedDonor.contact.workNumber != null && mergedDonor.contact.workNumber != ''">
                 <td class="icon"></td>
-                <td class="field">Work:</td>
+                <td class="field"><span translate>Work</span>:</td>
                 <td class="value">{{mergedDonor.contact.workNumber}}</td>
             </tr>
             <tr>
                 <td class="icon"><i class="fa {{icons.GLOBE}}"></i></td>
-                <td class="field">Preferred Address Type:</td>
+                <td class="field"><span translate>Preferred Address Type</span>:</td>
                 <td class="value">{{mergedDonor.preferredAddressType.preferredAddressType}}</td>
             </tr>
         </table>
@@ -97,7 +97,7 @@
 </div>
 <div class="row">
     <div class="col-sm-12">
-        <h4>Addresses</h4>
+        <h4><span translate>Addresses</span></h4>
     </div>
 </div>
 <div class="row">
@@ -123,7 +123,7 @@
         <table class="dash-table">
             <tr ng-if="mergedDonor.address.postalAddressLine1 != null && mergedDonor.address.postalAddressLine1 != ''">
                 <td class="icon" style="vertical-align: top;"><i class="fa {{icons.MAPMARKER}}"></i></td>
-                <td class="field" style="width:46%; vertical-align: top;">Postal:</td>
+                <td class="field" style="width:46%; vertical-align: top;"><span translate>Postal</span>:</td>
                 <td class="value" style="width:50%;">
                     <span ng-if="mergedDonor.address.postalAddressLine1 != null && mergedDonor.address.postalAddressLine1 != ''">{{mergedDonor.address.postalAddressLine1}} <br/></span>
                     <span ng-if="mergedDonor.address.postalAddressLine2 != null && mergedDonor.address.postalAddressLine2 != ''">{{mergedDonor.address.postalAddressLine2}} <br/></span>
