@@ -62,16 +62,14 @@
                 <div ng-include="'views/donors/mergeDonorsReview.html'"></div>
             </div>
 
-
-                    <button class="btn btn-primary" type="button"
-                            ng-click="step(currentStep, currentStep-1, mergeDonorForm)" ng-disabled="currentStep==1">Back</button>
-                    <button class="btn btn-primary" type="button"
-                            ng-click="step(currentStep, currentStep+1, mergeDonorForm)"
-                            ng-disabled="currentStep==lastStep" translate>Next</button>
-                    <button class="btn btn-primary" type="submit" ng-click="merge()"
-                            ng-disabled="currentStep!=lastStep" translate>Finish</button>
-                    <button class="btn btn-primary" type="button" ng-click="cancel()" translate>Cancel</button>
-
+            <button class="btn btn-primary" type="button"
+                    ng-click="step(currentStep, currentStep-1, mergeDonorForm)" ng-disabled="currentStep==1">Back</button>
+            <button class="btn btn-primary" type="button"
+                    ng-click="step(currentStep, currentStep+1, mergeDonorForm)"
+                    ng-disabled="currentStep==lastStep" translate>Next</button>
+            <button class="btn btn-primary" type="submit" ng-click="merge()"
+                    ng-disabled="currentStep!=lastStep" translate>Finish</button>
+            <button class="btn btn-primary" type="button" ng-click="cancel()" translate>Cancel</button>
 
         </div>
     </div>
