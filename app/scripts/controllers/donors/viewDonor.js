@@ -426,16 +426,11 @@ angular.module('bsis')
       }
     };
 
-    function checkDonorAge(donor) {
-      var birthDate = moment(donor.birthDate);
-      return DonorService.checkDonorAge(birthDate);
-    }
-
     $scope.addDonation = function(donation, donationBatch, bleedStartTime, bleedEndTime, valid) {
 
       if (valid) {
 
-        checkDonorAge($scope.donor).then(function() {
+        DonorService.checkDonorAge($scope.donor.birthDate).then(function() {
           return confirmAddDonation(donation, donationBatch);
         }).then(function() {
           $scope.addDonationSuccess = '';
