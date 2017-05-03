@@ -24,7 +24,7 @@
                 </em></small>
                 |
                 <small><em><span translate>Gender</span>:</em></small>
-                {{donor.gender}}
+                {{donor.gender | translate}}
                 |
                 <small><em><span translate>Age</span>: </em></small>
                 <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
@@ -62,22 +62,16 @@
                 <div ng-include="'views/donors/mergeDonorsReview.html'"></div>
             </div>
 
-            <div class="form-group">
-                <div class="col-sm-4">
+
                     <button class="btn btn-primary" type="button"
-                            ng-click="step(currentStep, currentStep-1, mergeDonorForm)" ng-disabled="currentStep==1">
-                        <span translate>Back</span>
-                    </button>
+                            ng-click="step(currentStep, currentStep-1, mergeDonorForm)" ng-disabled="currentStep==1">Back</button>
                     <button class="btn btn-primary" type="button"
                             ng-click="step(currentStep, currentStep+1, mergeDonorForm)"
-                            ng-disabled="currentStep==lastStep"><span translate>Next</span>
-                    </button>
+                            ng-disabled="currentStep==lastStep" translate>Next</button>
                     <button class="btn btn-primary" type="submit" ng-click="merge()"
-                            ng-disabled="currentStep!=lastStep"><span translate>Finish</span>
-                    </button>
-                    <button class="btn btn-primary" type="button" ng-click="cancel()"><span translate>Cancel</span></button>
-                </div>
-            </div>
+                            ng-disabled="currentStep!=lastStep" translate>Finish</button>
+                    <button class="btn btn-primary" type="button" ng-click="cancel()" translate>Cancel</button>
+
 
         </div>
     </div>
