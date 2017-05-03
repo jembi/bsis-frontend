@@ -426,32 +426,9 @@ angular.module('bsis')
       }
     };
 
-    var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
-    var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
-    var minBirthDate = moment().subtract(maxAge, 'years');
-    var maxBirthDate = moment().subtract(minAge, 'years');
-
     function checkDonorAge(donor) {
       var birthDate = moment(donor.birthDate);
-
-      if (birthDate.isBefore(minBirthDate)) {
-        return ModalsService.showConfirmation({
-          title: gettextCatalog.getString('Invalid donor'),
-          button: gettextCatalog.getString('Add donation'),
-          message: gettextCatalog.getString('This donor is over the maximum age of {{maxAge}}. Are you sure that you want to continue?',
-            {maxAge: maxAge})
-        });
-      } else if (birthDate.isAfter(maxBirthDate)) {
-        return ModalsService.showConfirmation({
-          title: gettextCatalog.getString('Invalid donor'),
-          button: gettextCatalog.getString('Add donation'),
-          message: gettextCatalog.getString('This donor is below the minimum age of {{minAge}}. Are you sure that you want to continue?',
-            {minAge: minAge})
-        });
-      } else {
-        // Don't show confirmation
-        return $q.resolve(null);
-      }
+      return DonorService.checkDonorAge(birthDate);
     }
 
     $scope.addDonation = function(donation, donationBatch, bleedStartTime, bleedEndTime, valid) {

@@ -8,7 +8,7 @@
     <uib-alert type="danger" close="" ng-show="err.userMessage">
         <span translate>Please provide valid inputs</span>
         <ul>
-            <li ng-show="err['donor.birthDate'][0].code === 'date.futureDate'"> {{err["donor.birthDate"]}}</li>
+            <li ng-show="err['donor.birthDate'][0].code === 'date.futureDate'">Cannot be a future date</li>
         </ul>
     </uib-alert>
 
