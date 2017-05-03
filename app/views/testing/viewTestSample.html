@@ -62,6 +62,7 @@
                     <div class="row">
                       <span class="col-sm-6">
                           <span class="h4" translate>TTI Outcomes</span>
+                          <hr style="margin-top:10px; margin-bottom:5px;"/>
                           <table class="dash-table" style="width:80%;">
                               <thead>
                               <tr>
@@ -70,7 +71,6 @@
                                   <th translate>Tested On</th>
                               </tr>
                               </thead>
-                              <hr style="margin-top:10px; margin-bottom:5px;"/>
                               <tbody>
                               <tr ng-repeat="test in testResults">
                                   <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.bloodTest.testNameShort}}</td>
@@ -82,6 +82,7 @@
                       </span>
                       <span class="col-sm-6">
                           <span class="h4" translate>Blood Group Serology Outcomes</span>
+                          <hr style="margin-top:10px; margin-bottom:5px;"/>
                           <table class="dash-table" style="width:80%;">
                               <thead>
                               <tr>
@@ -90,7 +91,6 @@
                                   <th translate>Tested On</th>
                               </tr>
                               </thead>
-                              <hr style="margin-top:10px; margin-bottom:5px;"/>
                               <tbody>
                               <tr ng-repeat="test in testResults">
                                   <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.bloodTest.testNameShort}}
