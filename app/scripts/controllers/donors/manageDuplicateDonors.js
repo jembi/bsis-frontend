@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ManageDonorsDuplicateCtrl', function($scope, $window, $location, $routeParams, DonorService, $filter, ngTableParams, $timeout, $log, ICONS, UI, gettextCatalog) {
+  .controller('ManageDonorsDuplicateCtrl', function($scope, $window, $location, $routeParams, DonorService, $filter, ngTableParams, $timeout, $log, ICONS, UI, DONATION, gettextCatalog) {
     $scope.icons = ICONS;
     $scope.ui = UI;
+    $scope.weightUnit = DONATION.WEIGHTUNIT;
 
     var duplicatesData = [{}];
     $scope.duplicatesData = duplicatesData;
