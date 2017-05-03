@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ManageDonorsDuplicateCtrl', function($scope, $window, $location, $routeParams, DonorService, $filter, ngTableParams, $timeout, ICONS, UI) {
+  .controller('ManageDonorsDuplicateCtrl', function($scope, $window, $location, $routeParams, DonorService, $filter, ngTableParams, $timeout, $log, ICONS, UI, DONATION, gettextCatalog) {
     $scope.icons = ICONS;
     $scope.ui = UI;
+    $scope.weightUnit = DONATION.WEIGHTUNIT;
 
     var duplicatesData = [{}];
     $scope.duplicatesData = duplicatesData;
@@ -130,7 +131,8 @@ angular.module('bsis')
         },
         function(err) {
           $scope.hasMessage = true;
-          $scope.message = 'Error merging the duplicate Donors. More information: ' + err.moreInfo + ' ... ' + angular.toJson(err);
+          $scope.message = gettextCatalog.getString('Error merging the duplicate Donors.');
+          $log.log('More information: ' + err.moreInfo + ' ... ' + angular.toJson(err));
         }
       );
     };
@@ -311,7 +313,7 @@ angular.module('bsis')
         $scope.selectedDonorsData = selectedDonorsData;
         $scope.donorFields = donorFields;
         if (selectedDonorsData === null || selectedDonorsData.length <= 1) {
-          $scope.message = 'Please select at least two donors.';
+          $scope.message = gettextCatalog.getString('Please select at least two donors.');
           $scope.invalid = true;
           $scope.hasMessage = true;
           return;
@@ -323,7 +325,7 @@ angular.module('bsis')
             mergedDonor.bloodRh = '';
           } else {
             // show them the mismatch message
-            $scope.message = 'The selected donors do not have the same blood group. If you continue, the merged donor will not be assigned a blood group, and will be considered a first time donor.';
+            $scope.message = gettextCatalog.getString('The selected donors do not have the same blood group. If you continue, the merged donor will not be assigned a blood group, and will be considered a first time donor.');
             $scope.invalid = true;
             $scope.hasMessage = true;
             $scope.bloodTypingMismatchCheck = true;
@@ -443,7 +445,8 @@ angular.module('bsis')
         },
         function(err) {
           $scope.hasMessage = true;
-          $scope.message = 'Error merging the duplicate Donors. More information: ' + err.moreInfo + ' ... ' + angular.toJson(err);
+          $scope.message = gettextCatalog.getString('Error merging the duplicate Donors.');
+          $log.log('More information: ' + err.moreInfo + ' ... ' + angular.toJson(err));
         }
       );
     };
