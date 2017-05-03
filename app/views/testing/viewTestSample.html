@@ -2,15 +2,20 @@
 <div class="col-sm-9 col-md-10 main">
   <h3 class="page-header" translate>View Test Sample</h3>
 
-  <form class="form-horizontal col-sm-12" role="form" name="viewTestSampleForm" ng-submit="findTestSample()">
+  <form class="form-horizontal col-sm-12" role="form" name="viewTestSampleForm" ng-submit="findTestSample()" novalidate>
       <div class="form-group">
           <label for="name" class="col-sm-1 control-label" translate>DIN</label>
           <div class="col-sm-11">
-              <div class="form-inline" style="padding-left:5px;">
-                  <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
+              <div class="form-inline">
+                  <input size="15" type="donationIdentificationNumber" name="donationIdentificationNumber"
                          class="form-control input-sm" placeholder=""
                          ng-model="search.donationIdentificationNumber"
                          required>
+              </div>
+              <div>
+                  <ng-messages for="viewTestSampleForm.donationIdentificationNumber.$error" role="alert" ng-show="viewTestSampleForm.$submitted">
+                    <ng-messages-include src="messages.html"></ng-messages-include>
+                  </ng-messages>
               </div>
           </div>
       </div>
@@ -23,7 +28,7 @@
       </div>
   </form>
 
-  <div ng-show="viewTestSampleForm.$submitted" ng-switch="donation != null" class="col-sm-12">
+  <div ng-show="viewTestSampleForm.$submitted && !searching && !viewTestSampleForm.$invalid" ng-switch="donation != null" class="col-sm-12">
       <div style="padding-bottom: 10px"></div>
       <div ng-switch-when="true">
           <div class="panel panel-default">

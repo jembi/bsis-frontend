@@ -10,6 +10,9 @@ angular.module('bsis').controller('ViewTestSampleCtrl', function($scope, $locati
 
   // Find the test sample when the form is submitted
   $scope.findTestSample = function() {
+    if ($scope.viewTestSampleForm.$invalid) {
+      return;
+    }
     $location.search(angular.extend({search: true}, $scope.search));
     $scope.searching = true;
     TestingService.getTestResultsByDIN({donationIdentificationNumber: $scope.search.donationIdentificationNumber}, function(response) {
