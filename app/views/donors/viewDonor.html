@@ -2,7 +2,7 @@
 <div class="col-sm-9 col-md-10 main">
 <form editable-form name="editableForm" onaftersave="updateDonor(donor)" oncancel="cancelForm(donor, editableForm)"
       novalidate>
-    <uib-alert type="danger" close="">
+    <uib-alert type="danger" close="" ng-show="err.userMessage">
         <span translate>Please provide valid inputs</span>
         <ul>
             <li ng-show="err['fieldErrors']['donor.birthDate'][0].code === 'date.futureDate'">
@@ -290,7 +290,7 @@
         </uib-tab>
         <uib-tab active="tabs.demographics">
             <uib-tab-heading>
-                <i class="fa {{icons.BARS}}"></i>&nbsp<span translate>Demographics</span>
+                <i class="fa {{icons.BARS}}"></i>&nbsp;<span translate>Demographics</span>
             </uib-tab-heading>
 
             <div class="panel panel-default">
@@ -303,7 +303,7 @@
 
         <uib-tab active="tabs.donations" select="getDonations(donor.id)" has-permission="{{permissions.VIEW_DONATION}}">
             <uib-tab-heading>
-                <i class="fa {{icons.ARCHIVE}}"></i>&nbsp<span translate>Donations</span> 
+                <i class="fa {{icons.ARCHIVE}}"></i>&nbsp;<span translate>Donations</span> 
             </uib-tab-heading>
 
             <div class="panel panel-default">
@@ -330,7 +330,7 @@
 
         <uib-tab active="tabs.deferrals" select="getDeferrals(donor.id)" has-permission="{{permissions.VIEW_DEFERRAL}}">
             <uib-tab-heading>
-                <i class="fa {{icons.WARNING}}"></i>&nbsp<span translate>Deferrals</span>
+                <i class="fa {{icons.WARNING}}"></i>&nbsp;<span translate>Deferrals</span>
             </uib-tab-heading>
             <div class="panel panel-default">
                 <div class="panel-body">
