@@ -220,6 +220,10 @@ msgstr "Annuler"
 msgid "Clear"
 msgstr "Effacer"
 
+#: app/views/inventory/discardComponentsModal.html:21
+msgid "Comments"
+msgstr "[FR] Comments"
+
 #: app/scripts/controllers/testing/viewTestBatch.js:437
 #: app/views/testing/viewTestBatch.html:45
 msgid "Close"
