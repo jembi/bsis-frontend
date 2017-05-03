@@ -22,10 +22,6 @@ angular.module('bsis')
       });
     }
 
-    function confirmAddDonor(birthDate) {
-      return DonorService.checkDonorAge(birthDate);
-    }
-
     $scope.addDonor = function(newDonor, dob, valid) {
 
       if (valid) {
@@ -38,7 +34,7 @@ angular.module('bsis')
           $scope.addingDonor = false;
         } else {
 
-          confirmAddDonor(birthDate).then(function() {
+          DonorService.checkDonorAge(birthDate).then(function() {
 
             $scope.addingDonor = true;
 

@@ -400,6 +400,7 @@ angular.module('bsis')
           return Promise.resolve(null);
         }
 
+        message += ' ';
         message += gettextCatalog.getString('Are you sure that you want to continue?');
 
         var modal = $uibModal.open({
