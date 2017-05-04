@@ -389,11 +389,12 @@ angular.module('bsis')
         var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
         var minBirthDate = moment().subtract(maxAge, 'years');
         var maxBirthDate = moment().subtract(minAge, 'years');
+        var donorBirthDate = moment(birthDate);
         var message;
 
-        if (birthDate.isBefore(minBirthDate)) {
+        if (donorBirthDate.isBefore(minBirthDate)) {
           message = gettextCatalog.getString('This donor is over the maximum age of {{maxAge}}.', {maxAge: maxAge});
-        } else if (birthDate.isAfter(maxBirthDate)) {
+        } else if (donorBirthDate.isAfter(maxBirthDate)) {
           message = gettextCatalog.getString('This donor is below the minimum age of {{minAge}}.', {minAge: minAge});
         } else {
         // Don't show confirmation
