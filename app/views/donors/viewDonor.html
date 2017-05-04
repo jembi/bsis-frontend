@@ -39,7 +39,7 @@
     </span>
 
     <span editable-select="donor.gender" e-class="xeditable title"
-          e-ng-options="item.id as item.name for item in gender" e-name="gender">
+          e-ng-options="item.id as (item.name | translate) for item in gender" e-name="gender">
       <span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;">
         <span ng-switch-when="male" class="fa-stack fa-1x">
           <i class="fa fa-circle fa-stack-2x fa-fw"></i>

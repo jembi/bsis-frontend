@@ -168,7 +168,7 @@ angular.module('bsis')
       return ModalsService.showConfirmation({
         title: gettextCatalog.getString('Delete Donor'),
         button: gettextCatalog.getString('Delete'),
-        message: gettextCatalog.getString('Are you sure you wish to delete the donor "') + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '"?'
+        message: gettextCatalog.getString('Are you sure you wish to delete the donor "{{firstName}}, {{lastName}} {{donorNumber}}"?', {firstName: donor.firstName, lastName: donor.lastName, donorNumber: donor.donorNumber})
       }).then(function() {
         // Delete confirmed - delete the donor
         $scope.deleteDonor(donor);
@@ -180,9 +180,9 @@ angular.module('bsis')
 
     function deleteCallback(err, donor) {
       if (err) {
-        Alerting.alertAddMsg(true, 'top', 'danger', gettextCatalog.getString('An error has occurred while deleting the donor "') + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
+        Alerting.alertAddMsg(true, 'top', 'danger', gettextCatalog.getString('An error has occurred while deleting the donor "{{firstName}} {{lastName}}, {{donor.donorNumber}} " Error :{{errorStatus}}  - {{developerErrorMessage}}', {firstName: donor.firstName, lastName: donor.lastName, donorNumber: donor.donorNumber, errorStatus: err.status, developerErrorMessage: err.data.developerMessage}));
       } else {
-        Alerting.alertAddMsg(true, 'top', 'success', gettextCatalog.getString('Donor "') + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + gettextCatalog.getString('" has been deleted successfully'));
+        Alerting.alertAddMsg(true, 'top', 'success', gettextCatalog.getString('Donor "{{firstName}} {{lastName}}, {{donor.donorNumber}}" has been deleted successfully', {firstName: donor.firstName, lastName: donor.lastName, donorNumber: donor.donorNumber}));
       }
     }
 
@@ -598,15 +598,15 @@ angular.module('bsis')
       $scope.deleteDonorDeferral = function(donorDeferral) {
         var message = '';
         if (donorDeferral.deferralReason.durationType === 'PERMANENT') {
-          message = 'Are you sure you want to void this permanent deferral? The donor may be eligible to donate as a result of this action.';
+          message = gettextCatalog.getString('Are you sure you want to void this permanent deferral? The donor may be eligible to donate as a result of this action.');
         } else {
-          message = 'Are you sure you want to void this deferral?';
+          message = gettextCatalog.getString('Are you sure you want to void this deferral?');
         }
 
         var confirmationModalConfig = {
           title: gettextCatalog.getString('Void Deferral'),
           button: gettextCatalog.getString('Void'),
-          message: gettextCatalog.getString(message)
+          message: message
         };
 
         ModalsService.showConfirmation(confirmationModalConfig).then(function() {
