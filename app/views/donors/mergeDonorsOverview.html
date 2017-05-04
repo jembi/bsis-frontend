@@ -5,7 +5,7 @@
         <td data-title="'Donor Number' | translate" header-class="text-left" class="text-center" sortable="'donorNumber'">
             {{donor.donorNumber}}
         </td>
-        <td data-title="'Identifier'" header-class="text-left" sortable="'idNumber'" class="form-inline">
+        <td data-title="'Identifier' | translate" header-class="text-left" sortable="'idNumber'" class="form-inline">
             <div class="radio" ng-if="donor.idNumber != null && donor.idNumber != ''">
                 <input id="idNumber{{donor.donorNumber}}" type="radio" name="idNumber"
                        ng-model="mergedDonorData.idNumber" ng-value="donor.id" required>
@@ -26,7 +26,7 @@
                 <label for="callingName{{donor.donorNumber}}">{{donor.callingName}}</label>
             </div>
         </td>
-        <td data-title="'PreferredLanguage' | translate" header-class="text-left" sortable="'preferredLanguage'"
+        <td data-title="'Preferred Language' | translate" header-class="text-left" sortable="'preferredLanguage'"
             class="form-inline">
             <div class="radio" ng-if="donor.preferredLanguage != null && donor.preferredLanguage != ''">
                 <input id="preferredLanguage{{donor.donorNumber}}" type="radio" name="preferredLanguage"
