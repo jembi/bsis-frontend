@@ -229,11 +229,11 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       if (col.name.indexOf('Date') !== -1) {
         return $filter('bsisDate')(value);
       } if (col.field === 'gender') {
-        return gettextCatalog.getString($filter('translate')(value));
+        return gettextCatalog.getString($filter('titleCase')(value));
       } if (col.field === 'counselled') {
-        return gettextCatalog.getString($filter('translate')(value));
+        return (value ? gettextCatalog.getString(value) : '');
       } if (col.field === 'referred') {
-        return gettextCatalog.getString($filter('translate')(value));
+        return (value ? gettextCatalog.getString(value) : '');
       }
       return value;
     },
