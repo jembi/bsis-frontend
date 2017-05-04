@@ -141,10 +141,27 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   var columnDefs = [
-    {name: 'Donor #', displayName: gettextCatalog.getString('Donor') + '#', field: 'donorNumber'},
-    {name: 'First Name', displayName: gettextCatalog.getString('First Name'), field: 'firstName'},
-    {name: 'Last Name', displayName: gettextCatalog.getString('Last Name'), field: 'lastName'},
-    {name: 'Gender', displayName: gettextCatalog.getString('Gender'), field: gettextCatalog.getString('gender')},
+    {
+      name: 'Donor #',
+      displayName: gettextCatalog.getString('Donor') + '#',
+      field: 'donorNumber'
+    },
+    {
+      name: 'First Name',
+      displayName: gettextCatalog.getString('First Name'),
+      field: 'firstName'
+    },
+    {
+      name: 'Last Name',
+      displayName: gettextCatalog.getString('Last Name'),
+      field: 'lastName'
+    },
+    {
+      name: 'Gender',
+      displayName: gettextCatalog.getString('Gender'),
+      field: 'gender',
+      cellFilter: 'translate'
+    },
 
     {
       name: 'Date of Birth',
@@ -176,12 +193,14 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     {
       name: 'Referred',
       displayName: gettextCatalog.getString('Referred'),
-      field: gettextCatalog.getString('referred')
+      field: 'referred',
+      cellFilter: 'translate'
     },
     {
       name: 'Counselled',
       displayName: gettextCatalog.getString('Counselled'),
-      field: gettextCatalog.getString('counselled')
+      field: 'counselled',
+      cellFilter: 'translate'
     },
     {
       name: 'Date',
@@ -253,7 +272,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       var columns = [
         {text: gettextCatalog.getString('Total donors: {{total}}', {total: $scope.gridOptions.data.length}), width: 'auto'},
         {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
-        {text: gettextCatalog.getString('Page') + currentPage + '' + gettextCatalog.getString('of') + '' + pageCount, style: {alignment: 'right'}}
+        {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
       ];
       return {
         columns: columns,
