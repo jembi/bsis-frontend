@@ -112,7 +112,7 @@
 <div class="panel panel-default" ng-if="searched">
     <div class="panel-body">
         <p>
-            <em>{{gridOptions.data.length}}<span translate>donor(s) found</span></em> | <em><span translate>Data export</span>: </em>
+            <em><span translate translate-params-count="gridOptions.data.length">{{count}} donor(s) found</span></em> | <em><span translate>Data export</span>: </em>
             <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')" translate>PDF</button>
             <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')" translate>CSV</button>
         </p>

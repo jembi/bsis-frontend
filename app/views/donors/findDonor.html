@@ -76,7 +76,7 @@
             <div class="panel-body">
 
                 <p>
-                    <em> {{data.length}} <span translate>donor(s) found</span> </em>
+                    <em translate translate-params-count="data.length">{{count}} donor(s) found</em>
             <span has-permission="{{permissions.ADD_DONOR}}">
               <span> | </span>
               <em ng-show="canAddDonors"><a ng-href="#/addDonor?firstName={{donorSearch.firstName}}&lastName={{donorSearch.lastName}}"  translate>Add New Donor</a></em>
