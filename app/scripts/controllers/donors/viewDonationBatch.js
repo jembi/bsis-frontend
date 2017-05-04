@@ -23,11 +23,6 @@ angular.module('bsis')
     $scope.pulseMax = DONATION.DONOR.PULSE_MAX;
     $scope.dinLength = DONATION.DIN_LENGTH;
 
-    var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
-    var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
-    var minBirthDate = moment().subtract(maxAge, 'years');
-    var maxBirthDate = moment().subtract(minAge, 'years');
-
     // The donation's previous pack type
     // Used to check if pack type has changed when updating a donation
     var previousPackType = null;
@@ -348,27 +343,6 @@ angular.module('bsis')
       });
     }
 
-    function checkDonorAge(donor) {
-      var birthDate = moment(donor.birthDate);
-
-      var message;
-      if (birthDate.isBefore(minBirthDate)) {
-        message = 'This donor is over the maximum age of ' + maxAge + '.';
-      } else if (birthDate.isAfter(maxBirthDate)) {
-        message = 'This donor is below the minimum age of ' + minAge + '.';
-      } else {
-        // Don't show confirmation
-        return Promise.resolve(null);
-      }
-      message += ' Are you sure that you want to continue?';
-
-      return ModalsService.showConfirmation({
-        title: 'Invalid donor',
-        button: 'Add donation',
-        message: message
-      });
-    }
-
     function confirmPackTypeChange(donation) {
       if (previousPackType.id === donation.packType.id) {
         return $q.resolve();
@@ -385,7 +359,7 @@ angular.module('bsis')
 
       if (valid) {
 
-        checkDonorAge($scope.donorSummary).then(function() {
+        DonorService.checkDonorAge($scope.donorSummary.birthDate).then(function() {
           return confirmAddDonation(donation);
         }).then(function() {
           $scope.addDonationSuccess = '';
