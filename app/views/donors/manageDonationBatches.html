@@ -44,7 +44,7 @@
                         </div>
                         <div ng-switch-when="false">
                             <p>
-                                <em> <span translate>No open donation batches</span>. </em>
+                                <em translate>No open donation batches</em>
                             </p>
                         </div>
 
@@ -63,9 +63,7 @@
                                             </select>
                                             <div>
                                                 <small class="error" ng-show="(addDonationBatchForm.venue.$invalid && (addDonationBatchForm.venue.$dirty || addDonationBatchForm.$submitted))" translate>This cannot be empty</small>
-                                                <small class="error" ng-show="err['donationBatch.venue']">
-                                                    {{'Location is not a Venue or there is already an open donation batch for that venue' | translate}}
-                                                </small>
+                                                <small class="error" ng-show="err['donationBatch.venue']" translate>Location is not a venue or there is already an open donation batch for that venue</small>
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +89,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-offset-1 col-sm-4">
                                         <button class="btn btn-primary" type="submit" ng-disabled="addingDonationBatch">
-                                            {{addingDonationBatch ? "Adding..." : "Add Donation Batch" | translate}}
+                                            {{addingDonationBatch ? "Adding..." : "Add" | translate}}
                                         </button>
                                         <button class="btn btn-primary" type="button" ng-disabled="addingDonationBatch" ng-click="clearDonationBatchForm(addDonationBatchForm)" translate>Clear</button>
                                     </div>
@@ -132,12 +130,12 @@
                         </div>
                         <div>
                           <ng-messages for="recentDonationsForm.startDate.$error" role="alert" ng-show="recentDonationsForm.$submitted">
-                            <small class="error" ng-message="required" translate>Select a valid date</small>
-                            <small class="error" ng-message="datesOutOfRange" translate>Select a date range that is less than one month</small>
+                            <small class="error" ng-message="required"><span translate>Select a valid date</span></small>
+                            <small class="error" ng-message="datesOutOfRange"><span translate>Select a date range that is less than one month</span></small>
                             <ng-messages-include src="messages.html"></ng-messages-include>
                           </ng-messages>
                           <ng-messages for="recentDonationsForm.endDate.$error" role="alert" ng-show="recentDonationsForm.$submitted && !recentDonationsForm.startDate.$invalid">
-                            <small class="error" ng-message="required" translate>Select a valid date</small>
+                            <small class="error" ng-message="required"><span translate>Select a valid date</span></small>
                             <ng-messages-include src="messages.html"></ng-messages-include>
                           </ng-messages>
                         </div>
@@ -164,23 +162,23 @@
                                     ng-mouseenter="this.$selected = true"
                                     ng-mouseleave="this.$selected = false"
                                     ng-class="{'active': donationBatch.$selected}">
-                                    <td data-title="'Created'" style="width:20%;" header-class="text-left"
+                                    <td data-title="'Created' | translate" style="width:20%;" header-class="text-left"
                                         sortable="'date'">
                                         {{donationBatch.donationBatchDate | bsisDate}}
                                     </td>
-                                    <td data-title="'Closed'" style="width:30%;" header-class="text-left"
+                                    <td data-title="'Closed' | translate" style="width:30%;" header-class="text-left"
                                         sortable="'date'">
                                         {{donationBatch.lastUpdated | bsisDateTime }}
                                     </td>
-                                    <td data-title="'Venue'" style="width:25%;" header-class="text-left"
+                                    <td data-title="'Venue' | translate" style="width:25%;" header-class="text-left"
                                         sortable="'center'">
                                         {{donationBatch.venue.name}}
                                     </td>
-                                    <td data-title="'# of Donations'" style="width:25%;" header-class="text-left"
+                                    <td data-title="'# of Donations' | translate" style="width:25%;" header-class="text-left"
                                         class="text-center" sortable="'numDonations'">
                                         {{donationBatch.numDonations}}
                                     </td>
-                                    <td data-title="'Historical'" style="width:15%;" header-class="text-left"
+                                    <td data-title="'Historical' | translate" style="width:15%;" header-class="text-left"
                                         class="text-center" sortable="'backEntry'">
                                         <span ng-show="donationBatch.backEntry"><i class="fa {{icons.SQUARECHECK}}"></i></span>
                                         <span ng-show="!donationBatch.backEntry"><i
@@ -195,7 +193,7 @@
                     <div class="panel panel-default" ng-if="recentDonationBatchData">
                         <div class="panel-body">
                             <p>
-                                <em> <span translate>No closed donation batches</span>. </em>
+                                <em translate>No closed donation batches</em>
                             </p>
                         </div>
                     </div>
