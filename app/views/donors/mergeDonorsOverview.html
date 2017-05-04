@@ -53,9 +53,8 @@
     <tfoot>
     <tr>
         <!-- row for the "None of the Above" radio buttons and error messages -->
-        <td data-title="'Donor Number' | translate" header-class="text-left" class="text-center" sortable="'donorNumber'">
-        </td>
-        <td data-title="'Identifier' | translate" header-class="text-left" sortable="'idNumber'" class="form-inline">
+        <td></td>
+        <td>
             <div class="radio" ng-if="donorFields['idNumber']">
                 <input id="idNumber" type="radio" name="idNumber" ng-model="mergedDonorData.idNumber" value="0"
                        required>
@@ -66,7 +65,7 @@
                 </small>
             </div>
         </td>
-        <td data-title="'Title' | translate" header-class="text-left" sortable="'title'" class="form-inline">
+        <td>
             <div class="radio" ng-if="donorFields['title']">
                 <input id="title" type="radio" name="title" ng-model="mergedDonorData.title" value="0" required>
                 <label for="title" translate>None of the above</label>
@@ -76,7 +75,7 @@
                 </small>
             </div>
         </td>
-        <td data-title="'Calling Name' | translate" header-class="text-left" sortable="'callingName'" class="form-inline">
+        <td>
             <div class="radio" ng-if="donorFields['callingName']">
                 <input id="callingName" type="radio" name="callingName" ng-model="mergedDonorData.callingName" value="0"
                        required>
@@ -87,8 +86,7 @@
                 </small>
             </div>
         </td>
-        <td data-title="'PreferredLanguage' | translate" header-class="text-left" sortable="'preferredLanguage'"
-            class="form-inline">
+        <td>
             <div ng-if="donorFields['preferredLanguage']">
                 <small class="error"
                        ng-show="(mergeDonorForm.preferredLanguage.$invalid && (mergeDonorForm.preferredLanguage.$dirty || invalid))">
@@ -96,7 +94,7 @@
                 </small>
             </div>
         </td>
-        <td data-title="'Venue' | translate" header-class="text-left" sortable="'venue'" class="form-inline">
+        <td>
             <div ng-if="donorFields['venue']">
                 <small class="error"
                        ng-show="(mergeDonorForm.venue.$invalid && (mergeDonorForm.venue.$dirty || invalid))">
@@ -104,8 +102,7 @@
                 </small>
             </div>
         </td>
-        <td data-title="'Donor Notes' | translate" header-class="text-left" sortable="'notes'">
-        </td>
+        <td></td>
     </tr>
     </tfoot>
 </table>
