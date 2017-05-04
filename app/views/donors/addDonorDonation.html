@@ -153,7 +153,7 @@
                     > <em ng-show="getBooleanValue('donation.hbNumericValue')"> {{hbUnit}} </em>
                     <select ng-show="getBooleanValue('donation.hbQualitativeValue')" class="form-control input-sm"
                             ng-model="donation.haemoglobinLevel"
-                            ng-options="l.value as l.label for l in haemoglobinLevels">
+                            ng-options="l.value as (l.label | titleCase | translate) for l in haemoglobinLevels">
                         <option value="" ng-disabled="true" translate>Level</option>
                     </select>
                     <div>
