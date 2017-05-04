@@ -142,8 +142,8 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
 
   var columnDefs = [
     {
-      name: 'Donor #',
-      displayName: gettextCatalog.getString('Donor #'),
+      name: 'Donor Number',
+      displayName: gettextCatalog.getString('Donor Number'),
       field: 'donorNumber'
     },
     {
