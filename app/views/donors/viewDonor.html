@@ -217,7 +217,7 @@
                                     <em><span translate translate-comment="Haemoglobin, abbreviation">Hb</span></em>:
                                     <span ng-show="getBooleanValue('donation.hbNumericValue')">{{lastDonation.haemoglobinCount}}</span>
                                     <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">(</span>
-                      <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span>
+                      <span ng-show="getBooleanValue('donation.hbQualitativeValue')">{{lastDonation.haemoglobinLevel | titleCase | translate }}</span>
                                     <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">)</span> |
                                     </span>
                                     <em><span translate translate-comment="Pulse, abbreviation">P</span></em>: {{lastDonation.donorPulse}} {{pulseUnit}}

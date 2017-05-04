@@ -126,8 +126,7 @@
                       <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
                       <span ng-show="getBooleanValue('donation.hbQualitativeValue')">
                         <span editable-select="donation.haemoglobinLevel" e-name="haemoglobinLevel"
-                          e-ng-options="l.value as l.label for l in haemoglobinLevels"
-                          style="text-transform:capitalize;">{{donation.haemoglobinLevel ? (donation.haemoglobinLevel | lowercase | translate) : ''}}
+                          e-ng-options="l.value as l.label for l in haemoglobinLevels">{{donation.haemoglobinLevel ? (donation.haemoglobinLevel | titleCase | translate) : ''}}
                         </span>
                       </span>
                       <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> )</span>
