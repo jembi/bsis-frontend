@@ -3,17 +3,15 @@
 angular.module('bsis')
 
   .controller('ViewDonorCtrl', function($scope, $location, $log, $filter, $q, ngTableParams, $timeout, $routeParams,
-                                         Alerting, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, gettextCatalog,
+                                         DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, gettextCatalog,
                                          ICONS, MONTH, TITLE, GENDER, DATEFORMAT, UI, DONATION, PERMISSIONS) {
 
     //Initialize scope variables
     $scope.icons = ICONS;
     $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
-    $scope.alerts = Alerting.getAlerts();
     $scope.ui = UI;
     $scope.dateFormat = DATEFORMAT;
 
-    $scope.alerts = Alerting.getAlerts();
     $scope.data = {};
     $scope.age = '';
     $scope.deferralsData = {};
@@ -163,8 +161,6 @@ angular.module('bsis')
      */
 
     $scope.confirmDelete = function(donor) {
-      Alerting.alertReset();
-
       return ModalsService.showConfirmation({
         title: gettextCatalog.getString('Delete Donor'),
         button: gettextCatalog.getString('Delete'),
@@ -178,22 +174,11 @@ angular.module('bsis')
 
     };
 
-    function deleteCallback(err, donor) {
-      if (err) {
-        Alerting.alertAddMsg(true, 'top', 'danger', gettextCatalog.getString('An error has occurred while deleting the donor "') + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
-      } else {
-        Alerting.alertAddMsg(true, 'top', 'success', gettextCatalog.getString('Donor "') + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + gettextCatalog.getString('" has been deleted successfully'));
-      }
-    }
-
     $scope.deleteDonor = function(donor) {
       DonorService.deleteDonor(donor.id, function() {
-        deleteCallback(false, donor);
         $location.path('findDonor').search({});
       }, function(err) {
-        deleteCallback(err, donor);
-        $location.path('viewDonor/' + donor.id)
-          .search({failed: true}); // If I do not set a parameter the route does not change, this needs to happen to refresh the donor.
+        $log.err(err);
       });
     };
 

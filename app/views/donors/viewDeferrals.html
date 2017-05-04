@@ -1,15 +1,15 @@
 <span style="float: right; padding-right: 15px;">
-  <em><a has-permission="{{permissions.ADD_DEFERRAL}}" href="" ng-click="manageDeferral()">Add Deferral</a></em>
+  <em><a has-permission="{{permissions.ADD_DEFERRAL}}" href="" ng-click="manageDeferral()" translate>Add Deferral</a></em>
 </span>
 <table class="dash-table">
     <tr>
         <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
-        <td class="field">Currently Deferred:</td>
+        <td class="field"><span translate>Currently Deferred</span>:</td>
         <td ng-if="currentlyDeferred" class="value red">
-            <span ng-if="lastDeferral.deferralReason.durationType === 'TEMPORARY'"> Deferred until {{deferredUntil | bsisDate}}</span>
-            <span ng-if="lastDeferral.deferralReason.durationType === 'PERMANENT'">Permanently deferred</span>
+            <span ng-if="lastDeferral.deferralReason.durationType === 'TEMPORARY'"><span translate>Deferred until</span> {{deferredUntil | bsisDate}}</span>
+            <span ng-if="lastDeferral.deferralReason.durationType === 'PERMANENT'" translate>Permanently deferred</span>
         </td>
-        <td ng-if="!currentlyDeferred" class="value green"> No current deferrals</td>
+        <td ng-if="!currentlyDeferred" class="value green" translate> No current deferrals</td>
     </tr>
     <tr>
         <td></td>
@@ -25,15 +25,15 @@
                 ng-mouseenter="this.$selected = true"
                 ng-mouseleave="this.$selected = false"
                 ng-class="{'active': deferral.$selected}">
-                <td data-title="'Created'" header-class="text-left" class="col-sm-1 text-center" sortable="'deferralDate'">
+                <td data-title="'Created' | translate" header-class="text-left" class="col-sm-1 text-center" sortable="'deferralDate'">
             <span>
               {{deferral.deferralDate | bsisDate}}
             </span>
                 </td>
-                <td data-title="'End'" header-class="text-left" class="col-sm-2 text-center" sortable="'deferredUntil'">
+                <td data-title="'End' | translate" header-class="text-left" class="col-sm-2 text-center" sortable="'deferredUntil'">
                     <span>{{ (deferral.deferredUntil | bsisDate) || '' }}</span>
                 </td>
-                <td data-title="'Reason'" header-class="text-left" class="col-sm-2" sortable="'deferralReason.reason'">
+                <td data-title="'Reason' | translate" header-class="text-left" class="col-sm-2" sortable="'deferralReason.reason'">
                     <span ng-show="!editableDeferralForm.$visible">{{deferral.deferralReason.reason}}</span>
             <span ng-show="editableDeferralForm.$visible" e-required>
               <select name="deferralReason" class="form-control input-sm"
@@ -44,13 +44,13 @@
               </select>
             </span>
                 </td>
-                <td data-title="'Comment'" header-class="text-left" class="col-sm-3" sortable="'deferralReasonText'">
+                <td data-title="'Comment' | translate" header-class="text-left" class="col-sm-3" sortable="'deferralReasonText'">
                     <span>{{deferral.deferralReasonText}}</span>
                 </td>
-                <td data-title="'Venue'" header-class="text-left" class="col-sm-1" sortable="'venue.name'">
+                <td data-title="'Venue' | translate" header-class="text-left" class="col-sm-1" sortable="'venue.name'">
                     <span>{{deferral.venue.name}}</span>
                 </td>
-                <td data-title="'User'" header-class="text-left" class="col-sm-1" sortable="'createdBy'"
+                <td data-title="'User' | translate" header-class="text-left" class="col-sm-1" sortable="'createdBy'"
                     filter="{ 'createdBy': 'text' }">
             <span>
               {{deferral.createdBy}}
@@ -61,7 +61,7 @@
 
                 <!-- Edit deferral actions -->
                 <div has-permission="{{permissions.EDIT_DEFFERAL}}" ng-hide="deletingDeferral" style="display:inline;">
-                    <em><a href="" ng-disabled="!deferral.permissions.canEdit" ng-click="manageDeferral(deferral)">Edit</a></em>
+                    <em><a href="" ng-disabled="!deferral.permissions.canEdit" ng-click="manageDeferral(deferral)" translate>Edit</a></em>
                 </div>
 
                 <form editable-form name="endDeferralForm"
@@ -69,13 +69,13 @@
                     <!-- End deferral actions -->
                     <div has-permission="{{permissions.EDIT_DEFFERAL}}" ng-hide="deletingDeferral" style="display:inline;">
                         <em>
-                            <button type="button" class="btn btn-link" ng-click="endDeferralForm.$show()" ng-disabled="!deferral.permissions.canEnd">End
+                            <button type="button" class="btn btn-link" ng-click="endDeferralForm.$show()" ng-disabled="!deferral.permissions.canEnd" translate>End
                                 Deferral
                             </button>
                         </em>
 
                     <span ng-show="endDeferralForm.$visible">
-                      <input size="30" type="comment" placeholder="Comment" class="form-control input-sm" id="comment"
+                      <input size="30" type="comment" placeholder="{{'Comment' | translate}}" class="form-control input-sm" id="comment"
                              name="comment" ng-model="comment" required>
                       <em>
                           <button type="submit" class="btn btn-link text-success"
@@ -96,7 +96,7 @@
                      ng-hide="editableDeferralForm.$visible || endDeferralForm.$visible" style="display:inline;">
                     <em>
                         <button type="button" class="btn btn-link" ng-click="deleteDonorDeferral(deferral);" ng-disabled="deletingDeferral">
-                            {{deletingDeferral ? 'Voiding...' : 'Void'}}
+                            {{deletingDeferral ? 'Voiding...' : 'Void' | translate}}
                         </button>
                     </em>
                 </div>
@@ -107,6 +107,6 @@
         </table>
     </div>
     <div ng-switch-when="false">
-        <h4><em>No Deferrals Found</em></h4>
+        <h4 translate><em>No Deferrals Found</em></h4>
     </div>
 </div>
