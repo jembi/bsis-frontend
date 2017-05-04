@@ -6,7 +6,7 @@
         <td class="icon"><i class="fa {{icons.WARNING}}"></i></td>
         <td class="field"><span translate>Currently Deferred</span>:</td>
         <td ng-if="currentlyDeferred" class="value red">
-            <span ng-if="lastDeferral.deferralReason.durationType === 'TEMPORARY'"><span translate>Deferred until</span> {{deferredUntil | bsisDate}}</span>
+            <span ng-if="lastDeferral.deferralReason.durationType === 'TEMPORARY'"><span translate translate-params-date="deferredUntil | bsisDate">Deferred Until {{date}}</span>
             <span ng-if="lastDeferral.deferralReason.durationType === 'PERMANENT'" translate>Permanently deferred</span>
         </td>
         <td ng-if="!currentlyDeferred" class="value green" translate> No current deferrals</td>
