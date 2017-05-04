@@ -194,13 +194,17 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       name: 'Referred',
       displayName: gettextCatalog.getString('Referred'),
       field: 'referred',
-      cellFilter: 'translate'
+      cellTemplate: '<div class="ui-grid-cell-contents">' +
+          '{{row.entity["referred"] ? (row.entity["referred"] | translate) : "" }}' +
+          '</div>'
     },
     {
       name: 'Counselled',
       displayName: gettextCatalog.getString('Counselled'),
       field: 'counselled',
-      cellFilter: 'translate'
+      cellTemplate: '<div class="ui-grid-cell-contents">' +
+          '{{row.entity["counselled"] ? (row.entity["counselled"] | translate) : "" }}' +
+          '</div>'
     },
     {
       name: 'Date',
@@ -224,6 +228,12 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     exporterFieldCallback: function(grid, row, col, value) {
       if (col.name.indexOf('Date') !== -1) {
         return $filter('bsisDate')(value);
+      } if (col.field === 'gender') {
+        return gettextCatalog.getString($filter('translate')(value));
+      } if (col.field === 'counselled') {
+        return gettextCatalog.getString($filter('translate')(value));
+      } if (col.field === 'referred') {
+        return gettextCatalog.getString($filter('translate')(value));
       }
       return value;
     },
