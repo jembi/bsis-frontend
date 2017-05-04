@@ -67,6 +67,7 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
     };
     form.$setPristine();
     form.$setUntouched();
+    $scope.err = null;
   };
 
   $scope.clearSearch = function(form) {
