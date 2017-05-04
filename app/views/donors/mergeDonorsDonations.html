@@ -20,7 +20,7 @@
                     {{donation.packType.packType}}
                 </td>
                 <td data-title="'TTI Test Status' | translate" header-class="text-left" sortable="'ttiStatus'">
-                    {{donation.ttistatus}}
+                    {{donation.ttistatus | titleCase | translate}}
                 </td>
                 <td data-title="'Blood Group Serology' | translate" header-class="text-left" class="text-center" sortable="'bloodAbo'">
                     {{donation.bloodTypingStatus | titleCase | translate}} - {{donation.bloodTypingMatchStatus | titleCase | translate}}
