@@ -141,6 +141,10 @@ msgstr "[FR] Any Date"
 msgid "Any Venue"
 msgstr "[FR] Any Venue"
 
+#: app/views/translations.html:75
+msgid "April"
+msgstr "[FR] April"
+
 #: app/scripts/controllers/testing/viewTestBatch.js:438
 msgid "Are you sure that you want to close this test batch?"
 msgstr "[FR] Are you sure that you want to close this test batch?"
@@ -201,6 +205,10 @@ msgid ""
 msgstr ""
 "[FR] Are you sure you wish to delete the donor \"{{firstName}}, {{lastName}} "
 "{{donorNumber}}\"?"
+
+#: app/views/translations.html:79
+msgid "August"
+msgstr "[FR] August"
 
 #: app/views/translations.html:31
 msgid "Available"
@@ -754,6 +762,10 @@ msgstr "La date ou l'heure est au future: prière ré-entrer"
 msgid "Day"
 msgstr "[FR] Day"
 
+#: app/views/translations.html:83
+msgid "December"
+msgstr "[FR] December"
+
 #: app/views/donors/viewDonor.html:333
 msgid "Deferrals"
 msgstr "[FR] Deferrals"
@@ -1101,6 +1113,10 @@ msgstr "Statut d'Expiration"
 msgid "Fail"
 msgstr "[FR] Fail"
 
+#: app/views/translations.html:73
+msgid "February"
+msgstr "[FR] February"
+
 #: app/views/donors/addDonation.html:63 app/views/donors/findDonor.html:34
 #: app/views/translations.html:4
 msgid "Female"
@@ -1283,6 +1299,18 @@ msgstr "Envoi"
 msgid "Issued"
 msgstr "Envoyé"
 
+#: app/views/translations.html:72
+msgid "January"
+msgstr "[FR] January"
+
+#: app/views/translations.html:78
+msgid "July"
+msgstr "[FR] July"
+
+#: app/views/translations.html:77
+msgid "June"
+msgstr "[FR] June"
+
 #: app/views/donors/addDonor.html:176
 msgid "Language"
 msgstr "[FR] Language"
@@ -1387,9 +1415,17 @@ msgstr "[FR] Manage Test Batch"
 msgid "Manage Test Batches"
 msgstr "[FR] Manage Test Batches"
 
+#: app/views/translations.html:74
+msgid "March"
+msgstr "[FR] March"
+
 #: app/views/translations.html:45
 msgid "Match"
 msgstr "[FR] Match"
+
+#: app/views/translations.html:76
+msgid "May"
+msgstr "[FR] May"
 
 #: app/views/donors/mergeDonorsSelection.html:40
 msgid "Merge?"
@@ -1592,6 +1628,10 @@ msgstr "Pas en Stock"
 msgid "Notes"
 msgstr "[FR] Notes"
 
+#: app/views/translations.html:82
+msgid "November"
+msgstr "[FR] November"
+
 #: app/scripts/controllers/testing/viewTestBatch.js:270
 #: app/views/donors/manageClinic.html:26
 #: app/views/donors/manageDonationBatches.html:177
@@ -1637,6 +1677,10 @@ msgstr "[FR] Number of Samples"
 #: app/scripts/controllers/inventory/recordReturn.js:108
 msgid "OK"
 msgstr "OK"
+
+#: app/views/translations.html:81
+msgid "October"
+msgstr "[FR] October"
 
 #: app/scripts/controllers/donors/viewDonationBatch.js:91
 #: app/views/translations.html:59
@@ -2216,6 +2260,10 @@ msgstr "Sélectionner un ou plusieurs"
 #: app/views/testing/viewTestBatch.html:179
 msgid "Select one or more donation batches"
 msgstr "[FR] Select one or more donation batches"
+
+#: app/views/translations.html:80
+msgid "September"
+msgstr "[FR] September"
 
 #: app/views/donors/viewDonationSummary.html:235
 msgid "Show test outcomes"
