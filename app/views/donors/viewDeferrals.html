@@ -9,7 +9,7 @@
             <span ng-if="lastDeferral.deferralReason.durationType === 'TEMPORARY'"><span translate>Deferred until</span> {{deferredUntil | bsisDate}}</span>
             <span ng-if="lastDeferral.deferralReason.durationType === 'PERMANENT'" translate>Permanently deferred</span>
         </td>
-        <td ng-if="!currentlyDeferred" class="value green" translate> No current deferrals</td>
+        <td ng-if="!currentlyDeferred" class="value green" translate>No current deferrals</td>
     </tr>
     <tr>
         <td></td>
@@ -69,8 +69,8 @@
                     <!-- End deferral actions -->
                     <div has-permission="{{permissions.EDIT_DEFFERAL}}" ng-hide="deletingDeferral" style="display:inline;">
                         <em>
-                            <button type="button" class="btn btn-link" ng-click="endDeferralForm.$show()" ng-disabled="!deferral.permissions.canEnd" translate>End
-                                Deferral
+                            <button type="button" class="btn btn-link" ng-click="endDeferralForm.$show()" ng-disabled="!deferral.permissions.canEnd" translate>
+                              End Deferral
                             </button>
                         </em>
 
@@ -79,11 +79,11 @@
                              name="comment" ng-model="comment" required>
                       <em>
                           <button type="submit" class="btn btn-link text-success"
-                                  ng-disabled="endDeferralForm.$waiting">
+                                  ng-disabled="endDeferralForm.$waiting" translate>
                               Save
                           </button>
                           <button type="button" class="btn btn-link text-muted" ng-disabled="endDeferralForm.$waiting"
-                                  ng-click="endDeferralForm.$cancel()">
+                                  ng-click="endDeferralForm.$cancel()" translate>
                               Cancel
                           </button>
                       </em>
