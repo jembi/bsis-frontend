@@ -69,7 +69,7 @@
     <div class="clearfix form-group">
         <label class="col-sm-2 control-label" for="counsellingStatus" translate>Counselling Status</label>
         <div class="form-inline col-sm-10">
-             <select name="counsellingStatus" class="form-control" ng-model="search.counsellingStatus" ng-options="status as (status | titleCase) for status in counsellingStatuses" ng-disabled="search.flaggedForCounselling" 
+             <select name="counsellingStatus" class="form-control" ng-model="search.counsellingStatus" ng-options="status as (status | titleCase | translate) for status in counsellingStatuses" ng-disabled="search.flaggedForCounselling" 
              ng-change="updateReferredAndNotReferredState()">
              <option value=""></option>
              </select> 

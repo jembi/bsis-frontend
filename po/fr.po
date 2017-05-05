@@ -812,6 +812,10 @@ msgstr "[FR] Demographics"
 msgid "Description"
 msgstr "[FR] Description"
 
+#: app/views/translations.html:87
+msgid "Did Not Receive Counselling"
+msgstr "[FR] Did Not Receive Counselling"
+
 #: app/views/translations.html:16
 msgid "Discard"
 msgstr "Rejeté"
@@ -2028,6 +2032,10 @@ msgstr ""
 msgid "Reason"
 msgstr "[FR] Reason"
 
+#: app/views/translations.html:85
+msgid "Received Counselling"
+msgstr "[FR] Received Counselling"
+
 #: app/views/testing/manageBloodGroupTesting.html:3
 msgid "Record Blood Group Serology Outcomes"
 msgstr "[FR] Record Blood Group Serology Outcomes"
@@ -2061,6 +2069,10 @@ msgstr "Enregistrer des Transfusions"
 #: app/views/donors/donorCounsellingDetails.html:91
 msgid "Referred"
 msgstr "[FR] Referred"
+
+#: app/views/translations.html:86
+msgid "Refused Counselling"
+msgstr "[FR] Refused Counselling"
 
 #: app/scripts/controllers/testing/viewTestBatch.js:507
 #: app/views/testing/viewTestBatch.html:42
