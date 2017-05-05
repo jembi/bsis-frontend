@@ -133,8 +133,8 @@
                            ng-class="{'ng-invalid ng-dirty' : (addDonationForm.donorWeight.$invalid && submitted)}"
                     > <em> {{weightUnit}} </em>
                     <div>
-                        <small class="error" ng-show="(addDonationForm.donorWeight.$error.min && (addDonationForm.donorWeight.$dirty || submitted))" translate>Please enter a value above {{weightMin}}</small>
-                        <small class="error" ng-show="(addDonationForm.donorWeight.$error.max && (addDonationForm.donorWeight.$dirty || submitted))" translate>Please enter a value below {{weightMax}}</small>
+                        <small class="error" ng-show="(addDonationForm.donorWeight.$error.min && (addDonationForm.donorWeight.$dirty || submitted))" translate translate-params-min-value="weightMin">Please enter a value above {{minValue}}</small>
+                        <small class="error" ng-show="(addDonationForm.donorWeight.$error.max && (addDonationForm.donorWeight.$dirty || submitted))" translate translate-params-max-value="weightMax">Please enter a value below {{maxValue}}</small>
                     </div>
                 </div>
             </div>
@@ -157,8 +157,8 @@
                         <option value="" ng-disabled="true" translate>Level</option>
                     </select>
                     <div>
-                        <small class="error" ng-show="(addDonationForm.hb.$error.min && (addDonationForm.hb.$dirty || submitted))" translate>Please enter a value above {{hbMin}}</small>
-                        <small class="error" ng-show="(addDonationForm.hb.$error.max && (addDonationForm.hb.$dirty || submitted))" translate>Please enter a value below {{hbMax}}</small>
+                        <small class="error" ng-show="(addDonationForm.hb.$error.min && (addDonationForm.hb.$dirty || submitted))" translate translate-params-min-value="hbMin">Please enter a value above {{minValue}}</small>
+                        <small class="error" ng-show="(addDonationForm.hb.$error.max && (addDonationForm.hb.$dirty || submitted))" translate translate-params-max-value="hbMax">Please enter a value below {{maxValue}}</small>
                     </div>
                 </div>
             </div>
@@ -181,10 +181,10 @@
                            ng-class="{'ng-invalid ng-dirty' : (addDonationForm.bpDiastolic.$invalid && submitted)}"
                     > <em> {{bpUnit}} </em>
                     <div>
-                        <small class="error" ng-show="(addDonationForm.bpSystolic.$error.min && (addDonationForm.bpSystolic.$dirty || submitted))" translate>Please enter a value above {{bpSystolicMin}}</small>
-                        <small class="error" ng-show="(addDonationForm.bpSystolic.$error.max && (addDonationForm.bpSystolic.$dirty || submitted))" translate>Please enter a value below {{bpSystolicMax}}</small>
-                        <small class="error" ng-show="(addDonationForm.bpDiastolic.$error.min && (addDonationForm.bpDiastolic.$dirty || submitted))" translate>Please enter a value above {{bpDiastolicMin}}</small>
-                        <small class="error" ng-show="(addDonationForm.bpDiastolic.$error.max && (addDonationForm.bpDiastolic.$dirty || submitted))" translate>Please enter a value below {{bpDiastolicMax}}</small>
+                        <small class="error" ng-show="(addDonationForm.bpSystolic.$error.min && (addDonationForm.bpSystolic.$dirty || submitted))" translate translate-params-min-value="bpSystolicMin">Please enter a value above {{minValue}}</small>
+                        <small class="error" ng-show="(addDonationForm.bpSystolic.$error.max && (addDonationForm.bpSystolic.$dirty || submitted))" translate translate-params-max-value="bpDiastolicMax">Please enter a value below {{maxValue}}</small>
+                        <small class="error" ng-show="(addDonationForm.bpDiastolic.$error.min && (addDonationForm.bpDiastolic.$dirty || submitted))" translate translate-params-min-value="bpSystolicMin">Please enter a value above {{minValue}}</small>
+                        <small class="error" ng-show="(addDonationForm.bpDiastolic.$error.max && (addDonationForm.bpDiastolic.$dirty || submitted))" translate translate-params-max-value="bpDiastolicMax">Please enter a value below {{maxValue}}</small>
                     </div>
                 </div>
             </div>
@@ -201,8 +201,8 @@
                            ng-class="{'ng-invalid ng-dirty' : (addDonationForm.pulse.$invalid && submitted) }"> 
                     <em> {{pulseUnit}} </em>
                     <div>
-                        <small class="error" ng-show="(addDonationForm.pulse.$error.min && (addDonationForm.pulse.$dirty || submitted))" translate>Please enter a value above {{pulseMin}}</small>
-                        <small class="error" ng-show="(addDonationForm.pulse.$error.max && (addDonationForm.pulse.$dirty || submitted))" translate>Please enter a value below {{pulseMax}}</small>
+                        <small class="error" ng-show="(addDonationForm.pulse.$error.min && (addDonationForm.pulse.$dirty || submitted))" translate translate-params-min-value="pulseMin">Please enter a value above {{minValue}}</small>
+                        <small class="error" ng-show="(addDonationForm.pulse.$error.max && (addDonationForm.pulse.$dirty || submitted))" translate translate-params-max-value="pulseMax">Please enter a value below {{maxValue}}</small>
                     </div>
                 </div>
             </div>
