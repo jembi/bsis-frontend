@@ -17,7 +17,7 @@
         <div class="row col-sm-11">
             <div class="form-inline" style="padding-left:5px;">
                 <select class="form-control input-sm" ng-model="donor.title"
-                        ng-options="item as item for item in title">
+                        ng-options="item as (item | titleCase | translate) for item in title">
                     <option value="" ng-disabled="true" translate>Title</option>
                 </select>
                 <input size="15" id="firstName" name="firstName" class="form-control input-sm" placeholder="{{'First' | translate}}"
