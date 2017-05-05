@@ -223,6 +223,10 @@ msgstr "Disponible"
 msgid "BP"
 msgstr "[FR] BP"
 
+#: app/views/donors/manageDuplicateDonors.html:65
+msgid "Back"
+msgstr "[FR] Back"
+
 #: app/views/donors/addDonorDonation.html:24
 msgid "Batch"
 msgstr "[FR] Match"
@@ -656,6 +660,7 @@ msgstr "DIN"
 msgid "DIN should be {{dinLength}} characters"
 msgstr "[FR] DIN should be {{dinLength}} characters"
 
+#. Date of Birth, abbreviation
 #: app/views/donors/addDonor.html:67
 msgid "DOB"
 msgstr "[FR] DOB"
@@ -2223,6 +2228,7 @@ msgstr "Recherche en cours..."
 
 #: app/views/donors/donorCommunications.html:16
 #: app/views/donors/donorCommunications.html:35
+#: app/views/donors/donorCounselling.html:11
 #: app/views/donors/manageDeferral.html:16
 #: app/views/donors/manageDeferral.html:42
 #: app/views/donors/manageDonationBatches.html:115
