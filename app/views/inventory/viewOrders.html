@@ -24,8 +24,8 @@
           <label class="col-sm-2 control-label" translate>Period</label>
           <div class="form-inline col-sm-10">
             <div>
-              <dateselect name="startDate" ng-model="searchParams.orderDateFrom" format="dateFormat" ng-class="{'has-error' : (findOrderForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{searchParams.orderDateTo | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }">
-              </dateselect><em translate>To</em>
+              <dateselect name="startDate" ng-model="searchParams.orderDateFrom" format="dateFormat" ng-class="{'has-error' : (findOrderForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{searchParams.orderDateTo | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
+              <em translate>To</em>
               <dateselect-end name="endDate" ng-model="searchParams.orderDateTo" format="dateFormat" ng-class="{'has-error' : (findOrderForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{searchParams.orderDateFrom |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>  
             </div>
             <div>
