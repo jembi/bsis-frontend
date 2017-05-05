@@ -13,7 +13,7 @@
             </tr>
             <tr>
                 <td class="field"><span translate>Time</span>:</td>
-                <td class="value">{{donation.bleedStartTime | bsisTime}} <span translate>to</span> {{donation.bleedEndTime | bsisTime}}</td>
+                <td class="value" translate translate-params-start-time="donation.bleedStartTime | bsisTime" translate-params-end-time="donation.bleedEndTime | bsisTime">{{startTime}} to {{endTime}}</td>
             </tr>
             <tr>
                 <td class="field"><span translate>Venue</span>:</td>
@@ -40,7 +40,7 @@
                 <td class="value">
                     <span ng-show="getBooleanValue('donation.hbNumericValue')">{{donation.haemoglobinCount}} {{hbUnit}}</span>
                     <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
-                    <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase | translate}}</span>
+                    <span ng-show="getBooleanValue('donation.hbQualitativeValue')">{{donation.haemoglobinLevel | titleCase | translate}}</span>
                     <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> )</span>
 
                 </td>

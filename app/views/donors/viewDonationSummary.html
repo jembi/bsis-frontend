@@ -22,7 +22,7 @@
                     <td class="value">{{donation.donationIdentificationNumber}}</td>
                 </tr>
                 <tr>
-                    <td class="field"><span translate>Donor #</span>:</td>
+                    <td class="field"><span translate>Donor Number</span>:</td>
                     <td class="value">{{donation.donorNumber}}</td>
                 </tr>
                 <tr>
@@ -43,7 +43,7 @@
                                             {{donation.bleedStartTime | bsisTime }}
                                         </span>
                                     </td>
-                                    <td> to</td>
+                                    <td> <span translate>to</span></td>
                                     <td>
                                         <span editable-bstime="donation.bleedEndTime" e-name="bleedEndTime"
                                             e-mousewheel="donation.permissions.canEditBleedTimes"
@@ -102,10 +102,10 @@
                         <br/>
                      <span ng-show="donationSummaryForm.$visible">
                      <small class="error" ng-show="donationSummaryForm.donorPulse.$error.min">
-                         <span translate translation-param-pulseMin="pulseMin">Please enter a value above {{pulseMin}}</span>
+                         <span translate translate-params-min-value="pulseMin">Please enter a value above {{minValue}}</span>
                      </small>
                      <small class="error" ng-show="donationSummaryForm.donorPulse.$error.max">
-                         <span translate translation-param-pulseMax="pulseMax">Please enter a value below {{pulseMax}}</span>
+                         <span translate translate-params-max-value="pulseMax">Please enter a value below {{maxValue}}</span>
                      </small>
                      </span>
                     </td>
@@ -126,18 +126,17 @@
                       <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
                       <span ng-show="getBooleanValue('donation.hbQualitativeValue')">
                         <span editable-select="donation.haemoglobinLevel" e-name="haemoglobinLevel"
-                          e-ng-options="l.value as l.label for l in haemoglobinLevels"
-                          style="text-transform:capitalize;">{{donation.haemoglobinLevel ? (donation.haemoglobinLevel | lowercase | translate) : ''}}
+                          e-ng-options="l.value as l.label for l in haemoglobinLevels">{{donation.haemoglobinLevel ? (donation.haemoglobinLevel | titleCase | translate) : ''}}
                         </span>
                       </span>
                       <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> )</span>
                       <br/>
                       <span ng-show="donationSummaryForm.$visible">
                         <small class="error" ng-show="donationSummaryForm.haemoglobinCount.$error.min">
-                           <span translate translation-param-hbMin="hbMin">Please enter a value above {{hbMin}}</span>
+                           <span translate translate-params-min-value="hbMin">Please enter a value above {{minValue}}</span>
                         </small>
                         <small class="error" ng-show="donationSummaryForm.haemoglobinCount.$error.max">
-                           <span translate translation-param-hbMax="hbMax">Please enter a value below {{hbMax}}</span>
+                           <span translate translate-params-max-value="hbMax">Please enter a value below {{maxValue}}</span>
                         </small>
                       </span>
                     </td>
@@ -161,17 +160,17 @@
                         <br/>
                      <span ng-show="donationSummaryForm.$visible">
                      <small class="error" ng-show="donationSummaryForm.bloodPressureSystolic.$error.min">
-                         <span translate translation-param-bpSystolicMin="bpSystolicMin">Please enter a value above {{bpSystolicMin}}</span>
+                         <span translate translate-params-min-value="bpSystolicMin">Please enter a value above {{minValue}}</span>
                      </small>
                      <small class="error" ng-show="donationSummaryForm.bloodPressureSystolic.$error.max">
-                         <span translate translation-param-bpSystolicMax="bpSystolicMax">Please enter a value below {{bpSystolicMax}}</span>
+                         <span translate translate-params-max-value="bpSystolicMax">Please enter a value below {{maxValue}}</span>
                      </small>
                      <br/>
                      <small class="error" ng-show="donationSummaryForm.bloodPressureDiastolic.$error.min">
-                         <span translate translation-param-bpDiastolicMin="bpDiastolicMin">Please enter a value above {{bpDiastolicMin}}</span>
+                         <span translate translate-params-min-value="bpDiastolicMin">Please enter a value above {{minValue}}</span>
                      </small>
                      <small class="error" ng-show="donationSummaryForm.bloodPressureDiastolic.$error.max">
-                         <span translate translation-param-bpDiastolicMax="bpDiastolicMax">Please enter a value below {{bpDiastolicMax}}</span>
+                         <span translate translate-params-max-value="bpDiastolicMax">Please enter a value below {{maxValue}}</span>
                      </small>
                      </span>
                     </td>
@@ -188,10 +187,10 @@
                         <br/>
                      <span ng-show="donationSummaryForm.$visible">
                      <small class="error" ng-show="donationSummaryForm.donorWeight.$error.min">
-                         <span translate translation-param-weightMin="weightMin">Please enter a value above {{weightMin}}</span>
+                         <span translate translate-params-min-value="weightMin">Please enter a value above {{minValue}}</span>
                      </small>
                      <small class="error" ng-show="donationSummaryForm.donorWeight.$error.max">
-                         <span translate translation-param-weightMax="weightMax">Please enter a value below {{weightMax}}</span>
+                         <span translate translate-params-max-value="weightMax">Please enter a value below {{maxValue}}</span>
                      </small>
                      </span>
                     </td>
@@ -240,7 +239,7 @@
         </table>
         <div ng-show="showTestResults" class="col-sm-6" style="height:100%;">
          <span>
-         <small><em><span translate>Sample Released</span>:</em></small> {{donation.released ? 'YES' : 'NO' | translate}}
+         <small><em><span translate>Sample Released</span>:</em></small> {{donation.released ? 'Yes' : 'No' | translate}}
          <br/>
          <small><em><span translate>TTI Test Status</span>:</em></small> {{donation.ttistatus | titleCase | translate}}
          <br/>

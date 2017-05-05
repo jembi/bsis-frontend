@@ -23,7 +23,7 @@
         <hr style="margin-top:8px;"/>
 
         <div class="form-group">
-            <label for="donorNumber" class="col-sm-3 control-label"><span translate>Donor</span> #</label>
+            <label for="donorNumber" class="col-sm-3 control-label"><span translate>Donor Number</span></label>
             <div class="row col-sm-9">
                 <div class="form-inline" style="padding-left:5px;">
                     <input name="donorNumber" size="15" type="donorNumber" id="donorNumber"
@@ -67,7 +67,7 @@
                       {{donorSummary.birthDate | bsisDate}}
                     </span>
                     <span class="center-block text-danger" ng-hide="donorSummaryLoading || donorSummary.eligible !== false" translate>
-                      Do not bleed
+                      Do not bleed donor
                     </span>
                     <span class="center-block text-success" ng-hide="donorSummaryLoading || donorSummary.eligible !== true" translate>
                       Eligible donor
@@ -216,7 +216,7 @@
                     <em ng-show="getBooleanValue('donation.hbNumericValue')"> {{hbUnit}} </em>
                     <select ng-show="getBooleanValue('donation.hbQualitativeValue')" class="form-control input-sm"
                             ng-model="donation.haemoglobinLevel"
-                            ng-options="l.value as l.label for l in haemoglobinLevels">
+                            ng-options="l.value as (l.label | titleCase | translate) for l in haemoglobinLevels">
                         <option value="" ng-disabled="true" translate>Level</option>
                     </select>
                     <div>

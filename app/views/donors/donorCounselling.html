@@ -32,7 +32,7 @@
         <div class="form-inline col-sm-10">
             <div>
                 <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-required="!search.anyDate" ng-click="updateAnyDate()"></dateselect>
-                <span><em>To:</em></span>
+                <em><span translate>To</span>:</em>
                 <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-required="!search.anyDate" ng-click="updateAnyDate()"></dateselect-end>
             </div>
             <div>
@@ -112,7 +112,7 @@
 <div class="panel panel-default" ng-if="searched">
     <div class="panel-body">
         <p>
-            <em>{{gridOptions.data.length}}<span translate>donor(s) found</span></em> | <em><span translate>Data export</span>: </em>
+            <em><span translate translate-params-count="gridOptions.data.length">{{count}} donor(s) found</span></em> | <em><span translate>Data Export</span>: </em>
             <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')" translate>PDF</button>
             <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')" translate>CSV</button>
         </p>

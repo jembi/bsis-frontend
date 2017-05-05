@@ -35,7 +35,7 @@
                        ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                        ng-class="{'ng-invalid ng-dirty' : addDonorForm.lastName.$invalid && submitted}"
                 >
-                <input size="15" id="callingName" name="callingName" class="form-control input-sm" placeholder="{{'Calling' | translate}}"
+                <input size="15" id="callingName" name="callingName" class="form-control input-sm" placeholder="{{'Calling Name' | translate}}"
                        ng-model="donor.callingName" ng-maxlength=20 alpha-name
                        ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                        ng-class="{'ng-invalid ng-dirty' : addDonorForm.callingName.$invalid && submitted}"

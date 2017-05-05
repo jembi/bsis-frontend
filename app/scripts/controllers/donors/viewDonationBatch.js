@@ -41,8 +41,8 @@ angular.module('bsis')
 
     var columnDefs = [
       {
-        name: 'Donor #',
-        displayName: gettextCatalog.getString('Donor #'),
+        name: 'Donor Number',
+        displayName: gettextCatalog.getString('Donor Number'),
         field: 'donorNumber'
       },
       {
