@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: app/views/donors/donationDetails.html:31
@@ -28,8 +28,7 @@ msgstr "Ajouter"
 msgid "Add Deferral"
 msgstr "[FR] Add Deferral"
 
-#: app/views/donors/addDonation.html:1
-#: app/views/donors/addDonorDonation.html:1
+#: app/views/donors/addDonation.html:1 app/views/donors/addDonorDonation.html:1
 #: app/views/donors/viewDonationBatch.html:4
 #: app/views/donors/viewDonations.html:2
 msgid "Add Donation"
@@ -80,7 +79,7 @@ msgstr "[FR] Address Type"
 msgid "Addresses"
 msgstr "[FR] Addresses"
 
-#: app/views/donors/addDonation.html:290
+#: app/views/donors/addDonation.html:291
 #: app/views/donors/addDonorDonation.html:212
 msgid "Adverse Event"
 msgstr "[FR] Adverse Event"
@@ -208,7 +207,7 @@ msgid "Available"
 msgstr "Disponible"
 
 #. Blood Pressure, abbreviation
-#: app/views/donors/addDonation.html:235
+#: app/views/donors/addDonation.html:236
 #: app/views/donors/addDonorDonation.html:168
 #: app/views/donors/donationDetails.html:49
 #: app/views/donors/viewDonationSummary.html:145
@@ -331,13 +330,14 @@ msgstr "CSV"
 msgid "Calling Name"
 msgstr "[FR] Calling Name"
 
-#: app/views/donors/addDonation.html:327
+#: app/views/donors/addDonation.html:328
 #: app/views/donors/addDonorDonation.html:249
 #: app/views/donors/donorCounsellingDetails.html:110
 #: app/views/donors/manageClinic.html:41 app/views/donors/manageClinic.html:54
 #: app/views/donors/manageClinic.html:69 app/views/donors/manageClinic.html:83
 #: app/views/donors/manageDeferral.html:82
 #: app/views/donors/manageDuplicateDonors.html:72
+#: app/views/donors/viewDeferrals.html:83
 #: app/views/donors/viewDonationSummary.html:14
 #: app/views/donors/viewDonations.html:66 app/views/donors/viewDonor.html:240
 #: app/views/donors/viewDonor.html:272 app/views/donors/viewDonor.html:92
@@ -593,8 +593,7 @@ msgstr "Créé"
 #: app/views/testing/manageTestBatch.html:174
 #: app/views/testing/manageTestBatch.html:27
 #: app/views/testing/reEnterBloodTyping.html:8
-#: app/views/testing/reEnterTTI.html:8
-#: app/views/testing/viewTestBatch.html:127
+#: app/views/testing/reEnterTTI.html:8 app/views/testing/viewTestBatch.html:127
 msgid "Created On"
 msgstr "Date de création"
 
@@ -796,7 +795,7 @@ msgstr "Supprimer les Lignes Sélectionnées"
 msgid "Demographics"
 msgstr "[FR] Demographics"
 
-#: app/views/donors/addDonation.html:313
+#: app/views/donors/addDonation.html:314
 #: app/views/donors/addDonorDonation.html:235
 msgid "Description"
 msgstr "[FR] Description"
@@ -856,8 +855,7 @@ msgstr "Expédié"
 #: app/views/inventory/fulfilOrder.html:10
 #: app/views/inventory/fulfilOrder.html:64
 #: app/views/inventory/manageOrders.html:39
-#: app/views/inventory/viewOrder.html:28
-#: app/views/inventory/viewOrders.html:46
+#: app/views/inventory/viewOrder.html:28 app/views/inventory/viewOrders.html:46
 msgid "Dispatched From"
 msgstr "Expédié de"
 
@@ -867,8 +865,7 @@ msgstr "Expédié de"
 #: app/views/inventory/fulfilOrder.html:11
 #: app/views/inventory/fulfilOrder.html:70
 #: app/views/inventory/manageOrders.html:73
-#: app/views/inventory/viewOrder.html:29
-#: app/views/inventory/viewOrders.html:73
+#: app/views/inventory/viewOrder.html:29 app/views/inventory/viewOrders.html:73
 msgid "Dispatched To"
 msgstr "Distribué à"
 
@@ -879,8 +876,7 @@ msgid "Distribution Center"
 msgstr "Centre de Distribution"
 
 #: app/views/donors/addDonation.html:69
-#: app/views/donors/addDonorDonation.html:10
-#: app/views/donors/viewDonor.html:63
+#: app/views/donors/addDonorDonation.html:10 app/views/donors/viewDonor.html:63
 msgid "Do not bleed donor"
 msgstr "[FR] Do not bleed donor"
 
@@ -942,7 +938,7 @@ msgstr "[FR] Done"
 msgid "Donor Address Merge"
 msgstr "[FR] Donor Address Merge"
 
-#: app/views/donors/addDonation.html:181
+#: app/views/donors/addDonation.html:182
 #: app/views/donors/addDonorDonation.html:122
 msgid "Donor Assessment"
 msgstr "[FR] Donor Assessment"
@@ -1021,8 +1017,7 @@ msgstr "Date d'Expiration"
 msgid "Duplicate Donors"
 msgstr "[FR] Duplicate Donors"
 
-#: app/views/donors/manageClinic.html:49
-#: app/views/donors/viewDeferrals.html:64
+#: app/views/donors/manageClinic.html:49 app/views/donors/viewDeferrals.html:64
 #: app/views/donors/viewDonationSummary.html:7
 #: app/views/donors/viewDonor.html:233 app/views/donors/viewDonor.html:265
 #: app/views/donors/viewDonor.html:85
@@ -1062,8 +1057,7 @@ msgstr "[FR] End Deferral"
 msgid "End date can't be before deferral date"
 msgstr "La date de début doit preceder la date de fin"
 
-#: app/messages.html:13
-#: app/scripts/controllers/donors/viewDonationBatch.js:516
+#: app/messages.html:13 app/scripts/controllers/donors/viewDonationBatch.js:516
 #: app/scripts/controllers/donors/viewDonor.js:352
 #: app/views/donors/addDonation.html:173
 #: app/views/donors/addDonorDonation.html:115
@@ -1078,8 +1072,7 @@ msgstr "L'heure de fin devrait être après l'heure de début"
 msgid "Enter"
 msgstr "[FR] Enter"
 
-#: app/messages.html:12
-#: app/scripts/controllers/donors/viewDonationBatch.js:500
+#: app/messages.html:12 app/scripts/controllers/donors/viewDonationBatch.js:500
 #: app/scripts/controllers/donors/viewDonationBatch.js:508
 #: app/scripts/controllers/donors/viewDonor.js:336
 #: app/scripts/controllers/donors/viewDonor.js:344
@@ -1125,8 +1118,7 @@ msgstr "[FR] Final Review"
 msgid "Find Donor"
 msgstr "[FR] Find Donor"
 
-#: app/views/inventory/findInventory.html:3
-#: app/views/inventory/sidebar.html:13
+#: app/views/inventory/findInventory.html:3 app/views/inventory/sidebar.html:13
 msgid "Find Inventory"
 msgstr "Trouver un Inventaire"
 
@@ -1145,8 +1137,7 @@ msgstr "[FR] First"
 
 #: app/scripts/controllers/donors/donorCommunications.js:78
 #: app/scripts/controllers/donors/donorCounselling.js:151
-#: app/views/donors/duplicateDonors.html:26
-#: app/views/donors/findDonor.html:103
+#: app/views/donors/duplicateDonors.html:26 app/views/donors/findDonor.html:103
 #: app/views/donors/mergeDonorsSelection.html:18
 msgid "First Name"
 msgstr "[FR] First Name"
@@ -1184,7 +1175,7 @@ msgid "Group"
 msgstr "[FR] Group"
 
 #. Haemoglobin, abbreviation
-#: app/views/donors/addDonation.html:207
+#: app/views/donors/addDonation.html:208
 #: app/views/donors/addDonorDonation.html:144
 #: app/views/donors/donationDetails.html:39
 #: app/views/donors/viewDonationSummary.html:114
@@ -1302,8 +1293,7 @@ msgstr "[FR] Last"
 
 #: app/scripts/controllers/donors/donorCommunications.js:82
 #: app/scripts/controllers/donors/donorCounselling.js:156
-#: app/views/donors/duplicateDonors.html:29
-#: app/views/donors/findDonor.html:106
+#: app/views/donors/duplicateDonors.html:29 app/views/donors/findDonor.html:106
 #: app/views/donors/mergeDonorsSelection.html:21
 msgid "Last Name"
 msgstr "[FR] Last Name"
@@ -1312,7 +1302,7 @@ msgstr "[FR] Last Name"
 msgid "Last Updated"
 msgstr "[FR] Last Updated"
 
-#: app/views/donors/addDonation.html:220
+#: app/views/donors/addDonation.html:221
 #: app/views/donors/addDonorDonation.html:157
 msgid "Level"
 msgstr "[FR] Level"
@@ -1384,8 +1374,8 @@ msgstr "Gestion de Commandes"
 msgid "Manage Return"
 msgstr "Gestion de Retour"
 
-#: app/views/inventory/manageReturns.html:3
-#: app/views/inventory/sidebar.html:19 app/views/inventory/viewReturns.html:3
+#: app/views/inventory/manageReturns.html:3 app/views/inventory/sidebar.html:19
+#: app/views/inventory/viewReturns.html:3
 msgid "Manage Returns"
 msgstr "Gestion de Retours"
 
@@ -1477,8 +1467,11 @@ msgstr "[FR] N"
 msgid "No Blood Group"
 msgstr "[FR] No Blood Group"
 
+#: app/views/donors/viewDeferrals.html:108
+msgid "No Deferrals Found"
+msgstr "[FR] No Deferrals Found"
+
 #: app/views/donors/mergeDonorsDeferrals.html:34
-#: app/views/donors/viewDeferrals.html:104
 msgid "No Deferrals found"
 msgstr "[FR] No Deferrals found"
 
@@ -1597,7 +1590,7 @@ msgstr "Pas en Stock"
 
 #: app/views/inventory/recordTransfusions.html:84
 msgid "Notes"
-msgstr "Notes"
+msgstr "[FR] Notes"
 
 #: app/scripts/controllers/testing/viewTestBatch.js:270
 #: app/views/donors/manageClinic.html:26
@@ -1671,8 +1664,7 @@ msgstr "Status de la Commande"
 
 #: app/scripts/controllers/inventory/viewOrder.js:121
 #: app/views/inventory/fulfilOrder.html:51
-#: app/views/inventory/fulfilOrder.html:9
-#: app/views/inventory/viewOrder.html:30
+#: app/views/inventory/fulfilOrder.html:9 app/views/inventory/viewOrder.html:30
 msgid "Order Type"
 msgstr "Type de Commande"
 
@@ -1807,21 +1799,14 @@ msgstr "[FR] Permanently deferred"
 msgid "Please enter a valid identifier"
 msgstr "[FR] Please enter a valid identifier"
 
-#: app/views/donors/addDonation.html:257
-#: app/views/donors/addDonorDonation.html:186
-msgid "Please enter a value above {{bpDiastolicMin}}"
-msgstr ""
-
-#: app/views/donors/addDonation.html:251
-#: app/views/donors/addDonorDonation.html:184
-msgid "Please enter a value above {{bpSystolicMin}}"
-msgstr ""
-
-#: app/views/donors/addDonation.html:224
+#: app/views/donors/addDonation.html:197 app/views/donors/addDonation.html:225
+#: app/views/donors/addDonation.html:252 app/views/donors/addDonation.html:258
+#: app/views/donors/addDonation.html:280
+#: app/views/donors/addDonorDonation.html:136
 #: app/views/donors/addDonorDonation.html:160
-msgid "Please enter a value above {{hbMin}}"
-msgstr ""
-
+#: app/views/donors/addDonorDonation.html:184
+#: app/views/donors/addDonorDonation.html:186
+#: app/views/donors/addDonorDonation.html:204
 #: app/views/donors/viewDonationSummary.html:105
 #: app/views/donors/viewDonationSummary.html:136
 #: app/views/donors/viewDonationSummary.html:163
@@ -1830,36 +1815,14 @@ msgstr ""
 msgid "Please enter a value above {{minValue}}"
 msgstr "[FR] Please enter a value above {{minValue}}"
 
-#: app/views/donors/addDonation.html:279
-#: app/views/donors/addDonorDonation.html:204
-msgid "Please enter a value above {{pulseMin}}"
-msgstr ""
-
-#: app/views/donors/addDonation.html:196
-#: app/views/donors/addDonorDonation.html:136
-msgid "Please enter a value above {{weightMin}}"
-msgstr ""
-
-#: app/views/donors/addDonation.html:260
-#: app/views/donors/addDonorDonation.html:187
-msgid "Please enter a value below {{bpDiastolicMax}}"
-msgstr ""
-
-#: app/views/donors/addDonorDonation.html:185
-msgid "Please enter a value below {{bpSystolicMax}}"
-msgstr ""
-
-#: app/views/donors/addDonation.html:254
-msgid ""
-"Please enter a value below {{bpSystolicMax}}<span><br>\n"
-"                        </span>"
-msgstr ""
-
-#: app/views/donors/addDonation.html:227
+#: app/views/donors/addDonation.html:200 app/views/donors/addDonation.html:228
+#: app/views/donors/addDonation.html:255 app/views/donors/addDonation.html:261
+#: app/views/donors/addDonation.html:283
+#: app/views/donors/addDonorDonation.html:137
 #: app/views/donors/addDonorDonation.html:161
-msgid "Please enter a value below {{hbMax}}"
-msgstr ""
-
+#: app/views/donors/addDonorDonation.html:185
+#: app/views/donors/addDonorDonation.html:187
+#: app/views/donors/addDonorDonation.html:205
 #: app/views/donors/viewDonationSummary.html:108
 #: app/views/donors/viewDonationSummary.html:139
 #: app/views/donors/viewDonationSummary.html:166
@@ -1867,16 +1830,6 @@ msgstr ""
 #: app/views/donors/viewDonationSummary.html:193
 msgid "Please enter a value below {{maxValue}}"
 msgstr "[FR] Please enter a value below {{maxValue}}"
-
-#: app/views/donors/addDonation.html:282
-#: app/views/donors/addDonorDonation.html:205
-msgid "Please enter a value below {{pulseMax}}"
-msgstr ""
-
-#: app/views/donors/addDonation.html:199
-#: app/views/donors/addDonorDonation.html:137
-msgid "Please enter a value below {{weightMax}}"
-msgstr ""
 
 #: app/views/donors/addDonor.html:9 app/views/donors/addDonorDonation.html:7
 #: app/views/donors/viewDonor.html:6
@@ -1982,7 +1935,7 @@ msgstr "Traiité"
 msgid "Prof"
 msgstr "[FR] Prof"
 
-#: app/views/donors/addDonation.html:268
+#: app/views/donors/addDonation.html:269
 #: app/views/donors/addDonorDonation.html:194
 #: app/views/donors/donationDetails.html:35
 #: app/views/donors/viewDonationSummary.html:93
@@ -2187,7 +2140,7 @@ msgid "Sample Released"
 msgstr "[FR] Sample Released"
 
 #: app/scripts/controllers/testing/testsReEntry.js:158
-#: app/views/donors/manageClinic.html:53
+#: app/views/donors/manageClinic.html:53 app/views/donors/viewDeferrals.html:79
 #: app/views/donors/viewDonationSummary.html:13
 #: app/views/donors/viewDonor.html:237 app/views/donors/viewDonor.html:269
 #: app/views/donors/viewDonor.html:91
@@ -2633,8 +2586,7 @@ msgstr "[FR] User"
 #: app/views/donors/viewDeferrals.html:50
 #: app/views/donors/viewDonationSummary.html:76
 #: app/views/donors/viewDonations.html:32 app/views/donors/viewDonor.html:114
-#: app/views/donors/viewDonor.html:209
-#: app/views/testing/viewTestBatch.html:187
+#: app/views/donors/viewDonor.html:209 app/views/testing/viewTestBatch.html:187
 #: app/views/testing/viewTestSample.html:42
 msgid "Venue"
 msgstr "[FR] Venue"
@@ -2655,8 +2607,7 @@ msgstr "[FR] Venue(s)"
 msgid "View"
 msgstr "[FR] View"
 
-#: app/views/donors/donorCommunications.html:3
-#: app/views/donors/sidebar.html:25
+#: app/views/donors/donorCommunications.html:3 app/views/donors/sidebar.html:25
 msgid "View / Export Donor List"
 msgstr "[FR] View / Export Donor List"
 
@@ -2723,7 +2674,7 @@ msgstr "Suppression en cours..."
 msgid "Ward No"
 msgstr "Numéro de Pavillon"
 
-#: app/views/donors/addDonation.html:185
+#: app/views/donors/addDonation.html:186
 #: app/views/donors/addDonorDonation.html:126
 #: app/views/donors/donationDetails.html:53
 #: app/views/donors/viewDonationSummary.html:179
@@ -2856,10 +2807,6 @@ msgstr "[FR] {{total}} donation(s) in batch"
 
 #~ msgid "{{count}} donor(s) found."
 #~ msgstr "[FR] {{count}} sample(s) found"
-
-#, fuzzy
-#~ msgid "No Deferrals Found"
-#~ msgstr "[FR] No donors found"
 
 #, fuzzy
 #~ msgid "Data export:"
