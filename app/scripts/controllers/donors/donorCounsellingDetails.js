@@ -1,9 +1,11 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope, $window, $routeParams, $log, DonorService, PostDonationCounsellingService, TestingService, ICONS, DATEFORMAT) {
+angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope, $window, $routeParams, $log, DonorService, PostDonationCounsellingService, TestingService, ConfigurationsService, ICONS, DATEFORMAT, DONATION) {
 
   $scope.icons = ICONS;
   $scope.dateFormat = DATEFORMAT;
+  $scope.hbUnit = DONATION.HBUNIT;
+
   $scope.postDonationCounselling = {};
   $scope.donation = {};
   $scope.donor = {};
@@ -12,6 +14,8 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
   $scope.referralSites = [];
   $scope.testResults = [];
   $scope.today = moment().startOf('day').toDate();
+
+  $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
 
   $scope.goBack = function() {
     $window.history.back();
