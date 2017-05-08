@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $filter, $location, $routeParams, BLOODGROUP, DATEFORMAT, DonorService) {
+angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $filter, $location, $routeParams, BLOODGROUP, DATEFORMAT, DonorService, gettextCatalog) {
 
   $scope.dateFormat = DATEFORMAT;
   $scope.venues = [];
@@ -70,21 +70,32 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
   };
 
   var columnDefs = [
-    {field: 'donorNumber'},
-    {field: 'firstName'},
-    {field: 'lastName'},
     {
-      name: 'Mobile Number',
+      displayName: gettextCatalog.getString('Donor Number'),
+      field: 'donorNumber'
+    },
+    {
+      displayName: gettextCatalog.getString('First Name'),
+      field: 'firstName'
+    },
+    {
+      displayName: gettextCatalog.getString('Last Name'),
+      field: 'lastName'},
+    {
+      displayName: gettextCatalog.getString('Mobile Number'),
       field: 'contact.mobileNumber'
     },
     {
-      name: 'Date of Last Donation',
+      displayName: gettextCatalog.getString('Date of Last Donation'),
       field: 'dateOfLastDonation',
       cellFilter: 'bsisDate'
     },
-    {field: 'bloodGroup'},
     {
-      name: 'Venue',
+      displayName: gettextCatalog.getString('Blood Group'),
+      field: 'bloodGroup'
+    },
+    {
+      displayName: gettextCatalog.getString('Venue'),
       field: 'venue.name'
     }
   ];
@@ -98,7 +109,7 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
 
     // Format values for exports
     exporterFieldCallback: function(grid, row, col, value) {
-      if (col.name === 'Date of Last Donation') {
+      if (col.field === 'dateOfLastDonation') {
         return $filter('bsisDate')(value);
       }
       return value;
@@ -114,34 +125,34 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
       var bloodGroups = angular.copy($scope.currentSearch.bloodGroups);
 
       if ($scope.currentSearch.anyBloodGroup) {
-        bloodGroups.push('Any');
+        bloodGroups.push(gettextCatalog.getString('Any'));
       }
 
       if ($scope.currentSearch.noBloodGroup) {
-        bloodGroups.push('None');
+        bloodGroups.push(gettextCatalog.getString('None'));
       }
 
       var columns = [
-        {text: 'Venue(s): ' + venues.join(', '), width: 'auto'},
-        {text: 'Blood Group(s): ' + bloodGroups.join(', '), width: 'auto'}
+        {text: gettextCatalog.getString('Venues') + ': ' + venues.join(', '), width: 'auto'},
+        {text: gettextCatalog.getString('Blood Groups') + ': ' + bloodGroups.join(', '), width: 'auto'}
       ];
 
       // Include last donation date range
       if ($scope.currentSearch.lastDonationFromDate && $scope.currentSearch.lastDonationToDate) {
         var fromDate = $filter('bsisDate')($scope.currentSearch.lastDonationFromDate);
         var toDate = $filter('bsisDate')($scope.currentSearch.lastDonationToDate);
-        columns.push({text: 'Date of Last Donation: ' + fromDate + ' to ' + toDate, width: 'auto'});
+        columns.push({text: gettextCatalog.getString('Date of Last Donation') + ': ' + gettextCatalog.getString('{{fromDate}} to {{toDate}}', {fromDate:fromDate, toDate:toDate}), width: 'auto'});
       }
 
       // Include date due to donate
       if ($scope.currentSearch.clinicDate) {
         var dueToDonateDate = $filter('bsisDate')($scope.currentSearch.clinicDate);
-        columns.push({text: 'Due to Donate: ' + dueToDonateDate, width: 'auto'});
+        columns.push({text: gettextCatalog.getString('Due To Donate') + ': ' + dueToDonateDate, width: 'auto'});
       }
 
       return [
         {
-          text: 'Donors List',
+          text: gettextCatalog.getString('Donors List'),
           bold: true,
           margin: [30, 10, 30, 0]
         },
@@ -156,9 +167,9 @@ angular.module('bsis').controller('DonorCommunicationsCtrl', function($scope, $f
     // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
-        {text: 'Total donors: ' + $scope.gridOptions.data.length, width: 'auto'},
-        {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-        {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+        {text: gettextCatalog.getString('Total donors') + ': ' + $scope.gridOptions.data.length, width: 'auto'},
+        {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+        {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
       ];
       return {
         columns: columns,

@@ -381,7 +381,7 @@
       "isTimeField": false,
       "autoGenerate": true,
       "defaultValue": "",
-      "displayName": "Donor #",
+      "displayName": "Donor Number",
       "isAutoGeneratable": true
     },
     "workAddress": {

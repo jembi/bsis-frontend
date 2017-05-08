@@ -4,66 +4,65 @@
         <table class="dash-table">
             <tbody>
             <tr>
-                <td class="field">DIN:</td>
+                <td class="field"><span translate translate-comment="Donation Identification Number, abbreviation">DIN</span>:</td>
                 <td class="value">{{donation.donationIdentificationNumber}}</td>
             </tr>
             <tr>
-                <td class="field">Date:</td>
+                <td class="field"><span translate>Date</span>:</td>
                 <td class="value">{{donation.donationDate | bsisDate }}</td>
             </tr>
             <tr>
-                <td class="field">Time:</td>
-                <td class="value">{{donation.bleedStartTime | bsisTime}} to {{donation.bleedEndTime | bsisTime}}</td>
+                <td class="field"><span translate>Time</span>:</td>
+                <td class="value" translate translate-params-start-time="donation.bleedStartTime | bsisTime" translate-params-end-time="donation.bleedEndTime | bsisTime">{{startTime}} to {{endTime}}</td>
             </tr>
             <tr>
-                <td class="field">Venue:</td>
+                <td class="field"><span translate>Venue</span>:</td>
                 <td class="value">{{donation.venue.name}}</td>
             </tr>
             <tr>
-                <td class="field">Pack:</td>
+                <td class="field"><span translate>Pack</span>:</td>
                 <td class="value">{{donation.packType.packType}}</td>
             </tr>
             <tr>
-                <td class="field">Donation:</td>
+                <td class="field"><span translate>Donation</span>:</td>
                 <td class="value">{{donation.donationType.type}}</td>
             </tr>
             <tr>
-                <td class="field">ABO/Rh:</td>
+                <td class="field"><span translate>ABO/Rh</span>:</td>
                 <td class="value">{{donation.bloodAbo}}{{donation.bloodRh}}</td>
             </tr>
             <tr>
-                <td class="field">Pulse:</td>
+                <td class="field"><span translate>Pulse</span>:</td>
                 <td class="value">{{donation.donorPulse}} {{pulseUnit}}</td>
             </tr>
             <tr>
-                <td class="field">Hb:</td>
+                <td class="field"><span translate>Hb</span>:</td>
                 <td class="value">
-
                     <span ng-show="getBooleanValue('donation.hbNumericValue')">{{donation.haemoglobinCount}} {{hbUnit}}</span>
                     <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span>
-                    <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{donation.haemoglobinLevel | lowercase}}</span>
+                    <span ng-show="getBooleanValue('donation.hbQualitativeValue')">{{donation.haemoglobinLevel | titleCase | translate}}</span>
                     <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> )</span>
 
                 </td>
             </tr>
             <tr>
-                <td class="field">BP:</td>
+                <td class="field"><span translate>BP</span>:</td>
                 <td class="value">{{donation.bloodPressureSystolic}}/{{donation.bloodPressureDiastolic}} {{bpUnit}}</td>
             </tr>
             <tr>
-                <td class="field">Weight:</td>
+                <td class="field"><span translate>Weight</span>:</td>
                 <td class="value">{{donation.donorWeight}} {{weightUnit}}</td>
             </tr>
             <tr>
-                <td class="field">Donation Notes:</td>
+                <td class="field"><span translate>Donation Notes</span>:</td>
                 <td class="valuesml">{{donation.notes}}</td>
             </tr>
             <tr>
-                <td class="field">Adverse Event Type:</td>
+                <td class="field"><span translate>Adverse Event Type</span>:</td>
                 <td class="value">{{donation.adverseEvent.type.name}}</td>
             </tr>
             <tr>
-                <td class="field">Adverse Event Comment:</td>
+                <td class="field"><span translate>Adverse Event Comment</span>:</td>
                 <td class="value">{{donation.adverseEvent.comment}}</td>
             </tr>
             </tbody>
@@ -75,9 +74,9 @@
 
 
     <span>
-      <small><em>TTI Test Status:</em></small> {{donation.ttistatus}}
+      <small><em><span translate>TTI Test Status</span>:</em></small> {{donation.ttistatus | titleCase | translate}}
       <br/>
-      <small><em>Blood Group Serology Test Status:</em></small> {{donation.bloodTypingStatus}} - {{donation.bloodTypingMatchStatus}}
+      <small><em><span translate>Blood Group Serology Test Status</span>:</em></small> {{donation.bloodTypingStatus | titleCase | translate}} - {{donation.bloodTypingMatchStatus | titleCase | translate}}
     </span>
 
         <hr style="margin-top:0px;"/>
@@ -85,7 +84,7 @@
         <div class="form-horizontal col-sm-12">
             <div class="row">
       <span class="col-sm-6">
-        <span class="h5">
+        <span class="h5" translate>
           TTI Outcomes
         </span>
         <table class="dash-table">
@@ -94,9 +93,9 @@
                 <td></td>
             </tr>
             <tr>
-                <th>Test</th>
-                <th>Outcome</th>
-                <th>Tested On</th>
+                <th translate>Test</th>
+                <th translate>Outcome</th>
+                <th translate>Tested On</th>
             </tr>
             </thead>
             <hr style="margin-top:10px; margin-bottom:5px;"/>
@@ -114,7 +113,7 @@
         </table>
       </span>
       <span class="col-sm-6">
-        <span class="h5">
+        <span class="h5" translate>
           Blood Group Serology Outcomes
         </span>
         <table class="dash-table">
@@ -123,9 +122,9 @@
                 <td></td>
             </tr>
             <tr>
-                <th>Test</th>
-                <th>Outcome</th>
-                <th>Tested On</th>
+                <th translate>Test</th>
+                <th translate>Outcome</th>
+                <th translate>Tested On</th>
             </tr>
             </thead>
             <hr style="margin-top:10px; margin-bottom:5px;"/>

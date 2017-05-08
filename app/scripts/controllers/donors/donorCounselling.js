@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, $filter, PostDonationCounsellingService, DATEFORMAT) {
+angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $location, $routeParams, $log, $filter, gettextCatalog, PostDonationCounsellingService, DATEFORMAT) {
   var master = {
     selectedVenues: [],
     startDate: null,
@@ -141,44 +141,74 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
   };
 
   var columnDefs = [
-    {name: 'Donor #', field: 'donorNumber'},
-    {name: 'First Name', field: 'firstName'},
-    {name: 'Last Name', field: 'lastName'},
-    {name: 'Gender', field: 'gender'},
+    {
+      name: 'Donor Number',
+      displayName: gettextCatalog.getString('Donor Number'),
+      field: 'donorNumber'
+    },
+    {
+      name: 'First Name',
+      displayName: gettextCatalog.getString('First Name'),
+      field: 'firstName'
+    },
+    {
+      name: 'Last Name',
+      displayName: gettextCatalog.getString('Last Name'),
+      field: 'lastName'
+    },
+    {
+      name: 'Gender',
+      displayName: gettextCatalog.getString('Gender'),
+      field: 'gender',
+      cellFilter: 'translate'
+    },
 
     {
       name: 'Date of Birth',
+      displayName: gettextCatalog.getString('Date of Birth'),
       field: 'birthDate',
       cellFilter: 'bsisDate'
     },
     {
       name: 'Blood Group',
+      displayName: gettextCatalog.getString('Blood Group'),
       field: 'bloodGroup'
     },
     {
       name: 'DIN',
-      displayName: 'DIN',
+      displayName: gettextCatalog.getString('DIN'),
       field: 'donationIdentificationNumber'
     },
     {
       name: 'Date of Donation',
+      displayName: gettextCatalog.getString('Date of Donation'),
       field: 'donationDate',
       cellFilter: 'bsisDate'
     },
     {
       name: 'Venue',
+      displayName: gettextCatalog.getString('Venue'),
       field: 'venue.name'
     },
     {
       name: 'Referred',
-      field: 'referred'
+      displayName: gettextCatalog.getString('Referred'),
+      field: 'referred',
+      cellTemplate: '<div class="ui-grid-cell-contents">' +
+          '{{row.entity["referred"] ? (row.entity["referred"] | translate) : "" }}' +
+          '</div>'
     },
     {
       name: 'Counselled',
-      field: 'counselled'
+      displayName: gettextCatalog.getString('Counselled'),
+      field: 'counselled',
+      cellTemplate: '<div class="ui-grid-cell-contents">' +
+          '{{row.entity["counselled"] ? (row.entity["counselled"] | translate) : "" }}' +
+          '</div>'
     },
     {
       name: 'Date',
+      displayName: gettextCatalog.getString('Date'),
       field: 'counsellingDate',
       cellFilter: 'bsisDate'
     }
@@ -198,6 +228,12 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     exporterFieldCallback: function(grid, row, col, value) {
       if (col.name.indexOf('Date') !== -1) {
         return $filter('bsisDate')(value);
+      } if (col.field === 'gender') {
+        return gettextCatalog.getString($filter('titleCase')(value));
+      } if (col.field === 'counselled') {
+        return (value ? gettextCatalog.getString(value) : '');
+      } if (col.field === 'referred') {
+        return (value ? gettextCatalog.getString(value) : '');
       }
       return value;
     },
@@ -216,19 +252,19 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       });
 
       var columns = [
-        {text: 'Venue(s): ' + (venues.join(',') || 'Any'), width: 'auto', fontSize: 10}
+        {text: gettextCatalog.getString('Venue(s)') + ': ' + (venues.join(',') || gettextCatalog.getString('Any')), width: 'auto', fontSize: 10}
       ];
 
       // Include last donation date range
       if ($scope.search.startDate && $scope.search.endDate) {
         var fromDate = $filter('bsisDate')($scope.search.startDate);
         var toDate = $filter('bsisDate')($scope.search.endDate);
-        columns.push({text: 'Donation Period: ' + fromDate + ' to ' + toDate, width: 'auto', fontSize: 10});
+        columns.push({text: gettextCatalog.getString('Donation Period') + ': ' + fromDate + gettextCatalog.getString('to') + '' + toDate, width: 'auto', fontSize: 10});
       }
 
       return [
         {
-          text: 'List of donors for post donation counselling',
+          text: gettextCatalog.getString('List of donors for post donation counselling'),
           bold: true,
           margin: [30, 10, 30, 0],
           fontSize: 12
@@ -244,9 +280,9 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
     // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
-        {text: 'Total donors: ' + $scope.gridOptions.data.length, width: 'auto'},
-        {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-        {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+        {text: gettextCatalog.getString('Total donors: {{total}}', {total: $scope.gridOptions.data.length}), width: 'auto'},
+        {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+        {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
       ];
       return {
         columns: columns,

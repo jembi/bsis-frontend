@@ -45,7 +45,7 @@
                     &nbsp;|&nbsp;
                     <small><em><span translate>Blood Group</span>:</em></small>
                     <span ng-if="donation.bloodGroup !== ''">{{donation.bloodGroup}}</span>
-                    <span ng-if="donation.bloodGroup == ''" translate>Unknown</span>
+                    <span ng-if="donation.bloodGroup == ''" translate translate-comment="Unknown Blood Group">Unknown</span>
                     &nbsp;|&nbsp;
                     <small><em><span translate>Pack Type</span>:</em></small> {{donation.packType.packType}}
                   </span>
