@@ -378,7 +378,7 @@ msgstr "[FR] Cannot be a future date"
 #: app/views/donors/donorCommunications.html:86
 #: app/views/donors/donorCounselling.html:108
 #: app/views/donors/findDonor.html:66
-#: app/views/donors/manageDonationBatches.html:149
+#: app/views/donors/manageDonationBatches.html:148
 #: app/views/donors/manageDonationBatches.html:94
 #: app/views/inventory/findInventory.html:94
 #: app/views/inventory/findTransfusion.html:80
@@ -408,7 +408,7 @@ msgid "Close Batch"
 msgstr "[FR] Close Batch"
 
 #: app/scripts/controllers/donors/viewDonationBatch.js:89
-#: app/views/donors/manageDonationBatches.html:169
+#: app/views/donors/manageDonationBatches.html:168
 #: app/views/testing/manageTestBatch.html:178 app/views/translations.html:61
 msgid "Closed"
 msgstr "[FR] Closed"
@@ -587,7 +587,7 @@ msgstr "[FR] Counselling Notes"
 msgid "Counselling Status"
 msgstr "[FR] Counselling Status"
 
-#: app/views/donors/manageDonationBatches.html:165
+#: app/views/donors/manageDonationBatches.html:164
 #: app/views/donors/manageDonationBatches.html:24
 #: app/views/donors/viewDeferrals.html:28 app/views/translations.html:23
 #: app/views/translations.html:39
@@ -625,6 +625,7 @@ msgstr "[FR] Currently Deferred"
 msgid "DD"
 msgstr "[FR] DD"
 
+#. Donation Identification Number, abbreviation
 #: app/scripts/controllers/donors/donorCounselling.js:179
 #: app/scripts/controllers/donors/viewDonationBatch.js:50
 #: app/scripts/controllers/inventory/findInventory.js:20
@@ -1212,7 +1213,7 @@ msgstr "[FR] Hb"
 msgid "Hide test outcomes"
 msgstr "[FR] Hide test outcomes"
 
-#: app/views/donors/manageDonationBatches.html:181
+#: app/views/donors/manageDonationBatches.html:180
 #: app/views/donors/manageDonationBatches.html:36
 msgid "Historical"
 msgstr "[FR] Historical"
@@ -1479,8 +1480,10 @@ msgstr "[FR] Ms"
 msgid "Must match the previous entry"
 msgstr "Doit correspondre à l'entrée précédente"
 
+#. No, abbreviation
 #: app/scripts/controllers/testing/viewTestBatch.js:153
 #: app/scripts/controllers/testing/viewTestBatch.js:231
+#: app/views/translations.html:90
 msgid "N"
 msgstr "[FR] N"
 
@@ -1537,7 +1540,7 @@ msgstr "[FR] No Previous Donations"
 msgid "No Type Determined"
 msgstr "[FR] No Type Determined"
 
-#: app/views/donors/manageDonationBatches.html:196
+#: app/views/donors/manageDonationBatches.html:195
 msgid "No closed donation batches"
 msgstr "[FR] No closed donation batches"
 
@@ -1643,7 +1646,7 @@ msgstr "[FR] November"
 
 #: app/scripts/controllers/testing/viewTestBatch.js:270
 #: app/views/donors/manageClinic.html:26
-#: app/views/donors/manageDonationBatches.html:177
+#: app/views/donors/manageDonationBatches.html:176
 #: app/views/donors/manageDonationBatches.html:32
 #: app/views/testing/viewTestBatch.html:191
 msgid "Number of Donations"
@@ -2000,6 +2003,11 @@ msgstr "[FR] Pulse"
 msgid "Quarantined"
 msgstr "Mis en Quarantaine"
 
+#. Refused counselling, abbreviation
+#: app/views/translations.html:91
+msgid "R"
+msgstr ""
+
 #: app/views/testing/viewTestBatch.html:100
 #: app/views/testing/viewTestBatch.html:114
 #: app/views/testing/viewTestBatch.html:65
@@ -2248,7 +2256,7 @@ msgstr "Sélectionner"
 msgid "Select Donors to Merge"
 msgstr "[FR] Select Donors to Merge"
 
-#: app/views/donors/manageDonationBatches.html:134
+#: app/views/donors/manageDonationBatches.html:133
 #: app/views/inventory/findTransfusion.html:64
 #: app/views/inventory/viewOrders.html:34
 #: app/views/inventory/viewReturns.html:34
@@ -2258,8 +2266,8 @@ msgstr "Sélectionnez une plage de dates inférieure à un mois"
 
 #: app/views/donors/donorCounselling.html:40
 #: app/views/donors/donorCounselling.html:46
-#: app/views/donors/manageDonationBatches.html:133
-#: app/views/donors/manageDonationBatches.html:138
+#: app/views/donors/manageDonationBatches.html:132
+#: app/views/donors/manageDonationBatches.html:137
 #: app/views/inventory/fulfilOrder.html:44
 #: app/views/inventory/viewOrders.html:33
 #: app/views/inventory/viewOrders.html:38
@@ -2502,7 +2510,7 @@ msgstr "[FR] Title"
 #: app/views/donors/donorCommunications.html:61
 #: app/views/donors/donorCounselling.html:35
 #: app/views/donors/donorCounsellingDetails.html:93
-#: app/views/donors/manageDonationBatches.html:128
+#: app/views/donors/manageDonationBatches.html:127
 #: app/views/inventory/findTransfusion.html:58
 #: app/views/inventory/viewOrders.html:28
 #: app/views/inventory/viewReturns.html:28
@@ -2641,7 +2649,7 @@ msgstr "[FR] User"
 #: app/views/donors/donorCounsellingDetails.html:44
 #: app/views/donors/findDonor.html:120 app/views/donors/manageClinic.html:22
 #: app/views/donors/manageDeferral.html:34
-#: app/views/donors/manageDonationBatches.html:173
+#: app/views/donors/manageDonationBatches.html:172
 #: app/views/donors/manageDonationBatches.html:28
 #: app/views/donors/manageDonationBatches.html:57
 #: app/views/donors/mergeDonorsDeferrals.html:16
@@ -2761,8 +2769,10 @@ msgstr "[FR] Work"
 msgid "Wt"
 msgstr "[FR] Wt"
 
+#. Yes, abbreviation
 #: app/scripts/controllers/testing/viewTestBatch.js:153
 #: app/scripts/controllers/testing/viewTestBatch.js:231
+#: app/views/translations.html:89
 msgid "Y"
 msgstr "[FR] Y"
 
