@@ -34,7 +34,7 @@ msgstr "[FR] Add Deferral"
 msgid "Add Donation"
 msgstr "[FR] Add Donation"
 
-#: app/views/donors/findDonor.html:86
+#: app/views/donors/findDonor.html:67
 msgid "Add Donation Batch"
 msgstr "[FR] Add Donation Batch"
 
@@ -42,7 +42,7 @@ msgstr "[FR] Add Donation Batch"
 msgid "Add Donor"
 msgstr "[FR] Add Donor"
 
-#: app/views/donors/findDonor.html:132 app/views/donors/findDonor.html:82
+#: app/views/donors/findDonor.html:113 app/views/donors/findDonor.html:63
 msgid "Add New Donor"
 msgstr "[FR] Add New Donor"
 
@@ -95,7 +95,7 @@ msgid "Adverse Event Type"
 msgstr "[FR] Adverse Event Type"
 
 #: app/views/donors/donorCounsellingDetails.html:37
-#: app/views/donors/findDonor.html:112
+#: app/views/donors/findDonor.html:93
 #: app/views/donors/manageDuplicateDonors.html:29
 #: app/views/donors/viewDonor.html:102
 msgid "Age"
@@ -115,7 +115,7 @@ msgstr "[FR] All Samples"
 msgid "All Sites"
 msgstr "Tous les Sites"
 
-#: app/views/donors/findDonor.html:57
+#: app/views/donors/findDonor.html:38
 msgid "All search fields cannot be empty"
 msgstr "[FR] All search fields cannot be empty"
 
@@ -327,6 +327,7 @@ msgstr "[FR] Blood Typing Issues or Incomplete"
 msgid "Blood Typing Status"
 msgstr "[FR] Blood Typing Status"
 
+#. Comma Separated Values file, abbreviation
 #: app/views/donors/donorCommunications.html:97
 #: app/views/donors/donorCounselling.html:117
 #: app/views/donors/viewDonationBatch.html:6
@@ -377,7 +378,7 @@ msgstr "[FR] Cannot be a future date"
 
 #: app/views/donors/donorCommunications.html:86
 #: app/views/donors/donorCounselling.html:108
-#: app/views/donors/findDonor.html:66
+#: app/views/donors/findDonor.html:47
 #: app/views/donors/manageDonationBatches.html:148
 #: app/views/donors/manageDonationBatches.html:94
 #: app/views/inventory/findInventory.html:94
@@ -621,10 +622,6 @@ msgstr "Retours en cours"
 msgid "Currently Deferred"
 msgstr "[FR] Currently Deferred"
 
-#: app/views/donors/findDonor.html:23
-msgid "DD"
-msgstr "[FR] DD"
-
 #. Donation Identification Number, abbreviation
 #: app/scripts/controllers/donors/donorCounselling.js:179
 #: app/scripts/controllers/donors/viewDonationBatch.js:50
@@ -636,7 +633,7 @@ msgstr "[FR] DD"
 #: app/scripts/controllers/testing/viewTestBatch.js:115
 #: app/views/donors/addDonation.html:80
 #: app/views/donors/addDonorDonation.html:42
-#: app/views/donors/donationDetails.html:7 app/views/donors/findDonor.html:47
+#: app/views/donors/donationDetails.html:7 app/views/donors/findDonor.html:28
 #: app/views/donors/mergeDonorsDonations.html:9
 #: app/views/donors/viewDonationSummary.html:21
 #: app/views/inventory/findInventory.html:8
@@ -735,7 +732,7 @@ msgstr "[FR] Date must be today or before"
 
 #: app/scripts/controllers/donors/donorCounselling.js:168
 #: app/scripts/controllers/inventory/viewOrder.js:161
-#: app/views/donors/findDonor.html:116 app/views/donors/findDonor.html:19
+#: app/views/donors/findDonor.html:97
 #: app/views/donors/mergeDonorsSelection.html:27
 #: app/views/inventory/fulfilOrder.html:118
 #: app/views/inventory/fulfilOrder.html:29
@@ -996,7 +993,7 @@ msgstr "[FR] Donor Notes"
 #: app/scripts/controllers/donors/viewDonationBatch.js:45
 #: app/views/donors/addDonation.html:26
 #: app/views/donors/donorCounsellingDetails.html:41
-#: app/views/donors/findDonor.html:38 app/views/donors/findDonor.html:99
+#: app/views/donors/findDonor.html:19 app/views/donors/findDonor.html:80
 #: app/views/donors/mergeDonorsAddress.html:5
 #: app/views/donors/mergeDonorsContact.html:5
 #: app/views/donors/mergeDonorsDeferrals.html:6
@@ -1012,7 +1009,7 @@ msgstr "[FR] Donor Number"
 msgid "Donor Overview Merge"
 msgstr "[FR] Donor Overview Merge"
 
-#: app/views/donors/findDonor.html:84
+#: app/views/donors/findDonor.html:65
 msgid "Donor Registration Blocked - No Open Donation Batches"
 msgstr "[FR] Donor Registration Blocked - No Open Donation Batches"
 
@@ -1127,8 +1124,7 @@ msgstr "[FR] Fail"
 msgid "February"
 msgstr "[FR] February"
 
-#: app/views/donors/addDonation.html:63 app/views/donors/findDonor.html:34
-#: app/views/translations.html:4
+#: app/views/donors/addDonation.html:63 app/views/translations.html:4
 msgid "Female"
 msgstr "Femme"
 
@@ -1163,7 +1159,7 @@ msgstr "[FR] First"
 
 #: app/scripts/controllers/donors/donorCommunications.js:78
 #: app/scripts/controllers/donors/donorCounselling.js:151
-#: app/views/donors/duplicateDonors.html:26 app/views/donors/findDonor.html:103
+#: app/views/donors/duplicateDonors.html:26 app/views/donors/findDonor.html:84
 #: app/views/donors/mergeDonorsSelection.html:18
 msgid "First Name"
 msgstr "[FR] First Name"
@@ -1185,7 +1181,7 @@ msgstr "Écart"
 #: app/scripts/controllers/donors/donorCounselling.js:161
 #: app/scripts/controllers/inventory/viewOrder.js:156
 #: app/views/donors/addDonor.html:134 app/views/donors/duplicateDonors.html:32
-#: app/views/donors/findDonor.html:109 app/views/donors/findDonor.html:31
+#: app/views/donors/findDonor.html:90
 #: app/views/donors/manageDuplicateDonors.html:26
 #: app/views/donors/mergeDonorsSelection.html:24
 #: app/views/inventory/fulfilOrder.html:112
@@ -1331,7 +1327,7 @@ msgstr "[FR] Last"
 
 #: app/scripts/controllers/donors/donorCommunications.js:82
 #: app/scripts/controllers/donors/donorCounselling.js:156
-#: app/views/donors/duplicateDonors.html:29 app/views/donors/findDonor.html:106
+#: app/views/donors/duplicateDonors.html:29 app/views/donors/findDonor.html:87
 #: app/views/donors/mergeDonorsSelection.html:21
 msgid "Last Name"
 msgstr "[FR] Last Name"
@@ -1373,12 +1369,7 @@ msgstr "GESTION D'INVENTAIRE"
 msgid "MANAGE TESTING"
 msgstr "[FR] MANAGE TESTING"
 
-#: app/views/donors/findDonor.html:25
-msgid "MM"
-msgstr "[MM] MM"
-
-#: app/views/donors/addDonation.html:59 app/views/donors/findDonor.html:33
-#: app/views/translations.html:2
+#: app/views/donors/addDonation.html:59 app/views/translations.html:2
 msgid "Male"
 msgstr "Homme"
 
@@ -1561,7 +1552,7 @@ msgstr ""
 msgid "No current deferrals"
 msgstr "[FR] No current deferrals"
 
-#: app/views/donors/findDonor.html:132
+#: app/views/donors/findDonor.html:113
 msgid "No donors found"
 msgstr "[FR] No donors found"
 
@@ -1744,6 +1735,7 @@ msgstr "[FR] Overview"
 msgid "P"
 msgstr "[FR] P"
 
+#. Portable Document Format file, abbreviation
 #: app/views/donors/donorCommunications.html:96
 #: app/views/donors/donorCounselling.html:116
 #: app/views/donors/viewDonationBatch.html:5
@@ -2006,7 +1998,7 @@ msgstr "Mis en Quarantaine"
 #. Refused counselling, abbreviation
 #: app/views/translations.html:91
 msgid "R"
-msgstr ""
+msgstr "[FR] R"
 
 #: app/views/testing/viewTestBatch.html:100
 #: app/views/testing/viewTestBatch.html:114
@@ -2647,7 +2639,7 @@ msgstr "[FR] User"
 #: app/scripts/controllers/testing/viewTestBatch.js:268
 #: app/views/donors/addDonor.html:155 app/views/donors/donationDetails.html:19
 #: app/views/donors/donorCounsellingDetails.html:44
-#: app/views/donors/findDonor.html:120 app/views/donors/manageClinic.html:22
+#: app/views/donors/findDonor.html:101 app/views/donors/manageClinic.html:22
 #: app/views/donors/manageDeferral.html:34
 #: app/views/donors/manageDonationBatches.html:172
 #: app/views/donors/manageDonationBatches.html:28
@@ -2776,10 +2768,6 @@ msgstr "[FR] Wt"
 msgid "Y"
 msgstr "[FR] Y"
 
-#: app/views/donors/findDonor.html:26
-msgid "YYYY"
-msgstr "[FR] YYYY"
-
 #: app/views/donors/addDonor.html:99
 msgid "Year"
 msgstr "[FR] Year"
@@ -2809,7 +2797,7 @@ msgstr "[FR] to"
 
 #: app/views/donors/donorCommunications.html:95
 #: app/views/donors/donorCounselling.html:115
-#: app/views/donors/findDonor.html:79
+#: app/views/donors/findDonor.html:60
 msgid "{{count}} donor(s) found"
 msgstr "[FR] {{count}} donor(s) found"
 
@@ -2859,6 +2847,15 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid "DD"
+#~ msgstr "[FR] DD"
+
+#~ msgid "MM"
+#~ msgstr "[MM] MM"
+
+#~ msgid "YYYY"
+#~ msgstr "[FR] YYYY"
 
 #~ msgid "Donor"
 #~ msgstr "[FR] Donor"
