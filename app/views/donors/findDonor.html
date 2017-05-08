@@ -15,25 +15,6 @@
             </div>
         </div>
     </div>
-    <div class="form-group" style="display:none;">
-        <label for="name" class="col-sm-1 control-label" translate>Date of Birth</label>
-        <div class="col-sm-3">
-            <div id="dob" class="form-control input-sm dob">
-                <input id="day" type="tel" ng-model="donorSearch.dob.day" maxlength="2" bsis-tab-to="month"
-                       placeholder="{{'DD' | translate}}"/>/
-                <input id="month" type="tel" ng-model="donorSearch.dob.month" maxlength="2" bsis-tab-to="year"
-                       placeholder="{{'MM' | translate}}"/>/
-                <input id="year" type="tel" ng-model="donorSearch.dob.year" maxlength="4" placeholder="{{'YYYY' | translate}}"/>
-            </div>
-        </div>
-    </div>
-    <div class="form-group" style="display:none;">
-        <label for="name" class="col-sm-1 control-label" translate>Gender</label>
-        <div class="col-sm-3" style="padding-top:5px;">
-            <input type="radio" ng-model="donorSearch.gender" value="male"/> <span translate>Male</span>
-            <input type="radio" ng-model="donorSearch.gender" value="female"/> <span translate>Female</span>
-        </div>
-    </div>
     <div class="form-group">
         <label for="name" class="col-sm-1 control-label"><span translate>Donor Number</span></label>
         <div class="row col-sm-11">
