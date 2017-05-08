@@ -231,7 +231,7 @@ msgstr "[FR] Back"
 
 #: app/views/donors/addDonorDonation.html:24
 msgid "Batch"
-msgstr "[FR] Match"
+msgstr "[FR] Batch"
 
 #: app/views/donors/manageDonationBatches.html:124
 msgid "Batch Date"
