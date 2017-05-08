@@ -1,0 +1,12 @@
+<span>
+	<span ng-show="haemoglobinCount">
+		<span ng-show="hbNumericValue">{{haemoglobinCount}}
+			<span ng-show="hbShowUnit">{{hbUnit}}</span>
+		</span>
+	</span>
+	<span ng-show="haemoglobinLevel">
+		<span ng-show="hbNumericValue && hbQualitativeValue">(</span>
+	    <span ng-show="hbQualitativeValue">{{haemoglobinLevel | titleCase}}</span>
+	    <span ng-show="hbNumericValue && hbQualitativeValue">)</span>
+	</span>
+</span>

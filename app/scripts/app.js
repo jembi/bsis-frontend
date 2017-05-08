@@ -929,6 +929,30 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
     };
   })
 
+  /* Custom haemoglobinValue directive to return haemeglobin information in the format: haemoglobinCount hbUnit ( hbQualitativeValue ) */
+  .directive('haemoglobinValue', function() {
+    return {
+      replace: 'true',
+      restrict: 'E',
+      scope: {
+        hbUnit: '=',
+        haemoglobinCount: '=',
+        hbNumericValue: '=',
+        haemoglobinLevel: '=',
+        hbQualitativeValue: '=',
+        hbShowUnit: '=?'
+      },
+      link: function(scope) {
+        if (scope.hbShowUnit == undefined) {
+          scope.hbShowUnit = true;
+        }
+      },
+      templateUrl: function() {
+        return 'views/template/haemoglobin.html';
+      }
+    };
+  })
+
 
   /*  Custom directive to check if user has associated permission
    example use: <span has-permission="{{permissions.SOME_PERMISSION}}">
