@@ -23,7 +23,7 @@ angular.module('bsis')
         id: 'ttiUnsafeSample',
         value: gettextCatalog.getString('TTI Unsafe or Incomplete'),
         reportName: gettextCatalog.getString('Test Batch Outcomes Summary Report - TTI Unsafe and Tests Outstanding'),
-        filterKeys: ['TTI_SAFE'],
+        filterKeys: ['SAFE'],
         columns: ['ttistatus'],
         matchType: false
       },
@@ -161,7 +161,7 @@ angular.module('bsis')
         displayName: gettextCatalog.getString('TTI Status'),
         field: 'ttistatus',
         cellTemplate: '<div class="ui-grid-cell-contents">' +
-          '{{row.entity["ttistatus"].replace("TTI_", "") | titleCase | translate}}' +
+          '{{row.entity["ttistatus"] | titleCase | translate}}' +
           '</div>',
         visible: true,
         width: '**',
@@ -206,7 +206,7 @@ angular.module('bsis')
         if (col.name === 'Date Bled') {
           return $filter('bsisDate')(value);
         } else if (col.name === 'ttistatus') {
-          value = value.replace('TTI_', '');
+          value = value;
           return gettextCatalog.getString($filter('titleCase')(value));
         } else if (col.name === 'bloodAboRh') {
           var bloodSerology = '';
