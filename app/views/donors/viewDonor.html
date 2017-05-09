@@ -223,14 +223,10 @@
                                     <em>Wt</em>: {{lastDonation.donorWeight}} {{weightUnit}} |
                                     <em>BP</em>:
                                     {{lastDonation.bloodPressureSystolic}}/{{lastDonation.bloodPressureDiastolic}}
-                                    {{bpUnit}}|
-                                    <span>
+                                    {{bpUnit}} |
                                     <em>Hb</em>:
-                                    <span ng-show="getBooleanValue('donation.hbNumericValue')">{{lastDonation.haemoglobinCount}}</span>
-                                    <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">(</span>
-                      <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span>
-                                    <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">)</span> |
-                                    </span>
+                                    <haemoglobin-value haemoglobin-count="lastDonation.haemoglobinCount" haemoglobin-level="lastDonation.haemoglobinLevel"> 
+                                    </haemoglobin-value> | 
                                     <em>P</em>: {{lastDonation.donorPulse}} {{pulseUnit}}
                                 </td>
                             </tr>
