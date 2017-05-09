@@ -939,13 +939,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         haemoglobinCount: '=',
         hbNumericValue: '=?',
         haemoglobinLevel: '=',
-        hbQualitativeValue: '=?',
-        hbShowUnit: '=?'
+        hbQualitativeValue: '=?'
       },
       link: function(scope) {
-        if (angular.isUndefined(scope.hbShowUnit)) {
-          scope.hbShowUnit = true;
-        }
         if (angular.isUndefined(scope.hbUnit)) {
           scope.hbUnit = DONATION.HBUNIT;
         }
