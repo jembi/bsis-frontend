@@ -212,15 +212,11 @@
                                     <em><span translate translate-comment="Weight, abbreviation">Wt</span></em>: {{lastDonation.donorWeight}} {{weightUnit}} |
                                     <em><span translate translate-comment="Blood Pressure, abbreviation">BP</span></em>:
                                     {{lastDonation.bloodPressureSystolic}}/{{lastDonation.bloodPressureDiastolic}}
-                                    {{bpUnit}}|
-                                    <span>
-                                    <em><span translate translate-comment="Haemoglobin, abbreviation">Hb</span></em>:
-                                    <span ng-show="getBooleanValue('donation.hbNumericValue')">{{lastDonation.haemoglobinCount}}</span>
-                                    <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">(</span>
-                      <span ng-show="getBooleanValue('donation.hbQualitativeValue')">{{lastDonation.haemoglobinLevel | titleCase | translate }}</span>
-                                    <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">)</span> |
-                                    </span>
-                                    <em><span translate translate-comment="Pulse, abbreviation">P</span></em>: {{lastDonation.donorPulse}} {{pulseUnit}}
+                                    {{bpUnit}} |
+                                    <em>Hb</em>:
+                                    <haemoglobin-value haemoglobin-count="lastDonation.haemoglobinCount" haemoglobin-level="lastDonation.haemoglobinLevel"> 
+                                    </haemoglobin-value> | 
+                                    <em>P</em>: {{lastDonation.donorPulse}} {{pulseUnit}}
                                 </td>
                             </tr>
                             <tr>

@@ -938,6 +938,35 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
     };
   })
 
+  /* Custom haemoglobinValue directive to return haemeglobin information in the format: haemoglobinCount hbUnit ( hbQualitativeValue ) */
+  .directive('haemoglobinValue', function(ConfigurationsService, DONATION) {
+    return {
+      replace: 'true',
+      restrict: 'E',
+      scope: {
+        hbUnit: '=?',
+        haemoglobinCount: '=',
+        hbNumericValue: '=?',
+        haemoglobinLevel: '=',
+        hbQualitativeValue: '=?'
+      },
+      link: function(scope) {
+        if (angular.isUndefined(scope.hbUnit)) {
+          scope.hbUnit = DONATION.HBUNIT;
+        }
+        if (angular.isUndefined(scope.hbNumericValue)) {
+          scope.hbNumericValue = ConfigurationsService.getBooleanValue('donation.hbNumericValue');
+        }
+        if (angular.isUndefined(scope.hbQualitativeValue)) {
+          scope.hbQualitativeValue = ConfigurationsService.getBooleanValue('donation.hbQualitativeValue');
+        }
+      },
+      templateUrl: function() {
+        return 'views/template/haemoglobin.html';
+      }
+    };
+  })
+
 
   /*  Custom directive to check if user has associated permission
    example use: <span has-permission="{{permissions.SOME_PERMISSION}}">
