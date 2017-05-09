@@ -930,21 +930,30 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
   })
 
   /* Custom haemoglobinValue directive to return haemeglobin information in the format: haemoglobinCount hbUnit ( hbQualitativeValue ) */
-  .directive('haemoglobinValue', function() {
+  .directive('haemoglobinValue', function(ConfigurationsService, DONATION) {
     return {
       replace: 'true',
       restrict: 'E',
       scope: {
-        hbUnit: '=',
+        hbUnit: '=?',
         haemoglobinCount: '=',
-        hbNumericValue: '=',
+        hbNumericValue: '=?',
         haemoglobinLevel: '=',
-        hbQualitativeValue: '=',
+        hbQualitativeValue: '=?',
         hbShowUnit: '=?'
       },
       link: function(scope) {
-        if (scope.hbShowUnit == undefined) {
+        if (angular.isUndefined(scope.hbShowUnit)) {
           scope.hbShowUnit = true;
+        }
+        if (angular.isUndefined(scope.hbUnit)) {
+          scope.hbUnit = DONATION.HBUNIT;
+        }
+        if (angular.isUndefined(scope.hbNumericValue)) {
+          scope.hbNumericValue = ConfigurationsService.getBooleanValue('donation.hbNumericValue');
+        }
+        if (angular.isUndefined(scope.hbQualitativeValue)) {
+          scope.hbQualitativeValue = ConfigurationsService.getBooleanValue('donation.hbQualitativeValue');
         }
       },
       templateUrl: function() {
