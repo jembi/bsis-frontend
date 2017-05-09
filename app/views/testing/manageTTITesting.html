@@ -65,7 +65,7 @@
                               {{sample.donation.donationDate | bsisDate}}
                           </td>
                           <td class="text-center">
-                              {{sample.ttistatus | titleCase | translate }}
+                              {{sample.ttistatus.replace("TTI_", "") | titleCase | translate }}
                           </td>
                           <td align="center" ng-repeat="test in testNames">
                               <div style="width:90px;">
