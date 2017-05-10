@@ -44,8 +44,7 @@
                 </td>
                 <td data-title="'Hb' | translate" header-class="text-left" class="col-sm-1 text-center"
                     sortable="'haemoglobinCount'">
-                    <span ng-show="getBooleanValue('donation.hbNumericValue')">{{donation.haemoglobinCount}} </span>
-                    <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span><span ng-show="getBooleanValue('donation.hbQualitativeValue')">{{donation.haemoglobinLevel ? (donation.haemoglobinLevel | titleCase | translate) : ''}}</span><span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">)</span>
+                    <haemoglobin-value haemoglobin-count="donation.haemoglobinCount" haemoglobin-level="donation.haemoglobinLevel"/>
                 </td>
                 <td data-title="'Pulse' | translate" header-class="text-left" class="col-sm-1 text-center" sortable="'donorPulse'">
                     {{donation.donorPulse}}

@@ -4,6 +4,7 @@ angular.module('bsis').controller('DonorCounsellingDetailsCtrl', function($scope
 
   $scope.icons = ICONS;
   $scope.dateFormat = DATEFORMAT;
+
   $scope.postDonationCounselling = {};
   $scope.donation = {};
   $scope.donor = {};
