@@ -85,12 +85,12 @@ msgid "Adverse Event"
 msgstr "[FR] Adverse Event"
 
 #: app/views/donors/donationDetails.html:61
-#: app/views/donors/viewDonationSummary.html:215
+#: app/views/donors/viewDonationSummary.html:210
 msgid "Adverse Event Comment"
 msgstr "[FR] Adverse Event Comment"
 
 #: app/views/donors/donationDetails.html:57
-#: app/views/donors/viewDonationSummary.html:204
+#: app/views/donors/viewDonationSummary.html:199
 msgid "Adverse Event Type"
 msgstr "[FR] Adverse Event Type"
 
@@ -220,7 +220,7 @@ msgstr "Disponible"
 #: app/views/donors/addDonation.html:236
 #: app/views/donors/addDonorDonation.html:168
 #: app/views/donors/donationDetails.html:45
-#: app/views/donors/viewDonationSummary.html:145
+#: app/views/donors/viewDonationSummary.html:140
 #: app/views/donors/viewDonations.html:41 app/views/donors/viewDonor.html:213
 msgid "BP"
 msgstr "[FR] BP"
@@ -294,7 +294,7 @@ msgid "Blood Group Serology"
 msgstr "[FR] Blood Group Serology"
 
 #: app/views/donors/donationDetails.html:112
-#: app/views/donors/viewDonationSummary.html:278
+#: app/views/donors/viewDonationSummary.html:273
 #: app/views/testing/viewTestSample.html:84
 msgid "Blood Group Serology Outcomes"
 msgstr "[FR] Blood Group Serology Outcomes"
@@ -304,7 +304,7 @@ msgid "Blood Group Serology Status"
 msgstr "[FR] Blood Group Serology Status"
 
 #: app/views/donors/donationDetails.html:75
-#: app/views/donors/viewDonationSummary.html:246
+#: app/views/donors/viewDonationSummary.html:241
 #: app/views/testing/viewTestSample.html:56
 msgid "Blood Group Serology Test Status"
 msgstr "[FR] Blood Group Serology Test Status"
@@ -939,7 +939,7 @@ msgid "Donation Information"
 msgstr "[FR] Donation Information"
 
 #: app/views/donors/donationDetails.html:53
-#: app/views/donors/viewDonationSummary.html:199
+#: app/views/donors/viewDonationSummary.html:194
 msgid "Donation Notes"
 msgstr "[FR] Donation Notes"
 
@@ -1128,7 +1128,7 @@ msgid "Expiry Status"
 msgstr "Statut d'Expiration"
 
 #. Haemoglobin Level
-#: app/views/translations.html:64 app/views/translations.html:94
+#: app/views/translations.html:64
 msgid "Fail"
 msgstr "[FR] Fail"
 
@@ -1217,7 +1217,7 @@ msgstr "[FR] Group"
 msgid "Hb"
 msgstr "[FR] Hb"
 
-#: app/views/donors/viewDonationSummary.html:231
+#: app/views/donors/viewDonationSummary.html:226
 msgid "Hide test outcomes"
 msgstr "[FR] Hide test outcomes"
 
@@ -1745,8 +1745,8 @@ msgstr "Type de Commande"
 #: app/scripts/controllers/inventory/findTransfusion.js:70
 #: app/views/donors/donationDetails.html:122
 #: app/views/donors/donationDetails.html:93
-#: app/views/donors/viewDonationSummary.html:257
-#: app/views/donors/viewDonationSummary.html:283
+#: app/views/donors/viewDonationSummary.html:252
+#: app/views/donors/viewDonationSummary.html:278
 #: app/views/testing/viewTestSample.html:70
 #: app/views/testing/viewTestSample.html:90
 msgid "Outcome"
@@ -1805,7 +1805,7 @@ msgid "Page {{currentPage}} of {{pageCount}}"
 msgstr "Page {{currentPage}} sur {{pageCount}}"
 
 #. Haemoglobin Level
-#: app/views/translations.html:63 app/views/translations.html:93
+#: app/views/translations.html:63
 msgid "Pass"
 msgstr "[FR] Pass"
 
@@ -1881,10 +1881,10 @@ msgstr "[FR] Please enter a valid identifier"
 #: app/views/donors/addDonorDonation.html:186
 #: app/views/donors/addDonorDonation.html:204
 #: app/views/donors/viewDonationSummary.html:105
-#: app/views/donors/viewDonationSummary.html:136
-#: app/views/donors/viewDonationSummary.html:163
-#: app/views/donors/viewDonationSummary.html:170
-#: app/views/donors/viewDonationSummary.html:190
+#: app/views/donors/viewDonationSummary.html:131
+#: app/views/donors/viewDonationSummary.html:158
+#: app/views/donors/viewDonationSummary.html:165
+#: app/views/donors/viewDonationSummary.html:185
 msgid "Please enter a value above {{minValue}}"
 msgstr "[FR] Please enter a value above {{minValue}}"
 
@@ -1897,15 +1897,15 @@ msgstr "[FR] Please enter a value above {{minValue}}"
 #: app/views/donors/addDonorDonation.html:187
 #: app/views/donors/addDonorDonation.html:205
 #: app/views/donors/viewDonationSummary.html:108
-#: app/views/donors/viewDonationSummary.html:139
-#: app/views/donors/viewDonationSummary.html:166
-#: app/views/donors/viewDonationSummary.html:173
-#: app/views/donors/viewDonationSummary.html:193
+#: app/views/donors/viewDonationSummary.html:134
+#: app/views/donors/viewDonationSummary.html:161
+#: app/views/donors/viewDonationSummary.html:168
+#: app/views/donors/viewDonationSummary.html:188
 msgid "Please enter a value below {{maxValue}}"
 msgstr "[FR] Please enter a value below {{maxValue}}"
 
-#: app/views/donors/addDonor.html:9 app/views/donors/addDonorDonation.html:7
-#: app/views/donors/viewDonor.html:6
+#: app/views/donors/addDonation.html:7 app/views/donors/addDonor.html:9
+#: app/views/donors/addDonorDonation.html:7 app/views/donors/viewDonor.html:6
 msgid "Please provide valid inputs"
 msgstr "[FR] Please provide valid inputs"
 
@@ -2230,7 +2230,7 @@ msgstr "[FR] Safe"
 msgid "Same as Home"
 msgstr "[FR] Same as Home"
 
-#: app/views/donors/viewDonationSummary.html:242
+#: app/views/donors/viewDonationSummary.html:237
 msgid "Sample Released"
 msgstr "[FR] Sample Released"
 
@@ -2317,7 +2317,7 @@ msgstr "[FR] Select one or more donation batches"
 msgid "September"
 msgstr "[FR] September"
 
-#: app/views/donors/viewDonationSummary.html:235
+#: app/views/donors/viewDonationSummary.html:230
 msgid "Show test outcomes"
 msgstr "[FR] Show test outcomes"
 
@@ -2356,7 +2356,7 @@ msgid "Stock Levels"
 msgstr "Niveaux de Stocks"
 
 #: app/views/donors/donationDetails.html:83
-#: app/views/donors/viewDonationSummary.html:252
+#: app/views/donors/viewDonationSummary.html:247
 #: app/views/testing/viewTestSample.html:64
 msgid "TTI Outcomes"
 msgstr "[FR] TTI Outcomes"
@@ -2371,7 +2371,7 @@ msgstr "[FR] TTI Test Outcomes"
 
 #: app/views/donors/donationDetails.html:73
 #: app/views/donors/mergeDonorsDonations.html:22
-#: app/views/donors/viewDonationSummary.html:244
+#: app/views/donors/viewDonationSummary.html:239
 #: app/views/testing/viewTestSample.html:54
 msgid "TTI Test Status"
 msgstr "[FR] TTI Test Status"
@@ -2387,8 +2387,8 @@ msgstr "[FR] TTI Unsafe or Incomplete"
 
 #: app/views/donors/donationDetails.html:121
 #: app/views/donors/donationDetails.html:92
-#: app/views/donors/viewDonationSummary.html:256
-#: app/views/donors/viewDonationSummary.html:282
+#: app/views/donors/viewDonationSummary.html:251
+#: app/views/donors/viewDonationSummary.html:277
 #: app/views/testing/viewTestSample.html:69
 #: app/views/testing/viewTestSample.html:89
 msgid "Test"
@@ -2418,8 +2418,8 @@ msgstr "[FR] Test Samples"
 
 #: app/views/donors/donationDetails.html:123
 #: app/views/donors/donationDetails.html:94
-#: app/views/donors/viewDonationSummary.html:258
-#: app/views/donors/viewDonationSummary.html:284
+#: app/views/donors/viewDonationSummary.html:253
+#: app/views/donors/viewDonationSummary.html:279
 #: app/views/testing/viewTestSample.html:71
 #: app/views/testing/viewTestSample.html:91
 msgid "Tested On"
@@ -2785,7 +2785,7 @@ msgstr "Numéro de Pavillon"
 #: app/views/donors/addDonation.html:186
 #: app/views/donors/addDonorDonation.html:126
 #: app/views/donors/donationDetails.html:49
-#: app/views/donors/viewDonationSummary.html:179
+#: app/views/donors/viewDonationSummary.html:174
 msgid "Weight"
 msgstr "[FR] Weight"
 
