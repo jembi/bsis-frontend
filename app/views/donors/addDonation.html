@@ -4,7 +4,7 @@
 <div ng-if="$parent.addDonationSuccess === false" ng-hide="$parent.addDonationSuccess !== false"
      style="padding-top:10px;">
     <uib-alert type="danger" close="">
-        {{err.userMessage}}
+        <span translate>Please provide valid inputs</span>
         <ul>
             <li ng-show="err['donation.donor.[0].code === 'donor.invalid'" translate>Please supply a valid donor</li>
             <li ng-show="err['donation.donationIdentificationNumber'][0].code === 'donationIdentificationNumber.nonunique'" translate>
