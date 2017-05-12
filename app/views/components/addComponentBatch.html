@@ -21,12 +21,12 @@
           <div class="row col-sm-6">
             <div class="form-inline" style="padding-left:5px;">
               <select name="donationBatches" class="form-control" ng-model="componentBatch.donationBatch.id" required>
-                <option value="" disabled><span translate>Select</span>:</option>
+                <option value="" disabled translate>Select</option>
                 <option ng-repeat="donationBatch in donationBatches" value="{{donationBatch.id}}">
                   <small>
                     {{donationBatch.venue.name}} |
                     {{donationBatch.donationBatchDate | bsisDate}} |
-                    {{donationBatch.numDonations}} donations
+                    {{donationBatch.numDonations}} <span translate>donations</span>
                   </small>
                 </option>
               </select>
@@ -44,7 +44,7 @@
           <div class="row col-sm-6">
             <div class="form-inline" style="padding-left:5px;">
               <select name="processingSite" class="form-control" ng-model="componentBatch.location.id" required ng-options="processingSite.id as processingSite.name for processingSite in processingSites">
-                <option value="" disabled><span translate>Select</span>:</option>
+                <option value="" disabled translate>Select</option>
               </select>
               <div>
                 <small class="error" ng-show="(addComponentBatchForm.processingSite.$invalid && addComponentBatchForm.$submitted)">
@@ -69,7 +69,7 @@
           <div class="row col-sm-10">
             <div class="form-inline" style="padding-left:5px;" ng-class="{'has-error': emptyTemperatureSubmitted}">
               <em><span translate>Temperature</span>:</em>
-              <input type="number" name="temperature" ng-model="temperature" class="form-control" style="width: 50px;" ng-required="componentBatch.bloodTransportBoxes.length === 0"/> <em>&deg;C</em>
+              <input type="number" name="temperature" ng-model="temperature" class="form-control" style="width: 50px;" ng-required="componentBatch.bloodTransportBoxes.length === 0"/> <em><span translate translate-comment="Degree Celsius, abbreviation"></span>&deg;C</em>
               <button class="btn btn-primary" ng-click="addBox(temperature);" type="button" style="margin-top:0;" translate>Add box</button>
               <div>
                 <small class="error" ng-show="(componentBatch.bloodTransportBoxes.length === 0 && addComponentBatchForm.$submitted)">
@@ -84,7 +84,7 @@
             </div>
             <div>
               <ul id="boxesList">
-                <li ng-repeat="box in componentBatch.bloodTransportBoxes track by $index"><span translate>Box</span>&nbsp;#{{$index + 1}} - {{box.temperature}}<em>&deg;C</em> </li>
+                <li ng-repeat="box in componentBatch.bloodTransportBoxes track by $index"><span translate  translate-params-box-number="$index + 1" translate-comment="Blood transport box number, abbreviation">Box#{{boxNumber}} - {{box.temperature}}</span><em><span translate translate-comment="Degree Celsius, abbreviation"></span>&deg;C</em></li>              
               </ul>
             </div>
           </div>
