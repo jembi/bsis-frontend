@@ -34,7 +34,7 @@
             <div class="form-inline" style="padding-left:5px;">
                 <dateselect name="donationDateFrom" ng-model="discardsSearch.donationDateFrom" format="dateFormat" opened="startDateOpen" cal-icon="icons.CALENDAR" ng-required="!dinSearch" ng-disabled="dinSearch" ui-date-range="1,months" ui-date-end="{{discardsSearch.donationDateTo | date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findDiscardedComponentsForm.donationDateFrom.$invalid)}" ng-model-options="{ allowInvalid: true }">
                 </dateselect>
-                <span><em><span translate>To</span></em></span>
+                <span><em translate>To</em></span>
                 <dateselect-end name="donationDateTo" ng-model="discardsSearch.donationDateTo" format="dateFormat" opened="endDateOpen" cal-icon="icons.CALENDAR" ng-required="!dinSearch" ng-disabled="dinSearch" ui-date-range="1,months" ui-date-start="{{discardsSearch.donationDateFrom |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findDiscardedComponentsForm.donationDateTo.$invalid)}" ng-model-options="{ allowInvalid: true }">
                 </dateselect-end>
             </div>
@@ -87,7 +87,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <p>
-                    <em><span translate>No components found</span>.</em>
+                    <em><span translate>No components found</span></em>
                 </p>
             </div>
         </div>
