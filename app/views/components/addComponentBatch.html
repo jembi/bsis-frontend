@@ -69,7 +69,8 @@
           <div class="row col-sm-10">
             <div class="form-inline" style="padding-left:5px;" ng-class="{'has-error': emptyTemperatureSubmitted}">
               <em><span translate>Temperature</span></em>
-              <input type="number" name="temperature" ng-model="temperature" class="form-control" style="width: 50px;" ng-required="componentBatch.bloodTransportBoxes.length === 0"/> <em><span translate translate-comment="Degree Celsius, abbreviation">&deg;C</span></em>
+              <input type="number" name="temperature" ng-model="temperature" class="form-control" style="width: 50px;" ng-required="componentBatch.bloodTransportBoxes.length === 0"/>
+                <em translate translate-comment="Degree Celsius, abbreviation">&deg;C</em>
               <button class="btn btn-primary" ng-click="addBox(temperature);" type="button" style="margin-top:0;" translate>Add box
               </button>
               <div>
@@ -85,8 +86,9 @@
             </div>
             <div>
               <ul id="boxesList">
-                <li ng-repeat="box in componentBatch.bloodTransportBoxes track by $index"><span translate  translate-params-box-number="$index + 1" translate-comment="Blood transport box number, abbreviation">Box&nbsp;#{{boxNumber}}</span> - {{box.temperature}}<em><span translate translate-comment="Degree Celsius, abbreviation">
-                &deg;C</span></em></li>              
+                <li ng-repeat="box in componentBatch.bloodTransportBoxes track by $index">
+                <span translate  translate-params-box-number="$index + 1" translate-comment="Blood transport box number, abbreviation">Box #{{boxNumber}}</span> - {{box.temperature}}
+                <em translate translate-comment="Degree Celsius, abbreviation">&deg;C</em></li>              
               </ul>
             </div>
           </div>
