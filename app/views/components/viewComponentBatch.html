@@ -1,43 +1,43 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/components/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-  <h3 class="page-header">Receive Components</h3>
+  <h3 class="page-header" translate>Receive Components</h3>
 
   <ul class="nav nav-tabs nav-justified">
     <li>
-      <a href="#/addComponentBatch">Add Delivery Form</a>
+      <a href="#/addComponentBatch" translate>Add Delivery Form</a>
     </li>
     <li class="active">
-      <a href="#/viewComponentBatches">View Delivery Forms</a>
+      <a href="#/viewComponentBatches" translate>View Delivery Forms</a>
     </li>
   </ul>
 
   <hr />
 
   <span class="h4" style="float:right; margin-top: -15px; padding-right: 15px; display:inline;">
-    <button class="btn btn-primary" ng-click="printDeliveryNote()">Print Delivery Note</button>
+    <button class="btn btn-primary" ng-click="printDeliveryNote()" translate>Print Delivery Note</button>
   </span>
 
   <section>
-    <h4>Donation Batch Info</h4>
-    <span class="text-muted">Date Created:</span> {{componentBatch.donationBatch.donationBatchDate | bsisDate}}
-    <span class="text-muted">Venue:</span> {{componentBatch.donationBatch.venue.name}}
-    <span class="text-muted">Number of Donations:</span> {{componentBatch.donationBatch.numDonations}}
-    <span class="text-muted">Status:</span> {{componentBatch.donationBatch.isClosed ? 'CLOSED' : 'OPEN'}}
+    <h4 translate>Donation Batch Info</h4>
+    <span class="text-muted"><span translate>Date Created</span>:</span> {{componentBatch.donationBatch.donationBatchDate | bsisDate}}
+    <span class="text-muted"><span translate>Venue</span>:</span> {{componentBatch.donationBatch.venue.name}}
+    <span class="text-muted"><span translate>Number of Donations</span>:</span> {{componentBatch.donationBatch.numDonations}}
+    <span class="text-muted"><span translate>Status</span>:</span> {{componentBatch.donationBatch.isClosed ? donationBatchClosed : donationBatchOpen}}
   </section>
 
   <hr />
 
   <section>
-    <span class="text-muted">Time of Delivery:</span> {{componentBatch.deliveryDate | bsisTime}}
-    <span class="text-muted">Location:</span> {{componentBatch.location.name}}
-    <span class="text-muted">Number of Blood Transport Boxes:</span> {{componentBatch.bloodTransportBoxes.length}}
+    <span class="text-muted"><span translate>Time of Delivery</span>:</span> {{componentBatch.deliveryDate | bsisTime}}
+    <span class="text-muted"><span translate>Location</span:</span> {{componentBatch.location.name}}
+    <span class="text-muted"><span translate>Number of Blood Transport Boxes</span>:</span> {{componentBatch.bloodTransportBoxes.length}}
   </section>
 
   <hr />
 
   <section>
     <div ng-repeat="box in componentBatch.bloodTransportBoxes">
-      <span class="text-muted">Blood Transport Box Temperature:</span> {{box.temperature}}&deg;C
+      <span class="text-muted"><span translate>Blood Transport Box Temperature</span>:</span> {{box.temperature}}&deg;C
     </div>
   </section>
 
