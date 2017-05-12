@@ -40,40 +40,40 @@ angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $ro
       var prefix = [];
       prefix.push(
         {
-          text: gettextCatalog.getString('Date Created') + ": " ,
+          text: gettextCatalog.getString('Date Created') + ': ',
           bold: true
         }, {
           text: $filter('bsisDate')($scope.componentBatch.donationBatch.donationBatchDate)
         }, {
-          text: " " + gettextCatalog.getString('Venue') + ": ",
+          text: ' ' + gettextCatalog.getString('Venue') + ': ',
           bold: true
         }, {
           text: $scope.componentBatch.donationBatch.venue.name
         }, {
-          text: " " + gettextCatalog.getString('Number of Donations') + ": ",
+          text: ' ' + gettextCatalog.getString('Number of Donations') + ': ',
           bold: true
         }, {
           text: '' + $scope.componentBatch.donationBatch.numDonations
         }, {
-          text: " " + gettextCatalog.getString('Status') + ": ",
+          text: ' ' + gettextCatalog.getString('Status') + ': ',
           bold: true
         }, {
-          text: ($scope.componentBatch.donationBatch.isClosed ? Sscope.donationBatchClosed : $scope.donationBatchOpen) + '\n'
+          text: ($scope.componentBatch.donationBatch.isClosed ? $scope.donationBatchClosed : $scope.donationBatchOpen) + '\n'
         }
       );
       prefix.push(
         {
-          text: " " + gettextCatalog.getString('Time of Delivery') + ": ",
+          text: ' ' + gettextCatalog.getString('Time of Delivery') + ': ',
           bold: true
         }, {
           text: $filter('bsisDateTime')($scope.componentBatch.deliveryDate)
         }, {
-          text: " " + gettextCatalog.getString('Location') + ": ",
+          text: ' ' + gettextCatalog.getString('Location') + ': ',
           bold: true
         }, {
           text: $scope.componentBatch.location.name
         }, {
-          text: " " + gettextCatalog.getString('Number of Blood Transport Boxes') + ": ",
+          text: ' ' + gettextCatalog.getString('Number of Blood Transport Boxes') + ': ',
           bold: true
         }, {
           text: '' + $scope.componentBatch.bloodTransportBoxes.length + '\n'
@@ -82,7 +82,7 @@ angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $ro
       angular.forEach($scope.componentBatch.bloodTransportBoxes, function(box) {
         prefix.push(
           {
-            text: gettextCatalog.getString('Blood Transport Box Temperature') + ": ",
+            text: gettextCatalog.getString('Blood Transport Box Temperature') + ': ',
             bold: true
           }, {
             text: box.temperature + '\u00B0C\n'
@@ -97,7 +97,7 @@ angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $ro
     // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
-        {text: gettextCatalog.getString('Number of components') + ": "  + $scope.gridOptions.data.length, width: 'auto'},
+        {text: gettextCatalog.getString('Number of components') + ': '  + $scope.gridOptions.data.length, width: 'auto'},
         {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
         {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
       ];
