@@ -1111,8 +1111,8 @@ msgstr "[FR] Enter"
 msgid "Enter a valid time"
 msgstr "Prière entrer une heure valide"
 
-#: app/scripts/controllers/donors/manageDuplicateDonors.js:134
-#: app/scripts/controllers/donors/manageDuplicateDonors.js:448
+#: app/scripts/controllers/donors/manageDuplicateDonors.js:136
+#: app/scripts/controllers/donors/manageDuplicateDonors.js:450
 msgid "Error merging the duplicate Donors."
 msgstr "[FR] Error merging the duplicate Donors."
 
@@ -1445,9 +1445,9 @@ msgstr "[FR] Match"
 msgid "May"
 msgstr "[FR] May"
 
-#: app/views/donors/mergeDonorsSelection.html:40
-msgid "Merge?"
-msgstr "[FR] Merge?"
+#: app/scripts/controllers/donors/manageDuplicateDonors.js:9
+msgid "Merge"
+msgstr "[FR] Merge"
 
 #: app/views/donors/addDonor.html:28
 msgid "Middle"
@@ -1922,7 +1922,7 @@ msgstr ""
 msgid "Please select a dispatch type"
 msgstr "Sélectionnez un type d'expédition"
 
-#: app/scripts/controllers/donors/manageDuplicateDonors.js:316
+#: app/scripts/controllers/donors/manageDuplicateDonors.js:318
 msgid "Please select at least two donors."
 msgstr "[FR] Please select at least two donors."
 
@@ -2434,7 +2434,7 @@ msgstr ""
 "[FR] The pack type has been updated - this will affect the initial "
 "components created with this donation. Do you want to continue?"
 
-#: app/scripts/controllers/donors/manageDuplicateDonors.js:328
+#: app/scripts/controllers/donors/manageDuplicateDonors.js:330
 msgid ""
 "The selected donors do not have the same blood group. If you continue, the "
 "merged donor will not be assigned a blood group, and will be considered a "
@@ -2889,6 +2889,9 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid "Merge?"
+#~ msgstr "[FR] Merge?"
 
 #~ msgid "P"
 #~ msgstr "[FR] P"
