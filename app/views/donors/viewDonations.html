@@ -40,7 +40,7 @@
                 </td>
                 <td data-title="'BP' | translate" header-class="text-left" class="col-sm-1 text-center"
                     sortable="'bloodPressureSystolic'">
-                    <span ng-if="donation.bloodPressureSystolic && donation.bloodPressureDiastolic">
+                    <span ng-if="donation.bloodPressureSystolic || donation.bloodPressureDiastolic">
                     {{donation.bloodPressureSystolic}}/{{donation.bloodPressureDiastolic}} {{bpUnit}}</span>
                 </td>
                 <td data-title="'Hb' | translate" header-class="text-left" class="col-sm-1 text-center"
