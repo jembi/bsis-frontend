@@ -22,7 +22,7 @@
             {{donor.lastName}}
         </td>
         <td data-title="'Gender' | translate" header-class="text-left" sortable="'gender'">
-            {{donor.gender | translate}}
+            {{donor.gender | titleCase | translate}}
         </td>
         <td data-title="'Date of Birth' | translate" header-class="text-left" class="text-center" sortable="'birthDate'">
             {{ (donor.birthDate | bsisDate) || '' }}

@@ -24,7 +24,7 @@
                 </em></small>
                 |
                 <small><em><span translate>Gender</span>:</em></small>
-                {{donor.gender | translate}}
+                {{donor.gender | titleCase | translate}}
                 |
                 <small><em><span translate>Age</span>: </em></small>
                 <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
