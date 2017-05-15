@@ -1,10 +1,10 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/components/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-  <h3 class="page-header">Record Components</h3>
+  <h3 class="page-header" translate>Record Components</h3>
 
   <form class="form-horizontal col-sm-12" name="forms.findComponentsForm" role="form" novalidate ng-submit="getComponentsByDIN();clearPreProcessForm();clearComponentTypeCombination();">
     <div class="form-group">
-      <label for="name" class="col-sm-1 control-label">DIN</label>
+      <label for="name" class="col-sm-1 control-label" translate>DIN</label>
       <div class="col-sm-11">
         <div class="form-inline">
           <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber" class="form-control input-sm" ng-model="componentsSearch.donationIdentificationNumber" required />
@@ -13,13 +13,13 @@
     </div>
     <div class="col-sm-offset-1">
       <small class="error" ng-show="(forms.findComponentsForm.$submitted && forms.findComponentsForm.$invalid)">
-        DIN cannot be empty
+        <span translate>DIN cannot be empty</span>
       </small>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-1 col-sm-3">
-        <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}} </button>
-        <button class="btn btn-primary" type="button" ng-click="clear();clearPreProcessForm();clearComponentTypeCombination();">Clear</button>
+        <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search" | translate}} </button>
+        <button class="btn btn-primary" type="button" ng-click="clear();clearPreProcessForm();clearComponentTypeCombination();" translate>Clear</button>
       </div>
     </div>
   </form>
@@ -33,7 +33,7 @@
       <!-- Component pre process form -->
       <form role="form" name="forms.preProcessForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canPreProcess" ng-submit="preProcessSelectedComponent()" novalidate>
         <div class="form-group">
-          <label for="componentWeight" class="col-sm-2 control-label">Component Weight</label>
+          <label for="componentWeight" class="col-sm-2 control-label" translate>Component Weight</label>
           <div class="col-sm-10">
             <input name="componentWeight" class="form-control input-sm" style="width:auto;" type="number" ng-min="1" ng-max="999" ng-model="component.weight" required />
             <ng-messages for="forms.preProcessForm.componentWeight.$error" ng-show="forms.preProcessForm.$submitted">
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="bleedStartTime" class="col-sm-2 control-label">Bleed times: Start</label>
+          <label for="bleedStartTime" class="col-sm-2 control-label"><span translate>Bleed times</span>:<span translate>Start</span></label>
           <div class="col-sm-10">
             <div class="time" style="width:150px;">
                 <uib-timepicker ng-model="component.bleedStartTime" name="bleedStartTime" show-spinners="false"></uib-timepicker>
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="time form-group">
-              <label for="bleedEndTime" class="col-sm-2 control-label">End</label>
+              <label for="bleedEndTime" class="col-sm-2 control-label" translate>End</label>
               <div class="col-sm-10">
                   <uib-timepicker ng-model="component.bleedEndTime" name="bleedEndTime" time-is-after="{{component.bleedStartTime | date:'yyyy-MM-dd HH:mm:ss'}}" time-not-same-as="{{component.bleedStartTime | date:'yyyy-MM-dd HH:mm:ss'}}" show-spinners="false" ng-required="submitted" ng-class="{'has-error' : (forms.preProcessForm.bleedEndTime.$invalid && forms.preProcessForm.$submitted)}"></uib-timepicker>
                   <div>
@@ -67,8 +67,8 @@
         </div>
         <div class="form-group">
           <div class="col-sm-3 col-sm-offset-2">
-            <button type="submit" class="btn btn-primary" ng-disabled="preProcessing">{{preProcessing ? "Saving..." : "Save"}}</button>
-            <button type="button" class="btn btn-primary" ng-disabled="preProcessing" ng-click="clearPreProcessForm();">Clear</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="preProcessing">{{preProcessing ? "Saving..." : "Save" | translate}}</button>
+            <button type="button" class="btn btn-primary" ng-disabled="preProcessing" ng-click="clearPreProcessForm();" translate>Clear</button>
           </div>
         </div>
       </form>
@@ -76,20 +76,20 @@
       <!-- Child component weight form -->
       <form role="form" name="forms.childComponentWeightForm" ng-if="component.permissions.canRecordChildComponentWeight" class="form-horizontal col-sm-12" ng-submit="recordChildWeight()" novalidate>
         <div class="form-group">
-          <label for="componentWeight" class="col-sm-2 control-label">Component Weight</label>
+          <label for="componentWeight" class="col-sm-2 control-label" translate>Component Weight</label>
           <div class="col-sm-10">
             <input name="componentWeight" class="form-control" style="width:auto;" type="number" ng-min="1" ng-max="{{getParentComponentWeight(component)}}" ng-model="component.weight" required />
             <ng-messages for="forms.childComponentWeightForm.componentWeight.$error" role="alert" ng-show="forms.childComponentWeightForm.$submitted">
-              <small class="error" ng-message="max">Component weight exceeds weight of parent component</small>
+              <small class="error" ng-message="max"><span translate>Component weight exceeds weight of parent component</span></small>
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-3 col-sm-offset-2">
-            <button type="submit" class="btn btn-primary" ng-disabled="savingChildWeight">{{savingChildWeight ? "Saving..." : "Save"}}
+            <button type="submit" class="btn btn-primary" ng-disabled="savingChildWeight">{{savingChildWeight ? "Saving..." : "Save" | translate}}
             </button>
-            <button type="button" class="btn btn-primary" ng-disabled="savingChildWeight" ng-click="clearChildComponentWeightForm();">Clear</button>
+            <button type="button" class="btn btn-primary" ng-disabled="savingChildWeight" ng-click="clearChildComponentWeightForm();" translate>Clear</button>
           </div>
         </div>        
         </br>
@@ -99,17 +99,17 @@
       <form name="forms.recordComponentsForm" class="form-horizontal col-sm-12" ng-if="component.permissions.canProcess" ng-submit="confirmProcessLabledComponent()" novalidate>
         <br/>
         <div class="form-group">
-          <label for="processedOnDate" class="col-sm-2 control-label">Processing Date</label>
+          <label for="processedOnDate" class="col-sm-2 control-label" translate>Processing Date</label>
           <div class="col-sm-10">
             <div class="time form-inline"  style="width:150px;">
               <dateselect style="width:100%;" name="processedOnDate" ng-model="processedOn.date" format="dateFormat" ng-class="{'has-error' : (forms.recordComponentsForm.processedOnDate.$invalid && forms.recordComponentsForm.$submitted)}" ng-required="true" date-time-after="{{component.createdOn}}" ng-model-options="{ allowInvalid: true }" min-date="component.createdOn" max-date="maxProcessedOnDate" date-time-not-in-future="{{processedOn.time | date:'yyyy-MM-dd HH:mm:ss'}}"></dateselect>
               <ng-messages for="forms.recordComponentsForm.processedOnDate.$error" role="alert" ng-show="forms.recordComponentsForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
-                <small class="error" ng-message="dateTimeAfter">Date is before collection date: please re-enter</small>
+                <small class="error" ng-message="dateTimeAfter"><span translate>Date is before collection date. Please re-enter</span></small>
               </ng-messages>
             </div>
             <div class="time form-group">
-              <label for="processedOnTime" class="col-sm-2 control-label">Time</label>
+              <label for="processedOnTime" class="col-sm-2 control-label" translate>Time</label>
               <div class="col-sm-5">
                   <div>
                     <uib-timepicker ng-model="processedOn.time" name="processedOnTime" show-spinners="false" ng-required="submitted" ng-class="{'has-error' : ((forms.recordComponentsForm.processedOnTime.$invalid || forms.recordComponentsForm.processedOnDate.$invalid) && forms.recordComponentsForm.$submitted)}" ng-change="updateTimeOnProcessedOnDate()"></uib-timepicker>
@@ -122,14 +122,14 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="combination" class="col-sm-2 control-label">Process Component</label>
+          <label for="combination" class="col-sm-2 control-label" translate>Process Component</label>
           <div class="col-sm-10">
             <div class="form-inline">
               <span ng-if="component && component.componentType.producedComponentTypeCombinations.length > 0">
                 <select name="combination" class="form-control input-sm" ng-model="component.componentTypeCombination"
                                                                          ng-options="item as item.combinationName for item in component.componentType.producedComponentTypeCombinations"
+                                                                         placeholder="{{'Select' | translate}}"
                                                                          required>
-                  <option value="" ng-disabled="true">Select:</option>
                 </select>
               </span>
               <ng-messages for="forms.recordComponentsForm.combination.$error" role="alert" ng-show="forms.recordComponentsForm.$submitted">
@@ -141,32 +141,32 @@
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-3">
             <button class="btn btn-primary" type="submit" ng-disabled="recordingComponents">
-              {{recordingComponents ? "Processing..." : "Process Component"}}
+              {{recordingComponents ? "Processing..." : "Process Component" | translate}}
             </button>
-            <button class="btn btn-primary" type="button" ng-click="clearRecordComponentForm();">Clear</button>
+            <button class="btn btn-primary" type="button" ng-click="clearRecordComponentForm();" translate>Clear</button>
           </div>
         </div>
       </form>
 
       <div ng-if="!component" style="clear:left;">
         <strong>
-          <em>Select a component to process</em>
+          <em><span translate>Select a component to process</span></em>
         </strong>
       </div>
 
       <div ng-if="component && !component.hasComponentBatch" style="clear:left;">
         <strong>
-          <em>Selected Component cannot be processed until component batch received</em>
+          <em translate>Selected Component cannot be processed until component batch received</em>
         </strong>
       </div>
 
       <div ng-if="component && !component.permissions.canPreProcess && !component.permissions.canProcess && component.hasComponentBatch" style="clear:left;">
         <strong>
-          <em>Selected component cannot be processed further</em>
+          <em translate>Selected component cannot be processed further</em>
         </strong>
         <div>
           <button class="btn btn-primary" ng-click="unprocessSelectedComponent();" ng-disabled="unprocessing" ng-if="component.permissions.canUnprocess">
-            {{unprocessing ? "Unprocessing..." : "Unprocess components"}}
+            {{unprocessing ? "Unprocessing..." : "Unprocess" | translate}}
           </button>
         </div>
       </div>
