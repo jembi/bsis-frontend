@@ -98,7 +98,7 @@
                            e-name="donorPulse"
                            onbeforesave="checkErrors(donationSummaryForm.donorPulse.$error.min,
                         donationSummaryForm.donorPulse.$error.max)">{{donation.donorPulse}}</span>
-                        <span> {{pulseUnit}}</span>
+                        <span ng-if="donation.donorPulse || donationSummaryForm.$visible"> {{pulseUnit}}</span>
                         <br/>
                      <span ng-show="donationSummaryForm.$visible">
                      <small class="error" ng-show="donationSummaryForm.donorPulse.$error.min">
@@ -121,10 +121,10 @@
                              e-name="haemoglobinCount"
                              onbeforesave="checkErrors(donationSummaryForm.haemoglobinCount.$error.min,
                           donationSummaryForm.haemoglobinCount.$error.max)">{{donation.haemoglobinCount}}</span>
-                        <span ng-show="getBooleanValue('donation.hbNumericValue')"> {{hbUnit}}</span>
+                        <span ng-show="(donation.haemoglobinCount && getBooleanValue('donation.hbNumericValue')) || donationSummaryForm.$visible"> {{hbUnit}}</span>
                       </span>
-                      <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')"> (</span><span ng-show="getBooleanValue('donation.hbQualitativeValue')"><span editable-select="donation.haemoglobinLevel" e-name="haemoglobinLevel"
-                          e-ng-options="l.value as (l.label | titleCase | translate) for l in haemoglobinLevels">{{donation.haemoglobinLevel ? (donation.haemoglobinLevel | titleCase | translate) : ''}}</span></span><span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">)</span>
+                      <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue') && (donation.haemoglobinLevel || donationSummaryForm.$visible)"> (</span><span ng-show="getBooleanValue('donation.hbQualitativeValue')"><span editable-select="donation.haemoglobinLevel" e-name="haemoglobinLevel"
+                          e-ng-options="l.value as (l.label | titleCase | translate) for l in haemoglobinLevels">{{donation.haemoglobinLevel ? (donation.haemoglobinLevel | titleCase | translate) : ''}}</span></span><span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue') && (donation.haemoglobinLevel || donationSummaryForm.$visible)">)</span>
                       <br/>
                       <span ng-show="donationSummaryForm.$visible">
                         <small class="error" ng-show="donationSummaryForm.haemoglobinCount.$error.min">
@@ -144,14 +144,15 @@
                            e-min={{bpSystolicMin}} e-max={{bpSystolicMax}} e-decimal
                            e-name="bloodPressureSystolic"
                            onbeforesave="checkErrors(donationSummaryForm.bloodPressureSystolic.$error.min,
-                        donationSummaryForm.bloodPressureSystolic.$error.max)">{{donation.bloodPressureSystolic}}</span> /
+                        donationSummaryForm.bloodPressureSystolic.$error.max)">{{donation.bloodPressureSystolic}}</span>
+                     <span ng-if="donation.bloodPressureSystolic || donation.bloodPressureDiastolic"> / </span>
                      <span e-class="form-control input-sm w50" editable-number="donation.bloodPressureDiastolic"
                            e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                            e-min={{bpDiastolicMin}} e-max={{bpDiastolicMax}} e-decimal
                            e-name="bloodPressureDiastolic"
                            onbeforesave="checkErrors(donationSummaryForm.bloodPressureDiastolic.$error.min,
                         donationSummaryForm.bloodPressureDiastolic.$error.max)">{{donation.bloodPressureDiastolic}}</span>
-                        <span> {{bpUnit}}</span>
+                        <span ng-if="donation.bloodPressureSystolic || donation.bloodPressureDiastolic || donationSummaryForm.$visible"> {{bpUnit}}</span>
                         <br/>
                      <span ng-show="donationSummaryForm.$visible">
                      <small class="error" ng-show="donationSummaryForm.bloodPressureSystolic.$error.min">
@@ -178,7 +179,7 @@
                            e-min={{weightMin}} e-max={{weightMax}} e-decimal
                            e-name="donorWeight"
                            onbeforesave="checkErrors(donationSummaryForm.donorWeight.$error.min, donationSummaryForm.donorWeight.$error.max)">{{donation.donorWeight}}</span>
-                        <span>{{weightUnit}}</span>
+                        <span ng-if="donation.donorWeight || donationSummaryForm.$visible"> {{weightUnit}}</span>
                         <br/>
                      <span ng-show="donationSummaryForm.$visible">
                      <small class="error" ng-show="donationSummaryForm.donorWeight.$error.min">
