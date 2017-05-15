@@ -1,5 +1,5 @@
 <p>
-    <em> {{componentsSearchCount}} <span translate>component(s) found</span></em>
+    <em translate translate-params-count="data.length"> {{componentsSearchCount}} component(s) found</em>
 </p>
 <table ng-table="componentsSummaryTableParams" show-filter="false" class="table">
     <tr ng-repeat="component in $data"
