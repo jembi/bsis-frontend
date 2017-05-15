@@ -98,8 +98,8 @@ angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $ro
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
         {text: gettextCatalog.getString('Number of components: {{componentNumber}} ', {componentNumber: $scope.gridOptions.data.length}), width: 'auto'},
-        {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-        {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+        {text: gettextCatalog.getString('Date generated: {{bsisDateTime}}', { bsisDateTime:  $filter('bsisDateTime')(new Date())}), width: 'auto'},
+        {text: gettextCatalog.getString('Page {{currentPage}}  of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
       ];
       return {
         columns: columns,
