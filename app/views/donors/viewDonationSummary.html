@@ -144,9 +144,7 @@
                            e-min={{bpSystolicMin}} e-max={{bpSystolicMax}} e-decimal
                            e-name="bloodPressureSystolic"
                            onbeforesave="checkErrors(donationSummaryForm.bloodPressureSystolic.$error.min,
-                        donationSummaryForm.bloodPressureSystolic.$error.max)">{{donation.bloodPressureSystolic}}</span>
-                     <span ng-if="donation.bloodPressureSystolic || donation.bloodPressureDiastolic || donationSummaryForm.$visible"> / </span>
-                     <span e-class="form-control input-sm w50" editable-number="donation.bloodPressureDiastolic"
+                        donationSummaryForm.bloodPressureSystolic.$error.max)">{{donation.bloodPressureSystolic}}</span><span ng-if="donation.bloodPressureSystolic || donation.bloodPressureDiastolic || donationSummaryForm.$visible">/</span><span e-class="form-control input-sm w50" editable-number="donation.bloodPressureDiastolic"
                            e-ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                            e-min={{bpDiastolicMin}} e-max={{bpDiastolicMax}} e-decimal
                            e-name="bloodPressureDiastolic"
