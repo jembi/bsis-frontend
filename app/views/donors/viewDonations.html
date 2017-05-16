@@ -36,18 +36,19 @@
                     {{donation.packType.packType}}
                 </td>
                 <td data-title="'Wt' | translate" header-class="text-left" class="col-sm-1 text-center" sortable="'donorWeight'">
-                    {{donation.donorWeight}}
+                    {{donation.donorWeight}} <span ng-if="donation.donorWeight">{{weightUnit}}</span>
                 </td>
                 <td data-title="'BP' | translate" header-class="text-left" class="col-sm-1 text-center"
                     sortable="'bloodPressureSystolic'">
-                    {{donation.bloodPressureSystolic}} {{donation.bloodPressureDiastolic}}
+                    <span ng-if="donation.bloodPressureSystolic || donation.bloodPressureDiastolic">
+                    {{donation.bloodPressureSystolic}}/{{donation.bloodPressureDiastolic}} {{bpUnit}}</span>
                 </td>
                 <td data-title="'Hb' | translate" header-class="text-left" class="col-sm-1 text-center"
                     sortable="'haemoglobinCount'">
                     <haemoglobin-value haemoglobin-count="donation.haemoglobinCount" haemoglobin-level="donation.haemoglobinLevel"/>
                 </td>
                 <td data-title="'Pulse' | translate" header-class="text-left" class="col-sm-1 text-center" sortable="'donorPulse'">
-                    {{donation.donorPulse}}
+                    {{donation.donorPulse}} <span ng-if="donation.donorPulse">{{pulseUnit}}</span>
                 </td>
                 <td data-title="''" class="col-sm-2 text-center">
             <span ng-hide="confirmDelete">
