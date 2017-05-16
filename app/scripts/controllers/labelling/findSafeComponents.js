@@ -10,7 +10,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     allSites: true,
     allComponentTypes: true,
     anyBloodGroup: true,
-    inventoryStatus: gettextCatalog.getString('NOT_IN_STOCK'),
+    inventoryStatus: 'NOT_IN_STOCK',
     startDate: moment().subtract(28, 'days').startOf('day').toDate(),
     endDate: moment().endOf('day').toDate()
   };
@@ -114,8 +114,12 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     exporterFieldCallback: function(grid, row, col, value) {
       if (col.field === 'createdOn') {
         return $filter('bsisDate')(value);
-      } else if (col.field === 'bloodGroup') {
+      } if (col.field === 'bloodGroup') {
         return row.entity.bloodAbo + row.entity.bloodRh;
+      } if(col.field === 'status') {
+        gettextCatalog.getString($filter('titleCase')(value));
+      } if (col.field === 'inventoryStatus') {
+        gettextCatalog.getString($filter('titleCase')(value));
       }
       return value;
     },
@@ -139,8 +143,8 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
           {text: gettextCatalog.getString('Number of components: {{componentNumber}}', {componentNumber: $scope.gridOptions.data.length}), width: 'auto'},
-          {text: gettextCatalog.getString('Date generated: {{bsisDateTime}}', {bsisDateTime: $filter('bsisDateTime')(new Date())}), width: 'auto'},
-          {text: gettextCatalog.getString('Page {{currentPage}}  of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount }), style: {alignment: 'right'}}
+          {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+          {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount }), style: {alignment: 'right'}}
       ];
       return {
         columns: columns,
