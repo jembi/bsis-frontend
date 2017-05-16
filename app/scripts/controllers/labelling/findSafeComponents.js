@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $log, $filter, LabellingService, UtilsService, BLOODGROUP, DATEFORMAT) {
+angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $log, $filter, gettextCatalog, LabellingService, UtilsService, BLOODGROUP, DATEFORMAT) {
   var searchMaster = {
     donationIdentificationNumber: null,
     componentCode: null,
@@ -10,7 +10,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     allSites: true,
     allComponentTypes: true,
     anyBloodGroup: true,
-    inventoryStatus: 'NOT_IN_STOCK',
+    inventoryStatus: gettextCatalog.getString('NOT_IN_STOCK'),
     startDate: moment().subtract(28, 'days').startOf('day').toDate(),
     endDate: moment().endOf('day').toDate()
   };
@@ -20,19 +20,21 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
   var columnDefs = [
     {
       name: 'DIN',
-      displayName: 'DIN',
+      displayName: gettextCatalog.getString('DIN'),
       field: 'donationIdentificationNumber',
       width: '**',
       maxWidth: '100'
     },
     {
       name: 'Component Code',
+      displayName: gettextCatalog.getString('Component Code'),
       field: 'componentCode',
       width: '**',
       maxWidth: '150'
     },
     {
       name: 'Date Collected',
+      displayName: gettextCatalog.getString('Date Collected'),
       field: 'createdOn',
       cellFilter: 'bsisDate',
       width: '**',
@@ -40,24 +42,30 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     },
     {
       name: 'Component Type',
+      displayName: gettextCatalog.getString('Component Type'),
       field: 'componentType.componentTypeName',
       width: '**'
     },
     {
       name: 'Component Status',
+      displayName: gettextCatalog.getString('Component Status'),
       field: 'status',
+      cellFilter: 'titleCase | translate',
       width: '**',
       maxWidth: '150'
     },
     {
       name: 'Inventory Status',
+      displayName: gettextCatalog.getString('Inventory Status'),
       field: 'inventoryStatus',
+      cellFilter: 'titleCase | translate',
       width: '150',
       maxWidth: '150'
 
     },
     {
       name: 'Expiry Status',
+      displayName: gettextCatalog.getString('Expiry Status'),
       field: 'expiryStatus',
       width: '**',
       maxWidth: '200',
@@ -67,12 +75,14 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     },
     {
       name: 'Site',
+      displayName: gettextCatalog.getString('Site'),
       field: 'location.name',
       width: '**',
       maxWidth: '350'
     },
     {
       name: 'Blood Group',
+      displayName: gettextCatalog.getString('Blood Group'),
       field: 'bloodGroup',
       cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.bloodAbo}}{{row.entity.bloodRh}}</div>',
       width: '**',
@@ -114,7 +124,7 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     exporterPdfHeader: function() {
       var finalArray = [
         {
-          text: 'Safe components',
+          text: gettextCatalog.getString('Safe components'),
           fontSize: 10,
           bold: true,
           margin: [30, 20, 0, 0] // [left, top, right, bottom]
@@ -128,9 +138,9 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
       // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
-          {text: 'Number of components: ' + $scope.gridOptions.data.length, width: 'auto'},
-          {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-          {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+          {text: gettextCatalog.getString('Number of components: {{componentNumber}}', {componentNumber: $scope.gridOptions.data.length}), width: 'auto'},
+          {text: gettextCatalog.getString('Date generated: {{bsisDateTime}}', {bsisDateTime: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+          {text: gettextCatalog.getString('Page {{currentPage}}  of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount }), style: {alignment: 'right'}}
       ];
       return {
         columns: columns,
