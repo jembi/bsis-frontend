@@ -37,7 +37,7 @@
 
   <section>
     <div ng-repeat="box in componentBatch.bloodTransportBoxes">
-      <span class="text-muted" translate>Blood Transport Box Temperature</span>:<span translate-params-box.temperature="box.temperature">{{box.temperature}}&deg;C</span>
+      <span class="text-muted" translate>Blood Transport Box Temperature</span>:<span translate translate-params-box.temperature="box.temperature" translate-comment="Degree Celsius, abbreviation">{{box.temperature}} &deg;C</span>
     </div>
   </section>
 
