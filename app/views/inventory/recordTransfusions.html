@@ -156,7 +156,7 @@
     <div class="form-group">
       <label for="gender" class="col-sm-2 control-label" translate>Gender</label>
       <div class="form-inline col-sm-10">
-        <select name="gender" class="form-control input-sm" ng-model="transfusion.patient.gender" ng-options="gender.id as (gender.name | translate) for gender in genders">
+        <select name="gender" class="form-control input-sm" ng-model="transfusion.patient.gender" ng-options="gender.id as (gender.name | titleCase | translate) for gender in genders">
           <option value=""></option>
         </select>
       </div>
