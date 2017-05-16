@@ -168,7 +168,7 @@ angular.module('bsis')
         return ModalsService.showConfirmation({
           title: gettextCatalog.getString('Overweight Pack'),
           button: gettextCatalog.getString('Continue'),
-          message: gettextCatalog.getString('The pack weight ({{componentWeight}}g) is above the maximum acceptable range ( {{packTypeWeight}}g ). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.maxWeight})
+          message: gettextCatalog.getString('The pack weight ({{componentWeight}}g) is above the maximum acceptable range ({{packTypeWeight}}g). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.maxWeight})
         });
       }
 
@@ -177,7 +177,7 @@ angular.module('bsis')
         return ModalsService.showConfirmation({
           title: gettextCatalog.getString('Underweight Pack'),
           button: gettextCatalog.getString('Continue'),
-          message: gettextCatalog.getString('The pack weight ({{componentWeight}}g) is below the minimum acceptable range ( {{packTypeWeight}}g ). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.lowVolumeWeight})
+          message: gettextCatalog.getString('The pack weight ({{componentWeight}}g) is below the minimum acceptable range ({{packTypeWeight}}g). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.lowVolumeWeight})
         });
       }
 
