@@ -79,7 +79,7 @@ angular.module('bsis')
       });
 
       if (componentTypesExceedingMaxTimeSinceDonation.length > 0) {
-        confirmationMessage = gettextCatalog.getString('Time since donation exceeded, the following components will be flagged as unsafe: {{component}}.', {component: componentTypesExceedingMaxTimeSinceDonation});
+        confirmationMessage = gettextCatalog.getString('Time since donation exceeded, the following components will be flagged as unsafe: {{components}}.', {components: componentTypesExceedingMaxTimeSinceDonation});
       }
 
       // Add to confirmation message if bleed times gap is greater or equals to maxBleedTime
@@ -102,7 +102,7 @@ angular.module('bsis')
         if (confirmationMessage.length > 0) {
           conditionalNewLines = '</br></br>';
         }
-        confirmationMessage += conditionalNewLines + gettextCatalog.getString('Bleed time exceeded, the following components will be flagged as unsafe: {{component}}.', {component:componentTypesExceedingMaxBleedTime});
+        confirmationMessage += conditionalNewLines + gettextCatalog.getString('Bleed time exceeded, the following components will be flagged as unsafe: {{components}}.', {components: componentTypesExceedingMaxBleedTime});
       }
 
       return confirmationMessage;
