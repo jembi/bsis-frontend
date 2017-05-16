@@ -22,7 +22,7 @@
             {{donor.lastName}}
         </td>
         <td data-title="'Gender' | translate" header-class="text-left" sortable="'gender'">
-            {{donor.gender | translate}}
+            {{donor.gender | titleCase | translate}}
         </td>
         <td data-title="'Date of Birth' | translate" header-class="text-left" class="text-center" sortable="'birthDate'">
             {{ (donor.birthDate | bsisDate) || '' }}
@@ -37,7 +37,7 @@
         <td data-title="'Venue' | translate" header-class="text-left" sortable="'venue'">
             {{donor.venue.name}}
         </td>
-        <td class="form-inline" data-title="'Merge?' | translate" header-class="text-left" class="text-center"
+        <td class="form-inline" data-title="'Merge' | translate" header-class="text-left" class="text-center"
             ng-click="$event.stopPropagation()">
             <div class="radio" style="display:inline-block;">
                 <input id="mergeYes{{donor.donorNumber}}" type="radio" name="merge{{donor.donorNumber}}" ng-value="true"

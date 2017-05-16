@@ -156,7 +156,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
             text: ' ' + gettextCatalog.getString('Gender') + ': ',
             bold: true
           }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.gender) ? notSpecifiedText : gettextCatalog.getString($scope.orderForm.patient.gender)
+            text: $scope.isFieldEmpty($scope.orderForm.patient.gender) ? notSpecifiedText : gettextCatalog.getString($filter('titleCase')($scope.orderForm.patient.gender))
           }, {
             text: ' ' + gettextCatalog.getString('Date of Birth') + ': ',
             bold: true

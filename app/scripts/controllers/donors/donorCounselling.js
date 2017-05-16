@@ -160,7 +160,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       name: 'Gender',
       displayName: gettextCatalog.getString('Gender'),
       field: 'gender',
-      cellFilter: 'translate'
+      cellFilter: 'titleCase | translate'
     },
 
     {

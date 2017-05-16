@@ -2,8 +2,8 @@
 
 angular.module('bsis').controller('ViewComponentBatchCtrl', function($scope, $routeParams, $filter, $log, gettextCatalog, ComponentBatchService) {
 
-  $scope.donationBatchClosed = gettextCatalog.getString('CLOSED');
-  $scope.donationBatchOpen = gettextCatalog.getString('OPEN');
+  $scope.donationBatchClosed = gettextCatalog.getString('Closed');
+  $scope.donationBatchOpen = gettextCatalog.getString('Open');
   $scope.gridOptions = {
     columnDefs: [
       {
