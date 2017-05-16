@@ -79,7 +79,7 @@ angular.module('bsis')
       });
 
       if (componentTypesExceedingMaxTimeSinceDonation.length > 0) {
-        confirmationMessage = gettextCatalog.getString('Time since donation exceeded, the following components will be flagged as unsafe: {{componentTypesExceedingMaxTimeSinceDonation}}.', {componentTypesExceedingMaxTimeSinceDonation:componentTypesExceedingMaxTimeSinceDonation});
+        confirmationMessage = gettextCatalog.getString('Time since donation exceeded, the following components will be flagged as unsafe: {{component}}.', {component: componentTypesExceedingMaxTimeSinceDonation});
       }
 
       // Add to confirmation message if bleed times gap is greater or equals to maxBleedTime
@@ -102,7 +102,7 @@ angular.module('bsis')
         if (confirmationMessage.length > 0) {
           conditionalNewLines = '</br></br>';
         }
-        confirmationMessage += conditionalNewLines + gettextCatalog.getString('Bleed time exceeded, the following components will be flagged as unsafe: {{componentTypesExceedingMaxBleedTime}}.', {componentTypesExceedingMaxBleedTime:componentTypesExceedingMaxBleedTime});
+        confirmationMessage += conditionalNewLines + gettextCatalog.getString('Bleed time exceeded, the following components will be flagged as unsafe: {{component}}.', {component:componentTypesExceedingMaxBleedTime});
       }
 
       return confirmationMessage;
@@ -168,7 +168,7 @@ angular.module('bsis')
         return ModalsService.showConfirmation({
           title: gettextCatalog.getString('Overweight Pack'),
           button: gettextCatalog.getString('Continue'),
-          message: gettextCatalog.getString('The pack weight ( {{componentWeight}}g ) is above the maximum acceptable range ( {{packTypeWeight}}g ). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.maxWeight})
+          message: gettextCatalog.getString('The pack weight ({{componentWeight}}g) is above the maximum acceptable range ( {{packTypeWeight}}g ). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.maxWeight})
         });
       }
 
@@ -177,7 +177,7 @@ angular.module('bsis')
         return ModalsService.showConfirmation({
           title: gettextCatalog.getString('Underweight Pack'),
           button: gettextCatalog.getString('Continue'),
-          message: gettextCatalog.getString('The pack weight ( {{componentWeight}}g ) is below the minimum acceptable range ( {{packTypeWeight}}g ). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.lowVolumeWeight})
+          message: gettextCatalog.getString('The pack weight ({{componentWeight}}g) is below the minimum acceptable range ( {{packTypeWeight}}g ). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.lowVolumeWeight})
         });
       }
 
@@ -187,13 +187,13 @@ angular.module('bsis')
           return ModalsService.showConfirmation({
             title: gettextCatalog.getString('Underweight Pack'),
             button: gettextCatalog.getString('Continue'),
-            message: gettextCatalog.getString('The pack weight ( {{componentWeight}}g ) is below the minimum acceptable range ( {{packTypeMinWeight}}g ). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeMinWeight: component.packType.minWeight})
+            message: gettextCatalog.getString('The pack weight ({{componentWeight}}g) is below the minimum acceptable range ({{packTypeWeight}}g). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.minWeight})
           });
         } else {
           return ModalsService.showConfirmation({
             title: gettextCatalog.getString('Low Pack Weight'),
             button: gettextCatalog.getString('Continue'),
-            message: gettextCatalog.getString('The pack weight ( {{component.weight}}g ) is low (below {{component.packType.minWeight}}g ). All components from this donation containing plasma will be flagged as Unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeMinWeight: component.packType.minWeight})
+            message: gettextCatalog.getString('The pack weight ({{componentWeight}}g) is low (below {{packTypeWeight}}g). All components from this donation containing plasma will be flagged as Unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.minWeight})
           });
         }
       }
@@ -380,33 +380,37 @@ angular.module('bsis')
 
     var columnDefs = [
       {
-        name: gettextCatalog.getString('Component Code'),
+        name: 'Component Code',
+        displayName: gettextCatalog.getString('Component Code'),
         field: 'componentCode',
         width: '**',
         maxWidth: '150'
       },
       {
-        name: gettextCatalog.getString('Component Type'),
+        name: 'Component Type',
+        displayName: gettextCatalog.getString('Component Type'),
         field: 'componentType.componentTypeName',
         width: '**',
         minWidth: '250'
       },
       {
-        name: gettextCatalog.getString('Status'),
+        name: 'Status',
+        displayName: gettextCatalog.getString('Status'),
         field: 'status',
         cellFilter: 'titleCase | translate',
         width: '**',
         maxWidth: '150'
       },
       {
-        name: gettextCatalog.getString('Created On'),
+        name: 'Created On',
+        displayName: gettextCatalog.getString('Created On'),
         field: 'createdOn',
         cellFilter: 'bsisDateTime',
         width: '**',
         maxWidth: '160'
       },
       {
-        name: gettextCatalog.getString('Expiry Status'),
+        name: 'Expiry Status',
         field: 'expiryStatus',
         cellFilter: 'translate',
         width: '**',
@@ -416,7 +420,8 @@ angular.module('bsis')
         }
       },
       {
-        name: gettextCatalog.getString('Weight'),
+        name: 'Weight',
+        displayName: gettextCatalog.getString('Weight'),
         field: 'weight',
         width: '**',
         maxWidth: '120'
