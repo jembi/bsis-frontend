@@ -411,8 +411,8 @@ angular.module('bsis')
       },
       {
         name: 'Expiry Status',
+        displayName: gettextCatalog.getString('Expiry Status'),
         field: 'expiryStatus',
-        cellFilter: 'translate',
         width: '**',
         maxWidth: '200',
         sortingAlgorithm: function(a, b, rowA, rowB) {
