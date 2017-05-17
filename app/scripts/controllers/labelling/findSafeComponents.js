@@ -114,12 +114,12 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     exporterFieldCallback: function(grid, row, col, value) {
       if (col.field === 'createdOn') {
         return $filter('bsisDate')(value);
-      } if (col.field === 'bloodGroup') {
+      } else if (col.field === 'bloodGroup') {
         return row.entity.bloodAbo + row.entity.bloodRh;
-      } if(col.field === 'status') {
+      } else if (col.field === 'status') {
         gettextCatalog.getString($filter('titleCase')(value));
-      } if (col.field === 'inventoryStatus') {
-        gettextCatalog.getString($filter('titleCase')(value));
+      } else if (col.field === 'inventoryStatus') {
+        return gettextCatalog.getString($filter('titleCase')(value));
       }
       return value;
     },

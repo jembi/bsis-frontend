@@ -94,7 +94,7 @@
           <dateselect-end name="endDate" ng-model="searchParams.endDate" format="dateFormat" ng-class="{'has-error' : (findSafeComponentsForm.endDate.$invalid)}" ng-required="!dinSearch" ui-date-start="{{searchParams.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" min-date="searchParams.startDate" ng-disabled="dinSearch"></dateselect-end>
           <div>
             <ng-messages for="findSafeComponentsForm.startDate.$error" role="alert" ng-show="findSafeComponentsForm.$submitted">
-              <small class="error" ng-message="required"><span  translate>Select a valid date<span></small>
+              <small class="error" ng-message="required"><span  translate>Select a valid date</span></small>
               <small class="error" ng-message="datesOutOfRange"><span  translate>Select a date range that is less than one month</span></small>
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
