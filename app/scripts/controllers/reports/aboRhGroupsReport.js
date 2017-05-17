@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('AboRhGroupsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
+  .controller('AboRhGroupsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT, gettextCatalog) {
 
     // Initialize variables
 
@@ -46,7 +46,7 @@ angular.module('bsis')
     function createAllGendersRow(femaleRow, maleRow) {
       var allGendersRow = angular.copy(femaleRow);
       allGendersRow.venue = '';
-      allGendersRow.cohorts = 'All';
+      allGendersRow.cohorts = gettextCatalog.getString('All');
       allGendersRow.aPlus = femaleRow.aPlus + maleRow.aPlus;
       allGendersRow.aMinus = femaleRow.aMinus + maleRow.aMinus;
       allGendersRow.bPlus = femaleRow.bPlus + maleRow.bPlus;
@@ -148,15 +148,15 @@ angular.module('bsis')
         if (newRow.location.name !== previousVenue) {
           $scope.venuesNumber += 1;
 
-          if (previousVenue != '') {
+          if (previousVenue !== '') {
             // Add female, male and all rows for previous venue
             addFemaleMaleAllRows(mergedFemaleRow, mergedMaleRow);
           }
 
           // Initialize values for the new venue
           previousVenue = newRow.location.name;
-          mergedFemaleRow = createZeroValuesRow(newRow, previousVenue, 'female');
-          mergedMaleRow = createZeroValuesRow(newRow, '', 'male');
+          mergedFemaleRow = createZeroValuesRow(newRow, previousVenue, gettextCatalog.getString($filter('titleCase')('female')));
+          mergedMaleRow = createZeroValuesRow(newRow, '', gettextCatalog.getString($filter('titleCase')('male')));
         }
 
         // Merge gender row with new row
@@ -211,8 +211,8 @@ angular.module('bsis')
     // Grid ui variables and methods
 
     var columnDefs = [
-      { name: 'Venue', field: 'venue' },
-      { name: 'Gender', field: 'cohorts'},
+      { name: 'Venue', displayName: gettextCatalog.getString('Venue'), field: 'venue' },
+      { name: 'Gender', displayName: gettextCatalog.getString('Gender'), field: 'cohorts'},
       { name: 'A+', field: 'aPlus', width: 55 },
       { name: 'A-', field: 'aMinus', width: 55 },
       { name: 'B+', field: 'bPlus', width: 55 },
@@ -222,7 +222,7 @@ angular.module('bsis')
       { name: 'O+', field: 'oPlus', width: 55 },
       { name: 'O-', field: 'oMinus', width: 55 },
       { name: 'NTD', displayName: 'NTD', field: 'empty', width: 65 },
-      { name: 'Total', field: 'total' }
+      { name: 'Total', displayName: gettextCatalog.getString('Total'), field: 'total' }
     ];
 
     $scope.gridOptions = {
@@ -252,8 +252,8 @@ angular.module('bsis')
       // PDF header
       exporterPdfHeader: function() {
         var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-          'ABO Rh Blood Grouping Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
+          gettextCatalog.getString('ABO Rh Blood Grouping Report'),
+          gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}));
         return header;
       },
 
