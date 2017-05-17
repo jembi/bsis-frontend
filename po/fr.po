@@ -844,9 +844,6 @@ msgid "Date Transfused"
 msgstr "Date de Transfusion"
 
 #: app/scripts/controllers/components/viewComponentBatch.js:101
-msgid "Date generated: {{bsisDateTime}}"
-msgstr "Généré le: {{bsisDateTime}}"
-
 #: app/scripts/controllers/components/viewComponentBatches.js:132
 #: app/scripts/controllers/donors/donorCommunications.js:171
 #: app/scripts/controllers/donors/donorCounselling.js:284
@@ -1707,7 +1704,7 @@ msgstr "Nom"
 
 #: app/views/donors/manageDonationBatches.html:52
 msgid "New Donation Batch"
-msgstr "[FR] Add Donation Batch"
+msgstr "[FR] New Donation Batch"
 
 #: app/views/testing/manageTestBatch.html:57
 msgid "New Test Batch"
@@ -1720,7 +1717,7 @@ msgstr "[FR] Next"
 #: app/views/donors/mergeDonorsSelection.html:50
 #: app/views/donors/viewDonor.html:180
 msgid "No"
-msgstr "[FR] N"
+msgstr "[FR] No"
 
 #: app/views/donors/donorCommunications.html:47
 msgid "No Blood Group"
@@ -1759,7 +1756,7 @@ msgstr "[FR] No closed donation batches"
 
 #: app/views/testing/manageTestBatch.html:204
 msgid "No closed test batches."
-msgstr "[FR] No closed test batches."
+msgstr "[FR] No closed test batches"
 
 #: app/views/components/findComponents.html:126
 #: app/views/components/findDiscards.html:90
@@ -3283,11 +3280,6 @@ msgstr "[FR] donations"
 msgid "to"
 msgstr "[FR] to"
 
-#. Degree Celsius, abbreviation
-#: app/views/components/viewComponentBatch.html:40
-msgid "{{box.temperature}} &deg;C"
-msgstr "[FR] {{box.temperature}} &deg;C"
-
 #: app/views/components/viewDonations.html:2
 msgid "{{count}} component(s) found"
 msgstr "[FR] {{count}} component(s) found"
@@ -3345,9 +3337,20 @@ msgstr "[FR] {{fromDate}} to {{toDate}}"
 msgid "{{startTime}} to {{endTime}}"
 msgstr "[FR] {{startTime}} to {{endTime}}"
 
+#. Degree Celsius, abbreviation
+#: app/views/components/viewComponentBatch.html:40
+msgid "{{temperature}} &deg;C"
+msgstr "[FR] {{temperature}} &deg;C"
+
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid "{{box.temperature}} &deg;C"
+#~ msgstr "[FR] {{box.temperature}} &deg;C"
+
+#~ msgid "Date generated: {{bsisDateTime}}"
+#~ msgstr "Généré le: {{bsisDateTime}}"
 
 #~ msgid "CLOSED"
 #~ msgstr "[FR] CLOSED"
