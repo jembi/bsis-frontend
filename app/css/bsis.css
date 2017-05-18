@@ -534,7 +534,7 @@ table.ng-table tr td {
 }
 
 .btn-primary {
-  padding: 4px 5px;
+  /*padding: 4px 5px;*/
   margin-top: 10px;
 }
 
@@ -771,4 +771,41 @@ a[disabled] {
 .ui-grid-header-cell-label {
   display:inline-block;
   white-space:initial;
+}
+
+/*----------------------------------------------
+
+SPACERS
+
+-----------------------------------------------*/
+
+.margin-t-0 {
+  margin-top: 0px;
+}
+
+.pad-t-30 {
+  padding-top: 30px;
+}
+
+.pad-l-5 {
+  padding-left: 5px;
+}
+
+.pad-l-10 {
+  padding-left: 10px;
+}
+
+.vert-align-03 {
+  vertical-align: 0.3em;
+}
+
+
+/*----------------------------------------------
+
+UTILITY
+
+-----------------------------------------------*/
+
+.display-block {
+  display:block;
 }

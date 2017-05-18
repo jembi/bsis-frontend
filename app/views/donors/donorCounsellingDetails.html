@@ -1,17 +1,17 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/donors/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-<span class="h2"> 
-  <span>{{donor.firstName}}</span> 
+  <span class="h2">
+  <span>{{donor.firstName}}</span>
   <span>{{donor.lastName}}</span>
   <small><em>
     <span ng-if="donor.title"> 
     <span>{{donor.title | translate}}</span>.</span>
       <span>{{donor.callingName}}</span>
   </em></small>
-</span>
+  </span>
 
-<!-- Gender -->
-<span ng-switch="donor.gender" class="h3" style="vertical-align: 0.3em; padding-left:10px;"> 
+  <!-- Gender -->
+  <span ng-switch="donor.gender" class="h3 pad-l-10">
   <span ng-switch-when="male" class="fa-stack fa-1x">
     <i class="fa fa-circle fa-stack-2x fa-fw"></i>
     <i class="fa {{icons.MALE}} fa-stack-1x fa-inverse fa-fw"></i>
@@ -20,106 +20,107 @@
     <i class="fa fa-circle fa-stack-2x fa-fw"></i>
     <i class="fa {{icons.FEMALE}} fa-stack-1x fa-inverse fa-fw"></i>
   </span>
-</span>
+  </span>
 
-<!-- Blood group -->
-<span class="h3" ng-if="donor.bloodGroup !== ''" style="vertical-align: 0.3em; padding-left:5px;">
+  <!-- Blood group -->
+  <span class="h3 pad-l-5 vert-align-03" ng-if="donor.bloodGroup !== ''">
   <span class="fa-stack fa-1x">
     <i class="fa fa-circle fa-stack-2x fa-fw"></i>
     <i class="fa fa-stack-1x fa-inverse">{{donor.bloodGroup}}</i>
   </span>
-</span>
+  </span>
 
-<hr/>
+  <hr/>
 
-<!-- Details -->
-<div class="h4">
+  <!-- Details -->
+  <div class="h4">
     <small><em><span translate>Age</span>:</em></small>
     <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
-    <em>(<span>{{donor.birthDate | bsisDate}}</span>)</em>
-    |
-    <small><em><span translate>Donor Number</span>:</em></small>
-    {{donor.donorNumber}}
-    |
+    <em>(<span>{{donor.birthDate | bsisDate}}</span>)</em> |
+    <small><em><span translate>Donor Number</span>:</em></small> {{donor.donorNumber}} |
     <small><em><span translate>Venue</span>:</em></small>
-    <span>{{donor.venue.name}}</span>
-    |
+    <span>{{donor.venue.name}}</span> |
     <small><em><span translate>Preferred Language</span>:</em></small>
     <span>{{donor.preferredLanguage.preferredLanguage}}</span>
-</div>
+  </div>
 
-<hr/>
+  <hr/>
 
-<!-- Counselling form -->
-<div class="panel panel-default">
+  <!-- Counselling form -->
+  <div class="panel panel-default">
     <div class="panel-body">
-        <form name="postDonationCounsellingForm" ng-submit="updatePostDonationCounselling()"
-              novalidate>
-          <div class="col-sm-12">
-            <div class="row form-inline form-multiline">
-              <div class="form-group">
-                <label for="counsellingDate" style="width: 120px" translate>Counselling Date</label>
-                <dateselect name="counsellingDate"
-                            format="dateFormat"
-                            ng-model="postDonationCounselling.counsellingDate"
-                            required ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingDate.$invalid}"
-                            date-time-not-in-future
-                            max-date="today">
-                </dateselect>
-                <ng-messages role="alert"
-                             for="postDonationCounsellingForm.counsellingDate.$error"
-                             ng-show="postDonationCounsellingForm.$submitted || postDonationCounsellingForm.counsellingDate.$dirty">
-                    <ng-messages-include src="messages.html"></ng-messages-include>
-                </ng-messages>
-              </div>
-              <div class="form-group">
-                <label for="counsellingStatus" translate>Counselling Status</label>
-                <select class="form-control"
-                        name="counsellingStatus"
-                        ng-model="postDonationCounselling.counsellingStatus"
-                        ng-options="status as (status | titleCase | translate) for status in counsellingStatuses"
-                        required ng-change="updateReferredEnabled()"
-                        ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingStatus.$invalid}">
-                </select>
-                <ng-messages role="alert"
-                             for="postDonationCounsellingForm.counsellingStatus.$error"
-                             ng-show="postDonationCounsellingForm.$submitted || postDonationCounsellingForm.counsellingStatus.$dirty">
-                    <ng-messages-include src="messages.html"></ng-messages-include>
-                </ng-messages>
-              </div>
-              <div class="form-group">
-                <label for="referred" translate>Referred</label>
-                <input type="checkbox" id="referred" ng-click="updateReferralSites()" ng-model="postDonationCounselling.referred" ng-disabled="!referredEnabled">
-                <label for="referralSite" translate>To</label>
-                  <select name="referralSite" class="form-control" ng-disabled="!postDonationCounselling.referred" ng-model="postDonationCounselling.referralSite" ng-options="referralSite as referralSite.name for referralSite in referralSites track by referralSite.id" style="min-width: 150px;" ng-required="postDonationCounselling.referred">
-                      <option value="" disabled></option>
-                  </select>
-                  <div>
-                      <ng-messages for="postDonationCounsellingForm.referralSite.$error" role="alert" ng-show="postDonationCounsellingForm.$submitted">
-                      <ng-messages-include src="messages.html"></ng-messages-include>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="counsellingNotes" style="width: 120px" translate>Counselling Notes</label>
-                  <input name="counsellingNotes" type="text" class="form-control" style="width: 600px;" ng-model="postDonationCounselling.notes"/>
-              </div>
-              <div class="form-group">
-                  <button type="submit" class="btn btn-primary" style="margin-top:0;" ng-disabled="updatingCounselling">
-                      {{updatingCounselling ? "Saving..." : "Save" | translate}}
-                  </button>
-                  <a class="btn btn-primary" style="margin-top:0;" href="" ng-click="goBack()"
-                     ng-disabled="updatingCounselling" translate>Cancel</a>
-                  <a class="btn btn-primary" style="margin-top:0;" href="" ng-click="removeStatus()"
-                     ng-disabled="!postDonationCounselling.permissions.canRemoveStatus || updatingCounselling" translate>Remove</a>
-              </div>
+      <form name="postDonationCounsellingForm" ng-submit="updatePostDonationCounselling()" novalidate>
+        <div class="row">
+          <div class="col-sm-4 col-md-3 col-lg-2 form-group">
+            <label class="display-block" for="counsellingDate" translate>Counselling Date</label>
+            <dateselect name="counsellingDate" format="dateFormat" ng-model="postDonationCounselling.counsellingDate" required ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingDate.$invalid}"
+              date-time-not-in-future max-date="today">
+            </dateselect>
+            <ng-messages role="alert" for="postDonationCounsellingForm.counsellingDate.$error" ng-show="postDonationCounsellingForm.$submitted || postDonationCounsellingForm.counsellingDate.$dirty">
+              <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
+          </div>
+          <div class="col-sm-7 col-md-5 col-lg-4 form-group">
+            <label class="display-block" for="counsellingStatus" translate>Counselling Status</label>
+
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" ng-model="postDonationCounselling.counsellingStatus" uib-btn-radio="'RECEIVED_COUNSELLING'" class="btn btn-default">Received</button>
+              <button type="button" ng-model="postDonationCounselling.counsellingStatus" uib-btn-radio="'DID_NOT_RECEIVE_COUNSELLING'"
+                class="btn btn-default">Did not receive</button>
+              <button type="button" ng-model="postDonationCounselling.counsellingStatus" uib-btn-radio="'REFUSED_COUNSELLING'" class="btn btn-default">Refused</button>
+            </div>
+
+            <!--<select class="form-control" name="counsellingStatus" ng-model="postDonationCounselling.counsellingStatus" ng-options="status as (status | titleCase | translate) for status in counsellingStatuses"
+                required ng-change="updateReferredEnabled()" ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingStatus.$invalid}">
+                </select>-->
+
+            <ng-messages role="alert" for="postDonationCounsellingForm.counsellingStatus.$error" ng-show="postDonationCounsellingForm.$submitted || postDonationCounsellingForm.counsellingStatus.$dirty">
+              <ng-messages-include src="messages.html"></ng-messages-include>
+            </ng-messages>
+          </div>
+
+          <div class="col-sm-6 col-md-2 col-lg-2 form-group">
+            <label class="display-block" for="referred" translate>Referred</label>
+            <!--<input type="checkbox" id="referred" ng-click="updateReferralSites()" ng-model="postDonationCounselling.referred" ng-disabled="!referredEnabled">-->
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" ng-model="postDonationCounselling.referred" uib-btn-radio=true class="btn btn-default">Yes</button>
+              <button type="button" ng-model="postDonationCounselling.referred" uib-btn-radio=false class="btn btn-default">No</button>
             </div>
           </div>
-        </form>
-    </div>
-</div>
 
-<!-- Donation details -->
-<div class="panel panel-default">
+          <div class="col-sm-6 col-md-2 col-lg-4 form-group">
+            <label for="referralSite" translate>Referral location</label>
+            <select name="referralSite" class="form-control" ng-disabled="!postDonationCounselling.referred" ng-model="postDonationCounselling.referralSite"
+              ng-options="referralSite as referralSite.name for referralSite in referralSites track by referralSite.id" ng-required="postDonationCounselling.referred">
+                      <option value="" disabled></option>
+                  </select>
+            <ng-messages for="postDonationCounsellingForm.referralSite.$error" role="alert" ng-show="postDonationCounsellingForm.$submitted">
+              <ng-messages-include class="align-right" src="messages.html"></ng-messages-include>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-md-8 col-lg-9 form-group">
+            <label for="counsellingNotes" translate>Counselling Notes</label>
+            <input name="counsellingNotes" type="text" class="form-control" ng-model="postDonationCounselling.notes" />
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 form-group pad-t-30">
+
+            <button class="btn btn-secondary" href="" ng-click="goBack()" ng-disabled="updatingCounselling" translate>Cancel</button>
+
+            <button class="btn btn-secondary" href="" ng-click="removeStatus()" ng-disabled="!postDonationCounselling.permissions.canRemoveStatus || updatingCounselling"
+              translate>Remove</button>
+
+            <button type="submit" class="btn btn-primary margin-t-0 pull-right" ng-disabled="updatingCounselling">
+                      {{updatingCounselling ? "Saving..." : "Save" | translate}}
+              </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Donation details -->
+  <div class="panel panel-default">
     <div class="panel-body" ng-include="'views/donors/donationDetails.html'"></div>
-</div>
+  </div>
 </div>
