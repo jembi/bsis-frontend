@@ -249,7 +249,7 @@ angular.module('bsis')
           calculateSummary();
           docDefinition = ReportsLayoutService.addSummaryContent(summaryData, docDefinition);
         }
-        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('All'), 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
         return docDefinition;
       },
