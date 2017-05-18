@@ -225,7 +225,7 @@ angular.module('bsis')
         var processingSitesNumberLine = gettextCatalog.getString('Number of processing sites: {{sitesNumber}}', {sitesNumber: $scope.sitesNumber});
         return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
           gettextCatalog.getString('Components Produced Summary Report'),
-          [gettextCatalog.getString('Date Period: '), $filter('bsisDate')($scope.search.startDate), gettextCatalog.getString(' to '), $filter('bsisDate')($scope.search.endDate)],
+          gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}),
           processingSitesNumberLine);
       },
 
