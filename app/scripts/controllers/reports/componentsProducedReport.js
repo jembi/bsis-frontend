@@ -192,7 +192,7 @@ angular.module('bsis')
       { name: 'AB-', displayName: 'AB-', field: 'AB-', width: 65 },
       { name: 'O+', field: 'O+', width: 55 },
       { name: 'O-', field: 'O-', width: 55 },
-      { name: 'NTD', displayName: 'NTD', field: 'empty', width: 55 },
+      { name: 'NTD', displayName: gettextCatalog.getString('NTD'), field: 'empty', width: 55 },
       { name: 'Total', displayName: gettextCatalog.getString('Total'), field: 'total', width: 55 }
     ];
 
