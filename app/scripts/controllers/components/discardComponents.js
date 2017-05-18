@@ -127,19 +127,22 @@ angular.module('bsis')
 
     var columnDefs = [
       {
-        name: gettextCatalog.getString('Component Code'),
+        name: 'Component Code',
+        displayName: gettextCatalog.getString('Component Code'),
         field: 'componentCode',
         width: '**',
         maxWidth: '150'
       },
       {
-        name: gettextCatalog.getString('Component Type'),
+        name: 'Component Type',
+        displayName: gettextCatalog.getString('Component Type'),
         field: 'componentType.componentTypeName',
         width: '**',
         minWidth: '250'
       },
       {
-        name: gettextCatalog.getString('Status'),
+        name: 'Status',
+        displayName: gettextCatalog.getString('Status'),
         field: 'status',
         cellTemplate: '<div class="ui-grid-cell-contents">' +
           '{{row.entity["status"] | titleCase | translate}}' +
@@ -148,20 +151,23 @@ angular.module('bsis')
         maxWidth: '150'
       },
       {
-        name: gettextCatalog.getString('Created On'),
+        name: 'Created On',
+        displayName: gettextCatalog.getString('Created On'),
         field: 'createdOn',
         cellFilter: 'bsisDate',
         width: '**',
         maxWidth: '150'
       },
       {
-        name: gettextCatalog.getString('Expiry Status'),
+        name: 'Expiry Status',
+        displayName: gettextCatalog.getString('Expiry Status'),
         field: 'expiryStatus',
         width: '**',
         maxWidth: '250'
       },
       {
-        name: gettextCatalog.getString('Weight'),
+        name: 'Weight',
+        displayName: gettextCatalog.getString('Weight'),
         field: 'weight',
         width: '**',
         maxWidth: '120'
