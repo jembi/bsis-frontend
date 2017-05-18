@@ -38,8 +38,8 @@
       <div class="panel panel-default" ng-if="submitted">
           <div class="panel-body">
               <p>
-                  <em translate translate-params-venues-number="venuesNumber">{{venuesNumber}} venue(s) found</em> |
-                  <em><span translate>Data export</span>: </em>
+                  <em translate translate-params-count="venuesNumber">{{count}} venue(s) found</em> |
+                  <em><span translate>Data Export</span>: </em>
 
                   <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')" translate>PDF</button>
                   <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')" translate>CSV</button>
