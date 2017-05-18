@@ -96,17 +96,20 @@ angular.module('bsis')
     }
 
     function calculateSummary() {
+      var translatedMale = gettextCatalog.getString('Male');
+      var translatedFemale = gettextCatalog.getString('Female');
+
       summaryData = [
-        [gettextCatalog.getString('All venues'), gettextCatalog.getString('Female'), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        ['', gettextCatalog.getString('Male'), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [gettextCatalog.getString('All venues'), translatedFemale, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ['', translatedMale, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         ['', gettextCatalog.getString('All'), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       ];
       var summaryRow = null;
       angular.forEach(mergedData, function(row) {
-        if (row.cohorts === gettextCatalog.getString('Female')) {
+        if (row.cohorts === translatedFemale) {
           summaryRow = summaryData[0];
         }
-        if (row.cohorts === gettextCatalog.getString('Male')) {
+        if (row.cohorts === translatedMale) {
           summaryRow = summaryData[1];
         }
         if (row.cohorts === gettextCatalog.getString('All')) {
@@ -146,7 +149,7 @@ angular.module('bsis')
         if (newRow.location.name !== previousVenue) {
           $scope.venuesNumber += 1;
 
-          if (previousVenue != '') {
+          if (previousVenue !== '') {
             // Add female, male and all rows for previous venue
             addFemaleMaleAllRows(mergedFemaleRow, mergedMaleRow);
           }
@@ -174,7 +177,7 @@ angular.module('bsis')
 
       angular.forEach($scope.gridOptions.data, function(row) {
         row.cohorts = gettextCatalog.getString($filter('titleCase')(row.cohorts));
-      })
+      });
     }
 
     $scope.getReport = function(selectPeriodForm) {
