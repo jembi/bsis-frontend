@@ -113,11 +113,6 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
           fontSize: 10,
           bold: true,
           margin: [30, 20, 0, 0] // [left, top, right, bottom]
-        },
-        {
-          text: gettextCatalog.getString('Created On') + ': ' + $filter('bsisDate')(new Date()),
-          fontSize: 6,
-          margin: [300, -10, 0, 0]
         }
       ];
       return finalArray;
