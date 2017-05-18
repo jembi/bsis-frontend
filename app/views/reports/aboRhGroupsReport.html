@@ -6,11 +6,11 @@
 
   <form class="form-horizontal" role="form"  name="selectPeriodForm" style="padding:10px 0;" ng-submit="getReport(selectPeriodForm)" novalidate>
     <div class="clearfix form-group">
-        <label class="col-sm-2 control-label"><span translate>Period</span>:</label>
+        <label class="col-sm-2 control-label" translate>Period</label>
         <div class="form-inline col-sm-10">
             <div>
                 <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-class="{'has-error' : (selectPeriodForm.startDate.$invalid)}" ng-required="true" ui-date-end="{{search.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
-                <span><em><span translate>To</span>:</em></span>
+                <span><em translate>To</em></span>
                 <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (selectPeriodForm.endDate.$invalid)}" ng-required="true" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ui-date-range min-date="search.startDate"></dateselect-end>
             </div>
             <div>
@@ -39,7 +39,7 @@
           <div class="panel-body">
               <p>
                   <em translate translate-params-count="venuesNumber">{{count}} venue(s) found</em> |
-                  <em><span translate>Data export</span>: </em>
+                  <em translate>Data Export</em>
 
                   <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')" translate>PDF</button>
                   <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')" translate>CSV</button>
