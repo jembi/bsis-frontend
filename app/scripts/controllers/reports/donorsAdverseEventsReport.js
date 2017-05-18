@@ -116,8 +116,15 @@ angular.module('bsis')
     // Grid ui variables and methods
 
     var columnDefs = [
-      { displayName: gettextCatalog.getString('Venue'), field: 'venue', width: '**', minWidth: 150 },
-      { displayName: gettextCatalog.getString('Total Adverse Events'), field: 'total', width: 55 }
+      { displayName: gettextCatalog.getString('Venue'),
+        field: 'venue',
+        width: '**',
+        minWidth: 150
+      },
+      { displayName: gettextCatalog.getString('Total Adverse Events'),
+        field: 'total',
+        width: 55
+      }
     ];
 
     $scope.gridOptions = {
@@ -135,7 +142,7 @@ angular.module('bsis')
 
       // Change formatting of PDF
       exporterPdfCustomFormatter: function(docDefinition) {
-        docDefinition = ReportsLayoutService.highlightTotalRows('Total All Venues', 0, docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('Total All Venues'), 0, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
         return docDefinition;
       },
@@ -151,7 +158,7 @@ angular.module('bsis')
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageFooter(gettextCatalog.getString('venues'), $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {
