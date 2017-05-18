@@ -88,7 +88,7 @@
                             {{donor.lastName}}
                         </td>
                         <td data-title="'Gender' | translate" header-class="text-left" sortable="'gender'">
-                            {{donor.gender}}
+                            {{donor.gender | titleCase | translate}}
                         </td>
                         <td data-title="'Age' | translate" header-class="text-left" class="text-center" calculate-age
                             dob="{{donor.birthDate}}" age="age">

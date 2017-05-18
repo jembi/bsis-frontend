@@ -44,7 +44,7 @@
       <span ng-hide="isFieldEmpty(orderForm.patient.bloodGroup)"> {{orderForm.patient.bloodGroup}}</span>
       <span class="text-muted" translate>Gender</span>
       <span ng-hide="!isFieldEmpty(orderForm.patient.gender)" translate> Not Specified</span>
-      <span ng-hide="isFieldEmpty(orderForm.patient.gender)"> {{orderForm.patient.gender | translate}}</span>
+      <span ng-hide="isFieldEmpty(orderForm.patient.gender)"> {{orderForm.patient.gender | titleCase | translate}}</span>
       <span class="text-muted" translate>Date of Birth</span>
       <span ng-hide="!isFieldEmpty(orderForm.patient.dateOfBirth)" translate> Not Specified</span>
       <span ng-hide="isFieldEmpty(orderForm.patient.dateOfBirth)"> {{orderForm.patient.dateOfBirth | bsisDate}}</span>

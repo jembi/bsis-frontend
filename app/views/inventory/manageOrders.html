@@ -144,7 +144,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label" translate>Gender</label>
               <div class="col-sm-8">
-                <select name="gender" class="form-control input-sm" ng-options="item.id as (item.name | translate) for item in genders" ng-model="orderForm.patient.gender">
+                <select name="gender" class="form-control input-sm" ng-options="item.id as (item.name | titleCase | translate) for item in genders" ng-model="orderForm.patient.gender">
                   <option value=""></option>
                 </select>
               </div>
