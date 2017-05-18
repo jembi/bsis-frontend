@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ComponentsProducedReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
+  .controller('ComponentsProducedReportCtrl', function($scope, $log, $filter, ReportsService, gettextCatalog, ReportsLayoutService, DATEFORMAT) {
 
     // Initialize variables
 
@@ -182,8 +182,8 @@ angular.module('bsis')
     // Grid ui variables and methods
 
     var columnDefs = [
-      { name: 'Site', field: 'venue' },
-      { name: 'Component Type', field: 'componentType'},
+      { name: 'Site', displayName: gettextCatalog.getString('Site'), field: 'venue' },
+      { name: 'Component Type', displayName: gettextCatalog.getString('Component Type'), field: 'componentType'},
       { name: 'A+', field: 'A+', width: 55 },
       { name: 'A-', field: 'A-', width: 55 },
       { name: 'B+', field: 'B+', width: 55 },
@@ -193,7 +193,7 @@ angular.module('bsis')
       { name: 'O+', field: 'O+', width: 55 },
       { name: 'O-', field: 'O-', width: 55 },
       { name: 'NTD', displayName: 'NTD', field: 'empty', width: 55 },
-      { name: 'Total', field: 'total', width: 55 }
+      { name: 'Total', displayName: gettextCatalog.getString('Total'), field: 'total', width: 55 }
     ];
 
     $scope.gridOptions = {
@@ -214,7 +214,7 @@ angular.module('bsis')
         if ($scope.sitesNumber > 1) {
           docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
         }
-        docDefinition = ReportsLayoutService.highlightTotalRows('Total', 1, docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('Total'), 1, docDefinition);
         var rowsPerPage = Math.min(componentTypes.length + 1, 27);
         docDefinition = ReportsLayoutService.paginatePdf(rowsPerPage, docDefinition);
         return docDefinition;
@@ -222,10 +222,10 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        var processingSitesNumberLine = 'Number of processing sites: ' + $scope.sitesNumber;
+        var processingSitesNumberLine = gettextCatalog.getString('Number of processing sites: {{sitesNumber}}', {sitesNumber: $scope.sitesNumber});
         return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-          'Components Produced Summary Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
+          gettextCatalog.getString('Components Produced Summary Report'),
+          gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}),
           processingSitesNumberLine);
       },
 
