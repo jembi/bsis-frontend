@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonorsAdverseEventsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
+  .controller('DonorsAdverseEventsReportCtrl', function($scope, $log, $filter, ReportsService, gettextCatalog, ReportsLayoutService, DATEFORMAT) {
 
     var mergedData = [];
     var master = {
@@ -83,7 +83,7 @@ angular.module('bsis')
 
       if ($scope.venuesNumber > 1) {
         // add total row to table
-        rowForTotal.venue = 'Total All Venues';
+        rowForTotal.venue = gettextCatalog.getString('Total All Venues');
         mergedData.push(rowForTotal);
       }
 
@@ -116,8 +116,8 @@ angular.module('bsis')
     // Grid ui variables and methods
 
     var columnDefs = [
-      { displayName: 'Venue', field: 'venue', width: '**', minWidth: 150 },
-      { displayName: 'Total Adverse Events', field: 'total', width: 55 }
+      { displayName: gettextCatalog.getString('Venue'), field: 'venue', width: '**', minWidth: 150 },
+      { displayName: gettextCatalog.getString('Total Adverse Events'), field: 'total', width: 55 }
     ];
 
     $scope.gridOptions = {
@@ -142,10 +142,10 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        var venuesNumberLine = 'Number of venues: ' + $scope.venuesNumber;
+        var venuesNumberLine = gettextCatalog.getString('Number of venues: {{venuesNumber}}', {venuesNumber: $scope.venuesNumber});
         return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-          'Donors Adverse Events Summary Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
+          gettextCatalog.getString('Donors Adverse Events Summary Report'),
+          gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}),
           venuesNumberLine);
       },
 
