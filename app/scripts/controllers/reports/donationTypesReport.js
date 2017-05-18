@@ -48,7 +48,7 @@ angular.module('bsis')
 
     function addSubtotalsRow(rows) {
       var subtotalsRow = initRow();
-      subtotalsRow.gender = 'All';
+      subtotalsRow.gender = gettextCatalog.getString('All');
       angular.forEach(rows, function(row, key) {
         angular.forEach(donationTypes, function(donationType) {
           subtotalsRow[donationType.type] += rows[key][donationType.type];
@@ -119,8 +119,17 @@ angular.module('bsis')
     // Grid ui variables and methods
     function initColumns() {
       var columns = [
-        { name: 'Venue', displayName: gettextCatalog.getString('Venue'), field: 'venue', width: '**', minWidth: '250' },
-        { name: 'Gender', displayName: gettextCatalog.getString('Gender'), field: 'gender', cellFilter: 'titleCase | translate', width: '**', maxWidth: '150' }
+        { name: 'Venue',
+          displayName: gettextCatalog.getString('Venue'),
+          field: 'venue', width: '**', minWidth: '250'
+        },
+        { name: 'Gender',
+          displayName: gettextCatalog.getString('Gender'),
+          field: 'gender',
+          cellFilter: 'titleCase | translate',
+          width: '**',
+          maxWidth: '150'
+        }
       ];
 
       angular.forEach(donationTypes, function(donationType) {
@@ -132,7 +141,12 @@ angular.module('bsis')
         });
       });
 
-      columns.push({ name: 'Total', displayName: gettextCatalog.getString('Total'), field: 'total', width: '**', maxWidth: '125' });
+      columns.push({ name: 'Total',
+                     displayName: gettextCatalog.getString('Total'),
+                     field: 'total',
+                     width: '**',
+                     maxWidth: '125'
+                   });
 
       return columns;
     }
@@ -155,7 +169,7 @@ angular.module('bsis')
       // PDF header
       exporterPdfHeader: function() {
         var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-          'Donations Collected By Type Report',
+          gettextCatalog.getString('Donations Collected By Type Report'),
           gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}));
         return header;
       },
@@ -164,10 +178,10 @@ angular.module('bsis')
       exporterPdfCustomFormatter: function(docDefinition) {
         if ($scope.venuesNumber > 1) {
           var summaryRows = ReportGeneratorService.generateSummaryRowsGroupingByCohort(dataValues, 'Gender', initRow, populateRow, addSubtotalsRow, addPercentageRow);
-          summaryRows[0][0] = 'All venues';
+          summaryRows[0][0] = gettextCatalog.getString('All venues');
           docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
         }
-        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('All'), 1, docDefinition);
         docDefinition = ReportsLayoutService.highlightPercentageRows('%', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(44, docDefinition);
         return docDefinition;
@@ -175,7 +189,7 @@ angular.module('bsis')
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageFooter(gettextCatalog.getString('venues'), $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {
