@@ -120,7 +120,7 @@ angular.module('bsis')
     function initColumns() {
       var columns = [
         { name: 'Venue', displayName: gettextCatalog.getString('Venue'), field: 'venue', width: '**', minWidth: '250' },
-        { name: 'Gender', displayName: gettextCatalog.getString('Gender'), field: 'gender', width: '**', maxWidth: '150' }
+        { name: 'Gender', displayName: gettextCatalog.getString('Gender'), field: 'gender', cellFilter: 'titleCase | translate', width: '**', maxWidth: '150' }
       ];
 
       angular.forEach(donationTypes, function(donationType) {
