@@ -6,8 +6,8 @@
     <uib-alert type="danger" close="">
         <span translate>Please provide valid inputs</span>
         <ul>
-            <li ng-show="err['donation.donor.[0].code === 'donor.invalid'" translate>Please supply a valid donor</li>
-            <li ng-show="err['donation.donationIdentificationNumber'][0].code === 'donationIdentificationNumber.nonunique'" translate>
+            <li ng-show="err['fieldErrors']['donation.donor'][0].code === 'donor.invalid' || err.developerMessage === 'Do not bleed donor'" translate>Please supply a valid donor</li>
+            <li ng-show="err['fieldErrors']['donation.donationIdentificationNumber'][0].code === 'donationIdentificationNumber.nonunique'" translate>
                 There is another donation with the same donation identification number
             </li>
         </ul>
