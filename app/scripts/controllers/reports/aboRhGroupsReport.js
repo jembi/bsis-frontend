@@ -46,7 +46,7 @@ angular.module('bsis')
     function createAllGendersRow(femaleRow, maleRow) {
       var allGendersRow = angular.copy(femaleRow);
       allGendersRow.venue = '';
-      allGendersRow.cohorts = gettextCatalog.getString('All');
+      allGendersRow.cohorts = 'All';
       allGendersRow.aPlus = femaleRow.aPlus + maleRow.aPlus;
       allGendersRow.aMinus = femaleRow.aMinus + maleRow.aMinus;
       allGendersRow.bPlus = femaleRow.bPlus + maleRow.bPlus;
@@ -97,19 +97,19 @@ angular.module('bsis')
 
     function calculateSummary() {
       summaryData = [
-        ['All venues', 'female', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        ['', 'male', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        ['', 'All', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        [gettextCatalog.getString('All venues'), gettextCatalog.getString('Female'), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ['', gettextCatalog.getString('Male'), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ['', gettextCatalog.getString('All'), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       ];
       var summaryRow = null;
       angular.forEach(mergedData, function(row) {
-        if (row.cohorts === 'female') {
+        if (row.cohorts === gettextCatalog.getString('Female')) {
           summaryRow = summaryData[0];
         }
-        if (row.cohorts === 'male') {
+        if (row.cohorts === gettextCatalog.getString('Male')) {
           summaryRow = summaryData[1];
         }
-        if (row.cohorts === 'All') {
+        if (row.cohorts === gettextCatalog.getString('All')) {
           summaryRow = summaryData[2];
         }
 
@@ -130,7 +130,6 @@ angular.module('bsis')
     }
 
     function mergeData(dataValues) {
-
       var previousVenue = '';
       var mergedFemaleRow = {};
       var mergedMaleRow = {};
@@ -138,7 +137,6 @@ angular.module('bsis')
       mergedData = [];
 
       angular.forEach(dataValues, function(newRow) {
-
         var cohorts = newRow.cohorts;
         var gender = cohorts[1].option;
         var bloodType = cohorts[2].option;
@@ -148,15 +146,15 @@ angular.module('bsis')
         if (newRow.location.name !== previousVenue) {
           $scope.venuesNumber += 1;
 
-          if (previousVenue !== '') {
+          if (previousVenue != '') {
             // Add female, male and all rows for previous venue
             addFemaleMaleAllRows(mergedFemaleRow, mergedMaleRow);
           }
 
           // Initialize values for the new venue
           previousVenue = newRow.location.name;
-          mergedFemaleRow = createZeroValuesRow(newRow, previousVenue, gettextCatalog.getString($filter('titleCase')('female')));
-          mergedMaleRow = createZeroValuesRow(newRow, '', gettextCatalog.getString($filter('titleCase')('male')));
+          mergedFemaleRow = createZeroValuesRow(newRow, previousVenue, 'female');
+          mergedMaleRow = createZeroValuesRow(newRow, '', 'male');
         }
 
         // Merge gender row with new row
@@ -173,6 +171,10 @@ angular.module('bsis')
       addFemaleMaleAllRows(mergedFemaleRow, mergedMaleRow);
 
       $scope.gridOptions.data = mergedData;
+
+      angular.forEach($scope.gridOptions.data, function(row) {
+        row.cohorts = gettextCatalog.getString($filter('titleCase')(row.cohorts));
+      })
     }
 
     $scope.getReport = function(selectPeriodForm) {
