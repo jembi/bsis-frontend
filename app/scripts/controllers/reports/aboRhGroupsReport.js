@@ -226,7 +226,7 @@ angular.module('bsis')
       { name: 'AB-', displayName: 'AB-', field: 'abMinus', width: 65 },
       { name: 'O+', field: 'oPlus', width: 55 },
       { name: 'O-', field: 'oMinus', width: 55 },
-      { name: 'NTD', displayName: 'NTD', field: 'empty', width: 65 },
+      { name: 'NTD', displayName: gettextCatalog.getString('NTD'), field: 'empty', width: 65 },
       { name: 'Total', displayName: gettextCatalog.getString('Total'), field: 'total' }
     ];
 
@@ -249,7 +249,7 @@ angular.module('bsis')
           calculateSummary();
           docDefinition = ReportsLayoutService.addSummaryContent(summaryData, docDefinition);
         }
-        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('All'), 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
         return docDefinition;
       },
