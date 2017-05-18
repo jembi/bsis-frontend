@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonationTypesReportCtrl', function($scope, $log, $filter, ReportsService, ReportGeneratorService, ReportsLayoutService, DATEFORMAT) {
+  .controller('DonationTypesReportCtrl', function($scope, $log, $filter, ReportsService, ReportGeneratorService, ReportsLayoutService, gettextCatalog, DATEFORMAT) {
 
     // Initialize variables
 
@@ -37,7 +37,7 @@ angular.module('bsis')
     }
 
     function populateRow(row, dataValue) {
-      var gender = ReportGeneratorService.getCohort(dataValue, 'Gender').option;
+      var gender = gettextCatalog.getString($filter('titleCase')(ReportGeneratorService.getCohort(dataValue, 'Gender').option));
       var donationType = ReportGeneratorService.getCohort(dataValue, 'Donation Type').option;
 
       row.gender = gender;
@@ -119,8 +119,8 @@ angular.module('bsis')
     // Grid ui variables and methods
     function initColumns() {
       var columns = [
-        { name: 'Venue', field: 'venue', width: '**', minWidth: '250' },
-        { name: 'Gender', field: 'gender', width: '**', maxWidth: '150' }
+        { name: 'Venue', displayName: gettextCatalog.getString('Venue'), field: 'venue', width: '**', minWidth: '250' },
+        { name: 'Gender', displayName: gettextCatalog.getString('Gender'), field: 'gender', width: '**', maxWidth: '150' }
       ];
 
       angular.forEach(donationTypes, function(donationType) {
@@ -132,7 +132,7 @@ angular.module('bsis')
         });
       });
 
-      columns.push({ name: 'Total', field: 'total', width: '**', maxWidth: '125' });
+      columns.push({ name: 'Total', displayName: gettextCatalog.getString('Total'), field: 'total', width: '**', maxWidth: '125' });
 
       return columns;
     }
@@ -156,7 +156,7 @@ angular.module('bsis')
       exporterPdfHeader: function() {
         var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
           'Donations Collected By Type Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
+          gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}));
         return header;
       },
 
