@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, ReportGeneratorService, DATEFORMAT) {
+angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, ReportGeneratorService, DATEFORMAT, gettextCatalog) {
 
   // Initialize variables
   var transfusionReactionTypes = [];
@@ -28,10 +28,10 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
 
     // PDF header
     exporterPdfHeader: function() {
-      var sitesNumberLine = 'Usage Sites: ' + $scope.usageSitesNumber;
+      var sitesNumberLine = gettextCatalog.getString('Usage Sites: {{count}}', {count: $scope.usageSitesNumber});
       return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-        'Transfusions Summary Report',
-        ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
+        gettextCatalog.getString('Transfusions Summary Report'),
+        [gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)})],
         sitesNumberLine);
     },
 
@@ -85,12 +85,12 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
 
     var columnChars = transfusionReactionTypes.length > 12 ? 6 : transfusionReactionTypes.length > 8 ? 8 : 12;
 
-    columnDefs.push({ displayName: 'Usage Site', field: 'usageSite', width: '**', minWidth: 150, maxWidth: 250 });
+    columnDefs.push({ displayName: gettextCatalog.getString('Usage Site'), field: 'usageSite', width: '**', minWidth: 150, maxWidth: 250 });
 
-    var totalTransfusedUneventfully = ReportsLayoutService.hyphenateLongWords('Total Transfused Uneventfully', columnChars);
+    var totalTransfusedUneventfully = ReportsLayoutService.hyphenateLongWords(gettextCatalog.getString('Total Transfused Uneventfully'), columnChars);
     columnDefs.push({ displayName: totalTransfusedUneventfully, field: 'totalTransfusedUneventfully'});
 
-    var totalNotTransfused = ReportsLayoutService.hyphenateLongWords('Total Not Transfused', columnChars);
+    var totalNotTransfused = ReportsLayoutService.hyphenateLongWords(gettextCatalog.getString('Total Not Transfused'), columnChars);
     columnDefs.push({ displayName: totalNotTransfused, field: 'totalNotTransfused'});
 
     angular.forEach(transfusionReactionTypes, function(transfusionReactionType) {
@@ -98,10 +98,10 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
       columnDefs.push({displayName: reactionType, field: transfusionReactionType.name});
     });
 
-    var totalReactions = ReportsLayoutService.hyphenateLongWords('Total Reactions', columnChars);
+    var totalReactions = ReportsLayoutService.hyphenateLongWords(gettextCatalog.getString('Total Reactions'), columnChars);
     columnDefs.push({ displayName: totalReactions, field: 'totalReactions'});
 
-    var totalUnknown = ReportsLayoutService.hyphenateLongWords('Total Unknown', columnChars);
+    var totalUnknown = ReportsLayoutService.hyphenateLongWords(gettextCatalog.getString('Total Unknown'), columnChars);
     columnDefs.push({ displayName: totalUnknown, field: 'totalUnknown'});
   }
 
@@ -151,7 +151,7 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
         // Add summary row
         if ($scope.usageSitesNumber > 1) {
           var summaryRow = ReportGeneratorService.generateSummaryRow(report.dataValues, transfusionReactionTypes, initRow, populateRow);
-          summaryRow.usageSite = 'All Sites';
+          summaryRow.usageSite = gettextCatalog.getString('All Sites');
           $scope.gridOptions.data.push(summaryRow);
         }
         $scope.gridOptions.paginationCurrentPage = 1;
