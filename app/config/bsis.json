@@ -2,6 +2,6 @@
   "apiHost": "localhost",
   "apiPort": "8080",
   "apiApp": "bsis",
-  "language": "fr",
-  "languageDebug": true
+  "language": "en",
+  "languageDebug": false
 }
