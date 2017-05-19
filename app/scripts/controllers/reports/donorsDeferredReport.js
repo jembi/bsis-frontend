@@ -129,23 +129,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     ];
   }
 
-  function init() {
-    ReportsService.getDonorsDeferredReportForm(function(res) {
-      // Add deferral reason columns
-      angular.forEach(res.deferralReasons, function(column) {
-        $scope.deferralReasons.push(column.reason);
-        // Add new column before the total column
-        columnDefs.splice(-1, 0, {displayName: gettextCatalog.getString(column.reason), field: column.reason, width: '**', maxWidth: '125'});
-      });
 
-      // Notify the grid of the changes if it has been initialised
-      if ($scope.gridApi) {
-        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-      }
-    }, function(err) {
-      $log.error(err);
-    });
-  }
 
   $scope.dateFormat = DATEFORMAT;
   $scope.search = angular.copy(master);
@@ -190,45 +174,66 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     });
   };
 
-  $scope.gridOptions = {
-    data: [],
-    paginationPageSize: 9,
-    paginationTemplate: 'views/template/pagination.html',
-    columnDefs: columnDefs,
-    minRowsToShow: 9,
+  function initGridOptionsConfig() {
+    $scope.gridOptions = {
+      data: [],
+      paginationPageSize: 9,
+      paginationTemplate: 'views/template/pagination.html',
+      columnDefs: columnDefs,
+      minRowsToShow: 9,
 
-    exporterPdfOrientation: 'landscape',
-    exporterPdfPageSize: 'A4',
-    exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
-    exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
-    exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
+      exporterPdfOrientation: 'landscape',
+      exporterPdfPageSize: 'A4',
+      exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
+      exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
+      exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
 
-    // PDF header
-    exporterPdfHeader: function() {
-      return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
+      // PDF header
+      exporterPdfHeader: function() {
+        return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
         gettextCatalog.getString('Donors Deferred Summary Report'),
         gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}));
-    },
+      },
 
-    // Change formatting of PDF
-    exporterPdfCustomFormatter: function(docDefinition) {
-      if ($scope.venuesNumber > 1) {
-        docDefinition = ReportsLayoutService.addSummaryContent($scope.gridOptions.summaryData, docDefinition);
+      // Change formatting of PDF
+      exporterPdfCustomFormatter: function(docDefinition) {
+        if ($scope.venuesNumber > 1) {
+          docDefinition = ReportsLayoutService.addSummaryContent($scope.gridOptions.summaryData, docDefinition);
+        }
+        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
+        docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
+        return docDefinition;
+      },
+
+      // PDF footer
+      exporterPdfFooter: function(currentPage, pageCount) {
+        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+      },
+
+      onRegisterApi: function(gridApi) {
+        $scope.gridApi = gridApi;
       }
-      docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
-      docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
-      return docDefinition;
-    },
+    };
+  }
 
-    // PDF footer
-    exporterPdfFooter: function(currentPage, pageCount) {
-      return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
-    },
+  function init() {
+    ReportsService.getDonorsDeferredReportForm(function(res) {
+      // Add deferral reason columns
+      angular.forEach(res.deferralReasons, function(column) {
+        $scope.deferralReasons.push(column.reason);
+        // Add new column before the total column
+        columnDefs.splice(-1, 0, {displayName: column.reason, field: column.reason, width: '**', maxWidth: '125'});
+      });
 
-    onRegisterApi: function(gridApi) {
-      $scope.gridApi = gridApi;
-    }
-  };
+      // Notify the grid of the changes if it has been initialised
+      if ($scope.gridApi) {
+        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+      }
+      initGridOptionsConfig();
+    }, function(err) {
+      $log.error(err);
+    });
+  }
 
   $scope.export = function(format) {
     if (format === 'pdf') {
