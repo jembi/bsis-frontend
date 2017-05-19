@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT, uiGridConstants) {
+angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $log, $filter, ReportsService, gettextCatalog, ReportsLayoutService, DATEFORMAT, uiGridConstants) {
 
   // Initialize variables
 
@@ -14,9 +14,9 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
   // UI grid initial columns
   var columnDefs = [
-    {displayName: 'Venue', field: 'venue', width: '**', minWidth: '250'},
-    {displayName: 'Gender', field: 'gender', width: '**', maxWidth: '150'},
-    {displayName: 'Total', field: 'total', width: '**', maxWidth: '125'}
+    {displayName: gettextCatalog.getString('Venue'), field: 'venue', width: '**', minWidth: '250'},
+    {displayName: gettextCatalog.getString('Gender'), field: 'gender', cellFilter: 'titleCase | translate', width: '**', maxWidth: '150'},
+    {displayName: gettextCatalog.getString('Total'), field: 'total', width: '**', maxWidth: '125'}
   ];
 
   function createZeroValuesRow(venue, gender) {
@@ -71,7 +71,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
     angular.forEach(dataValues, function(dataValue) {
 
-      var gender = dataValue.cohorts[0].option;
+      var gender = gettextCatalog.getString($filter('titleCase')(dataValue.cohorts[0].option));
       var deferralReason = dataValue.cohorts[1].option;
 
       // New venue
@@ -135,7 +135,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
       angular.forEach(res.deferralReasons, function(column) {
         $scope.deferralReasons.push(column.reason);
         // Add new column before the total column
-        columnDefs.splice(-1, 0, {displayName: column.reason, field: column.reason, width: '**', maxWidth: '125'});
+        columnDefs.splice(-1, 0, {displayName: gettextCatalog.getString(column.reason), field: column.reason, width: '**', maxWidth: '125'});
       });
 
       // Notify the grid of the changes if it has been initialised
@@ -206,8 +206,8 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     // PDF header
     exporterPdfHeader: function() {
       return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-        'Donors Deferred Summary Report',
-        ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
+        gettextCatalog.getString('Donors Deferred Summary Report'),
+        gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}));
     },
 
     // Change formatting of PDF
