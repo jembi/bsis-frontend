@@ -126,7 +126,6 @@ angular.module('bsis')
         { name: 'Gender',
           displayName: gettextCatalog.getString('Gender'),
           field: 'gender',
-          cellFilter: 'titleCase | translate',
           width: '**',
           maxWidth: '150'
         }
@@ -190,7 +189,7 @@ angular.module('bsis')
 
         // PDF footer
         exporterPdfFooter: function(currentPage, pageCount) {
-          return ReportsLayoutService.generatePdfPageFooter(gettextCatalog.getString('venues'), $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+          return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
         },
 
         onRegisterApi: function(gridApi) {
