@@ -127,44 +127,46 @@ angular.module('bsis')
       }
     ];
 
-    $scope.gridOptions = {
-      data: [],
-      paginationPageSize: 8,
-      paginationTemplate: 'views/template/pagination.html',
-      columnDefs: columnDefs,
-      minRowsToShow: 8,
+    function initGridOptionsConfig() {
+      $scope.gridOptions = {
+        data: [],
+        paginationPageSize: 8,
+        paginationTemplate: 'views/template/pagination.html',
+        columnDefs: columnDefs,
+        minRowsToShow: 8,
 
-      exporterPdfOrientation: 'landscape',
-      exporterPdfPageSize: 'A4',
-      exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
-      exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
-      exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
+        exporterPdfOrientation: 'landscape',
+        exporterPdfPageSize: 'A4',
+        exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
+        exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
+        exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
 
-      // Change formatting of PDF
-      exporterPdfCustomFormatter: function(docDefinition) {
-        docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('Total All Venues'), 0, docDefinition);
-        docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
-        return docDefinition;
-      },
+        // Change formatting of PDF
+        exporterPdfCustomFormatter: function(docDefinition) {
+          docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('Total All Venues'), 0, docDefinition);
+          docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
+          return docDefinition;
+        },
 
-      // PDF header
-      exporterPdfHeader: function() {
-        var venuesNumberLine = gettextCatalog.getString('Number of venues: {{venuesNumber}}', {venuesNumber: $scope.venuesNumber});
-        return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
+        // PDF header
+        exporterPdfHeader: function() {
+          var venuesNumberLine = gettextCatalog.getString('Number of venues: {{venuesNumber}}', {venuesNumber: $scope.venuesNumber});
+          return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
           gettextCatalog.getString('Donors Adverse Events Summary Report'),
           gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}),
           venuesNumberLine);
-      },
+        },
 
-      // PDF footer
-      exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter(gettextCatalog.getString('venues'), $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
-      },
+        // PDF footer
+        exporterPdfFooter: function(currentPage, pageCount) {
+          return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        },
 
-      onRegisterApi: function(gridApi) {
-        $scope.gridApi = gridApi;
-      }
-    };
+        onRegisterApi: function(gridApi) {
+          $scope.gridApi = gridApi;
+        }
+      };
+    }
 
     $scope.export = function(format) {
       if (format === 'pdf') {
@@ -183,6 +185,7 @@ angular.module('bsis')
           var displayName = ReportsLayoutService.hyphenateLongWords(adverseEventType.name, 11);
           columnDefs.splice(-1, 0, {displayName: displayName, field: adverseEventType.name, width: '**', minWidth: 80, maxWidth: 100});
         });
+        initGridOptionsConfig();
       }, $log.error);
     }
 
