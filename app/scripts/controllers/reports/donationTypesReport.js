@@ -127,7 +127,7 @@ angular.module('bsis')
           displayName: gettextCatalog.getString('Gender'),
           field: 'gender',
           width: '**',
-          maxWidth: '150'
+          minWidth: '150'
         }
       ];
 
@@ -136,7 +136,7 @@ angular.module('bsis')
           name: donationType.type,
           field: donationType.type,
           width: '**',
-          maxWidth: '125'
+          minWidth: '125'
         });
       });
 
@@ -144,7 +144,7 @@ angular.module('bsis')
                      displayName: gettextCatalog.getString('Total'),
                      field: 'total',
                      width: '**',
-                     maxWidth: '125'
+                     minWidth: '125'
                    });
 
       return columns;
