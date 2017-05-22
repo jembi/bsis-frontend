@@ -31,7 +31,7 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
       var sitesNumberLine = gettextCatalog.getString('Usage Sites: {{count}}', {count: $scope.usageSitesNumber});
       return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
         gettextCatalog.getString('Transfusions Summary Report'),
-        [gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)})],
+        gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}),
         sitesNumberLine);
     },
 
@@ -85,24 +85,39 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
 
     var columnChars = transfusionReactionTypes.length > 12 ? 6 : transfusionReactionTypes.length > 8 ? 8 : 12;
 
-    columnDefs.push({ displayName: gettextCatalog.getString('Usage Site'), field: 'usageSite', width: '**', minWidth: 150, maxWidth: 250 });
+    columnDefs.push({
+      displayName: gettextCatalog.getString('Usage Site'),
+      field: 'usageSite',
+      width: '**',
+      minWidth: 150,
+      maxWidth: 250 });
 
     var totalTransfusedUneventfully = ReportsLayoutService.hyphenateLongWords(gettextCatalog.getString('Total Transfused Uneventfully'), columnChars);
-    columnDefs.push({ displayName: totalTransfusedUneventfully, field: 'totalTransfusedUneventfully'});
+    columnDefs.push({
+      displayName: totalTransfusedUneventfully,
+      field: 'totalTransfusedUneventfully'});
 
     var totalNotTransfused = ReportsLayoutService.hyphenateLongWords(gettextCatalog.getString('Total Not Transfused'), columnChars);
-    columnDefs.push({ displayName: totalNotTransfused, field: 'totalNotTransfused'});
+    columnDefs.push({
+      displayName: totalNotTransfused,
+      field: 'totalNotTransfused'});
 
     angular.forEach(transfusionReactionTypes, function(transfusionReactionType) {
       var reactionType = ReportsLayoutService.hyphenateLongWords(transfusionReactionType.name, columnChars);
-      columnDefs.push({displayName: reactionType, field: transfusionReactionType.name});
+      columnDefs.push({
+        displayName: reactionType,
+        field: transfusionReactionType.name});
     });
 
     var totalReactions = ReportsLayoutService.hyphenateLongWords(gettextCatalog.getString('Total Reactions'), columnChars);
-    columnDefs.push({ displayName: totalReactions, field: 'totalReactions'});
+    columnDefs.push({
+      displayName: totalReactions,
+      field: 'totalReactions'});
 
     var totalUnknown = ReportsLayoutService.hyphenateLongWords(gettextCatalog.getString('Total Unknown'), columnChars);
-    columnDefs.push({ displayName: totalUnknown, field: 'totalUnknown'});
+    columnDefs.push({
+      displayName: totalUnknown,
+      field: 'totalUnknown'});
   }
 
   function initRow(reactionTypes) {
