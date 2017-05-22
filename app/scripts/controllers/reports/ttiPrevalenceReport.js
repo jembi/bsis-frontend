@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('TTIPrevalenceReportCtrl', function($scope, $log, $filter, ReportsService, ReportGeneratorService, ReportsLayoutService, DATEFORMAT) {
+  .controller('TTIPrevalenceReportCtrl', function($scope, $log, $filter, ReportsService, ReportGeneratorService, ReportsLayoutService, DATEFORMAT, gettextCatalog) {
 
     // Initialize variables
     var master = {
@@ -42,8 +42,8 @@ angular.module('bsis')
     // Grid ui variables and methods
     function initColumns() {
       var columns = [
-        {name: 'Venue', displayName: 'Venue', field: 'venue', width: '**', minWidth: '200'},
-        {name: 'Gender', displayName: 'Gender', field: 'gender', width:'**', maxWidth: '130'}
+        {name: 'Venue', displayName: gettextCatalog.getString('Venue'), field: 'venue', width: '**', minWidth: '200'},
+        {name: 'Gender', displayName: gettextCatalog.getString('Gender'), field: 'gender', width:'**', maxWidth: '130'}
       ];
 
       angular.forEach(ttiBloodTests, function(ttiBloodTest) {
@@ -53,9 +53,9 @@ angular.module('bsis')
       });
 
       columns = columns.concat([
-        {name: 'TotalPos', displayName: 'Total +', field: 'totalPos', width: '**', maxWidth: '80'},
-        {name: 'Total', displayName: 'Total', field: 'total', width: '**', maxWidth: '80'},
-        {name: 'TTIRate', displayName: 'TTI %', field: 'ttiRate', width: '**', maxWidth: '80'}
+        {name: 'TotalPos', displayName: gettextCatalog.getString('Total +'), field: 'totalPos', width: '**', maxWidth: '80'},
+        {name: 'Total', displayName: gettextCatalog.getString('Total'), field: 'total', width: '**', maxWidth: '80'},
+        {name: 'TTIRate', displayName: gettextCatalog.getString('TTI %'), field: 'ttiRate', width: '**', maxWidth: '80'}
       ]);
 
       angular.forEach(ttiBloodTests, function(ttiBloodTest) {
@@ -72,7 +72,7 @@ angular.module('bsis')
 
     function populateRow(row, dataValue) {
       var gender = ReportGeneratorService.getCohort(dataValue, 'Gender').option;
-      row.gender = gender;
+      row.gender = gettextCatalog.getString($filter('titleCase')(gender));
 
       if (dataValue.id === 'totalUnitsTested') {
         row.total += dataValue.value;
@@ -80,7 +80,6 @@ angular.module('bsis')
       } else if (dataValue.id === 'totalUnsafeUnitsTested') {
         row.totalPos += dataValue.value;
         row.ttiRate = getPercentage(row.totalPos, row.total);
-
       } else {
         var ttiBloodTest = ReportGeneratorService.getCohort(dataValue, 'Blood Test').option;
         var result = ReportGeneratorService.getCohort(dataValue, 'Blood Test Result').option;
@@ -94,7 +93,7 @@ angular.module('bsis')
 
     function addAllGendersRow(rows) {
       var allGendersRow = initRow();
-      allGendersRow.gender = 'All';
+      allGendersRow.gender = gettextCatalog.getString('All');
       angular.forEach(rows, function(row) {
         allGendersRow.total += row.total;
         allGendersRow.totalPos += row.totalPos;
@@ -171,8 +170,8 @@ angular.module('bsis')
       // PDF header
       exporterPdfHeader: function() {
         var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-          'TTI Prevalence Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
+          gettextCatalog.getString('TTI Prevalence Report'),
+          gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}));
         return header;
       },
 
@@ -180,10 +179,10 @@ angular.module('bsis')
       exporterPdfCustomFormatter: function(docDefinition) {
         if ($scope.venuesNumber > 1) {
           var summaryRows = ReportGeneratorService.generateSummaryRowsGroupingByCohort(dataValues, 'Gender', initRow, populateRow, addAllGendersRow);
-          summaryRows[0][0] = 'All venues';
+          summaryRows[0][0] = gettextCatalog.getString('All venues');
           docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
         }
-        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('All'), 1, docDefinition);
         docDefinition = ReportsLayoutService.highlightPercentageRows('%', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
         return docDefinition;
