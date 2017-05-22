@@ -129,8 +129,6 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     ];
   }
 
-
-
   $scope.dateFormat = DATEFORMAT;
   $scope.search = angular.copy(master);
 
@@ -207,7 +205,10 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageFooter(
+          gettextCatalog.getString('venues'), $scope.venuesNumber,
+          currentPage, pageCount,
+          $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {
