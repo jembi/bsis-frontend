@@ -145,7 +145,7 @@ msgid "All statuses"
 msgstr "[FR] All statuses"
 
 #. Blood Typing Match Status
-#: app/views/translations.html:46
+#: app/views/translations.html:50
 msgid "Ambiguous"
 msgstr "[FR] Ambiguous"
 
@@ -168,7 +168,7 @@ msgstr "[FR] Any Date"
 msgid "Any Venue"
 msgstr "[FR] Any Venue"
 
-#: app/views/translations.html:77
+#: app/views/translations.html:81
 msgid "April"
 msgstr "[FR] April"
 
@@ -241,12 +241,12 @@ msgstr ""
 "[FR] Are you sure you wish to delete the donor \"{{firstName}}, {{lastName}} "
 "{{donorNumber}}\"?"
 
-#: app/views/translations.html:81
+#: app/views/translations.html:85
 msgid "August"
 msgstr "[FR] August"
 
 #. Component Status
-#: app/views/translations.html:33
+#: app/views/translations.html:37
 msgid "Available"
 msgstr "Disponible"
 
@@ -494,7 +494,7 @@ msgstr "[FR] Close Batch"
 #: app/scripts/controllers/components/viewComponentBatch.js:5
 #: app/scripts/controllers/donors/viewDonationBatch.js:89
 #: app/views/donors/manageDonationBatches.html:168
-#: app/views/testing/manageTestBatch.html:178 app/views/translations.html:63
+#: app/views/testing/manageTestBatch.html:178 app/views/translations.html:67
 msgid "Closed"
 msgstr "[FR] Closed"
 
@@ -520,7 +520,7 @@ msgid "Comments"
 msgstr "[FR] Comments"
 
 #. Blood Typing Status
-#: app/views/translations.html:54
+#: app/views/translations.html:58
 msgid "Complete"
 msgstr "[FR] Complete"
 
@@ -732,8 +732,8 @@ msgstr "[FR] Counselling Status"
 #. Return Status
 #: app/views/donors/manageDonationBatches.html:164
 #: app/views/donors/manageDonationBatches.html:24
-#: app/views/donors/viewDeferrals.html:28 app/views/translations.html:25
-#: app/views/translations.html:41
+#: app/views/donors/viewDeferrals.html:28 app/views/translations.html:29
+#: app/views/translations.html:45
 msgid "Created"
 msgstr "Créé"
 
@@ -946,7 +946,7 @@ msgstr "La date ou l'heure est au future: prière ré-entrer"
 msgid "Day"
 msgstr "[FR] Day"
 
-#: app/views/translations.html:85
+#: app/views/translations.html:89
 msgid "December"
 msgstr "[FR] December"
 
@@ -1009,7 +1009,7 @@ msgid "Description"
 msgstr "[FR] Description"
 
 #. Counselling Status
-#: app/views/translations.html:89
+#: app/views/translations.html:93
 msgid "Did Not Receive Counselling"
 msgstr "[FR] Did Not Receive Counselling"
 
@@ -1035,7 +1035,7 @@ msgid "Discard Stock"
 msgstr "Rejeter le Stock"
 
 #. Component Status
-#: app/views/translations.html:38
+#: app/views/translations.html:42
 msgid "Discarded"
 msgstr "Rejeté"
 
@@ -1067,7 +1067,7 @@ msgid "Dispatch Type"
 msgstr "Type d'Expédition"
 
 #. Order Status
-#: app/views/translations.html:26
+#: app/views/translations.html:30
 msgid "Dispatched"
 msgstr "Expédié"
 
@@ -1231,7 +1231,7 @@ msgid "Donors List"
 msgstr "[FR] Donors List"
 
 #. Personal Title
-#: app/views/translations.html:71
+#: app/views/translations.html:75
 msgid "Dr"
 msgstr "[FR] Dr"
 
@@ -1326,7 +1326,7 @@ msgid "Error merging the duplicate Donors."
 msgstr "[FR] Error merging the duplicate Donors."
 
 #. Component Status
-#: app/views/translations.html:34
+#: app/views/translations.html:38
 msgid "Expired"
 msgstr "Expiré"
 
@@ -1342,11 +1342,11 @@ msgid "Expiry Status"
 msgstr "Statut d'Expiration"
 
 #. Haemoglobin Level
-#: app/views/translations.html:66
+#: app/views/translations.html:70
 msgid "Fail"
 msgstr "[FR] Fail"
 
-#: app/views/translations.html:75
+#: app/views/translations.html:79
 msgid "February"
 msgstr "[FR] February"
 
@@ -1481,11 +1481,9 @@ msgstr "Numéro de Pavillon à l'Hôpital"
 msgid "Identifier"
 msgstr "[FR] Identifier"
 
-#. Inventory Status
 #: app/scripts/controllers/inventory/viewStockLevels.js:86
 #: app/views/inventory/viewStockLevels.html:29
 #: app/views/labelling/findSafeComponents.html:118
-#: app/views/translations.html:96
 msgid "In Stock"
 msgstr "En Stock"
 
@@ -1503,7 +1501,7 @@ msgstr "[FR] Include Similar Results"
 
 #. Blood Typing Match Status
 #. TTI Status
-#: app/views/translations.html:50 app/views/translations.html:59
+#: app/views/translations.html:54 app/views/translations.html:63
 msgid "Indeterminate"
 msgstr "[FR] Indeterminate"
 
@@ -1551,24 +1549,24 @@ msgstr "[FR] Inventory Status"
 #. Order Type
 #: app/views/inventory/fulfilOrder.html:56
 #: app/views/inventory/manageOrders.html:60
-#: app/views/inventory/viewOrders.html:63 app/views/translations.html:29
+#: app/views/inventory/viewOrders.html:63 app/views/translations.html:33
 msgid "Issue"
 msgstr "Envoi"
 
 #. Component Status
-#: app/views/translations.html:35
+#: app/views/translations.html:39
 msgid "Issued"
 msgstr "Envoyé"
 
-#: app/views/translations.html:74
+#: app/views/translations.html:78
 msgid "January"
 msgstr "[FR] January"
 
-#: app/views/translations.html:80
+#: app/views/translations.html:84
 msgid "July"
 msgstr "[FR] July"
 
-#: app/views/translations.html:79
+#: app/views/translations.html:83
 msgid "June"
 msgstr "[FR] June"
 
@@ -1700,16 +1698,16 @@ msgstr "[FR] Manage Test Batch"
 msgid "Manage Test Batches"
 msgstr "[FR] Manage Test Batches"
 
-#: app/views/translations.html:76
+#: app/views/translations.html:80
 msgid "March"
 msgstr "[FR] March"
 
 #. Blood Typing Match Status
-#: app/views/translations.html:47
+#: app/views/translations.html:51
 msgid "Match"
 msgstr "[FR] Match"
 
-#: app/views/translations.html:78
+#: app/views/translations.html:82
 msgid "May"
 msgstr "[FR] May"
 
@@ -1741,17 +1739,17 @@ msgstr ""
 "saisir un code de composant"
 
 #. Personal Title
-#: app/views/translations.html:68
+#: app/views/translations.html:72
 msgid "Mr"
 msgstr "[FR] Mr"
 
 #. Personal Title
-#: app/views/translations.html:69
+#: app/views/translations.html:73
 msgid "Mrs"
 msgstr "[FR] Mrs"
 
 #. Personal Title
-#: app/views/translations.html:70
+#: app/views/translations.html:74
 msgid "Ms"
 msgstr "[FR] Ms"
 
@@ -1762,7 +1760,7 @@ msgstr "Doit correspondre à l'entrée précédente"
 #. No, abbreviation
 #: app/scripts/controllers/testing/viewTestBatch.js:153
 #: app/scripts/controllers/testing/viewTestBatch.js:231
-#: app/views/translations.html:92
+#: app/views/translations.html:96
 msgid "N"
 msgstr "[FR] N"
 
@@ -1807,7 +1805,7 @@ msgid "No Donations found"
 msgstr "[FR] No Donations found"
 
 #. Blood Typing Match Status
-#: app/views/translations.html:45
+#: app/views/translations.html:49
 msgid "No Match"
 msgstr "[FR] No Match"
 
@@ -1817,7 +1815,7 @@ msgstr "[FR] No Previous Donations"
 
 #. Blood Typing Match Status
 #: app/views/testing/manageBloodGroupMatchTesting.html:59
-#: app/views/translations.html:49
+#: app/views/translations.html:53
 msgid "No Type Determined"
 msgstr "[FR] No Type Determined"
 
@@ -1890,16 +1888,10 @@ msgstr "[FR] None of the above"
 #. Blood Typing Match Status
 #. Blood Typing Status
 #. TTI Status
-#: app/views/translations.html:44 app/views/translations.html:52
-#: app/views/translations.html:56
+#: app/views/translations.html:48 app/views/translations.html:56
+#: app/views/translations.html:60
 msgid "Not Done"
 msgstr "[FR] Not Done"
-
-# Inventory Status Not In Stock
-#. Inventory Status
-#: app/views/translations.html:95
-msgid "Not In Stock"
-msgstr "[FR] Not In Stock"
 
 #: app/scripts/controllers/inventory/viewStockLevels.js:86
 msgid "Not Labelled"
@@ -1919,7 +1911,7 @@ msgid "Not Specified"
 msgstr "Non Spécifié"
 
 #. Transfusion Outcome
-#: app/views/translations.html:22
+#: app/views/translations.html:26
 msgid "Not Transfused"
 msgstr "Non Transfusé"
 
@@ -1946,7 +1938,7 @@ msgstr "Pas en Stock"
 msgid "Notes"
 msgstr "[FR] Notes"
 
-#: app/views/translations.html:84
+#: app/views/translations.html:88
 msgid "November"
 msgstr "[FR] November"
 
@@ -2017,14 +2009,14 @@ msgstr "[FR] Number of forms: {{count}}"
 msgid "OK"
 msgstr "OK"
 
-#: app/views/translations.html:83
+#: app/views/translations.html:87
 msgid "October"
 msgstr "[FR] October"
 
 #. Test Batch Status
 #: app/scripts/controllers/components/viewComponentBatch.js:6
 #: app/scripts/controllers/donors/viewDonationBatch.js:91
-#: app/views/translations.html:61
+#: app/views/translations.html:65
 msgid "Open"
 msgstr "[FR] Open"
 
@@ -2134,7 +2126,7 @@ msgid "Page {{currentPage}} of {{pageCount}}"
 msgstr "Page {{currentPage}} sur {{pageCount}}"
 
 #. Haemoglobin Level
-#: app/views/translations.html:65
+#: app/views/translations.html:69
 msgid "Pass"
 msgstr "[FR] Pass"
 
@@ -2165,12 +2157,12 @@ msgstr "Numéro de patient"
 #. Order Type
 #: app/views/inventory/fulfilOrder.html:59
 #: app/views/inventory/manageOrders.html:64
-#: app/views/inventory/viewOrders.html:67 app/views/translations.html:30
+#: app/views/inventory/viewOrders.html:67 app/views/translations.html:34
 msgid "Patient Request"
 msgstr "Demande de patient"
 
 #. Blood Typing Status
-#: app/views/translations.html:53
+#: app/views/translations.html:57
 msgid "Pending Tests"
 msgstr "[FR] Pending Tests"
 
@@ -2345,6 +2337,10 @@ msgstr "[FR] Print Pack Label"
 msgid "Print Return Note"
 msgstr "Imprimer la Note de Retour"
 
+#: app/views/translations.html:19
+msgid "Process"
+msgstr "[FR] Process"
+
 #: app/views/components/recordComponents.html:125
 msgid "Process Component"
 msgstr "[FR] Process Component"
@@ -2354,7 +2350,7 @@ msgid "Process labelled component"
 msgstr "[FR] Process labelled component"
 
 #. Component Status
-#: app/views/translations.html:39
+#: app/views/translations.html:43
 msgid "Processed"
 msgstr "Traiité"
 
@@ -2370,8 +2366,12 @@ msgstr "[FR] Processing Site"
 msgid "Processing site"
 msgstr "[FR] Processing site"
 
+#: app/views/translations.html:20
+msgid "Processing..."
+msgstr "[FR] Processing..."
+
 #. Personal Title
-#: app/views/translations.html:72
+#: app/views/translations.html:76
 msgid "Prof"
 msgstr "[FR] Prof"
 
@@ -2384,12 +2384,12 @@ msgid "Pulse"
 msgstr "[FR] Pulse"
 
 #. Component Status
-#: app/views/translations.html:32
+#: app/views/translations.html:36
 msgid "Quarantined"
 msgstr "Mis en Quarantaine"
 
 #. Refused counselling, abbreviation
-#: app/views/translations.html:93
+#: app/views/translations.html:97
 msgid "R"
 msgstr "[FR] R"
 
@@ -2442,7 +2442,7 @@ msgid "Receive Components"
 msgstr "[FR] Receive Components"
 
 #. Counselling Status
-#: app/views/translations.html:87
+#: app/views/translations.html:91
 msgid "Received Counselling"
 msgstr "[FR] Received Counselling"
 
@@ -2486,7 +2486,7 @@ msgid "Referred"
 msgstr "[FR] Referred"
 
 #. Counselling Status
-#: app/views/translations.html:88
+#: app/views/translations.html:92
 msgid "Refused Counselling"
 msgstr "[FR] Refused Counselling"
 
@@ -2497,7 +2497,7 @@ msgstr "[FR] Release"
 
 #. Test Batch Status
 #: app/scripts/controllers/testing/viewTestBatch.js:150
-#: app/views/translations.html:62
+#: app/views/translations.html:66
 msgid "Released"
 msgstr "[FR] Released"
 
@@ -2509,11 +2509,6 @@ msgstr "[FR] Remove"
 #: app/views/inventory/recordReturn.html:68
 msgid "Remove Pack"
 msgstr "Supprimer une Poche de Sang"
-
-#. Inventory Status
-#: app/views/translations.html:97
-msgid "Removed"
-msgstr "[FR] Removed"
 
 #: app/scripts/controllers/testing/viewTestBatch.js:455
 #: app/views/donors/manageClinic.html:81
@@ -2543,7 +2538,7 @@ msgid "Resolve Ambiguous ABO/Rh Outcomes"
 msgstr "[FR] Resolve Ambiguous ABO/Rh Outcomes"
 
 #. Blood Typing Match Status
-#: app/views/translations.html:48
+#: app/views/translations.html:52
 msgid "Resolved"
 msgstr "[FR] Resolved"
 
@@ -2572,7 +2567,7 @@ msgid "Return to Stock"
 msgstr "Retourner au Stock"
 
 #. Return Status
-#: app/views/translations.html:42
+#: app/views/translations.html:46
 msgid "Returned"
 msgstr "Retourné"
 
@@ -2607,7 +2602,7 @@ msgid "Review the donations for the merged donor"
 msgstr "[FR] Review the donations for the merged donor"
 
 #. TTI Status
-#: app/views/translations.html:57
+#: app/views/translations.html:61
 msgid "Safe"
 msgstr "[FR] Safe"
 
@@ -2756,7 +2751,7 @@ msgstr "[FR] Selected component cannot be discarded or undiscarded"
 msgid "Selected component cannot be processed further"
 msgstr "[FR] Selected component cannot be processed further"
 
-#: app/views/translations.html:82
+#: app/views/translations.html:86
 msgid "September"
 msgstr "[FR] September"
 
@@ -3134,12 +3129,12 @@ msgstr "[FR] Total donors: {{total}}"
 #. Order Type
 #: app/views/inventory/fulfilOrder.html:53
 #: app/views/inventory/manageOrders.html:56
-#: app/views/inventory/viewOrders.html:59 app/views/translations.html:28
+#: app/views/inventory/viewOrders.html:59 app/views/translations.html:32
 msgid "Transfer"
 msgstr "Transfert"
 
 #. Component Status
-#: app/views/translations.html:36
+#: app/views/translations.html:40
 msgid "Transfused"
 msgstr "Transfusé"
 
@@ -3148,7 +3143,7 @@ msgid "Transfused On"
 msgstr "Transfusé le"
 
 #. Transfusion Outcome
-#: app/views/translations.html:20
+#: app/views/translations.html:24
 msgid "Transfused Uneventfully"
 msgstr "Transfusé sans Problème"
 
@@ -3163,7 +3158,7 @@ msgid "Transfusion Outcome"
 msgstr "Resultat de la Transfusion"
 
 #. Transfusion Outcome
-#: app/views/translations.html:21
+#: app/views/translations.html:25
 msgid "Transfusion Reaction Occurred"
 msgstr "Une Réaction s'est Produite lors de la Transfusion"
 
@@ -3226,9 +3221,13 @@ msgstr "Unités Fournies"
 
 #. Transfusion Outcome
 #. Unknown Blood Group
-#: app/views/testing/viewTestSample.html:48 app/views/translations.html:23
+#: app/views/testing/viewTestSample.html:48 app/views/translations.html:27
 msgid "Unknown"
 msgstr "Inconnu"
+
+#: app/views/translations.html:21
+msgid "Unprocess"
+msgstr "[FR] Unprocess"
 
 #: app/scripts/controllers/components/recordComponents.js:334
 msgid "Unprocess Component"
@@ -3242,9 +3241,13 @@ msgstr ""
 "[FR] Unprocessing this component will cause all components that were "
 "produced from it to be deleted. Do you want to continue?"
 
+#: app/views/translations.html:22
+msgid "Unprocessing..."
+msgstr "[FR] Unprocessing..."
+
 #. Component Status
 #. TTI Status
-#: app/views/translations.html:37 app/views/translations.html:58
+#: app/views/translations.html:41 app/views/translations.html:62
 msgid "Unsafe"
 msgstr "Peu sûr"
 
@@ -3408,7 +3411,7 @@ msgstr "[FR] Wt"
 #. Yes, abbreviation
 #: app/scripts/controllers/testing/viewTestBatch.js:153
 #: app/scripts/controllers/testing/viewTestBatch.js:231
-#: app/views/translations.html:91
+#: app/views/translations.html:95
 msgid "Y"
 msgstr "[FR] Y"
 
@@ -3492,6 +3495,13 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+# Inventory Status Not In Stock
+#~ msgid "Not In Stock"
+#~ msgstr "[FR] Not In Stock"
+
+#~ msgid "Removed"
+#~ msgstr "[FR] Removed"
 
 #~ msgid "&deg;C"
 #~ msgstr "[FR] &deg;C"
