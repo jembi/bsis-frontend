@@ -172,7 +172,7 @@ angular.module('bsis')
         var sitesNumberLine = gettextCatalog.getString('Distribution Sites') + ': ' + $scope.sitesNumber;
         var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
           gettextCatalog.getString('Blood Units Issued Summary Report'),
-          [gettextCatalog.getString('Date Period: {{startDate}} to {{endDate}}', {startDate: $filter('bsisDate')($scope.search.startDate), endDate: $filter('bsisDate')($scope.search.endDate)})],
+          [gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)})],
           sitesNumberLine);
         return header;
       },
