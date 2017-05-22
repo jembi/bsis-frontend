@@ -41,6 +41,10 @@ angular.module('bsis')
 
     // Grid ui variables and methods
     function initColumns() {
+      /// Positive, abbreviation (symbol)
+      var pos = gettextCatalog.getString('+');
+      /// Percentage, abbreviation (symbol)
+      var percentage = gettextCatalog.getString('%');
       var columns = [
         {name: 'Venue', displayName: gettextCatalog.getString('Venue'), field: 'venue', width: '**', minWidth: '200'},
         {name: 'Gender', displayName: gettextCatalog.getString('Gender'), field: 'gender', width:'**', maxWidth: '130'}
@@ -48,19 +52,19 @@ angular.module('bsis')
 
       angular.forEach(ttiBloodTests, function(ttiBloodTest) {
         columns.push(
-          {name: ttiBloodTest.testName, displayName: ttiBloodTest.testName + ' +', field: ttiBloodTest.testName, width: '**', maxWidth: '80'}
+          {name: ttiBloodTest.testName, displayName: ttiBloodTest.testName + ' ' + pos, field: ttiBloodTest.testName, width: '**', maxWidth: '80'}
         );
       });
 
       columns = columns.concat([
-        {name: 'TotalPos', displayName: gettextCatalog.getString('Total +'), field: 'totalPos', width: '**', maxWidth: '80'},
+        {name: 'TotalPos', displayName: gettextCatalog.getString('Total') + ' ' + pos, field: 'totalPos', width: '**', maxWidth: '80'},
         {name: 'Total', displayName: gettextCatalog.getString('Total'), field: 'total', width: '**', maxWidth: '80'},
-        {name: 'TTIRate', displayName: gettextCatalog.getString('TTI %'), field: 'ttiRate', width: '**', maxWidth: '80'}
+        {name: 'TTIRate', displayName: gettextCatalog.getString('TTI') + ' ' + percentage, field: 'ttiRate', width: '**', maxWidth: '80'}
       ]);
 
       angular.forEach(ttiBloodTests, function(ttiBloodTest) {
         columns.push(
-          {name: ttiBloodTest.testName  + 'Rate', displayName: ttiBloodTest.testName  + ' %', field: ttiBloodTest.testName + 'Rate', width: '**', maxWidth: '80'}
+          {name: ttiBloodTest.testName  + 'Rate', displayName: ttiBloodTest.testName + ' ' + percentage, field: ttiBloodTest.testName + 'Rate', width: '**', maxWidth: '80'}
         );
       });
       return columns;
@@ -183,7 +187,6 @@ angular.module('bsis')
           docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
         }
         docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('All'), 1, docDefinition);
-        docDefinition = ReportsLayoutService.highlightPercentageRows('%', 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
         return docDefinition;
       },
