@@ -393,9 +393,9 @@ angular.module('bsis')
         var message;
 
         if (donorBirthDate.isBefore(minBirthDate)) {
-          message = gettextCatalog.getString('This donor is over the maximum age of {{maxAge}}.', {maxAge: maxAge});
+          message = gettextCatalog.getString('This donor is over the maximum age of {{maxAge}}', {maxAge: maxAge}) + '.';
         } else if (donorBirthDate.isAfter(maxBirthDate)) {
-          message = gettextCatalog.getString('This donor is below the minimum age of {{minAge}}.', {minAge: minAge});
+          message = gettextCatalog.getString('This donor is below the minimum age of {{minAge}}', {minAge: minAge}) + '.';
         } else {
         // Don't show confirmation
           return Promise.resolve(null);
