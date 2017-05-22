@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('UnitsDiscardedReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
+  .controller('UnitsDiscardedReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT, gettextCatalog) {
 
     // Initialize variables
 
@@ -114,7 +114,7 @@ angular.module('bsis')
       $scope.venuesNumber = 0;
 
       // Initialize total row for summary
-      summaryRows[0] = initRow('Total');
+      summaryRows[0] = initRow(gettextCatalog.getString('Total'));
 
       angular.forEach(dataValues, function(newRow) {
         // New venue
@@ -128,7 +128,7 @@ angular.module('bsis')
           // Initialize total row for new venue
           previousVenue = newRow.location.name;
           rowsForVenue = [];
-          rowsForVenue[0] = initRow('Total');
+          rowsForVenue[0] = initRow(gettextCatalog.getString('Total'));
           componentTypeIndex = 0;
           previousComponentType = '';
         }
@@ -147,7 +147,7 @@ angular.module('bsis')
 
         populateRows(rowsForVenue, newRow, componentTypeIndex);
         // Update venue for summary
-        newRow.location.name = 'All processing sites';
+        newRow.location.name = gettextCatalog.getString('All processing sites');
         populateRows(summaryRows, newRow, summaryComponentTypeMap[componentType]);
       });
 
@@ -186,9 +186,9 @@ angular.module('bsis')
     // Grid ui variables and methods
 
     var columnDefs = [
-      { name: 'Site', field: 'venue', width: '**', minWidth: 150 },
-      { name: 'Component Type', field: 'componentType', width: '**', minWidth: 150 },
-      { name: 'Total', field: 'total', width: 55 }
+      { name: 'Site', displayName: gettextCatalog.getString('Site'), field: 'venue', width: '**', minWidth: 150 },
+      { name: 'Component Type', displayName: gettextCatalog.getString('Component Type'), field: 'componentType', width: '**', minWidth: 150 },
+      { name: 'Total', displayName: gettextCatalog.getString('Total'), field: 'total', width: 55 }
     ];
 
     $scope.gridOptions = {
@@ -216,16 +216,17 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        var processingSitesNumberLine = 'Number of processing sites: ' + $scope.venuesNumber;
+        var processingSitesNumberLine = gettextCatalog.getString('Number of processing sites: {{sitesNumber}}', {sitesNumber: $scope.venuesNumber});
         return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-          'Discards Summary Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
+          gettextCatalog.getString('Discards Summary Report'),
+
+          gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}),
           processingSitesNumberLine);
       },
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('sites', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageFooter(gettextCatalog.getString('sites'), $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {
