@@ -65,8 +65,8 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     var previousVenue = null;
     var mergedFemaleRow = null;
     var mergedMaleRow = null;
-    var femaleSummaryRow = createZeroValuesRow(gettextCatalog.getString('All Venues'), gettextCatalog.getString($filter('titleCase')('Female')));
-    var maleSummaryRow = createZeroValuesRow('', gettextCatalog.getString($filter('titleCase')('female')));
+    var femaleSummaryRow = createZeroValuesRow(gettextCatalog.getString('All Venues'), gettextCatalog.getString('Female'));
+    var maleSummaryRow = createZeroValuesRow('', gettextCatalog.getString('Female'));
     var allSummaryRow = createZeroValuesRow('', gettextCatalog.getString('All'));
 
     angular.forEach(dataValues, function(dataValue) {
@@ -86,8 +86,8 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
         }
 
         // Initialize values for the new venue
-        mergedFemaleRow = createZeroValuesRow(dataValue.location.name, gettextCatalog.getString($filter('titleCase')('female')));
-        mergedMaleRow = createZeroValuesRow('', gettextCatalog.getString($filter('titleCase')('male')));
+        mergedFemaleRow = createZeroValuesRow(dataValue.location.name, gettextCatalog.getString('Female'));
+        mergedMaleRow = createZeroValuesRow('', gettextCatalog.getString('Male'));
 
         // Store the previous venue name
         previousVenue = dataValue.location.name;
