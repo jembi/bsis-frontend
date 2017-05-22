@@ -61,7 +61,7 @@ angular.module('bsis')
 
     function addPercentageRow(rows) {
       var subtotalsRow = angular.copy(addSubtotalsRow(rows));
-      subtotalsRow.gender = '%';
+      subtotalsRow.gender = gettextCatalog.getString('%');
 
       angular.forEach(donationTypes, function(donationType) {
         subtotalsRow[donationType.type] = $filter('number')(subtotalsRow[donationType.type] / subtotalsRow.total * 100, 2) + '%';
@@ -182,14 +182,17 @@ angular.module('bsis')
             docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
           }
           docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('All'), 1, docDefinition);
-          docDefinition = ReportsLayoutService.highlightPercentageRows('%', 1, docDefinition);
+          docDefinition = ReportsLayoutService.highlightPercentageRows(gettextCatalog.getString('%'), 1, docDefinition);
           docDefinition = ReportsLayoutService.paginatePdf(44, docDefinition);
           return docDefinition;
         },
 
         // PDF footer
         exporterPdfFooter: function(currentPage, pageCount) {
-          return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+          return ReportsLayoutService.generatePdfPageFooter(
+            gettextCatalog.getString('venues'), $scope.venuesNumber,
+            currentPage, pageCount,
+            $scope.gridOptions.exporterPdfOrientation);
         },
 
         onRegisterApi: function(gridApi) {

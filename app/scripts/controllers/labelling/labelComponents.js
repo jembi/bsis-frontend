@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, $routeParams, $timeout, LabellingService) {
+angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $location, $log, $routeParams, $timeout, LabellingService, gettextCatalog) {
 
   $scope.serverErrorMessage = null;
   $scope.searchResults = null;
@@ -82,7 +82,7 @@ angular.module('bsis').controller('LabelComponentsCtrl', function($scope, $locat
       $scope.verifyComponent = component;
     }, function(err) {
       if (err.errorCode === 'CONFLICT') {
-        $scope.serverErrorMessage = 'This component cannot be labelled - please check the status of the donor and donation';
+        $scope.serverErrorMessage = gettextCatalog.getString('This component cannot be labelled - please check the status of the donor and donation');
       }
       $log.error(err);
     });

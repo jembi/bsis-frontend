@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $filter, $location, ComponentBatchService, $log, DATEFORMAT) {
+angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $filter, $location, ComponentBatchService, $log, DATEFORMAT, gettextCatalog) {
 
   $scope.dateFormat = DATEFORMAT;
 
@@ -34,6 +34,7 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
   var columnDefs = [
     {
       name: 'Collection Date',
+      displayName: gettextCatalog.getString('Collection Date'),
       field: 'collectionDate',
       cellFilter: 'bsisDate',
       width: '**',
@@ -41,24 +42,29 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     },
     {
       name: 'Processing Site',
+      displayName: gettextCatalog.getString('Processing Site'),
       field: 'location.name',
       width: '**',
       maxWidth: '350'
     },
     {
       name: 'Num Initial Components',
+      displayName: gettextCatalog.getString('Num Initial Components'),
       field: 'numberOfInitialComponents',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Donation Batch Status',
+      displayName: gettextCatalog.getString('Donation Batch Status'),
       field: 'donationBatch.status',
+      cellFilter: 'titleCase | translate',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Delivery Date',
+      displayName: gettextCatalog.getString('Delivery Date'),
       field: 'deliveryDate',
       cellFilter: 'bsisDate',
       width: '**',
@@ -66,6 +72,7 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     },
     {
       name: 'Num Boxes',
+      displayName: gettextCatalog.getString('Num Boxes'),
       field: 'numberOfBoxes',
       width: '**'
     }
@@ -92,6 +99,8 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     exporterFieldCallback: function(grid, row, col, value) {
       if (col.field === 'collectionDate' || col.field === 'deliveryDate') {
         return $filter('bsisDate')(value);
+      } else if (col.field === 'donationBatch.status') {
+        return gettextCatalog.getString($filter('titleCase')(value));
       }
       return value;
     },
@@ -100,15 +109,10 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     exporterPdfHeader: function() {
       var finalArray = [
         {
-          text: 'Component Delivery Forms',
+          text: gettextCatalog.getString('Component Delivery Forms'),
           fontSize: 10,
           bold: true,
           margin: [30, 20, 0, 0] // [left, top, right, bottom]
-        },
-        {
-          text: 'Created On: ' + $filter('bsisDate')(new Date()),
-          fontSize: 6,
-          margin: [300, -10, 0, 0]
         }
       ];
       return finalArray;
@@ -119,9 +123,9 @@ angular.module('bsis').controller('ViewComponentBatchesCtrl', function($scope, $
     // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
-        {text: 'Number of forms: ' + $scope.gridOptions.data.length, width: 'auto'},
-        {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-        {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+        {text: gettextCatalog.getString('Number of forms: {{count}}', {count: $scope.gridOptions.data.length}), width: 'auto'},
+        {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+        {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
       ];
       return {
         columns: columns,

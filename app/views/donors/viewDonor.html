@@ -209,14 +209,14 @@
                                     <em><span translate>Venue</span></em>: {{lastDonation.venue.name}} <br/>
                                     <em><span translate>Donation Type</span></em>: {{lastDonation.donationType.type}} |
                                     <em><span translate>Pack Type</span></em>: {{lastDonation.packType.packType}}<br/>
-                                    <em><span translate translate-comment="Weight, abbreviation">Wt</span></em>: {{lastDonation.donorWeight}} {{weightUnit}} |
+                                    <em><span translate translate-comment="Weight, abbreviation">Wt</span></em>: {{lastDonation.donorWeight}} <span ng-if="lastDonation.donorWeight">{{weightUnit}}</span> |
                                     <em><span translate translate-comment="Blood Pressure, abbreviation">BP</span></em>:
                                     {{lastDonation.bloodPressureSystolic}}/{{lastDonation.bloodPressureDiastolic}}
-                                    {{bpUnit}} |
+                                    <span ng-if="lastDonation.bloodPressureSystolic || lastDonation.bloodPressureDiastolic">{{bpUnit}}</span> |
                                     <em>Hb</em>:
                                     <haemoglobin-value haemoglobin-count="lastDonation.haemoglobinCount" haemoglobin-level="lastDonation.haemoglobinLevel"> 
                                     </haemoglobin-value> | 
-                                    <em>P</em>: {{lastDonation.donorPulse}} {{pulseUnit}}
+                                    <em>P</em>: {{lastDonation.donorPulse}} <span ng-if="lastDonation.donorPulse">{{pulseUnit}}</span>
                                 </td>
                             </tr>
                             <tr>

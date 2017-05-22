@@ -44,7 +44,10 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
 
     // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
-      return ReportsLayoutService.generatePdfPageFooter('sites', $scope.usageSitesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+      return ReportsLayoutService.generatePdfPageFooter(
+        gettextCatalog.getString('sites'), $scope.usageSitesNumber,
+        currentPage, pageCount,
+        $scope.gridOptions.exporterPdfOrientation);
     },
 
     onRegisterApi: function(gridApi) {
