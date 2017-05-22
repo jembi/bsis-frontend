@@ -1481,6 +1481,7 @@ msgstr "Numéro de Pavillon à l'Hôpital"
 msgid "Identifier"
 msgstr "[FR] Identifier"
 
+#. Inventory Status
 #: app/scripts/controllers/inventory/viewStockLevels.js:86
 #: app/views/inventory/viewStockLevels.html:29
 #: app/views/labelling/findSafeComponents.html:118
@@ -1894,6 +1895,12 @@ msgstr "[FR] None of the above"
 msgid "Not Done"
 msgstr "[FR] Not Done"
 
+# Inventory Status Not In Stock
+#. Inventory Status
+#: app/views/translations.html:95
+msgid "Not In Stock"
+msgstr "[FR] Not In Stock"
+
 #: app/scripts/controllers/inventory/viewStockLevels.js:86
 msgid "Not Labelled"
 msgstr "Non Étiqueté"
@@ -1932,7 +1939,6 @@ msgstr "[FR] Not found. Please re-enter DIN."
 
 #: app/views/inventory/viewStockLevels.html:33
 #: app/views/labelling/findSafeComponents.html:114
-#: app/views/translations.html:95
 msgid "Not in Stock"
 msgstr "Pas en Stock"
 
@@ -2504,6 +2510,7 @@ msgstr "[FR] Remove"
 msgid "Remove Pack"
 msgstr "Supprimer une Poche de Sang"
 
+#. Inventory Status
 #: app/views/translations.html:97
 msgid "Removed"
 msgstr "[FR] Removed"
@@ -3485,9 +3492,6 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
-
-#~ msgid "Not In Stock"
-#~ msgstr "[FR] Not In Stock"
 
 #~ msgid "&deg;C"
 #~ msgstr "[FR] &deg;C"
