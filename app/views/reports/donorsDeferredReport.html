@@ -19,7 +19,7 @@
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
               <ng-messages for="selectPeriodForm.endDate.$error" role="alert" ng-show="selectPeriodForm.$submitted && !selectPeriodForm.startDate.$invalid">
-                <small class="error" ng-message="required" translate>Select a valid date</small>
+                <small class="error" ng-message="required" translate><span translate>Select a valid date</span></small>
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
             </div>
@@ -38,8 +38,8 @@
       <div class="panel panel-default" ng-if="submitted">
           <div class="panel-body">
               <p>
-                  <em translate translate-params-venues-number="venuesNumber">{{venuesNumber}} venue(s) found</em> |
-                  <em><span translate>Data export</span>: </em>
+                  <em translate translate-params-count="venuesNumber">{{count}} venue(s) found</em> |
+                  <em><span translate>Data Export</span></em>
 
                   <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')" translate>PDF</button>
                   <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')" translate>CSV</button>

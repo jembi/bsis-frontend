@@ -15,7 +15,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
   // UI grid initial columns
   var columnDefs = [
     {displayName: gettextCatalog.getString('Venue'), field: 'venue', width: '**', minWidth: '250'},
-    {displayName: gettextCatalog.getString('Gender'), field: 'gender', cellFilter: 'titleCase | translate', width: '**', maxWidth: '150'},
+    {displayName: gettextCatalog.getString('Gender'), field: 'gender', width: '**', maxWidth: '150'},
     {displayName: gettextCatalog.getString('Total'), field: 'total', width: '**', maxWidth: '125'}
   ];
 
@@ -39,7 +39,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
   function createAllGendersRow(femaleRow, maleRow) {
     var row = {
       venue: '',
-      gender: 'All',
+      gender: gettextCatalog.getString('All'),
       total: femaleRow.total + maleRow.total
     };
 
@@ -65,13 +65,13 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     var previousVenue = null;
     var mergedFemaleRow = null;
     var mergedMaleRow = null;
-    var femaleSummaryRow = createZeroValuesRow('All Venues', 'female');
-    var maleSummaryRow = createZeroValuesRow('', 'male');
-    var allSummaryRow = createZeroValuesRow('', 'All');
+    var femaleSummaryRow = createZeroValuesRow(gettextCatalog.getString('All Venues'), gettextCatalog.getString($filter('titleCase')('Female')));
+    var maleSummaryRow = createZeroValuesRow('', gettextCatalog.getString($filter('titleCase')('female')));
+    var allSummaryRow = createZeroValuesRow('', gettextCatalog.getString('All'));
 
     angular.forEach(dataValues, function(dataValue) {
 
-      var gender = gettextCatalog.getString($filter('titleCase')(dataValue.cohorts[0].option));
+      var gender = dataValue.cohorts[0].option;
       var deferralReason = dataValue.cohorts[1].option;
 
       // New venue
@@ -86,8 +86,8 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
         }
 
         // Initialize values for the new venue
-        mergedFemaleRow = createZeroValuesRow(dataValue.location.name, 'female');
-        mergedMaleRow = createZeroValuesRow('', 'male');
+        mergedFemaleRow = createZeroValuesRow(dataValue.location.name, gettextCatalog.getString($filter('titleCase')('female')));
+        mergedMaleRow = createZeroValuesRow('', gettextCatalog.getString($filter('titleCase')('male')));
 
         // Store the previous venue name
         previousVenue = dataValue.location.name;
@@ -128,7 +128,6 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
       textValues(allSummaryRow)
     ];
   }
-
 
 
   $scope.dateFormat = DATEFORMAT;
@@ -200,14 +199,14 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
         if ($scope.venuesNumber > 1) {
           docDefinition = ReportsLayoutService.addSummaryContent($scope.gridOptions.summaryData, docDefinition);
         }
-        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('All'), 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
         return docDefinition;
       },
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageFooter(gettextCatalog.getString('venues'), $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {
