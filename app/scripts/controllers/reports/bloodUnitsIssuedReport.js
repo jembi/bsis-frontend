@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('BloodUnitsIssuedReportCtrl', function($scope, $log, $filter, DATEFORMAT, ReportsService, ReportGeneratorService, ReportsLayoutService) {
+  .controller('BloodUnitsIssuedReportCtrl', function($scope, $log, $filter, DATEFORMAT, ReportsService, ReportGeneratorService, ReportsLayoutService, gettextCatalog) {
 
     // Initialize variables
     var master = {
@@ -62,7 +62,7 @@ angular.module('bsis')
 
     function addSubtotalsRow(rows) {
       var subtotalsRow = initRow();
-      subtotalsRow.componentType = 'Total Blood Units';
+      subtotalsRow.componentType = gettextCatalog.getString('Total Blood Units');
       angular.forEach(rows, function(row, key) {
         subtotalsRow.bulkOrder += rows[key].bulkOrder;
         subtotalsRow.bulkIssue += rows[key].bulkIssue;
@@ -124,16 +124,16 @@ angular.module('bsis')
 
     // Grid ui variables and methods
     var columnDefs = [
-      { displayName: 'Distribution Site', field: 'distributionSite', width: '**', minWidth: 200},
-      { displayName: 'Component Type', field: 'componentType', width: '**', minWidth: 200},
-      { displayName: 'Ordered', field: 'bulkOrder', width: 100 },
-      { displayName: 'Issued', field: 'bulkIssue', width: 100 },
-      { displayName: 'Gap', field: 'bulkGap', width: 100 },
-      { displayName: '% Issued vs Ordered', field: 'bulkRate', width: 100 },
-      { displayName: 'Patient Requests', field: 'patientOrder', width: 100 },
-      { displayName: 'Issued', field: 'patientIssue', width: 100 },
-      { displayName: 'Gap', field: 'patientGap', width: 100 },
-      { displayName: '% Issued vs Requests', field: 'patientRate', width: 100 }
+      { displayName: gettextCatalog.getString('Distribution Site'), field: 'distributionSite', width: '**', minWidth: 200},
+      { displayName: gettextCatalog.getString('Component Type'), field: 'componentType', width: '**', minWidth: 200},
+      { displayName: gettextCatalog.getString('Ordered'), field: 'bulkOrder', width: 100 },
+      { displayName: gettextCatalog.getString('Issued'), field: 'bulkIssue', width: 100 },
+      { displayName: gettextCatalog.getString('Gap'), field: 'bulkGap', width: 100 },
+      { displayName: gettextCatalog.getString('% Issued vs Ordered'), field: 'bulkRate', width: 100 },
+      { displayName: gettextCatalog.getString('Patient Requests'), field: 'patientOrder', width: 100 },
+      { displayName: gettextCatalog.getString('Issued'), field: 'patientIssue', width: 100 },
+      { displayName: gettextCatalog.getString('Gap'), field: 'patientGap', width: 100 },
+      { displayName: gettextCatalog.getString('% Issued vs Requests'), field: 'patientRate', width: 100 }
     ];
 
     $scope.gridOptions = {
@@ -153,10 +153,10 @@ angular.module('bsis')
       exporterPdfCustomFormatter: function(docDefinition) {
         if ($scope.sitesNumber > 1) {
           var summaryRows = ReportGeneratorService.generateSummaryRowsGroupingByCohort(dataValues, 'Component Type', initRow, populateRow, addSubtotalsRow);
-          summaryRows[0][0] = 'All Sites';
+          summaryRows[0][0] = gettextCatalog.getString('All Sites');
           docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
         }
-        docDefinition = ReportsLayoutService.highlightTotalRows('Total Blood Units', 1, docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('Total Blood Units'), 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(33, docDefinition);
         return docDefinition;
       },
@@ -169,17 +169,20 @@ angular.module('bsis')
 
       // PDF header
       exporterPdfHeader: function() {
-        var sitesNumberLine = 'Distribution Sites: ' + $scope.sitesNumber;
+        var sitesNumberLine = gettextCatalog.getString('Distribution Sites') + ': ' + $scope.sitesNumber;
         var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-          'Blood Units Issued Summary Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)],
+          gettextCatalog.getString('Blood Units Issued Summary Report'),
+          [gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)})],
           sitesNumberLine);
         return header;
       },
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('sites', $scope.sitesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageFooter(
+          gettextCatalog.getString('sites'), $scope.sitesNumber,
+          currentPage, pageCount,
+          $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {

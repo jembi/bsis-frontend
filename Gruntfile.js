@@ -323,7 +323,7 @@ module.exports = function(grunt) {
             '<%= yeoman.app %>/views/translations.html',
             '<%= yeoman.app %>/views/*/*.html',
             '<%= yeoman.app %>/*.html',
-            '<%= yeoman.app %>/scripts/controllers/*/*.js'
+            '<%= yeoman.app %>/scripts/**/*/*.js'
           ]
         }
       }

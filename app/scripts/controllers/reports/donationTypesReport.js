@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('DonationTypesReportCtrl', function($scope, $log, $filter, ReportsService, ReportGeneratorService, ReportsLayoutService, DATEFORMAT) {
+  .controller('DonationTypesReportCtrl', function($scope, $log, $filter, ReportsService, ReportGeneratorService, ReportsLayoutService, gettextCatalog, DATEFORMAT) {
 
     // Initialize variables
 
@@ -37,7 +37,7 @@ angular.module('bsis')
     }
 
     function populateRow(row, dataValue) {
-      var gender = ReportGeneratorService.getCohort(dataValue, 'Gender').option;
+      var gender = gettextCatalog.getString($filter('titleCase')(ReportGeneratorService.getCohort(dataValue, 'Gender').option));
       var donationType = ReportGeneratorService.getCohort(dataValue, 'Donation Type').option;
 
       row.gender = gender;
@@ -48,7 +48,7 @@ angular.module('bsis')
 
     function addSubtotalsRow(rows) {
       var subtotalsRow = initRow();
-      subtotalsRow.gender = 'All';
+      subtotalsRow.gender = gettextCatalog.getString('All');
       angular.forEach(rows, function(row, key) {
         angular.forEach(donationTypes, function(donationType) {
           subtotalsRow[donationType.type] += rows[key][donationType.type];
@@ -61,7 +61,7 @@ angular.module('bsis')
 
     function addPercentageRow(rows) {
       var subtotalsRow = angular.copy(addSubtotalsRow(rows));
-      subtotalsRow.gender = '%';
+      subtotalsRow.gender = gettextCatalog.getString('%');
 
       angular.forEach(donationTypes, function(donationType) {
         subtotalsRow[donationType.type] = $filter('number')(subtotalsRow[donationType.type] / subtotalsRow.total * 100, 2) + '%';
@@ -119,8 +119,16 @@ angular.module('bsis')
     // Grid ui variables and methods
     function initColumns() {
       var columns = [
-        { name: 'Venue', field: 'venue', width: '**', minWidth: '250' },
-        { name: 'Gender', field: 'gender', width: '**', maxWidth: '150' }
+        { name: 'Venue',
+          displayName: gettextCatalog.getString('Venue'),
+          field: 'venue', width: '**', minWidth: '250'
+        },
+        { name: 'Gender',
+          displayName: gettextCatalog.getString('Gender'),
+          field: 'gender',
+          width: '**',
+          minWidth: '150'
+        }
       ];
 
       angular.forEach(donationTypes, function(donationType) {
@@ -128,60 +136,70 @@ angular.module('bsis')
           name: donationType.type,
           field: donationType.type,
           width: '**',
-          maxWidth: '125'
+          minWidth: '125'
         });
       });
 
-      columns.push({ name: 'Total', field: 'total', width: '**', maxWidth: '125' });
+      columns.push({ name: 'Total',
+                     displayName: gettextCatalog.getString('Total'),
+                     field: 'total',
+                     width: '**',
+                     minWidth: '125'
+                   });
 
       return columns;
     }
 
     var columnDefs = [];
 
-    $scope.gridOptions = {
-      data: [],
-      paginationPageSize: 8,
-      paginationTemplate: 'views/template/pagination.html',
-      columnDefs: columnDefs,
-      minRowsToShow: 8,
+    function initGridOptionsConfig() {
+      $scope.gridOptions = {
+        data: [],
+        paginationPageSize: 8,
+        paginationTemplate: 'views/template/pagination.html',
+        columnDefs: columnDefs,
+        minRowsToShow: 8,
 
-      exporterPdfOrientation: 'portrait',
-      exporterPdfPageSize: 'A4',
-      exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
-      exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
-      exporterPdfMaxGridWidth: ReportsLayoutService.pdfPortraitMaxGridWidth,
+        exporterPdfOrientation: 'portrait',
+        exporterPdfPageSize: 'A4',
+        exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
+        exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
+        exporterPdfMaxGridWidth: ReportsLayoutService.pdfPortraitMaxGridWidth,
 
-      // PDF header
-      exporterPdfHeader: function() {
-        var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-          'Donations Collected By Type Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
-        return header;
-      },
+        // PDF header
+        exporterPdfHeader: function() {
+          var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
+            gettextCatalog.getString('Donations Collected By Type Report'),
+            gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}));
+          return header;
+        },
 
-      // Change formatting of PDF
-      exporterPdfCustomFormatter: function(docDefinition) {
-        if ($scope.venuesNumber > 1) {
-          var summaryRows = ReportGeneratorService.generateSummaryRowsGroupingByCohort(dataValues, 'Gender', initRow, populateRow, addSubtotalsRow, addPercentageRow);
-          summaryRows[0][0] = 'All venues';
-          docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
+        // Change formatting of PDF
+        exporterPdfCustomFormatter: function(docDefinition) {
+          if ($scope.venuesNumber > 1) {
+            var summaryRows = ReportGeneratorService.generateSummaryRowsGroupingByCohort(dataValues, 'Gender', initRow, populateRow, addSubtotalsRow, addPercentageRow);
+            summaryRows[0][0] = gettextCatalog.getString('All venues');
+            docDefinition = ReportsLayoutService.addSummaryContent(summaryRows, docDefinition);
+          }
+          docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('All'), 1, docDefinition);
+          docDefinition = ReportsLayoutService.highlightPercentageRows(gettextCatalog.getString('%'), 1, docDefinition);
+          docDefinition = ReportsLayoutService.paginatePdf(44, docDefinition);
+          return docDefinition;
+        },
+
+        // PDF footer
+        exporterPdfFooter: function(currentPage, pageCount) {
+          return ReportsLayoutService.generatePdfPageFooter(
+            gettextCatalog.getString('venues'), $scope.venuesNumber,
+            currentPage, pageCount,
+            $scope.gridOptions.exporterPdfOrientation);
+        },
+
+        onRegisterApi: function(gridApi) {
+          $scope.gridApi = gridApi;
         }
-        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
-        docDefinition = ReportsLayoutService.highlightPercentageRows('%', 1, docDefinition);
-        docDefinition = ReportsLayoutService.paginatePdf(44, docDefinition);
-        return docDefinition;
-      },
-
-      // PDF footer
-      exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
-      },
-
-      onRegisterApi: function(gridApi) {
-        $scope.gridApi = gridApi;
-      }
-    };
+      };
+    }
 
     $scope.export = function(format) {
       if (format === 'pdf') {
@@ -195,6 +213,7 @@ angular.module('bsis')
       ReportsService.getDonationsReportForm(function(response) {
         donationTypes = response.donationTypes;
         columnDefs = initColumns();
+        initGridOptionsConfig();
       }, $log.error);
     }
 

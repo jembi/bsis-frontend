@@ -12,6 +12,31 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#. Percentage, abbreviation (symbol)
+#: app/scripts/controllers/reports/donationTypesReport.js:185
+#: app/scripts/controllers/reports/donationTypesReport.js:64
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:47
+msgid "%"
+msgstr "[FR] %"
+
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:132
+msgid "% Issued vs Ordered"
+msgstr "[FR] % Issued vs Ordered"
+
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:136
+msgid "% Issued vs Requests"
+msgstr "[FR] % Issued vs Requests"
+
+#. Positive, abbreviation (symbol)
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:45
+msgid "+"
+msgstr "[FR] +"
+
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:260
+#: app/views/reports/aboRhGroupsReport.html:3 app/views/reports/sidebar.html:13
+msgid "ABO Rh Blood Grouping Report"
+msgstr "[FR] ABO Rh Blood Grouping Report"
+
 #: app/views/donors/donationDetails.html:31
 msgid "ABO/Rh"
 msgstr "[FR] ABO/Rh"
@@ -20,7 +45,7 @@ msgstr "[FR] ABO/Rh"
 msgid "ABO/Rh Outcomes"
 msgstr "[FR] ABO/Rh Outcomes"
 
-#: app/views/translations.html:11
+#: app/scripts/services/donors.js:414 app/views/translations.html:11
 msgid "Add"
 msgstr "Ajouter"
 
@@ -117,6 +142,20 @@ msgid "Age"
 msgstr "[FR] Age"
 
 #: app/scripts/controllers/inventory/findTransfusion.js:129
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:105
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:115
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:252
+#: app/scripts/controllers/reports/donationTypesReport.js:184
+#: app/scripts/controllers/reports/donationTypesReport.js:51
+#: app/scripts/controllers/reports/donorsDeferredReport.js:201
+#: app/scripts/controllers/reports/donorsDeferredReport.js:42
+#: app/scripts/controllers/reports/donorsDeferredReport.js:70
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:100
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:189
+#: app/views/reports/componentsProducedReport.html:17
+#: app/views/reports/donorsAdverseEventsReport.html:17
+#: app/views/reports/transfusionsReport.html:17
+#: app/views/reports/unitsDiscardedReport.html:17
 msgid "All"
 msgstr "Tous"
 
@@ -124,17 +163,28 @@ msgstr "Tous"
 msgid "All Components"
 msgstr "[FR] All Components"
 
+#: app/scripts/controllers/reports/componentsProducedReport.js:108
+#: app/scripts/controllers/reports/unitsDiscardedReport.js:150
+msgid "All Processing Sites"
+msgstr "[FR] All Processing Sites"
+
 #: app/scripts/controllers/testing/viewTestBatch.js:16
 msgid "All Samples"
 msgstr "[FR] All Samples"
 
 #: app/scripts/controllers/inventory/viewStockLevels.js:59
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:156
+#: app/scripts/controllers/reports/transfusionsReport.js:172
 #: app/views/components/findComponents.html:26
 #: app/views/inventory/findInventory.html:40
 #: app/views/inventory/viewStockLevels.html:18
 #: app/views/labelling/findSafeComponents.html:37
 msgid "All Sites"
 msgstr "Tous les Sites"
+
+#: app/scripts/controllers/reports/donorsDeferredReport.js:68
+msgid "All Venues"
+msgstr "[FR] All Venues"
 
 #: app/views/donors/findDonor.html:38
 msgid "All search fields cannot be empty"
@@ -143,6 +193,12 @@ msgstr "[FR] All search fields cannot be empty"
 #: app/views/components/findComponents.html:58
 msgid "All statuses"
 msgstr "[FR] All statuses"
+
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:103
+#: app/scripts/controllers/reports/donationTypesReport.js:181
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:186
+msgid "All venues"
+msgstr "[FR] All venues"
 
 #. Blood Typing Match Status
 #: app/views/translations.html:50
@@ -175,6 +231,10 @@ msgstr "[FR] April"
 #: app/scripts/controllers/testing/viewTestBatch.js:438
 msgid "Are you sure that you want to close this test batch?"
 msgstr "[FR] Are you sure that you want to close this test batch?"
+
+#: app/scripts/services/donors.js:405
+msgid "Are you sure that you want to continue?"
+msgstr "[FR] Are you sure that you want to continue?"
 
 #: app/scripts/controllers/inventory/viewOrder.js:250
 msgid "Are you sure that you want to delete this Order?"
@@ -386,6 +446,12 @@ msgstr "[FR] Blood Typing Issues or Incomplete"
 msgid "Blood Typing Status"
 msgstr "[FR] Blood Typing Status"
 
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:174
+#: app/views/reports/bloodUnitsIssuedReport.html:3
+#: app/views/reports/sidebar.html:19
+msgid "Blood Units Issued Summary Report"
+msgstr "[FR] Blood Units Issued Summary Report"
+
 #. Blood transport box number, abbreviation
 #: app/views/components/addComponentBatch.html:89
 msgid "Box #{{boxNumber}}"
@@ -400,6 +466,15 @@ msgstr "[FR] Box #{{boxNumber}}"
 #: app/views/inventory/findTransfusion.html:91
 #: app/views/inventory/viewStockLevels.html:49
 #: app/views/labelling/findSafeComponents.html:143
+#: app/views/reports/aboRhGroupsReport.html:45
+#: app/views/reports/bloodUnitsIssuedReport.html:45
+#: app/views/reports/componentsProducedReport.html:64
+#: app/views/reports/donationTypesReport.html:45
+#: app/views/reports/donorsAdverseEventsReport.html:65
+#: app/views/reports/donorsDeferredReport.html:45
+#: app/views/reports/transfusionsReport.html:65
+#: app/views/reports/ttiPrevalenceReport.html:45
+#: app/views/reports/unitsDiscardedReport.html:65
 #: app/views/testing/viewTestBatch.html:220
 msgid "CSV"
 msgstr "CSV"
@@ -474,6 +549,14 @@ msgstr "[FR] Cannot print pack or discard labels for component"
 #: app/views/inventory/viewStockLevels.html:40
 #: app/views/labelling/findSafeComponents.html:133
 #: app/views/labelling/labelComponents.html:35
+#: app/views/reports/aboRhGroupsReport.html:33
+#: app/views/reports/bloodUnitsIssuedReport.html:33
+#: app/views/reports/donationTypesReport.html:33
+#: app/views/reports/donorsAdverseEventsReport.html:53
+#: app/views/reports/donorsDeferredReport.html:33
+#: app/views/reports/transfusionsReport.html:53
+#: app/views/reports/ttiPrevalenceReport.html:33
+#: app/views/reports/unitsDiscardedReport.html:53
 #: app/views/testing/manageTestBatch.html:115
 #: app/views/testing/manageTestBatch.html:159
 #: app/views/testing/viewTestSample.html:26
@@ -565,6 +648,9 @@ msgstr "Information sur le Composant Transfusé"
 #: app/scripts/controllers/inventory/viewReturn.js:23
 #: app/scripts/controllers/inventory/viewStockLevels.js:17
 #: app/scripts/controllers/labelling/findSafeComponents.js:45
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:128
+#: app/scripts/controllers/reports/componentsProducedReport.js:186
+#: app/scripts/controllers/reports/unitsDiscardedReport.js:190
 #: app/views/components/viewComponents.html:15
 #: app/views/components/viewDonations.html:19
 #: app/views/inventory/findInventory.html:50
@@ -672,6 +758,15 @@ msgid ""
 msgstr ""
 "Le composant {{din}} ({{componentCode}}) n'a pas été trouvé dans ce "
 "formulaire de retour."
+
+#: app/views/reports/componentsProducedReport.html:3
+#: app/views/reports/sidebar.html:25
+msgid "Components Produced Report"
+msgstr "[FR] Components Produced Report"
+
+#: app/scripts/controllers/reports/componentsProducedReport.js:227
+msgid "Components Produced Summary Report"
+msgstr "[FR] Components Produced Summary Report"
 
 #: app/scripts/controllers/testing/viewTestBatch.js:436
 msgid "Confirm Close"
@@ -849,8 +944,20 @@ msgstr "[FR] DONOR RECORDS"
 #: app/views/inventory/findTransfusion.html:89
 #: app/views/inventory/viewStockLevels.html:47
 #: app/views/labelling/findSafeComponents.html:141
+#: app/views/reports/aboRhGroupsReport.html:42
+#: app/views/reports/bloodUnitsIssuedReport.html:42
+#: app/views/reports/donationTypesReport.html:42
+#: app/views/reports/donorsAdverseEventsReport.html:62
+#: app/views/reports/donorsDeferredReport.html:42
+#: app/views/reports/transfusionsReport.html:62
+#: app/views/reports/ttiPrevalenceReport.html:42
+#: app/views/reports/unitsDiscardedReport.html:62
 #: app/views/testing/viewTestBatch.html:218
 msgid "Data Export"
+msgstr "Exportation de Données"
+
+#: app/views/reports/componentsProducedReport.html:62
+msgid "Data export"
 msgstr "Exportation de Données"
 
 #: app/scripts/controllers/donors/donorCounselling.js:211
@@ -880,6 +987,18 @@ msgstr "[FR] Date Collected"
 msgid "Date Created"
 msgstr "Créé"
 
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:261
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:175
+#: app/scripts/controllers/reports/componentsProducedReport.js:228
+#: app/scripts/controllers/reports/donationTypesReport.js:173
+#: app/scripts/controllers/reports/donorsAdverseEventsReport.js:156
+#: app/scripts/controllers/reports/donorsDeferredReport.js:193
+#: app/scripts/controllers/reports/transfusionsReport.js:34
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:178
+#: app/scripts/controllers/reports/unitsDiscardedReport.js:223
+msgid "Date Period: {{fromDate}} to {{toDate}}"
+msgstr "[FR] Date Period: {{fromDate}} to {{toDate}}"
+
 #: app/views/inventory/recordTransfusions.html:89
 msgid "Date Transfused"
 msgstr "Date de Transfusion"
@@ -896,6 +1015,7 @@ msgstr "Date de Transfusion"
 #: app/scripts/controllers/inventory/viewStockLevels.js:96
 #: app/scripts/controllers/labelling/findSafeComponents.js:146
 #: app/scripts/controllers/testing/viewTestBatch.js:287
+#: app/scripts/services/reportsLayout.js:49
 msgid "Date generated: {{date}}"
 msgstr "Généré le: {{date}}"
 
@@ -1043,6 +1163,12 @@ msgstr "Rejeté"
 msgid "Discarding..."
 msgstr "Rejet en cours..."
 
+#: app/scripts/controllers/reports/unitsDiscardedReport.js:221
+#: app/views/reports/sidebar.html:23
+#: app/views/reports/unitsDiscardedReport.html:3
+msgid "Discards Summary Report"
+msgstr "[FR] Discards Summary Report"
+
 #: app/scripts/controllers/inventory/manageOrders.js:132
 #: app/scripts/controllers/inventory/viewOrder.js:111
 #: app/scripts/controllers/inventory/viewOrders.js:18
@@ -1093,6 +1219,14 @@ msgstr "Distribué à"
 #: app/views/inventory/viewStockLevels.html:8
 msgid "Distribution Center"
 msgstr "Centre de Distribution"
+
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:127
+msgid "Distribution Site"
+msgstr "[FR] Distribution Site"
+
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:172
+msgid "Distribution Sites"
+msgstr "[FR] Distribution Sites"
 
 #: app/views/donors/addDonation.html:69
 #: app/views/donors/addDonorDonation.html:10 app/views/donors/viewDonor.html:63
@@ -1153,6 +1287,10 @@ msgstr "[FR] Donation Period"
 msgid "Donation Type"
 msgstr "[FR] Donation Type"
 
+#: app/views/reports/sidebar.html:15
+msgid "Donation Types Report"
+msgstr "[FR] Donation Types Report"
+
 #: app/views/components/addComponentBatch.html:20
 msgid "Donation batch"
 msgstr "[FR] Donation batch"
@@ -1160,6 +1298,11 @@ msgstr "[FR] Donation batch"
 #: app/views/donors/viewDonor.html:302
 msgid "Donations"
 msgstr "[FR] Donations"
+
+#: app/scripts/controllers/reports/donationTypesReport.js:172
+#: app/views/reports/donationTypesReport.html:3
+msgid "Donations Collected By Type Report"
+msgstr "[FR] Donations Collected By Type Report"
 
 #: app/views/components/viewComponents.html:2
 #: app/views/donors/viewDonationSummary.html:9
@@ -1225,6 +1368,18 @@ msgstr "[FR] Donor Overview Merge"
 #: app/views/donors/findDonor.html:65
 msgid "Donor Registration Blocked - No Open Donation Batches"
 msgstr "[FR] Donor Registration Blocked - No Open Donation Batches"
+
+#: app/scripts/controllers/reports/donorsAdverseEventsReport.js:155
+#: app/views/reports/donorsAdverseEventsReport.html:3
+#: app/views/reports/sidebar.html:27
+msgid "Donors Adverse Events Summary Report"
+msgstr "[FR] Donors Adverse Events Summary Report"
+
+#: app/scripts/controllers/reports/donorsDeferredReport.js:192
+#: app/views/reports/donorsDeferredReport.html:3
+#: app/views/reports/sidebar.html:21
+msgid "Donors Deferred Summary Report"
+msgstr "[FR] Donors Deferred Summary Report"
 
 #: app/scripts/controllers/donors/donorCommunications.js:155
 msgid "Donors List"
@@ -1350,6 +1505,10 @@ msgstr "[FR] Fail"
 msgid "February"
 msgstr "[FR] February"
 
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:100
+#: app/scripts/controllers/reports/donorsDeferredReport.js:68
+#: app/scripts/controllers/reports/donorsDeferredReport.js:69
+#: app/scripts/controllers/reports/donorsDeferredReport.js:89
 #: app/views/donors/addDonation.html:63 app/views/translations.html:3
 msgid "Female"
 msgstr "Femme"
@@ -1419,11 +1578,17 @@ msgstr " Exécuter le Formulaire de Commande"
 
 #: app/scripts/controllers/inventory/fulfilOrder.js:405
 #: app/scripts/controllers/inventory/viewOrder.js:32
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:131
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:135
 msgid "Gap"
 msgstr "Écart"
 
 #: app/scripts/controllers/donors/donorCounselling.js:161
 #: app/scripts/controllers/inventory/viewOrder.js:156
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:220
+#: app/scripts/controllers/reports/donationTypesReport.js:127
+#: app/scripts/controllers/reports/donorsDeferredReport.js:18
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:50
 #: app/views/donors/addDonor.html:134 app/views/donors/duplicateDonors.html:32
 #: app/views/donors/findDonor.html:90
 #: app/views/donors/manageDuplicateDonors.html:26
@@ -1525,6 +1690,10 @@ msgstr "Composant Invalide"
 msgid "Invalid date"
 msgstr "Date Invalide"
 
+#: app/scripts/services/donors.js:413
+msgid "Invalid donor"
+msgstr "[FR] Invalid donor"
+
 #: app/messages.html:6 app/views/donors/viewDonorDemographics.html:43
 msgid "Invalid email address"
 msgstr "Adresse e-mail Invalide"
@@ -1554,6 +1723,8 @@ msgid "Issue"
 msgstr "Envoi"
 
 #. Component Status
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:130
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:134
 #: app/views/translations.html:39
 msgid "Issued"
 msgstr "Envoyé"
@@ -1651,6 +1822,8 @@ msgstr "GESTION D'INVENTAIRE"
 msgid "MANAGE TESTING"
 msgstr "[FR] MANAGE TESTING"
 
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:99
+#: app/scripts/controllers/reports/donorsDeferredReport.js:90
 #: app/views/donors/addDonation.html:59 app/views/translations.html:2
 msgid "Male"
 msgstr "Homme"
@@ -1764,6 +1937,13 @@ msgstr "Doit correspondre à l'entrée précédente"
 msgid "N"
 msgstr "[FR] N"
 
+#. No Type Determined, abbreviation
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:229
+#: app/scripts/controllers/reports/componentsProducedReport.js:195
+#: app/views/translations.html:98
+msgid "NTD"
+msgstr "[FR] NTD"
+
 #: app/views/donors/addDonor.html:16 app/views/donors/findDonor.html:6
 #: app/views/donors/manageDuplicateDonors.html:20
 #: app/views/donors/mergeDonorsReview.html:12
@@ -1848,6 +2028,10 @@ msgstr ""
 #: app/views/donors/viewDeferrals.html:12 app/views/donors/viewDonor.html:171
 msgid "No current deferrals"
 msgstr "[FR] No current deferrals"
+
+#: app/scripts/services/reportsLayout.js:87
+msgid "No data for date range selected"
+msgstr "[FR] No data for date range selected"
 
 #: app/views/donors/findDonor.html:113
 msgid "No donors found"
@@ -2004,6 +2188,15 @@ msgstr "[FR] Number of Samples"
 msgid "Number of forms: {{count}}"
 msgstr "[FR] Number of forms: {{count}}"
 
+#: app/scripts/controllers/reports/componentsProducedReport.js:225
+#: app/scripts/controllers/reports/unitsDiscardedReport.js:219
+msgid "Number of processing sites: {{sitesNumber}}"
+msgstr "[FR] Number of processing sites: {{sitesNumber}}"
+
+#: app/scripts/controllers/reports/donorsAdverseEventsReport.js:153
+msgid "Number of venues: {{venuesNumber}}"
+msgstr "[FR] Number of venues: {{venuesNumber}}"
+
 #: app/scripts/controllers/inventory/fulfilOrder.js:198
 #: app/scripts/controllers/inventory/recordReturn.js:108
 msgid "OK"
@@ -2045,6 +2238,10 @@ msgstr "Status de la Commande"
 msgid "Order Type"
 msgstr "Type de Commande"
 
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:129
+msgid "Ordered"
+msgstr "[FR] Ordered"
+
 #: app/scripts/controllers/inventory/findTransfusion.js:70
 #: app/views/donors/donationDetails.html:122
 #: app/views/donors/donationDetails.html:93
@@ -2073,6 +2270,15 @@ msgstr "[FR] Overweight Pack"
 #: app/views/inventory/findTransfusion.html:90
 #: app/views/inventory/viewStockLevels.html:48
 #: app/views/labelling/findSafeComponents.html:142
+#: app/views/reports/aboRhGroupsReport.html:44
+#: app/views/reports/bloodUnitsIssuedReport.html:44
+#: app/views/reports/componentsProducedReport.html:63
+#: app/views/reports/donationTypesReport.html:44
+#: app/views/reports/donorsAdverseEventsReport.html:64
+#: app/views/reports/donorsDeferredReport.html:44
+#: app/views/reports/transfusionsReport.html:64
+#: app/views/reports/ttiPrevalenceReport.html:44
+#: app/views/reports/unitsDiscardedReport.html:64
 #: app/views/testing/viewTestBatch.html:219
 msgid "PDF"
 msgstr "PDF"
@@ -2122,6 +2328,7 @@ msgstr "[FR] Pack Weight Update"
 #: app/scripts/controllers/inventory/viewStockLevels.js:97
 #: app/scripts/controllers/labelling/findSafeComponents.js:147
 #: app/scripts/controllers/testing/viewTestBatch.js:288
+#: app/scripts/services/reportsLayout.js:51
 msgid "Page {{currentPage}} of {{pageCount}}"
 msgstr "Page {{currentPage}} sur {{pageCount}}"
 
@@ -2161,6 +2368,10 @@ msgstr "Numéro de patient"
 msgid "Patient Request"
 msgstr "Demande de patient"
 
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:133
+msgid "Patient Requests"
+msgstr "[FR] Patient Requests"
+
 #. Blood Typing Status
 #: app/views/translations.html:57
 msgid "Pending Tests"
@@ -2185,6 +2396,15 @@ msgstr "[FR] Pending: blood group serology repeat test outcomes."
 #: app/views/inventory/viewOrders.html:24
 #: app/views/inventory/viewReturns.html:24
 #: app/views/labelling/findSafeComponents.html:90
+#: app/views/reports/aboRhGroupsReport.html:9
+#: app/views/reports/bloodUnitsIssuedReport.html:9
+#: app/views/reports/componentsProducedReport.html:29
+#: app/views/reports/donationTypesReport.html:9
+#: app/views/reports/donorsAdverseEventsReport.html:29
+#: app/views/reports/donorsDeferredReport.html:9
+#: app/views/reports/transfusionsReport.html:29
+#: app/views/reports/ttiPrevalenceReport.html:9
+#: app/views/reports/unitsDiscardedReport.html:29
 #: app/views/testing/manageTestBatch.html:136
 msgid "Period"
 msgstr "Période"
@@ -2285,6 +2505,10 @@ msgstr "[FR] Please supply a valid donor"
 msgid "Postal"
 msgstr "[FR] Postal"
 
+#: app/scripts/services/reportsLayout.js:59
+msgid "Powered by"
+msgstr "[FR] Powered by"
+
 #: app/views/donors/mergeDonorsAddress.html:8
 #: app/views/donors/mergeDonorsReview.html:89
 #: app/views/donors/viewDonorDemographics.html:67
@@ -2363,6 +2587,8 @@ msgid "Processing Site"
 msgstr "[FR] Processing Site"
 
 #: app/views/components/addComponentBatch.html:43
+#: app/views/reports/componentsProducedReport.html:9
+#: app/views/reports/unitsDiscardedReport.html:9
 msgid "Processing site"
 msgstr "[FR] Processing site"
 
@@ -2392,6 +2618,10 @@ msgstr "Mis en Quarantaine"
 #: app/views/translations.html:97
 msgid "R"
 msgstr "[FR] R"
+
+#: app/views/reports/sidebar.html:12
+msgid "REPORTS"
+msgstr "[FR] REPORTS"
 
 #: app/views/testing/viewTestBatch.html:100
 #: app/views/testing/viewTestBatch.html:114
@@ -2715,6 +2945,24 @@ msgstr "[FR] Select a processing site"
 #: app/views/inventory/viewReturns.html:38
 #: app/views/labelling/findSafeComponents.html:102
 #: app/views/labelling/findSafeComponents.html:97
+#: app/views/reports/aboRhGroupsReport.html:18
+#: app/views/reports/aboRhGroupsReport.html:22
+#: app/views/reports/bloodUnitsIssuedReport.html:18
+#: app/views/reports/bloodUnitsIssuedReport.html:22
+#: app/views/reports/componentsProducedReport.html:38
+#: app/views/reports/componentsProducedReport.html:42
+#: app/views/reports/donationTypesReport.html:18
+#: app/views/reports/donationTypesReport.html:22
+#: app/views/reports/donorsAdverseEventsReport.html:38
+#: app/views/reports/donorsAdverseEventsReport.html:42
+#: app/views/reports/donorsDeferredReport.html:18
+#: app/views/reports/donorsDeferredReport.html:22
+#: app/views/reports/transfusionsReport.html:38
+#: app/views/reports/transfusionsReport.html:42
+#: app/views/reports/ttiPrevalenceReport.html:18
+#: app/views/reports/ttiPrevalenceReport.html:22
+#: app/views/reports/unitsDiscardedReport.html:38
+#: app/views/reports/unitsDiscardedReport.html:42
 #: app/views/testing/manageTestBatch.html:145
 #: app/views/testing/manageTestBatch.html:150
 msgid "Select a valid date"
@@ -2760,6 +3008,8 @@ msgid "Show test outcomes"
 msgstr "[FR] Show test outcomes"
 
 #: app/scripts/controllers/labelling/findSafeComponents.js:78
+#: app/scripts/controllers/reports/componentsProducedReport.js:185
+#: app/scripts/controllers/reports/unitsDiscardedReport.js:189
 #: app/views/labelling/findSafeComponents.html:27
 msgid "Site"
 msgstr "[FR] Site"
@@ -2806,11 +3056,21 @@ msgstr "[FR] Step {{step}} of {{totalsteps}}"
 msgid "Stock Levels"
 msgstr "Niveaux de Stocks"
 
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:62
+msgid "TTI"
+msgstr "[FR] TTI"
+
 #: app/views/donors/donationDetails.html:83
 #: app/views/donors/viewDonationSummary.html:243
 #: app/views/testing/viewTestSample.html:64
 msgid "TTI Outcomes"
 msgstr "[FR] TTI Outcomes"
+
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:177
+#: app/views/reports/sidebar.html:17
+#: app/views/reports/ttiPrevalenceReport.html:3
+msgid "TTI Prevalence Report"
+msgstr "[FR] TTI Prevalence Report"
 
 #: app/scripts/controllers/testing/viewTestBatch.js:161
 msgid "TTI Status"
@@ -3004,6 +3264,10 @@ msgstr ""
 "[FR] This component cannot be labelled - please check the status of the "
 "donor and donation"
 
+#: app/scripts/services/donors.js:398
+msgid "This donor is below the minimum age of {{minAge}}"
+msgstr "[FR] This donor is below the minimum age of {{minAge}}"
+
 #: app/scripts/controllers/donors/viewDonationBatch.js:345
 #: app/scripts/controllers/donors/viewDonor.js:404
 msgid ""
@@ -3012,6 +3276,10 @@ msgid ""
 msgstr ""
 "[FR] This donor is not eligible to donate. Components for this donation will "
 "be flagged as unsafe. Do you want to continue?"
+
+#: app/scripts/services/donors.js:396
+msgid "This donor is over the maximum age of {{maxAge}}"
+msgstr "[FR] This donor is over the maximum age of {{maxAge}}"
 
 #: app/scripts/controllers/donors/viewDonationBatch.js:447
 #: app/scripts/controllers/donors/viewDonor.js:664
@@ -3078,6 +3346,15 @@ msgstr "[FR] Title"
 #: app/views/inventory/viewOrders.html:28
 #: app/views/inventory/viewReturns.html:28
 #: app/views/labelling/findSafeComponents.html:93
+#: app/views/reports/aboRhGroupsReport.html:13
+#: app/views/reports/bloodUnitsIssuedReport.html:13
+#: app/views/reports/componentsProducedReport.html:33
+#: app/views/reports/donationTypesReport.html:13
+#: app/views/reports/donorsAdverseEventsReport.html:33
+#: app/views/reports/donorsDeferredReport.html:13
+#: app/views/reports/transfusionsReport.html:33
+#: app/views/reports/ttiPrevalenceReport.html:13
+#: app/views/reports/unitsDiscardedReport.html:33
 #: app/views/testing/manageTestBatch.html:140
 msgid "To"
 msgstr "à"
@@ -3099,20 +3376,57 @@ msgid "Too small"
 msgstr "Trop Petit"
 
 #: app/scripts/controllers/inventory/viewStockLevels.js:18
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:230
+#: app/scripts/controllers/reports/componentsProducedReport.js:196
+#: app/scripts/controllers/reports/componentsProducedReport.js:217
+#: app/scripts/controllers/reports/donationTypesReport.js:144
+#: app/scripts/controllers/reports/donorsDeferredReport.js:19
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:60
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:61
+#: app/scripts/controllers/reports/unitsDiscardedReport.js:117
+#: app/scripts/controllers/reports/unitsDiscardedReport.js:131
+#: app/scripts/controllers/reports/unitsDiscardedReport.js:191
 msgid "Total"
 msgstr "Total"
 
+#: app/scripts/controllers/reports/donorsAdverseEventsReport.js:124
 #: app/views/donors/viewDonor.html:193
 msgid "Total Adverse Events"
 msgstr "[FR] Total Adverse Events"
+
+#: app/scripts/controllers/reports/donorsAdverseEventsReport.js:146
+#: app/scripts/controllers/reports/donorsAdverseEventsReport.js:86
+msgid "Total All Venues"
+msgstr "[FR] Total All Venues"
+
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:159
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:65
+msgid "Total Blood Units"
+msgstr "[FR] Total Blood Units"
 
 #: app/views/donors/viewDonor.html:188
 msgid "Total Donations"
 msgstr "[FR] Total Donations"
 
+#: app/scripts/controllers/reports/transfusionsReport.js:103
+msgid "Total Not Transfused"
+msgstr "[FR] Total Not Transfused"
+
+#: app/scripts/controllers/reports/transfusionsReport.js:115
+msgid "Total Reactions"
+msgstr "[FR] Total Reactions"
+
+#: app/scripts/controllers/reports/transfusionsReport.js:98
+msgid "Total Transfused Uneventfully"
+msgstr "[FR] Total Transfused Uneventfully"
+
 #: app/scripts/controllers/inventory/findTransfusion.js:147
 msgid "Total Units: {{total}}"
 msgstr "Total des Unités: {{total}}"
+
+#: app/scripts/controllers/reports/transfusionsReport.js:120
+msgid "Total Unknown"
+msgstr "[FR] Total Unknown"
 
 #: app/scripts/controllers/donors/viewDonationBatch.js:118
 msgid "Total donations"
@@ -3125,6 +3439,10 @@ msgstr "[FR] Total donors"
 #: app/scripts/controllers/donors/donorCounselling.js:283
 msgid "Total donors: {{total}}"
 msgstr "[FR] Total donors: {{total}}"
+
+#: app/scripts/services/reportsLayout.js:47
+msgid "Total {{recordsName}}: {{totalRecords}}"
+msgstr "[FR] Total {{recordsName}}: {{totalRecords}}"
 
 #. Order Type
 #: app/views/inventory/fulfilOrder.html:53
@@ -3172,6 +3490,12 @@ msgstr "Type de Réaction Produite lors de la Transfusion"
 #: app/views/inventory/recordTransfusions.html:47
 msgid "Transfusion Site"
 msgstr "Site de Transfusion"
+
+#: app/scripts/controllers/reports/transfusionsReport.js:33
+#: app/views/reports/sidebar.html:29
+#: app/views/reports/transfusionsReport.html:3
+msgid "Transfusions Summary Report"
+msgstr "[FR] Transfusions Summary Report"
 
 #: app/views/components/findComponents.html:37
 #: app/views/components/findDiscards.html:18
@@ -3251,6 +3575,15 @@ msgstr "[FR] Unprocessing..."
 msgid "Unsafe"
 msgstr "Peu sûr"
 
+#: app/scripts/controllers/reports/transfusionsReport.js:92
+#: app/views/reports/transfusionsReport.html:9
+msgid "Usage Site"
+msgstr "[FR] Usage Site"
+
+#: app/scripts/controllers/reports/transfusionsReport.js:31
+msgid "Usage Sites: {{count}}"
+msgstr "[FR] Usage Sites: {{count}}"
+
 #: app/views/donors/viewDeferrals.html:53
 msgid "User"
 msgstr "[FR] User"
@@ -3259,6 +3592,11 @@ msgstr "[FR] User"
 #: app/scripts/controllers/donors/donorCommunications.js:98
 #: app/scripts/controllers/donors/donorCounselling.js:190
 #: app/scripts/controllers/donors/viewDonationBatch.js:96
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:219
+#: app/scripts/controllers/reports/donationTypesReport.js:123
+#: app/scripts/controllers/reports/donorsAdverseEventsReport.js:119
+#: app/scripts/controllers/reports/donorsDeferredReport.js:17
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:49
 #: app/scripts/controllers/testing/viewTestBatch.js:143
 #: app/scripts/controllers/testing/viewTestBatch.js:268
 #: app/views/components/viewComponentBatch.html:23
@@ -3277,7 +3615,9 @@ msgstr "[FR] User"
 #: app/views/donors/viewDeferrals.html:50
 #: app/views/donors/viewDonationSummary.html:76
 #: app/views/donors/viewDonations.html:32 app/views/donors/viewDonor.html:114
-#: app/views/donors/viewDonor.html:209 app/views/testing/viewTestBatch.html:187
+#: app/views/donors/viewDonor.html:209
+#: app/views/reports/donorsAdverseEventsReport.html:9
+#: app/views/testing/viewTestBatch.html:187
 #: app/views/testing/viewTestSample.html:42
 msgid "Venue"
 msgstr "[FR] Venue"
@@ -3430,10 +3770,25 @@ msgstr "[FR] Yes"
 msgid "donations"
 msgstr "[FR] donations"
 
+#: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:183
+#: app/scripts/controllers/reports/componentsProducedReport.js:235
+#: app/scripts/controllers/reports/transfusionsReport.js:48
+#: app/scripts/controllers/reports/unitsDiscardedReport.js:229
+msgid "sites"
+msgstr "[FR] sites"
+
 #: app/scripts/controllers/donors/donorCounselling.js:262
 #: app/views/donors/viewDonationSummary.html:46
 msgid "to"
 msgstr "[FR] to"
+
+#: app/scripts/controllers/reports/aboRhGroupsReport.js:268
+#: app/scripts/controllers/reports/donationTypesReport.js:193
+#: app/scripts/controllers/reports/donorsAdverseEventsReport.js:163
+#: app/scripts/controllers/reports/donorsDeferredReport.js:209
+#: app/scripts/controllers/reports/ttiPrevalenceReport.js:197
+msgid "venues"
+msgstr "[FR] venues"
 
 #: app/views/components/viewDonations.html:2
 msgid "{{count}} component(s) found"
@@ -3472,6 +3827,21 @@ msgstr ""
 msgid "{{count}} sample(s) found"
 msgstr "[FR] {{count}} sample(s) found"
 
+#: app/views/reports/bloodUnitsIssuedReport.html:41
+#: app/views/reports/componentsProducedReport.html:61
+#: app/views/reports/transfusionsReport.html:61
+#: app/views/reports/unitsDiscardedReport.html:61
+msgid "{{count}} site(s) found"
+msgstr "[FR] {{count}} site(s) found"
+
+#: app/views/reports/aboRhGroupsReport.html:41
+#: app/views/reports/donationTypesReport.html:41
+#: app/views/reports/donorsAdverseEventsReport.html:61
+#: app/views/reports/donorsDeferredReport.html:41
+#: app/views/reports/ttiPrevalenceReport.html:41
+msgid "{{count}} venue(s) found"
+msgstr "[FR] {{count}} venue(s) found"
+
 #: app/views/donors/mergeDonorsSelection.html:1
 msgid "{{duplicateCount}} possible duplicate donors identified."
 msgstr "[FR] {{duplicateCount}} possible duplicate donors identified."
@@ -3495,6 +3865,12 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid "All processing sites"
+#~ msgstr "[FR] All processing sites"
+
+#~ msgid "{{count}} sites(s) found"
+#~ msgstr "[FR] {{count}} sites(s) found"
 
 # Inventory Status Not In Stock
 #~ msgid "Not In Stock"
@@ -3550,9 +3926,6 @@ msgstr "[FR] {{total}} donation(s) in batch"
 
 #~ msgid "# of Donations"
 #~ msgstr "[FR] Number of Donations"
-
-#~ msgid "Data export"
-#~ msgstr "Exportation de Données"
 
 #~ msgid "Mobile"
 #~ msgstr "[FR] Mobile"

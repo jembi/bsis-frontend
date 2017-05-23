@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('AboRhGroupsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT) {
+  .controller('AboRhGroupsReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT, gettextCatalog) {
 
     // Initialize variables
 
@@ -96,20 +96,23 @@ angular.module('bsis')
     }
 
     function calculateSummary() {
+      var translatedMale = gettextCatalog.getString('Male');
+      var translatedFemale = gettextCatalog.getString('Female');
+
       summaryData = [
-        ['All venues', 'female', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        ['', 'male', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        ['', 'All', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        [gettextCatalog.getString('All venues'), translatedFemale, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ['', translatedMale, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ['', gettextCatalog.getString('All'), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       ];
       var summaryRow = null;
       angular.forEach(mergedData, function(row) {
-        if (row.cohorts === 'female') {
+        if (row.cohorts === translatedFemale) {
           summaryRow = summaryData[0];
         }
-        if (row.cohorts === 'male') {
+        if (row.cohorts === translatedMale) {
           summaryRow = summaryData[1];
         }
-        if (row.cohorts === 'All') {
+        if (row.cohorts === gettextCatalog.getString('All')) {
           summaryRow = summaryData[2];
         }
 
@@ -130,7 +133,6 @@ angular.module('bsis')
     }
 
     function mergeData(dataValues) {
-
       var previousVenue = '';
       var mergedFemaleRow = {};
       var mergedMaleRow = {};
@@ -138,7 +140,6 @@ angular.module('bsis')
       mergedData = [];
 
       angular.forEach(dataValues, function(newRow) {
-
         var cohorts = newRow.cohorts;
         var gender = cohorts[1].option;
         var bloodType = cohorts[2].option;
@@ -148,7 +149,7 @@ angular.module('bsis')
         if (newRow.location.name !== previousVenue) {
           $scope.venuesNumber += 1;
 
-          if (previousVenue != '') {
+          if (previousVenue !== '') {
             // Add female, male and all rows for previous venue
             addFemaleMaleAllRows(mergedFemaleRow, mergedMaleRow);
           }
@@ -173,6 +174,10 @@ angular.module('bsis')
       addFemaleMaleAllRows(mergedFemaleRow, mergedMaleRow);
 
       $scope.gridOptions.data = mergedData;
+
+      angular.forEach($scope.gridOptions.data, function(row) {
+        row.cohorts = gettextCatalog.getString($filter('titleCase')(row.cohorts));
+      });
     }
 
     $scope.getReport = function(selectPeriodForm) {
@@ -211,8 +216,8 @@ angular.module('bsis')
     // Grid ui variables and methods
 
     var columnDefs = [
-      { name: 'Venue', field: 'venue' },
-      { name: 'Gender', field: 'cohorts'},
+      { name: 'Venue', displayName: gettextCatalog.getString('Venue'), field: 'venue' },
+      { name: 'Gender', displayName: gettextCatalog.getString('Gender'), field: 'cohorts'},
       { name: 'A+', field: 'aPlus', width: 55 },
       { name: 'A-', field: 'aMinus', width: 55 },
       { name: 'B+', field: 'bPlus', width: 55 },
@@ -221,8 +226,8 @@ angular.module('bsis')
       { name: 'AB-', displayName: 'AB-', field: 'abMinus', width: 65 },
       { name: 'O+', field: 'oPlus', width: 55 },
       { name: 'O-', field: 'oMinus', width: 55 },
-      { name: 'NTD', displayName: 'NTD', field: 'empty', width: 65 },
-      { name: 'Total', field: 'total' }
+      { name: 'NTD', displayName: gettextCatalog.getString('NTD'), field: 'empty', width: 65 },
+      { name: 'Total', displayName: gettextCatalog.getString('Total'), field: 'total' }
     ];
 
     $scope.gridOptions = {
@@ -244,7 +249,7 @@ angular.module('bsis')
           calculateSummary();
           docDefinition = ReportsLayoutService.addSummaryContent(summaryData, docDefinition);
         }
-        docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
+        docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('All'), 1, docDefinition);
         docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
         return docDefinition;
       },
@@ -252,14 +257,17 @@ angular.module('bsis')
       // PDF header
       exporterPdfHeader: function() {
         var header =  ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-          'ABO Rh Blood Grouping Report',
-          ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
+          gettextCatalog.getString('ABO Rh Blood Grouping Report'),
+          gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}));
         return header;
       },
 
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
-        return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
+        return ReportsLayoutService.generatePdfPageFooter(
+          gettextCatalog.getString('venues'), $scope.venuesNumber,
+          currentPage, pageCount,
+          $scope.gridOptions.exporterPdfOrientation);
       },
 
       onRegisterApi: function(gridApi) {
