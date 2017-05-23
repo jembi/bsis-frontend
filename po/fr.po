@@ -3219,7 +3219,7 @@ msgstr ""
 
 #: app/messages.html:19
 msgid ""
-"There is no component in ISSUED state for specified din and component code"
+"There is no component in ISSUED state for specified DIN and component code"
 msgstr ""
 "Il n'y a pas de composant avec un statut ENVOYÉ pour le DIN et le code de "
 "composant sélétionnés"
@@ -3860,6 +3860,12 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid ""
+#~ "There is no component in ISSUED state for specified din and component code"
+#~ msgstr ""
+#~ "Il n'y a pas de composant avec un statut ENVOYÉ pour le DIN et le code de "
+#~ "composant sélétionnés"
 
 #~ msgid ""
 #~ "Component with DIN {{din}} and ComponentCode {{componentCode}} not found."
