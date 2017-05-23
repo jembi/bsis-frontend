@@ -37,7 +37,7 @@ angular.module('bsis').controller('TransfusionsReportCtrl', function($scope, $lo
 
     // Change formatting of PDF
     exporterPdfCustomFormatter: function(docDefinition) {
-      docDefinition = ReportsLayoutService.highlightTotalRows('All Sites', 0, docDefinition);
+      docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('All Sites'), 0, docDefinition);
       docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
       return docDefinition;
     },
