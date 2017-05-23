@@ -147,7 +147,7 @@ angular.module('bsis')
 
         populateRows(rowsForVenue, newRow, componentTypeIndex);
         // Update venue for summary
-        newRow.location.name = gettextCatalog.getString('All processing sites');
+        newRow.location.name = gettextCatalog.getString('All Processing Sites');
         populateRows(summaryRows, newRow, summaryComponentTypeMap[componentType]);
       });
 

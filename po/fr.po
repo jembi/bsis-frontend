@@ -163,6 +163,11 @@ msgstr "Tous"
 msgid "All Components"
 msgstr "[FR] All Components"
 
+#: app/scripts/controllers/reports/componentsProducedReport.js:108
+#: app/scripts/controllers/reports/unitsDiscardedReport.js:150
+msgid "All Processing Sites"
+msgstr "[FR] All Processing Sites"
+
 #: app/scripts/controllers/testing/viewTestBatch.js:16
 msgid "All Samples"
 msgstr "[FR] All Samples"
@@ -180,10 +185,6 @@ msgstr "Tous les Sites"
 #: app/scripts/controllers/reports/donorsDeferredReport.js:68
 msgid "All Venues"
 msgstr "[FR] All Venues"
-
-#: app/scripts/controllers/reports/unitsDiscardedReport.js:150
-msgid "All processing sites"
-msgstr "[FR] All processing sites"
 
 #: app/views/donors/findDonor.html:38
 msgid "All search fields cannot be empty"
@@ -3864,6 +3865,9 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid "All processing sites"
+#~ msgstr "[FR] All processing sites"
 
 #~ msgid "{{count}} sites(s) found"
 #~ msgstr "[FR] {{count}} sites(s) found"

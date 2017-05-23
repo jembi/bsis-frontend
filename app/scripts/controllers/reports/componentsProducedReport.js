@@ -105,7 +105,7 @@ angular.module('bsis')
       var rowsForVenue = [];
 
       mergedData = [];
-      summaryRows = initRowsForVenue('All Processing Sites');
+      summaryRows = initRowsForVenue(gettextCatalog.getString('All Processing Sites'));
       $scope.sitesNumber = 0;
 
       angular.forEach(dataValues, function(newRow) {
