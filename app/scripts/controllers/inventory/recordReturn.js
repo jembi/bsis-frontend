@@ -190,7 +190,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     });
 
     if (components.length === $scope.components.length) {
-      showErrorMessage(gettextCatalog.getString('Component {{din}} ({{componentCode}}) was not found in this Return Form.', {din: $scope.component.din, componentCode: $scope.component.componentCode}));
+      showErrorMessage(gettextCatalog.getString('Component {{DIN}} ({{componentCode}}) was not found in this Return Form.', {DIN: $scope.component.din, componentCode: $scope.component.componentCode}));
     } else {
       $scope.components = components;
       $scope.component = angular.copy(componentMaster);
@@ -212,14 +212,14 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
     ComponentService.findComponent(searchParams, function(component) {
       if (component.status !== 'ISSUED') {
         // check if component status is ISSUED
-        showErrorMessage(gettextCatalog.getString('Component {{din}} ({{componentCode}}) has not been issued.', {din: $scope.component.din, componentCode: $scope.component.componentCode}));
+        showErrorMessage(gettextCatalog.getString('Component {{DIN}} ({{componentCode}}) has not been issued.', {DIN: $scope.component.din, componentCode: $scope.component.componentCode}));
       } else {
         // check if component has already been added
         var componentAlreadyAdded = $scope.components.some(function(e) {
           return e.id === component.id;
         });
         if (componentAlreadyAdded) {
-          showErrorMessage(gettextCatalog.getString('Component {{din}} ({{componentCode}}) has already been added to this Return Form.', {din: $scope.component.din, componentCode: $scope.component.componentCode}));
+          showErrorMessage(gettextCatalog.getString('Component {{DIN}} ({{componentCode}}) has already been added to this Return Form.', {DIN: $scope.component.din, componentCode: $scope.component.componentCode}));
         } else {
           // add component to Return Form and reset the form
           $scope.components.push(component);
@@ -231,7 +231,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       $scope.addingComponent = false;
     }, function(err) {
       if (err.errorCode === 'NOT_FOUND') {
-        showErrorMessage(gettextCatalog.getString('Component with DIN {{din}} and ComponentCode {{componentCode}} not found.', {din: $scope.component.din, componentCode: $scope.component.componentCode}));
+        showErrorMessage(gettextCatalog.getString('Component with DIN {{DIN}} and ComponentCode {{componentCode}} not found.', {DIN: $scope.component.din, componentCode: $scope.component.componentCode}));
       } else {
         $log.error(err);
       }
