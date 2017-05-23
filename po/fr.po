@@ -175,6 +175,7 @@ msgstr "[FR] All Samples"
 #: app/scripts/controllers/inventory/viewStockLevels.js:59
 #: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:156
 #: app/scripts/controllers/reports/transfusionsReport.js:172
+#: app/scripts/controllers/reports/transfusionsReport.js:40
 #: app/views/components/findComponents.html:26
 #: app/views/inventory/findInventory.html:40
 #: app/views/inventory/viewStockLevels.html:18
@@ -683,17 +684,11 @@ msgid "Component weight exceeds weight of parent component"
 msgstr "[FR] Component weight exceeds weight of parent component"
 
 #: app/scripts/controllers/inventory/fulfilOrder.js:300
+#: app/scripts/controllers/inventory/recordReturn.js:234
 msgid ""
 "Component with DIN {{DIN}} and ComponentCode {{componentCode}} not found."
 msgstr ""
 "Composant avec DIN {{DIN}} et code de composant {{componentCode}} non trouvé."
-
-#: app/scripts/controllers/inventory/recordReturn.js:234
-msgid ""
-"Component with DIN {{din}} and ComponentCode {{componentCode}} not found."
-msgstr ""
-"Aucun composant avec DIN {{din}} et code de composant {{componentCode}} "
-"trouvé."
 
 #: app/scripts/controllers/inventory/fulfilOrder.js:285
 msgid "Component {{DIN}} ({{componentCode}}) does not match what was ordered."
@@ -708,6 +703,14 @@ msgstr ""
 "Le composant {{DIN}} ({{componentCode}}) a déjà été ajouté à ce Formulaire "
 "de Commande."
 
+#: app/scripts/controllers/inventory/recordReturn.js:222
+msgid ""
+"Component {{DIN}} ({{componentCode}}) has already been added to this Return "
+"Form."
+msgstr ""
+"Composant {{din}} ({{componentCode}}) a déjà été ajouté à ce Formulaire de "
+"Retour."
+
 #: app/scripts/controllers/inventory/fulfilOrder.js:272
 msgid ""
 "Component {{DIN}} ({{componentCode}}) has already been assigned to another "
@@ -715,6 +718,10 @@ msgid ""
 msgstr ""
 "Le composant {{DIN}} ({{componentCode}}) a déjà été ajouté à un autre "
 "Formulaire de Commande."
+
+#: app/scripts/controllers/inventory/recordReturn.js:215
+msgid "Component {{DIN}} ({{componentCode}}) has not been issued."
+msgstr "Le composant {{din}} ({{componentCode}}) n'a pas été émi."
 
 #: app/scripts/controllers/inventory/fulfilOrder.js:249
 msgid ""
@@ -740,21 +747,9 @@ msgstr ""
 "Le composant {{DIN}} ({{componentCode}}) n'a pas été trouvé dans ce "
 "formulaire de commande."
 
-#: app/scripts/controllers/inventory/recordReturn.js:222
-msgid ""
-"Component {{din}} ({{componentCode}}) has already been added to this Return "
-"Form."
-msgstr ""
-"Composant {{din}} ({{componentCode}}) a déjà été ajouté à ce Formulaire de "
-"Retour."
-
-#: app/scripts/controllers/inventory/recordReturn.js:215
-msgid "Component {{din}} ({{componentCode}}) has not been issued."
-msgstr "Le composant {{din}} ({{componentCode}}) n'a pas été émi."
-
 #: app/scripts/controllers/inventory/recordReturn.js:193
 msgid ""
-"Component {{din}} ({{componentCode}}) was not found in this Return Form."
+"Component {{DIN}} ({{componentCode}}) was not found in this Return Form."
 msgstr ""
 "Le composant {{din}} ({{componentCode}}) n'a pas été trouvé dans ce "
 "formulaire de retour."
@@ -3224,7 +3219,7 @@ msgstr ""
 
 #: app/messages.html:19
 msgid ""
-"There is no component in ISSUED state for specified din and component code"
+"There is no component in ISSUED state for specified DIN and component code"
 msgstr ""
 "Il n'y a pas de composant avec un statut ENVOYÉ pour le DIN et le code de "
 "composant sélétionnés"
@@ -3865,6 +3860,34 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid ""
+#~ "There is no component in ISSUED state for specified din and component code"
+#~ msgstr ""
+#~ "Il n'y a pas de composant avec un statut ENVOYÉ pour le DIN et le code de "
+#~ "composant sélétionnés"
+
+#~ msgid ""
+#~ "Component with DIN {{din}} and ComponentCode {{componentCode}} not found."
+#~ msgstr ""
+#~ "Aucun composant avec DIN {{din}} et code de composant {{componentCode}} "
+#~ "trouvé."
+
+#~ msgid ""
+#~ "Component {{din}} ({{componentCode}}) has already been added to this "
+#~ "Return Form."
+#~ msgstr ""
+#~ "Composant {{din}} ({{componentCode}}) a déjà été ajouté à ce Formulaire "
+#~ "de Retour."
+
+#~ msgid "Component {{din}} ({{componentCode}}) has not been issued."
+#~ msgstr "Le composant {{din}} ({{componentCode}}) n'a pas été émi."
+
+#~ msgid ""
+#~ "Component {{din}} ({{componentCode}}) was not found in this Return Form."
+#~ msgstr ""
+#~ "Le composant {{din}} ({{componentCode}}) n'a pas été trouvé dans ce "
+#~ "formulaire de retour."
 
 #~ msgid "All processing sites"
 #~ msgstr "[FR] All processing sites"
