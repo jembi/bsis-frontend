@@ -68,7 +68,7 @@ angular.module('bsis')
         field: 'eligibility',
         name: 'eligibility',
         displayName: gettextCatalog.getString('Eligibility'),
-        cellFilter: 'eligibility',
+        cellFilter: 'eligibility | translate',
         maxWidth: '150'
       }
     ];
