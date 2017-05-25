@@ -708,7 +708,7 @@ msgid ""
 "Component {{DIN}} ({{componentCode}}) has already been added to this Return "
 "Form."
 msgstr ""
-"Composant {{din}} ({{componentCode}}) a déjà été ajouté à ce Formulaire de "
+"Composant {{DIN}} ({{componentCode}}) a déjà été ajouté à ce Formulaire de "
 "Retour."
 
 #: app/scripts/controllers/inventory/fulfilOrder.js:272
@@ -721,7 +721,7 @@ msgstr ""
 
 #: app/scripts/controllers/inventory/recordReturn.js:215
 msgid "Component {{DIN}} ({{componentCode}}) has not been issued."
-msgstr "Le composant {{din}} ({{componentCode}}) n'a pas été émi."
+msgstr "Le composant {{DIN}} ({{componentCode}}) n'a pas été émi."
 
 #: app/scripts/controllers/inventory/fulfilOrder.js:249
 msgid ""
@@ -751,7 +751,7 @@ msgstr ""
 msgid ""
 "Component {{DIN}} ({{componentCode}}) was not found in this Return Form."
 msgstr ""
-"Le composant {{din}} ({{componentCode}}) n'a pas été trouvé dans ce "
+"Le composant {{DIN}} ({{componentCode}}) n'a pas été trouvé dans ce "
 "formulaire de retour."
 
 #: app/views/reports/componentsProducedReport.html:3
