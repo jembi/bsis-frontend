@@ -101,8 +101,10 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
 
     // Format values for exports
     exporterFieldCallback: function(grid, row, col, value) {
-      if (col.name === 'birthDate' || col.name === 'donationDate') {
+      if (col.field === 'birthDate' || col.field === 'donationDate') {
         return $filter('bsisDate')(value);
+      } else if (col.field === 'gender') {
+        return gettextCatalog.getString($filter('titleCase')(value));
       } else {
         return value;
       }
