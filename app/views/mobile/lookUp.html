@@ -41,7 +41,7 @@
     <div class="panel panel-default" ng-if="currentSearch && !searching">
         <div class="panel-body">
             <p>
-                <em translate translate-params-count="gridOptions.data.length">{{count}} donor(s) found</em>&nbsp;|&nbsp;<span translate translate-params-number-eligible-donors="numberEligibleDonors" translate-params-total-donors="gridOptions.data.length" translate-params-percentage="percentageEligibleDonor">Eligible Donors: {{numberEligibleDonors}} out of {{totalDonors}} ({{percentage}}%)</span>&nbsp;|&nbsp;<em translate>Data export</em>
+                <em translate translate-params-count="gridOptions.data.length">{{count}} donor(s) found</em>&nbsp;|&nbsp;<span translate translate-params-number-eligible-donors="numberEligibleDonors" translate-params-total-donors="gridOptions.data.length" translate-params-percentage="percentageEligibleDonor">Eligible Donors: {{numberEligibleDonors}} out of {{totalDonors}} ({{percentage}}%)</span>&nbsp;|&nbsp;<em translate>Data Export</em>
                 <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')" translate>PDF</button>
             </p>
             <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
