@@ -2,7 +2,7 @@
 <div class="col-sm-9 col-md-10 main">
     <h3 class="page-header">Mobile Clinic Look Up</h3>
 
-    <form name="mobileClinicLookUpForm" class="form-horizontal" style="padding:10px 0;" ng-submit="onSearch(mobileClinicLookUpForm)">
+    <form name="mobileClinicLookUpForm" class="form-horizontal" style="padding:10px 0;" ng-submit="onSearch(mobileClinicLookUpForm)" novalidate>
 
         <div class="clearfix form-group">
             <label class="col-sm-2 control-label" translate>Venue</label>
@@ -45,7 +45,7 @@
     <div class="panel panel-default" ng-if="currentSearch && !searching">
         <div class="panel-body">
             <p>
-                <em translate translate-params-count="gridOptions.data.length">{{count}} donor(s) found</em>&nbsp;|&nbsp;<span translate translate-params-number-eligible-donor="numberEligibleDonor"translate-params-total-donors="gridOptions.data.length" translate-params-percentage="percentageEligibleDonor">Eligible Donors: {{numberEligibleDonor}} out of {{totalDonors}} ({{percentage}}%)</span>&nbsp;|&nbsp;<em translate>Data export</em>
+                <em translate translate-params-count="gridOptions.data.length">{{count}} donor(s) found</em>&nbsp;|&nbsp;<span translate translate-params-number-eligible-donors="numberEligibleDonors"translate-params-total-donors="gridOptions.data.length" translate-params-percentage="percentageEligibleDonor">Eligible Donors: {{numberEligibleDonors}} out of {{totalDonors}} ({{percentage}}%)</span>&nbsp;|&nbsp;<em translate>Data export</em>
                 <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')" translate>PDF</button>
             </p>
             <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>

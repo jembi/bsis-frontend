@@ -105,8 +105,8 @@ angular.module('bsis')
         }
 
         // Include Number and Percentage Eligible Donors
-        columns.push({text: gettextCatalog.getString('Eligible Donors: {{numberEligibleDonor}} out of {{totalDonors}} ({{percentage}}%)',
-          { numberEligibleDonor: $scope.numberEligibleDonor, totalDonors: $scope.gridOptions.data.length, percentage: $scope.percentageEligibleDonor}),
+        columns.push({text: gettextCatalog.getString('Eligible Donors: {{numberEligibleDonors}} out of {{totalDonors}} ({{percentage}}%)',
+          { numberEligibleDonors: $scope.numberEligibleDonors, totalDonors: $scope.gridOptions.data.length, percentage: $scope.percentageEligibleDonor}),
           width: 'auto'});
 
         return [
@@ -180,8 +180,8 @@ angular.module('bsis')
       $scope.searching = true;
       MobileService.mobileClinicLookUp(search, function(res) {
         $scope.gridOptions.data = res.donors;
-        $scope.numberEligibleDonor = calculateNumberEligibleDonors($scope.gridOptions.data);
-        $scope.percentageEligibleDonor = calculatePercentageEligibleDonors($scope.numberEligibleDonor, $scope.gridOptions.data.length);
+        $scope.numberEligibleDonors = calculateNumberEligibleDonors($scope.gridOptions.data);
+        $scope.percentageEligibleDonor = calculatePercentageEligibleDonors($scope.numberEligibleDonors, $scope.gridOptions.data.length);
         $scope.gridOptions.paginationCurrentPage = 1;
         $scope.searching = false;
       }, function(err) {
