@@ -85,7 +85,8 @@ angular.module('bsis')
         if (col.name === 'birthDate') {
           return $filter('bsisDate')(value);
         } else if (col.name === 'eligibility') {
-          return $filter('eligibility')(value);
+          return gettextCatalog.getString($filter('eligibility')(value));
+
         } else {
           return value;
         }
