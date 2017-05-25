@@ -46,8 +46,8 @@
     <div class="panel-body">
       <div style="margin-bottom:5px;">
         <em translate translate-params-count="gridOptions.data.length">{{count}} donor(s) found</em> | <em translate>Data Export</em>
-        <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')" translate>CSV</button>
         <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')" translate>PDF</button>
+        <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')" translate>CSV</button>
       </div>
       <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
     </div>
