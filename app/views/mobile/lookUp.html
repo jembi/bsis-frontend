@@ -10,19 +10,12 @@
                 <select name="venue" class="form-control input-sm"
                         ng-model="search.venue"
                         ng-options="item.id as item.name disable when (item.disabled || item.isDeleted) for item in venues"
-                        required
-                        ng-class="{'ng-invalid ng-dirty' : mobileClinicLookUpForm.venue.$invalid && submitted}">
+                        required>
                     <option value="" ng-disabled="true"></option>
                 </select>
-                <div>
-                    <small class="error"
-                           ng-show="(mobileClinicLookUpForm.venue.$invalid && (addDonationBatchForm.venue.$dirty || submitted))">
-                        <span translate>This cannot be empty</span>
-                    </small>
-                    <small class="error" ng-show="err['search.venue']">
-                        {{err["search.venue"]}}
-                    </small>
-                </div>
+                <ng-messages for="mobileClinicLookUpForm.venue.$error" role="alert" ng-show="mobileClinicLookUpForm.$submitted">
+                    <ng-messages-include src="messages.html"></ng-messages-include>
+                </ng-messages>
             </div>
         </div>
 
@@ -30,8 +23,11 @@
             <label class="col-sm-2 control-label" translate>Clinic Date</label>
             <div class="form-inline col-sm-10">
                 <div>
-                    <dateselect ng-model="search.clinicDate" format="dateFormat" ng-required="true"></dateselect>
+                    <dateselect name="clinicDate" ng-model="search.clinicDate" format="dateFormat" ng-required="true"></dateselect>
                 </div>
+                <ng-messages for="mobileClinicLookUpForm.clinicDate.$error" role="alert" ng-show="mobileClinicLookUpForm.$submitted">
+                    <ng-messages-include src="messages.html"></ng-messages-include>
+                </ng-messages>
             </div>
         </div>
 
