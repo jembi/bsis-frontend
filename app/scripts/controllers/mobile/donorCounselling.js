@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope, $log, $filter, $location, $routeParams, $timeout, MobileService, uiGridConstants, uiGridExporterConstants, DATEFORMAT, gettextCatalog) {
+angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope, $log, $filter, $location, $routeParams, $timeout, MobileService, uiGridConstants, uiGridExporterConstants, gettextCatalog, DATEFORMAT) {
 
   // Initialise controller variables
   var columnDefs = [
