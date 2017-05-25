@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('MobileClinicExportCtrl', function($scope, $filter, $location, $routeParams, $log, MobileService, uiGridExporterConstants, DATEFORMAT) {
+  .controller('MobileClinicExportCtrl', function($scope, $filter, $location, $routeParams, $log, gettextCatalog, MobileService, uiGridExporterConstants, DATEFORMAT) {
 
     $scope.dateFormat = DATEFORMAT;
 
@@ -21,53 +21,54 @@ angular.module('bsis')
       {
         field: 'venue.name',
         name: 'venue',
-        displayName: 'Venue',
+        displayName: gettextCatalog.getString('Venue'),
         width: '**'
       },
       {
         field: 'donorNumber',
         name: 'donorNumber',
-        displayName: 'Donor Number',
+        displayName: gettextCatalog.getString('Donor Number'),
         width: '**',
         maxWidth: '125'
       },
       {
         field: 'firstName',
         name: 'firstName',
-        displayName: 'First Name',
+        displayName: gettextCatalog.getString('First Name'),
         width: '**'
       },
       {
         field: 'lastName',
         name: 'lastName',
-        displayName: 'Last Name',
+        displayName: gettextCatalog.getString('Last Name'),
         width: '**'
       },
       {
         field: 'gender',
         name: 'gender',
-        displayName: 'Gender',
+        displayName: gettextCatalog.getString('Gender'),
+        cellFilter: 'titleCase | translate',
         width: '**',
         maxWidth: '80'
       },
       {
         field: 'birthDate',
         name: 'birthDate',
-        displayName: 'Date of Birth',
+        displayName: gettextCatalog.getString('Date of Birth'),
         cellFilter: 'bsisDate',
         maxWidth: '150'
       },
       {
         field: 'bloodType',
         name: 'bloodType',
-        displayName: 'Blood Type',
+        displayName: gettextCatalog.getString('Blood Type'),
         maxWidth: '100'
       },
       {
         field: 'eligibility',
         name: 'eligibility',
-        displayName: 'Eligibility',
-        cellFilter: 'eligibility',
+        displayName: gettextCatalog.getString('Eligibility'),
+        cellFilter: 'eligibility | translate',
         maxWidth: '150'
       }
     ];
@@ -173,7 +174,7 @@ angular.module('bsis')
         if (err && err.userMessage) {
           $scope.error.message = err.userMessage;
         } else {
-          $scope.error.message = 'An error occurred.';
+          $scope.error.message = gettextCatalog.getString('An error occurred.');
         }
       });
     }
