@@ -10,9 +10,9 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
     {field: 'gender', displayName: gettextCatalog.getString('Gender'), cellFilter: 'titleCase|translate'},
     {field: 'birthDate', displayName: gettextCatalog.getString('Birth Date'), cellFilter: 'bsisDate'},
     {field: 'donationDate', displayName: gettextCatalog.getString('Donation Date'), cellFilter: 'bsisDate'},
-    {displayName: 'DIN', displayName: gettextCatalog.getString('DIN'), field: 'donationIdentificationNumber'},
-    {displayName: 'ABO', displayName: gettextCatalog.getString('ABO'), field: 'bloodAbo'},
-    {displayName: 'Rh', displayName: gettextCatalog.getString('Rh'), field: 'bloodRh'}
+    {field: 'donationIdentificationNumber', displayName: gettextCatalog.getString('DIN')},
+    {field: 'bloodAbo', displayName: gettextCatalog.getString('ABO')},
+    {field: 'bloodRh', displayName: gettextCatalog.getString('Rh')}
   ];
   var masterSearch = {
     venueId: null,
