@@ -82,11 +82,12 @@ angular.module('bsis')
 
       // Format values for exports
       exporterFieldCallback: function(grid, row, col, value) {
-        if (col.name === 'birthDate') {
+        if (col.field === 'birthDate') {
           return $filter('bsisDate')(value);
-        } else if (col.name === 'eligibility') {
+        } else if (col.field === 'eligibility') {
           return gettextCatalog.getString($filter('eligibility')(value));
-
+        } else if (col.field === 'gender') {
+          return gettextCatalog.getString($filter('titleCase')(value));
         } else {
           return value;
         }
