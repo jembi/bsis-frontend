@@ -4,7 +4,7 @@ angular.module('bsis')
   .controller('HeaderCtrl', function($scope, $location, AuthService, ConfigurationsService, ICONS, PERMISSIONS, UI) {
 
     $scope.icons = ICONS;
-    var urlRegexPattern = '([0-9a-f\-]{36})+';
+    var uuidRegexPattern = '[0-9a-f\\-]*';
     $scope.warningMessage = ConfigurationsService.getStringValue('ui.header.warningMessage');
 
     $scope.isPasswordReset = function() {
@@ -85,14 +85,14 @@ angular.module('bsis')
       '/manageDuplicateDonors',
       '/manageDonors',
       '/addDonor',
-      '/viewDonor/' + urlRegexPattern,
+      '/viewDonor/' + uuidRegexPattern,
       '/addDonation',
       '/manageDonationBatches',
       '/manageClinic',
       '/donorCounselling',
       '/exportDonorList',
-      '/donorCounselling/' + urlRegexPattern,
-      '/manageClinic/' + urlRegexPattern
+      '/donorCounselling/' + uuidRegexPattern,
+      '/manageClinic/' + uuidRegexPattern
     ];
 
     var componentsRoutes = [
@@ -102,7 +102,7 @@ angular.module('bsis')
       '/findDiscards',
       '/discardComponents',
       '/addComponentBatch',
-      '/viewComponentBatch/' + urlRegexPattern,
+      '/viewComponentBatch/' + uuidRegexPattern,
       '/viewComponentBatches'
     ];
 
@@ -110,14 +110,14 @@ angular.module('bsis')
       '/testing',
       '/viewTestSample',
       '/manageTestBatch',
-      '/viewTestBatch/' + urlRegexPattern,
-      '/manageTTITesting/' + urlRegexPattern + '/\\w+',
-      '/reEnterTTI/' + urlRegexPattern + '/\\w+',
-      '/reEnterBloodTyping/' + urlRegexPattern + '/\\w+',
-      '/managePendingTests/' + urlRegexPattern + '/\\w+',
-      '/manageBloodGroupTesting/' + urlRegexPattern + '/\\w+',
-      '/managePendingBloodTypingTests/' + urlRegexPattern + '/\\w+',
-      '/manageBloodGroupMatchTesting/' + urlRegexPattern
+      '/viewTestBatch/' + uuidRegexPattern,
+      '/manageTTITesting/' + uuidRegexPattern + '/\\w+',
+      '/reEnterTTI/' + uuidRegexPattern + '/\\w+',
+      '/reEnterBloodTyping/' + uuidRegexPattern + '/\\w+',
+      '/managePendingTests/' + uuidRegexPattern + '/\\w+',
+      '/manageBloodGroupTesting/' + uuidRegexPattern + '/\\w+',
+      '/managePendingBloodTypingTests/' + uuidRegexPattern + '/\\w+',
+      '/manageBloodGroupMatchTesting/' + uuidRegexPattern
     ];
 
     var inventoryRoutes = [
@@ -125,12 +125,12 @@ angular.module('bsis')
       '/findInventory',
       '/viewStockLevels',
       '/manageOrders',
-      '/fulfilOrder/' + urlRegexPattern,
-      '/viewOrder/' + urlRegexPattern,
+      '/fulfilOrder/' + uuidRegexPattern,
+      '/viewOrder/' + uuidRegexPattern,
       '/viewOrders',
       '/manageReturns',
-      '/recordReturn/' + urlRegexPattern,
-      '/viewReturn/' + urlRegexPattern,
+      '/recordReturn/' + uuidRegexPattern,
+      '/viewReturn/' + uuidRegexPattern,
       '/viewReturns',
       '/recordTransfusions',
       '/findTransfusion'
@@ -166,39 +166,39 @@ angular.module('bsis')
       '/settings',
       '/accountSettings',
       '/locations',
-      '/manageLocation/?' + urlRegexPattern,
+      '/manageLocation/?' + uuidRegexPattern,
       '/componentTypes',
-      '/manageComponentType/?' + urlRegexPattern,
-      '/manageComponentTypeCombination/?' + urlRegexPattern,
+      '/manageComponentType/?' + uuidRegexPattern,
+      '/manageComponentTypeCombination/?' + uuidRegexPattern,
       '/deferralReasons',
-      '/manageDeferralReason/?' + urlRegexPattern,
+      '/manageDeferralReason/?' + uuidRegexPattern,
       '/discardReasons',
-      '/manageDiscardReason/?' + urlRegexPattern,
+      '/manageDiscardReason/?' + uuidRegexPattern,
       '/configurations',
-      '/manageConfiguration/?' + urlRegexPattern,
+      '/manageConfiguration/?' + uuidRegexPattern,
       '/users',
-      '/manageUser/?' + urlRegexPattern,
+      '/manageUser/?' + uuidRegexPattern,
       '/roles',
-      '/manageRole/?' + urlRegexPattern,
+      '/manageRole/?' + uuidRegexPattern,
       '/donationTypes',
-      '/manageDonationType/?' + urlRegexPattern,
+      '/manageDonationType/?' + uuidRegexPattern,
       '/packTypes',
-      '/managePackType/?' + urlRegexPattern,
+      '/managePackType/?' + uuidRegexPattern,
       '/auditLog',
       '/adverseEventTypes',
       '/addAdverseEventType',
-      '/editAdverseEventType/?' + urlRegexPattern,
+      '/editAdverseEventType/?' + uuidRegexPattern,
       '/divisions',
       '/manageDivision',
-      '/manageDivision/?' + urlRegexPattern,
+      '/manageDivision/?' + uuidRegexPattern,
       '/dataExport',
       '/componentTypeCombinations',
       '/bloodTests',
-      '/manageBloodTest/?' + urlRegexPattern,
+      '/manageBloodTest/?' + uuidRegexPattern,
       '/bloodTestingRules',
-      '/manageBloodTestingRule/?' + urlRegexPattern,
+      '/manageBloodTestingRule/?' + uuidRegexPattern,
       '/transfusionReactionTypes',
-      '/manageTransfusionReactionType/?' + urlRegexPattern
+      '/manageTransfusionReactionType/?' + uuidRegexPattern
     ];
 
     /**
