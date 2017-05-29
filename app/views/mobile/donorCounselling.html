@@ -1,11 +1,11 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/mobile/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-  <h3 class="page-header">Donor Counselling</h3>
+  <h3 class="page-header" translate>Donor Counselling</h3>
 
   <form name="donorCounsellingForm" class="form-horizontal" style="padding:10px 0;" ng-submit="getDonorOutcomes()" novalidate>
 
     <div class="form-group">
-      <label class="col-sm-2 control-label">Venue:</label>
+      <label class="col-sm-2 control-label" translate>Venue</label>
       <div class="form-inline col-sm-10">
         <select name="venue" class="form-control input-sm" ng-model="search.venueId" ng-options="item.id as item.name for item in venues" required>
           <option value="" ng-disabled="true"></option>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-group">
-      <label class="col-sm-2 control-label">Start Date:</label>
+      <label class="col-sm-2 control-label" translate>Start Date</label>
       <div class="form-inline col-sm-10">
         <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-required="true"></dateselect>
         <ng-messages for="donorCounsellingForm.startDate.$error" ng-show="donorCounsellingForm.$submitted">
@@ -27,7 +27,7 @@
     </div>
 
     <div class="form-group">
-      <label class="col-sm-2 control-label">End Date:</label>
+      <label class="col-sm-2 control-label" translate>End Date</label>
       <div class="form-inline col-sm-10">
         <dateselect name="endDate" ng-model="search.endDate" format="dateFormat" ng-required="true"></dateselect>
         <ng-messages for="donorCounsellingForm.endDate.$error" ng-show="donorCounsellingForm.$submitted">
@@ -37,17 +37,17 @@
     </div>
 
     <div class="col-sm-offset-2">
-      <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search"}}</button>
-      <button class="btn btn-primary" type="button" ng-click="clearSearch()">Clear</button>
+      <button class="btn btn-primary" type="submit" ng-disabled="searching">{{searching ? "Searching..." : "Search" | translate}}</button>
+      <button class="btn btn-primary" type="button" ng-click="clearSearch()" translate>Clear</button>
     </div>
   </form>
 
   <div class="panel panel-default" ng-if="gridOptions.data != null">
     <div class="panel-body">
       <div style="margin-bottom:5px;">
-        <em>{{gridOptions.data.length}} donor(s) found</em> | <em> Data export: </em>
-        <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')">CSV</button>
-        <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')">PDF</button>
+        <em translate translate-params-count="gridOptions.data.length">{{count}} donor(s) found</em> | <em translate>Data Export</em>
+        <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')" translate>PDF</button>
+        <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')" translate>CSV</button>
       </div>
       <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
     </div>

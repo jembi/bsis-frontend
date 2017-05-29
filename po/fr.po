@@ -32,6 +32,10 @@ msgstr "[FR] % Issued vs Requests"
 msgid "+"
 msgstr "[FR] +"
 
+#: app/scripts/controllers/mobile/donorCounselling.js:14
+msgid "ABO"
+msgstr "[FR] ABO"
+
 #: app/scripts/controllers/reports/aboRhGroupsReport.js:260
 #: app/views/reports/aboRhGroupsReport.html:3 app/views/reports/sidebar.html:13
 msgid "ABO Rh Blood Grouping Report"
@@ -184,6 +188,7 @@ msgid "All Sites"
 msgstr "Tous les Sites"
 
 #: app/scripts/controllers/reports/donorsDeferredReport.js:68
+#: app/views/mobile/mobileClinicExport.html:23
 msgid "All Venues"
 msgstr "[FR] All Venues"
 
@@ -205,6 +210,10 @@ msgstr "[FR] All venues"
 #: app/views/translations.html:54
 msgid "Ambiguous"
 msgstr "[FR] Ambiguous"
+
+#: app/scripts/controllers/mobile/mobileClinicExport.js:178
+msgid "An error occurred."
+msgstr "[FR] An error occurred."
 
 #: app/scripts/controllers/donors/donorCommunications.js:128
 #: app/scripts/controllers/donors/donorCounselling.js:255
@@ -336,6 +345,7 @@ msgstr "[FR] Batch Date"
 msgid "Batch Status"
 msgstr "[FR] Batch Status"
 
+#: app/scripts/controllers/mobile/donorCounselling.js:11
 #: app/views/donors/duplicateDonors.html:35
 msgid "Birth Date"
 msgstr "Date de naissance"
@@ -437,6 +447,11 @@ msgstr "[FR] Blood Transport Box Temperature"
 msgid "Blood Transport box"
 msgstr "[FR] Blood Transport box"
 
+#: app/scripts/controllers/mobile/mobile.js:55
+#: app/scripts/controllers/mobile/mobileClinicExport.js:64
+msgid "Blood Type"
+msgstr "[FR] Blood Type"
+
 #: app/scripts/controllers/testing/viewTestBatch.js:32
 msgid "Blood Typing Issues or Incomplete"
 msgstr "[FR] Blood Typing Issues or Incomplete"
@@ -467,6 +482,8 @@ msgstr "[FR] Box #{{boxNumber}}"
 #: app/views/inventory/findTransfusion.html:91
 #: app/views/inventory/viewStockLevels.html:49
 #: app/views/labelling/findSafeComponents.html:143
+#: app/views/mobile/donorCounselling.html:50
+#: app/views/mobile/mobileClinicExport.html:58
 #: app/views/reports/aboRhGroupsReport.html:45
 #: app/views/reports/bloodUnitsIssuedReport.html:45
 #: app/views/reports/componentsProducedReport.html:64
@@ -550,6 +567,8 @@ msgstr "[FR] Cannot print pack or discard labels for component"
 #: app/views/inventory/viewStockLevels.html:40
 #: app/views/labelling/findSafeComponents.html:133
 #: app/views/labelling/labelComponents.html:35
+#: app/views/mobile/donorCounselling.html:41 app/views/mobile/lookUp.html:37
+#: app/views/mobile/mobileClinicExport.html:47
 #: app/views/reports/aboRhGroupsReport.html:33
 #: app/views/reports/bloodUnitsIssuedReport.html:33
 #: app/views/reports/donationTypesReport.html:33
@@ -563,6 +582,11 @@ msgstr "[FR] Cannot print pack or discard labels for component"
 #: app/views/testing/viewTestSample.html:26
 msgid "Clear"
 msgstr "Effacer"
+
+#: app/scripts/controllers/mobile/mobile.js:104 app/views/mobile/lookUp.html:23
+#: app/views/mobile/mobileClinicExport.html:33
+msgid "Clinic Date"
+msgstr "[FR] Clinic Date"
 
 #: app/scripts/controllers/testing/viewTestBatch.js:437
 #: app/views/donors/manageClinic.html:67
@@ -868,6 +892,7 @@ msgstr "[FR] Currently Deferred"
 #: app/scripts/controllers/inventory/viewOrder.js:42
 #: app/scripts/controllers/inventory/viewReturn.js:9
 #: app/scripts/controllers/labelling/findSafeComponents.js:23
+#: app/scripts/controllers/mobile/donorCounselling.js:13
 #: app/scripts/controllers/testing/viewTestBatch.js:115
 #: app/views/components/discardComponents.html:7
 #: app/views/components/findComponents.html:7
@@ -939,6 +964,8 @@ msgstr "[FR] DONOR RECORDS"
 #: app/views/inventory/findTransfusion.html:89
 #: app/views/inventory/viewStockLevels.html:47
 #: app/views/labelling/findSafeComponents.html:141
+#: app/views/mobile/donorCounselling.html:48 app/views/mobile/lookUp.html:44
+#: app/views/mobile/mobileClinicExport.html:57
 #: app/views/reports/aboRhGroupsReport.html:42
 #: app/views/reports/bloodUnitsIssuedReport.html:42
 #: app/views/reports/donationTypesReport.html:42
@@ -1009,6 +1036,8 @@ msgstr "Date de Transfusion"
 #: app/scripts/controllers/inventory/viewReturn.js:126
 #: app/scripts/controllers/inventory/viewStockLevels.js:96
 #: app/scripts/controllers/labelling/findSafeComponents.js:146
+#: app/scripts/controllers/mobile/donorCounselling.js:150
+#: app/scripts/controllers/mobile/mobile.js:130
 #: app/scripts/controllers/testing/viewTestBatch.js:287
 #: app/scripts/services/reportsLayout.js:49
 msgid "Date generated: {{date}}"
@@ -1028,6 +1057,8 @@ msgstr "[FR] Date must be today or before"
 
 #: app/scripts/controllers/donors/donorCounselling.js:168
 #: app/scripts/controllers/inventory/viewOrder.js:161
+#: app/scripts/controllers/mobile/mobile.js:49
+#: app/scripts/controllers/mobile/mobileClinicExport.js:57
 #: app/views/donors/findDonor.html:97
 #: app/views/donors/mergeDonorsSelection.html:27
 #: app/views/inventory/fulfilOrder.html:118
@@ -1251,6 +1282,7 @@ msgstr "[FR] Donation Batch Status"
 msgid "Donation Batches"
 msgstr "[FR] Donation Batches"
 
+#: app/scripts/controllers/mobile/donorCounselling.js:12
 #: app/views/testing/manageBloodGroupMatchTesting.html:39
 #: app/views/testing/manageBloodGroupTesting.html:39
 #: app/views/testing/managePendingBloodTypingTests.html:42
@@ -1317,7 +1349,9 @@ msgstr "[FR] Donor Assessment"
 msgid "Donor Contact Merge"
 msgstr "[FR] Donor Contact Merge"
 
+#: app/scripts/controllers/mobile/donorCounselling.js:128
 #: app/views/donors/donorCounselling.html:3 app/views/donors/sidebar.html:23
+#: app/views/mobile/donorCounselling.html:3 app/views/mobile/sidebar.html:15
 msgid "Donor Counselling"
 msgstr "[FR] Donor Counselling"
 
@@ -1342,6 +1376,9 @@ msgstr "[FR] Donor Notes"
 #: app/scripts/controllers/donors/donorCommunications.js:74
 #: app/scripts/controllers/donors/donorCounselling.js:146
 #: app/scripts/controllers/donors/viewDonationBatch.js:45
+#: app/scripts/controllers/mobile/donorCounselling.js:7
+#: app/scripts/controllers/mobile/mobile.js:32
+#: app/scripts/controllers/mobile/mobileClinicExport.js:30
 #: app/views/donors/addDonation.html:26
 #: app/views/donors/donorCounsellingDetails.html:41
 #: app/views/donors/findDonor.html:19 app/views/donors/findDonor.html:80
@@ -1412,6 +1449,24 @@ msgstr "[FR] Duplicate Donors"
 msgid "Edit"
 msgstr "Modifier"
 
+#: app/scripts/controllers/mobile/mobile.js:59
+#: app/scripts/controllers/mobile/mobileClinicExport.js:70
+msgid "Eligibility"
+msgstr "[FR] Eligibility"
+
+#. Donor Eligibility
+#: app/views/translations.html:104
+msgid "Eligible"
+msgstr "[FR] Eligible"
+
+#: app/scripts/controllers/mobile/mobile.js:108 app/views/mobile/lookUp.html:44
+msgid ""
+"Eligible Donors: {{numberEligibleDonors}} out of {{totalDonors}} "
+"({{percentage}}%)"
+msgstr ""
+"[FR] Eligible Donors: {{numberEligibleDonors}} out of {{totalDonors}} "
+"({{percentage}}%)"
+
 #: app/views/donors/addDonation.html:72 app/views/donors/viewDonor.html:67
 msgid "Eligible donor"
 msgstr "[FR] Eligible donor"
@@ -1429,7 +1484,9 @@ msgstr "[FR] Email"
 msgid "End"
 msgstr "[FR] End"
 
+#: app/scripts/controllers/mobile/donorCounselling.js:137
 #: app/views/donors/manageDeferral.html:55
+#: app/views/mobile/donorCounselling.html:30
 msgid "End Date"
 msgstr "[FR] End Date"
 
@@ -1557,6 +1614,9 @@ msgstr "[FR] First"
 
 #: app/scripts/controllers/donors/donorCommunications.js:78
 #: app/scripts/controllers/donors/donorCounselling.js:151
+#: app/scripts/controllers/mobile/donorCounselling.js:8
+#: app/scripts/controllers/mobile/mobile.js:36
+#: app/scripts/controllers/mobile/mobileClinicExport.js:37
 #: app/views/donors/duplicateDonors.html:26 app/views/donors/findDonor.html:84
 #: app/views/donors/mergeDonorsSelection.html:18
 msgid "First Name"
@@ -1580,6 +1640,9 @@ msgstr "Écart"
 
 #: app/scripts/controllers/donors/donorCounselling.js:161
 #: app/scripts/controllers/inventory/viewOrder.js:156
+#: app/scripts/controllers/mobile/donorCounselling.js:10
+#: app/scripts/controllers/mobile/mobile.js:44
+#: app/scripts/controllers/mobile/mobileClinicExport.js:49
 #: app/scripts/controllers/reports/aboRhGroupsReport.js:220
 #: app/scripts/controllers/reports/donationTypesReport.js:127
 #: app/scripts/controllers/reports/donorsDeferredReport.js:18
@@ -1761,6 +1824,9 @@ msgstr "[FR] Last"
 
 #: app/scripts/controllers/donors/donorCommunications.js:82
 #: app/scripts/controllers/donors/donorCounselling.js:156
+#: app/scripts/controllers/mobile/donorCounselling.js:9
+#: app/scripts/controllers/mobile/mobile.js:40
+#: app/scripts/controllers/mobile/mobileClinicExport.js:43
 #: app/views/donors/duplicateDonors.html:29 app/views/donors/findDonor.html:87
 #: app/views/donors/mergeDonorsSelection.html:21
 msgid "Last Name"
@@ -1799,6 +1865,10 @@ msgstr ""
 "[FR] Location is not a venue or there is already an open donation batch for "
 "that venue"
 
+#: app/views/mobile/lookUp.html:3 app/views/mobile/sidebar.html:13
+msgid "Look Up"
+msgstr "[FR] Look Up"
+
 #: app/scripts/controllers/components/recordComponents.js:194
 msgid "Low Pack Weight"
 msgstr "[FR] Low Pack Weight"
@@ -1818,6 +1888,10 @@ msgstr "GESTION D'INVENTAIRE"
 #: app/views/testing/sidebar.html:12
 msgid "MANAGE TESTING"
 msgstr "[FR] MANAGE TESTING"
+
+#: app/views/mobile/sidebar.html:12
+msgid "MOBILE CLINIC"
+msgstr "[FR] MOBILE CLINIC"
 
 #: app/scripts/controllers/reports/aboRhGroupsReport.js:99
 #: app/scripts/controllers/reports/donorsDeferredReport.js:90
@@ -1888,6 +1962,14 @@ msgstr "[FR] Merge"
 #: app/views/donors/addDonor.html:28
 msgid "Middle"
 msgstr "[FR] Middle"
+
+#: app/views/mobile/mobileClinicExport.html:3 app/views/mobile/sidebar.html:17
+msgid "Mobile Clinic Export"
+msgstr "[FR] Mobile Clinic Export"
+
+#: app/scripts/controllers/mobile/mobile.js:114
+msgid "Mobile Clinic Look Up"
+msgstr "[FR] Mobile Clinic Look Up"
 
 #: app/scripts/controllers/donors/donorCommunications.js:85
 #: app/views/donors/mergeDonorsContact.html:24
@@ -2073,6 +2155,11 @@ msgstr "[FR] None of the above"
 #: app/views/translations.html:64
 msgid "Not Done"
 msgstr "[FR] Not Done"
+
+#. Donor Eligibility
+#: app/views/translations.html:105
+msgid "Not Eligible"
+msgstr "[FR] Not Eligible"
 
 # Inventory Status Not In Stock
 #. Inventory Status
@@ -2273,6 +2360,7 @@ msgstr "[FR] Overweight Pack"
 #: app/views/inventory/findTransfusion.html:90
 #: app/views/inventory/viewStockLevels.html:48
 #: app/views/labelling/findSafeComponents.html:142
+#: app/views/mobile/donorCounselling.html:49 app/views/mobile/lookUp.html:45
 #: app/views/reports/aboRhGroupsReport.html:44
 #: app/views/reports/bloodUnitsIssuedReport.html:44
 #: app/views/reports/componentsProducedReport.html:63
@@ -2330,6 +2418,8 @@ msgstr "[FR] Pack Weight Update"
 #: app/scripts/controllers/inventory/viewReturn.js:127
 #: app/scripts/controllers/inventory/viewStockLevels.js:97
 #: app/scripts/controllers/labelling/findSafeComponents.js:147
+#: app/scripts/controllers/mobile/donorCounselling.js:151
+#: app/scripts/controllers/mobile/mobile.js:131
 #: app/scripts/controllers/testing/viewTestBatch.js:288
 #: app/scripts/services/reportsLayout.js:51
 msgid "Page {{currentPage}} of {{pageCount}}"
@@ -2839,6 +2929,10 @@ msgstr "[FR] Review the deferrals for the merged donor"
 msgid "Review the donations for the merged donor"
 msgstr "[FR] Review the donations for the merged donor"
 
+#: app/scripts/controllers/mobile/donorCounselling.js:15
+msgid "Rh"
+msgstr "[FR] Rh"
+
 #. TTI Status
 #: app/views/translations.html:65
 msgid "Safe"
@@ -2903,6 +2997,7 @@ msgstr "Recherche en cours..."
 #: app/views/inventory/manageReturns.html:42
 #: app/views/inventory/manageReturns.html:54
 #: app/views/labelling/findSafeComponents.html:72
+#: app/views/mobile/mobileClinicExport.html:15
 #: app/views/testing/manageTestBatch.html:101
 #: app/views/testing/manageTestBatch.html:75
 msgid "Select"
@@ -3027,6 +3122,11 @@ msgstr "[FR] Site"
 #: app/views/donors/addDonorDonation.html:100
 msgid "Start"
 msgstr "[FR] Start"
+
+#: app/scripts/controllers/mobile/donorCounselling.js:136
+#: app/views/mobile/donorCounselling.html:20
+msgid "Start Date"
+msgstr "[FR] Start Date"
 
 #: app/messages.html:14
 msgid "Start and end times are the same: please re-enter"
@@ -3289,6 +3389,16 @@ msgstr ""
 msgid "This donor is over the maximum age of {{maxAge}}"
 msgstr "[FR] This donor is over the maximum age of {{maxAge}}"
 
+#: app/views/mobile/mobileClinicExport.html:42
+msgid ""
+"This export may take some time if run for all venues and can affect the "
+"performance of the system. It is recommended that this export is only run "
+"after standard operating hours, to minimise impact on other activities."
+msgstr ""
+"[FR] This export may take some time if run for all venues and can affect the "
+"performance of the system. It is recommended that this export is only run "
+"after standard operating hours, to minimise impact on other activities."
+
 #: app/scripts/controllers/donors/viewDonationBatch.js:447
 #: app/scripts/controllers/donors/viewDonor.js:664
 msgid "This form is not valid"
@@ -3445,6 +3555,8 @@ msgid "Total donors"
 msgstr "[FR] Total donors"
 
 #: app/scripts/controllers/donors/donorCounselling.js:283
+#: app/scripts/controllers/mobile/donorCounselling.js:149
+#: app/scripts/controllers/mobile/mobile.js:129
 msgid "Total donors: {{total}}"
 msgstr "[FR] Total donors: {{total}}"
 
@@ -3600,6 +3712,9 @@ msgstr "[FR] User"
 #: app/scripts/controllers/donors/donorCommunications.js:98
 #: app/scripts/controllers/donors/donorCounselling.js:190
 #: app/scripts/controllers/donors/viewDonationBatch.js:96
+#: app/scripts/controllers/mobile/donorCounselling.js:135
+#: app/scripts/controllers/mobile/mobile.js:98
+#: app/scripts/controllers/mobile/mobileClinicExport.js:24
 #: app/scripts/controllers/reports/aboRhGroupsReport.js:219
 #: app/scripts/controllers/reports/donationTypesReport.js:123
 #: app/scripts/controllers/reports/donorsAdverseEventsReport.js:119
@@ -3623,7 +3738,8 @@ msgstr "[FR] User"
 #: app/views/donors/viewDeferrals.html:50
 #: app/views/donors/viewDonationSummary.html:76
 #: app/views/donors/viewDonations.html:32 app/views/donors/viewDonor.html:114
-#: app/views/donors/viewDonor.html:209
+#: app/views/donors/viewDonor.html:209 app/views/mobile/donorCounselling.html:8
+#: app/views/mobile/lookUp.html:8 app/views/mobile/mobileClinicExport.html:12
 #: app/views/reports/donorsAdverseEventsReport.html:9
 #: app/views/testing/viewTestBatch.html:187
 #: app/views/testing/viewTestSample.html:42
@@ -3804,7 +3920,8 @@ msgstr "[FR] {{count}} component(s) found"
 
 #: app/views/donors/donorCommunications.html:95
 #: app/views/donors/donorCounselling.html:115
-#: app/views/donors/findDonor.html:60
+#: app/views/donors/findDonor.html:60 app/views/mobile/donorCounselling.html:48
+#: app/views/mobile/lookUp.html:44 app/views/mobile/mobileClinicExport.html:56
 msgid "{{count}} donor(s) found"
 msgstr "[FR] {{count}} donor(s) found"
 
