@@ -4,7 +4,7 @@ angular.module('bsis')
   .controller('HeaderCtrl', function($scope, $location, AuthService, ConfigurationsService, ICONS, PERMISSIONS, UI) {
 
     $scope.icons = ICONS;
-
+    var uuidRegexPattern = '[0-9a-f\\-]*';
     $scope.warningMessage = ConfigurationsService.getStringValue('ui.header.warningMessage');
 
     $scope.isPasswordReset = function() {
@@ -85,14 +85,14 @@ angular.module('bsis')
       '/manageDuplicateDonors',
       '/manageDonors',
       '/addDonor',
-      '/viewDonor/\\d+',
+      '/viewDonor/' + uuidRegexPattern,
       '/addDonation',
       '/manageDonationBatches',
       '/manageClinic',
       '/donorCounselling',
       '/exportDonorList',
-      '/donorCounselling/\\d+',
-      '/manageClinic/\\d+'
+      '/donorCounselling/' + uuidRegexPattern,
+      '/manageClinic/' + uuidRegexPattern
     ];
 
     var componentsRoutes = [
@@ -102,7 +102,7 @@ angular.module('bsis')
       '/findDiscards',
       '/discardComponents',
       '/addComponentBatch',
-      '/viewComponentBatch/\\d+',
+      '/viewComponentBatch/' + uuidRegexPattern,
       '/viewComponentBatches'
     ];
 
@@ -110,14 +110,14 @@ angular.module('bsis')
       '/testing',
       '/viewTestSample',
       '/manageTestBatch',
-      '/viewTestBatch/\\d+',
-      '/manageTTITesting/\\d+/\\w+',
-      '/reEnterTTI/\\d+/\\w+',
-      '/reEnterBloodTyping/\\d+/\\w+',
-      '/managePendingTests/\\d+/\\w+',
-      '/manageBloodGroupTesting/\\d+/\\w+',
-      '/managePendingBloodTypingTests/\\d+/\\w+',
-      '/manageBloodGroupMatchTesting/\\d+'
+      '/viewTestBatch/' + uuidRegexPattern,
+      '/manageTTITesting/' + uuidRegexPattern + '/\\w+',
+      '/reEnterTTI/' + uuidRegexPattern + '/\\w+',
+      '/reEnterBloodTyping/' + uuidRegexPattern + '/\\w+',
+      '/managePendingTests/' + uuidRegexPattern + '/\\w+',
+      '/manageBloodGroupTesting/' + uuidRegexPattern + '/\\w+',
+      '/managePendingBloodTypingTests/' + uuidRegexPattern + '/\\w+',
+      '/manageBloodGroupMatchTesting/' + uuidRegexPattern
     ];
 
     var inventoryRoutes = [
@@ -125,12 +125,12 @@ angular.module('bsis')
       '/findInventory',
       '/viewStockLevels',
       '/manageOrders',
-      '/fulfilOrder/\\d+',
-      '/viewOrder/\\d+',
+      '/fulfilOrder/' + uuidRegexPattern,
+      '/viewOrder/' + uuidRegexPattern,
       '/viewOrders',
       '/manageReturns',
-      '/recordReturn/\\d+',
-      '/viewReturn/\\d+',
+      '/recordReturn/' + uuidRegexPattern,
+      '/viewReturn/' + uuidRegexPattern,
       '/viewReturns',
       '/recordTransfusions',
       '/findTransfusion'
@@ -166,39 +166,39 @@ angular.module('bsis')
       '/settings',
       '/accountSettings',
       '/locations',
-      '/manageLocation/?\\d*',
+      '/manageLocation/?' + uuidRegexPattern,
       '/componentTypes',
-      '/manageComponentType/?\\d*',
-      '/manageComponentTypeCombination/?\\d*',
+      '/manageComponentType/?' + uuidRegexPattern,
+      '/manageComponentTypeCombination/?' + uuidRegexPattern,
       '/deferralReasons',
-      '/manageDeferralReason/?\\d*',
+      '/manageDeferralReason/?' + uuidRegexPattern,
       '/discardReasons',
-      '/manageDiscardReason/?\\d*',
+      '/manageDiscardReason/?' + uuidRegexPattern,
       '/configurations',
-      '/manageConfiguration/?\\d*',
+      '/manageConfiguration/?' + uuidRegexPattern,
       '/users',
-      '/manageUser/?\\d*',
+      '/manageUser/?' + uuidRegexPattern,
       '/roles',
-      '/manageRole/?\\d*',
+      '/manageRole/?' + uuidRegexPattern,
       '/donationTypes',
-      '/manageDonationType/?\\d*',
+      '/manageDonationType/?' + uuidRegexPattern,
       '/packTypes',
-      '/managePackType/?\\d*',
+      '/managePackType/?' + uuidRegexPattern,
       '/auditLog',
       '/adverseEventTypes',
       '/addAdverseEventType',
-      '/editAdverseEventType/?\\d*',
+      '/editAdverseEventType/?' + uuidRegexPattern,
       '/divisions',
       '/manageDivision',
-      '/manageDivision/?\\d*',
+      '/manageDivision/?' + uuidRegexPattern,
       '/dataExport',
       '/componentTypeCombinations',
       '/bloodTests',
-      '/manageBloodTest/?\\d*',
+      '/manageBloodTest/?' + uuidRegexPattern,
       '/bloodTestingRules',
-      '/manageBloodTestingRule/?\\d*',
+      '/manageBloodTestingRule/?' + uuidRegexPattern,
       '/transfusionReactionTypes',
-      '/manageTransfusionReactionType/?\\d*'
+      '/manageTransfusionReactionType/?' + uuidRegexPattern
     ];
 
     /**
