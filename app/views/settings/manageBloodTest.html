@@ -85,9 +85,7 @@
           <div class="col-sm-10">
             <div class="form-inline">
               <input id="validOutcome" name="validOutcome" ng-model="validOutcome" ng-maxlength=10 class="form-control input-sm" style="width:auto;min-width:350px;">
-              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="addValidOutcome()" translate>
-                  Add Outcome
-              </button>
+              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="addValidOutcome()" translate>Add Outcome</button>
               <div>
                 <ng-messages for="bloodTestForm.validOutcome.$error" ng-show="addOutcomeClicked">
                   <ng-messages-include src="messages.html"></ng-messages-include>
@@ -103,9 +101,7 @@
             <div class="form-inline">
               <select class="form-control" style="width:auto;min-width:350px;" name="removedValidOutcomes" ng-model="removedValidOutcomes" ng-options="t as t for t in bloodTest.validResults" multiple>
               </select>
-              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="removeValidOutcomes(removedValidOutcomes)" ng-disabled="!removedValidOutcomes || removedValidOutcomes.length===0" translate>
-                Remove Outcome
-              </button>
+              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="removeValidOutcomes(removedValidOutcomes)" ng-disabled="!removedValidOutcomes || removedValidOutcomes.length===0" translate>Remove Outcome</button>
               <div>
                 <small class="error" style="display:block;" ng-show="bloodTestForm.removedValidOutcomes.$error.cantremove">
                   <span translate>Remove from negative or positive outcomes first</span>
@@ -128,9 +124,7 @@
             <div class="form-inline">
               <select class="form-control" style="width:auto;min-width:350px;" name="negativeOutcome" ng-model="negativeOutcome" ng-options="t as t for t in notSelectedResults">
               </select>
-              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="addNegativeOutcome()" translate>
-                  Add Outcome
-              </button>
+              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="addNegativeOutcome()" translate>Add Outcome</button>
               <div>
                 <ng-messages for="bloodTestForm.negativeOutcome.$error">
                   <ng-messages-include src="messages.html"></ng-messages-include>
@@ -146,9 +140,7 @@
             <div class="form-inline">
               <select class="form-control" style="width:auto;min-width:350px;" name="removedNegativeOutcomes" ng-model="removedNegativeOutcomes" ng-options="t as t for t in bloodTest.negativeResults" multiple>
               </select>
-              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="removeNegativeOutcomes()" ng-disabled="!removedNegativeOutcomes || removedNegativeOutcomes.length===0" translate>
-                Remove Outcome
-              </button>
+              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="removeNegativeOutcomes()" ng-disabled="!removedNegativeOutcomes || removedNegativeOutcomes.length===0" translate>Remove Outcome</button>
             </div>
           </div>
         </div>
@@ -161,9 +153,7 @@
             <div class="form-inline">
               <select class="form-control" style="width:auto;min-width:350px;" name="positiveOutcome" ng-model="positiveOutcome" ng-options="t as t for t in notSelectedResults">
               </select>
-              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="addPositiveOutcome()">
-                  <span translate>Add Outcome</span>
-              </button>
+              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="addPositiveOutcome()">Add Outcome</button>
               <div>
                 <ng-messages for="bloodTestForm.positiveOutcome.$error">
                   <ng-messages-include src="messages.html"></ng-messages-include>
@@ -179,9 +169,7 @@
             <div class="form-inline">
               <select class="form-control" style="width:auto;min-width:350px;" name="removedPositiveOutcomes" ng-model="removedPositiveOutcomes" ng-options="t as t for t in bloodTest.positiveResults" multiple>
               </select>
-              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="removePositiveOutcomes()" ng-disabled="!removedPositiveOutcomes || removedPositiveOutcomes.length===0" translate>
-                Remove Outcome
-              </button>
+              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="removePositiveOutcomes()" ng-disabled="!removedPositiveOutcomes || removedPositiveOutcomes.length===0" translate>Remove Outcome</button>
             </div>
           </div>
         </div>
