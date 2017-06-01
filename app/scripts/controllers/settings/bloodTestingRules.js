@@ -13,7 +13,6 @@ angular.module('bsis').controller('BloodTestingRulesCtrl', function($scope, $loc
       name: 'Category',
       displayName: gettextCatalog.getString('Category'),
       field: 'category',
-      cellFilter: 'titleCase | translate',
       width: '**',
       maxWidth: '200'
     },
@@ -35,7 +34,6 @@ angular.module('bsis').controller('BloodTestingRulesCtrl', function($scope, $loc
       name: 'Donation Field Value',
       displayName: gettextCatalog.getString('Donation Field Value'),
       field: 'newInformation',
-      cellFilter: 'titleCase | translate',
       width: '**',
       maxWidth: '200'
     },

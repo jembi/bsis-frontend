@@ -19,7 +19,6 @@ angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, ICONS
       name: 'Category',
       displayName: gettextCatalog.getString('Category'),
       field: 'category',
-      cellFilter: 'titleCase | translate',
       width: '**',
       maxWidth: '200'
     },
