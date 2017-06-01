@@ -7,10 +7,9 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <p>
-                    <em translate translate-params-discard-reasons-count="discardReasonsCount"> {{discardReasonsCount}} discard reason(s) found </em> <span
+                    <em translate translate-params-count="discardReasonsCount"> {{count}} discard reason(s) found </em> <span
                         has-permission="{{permissions.MANAGE_DISCARD_REASONS}}"> | <em> <a href=""
-                                                                                           ng-click="addNewDiscardReason()" translate>Add
-                    New Discard Reason</a></em> </span>
+                                                                                           ng-click="addNewDiscardReason()" translate>Add New Discard Reason</a></em> </span>
                 </p>
                 <table ng-table="discardsTableParams" show-filter="false" class="table">
                     <tr ng-repeat="discard in $data"
