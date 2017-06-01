@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DivisionsCtrl', function($scope, $location, $routeParams, $filter, $log, DivisionsService) {
+angular.module('bsis').controller('DivisionsCtrl', function($scope, $location, $routeParams, $filter, $log, DivisionsService, gettextCatalog) {
 
   var masterSearch = {
     name: null,
@@ -42,9 +42,9 @@ angular.module('bsis').controller('DivisionsCtrl', function($scope, $location, $
   $scope.gridOptions = {
     data: null,
     columnDefs: [
-      {displayName: 'Name', field: 'name'},
-      {displayName: 'Division Level', field: 'level', cellFilter: 'divisionLevel'},
-      {displayName: 'Parent Division', field: 'parent.name'}
+      {displayName: gettextCatalog.getString('Name'), field: 'name'},
+      {displayName: gettextCatalog.getString('Division Level'), field: 'level', cellFilter: 'divisionLevel'},
+      {displayName: gettextCatalog.getString('Parent Division'), field: 'parent.name'}
     ],
     paginationPageSize: 7,
     paginationTemplate: 'views/template/pagination.html',
