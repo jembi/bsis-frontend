@@ -9,8 +9,8 @@
                 <p>
                     <em translate translate-params-count="deferralReasonsCount"> {{count}} deferral reason(s) found </em> <span
                         has-permission="{{permissions.MANAGE_DEFERRAL_REASONS}}"> | <em> <a href=""
-                                                                                            ng-click="addNewDeferralReason()" translate>Add
-                    New Deferral Reason</a></em> </span>
+                                                                                            ng-click="addNewDeferralReason()" translate>Add New Deferral Reason
+                                                                                            </a></em> </span>
                 </p>
                 <table ng-table="deferralsTableParams" show-filter="false" class="table">
                     <tr ng-repeat="deferral in $data"
@@ -22,8 +22,8 @@
                             {{deferral.reason}}
                         </td>
                         <td data-title="'Default Duration' | translate" sortable="'defaultDuration'" class="text-center">
-                            <span ng-if="deferral.durationType === 'PERMANENT'" translate>'Permanent'</span> 
-                            <span ng-if="deferral.durationType !== 'PERMANENT' && deferral.defaultDuration !== null" translate translate-params-num-of-days="deferral.defaultDuration"> {{numOfDays}} 'day(s)'</span>
+                            <span ng-if="deferral.durationType === 'PERMANENT'" translate>Permanent</span> 
+                            <span ng-if="deferral.durationType !== 'PERMANENT' && deferral.defaultDuration !== null" translate translate-params-num-of-days="deferral.defaultDuration">{{numOfDays}} day(s)</span>
                         </td>
                         <td data-title="'Enabled' | translate" class="text-center">
                             <span ng-show="!deferral.isDeleted"><i class="fa {{icons.SQUARECHECK}}"></i></span>
