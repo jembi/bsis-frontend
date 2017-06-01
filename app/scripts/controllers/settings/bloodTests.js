@@ -33,7 +33,6 @@ angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, ICONS
       name: 'BloodTestType',
       displayName: gettextCatalog.getString('Blood Test Type'),
       field: 'bloodTestType',
-      cellFilter: 'titleCase | translate',
       width: '**',
       maxWidth: '200'
     },
