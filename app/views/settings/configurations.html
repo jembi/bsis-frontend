@@ -7,10 +7,10 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <p>
-                    <em translate translate-params-count="configurationsCount">{{count}} configuration(s) found</em> <span
+                    <em translate translate-params-count="configurationsCount">{{count}} configuration(s) found</em><span
                         has-permission="{{permissions.MANAGE_GENERAL_CONFIGS}}"> | <em> <a href=""
-                                                                                           ng-click="addNewConfiguration()" translate>Add
-                    New Configuration</a></em> </span>
+                                                                                           ng-click="addNewConfiguration()" translate>Add New Configuration
+                                                                                           </a></em></span>
                 </p>
                 <table ng-table="configurationsTableParams" show-filter="false" class="table">
                     <tr ng-repeat="configuration in $data"
