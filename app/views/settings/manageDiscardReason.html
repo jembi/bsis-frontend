@@ -19,10 +19,11 @@
                                 <small class="error" ng-show="serverError.reason">
                                     {{serverError.reason}}
                                 </small>
-                                <small class="error"
-                                       ng-show="(discardForm.reason.$error.required && (discardForm.reason.$dirty || submitted))">
-                                    This cannot be empty
-                                </small>
+                                <div>
+                                    <ng-messages for="discardForm.reason.$error" ng-show="discardForm.$submitted">
+                                        <ng-messages-include src="messages.html"></ng-messages-include>
+                                    </ng-messages>
+                                </div>
                             </div>
                         </div>
                     </div>
