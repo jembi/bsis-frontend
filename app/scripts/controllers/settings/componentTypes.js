@@ -40,7 +40,8 @@ angular.module('bsis').controller('ComponentTypesCtrl', function($scope, $locati
       name: 'ExpiresAfter',
       displayName: gettextCatalog.getString('Expires After'),
       field: 'expiresAfter',
-      cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.expiresAfter}} {{row.entity.expiresAfterUnits | titleCase}}</div>',
+      cellTemplate: '<div class="ui-grid-cell-contents">' +
+      '<span translate translate-params-num-of-days="row.entity.expiresAfter">{{numOfDays}} day(s)</span></div>',
       width: '**',
       maxWidth: '150'
     },

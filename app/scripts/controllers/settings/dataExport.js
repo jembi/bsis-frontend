@@ -34,8 +34,7 @@ angular.module('bsis').controller('DataExportCtrl', function($scope, $log, Modal
       title: gettextCatalog.getString('Data Export'),
       button: gettextCatalog.getString('Export Data'),
       message: gettextCatalog.getString('Are you sure that you want to export all data?') +
-      gettextCatalog.getString('This export may take some time and can affect the performance of the system. ') +
-      gettextCatalog.getString('It is recommended that this process is only run after standard operating hours, to minimise the impact on other activities.')
+      gettextCatalog.getString('This export may take some time and can affect the performance of the system. It is recommended that this process is only run after standard operating hours, to minimise the impact on other activities.')
     };
 
     ModalsService.showConfirmation(unprocessConfirmation).then(function() {
