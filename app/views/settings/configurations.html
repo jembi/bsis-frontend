@@ -1,15 +1,15 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-    <h3 class="page-header">General Configurations</h3>
+    <h3 class="page-header" translate>General Configurations</h3>
 
     <div class="col-sm-12">
         <div style="padding-bottom: 10px"></div>
         <div class="panel panel-default">
             <div class="panel-body">
                 <p>
-                    <em> {{configurationsCount}} configuration(s) found </em> <span
+                    <em translate translate-params-count="configurationsCount">{{count}} configuration(s) found</em> <span
                         has-permission="{{permissions.MANAGE_GENERAL_CONFIGS}}"> | <em> <a href=""
-                                                                                           ng-click="addNewConfiguration()">Add
+                                                                                           ng-click="addNewConfiguration()" translate>Add
                     New Configuration</a></em> </span>
                 </p>
                 <table ng-table="configurationsTableParams" show-filter="false" class="table">
@@ -18,16 +18,16 @@
                         ng-mouseenter="this.$selected = true"
                         ng-mouseleave="this.$selected = false"
                         ng-class="{'active': configuration.$selected}">
-                        <td data-title="'Name'" style="width:30%;" header-class="text-left" sortable="'name'">
+                        <td data-title="'Name' | translate" style="width:30%;" header-class="text-left" sortable="'name'">
                             {{configuration.name}}
                         </td>
-                        <td data-title="'Description'" header-class="text-left" sortable="''">
+                        <td data-title="'Description'| translate" header-class="text-left" sortable="''">
                             {{configuration.description}}
                         </td>
-                        <td data-title="'DataType'" header-class="text-left" sortable="''">
+                        <td data-title="'DataType' | translate" header-class="text-left" sortable="''">
                             {{configuration.dataType.datatype}}
                         </td>
-                        <td data-title="'Value'" header-class="text-left" sortable="''" ng-switch on="configuration.dataType.datatype">
+                        <td data-title="'Value' | translate" header-class="text-left" sortable="''" ng-switch on="configuration.dataType.datatype">
                             <span ng-switch-when="password">•••••</span>
                             <span ng-switch-default>
                                 {{configuration.value.substr(0,40)}}
