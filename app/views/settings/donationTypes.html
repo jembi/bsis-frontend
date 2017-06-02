@@ -9,8 +9,7 @@
                 <p>
                     <em translate translate-params-count="donationTypesCount">{{count}} donation type(s) found</em> <span
                         has-permission="{{permissions.MANAGE_DONATION_TYPES}}"> | <em> <a href=""
-                                                                                          ng-click="addNewDonationType()" translate>Add
-                    New Donation Type</a></em> </span>
+                                                                                          ng-click="addNewDonationType()" translate>Add New Donation Type</a></em> </span>
                 </p>
                 <table ng-table="donationsTableParams" show-filter="false" class="table">
                     <tr ng-repeat="donationType in donationTypes"
