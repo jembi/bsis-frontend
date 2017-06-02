@@ -16,8 +16,8 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
   ];
   var masterSearch = {
     venueId: null,
-    startDate: moment().subtract(30, 'days').toDate(),
-    endDate: moment().toDate()
+    startDate: moment().subtract(30, 'days').startOf('day').toDate(),
+    endDate: moment().endOf('day').toDate()
   };
   var currentSearch = null;
   var defaultValues = {};
