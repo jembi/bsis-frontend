@@ -1,14 +1,14 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-    <h3 class="page-header">Manage Users</h3>
+    <h3 class="page-header" translate>Manage Users</h3>
 
     <div class="col-sm-12">
         <div style="padding-bottom: 10px"></div>
         <div class="panel panel-default">
             <div class="panel-body">
                 <p>
-                    <em> {{usersCount}} user(s) found </em> <span has-permission="{{permissions.MANAGE_USERS}}"> | <em> <a
-                        href="" ng-click="addNewUser()">Add New User</a></em> </span>
+                    <em translate translate-params-count="usersCount">{{count}} user(s) found</em> <span has-permission="{{permissions.MANAGE_USERS}}"> | <em> <a
+                        href="" ng-click="addNewUser()" translate>Add New User</a></em> </span>
                 </p>
 
 
@@ -17,22 +17,22 @@
                         ng-mouseenter="this.$selected = true"
                         ng-mouseleave="this.$selected = false"
                         ng-class="{'active': user.$selected}">
-                        <td ng-click="manageUser(user);" data-title="'Username'" style="width:30%;" header-class="text-left"
+                        <td ng-click="manageUser(user);" data-title="'Username' | translate" style="width:30%;" header-class="text-left"
                             sortable="'name'">
                             {{user.username}}
                         </td>
-                        <td ng-click="manageUser(user);" data-title="'First Name'" header-class="text-left"
+                        <td ng-click="manageUser(user);" data-title="'First Name' | translate" header-class="text-left"
                             sortable="'name'">
                             {{user.firstName}} {{user.lastName}}
                         </td>
                         <td data-title="" style="width:25%;" header-class="text-left" sortable="" class="text-center">
                             <span style="font-size: 0.9em;">
                               <span ng-if="userToRemove == user.id">
-                                <em><a ng-click="removeUser(user)"> Confirm</a></em> |
-                                <em><a ng-click="cancelRemoveUser()"> Cancel</a></em>
+                                <em><a ng-click="removeUser(user)" translate>Confirm</a></em> |
+                                <em><a ng-click="cancelRemoveUser()" translate>Cancel</a></em>
                               </span>
                               <span ng-if="userToRemove != user.id">
-                                <em><a ng-click="removeUserCheck(user)"> Remove</a></em>
+                                <em><a ng-click="removeUserCheck(user)" translate>Remove</a></em>
                               </span>
                             </span>
                         </td>
