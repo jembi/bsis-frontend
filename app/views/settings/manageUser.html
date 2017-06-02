@@ -1,20 +1,20 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-  <h3 class="page-header">Manage User</h3>
+  <h3 class="page-header" translate>Manage User</h3>
   <div class="panel panel-default">
       <div class="panel-body">
           <form name="userForm" novalidate class="form-horizontal col-sm-12" role="form"
                 ng-submit="saveUser(user, userForm)">
               <div class="row form-group col-sm-12">
-                  <label for="firstName" class="col-sm-1 control-label">Name</label>
+                  <label for="firstName" class="col-sm-1 control-label" translate>Name</label>
 
                   <div class="row col-sm-6">
                       <div class="form-inline" style="padding-left:15px;">
                           <input size="15" id="firstName" name="firstName" class="form-control input-sm"
-                                 placeholder="First" ng-model="user.firstName" required ng-minlength=1 ng-maxlength=30
+                                 placeholder="{{'First' | translate}}" ng-model="user.firstName" required ng-minlength=1 ng-maxlength=30
                                  ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                                  ng-class="{'ng-invalid ng-dirty' : userForm.firstName.$invalid && submitted}">
-                          <input size="15" id="lastName" name="lastName" class="form-control input-sm" placeholder="Last"
+                          <input size="15" id="lastName" name="lastName" class="form-control input-sm" placeholder="{{'Last' | translate}}"
                                  ng-model="user.lastName" required ng-minlength=1 ng-maxlength=30
                                  ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                                  ng-class="{'ng-invalid ng-dirty' : userForm.lastName.$invalid && submitted}">
@@ -23,16 +23,14 @@
                                      ng-show="
                     (userForm.firstName.$error.required && (userForm.firstName.$dirty || submitted)) ||
                     (userForm.lastName.$error.required && (userForm.lastName.$dirty || submitted))
-                  ">
-                                  This cannot be empty
-                              </small>
+                  "><span translate>This cannot be empty</span></small>
                           </div>
                       </div>
                   </div>
               </div>
 
               <div class="row form-group col-sm-12">
-                  <label for="emailId" class="col-sm-1 control-label">Email</label>
+                  <label for="emailId" class="col-sm-1 control-label" translate>Email</label>
 
                   <div class="col-sm-4">
                       <div class="form-inline">
@@ -52,7 +50,7 @@
               </div>
               <div class="row form-group col-sm-12">
 
-                  <label for="username" class="col-sm-1 control-label">Username</label>
+                  <label for="username" class="col-sm-1 control-label" translate>Username</label>
 
                   <div class="col-sm-4">
                       <div class="form-inline">
@@ -64,11 +62,11 @@
 
                           <div>
                               <small class="error" ng-show="serverError">
-                                  {{serverError}}
+                                  {{serverError | translate}}
                               </small>
                               <small class="error"
                                      ng-show="(userForm.username.$error.required && (userForm.username.$dirty || submitted))">
-                                  This cannot be empty
+                                  <span translate>This cannot be empty</span>
                               </small>
                           </div>
                       </div>
@@ -78,17 +76,17 @@
 
 
               <div class="row form-group col-sm-12">
-                  <label for="password" class="col-sm-1 control-label">Password </label>
+                  <label for="password" class="col-sm-1 control-label" translate>Password</label>
 
                   <div class="col-sm-4">
                       <div class="form-inline">
                   <span ng-if="disableUsername">
                       <input type="checkbox" id="modifyPassword" name="modifyPassword" ng-model="user.modifyPassword"/>
-                      <label style="cursor: pointer;" for="modifyPassword">Reset Password</label>
+                      <label style="cursor: pointer;" for="modifyPassword" translate>Reset Password</label>
                       <br/>
                   </span>
 
-                          <input size="34" id="password" name="password" type="password" placeholder="Enter Password"
+                          <input size="34" id="password" name="password" type="password" placeholder="{{'Enter Password' | translate}}"
                                  ng-disabled="!user.modifyPassword"
                                  class="form-control input-sm"
                                  ng-model="user.password" ng-required="passwordRequired"
@@ -97,7 +95,7 @@
                           <div>
                               <small class="error"
                                      ng-show="(userForm.password.$error.required && (userForm.password.$dirty || submitted))">
-                                  This cannot be empty
+                                  <span translate>This cannot be empty</span>
                               </small>
                           </div>
                       </div>
@@ -111,7 +109,7 @@
                   <div class="col-sm-4">
                       <div class="form-inline">
                           <input size="34" type="password" id="confirmPassword" name="confirmPassword"
-                                 placeholder="Confirm Password"
+                                 placeholder="{{'Confirm Password' | translate}}"
                                  ng-disabled="!user.modifyPassword"
                                  ng-class="{'ng-invalid ng-dirty' : userForm.password.$invalid && submitted}"
                                  class="form-control input-sm"
@@ -141,10 +139,10 @@
               </div>
               -->
               <div class="row form-group col-sm-12">
-                  <label for="firstName" class="col-sm-1 control-label">Roles</label>
+                  <label for="firstName" class="col-sm-1 control-label" translate>Roles</label>
 
                   <small class="error" ng-show="roleRequired">
-                      Please select at least one role.
+                      <span translate>Please select at least one role</span>
                   </small>
 
 
@@ -165,12 +163,9 @@
 
               <div class="form-group">
                   <div class="col-sm-offset-1 col-sm-4">
-                      <button class="btn btn-primary" type="submit" ng-disabled="savingUser">{{savingUser ? "Saving..." :
-                          "Save User"}}
-                      </button>
+                      <button class="btn btn-primary" type="submit" ng-disabled="savingUser">{{savingUser ? "Saving..." : "Save" | translate}}</button>
                       <button class="btn btn-primary" type="button"
-                              ng-click="clear(); go('/users');" ng-disabled="savingUser">Cancel
-                      </button>
+                              ng-click="clear(); go('/users');" ng-disabled="savingUser" translate>Cancel</button>
                   </div>
               </div>
           </form>
