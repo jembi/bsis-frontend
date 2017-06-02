@@ -17,7 +17,7 @@
                                    ng-class="{'ng-invalid ng-dirty' : (discardForm.reason.$invalid && submitted) || discardReasonInvalid }">
                             <div>
                                 <small class="error" ng-show="serverError.reason">
-                                    {{serverError.reason}}
+                                    {{serverError.reason | translate}}
                                 </small>
                                 <div>
                                     <ng-messages for="discardForm.reason.$error" ng-show="discardForm.$submitted">
