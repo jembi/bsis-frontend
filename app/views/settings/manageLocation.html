@@ -12,12 +12,8 @@
             <div class="form-inline">
               <input size="30" id="name" name="name" class="form-control input-sm" ng-model="location.name" required>
               <div>
-                <small class="error" ng-show="locationForm.name.$error.duplicate && locationForm.$submitted" translate>
-                  Location name already exists
-                </small>
-                <small class="error" ng-show="locationForm.name.$error.required && locationForm.$submitted" translate>
-                  This cannot be empty
-                </small>
+                <small class="error" ng-show="locationForm.name.$error.duplicate && locationForm.$submitted" translate>Location name already exists</small>
+                <small class="error" ng-show="locationForm.name.$error.required && locationForm.$submitted" translate>This cannot be empty</small>
               </div>
             </div>
           </div>
@@ -58,9 +54,7 @@
               </label>
             </div>
             <div>
-              <small class="error" ng-show="!validateLocationType() && locationForm.$submitted" translate>
-                Please choose at least one location type
-              </small>
+              <small class="error" ng-show="!validateLocationType() && locationForm.$submitted" translate>Please choose at least one location type</small>
             </div>
           </div>
         </div>
@@ -71,9 +65,7 @@
           <div class="col-sm-10">
             <select class="form-control" name="divisionLevel1" style="width:auto;" ng-model="location.divisionLevel1" required 
             ng-options="d as d.name for d in level1Divisions track by d.id"></select>
-            <small class="error" ng-show="locationForm.divisionLevel1.$error.required && locationForm.$submitted" translate>
-              This cannot be empty
-            </small>
+            <small class="error" ng-show="locationForm.divisionLevel1.$error.required && locationForm.$submitted" translate>This cannot be empty</small>
           </div>
         </div>
 
@@ -85,9 +77,7 @@
             ng-required="locationForm.$submitted"
             ng-options="d as d.name for d in level2Divisions track by d.id" 
             ng-disabled="location.divisionLevel1 === null || level2Divisions.length === 0"></select>
-            <small class="error" ng-show="locationForm.divisionLevel2.$error.required && locationForm.$submitted" translate>
-              This cannot be empty
-            </small>
+            <small class="error" ng-show="locationForm.divisionLevel2.$error.required && locationForm.$submitted" translate>This cannot be empty</small>
           </div>
         </div>
 
@@ -99,9 +89,7 @@
             ng-required="locationForm.$submitted" 
             ng-options="d as d.name for d in level3Divisions track by d.id" 
             ng-disabled="location.divisionLevel2 === null || level3Divisions.length === 0"></select>
-            <small class="error" ng-show="locationForm.divisionLevel3.$error.required && locationForm.$submitted" translate>
-              This cannot be empty
-            </small>
+            <small class="error" ng-show="locationForm.divisionLevel3.$error.required && locationForm.$submitted" translate>This cannot be empty</small>
           </div>
         </div>
 
@@ -122,8 +110,7 @@
                 ng-disabled="savingLocation">{{savingLocation ? "Saving..." : "Save" | translate}}
             </button>
             <button class="btn btn-primary" type="button" ng-click="cancel()"
-                style="margin-top: 2px" ng-disabled="savingLocation" translate>Cancel
-            </button>
+                style="margin-top: 2px" ng-disabled="savingLocation" translate>Cancel</button>
           </div>
         </div>
       </form>
