@@ -44,7 +44,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label" translate>Transfusion Outcome</label>
       <div class="form-inline col-sm-10">
-        <select name="transfusionOutcome" ng-model="searchParams.transfusionOutcome" class="form-control" ng-options="outcome as (outcome | titleCase) for outcome in transfusionOutcomes" style="min-width: 350px;" ng-disabled="searchParams.donationIdentificationNumber">
+        <select name="transfusionOutcome" ng-model="searchParams.transfusionOutcome" class="form-control" ng-options="outcome as (outcome | titleCase | translate) for outcome in transfusionOutcomes" style="min-width: 350px;" ng-disabled="searchParams.donationIdentificationNumber">
           <option value=""></option>
         </select>
       </div>
@@ -82,7 +82,7 @@
     </div>
 
   </form>
-  
+
 
   <div class="panel panel-default col-sm-12" ng-if="submitted">
     <div class="panel-body">
