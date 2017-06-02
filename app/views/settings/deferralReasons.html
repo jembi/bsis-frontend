@@ -9,8 +9,7 @@
                 <p>
                     <em translate translate-params-count="deferralReasonsCount"> {{count}} deferral reason(s) found </em> <span
                         has-permission="{{permissions.MANAGE_DEFERRAL_REASONS}}"> | <em> <a href=""
-                                                                                            ng-click="addNewDeferralReason()" translate>Add New Deferral Reason
-                                                                                            </a></em> </span>
+                                                                                            ng-click="addNewDeferralReason()" translate>Add New Deferral Reason</a></em> </span>
                 </p>
                 <table ng-table="deferralsTableParams" show-filter="false" class="table">
                     <tr ng-repeat="deferral in $data"
