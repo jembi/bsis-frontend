@@ -33,9 +33,7 @@
                 </option>
               </select>
               <button class="btn btn-primary" type="button" style="margin-top: 2px" 
-                      ng-click="addSourceComponent()" ng-disabled="userSelection.selectedSourceComponentIndex===null" translate>
-                Add Source Component
-              </button>
+                      ng-click="addSourceComponent()" ng-disabled="userSelection.selectedSourceComponentIndex===null" translate>Add Source Component</button>
             </div>
           </div>
         </div>
@@ -51,9 +49,7 @@
                 </option>
               </select>
               <button class="btn btn-primary" type="button" style="margin-top: 2px"
-                ng-click="removeSourceComponent()" ng-disabled="userSelection.selectedSourceComponentList.length===0" translate>
-                Remove Source Component
-              </button>
+                ng-click="removeSourceComponent()" ng-disabled="userSelection.selectedSourceComponentList.length===0" translate>Remove Source Component</button>
               <div>
                 <ng-messages for="componentCombinationForm.sourceComponentList.$error" ng-show="componentCombinationForm.$submitted">
                   <ng-messages-include src="messages.html"></ng-messages-include>
@@ -75,9 +71,7 @@
                 </option>
               </select>
               <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="addUnit()" 
-              ng-disabled="userSelection.selectedProducedComponentIndex===null" translate>
-                  Add Unit
-              </button>
+              ng-disabled="userSelection.selectedProducedComponentIndex===null" translate>Add Unit</button>
             </div>
           </div>
         </div>
@@ -92,9 +86,7 @@
                   {{componentType.componentTypeName}}
                 </option>
               </select>
-              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="removeProducedComponent()" ng-disabled="userSelection.selectedProducedComponentList.length===0" translate>
-                Remove Unit
-              </button>
+              <button class="btn btn-primary" type="button" style="margin-top: 2px" ng-click="removeProducedComponent()" ng-disabled="userSelection.selectedProducedComponentList.length===0" translate>Remove Unit</button>
               <ng-messages for="componentCombinationForm.producedComponentList.$error" role="alert" ng-show="componentCombinationForm.$submitted">
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
@@ -117,8 +109,7 @@
                 ng-disabled="savingComponentCombination">{{savingComponentCombination ? "Saving..." : "Save" | translate}}
             </button>
             <button class="btn btn-primary" type="button" ng-click="cancel()"
-                style="margin-top: 2px" ng-disabled="savingComponentCombination" translate>Cancel
-            </button>
+                style="margin-top: 2px" ng-disabled="savingComponentCombination" translate>Cancel</button>
           </div>
         </div>
       </form>
