@@ -17,10 +17,6 @@
                                    ng-class="{'ng-invalid ng-dirty' : (roleForm.name.$invalid && submitted) || nameInvalid }">
                             <div>
                                 <small class="error" ng-show="err === 'roleName.nonunique'" translate>Role name already exists</small>
-                                <small class="error"
-                                       ng-show="(roleForm.name.$error.required && (roleForm.name.$dirty || submitted))">
-                                    This cannot be empty
-                                </small>
                                 <div>
                                      <ng-messages for="roleForm.name.$error" ng-show="(roleForm.name.$dirty || submitted)">
                                         <ng-messages-include src="messages.html"></ng-messages-include>
