@@ -1,21 +1,21 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-  <h3 class="page-header">Manage Location</h3>
+  <h3 class="page-header" translate>Manage Location</h3>
   <div class="panel panel-default">
     <div class="panel-body">
       <form name="locationForm" novalidate class="form-horizontal col-sm-12" ng-submit="saveLocation()">
 
         <!-- Set name -->
         <div class="row form-group col-sm-12">
-          <label for="name" class="col-sm-2 control-label">Name</label>
+          <label for="name" class="col-sm-2 control-label" translate>Name</label>
           <div class="col-sm-4">
             <div class="form-inline">
               <input size="30" id="name" name="name" class="form-control input-sm" ng-model="location.name" required>
               <div>
-                <small class="error" ng-show="locationForm.name.$error.duplicate && locationForm.$submitted">
+                <small class="error" ng-show="locationForm.name.$error.duplicate && locationForm.$submitted" translate>
                   Location name already exists
                 </small>
-                <small class="error" ng-show="locationForm.name.$error.required && locationForm.$submitted">
+                <small class="error" ng-show="locationForm.name.$error.required && locationForm.$submitted" translate>
                   This cannot be empty
                 </small>
               </div>
@@ -25,40 +25,40 @@
 
         <!-- Set location type booleans -->
         <div class="row form-group col-sm-12">
-          <label class="col-sm-2 control-label">Location Type</label>
+          <label class="col-sm-2 control-label" translate>Location Type</label>
           <div class="col-sm-10 form-inline">
             <div class="checkbox">
               <label>
                 <input type="checkbox" id="isVenue" name="isVenue" ng-model="location.isVenue" ng-required="!validateLocationType()"/>
-                Donor Clinic
+                <span translate>Donor Clinic</span>
               </label>
               <label>
                 <input type="checkbox" id="isMobile" name="isMobile" ng-model="location.isMobileSite" ng-required="!validateLocationType()"/>
-                Mobile Clinic
+                <span translate>Mobile Clinic</span>
               </label>
               <label>
                 <input type="checkbox" name="isProcessingSite" ng-model="location.isProcessingSite" ng-required="!validateLocationType()"/>
-                Components
+                <span translate>Components</span>
               </label>
               <label>
                 <input type="checkbox" name="isTestingSite" ng-model="location.isTestingSite" ng-required="!validateLocationType()"/>
-                Testing
+                <span translate>Testing</span>
               </label>
               <label>
                 <input type="checkbox" name="isDistributionSite" ng-model="location.isDistributionSite" ng-required="!validateLocationType()"/>
-                Inventory
+                <span translate>Inventory</span>
               </label>
               <label>
                 <input type="checkbox" name="isUsageSite" ng-model="location.isUsageSite" ng-required="!validateLocationType()"/>
-                Hospital / Clinic
+                <span translate>Hospital / Clinic</span>
               </label>
               <label>
                 <input type="checkbox" name="isReferralSite" ng-model="location.isReferralSite" ng-required="!validateLocationType()"/>
-                Referral Site
+                <span translate>Referral Site</span>
               </label>
             </div>
             <div>
-              <small class="error" ng-show="!validateLocationType() && locationForm.$submitted">
+              <small class="error" ng-show="!validateLocationType() && locationForm.$submitted" translate>
                 Please choose at least one location type
               </small>
             </div>
@@ -71,7 +71,7 @@
           <div class="col-sm-10">
             <select class="form-control" name="divisionLevel1" style="width:auto;" ng-model="location.divisionLevel1" required 
             ng-options="d as d.name for d in level1Divisions track by d.id"></select>
-            <small class="error" ng-show="locationForm.divisionLevel1.$error.required && locationForm.$submitted">
+            <small class="error" ng-show="locationForm.divisionLevel1.$error.required && locationForm.$submitted" translate>
               This cannot be empty
             </small>
           </div>
@@ -85,7 +85,7 @@
             ng-required="locationForm.$submitted"
             ng-options="d as d.name for d in level2Divisions track by d.id" 
             ng-disabled="location.divisionLevel1 === null || level2Divisions.length === 0"></select>
-            <small class="error" ng-show="locationForm.divisionLevel2.$error.required && locationForm.$submitted">
+            <small class="error" ng-show="locationForm.divisionLevel2.$error.required && locationForm.$submitted" translate>
               This cannot be empty
             </small>
           </div>
@@ -99,7 +99,7 @@
             ng-required="locationForm.$submitted" 
             ng-options="d as d.name for d in level3Divisions track by d.id" 
             ng-disabled="location.divisionLevel2 === null || level3Divisions.length === 0"></select>
-            <small class="error" ng-show="locationForm.divisionLevel3.$error.required && locationForm.$submitted">
+            <small class="error" ng-show="locationForm.divisionLevel3.$error.required && locationForm.$submitted" translate>
               This cannot be empty
             </small>
           </div>
@@ -107,7 +107,7 @@
 
         <!-- Set isDeleted -->
         <div class="row form-group col-sm-12">
-          <label for="isDeleted" class="col-sm-2 control-label">Enabled</label>
+          <label for="isDeleted" class="col-sm-2 control-label" translate>Enabled</label>
           <div class="col-sm-4">
             <div class="checkbox">
               <input type="checkbox" id="isDeleted" name="isDeleted" ng-model="location.isDeleted" ng-true-value="false" ng-false-value="true"/>
@@ -119,10 +119,10 @@
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
             <button class="btn btn-primary" type="submit" style="margin-top: 2px"
-                ng-disabled="savingLocation">{{savingLocation ? "Saving..." : "Save Location"}}
+                ng-disabled="savingLocation">{{savingLocation ? "Saving..." : "Save" | translate}}
             </button>
             <button class="btn btn-primary" type="button" ng-click="cancel()"
-                style="margin-top: 2px" ng-disabled="savingLocation">Cancel
+                style="margin-top: 2px" ng-disabled="savingLocation" translate>Cancel
             </button>
           </div>
         </div>
