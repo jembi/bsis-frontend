@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('LoginCtrl', function($scope, $location, AuthService, ConfigurationsService) {
+  .controller('LoginCtrl', function($scope, $location, AuthService, ConfigurationsService, gettextCatalog) {
     $scope.credentials = {
       username: '',
       password: ''
@@ -32,17 +32,17 @@ angular.module('bsis')
 
           // error message for 401 - Unauthorized response
           if (statusCode === 401) {
-            $scope.loginAlert = 'Invalid Username / Password.';
+            $scope.loginAlert = gettextCatalog.getString('Invalid Username / Password');
           }
 
           // error message to display when the host is unavailable
           if (statusCode === 0) {
-            $scope.loginAlert = 'Unable to establish a connection. Please report this issue and try again later.';
+            $scope.loginAlert = gettextCatalog.getString('Unable to establish a connection. Please report this issue and try again later');
           }
         });
       } else {
         $scope.loginInvalid = true;
-        $scope.loginAlert = 'Please supply all fields';
+        $scope.loginAlert = gettextCatalog.getString('Please supply all fields');
       }
 
     };
