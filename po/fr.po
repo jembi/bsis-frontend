@@ -1931,7 +1931,6 @@ msgstr "[FR] First"
 #: app/scripts/controllers/mobile/mobileClinicExport.js:37
 #: app/views/donors/duplicateDonors.html:26 app/views/donors/findDonor.html:84
 #: app/views/donors/mergeDonorsSelection.html:18
-#: app/views/settings/users.html:24
 msgid "First Name"
 msgstr "[FR] First Name"
 
@@ -1943,6 +1942,10 @@ msgstr "[FR] Flagged for Counselling"
 #: app/views/inventory/fulfilOrder.html:3
 msgid "Fulfil Order Form"
 msgstr " Exécuter le Formulaire de Commande"
+
+#: app/views/settings/users.html:24
+msgid "Full Name"
+msgstr "[FR] Full Name"
 
 #: app/scripts/controllers/inventory/fulfilOrder.js:405
 #: app/scripts/controllers/inventory/viewOrder.js:32
