@@ -22,7 +22,7 @@
                         </td>
                         <td data-title="'Default Duration' | translate" sortable="'defaultDuration'" class="text-center">
                             <span ng-if="deferral.durationType === 'PERMANENT'" translate>Permanent</span> 
-                            <span ng-if="deferral.durationType !== 'PERMANENT' && deferral.defaultDuration !== null" translate translate-params-num-of-days="deferral.defaultDuration">{{numOfDays}} day(s)</span>
+                            <span ng-if="deferral.durationType !== 'PERMANENT' && deferral.defaultDuration !== null" translate translate-params-count="deferral.defaultDuration">{{count}} day(s)</span>
                         </td>
                         <td data-title="'Enabled' | translate" class="text-center">
                             <span ng-show="!deferral.isDeleted"><i class="fa {{icons.SQUARECHECK}}"></i></span>
