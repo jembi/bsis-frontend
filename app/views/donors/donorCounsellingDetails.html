@@ -94,12 +94,12 @@
           </div>
           <div class="col-sm-6 col-md-4 col-lg-3 form-group pad-t-30">
 
-            <button class="btn btn-secondary" href="" ng-click="goBack()" ng-disabled="updatingCounselling" translate>Cancel</button>
+            <button class="btn btn-primary margin-t-3" href="" ng-click="goBack()" ng-disabled="updatingCounselling" translate>Cancel</button>
 
-            <button class="btn btn-secondary" href="" ng-click="removeStatus()" ng-disabled="!postDonationCounselling.permissions.canRemoveStatus || updatingCounselling"
+            <button class="btn btn-primary margin-t-3" href="" ng-click="removeStatus()" ng-disabled="!postDonationCounselling.permissions.canRemoveStatus || updatingCounselling"
               translate>Remove</button>
 
-            <button type="submit" class="btn btn-primary margin-t-0 pull-right" ng-disabled="updatingCounselling">
+            <button type="submit" class="btn btn-primary margin-t-3 pull-right" ng-disabled="updatingCounselling">
                       {{updatingCounselling ? "Saving..." : "Save" | translate}}
               </button>
           </div>
