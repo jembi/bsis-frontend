@@ -655,7 +655,7 @@ msgstr "[FR] Can be Issued"
 #: app/views/settings/managePackType.html:134
 #: app/views/settings/manageRole.html:71
 #: app/views/settings/manageTransfusionReactionType.html:45
-#: app/views/settings/manageUser.html:153 app/views/settings/users.html:32
+#: app/views/settings/manageUser.html:154 app/views/settings/users.html:32
 #: app/views/testing/manageBloodGroupMatchTesting.html:123
 #: app/views/testing/manageBloodGroupTesting.html:92
 #: app/views/testing/managePendingBloodTypingTests.html:98
@@ -964,7 +964,7 @@ msgid "Confirm Void"
 msgstr "[FR] Confirm Void"
 
 #: app/views/settings/accountSettings.html:121
-#: app/views/settings/manageUser.html:110
+#: app/views/settings/manageUser.html:111
 msgid "Confirm password"
 msgstr "[FR] Confirm password"
 
@@ -1154,7 +1154,7 @@ msgstr "[FR] DONOR RECORDS"
 msgid "Data Export"
 msgstr "Exportation de Données"
 
-#: app/views/settings/configurations.html:27
+#: app/views/settings/configurations.html:26
 #: app/views/settings/manageConfiguration.html:49
 msgid "Data Type"
 msgstr "[FR] Data Type"
@@ -1357,7 +1357,7 @@ msgstr "[FR] Demographics"
 #: app/views/donors/addDonorDonation.html:235
 #: app/views/settings/adverseEventTypeForm.html:25
 #: app/views/settings/adverseEventTypes.html:20
-#: app/views/settings/configurations.html:24
+#: app/views/settings/configurations.html:23
 #: app/views/settings/manageConfiguration.html:31
 #: app/views/settings/manageRole.html:30
 #: app/views/settings/manageTransfusionReactionType.html:24
@@ -1806,7 +1806,7 @@ msgstr "[FR] Enter a valid temperature"
 msgid "Enter a valid time"
 msgstr "Prière entrer une heure valide"
 
-#: app/views/settings/manageUser.html:87
+#: app/views/settings/manageUser.html:88
 msgid "Enter password"
 msgstr "[FR] Enter password"
 
@@ -2566,7 +2566,7 @@ msgstr "[FR] NTD"
 #: app/views/settings/accountSettings.html:23
 #: app/views/settings/adverseEventTypeForm.html:8
 #: app/views/settings/adverseEventTypes.html:19
-#: app/views/settings/configurations.html:21
+#: app/views/settings/configurations.html:20
 #: app/views/settings/divisions.html:11 app/views/settings/locations.html:11
 #: app/views/settings/manageComponentType.html:9
 #: app/views/settings/manageComponentTypeCombination.html:9
@@ -3011,7 +3011,7 @@ msgstr "[FR] Pass"
 
 #. Data Type
 #: app/views/settings/accountSettings.html:74
-#: app/views/settings/manageUser.html:77 app/views/translations.html:89
+#: app/views/settings/manageUser.html:78 app/views/translations.html:89
 msgid "Password"
 msgstr "[FR] Password"
 
@@ -3171,7 +3171,7 @@ msgstr "Sélectionnez un type d'expédition"
 msgid "Please select at least one permission"
 msgstr "[FR] Please select at least one permission"
 
-#: app/views/settings/manageUser.html:131
+#: app/views/settings/manageUser.html:132
 msgid "Please select at least one role"
 msgstr "[FR] Please select at least one role"
 
@@ -3522,7 +3522,7 @@ msgstr "[FR] Repeat ABO/Rh Outcomes"
 msgid "Repeat TTI Test Outcomes"
 msgstr "[FR] Repeat TTI Test Outcomes"
 
-#: app/views/settings/manageUser.html:83
+#: app/views/settings/manageUser.html:84
 msgid "Reset Password"
 msgstr "[FR] Reset Password"
 
@@ -3611,7 +3611,7 @@ msgstr "[FR] Rh"
 msgid "Role name already exists"
 msgstr "[FR] Role name already exists"
 
-#: app/views/settings/manageUser.html:128
+#: app/views/settings/manageUser.html:129
 msgid "Roles"
 msgstr "[FR] Roles"
 
@@ -4107,8 +4107,8 @@ msgstr ""
 #: app/views/settings/manageLocation.html:68
 #: app/views/settings/manageLocation.html:80
 #: app/views/settings/manageLocation.html:92
-#: app/views/settings/manageUser.html:26 app/views/settings/manageUser.html:67
-#: app/views/settings/manageUser.html:96
+#: app/views/settings/manageUser.html:26 app/views/settings/manageUser.html:68
+#: app/views/settings/manageUser.html:97
 msgid "This cannot be empty"
 msgstr "Ce champ ne peut pas être vide"
 
@@ -4488,11 +4488,19 @@ msgstr "[FR] Username"
 msgid "Username already exists"
 msgstr "[FR] Username already exists"
 
+#: app/views/settings/manageUser.html:65
+msgid ""
+"Username invalid. Use only alphanumeric characters, underscore (_), hyphen "
+"(-), and period (.)"
+msgstr ""
+"[FR] Username invalid. Use only alphanumeric characters, underscore (_), "
+"hyphen (-), and period (.)"
+
 #: app/views/settings/manageBloodTest.html:84
 msgid "Valid Outcomes"
 msgstr "[FR] Valid Outcomes"
 
-#: app/views/settings/configurations.html:30
+#: app/views/settings/configurations.html:29
 #: app/views/settings/manageConfiguration.html:69
 msgid "Value"
 msgstr "[FR] Value"
@@ -4874,6 +4882,86 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid "Build: {{backendBuildNumber}} / {{frontEndBuildNumber}}"
+#~ msgstr "[FR] Build: {{backendBuildNumber}} / {{frontEndBuildNumber}}"
+
+#~ msgid "COMPONENTS"
+#~ msgstr "[FR] COMPONENTS"
+
+#~ msgid "Check Components to Print Pack and Discard Labels"
+#~ msgstr "[FR] Check Components to Print Pack and Discard Labels"
+
+#~ msgid "Component Production Laboratory"
+#~ msgstr "[FR] Component Production Laboratory"
+
+#~ msgid "DONORS"
+#~ msgstr "[FR] DONORS"
+
+#~ msgid "Forgot password"
+#~ msgstr "[FR] Forgot password"
+
+#~ msgid "HOME"
+#~ msgstr "[FR] HOME"
+
+#~ msgid "INVENTORY"
+#~ msgstr "[FR] INVENTORY"
+
+#~ msgid "Invalid Username / Password"
+#~ msgstr "[FR] Invalid Username / Password"
+
+#~ msgid "Log in"
+#~ msgstr "[FR] Log in"
+
+#~ msgid "Log out"
+#~ msgstr "[FR] Log out"
+
+#~ msgid "Manage Account and System Settings"
+#~ msgstr "[FR] Manage Account and System Settings"
+
+#~ msgid "Manage Blood Bank Inventory, Requests, Transfers and Issues"
+#~ msgstr "[FR] Manage Blood Bank Inventory, Requests, Transfers and IssuesS"
+
+#~ msgid "Manage Donor Records, Donation Batches and Donor Communications"
+#~ msgstr ""
+#~ "[FR] Manage Donor Records, Donation Batches and Donor Communications"
+
+#~ msgid "Manage Mobile Clinics and Sync Data"
+#~ msgstr "[FR] Manage Mobile Clinics and Sync Data"
+
+#~ msgid "Manage TTI and Blood Group Serology Testing"
+#~ msgstr "[FR] Manage TTI and Blood Group Serology Testing"
+
+#~ msgid "Please supply all fields"
+#~ msgstr "[FR] Please supply all fields"
+
+#~ msgid "TESTING"
+#~ msgstr "[FR] TESTING"
+
+#~ msgid ""
+#~ "That page is not accessible - you have been redirected to the home page."
+#~ msgstr ""
+#~ "[FR] That page is not accessible - you have been redirected to the home "
+#~ "page."
+
+#~ msgid "Toggle navigation"
+#~ msgstr "[FR] Toggle navigation"
+
+#~ msgid ""
+#~ "Unable to establish a connection. Please report this issue and try again "
+#~ "later"
+#~ msgstr ""
+#~ "[FR] Unable to establish a connection. Please report this issue and try "
+#~ "again later"
+
+#~ msgid "Version: {{backendVersion}} / {{frontEndVersion}}"
+#~ msgstr "[FR] Version: {{backendVersion}} / {{frontEndVersion}}"
+
+#~ msgid "View Charts and Export Reports"
+#~ msgstr "[FR] View Charts and Export Reports"
+
+#~ msgid "Welcome to BSIS - The Blood Safety Information System"
+#~ msgstr "[FR] Welcome to BSIS - The Blood Safety Information System"
 
 #~ msgid ""
 #~ "Component with DIN {{din}} and ComponentCode {{componentCode}} not found."
