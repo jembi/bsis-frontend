@@ -148,8 +148,6 @@ angular.module('bsis')
         if (err) {
           if (err.fieldErrors.packType && err.fieldErrors.packType[0].code === 'name.exists') {
             $scope.packTypeForm.packType.$setValidity('duplicate', false);
-          } else if (err.fieldErrors.countAsDonation && err.fieldErrors.countAsDonation[0].code === 'countAsDonation.notAllowed') {
-            $scope.packTypeForm.countAsDonation.$setValidity('invalid', false);
           }
         }
         $scope.savingPackType = false;
@@ -186,8 +184,6 @@ angular.module('bsis')
         if (err) {
           if (err.fieldErrors.packType && err.fieldErrors.packType[0].code === 'name.exists') {
             $scope.packTypeForm.packType.$setValidity('duplicate', false);
-          } else if (err.fieldErrors.countAsDonation && err.fieldErrors.countAsDonation[0].code === 'countAsDonation.notAllowed') {
-            $scope.packTypeForm.countAsDonation.$setValidity('invalid', false);
           }
         }
         $scope.savingPackType = false;
