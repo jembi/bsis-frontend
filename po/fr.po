@@ -1943,10 +1943,6 @@ msgstr "[FR] Flagged for Counselling"
 msgid "Fulfil Order Form"
 msgstr " Exécuter le Formulaire de Commande"
 
-#: app/views/settings/users.html:24
-msgid "Full Name"
-msgstr "[FR] Full Name"
-
 #: app/scripts/controllers/inventory/fulfilOrder.js:405
 #: app/scripts/controllers/inventory/viewOrder.js:32
 #: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:131
