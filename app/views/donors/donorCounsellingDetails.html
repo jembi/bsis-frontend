@@ -60,7 +60,7 @@
               <ng-messages-include src="messages.html"></ng-messages-include>
             </ng-messages>
           </div>
-          <div class="col-sm-7 col-md-5 col-lg-4 form-group">
+          <div class="col-sm-6 col-md-3 col-lg-4 form-group">
             <label class="display-block" for="counsellingStatus" translate>Counselling Status</label>
 
             <select class="form-control" name="counsellingStatus" ng-model="postDonationCounselling.counsellingStatus" ng-options="status as (status | titleCase | translate) for status in counsellingStatuses"
@@ -77,7 +77,7 @@
             <input type="checkbox" id="referred" ng-click="updateReferralSites()" ng-model="postDonationCounselling.referred" ng-disabled="!referredEnabled">
           </div>
 
-          <div class="col-sm-6 col-md-2 col-lg-4 form-group">
+          <div class="col-sm-7 col-md-4 col-lg-4 form-group">
             <label for="referralSite" translate>Referral location</label>
             <select name="referralSite" class="form-control" ng-disabled="!postDonationCounselling.referred" ng-model="postDonationCounselling.referralSite"
               ng-options="referralSite as referralSite.name for referralSite in referralSites track by referralSite.id" ng-required="postDonationCounselling.referred">
