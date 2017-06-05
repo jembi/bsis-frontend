@@ -1,12 +1,12 @@
 <div class="container">
     <form class="form-signin" name="loginForm" ng-submit="login(credentials, loginForm)" novalidate>
         <img class="main" src="images/bsis_logo.png">
-        <input type="username" id="username" name="username" class="form-control input-md" placeholder="Username"
+        <input type="username" id="username" name="username" class="form-control input-md" placeholder="{{'Username' | translate}}"
                required autofocus="true"
                ng-model="credentials.username" select-on-focus
                ng-class="{'ng-invalid ng-dirty' : loginForm.username.$invalid && loginInvalid}"
                ng-model-options="{ updateOn: 'blur', debounce: { blur: 1000 } }">
-        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required
+        <input type="password" id="password" name="password" class="form-control" placeholder="{{'Password' | translate}}" required
                ng-model="credentials.password" select-on-focus
                ng-class="{'ng-invalid ng-dirty' : loginForm.password.$invalid && loginInvalid}"
                ng-model-options="{ updateOn: 'blur', debounce: { blur: 1000 } }">
