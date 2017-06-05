@@ -105,7 +105,7 @@ angular.module('bsis')
 
     $scope.$watch('packType.packType', function() {
       $timeout(function() {
-        if($scope.packTypeForm) {
+        if ($scope.packTypeForm) {
           $scope.packTypeForm.packType.$setValidity('duplicate', true);
         }
       });
@@ -113,12 +113,12 @@ angular.module('bsis')
 
     $scope.$watch('packType.countAsDonation', function() {
       $timeout(function() {
-        if($scope.packTypeForm) {
+        if ($scope.packTypeForm) {
           $scope.packTypeForm.countAsDonation.$setValidity('invalid', true);
         }
       });
     });
-    
+
     $scope.savePackType = function(packType, packTypeForm) {
 
       if (packTypeForm.$valid) {
@@ -183,7 +183,7 @@ angular.module('bsis')
       PackTypesService.updatePackType(packType, function() {
         $scope.go('/packTypes');
       }, function(err) {
-       if (err) {
+        if (err) {
           if (err.fieldErrors.packType && err.fieldErrors.packType[0].code === 'name.exists') {
             $scope.packTypeForm.packType.$setValidity('duplicate', false);
           } else if (err.fieldErrors.countAsDonation && err.fieldErrors.countAsDonation[0].code === 'countAsDonation.notAllowed') {
