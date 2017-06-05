@@ -217,23 +217,23 @@ angular.module('bsis')
 
     var setMenuSelection = function() {
       if (matchesRoutes($location.path(), donorRoutes)) { // if on donors page, set menu to DONORS
-        $scope.currentSection = 'DONORS';
+        $scope.currentSection = gettextCatalog.getString('DONORS');
       } else if (matchesRoutes($location.path(), componentsRoutes)) { // else if on components page, set menu to COMPONENTS
-        $scope.currentSection = 'COMPONENTS';
+        $scope.currentSection = gettextCatalog.getString('COMPONENTS');
       } else if (matchesRoutes($location.path(), testingRoutes)) { // else if on testing page, set menu to TESTING
-        $scope.currentSection = 'TESTING';
+        $scope.currentSection = gettextCatalog.getString('TESTING');
       } else if (matchesRoutes($location.path(), inventoryRoutes)) { // else if on inventory page, set menu to INVENTORY
-        $scope.currentSection = 'INVENTORY';
+        $scope.currentSection = gettextCatalog.getString('INVENTORY');
       } else if (matchesRoutes($location.path(), labellingRoutes)) { // else if on labelling page, set menu to LABELLING
-        $scope.currentSection = 'LABELLING';
+        $scope.currentSection = gettextCatalog.getString('LABELLING');
       } else if (matchesRoutes($location.path(), reportsRoutes)) { // else if on reports page, set menu to REPORTS
-        $scope.currentSection = 'REPORTS';
+        $scope.currentSection = gettextCatalog.getString('REPORTS');
       } else if (matchesRoutes($location.path(), mobileRoutes)) { // else if on mobile clinic page, set menu to MOBILE
-        $scope.currentSection = 'MOBILE CLINIC';
+        $scope.currentSection = gettextCatalog.getString('MOBILE CLINIC');
       } else if (matchesRoutes($location.path(), settingsRoutes)) { // else if on settings page, set menu to SETTINGS
-        $scope.currentSection = 'SETTINGS';
+        $scope.currentSection = gettextCatalog.getString('SETTINGS');
       } else { // else set menu to HOME
-        $scope.currentSection = 'HOME';
+        $scope.currentSection = gettextCatalog.getString('HOME');
       }
     };
 
