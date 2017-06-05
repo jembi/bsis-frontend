@@ -43,9 +43,6 @@
                                            ng-disabled="!packType.testSampleProduced"
                                            ng-class="{'ng-invalid ng-dirty' : packTypeForm.countAsDonation.$invalid && submitted }"/>
                                 </div>
-                                <ng-messages for="packTypeForm.countAsDonation.$error" role="alert" ng-show="packTypeForm.$submitted">
-                                    <ng-messages-include src="messages.html"></ng-messages-include>
-                                </ng-messages>
                             </div>
                         </div>
 
@@ -61,6 +58,9 @@
                                         <option value="" ng-disabled="true" translate>Select</option>
                                     </select>
                                 </div>
+                                <ng-messages for="packTypeForm.componentType.$error" role="alert" ng-show="packTypeForm.$submitted">
+                                    <ng-messages-include src="messages.html"></ng-messages-include>
+                                </ng-messages>
                             </div>
                         </div>
 
@@ -74,7 +74,7 @@
                                            ng-minlength=1 ng-maxlength=3
                                            ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                                            ng-class="{'ng-invalid ng-dirty' : packTypeForm.periodBetweenDonations.$invalid && submitted}"
-                                    /> <em>days</em>
+                                    /> <em translate>days</em>
                                     <ng-messages for="packTypeForm.periodBetweenDonations.$error" role="alert" ng-show="packTypeForm.$submitted">
                                         <ng-messages-include src="messages.html"></ng-messages-include>
                                     </ng-messages>

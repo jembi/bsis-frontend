@@ -25,7 +25,7 @@
                             {{configuration.description}}
                         </td>
                         <td data-title="'Data Type' | translate" header-class="text-left" sortable="''">
-                            {{configuration.dataType.datatype}}
+                            {{configuration.dataType.datatype | titleCase | filter}}
                         </td>
                         <td data-title="'Value' | translate" header-class="text-left" sortable="''" ng-switch on="configuration.dataType.datatype">
                             <span ng-switch-when="password">•••••</span>
