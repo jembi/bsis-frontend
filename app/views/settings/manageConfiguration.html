@@ -17,7 +17,7 @@
                                    ng-class="{'ng-invalid ng-dirty' : (configurationForm.name.$invalid && submitted) || configurationNameInvalid }">
                             <div>
                                 <small class="error" ng-show="serverError.name">
-                                    {{serverError.name}}
+                                    <span translate>This must be unique</span>
                                 </small>
                                 <small class="error"
                                        ng-show="(configurationForm.name.$error.required && (configurationForm.name.$dirty || submitted))">
@@ -93,7 +93,12 @@
                                    ng-class="{'ng-invalid ng-dirty' : configurationForm.dataType.$invalid && submitted}" />
                             <div>
                                 <small class="error" ng-show="serverError.value">
-                                    {{serverError.value}}
+                                    <span ng-switch on="datatype">
+                                      <span ng-switch-when="integer" translate>Invalid integer value</span>
+                                      <span ng-switch-when="decimal" translate>Invalid decimal value</span>
+                                      <span ng-switch-when="boolean" translate>Invalid boolean value</span>
+                                      <span ng-switch-default translate>Invalid value</span>
+                                    </span>
                                 </small>
                                 <small class="error"
                                        ng-show="(configurationForm.value.$error.required && (configurationForm.value.$dirty || submitted))">
