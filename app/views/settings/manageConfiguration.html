@@ -51,7 +51,7 @@
                         <div class="form-inline">
                             <select id="dataType" name="dataType" class="form-control input-sm"
                                     ng-model="configuration.dataType.id"
-                                    ng-options="item.id as item.datatype for item in dataTypes" required
+                                    ng-options="item.id as (item.datatype | titleCase | translate) for item in dataTypes" required
                                     ng-class="{'ng-invalid ng-dirty' : configurationForm.dataType.$invalid && submitted}">
                                 <option value="" ng-disabled="true" translate>Select</option>
                             </select>
