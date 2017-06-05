@@ -63,16 +63,9 @@
           <div class="col-sm-7 col-md-5 col-lg-4 form-group">
             <label class="display-block" for="counsellingStatus" translate>Counselling Status</label>
 
-            <div class="btn-group" role="group" aria-label="...">
-              <button type="button" ng-model="postDonationCounselling.counsellingStatus" uib-btn-radio="'RECEIVED_COUNSELLING'" class="btn btn-default">Received</button>
-              <button type="button" ng-model="postDonationCounselling.counsellingStatus" uib-btn-radio="'DID_NOT_RECEIVE_COUNSELLING'"
-                class="btn btn-default">Did not receive</button>
-              <button type="button" ng-model="postDonationCounselling.counsellingStatus" uib-btn-radio="'REFUSED_COUNSELLING'" class="btn btn-default">Refused</button>
-            </div>
-
-            <!--<select class="form-control" name="counsellingStatus" ng-model="postDonationCounselling.counsellingStatus" ng-options="status as (status | titleCase | translate) for status in counsellingStatuses"
+            <select class="form-control" name="counsellingStatus" ng-model="postDonationCounselling.counsellingStatus" ng-options="status as (status | titleCase | translate) for status in counsellingStatuses"
                 required ng-change="updateReferredEnabled()" ng-class="{'has-error': postDonationCounsellingForm.$submitted && postDonationCounsellingForm.counsellingStatus.$invalid}">
-                </select>-->
+                </select>
 
             <ng-messages role="alert" for="postDonationCounsellingForm.counsellingStatus.$error" ng-show="postDonationCounsellingForm.$submitted || postDonationCounsellingForm.counsellingStatus.$dirty">
               <ng-messages-include src="messages.html"></ng-messages-include>
@@ -81,11 +74,7 @@
 
           <div class="col-sm-6 col-md-2 col-lg-2 form-group">
             <label class="display-block" for="referred" translate>Referred</label>
-            <!--<input type="checkbox" id="referred" ng-click="updateReferralSites()" ng-model="postDonationCounselling.referred" ng-disabled="!referredEnabled">-->
-            <div class="btn-group" role="group" aria-label="...">
-              <button type="button" ng-model="postDonationCounselling.referred" uib-btn-radio=true class="btn btn-default">Yes</button>
-              <button type="button" ng-model="postDonationCounselling.referred" uib-btn-radio=false class="btn btn-default">No</button>
-            </div>
+            <input type="checkbox" id="referred" ng-click="updateReferralSites()" ng-model="postDonationCounselling.referred" ng-disabled="!referredEnabled">
           </div>
 
           <div class="col-sm-6 col-md-2 col-lg-4 form-group">
