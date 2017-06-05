@@ -93,15 +93,10 @@
             <input name="counsellingNotes" type="text" class="form-control" ng-model="postDonationCounselling.notes" />
           </div>
           <div class="col-sm-6 col-md-4 col-lg-3 form-group pad-t-30">
-
-            <button class="btn btn-primary margin-t-3" href="" ng-click="goBack()" ng-disabled="updatingCounselling" translate>Cancel</button>
-
+            <button type="submit" class="btn btn-primary margin-t-3" ng-disabled="updatingCounselling">{{updatingCounselling ? "Saving..." : "Save" | translate}}</button>
             <button class="btn btn-primary margin-t-3" href="" ng-click="removeStatus()" ng-disabled="!postDonationCounselling.permissions.canRemoveStatus || updatingCounselling"
               translate>Remove</button>
-
-            <button type="submit" class="btn btn-primary margin-t-3" ng-disabled="updatingCounselling">
-                      {{updatingCounselling ? "Saving..." : "Save" | translate}}
-              </button>
+            <button class="btn btn-primary margin-t-3" href="" ng-click="goBack()" ng-disabled="updatingCounselling" translate>Cancel</button>
           </div>
         </div>
       </form>
