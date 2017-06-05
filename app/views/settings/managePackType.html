@@ -4,19 +4,6 @@
         <h3 class="page-header" translate>Manage Pack Type</h3>
         <div class="panel panel-default">
             <div class="panel-body">
-                <div ng-show="serverError">
-                    <uib-alert type="danger" close="serverError = null">
-                        {{serverError.userMessage}}
-                        <ul>
-                            <li ng-show="serverError.fieldErrors['type.packType']">
-                                {{serverError.fieldErrors['type.packType']}}
-                            </li>
-                            <li ng-show="serverError.fieldErrors['type.countAsDonation']">
-                                {{serverError.fieldErrors['type.countAsDonation']}}
-                            </li>
-                        </ul>
-                    </uib-alert>
-                </div>
 
                 <form name="packTypeForm" novalidate class="form-horizontal col-sm-12" role="form"
                       ng-submit="savePackType(packType,packTypeForm)">
@@ -25,11 +12,7 @@
                             <label for="packType" class="col-sm-2 control-label" translate>Pack Type</label>
                             <div class="col-sm-8">
                                 <div class="form-inline">
-                                    <input size="20" id="packType" name="packType" class="form-control input-sm"
-                                           ng-model="packType.packType" required
-                                           ng-minlength=1 ng-maxlength=30
-                                           ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                                           ng-class="{'ng-invalid ng-dirty' : packTypeForm.packType.$invalid && submitted}"/>
+                                    <input class="form-control" name="packType" ng-model="packType.packType" required>
                                     <ng-messages for="packTypeForm.packType.$error" role="alert" ng-show="packTypeForm.$submitted">
                                         <ng-messages-include src="messages.html"></ng-messages-include>
                                     </ng-messages>
@@ -60,6 +43,9 @@
                                            ng-disabled="!packType.testSampleProduced"
                                            ng-class="{'ng-invalid ng-dirty' : packTypeForm.countAsDonation.$invalid && submitted }"/>
                                 </div>
+                                <ng-messages for="packTypeForm.countAsDonation.$error" role="alert" ng-show="packTypeForm.$submitted">
+                                    <ng-messages-include src="messages.html"></ng-messages-include>
+                                </ng-messages>
                             </div>
                         </div>
 
@@ -74,9 +60,6 @@
                                             ng-class="{'ng-invalid ng-dirty' : packTypeForm.componentType.$invalid && submitted}">
                                         <option value="" ng-disabled="true" translate>Select</option>
                                     </select>
-                                    <ng-messages for="packTypeForm.countAsDonation.$error" role="alert" ng-show="packTypeForm.$submitted">
-                                        <ng-messages-include src="messages.html"></ng-messages-include>
-                                    </ng-messages>
                                 </div>
                             </div>
                         </div>
