@@ -62,6 +62,7 @@
 
                           <div>
                               <small class="error" ng-show="err === 'userName.nonunique'" translate>Username already exists</small>
+                              <small class="error" ng-show="err === 'user.incorrect'" translate>Username invalid. Use only alphanumeric characters, underscore (_), hyphen (-), and period (.)</small>
                               <small class="error"
                                      ng-show="(userForm.username.$error.required && (userForm.username.$dirty || submitted))">
                                   <span translate>This cannot be empty</span>
