@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('HeaderCtrl', function($scope, $location, AuthService, ConfigurationsService, ICONS, PERMISSIONS, UI) {
+  .controller('HeaderCtrl', function($scope, $location, AuthService, ConfigurationsService, ICONS, PERMISSIONS, UI, gettextCatalog) {
 
     $scope.icons = ICONS;
     var uuidRegexPattern = '[0-9a-f\\-]*';
@@ -14,63 +14,63 @@ angular.module('bsis')
 
     $scope.sectionList = [
       {
-        'title': 'HOME',
+        'title': gettextCatalog.getString('HOME'),
         'href': '#home',
         'icon': ICONS.HOME,
         'permission': PERMISSIONS.AUTHENTICATED,
         'sectionEnabled': 'true'
       },
       {
-        'title': 'DONORS',
+        'title': gettextCatalog.getString('DONORS'),
         'href': '#donors',
         'icon': ICONS.DONORS,
         'permission': PERMISSIONS.VIEW_DONOR_INFORMATION,
         'sectionEnabled': UI.DONORS_TAB_ENABLED
       },
       {
-        'title': 'COMPONENTS',
+        'title': gettextCatalog.getString('COMPONENTS'),
         'href': '#components',
         'icon': ICONS.COMPONENTS,
         'permission': PERMISSIONS.VIEW_COMPONENT_INFORMATION,
         'sectionEnabled': UI.COMPONENTS_TAB_ENABLED
       },
       {
-        'title': 'TESTING',
+        'title': gettextCatalog.getString('TESTING'),
         'href': '#testing',
         'icon': ICONS.TESTING,
         'permission': PERMISSIONS.VIEW_TESTING_INFORMATION,
         'sectionEnabled': UI.TESTING_TAB_ENABLED
       },
       {
-        'title': 'LABELLING',
+        'title': gettextCatalog.getString('LABELLING'),
         'href': '#labelling',
         'icon': ICONS.LABELLING,
         'permission': PERMISSIONS.LABEL_COMPONENT,
         'sectionEnabled': UI.LABELLING_TAB_ENABLED
       },
       {
-        'title': 'INVENTORY',
+        'title': gettextCatalog.getString('INVENTORY'),
         'href': '#inventory',
         'icon': ICONS.INVENTORY,
         'permission': PERMISSIONS.VIEW_INVENTORY_INFORMATION,
         'sectionEnabled': UI.INVENTORY_TAB_ENABLED
       },
       {
-        'title': 'REPORTS',
+        'title': gettextCatalog.getString('REPORTS'),
         'href': '#reports',
         'icon': ICONS.REPORTS,
         'permission': PERMISSIONS.VIEW_REPORTING_INFORMATION,
         'sectionEnabled': UI.REPORTS_TAB_ENABLED
       },
       {
-        'title': 'MOBILE CLINIC',
+        'title': gettextCatalog.getString('MOBILE CLINIC'),
         'href': '#mobile',
         'icon': ICONS.MOBILE,
         'permission': PERMISSIONS.VIEW_MOBILE_CLINIC_INFORMATION,
         'sectionEnabled': UI.MOBILE_CLINIC_TAB_ENABLED
       },
       {
-        'title': 'SETTINGS',
+        'title': gettextCatalog.getString('SETTINGS'),
         'href': '#settings',
         'icon': ICONS.SETTINGS,
         'permission': PERMISSIONS.AUTHENTICATED,
@@ -217,23 +217,23 @@ angular.module('bsis')
 
     var setMenuSelection = function() {
       if (matchesRoutes($location.path(), donorRoutes)) { // if on donors page, set menu to DONORS
-        $scope.currentSection = 'DONORS';
+        $scope.currentSection = gettextCatalog.getString('DONORS');
       } else if (matchesRoutes($location.path(), componentsRoutes)) { // else if on components page, set menu to COMPONENTS
-        $scope.currentSection = 'COMPONENTS';
+        $scope.currentSection = gettextCatalog.getString('COMPONENTS');
       } else if (matchesRoutes($location.path(), testingRoutes)) { // else if on testing page, set menu to TESTING
-        $scope.currentSection = 'TESTING';
+        $scope.currentSection = gettextCatalog.getString('TESTING');
       } else if (matchesRoutes($location.path(), inventoryRoutes)) { // else if on inventory page, set menu to INVENTORY
-        $scope.currentSection = 'INVENTORY';
+        $scope.currentSection = gettextCatalog.getString('INVENTORY');
       } else if (matchesRoutes($location.path(), labellingRoutes)) { // else if on labelling page, set menu to LABELLING
-        $scope.currentSection = 'LABELLING';
+        $scope.currentSection = gettextCatalog.getString('LABELLING');
       } else if (matchesRoutes($location.path(), reportsRoutes)) { // else if on reports page, set menu to REPORTS
-        $scope.currentSection = 'REPORTS';
+        $scope.currentSection = gettextCatalog.getString('REPORTS');
       } else if (matchesRoutes($location.path(), mobileRoutes)) { // else if on mobile clinic page, set menu to MOBILE
-        $scope.currentSection = 'MOBILE CLINIC';
+        $scope.currentSection = gettextCatalog.getString('MOBILE CLINIC');
       } else if (matchesRoutes($location.path(), settingsRoutes)) { // else if on settings page, set menu to SETTINGS
-        $scope.currentSection = 'SETTINGS';
+        $scope.currentSection = gettextCatalog.getString('SETTINGS');
       } else { // else set menu to HOME
-        $scope.currentSection = 'HOME';
+        $scope.currentSection = gettextCatalog.getString('HOME');
       }
     };
 

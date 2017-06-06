@@ -2,13 +2,13 @@
 
 
     <div class="container">
-        <div class="navbar-sub">Welcome to BSIS - The Blood Safety Information System</div>
+        <div class="navbar-sub" translate>Welcome to BSIS - The Blood Safety Information System</div>
         <hr class="hr-top">
 
         <div ng-if="accessDenied === true" ng-hide="accessDenied === false"
              style="padding-top:10px; width:60%; margin:auto;">
-            <uib-alert type="danger" close="accessDenied = false">That page is not accessible - you have been redirected to
-                the home page.
+            <uib-alert type="danger" close="accessDenied = false">
+              <span translate>That page is not accessible - you have been redirected to the home page.</span>
             </uib-alert>
         </div>
 
@@ -23,9 +23,9 @@
                         </div>
                     </button>
                 </div>
-                <h3>DONORS</h3>
+                <h3 translate>DONORS</h3>
                 <hr class="hr-info">
-                <p class="p-info">Manage Donor Records, Donation Batches and Donor Communications</p>
+                <p class="p-info" translate>Manage Donor Records, Donation Batches and Donor Communications</p>
             </div>
 
             <div class="col-lg-3 placeholder {{isSectionEnabled('#componentsSection')}}">
@@ -38,9 +38,9 @@
                         </div>
                     </button>
                 </div>
-                <h3>COMPONENTS</h3>
+                <h3 translate>COMPONENTS</h3>
                 <hr class="hr-info">
-                <p class="p-info">Component Production Laboratory</p>
+                <p class="p-info" translate>Component Production Laboratory</p>
             </div>
 
             <div class="col-lg-3 placeholder {{isSectionEnabled('#testingSection')}}">
@@ -53,9 +53,9 @@
                         </div>
                     </button>
                 </div>
-                <h3>TESTING</h3>
+                <h3 translate>TESTING</h3>
                 <hr class="hr-info">
-                <p class="p-info">Manage TTI and Blood Group Serology Testing</p>
+                <p class="p-info" translate>Manage TTI and Blood Group Serology Testing</p>
             </div>
 
             <div class="col-lg-3 placeholder {{isSectionEnabled('#labellingSection')}}">
@@ -68,9 +68,9 @@
                         </div>
                     </button>
                 </div>
-                <h3>LABELLING</h3>
+                <h3 translate>LABELLING</h3>
                 <hr class="hr-info">
-                <p class="p-info">Check Components to Print Pack and Discard Labels</p>
+                <p class="p-info" translate>Check Components to Print Pack and Discard Labels</p>
             </div>
 
         </div>
@@ -87,9 +87,9 @@
                         </div>
                     </button>
                 </div>
-                <h3>INVENTORY</h3>
+                <h3 translate>INVENTORY</h3>
                 <hr class="hr-info">
-                <p class="p-info">Manage Blood Bank Inventory, Requests, Transfers and Issues</p>
+                <p class="p-info" translate>Manage Blood Bank Inventory, Requests, Transfers and Issues</p>
             </div>
 
             <div class="col-lg-3 placeholder {{isSectionEnabled('#reportsSection')}}">
@@ -102,9 +102,9 @@
                         </div>
                     </button>
                 </div>
-                <h3>REPORTS</h3>
+                <h3 translate>REPORTS</h3>
                 <hr class="hr-info">
-                <p class="p-info">View Charts and Export Reports</p>
+                <p class="p-info" translate>View Charts and Export Reports</p>
             </div>
 
             <div class="col-lg-3 placeholder {{isSectionEnabled('#mobileSection')}}">
@@ -117,9 +117,9 @@
                         </div>
                     </button>
                 </div>
-                <h3>MOBILE CLINIC</h3>
+                <h3 translate>MOBILE CLINIC</h3>
                 <hr class="hr-info">
-                <p class="p-info {{isSectionEnabled('#mobileSection')}}">Manage Mobile Clinics and Sync Data</p>
+                <p class="p-info {{isSectionEnabled('#mobileSection')}}" translate>Manage Mobile Clinics and Sync Data</p>
             </div>
 
             <div class="col-lg-3 placeholder {{isSectionEnabled('#settingsSection')}}">
@@ -131,9 +131,9 @@
                         </div>
                     </button>
                 </div>
-                <h3>SETTINGS</h3>
+                <h3 translate>SETTINGS</h3>
                 <hr class="hr-info">
-                <p class="p-info">Manage Account and System Settings</p>
+                <p class="p-info" translate>Manage Account and System Settings</p>
             </div>
 
         </div>

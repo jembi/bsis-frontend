@@ -53,7 +53,8 @@ msgstr "[FR] ABO/Rh"
 msgid "ABO/Rh Outcomes"
 msgstr "[FR] ABO/Rh Outcomes"
 
-#: app/views/settings/accountSettings.html:3 app/views/settings/sidebar.html:13
+#: app/views/header.html:43 app/views/settings/accountSettings.html:3
+#: app/views/settings/sidebar.html:13
 msgid "Account Settings"
 msgstr "[FR] Account Settings"
 
@@ -301,7 +302,7 @@ msgid "All venues"
 msgstr "[FR] All venues"
 
 #. Blood Typing Match Status
-#: app/views/translations.html:56
+#: app/views/translations.html:58
 msgid "Ambiguous"
 msgstr "[FR] Ambiguous"
 
@@ -328,7 +329,7 @@ msgstr "[FR] Any Date"
 msgid "Any Venue"
 msgstr "[FR] Any Venue"
 
-#: app/views/translations.html:100
+#: app/views/translations.html:102
 msgid "April"
 msgstr "[FR] April"
 
@@ -413,12 +414,12 @@ msgstr ""
 msgid "Audit Log"
 msgstr "[FR] Audit Log"
 
-#: app/views/translations.html:104
+#: app/views/translations.html:106
 msgid "August"
 msgstr "[FR] August"
 
 #. Component Status
-#: app/views/translations.html:43
+#: app/views/translations.html:45
 msgid "Available"
 msgstr "Disponible"
 
@@ -434,6 +435,10 @@ msgstr "[FR] BP"
 #: app/views/donors/manageDuplicateDonors.html:65
 msgid "Back"
 msgstr "[FR] Back"
+
+#: app/views/forgotPassword.html:15
+msgid "Back to login"
+msgstr "[FR] Back to login"
 
 #: app/views/donors/addDonorDonation.html:24
 msgid "Batch"
@@ -581,7 +586,7 @@ msgid "Blood Units Issued Summary Report"
 msgstr "[FR] Blood Units Issued Summary Report"
 
 #. Data Type
-#: app/views/translations.html:88
+#: app/views/translations.html:90
 msgid "Boolean"
 msgstr "[FR] Boolean"
 
@@ -589,6 +594,15 @@ msgstr "[FR] Boolean"
 #: app/views/components/addComponentBatch.html:89
 msgid "Box #{{boxNumber}}"
 msgstr "[FR] Box #{{boxNumber}}"
+
+#: app/views/footer.html:4 app/views/sidebarFooter.html:6
+msgid "Build: {{backendBuildNumber}} / {{frontEndBuildNumber}}"
+msgstr "[FR] Build: {{backendBuildNumber}} / {{frontEndBuildNumber}}"
+
+#: app/scripts/controllers/header.js:222 app/scripts/controllers/header.js:31
+#: app/views/home.html:41
+msgid "COMPONENTS"
+msgstr "[FR] COMPONENTS"
 
 #. Comma Separated Values file, abbreviation
 #: app/views/components/viewComponentBatches.html:50
@@ -624,7 +638,7 @@ msgstr "[FR] Calling Name"
 msgid "Can be Issued"
 msgstr "[FR] Can be Issued"
 
-#: app/views/donors/addDonation.html:328
+#: app/views/confirmModal.html:8 app/views/donors/addDonation.html:328
 #: app/views/donors/addDonorDonation.html:249
 #: app/views/donors/donorCounsellingDetails.html:110
 #: app/views/donors/manageClinic.html:41 app/views/donors/manageClinic.html:54
@@ -681,6 +695,10 @@ msgstr "[FR] Cannot print pack or discard labels for component"
 #: app/views/settings/manageBloodTest.html:38
 msgid "Category"
 msgstr "[FR] Category"
+
+#: app/views/home.html:73
+msgid "Check Components to Print Pack and Discard Labels"
+msgstr "[FR] Check Components to Print Pack and Discard Labels"
 
 #: app/views/components/addComponentBatch.html:98
 #: app/views/components/discardComponents.html:22
@@ -746,7 +764,7 @@ msgstr "[FR] Close Batch"
 #: app/scripts/controllers/components/viewComponentBatch.js:5
 #: app/scripts/controllers/donors/viewDonationBatch.js:89
 #: app/views/donors/manageDonationBatches.html:168
-#: app/views/testing/manageTestBatch.html:178 app/views/translations.html:73
+#: app/views/testing/manageTestBatch.html:178 app/views/translations.html:75
 msgid "Closed"
 msgstr "[FR] Closed"
 
@@ -772,7 +790,7 @@ msgid "Comments"
 msgstr "[FR] Comments"
 
 #. Blood Typing Status
-#: app/views/translations.html:64
+#: app/views/translations.html:66
 msgid "Complete"
 msgstr "[FR] Complete"
 
@@ -798,6 +816,10 @@ msgstr "Code de Composant"
 #: app/scripts/controllers/components/viewComponentBatches.js:112
 msgid "Component Delivery Forms"
 msgstr "[FR] Component Delivery Forms"
+
+#: app/views/home.html:43
+msgid "Component Production Laboratory"
+msgstr "[FR] Component Production Laboratory"
 
 #: app/scripts/controllers/labelling/findSafeComponents.js:51
 msgid "Component Status"
@@ -951,6 +973,10 @@ msgstr "[FR] Confirm"
 msgid "Confirm Close"
 msgstr "[FR] Confirm Close"
 
+#: app/views/passwordReset.html:27
+msgid "Confirm Password"
+msgstr "[FR] Confirm Password"
+
 #: app/scripts/controllers/testing/viewTestBatch.js:506
 msgid "Confirm Release"
 msgstr "[FR] Confirm Release"
@@ -962,6 +988,10 @@ msgstr "[FR] Confirm Reopen"
 #: app/scripts/controllers/testing/viewTestBatch.js:476
 msgid "Confirm Void"
 msgstr "[FR] Confirm Void"
+
+#: app/views/passwordReset.html:32
+msgid "Confirm new password"
+msgstr "[FR] Confirm new password"
 
 #: app/views/settings/accountSettings.html:121
 #: app/views/settings/manageUser.html:111
@@ -1016,8 +1046,8 @@ msgstr "[FR] Counselling Status"
 #. Return Status
 #: app/views/donors/manageDonationBatches.html:164
 #: app/views/donors/manageDonationBatches.html:24
-#: app/views/donors/viewDeferrals.html:28 app/views/translations.html:31
-#: app/views/translations.html:51
+#: app/views/donors/viewDeferrals.html:28 app/views/translations.html:33
+#: app/views/translations.html:53
 msgid "Created"
 msgstr "Créé"
 
@@ -1129,6 +1159,11 @@ msgstr "[FR] DONOR COMMUNICATIONS"
 #: app/views/donors/sidebar.html:12
 msgid "DONOR RECORDS"
 msgstr "[FR] DONOR RECORDS"
+
+#: app/scripts/controllers/header.js:220 app/scripts/controllers/header.js:24
+#: app/views/home.html:26
+msgid "DONORS"
+msgstr "[FR] DONORS"
 
 #: app/scripts/controllers/settings/dataExport.js:34
 #: app/views/components/viewComponentBatches.html:47
@@ -1277,12 +1312,12 @@ msgstr "La date ou l'heure est au future: prière ré-entrer"
 msgid "Day"
 msgstr "[FR] Day"
 
-#: app/views/translations.html:108
+#: app/views/translations.html:110
 msgid "December"
 msgstr "[FR] December"
 
 #. Data Type
-#: app/views/translations.html:87
+#: app/views/translations.html:89
 msgid "Decimal"
 msgstr "[FR] Decimal"
 
@@ -1291,7 +1326,7 @@ msgstr "[FR] Decimal"
 msgid "Default Duration"
 msgstr "[FR] Default Duration"
 
-#: app/views/translations.html:124
+#: app/views/translations.html:126
 msgid "Deferral Reason already exists."
 msgstr "[FR] Deferral Reason already exists."
 
@@ -1366,7 +1401,7 @@ msgid "Description"
 msgstr "[FR] Description"
 
 #. Counselling Status
-#: app/views/translations.html:112
+#: app/views/translations.html:114
 msgid "Did Not Receive Counselling"
 msgstr "[FR] Did Not Receive Counselling"
 
@@ -1387,7 +1422,7 @@ msgstr "Rejeter des Composants"
 msgid "Discard Reason"
 msgstr "Raison de rejet"
 
-#: app/views/translations.html:122
+#: app/views/translations.html:124
 msgid "Discard Reason already exists."
 msgstr "[FR] Discard Reason already exists."
 
@@ -1396,7 +1431,7 @@ msgid "Discard Stock"
 msgstr "Rejeter le Stock"
 
 #. Component Status
-#: app/views/translations.html:48
+#: app/views/translations.html:50
 msgid "Discarded"
 msgstr "Rejeté"
 
@@ -1434,7 +1469,7 @@ msgid "Dispatch Type"
 msgstr "Type d'Expédition"
 
 #. Order Status
-#: app/views/translations.html:32
+#: app/views/translations.html:34
 msgid "Dispatched"
 msgstr "Expédié"
 
@@ -1463,7 +1498,7 @@ msgstr "Centre de Distribution"
 
 #. Location Type
 #: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:127
-#: app/views/translations.html:80
+#: app/views/translations.html:82
 msgid "Distribution Site"
 msgstr "[FR] Distribution Site"
 
@@ -1558,7 +1593,7 @@ msgstr "[FR] Donation Types Report"
 msgid "Donation batch"
 msgstr "[FR] Donation batch"
 
-#: app/views/translations.html:125
+#: app/views/translations.html:127
 msgid "Donation type already exists."
 msgstr "[FR] Donation type already exists."
 
@@ -1666,7 +1701,7 @@ msgid "Downloading..."
 msgstr "[FR] Downloading..."
 
 #. Personal Title
-#: app/views/translations.html:94
+#: app/views/translations.html:96
 msgid "Dr"
 msgstr "[FR] Dr"
 
@@ -1707,7 +1742,7 @@ msgid "Eligibility"
 msgstr "[FR] Eligibility"
 
 #. Donor Eligibility
-#: app/views/translations.html:119
+#: app/views/translations.html:121
 msgid "Eligible"
 msgstr "[FR] Eligible"
 
@@ -1820,7 +1855,7 @@ msgid "Error merging the duplicate Donors."
 msgstr "[FR] Error merging the duplicate Donors."
 
 #. Component Status
-#: app/views/translations.html:44
+#: app/views/translations.html:46
 msgid "Expired"
 msgstr "Expiré"
 
@@ -1859,11 +1894,11 @@ msgstr ""
 "compressed zip file containing a separate CSV file for each dataset."
 
 #. Haemoglobin Level
-#: app/views/translations.html:76
+#: app/views/translations.html:78
 msgid "Fail"
 msgstr "[FR] Fail"
 
-#: app/views/translations.html:98
+#: app/views/translations.html:100
 msgid "February"
 msgstr "[FR] February"
 
@@ -1939,6 +1974,10 @@ msgstr "[FR] First Name"
 msgid "Flagged for Counselling"
 msgstr "[FR] Flagged for Counselling"
 
+#: app/views/login.html:17
+msgid "Forgot password"
+msgstr "[FR] Forgot password"
+
 #: app/views/inventory/fulfilOrder.html:3
 msgid "Fulfil Order Form"
 msgstr " Exécuter le Formulaire de Commande"
@@ -1979,6 +2018,10 @@ msgstr "[FR] General Configurations"
 msgid "Group"
 msgstr "[FR] Group"
 
+#: app/scripts/controllers/header.js:17 app/scripts/controllers/header.js:236
+msgid "HOME"
+msgstr "[FR] HOME"
+
 #. Haemoglobin, abbreviation
 #: app/views/donors/addDonation.html:208
 #: app/views/donors/addDonorDonation.html:144
@@ -2018,6 +2061,11 @@ msgstr "[FR] Hospital / Clinic"
 msgid "Hospital Ward No"
 msgstr "Numéro de Pavillon à l'Hôpital"
 
+#: app/scripts/controllers/header.js:226 app/scripts/controllers/header.js:52
+#: app/views/home.html:90
+msgid "INVENTORY"
+msgstr "[FR] INVENTORY"
+
 #: app/views/donors/mergeDonorsOverview.html:8
 #: app/views/donors/mergeDonorsReview.html:49
 #: app/views/donors/viewDonor.html:224
@@ -2033,7 +2081,7 @@ msgstr "[FR] In Active Use"
 #: app/scripts/controllers/inventory/viewStockLevels.js:86
 #: app/views/inventory/viewStockLevels.html:29
 #: app/views/labelling/findSafeComponents.html:118
-#: app/views/translations.html:39
+#: app/views/translations.html:41
 msgid "In Stock"
 msgstr "En Stock"
 
@@ -2052,7 +2100,7 @@ msgstr "[FR] Include Similar Results"
 
 #. Blood Typing Match Status
 #. TTI Status
-#: app/views/translations.html:60 app/views/translations.html:69
+#: app/views/translations.html:62 app/views/translations.html:71
 msgid "Indeterminate"
 msgstr "[FR] Indeterminate"
 
@@ -2062,7 +2110,7 @@ msgid "Ineligible Donor"
 msgstr "[FR] Ineligible Donor"
 
 #. Data Type
-#: app/views/translations.html:86
+#: app/views/translations.html:88
 msgid "Integer"
 msgstr "[FR] Integer"
 
@@ -2074,6 +2122,10 @@ msgstr "Invalide"
 #: app/scripts/controllers/inventory/recordReturn.js:107
 msgid "Invalid Component"
 msgstr "Composant Invalide"
+
+#: app/scripts/controllers/login.js:35
+msgid "Invalid Username / Password"
+msgstr "[FR] Invalid Username / Password"
 
 #: app/views/settings/manageConfiguration.html:99
 msgid "Invalid boolean value"
@@ -2126,30 +2178,31 @@ msgstr "[FR] Inventory Status"
 #. Order Type
 #: app/views/inventory/fulfilOrder.html:56
 #: app/views/inventory/manageOrders.html:60
-#: app/views/inventory/viewOrders.html:63 app/views/translations.html:35
+#: app/views/inventory/viewOrders.html:63 app/views/translations.html:37
 msgid "Issue"
 msgstr "Envoi"
 
 #. Component Status
 #: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:130
 #: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:134
-#: app/views/translations.html:45
+#: app/views/translations.html:47
 msgid "Issued"
 msgstr "Envoyé"
 
-#: app/views/translations.html:97
+#: app/views/translations.html:99
 msgid "January"
 msgstr "[FR] January"
 
-#: app/views/translations.html:103
+#: app/views/translations.html:105
 msgid "July"
 msgstr "[FR] July"
 
-#: app/views/translations.html:102
+#: app/views/translations.html:104
 msgid "June"
 msgstr "[FR] June"
 
-#: app/views/labelling/sidebar.html:12
+#: app/scripts/controllers/header.js:228 app/scripts/controllers/header.js:45
+#: app/views/home.html:71 app/views/labelling/sidebar.html:12
 msgid "LABELLING"
 msgstr "[FR] LABELLING"
 
@@ -2229,6 +2282,14 @@ msgstr ""
 msgid "Location name already exists"
 msgstr "[FR] Location name already exists"
 
+#: app/views/login.html:13
+msgid "Log in"
+msgstr "[FR] Log in"
+
+#: app/views/header.html:47
+msgid "Log out"
+msgstr "[FR] Log out"
+
 #: app/views/mobile/lookUp.html:3 app/views/mobile/sidebar.html:13
 msgid "Look Up"
 msgstr "[FR] Look Up"
@@ -2257,7 +2318,8 @@ msgstr "GESTION D'INVENTAIRE"
 msgid "MANAGE TESTING"
 msgstr "[FR] MANAGE TESTING"
 
-#: app/views/mobile/sidebar.html:12
+#: app/scripts/controllers/header.js:232 app/scripts/controllers/header.js:66
+#: app/views/home.html:120 app/views/mobile/sidebar.html:12
 msgid "MOBILE CLINIC"
 msgstr "[FR] MOBILE CLINIC"
 
@@ -2267,10 +2329,18 @@ msgstr "[FR] MOBILE CLINIC"
 msgid "Male"
 msgstr "Homme"
 
+#: app/views/home.html:136
+msgid "Manage Account and System Settings"
+msgstr "[FR] Manage Account and System Settings"
+
 #: app/views/settings/adverseEventTypes.html:3
 #: app/views/settings/sidebar.html:22
 msgid "Manage Adverse Event Types"
 msgstr "[FR] Manage Adverse Event Types"
+
+#: app/views/home.html:92
+msgid "Manage Blood Bank Inventory, Requests, Transfers and Issues"
+msgstr "[FR] Manage Blood Bank Inventory, Requests, Transfers and IssuesS"
 
 #: app/views/settings/manageBloodTest.html:3
 msgid "Manage Blood Test"
@@ -2355,6 +2425,10 @@ msgstr "[FR] Manage Donation Type"
 msgid "Manage Donation Types"
 msgstr "[FR] Manage Donation Types"
 
+#: app/views/home.html:28
+msgid "Manage Donor Records, Donation Batches and Donor Communications"
+msgstr "[FR] Manage Donor Records, Donation Batches and Donor Communications"
+
 #: app/views/donors/sidebar.html:13
 msgid "Manage Donors"
 msgstr "[FR] Manage Donors"
@@ -2366,6 +2440,10 @@ msgstr "[FR] Manage Location"
 #: app/views/settings/locations.html:3 app/views/settings/sidebar.html:18
 msgid "Manage Locations"
 msgstr "[FR] Manage Locations"
+
+#: app/views/home.html:122
+msgid "Manage Mobile Clinics and Sync Data"
+msgstr "[FR] Manage Mobile Clinics and Sync Data"
 
 #: app/views/inventory/viewOrder.html:3
 msgid "Manage Order"
@@ -2401,6 +2479,10 @@ msgstr "[FR] Manage Role"
 msgid "Manage Roles"
 msgstr "[FR] Manage Roles"
 
+#: app/views/home.html:58
+msgid "Manage TTI and Blood Group Serology Testing"
+msgstr "[FR] Manage TTI and Blood Group Serology Testing"
+
 #: app/views/testing/viewTestBatch.html:3
 msgid "Manage Test Batch"
 msgstr "[FR] Manage Test Batch"
@@ -2426,7 +2508,7 @@ msgstr "[FR] Manage User"
 msgid "Manage Users"
 msgstr "[FR] Manage Users"
 
-#: app/views/translations.html:99
+#: app/views/translations.html:101
 msgid "March"
 msgstr "[FR] March"
 
@@ -2440,7 +2522,7 @@ msgid "Mark Component as Unsafe for Positive Test Outcomes"
 msgstr "[FR] Mark Component as Unsafe for Positive Test Outcomes"
 
 #. Blood Typing Match Status
-#: app/views/translations.html:57
+#: app/views/translations.html:59
 msgid "Match"
 msgstr "[FR] Match"
 
@@ -2464,7 +2546,7 @@ msgstr "[FR] Max time since donation should be between 0 and 30 hours"
 msgid "Maximum Weight"
 msgstr "[FR] Maximum Weight"
 
-#: app/views/translations.html:101
+#: app/views/translations.html:103
 msgid "May"
 msgstr "[FR] May"
 
@@ -2520,17 +2602,17 @@ msgstr ""
 "saisir un code de composant"
 
 #. Personal Title
-#: app/views/translations.html:91
+#: app/views/translations.html:93
 msgid "Mr"
 msgstr "[FR] Mr"
 
 #. Personal Title
-#: app/views/translations.html:92
+#: app/views/translations.html:94
 msgid "Mrs"
 msgstr "[FR] Mrs"
 
 #. Personal Title
-#: app/views/translations.html:93
+#: app/views/translations.html:95
 msgid "Ms"
 msgstr "[FR] Ms"
 
@@ -2541,14 +2623,14 @@ msgstr "Doit correspondre à l'entrée précédente"
 #. No, abbreviation
 #: app/scripts/controllers/testing/viewTestBatch.js:153
 #: app/scripts/controllers/testing/viewTestBatch.js:231
-#: app/views/translations.html:115
+#: app/views/translations.html:117
 msgid "N"
 msgstr "[FR] N"
 
 #. No Type Determined, abbreviation
 #: app/scripts/controllers/reports/aboRhGroupsReport.js:229
 #: app/scripts/controllers/reports/componentsProducedReport.js:195
-#: app/views/translations.html:117
+#: app/views/translations.html:119
 msgid "NTD"
 msgstr "[FR] NTD"
 
@@ -2575,6 +2657,7 @@ msgstr "[FR] NTD"
 #: app/views/settings/manageRole.html:10
 #: app/views/settings/manageTransfusionReactionType.html:9
 #: app/views/settings/manageUser.html:9 app/views/settings/roles.html:22
+#: app/views/settings/users.html:24
 msgid "Name"
 msgstr "Nom"
 
@@ -2586,11 +2669,15 @@ msgstr "[FR] Negative Outcomes"
 msgid "New Donation Batch"
 msgstr "[FR] New Donation Batch"
 
+#: app/views/passwordReset.html:13
+msgid "New Password"
+msgstr "[FR] New Password"
+
 #: app/views/testing/manageTestBatch.html:57
 msgid "New Test Batch"
 msgstr "[FR] New Test Batch"
 
-#: app/views/settings/accountSettings.html:106
+#: app/views/passwordReset.html:17 app/views/settings/accountSettings.html:106
 msgid "New password"
 msgstr "[FR] New password"
 
@@ -2620,7 +2707,7 @@ msgid "No Donations found"
 msgstr "[FR] No Donations found"
 
 #. Blood Typing Match Status
-#: app/views/translations.html:55
+#: app/views/translations.html:57
 msgid "No Match"
 msgstr "[FR] No Match"
 
@@ -2630,7 +2717,7 @@ msgstr "[FR] No Previous Donations"
 
 #. Blood Typing Match Status
 #: app/views/testing/manageBloodGroupMatchTesting.html:59
-#: app/views/translations.html:59
+#: app/views/translations.html:61
 msgid "No Type Determined"
 msgstr "[FR] No Type Determined"
 
@@ -2707,19 +2794,19 @@ msgstr "[FR] None of the above"
 #. Blood Typing Match Status
 #. Blood Typing Status
 #. TTI Status
-#: app/views/translations.html:54 app/views/translations.html:62
-#: app/views/translations.html:66
+#: app/views/translations.html:56 app/views/translations.html:64
+#: app/views/translations.html:68
 msgid "Not Done"
 msgstr "[FR] Not Done"
 
 #. Donor Eligibility
-#: app/views/translations.html:120
+#: app/views/translations.html:122
 msgid "Not Eligible"
 msgstr "[FR] Not Eligible"
 
 # Inventory Status Not In Stock
 #. Inventory Status
-#: app/views/translations.html:38
+#: app/views/translations.html:40
 msgid "Not In Stock"
 msgstr "[FR] Not In Stock"
 
@@ -2741,7 +2828,7 @@ msgid "Not Specified"
 msgstr "Non Spécifié"
 
 #. Transfusion Outcome
-#: app/views/translations.html:28
+#: app/views/translations.html:30
 msgid "Not Transfused"
 msgstr "Non Transfusé"
 
@@ -2768,7 +2855,7 @@ msgstr "Pas en Stock"
 msgid "Notes"
 msgstr "[FR] Notes"
 
-#: app/views/translations.html:107
+#: app/views/translations.html:109
 msgid "November"
 msgstr "[FR] November"
 
@@ -2852,14 +2939,14 @@ msgstr "[FR] Number of venues: {{venuesNumber}}"
 msgid "OK"
 msgstr "OK"
 
-#: app/views/translations.html:106
+#: app/views/translations.html:108
 msgid "October"
 msgstr "[FR] October"
 
 #. Test Batch Status
 #: app/scripts/controllers/components/viewComponentBatch.js:6
 #: app/scripts/controllers/donors/viewDonationBatch.js:91
-#: app/views/translations.html:71
+#: app/views/translations.html:73
 msgid "Open"
 msgstr "[FR] Open"
 
@@ -2965,7 +3052,7 @@ msgstr "[FR] Pack Type"
 msgid "Pack Type Update"
 msgstr "[FR] Pack Type Update"
 
-#: app/views/translations.html:127
+#: app/views/translations.html:129
 msgid "Pack Type name already exists."
 msgstr "[FR] Pack Type name already exists."
 
@@ -3004,15 +3091,23 @@ msgid "Parent division levels cannot be changed"
 msgstr "[FR] Parent division levels cannot be changed"
 
 #. Haemoglobin Level
-#: app/views/translations.html:75
+#: app/views/translations.html:77
 msgid "Pass"
 msgstr "[FR] Pass"
 
 #. Data Type
-#: app/views/settings/accountSettings.html:74
-#: app/views/settings/manageUser.html:78 app/views/translations.html:89
+#: app/views/login.html:9 app/views/settings/accountSettings.html:74
+#: app/views/settings/manageUser.html:78 app/views/translations.html:91
 msgid "Password"
 msgstr "[FR] Password"
+
+#: app/scripts/controllers/forgotPassword.js:30
+msgid ""
+"Password reset failed. Please make sure that you have entered the correct "
+"username and try again"
+msgstr ""
+"[FR] Password reset failed. Please make sure that you have entered the "
+"correct username and try again"
 
 #: app/views/inventory/manageOrders.html:91
 msgid "Patient Details"
@@ -3041,7 +3136,7 @@ msgstr "Numéro de patient"
 #. Order Type
 #: app/views/inventory/fulfilOrder.html:59
 #: app/views/inventory/manageOrders.html:64
-#: app/views/inventory/viewOrders.html:67 app/views/translations.html:36
+#: app/views/inventory/viewOrders.html:67 app/views/translations.html:38
 msgid "Patient Request"
 msgstr "Demande de patient"
 
@@ -3051,7 +3146,7 @@ msgstr "[FR] Patient Requests"
 
 #. Blood Typing Status
 #: app/views/settings/manageBloodTestingRule.html:75
-#: app/views/translations.html:63
+#: app/views/translations.html:65
 msgid "Pending Tests"
 msgstr "[FR] Pending Tests"
 
@@ -3206,6 +3301,10 @@ msgstr "[FR] Please select the correct donor information below"
 msgid "Please supply a valid donor"
 msgstr "[FR] Please supply a valid donor"
 
+#: app/scripts/controllers/login.js:45
+msgid "Please supply all fields"
+msgstr "[FR] Please supply all fields"
+
 #: app/views/settings/manageBloodTest.html:151
 msgid "Positive Outcomes"
 msgstr "[FR] Positive Outcomes"
@@ -3289,7 +3388,7 @@ msgid "Process labelled component"
 msgstr "[FR] Process labelled component"
 
 #. Component Status
-#: app/views/translations.html:49
+#: app/views/translations.html:51
 msgid "Processed"
 msgstr "Traiité"
 
@@ -3299,7 +3398,7 @@ msgstr "[FR] Processing Date"
 
 #. Location Type
 #: app/scripts/controllers/components/viewComponentBatches.js:45
-#: app/views/translations.html:79
+#: app/views/translations.html:81
 msgid "Processing Site"
 msgstr "[FR] Processing Site"
 
@@ -3318,7 +3417,7 @@ msgid "Produced Component(s)"
 msgstr "[FR] Produced Component(s)"
 
 #. Personal Title
-#: app/views/translations.html:95
+#: app/views/translations.html:97
 msgid "Prof"
 msgstr "[FR] Prof"
 
@@ -3331,16 +3430,17 @@ msgid "Pulse"
 msgstr "[FR] Pulse"
 
 #. Component Status
-#: app/views/translations.html:42
+#: app/views/translations.html:44
 msgid "Quarantined"
 msgstr "Mis en Quarantaine"
 
 #. Refused counselling, abbreviation
-#: app/views/translations.html:116
+#: app/views/translations.html:118
 msgid "R"
 msgstr "[FR] R"
 
-#: app/views/reports/sidebar.html:12
+#: app/scripts/controllers/header.js:230 app/scripts/controllers/header.js:59
+#: app/views/home.html:105 app/views/reports/sidebar.html:12
 msgid "REPORTS"
 msgstr "[FR] REPORTS"
 
@@ -3402,7 +3502,7 @@ msgid "Receive Components"
 msgstr "[FR] Receive Components"
 
 #. Counselling Status
-#: app/views/translations.html:110
+#: app/views/translations.html:112
 msgid "Received Counselling"
 msgstr "[FR] Received Counselling"
 
@@ -3441,7 +3541,7 @@ msgid "Record Transfusions"
 msgstr "Enregistrer des Transfusions"
 
 #. Location Type
-#: app/views/settings/manageLocation.html:53 app/views/translations.html:83
+#: app/views/settings/manageLocation.html:53 app/views/translations.html:85
 msgid "Referral Site"
 msgstr "[FR] Referral Site"
 
@@ -3451,7 +3551,7 @@ msgid "Referred"
 msgstr "[FR] Referred"
 
 #. Counselling Status
-#: app/views/translations.html:111
+#: app/views/translations.html:113
 msgid "Refused Counselling"
 msgstr "[FR] Refused Counselling"
 
@@ -3462,7 +3562,7 @@ msgstr "[FR] Release"
 
 #. Test Batch Status
 #: app/scripts/controllers/testing/viewTestBatch.js:150
-#: app/views/translations.html:72
+#: app/views/translations.html:74
 msgid "Released"
 msgstr "[FR] Released"
 
@@ -3499,7 +3599,7 @@ msgid "Remove from negative or positive outcomes first"
 msgstr "[FR] Remove from negative or positive outcomes first"
 
 #. Inventory Status
-#: app/views/translations.html:40
+#: app/views/translations.html:42
 msgid "Removed"
 msgstr "[FR] Removed"
 
@@ -3525,6 +3625,14 @@ msgstr "[FR] Repeat TTI Test Outcomes"
 msgid "Reset Password"
 msgstr "[FR] Reset Password"
 
+#: app/views/translations.html:25
+msgid "Reset password"
+msgstr "[FR] Reset password"
+
+#: app/views/translations.html:26
+msgid "Resetting..."
+msgstr "[FR] Resetting..."
+
 #: app/views/testing/manageBloodGroupMatchTesting.html:56
 msgid "Resolve"
 msgstr "[FR] Resolve"
@@ -3535,7 +3643,7 @@ msgid "Resolve Ambiguous ABO/Rh Outcomes"
 msgstr "[FR] Resolve Ambiguous ABO/Rh Outcomes"
 
 #. Blood Typing Match Status
-#: app/views/translations.html:58
+#: app/views/translations.html:60
 msgid "Resolved"
 msgstr "[FR] Resolved"
 
@@ -3564,7 +3672,7 @@ msgid "Return to Stock"
 msgstr "Retourner au Stock"
 
 #. Return Status
-#: app/views/translations.html:52
+#: app/views/translations.html:54
 msgid "Returned"
 msgstr "Retourné"
 
@@ -3614,12 +3722,13 @@ msgstr "[FR] Role name already exists"
 msgid "Roles"
 msgstr "[FR] Roles"
 
-#: app/views/settings/sidebar.html:12
+#: app/scripts/controllers/header.js:234 app/scripts/controllers/header.js:73
+#: app/views/home.html:134 app/views/settings/sidebar.html:12
 msgid "SETTINGS"
 msgstr "[FR] SETTINGS"
 
 #. TTI Status
-#: app/views/translations.html:67
+#: app/views/translations.html:69
 msgid "Safe"
 msgstr "[FR] Safe"
 
@@ -3790,9 +3899,17 @@ msgstr "[FR] Selected component cannot be discarded or undiscarded"
 msgid "Selected component cannot be processed further"
 msgstr "[FR] Selected component cannot be processed further"
 
-#: app/views/translations.html:105
+#: app/views/translations.html:107
 msgid "September"
 msgstr "[FR] September"
+
+#: app/views/passwordReset.html:43
+msgid "Set Password"
+msgstr "[FR] Set Password"
+
+#: app/views/passwordReset.html:4
+msgid "Set a New Password"
+msgstr "[FR] Set a New Password"
 
 #: app/scripts/controllers/settings/bloodTests.js:14
 msgid "Short Name"
@@ -3867,6 +3984,11 @@ msgstr "Niveaux de Stocks"
 #: app/views/settings/manageComponentType.html:109
 msgid "Storage Info"
 msgstr "[FR] Storage Info"
+
+#: app/scripts/controllers/header.js:224 app/scripts/controllers/header.js:38
+#: app/views/home.html:56
+msgid "TESTING"
+msgstr "[FR] TESTING"
 
 #: app/scripts/controllers/reports/ttiPrevalenceReport.js:62
 msgid "TTI"
@@ -3975,14 +4097,20 @@ msgid "Testing"
 msgstr "[FR] Testing"
 
 #. Location Type
-#: app/views/translations.html:82
+#: app/views/translations.html:84
 msgid "Testing Site"
 msgstr "[FR] Testing Site"
 
 #. Data Type
-#: app/views/translations.html:85
+#: app/views/translations.html:87
 msgid "Text"
 msgstr "[FR] Text"
+
+#: app/views/home.html:11
+msgid ""
+"That page is not accessible - you have been redirected to the home page."
+msgstr ""
+"[FR] That page is not accessible - you have been redirected to the home page."
 
 #: app/scripts/controllers/donors/viewDonationBatch.js:357
 #: app/scripts/controllers/donors/viewDonor.js:114
@@ -4236,6 +4364,10 @@ msgstr "[FR] Title"
 msgid "To"
 msgstr "à"
 
+#: app/views/header.html:5
+msgid "Toggle navigation"
+msgstr "[FR] Toggle navigation"
+
 #: app/messages.html:9
 msgid "Too large"
 msgstr "Trop Grand"
@@ -4326,12 +4458,12 @@ msgstr "[FR] Total {{recordsName}}: {{totalRecords}}"
 #. Order Type
 #: app/views/inventory/fulfilOrder.html:53
 #: app/views/inventory/manageOrders.html:56
-#: app/views/inventory/viewOrders.html:59 app/views/translations.html:34
+#: app/views/inventory/viewOrders.html:59 app/views/translations.html:36
 msgid "Transfer"
 msgstr "Transfert"
 
 #. Component Status
-#: app/views/translations.html:46
+#: app/views/translations.html:48
 msgid "Transfused"
 msgstr "Transfusé"
 
@@ -4340,7 +4472,7 @@ msgid "Transfused On"
 msgstr "Transfusé le"
 
 #. Transfusion Outcome
-#: app/views/translations.html:26
+#: app/views/translations.html:28
 msgid "Transfused Uneventfully"
 msgstr "Transfusé sans Problème"
 
@@ -4355,7 +4487,7 @@ msgid "Transfusion Outcome"
 msgstr "Resultat de la Transfusion"
 
 #. Transfusion Outcome
-#: app/views/translations.html:27
+#: app/views/translations.html:29
 msgid "Transfusion Reaction Occurred"
 msgstr "Une Réaction s'est Produite lors de la Transfusion"
 
@@ -4387,6 +4519,14 @@ msgstr "[FR] Transport Info"
 #: app/views/settings/manageDonationType.html:10
 msgid "Type"
 msgstr "[FR] Type"
+
+#: app/scripts/controllers/login.js:40
+msgid ""
+"Unable to establish a connection. Please report this issue and try again "
+"later"
+msgstr ""
+"[FR] Unable to establish a connection. Please report this issue and try "
+"again later"
 
 #: app/scripts/controllers/components/recordComponents.js:178
 #: app/scripts/controllers/components/recordComponents.js:188
@@ -4430,7 +4570,7 @@ msgstr "Unités Fournies"
 
 #. Transfusion Outcome
 #. Unknown Blood Group
-#: app/views/testing/viewTestSample.html:48 app/views/translations.html:29
+#: app/views/testing/viewTestSample.html:48 app/views/translations.html:31
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -4456,7 +4596,7 @@ msgstr "[FR] Unprocessing..."
 
 #. Component Status
 #. TTI Status
-#: app/views/translations.html:47 app/views/translations.html:68
+#: app/views/translations.html:49 app/views/translations.html:70
 msgid "Unsafe"
 msgstr "Peu sûr"
 
@@ -4466,7 +4606,7 @@ msgstr "[FR] Updating details failed. Please try again"
 
 #. Location Type
 #: app/scripts/controllers/reports/transfusionsReport.js:92
-#: app/views/reports/transfusionsReport.html:9 app/views/translations.html:81
+#: app/views/reports/transfusionsReport.html:9 app/views/translations.html:83
 msgid "Usage Site"
 msgstr "[FR] Usage Site"
 
@@ -4478,6 +4618,7 @@ msgstr "[FR] Usage Sites: {{count}}"
 msgid "User"
 msgstr "[FR] User"
 
+#: app/views/forgotPassword.html:4 app/views/login.html:4
 #: app/views/settings/accountSettings.html:66
 #: app/views/settings/manageUser.html:53 app/views/settings/users.html:20
 msgid "Username"
@@ -4539,7 +4680,7 @@ msgstr "[FR] Value"
 #: app/views/mobile/lookUp.html:8 app/views/mobile/mobileClinicExport.html:12
 #: app/views/reports/donorsAdverseEventsReport.html:9
 #: app/views/testing/viewTestBatch.html:187
-#: app/views/testing/viewTestSample.html:42 app/views/translations.html:78
+#: app/views/testing/viewTestSample.html:42 app/views/translations.html:80
 msgid "Venue"
 msgstr "[FR] Venue"
 
@@ -4562,6 +4703,10 @@ msgstr "[FR] Verify"
 msgid "Verifying..."
 msgstr "[FR] Verifying..."
 
+#: app/views/footer.html:4 app/views/sidebarFooter.html:5
+msgid "Version: {{backendVersion}} / {{frontEndVersion}}"
+msgstr "[FR] Version: {{backendVersion}} / {{frontEndVersion}}"
+
 #: app/views/donors/viewDonations.html:56 app/views/donors/viewDonor.html:178
 #: app/views/donors/viewDonor.html:183
 msgid "View"
@@ -4574,6 +4719,10 @@ msgstr "[FR] View / Export Donor List"
 #: app/views/settings/sidebar.html:43
 msgid "View Audit Log"
 msgstr "[FR] View Audit Log"
+
+#: app/views/home.html:107
+msgid "View Charts and Export Reports"
+msgstr "[FR] View Charts and Export Reports"
 
 #: app/views/components/addComponentBatch.html:10
 #: app/views/components/viewComponentBatch.html:10
@@ -4658,6 +4807,10 @@ msgstr "Numéro de Pavillon"
 msgid "Weight"
 msgstr "[FR] Weight"
 
+#: app/views/home.html:5
+msgid "Welcome to BSIS - The Blood Safety Information System"
+msgstr "[FR] Welcome to BSIS - The Blood Safety Information System"
+
 #: app/views/donors/mergeDonorsAddress.html:65
 #: app/views/donors/mergeDonorsContact.html:38
 #: app/views/donors/mergeDonorsReview.html:141
@@ -4676,7 +4829,7 @@ msgstr "[FR] Wt"
 #. Yes, abbreviation
 #: app/scripts/controllers/testing/viewTestBatch.js:153
 #: app/scripts/controllers/testing/viewTestBatch.js:231
-#: app/views/translations.html:114
+#: app/views/translations.html:116
 msgid "Y"
 msgstr "[FR] Y"
 
@@ -4689,9 +4842,28 @@ msgstr "[FR] Year"
 msgid "Yes"
 msgstr "[FR] Yes"
 
+#: app/views/passwordReset.html:7
+msgid ""
+"You have logged in with a recovery password. Please set a new password "
+"before you continue."
+msgstr ""
+"[FR] You have logged in with a recovery password. Please set a new password "
+"before you continue."
+
+#: app/scripts/controllers/forgotPassword.js:14
+msgid "You need to provide a username"
+msgstr "[FR] You need to provide a username"
+
 #: app/scripts/controllers/settings/accountSettings.js:44
 msgid "Your details were successfully updated"
 msgstr "[FR] Your details were successfully updated"
+
+#: app/scripts/controllers/forgotPassword.js:26
+msgid ""
+"Your password has been reset. Please check your email for the new password"
+msgstr ""
+"[FR] Your password has been reset. Please check your email for the new "
+"password"
 
 #: app/views/settings/manageComponentType.html:100
 #: app/views/settings/manageDeferralReason.html:55
@@ -4882,85 +5054,14 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
 
-#~ msgid "Build: {{backendBuildNumber}} / {{frontEndBuildNumber}}"
-#~ msgstr "[FR] Build: {{backendBuildNumber}} / {{frontEndBuildNumber}}"
+#~ msgid "Please set a new password before you continue"
+#~ msgstr "[FR] Please set a new password before you continue"
 
-#~ msgid "COMPONENTS"
-#~ msgstr "[FR] COMPONENTS"
+#~ msgid "You have logged in with a recovery password"
+#~ msgstr "[FR] You have logged in with a recovery password"
 
-#~ msgid "Check Components to Print Pack and Discard Labels"
-#~ msgstr "[FR] Check Components to Print Pack and Discard Labels"
-
-#~ msgid "Component Production Laboratory"
-#~ msgstr "[FR] Component Production Laboratory"
-
-#~ msgid "DONORS"
-#~ msgstr "[FR] DONORS"
-
-#~ msgid "Forgot password"
-#~ msgstr "[FR] Forgot password"
-
-#~ msgid "HOME"
-#~ msgstr "[FR] HOME"
-
-#~ msgid "INVENTORY"
-#~ msgstr "[FR] INVENTORY"
-
-#~ msgid "Invalid Username / Password"
-#~ msgstr "[FR] Invalid Username / Password"
-
-#~ msgid "Log in"
-#~ msgstr "[FR] Log in"
-
-#~ msgid "Log out"
-#~ msgstr "[FR] Log out"
-
-#~ msgid "Manage Account and System Settings"
-#~ msgstr "[FR] Manage Account and System Settings"
-
-#~ msgid "Manage Blood Bank Inventory, Requests, Transfers and Issues"
-#~ msgstr "[FR] Manage Blood Bank Inventory, Requests, Transfers and IssuesS"
-
-#~ msgid "Manage Donor Records, Donation Batches and Donor Communications"
-#~ msgstr ""
-#~ "[FR] Manage Donor Records, Donation Batches and Donor Communications"
-
-#~ msgid "Manage Mobile Clinics and Sync Data"
-#~ msgstr "[FR] Manage Mobile Clinics and Sync Data"
-
-#~ msgid "Manage TTI and Blood Group Serology Testing"
-#~ msgstr "[FR] Manage TTI and Blood Group Serology Testing"
-
-#~ msgid "Please supply all fields"
-#~ msgstr "[FR] Please supply all fields"
-
-#~ msgid "TESTING"
-#~ msgstr "[FR] TESTING"
-
-#~ msgid ""
-#~ "That page is not accessible - you have been redirected to the home page."
-#~ msgstr ""
-#~ "[FR] That page is not accessible - you have been redirected to the home "
-#~ "page."
-
-#~ msgid "Toggle navigation"
-#~ msgstr "[FR] Toggle navigation"
-
-#~ msgid ""
-#~ "Unable to establish a connection. Please report this issue and try again "
-#~ "later"
-#~ msgstr ""
-#~ "[FR] Unable to establish a connection. Please report this issue and try "
-#~ "again later"
-
-#~ msgid "Version: {{backendVersion}} / {{frontEndVersion}}"
-#~ msgstr "[FR] Version: {{backendVersion}} / {{frontEndVersion}}"
-
-#~ msgid "View Charts and Export Reports"
-#~ msgstr "[FR] View Charts and Export Reports"
-
-#~ msgid "Welcome to BSIS - The Blood Safety Information System"
-#~ msgstr "[FR] Welcome to BSIS - The Blood Safety Information System"
+#~ msgid "Full Name"
+#~ msgstr "[FR] Full Name"
 
 #~ msgid ""
 #~ "Component with DIN {{din}} and ComponentCode {{componentCode}} not found."
