@@ -1,13 +1,13 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-  <h3 class="page-header">Manage Component Types</h3>
+  <h3 class="page-header" translate>Manage Component Types</h3>
 
   <div class="col-sm-12">
     <div class="panel panel-default">
       <div class="panel-body">
         <p>
-          <em>{{gridOptions.data.length}} Component Type(s) found</em> | 
-          <a href="#/manageComponentType">Add New Component Type</a>
+          <em translate translate-params-count="gridOptions.data.length">{{count}} Component Type(s) found</em> | 
+          <a href="#/manageComponentType" translate>Add New Component Type</a>
         </p>
         <div class="grid" ui-grid="gridOptions" ui-grid-pagination></div> 
       <div>

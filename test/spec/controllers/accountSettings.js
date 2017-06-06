@@ -64,7 +64,7 @@ describe('Controller: AccountSettingsCtrl', function() {
       httpBackend.flush(1);
 
       expect(scope.detailsStyle).toBe('danger');
-      expect(scope.detailsMessage).toBe('Loading details failed. Please try refreshing.');
+      expect(scope.detailsMessage).toBe('Loading details failed. Please try refreshing');
     });
   });
 
@@ -127,7 +127,7 @@ describe('Controller: AccountSettingsCtrl', function() {
       scope.updateUserDetails();
 
       expect(scope.detailsStyle).toBe('danger');
-      expect(scope.detailsMessage).toBe('Please complete all of the required fields.');
+      expect(scope.detailsMessage).toBe('Please complete all of the required fields');
     });
 
     it('should update the user details and display a message on success', inject(function(AuthService) {
@@ -144,7 +144,7 @@ describe('Controller: AccountSettingsCtrl', function() {
       expect(scope.masterDetails.lastName).toBe('Tester');
       expect(scope.resetUserDetails).toHaveBeenCalled();
       expect(scope.detailsStyle).toBe('success');
-      expect(scope.detailsMessage).toBe('Your details were successfully updated.');
+      expect(scope.detailsMessage).toBe('Your details were successfully updated');
       expect(AuthService.setLoggedOnUser).toHaveBeenCalled();
     }));
 
@@ -172,7 +172,7 @@ describe('Controller: AccountSettingsCtrl', function() {
       httpBackend.flush(1);
 
       expect(scope.detailsStyle).toBe('danger');
-      expect(scope.detailsMessage).toBe('Updating details failed. Please try again.');
+      expect(scope.detailsMessage).toBe('Updating details failed. Please try again');
     });
 
     it('should display the returned error message when updating the password fails', function() {

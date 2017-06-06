@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, Api, ngTableParams, DATEFORMAT) {
+angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, Api, ngTableParams, gettextCatalog, DATEFORMAT) {
 
   function unwindRevisions(revisions) {
     var mapped = [];
@@ -69,15 +69,15 @@ angular.module('bsis').controller('AuditLogCtrl', function($scope, $filter, $q, 
     deferred.resolve([
       {
         id: 'ADD',
-        title: 'Added'
+        title: gettextCatalog.getString('Added')
       },
       {
         id: 'MOD',
-        title: 'Modified'
+        title: gettextCatalog.getString('Modified')
       },
       {
         id: 'DEL',
-        title: 'Deleted'
+        title: gettextCatalog.getString('Deleted')
       }
     ]);
     return deferred;

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('AccountSettingsCtrl', function($scope, UsersService) {
+  .controller('AccountSettingsCtrl', function($scope, UsersService, gettextCatalog) {
 
     $scope.masterDetails = {
       firstName: '',
@@ -31,7 +31,7 @@ angular.module('bsis')
     $scope.updateUserDetails = function() {
       if ($scope.userDetailsForm.$invalid) {
         $scope.detailsStyle = 'danger';
-        $scope.detailsMessage = 'Please complete all of the required fields.';
+        $scope.detailsMessage = gettextCatalog.getString('Please complete all of the required fields');
         return;
       }
 
@@ -41,14 +41,14 @@ angular.module('bsis')
         $scope.masterDetails = updatedUser;
         $scope.resetUserDetails();
         $scope.detailsStyle = 'success';
-        $scope.detailsMessage = 'Your details were successfully updated.';
+        $scope.detailsMessage = gettextCatalog.getString('Your details were successfully updated');
         $scope.updatingUser = false;
       }, function(response) {
         $scope.detailsStyle = 'danger';
         if (response.data && response.data['user.password']) {
           $scope.detailsMessage = response.data['user.password'];
         } else {
-          $scope.detailsMessage = 'Updating details failed. Please try again.';
+          $scope.detailsMessage = gettextCatalog.getString('Updating details failed. Please try again');
         }
         $scope.updatingUser = false;
       });
@@ -65,7 +65,7 @@ angular.module('bsis')
       $scope.resetUserDetails();
     }, function() {
       $scope.detailsStyle = 'danger';
-      $scope.detailsMessage = 'Loading details failed. Please try refreshing.';
+      $scope.detailsMessage = gettextCatalog.getString('Loading details failed. Please try refreshing');
     });
 
   });

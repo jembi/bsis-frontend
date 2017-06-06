@@ -1,12 +1,12 @@
 <div class="col-sm-2 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-  <h3 class="page-header">Manage Transfusion Reaction Type</h3>
+  <h3 class="page-header" translate>Manage Transfusion Reaction Type</h3>
   <div class="panel panel-default">
     <div class="panel-body">
       <form name="transfusionReactionTypeForm" novalidate class="form-horizontal col-sm-12" ng-submit="saveTransfusionReactionType()">
 
         <div class="row form-group col-sm-12">
-          <label for="name" class="col-sm-2 control-label">Name</label>
+          <label for="name" class="col-sm-2 control-label" translate>Name</label>
           <div class="col-sm-10">
             <div class="form-inline">
               <input id="name" name="name" class="form-control input-sm" style="width:auto;min-width:350px;"
@@ -21,7 +21,7 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="description" class="col-sm-2 control-label">Description</label>
+          <label for="description" class="col-sm-2 control-label" translate>Description</label>
           <div class="col-sm-10">
             <div class="form-inline">
               <input id="transfusionReactionType" name="transfusionReactionType" class="form-control input-sm" style="width:auto;min-width:350px;" ng-model= "transfusionReactionType.description">
@@ -32,7 +32,7 @@
           <div class="col-sm-2"></div>
           <label for="isDeleted" class="col-sm-10">
             <div class="checkbox">
-              <input type="checkbox" id="isDeleted" name="isDeleted" ng-model="transfusionReactionType.isDeleted" ng-true-value="false" ng-false-value="true"/><b>Enabled</b>
+              <input type="checkbox" id="isDeleted" name="isDeleted" ng-model="transfusionReactionType.isDeleted" ng-true-value="false" ng-false-value="true"/><b translate>Enabled</b>
             </div>
           </label>
         </div>
@@ -40,11 +40,10 @@
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-6">
             <button class="btn btn-primary" type="submit" style="margin-top: 2px"
-                ng-disabled="savingTransfusionReactionType">{{savingTransfusionReactionType ? "Saving..." : "Save Transfusion Reaction Type"}}
+                ng-disabled="savingTransfusionReactionType">{{savingTransfusionReactionType ? "Saving..." : "Save" | translate}}
             </button>
             <button class="btn btn-primary" type="button" ng-click="cancel()"
-                style="margin-top: 2px" ng-disabled="savingTransfusionReactionType">Cancel
-            </button>
+                style="margin-top: 2px" ng-disabled="savingTransfusionReactionType" translate>Cancel</button>
           </div>
         </div>
       </form>

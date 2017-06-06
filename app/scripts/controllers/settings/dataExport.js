@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DataExportCtrl', function($scope, $log, ModalsService, DataExportService) {
+angular.module('bsis').controller('DataExportCtrl', function($scope, $log, ModalsService, DataExportService, gettextCatalog) {
 
   $scope.downloading = false;
 
@@ -31,10 +31,10 @@ angular.module('bsis').controller('DataExportCtrl', function($scope, $log, Modal
 
   $scope.download = function() {
     var unprocessConfirmation = {
-      title: 'Data Export',
-      button: 'Export Data',
-      message: 'Are you sure that you want to export all data? This export may take some time and can affect the performance of the system. ' +
-      'It is recommended that this process is only run after standard operating hours, to minimise impact on other activities.'
+      title: gettextCatalog.getString('Data Export'),
+      button: gettextCatalog.getString('Export Data'),
+      message: gettextCatalog.getString('Are you sure that you want to export all data?') +
+      gettextCatalog.getString('This export may take some time and can affect the performance of the system. It is recommended that this process is only run after standard operating hours, to minimise the impact on other activities.')
     };
 
     ModalsService.showConfirmation(unprocessConfirmation).then(function() {

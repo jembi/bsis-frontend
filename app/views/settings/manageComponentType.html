@@ -1,12 +1,12 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-  <h3 class="page-header">Manage Component Type</h3>
+  <h3 class="page-header" translate>Manage Component Type</h3>
   <div class="panel panel-default">
     <div class="panel-body">
       <form name="componentTypeForm" novalidate class="form-horizontal col-sm-12" ng-submit="saveComponentType()">
 
         <div class="row form-group col-sm-12">
-          <label for="componentTypeName" class="col-sm-2 control-label">Name</label>
+          <label for="componentTypeName" class="col-sm-2 control-label" translate>Name</label>
           <div class="col-sm-4">
             <div class="form-inline">
               <input size="40" id="componentTypeName" name="componentTypeName" class="form-control input-sm" 
@@ -21,7 +21,7 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="componentTypeCode" class="col-sm-2 control-label">Component Code</label>
+          <label for="componentTypeCode" class="col-sm-2 control-label" translate>Component Code</label>
           <div class="col-sm-4">
             <div class="form-inline">
               <input size="10" id="componentTypeCode" name="componentTypeCode" class="form-control input-sm" 
@@ -36,7 +36,7 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="canBeIssued" class="col-sm-2 control-label">Can be Issued</label>
+          <label for="canBeIssued" class="col-sm-2 control-label" translate>Can be Issued</label>
           <div class="col-sm-4">
             <div class="checkbox">
               <input type="checkbox" id="canBeIssued" name="canBeIssued" ng-model="componentType.canBeIssued" ng-true-value="true" ng-false-value="false"/>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="containsPlasma" class="col-sm-2 control-label">Contains Plasma</label>
+          <label for="containsPlasma" class="col-sm-2 control-label" translate>Contains Plasma</label>
           <div class="col-sm-4">
             <div class="checkbox">
               <input type="checkbox" id="containsPlasma" name="containsPlasma" ng-model="componentType.containsPlasma" ng-true-value="true" ng-false-value="false"/>
@@ -54,12 +54,12 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="maxBleedTime" class="col-sm-2 control-label">Max bleed time</label>
+          <label for="maxBleedTime" class="col-sm-2 control-label" translate>Max bleed time</label>
           <div class="col-sm-4">
             <div class="form-inline">
-              <input type="number" name="maxBleedTime" class="form-control input-sm" ng-model="componentType.maxBleedTime" style="max-width: 35px;" ng-max="60" ng-min="0"> minutes
+              <input type="number" name="maxBleedTime" class="form-control input-sm" ng-model="componentType.maxBleedTime" style="max-width: 35px;" ng-max="60" ng-min="0" > <span translate>minutes</span>
               <div>
-                <small class="error" ng-show="(componentTypeForm.maxBleedTime.$error.max || componentTypeForm.maxBleedTime.$error.min) || submitted">
+                <small class="error" ng-show="(componentTypeForm.maxBleedTime.$error.max || componentTypeForm.maxBleedTime.$error.min) || submitted" translate>
                   Max bleed time should be between 0 and 60 mins
                 </small>
               </div>
@@ -68,12 +68,12 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="maxTimeSinceDonation" class="col-sm-2 control-label">Max time since donation</label>
+          <label for="maxTimeSinceDonation" class="col-sm-2 control-label" translate>Max time since donation</label>
           <div class="col-sm-4">
             <div class="form-inline">
-              <input type="number" name="maxTimeSinceDonation" class="form-control input-sm" ng-model="componentType.maxTimeSinceDonation" style="max-width: 35px;" ng-max="30" ng-min="0"> hours
+              <input type="number" name="maxTimeSinceDonation" class="form-control input-sm" ng-model="componentType.maxTimeSinceDonation" style="max-width: 35px;" ng-max="30" ng-min="0"> <span translate>hours</span>
               <div>
-                <small class="error" ng-show="(componentTypeForm.maxTimeSinceDonation.$error.max || componentTypeForm.maxTimeSinceDonation.$error.min) || submitted">
+                <small class="error" ng-show="(componentTypeForm.maxTimeSinceDonation.$error.max || componentTypeForm.maxTimeSinceDonation.$error.min) || submitted" translate>
                   Max time since donation should be between 0 and 30 hours
                 </small>
               </div>
@@ -82,10 +82,10 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="gravity" class="col-sm-2 control-label">Specific Gravity</label>
+          <label for="gravity" class="col-sm-2 control-label" translate>Specific Gravity</label>
           <div class="col-sm-4">
             <div class="form-inline">
-              <input type="number" name="gravity" class="form-control input-sm" style="width:60px;" ng-model="componentType.gravity" ng-max="2" ng-min="0.001" max-decimal-digits="3" /> (0.001 to 2) with max 3 decimal digits (i.e. 1.004)
+              <input type="number" name="gravity" class="form-control input-sm" style="width:60px;" ng-model="componentType.gravity" ng-max="2" ng-min="0.001" max-decimal-digits="3" /> <span translate>(0.001 to 2) with max 3 decimal digits (i.e. 1.004)</span>
               <ng-messages for="componentTypeForm.gravity.$error" role="alert">
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
@@ -94,10 +94,10 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="expiresAfter" class="col-sm-2 control-label">Expires After</label>
+          <label for="expiresAfter" class="col-sm-2 control-label" translate>Expires After</label>
           <div class="col-sm-4">
             <div class="form-inline">
-              <input type="number" id="expiresAfter" name="expiresAfter" class="form-control input-sm" style="width:50px;" ng-model="componentType.expiresAfter" required> days
+              <input type="number" id="expiresAfter" name="expiresAfter" class="form-control input-sm" style="width:50px;" ng-model="componentType.expiresAfter" required> <span translate>days</span>
                 <ng-messages for="componentTypeForm.expiresAfter.$error" role="alert" ng-show="componentTypeForm.$submitted">
                   <ng-messages-include src="messages.html"></ng-messages-include>
                 </ng-messages>
@@ -106,7 +106,7 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="storageInfo" class="col-sm-2 control-label">Storage Info</label>
+          <label for="storageInfo" class="col-sm-2 control-label" translate>Storage Info</label>
           <div class="col-sm-4">
             <div class="form-inline">
               <input size="40" id="storageInfo" name="storageInfo" class="form-control input-sm" ng-model="componentType.storageInfo">
@@ -118,7 +118,7 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="transportInfo" class="col-sm-2 control-label">Transport Info</label>
+          <label for="transportInfo" class="col-sm-2 control-label" translate>Transport Info</label>
           <div class="col-sm-4">
             <div class="form-inline">
               <input size="40" id="transportInfo" name="transportInfo" class="form-control input-sm" ng-model="componentType.transportInfo">
@@ -130,7 +130,7 @@
         </div>
 
         <div class="row form-group col-sm-12">
-          <label for="preparationInfo" class="col-sm-2 control-label">Preparation Info</label>
+          <label for="preparationInfo" class="col-sm-2 control-label" translate>Preparation Info</label>
           <div class="col-sm-4">
             <div class="form-inline">
               <input size="40" id="preparationInfo" name="preparationInfo" class="form-control input-sm" ng-model="componentType.preparationInfo">
@@ -143,7 +143,7 @@
 
 
         <div class="row form-group col-sm-12">
-          <label for="isDeleted" class="col-sm-2 control-label">Enabled</label>
+          <label for="isDeleted" class="col-sm-2 control-label" translate>Enabled</label>
           <div class="col-sm-4">
             <div class="checkbox">
               <input type="checkbox" id="isDeleted" name="isDeleted" ng-model="componentType.isDeleted" ng-true-value="false" ng-false-value="true"/>
@@ -154,10 +154,10 @@
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
             <button class="btn btn-primary" type="submit" style="margin-top: 2px"
-                ng-disabled="savingComponentType">{{savingComponentType ? "Saving..." : "Save Component Type"}}
+                ng-disabled="savingComponentType">{{savingComponentType ? "Saving..." : "Save" | translate}}
             </button>
             <button class="btn btn-primary" type="button" ng-click="cancel()"
-                style="margin-top: 2px" ng-disabled="savingComponentType">Cancel
+                style="margin-top: 2px" ng-disabled="savingComponentType" translate>Cancel
             </button>
           </div>
         </div>
