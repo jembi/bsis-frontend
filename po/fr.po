@@ -3297,10 +3297,6 @@ msgstr "[FR] Please select one"
 msgid "Please select the correct donor information below"
 msgstr "[FR] Please select the correct donor information below"
 
-#: app/views/passwordReset.html:7
-msgid "Please set a new password before you continue"
-msgstr "[FR] Please set a new password before you continue"
-
 #: app/views/donors/addDonation.html:9
 msgid "Please supply a valid donor"
 msgstr "[FR] Please supply a valid donor"
@@ -4847,8 +4843,12 @@ msgid "Yes"
 msgstr "[FR] Yes"
 
 #: app/views/passwordReset.html:7
-msgid "You have logged in with a recovery password"
-msgstr "[FR] You have logged in with a recovery password"
+msgid ""
+"You have logged in with a recovery password. Please set a new password "
+"before you continue."
+msgstr ""
+"[FR] You have logged in with a recovery password. Please set a new password "
+"before you continue."
 
 #: app/scripts/controllers/forgotPassword.js:14
 msgid "You need to provide a username"
@@ -5053,6 +5053,12 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid "Please set a new password before you continue"
+#~ msgstr "[FR] Please set a new password before you continue"
+
+#~ msgid "You have logged in with a recovery password"
+#~ msgstr "[FR] You have logged in with a recovery password"
 
 #~ msgid "Full Name"
 #~ msgstr "[FR] Full Name"
