@@ -973,6 +973,10 @@ msgstr "[FR] Confirm"
 msgid "Confirm Close"
 msgstr "[FR] Confirm Close"
 
+#: app/views/passwordReset.html:27
+msgid "Confirm Password"
+msgstr "[FR] Confirm Password"
+
 #: app/scripts/controllers/testing/viewTestBatch.js:506
 msgid "Confirm Release"
 msgstr "[FR] Confirm Release"
@@ -984,6 +988,10 @@ msgstr "[FR] Confirm Reopen"
 #: app/scripts/controllers/testing/viewTestBatch.js:476
 msgid "Confirm Void"
 msgstr "[FR] Confirm Void"
+
+#: app/views/passwordReset.html:32
+msgid "Confirm new password"
+msgstr "[FR] Confirm new password"
 
 #: app/views/settings/accountSettings.html:121
 #: app/views/settings/manageUser.html:111
@@ -2661,11 +2669,15 @@ msgstr "[FR] Negative Outcomes"
 msgid "New Donation Batch"
 msgstr "[FR] New Donation Batch"
 
+#: app/views/passwordReset.html:13
+msgid "New Password"
+msgstr "[FR] New Password"
+
 #: app/views/testing/manageTestBatch.html:57
 msgid "New Test Batch"
 msgstr "[FR] New Test Batch"
 
-#: app/views/settings/accountSettings.html:106
+#: app/views/passwordReset.html:17 app/views/settings/accountSettings.html:106
 msgid "New password"
 msgstr "[FR] New password"
 
@@ -3285,6 +3297,10 @@ msgstr "[FR] Please select one"
 msgid "Please select the correct donor information below"
 msgstr "[FR] Please select the correct donor information below"
 
+#: app/views/passwordReset.html:7
+msgid "Please set a new password before you continue"
+msgstr "[FR] Please set a new password before you continue"
+
 #: app/views/donors/addDonation.html:9
 msgid "Please supply a valid donor"
 msgstr "[FR] Please supply a valid donor"
@@ -3890,6 +3906,14 @@ msgstr "[FR] Selected component cannot be processed further"
 #: app/views/translations.html:107
 msgid "September"
 msgstr "[FR] September"
+
+#: app/views/passwordReset.html:43
+msgid "Set Password"
+msgstr "[FR] Set Password"
+
+#: app/views/passwordReset.html:4
+msgid "Set a New Password"
+msgstr "[FR] Set a New Password"
 
 #: app/scripts/controllers/settings/bloodTests.js:14
 msgid "Short Name"
@@ -4821,6 +4845,10 @@ msgstr "[FR] Year"
 #: app/views/donors/viewDonor.html:176
 msgid "Yes"
 msgstr "[FR] Yes"
+
+#: app/views/passwordReset.html:7
+msgid "You have logged in with a recovery password"
+msgstr "[FR] You have logged in with a recovery password"
 
 #: app/scripts/controllers/forgotPassword.js:14
 msgid "You need to provide a username"
