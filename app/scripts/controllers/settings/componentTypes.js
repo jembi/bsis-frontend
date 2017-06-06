@@ -1,23 +1,24 @@
 'use strict';
 
-angular.module('bsis').controller('ComponentTypesCtrl', function($scope, $location, $routeParams, $log, ICONS, ComponentTypesService) {
+angular.module('bsis').controller('ComponentTypesCtrl', function($scope, $location, $routeParams, $log, gettextCatalog, ICONS, ComponentTypesService) {
 
   var columnDefs = [
     {
       name: 'Name',
       field: 'componentTypeName',
+      displayName: gettextCatalog.getString('Name'),
       width: '**'
     },
     {
       name: 'ComponentCode',
-      displayName: 'Component Code',
+      displayName: gettextCatalog.getString('Component Code'),
       field: 'componentTypeCode',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'CanBeIssued',
-      displayName: 'Can be Issued',
+      displayName: gettextCatalog.getString('Can be Issued'),
       field: 'canBeIssued',
       cellTemplate: '<div class="ui-grid-cell-contents">' +
         '<span ng-show="row.entity.canBeIssued"><i class="fa {{grid.appScope.icons.SQUARECHECK}}"></i></span>' +
@@ -27,7 +28,7 @@ angular.module('bsis').controller('ComponentTypesCtrl', function($scope, $locati
     },
     {
       name: 'ContainsPlasma',
-      displayName: 'Contains Plasma',
+      displayName: gettextCatalog.getString('Contains Plasma'),
       field: 'containsPlasma',
       cellTemplate: '<div class="ui-grid-cell-contents">' +
         '<span ng-show="row.entity.containsPlasma"><i class="fa {{grid.appScope.icons.SQUARECHECK}}"></i></span>' +
@@ -37,15 +38,17 @@ angular.module('bsis').controller('ComponentTypesCtrl', function($scope, $locati
     },
     {
       name: 'ExpiresAfter',
-      displayName: 'Expires After',
+      displayName: gettextCatalog.getString('Expires After'),
       field: 'expiresAfter',
-      cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.expiresAfter}} {{row.entity.expiresAfterUnits | titleCase}}</div>',
+      cellTemplate: '<div class="ui-grid-cell-contents">' +
+      '<span translate translate-params-count="row.entity.expiresAfter">{{count}} day(s)</span></div>',
       width: '**',
       maxWidth: '150'
     },
     {
       name: 'Enabled',
       field: 'isDeleted',
+      displayName: gettextCatalog.getString('Enabled'),
       cellTemplate: '<div class="ui-grid-cell-contents">' +
         '<span ng-show="!row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARECHECK}}"></i></span>' +
         '<span ng-show="row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARE}}"></i></span></div>',

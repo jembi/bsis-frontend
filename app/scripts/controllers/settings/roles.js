@@ -109,8 +109,7 @@ angular.module('bsis')
             $scope.go('/roles');
           } else {
             $scope.nameInvalid = 'ng-invalid';
-            var name = 'name';
-            $scope.serverError = err[name];
+            $scope.err = err.fieldErrors.name[0].code;
           }
           $scope.savingRole = false;
         });

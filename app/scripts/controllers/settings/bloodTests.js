@@ -1,41 +1,44 @@
 'use strict';
 
-angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, ICONS, $location, BloodTestsService) {
+angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, ICONS, $location, BloodTestsService, gettextCatalog) {
 
   var columnDefs = [
     {
       name: 'Name',
+      displayName: gettextCatalog.getString('Name'),
       field: 'testName',
       width: '**'
     },
     {
       name: 'Short Name',
+      displayName: gettextCatalog.getString('Short Name'),
       field: 'testNameShort',
       width: '**'
     },
     {
       name: 'Category',
+      displayName: gettextCatalog.getString('Category'),
       field: 'category',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Rank in Category',
-      displayName: 'Rank in Category',
+      displayName: gettextCatalog.getString('Rank in Category'),
       field: 'rankInCategory',
       width: '**',
       maxWidth: '140'
     },
     {
       name: 'BloodTestType',
-      displayName: 'Blood Test Type',
+      displayName: gettextCatalog.getString('Blood Test Type'),
       field: 'bloodTestType',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'IsActive',
-      displayName: 'In Active Use',
+      displayName: gettextCatalog.getString('In Active Use'),
       field: 'isActive',
       cellTemplate: '<div class="ui-grid-cell-contents">' +
         '<span ng-show="row.entity.isActive"><i class="fa {{grid.appScope.icons.SQUARECHECK}}"></i></span>' +
@@ -45,6 +48,7 @@ angular.module('bsis').controller('BloodTestsCtrl', function($scope, $log, ICONS
     },
     {
       name: 'Enabled',
+      displayName: gettextCatalog.getString('Enabled'),
       field: 'isDeleted',
       cellTemplate: '<div class="ui-grid-cell-contents">' +
         '<span ng-show="!row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARECHECK}}"></i></span>' +

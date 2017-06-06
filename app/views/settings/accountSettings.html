@@ -1,6 +1,6 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-    <h3 class="page-header">Account Settings</h3>
+    <h3 class="page-header" translate>Account Settings</h3>
 
     <div class="col-sm-12">
         <div style="padding-bottom:10px;"></div>
@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 col-lg-1 control-label">Name</label>
+                        <label class="col-sm-3 col-lg-1 control-label" translate>Name</label>
                         <div class="col-sm-9 col-lg-11 form-inline">
                             <div class="form-group"
                                  ng-class="{'has-error': (userDetailsForm.$submitted || userDetailsForm.firstName.$dirty) && userDetailsForm.firstName.$invalid}"
@@ -28,7 +28,7 @@
                                 <input size="15" class="form-control input-sm" style="width:auto;" type="text"
                                        name="firstName" ng-model="userDetails.firstName"
                                        ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}"
-                                       placeholder="First" required/>
+                                       placeholder="{{'First' | translate}}" required/>
                             </div>
                             <div class="form-group"
                                  ng-class="{'has-error': (userDetailsForm.$submitted || userDetailsForm.lastName.$dirty) && userDetailsForm.lastName.$invalid}"
@@ -36,7 +36,7 @@
                                 <input size="15" class="form-control input-sm" style="width:auto;" type="text"
                                        name="lastName" ng-model="userDetails.lastName"
                                        ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}"
-                                       placeholder="Last" required/>
+                                       placeholder="{{'Last' | translate}}" required/>
                             </div>
                             <ng-messages
                                     for="userDetailsForm.firstName.$invalid ? userDetailsForm.firstName.$error : userDetailsForm.lastName.$invalid ? userDetailsForm.lastName.$error : {}"
@@ -49,7 +49,8 @@
 
                     <div class="form-group"
                          ng-class="{'has-error': (userDetailsForm.$submitted || userDetailsForm.emailId.$dirty) && userDetailsForm.emailId.$invalid}">
-                        <label class="col-sm-3 col-lg-1 control-label" style="color:inherit;" for="emailId">Email</label>
+                        <label class="col-sm-3 col-lg-1 control-label" style="color:inherit;" for="emailId" translate>Email
+                        </label>
                         <div class="col-sm-9 col-lg-11">
                             <input size="34" class="form-control input-sm" style="width:auto;" type="email" name="emailId"
                                    ng-model="userDetails.emailId"
@@ -62,7 +63,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 col-lg-1 control-label" for="username">Username</label>
+                        <label class="col-sm-3 col-lg-1 control-label" for="username" translate>Username</label>
                         <div class="col-sm-9 col-lg-11">
                             <input size="34" class="form-control input-sm" style="width:auto;" type="text" name="username"
                                    ng-model="userDetails.username" disabled/>
@@ -70,12 +71,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 col-lg-1 control-label">Password</label>
+                        <label class="col-sm-3 col-lg-1 control-label" translate>Password</label>
                         <div class="col-sm-9 col-lg-11">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="modifyPassword" ng-model="userDetails.modifyPassword"/>
-                                    Modify password
+                                    <span translate>Modify password</span>
                                 </label>
                             </div>
                         </div>
@@ -87,7 +88,7 @@
                             <input size="34" class="form-control input-sm" style="width:auto;" type="password"
                                    name="currentPassword" ng-model="userDetails.currentPassword"
                                    ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}"
-                                   ng-disabled="!userDetails.modifyPassword" placeholder="Current password"
+                                   ng-disabled="!userDetails.modifyPassword" placeholder="{{'Current password' | translate}}"
                                    ng-required="userDetails.modifyPassword"/>
                             <ng-messages for="userDetailsForm.currentPassword.$error" role="alert"
                                          ng-show="userDetailsForm.$submitted || userDetailsForm.currentPassword.$dirty">
@@ -102,7 +103,7 @@
                             <input size="34" class="form-control input-sm" style="width:auto;" type="password"
                                    name="password" ng-model="userDetails.password"
                                    ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}"
-                                   ng-disabled="!userDetails.modifyPassword" placeholder="New password"
+                                   ng-disabled="!userDetails.modifyPassword" placeholder="{{'New password' | translate}}"
                                    ng-required="userDetails.modifyPassword"/>
                             <ng-messages for="userDetailsForm.password.$error" role="alert"
                                          ng-show="userDetailsForm.$submitted || userDetailsForm.password.$dirty">
@@ -117,7 +118,7 @@
                             <input size="34" class="form-control input-sm" style="width:auto;" type="password"
                                    name="confirmPassword" ng-model="userDetails.confirmPassword"
                                    ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0}}"
-                                   ng-disabled="!userDetails.modifyPassword" placeholder="Confirm password"
+                                   ng-disabled="!userDetails.modifyPassword" placeholder="{{'Confirm password' | translate}}"
                                    ng-required="userDetails.modifyPassword" compare-to="userDetails.password"/>
                             <ng-messages for="userDetailsForm.confirmPassword.$error" role="alert"
                                          ng-show="userDetailsForm.$submitted || userDetailsForm.confirmPassword.$dirty">
@@ -129,7 +130,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-lg-offset-1 col-sm-9 col-lg-11">
                             <button class="btn btn-primary" type="submit" ng-disabled="updatingUser">{{updatingUser ?
-                                "Saving..." : "Save Changes"}}
+                                "Saving..." : "Save" | translate}}
                             </button>
                         </div>
                     </div>

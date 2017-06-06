@@ -85,13 +85,13 @@ angular.module('bsis')
 
   })
 
-  .controller('ManagePackTypesCtrl', function($scope, $location, $log, PackTypesService, ICONS, ComponentTypesService, $routeParams) {
+  .controller('ManagePackTypesCtrl', function($scope, $location, $log, PackTypesService, ICONS, ComponentTypesService, $routeParams, $timeout) {
     $scope.icons = ICONS;
     $scope.selection = '/managePackType';
     $scope.packType = PackTypesService.getPackType();
     $scope.serverError = null;
 
-    if ($scope.packType === '') {
+    if ($scope.packType   === '') {
       $scope.packType = {
         countAsDonation: false
       };
@@ -101,6 +101,22 @@ angular.module('bsis')
       $scope.componentTypes = response.componentTypes;
     }, function(err) {
       $log.error(err);
+    });
+
+    $scope.$watch('packType.packType', function() {
+      $timeout(function() {
+        if ($scope.packTypeForm) {
+          $scope.packTypeForm.packType.$setValidity('duplicate', true);
+        }
+      });
+    });
+
+    $scope.$watch('packType.countAsDonation', function() {
+      $timeout(function() {
+        if ($scope.packTypeForm) {
+          $scope.packTypeForm.countAsDonation.$setValidity('invalid', true);
+        }
+      });
     });
 
     $scope.savePackType = function(packType, packTypeForm) {
@@ -129,13 +145,11 @@ angular.module('bsis')
       PackTypesService.addPackType(packType, function() {
         $scope.go('/packTypes');
       }, function(err) {
-        $scope.serverError = {
-          userMessage: err.userMessage,
-          fieldErrors: {
-            'type.packType': err['type.packType'],
-            'type.countAsDonation': err['type.countAsDonation']
+        if (err) {
+          if (err.fieldErrors.packType && err.fieldErrors.packType[0].code === 'name.exists') {
+            $scope.packTypeForm.packType.$setValidity('duplicate', false);
           }
-        };
+        }
         $scope.savingPackType = false;
       });
     };
@@ -167,13 +181,11 @@ angular.module('bsis')
       PackTypesService.updatePackType(packType, function() {
         $scope.go('/packTypes');
       }, function(err) {
-        $scope.serverError = {
-          userMessage: err.userMessage,
-          fieldErrors: {
-            'type.packType': err['type.packType'],
-            'type.countAsDonation': err['type.countAsDonation']
+        if (err) {
+          if (err.fieldErrors.packType && err.fieldErrors.packType[0].code === 'name.exists') {
+            $scope.packTypeForm.packType.$setValidity('duplicate', false);
           }
-        };
+        }
         $scope.savingPackType = false;
       });
     };

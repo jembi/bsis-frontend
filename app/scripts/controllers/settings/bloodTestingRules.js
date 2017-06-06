@@ -1,39 +1,45 @@
 'use strict';
 
-angular.module('bsis').controller('BloodTestingRulesCtrl', function($scope, $location, $log, ICONS, BloodTestingRulesService) {
+angular.module('bsis').controller('BloodTestingRulesCtrl', function($scope, $location, $log, ICONS, BloodTestingRulesService, gettextCatalog) {
 
   var columnDefs = [
     {
       name: 'Blood Test',
+      displayName: gettextCatalog.getString('Blood Test'),
       field: 'testNameShort',
       width: '**'
     },
     {
       name: 'Category',
+      displayName: gettextCatalog.getString('Category'),
       field: 'category',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Donation Field',
+      displayName: gettextCatalog.getString('Donation Field'),
       field: 'donationFieldChanged',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Test Outcome',
+      displayName: gettextCatalog.getString('Test Outcome'),
       field: 'pattern',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Donation Field Value',
+      displayName: gettextCatalog.getString('Donation Field Value'),
       field: 'newInformation',
       width: '**',
       maxWidth: '200'
     },
     {
       name: 'Enabled',
+      displayName: gettextCatalog.getString('Enabled'),
       field: 'isDeleted',
       cellTemplate: '<div class="ui-grid-cell-contents">' +
         '<span ng-show="!row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARECHECK}}""></i></span>' +
