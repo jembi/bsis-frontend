@@ -777,6 +777,14 @@ msgstr "[FR] Closed Batches"
 msgid "Collection Date"
 msgstr "[FR] Collection Date"
 
+#: app/scripts/services/componentValidation.js:12
+msgid ""
+"Combined weight of components exceeds weight of parent component. Do you "
+"want to continue?"
+msgstr ""
+"[FR] Combined weight of components exceeds weight of parent component. Do "
+"you want to continue?"
+
 #: app/views/donors/mergeDonorsDeferrals.html:24
 #: app/views/donors/viewDeferrals.html:47
 #: app/views/donors/viewDeferrals.html:76
@@ -1022,6 +1030,7 @@ msgstr "[FR] Contains Plasma"
 #: app/scripts/controllers/donors/viewDonor.js:113
 #: app/scripts/controllers/donors/viewDonor.js:403
 #: app/scripts/controllers/inventory/fulfilOrder.js:312
+#: app/scripts/services/componentValidation.js:11
 msgid "Continue"
 msgstr "Continuer"
 
@@ -2999,6 +3008,10 @@ msgstr "Résultat"
 msgid "Overview"
 msgstr "[FR] Overview"
 
+#: app/scripts/services/componentValidation.js:10
+msgid "Overweight Child Packs"
+msgstr "[FR] Overweight Child Packs"
+
 #: app/scripts/controllers/components/recordComponents.js:169
 msgid "Overweight Pack"
 msgstr "[FR] Overweight Pack"
@@ -4356,6 +4369,7 @@ msgstr "[FR] Title"
 #: app/views/components/viewComponentBatches.html:20
 #: app/views/donors/donorCommunications.html:61
 #: app/views/donors/donorCounselling.html:35
+#: app/views/donors/donorCounsellingDetails.html:93
 #: app/views/donors/manageDonationBatches.html:127
 #: app/views/inventory/findTransfusion.html:58
 #: app/views/inventory/viewOrders.html:28
