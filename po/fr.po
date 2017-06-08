@@ -218,8 +218,8 @@ msgstr "[FR] Address Type"
 msgid "Addresses"
 msgstr "[FR] Addresses"
 
-#: app/views/donors/addDonation.html:291
-#: app/views/donors/addDonorDonation.html:212
+#: app/views/donors/addDonation.html:295
+#: app/views/donors/addDonorDonation.html:214
 msgid "Adverse Event"
 msgstr "[FR] Adverse Event"
 
@@ -424,8 +424,8 @@ msgid "Available"
 msgstr "Disponible"
 
 #. Blood Pressure, abbreviation
-#: app/views/donors/addDonation.html:236
-#: app/views/donors/addDonorDonation.html:168
+#: app/views/donors/addDonation.html:240
+#: app/views/donors/addDonorDonation.html:170
 #: app/views/donors/donationDetails.html:45
 #: app/views/donors/viewDonationSummary.html:138
 #: app/views/donors/viewDonations.html:41 app/views/donors/viewDonor.html:213
@@ -440,7 +440,7 @@ msgstr "[FR] Back"
 msgid "Back to login"
 msgstr "[FR] Back to login"
 
-#: app/views/donors/addDonorDonation.html:24
+#: app/views/donors/addDonorDonation.html:26
 msgid "Batch"
 msgstr "[FR] Batch"
 
@@ -457,8 +457,8 @@ msgstr "[FR] Batch Status"
 msgid "Birth Date"
 msgstr "Date de naissance"
 
-#: app/views/donors/addDonation.html:149
-#: app/views/donors/addDonorDonation.html:96
+#: app/views/donors/addDonation.html:153
+#: app/views/donors/addDonorDonation.html:98
 #: app/views/donors/viewDonationSummary.html:33
 msgid "Bleed Times"
 msgstr "[FR] Bleed Times"
@@ -518,8 +518,8 @@ msgstr "Groupe Sanguin"
 msgid "Blood Group Serology"
 msgstr "[FR] Blood Group Serology"
 
-#: app/views/donors/donationDetails.html:112
-#: app/views/donors/viewDonationSummary.html:269
+#: app/views/donors/donationDetails.html:110
+#: app/views/donors/viewDonationSummary.html:270
 #: app/views/testing/viewTestSample.html:84
 msgid "Blood Group Serology Outcomes"
 msgstr "[FR] Blood Group Serology Outcomes"
@@ -610,7 +610,7 @@ msgstr "[FR] COMPONENTS"
 #: app/views/donors/donorCounselling.html:117
 #: app/views/donors/viewDonationBatch.html:6
 #: app/views/inventory/findInventory.html:105
-#: app/views/inventory/findTransfusion.html:91
+#: app/views/inventory/findTransfusion.html:90
 #: app/views/inventory/viewStockLevels.html:49
 #: app/views/labelling/findSafeComponents.html:143
 #: app/views/mobile/donorCounselling.html:50
@@ -638,9 +638,9 @@ msgstr "[FR] Calling Name"
 msgid "Can be Issued"
 msgstr "[FR] Can be Issued"
 
-#: app/views/confirmModal.html:8 app/views/donors/addDonation.html:328
-#: app/views/donors/addDonorDonation.html:249
-#: app/views/donors/donorCounsellingDetails.html:110
+#: app/views/confirmModal.html:8 app/views/donors/addDonation.html:332
+#: app/views/donors/addDonorDonation.html:251
+#: app/views/donors/donorCounsellingDetails.html:99
 #: app/views/donors/manageClinic.html:41 app/views/donors/manageClinic.html:54
 #: app/views/donors/manageClinic.html:69 app/views/donors/manageClinic.html:83
 #: app/views/donors/manageDeferral.html:82
@@ -1029,16 +1029,16 @@ msgstr "Continuer"
 msgid "Counselled"
 msgstr "[FR] Counselled"
 
-#: app/views/donors/donorCounsellingDetails.html:61
+#: app/views/donors/donorCounsellingDetails.html:55
 msgid "Counselling Date"
 msgstr "[FR] Counselling Date"
 
-#: app/views/donors/donorCounsellingDetails.html:103
+#: app/views/donors/donorCounsellingDetails.html:92
 msgid "Counselling Notes"
 msgstr "[FR] Counselling Notes"
 
 #: app/views/donors/donorCounselling.html:70
-#: app/views/donors/donorCounsellingDetails.html:76
+#: app/views/donors/donorCounsellingDetails.html:64
 msgid "Counselling Status"
 msgstr "[FR] Counselling Status"
 
@@ -1104,8 +1104,8 @@ msgstr "[FR] Currently Deferred"
 #: app/views/components/recordComponents.html:7
 #: app/views/components/viewComponents.html:6
 #: app/views/components/viewDonations.html:9
-#: app/views/donors/addDonation.html:80
-#: app/views/donors/addDonorDonation.html:42
+#: app/views/donors/addDonation.html:84
+#: app/views/donors/addDonorDonation.html:44
 #: app/views/donors/donationDetails.html:7 app/views/donors/findDonor.html:28
 #: app/views/donors/mergeDonorsDonations.html:9
 #: app/views/donors/viewDonationSummary.html:21
@@ -1134,8 +1134,8 @@ msgstr "DIN"
 msgid "DIN cannot be empty"
 msgstr "[FR] DIN cannot be empty"
 
-#: app/views/donors/addDonation.html:97
-#: app/views/donors/addDonorDonation.html:55
+#: app/views/donors/addDonation.html:101
+#: app/views/donors/addDonorDonation.html:57
 msgid "DIN should be {{dinLength}} characters"
 msgstr "[FR] DIN should be {{dinLength}} characters"
 
@@ -1171,7 +1171,7 @@ msgstr "[FR] DONORS"
 #: app/views/donors/donorCounselling.html:115
 #: app/views/donors/viewDonationBatch.html:4
 #: app/views/inventory/findInventory.html:103
-#: app/views/inventory/findTransfusion.html:89
+#: app/views/inventory/findTransfusion.html:88
 #: app/views/inventory/viewStockLevels.html:47
 #: app/views/labelling/findSafeComponents.html:141
 #: app/views/mobile/donorCounselling.html:48 app/views/mobile/lookUp.html:44
@@ -1388,8 +1388,8 @@ msgid "Demographics"
 msgstr "[FR] Demographics"
 
 #: app/scripts/controllers/settings/transfusionReactionTypes.js:18
-#: app/views/donors/addDonation.html:314
-#: app/views/donors/addDonorDonation.html:235
+#: app/views/donors/addDonation.html:318
+#: app/views/donors/addDonorDonation.html:237
 #: app/views/settings/adverseEventTypeForm.html:25
 #: app/views/settings/adverseEventTypes.html:20
 #: app/views/settings/configurations.html:23
@@ -1511,13 +1511,13 @@ msgstr "[FR] Distribution Sites"
 msgid "Division Level"
 msgstr "[FR] Division Level"
 
-#: app/views/donors/addDonation.html:69
+#: app/views/donors/addDonation.html:73
 #: app/views/donors/addDonorDonation.html:10 app/views/donors/viewDonor.html:63
 msgid "Do not bleed donor"
 msgstr "[FR] Do not bleed donor"
 
-#: app/views/donors/addDonation.html:128
-#: app/views/donors/addDonorDonation.html:78
+#: app/views/donors/addDonation.html:132
+#: app/views/donors/addDonorDonation.html:80
 #: app/views/donors/donationDetails.html:27
 msgid "Donation"
 msgstr "[FR] Donation"
@@ -1563,8 +1563,8 @@ msgstr "[FR] Donation Field Affected"
 msgid "Donation Field Value"
 msgstr "[FR] Donation Field Value"
 
-#: app/views/donors/addDonation.html:22
-#: app/views/donors/addDonorDonation.html:20
+#: app/views/donors/addDonation.html:26
+#: app/views/donors/addDonorDonation.html:22
 msgid "Donation Information"
 msgstr "[FR] Donation Information"
 
@@ -1615,8 +1615,8 @@ msgstr "[FR] Done"
 msgid "Donor Address Merge"
 msgstr "[FR] Donor Address Merge"
 
-#: app/views/donors/addDonation.html:182
-#: app/views/donors/addDonorDonation.html:122
+#: app/views/donors/addDonation.html:186
+#: app/views/donors/addDonorDonation.html:124
 msgid "Donor Assessment"
 msgstr "[FR] Donor Assessment"
 
@@ -1658,8 +1658,8 @@ msgstr "[FR] Donor Notes"
 #: app/scripts/controllers/mobile/donorCounselling.js:7
 #: app/scripts/controllers/mobile/mobile.js:32
 #: app/scripts/controllers/mobile/mobileClinicExport.js:30
-#: app/views/donors/addDonation.html:26
-#: app/views/donors/donorCounsellingDetails.html:41
+#: app/views/donors/addDonation.html:30
+#: app/views/donors/donorCounsellingDetails.html:40
 #: app/views/donors/findDonor.html:19 app/views/donors/findDonor.html:80
 #: app/views/donors/mergeDonorsAddress.html:5
 #: app/views/donors/mergeDonorsContact.html:5
@@ -1679,6 +1679,11 @@ msgstr "[FR] Donor Overview Merge"
 #: app/views/donors/findDonor.html:65
 msgid "Donor Registration Blocked - No Open Donation Batches"
 msgstr "[FR] Donor Registration Blocked - No Open Donation Batches"
+
+#: app/views/donors/addDonation.html:15
+#: app/views/donors/addDonorDonation.html:12
+msgid "Donor is currently deferred"
+msgstr "[FR] Donor is currently deferred"
 
 #: app/scripts/controllers/reports/donorsAdverseEventsReport.js:155
 #: app/views/reports/donorsAdverseEventsReport.html:3
@@ -1754,7 +1759,7 @@ msgstr ""
 "[FR] Eligible Donors: {{numberEligibleDonors}} out of {{totalDonors}} "
 "({{percentage}}%)"
 
-#: app/views/donors/addDonation.html:72 app/views/donors/viewDonor.html:67
+#: app/views/donors/addDonation.html:76 app/views/donors/viewDonor.html:67
 msgid "Eligible donor"
 msgstr "[FR] Eligible donor"
 
@@ -1792,8 +1797,8 @@ msgid "Enabled"
 msgstr "[FR] Enabled"
 
 #: app/views/components/recordComponents.html:56
-#: app/views/donors/addDonation.html:165
-#: app/views/donors/addDonorDonation.html:110
+#: app/views/donors/addDonation.html:169
+#: app/views/donors/addDonorDonation.html:112
 #: app/views/donors/viewDeferrals.html:33
 msgid "End"
 msgstr "[FR] End"
@@ -1814,8 +1819,8 @@ msgstr "La date de début doit preceder la date de fin"
 
 #: app/messages.html:13 app/scripts/controllers/donors/viewDonationBatch.js:516
 #: app/scripts/controllers/donors/viewDonor.js:352
-#: app/views/donors/addDonation.html:173
-#: app/views/donors/addDonorDonation.html:115
+#: app/views/donors/addDonation.html:177
+#: app/views/donors/addDonorDonation.html:117
 msgid "End time should be after Start time"
 msgstr "L'heure de fin devrait être après l'heure de début"
 
@@ -1835,9 +1840,9 @@ msgstr "[FR] Enter a valid temperature"
 #: app/scripts/controllers/donors/viewDonationBatch.js:508
 #: app/scripts/controllers/donors/viewDonor.js:336
 #: app/scripts/controllers/donors/viewDonor.js:344
-#: app/views/donors/addDonation.html:158 app/views/donors/addDonation.html:170
-#: app/views/donors/addDonorDonation.html:104
-#: app/views/donors/addDonorDonation.html:114
+#: app/views/donors/addDonation.html:162 app/views/donors/addDonation.html:174
+#: app/views/donors/addDonorDonation.html:106
+#: app/views/donors/addDonorDonation.html:116
 msgid "Enter a valid time"
 msgstr "Prière entrer une heure valide"
 
@@ -1906,7 +1911,7 @@ msgstr "[FR] February"
 #: app/scripts/controllers/reports/donorsDeferredReport.js:68
 #: app/scripts/controllers/reports/donorsDeferredReport.js:69
 #: app/scripts/controllers/reports/donorsDeferredReport.js:89
-#: app/views/donors/addDonation.html:63 app/views/translations.html:3
+#: app/views/donors/addDonation.html:67 app/views/translations.html:3
 msgid "Female"
 msgstr "Femme"
 
@@ -2023,8 +2028,8 @@ msgid "HOME"
 msgstr "[FR] HOME"
 
 #. Haemoglobin, abbreviation
-#: app/views/donors/addDonation.html:208
-#: app/views/donors/addDonorDonation.html:144
+#: app/views/donors/addDonation.html:212
+#: app/views/donors/addDonorDonation.html:146
 #: app/views/donors/donationDetails.html:39
 #: app/views/donors/viewDonationSummary.html:113
 #: app/views/donors/viewDonations.html:46
@@ -2149,7 +2154,7 @@ msgstr "[FR] Invalid donor"
 msgid "Invalid email address"
 msgstr "Adresse e-mail Invalide"
 
-#: app/views/donors/addDonation.html:102 app/views/donors/addDonation.html:40
+#: app/views/donors/addDonation.html:106 app/views/donors/addDonation.html:44
 #: app/views/donors/addDonor.html:123 app/views/donors/addDonor.html:59
 msgid "Invalid input"
 msgstr "Date Invalide"
@@ -2239,8 +2244,8 @@ msgstr "[FR] Last Name"
 msgid "Last Updated"
 msgstr "[FR] Last Updated"
 
-#: app/views/donors/addDonation.html:221
-#: app/views/donors/addDonorDonation.html:157
+#: app/views/donors/addDonation.html:225
+#: app/views/donors/addDonorDonation.html:159
 #: app/views/settings/manageDivision.html:19
 msgid "Level"
 msgstr "[FR] Level"
@@ -2325,7 +2330,7 @@ msgstr "[FR] MOBILE CLINIC"
 
 #: app/scripts/controllers/reports/aboRhGroupsReport.js:99
 #: app/scripts/controllers/reports/donorsDeferredReport.js:90
-#: app/views/donors/addDonation.html:59 app/views/translations.html:2
+#: app/views/donors/addDonation.html:63 app/views/translations.html:2
 msgid "Male"
 msgstr "Homme"
 
@@ -2763,7 +2768,7 @@ msgstr "[FR] No donors found"
 msgid "No duplicate donors found"
 msgstr "[FR] No duplicate donors found"
 
-#: app/views/donors/addDonorDonation.html:27
+#: app/views/donors/addDonorDonation.html:29
 #: app/views/donors/manageDonationBatches.html:47
 msgid "No open donation batches"
 msgstr "[FR] No open donation batches"
@@ -2980,10 +2985,10 @@ msgid "Ordered"
 msgstr "[FR] Ordered"
 
 #: app/scripts/controllers/inventory/findTransfusion.js:70
-#: app/views/donors/donationDetails.html:122
-#: app/views/donors/donationDetails.html:93
-#: app/views/donors/viewDonationSummary.html:248
-#: app/views/donors/viewDonationSummary.html:274
+#: app/views/donors/donationDetails.html:119
+#: app/views/donors/donationDetails.html:92
+#: app/views/donors/viewDonationSummary.html:249
+#: app/views/donors/viewDonationSummary.html:276
 #: app/views/testing/viewTestSample.html:70
 #: app/views/testing/viewTestSample.html:90
 msgid "Outcome"
@@ -3004,7 +3009,7 @@ msgstr "[FR] Overweight Pack"
 #: app/views/donors/donorCounselling.html:116
 #: app/views/donors/viewDonationBatch.html:5
 #: app/views/inventory/findInventory.html:104
-#: app/views/inventory/findTransfusion.html:90
+#: app/views/inventory/findTransfusion.html:89
 #: app/views/inventory/viewStockLevels.html:48
 #: app/views/labelling/findSafeComponents.html:142
 #: app/views/mobile/donorCounselling.html:49 app/views/mobile/lookUp.html:45
@@ -3025,8 +3030,8 @@ msgstr "PDF"
 msgid "POST DONATION"
 msgstr "[FR] POST DONATION"
 
-#: app/views/donors/addDonation.html:110
-#: app/views/donors/addDonorDonation.html:62
+#: app/views/donors/addDonation.html:114
+#: app/views/donors/addDonorDonation.html:64
 #: app/views/donors/donationDetails.html:23
 msgid "Pack"
 msgstr "[FR] Pack"
@@ -3211,14 +3216,14 @@ msgstr "[FR] Please complete all of the required fields"
 msgid "Please enter a valid identifier"
 msgstr "[FR] Please enter a valid identifier"
 
-#: app/views/donors/addDonation.html:197 app/views/donors/addDonation.html:225
-#: app/views/donors/addDonation.html:252 app/views/donors/addDonation.html:258
-#: app/views/donors/addDonation.html:280
-#: app/views/donors/addDonorDonation.html:136
-#: app/views/donors/addDonorDonation.html:160
-#: app/views/donors/addDonorDonation.html:184
+#: app/views/donors/addDonation.html:201 app/views/donors/addDonation.html:229
+#: app/views/donors/addDonation.html:256 app/views/donors/addDonation.html:262
+#: app/views/donors/addDonation.html:284
+#: app/views/donors/addDonorDonation.html:138
+#: app/views/donors/addDonorDonation.html:162
 #: app/views/donors/addDonorDonation.html:186
-#: app/views/donors/addDonorDonation.html:204
+#: app/views/donors/addDonorDonation.html:188
+#: app/views/donors/addDonorDonation.html:206
 #: app/views/donors/viewDonationSummary.html:104
 #: app/views/donors/viewDonationSummary.html:129
 #: app/views/donors/viewDonationSummary.html:154
@@ -3227,14 +3232,14 @@ msgstr "[FR] Please enter a valid identifier"
 msgid "Please enter a value above {{minValue}}"
 msgstr "[FR] Please enter a value above {{minValue}}"
 
-#: app/views/donors/addDonation.html:200 app/views/donors/addDonation.html:228
-#: app/views/donors/addDonation.html:255 app/views/donors/addDonation.html:261
-#: app/views/donors/addDonation.html:283
-#: app/views/donors/addDonorDonation.html:137
-#: app/views/donors/addDonorDonation.html:161
-#: app/views/donors/addDonorDonation.html:185
+#: app/views/donors/addDonation.html:204 app/views/donors/addDonation.html:232
+#: app/views/donors/addDonation.html:259 app/views/donors/addDonation.html:265
+#: app/views/donors/addDonation.html:287
+#: app/views/donors/addDonorDonation.html:139
+#: app/views/donors/addDonorDonation.html:163
 #: app/views/donors/addDonorDonation.html:187
-#: app/views/donors/addDonorDonation.html:205
+#: app/views/donors/addDonorDonation.html:189
+#: app/views/donors/addDonorDonation.html:207
 #: app/views/donors/viewDonationSummary.html:107
 #: app/views/donors/viewDonationSummary.html:132
 #: app/views/donors/viewDonationSummary.html:157
@@ -3331,7 +3336,7 @@ msgstr "[FR] Preferred Address Type"
 msgid "Preferred Contact Type"
 msgstr "[FR] Preferred Contact Type"
 
-#: app/views/donors/donorCounsellingDetails.html:47
+#: app/views/donors/donorCounsellingDetails.html:43
 #: app/views/donors/mergeDonorsOverview.html:29
 #: app/views/donors/mergeDonorsReview.html:24
 #: app/views/donors/viewDonor.html:120
@@ -3421,8 +3426,8 @@ msgstr "[FR] Produced Component(s)"
 msgid "Prof"
 msgstr "[FR] Prof"
 
-#: app/views/donors/addDonation.html:269
-#: app/views/donors/addDonorDonation.html:194
+#: app/views/donors/addDonation.html:273
+#: app/views/donors/addDonorDonation.html:196
 #: app/views/donors/donationDetails.html:35
 #: app/views/donors/viewDonationSummary.html:93
 #: app/views/donors/viewDonations.html:50
@@ -3541,12 +3546,13 @@ msgid "Record Transfusions"
 msgstr "Enregistrer des Transfusions"
 
 #. Location Type
+#: app/views/donors/donorCounsellingDetails.html:81
 #: app/views/settings/manageLocation.html:53 app/views/translations.html:85
 msgid "Referral Site"
 msgstr "[FR] Referral Site"
 
 #: app/scripts/controllers/donors/donorCounselling.js:195
-#: app/views/donors/donorCounsellingDetails.html:91
+#: app/views/donors/donorCounsellingDetails.html:76
 msgid "Referred"
 msgstr "[FR] Referred"
 
@@ -3566,7 +3572,7 @@ msgstr "[FR] Release"
 msgid "Released"
 msgstr "[FR] Released"
 
-#: app/views/donors/donorCounsellingDetails.html:112
+#: app/views/donors/donorCounsellingDetails.html:97
 #: app/views/settings/users.html:35
 msgid "Remove"
 msgstr "[FR] Remove"
@@ -3899,6 +3905,12 @@ msgstr "[FR] Selected component cannot be discarded or undiscarded"
 msgid "Selected component cannot be processed further"
 msgstr "[FR] Selected component cannot be processed further"
 
+#: app/views/donors/addDonation.html:13
+#: app/views/donors/addDonorDonation.html:11
+msgid "Selected donation date is before donor's next allowed donation date"
+msgstr ""
+"[FR] Selected donation date is before donor's next allowed donation date"
+
 #: app/views/translations.html:107
 msgid "September"
 msgstr "[FR] September"
@@ -3935,8 +3947,8 @@ msgid "Specific Gravity"
 msgstr "[FR] Specific Gravity"
 
 #: app/views/components/recordComponents.html:45
-#: app/views/donors/addDonation.html:153
-#: app/views/donors/addDonorDonation.html:100
+#: app/views/donors/addDonation.html:157
+#: app/views/donors/addDonorDonation.html:102
 msgid "Start"
 msgstr "[FR] Start"
 
@@ -4034,10 +4046,10 @@ msgstr "[FR] TTI Unsafe or Incomplete"
 msgid "Temperature"
 msgstr "[FR] Temperature"
 
-#: app/views/donors/donationDetails.html:121
-#: app/views/donors/donationDetails.html:92
-#: app/views/donors/viewDonationSummary.html:247
-#: app/views/donors/viewDonationSummary.html:273
+#: app/views/donors/donationDetails.html:118
+#: app/views/donors/donationDetails.html:91
+#: app/views/donors/viewDonationSummary.html:248
+#: app/views/donors/viewDonationSummary.html:275
 #: app/views/testing/viewTestSample.html:69
 #: app/views/testing/viewTestSample.html:89
 msgid "Test"
@@ -4083,10 +4095,10 @@ msgstr "[FR] Test Sample Produced"
 msgid "Test Samples"
 msgstr "[FR] Test Samples"
 
-#: app/views/donors/donationDetails.html:123
-#: app/views/donors/donationDetails.html:94
-#: app/views/donors/viewDonationSummary.html:249
-#: app/views/donors/viewDonationSummary.html:275
+#: app/views/donors/donationDetails.html:120
+#: app/views/donors/donationDetails.html:93
+#: app/views/donors/viewDonationSummary.html:250
+#: app/views/donors/viewDonationSummary.html:277
 #: app/views/testing/viewTestSample.html:71
 #: app/views/testing/viewTestSample.html:91
 msgid "Tested On"
@@ -4208,15 +4220,15 @@ msgstr ""
 "[FR] There is no component in ISSUED state for specified DIN and component "
 "type"
 
-#: app/messages.html:2 app/views/donors/addDonation.html:120
-#: app/views/donors/addDonation.html:139 app/views/donors/addDonation.html:35
-#: app/views/donors/addDonation.html:92 app/views/donors/addDonor.html:113
+#: app/messages.html:2 app/views/donors/addDonation.html:124
+#: app/views/donors/addDonation.html:143 app/views/donors/addDonation.html:39
+#: app/views/donors/addDonation.html:96 app/views/donors/addDonor.html:113
 #: app/views/donors/addDonor.html:147 app/views/donors/addDonor.html:168
 #: app/views/donors/addDonor.html:190 app/views/donors/addDonor.html:49
-#: app/views/donors/addDonorDonation.html:35
-#: app/views/donors/addDonorDonation.html:52
-#: app/views/donors/addDonorDonation.html:71
-#: app/views/donors/addDonorDonation.html:87
+#: app/views/donors/addDonorDonation.html:37
+#: app/views/donors/addDonorDonation.html:54
+#: app/views/donors/addDonorDonation.html:73
+#: app/views/donors/addDonorDonation.html:89
 #: app/views/donors/manageDeferral.html:21
 #: app/views/donors/manageDeferral.html:45
 #: app/views/donors/manageDeferral.html:65
@@ -4344,7 +4356,6 @@ msgstr "[FR] Title"
 #: app/views/components/viewComponentBatches.html:20
 #: app/views/donors/donorCommunications.html:61
 #: app/views/donors/donorCounselling.html:35
-#: app/views/donors/donorCounsellingDetails.html:93
 #: app/views/donors/manageDonationBatches.html:127
 #: app/views/inventory/findTransfusion.html:58
 #: app/views/inventory/viewOrders.html:28
@@ -4662,7 +4673,7 @@ msgstr "[FR] Value"
 #: app/scripts/controllers/testing/viewTestBatch.js:268
 #: app/views/components/viewComponentBatch.html:23
 #: app/views/donors/addDonor.html:155 app/views/donors/donationDetails.html:19
-#: app/views/donors/donorCounsellingDetails.html:44
+#: app/views/donors/donorCounsellingDetails.html:41
 #: app/views/donors/findDonor.html:101 app/views/donors/manageClinic.html:22
 #: app/views/donors/manageDeferral.html:34
 #: app/views/donors/manageDonationBatches.html:172
@@ -4800,8 +4811,8 @@ msgstr "Numéro de Pavillon"
 #: app/scripts/controllers/components/discardComponents.js:170
 #: app/scripts/controllers/components/recordComponents.js:424
 #: app/views/components/viewComponents.html:19
-#: app/views/donors/addDonation.html:186
-#: app/views/donors/addDonorDonation.html:126
+#: app/views/donors/addDonation.html:190
+#: app/views/donors/addDonorDonation.html:128
 #: app/views/donors/donationDetails.html:49
 #: app/views/donors/viewDonationSummary.html:171
 msgid "Weight"
