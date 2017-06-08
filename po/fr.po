@@ -518,8 +518,8 @@ msgstr "Groupe Sanguin"
 msgid "Blood Group Serology"
 msgstr "[FR] Blood Group Serology"
 
-#: app/views/donors/donationDetails.html:112
-#: app/views/donors/viewDonationSummary.html:269
+#: app/views/donors/donationDetails.html:110
+#: app/views/donors/viewDonationSummary.html:270
 #: app/views/testing/viewTestSample.html:84
 msgid "Blood Group Serology Outcomes"
 msgstr "[FR] Blood Group Serology Outcomes"
@@ -610,7 +610,7 @@ msgstr "[FR] COMPONENTS"
 #: app/views/donors/donorCounselling.html:117
 #: app/views/donors/viewDonationBatch.html:6
 #: app/views/inventory/findInventory.html:105
-#: app/views/inventory/findTransfusion.html:91
+#: app/views/inventory/findTransfusion.html:90
 #: app/views/inventory/viewStockLevels.html:49
 #: app/views/labelling/findSafeComponents.html:143
 #: app/views/mobile/donorCounselling.html:50
@@ -640,7 +640,7 @@ msgstr "[FR] Can be Issued"
 
 #: app/views/confirmModal.html:8 app/views/donors/addDonation.html:328
 #: app/views/donors/addDonorDonation.html:249
-#: app/views/donors/donorCounsellingDetails.html:110
+#: app/views/donors/donorCounsellingDetails.html:99
 #: app/views/donors/manageClinic.html:41 app/views/donors/manageClinic.html:54
 #: app/views/donors/manageClinic.html:69 app/views/donors/manageClinic.html:83
 #: app/views/donors/manageDeferral.html:82
@@ -776,6 +776,14 @@ msgstr "[FR] Closed Batches"
 #: app/scripts/controllers/components/viewComponentBatches.js:37
 msgid "Collection Date"
 msgstr "[FR] Collection Date"
+
+#: app/scripts/services/componentValidation.js:12
+msgid ""
+"Combined weight of components exceeds weight of parent component. Do you "
+"want to continue?"
+msgstr ""
+"[FR] Combined weight of components exceeds weight of parent component. Do "
+"you want to continue?"
 
 #: app/views/donors/mergeDonorsDeferrals.html:24
 #: app/views/donors/viewDeferrals.html:47
@@ -1022,6 +1030,7 @@ msgstr "[FR] Contains Plasma"
 #: app/scripts/controllers/donors/viewDonor.js:113
 #: app/scripts/controllers/donors/viewDonor.js:403
 #: app/scripts/controllers/inventory/fulfilOrder.js:312
+#: app/scripts/services/componentValidation.js:11
 msgid "Continue"
 msgstr "Continuer"
 
@@ -1029,16 +1038,16 @@ msgstr "Continuer"
 msgid "Counselled"
 msgstr "[FR] Counselled"
 
-#: app/views/donors/donorCounsellingDetails.html:61
+#: app/views/donors/donorCounsellingDetails.html:55
 msgid "Counselling Date"
 msgstr "[FR] Counselling Date"
 
-#: app/views/donors/donorCounsellingDetails.html:103
+#: app/views/donors/donorCounsellingDetails.html:92
 msgid "Counselling Notes"
 msgstr "[FR] Counselling Notes"
 
 #: app/views/donors/donorCounselling.html:70
-#: app/views/donors/donorCounsellingDetails.html:76
+#: app/views/donors/donorCounsellingDetails.html:64
 msgid "Counselling Status"
 msgstr "[FR] Counselling Status"
 
@@ -1171,7 +1180,7 @@ msgstr "[FR] DONORS"
 #: app/views/donors/donorCounselling.html:115
 #: app/views/donors/viewDonationBatch.html:4
 #: app/views/inventory/findInventory.html:103
-#: app/views/inventory/findTransfusion.html:89
+#: app/views/inventory/findTransfusion.html:88
 #: app/views/inventory/viewStockLevels.html:47
 #: app/views/labelling/findSafeComponents.html:141
 #: app/views/mobile/donorCounselling.html:48 app/views/mobile/lookUp.html:44
@@ -1659,7 +1668,7 @@ msgstr "[FR] Donor Notes"
 #: app/scripts/controllers/mobile/mobile.js:32
 #: app/scripts/controllers/mobile/mobileClinicExport.js:30
 #: app/views/donors/addDonation.html:26
-#: app/views/donors/donorCounsellingDetails.html:41
+#: app/views/donors/donorCounsellingDetails.html:40
 #: app/views/donors/findDonor.html:19 app/views/donors/findDonor.html:80
 #: app/views/donors/mergeDonorsAddress.html:5
 #: app/views/donors/mergeDonorsContact.html:5
@@ -2980,10 +2989,10 @@ msgid "Ordered"
 msgstr "[FR] Ordered"
 
 #: app/scripts/controllers/inventory/findTransfusion.js:70
-#: app/views/donors/donationDetails.html:122
-#: app/views/donors/donationDetails.html:93
-#: app/views/donors/viewDonationSummary.html:248
-#: app/views/donors/viewDonationSummary.html:274
+#: app/views/donors/donationDetails.html:119
+#: app/views/donors/donationDetails.html:92
+#: app/views/donors/viewDonationSummary.html:249
+#: app/views/donors/viewDonationSummary.html:276
 #: app/views/testing/viewTestSample.html:70
 #: app/views/testing/viewTestSample.html:90
 msgid "Outcome"
@@ -2993,6 +3002,10 @@ msgstr "Résultat"
 #: app/views/donors/viewDonor.html:147
 msgid "Overview"
 msgstr "[FR] Overview"
+
+#: app/scripts/services/componentValidation.js:10
+msgid "Overweight Child Packs"
+msgstr "[FR] Overweight Child Packs"
 
 #: app/scripts/controllers/components/recordComponents.js:169
 msgid "Overweight Pack"
@@ -3004,7 +3017,7 @@ msgstr "[FR] Overweight Pack"
 #: app/views/donors/donorCounselling.html:116
 #: app/views/donors/viewDonationBatch.html:5
 #: app/views/inventory/findInventory.html:104
-#: app/views/inventory/findTransfusion.html:90
+#: app/views/inventory/findTransfusion.html:89
 #: app/views/inventory/viewStockLevels.html:48
 #: app/views/labelling/findSafeComponents.html:142
 #: app/views/mobile/donorCounselling.html:49 app/views/mobile/lookUp.html:45
@@ -3331,7 +3344,7 @@ msgstr "[FR] Preferred Address Type"
 msgid "Preferred Contact Type"
 msgstr "[FR] Preferred Contact Type"
 
-#: app/views/donors/donorCounsellingDetails.html:47
+#: app/views/donors/donorCounsellingDetails.html:43
 #: app/views/donors/mergeDonorsOverview.html:29
 #: app/views/donors/mergeDonorsReview.html:24
 #: app/views/donors/viewDonor.html:120
@@ -3541,12 +3554,13 @@ msgid "Record Transfusions"
 msgstr "Enregistrer des Transfusions"
 
 #. Location Type
+#: app/views/donors/donorCounsellingDetails.html:81
 #: app/views/settings/manageLocation.html:53 app/views/translations.html:85
 msgid "Referral Site"
 msgstr "[FR] Referral Site"
 
 #: app/scripts/controllers/donors/donorCounselling.js:195
-#: app/views/donors/donorCounsellingDetails.html:91
+#: app/views/donors/donorCounsellingDetails.html:76
 msgid "Referred"
 msgstr "[FR] Referred"
 
@@ -3566,7 +3580,7 @@ msgstr "[FR] Release"
 msgid "Released"
 msgstr "[FR] Released"
 
-#: app/views/donors/donorCounsellingDetails.html:112
+#: app/views/donors/donorCounsellingDetails.html:97
 #: app/views/settings/users.html:35
 msgid "Remove"
 msgstr "[FR] Remove"
@@ -4034,10 +4048,10 @@ msgstr "[FR] TTI Unsafe or Incomplete"
 msgid "Temperature"
 msgstr "[FR] Temperature"
 
-#: app/views/donors/donationDetails.html:121
-#: app/views/donors/donationDetails.html:92
-#: app/views/donors/viewDonationSummary.html:247
-#: app/views/donors/viewDonationSummary.html:273
+#: app/views/donors/donationDetails.html:118
+#: app/views/donors/donationDetails.html:91
+#: app/views/donors/viewDonationSummary.html:248
+#: app/views/donors/viewDonationSummary.html:275
 #: app/views/testing/viewTestSample.html:69
 #: app/views/testing/viewTestSample.html:89
 msgid "Test"
@@ -4083,10 +4097,10 @@ msgstr "[FR] Test Sample Produced"
 msgid "Test Samples"
 msgstr "[FR] Test Samples"
 
-#: app/views/donors/donationDetails.html:123
-#: app/views/donors/donationDetails.html:94
-#: app/views/donors/viewDonationSummary.html:249
-#: app/views/donors/viewDonationSummary.html:275
+#: app/views/donors/donationDetails.html:120
+#: app/views/donors/donationDetails.html:93
+#: app/views/donors/viewDonationSummary.html:250
+#: app/views/donors/viewDonationSummary.html:277
 #: app/views/testing/viewTestSample.html:71
 #: app/views/testing/viewTestSample.html:91
 msgid "Tested On"
@@ -4344,7 +4358,6 @@ msgstr "[FR] Title"
 #: app/views/components/viewComponentBatches.html:20
 #: app/views/donors/donorCommunications.html:61
 #: app/views/donors/donorCounselling.html:35
-#: app/views/donors/donorCounsellingDetails.html:93
 #: app/views/donors/manageDonationBatches.html:127
 #: app/views/inventory/findTransfusion.html:58
 #: app/views/inventory/viewOrders.html:28
@@ -4662,7 +4675,7 @@ msgstr "[FR] Value"
 #: app/scripts/controllers/testing/viewTestBatch.js:268
 #: app/views/components/viewComponentBatch.html:23
 #: app/views/donors/addDonor.html:155 app/views/donors/donationDetails.html:19
-#: app/views/donors/donorCounsellingDetails.html:44
+#: app/views/donors/donorCounsellingDetails.html:41
 #: app/views/donors/findDonor.html:101 app/views/donors/manageClinic.html:22
 #: app/views/donors/manageDeferral.html:34
 #: app/views/donors/manageDonationBatches.html:172
