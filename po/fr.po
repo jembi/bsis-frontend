@@ -390,11 +390,11 @@ msgstr ""
 msgid "Are you sure you want to undiscard these components?"
 msgstr "[FR] Are you sure you want to undiscard these components?"
 
-#: app/scripts/controllers/donors/viewDonor.js:588
+#: app/scripts/controllers/donors/viewDonor.js:591
 msgid "Are you sure you want to void this deferral?"
 msgstr "Êtes-vous sûr(e) de vouloir supprimer cette Transfusion?"
 
-#: app/scripts/controllers/donors/viewDonor.js:586
+#: app/scripts/controllers/donors/viewDonor.js:589
 msgid ""
 "Are you sure you want to void this permanent deferral? The donor may be "
 "eligible to donate as a result of this action."
@@ -1826,7 +1826,7 @@ msgstr "[FR] End Deferral"
 msgid "End date can't be before deferral date"
 msgstr "La date de début doit preceder la date de fin"
 
-#: app/messages.html:13 app/scripts/controllers/donors/viewDonationBatch.js:516
+#: app/messages.html:13 app/scripts/controllers/donors/viewDonationBatch.js:526
 #: app/scripts/controllers/donors/viewDonor.js:352
 #: app/views/donors/addDonation.html:177
 #: app/views/donors/addDonorDonation.html:117
@@ -1845,8 +1845,8 @@ msgstr "[FR] Enter"
 msgid "Enter a valid temperature"
 msgstr "[FR] Enter a valid temperature"
 
-#: app/messages.html:12 app/scripts/controllers/donors/viewDonationBatch.js:500
-#: app/scripts/controllers/donors/viewDonationBatch.js:508
+#: app/messages.html:12 app/scripts/controllers/donors/viewDonationBatch.js:510
+#: app/scripts/controllers/donors/viewDonationBatch.js:518
 #: app/scripts/controllers/donors/viewDonor.js:336
 #: app/scripts/controllers/donors/viewDonor.js:344
 #: app/views/donors/addDonation.html:162 app/views/donors/addDonation.html:174
@@ -2760,7 +2760,7 @@ msgstr ""
 "Aucun composant avec le type de composant sélectionné n'existe pour le don "
 "sélectionné"
 
-#: app/scripts/controllers/donors/viewDonor.js:493
+#: app/scripts/controllers/donors/viewDonor.js:496
 #: app/views/donors/viewDeferrals.html:12 app/views/donors/viewDonor.html:171
 msgid "No current deferrals"
 msgstr "[FR] No current deferrals"
@@ -3225,7 +3225,7 @@ msgstr "[FR] Please choose at least one location type"
 msgid "Please complete all of the required fields"
 msgstr "[FR] Please complete all of the required fields"
 
-#: app/scripts/controllers/donors/viewDonor.js:652
+#: app/scripts/controllers/donors/viewDonor.js:655
 msgid "Please enter a valid identifier"
 msgstr "[FR] Please enter a valid identifier"
 
@@ -3920,9 +3920,9 @@ msgstr "[FR] Selected component cannot be processed further"
 
 #: app/views/donors/addDonation.html:13
 #: app/views/donors/addDonorDonation.html:11
-msgid "Selected donation date is before donor's next allowed donation date"
+msgid "Selected donation Date is before donor's next allowed donation date"
 msgstr ""
-"[FR] Selected donation date is before donor's next allowed donation date"
+"[FR] Selected donation Date is before donor's next allowed donation date"
 
 #: app/views/translations.html:107
 msgid "September"
@@ -4310,8 +4310,8 @@ msgstr ""
 "performance of the system. It is recommended that this export is only run "
 "after standard operating hours, to minimise impact on other activities."
 
-#: app/scripts/controllers/donors/viewDonationBatch.js:447
-#: app/scripts/controllers/donors/viewDonor.js:664
+#: app/scripts/controllers/donors/viewDonationBatch.js:457
+#: app/scripts/controllers/donors/viewDonor.js:667
 msgid "This form is not valid"
 msgstr "[FR] This form is not valid"
 
@@ -4369,7 +4369,6 @@ msgstr "[FR] Title"
 #: app/views/components/viewComponentBatches.html:20
 #: app/views/donors/donorCommunications.html:61
 #: app/views/donors/donorCounselling.html:35
-#: app/views/donors/donorCounsellingDetails.html:93
 #: app/views/donors/manageDonationBatches.html:127
 #: app/views/inventory/findTransfusion.html:58
 #: app/views/inventory/viewOrders.html:28
@@ -4780,7 +4779,7 @@ msgstr "[FR] View Summary"
 msgid "View Test Sample"
 msgstr "[FR] View Test Sample"
 
-#: app/scripts/controllers/donors/viewDonor.js:593
+#: app/scripts/controllers/donors/viewDonor.js:596
 #: app/scripts/controllers/inventory/recordTransfusions.js:179
 #: app/scripts/controllers/inventory/viewOrder.js:249
 #: app/scripts/controllers/inventory/viewReturn.js:207
@@ -4794,7 +4793,7 @@ msgstr "[FR] View Test Sample"
 msgid "Void"
 msgstr "Supprimer"
 
-#: app/scripts/controllers/donors/viewDonor.js:592
+#: app/scripts/controllers/donors/viewDonor.js:595
 msgid "Void Deferral"
 msgstr "[FR] Void Deferral"
 
@@ -5078,6 +5077,10 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid "Selected donation date is before donor's next allowed donation date"
+#~ msgstr ""
+#~ "[FR] Selected donation date is before donor's next allowed donation date"
 
 #~ msgid "Please set a new password before you continue"
 #~ msgstr "[FR] Please set a new password before you continue"
