@@ -6,13 +6,13 @@
     <uib-alert type="danger" close="">
         <span translate>Please provide valid inputs</span>
         <ul>
-            <li ng-show="err['fieldErrors']['donation.donor'][0].code === 'donor.invalid' || err.developerMessage === 'Do not bleed donor'" translate>Please supply a valid donor</li>
-            <li ng-show="err['fieldErrors']['donation.donationIdentificationNumber'][0].code === 'donationIdentificationNumber.nonunique'" translate>
+            <li ng-show="invalidDonorError.code === 'donor.invalid' || err.developerMessage === 'Do not bleed donor'" translate>Please supply a valid donor</li>
+            <li ng-show="donationIdentificationNumberError.code === 'donationIdentificationNumber.nonunique'" translate>
                 There is another donation with the same donation identification number
             </li>
-            <li ng-show="err['fieldErrors']['donation.donor][0].code === 'donor.donationBeforeNextAllowedDate'" translate>Selected donation date is before donor's next allowed donation date
+            <li ng-show="invalidDonorError.code === 'errors.invalid.donationBeforeNextAllowedDate'" translate>Selected donation date is before donor's next allowed donation date
             </li>
-            <li ng-show="err['fieldErrors']['donation.donor][0].code === 'donor.deferred'" translate>Donor is currently deferred
+            <li ng-show="invalidDonorError.code === 'errors.invalid.donorDeferred'" translate>Donor is currently deferred
             </li>
         </ul>
     </uib-alert>
@@ -31,7 +31,7 @@
             <div class="row col-sm-9">
                 <div class="form-inline" style="padding-left:5px;">
                     <input name="donorNumber" size="15" type="donorNumber" id="donorNumber"
-                           class="form-control input-sm" placeholder="" ng-model="donation.donorNumber" required 
+                           class="form-control input-sm" placeholder="" ng-model="donation.donorNumber" required
                            ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
                            ng-class="{'ng-invalid ng-dirty' : (addDonationForm.donorNumber.$invalid && submitted)}">
                     <div>

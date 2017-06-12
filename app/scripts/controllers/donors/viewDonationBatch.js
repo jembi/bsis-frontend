@@ -398,6 +398,11 @@ angular.module('bsis')
             $scope.err = err;
             $scope.addDonationSuccess = false;
             $scope.addingDonation = false;
+
+            if (angular.isDefined(err.fieldErrors)) {
+              $scope.donationIdentificationNumberError = err.fieldErrors['donation.donationIdentificationNumber'][0];
+              $scope.invalidDonorError = err.fieldErrors['donation.donor'][0];
+            }
           });
         }, function() {
           // Do nothing
