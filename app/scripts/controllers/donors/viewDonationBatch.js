@@ -400,8 +400,13 @@ angular.module('bsis')
             $scope.addingDonation = false;
 
             if (angular.isDefined(err.fieldErrors)) {
-              $scope.donationIdentificationNumberError = err.fieldErrors['donation.donationIdentificationNumber'][0];
-              $scope.invalidDonorError = err.fieldErrors['donation.donor'][0];
+              if (angular.isDefined(err.fieldErrors['donation.donationIdentificationNumber'])) {
+                $scope.donationIdentificationNumberError = err.fieldErrors['donation.donationIdentificationNumber'][0];
+              }
+
+              if (angular.isDefined(err.fieldErrors['donation.donor'])) {
+                $scope.invalidDonorError = err.fieldErrors['donation.donor'][0];
+              }
             }
           });
         }, function() {
