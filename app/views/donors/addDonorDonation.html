@@ -6,7 +6,7 @@
     <uib-alert type="danger" close="">
         <span translate>Please provide valid inputs</span>
         <ul>
-            <li ng-show="donorDonationDINError.code === 'donation.donationIdentificationNumber'" translate>There is another donation with the same donation identification number</li>
+            <li ng-show="donorDonationDINError.code === 'donationIdentificationNumber.nonunique'" translate>There is another donation with the same donation identification number</li>
             <li ng-show="!donorDonationError['fieldErrors']" translate>Do not bleed donor</li>
             <li ng-show="invalidDonorDonationError.code === 'errors.invalid.donationBeforeNextAllowedDate'" translate>Selected donation Date is before donor's next allowed donation date</li>
             <li ng-show="invalidDonorDonationError.code === 'errors.invalid.donorDeferred'" translate>Donor is currently deferred</li>
