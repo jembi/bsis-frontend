@@ -6,8 +6,10 @@
     <uib-alert type="danger" close="">
         <span translate>Please provide valid inputs</span>
         <ul>
-            <li ng-show="donorDonationError['fieldErrors']['donation.donationIdentificationNumber'][0].code === 'donationIdentificationNumber.nonunique'" translate>There is another donation with the same donation identification number</li>
+            <li ng-show="donorDonationDINError.code === 'donationIdentificationNumber.nonunique'" translate>There is another donation with the same donation identification number</li>
             <li ng-show="!donorDonationError['fieldErrors']" translate>Do not bleed donor</li>
+            <li ng-show="invalidDonorDonationError.code === 'errors.invalid.donationBeforeNextAllowedDate'" translate>Selected donation date is before donor's next allowed donation date</li>
+            <li ng-show="invalidDonorDonationError.code === 'errors.invalid.donorDeferred'" translate>Donor is currently deferred</li>
         </ul>
     </uib-alert>
 </div>
@@ -198,7 +200,7 @@
                            placeholder="" ng-model="donation.donorPulse"
                            integer min={{pulseMin}} max={{pulseMax}}
                            ng-model-options="{ updateOn:'default blur', debounce: { default: 500, blur: 0 } }"
-                           ng-class="{'ng-invalid ng-dirty' : (addDonationForm.pulse.$invalid && submitted) }"> 
+                           ng-class="{'ng-invalid ng-dirty' : (addDonationForm.pulse.$invalid && submitted) }">
                     <em> {{pulseUnit}} </em>
                     <div>
                         <small class="error" ng-show="(addDonationForm.pulse.$error.min && (addDonationForm.pulse.$dirty || submitted))" translate translate-params-min-value="pulseMin">Please enter a value above {{minValue}}</small>

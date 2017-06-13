@@ -451,6 +451,16 @@ angular.module('bsis')
           }, function(err) {
             $scope.donorDonationError = err;
             $scope.addDonationSuccess = false;
+
+            if (angular.isDefined(err.fieldErrors)) {
+              if (angular.isDefined(err.fieldErrors['donation.donationIdentificationNumber'])) {
+                $scope.donorDonationDINError = err.fieldErrors['donation.donationIdentificationNumber'][0];
+              }
+              if (angular.isDefined(err.fieldErrors['donation.donor'])) {
+                $scope.invalidDonorDonationError = err.fieldErrors['donation.donor'][0];
+              }
+            }
+
             // refresh donor overview after adding donation
             getDonorOverview();
 
