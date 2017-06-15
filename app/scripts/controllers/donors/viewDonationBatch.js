@@ -358,6 +358,11 @@ angular.module('bsis')
       });
     }
 
+    var clearDonationErrors = function() {
+      $scope.donationIdentificationNumberError = null;
+      $scope.invalidDonorError = null;
+    };
+
     $scope.addDonation = function(donation, bleedStartTime, bleedEndTime, valid) {
 
       if (valid) {
@@ -382,6 +387,8 @@ angular.module('bsis')
 
           $scope.addingDonation = true;
 
+          clearDonationErrors();
+
           DonorService.addDonationToBatch(donation, function(response) {
             $scope.addDonationSuccess = true;
             $scope.donation = {};
@@ -400,6 +407,7 @@ angular.module('bsis')
             $scope.addingDonation = false;
 
             if (angular.isDefined(err.fieldErrors)) {
+              $log.debug(err.fieldErrors);
               if (angular.isDefined(err.fieldErrors['donation.donationIdentificationNumber'])) {
                 $scope.donationIdentificationNumberError = err.fieldErrors['donation.donationIdentificationNumber'][0];
               }

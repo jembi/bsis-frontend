@@ -411,6 +411,11 @@ angular.module('bsis')
       }
     };
 
+    var clearDonationErrors = function() {
+      $scope.donorDonationDINError = null;
+      $scope.invalidDonorDonationError = null;
+    };
+
     $scope.addDonation = function(donation, donationBatch, bleedStartTime, bleedEndTime, valid) {
 
       if (valid) {
@@ -435,6 +440,8 @@ angular.module('bsis')
           }
 
           $scope.addingDonation = true;
+
+          clearDonationErrors();
 
           DonorService.addDonation(donation, function() {
 
