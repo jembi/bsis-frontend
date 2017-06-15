@@ -10,13 +10,14 @@
 
     <div class="h4">
         <small><em>Date Created: </em></small>
-        <span ng-show="!editableForm.$visible">{{ (donationBatch.donationBatchDate | bsisDate) || '' }}</span>
-    <span ng-show="editableForm.$visible">
-      <dateselect name="donationBatchDate" ng-model="donationBatch.donationBatchDate" initDate="donationBatch.donationBatchDate" format="format"
-                  ng-disabled="!donationBatch.permissions.canEditDate" required date-time-not-in-future
-                  ng-class="{'has-error' : editableForm.donationBatchDate.$invalid || editableForm.donationBatchDate.$error.required}" max-date="today">
-      </dateselect>
-    </span>
+        <span ng-show="!editableForm.$visible">{{ (donationBatch.donationBatchDate | bsisDateTime) || '' }}</span>
+        <span ng-show="editableForm.$visible">
+          <dateselect name="donationBatchDate" ng-model="donationBatchDate.date" initDate="donationBatch.donationBatchDate" format="dateFormat" cal-icon="icons.CALENDAR" ng-disabled="!donationBatch.permissions.canEditDate" required date-time-not-in-future ng-class="{'has-error' : editableForm.donationBatchDate.$invalid || editableForm.donationBatchDate.$error.required}" max-date="today">
+          </dateselect>
+        <div style="display: inline-table; vertical-align: middle;">
+          <uib-timepicker ng-model="donationBatchDate.time" name="donationBatchDateTime" show-spinners="false" ng-required="submitted" ng-change="updateTimeOnDonationBatchDate()"></uib-timepicker>
+        </div>
+        </span>
         |
         <small><em>Venue: </em></small>
         <span e-class="xeditable venue" editable-select="donationBatch.venue"
@@ -88,7 +89,10 @@
 
     </div>
     <div>
-      <ng-messages for="editableForm.donationBatchDate.$error" role="alert" ng-show="editableForm.donationBatchDate.$error.dateInFuture || editableForm.donationBatchDate.$error.required">
+      <ng-messages for="editableForm.donationBatchDate.$error" role="alert" ng-show="(editableForm.donationBatchDate.$error.dateInFuture || editableForm.donationBatchDate.$error.required) && editableForm.$visible">
+        <ng-messages-include src="messages.html"></ng-messages-include>
+      </ng-messages>
+      <ng-messages for="editableForm.donationBatchDateTime.$error" role="alert" ng-show="editableForm.donationBatchDateTime.$invalid && editableForm.$visible">
         <ng-messages-include src="messages.html"></ng-messages-include>
       </ng-messages>
 

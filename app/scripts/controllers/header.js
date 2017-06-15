@@ -131,7 +131,9 @@ angular.module('bsis')
       '/manageReturns',
       '/recordReturn/\\d+',
       '/viewReturn/\\d+',
-      '/viewReturns'
+      '/viewReturns',
+      '/recordTransfusions',
+      '/findTransfusion'
     ];
 
     var labellingRoutes = [
@@ -149,7 +151,8 @@ angular.module('bsis')
       '/donorsDeferredReport',
       '/unitsDiscardedReport',
       '/componentsProducedReport',
-      '/donorsAdverseEventsReport'
+      '/donorsAdverseEventsReport',
+      '/transfusionsReport'
     ];
 
     var mobileRoutes = [
@@ -193,7 +196,9 @@ angular.module('bsis')
       '/bloodTests',
       '/manageBloodTest/?\\d*',
       '/bloodTestingRules',
-      '/manageBloodTestingRule/?\\d*'
+      '/manageBloodTestingRule/?\\d*',
+      '/transfusionReactionTypes',
+      '/manageTransfusionReactionType/?\\d*'
     ];
 
     /**

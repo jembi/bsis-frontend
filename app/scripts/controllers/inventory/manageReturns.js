@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $location, $log, ReturnFormsService) {
+angular.module('bsis').controller('ManageReturnsCtrl', function($scope, $location, $log, ReturnFormsService, DATEFORMAT) {
+
+  $scope.dateFormat = DATEFORMAT;
 
   var columnDefs = [
     {

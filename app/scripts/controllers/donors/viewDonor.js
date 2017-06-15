@@ -10,6 +10,7 @@ angular.module('bsis')
     $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
     $scope.alerts = Alerting.getAlerts();
     $scope.ui = UI;
+    $scope.dateFormat = DATEFORMAT;
 
     $scope.alerts = Alerting.getAlerts();
     $scope.data = {};
@@ -98,6 +99,7 @@ angular.module('bsis')
           $scope.totalAdverseEvents = response.totalAdverseEvents;
           $scope.donorPermissions.canDelete = response.canDelete;
           $scope.isEligible = response.isEligible;
+          $scope.donorInitialized = true;
         }
       });
     }

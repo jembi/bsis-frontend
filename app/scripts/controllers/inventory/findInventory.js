@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService, UtilsService) {
+  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService, UtilsService, DATEFORMAT) {
+
+    $scope.dateFormat = DATEFORMAT;
 
     var master = {
       donationIdentificationNumber: null,
@@ -201,6 +203,15 @@ angular.module('bsis')
 
     $scope.clearBloodGroups = function() {
       $scope.searchParams.bloodGroups = [];
+    };
+
+    $scope.clearFields = function() {
+      $scope.searchParams.locationId = null;
+      $scope.searchParams.allSites = true,
+      $scope.searchParams.componentTypeId = null;
+      $scope.searchParams.bloodGroups = [];
+      $scope.searchParams.anyBloodGroup = true;
+      $scope.searchParams.dueToExpireBy = null;
     };
 
     $scope.clearSearch = function(searchForm) {

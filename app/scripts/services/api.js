@@ -353,18 +353,19 @@ angular.module('bsis')
 
       AuditRevisions: $resource(url + '/auditrevisions'),
 
-      DonationSummaries: $resource(url + '/donations/summaries'),
-
       DonorPostDonationCounselling: $resource(url + '/donors/:donorId/postdonationcounselling'),
 
-      PostDonationCounselling: $resource(url + '/postdonationcounsellings/:id', {id: '@id'}, {
-        update: {method: 'PUT'},
-        searchForm: {
+      PostDonationCounsellings: $resource(url + '/postdonationcounsellings/:id', {id: '@id'}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/postdonationcounsellings/form'
+        },
+        getSearchForm: {
           method: 'GET',
           url: url + '/postdonationcounsellings/searchForm'
-        }
+        },
+        update: {method: 'PUT'}
       }),
-      PostDonationCounsellingFormFields: $resource(url + '/postdonationcounsellings/form'),
 
       AdverseEventTypes: $resource(url + '/adverseevents/types/:id', {id: '@id'}, {
         update: {method: 'PUT'}
@@ -393,9 +394,19 @@ angular.module('bsis')
         }
       }),
 
-      DonationsReport: $resource(url + '/reports/collecteddonations/generate'),
+      DonationsReport: $resource(url + '/reports/collecteddonations/generate', {}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/collecteddonations/form'
+        }
+      }),
 
-      TTIPrevalenceReport: $resource(url + '/reports/ttiprevalence/generate'),
+      TTIPrevalenceReport: $resource(url + '/reports/ttiprevalence/generate', {}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/ttiprevalence/form'
+        }
+      }),
 
       StockLevelsReport: $resource(url + '/reports/stockLevels', {}, {
         generate: {
@@ -463,6 +474,17 @@ angular.module('bsis')
         }
       }),
 
+      TransfusionsReport: $resource(url + '/reports/transfusionsummary', {}, {
+        generate: {
+          method: 'GET',
+          url: url + '/reports/transfusionsummary/generate'
+        },
+        getForm: {
+          method: 'GET',
+          url: url + '/reports/transfusionsummary/form'
+        }
+      }),
+
       OrderForms: $resource(url + '/orderforms/:id', {id: '@id'}, {
         update: {method: 'PUT'},
         search: {
@@ -501,6 +523,10 @@ angular.module('bsis')
         getSearchForm: {
           method: 'GET',
           url: url + '/inventories/search/form'
+        },
+        getInventory: {
+          method: 'GET',
+          url: url + '/inventories'
         }
       }),
 
@@ -508,6 +534,41 @@ angular.module('bsis')
         search: {
           method: 'GET',
           url: url + '/divisions/search'
+        },
+        update: {
+          method: 'PUT'
+        }
+      }),
+
+      TransfusionReactionTypes: $resource(url + '/transfusionreactiontypes/:id', {id: '@id'}, {
+        search: {
+          method: 'GET',
+          url: url + '/transfusionreactiontypes/search'
+        },
+        add: {
+          method: 'POST',
+          url: url + '/transfusionreactiontypes'
+        },
+        update: {
+          method: 'PUT'
+        }
+      }),
+
+      Transfusion: $resource(url + '/transfusions/:id', {id: '@id'}, {
+        getForm: {
+          method: 'GET',
+          url: url + '/transfusions/form'
+        },
+        save: {
+          method: 'POST'
+        },
+        getSearchForm: {
+          method: 'GET',
+          url: url + '/transfusions/search/form'
+        },
+        search: {
+          method: 'GET',
+          url: url + '/transfusions/search'
         },
         update: {
           method: 'PUT'

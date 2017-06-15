@@ -1,9 +1,13 @@
 'use strict';
 
-angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService) {
+angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService, GENDER, BLOODGROUP, DATEFORMAT) {
 
   var distributionSites = [];
   var usageSites = [];
+
+  $scope.dateFormat = DATEFORMAT;
+
+  $scope.maxDateOfBirth = moment().endOf('day').toDate();
 
   // Set the "dispatch to" sites based on dispatch type
   function updateDispatchToSites() {
@@ -12,7 +16,7 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
         // Filter the selected distribution site from the options
         return site.id !== $scope.orderForm.dispatchedFrom;
       });
-    } else if ($scope.orderForm.type === 'ISSUE') {
+    } else if ($scope.orderForm.type === 'ISSUE' || $scope.orderForm.type === 'PATIENT_REQUEST') {
       $scope.dispatchToSites = usageSites;
     } else {
       $scope.dispatchToSites = [];
@@ -35,13 +39,18 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
       usageSites = res.usageSites;
       updateDispatchToSites();
     }, $log.error);
+
+    // Initialise the gender and blood group lists
+    $scope.genders = GENDER.options;
+    $scope.bloodGroups = BLOODGROUP.options;
   }
 
   $scope.orderForm = {
     orderDate: new Date(),
     type: null,
     dispatchedFrom: null,
-    dispatchedTo: null
+    dispatchedTo: null,
+    patient: null
   };
   $scope.addingOrderForm = false;
   // The available sites to be dispatched from
@@ -56,6 +65,10 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     }
     $scope.addingOrderForm = true;
 
+    if ($scope.orderForm.type !== 'PATIENT_REQUEST') {
+      $scope.orderForm.patient = null;
+    }
+
     var orderForm = {
       status: 'CREATED',
       orderDate: $scope.orderForm.orderDate,
@@ -65,13 +78,17 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
       },
       dispatchedTo: {
         id: $scope.orderForm.dispatchedTo
-      }
+      },
+      patient: $scope.orderForm.patient
     };
 
     OrderFormsService.addOrderForm({}, orderForm, function(res) {
       $scope.addingOrderForm = false;
       $location.path('/fulfilOrder/' + res.orderForm.id);
-    }, $log.error);
+    }, function(err) {
+      $log.error(err);
+      $scope.addingOrderForm = false;
+    });
   };
 
   $scope.clearForm = function() {
@@ -79,6 +96,7 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
     $scope.orderForm.type = null;
     $scope.orderForm.dispatchedFrom = null;
     $scope.orderForm.dispatchedTo = null;
+    $scope.orderForm.patient = null;
     $scope.addOrderForm.$setPristine();
   };
 

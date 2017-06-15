@@ -86,6 +86,10 @@ angular.module('bsis')
 
     // Inventory Permissions
     LABEL_COMPONENT: 'Label Component',
+    ADD_TRANSFUSION_DATA: 'Add Transfusion Data',
+    EDIT_TRANSFUSION_DATA: 'Edit Transfusion Data',
+    VIEW_TRANSFUSION_DATA: 'View Transfusion Data',
+    VOID_TRANSFUSION_DATA: 'Void Transfusion Data',
 
     // Discard Permissions
     DISCARD_COMPONENT: 'Discard Component',
@@ -103,6 +107,7 @@ angular.module('bsis')
     TTI_REPORTING: 'Reporting - TTI Testing',
     COMPONENTS_REPORTING: 'Reporting - Components',
     DONORS_REPORTING: 'Reporting - Donors',
+    TRANSFUSIONS_REPORTING: 'Reporting - Transfusions',
 
     // Admin and Super-User Permissions
     MANAGE_USERS: 'Manage Users',
@@ -126,6 +131,7 @@ angular.module('bsis')
     MANAGE_REQUESTS: 'Manage Requests',
     MANAGE_GENERAL_CONFIGS: 'Manage General Configs',
     MANAGE_COMPONENT_TYPES: 'Manage Component Types',
+    MANAGE_TRANSFUSION_REACTION_TYPES: 'Manage Transfusion Reaction Types',
 
     //Page Control Permissions
     VIEW_DONOR_INFORMATION: 'View Donor Information',

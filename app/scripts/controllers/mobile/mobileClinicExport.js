@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('MobileClinicExportCtrl', function($scope, $filter, $location, $routeParams, $log, MobileService, uiGridExporterConstants) {
+  .controller('MobileClinicExportCtrl', function($scope, $filter, $location, $routeParams, $log, MobileService, uiGridExporterConstants, DATEFORMAT) {
+
+    $scope.dateFormat = DATEFORMAT;
 
     $scope.venues = [];
     $scope.search = {};

@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService, ModalsService) {
+angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService, ModalsService, DATEFORMAT) {
+
+  $scope.dateFormat = DATEFORMAT;
 
   var unitsOrderedColumnDefs = [
     {
@@ -120,9 +122,49 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
           text: ' Order Type: ',
           bold: true
         }, {
-          text: $scope.orderForm.type + '\n'
+          text: $filter('titleCase')($scope.orderForm.type) + '\n'
         }
       );
+      if ($scope.orderForm.type === 'PATIENT_REQUEST') {
+        prefix.push(
+          {
+            text: ' Blood Bank No: ',
+            bold: true
+          }, {
+            text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalBloodBankNumber) ? 'Not Specified' : $scope.orderForm.patient.hospitalBloodBankNumber
+          }, {
+            text: ' Ward No: ',
+            bold: true
+          }, {
+            text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalWardNumber) ? 'Not Specified' : $scope.orderForm.patient.hospitalWardNumber
+          }, {
+            text: ' Patient Number: ',
+            bold: true
+          }, {
+            text: $scope.isFieldEmpty($scope.orderForm.patient.patientNumber) ? 'Not Specified' : $scope.orderForm.patient.patientNumber
+          }, {
+            text: ' Patient Name: ',
+            bold: true
+          }, {
+            text: $scope.orderForm.patient.name1 + ' ' + $scope.orderForm.patient.name2 + '\n'
+          }, {
+            text: ' Blood Group: ',
+            bold: true
+          }, {
+            text: $scope.isFieldEmpty($scope.orderForm.patient.bloodGroup) ? 'Not Specified' : $scope.orderForm.patient.bloodGroup
+          }, {
+            text: ' Gender: ',
+            bold: true
+          }, {
+            text: $scope.isFieldEmpty($scope.orderForm.patient.gender) ? 'Not Specified' : $scope.orderForm.patient.gender
+          }, {
+            text: ' Date of Birth: ',
+            bold: true
+          }, {
+            text: $scope.isFieldEmpty($scope.orderForm.patient.dateOfBirth) ? 'Not Specified' : $filter('bsisDate')($scope.orderForm.patient.dateOfBirth)
+          }
+        );
+      }
 
       docDefinition.content = [{text: prefix, margin: [-10, 0, 0, 0], fontSize: 7}].concat(docDefinition.content);
       return docDefinition;
@@ -161,7 +203,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
       };
       var unmatchedComponents = [];
       angular.forEach(componentsToMatch, function(component) {
-        var bloodGroup = component.bloodAbo + component.bloodRh;
+        var bloodGroup = component.bloodGroup;
         if (row.gap > 0 && component.componentType.id === item.componentType.id && bloodGroup === item.bloodGroup) {
           // can't over supply and component matches
           row.numberSupplied = row.numberSupplied + 1;
@@ -181,7 +223,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
       var row = {
         donationIdentificationNumber: component.donationIdentificationNumber,
         componentTypeName: component.componentType.componentTypeName,
-        bloodGroup: component.bloodAbo + component.bloodRh
+        bloodGroup: component.bloodGroup
       };
       $scope.unitsSuppliedGridOptions.data.push(row);
     });
@@ -191,6 +233,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     // Fetch the order form by its id
     OrderFormsService.getOrderForm({id: $routeParams.id}, function(res) {
       $scope.orderForm = res.orderForm;
+      $scope.orderFormHasPatient = res.orderForm.patient !== null ? true : false;
       populateUnitsOrderedGrid($scope.orderForm);
       populateUnitsSuppliedGrid($scope.orderForm);
     }, $log.error);
@@ -238,6 +281,13 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
         $log.error(err);
       });
     });
+  };
+
+  $scope.isFieldEmpty = function(field) {
+    if (field) {
+      return field.length === 0;
+    }
+    return true;
   };
 
   $scope.edit = function() {

@@ -63,7 +63,7 @@
       </span>
     </span>
 
-    <span ng-if="isEligible !== undefined">
+    <span ng-if="donorInitialized !== undefined">
       <uib-alert type="danger" class="inline" close="" ng-show="isEligible !== true">
           Do not bleed donor
       </uib-alert>
@@ -114,7 +114,7 @@
         <span calculate-age dob="{{donor.birthDate}}" age="age">{{age}}</span>
         <em>(<span ng-show="!editableForm.$visible">{{ (donor.birthDate | bsisDate) || '' }}</span>
       <span ng-show="editableForm.$visible">
-        <dateselect ng-model="donor.birthDate" initDate="donor.birthDate" format="format" opened="donorBirthDateOpen"
+        <dateselect ng-model="donor.birthDate" initDate="donor.birthDate" format="dateFormat" opened="donorBirthDateOpen"
                     cal-icon="icons.CALENDAR">
         </dateselect>
         </span>) </em>
@@ -158,7 +158,8 @@
                 <i class="fa {{icons.INFOCIRCLE}}"></i> Overview
             </uib-tab-heading>
 
-            <div class="panel panel-default">
+            <!-- Display this panel when the donor is initialized to avoid "flash" field value changes-->
+            <div class="panel panel-default" ng-if="donorInitialized !== undefined">
                 <div class="panel-body">
 
                         <table class="dash-table">
@@ -222,14 +223,10 @@
                                     <em>Wt</em>: {{lastDonation.donorWeight}} {{weightUnit}} |
                                     <em>BP</em>:
                                     {{lastDonation.bloodPressureSystolic}}/{{lastDonation.bloodPressureDiastolic}}
-                                    {{bpUnit}}|
-                                    <span>
+                                    {{bpUnit}} |
                                     <em>Hb</em>:
-                                    <span ng-show="getBooleanValue('donation.hbNumericValue')">{{lastDonation.haemoglobinCount}}</span>
-                                    <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">(</span>
-                      <span ng-show="getBooleanValue('donation.hbQualitativeValue')" style="text-transform:capitalize;">{{lastDonation.haemoglobinLevel | lowercase}}</span>
-                                    <span ng-show="getBooleanValue('donation.hbNumericValue') && getBooleanValue('donation.hbQualitativeValue')">)</span> |
-                                    </span>
+                                    <haemoglobin-value haemoglobin-count="lastDonation.haemoglobinCount" haemoglobin-level="lastDonation.haemoglobinLevel"> 
+                                    </haemoglobin-value> | 
                                     <em>P</em>: {{lastDonation.donorPulse}} {{pulseUnit}}
                                 </td>
                             </tr>

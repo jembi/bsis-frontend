@@ -22,62 +22,147 @@
 
       <br/>
 
-      <h4>Add Order</h4>
-      <form class="form-horizontal" name="addOrderForm" role="form" style="padding:0 15px;" ng-submit="addOrder();" novalidate>
+      <form class="form-horizontal" name="addOrderForm" role="form" style="padding:0 15px;" ng-submit="addOrder();"novalidate>
+        <div class="col-sm-5">
+          <h4>Add Order</h4>
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="orderDate">Order Date:</label>
+            <div class="col-sm-9">
+              <dateselect name="orderDate" ng-model="orderForm.orderDate" ng-required="true" format="dateFormat"></dateselect>
+              <ng-messages for="addOrderForm.orderDate.$error" role="alert" ng-show="addOrderForm.$submitted">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
+            </div>
+          </div>
 
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="orderDate">Order Date:</label>
-          <div class="col-sm-10">
-            <dateselect name="orderDate" ng-model="orderForm.orderDate" ng-required="true"></dateselect>
-            <ng-messages for="addOrderForm.orderDate.$error" role="alert" ng-show="addOrderForm.$submitted">
-              <ng-messages-include src="messages.html"></ng-messages-include>
-            </ng-messages>
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="dispatchedFrom">Dispatched From:</label>
+            <div class="col-sm-9">
+              <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="orderForm.dispatchedFrom" ng-options="item.id as item.name for item in dispatchFromSites track by item.id" required>
+                <option value="" disabled selected>Select:</option>
+              </select>
+              <ng-messages for="addOrderForm.dispatchedFrom.$error" role="alert" ng-show="addOrderForm.$submitted">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Dispatch Type:</label>
+            <div class="col-sm-9">
+              <label class="radio-inline">
+                <input type="radio" name="transferType" ng-model="orderForm.type" value="TRANSFER" required> Transfer
+              </label>
+              <label class="radio-inline">
+                <input type="radio" ng-model="orderForm.type" value="ISSUE" required> Issue
+              </label>
+              <label class="radio-inline">
+                <input type="radio" ng-model="orderForm.type" value="PATIENT_REQUEST" required> Patient Request
+              </label>
+              <small class="error" style="display:block;" ng-show="addOrderForm.$submitted && !orderForm.type">
+                Please select a dispatch type
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="dispatchedTo">Dispatched To:</label>
+            <div class="col-sm-9">
+              <select class="form-control" style="width:auto;" name="dispatchedTo" ng-model="orderForm.dispatchedTo" ng-options="item.id as item.name for item in dispatchToSites track by item.id" ng-disabled="!orderForm.type" required>
+                <option value="" selected></option>
+              </select>
+              <ng-messages for="addOrderForm.dispatchedTo.$error" role="alert" ng-show="addOrderForm.$submitted">
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
+            </div>
+          </div>
+
+          <div class="col-sm-offset-2">
+            <button class="btn btn-primary" type="submit" ng-disabled="addingOrderForm">{{addingOrderForm ? 'Adding...' : 'Add Order'}}</button>
+            <button class="btn btn-primary" type="button" ng-disabled="addingOrderForm" ng-click="clearForm();">Clear</button>
+          </div>
+        </div>
+        <div class="col-sm-7" ng-if="orderForm.type==='PATIENT_REQUEST'">
+          <h4>Patient Details</h4>
+
+          <div class="form-group col-sm-12">
+            <div class="row">
+              <label class="col-sm-2 control-label" for="name1">Name:</label>
+              <div class="col-sm-5" >
+                <input name="name1" type="text" class="form-control" ng-model="orderForm.patient.name1" ng-maxlength=20 required/>
+                <ng-messages for="addOrderForm.name1.$error" role="alert" ng-show="addOrderForm.$submitted" >
+                  <ng-messages-include src="messages.html"></ng-messages-include>
+                </ng-messages>
+              </div>
+
+              <div class="col-sm-5">
+                <input name = "name2" type="text" class="form-control" ng-model="orderForm.patient.name2" ng-maxlength=20 required/>
+                <ng-messages for="addOrderForm.name2.$error" role="alert" ng-show="addOrderForm.$submitted">
+                  <ng-messages-include src="messages.html"></ng-messages-include>
+                </ng-messages>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Date of birth:</label>
+                <div class="col-sm-8">
+                  <dateselect name="dateOfBirth" ng-model="orderForm.patient.dateOfBirth" format="dateFormat" date-time-not-in-future ng-model-options="{ allowInvalid: true }" ng-class="{'has-error' : addOrderForm.dateOfBirth.$invalid}" max-date="maxDateOfBirth" ></dateselect>
+                  <div>
+                    <ng-messages for="addOrderForm.dateOfBirth.$error" role="alert" ng-show="addOrderForm.dateOfBirth.$invalid && addOrderForm.$submitted">
+                      <ng-messages-include src="messages.html"></ng-messages-include>
+                    </ng-messages>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Patient No:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" ng-model="orderForm.patient.patientNumber"/>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Blood Bank No:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" ng-model="orderForm.patient.hospitalBloodBankNumber"/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Gender:</label>
+              <div class="col-sm-8">
+                <select name="gender" class="form-control input-sm" ng-options="item.id as item.name for item in genders" ng-model="orderForm.patient.gender">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Blood Group:</label>
+              <div class="col-sm-8">
+                 <select name="bloodGroup" class="form-control" ng-options="item for item in bloodGroups" ng-model="orderForm.patient.bloodGroup">
+                   <option value=""></option>
+                 </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Hospital Ward No:</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" ng-model="orderForm.patient.hospitalWardNumber"/>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="dispatchedFrom">Dispatched From:</label>
-          <div class="col-sm-10">
-            <select class="form-control" style="width:auto;" name="dispatchedFrom" ng-model="orderForm.dispatchedFrom" ng-options="item.id as item.name for item in dispatchFromSites track by item.id" required>
-              <option value="" disabled selected>Select:</option>
-            </select>
-            <ng-messages for="addOrderForm.dispatchedFrom.$error" role="alert" ng-show="addOrderForm.$submitted">
-              <ng-messages-include src="messages.html"></ng-messages-include>
-            </ng-messages>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Dispatch Type:</label>
-          <div class="col-sm-10">
-            <label class="radio-inline">
-              <input type="radio" name="transferType" ng-model="orderForm.type" value="TRANSFER" required> Transfer
-            </label>
-            <label class="radio-inline">
-              <input type="radio" ng-model="orderForm.type" value="ISSUE" required> Issue
-            </label>
-            <small class="error" style="display:block;" ng-show="addOrderForm.$submitted && !orderForm.type">
-              Please select a dispatch type
-            </small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="dispatchedTo">Dispatched To:</label>
-          <div class="col-sm-10">
-            <select class="form-control" style="width:auto;" name="dispatchedTo" ng-model="orderForm.dispatchedTo" ng-options="item.id as item.name for item in dispatchToSites track by item.id" ng-disabled="!orderForm.type" required>
-              <option value="" selected></option>
-            </select>
-            <ng-messages for="addOrderForm.dispatchedTo.$error" role="alert" ng-show="addOrderForm.$submitted">
-              <ng-messages-include src="messages.html"></ng-messages-include>
-            </ng-messages>
-          </div>
-        </div>
-
-        <div class="col-sm-offset-2">
-          <button class="btn btn-primary" type="submit" ng-disabled="addingOrderForm">{{addingOrderForm ? 'Adding...' : 'Add Order'}}</button>
-          <button class="btn btn-primary" type="button" ng-disabled="addingOrderForm" ng-click="clearForm();">Clear</button>
-        </div>
       </form>
     </div>
   </div>

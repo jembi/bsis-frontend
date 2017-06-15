@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, $log, OrderFormsService) {
+angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, $log, OrderFormsService, DATEFORMAT) {
+
+  $scope.dateFormat = DATEFORMAT;
 
   var master = {
     orderDateFrom: moment().subtract(7, 'days').startOf('day').toDate(),
@@ -72,7 +74,7 @@ angular.module('bsis').controller('ViewOrdersCtrl', function($scope, $location, 
         // Filter the selected distribution site from the options
         return site.id !== $scope.searchParams.dispatchedFrom;
       });
-    } else if ($scope.searchParams.type === 'ISSUE') {
+    } else if ($scope.searchParams.type === 'ISSUE' || $scope.searchParams.type === 'PATIENT_REQUEST') {
       $scope.dispatchToSites = usageSites;
     } else {
       $scope.dispatchToSites = [];
