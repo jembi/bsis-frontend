@@ -8,8 +8,8 @@
         <ul>
             <li ng-show="invalidDonorError.code === 'donor.invalid' || err.developerMessage === 'Do not bleed donor'" translate>Please supply a valid donor</li>
             <li ng-show="donationIdentificationNumberError.code === 'donationIdentificationNumber.nonunique'" translate>There is another donation with the same donation identification number</li>
-            <li ng-show="invalidDonorError.code === 'errors.invalid.donationBeforeNextAllowedDate'" translate>Selected donation date is before donor's next allowed donation date</li>
-            <li ng-show="invalidDonorError.code === 'errors.invalid.donorDeferred'" translate>Donor is currently deferred</li>
+            <li ng-show="invalidDonorError.code === 'errors.invalid.donationBeforeNextAllowedDate'" translate>Please supply a valid donor</li>
+            <li ng-show="invalidDonorError.code === 'errors.invalid.donorDeferred'" translate>Please supply a valid donor</li>
         </ul>
     </uib-alert>
 </div>
