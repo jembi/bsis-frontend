@@ -4893,10 +4893,6 @@ msgstr ""
 "[FR] Your password has been reset. Please check your email for the new "
 "password"
 
-#: app/scripts/util/filters.js:80
-msgid "day(s) to expire"
-msgstr "[FR] day(s) to expire"
-
 #: app/views/settings/manageComponentType.html:100
 #: app/views/settings/manageDeferralReason.html:55
 #: app/views/settings/managePackType.html:77
@@ -4984,6 +4980,10 @@ msgstr "[FR] {{count}} configuration(s) found"
 #: app/views/settings/deferralReasons.html:25
 msgid "{{count}} day(s)"
 msgstr "[FR] {{count}} day(s)"
+
+#: app/scripts/util/filters.js:80
+msgid "{{count}} day(s) to expire"
+msgstr "[FR] {{count}} day(s) to expire"
 
 #: app/views/settings/deferralReasons.html:10
 msgid "{{count}} deferral reason(s) found"
@@ -5085,6 +5085,9 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid "day(s) to expire"
+#~ msgstr "[FR] day(s) to expire"
 
 #~ msgid "Selected donation Date is before donor's next allowed donation date"
 #~ msgstr ""
