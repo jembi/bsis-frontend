@@ -16,7 +16,7 @@
     <span class="text-muted" translate>Ward No</span>
     <span ng-hide="!isFieldEmpty(orderForm.patient.hospitalWardNumber)" translate> Not Specified</span>
     <span ng-hide="isFieldEmpty(orderForm.patient.hospitalWardNumber)"> {{orderForm.patient.hospitalWardNumber}}</span>
-    <span class="text-muted" translate>Patient No</span>
+    <span class="text-muted" translate>Patient Number</span>
     <span ng-hide="!isFieldEmpty(orderForm.patient.patientNumber)" translate> Not Specified</span>
     <span ng-hide="isFieldEmpty(orderForm.patient.patientNumber)"> {{orderForm.patient.patientNumber}}</span>
     <span class="text-muted" translate>Patient Name</span> {{orderForm.patient.name1}} {{orderForm.patient.name2}}<br/>
@@ -84,7 +84,7 @@
       />
     </div>
     <div class="form-group">
-      <span class="text-muted" for="patientNumber" translate>Patient No</span>
+      <span class="text-muted" for="patientNumber" translate>Patient Number</span>
       <input name="patientNumber" type="text" class="form-control" ng-model="orderDetailsForm.patient.patientNumber" />
     </div>
     <div class="form-group">
