@@ -30,12 +30,12 @@
             </div>
             <div>
               <ng-messages for="findOrderForm.startDate.$error" role="alert" ng-show="findOrderForm.$submitted">
-                <small class="error" ng-message="required" translate>Select a valid date</small>
-                <small class="error" ng-message="datesOutOfRange" translate>Select a date range that is less than one month</small>
+                <small class="error" ng-message="required"><translate>Select a valid date</translate></small>
+                <small class="error" ng-message="datesOutOfRange"><translate>Select a date range that is less than one month</translate></small>
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
               <ng-messages for="findOrderForm.endDate.$error" role="alert" ng-show="findOrderForm.$submitted && !findOrderForm.startDate.$invalid">
-                <small class="error" ng-message="required" translate>Select a valid date</small>
+                <small class="error" ng-message="required"><translate>Select a valid date</translate></small>
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
             </div>
