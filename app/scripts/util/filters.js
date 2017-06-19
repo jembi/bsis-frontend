@@ -77,7 +77,7 @@ angular.module('bsis')
 
   .filter('daysToExpire', function(gettextCatalog) {
     return function(input) {
-      return input < 0 ? gettextCatalog.getString('Already expired') : input + ' ' + gettextCatalog.getString('day(s) to expire');
+      return input < 0 ? gettextCatalog.getString('Already expired') : gettextCatalog.getString('{{count}} day(s) to expire', {count: input});
     };
   })
 ;
