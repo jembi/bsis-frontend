@@ -44,7 +44,7 @@
                             'sort-desc': testOutcomesTableParams.isSortBy('ttistatus', 'desc')
                           }"
                           ng-click="testOutcomesTableParams.sorting('ttistatus', testOutcomesTableParams.isSortBy('ttistatus', 'asc') ? 'desc' : 'asc')">
-                          <div><span translate>TTI Status</span> <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
+                          <div><span translate>TTI Testing Status</span> <span ng-bind="$column.title(this)" ng-class="{'sort-indicator': params.settings().sortingIndicator=='span'}" class="ng-binding sort-indicator"></span></div>
                       </th>
                       <th ng-repeat="column in testNames" ng-show="true"
                           class="text-center" ng-class=""
