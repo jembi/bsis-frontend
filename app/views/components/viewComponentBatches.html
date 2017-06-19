@@ -16,9 +16,7 @@
       <label class="col-sm-2 control-label"><span translate>Period</span>:</label>
       <div class="form-inline col-sm-10">
         <div>
-          <dateselect name="startDate" ng-model="period.startDate" format="dateFormat" ng-class="{'has-error' : (findComponentBatchesForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{period.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
-          <span><em translate>To</em></span>
-          <dateselect-end name="endDate" ng-model="period.endDate" format="dateFormat" ng-class="{'has-error' : (findComponentBatchesForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{period.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>
+          <dateselect name="startDate" ng-model="period.startDate" format="dateFormat" ng-class="{'has-error' : (findComponentBatchesForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{period.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect><span>&nbsp;<em translate>To</em>&nbsp;</span><dateselect-end name="endDate" ng-model="period.endDate" format="dateFormat" ng-class="{'has-error' : (findComponentBatchesForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{period.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>
         </div>
         <div>
           <ng-messages for="findComponentBatchesForm.startDate.$error" role="alert" ng-show="findComponentBatchesForm.$submitted">

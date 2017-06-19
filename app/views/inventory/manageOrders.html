@@ -63,9 +63,7 @@
                 <input type="radio" ng-model="orderForm.type" value="PATIENT_REQUEST" required>
                 <span translate>Patient Request</span>
               </label>
-              <small class="error" style="display:block;" ng-show="addOrderForm.$submitted && !orderForm.type" translate>
-                Please select a dispatch type
-              </small>
+              <small class="error" style="display:block;" ng-show="addOrderForm.$submitted && !orderForm.type"><translate>Please select a dispatch type</translate></small>
             </div>
           </div>
 

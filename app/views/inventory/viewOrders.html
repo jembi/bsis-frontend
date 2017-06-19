@@ -24,18 +24,16 @@
           <label class="col-sm-2 control-label" translate>Period</label>
           <div class="form-inline col-sm-10">
             <div>
-              <dateselect name="startDate" ng-model="searchParams.orderDateFrom" format="dateFormat" ng-class="{'has-error' : (findOrderForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{searchParams.orderDateTo | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
-              <em translate>To</em>
-              <dateselect-end name="endDate" ng-model="searchParams.orderDateTo" format="dateFormat" ng-class="{'has-error' : (findOrderForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{searchParams.orderDateFrom |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>  
+              <dateselect name="startDate" ng-model="searchParams.orderDateFrom" format="dateFormat" ng-class="{'has-error' : (findOrderForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{searchParams.orderDateTo | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect><span>&nbsp;<em translate>To</em>&nbsp;</span><dateselect-end name="endDate" ng-model="searchParams.orderDateTo" format="dateFormat" ng-class="{'has-error' : (findOrderForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{searchParams.orderDateFrom |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>  
             </div>
             <div>
               <ng-messages for="findOrderForm.startDate.$error" role="alert" ng-show="findOrderForm.$submitted">
-                <small class="error" ng-message="required" translate>Select a valid date</small>
-                <small class="error" ng-message="datesOutOfRange" translate>Select a date range that is less than one month</small>
+                <small class="error" ng-message="required"><translate>Select a valid date</translate></small>
+                <small class="error" ng-message="datesOutOfRange"><translate>Select a date range that is less than one month</translate></small>
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
               <ng-messages for="findOrderForm.endDate.$error" role="alert" ng-show="findOrderForm.$submitted && !findOrderForm.startDate.$invalid">
-                <small class="error" ng-message="required" translate>Select a valid date</small>
+                <small class="error" ng-message="required"><translate>Select a valid date</translate></small>
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
             </div>

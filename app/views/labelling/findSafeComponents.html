@@ -89,9 +89,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label" translate>Period</label>
       <div class="col-sm-10">
-          <dateselect name="startDate" ng-model="searchParams.startDate" format="dateFormat" ng-class="{'has-error' : (findSafeComponentsForm.startDate.$invalid)}" ng-required="!dinSearch" ui-date-range="1,months" ui-date-end="{{searchParams.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ng-disabled="dinSearch"></dateselect>
-          <span><em translate>To</em></span>
-          <dateselect-end name="endDate" ng-model="searchParams.endDate" format="dateFormat" ng-class="{'has-error' : (findSafeComponentsForm.endDate.$invalid)}" ng-required="!dinSearch" ui-date-start="{{searchParams.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" min-date="searchParams.startDate" ng-disabled="dinSearch"></dateselect-end>
+          <dateselect name="startDate" ng-model="searchParams.startDate" format="dateFormat" ng-class="{'has-error' : (findSafeComponentsForm.startDate.$invalid)}" ng-required="!dinSearch" ui-date-range="1,months" ui-date-end="{{searchParams.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ng-disabled="dinSearch"></dateselect><span>&nbsp;<em translate>To</em>&nbsp;</span><dateselect-end name="endDate" ng-model="searchParams.endDate" format="dateFormat" ng-class="{'has-error' : (findSafeComponentsForm.endDate.$invalid)}" ng-required="!dinSearch" ui-date-start="{{searchParams.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" min-date="searchParams.startDate" ng-disabled="dinSearch"></dateselect-end>
           <div>
             <ng-messages for="findSafeComponentsForm.startDate.$error" role="alert" ng-show="findSafeComponentsForm.$submitted">
               <small class="error" ng-message="required"><span  translate>Select a valid date</span></small>

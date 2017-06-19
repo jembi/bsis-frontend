@@ -69,9 +69,7 @@
           <label for="donationDate" class="col-sm-1 control-label" translate>Period</label>
           <div class="col-sm-11">
             <dateselect name="donationDateFrom" ng-model="search.donationDateFrom" format="format" opened="donationDateFromOpen" cal-icon="icons.CALENDAR" ng-required="!dinSearch" ng-disabled="dinSearch" ui-date-range="1,months" ui-date-end="{{search.donationDateTo | date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findComponentForm.donationDateFrom.$invalid)}" ng-model-options="{ allowInvalid: true }">
-            </dateselect>
-            <span><em><span translate>To</span>:</em></span>
-            <dateselect-end name="donationDateTo" ng-model="search.donationDateTo" format="format" opened="donationDateToOpen" cal-icon="icons.CALENDAR" ng-required="!dinSearch" ng-disabled="dinSearch" ui-date-range="1,months" ui-date-start="{{search.donationDateFrom |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findComponentForm.donationDateTo.$invalid)}" ng-model-options="{ allowInvalid: true }">
+            </dateselect><span>&nbsp;<em translate>To</em>&nbsp;</span><dateselect-end name="donationDateTo" ng-model="search.donationDateTo" format="format" opened="donationDateToOpen" cal-icon="icons.CALENDAR" ng-required="!dinSearch" ng-disabled="dinSearch" ui-date-range="1,months" ui-date-start="{{search.donationDateFrom |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-class="{'has-error' : (findComponentForm.donationDateTo.$invalid)}" ng-model-options="{ allowInvalid: true }">
             </dateselect-end>
             <div>
               <ng-messages for="findComponentForm.donationDateFrom.$error" role="alert" ng-show="findComponentForm.$submitted">
