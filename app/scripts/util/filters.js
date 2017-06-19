@@ -74,4 +74,10 @@ angular.module('bsis')
       return ConfigurationsService.getStringValue('ui.division.level' + input + '.displayName') || 'Unknown level';
     };
   })
+
+  .filter('daysToExpire', function(gettextCatalog) {
+    return function(input) {
+      return input < 0 ? gettextCatalog.getString('Already expired') : input + ' ' + gettextCatalog.getString('day(s) to expire');
+    };
+  })
 ;

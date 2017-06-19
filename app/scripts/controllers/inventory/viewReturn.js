@@ -48,9 +48,12 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
       maxWidth: '100'
     },
     {
-      name: 'expiryStatus',
-      field: 'expiryStatus',
+      name: 'daysToExpire',
+      field: 'daysToExpire',
       displayName: gettextCatalog.getString('Expiry Status'),
+      cellTemplate: '<div class="ui-grid-cell-contents">' +
+           '{{row.entity["daysToExpire"] | daysToExpire}}' +
+           '</div>',
       width: '**',
       maxWidth: '150',
       sortingAlgorithm: function(a, b, rowA, rowB) {
@@ -147,7 +150,7 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
       bloodGroup: component.bloodAbo + component.bloodRh,
       status: component.status,
       createdOn: component.createdOn,
-      expiryStatus: component.expiryStatus
+      daysToExpire: component.daysToExpire
     };
   }
 
