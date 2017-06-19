@@ -29,9 +29,7 @@
         <label class="col-sm-2 control-label" translate>Period</label>
         <div class="form-inline col-sm-10">
             <div>
-                <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-class="{'has-error' : (searchForm.startDate.$invalid)}" ng-required="true" ui-date-end="{{search.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ></dateselect>
-                <span><em translate>To</em></span>
-                <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (searchForm.endDate.$invalid)}" ng-required="true" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ui-date-range min-date="search.startDate"></dateselect-end>
+                <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-class="{'has-error' : (searchForm.startDate.$invalid)}" ng-required="true" ui-date-end="{{search.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ></dateselect><span>&nbsp;<em translate>To</em>&nbsp;</span><dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (searchForm.endDate.$invalid)}" ng-required="true" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ui-date-range min-date="search.startDate"></dateselect-end>
             </div>
             <div>
               <ng-messages for="searchForm.startDate.$error" role="alert" ng-show="searchForm.$submitted">
