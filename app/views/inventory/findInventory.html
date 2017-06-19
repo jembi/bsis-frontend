@@ -37,7 +37,7 @@
         </select>
         <label>
           <input type="checkbox" name="allSites" ng-model="searchParams.allSites" ng-disabled="searchParams.donationIdentificationNumber||searchParams.componentCode" ng-click="clearLocationId()" />
-          <span translate>All Sites</span>
+          <span translate>All</span>
         </label>
         <div>
           <ng-messages for="searchForm.distributionCenter.$error" role="alert" ng-show="searchForm.$submitted">
@@ -70,7 +70,7 @@
         </ui-select>
         <label>
                 <input type="checkbox" name="anyBloodGroup" ng-model="searchParams.anyBloodGroup" ng-click="clearBloodGroups()" ng-disabled="searchParams.donationIdentificationNumber||searchParams.componentCode"/>
-                <span translate>Any Blood Group</span>
+                <span translate>Any</span>
             </label>
         <div>
           <ng-messages for="searchForm.bloodGroups.$error" role="alert" ng-show="searchForm.$submitted">

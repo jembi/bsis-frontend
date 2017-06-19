@@ -10,13 +10,13 @@
     <span class="text-muted" translate>Dispatched From</span> {{orderForm.dispatchedFrom.name}}
     <span class="text-muted" translate>Dispatched To</span> {{orderForm.dispatchedTo.name}}
     <span ng-hide="orderForm.type !== 'PATIENT_REQUEST'"><br/>
-      <span class="text-muted" translate>Blood Bank No</span>
+      <span class="text-muted" translate>Blood Bank</span>
     <span ng-hide="!isFieldEmpty(orderForm.patient.hospitalBloodBankNumber)" translate> Not Specified</span>
     <span ng-hide="isFieldEmpty(orderForm.patient.hospitalBloodBankNumber)"> {{orderForm.patient.hospitalBloodBankNumber}}</span>
-    <span class="text-muted" translate>Ward No</span>
+    <span class="text-muted" translate>Ward Number</span>
     <span ng-hide="!isFieldEmpty(orderForm.patient.hospitalWardNumber)" translate> Not Specified</span>
     <span ng-hide="isFieldEmpty(orderForm.patient.hospitalWardNumber)"> {{orderForm.patient.hospitalWardNumber}}</span>
-    <span class="text-muted" translate>Patient No</span>
+    <span class="text-muted" translate>Patient Number</span>
     <span ng-hide="!isFieldEmpty(orderForm.patient.patientNumber)" translate> Not Specified</span>
     <span ng-hide="isFieldEmpty(orderForm.patient.patientNumber)"> {{orderForm.patient.patientNumber}}</span>
     <span class="text-muted" translate>Patient Name</span> {{orderForm.patient.name1}} {{orderForm.patient.name2}}<br/>
@@ -74,17 +74,17 @@
 
       <span ng-if="orderDetailsForm.type === 'PATIENT_REQUEST'">
         <div class="form-group">
-          <span class="text-muted" for="hospitalBloodBankNumber" translate>Blood Bank No</span>
+          <span class="text-muted" for="hospitalBloodBankNumber" translate>Blood Bank</span>
       <input name="hospitalBloodBankNumber" type="text" class="form-control" ng-model="orderDetailsForm.patient.hospitalBloodBankNumber"
       />
     </div>
     <div class="form-group">
-      <span class="text-muted" for="hospitalWardNumber" translate>Ward No</span>
+      <span class="text-muted" for="hospitalWardNumber" translate>Ward Number</span>
       <input name="hospitalWardNumber" type="text" class="form-control" ng-model="orderDetailsForm.patient.hospitalWardNumber"
       />
     </div>
     <div class="form-group">
-      <span class="text-muted" for="patientNumber" translate>Patient No</span>
+      <span class="text-muted" for="patientNumber" translate>Patient Number</span>
       <input name="patientNumber" type="text" class="form-control" ng-model="orderDetailsForm.patient.patientNumber" />
     </div>
     <div class="form-group">

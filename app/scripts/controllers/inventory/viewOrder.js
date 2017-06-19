@@ -128,12 +128,12 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
       if ($scope.orderForm.type === 'PATIENT_REQUEST') {
         prefix.push(
           {
-            text: ' ' + gettextCatalog.getString('Blood Bank No') + ': ',
+            text: ' ' + gettextCatalog.getString('Blood Bank') + ': ',
             bold: true
           }, {
             text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalBloodBankNumber) ? notSpecifiedText : $scope.orderForm.patient.hospitalBloodBankNumber
           }, {
-            text: ' ' + gettextCatalog.getString('Ward No') + ': ',
+            text: ' ' + gettextCatalog.getString('Ward Number') + ': ',
             bold: true
           }, {
             text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalWardNumber) ? notSpecifiedText : $scope.orderForm.patient.hospitalWardNumber
