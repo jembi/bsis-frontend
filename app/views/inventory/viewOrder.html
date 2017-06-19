@@ -22,20 +22,20 @@
   </span>
 
   <hr style="clear:right;"/>
-  
+
   <section>
     <span class="text-muted" translate>Order Date</span> {{orderForm.orderDate | bsisDate}}
     <span class="text-muted" translate>Dispatched From</span> {{orderForm.dispatchedFrom.name}}
     <span class="text-muted" translate>Dispatched To</span> {{orderForm.dispatchedTo.name}}
     <span class="text-muted" translate>Order Type</span> {{orderForm.type |  titleCase | translate}}
     <div ng-show="orderFormHasPatient">
-      <span class="text-muted" translate>Blood Bank No</span>
+      <span class="text-muted" translate>Blood Bank</span>
       <span ng-hide="!isFieldEmpty(orderForm.patient.hospitalBloodBankNumber)" translate> Not Specified</span>
       <span ng-hide="isFieldEmpty(orderForm.patient.hospitalBloodBankNumber)"> {{orderForm.patient.hospitalBloodBankNumber}}</span>
-      <span class="text-muted" translate>Ward No</span>
+      <span class="text-muted" translate>Ward Number</span>
       <span ng-hide="!isFieldEmpty(orderForm.patient.hospitalWardNumber)" translate> Not Specified</span>
       <span ng-hide="isFieldEmpty(orderForm.patient.hospitalWardNumber)"> {{orderForm.patient.hospitalWardNumber}}</span>
-      <span class="text-muted" translate>Patient No</span>
+      <span class="text-muted" translate>Patient Number</span>
       <span ng-hide="!isFieldEmpty(orderForm.patient.patientNumber)" translate> Not Specified</span>
       <span ng-hide="isFieldEmpty(orderForm.patient.patientNumber)"> {{orderForm.patient.patientNumber}}</span>
       <span class="text-muted" translate>Patient Name</span> {{orderForm.patient.name1}} {{orderForm.patient.name2}}<br/>

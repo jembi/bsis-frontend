@@ -59,7 +59,7 @@
         <td style="text-align:right;padding-right:10px;">
           <span has-permission="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="confirmDelete || confirmEdit">
             <small>
-              <em><span translate>TTI Test Outcomes</span>:
+              <em><span translate>TTI Outcomes</span>:
                 <a ng-href="#/manageTTITesting/{{testBatch.id}}/BASIC_TTI" translate>Enter</a>
                  &nbsp;|&nbsp;
                 <a ng-href="#/reEnterTTI/{{testBatch.id}}/BASIC_TTI" ng-disabled="!hasReEntryRequiredTTITests" translate>Re-Enter</a>
@@ -83,7 +83,7 @@
         <td style="text-align:right;padding-right:10px;">
           <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
             <small>
-              <em><span translate>Repeat TTI Test Outcomes</span>:
+              <em><span translate>Repeat TTI Outcomes</span>:
                 <a ng-href="#/managePendingTests/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!hasRepeatTTITests" translate>Enter</a>
                 &nbsp;|&nbsp;
                 <a ng-href="#/reEnterTTI/{{testBatch.id}}/REPEAT_TTI" ng-disabled="!hasReEntryRequiredRepeatTTITests" translate>Re-Enter</a>
@@ -108,7 +108,7 @@
         <td style="text-align:right;padding-right:10px;">
           <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
             <small>
-              <em><span translate>Confirmatory TTI Test Outcomes</span>:
+              <em><span translate>Confirmatory TTI Outcomes</span>:
                 <a ng-href="#/managePendingTests/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!hasConfirmatoryTTITests" translate>Enter</a>
                 &nbsp;|&nbsp;
                 <a ng-href="#/reEnterTTI/{{testBatch.id}}/CONFIRMATORY_TTI" ng-disabled="!hasReEntryRequiredConfirmatoryTTITests" translate>Re-Enter</a>

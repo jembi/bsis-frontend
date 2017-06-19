@@ -252,7 +252,7 @@ angular.module('bsis').controller('DonorCounsellingCtrl', function($scope, $loca
       });
 
       var columns = [
-        {text: gettextCatalog.getString('Venue(s)') + ': ' + (venues.join(',') || gettextCatalog.getString('Any')), width: 'auto', fontSize: 10}
+        {text: gettextCatalog.getString('Venue') + ': ' + (venues.join(',') || gettextCatalog.getString('Any')), width: 'auto', fontSize: 10}
       ];
 
       // Include last donation date range

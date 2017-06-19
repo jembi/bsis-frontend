@@ -16,14 +16,14 @@
         </div>
 
         <div class="form-group">
-          <label for="locationId" class="col-sm-1 control-label" translate>Location</label>
+          <label for="locationId" class="col-sm-1 control-label" translate>Site</label>
           <div class="form-inline col-sm-11">            
             <select name="locationId" class="form-control" ng-change="updateAllSites()"  ng-disabled="dinSearch" ng-model="search.locationId" ng-options="location.id as location.name for location in locations" style="min-width: 350px;" ng-required="!search.allSites">
                 <option value="" disabled></option>
             </select>
             <label>
               <input type="checkbox" name="allSites" ng-model="search.allSites" ng-click="clearLocations()" ng-disabled="dinSearch" />
-              <span translate>All Sites</span>
+              <span translate>All</span>
             </label>
             <div>
                 <ng-messages for="findComponentForm.locationId.$error" role="alert" ng-show="findComponentForm.$submitted">
@@ -55,7 +55,7 @@
                 </select>
                 <label>
                 <input type="checkbox" name="allStatuses" ng-model="search.allStatuses" ng-click="clearComponentStatuses()" ng-disabled="dinSearch" />
-                <span translate>All statuses</span>
+                <span translate>All</span>
                 </label>
                 <div>
                     <ng-messages for="findComponentForm.status.$error" role="alert" ng-show="findComponentForm.$submitted">
