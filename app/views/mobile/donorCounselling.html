@@ -20,7 +20,7 @@
       <label class="col-sm-2 control-label" translate>Start Date</label>
       <div class="form-inline col-sm-10">
         <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-class="{'has-error' : (donorCounsellingForm.startDate.$invalid)}" ng-required="true" ui-date-end="{{search.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
-        <ng-messages for="donorCounsellingForm.startDate.$error" ng-show="donorCounsellingForm.$submitted" class="form-inline col-sm-10">
+        <ng-messages for="donorCounsellingForm.startDate.$error" ng-show="donorCounsellingForm.$submitted">
           <small class="error" ng-message="required"><span translate>Select a valid date</span></small>
           <ng-messages-include src="messages.html"></ng-messages-include>
         </ng-messages>
@@ -31,7 +31,7 @@
       <label class="col-sm-2 control-label" translate>End Date</label>
       <div class="form-inline col-sm-10">
         <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (donorCounsellingForm.endDate.$invalid)}" ng-required="true" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }" ui-date-range min-date="search.startDate"></dateselect-end>
-        <ng-messages for="donorCounsellingForm.endDate.$error" ng-show="donorCounsellingForm.$submitted" class="form-inline col-sm-10">
+        <ng-messages for="donorCounsellingForm.endDate.$error" ng-show="donorCounsellingForm.$submitted">
           <small class="error" ng-message="required"><span translate>Select a valid date</span></small>
           <ng-messages-include src="messages.html"></ng-messages-include>
         </ng-messages>
