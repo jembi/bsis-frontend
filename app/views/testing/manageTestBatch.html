@@ -67,7 +67,7 @@
                                           <div class="form-group">
                                               <label for="name" class="col-sm-2 control-label" translate>Donation Batches</label>
                                               <div class="row col-sm-10">
-                                                  <div class="form-inline" style="padding-left:5px;">
+                                                  <div ng-class="{'has-error' : addTestBatchForm.donationBatches.$error.required}"  class="form-inline" style="padding-left:5px;">
                                                       <!-- FIXME: Required doesn't work on ui-select multiple selects. See https://github.com/angular-ui/ui-select/issues/258 -->
                                                       <ui-select name="donationBatches" required multiple
                                                                  ng-model="testBatch.donationBatchIds" theme="bootstrap"
@@ -85,10 +85,7 @@
                                                           </ui-select-choices>
                                                       </ui-select>
                                                       <div>
-                                                          <small class="error"
-                                                                 ng-show="(addTestBatchForm.donationBatches.$invalid && (addTestBatchForm.donationBatches.$dirty || submitted))">
-                                                              <span translate>Select one or more donation batches</span>
-                                                          </small>
+                                                          <small class="error" ng-show="addTestBatchForm.donationBatches.$error.required && addTestBatchForm.$submitted" translate>No test batch selected. Please select a test batch</small>
                                                       </div>
                                                   </div>
                                               </div>
