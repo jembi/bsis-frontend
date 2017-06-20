@@ -51,9 +51,7 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
       name: 'daysToExpire',
       field: 'daysToExpire',
       displayName: gettextCatalog.getString('Expiry Status'),
-      cellTemplate: '<div class="ui-grid-cell-contents">' +
-           '{{row.entity["daysToExpire"] | daysToExpire}}' +
-           '</div>',
+      cellFilter: 'daysToExpire',
       width: '**',
       maxWidth: '150',
       sortingAlgorithm: function(a, b, rowA, rowB) {
