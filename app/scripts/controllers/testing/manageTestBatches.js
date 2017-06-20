@@ -52,6 +52,11 @@ angular.module('bsis')
     $scope.getUnassignedDonationBatches();
 
     $scope.addTestBatch = function(addTestBatchForm) {
+      if ($scope.testBatch.donationBatchIds.length === 0) {
+        addTestBatchForm.donationBatches.$setValidity('required', false);
+        return;
+      }
+
       if (addTestBatchForm.$valid) {
 
         $scope.addingTestBatch = true;

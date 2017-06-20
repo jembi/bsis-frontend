@@ -92,7 +92,7 @@
         </dateselect>
         <div>
           <ng-messages for="recordTransfusionsForm.dateTransfused.$error" role="alert" ng-show="recordTransfusionsForm.$submitted">
-            <small class="error" ng-show="recordTransfusionsForm.dateTransfused.$modelValue === undefined" translate>Invalid date</small>
+            <small class="error" ng-show="recordTransfusionsForm.dateTransfused.$modelValue === undefined"><translate>Invalid date</translate></small>
             <ng-messages-include src="messages.html"></ng-messages-include>
           </ng-messages>
         </div>
@@ -119,7 +119,7 @@
     </div>
 
     <div class="clearfix form-group">
-      <label class="col-sm-2 control-label" translate>Patient No</label>
+      <label class="col-sm-2 control-label" translate>Patient Number</label>
       <div class="form-inline col-sm-10">
         <input class="form-control" name="patientNumber" ng-model="transfusion.patient.patientNumber">
       </div>
@@ -133,7 +133,7 @@
     </div>
 
     <div class="clearfix form-group">
-      <label class="col-sm-2 control-label" translate>Ward No</label>
+      <label class="col-sm-2 control-label" translate>Ward Number</label>
       <div class="form-inline col-sm-10">
         <input class="form-control" name="hospitalWardNumber" ng-model="transfusion.patient.hospitalWardNumber">
       </div>

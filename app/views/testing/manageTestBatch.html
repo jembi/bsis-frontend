@@ -67,7 +67,7 @@
                                           <div class="form-group">
                                               <label for="name" class="col-sm-2 control-label" translate>Donation Batches</label>
                                               <div class="row col-sm-10">
-                                                  <div class="form-inline" style="padding-left:5px;">
+                                                  <div ng-class="{'has-error' : addTestBatchForm.donationBatches.$error.required}"  class="form-inline" style="padding-left:5px;">
                                                       <!-- FIXME: Required doesn't work on ui-select multiple selects. See https://github.com/angular-ui/ui-select/issues/258 -->
                                                       <ui-select name="donationBatches" required multiple
                                                                  ng-model="testBatch.donationBatchIds" theme="bootstrap"
@@ -85,10 +85,7 @@
                                                           </ui-select-choices>
                                                       </ui-select>
                                                       <div>
-                                                          <small class="error"
-                                                                 ng-show="(addTestBatchForm.donationBatches.$invalid && (addTestBatchForm.donationBatches.$dirty || submitted))">
-                                                              <span translate>Select one or more donation batches</span>
-                                                          </small>
+                                                          <small class="error" ng-show="addTestBatchForm.donationBatches.$error.required && addTestBatchForm.$submitted" translate>No test batch selected. Please select a test batch</small>
                                                       </div>
                                                   </div>
                                               </div>
@@ -136,9 +133,7 @@
                       <label class="col-sm-2 control-label" translate>Period</label>
                       <div class="form-inline col-sm-10">
                           <div>
-                              <dateselect name="startDate"  ng-model="search.startDate" format="dateFormat"  ng-class="{'has-error' : (closedTestBatchesForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{search.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect>
-                              <em translate>To</em>
-                              <dateselect-end name="endDate"  ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (closedTestBatchesForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>
+                              <dateselect name="startDate"  ng-model="search.startDate" format="dateFormat"  ng-class="{'has-error' : (closedTestBatchesForm.startDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-end="{{search.endDate | date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect><span>&nbsp;<em translate>To</em>&nbsp;</span><dateselect-end name="endDate"  ng-model="search.endDate" format="dateFormat" ng-class="{'has-error' : (closedTestBatchesForm.endDate.$invalid)}" ng-required="true" ui-date-range="1,months" ui-date-start="{{search.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}" ng-model-options="{ allowInvalid: true }"></dateselect-end>
                           </div>
                           <div>
                             <ng-messages for="closedTestBatchesForm.startDate.$error" role="alert" ng-show="closedTestBatchesForm.$submitted">

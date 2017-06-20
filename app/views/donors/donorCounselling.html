@@ -16,7 +16,7 @@
             <div class="checkbox">
                 <label>
                     <input type="checkbox" name="allVenues" ng-model="search.allVenues" ng-click="clearVenues()"> 
-                    <span translate>Any Venue</span>
+                    <span translate>Any</span>
                     
                 </label>
             </div>
@@ -31,9 +31,7 @@
         <label class="col-sm-2 control-label" translate>Donation Period</label>
         <div class="form-inline col-sm-10">
             <div>
-                <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-required="!search.anyDate" ng-click="updateAnyDate()"></dateselect>
-                <em><span translate>To</span>:</em>
-                <dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-required="!search.anyDate" ng-click="updateAnyDate()"></dateselect-end>
+                <dateselect name="startDate" ng-model="search.startDate" format="dateFormat" ng-required="!search.anyDate" ng-click="updateAnyDate()"></dateselect><span>&nbsp;<em translate>To</em>&nbsp;</span><dateselect-end name="endDate" ng-model="search.endDate" format="dateFormat" ng-required="!search.anyDate" ng-click="updateAnyDate()"></dateselect-end>
             </div>
             <div>
                 <ng-messages for="findDonorCounsellingForm.startDate.$error" role="alert" ng-show="findDonorCounsellingForm.$submitted">
@@ -50,7 +48,7 @@
             <div class="checkbox">
                 <label>
                     <input type="checkbox" ng-model="search.anyDate" ng-click="clearDates()">
-                    <span translate>Any Date</span>
+                    <span translate>Any</span>
                 </label>
             </div>
         </div>
