@@ -55,9 +55,10 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       maxWidth: '100'
     },
     {
-      name: 'expiryStatus',
+      name: 'daysToExpire',
       displayName: gettextCatalog.getString('Expiry Status'),
-      field: 'expiryStatus',
+      field: 'daysToExpire',
+      cellFilter: 'daysToExpire',
       width: '**',
       maxWidth: '150',
       sortingAlgorithm: function(a, b, rowA, rowB) {
@@ -74,7 +75,7 @@ angular.module('bsis').controller('RecordReturnCtrl', function($scope, $location
       bloodGroup: component.bloodAbo + component.bloodRh,
       status: component.status,
       createdOn: component.createdOn,
-      expiryStatus: component.expiryStatus
+      daysToExpire: component.daysToExpire
     };
   }
 

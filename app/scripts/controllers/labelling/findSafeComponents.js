@@ -66,7 +66,8 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
     {
       name: 'Expiry Status',
       displayName: gettextCatalog.getString('Expiry Status'),
-      field: 'expiryStatus',
+      field: 'daysToExpire',
+      cellFilter: 'daysToExpire',
       width: '**',
       maxWidth: '200',
       sortingAlgorithm: function(a, b, rowA, rowB) {
@@ -120,6 +121,8 @@ angular.module('bsis').controller('FindSafeComponentsCtrl', function($scope, $lo
         return gettextCatalog.getString($filter('titleCase')(value));
       } else if (col.field === 'inventoryStatus') {
         return gettextCatalog.getString($filter('titleCase')(value));
+      } else if (col.field === 'daysToExpire') {
+        return gettextCatalog.getString($filter('daysToExpire')(value));
       }
       return value;
     },
