@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Percentage, abbreviation (symbol)
@@ -41,7 +41,8 @@ msgid "ABO"
 msgstr "[FR] ABO"
 
 #: app/scripts/controllers/reports/aboRhGroupsReport.js:260
-#: app/views/reports/aboRhGroupsReport.html:3 app/views/reports/sidebar.html:13
+#: app/views/reports/aboRhGroupsReport.html:3
+#: app/views/reports/sidebar.html:13
 msgid "ABO Rh Blood Grouping Report"
 msgstr "[FR] ABO Rh Blood Grouping Report"
 
@@ -81,7 +82,8 @@ msgstr "[FR] Add Deferral"
 msgid "Add Delivery Form"
 msgstr "[FR] Add Delivery Form"
 
-#: app/views/donors/addDonation.html:1 app/views/donors/addDonorDonation.html:1
+#: app/views/donors/addDonation.html:1
+#: app/views/donors/addDonorDonation.html:1
 #: app/views/donors/viewDonationBatch.html:4
 #: app/views/donors/viewDonations.html:2
 msgid "Add Donation"
@@ -728,8 +730,8 @@ msgstr "[FR] Check Components to Print Pack and Discard Labels"
 msgid "Clear"
 msgstr "Effacer"
 
-#: app/scripts/controllers/mobile/mobile.js:104 app/views/mobile/lookUp.html:23
-#: app/views/mobile/mobileClinicExport.html:33
+#: app/scripts/controllers/mobile/mobile.js:104
+#: app/views/mobile/lookUp.html:23 app/views/mobile/mobileClinicExport.html:33
 msgid "Clinic Date"
 msgstr "[FR] Clinic Date"
 
@@ -1058,7 +1060,8 @@ msgstr "Créé"
 #: app/views/testing/manageTestBatch.html:169
 #: app/views/testing/manageTestBatch.html:27
 #: app/views/testing/reEnterBloodTyping.html:8
-#: app/views/testing/reEnterTTI.html:8 app/views/testing/viewTestBatch.html:127
+#: app/views/testing/reEnterTTI.html:8
+#: app/views/testing/viewTestBatch.html:127
 msgid "Created On"
 msgstr "Date de création"
 
@@ -1195,7 +1198,8 @@ msgstr "Exportation de Données"
 #: app/views/donors/manageDonationBatches.html:74
 #: app/views/donors/mergeDonorsDonations.html:13
 #: app/views/donors/viewDonations.html:29 app/views/donors/viewDonor.html:208
-#: app/views/settings/auditLog.html:19 app/views/testing/viewTestBatch.html:189
+#: app/views/settings/auditLog.html:19
+#: app/views/testing/viewTestBatch.html:189
 #: app/views/testing/viewTestSample.html:44
 msgid "Date"
 msgstr "[FR] Date"
@@ -1468,7 +1472,8 @@ msgstr "Expédié"
 #: app/views/inventory/fulfilOrder.html:10
 #: app/views/inventory/fulfilOrder.html:64
 #: app/views/inventory/manageOrders.html:39
-#: app/views/inventory/viewOrder.html:28 app/views/inventory/viewOrders.html:44
+#: app/views/inventory/viewOrder.html:28
+#: app/views/inventory/viewOrders.html:44
 msgid "Dispatched From"
 msgstr "Expédié de"
 
@@ -1478,7 +1483,8 @@ msgstr "Expédié de"
 #: app/views/inventory/fulfilOrder.html:11
 #: app/views/inventory/fulfilOrder.html:70
 #: app/views/inventory/manageOrders.html:71
-#: app/views/inventory/viewOrder.html:29 app/views/inventory/viewOrders.html:71
+#: app/views/inventory/viewOrder.html:29
+#: app/views/inventory/viewOrders.html:71
 msgid "Dispatched To"
 msgstr "Distribué à"
 
@@ -1506,7 +1512,8 @@ msgstr "[FR] Division Level"
 #: app/views/donors/addDonation.html:69
 #: app/views/donors/addDonorDonation.html:10
 #: app/views/donors/addDonorDonation.html:11
-#: app/views/donors/addDonorDonation.html:12 app/views/donors/viewDonor.html:63
+#: app/views/donors/addDonorDonation.html:12
+#: app/views/donors/viewDonor.html:63
 msgid "Do not bleed donor"
 msgstr "[FR] Do not bleed donor"
 
@@ -1714,7 +1721,8 @@ msgstr "Date d'Expiration"
 msgid "Duplicate Donors"
 msgstr "[FR] Duplicate Donors"
 
-#: app/views/donors/manageClinic.html:49 app/views/donors/viewDeferrals.html:64
+#: app/views/donors/manageClinic.html:49
+#: app/views/donors/viewDeferrals.html:64
 #: app/views/donors/viewDonationSummary.html:7
 #: app/views/donors/viewDonor.html:229 app/views/donors/viewDonor.html:261
 #: app/views/donors/viewDonor.html:85
@@ -1740,7 +1748,8 @@ msgstr "[FR] Eligibility"
 msgid "Eligible"
 msgstr "[FR] Eligible"
 
-#: app/scripts/controllers/mobile/mobile.js:108 app/views/mobile/lookUp.html:44
+#: app/scripts/controllers/mobile/mobile.js:108
+#: app/views/mobile/lookUp.html:44
 msgid ""
 "Eligible Donors: {{numberEligibleDonors}} out of {{totalDonors}} "
 "({{percentage}}%)"
@@ -1806,7 +1815,8 @@ msgstr "[FR] End Deferral"
 msgid "End date can't be before deferral date"
 msgstr "La date de début doit preceder la date de fin"
 
-#: app/messages.html:13 app/scripts/controllers/donors/viewDonationBatch.js:534
+#: app/messages.html:13
+#: app/scripts/controllers/donors/viewDonationBatch.js:534
 #: app/scripts/controllers/donors/viewDonor.js:352
 #: app/views/donors/addDonation.html:173
 #: app/views/donors/addDonorDonation.html:117
@@ -1825,7 +1835,8 @@ msgstr "[FR] Enter"
 msgid "Enter a valid temperature"
 msgstr "[FR] Enter a valid temperature"
 
-#: app/messages.html:12 app/scripts/controllers/donors/viewDonationBatch.js:518
+#: app/messages.html:12
+#: app/scripts/controllers/donors/viewDonationBatch.js:518
 #: app/scripts/controllers/donors/viewDonationBatch.js:526
 #: app/scripts/controllers/donors/viewDonor.js:336
 #: app/scripts/controllers/donors/viewDonor.js:344
@@ -1926,7 +1937,8 @@ msgstr "[FR] Find Discards"
 msgid "Find Donor"
 msgstr "[FR] Find Donor"
 
-#: app/views/inventory/findInventory.html:3 app/views/inventory/sidebar.html:13
+#: app/views/inventory/findInventory.html:3
+#: app/views/inventory/sidebar.html:13
 msgid "Find Inventory"
 msgstr "Trouver un Inventaire"
 
@@ -2377,7 +2389,8 @@ msgstr "[FR] Manage Deferral"
 msgid "Manage Deferral Reason"
 msgstr "[FR] Manage Deferral Reason"
 
-#: app/views/settings/deferralReasons.html:3 app/views/settings/sidebar.html:26
+#: app/views/settings/deferralReasons.html:3
+#: app/views/settings/sidebar.html:26
 msgid "Manage Deferral Reasons"
 msgstr "[FR] Manage Deferral Reasons"
 
@@ -2455,8 +2468,8 @@ msgstr "[FR] Manage Pack Types"
 msgid "Manage Return"
 msgstr "Gestion de Retour"
 
-#: app/views/inventory/manageReturns.html:3 app/views/inventory/sidebar.html:19
-#: app/views/inventory/viewReturns.html:3
+#: app/views/inventory/manageReturns.html:3
+#: app/views/inventory/sidebar.html:19 app/views/inventory/viewReturns.html:3
 msgid "Manage Returns"
 msgstr "Gestion de Retours"
 
@@ -2761,10 +2774,6 @@ msgstr "[FR] No open donation batches"
 msgid "No open test batches."
 msgstr "[FR] No open test batches."
 
-#: app/views/testing/manageTestBatch.html:88
-msgid "No test batch selected. Please select a test batch"
-msgstr "[FR] No test batch selected. Please select a test batch"
-
 #: app/scripts/controllers/donors/donorCommunications.js:132
 msgid "None"
 msgstr "[FR] None"
@@ -2964,7 +2973,8 @@ msgstr "Status de la Commande"
 
 #: app/scripts/controllers/inventory/viewOrder.js:121
 #: app/views/inventory/fulfilOrder.html:51
-#: app/views/inventory/fulfilOrder.html:9 app/views/inventory/viewOrder.html:30
+#: app/views/inventory/fulfilOrder.html:9
+#: app/views/inventory/viewOrder.html:30
 msgid "Order Type"
 msgstr "Type de Commande"
 
@@ -3742,7 +3752,8 @@ msgid "Sample Released"
 msgstr "[FR] Sample Released"
 
 #: app/scripts/controllers/testing/testsReEntry.js:158
-#: app/views/donors/manageClinic.html:53 app/views/donors/viewDeferrals.html:79
+#: app/views/donors/manageClinic.html:53
+#: app/views/donors/viewDeferrals.html:79
 #: app/views/donors/viewDonationSummary.html:13
 #: app/views/donors/viewDonor.html:233 app/views/donors/viewDonor.html:265
 #: app/views/donors/viewDonor.html:91
@@ -3872,6 +3883,7 @@ msgstr "[FR] Select components to discard or undiscard"
 msgid "Select one or more"
 msgstr "Sélectionner un ou plusieurs"
 
+#: app/views/testing/manageTestBatch.html:88
 #: app/views/testing/viewTestBatch.html:179
 msgid "Select one or more donation batches"
 msgstr "[FR] Select one or more donation batches"
@@ -4663,8 +4675,9 @@ msgstr "[FR] Value"
 #: app/views/donors/viewDeferrals.html:50
 #: app/views/donors/viewDonationSummary.html:76
 #: app/views/donors/viewDonations.html:32 app/views/donors/viewDonor.html:114
-#: app/views/donors/viewDonor.html:209 app/views/mobile/donorCounselling.html:8
-#: app/views/mobile/lookUp.html:8 app/views/mobile/mobileClinicExport.html:12
+#: app/views/donors/viewDonor.html:209
+#: app/views/mobile/donorCounselling.html:8 app/views/mobile/lookUp.html:8
+#: app/views/mobile/mobileClinicExport.html:12
 #: app/views/reports/donorsAdverseEventsReport.html:9
 #: app/views/testing/viewTestBatch.html:187
 #: app/views/testing/viewTestSample.html:42 app/views/translations.html:80
@@ -4695,7 +4708,8 @@ msgstr "[FR] Version: {{backendVersion}} / {{frontEndVersion}}"
 msgid "View"
 msgstr "[FR] View"
 
-#: app/views/donors/donorCommunications.html:3 app/views/donors/sidebar.html:25
+#: app/views/donors/donorCommunications.html:3
+#: app/views/donors/sidebar.html:25
 msgid "View / Export Donor List"
 msgstr "[FR] View / Export Donor List"
 
@@ -4955,8 +4969,9 @@ msgstr "[FR] {{count}} donation type(s) found"
 
 #: app/views/donors/donorCommunications.html:95
 #: app/views/donors/donorCounselling.html:113
-#: app/views/donors/findDonor.html:60 app/views/mobile/donorCounselling.html:48
-#: app/views/mobile/lookUp.html:44 app/views/mobile/mobileClinicExport.html:56
+#: app/views/donors/findDonor.html:60
+#: app/views/mobile/donorCounselling.html:48 app/views/mobile/lookUp.html:44
+#: app/views/mobile/mobileClinicExport.html:56
 msgid "{{count}} donor(s) found"
 msgstr "[FR] {{count}} donor(s) found"
 
@@ -5041,6 +5056,9 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid "No test batch selected. Please select a test batch"
+#~ msgstr "[FR] No test batch selected. Please select a test batch"
 
 #~ msgid "day(s) to expire"
 #~ msgstr "[FR] day(s) to expire"
