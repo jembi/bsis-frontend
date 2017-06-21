@@ -383,7 +383,7 @@ msgstr "[FR] Are you sure you want to undiscard these components?"
 
 #: app/scripts/controllers/donors/viewDonor.js:605
 msgid "Are you sure you want to void this deferral?"
-msgstr "Êtes-vous sûr(e) de vouloir supprimer cette Transfusion?"
+msgstr "[FR] Are you sure you want to void this deferral?"
 
 #: app/scripts/controllers/donors/viewDonor.js:603
 msgid ""
