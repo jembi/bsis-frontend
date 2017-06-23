@@ -21,6 +21,10 @@ angular.module('bsis')
       $scope.searchResults = '';
     };
 
+    $scope.clearLocationId = function() {
+      $scope.search.locationId = null;
+    };
+
     $scope.viewTestBatch = function(item) {
       $location.path('/viewTestBatch/' + item.id);
     };
@@ -110,6 +114,7 @@ angular.module('bsis')
     $scope.closedTestBatches = false;
 
     var master = {
+      allSites: true,
       status: 'CLOSED',
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: moment().endOf('day').toDate()
@@ -138,6 +143,10 @@ angular.module('bsis')
         if ($scope.search.endDate) {
           var endDate = moment($scope.search.endDate).endOf('day').toDate();
           query.endDate = endDate;
+        }
+
+        if ($scope.search.locationId) {
+          query.locationId = $scope.search.locationId;
         }
 
         $scope.searching = true;
