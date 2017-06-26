@@ -3,12 +3,9 @@ angular.module('bsis')
 
     $scope.icons = ICONS;
 
-    // Open batches functions
-
     var data = [{}];
     $scope.openTestBatches = false;
     var testBatchMaster = {
-      donationBatchIds: [],
       location: null
     };
     $scope.testBatch = angular.copy(testBatchMaster);
@@ -43,31 +40,24 @@ angular.module('bsis')
       });
     };
 
-    $scope.getUnassignedDonationBatches = function() {
+    $scope.getTestBatchForm = function() {
       TestingService.getTestBatchFormFields(function(response) {
         if (response !== false) {
-          $scope.donationBatches = response.donationBatches;
           $scope.testingSites = response.testingSites;
         }
       });
     };
 
     $scope.getOpenTestBatches();
-    $scope.getUnassignedDonationBatches();
+    $scope.getTestBatchForm();
 
     $scope.addTestBatch = function(addTestBatchForm) {
-      if ($scope.testBatch.donationBatchIds.length === 0) {
-        addTestBatchForm.donationBatches.$setValidity('required', false);
-        return;
-      }
-
       if (addTestBatchForm.$valid) {
 
         $scope.addingTestBatch = true;
         TestingService.addTestBatch($scope.testBatch, function() {
           $scope.testBatch = angular.copy(testBatchMaster);
           $scope.getOpenTestBatches();
-          $scope.getUnassignedDonationBatches();
           $scope.submitted = '';
           $scope.addingTestBatch = false;
           addTestBatchForm.$setPristine();

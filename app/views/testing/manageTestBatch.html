@@ -56,67 +56,32 @@
                           <div has-permission="{{permissions.ADD_TEST_BATCH}}">
                               <h4 translate>New Test Batch</h4>
 
-                              <div ng-switch on="donationBatches.length">
-                                  <div ng-switch-when="0">
-                                      <p><em translate>There are no donation batches to test.</em></p>
-                                  </div>
-                                  <div ng-switch-default>
-                                      <form name="addTestBatchForm" novalidate class="form-horizontal col-sm-12"
-                                            role="form"
-                                            ng-submit="addTestBatch(addTestBatchForm)">
-                                          <div class="form-group">
-                                              <label for="name" class="col-sm-2 control-label" translate>Donation Batches</label>
-                                              <div class="row col-sm-10">
-                                                  <div ng-class="{'has-error' : addTestBatchForm.donationBatches.$error.required}"  class="form-inline" style="padding-left:5px;">
-                                                      <!-- FIXME: Required doesn't work on ui-select multiple selects. See https://github.com/angular-ui/ui-select/issues/258 -->
-                                                      <ui-select name="donationBatches" required multiple
-                                                                 ng-model="testBatch.donationBatchIds" theme="bootstrap"
-                                                                 ng-disabled="disabled" style="width: 700px;">
-                                                          <ui-select-match placeholder="{{'Select' | translate}}">{{$item.venue.name}}
-                                                              ({{$item.donationBatchDate | bsisDate}})
-                                                          </ui-select-match>
-                                                          <ui-select-choices
-                                                                  repeat="donationBatch.id as donationBatch in donationBatches | filter:$select.search">
-                                                              <div ng-bind-html="donationBatch.venue.name"></div>
-                                                              <small>
-                                                                  {{donationBatch.donationBatchDate | bsisDate}} |
-                                                                  {{donationBatch.numDonations}} <span translate>donations</span>
-                                                              </small>
-                                                          </ui-select-choices>
-                                                      </ui-select>
-                                                      <div>
-                                                          <small class="error" ng-show="addTestBatchForm.donationBatches.$error.required && addTestBatchForm.$submitted" translate>Select one or more donation batches</small>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
+                                <form name="addTestBatchForm" novalidate class="form-horizontal col-sm-12"
+                                      role="form"
+                                      ng-submit="addTestBatch(addTestBatchForm)">
+                                    <div class="form-group">
+                                      <label for="location" class="control-label col-sm-2" translate>Location</label>
+                                      <div class="col-sm-10" style="padding-left:5px;">
+                                        <select name="location" class="form-control" style="width:auto;" ng-model="testBatch.location" ng-options="site as site.name for site in testingSites track by site.id" required>
+                                          <option disabled selected value="" translate>Select</option>
+                                        </select>
+                                        <ng-messages for="addTestBatchForm.location.$error" ng-show="addTestBatchForm.$submitted">
+                                          <ng-messages-include src="messages.html"></ng-messages-include>
+                                        </ng-messages>
+                                      </div>
+                                    </div>
 
-                                          <div class="form-group">
-                                            <label for="location" class="control-label col-sm-2" translate>Location</label>
-                                            <div class="col-sm-10" style="padding-left:5px;">
-                                              <select name="location" class="form-control" style="width:auto;" ng-model="testBatch.location" ng-options="site as site.name for site in testingSites track by site.id" required>
-                                                <option disabled selected value="" translate>Select</option>
-                                              </select>
-                                              <ng-messages for="addTestBatchForm.location.$error" ng-show="addTestBatchForm.$submitted">
-                                                <ng-messages-include src="messages.html"></ng-messages-include>
-                                              </ng-messages>
-                                            </div>
-                                          </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-4">
+                                            <button class="btn btn-primary" type="submit"
+                                                    ng-disabled="addingTestBatch">{{addingTestBatch ? "Adding..." : "Add" | translate}}
+                                            </button>
+                                            <button class="btn btn-primary" type="button"
+                                                    ng-click="clearAddTestBatchForm(addTestBatchForm);" translate>Clear</button>
+                                        </div>
+                                    </div>
 
-                                          <div class="form-group">
-                                              <div class="col-sm-offset-2 col-sm-4">
-                                                  <button class="btn btn-primary" type="submit"
-                                                          ng-disabled="addingTestBatch">{{addingTestBatch ? "Adding..." :
-                                                      "Add" | translate}}
-                                                  </button>
-                                                  <button class="btn btn-primary" type="button"
-                                                          ng-click="clearAddTestBatchForm(addTestBatchForm);" translate>Clear</button>
-                                              </div>
-                                          </div>
-
-                                      </form>
-                                  </div>
-                              </div>
+                                </form>
                           </div>
                       </div>
                   </div>
