@@ -121,7 +121,7 @@
     </table>
   </span>
 
-  <form editable-form name="editableForm" onbeforesave="validateForm(editableForm)" onaftersave="updateTestBatch(testBatch)">
+  <form editable-form name="editableForm" onbeforesave="validateForm()" onaftersave="updateTestBatch(testBatch)">
 
       <div class="h4">
         <small><em><span translate>Created On</span>: </em></small>
@@ -158,30 +158,7 @@
             ng-href="#/manageBloodGroupMatchTesting/{{testBatch.id}}" ng-disabled="!hasPendingBloodTypingConfirmations" translate>Resolve Ambiguous ABO/Rh Outcomes</a></em></small> </span>
   </span>
 
-      <div ng-show="editableForm.$visible && testBatch.permissions.canEditDonationBatches">
-          <small><em><span translate>Donation Batches</span>: </em></small>
-        <div class="form-group" >
-            <ui-select name="donationBatches" multiple ng-model="testBatch.donationBatchIds" ui-select-required
-                       style="width: 700px;">
-                <ui-select-match placeholder="{{ 'Select' | translate}}">{{$item.venue.name}} ({{$item.donationBatchDate | bsisDate}})
-                </ui-select-match>
-                <ui-select-choices
-                        repeat="donationBatch.id as donationBatch in testBatchAvailableDonationBatches | filter:$select.search">
-                    <div ng-bind-html="donationBatch.venue.name"></div>
-                    <small>
-                        {{donationBatch.donationBatchDate | bsisDate}}
-                        &nbsp;|&nbsp;
-                        {{donationBatch.numDonations}} <span translate>donations</span>
-                    </small>
-                </ui-select-choices>
-            </ui-select>
-            <small class="error" ng-show="editableForm.$error.uiSelectRequired">
-                <span translate>Select one or more donation batches</span>
-            </small>
-        </div>
-      </div>
-
-    <span ng-show="!editableForm.$visible || !testBatch.permissions.canEditDonationBatches">
+    <span>
       <span class="h4" style="font-size: 0.95em; margin-top:0px; margin-bottom:0px;"
             ng-repeat="donationBatch in testBatch.donationBatches">
         <small><em><span translate>Venue</span>: </em></small>{{donationBatch.venue.name}}
