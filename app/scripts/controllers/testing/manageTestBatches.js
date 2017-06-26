@@ -6,9 +6,11 @@ angular.module('bsis')
     var data = [{}];
     $scope.openTestBatches = false;
     var testBatchMaster = {
+      testBatchDate: new Date(),
       location: null
     };
     $scope.testBatch = angular.copy(testBatchMaster);
+    $scope.maxTestBatchDate = moment().endOf('day').toDate();
 
     $scope.clearAddTestBatchForm = function(form) {
       $location.search({});
@@ -53,7 +55,6 @@ angular.module('bsis')
 
     $scope.addTestBatch = function(addTestBatchForm) {
       if (addTestBatchForm.$valid) {
-
         $scope.addingTestBatch = true;
         TestingService.addTestBatch($scope.testBatch, function() {
           $scope.testBatch = angular.copy(testBatchMaster);
