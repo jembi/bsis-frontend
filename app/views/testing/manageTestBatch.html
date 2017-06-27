@@ -25,8 +25,8 @@
                                       ng-mouseleave="this.$selected = false"
                                       ng-class="{'active': testBatch.$selected}">
                                       <td data-title="'Created On'| translate" style="width:30%;" header-class="text-left"
-                                          class="text-center" sortable="'createdDate'">
-                                          {{testBatch.createdDate | bsisDateTime}}
+                                          class="text-center" sortable="'testBatchDate'">
+                                          {{testBatch.testBatchDate | bsisDateTime}}
                                       </td>
                                       <td data-title="'Test Samples'| translate" style="width:15%;" header-class="text-left"
                                           class="text-center" sortable="'numSamples'">
@@ -163,24 +163,19 @@
                                       ng-mouseenter="this.$selected = true"
                                       ng-mouseleave="this.$selected = false"
                                       ng-class="{'active': testBatch.$selected}">
-                                      <td data-title="'Created On' | translate" style="width:20%;" header-class="text-left"
-                                          class="text-center" sortable="'createdDate'">
-                                          {{testBatch.createdDate | bsisDate}}
+                                      <td data-title="'Created On' | translate" style="width:20%;" header-class="text-left" class="text-center" sortable="'testBatchDate'">
+                                          {{testBatch.testBatchDate | bsisDateTime}}
                                       </td>
-                                      <td data-title="'Closed' | translate" style="width:20%;" header-class="text-left"
-                                          sortable="'date'">
+                                      <td data-title="'Closed' | translate" style="width:20%;" header-class="text-left" class="text-center" sortable="'date'">
                                           {{testBatch.lastUpdated | bsisDateTime}}
                                       </td>
-                                      <td data-title="'Test Samples' | translate" style="width:15%;" header-class="text-left"
-                                          class="text-center" sortable="'numSamples'">
+                                      <td data-title="'Test Samples' | translate" style="width:15%;" header-class="text-left" class="text-center" sortable="'numSamples'">
                                           {{testBatch.numSamples}}
                                       </td>
-                                      <td data-title="'Status' | translate" style="width:15%;" header-class="text-left"
-                                          class="text-center" sortable="'status'">
+                                      <td data-title="'Status' | translate" style="width:15%;" header-class="text-left" class="text-center" sortable="'status'">
                                           {{testBatch.status | titleCase | translate}}
                                       </td>
-                                      <td data-title="'Location' | translate" style="width:30%;" header-class="text-left"
-                                          class="text-center" sortable="'location'">
+                                      <td data-title="'Location' | translate" style="width:30%;" header-class="text-left" class="text-center" sortable="'location'">
                                           {{testBatch.location.name}}
                                       </td>
                                   </tr>
