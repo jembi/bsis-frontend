@@ -5,6 +5,7 @@ angular.module('bsis')
   .controller('ViewTestBatchCtrl', function($scope, $location, $log, $filter, $timeout, $routeParams, $q, $route, uiGridConstants, gettextCatalog, TestingService, ModalsService, DATEFORMAT) {
 
     $scope.dateFormat = DATEFORMAT;
+    $scope.today = new Date();
 
     $scope.exportOptions = [
       {
@@ -59,6 +60,11 @@ angular.module('bsis')
       });
       $scope.gridOptions.data = donations;
       $scope.testBatch.numReleasedSamples = numReleasedSamples;
+      $scope.testBatchDate = {
+        // set the testBatchDate so it can be edited
+        date: new Date($scope.testBatch.testBatchDate),
+        time: new Date($scope.testBatch.testBatchDate)
+      };
     };
 
     $scope.refreshEditTestBatchForm = function() {
@@ -504,6 +510,7 @@ angular.module('bsis')
     };
 
     $scope.updateTestBatch = function(testBatch) {
+      testBatch.testBatchDate = $scope.testBatchDate.date;
       TestingService.updateTestBatch(testBatch, function(response) {
         $scope.testBatch = response;
         $scope.refreshCurrentTestBatch();
@@ -514,7 +521,18 @@ angular.module('bsis')
       });
     };
 
-    $scope.validateForm = function() {
-      $scope.confirmEdit = false;
+    $scope.validateForm = function(editableForm) {
+      if (editableForm.$invalid) {
+        return 'invalid';
+      } else {
+        $scope.confirmEdit = false;
+        return true;
+      }
+    };
+
+    $scope.updateTimeOnTestBatchDate = function() {
+      if ($scope.testBatchDate.time) {
+        $scope.testBatchDate.date = moment($scope.testBatchDate.date).hour($scope.testBatchDate.time.getHours()).minutes($scope.testBatchDate.time.getMinutes()).toDate();
+      }
     };
   });
