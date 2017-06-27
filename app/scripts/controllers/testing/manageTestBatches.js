@@ -2,15 +2,15 @@ angular.module('bsis')
   .controller('TestBatchCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS) {
 
     $scope.icons = ICONS;
+    $scope.today = new Date();
 
     var data = [{}];
     $scope.openTestBatches = false;
     var testBatchMaster = {
-      testBatchDate: new Date(),
+      testBatchDate: $scope.today,
       location: null
     };
     $scope.testBatch = angular.copy(testBatchMaster);
-    $scope.maxTestBatchDate = moment().endOf('day').toDate();
 
     $scope.clearAddTestBatchForm = function(form) {
       $location.search({});
@@ -54,7 +54,9 @@ angular.module('bsis')
     $scope.getTestBatchForm();
 
     $scope.addTestBatch = function(addTestBatchForm) {
+
       if (addTestBatchForm.$valid) {
+
         $scope.addingTestBatch = true;
         TestingService.addTestBatch($scope.testBatch, function() {
           $scope.testBatch = angular.copy(testBatchMaster);

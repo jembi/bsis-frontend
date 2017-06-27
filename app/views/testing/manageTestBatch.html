@@ -76,7 +76,7 @@
                                         <label for="testBatchDate" class="control-label col-sm-2" translate>Date</label>
                                         <div class="row col-sm-10">
                                             <div class="form-inline" style="padding-left:15px;">
-                                                <dateselect name="testBatchDate" ng-model="testBatch.testBatchDate" format="dateFormat" ng-class="{'has-error' : ( addTestBatchForm.testBatchDate.$invalid && addTestBatchForm.$submitted)}" required max-date="maxTestBatchDate" date-time-not-in-future ng-model-options="{ allowInvalid: true }"></dateselect>
+                                                <dateselect name="testBatchDate" ng-model="testBatch.testBatchDate" format="dateFormat" ng-class="{'has-error' : ( addTestBatchForm.testBatchDate.$invalid && addTestBatchForm.$submitted)}" required max-date="today" date-time-not-in-future ng-model-options="{ allowInvalid: true }"></dateselect>
                                                 <div>
                                                   <ng-messages for="addTestBatchForm.testBatchDate.$error" ng-show="addTestBatchForm.$submitted">
                                                     <small class="error" ng-message="required"><span translate>This cannot be empty</span></small>
