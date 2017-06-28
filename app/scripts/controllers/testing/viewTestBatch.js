@@ -256,27 +256,6 @@ angular.module('bsis')
         return finalArray;
       },
 
-
-      exporterPdfCustomFormatter: function(docDefinition) {
-        var prefix = [];
-        angular.forEach($scope.testBatch.donationBatches, function(val) {
-          var venue = val.venue.name;
-          var dateCreated = $filter('bsisDate')(val.donationBatchDate);
-          var numDonations = val.numDonations;
-          prefix.push(
-            {
-              text: gettextCatalog.getString('Venue') + ': ' + venue + ', ' +
-                gettextCatalog.getString('Date Created') + ': ' + dateCreated + ', ' +
-                gettextCatalog.getString('Number of Donations') + ': ' + numDonations + '\n'
-            }
-          );
-        });
-
-        docDefinition.content = [{text: prefix, margin: [-10, 0, 0, 0], fontSize: 7}].concat(docDefinition.content);
-        return docDefinition;
-      },
-
-
       exporterPdfTableStyle: {margin: [-10, 10, 0, 0]},
 
 
