@@ -498,6 +498,7 @@ angular.module('bsis')
           {count: testBatch.readyForReleaseCount, total: testBatch.numSamples});
       } else {
         message = gettextCatalog.getString('{{count}} of {{total}} samples will be released. ' +
+          'Once you release these samples you will no longer be able to add DINs to this batch. ' +
           'Are you sure that you want to release this test batch?',
           {count: testBatch.readyForReleaseCount, total: testBatch.numSamples});
       }
