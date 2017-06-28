@@ -25,8 +25,8 @@
                                       ng-mouseleave="this.$selected = false"
                                       ng-class="{'active': testBatch.$selected}">
                                       <td data-title="'Created On'| translate" style="width:30%;" header-class="text-left"
-                                          class="text-center" sortable="'createdDate'">
-                                          {{testBatch.createdDate | bsisDateTime}}
+                                          class="text-center" sortable="'testBatchDate'">
+                                          {{testBatch.testBatchDate | bsisDateTime}}
                                       </td>
                                       <td data-title="'Test Samples'| translate" style="width:15%;" header-class="text-left"
                                           class="text-center" sortable="'numSamples'">
@@ -56,67 +56,49 @@
                           <div has-permission="{{permissions.ADD_TEST_BATCH}}">
                               <h4 translate>New Test Batch</h4>
 
-                              <div ng-switch on="donationBatches.length">
-                                  <div ng-switch-when="0">
-                                      <p><em translate>There are no donation batches to test.</em></p>
-                                  </div>
-                                  <div ng-switch-default>
-                                      <form name="addTestBatchForm" novalidate class="form-horizontal col-sm-12"
-                                            role="form"
-                                            ng-submit="addTestBatch(addTestBatchForm)">
-                                          <div class="form-group">
-                                              <label for="name" class="col-sm-2 control-label" translate>Donation Batches</label>
-                                              <div class="row col-sm-10">
-                                                  <div ng-class="{'has-error' : addTestBatchForm.donationBatches.$error.required}"  class="form-inline" style="padding-left:5px;">
-                                                      <!-- FIXME: Required doesn't work on ui-select multiple selects. See https://github.com/angular-ui/ui-select/issues/258 -->
-                                                      <ui-select name="donationBatches" required multiple
-                                                                 ng-model="testBatch.donationBatchIds" theme="bootstrap"
-                                                                 ng-disabled="disabled" style="width: 700px;">
-                                                          <ui-select-match placeholder="{{'Select' | translate}}">{{$item.venue.name}}
-                                                              ({{$item.donationBatchDate | bsisDate}})
-                                                          </ui-select-match>
-                                                          <ui-select-choices
-                                                                  repeat="donationBatch.id as donationBatch in donationBatches | filter:$select.search">
-                                                              <div ng-bind-html="donationBatch.venue.name"></div>
-                                                              <small>
-                                                                  {{donationBatch.donationBatchDate | bsisDate}} |
-                                                                  {{donationBatch.numDonations}} <span translate>donations</span>
-                                                              </small>
-                                                          </ui-select-choices>
-                                                      </ui-select>
-                                                      <div>
-                                                          <small class="error" ng-show="addTestBatchForm.donationBatches.$error.required && addTestBatchForm.$submitted" translate>Select one or more donation batches</small>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
+                                <form name="addTestBatchForm" novalidate class="form-horizontal col-sm-12"
+                                      role="form"
+                                      ng-submit="addTestBatch(addTestBatchForm)">
+                                    <div class="form-group">
+                                      <label for="location" class="control-label col-sm-2" translate>Location</label>
+                                      <div class="col-sm-10">
+                                        <select name="location" class="form-control" style="width:auto;" ng-model="testBatch.location" ng-options="site as site.name for site in testingSites track by site.id" required>
+                                          <option disabled selected value="" translate>Select</option>
+                                        </select>
+                                        <ng-messages for="addTestBatchForm.location.$error" ng-show="addTestBatchForm.$submitted">
+                                          <ng-messages-include src="messages.html"></ng-messages-include>
+                                        </ng-messages>
+                                      </div>
+                                    </div>
 
-                                          <div class="form-group">
-                                            <label for="location" class="control-label col-sm-2" translate>Location</label>
-                                            <div class="col-sm-10" style="padding-left:5px;">
-                                              <select name="location" class="form-control" style="width:auto;" ng-model="testBatch.location" ng-options="site as site.name for site in testingSites track by site.id" required>
-                                                <option disabled selected value="" translate>Select</option>
-                                              </select>
-                                              <ng-messages for="addTestBatchForm.location.$error" ng-show="addTestBatchForm.$submitted">
-                                                <ng-messages-include src="messages.html"></ng-messages-include>
-                                              </ng-messages>
+                                    <!-- Date and checkbox -->
+                                    <div class="form-group">
+                                        <label for="testBatchDate" class="control-label col-sm-2" translate>Date</label>
+                                        <div class="row col-sm-10">
+                                            <div class="form-inline" style="padding-left:15px;">
+                                                <dateselect name="testBatchDate" ng-model="testBatch.testBatchDate" format="dateFormat" ng-class="{'has-error' : ( addTestBatchForm.testBatchDate.$invalid && addTestBatchForm.$submitted)}" required max-date="today" date-time-not-in-future ng-model-options="{ allowInvalid: true }"></dateselect>
+                                                <div>
+                                                  <ng-messages for="addTestBatchForm.testBatchDate.$error" ng-show="addTestBatchForm.$submitted">
+                                                    <small class="error" ng-message="required"><span translate>This cannot be empty</span></small>
+                                                    <small class="error" ng-message="dateInFuture"><span translate>Date must be today or before</span></small>
+                                                    <ng-messages-include src="messages.html"></ng-messages-include>
+                                                  </ng-messages>
+                                                </div>
                                             </div>
-                                          </div>
+                                        </div>
+                                    </div>
 
-                                          <div class="form-group">
-                                              <div class="col-sm-offset-2 col-sm-4">
-                                                  <button class="btn btn-primary" type="submit"
-                                                          ng-disabled="addingTestBatch">{{addingTestBatch ? "Adding..." :
-                                                      "Add" | translate}}
-                                                  </button>
-                                                  <button class="btn btn-primary" type="button"
-                                                          ng-click="clearAddTestBatchForm(addTestBatchForm);" translate>Clear</button>
-                                              </div>
-                                          </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-4">
+                                            <button class="btn btn-primary" type="submit"
+                                                    ng-disabled="addingTestBatch">{{addingTestBatch ? "Adding..." : "Add" | translate}}
+                                            </button>
+                                            <button class="btn btn-primary" type="button"
+                                                    ng-click="clearAddTestBatchForm(addTestBatchForm);" translate>Clear</button>
+                                        </div>
+                                    </div>
 
-                                      </form>
-                                  </div>
-                              </div>
+                                </form>
                           </div>
                       </div>
                   </div>
@@ -181,24 +163,19 @@
                                       ng-mouseenter="this.$selected = true"
                                       ng-mouseleave="this.$selected = false"
                                       ng-class="{'active': testBatch.$selected}">
-                                      <td data-title="'Created On' | translate" style="width:20%;" header-class="text-left"
-                                          class="text-center" sortable="'createdDate'">
-                                          {{testBatch.createdDate | bsisDate}}
+                                      <td data-title="'Created On' | translate" style="width:20%;" header-class="text-left" class="text-center" sortable="'testBatchDate'">
+                                          {{testBatch.testBatchDate | bsisDateTime}}
                                       </td>
-                                      <td data-title="'Closed' | translate" style="width:20%;" header-class="text-left"
-                                          sortable="'date'">
+                                      <td data-title="'Closed' | translate" style="width:20%;" header-class="text-left" class="text-center" sortable="'date'">
                                           {{testBatch.lastUpdated | bsisDateTime}}
                                       </td>
-                                      <td data-title="'Test Samples' | translate" style="width:15%;" header-class="text-left"
-                                          class="text-center" sortable="'numSamples'">
+                                      <td data-title="'Test Samples' | translate" style="width:15%;" header-class="text-left" class="text-center" sortable="'numSamples'">
                                           {{testBatch.numSamples}}
                                       </td>
-                                      <td data-title="'Status' | translate" style="width:15%;" header-class="text-left"
-                                          class="text-center" sortable="'status'">
+                                      <td data-title="'Status' | translate" style="width:15%;" header-class="text-left" class="text-center" sortable="'status'">
                                           {{testBatch.status | titleCase | translate}}
                                       </td>
-                                      <td data-title="'Location' | translate" style="width:30%;" header-class="text-left"
-                                          class="text-center" sortable="'location'">
+                                      <td data-title="'Location' | translate" style="width:30%;" header-class="text-left" class="text-center" sortable="'location'">
                                           {{testBatch.location.name}}
                                       </td>
                                   </tr>

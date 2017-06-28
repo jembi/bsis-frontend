@@ -264,6 +264,7 @@ msgstr "[FR] Age"
 #: app/views/reports/donorsAdverseEventsReport.html:17
 #: app/views/reports/transfusionsReport.html:17
 #: app/views/reports/unitsDiscardedReport.html:17
+#: app/views/testing/manageTestBatch.html:141
 msgid "All"
 msgstr "Tous"
 
@@ -272,7 +273,7 @@ msgstr "Tous"
 msgid "All Processing Sites"
 msgstr "[FR] All Processing Sites"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:16
+#: app/scripts/controllers/testing/viewTestBatch.js:13
 msgid "All Samples"
 msgstr "[FR] All Samples"
 
@@ -324,7 +325,7 @@ msgstr "[FR] Any"
 msgid "April"
 msgstr "[FR] April"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:438
+#: app/scripts/controllers/testing/viewTestBatch.js:428
 msgid "Are you sure that you want to close this test batch?"
 msgstr "[FR] Are you sure that you want to close this test batch?"
 
@@ -344,7 +345,7 @@ msgstr "Êtes-vous sûr(e) de vouloir supprimer ce Retour?"
 msgid "Are you sure that you want to export all data?"
 msgstr "[FR] Are you sure that you want to export all data?"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:456
+#: app/scripts/controllers/testing/viewTestBatch.js:446
 msgid "Are you sure that you want to reopen this test batch?"
 msgstr "[FR] Are you sure that you want to reopen this test batch?"
 
@@ -352,7 +353,7 @@ msgstr "[FR] Are you sure that you want to reopen this test batch?"
 msgid "Are you sure that you want to void this Tranfusion?"
 msgstr "Êtes-vous sûr(e) de vouloir supprimer cette Transfusion?"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:478
+#: app/scripts/controllers/testing/viewTestBatch.js:468
 msgid "Are you sure that you want to void this test batch?"
 msgstr "[FR] Are you sure that you want to void this test batch?"
 
@@ -501,7 +502,7 @@ msgstr "Banque du Sang"
 msgid "Blood Group"
 msgstr "Groupe Sanguin"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:172
+#: app/scripts/controllers/testing/viewTestBatch.js:162
 #: app/views/donors/mergeDonorsDonations.html:25
 msgid "Blood Group Serology"
 msgstr "[FR] Blood Group Serology"
@@ -554,7 +555,7 @@ msgstr "[FR] Blood Transport box"
 msgid "Blood Type"
 msgstr "[FR] Blood Type"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:32
+#: app/scripts/controllers/testing/viewTestBatch.js:29
 msgid "Blood Typing Issues or Incomplete"
 msgstr "[FR] Blood Typing Issues or Incomplete"
 
@@ -598,7 +599,7 @@ msgstr "[FR] COMPONENTS"
 #: app/views/inventory/findTransfusion.html:88
 #: app/views/inventory/viewStockLevels.html:49
 #: app/views/labelling/findSafeComponents.html:141
-#: app/views/mobile/donorCounselling.html:50
+#: app/views/mobile/donorCounselling.html:60
 #: app/views/mobile/mobileClinicExport.html:58
 #: app/views/reports/aboRhGroupsReport.html:43
 #: app/views/reports/bloodUnitsIssuedReport.html:43
@@ -609,7 +610,7 @@ msgstr "[FR] COMPONENTS"
 #: app/views/reports/transfusionsReport.html:63
 #: app/views/reports/ttiPrevalenceReport.html:43
 #: app/views/reports/unitsDiscardedReport.html:63
-#: app/views/testing/viewTestBatch.html:220
+#: app/views/testing/viewTestBatch.html:208
 msgid "CSV"
 msgstr "CSV"
 
@@ -713,7 +714,7 @@ msgstr "[FR] Check Components to Print Pack and Discard Labels"
 #: app/views/inventory/viewStockLevels.html:40
 #: app/views/labelling/findSafeComponents.html:131
 #: app/views/labelling/labelComponents.html:35
-#: app/views/mobile/donorCounselling.html:41 app/views/mobile/lookUp.html:37
+#: app/views/mobile/donorCounselling.html:51 app/views/mobile/lookUp.html:37
 #: app/views/mobile/mobileClinicExport.html:47
 #: app/views/reports/aboRhGroupsReport.html:31
 #: app/views/reports/bloodUnitsIssuedReport.html:31
@@ -724,8 +725,8 @@ msgstr "[FR] Check Components to Print Pack and Discard Labels"
 #: app/views/reports/ttiPrevalenceReport.html:31
 #: app/views/reports/unitsDiscardedReport.html:51
 #: app/views/settings/divisions.html:38 app/views/settings/locations.html:38
-#: app/views/testing/manageTestBatch.html:112
-#: app/views/testing/manageTestBatch.html:154
+#: app/views/testing/manageTestBatch.html:151
+#: app/views/testing/manageTestBatch.html:96
 #: app/views/testing/viewTestSample.html:26
 msgid "Clear"
 msgstr "Effacer"
@@ -735,7 +736,7 @@ msgstr "Effacer"
 msgid "Clinic Date"
 msgstr "[FR] Clinic Date"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:437
+#: app/scripts/controllers/testing/viewTestBatch.js:427
 #: app/views/donors/manageClinic.html:67
 #: app/views/testing/viewTestBatch.html:45
 msgid "Close"
@@ -749,12 +750,12 @@ msgstr "[FR] Close Batch"
 #: app/scripts/controllers/components/viewComponentBatch.js:5
 #: app/scripts/controllers/donors/viewDonationBatch.js:89
 #: app/views/donors/manageDonationBatches.html:167
-#: app/views/testing/manageTestBatch.html:173 app/views/translations.html:75
+#: app/views/testing/manageTestBatch.html:169 app/views/translations.html:75
 msgid "Closed"
 msgstr "[FR] Closed"
 
 #: app/views/donors/manageDonationBatches.html:107
-#: app/views/testing/manageTestBatch.html:129
+#: app/views/testing/manageTestBatch.html:111
 msgid "Closed Batches"
 msgstr "[FR] Closed Batches"
 
@@ -962,7 +963,7 @@ msgstr "[FR] Components Produced Summary Report"
 msgid "Confirm"
 msgstr "[FR] Confirm"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:436
+#: app/scripts/controllers/testing/viewTestBatch.js:426
 msgid "Confirm Close"
 msgstr "[FR] Confirm Close"
 
@@ -970,15 +971,15 @@ msgstr "[FR] Confirm Close"
 msgid "Confirm Password"
 msgstr "[FR] Confirm Password"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:506
+#: app/scripts/controllers/testing/viewTestBatch.js:496
 msgid "Confirm Release"
 msgstr "[FR] Confirm Release"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:454
+#: app/scripts/controllers/testing/viewTestBatch.js:444
 msgid "Confirm Reopen"
 msgstr "[FR] Confirm Reopen"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:476
+#: app/scripts/controllers/testing/viewTestBatch.js:466
 msgid "Confirm Void"
 msgstr "[FR] Confirm Void"
 
@@ -1057,7 +1058,7 @@ msgstr "Créé"
 #: app/views/testing/managePendingBloodTypingTests.html:8
 #: app/views/testing/managePendingTests.html:10
 #: app/views/testing/manageTTITesting.html:8
-#: app/views/testing/manageTestBatch.html:169
+#: app/views/testing/manageTestBatch.html:166
 #: app/views/testing/manageTestBatch.html:27
 #: app/views/testing/reEnterBloodTyping.html:8
 #: app/views/testing/reEnterTTI.html:8
@@ -1092,7 +1093,7 @@ msgstr "[FR] Currently Deferred"
 #: app/scripts/controllers/inventory/viewReturn.js:9
 #: app/scripts/controllers/labelling/findSafeComponents.js:23
 #: app/scripts/controllers/mobile/donorCounselling.js:13
-#: app/scripts/controllers/testing/viewTestBatch.js:115
+#: app/scripts/controllers/testing/viewTestBatch.js:105
 #: app/views/components/discardComponents.html:7
 #: app/views/components/findComponents.html:7
 #: app/views/components/findDiscards.html:7
@@ -1169,7 +1170,7 @@ msgstr "[FR] DONORS"
 #: app/views/inventory/findTransfusion.html:86
 #: app/views/inventory/viewStockLevels.html:47
 #: app/views/labelling/findSafeComponents.html:139
-#: app/views/mobile/donorCounselling.html:48 app/views/mobile/lookUp.html:44
+#: app/views/mobile/donorCounselling.html:58 app/views/mobile/lookUp.html:44
 #: app/views/mobile/mobileClinicExport.html:57
 #: app/views/reports/aboRhGroupsReport.html:40
 #: app/views/reports/bloodUnitsIssuedReport.html:40
@@ -1180,7 +1181,7 @@ msgstr "[FR] DONORS"
 #: app/views/reports/ttiPrevalenceReport.html:40
 #: app/views/reports/unitsDiscardedReport.html:60
 #: app/views/settings/dataExport.html:3 app/views/settings/sidebar.html:45
-#: app/views/testing/viewTestBatch.html:218
+#: app/views/testing/viewTestBatch.html:206
 msgid "Data Export"
 msgstr "Exportation de Données"
 
@@ -1199,12 +1200,13 @@ msgstr "Exportation de Données"
 #: app/views/donors/mergeDonorsDonations.html:13
 #: app/views/donors/viewDonations.html:29 app/views/donors/viewDonor.html:208
 #: app/views/settings/auditLog.html:19
-#: app/views/testing/viewTestBatch.html:189
+#: app/views/testing/manageTestBatch.html:76
+#: app/views/testing/viewTestBatch.html:177
 #: app/views/testing/viewTestSample.html:44
 msgid "Date"
 msgstr "[FR] Date"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:126
+#: app/scripts/controllers/testing/viewTestBatch.js:116
 #: app/views/donors/viewDonationSummary.html:29
 msgid "Date Bled"
 msgstr "[FR] Date Bled"
@@ -1215,7 +1217,7 @@ msgstr "[FR] Date Collected"
 
 #: app/scripts/controllers/components/viewComponentBatch.js:43
 #: app/scripts/controllers/donors/viewDonationBatch.js:97
-#: app/scripts/controllers/testing/viewTestBatch.js:269
+#: app/scripts/controllers/testing/viewTestBatch.js:259
 #: app/views/components/viewComponentBatch.html:22
 #: app/views/donors/manageClinic.html:12
 msgid "Date Created"
@@ -1254,7 +1256,7 @@ msgstr "Date de Transfusion"
 #: app/scripts/controllers/labelling/findSafeComponents.js:149
 #: app/scripts/controllers/mobile/donorCounselling.js:150
 #: app/scripts/controllers/mobile/mobile.js:130
-#: app/scripts/controllers/testing/viewTestBatch.js:287
+#: app/scripts/controllers/testing/viewTestBatch.js:277
 #: app/scripts/services/reportsLayout.js:49
 msgid "Date generated: {{date}}"
 msgstr "Généré le: {{date}}"
@@ -1268,6 +1270,7 @@ msgid "Date must be after component was created"
 msgstr "La date doit être après la création du composant"
 
 #: app/views/donors/manageDonationBatches.html:83
+#: app/views/testing/manageTestBatch.html:83
 msgid "Date must be today or before"
 msgstr "[FR] Date must be today or before"
 
@@ -1535,11 +1538,6 @@ msgstr "[FR] Donation Batch Report"
 msgid "Donation Batch Status"
 msgstr "[FR] Donation Batch Status"
 
-#: app/views/testing/manageTestBatch.html:68
-#: app/views/testing/viewTestBatch.html:162
-msgid "Donation Batches"
-msgstr "[FR] Donation Batches"
-
 #: app/scripts/controllers/mobile/donorCounselling.js:12
 #: app/views/testing/manageBloodGroupMatchTesting.html:39
 #: app/views/testing/manageBloodGroupTesting.html:39
@@ -1803,7 +1801,7 @@ msgstr "[FR] End"
 
 #: app/scripts/controllers/mobile/donorCounselling.js:137
 #: app/views/donors/manageDeferral.html:55
-#: app/views/mobile/donorCounselling.html:30
+#: app/views/mobile/donorCounselling.html:35
 msgid "End Date"
 msgstr "[FR] End Date"
 
@@ -1915,7 +1913,7 @@ msgstr "[FR] February"
 msgid "Female"
 msgstr "Femme"
 
-#: app/views/testing/viewTestBatch.html:212
+#: app/views/testing/viewTestBatch.html:200
 msgid "Filter data"
 msgstr "[FR] Filter data"
 
@@ -2259,10 +2257,11 @@ msgstr "[FR] Loading details failed. Please try refreshing"
 #: app/scripts/controllers/inventory/findInventory.js:66
 #: app/views/components/viewComponentBatch.html:32
 #: app/views/components/viewDonations.html:28
-#: app/views/testing/manageTestBatch.html:185
+#: app/views/testing/manageTestBatch.html:134
+#: app/views/testing/manageTestBatch.html:178
 #: app/views/testing/manageTestBatch.html:39
-#: app/views/testing/manageTestBatch.html:95
-#: app/views/testing/viewTestBatch.html:133
+#: app/views/testing/manageTestBatch.html:63
+#: app/views/testing/viewTestBatch.html:136
 msgid "Location"
 msgstr "Emplacement"
 
@@ -2623,8 +2622,8 @@ msgid "Must match the previous entry"
 msgstr "Doit correspondre à l'entrée précédente"
 
 #. No, abbreviation
-#: app/scripts/controllers/testing/viewTestBatch.js:153
-#: app/scripts/controllers/testing/viewTestBatch.js:231
+#: app/scripts/controllers/testing/viewTestBatch.js:143
+#: app/scripts/controllers/testing/viewTestBatch.js:221
 #: app/views/translations.html:117
 msgid "N"
 msgstr "[FR] N"
@@ -2727,7 +2726,7 @@ msgstr "[FR] No Type Determined"
 msgid "No closed donation batches"
 msgstr "[FR] No closed donation batches"
 
-#: app/views/testing/manageTestBatch.html:199
+#: app/views/testing/manageTestBatch.html:191
 msgid "No closed test batches."
 msgstr "[FR] No closed test batches"
 
@@ -2875,12 +2874,12 @@ msgid "Number of Blood Transport Boxes"
 msgstr "[FR] Number of Blood Transport Boxes"
 
 #: app/scripts/controllers/components/viewComponentBatch.js:53
-#: app/scripts/controllers/testing/viewTestBatch.js:270
+#: app/scripts/controllers/testing/viewTestBatch.js:260
 #: app/views/components/viewComponentBatch.html:24
 #: app/views/donors/manageClinic.html:26
 #: app/views/donors/manageDonationBatches.html:175
 #: app/views/donors/manageDonationBatches.html:32
-#: app/views/testing/viewTestBatch.html:191
+#: app/views/testing/viewTestBatch.html:179
 msgid "Number of Donations"
 msgstr "[FR] Number of Donations"
 
@@ -2891,19 +2890,19 @@ msgstr "[FR] Number of Donations"
 #: app/views/testing/manageTTITesting.html:11
 #: app/views/testing/reEnterBloodTyping.html:11
 #: app/views/testing/reEnterTTI.html:11
-#: app/views/testing/viewTestBatch.html:142
+#: app/views/testing/viewTestBatch.html:153
 msgid "Number of Samples"
 msgstr "[FR] Number of Samples"
 
-#: app/views/testing/viewTestBatch.html:145
+#: app/views/testing/viewTestBatch.html:156
 msgid "Number of Samples Ready for Release"
 msgstr "[FR] Number of Samples Ready for Release"
 
-#: app/views/testing/viewTestBatch.html:149
+#: app/views/testing/viewTestBatch.html:160
 msgid "Number of Samples Released"
 msgstr "[FR] Number of Samples Released"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:286
+#: app/scripts/controllers/testing/viewTestBatch.js:276
 msgid "Number of Samples: {{sampleNumber}}"
 msgstr "[FR] Number of Samples: {{sampleNumber}}"
 
@@ -3014,7 +3013,7 @@ msgstr "[FR] Overweight Pack"
 #: app/views/inventory/findTransfusion.html:87
 #: app/views/inventory/viewStockLevels.html:48
 #: app/views/labelling/findSafeComponents.html:140
-#: app/views/mobile/donorCounselling.html:49 app/views/mobile/lookUp.html:45
+#: app/views/mobile/donorCounselling.html:59 app/views/mobile/lookUp.html:45
 #: app/views/reports/aboRhGroupsReport.html:42
 #: app/views/reports/bloodUnitsIssuedReport.html:42
 #: app/views/reports/componentsProducedReport.html:61
@@ -3024,7 +3023,7 @@ msgstr "[FR] Overweight Pack"
 #: app/views/reports/transfusionsReport.html:62
 #: app/views/reports/ttiPrevalenceReport.html:42
 #: app/views/reports/unitsDiscardedReport.html:62
-#: app/views/testing/viewTestBatch.html:219
+#: app/views/testing/viewTestBatch.html:207
 msgid "PDF"
 msgstr "PDF"
 
@@ -3044,7 +3043,7 @@ msgstr "[FR] Pack Label DIN"
 
 #: app/scripts/controllers/components/viewComponentBatch.js:13
 #: app/scripts/controllers/donors/viewDonationBatch.js:55
-#: app/scripts/controllers/testing/viewTestBatch.js:135
+#: app/scripts/controllers/testing/viewTestBatch.js:125
 #: app/views/donors/mergeDonorsDonations.html:19
 #: app/views/donors/viewDonationSummary.html:80
 #: app/views/donors/viewDonations.html:35 app/views/donors/viewDonor.html:211
@@ -3080,7 +3079,7 @@ msgstr "[FR] Pack Weight Update"
 #: app/scripts/controllers/labelling/findSafeComponents.js:150
 #: app/scripts/controllers/mobile/donorCounselling.js:151
 #: app/scripts/controllers/mobile/mobile.js:131
-#: app/scripts/controllers/testing/viewTestBatch.js:288
+#: app/scripts/controllers/testing/viewTestBatch.js:278
 #: app/scripts/services/reportsLayout.js:51
 msgid "Page {{currentPage}} of {{pageCount}}"
 msgstr "Page {{currentPage}} sur {{pageCount}}"
@@ -3154,15 +3153,15 @@ msgstr "[FR] Patient Requests"
 msgid "Pending Tests"
 msgstr "[FR] Pending Tests"
 
-#: app/views/testing/viewTestBatch.html:203
+#: app/views/testing/viewTestBatch.html:191
 msgid "Pending: TTI repeat and/or confirmatory test outcomes."
 msgstr "[FR] Pending: TTI repeat and/or confirmatory test outcomes."
 
-#: app/views/testing/viewTestBatch.html:205
+#: app/views/testing/viewTestBatch.html:193
 msgid "Pending: ambiguous blood group serology test outcomes."
 msgstr "[FR] Pending: ambiguous blood group serology test outcomes."
 
-#: app/views/testing/viewTestBatch.html:204
+#: app/views/testing/viewTestBatch.html:192
 msgid "Pending: blood group serology repeat test outcomes."
 msgstr "[FR] Pending: blood group serology repeat test outcomes."
 
@@ -3182,7 +3181,7 @@ msgstr "[FR] Pending: blood group serology repeat test outcomes."
 #: app/views/reports/transfusionsReport.html:29
 #: app/views/reports/ttiPrevalenceReport.html:9
 #: app/views/reports/unitsDiscardedReport.html:29
-#: app/views/testing/manageTestBatch.html:133
+#: app/views/testing/manageTestBatch.html:115
 msgid "Period"
 msgstr "Période"
 
@@ -3347,7 +3346,7 @@ msgstr "[FR] Preferred Language"
 msgid "Preparation Info"
 msgstr "[FR] Preparation Info"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:184
+#: app/scripts/controllers/testing/viewTestBatch.js:174
 msgid "Previous ABO/Rh"
 msgstr "[FR] Previous ABO/Rh"
 
@@ -3561,13 +3560,13 @@ msgstr "[FR] Referred"
 msgid "Refused Counselling"
 msgstr "[FR] Refused Counselling"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:507
+#: app/scripts/controllers/testing/viewTestBatch.js:497
 #: app/views/testing/viewTestBatch.html:42
 msgid "Release"
 msgstr "[FR] Release"
 
 #. Test Batch Status
-#: app/scripts/controllers/testing/viewTestBatch.js:150
+#: app/scripts/controllers/testing/viewTestBatch.js:140
 #: app/views/translations.html:74
 msgid "Released"
 msgstr "[FR] Released"
@@ -3609,7 +3608,7 @@ msgstr "[FR] Remove from negative or positive outcomes first"
 msgid "Removed"
 msgstr "[FR] Removed"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:455
+#: app/scripts/controllers/testing/viewTestBatch.js:445
 #: app/views/donors/manageClinic.html:81
 #: app/views/testing/viewTestBatch.html:48
 msgid "Reopen"
@@ -3644,7 +3643,7 @@ msgid "Resolve"
 msgstr "[FR] Resolve"
 
 #: app/views/testing/manageBloodGroupMatchTesting.html:3
-#: app/views/testing/viewTestBatch.html:157
+#: app/views/testing/viewTestBatch.html:168
 msgid "Resolve Ambiguous ABO/Rh Outcomes"
 msgstr "[FR] Resolve Ambiguous ABO/Rh Outcomes"
 
@@ -3802,8 +3801,7 @@ msgstr "Recherche en cours..."
 #: app/views/mobile/mobileClinicExport.html:15
 #: app/views/settings/manageConfiguration.html:56
 #: app/views/settings/managePackType.html:58
-#: app/views/testing/manageTestBatch.html:75
-#: app/views/testing/manageTestBatch.html:98
+#: app/views/testing/manageTestBatch.html:66
 msgid "Select"
 msgstr "Sélectionner"
 
@@ -3823,7 +3821,7 @@ msgstr "[FR] Select a component to process"
 #: app/views/inventory/viewOrders.html:32
 #: app/views/inventory/viewReturns.html:32
 #: app/views/labelling/findSafeComponents.html:96
-#: app/views/testing/manageTestBatch.html:141
+#: app/views/testing/manageTestBatch.html:123
 msgid "Select a date range that is less than one month"
 msgstr "Sélectionnez une plage de dates inférieure à un mois"
 
@@ -3852,6 +3850,8 @@ msgstr "[FR] Select a processing site"
 #: app/views/inventory/viewReturns.html:36
 #: app/views/labelling/findSafeComponents.html:100
 #: app/views/labelling/findSafeComponents.html:95
+#: app/views/mobile/donorCounselling.html:27
+#: app/views/mobile/donorCounselling.html:42
 #: app/views/reports/aboRhGroupsReport.html:16
 #: app/views/reports/aboRhGroupsReport.html:20
 #: app/views/reports/bloodUnitsIssuedReport.html:16
@@ -3870,8 +3870,8 @@ msgstr "[FR] Select a processing site"
 #: app/views/reports/ttiPrevalenceReport.html:20
 #: app/views/reports/unitsDiscardedReport.html:36
 #: app/views/reports/unitsDiscardedReport.html:40
-#: app/views/testing/manageTestBatch.html:140
-#: app/views/testing/manageTestBatch.html:145
+#: app/views/testing/manageTestBatch.html:122
+#: app/views/testing/manageTestBatch.html:127
 msgid "Select a valid date"
 msgstr "Sélectionner une date valide"
 
@@ -3882,11 +3882,6 @@ msgstr "[FR] Select components to discard or undiscard"
 #: app/messages.html:3
 msgid "Select one or more"
 msgstr "Sélectionner un ou plusieurs"
-
-#: app/views/testing/manageTestBatch.html:88
-#: app/views/testing/viewTestBatch.html:179
-msgid "Select one or more donation batches"
-msgstr "[FR] Select one or more donation batches"
 
 #: app/views/components/discardComponents.html:46
 msgid "Selected Component cannot be discarded until component batch received"
@@ -3970,7 +3965,7 @@ msgstr "La date de début doit preceder la date de fin"
 #: app/views/components/viewComponentBatch.html:25
 #: app/views/components/viewComponents.html:16
 #: app/views/components/viewDonations.html:22
-#: app/views/testing/manageTestBatch.html:181
+#: app/views/testing/manageTestBatch.html:175
 #: app/views/testing/manageTestBatch.html:35
 msgid "Status"
 msgstr "Statut"
@@ -4015,7 +4010,7 @@ msgstr "[FR] TTI Outcomes"
 msgid "TTI Prevalence Report"
 msgstr "[FR] TTI Prevalence Report"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:161
+#: app/scripts/controllers/testing/viewTestBatch.js:151
 #: app/views/donors/donationDetails.html:73
 #: app/views/donors/mergeDonorsDonations.html:22
 #: app/views/donors/viewDonationSummary.html:235
@@ -4025,7 +4020,7 @@ msgstr "[FR] TTI Prevalence Report"
 msgid "TTI Status"
 msgstr "[FR] TTI Status"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:24
+#: app/scripts/controllers/testing/viewTestBatch.js:21
 msgid "TTI Unsafe or Incomplete"
 msgstr "[FR] TTI Unsafe or Incomplete"
 
@@ -4042,11 +4037,11 @@ msgstr "[FR] Temperature"
 msgid "Test"
 msgstr "[FR] Test"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:17
+#: app/scripts/controllers/testing/viewTestBatch.js:14
 msgid "Test Batch Outcomes Summary Report"
 msgstr "[FR] Test Batch Outcomes Summary Report"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:33
+#: app/scripts/controllers/testing/viewTestBatch.js:30
 msgid ""
 "Test Batch Outcomes Summary Report - Blood Typing Issues and Tests "
 "Outstanding"
@@ -4054,7 +4049,7 @@ msgstr ""
 "[FR] Test Batch Outcomes Summary Report - Blood Typing Issues and Tests "
 "Outstanding"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:25
+#: app/scripts/controllers/testing/viewTestBatch.js:22
 msgid "Test Batch Outcomes Summary Report - TTI Unsafe and Tests Outstanding"
 msgstr ""
 "[FR] Test Batch Outcomes Summary Report - TTI Unsafe and Tests Outstanding"
@@ -4077,7 +4072,7 @@ msgstr "[FR] Test Outcome"
 msgid "Test Sample Produced"
 msgstr "[FR] Test Sample Produced"
 
-#: app/views/testing/manageTestBatch.html:177
+#: app/views/testing/manageTestBatch.html:172
 #: app/views/testing/manageTestBatch.html:31
 msgid "Test Samples"
 msgstr "[FR] Test Samples"
@@ -4183,10 +4178,6 @@ msgstr ""
 "the merged donor will not be assigned a blood group, and will be considered "
 "a first time donor."
 
-#: app/views/testing/manageTestBatch.html:61
-msgid "There are no donation batches to test."
-msgstr "[FR] There are no donation batches to test."
-
 #: app/views/donors/addDonation.html:10
 #: app/views/donors/addDonorDonation.html:9
 msgid "There is another donation with the same donation identification number"
@@ -4235,6 +4226,7 @@ msgstr ""
 #: app/views/settings/manageLocation.html:92
 #: app/views/settings/manageUser.html:26 app/views/settings/manageUser.html:68
 #: app/views/settings/manageUser.html:97
+#: app/views/testing/manageTestBatch.html:82
 msgid "This cannot be empty"
 msgstr "Ce champ ne peut pas être vide"
 
@@ -4302,11 +4294,11 @@ msgstr "Ce champ doit être un nombre"
 msgid "This must be unique"
 msgstr "Ce champ doit être unique"
 
-#: app/views/testing/viewTestBatch.html:202
+#: app/views/testing/viewTestBatch.html:190
 msgid "This test batch is ready to be closed."
 msgstr "[FR] This test batch is ready to be closed."
 
-#: app/views/testing/viewTestBatch.html:201
+#: app/views/testing/viewTestBatch.html:189
 msgid "This test batch is ready to be released."
 msgstr "[FR] This test batch is ready to be released."
 
@@ -4358,7 +4350,7 @@ msgstr "[FR] Title"
 #: app/views/reports/ttiPrevalenceReport.html:12
 #: app/views/reports/unitsDiscardedReport.html:32
 #: app/views/settings/auditLog.html:13
-#: app/views/testing/manageTestBatch.html:136
+#: app/views/testing/manageTestBatch.html:118
 msgid "To"
 msgstr "à"
 
@@ -4657,8 +4649,8 @@ msgstr "[FR] Value"
 #: app/scripts/controllers/reports/donorsAdverseEventsReport.js:119
 #: app/scripts/controllers/reports/donorsDeferredReport.js:17
 #: app/scripts/controllers/reports/ttiPrevalenceReport.js:49
-#: app/scripts/controllers/testing/viewTestBatch.js:143
-#: app/scripts/controllers/testing/viewTestBatch.js:268
+#: app/scripts/controllers/testing/viewTestBatch.js:133
+#: app/scripts/controllers/testing/viewTestBatch.js:258
 #: app/views/components/viewComponentBatch.html:23
 #: app/views/donors/addDonor.html:155 app/views/donors/donationDetails.html:19
 #: app/views/donors/donorCounsellingDetails.html:41
@@ -4679,7 +4671,7 @@ msgstr "[FR] Value"
 #: app/views/mobile/donorCounselling.html:8 app/views/mobile/lookUp.html:8
 #: app/views/mobile/mobileClinicExport.html:12
 #: app/views/reports/donorsAdverseEventsReport.html:9
-#: app/views/testing/viewTestBatch.html:187
+#: app/views/testing/viewTestBatch.html:175
 #: app/views/testing/viewTestSample.html:42 app/views/translations.html:80
 msgid "Venue"
 msgstr "[FR] Venue"
@@ -4756,7 +4748,7 @@ msgstr "[FR] View Test Sample"
 #: app/scripts/controllers/inventory/recordTransfusions.js:179
 #: app/scripts/controllers/inventory/viewOrder.js:249
 #: app/scripts/controllers/inventory/viewReturn.js:208
-#: app/scripts/controllers/testing/viewTestBatch.js:477
+#: app/scripts/controllers/testing/viewTestBatch.js:467
 #: app/views/donors/manageClinic.html:35 app/views/donors/manageClinic.html:39
 #: app/views/donors/viewDonations.html:60
 #: app/views/donors/viewDonations.html:65 app/views/donors/viewDonor.html:76
@@ -4825,8 +4817,8 @@ msgid "Wt"
 msgstr "[FR] Wt"
 
 #. Yes, abbreviation
-#: app/scripts/controllers/testing/viewTestBatch.js:153
-#: app/scripts/controllers/testing/viewTestBatch.js:231
+#: app/scripts/controllers/testing/viewTestBatch.js:143
+#: app/scripts/controllers/testing/viewTestBatch.js:221
 #: app/views/translations.html:116
 msgid "Y"
 msgstr "[FR] Y"
@@ -4870,8 +4862,6 @@ msgid "days"
 msgstr "[FR] days"
 
 #: app/views/components/addComponentBatch.html:29
-#: app/views/testing/manageTestBatch.html:83
-#: app/views/testing/viewTestBatch.html:174
 msgid "donations"
 msgstr "[FR] donations"
 
@@ -4970,17 +4960,17 @@ msgstr "[FR] {{count}} donation type(s) found"
 #: app/views/donors/donorCommunications.html:95
 #: app/views/donors/donorCounselling.html:113
 #: app/views/donors/findDonor.html:60
-#: app/views/mobile/donorCounselling.html:48 app/views/mobile/lookUp.html:44
+#: app/views/mobile/donorCounselling.html:58 app/views/mobile/lookUp.html:44
 #: app/views/mobile/mobileClinicExport.html:56
 msgid "{{count}} donor(s) found"
 msgstr "[FR] {{count}} donor(s) found"
 
-#: app/views/testing/viewTestBatch.html:146
-#: app/views/testing/viewTestBatch.html:150
+#: app/views/testing/viewTestBatch.html:157
+#: app/views/testing/viewTestBatch.html:161
 msgid "{{count}} of {{total}}"
 msgstr "[FR] {{count}} of {{total}}"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:495
+#: app/scripts/controllers/testing/viewTestBatch.js:485
 msgid ""
 "{{count}} of {{total}} samples will be released, the remaining samples "
 "require discrepancies to be resolved. Are you sure that you want to release "
@@ -4990,7 +4980,7 @@ msgstr ""
 "require discrepancies to be resolved. Are you sure that you want to release "
 "this test batch?"
 
-#: app/scripts/controllers/testing/viewTestBatch.js:500
+#: app/scripts/controllers/testing/viewTestBatch.js:490
 msgid ""
 "{{count}} of {{total}} samples will be released. Are you sure that you want "
 "to release this test batch?"
@@ -5006,7 +4996,7 @@ msgstr "[FR] {{count}} pack type(s) found"
 msgid "{{count}} role(s) found"
 msgstr "[FR] {{count}} role(s) found"
 
-#: app/views/testing/viewTestBatch.html:212
+#: app/views/testing/viewTestBatch.html:200
 msgid "{{count}} sample(s) found"
 msgstr "[FR] {{count}} sample(s) found"
 
@@ -5056,6 +5046,15 @@ msgstr "[FR] {{startTime}} to {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "[FR] {{total}} donation(s) in batch"
+
+#~ msgid "Donation Batches"
+#~ msgstr "[FR] Donation Batches"
+
+#~ msgid "Select one or more donation batches"
+#~ msgstr "[FR] Select one or more donation batches"
+
+#~ msgid "There are no donation batches to test."
+#~ msgstr "[FR] There are no donation batches to test."
 
 #~ msgid "No test batch selected. Please select a test batch"
 #~ msgstr "[FR] No test batch selected. Please select a test batch"
