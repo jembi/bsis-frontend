@@ -105,7 +105,7 @@
       </tr>
 
       <tr>
-        <td style="text-align:right;padding-right:10px;">
+        <td style="text-align:right;">
           <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
             <small>
               <em><span translate>Confirmatory TTI Outcomes</span>:
@@ -116,7 +116,12 @@
             </small>
           </span>
         </td>
-        <td></td>
+        <td style="text-align:right;">
+          <span ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
+            <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a
+                    ng-href="#/manageBloodGroupMatchTesting/{{testBatch.id}}" ng-disabled="!hasPendingBloodTypingConfirmations" translate>Resolve Ambiguous ABO/Rh Outcomes</a></em></small> </span>
+          </span>
+        </td>
       </tr>
     </table>
   </span>
@@ -125,9 +130,9 @@
 
       <div class="h4">
         <small><em><span translate>Created On</span>: </em></small>
-        <span ng-show="!editableForm.$visible">{{ (testBatch.createdDate | bsisDate) || '' }}</span>
+        <span ng-show="!editableForm.$visible">{{ (testBatch.testBatchDate | bsisDate) || '' }}</span>
         <span ng-show="editableForm.$visible" style="display:inline;">
-          <dateselect ng-model="testBatch.createdDate" initDate="testBatch.createdDate" format="dateFormat" opened="dateToOpen"></dateselect>
+          <dateselect ng-model="testBatch.testBatchDate" initDate="testBatch.testBatchDate" format="dateFormat" opened="dateToOpen"></dateselect>
         </span>
         &nbsp;|&nbsp;
         <small><em><span translate>Location</span>: </em></small>
@@ -150,13 +155,6 @@
           <span translate translate-params-count="testBatch.numReleasedSamples" translate-params-total="testBatch.numSamples">{{count}} of {{total}}</span>
         </span>
       </div>
-
-      <hr style="margin-bottom:5px;"/>
-
-  <span ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
-    <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'"> <small><em><a
-            ng-href="#/manageBloodGroupMatchTesting/{{testBatch.id}}" ng-disabled="!hasPendingBloodTypingConfirmations" translate>Resolve Ambiguous ABO/Rh Outcomes</a></em></small> </span>
-  </span>
 
       <div ng-show="editableForm.$visible && testBatch.permissions.canEditDonations">
           <small><em><span translate>Donation Batches</span>: </em></small>
@@ -181,21 +179,9 @@
         </div>
       </div>
 
-    <span ng-show="!editableForm.$visible || !testBatch.permissions.canEditDonations">
-      <span class="h4" style="font-size: 0.95em; margin-top:0px; margin-bottom:0px;"
-            ng-repeat="donationBatch in testBatch.donationBatches">
-        <small><em><span translate>Venue</span>: </em></small>{{donationBatch.venue.name}}
-        &nbsp;|&nbsp;
-        <small><em><span translate>Date</span>: </em></small> {{donationBatch.donationBatchDate | bsisDate}}
-        &nbsp;|&nbsp; 
-        <small><em><span translate>Number of Donations</span>: </em></small> {{donationBatch.numDonations}}
-        <br/>
-      </span>
-    </span>
-
   </form>
 
-  <hr style="margin-top:5px;"/>
+  <hr style="margin-bottom:5px;"/>
 
   <div style="padding-bottom: 5px">
       <uib-alert type="info" ng-if="testBatch.permissions.canRelease"><span translate>This test batch is ready to be released.</span></uib-alert>
