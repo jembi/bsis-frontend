@@ -105,7 +105,7 @@
       </tr>
 
       <tr>
-        <td style="text-align:right;">
+        <td style="text-align:right; padding-right:10px;">
           <span has-permissions="{{permissions.ADD_TTI_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
             <small>
               <em><span translate>Confirmatory TTI Outcomes</span>:
@@ -117,7 +117,7 @@
           </span>
         </td>
         <td style="text-align:right;">
-          <span ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; margin-top: 0px; margin-bottom: 0px; padding-right: 15px;">
+          <span ng-hide="confirmDelete || confirmEdit" class="h4">
             <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
               <small>
                 <em>
@@ -190,14 +190,14 @@
       </div>
       <div class="col-sm-3 form-group">
          <label class="display-block" for="fromDIN" translate>From DIN</label>
-         <input name="fromDIN" type="text" size="15" class="form-control" ng-model="fromDIN" 
+         <input name="fromDIN" type="text" size="15" class="form-control" ng-model="fromDIN"
                 ng-maxlength="dinLength"
                 ng-minlength="dinLength"/>
       </div>
       <div class="col-sm-3 form-group">
          <label class="display-block" for="toDIN" translate>To DIN</label>
-         <input name="toDIN" type="text" size="15" class="form-control" ng-model="toDIN" 
-                ng-maxlength="dinLength" 
+         <input name="toDIN" type="text" size="15" class="form-control" ng-model="toDIN"
+                ng-maxlength="dinLength"
                 ng-minlength="dinLength"/>
       </div>
       <div class="col-sm-2 form-group pad-t-30">
