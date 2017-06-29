@@ -4,12 +4,9 @@ angular.module('bsis')
 
   .controller('ViewTestBatchCtrl', function($scope, $location, $log, $filter, $timeout, $routeParams, $q, $route, uiGridConstants, gettextCatalog, TestingService, ModalsService, DATEFORMAT) {
 
-    var data = [{}];
-    $scope.data = data;
-
     $scope.dateFormat = DATEFORMAT;
+    $scope.today = new Date();
 
-    $scope.testBatchAvailableDonationBatches = [];
     $scope.exportOptions = [
       {
         id: 'allSamples',
@@ -42,45 +39,38 @@ angular.module('bsis')
       TestingService.getTestBatchById($routeParams.id, function(response) {
         $scope.testBatch = response.testBatch;
         $scope.refreshCurrentTestBatch();
-        $scope.refreshTestBatchAvailableDonations();
+        $scope.refreshEditTestBatchForm();
       }, function(err) {
         $log.error(err);
       });
     };
 
     $scope.refreshCurrentTestBatch = function() {
-      // get the donation batches and the donations linked to this test batch
-      $scope.testBatch.donationBatchIds = [];
       var donations = [];
       var numReleasedSamples = 0;
       angular.forEach($scope.testBatch.donationBatches, function(batch) {
-        $scope.testBatch.donationBatchIds.push(batch.id);
         angular.forEach(batch.donations, function(donation) {
           if (donation.released) {
+            // calculate the number of released samples
             numReleasedSamples++;
           }
+          // get the donations linked to this test batch
           donations.push(donation);
         });
       });
-      data = donations;
-      $scope.gridOptions.data = data;
-      $scope.data = data;
+      $scope.gridOptions.data = donations;
       $scope.testBatch.numReleasedSamples = numReleasedSamples;
+      $scope.testBatchDate = {
+        // set the testBatchDate so it can be edited
+        date: new Date($scope.testBatch.testBatchDate),
+        time: new Date($scope.testBatch.testBatchDate)
+      };
     };
 
-    $scope.refreshTestBatchAvailableDonations = function() {
-      $scope.testBatchAvailableDonationBatches = [];
-      angular.forEach($scope.testBatch.donationBatches, function(batch) {
-        $scope.testBatchAvailableDonationBatches.push(batch);
-      });
-      // get the available donation batches
+    $scope.refreshEditTestBatchForm = function() {
       TestingService.getTestBatchFormFields(function(response) {
         if (response !== false) {
-          $scope.donationBatches = response.donationBatches;
           $scope.locations = response.testingSites;
-          angular.forEach(response.donationBatches, function(batch) {
-            $scope.testBatchAvailableDonationBatches.push(batch);
-          });
         }
       });
     };
@@ -500,6 +490,7 @@ angular.module('bsis')
     };
 
     $scope.updateTestBatch = function(testBatch) {
+      testBatch.testBatchDate = $scope.testBatchDate.date;
       TestingService.updateTestBatch(testBatch, function(response) {
         $scope.testBatch = response;
         $scope.refreshCurrentTestBatch();
@@ -510,11 +501,18 @@ angular.module('bsis')
       });
     };
 
-    $scope.validateForm = function(form) {
-      if (form.donationBatches.$invalid) {
+    $scope.validateForm = function(editableForm) {
+      if (editableForm.$invalid) {
         return 'invalid';
       } else {
         $scope.confirmEdit = false;
+        return true;
+      }
+    };
+
+    $scope.updateTimeOnTestBatchDate = function() {
+      if ($scope.testBatchDate.time) {
+        $scope.testBatchDate.date = moment($scope.testBatchDate.date).hour($scope.testBatchDate.time.getHours()).minutes($scope.testBatchDate.time.getMinutes()).toDate();
       }
     };
   });

@@ -2,13 +2,12 @@ angular.module('bsis')
   .controller('TestBatchCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS) {
 
     $scope.icons = ICONS;
-
-    // Open batches functions
+    $scope.today = new Date();
 
     var data = [{}];
     $scope.openTestBatches = false;
     var testBatchMaster = {
-      donationBatchIds: [],
+      testBatchDate: $scope.today,
       location: null
     };
     $scope.testBatch = angular.copy(testBatchMaster);
@@ -43,23 +42,18 @@ angular.module('bsis')
       });
     };
 
-    $scope.getUnassignedDonationBatches = function() {
+    $scope.getTestBatchForm = function() {
       TestingService.getTestBatchFormFields(function(response) {
         if (response !== false) {
-          $scope.donationBatches = response.donationBatches;
           $scope.testingSites = response.testingSites;
         }
       });
     };
 
     $scope.getOpenTestBatches();
-    $scope.getUnassignedDonationBatches();
+    $scope.getTestBatchForm();
 
     $scope.addTestBatch = function(addTestBatchForm) {
-      if ($scope.testBatch.donationBatchIds.length === 0) {
-        addTestBatchForm.donationBatches.$setValidity('required', false);
-        return;
-      }
 
       if (addTestBatchForm.$valid) {
 
@@ -67,7 +61,6 @@ angular.module('bsis')
         TestingService.addTestBatch($scope.testBatch, function() {
           $scope.testBatch = angular.copy(testBatchMaster);
           $scope.getOpenTestBatches();
-          $scope.getUnassignedDonationBatches();
           $scope.submitted = '';
           $scope.addingTestBatch = false;
           addTestBatchForm.$setPristine();
