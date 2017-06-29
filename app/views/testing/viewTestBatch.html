@@ -121,7 +121,7 @@
     </table>
   </span>
 
-  <form editable-form name="editableForm" onbeforesave="validateForm(editableForm)" onaftersave="updateTestBatch(testBatch)">
+  <form editable-form name="editableForm" onbeforesave="validateForm(editableForm)" onaftersave="updateTestBatch(testBatch)"      ng-submit="addSampleToTestBatch()">
 
       <div class="h4">
         <small><em><span translate>Created On</span>: </em></small>
@@ -191,6 +191,27 @@
       <uib-alert type="info" ng-if="hasPendingRepeatTTITests || hasPendingConfirmatoryTTITests"><span translate>Pending: TTI repeat and/or confirmatory test outcomes.</span></uib-alert>
       <uib-alert type="info" ng-if="hasPendingRepeatBloodTypingTests"><span translate>Pending: blood group serology repeat test outcomes.</span></uib-alert>
       <uib-alert type="info" ng-if="hasPendingBloodTypingConfirmations"><span translate>Pending: ambiguous blood group serology test outcomes.</span></uib-alert>
+  </div>
+
+  <div class="col-sm-12" has-permission="{{permissions.EDIT_TEST_BATCH}}">
+     <div class="col-sm-4 pad-t-30">
+          <h4> Assign Sample(s) to Test Batch</h4>
+      </div>
+      <div class="col-sm-3 form-group">
+         <label class="display-block" for="fromDIN" translate>From DIN</label>
+         <input name="fromDIN" type="text" size="15" class="form-control" ng-model="fromDIN" 
+                ng-maxlength="dinLength"
+                ng-minlength="dinLength"/>
+      </div>
+      <div class="col-sm-3 form-group">
+         <label class="display-block" for="toDIN" translate>To DIN</label>
+         <input name="toDIN" type="text" size="15" class="form-control" ng-model="toDIN" 
+                ng-maxlength="dinLength" 
+                ng-minlength="dinLength"/>
+      </div>
+      <div class="col-sm-2 form-group pad-t-30">
+          <button type="submit" class="btn  btn-block btn-primary margin-t-3" translate>Add</button>
+      </div>
   </div>
 
   <div class="col-sm-12">
