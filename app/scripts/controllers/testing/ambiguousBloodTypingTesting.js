@@ -15,7 +15,7 @@ angular.module('bsis')
     var getSamples = function() {
       TestingService.getTestBatchDonations($routeParams.id, 'AMBIGUOUS', function(response) {
         $scope.data = response.donations;
-        $scope.testBatchCreatedDate = response.testBatchCreatedDate;
+        $scope.testBatchCreatedDate = response.testBatchDate;
         $scope.numberOfDonations = $scope.data.length;
         $scope.bloodTypingResolutions = {};
 
