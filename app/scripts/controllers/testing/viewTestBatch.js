@@ -2,10 +2,11 @@
 
 angular.module('bsis')
 
-  .controller('ViewTestBatchCtrl', function($scope, $location, $log, $filter, $timeout, $routeParams, $q, $route, uiGridConstants, gettextCatalog, TestingService, ModalsService, DATEFORMAT) {
+  .controller('ViewTestBatchCtrl', function($scope, $location, $log, $filter, $timeout, $routeParams, $q, $route, DONATION, uiGridConstants, gettextCatalog, TestingService, ModalsService, DATEFORMAT) {
 
     $scope.dateFormat = DATEFORMAT;
     $scope.today = new Date();
+    $scope.dinLength = DONATION.DIN_LENGTH;
 
     $scope.exportOptions = [
       {
@@ -514,5 +515,10 @@ angular.module('bsis')
       if ($scope.testBatchDate.time) {
         $scope.testBatchDate.date = moment($scope.testBatchDate.date).hour($scope.testBatchDate.time.getHours()).minutes($scope.testBatchDate.time.getMinutes()).toDate();
       }
+    };
+
+    $scope.addSampleToTestBatch = function() {
+      $log.info('Not yet implemented.');
+      $log.info('parameters: fromDIN: ' + $scope.dinRange.fromDIN + ' toDIN: ' +  $scope.dinRange.toDIN);
     };
   });
