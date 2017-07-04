@@ -184,7 +184,7 @@
       <uib-alert type="info" ng-if="hasPendingBloodTypingConfirmations"><span translate>Pending: ambiguous blood group serology test outcomes.</span></uib-alert>
   </div>
 
-  <form  name="addDonationToTestBatchForm" ng-submit="addSampleToTestBatch()">
+  <form  novalidate name="addDonationToTestBatchForm" ng-submit="addSampleToTestBatch()">
       <div class="col-sm-12" has-permission="{{permissions.EDIT_TEST_BATCH}}">
           <div class="col-sm-4 pad-t-30">
               <h4 translate>Assign Sample(s) to Test Batch</h4>
@@ -197,6 +197,7 @@
                         ng-minlength="dinLength"
                         ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                         ng-class="{'ng-invalid ng-dirty' : (addDonationToTestBatchForm.fromDIN.$invalid && submitted)}"
+                        ng-change="validateDINRange()"
                         required />
 
                  <div>
@@ -208,7 +209,7 @@
                      <small class="error" ng-show="(addDonationToTestBatchForm.fromDIN.$error.required && (addDonationToTestBatchForm.fromDIN.$dirty || submitted))">
                          <span translate>This cannot be empty</span>
                      </small>
-                 </div>    
+                 </div>
           </div>
 
           <div class="col-sm-3 form-group">
@@ -219,7 +220,7 @@
                         ng-minlength="dinLength"
                         ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
                         ng-class="{'ng-invalid ng-dirty' : (addDonationToTestBatchForm.toDIN.$invalid && submitted)}"
-                        required />
+                        ng-change="validateDINRange()">
 
                  <div>
                      <small class="error" ng-show="(addDonationToTestBatchForm.toDIN.$error.maxlength || addDonationToTestBatchForm.toDIN.$error.minlength && (addDonationToTestBatchForm.toDIN.$dirty || submitted))">
@@ -227,10 +228,10 @@
                      </small>
                  </div> 
                  <div>
-                     <small class="error" ng-show="(addDonationToTestBatchForm.toDIN.$error.required && (addDonationToTestBatchForm.toDIN.$dirty || submitted))">
-                         <span translate>This cannot be empty</span>
+                     <small class="error" ng-show="(addDonationToTestBatchForm.toDIN.$error.invalidDINRange && (addDonationToTestBatchForm.toDIN.$dirty || submitted))">
+                         <span translate>DIN range is invalid</span>
                      </small>
-                 </div>              
+                 </div>                  
           </div>
           <div class="col-sm-2 form-group pad-t-30">
               <button type="submit" class="btn  btn-block btn-primary margin-t-3" translate>Add</button>

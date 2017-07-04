@@ -8,6 +8,11 @@ angular.module('bsis')
     $scope.today = new Date();
     $scope.dinLength = DONATION.DIN_LENGTH;
 
+    $scope.dinRange = {
+      toDIN: null,
+      fromDIN: null
+    };
+
     $scope.exportOptions = [
       {
         id: 'allSamples',
@@ -509,6 +514,14 @@ angular.module('bsis')
     $scope.updateTimeOnTestBatchDate = function() {
       if ($scope.testBatchDate.time) {
         $scope.testBatchDate.date = moment($scope.testBatchDate.date).hour($scope.testBatchDate.time.getHours()).minutes($scope.testBatchDate.time.getMinutes()).toDate();
+      }
+    };
+
+    $scope.validateDINRange = function() {
+      if ($scope.dinRange.fromDIN > $scope.dinRange.toDIN && ($scope.dinRange.toDIN !== null)) {
+        $scope.addDonationToTestBatchForm.toDIN.$setValidity('invalidDINRange', false);
+      } else {
+        $scope.addDonationToTestBatchForm.toDIN.$setValidity('invalidDINRange', true);
       }
     };
 
