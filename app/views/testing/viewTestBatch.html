@@ -184,36 +184,38 @@
       <uib-alert type="info" ng-if="hasPendingBloodTypingConfirmations"><span translate>Pending: ambiguous blood group serology test outcomes.</span></uib-alert>
   </div>
 
-  <form  novalidate name="addDonationToTestBatchForm" ng-submit="addSampleToTestBatch()">
+  <form  class="form-inline" novalidate name="addDonationToTestBatchForm" ng-submit="addSampleToTestBatch()">
       <div class="col-sm-12" has-permission="{{permissions.EDIT_TEST_BATCH}}">
-          <div class="col-sm-4 pad-t-30">
+          <div class="col-sm-3">
               <h4 translate>Assign Sample(s) to Test Batch</h4>
           </div>
-          <div class="col-sm-3 form-group">
-             <label class="display-block" for="fromDIN" translate>DIN From</label>
-                 <input name="fromDIN" type="text" size="15" class="form-control" 
-                        ng-model="dinRange.fromDIN" style="width:150px;"
-                        ng-maxlength="dinLength"
-                        ng-minlength="dinLength"
-                        ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
-                        ng-class="{'ng-invalid ng-dirty' : (addDonationToTestBatchForm.fromDIN.$invalid && submitted)}"
-                        ng-change="validateDINRange()"
-                        required />
+          <div class="form-group">
 
-                 <div>
-                     <small class="error" ng-show="(addDonationToTestBatchForm.fromDIN.$error.maxlength ||  addDonationToTestBatchForm.fromDIN.$error.minlength && (addDonationToTestBatchForm.fromDIN.$dirty || submitted))">
-                         <span translate>DIN should be {{dinLength}} characters</span>
-                     </small>
-                 </div>
-                 <div>
-                     <small class="error" ng-show="(addDonationToTestBatchForm.fromDIN.$error.required && (addDonationToTestBatchForm.fromDIN.$dirty || submitted))">
-                         <span translate>This cannot be empty</span>
-                     </small>
-                 </div>
+             <div class="input-group"><label  for="fromDIN" translate>DIN From</label></div>
+             <div class="input-group">
+                <input name="fromDIN" type="text" size="15" class="form-control" 
+                       ng-model="dinRange.fromDIN" style="width:150px;"
+                       ng-maxlength="dinLength"
+                       ng-minlength="dinLength"
+                       ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
+                       ng-class="{'ng-invalid ng-dirty' : (addDonationToTestBatchForm.fromDIN.$invalid && submitted)}"
+                       ng-change="validateDINRange()"
+                       required />
+
+            
+                  <ng-messages for="addDonationToTestBatchForm.fromDIN.$error" role="alert" ng-show="addDonationToTestBatchForm.$submitted">
+                    <div>
+                      <small class="error" ng-message="minlength"><span translate>DIN should be {{dinLength}} characters</span></small>
+                      <small class="error" ng-message="maxlength"><span translate>DIN should be {{dinLength}} characters</span></small>  
+                    </div>
+                      <ng-messages-include src="messages.html"></ng-messages-include>
+                  </ng-messages>
+              </div>
           </div>
 
-          <div class="col-sm-3 form-group">
-             <label class="display-block" for="toDIN" translate>DIN To</label>
+          <div class="form-group">
+            <div class="input-group"><label  for="fromDIN" translate>DIN To</label></div>
+              <div class="input-group">
                  <input name="toDIN" type="text" size="15" class="form-control" 
                         ng-model="dinRange.toDIN" style="width:150px;"
                         ng-maxlength="dinLength" 
@@ -222,18 +224,15 @@
                         ng-class="{'ng-invalid ng-dirty' : (addDonationToTestBatchForm.toDIN.$invalid && submitted)}"
                         ng-change="validateDINRange()">
 
-                 <div>
-                     <small class="error" ng-show="(addDonationToTestBatchForm.toDIN.$error.maxlength || addDonationToTestBatchForm.toDIN.$error.minlength && (addDonationToTestBatchForm.toDIN.$dirty || submitted))">
-                         <span translate>DIN should be {{dinLength}} characters</span>
-                     </small>
-                 </div> 
-                 <div>
-                     <small class="error" ng-show="(addDonationToTestBatchForm.toDIN.$error.invalidDINRange && (addDonationToTestBatchForm.toDIN.$dirty || submitted))">
-                         <span translate>DIN range is invalid</span>
-                     </small>
-                 </div>                  
+                   <ng-messages for="addDonationToTestBatchForm.toDIN.$error" role="alert" ng-show="addDonationToTestBatchForm.$submitted">
+                     <div>
+                        <small class="error" ng-message="minlength"><span translate>DIN should be {{dinLength}} characters</span></small>
+                        <small class="error" ng-message="maxlength"><span translate>DIN should be {{dinLength}} characters</span></small>  
+                     </div> 
+                   </ng-messages> 
+              </div>             
           </div>
-          <div class="col-sm-2 form-group pad-t-30">
+          <div class="form-group">
               <button type="submit" class="btn  btn-block btn-primary margin-t-3" translate>Add</button>
           </div>
       </div>

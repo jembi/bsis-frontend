@@ -518,7 +518,7 @@ angular.module('bsis')
     };
 
     $scope.validateDINRange = function() {
-      if ($scope.dinRange.fromDIN > $scope.dinRange.toDIN && ($scope.dinRange.toDIN !== null)) {
+      if ($scope.dinRange.fromDIN > $scope.dinRange.toDIN && ($scope.dinRange.toDIN !== null && $scope.dinRange.toDIN !== '')) {
         $scope.addDonationToTestBatchForm.toDIN.$setValidity('invalidDINRange', false);
       } else {
         $scope.addDonationToTestBatchForm.toDIN.$setValidity('invalidDINRange', true);
