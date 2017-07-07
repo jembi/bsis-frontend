@@ -35,7 +35,7 @@ angular.module('bsis')
           var hiddenElement = document.createElement('a');
           hiddenElement.href = 'data:attachment/zpl,' + encodeURI(label.labelZPL);
           hiddenElement.target = '_blank';
-          hiddenElement.download = 'label.zpl';
+          hiddenElement.download = 'label' + moment(new Date()) + '.zpl';
           hiddenElement.click();
         }, function(err) {
           onError(err.data);
@@ -48,7 +48,7 @@ angular.module('bsis')
           var hiddenElement = document.createElement('a');
           hiddenElement.href = 'data:attachment/zpl,' + encodeURI(label.labelZPL);
           hiddenElement.target = '_blank';
-          hiddenElement.download = 'label.zpl';
+          hiddenElement.download = 'label' + moment(new Date()) + '.zpl';
           hiddenElement.click();
         }, function(err) {
           onError(err.data);
