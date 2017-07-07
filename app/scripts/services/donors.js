@@ -239,7 +239,7 @@ angular.module('bsis')
           var hiddenElement = document.createElement('a');
           hiddenElement.href = 'data:attachment/zpl,' + encodeURI(label.labelZPL);
           hiddenElement.target = '_blank';
-          hiddenElement.download = 'barcode.bc';
+          hiddenElement.download = 'barcode' + moment(new Date()) + '.bc';
           hiddenElement.click();
 
         }, function() {
