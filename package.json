@@ -1,7 +1,7 @@
 {
   "name": "bsis",
   "private": true,
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Blood Safety Information System",
   "repository": "https://github.com/jembi/bsis-frontend",
   "license": "BSD-3-Clause",
