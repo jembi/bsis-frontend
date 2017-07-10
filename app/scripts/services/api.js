@@ -87,6 +87,13 @@ angular.module('bsis')
         search: {
           method: 'GET',
           url: url + '/testbatches/search'
+        },
+        addDonationsToTestBatch: {
+          method: 'PUT',
+          url: url + '/testbatches/:id/donations',
+          params: {
+            id: '@id'
+          }
         }
       }),
 

@@ -526,18 +526,33 @@ angular.module('bsis')
       }
     };
 
-    $scope.addSampleToTestBatch = function() {
+
+    $scope.addSampleToTestBatch = function(addDonationToTestBatchForm) {
+      var testBatchSamples = {
+        testBatchId : $routeParams.id,
+        fromDIN     : $scope.dinRange.fromDIN,
+        toDIN       : $scope.dinRange.toDIN
+      };
       $scope.validateDINRange();
       if ($scope.addDonationToTestBatchForm.$invalid) {
-        return;
+        if ($scope.dinRange.toDIN === null || $scope.dinRange.toDIN === '') {
+          $scope.dinRange.toDIN = $scope.dinRange.fromDIN;
+        }
+
+        TestingService.addDonationsToTestBatch(testBatchSamples, function(response) {
+          $scope.addSamples = response;
+          $scope.refreshCurrentTestBatch();
+          $scope.clearAddDonationToTestBatchForm(addDonationToTestBatchForm);
+        }, function(err) {
+          $scope.err = err;
+          $log.error(err);
+        });
       }
-      $log.info('Not yet implemented.');
-      $log.info('parameters: fromDIN: ' + $scope.dinRange.fromDIN + ' toDIN: ' +  $scope.dinRange.toDIN);
     };
 
-    $scope.clearAddDonationToTestBatchForm = function() {
-      $scope.addDonationToTestBatchForm.$setPristine();
-      $scope.addDonationToTestBatchForm.$setUntouched();
+    $scope.clearAddDonationToTestBatchForm = function(addDonationToTestBatchForm) {
+      addDonationToTestBatchForm.$setPristine();
+      addDonationToTestBatchForm.$setUntouched();
       $scope.dinRange = angular.copy(dinRangeMaster);
     };
   });
