@@ -463,8 +463,9 @@ angular.module('bsis')
       var message;
       if (testBatch.readyForReleaseCount < testBatch.numSamples) {
         message = gettextCatalog.getString('{{count}} of {{total}} samples will be released, ' +
-          'the remaining samples require discrepancies to be resolved. Are you sure that ' +
-          'you want to release this test batch?',
+          'the remaining samples require discrepancies to be resolved. ' +
+          'Once you release these samples you will no longer be able to add DINs to this batch. ' +
+          'Are you sure that you want to release this test batch?',
           {count: testBatch.readyForReleaseCount, total: testBatch.numSamples});
       } else {
         message = gettextCatalog.getString('{{count}} of {{total}} samples will be released. ' +
