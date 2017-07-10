@@ -519,7 +519,7 @@ angular.module('bsis')
     };
 
     $scope.validateDINRange = function() {
-      if ($scope.dinRange.fromDIN > $scope.dinRange.toDIN && ($scope.dinRange.toDIN !== null && $scope.dinRange.toDIN !== '')) {
+      if ($scope.dinRange.toDIN && $scope.dinRange.fromDIN > $scope.dinRange.toDIN) {
         $scope.addDonationToTestBatchForm.toDIN.$setValidity('invalidDINRange', false);
       } else {
         $scope.addDonationToTestBatchForm.toDIN.$setValidity('invalidDINRange', true);
@@ -527,6 +527,10 @@ angular.module('bsis')
     };
 
     $scope.addSampleToTestBatch = function() {
+      $scope.validateDINRange();
+      if ($scope.addDonationToTestBatchForm.$invalid) {
+        return;
+      }
       $log.info('Not yet implemented.');
       $log.info('parameters: fromDIN: ' + $scope.dinRange.fromDIN + ' toDIN: ' +  $scope.dinRange.toDIN);
     };

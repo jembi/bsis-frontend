@@ -197,18 +197,14 @@
                        ng-model="dinRange.fromDIN" style="width:150px;"
                        ng-maxlength="dinLength"
                        ng-minlength="dinLength"
-                       ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
-                       ng-class="{'ng-invalid ng-dirty' : (addDonationToTestBatchForm.fromDIN.$invalid && submitted)}"
-                       ng-change="validateDINRange()"
                        required />
 
-            
                   <ng-messages for="addDonationToTestBatchForm.fromDIN.$error" role="alert" ng-show="addDonationToTestBatchForm.$submitted">
                     <div>
                       <small class="error" ng-message="minlength"><span translate>DIN should be {{dinLength}} characters</span></small>
                       <small class="error" ng-message="maxlength"><span translate>DIN should be {{dinLength}} characters</span></small>
                     </div>
-                      <ng-messages-include src="messages.html"></ng-messages-include>
+                    <ng-messages-include src="messages.html"></ng-messages-include>
                   </ng-messages>
               </div>
           </div>
@@ -219,15 +215,14 @@
                  <input name="toDIN" type="text" size="15" class="form-control" 
                         ng-model="dinRange.toDIN" style="width:150px;"
                         ng-maxlength="dinLength" 
-                        ng-minlength="dinLength"
-                        ng-model-options="{ updateOn:'default blur', debounce: { default: 1000, blur: 0 } }"
-                        ng-class="{'ng-invalid ng-dirty' : (addDonationToTestBatchForm.toDIN.$invalid && submitted)}"
-                        ng-change="validateDINRange()">
+                        ng-minlength="dinLength">
 
                    <ng-messages for="addDonationToTestBatchForm.toDIN.$error" role="alert" ng-show="addDonationToTestBatchForm.$submitted">
                      <div>
                         <small class="error" ng-message="minlength"><span translate>DIN should be {{dinLength}} characters</span></small>
                         <small class="error" ng-message="maxlength"><span translate>DIN should be {{dinLength}} characters</span></small>
+                        <small class="error" ng-message="invalidDINRange"><span translate>Invalid DIN range</span></small>
+                        <ng-messages-include src="messages.html"></ng-messages-include>
                      </div> 
                    </ng-messages> 
               </div>
