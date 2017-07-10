@@ -24,7 +24,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
     // DEFAULT VIEW - DISPLAY HOME PAGE IF USER AUTHENTICATED
       .when('/', {
         templateUrl: 'views/home.html',
-        controller: ' ',
+        controller: 'HomeCtrl',
         permission: PERMISSIONS.AUTHENTICATED
       })
 
