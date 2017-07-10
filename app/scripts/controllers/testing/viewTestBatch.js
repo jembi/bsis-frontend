@@ -8,10 +8,11 @@ angular.module('bsis')
     $scope.today = new Date();
     $scope.dinLength = DONATION.DIN_LENGTH;
 
-    $scope.dinRange = {
+    var dinRangeMaster = {
       toDIN: null,
       fromDIN: null
     };
+    $scope.dinRange = angular.copy(dinRangeMaster);
 
     $scope.exportOptions = [
       {
@@ -528,5 +529,11 @@ angular.module('bsis')
     $scope.addSampleToTestBatch = function() {
       $log.info('Not yet implemented.');
       $log.info('parameters: fromDIN: ' + $scope.dinRange.fromDIN + ' toDIN: ' +  $scope.dinRange.toDIN);
+    };
+
+    $scope.clearAddDonationToTestBatchForm = function() {
+      $scope.addDonationToTestBatchForm.$setPristine();
+      $scope.addDonationToTestBatchForm.$setUntouched();
+      $scope.dinRange = angular.copy(dinRangeMaster);
     };
   });
