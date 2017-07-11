@@ -95,6 +95,7 @@ angular.module('bsis')
             id: '@id'
           }
         }
+
       }),
 
       ComponentBatches: $resource(url + '/componentbatches/:id', null,

@@ -87,18 +87,12 @@ angular.module('bsis')
           onError(err);
         });
       },
-      addDonationsToTestBatch: function(testBatchSamples, onSuccess, onError) {
-        Api.TestBatches.addDonationsToTestBatch({id: testBatchSamples.testBatchId}, testBatchSamples, function(data) {
-          onSuccess(data);
-        }, function(err) {
-          onError(err.data);
-        });
-      },
       getTestResultsByDIN: Api.TestResults.get,
       getTestBatchOverviewById: Api.TestResults.overview,
       getTestBatchOutcomesReport: Api.TestResults.report,
       getTestOutcomesByBatchIdAndBloodTestType: Api.TestResults.search,
       saveTestResults: Api.TestResults.saveResults,
-      saveBloodTypingResolutions: Api.Donations.bloodTypingResolutions
+      saveBloodTypingResolutions: Api.Donations.bloodTypingResolutions,
+      addDonationsToTestBatch: Api.TestBatches.addDonationsToTestBatch
     };
   });
