@@ -7,6 +7,7 @@ angular.module('bsis')
     $scope.dateFormat = DATEFORMAT;
     $scope.today = new Date();
     $scope.dinLength = DONATION.DIN_LENGTH;
+    $scope.hasErrors = '';
 
     var dinRangeMaster = {
       toDIN: null,
@@ -526,6 +527,9 @@ angular.module('bsis')
       }
     };
 
+    $scope.clearErrors = function() {
+      $scope.hasErrors = '';
+    };
 
     $scope.addSampleToTestBatch = function() {
       var testBatchSamples = {
@@ -544,8 +548,12 @@ angular.module('bsis')
 
       TestingService.addDonationsToTestBatch({id: testBatchSamples.testBatchId}, testBatchSamples, function() {
         $scope.refreshCurrentTestBatch();
+        $scope.clearErrors();
       }, function(err) {
         $log.error(err);
+        if (err.data.hasErrors === 'true') {
+          $scope.hasErrors = 'true';
+        }
       });
     };
 
