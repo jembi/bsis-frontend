@@ -46,14 +46,14 @@ angular.module('bsis')
     $scope.getCurrentTestBatch = function() {
       TestingService.getTestBatchById($routeParams.id, function(response) {
         $scope.testBatch = response.testBatch;
-        $scope.refreshCurrentTestBatch();
+        $scope.refreshCurrentTestBatch(response);
         $scope.refreshEditTestBatchForm();
       }, function(err) {
         $log.error(err);
       });
     };
 
-    $scope.refreshCurrentTestBatch = function() {
+    $scope.refreshCurrentTestBatch = function(response) {
       var numReleasedSamples = 0;
       angular.forEach($scope.testBatch.donations, function(donation) {
         // calculate the number of released samples
@@ -61,7 +61,12 @@ angular.module('bsis')
           numReleasedSamples++;
         }
       });
-      $scope.gridOptions.data = $scope.testBatch.donations;
+
+      if (angular.isDefined(response.donations)) {
+        $scope.gridOptions.data = response.donations;
+      } else {
+        $scope.gridOptions.data = $scope.testBatch.donations;
+      }
       $scope.testBatch.numReleasedSamples = numReleasedSamples;
       $scope.testBatchDate = {
         // set the testBatchDate so it can be edited
@@ -487,7 +492,7 @@ angular.module('bsis')
       ModalsService.showConfirmation(confirmation).then(function() {
         TestingService.releaseTestBatch(testBatch, function(response) {
           $scope.testBatch = response;
-          $scope.refreshCurrentTestBatch();
+          $scope.refreshCurrentTestBatch(response);
         }, function(err) {
           $scope.err = err;
           $log.error(err);
@@ -499,7 +504,7 @@ angular.module('bsis')
       testBatch.testBatchDate = $scope.testBatchDate.date;
       TestingService.updateTestBatch(testBatch, function(response) {
         $scope.testBatch = response;
-        $scope.refreshCurrentTestBatch();
+        $scope.refreshCurrentTestBatch(response);
         $scope.err = '';
       }, function(err) {
         $scope.err = err;
@@ -530,10 +535,6 @@ angular.module('bsis')
       }
     };
 
-    $scope.clearErrors = function() {
-      $scope.hasErrors = '';
-    };
-
     $scope.addSampleToTestBatch = function() {
       var testBatchSamples = {
         testBatchId : $routeParams.id,
@@ -549,12 +550,12 @@ angular.module('bsis')
         $scope.dinRange.toDIN = $scope.dinRange.fromDIN;
       }
 
-      TestingService.addDonationsToTestBatch({id: testBatchSamples.testBatchId}, testBatchSamples, function() {
-        $scope.refreshCurrentTestBatch();
-        $scope.clearErrors();
+      TestingService.addDonationsToTestBatch({id: testBatchSamples.testBatchId}, testBatchSamples, function(response) {
+        $scope.refreshCurrentTestBatch(response);
       }, function(err) {
         $log.error(err);
-        if (err.data.hasErrors === 'true') {
+        $scope.hasErrors = '';
+        if (err.status !== 404 && err.status !== 500 && err.data.hasErrors === 'true') {
           $scope.hasErrors = 'true';
         }
       });
