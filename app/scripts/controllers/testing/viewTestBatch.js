@@ -540,13 +540,14 @@ angular.module('bsis')
         fromDIN     : $scope.dinRange.fromDIN,
         toDIN       : $scope.dinRange.toDIN
       };
+
       $scope.validateDINRange();
       if ($scope.addDonationToTestBatchForm.$invalid) {
         return ;
       }
 
-      if ($scope.dinRange.toDIN === null || $scope.dinRange.toDIN === '') {
-        $scope.dinRange.toDIN = $scope.dinRange.fromDIN;
+      if (!$scope.dinRange.toDIN) {
+        testBatchSamples.toDIN = $scope.dinRange.fromDIN;
       }
 
       TestingService.addDonationsToTestBatch({id: testBatchSamples.testBatchId}, testBatchSamples, function(response) {
