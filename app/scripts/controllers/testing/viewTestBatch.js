@@ -7,7 +7,6 @@ angular.module('bsis')
     $scope.dateFormat = DATEFORMAT;
     $scope.today = new Date();
     $scope.dinLength = DONATION.DIN_LENGTH;
-    $scope.hasErrors = '';
 
     var dinRangeMaster = {
       toDIN: null,
@@ -554,9 +553,9 @@ angular.module('bsis')
         $scope.refreshCurrentTestBatch(response);
       }, function(err) {
         $log.error(err);
-        $scope.hasErrors = '';
+        $scope.hasErrors = false;
         if (err.status !== 404 && err.status !== 500 && err.data.hasErrors === 'true') {
-          $scope.hasErrors = 'true';
+          $scope.hasErrors = true;
         }
       });
     };
