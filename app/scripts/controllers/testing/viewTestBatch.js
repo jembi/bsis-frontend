@@ -565,5 +565,6 @@ angular.module('bsis')
       addDonationToTestBatchForm.$setPristine();
       addDonationToTestBatchForm.$setUntouched();
       $scope.dinRange = angular.copy(dinRangeMaster);
+      $scope.hasErrors = false;
     };
   });
