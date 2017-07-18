@@ -2,10 +2,17 @@
 
 angular.module('bsis')
 
-  .controller('ViewTestBatchCtrl', function($scope, $location, $log, $filter, $timeout, $routeParams, $q, $route, uiGridConstants, gettextCatalog, TestingService, ModalsService, DATEFORMAT) {
+  .controller('ViewTestBatchCtrl', function($scope, $location, $log, $filter, $timeout, $routeParams, $q, $route, DONATION, uiGridConstants, gettextCatalog, TestingService, ModalsService, DATEFORMAT) {
 
     $scope.dateFormat = DATEFORMAT;
     $scope.today = new Date();
+    $scope.dinLength = DONATION.DIN_LENGTH;
+
+    var dinRangeMaster = {
+      toDIN: null,
+      fromDIN: null
+    };
+    $scope.dinRange = angular.copy(dinRangeMaster);
 
     $scope.exportOptions = [
       {
@@ -38,27 +45,27 @@ angular.module('bsis')
     $scope.getCurrentTestBatch = function() {
       TestingService.getTestBatchById($routeParams.id, function(response) {
         $scope.testBatch = response.testBatch;
-        $scope.refreshCurrentTestBatch();
+        $scope.refreshCurrentTestBatch(response);
         $scope.refreshEditTestBatchForm();
       }, function(err) {
         $log.error(err);
       });
     };
 
-    $scope.refreshCurrentTestBatch = function() {
-      var donations = [];
+    $scope.refreshCurrentTestBatch = function(response) {
       var numReleasedSamples = 0;
-      angular.forEach($scope.testBatch.donationBatches, function(batch) {
-        angular.forEach(batch.donations, function(donation) {
-          if (donation.released) {
-            // calculate the number of released samples
-            numReleasedSamples++;
-          }
-          // get the donations linked to this test batch
-          donations.push(donation);
-        });
+      angular.forEach($scope.testBatch.donations, function(donation) {
+        // calculate the number of released samples
+        if (donation.released) {
+          numReleasedSamples++;
+        }
       });
-      $scope.gridOptions.data = donations;
+
+      if (angular.isDefined(response.donations)) {
+        $scope.gridOptions.data = response.donations;
+      } else {
+        $scope.gridOptions.data = $scope.testBatch.donations;
+      }
       $scope.testBatch.numReleasedSamples = numReleasedSamples;
       $scope.testBatchDate = {
         // set the testBatchDate so it can be edited
@@ -245,27 +252,6 @@ angular.module('bsis')
         ];
         return finalArray;
       },
-
-
-      exporterPdfCustomFormatter: function(docDefinition) {
-        var prefix = [];
-        angular.forEach($scope.testBatch.donationBatches, function(val) {
-          var venue = val.venue.name;
-          var dateCreated = $filter('bsisDate')(val.donationBatchDate);
-          var numDonations = val.numDonations;
-          prefix.push(
-            {
-              text: gettextCatalog.getString('Venue') + ': ' + venue + ', ' +
-                gettextCatalog.getString('Date Created') + ': ' + dateCreated + ', ' +
-                gettextCatalog.getString('Number of Donations') + ': ' + numDonations + '\n'
-            }
-          );
-        });
-
-        docDefinition.content = [{text: prefix, margin: [-10, 0, 0, 0], fontSize: 7}].concat(docDefinition.content);
-        return docDefinition;
-      },
-
 
       exporterPdfTableStyle: {margin: [-10, 10, 0, 0]},
 
@@ -483,11 +469,13 @@ angular.module('bsis')
       var message;
       if (testBatch.readyForReleaseCount < testBatch.numSamples) {
         message = gettextCatalog.getString('{{count}} of {{total}} samples will be released, ' +
-          'the remaining samples require discrepancies to be resolved. Are you sure that ' +
-          'you want to release this test batch?',
+          'the remaining samples require discrepancies to be resolved. ' +
+          'Once you release these samples you will no longer be able to add DINs to this batch. ' +
+          'Are you sure that you want to release this test batch?',
           {count: testBatch.readyForReleaseCount, total: testBatch.numSamples});
       } else {
         message = gettextCatalog.getString('{{count}} of {{total}} samples will be released. ' +
+          'Once you release these samples you will no longer be able to add DINs to this batch. ' +
           'Are you sure that you want to release this test batch?',
           {count: testBatch.readyForReleaseCount, total: testBatch.numSamples});
       }
@@ -501,7 +489,7 @@ angular.module('bsis')
       ModalsService.showConfirmation(confirmation).then(function() {
         TestingService.releaseTestBatch(testBatch, function(response) {
           $scope.testBatch = response;
-          $scope.refreshCurrentTestBatch();
+          $scope.refreshCurrentTestBatch(response);
         }, function(err) {
           $scope.err = err;
           $log.error(err);
@@ -513,7 +501,7 @@ angular.module('bsis')
       testBatch.testBatchDate = $scope.testBatchDate.date;
       TestingService.updateTestBatch(testBatch, function(response) {
         $scope.testBatch = response;
-        $scope.refreshCurrentTestBatch();
+        $scope.refreshCurrentTestBatch(response);
         $scope.err = '';
       }, function(err) {
         $scope.err = err;
@@ -534,5 +522,49 @@ angular.module('bsis')
       if ($scope.testBatchDate.time) {
         $scope.testBatchDate.date = moment($scope.testBatchDate.date).hour($scope.testBatchDate.time.getHours()).minutes($scope.testBatchDate.time.getMinutes()).toDate();
       }
+    };
+
+    $scope.validateDINRange = function() {
+      if ($scope.dinRange.toDIN && $scope.dinRange.fromDIN > $scope.dinRange.toDIN) {
+        $scope.addDonationToTestBatchForm.toDIN.$setValidity('invalidDINRange', false);
+      } else {
+        $scope.addDonationToTestBatchForm.toDIN.$setValidity('invalidDINRange', true);
+      }
+    };
+
+    $scope.addSampleToTestBatch = function() {
+      var testBatchSamples = {
+        testBatchId : $routeParams.id,
+        fromDIN     : $scope.dinRange.fromDIN,
+        toDIN       : $scope.dinRange.toDIN
+      };
+
+      $scope.validateDINRange();
+      if ($scope.addDonationToTestBatchForm.$invalid) {
+        return ;
+      }
+
+      if (!$scope.dinRange.toDIN) {
+        testBatchSamples.toDIN = $scope.dinRange.fromDIN;
+      }
+
+      TestingService.addDonationsToTestBatch({id: testBatchSamples.testBatchId}, testBatchSamples, function(response) {
+        $scope.testBatch = response;
+        $scope.refreshCurrentTestBatch(response);
+        $scope.clearAddDonationToTestBatchForm($scope.addDonationToTestBatchForm);
+      }, function(err) {
+        $log.error(err);
+        $scope.hasErrors = false;
+        if (err.status !== 404 && err.status !== 500 && err.data.hasErrors === 'true') {
+          $scope.hasErrors = true;
+        }
+      });
+    };
+
+    $scope.clearAddDonationToTestBatchForm = function(addDonationToTestBatchForm) {
+      addDonationToTestBatchForm.$setPristine();
+      addDonationToTestBatchForm.$setUntouched();
+      $scope.dinRange = angular.copy(dinRangeMaster);
+      $scope.hasErrors = false;
     };
   });

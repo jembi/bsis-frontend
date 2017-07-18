@@ -4,7 +4,7 @@ angular.module('bsis')
   .factory('TestingService', function($http, Api) {
     return {
       getTestBatchFormFields: function(response) {
-        Api.TestBatchFormFields.get({}, function(backingForm) {
+        Api.TestBatches.getTestBatchForm({}, function(backingForm) {
           response(backingForm);
         }, function() {
           response(false);
@@ -32,7 +32,7 @@ angular.module('bsis')
         });
       },
       getOpenTestBatches: function(response) {
-        Api.FindTestBatches.get({status: ['OPEN', 'RELEASED']}, function(testBatches) {
+        Api.TestBatches.search({status: ['OPEN', 'RELEASED']}, function(testBatches) {
           response(testBatches);
         }, function() {
           response(false);
@@ -74,14 +74,14 @@ angular.module('bsis')
         Api.TestBatches.delete({id: testBatchId}, onSuccess, onError);
       },
       getRecentTestBatches: function(options, onSuccess, onError) {
-        Api.FindTestBatches.get(options, function(testBatches) {
+        Api.TestBatches.search(options, function(testBatches) {
           onSuccess(testBatches);
         }, function(err) {
           onError(err.data);
         });
       },
       getTestBatchDonations: function(id, bloodTypingMatchStatus, onSuccess, onError) {
-        Api.TestBatchDonations.get({id: id, bloodTypingMatchStatus: bloodTypingMatchStatus}, function(data) {
+        Api.TestBatches.getTestBatchDonations({id: id, bloodTypingMatchStatus: bloodTypingMatchStatus}, function(data) {
           onSuccess(data);
         }, function(err) {
           onError(err);
@@ -92,6 +92,7 @@ angular.module('bsis')
       getTestBatchOutcomesReport: Api.TestResults.report,
       getTestOutcomesByBatchIdAndBloodTestType: Api.TestResults.search,
       saveTestResults: Api.TestResults.saveResults,
-      saveBloodTypingResolutions: Api.Donations.bloodTypingResolutions
+      saveBloodTypingResolutions: Api.Donations.bloodTypingResolutions,
+      addDonationsToTestBatch: Api.TestBatches.addDonationsToTestBatch
     };
   });
