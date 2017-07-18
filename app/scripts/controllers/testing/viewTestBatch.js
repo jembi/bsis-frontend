@@ -549,6 +549,7 @@ angular.module('bsis')
       }
 
       TestingService.addDonationsToTestBatch({id: testBatchSamples.testBatchId}, testBatchSamples, function(response) {
+        $scope.testBatch = response;
         $scope.refreshCurrentTestBatch(response);
         $scope.clearAddDonationToTestBatchForm($scope.addDonationToTestBatchForm);
       }, function(err) {
