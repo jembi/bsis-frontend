@@ -129,7 +129,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
   var generateDispatchReportTitle = function() {
     var title = gettextCatalog.getString('Order Date') + ': ' + $filter('bsisDate')($scope.orderForm.orderDate) + '   ' +
       gettextCatalog.getString('Dispatch From') + ': ' + $scope.orderForm.dispatchedFrom.name + '   ' +
-      gettextCatalog.getString('Dispatch To') + ': ' + $scope.orderForm.dispatchedTo.name + '   ' +
+      gettextCatalog.getString('Dispatched To') + ': ' + $scope.orderForm.dispatchedTo.name + '   ' +
       gettextCatalog.getString('Order Type') + ': ' +  gettextCatalog.getString($filter('titleCase')($scope.orderForm.type)) + '  \n\n';
 
     if ($scope.orderForm.type === 'PATIENT_REQUEST') {
@@ -187,7 +187,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
       {style: 'tableHeader', text: gettextCatalog.getString('Component Type')},
       {style: 'tableHeader', text: gettextCatalog.getString('Blood Group')},
       {style: 'tableHeader', text: gettextCatalog.getString('Units Ordered')},
-      {style: 'tableHeader', colSpan: 2, text: gettextCatalog.getString('Units Supplied / DIN')},
+      {style: 'tableHeader', colSpan: 2, text: gettextCatalog.getString('Units Supplied') + ' / ' +  gettextCatalog.getString('DIN')},
       null,
       {style: 'tableHeader', text: gettextCatalog.getString('Gap')}]
     );
