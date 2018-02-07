@@ -21,6 +21,8 @@ angular.module('bsis').controller('ViewTestSampleCtrl', function($scope, $locati
       $scope.searching = false;
     }, function(err) {
       $log.error(err);
+      $scope.donation = null;
+      $scope.testResults = [];
       $scope.searching = false;
     });
   };
