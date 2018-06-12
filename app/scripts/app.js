@@ -207,9 +207,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.VIEW_TEST_BATCH,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/manageTTITesting/:id/:bloodTestType', {
-        templateUrl: 'views/testing/manageTTITesting.html',
-        controller: 'RecordTestResultsCtrl',
+      .when('/recordTTIOutcomes/:id/:bloodTestType', {
+        templateUrl: 'views/testing/recordTTIOutcomes.html',
+        controller: 'RecordTestOutcomesCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
@@ -227,13 +227,13 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       })
       .when('/managePendingTests/:id/:bloodTestType', {
         templateUrl: 'views/testing/managePendingTests.html',
-        controller: 'RecordTestResultsCtrl',
+        controller: 'RecordTestOutcomesCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
       .when('/manageBloodGroupTesting/:id/:bloodTestType', {
         templateUrl: 'views/testing/manageBloodGroupTesting.html',
-        controller: 'RecordTestResultsCtrl',
+        controller: 'RecordTestOutcomesCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
@@ -245,7 +245,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       })
       .when('/managePendingBloodTypingTests/:id/:bloodTestType', {
         templateUrl: 'views/testing/managePendingBloodTypingTests.html',
-        controller: 'RecordTestResultsCtrl',
+        controller: 'RecordTestOutcomesCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })

@@ -111,7 +111,7 @@ angular.module('bsis')
       '/viewTestSample',
       '/manageTestBatches',
       '/manageTestBatch/' + uuidRegexPattern,
-      '/manageTTITesting/' + uuidRegexPattern + '/\\w+',
+      '/recordTTIOutcomes/' + uuidRegexPattern + '/\\w+',
       '/reEnterTTI/' + uuidRegexPattern + '/\\w+',
       '/reEnterBloodTyping/' + uuidRegexPattern + '/\\w+',
       '/managePendingTests/' + uuidRegexPattern + '/\\w+',

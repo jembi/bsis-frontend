@@ -5,7 +5,7 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, Routing
       path: '/manageTestBatches',
       subpaths: [
         '/manageTestBatch',
-        '/manageTTITesting',
+        '/recordTTIOutcomes',
         '/reEnterTTI',
         '/reEnterBloodTyping',
         '/managePendingTests',

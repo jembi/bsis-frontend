@@ -665,7 +665,7 @@ msgstr "[FR] Can be Issued"
 #: app/views/testing/manageBloodGroupTesting.html:92
 #: app/views/testing/managePendingBloodTypingTests.html:98
 #: app/views/testing/managePendingTests.html:96
-#: app/views/testing/manageTTITesting.html:92
+#: app/views/testing/recordTTIOutcomes.html:92
 #: app/views/testing/reEnterBloodTyping.html:101
 #: app/views/testing/reEnterTTI.html:101
 #: app/views/testing/manageTestBatch.html:17
@@ -1063,7 +1063,7 @@ msgstr "Créé"
 #: app/views/testing/manageBloodGroupTesting.html:8
 #: app/views/testing/managePendingBloodTypingTests.html:8
 #: app/views/testing/managePendingTests.html:10
-#: app/views/testing/manageTTITesting.html:8
+#: app/views/testing/recordTTIOutcomes.html:8
 #: app/views/testing/manageTestBatches.html:166
 #: app/views/testing/manageTestBatches.html:27
 #: app/views/testing/reEnterBloodTyping.html:8
@@ -1123,7 +1123,7 @@ msgstr "[FR] Currently Deferred"
 #: app/views/testing/manageBloodGroupTesting.html:31
 #: app/views/testing/managePendingBloodTypingTests.html:32
 #: app/views/testing/managePendingTests.html:33
-#: app/views/testing/manageTTITesting.html:31
+#: app/views/testing/recordTTIOutcomes.html:31
 #: app/views/testing/reEnterBloodTyping.html:31
 #: app/views/testing/reEnterTTI.html:31
 #: app/views/testing/viewTestSample.html:38
@@ -1559,7 +1559,7 @@ msgstr "[FR] Donation Batch Status"
 #: app/views/testing/manageBloodGroupTesting.html:39
 #: app/views/testing/managePendingBloodTypingTests.html:42
 #: app/views/testing/managePendingTests.html:41
-#: app/views/testing/manageTTITesting.html:39
+#: app/views/testing/recordTTIOutcomes.html:39
 #: app/views/testing/reEnterBloodTyping.html:39
 #: app/views/testing/reEnterTTI.html:39
 msgid "Donation Date"
@@ -2905,7 +2905,7 @@ msgstr "[FR] Number of Donations"
 #: app/views/testing/manageBloodGroupTesting.html:11
 #: app/views/testing/managePendingBloodTypingTests.html:11
 #: app/views/testing/managePendingTests.html:13
-#: app/views/testing/manageTTITesting.html:11
+#: app/views/testing/recordTTIOutcomes.html:11
 #: app/views/testing/reEnterBloodTyping.html:11
 #: app/views/testing/reEnterTTI.html:11
 #: app/views/testing/manageTestBatch.html:163
@@ -3553,7 +3553,7 @@ msgstr "[FR] Record Repeat TTI Outcomes"
 msgid "Record Return"
 msgstr "Enregistrer un Retour"
 
-#: app/views/testing/manageTTITesting.html:3
+#: app/views/testing/recordTTIOutcomes.html:3
 msgid "Record TTI Outcomes"
 msgstr "[FR] Record TTI Outcomes"
 
@@ -4036,7 +4036,7 @@ msgstr "[FR] TTI Prevalence Report"
 #: app/views/donors/donationDetails.html:73
 #: app/views/donors/mergeDonorsDonations.html:22
 #: app/views/donors/viewDonationSummary.html:235
-#: app/views/testing/manageTTITesting.html:47
+#: app/views/testing/recordTTIOutcomes.html:47
 #: app/views/testing/reEnterTTI.html:47
 #: app/views/testing/viewTestSample.html:54
 msgid "TTI Status"
