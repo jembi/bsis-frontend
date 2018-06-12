@@ -96,7 +96,7 @@ angular.module('bsis')
       });
 
       TestingService.saveTestResults({reEntry: reEntry}, testResultsArray, function() {
-        $location.path('/viewTestBatch/' + $routeParams.id);
+        $location.path('/manageTestBatch/' + $routeParams.id);
       }, function(err) {
         $log.error(err);
         $scope.savingTestResults = false;

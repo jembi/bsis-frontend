@@ -63,7 +63,7 @@ angular.module('bsis')
       });
 
       TestingService.saveBloodTypingResolutions(bloodTypingResolutionsArray, function() {
-        $location.path('/viewTestBatch/' + $routeParams.id);
+        $location.path('/manageTestBatch/' + $routeParams.id);
       }, function(err) {
         $log.error(err);
         $scope.savingTestResults = false;

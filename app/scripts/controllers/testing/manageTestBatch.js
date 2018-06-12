@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('ViewTestBatchCtrl', function($scope, $location, $log, $filter, $timeout, $routeParams, $q, $route, DONATION, uiGridConstants, gettextCatalog, TestingService, ModalsService, DATEFORMAT) {
+  .controller('ManageTestBatchCtrl', function($scope, $location, $log, $filter, $timeout, $routeParams, $q, $route, DONATION, uiGridConstants, gettextCatalog, TestingService, ModalsService, DATEFORMAT) {
 
     $scope.dateFormat = DATEFORMAT;
     $scope.today = new Date();

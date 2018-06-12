@@ -24,8 +24,8 @@ angular.module('bsis')
       $scope.search.locationId = null;
     };
 
-    $scope.viewTestBatch = function(item) {
-      $location.path('/viewTestBatch/' + item.id);
+    $scope.manageTestBatch = function(item) {
+      $location.path('/manageTestBatch/' + item.id);
     };
 
     $scope.getOpenTestBatches = function() {
