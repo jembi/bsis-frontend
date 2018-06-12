@@ -117,7 +117,7 @@ angular.module('bsis')
       '/managePendingTests/' + uuidRegexPattern + '/\\w+',
       '/recordABORhOutcomes/' + uuidRegexPattern + '/\\w+',
       '/recordRepeatABORhOutcomes/' + uuidRegexPattern + '/\\w+',
-      '/manageBloodGroupMatchTesting/' + uuidRegexPattern
+      '/resolveAmbiguousABORhOutcomes/' + uuidRegexPattern
     ];
 
     var inventoryRoutes = [

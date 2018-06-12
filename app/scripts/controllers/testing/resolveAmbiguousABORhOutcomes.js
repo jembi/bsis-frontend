@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('AmbiguousBloodTypingTestingCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams, BLOODABO, BLOODRH) {
+  .controller('ResolveAmbiguousABORhOutcomesCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams, BLOODABO, BLOODRH) {
 
     $scope.bloodAboOptions = BLOODABO;
     $scope.bloodRhOptions = BLOODRH;

@@ -11,7 +11,7 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, Routing
         '/managePendingTests',
         '/recordRepeatABORhOutcomes',
         '/recordABORhOutcomes',
-        '/manageBloodGroupMatchTesting'
+        '/resolveAmbiguousABORhOutcomes'
       ]
     }, {
       path: '/viewTestSample',

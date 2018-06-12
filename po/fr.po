@@ -472,7 +472,7 @@ msgstr ""
 msgid "Bleed times"
 msgstr "[FR] Bleed times"
 
-#: app/views/testing/manageBloodGroupMatchTesting.html:50
+#: app/views/testing/resolveAmbiguousABORhOutcomes.html:50
 msgid "Blood ABO"
 msgstr "[FR] Blood ABO"
 
@@ -532,7 +532,7 @@ msgstr "[FR] Blood Group Serology Status"
 msgid "Blood Groups"
 msgstr "Groupes Sanguins"
 
-#: app/views/testing/manageBloodGroupMatchTesting.html:53
+#: app/views/testing/resolveAmbiguousABORhOutcomes.html:53
 msgid "Blood Rh"
 msgstr "[FR] Blood Rh"
 
@@ -564,7 +564,7 @@ msgstr "[FR] Blood Type"
 msgid "Blood Typing Issues or Incomplete"
 msgstr "[FR] Blood Typing Issues or Incomplete"
 
-#: app/views/testing/manageBloodGroupMatchTesting.html:47
+#: app/views/testing/resolveAmbiguousABORhOutcomes.html:47
 #: app/views/testing/recordABORhOutcomes.html:47
 #: app/views/testing/reenterABORhOutcomes.html:47
 msgid "Blood Typing Status"
@@ -661,7 +661,7 @@ msgstr "[FR] Can be Issued"
 #: app/views/settings/manageRole.html:71
 #: app/views/settings/manageTransfusionReactionType.html:45
 #: app/views/settings/manageUser.html:154 app/views/settings/users.html:32
-#: app/views/testing/manageBloodGroupMatchTesting.html:123
+#: app/views/testing/resolveAmbiguousABORhOutcomes.html:123
 #: app/views/testing/recordABORhOutcomes.html:92
 #: app/views/testing/recordRepeatABORhOutcomes.html:98
 #: app/views/testing/managePendingTests.html:96
@@ -1059,7 +1059,7 @@ msgstr "Créé"
 #: app/scripts/controllers/inventory/viewReturn.js:45
 #: app/views/components/viewComponents.html:17
 #: app/views/components/viewDonations.html:16
-#: app/views/testing/manageBloodGroupMatchTesting.html:8
+#: app/views/testing/resolveAmbiguousABORhOutcomes.html:8
 #: app/views/testing/recordABORhOutcomes.html:8
 #: app/views/testing/recordRepeatABORhOutcomes.html:8
 #: app/views/testing/managePendingTests.html:10
@@ -1119,7 +1119,7 @@ msgstr "[FR] Currently Deferred"
 #: app/views/labelling/findSafeComponents.html:8
 #: app/views/labelling/labelComponents.html:20
 #: app/views/labelling/labelComponents.html:84
-#: app/views/testing/manageBloodGroupMatchTesting.html:31
+#: app/views/testing/resolveAmbiguousABORhOutcomes.html:31
 #: app/views/testing/recordABORhOutcomes.html:31
 #: app/views/testing/recordRepeatABORhOutcomes.html:32
 #: app/views/testing/managePendingTests.html:33
@@ -1555,7 +1555,7 @@ msgid "Donation Batch Status"
 msgstr "[FR] Donation Batch Status"
 
 #: app/scripts/controllers/mobile/donorCounselling.js:12
-#: app/views/testing/manageBloodGroupMatchTesting.html:39
+#: app/views/testing/resolveAmbiguousABORhOutcomes.html:39
 #: app/views/testing/recordABORhOutcomes.html:39
 #: app/views/testing/recordRepeatABORhOutcomes.html:42
 #: app/views/testing/managePendingTests.html:41
@@ -2737,7 +2737,7 @@ msgid "No Previous Donations"
 msgstr "[FR] No Previous Donations"
 
 #. Blood Typing Match Status
-#: app/views/testing/manageBloodGroupMatchTesting.html:59
+#: app/views/testing/resolveAmbiguousABORhOutcomes.html:59
 #: app/views/translations.html:61
 msgid "No Type Determined"
 msgstr "[FR] No Type Determined"
@@ -2901,7 +2901,7 @@ msgstr "[FR] Number of Blood Transport Boxes"
 msgid "Number of Donations"
 msgstr "[FR] Number of Donations"
 
-#: app/views/testing/manageBloodGroupMatchTesting.html:11
+#: app/views/testing/resolveAmbiguousABORhOutcomes.html:11
 #: app/views/testing/recordABORhOutcomes.html:11
 #: app/views/testing/recordRepeatABORhOutcomes.html:11
 #: app/views/testing/managePendingTests.html:13
@@ -3656,11 +3656,11 @@ msgstr "[FR] Reset password"
 msgid "Resetting..."
 msgstr "[FR] Resetting..."
 
-#: app/views/testing/manageBloodGroupMatchTesting.html:56
+#: app/views/testing/resolveAmbiguousABORhOutcomes.html:56
 msgid "Resolve"
 msgstr "[FR] Resolve"
 
-#: app/views/testing/manageBloodGroupMatchTesting.html:3
+#: app/views/testing/resolveAmbiguousABORhOutcomes.html:3
 #: app/views/testing/manageTestBatch.html:124
 msgid "Resolve Ambiguous ABO/Rh Outcomes"
 msgstr "[FR] Resolve Ambiguous ABO/Rh Outcomes"
