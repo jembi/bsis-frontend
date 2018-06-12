@@ -566,7 +566,7 @@ msgstr "[FR] Blood Typing Issues or Incomplete"
 
 #: app/views/testing/manageBloodGroupMatchTesting.html:47
 #: app/views/testing/recordABORhOutcomes.html:47
-#: app/views/testing/reEnterBloodTyping.html:47
+#: app/views/testing/reenterABORhOutcomes.html:47
 msgid "Blood Typing Status"
 msgstr "[FR] Blood Typing Status"
 
@@ -666,7 +666,7 @@ msgstr "[FR] Can be Issued"
 #: app/views/testing/managePendingBloodTypingTests.html:98
 #: app/views/testing/managePendingTests.html:96
 #: app/views/testing/recordTTIOutcomes.html:92
-#: app/views/testing/reEnterBloodTyping.html:101
+#: app/views/testing/reenterABORhOutcomes.html:101
 #: app/views/testing/reenterTTIOutcomes.html:101
 #: app/views/testing/manageTestBatch.html:17
 #: app/views/testing/manageTestBatch.html:34
@@ -1066,7 +1066,7 @@ msgstr "Créé"
 #: app/views/testing/recordTTIOutcomes.html:8
 #: app/views/testing/manageTestBatches.html:166
 #: app/views/testing/manageTestBatches.html:27
-#: app/views/testing/reEnterBloodTyping.html:8
+#: app/views/testing/reenterABORhOutcomes.html:8
 #: app/views/testing/reenterTTIOutcomes.html:8
 #: app/views/testing/manageTestBatch.html:137
 msgid "Created On"
@@ -1124,7 +1124,7 @@ msgstr "[FR] Currently Deferred"
 #: app/views/testing/managePendingBloodTypingTests.html:32
 #: app/views/testing/managePendingTests.html:33
 #: app/views/testing/recordTTIOutcomes.html:31
-#: app/views/testing/reEnterBloodTyping.html:31
+#: app/views/testing/reenterABORhOutcomes.html:31
 #: app/views/testing/reenterTTIOutcomes.html:31
 #: app/views/testing/viewTestSample.html:38
 #: app/views/testing/viewTestSample.html:7
@@ -1560,7 +1560,7 @@ msgstr "[FR] Donation Batch Status"
 #: app/views/testing/managePendingBloodTypingTests.html:42
 #: app/views/testing/managePendingTests.html:41
 #: app/views/testing/recordTTIOutcomes.html:39
-#: app/views/testing/reEnterBloodTyping.html:39
+#: app/views/testing/reenterABORhOutcomes.html:39
 #: app/views/testing/reenterTTIOutcomes.html:39
 msgid "Donation Date"
 msgstr "[FR] Donation Date"
@@ -2906,7 +2906,7 @@ msgstr "[FR] Number of Donations"
 #: app/views/testing/managePendingBloodTypingTests.html:11
 #: app/views/testing/managePendingTests.html:13
 #: app/views/testing/recordTTIOutcomes.html:11
-#: app/views/testing/reEnterBloodTyping.html:11
+#: app/views/testing/reenterABORhOutcomes.html:11
 #: app/views/testing/reenterTTIOutcomes.html:11
 #: app/views/testing/manageTestBatch.html:163
 msgid "Number of Samples"
@@ -3269,7 +3269,7 @@ msgstr "[FR] Please enter a value below {{maxValue}}"
 msgid "Please provide valid inputs"
 msgstr "[FR] Please provide valid inputs"
 
-#: app/views/testing/reEnterBloodTyping.html:21
+#: app/views/testing/reenterABORhOutcomes.html:21
 #: app/views/testing/reenterTTIOutcomes.html:21
 msgid ""
 "Please resolve all discrepancies between initial and re-rentered outcomes "
@@ -3479,7 +3479,7 @@ msgstr "[FR] Rank in Category"
 msgid "Re-Enter"
 msgstr "[FR] Re-Enter"
 
-#: app/views/testing/reEnterBloodTyping.html:3
+#: app/views/testing/reenterABORhOutcomes.html:3
 msgid "Re-Enter ABO/Rh Outcomes"
 msgstr "[FR] Re-Enter ABO/Rh Outcomes"
 
