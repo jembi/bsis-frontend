@@ -114,7 +114,7 @@ angular.module('bsis')
       '/recordTTIOutcomes/' + uuidRegexPattern + '/\\w+',
       '/reenterTTIOutcomes/' + uuidRegexPattern + '/\\w+',
       '/reenterABORhOutcomes/' + uuidRegexPattern + '/\\w+',
-      '/managePendingTests/' + uuidRegexPattern + '/\\w+',
+      '/recordRepeatTTIOutcomes/' + uuidRegexPattern + '/\\w+',
       '/recordABORhOutcomes/' + uuidRegexPattern + '/\\w+',
       '/recordRepeatABORhOutcomes/' + uuidRegexPattern + '/\\w+',
       '/resolveAmbiguousABORhOutcomes/' + uuidRegexPattern

@@ -664,7 +664,7 @@ msgstr "[FR] Can be Issued"
 #: app/views/testing/resolveAmbiguousABORhOutcomes.html:123
 #: app/views/testing/recordABORhOutcomes.html:92
 #: app/views/testing/recordRepeatABORhOutcomes.html:98
-#: app/views/testing/managePendingTests.html:96
+#: app/views/testing/recordRepeatTTIOutcomes.html:96
 #: app/views/testing/recordTTIOutcomes.html:92
 #: app/views/testing/reenterABORhOutcomes.html:101
 #: app/views/testing/reenterTTIOutcomes.html:101
@@ -1062,7 +1062,7 @@ msgstr "Créé"
 #: app/views/testing/resolveAmbiguousABORhOutcomes.html:8
 #: app/views/testing/recordABORhOutcomes.html:8
 #: app/views/testing/recordRepeatABORhOutcomes.html:8
-#: app/views/testing/managePendingTests.html:10
+#: app/views/testing/recordRepeatTTIOutcomes.html:10
 #: app/views/testing/recordTTIOutcomes.html:8
 #: app/views/testing/manageTestBatches.html:166
 #: app/views/testing/manageTestBatches.html:27
@@ -1122,7 +1122,7 @@ msgstr "[FR] Currently Deferred"
 #: app/views/testing/resolveAmbiguousABORhOutcomes.html:31
 #: app/views/testing/recordABORhOutcomes.html:31
 #: app/views/testing/recordRepeatABORhOutcomes.html:32
-#: app/views/testing/managePendingTests.html:33
+#: app/views/testing/recordRepeatTTIOutcomes.html:33
 #: app/views/testing/recordTTIOutcomes.html:31
 #: app/views/testing/reenterABORhOutcomes.html:31
 #: app/views/testing/reenterTTIOutcomes.html:31
@@ -1558,7 +1558,7 @@ msgstr "[FR] Donation Batch Status"
 #: app/views/testing/resolveAmbiguousABORhOutcomes.html:39
 #: app/views/testing/recordABORhOutcomes.html:39
 #: app/views/testing/recordRepeatABORhOutcomes.html:42
-#: app/views/testing/managePendingTests.html:41
+#: app/views/testing/recordRepeatTTIOutcomes.html:41
 #: app/views/testing/recordTTIOutcomes.html:39
 #: app/views/testing/reenterABORhOutcomes.html:39
 #: app/views/testing/reenterTTIOutcomes.html:39
@@ -2904,7 +2904,7 @@ msgstr "[FR] Number of Donations"
 #: app/views/testing/resolveAmbiguousABORhOutcomes.html:11
 #: app/views/testing/recordABORhOutcomes.html:11
 #: app/views/testing/recordRepeatABORhOutcomes.html:11
-#: app/views/testing/managePendingTests.html:13
+#: app/views/testing/recordRepeatTTIOutcomes.html:13
 #: app/views/testing/recordTTIOutcomes.html:11
 #: app/views/testing/reenterABORhOutcomes.html:11
 #: app/views/testing/reenterTTIOutcomes.html:11
@@ -3537,7 +3537,7 @@ msgstr "[FR] Record Blood Group Serology Outcomes"
 msgid "Record Components"
 msgstr "[FR] Record Components"
 
-#: app/views/testing/managePendingTests.html:5
+#: app/views/testing/recordRepeatTTIOutcomes.html:5
 msgid "Record Confirmatory TTI Outcomes"
 msgstr "[FR] Record Confirmatory TTI Outcomes"
 
@@ -3545,7 +3545,7 @@ msgstr "[FR] Record Confirmatory TTI Outcomes"
 msgid "Record Repeat ABO/Rh Outcomes"
 msgstr "[FR] Record Repeat ABO/Rh Outcomes"
 
-#: app/views/testing/managePendingTests.html:4
+#: app/views/testing/recordRepeatTTIOutcomes.html:4
 msgid "Record Repeat TTI Outcomes"
 msgstr "[FR] Record Repeat TTI Outcomes"
 

@@ -8,7 +8,7 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, Routing
         '/recordTTIOutcomes',
         '/reenterTTIOutcomes',
         '/reenterABORhOutcomes',
-        '/managePendingTests',
+        '/recordRepeatTTIOutcomes',
         '/recordRepeatABORhOutcomes',
         '/recordABORhOutcomes',
         '/resolveAmbiguousABORhOutcomes'
