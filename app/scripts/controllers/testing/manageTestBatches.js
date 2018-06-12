@@ -1,5 +1,5 @@
 angular.module('bsis')
-  .controller('TestBatchCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS) {
+  .controller('ManageTestBatchesCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS) {
 
     $scope.icons = ICONS;
     $scope.today = new Date();

@@ -417,7 +417,7 @@ angular.module('bsis')
       ModalsService.showConfirmation(confirmation).then(function() {
 
         TestingService.closeTestBatch(testBatch, function() {
-          $location.path('/manageTestBatch');
+          $location.path('/manageTestBatches');
         }, function(err) {
           $log.error(err);
         });
@@ -457,7 +457,7 @@ angular.module('bsis')
       ModalsService.showConfirmation(confirmation).then(function() {
 
         TestingService.deleteTestBatch(testBatchId, function() {
-          $location.path('/manageTestBatch');
+          $location.path('/manageTestBatches');
         }, function(err) {
           $scope.err = err;
           $log.error(err);

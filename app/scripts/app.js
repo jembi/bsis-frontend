@@ -184,7 +184,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // TESTING URLs
       .when('/testing', {
-        redirectTo: '/manageTestBatch',
+        redirectTo: '/manageTestBatches',
         permission: PERMISSIONS.VIEW_TESTING_INFORMATION,
         enabled: UI.TESTING_TAB_ENABLED
       })
@@ -195,9 +195,9 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         enabled: UI.TESTING_TAB_ENABLED,
         reloadOnSearch: false
       })
-      .when('/manageTestBatch', {
-        templateUrl: 'views/testing/manageTestBatch.html',
-        controller: 'TestBatchCtrl',
+      .when('/manageTestBatches', {
+        templateUrl: 'views/testing/manageTestBatches.html',
+        controller: 'ManageTestBatchesCtrl',
         permission: PERMISSIONS.VIEW_TEST_BATCH,
         enabled: UI.TESTING_TAB_ENABLED
       })
@@ -729,7 +729,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       if ($location.path() === '/testing') {
         // Initial routing for testing page
         if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_BATCH) !== -1) {
-          $location.path('/manageTestBatch');
+          $location.path('/manageTestBatches');
         } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_OUTCOME) !== -1) {
           $location.path('/viewTestSample');
         } else {

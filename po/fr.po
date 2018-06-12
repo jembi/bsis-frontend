@@ -265,7 +265,7 @@ msgstr "[FR] Age"
 #: app/views/reports/donorsAdverseEventsReport.html:17
 #: app/views/reports/transfusionsReport.html:17
 #: app/views/reports/unitsDiscardedReport.html:17
-#: app/views/testing/manageTestBatch.html:141
+#: app/views/testing/manageTestBatches.html:141
 msgid "All"
 msgstr "Tous"
 
@@ -730,8 +730,8 @@ msgstr "[FR] Check Components to Print Pack and Discard Labels"
 #: app/views/reports/ttiPrevalenceReport.html:31
 #: app/views/reports/unitsDiscardedReport.html:51
 #: app/views/settings/divisions.html:38 app/views/settings/locations.html:38
-#: app/views/testing/manageTestBatch.html:151
-#: app/views/testing/manageTestBatch.html:96
+#: app/views/testing/manageTestBatches.html:151
+#: app/views/testing/manageTestBatches.html:96
 #: app/views/testing/viewTestBatch.html:234
 #: app/views/testing/viewTestSample.html:26
 msgid "Clear"
@@ -756,12 +756,12 @@ msgstr "[FR] Close Batch"
 #: app/scripts/controllers/components/viewComponentBatch.js:5
 #: app/scripts/controllers/donors/viewDonationBatch.js:89
 #: app/views/donors/manageDonationBatches.html:167
-#: app/views/testing/manageTestBatch.html:169 app/views/translations.html:75
+#: app/views/testing/manageTestBatches.html:169 app/views/translations.html:75
 msgid "Closed"
 msgstr "[FR] Closed"
 
 #: app/views/donors/manageDonationBatches.html:107
-#: app/views/testing/manageTestBatch.html:111
+#: app/views/testing/manageTestBatches.html:111
 msgid "Closed Batches"
 msgstr "[FR] Closed Batches"
 
@@ -1064,8 +1064,8 @@ msgstr "Créé"
 #: app/views/testing/managePendingBloodTypingTests.html:8
 #: app/views/testing/managePendingTests.html:10
 #: app/views/testing/manageTTITesting.html:8
-#: app/views/testing/manageTestBatch.html:166
-#: app/views/testing/manageTestBatch.html:27
+#: app/views/testing/manageTestBatches.html:166
+#: app/views/testing/manageTestBatches.html:27
 #: app/views/testing/reEnterBloodTyping.html:8
 #: app/views/testing/reEnterTTI.html:8
 #: app/views/testing/viewTestBatch.html:137
@@ -1218,7 +1218,7 @@ msgstr "Exportation de Données"
 #: app/views/donors/mergeDonorsDonations.html:13
 #: app/views/donors/viewDonations.html:29 app/views/donors/viewDonor.html:208
 #: app/views/settings/auditLog.html:19
-#: app/views/testing/manageTestBatch.html:76
+#: app/views/testing/manageTestBatches.html:76
 #: app/views/testing/viewTestSample.html:44
 msgid "Date"
 msgstr "[FR] Date"
@@ -1286,7 +1286,7 @@ msgid "Date must be after component was created"
 msgstr "La date doit être après la création du composant"
 
 #: app/views/donors/manageDonationBatches.html:83
-#: app/views/testing/manageTestBatch.html:83
+#: app/views/testing/manageTestBatches.html:83
 msgid "Date must be today or before"
 msgstr "[FR] Date must be today or before"
 
@@ -2277,10 +2277,10 @@ msgstr "[FR] Loading details failed. Please try refreshing"
 #: app/scripts/controllers/inventory/findInventory.js:66
 #: app/views/components/viewComponentBatch.html:32
 #: app/views/components/viewDonations.html:28
-#: app/views/testing/manageTestBatch.html:134
-#: app/views/testing/manageTestBatch.html:178
-#: app/views/testing/manageTestBatch.html:39
-#: app/views/testing/manageTestBatch.html:63
+#: app/views/testing/manageTestBatches.html:134
+#: app/views/testing/manageTestBatches.html:178
+#: app/views/testing/manageTestBatches.html:39
+#: app/views/testing/manageTestBatches.html:63
 #: app/views/testing/viewTestBatch.html:146
 msgid "Location"
 msgstr "Emplacement"
@@ -2508,7 +2508,7 @@ msgstr "[FR] Manage TTI and Blood Group Serology Testing"
 msgid "Manage Test Batch"
 msgstr "[FR] Manage Test Batch"
 
-#: app/views/testing/manageTestBatch.html:3 app/views/testing/sidebar.html:13
+#: app/views/testing/manageTestBatches.html:3 app/views/testing/sidebar.html:13
 msgid "Manage Test Batches"
 msgstr "[FR] Manage Test Batches"
 
@@ -2694,7 +2694,7 @@ msgstr "[FR] New Donation Batch"
 msgid "New Password"
 msgstr "[FR] New Password"
 
-#: app/views/testing/manageTestBatch.html:57
+#: app/views/testing/manageTestBatches.html:57
 msgid "New Test Batch"
 msgstr "[FR] New Test Batch"
 
@@ -2746,7 +2746,7 @@ msgstr "[FR] No Type Determined"
 msgid "No closed donation batches"
 msgstr "[FR] No closed donation batches"
 
-#: app/views/testing/manageTestBatch.html:191
+#: app/views/testing/manageTestBatches.html:191
 msgid "No closed test batches."
 msgstr "[FR] No closed test batches"
 
@@ -2789,7 +2789,7 @@ msgstr "[FR] No duplicate donors found"
 msgid "No open donation batches"
 msgstr "[FR] No open donation batches"
 
-#: app/views/testing/manageTestBatch.html:51
+#: app/views/testing/manageTestBatches.html:51
 msgid "No open test batches."
 msgstr "[FR] No open test batches."
 
@@ -2970,7 +2970,7 @@ msgid "Open"
 msgstr "[FR] Open"
 
 #: app/views/donors/manageDonationBatches.html:11
-#: app/views/testing/manageTestBatch.html:12
+#: app/views/testing/manageTestBatches.html:12
 msgid "Open Batches"
 msgstr "[FR] Open Batches"
 
@@ -3199,7 +3199,7 @@ msgstr "[FR] Pending: blood group serology repeat test outcomes."
 #: app/views/reports/transfusionsReport.html:29
 #: app/views/reports/ttiPrevalenceReport.html:9
 #: app/views/reports/unitsDiscardedReport.html:29
-#: app/views/testing/manageTestBatch.html:115
+#: app/views/testing/manageTestBatches.html:115
 msgid "Period"
 msgstr "Période"
 
@@ -3823,7 +3823,7 @@ msgstr "Recherche en cours..."
 #: app/views/mobile/mobileClinicExport.html:15
 #: app/views/settings/manageConfiguration.html:56
 #: app/views/settings/managePackType.html:58
-#: app/views/testing/manageTestBatch.html:66
+#: app/views/testing/manageTestBatches.html:66
 msgid "Select"
 msgstr "Sélectionner"
 
@@ -3843,7 +3843,7 @@ msgstr "[FR] Select a component to process"
 #: app/views/inventory/viewOrders.html:32
 #: app/views/inventory/viewReturns.html:32
 #: app/views/labelling/findSafeComponents.html:96
-#: app/views/testing/manageTestBatch.html:123
+#: app/views/testing/manageTestBatches.html:123
 msgid "Select a date range that is less than one month"
 msgstr "Sélectionnez une plage de dates inférieure à un mois"
 
@@ -3892,8 +3892,8 @@ msgstr "[FR] Select a processing site"
 #: app/views/reports/ttiPrevalenceReport.html:20
 #: app/views/reports/unitsDiscardedReport.html:36
 #: app/views/reports/unitsDiscardedReport.html:40
-#: app/views/testing/manageTestBatch.html:122
-#: app/views/testing/manageTestBatch.html:127
+#: app/views/testing/manageTestBatches.html:122
+#: app/views/testing/manageTestBatches.html:127
 msgid "Select a valid date"
 msgstr "Sélectionner une date valide"
 
@@ -3987,8 +3987,8 @@ msgstr "La date de début doit preceder la date de fin"
 #: app/views/components/viewComponentBatch.html:25
 #: app/views/components/viewComponents.html:16
 #: app/views/components/viewDonations.html:22
-#: app/views/testing/manageTestBatch.html:175
-#: app/views/testing/manageTestBatch.html:35
+#: app/views/testing/manageTestBatches.html:175
+#: app/views/testing/manageTestBatches.html:35
 msgid "Status"
 msgstr "Statut"
 
@@ -4094,8 +4094,8 @@ msgstr "[FR] Test Outcome"
 msgid "Test Sample Produced"
 msgstr "[FR] Test Sample Produced"
 
-#: app/views/testing/manageTestBatch.html:172
-#: app/views/testing/manageTestBatch.html:31
+#: app/views/testing/manageTestBatches.html:172
+#: app/views/testing/manageTestBatches.html:31
 msgid "Test Samples"
 msgstr "[FR] Test Samples"
 
@@ -4248,7 +4248,7 @@ msgstr ""
 #: app/views/settings/manageLocation.html:92
 #: app/views/settings/manageUser.html:26 app/views/settings/manageUser.html:68
 #: app/views/settings/manageUser.html:97
-#: app/views/testing/manageTestBatch.html:82
+#: app/views/testing/manageTestBatches.html:82
 msgid "This cannot be empty"
 msgstr "Ce champ ne peut pas être vide"
 
@@ -4372,7 +4372,7 @@ msgstr "[FR] Title"
 #: app/views/reports/ttiPrevalenceReport.html:12
 #: app/views/reports/unitsDiscardedReport.html:32
 #: app/views/settings/auditLog.html:13
-#: app/views/testing/manageTestBatch.html:118
+#: app/views/testing/manageTestBatches.html:118
 msgid "To"
 msgstr "à"
 

@@ -109,7 +109,7 @@ angular.module('bsis')
     var testingRoutes = [
       '/testing',
       '/viewTestSample',
-      '/manageTestBatch',
+      '/manageTestBatches',
       '/viewTestBatch/' + uuidRegexPattern,
       '/manageTTITesting/' + uuidRegexPattern + '/\\w+',
       '/reEnterTTI/' + uuidRegexPattern + '/\\w+',
