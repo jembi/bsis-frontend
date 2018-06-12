@@ -116,7 +116,7 @@ angular.module('bsis')
       '/reenterABORhOutcomes/' + uuidRegexPattern + '/\\w+',
       '/managePendingTests/' + uuidRegexPattern + '/\\w+',
       '/recordABORhOutcomes/' + uuidRegexPattern + '/\\w+',
-      '/managePendingBloodTypingTests/' + uuidRegexPattern + '/\\w+',
+      '/recordRepeatABORhOutcomes/' + uuidRegexPattern + '/\\w+',
       '/manageBloodGroupMatchTesting/' + uuidRegexPattern
     ];
 

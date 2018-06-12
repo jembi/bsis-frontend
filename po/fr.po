@@ -520,7 +520,7 @@ msgstr "[FR] Blood Group Serology Outcomes"
 
 #: app/views/donors/donationDetails.html:75
 #: app/views/donors/viewDonationSummary.html:237
-#: app/views/testing/managePendingBloodTypingTests.html:52
+#: app/views/testing/recordRepeatABORhOutcomes.html:52
 #: app/views/testing/viewTestSample.html:56
 msgid "Blood Group Serology Status"
 msgstr "[FR] Blood Group Serology Status"
@@ -663,7 +663,7 @@ msgstr "[FR] Can be Issued"
 #: app/views/settings/manageUser.html:154 app/views/settings/users.html:32
 #: app/views/testing/manageBloodGroupMatchTesting.html:123
 #: app/views/testing/recordABORhOutcomes.html:92
-#: app/views/testing/managePendingBloodTypingTests.html:98
+#: app/views/testing/recordRepeatABORhOutcomes.html:98
 #: app/views/testing/managePendingTests.html:96
 #: app/views/testing/recordTTIOutcomes.html:92
 #: app/views/testing/reenterABORhOutcomes.html:101
@@ -1061,7 +1061,7 @@ msgstr "Créé"
 #: app/views/components/viewDonations.html:16
 #: app/views/testing/manageBloodGroupMatchTesting.html:8
 #: app/views/testing/recordABORhOutcomes.html:8
-#: app/views/testing/managePendingBloodTypingTests.html:8
+#: app/views/testing/recordRepeatABORhOutcomes.html:8
 #: app/views/testing/managePendingTests.html:10
 #: app/views/testing/recordTTIOutcomes.html:8
 #: app/views/testing/manageTestBatches.html:166
@@ -1121,7 +1121,7 @@ msgstr "[FR] Currently Deferred"
 #: app/views/labelling/labelComponents.html:84
 #: app/views/testing/manageBloodGroupMatchTesting.html:31
 #: app/views/testing/recordABORhOutcomes.html:31
-#: app/views/testing/managePendingBloodTypingTests.html:32
+#: app/views/testing/recordRepeatABORhOutcomes.html:32
 #: app/views/testing/managePendingTests.html:33
 #: app/views/testing/recordTTIOutcomes.html:31
 #: app/views/testing/reenterABORhOutcomes.html:31
@@ -1557,7 +1557,7 @@ msgstr "[FR] Donation Batch Status"
 #: app/scripts/controllers/mobile/donorCounselling.js:12
 #: app/views/testing/manageBloodGroupMatchTesting.html:39
 #: app/views/testing/recordABORhOutcomes.html:39
-#: app/views/testing/managePendingBloodTypingTests.html:42
+#: app/views/testing/recordRepeatABORhOutcomes.html:42
 #: app/views/testing/managePendingTests.html:41
 #: app/views/testing/recordTTIOutcomes.html:39
 #: app/views/testing/reenterABORhOutcomes.html:39
@@ -2903,7 +2903,7 @@ msgstr "[FR] Number of Donations"
 
 #: app/views/testing/manageBloodGroupMatchTesting.html:11
 #: app/views/testing/recordABORhOutcomes.html:11
-#: app/views/testing/managePendingBloodTypingTests.html:11
+#: app/views/testing/recordRepeatABORhOutcomes.html:11
 #: app/views/testing/managePendingTests.html:13
 #: app/views/testing/recordTTIOutcomes.html:11
 #: app/views/testing/reenterABORhOutcomes.html:11
@@ -3541,7 +3541,7 @@ msgstr "[FR] Record Components"
 msgid "Record Confirmatory TTI Outcomes"
 msgstr "[FR] Record Confirmatory TTI Outcomes"
 
-#: app/views/testing/managePendingBloodTypingTests.html:3
+#: app/views/testing/recordRepeatABORhOutcomes.html:3
 msgid "Record Repeat ABO/Rh Outcomes"
 msgstr "[FR] Record Repeat ABO/Rh Outcomes"
 

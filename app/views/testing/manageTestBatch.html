@@ -95,9 +95,9 @@
           <span has-permission="{{permissions.ADD_BLOOD_TYPING_OUTCOME}}" ng-hide="testBatch.status=='CLOSED'">
             <small>
               <em><span translate>Repeat ABO/Rh Outcomes</span>:
-                <a ng-href="#/managePendingBloodTypingTests/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!hasRepeatBloodTypingTests" translate>Enter</a>
+                <a ng-href="#/recordRepeatABORhOutcomes/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!hasRepeatBloodTypingTests" translate>Enter</a>
                 &nbsp;|&nbsp;
-                <a ng-href="#/reEnterBloodTyping/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!hasReEntryRequiredRepeatBloodTypingTests" translate>Re-Enter</a>
+                <a ng-href="#/reenterABORhOutcomes/{{testBatch.id}}/REPEAT_BLOODTYPING" ng-disabled="!hasReEntryRequiredRepeatBloodTypingTests" translate>Re-Enter</a>
               </em>
             </small>
           </span>
