@@ -667,7 +667,7 @@ msgstr "[FR] Can be Issued"
 #: app/views/testing/managePendingTests.html:96
 #: app/views/testing/recordTTIOutcomes.html:92
 #: app/views/testing/reEnterBloodTyping.html:101
-#: app/views/testing/reEnterTTI.html:101
+#: app/views/testing/reenterTTIOutcomes.html:101
 #: app/views/testing/manageTestBatch.html:17
 #: app/views/testing/manageTestBatch.html:34
 msgid "Cancel"
@@ -1067,7 +1067,7 @@ msgstr "Créé"
 #: app/views/testing/manageTestBatches.html:166
 #: app/views/testing/manageTestBatches.html:27
 #: app/views/testing/reEnterBloodTyping.html:8
-#: app/views/testing/reEnterTTI.html:8
+#: app/views/testing/reenterTTIOutcomes.html:8
 #: app/views/testing/manageTestBatch.html:137
 msgid "Created On"
 msgstr "Date de création"
@@ -1125,7 +1125,7 @@ msgstr "[FR] Currently Deferred"
 #: app/views/testing/managePendingTests.html:33
 #: app/views/testing/recordTTIOutcomes.html:31
 #: app/views/testing/reEnterBloodTyping.html:31
-#: app/views/testing/reEnterTTI.html:31
+#: app/views/testing/reenterTTIOutcomes.html:31
 #: app/views/testing/viewTestSample.html:38
 #: app/views/testing/viewTestSample.html:7
 msgid "DIN"
@@ -1561,7 +1561,7 @@ msgstr "[FR] Donation Batch Status"
 #: app/views/testing/managePendingTests.html:41
 #: app/views/testing/recordTTIOutcomes.html:39
 #: app/views/testing/reEnterBloodTyping.html:39
-#: app/views/testing/reEnterTTI.html:39
+#: app/views/testing/reenterTTIOutcomes.html:39
 msgid "Donation Date"
 msgstr "[FR] Donation Date"
 
@@ -2907,7 +2907,7 @@ msgstr "[FR] Number of Donations"
 #: app/views/testing/managePendingTests.html:13
 #: app/views/testing/recordTTIOutcomes.html:11
 #: app/views/testing/reEnterBloodTyping.html:11
-#: app/views/testing/reEnterTTI.html:11
+#: app/views/testing/reenterTTIOutcomes.html:11
 #: app/views/testing/manageTestBatch.html:163
 msgid "Number of Samples"
 msgstr "[FR] Number of Samples"
@@ -3270,7 +3270,7 @@ msgid "Please provide valid inputs"
 msgstr "[FR] Please provide valid inputs"
 
 #: app/views/testing/reEnterBloodTyping.html:21
-#: app/views/testing/reEnterTTI.html:21
+#: app/views/testing/reenterTTIOutcomes.html:21
 msgid ""
 "Please resolve all discrepancies between initial and re-rentered outcomes "
 "before saving the form."
@@ -3483,7 +3483,7 @@ msgstr "[FR] Re-Enter"
 msgid "Re-Enter ABO/Rh Outcomes"
 msgstr "[FR] Re-Enter ABO/Rh Outcomes"
 
-#: app/views/testing/reEnterTTI.html:3
+#: app/views/testing/reenterTTIOutcomes.html:3
 msgid "Re-Enter TTI Outcomes"
 msgstr "[FR] Re-Enter TTI Outcomes"
 
@@ -4037,7 +4037,7 @@ msgstr "[FR] TTI Prevalence Report"
 #: app/views/donors/mergeDonorsDonations.html:22
 #: app/views/donors/viewDonationSummary.html:235
 #: app/views/testing/recordTTIOutcomes.html:47
-#: app/views/testing/reEnterTTI.html:47
+#: app/views/testing/reenterTTIOutcomes.html:47
 #: app/views/testing/viewTestSample.html:54
 msgid "TTI Status"
 msgstr "[FR] TTI Status"

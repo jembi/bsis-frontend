@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('TestsReEnterCtrl', function($scope, $location, $log, TestingService, $uibModal, $sce, $filter, ngTableParams, $timeout, $routeParams, gettextCatalog) {
+  .controller('ReenterTestOutcomesCtrl', function($scope, $location, $log, TestingService, $uibModal, $sce, $filter, ngTableParams, $timeout, $routeParams, gettextCatalog) {
 
     $scope.data = [];
 
