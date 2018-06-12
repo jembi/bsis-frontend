@@ -565,7 +565,7 @@ msgid "Blood Typing Issues or Incomplete"
 msgstr "[FR] Blood Typing Issues or Incomplete"
 
 #: app/views/testing/manageBloodGroupMatchTesting.html:47
-#: app/views/testing/manageBloodGroupTesting.html:47
+#: app/views/testing/recordABORhOutcomes.html:47
 #: app/views/testing/reEnterBloodTyping.html:47
 msgid "Blood Typing Status"
 msgstr "[FR] Blood Typing Status"
@@ -662,7 +662,7 @@ msgstr "[FR] Can be Issued"
 #: app/views/settings/manageTransfusionReactionType.html:45
 #: app/views/settings/manageUser.html:154 app/views/settings/users.html:32
 #: app/views/testing/manageBloodGroupMatchTesting.html:123
-#: app/views/testing/manageBloodGroupTesting.html:92
+#: app/views/testing/recordABORhOutcomes.html:92
 #: app/views/testing/managePendingBloodTypingTests.html:98
 #: app/views/testing/managePendingTests.html:96
 #: app/views/testing/recordTTIOutcomes.html:92
@@ -1060,7 +1060,7 @@ msgstr "Créé"
 #: app/views/components/viewComponents.html:17
 #: app/views/components/viewDonations.html:16
 #: app/views/testing/manageBloodGroupMatchTesting.html:8
-#: app/views/testing/manageBloodGroupTesting.html:8
+#: app/views/testing/recordABORhOutcomes.html:8
 #: app/views/testing/managePendingBloodTypingTests.html:8
 #: app/views/testing/managePendingTests.html:10
 #: app/views/testing/recordTTIOutcomes.html:8
@@ -1120,7 +1120,7 @@ msgstr "[FR] Currently Deferred"
 #: app/views/labelling/labelComponents.html:20
 #: app/views/labelling/labelComponents.html:84
 #: app/views/testing/manageBloodGroupMatchTesting.html:31
-#: app/views/testing/manageBloodGroupTesting.html:31
+#: app/views/testing/recordABORhOutcomes.html:31
 #: app/views/testing/managePendingBloodTypingTests.html:32
 #: app/views/testing/managePendingTests.html:33
 #: app/views/testing/recordTTIOutcomes.html:31
@@ -1556,7 +1556,7 @@ msgstr "[FR] Donation Batch Status"
 
 #: app/scripts/controllers/mobile/donorCounselling.js:12
 #: app/views/testing/manageBloodGroupMatchTesting.html:39
-#: app/views/testing/manageBloodGroupTesting.html:39
+#: app/views/testing/recordABORhOutcomes.html:39
 #: app/views/testing/managePendingBloodTypingTests.html:42
 #: app/views/testing/managePendingTests.html:41
 #: app/views/testing/recordTTIOutcomes.html:39
@@ -2902,7 +2902,7 @@ msgid "Number of Donations"
 msgstr "[FR] Number of Donations"
 
 #: app/views/testing/manageBloodGroupMatchTesting.html:11
-#: app/views/testing/manageBloodGroupTesting.html:11
+#: app/views/testing/recordABORhOutcomes.html:11
 #: app/views/testing/managePendingBloodTypingTests.html:11
 #: app/views/testing/managePendingTests.html:13
 #: app/views/testing/recordTTIOutcomes.html:11
@@ -3528,7 +3528,7 @@ msgstr "[FR] Receive Components"
 msgid "Received Counselling"
 msgstr "[FR] Received Counselling"
 
-#: app/views/testing/manageBloodGroupTesting.html:3
+#: app/views/testing/recordABORhOutcomes.html:3
 msgid "Record Blood Group Serology Outcomes"
 msgstr "[FR] Record Blood Group Serology Outcomes"
 

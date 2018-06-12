@@ -10,7 +10,7 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, Routing
         '/reEnterBloodTyping',
         '/managePendingTests',
         '/managePendingBloodTypingTests',
-        '/manageBloodGroupTesting',
+        '/recordABORhOutcomes',
         '/manageBloodGroupMatchTesting'
       ]
     }, {

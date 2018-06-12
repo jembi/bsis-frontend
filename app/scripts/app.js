@@ -231,8 +231,8 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/manageBloodGroupTesting/:id/:bloodTestType', {
-        templateUrl: 'views/testing/manageBloodGroupTesting.html',
+      .when('/recordABORhOutcomes/:id/:bloodTestType', {
+        templateUrl: 'views/testing/recordABORhOutcomes.html',
         controller: 'RecordTestOutcomesCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
