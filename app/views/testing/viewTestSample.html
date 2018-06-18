@@ -28,32 +28,32 @@
       </div>
   </form>
 
-  <div ng-show="viewTestSampleForm.$submitted && !searching && !viewTestSampleForm.$invalid" ng-switch="donation != null" class="col-sm-12">
+  <div ng-show="viewTestSampleForm.$submitted && !searching && !viewTestSampleForm.$invalid" ng-switch="testSample != null" class="col-sm-12">
       <div style="padding-bottom: 10px"></div>
       <div ng-switch-when="true">
           <div class="panel panel-default">
               <div class="panel-body">
 
                   <span class="h3">
-                    <small><em><span translate>DIN</span>:</em></small> {{donation.donationIdentificationNumber}}
+                    <small><em><span translate>DIN</span>:</em></small> {{testSample.din}}
                   </span>
                   <span class="h4">
                     &nbsp;|&nbsp;
-                    <small><em><span translate>Venue</span>:</em></small> {{donation.venue.name}}
+                    <small><em><span translate>Venue</span>:</em></small> {{testSample.venue}}
                     &nbsp;|&nbsp;
-                    <small><em><span translate>Date</span>: </em></small> {{donation.donationDate | bsisDate}}
+                    <small><em><span translate>Date</span>: </em></small> {{testSample.donationDate | bsisDate}}
                     &nbsp;|&nbsp;
                     <small><em><span translate>Blood Group</span>:</em></small>
-                    <span ng-if="donation.bloodGroup !== ''">{{donation.bloodGroup}}</span>
-                    <span ng-if="donation.bloodGroup == ''" translate translate-comment="Unknown Blood Group">Unknown</span>
+                    <span ng-if="testSample.bloodGroup !== ''">{{testSample.bloodGroup}}</span>
+                    <span ng-if="testSample.bloodGroup == ''" translate translate-comment="Unknown Blood Group">Unknown</span>
                     &nbsp;|&nbsp;
-                    <small><em><span translate>Pack Type</span>:</em></small> {{donation.packType.packType}}
+                    <small><em><span translate>Pack Type</span>:</em></small> {{testSample.packType}}
                   </span>
                   <hr/>
                   <span class="h4">
-                    <small><em><span translate>TTI Status</span>:</em></small> {{donation.ttistatus | titleCase | translate}}
+                    <small><em><span translate>TTI Status</span>:</em></small> {{testSample.ttiStatus | titleCase | translate}}
                     <br/>
-                    <small><em><span translate>Blood Group Serology Status</span>:</em></small> {{donation.bloodTypingStatus | titleCase | translate}} - {{donation.bloodTypingMatchStatus | titleCase | translate}}
+                    <small><em><span translate>Blood Group Serology Status</span>:</em></small> {{testSample.bloodTypingStatus | titleCase | translate}} - {{testSample.bloodTypingMatchStatus | titleCase | translate}}
                   </span>
 
                   <hr/>
@@ -72,10 +72,10 @@
                               </tr>
                               </thead>
                               <tbody>
-                              <tr ng-repeat="test in testResults">
-                                  <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.bloodTest.testNameShort}}</td>
-                                  <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.result}}</td>
-                                  <td ng-if="test.bloodTest.category == 'TTI'" class="value">{{test.testedOn | bsisDate}}</td>
+                              <tr ng-repeat="test in testOutcomes">
+                                  <td ng-if="test.testCategory == 'TTI'" class="value">{{test.testName}}</td>
+                                  <td ng-if="test.testCategory == 'TTI'" class="value">{{test.result}}</td>
+                                  <td ng-if="test.testCategory == 'TTI'" class="value">{{test.testedOn | bsisDate}}</td>
                               </tr>
                               </tbody>
                           </table>
@@ -92,11 +92,11 @@
                               </tr>
                               </thead>
                               <tbody>
-                              <tr ng-repeat="test in testResults">
-                                  <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.bloodTest.testNameShort}}
+                              <tr ng-repeat="test in testOutcomes">
+                                  <td ng-if="test.testCategory == 'BLOODTYPING'" class="value">{{test.testName}}
                                   </td>
-                                  <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.result}}</td>
-                                  <td ng-if="test.bloodTest.category == 'BLOODTYPING'" class="value">{{test.testedOn | bsisDate}}
+                                  <td ng-if="test.testCategory == 'BLOODTYPING'" class="value">{{test.result}}</td>
+                                  <td ng-if="test.testCategory == 'BLOODTYPING'" class="value">{{test.testedOn | bsisDate}}
                                   </td>
                               </tr>
                               </tbody>
