@@ -51,6 +51,12 @@
                   </span>
                   <hr/>
                   <span class="h4">
+                    <small><em><span translate>Testing Site</span>:</em></small> {{testSample.testingSite}}
+                    &nbsp;|&nbsp;
+                    <small><em><span translate>Testing Date</span>:</em></small> {{testSample.testingDate | bsisDate}}
+                  </span>
+                  <hr/>
+                  <span class="h4">
                     <small><em><span translate>TTI Status</span>:</em></small> {{testSample.ttiStatus | titleCase | translate}}
                     <br/>
                     <small><em><span translate>Blood Group Serology Status</span>:</em></small> {{testSample.bloodTypingStatus | titleCase | translate}} - {{testSample.bloodTypingMatchStatus | titleCase | translate}}
