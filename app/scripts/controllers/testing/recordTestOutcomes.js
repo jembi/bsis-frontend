@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('RecordTestResultsCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams) {
+  .controller('RecordTestOutcomesCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams) {
     $scope.data = [{}];
 
     $scope.go = function(path) {
@@ -96,7 +96,7 @@ angular.module('bsis')
       });
 
       TestingService.saveTestResults({reEntry: reEntry}, testResultsArray, function() {
-        $location.path('/viewTestBatch/' + $routeParams.id);
+        $location.path('/manageTestBatch/' + $routeParams.id);
       }, function(err) {
         $log.error(err);
         $scope.savingTestResults = false;

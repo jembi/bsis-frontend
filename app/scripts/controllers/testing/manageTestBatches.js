@@ -1,5 +1,5 @@
 angular.module('bsis')
-  .controller('TestBatchCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS) {
+  .controller('ManageTestBatchesCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS) {
 
     $scope.icons = ICONS;
     $scope.today = new Date();
@@ -24,8 +24,8 @@ angular.module('bsis')
       $scope.search.locationId = null;
     };
 
-    $scope.viewTestBatch = function(item) {
-      $location.path('/viewTestBatch/' + item.id);
+    $scope.manageTestBatch = function(item) {
+      $location.path('/manageTestBatch/' + item.id);
     };
 
     $scope.getOpenTestBatches = function() {

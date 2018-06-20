@@ -184,7 +184,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
 
       // TESTING URLs
       .when('/testing', {
-        redirectTo: '/manageTestBatch',
+        redirectTo: '/manageTestBatches',
         permission: PERMISSIONS.VIEW_TESTING_INFORMATION,
         enabled: UI.TESTING_TAB_ENABLED
       })
@@ -195,57 +195,57 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         enabled: UI.TESTING_TAB_ENABLED,
         reloadOnSearch: false
       })
-      .when('/manageTestBatch', {
+      .when('/manageTestBatches', {
+        templateUrl: 'views/testing/manageTestBatches.html',
+        controller: 'ManageTestBatchesCtrl',
+        permission: PERMISSIONS.VIEW_TEST_BATCH,
+        enabled: UI.TESTING_TAB_ENABLED
+      })
+      .when('/manageTestBatch/:id?', {
         templateUrl: 'views/testing/manageTestBatch.html',
-        controller: 'TestBatchCtrl',
+        controller: 'ManageTestBatchCtrl',
         permission: PERMISSIONS.VIEW_TEST_BATCH,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/viewTestBatch/:id?', {
-        templateUrl: 'views/testing/viewTestBatch.html',
-        controller: 'ViewTestBatchCtrl',
-        permission: PERMISSIONS.VIEW_TEST_BATCH,
-        enabled: UI.TESTING_TAB_ENABLED
-      })
-      .when('/manageTTITesting/:id/:bloodTestType', {
-        templateUrl: 'views/testing/manageTTITesting.html',
-        controller: 'RecordTestResultsCtrl',
+      .when('/recordTTIOutcomes/:id/:bloodTestType', {
+        templateUrl: 'views/testing/recordTTIOutcomes.html',
+        controller: 'RecordTestOutcomesCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/reEnterTTI/:id/:bloodTestType', {
-        templateUrl: 'views/testing/reEnterTTI.html',
-        controller: 'TestsReEnterCtrl',
+      .when('/reenterTTIOutcomes/:id/:bloodTestType', {
+        templateUrl: 'views/testing/reenterTTIOutcomes.html',
+        controller: 'ReenterTestOutcomesCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/reEnterBloodTyping/:id/:bloodTestType', {
-        templateUrl: 'views/testing/reEnterBloodTyping.html',
-        controller: 'TestsReEnterCtrl',
+      .when('/reenterABORhOutcomes/:id/:bloodTestType', {
+        templateUrl: 'views/testing/reenterABORhOutcomes.html',
+        controller: 'ReenterTestOutcomesCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/managePendingTests/:id/:bloodTestType', {
-        templateUrl: 'views/testing/managePendingTests.html',
-        controller: 'RecordTestResultsCtrl',
+      .when('/recordRepeatTTIOutcomes/:id/:bloodTestType', {
+        templateUrl: 'views/testing/recordRepeatTTIOutcomes.html',
+        controller: 'RecordTestOutcomesCtrl',
         permission: PERMISSIONS.ADD_TTI_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/manageBloodGroupTesting/:id/:bloodTestType', {
-        templateUrl: 'views/testing/manageBloodGroupTesting.html',
-        controller: 'RecordTestResultsCtrl',
+      .when('/recordABORhOutcomes/:id/:bloodTestType', {
+        templateUrl: 'views/testing/recordABORhOutcomes.html',
+        controller: 'RecordTestOutcomesCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/manageBloodGroupMatchTesting/:id', {
-        templateUrl: 'views/testing/manageBloodGroupMatchTesting.html',
-        controller: 'AmbiguousBloodTypingTestingCtrl',
+      .when('/resolveAmbiguousABORhOutcomes/:id', {
+        templateUrl: 'views/testing/resolveAmbiguousABORhOutcomes.html',
+        controller: 'ResolveAmbiguousABORhOutcomesCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
-      .when('/managePendingBloodTypingTests/:id/:bloodTestType', {
-        templateUrl: 'views/testing/managePendingBloodTypingTests.html',
-        controller: 'RecordTestResultsCtrl',
+      .when('/recordRepeatABORhOutcomes/:id/:bloodTestType', {
+        templateUrl: 'views/testing/recordRepeatABORhOutcomes.html',
+        controller: 'RecordTestOutcomesCtrl',
         permission: PERMISSIONS.ADD_BLOOD_TYPING_OUTCOME,
         enabled: UI.TESTING_TAB_ENABLED
       })
@@ -729,7 +729,7 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
       if ($location.path() === '/testing') {
         // Initial routing for testing page
         if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_BATCH) !== -1) {
-          $location.path('/manageTestBatch');
+          $location.path('/manageTestBatches');
         } else if ($rootScope.sessionUserPermissions.indexOf(PERMISSIONS.VIEW_TEST_OUTCOME) !== -1) {
           $location.path('/viewTestSample');
         } else {
