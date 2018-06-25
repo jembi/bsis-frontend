@@ -40,6 +40,11 @@
                                           class="text-center" sortable="'location'">
                                           {{testBatch.location.name}}
                                       </td>
+                                      <td data-title="'Historical' | translate" style="width:15%;" header-class="text-left"
+                                        class="text-center" sortable="'backEntry'">
+                                        <span ng-show="testBatch.backEntry"><i class="fa {{icons.SQUARECHECK}}"></i></span>
+                                        <span ng-show="!testBatch.backEntry"><i class="fa {{icons.SQUARE}}"></i></span>
+                                      </td>
                                   </tr>
                               </table>
 
@@ -60,8 +65,8 @@
                                       role="form"
                                       ng-submit="addTestBatch(addTestBatchForm)">
                                     <div class="form-group">
-                                      <label for="location" class="control-label col-sm-2" translate>Location</label>
-                                      <div class="col-sm-10">
+                                      <label for="location" class="control-label col-sm-1" translate>Location</label>
+                                      <div class="col-sm-11">
                                         <select name="location" class="form-control" style="width:auto;" ng-model="testBatch.location" ng-options="site as site.name for site in testingSites track by site.id" required>
                                           <option disabled selected value="" translate>Select</option>
                                         </select>
@@ -71,25 +76,37 @@
                                       </div>
                                     </div>
 
-                                    <!-- Date and checkbox -->
+                                    <!-- Date/time and checkbox -->
                                     <div class="form-group">
-                                        <label for="testBatchDate" class="control-label col-sm-2" translate>Date</label>
-                                        <div class="row col-sm-10">
-                                            <div class="form-inline" style="padding-left:15px;">
-                                                <dateselect name="testBatchDate" ng-model="testBatch.testBatchDate" format="dateFormat" ng-class="{'has-error' : ( addTestBatchForm.testBatchDate.$invalid && addTestBatchForm.$submitted)}" required max-date="today" date-time-not-in-future ng-model-options="{ allowInvalid: true }"></dateselect>
-                                                <div>
-                                                  <ng-messages for="addTestBatchForm.testBatchDate.$error" ng-show="addTestBatchForm.$submitted">
-                                                    <small class="error" ng-message="required"><span translate>This cannot be empty</span></small>
-                                                    <small class="error" ng-message="dateInFuture"><span translate>Date must be today or before</span></small>
+                                        <label for="testBatchDate" class="control-label col-sm-1" translate>Date</label>
+                                        <div class="col-sm-8">
+                                            <div class="time form-inline" style="width:195px;">
+                                                <dateselect name="testBatchDate" ng-model="testBatchDate.date" format="dateFormat" ng-class="{'has-error' : ( addTestBatchForm.testBatchDate.$invalid)}" ng-required="testBatch.backEntry && addTestBatchForm.$submitted" max-date="maxDate" date-time-not-in-future ng-model-options="{ allowInvalid: true }" ng-disabled="!testBatch.backEntry"></dateselect>
+                                                <ng-messages for="addTestBatchForm.testBatchDate.$error" ng-show="addTestBatchForm.$submitted">
                                                     <ng-messages-include src="messages.html"></ng-messages-include>
-                                                  </ng-messages>
+                                                </ng-messages>
+                                            </div>
+                                            <div class="time form-group" style="width:230px;">
+                                                <label for="testBatchTime" class="control-label col-sm-2" translate>Time</label>
+                                                <div class="col-sm-8">
+                                                    <uib-timepicker name="testBatchTime" ng-model="testBatchDate.time" show-spinners="false" ng-class="{'has-error' : addTestBatchForm.testBatchTime.$invalid}" ng-change="applyTimeChangeToDate()"></uib-timepicker>
+                                                    <ng-messages for="addTestBatchForm.testBatchTime.$error" ng-show="addTestBatchForm.$submitted">
+                                                        <ng-messages-include src="messages.html"></ng-messages-include>
+                                                    </ng-messages>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="checkbox" >
+                                                        <input type="checkbox" id="backEntry" name="backEntry" ng-change="applyBackEntryChange()" ng-model="testBatch.backEntry"/> <b translate>Historical Data Entry</b>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-4">
+                                        <div class="col-sm-offset-1 col-sm-4">
                                             <button class="btn btn-primary" type="submit"
                                                     ng-disabled="addingTestBatch">{{addingTestBatch ? "Adding..." : "Add" | translate}}
                                             </button>
