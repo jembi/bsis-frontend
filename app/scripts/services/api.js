@@ -300,6 +300,10 @@ angular.module('bsis')
       ),
 
       TestResults: $resource(url + '/testresults/:donationIdentificationNumber', {donationIdentificationNumber: '@donationIdentificationNumber'}, {
+        getTestSample: {
+          method: 'GET',
+          url: url + '/testresults/:donationIdentificationNumber/sample'
+        },
         search: {
           method: 'GET',
           url: url + '/testresults/search'
