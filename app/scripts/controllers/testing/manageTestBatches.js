@@ -2,7 +2,7 @@ angular.module('bsis')
   .controller('ManageTestBatchesCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS) {
 
     $scope.icons = ICONS;
-    $scope.maxDate = moment().endOf('day').toDate();
+    $scope.maxDate = moment().toDate();
 
     var data = [{}];
     $scope.openTestBatches = false;
@@ -30,6 +30,7 @@ angular.module('bsis')
     $scope.applyBackEntryChange = function() {
       if ($scope.testBatch.backEntry) {
         $scope.testBatchDate.date = null;
+        $scope.testBatchDate.time = moment().startOf('day').toDate();
       } else {
         $scope.testBatchDate = angular.copy(testBatchDateMaster);
       }

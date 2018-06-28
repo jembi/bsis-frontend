@@ -81,7 +81,7 @@
                                         <label for="testBatchDate" class="control-label col-sm-1" translate>Date</label>
                                         <div class="col-sm-8">
                                             <div class="time form-inline" style="width:195px;">
-                                                <dateselect name="testBatchDate" ng-model="testBatchDate.date" format="dateFormat" ng-class="{'has-error' : ( addTestBatchForm.testBatchDate.$invalid)}" ng-required="testBatch.backEntry && addTestBatchForm.$submitted" max-date="maxDate" date-time-not-in-future ng-model-options="{ allowInvalid: true }" ng-disabled="!testBatch.backEntry"></dateselect>
+                                                <dateselect name="testBatchDate" ng-model="testBatchDate.date" format="dateFormat" ng-class="{'has-error': (addTestBatchForm.testBatchDate.$invalid)}" ng-required="testBatch.backEntry && addTestBatchForm.$submitted" max-date="maxDate" date-time-not-in-future ng-model-options="{allowInvalid: true}" ng-disabled="!testBatch.backEntry"></dateselect>
                                                 <ng-messages for="addTestBatchForm.testBatchDate.$error" ng-show="addTestBatchForm.$submitted">
                                                     <ng-messages-include src="messages.html"></ng-messages-include>
                                                 </ng-messages>
@@ -89,16 +89,19 @@
                                             <div class="time form-group" style="width:230px;">
                                                 <label for="testBatchTime" class="control-label col-sm-2" translate>Time</label>
                                                 <div class="col-sm-8">
-                                                    <uib-timepicker name="testBatchTime" ng-model="testBatchDate.time" show-spinners="false" ng-class="{'has-error' : addTestBatchForm.testBatchTime.$invalid}" ng-change="applyTimeChangeToDate()"></uib-timepicker>
-                                                    <ng-messages for="addTestBatchForm.testBatchTime.$error" ng-show="addTestBatchForm.$submitted">
-                                                        <ng-messages-include src="messages.html"></ng-messages-include>
-                                                    </ng-messages>
+                                                    <fieldset ng-disabled="!testBatch.backEntry">
+                                                        <uib-timepicker name="testBatchTime" ng-model="testBatchDate.time" show-spinners="false" ng-class="{'has-error': addTestBatchForm.testBatchTime.$invalid}" ng-change="applyTimeChangeToDate()"></uib-timepicker>
+                                                        <ng-messages for="addTestBatchForm.testBatchTime.$error" ng-show="addTestBatchForm.$submitted">
+                                                            <ng-messages-include src="messages.html"></ng-messages-include>
+                                                        </ng-messages>
+                                                    </fieldset>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-3">
                                                     <label class="checkbox" >
-                                                        <input type="checkbox" id="backEntry" name="backEntry" ng-change="applyBackEntryChange()" ng-model="testBatch.backEntry"/> <b translate>Historical Data Entry</b>
+                                                        <input type="checkbox" id="backEntry" name="backEntry" ng-change="applyBackEntryChange()" ng-model="testBatch.backEntry"/>
+                                                        <b translate>Historical Data Entry</b>
                                                     </label>
                                                 </div>
                                             </div>
