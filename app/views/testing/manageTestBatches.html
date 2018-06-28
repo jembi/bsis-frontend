@@ -90,7 +90,7 @@
                                                 <label for="testBatchTime" class="control-label col-sm-2" translate>Time</label>
                                                 <div class="col-sm-8">
                                                     <fieldset ng-disabled="!testBatch.backEntry">
-                                                        <uib-timepicker name="testBatchTime" ng-model="testBatchDate.time" show-spinners="false" ng-class="{'has-error': addTestBatchForm.testBatchTime.$invalid}" ng-change="applyTimeChangeToDate()"></uib-timepicker>
+                                                        <uib-timepicker name="testBatchTime" ng-model="testBatchDate.time" show-spinners="false" ng-class="{'has-error': addTestBatchForm.testBatchTime.$invalid}"></uib-timepicker>
                                                         <ng-messages for="addTestBatchForm.testBatchTime.$error" ng-show="addTestBatchForm.$submitted">
                                                             <ng-messages-include src="messages.html"></ng-messages-include>
                                                         </ng-messages>

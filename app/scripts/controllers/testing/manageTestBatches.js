@@ -25,6 +25,7 @@ angular.module('bsis')
       $scope.testBatch = angular.copy(testBatchMaster);
       $scope.testBatchDate = angular.copy(testBatchDateMaster);
       $scope.searchResults = '';
+      $scope.addingTestBatch = false;
     };
 
     $scope.applyBackEntryChange = function() {
@@ -39,12 +40,6 @@ angular.module('bsis')
     function getTestBatchDate(date, time) {
       return moment(date).hour(time.getHours()).minutes(time.getMinutes()).toDate();
     }
-
-    $scope.applyTimeChangeToDate = function() {
-      if ($scope.testBatchDate.time !== null) {
-        $scope.testBatchDate.date = getTestBatchDate($scope.testBatchDate.date, $scope.testBatchDate.time);
-      }
-    };
 
     $scope.clearLocationId = function() {
       $scope.search.locationId = null;
@@ -84,11 +79,8 @@ angular.module('bsis')
         $scope.addingTestBatch = true;
         $scope.testBatch.testBatchDate = getTestBatchDate($scope.testBatchDate.date, $scope.testBatchDate.time);
         TestingService.addTestBatch($scope.testBatch, function() {
-          $scope.testBatch = angular.copy(testBatchMaster);
           $scope.getOpenTestBatches();
-          $scope.submitted = '';
-          $scope.addingTestBatch = false;
-          addTestBatchForm.$setPristine();
+          $scope.clearAddTestBatchForm(addTestBatchForm);
         }, function(err) {
           $log.error(err);
           $scope.addingTestBatch = false;
