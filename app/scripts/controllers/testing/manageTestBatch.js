@@ -8,6 +8,7 @@ angular.module('bsis')
     $scope.today = new Date();
     $scope.dinLength = DONATION.DIN_LENGTH;
 
+    var samplesToRemoveList = [];
     var dinRangeMaster = {
       toDIN: null,
       fromDIN: null
@@ -191,6 +192,9 @@ angular.module('bsis')
       paginationPageSizes: [10],
       paginationTemplate: 'views/template/pagination.html',
       columnDefs: columnDefs,
+      enableRowSelection: true,
+      multiSelect: true,
+      enableSelectAll: false,
 
       exporterPdfOrientation: 'landscape',
       exporterPdfPageSize: 'A4',
@@ -272,9 +276,16 @@ angular.module('bsis')
       },
       enableFiltering: false,
 
+      isRowSelectable: function(row) {
+        return $scope.testBatch.permissions.canEditDonations && row.entity.status !== 'RELEASED';
+      },
+
       onRegisterApi: function(gridApi) {
         $scope.gridApi = gridApi;
-
+        gridApi.selection.on.rowSelectionChanged($scope, function() {
+          samplesToRemoveList = gridApi.selection.getSelectedRows();
+          $scope.isRemoveSamplesEnabled = samplesToRemoveList.length > 0;
+        });
       }
     };
 
@@ -558,6 +569,43 @@ angular.module('bsis')
         if (err.status !== 404 && err.status !== 500 && err.data.hasErrors === 'true') {
           $scope.hasErrors = true;
         }
+      });
+    };
+
+    function removeSamplesFromTestBatch(sampleIds) {
+      $log.info('Removing from test batch: ' + $routeParams.id);
+      $log.info(sampleIds);
+      $scope.removingSamples = false;
+    }
+
+    $scope.removeSamplesFromTestBatch = function() {
+      $scope.removingSamples = true;
+      var testOutcomesCaptured = false;
+      var sampleIds = [];
+      angular.forEach(samplesToRemoveList, function(sample) {
+        $log.info(sample.donationIdentificationNumber);
+        sampleIds.push(sample.id);
+        if (sample.ttistatus !== 'NOT_DONE' || sample.bloodTypingStatus !== 'NOT_DONE' || sample.bloodTypingMatchStatus !== 'NOT_DONE') {
+          testOutcomesCaptured = true;
+        }
+      });
+
+      if (!testOutcomesCaptured) {
+        removeSamplesFromTestBatch(sampleIds);
+        return;
+      }
+
+      var removalConfirmation = {
+        title: gettextCatalog.getString('Remove Test Sample(s)'),
+        button: gettextCatalog.getString('Remove'),
+        message: gettextCatalog.getString('Test outcomes have been recorded for one or more samples. Removing these from the test batch will clear all outcomes for those samples. Are you sure you want to continue?')
+      };
+
+      ModalsService.showConfirmation(removalConfirmation).then(function() {
+        removeSamplesFromTestBatch(sampleIds);
+      }).catch(function() {
+        // Confirmation was rejected
+        $scope.removingSamples = false;
       });
     };
 

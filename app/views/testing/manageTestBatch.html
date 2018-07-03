@@ -245,13 +245,14 @@
                   <select class="input-sm" ng-model="dataExportType"
                           ng-options="item as item.value for item in exportOptions" ng-change="filter(dataExportType)">
                   </select>
+                  <button class="btn btn-primary" style="margin-top: 0px; float: right" ng-click="removeSamplesFromTestBatch()" ng-disabled="!isRemoveSamplesEnabled || removingSamples" translate>{{removingSamples ? "Removing..." : "Remove Sample(s)" | translate}}</button>
                 </p>
                 <p>
                   <span translate>Data Export</span>
                   <button class="btn btn-primary btn-ui-grid-export" ng-click="export('pdf')" translate>PDF</button>
                   <button class="btn btn-primary btn-ui-grid-export" ng-click="export('csv')" translate>CSV</button>
               </p>
-              <div class="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination></div>
+              <div class="grid" ui-grid="gridOptions" ui-grid-selection ui-grid-exporter ui-grid-pagination></div>
           </div>
       </div>
   </div>
