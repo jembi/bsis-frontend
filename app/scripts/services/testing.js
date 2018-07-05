@@ -94,6 +94,7 @@ angular.module('bsis')
       getTestOutcomesByBatchIdAndBloodTestType: Api.TestResults.search,
       saveTestResults: Api.TestResults.saveResults,
       saveBloodTypingResolutions: Api.Donations.bloodTypingResolutions,
-      addDonationsToTestBatch: Api.TestBatches.addDonationsToTestBatch
+      addDonationsToTestBatch: Api.TestBatches.addDonationsToTestBatch,
+      removeDonationsFromTestBatch: Api.TestBatches.removeDonationsFromTestBatch
     };
   });

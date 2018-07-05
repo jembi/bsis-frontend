@@ -572,11 +572,12 @@ angular.module('bsis')
       });
     };
 
-    function removeSamplesFromTestBatch(sampleIds) {
-      $log.info('Removing from test batch: ' + $routeParams.id);
-      $log.info(sampleIds);
-      $scope.removingSamples = false;
-    }
+    $scope.clearAddDonationToTestBatchForm = function(addDonationToTestBatchForm) {
+      addDonationToTestBatchForm.$setPristine();
+      addDonationToTestBatchForm.$setUntouched();
+      $scope.dinRange = angular.copy(dinRangeMaster);
+      $scope.hasErrors = false;
+    };
 
     $scope.removeSamplesFromTestBatch = function() {
       $scope.removingSamples = true;
@@ -609,10 +610,23 @@ angular.module('bsis')
       });
     };
 
-    $scope.clearAddDonationToTestBatchForm = function(addDonationToTestBatchForm) {
-      addDonationToTestBatchForm.$setPristine();
-      addDonationToTestBatchForm.$setUntouched();
-      $scope.dinRange = angular.copy(dinRangeMaster);
-      $scope.hasErrors = false;
-    };
+    function removeSamplesFromTestBatch(sampleIds) {
+      $log.info('Removing from test batch: ' + $routeParams.id);
+      $log.info(sampleIds);
+
+      TestingService.removeDonationsFromTestBatch(
+          {id: $routeParams.id},
+          {testBatchId: $routeParams.id, donationIds: sampleIds},
+          function(response) {
+            $scope.testBatch = response;
+            $scope.refreshCurrentTestBatch(response);
+      }, function(err) {
+            $log.error(err);
+            $scope.hasErrors = false;
+            if (err.status !== 404 && err.status !== 500 && err.data.hasErrors === 'true') {
+              $scope.hasErrors = true;
+            }
+      });
+      $scope.removingSamples = false;
+    }
   });
