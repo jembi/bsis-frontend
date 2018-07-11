@@ -2,23 +2,44 @@ angular.module('bsis')
   .controller('ManageTestBatchesCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS) {
 
     $scope.icons = ICONS;
-    $scope.today = new Date();
+    $scope.maxDate = moment().toDate();
 
     var data = [{}];
     $scope.openTestBatches = false;
     var testBatchMaster = {
-      testBatchDate: $scope.today,
-      location: null
+      testBatchDate: null,
+      location: null,
+      backEntry: false
+    };
+    var testBatchDateMaster = {
+      date: moment().toDate(),
+      time: moment().toDate()
     };
     $scope.testBatch = angular.copy(testBatchMaster);
+    $scope.testBatchDate = angular.copy(testBatchDateMaster);
 
     $scope.clearAddTestBatchForm = function(form) {
       $location.search({});
       form.$setPristine();
       $scope.submitted = '';
       $scope.testBatch = angular.copy(testBatchMaster);
+      $scope.testBatchDate = angular.copy(testBatchDateMaster);
       $scope.searchResults = '';
+      $scope.addingTestBatch = false;
     };
+
+    $scope.applyBackEntryChange = function() {
+      if ($scope.testBatch.backEntry) {
+        $scope.testBatchDate.date = null;
+        $scope.testBatchDate.time = moment().startOf('day').toDate();
+      } else {
+        $scope.testBatchDate = angular.copy(testBatchDateMaster);
+      }
+    };
+
+    function getTestBatchDate(date, time) {
+      return moment(date).hour(time.getHours()).minutes(time.getMinutes()).toDate();
+    }
 
     $scope.clearLocationId = function() {
       $scope.search.locationId = null;
@@ -54,16 +75,12 @@ angular.module('bsis')
     $scope.getTestBatchForm();
 
     $scope.addTestBatch = function(addTestBatchForm) {
-
       if (addTestBatchForm.$valid) {
-
         $scope.addingTestBatch = true;
+        $scope.testBatch.testBatchDate = getTestBatchDate($scope.testBatchDate.date, $scope.testBatchDate.time);
         TestingService.addTestBatch($scope.testBatch, function() {
-          $scope.testBatch = angular.copy(testBatchMaster);
           $scope.getOpenTestBatches();
-          $scope.submitted = '';
-          $scope.addingTestBatch = false;
-          addTestBatchForm.$setPristine();
+          $scope.clearAddTestBatchForm(addTestBatchForm);
         }, function(err) {
           $log.error(err);
           $scope.addingTestBatch = false;
