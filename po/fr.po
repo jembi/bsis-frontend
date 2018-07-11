@@ -264,7 +264,7 @@ msgstr "Age"
 #: app/views/reports/donorsAdverseEventsReport.html:17
 #: app/views/reports/transfusionsReport.html:17
 #: app/views/reports/unitsDiscardedReport.html:17
-#: app/views/testing/manageTestBatches.html:158
+#: app/views/testing/manageTestBatches.html:161
 msgid "All"
 msgstr "Tous"
 
@@ -514,14 +514,14 @@ msgstr "Sérologie de groupe sanguin"
 
 #: app/views/donors/donationDetails.html:110
 #: app/views/donors/viewDonationSummary.html:270
-#: app/views/testing/viewTestSample.html:84
+#: app/views/testing/viewTestSample.html:90
 msgid "Blood Group Serology Outcomes"
 msgstr "Résultats de la sérologie du groupe sanguin"
 
 #: app/views/donors/donationDetails.html:75
 #: app/views/donors/viewDonationSummary.html:237
 #: app/views/testing/recordRepeatABORhOutcomes.html:52
-#: app/views/testing/viewTestSample.html:56
+#: app/views/testing/viewTestSample.html:62
 msgid "Blood Group Serology Status"
 msgstr "Statut sérologique du groupe sanguin"
 
@@ -734,8 +734,8 @@ msgstr ""
 #: app/views/reports/unitsDiscardedReport.html:51
 #: app/views/settings/divisions.html:38 app/views/settings/locations.html:38
 #: app/views/testing/manageTestBatch.html:234
-#: app/views/testing/manageTestBatches.html:113
-#: app/views/testing/manageTestBatches.html:168
+#: app/views/testing/manageTestBatches.html:116
+#: app/views/testing/manageTestBatches.html:171
 #: app/views/testing/viewTestSample.html:26
 msgid "Clear"
 msgstr "Effacer"
@@ -759,12 +759,12 @@ msgstr "Fermer le lot"
 #: app/scripts/controllers/components/viewComponentBatch.js:5
 #: app/scripts/controllers/donors/viewDonationBatch.js:89
 #: app/views/donors/manageDonationBatches.html:167
-#: app/views/testing/manageTestBatches.html:186 app/views/translations.html:75
+#: app/views/testing/manageTestBatches.html:189 app/views/translations.html:75
 msgid "Closed"
 msgstr "Fermé"
 
 #: app/views/donors/manageDonationBatches.html:107
-#: app/views/testing/manageTestBatches.html:128
+#: app/views/testing/manageTestBatches.html:131
 msgid "Closed Batches"
 msgstr "Lots fermés"
 
@@ -1062,7 +1062,7 @@ msgstr "Créé"
 #: app/views/components/viewComponents.html:17
 #: app/views/components/viewDonations.html:16
 #: app/views/testing/manageTestBatch.html:137
-#: app/views/testing/manageTestBatches.html:183
+#: app/views/testing/manageTestBatches.html:186
 #: app/views/testing/manageTestBatches.html:27
 #: app/views/testing/recordABORhOutcomes.html:8
 #: app/views/testing/recordRepeatABORhOutcomes.html:8
@@ -2056,7 +2056,7 @@ msgid "Historical"
 msgstr "Historique"
 
 #: app/views/donors/manageDonationBatches.html:79
-#: app/views/testing/manageTestBatches.html:101
+#: app/views/testing/manageTestBatches.html:104
 msgid "Historical Data Entry"
 msgstr "Entrée de Données Historiques"
 
@@ -2274,8 +2274,8 @@ msgstr "Le chargement des détails a échoué. Veuillez essayer d'actualiser"
 #: app/views/components/viewComponentBatch.html:32
 #: app/views/components/viewDonations.html:28
 #: app/views/testing/manageTestBatch.html:146
-#: app/views/testing/manageTestBatches.html:151
-#: app/views/testing/manageTestBatches.html:195
+#: app/views/testing/manageTestBatches.html:154
+#: app/views/testing/manageTestBatches.html:198
 #: app/views/testing/manageTestBatches.html:39
 #: app/views/testing/manageTestBatches.html:68
 msgid "Location"
@@ -2748,7 +2748,7 @@ msgstr "Aucun Type Déterminé"
 msgid "No closed donation batches"
 msgstr "Aucun Lot de Dons Fermés"
 
-#: app/views/testing/manageTestBatches.html:208
+#: app/views/testing/manageTestBatches.html:211
 msgid "No closed test batches."
 msgstr "Aucun lot de tests fermés."
 
@@ -2863,7 +2863,7 @@ msgstr ""
 "Aucun résultat. Veuillez ré-entrer le DIN ou sélectionner un type de "
 "composant différent"
 
-#: app/views/testing/viewTestSample.html:114
+#: app/views/testing/viewTestSample.html:120
 msgid "Not found. Please re-enter DIN."
 msgstr "Aucun résultat. Veuillez ré-entrer le DIN."
 
@@ -3002,8 +3002,8 @@ msgstr "Commandé"
 #: app/views/donors/donationDetails.html:92
 #: app/views/donors/viewDonationSummary.html:249
 #: app/views/donors/viewDonationSummary.html:276
-#: app/views/testing/viewTestSample.html:70
-#: app/views/testing/viewTestSample.html:90
+#: app/views/testing/viewTestSample.html:76
+#: app/views/testing/viewTestSample.html:96
 msgid "Outcome"
 msgstr "Résultat"
 
@@ -3198,7 +3198,7 @@ msgstr ""
 #: app/views/reports/transfusionsReport.html:29
 #: app/views/reports/ttiPrevalenceReport.html:9
 #: app/views/reports/unitsDiscardedReport.html:29
-#: app/views/testing/manageTestBatches.html:132
+#: app/views/testing/manageTestBatches.html:135
 msgid "Period"
 msgstr "Période"
 
@@ -3841,7 +3841,7 @@ msgstr "Sélectionnez un Composant à traiter"
 #: app/views/inventory/viewOrders.html:32
 #: app/views/inventory/viewReturns.html:32
 #: app/views/labelling/findSafeComponents.html:96
-#: app/views/testing/manageTestBatches.html:140
+#: app/views/testing/manageTestBatches.html:143
 msgid "Select a date range that is less than one month"
 msgstr "Sélectionnez une plage de dates de moins d'un mois"
 
@@ -3890,8 +3890,8 @@ msgstr "Sélectionnez un site de traitement"
 #: app/views/reports/ttiPrevalenceReport.html:20
 #: app/views/reports/unitsDiscardedReport.html:36
 #: app/views/reports/unitsDiscardedReport.html:40
-#: app/views/testing/manageTestBatches.html:139
-#: app/views/testing/manageTestBatches.html:144
+#: app/views/testing/manageTestBatches.html:142
+#: app/views/testing/manageTestBatches.html:147
 msgid "Select a valid date"
 msgstr "Sélectionnez une date valide"
 
@@ -3987,7 +3987,7 @@ msgstr "La date de début doit se situer avant la date de fin"
 #: app/views/components/viewComponentBatch.html:25
 #: app/views/components/viewComponents.html:16
 #: app/views/components/viewDonations.html:22
-#: app/views/testing/manageTestBatches.html:192
+#: app/views/testing/manageTestBatches.html:195
 #: app/views/testing/manageTestBatches.html:35
 msgid "Status"
 msgstr "Statut"
@@ -4022,7 +4022,7 @@ msgstr "TTI"
 #: app/views/donors/donationDetails.html:83
 #: app/views/donors/viewDonationSummary.html:243
 #: app/views/testing/manageTestBatch.html:62
-#: app/views/testing/viewTestSample.html:64
+#: app/views/testing/viewTestSample.html:70
 msgid "TTI Outcomes"
 msgstr "Résultats TTI"
 
@@ -4038,7 +4038,7 @@ msgstr "Rapport de Prévalence TTI"
 #: app/views/donors/viewDonationSummary.html:235
 #: app/views/testing/recordTTIOutcomes.html:47
 #: app/views/testing/reenterTTIOutcomes.html:47
-#: app/views/testing/viewTestSample.html:54
+#: app/views/testing/viewTestSample.html:60
 msgid "TTI Status"
 msgstr "Statut TTI"
 
@@ -4054,8 +4054,8 @@ msgstr "Température"
 #: app/views/donors/donationDetails.html:91
 #: app/views/donors/viewDonationSummary.html:248
 #: app/views/donors/viewDonationSummary.html:275
-#: app/views/testing/viewTestSample.html:69
-#: app/views/testing/viewTestSample.html:89
+#: app/views/testing/viewTestSample.html:75
+#: app/views/testing/viewTestSample.html:95
 msgid "Test"
 msgstr "Test"
 
@@ -4095,7 +4095,7 @@ msgstr "Résultat du Test"
 msgid "Test Sample Produced"
 msgstr "Échantillon du Test Produit"
 
-#: app/views/testing/manageTestBatches.html:189
+#: app/views/testing/manageTestBatches.html:192
 #: app/views/testing/manageTestBatches.html:31
 msgid "Test Samples"
 msgstr "Échantillons du Test"
@@ -4104,8 +4104,8 @@ msgstr "Échantillons du Test"
 #: app/views/donors/donationDetails.html:93
 #: app/views/donors/viewDonationSummary.html:250
 #: app/views/donors/viewDonationSummary.html:277
-#: app/views/testing/viewTestSample.html:71
-#: app/views/testing/viewTestSample.html:91
+#: app/views/testing/viewTestSample.html:77
+#: app/views/testing/viewTestSample.html:97
 msgid "Tested On"
 msgstr "Testé Sur"
 
@@ -4113,8 +4113,14 @@ msgstr "Testé Sur"
 msgid "Testing"
 msgstr "Test en cours"
 
+#: app/views/testing/viewTestSample.html:56
+#, fuzzy
+#| msgid "Testing Site"
+msgid "Testing Date"
+msgstr "Site de Test"
+
 #. Location Type
-#: app/views/translations.html:84
+#: app/views/testing/viewTestSample.html:54 app/views/translations.html:84
 msgid "Testing Site"
 msgstr "Site de Test"
 
@@ -4371,7 +4377,7 @@ msgstr "Titre"
 #: app/views/reports/ttiPrevalenceReport.html:12
 #: app/views/reports/unitsDiscardedReport.html:32
 #: app/views/settings/auditLog.html:13
-#: app/views/testing/manageTestBatches.html:135
+#: app/views/testing/manageTestBatches.html:138
 msgid "To"
 msgstr "A"
 
