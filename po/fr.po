@@ -404,7 +404,7 @@ msgstr ""
 
 #: app/views/testing/manageTestBatch.html:192
 msgid "Assign Sample(s) to Test Batch"
-msgstr "[FR] Assign Sample(s) to Test Batch"
+msgstr "Attribuer un échantillon(s) à un lot de test"
 
 #: app/views/settings/auditLog.html:3
 msgid "Audit Log"
@@ -588,7 +588,7 @@ msgstr "Boîte #{{boxNumber}}"
 
 #: app/views/footer.html:4 app/views/sidebarFooter.html:6
 msgid "Build: {{backendBuildNumber}} / {{frontEndBuildNumber}}"
-msgstr "[FR] Build: {{backendBuildNumber}} / {{frontEndBuildNumber}}"
+msgstr "Création: {{backendBuildNumber}} / {{frontEndBuildNumber}}"
 
 #: app/scripts/controllers/header.js:222 app/scripts/controllers/header.js:31
 #: app/views/home.html:41
@@ -3769,7 +3769,8 @@ msgstr "Échantillon Utilisé"
 
 #: app/views/testing/manageTestBatch.html:185
 msgid "Sample not found and/or cannot be assigned to this test batch"
-msgstr "[FR] Sample not found and/or cannot be assigned to this test batch"
+msgstr ""
+"Échantillon non trouvé et / ou ne peut pas être attribué à ce lot de test"
 
 #: app/scripts/controllers/testing/reenterTestOutcomes.js:158
 #: app/views/donors/manageClinic.html:53 app/views/donors/viewDeferrals.html:79
@@ -4114,10 +4115,8 @@ msgid "Testing"
 msgstr "Test en cours"
 
 #: app/views/testing/viewTestSample.html:56
-#, fuzzy
-#| msgid "Testing Site"
 msgid "Testing Date"
-msgstr "Site de Test"
+msgstr "Date de Test"
 
 #. Location Type
 #: app/views/testing/viewTestSample.html:54 app/views/translations.html:84
