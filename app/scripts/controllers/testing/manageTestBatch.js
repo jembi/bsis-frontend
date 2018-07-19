@@ -559,10 +559,16 @@ angular.module('bsis')
         testBatchSamples.toDIN = $scope.dinRange.fromDIN;
       }
 
+      var currentDonationsInBatch = $scope.testBatch.donations.length;
+
       TestingService.addDonationsToTestBatch({id: testBatchSamples.testBatchId}, testBatchSamples, function(response) {
         $scope.testBatch = response;
         $scope.refreshCurrentTestBatch(response);
         $scope.clearAddDonationToTestBatchForm($scope.addDonationToTestBatchForm);
+
+        $scope.dinsToAdd = response.donations.length + response.dinsWithoutTestSamples.length + response.dinsInOtherTestBatches.length - currentDonationsInBatch;
+        $scope.dinsAdded = response.donations.length - currentDonationsInBatch;
+        $scope.dinsIgnored = response.dinsWithoutTestSamples.length + response.dinsInOtherTestBatches.length;
       }, function(err) {
         $log.error(err);
         $scope.hasErrors = false;
@@ -580,6 +586,8 @@ angular.module('bsis')
     };
 
     function removeSamplesFromTestBatch(sampleIds) {
+      $scope.dinsToAdd = null;
+      $scope.dinsIgnored = null;
       TestingService.removeDonationsFromTestBatch(
         {id: $routeParams.id},
           {testBatchId: $routeParams.id, donationIds: sampleIds},
