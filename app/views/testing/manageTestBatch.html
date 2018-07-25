@@ -52,8 +52,17 @@
 
   <hr style="clear:right;"/>
 
-  <span ng-if="testBatch.status!='CLOSED'" ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; vertical-align: center; margin-top: 0px; margin-bottom: 0px; padding-right: 15px; text-align: right;">
+  <div style="padding-bottom: 5px">
+    <uib-alert type="info" ng-if="testBatch.permissions.canRelease"><span translate>This test batch is ready to be released.</span></uib-alert>
+    <uib-alert type="info" ng-if="testBatch.permissions.canClose"><span translate>This test batch is ready to be closed.</span></uib-alert>
+    <uib-alert type="info" ng-if="hasPendingRepeatTTITests || hasPendingConfirmatoryTTITests"><span translate>Pending: TTI repeat and/or confirmatory test outcomes.</span></uib-alert>
+    <uib-alert type="info" ng-if="hasPendingRepeatBloodTypingTests"><span translate>Pending: blood group serology repeat test outcomes.</span></uib-alert>
+    <uib-alert type="info" ng-if="hasPendingBloodTypingConfirmations"><span translate>Pending: ambiguous blood group serology test outcomes.</span></uib-alert>
+    <uib-alert type="info" ng-if="dinsIgnored > 0"><span translate>{{dinsAdded}} out of {{dinsToAdd}} sample(s) in the range were added to the test batch. {{testBatch.dinsInOtherTestBatches.length}} belonged to another test batch, and {{testBatch.dinsWithoutTestSamples.length}} didn't produce test samples.</span></uib-alert>
+    <uib-alert type="danger" ng-if="dinsIgnored === 0 && dinsToAdd === 0"><span translate>Already added or invalid DINs entered.</span></uib-alert>
+  </div>
 
+  <span ng-if="testBatch.status!='CLOSED'" ng-hide="confirmDelete || confirmEdit" class="h4" style="float: right; vertical-align: center; margin-top: 0px; margin-bottom: 0px; padding-right: 15px; text-align: right;">
     <table>
       <tr>
         <td style="text-align:right;padding-right:10px;">
@@ -175,16 +184,6 @@
   </form>
 
   <hr style="margin-bottom:5px;"/>
-
-  <div style="padding-bottom: 5px">
-      <uib-alert type="info" ng-if="testBatch.permissions.canRelease"><span translate>This test batch is ready to be released.</span></uib-alert>
-      <uib-alert type="info" ng-if="testBatch.permissions.canClose"><span translate>This test batch is ready to be closed.</span></uib-alert>
-      <uib-alert type="info" ng-if="hasPendingRepeatTTITests || hasPendingConfirmatoryTTITests"><span translate>Pending: TTI repeat and/or confirmatory test outcomes.</span></uib-alert>
-      <uib-alert type="info" ng-if="hasPendingRepeatBloodTypingTests"><span translate>Pending: blood group serology repeat test outcomes.</span></uib-alert>
-      <uib-alert type="info" ng-if="hasPendingBloodTypingConfirmations"><span translate>Pending: ambiguous blood group serology test outcomes.</span></uib-alert>
-      <uib-alert type="info" ng-if="dinsIgnored > 0"><span translate>{{dinsAdded}} out of {{dinsToAdd}} sample(s) in the range were added to the test batch. {{testBatch.dinsInOtherTestBatches.length}} belonged to another test batch, and {{testBatch.dinsWithoutTestSamples.length}} didn't produce test samples.</span></uib-alert>
-      <uib-alert type="danger" ng-if="dinsIgnored === 0 && dinsToAdd === 0"><span translate>Already added or invalid DINs entered.</span></uib-alert>
-  </div>
 
   <form class="form-inline" novalidate name="addDonationToTestBatchForm" ng-submit="addSampleToTestBatch()">
     <fieldset ng-disabled="!testBatch.permissions.canEditDonations">
