@@ -17,6 +17,8 @@
         <th class="center" translate>Created On</th>
         <th class="center" translate>Expiry Status</th>
         <th class="center" translate>Weight</th>
+        <th class="center" translate>Discard Reason</th>
+        <th class="center" translate>Comments</th>
     </tr>
     </thead>
     <tbody>
@@ -26,6 +28,8 @@
         <td class="value center">{{component.createdOn | bsisDateTime}}</td>
         <td class="value center">{{component.daysToExpire | daysToExpire}}</td>
         <td class="value center">{{component.weight}}</td>
+        <td class="value center">{{component.discardReason}}</td>
+        <td class="value center">{{component.discardReasonComment}}</td>
     </tr>
     </tbody>
 </table>
