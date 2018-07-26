@@ -76,9 +76,11 @@ angular.module('bsis')
         },
         getTestBatchDonations: {
           method: 'GET',
-          params: {id: '@id',
-                   bloodTypingMatchStatus: '@bloodTypingMatchStatus'},
-          url: url + '/testbatches/:id/donations'
+          url: url + '/testbatches/:id/donations',
+          params: {
+            id: '@id',
+            bloodTypingMatchStatus: '@bloodTypingMatchStatus'
+          }
         },
         getTestBatchForm: {
           method: 'GET',
@@ -90,12 +92,18 @@ angular.module('bsis')
         },
         addDonationsToTestBatch: {
           method: 'PUT',
-          url: url + '/testbatches/:id/donations',
+          url: url + '/testbatches/:id/addDonations',
+          params: {
+            id: '@id'
+          }
+        },
+        removeDonationsFromTestBatch: {
+          method: 'PUT',
+          url: url + '/testbatches/:id/removeDonations',
           params: {
             id: '@id'
           }
         }
-
       }),
 
       ComponentBatches: $resource(url + '/componentbatches/:id', null,
