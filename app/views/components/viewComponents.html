@@ -6,7 +6,7 @@
   <small><em><span translate>DIN</span>:</em></small> {{din}}
 </span>
 
-<table class="dash-table" style="width:70%;">
+<table class="dash-table" style="width:100%;">
     <thead>
     <tr>
         <td></td>
@@ -18,7 +18,7 @@
         <th class="center" translate>Expiry Status</th>
         <th class="center" translate>Weight</th>
         <th class="center" translate>Discard Reason</th>
-        <th class="center" translate>Comments</th>
+        <th style="width:40%;" translate>Comments</th>
     </tr>
     </thead>
     <tbody>
@@ -29,7 +29,7 @@
         <td class="value center">{{component.daysToExpire | daysToExpire}}</td>
         <td class="value center">{{component.weight}}</td>
         <td class="value center">{{component.discardReason}}</td>
-        <td class="value center">{{component.discardReasonComment}}</td>
+        <td class="value">{{component.discardReasonComment}}</td>
     </tr>
     </tbody>
 </table>
