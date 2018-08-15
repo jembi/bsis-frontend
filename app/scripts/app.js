@@ -188,6 +188,12 @@ var app = angular.module('bsis', [ // eslint-disable-line angular/di
         permission: PERMISSIONS.VIEW_TESTING_INFORMATION,
         enabled: UI.TESTING_TAB_ENABLED
       })
+      .when('/findTestSamples', {
+        templateUrl: 'views/testing/findTestSamples.html',
+        controller: 'FindTestSamplesCtrl',
+        permission: PERMISSIONS.VIEW_TEST_OUTCOME,
+        enabled: UI.TESTING_TAB_ENABLED
+      })
       .when('/viewTestSample', {
         templateUrl: 'views/testing/viewTestSample.html',
         controller: 'ViewTestSampleCtrl',
