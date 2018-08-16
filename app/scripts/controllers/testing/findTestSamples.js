@@ -4,7 +4,7 @@ angular.module('bsis').controller('FindTestSamplesCtrl', function($scope, $locat
 
   $scope.dateFormat = DATEFORMAT;
 
-  var searchParams = {
+  var master = {
     din: null,
     venueId: null,
     allVenues: false,
@@ -76,14 +76,14 @@ angular.module('bsis').controller('FindTestSamplesCtrl', function($scope, $locat
 
   $scope.isTestSampleSearchValid = function() {
     var currentParams = $scope.searchParams;
-    return currentParams.din
+    return !!currentParams.din
            || ((currentParams.venueId || currentParams.allVenues)
            && (currentParams.packTypeId || currentParams.allPackTypes)
            && currentParams.startDate && currentParams.endDate);
   };
 
-  $scope.findTestSamples = function(findTestSamplesForm) {
-    if (findTestSamplesForm.$invalid) {
+  $scope.findTestSamples = function() {
+    if (!$scope.isTestSampleSearchValid()) {
       return;
     }
     $scope.searching = true;
@@ -99,11 +99,18 @@ angular.module('bsis').controller('FindTestSamplesCtrl', function($scope, $locat
     });
   };
 
-  $scope.init = function() {
+  $scope.reset = function(form) {
     $scope.gridOptions.data = [];
-    $scope.searchParams = angular.copy(searchParams);
+    $scope.searchParams = angular.copy(master);
     $scope.submitted = false;
     $scope.searching = false;
+    if (form) {
+      form.$setPristine();
+    }
+  };
+
+  $scope.init = function() {
+    $scope.reset();
     TestingService.getTestResultsForm(function(response) {
       $scope.venues = response.venues;
       $scope.packTypes = response.packTypes;

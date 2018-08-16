@@ -7,8 +7,7 @@
 
       <h3 class="page-header" translate>Find Test Samples</h3>
 
-      <form class="form-horizontal col-sm-12" name="findTestSamplesForm" novalidate
-            ng-submit="findTestSamples(findTestSamplesForm)">
+      <form class="form-horizontal col-sm-12" name="findTestSamplesForm" novalidate ng-submit="findTestSamples()">
 
         <div class="form-group">
           <label class="col-sm-1 control-label" translate
@@ -17,8 +16,8 @@
           </label>
           <div class="col-sm-11">
             <div class="form-inline">
-              <input class="form-control" style="max-width: 170px" id="donationIdentificationNumber" ng-model="searchParams.din"
-                     ng-required="!isTestSamplesSearchValid()"
+              <input id="din" class="form-control" style="max-width: 170px"
+                     name="din" ng-model="searchParams.din" ng-required="!isTestSamplesSearchValid()"
                      ng-disabled="searchParams.venueId||searchParams.allVenues||searchParams.packTypeId||searchParams.allPackTypes||searchParams.startDate||searchParams.endDate">
             </div>
           </div>
@@ -27,14 +26,15 @@
         <div class="form-group">
           <label class="col-sm-1 control-label" translate>Venue</label>
           <div class="col-sm-11">
-            <select class="form-control input-group" style="min-width:170px; width:auto;" name="venue" ng-model="searchParams.venueId"
-                    ng-options="item.id as item.name for item in venues track by item.id"
-                    ng-required="!isTestSamplesSearchValid()"
+            <select id="venue" class="form-control input-group" style="min-width:170px; width:auto;"
+                    name="venue" ng-options="item.id as item.name for item in venues track by item.id"
+                    ng-model="searchParams.venueId" ng-required="!isTestSamplesSearchValid()"
                     ng-disabled="searchParams.din || searchParams.allVenues">
               <option value="" selected></option>
             </select>
             <label class="checkbox input-group">
               <input type="checkbox" id="allVenues" name="allVenues" ng-model="searchParams.allVenues"
+                     ng-required="!isTestSampleSearchValid()"
                      ng-disabled="searchParams.din || searchParams.venueId"/>
               <b translate>All Venues</b>
             </label>
@@ -44,14 +44,15 @@
         <div class="form-group">
           <label class="col-sm-1 control-label" translate>Pack Type</label>
           <div class="col-sm-11">
-            <select class="form-control input-group" style="min-width:170px; width:auto;" name="packType" ng-model="searchParams.packTypeId"
-                    ng-options="item.id as item.packType for item in packTypes track by item.id"
-                    ng-required="!isTestSamplesSearchValid()"
+            <select id="packType" class="form-control input-group" style="min-width:170px; width:auto;"
+                    name="packType" ng-options="item.id as item.packType for item in packTypes track by item.id"
+                    ng-model="searchParams.packTypeId" ng-required="!isTestSamplesSearchValid()"
                     ng-disabled="searchParams.din || searchParams.allPackTypes">
               <option value="" selected></option>
             </select>
             <label class="checkbox input-group" >
               <input type="checkbox" id="allPackTypes" name="allPackTypes" ng-model="searchParams.allPackTypes"
+                     ng-required="!isTestSampleSearchValid()"
                      ng-disabled="searchParams.din || searchParams.packTypeId"/>
               <b translate>All Pack Types</b>
             </label>
@@ -61,22 +62,22 @@
         <div class="form-group">
           <label class="col-sm-1 control-label" translate>Period</label>
             <div class="form-inline col-sm-11">
-              <dateselect name="startDate" ng-model="searchParams.startDate" format="dateFormat"
-                          ng-class="{'has-error' : (findTestSamplesForm.startDate.$invalid)}"
+              <dateselect id="startDate" name="startDate" ng-model="searchParams.startDate" format="dateFormat"
+                          ng-class="{'has-error' : (findTestSamplesForm.$submitted && !isTestSampleSearchValid() && findTestSamplesForm.startDate.$invalid)}"
                           ui-date-range="1,months" ui-date-end="{{searchParams.endDate | date:'yyyy-MM-dd HH:mm:ss'}}"
                           ng-model-options="{ allowInvalid: true }" ng-required="!isTestSamplesSearchValid()"
                           ng-disabled="searchParams.din"></dateselect>
               <span>&nbsp;<em translate>To</em>&nbsp;</span>
-              <dateselect-end name="endDate" ng-model="searchParams.endDate" format="dateFormat"
-                              ng-class="{'has-error' : (findTestSamplesForm.endDate.$invalid)}"
+              <dateselect-end id="endDate" name="endDate" ng-model="searchParams.endDate" format="dateFormat"
+                              ng-class="{'has-error' : (findTestSamplesForm.$submitted && !isTestSampleSearchValid() && findTestSamplesForm.endDate.$invalid)}"
                               ui-date-range="1,months"
                               ui-date-start="{{searchParams.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}"
                               ng-model-options="{ allowInvalid: true }" ng-required="!isTestSamplesSearchValid()"
                               ng-disabled="searchParams.din"></dateselect-end>
               <ng-messages for="findTestSamplesForm.startDate.$error" role="alert"
-                           ng-show="findTestSamplesForm.$submitted">
+                           ng-show="findTestSamplesForm.$submitted && !isTestSampleSearchValid() && findTestSamplesForm.startDate.$invalid">
                 <small class="error" ng-message="required">
-                  <translate>Select a valid date</translate>
+                  <translate>Select a valid start date</translate>
                 </small>
                 <small class="error" ng-message="datesOutOfRange">
                   <translate>Select a date range that is less than one month</translate>
@@ -84,9 +85,9 @@
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
               <ng-messages for="findTestSamplesForm.endDate.$error" role="alert"
-                           ng-show="findTestSamplesForm.$submitted && !findTestSamplesForm.startDate.$invalid">
+                           ng-show="findTestSamplesForm.$submitted && !isTestSampleSearchValid() && !findTestSamplesForm.startDate.$invalid">
                 <small class="error" ng-message="required">
-                  <translate>Select a valid date</translate>
+                  <translate>Select a valid end date</translate>
                 </small>
                 <ng-messages-include src="messages.html"></ng-messages-include>
               </ng-messages>
@@ -98,7 +99,7 @@
             <button class="btn btn-primary" type="submit" ng-disabled="!isTestSampleSearchValid() || searching">
               {{searching ? "Searching..." : "Search" | translate}}
             </button>
-            <button class="btn btn-primary" type="button" ng-click="init()" translate>Clear</button>
+            <button class="btn btn-primary" type="button" ng-click="reset(findTestSamplesForm)" translate>Clear</button>
           </div>
         </div>
       </form>
