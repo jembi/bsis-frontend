@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location, $log, DonationsService, TestingService, DATEFORMAT, gettextCatalog) {
+angular.module('bsis').controller('FindTestSamplesCtrl', function($scope, $location, $log, DonationsService, TestingService, DATEFORMAT, gettextCatalog) {
 
   $scope.dateFormat = DATEFORMAT;
 
@@ -10,8 +10,8 @@ angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location,
     allVenues: false,
     packTypeId: null,
     allPackTypes: false,
-    startDate: moment().date(1).startOf('day').toDate(),
-    endDate: moment().endOf('month').toDate()
+    startDate: null,
+    endDate: null
   };
 
   var columnDefs = [
@@ -75,25 +75,25 @@ angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location,
   };
 
   $scope.isTestSampleSearchValid = function() {
-    var searchParams = $scope.searchParams;
-    return searchParams.din
-           || ((searchParams.venueId || searchParams.allVenues)
-           && (searchParams.packTypeId || searchParams.allPackTypes)
-           && searchParams.startDate && searchParams.endDate);
+    var currentParams = $scope.searchParams;
+    return currentParams.din
+           || ((currentParams.venueId || currentParams.allVenues)
+           && (currentParams.packTypeId || currentParams.allPackTypes)
+           && currentParams.startDate && currentParams.endDate);
   };
 
-  $scope.findReturns = function(findTestSamplesForm) {
+  $scope.findTestSamples = function(findTestSamplesForm) {
     if (findTestSamplesForm.$invalid) {
       return;
     }
     $scope.searching = true;
     $scope.submitted = true;
 
-    DonationsService.search($scope.searchParams, function (response) {
+    DonationsService.search($scope.searchParams, function(response) {
       $scope.gridOptions.data = response.donations;
       $scope.searching = false;
       $scope.gridOptions.paginationCurrentPage = 1;
-    }, function (error) {
+    }, function(error) {
       $scope.searching = false;
       $log.error(error);
     });
@@ -111,6 +111,5 @@ angular.module('bsis').controller('ViewReturnsCtrl', function($scope, $location,
   };
 
   $scope.init();
-
 
 });

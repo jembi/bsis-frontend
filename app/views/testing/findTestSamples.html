@@ -2,100 +2,113 @@
 
 <div class="col-sm-9 col-md-10 main">
 
-  <h3 class="page-header" translate>Find Test Samples</h3>
-
-  <form class="form-horizontal col-sm-12" name="findTestSamplesForm" novalidate
-        ng-submit="findTestSamples(findTestSamplesForm)">
-    <div class="form-group">
-      <label class="col-sm-1 control-label" translate
-             translate-comment="Donation Identification Number, abbreviation">
-        DIN
-      </label>
-      <div class="row col-sm-11">
-        <div class="form-inline" style="padding-left:5px;">
-          <input size="15" type="donationIdentificationNumber" id="donationIdentificationNumber"
-                 class="form-control input-sm" placeholder="" ng-model="searchParams.donationIdentificationNumber"
-                 ng-required="!isTestSamplesSearchValid()"
-                 ng-disabled="searchParams.venueId||searchParams.allVenues||searchParams.packTypeId||searchParams.allPackTypes||searchParams.startDate||searchParams.endDate">
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-2 control-label" translate>Venue</label>
-      <div class="col-sm-10">
-        <select class="form-control" style="width:auto;" name="venue" ng-model="searchParams.venue"
-                ng-options="item.id as item.name for item in venues track by item.id"
-                ng-required="!isTestSamplesSearchValid()" ng-disabled="searchParams.din">
-          <option value="" selected></option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-2 control-label" translate>Pack Type</label>
-      <div class="col-sm-10">
-        <select class="form-control" style="width:auto;" name="packType" ng-model="searchParams.packType"
-                ng-options="item.id as item.name for item in packTypes track by item.id"
-                ng-required="!isTestSamplesSearchValid()" ng-disabled="searchParams.din">
-          <option value="" selected></option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-1 control-label" translate>Period</label>
-      <div>
-        <div class="form-inline col-sm-10">
-          <dateselect name="startDate" ng-model="searchParams.startDate" format="dateFormat"
-                      ng-class="{'has-error' : (findTestSamplesForm.startDate.$invalid)}"
-                      ui-date-range="1,months" ui-date-end="{{searchParams.endDate | date:'yyyy-MM-dd HH:mm:ss'}}"
-                      ng-model-options="{ allowInvalid: true }" ng-required="!isTestSamplesSearchValid()"
-                      ng-disabled="searchParams.din"></dateselect>
-          <span>&nbsp;<em translate>To</em>&nbsp;</span>
-          <dateselect-end name="endDate" ng-model="searchParams.endDate" format="dateFormat"
-                          ng-class="{'has-error' : (findReturnForm.endDate.$invalid)}"
-                          ui-date-range="1,months" ui-date-start="{{searchParams.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}"
-                          ng-model-options="{ allowInvalid: true }" ng-required="!isTestSamplesSearchValid()"
-                          ng-disabled="searchParams.din"></dateselect-end>
-        </div>
-        <div>
-          <ng-messages for="findTestSamplesForm.startDate.$error" role="alert" ng-show="findTestSamplesForm.$submitted">
-            <small class="error" ng-message="required">
-              <translate>Select a valid date</translate>
-            </small>
-            <small class="error" ng-message="datesOutOfRange">
-              <translate>Select a date range that is less than one month</translate>
-            </small>
-            <ng-messages-include src="messages.html"></ng-messages-include>
-          </ng-messages>
-          <ng-messages for="findTestSamplesForm.endDate.$error" role="alert"
-                       ng-show="findTestSamplesForm.$submitted && !findTestSamplesForm.startDate.$invalid">
-            <small class="error" ng-message="required">
-              <translate>Select a valid date</translate>
-            </small>
-            <ng-messages-include src="messages.html"></ng-messages-include>
-          </ng-messages>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-offset-1">
-      <small class="error" ng-show="findTestSamplesForm.$submitted && !isTestSampleSearchValid()" translate>
-        All search fields cannot be empty
-      </small>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-1 col-sm-3">
-        <button class="btn btn-primary" type="submit" ng-disabled="searching">
-          {{searching ? "Searching..." : "Search" | translate}}
-        </button>
-        <button class="btn btn-primary" type="button" ng-click="clear(findTestSamplesForm)" translate>Clear</button>
-      </div>
-    </div>
-  </form>
-
-  <div class="panel panel-default" ng-if="submitted">
+  <div class="panel panel-default">
     <div class="panel-body">
+
+      <h3 class="page-header" translate>Find Test Samples</h3>
+
+      <form class="form-horizontal col-sm-12" name="findTestSamplesForm" novalidate
+            ng-submit="findTestSamples(findTestSamplesForm)">
+
+        <div class="form-group">
+          <label class="col-sm-1 control-label" translate
+                 translate-comment="Donation Identification Number, abbreviation">
+            DIN
+          </label>
+          <div class="col-sm-11">
+            <div class="form-inline">
+              <input class="form-control" style="max-width: 170px" id="donationIdentificationNumber" ng-model="searchParams.din"
+                     ng-required="!isTestSamplesSearchValid()"
+                     ng-disabled="searchParams.venueId||searchParams.allVenues||searchParams.packTypeId||searchParams.allPackTypes||searchParams.startDate||searchParams.endDate">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-1 control-label" translate>Venue</label>
+          <div class="col-sm-11">
+            <select class="form-control input-group" style="min-width:170px; width:auto;" name="venue" ng-model="searchParams.venueId"
+                    ng-options="item.id as item.name for item in venues track by item.id"
+                    ng-required="!isTestSamplesSearchValid()"
+                    ng-disabled="searchParams.din || searchParams.allVenues">
+              <option value="" selected></option>
+            </select>
+            <label class="checkbox input-group">
+              <input type="checkbox" id="allVenues" name="allVenues" ng-model="searchParams.allVenues"
+                     ng-disabled="searchParams.din || searchParams.venueId"/>
+              <b translate>All Venues</b>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-1 control-label" translate>Pack Type</label>
+          <div class="col-sm-11">
+            <select class="form-control input-group" style="min-width:170px; width:auto;" name="packType" ng-model="searchParams.packTypeId"
+                    ng-options="item.id as item.packType for item in packTypes track by item.id"
+                    ng-required="!isTestSamplesSearchValid()"
+                    ng-disabled="searchParams.din || searchParams.allPackTypes">
+              <option value="" selected></option>
+            </select>
+            <label class="checkbox input-group" >
+              <input type="checkbox" id="allPackTypes" name="allPackTypes" ng-model="searchParams.allPackTypes"
+                     ng-disabled="searchParams.din || searchParams.packTypeId"/>
+              <b translate>All Pack Types</b>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-1 control-label" translate>Period</label>
+            <div class="form-inline col-sm-11">
+              <dateselect name="startDate" ng-model="searchParams.startDate" format="dateFormat"
+                          ng-class="{'has-error' : (findTestSamplesForm.startDate.$invalid)}"
+                          ui-date-range="1,months" ui-date-end="{{searchParams.endDate | date:'yyyy-MM-dd HH:mm:ss'}}"
+                          ng-model-options="{ allowInvalid: true }" ng-required="!isTestSamplesSearchValid()"
+                          ng-disabled="searchParams.din"></dateselect>
+              <span>&nbsp;<em translate>To</em>&nbsp;</span>
+              <dateselect-end name="endDate" ng-model="searchParams.endDate" format="dateFormat"
+                              ng-class="{'has-error' : (findTestSamplesForm.endDate.$invalid)}"
+                              ui-date-range="1,months"
+                              ui-date-start="{{searchParams.startDate |  date:'yyyy-MM-dd HH:mm:ss'}}"
+                              ng-model-options="{ allowInvalid: true }" ng-required="!isTestSamplesSearchValid()"
+                              ng-disabled="searchParams.din"></dateselect-end>
+              <ng-messages for="findTestSamplesForm.startDate.$error" role="alert"
+                           ng-show="findTestSamplesForm.$submitted">
+                <small class="error" ng-message="required">
+                  <translate>Select a valid date</translate>
+                </small>
+                <small class="error" ng-message="datesOutOfRange">
+                  <translate>Select a date range that is less than one month</translate>
+                </small>
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
+              <ng-messages for="findTestSamplesForm.endDate.$error" role="alert"
+                           ng-show="findTestSamplesForm.$submitted && !findTestSamplesForm.startDate.$invalid">
+                <small class="error" ng-message="required">
+                  <translate>Select a valid date</translate>
+                </small>
+                <ng-messages-include src="messages.html"></ng-messages-include>
+              </ng-messages>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-1 col-sm-3">
+            <button class="btn btn-primary" type="submit" ng-disabled="!isTestSampleSearchValid() || searching">
+              {{searching ? "Searching..." : "Search" | translate}}
+            </button>
+            <button class="btn btn-primary" type="button" ng-click="init()" translate>Clear</button>
+          </div>
+        </div>
+      </form>
+
       <div class="col-sm-12">
-        <div id="grid" class="grid" ui-grid="gridOptions" ui-grid-pagination></div>
+        <div class="panel panel-default" ng-if="submitted">
+          <div id="grid" class="grid" ui-grid="gridOptions" ui-grid-pagination></div>
+        </div>
       </div>
+
     </div>
   </div>
 
