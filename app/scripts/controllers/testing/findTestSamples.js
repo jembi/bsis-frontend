@@ -7,11 +7,11 @@ angular.module('bsis').controller('FindTestSamplesCtrl', function($scope, $locat
   var master = {
     din: null,
     venueId: null,
-    allVenues: false,
+    allVenues: true,
     packTypeId: null,
-    allPackTypes: false,
-    startDate: null,
-    endDate: null
+    allPackTypes: true,
+    startDate: moment().subtract(7, 'days').startOf('day').toDate(),
+    endDate: moment().endOf('day').toDate()
   };
 
   var columnDefs = [
@@ -19,7 +19,6 @@ angular.module('bsis').controller('FindTestSamplesCtrl', function($scope, $locat
       name: 'DonationIdentificationNumber',
       displayName: gettextCatalog.getString('DIN'),
       field: 'donationIdentificationNumber',
-      cellFilter: 'bsisDate',
       width: '**'
     },
     {
@@ -44,13 +43,13 @@ angular.module('bsis').controller('FindTestSamplesCtrl', function($scope, $locat
     },
     {
       name: 'TTI Status',
-      displayName: gettextCatalog.getString('TTI Test Status'),
-      field: 'ttiStatus',
+      displayName: gettextCatalog.getString('TTI Status'),
+      field: 'ttistatus',
       width: '**'
     },
     {
       name: 'Blood Typing Match Status',
-      displayName: gettextCatalog.getString('Blood Group Serology Test Status'),
+      displayName: gettextCatalog.getString('Blood Group Serology'),
       field: 'bloodTypingMatchStatus',
       width: '**'
     }
@@ -74,29 +73,66 @@ angular.module('bsis').controller('FindTestSamplesCtrl', function($scope, $locat
     }
   };
 
-  $scope.isTestSampleSearchValid = function() {
-    var currentParams = $scope.searchParams;
-    return !!currentParams.din
-           || ((currentParams.venueId || currentParams.allVenues)
-           && (currentParams.packTypeId || currentParams.allPackTypes)
-           && currentParams.startDate && currentParams.endDate);
+  $scope.updateDinSearch = function() {
+    var din = $scope.searchParams.din;
+    if (din && din.length > 0) {
+      $scope.dinSearch = true;
+      $scope.searchParams.startDate = null;
+      $scope.searchParams.endDate = null;
+    } else {
+      $scope.dinSearch = false;
+      $scope.searchParams = angular.copy(master);
+    }
+  };
+
+  $scope.updateAllVenues = function() {
+    if ($scope.searchParams.venueId) {
+      $scope.searchParams.allVenues = false;
+    }
+  };
+
+  $scope.updateAllPackTypes = function() {
+    if ($scope.searchParams.packTypeId) {
+      $scope.searchParams.allPackTypes = false;
+    }
+  };
+
+  $scope.clearVenue = function() {
+    $scope.searchParams.venueId = null;
+  };
+
+  $scope.clearPackType = function() {
+    $scope.searchParams.packTypeId = null;
   };
 
   $scope.findTestSamples = function() {
-    if (!$scope.isTestSampleSearchValid()) {
+    if (!$scope.findTestSamplesForm.$valid) {
       return;
     }
     $scope.searching = true;
     $scope.submitted = true;
 
-    DonationsService.search($scope.searchParams, function(response) {
-      $scope.gridOptions.data = response.donations;
-      $scope.searching = false;
-      $scope.gridOptions.paginationCurrentPage = 1;
-    }, function(error) {
-      $scope.searching = false;
-      $log.error(error);
-    });
+    if ($scope.searchParams.din) {
+      $log.info($scope.searchParams.din);
+      DonationsService.findByDin({din: $scope.searchParams.din}, function(response) {
+        $scope.gridOptions.data = response.donations;
+        $scope.searching = false;
+        $scope.gridOptions.paginationCurrentPage = 1;
+      }, function(error) {
+        $scope.searching = false;
+        $log.error(error);
+      });
+
+    } else {
+      DonationsService.search($scope.searchParams, function(response) {
+        $scope.gridOptions.data = response.donations;
+        $scope.searching = false;
+        $scope.gridOptions.paginationCurrentPage = 1;
+      }, function(error) {
+        $scope.searching = false;
+        $log.error(error);
+      });
+    }
   };
 
   $scope.reset = function(form) {
@@ -104,6 +140,7 @@ angular.module('bsis').controller('FindTestSamplesCtrl', function($scope, $locat
     $scope.searchParams = angular.copy(master);
     $scope.submitted = false;
     $scope.searching = false;
+    $scope.dinSearch = null;
     if (form) {
       form.$setPristine();
     }
