@@ -67,7 +67,8 @@ angular.module('bsis')
           url: url + '/donations'
         },
         search: {
-
+          method: 'GET',
+          url: url + '/donations/search'
         }
       }),
 
