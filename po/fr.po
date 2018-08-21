@@ -50,7 +50,7 @@ msgstr "Rapport sur le regroupement sanguin ABO Rho"
 msgid "ABO/Rh"
 msgstr "ABO/Rh"
 
-#: app/views/testing/manageTestBatch.html:73
+#: app/views/testing/manageTestBatch.html:82
 msgid "ABO/Rh Outcomes"
 msgstr "Résultats ABO / Rh"
 
@@ -264,6 +264,8 @@ msgstr "Age"
 #: app/views/reports/donorsAdverseEventsReport.html:17
 #: app/views/reports/transfusionsReport.html:17
 #: app/views/reports/unitsDiscardedReport.html:17
+#: app/views/testing/findTestSamples.html:28
+#: app/views/testing/findTestSamples.html:46
 #: app/views/testing/manageTestBatches.html:161
 msgid "All"
 msgstr "Tous"
@@ -297,6 +299,10 @@ msgstr "Tous les champs de recherche ne peuvent pas être vides"
 #: app/scripts/controllers/reports/ttiPrevalenceReport.js:186
 msgid "All venues"
 msgstr "Tous les emplacements"
+
+#: app/views/testing/manageTestBatch.html:62
+msgid "Already added or invalid DINs entered."
+msgstr "[FR] Already added or invalid DINs entered."
 
 #: app/scripts/util/filters.js:80
 msgid "Already expired"
@@ -507,6 +513,7 @@ msgstr "Banque du sang"
 msgid "Blood Group"
 msgstr "Groupe sanguin"
 
+#: app/scripts/controllers/testing/findTestSamples.js:52
 #: app/scripts/controllers/testing/manageTestBatch.js:170
 #: app/views/donors/mergeDonorsDonations.html:25
 msgid "Blood Group Serology"
@@ -590,7 +597,7 @@ msgstr "Boîte #{{boxNumber}}"
 msgid "Build: {{backendBuildNumber}} / {{frontEndBuildNumber}}"
 msgstr "Création: {{backendBuildNumber}} / {{frontEndBuildNumber}}"
 
-#: app/scripts/controllers/header.js:222 app/scripts/controllers/header.js:31
+#: app/scripts/controllers/header.js:223 app/scripts/controllers/header.js:31
 #: app/views/home.html:41
 msgid "COMPONENTS"
 msgstr "COMPOSANTS"
@@ -733,6 +740,7 @@ msgstr ""
 #: app/views/reports/ttiPrevalenceReport.html:31
 #: app/views/reports/unitsDiscardedReport.html:51
 #: app/views/settings/divisions.html:38 app/views/settings/locations.html:38
+#: app/views/testing/findTestSamples.html:81
 #: app/views/testing/manageTestBatch.html:234
 #: app/views/testing/manageTestBatches.html:116
 #: app/views/testing/manageTestBatches.html:171
@@ -769,6 +777,7 @@ msgid "Closed Batches"
 msgstr "Lots fermés"
 
 #: app/scripts/controllers/components/viewComponentBatches.js:37
+#: app/scripts/controllers/testing/findTestSamples.js:33
 msgid "Collection Date"
 msgstr "Date de collecte"
 
@@ -1000,7 +1009,7 @@ msgstr "Confirmer le nouveau mot de passe"
 msgid "Confirm password"
 msgstr "Confirmer le mot de passe"
 
-#: app/views/testing/manageTestBatch.html:111
+#: app/views/testing/manageTestBatch.html:120
 msgid "Confirmatory TTI Outcomes"
 msgstr "Résultats confirmatoires de l'ITT"
 
@@ -1061,7 +1070,7 @@ msgstr "Créé"
 #: app/scripts/controllers/inventory/viewReturn.js:45
 #: app/views/components/viewComponents.html:17
 #: app/views/components/viewDonations.html:16
-#: app/views/testing/manageTestBatch.html:137
+#: app/views/testing/manageTestBatch.html:146
 #: app/views/testing/manageTestBatches.html:186
 #: app/views/testing/manageTestBatches.html:27
 #: app/views/testing/recordABORhOutcomes.html:8
@@ -1102,6 +1111,7 @@ msgstr "Actuellement différé"
 #: app/scripts/controllers/inventory/viewReturn.js:9
 #: app/scripts/controllers/labelling/findSafeComponents.js:23
 #: app/scripts/controllers/mobile/donorCounselling.js:13
+#: app/scripts/controllers/testing/findTestSamples.js:20
 #: app/scripts/controllers/testing/manageTestBatch.js:113
 #: app/views/components/discardComponents.html:7
 #: app/views/components/findComponents.html:7
@@ -1122,6 +1132,7 @@ msgstr "Actuellement différé"
 #: app/views/labelling/findSafeComponents.html:8
 #: app/views/labelling/labelComponents.html:20
 #: app/views/labelling/labelComponents.html:84
+#: app/views/testing/findTestSamples.html:8
 #: app/views/testing/recordABORhOutcomes.html:31
 #: app/views/testing/recordRepeatABORhOutcomes.html:32
 #: app/views/testing/recordRepeatTTIOutcomes.html:33
@@ -1177,7 +1188,7 @@ msgstr "COMMUNICATIONS AU DONNEUR"
 msgid "DONOR RECORDS"
 msgstr "INFORMATIONS RELATIVES AU DONNEU"
 
-#: app/scripts/controllers/header.js:220 app/scripts/controllers/header.js:24
+#: app/scripts/controllers/header.js:221 app/scripts/controllers/header.js:24
 #: app/views/home.html:26
 msgid "DONORS"
 msgstr "DONNEURS"
@@ -1831,11 +1842,11 @@ msgstr "La date de fin ne peut pas être située avant la date de report"
 msgid "End time should be after Start time"
 msgstr "La date de fin doit être située après la date de Début"
 
-#: app/views/testing/manageTestBatch.html:112
-#: app/views/testing/manageTestBatch.html:63
-#: app/views/testing/manageTestBatch.html:74
-#: app/views/testing/manageTestBatch.html:87
-#: app/views/testing/manageTestBatch.html:98
+#: app/views/testing/manageTestBatch.html:107
+#: app/views/testing/manageTestBatch.html:121
+#: app/views/testing/manageTestBatch.html:72
+#: app/views/testing/manageTestBatch.html:83
+#: app/views/testing/manageTestBatch.html:96
 msgid "Enter"
 msgstr "Entrer"
 
@@ -1957,6 +1968,10 @@ msgstr "Trouver des Composants Sûrs"
 msgid "Find Safe Components to Label"
 msgstr "Trouver des Composants Sûrs à Étiqueter"
 
+#: app/views/testing/findTestSamples.html:3 app/views/testing/sidebar.html:19
+msgid "Find Test Samples"
+msgstr "[FR] Find Test Samples"
+
 #: app/views/inventory/findTransfusion.html:3
 #: app/views/inventory/sidebar.html:23
 msgid "Find Transfusions"
@@ -2032,7 +2047,7 @@ msgstr "Configurations Générales"
 msgid "Group"
 msgstr "Groupe"
 
-#: app/scripts/controllers/header.js:17 app/scripts/controllers/header.js:236
+#: app/scripts/controllers/header.js:17 app/scripts/controllers/header.js:237
 msgid "HOME"
 msgstr "ACCUEIL"
 
@@ -2073,7 +2088,7 @@ msgstr "Accueil"
 msgid "Hospital / Clinic"
 msgstr "Hôpital / Clinique"
 
-#: app/scripts/controllers/header.js:226 app/scripts/controllers/header.js:52
+#: app/scripts/controllers/header.js:227 app/scripts/controllers/header.js:52
 #: app/views/home.html:90
 msgid "INVENTORY"
 msgstr "INVENTAIRE"
@@ -2217,7 +2232,7 @@ msgstr "Juillet"
 msgid "June"
 msgstr "Juin"
 
-#: app/scripts/controllers/header.js:228 app/scripts/controllers/header.js:45
+#: app/scripts/controllers/header.js:229 app/scripts/controllers/header.js:45
 #: app/views/home.html:71 app/views/labelling/sidebar.html:12
 msgid "LABELLING"
 msgstr "ETIQUETAGE"
@@ -2273,7 +2288,7 @@ msgstr "Le chargement des détails a échoué. Veuillez essayer d'actualiser"
 #: app/scripts/controllers/inventory/findInventory.js:66
 #: app/views/components/viewComponentBatch.html:32
 #: app/views/components/viewDonations.html:28
-#: app/views/testing/manageTestBatch.html:146
+#: app/views/testing/manageTestBatch.html:155
 #: app/views/testing/manageTestBatches.html:154
 #: app/views/testing/manageTestBatches.html:198
 #: app/views/testing/manageTestBatches.html:39
@@ -2330,11 +2345,11 @@ msgstr "GÉRER LES REJETS"
 msgid "MANAGE INVENTORY"
 msgstr "GÉRER L’INVENTAIRE"
 
-#: app/views/testing/sidebar.html:12
+#: app/views/testing/sidebar.html:13
 msgid "MANAGE TESTING"
 msgstr "GÉRER LES TESTS"
 
-#: app/scripts/controllers/header.js:232 app/scripts/controllers/header.js:66
+#: app/scripts/controllers/header.js:233 app/scripts/controllers/header.js:66
 #: app/views/home.html:120 app/views/mobile/sidebar.html:12
 msgid "MOBILE CLINIC"
 msgstr "CLINIQUE MOBILE"
@@ -2507,7 +2522,7 @@ msgstr "Gérer les Tests de TTI et de Sérologie de Groupe Sanguin"
 msgid "Manage Test Batch"
 msgstr "Gérer le Lot de Test"
 
-#: app/views/testing/manageTestBatches.html:3 app/views/testing/sidebar.html:13
+#: app/views/testing/manageTestBatches.html:3 app/views/testing/sidebar.html:16
 msgid "Manage Test Batches"
 msgstr "Gérer les Lots de Test"
 
@@ -2901,7 +2916,7 @@ msgstr "Nombre de Boîtes de Transport de Sang"
 msgid "Number of Donations"
 msgstr "Nombre de Dons"
 
-#: app/views/testing/manageTestBatch.html:163
+#: app/views/testing/manageTestBatch.html:172
 #: app/views/testing/recordABORhOutcomes.html:11
 #: app/views/testing/recordRepeatABORhOutcomes.html:11
 #: app/views/testing/recordRepeatTTIOutcomes.html:13
@@ -2912,11 +2927,11 @@ msgstr "Nombre de Dons"
 msgid "Number of Samples"
 msgstr "Nombre d’Échantillons"
 
-#: app/views/testing/manageTestBatch.html:166
+#: app/views/testing/manageTestBatch.html:175
 msgid "Number of Samples Ready for Release"
 msgstr "Nombre d’Échantillons Prêts à Être Utilisés"
 
-#: app/views/testing/manageTestBatch.html:170
+#: app/views/testing/manageTestBatch.html:179
 msgid "Number of Samples Released"
 msgstr "Nombre d’Échantillons Utilisés"
 
@@ -3059,12 +3074,14 @@ msgstr "Étiquette DIN du paquet"
 
 #: app/scripts/controllers/components/viewComponentBatch.js:13
 #: app/scripts/controllers/donors/viewDonationBatch.js:55
+#: app/scripts/controllers/testing/findTestSamples.js:40
 #: app/scripts/controllers/testing/manageTestBatch.js:133
 #: app/views/donors/mergeDonorsDonations.html:19
 #: app/views/donors/viewDonationSummary.html:80
 #: app/views/donors/viewDonations.html:35 app/views/donors/viewDonor.html:211
 #: app/views/settings/managePackType.html:12
 #: app/views/settings/packTypes.html:22
+#: app/views/testing/findTestSamples.html:39
 #: app/views/testing/viewTestSample.html:50
 msgid "Pack Type"
 msgstr "Type de paquet"
@@ -3168,16 +3185,16 @@ msgstr "Requêtes du patient"
 msgid "Pending Tests"
 msgstr "Tests en attente"
 
-#: app/views/testing/manageTestBatch.html:182
+#: app/views/testing/manageTestBatch.html:58
 msgid "Pending: TTI repeat and/or confirmatory test outcomes."
 msgstr "En attente: Résultats de tests de confirmation et/ou répétés TTI."
 
-#: app/views/testing/manageTestBatch.html:184
+#: app/views/testing/manageTestBatch.html:60
 msgid "Pending: ambiguous blood group serology test outcomes."
 msgstr ""
 "En attente: Résultats ambigus de tests de sérologies de groupes sanguins."
 
-#: app/views/testing/manageTestBatch.html:183
+#: app/views/testing/manageTestBatch.html:59
 msgid "Pending: blood group serology repeat test outcomes."
 msgstr ""
 "En attente: Résultats de tests répétés de sérologies de groupes sanguins."
@@ -3198,6 +3215,7 @@ msgstr ""
 #: app/views/reports/transfusionsReport.html:29
 #: app/views/reports/ttiPrevalenceReport.html:9
 #: app/views/reports/unitsDiscardedReport.html:29
+#: app/views/testing/findTestSamples.html:57
 #: app/views/testing/manageTestBatches.html:135
 msgid "Period"
 msgstr "Période"
@@ -3460,7 +3478,7 @@ msgstr "Quarantaine"
 msgid "R"
 msgstr "R"
 
-#: app/scripts/controllers/header.js:230 app/scripts/controllers/header.js:59
+#: app/scripts/controllers/header.js:231 app/scripts/controllers/header.js:59
 #: app/views/home.html:105 app/views/reports/sidebar.html:12
 msgid "REPORTS"
 msgstr "RAPPORTS"
@@ -3470,11 +3488,11 @@ msgstr "RAPPORTS"
 msgid "Rank in Category"
 msgstr "Rang dans la Catégorie"
 
-#: app/views/testing/manageTestBatch.html:100
-#: app/views/testing/manageTestBatch.html:114
-#: app/views/testing/manageTestBatch.html:65
-#: app/views/testing/manageTestBatch.html:75
-#: app/views/testing/manageTestBatch.html:89
+#: app/views/testing/manageTestBatch.html:109
+#: app/views/testing/manageTestBatch.html:123
+#: app/views/testing/manageTestBatch.html:74
+#: app/views/testing/manageTestBatch.html:84
+#: app/views/testing/manageTestBatch.html:98
 msgid "Re-Enter"
 msgstr "Ré-Entrez"
 
@@ -3588,7 +3606,7 @@ msgstr "Libération"
 msgid "Released"
 msgstr "Libéré"
 
-#: app/scripts/controllers/testing/manageTestBatch.js:618
+#: app/scripts/controllers/testing/manageTestBatch.js:626
 #: app/views/donors/donorCounsellingDetails.html:97
 #: app/views/settings/users.html:35
 msgid "Remove"
@@ -3613,7 +3631,7 @@ msgstr "Retirer un Paquet"
 msgid "Remove Source Component"
 msgstr "Retirer un Composant de Source"
 
-#: app/scripts/controllers/testing/manageTestBatch.js:617
+#: app/scripts/controllers/testing/manageTestBatch.js:625
 msgid "Remove Test Sample(s)"
 msgstr "Retirer échantillon(s) du Test"
 
@@ -3644,11 +3662,11 @@ msgstr "Ré-ouvrir"
 msgid "Reopen Batch"
 msgstr "Ré-ouvrir un Lot"
 
-#: app/views/testing/manageTestBatch.html:97
+#: app/views/testing/manageTestBatch.html:106
 msgid "Repeat ABO/Rh Outcomes"
 msgstr "Répéter les Résultats ABO/Rh"
 
-#: app/views/testing/manageTestBatch.html:86
+#: app/views/testing/manageTestBatch.html:95
 msgid "Repeat TTI Outcomes"
 msgstr "Répéter les Résultats TTI"
 
@@ -3668,7 +3686,7 @@ msgstr "Réinitialisation..."
 msgid "Resolve"
 msgstr "Résoudre"
 
-#: app/views/testing/manageTestBatch.html:124
+#: app/views/testing/manageTestBatch.html:133
 #: app/views/testing/resolveAmbiguousABORhOutcomes.html:3
 msgid "Resolve Ambiguous ABO/Rh Outcomes"
 msgstr "Résoudre les résultats ambigus d’ABO/Rh"
@@ -3753,7 +3771,7 @@ msgstr "Le nom du rôle existe déjà"
 msgid "Roles"
 msgstr "Rôles"
 
-#: app/scripts/controllers/header.js:234 app/scripts/controllers/header.js:73
+#: app/scripts/controllers/header.js:235 app/scripts/controllers/header.js:73
 #: app/views/home.html:134 app/views/settings/sidebar.html:12
 msgid "SETTINGS"
 msgstr "PARAMETRES"
@@ -3775,11 +3793,6 @@ msgstr "De Même qu’à la Maison"
 #: app/views/donors/viewDonationSummary.html:233
 msgid "Sample Released"
 msgstr "Échantillon Utilisé"
-
-#: app/views/testing/manageTestBatch.html:185
-msgid "Sample not found and/or cannot be assigned to this test batch"
-msgstr ""
-"Échantillon non trouvé et / ou ne peut pas être attribué à ce lot de test"
 
 #: app/scripts/controllers/testing/reenterTestOutcomes.js:158
 #: app/views/donors/manageClinic.html:53 app/views/donors/viewDeferrals.html:79
@@ -3851,6 +3864,7 @@ msgstr "Sélectionnez un Composant à traiter"
 #: app/views/inventory/viewOrders.html:32
 #: app/views/inventory/viewReturns.html:32
 #: app/views/labelling/findSafeComponents.html:96
+#: app/views/testing/findTestSamples.html:65
 #: app/views/testing/manageTestBatches.html:143
 msgid "Select a date range that is less than one month"
 msgstr "Sélectionnez une plage de dates de moins d'un mois"
@@ -3900,6 +3914,8 @@ msgstr "Sélectionnez un site de traitement"
 #: app/views/reports/ttiPrevalenceReport.html:20
 #: app/views/reports/unitsDiscardedReport.html:36
 #: app/views/reports/unitsDiscardedReport.html:40
+#: app/views/testing/findTestSamples.html:64
+#: app/views/testing/findTestSamples.html:69
 #: app/views/testing/manageTestBatches.html:142
 #: app/views/testing/manageTestBatches.html:147
 msgid "Select a valid date"
@@ -4020,7 +4036,7 @@ msgstr "Niveaux de Stock"
 msgid "Storage Info"
 msgstr "Informations de Stockage"
 
-#: app/scripts/controllers/header.js:224 app/scripts/controllers/header.js:38
+#: app/scripts/controllers/header.js:225 app/scripts/controllers/header.js:38
 #: app/views/home.html:56
 msgid "TESTING"
 msgstr "TEST EN COURS"
@@ -4031,7 +4047,7 @@ msgstr "TTI"
 
 #: app/views/donors/donationDetails.html:83
 #: app/views/donors/viewDonationSummary.html:243
-#: app/views/testing/manageTestBatch.html:62
+#: app/views/testing/manageTestBatch.html:71
 #: app/views/testing/viewTestSample.html:70
 msgid "TTI Outcomes"
 msgstr "Résultats TTI"
@@ -4042,6 +4058,7 @@ msgstr "Résultats TTI"
 msgid "TTI Prevalence Report"
 msgstr "Rapport de Prévalence TTI"
 
+#: app/scripts/controllers/testing/findTestSamples.js:46
 #: app/scripts/controllers/testing/manageTestBatch.js:159
 #: app/views/donors/donationDetails.html:73
 #: app/views/donors/mergeDonorsDonations.html:22
@@ -4110,7 +4127,7 @@ msgstr "Échantillon du Test Produit"
 msgid "Test Samples"
 msgstr "Échantillons du Test"
 
-#: app/scripts/controllers/testing/manageTestBatch.js:619
+#: app/scripts/controllers/testing/manageTestBatch.js:627
 msgid ""
 "Test outcomes have been recorded for one or more samples. Removing these "
 "from the test batch will clear all outcomes for those samples. Are you sure "
@@ -4338,11 +4355,11 @@ msgstr "Ce champ doit contenir un nombre"
 msgid "This must be unique"
 msgstr "Ce champ doit être unique"
 
-#: app/views/testing/manageTestBatch.html:181
+#: app/views/testing/manageTestBatch.html:57
 msgid "This test batch is ready to be closed."
 msgstr "Ce lot de test est prêt à être fermé."
 
-#: app/views/testing/manageTestBatch.html:180
+#: app/views/testing/manageTestBatch.html:56
 msgid "This test batch is ready to be released."
 msgstr "Ce lot de test est prêt à être utilisé."
 
@@ -4395,6 +4412,7 @@ msgstr "Titre"
 #: app/views/reports/ttiPrevalenceReport.html:12
 #: app/views/reports/unitsDiscardedReport.html:32
 #: app/views/settings/auditLog.html:13
+#: app/views/testing/findTestSamples.html:60
 #: app/views/testing/manageTestBatches.html:138
 msgid "To"
 msgstr "A"
@@ -4696,6 +4714,7 @@ msgstr "Valeur"
 #: app/scripts/controllers/reports/donorsAdverseEventsReport.js:119
 #: app/scripts/controllers/reports/donorsDeferredReport.js:17
 #: app/scripts/controllers/reports/ttiPrevalenceReport.js:49
+#: app/scripts/controllers/testing/findTestSamples.js:26
 #: app/scripts/controllers/testing/manageTestBatch.js:141
 #: app/views/components/viewComponentBatch.html:23
 #: app/views/donors/addDonor.html:155 app/views/donors/donationDetails.html:19
@@ -4716,6 +4735,7 @@ msgstr "Valeur"
 #: app/views/donors/viewDonor.html:209 app/views/mobile/donorCounselling.html:8
 #: app/views/mobile/lookUp.html:8 app/views/mobile/mobileClinicExport.html:12
 #: app/views/reports/donorsAdverseEventsReport.html:9
+#: app/views/testing/findTestSamples.html:21
 #: app/views/testing/viewTestSample.html:42 app/views/translations.html:81
 msgid "Venue"
 msgstr "Salle"
@@ -4783,7 +4803,7 @@ msgstr "Afficher les Niveaux de Stock"
 msgid "View Summary"
 msgstr "Afficher un Résumé"
 
-#: app/views/testing/sidebar.html:15 app/views/testing/viewTestSample.html:3
+#: app/views/testing/sidebar.html:22 app/views/testing/viewTestSample.html:3
 msgid "View Test Sample"
 msgstr "Afficher les Échantillons de Test"
 
@@ -5007,8 +5027,8 @@ msgstr "{{count}} type de don(s) identifiés"
 msgid "{{count}} donor(s) found"
 msgstr "{{count}} donneur(s) identifiés"
 
-#: app/views/testing/manageTestBatch.html:167
-#: app/views/testing/manageTestBatch.html:171
+#: app/views/testing/manageTestBatch.html:176
+#: app/views/testing/manageTestBatch.html:180
 msgid "{{count}} of {{total}}"
 msgstr "{{count}} du {{total}}"
 
@@ -5068,6 +5088,18 @@ msgstr "{{count}} utilisateur(s) identifiés"
 msgid "{{count}} venue(s) found"
 msgstr "{{count}} d’emplacement identifiés"
 
+#: app/views/testing/manageTestBatch.html:61
+msgid ""
+"{{dinsAdded}} out of {{dinsToAdd}} sample(s) in the range were added to the "
+"test batch. {{testBatch.dinsInOtherTestBatches.length}} belonged to another "
+"test batch, and {{testBatch.dinsWithoutTestSamples.length}} didn't produce "
+"test samples."
+msgstr ""
+"[FR] {{dinsAdded}} out of {{dinsToAdd}} sample(s) in the range were added to "
+"the test batch. {{testBatch.dinsInOtherTestBatches.length}} belonged to "
+"another test batch, and {{testBatch.dinsWithoutTestSamples.length}} didn't "
+"produce test samples."
+
 #: app/views/donors/mergeDonorsSelection.html:1
 msgid "{{duplicateCount}} possible duplicate donors identified."
 msgstr "{{duplicateCount}} possibles de donneurs en double identifiés."
@@ -5091,3 +5123,7 @@ msgstr "{{startTime}} à {{endTime}}"
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
 msgstr "{{total}} don(s) en lot"
+
+#~ msgid "Sample not found and/or cannot be assigned to this test batch"
+#~ msgstr ""
+#~ "Échantillon non trouvé et / ou ne peut pas être attribué à ce lot de test"

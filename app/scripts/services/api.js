@@ -61,6 +61,14 @@ angular.module('bsis')
         getEditForm: {
           method: 'GET',
           url: url + '/donations/:id/form'
+        },
+        findByDin: {
+          method: 'GET',
+          url: url + '/donations'
+        },
+        search: {
+          method: 'GET',
+          url: url + '/donations/search'
         }
       }),
 
@@ -307,7 +315,11 @@ angular.module('bsis')
         }
       ),
 
-      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', {donationIdentificationNumber: '@donationIdentificationNumber'}, {
+      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', {din: '@donationIdentificationNumber'}, {
+        form: {
+          method: 'GET',
+          url: url + '/testresults/form'
+        },
         getTestSample: {
           method: 'GET',
           url: url + '/testresults/:donationIdentificationNumber/sample'

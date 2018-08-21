@@ -87,6 +87,7 @@ angular.module('bsis')
           onError(err);
         });
       },
+      getTestResultsForm: Api.TestResults.form,
       getTestResultsByDIN: Api.TestResults.get,
       getTestSampleByDIN: Api.TestResults.getTestSample,
       getTestBatchOverviewById: Api.TestResults.overview,
