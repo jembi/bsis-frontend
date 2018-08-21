@@ -109,15 +109,16 @@ angular.module('bsis')
     var testingRoutes = [
       '/testing',
       '/viewTestSample',
-      '/manageTestBatch',
-      '/viewTestBatch/' + uuidRegexPattern,
-      '/manageTTITesting/' + uuidRegexPattern + '/\\w+',
-      '/reEnterTTI/' + uuidRegexPattern + '/\\w+',
-      '/reEnterBloodTyping/' + uuidRegexPattern + '/\\w+',
-      '/managePendingTests/' + uuidRegexPattern + '/\\w+',
-      '/manageBloodGroupTesting/' + uuidRegexPattern + '/\\w+',
-      '/managePendingBloodTypingTests/' + uuidRegexPattern + '/\\w+',
-      '/manageBloodGroupMatchTesting/' + uuidRegexPattern
+      '/findTestSamples',
+      '/manageTestBatches',
+      '/manageTestBatch/' + uuidRegexPattern,
+      '/recordTTIOutcomes/' + uuidRegexPattern + '/\\w+',
+      '/reenterTTIOutcomes/' + uuidRegexPattern + '/\\w+',
+      '/reenterABORhOutcomes/' + uuidRegexPattern + '/\\w+',
+      '/recordRepeatTTIOutcomes/' + uuidRegexPattern + '/\\w+',
+      '/recordABORhOutcomes/' + uuidRegexPattern + '/\\w+',
+      '/recordRepeatABORhOutcomes/' + uuidRegexPattern + '/\\w+',
+      '/resolveAmbiguousABORhOutcomes/' + uuidRegexPattern
     ];
 
     var inventoryRoutes = [

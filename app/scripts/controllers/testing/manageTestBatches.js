@@ -1,28 +1,52 @@
 angular.module('bsis')
-  .controller('TestBatchCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS) {
+  .controller('ManageTestBatchesCtrl', function($scope, $location, TestingService, ngTableParams, $timeout, $filter, $log, DATEFORMAT, ICONS) {
 
     $scope.icons = ICONS;
-
-    // Open batches functions
+    $scope.maxDate = moment().toDate();
 
     var data = [{}];
     $scope.openTestBatches = false;
     var testBatchMaster = {
-      donationBatchIds: [],
-      location: null
+      testBatchDate: null,
+      location: null,
+      backEntry: false
+    };
+    var testBatchDateMaster = {
+      date: moment().toDate(),
+      time: moment().toDate()
     };
     $scope.testBatch = angular.copy(testBatchMaster);
+    $scope.testBatchDate = angular.copy(testBatchDateMaster);
 
     $scope.clearAddTestBatchForm = function(form) {
       $location.search({});
       form.$setPristine();
       $scope.submitted = '';
       $scope.testBatch = angular.copy(testBatchMaster);
+      $scope.testBatchDate = angular.copy(testBatchDateMaster);
       $scope.searchResults = '';
+      $scope.addingTestBatch = false;
     };
 
-    $scope.viewTestBatch = function(item) {
-      $location.path('/viewTestBatch/' + item.id);
+    $scope.applyBackEntryChange = function() {
+      if ($scope.testBatch.backEntry) {
+        $scope.testBatchDate.date = null;
+        $scope.testBatchDate.time = moment().startOf('day').toDate();
+      } else {
+        $scope.testBatchDate = angular.copy(testBatchDateMaster);
+      }
+    };
+
+    function getTestBatchDate(date, time) {
+      return moment(date).hour(time.getHours()).minutes(time.getMinutes()).toDate();
+    }
+
+    $scope.clearLocationId = function() {
+      $scope.search.locationId = null;
+    };
+
+    $scope.manageTestBatch = function(item) {
+      $location.path('/manageTestBatch/' + item.id);
     };
 
     $scope.getOpenTestBatches = function() {
@@ -39,34 +63,24 @@ angular.module('bsis')
       });
     };
 
-    $scope.getUnassignedDonationBatches = function() {
+    $scope.getTestBatchForm = function() {
       TestingService.getTestBatchFormFields(function(response) {
         if (response !== false) {
-          $scope.donationBatches = response.donationBatches;
           $scope.testingSites = response.testingSites;
         }
       });
     };
 
     $scope.getOpenTestBatches();
-    $scope.getUnassignedDonationBatches();
+    $scope.getTestBatchForm();
 
     $scope.addTestBatch = function(addTestBatchForm) {
-      if ($scope.testBatch.donationBatchIds.length === 0) {
-        addTestBatchForm.donationBatches.$setValidity('required', false);
-        return;
-      }
-
       if (addTestBatchForm.$valid) {
-
         $scope.addingTestBatch = true;
+        $scope.testBatch.testBatchDate = getTestBatchDate($scope.testBatchDate.date, $scope.testBatchDate.time);
         TestingService.addTestBatch($scope.testBatch, function() {
-          $scope.testBatch = angular.copy(testBatchMaster);
           $scope.getOpenTestBatches();
-          $scope.getUnassignedDonationBatches();
-          $scope.submitted = '';
-          $scope.addingTestBatch = false;
-          addTestBatchForm.$setPristine();
+          $scope.clearAddTestBatchForm(addTestBatchForm);
         }, function(err) {
           $log.error(err);
           $scope.addingTestBatch = false;
@@ -110,6 +124,7 @@ angular.module('bsis')
     $scope.closedTestBatches = false;
 
     var master = {
+      allSites: true,
       status: 'CLOSED',
       startDate: moment().subtract(7, 'days').startOf('day').toDate(),
       endDate: moment().endOf('day').toDate()
@@ -138,6 +153,10 @@ angular.module('bsis')
         if ($scope.search.endDate) {
           var endDate = moment($scope.search.endDate).endOf('day').toDate();
           query.endDate = endDate;
+        }
+
+        if ($scope.search.locationId) {
+          query.locationId = $scope.search.locationId;
         }
 
         $scope.searching = true;

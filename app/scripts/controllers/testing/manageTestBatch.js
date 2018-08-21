@@ -2,14 +2,19 @@
 
 angular.module('bsis')
 
-  .controller('ViewTestBatchCtrl', function($scope, $location, $log, $filter, $timeout, $routeParams, $q, $route, uiGridConstants, gettextCatalog, TestingService, ModalsService, DATEFORMAT) {
-
-    var data = [{}];
-    $scope.data = data;
+  .controller('ManageTestBatchCtrl', function($scope, $location, $log, $filter, $timeout, $routeParams, $q, $route, DONATION, uiGridConstants, gettextCatalog, TestingService, ModalsService, DATEFORMAT) {
 
     $scope.dateFormat = DATEFORMAT;
+    $scope.today = new Date();
+    $scope.dinLength = DONATION.DIN_LENGTH;
 
-    $scope.testBatchAvailableDonationBatches = [];
+    var samplesToRemoveList = [];
+    var dinRangeMaster = {
+      toDIN: null,
+      fromDIN: null
+    };
+    $scope.dinRange = angular.copy(dinRangeMaster);
+
     $scope.exportOptions = [
       {
         id: 'allSamples',
@@ -41,46 +46,39 @@ angular.module('bsis')
     $scope.getCurrentTestBatch = function() {
       TestingService.getTestBatchById($routeParams.id, function(response) {
         $scope.testBatch = response.testBatch;
-        $scope.refreshCurrentTestBatch();
-        $scope.refreshTestBatchAvailableDonations();
+        $scope.refreshCurrentTestBatch(response);
+        $scope.refreshEditTestBatchForm();
       }, function(err) {
         $log.error(err);
       });
     };
 
-    $scope.refreshCurrentTestBatch = function() {
-      // get the donation batches and the donations linked to this test batch
-      $scope.testBatch.donationBatchIds = [];
-      var donations = [];
+    $scope.refreshCurrentTestBatch = function(response) {
       var numReleasedSamples = 0;
-      angular.forEach($scope.testBatch.donationBatches, function(batch) {
-        $scope.testBatch.donationBatchIds.push(batch.id);
-        angular.forEach(batch.donations, function(donation) {
-          if (donation.released) {
-            numReleasedSamples++;
-          }
-          donations.push(donation);
-        });
+      angular.forEach($scope.testBatch.donations, function(donation) {
+        // calculate the number of released samples
+        if (donation.released) {
+          numReleasedSamples++;
+        }
       });
-      data = donations;
-      $scope.gridOptions.data = data;
-      $scope.data = data;
+
+      if (angular.isDefined(response.donations)) {
+        $scope.gridOptions.data = response.donations;
+      } else {
+        $scope.gridOptions.data = $scope.testBatch.donations;
+      }
       $scope.testBatch.numReleasedSamples = numReleasedSamples;
+      $scope.testBatchDate = {
+        // set the testBatchDate so it can be edited
+        date: new Date($scope.testBatch.testBatchDate),
+        time: new Date($scope.testBatch.testBatchDate)
+      };
     };
 
-    $scope.refreshTestBatchAvailableDonations = function() {
-      $scope.testBatchAvailableDonationBatches = [];
-      angular.forEach($scope.testBatch.donationBatches, function(batch) {
-        $scope.testBatchAvailableDonationBatches.push(batch);
-      });
-      // get the available donation batches
+    $scope.refreshEditTestBatchForm = function() {
       TestingService.getTestBatchFormFields(function(response) {
         if (response !== false) {
-          $scope.donationBatches = response.donationBatches;
           $scope.locations = response.testingSites;
-          angular.forEach(response.donationBatches, function(batch) {
-            $scope.testBatchAvailableDonationBatches.push(batch);
-          });
         }
       });
     };
@@ -194,6 +192,9 @@ angular.module('bsis')
       paginationPageSizes: [10],
       paginationTemplate: 'views/template/pagination.html',
       columnDefs: columnDefs,
+      enableRowSelection: true,
+      multiSelect: true,
+      enableSelectAll: false,
 
       exporterPdfOrientation: 'landscape',
       exporterPdfPageSize: 'A4',
@@ -256,27 +257,6 @@ angular.module('bsis')
         return finalArray;
       },
 
-
-      exporterPdfCustomFormatter: function(docDefinition) {
-        var prefix = [];
-        angular.forEach($scope.testBatch.donationBatches, function(val) {
-          var venue = val.venue.name;
-          var dateCreated = $filter('bsisDate')(val.donationBatchDate);
-          var numDonations = val.numDonations;
-          prefix.push(
-            {
-              text: gettextCatalog.getString('Venue') + ': ' + venue + ', ' +
-                gettextCatalog.getString('Date Created') + ': ' + dateCreated + ', ' +
-                gettextCatalog.getString('Number of Donations') + ': ' + numDonations + '\n'
-            }
-          );
-        });
-
-        docDefinition.content = [{text: prefix, margin: [-10, 0, 0, 0], fontSize: 7}].concat(docDefinition.content);
-        return docDefinition;
-      },
-
-
       exporterPdfTableStyle: {margin: [-10, 10, 0, 0]},
 
 
@@ -296,9 +276,16 @@ angular.module('bsis')
       },
       enableFiltering: false,
 
+      isRowSelectable: function(row) {
+        return $scope.testBatch.permissions.canEditDonations && row.entity.status !== 'RELEASED';
+      },
+
       onRegisterApi: function(gridApi) {
         $scope.gridApi = gridApi;
-
+        gridApi.selection.on.rowSelectionChanged($scope, function() {
+          samplesToRemoveList = gridApi.selection.getSelectedRows();
+          $scope.isRemoveSamplesEnabled = samplesToRemoveList.length > 0;
+        });
       }
     };
 
@@ -441,7 +428,7 @@ angular.module('bsis')
       ModalsService.showConfirmation(confirmation).then(function() {
 
         TestingService.closeTestBatch(testBatch, function() {
-          $location.path('/manageTestBatch');
+          $location.path('/manageTestBatches');
         }, function(err) {
           $log.error(err);
         });
@@ -481,7 +468,7 @@ angular.module('bsis')
       ModalsService.showConfirmation(confirmation).then(function() {
 
         TestingService.deleteTestBatch(testBatchId, function() {
-          $location.path('/manageTestBatch');
+          $location.path('/manageTestBatches');
         }, function(err) {
           $scope.err = err;
           $log.error(err);
@@ -493,11 +480,13 @@ angular.module('bsis')
       var message;
       if (testBatch.readyForReleaseCount < testBatch.numSamples) {
         message = gettextCatalog.getString('{{count}} of {{total}} samples will be released, ' +
-          'the remaining samples require discrepancies to be resolved. Are you sure that ' +
-          'you want to release this test batch?',
+          'the remaining samples require discrepancies to be resolved. ' +
+          'Once you release these samples you will no longer be able to add DINs to this batch. ' +
+          'Are you sure that you want to release this test batch?',
           {count: testBatch.readyForReleaseCount, total: testBatch.numSamples});
       } else {
         message = gettextCatalog.getString('{{count}} of {{total}} samples will be released. ' +
+          'Once you release these samples you will no longer be able to add DINs to this batch. ' +
           'Are you sure that you want to release this test batch?',
           {count: testBatch.readyForReleaseCount, total: testBatch.numSamples});
       }
@@ -511,7 +500,7 @@ angular.module('bsis')
       ModalsService.showConfirmation(confirmation).then(function() {
         TestingService.releaseTestBatch(testBatch, function(response) {
           $scope.testBatch = response;
-          $scope.refreshCurrentTestBatch();
+          $scope.refreshCurrentTestBatch(response);
         }, function(err) {
           $scope.err = err;
           $log.error(err);
@@ -520,9 +509,10 @@ angular.module('bsis')
     };
 
     $scope.updateTestBatch = function(testBatch) {
+      testBatch.testBatchDate = $scope.testBatchDate.date;
       TestingService.updateTestBatch(testBatch, function(response) {
         $scope.testBatch = response;
-        $scope.refreshCurrentTestBatch();
+        $scope.refreshCurrentTestBatch(response);
         $scope.err = '';
       }, function(err) {
         $scope.err = err;
@@ -530,11 +520,118 @@ angular.module('bsis')
       });
     };
 
-    $scope.validateForm = function(form) {
-      if (form.donationBatches.$invalid) {
+    $scope.validateForm = function(editableForm) {
+      if (editableForm.$invalid) {
         return 'invalid';
       } else {
         $scope.confirmEdit = false;
+        return true;
       }
+    };
+
+    $scope.updateTimeOnTestBatchDate = function() {
+      if ($scope.testBatchDate.time) {
+        $scope.testBatchDate.date = moment($scope.testBatchDate.date).hour($scope.testBatchDate.time.getHours()).minutes($scope.testBatchDate.time.getMinutes()).toDate();
+      }
+    };
+
+    $scope.validateDINRange = function() {
+      if ($scope.dinRange.toDIN && $scope.dinRange.fromDIN > $scope.dinRange.toDIN) {
+        $scope.addDonationToTestBatchForm.toDIN.$setValidity('invalidDINRange', false);
+      } else {
+        $scope.addDonationToTestBatchForm.toDIN.$setValidity('invalidDINRange', true);
+      }
+    };
+
+    $scope.addSampleToTestBatch = function() {
+      var testBatchSamples = {
+        testBatchId : $routeParams.id,
+        fromDIN     : $scope.dinRange.fromDIN,
+        toDIN       : $scope.dinRange.toDIN
+      };
+
+      $scope.validateDINRange();
+      if ($scope.addDonationToTestBatchForm.$invalid) {
+        return ;
+      }
+
+      if (!$scope.dinRange.toDIN) {
+        testBatchSamples.toDIN = $scope.dinRange.fromDIN;
+      }
+
+      var currentDonationsInBatch = $scope.testBatch.donations.length;
+
+      TestingService.addDonationsToTestBatch({id: testBatchSamples.testBatchId}, testBatchSamples, function(response) {
+        $scope.testBatch = response;
+        $scope.refreshCurrentTestBatch(response);
+        $scope.clearAddDonationToTestBatchForm($scope.addDonationToTestBatchForm);
+
+        $scope.dinsToAdd = response.donations.length + response.dinsWithoutTestSamples.length + response.dinsInOtherTestBatches.length - currentDonationsInBatch;
+        $scope.dinsAdded = response.donations.length - currentDonationsInBatch;
+        $scope.dinsIgnored = response.dinsWithoutTestSamples.length + response.dinsInOtherTestBatches.length;
+      }, function(err) {
+        $log.error(err);
+        $scope.hasErrors = false;
+        if (err.status !== 404 && err.status !== 500 && err.data.hasErrors === 'true') {
+          $scope.hasErrors = true;
+        }
+      });
+    };
+
+    $scope.clearAddDonationToTestBatchForm = function(addDonationToTestBatchForm) {
+      addDonationToTestBatchForm.$setPristine();
+      addDonationToTestBatchForm.$setUntouched();
+      $scope.dinRange = angular.copy(dinRangeMaster);
+      $scope.hasErrors = false;
+    };
+
+    function removeSamplesFromTestBatch(sampleIds) {
+      $scope.dinsToAdd = null;
+      $scope.dinsIgnored = null;
+      TestingService.removeDonationsFromTestBatch(
+        {id: $routeParams.id},
+          {testBatchId: $routeParams.id, donationIds: sampleIds},
+          function(response) {
+            $scope.testBatch = response;
+            $scope.refreshCurrentTestBatch(response);
+          }, function(err) {
+            $log.error(err);
+            $scope.hasErrors = false;
+            if (err.status !== 404 && err.status !== 500 && err.data.hasErrors === 'true') {
+              $scope.hasErrors = true;
+            }
+          });
+      $scope.removingSamples = false;
+    }
+
+    $scope.removeSamplesFromTestBatch = function() {
+      $scope.removingSamples = true;
+      var testOutcomesCaptured = false;
+      var sampleIds = [];
+      angular.forEach(samplesToRemoveList, function(sample) {
+        $log.info(sample.donationIdentificationNumber);
+        sampleIds.push(sample.id);
+        if (sample.ttistatus !== 'NOT_DONE' || sample.bloodTypingStatus !== 'NOT_DONE' || sample.bloodTypingMatchStatus !== 'NOT_DONE') {
+          testOutcomesCaptured = true;
+        }
+      });
+
+      if (!testOutcomesCaptured) {
+        removeSamplesFromTestBatch(sampleIds);
+        return;
+      }
+
+      var removalConfirmation = {
+        title: gettextCatalog.getString('Remove Test Sample(s)'),
+        button: gettextCatalog.getString('Remove'),
+        message: gettextCatalog.getString('Test outcomes have been recorded for one or more samples. Removing these from the test batch will clear all outcomes for those samples. Are you sure you want to continue?')
+      };
+
+      ModalsService.showConfirmation(removalConfirmation).then(function() {
+        removeSamplesFromTestBatch(sampleIds);
+      }).catch(function() {
+        // Confirmation was rejected
+        $scope.removingSamples = false;
+      });
     };
   });

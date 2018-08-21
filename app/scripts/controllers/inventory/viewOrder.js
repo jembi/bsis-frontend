@@ -1,5 +1,7 @@
 'use strict';
 
+/*global pdfMake */
+
 angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $log, $filter, $routeParams, OrderFormsService, ModalsService, DATEFORMAT, gettextCatalog) {
 
   $scope.dateFormat = DATEFORMAT;
@@ -63,11 +65,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     paginationPageSize: 4,
     paginationPageSizes: [4],
     paginationTemplate: 'views/template/pagination.html',
-    minRowsToShow: 4,
-
-    onRegisterApi: function(gridApi) {
-      $scope.unitsOrderedGridApi = gridApi;
-    }
+    minRowsToShow: 4
   };
 
   $scope.unitsSuppliedGridOptions = {
@@ -76,118 +74,7 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     paginationPageSize: 4,
     paginationPageSizes: [4],
     paginationTemplate: 'views/template/pagination.html',
-    minRowsToShow: 4,
-
-    exporterPdfOrientation: 'portrait',
-    exporterPdfPageSize: 'A4',
-    exporterPdfDefaultStyle: { fontSize: 4, margin: [-2, 0, 0, 0] },
-    exporterPdfTableHeaderStyle: { fontSize: 5, bold: true, margin: [-2, 0, 0, 0] },
-    exporterPdfMaxGridWidth: 400,
-
-    // PDF header
-    exporterPdfHeader: function() {
-      var finalArray = [
-        {
-          text: gettextCatalog.getString('Dispatch Note'),
-          fontSize: 10,
-          bold: true,
-          margin: [30, 20, 0, 0] // [left, top, right, bottom]
-        }
-      ];
-      return finalArray;
-    },
-
-    exporterPdfTableStyle: { margin: [-10, 10, 0, 0] },
-
-    exporterPdfCustomFormatter: function(docDefinition) {
-      var prefix = [];
-      prefix.push(
-        {
-          text: gettextCatalog.getString('Order Date') + ': ',
-          bold: true
-        }, {
-          text: $filter('bsisDate')($scope.orderForm.orderDate)
-        }, {
-          text: ' ' + gettextCatalog.getString('Dispatch From') + ': ',
-          bold: true
-        }, {
-          text: $scope.orderForm.dispatchedFrom.name
-        }, {
-          text: ' ' + gettextCatalog.getString('Dispatched To') + ': ',
-          bold: true
-        }, {
-          text: $scope.orderForm.dispatchedTo.name
-        }, {
-          text: ' ' + gettextCatalog.getString('Order Type') + ': ',
-          bold: true
-        }, {
-          text: gettextCatalog.getString($filter('titleCase')($scope.orderForm.type)) + '\n'
-        }
-      );
-      var notSpecifiedText = gettextCatalog.getString('Not Specified');
-      if ($scope.orderForm.type === 'PATIENT_REQUEST') {
-        prefix.push(
-          {
-            text: ' ' + gettextCatalog.getString('Blood Bank') + ': ',
-            bold: true
-          }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalBloodBankNumber) ? notSpecifiedText : $scope.orderForm.patient.hospitalBloodBankNumber
-          }, {
-            text: ' ' + gettextCatalog.getString('Ward Number') + ': ',
-            bold: true
-          }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.hospitalWardNumber) ? notSpecifiedText : $scope.orderForm.patient.hospitalWardNumber
-          }, {
-            text: ' ' + gettextCatalog.getString('Patient Number') + ': ',
-            bold: true
-          }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.patientNumber) ? notSpecifiedText : $scope.orderForm.patient.patientNumber
-          }, {
-            text: ' ' + gettextCatalog.getString('Patient Name') + ': ',
-            bold: true
-          }, {
-            text: $scope.orderForm.patient.name1 + ' ' + $scope.orderForm.patient.name2 + '\n'
-          }, {
-            text: ' ' + gettextCatalog.getString('Blood Group') + ': ',
-            bold: true
-          }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.bloodGroup) ? notSpecifiedText : $scope.orderForm.patient.bloodGroup
-          }, {
-            text: ' ' + gettextCatalog.getString('Gender') + ': ',
-            bold: true
-          }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.gender) ? notSpecifiedText : gettextCatalog.getString($filter('titleCase')($scope.orderForm.patient.gender))
-          }, {
-            text: ' ' + gettextCatalog.getString('Date of Birth') + ': ',
-            bold: true
-          }, {
-            text: $scope.isFieldEmpty($scope.orderForm.patient.dateOfBirth) ? notSpecifiedText : $filter('bsisDate')($scope.orderForm.patient.dateOfBirth)
-          }
-        );
-      }
-
-      docDefinition.content = [{ text: prefix, margin: [-10, 0, 0, 0], fontSize: 7 }].concat(docDefinition.content);
-      return docDefinition;
-    },
-
-    // PDF footer
-    exporterPdfFooter: function(currentPage, pageCount) {
-      var columns = [
-        { text: gettextCatalog.getString('Number of components: {{componentNumber}}', {componentNumber: $scope.unitsSuppliedGridOptions.data.length}), width: 'auto' },
-        { text: gettextCatalog.getString('Date generated: {{date}}', { date: $filter('bsisDateTime')(new Date())}), width: 'auto' },
-        { text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: { alignment: 'right' } }
-      ];
-      return {
-        columns: columns,
-        columnGap: 10,
-        margin: [30, 0],
-        fontSize: 6
-      };
-    },
-
-    onRegisterApi: function(gridApi) {
-      $scope.unitsSuppliedGridApi = gridApi;
-    }
+    minRowsToShow: 4
   };
 
   function populateUnitsOrderedGrid(orderForm) {
@@ -239,8 +126,113 @@ angular.module('bsis').controller('ViewOrderCtrl', function($scope, $location, $
     }, $log.error);
   }
 
+  var generateDispatchReportTitle = function() {
+    var title = gettextCatalog.getString('Order Date') + ': ' + $filter('bsisDate')($scope.orderForm.orderDate) + '   ' +
+      gettextCatalog.getString('Dispatch From') + ': ' + $scope.orderForm.dispatchedFrom.name + '   ' +
+      gettextCatalog.getString('Dispatched To') + ': ' + $scope.orderForm.dispatchedTo.name + '   ' +
+      gettextCatalog.getString('Order Type') + ': ' +  gettextCatalog.getString($filter('titleCase')($scope.orderForm.type)) + '  \n\n';
+
+    if ($scope.orderForm.type === 'PATIENT_REQUEST') {
+      var notSpecifiedText = gettextCatalog.getString('Not Specified');
+      title += gettextCatalog.getString('Blood Bank') + ': ' + ($scope.isFieldEmpty($scope.orderForm.patient.hospitalBloodBankNumber) ? notSpecifiedText : $scope.orderForm.patient.hospitalBloodBankNumber) + '   ';
+      title += gettextCatalog.getString('Ward Number') + ': ' + ($scope.isFieldEmpty($scope.orderForm.patient.hospitalWardNumber) ? notSpecifiedText : $scope.orderForm.patient.hospitalWardNumber) + '   ';
+      title += gettextCatalog.getString('Patient Number') + ': ' + ($scope.isFieldEmpty($scope.orderForm.patient.patientNumber) ? notSpecifiedText : $scope.orderForm.patient.patientNumber) + '   ';
+      title += gettextCatalog.getString('Patient Name') + ': ' + ($scope.orderForm.patient.name1 + ' ' + $scope.orderForm.patient.name2) + '   ';
+      title += gettextCatalog.getString('Blood Group') + ': ' + ($scope.isFieldEmpty($scope.orderForm.patient.bloodGroup) ? notSpecifiedText : $scope.orderForm.patient.bloodGroup) + '   ';
+      title += gettextCatalog.getString('Gender') + ': ' + ($scope.isFieldEmpty($scope.orderForm.patient.gender) ? notSpecifiedText : gettextCatalog.getString($filter('titleCase')($scope.orderForm.patient.gender))) + '   ';
+      title += gettextCatalog.getString('Date of Birth') + ': ' + ($scope.isFieldEmpty($scope.orderForm.patient.dateOfBirth) ? notSpecifiedText : $filter('bsisDate')($scope.orderForm.patient.dateOfBirth)) + ' \n\n';
+    }
+
+    return title;
+  };
+
+  var retrieveDispatchedDINs = function(componentTypeName, bloodGroup) {
+    var dispatchedDINs = [];
+    $scope.unitsSuppliedGridOptions.data.forEach(function(unitSuppliedRecord) {
+      if (unitSuppliedRecord.componentTypeName === componentTypeName &&
+        unitSuppliedRecord.bloodGroup === bloodGroup) {
+        dispatchedDINs.push(unitSuppliedRecord.donationIdentificationNumber);
+      }
+    });
+    return dispatchedDINs;
+  };
+
+  var generateDispatchReportRecords = function(unitOrderedRecord) {
+    var dispatchedDINs = retrieveDispatchedDINs(unitOrderedRecord.componentTypeName, unitOrderedRecord.bloodGroup);
+    var dispatchReportRecords = [];
+
+    dispatchReportRecords.push([
+      { rowSpan: dispatchedDINs.length, text: unitOrderedRecord.componentTypeName },
+      { rowSpan: dispatchedDINs.length, text: unitOrderedRecord.bloodGroup },
+      { rowSpan: dispatchedDINs.length, text: unitOrderedRecord.numberOfUnits, alignment: 'right' },
+      { rowSpan: dispatchedDINs.length, text: unitOrderedRecord.numberSupplied, alignment: 'right' },
+      { text: dispatchedDINs[0], alignment: 'center' },
+      { rowSpan: dispatchedDINs.length, text: unitOrderedRecord.gap, alignment: 'right' }]);
+
+    if (dispatchedDINs.length > 1) {
+      dispatchedDINs.splice(0, 1); // removes the first DIN (already inserted)
+      dispatchedDINs.forEach(function(din) {
+        dispatchReportRecords.push(['', '', '', '', { text: din, alignment: 'center' }, '']);
+      });
+    }
+
+    return dispatchReportRecords;
+  };
+
+  var generateDispatchNoteReport = function() {
+    var body = [];
+
+    // table header
+    body.push([
+      {style: 'tableHeader', text: gettextCatalog.getString('Component Type')},
+      {style: 'tableHeader', text: gettextCatalog.getString('Blood Group')},
+      {style: 'tableHeader', text: gettextCatalog.getString('Units Ordered')},
+      {style: 'tableHeader', colSpan: 2, text: gettextCatalog.getString('Units Supplied') + ' / ' +  gettextCatalog.getString('DIN')},
+      null,
+      {style: 'tableHeader', text: gettextCatalog.getString('Gap')}]
+    );
+
+    // data rows
+    $scope.unitsOrderedGridOptions.data.forEach(function(unitOrderedRecord) {
+      var dispatchReportRecords = generateDispatchReportRecords(unitOrderedRecord);
+      dispatchReportRecords.forEach(function(dispatchReportRecord) {
+        body.push(dispatchReportRecord);
+      });
+    });
+
+    var docDefinition = {
+      content: [
+        {
+          text: gettextCatalog.getString('Dispatch Note'),
+          style: 'header'
+        },
+        generateDispatchReportTitle(),
+        {
+          style: 'tableExample',
+          table: {
+            widths: ['*', 70, 80, 50, 70, 50],
+            body: body
+          }
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 17,
+          bold: true,
+          alignment: 'center'
+        },
+        tableHeader: {
+          alignment: 'center',
+          bold: true
+        }
+      }
+    };
+
+    return docDefinition;
+  };
+
   $scope.exportDispatchNote = function() {
-    $scope.unitsSuppliedGridApi.exporter.pdfExport('all', 'all');
+    pdfMake.createPdf(generateDispatchNoteReport()).open();
   };
 
   $scope.deleteOrder = function() {

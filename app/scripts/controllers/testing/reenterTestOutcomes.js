@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('TestsReEnterCtrl', function($scope, $location, $log, TestingService, $uibModal, $sce, $filter, ngTableParams, $timeout, $routeParams, gettextCatalog) {
+  .controller('ReenterTestOutcomesCtrl', function($scope, $location, $log, TestingService, $uibModal, $sce, $filter, ngTableParams, $timeout, $routeParams, gettextCatalog) {
 
     $scope.data = [];
 
@@ -145,7 +145,7 @@ angular.module('bsis')
       });
 
       TestingService.saveTestResults({reEntry: true}, testResultsArray, function() {
-        $location.path('/viewTestBatch/' + $routeParams.id);
+        $location.path('/manageTestBatch/' + $routeParams.id);
       }, function(err) {
         $log.error(err);
         $scope.savingTestOutcomes = false;
