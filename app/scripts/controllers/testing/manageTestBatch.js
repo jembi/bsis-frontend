@@ -566,9 +566,9 @@ angular.module('bsis')
         $scope.refreshCurrentTestBatch(response);
         $scope.clearAddDonationToTestBatchForm($scope.addDonationToTestBatchForm);
 
-        $scope.dinsToAdd = response.donations.length + response.dinsWithoutTestSamples.length + response.dinsInOtherTestBatches.length - currentDonationsInBatch;
+        $scope.dinsToAdd = response.donations.length + response.dinsWithoutTestSamples.length + response.dinsInOtherTestBatches.length + response.dinsInOpenDonationanBatch.length - currentDonationsInBatch;
         $scope.dinsAdded = response.donations.length - currentDonationsInBatch;
-        $scope.dinsIgnored = response.dinsWithoutTestSamples.length + response.dinsInOtherTestBatches.length;
+        $scope.dinsIgnored = response.dinsWithoutTestSamples.length + response.dinsInOtherTestBatches.length + response.dinsInOpenDonationanBatch.length;
       }, function(err) {
         $log.error(err);
         $scope.hasErrors = false;
