@@ -81,7 +81,7 @@
                     <td class="value">
                         <fieldset ng-disabled="!donation.permissions.canEditPackType">
                         <span editable-select="donation.packType" e-name="packType"
-                              e-ng-options="pt as pt.packType disable when (testBatchStatus != null && testBatchStatus !== 'OPEN' && !donation.packType.testSampleProduced && pt.testSampleProduced) for pt in packTypes track by pt.id">{{donation.packType.packType}}</span>
+                              e-ng-options="pt as pt.packType disable when (testBatchStatus != null && testBatchStatus !== 'OPEN' && ((!donation.packType.testSampleProduced && pt.testSampleProduced) || (donation.packType.testSampleProduced && !pt.testSampleProduced))) for pt in packTypes track by pt.id">{{donation.packType.packType}}</span>
                         </fieldset>
                     </td>
                 </tr>
