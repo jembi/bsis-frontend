@@ -58,7 +58,7 @@
     <uib-alert type="info" ng-if="hasPendingRepeatTTITests || hasPendingConfirmatoryTTITests"><span translate>Pending: TTI repeat and/or confirmatory test outcomes.</span></uib-alert>
     <uib-alert type="info" ng-if="hasPendingRepeatBloodTypingTests"><span translate>Pending: blood group serology repeat test outcomes.</span></uib-alert>
     <uib-alert type="info" ng-if="hasPendingBloodTypingConfirmations"><span translate>Pending: ambiguous blood group serology test outcomes.</span></uib-alert>
-    <uib-alert type="info" ng-if="dinsIgnored > 0"><span translate>{{dinsAdded}} out of {{dinsToAdd}} sample(s) in the range were added to the test batch. {{testBatch.dinsInOtherTestBatches.length}} belonged to another test batch, and {{testBatch.dinsWithoutTestSamples.length}} didn't produce test samples.</span></uib-alert>
+    <uib-alert type="info" ng-if="dinsIgnored > 0"><span translate>{{dinsAdded}} out of {{dinsToAdd}} sample(s) in the range were added to the test batch. {{testBatch.dinsInOtherTestBatches.length}} belonged to another test batch and {{testBatch.dinsWithoutTestSamples.length}} didn't produce test samples and {{testBatch.dinsInOpenDonationanBatch.length}} belonged to an open Donation Batch.</span></uib-alert>
     <uib-alert type="danger" ng-if="dinsIgnored === 0 && dinsToAdd === 0"><span translate>Already added or invalid DINs entered.</span></uib-alert>
   </div>
 
