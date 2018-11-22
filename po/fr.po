@@ -21,11 +21,11 @@ msgstr "%"
 
 #: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:132
 msgid "% Issued vs Ordered"
-msgstr "% Émis vs commandé"
+msgstr "% Distribué vs commandé"
 
 #: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:136
 msgid "% Issued vs Requests"
-msgstr "% Émis vs demandes"
+msgstr "% Distribué vs demandes"
 
 #: app/views/settings/manageComponentType.html:88
 msgid "(0.001 to 2) with max 3 decimal digits (i.e. 1.004)"
@@ -44,7 +44,7 @@ msgstr "ABO"
 #: app/scripts/controllers/reports/aboRhGroupsReport.js:260
 #: app/views/reports/aboRhGroupsReport.html:3 app/views/reports/sidebar.html:13
 msgid "ABO Rh Blood Grouping Report"
-msgstr "Rapport sur le regroupement sanguin ABO Rho"
+msgstr "Rapport des Groupes sanguins ABO RhD"
 
 #: app/views/donors/donationDetails.html:31
 msgid "ABO/Rh"
@@ -57,7 +57,7 @@ msgstr "Résultats ABO / Rh"
 #: app/views/header.html:43 app/views/settings/accountSettings.html:3
 #: app/views/settings/sidebar.html:13
 msgid "Account Settings"
-msgstr "Paramètres Acnombre"
+msgstr "Gestion des comptes"
 
 #: app/scripts/services/donors.js:414
 #: app/views/testing/manageTestBatch.html:233 app/views/translations.html:11
@@ -123,7 +123,7 @@ msgstr "Ajouter une nouvelle configuration"
 
 #: app/views/settings/deferralReasons.html:11
 msgid "Add New Deferral Reason"
-msgstr "Ajouter une nouvelle raison de report"
+msgstr "Ajouter une nouvelle raison d’ajournement"
 
 #: app/views/settings/discardReasons.html:11
 msgid "Add New Discard Reason"
@@ -325,7 +325,7 @@ msgstr "Une erreur est survenue."
 #: app/views/inventory/findInventory.html:73
 #: app/views/labelling/findSafeComponents.html:79
 msgid "Any"
-msgstr "Tout"
+msgstr "Tous"
 
 #: app/views/translations.html:103
 msgid "April"
@@ -432,7 +432,7 @@ msgstr "Disponible"
 #: app/views/donors/viewDonationSummary.html:138
 #: app/views/donors/viewDonations.html:41 app/views/donors/viewDonor.html:213
 msgid "BP"
-msgstr "BP"
+msgstr "TA"
 
 #: app/views/donors/manageDuplicateDonors.html:65
 msgid "Back"
@@ -463,7 +463,7 @@ msgstr "Date de naissance"
 #: app/views/donors/addDonorDonation.html:98
 #: app/views/donors/viewDonationSummary.html:33
 msgid "Bleed Times"
-msgstr "Temps de saignement"
+msgstr "Durée de prélèvement"
 
 #: app/scripts/controllers/components/recordComponents.js:105
 msgid ""
@@ -488,7 +488,7 @@ msgstr "Sang ABO"
 #: app/views/inventory/recordTransfusions.html:129
 #: app/views/inventory/viewOrder.html:32
 msgid "Blood Bank"
-msgstr "Banque du sang"
+msgstr "Banque de sang"
 
 #: app/scripts/controllers/donors/donorCommunications.js:94
 #: app/scripts/controllers/donors/donorCounselling.js:174
@@ -537,7 +537,7 @@ msgstr "Statut sérologique du groupe sanguin"
 #: app/views/inventory/findInventory.html:62
 #: app/views/labelling/findSafeComponents.html:69
 msgid "Blood Groups"
-msgstr "Groupes sanguins"
+msgstr "Groupe Sanguin"
 
 #: app/views/testing/resolveAmbiguousABORhOutcomes.html:53
 msgid "Blood Rh"
@@ -556,11 +556,11 @@ msgstr "Type de test sanguin"
 #: app/scripts/controllers/components/viewComponentBatch.js:85
 #: app/views/components/viewComponentBatch.html:40
 msgid "Blood Transport Box Temperature"
-msgstr "Température de la boîte de transport de sang"
+msgstr "Température de la conteneur de transport de sang"
 
 #: app/views/components/addComponentBatch.html:68
 msgid "Blood Transport box"
-msgstr "Boîte de transport de sang"
+msgstr "Boîte de Transport du Sang"
 
 #: app/scripts/controllers/mobile/mobile.js:55
 #: app/scripts/controllers/mobile/mobileClinicExport.js:64
@@ -581,7 +581,7 @@ msgstr "Statut hémotypologie"
 #: app/views/reports/bloodUnitsIssuedReport.html:3
 #: app/views/reports/sidebar.html:19
 msgid "Blood Units Issued Summary Report"
-msgstr "Rapport sommaire des unités de sang publié"
+msgstr "Résumé du Rapport des unités de sang distribuées"
 
 #. Data Type
 #: app/views/translations.html:91
@@ -634,7 +634,7 @@ msgstr "Identifiant"
 #: app/scripts/controllers/settings/componentTypes.js:21
 #: app/views/settings/manageComponentType.html:39
 msgid "Can be Issued"
-msgstr "Peut être émis"
+msgstr "Peut être Distribué"
 
 #: app/views/confirmModal.html:8 app/views/donors/addDonation.html:328
 #: app/views/donors/addDonorDonation.html:251
@@ -699,7 +699,8 @@ msgstr "Catégorie"
 #: app/views/home.html:73
 msgid "Check Components to Print Pack and Discard Labels"
 msgstr ""
-"Vérifier les composants pour imprimer le pack et supprimer les étiquettes"
+"Vérifier les composants pour imprimer les étiquetes des poches à distribuer "
+"ou à détruire"
 
 #: app/views/components/addComponentBatch.html:98
 #: app/views/components/discardComponents.html:22
@@ -751,7 +752,7 @@ msgstr "Effacer"
 #: app/scripts/controllers/mobile/mobile.js:104 app/views/mobile/lookUp.html:23
 #: app/views/mobile/mobileClinicExport.html:33
 msgid "Clinic Date"
-msgstr "Date clinique"
+msgstr "Date de la Clinique Mobile"
 
 #: app/scripts/controllers/testing/manageTestBatch.js:424
 #: app/views/donors/manageClinic.html:67
@@ -804,7 +805,7 @@ msgstr "Commentaires"
 #. Blood Typing Status
 #: app/views/translations.html:67
 msgid "Complete"
-msgstr "Achevé"
+msgstr "Terminé"
 
 #: app/scripts/controllers/components/discardComponents.js:131
 #: app/scripts/controllers/components/recordComponents.js:384
@@ -823,7 +824,7 @@ msgstr "Achevé"
 #: app/views/labelling/findSafeComponents.html:16
 #: app/views/settings/manageComponentType.html:24
 msgid "Component Code"
-msgstr "Code de Composant"
+msgstr "Code du Composant"
 
 #: app/scripts/controllers/components/viewComponentBatches.js:112
 msgid "Component Delivery Forms"
@@ -831,7 +832,7 @@ msgstr "Formulaires de livraison de composants"
 
 #: app/views/home.html:43
 msgid "Component Production Laboratory"
-msgstr "Laboratoire de production de composants"
+msgstr "Gérer la Production de Composants"
 
 #: app/scripts/controllers/labelling/findSafeComponents.js:51
 msgid "Component Status"
@@ -965,12 +966,12 @@ msgstr "Composants"
 #: app/views/settings/managePackType.html:35
 #: app/views/settings/packTypes.html:33
 msgid "Components Produced"
-msgstr "Composants produits"
+msgstr "Composant sanguins"
 
 #: app/views/reports/componentsProducedReport.html:3
 #: app/views/reports/sidebar.html:25
 msgid "Components Produced Report"
-msgstr "Rapport sur les composants produits"
+msgstr "Rapport des Composants Préparés"
 
 #: app/scripts/controllers/reports/componentsProducedReport.js:227
 msgid "Components Produced Summary Report"
@@ -1011,7 +1012,7 @@ msgstr "Confirmer le mot de passe"
 
 #: app/views/testing/manageTestBatch.html:120
 msgid "Confirmatory TTI Outcomes"
-msgstr "Résultats confirmatoires de l'ITT"
+msgstr "Résultats de confirmation de l'ITT"
 
 #: app/scripts/controllers/settings/componentTypes.js:31
 #: app/views/settings/manageComponentType.html:48
@@ -1052,7 +1053,7 @@ msgstr "Notes de thérapie"
 #: app/views/donors/donorCounselling.html:68
 #: app/views/donors/donorCounsellingDetails.html:64
 msgid "Counselling Status"
-msgstr "Statut de la thérapie"
+msgstr "Statut de la Traitement"
 
 #. Order Status
 #. Return Status
@@ -1097,7 +1098,7 @@ msgstr "Mot de passe actuel"
 
 #: app/views/donors/viewDeferrals.html:7 app/views/donors/viewDonor.html:166
 msgid "Currently Deferred"
-msgstr "Actuellement différé"
+msgstr "Actuellement ajourné"
 
 #. Donation Identification Number, abbreviation
 #: app/scripts/controllers/components/viewComponentBatch.js:10
@@ -1186,7 +1187,7 @@ msgstr "COMMUNICATIONS AU DONNEUR"
 
 #: app/views/donors/sidebar.html:12
 msgid "DONOR RECORDS"
-msgstr "INFORMATIONS RELATIVES AU DONNEU"
+msgstr "INFORMATIONS RELATIVES AU DONNEUR"
 
 #: app/scripts/controllers/header.js:221 app/scripts/controllers/header.js:24
 #: app/views/home.html:26
@@ -1224,7 +1225,7 @@ msgstr "Type de données"
 
 #: app/views/reports/componentsProducedReport.html:60
 msgid "Data export"
-msgstr "Exportation de données"
+msgstr "Exporter les Données "
 
 #: app/scripts/controllers/donors/donorCounselling.js:211
 #: app/views/donors/donationDetails.html:11
@@ -1240,7 +1241,7 @@ msgstr "Date"
 #: app/scripts/controllers/testing/manageTestBatch.js:124
 #: app/views/donors/viewDonationSummary.html:29
 msgid "Date Bled"
-msgstr "Date de saignée"
+msgstr "Date de prélèvement"
 
 #: app/scripts/controllers/labelling/findSafeComponents.js:37
 msgid "Date Collected"
@@ -1251,7 +1252,7 @@ msgstr "Date de collecte"
 #: app/views/components/viewComponentBatch.html:22
 #: app/views/donors/manageClinic.html:12
 msgid "Date Created"
-msgstr "Date créée"
+msgstr "Date de Création"
 
 #: app/scripts/controllers/reports/aboRhGroupsReport.js:261
 #: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:175
@@ -1314,7 +1315,7 @@ msgstr "La date doit être d’aujourd'hui ou antérieure"
 #: app/views/inventory/recordTransfusions.html:143
 #: app/views/inventory/viewOrder.html:48
 msgid "Date of Birth"
-msgstr "Date de naissance"
+msgstr "Date de Naissance"
 
 #: app/scripts/controllers/donors/donorCounselling.js:184
 msgid "Date of Donation"
@@ -1407,12 +1408,12 @@ msgstr "Bon de livraison"
 
 #: app/views/components/addComponentBatch.html:59
 msgid "Delivery Time"
-msgstr "Heure de livraison"
+msgstr "Heure de Livraison"
 
 #: app/views/donors/mergeDonorsReview.html:60
 #: app/views/donors/viewDonor.html:289
 msgid "Demographics"
-msgstr "Démographie"
+msgstr "Contact"
 
 #: app/scripts/controllers/settings/transfusionReactionTypes.js:18
 #: app/views/donors/addDonation.html:314
@@ -1459,7 +1460,7 @@ msgstr "Supprimer le stock"
 #. Component Status
 #: app/views/translations.html:51
 msgid "Discarded"
-msgstr "Supprimée"
+msgstr "Rejeté"
 
 #: app/views/translations.html:13
 msgid "Discarding..."
@@ -1475,7 +1476,7 @@ msgstr "Rapport sommaire des rejets"
 #: app/scripts/controllers/inventory/viewOrder.js:131
 #: app/scripts/controllers/inventory/viewOrders.js:18
 msgid "Dispatch From"
-msgstr "Expédier de"
+msgstr "Distribué de"
 
 #: app/scripts/controllers/inventory/viewOrder.js:206
 msgid "Dispatch Note"
@@ -1492,7 +1493,7 @@ msgstr "Expédition de la commande"
 #: app/views/inventory/manageOrders.html:52
 #: app/views/inventory/viewOrders.html:53
 msgid "Dispatch Type"
-msgstr "Type d'expédition"
+msgstr "Type de Distribution"
 
 #. Order Status
 #: app/views/translations.html:35
@@ -1542,7 +1543,7 @@ msgstr "Niveau de division"
 #: app/views/donors/addDonorDonation.html:11
 #: app/views/donors/addDonorDonation.html:12 app/views/donors/viewDonor.html:63
 msgid "Do not bleed donor"
-msgstr "Ne pas saigner le donneur"
+msgstr "Ne pas préléver le donneur"
 
 #: app/views/donors/addDonation.html:128
 #: app/views/donors/addDonorDonation.html:80
@@ -1575,16 +1576,16 @@ msgstr "Date du don"
 
 #: app/scripts/controllers/settings/bloodTestingRules.js:21
 msgid "Donation Field"
-msgstr "Champ de Don"
+msgstr "Rubrique du Don"
 
 #: app/views/settings/manageBloodTestingRule.html:26
 msgid "Donation Field Affected"
-msgstr "Champ de donation affecté"
+msgstr "Rubrique du Don"
 
 #: app/scripts/controllers/settings/bloodTestingRules.js:35
 #: app/views/settings/manageBloodTestingRule.html:58
 msgid "Donation Field Value"
-msgstr "Valeur du Champ de Don"
+msgstr "Valeur de la Rubrique du Don"
 
 #: app/views/donors/addDonation.html:22
 #: app/views/donors/addDonorDonation.html:22
@@ -1614,7 +1615,7 @@ msgstr "Rapport des Types de Don"
 
 #: app/views/components/addComponentBatch.html:20
 msgid "Donation batch"
-msgstr "Lot du don"
+msgstr "Lot du Don"
 
 #: app/views/translations.html:128
 msgid "Donation type already exists."
@@ -1655,7 +1656,7 @@ msgstr "Informations de Contact Combinées du Donneur"
 #: app/views/donors/donorCounselling.html:3 app/views/donors/sidebar.html:23
 #: app/views/mobile/donorCounselling.html:3 app/views/mobile/sidebar.html:15
 msgid "Donor Counselling"
-msgstr "Thérapie du Donneur"
+msgstr "Traitement du Donneur"
 
 #: app/views/donors/manageDuplicateDonors.html:15
 msgid "Donor Deferrals Review"
@@ -1707,13 +1708,13 @@ msgstr "Inscription du Donneur Bloquée - Pas de Lot de Don Disponible"
 #: app/views/reports/donorsAdverseEventsReport.html:3
 #: app/views/reports/sidebar.html:27
 msgid "Donors Adverse Events Summary Report"
-msgstr "Résumé du Rapport d’Événements Dévaforables aux Donneurs"
+msgstr "Résumé du Rapport d’Effets Indésirables du Don"
 
 #: app/scripts/controllers/reports/donorsDeferredReport.js:192
 #: app/views/reports/donorsDeferredReport.html:3
 #: app/views/reports/sidebar.html:21
 msgid "Donors Deferred Summary Report"
-msgstr "Résumé du Rapport des Donneurs Reportés"
+msgstr "Résumé du Rapport des Donneurs Ajournés"
 
 #: app/scripts/controllers/donors/donorCommunications.js:155
 msgid "Donors List"
@@ -1737,11 +1738,11 @@ msgstr "Donné Le"
 
 #: app/views/inventory/findInventory.html:83
 msgid "Due to Expire By"
-msgstr "Expire Le"
+msgstr "Périme le"
 
 #: app/views/donors/duplicateDonors.html:3 app/views/donors/sidebar.html:16
 msgid "Duplicate Donors"
-msgstr "Donneurs Doubles"
+msgstr "Double Donneurs"
 
 #: app/views/donors/manageClinic.html:49 app/views/donors/viewDeferrals.html:64
 #: app/views/donors/viewDonationSummary.html:7
@@ -1852,7 +1853,7 @@ msgstr "Entrer"
 
 #: app/views/components/addComponentBatch.html:82
 msgid "Enter a valid temperature"
-msgstr "E une température valide"
+msgstr "Insérer une température valide"
 
 #: app/messages.html:12 app/scripts/controllers/donors/viewDonationBatch.js:518
 #: app/scripts/controllers/donors/viewDonationBatch.js:526
@@ -1880,12 +1881,12 @@ msgstr "Erreur lors de la fusion des donneurs doublons."
 #. Component Status
 #: app/views/translations.html:47
 msgid "Expired"
-msgstr "Expiré"
+msgstr "Périmé"
 
 #: app/scripts/controllers/settings/componentTypes.js:41
 #: app/views/settings/manageComponentType.html:97
 msgid "Expires After"
-msgstr "Expire après le"
+msgstr "Périme après le"
 
 #: app/scripts/controllers/components/discardComponents.js:163
 #: app/scripts/controllers/components/recordComponents.js:414
@@ -1912,10 +1913,10 @@ msgid ""
 "outcomes, and components datasets. The data will be downloaded as a "
 "compressed zip file containing a separate CSV file for each dataset."
 msgstr ""
-"Exporte les jeux de données sur les donneurs, les dons, les reports, le "
-"soutien post-don, les résultats des tests, et les Composants. Les données "
-"seront téléchargées en tant que fichier zip compressé contenant un fichier "
-"CSV séparé pour chaque jeu de données."
+"Exporte les groupes de données des donneurs, des dons, des ajournements, de "
+"l’assistance post-don, des résultats des tests, et des composants sanguins. "
+"Les données seront téléchargées sous forme de fichier zip compressé "
+"contenant un fichier CSV séparé pour chaque groupe de données"
 
 #. Haemoglobin Level
 #: app/views/translations.html:79
@@ -1958,7 +1959,7 @@ msgstr "Trouver un Donneur"
 
 #: app/views/inventory/findInventory.html:3 app/views/inventory/sidebar.html:13
 msgid "Find Inventory"
-msgstr "Trouver de l’Inventaire"
+msgstr "Trouver l’Inventaire"
 
 #: app/views/labelling/sidebar.html:13
 msgid "Find Safe Components"
@@ -1970,7 +1971,7 @@ msgstr "Trouver des Composants Sûrs à Étiqueter"
 
 #: app/views/testing/findTestSamples.html:3 app/views/testing/sidebar.html:19
 msgid "Find Test Samples"
-msgstr "Trouver des échantillons de test"
+msgstr "Trouver les Echantillons à Tester"
 
 #: app/views/inventory/findTransfusion.html:3
 #: app/views/inventory/sidebar.html:23
@@ -1985,7 +1986,7 @@ msgstr "Terminer"
 #: app/views/settings/accountSettings.html:31
 #: app/views/settings/manageUser.html:14
 msgid "First"
-msgstr "Premier"
+msgstr "Prénom"
 
 #: app/scripts/controllers/donors/donorCommunications.js:78
 #: app/scripts/controllers/donors/donorCounselling.js:151
@@ -2000,7 +2001,7 @@ msgstr "Prénom"
 #: app/views/donors/donorCounselling.html:58
 #: app/views/donors/viewDonor.html:175
 msgid "Flagged for Counselling"
-msgstr "Marqué pour une Thérapie"
+msgstr "Identifié pour un Traitement"
 
 #: app/views/login.html:17
 msgid "Forgot password"
@@ -2114,11 +2115,11 @@ msgstr "En Stock"
 
 #: app/views/donors/donorCounselling.html:83
 msgid "Include Donors That Have Been Referred"
-msgstr "Inclure les Donneurs Ayant Été Reportés"
+msgstr "Inclure les Donneurs Ayant Été Ajournés"
 
 #: app/views/donors/donorCounselling.html:96
 msgid "Include Donors That Have Not Been Referred"
-msgstr "Inclure les Donneurs N’Ayant Pas Été Reportés"
+msgstr "Inclure les Donneurs N’Ayant Pas Été Ajournés"
 
 #: app/views/donors/findDonor.html:13 app/views/settings/divisions.html:15
 #: app/views/settings/locations.html:15
@@ -2211,14 +2212,14 @@ msgstr "Statut de l’Inventaire"
 #: app/views/inventory/manageOrders.html:60
 #: app/views/inventory/viewOrders.html:61 app/views/translations.html:38
 msgid "Issue"
-msgstr "Expédier"
+msgstr "Délivrance"
 
 #. Component Status
 #: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:130
 #: app/scripts/controllers/reports/bloodUnitsIssuedReport.js:134
 #: app/views/translations.html:48
 msgid "Issued"
-msgstr "Émis"
+msgstr "Distribué"
 
 #: app/views/translations.html:100
 msgid "January"
@@ -2240,7 +2241,7 @@ msgstr "ETIQUETAGE"
 #: app/views/labelling/labelComponents.html:3
 #: app/views/labelling/sidebar.html:15
 msgid "Label Components"
-msgstr "Composants d’Étiquette"
+msgstr "Etiqueter les Composants"
 
 #: app/views/labelling/labelComponents.html:80
 msgid "Label Verification for {{componentCode}}"
@@ -2254,7 +2255,7 @@ msgstr "Langue"
 #: app/views/settings/accountSettings.html:39
 #: app/views/settings/manageUser.html:17
 msgid "Last"
-msgstr "Dernier"
+msgstr "Nom de Famille"
 
 #: app/scripts/controllers/donors/donorCommunications.js:82
 #: app/scripts/controllers/donors/donorCounselling.js:156
@@ -2367,13 +2368,13 @@ msgstr "Gérer les Paramètres du Système"
 #: app/views/settings/adverseEventTypes.html:3
 #: app/views/settings/sidebar.html:22
 msgid "Manage Adverse Event Types"
-msgstr "Gérer les Type d’Événements Défavorables"
+msgstr "Gérer les Types d’Effets Indésirables du Don"
 
 #: app/views/home.html:92
 msgid "Manage Blood Bank Inventory, Requests, Transfers and Issues"
 msgstr ""
 "Gérer l’Inventaire, les Requêtes, les Transferts et les Livraisons de la "
-"Banque du Sang"
+"Banque de Sang"
 
 #: app/views/settings/manageBloodTest.html:3
 msgid "Manage Blood Test"
@@ -2381,12 +2382,12 @@ msgstr "Gérer l’Analyse de Sang"
 
 #: app/views/settings/manageBloodTestingRule.html:3
 msgid "Manage Blood Testing Rule"
-msgstr "Gérer la Règle de l’Analyse de Sang"
+msgstr "Gérer les Règles d’Analyse de Sang"
 
 #: app/views/settings/bloodTestingRules.html:3
 #: app/views/settings/sidebar.html:40
 msgid "Manage Blood Testing Rules"
-msgstr "Gérer les Règles de l’Analyse de Sang"
+msgstr "Gérer les Règles d’Analyse de Sang"
 
 #: app/views/settings/bloodTests.html:3 app/views/settings/sidebar.html:38
 msgid "Manage Blood Tests"
@@ -2415,7 +2416,7 @@ msgstr "Gérer la Configuration"
 
 #: app/views/donors/manageDeferral.html:1
 msgid "Manage Deferral"
-msgstr "Gérer le Report"
+msgstr "Gérer l’Ajournement"
 
 #: app/views/settings/manageDeferralReason.html:3
 msgid "Manage Deferral Reason"
@@ -2423,7 +2424,7 @@ msgstr "Gérer la Raison de Report"
 
 #: app/views/settings/deferralReasons.html:3 app/views/settings/sidebar.html:26
 msgid "Manage Deferral Reasons"
-msgstr "Gérer les Raisons de Report"
+msgstr "Gérer les Raisons d’Ajournement"
 
 #: app/views/settings/manageDiscardReason.html:3
 msgid "Manage Discard Reason"
@@ -2461,7 +2462,7 @@ msgstr "Gérer les Types de Dons"
 #: app/views/home.html:28
 msgid "Manage Donor Records, Donation Batches and Donor Communications"
 msgstr ""
-"Gérer les Enregistrements de Donneurs, les Lots de Dons et les "
+"Gérer les Enregistrements des Donneurs, les Lots de Dons et les "
 "Communications aux Donneurs"
 
 #: app/views/donors/sidebar.html:13
@@ -2495,7 +2496,7 @@ msgstr "Gérer le Type de Paquet"
 
 #: app/views/settings/packTypes.html:3 app/views/settings/sidebar.html:31
 msgid "Manage Pack Types"
-msgstr "Gérer les Types de Paquets"
+msgstr "Gérer les Types de Poches"
 
 #: app/views/inventory/viewReturn.html:3
 msgid "Manage Return"
@@ -2516,11 +2517,11 @@ msgstr "Gérer les Rôles"
 
 #: app/views/home.html:58
 msgid "Manage TTI and Blood Group Serology Testing"
-msgstr "Gérer les Tests de TTI et de Sérologie de Groupe Sanguin"
+msgstr "Gérer les Tests des ITT et de Sérologie des Groupes Sanguins"
 
 #: app/views/testing/manageTestBatch.html:3
 msgid "Manage Test Batch"
-msgstr "Gérer le Lot de Test"
+msgstr "Gérer le Lot de Tests"
 
 #: app/views/testing/manageTestBatches.html:3 app/views/testing/sidebar.html:16
 msgid "Manage Test Batches"
@@ -2533,7 +2534,7 @@ msgstr "Gérer le Type de Réactions Post-Transfusion"
 #: app/views/settings/sidebar.html:42
 #: app/views/settings/transfusionReactionTypes.html:3
 msgid "Manage Transfusion Reaction Types"
-msgstr "Gérer les Types de Réactions Post-Transfusion"
+msgstr "Gérer les Types de Réactions Transfusionnelles"
 
 #: app/views/settings/manageUser.html:3
 msgid "Manage User"
@@ -2550,13 +2551,13 @@ msgstr "Mars"
 #: app/views/settings/manageBloodTest.html:192
 msgid "Mark Component Containing Plasma as Unsafe for Positive Test Outcomes"
 msgstr ""
-"Marquer un Composant Contenant du Plasma en tant que Non Sûr pour des "
-"Résultats de Tests Positifs"
+"Marquer un Composant Contenant du Plasma comme Non Sûr pour des Résultats de "
+"Tests Positifs"
 
 #: app/views/settings/manageBloodTest.html:183
 msgid "Mark Component as Unsafe for Positive Test Outcomes"
 msgstr ""
-"Marquer un Composant en tant que Non Sûr pour des Résultats de Tests Positifs"
+"Marquer un Composant comme Non Sûr pour des Résultats de Tests Positifs"
 
 #. Blood Typing Match Status
 #: app/views/translations.html:60
@@ -2573,7 +2574,7 @@ msgstr "Le temps de saignement maximum devrait être entre 0 et 60 minutes"
 
 #: app/views/settings/manageComponentType.html:71
 msgid "Max time since donation"
-msgstr "Temps maximum depuis le dernier don"
+msgstr "Temps maximal depuis le dernier don"
 
 #: app/views/settings/manageComponentType.html:76
 msgid "Max time since donation should be between 0 and 30 hours"
@@ -2594,7 +2595,7 @@ msgstr "Combiner"
 
 #: app/views/donors/addDonor.html:28
 msgid "Middle"
-msgstr "Milieu"
+msgstr "Deuxième Prénom"
 
 #: app/views/settings/managePackType.html:85
 msgid "Minimum Weight"
@@ -2765,7 +2766,7 @@ msgstr "Aucun Lot de Dons Fermés"
 
 #: app/views/testing/manageTestBatches.html:211
 msgid "No closed test batches."
-msgstr "Aucun lot de tests fermés."
+msgstr "Aucun lot de tests fermé."
 
 #: app/views/labelling/labelComponents.html:46
 msgid "No components for donation"
@@ -2785,7 +2786,7 @@ msgstr "Aucun Composant du type spécifié n'existe pour le don spécifié"
 #: app/scripts/controllers/donors/viewDonor.js:510
 #: app/views/donors/viewDeferrals.html:12 app/views/donors/viewDonor.html:171
 msgid "No current deferrals"
-msgstr "Aucun report en cours"
+msgstr "Aucun ajournement en cours"
 
 #: app/scripts/services/reportsLayout.js:87
 msgid "No data for date range selected"
@@ -2797,7 +2798,7 @@ msgstr "Aucun Report Trouvé"
 
 #: app/views/donors/duplicateDonors.html:52
 msgid "No duplicate donors found"
-msgstr "Aucun donneur doublon trouvé"
+msgstr "Aucun double donneur trouvé"
 
 #: app/views/donors/addDonorDonation.html:29
 #: app/views/donors/manageDonationBatches.html:47
@@ -2897,16 +2898,16 @@ msgstr "Novembre"
 
 #: app/scripts/controllers/components/viewComponentBatches.js:75
 msgid "Num Boxes"
-msgstr "Nom. Boîtes"
+msgstr "Nom. Conteneurs"
 
 #: app/scripts/controllers/components/viewComponentBatches.js:52
 msgid "Num Initial Components"
-msgstr "Nom. De Composants Initiaux"
+msgstr "Nom. Initial de Composants"
 
 #: app/scripts/controllers/components/viewComponentBatch.js:76
 #: app/views/components/viewComponentBatch.html:33
 msgid "Number of Blood Transport Boxes"
-msgstr "Nombre de Boîtes de Transport de Sang"
+msgstr "Nombre de Conteneurs de Transport de Sang"
 
 #: app/scripts/controllers/components/viewComponentBatch.js:53
 #: app/views/components/viewComponentBatch.html:24
@@ -3066,11 +3067,11 @@ msgstr "POST-DON"
 #: app/views/donors/addDonorDonation.html:64
 #: app/views/donors/donationDetails.html:23
 msgid "Pack"
-msgstr "Paquet"
+msgstr "Poche"
 
 #: app/views/labelling/labelComponents.html:97
 msgid "Pack Label DIN"
-msgstr "Étiquette DIN du paquet"
+msgstr "Étiquette DIN de la poche"
 
 #: app/scripts/controllers/components/viewComponentBatch.js:13
 #: app/scripts/controllers/donors/viewDonationBatch.js:55
@@ -3084,7 +3085,7 @@ msgstr "Étiquette DIN du paquet"
 #: app/views/testing/findTestSamples.html:39
 #: app/views/testing/viewTestSample.html:50
 msgid "Pack Type"
-msgstr "Type de paquet"
+msgstr "Type de Poche"
 
 #: app/scripts/controllers/donors/viewDonationBatch.js:355
 #: app/scripts/controllers/donors/viewDonor.js:112
@@ -3187,7 +3188,7 @@ msgstr "Tests en attente"
 
 #: app/views/testing/manageTestBatch.html:58
 msgid "Pending: TTI repeat and/or confirmatory test outcomes."
-msgstr "En attente: Résultats de tests de confirmation et/ou répétés TTI."
+msgstr "En attente: Résultats de tests de confirmation et/ou répétés ITT."
 
 #: app/views/testing/manageTestBatch.html:60
 msgid "Pending: ambiguous blood group serology test outcomes."
@@ -3352,7 +3353,7 @@ msgstr "Résultats positifs"
 #: app/views/donors/mergeDonorsReview.html:123
 #: app/views/donors/viewDonorDemographics.html:151
 msgid "Postal"
-msgstr "Poste"
+msgstr "Boîte Postale"
 
 #: app/scripts/services/reportsLayout.js:59
 msgid "Powered by"
@@ -3404,7 +3405,7 @@ msgstr "Imprimer un bon de livraison"
 
 #: app/views/donors/viewDonor.html:130
 msgid "Print Donor Barcode"
-msgstr "Imprimer le Code-Barres du Donneur"
+msgstr "Imprimer le Code-Barre du Donneur"
 
 #: app/views/labelling/labelComponents.html:54
 msgid "Print Pack Label"
@@ -3416,7 +3417,7 @@ msgstr "Imprimer un bon de Retour"
 
 #: app/views/translations.html:19
 msgid "Process"
-msgstr "Traiter"
+msgstr "Préparé"
 
 #: app/views/components/recordComponents.html:125
 msgid "Process Component"
@@ -3429,7 +3430,7 @@ msgstr "Traiter le Composant étiqueté"
 #. Component Status
 #: app/views/translations.html:52
 msgid "Processed"
-msgstr "Traité"
+msgstr "Préparé"
 
 #: app/views/components/recordComponents.html:102
 msgid "Processing Date"
@@ -3439,13 +3440,13 @@ msgstr "Date de Traitement"
 #: app/scripts/controllers/components/viewComponentBatches.js:45
 #: app/views/translations.html:82
 msgid "Processing Site"
-msgstr "Site de Traitement"
+msgstr "Site de Préparation"
 
 #: app/views/components/addComponentBatch.html:43
 #: app/views/reports/componentsProducedReport.html:9
 #: app/views/reports/unitsDiscardedReport.html:9
 msgid "Processing site"
-msgstr "Site de Traitement"
+msgstr "Site de Préparation"
 
 #: app/views/translations.html:20
 msgid "Processing..."
@@ -3494,7 +3495,7 @@ msgstr "Rang dans la Catégorie"
 #: app/views/testing/manageTestBatch.html:84
 #: app/views/testing/manageTestBatch.html:98
 msgid "Re-Enter"
-msgstr "Ré-Entrez"
+msgstr "Re-Entrer"
 
 #: app/views/testing/reenterABORhOutcomes.html:3
 msgid "Re-Enter ABO/Rh Outcomes"
@@ -3538,7 +3539,7 @@ msgstr "Raison"
 #: app/views/components/viewComponentBatch.html:3
 #: app/views/components/viewComponentBatches.html:3
 msgid "Receive Components"
-msgstr "Réception de Composants"
+msgstr "Réception des Composants"
 
 #. Counselling Status
 #: app/views/translations.html:113
@@ -3604,7 +3605,7 @@ msgstr "Libération"
 #: app/scripts/controllers/testing/manageTestBatch.js:148
 #: app/views/translations.html:75
 msgid "Released"
-msgstr "Libéré"
+msgstr "Validé"
 
 #: app/scripts/controllers/testing/manageTestBatch.js:626
 #: app/views/donors/donorCounsellingDetails.html:97
@@ -3668,7 +3669,7 @@ msgstr "Répéter les Résultats ABO/Rh"
 
 #: app/views/testing/manageTestBatch.html:95
 msgid "Repeat TTI Outcomes"
-msgstr "Répéter les Résultats TTI"
+msgstr "Répéter les Résultats ITT"
 
 #: app/views/settings/manageUser.html:84
 msgid "Reset Password"
@@ -3854,7 +3855,7 @@ msgstr "Sélectionnez des Donneurs à Combiner"
 
 #: app/views/components/recordComponents.html:153
 msgid "Select a component to process"
-msgstr "Sélectionnez un Composant à traiter"
+msgstr "Sélectionnez un Composant à préparer"
 
 #: app/views/components/findComponents.html:77
 #: app/views/components/findDiscards.html:42
@@ -3875,7 +3876,7 @@ msgstr "Sélectionnez un lot de dons"
 
 #: app/views/components/addComponentBatch.html:51
 msgid "Select a processing site"
-msgstr "Sélectionnez un site de traitement"
+msgstr "Sélectionnez un site de Préparation"
 
 #: app/views/components/findComponents.html:76
 #: app/views/components/findComponents.html:81
@@ -4039,24 +4040,24 @@ msgstr "Informations de Stockage"
 #: app/scripts/controllers/header.js:225 app/scripts/controllers/header.js:38
 #: app/views/home.html:56
 msgid "TESTING"
-msgstr "TEST EN COURS"
+msgstr "TESTS EN COURS"
 
 #: app/scripts/controllers/reports/ttiPrevalenceReport.js:62
 msgid "TTI"
-msgstr "TTI"
+msgstr "ITT"
 
 #: app/views/donors/donationDetails.html:83
 #: app/views/donors/viewDonationSummary.html:243
 #: app/views/testing/manageTestBatch.html:71
 #: app/views/testing/viewTestSample.html:70
 msgid "TTI Outcomes"
-msgstr "Résultats TTI"
+msgstr "Résultats ITT"
 
 #: app/scripts/controllers/reports/ttiPrevalenceReport.js:177
 #: app/views/reports/sidebar.html:17
 #: app/views/reports/ttiPrevalenceReport.html:3
 msgid "TTI Prevalence Report"
-msgstr "Rapport de Prévalence TTI"
+msgstr "Rapport des Prévalences des ITT"
 
 #: app/scripts/controllers/testing/findTestSamples.js:46
 #: app/scripts/controllers/testing/manageTestBatch.js:159
@@ -4067,7 +4068,7 @@ msgstr "Rapport de Prévalence TTI"
 #: app/views/testing/reenterTTIOutcomes.html:47
 #: app/views/testing/viewTestSample.html:60
 msgid "TTI Status"
-msgstr "Statut TTI"
+msgstr "Statut ITT"
 
 #: app/scripts/controllers/testing/manageTestBatch.js:29
 msgid "TTI Unsafe or Incomplete"
@@ -4110,7 +4111,7 @@ msgstr "Nom du Test"
 
 #: app/views/settings/manageBloodTest.html:24
 msgid "Test Name (Short)"
-msgstr "Nom du Test (court)"
+msgstr "Nom du Test (abrégé)"
 
 #: app/scripts/controllers/settings/bloodTestingRules.js:28
 #: app/views/settings/manageBloodTestingRule.html:43
@@ -4120,7 +4121,7 @@ msgstr "Résultat du Test"
 #: app/views/settings/managePackType.html:24
 #: app/views/settings/packTypes.html:28
 msgid "Test Sample Produced"
-msgstr "Échantillon du Test Produit"
+msgstr "Echantillon pour le Test"
 
 #: app/views/testing/manageTestBatches.html:192
 #: app/views/testing/manageTestBatches.html:31
@@ -4144,7 +4145,7 @@ msgstr ""
 #: app/views/testing/viewTestSample.html:77
 #: app/views/testing/viewTestSample.html:97
 msgid "Tested On"
-msgstr "Testé Sur"
+msgstr "Testé le"
 
 #: app/views/settings/manageLocation.html:41
 msgid "Testing"
@@ -4332,10 +4333,10 @@ msgid ""
 "performance of the system. It is recommended that this export is only run "
 "after standard operating hours, to minimise impact on other activities."
 msgstr ""
-"Cette exportation peut prendre du temps si elle est lancée sur toutes les "
-"salles et pourrait affecter les performances du système. Il est recommandé "
-"de lancer cette exportation après les horaires standard d'utilisation, pour "
-"minimiser l'impact sur les autres activités."
+"Cette exportation peut prendre du temps si elle est lancée sur tous les "
+"Postes de Prélèvements et pourrait affecter les performances du système. Il "
+"est recommandé de lancer cette exportation après les horaires standard "
+"d'utilisation, pour minimiser l'impact sur les autres activités."
 
 #: app/scripts/controllers/donors/viewDonationBatch.js:465
 #: app/scripts/controllers/donors/viewDonor.js:681
@@ -4454,7 +4455,7 @@ msgstr "Total"
 #: app/scripts/controllers/reports/donorsAdverseEventsReport.js:124
 #: app/views/donors/viewDonor.html:193
 msgid "Total Adverse Events"
-msgstr "Total d’Événements Défavorables"
+msgstr "Total Effets Indésirables"
 
 #: app/scripts/controllers/reports/donorsAdverseEventsReport.js:146
 #: app/scripts/controllers/reports/donorsAdverseEventsReport.js:86
@@ -4527,7 +4528,7 @@ msgstr "Transfusé Le"
 #. Transfusion Outcome
 #: app/views/translations.html:29
 msgid "Transfused Uneventfully"
-msgstr "Transfusé Sans Événements"
+msgstr "Transfusé sans Accidents"
 
 #: app/views/inventory/recordTransfusions.html:82
 msgid "Transfusion Notes"
@@ -4693,7 +4694,7 @@ msgstr ""
 
 #: app/views/settings/manageBloodTest.html:84
 msgid "Valid Outcomes"
-msgstr "Nom d’utilisateur"
+msgstr "Nom de l’Utilisateur"
 
 #: app/views/settings/configurations.html:29
 #: app/views/settings/manageConfiguration.html:69
@@ -4738,14 +4739,14 @@ msgstr "Valeur"
 #: app/views/testing/findTestSamples.html:21
 #: app/views/testing/viewTestSample.html:42 app/views/translations.html:81
 msgid "Venue"
-msgstr "Salle"
+msgstr "Poste de Prélèvement"
 
 #: app/scripts/controllers/donors/donorCommunications.js:136
 #: app/views/donors/donorCommunications.html:13
 #: app/views/donors/donorCounselling.html:8
 #: app/views/donors/manageDonationBatches.html:111
 msgid "Venues"
-msgstr "Salles"
+msgstr "Postes de Prélèvements"
 
 #: app/views/translations.html:17
 msgid "Verify"
@@ -4774,7 +4775,7 @@ msgstr "Afficher le Journal d’Audit"
 
 #: app/views/home.html:107
 msgid "View Charts and Export Reports"
-msgstr "Afficher les Graphiques et Rapports d’Exportation"
+msgstr "Afficher les Graphiques et Exporter les Rapports"
 
 #: app/views/components/addComponentBatch.html:10
 #: app/views/components/viewComponentBatch.html:10
@@ -4805,7 +4806,7 @@ msgstr "Afficher un Résumé"
 
 #: app/views/testing/sidebar.html:22 app/views/testing/viewTestSample.html:3
 msgid "View Test Sample"
-msgstr "Afficher les Échantillons de Test"
+msgstr "Afficher les Échantillons à tester"
 
 #: app/scripts/controllers/donors/viewDonor.js:610
 #: app/scripts/controllers/inventory/recordTransfusions.js:179
@@ -4848,7 +4849,7 @@ msgstr "Annulation..."
 #: app/views/inventory/recordTransfusions.html:136
 #: app/views/inventory/viewOrder.html:35
 msgid "Ward Number"
-msgstr "Numéro de Service"
+msgstr "Numéro du Service"
 
 #: app/scripts/controllers/components/discardComponents.js:171
 #: app/scripts/controllers/components/recordComponents.js:425
@@ -4966,15 +4967,15 @@ msgstr "salles"
 
 #: app/views/settings/bloodTests.html:9
 msgid "{{count}} Blood Test(s) found"
-msgstr "{{count}} Blood Test(s) found"
+msgstr "{{count}} Test(s) sanguin(s) identifié(s)"
 
 #: app/views/settings/bloodTestingRules.html:9
 msgid "{{count}} Blood Testing Rule(s) found"
-msgstr "{{count}} Règle de test sanguin trouvée"
+msgstr "{{count}} Règle(s) de test sanguin trouvée(s)"
 
 #: app/views/settings/componentTypeCombinations.html:9
 msgid "{{count}} Component Combination(s) found"
-msgstr "{{count}} Different Composant identifiés"
+msgstr "{{count}} Différent(s) Composant(s) identifié(s)"
 
 #: app/views/settings/componentTypes.html:9
 msgid "{{count}} Component Type(s) found"
@@ -4986,19 +4987,19 @@ msgstr "{{count}} Division(s) trouvée(s)"
 
 #: app/views/settings/locations.html:48
 msgid "{{count}} Location(s) found"
-msgstr "{{count}} d’emplacement(s) trouvée(s)"
+msgstr "{{count}} emplacement(s) trouvé(s)"
 
 #: app/views/settings/adverseEventTypes.html:11
 msgid "{{count}} adverse event type(s) found"
-msgstr "{{count}} Type(s) d'effet secondaire identifiés"
+msgstr "{{count}} Type(s) d’effets secondaires identifié(s)"
 
 #: app/views/components/viewDonations.html:2
 msgid "{{count}} component(s) found"
-msgstr "{{count}} composant trouvé(s)"
+msgstr "{{count}} composant(s) trouvé(s)"
 
 #: app/views/settings/configurations.html:10
 msgid "{{count}} configuration(s) found"
-msgstr "{{count}} configuration(s) trouvé(s)"
+msgstr "{{count}} configuration(s) trouvée(s)"
 
 #: app/views/settings/deferralReasons.html:25
 msgid "{{count}} day(s)"
@@ -5006,11 +5007,11 @@ msgstr "{{count}} Jour(s)"
 
 #: app/scripts/util/filters.js:80
 msgid "{{count}} day(s) to expire"
-msgstr "{{count}} jour restant avant expiration"
+msgstr "{{count}} jour(s) restant avant expiration"
 
 #: app/views/settings/deferralReasons.html:10
 msgid "{{count}} deferral reason(s) found"
-msgstr "{{count}} motif(s) de report identifiés"
+msgstr "{{count}} motif(s) de report identifie(s)"
 
 #: app/views/settings/discardReasons.html:10
 msgid "{{count}} discard reason(s) found"
@@ -5025,12 +5026,12 @@ msgstr "{{count}} type de don(s) identifiés"
 #: app/views/donors/findDonor.html:60 app/views/mobile/donorCounselling.html:58
 #: app/views/mobile/lookUp.html:44 app/views/mobile/mobileClinicExport.html:56
 msgid "{{count}} donor(s) found"
-msgstr "{{count}} donneur(s) identifiés"
+msgstr "{{count}} donneur(s) identifié(s)"
 
 #: app/views/testing/manageTestBatch.html:176
 #: app/views/testing/manageTestBatch.html:180
 msgid "{{count}} of {{total}}"
-msgstr "{{count}} du {{total}}"
+msgstr "{{count}} sur {{total}}"
 
 #: app/scripts/controllers/testing/manageTestBatch.js:482
 msgid ""
@@ -5055,22 +5056,22 @@ msgstr ""
 
 #: app/views/settings/packTypes.html:11
 msgid "{{count}} pack type(s) found"
-msgstr "{{count}} du type de pack(s) identifiés"
+msgstr "{{count}} types de poche(s) identifiée(s)"
 
 #: app/views/settings/roles.html:11
 msgid "{{count}} role(s) found"
-msgstr "{{count}} rôle(s) identifiés"
+msgstr "{{count}} rôle(s) identifie(s)"
 
 #: app/views/testing/manageTestBatch.html:244
 msgid "{{count}} sample(s) found"
-msgstr "{{count}} échantillon(s) identifiés"
+msgstr "{{count}} échantillon(s) identifie(s)"
 
 #: app/views/reports/bloodUnitsIssuedReport.html:39
 #: app/views/reports/componentsProducedReport.html:59
 #: app/views/reports/transfusionsReport.html:59
 #: app/views/reports/unitsDiscardedReport.html:59
 msgid "{{count}} site(s) found"
-msgstr "{{count}} site(s) identifiés"
+msgstr "{{count}} site(s) identifié(s)"
 
 #: app/views/settings/transfusionReactionTypes.html:10
 msgid "{{count}} transfusion reaction type(s) found"
@@ -5078,7 +5079,7 @@ msgstr "{{count}} réaction(s) transfusionnelle(s) trouvée(s)"
 
 #: app/views/settings/users.html:10
 msgid "{{count}} user(s) found"
-msgstr "{{count}} utilisateur(s) identifiés"
+msgstr "{{count}} utilisateur(s) identifie(s)"
 
 #: app/views/reports/aboRhGroupsReport.html:39
 #: app/views/reports/donationTypesReport.html:39
@@ -5086,7 +5087,7 @@ msgstr "{{count}} utilisateur(s) identifiés"
 #: app/views/reports/donorsDeferredReport.html:39
 #: app/views/reports/ttiPrevalenceReport.html:39
 msgid "{{count}} venue(s) found"
-msgstr "{{count}} d’emplacement identifiés"
+msgstr "{{count}} emplacement(s) identifié(s)"
 
 #: app/views/testing/manageTestBatch.html:61
 msgid ""
@@ -5096,11 +5097,12 @@ msgid ""
 "test samples and {{testBatch.dinsInOpenDonationanBatch.length}} belonged to "
 "an open Donation Batch."
 msgstr ""
-"[FR] {{dinsAdded}} out of {{dinsToAdd}} sample(s) in the range were added to "
-"the test batch. {{testBatch.dinsInOtherTestBatches.length}} belonged to "
-"another test batch and {{testBatch.dinsWithoutTestSamples.length}} didn't "
-"produce test samples and {{testBatch.dinsInOpenDonationanBatch.length}} "
-"belonged to an open Donation Batch."
+"{{dinsAdded}} sur {{dinsToAdd}} échantillon(s) de la séquence "
+"était(ent) ajouté(s) au lot de tests. {{testBatch.dinsInOtherTestBatches."
+"length}} appartenait(ent) à un autre lot de tests et {{testBatch."
+"dinsWithoutTestSamples.length}} n’avait(ent) pas d’échantillons de test et "
+"{{testBatch.dinsInOpenDonationanBatch.length}} appartenait(ent) à un lot de "
+"dons ouvert."
 
 #: app/views/donors/mergeDonorsSelection.html:1
 msgid "{{duplicateCount}} possible duplicate donors identified."
@@ -5112,7 +5114,7 @@ msgstr "{{duplicateDonorCount}} ensemble(s) de donneurs en double trouvés."
 
 #: app/views/components/viewComponentBatches.html:45
 msgid "{{formNumber}} form(s) found"
-msgstr "{{formNumber}} forme(s) trouvée(s)"
+msgstr "{{formNumber}} formulaire(s) trouvé(s)"
 
 #: app/scripts/controllers/donors/donorCommunications.js:144
 msgid "{{fromDate}} to {{toDate}}"
@@ -5124,7 +5126,7 @@ msgstr "{{startTime}} à {{endTime}}"
 
 #: app/views/donors/viewDonationBatch.html:2
 msgid "{{total}} donation(s) in batch"
-msgstr "{{total}} don(s) en lot"
+msgstr "{{total}} don(s) dans le lot"
 
 #~ msgid "Sample not found and/or cannot be assigned to this test batch"
 #~ msgstr ""
