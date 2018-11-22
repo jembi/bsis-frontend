@@ -302,7 +302,7 @@ msgstr "Tous les emplacements"
 
 #: app/views/testing/manageTestBatch.html:62
 msgid "Already added or invalid DINs entered."
-msgstr "[FR] Already added or invalid DINs entered."
+msgstr "DIN déjà ajoutés ou invalids."
 
 #: app/scripts/util/filters.js:80
 msgid "Already expired"
@@ -2153,7 +2153,7 @@ msgstr "Composant Invalide"
 
 #: app/views/testing/manageTestBatch.html:226
 msgid "Invalid DIN range"
-msgstr "Invalid DIN range"
+msgstr "Intervalle DIN invalide"
 
 #: app/scripts/controllers/login.js:35
 msgid "Invalid Username / Password"
@@ -4134,9 +4134,9 @@ msgid ""
 "from the test batch will clear all outcomes for those samples. Are you sure "
 "you want to continue?"
 msgstr ""
-"[FR] Test outcomes have been recorded for one or more samples. Removing "
-"these from the test batch will clear all outcomes for those samples. Are you "
-"sure you want to continue?"
+"Les résultats du test ont été réorganisés pour un ou plusieurs échantillons. "
+"Le fait de les retirer du lot de test effacera tous les résultats pour ces "
+"échantillons. Êtes-vous sur de vouloir continuer?"
 
 #: app/views/donors/donationDetails.html:120
 #: app/views/donors/donationDetails.html:93
@@ -5097,10 +5097,10 @@ msgid ""
 "test samples and {{testBatch.dinsInOpenDonationanBatch.length}} belonged to "
 "an open Donation Batch."
 msgstr ""
-"{{dinsAdded}} sur {{dinsToAdd}} échantillon(s) de la séquence "
-"était(ent) ajouté(s) au lot de tests. {{testBatch.dinsInOtherTestBatches."
-"length}} appartenait(ent) à un autre lot de tests et {{testBatch."
-"dinsWithoutTestSamples.length}} n’avait(ent) pas d’échantillons de test et "
+"{{dinsAdded}} sur {{dinsToAdd}} échantillon(s) de la séquence était(ent) "
+"ajouté(s) au lot de tests. {{testBatch.dinsInOtherTestBatches.length}} "
+"appartenait(ent) à un autre lot de tests et {{testBatch.dinsWithoutTestSamples.length}} "
+"n’avait(ent) pas d’échantillons de test et "
 "{{testBatch.dinsInOpenDonationanBatch.length}} appartenait(ent) à un lot de "
 "dons ouvert."
 
