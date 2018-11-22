@@ -2,22 +2,27 @@ angular.module('bsis').controller('ViewTestSampleCtrl', function($scope, $locati
 
   // Initial values
   $scope.searching = false;
-  $scope.donation = null;
-  $scope.testResults = [];
+  $scope.testSample = null;
+  $scope.testOutcomes = [];
   $scope.search = {
     donationIdentificationNumber: $routeParams.donationIdentificationNumber || null
   };
 
   // Find the test sample when the form is submitted
   $scope.findTestSample = function() {
+    if ($scope.viewTestSampleForm.$invalid) {
+      return;
+    }
     $location.search(angular.extend({search: true}, $scope.search));
     $scope.searching = true;
-    TestingService.getTestResultsByDIN({donationIdentificationNumber: $scope.search.donationIdentificationNumber}, function(response) {
-      $scope.donation = response.donation;
-      $scope.testResults = response.testResults.recentTestResults;
+    TestingService.getTestSampleByDIN({donationIdentificationNumber: $scope.search.donationIdentificationNumber}, function(response) {
+      $scope.testSample = response.testSample;
+      $scope.testOutcomes = response.testSample.testOutcomes;
       $scope.searching = false;
     }, function(err) {
       $log.error(err);
+      $scope.testSample = null;
+      $scope.testOutcomes = [];
       $scope.searching = false;
     });
   };
@@ -26,8 +31,8 @@ angular.module('bsis').controller('ViewTestSampleCtrl', function($scope, $locati
   $scope.clear = function() {
     $location.search({});
     $scope.searching = false;
-    $scope.donation = null;
-    $scope.testResults = [];
+    $scope.testSample = null;
+    $scope.testOutcomes = [];
     $scope.search.donationIdentificationNumber = null;
     $scope.viewTestSampleForm.$setPristine();
   };

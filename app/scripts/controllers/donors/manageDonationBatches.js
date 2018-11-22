@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, $location, $log, DonorService, ICONS, PACKTYPE, $q, $filter, DATEFORMAT, ngTableParams, $timeout) {
+angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, $location, $log, DonorService, ICONS, $q, $filter, DATEFORMAT, ngTableParams, $timeout) {
 
   var data = [];
   var recentDonationBatchData = null;
@@ -21,7 +21,6 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
   $scope.maxDonationBatchDate = moment().endOf('day').toDate();
   $scope.dateFormat = DATEFORMAT;
   $scope.icons = ICONS;
-  $scope.packTypes = PACKTYPE.packtypes;
 
   function getOpenDonationBatches() {
 
@@ -68,6 +67,7 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
     };
     form.$setPristine();
     form.$setUntouched();
+    $scope.err = null;
   };
 
   $scope.clearSearch = function(form) {
@@ -177,6 +177,7 @@ angular.module('bsis').controller('ManageDonationBatchesCtrl', function($scope, 
 
       }, function(err) {
         $scope.err = err;
+        $log.log(err);
         $scope.addingDonationBatch = false;
       });
     }

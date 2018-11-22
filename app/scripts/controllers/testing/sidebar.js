@@ -2,16 +2,16 @@ angular.module('bsis').controller('TestingSidebarCtrl', function($scope, Routing
 
   var routes = [
     {
-      path: '/manageTestBatch',
+      path: '/manageTestBatches',
       subpaths: [
-        '/viewTestBatch',
-        '/manageTTITesting',
-        '/reEnterTTI',
-        '/reEnterBloodTyping',
-        '/managePendingTests',
-        '/managePendingBloodTypingTests',
-        '/manageBloodGroupTesting',
-        '/manageBloodGroupMatchTesting'
+        '/manageTestBatch',
+        '/recordTTIOutcomes',
+        '/reenterTTIOutcomes',
+        '/reenterABORhOutcomes',
+        '/recordRepeatTTIOutcomes',
+        '/recordRepeatABORhOutcomes',
+        '/recordABORhOutcomes',
+        '/resolveAmbiguousABORhOutcomes'
       ]
     }, {
       path: '/viewTestSample',

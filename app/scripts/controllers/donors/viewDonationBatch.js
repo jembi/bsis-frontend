@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, $q, $filter, $routeParams, ICONS, PACKTYPE, DATEFORMAT, DONATION, PERMISSIONS) {
+  .controller('ViewDonationBatchCtrl', function($scope, $location, $log, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, $q, $filter, $routeParams, ICONS, DATEFORMAT, DONATION, PERMISSIONS, gettextCatalog) {
 
     $scope.icons = ICONS;
-    $scope.packTypes = PACKTYPE.packtypes;
     $scope.dateFormat = DATEFORMAT;
 
     $scope.bpUnit = DONATION.BPUNIT;
@@ -24,11 +23,6 @@ angular.module('bsis')
     $scope.pulseMax = DONATION.DONOR.PULSE_MAX;
     $scope.dinLength = DONATION.DIN_LENGTH;
 
-    var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
-    var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
-    var minBirthDate = moment().subtract(maxAge, 'years');
-    var maxBirthDate = moment().subtract(minAge, 'years');
-
     // The donation's previous pack type
     // Used to check if pack type has changed when updating a donation
     var previousPackType = null;
@@ -47,20 +41,23 @@ angular.module('bsis')
 
     var columnDefs = [
       {
-        name: 'Donor #',
+        name: 'Donor Number',
+        displayName: gettextCatalog.getString('Donor Number'),
         field: 'donorNumber'
       },
       {
         name: 'DIN',
-        displayName: 'DIN',
+        displayName: gettextCatalog.getString('DIN'),
         field: 'donationIdentificationNumber'
       },
       {
         name: 'Pack Type',
+        displayName: gettextCatalog.getString('Pack Type'),
         field: 'packType.packType'
       },
       {
         name: 'Donation Type',
+        displayName: gettextCatalog.getString('Donation Type'),
         field: 'donationType.type'
       }
     ];
@@ -89,21 +86,21 @@ angular.module('bsis')
         var lastUpdated = $filter('bsisDate')($scope.donationBatch.lastUpdated);
         var status;
         if ($scope.donationBatch.isClosed) {
-          status = 'Closed';
+          status = gettextCatalog.getString('Closed');
         } else {
-          status = 'Open';
+          status = gettextCatalog.getString('Open');
         }
 
         var columns = [
-          {text: 'Batch Status: ' + status, width: 'auto'},
-          {text: 'Venue: ' + venue, width: 'auto'},
-          {text: 'Date Created: ' + dateCreated, width: 'auto'},
-          {text: 'Last Updated: ' + lastUpdated, width: 'auto'}
+          {text: gettextCatalog.getString('Batch Status') + ': ' + status, width: 'auto'},
+          {text: gettextCatalog.getString('Venue') + ': ' + venue, width: 'auto'},
+          {text: gettextCatalog.getString('Date Created') + ': ' + dateCreated, width: 'auto'},
+          {text: gettextCatalog.getString('Last Updated') + ': ' + lastUpdated, width: 'auto'}
         ];
 
         return [
           {
-            text: 'Donation Batch Report',
+            text: gettextCatalog.getString('Donation Batch Report'),
             bold: true,
             margin: [30, 10, 30, 0]
           },
@@ -118,9 +115,9 @@ angular.module('bsis')
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
         var columns = [
-          {text: 'Total donations: ' + $scope.gridOptions.data.length, width: 'auto'},
-          {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-          {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+          {text: gettextCatalog.getString('Total donations') + ': ' + $scope.gridOptions.data.length, width: 'auto'},
+          {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+          {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
         ];
         return {
           columns: columns,
@@ -343,30 +340,9 @@ angular.module('bsis')
       }
 
       return ModalsService.showConfirmation({
-        title: 'Ineligible Donor',
-        button: 'Continue',
-        message: 'This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?'
-      });
-    }
-
-    function checkDonorAge(donor) {
-      var birthDate = moment(donor.birthDate);
-
-      var message;
-      if (birthDate.isBefore(minBirthDate)) {
-        message = 'This donor is over the maximum age of ' + maxAge + '.';
-      } else if (birthDate.isAfter(maxBirthDate)) {
-        message = 'This donor is below the minimum age of ' + minAge + '.';
-      } else {
-        // Don't show confirmation
-        return Promise.resolve(null);
-      }
-      message += ' Are you sure that you want to continue?';
-
-      return ModalsService.showConfirmation({
-        title: 'Invalid donor',
-        button: 'Add donation',
-        message: message
+        title: gettextCatalog.getString('Ineligible Donor'),
+        button: gettextCatalog.getString('Continue'),
+        message: gettextCatalog.getString('This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?')
       });
     }
 
@@ -376,17 +352,22 @@ angular.module('bsis')
       }
 
       return ModalsService.showConfirmation({
-        title: 'Pack Type Update',
-        button: 'Continue',
-        message: 'The pack type has been updated - this will affect the initial components created with this donation. Do you want to continue?'
+        title: gettextCatalog.getString('Pack Type Update'),
+        button: gettextCatalog.getString('Continue'),
+        message: gettextCatalog.getString('The pack type has been updated - this will affect the initial components created with this donation. Do you want to continue?')
       });
     }
+
+    var clearDonationErrors = function() {
+      $scope.donationIdentificationNumberError = null;
+      $scope.invalidDonorError = null;
+    };
 
     $scope.addDonation = function(donation, bleedStartTime, bleedEndTime, valid) {
 
       if (valid) {
 
-        checkDonorAge($scope.donorSummary).then(function() {
+        DonorService.checkDonorAge($scope.donorSummary.birthDate).then(function() {
           return confirmAddDonation(donation);
         }).then(function() {
           $scope.addDonationSuccess = '';
@@ -406,6 +387,8 @@ angular.module('bsis')
 
           $scope.addingDonation = true;
 
+          clearDonationErrors();
+
           DonorService.addDonationToBatch(donation, function(response) {
             $scope.addDonationSuccess = true;
             $scope.donation = {};
@@ -422,6 +405,17 @@ angular.module('bsis')
             $scope.err = err;
             $scope.addDonationSuccess = false;
             $scope.addingDonation = false;
+
+            if (angular.isDefined(err.fieldErrors)) {
+              $log.debug(err.fieldErrors);
+              if (angular.isDefined(err.fieldErrors['donation.donationIdentificationNumber'])) {
+                $scope.donationIdentificationNumberError = err.fieldErrors['donation.donationIdentificationNumber'][0];
+              }
+
+              if (angular.isDefined(err.fieldErrors['donation.donor'])) {
+                $scope.invalidDonorError = err.fieldErrors['donation.donor'][0];
+              }
+            }
           });
         }, function() {
           // Do nothing
@@ -468,7 +462,7 @@ angular.module('bsis')
       if (form.$valid) {
         return true;
       } else {
-        return 'This form is not valid';
+        return gettextCatalog.getString('This form is not valid');
       }
     };
 
@@ -521,7 +515,7 @@ angular.module('bsis')
 
       if (bleedTimeData.bleedEndTime === null) {
         $scope.clearError('emptyBleedEndTime');
-        $scope.raiseError('emptyBleedEndTime', 'Enter a valid time');
+        $scope.raiseError('emptyBleedEndTime', gettextCatalog.getString('Enter a valid time'));
         $scope.getError('emptyBleedEndTime');
       } else {
         $scope.clearError('emptyBleedEndTime');
@@ -529,7 +523,7 @@ angular.module('bsis')
 
       if (bleedTimeData.bleedStartTime === null) {
         $scope.clearError('emptyBleedStartTime');
-        $scope.raiseError('emptyBleedStartTime', 'Enter a valid time');
+        $scope.raiseError('emptyBleedStartTime', gettextCatalog.getString('Enter a valid time'));
         $scope.getError('emptyBleedStartTime');
       } else {
         $scope.clearError('emptyBleedStartTime');
@@ -537,7 +531,7 @@ angular.module('bsis')
 
       if (new Date(bleedTimeData.bleedEndTime) < new Date(bleedTimeData.bleedStartTime) && $scope.formErrors.length === 0) {
         $scope.clearError('endTimeBeforeStartTime');
-        $scope.raiseError('endTimeBeforeStartTime', 'End time should be after Start time');
+        $scope.raiseError('endTimeBeforeStartTime', gettextCatalog.getString('End time should be after Start time'));
         $scope.getError('endTimeBeforeStartTime');
       } else {
         $scope.clearError('endTimeBeforeStartTime');

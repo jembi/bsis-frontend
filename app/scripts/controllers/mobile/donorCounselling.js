@@ -1,18 +1,18 @@
 'use strict';
 
-angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope, $log, $filter, $location, $routeParams, $timeout, MobileService, uiGridConstants, uiGridExporterConstants, DATEFORMAT) {
+angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope, $log, $filter, $location, $routeParams, $timeout, MobileService, uiGridConstants, uiGridExporterConstants, gettextCatalog, DATEFORMAT) {
 
   // Initialise controller variables
   var columnDefs = [
-    {field: 'donorNumber'},
-    {field: 'firstName'},
-    {field: 'lastName'},
-    {field: 'gender'},
-    {field: 'birthDate', cellFilter: 'bsisDate'},
-    {field: 'donationDate', cellFilter: 'bsisDate'},
-    {displayName: 'DIN', field: 'donationIdentificationNumber'},
-    {displayName: 'ABO', field: 'bloodAbo'},
-    {displayName: 'Rh', field: 'bloodRh'}
+    {field: 'donorNumber', displayName: gettextCatalog.getString('Donor Number')},
+    {field: 'firstName', displayName: gettextCatalog.getString('First Name')},
+    {field: 'lastName', displayName: gettextCatalog.getString('Last Name')},
+    {field: 'gender', displayName: gettextCatalog.getString('Gender'), cellFilter: 'titleCase|translate'},
+    {field: 'birthDate', displayName: gettextCatalog.getString('Birth Date'), cellFilter: 'bsisDate'},
+    {field: 'donationDate', displayName: gettextCatalog.getString('Donation Date'), cellFilter: 'bsisDate'},
+    {field: 'donationIdentificationNumber', displayName: gettextCatalog.getString('DIN')},
+    {field: 'bloodAbo', displayName: gettextCatalog.getString('ABO')},
+    {field: 'bloodRh', displayName: gettextCatalog.getString('Rh')}
   ];
   var masterSearch = {
     venueId: null,
@@ -46,7 +46,7 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
       // Refresh the previous search if there is one
       if ($routeParams.search) {
         $scope.search = {
-          venueId: +$routeParams.venueId,
+          venueId: $routeParams.venueId,
           startDate: new Date($routeParams.startDate),
           endDate: new Date($routeParams.endDate)
         };
@@ -101,8 +101,10 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
 
     // Format values for exports
     exporterFieldCallback: function(grid, row, col, value) {
-      if (col.name === 'birthDate' || col.name === 'donationDate') {
+      if (col.field === 'birthDate' || col.field === 'donationDate') {
         return $filter('bsisDate')(value);
+      } else if (col.field === 'gender') {
+        return gettextCatalog.getString($filter('titleCase')(value));
       } else {
         return value;
       }
@@ -123,16 +125,16 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
 
       return [
         {
-          text: 'Donor Counselling',
+          text: gettextCatalog.getString('Donor Counselling'),
           fontSize: 10,
           bold: true,
           margin: [30, 10, 30, 0]
         },
         {
           columns: [
-            {text: 'Venue: ' + venueName, width: 'auto'},
-            {text: 'Start Date: ' + startDate, width: 'auto'},
-            {text: 'End Date: ' + endDate, width: 'auto'}
+            {text: gettextCatalog.getString('Venue') + ': ' + venueName, width: 'auto'},
+            {text: gettextCatalog.getString('Start Date') + ': ' + startDate, width: 'auto'},
+            {text: gettextCatalog.getString('End Date') + ': ' + endDate, width: 'auto'}
           ],
           columnGap: 10,
           fontSize: 6,
@@ -144,9 +146,9 @@ angular.module('bsis').controller('MobileDonorCounsellingCtrl', function($scope,
     // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
-        {text: 'Total donors: ' + $scope.gridOptions.data.length, width: 'auto'},
-        {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-        {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+        {text: gettextCatalog.getString('Total donors: {{total}}', {total : $scope.gridOptions.data.length}), width: 'auto'},
+        {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+        {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
       ];
       return {
         columns: columns,

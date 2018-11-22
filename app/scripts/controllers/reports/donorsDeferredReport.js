@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $log, $filter, ReportsService, ReportsLayoutService, DATEFORMAT, uiGridConstants) {
+angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $log, $filter, ReportsService, gettextCatalog, ReportsLayoutService, DATEFORMAT, uiGridConstants) {
 
   // Initialize variables
 
@@ -14,9 +14,9 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
 
   // UI grid initial columns
   var columnDefs = [
-    {displayName: 'Venue', field: 'venue', width: '**', minWidth: '250'},
-    {displayName: 'Gender', field: 'gender', width: '**', maxWidth: '150'},
-    {displayName: 'Total', field: 'total', width: '**', maxWidth: '125'}
+    {displayName: gettextCatalog.getString('Venue'), field: 'venue', width: '**', minWidth: '250'},
+    {displayName: gettextCatalog.getString('Gender'), field: 'gender', width: '**', maxWidth: '150'},
+    {displayName: gettextCatalog.getString('Total'), field: 'total', width: '**', maxWidth: '125'}
   ];
 
   function createZeroValuesRow(venue, gender) {
@@ -39,7 +39,7 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
   function createAllGendersRow(femaleRow, maleRow) {
     var row = {
       venue: '',
-      gender: 'All',
+      gender: gettextCatalog.getString('All'),
       total: femaleRow.total + maleRow.total
     };
 
@@ -65,9 +65,9 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     var previousVenue = null;
     var mergedFemaleRow = null;
     var mergedMaleRow = null;
-    var femaleSummaryRow = createZeroValuesRow('All Venues', 'female');
-    var maleSummaryRow = createZeroValuesRow('', 'male');
-    var allSummaryRow = createZeroValuesRow('', 'All');
+    var femaleSummaryRow = createZeroValuesRow(gettextCatalog.getString('All Venues'), gettextCatalog.getString('Female'));
+    var maleSummaryRow = createZeroValuesRow('', gettextCatalog.getString('Female'));
+    var allSummaryRow = createZeroValuesRow('', gettextCatalog.getString('All'));
 
     angular.forEach(dataValues, function(dataValue) {
 
@@ -86,8 +86,8 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
         }
 
         // Initialize values for the new venue
-        mergedFemaleRow = createZeroValuesRow(dataValue.location.name, 'female');
-        mergedMaleRow = createZeroValuesRow('', 'male');
+        mergedFemaleRow = createZeroValuesRow(dataValue.location.name, gettextCatalog.getString('Female'));
+        mergedMaleRow = createZeroValuesRow('', gettextCatalog.getString('Male'));
 
         // Store the previous venue name
         previousVenue = dataValue.location.name;
@@ -127,24 +127,6 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
       textValues(maleSummaryRow),
       textValues(allSummaryRow)
     ];
-  }
-
-  function init() {
-    ReportsService.getDonorsDeferredReportForm(function(res) {
-      // Add deferral reason columns
-      angular.forEach(res.deferralReasons, function(column) {
-        $scope.deferralReasons.push(column.reason);
-        // Add new column before the total column
-        columnDefs.splice(-1, 0, {displayName: column.reason, field: column.reason, width: '**', maxWidth: '125'});
-      });
-
-      // Notify the grid of the changes if it has been initialised
-      if ($scope.gridApi) {
-        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-      }
-    }, function(err) {
-      $log.error(err);
-    });
   }
 
   $scope.dateFormat = DATEFORMAT;
@@ -190,45 +172,69 @@ angular.module('bsis').controller('DonorsDeferredReportCtrl', function($scope, $
     });
   };
 
-  $scope.gridOptions = {
-    data: [],
-    paginationPageSize: 9,
-    paginationTemplate: 'views/template/pagination.html',
-    columnDefs: columnDefs,
-    minRowsToShow: 9,
+  function initGridOptionsConfig() {
+    $scope.gridOptions = {
+      data: [],
+      paginationPageSize: 9,
+      paginationTemplate: 'views/template/pagination.html',
+      columnDefs: columnDefs,
+      minRowsToShow: 9,
 
-    exporterPdfOrientation: 'landscape',
-    exporterPdfPageSize: 'A4',
-    exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
-    exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
-    exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
+      exporterPdfOrientation: 'landscape',
+      exporterPdfPageSize: 'A4',
+      exporterPdfDefaultStyle: ReportsLayoutService.pdfDefaultStyle,
+      exporterPdfTableHeaderStyle: ReportsLayoutService.pdfTableHeaderStyle,
+      exporterPdfMaxGridWidth: ReportsLayoutService.pdfLandscapeMaxGridWidth,
 
-    // PDF header
-    exporterPdfHeader: function() {
-      return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
-        'Donors Deferred Summary Report',
-        ['Date Period: ', $filter('bsisDate')($scope.search.startDate), ' to ', $filter('bsisDate')($scope.search.endDate)]);
-    },
+      // PDF header
+      exporterPdfHeader: function() {
+        return ReportsLayoutService.generatePdfPageHeader($scope.gridOptions.exporterPdfOrientation,
+        gettextCatalog.getString('Donors Deferred Summary Report'),
+        gettextCatalog.getString('Date Period: {{fromDate}} to {{toDate}}', {fromDate: $filter('bsisDate')($scope.search.startDate), toDate: $filter('bsisDate')($scope.search.endDate)}));
+      },
 
-    // Change formatting of PDF
-    exporterPdfCustomFormatter: function(docDefinition) {
-      if ($scope.venuesNumber > 1) {
-        docDefinition = ReportsLayoutService.addSummaryContent($scope.gridOptions.summaryData, docDefinition);
+      // Change formatting of PDF
+      exporterPdfCustomFormatter: function(docDefinition) {
+        if ($scope.venuesNumber > 1) {
+          docDefinition = ReportsLayoutService.addSummaryContent($scope.gridOptions.summaryData, docDefinition);
+        }
+        docDefinition = ReportsLayoutService.highlightTotalRows(gettextCatalog.getString('All'), 1, docDefinition);
+        docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
+        return docDefinition;
+      },
+
+      // PDF footer
+      exporterPdfFooter: function(currentPage, pageCount) {
+        return ReportsLayoutService.generatePdfPageFooter(
+          gettextCatalog.getString('venues'), $scope.venuesNumber,
+          currentPage, pageCount,
+          $scope.gridOptions.exporterPdfOrientation);
+      },
+
+      onRegisterApi: function(gridApi) {
+        $scope.gridApi = gridApi;
       }
-      docDefinition = ReportsLayoutService.highlightTotalRows('All', 1, docDefinition);
-      docDefinition = ReportsLayoutService.paginatePdf(27, docDefinition);
-      return docDefinition;
-    },
+    };
+  }
 
-    // PDF footer
-    exporterPdfFooter: function(currentPage, pageCount) {
-      return ReportsLayoutService.generatePdfPageFooter('venues', $scope.venuesNumber, currentPage, pageCount, $scope.gridOptions.exporterPdfOrientation);
-    },
+  function init() {
+    ReportsService.getDonorsDeferredReportForm(function(res) {
+      // Add deferral reason columns
+      angular.forEach(res.deferralReasons, function(column) {
+        $scope.deferralReasons.push(column.reason);
+        // Add new column before the total column
+        columnDefs.splice(-1, 0, {displayName: column.reason, field: column.reason, width: '**', maxWidth: '125'});
+      });
 
-    onRegisterApi: function(gridApi) {
-      $scope.gridApi = gridApi;
-    }
-  };
+      // Notify the grid of the changes if it has been initialised
+      if ($scope.gridApi) {
+        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+      }
+      initGridOptionsConfig();
+    }, function(err) {
+      $log.error(err);
+    });
+  }
 
   $scope.export = function(format) {
     if (format === 'pdf') {

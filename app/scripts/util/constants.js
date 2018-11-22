@@ -136,54 +136,6 @@ angular.module('bsis')
       }
     ]
   })
-  .constant('PACKTYPE', {
-    'packtypes': [
-      {
-        'id': 1,
-        'name': 'Single',
-        'isDeleted': false
-      },
-      {
-        'id': 2,
-        'name': 'Triple',
-        'isDeleted': false
-      },
-      {
-        'id': 3,
-        'name': 'Quad',
-        'isDeleted': false
-      }
-    ]
-  })
-  .constant('COMPONENTTYPE', {
-    'componentTypes': [
-      {
-        'id': 1,
-        'name': 'All Components',
-        'isDeleted': false
-      },
-      {
-        'id': 2,
-        'name': 'Whole Blood',
-        'isDeleted': false
-      },
-      {
-        'id': 3,
-        'name': 'Red Cell Concentrate',
-        'isDeleted': false
-      },
-      {
-        'id': 4,
-        'name': 'Fresh Frozen Plasma',
-        'isDeleted': false
-      },
-      {
-        'id': 5,
-        'name': 'Buffy Coat',
-        'isDeleted': false
-      }
-    ]
-  })
   .constant('DATATYPES', {
     options: [
       {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService, GENDER, BLOODGROUP, DATEFORMAT) {
+angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $location, OrderFormsService, GENDER, BLOODGROUP, DATEFORMAT, gettextCatalog) {
 
   var distributionSites = [];
   var usageSites = [];
@@ -115,25 +115,26 @@ angular.module('bsis').controller('ManageOrdersCtrl', function($scope, $log, $lo
 
   var columnDefs = [
     {
-      name: 'Order Date',
+      displayName: gettextCatalog.getString('Order Date'),
       field: 'orderDate',
       cellFilter: 'bsisDate',
       width: '**',
       maxWidth: '200'
     },
     {
-      name: 'Dispatch Type',
+      displayName: gettextCatalog.getString('Dispatch Type'),
       field: 'type',
+      cellFilter: 'titleCase | translate',
       width: '**',
       maxWidth: '200'
     },
     {
-      name: 'Dispatched From',
+      displayName: gettextCatalog.getString('Dispatch From'),
       field: 'dispatchedFrom.name',
       width: '**'
     },
     {
-      name: 'Dispatched To',
+      displayName: gettextCatalog.getString('Dispatched To'),
       field: 'dispatchedTo.name',
       width: '**'
     }

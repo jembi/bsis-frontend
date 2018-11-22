@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, ComponentService, ComponentValidationService, ModalsService, UtilsService, $uibModal, DATEFORMAT) {
+  .controller('RecordComponentsCtrl', function($scope, $location, $log, $timeout, $q, $routeParams, gettextCatalog, ComponentService, ComponentValidationService, ModalsService, UtilsService, $uibModal, DATEFORMAT) {
 
     $scope.component = null;
     $scope.componentsSearch = {
@@ -79,7 +79,7 @@ angular.module('bsis')
       });
 
       if (componentTypesExceedingMaxTimeSinceDonation.length > 0) {
-        confirmationMessage = 'Time since donation exceeded, the following components will be flagged as unsafe: ' + componentTypesExceedingMaxTimeSinceDonation + '.';
+        confirmationMessage = gettextCatalog.getString('Time since donation exceeded, the following components will be flagged as unsafe: {{components}}.', {components: componentTypesExceedingMaxTimeSinceDonation});
       }
 
       // Add to confirmation message if bleed times gap is greater or equals to maxBleedTime
@@ -102,7 +102,7 @@ angular.module('bsis')
         if (confirmationMessage.length > 0) {
           conditionalNewLines = '</br></br>';
         }
-        confirmationMessage += conditionalNewLines + 'Bleed time exceeded, the following components will be flagged as unsafe: ' + componentTypesExceedingMaxBleedTime + '.';
+        confirmationMessage += conditionalNewLines + gettextCatalog.getString('Bleed time exceeded, the following components will be flagged as unsafe: {{components}}.', {components: componentTypesExceedingMaxBleedTime});
       }
 
       return confirmationMessage;
@@ -114,8 +114,8 @@ angular.module('bsis')
 
       if (confirmationMessage.length > 0) {
         return ModalsService.showConfirmation({
-          title: 'Time since Donation or Bleed Time exceeded',
-          button: 'Continue',
+          title: gettextCatalog.getString('Time since Donation or Bleed Time exceeded'),
+          button: gettextCatalog.getString('Continue'),
           message: confirmationMessage
         });
       }
@@ -166,18 +166,18 @@ angular.module('bsis')
       // Show confirmation if it is above max weight
       if (component.packType.maxWeight != null && component.weight > component.packType.maxWeight) {
         return ModalsService.showConfirmation({
-          title: 'Overweight Pack',
-          button: 'Continue',
-          message: 'The pack weight (' + component.weight + 'g) is above the maximum acceptable range (' + component.packType.maxWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
+          title: gettextCatalog.getString('Overweight Pack'),
+          button: gettextCatalog.getString('Continue'),
+          message: gettextCatalog.getString('The pack weight ({{componentWeight}}g) is above the maximum acceptable range ({{packTypeWeight}}g). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.maxWeight})
         });
       }
 
       // Show confirmation if it is below low volume weight
       if (component.packType.lowVolumeWeight != null && component.weight <= component.packType.lowVolumeWeight) {
         return ModalsService.showConfirmation({
-          title: 'Underweight Pack',
-          button: 'Continue',
-          message: 'The pack weight (' + component.weight + 'g) is below the minimum acceptable range (' + component.packType.lowVolumeWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
+          title: gettextCatalog.getString('Underweight Pack'),
+          button: gettextCatalog.getString('Continue'),
+          message: gettextCatalog.getString('The pack weight ({{componentWeight}}g) is below the minimum acceptable range ({{packTypeWeight}}g). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.lowVolumeWeight})
         });
       }
 
@@ -185,15 +185,15 @@ angular.module('bsis')
         // Show confirmation if it is below min weight when lowVolumeWeight is null
         if (component.packType.lowVolumeWeight == null) {
           return ModalsService.showConfirmation({
-            title: 'Underweight Pack',
-            button: 'Continue',
-            message: 'The pack weight (' + component.weight + 'g) is below the minimum acceptable range (' + component.packType.minWeight + 'g). Components from this donation will be flagged as unsafe. Do you want to continue?'
+            title: gettextCatalog.getString('Underweight Pack'),
+            button: gettextCatalog.getString('Continue'),
+            message: gettextCatalog.getString('The pack weight ({{componentWeight}}g) is below the minimum acceptable range ({{packTypeWeight}}g). Components from this donation will be flagged as unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.minWeight})
           });
         } else {
           return ModalsService.showConfirmation({
-            title: 'Low Pack Weight',
-            button: 'Continue',
-            message: 'The pack weight (' + component.weight + 'g) is low (below ' + component.packType.minWeight + 'g). All components from this donation containing plasma will be flagged as Unsafe. Do you want to continue?'
+            title: gettextCatalog.getString('Low Pack Weight'),
+            button: gettextCatalog.getString('Continue'),
+            message: gettextCatalog.getString('The pack weight ({{componentWeight}}g) is low (below {{packTypeWeight}}g). All components from this donation containing plasma will be flagged as Unsafe. Do you want to continue?', {componentWeight: component.weight, packTypeWeight: component.packType.minWeight})
           });
         }
       }
@@ -206,9 +206,9 @@ angular.module('bsis')
         if (previousComponent.weight != null && (previousComponent.weight > component.packType.maxWeight
               || previousComponent.weight < component.packType.minWeight)) {
           return ModalsService.showConfirmation({
-            title: 'Pack Weight Update',
-            button: 'Continue',
-            message: 'The pack weight has changed from an underweight or overweight value to one within the acceptable range. Components from this donation will no longer be flagged as unsafe as a result of the pack weight. Do you want to continue?'
+            title: gettextCatalog.getString('Pack Weight Update'),
+            button: gettextCatalog.getString('Continue'),
+            message: gettextCatalog.getString('The pack weight has changed from an underweight or overweight value to one within the acceptable range. Components from this donation will no longer be flagged as unsafe as a result of the pack weight. Do you want to continue?')
           });
         }
       }
@@ -331,9 +331,9 @@ angular.module('bsis')
 
     $scope.unprocessSelectedComponent = function() {
       var unprocessConfirmation = {
-        title: 'Unprocess Component',
-        button: 'Continue',
-        message: 'Unprocessing this component will cause all components that were produced from it to be deleted. Do you want to continue?'
+        title:  gettextCatalog.getString('Unprocess Component'),
+        button: gettextCatalog.getString('Continue'),
+        message: gettextCatalog.getString('Unprocessing this component will cause all components that were produced from it to be deleted. Do you want to continue?')
       };
 
       $scope.unprocessing = true;
@@ -381,24 +381,29 @@ angular.module('bsis')
     var columnDefs = [
       {
         name: 'Component Code',
+        displayName: gettextCatalog.getString('Component Code'),
         field: 'componentCode',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Component Type',
+        displayName: gettextCatalog.getString('Component Type'),
         field: 'componentType.componentTypeName',
         width: '**',
         minWidth: '250'
       },
       {
         name: 'Status',
+        displayName: gettextCatalog.getString('Status'),
         field: 'status',
+        cellFilter: 'titleCase | translate',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Created On',
+        displayName: gettextCatalog.getString('Created On'),
         field: 'createdOn',
         cellFilter: 'bsisDateTime',
         width: '**',
@@ -406,7 +411,9 @@ angular.module('bsis')
       },
       {
         name: 'Expiry Status',
-        field: 'expiryStatus',
+        displayName: gettextCatalog.getString('Expiry Status'),
+        field: 'daysToExpire',
+        cellFilter: 'daysToExpire',
         width: '**',
         maxWidth: '200',
         sortingAlgorithm: function(a, b, rowA, rowB) {
@@ -415,6 +422,7 @@ angular.module('bsis')
       },
       {
         name: 'Weight',
+        displayName: gettextCatalog.getString('Weight'),
         field: 'weight',
         width: '**',
         maxWidth: '120'
@@ -453,10 +461,10 @@ angular.module('bsis')
     $scope.confirmProcessLabledComponent = function() {
       if ($scope.component.inventoryStatus === 'IN_STOCK') {
         var messageText = '';
-        messageText += 'The selected component has already been labelled. Do you want to continue?';
+        messageText += gettextCatalog.getString('The selected component has already been labelled. Do you want to continue?');
         var saveObject = {
-          title: 'Process labelled component',
-          button: 'Continue',
+          title: gettextCatalog.getString('Process labelled component'),
+          button: gettextCatalog.getString('Continue'),
           message: messageText
         };
         var modalInstance = $uibModal.open({

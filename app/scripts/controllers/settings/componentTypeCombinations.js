@@ -1,16 +1,18 @@
 'use strict';
 
-angular.module('bsis').controller('ComponentTypeCombinationsCtrl', function($scope, $location, $routeParams, $log, ICONS, ComponentTypeCombinationsService) {
+angular.module('bsis').controller('ComponentTypeCombinationsCtrl', function($scope, $location, $routeParams, gettextCatalog, $log, ICONS, ComponentTypeCombinationsService) {
 
   var columnDefs = [
     {
       name: 'Name',
       field: 'combinationName',
+      displayName: gettextCatalog.getString('Name'),
       width: '**'
     },
     {
       name: 'Enabled',
       field: 'isDeleted',
+      displayName: gettextCatalog.getString('Enabled'),
       cellTemplate: '<div class="ui-grid-cell-contents">' +
         '<span ng-show="!row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARECHECK}}"></i></span>' +
         '<span ng-show="row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARE}}"></i></span></div>',

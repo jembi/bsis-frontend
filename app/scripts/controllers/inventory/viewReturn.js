@@ -1,55 +1,57 @@
 'use strict';
 
-angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, $log, $filter, $routeParams, $uibModal, ReturnFormsService, ModalsService, UtilsService) {
+angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, $log, $filter, $routeParams, $uibModal, ReturnFormsService, ModalsService, UtilsService, gettextCatalog) {
 
   var columnDefs = [
     {
       name: 'donationIdentificationNumber',
       field: 'donationIdentificationNumber',
-      displayName: 'DIN',
+      displayName: gettextCatalog.getString('DIN'),
       width: '**',
       maxWidth: '100'
     },
     {
       name: 'componentCode',
       field: 'componentCode',
-      displayName: 'Component Code',
+      displayName: gettextCatalog.getString('Component Code'),
       width: '**',
       maxWidth: '150'
     },
     {
       name: 'componentTypeName',
       field: 'componentTypeName',
-      displayName: 'Component Type',
+      displayName: gettextCatalog.getString('Component Type'),
       width: '**',
       minWidth: '200'
     },
     {
       name: 'bloodGroup',
       field: 'bloodGroup',
-      displayName: 'Blood Group',
+      displayName: gettextCatalog.getString('Blood Group'),
       width: '**',
       maxWidth: '125'
     },
     {
       name: 'status',
       field: 'status',
-      displayName: 'Status',
+      cellFilter: 'titleCase | translate',
+      displayName: gettextCatalog.getString('Status'),
       width: '**',
       maxWidth: '150'
     },
     {
       name: 'createdOn',
       field: 'createdOn',
-      displayName: 'Created On',
+      displayName: gettextCatalog.getString('Created On'),
       cellFilter: 'bsisDate',
       width: '**',
       maxWidth: '100'
     },
     {
-      name: 'expiryStatus',
-      field: 'expiryStatus',
-      displayName: 'Expiry Status',
+      name: 'daysToExpire',
+      field: 'daysToExpire',
+      displayName: gettextCatalog.getString('Expiry Status'),
+      cellFilter: 'daysToExpire',
       width: '**',
       maxWidth: '150',
       sortingAlgorithm: function(a, b, rowA, rowB) {
@@ -82,7 +84,7 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     exporterPdfHeader: function() {
       var finalArray = [
         {
-          text: 'Return Note',
+          text: gettextCatalog.getString('Return Note'),
           fontSize: 10,
           bold: true,
           margin: [30, 20, 0, 0] // [left, top, right, bottom]
@@ -97,17 +99,17 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
       var prefix = [];
       prefix.push(
         {
-          text: 'Return Date: ',
+          text: gettextCatalog.getString('Return Date') + ': ',
           bold: true
         }, {
           text: $filter('bsisDate')($scope.returnForm.returnDate)
         }, {
-          text: ' Return From: ',
+          text: ' ' + gettextCatalog.getString('Returned From') + ': ',
           bold: true
         }, {
           text: $scope.returnForm.returnedFrom.name
         }, {
-          text: ' Returned To: ',
+          text: ' ' + gettextCatalog.getString('Returned To') + ': ',
           bold: true
         }, {
           text: $scope.returnForm.returnedTo.name
@@ -121,9 +123,9 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
     // PDF footer
     exporterPdfFooter: function(currentPage, pageCount) {
       var columns = [
-        {text: 'Number of components: ' + $scope.gridOptions.data.length, width: 'auto'},
-        {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-        {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+        {text: gettextCatalog.getString('Number of components: {{componentNumber}}', {componentNumber: $scope.gridOptions.data.length}), width: 'auto'},
+        {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+        {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
       ];
       return {
         columns: columns,
@@ -146,7 +148,7 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
       bloodGroup: component.bloodAbo + component.bloodRh,
       status: component.status,
       createdOn: component.createdOn,
-      expiryStatus: component.expiryStatus
+      daysToExpire: component.daysToExpire
     };
   }
 
@@ -202,9 +204,9 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
 
   $scope.deleteReturn = function() {
     var deleteConfirmation = {
-      title: 'Void Return',
-      button: 'Void',
-      message: 'Are you sure that you want to delete this Return?'
+      title: gettextCatalog.getString('Void Return'),
+      button: gettextCatalog.getString('Void'),
+      message: gettextCatalog.getString('Are you sure that you want to delete this Return?')
     };
 
     ModalsService.showConfirmation(deleteConfirmation).then(function() {
@@ -223,9 +225,9 @@ angular.module('bsis').controller('ViewReturnCtrl', function($scope, $location, 
 
   $scope.return = function() {
     var returnConfirmation = {
-      title: 'Return To Stock',
-      button: 'Return To Stock',
-      message: 'Are you sure you want to return all units into inventory?'
+      title: gettextCatalog.getString('Return to Stock'),
+      button: gettextCatalog.getString('Return to Stock'),
+      message: gettextCatalog.getString('Are you sure you want to return all units into inventory?')
     };
 
     ModalsService.showConfirmation(returnConfirmation).then(function() {

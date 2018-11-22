@@ -305,7 +305,7 @@ hr {
 
 }
 
-.nav-sidebar span {
+.nav-sidebar span.sidebar-heading {
   position: relative;
   display: block;
   padding-right: 20px;
@@ -315,6 +315,11 @@ hr {
   font-size: 1.23rem;
   font-weight: bold;
   cursor: default;
+}
+
+/* Removes padding from i18n transalation spans */
+.nav-sidebar span.ng-scope {
+    padding: 0;
 }
 
 /* login form css */
@@ -766,4 +771,49 @@ a[disabled] {
 .ui-grid-header-cell-label {
   display:inline-block;
   white-space:initial;
+}
+
+/*----------------------------------------------
+
+SPACERS
+
+-----------------------------------------------*/
+
+.margin-t-0 {
+  margin-top: 0px;
+}
+
+.margin-t-3 {
+  margin-top: 3px;
+}
+
+.pad-t-10 {
+  padding-top:10px;
+}
+
+.pad-t-30 {
+  padding-top: 30px;
+}
+
+.pad-l-5 {
+  padding-left: 5px;
+}
+
+.pad-l-10 {
+  padding-left: 10px;
+}
+
+.vert-align-03 {
+  vertical-align: 0.3em;
+}
+
+
+/*----------------------------------------------
+
+UTILITY
+
+-----------------------------------------------*/
+
+.display-block {
+  display:block;
 }

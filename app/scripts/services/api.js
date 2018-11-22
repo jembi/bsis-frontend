@@ -61,6 +61,14 @@ angular.module('bsis')
         getEditForm: {
           method: 'GET',
           url: url + '/donations/:id/form'
+        },
+        findByDin: {
+          method: 'GET',
+          url: url + '/donations'
+        },
+        search: {
+          method: 'GET',
+          url: url + '/donations/search'
         }
       }),
 
@@ -70,21 +78,41 @@ angular.module('bsis')
         }
       ),
 
-      TestBatches: $resource(url + '/testbatches/:id', {id: '@id'},
-        {
-          update: {method: 'PUT'}
-        }
-      ),
-
-      TestBatchDonations: $resource(url + '/testbatches/:id/donations', {},
-        {
-          query: {
-            method: 'GET',
-            params: {id: '@id',
-                     bloodTypingMatchStatus: '@bloodTypingMatchStatus'}
+      TestBatches: $resource(url + '/testbatches/:id', {id: '@id'}, {
+        update: {
+          method: 'PUT'
+        },
+        getTestBatchDonations: {
+          method: 'GET',
+          url: url + '/testbatches/:id/donations',
+          params: {
+            id: '@id',
+            bloodTypingMatchStatus: '@bloodTypingMatchStatus'
+          }
+        },
+        getTestBatchForm: {
+          method: 'GET',
+          url: url + '/testbatches/form'
+        },
+        search: {
+          method: 'GET',
+          url: url + '/testbatches/search'
+        },
+        addDonationsToTestBatch: {
+          method: 'PUT',
+          url: url + '/testbatches/:id/addDonations',
+          params: {
+            id: '@id'
+          }
+        },
+        removeDonationsFromTestBatch: {
+          method: 'PUT',
+          url: url + '/testbatches/:id/removeDonations',
+          params: {
+            id: '@id'
           }
         }
-      ),
+      }),
 
       ComponentBatches: $resource(url + '/componentbatches/:id', null,
         {
@@ -118,7 +146,6 @@ angular.module('bsis')
       }),
 
       DonationBatchFormFields: $resource(url + '/donationbatches/form'),
-      TestBatchFormFields: $resource(url + '/testbatches/form'),
       TTITestingFormFields: $resource(url + '/ttitests/form'),
       BloodGroupTestingFormFields: $resource(url + '/bloodgroupingtests/form'),
       ComponentBatchesFormFields: $resource(url + '/componentbatches/form'),
@@ -288,9 +315,15 @@ angular.module('bsis')
         }
       ),
 
-      FindTestBatches: $resource(url + '/testbatches/search'),
-
-      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', {donationIdentificationNumber: '@donationIdentificationNumber'}, {
+      TestResults: $resource(url + '/testresults/:donationIdentificationNumber', {din: '@donationIdentificationNumber'}, {
+        form: {
+          method: 'GET',
+          url: url + '/testresults/form'
+        },
+        getTestSample: {
+          method: 'GET',
+          url: url + '/testresults/:donationIdentificationNumber/sample'
+        },
         search: {
           method: 'GET',
           url: url + '/testresults/search'

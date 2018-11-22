@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService, UtilsService, DATEFORMAT) {
+  .controller('FindInventoryCtrl', function($scope, $filter, $log, BLOODGROUP, InventoriesService, UtilsService, DATEFORMAT, gettextCatalog) {
 
     $scope.dateFormat = DATEFORMAT;
 
@@ -17,19 +17,21 @@ angular.module('bsis')
     var columnDefs = [
       {
         name: 'DIN',
-        displayName: 'DIN',
+        displayName: gettextCatalog.getString('DIN'),
         field: 'donationIdentificationNumber',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Component Code',
+        displayName: gettextCatalog.getString('Component Code'),
         field: 'componentCode',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Created On',
+        displayName: gettextCatalog.getString('Created On'),
         field: 'createdOn',
         cellFilter: 'bsisDate',
         width: '**',
@@ -37,18 +39,22 @@ angular.module('bsis')
       },
       {
         name: 'Component Type',
+        displayName: gettextCatalog.getString('Component Type'),
         field: 'componentType.componentTypeName',
         width: '**'
       },
       {
         name: 'Blood Group',
+        displayName: gettextCatalog.getString('Blood Group'),
         field: 'bloodGroup',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Expiry Status',
-        field: 'expiryStatus',
+        displayName: gettextCatalog.getString('Expiry Status'),
+        field: 'daysToExpire',
+        cellFilter: 'daysToExpire',
         width: '**',
         maxWidth: '200',
         sortingAlgorithm: function(a, b, rowA, rowB) {
@@ -57,6 +63,7 @@ angular.module('bsis')
       },
       {
         name: 'Location',
+        displayName: gettextCatalog.getString('Location'),
         field: 'location.name',
         width: '**',
         maxWidth: '350'
@@ -121,7 +128,7 @@ angular.module('bsis')
       exporterPdfHeader: function() {
         var finalArray = [
           {
-            text: 'Inventory',
+            text: gettextCatalog.getString('Inventory'),
             fontSize: 10,
             bold: true,
             margin: [30, 20, 0, 0] // [left, top, right, bottom]
@@ -135,9 +142,9 @@ angular.module('bsis')
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
         var columns = [
-          {text: 'Number of components: ' + $scope.gridOptions.data.length, width: 'auto'},
-          {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-          {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+          {text: gettextCatalog.getString('Number of components: {{componentNumber}}', {componentNumber: $scope.gridOptions.data.length}), width: 'auto'},
+          {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+          {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
         ];
         return {
           columns: columns,

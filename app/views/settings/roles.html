@@ -1,6 +1,6 @@
 <div class="col-sm-3 col-md-2" ng-include="'views/settings/sidebar.html'"></div>
 <div class="col-sm-9 col-md-10 main">
-    <h3 class="page-header">Manage Roles</h3>
+    <h3 class="page-header" translate>Manage Roles</h3>
 
     <div class="col-sm-12">
         <div style="padding-bottom: 10px"></div>
@@ -8,8 +8,8 @@
             <div class="panel-body">
 
                 <p>
-                    <em> {{rolesCount}} role(s) found </em> <span has-permission="{{permissions.MANAGE_ROLES}}"> | <em> <a
-                        href="" ng-click="addNewRole()">Add New Role</a></em> </span>
+                    <em translate translate-params-count="rolesCount">{{count}} role(s) found</em> <span has-permission="{{permissions.MANAGE_ROLES}}"> | <em> <a
+                        href="" ng-click="addNewRole()" translate>Add New Role</a></em> </span>
                 </p>
 
                 <table ng-table="rolesTableParams" show-filter="false" class="table">
@@ -19,10 +19,10 @@
                         ng-mouseleave="this.$selected = false"
                         ng-class="{'active': role.$selected}"
                     >
-                        <td data-title="'Name'" style="width:30%;" header-class="text-left" sortable="'name'">
+                        <td data-title="'Name' | translate" style="width:30%;" header-class="text-left" sortable="'name'">
                             {{role.name}}
                         </td>
-                        <td data-title="'Description'" header-class="text-left" sortable="'name'">
+                        <td data-title="'Description' | translate" header-class="text-left" sortable="'name'">
                             {{role.description}}
                         </td>
                     </tr>

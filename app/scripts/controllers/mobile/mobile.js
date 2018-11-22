@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('MobileCtrl', function($scope, $filter, $location, $routeParams, MobileService, uiGridExporterConstants, DATEFORMAT) {
+  .controller('MobileCtrl', function($scope, $filter, $location, $routeParams, MobileService, uiGridExporterConstants, gettextCatalog, DATEFORMAT) {
 
     $scope.dateFormat = DATEFORMAT;
     $scope.venues = [];
@@ -22,25 +22,43 @@ angular.module('bsis')
     };
 
     $scope.search = {
-      venue: angular.isUndefined($routeParams.venueId) ? master.venue : +$routeParams.venueId,
+      venue: angular.isUndefined($routeParams.venueId) ? master.venue : $routeParams.venueId,
       clinicDate: angular.isUndefined($routeParams.clinicDate) ? master.clinicDate : new Date($routeParams.clinicDate)
     };
 
     var columnDefs = [
-      {field: 'donorNumber'},
-      {field: 'firstName'},
-      {field: 'lastName'},
-      {field: 'gender'},
+      {
+        field: 'donorNumber',
+        displayName: gettextCatalog.getString('Donor Number')
+      },
+      {
+        field: 'firstName',
+        displayName: gettextCatalog.getString('First Name')
+      },
+      {
+        field: 'lastName',
+        displayName: gettextCatalog.getString('Last Name')
+      },
+      {
+        field: 'gender',
+        displayName: gettextCatalog.getString('Gender'),
+        cellFilter: 'titleCase | translate'
+      },
       {
         name: 'Date of Birth',
+        displayName: gettextCatalog.getString('Date of Birth'),
         field: 'birthDate',
         cellFilter: 'bsisDate'
       },
-      {field: 'bloodType'},
+      {
+        field: 'bloodType',
+        displayName: gettextCatalog.getString('Blood Type')
+      },
       {
         name: 'Eligibility',
+        displayName: gettextCatalog.getString('Eligibility'),
         field: 'eligibility',
-        cellFilter: 'eligibility'
+        cellFilter: 'eligibility | translate'
       }
     ];
 
@@ -55,14 +73,15 @@ angular.module('bsis')
 
       // Format values for exports
       exporterFieldCallback: function(grid, row, col, value) {
-        if (col.name === 'Date of Birth') {
+        if (col.field === 'birthDate') {
           return $filter('bsisDate')(value);
-        } else if (col.name === 'Eligibility') {
-          return $filter('eligibility')(value);
+        } else if (col.field === 'eligibility') {
+          return gettextCatalog.getString($filter('eligibility')(value));
+        } else if (col.field === 'gender') {
+          return gettextCatalog.getString($filter('titleCase')(value));
         } else {
           return value;
         }
-
       },
 
       // PDF header
@@ -76,25 +95,23 @@ angular.module('bsis')
         });
 
         var columns = [
-          {text: 'Venue: ' + venueName, width: 'auto'}
+          {text: gettextCatalog.getString('Venue') + ': ' + venueName, width: 'auto'}
         ];
 
         // Include Clinic Date
         if ($scope.currentSearch.clinicDate) {
           var clinicDate = $filter('bsisDate')($scope.currentSearch.clinicDate);
-          columns.push({text: 'Clinic Date: ' + clinicDate, width: 'auto'});
+          columns.push({text: gettextCatalog.getString('Clinic Date') + ': ' + clinicDate, width: 'auto'});
         }
 
         // Include Number and Percentage Eligible Donors
-        columns.push({text: 'Eligible Donors: ' +
-           $scope.numberEligibleDonor + ' out of ' +
-           $scope.gridOptions.data.length +
-            ' (' + $scope.percentageEligibleDonor + '%)',
+        columns.push({text: gettextCatalog.getString('Eligible Donors: {{numberEligibleDonors}} out of {{totalDonors}} ({{percentage}}%)',
+          { numberEligibleDonors: $scope.numberEligibleDonors, totalDonors: $scope.gridOptions.data.length, percentage: $scope.percentageEligibleDonor}),
           width: 'auto'});
 
         return [
           {
-            text: 'Mobile Clinic Look Up',
+            text: gettextCatalog.getString('Mobile Clinic Look Up'),
             bold: true,
             margin: [30, 10, 30, 0]
           },
@@ -109,9 +126,9 @@ angular.module('bsis')
       // PDF footer
       exporterPdfFooter: function(currentPage, pageCount) {
         var columns = [
-          {text: 'Total donors: ' + $scope.gridOptions.data.length, width: 'auto'},
-          {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-          {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+          {text: gettextCatalog.getString('Total donors: {{total}}', {total: $scope.gridOptions.data.length}), width: 'auto'},
+          {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+          {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
         ];
         return {
           columns: columns,
@@ -163,8 +180,8 @@ angular.module('bsis')
       $scope.searching = true;
       MobileService.mobileClinicLookUp(search, function(res) {
         $scope.gridOptions.data = res.donors;
-        $scope.numberEligibleDonor = calculateNumberEligibleDonors($scope.gridOptions.data);
-        $scope.percentageEligibleDonor = calculatePercentageEligibleDonors($scope.numberEligibleDonor, $scope.gridOptions.data.length);
+        $scope.numberEligibleDonors = calculateNumberEligibleDonors($scope.gridOptions.data);
+        $scope.percentageEligibleDonor = calculatePercentageEligibleDonors($scope.numberEligibleDonors, $scope.gridOptions.data.length);
         $scope.gridOptions.paginationCurrentPage = 1;
         $scope.searching = false;
       }, function(err) {

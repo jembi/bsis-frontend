@@ -1,12 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('AddDonorCtrl', function($scope, $location, $routeParams, $uibModal, ConfigurationsService, DonorService, DATEFORMAT, MONTH, TITLE, GENDER) {
-
-    var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
-    var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
-    var minBirthDate = moment().subtract(maxAge, 'years');
-    var maxBirthDate = moment().subtract(minAge, 'years');
+  .controller('AddDonorCtrl', function($scope, $location, $routeParams, DonorService, DATEFORMAT, MONTH, TITLE, GENDER) {
 
     function initialiseDonorForm() {
       DonorService.getDonorFormFields(function(response) {
@@ -27,35 +22,6 @@ angular.module('bsis')
       });
     }
 
-    function confirmAddDonor(birthDate) {
-
-      var message;
-      if (birthDate.isBefore(minBirthDate)) {
-        message = 'This donor is over the maximum age of ' + maxAge + '.';
-      } else if (birthDate.isAfter(maxBirthDate)) {
-        message = 'This donor is below the minimum age of ' + minAge + '.';
-      } else {
-        // Don't show confirmation
-        return Promise.resolve(null);
-      }
-      message += ' Are you sure that you want to continue?';
-
-      var modal = $uibModal.open({
-        animation: false,
-        templateUrl: 'views/confirmModal.html',
-        controller: 'ConfirmModalCtrl',
-        resolve: {
-          confirmObject: {
-            title: 'Invalid donor',
-            button: 'Add donor',
-            message: message
-          }
-        }
-      });
-
-      return modal.result;
-    }
-
     $scope.addDonor = function(newDonor, dob, valid) {
 
       if (valid) {
@@ -68,7 +34,7 @@ angular.module('bsis')
           $scope.addingDonor = false;
         } else {
 
-          confirmAddDonor(birthDate).then(function() {
+          DonorService.checkDonorAge(birthDate).then(function() {
 
             $scope.addingDonor = true;
 

@@ -156,9 +156,7 @@ angular.module('bsis')
           if (!angular.isArray(componentTypes)) {
             componentTypes = [componentTypes];
           }
-          angular.forEach(componentTypes, function(selectedComponentType) {
-            $scope.search.componentTypes.push(parseInt(selectedComponentType));
-          });
+          $scope.search.componentTypes = componentTypes;
         }
         if ($routeParams.locationId) {
           var locationId = $routeParams.locationId;

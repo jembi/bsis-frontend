@@ -1,5 +1,5 @@
 angular.module('bsis')
-  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, $filter, ngTableParams, $timeout, $routeParams, uiGridConstants, $log, ModalsService) {
+  .controller('DiscardComponentsCtrl', function($scope, $location, ComponentService, ICONS, $filter, ngTableParams, $timeout, $routeParams, uiGridConstants, gettextCatalog, $log, ModalsService) {
 
     var selectedComponents = [];
     var forms = $scope.forms = {};
@@ -43,9 +43,9 @@ angular.module('bsis')
       }
 
       var discardConfirmation = {
-        title: 'Discard Components',
-        button: 'Continue',
-        message: 'Are you sure you want to discard these components?'
+        title: gettextCatalog.getString('Discard Components'),
+        button: gettextCatalog.getString('Continue'),
+        message: gettextCatalog.getString('Are you sure you want to discard these components?')
       };
 
       ModalsService.showConfirmation(discardConfirmation).then(function() {
@@ -77,9 +77,9 @@ angular.module('bsis')
     $scope.undiscardComponents = function() {
 
       var undiscardConfirmation = {
-        title: 'Undiscard Components',
-        button: 'Continue',
-        message: 'Are you sure you want to undiscard these components?'
+        title: gettextCatalog.getString('Undiscard Components'),
+        button: gettextCatalog.getString('Continue'),
+        message: gettextCatalog.getString('Are you sure you want to undiscard these components?')
       };
 
       ModalsService.showConfirmation(undiscardConfirmation).then(function() {
@@ -128,24 +128,31 @@ angular.module('bsis')
     var columnDefs = [
       {
         name: 'Component Code',
+        displayName: gettextCatalog.getString('Component Code'),
         field: 'componentCode',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Component Type',
+        displayName: gettextCatalog.getString('Component Type'),
         field: 'componentType.componentTypeName',
         width: '**',
         minWidth: '250'
       },
       {
         name: 'Status',
+        displayName: gettextCatalog.getString('Status'),
         field: 'status',
+        cellTemplate: '<div class="ui-grid-cell-contents">' +
+          '{{row.entity["status"] | titleCase | translate}}' +
+          '</div>',
         width: '**',
         maxWidth: '150'
       },
       {
         name: 'Created On',
+        displayName: gettextCatalog.getString('Created On'),
         field: 'createdOn',
         cellFilter: 'bsisDate',
         width: '**',
@@ -153,12 +160,15 @@ angular.module('bsis')
       },
       {
         name: 'Expiry Status',
-        field: 'expiryStatus',
+        displayName: gettextCatalog.getString('Expiry Status'),
+        field: 'daysToExpire',
+        cellFilter: 'daysToExpire',
         width: '**',
         maxWidth: '250'
       },
       {
         name: 'Weight',
+        displayName: gettextCatalog.getString('Weight'),
         field: 'weight',
         width: '**',
         maxWidth: '120'

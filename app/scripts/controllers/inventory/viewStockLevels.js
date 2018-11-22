@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .controller('ViewStockLevelsCtrl', function($scope, $location, $filter, $log, ReportsService) {
+  .controller('ViewStockLevelsCtrl', function($scope, $location, $filter, $log, ReportsService, gettextCatalog) {
 
     $scope.distributionCenters = null;
 
@@ -14,8 +14,11 @@ angular.module('bsis')
       allSites: true
     };
 
+    var componentTypeTitle = gettextCatalog.getString('Component Type');
+    var totalTitle = gettextCatalog.getString('Total');
+
     var inStockColumnDefs = [
-      { name: 'Component Type', field: 'componentType', width: '**' },
+      { name: 'Component Type', displayName:componentTypeTitle, field: 'componentType', width: '**' },
       { name: 'A+', displayName: 'A+', field: 'aPlus', width: 55 },
       { name: 'A-', displayName: 'A-', field: 'aMinus', width: 55 },
       { name: 'B+', displayName: 'B+', field: 'bPlus', width: 55 },
@@ -24,11 +27,11 @@ angular.module('bsis')
       { name: 'AB-', displayName: 'AB-', field: 'abMinus', width: 65 },
       { name: 'O+', displayName: 'O+', field: 'oPlus', width: 55 },
       { name: 'O-', displayName: 'O-', field: 'oMinus', width: 55 },
-      { name: 'Total', displayName: 'Total', field: 'total', width: 95 }
+      { name: 'Total', displayName: totalTitle, field: 'total', width: 95 }
     ];
 
     var notLabelledColumnDefs = [
-      { name: 'Component Type', field: 'componentType', width: '**' },
+      { name: 'Component Type', displayName:componentTypeTitle, field: 'componentType', width: '**' },
       { name: 'A+', displayName: 'A+', field: 'aPlus', width: 55 },
       { name: 'A-', displayName: 'A-', field: 'aMinus', width: 55 },
       { name: 'B+', displayName: 'B+', field: 'bPlus', width: 55 },
@@ -38,7 +41,7 @@ angular.module('bsis')
       { name: 'O+', displayName: 'O+', field: 'oPlus', width: 55 },
       { name: 'O-', displayName: 'O-', field: 'oMinus', width: 55 },
       { name: 'NTD', displayName: 'NTD', field: 'empty', width: 65 },
-      { name: 'Total', displayName: 'Total', field: 'total', width: 95 }
+      { name: 'Total', displayName: totalTitle, field: 'total', width: 95 }
     ];
 
     function isInStockSearch() {
@@ -53,7 +56,7 @@ angular.module('bsis')
       if (!searchedParams.distributionCenter) {
         prefix.push(
           {
-            text: 'All Sites',
+            text: gettextCatalog.getString('All Sites'),
             fontSize: 8,
             bold: true
           }
@@ -64,7 +67,7 @@ angular.module('bsis')
         });
         prefix.push(
           {
-            text: 'Distribution Center: ',
+            text: gettextCatalog.getString('Distribution Center') + ': ',
             fontSize: 8,
             bold: true
           }, {
@@ -80,7 +83,7 @@ angular.module('bsis')
     function exportPDFHeader() {
       return [
         {
-          text: 'Stock Levels: ' + (isInStockSearch() ? 'In Stock' : 'Not Labelled'),
+          text: gettextCatalog.getString('Stock Levels') + ': ' + (isInStockSearch() ? gettextCatalog.getString('In Stock') : gettextCatalog.getString('Not Labelled')),
           fontSize: 10,
           bold: true,
           margin: [30, 20, 0, 0]
@@ -90,8 +93,8 @@ angular.module('bsis')
 
     function exportPDFFooter(gridOptions, currentPage, pageCount) {
       var columns = [
-        {text: 'Date generated: ' + $filter('bsisDateTime')(new Date()), width: 'auto'},
-        {text: 'Page ' + currentPage + ' of ' + pageCount, style: {alignment: 'right'}}
+        {text: gettextCatalog.getString('Date generated: {{date}}', {date: $filter('bsisDateTime')(new Date())}), width: 'auto'},
+        {text: gettextCatalog.getString('Page {{currentPage}} of {{pageCount}}', {currentPage: currentPage, pageCount: pageCount}), style: {alignment: 'right'}}
       ];
       return {
         columns: columns,

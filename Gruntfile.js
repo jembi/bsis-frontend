@@ -18,6 +18,7 @@ module.exports = function(grunt) {
 
   // enables grunt-git-describe
   grunt.loadNpmTasks('grunt-git-describe');
+  grunt.loadNpmTasks('grunt-angular-gettext');
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -37,10 +38,18 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/**/*.js'],
-        tasks: ['newer:eslint:src'],
+        tasks: ['newer:eslint:src', 'nggettextExtract'],
         options: {
           livereload: true
         }
+      },
+      html: {
+        files: ['<%= yeoman.app %>/views/**/*.html', 'app/*.html'],
+        tasks: ['nggettextExtract']
+      },
+      po: {
+        files: ['po/*.po'],
+        tasks: ['nggettextCompile']
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
@@ -105,7 +114,8 @@ module.exports = function(grunt) {
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/**/*.js',
         '!<%= yeoman.app %>/scripts/jquery.min.js',
-        '!<%= yeoman.app %>/scripts/bootstrap.min.js'
+        '!<%= yeoman.app %>/scripts/bootstrap.min.js',
+        '!<%= yeoman.app %>/scripts/translations.js'
       ],
       test: [
         'test/spec/{,*/}*.js'
@@ -306,31 +316,24 @@ module.exports = function(grunt) {
       ]
     },
 
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
-    //         '<%= yeoman.app %>/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
+    nggettext_extract: {
+      pot: {
+        files: {
+          'po/template.pot': [
+            '<%= yeoman.app %>/**/*.html',
+            '<%= yeoman.app %>/scripts/**/*/*.js'
+          ]
+        }
+      }
+    },
+
+    nggettext_compile: {
+      all: {
+        files: {
+          '<%= yeoman.app %>/scripts/translations.js': ['po/*.po']
+        }
+      }
+    },
 
     // Test settings
     karma: {
@@ -363,6 +366,7 @@ module.exports = function(grunt) {
       'autoprefixer',
       'connect:livereload',
       'version',
+      'nggettextCompile',
       'watch'
     ]);
   });
@@ -394,6 +398,10 @@ module.exports = function(grunt) {
     grunt.task.run(['serve:' + target]);
   });
 
+  // Translation tasks
+  grunt.registerTask('nggettextExtract', ['nggettext_extract']);
+  grunt.registerTask('nggettextCompile', ['nggettext_compile']);
+
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',
@@ -411,11 +419,12 @@ module.exports = function(grunt) {
     'concurrent:dist',
     'autoprefixer',
     'newer:eslint',
+    'nggettextExtract',
+    'nggettextCompile',
     'concat',
     'ngAnnotate',
     'copy:dist',
     'cdnify',
-    //'cssmin',
     'uglify',
     'rev',
     'usemin',

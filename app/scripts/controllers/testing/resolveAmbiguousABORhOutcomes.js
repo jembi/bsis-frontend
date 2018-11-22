@@ -2,7 +2,7 @@
 
 angular.module('bsis')
 
-  .controller('AmbiguousBloodTypingTestingCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams, BLOODABO, BLOODRH) {
+  .controller('ResolveAmbiguousABORhOutcomesCtrl', function($scope, $location, $log, TestingService, $filter, ngTableParams, $timeout, $routeParams, BLOODABO, BLOODRH) {
 
     $scope.bloodAboOptions = BLOODABO;
     $scope.bloodRhOptions = BLOODRH;
@@ -15,7 +15,7 @@ angular.module('bsis')
     var getSamples = function() {
       TestingService.getTestBatchDonations($routeParams.id, 'AMBIGUOUS', function(response) {
         $scope.data = response.donations;
-        $scope.testBatchCreatedDate = response.testBatchCreatedDate;
+        $scope.testBatchCreatedDate = response.testBatchDate;
         $scope.numberOfDonations = $scope.data.length;
         $scope.bloodTypingResolutions = {};
 
@@ -63,7 +63,7 @@ angular.module('bsis')
       });
 
       TestingService.saveBloodTypingResolutions(bloodTypingResolutionsArray, function() {
-        $location.path('/viewTestBatch/' + $routeParams.id);
+        $location.path('/manageTestBatch/' + $routeParams.id);
       }, function(err) {
         $log.error(err);
         $scope.savingTestResults = false;

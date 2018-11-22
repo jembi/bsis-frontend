@@ -1,11 +1,11 @@
-<p>Please select the correct donor information below:</p>
+<p><span translate>Please select the correct donor information below</span>:</p>
 <table ng-table="manageSelectedDuplicateDonorTableParams" show-filter="false" class="table">
     <tbody>
     <tr ng-repeat="donor in $data">
-        <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+        <td data-title="'Donor Number' | translate" header-class="text-left" class="text-center" sortable="'donorNumber'">
             {{donor.donorNumber}}
         </td>
-        <td data-title="'Preferred Address Type'" header-class="text-left" sortable="'preferredAddressType'"
+        <td data-title="'Preferred Address Type' | translate" header-class="text-left" sortable="'preferredAddressType'"
             class="form-inline">
             <div class="radio" ng-if="donor.preferredAddressType != null">
                 <input id="preferredAddressType{{donor.donorNumber}}" type="radio" name="preferredAddressType"
@@ -13,7 +13,7 @@
                 <label for="preferredAddressType{{donor.donorNumber}}">{{donor.preferredAddressType.preferredAddressType}}</label>
             </div>
         </td>
-        <td data-title="'Home'" header-class="text-left" sortable="'homeAddress'" class="form-inline">
+        <td data-title="'Home' | translate" header-class="text-left" sortable="'homeAddress'" class="form-inline">
             <div class="radio" ng-if="donor.address.homeAddressLine1 != null && donor.address.homeAddressLine1 != ''">
                 <input id="homeAddressLine1{{donor.donorNumber}}" type="radio" name="homeAddress"
                        ng-model="mergedDonorData.homeAddress" ng-value="donor.id" required>
@@ -37,7 +37,7 @@
                 </label>
             </div>
         </td>
-        <td data-title="'Postal'" header-class="text-left" sortable="'postalAddress'" class="form-inline">
+        <td data-title="'Postal' | translate" header-class="text-left" sortable="'postalAddress'" class="form-inline">
             <div class="radio"
                  ng-if="donor.address.postalAddressLine1 != null && donor.address.postalAddressLine1 != ''">
                 <input id="postalAddressLine1{{donor.donorNumber}}" type="radio" name="postalAddress"
@@ -62,7 +62,7 @@
                 </label>
             </div>
         </td>
-        <td data-title="'Work'" header-class="text-left" sortable="'workAddress'" class="form-inline">
+        <td data-title="'Work' | translate" header-class="text-left" sortable="'workAddress'" class="form-inline">
             <div class="radio" ng-if="donor.address.workAddressLine1 != null && donor.address.workAddressLine1 != ''">
                 <input id="workAddressLine1{{donor.donorNumber}}" type="radio" name="workAddress"
                        ng-model="mergedDonorData.workAddress" ng-value="donor.id" required>
@@ -91,50 +91,49 @@
     <tfoot>
     <tr>
         <!-- row for the "None of the Above" radio buttons and error messages -->
-        <td data-title="'Donor Number'" header-class="text-left" class="text-center" sortable="'donorNumber'">
+        <td>
         </td>
-        <td data-title="'Preferred Address Type'" header-class="text-left" sortable="'preferredAddressType'"
-            class="form-inline">
+        <td>
             <div class="radio" ng-if="donorFields['preferredAddressType']">
                 <input id="preferredAddressType" type="radio" name="preferredAddressType"
                        ng-model="mergedDonorData.preferredAddressType" value="0" required>
-                <label for="preferredAddressType">None of the above</label>
+                <label for="preferredAddressType" translate>None of the above</label>
                 <small class="error"
                        ng-show="(mergeDonorForm.preferredAddressType.$invalid && (mergeDonorForm.preferredAddressType.$dirty || invalid))">
-                    <br/>Please select one
+                    <br/><span translate>Please select one</span>
                 </small>
             </div>
         </td>
-        <td data-title="'Home'" header-class="text-left" sortable="'homeAddress'" class="form-inline">
+        <td>
             <div class="radio" ng-if="donorFields['homeAddress']">
                 <input id="homeAddress" type="radio" name="homeAddress" ng-model="mergedDonorData.homeAddress" value="0"
                        required>
-                <label for="homeAddress">None of the above</label>
+                <label for="homeAddress" translate>None of the above</label>
                 <small class="error"
                        ng-show="(mergeDonorForm.homeAddress.$invalid && (mergeDonorForm.homeAddress.$dirty || invalid))">
-                    <br/>Please select one
+                    <br/><span translate>Please select one</span>
                 </small>
             </div>
         </td>
-        <td data-title="'Postal'" header-class="text-left" sortable="'postalAddress'" class="form-inline">
+        <td>
             <div class="radio" ng-if="donorFields['postalAddress']">
                 <input id="postalAddress" type="radio" name="postalAddress" ng-model="mergedDonorData.postalAddress"
                        value="0" required>
-                <label for="postalAddress">None of the above</label>
+                <label for="postalAddress" translate>None of the above</label>
                 <small class="error"
                        ng-show="(mergeDonorForm.postalAddress.$invalid && (mergeDonorForm.postalAddress.$dirty || invalid))">
-                    <br/>Please select one
+                    <br/><span translate>Please select one</span>
                 </small>
             </div>
         </td>
-        <td data-title="'Work'" header-class="text-left" sortable="'workAddress'" class="form-inline">
+        <td>
             <div class="radio" ng-if="donorFields['workAddress']">
                 <input id="workAddress" type="radio" name="workAddress" ng-model="mergedDonorData.workAddress" value="0"
                        required>
-                <label for="workAddress">None of the above</label>
+                <label for="workAddress" translate>None of the above</label>
                 <small class="error"
                        ng-show="(mergeDonorForm.workAddress.$invalid && (mergeDonorForm.workAddress.$dirty || invalid))">
-                    <br/>Please select one
+                    <br/><span translate>Please select one</span>
                 </small>
             </div>
         </td>

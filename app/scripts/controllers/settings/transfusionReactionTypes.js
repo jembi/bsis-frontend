@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('TransfusionReactionTypesCtrl', function($scope, $filter, $location, $log, $timeout, ICONS, TransfusionReactionTypesService) {
+angular.module('bsis').controller('TransfusionReactionTypesCtrl', function($scope, $filter, $location, $log, gettextCatalog, $timeout, ICONS, TransfusionReactionTypesService) {
 
   $scope.icons = ICONS;
   $scope.transfusionReactionTypes = {};
@@ -9,18 +9,20 @@ angular.module('bsis').controller('TransfusionReactionTypesCtrl', function($scop
     {
       name: 'Name',
       field: 'name',
+      displayName: gettextCatalog.getString('Name'),
       width: '**',
       maxWidth: '300'
     },
     {
       name: 'Description',
-      displayName: 'Description',
+      displayName: gettextCatalog.getString('Description'),
       field: 'description',
       width: '**'
     },
     {
       name: 'Enabled',
       field: 'isDeleted',
+      displayName: gettextCatalog.getString('Enabled'),
       cellTemplate: '<div class="ui-grid-cell-contents">' +
         '<span ng-show="!row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARECHECK}}"></i></span>' +
         '<span ng-show="row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARE}}"></i></span></div>',

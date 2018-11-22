@@ -202,6 +202,7 @@ angular.module('bsis')
             if (err[fieldName]) {
               $scope.usernameInvalid = 'ng-invalid';
               $scope.serverError = err[fieldName];
+              $scope.err = err.fieldErrors.username[0].code;
             }
           }
           $scope.savingUser = false;

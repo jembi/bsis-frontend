@@ -1,15 +1,15 @@
 <div class="modal-header">
-  <h3 class="modal-title">Discard Components</h3>
+  <h3 class="modal-title" translate>Discard Components</h3>
 </div>
 <form name="discardComponentsForm" class="form-horizontal" role="form" ng-submit="discardComponents()" novalidate>
   <div class="modal-body">
-    <p style="font-size: 20px;">Are you sure you want to discard all units in this return?</p>
+    <p style="font-size: 20px;" translate>Are you sure you want to discard all units in this return?</p>
     <div class="form-group" style="margin-left: 0; margin-right: 0">
-      <label>Discard Reason</label>
+      <label translate>Discard Reason</label>
       <select name="discardReason" class="form-control input-sm" ng-model="discard.discardReason"
               ng-options="item as item.reason for item in discardReasons"
               ng-required="true">
-        <option value="" ng-disabled="true">Select:</option>
+        <option value="" ng-disabled="true" translate>Select</option>
       </select>
       <div>
         <ng-messages for="discardComponentsForm.discardReason.$error" role="alert" ng-show="discardComponentsForm.$submitted">
@@ -18,11 +18,11 @@
       </div>
     </div>
     <div class="form-group" style="margin-left: 0; margin-right: 0">
-      <input size="35" class="form-control input-sm" placeholder="Comments" ng-model="discard.discardReasonText" />
+      <input size="35" class="form-control input-sm" placeholder="{{'Comments'|translate}}" ng-model="discard.discardReasonText"/>
     </div>
   </div>
   <div class="modal-footer">
-      <button class="btn btn-primary" type="submit" ng-disabled="discardingComponent">{{discardingComponent ? "Discarding..." : "Discard Components"}}</button>
-      <button class="btn btn-primary" type="button" ng-disabled="discardingComponent" ng-click="close()">Cancel</button>
+      <button class="btn btn-primary" type="submit" ng-disabled="discardingComponent">{{discardingComponent ? "Discarding..." : "Discard" | translate}}</button>
+      <button class="btn btn-primary" type="button" ng-disabled="discardingComponent" ng-click="close()" translate>Cancel</button>
   </div>
 </form>

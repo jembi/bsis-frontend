@@ -2,17 +2,16 @@
 
 angular.module('bsis')
 
-  .controller('ViewDonorCtrl', function($scope, $location, $log, Alerting, DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, ICONS, PACKTYPE, MONTH, TITLE,
-                                         GENDER, DATEFORMAT, UI, DONATION, $filter, $q, ngTableParams, $timeout, $routeParams, PERMISSIONS) {
+  .controller('ViewDonorCtrl', function($scope, $location, $log, $filter, $q, ngTableParams, $timeout, $routeParams,
+                                         DonorService, DonationsService, TestingService, ConfigurationsService, ModalsService, AuthService, gettextCatalog,
+                                         ICONS, MONTH, TITLE, GENDER, DATEFORMAT, UI, DONATION, PERMISSIONS) {
 
     //Initialize scope variables
     $scope.icons = ICONS;
     $scope.getBooleanValue = ConfigurationsService.getBooleanValue;
-    $scope.alerts = Alerting.getAlerts();
     $scope.ui = UI;
     $scope.dateFormat = DATEFORMAT;
 
-    $scope.alerts = Alerting.getAlerts();
     $scope.data = {};
     $scope.age = '';
     $scope.deferralsData = {};
@@ -110,9 +109,9 @@ angular.module('bsis')
       }
 
       return ModalsService.showConfirmation({
-        title: 'Pack Type Update',
-        button: 'Continue',
-        message: 'The pack type has been updated - this will affect the initial components created with this donation. Do you want to continue?'
+        title: gettextCatalog.getString('Pack Type Update'),
+        button: gettextCatalog.getString('Continue'),
+        message: gettextCatalog.getString('The pack type has been updated - this will affect the initial components created with this donation. Do you want to continue?')
       });
     }
 
@@ -162,12 +161,10 @@ angular.module('bsis')
      */
 
     $scope.confirmDelete = function(donor) {
-      Alerting.alertReset();
-
       return ModalsService.showConfirmation({
-        title: 'Delete Donor',
-        button: 'Delete',
-        message: 'Are you sure you wish to delete the donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '"?'
+        title: gettextCatalog.getString('Delete Donor'),
+        button: gettextCatalog.getString('Delete'),
+        message: gettextCatalog.getString('Are you sure you wish to delete the donor "{{firstName}}, {{lastName}} {{donorNumber}}"?', {firstName: donor.firstName, lastName: donor.lastName, donorNumber: donor.donorNumber})
       }).then(function() {
         // Delete confirmed - delete the donor
         $scope.deleteDonor(donor);
@@ -177,22 +174,11 @@ angular.module('bsis')
 
     };
 
-    function deleteCallback(err, donor) {
-      if (err) {
-        Alerting.alertAddMsg(true, 'top', 'danger', 'An error has occurred while deleting the donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" Error :' + err.status + ' - ' + err.data.developerMessage);
-      } else {
-        Alerting.alertAddMsg(true, 'top', 'success', 'Donor "' + donor.firstName + ' ' + donor.lastName + ', ' + donor.donorNumber + '" has been deleted successfully');
-      }
-    }
-
     $scope.deleteDonor = function(donor) {
       DonorService.deleteDonor(donor.id, function() {
-        deleteCallback(false, donor);
         $location.path('findDonor').search({});
       }, function(err) {
-        deleteCallback(err, donor);
-        $location.path('viewDonor/' + donor.id)
-          .search({failed: true}); // If I do not set a parameter the route does not change, this needs to happen to refresh the donor.
+        $log.err(err);
       });
     };
 
@@ -347,7 +333,7 @@ angular.module('bsis')
 
       if (bleedTimeData.bleedEndTime === null) {
         $scope.clearError('emptyBleedEndTime');
-        $scope.raiseError('emptyBleedEndTime', 'Enter a valid time');
+        $scope.raiseError('emptyBleedEndTime', gettextCatalog.getString('Enter a valid time'));
         $scope.getError('emptyBleedEndTime');
       } else {
         $scope.clearError('emptyBleedEndTime');
@@ -355,7 +341,7 @@ angular.module('bsis')
 
       if (bleedTimeData.bleedStartTime === null) {
         $scope.clearError('emptyBleedStartTime');
-        $scope.raiseError('emptyBleedStartTime', 'Enter a valid time');
+        $scope.raiseError('emptyBleedStartTime', gettextCatalog.getString('Enter a valid time'));
         $scope.getError('emptyBleedStartTime');
       } else {
         $scope.clearError('emptyBleedStartTime');
@@ -363,7 +349,7 @@ angular.module('bsis')
 
       if (new Date(bleedTimeData.bleedEndTime) < new Date(bleedTimeData.bleedStartTime) && $scope.formErrors.length === 0) {
         $scope.clearError('endTimeBeforeStartTime');
-        $scope.raiseError('endTimeBeforeStartTime', 'End time should be after Start time');
+        $scope.raiseError('endTimeBeforeStartTime', gettextCatalog.getString('End time should be after Start time'));
         $scope.getError('endTimeBeforeStartTime');
       } else {
         $scope.clearError('endTimeBeforeStartTime');
@@ -413,9 +399,9 @@ angular.module('bsis')
       }
 
       return ModalsService.showConfirmation({
-        title: 'Ineligible Donor',
-        button: 'Continue',
-        message: 'This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?'
+        title: gettextCatalog.getString('Ineligible Donor'),
+        button: gettextCatalog.getString('Continue'),
+        message: gettextCatalog.getString('This donor is not eligible to donate. Components for this donation will be flagged as unsafe. Do you want to continue?')
       });
     }
 
@@ -425,37 +411,16 @@ angular.module('bsis')
       }
     };
 
-    var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
-    var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
-    var minBirthDate = moment().subtract(maxAge, 'years');
-    var maxBirthDate = moment().subtract(minAge, 'years');
-
-    function checkDonorAge(donor) {
-      var birthDate = moment(donor.birthDate);
-
-      var message;
-      if (birthDate.isBefore(minBirthDate)) {
-        message = 'This donor is over the maximum age of ' + maxAge + '.';
-      } else if (birthDate.isAfter(maxBirthDate)) {
-        message = 'This donor is below the minimum age of ' + minAge + '.';
-      } else {
-        // Don't show confirmation
-        return $q.resolve(null);
-      }
-      message += ' Are you sure that you want to continue?';
-
-      return ModalsService.showConfirmation({
-        title: 'Invalid donor',
-        button: 'Add donation',
-        message: message
-      });
-    }
+    var clearDonationErrors = function() {
+      $scope.donorDonationDINError = null;
+      $scope.invalidDonorDonationError = null;
+    };
 
     $scope.addDonation = function(donation, donationBatch, bleedStartTime, bleedEndTime, valid) {
 
       if (valid) {
 
-        checkDonorAge($scope.donor).then(function() {
+        DonorService.checkDonorAge($scope.donor.birthDate).then(function() {
           return confirmAddDonation(donation, donationBatch);
         }).then(function() {
           $scope.addDonationSuccess = '';
@@ -476,6 +441,8 @@ angular.module('bsis')
 
           $scope.addingDonation = true;
 
+          clearDonationErrors();
+
           DonorService.addDonation(donation, function() {
 
             $scope.addDonationSuccess = true;
@@ -491,6 +458,16 @@ angular.module('bsis')
           }, function(err) {
             $scope.donorDonationError = err;
             $scope.addDonationSuccess = false;
+
+            if (angular.isDefined(err.fieldErrors)) {
+              if (angular.isDefined(err.fieldErrors['donation.donationIdentificationNumber'])) {
+                $scope.donorDonationDINError = err.fieldErrors['donation.donationIdentificationNumber'][0];
+              }
+              if (angular.isDefined(err.fieldErrors['donation.donor'])) {
+                $scope.invalidDonorDonationError = err.fieldErrors['donation.donor'][0];
+              }
+            }
+
             // refresh donor overview after adding donation
             getDonorOverview();
 
@@ -530,7 +507,7 @@ angular.module('bsis')
       var today = new Date();
       today.setHours(23, 59, 59, 0);
       $scope.deferredUntilDate = today;
-      $scope.deferredUntil = 'No current deferrals';
+      $scope.deferredUntil = gettextCatalog.getString('No current deferrals');
     }
 
     function refreshDeferralMessage(deferral) {
@@ -623,14 +600,14 @@ angular.module('bsis')
       $scope.deleteDonorDeferral = function(donorDeferral) {
         var message = '';
         if (donorDeferral.deferralReason.durationType === 'PERMANENT') {
-          message = 'Are you sure you want to void this permanent deferral? The donor may be eligible to donate as a result of this action.';
+          message = gettextCatalog.getString('Are you sure you want to void this permanent deferral? The donor may be eligible to donate as a result of this action.');
         } else {
-          message = 'Are you sure you want to void this deferral?';
+          message = gettextCatalog.getString('Are you sure you want to void this deferral?');
         }
 
         var confirmationModalConfig = {
-          title: 'Void Deferral',
-          button: 'Void Deferral',
+          title: gettextCatalog.getString('Void Deferral'),
+          button: gettextCatalog.getString('Void'),
           message: message
         };
 
@@ -689,7 +666,7 @@ angular.module('bsis')
     $scope.checkIdentifier = function(identifierData) {
       if (!identifierData.idNumber || angular.isUndefined(identifierData.idType)) {
         $scope.clearError('identifier');
-        $scope.raiseError('identifier', 'Please enter a valid identifier');
+        $scope.raiseError('identifier', gettextCatalog.getString('Please enter a valid identifier'));
         $scope.getError('identifier');
         return ' ';
       } else {
@@ -701,7 +678,7 @@ angular.module('bsis')
       if (form.$valid) {
         return true;
       } else {
-        return 'This form is not valid';
+        return gettextCatalog.getString('This form is not valid');
       }
     };
 

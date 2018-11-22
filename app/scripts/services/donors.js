@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bsis')
-  .factory('DonorService', function($http, Api) {
+  .factory('DonorService', function($http, Api, ConfigurationsService, gettextCatalog, $uibModal) {
 
     var donorObj = {};
     var donationBatchObj = {};
@@ -239,7 +239,7 @@ angular.module('bsis')
           var hiddenElement = document.createElement('a');
           hiddenElement.href = 'data:attachment/zpl,' + encodeURI(label.labelZPL);
           hiddenElement.target = '_blank';
-          hiddenElement.download = 'barcode.bc';
+          hiddenElement.download = 'barcode' + moment(new Date()) + '.bc';
           hiddenElement.click();
 
         }, function() {
@@ -381,6 +381,43 @@ angular.module('bsis')
 
       getDonation: function(donationId, onSuccess, onError) {
         return Api.Donations.get({id: donationId}, onSuccess, onError);
+      },
+
+      checkDonorAge: function(birthDate) {
+
+        var minAge = ConfigurationsService.getIntValue('donors.minimumAge');
+        var maxAge = ConfigurationsService.getIntValue('donors.maximumAge') || 100;
+        var minBirthDate = moment().subtract(maxAge, 'years');
+        var maxBirthDate = moment().subtract(minAge, 'years');
+        var donorBirthDate = moment(birthDate);
+        var message;
+
+        if (donorBirthDate.isBefore(minBirthDate)) {
+          message = gettextCatalog.getString('This donor is over the maximum age of {{maxAge}}', {maxAge: maxAge}) + '.';
+        } else if (donorBirthDate.isAfter(maxBirthDate)) {
+          message = gettextCatalog.getString('This donor is below the minimum age of {{minAge}}', {minAge: minAge}) + '.';
+        } else {
+        // Don't show confirmation
+          return Promise.resolve(null);
+        }
+
+        message += ' ';
+        message += gettextCatalog.getString('Are you sure that you want to continue?');
+
+        var modal = $uibModal.open({
+          animation: false,
+          templateUrl: 'views/confirmModal.html',
+          controller: 'ConfirmModalCtrl',
+          resolve: {
+            confirmObject: {
+              title: gettextCatalog.getString('Invalid donor'),
+              button: gettextCatalog.getString('Add'),
+              message: message
+            }
+          }
+        });
+
+        return modal.result;
       }
 
     };

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $routeParams, $log, ICONS, LocationsService, ConfigurationsService) {
+angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $routeParams, $log, ICONS, LocationsService, ConfigurationsService, gettextCatalog) {
 
   var master = {
     name: '',
@@ -11,11 +11,13 @@ angular.module('bsis').controller('LocationsCtrl', function($scope, $location, $
   var columnDefs = [
     {
       name: 'Name',
+      displayName: gettextCatalog.getString('Name'),
       field: 'name',
       width: '**'
     },
     {
       name: 'Enabled',
+      displayName: gettextCatalog.getString('Enabled'),
       field: 'isDeleted',
       cellTemplate: '<div class="ui-grid-cell-contents">' +
         '<span ng-show="!row.entity.isDeleted"><i class="fa {{grid.appScope.icons.SQUARECHECK}}"></i></span>' +
