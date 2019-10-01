@@ -28,7 +28,7 @@
 
   <meta name="viewport" content="width=device-width">
   
-  <title>bsis/DISCLAIMER.md at develop · jembi/bsis</title>
+  <title>bsis/CONTRIBUTORS-AGREEMENT.md at develop · jembi/bsis</title>
     <meta name="description" content="BSIS is a system to monitor blood inventory from collection to transfusion.  Started as a collaboration between the Computing For Good (C4G) program at Georgia Tech and the Centers for Diseases Control and Prevention (CDC), the application is now maintained, developed and managed by Jembi Health Systems (JHS), in partnership with Safe Blood for Africa (SBFA) and the Centers for Diseases Control (CDC). - jembi/bsis">
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
   <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
@@ -38,10 +38,10 @@
     <meta property="og:image" content="https://avatars3.githubusercontent.com/u/1931511?s=400&amp;v=4" /><meta property="og:site_name" content="GitHub" /><meta property="og:type" content="object" /><meta property="og:title" content="jembi/bsis" /><meta property="og:url" content="https://github.com/jembi/bsis" /><meta property="og:description" content="BSIS is a system to monitor blood inventory from collection to transfusion.  Started as a collaboration between the Computing For Good (C4G) program at Georgia Tech and the Centers for Diseases Con..." />
 
   <link rel="assets" href="https://github.githubassets.com/">
-  <link rel="web-socket" href="wss://live.github.com/_sockets/VjI6NDI5NTU4NTQ4OjkwMzlkZDcyNGEzMzdmZWZiY2MwZDZkNzJjZWFhZjQ1YThhYzUxNmU5OGYzNjRlMTk0Yjk0MGFkYmY3NzkxNzE=--df4293fa41e01b3590846c45663a44b7b102b7c6">
+  <link rel="web-socket" href="wss://live.github.com/_sockets/VjI6NDI5NTU4NTQ4Ojg3MzNiOTdiYTg1YTI5MzU1YzhiNjgyYTBkYmRlNGMyYWUyMGViYzczNGRjMWY4YjJhMzQxZjVmOTYxYzhlZjQ=--408c7bf3a8b120c15b256f154f10f853d96c5c3a">
   <meta name="pjax-timeout" content="1000">
   <link rel="sudo-modal" href="/sessions/sudo_modal">
-  <meta name="request-id" content="C476:35CD9:32B5D53:4D65257:5D934D35" data-pjax-transient>
+  <meta name="request-id" content="C476:35CD9:32B50DF:4D64546:5D934D2C" data-pjax-transient>
 
 
   
@@ -52,7 +52,7 @@
     <meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
     <meta name="google-site-verification" content="GXs5KoUUkNCoaAZn7wPN-t01Pywp9M3sEjnt_3_ZWPc">
 
-  <meta name="octolytics-host" content="collector.githubapp.com" /><meta name="octolytics-app-id" content="github" /><meta name="octolytics-event-url" content="https://collector.githubapp.com/github-external/browser_event" /><meta name="octolytics-dimension-request_id" content="C476:35CD9:32B5D53:4D65257:5D934D35" /><meta name="octolytics-dimension-region_edge" content="ams" /><meta name="octolytics-dimension-region_render" content="iad" /><meta name="octolytics-dimension-ga_id" content="" class="js-octo-ga-id" /><meta name="octolytics-dimension-visitor_id" content="5794194003817408918" /><meta name="octolytics-actor-id" content="20767660" /><meta name="octolytics-actor-login" content="rowanpi" /><meta name="octolytics-actor-hash" content="9e49f1b958580f3d504fc6e51fd6ca4378a148e8e134f3e5ef6e77fb581dba5d" />
+  <meta name="octolytics-host" content="collector.githubapp.com" /><meta name="octolytics-app-id" content="github" /><meta name="octolytics-event-url" content="https://collector.githubapp.com/github-external/browser_event" /><meta name="octolytics-dimension-request_id" content="C476:35CD9:32B50DF:4D64546:5D934D2C" /><meta name="octolytics-dimension-region_edge" content="ams" /><meta name="octolytics-dimension-region_render" content="iad" /><meta name="octolytics-dimension-ga_id" content="" class="js-octo-ga-id" /><meta name="octolytics-dimension-visitor_id" content="5794194003817408918" /><meta name="octolytics-actor-id" content="20767660" /><meta name="octolytics-actor-login" content="rowanpi" /><meta name="octolytics-actor-hash" content="9e49f1b958580f3d504fc6e51fd6ca4378a148e8e134f3e5ef6e77fb581dba5d" />
 <meta name="analytics-location" content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" />
 
 
@@ -71,7 +71,7 @@
     <meta name="user-login" content="rowanpi">
 
       <meta name="expected-hostname" content="github.com">
-    <meta name="js-proxy-site-detection-payload" content="NjkxZWI5N2NhZTA0ZWU1ODlkMTgwMTcxMzc3MzcwMTc5ZDgzNDYzYzdlNmE0ZDAyMjBlZTU4ZGRiM2YwNjAzM3x7InJlbW90ZV9hZGRyZXNzIjoiNDEuMTkzLjIxOC4xMjIiLCJyZXF1ZXN0X2lkIjoiQzQ3NjozNUNEOTozMkI1RDUzOjRENjUyNTc6NUQ5MzREMzUiLCJ0aW1lc3RhbXAiOjE1Njk5MzQ2NjAsImhvc3QiOiJnaXRodWIuY29tIn0=">
+    <meta name="js-proxy-site-detection-payload" content="MzBjZjljMzg5ZjhiMTUwNGVkZWU0NmJiNGQ2MWJhOWVjMDdlOWRiOGRhMjMwNmVhMWIzYzU3MmU0MGM2Yjg3OHx7InJlbW90ZV9hZGRyZXNzIjoiNDEuMTkzLjIxOC4xMjIiLCJyZXF1ZXN0X2lkIjoiQzQ3NjozNUNEOTozMkI1MERGOjRENjQ1NDY6NUQ5MzREMkMiLCJ0aW1lc3RhbXAiOjE1Njk5MzQ2NDUsImhvc3QiOiJnaXRodWIuY29tIn0=">
 
     <meta name="enabled-features" content="ACTIONS_V2_ON_MARKETPLACE,MARKETPLACE_FEATURED_BLOG_POSTS,MARKETPLACE_INVOICED_BILLING,MARKETPLACE_SOCIAL_PROOF_CUSTOMERS,MARKETPLACE_TRENDING_SOCIAL_PROOF,MARKETPLACE_RECOMMENDATIONS,MARKETPLACE_PENDING_INSTALLATIONS,NOTIFY_ON_BLOCK,RELATED_ISSUES,GHE_CLOUD_TRIAL">
 
@@ -80,14 +80,14 @@
   <meta http-equiv="x-pjax-version" content="d1e2eee64de5ad3c93ba4d9cd739c4b0">
   
 
-      <link href="https://github.com/jembi/bsis/commits/develop.atom?token=AE6OHLDXPGQXD4UAVHNUCPV3UB74G" rel="alternate" title="Recent Commits to bsis:develop" type="application/atom+xml">
+      <link href="https://github.com/jembi/bsis/commits/develop.atom?token=AE6OHLCL7SQNYAOXQHD2MN53UB73K" rel="alternate" title="Recent Commits to bsis:develop" type="application/atom+xml">
 
   <meta name="go-import" content="github.com/jembi/bsis git https://github.com/jembi/bsis.git">
 
   <meta name="octolytics-dimension-user_id" content="1931511" /><meta name="octolytics-dimension-user_login" content="jembi" /><meta name="octolytics-dimension-repository_id" content="13254298" /><meta name="octolytics-dimension-repository_nwo" content="jembi/bsis" /><meta name="octolytics-dimension-repository_public" content="false" /><meta name="octolytics-dimension-repository_is_fork" content="false" /><meta name="octolytics-dimension-repository_network_root_id" content="13254298" /><meta name="octolytics-dimension-repository_network_root_nwo" content="jembi/bsis" /><meta name="octolytics-dimension-repository_explore_github_marketplace_ci_cta_shown" content="false" />
 
 
-    <link rel="canonical" href="https://github.com/jembi/bsis/blob/develop/DISCLAIMER.md" data-pjax-transient>
+    <link rel="canonical" href="https://github.com/jembi/bsis/blob/develop/CONTRIBUTORS-AGREEMENT.md" data-pjax-transient>
 
 
   <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
@@ -159,7 +159,7 @@
           aria-autocomplete="list"
           aria-controls="jump-to-results"
           aria-label="Search or jump to…"
-          data-jump-to-suggestions-path="/_graphql/GetSuggestedNavigationDestinations#csrf-token=QeR19eOz7oOpwgZ/I+38jAgT778dorwd7NzxCOv09t19AqvJY62psAkwD+UCmjrAooSgWRpVPhr2f8iDD9yhhA=="
+          data-jump-to-suggestions-path="/_graphql/GetSuggestedNavigationDestinations#csrf-token=Optdny3djmykRHMnCpBI5BL92DXV9FxcH4DC9Ed0CykGfYOjrcPJXwS2er0r546ouGqX09ID3lsFI/t/o1xccA=="
           spellcheck="false"
           autocomplete="off"
           >
@@ -312,7 +312,7 @@
       <img class="avatar" height="20" width="20" alt="@rowanpi" src="https://avatars2.githubusercontent.com/u/20767660?s=60&amp;v=4" />
       rowanpi
 </a>
-    <!-- '"` --><!-- </textarea></xmp> --></option></form><form action="/logout" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="Ug8xtSFwFSWwlroHDvfqvjnLVicHRvWwj4mnN7x2aHW/EPkPwf1GEJfqiSEF8VphYKkwFH5iqvAsJa8gEPcjcw==" />
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form action="/logout" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="zpuOO3sAfGQSyED1b/tTPPd0zMtAET3Ge5l7GDzBK/wjhEaBm40vUTW0c9Nk/ePjrhaq+Dk1YobYNXMPkEBg+g==" />
       <button type="submit" class="Header-link mr-0 mr-lg-3 py-2 py-lg-0 border-top border-lg-top-0 border-white-fade-15 d-lg-none btn-link d-block width-full text-left" data-ga-click="Header, sign out, icon:logout" style="padding-left: 2px;">
         <svg class="octicon octicon-sign-out v-align-middle" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 9V7H8V5h4V3l4 3-4 3zm-2 3H6V3L2 1h8v3h1V1c0-.55-.45-1-1-1H1C.45 0 0 .45 0 1v11.38c0 .39.22.73.55.91L6 16.01V13h4c.55 0 1-.45 1-1V8h-1v4z"/></svg>
         Sign out
@@ -396,7 +396,7 @@
   " data-team-hovercards-enabled>
   <details class="js-user-status-details details-reset details-overlay details-overlay-dark">
     <summary class="btn-link btn-block link-gray no-underline js-toggle-user-status-edit toggle-user-status-edit "
-      role="menuitem" data-hydro-click="{&quot;event_type&quot;:&quot;user_profile.click&quot;,&quot;payload&quot;:{&quot;profile_user_id&quot;:1931511,&quot;target&quot;:&quot;EDIT_USER_STATUS&quot;,&quot;user_id&quot;:20767660,&quot;client_id&quot;:&quot;1349065919.1564223894&quot;,&quot;originating_request_id&quot;:&quot;C476:35CD9:32B5D53:4D65257:5D934D35&quot;,&quot;originating_url&quot;:&quot;https://github.com/jembi/bsis/blob/develop/DISCLAIMER.md&quot;,&quot;referrer&quot;:&quot;https://github.com/jembi/bsis&quot;}}" data-hydro-click-hmac="0c45c93edd2c8e390ddf2e38ca41c8be6a37d82d7bbefd579e0a5d5391711fd9">
+      role="menuitem" data-hydro-click="{&quot;event_type&quot;:&quot;user_profile.click&quot;,&quot;payload&quot;:{&quot;profile_user_id&quot;:1931511,&quot;target&quot;:&quot;EDIT_USER_STATUS&quot;,&quot;user_id&quot;:20767660,&quot;client_id&quot;:&quot;1349065919.1564223894&quot;,&quot;originating_request_id&quot;:&quot;C476:35CD9:32B50DF:4D64546:5D934D2C&quot;,&quot;originating_url&quot;:&quot;https://github.com/jembi/bsis/blob/develop/CONTRIBUTORS-AGREEMENT.md&quot;,&quot;referrer&quot;:&quot;https://github.com/jembi/bsis&quot;}}" data-hydro-click-hmac="cc6f49afed9ed5bdcc074754167ec9300c7f8569a89bf345f971f53650b72b8f">
       <div class="d-flex">
         <div class="f6 lh-condensed user-status-header
           d-inline-block v-align-middle
@@ -423,7 +423,7 @@
       </div>
     </summary>
     <details-dialog class="details-dialog rounded-1 anim-fade-in fast Box Box--overlay" role="dialog" tabindex="-1">
-      <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="position-relative flex-auto js-user-status-form" action="/users/status?compact=1&amp;link_mentions=0&amp;truncate=1" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="put" /><input type="hidden" name="authenticity_token" value="JVNcMLubwkjATfO1mbHkKU2zM9KzHT5Y2PK7T+lSoOyc7soHZ8ICZ2c5fmEOEHPaD8oYNfCLtEOmhqJGcfc6cQ==" />
+      <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="position-relative flex-auto js-user-status-form" action="/users/status?compact=1&amp;link_mentions=0&amp;truncate=1" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="put" /><input type="hidden" name="authenticity_token" value="w5HujQ3VnZqcIqzi66l7MGIp8jjxM/sIH0277BTf8pF6LHi60YxdtTtWITZ8COzDIFDZ37KlcRNhOaLljHpoDA==" />
         <div class="Box-header bg-gray border-bottom p-3">
           <button class="Box-btn-octicon js-toggle-user-status-edit btn-octicon float-right" type="reset" aria-label="Close dialog" data-close-dialog>
             <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>
@@ -543,17 +543,17 @@
       </li>
       <li class="dropdown-divider" role="none"></li>
         <li>
-          <button type="button" class="btn-link dropdown-item ws-normal js-user-status-expire-button" title="in 30 minutes" value="2019-10-01T15:27:40+02:00">
+          <button type="button" class="btn-link dropdown-item ws-normal js-user-status-expire-button" title="in 30 minutes" value="2019-10-01T15:27:25+02:00">
             in 30 minutes
           </button>
         </li>
         <li>
-          <button type="button" class="btn-link dropdown-item ws-normal js-user-status-expire-button" title="in 1 hour" value="2019-10-01T15:57:40+02:00">
+          <button type="button" class="btn-link dropdown-item ws-normal js-user-status-expire-button" title="in 1 hour" value="2019-10-01T15:57:25+02:00">
             in 1 hour
           </button>
         </li>
         <li>
-          <button type="button" class="btn-link dropdown-item ws-normal js-user-status-expire-button" title="in 4 hours" value="2019-10-01T18:57:40+02:00">
+          <button type="button" class="btn-link dropdown-item ws-normal js-user-status-expire-button" title="in 4 hours" value="2019-10-01T18:57:25+02:00">
             in 4 hours
           </button>
         </li>
@@ -604,7 +604,7 @@
     <div role="none" class="dropdown-divider"></div>
     <a role="menuitem" class="dropdown-item" href="https://help.github.com" data-ga-click="Header, go to help, text:help">Help</a>
     <a role="menuitem" class="dropdown-item" href="/settings/profile" data-ga-click="Header, go to settings, icon:settings">Settings</a>
-    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="logout-form" action="/logout" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="6yAOGoN8eDJSljA2s1INVhhRbsCgpJpD6wijwcBO5ZcGP8agY/ErB3XqAxC4VL2JQTMI89mAxQNIpKvWbM+ukQ==" />
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="logout-form" action="/logout" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="RF+ULosQ3yvO3Nk2B3B/QWcUVhoYeyw7XxmQuhtAIqqpQFyUa52MHumg6hAMds+ePnYwKWFfc3v8tZitt8FprA==" />
       
       <button type="submit" class="dropdown-item dropdown-signout" data-ga-click="Header, sign out, icon:logout" role="menuitem">
         Sign out
@@ -658,10 +658,10 @@
 
   <li>
     
-    <!-- '"` --><!-- </textarea></xmp> --></option></form><form data-remote="true" class="clearfix js-social-form js-social-container" action="/notifications/subscribe" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="F/l7nA7BPkDhLYW6k9k443KQhSarDWPl838sXi1xMYQPQcRDQ3126/ezXaLh6O5XKaf2V+VCb6Q1703mqGq2pw==" />      <input type="hidden" name="repository_id" value="13254298">
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form data-remote="true" class="clearfix js-social-form js-social-container" action="/notifications/subscribe" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="K3bST5Jy9O34iYwNyfkM3Ht0SJvStDcTWjaw+usMerEzzm2Q3868Ru4XVBW7yNpoIEM76pz7O1KcptFCbhf9kg==" />      <input type="hidden" name="repository_id" value="13254298">
 
       <details class="details-reset details-overlay select-menu float-left">
-        <summary class="select-menu-button float-left btn btn-sm btn-with-count" data-hydro-click="{&quot;event_type&quot;:&quot;repository.click&quot;,&quot;payload&quot;:{&quot;target&quot;:&quot;WATCH_BUTTON&quot;,&quot;repository_id&quot;:13254298,&quot;client_id&quot;:&quot;1349065919.1564223894&quot;,&quot;originating_request_id&quot;:&quot;C476:35CD9:32B5D53:4D65257:5D934D35&quot;,&quot;originating_url&quot;:&quot;https://github.com/jembi/bsis/blob/develop/DISCLAIMER.md&quot;,&quot;referrer&quot;:&quot;https://github.com/jembi/bsis&quot;,&quot;user_id&quot;:20767660}}" data-hydro-click-hmac="3f7c8bcb51708f90f999d43dc4630f9b57d71462c0831f6398d9d9c8ba45adcf" data-ga-click="Repository, click Watch settings, action:blob#show">          <span data-menu-button>
+        <summary class="select-menu-button float-left btn btn-sm btn-with-count" data-hydro-click="{&quot;event_type&quot;:&quot;repository.click&quot;,&quot;payload&quot;:{&quot;target&quot;:&quot;WATCH_BUTTON&quot;,&quot;repository_id&quot;:13254298,&quot;client_id&quot;:&quot;1349065919.1564223894&quot;,&quot;originating_request_id&quot;:&quot;C476:35CD9:32B50DF:4D64546:5D934D2C&quot;,&quot;originating_url&quot;:&quot;https://github.com/jembi/bsis/blob/develop/CONTRIBUTORS-AGREEMENT.md&quot;,&quot;referrer&quot;:&quot;https://github.com/jembi/bsis&quot;,&quot;user_id&quot;:20767660}}" data-hydro-click-hmac="47508befaaac0560530a38d0f26f103f73d070f5901ff7f12480dd9606744f2d" data-ga-click="Repository, click Watch settings, action:blob#show">          <span data-menu-button>
               <svg class="octicon octicon-eye v-align-text-bottom" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"/></svg>
               Unwatch
           </span>
@@ -732,18 +732,18 @@
 
   <li>
       <div class="js-toggler-container js-social-container starring-container on">
-    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="starred js-social-form" action="/jembi/bsis/unstar" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="lOHK0EVLRR3s/g51vccWiUQ99UwTA9b9WED42vfQ22wAENAPV9Ah4brvVgnU3/a+lyzjU4T9/tsLuqhywK0/5w==" />
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="starred js-social-form" action="/jembi/bsis/unstar" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="L3zEI/4qv4hGn4D6MfC18h5ghYRx/Iw1FGK377qlrle7jd787LHbdBCO2IZY6FXFzXGTm+YCpBNHmOdHjdhK3A==" />
       <input type="hidden" name="context" value="repository"></input>
-      <button type="submit" class="btn btn-sm btn-with-count js-toggler-target" aria-label="Unstar this repository" title="Unstar jembi/bsis" data-hydro-click="{&quot;event_type&quot;:&quot;repository.click&quot;,&quot;payload&quot;:{&quot;target&quot;:&quot;UNSTAR_BUTTON&quot;,&quot;repository_id&quot;:13254298,&quot;client_id&quot;:&quot;1349065919.1564223894&quot;,&quot;originating_request_id&quot;:&quot;C476:35CD9:32B5D53:4D65257:5D934D35&quot;,&quot;originating_url&quot;:&quot;https://github.com/jembi/bsis/blob/develop/DISCLAIMER.md&quot;,&quot;referrer&quot;:&quot;https://github.com/jembi/bsis&quot;,&quot;user_id&quot;:20767660}}" data-hydro-click-hmac="5abcdf76856453b761961a953bd48d6df0dbfdb2612f2130b8d97fe79cf61b1b" data-ga-click="Repository, click unstar button, action:blob#show; text:Unstar">        <svg class="octicon octicon-star v-align-text-bottom" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74L14 6z"/></svg>
+      <button type="submit" class="btn btn-sm btn-with-count js-toggler-target" aria-label="Unstar this repository" title="Unstar jembi/bsis" data-hydro-click="{&quot;event_type&quot;:&quot;repository.click&quot;,&quot;payload&quot;:{&quot;target&quot;:&quot;UNSTAR_BUTTON&quot;,&quot;repository_id&quot;:13254298,&quot;client_id&quot;:&quot;1349065919.1564223894&quot;,&quot;originating_request_id&quot;:&quot;C476:35CD9:32B50DF:4D64546:5D934D2C&quot;,&quot;originating_url&quot;:&quot;https://github.com/jembi/bsis/blob/develop/CONTRIBUTORS-AGREEMENT.md&quot;,&quot;referrer&quot;:&quot;https://github.com/jembi/bsis&quot;,&quot;user_id&quot;:20767660}}" data-hydro-click-hmac="c595a8bb3132766b5ed97e211f1410bc8715278110054281c444425edca34892" data-ga-click="Repository, click unstar button, action:blob#show; text:Unstar">        <svg class="octicon octicon-star v-align-text-bottom" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74L14 6z"/></svg>
         Unstar
 </button>        <a class="social-count js-social-count" href="/jembi/bsis/stargazers"
            aria-label="2 users starred this repository">
            2
         </a>
 </form>
-    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="unstarred js-social-form" action="/jembi/bsis/star" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="r5eLXKGPSYgvgnY2DMmGc3tsoew1K1kgFMUzrFCxAYE3436trGS4phGtU/wRvEBJ+5NFtrPS14bk0kwEd7hmMQ==" />
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="unstarred js-social-form" action="/jembi/bsis/star" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="NG56/zJ53P6d1pBCmm3Btr1AeXX/vUhkfepI0FVdNyKsGo8OP5It0KP5tYiHGAeMPb+dL3lExsKN/Td4clRQkg==" />
       <input type="hidden" name="context" value="repository"></input>
-      <button type="submit" class="btn btn-sm btn-with-count js-toggler-target" aria-label="Unstar this repository" title="Star jembi/bsis" data-hydro-click="{&quot;event_type&quot;:&quot;repository.click&quot;,&quot;payload&quot;:{&quot;target&quot;:&quot;STAR_BUTTON&quot;,&quot;repository_id&quot;:13254298,&quot;client_id&quot;:&quot;1349065919.1564223894&quot;,&quot;originating_request_id&quot;:&quot;C476:35CD9:32B5D53:4D65257:5D934D35&quot;,&quot;originating_url&quot;:&quot;https://github.com/jembi/bsis/blob/develop/DISCLAIMER.md&quot;,&quot;referrer&quot;:&quot;https://github.com/jembi/bsis&quot;,&quot;user_id&quot;:20767660}}" data-hydro-click-hmac="f93b0a947e2b34266d84845415285c2350265d2b456eb98b0e74b8163938a34c" data-ga-click="Repository, click star button, action:blob#show; text:Star">        <svg class="octicon octicon-star v-align-text-bottom" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74L14 6z"/></svg>
+      <button type="submit" class="btn btn-sm btn-with-count js-toggler-target" aria-label="Unstar this repository" title="Star jembi/bsis" data-hydro-click="{&quot;event_type&quot;:&quot;repository.click&quot;,&quot;payload&quot;:{&quot;target&quot;:&quot;STAR_BUTTON&quot;,&quot;repository_id&quot;:13254298,&quot;client_id&quot;:&quot;1349065919.1564223894&quot;,&quot;originating_request_id&quot;:&quot;C476:35CD9:32B50DF:4D64546:5D934D2C&quot;,&quot;originating_url&quot;:&quot;https://github.com/jembi/bsis/blob/develop/CONTRIBUTORS-AGREEMENT.md&quot;,&quot;referrer&quot;:&quot;https://github.com/jembi/bsis&quot;,&quot;user_id&quot;:20767660}}" data-hydro-click-hmac="7ae2dc75eb55f1d6c23468808bc26db6af088a5a40752fb22851c3b627127edb" data-ga-click="Repository, click star button, action:blob#show; text:Star">        <svg class="octicon octicon-star v-align-text-bottom" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74L14 6z"/></svg>
         Star
 </button>        <a class="social-count js-social-count" href="/jembi/bsis/stargazers"
            aria-label="2 users starred this repository">
@@ -755,7 +755,7 @@
 
   <li>
           <details class="details-reset details-overlay details-overlay-dark d-inline-block float-left">
-            <summary class="btn btn-sm btn-with-count" data-hydro-click="{&quot;event_type&quot;:&quot;repository.click&quot;,&quot;payload&quot;:{&quot;target&quot;:&quot;FORK_BUTTON&quot;,&quot;repository_id&quot;:13254298,&quot;client_id&quot;:&quot;1349065919.1564223894&quot;,&quot;originating_request_id&quot;:&quot;C476:35CD9:32B5D53:4D65257:5D934D35&quot;,&quot;originating_url&quot;:&quot;https://github.com/jembi/bsis/blob/develop/DISCLAIMER.md&quot;,&quot;referrer&quot;:&quot;https://github.com/jembi/bsis&quot;,&quot;user_id&quot;:20767660}}" data-hydro-click-hmac="e4830c92b01c05919e6620b755c7baf2c7994d0be7ab77fac0c141a97d308921" data-ga-click="Repository, show fork modal, action:blob#show; text:Fork" title="Fork your own copy of jembi/bsis to your account">              <svg class="octicon octicon-repo-forked v-align-text-bottom" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
+            <summary class="btn btn-sm btn-with-count" data-hydro-click="{&quot;event_type&quot;:&quot;repository.click&quot;,&quot;payload&quot;:{&quot;target&quot;:&quot;FORK_BUTTON&quot;,&quot;repository_id&quot;:13254298,&quot;client_id&quot;:&quot;1349065919.1564223894&quot;,&quot;originating_request_id&quot;:&quot;C476:35CD9:32B50DF:4D64546:5D934D2C&quot;,&quot;originating_url&quot;:&quot;https://github.com/jembi/bsis/blob/develop/CONTRIBUTORS-AGREEMENT.md&quot;,&quot;referrer&quot;:&quot;https://github.com/jembi/bsis&quot;,&quot;user_id&quot;:20767660}}" data-hydro-click-hmac="1f788d0a628657b84f3c69d084d481cec15fcc209ca004f22529380c780e6b07" data-ga-click="Repository, show fork modal, action:blob#show; text:Fork" title="Fork your own copy of jembi/bsis to your account">              <svg class="octicon octicon-repo-forked v-align-text-bottom" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
               Fork
 </summary>            <details-dialog
               class="anim-fade-in fast Box Box--overlay d-flex flex-column"
@@ -896,9 +896,9 @@
   
 
 
-    <a class="d-none js-permalink-shortcut" data-hotkey="y" href="/jembi/bsis/blob/1e04d459012e2016fdeb59660d862da7adedca5d/DISCLAIMER.md">Permalink</a>
+    <a class="d-none js-permalink-shortcut" data-hotkey="y" href="/jembi/bsis/blob/1e04d459012e2016fdeb59660d862da7adedca5d/CONTRIBUTORS-AGREEMENT.md">Permalink</a>
 
-    <!-- blob contrib key: blob_contributors:v21:876f5cd31d610cbb788a960b488bc472 -->
+    <!-- blob contrib key: blob_contributors:v21:1556daf7e3933d36172ba164f783ba8e -->
       
 
     <div class="d-flex flex-items-start flex-shrink-0 pb-3 flex-column flex-md-row">
@@ -912,7 +912,7 @@
     <span class="css-truncate-target" data-menu-button>develop</span>
   </summary>
 
-  <details-menu class="select-menu-modal hx_rsm-modal position-absolute" style="z-index: 99;" src="/jembi/bsis/ref-list/develop/DISCLAIMER.md?source_action=show&amp;source_controller=blob" preload>
+  <details-menu class="select-menu-modal hx_rsm-modal position-absolute" style="z-index: 99;" src="/jembi/bsis/ref-list/develop/CONTRIBUTORS-AGREEMENT.md?source_action=show&amp;source_controller=blob" preload>
     <include-fragment class="select-menu-loading-overlay anim-pulse">
       <svg height="32" class="octicon octicon-octoface" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true"><path fill-rule="evenodd" d="M14.7 5.34c.13-.32.55-1.59-.13-3.31 0 0-1.05-.33-3.44 1.3-1-.28-2.07-.32-3.13-.32s-2.13.04-3.13.32c-2.39-1.64-3.44-1.3-3.44-1.3-.68 1.72-.26 2.99-.13 3.31C.49 6.21 0 7.33 0 8.69 0 13.84 3.33 15 7.98 15S16 13.84 16 8.69c0-1.36-.49-2.48-1.3-3.35zM8 14.02c-3.3 0-5.98-.15-5.98-3.35 0-.76.38-1.48 1.02-2.07 1.07-.98 2.9-.46 4.96-.46 2.07 0 3.88-.52 4.96.46.65.59 1.02 1.3 1.02 2.07 0 3.19-2.68 3.35-5.98 3.35zM5.49 9.01c-.66 0-1.2.8-1.2 1.78s.54 1.79 1.2 1.79c.66 0 1.2-.8 1.2-1.79s-.54-1.78-1.2-1.78zm5.02 0c-.66 0-1.2.79-1.2 1.78s.54 1.79 1.2 1.79c.66 0 1.2-.8 1.2-1.79s-.53-1.78-1.2-1.78z"/></svg>
     </include-fragment>
@@ -926,13 +926,13 @@
                 data-hotkey="t">
             Find file
           </a>
-          <clipboard-copy value="DISCLAIMER.md" class="btn btn-sm BtnGroup-item">
+          <clipboard-copy value="CONTRIBUTORS-AGREEMENT.md" class="btn btn-sm BtnGroup-item">
             Copy path
           </clipboard-copy>
         </div>
       </span>
       <h2 id="blob-path" class="breadcrumb flex-auto min-width-0 text-normal flex-md-self-center ml-md-2 mr-md-3 my-2 my-md-0">
-        <span class="js-repo-root text-bold"><span class="js-path-segment"><a data-pjax="true" href="/jembi/bsis"><span>bsis</span></a></span></span><span class="separator">/</span><strong class="final-path">DISCLAIMER.md</strong>
+        <span class="js-repo-root text-bold"><span class="js-path-segment"><a data-pjax="true" href="/jembi/bsis"><span>bsis</span></a></span></span><span class="separator">/</span><strong class="final-path">CONTRIBUTORS-AGREEMENT.md</strong>
       </h2>
 
       <div class="BtnGroup flex-shrink-0 d-none d-md-inline-block">
@@ -942,7 +942,7 @@
               data-hotkey="t">
           Find file
         </a>
-        <clipboard-copy value="DISCLAIMER.md" class="btn btn-sm BtnGroup-item">
+        <clipboard-copy value="CONTRIBUTORS-AGREEMENT.md" class="btn btn-sm BtnGroup-item">
           Copy path
         </clipboard-copy>
       </div>
@@ -957,12 +957,12 @@
           <a rel="contributor" data-skip-pjax="true" data-hovercard-type="user" data-hovercard-url="/hovercards?user_id=20767660" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="/rowanpi"><img class="avatar" src="https://avatars1.githubusercontent.com/u/20767660?s=40&amp;v=4" width="20" height="20" alt="@rowanpi" /></a>
           <a class="text-bold link-gray-dark lh-default v-align-middle" rel="contributor" data-hovercard-type="user" data-hovercard-url="/hovercards?user_id=20767660" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="/rowanpi">rowanpi</a>
             <span class="lh-default v-align-middle">
-              <a data-pjax="true" title="Update Disclaimer.MD to be in line with Readme Disclaimer" class="link-gray" href="/jembi/bsis/commit/caf39cc851bac9372605a9105a67004d7f05a6dd">Update Disclaimer.MD to be in line with Readme Disclaimer</a>
+              <a data-pjax="true" title="Add Contributors Agreement" class="link-gray" href="/jembi/bsis/commit/79350d8ec46784b148d5f6183fd2af20bd10241e">Add Contributors Agreement</a>
             </span>
         </span>
         <span class="d-inline-block flex-shrink-0 v-align-bottom f6 mt-2 mt-md-0">
-          <a class="pr-2 text-mono link-gray" href="/jembi/bsis/commit/caf39cc851bac9372605a9105a67004d7f05a6dd" data-pjax>caf39cc</a>
-          <relative-time datetime="2019-10-01T09:15:51Z">Oct 1, 2019</relative-time>
+          <a class="pr-2 text-mono link-gray" href="/jembi/bsis/commit/79350d8ec46784b148d5f6183fd2af20bd10241e" data-pjax>79350d8</a>
+          <relative-time datetime="2019-10-01T09:54:51Z">Oct 1, 2019</relative-time>
         </span>
       </div>
 
@@ -974,7 +974,7 @@
         <details-dialog
           class="Box Box--overlay d-flex flex-column anim-fade-in fast"
           aria-label="Users who have contributed to this file"
-          src="/jembi/bsis/contributors/develop/DISCLAIMER.md/list" preload>
+          src="/jembi/bsis/contributors/develop/CONTRIBUTORS-AGREEMENT.md/list" preload>
           <div class="Box-header">
             <button class="Box-btn-octicon btn-octicon float-right" type="button" aria-label="Close dialog" data-close-dialog>
               <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>
@@ -998,29 +998,29 @@
 <div class="Box-header py-2 d-flex flex-column flex-shrink-0 flex-md-row flex-md-items-center">
 
   <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
-      5 lines (3 sloc)
+      42 lines (26 sloc)
       <span class="file-info-divider"></span>
-    1.78 KB
+    7.22 KB
   </div>
 
   <div class="d-flex py-1 py-md-0 flex-auto flex-order-1 flex-md-order-2 flex-sm-grow-0 flex-justify-between">
 
     <div class="BtnGroup">
-      <a id="raw-url" class="btn btn-sm BtnGroup-item" href="/jembi/bsis/raw/develop/DISCLAIMER.md">Raw</a>
-        <a class="btn btn-sm js-update-url-with-hash BtnGroup-item" data-hotkey="b" href="/jembi/bsis/blame/develop/DISCLAIMER.md">Blame</a>
-      <a rel="nofollow" class="btn btn-sm BtnGroup-item" href="/jembi/bsis/commits/develop/DISCLAIMER.md">History</a>
+      <a id="raw-url" class="btn btn-sm BtnGroup-item" href="/jembi/bsis/raw/develop/CONTRIBUTORS-AGREEMENT.md">Raw</a>
+        <a class="btn btn-sm js-update-url-with-hash BtnGroup-item" data-hotkey="b" href="/jembi/bsis/blame/develop/CONTRIBUTORS-AGREEMENT.md">Blame</a>
+      <a rel="nofollow" class="btn btn-sm BtnGroup-item" href="/jembi/bsis/commits/develop/CONTRIBUTORS-AGREEMENT.md">History</a>
     </div>
 
 
     <div>
 
-            <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="inline-form js-update-url-with-hash" action="/jembi/bsis/edit/develop/DISCLAIMER.md" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="fyk5tDu6is9c60B+XKEe+A3xiFkJcAB8gXEF+X+E34DAd4Pz98UiqxLhZ0sz8gdxdcRt7x7WqVpNqo0guM8zAA==" />
+            <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="inline-form js-update-url-with-hash" action="/jembi/bsis/edit/develop/CONTRIBUTORS-AGREEMENT.md" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="rnBVEAvBPURUXxP9ObfYzJLwM1I+H3oaa0KcUj4gaYEYewO4Rt4biGhRTrJYvua72GTkkFnNRwNiQBk/CSD26A==" />
               <button class="btn-octicon tooltipped tooltipped-nw" type="submit"
                 aria-label="Edit this file" data-hotkey="e" data-disable-with>
                 <svg class="octicon octicon-pencil" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg>
               </button>
 </form>
-          <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="inline-form" action="/jembi/bsis/delete/develop/DISCLAIMER.md" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="3lO3krHsMf+h+y5LwJyohl1J2DaowS+T9fVju5iF9ZUfv3CPIvzE152Jz+rSUKNB7WLZiha0408J5znNzMs5Qw==" />
+          <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="inline-form" action="/jembi/bsis/delete/develop/CONTRIBUTORS-AGREEMENT.md" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="JEj5yx0ENOj3eob4AAv78KYdcPDA5z6e4AdWpTCENCGL7XjCIeM7VOkeyUG2gjwvAOb+OQRORxOWynU8ieboAw==" />
             <button class="btn-octicon btn-octicon-danger tooltipped tooltipped-nw" type="submit"
               aria-label="Delete this file" data-disable-with>
               <svg class="octicon octicon-trashcan" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"/></svg>
@@ -1034,15 +1034,31 @@
 
       
   <div id="readme" class="Box-body readme blob instapaper_body js-code-block-container">
-    <article class="markdown-body entry-content p-3 p-md-6" itemprop="text"><h1><a id="user-content-blood-safety-information-systems-bsis-disclaimer" class="anchor" aria-hidden="true" href="#blood-safety-information-systems-bsis-disclaimer"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>BLOOD SAFETY INFORMATION SYSTEMS (BSIS) DISCLAIMER</h1>
-<ol>
-<li>
-<p>No warranties of any kind whatsoever are made as to the results that You will obtain from relying upon the covered code (or any information or content obtained by way of the covered code), including but not limited to compliance with privacy laws or regulations or laboratory and clinical care industry standards and protocols. Use of the covered code is not a substitute for appropriately-trained and registered professional blood service and healthcare providers, standard practice, quality assurance guidelines or professional judgment. Any decision with regard to the appropriateness of treatment, or the validity or reliability of information or content made available by the covered code, is the sole responsibility of the appropriately-trained and registered professional blood service personnel and health care providers.</p>
-</li>
-<li>
-<p>Under no circumstances and under no legal theory, whether tort (including negligence), contract, or otherwise, shall any Contributor, or anyone who distributes Covered Software as permitted by the license, be liable to You for any indirect, special, incidental, consequential damages of any character including, without limitation, damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other damages or losses of any nature whatsoever (direct or otherwise) on account of or associated with the use or inability to use the covered content (including, without limitation, the use of information or content made available by the covered code, all documentation associated therewith, and the failure of the covered code to comply with privacy laws and regulations or clinical care industry standards and protocols), even if such party shall have been informed of the possibility of such damages.</p>
-</li>
-</ol>
+    <article class="markdown-body entry-content p-3 p-md-6" itemprop="text"><h1><a id="user-content-contributors-license-agreement" class="anchor" aria-hidden="true" href="#contributors-license-agreement"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CONTRIBUTORS LICENSE AGREEMENT</h1>
+<p>Jembi Health Systems NPC is an Africa based non-profit company, registered in accordance with the company laws of South Africa, that develops and curates open source software and health information systems. We manage open source software Products; core areas of expertise include requirements gathering and management, technical system design and solution architecture, software development and quality control, implementation and capacity building, and monitoring and evaluation.</p>
+<p>As an organisation Jembi Health Systems NPC is passionate about its open source Products and the developer and user communities that grow around them. As a member of one of these communities Jembi Health Systems NPC needs to have an agreement with You regarding your Contributions to the Product code and/or documentation that we curate.</p>
+<p>Before Contributing to the Product Jembi Health Systems NPC requests you to please sign this Contributor License Agreement (CLA). CLAs are a commonly accepted practice for open source software projects. They are used to facilitate the broad use and distributions of the Product while retaining users’ confidence in the origins and ongoing existence of the Product code. This CLA gives Jembi Health Systems NPC permission to distribute your contributed code without restriction. It does not assign to us any copyright and the ownership of the intellectual property rights remains with you. It merely ensures that the Product remains open source. You cannot withdraw permission for its use at a later date.</p>
+<p>Once signed this CLA between Jembi Health Systems NPC and You will be kept on file by Jembi Health Systems NPC as the legal curators of the intellectual property and copyright of the Product. This CLA is for both Your protection as a Contributor to the community as well as that of Jembi Health Systems NPC as the community curator. It does not change your rights to use Your own contributions for any other purpose.
+In signing this CLA You accept and agree to the following terms and conditions for Your present and future Contributions to the Product. Except for the license granted herein to Jembi and recipients of software distributed by Jembi Health Systems NPC, You reserve all right, title, and interest in and to Your Contributions.</p>
+<h2><a id="user-content-i-definitions" class="anchor" aria-hidden="true" href="#i-definitions"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>I. Definitions</h2>
+<p>"You" (or "Your") shall mean the copyright owner or legal entity authorized by the copyright owner that is making this Agreement with Jembi Health Systems NPC. For legal entities, the entity making a Contribution and all other entities that control, are controlled by, or are under common control with that entity are considered to be a single Contributor. For the purposes of this definition, "control" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.</p>
+<p>“Product” shall mean the quality-assured software code and associated developer,implementer and user documentation.</p>
+<p>"Contribution" shall mean any original work of authorship, including any modifications or additions to an existing work, that is intentionally submitted by You to Jembi for inclusion in, or documentation of, any of the products owned or managed by Jembi (the "Work"). For the purposes of this definition, "submitted" means any form of electronic, verbal, or written communication sent to Jembi or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, Jembi for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by You as "Not a Contribution."</p>
+<h2><a id="user-content-ii-grant-of-copyright-license" class="anchor" aria-hidden="true" href="#ii-grant-of-copyright-license"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>II. Grant of Copyright License</h2>
+<p>Subject to the terms and conditions of this Agreement, You hereby grant to Jembi Health Systems NPC and to recipients of software distributed by Jembi Health Systems NPC a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare derivative works of, publicly display, publicly perform, sublicense, and distribute Your Contributions and such derivative works.</p>
+<h2><a id="user-content-iii-grant-of-patent-license" class="anchor" aria-hidden="true" href="#iii-grant-of-patent-license"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>III. Grant of Patent License</h2>
+<p>Subject to the terms and conditions of this Agreement, You hereby grant to Jembi Health Systems NPC and to recipients of software distributed by Jembi Health Systems NPC a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by You that are necessarily infringed by Your Contribution(s) alone or by combination of Your Contribution(s) with the Work to which such Contribution(s) was submitted. If any entity institutes patent litigation against You or any other entity (including a cross-claim or counterclaim in a lawsuit) alleging that your Contribution, or the Work to which you have contributed, constitutes direct or contributory patent infringement, then any patent licenses granted to that entity under this Agreement for that Contribution or Work shall terminate as of the date such litigation is filed.</p>
+<p>You represent that you are legally entitled to grant the above license. If your employer(s) has rights to intellectual property that you create that includes your Contributions, you represent that you have received permission to make Contributions on behalf of that employer, that your employer has waived such rights for your Contributions to Jembi, or that your employer has executed a separate Corporate CLA with Jembi Health Systems NPC.</p>
+<h2><a id="user-content-iv" class="anchor" aria-hidden="true" href="#iv"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>IV.</h2>
+<p>You represent that each of Your Contributions is Your original creation (see section 7 for submissions on behalf of others). You represent that Your Contribution submissions include complete details of any third-party license or other restriction (including, but not limited to, related patents and trademarks) of which you are personally aware and which are associated with any part of Your Contributions.</p>
+<h2><a id="user-content-v" class="anchor" aria-hidden="true" href="#v"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>V.</h2>
+<p>You are not expected to provide support for Your Contributions, except to the extent You desire to provide support. You may provide support for free, for a fee, or not at all. Unless required by applicable law or agreed to in writing,</p>
+<h2><a id="user-content-vi" class="anchor" aria-hidden="true" href="#vi"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>VI.</h2>
+<p>You provide Your Contributions on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON- INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.</p>
+<h2><a id="user-content-vii" class="anchor" aria-hidden="true" href="#vii"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>VII.</h2>
+<p>Should You wish to submit work that is not Your original creation, You may submit it to Jembi Health Systems NPC separately from any Contribution, identifying the complete details of its source and of any license or other restriction (including, but not limited to, related patents, trademarks, and license agreements) of which you are personally aware, and conspicuously marking the work as "Submitted on behalf of a third-party: [named here]".</p>
+<h2><a id="user-content-viii" class="anchor" aria-hidden="true" href="#viii"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>VIII.</h2>
+<p>You agree to notify Jembi Health Systems of any facts or circumstances of which you become aware that would make these representations inaccurate in any respect.</p>
 </article>
   </div>
 
@@ -1074,7 +1090,7 @@
 <div class="footer container-lg width-full p-responsive" role="contentinfo">
   <div class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
     <ul class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
-      <li class="mr-3 mr-lg-0">&copy; 2019 <span title="0.41872s from unicorn-b757689-vdcqs">GitHub</span>, Inc.</li>
+      <li class="mr-3 mr-lg-0">&copy; 2019 <span title="0.52371s from unicorn-5999976984-drv6h">GitHub</span>, Inc.</li>
         <li class="mr-3 mr-lg-0"><a data-ga-click="Footer, go to terms, text:terms" href="https://github.com/site/terms">Terms</a></li>
         <li class="mr-3 mr-lg-0"><a data-ga-click="Footer, go to privacy, text:privacy" href="https://github.com/site/privacy">Privacy</a></li>
         <li class="mr-3 mr-lg-0"><a data-ga-click="Footer, go to security, text:security" href="https://github.com/security">Security</a></li>
